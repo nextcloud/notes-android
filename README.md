@@ -7,9 +7,15 @@ An android client for OwnCloud Notes App.
 * List, Create, Edit and Delete Notes
 * Bulk Delete
 * Render MarkDown (using ![AndDown](https://github.com/commonsguy/cwac-anddown)
+* English and German UI
 
 ##Planned Features
 * Bug Fixing
+* Handle Internationalization
+
+##Screenshots
+![Demo 1](/demo-1.png)
+![Demo 2](/demo-2.png)
 
 ##Requirements
 * ![OwnCloud](https://github.com/owncloud/) instance running
