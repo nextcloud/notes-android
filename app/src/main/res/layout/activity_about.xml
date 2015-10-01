@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/about_version_title"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_version_title"/>
+
+    <TextView
+        android:id="@+id/about_version"
+        style="?android:attr/editTextPreferenceStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/about_version"/>
+
+    <TextView
+        android:id="@+id/about_author_title"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_author_title"/>
+
+    <TextView
+        android:id="@+id/about_author"
+        style="?android:attr/editTextPreferenceStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/about_author"/>
+
+    <TextView
+        android:id="@+id/about_icon_disclaimer_title"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_icon_disclaimer_title"/>
+
+    <TextView
+        android:id="@+id/about_icon_disclaimer"
+        style="?android:attr/editTextPreferenceStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/about_icon_disclaimer"/>
+
+</LinearLayout>

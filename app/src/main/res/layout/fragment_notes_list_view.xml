@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="16dp"
+    android:background="@drawable/list_item_background_selector"
+    android:id="@+id/noteItem" >
+
+    <TextView
+        android:id="@+id/noteTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_vertical"
+        android:textColor="@drawable/list_item_color_selector"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/noteModified"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:layout_below="@id/noteTitle"
+        android:textColor="@drawable/list_item_color_selector_low"
+        android:textSize="14sp" />
+
+</RelativeLayout>

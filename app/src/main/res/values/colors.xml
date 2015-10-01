@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colors -->
+
+    <color name="primary">#1d2d44</color>
+    <color name="primary_dark">#112233</color>
+
+    <color name="bg_highlighted">#f3f3f3</color>
+    <color name="bg_normal">#ffffff</color>
+    <color name="fg_default">#000000</color>
+    <color name="fg_default_selection">#333333</color>
+    <color name="fg_default_low">#666666</color>
+    <color name="fg_contrast">#ffffff</color>
+</resources>

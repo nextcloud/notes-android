@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout
+    android:id="@+id/settings_grid_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin"
+    app:columnCount="2"
+    app:orientation="horizontal"
+    >
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/settings_url_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_column="0"
+        app:layout_row="0"
+        app:layout_gravity="fill"
+        >
+
+        <EditText
+            android:id="@+id/settings_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/settings_url"
+            android:inputType="textUri"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_url_check"
+        android:src="@drawable/ic_action_done_dark"
+        android:contentDescription="@string/settings_url_check_description"
+        android:visibility="invisible"
+        app:layout_column="1"
+        app:layout_row="0"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_url_warn_http"
+        android:visibility="gone"
+        android:text="@string/settings_url_warn_http"
+        app:layout_columnSpan="2"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/settings_username_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_column="0"
+        app:layout_row="2"
+        app:layout_gravity="fill">
+
+        <EditText
+            android:id="@+id/settings_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/settings_username"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/settings_password_wrapper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_column="0"
+        app:layout_row="3"
+        app:layout_gravity="fill">
+
+        <EditText
+            android:id="@+id/settings_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/settings_password"
+            android:inputType="textPassword"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_password_check"
+        android:src="@drawable/ic_action_done_dark"
+        android:contentDescription="@string/settings_password_check_description"
+        android:visibility="invisible"
+        app:layout_column="1"
+        app:layout_row="3"
+        />
+
+    <Button
+        android:id="@+id/settings_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shadowColor="@color/fg_default_low"
+        android:text="@string/settings_submit"
+        app:layout_gravity="end"
+        app:layout_row="4"
+        app:layout_column="0"
+        app:layout_columnSpan="2"
+        />
+
+</android.support.v7.widget.GridLayout>

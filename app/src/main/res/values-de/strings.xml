@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OwnCloud Notes</string>
+    <string name="action_create">Neue Notiz</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_create_save">Speichern</string>
+    <string name="action_edit_save">Speichern</string>
+    <string name="action_about">Über</string>
+    <string name="menu_delete">Löschen</string>
+    <string name="menu_copy">Kopieren</string>
+    <string name="menu_edit">Bearbeiten</string>
+    <string name="menu_share">Teilen</string>
+    <string name="menu_about">Über</string>
+
+    <string name="ab_selected">ausgewählt</string>
+
+    <string name="copy">Kopie</string>
+
+    <!-- About -->
+
+	<string name="about_version_title">Version</string>
+	<string name="about_version">Sie benutzen aktuell <strong>v0.1.0</strong></string>
+	<string name="about_author_title">Autor</string>
+	<string name="about_author">Diese Android-App wird entwickelt von <a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+	<string name="about_icon_disclaimer_title">App-Icon</string>
+    <string name="about_icon_disclaimer"><p>Ursprüngliches Icon wurde erstellt von <a href="http://www.freepik.com" title="Freepik">Freepik</a> auf <a href="http://www.flaticon.com/free-icon/ceo-copyrighting_15475" title="Flaticon">www.flaticon.com</a></p></string>
+
+    <!-- Settings -->
+
+    <string name="settings_server">Server</string>
+    <string name="settings_url">URL</string>
+    <string name="settings_url_check_description">Zeigt an, ob die angegebene URL erreichbar ist.</string>
+    <string name="settings_url_warn_http">WARNUNG: http ist unsicher. Bitte benutzen Sie https.</string>
+    <string name="settings_username">Benutzername</string>
+    <string name="settings_password">Passwort</string>
+    <string name="settings_password_check_description">Zeigt an, ob die angegebenen Zugangsdaten korrekt sind.</string>
+    <string name="settings_submit">OK</string>
+
+    <!-- Network -->
+
+    <string name="network_connecting">Verbindung wird hergestellt</string>
+    <string name="network_connected">Verbunden</string>
+    <string name="network_disconnected">Kein Netzwerk verfügbar</string>
+
+    <!-- Error -->
+
+    <string name="error_url_malformed">URL nicht korrekt</string>
+    <string name="error_json">JSON Fehler</string>
+    <string name="error_io">IO Fehler</string>
+    <string name="error_username_password_invalid">Benutzername / Passwort nicht korrekt</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Einstellungen</string>
+</resources>
