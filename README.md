@@ -4,7 +4,8 @@ An android client for OwnCloud Notes App.
 **Warning:** This app is beta. This means it is not tested well (only by some VMs and my personal device).
 
 ##Features
-* List, Create, Edit and Delete Notes
+* List, Create, Edit, Share and Delete Notes
+* Share Text and Links as new Note into the App
 * Bulk Delete
 * Render MarkDown (using [AndDown](https://github.com/commonsguy/cwac-anddown))
 * English and German UI
