@@ -8,8 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
+import android.util.Log;
 
 import org.json.JSONException;
 
@@ -17,8 +17,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
@@ -40,6 +38,8 @@ public class NoteServerSyncHelper {
     private int operationsCount = 0;
     private int operationsFinished = 0;
 
+    private Handler handler = null;
+
     private List<ICallback> callbacks = new ArrayList<>();
 
     private final View.OnClickListener goToSettingsListener = new View.OnClickListener() {
@@ -55,12 +55,16 @@ public class NoteServerSyncHelper {
         callbacks.add(callback);
     }
 
-    public boolean isFinished() {
-        return operationsFinished == operationsCount;
-    }
-
     public NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.db = db;
+        handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                for (ICallback callback : callbacks) {
+                    callback.onFinish();
+                }
+            }
+        };
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(db.getContext().getApplicationContext());
         String url = preferences.getString(SettingsActivity.SETTINGS_URL,
@@ -77,24 +81,15 @@ public class NoteServerSyncHelper {
         uploadNewNotes();
         uploadDeletedNotes();
         downloadNotes();
-        final Handler handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                for (ICallback callback : callbacks) {
-                    callback.onFinish();
-                }
-            }
-        };
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            public void run() {
-                Log.v("Note", "Sync operations: " + operationsFinished + "/" + operationsCount);
-                if (isFinished()) {
-                    handler.obtainMessage(1).sendToTarget();
-                    cancel();
-                }
-            }
-        }, 0, 200);
+    }
+
+    private void asyncTaskFinished() {
+        operationsFinished++;
+        Log.v("Note", "Finished " + operationsFinished + " / " + operationsCount);
+        if(operationsFinished == operationsCount) {
+            handler.obtainMessage(1).sendToTarget();
+        }
+
     }
 
     public void uploadEditedNotes() {
@@ -178,7 +173,7 @@ public class NoteServerSyncHelper {
                 }
                 db.addNote((Note) params[0]);
             }
-            operationsFinished++;
+            asyncTaskFinished();
         }
     }
 
@@ -213,7 +208,7 @@ public class NoteServerSyncHelper {
         @Override
         protected void onPostExecute(Note note) {
             db.updateNote(note);
-            operationsFinished++;
+            asyncTaskFinished();
         }
     }
 
@@ -243,7 +238,7 @@ public class NoteServerSyncHelper {
         @Override
         protected void onPostExecute(Void aVoid) {
             db.deleteNote(id);
-            operationsFinished++;
+            asyncTaskFinished();
         }
     }
 
@@ -289,7 +284,7 @@ public class NoteServerSyncHelper {
             for (Note note : result) {
                 db.addNote(note);
             }
-            operationsFinished++;
+            asyncTaskFinished();
         }
     }
 }
