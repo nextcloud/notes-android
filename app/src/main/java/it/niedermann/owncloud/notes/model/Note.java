@@ -1,30 +1,26 @@
 package it.niedermann.owncloud.notes.model;
 
-import android.text.Html;
-
-import com.commonsware.cwac.anddown.AndDown;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.util.NoteUtil;
 
 @SuppressWarnings("serial")
 public class Note implements Serializable {
-
-    private static final AndDown and_down = new AndDown();
 	private long id = 0;
 	private String title = "";
 	private Calendar modified = null;
 	private String content = "";
+    private String excerpt = "";
     private String htmlContent = null;
 
 	public Note(long id, Calendar modified, String title, String content) {
 		this.id = id;
         if(title != null)
-        this.title = Html.fromHtml(and_down.markdownToHtml(title)).toString().trim();
+            setTitle(title);
         setTitle(title);
         setContent(content);
         this.modified = modified;
@@ -39,7 +35,7 @@ public class Note implements Serializable {
 	}
 
     public void setTitle(String title) {
-        this.title = Html.fromHtml(and_down.markdownToHtml(title)).toString().trim();
+        this.title = NoteUtil.removeMarkDown(title);
     }
 
 	@SuppressWarnings("WeakerAccess")
@@ -57,13 +53,31 @@ public class Note implements Serializable {
 	}
 
     public void setContent(String content) {
+        setExcerpt(content);
         this.content = content;
         this.htmlContent = null;
     }
 
+    public String getExcerpt() {
+        return excerpt;
+    }
+
+    private void setExcerpt(String content) {
+        if (content.contains("\n")) {
+            String[] lines = content.split("\n");
+            int currentLine = 1;
+            while (NoteUtil.isEmptyLine(lines[currentLine]) && currentLine < lines.length) {
+                currentLine++;
+            }
+            excerpt = NoteUtil.removeMarkDown(lines[currentLine]);
+        } else {
+            excerpt = content;
+        }
+    }
+
     public String getHtmlContent() {
         if(htmlContent == null && getContent() != null) {
-            htmlContent = and_down.markdownToHtml(getContent());
+            htmlContent = NoteUtil.parseMarkDown(getContent());
         }
         return htmlContent;
     }

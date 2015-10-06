@@ -51,18 +51,18 @@ public class NoteAdapter extends ArrayAdapter<Note> {
 			// These TextViews are created in the XML files we defined.
 
 			TextView noteTitle = (TextView) v.findViewById(R.id.noteTitle);
-			TextView noteModified = (TextView) v
-					.findViewById(R.id.noteModified);
+            TextView noteExcerpt = (TextView) v
+                    .findViewById(R.id.noteExcerpt);
 
 			// check to see if each individual textview is null.
 			// if not, assign some text!
 			if (noteTitle != null) {
 				noteTitle.setText(note.getTitle());
 			}
-			if (noteModified != null) {
-				noteModified.setText(note.getModified("dd.MM.yyyy HH:mm"));
-			}
-		}
+            if (noteExcerpt != null) {
+                noteExcerpt.setText(note.getExcerpt());
+            }
+        }
 
 		// the view must be returned to our activity
 		return v;
