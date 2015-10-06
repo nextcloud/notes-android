@@ -36,18 +36,33 @@
         android:text="@string/about_author"/>
 
     <TextView
-        android:id="@+id/about_icon_disclaimer_title"
+        android:id="@+id/about_app_icon_disclaimer_title"
         style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/about_icon_disclaimer_title"/>
+        android:text="@string/about_app_icon_disclaimer_title"/>
 
     <TextView
-        android:id="@+id/about_icon_disclaimer"
+        android:id="@+id/about_app_icon_disclaimer"
         style="?android:attr/editTextPreferenceStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="@string/about_icon_disclaimer"/>
+        android:text="@string/about_app_icon_disclaimer"/>
+
+    <TextView
+        android:id="@+id/about_icons_disclaimer_title"
+        style="?android:attr/listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_icons_disclaimer_title"/>
+
+    <TextView
+        android:id="@+id/about_icons_disclaimer"
+        style="?android:attr/editTextPreferenceStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/about_icons_disclaimer"/>
 
 </LinearLayout>

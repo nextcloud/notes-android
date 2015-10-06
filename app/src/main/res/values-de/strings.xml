@@ -23,8 +23,10 @@
 	<string name="about_version">Sie benutzen aktuell <strong>v0.1.0</strong></string>
 	<string name="about_author_title">Autor</string>
 	<string name="about_author">Diese Android-App wird entwickelt von <a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
-	<string name="about_icon_disclaimer_title">App-Icon</string>
-    <string name="about_icon_disclaimer"><p>Ursprüngliches Icon wurde erstellt von <a href="http://www.freepik.com" title="Freepik">Freepik</a> auf <a href="http://www.flaticon.com/free-icon/ceo-copyrighting_15475" title="Flaticon">www.flaticon.com</a></p></string>
+    <string name="about_app_icon_disclaimer_title">App-Icon</string>
+    <string name="about_app_icon_disclaimer"><p>Ursprüngliches Icon wurde erstellt von <a href="http://www.freepik.com" title="Freepik">Freepik</a> auf <a href="http://www.flaticon.com/free-icon/ceo-copyrighting_15475" title="Flaticon">www.flaticon.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Icons</string>
+    <string name="about_icons_disclaimer"><p>Alle weiteren Icons, die in dieser App verwendet werden, sind <a href="https://materialdesignicons.com/" title="Link to Website">Material Design Icons</a> von Google Inc. und unter einer Creative Commons License lizensiert.</p></string>
 
     <!-- Settings -->
 
