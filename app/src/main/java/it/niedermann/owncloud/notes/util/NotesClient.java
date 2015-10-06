@@ -23,6 +23,18 @@ import it.niedermann.owncloud.notes.model.Note;
 
 public class NotesClient {
 
+    private static final String key_id = "id";
+    private static final String key_title = "title";
+    private static final String key_content = "content";
+    private static final String key_modified = "id";
+
+    private static final String application_json = "application/json";
+
+    private static final String method_get = "GET";
+    private static final String method_put = "PUT";
+    private static final String method_post = "POST";
+    private static final String method_delete = "DELETE";
+
 	private String url = "";
 	private String username = "";
 	private String password = "";
@@ -36,8 +48,8 @@ public class NotesClient {
 	public List<Note> getNotes() throws JSONException,
             IOException {
 		List<Note> notesList = new ArrayList<>();
-		JSONArray notes = new JSONArray(requestServer("notes", "GET", null));
-		long noteId = 0;
+        JSONArray notes = new JSONArray(requestServer("notes", method_get, null));
+        long noteId = 0;
 		String noteTitle = "";
 		String noteContent = "";
 		Calendar noteModified = null;
@@ -45,20 +57,20 @@ public class NotesClient {
 		for (int i = 0; i < notes.length(); i++) {
 			currentItem = notes.getJSONObject(i);
 
-			if (!currentItem.isNull("id")) {
-				noteId = currentItem.getLong("id");
-			}
-			if (!currentItem.isNull("title")) {
-				noteTitle = currentItem.getString("title");
-			}
-			if (!currentItem.isNull("content")) {
-				noteContent = currentItem.getString("content");
-			}
-			if (!currentItem.isNull("modified")) {
-				noteModified = GregorianCalendar.getInstance();
+            if (!currentItem.isNull(key_id)) {
+                noteId = currentItem.getLong(key_id);
+            }
+            if (!currentItem.isNull(key_title)) {
+                noteTitle = currentItem.getString(key_title);
+            }
+            if (!currentItem.isNull(key_content)) {
+                noteContent = currentItem.getString(key_content);
+            }
+            if (!currentItem.isNull(key_modified)) {
+                noteModified = GregorianCalendar.getInstance();
 				noteModified
-						.setTimeInMillis(currentItem.getLong("modified") * 1000);
-			}
+                        .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
+            }
 			notesList
 					.add(new Note(noteId, noteModified, noteTitle, noteContent));
 		}
@@ -66,7 +78,7 @@ public class NotesClient {
 	}
 
     /**
-     * Fetches on Note by ID from Server
+     * Fetches a Note by ID from Server
      * TODO Maybe fetch only id, title and modified from server until a note has been opened?
      * @param id long - ID of the wanted note
      * @return Requested Note
@@ -81,22 +93,22 @@ public class NotesClient {
 		String noteContent = "";
 		Calendar noteModified = null;
 		JSONObject currentItem = new JSONObject(
-				requestServer("notes/" + id, "GET", null));
+                requestServer("notes/" + id, method_get, null));
 
-		if (!currentItem.isNull("id")) {
-			noteId = currentItem.getLong("id");
-		}
-		if (!currentItem.isNull("title")) {
-			noteTitle = currentItem.getString("title");
-		}
-		if (!currentItem.isNull("content")) {
-			noteContent = currentItem.getString("content");
-		}
-		if (!currentItem.isNull("modified")) {
-			noteModified = GregorianCalendar.getInstance();
+        if (!currentItem.isNull(key_id)) {
+            noteId = currentItem.getLong(key_id);
+        }
+        if (!currentItem.isNull(key_title)) {
+            noteTitle = currentItem.getString(key_title);
+        }
+        if (!currentItem.isNull(key_content)) {
+            noteContent = currentItem.getString(key_content);
+        }
+        if (!currentItem.isNull(key_modified)) {
+            noteModified = GregorianCalendar.getInstance();
 			noteModified
-					.setTimeInMillis(currentItem.getLong("modified") * 1000);
-		}
+                    .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
+        }
 		return new Note(noteId, noteModified, noteTitle, noteContent);
 	}
 
@@ -115,24 +127,24 @@ public class NotesClient {
 		Calendar noteModified = null;
 
 		JSONObject paramObject = new JSONObject();
-		paramObject.accumulate("content", content);
-		JSONObject currentItem = new JSONObject(requestServer("notes", "POST",
-				paramObject));
+        paramObject.accumulate(key_content, content);
+        JSONObject currentItem = new JSONObject(requestServer("notes", method_post,
+                paramObject));
 
-		if (!currentItem.isNull("id")) {
-			noteId = currentItem.getLong("id");
-		}
-		if (!currentItem.isNull("title")) {
-			noteTitle = currentItem.getString("title");
-		}
-		if (!currentItem.isNull("content")) {
-			noteContent = currentItem.getString("content");
-		}
-		if (!currentItem.isNull("modified")) {
-			noteModified = GregorianCalendar.getInstance();
+        if (!currentItem.isNull(key_id)) {
+            noteId = currentItem.getLong(key_id);
+        }
+        if (!currentItem.isNull(key_title)) {
+            noteTitle = currentItem.getString(key_title);
+        }
+        if (!currentItem.isNull(key_content)) {
+            noteContent = currentItem.getString(key_content);
+        }
+        if (!currentItem.isNull(key_modified)) {
+            noteModified = GregorianCalendar.getInstance();
 			noteModified
-					.setTimeInMillis(currentItem.getLong("modified") * 1000);
-		}
+                    .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
+        }
 		return new Note(noteId, noteModified, noteTitle, noteContent);
 	}
 
@@ -142,25 +154,25 @@ public class NotesClient {
 		Calendar noteModified = null;
 
 		JSONObject paramObject = new JSONObject();
-		paramObject.accumulate("content", content);
-		JSONObject currentItem = new JSONObject(requestServer(
-				"notes/" + noteId, "PUT", paramObject));
+        paramObject.accumulate(key_content, content);
+        JSONObject currentItem = new JSONObject(requestServer(
+                "notes/" + noteId, method_put, paramObject));
 
-		if (!currentItem.isNull("title")) {
-			noteTitle = currentItem.getString("title");
-		}
-		if (!currentItem.isNull("modified")) {
-			noteModified = GregorianCalendar.getInstance();
+        if (!currentItem.isNull(key_title)) {
+            noteTitle = currentItem.getString(key_title);
+        }
+        if (!currentItem.isNull(key_modified)) {
+            noteModified = GregorianCalendar.getInstance();
 			noteModified
-					.setTimeInMillis(currentItem.getLong("modified") * 1000);
-		}
+                    .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
+        }
 		return new Note(noteId, noteModified, noteTitle, content);
 	}
 
 	public void deleteNote(long noteId) throws
             IOException {
-		this.requestServer("notes/" + noteId, "DELETE", null);
-	}
+        this.requestServer("notes/" + noteId, method_delete, null);
+    }
 
 	/**
 	 * Request-Method for POST, PUT with or without JSON-Object-Parameter
@@ -188,7 +200,7 @@ public class NotesClient {
         con.setConnectTimeout(10 * 1000); // 10 seconds
 		if (params != null) {
             con.setFixedLengthStreamingMode(params.toString().getBytes().length);
-            con.setRequestProperty("Content-Type", "application/json");
+            con.setRequestProperty("Content-Type", application_json);
             con.setDoOutput(true);
             OutputStream os = con.getOutputStream();
 			Log.v("Note", params.toString());
