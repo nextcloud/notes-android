@@ -25,9 +25,10 @@ public class Note implements Serializable {
 		this.id = id;
         if(title != null)
         this.title = Html.fromHtml(and_down.markdownToHtml(title)).toString().trim();
-		this.modified = modified;
-		this.content = content;
-	}
+        setTitle(title);
+        setContent(content);
+        this.modified = modified;
+    }
 
 	public long getId() {
 		return id;
@@ -38,7 +39,7 @@ public class Note implements Serializable {
 	}
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = Html.fromHtml(and_down.markdownToHtml(title)).toString().trim();
     }
 
 	@SuppressWarnings("WeakerAccess")

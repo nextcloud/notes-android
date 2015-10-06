@@ -21,7 +21,7 @@ public class NotesClientUtil {
      * @return true, if the given String is only http
      */
     public static boolean isHttp(String url) {
-        return url.length() > 4 && url.startsWith("http") && url.charAt(4) != 's';
+        return url != null && url.length() > 4 && url.startsWith("http") && url.charAt(4) != 's';
     }
 
     /**
