@@ -1,4 +1,4 @@
-# OwnCloud Notes
+# ownCloud Notes
 An android client for OwnCloud Notes App.
 
 :construction: **Warning:** This app is beta. This means it is not tested well (only by some VMs and my personal device).
@@ -12,7 +12,8 @@ An android client for OwnCloud Notes App.
 
 ## :checkered_flag: Planned Features
 * Provide App on [F-Droid](https://f-droid.org/) App-Store
-* Bug Fixing
+* Table Layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
+* Simple widget for individual note ([#5](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/5))
 * Handle Internationalization
 
 ## :eyes: Screenshots
@@ -20,9 +21,10 @@ An android client for OwnCloud Notes App.
 ![Demo 2](/demo-2.png)
 
 ## :wrench: Contribution
+* Test the App with different Devices
 * Write issues in the [Issue-Tracker](https://github.com/stefan-niedermann/OwnCloud-Notes/issues)
 * Provide Pull-Requests
-* Buy me a beer :wink:
+* Send me a bottle of your favorite beer :beers: :wink:
 
 ## :link: Requirements
 * [OwnCloud](https://github.com/owncloud/) instance running
