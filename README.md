@@ -11,10 +11,10 @@ An android client for OwnCloud Notes App.
 * English and German UI
 
 ## :checkered_flag: Planned Features
-* Provide App on [F-Droid](https://f-droid.org/) App-Store
+* Provide App on [F-Droid](https://f-droid.org/) App-Store ([#13](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/13))
 * Table Layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
 * Simple widget for individual note ([#5](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/5))
-* Handle Internationalization
+* Handle Internationalization ([#14](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/14))
 
 ## :eyes: Screenshots
 ![Demo 1](/demo-1.png)
