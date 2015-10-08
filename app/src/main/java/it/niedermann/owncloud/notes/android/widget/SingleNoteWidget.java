@@ -39,7 +39,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int i : appWidgetIds) {
+        for (int i = 0; i < appWidgetIds.length; i++) {
             int appWidgetId = appWidgetIds[i];
             Log.v("SingleNoteWidget", "onUpdate appWidgetId: " + appWidgetId);
             updateAppWidget(null, context, appWidgetManager, appWidgetId);
