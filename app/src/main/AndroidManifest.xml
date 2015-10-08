@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.niedermann.owncloud.notes"
-    android:versionCode="1"
-    android:versionName="1.0">
+    android:versionCode="2"
+    android:versionName="0.2.0">
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -14,11 +14,11 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/OwnCloud"
-        android:fullBackupContent="true"
         android:supportsRtl="true"
+        android:theme="@style/OwnCloud"
         >
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
