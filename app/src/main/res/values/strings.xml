@@ -7,6 +7,7 @@
     <string name="action_create_save">Save</string>
     <string name="action_edit_save">Save</string>
     <string name="action_about">About</string>
+    <string name="action_select_note">Select Note</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_copy">Copy</string>
     <string name="menu_edit">Edit</string>
