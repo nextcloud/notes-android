@@ -213,12 +213,12 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 adapter.add(editedNote);
             }
         } else if (requestCode == SettingsActivity.CREDENTIALS_CHANGED) {
-            Log.v("Note", "Credentials Changed!!");
+            Log.v("Note", "Credentials Changed!");
+            db = new NoteSQLiteOpenHelper(this);
+            db.synchronizeWithServer(); // Needed to instanciate new NotesClient with new URL
         }
         Log.v("Note", "New NoteSQLteOpenHelper instanciated");
         //TODO Maybe only if previous activity == settings activity?
-        //db = new NoteSQLiteOpenHelper(this);
-        //db.synchronizeWithServer(); // Needed to instanciate new NotesClient with new URL
         setListView(db.getNotes());
     }
 
