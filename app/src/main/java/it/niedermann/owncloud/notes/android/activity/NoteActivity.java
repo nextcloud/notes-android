@@ -26,7 +26,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // backToListViewIntent = new Intent();
+        Log.v("Note", "NoteActivity.onCreate()");
         setContentView(R.layout.activity_single_note);
         note = (Note) getIntent().getSerializableExtra(
                 NotesListViewActivity.SELECTED_NOTE);
@@ -38,7 +38,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             actionBar.setTitle(note.getTitle());
             actionBar.setSubtitle(note.getModified("dd.MM.yyyy HH:mm"));
         }
-        noteContent = (TextView) findViewById(R.id.singleNoteContent);
+        noteContent = (TextView) findViewById(R.id.single_note_content);
         noteContent.setText(note.getSpannableContent());
     }
 

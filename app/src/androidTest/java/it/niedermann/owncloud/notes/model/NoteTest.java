@@ -16,10 +16,4 @@ public class NoteTest extends TestCase {
         note.setTitle("* Aufzählung");
         assertTrue("Aufzählung".equals(note.getTitle()));
     }
-
-    public void testMarkDownRendering() {
-        Note note = new Note(0, Calendar.getInstance(), "", "**bold**");
-        System.out.println(note.getHtmlContent());
-        assertTrue(note.getHtmlContent().contains("<strong>bold</strong>"));
-    }
 }
