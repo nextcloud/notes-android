@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/noteItem"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/noteItem"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:background="@drawable/list_item_background_selector"
@@ -9,15 +9,29 @@
 
     <TextView
         android:id="@+id/noteTitle"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:textColor="@drawable/list_item_color_selector"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/noteModified"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
         android:gravity="center_vertical"
-        android:textColor="@drawable/list_item_color_selector"
-        android:textSize="16sp" />
+        android:textColor="@drawable/list_item_color_selector_low"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/noteExcerpt"

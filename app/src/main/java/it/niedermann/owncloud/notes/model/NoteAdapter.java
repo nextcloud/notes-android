@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
@@ -14,12 +15,9 @@ import it.niedermann.owncloud.notes.R;
 public class NoteAdapter extends ArrayAdapter<Note> {
     private List<Note> noteList = null;
 
-	// private SparseBooleanArray mSelectedItemsIds;
-
 	public NoteAdapter(Context context,
 			List<Note> noteList) {
 		super(context, android.R.layout.simple_list_item_1, noteList);
-		// mSelectedItemsIds = new SparseBooleanArray();
 		this.noteList = noteList;
 	}
 
@@ -53,16 +51,17 @@ public class NoteAdapter extends ArrayAdapter<Note> {
 			TextView noteTitle = (TextView) v.findViewById(R.id.noteTitle);
             TextView noteExcerpt = (TextView) v
                     .findViewById(R.id.noteExcerpt);
+			TextView noteModified = (TextView) v.findViewById(R.id.noteModified);
 
-			// check to see if each individual textview is null.
-			// if not, assign some text!
-			if (noteTitle != null) {
 				noteTitle.setText(note.getTitle());
-			}
-            if (noteExcerpt != null) {
                 noteExcerpt.setText(note.getExcerpt());
-            }
-        }
+			Calendar modified = note.getModified();
+			if (modified.get(Calendar.YEAR) == 2015) {
+				noteModified.setText(note.getModified("dd.MM."));
+			} else {
+				noteModified.setText(note.getModified("dd.MM.yyyy"));
+			}
+		}
 
 		// the view must be returned to our activity
 		return v;
