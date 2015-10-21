@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     public static final String SETTINGS_USERNAME = "settingsUsername";
     public static final String SETTINGS_PASSWORD = "settingsPassword";
     public static final String DEFAULT_SETTINGS = "";
+    public static final int CREDENTIALS_CHANGED = 3;
 
     private SharedPreferences preferences = null;
     private EditText field_url = null;
@@ -164,6 +166,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(getApplicationContext());
                 db.synchronizeWithServer();
 
+                final Intent data = new Intent();
+                //FIXME send correct note back to NotesListView
+                data.putExtra(NotesListViewActivity.CREDENTIALS_CHANGED, CREDENTIALS_CHANGED);
+                setResult(RESULT_OK, data);
                 finish();
             } else {
                 Log.v("Note", "Invalid Credentials!");

@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.text.Html;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -22,7 +21,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
     public static void updateAppWidget(Note note, Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
         if (note != null) {
-            updateViews.setTextViewText(R.id.singleNoteContent, Html.fromHtml(note.getHtmlContent()));
+            updateViews.setTextViewText(R.id.singleNoteContent, note.getSpannableContent());
         }
         appWidgetManager.updateAppWidget(appWidgetId, updateViews);
 

@@ -1,25 +1,22 @@
 package it.niedermann.owncloud.notes.util;
 
-import android.text.Html;
-
-import com.commonsware.cwac.anddown.AndDown;
+import in.uncod.android.bypass.Bypass;
 
 /**
  * Provides basic functionality for Note operations.
  * Created by stefan on 06.10.15.
  */
 public class NoteUtil {
+    private static final Bypass bypass = new Bypass();
 
-    private static final AndDown and_down = new AndDown();
 
     /**
-     * Parses a MarkDown-String and returns its HTML-Pendant
-     *
-     * @param s String MarkDown
-     * @return String HTML
+     * Parses a MarkDown-String and returns a Spannable
+     * @param s String - MarkDown
+     * @return Spannable
      */
     public static String parseMarkDown(String s) {
-        return and_down.markdownToHtml(s);
+        return bypass.markdownToSpannable(s).toString();
     }
 
     /**
@@ -29,7 +26,7 @@ public class NoteUtil {
      * @return Plain Text-String
      */
     public static String removeMarkDown(String s) {
-        return s == null ? "" : Html.fromHtml(and_down.markdownToHtml(s)).toString().trim();
+        return s == null ? "" : s.replaceAll("[#*-]", "").trim();
     }
 
     /**

@@ -60,7 +60,19 @@
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" >
         </activity>
 
-        <!-- Widget -->
+        <!-- All Notes Widget -->
+
+        <receiver android:name="it.niedermann.owncloud.notes.android.widget.AllNotesWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/all_notes_widget_provider_info" />
+        </receiver>
+
+        <!-- Single Note Widget -->
 
         <receiver android:name="it.niedermann.owncloud.notes.android.widget.SingleNoteWidget">
             <intent-filter>

@@ -11,6 +11,6 @@
         android:background="@color/bg_transparent"
         android:padding="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/fg_default" />
+        android:textColor="@color/fg_contrast" />
 
 </FrameLayout>

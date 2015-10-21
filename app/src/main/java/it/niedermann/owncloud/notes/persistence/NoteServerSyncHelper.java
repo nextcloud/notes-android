@@ -8,8 +8,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.util.Log;
+import android.view.View;
 
 import org.json.JSONException;
 
@@ -34,14 +34,6 @@ public class NoteServerSyncHelper {
 
     private NotesClient client = null;
     private  NoteSQLiteOpenHelper db = null;
-
-    private int operationsCount = 0;
-    private int operationsFinished = 0;
-
-    private Handler handler = null;
-
-    private List<ICallback> callbacks = new ArrayList<>();
-
     private final View.OnClickListener goToSettingsListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -50,10 +42,10 @@ public class NoteServerSyncHelper {
             parent.startActivity(intent);
         }
     };
-
-    public void addCallback(ICallback callback) {
-        callbacks.add(callback);
-    }
+    private int operationsCount = 0;
+    private int operationsFinished = 0;
+    private Handler handler = null;
+    private List<ICallback> callbacks = new ArrayList<>();
 
     public NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.db = db;
@@ -74,6 +66,10 @@ public class NoteServerSyncHelper {
         String password = preferences.getString(SettingsActivity.SETTINGS_PASSWORD,
                 SettingsActivity.DEFAULT_SETTINGS);
         client = new NotesClient(url, username, password);
+    }
+
+    public void addCallback(ICallback callback) {
+        callbacks.add(callback);
     }
 
     public void synchronize() {

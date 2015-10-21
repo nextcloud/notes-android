@@ -15,7 +15,7 @@ public class Note implements Serializable {
 	private Calendar modified = null;
 	private String content = "";
     private String excerpt = "";
-    private String htmlContent = null;
+    private String spannableContent = null;
 
 	public Note(long id, Calendar modified, String title, String content) {
 		this.id = id;
@@ -55,7 +55,7 @@ public class Note implements Serializable {
     public void setContent(String content) {
         setExcerpt(content);
         this.content = content;
-        this.htmlContent = null;
+        this.spannableContent = null;
     }
 
     public String getExcerpt() {
@@ -75,11 +75,11 @@ public class Note implements Serializable {
         }
     }
 
-    public String getHtmlContent() {
-        if(htmlContent == null && getContent() != null) {
-            htmlContent = NoteUtil.parseMarkDown(getContent());
+    public String getSpannableContent() {
+        if (spannableContent == null && getContent() != null) {
+            spannableContent = NoteUtil.parseMarkDown(getContent());
         }
-        return htmlContent;
+        return spannableContent;
     }
 
 	@Override

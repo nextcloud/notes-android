@@ -5,13 +5,18 @@
              android:layout_height="match_parent"
              android:orientation="vertical">
 
-    <WebView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
         android:id="@+id/singleNoteContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/fg_default" />
+    </ScrollView>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_edit"
         style="@style/fab"

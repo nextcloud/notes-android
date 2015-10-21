@@ -8,20 +8,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebView;
+import android.widget.TextView;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 public class NoteActivity extends AppCompatActivity implements View.OnClickListener {
-    private Note note = null;
-    private int notePosition = 0;
-    private WebView noteContent = null;
-    private ActionBar actionBar = null;
     // Intent backToListViewIntent = null;
     public final static String EDIT_NOTE = "it.niedermann.owncloud.notes.edit_note_id";
     public final static int EDIT_NOTE_CMD = 1;
+    private Note note = null;
+    private int notePosition = 0;
+    private TextView noteContent = null;
+    private ActionBar actionBar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,8 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             actionBar.setTitle(note.getTitle());
             actionBar.setSubtitle(note.getModified("dd.MM.yyyy HH:mm"));
         }
-        noteContent = (WebView) findViewById(R.id.singleNoteContent);
-        noteContent.loadData(note.getHtmlContent(), "text/html", "UTF-8");
+        noteContent = (TextView) findViewById(R.id.singleNoteContent);
+        noteContent.setText(note.getSpannableContent());
     }
 
     @Override
@@ -65,7 +65,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        NoteSQLiteOpenHelper db = null;
+        NoteSQLiteOpenHelper db;
         switch (id) {
             case R.id.menu_delete:
                 //setContentView(R.layout.activity_notes_list_view);
@@ -106,7 +106,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 Note editedNote = (Note) data.getExtras().getSerializable(
                         EDIT_NOTE);
                 if (editedNote != null) {
-                    noteContent.loadData(editedNote.getHtmlContent(), "text/html", "UTF-8");
+                    noteContent.setText(editedNote.getSpannableContent());
                     actionBar.setTitle(editedNote.getTitle());
                     actionBar.setSubtitle(editedNote.getModified("dd.MM.yyyy HH:mm"));
                 }

@@ -31,6 +31,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     public final static String SELECTED_NOTE = "it.niedermann.owncloud.notes.clicked_note";
     public final static String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public final static String SELECTED_NOTE_POSITION = "it.niedermann.owncloud.notes.clicked_note_position";
+    public final static String CREDENTIALS_CHANGED = "it.niedermann.owncloud.notes.CREDENTIALS_CHANGED";
 
     private final static int create_note_cmd = 0;
     private final static int show_single_note_cmd = 1;
@@ -211,7 +212,13 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 adapter.remove(adapter.getItem(notePosition));
                 adapter.add(editedNote);
             }
+        } else if (requestCode == SettingsActivity.CREDENTIALS_CHANGED) {
+            Log.v("Note", "Credentials Changed!!");
         }
+        Log.v("Note", "New NoteSQLteOpenHelper instanciated");
+        //TODO Maybe only if previous activity == settings activity?
+        //db = new NoteSQLiteOpenHelper(this);
+        //db.synchronizeWithServer(); // Needed to instanciate new NotesClient with new URL
         setListView(db.getNotes());
     }
 
@@ -294,6 +301,17 @@ public class NotesListViewActivity extends AppCompatActivity implements
     }
 
     /**
+     * Removes all selections.
+     */
+    private void removeSelection() {
+        SparseBooleanArray checkedItemPositions = listView
+                .getCheckedItemPositions();
+        for (int i = 0; i < checkedItemPositions.size(); i++) {
+            listView.setItemChecked(i, false);
+        }
+    }
+
+    /**
      * Handler for the MultiSelect Actions
      */
     private class MultiSelectedActionModeCallback implements
@@ -343,17 +361,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
             removeSelection();
             mActionMode = null;
             adapter.notifyDataSetChanged();
-        }
-    }
-
-    /**
-     * Removes all selections.
-     */
-    private void removeSelection() {
-        SparseBooleanArray checkedItemPositions = listView
-                .getCheckedItemPositions();
-        for (int i = 0; i < checkedItemPositions.size(); i++) {
-            listView.setItemChecked(i, false);
         }
     }
 }
