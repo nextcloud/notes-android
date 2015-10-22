@@ -71,6 +71,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/all_notes_widget_provider_info" />
         </receiver>
+        <service android:name=".android.widget.AllNotesWidget$StackWidgetService" />
 
         <!-- Single Note Widget -->
 

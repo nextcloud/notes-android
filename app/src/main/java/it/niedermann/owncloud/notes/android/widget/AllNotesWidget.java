@@ -42,7 +42,7 @@ public class AllNotesWidget extends AppWidgetProvider {
         }
     }
 
-    class StackWidgetService extends RemoteViewsService {
+    public class StackWidgetService extends RemoteViewsService {
         @Override
         public RemoteViewsFactory onGetViewFactory(Intent intent) {
             return new StackRemoteViewsFactory(this.getApplicationContext(), intent);
@@ -53,7 +53,7 @@ public class AllNotesWidget extends AppWidgetProvider {
     class StackRemoteViewsFactory implements
             RemoteViewsService.RemoteViewsFactory {
         private static final int mCount = 10;
-        private List<Note> mWidgetItems = new ArrayList<Note>();
+        private List<Note> mWidgetItems = new ArrayList<>();
         private Context mContext;
         private int mAppWidgetId;
 

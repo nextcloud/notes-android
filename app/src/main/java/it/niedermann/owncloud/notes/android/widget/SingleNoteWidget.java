@@ -35,8 +35,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        if (intent.getAction().equals(ACTION_SHOW_NOTE)) {
-        }
+        //if (intent.getAction().equals(ACTION_SHOW_NOTE)) {
+        //}
     }
 
     @Override
