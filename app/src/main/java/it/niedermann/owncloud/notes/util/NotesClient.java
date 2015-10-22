@@ -186,8 +186,8 @@ public class NotesClient {
 	 */
 	private String requestServer(String target, String method, JSONObject params)
 			throws IOException {
-		String result = "";
-		String targetURL = url + "index.php/apps/notes/api/v0.2/" + target;
+        StringBuffer result = new StringBuffer();
+        String targetURL = url + "index.php/apps/notes/api/v0.2/" + target;
 		Log.v("Note", targetURL);
 		HttpURLConnection con = (HttpURLConnection) new URL(targetURL)
 				.openConnection();
@@ -208,12 +208,11 @@ public class NotesClient {
             os.flush();
             os.close();
 		}
-		BufferedReader rd;
-		String line;
-		rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String line;
 		while ((line = rd.readLine()) != null) {
-			result += line;
-		}
-		return result;
-	}
+            result.append(line);
+        }
+        return result.toString();
+    }
 }
