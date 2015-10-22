@@ -59,6 +59,9 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String url = ((EditText) findViewById(R.id.settings_url)).getText().toString();
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "https://" + url;
+                }
                 new URLValidatorAsyncTask().execute(url);
 
                 if (NotesClientUtil.isHttp(url)) {
@@ -88,7 +91,10 @@ public class SettingsActivity extends AppCompatActivity {
                 if (!url.endsWith("/")) {
                     url += "/";
                 }
-
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "https://" + url;
+                }
+                Log.v("Note", "URL: " + url);
                 new LoginValidatorAsyncTask().execute(url, username, password);
             }
         });
