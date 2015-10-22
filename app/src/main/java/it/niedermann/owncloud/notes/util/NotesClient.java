@@ -25,7 +25,7 @@ public class NotesClient {
     private static final String key_id = "id";
     private static final String key_title = "title";
     private static final String key_content = "content";
-    private static final String key_modified = "id";
+    private static final String key_modified = "modified";
 
     private static final String application_json = "application/json";
 

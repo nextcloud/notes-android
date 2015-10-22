@@ -38,6 +38,12 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         }
         noteContent = (TextView) findViewById(R.id.single_note_content);
         noteContent.setText(note.getSpannableContent());
+        findViewById(R.id.fab_edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NoteActivity.this, EditNoteActivity.class));
+            }
+        });
     }
 
     @Override

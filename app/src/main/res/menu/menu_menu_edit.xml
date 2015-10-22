@@ -6,7 +6,7 @@
         android:id="@+id/action_edit_cancel"
         android:icon="@drawable/ic_action_cancel"
         android:orderInCategory="90"
-        android:title="@string/action_edit_cancl"
+        android:title="@string/action_edit_cancel"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_edit_save"

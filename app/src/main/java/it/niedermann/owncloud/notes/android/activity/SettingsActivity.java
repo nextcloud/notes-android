@@ -50,7 +50,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         field_url.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -65,7 +66,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
         // Load current Preferences
@@ -74,6 +76,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         field_password.setText(preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS));
 
         btn_submit.setOnClickListener(this);
+        findViewById(R.id.settings_submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SettingsActivity.this, NotesListViewActivity.class));
+            }
+        });
     }
 
     /**

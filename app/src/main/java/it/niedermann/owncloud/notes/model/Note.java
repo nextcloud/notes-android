@@ -45,8 +45,8 @@ public class Note implements Serializable {
 
 	public String getModified(String format) {
 		return new SimpleDateFormat(format, Locale.GERMANY)
-				.format(this.getModified().getTime());
-	}
+                .format(this.getModified().getTimeInMillis());
+    }
 
 	public String getContent() {
 		return content;
