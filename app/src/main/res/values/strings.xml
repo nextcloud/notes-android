@@ -23,7 +23,7 @@
     <!-- About -->
 
 	<string name="about_version_title">Version</string>
-    <string name="about_version">You are currently using <strong>v0.2.0</strong></string>
+    <string name="about_version">You are currently using <strong>v0.3.0</strong></string>
 	<string name="about_author_title">Author</string>
 	<string name="about_author">This Android-Application is developed and presented by <a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_app_icon_disclaimer_title">App-Icon</string>

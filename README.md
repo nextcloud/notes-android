@@ -8,13 +8,14 @@ An android client for OwnCloud Notes App.
 * Share Text and Links as new Note into the App
 * Bulk Delete
 * Render MarkDown (using [AndDown](https://github.com/commonsguy/cwac-anddown))
-* English and German UI
+* English, German and Serbian UI
 
 ## :checkered_flag: Planned Features
 * Provide App on [F-Droid](https://f-droid.org/) App-Store ([#13](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/13))
 * Table Layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
 * Simple widget for individual note ([#5](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/5))
 * Make a widget for all Notes ([#15](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/15))
+* Local Search ([#19](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/19))
 * Handle Internationalization ([#14](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/14))
 
 ## :eyes: Screenshots
@@ -37,3 +38,4 @@ This Project is licensed under the [GNU GENERAL PUBLIC LICENSE](/LICENSE).
 
 ## :twisted_rightwards_arrows: Alternatives
 If you dislike this app and you are looking for alternatives: Have a look at [MyOwnNotes](https://github.com/aykit/MyOwnNotes).
+
