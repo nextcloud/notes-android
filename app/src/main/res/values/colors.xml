@@ -8,8 +8,10 @@
     <color name="bg_transparent">#aa081a2f</color>
     <color name="bg_highlighted">#f3f3f3</color>
     <color name="bg_normal">#ffffff</color>
+    <color name="bg_attention">#662020</color>
     <color name="fg_default">#000000</color>
     <color name="fg_default_selection">#333333</color>
     <color name="fg_default_low">#666666</color>
+    <color name="fg_default_high">#cccccc</color>
     <color name="fg_contrast">#ffffff</color>
 </resources>

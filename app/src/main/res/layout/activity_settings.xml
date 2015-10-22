@@ -24,7 +24,11 @@
         android:id="@+id/settings_url_warn_http"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/bg_attention"
+        android:padding="8dp"
         android:text="@string/settings_url_warn_http"
+        android:textColor="@color/fg_contrast"
         android:visibility="gone" />
 
     <android.support.design.widget.TextInputLayout

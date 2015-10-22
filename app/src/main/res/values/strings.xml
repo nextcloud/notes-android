@@ -36,7 +36,7 @@
     <string name="settings_server">Server</string>
     <string name="settings_url">URL</string>
     <string name="settings_url_check_description">Shows if the URL can be pinged.</string>
-    <string name="settings_url_warn_http">WARNING: http is unsafe. Please use https.</string>
+    <string name="settings_url_warn_http">WARNING: "http" is unsafe. Please use "https".</string>
     <string name="settings_username">Username</string>
     <string name="settings_password">Password</string>
     <string name="settings_password_check_description">Shows if the given credentials are correct.</string>
