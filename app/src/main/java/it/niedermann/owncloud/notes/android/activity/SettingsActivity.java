@@ -2,12 +2,15 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +23,7 @@ import it.niedermann.owncloud.notes.util.NotesClientUtil;
  * Allows to set Settings like URL, Username and Password for Server-Synchronization
  * Created by stefan on 22.09.15.
  */
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingsActivity extends AppCompatActivity {
 
     public static final String SETTINGS_FIRST_RUN = "firstRun";
     public static final String SETTINGS_URL = "settingsUrl";
@@ -75,32 +78,20 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         field_username.setText(preferences.getString(SETTINGS_USERNAME, DEFAULT_SETTINGS));
         field_password.setText(preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS));
 
-        btn_submit.setOnClickListener(this);
-        findViewById(R.id.settings_submit).setOnClickListener(new View.OnClickListener() {
+        btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingsActivity.this, NotesListViewActivity.class));
+                String url = field_url.getText().toString();
+                String username = field_username.getText().toString();
+                String password = field_password.getText().toString();
+
+                if (!url.endsWith("/")) {
+                    url += "/";
+                }
+
+                new LoginValidatorAsyncTask().execute(url, username, password);
             }
         });
-    }
-
-    /**
-     * Handle Submit Button Click
-     * Checks and Writes the new Preferences into the SharedPreferences Object.
-     *
-     * @param v View
-     */
-    @Override
-    public void onClick(View v) {
-        String url = field_url.getText().toString();
-        String username = field_username.getText().toString();
-        String password = field_password.getText().toString();
-
-        if (!url.endsWith("/")) {
-            url += "/";
-        }
-
-        new LoginValidatorAsyncTask().execute(url, username, password);
     }
 
     /************************************ Async Tasks ************************************/
@@ -113,7 +104,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         @Override
         protected void onPreExecute() {
-            findViewById(R.id.settings_url_check).setVisibility(View.INVISIBLE);
+            ((EditText) findViewById(R.id.settings_url)).setCompoundDrawables(null, null, null, null);
         }
 
         @Override
@@ -124,9 +115,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(Boolean o) {
             if (o) {
-                findViewById(R.id.settings_url_check).setVisibility(View.VISIBLE);
+                Drawable actionDoneDark = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_action_done_dark);
+                actionDoneDark.setBounds(0, 0, 50, 50);
+                ((EditText) findViewById(R.id.settings_url)).setCompoundDrawables(null, null, actionDoneDark, null);
             } else {
-                findViewById(R.id.settings_url_check).setVisibility(View.INVISIBLE);
+                ((EditText) findViewById(R.id.settings_url)).setCompoundDrawables(null, null, null, null);
             }
         }
     }
@@ -176,6 +169,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 setResult(RESULT_OK, data);
                 finish();
             } else {
+                Log.e("Note", "invalid login");
                 btn_submit.setEnabled(true);
                 //TODO Show Error Message
             }

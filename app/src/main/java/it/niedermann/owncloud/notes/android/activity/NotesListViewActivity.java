@@ -50,9 +50,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         // First Run Wizard
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
-        Log.v("Note", "First Run: " + preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true));
         if(preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
-            Log.v("Note", "Seems to be the First Run...");
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
         }
@@ -198,76 +196,20 @@ public class NotesListViewActivity extends AppCompatActivity implements
             }
         } else if (requestCode == NoteActivity.EDIT_NOTE_CMD) {
             if (resultCode == RESULT_OK) {
-                Log.v("Note", "Note was edited from single view");
-
                 Note editedNote = (Note) data.getExtras().getSerializable(
                         NoteActivity.EDIT_NOTE);
-                Log.v("Note", "Neuer Titel: " + editedNote);
-
                 int notePosition = data.getExtras().getInt(
                         SELECTED_NOTE_POSITION);
-                Log.v("Note", "notePosition | NotesListViewActivity kam an "
-                        + notePosition);
-
                 adapter.remove(adapter.getItem(notePosition));
                 adapter.add(editedNote);
             }
         } else if (requestCode == SettingsActivity.CREDENTIALS_CHANGED) {
-            Log.v("Note", "Credentials Changed!");
             db = new NoteSQLiteOpenHelper(this);
             db.synchronizeWithServer(); // Needed to instanciate new NotesClient with new URL
         }
-        Log.v("Note", "New NoteSQLteOpenHelper instanciated");
         //TODO Maybe only if previous activity == settings activity?
         setListView(db.getNotes());
     }
-
-    // private class SingleSelectedActionModeCallback implements
-    // ActionMode.Callback {
-    //
-    // @Override
-    // public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-    // // inflate contextual menu
-    // mode.getMenuInflater().inflate(R.menu.menu_list_context_single,
-    // menu);
-    // return true;
-    // }
-    //
-    // @Override
-    // public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-    // return false;
-    // }
-    //
-    // @Override
-    // public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-    // switch (item.getItemId()) {
-    // case R.id.menu_delete:
-    // SparseBooleanArray checkedItemPositions = listView
-    // .getCheckedItemPositions();
-    // for (int i = (checkedItemPositions.size() - 1); i >= 0; i--) {
-    // if (checkedItemPositions.valueAt(i)) {
-    //
-    // Note checkedItem = adapter.getItem(checkedItemPositions
-    // .keyAt(i));
-    //
-    // NoteDeleterAsyncTask deleter = new NoteDeleterAsyncTask();
-    // deleter.execute(checkedItem);
-    // }
-    // }
-    // mode.finish(); // Action picked, so close the CAB
-    // return true;
-    // default:
-    // return false;
-    // }
-    // }
-    //
-    // @Override
-    // public void onDestroyActionMode(ActionMode mode) {
-    // removeSelection();
-    // mActionMode = null;
-    // adapter.notifyDataSetChanged();
-    // }
-    // }
 
     /**
      * Long click on one item in the list view. It starts the Action Mode and allows selecting more
