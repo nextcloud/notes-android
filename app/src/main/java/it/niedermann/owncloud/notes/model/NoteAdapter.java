@@ -55,7 +55,7 @@ public class NoteAdapter extends ArrayAdapter<Note> {
 
 			noteTitle.setText(note.getTitle());
 			noteExcerpt.setText(note.getExcerpt());
-			noteModified.setText(DateUtils.getRelativeTimeSpanString(getContext(), note.getModified().getTimeInMillis()));
+			noteModified.setText(DateUtils.getRelativeDateTimeString(getContext(), note.getModified().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
 		}
 
 		// the view must be returned to our activity
