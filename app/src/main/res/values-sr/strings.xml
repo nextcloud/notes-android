@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">оунКлауд белешке</string>
+    <string name="action_create">Нова белешка</string>
+    <string name="action_settings">Поставке</string>
+    <string name="action_create_save">Сачувај</string>
+    <string name="action_edit_save">Сачувај</string>
+    <string name="action_about">О програму</string>
+    <string name="action_select_note">Изабери белешку</string>
+    <string name="menu_delete">Обриши</string>
+    <string name="menu_copy">Копирај</string>
+    <string name="menu_edit">Уреди</string>
+    <string name="menu_share">Подели</string>
+    <string name="menu_about">О програму</string>
+    
+    <string name="ab_selected">изабрана</string>
+
+    <string name="copy">Копирај</string>
+
+    <!-- About -->
+
+	<string name="about_version_title">Издање</string>
+    <string name="about_version">Текуће издање је <strong>0.2.0</strong></string>
+	<string name="about_author_title">Аутор</string>
+	<string name="about_author">Ову апликацију за Андроид је направио и презентовао <a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_app_icon_disclaimer_title">Икона апликације</string>
+    <string name="about_app_icon_disclaimer"><p>Изворни аутор <a href="http://www.freepik.com" title="Freepik">Freepik</a> са <a href="http://www.flaticon.com/free-icon/ceo-copyrighting_15475" title="Flaticon">www.flaticon.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Иконе</string>
+    <string name="about_icons_disclaimer"><p>Све остале иконе ове апликације су <a href="https://materialdesignicons.com/" title="веза на вебсајт">иконе материјал дизајна</a> које је креирао Google Inc. и лиценциране су Creative Commons лиценцом.</p></string>
+
+    <!-- Settings -->
+
+    <string name="settings_server">Сервер</string>
+    <string name="settings_url">УРЛ</string>
+    <string name="settings_url_check_description">Приказ доступности УРЛ-а.</string>
+    <string name="settings_url_warn_http">УПОЗОРЕЊЕ: „http“ протокол није безбедан. Користите „https“.</string>
+    <string name="settings_username">Корисничко име</string>
+    <string name="settings_password">Лозинка</string>
+    <string name="settings_password_check_description">Приказ тачности акредитива.</string>
+    <string name="settings_submit">У реду</string>
+
+    <!-- Network -->
+
+    <string name="network_connecting">Веза је успостављена</string>
+    <string name="network_connected">Повезан</string>
+    <string name="network_disconnected">Мрежа није доступна</string>
+
+    <!-- Error -->
+
+    <string name="error_url_malformed">УРЛ унакажен</string>
+    <string name="error_json">ЈСОН грешка</string>
+    <string name="error_io">У/И грешка</string>
+    <string name="error_username_password_invalid">Корисничко име или лозинка нису тачни</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Поставке</string>
+
+</resources>
