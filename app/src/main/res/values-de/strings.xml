@@ -34,13 +34,14 @@
     <!-- Settings -->
 
     <string name="settings_server">Server</string>
-    <string name="settings_url">URL</string>
+    <string name="settings_url">Server Adresse</string>
     <string name="settings_url_check_description">Zeigt an, ob die angegebene URL erreichbar ist.</string>
     <string name="settings_url_warn_http">WARNUNG: "http" ist unsicher. Bitte benutzen Sie "https".</string>
     <string name="settings_username">Benutzername</string>
     <string name="settings_password">Passwort</string>
     <string name="settings_password_check_description">Zeigt an, ob die angegebenen Zugangsdaten korrekt sind.</string>
-    <string name="settings_submit">OK</string>
+    <string name="settings_submit">Verbinden</string>
+    <string name="settings_submitting">Verbindet&#8230;</string>
 
     <!-- Network -->
 

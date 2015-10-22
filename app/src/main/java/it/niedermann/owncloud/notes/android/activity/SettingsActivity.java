@@ -132,7 +132,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            field_url.setEnabled(false);
+            field_username.setEnabled(false);
+            field_password.setEnabled(false);
             btn_submit.setEnabled(false);
+            btn_submit.setText(R.string.settings_submitting);
         }
 
         /**
@@ -171,6 +175,10 @@ public class SettingsActivity extends AppCompatActivity {
             } else {
                 Log.e("Note", "invalid login");
                 btn_submit.setEnabled(true);
+                field_url.setEnabled(true);
+                field_username.setEnabled(true);
+                field_password.setEnabled(true);
+                btn_submit.setText(R.string.settings_submit);
                 //TODO Show Error Message
             }
         }
