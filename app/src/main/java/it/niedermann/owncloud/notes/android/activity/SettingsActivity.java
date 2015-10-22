@@ -37,6 +37,7 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText field_username = null;
     private EditText field_password = null;
     private Button btn_submit = null;
+    private boolean first_run = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
+
+        if (preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+            first_run = true;
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
 
         field_url = (EditText) findViewById(R.id.settings_url);
         field_username = (EditText) findViewById(R.id.settings_username);
@@ -94,10 +100,19 @@ public class SettingsActivity extends AppCompatActivity {
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     url = "https://" + url;
                 }
-                Log.v("Note", "URL: " + url);
                 new LoginValidatorAsyncTask().execute(url, username, password);
             }
         });
+    }
+
+    /**
+     * Prevent pressing back button on first run
+     */
+    @Override
+    public void onBackPressed() {
+        if (!first_run) {
+            super.onBackPressed();
+        }
     }
 
     /************************************ Async Tasks ************************************/
