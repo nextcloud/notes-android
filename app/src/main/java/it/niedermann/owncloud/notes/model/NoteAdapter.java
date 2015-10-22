@@ -1,13 +1,13 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
@@ -53,14 +53,9 @@ public class NoteAdapter extends ArrayAdapter<Note> {
                     .findViewById(R.id.noteExcerpt);
 			TextView noteModified = (TextView) v.findViewById(R.id.noteModified);
 
-				noteTitle.setText(note.getTitle());
-                noteExcerpt.setText(note.getExcerpt());
-			Calendar modified = note.getModified();
-			if (modified.get(Calendar.YEAR) == 2015) {
-				noteModified.setText(note.getModified("dd.MM."));
-			} else {
-				noteModified.setText(note.getModified("dd.MM.yyyy"));
-			}
+			noteTitle.setText(note.getTitle());
+			noteExcerpt.setText(note.getExcerpt());
+			noteModified.setText(DateUtils.getRelativeTimeSpanString(getContext(), note.getModified().getTimeInMillis()));
 		}
 
 		// the view must be returned to our activity

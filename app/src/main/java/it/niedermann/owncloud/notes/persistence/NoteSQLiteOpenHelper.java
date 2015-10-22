@@ -147,7 +147,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     public List<Note> getNotes() {
         List<Note> notes = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()});
+        Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle()});
         if (cursor.moveToFirst()) {
             do {
                 Calendar modified = Calendar.getInstance();
