@@ -20,8 +20,8 @@ public class EditNoteActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
         note = (Note) getIntent().getSerializableExtra(
-                NoteActivity.EDIT_NOTE);
-        content = (EditText) findViewById(R.id.editContent);
+				NoteActivity.EDIT_NOTE);
+		content = (EditText) findViewById(R.id.editContent);
         content.setEnabled(false);
         content.setText(note.getContent());
         content.setSelection(note.getContent().length());

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +15,6 @@ import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 public class NoteActivity extends AppCompatActivity implements View.OnClickListener {
-    // Intent backToListViewIntent = null;
     public final static String EDIT_NOTE = "it.niedermann.owncloud.notes.edit_note_id";
     public final static int EDIT_NOTE_CMD = 1;
     private Note note = null;
@@ -34,16 +34,11 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(note.getTitle());
-            actionBar.setSubtitle(note.getModified("dd.MM.yyyy HH:mm"));
+            actionBar.setSubtitle(DateUtils.getRelativeDateTimeString(getApplicationContext(), note.getModified().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
         }
         noteContent = (TextView) findViewById(R.id.single_note_content);
         noteContent.setText(note.getSpannableContent());
-        findViewById(R.id.fab_edit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(NoteActivity.this, EditNoteActivity.class));
-            }
-        });
+        findViewById(R.id.fab_edit).setOnClickListener(this);
     }
 
     @Override
@@ -72,7 +67,6 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         NoteSQLiteOpenHelper db;
         switch (id) {
             case R.id.menu_delete:
-                //setContentView(R.layout.activity_notes_list_view);
                 db = new NoteSQLiteOpenHelper(this);
                 db.deleteNoteAndSync(note.getId());
                 finish();
