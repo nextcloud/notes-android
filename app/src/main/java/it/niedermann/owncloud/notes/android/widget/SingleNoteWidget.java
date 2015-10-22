@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
@@ -37,7 +36,6 @@ public class SingleNoteWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
         if (intent.getAction().equals(ACTION_SHOW_NOTE)) {
-            Log.v("SingleNoteWidget", "SingleNoteWidget.onReceive()");
         }
     }
 
@@ -45,7 +43,6 @@ public class SingleNoteWidget extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int i = 0; i < appWidgetIds.length; i++) {
             int appWidgetId = appWidgetIds[i];
-            Log.v("SingleNoteWidget", "onUpdate appWidgetId: " + appWidgetId);
             updateAppWidget(null, context, appWidgetManager, appWidgetId);
         }
     }

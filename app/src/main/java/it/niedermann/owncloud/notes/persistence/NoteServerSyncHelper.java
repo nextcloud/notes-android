@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.View;
 
 import org.json.JSONException;
@@ -81,7 +80,6 @@ public class NoteServerSyncHelper {
 
     private void asyncTaskFinished() {
         operationsFinished++;
-        Log.v("Note", "Finished " + operationsFinished + " / " + operationsCount);
         if(operationsFinished == operationsCount) {
             handler.obtainMessage(1).sendToTarget();
         }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -35,12 +34,9 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
         super.onCreate(savedInstanceState);
         setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_select_single_note);
-
-        Log.v("NoteWidget", "In Config Activity");
         // Display Data
         db = new NoteSQLiteOpenHelper(this);
         db.synchronizeWithServer();
-        Log.v("NoteWidget", "Databasename: " + db.getDatabaseName());
         setListView(db.getNotes());
 
 

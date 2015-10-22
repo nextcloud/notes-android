@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -116,7 +115,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         @Override
         protected void onPostExecute(Boolean o) {
-            Log.v("Note", "Set Visible: " + o);
             if (o) {
                 findViewById(R.id.settings_url_check).setVisibility(View.VISIBLE);
             } else {
@@ -151,14 +149,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(Boolean isValidLogin) {
             if(isValidLogin) {
-                Log.v("Note", "Valid Credentials.");
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(SETTINGS_URL, url);
                 editor.putString(SETTINGS_USERNAME, username);
                 editor.putString(SETTINGS_PASSWORD, password);
 
                 // Now it is no more First Run
-                Log.v("Note", "set First_Run to false.");
                 editor.putBoolean(SETTINGS_FIRST_RUN, false);
 
                 editor.apply();
@@ -172,7 +168,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 setResult(RESULT_OK, data);
                 finish();
             } else {
-                Log.v("Note", "Invalid Credentials!");
                 btn_submit.setEnabled(true);
                 //TODO Show Error Message
             }

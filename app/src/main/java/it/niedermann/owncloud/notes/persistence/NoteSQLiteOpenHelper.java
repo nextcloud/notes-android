@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,7 +54,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.v("Note", "Creating Database");
         db.execSQL("CREATE TABLE '" + table_notes + "' ( '" +
                 key_id + "' INTEGER PRIMARY KEY AUTOINCREMENT, '" +
                 key_status + "' VARCHAR(50), '" +
@@ -71,7 +69,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @SuppressWarnings("UnusedReturnValue")
     public long addNoteAndSync(String content) {
-        Log.v("Note", "addNoteAndSync");
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -93,7 +90,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param note Note to be added
      */
     public void addNote(Note note) {
-        Log.v("Note", "addNote (" + note + ")");
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -117,7 +113,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @SuppressWarnings("unused")
     public Note getNote(long id) {
-        Log.v("Note", "getNote(" + id + ")");
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor =
                 db.query(table_notes,
@@ -150,7 +145,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return List&lt;Note&gt;
      */
     public List<Note> getNotes() {
-        Log.v("Note", "getNotes");
         List<Note> notes = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()});
@@ -177,7 +171,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return List&lt;Note&gt;
      */
     public List<Note> getNotesByStatus(DBStatus status) {
-        Log.v("Note", "getNotesByStatus(" + status.getTitle() + ")");
         List<Note> notes = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " = ?", new String[]{status.getTitle()});
@@ -206,7 +199,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @SuppressWarnings("UnusedReturnValue")
     public int updateNoteAndSync(Note note) {
-        Log.v("Note", "updateNoteAndSync(" + note + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_id, note.getId());
@@ -231,7 +223,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @SuppressWarnings("UnusedReturnValue")
     public int updateNote(Note note) {
-        Log.v("Note", "updateNote(" + note + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_id, note.getId());
@@ -256,7 +247,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @SuppressWarnings("UnusedReturnValue")
     public int deleteNoteAndSync(long id) {
-        Log.v("Note", "deleteNoteAndSync(" + id + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, DBStatus.LOCAL_DELETED.getTitle());
@@ -275,7 +265,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param id long - ID of the Note that should be deleted.
      */
     public void deleteNote(long id) {
-        Log.v("Note", "deleteNote(" + id + ")");
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(table_notes,
                 key_id + " = ?",
@@ -285,7 +274,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.v("Note", "onUpgrade - DELETE *");
         clearDatabase();
     }
 

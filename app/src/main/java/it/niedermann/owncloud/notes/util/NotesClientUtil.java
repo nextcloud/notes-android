@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.util.Base64;
-import android.util.Log;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -36,13 +35,8 @@ public class NotesClientUtil {
             urlc.setRequestProperty("Connection", "close");
             urlc.setConnectTimeout(1000 * 10); // mTimeout is in seconds
             urlc.connect();
-            if (urlc.getResponseCode() == 200) {
-                Log.v("Note", "ResponseCode: " + urlc.getResponseCode());
-                return true;
-            } else {
-                return false;
-            }
-        } catch (MalformedURLException e1) {
+            return urlc.getResponseCode() == 200;
+        } catch (MalformedURLException el) {
             return false;
         } catch (IOException e) {
             return false;
@@ -59,7 +53,6 @@ public class NotesClientUtil {
     public static boolean isValidLogin(String url, String username, String password) {
         try {
             String targetURL = url + "index.php/apps/notes/api/v0.2/notes";
-            Log.v("Note", targetURL);
             HttpURLConnection con = (HttpURLConnection) new URL(targetURL)
                     .openConnection();
             con.setRequestMethod("GET");

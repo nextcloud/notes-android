@@ -50,9 +50,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         // First Run Wizard
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
-        Log.v("Note", "First Run: " + preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true));
         if(preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
-            Log.v("Note", "Seems to be the First Run...");
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
         }
@@ -127,7 +125,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
     public void onItemClick(AdapterView<?> parentView, View childView,
                             int position, long id) {
         listView.setItemChecked(position, !listView.isItemChecked(position));
-        Log.v("Note", "getCheckedItemCount " + listView.getCheckedItemCount());
         if (listView.getCheckedItemCount() < 1) {
             removeSelection();
             Intent intent = new Intent(getApplicationContext(),
@@ -135,9 +132,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
             Note note = adapter.getItem(position);
             intent.putExtra(SELECTED_NOTE, note);
             intent.putExtra(SELECTED_NOTE_POSITION, position);
-            Log.v("Note",
-                    "notePosition | NotesListViewActivity wurde abgesendet "
-                            + position);
             startActivityForResult(intent, show_single_note_cmd);
         } else { // perform long click if already something is selected
             onListItemSelect(position);
@@ -198,26 +192,17 @@ public class NotesListViewActivity extends AppCompatActivity implements
             }
         } else if (requestCode == NoteActivity.EDIT_NOTE_CMD) {
             if (resultCode == RESULT_OK) {
-                Log.v("Note", "Note was edited from single view");
-
                 Note editedNote = (Note) data.getExtras().getSerializable(
                         NoteActivity.EDIT_NOTE);
-                Log.v("Note", "Neuer Titel: " + editedNote);
-
                 int notePosition = data.getExtras().getInt(
                         SELECTED_NOTE_POSITION);
-                Log.v("Note", "notePosition | NotesListViewActivity kam an "
-                        + notePosition);
-
                 adapter.remove(adapter.getItem(notePosition));
                 adapter.add(editedNote);
             }
         } else if (requestCode == SettingsActivity.CREDENTIALS_CHANGED) {
-            Log.v("Note", "Credentials Changed!");
             db = new NoteSQLiteOpenHelper(this);
             db.synchronizeWithServer(); // Needed to instanciate new NotesClient with new URL
         }
-        Log.v("Note", "New NoteSQLteOpenHelper instanciated");
         //TODO Maybe only if previous activity == settings activity?
         setListView(db.getNotes());
     }

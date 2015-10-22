@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.util.Base64;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -188,7 +187,6 @@ public class NotesClient {
 			throws IOException {
         StringBuffer result = new StringBuffer();
         String targetURL = url + "index.php/apps/notes/api/v0.2/" + target;
-		Log.v("Note", targetURL);
 		HttpURLConnection con = (HttpURLConnection) new URL(targetURL)
 				.openConnection();
 		con.setRequestMethod(method);
@@ -203,7 +201,6 @@ public class NotesClient {
             con.setRequestProperty("Content-Type", application_json);
             con.setDoOutput(true);
             OutputStream os = con.getOutputStream();
-			Log.v("Note", params.toString());
             os.write(params.toString().getBytes());
             os.flush();
             os.close();

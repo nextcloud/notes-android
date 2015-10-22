@@ -5,7 +5,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -27,8 +26,6 @@ public class AllNotesWidget extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int i = 0; i < appWidgetIds.length; i++) {
             int appWidgetId = appWidgetIds[i];
-            Log.v("AllNotesWidget", "onUpdate appWidgetId: " + appWidgetId);
-
             // Set up the intent that starts the StackViewService, which will
             // provide the views for this collection.
             Intent intent = new Intent(context, StackWidgetService.class);
@@ -64,7 +61,6 @@ public class AllNotesWidget extends AppWidgetProvider {
             mContext = context;
             mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
-            Log.v("AllNotesWidget", "StackRemoteViewsFactory()");
             NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(mContext);
             db.synchronizeWithServer();
             mWidgetItems = db.getNotes();
@@ -72,7 +68,6 @@ public class AllNotesWidget extends AppWidgetProvider {
         }
 
         public void onCreate() {
-            Log.v("AllNotesWidget", "StackRemoteViewsFactory.onCreate");
             mWidgetItems.add(new Note(0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung"));
         }
 
@@ -93,7 +88,6 @@ public class AllNotesWidget extends AppWidgetProvider {
 
         @Override
         public RemoteViews getViewAt(int position) {
-            Log.v("AllNotesWidget", "StackRemoteViewsFactory.getViewAt()");
             // Construct a remote views item based on the app widget item XML file,
             // and set the text based on the position.
             RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.fragment_notes_list_view);
