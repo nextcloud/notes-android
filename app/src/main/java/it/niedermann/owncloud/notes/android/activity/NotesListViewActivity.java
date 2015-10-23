@@ -206,6 +206,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
             } else { // perform long click if already something is selected
                 onListItemSelect(position);
             }
+        } else {
+            listView.setItemChecked(position, false);
         }
     }
 
@@ -285,27 +287,31 @@ public class NotesListViewActivity extends AppCompatActivity implements
      * @param position int - position of the clicked item
      */
     private void onListItemSelect(int position) {
-        listView.setItemChecked(position, !listView.isItemChecked(position));
-        int checkedItemCount = listView.getCheckedItemCount();
-        boolean hasCheckedItems = checkedItemCount > 0;
+        if (!adapter.getItem(position).isSection()) {
+            listView.setItemChecked(position, !listView.isItemChecked(position));
+            int checkedItemCount = listView.getCheckedItemCount();
+            boolean hasCheckedItems = checkedItemCount > 0;
 
-        if (hasCheckedItems && mActionMode == null) {
-            // TODO differ if one or more items are selected
-            // if (checkedItemCount == 1) {
-            // mActionMode = startActionMode(new
-            // SingleSelectedActionModeCallback());
-            // } else {
-            // there are some selected items, start the actionMode
-            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
-            // }
-        } else if (!hasCheckedItems && mActionMode != null) {
-            // there no selected items, finish the actionMode
-            mActionMode.finish();
-        }
+            if (hasCheckedItems && mActionMode == null) {
+                // TODO differ if one or more items are selected
+                // if (checkedItemCount == 1) {
+                // mActionMode = startActionMode(new
+                // SingleSelectedActionModeCallback());
+                // } else {
+                // there are some selected items, start the actionMode
+                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
+                // }
+            } else if (!hasCheckedItems && mActionMode != null) {
+                // there no selected items, finish the actionMode
+                mActionMode.finish();
+            }
 
-        if (mActionMode != null) {
-            mActionMode.setTitle(String.valueOf(listView.getCheckedItemCount())
-                    + " " + getString(R.string.ab_selected));
+            if (mActionMode != null) {
+                mActionMode.setTitle(String.valueOf(listView.getCheckedItemCount())
+                        + " " + getString(R.string.ab_selected));
+            }
+        } else {
+            listView.setItemChecked(position, false);
         }
     }
 
