@@ -10,12 +10,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RemoteViews;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.widget.SingleNoteWidget;
+import it.niedermann.owncloud.notes.model.Item;
+import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.Note;
-import it.niedermann.owncloud.notes.model.NoteAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 /**
@@ -27,7 +29,7 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
     int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     private NoteSQLiteOpenHelper db = null;
     private ListView listView = null;
-    private NoteAdapter adapter = null;
+    private ItemAdapter adapter = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,9 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
      * @param noteList List&lt;Note&gt;
      */
     private void setListView(List<Note> noteList) {
-        adapter = new NoteAdapter(getApplicationContext(), noteList);
+        List<Item> itemList = new ArrayList<>();
+        itemList.addAll(noteList);
+        adapter = new ItemAdapter(getApplicationContext(), itemList);
         listView = (ListView) findViewById(R.id.select_single_note_list_view);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
@@ -75,7 +79,7 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
         appWidgetManager.updateAppWidget(appWidgetId, views);
-        SingleNoteWidget.updateAppWidget(adapter.getItem(position), context, appWidgetManager, appWidgetId);
+        SingleNoteWidget.updateAppWidget((Note) adapter.getItem(position), context, appWidgetManager, appWidgetId);
 
         Intent resultValue = new Intent();
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

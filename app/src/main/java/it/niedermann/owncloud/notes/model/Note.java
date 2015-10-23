@@ -9,8 +9,8 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 @SuppressWarnings("serial")
-public class Note implements Serializable {
-	private long id = 0;
+public class Note implements Item, Serializable {
+    private long id = 0;
 	private String title = "";
 	private Calendar modified = null;
 	private String content = "";
@@ -77,4 +77,9 @@ public class Note implements Serializable {
 	public String toString() {
 		return "#" + getId() + " " + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + ")";
 	}
+
+    @Override
+    public boolean isSection() {
+        return false;
+    }
 }

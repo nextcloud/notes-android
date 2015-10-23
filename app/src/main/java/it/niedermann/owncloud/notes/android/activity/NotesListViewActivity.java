@@ -17,11 +17,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.Item;
+import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.Note;
-import it.niedermann.owncloud.notes.model.NoteAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 
@@ -39,7 +41,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private final static int about = 3;
 
     private ListView listView = null;
-    private NoteAdapter adapter = null;
+    private ItemAdapter adapter = null;
     private ActionMode mActionMode;
     private SwipeRefreshLayout swipeRefreshLayout = null;
     private NoteSQLiteOpenHelper db = null;
@@ -103,7 +105,31 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     @SuppressWarnings("WeakerAccess")
     public void setListView(List<Note> noteList) {
-        adapter = new NoteAdapter(getApplicationContext(), noteList);
+        List<Item> itemList = new ArrayList<>();
+        /*
+        //TODO Implement #12
+
+        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_recent)));
+        if(noteList.size() > 0) {
+            itemList.add(noteList.get(0));
+        }
+        Calendar yesterday = Calendar.getInstance();
+        yesterday.set(Calendar.HOUR_OF_DAY, 0);
+        yesterday.set(Calendar.MINUTE, 0);
+        yesterday.set(Calendar.SECOND, 0);
+        yesterday.set(Calendar.MILLISECOND, 0);
+        boolean yesterdaySet = false;
+        for(int i = 1; i < noteList.size(); i++) {
+            if (!yesterdaySet && noteList.get(i).getModified().before(yesterday)) {
+                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
+                yesterdaySet = true;
+            }
+            itemList.add(noteList.get(i));
+        }*/
+
+        itemList.addAll(noteList);
+
+        adapter = new ItemAdapter(getApplicationContext(), itemList);
         listView = (ListView) findViewById(R.id.list_view);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
@@ -130,13 +156,15 @@ public class NotesListViewActivity extends AppCompatActivity implements
             removeSelection();
             Intent intent = new Intent(getApplicationContext(),
                     NoteActivity.class);
-            Note note = adapter.getItem(position);
-            intent.putExtra(SELECTED_NOTE, note);
-            intent.putExtra(SELECTED_NOTE_POSITION, position);
-            Log.v("Note",
-                    "notePosition | NotesListViewActivity wurde abgesendet "
-                            + position);
-            startActivityForResult(intent, show_single_note_cmd);
+            Item item = adapter.getItem(position);
+            if (!item.isSection()) {
+                intent.putExtra(SELECTED_NOTE, (Note) item);
+                intent.putExtra(SELECTED_NOTE_POSITION, position);
+                Log.v("Note",
+                        "notePosition | NotesListViewActivity wurde abgesendet "
+                                + position);
+                startActivityForResult(intent, show_single_note_cmd);
+            }
         } else { // perform long click if already something is selected
             onListItemSelect(position);
         }
@@ -285,7 +313,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                             .getCheckedItemPositions();
                     for (int i = (checkedItemPositions.size() - 1); i >= 0; i--) {
                         if (checkedItemPositions.valueAt(i)) {
-                            Note note = adapter.getItem(checkedItemPositions
+                            Note note = (Note) adapter.getItem(checkedItemPositions
                                     .keyAt(i));
                             db.deleteNoteAndSync(note.getId());
                             adapter.remove(note);

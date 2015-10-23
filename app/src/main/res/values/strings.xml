@@ -20,6 +20,13 @@
 
     <string name="copy">Copy</string>
 
+    <string name="listview_updated_recent">Updated recently</string>
+    <string name="listview_updated_today">Updated today</string>
+    <string name="listview_updated_yesterday">Updated yesterday</string>
+    <string name="listview_updated_this_week">Updated this week</string>
+    <string name="listview_updated_this_month">Updated this month</string>
+    <string name="listview_updated_earlier">Updated earlier</string>
+
     <!-- About -->
 
 	<string name="about_version_title">Version</string>
