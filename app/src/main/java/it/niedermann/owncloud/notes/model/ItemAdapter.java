@@ -36,8 +36,9 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 			}
 			SectionItem section = (SectionItem) item;
 			TextView sectionTitle = (TextView) v.findViewById(R.id.sectionTitle);
-			sectionTitle.setText(section.geTitle());
-
+			if (sectionTitle != null) {
+				sectionTitle.setText(section.geTitle());
+			}
 		} else {
 			// first check to see if the view is null. if so, we have to inflate it.
 			// to inflate it basically means to render, or show, the view.
@@ -56,16 +57,15 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 			 */
 			Note note = (Note) item;
 
-			if (note != null) {
+			// This is how you obtain a reference to the TextViews.
+			// These TextViews are created in the XML files we defined.
 
-				// This is how you obtain a reference to the TextViews.
-				// These TextViews are created in the XML files we defined.
+			TextView noteTitle = (TextView) v.findViewById(R.id.noteTitle);
+			TextView noteExcerpt = (TextView) v
+					.findViewById(R.id.noteExcerpt);
+			TextView noteModified = (TextView) v.findViewById(R.id.noteModified);
 
-				TextView noteTitle = (TextView) v.findViewById(R.id.noteTitle);
-				TextView noteExcerpt = (TextView) v
-						.findViewById(R.id.noteExcerpt);
-				TextView noteModified = (TextView) v.findViewById(R.id.noteModified);
-
+			if (noteTitle != null) { //FIXME on quick scroll or moving to portrait mode the TextView seems to be null. This is only to prevent App Crashing
 				noteTitle.setText(note.getTitle());
 				noteExcerpt.setText(note.getExcerpt());
 				noteModified.setText(DateUtils.getRelativeDateTimeString(getContext(), note.getModified().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
