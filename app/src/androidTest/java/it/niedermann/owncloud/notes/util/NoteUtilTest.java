@@ -25,9 +25,10 @@ public class NoteUtilTest extends TestCase {
         assertEquals("Test", NoteUtil.getLineWithoutMarkDown("Test", 0));
         assertEquals("Test", NoteUtil.getLineWithoutMarkDown("\nTest", 0));
         assertEquals("Foo", NoteUtil.getLineWithoutMarkDown("Foo\nBar", 0));
+        assertEquals("Bar", NoteUtil.getLineWithoutMarkDown("Foo\nBar", 1));
     }
 
-    public void testGenerateTitle() {
+    public void testGenerateNoteTitle() {
         assertEquals("Test", NoteUtil.generateNoteTitle("Test"));
         assertEquals("Test", NoteUtil.generateNoteTitle("Test\n"));
         assertEquals("Test", NoteUtil.generateNoteTitle("Test\nFoo"));
@@ -35,7 +36,10 @@ public class NoteUtilTest extends TestCase {
         assertEquals("Test", NoteUtil.generateNoteTitle("\n\nTest"));
     }
 
-    public void testGenerateExcerpt() {
+    public void testGenerateNoteExcerpt() {
         assertEquals("Test", NoteUtil.generateNoteExcerpt("Test"));
+        assertEquals("Foo", NoteUtil.generateNoteExcerpt("Test\nFoo"));
+        assertEquals("Foo", NoteUtil.generateNoteExcerpt("Test\nFoo\nBar"));
+        assertEquals("", NoteUtil.generateNoteExcerpt(""));
     }
 }
