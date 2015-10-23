@@ -63,16 +63,7 @@ public class Note implements Serializable {
     }
 
     private void setExcerpt(String content) {
-        if (content.contains("\n")) {
-            String[] lines = content.split("\n");
-            int currentLine = 1;
-            while (NoteUtil.isEmptyLine(lines[currentLine]) && currentLine < lines.length) {
-                currentLine++;
-            }
-            excerpt = NoteUtil.removeMarkDown(lines[currentLine]);
-        } else {
-            excerpt = content;
-        }
+        excerpt = NoteUtil.generateNoteExcerpt(content);
     }
 
     public String getSpannableContent() {

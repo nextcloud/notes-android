@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.Note;
+import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
@@ -73,6 +74,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(key_status, DBStatus.LOCAL_CREATED.getTitle());
+        values.put(key_title, NoteUtil.generateNoteTitle(content));
         values.put(key_content, content);
 
         long id = db.insert(table_notes,
@@ -91,14 +93,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public void addNote(Note note) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(NoteSQLiteOpenHelper.key_id, note.getId());
         values.put(NoteSQLiteOpenHelper.key_status, DBStatus.VOID.getTitle());
         values.put(NoteSQLiteOpenHelper.key_title, note.getTitle());
         values.put(NoteSQLiteOpenHelper.key_modified, note.getModified(NoteSQLiteOpenHelper.DATE_FORMAT));
         values.put(NoteSQLiteOpenHelper.key_content, note.getContent());
-
         db.insert(NoteSQLiteOpenHelper.table_notes,
                 null,
                 values);

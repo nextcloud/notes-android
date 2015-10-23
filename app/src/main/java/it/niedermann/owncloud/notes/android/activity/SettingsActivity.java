@@ -157,16 +157,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            field_url.setEnabled(false);
-            field_username.setEnabled(false);
-            field_password.setEnabled(false);
-            btn_submit.setEnabled(false);
+            setInputsEnabled(false);
             btn_submit.setText(R.string.settings_submitting);
         }
 
         /**
          * @param params url, username and password
-         * @return isValidLogin
+         * @return isValidLogin Boolean
          */
         @Override
         protected Boolean doInBackground(String... params) {
@@ -183,10 +180,8 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.putString(SETTINGS_URL, url);
                 editor.putString(SETTINGS_USERNAME, username);
                 editor.putString(SETTINGS_PASSWORD, password);
-
                 // Now it is no more First Run
                 editor.putBoolean(SETTINGS_FIRST_RUN, false);
-
                 editor.apply();
 
                 NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(getApplicationContext());
@@ -199,13 +194,22 @@ public class SettingsActivity extends AppCompatActivity {
                 finish();
             } else {
                 Log.e("Note", "invalid login");
-                btn_submit.setEnabled(true);
-                field_url.setEnabled(true);
-                field_username.setEnabled(true);
-                field_password.setEnabled(true);
                 btn_submit.setText(R.string.settings_submit);
+                setInputsEnabled(true);
                 //TODO Show Error Message
             }
+        }
+
+        /**
+         * Sets all Input-Fields and Buttons to enabled or disabled depending on the given boolean.
+         *
+         * @param enabled - boolean
+         */
+        private void setInputsEnabled(boolean enabled) {
+            btn_submit.setEnabled(enabled);
+            field_url.setEnabled(enabled);
+            field_username.setEnabled(enabled);
+            field_password.setEnabled(enabled);
         }
     }
 }

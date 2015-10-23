@@ -31,16 +31,62 @@ public class NoteUtil {
 
     /**
      * Checks if a line is empty.
-     * " " -> empty
-     * "\n" -> empty
-     * "\n " -> empty
-     * " \n" -> empty
+     * <pre>
+     * " "    -> empty
+     * "\n"   -> empty
+     * "\n "  -> empty
+     * " \n"  -> empty
      * " \n " -> empty
+     * </pre>
      *
      * @param line String - a single Line which ends with \n
      * @return boolean isEmpty
      */
     public static boolean isEmptyLine(String line) {
         return removeMarkDown(line).trim().length() == 0;
+    }
+
+    /**
+     * Generates an excerpt of a content String (reads second line which is not empty)
+     *
+     * @param content String
+     * @return excerpt String
+     */
+    public static String generateNoteExcerpt(String content) {
+        return getLineWithoutMarkDown(content, 1);
+    }
+
+    /**
+     * Generates a title of a content String (reads fist linew which is not empty)
+     *
+     * @param content String
+     * @return excerpt String
+     */
+    public static String generateNoteTitle(String content) {
+        return getLineWithoutMarkDown(content, 0);
+    }
+
+    /**
+     * Reads the requested line and strips all MarkDown. If line is empty, it will go ahead to find the next not-empty line.
+     *
+     * @param content    String
+     * @param lineNumber int
+     * @return lineContent String
+     */
+    public static String getLineWithoutMarkDown(String content, int lineNumber) {
+        String line = "";
+        if (content.contains("\n")) {
+            String[] lines = content.split("\n");
+            int currentLine = lineNumber;
+            while (currentLine < lines.length && NoteUtil.isEmptyLine(lines[currentLine])) {
+                currentLine++;
+            }
+            if (currentLine < lines.length) {
+                line = NoteUtil.removeMarkDown(lines[currentLine]);
+            }
+        } else {
+            line = content;
+        }
+        return line;
     }
 }
