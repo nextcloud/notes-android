@@ -18,12 +18,14 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.Note;
+import it.niedermann.owncloud.notes.model.SectionItem;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 
@@ -106,28 +108,63 @@ public class NotesListViewActivity extends AppCompatActivity implements
     @SuppressWarnings("WeakerAccess")
     public void setListView(List<Note> noteList) {
         List<Item> itemList = new ArrayList<>();
-        /*
-        //TODO Implement #12
+        // #12 Create Sections depending on Time
 
-        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_recent)));
-        if(noteList.size() > 0) {
-            itemList.add(noteList.get(0));
-        }
+        boolean recentSet, todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
+        recentSet = todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
+        Calendar recent = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0);
+        today.set(Calendar.MILLISECOND, 0);
         Calendar yesterday = Calendar.getInstance();
+        yesterday.set(Calendar.DAY_OF_YEAR, yesterday.get(Calendar.DAY_OF_YEAR) - 1);
         yesterday.set(Calendar.HOUR_OF_DAY, 0);
         yesterday.set(Calendar.MINUTE, 0);
         yesterday.set(Calendar.SECOND, 0);
         yesterday.set(Calendar.MILLISECOND, 0);
-        boolean yesterdaySet = false;
-        for(int i = 1; i < noteList.size(); i++) {
-            if (!yesterdaySet && noteList.get(i).getModified().before(yesterday)) {
+        Calendar week = Calendar.getInstance();
+        week.set(Calendar.DAY_OF_WEEK, week.getFirstDayOfWeek());
+        week.set(Calendar.HOUR_OF_DAY, 0);
+        week.set(Calendar.MINUTE, 0);
+        week.set(Calendar.SECOND, 0);
+        week.set(Calendar.MILLISECOND, 0);
+        Calendar month = Calendar.getInstance();
+        month.set(Calendar.DAY_OF_MONTH, 0);
+        month.set(Calendar.HOUR_OF_DAY, 0);
+        month.set(Calendar.MINUTE, 0);
+        month.set(Calendar.SECOND, 0);
+        month.set(Calendar.MILLISECOND, 0);
+        for (int i = 0; i < noteList.size(); i++) {
+            Note currentNote = noteList.get(i);
+            if (!recentSet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() < 600000) {
+                // < 10 minutes
+                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_recent)));
+                recentSet = true;
+            } else if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
+                // < 10 minutes but after 00:00 today
+                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
+                todaySet = true;
+            } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
+                // between today 00:00 and yesterday 00:00
                 itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
                 yesterdaySet = true;
+            } else if (!weekSet && currentNote.getModified().getTimeInMillis() < yesterday.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= week.getTimeInMillis()) {
+                // between yesterday 00:00 and start of the week 00:00
+                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_week)));
+                weekSet = true;
+            } else if (!monthSet && currentNote.getModified().getTimeInMillis() < week.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= month.getTimeInMillis()) {
+                // between start of the week 00:00 and start of the month 00:00
+                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_month)));
+                monthSet = true;
+            } else if (!earlierSet && currentNote.getModified().getTimeInMillis() < month.getTimeInMillis()) {
+                // before start of the month 00:00
+                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_earlier)));
+                earlierSet = true;
             }
-            itemList.add(noteList.get(i));
-        }*/
-
-        itemList.addAll(noteList);
+            itemList.add(currentNote);
+        }
 
         adapter = new ItemAdapter(getApplicationContext(), itemList);
         listView = (ListView) findViewById(R.id.list_view);
@@ -150,23 +187,25 @@ public class NotesListViewActivity extends AppCompatActivity implements
     @Override
     public void onItemClick(AdapterView<?> parentView, View childView,
                             int position, long id) {
-        listView.setItemChecked(position, !listView.isItemChecked(position));
-        Log.v("Note", "getCheckedItemCount " + listView.getCheckedItemCount());
-        if (listView.getCheckedItemCount() < 1) {
-            removeSelection();
-            Intent intent = new Intent(getApplicationContext(),
-                    NoteActivity.class);
-            Item item = adapter.getItem(position);
-            if (!item.isSection()) {
-                intent.putExtra(SELECTED_NOTE, (Note) item);
-                intent.putExtra(SELECTED_NOTE_POSITION, position);
-                Log.v("Note",
-                        "notePosition | NotesListViewActivity wurde abgesendet "
-                                + position);
-                startActivityForResult(intent, show_single_note_cmd);
+        Item item = adapter.getItem(position);
+        if (!item.isSection()) {
+            listView.setItemChecked(position, !listView.isItemChecked(position));
+            Log.v("Note", "getCheckedItemCount " + listView.getCheckedItemCount());
+            if (listView.getCheckedItemCount() < 1) {
+                removeSelection();
+                Intent intent = new Intent(getApplicationContext(),
+                        NoteActivity.class);
+                if (!item.isSection()) {
+                    intent.putExtra(SELECTED_NOTE, (Note) item);
+                    intent.putExtra(SELECTED_NOTE_POSITION, position);
+                    Log.v("Note",
+                            "notePosition | NotesListViewActivity wurde abgesendet "
+                                    + position);
+                    startActivityForResult(intent, show_single_note_cmd);
+                }
+            } else { // perform long click if already something is selected
+                onListItemSelect(position);
             }
-        } else { // perform long click if already something is selected
-            onListItemSelect(position);
         }
     }
 
