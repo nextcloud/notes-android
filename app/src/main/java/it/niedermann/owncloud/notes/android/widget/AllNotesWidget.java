@@ -24,18 +24,17 @@ public class AllNotesWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int i = 0; i < appWidgetIds.length; i++) {
-            int appWidgetId = appWidgetIds[i];
+        for (int appWidgetId : appWidgetIds) {
             // Set up the intent that starts the StackViewService, which will
             // provide the views for this collection.
             Intent intent = new Intent(context, StackWidgetService.class);
             // Add the app widget ID to the intent extras.
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
+            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
             // Instantiate the RemoteViews object for the app widget layout.
 
             RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_all_notes);
-            rv.setRemoteAdapter(appWidgetIds[i], intent);
+            rv.setRemoteAdapter(appWidgetId, intent);
 
             appWidgetManager.updateAppWidget(appWidgetId, rv);
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.layout.widget_all_notes);
@@ -50,8 +49,7 @@ public class AllNotesWidget extends AppWidgetProvider {
     }
 
 
-    class StackRemoteViewsFactory implements
-            RemoteViewsService.RemoteViewsFactory {
+    class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         private static final int mCount = 10;
         private List<Note> mWidgetItems = new ArrayList<>();
         private Context mContext;

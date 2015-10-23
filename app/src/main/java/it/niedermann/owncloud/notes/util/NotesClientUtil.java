@@ -2,7 +2,12 @@ package it.niedermann.owncloud.notes.util;
 
 import android.util.Base64;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,26 +26,6 @@ public class NotesClientUtil {
      */
     public static boolean isHttp(String url) {
         return url != null && url.length() > 4 && url.startsWith("http") && url.charAt(4) != 's';
-    }
-
-    /**
-     * Checks if the given URL returns a valid status code and sets the Check next to the URL-Input Field to visible.
-     * @param urlStr String URL
-     * @return URL is valid
-     */
-    public static boolean isValidURL(String urlStr) {
-        try {
-            URL url = new URL(urlStr);
-            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-            urlc.setRequestProperty("Connection", "close");
-            urlc.setConnectTimeout(1000 * 10); // mTimeout is in seconds
-            urlc.connect();
-            return urlc.getResponseCode() == 200;
-        } catch (MalformedURLException el) {
-            return false;
-        } catch (IOException e) {
-            return false;
-        }
     }
 
     /**
@@ -72,6 +57,31 @@ public class NotesClientUtil {
             return false;
         }
         return false;
+    }
+
+    /**
+     * Pings a server and checks if there is a installed ownCloud instance
+     *
+     * @param url String URL to server
+     * @return true if there is a installed instance, false if not
+     */
+    public static boolean pingServer(String url) {
+        StringBuffer result = new StringBuffer();
+        try {
+            HttpURLConnection con = (HttpURLConnection) new URL(url + "status.php")
+                    .openConnection();
+            con.setRequestMethod(NotesClient.METHOD_GET);
+            con.setConnectTimeout(10 * 1000); // 10 seconds
+            BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+            JSONObject response = new JSONObject(result.toString());
+            return response.getBoolean("installed");
+        } catch (IOException | JSONException e) {
+            return false;
+        }
     }
 
 }

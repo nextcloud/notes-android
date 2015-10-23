@@ -22,18 +22,15 @@ import it.niedermann.owncloud.notes.model.Note;
 
 public class NotesClient {
 
+    public static final String METHOD_GET = "GET";
+    public static final String METHOD_PUT = "PUT";
+    public static final String METHOD_POST = "POST";
+    public static final String METHOD_DELETE = "DELETE";
     private static final String key_id = "id";
     private static final String key_title = "title";
     private static final String key_content = "content";
     private static final String key_modified = "modified";
-
     private static final String application_json = "application/json";
-
-    private static final String method_get = "GET";
-    private static final String method_put = "PUT";
-    private static final String method_post = "POST";
-    private static final String method_delete = "DELETE";
-
 	private String url = "";
 	private String username = "";
 	private String password = "";
@@ -47,7 +44,7 @@ public class NotesClient {
 	public List<Note> getNotes() throws JSONException,
             IOException {
 		List<Note> notesList = new ArrayList<>();
-        JSONArray notes = new JSONArray(requestServer("notes", method_get, null));
+        JSONArray notes = new JSONArray(requestServer("notes", METHOD_GET, null));
         long noteId = 0;
 		String noteTitle = "";
 		String noteContent = "";
@@ -92,7 +89,7 @@ public class NotesClient {
 		String noteContent = "";
 		Calendar noteModified = null;
 		JSONObject currentItem = new JSONObject(
-                requestServer("notes/" + id, method_get, null));
+                requestServer("notes/" + id, METHOD_GET, null));
 
         if (!currentItem.isNull(key_id)) {
             noteId = currentItem.getLong(key_id);
@@ -127,7 +124,7 @@ public class NotesClient {
 
 		JSONObject paramObject = new JSONObject();
         paramObject.accumulate(key_content, content);
-        JSONObject currentItem = new JSONObject(requestServer("notes", method_post,
+        JSONObject currentItem = new JSONObject(requestServer("notes", METHOD_POST,
                 paramObject));
 
         if (!currentItem.isNull(key_id)) {
@@ -155,7 +152,7 @@ public class NotesClient {
 		JSONObject paramObject = new JSONObject();
         paramObject.accumulate(key_content, content);
         JSONObject currentItem = new JSONObject(requestServer(
-                "notes/" + noteId, method_put, paramObject));
+                "notes/" + noteId, METHOD_PUT, paramObject));
 
         if (!currentItem.isNull(key_title)) {
             noteTitle = currentItem.getString(key_title);
@@ -170,7 +167,7 @@ public class NotesClient {
 
 	public void deleteNote(long noteId) throws
             IOException {
-        this.requestServer("notes/" + noteId, method_delete, null);
+        this.requestServer("notes/" + noteId, METHOD_DELETE, null);
     }
 
 	/**

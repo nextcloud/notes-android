@@ -65,6 +65,10 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String url = ((EditText) findViewById(R.id.settings_url)).getText().toString();
+
+                if (!url.endsWith("/")) {
+                    url += "/";
+                }
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     url = "https://" + url;
                 }
@@ -130,7 +134,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            return NotesClientUtil.isValidURL(params[0]);
+            return NotesClientUtil.pingServer(params[0]);
         }
 
         @Override
