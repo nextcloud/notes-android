@@ -18,5 +18,24 @@ public class NoteUtilTest extends TestCase {
         assertTrue(NoteUtil.isEmptyLine("\n "));
         assertTrue(NoteUtil.isEmptyLine(" \n"));
         assertTrue(NoteUtil.isEmptyLine(" \n "));
+        assertFalse(NoteUtil.isEmptyLine("a \n "));
+    }
+
+    public void testGetLineWithoutMarkDown() {
+        assertEquals("Test", NoteUtil.getLineWithoutMarkDown("Test", 0));
+        assertEquals("Test", NoteUtil.getLineWithoutMarkDown("\nTest", 0));
+        assertEquals("Foo", NoteUtil.getLineWithoutMarkDown("Foo\nBar", 0));
+    }
+
+    public void testGenerateTitle() {
+        assertEquals("Test", NoteUtil.generateNoteTitle("Test"));
+        assertEquals("Test", NoteUtil.generateNoteTitle("Test\n"));
+        assertEquals("Test", NoteUtil.generateNoteTitle("Test\nFoo"));
+        assertEquals("Test", NoteUtil.generateNoteTitle("\nTest"));
+        assertEquals("Test", NoteUtil.generateNoteTitle("\n\nTest"));
+    }
+
+    public void testGenerateExcerpt() {
+        assertEquals("Test", NoteUtil.generateNoteExcerpt("Test"));
     }
 }

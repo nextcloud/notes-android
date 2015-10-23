@@ -65,7 +65,7 @@ public class NotesClientUtil {
      * @param url String URL to server
      * @return true if there is a installed instance, false if not
      */
-    public static boolean pingServer(String url) {
+    public static boolean isValidURL(String url) {
         StringBuffer result = new StringBuffer();
         try {
             HttpURLConnection con = (HttpURLConnection) new URL(url + "status.php")

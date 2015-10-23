@@ -134,7 +134,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            return NotesClientUtil.pingServer(params[0]);
+            return NotesClientUtil.isValidURL(params[0]);
         }
 
         @Override
