@@ -7,17 +7,14 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.Note;
@@ -123,36 +120,7 @@ public class NoteServerSyncHelper {
             try {
                 Note note = client.createNote(oldNote.getContent());
                 return new Object[]{note, oldNote.getId()};
-            } catch (MalformedURLException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_url_malformed, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.snackbar_settings, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Activity parent = (Activity) db.getContext();
-                                Intent intent = new Intent(parent, SettingsActivity.class);
-                                parent.startActivity(intent);
-                            }
-                        })
-                        .show();
-                e.printStackTrace();
-            } catch (JSONException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_json, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.snackbar_settings, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Activity parent = (Activity) db.getContext();
-                                Intent intent = new Intent(parent, SettingsActivity.class);
-                                parent.startActivity(intent);
-                            }
-                        })
-                        .show();
-                e.printStackTrace();
-            } catch (IOException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_io, Snackbar.LENGTH_LONG)
-                        .show();
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return null;
@@ -178,22 +146,7 @@ public class NoteServerSyncHelper {
             try {
                 Note oldNote = (Note) params[0];
                 return client.editNote(oldNote.getId(), oldNote.getContent());
-            } catch (MalformedURLException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_url_malformed, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.snackbar_settings, goToSettingsListener)
-                        .show();
-                e.printStackTrace();
-            } catch (JSONException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_json, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.snackbar_settings, goToSettingsListener)
-                        .show();
-                e.printStackTrace();
-            } catch (IOException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_io, Snackbar.LENGTH_LONG)
-                        .show();
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
             return null;
@@ -215,16 +168,8 @@ public class NoteServerSyncHelper {
             try {
                 id = ((Note) params[0]).getId();
                 client.deleteNote(id);
-            } catch (MalformedURLException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_url_malformed, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.snackbar_settings, goToSettingsListener)
-                        .show();
-                e.printStackTrace();
             } catch (IOException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_io, Snackbar.LENGTH_LONG)
-                        .show();
+                e.printStackTrace();
             }
             return null;
         }
@@ -245,24 +190,7 @@ public class NoteServerSyncHelper {
             List<Note> notes = new ArrayList<>();
             try {
                 notes = client.getNotes();
-            } catch (MalformedURLException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_url_malformed, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.snackbar_settings, goToSettingsListener)
-                        .show();
-                serverError = true;
-                e.printStackTrace();
-            } catch (JSONException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_json, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.snackbar_settings, goToSettingsListener)
-                        .show();
-                serverError = true;
-                e.printStackTrace();
-            } catch (IOException e) {
-                Snackbar
-                        .make(((Activity) db.getContext()).getWindow().getDecorView(), R.string.error_io, Snackbar.LENGTH_LONG)
-                        .show();
+            } catch (IOException | JSONException e) {
                 serverError = true;
                 e.printStackTrace();
             }
@@ -271,7 +199,7 @@ public class NoteServerSyncHelper {
 
         @Override
         protected void onPostExecute(List<Note> result) {
-            // Clear Database only if there is an Server
+            // Clear Database only if there was no Server Error
             if(!serverError) {
                 db.clearDatabase();
             }
