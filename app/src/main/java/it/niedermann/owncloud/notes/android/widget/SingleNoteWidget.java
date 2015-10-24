@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.NoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 import it.niedermann.owncloud.notes.model.Note;
 
@@ -23,7 +24,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
         if (note != null) {
             updateViews.setTextViewText(R.id.single_note_content, note.getSpannableContent());
             //FIXME does not work!
-            Intent intent = new Intent(context, SingleNoteWidget.class);
+            Intent intent = new Intent(context, NoteActivity.class);
             //intent.setAction(ACTION_SHOW_NOTE);
             intent.putExtra(NotesListViewActivity.SELECTED_NOTE, note);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
