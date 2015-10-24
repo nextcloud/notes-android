@@ -109,7 +109,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     public void setListView(List<Note> noteList) {
         List<Item> itemList = new ArrayList<>();
         // #12 Create Sections depending on Time
-
+        // TODO Move to ItemAdapter?
         boolean recentSet, todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
         recentSet = todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
         Calendar recent = Calendar.getInstance();
