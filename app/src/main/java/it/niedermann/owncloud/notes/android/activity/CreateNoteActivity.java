@@ -49,10 +49,9 @@ public class CreateNoteActivity extends AppCompatActivity {
                 editTextField.setEnabled(false);
                 String content = editTextField.getText().toString();
                 NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(this);
-                db.addNoteAndSync(content);
+                long noteId = db.addNoteAndSync(content);
                 Intent data = new Intent();
-                //FIXME send correct note back to NotesListView
-                data.putExtra(NotesListViewActivity.CREATED_NOTE, new Note(-1, null, "", content));
+                data.putExtra(NotesListViewActivity.CREATED_NOTE, db.getNote(noteId));
                 setResult(RESULT_OK, data);
                 finish();
                 return true;
