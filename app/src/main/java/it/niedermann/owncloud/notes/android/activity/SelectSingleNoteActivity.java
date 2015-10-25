@@ -23,6 +23,7 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 /**
  * Configuration Activity to select a single note which should be displayed in the SingleNoteWidget
  * Created by stefan on 08.10.15.
+ * TODO: use a RecyclerView and NoteAdapter instead of ListView/ItemAdapter
  */
 public class SelectSingleNoteActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
