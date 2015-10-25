@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">ownCloud Notes</string>
+    <string name="no_notes">No notes yet</string>
     <string name="action_create">New Note</string>
     <string name="action_settings">Settings</string>
     <string name="action_create_save">Save</string>
