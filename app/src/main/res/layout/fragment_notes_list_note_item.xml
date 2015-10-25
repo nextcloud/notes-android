@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/noteTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="false"
         android:layout_alignParentRight="true"
@@ -20,20 +20,6 @@
         android:gravity="center_vertical"
         android:textColor="@drawable/list_item_color_selector"
         android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/noteModified"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true"
-        android:gravity="center_vertical"
-        android:textColor="@drawable/list_item_color_selector_low"
-        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/noteExcerpt"

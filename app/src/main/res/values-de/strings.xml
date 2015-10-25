@@ -20,12 +20,11 @@
 
     <string name="copy">Kopie</string>
 
-    <string name="listview_updated_recent">Kürzlich aktualisiert</string>
-    <string name="listview_updated_today">Heute aktualisiert</string>
-    <string name="listview_updated_yesterday">Gestern aktualisiert</string>
-    <string name="listview_updated_this_week">Diese Woche aktualisiert</string>
-    <string name="listview_updated_this_month">Diesen Monat aktualisiert</string>
-    <string name="listview_updated_earlier">Früher aktualisiert</string>
+    <string name="listview_updated_today">Heute</string>
+    <string name="listview_updated_yesterday">Gestern</string>
+    <string name="listview_updated_this_week">Diese Woche</string>
+    <string name="listview_updated_this_month">Diesen Monat</string>
+    <string name="listview_updated_earlier">Früher</string>
 
     <!-- About -->
 

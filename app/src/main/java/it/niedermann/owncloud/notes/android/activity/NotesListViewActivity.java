@@ -110,8 +110,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
         List<Item> itemList = new ArrayList<>();
         // #12 Create Sections depending on Time
         // TODO Move to ItemAdapter?
-        boolean recentSet, todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
-        recentSet = todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
+        boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
+        todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
         Calendar recent = Calendar.getInstance();
         Calendar today = Calendar.getInstance();
         today.set(Calendar.HOUR_OF_DAY, 0);
@@ -138,29 +138,35 @@ public class NotesListViewActivity extends AppCompatActivity implements
         month.set(Calendar.MILLISECOND, 0);
         for (int i = 0; i < noteList.size(); i++) {
             Note currentNote = noteList.get(i);
-            if (!recentSet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() < 600000) {
-                // < 10 minutes
-                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_recent)));
-                recentSet = true;
-            } else if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
+            if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
                 // < 10 minutes but after 00:00 today
-                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
+                if (i > 0) {
+                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
+                }
                 todaySet = true;
             } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
                 // between today 00:00 and yesterday 00:00
-                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
+                if (i > 0) {
+                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
+                }
                 yesterdaySet = true;
             } else if (!weekSet && currentNote.getModified().getTimeInMillis() < yesterday.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= week.getTimeInMillis()) {
                 // between yesterday 00:00 and start of the week 00:00
-                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_week)));
+                if (i > 0) {
+                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_week)));
+                }
                 weekSet = true;
             } else if (!monthSet && currentNote.getModified().getTimeInMillis() < week.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= month.getTimeInMillis()) {
                 // between start of the week 00:00 and start of the month 00:00
-                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_month)));
+                if (i > 0) {
+                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_month)));
+                }
                 monthSet = true;
             } else if (!earlierSet && currentNote.getModified().getTimeInMillis() < month.getTimeInMillis()) {
                 // before start of the month 00:00
-                itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_earlier)));
+                if (i > 0) {
+                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_earlier)));
+                }
                 earlierSet = true;
             }
             itemList.add(currentNote);

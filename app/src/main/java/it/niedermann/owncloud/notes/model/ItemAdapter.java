@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +48,6 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 			Note note = (Note) item;
 			((TextView) convertView.findViewById(R.id.noteTitle)).setText(note.getTitle());
 			((TextView) convertView.findViewById(R.id.noteExcerpt)).setText(note.getExcerpt());
-			((TextView) convertView.findViewById(R.id.noteModified)).setText(DateUtils.getRelativeDateTimeString(getContext(), note.getModified().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
 		}
 		return convertView;
 	}

@@ -17,7 +17,7 @@
         android:layout_alignWithParentIfMissing="true"
         android:ellipsize="end"
         android:gravity="center_vertical"
-        android:textColor="@drawable/list_item_color_selector"
-        android:textSize="14sp" />
+        android:textColor="@color/fg_default_selection"
+        android:textSize="12sp" />
 
 </RelativeLayout>
