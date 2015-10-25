@@ -81,13 +81,13 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                         note.getContent());
                 startActivity(shareIntent);
                 return true;
-            case R.id.menu_copy:
+            /*case R.id.menu_copy:
                 db = new NoteSQLiteOpenHelper(this);
                 Note newNote = db.getNote(db.addNoteAndSync(note.getContent()));
                 newNote.setTitle(note.getTitle() + " (" + getResources().getString(R.string.copy) + ")");
                 db.updateNote(newNote);
                 finish();
-                return true;
+                return true;*/
             default:
                 return super.onOptionsItemSelected(item);
         }

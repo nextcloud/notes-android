@@ -6,19 +6,19 @@
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:icon="@drawable/ic_action_share"
         android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="@string/menu_share"/>
-    <item
+        android:title="@string/menu_share"
+        app:showAsAction="never"/>
+    <!--item
         android:id="@+id/menu_copy"
         android:icon="@drawable/ic_action_copy"
         android:orderInCategory="110"
         app:showAsAction="never"
-        android:title="@string/menu_copy"/>
+        android:title="@string/menu_copy"/-->
     <item
         android:id="@+id/menu_delete"
         android:icon="@drawable/ic_action_delete"
         android:orderInCategory="120"
-        app:showAsAction="never"
-        android:title="@string/menu_delete"/>
+        android:title="@string/menu_delete"
+        app:showAsAction="never"/>
 
 </menu>
