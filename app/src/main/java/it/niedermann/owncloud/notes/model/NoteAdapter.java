@@ -2,10 +2,10 @@ package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
 import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +22,7 @@ public class NoteAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
     @SuppressWarnings("unused")
     private static final String TAG = NoteAdapter.class.getSimpleName();
 
-    private SortedList<Note> notes;
+    private SortedList<Item> items;
     private Context context;
     private NoteClickListener listener;
 
@@ -53,11 +53,11 @@ public class NoteAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
     public static final int TYPE_SECTION = 1;
 
     public NoteAdapter(Context context, NoteClickListener listener) {
-        notes = new SortedList<>(Note.class, new SortedList.Callback<Note>() {
+        items = new SortedList<>(Item.class, new SortedList.Callback<Item>() {
             @Override
-            public int compare(Note o1, Note o2) {
+            public int compare(Item o1, Item o2) {
                 // Reverse Calendar.compareTo result to sort most recent first
-                return -o1.getModified().compareTo(o2.getModified());
+                return -o1.getDate().compareTo(o2.getDate());
             }
 
             @Override
@@ -81,14 +81,21 @@ public class NoteAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
             }
 
             @Override
-            public boolean areContentsTheSame(Note oldItem, Note newItem) {
-                return oldItem.getModified().equals(newItem.getModified()) &&
-                        oldItem.getTitle().equals(newItem.getTitle()) &&
-                        oldItem.getContent().equals(newItem.getContent());
+            public boolean areContentsTheSame(Item oldItem, Item newItem) {
+                if (oldItem instanceof SectionItem) {
+                    return newItem instanceof SectionItem && ((SectionItem) oldItem).geTitle().equals(((SectionItem) newItem).geTitle());
+                } else if (oldItem instanceof Note) {
+                    return (newItem instanceof Note) &&
+                            ((Note) oldItem).getModified().equals(((Note) newItem).getModified()) &&
+                            ((Note) oldItem).getTitle().equals(((Note) newItem).getTitle()) &&
+                            ((Note) oldItem).getContent().equals(((Note) newItem).getContent());
+                }
+
+                return false;
             }
 
             @Override
-            public boolean areItemsTheSame(Note item1, Note item2) {
+            public boolean areItemsTheSame(Item item1, Item item2) {
                 return item1.equals(item2);
             }
         });
@@ -113,16 +120,16 @@ public class NoteAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof NoteHolder) {
-            ((NoteHolder) holder).bind(notes.get(position), position);
-        } else if (holder instanceof SectionHolder) {
+        if (holder instanceof NoteHolder && !items.get(position).isSection()) {
+            ((NoteHolder) holder).bind(((Note) items.get(position)), position);
+        } else if (holder instanceof SectionHolder && items.get(position).isSection()) {
             // TODO: bind holder
         }
     }
 
     @Override
     public int getItemCount() {
-        return notes.size();
+        return items.size();
     }
 
     @Override
@@ -132,30 +139,38 @@ public class NoteAdapter extends SelectableAdapter<RecyclerView.ViewHolder> {
     }
 
     public void addNote(Note note) {
-        notes.add(note);
+        items.add(note);
     }
 
     public void replaceNote(int position, Note note) {
-        notes.updateItemAt(position, note);
+        items.updateItemAt(position, note);
     }
 
+    @SuppressWarnings("unchecked") // items.addAll needs a Collection<Item>,
+                                   // we pass it a Collection<Note>
     public void replaceNotes(Collection<Note> notes) {
-        this.notes.beginBatchedUpdates();
-        this.notes.clear();
-        this.notes.addAll(notes);
-        this.notes.endBatchedUpdates();
+        items.beginBatchedUpdates();
+        items.clear();
+        items.addAll((Collection) notes);
+        items.endBatchedUpdates();
     }
 
     public void removeNotes(Collection<Note> notes) {
-        this.notes.beginBatchedUpdates();
+        items.beginBatchedUpdates();
         for (Note note : notes) {
-            this.notes.remove(note);
+            items.remove(note);
         }
-        this.notes.endBatchedUpdates();
+        items.endBatchedUpdates();
     }
 
+    @Nullable
     public Note getNote(int position) {
-        return notes.get(position);
+        Item item = items.get(position);
+        if (!item.isSection()) {
+            return (Note) item;
+        } else {
+            return null;
+        }
     }
 
     private static @Timeframe int getNoteTimeframe(Note note) {

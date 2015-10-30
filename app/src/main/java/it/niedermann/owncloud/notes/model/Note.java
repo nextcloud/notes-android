@@ -82,4 +82,9 @@ public class Note implements Item, Serializable {
     public boolean isSection() {
         return false;
     }
+
+    @Override
+    public Calendar getDate() {
+        return getModified();
+    }
 }
