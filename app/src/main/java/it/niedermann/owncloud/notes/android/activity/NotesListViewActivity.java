@@ -267,7 +267,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 Note createdNote = (Note) data.getExtras().getSerializable(
                         CREATED_NOTE);
-                adapter.add(createdNote);
+                adapter.insert(createdNote, 0);
             }
         } else if (requestCode == NoteActivity.EDIT_NOTE_CMD) {
             if (resultCode == RESULT_OK) {
@@ -276,14 +276,13 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 int notePosition = data.getExtras().getInt(
                         SELECTED_NOTE_POSITION);
                 adapter.remove(adapter.getItem(notePosition));
-                adapter.add(editedNote);
+                adapter.insert(editedNote, notePosition);
             }
         } else if (requestCode == SettingsActivity.CREDENTIALS_CHANGED) {
             db = new NoteSQLiteOpenHelper(this);
             db.synchronizeWithServer(); // Needed to instanciate new NotesClient with new URL
+            setListView(db.getNotes());
         }
-        //TODO Maybe only if previous activity == settings activity?
-        setListView(db.getNotes());
     }
 
     /**

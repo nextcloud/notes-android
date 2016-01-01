@@ -109,7 +109,6 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                     actionBar.setTitle(note.getTitle());
                     actionBar.setSubtitle(note.getModified("dd.MM.yyyy HH:mm"));
                 }
-                // TODO Fire changed note to noteslistviewactivity
                 data.putExtra(NotesListViewActivity.SELECTED_NOTE_POSITION,
                         notePosition);
                 setResult(RESULT_OK, data);
