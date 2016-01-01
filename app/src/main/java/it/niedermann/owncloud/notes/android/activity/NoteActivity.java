@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,6 +96,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.v("Note", "RequestCode: " + requestCode + " ResultCode: " + resultCode);
         // Check which request we're responding to
         if (requestCode == EDIT_NOTE_CMD) {
             // Make sure the request was successful
@@ -102,9 +104,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 Note editedNote = (Note) data.getExtras().getSerializable(
                         EDIT_NOTE);
                 if (editedNote != null) {
-                    noteContent.setText(editedNote.getSpannableContent());
-                    actionBar.setTitle(editedNote.getTitle());
-                    actionBar.setSubtitle(editedNote.getModified("dd.MM.yyyy HH:mm"));
+                    note = editedNote;
+                    noteContent.setText(note.getSpannableContent());
+                    actionBar.setTitle(note.getTitle());
+                    actionBar.setSubtitle(note.getModified("dd.MM.yyyy HH:mm"));
                 }
                 // TODO Fire changed note to noteslistviewactivity
                 data.putExtra(NotesListViewActivity.SELECTED_NOTE_POSITION,
