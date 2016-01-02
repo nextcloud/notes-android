@@ -11,9 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
@@ -91,20 +93,18 @@ public class SettingsActivity extends AppCompatActivity {
         field_username.setText(preferences.getString(SETTINGS_USERNAME, DEFAULT_SETTINGS));
         field_password.setText(preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS));
 
+        field_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                login();
+                return true;
+            }
+        });
+
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = field_url.getText().toString();
-                String username = field_username.getText().toString();
-                String password = field_password.getText().toString();
-
-                if (!url.endsWith("/")) {
-                    url += "/";
-                }
-                if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                    url = "https://" + url;
-                }
-                new LoginValidatorAsyncTask().execute(url, username, password);
+                login();
             }
         });
     }
@@ -117,6 +117,20 @@ public class SettingsActivity extends AppCompatActivity {
         if (!first_run) {
             super.onBackPressed();
         }
+    }
+
+    private void login() {
+        String url = field_url.getText().toString();
+        String username = field_username.getText().toString();
+        String password = field_password.getText().toString();
+
+        if (!url.endsWith("/")) {
+            url += "/";
+        }
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "https://" + url;
+        }
+        new LoginValidatorAsyncTask().execute(url, username, password);
     }
 
     /************************************ Async Tasks ************************************/
