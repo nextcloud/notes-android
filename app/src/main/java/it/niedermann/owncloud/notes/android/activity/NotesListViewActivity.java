@@ -276,11 +276,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 int notePosition = data.getExtras().getInt(
                         SELECTED_NOTE_POSITION);
                 adapter.remove(adapter.getItem(notePosition));
-                adapter.insert(editedNote, notePosition);
+                adapter.insert(editedNote, 0);
             }
         } else if (requestCode == SettingsActivity.CREDENTIALS_CHANGED) {
             db = new NoteSQLiteOpenHelper(this);
-            db.synchronizeWithServer(); // Needed to instanciate new NotesClient with new URL
+            db.synchronizeWithServer(); // Needed to instantiate new NotesClient with new URL
             setListView(db.getNotes());
         }
     }
