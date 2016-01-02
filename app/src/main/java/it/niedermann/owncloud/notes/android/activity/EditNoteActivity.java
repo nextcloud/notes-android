@@ -86,10 +86,16 @@ public class EditNoteActivity extends AppCompatActivity {
 		if (ab != null) {
 			getSupportActionBar().setSubtitle(getResources().getString(R.string.action_edit_saved));
 		}
+		final AppCompatActivity that = this;
 		Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
 			@Override
 			public void run() {
-				getSupportActionBar().setSubtitle(null);
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						getSupportActionBar().setSubtitle(null);
+					}
+				});
 			}
 		}, 1, TimeUnit.SECONDS);
 	}
