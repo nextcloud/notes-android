@@ -32,7 +32,7 @@
     <!-- About -->
 
 	<string name="about_version_title">Version</string>
-    <string name="about_version">Sie benutzen aktuell <strong>v0.3.0</strong></string>
+    <string name="about_version">Sie benutzen aktuell <strong>v0.4.0</strong></string>
 	<string name="about_author_title">Autor</string>
 	<string name="about_author">Diese Android-App wird entwickelt von <a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_app_icon_disclaimer_title">App-Icon</string>
