@@ -16,8 +16,8 @@ public class NoteUtil {
      * @param s String - MarkDown
      * @return Spannable
      */
-    public static String parseMarkDown(String s) {
-        return bypass.markdownToSpannable(s).toString();
+    public static CharSequence parseMarkDown(String s) {
+        return bypass.markdownToSpannable(s);
     }
 
     /**

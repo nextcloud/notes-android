@@ -15,7 +15,6 @@ public class Note implements Item, Serializable {
     private Calendar modified = null;
     private String content = "";
     private String excerpt = "";
-    private String spannableContent = null;
 
     public Note(long id, Calendar modified, String title, String content) {
         this.id = id;
@@ -55,7 +54,6 @@ public class Note implements Item, Serializable {
     public void setContent(String content) {
         setExcerpt(content);
         this.content = content;
-        this.spannableContent = null;
     }
 
     public String getExcerpt() {
@@ -66,11 +64,9 @@ public class Note implements Item, Serializable {
         excerpt = NoteUtil.generateNoteExcerpt(content);
     }
 
-    public String getSpannableContent() {
-        if (spannableContent == null && getContent() != null) {
-            spannableContent = NoteUtil.parseMarkDown(getContent());
-        }
-        return spannableContent;
+    public CharSequence getSpannableContent() {
+        // TODO Cache the generated CharSequence not possible because CharSequence does not implement Serializable
+        return NoteUtil.parseMarkDown(getContent());
     }
 
     @Override
