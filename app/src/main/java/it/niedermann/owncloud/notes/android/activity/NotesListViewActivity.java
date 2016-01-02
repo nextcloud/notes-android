@@ -264,12 +264,12 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 adapter.insert(createdNote, 0);
             }
         } else if (requestCode == show_single_note_cmd) {
+            int notePosition = data.getExtras().getInt(
+                    SELECTED_NOTE_POSITION);
+            adapter.remove(adapter.getItem(notePosition));
             if (resultCode == RESULT_OK) {
                 Note editedNote = (Note) data.getExtras().getSerializable(
                         NoteActivity.EDIT_NOTE);
-                int notePosition = data.getExtras().getInt(
-                        SELECTED_NOTE_POSITION);
-                adapter.remove(adapter.getItem(notePosition));
                 adapter.insert(editedNote, 0);
             }
         } else if (requestCode == server_settings) {

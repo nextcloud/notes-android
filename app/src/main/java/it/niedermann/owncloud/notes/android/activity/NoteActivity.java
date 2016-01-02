@@ -70,6 +70,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.menu_delete:
                 db = new NoteSQLiteOpenHelper(this);
                 db.deleteNoteAndSync(note.getId());
+                Intent data = new Intent();
+                data.putExtra(NotesListViewActivity.SELECTED_NOTE_POSITION,
+                        notePosition);
+                setResult(RESULT_FIRST_USER, data);
                 finish();
                 return true;
             case R.id.menu_share:
