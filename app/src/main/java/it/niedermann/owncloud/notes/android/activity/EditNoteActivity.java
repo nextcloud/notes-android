@@ -90,21 +90,29 @@ public class EditNoteActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         getSupportActionBar().setSubtitle(getResources().getString(R.string.action_edit_saved));
+                        Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
+                            @Override
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        getSupportActionBar().setSubtitle(null);
+                                    }
+                                });
+                            }
+                        }, 1, TimeUnit.SECONDS);
                     }
                 });
+
+                /* TODO Notify widgets
+
+                int widgetIDs[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
+
+                for (int id : widgetIDs) {
+                    AppWidgetManager.getInstance(getApplication()).notifyAppWidgetViewDataChanged(id, R.layout.widget_single_note);
+                }*/
             }
         });
         db.updateNoteAndSync(note);
-        Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        getSupportActionBar().setSubtitle(null);
-                    }
-                });
-            }
-        }, 1, TimeUnit.SECONDS);
     }
 }
