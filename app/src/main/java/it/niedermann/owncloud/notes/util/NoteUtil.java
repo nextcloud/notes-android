@@ -12,6 +12,7 @@ public class NoteUtil {
 
     /**
      * Parses a MarkDown-String and returns a Spannable
+     *
      * @param s String - MarkDown
      * @return Spannable
      */

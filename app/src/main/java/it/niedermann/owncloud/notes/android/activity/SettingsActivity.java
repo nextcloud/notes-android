@@ -175,7 +175,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean isValidLogin) {
-            if(isValidLogin) {
+            if (isValidLogin) {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(SETTINGS_URL, url);
                 editor.putString(SETTINGS_USERNAME, username);

@@ -7,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,7 +53,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         // First Run Wizard
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
-        if(preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+        if (preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
         }
@@ -71,8 +70,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.d("Swipe", "Refreshing Notes");
-                db.synchronizeWithServer();
                 db.getNoteServerSyncHelper().addCallback(new ICallback() {
                     @Override
                     public void onFinish() {
@@ -80,6 +77,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                         setListView(db.getNotes());
                     }
                 });
+                db.synchronizeWithServer();
             }
         });
 
@@ -196,7 +194,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
         Item item = adapter.getItem(position);
         if (!item.isSection()) {
             listView.setItemChecked(position, !listView.isItemChecked(position));
-            Log.v("Note", "getCheckedItemCount " + listView.getCheckedItemCount());
             if (listView.getCheckedItemCount() < 1) {
                 removeSelection();
                 Intent intent = new Intent(getApplicationContext(),
@@ -204,9 +201,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 if (!item.isSection()) {
                     intent.putExtra(SELECTED_NOTE, (Note) item);
                     intent.putExtra(SELECTED_NOTE_POSITION, position);
-                    Log.v("Note",
-                            "notePosition | NotesListViewActivity wurde abgesendet "
-                                    + position);
                     startActivityForResult(intent, show_single_note_cmd);
                 }
             } else { // perform long click if already something is selected
@@ -269,7 +263,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                         CREATED_NOTE);
                 adapter.insert(createdNote, 0);
             }
-        } else if (requestCode == NoteActivity.EDIT_NOTE_CMD) {
+        } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK) {
                 Note editedNote = (Note) data.getExtras().getSerializable(
                         NoteActivity.EDIT_NOTE);
@@ -278,10 +272,16 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 adapter.remove(adapter.getItem(notePosition));
                 adapter.insert(editedNote, 0);
             }
-        } else if (requestCode == SettingsActivity.CREDENTIALS_CHANGED) {
+        } else if (requestCode == server_settings) {
+            // Create new Instance with new URL and credentials
             db = new NoteSQLiteOpenHelper(this);
-            db.synchronizeWithServer(); // Needed to instantiate new NotesClient with new URL
-            setListView(db.getNotes());
+            db.getNoteServerSyncHelper().addCallback(new ICallback() {
+                @Override
+                public void onFinish() {
+                    setListView(db.getNotes());
+                }
+            });
+            db.synchronizeWithServer();
         }
     }
 
