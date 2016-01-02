@@ -264,13 +264,15 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 adapter.insert(createdNote, 0);
             }
         } else if (requestCode == show_single_note_cmd) {
-            int notePosition = data.getExtras().getInt(
-                    SELECTED_NOTE_POSITION);
-            adapter.remove(adapter.getItem(notePosition));
-            if (resultCode == RESULT_OK) {
-                Note editedNote = (Note) data.getExtras().getSerializable(
-                        NoteActivity.EDIT_NOTE);
-                adapter.insert(editedNote, 0);
+            if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
+                int notePosition = data.getExtras().getInt(
+                        SELECTED_NOTE_POSITION);
+                adapter.remove(adapter.getItem(notePosition));
+                if (resultCode == RESULT_OK) {
+                    Note editedNote = (Note) data.getExtras().getSerializable(
+                            NoteActivity.EDIT_NOTE);
+                    adapter.insert(editedNote, 0);
+                }
             }
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
