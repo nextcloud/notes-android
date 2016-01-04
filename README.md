@@ -1,5 +1,5 @@
 # ownCloud Notes
-An android client for OwnCloud Notes App.
+An android client for ownCloud Notes App.
 
 :construction: **Warning:** This app is beta. This means it is not tested well (only by some VMs and my personal device).
 
