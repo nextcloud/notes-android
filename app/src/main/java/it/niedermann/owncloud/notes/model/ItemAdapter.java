@@ -65,54 +65,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
     private static NoteClickListener noteClickListener;
 
 
-
-
-    public static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener{
-		// each data item is just a string in this case
-		public TextView noteTitle;
-		public TextView noteExcerpt;
-        public int position = -1;
-
-        private NoteViewHolder(View v) {
-			super(v);
-			this.noteTitle = (TextView) v.findViewById(R.id.noteTitle);
-			this.noteExcerpt = (TextView) v.findViewById(R.id.noteExcerpt);
-            v.setOnClickListener(this);
-            v.setOnLongClickListener(this);
-		}
-
-        public void setPosition(int pos){
-            position =pos;
-        }
-
-        @Override
-        public void onClick(View v) {
-            noteClickListener.onNoteClick(position,v);
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            return noteClickListener.onNoteLongClick(position,v);
-        }
-    }
-    public interface NoteClickListener{
-        public void onNoteClick(int position,View v);
-        public boolean onNoteLongClick(int position,View v);
-
-    }
-
-
-	/**
-	 * Sections and Note-Items
-	 */
-	private static final int count_types = 2;
-	private static final int section_type = 0;
-	private static final int note_type = 1;
-	private List<Item> itemList = null;
-    private List<Integer> selected= null;
-    private static NoteClickListener noteClickListener;
-
-
     public ItemAdapter(Context context, List<Item> itemList) {
 		//super(context, android.R.layout.simple_list_item_1, itemList);
 		super();
@@ -125,7 +77,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
     }
 
     public void add(Note createdNote) {
-        //TODO
         itemList.add(createdNote);
     }
 	// Create new views (invoked by the layout manager)
@@ -134,9 +85,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
 												   int viewType) {
 		View v = LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.fragment_notes_list_note_item, parent, false);
-		// set the view's size, margins, paddings and layout parameters
-		// ...
-        //TODO
 
 		NoteViewHolder vh = new NoteViewHolder(v);
 
@@ -181,20 +129,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
                 selected.remove(i);
                 return true;
             }
-            SectionItem section = (SectionItem) item;
-            TextView sectionTitle = (TextView) convertView.findViewById(R.id.sectionTitle);
-            if (sectionTitle != null) {
-                sectionTitle.setText(section.geTitle());
-            }
-        } else {
-            if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) getContext()
-                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.fragment_notes_list_note_item, null);
-            }
-            Note note = (Note) item;
-            ((TextView) convertView.findViewById(R.id.noteTitle)).setText(note.getTitle());
-            ((TextView) convertView.findViewById(R.id.noteExcerpt)).setText(note.getExcerpt());
         }
         // position was not selected
         return false;
