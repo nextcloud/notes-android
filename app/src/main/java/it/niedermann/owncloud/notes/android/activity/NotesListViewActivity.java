@@ -16,6 +16,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,6 +82,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                         setListView(db.getNotes());
                     }
                 });
+                db.synchronizeWithServer();
             }
         });
 
@@ -180,8 +183,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
         //listView.setChoiceMode(CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-
-
     }
 
 
@@ -204,7 +205,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
      * @param item MenuItem - the clicked menu item
      * @return boolean
      */
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
@@ -219,7 +220,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }*/
+    }
 
     /**
      * Handles the Results of started Sub Activities (Created Note, Edited Note)
@@ -238,21 +239,28 @@ public class NotesListViewActivity extends AppCompatActivity implements
                         CREATED_NOTE);
                 adapter.add(createdNote);
             }
-        } else if (requestCode == NoteActivity.EDIT_NOTE_CMD) {
-            if (resultCode == RESULT_OK) {
-                Note editedNote = (Note) data.getExtras().getSerializable(
-                        NoteActivity.EDIT_NOTE);
+        } else if (requestCode == show_single_note_cmd) {
+            if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
                 int notePosition = data.getExtras().getInt(
                         SELECTED_NOTE_POSITION);
                 adapter.remove(adapter.getItem(notePosition));
-                adapter.add(editedNote);
+                if (resultCode == RESULT_OK) {
+                    Note editedNote = (Note) data.getExtras().getSerializable(
+                            NoteActivity.EDIT_NOTE);
+                    adapter.insert(editedNote, 0);
+                }
             }
-        } else if (requestCode == SettingsActivity.CREDENTIALS_CHANGED) {
+        } else if (requestCode == server_settings) {
+            // Create new Instance with new URL and credentials
             db = new NoteSQLiteOpenHelper(this);
-            db.synchronizeWithServer(); // Needed to instanciate new NotesClient with new URL
+            db.getNoteServerSyncHelper().addCallback(new ICallback() {
+                @Override
+                public void onFinish() {
+                    setListView(db.getNotes());
+                }
+            });
+            db.synchronizeWithServer();
         }
-        //TODO Maybe only if previous activity == settings activity?
-        setListView(db.getNotes());
     }
 
     /**
@@ -385,7 +393,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
                             adapter.remove(note);
 
                     }
-
                     mode.finish(); // Action picked, so close the CAB
                     return true;
                 default:

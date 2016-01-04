@@ -15,6 +15,57 @@ import it.niedermann.owncloud.notes.R;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder>{
 
 
+	public void insert(Note createdNote, int i) {
+        itemList.add(i,createdNote);
+	}
+
+	public static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener{
+		// each data item is just a string in this case
+		public TextView noteTitle;
+		public TextView noteExcerpt;
+        public int position = -1;
+
+        private NoteViewHolder(View v) {
+			super(v);
+			this.noteTitle = (TextView) v.findViewById(R.id.noteTitle);
+			this.noteExcerpt = (TextView) v.findViewById(R.id.noteExcerpt);
+            v.setOnClickListener(this);
+            v.setOnLongClickListener(this);
+		}
+
+        public void setPosition(int pos){
+            position =pos;
+        }
+
+        @Override
+        public void onClick(View v) {
+            noteClickListener.onNoteClick(position,v);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            return noteClickListener.onNoteLongClick(position,v);
+        }
+    }
+    public interface NoteClickListener{
+        public void onNoteClick(int position,View v);
+        public boolean onNoteLongClick(int position,View v);
+
+    }
+
+
+	/**
+	 * Sections and Note-Items
+	 */
+	private static final int count_types = 2;
+	private static final int section_type = 0;
+	private static final int note_type = 1;
+	private List<Item> itemList = null;
+    private List<Integer> selected= null;
+    private static NoteClickListener noteClickListener;
+
+
+
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener,View.OnClickListener{
 		// each data item is just a string in this case
@@ -130,6 +181,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
                 selected.remove(i);
                 return true;
             }
+            SectionItem section = (SectionItem) item;
+            TextView sectionTitle = (TextView) convertView.findViewById(R.id.sectionTitle);
+            if (sectionTitle != null) {
+                sectionTitle.setText(section.geTitle());
+            }
+        } else {
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) getContext()
+                        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.fragment_notes_list_note_item, null);
+            }
+            Note note = (Note) item;
+            ((TextView) convertView.findViewById(R.id.noteTitle)).setText(note.getTitle());
+            ((TextView) convertView.findViewById(R.id.noteExcerpt)).setText(note.getExcerpt());
         }
         // position was not selected
         return false;
