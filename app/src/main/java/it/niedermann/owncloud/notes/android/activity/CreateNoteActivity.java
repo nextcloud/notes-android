@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 public class CreateNoteActivity extends AppCompatActivity {
@@ -49,10 +48,8 @@ public class CreateNoteActivity extends AppCompatActivity {
                 editTextField.setEnabled(false);
                 String content = editTextField.getText().toString();
                 NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(this);
-                db.addNoteAndSync(content);
                 Intent data = new Intent();
-                //FIXME send correct note back to NotesListView
-                data.putExtra(NotesListViewActivity.CREATED_NOTE, new Note(-1, null, "", content));
+                data.putExtra(NotesListViewActivity.CREATED_NOTE, db.getNote(db.addNoteAndSync(content)));
                 setResult(RESULT_OK, data);
                 finish();
                 return true;

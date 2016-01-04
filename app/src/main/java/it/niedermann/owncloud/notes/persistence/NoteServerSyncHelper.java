@@ -29,7 +29,7 @@ import it.niedermann.owncloud.notes.util.NotesClient;
 public class NoteServerSyncHelper {
 
     private NotesClient client = null;
-    private  NoteSQLiteOpenHelper db = null;
+    private NoteSQLiteOpenHelper db = null;
     private final View.OnClickListener goToSettingsListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -51,6 +51,7 @@ public class NoteServerSyncHelper {
                 for (ICallback callback : callbacks) {
                     callback.onFinish();
                 }
+                callbacks.clear();
             }
         };
         SharedPreferences preferences = PreferenceManager
@@ -64,10 +65,22 @@ public class NoteServerSyncHelper {
         client = new NotesClient(url, username, password);
     }
 
+    /**
+     * Adds a callback method to the NoteServerSyncHelper.
+     * All callbacks will be executed once all synchronize operations are done.
+     * After execution the callback will be deleted, so it has to be added again if it shall be
+     * executed the next time all synchronize operations are finished.
+     *
+     * @param callback Implementation of ICallback, contains one method that shall be executed.
+     */
     public void addCallback(ICallback callback) {
         callbacks.add(callback);
     }
 
+    /**
+     * Synchronizes Edited, New and Deleted Notes. After all changed content has been sent to the
+     * server, it downloads all changes that happened on the server.
+     */
     public void synchronize() {
         uploadEditedNotes();
         uploadNewNotes();
@@ -75,12 +88,14 @@ public class NoteServerSyncHelper {
         downloadNotes();
     }
 
+    /**
+     * Helper method to check if all synchronize operations are done yet.
+     */
     private void asyncTaskFinished() {
         operationsFinished++;
-        if(operationsFinished == operationsCount) {
+        if (operationsFinished == operationsCount) {
             handler.obtainMessage(1).sendToTarget();
         }
-
     }
 
     public void uploadEditedNotes() {
@@ -128,7 +143,7 @@ public class NoteServerSyncHelper {
 
         @Override
         protected void onPostExecute(Object[] params) {
-            if(params != null) {
+            if (params != null) {
                 Long id = (Long) params[1];
                 if (id != null) {
                     db.deleteNote(((Long) params[1]));
@@ -200,7 +215,7 @@ public class NoteServerSyncHelper {
         @Override
         protected void onPostExecute(List<Note> result) {
             // Clear Database only if there was no Server Error
-            if(!serverError) {
+            if (!serverError) {
                 db.clearDatabase();
             }
             for (Note note : result) {

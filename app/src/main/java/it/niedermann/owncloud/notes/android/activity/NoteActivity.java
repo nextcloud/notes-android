@@ -69,6 +69,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.menu_delete:
                 db = new NoteSQLiteOpenHelper(this);
                 db.deleteNoteAndSync(note.getId());
+                Intent data = new Intent();
+                data.putExtra(NotesListViewActivity.SELECTED_NOTE_POSITION,
+                        notePosition);
+                setResult(RESULT_FIRST_USER, data);
                 finish();
                 return true;
             case R.id.menu_share:
@@ -102,11 +106,11 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 Note editedNote = (Note) data.getExtras().getSerializable(
                         EDIT_NOTE);
                 if (editedNote != null) {
-                    noteContent.setText(editedNote.getSpannableContent());
-                    actionBar.setTitle(editedNote.getTitle());
-                    actionBar.setSubtitle(editedNote.getModified("dd.MM.yyyy HH:mm"));
+                    note = editedNote;
+                    noteContent.setText(note.getSpannableContent());
+                    actionBar.setTitle(note.getTitle());
+                    actionBar.setSubtitle(note.getModified("dd.MM.yyyy HH:mm"));
                 }
-                // TODO Fire changed note to noteslistviewactivity
                 data.putExtra(NotesListViewActivity.SELECTED_NOTE_POSITION,
                         notePosition);
                 setResult(RESULT_OK, data);

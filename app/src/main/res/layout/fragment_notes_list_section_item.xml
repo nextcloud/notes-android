@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     android:id="@+id/sectionItem"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:background="@color/bg_highlighted"
@@ -17,6 +18,8 @@
         android:layout_alignWithParentIfMissing="true"
         android:ellipsize="end"
         android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:textColor="@color/fg_default_selection"
         android:textSize="12sp" />
 

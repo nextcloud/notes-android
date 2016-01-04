@@ -11,51 +11,49 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 @SuppressWarnings("serial")
 public class Note implements Item, Serializable {
     private long id = 0;
-	private String title = "";
-	private Calendar modified = null;
-	private String content = "";
+    private String title = "";
+    private Calendar modified = null;
+    private String content = "";
     private String excerpt = "";
-    private String spannableContent = null;
 
-	public Note(long id, Calendar modified, String title, String content) {
-		this.id = id;
-        if(title != null)
+    public Note(long id, Calendar modified, String title, String content) {
+        this.id = id;
+        if (title != null)
             setTitle(title);
         setTitle(title);
         setContent(content);
         this.modified = modified;
     }
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
     public void setTitle(String title) {
         this.title = NoteUtil.removeMarkDown(title);
     }
 
-	@SuppressWarnings("WeakerAccess")
+    @SuppressWarnings("WeakerAccess")
     public Calendar getModified() {
-		return modified;
-	}
+        return modified;
+    }
 
-	public String getModified(String format) {
-		return new SimpleDateFormat(format, Locale.GERMANY)
+    public String getModified(String format) {
+        return new SimpleDateFormat(format, Locale.GERMANY)
                 .format(this.getModified().getTimeInMillis());
     }
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
     public void setContent(String content) {
         setExcerpt(content);
         this.content = content;
-        this.spannableContent = null;
     }
 
     public String getExcerpt() {
@@ -66,17 +64,15 @@ public class Note implements Item, Serializable {
         excerpt = NoteUtil.generateNoteExcerpt(content);
     }
 
-    public String getSpannableContent() {
-        if (spannableContent == null && getContent() != null) {
-            spannableContent = NoteUtil.parseMarkDown(getContent());
-        }
-        return spannableContent;
+    public CharSequence getSpannableContent() {
+        // TODO Cache the generated CharSequence not possible because CharSequence does not implement Serializable
+        return NoteUtil.parseMarkDown(getContent());
     }
 
-	@Override
-	public String toString() {
-		return "#" + getId() + " " + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + ")";
-	}
+    @Override
+    public String toString() {
+        return "#" + getId() + " " + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + ")";
+    }
 
     @Override
     public boolean isSection() {

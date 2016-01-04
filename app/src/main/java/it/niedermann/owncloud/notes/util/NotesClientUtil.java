@@ -29,8 +29,7 @@ public class NotesClientUtil {
     }
 
     /**
-     *
-     * @param url String
+     * @param url      String
      * @param username String
      * @param password String
      * @return Username and Password are a valid Login-Combination for the given URL.
