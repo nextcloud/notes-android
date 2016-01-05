@@ -107,11 +107,19 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
         return itemList.size();
     }
 
-    public boolean select(Integer position){
-        if(!selected.contains(position)) {
-            return selected.add(position);
+    /**
+     * select an Item of the List
+     * @param position the position of the Item to select
+     * @return if it is a new Item which was selected
+     */
+    public boolean select(int position){
+        for (Integer pos:selected) {
+            if(pos.intValue() == position){
+                return false;
+            }
         }
-        return false;
+        selected.add(position);
+        return true;
     }
 
     public void clearSelection(){

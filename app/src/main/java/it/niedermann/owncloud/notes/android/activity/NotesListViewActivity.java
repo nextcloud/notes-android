@@ -111,6 +111,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     @SuppressWarnings("WeakerAccess")
     public void setListView(List<Note> noteList) {
         List<Item> itemList = new ArrayList<>();
+        /*
         // #12 Create Sections depending on Time
         // TODO Move to ItemAdapter?
         boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
@@ -139,6 +140,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         month.set(Calendar.MINUTE, 0);
         month.set(Calendar.SECOND, 0);
         month.set(Calendar.MILLISECOND, 0);
+        */
         for (int i = 0; i < noteList.size(); i++) {
             Note currentNote = noteList.get(i);
             /*
@@ -264,73 +266,16 @@ public class NotesListViewActivity extends AppCompatActivity implements
     }
 
     /**
-     * Long click on one item in the list view. It starts the Action Mode and allows selecting more
-     * items and execute bulk functions (e. g. delete)
-     *
-     * @param position int - position of the clicked item
+     * short click on a List Item
+     * @param position Position of the Item in the List
+     * @param v Viewholder of the item
      */
-    private void onListItemSelect(int position) {
-        if (!adapter.getItem(position).isSection()) {
-            adapter.select(position);
-            int checkedItemCount = adapter.getSelected().size();
-            boolean hasCheckedItems = checkedItemCount > 0;
-
-            if (hasCheckedItems && mActionMode == null) {
-                // TODO differ if one or more items are selected
-                // if (checkedItemCount == 1) {
-                // mActionMode = startActionMode(new
-                // SingleSelectedActionModeCallback());
-                // } else {
-                // there are some selected items, start the actionMode
-                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
-                // }
-            } else if (!hasCheckedItems && mActionMode != null) {
-                // there no selected items, finish the actionMode
-                mActionMode.finish();
-            }
-
-            if (mActionMode != null) {
-                mActionMode.setTitle(String.valueOf(checkedItemCount)
-                        + " " + getString(R.string.ab_selected));
-            }
-        } else {
-            //just for sections
-        }
-    }
-
-
-
     @Override
     public void onNoteClick(int position, View v) {
 
         if (mActionMode != null) {
-            if(!adapter.select(position)){
-                v.setSelected(false);
-                adapter.deselect(position);
-            }else{
-                v.setSelected(true);
-            }
-            mActionMode.setTitle(String.valueOf(adapter.getSelected().size())
-                    + " " + getString(R.string.ab_selected));
-            int checkedItemCount = adapter.getSelected().size();
-            boolean hasCheckedItems = checkedItemCount > 0;
-
-            if (hasCheckedItems && mActionMode == null) {
-                // TODO differ if one or more items are selected
-                // if (checkedItemCount == 1) {
-                // mActionMode = startActionMode(new
-                // SingleSelectedActionModeCallback());
-                // } else {
-                // there are some selected items, start the actionMode
-                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
-                // }
-            } else if (!hasCheckedItems && mActionMode != null) {
-                // there no selected items, finish the actionMode
-                mActionMode.finish();
-            }
+            selectNote(position,v);
         }else {
-
-
                 Intent intent = new Intent(getApplicationContext(),
                         NoteActivity.class);
 
@@ -345,17 +290,47 @@ public class NotesListViewActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public boolean onNoteLongClick(int position, View v) {
+    /** Helper function to reduce codeduplication, called from longClick and click
+     * @param position Postion of the selected note
+     * @return if Note was selected true, if Note was deselected false
+     */
+    private boolean selectNote(int position, View v){
         boolean selected=adapter.select(position);
+        v.setSelected(selected);
         if(selected) {
-            v.setSelected(selected);
-            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
+            Log.v("Note", "notePosition | Note wurde ausgewaehlt "
+                    + position);
+            int checkedItemCount = adapter.getSelected().size();
+            // first selection needs to start Action Mode
+            if(mActionMode == null) {
+                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
+            }
+            mActionMode.setTitle(String.valueOf(checkedItemCount)
+                    + " " + getString(R.string.ab_selected));
+        }else{
+            adapter.deselect(position);
+            Log.v("Note", "notePosition | Note wurde abgewaehlt "
+                    + position);
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(String.valueOf(checkedItemCount)
                     + " " + getString(R.string.ab_selected));
+            // last deselection needs to finish ActionMode
+            if(checkedItemCount==0) {
+                mActionMode.finish();
+            }
         }
         return selected;
+    }
+
+    /**
+     * Long click on a List Item in the RecyclerVIEW
+     * @param position Position of the Item in the List
+     * @param v Viewholder of the item
+     * @return true if the item is selected otherwise false
+     */
+    @Override
+    public boolean onNoteLongClick(int position, View v) {
+        return selectNote(position,v);
     }
 
     /**
@@ -389,6 +364,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
                             Note note = (Note) adapter.getItem(i);
+                        //TODO not sync after every deletion, better sync after loop
                             db.deleteNoteAndSync(note.getId());
                             adapter.remove(note);
 
