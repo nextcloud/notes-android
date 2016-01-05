@@ -43,6 +43,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private final static int show_single_note_cmd = 1;
     private final static int server_settings = 2;
     private final static int about = 3;
+    private final int columns = 1;
 
     private RecyclerView listView = null;
     private ItemAdapter adapter = null;
@@ -184,7 +185,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         listView = (RecyclerView) findViewById(R.id.list_view);
         //listView.setChoiceMode(CHOICE_MODE_MULTIPLE);
         listView.setAdapter(adapter);
-        listView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+        listView.setLayoutManager(new StaggeredGridLayoutManager(columns, StaggeredGridLayoutManager.VERTICAL));
     }
 
 
