@@ -1,13 +1,15 @@
 # ownCloud Notes
-An android client for OwnCloud Notes App.
+An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
 
 :construction: **Warning:** This app is beta. This means it is not tested well (only by some VMs and my personal device).
+
+:arrow_forward: **Access:** Since this app is currently not available in any Appstore, i will provide some versions in [my ownCloud instance](http://owncloud.niedermann.it/index.php/s/BOM5V1VZwscFk1k). Feel free to download and distribute. But *be careful*: This kind of installation does not include any kind of automatic updates, so you will have to check manually for new security and feature updates.
 
 ## :rocket: Features
 * List, Create, Edit, Share and Delete Notes
 * Share Text and Links as new Note into the App
 * Bulk Delete
-* Render MarkDown (using [AndDown](https://github.com/commonsguy/cwac-anddown))
+* Render MarkDown (using [Bypass](https://github.com/Uncodin/bypass))
 * English, German and Serbian UI
 
 ## :checkered_flag: Planned Features
@@ -30,8 +32,8 @@ An android client for OwnCloud Notes App.
 * Send me a bottle of your favorite beer :beers: :wink:
 
 ## :link: Requirements
-* [OwnCloud](https://github.com/owncloud/) instance running
-* [OwnCloud Notes](https://github.com/owncloud/notes) app enabled
+* [ownCloud](https://github.com/owncloud/) instance running
+* [ownCloud Notes](https://github.com/owncloud/notes) app enabled
 
 ## :notebook: License
 This Project is licensed under the [GNU GENERAL PUBLIC LICENSE](/LICENSE).

@@ -27,6 +27,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.Note;
+import it.niedermann.owncloud.notes.model.SectionItem;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 
@@ -55,13 +56,12 @@ public class NotesListViewActivity extends AppCompatActivity implements
         // First Run Wizard
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
-        if(preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+        if (preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
         }
 
         setContentView(R.layout.activity_notes_list_view);
-
 
         // Display Data
         db = new NoteSQLiteOpenHelper(this);
@@ -237,7 +237,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 Note createdNote = (Note) data.getExtras().getSerializable(
                         CREATED_NOTE);
-                adapter.add(createdNote);
+                adapter.insert(createdNote, 0);
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
