@@ -37,6 +37,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private final static int show_single_note_cmd = 1;
     private final static int server_settings = 2;
     private final static int about = 3;
+
+    // Layout Settings
+    public final static boolean CARDLAYOUT=false;
     private final int columns = 1;
 
     private RecyclerView recyclerView = null;
@@ -178,7 +181,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
         adapter.setNoteClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.list_view);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(columns, StaggeredGridLayoutManager.VERTICAL));
-        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
+        if(!NotesListViewActivity.CARDLAYOUT) {
+            recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
+        }
         //recyclerView.setChoiceMode(CHOICE_MODE_MULTIPLE);
         recyclerView.setAdapter(adapter);
     }

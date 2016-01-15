@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder>{
 
@@ -64,7 +65,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
 	private List<Item> itemList = null;
     private List<Integer> selected= null;
     private static NoteClickListener noteClickListener;
-    public final static boolean CARDLAYOUT=false;
 
 
 
@@ -87,7 +87,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
 	public NoteViewHolder onCreateViewHolder(ViewGroup parent,
 												   int viewType) {
         View v=null;
-        if(ItemAdapter.CARDLAYOUT){
+        if(NotesListViewActivity.CARDLAYOUT){
             v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.fragment_notes_list_note_card, parent, false);
         }else {
