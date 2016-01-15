@@ -7,29 +7,23 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.Note;
-import it.niedermann.owncloud.notes.model.SectionItem;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.util.SimpleDividerItemDecoration;
 
 public class NotesListViewActivity extends AppCompatActivity implements
          ItemAdapter.NoteClickListener,View.OnClickListener {
@@ -45,7 +39,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private final static int about = 3;
     private final int columns = 1;
 
-    private RecyclerView listView = null;
+    private RecyclerView recyclerView = null;
     private ItemAdapter adapter = null;
     private ActionMode mActionMode;
     private SwipeRefreshLayout swipeRefreshLayout = null;
@@ -67,7 +61,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         // Display Data
         db = new NoteSQLiteOpenHelper(this);
         db.synchronizeWithServer();
-        setListView(db.getNotes());
+        setRecyclerView(db.getNotes());
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
@@ -80,7 +74,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     @Override
                     public void onFinish() {
                         swipeRefreshLayout.setRefreshing(false);
-                        setListView(db.getNotes());
+                        setRecyclerView(db.getNotes());
                     }
                 });
                 db.synchronizeWithServer();
@@ -110,7 +104,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
      * @param noteList List&lt;Note&gt;
      */
     @SuppressWarnings("WeakerAccess")
-    public void setListView(List<Note> noteList) {
+    public void setRecyclerView(List<Note> noteList) {
         List<Item> itemList = new ArrayList<>();
         /*
         // #12 Create Sections depending on Time
@@ -182,10 +176,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         adapter = new ItemAdapter(getApplicationContext(), itemList);
         adapter.setNoteClickListener(this);
-        listView = (RecyclerView) findViewById(R.id.list_view);
-        //listView.setChoiceMode(CHOICE_MODE_MULTIPLE);
-        listView.setAdapter(adapter);
-        listView.setLayoutManager(new StaggeredGridLayoutManager(columns, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView = (RecyclerView) findViewById(R.id.list_view);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(columns, StaggeredGridLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
+        //recyclerView.setChoiceMode(CHOICE_MODE_MULTIPLE);
+        recyclerView.setAdapter(adapter);
     }
 
 
@@ -259,7 +254,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             db.getNoteServerSyncHelper().addCallback(new ICallback() {
                 @Override
                 public void onFinish() {
-                    setListView(db.getNotes());
+                    setRecyclerView(db.getNotes());
                 }
             });
             db.synchronizeWithServer();

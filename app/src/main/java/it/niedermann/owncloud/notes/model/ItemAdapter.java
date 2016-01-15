@@ -15,6 +15,7 @@ import it.niedermann.owncloud.notes.R;
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder>{
 
 
+
 	public void insert(Note createdNote, int i) {
         itemList.add(i,createdNote);
 	}
@@ -63,6 +64,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
 	private List<Item> itemList = null;
     private List<Integer> selected= null;
     private static NoteClickListener noteClickListener;
+    public final static boolean CARDLAYOUT=false;
+
 
 
     public ItemAdapter(Context context, List<Item> itemList) {
@@ -83,9 +86,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
 	@Override
 	public NoteViewHolder onCreateViewHolder(ViewGroup parent,
 												   int viewType) {
-		View v = LayoutInflater.from(parent.getContext())
-				.inflate(R.layout.fragment_notes_list_note_item, parent, false);
-
+        View v=null;
+        if(ItemAdapter.CARDLAYOUT){
+            v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.fragment_notes_list_note_card, parent, false);
+        }else {
+            v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.fragment_notes_list_note_item, parent, false);
+        }
 		NoteViewHolder vh = new NoteViewHolder(v);
 
 		return vh;
