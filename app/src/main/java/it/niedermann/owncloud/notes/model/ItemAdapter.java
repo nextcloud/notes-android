@@ -107,7 +107,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.NoteViewHolder
 		Item item = itemList.get(position);
 		Note note = (Note) item;
 		holder.noteTitle.setText(note.getTitle());
-		holder.noteExcerpt.setText(note.getExcerpt());
+        if(NotesListViewActivity.CARDLAYOUT) {
+            holder.noteExcerpt.setText(note.getSpannableContent());
+        }else{
+            holder.noteExcerpt.setText(note.getExcerpt());
+        }
         holder.setPosition(position);
 	}
     @Override

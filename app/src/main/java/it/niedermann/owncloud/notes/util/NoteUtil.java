@@ -54,16 +54,8 @@ public class NoteUtil {
      * @return excerpt String
      */
     public static String generateNoteExcerpt(String content) {
-        /*StringBuilder excerpt=new StringBuilder();
-
-        for(int i=1;i<10;i++) {
-            String line=getLineWithoutMarkDown(content, i);
-            if(!line.equals("")) {
-                excerpt.append(line + "\n");
-            }
-        }*/
-        return removeMarkDown(content);
-        //return getLineWithoutMarkDown(content, 1);
+        //return removeMarkDown(content);
+        return getLineWithoutMarkDown(content, 1);
     }
 
     /**
