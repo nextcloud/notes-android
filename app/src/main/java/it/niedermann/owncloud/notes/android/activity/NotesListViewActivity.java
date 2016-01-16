@@ -7,14 +7,15 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
-import android.util.SparseBooleanArray;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ListView;
+
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,7 +30,7 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 
 public class NotesListViewActivity extends AppCompatActivity implements
-        OnItemClickListener, View.OnClickListener {
+        ItemAdapter.NoteClickListener, View.OnClickListener {
 
     public final static String SELECTED_NOTE = "it.niedermann.owncloud.notes.clicked_note";
     public final static String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
@@ -41,11 +42,16 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private final static int server_settings = 2;
     private final static int about = 3;
 
-    private ListView listView = null;
+    private RecyclerView listView = null;
     private ItemAdapter adapter = null;
     private ActionMode mActionMode;
     private SwipeRefreshLayout swipeRefreshLayout = null;
     private NoteSQLiteOpenHelper db = null;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         // Floating Action Button
         findViewById(R.id.fab_create).setOnClickListener(this);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     /**
@@ -171,44 +180,10 @@ public class NotesListViewActivity extends AppCompatActivity implements
         }
 
         adapter = new ItemAdapter(getApplicationContext(), itemList);
-        listView = (ListView) findViewById(R.id.list_view);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        ItemAdapter.setNoteClickListener(this);
+        listView = (RecyclerView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
-        listView.setOnItemLongClickListener(new OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                onListItemSelect(position);
-                return true;
-            }
-        });
-    }
-
-    /**
-     * A short click on one list item. Creates a new instance of NoteActivity.
-     */
-    @Override
-    public void onItemClick(AdapterView<?> parentView, View childView,
-                            int position, long id) {
-        Item item = adapter.getItem(position);
-        if (!item.isSection()) {
-            listView.setItemChecked(position, !listView.isItemChecked(position));
-            if (listView.getCheckedItemCount() < 1) {
-                removeSelection();
-                Intent intent = new Intent(getApplicationContext(),
-                        NoteActivity.class);
-                if (!item.isSection()) {
-                    intent.putExtra(SELECTED_NOTE, (Note) item);
-                    intent.putExtra(SELECTED_NOTE_POSITION, position);
-                    startActivityForResult(intent, show_single_note_cmd);
-                }
-            } else { // perform long click if already something is selected
-                onListItemSelect(position);
-            }
-        } else {
-            listView.setItemChecked(position, false);
-        }
+        listView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     /**
@@ -261,7 +236,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 Note createdNote = (Note) data.getExtras().getSerializable(
                         CREATED_NOTE);
-                adapter.insert(createdNote, 0);
+                adapter.add(createdNote);
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
@@ -271,7 +246,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 if (resultCode == RESULT_OK) {
                     Note editedNote = (Note) data.getExtras().getSerializable(
                             NoteActivity.EDIT_NOTE);
-                    adapter.insert(editedNote, 0);
+                    adapter.add(editedNote);
                 }
             }
         } else if (requestCode == server_settings) {
@@ -287,16 +262,18 @@ public class NotesListViewActivity extends AppCompatActivity implements
         }
     }
 
-    /**
-     * Long click on one item in the list view. It starts the Action Mode and allows selecting more
-     * items and execute bulk functions (e. g. delete)
-     *
-     * @param position int - position of the clicked item
-     */
-    private void onListItemSelect(int position) {
-        if (!adapter.getItem(position).isSection()) {
-            listView.setItemChecked(position, !listView.isItemChecked(position));
-            int checkedItemCount = listView.getCheckedItemCount();
+    @Override
+    public void onNoteClick(int position, View v) {
+        if (mActionMode != null) {
+            if (!adapter.select(position)) {
+                v.setSelected(false);
+                adapter.deselect(position);
+            } else {
+                v.setSelected(true);
+            }
+            mActionMode.setTitle(String.valueOf(adapter.getSelected().size())
+                    + " " + getString(R.string.ab_selected));
+            int checkedItemCount = adapter.getSelected().size();
             boolean hasCheckedItems = checkedItemCount > 0;
 
             if (hasCheckedItems && mActionMode == null) {
@@ -312,25 +289,34 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 // there no selected items, finish the actionMode
                 mActionMode.finish();
             }
-
-            if (mActionMode != null) {
-                mActionMode.setTitle(String.valueOf(listView.getCheckedItemCount())
-                        + " " + getString(R.string.ab_selected));
-            }
         } else {
-            listView.setItemChecked(position, false);
+
+
+            Intent intent = new Intent(getApplicationContext(),
+                    NoteActivity.class);
+
+            Item item = adapter.getItem(position);
+            intent.putExtra(SELECTED_NOTE, (Note) item);
+            intent.putExtra(SELECTED_NOTE_POSITION, position);
+            Log.v("Note",
+                    "notePosition | NotesListViewActivity wurde abgesendet "
+                            + position);
+            startActivityForResult(intent, show_single_note_cmd);
+
         }
     }
 
-    /**
-     * Removes all selections.
-     */
-    private void removeSelection() {
-        SparseBooleanArray checkedItemPositions = listView
-                .getCheckedItemPositions();
-        for (int i = 0; i < checkedItemPositions.size(); i++) {
-            listView.setItemChecked(i, false);
+    @Override
+    public boolean onNoteLongClick(int position, View v) {
+        boolean selected = adapter.select(position);
+        if (selected) {
+            v.setSelected(selected);
+            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
+            int checkedItemCount = adapter.getSelected().size();
+            mActionMode.setTitle(String.valueOf(checkedItemCount)
+                    + " " + getString(R.string.ab_selected));
         }
+        return selected;
     }
 
     /**
@@ -361,15 +347,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.menu_delete:
-                    SparseBooleanArray checkedItemPositions = listView
-                            .getCheckedItemPositions();
-                    for (int i = (checkedItemPositions.size() - 1); i >= 0; i--) {
-                        if (checkedItemPositions.valueAt(i)) {
-                            Note note = (Note) adapter.getItem(checkedItemPositions
-                                    .keyAt(i));
-                            db.deleteNoteAndSync(note.getId());
-                            adapter.remove(note);
-                        }
+                    List<Integer> selection = adapter.getSelected();
+                    for (Integer i : selection) {
+                        Note note = (Note) adapter.getItem(i);
+                        db.deleteNoteAndSync(note.getId());
+                        adapter.remove(note);
                     }
                     mode.finish(); // Action picked, so close the CAB
                     return true;
@@ -380,7 +362,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            removeSelection();
+            adapter.clearSelection();
             mActionMode = null;
             adapter.notifyDataSetChanged();
         }
