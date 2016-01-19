@@ -14,9 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -47,11 +44,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private ActionMode mActionMode;
     private SwipeRefreshLayout swipeRefreshLayout = null;
     private NoteSQLiteOpenHelper db = null;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +81,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         // Floating Action Button
         findViewById(R.id.fab_create).setOnClickListener(this);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     /**
