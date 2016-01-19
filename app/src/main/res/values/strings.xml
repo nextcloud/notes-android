@@ -67,5 +67,6 @@
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Settings</string>
+    <string name="noteTransition">noteTransition</string>
 
 </resources>

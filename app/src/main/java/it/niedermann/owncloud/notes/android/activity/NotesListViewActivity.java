@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
@@ -277,6 +279,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
         if (mActionMode != null) {
             selectNote(position,v);
         }else {
+
+
                 Intent intent = new Intent(getApplicationContext(),
                         NoteActivity.class);
 
@@ -286,7 +290,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 Log.v("Note",
                         "notePosition | NotesListViewActivity wurde abgesendet "
                                 + position);
-                startActivityForResult(intent, show_single_note_cmd);
+                //startActivityForResult(intent, show_single_note_cmd);
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, getString(R.string.noteTransition));
+            ActivityCompat.startActivityForResult(this, intent, show_single_note_cmd, optionsCompat.toBundle());
 
         }
     }
