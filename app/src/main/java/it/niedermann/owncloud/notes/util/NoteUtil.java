@@ -54,6 +54,7 @@ public class NoteUtil {
      * @return excerpt String
      */
     public static String generateNoteExcerpt(String content) {
+        //return removeMarkDown(content);
         return getLineWithoutMarkDown(content, 1);
     }
 

@@ -4,32 +4,31 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
-import android.util.SparseBooleanArray;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.Note;
-import it.niedermann.owncloud.notes.model.SectionItem;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.util.SimpleDividerItemDecoration;
 
 public class NotesListViewActivity extends AppCompatActivity implements
-        OnItemClickListener, View.OnClickListener {
+         ItemAdapter.NoteClickListener,View.OnClickListener {
 
     public final static String SELECTED_NOTE = "it.niedermann.owncloud.notes.clicked_note";
     public final static String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
@@ -41,7 +40,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private final static int server_settings = 2;
     private final static int about = 3;
 
-    private ListView listView = null;
+    // Layout Settings
+    public final static boolean CARDLAYOUT=false;
+    private final int columns = 1;
+
+    private RecyclerView recyclerView = null;
     private ItemAdapter adapter = null;
     private ActionMode mActionMode;
     private SwipeRefreshLayout swipeRefreshLayout = null;
@@ -63,18 +66,20 @@ public class NotesListViewActivity extends AppCompatActivity implements
         // Display Data
         db = new NoteSQLiteOpenHelper(this);
         db.synchronizeWithServer();
-        setListView(db.getNotes());
+        setRecyclerView(db.getNotes());
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Log.d("Swipe", "Refreshing Notes");
+                db.synchronizeWithServer();
                 db.getNoteServerSyncHelper().addCallback(new ICallback() {
                     @Override
                     public void onFinish() {
                         swipeRefreshLayout.setRefreshing(false);
-                        setListView(db.getNotes());
+                        setRecyclerView(db.getNotes());
                     }
                 });
                 db.synchronizeWithServer();
@@ -104,8 +109,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
      * @param noteList List&lt;Note&gt;
      */
     @SuppressWarnings("WeakerAccess")
-    public void setListView(List<Note> noteList) {
+    public void setRecyclerView(List<Note> noteList) {
         List<Item> itemList = new ArrayList<>();
+        /*
         // #12 Create Sections depending on Time
         // TODO Move to ItemAdapter?
         boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
@@ -134,8 +140,10 @@ public class NotesListViewActivity extends AppCompatActivity implements
         month.set(Calendar.MINUTE, 0);
         month.set(Calendar.SECOND, 0);
         month.set(Calendar.MILLISECOND, 0);
+        */
         for (int i = 0; i < noteList.size(); i++) {
             Note currentNote = noteList.get(i);
+            /*
             if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
                 // < 10 minutes but after 00:00 today
                 if (i > 0) {
@@ -167,49 +175,22 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 }
                 earlierSet = true;
             }
+            */
             itemList.add(currentNote);
         }
 
         adapter = new ItemAdapter(getApplicationContext(), itemList);
-        listView = (ListView) findViewById(R.id.list_view);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
-        listView.setOnItemLongClickListener(new OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
-                onListItemSelect(position);
-                return true;
-            }
-        });
+        adapter.setNoteClickListener(this);
+        recyclerView = (RecyclerView) findViewById(R.id.list_view);
+        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(columns, StaggeredGridLayoutManager.VERTICAL));
+        if(!NotesListViewActivity.CARDLAYOUT) {
+            recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
+        }
+        //recyclerView.setChoiceMode(CHOICE_MODE_MULTIPLE);
+        recyclerView.setAdapter(adapter);
     }
 
-    /**
-     * A short click on one list item. Creates a new instance of NoteActivity.
-     */
-    @Override
-    public void onItemClick(AdapterView<?> parentView, View childView,
-                            int position, long id) {
-        Item item = adapter.getItem(position);
-        if (!item.isSection()) {
-            listView.setItemChecked(position, !listView.isItemChecked(position));
-            if (listView.getCheckedItemCount() < 1) {
-                removeSelection();
-                Intent intent = new Intent(getApplicationContext(),
-                        NoteActivity.class);
-                if (!item.isSection()) {
-                    intent.putExtra(SELECTED_NOTE, (Note) item);
-                    intent.putExtra(SELECTED_NOTE_POSITION, position);
-                    startActivityForResult(intent, show_single_note_cmd);
-                }
-            } else { // perform long click if already something is selected
-                onListItemSelect(position);
-            }
-        } else {
-            listView.setItemChecked(position, false);
-        }
-    }
+
 
     /**
      * Adds the Menu Items to the Action Bar.
@@ -280,7 +261,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             db.getNoteServerSyncHelper().addCallback(new ICallback() {
                 @Override
                 public void onFinish() {
-                    setListView(db.getNotes());
+                    setRecyclerView(db.getNotes());
                 }
             });
             db.synchronizeWithServer();
@@ -288,49 +269,75 @@ public class NotesListViewActivity extends AppCompatActivity implements
     }
 
     /**
-     * Long click on one item in the list view. It starts the Action Mode and allows selecting more
-     * items and execute bulk functions (e. g. delete)
-     *
-     * @param position int - position of the clicked item
+     * short click on a List Item
+     * @param position Position of the Item in the List
+     * @param v Viewholder of the item
      */
-    private void onListItemSelect(int position) {
-        if (!adapter.getItem(position).isSection()) {
-            listView.setItemChecked(position, !listView.isItemChecked(position));
-            int checkedItemCount = listView.getCheckedItemCount();
-            boolean hasCheckedItems = checkedItemCount > 0;
+    @Override
+    public void onNoteClick(int position, View v) {
 
-            if (hasCheckedItems && mActionMode == null) {
-                // TODO differ if one or more items are selected
-                // if (checkedItemCount == 1) {
-                // mActionMode = startActionMode(new
-                // SingleSelectedActionModeCallback());
-                // } else {
-                // there are some selected items, start the actionMode
-                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
-                // }
-            } else if (!hasCheckedItems && mActionMode != null) {
-                // there no selected items, finish the actionMode
-                mActionMode.finish();
-            }
+        if (mActionMode != null) {
+            selectNote(position,v);
+        }else {
 
-            if (mActionMode != null) {
-                mActionMode.setTitle(String.valueOf(listView.getCheckedItemCount())
-                        + " " + getString(R.string.ab_selected));
-            }
-        } else {
-            listView.setItemChecked(position, false);
+
+                Intent intent = new Intent(getApplicationContext(),
+                        NoteActivity.class);
+
+                Item item = adapter.getItem(position);
+                intent.putExtra(SELECTED_NOTE, (Note) item);
+                intent.putExtra(SELECTED_NOTE_POSITION, position);
+                Log.v("Note",
+                        "notePosition | NotesListViewActivity wurde abgesendet "
+                                + position);
+                //startActivityForResult(intent, show_single_note_cmd);
+            ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, v, getString(R.string.noteTransition));
+            ActivityCompat.startActivityForResult(this, intent, show_single_note_cmd, optionsCompat.toBundle());
+
         }
     }
 
-    /**
-     * Removes all selections.
+    /** Helper function to reduce codeduplication, called from longClick and click
+     * @param position Postion of the selected note
+     * @return if Note was selected true, if Note was deselected false
      */
-    private void removeSelection() {
-        SparseBooleanArray checkedItemPositions = listView
-                .getCheckedItemPositions();
-        for (int i = 0; i < checkedItemPositions.size(); i++) {
-            listView.setItemChecked(i, false);
+    private boolean selectNote(int position, View v){
+        boolean selected=adapter.select(position);
+        v.setSelected(selected);
+        if(selected) {
+            Log.v("Note", "notePosition | Note wurde ausgewaehlt "
+                    + position);
+            int checkedItemCount = adapter.getSelected().size();
+            // first selection needs to start Action Mode
+            if(mActionMode == null) {
+                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
+            }
+            mActionMode.setTitle(String.valueOf(checkedItemCount)
+                    + " " + getString(R.string.ab_selected));
+        }else{
+            adapter.deselect(position);
+            Log.v("Note", "notePosition | Note wurde abgewaehlt "
+                    + position);
+            int checkedItemCount = adapter.getSelected().size();
+            mActionMode.setTitle(String.valueOf(checkedItemCount)
+                    + " " + getString(R.string.ab_selected));
+            // last deselection needs to finish ActionMode
+            if(checkedItemCount==0) {
+                mActionMode.finish();
+            }
         }
+        return selected;
+    }
+
+    /**
+     * Long click on a List Item in the RecyclerVIEW
+     * @param position Position of the Item in the List
+     * @param v Viewholder of the item
+     * @return true if the item is selected otherwise false
+     */
+    @Override
+    public boolean onNoteLongClick(int position, View v) {
+        return selectNote(position,v);
     }
 
     /**
@@ -361,15 +368,13 @@ public class NotesListViewActivity extends AppCompatActivity implements
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.menu_delete:
-                    SparseBooleanArray checkedItemPositions = listView
-                            .getCheckedItemPositions();
-                    for (int i = (checkedItemPositions.size() - 1); i >= 0; i--) {
-                        if (checkedItemPositions.valueAt(i)) {
-                            Note note = (Note) adapter.getItem(checkedItemPositions
-                                    .keyAt(i));
+                    List<Integer> selection = adapter.getSelected();
+                    for (Integer i : selection) {
+                            Note note = (Note) adapter.getItem(i);
+                        //TODO not sync after every deletion, better sync after loop
                             db.deleteNoteAndSync(note.getId());
                             adapter.remove(note);
-                        }
+
                     }
                     mode.finish(); // Action picked, so close the CAB
                     return true;
@@ -380,7 +385,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            removeSelection();
+            adapter.clearSelection();
             mActionMode = null;
             adapter.notifyDataSetChanged();
         }

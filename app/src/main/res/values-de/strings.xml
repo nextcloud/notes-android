@@ -7,6 +7,7 @@
     <string name="action_settings">Einstellungen</string>
     <string name="action_create_save">Speichern</string>
     <string name="action_create_cancel">Abbrechen</string>
+    <string name="action_edit_editing">Bearbeiten</string>
     <string name="action_edit_save">Speichern</string>
     <string name="action_edit_saving">Speichern&#8230;</string>
     <string name="action_edit_saved">Gespeichert</string>

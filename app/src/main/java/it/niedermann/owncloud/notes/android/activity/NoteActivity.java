@@ -2,6 +2,8 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
@@ -9,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Note;
@@ -84,6 +87,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 shareIntent.putExtra(android.content.Intent.EXTRA_TEXT,
                         note.getContent());
                 startActivity(shareIntent);
+                return true;
+            case android.R.id.home:
+                //ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this, noteContent, getString(R.string.noteTransition));
+                ActivityCompat.finishAfterTransition(this);
                 return true;
             /*case R.id.menu_copy:
                 db = new NoteSQLiteOpenHelper(this);

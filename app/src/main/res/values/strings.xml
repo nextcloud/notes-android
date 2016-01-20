@@ -7,6 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_create_save">Save</string>
     <string name="action_create_cancel">Cancel</string>
+    <string name="action_edit_editing">Editing</string>
     <string name="action_edit_save">Save</string>
     <string name="action_edit_saving">Saving&#8230;</string>
     <string name="action_edit_saved">Saved</string>
@@ -52,6 +53,7 @@
     <string name="settings_submit">Connect</string>
     <string name="settings_submitting">Connecting&#8230;</string>
 
+
     <!-- Network -->
 
     <string name="network_connecting">Verbindung wird hergestellt</string>
@@ -67,5 +69,10 @@
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Settings</string>
+
+
+
+    <!-- Transition Identifier -->
+    <string name="noteTransition">noteTransition</string>
 
 </resources>
