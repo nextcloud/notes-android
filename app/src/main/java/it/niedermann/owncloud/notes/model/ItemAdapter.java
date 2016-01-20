@@ -27,7 +27,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         //super(context, android.R.layout.simple_list_item_1, itemList);
         super();
         this.itemList = itemList;
-        this.selected = new ArrayList<Integer>();
+        this.selected = new ArrayList<>();
     }
 
     public static void setNoteClickListener(NoteClickListener noteClickListener) {
@@ -35,7 +35,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public void add(Note createdNote) {
-        //TODO
+        //TODO sort createdNote to first position
+        this.add(createdNote);
         itemList.add(createdNote);
     }
 
@@ -123,9 +124,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface NoteClickListener {
         void onNoteClick(int position, View v);
-
         boolean onNoteLongClick(int position, View v);
-
     }
 
     public static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
