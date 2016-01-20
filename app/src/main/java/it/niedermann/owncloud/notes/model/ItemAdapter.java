@@ -78,10 +78,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public boolean select(Integer position) {
-        if (!selected.contains(position)) {
-            return selected.add(position);
-        }
-        return false;
+        return !selected.contains(position) && selected.add(position);
     }
 
     public void clearSelection() {
