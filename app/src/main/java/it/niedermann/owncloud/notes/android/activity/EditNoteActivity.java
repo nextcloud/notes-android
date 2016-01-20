@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateUtils;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import java.util.Timer;
@@ -23,6 +25,7 @@ public class EditNoteActivity extends AppCompatActivity {
     private EditText content = null;
     private Note note = null;
     private Timer timer = new Timer();
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -34,6 +37,14 @@ public class EditNoteActivity extends AppCompatActivity {
         content.setEnabled(false);
         content.setText(note.getContent());
         content.setEnabled(true);
+
+        actionBar=getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(note.getTitle());
+            actionBar.setSubtitle(getString(R.string.action_edit_editing));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         content.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
@@ -76,10 +87,28 @@ public class EditNoteActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+             case android.R.id.home:
+                 content.setEnabled(false);
+                 saveData();
+                 Intent data = new Intent();
+                 data.setAction(Intent.ACTION_VIEW);
+                 data.putExtra(NoteActivity.EDIT_NOTE, note);
+                 setResult(RESULT_OK, data);
+                 finish();
+                 return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
     private void saveData() {
-        ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setSubtitle(getResources().getString(R.string.action_edit_saving));
+
+        if (actionBar != null) {
+            actionBar.setSubtitle(getString(R.string.action_edit_saving));
         }
         note.setContent(((EditText) findViewById(R.id.editContent)).getText().toString());
         NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(this);
@@ -89,14 +118,14 @@ public class EditNoteActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        getSupportActionBar().setSubtitle(getResources().getString(R.string.action_edit_saved));
+                        actionBar.setSubtitle(getResources().getString(R.string.action_edit_saved));
                         Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
                             @Override
                             public void run() {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        getSupportActionBar().setSubtitle(null);
+                                        actionBar.setSubtitle(getString(R.string.action_edit_editing));
                                     }
                                 });
                             }
