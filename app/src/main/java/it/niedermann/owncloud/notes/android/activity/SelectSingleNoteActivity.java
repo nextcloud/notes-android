@@ -5,9 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.RemoteViews;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
 
     int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     private NoteSQLiteOpenHelper db = null;
-    private ListView listView = null;
+    private RecyclerView listView = null;
     private ItemAdapter adapter = null;
 
     @Override
@@ -65,10 +66,10 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
         List<Item> itemList = new ArrayList<>();
         itemList.addAll(noteList);
         adapter = new ItemAdapter(getApplicationContext(), itemList);
-        listView = (ListView) findViewById(R.id.select_single_note_list_view);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listView = (RecyclerView) findViewById(R.id.select_single_note_list_view);
         listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
+        listView.setLayoutManager(new LinearLayoutManager(this));
+        //httpslistView.setOnItemClickListener(this);
     }
 
     @Override
