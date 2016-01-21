@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.model;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,9 +34,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public void add(Note createdNote) {
-        //TODO sort createdNote to first position
-        this.add(createdNote);
-        itemList.add(createdNote);
+        itemList.add(0, createdNote);
+        notifyDataSetChanged();
     }
 
     // Create new views (invoked by the layout manager)
@@ -107,6 +105,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void remove(Item item) {
         itemList.remove(item);
+        notifyDataSetChanged();
     }
 
     @Override

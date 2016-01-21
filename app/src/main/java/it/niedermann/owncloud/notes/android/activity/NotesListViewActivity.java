@@ -73,7 +73,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     public void onFinish() {
                         swipeRefreshLayout.setRefreshing(false);
                         adapter.clearSelection();
-                        mActionMode.finish();
+                        if (mActionMode != null) {
+                            mActionMode.finish();
+                        }
                         setListView(db.getNotes());
                     }
                 });
@@ -227,10 +229,10 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 //not need because of db.synchronisation in createActivity
 
-                /*Note createdNote = (Note) data.getExtras().getSerializable(
+                Note createdNote = (Note) data.getExtras().getSerializable(
                         CREATED_NOTE);
-                adapter.add(createdNote);*/
-                setListView(db.getNotes());
+                adapter.add(createdNote);
+                //setListView(db.getNotes());
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
