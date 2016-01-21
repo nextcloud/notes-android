@@ -23,7 +23,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static NoteClickListener noteClickListener;
     private List<Item> itemList = null;
     private List<Integer> selected = null;
-    public ItemAdapter(Context context, List<Item> itemList) {
+    public ItemAdapter(List<Item> itemList) {
         //super(context, android.R.layout.simple_list_item_1, itemList);
         super();
         this.itemList = itemList;
