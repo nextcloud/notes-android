@@ -65,7 +65,7 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
     private void setListView(List<Note> noteList) {
         List<Item> itemList = new ArrayList<>();
         itemList.addAll(noteList);
-        adapter = new ItemAdapter(getApplicationContext(), itemList);
+        adapter = new ItemAdapter(itemList);
         listView = (RecyclerView) findViewById(R.id.select_single_note_list_view);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));

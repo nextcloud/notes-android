@@ -168,7 +168,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             itemList.add(currentNote);
         }
 
-        adapter = new ItemAdapter(getApplicationContext(), itemList);
+        adapter = new ItemAdapter(itemList);
         ItemAdapter.setNoteClickListener(this);
         listView = (RecyclerView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
@@ -223,9 +223,12 @@ public class NotesListViewActivity extends AppCompatActivity implements
         if (requestCode == create_note_cmd) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                Note createdNote = (Note) data.getExtras().getSerializable(
+                //not need because of db.synchronisation in createActivity
+
+                /*Note createdNote = (Note) data.getExtras().getSerializable(
                         CREATED_NOTE);
-                adapter.add(createdNote);
+                adapter.add(createdNote);*/
+                setListView(db.getNotes());
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
@@ -340,9 +343,12 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     for (Integer i : selection) {
                         Note note = (Note) adapter.getItem(i);
                         db.deleteNoteAndSync(note.getId());
-                        adapter.remove(note);
+                        // Not needed because of dbsync
+                        //adapter.remove(note);
                     }
                     mode.finish(); // Action picked, so close the CAB
+                    //after delete selection has to be cleared
+                    setListView(db.getNotes());
                     return true;
                 default:
                     return false;
