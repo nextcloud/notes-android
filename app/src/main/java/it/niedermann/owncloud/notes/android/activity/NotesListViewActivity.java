@@ -72,6 +72,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     @Override
                     public void onFinish() {
                         swipeRefreshLayout.setRefreshing(false);
+                        adapter.clearSelection();
+                        mActionMode.finish();
                         setListView(db.getNotes());
                     }
                 });
