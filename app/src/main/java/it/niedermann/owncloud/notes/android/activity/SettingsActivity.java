@@ -66,7 +66,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String url = ((EditText) findViewById(R.id.settings_url)).getText().toString();
+                String url = field_url.getText().toString();
 
                 if (!url.endsWith("/")) {
                     url += "/";
@@ -81,10 +81,29 @@ public class SettingsActivity extends AppCompatActivity {
                 } else {
                     findViewById(R.id.settings_url_warn_http).setVisibility(View.GONE);
                 }
+
+                handleSubmitButtonEnabled(field_url.getText(), field_username.getText());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
+            }
+        });
+
+        field_username.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                handleSubmitButtonEnabled(field_url.getText(), field_username.getText());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
@@ -101,6 +120,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        btn_submit.setEnabled(false);
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,6 +151,14 @@ public class SettingsActivity extends AppCompatActivity {
             url = "https://" + url;
         }
         new LoginValidatorAsyncTask().execute(url, username, password);
+    }
+
+    private void handleSubmitButtonEnabled(Editable url, Editable username) {
+        if (field_username.getText().length() > 0 && field_url.getText().length() > 0) {
+            btn_submit.setEnabled(true);
+        } else {
+            btn_submit.setEnabled(false);
+        }
     }
 
     /************************************ Async Tasks ************************************/
