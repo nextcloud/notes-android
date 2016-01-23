@@ -37,6 +37,13 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
         super.onCreate(savedInstanceState);
         setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_select_single_note);
+
+        adapter = new ItemAdapter(this);
+        listView = (RecyclerView) findViewById(R.id.list_view);
+        listView.setAdapter(adapter);
+        listView.setLayoutManager(new LinearLayoutManager(this));
+        //ItemAdapter.setNoteClickListener(this);
+
         // Display Data
         db = new NoteSQLiteOpenHelper(this);
         db.synchronizeWithServer();
@@ -62,14 +69,8 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
      *
      * @param noteList List&lt;Note&gt;
      */
-    private void setListView(List<Note> noteList) {
-        List<Item> itemList = new ArrayList<>();
-        itemList.addAll(noteList);
-        adapter = new ItemAdapter(itemList);
-        listView = (RecyclerView) findViewById(R.id.select_single_note_list_view);
-        listView.setAdapter(adapter);
-        listView.setLayoutManager(new LinearLayoutManager(this));
-        //httpslistView.setOnItemClickListener(this);
+    public void setListView(List<Note> noteList) {
+        adapter.fillItemList(noteList);
     }
 
     @Override
