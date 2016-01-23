@@ -19,7 +19,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
- * <p/>
+ * <p>
  * Created by stefan on 19.09.15.
  */
 public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
@@ -37,10 +37,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private NoteServerSyncHelper serverSyncHelper = null;
     private Context context = null;
+    private List<Note> noteList = null;
 
     public NoteSQLiteOpenHelper(Context context) {
         super(context, database_name, null, database_version);
         this.context = context;
+        noteList = new ArrayList<>();
         serverSyncHelper = new NoteServerSyncHelper(this);
     }
 
@@ -145,7 +147,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return List&lt;Note&gt;
      */
     public List<Note> getNotes() {
-        List<Note> notes = new ArrayList<>();
+        noteList.clear();
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle()});
         if (cursor.moveToFirst()) {
@@ -158,11 +160,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                notes.add(new Note(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4)));
+                noteList.add(new Note(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4)));
             } while (cursor.moveToNext());
         }
         cursor.close();
-        return notes;
+        return noteList;
     }
 
     /**

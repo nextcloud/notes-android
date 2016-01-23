@@ -3,16 +3,19 @@ package it.niedermann.owncloud.notes.persistence;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.content.res.Resources;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.Note;
+import it.niedermann.owncloud.notes.util.ICallback;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
- * <p/>
+ * <p>
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
@@ -22,14 +25,15 @@ public class SyncService extends IntentService {
     private static final String ACTION_CREATE_NOTE = "it.niedermann.owncloud.notes.persistence.action.create";
     private static final String ACTION_EDIT_NOTE = "it.niedermann.owncloud.notes.persistence.action.edit";
     private static final String ACTION_SYNC = "it.niedermann.owncloud.notes.persistence.action.edit";
+    private static final String ACTION_DELETE_NOTE = "it.niedermann.owncloud.notes.persistence.action.delete";
 
     private static final String CONTENT = "it.niedermann.owncloud.notes.persistence.extra.content";
     private static final String NOTE = "it.niedermann.owncloud.notes.persistence.extra.note";
-    private static final String ADAPTER = "it.niedermann.owncloud.notes.persistence.extra.Adapter";
+    private static final String NOTEID = "it.niedermann.owncloud.notes.persistence.extra.note";
 
 
     private static NoteSQLiteOpenHelper db = null;
-
+    private static Note createdNote = null;
 
 
     public SyncService() {
@@ -43,14 +47,26 @@ public class SyncService extends IntentService {
      * @see IntentService
      */
     // TODO: Customize helper method
-    public static void startActionSync(Context context, ArrayList<Item> param1) {
+    public static void startActionSync(Context context) {
         //setup Database
-        db = new NoteSQLiteOpenHelper(context);
-
+        if (db == null) db = new NoteSQLiteOpenHelper(context);
         Intent intent = new Intent(context, SyncService.class);
         intent.setAction(ACTION_SYNC);
-        intent.putExtra(ADAPTER, param1);
         context.startService(intent);
+    }
+
+    public static List<Note> getNotes() {
+        if (db != null) return db.getNotes();
+        else throw new Resources.NotFoundException("Not Synced with Server");
+    }
+
+    public static Note getCreatedNote() {
+        return createdNote;
+    }
+
+    public static void addCallback(ICallback callback) {
+        if (db != null) db.getNoteServerSyncHelper().addCallback(callback);
+        else throw new Resources.NotFoundException("Not Synced with Server");
     }
 
     /**
@@ -62,8 +78,7 @@ public class SyncService extends IntentService {
     // TODO: Customize helper method
     public static void startActionEditNote(Context context, Note editedNote) {
         //setup Database
-        db = new NoteSQLiteOpenHelper(context);
-
+        if (db == null) db = new NoteSQLiteOpenHelper(context);
         Intent intent = new Intent(context, SyncService.class);
         intent.setAction(ACTION_EDIT_NOTE);
         intent.putExtra(NOTE, editedNote);
@@ -80,28 +95,47 @@ public class SyncService extends IntentService {
     // TODO: Customize helper method
     public static void startActionCreateNote(Context context, String noteContent) {
         //setup Database
-        db = new NoteSQLiteOpenHelper(context);
-
+        if (db == null) db = new NoteSQLiteOpenHelper(context);
         Intent intent = new Intent(context, SyncService.class);
         intent.setAction(ACTION_CREATE_NOTE);
         intent.putExtra(CONTENT, noteContent);
         context.startService(intent);
     }
 
+    public static void startActionDeleteNoteAndSync(Context context, long id) {
+        //setup Database
+        if (db == null) db = new NoteSQLiteOpenHelper(context);
+        Intent intent = new Intent(context, SyncService.class);
+        intent.setAction(ACTION_DELETE_NOTE);
+        intent.putExtra(NOTEID, id);
+        context.startService(intent);
+    }
+
+    public static void resetLocalDatabase(){
+        db=null;
+    }
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_SYNC.equals(action)) {
-                final ArrayList param1 = intent.getParcelableArrayListExtra(ADAPTER);
-                handleActionSync(param1);
+                handleActionSync();
             } else if (ACTION_EDIT_NOTE.equals(action)) {
                 final Note param1 = (Note) intent.getSerializableExtra(NOTE);
                 handleActionEditNote(param1);
             } else if (ACTION_CREATE_NOTE.equals(action)) {
                 final String param1 = intent.getStringExtra(CONTENT);
                 handleActionCreateNote(param1);
+            } else if (ACTION_DELETE_NOTE.equals(action)) {
+                final Long param1 = intent.getLongExtra(NOTEID, -1);
+                handleActionDeleteNote(param1);
             }
+        }
+    }
+
+    private void handleActionDeleteNote(Long param1) {
+        if (param1 != -1) {
+            db.deleteNoteAndSync(param1);
         }
     }
 
@@ -109,9 +143,9 @@ public class SyncService extends IntentService {
      * Handle action Foo in the provided background thread with the provided
      * parameters.
      */
-    private void handleActionSync(ArrayList notes) {
+    private void handleActionSync() {
         // TODO: Handle action ACTION_SYNC
-        throw new UnsupportedOperationException("Not yet implemented");
+        db.synchronizeWithServer();
     }
 
     /**
@@ -120,12 +154,14 @@ public class SyncService extends IntentService {
      */
     private void handleActionEditNote(Note editedNote) {
         // TODO: Handle action ACTION_EDIT_NOTE
-        throw new UnsupportedOperationException("Not yet implemented");
+        db.updateNoteAndSync(editedNote);
     }
 
     private void handleActionCreateNote(String noteContent) {
         // TODO: Handle action ACTION_CREATE_NOTE
-        throw new UnsupportedOperationException("Not yet implemented");
+       long id = db.addNoteAndSync(noteContent);
+        createdNote = db.getNote(id);
     }
+
 
 }

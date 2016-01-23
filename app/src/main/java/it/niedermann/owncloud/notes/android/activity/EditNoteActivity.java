@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.SyncService;
 import it.niedermann.owncloud.notes.util.ICallback;
 
 public class EditNoteActivity extends AppCompatActivity {
@@ -106,8 +107,7 @@ public class EditNoteActivity extends AppCompatActivity {
             ab.setSubtitle(getResources().getString(R.string.action_edit_saving));
         }
         note.setContent(((EditText) findViewById(R.id.editContent)).getText().toString());
-        NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(this);
-        db.getNoteServerSyncHelper().addCallback(new ICallback() {
+        SyncService.addCallback(new ICallback() {
             @Override
             public void onFinish() {
                 runOnUiThread(new Runnable() {
@@ -137,6 +137,6 @@ public class EditNoteActivity extends AppCompatActivity {
                 }*/
             }
         });
-        db.updateNoteAndSync(note);
+        SyncService.startActionEditNote(EditNoteActivity.this, note);
     }
 }

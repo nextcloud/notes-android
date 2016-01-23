@@ -14,16 +14,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.Note;
-import it.niedermann.owncloud.notes.model.SectionItem;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.SyncService;
 import it.niedermann.owncloud.notes.util.ICallback;
 
@@ -44,7 +41,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private ItemAdapter adapter = null;
     private ActionMode mActionMode;
     private SwipeRefreshLayout swipeRefreshLayout = null;
-    private NoteSQLiteOpenHelper db = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,24 +63,23 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
 
         // Display Data
-        // TODO Move db to Adapter
-        db = new NoteSQLiteOpenHelper(this);
-        db.synchronizeWithServer();
-        setListView(db.getNotes());
+        // TODO Move to Adapter
+        SyncService.startActionSync(this);
+        setListView(SyncService.getNotes());
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                db.getNoteServerSyncHelper().addCallback(new ICallback() {
+                SyncService.startActionSync(NotesListViewActivity.this);
+                SyncService.addCallback(new ICallback() {
                     @Override
                     public void onFinish() {
                         swipeRefreshLayout.setRefreshing(false);
-                        setListView(db.getNotes());
+                        setListView(SyncService.getNotes());
                     }
                 });
-                db.synchronizeWithServer();
             }
         });
 
@@ -94,7 +89,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
     /**
      * Click listener for <strong>Floating Action Button</strong>
-     * <p/>
+     * <p>
      * Creates a new Instance of CreateNoteActivity.
      *
      * @param v View
@@ -168,7 +163,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 /*Note createdNote = (Note) data.getExtras().getSerializable(
                         CREATED_NOTE);
                 adapter.add(createdNote);*/
-                setListView(db.getNotes());
+                setListView(SyncService.getNotes());
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
@@ -183,14 +178,14 @@ public class NotesListViewActivity extends AppCompatActivity implements
             }
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
-            db = new NoteSQLiteOpenHelper(this);
-            db.getNoteServerSyncHelper().addCallback(new ICallback() {
+            // TODO see what happens to the service
+            SyncService.addCallback(new ICallback() {
                 @Override
                 public void onFinish() {
-                    setListView(db.getNotes());
+                    setListView(SyncService.getNotes());
                 }
             });
-            db.synchronizeWithServer();
+            SyncService.startActionSync(this);
         }
     }
 
@@ -241,8 +236,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
     @Override
     public boolean onNoteLongClick(int position, View v) {
         boolean selected = adapter.select(position);
+        v.setSelected(selected);
         if (selected) {
-            v.setSelected(selected);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(String.valueOf(checkedItemCount)
@@ -282,13 +277,13 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
                         Note note = (Note) adapter.getItem(i);
-                        db.deleteNoteAndSync(note.getId());
+                        SyncService.startActionDeleteNoteAndSync(NotesListViewActivity.this, note.getId());
                         // Not needed because of dbsync
                         //adapter.remove(note);
                     }
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
-                    setListView(db.getNotes());
+                    setListView(SyncService.getNotes());
                     return true;
                 default:
                     return false;

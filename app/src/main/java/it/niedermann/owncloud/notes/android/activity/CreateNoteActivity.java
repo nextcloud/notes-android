@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.SyncService;
+import it.niedermann.owncloud.notes.util.ICallback;
 
 public class CreateNoteActivity extends AppCompatActivity {
     private EditText editTextField = null;
@@ -47,9 +49,18 @@ public class CreateNoteActivity extends AppCompatActivity {
             case R.id.action_create_save:
                 editTextField.setEnabled(false);
                 String content = editTextField.getText().toString();
-                NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(this);
                 Intent data = new Intent();
-                data.putExtra(NotesListViewActivity.CREATED_NOTE, db.getNote(db.addNoteAndSync(content)));
+                //TODO generate Extra
+                /*
+                SyncService.addCallback(new ICallback() {
+                    @Override
+                    public void onFinish() {
+                        data.putExtra(NotesListViewActivity.CREATED_NOTE, SyncService.getCreatedNote());
+                    }
+                });
+                */
+                SyncService.startActionCreateNote(this,content);
+                //data.putExtra(NotesListViewActivity.CREATED_NOTE, );
                 setResult(RESULT_OK, data);
                 finish();
                 return true;
