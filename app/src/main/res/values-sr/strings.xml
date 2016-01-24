@@ -2,10 +2,16 @@
 <resources>
 
     <string name="app_name">оунКлауд белешке</string>
+    <string name="no_notes">Још нема белешки</string>
     <string name="action_create">Нова белешка</string>
     <string name="action_settings">Поставке</string>
     <string name="action_create_save">Сачувај</string>
+    <string name="action_create_cancel">Одустани</string>
+    <string name="action_edit_editing">Уреди</string>
     <string name="action_edit_save">Сачувај</string>
+    <string name="action_edit_saving">Уписујем&#8230;</string>
+    <string name="action_edit_saved">Уписано</string>
+    <string name="action_edit_cancel">Одустани</string>
     <string name="action_about">О програму</string>
     <string name="action_select_note">Изабери белешку</string>
     <string name="menu_delete">Обриши</string>
@@ -18,16 +24,23 @@
 
     <string name="copy">Копирај</string>
 
+    <string name="listview_updated_today">данас</string>
+    <string name="listview_updated_yesterday">јуче</string>
+    <string name="listview_updated_this_week">ове седмице</string>
+    <string name="listview_updated_this_month">овога месеца</string>
+    <string name="listview_updated_earlier">раније</string>
+
     <!-- Settings -->
 
     <string name="settings_server">Сервер</string>
-    <string name="settings_url">УРЛ</string>
+    <string name="settings_url">Адреса сервера</string>
     <string name="settings_url_check_description">Приказ доступности УРЛ-а.</string>
     <string name="settings_url_warn_http">УПОЗОРЕЊЕ: „http“ протокол није безбедан. Користите „https“.</string>
     <string name="settings_username">Корисничко име</string>
     <string name="settings_password">Лозинка</string>
     <string name="settings_password_check_description">Приказ тачности акредитива.</string>
-    <string name="settings_submit">У реду</string>
+    <string name="settings_submit">Повежи</string>
+    <string name="settings_submitting">Повезујем се&#8230;</string>
 
     <!-- Network -->
 
@@ -45,12 +58,32 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Поставке</string>
 
+
     <!-- About -->
 
     <string name="about_version_title">Издање</string>
     <string name="about_version">Текуће издање је <strong>0.4.0</strong></string>
+    <string name="about_maintainer_title">Главни програмер</string>
+    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_developers_title">Програмери</string>
+    <string name="about_developers">Стефан Нидерман (Stefan Niedermann), HeaDBanGer84</string>
+    <string name="about_translators_title">Преводиоци</string>
+    <string name="about_translators">Младен Пејаковић (српски)</string>
+    <string name="about_testers_title">Тестери</string>
+    <string name="about_testers">Јан Борхарт (Jan C. Borchardt)</string>
+    <string name="about_source_title">Изворни кôд</string>
+    <string name="about_source">Пројекат је хостован на Гитхабу: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues_title">Грешке</string>
+    <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу пријава: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_app_license_title">Лиценца апликације</string>
+    <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом Општом јавном лиценцом (ГПЛ) в2.</string>
+    <string name="about_app_license_button">Прикажи лиценцу</string>
     <string name="about_app_icon_disclaimer_title">Икона апликације</string>
     <string name="about_app_icon_disclaimer"><p>Изворни аутор <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> са <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Иконе</string>
     <string name="about_icons_disclaimer"><p>Све остале иконе ове апликације су <a href="https://materialdesignicons.com/" title="веза на вебсајт">иконе материјал дизајна</a> које је креирао Google Inc. и лиценциране су Creative Commons лиценцом.</p></string>
+
+    <string name="about_credits_tab_title">Заслуге</string>
+    <string name="about_contribution_tab_title">Допринос</string>
+    <string name="about_license_tab_title">Лиценца</string>
 </resources>
