@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import it.niedermann.owncloud.notes.R;
 
@@ -23,6 +25,8 @@ public class AboutFragmentLicenseTab extends Fragment {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GNU_GENERAL_PUBLIC_LICENSE)));
             }
         });
+        ((TextView) v.findViewById(R.id.about_app_icon_disclaimer)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((TextView) v.findViewById(R.id.about_icons_disclaimer)).setMovementMethod(LinkMovementMethod.getInstance());
         return v;
     }
 }
