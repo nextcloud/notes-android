@@ -50,17 +50,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                 editTextField.setEnabled(false);
                 String content = editTextField.getText().toString();
                 Intent data = new Intent();
-                //TODO generate Extra
-                /*
-                SyncService.addCallback(new ICallback() {
-                    @Override
-                    public void onFinish() {
-                        data.putExtra(NotesListViewActivity.CREATED_NOTE, SyncService.getCreatedNote());
-                    }
-                });
-                */
                 SyncService.startActionCreateNote(this,content);
-                //data.putExtra(NotesListViewActivity.CREATED_NOTE, );
                 setResult(RESULT_OK, data);
                 finish();
                 return true;

@@ -53,7 +53,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             startActivityForResult(settingsIntent, server_settings);
         }
         setContentView(R.layout.activity_notes_list_view);
-
+        SyncService.startActionSync(this);
         // Prepare Adapter
         adapter = new ItemAdapter(this);
         listView = (RecyclerView) findViewById(R.id.list_view);
@@ -64,8 +64,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         // Display Data
         // TODO Move to Adapter
-        SyncService.startActionSync(this);
-        setListView(SyncService.getNotes());
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
@@ -77,7 +75,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     @Override
                     public void onFinish() {
                         swipeRefreshLayout.setRefreshing(false);
-                        setListView(SyncService.getNotes());
+                        setListView(SyncService.getNotes(NotesListViewActivity.this));
                     }
                 });
             }
@@ -158,12 +156,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         if (requestCode == create_note_cmd) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                //not need because of db.synchronisation in createActivity
-
-                /*Note createdNote = (Note) data.getExtras().getSerializable(
-                        CREATED_NOTE);
-                adapter.add(createdNote);*/
-                setListView(SyncService.getNotes());
+                setListView(SyncService.getNotes(this));
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
@@ -173,7 +166,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 if (resultCode == RESULT_OK) {
                     Note editedNote = (Note) data.getExtras().getSerializable(
                             NoteActivity.EDIT_NOTE);
-                    adapter.add(editedNote);
+                    adapter.editNote(editedNote);
                 }
             }
         } else if (requestCode == server_settings) {
@@ -182,7 +175,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             SyncService.addCallback(new ICallback() {
                 @Override
                 public void onFinish() {
-                    setListView(SyncService.getNotes());
+                    setListView(SyncService.getNotes(NotesListViewActivity.this));
                 }
             });
             SyncService.startActionSync(this);
@@ -276,14 +269,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 case R.id.menu_delete:
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
-                        Note note = (Note) adapter.getItem(i);
-                        SyncService.startActionDeleteNoteAndSync(NotesListViewActivity.this, note.getId());
-                        // Not needed because of dbsync
-                        //adapter.remove(note);
+                        adapter.remove(adapter.getItem(i));
                     }
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
-                    setListView(SyncService.getNotes());
+                    setListView(SyncService.getNotes(NotesListViewActivity.this));
                     return true;
                 default:
                     return false;

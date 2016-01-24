@@ -55,9 +55,12 @@ public class SyncService extends IntentService {
         context.startService(intent);
     }
 
-    public static List<Note> getNotes() {
+    public static List<Note> getNotes(Context context) {
         if (db != null) return db.getNotes();
-        else throw new Resources.NotFoundException("Not Synced with Server");
+        else {
+            startActionSync(context);
+            return null;
+        }
     }
 
     public static Note getCreatedNote() {

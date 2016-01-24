@@ -12,6 +12,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.SyncService;
+import it.niedermann.owncloud.notes.util.ICallback;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -25,22 +27,31 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Item> itemList = null;
     private List<Integer> selected = null;
     private Context context = null;
-
-    public ItemAdapter(List<Note> noteList, Context context) {
-        super();
-        this.context = context;
-        this.itemList = new ArrayList<>();
-        this.selected = new ArrayList<>();
-        fillItemList(noteList);
-    }
-
-    public ItemAdapter(Context context) {
+/*
+    public ItemAdapter(final List<Note> noteList, Context context) {
         super();
         this.context = context;
         this.itemList = new ArrayList<>();
         this.selected = new ArrayList<>();
     }
+*/
+    public ItemAdapter(final Context context) {
+        super();
+        this.context = context;
+        this.itemList = new ArrayList<>();
+        this.selected = new ArrayList<>();
+        SyncService.addCallback(new ICallback() {
+            @Override
+            public void onFinish() {
+                fillItemList(SyncService.getNotes(context));
+            }
+        });
+        SyncService.startActionSync(context);
+    }
 
+    /*
+     *   Initial fill
+     */
 
     public void fillItemList(List<Note> noteList) {
         itemList.clear();
@@ -109,15 +120,77 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    /*
+     *    Manipulating Notes
+     */
 
-    public static void setNoteClickListener(NoteClickListener noteClickListener) {
-        ItemAdapter.noteClickListener = noteClickListener;
+    public void remove(Item item) {
+        if (!item.isSection()) {
+            final int index = itemList.indexOf(item);
+            SyncService.addCallback(new ICallback() {
+                @Override
+                public void onFinish() {
+                    itemList.remove(index);
+                }
+            });
+            Note noteItem = (Note) item;
+            SyncService.startActionDeleteNoteAndSync(context, noteItem.getId());
+        } else {
+            itemList.remove(item);
+        }
     }
 
-    public void add(Note createdNote) {
-        //DONE-TODO sort createdNote to first position?
+    public void editNote(Note note) {
+        //TODO correct sections
         // this.add(createdNote);
-        itemList.add(0,createdNote);
+        SyncService.startActionEditNote(context, note);
+        SyncService.addCallback(new ICallback() {
+            @Override
+            public void onFinish() {
+                itemList.add(0, SyncService.getCreatedNote());
+            }
+        });
+    }
+
+    public void add(String createdNote) {
+        //TODO correct sections
+        SyncService.startActionCreateNote(context, createdNote);
+        SyncService.addCallback(new ICallback() {
+            @Override
+            public void onFinish() {
+                itemList.add(0, SyncService.getCreatedNote());
+            }
+        });
+    }
+
+    /*
+     *
+     * Handle the selection
+     *
+     */
+
+    public boolean select(Integer position) {
+        return !selected.contains(position) && selected.add(position);
+    }
+
+    public void clearSelection() {
+        selected.clear();
+    }
+
+    public List<Integer> getSelected() {
+        return selected;
+    }
+
+    public boolean deselect(Integer position) {
+        for (int i = 0; i < selected.size(); i++) {
+            if (selected.get(i) == position) {
+                //position was selected and removed
+                selected.remove(i);
+                return true;
+            }
+        }
+        // position was not selected
+        return false;
     }
 
     // Create new views (invoked by the layout manager)
@@ -153,37 +226,15 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public boolean select(Integer position) {
-        return !selected.contains(position) && selected.add(position);
+    public static void setNoteClickListener(NoteClickListener noteClickListener) {
+        ItemAdapter.noteClickListener = noteClickListener;
     }
 
-    public void clearSelection() {
-        selected.clear();
-    }
-
-    public List<Integer> getSelected() {
-        return selected;
-    }
-
-    public boolean deselect(Integer position) {
-        for (int i = 0; i < selected.size(); i++) {
-            if (selected.get(i) == position) {
-                //position was selected and removed
-                selected.remove(i);
-                return true;
-            }
-        }
-        // position was not selected
-        return false;
-    }
 
     public Item getItem(int notePosition) {
         return itemList.get(notePosition);
     }
 
-    public void remove(Item item) {
-        itemList.remove(item);
-    }
 
     @Override
     public int getItemCount() {
@@ -197,6 +248,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface NoteClickListener {
         void onNoteClick(int position, View v);
+
         boolean onNoteLongClick(int position, View v);
     }
 
