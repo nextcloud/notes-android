@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import it.niedermann.owncloud.notes.R;
 
-public class AboutFragmentCredentialsTab extends Fragment {
+public class AboutFragmentCreditsTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_about_credentials_tab, container, false);
+        return inflater.inflate(R.layout.fragment_about_credits_tab, container, false);
     }
 }
