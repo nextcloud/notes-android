@@ -56,7 +56,7 @@
     <string name="error_username_password_invalid">մուտքագրված տվյալները սխալ են</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">կարքավորումներ</string>
+    <string name="snackbar_settings">կարգավորումներ</string>
 
     <!-- About -->
 
