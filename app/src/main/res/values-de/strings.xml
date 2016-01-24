@@ -85,4 +85,7 @@
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Mitmachen</string>
     <string name="about_license_tab_title">Lizenz</string>
+
+    <string name="widget_all_notes_title">Alle Notizen</string>
+    <string name="widget_single_note_title">Eine Notiz</string>
 </resources>

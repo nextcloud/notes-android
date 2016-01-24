@@ -141,7 +141,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
                 // < 10 minutes but after 00:00 today
                 if (i > 0) {
-                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
+                    //itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
                 }
                 todaySet = true;
             } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {

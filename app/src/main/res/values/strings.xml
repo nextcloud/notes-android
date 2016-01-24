@@ -44,9 +44,9 @@
 
     <!-- Network -->
 
-    <string name="network_connecting">Verbindung wird hergestellt</string>
-    <string name="network_connected">Verbunden</string>
-    <string name="network_disconnected">Kein Netzwerk verfügbar</string>
+    <string name="network_connecting">Connecting</string>
+    <string name="network_connected">Connected</string>
+    <string name="network_disconnected">No network available</string>
 
     <!-- Error -->
 
@@ -86,4 +86,7 @@
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Contribution</string>
     <string name="about_license_tab_title">License</string>
+
+    <string name="widget_all_notes_title">All Notes</string>
+    <string name="widget_single_note_title">Single Note</string>
 </resources>

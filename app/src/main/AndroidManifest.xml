@@ -64,7 +64,9 @@
 
         <!-- All Notes Widget -->
 
-        <receiver android:name="it.niedermann.owncloud.notes.android.widget.AllNotesWidget">
+        <receiver
+            android:name="it.niedermann.owncloud.notes.android.widget.AllNotesWidget"
+            android:label="@string/widget_all_notes_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -77,7 +79,9 @@
 
         <!-- Single Note Widget -->
 
-        <receiver android:name="it.niedermann.owncloud.notes.android.widget.SingleNoteWidget">
+        <receiver
+            android:name="it.niedermann.owncloud.notes.android.widget.SingleNoteWidget"
+            android:label="@string/widget_single_note_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
