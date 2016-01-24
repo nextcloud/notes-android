@@ -18,17 +18,6 @@
 
     <string name="copy">Копирај</string>
 
-    <!-- About -->
-
-	<string name="about_version_title">Издање</string>
-    <string name="about_version">Текуће издање је <strong>0.4.0</strong></string>
-	<string name="about_author_title">Аутор</string>
-	<string name="about_author">Ову апликацију за Андроид је направио и презентовао <a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
-    <string name="about_app_icon_disclaimer_title">Икона апликације</string>
-    <string name="about_app_icon_disclaimer"><p>Изворни аутор <a href="http://www.freepik.com" title="Freepik">Freepik</a> са <a href="http://www.flaticon.com/free-icon/ceo-copyrighting_15475" title="Flaticon">www.flaticon.com</a></p></string>
-    <string name="about_icons_disclaimer_title">Иконе</string>
-    <string name="about_icons_disclaimer"><p>Све остале иконе ове апликације су <a href="https://materialdesignicons.com/" title="веза на вебсајт">иконе материјал дизајна</a> које је креирао Google Inc. и лиценциране су Creative Commons лиценцом.</p></string>
-
     <!-- Settings -->
 
     <string name="settings_server">Сервер</string>
@@ -56,4 +45,12 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Поставке</string>
 
+    <!-- About -->
+
+    <string name="about_version_title">Издање</string>
+    <string name="about_version">Текуће издање је <strong>0.4.0</strong></string>
+    <string name="about_app_icon_disclaimer_title">Икона апликације</string>
+    <string name="about_app_icon_disclaimer"><p>Изворни аутор <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> са <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Иконе</string>
+    <string name="about_icons_disclaimer"><p>Све остале иконе ове апликације су <a href="https://materialdesignicons.com/" title="веза на вебсајт">иконе материјал дизајна</a> које је креирао Google Inc. и лиценциране су Creative Commons лиценцом.</p></string>
 </resources>

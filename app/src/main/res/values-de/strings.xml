@@ -62,14 +62,23 @@
 
     <string name="about_version_title">Version</string>
     <string name="about_version">Sie benutzen aktuell <strong>v0.4.0</strong></string>
-    <string name="about_author_title">Autor</string>
-    <string name="about_author">Diese Android-App wird entwickelt von <a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_developers_title">Entwickler</string>
+    <string name="about_developers">Stefan Niedermann, HeaDBanGer84</string>
+    <string name="about_translators_title">Übersetzer</string>
+    <string name="about_translators">pejakm (Serbian)</string>
+    <string name="about_testers_title">Tester</string>
+    <string name="about_testers">Jan C. Borchardt</string>
+    <string name="about_app_license_title">App Lizenz</string>
+    <string name="about_app_license">Diese Applikation ist lizenziert unter der GNU GENERAL PUBLIC LICENSE v2.</string>
+    <string name="about_app_license_button">Lizenz ansehen</string>
     <string name="about_app_icon_disclaimer_title">App-Icon</string>
-    <string name="about_app_icon_disclaimer"><p>Ursprüngliches Icon wurde erstellt von <a href="http://www.freepik.com" title="Freepik">Freepik</a> auf <a href="http://www.flaticon.com/free-icon/ceo-copyrighting_15475" title="Flaticon">www.flaticon.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Ursprüngliches Icon wurde erstellt von <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> auf <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Icons</string>
     <string name="about_icons_disclaimer"><p>Alle weiteren Icons, die in dieser App verwendet werden, sind <a href="https://materialdesignicons.com/" title="Link to Website">Material Design Icons</a> von Google Inc. und unter einer Creative Commons License lizensiert.</p></string>
 
     <string name="about_credits_tab_title">Credits</string>
-    <string name="about_contribution_tab_title">Contribution</string>
-    <string name="about_license_tab_title">License</string>
+    <string name="about_contribution_tab_title">Mitmachen</string>
+    <string name="about_license_tab_title">Lizenz</string>
 </resources>

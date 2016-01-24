@@ -39,48 +39,63 @@
             android:text="@string/about_version"/>
 
         <TextView
-            android:id="@+id/about_author_title"
+            android:id="@+id/about_maintainer_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_author_title"/>
+            android:text="@string/about_maintainer_title"/>
 
         <TextView
-            android:id="@+id/about_author"
+            android:id="@+id/about_maintainer"
             style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/about_author"/>
+            android:text="@string/about_maintainer"/>
 
         <TextView
-            android:id="@+id/about_app_icon_disclaimer_title"
+            android:id="@+id/about_developers_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_app_icon_disclaimer_title"/>
+            android:text="@string/about_developers_title"/>
 
         <TextView
-            android:id="@+id/about_app_icon_disclaimer"
+            android:id="@+id/about_developers"
             style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/about_app_icon_disclaimer"/>
+            android:text="@string/about_developers"/>
 
         <TextView
-            android:id="@+id/about_icons_disclaimer_title"
+            android:id="@+id/about_translators_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_icons_disclaimer_title"/>
+            android:text="@string/about_translators_title"/>
 
         <TextView
-            android:id="@+id/about_icons_disclaimer"
+            android:id="@+id/about_translators"
             style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/about_icons_disclaimer"/>
+            android:text="@string/about_translators"/>
+
+        <TextView
+            android:id="@+id/about_testers_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_testers_title"/>
+
+        <TextView
+            android:id="@+id/about_testers"
+            style="?android:attr/editTextPreferenceStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/about_testers"/>
     </LinearLayout>
 </ScrollView>

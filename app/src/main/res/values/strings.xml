@@ -63,10 +63,19 @@
 
     <string name="about_version_title">Version</string>
     <string name="about_version">You are currently using <strong>v0.4.0</strong></string>
-    <string name="about_author_title">Author</string>
-    <string name="about_author">This Android-Application is developed and presented by <a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_developers_title">Developers</string>
+    <string name="about_developers">Stefan Niedermann, HeaDBanGer84</string>
+    <string name="about_translators_title">Translators</string>
+    <string name="about_translators">pejakm (Serbian)</string>
+    <string name="about_testers_title">Testers</string>
+    <string name="about_testers">Jan C. Borchardt</string>
+    <string name="about_app_license_title">App License</string>
+    <string name="about_app_license">This application is licensed under the GNU GENERAL PUBLIC LICENSE v2.</string>
+    <string name="about_app_license_button">View License</string>
     <string name="about_app_icon_disclaimer_title">App-Icon</string>
-    <string name="about_app_icon_disclaimer"><p>Original icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com/free-icon/ceo-copyrighting_15475" title="Flaticon">www.flaticon.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Original icon made by <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> from <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Icons</string>
     <string name="about_icons_disclaimer"><p>All further icons used by this app are <a href="https://materialdesignicons.com/" title="Link to Website">Material Design Icons</a> made by Google Inc. and licensed under a Creative Commons License.</p></string>
 
