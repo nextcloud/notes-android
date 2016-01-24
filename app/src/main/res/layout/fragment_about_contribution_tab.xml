@@ -10,8 +10,33 @@
         android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
+            android:id="@+id/about_source_title"
+            style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Contribute on Github.com"/>
+            android:text="@string/about_source_title"/>
+
+        <TextView
+            android:id="@+id/about_source"
+            style="?android:attr/editTextPreferenceStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/about_source"/>
+
+        <TextView
+            android:id="@+id/about_issues_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_issues_title"/>
+
+        <TextView
+            android:id="@+id/about_issues"
+            style="?android:attr/editTextPreferenceStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/about_issues"/>
     </LinearLayout>
 </ScrollView>

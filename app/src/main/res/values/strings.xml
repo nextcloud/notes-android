@@ -71,6 +71,10 @@
     <string name="about_translators">pejakm (Serbian)</string>
     <string name="about_testers_title">Testers</string>
     <string name="about_testers">Jan C. Borchardt</string>
+    <string name="about_source_title">Source Code</string>
+    <string name="about_source">This project is hosted on GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues_title">Issues</string>
+    <string name="about_issues">You can report bugs, enhancement proposals and feature requests at the GitHub issue tracker: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">App License</string>
     <string name="about_app_license">This application is licensed under the GNU GENERAL PUBLIC LICENSE v2.</string>
     <string name="about_app_license_button">View License</string>
