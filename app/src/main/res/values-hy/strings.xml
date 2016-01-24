@@ -35,7 +35,7 @@
     <string name="settings_server">սերվեր</string>
     <string name="settings_url">սերվերի հասցեն</string>
     <string name="settings_url_check_description">ցույց է տալիս, որ տրված հասցեն հասանելի է</string>
-    <string name="settings_url_warn_http">ՈՒՇԱԴՐՈՒԹՅՈՒՆ: "http" պարունակում է վտանգ է. առաջարկում ենք օգտագործել "https".</string>
+    <string name="settings_url_warn_http">ՈՒՇԱԴՐՈՒԹՅՈՒՆ: "http" պարունակում է վտանգ. առաջարկում ենք օգտագործել "https".</string>
     <string name="settings_username">մուտքանուն</string>
     <string name="settings_password">գախտնաբառ</string>
     <string name="settings_password_check_description">ցույց է տալիս, որ մուտքագրված տվյալները ճիշտ են.</string>
@@ -67,15 +67,15 @@
     <string name="about_developers_title">ծրագրավորող</string>
     <string name="about_developers">Stefan Niedermann, HeaDBanGer84</string>
     <string name="about_translators_title">թարգմանիչ</string>
-    <string name="about_translators">pejakm (Serbian)</string>
+    <string name="about_translators">Արթուր Դավթյան</string>
     <string name="about_testers_title">թեսթավորող</string>
     <string name="about_testers">Jan C. Borchardt</string>
     <string name="about_source_title">ծրագրի կոդը</string>
     <string name="about_source">ծրագիրը տեղադրված է GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">հայց</string>
     <string name="about_issues">բոլոր առաջարկները կարող եք ներկայացնել GitHub հայցեր բաժնում: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
-    <string name="about_app_license_title">ծրագիր օգտագործելու լիցենզիա</string>
-    <string name="about_app_license">տվյալ ծրագիրը թուլատրված է GNU GENERAL PUBLIC LICENSE v2 կողմից.</string>
+    <string name="about_app_license_title">ծրագրի լիցենզիան</string>
+    <string name="about_app_license">տվյալ ծրագիրը լիցենզավորված է GNU GENERAL PUBLIC LICENSE v2 կողմից.</string>
     <string name="about_app_license_button">տեսնել լիցենզիան </string>
     <string name="about_app_icon_disclaimer_title">ծրագրի լոգոտիպը</string>
     <string name="about_app_icon_disclaimer"><p>նախնական լոգոտիպը ստեղծված է<a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> մեջ <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
