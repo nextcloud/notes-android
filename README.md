@@ -1,8 +1,6 @@
 # ownCloud Notes
 An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
 
-:construction: **Warning:** This app is beta. This means it is not tested well (only by some VMs and my personal device).
-
 :arrow_forward: **Access:** Since this app is currently not available in any Appstore, i will provide some versions in [my ownCloud instance](http://owncloud.niedermann.it/index.php/s/BOM5V1VZwscFk1k). Feel free to download and distribute. But *be careful*: This kind of installation does not include any kind of automatic updates, so you will have to check manually for new security and feature updates.
 
 ## :rocket: Features
@@ -10,7 +8,7 @@ An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
 * Share Text and Links as new Note into the App
 * Bulk Delete
 * Render MarkDown (using [Bypass](https://github.com/Uncodin/bypass))
-* English, German and Serbian UI
+* English, German, Russian, Armenian and Serbian UI
 
 ## :checkered_flag: Planned Features
 * Provide App on [F-Droid](https://f-droid.org/) App-Store ([#13](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/13))
