@@ -40,13 +40,6 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.context = context;
         this.itemList = new ArrayList<>();
         this.selected = new ArrayList<>();
-        SyncService.addCallback(new ICallback() {
-            @Override
-            public void onFinish() {
-                fillItemList(SyncService.getNotes(context));
-            }
-        });
-        SyncService.startActionSync(context);
     }
 
     /*

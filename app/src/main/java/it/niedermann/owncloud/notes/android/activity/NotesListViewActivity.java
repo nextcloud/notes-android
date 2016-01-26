@@ -51,19 +51,19 @@ public class NotesListViewActivity extends AppCompatActivity implements
         if (preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
+
+
+        } else {
+            SyncService.startActionSync(this);
         }
         setContentView(R.layout.activity_notes_list_view);
-        SyncService.startActionSync(this);
+
         // Prepare Adapter
         adapter = new ItemAdapter(this);
         listView = (RecyclerView) findViewById(R.id.list_view);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         ItemAdapter.setNoteClickListener(this);
-
-
-        // Display Data
-        // TODO Move to Adapter
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
@@ -87,7 +87,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
     /**
      * Click listener for <strong>Floating Action Button</strong>
-     * <p>
+     * <p/>
      * Creates a new Instance of CreateNoteActivity.
      *
      * @param v View

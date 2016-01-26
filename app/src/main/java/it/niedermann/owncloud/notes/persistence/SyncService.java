@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import it.niedermann.owncloud.notes.util.ICallback;
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
- * <p>
+ * <p/>
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
@@ -34,6 +35,7 @@ public class SyncService extends IntentService {
 
     private static NoteSQLiteOpenHelper db = null;
     private static Note createdNote = null;
+    private static List<Note> notes = null;
 
 
     public SyncService() {
@@ -48,6 +50,7 @@ public class SyncService extends IntentService {
      */
     // TODO: Customize helper method
     public static void startActionSync(Context context) {
+        Log.i(SyncService.class.getName(), "Start SycnService: ACTION_SYNC");
         //setup Database
         if (db == null) db = new NoteSQLiteOpenHelper(context);
         Intent intent = new Intent(context, SyncService.class);
@@ -56,10 +59,13 @@ public class SyncService extends IntentService {
     }
 
     public static List<Note> getNotes(Context context) {
-        if (db != null) return db.getNotes();
-        else {
-            startActionSync(context);
-            return null;
+        if(notes!= null) {
+            return notes;
+        }else{
+            if (db == null) db = new NoteSQLiteOpenHelper(context);
+            // Not started as Service to wait for the Notes!
+            handleActionSync();
+            return notes;
         }
     }
 
@@ -80,6 +86,7 @@ public class SyncService extends IntentService {
      */
     // TODO: Customize helper method
     public static void startActionEditNote(Context context, Note editedNote) {
+        Log.i(SyncService.class.getName(), "Start SycnService: ACTION_EDIT_NOTE id: " + editedNote.getId());
         //setup Database
         if (db == null) db = new NoteSQLiteOpenHelper(context);
         Intent intent = new Intent(context, SyncService.class);
@@ -97,6 +104,7 @@ public class SyncService extends IntentService {
      */
     // TODO: Customize helper method
     public static void startActionCreateNote(Context context, String noteContent) {
+        Log.i(SyncService.class.getName(), "Start SycnService: ACTION_CREATE_NOTE content: " + noteContent);
         //setup Database
         if (db == null) db = new NoteSQLiteOpenHelper(context);
         Intent intent = new Intent(context, SyncService.class);
@@ -106,6 +114,7 @@ public class SyncService extends IntentService {
     }
 
     public static void startActionDeleteNoteAndSync(Context context, long id) {
+        Log.i(SyncService.class.getName(), "Start SycnService: ACTION_DELETE_NOTE id: " + id);
         //setup Database
         if (db == null) db = new NoteSQLiteOpenHelper(context);
         Intent intent = new Intent(context, SyncService.class);
@@ -114,9 +123,10 @@ public class SyncService extends IntentService {
         context.startService(intent);
     }
 
-    public static void resetLocalDatabase(){
-        db=null;
+    public static void resetLocalDatabase() {
+        db = null;
     }
+
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
@@ -140,15 +150,18 @@ public class SyncService extends IntentService {
         if (param1 != -1) {
             db.deleteNoteAndSync(param1);
         }
+        notes = db.getNotes();
     }
 
     /**
      * Handle action Foo in the provided background thread with the provided
      * parameters.
      */
-    private void handleActionSync() {
+    private static void handleActionSync() {
+        Log.i(SyncService.class.getName(), "Start SycnService: handle ACTION_SYNC");
         // TODO: Handle action ACTION_SYNC
         db.synchronizeWithServer();
+        notes = db.getNotes();
     }
 
     /**
@@ -158,12 +171,14 @@ public class SyncService extends IntentService {
     private void handleActionEditNote(Note editedNote) {
         // TODO: Handle action ACTION_EDIT_NOTE
         db.updateNoteAndSync(editedNote);
+        notes = db.getNotes();
     }
 
     private void handleActionCreateNote(String noteContent) {
         // TODO: Handle action ACTION_CREATE_NOTE
-       long id = db.addNoteAndSync(noteContent);
+        long id = db.addNoteAndSync(noteContent);
         createdNote = db.getNote(id);
+        notes = db.getNotes();
     }
 
 

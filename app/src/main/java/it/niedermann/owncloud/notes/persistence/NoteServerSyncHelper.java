@@ -23,7 +23,7 @@ import it.niedermann.owncloud.notes.util.NotesClient;
 
 /**
  * Helps to synchronize the Database to the Server.
- * <p/>
+ * <p>
  * Created by stefan on 20.09.15.
  */
 public class NoteServerSyncHelper {
@@ -98,130 +98,69 @@ public class NoteServerSyncHelper {
         }
     }
 
+    // Not async anymore
     public void uploadEditedNotes() {
         List<Note> notes = db.getNotesByStatus(DBStatus.LOCAL_EDITED);
         for (Note note : notes) {
-            UploadEditedNotesTask editedNotesTask = new UploadEditedNotesTask();
-            editedNotesTask.execute(note);
+            operationsCount++;
+            try {
+                Note newNote = client.editNote(note.getId(), note.getContent());
+                db.updateNote(newNote);
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            asyncTaskFinished();
         }
     }
 
+    // Not async anymore
     public void uploadNewNotes() {
         List<Note> notes = db.getNotesByStatus(DBStatus.LOCAL_CREATED);
         for (Note note : notes) {
-            UploadNewNoteTask newNotesTask = new UploadNewNoteTask();
-            newNotesTask.execute(note);
+            operationsCount++;
+            try {
+                Note newNote = client.createNote(note.getContent());
+                //change Status of note
+                db.deleteNote(note.getId());
+                db.addNote(newNote);
+                asyncTaskFinished();
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
+            asyncTaskFinished();
         }
     }
 
+    // Not async anymore
     public void uploadDeletedNotes() {
         List<Note> notes = db.getNotesByStatus(DBStatus.LOCAL_DELETED);
         for (Note note : notes) {
-            UploadDeletedNoteTask deletedNotesTask = new UploadDeletedNoteTask();
-            deletedNotesTask.execute(note);
-        }
-    }
-
-    public void downloadNotes() {
-        DownloadNotesTask downloadNotesTask = new DownloadNotesTask();
-        downloadNotesTask.execute();
-    }
-
-    private class UploadNewNoteTask extends AsyncTask<Object, Void, Object[]> {
-        @Override
-        protected Object[] doInBackground(Object... params) {
-            operationsCount++;
-            Note oldNote = (Note) params[0];
-            try {
-                Note note = client.createNote(oldNote.getContent());
-                return new Object[]{note, oldNote.getId()};
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object[] params) {
-            if (params != null) {
-                Long id = (Long) params[1];
-                if (id != null) {
-                    db.deleteNote(((Long) params[1]));
-                }
-                db.addNote((Note) params[0]);
-            }
-            asyncTaskFinished();
-        }
-    }
-
-    private class UploadEditedNotesTask extends AsyncTask<Object, Void, Note> {
-        @Override
-        protected Note doInBackground(Object... params) {
             operationsCount++;
             try {
-                Note oldNote = (Note) params[0];
-                return client.editNote(oldNote.getId(), oldNote.getContent());
-            } catch (IOException | JSONException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Note note) {
-            db.updateNote(note);
-            asyncTaskFinished();
-        }
-    }
-
-    private class UploadDeletedNoteTask extends AsyncTask<Object, Void, Void> {
-        Long id = null;
-
-        @Override
-        protected Void doInBackground(Object... params) {
-            operationsCount++;
-            try {
-                id = ((Note) params[0]).getId();
+                long id = note.getId();
                 client.deleteNote(id);
+                db.deleteNote(id);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            db.deleteNote(id);
             asyncTaskFinished();
         }
     }
 
-    private class DownloadNotesTask extends AsyncTask<Object, Void, List<Note>> {
-        private boolean serverError = false;
-
-        @Override
-        protected List<Note> doInBackground(Object... params) {
-            operationsCount++;
-            List<Note> notes = new ArrayList<>();
-            try {
-                notes = client.getNotes();
-            } catch (IOException | JSONException e) {
-                serverError = true;
-                e.printStackTrace();
-            }
-            return notes;
-        }
-
-        @Override
-        protected void onPostExecute(List<Note> result) {
-            // Clear Database only if there was no Server Error
-            if (!serverError) {
-                db.clearDatabase();
-            }
-            for (Note note : result) {
+    // Not async anymore
+    public void downloadNotes() {
+        operationsCount++;
+        try {
+            List<Note> notesFromServer = client.getNotes();
+            for (Note note : notesFromServer) {
                 db.addNote(note);
             }
-            asyncTaskFinished();
+        } catch (IOException | JSONException e) {
+            // Clear Database only if there was no Server Error
+            db.clearDatabase();
+            e.printStackTrace();
         }
+        asyncTaskFinished();
     }
+
 }
