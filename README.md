@@ -17,7 +17,6 @@ Some versions (including the latest developer-version) can be accessed via [my o
 * English, German, Russian, Armenian and Serbian UI
 
 ## :checkered_flag: Planned Features
-* Provide App on [F-Droid](https://f-droid.org/) App-Store ([#13](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/13))
 * Table Layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
 * Simple widget for individual note ([#5](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/5))
 * Make a widget for all Notes ([#15](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/15))
