@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
-        minSdkVersion 22
+        minSdkVersion 10
         targetSdkVersion 23
-        versionCode 5
-        versionName "0.5.0"
+        versionCode 6
+        versionName "0.5.1"
     }
     buildTypes {
         release {
@@ -21,9 +21,9 @@ android {
 
 dependencies {
     compile 'com.commit451:bypasses:1.0.1'
-    compile 'com.android.support:support-v4:23.0.1'
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.android.support:design:23.0.1'
-    compile 'com.android.support:recyclerview-v7:23.0.1'
+    compile 'com.android.support:support-v4:23.1.0'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.android.support:design:23.1.0'
+    compile 'com.android.support:recyclerview-v7:23.1.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
 }
