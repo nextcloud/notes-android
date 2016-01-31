@@ -169,7 +169,11 @@ public class NoteServerSyncHelper {
 
         @Override
         protected void onPostExecute(Note note) {
-            db.updateNote(note);
+            if (note != null) {
+                // Note has been deleted on server?
+                // Maybe handle with Pop-Up and ask if Note should be local deleted or recreated on server.
+                db.updateNote(note);
+            }
             asyncTaskFinished();
         }
     }

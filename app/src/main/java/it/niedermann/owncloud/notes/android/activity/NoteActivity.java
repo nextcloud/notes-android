@@ -28,6 +28,9 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_single_note);
         note = (Note) getIntent().getSerializableExtra(
                 NotesListViewActivity.SELECTED_NOTE);
+        if (savedInstanceState != null) {
+            note = (Note) savedInstanceState.getSerializable("note");
+        }
         notePosition = getIntent().getIntExtra(
                 NotesListViewActivity.SELECTED_NOTE_POSITION, 0);
         findViewById(R.id.fab_edit).setOnClickListener(this);
@@ -39,6 +42,12 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         noteContent = (TextView) findViewById(R.id.single_note_content);
         noteContent.setText(note.getSpannableContent());
         findViewById(R.id.fab_edit).setOnClickListener(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable("note", note);
+        super.onSaveInstanceState(outState);
     }
 
     @Override

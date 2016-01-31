@@ -30,17 +30,6 @@
     <string name="listview_updated_this_month">Diesen Monat</string>
     <string name="listview_updated_earlier">Früher</string>
 
-    <!-- About -->
-
-	<string name="about_version_title">Version</string>
-    <string name="about_version">Sie benutzen aktuell <strong>v0.4.0</strong></string>
-	<string name="about_author_title">Autor</string>
-	<string name="about_author">Diese Android-App wird entwickelt von <a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
-    <string name="about_app_icon_disclaimer_title">App-Icon</string>
-    <string name="about_app_icon_disclaimer"><p>Ursprüngliches Icon wurde erstellt von <a href="http://www.freepik.com" title="Freepik">Freepik</a> auf <a href="http://www.flaticon.com/free-icon/ceo-copyrighting_15475" title="Flaticon">www.flaticon.com</a></p></string>
-    <string name="about_icons_disclaimer_title">Icons</string>
-    <string name="about_icons_disclaimer"><p>Alle weiteren Icons, die in dieser App verwendet werden, sind <a href="https://materialdesignicons.com/" title="Link to Website">Material Design Icons</a> von Google Inc. und unter einer Creative Commons License lizensiert.</p></string>
-
     <!-- Settings -->
 
     <string name="settings_server">Server</string>
@@ -68,4 +57,35 @@
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Einstellungen</string>
+
+    <!-- About -->
+
+    <string name="about_version_title">Version</string>
+    <string name="about_version">Sie benutzen aktuell <strong>v0.5.2</strong></string>
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_developers_title">Entwickler</string>
+    <string name="about_developers">Stefan Niedermann, HeaDBanGer84</string>
+    <string name="about_translators_title">Übersetzer</string>
+    <string name="about_translators">pejakm (Serbe), ageru (Français (France))</string>
+    <string name="about_testers_title">Tester</string>
+    <string name="about_testers">Jan C. Borchardt</string>
+    <string name="about_source_title">Quellcode</string>
+    <string name="about_source">Dieses Projekt ist auf GitHub gehosted: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues_title">Tickets</string>
+    <string name="about_issues">Sie können Fehler, Verbesserungsvorschläge oder Wünsche für neue Funktionen im GitHub Ticket-System erfassen: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_app_license_title">App Lizenz</string>
+    <string name="about_app_license">Diese Applikation ist lizenziert unter der GNU GENERAL PUBLIC LICENSE v2.</string>
+    <string name="about_app_license_button">Lizenz ansehen</string>
+    <string name="about_app_icon_disclaimer_title">App-Icon</string>
+    <string name="about_app_icon_disclaimer"><p>Ursprüngliches Icon wurde erstellt von <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> auf <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Icons</string>
+    <string name="about_icons_disclaimer"><p>Alle weiteren Icons, die in dieser App verwendet werden, sind <a href="https://materialdesignicons.com/" title="Link to Website">Material Design Icons</a> von Google Inc. und unter einer Creative Commons License lizensiert.</p></string>
+
+    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_contribution_tab_title">Mitmachen</string>
+    <string name="about_license_tab_title">Lizenz</string>
+
+    <string name="widget_all_notes_title">Alle Notizen</string>
+    <string name="widget_single_note_title">Eine Notiz</string>
 </resources>

@@ -78,7 +78,7 @@ public class NotesClientUtil {
             }
             JSONObject response = new JSONObject(result.toString());
             return response.getBoolean("installed");
-        } catch (IOException | JSONException e) {
+        } catch (IOException | JSONException | NullPointerException e) {
             return false;
         }
     }

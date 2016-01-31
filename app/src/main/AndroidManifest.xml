@@ -2,11 +2,11 @@
 <manifest
     package="it.niedermann.owncloud.notes"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="4"
-    android:versionName="0.4.0">
+    android:versionCode="7"
+    android:versionName="0.5.2">
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="10"
         android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -64,7 +64,9 @@
 
         <!-- All Notes Widget -->
 
-        <receiver android:name="it.niedermann.owncloud.notes.android.widget.AllNotesWidget">
+        <!--receiver
+            android:name="it.niedermann.owncloud.notes.android.widget.AllNotesWidget"
+            android:label="@string/widget_all_notes_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -73,11 +75,13 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/all_notes_widget_provider_info" />
         </receiver>
-        <service android:name=".android.widget.AllNotesWidget$StackWidgetService" />
+        <service android:name=".android.widget.AllNotesWidget$StackWidgetService" /-->
 
         <!-- Single Note Widget -->
 
-        <receiver android:name="it.niedermann.owncloud.notes.android.widget.SingleNoteWidget">
+        <!--receiver
+            android:name="it.niedermann.owncloud.notes.android.widget.SingleNoteWidget"
+            android:label="@string/widget_single_note_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -93,6 +97,6 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
-        </activity>
+        </activity-->
     </application>
 </manifest>
