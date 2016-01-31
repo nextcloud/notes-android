@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="it.niedermann.owncloud.notes"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="4"
-    android:versionName="0.4.0">
+    android:versionCode="7"
+    android:versionName="0.5.2">
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="10"
         android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -19,51 +22,55 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/OwnCloud"
-        >
+        android:theme="@style/OwnCloud">
+
         <!-- Apps -->
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            android:label="@string/app_name" >
+            android:name=".android.activity.NotesListViewActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.NoteActivity"
+            android:name=".android.activity.NoteActivity"
             android:label="@string/app_name"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" >
-        </activity>
+            android:parentActivityName=".android.activity.NotesListViewActivity"></activity>
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.SettingsActivity"
+            android:name=".android.activity.SettingsActivity"
             android:label="@string/app_name"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" >
-        </activity>
+            android:parentActivityName=".android.activity.NotesListViewActivity"
+            android:windowSoftInputMode="stateVisible"></activity>
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.CreateNoteActivity"
+            android:name=".android.activity.CreateNoteActivity"
             android:label="@string/action_create"
-            android:windowSoftInputMode="stateVisible" >
+            android:windowSoftInputMode="stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
+
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
+            android:name=".android.activity.EditNoteActivity"
             android:label="@string/menu_edit"
-            android:windowSoftInputMode="stateVisible" >
-        </activity>
+            android:windowSoftInputMode="stateVisible"></activity>
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"
+            android:name=".android.activity.AboutActivity"
             android:label="@string/menu_about"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" >
-        </activity>
+            android:parentActivityName=".android.activity.NotesListViewActivity"></activity>
 
         <!-- All Notes Widget -->
 
-        <receiver android:name="it.niedermann.owncloud.notes.android.widget.AllNotesWidget">
+
+        <!--
+        receiver
+            android:name="it.niedermann.owncloud.notes.android.widget.AllNotesWidget"
+            android:label="@string/widget_all_notes_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -72,11 +79,17 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/all_notes_widget_provider_info" />
         </receiver>
-        <service android:name=".android.widget.AllNotesWidget$StackWidgetService" />
+        <service android:name=".android.widget.AllNotesWidget$StackWidgetService" /
+        -->
+
 
         <!-- Single Note Widget -->
 
-        <receiver android:name="it.niedermann.owncloud.notes.android.widget.SingleNoteWidget">
+
+        <!--
+        receiver
+            android:name="it.niedermann.owncloud.notes.android.widget.SingleNoteWidget"
+            android:label="@string/widget_single_note_title">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -92,12 +105,17 @@
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
-        </activity>
+        </activity
+        -->
         <service android:name=".persistence.SyncService" />
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
+
     </application>
+
 </manifest>

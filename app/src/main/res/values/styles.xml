@@ -11,6 +11,7 @@
         <item name="android:buttonStyle">@style/ocbutton</item>
         <item name="android:windowBackground">@color/bg_normal</item>
     </style>
+
     <style name="fab">
         <item name="android:layout_margin">16dp</item>
         <item name="android:layout_width">wrap_content</item>

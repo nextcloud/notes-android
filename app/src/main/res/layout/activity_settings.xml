@@ -10,7 +10,7 @@
         android:id="@+id/settings_url_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_gap">
+        android:layout_marginTop="8dp">
 
         <EditText
             android:id="@+id/settings_url"

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/textView"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="30dp"
+            android:drawableTop="@drawable/ic_launcher"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/fg_default_low"
+            android:textSize="26sp"/>
+
+        <TextView
+            android:id="@+id/about_version_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_version_title"/>
+
+        <TextView
+            android:id="@+id/about_version"
+            style="?android:attr/editTextPreferenceStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/about_version"/>
+
+        <TextView
+            android:id="@+id/about_maintainer_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_maintainer_title"/>
+
+        <TextView
+            android:id="@+id/about_maintainer"
+            style="?android:attr/editTextPreferenceStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/about_maintainer"/>
+
+        <TextView
+            android:id="@+id/about_developers_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_developers_title"/>
+
+        <TextView
+            android:id="@+id/about_developers"
+            style="?android:attr/editTextPreferenceStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/about_developers"/>
+
+        <TextView
+            android:id="@+id/about_translators_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_translators_title"/>
+
+        <TextView
+            android:id="@+id/about_translators"
+            style="?android:attr/editTextPreferenceStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/about_translators"/>
+
+        <TextView
+            android:id="@+id/about_testers_title"
+            style="?android:attr/listSeparatorTextViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_testers_title"/>
+
+        <TextView
+            android:id="@+id/about_testers"
+            style="?android:attr/editTextPreferenceStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/about_testers"/>
+    </LinearLayout>
+</ScrollView>

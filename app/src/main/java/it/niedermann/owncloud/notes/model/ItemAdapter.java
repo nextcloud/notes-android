@@ -27,14 +27,15 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Item> itemList = null;
     private List<Integer> selected = null;
     private Context context = null;
-/*
-    public ItemAdapter(final List<Note> noteList, Context context) {
-        super();
-        this.context = context;
-        this.itemList = new ArrayList<>();
-        this.selected = new ArrayList<>();
-    }
-*/
+
+    /*
+        public ItemAdapter(final List<Note> noteList, Context context) {
+            super();
+            this.context = context;
+            this.itemList = new ArrayList<>();
+            this.selected = new ArrayList<>();
+        }
+    */
     public ItemAdapter(final Context context) {
         super();
         this.context = context;
@@ -113,7 +114,11 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    /*
+    public void add(Note createdNote) {
+        itemList.add(0, createdNote);
+        notifyDataSetChanged();
+    }
+            /*
      *    Manipulating Notes
      */
 
@@ -227,7 +232,6 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public Item getItem(int notePosition) {
         return itemList.get(notePosition);
     }
-
 
     @Override
     public int getItemCount() {

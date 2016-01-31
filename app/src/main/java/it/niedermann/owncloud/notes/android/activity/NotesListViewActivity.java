@@ -75,6 +75,10 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     @Override
                     public void onFinish() {
                         swipeRefreshLayout.setRefreshing(false);
+                        adapter.clearSelection();
+                        if (mActionMode != null) {
+                            mActionMode.finish();
+                        }
                         setListView(SyncService.getNotes(NotesListViewActivity.this));
                     }
                 });
@@ -156,7 +160,12 @@ public class NotesListViewActivity extends AppCompatActivity implements
         if (requestCode == create_note_cmd) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                setListView(SyncService.getNotes(this));
+                //not need because of db.synchronisation in createActivity
+
+                Note createdNote = (Note) data.getExtras().getSerializable(
+                        CREATED_NOTE);
+                adapter.add(createdNote);
+                //setListView(db.getNotes());
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {

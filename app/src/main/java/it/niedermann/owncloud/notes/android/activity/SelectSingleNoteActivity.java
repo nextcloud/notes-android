@@ -25,7 +25,7 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
  * Configuration Activity to select a single note which should be displayed in the SingleNoteWidget
  * Created by stefan on 08.10.15.
  */
-public class SelectSingleNoteActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class SelectSingleNoteActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener {
 
     int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     private NoteSQLiteOpenHelper db = null;
@@ -74,7 +74,7 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onNoteClick(int position, View v) {
         final Context context = SelectSingleNoteActivity.this;
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -87,5 +87,10 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements Adapt
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         setResult(RESULT_OK, resultValue);
         finish();
+    }
+
+    @Override
+    public boolean onNoteLongClick(int position, View v) {
+        return false;
     }
 }
