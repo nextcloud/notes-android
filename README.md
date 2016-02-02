@@ -13,8 +13,6 @@ An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
   <img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" />
 </a>
 
-Some versions (including the latest developer-version) can be accessed via [my ownCloud instance](http://owncloud.niedermann.it/index.php/s/BOM5V1VZwscFk1k). Feel free to download and distribute. But *be careful*: This kind of installation does not include any kind of automatic updates, so you will have to check manually for new security and feature updates.
-
 ## :rocket: Features
 * List, Create, Edit, Share and Delete Notes
 * Share Text and Links as new Note into the App
