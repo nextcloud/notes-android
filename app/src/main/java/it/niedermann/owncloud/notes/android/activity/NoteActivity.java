@@ -118,7 +118,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                     note = editedNote;
                     noteContent.setText(note.getSpannableContent());
                     actionBar.setTitle(note.getTitle());
-                    actionBar.setSubtitle(note.getModified("dd.MM.yyyy HH:mm"));
+                    actionBar.setSubtitle(DateUtils.getRelativeDateTimeString(getApplicationContext(), note.getModified().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
                 }
                 data.putExtra(NotesListViewActivity.SELECTED_NOTE_POSITION,
                         notePosition);
