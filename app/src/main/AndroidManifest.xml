@@ -2,8 +2,8 @@
 <manifest
     package="it.niedermann.owncloud.notes"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:versionCode="7"
-    android:versionName="0.5.2">
+    android:versionCode="8"
+    android:versionName="0.6.0">
 
     <uses-sdk
         android:minSdkVersion="10"
