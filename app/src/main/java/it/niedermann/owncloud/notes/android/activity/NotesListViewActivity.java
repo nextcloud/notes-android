@@ -1,14 +1,17 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,6 +47,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private ActionMode mActionMode;
     private SwipeRefreshLayout swipeRefreshLayout = null;
     private NoteSQLiteOpenHelper db = null;
+    private SearchView searchView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,7 +192,39 @@ public class NotesListViewActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_list_view, menu);
+        // Associate searchable configuration with the SearchView
+        final MenuItem item = menu.findItem(R.id.search);
+        searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                search(newText);
+                return true;
+            }
+        });
         return true;
+    }
+
+    private void search(String query) {
+        if (query.length() > 0) {
+            setListView(db.searchNotes(query));
+        } else {
+            setListView(db.getNotes());
+        }
+        listView.scrollToPosition(0);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            search(intent.getStringExtra(SearchManager.QUERY));
+        }
+        super.onNewIntent(intent);
     }
 
     /**
@@ -352,6 +388,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     }
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
+                    searchView.setIconified(true);
                     setListView(db.getNotes());
                     return true;
                 default:

@@ -6,7 +6,7 @@
     android:versionName="0.6.0">
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="11"
         android:targetSdkVersion="23" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,7 +28,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"/>
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"/>
         </activity>
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.NoteActivity"
