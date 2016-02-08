@@ -203,20 +203,25 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                search(newText);
+                search(newText.trim());
                 return true;
             }
         });
         return true;
     }
 
-    private void search(String query) {
-        if (query.length() > 0) {
-            setListView(db.searchNotes(query));
-        } else {
-            setListView(db.getNotes());
-        }
-        listView.scrollToPosition(0);
+    private void search(final String query) {
+        new Thread() {
+            @Override
+            public void run() {
+                if (query.length() > 0) {
+                    setListView(db.searchNotes(query));
+                } else {
+                    setListView(db.getNotes());
+                }
+                listView.scrollToPosition(0);
+            }
+        }.run();
     }
 
     @Override
@@ -349,6 +354,15 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     + " " + getString(R.string.ab_selected));
         }
         return selected;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (searchView.isIconified()) {
+            super.onBackPressed();
+        } else {
+            searchView.setIconified(true);
+        }
     }
 
     /**
