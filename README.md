@@ -14,29 +14,29 @@ An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
 </a>
 
 ## :rocket: Features
-* List, Create, Edit, Share and Delete Notes
-* Share Text and Links as new Note into the App
-* Bulk Delete
+* List, create, edit, share and delete notes
+* Share text and links as new note into the app
+* Bulk delete
 * Render MarkDown (using [Bypass](https://github.com/Uncodin/bypass))
 * English, German, Russian, Armenian, French and Serbian UI
 
-## :checkered_flag: Planned Features
-* Table Layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
+## :checkered_flag: Planned features
+* Table layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
 * Simple widget for individual note ([#5](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/5))
-* Make a widget for all Notes ([#15](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/15))
-* Local Search ([#19](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/19))
-* Handle Internationalization ([#14](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/14))
+* Make a widget for all notes ([#15](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/15))
+* Local search ([#19](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/19))
+* Handle internationalization ([#14](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/14))
 
 ## :eyes: Screenshots
 ![Demo 1](/demo-1.png)
 ![Demo 2](/demo-2.png)
 
 ## :wrench: Contribution
-* Test the App with different Devices
-* Write issues in the [Issue-Tracker](https://github.com/stefan-niedermann/OwnCloud-Notes/issues)
-* Provide Pull-Requests
-* Translate this App
-* Buy this App on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
+* Test the app with different devices
+* Write issues in the [issue tracker](https://github.com/stefan-niedermann/OwnCloud-Notes/issues)
+* Provide pull requests
+* Translate this app
+* Buy this app on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
 * Send me a bottle of your favorite beer :beers: :wink:
 
 ## :link: Requirements
@@ -44,7 +44,7 @@ An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
 * [ownCloud Notes](https://github.com/owncloud/notes) app enabled
 
 ## :notebook: License
-This Project is licensed under the [GNU GENERAL PUBLIC LICENSE](/LICENSE).
+This project is licensed under the [GNU GENERAL PUBLIC LICENSE](/LICENSE).
 
 ## :twisted_rightwards_arrows: Alternatives
 If you dislike this app and you are looking for alternatives: Have a look at [MyOwnNotes](https://github.com/aykit/MyOwnNotes).
