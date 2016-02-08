@@ -76,7 +76,7 @@
     <string name="about_issues_title">Грешке</string>
     <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу пријава: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">Лиценца апликације</string>
-    <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом Општом јавном лиценцом (ГПЛ) в2.</string>
+    <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом Општом јавном лиценцом (ГПЛ) в3+.</string>
     <string name="about_app_license_button">Прикажи лиценцу</string>
     <string name="about_app_icon_disclaimer_title">Икона апликације</string>
     <string name="about_app_icon_disclaimer"><p>Изворни аутор <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> са <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
