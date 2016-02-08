@@ -308,8 +308,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
             } else {
                 v.setSelected(true);
             }
-            mActionMode.setTitle(String.valueOf(adapter.getSelected().size())
-                    + " " + getString(R.string.ab_selected));
+            int size = adapter.getSelected().size();
+            mActionMode.setTitle(String.valueOf(getResources().getQuantityString(R.plurals.ab_selected, size, size)));
             int checkedItemCount = adapter.getSelected().size();
             boolean hasCheckedItems = checkedItemCount > 0;
 
@@ -350,8 +350,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             v.setSelected(selected);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
             int checkedItemCount = adapter.getSelected().size();
-            mActionMode.setTitle(String.valueOf(checkedItemCount)
-                    + " " + getString(R.string.ab_selected));
+            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
         }
         return selected;
     }
