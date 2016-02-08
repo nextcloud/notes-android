@@ -2,7 +2,7 @@
 <resources>
     <plurals
         name="ab_selected">
-        <item quantity="one">%d selectionnée(s)</item>
-        <item quantity="other">%d selectionnée(s)</item>
+        <item quantity="one">%d ausgewählt</item>
+        <item quantity="other">%d ausgewählt</item>
     </plurals>
 </resources>
