@@ -17,7 +17,21 @@ public class NoteUtil {
      * @return Spannable
      */
     public static CharSequence parseMarkDown(String s) {
-        return bypass.markdownToSpannable(s);
+        /*
+         * Appends two spaces at the end of every line to force a line break.
+         *
+         * @see #24
+         */
+        StringBuilder sb = new StringBuilder();
+        for (String line : s.split("\n")) {
+            sb.append(line);
+            // If line is not a list item
+            if (!line.trim().matches("^([\\-*]|[0-9]+\\.)(.)*")) {
+                sb.append("  ");
+            }
+            sb.append("\n");
+        }
+        return bypass.markdownToSpannable(sb.toString());
     }
 
     /**
