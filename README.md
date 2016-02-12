@@ -14,7 +14,7 @@ An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
 </a>
 
 ## :rocket: Features
-* List, create, edit, share and delete notes
+* List, create, edit, share, search and delete notes
 * Share text and links as new note into the app
 * Bulk delete
 * Render MarkDown (using [Bypass](https://github.com/Uncodin/bypass))
@@ -24,7 +24,6 @@ An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
 * Table layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
 * Simple widget for individual note ([#5](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/5))
 * Make a widget for all notes ([#15](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/15))
-* Local search ([#19](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/19))
 * Handle internationalization ([#14](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/14))
 
 ## :eyes: Screenshots
