@@ -47,6 +47,10 @@ public class Note implements Item, Serializable {
                 .format(this.getModified().getTimeInMillis());
     }
 
+    public void setModified(Calendar modified) {
+        this.modified = modified;
+    }
+
     public String getContent() {
         return content;
     }

@@ -11,11 +11,12 @@
 
         <TextView
             android:id="@+id/single_note_content"
-        android:layout_width="match_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/fg_default" />
+            android:textColor="@color/fg_default"
+            android:textIsSelectable="true"/>
     </ScrollView>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_edit"

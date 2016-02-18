@@ -146,8 +146,34 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public List<Note> getNotes() {
         List<Note> notes = new ArrayList<>();
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle()});
+        if (cursor.moveToFirst()) {
+            do {
+                Calendar modified = Calendar.getInstance();
+                try {
+                    String modifiedStr = cursor.getString(3);
+                    if (modifiedStr != null)
+                        modified.setTime(new SimpleDateFormat(DATE_FORMAT, Locale.GERMANY).parse(modifiedStr));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                notes.add(new Note(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return notes;
+    }
+
+    /**
+     * Returns a list of all Notes in the Database
+     *
+     * @return List&lt;Note&gt;
+     */
+    public List<Note> searchNotes(String query) {
+        List<Note> notes = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? AND " + key_content + " LIKE ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "%" + query + "%"});
         if (cursor.moveToFirst()) {
             do {
                 Calendar modified = Calendar.getInstance();

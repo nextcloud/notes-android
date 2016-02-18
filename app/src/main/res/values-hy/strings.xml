@@ -20,8 +20,6 @@
     <string name="menu_share">կիսվել</string>
     <string name="menu_about">էջի վերաբերյալ</string>
 
-    <string name="ab_selected">ընտրված է</string>
-
     <string name="copy">պատճենահանել</string>
 
     <string name="listview_updated_today">այսօր</string>
@@ -61,13 +59,13 @@
     <!-- About -->
 
     <string name="about_version_title">տարբերակ</string>
-    <string name="about_version">դուք օգտագործում եք <strong>v0.5.2</strong></string>
+    <string name="about_version">դուք օգտագործում եք <strong>v0.7.0</strong></string>
     <string name="about_maintainer_title">ղեկավար</string>
     <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">ծրագրավորող</string>
     <string name="about_developers">Stefan Niedermann, HeaDBanGer84</string>
     <string name="about_translators_title">թարգմանիչ</string>
-    <string name="about_translators">Արթուր Դավթյան</string>
+    <string name="about_translators">Արթուր Դավթյան, ageru (Français (France))</string>
     <string name="about_testers_title">թեսթավորող</string>
     <string name="about_testers">Jan C. Borchardt</string>
     <string name="about_source_title">ծրագրի կոդը</string>
@@ -75,7 +73,7 @@
     <string name="about_issues_title">հայց</string>
     <string name="about_issues">բոլոր առաջարկները կարող եք ներկայացնել GitHub հայցեր բաժնում: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">ծրագրի լիցենզիան</string>
-    <string name="about_app_license">տվյալ ծրագիրը լիցենզավորված է GNU GENERAL PUBLIC LICENSE v2 կողմից.</string>
+    <string name="about_app_license">տվյալ ծրագիրը լիցենզավորված է GNU GENERAL PUBLIC LICENSE v3+ կողմից.</string>
     <string name="about_app_license_button">տեսնել լիցենզիան </string>
     <string name="about_app_icon_disclaimer_title">ծրագրի լոգոտիպը</string>
     <string name="about_app_icon_disclaimer"><p>նախնական լոգոտիպը ստեղծված է<a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> մեջ <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>

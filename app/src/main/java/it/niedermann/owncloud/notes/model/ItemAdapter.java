@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,14 +89,18 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public boolean deselect(Integer position) {
+        Log.v("Note", "Position: " + position);
         for (int i = 0; i < selected.size(); i++) {
+            Log.v("Note", "Compare: " + selected.get(i) + " == " + position);
             if (selected.get(i) == position) {
                 //position was selected and removed
                 selected.remove(i);
+                Log.v("Note", "Return: true");
                 return true;
             }
         }
         // position was not selected
+        Log.v("Note", "Return: false");
         return false;
     }
 

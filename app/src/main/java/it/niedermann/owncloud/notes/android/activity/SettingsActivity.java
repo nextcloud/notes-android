@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
@@ -238,7 +239,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Log.e("Note", "invalid login");
                 btn_submit.setText(R.string.settings_submit);
                 setInputsEnabled(true);
-                //TODO Show Error Message
+                Toast.makeText(getApplicationContext(), getString(R.string.error_username_password_invalid), Toast.LENGTH_LONG).show();
             }
         }
 

@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -18,6 +19,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class EditNoteActivity extends AppCompatActivity {
     private final long DELAY = 1000; // in ms
@@ -105,7 +107,11 @@ public class EditNoteActivity extends AppCompatActivity {
         if (ab != null) {
             ab.setSubtitle(getResources().getString(R.string.action_edit_saving));
         }
+        // #74
+        note.setModified(Calendar.getInstance());
         note.setContent(((EditText) findViewById(R.id.editContent)).getText().toString());
+        // #80
+        note.setTitle(NoteUtil.generateNoteTitle(note.getContent()));
         NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(this);
         db.getNoteServerSyncHelper().addCallback(new ICallback() {
             @Override

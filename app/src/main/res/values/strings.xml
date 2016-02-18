@@ -19,8 +19,6 @@
     <string name="menu_edit">Edit</string>
     <string name="menu_share">Share</string>
     <string name="menu_about">About</string>
-    
-    <string name="ab_selected">selected</string>
 
     <string name="copy">Copy</string>
 
@@ -62,13 +60,13 @@
     <!-- About -->
 
     <string name="about_version_title">Version</string>
-    <string name="about_version">You are currently using <strong>v0.5.2</strong></string>
+    <string name="about_version">You are currently using <strong>v0.7.0</strong></string>
     <string name="about_maintainer_title">Maintainer</string>
     <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">Developers</string>
     <string name="about_developers">Stefan Niedermann, HeaDBanGer84</string>
     <string name="about_translators_title">Translators</string>
-    <string name="about_translators">pejakm (Serbian)</string>
+    <string name="about_translators">pejakm (Serbe), ageru (Français (France))</string>
     <string name="about_testers_title">Testers</string>
     <string name="about_testers">Jan C. Borchardt</string>
     <string name="about_source_title">Source code</string>
@@ -76,7 +74,7 @@
     <string name="about_issues_title">Issues</string>
     <string name="about_issues">You can report bugs, enhancement proposals and feature requests at the GitHub issue tracker: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">App license</string>
-    <string name="about_app_license">This application is licensed under the GNU GENERAL PUBLIC LICENSE v2.</string>
+    <string name="about_app_license">This application is licensed under the GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">View license</string>
     <string name="about_app_icon_disclaimer_title">App icon</string>
     <string name="about_app_icon_disclaimer"><p>Original icon made by <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> from <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>

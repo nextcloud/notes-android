@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals
+        name="ab_selected">
+        <item quantity="one">%d изабрана</item>
+        <item quantity="few">%d изабрана</item>
+        <item quantity="other">%d изабрана</item>
+    </plurals>
+</resources>

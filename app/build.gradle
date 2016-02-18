@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
-        minSdkVersion 10
+        minSdkVersion 11
         targetSdkVersion 23
-        versionCode 7
-        versionName "0.5.2"
+        versionCode 9
+        versionName "0.7.0"
     }
     buildTypes {
         release {
