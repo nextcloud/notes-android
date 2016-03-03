@@ -29,7 +29,6 @@
     <string name="listview_updated_earlier">Earlier</string>
 
     <!-- Settings -->
-
     <string name="settings_server">Server</string>
     <string name="settings_url">Server address</string>
     <string name="settings_url_check_description">Shows if the address can be pinged.</string>
@@ -41,16 +40,15 @@
     <string name="settings_submitting">Connecting &#8230;</string>
 
     <!-- Network -->
-
     <string name="network_connecting">Connecting</string>
     <string name="network_connected">Connected</string>
     <string name="network_disconnected">No network available</string>
 
     <!-- Error -->
-
-    <string name="error_url_malformed">Wrong server address</string>
     <string name="error_json">JSON error</string>
     <string name="error_io">IO error</string>
+    <string name="error_invalid_login">Invalid login</string>
+    <string name="error_url_malformed">Wrong server address</string>
     <string name="error_username_password_invalid">Wrong username or password</string>
 
     <!-- Snackbar Actions -->
@@ -58,7 +56,6 @@
 
 
     <!-- About -->
-
     <string name="about_version_title">Version</string>
     <string name="about_version">You are currently using <strong>v0.7.0</strong></string>
     <string name="about_maintainer_title">Maintainer</string>
