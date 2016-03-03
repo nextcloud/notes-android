@@ -48,9 +48,10 @@
 
     <!-- Error -->
 
-    <string name="error_url_malformed">Adresse du serveur invalide</string>
     <string name="error_json">Erreur de JSON</string>
     <string name="error_io">Erreur d\'E/S</string>
+    <string name="error_invalid_login">Ouverture de session invalide</string>
+    <string name="error_url_malformed">Adresse du serveur invalide</string>
     <string name="error_username_password_invalid">Identifiant ou mot de passe invalide</string>
 
     <!-- Snackbar Actions -->
