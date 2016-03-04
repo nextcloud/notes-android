@@ -29,7 +29,6 @@
     <string name="listview_updated_earlier">Plus tôt</string>
 
     <!-- Settings -->
-
     <string name="settings_server">Serveur</string>
     <string name="settings_url">Adresse du serveur</string>
     <string name="settings_url_check_description">Visible si l\'adresse répond aux pings.</string>
@@ -41,24 +40,22 @@
     <string name="settings_submitting">Connexion en cours&#8230;</string>
 
     <!-- Network -->
-
     <string name="network_connecting">Connexion en cours</string>
     <string name="network_connected">Connecté</string>
     <string name="network_disconnected">Aucune connexion réseau disponible</string>
 
     <!-- Error -->
-
-    <string name="error_url_malformed">Adresse du serveur invalide</string>
     <string name="error_json">Erreur de JSON</string>
     <string name="error_io">Erreur d\'E/S</string>
-    <string name="error_username_password_invalid">Identifiant ou mot de passe invalide</string>
+    <string name="error_invalid_login">Détails de connexion incorrects</string>
+    <string name="error_url_malformed">Adresse du serveur incorrecte</string>
+    <string name="error_username_password_invalid">Identifiant ou mot de passe incorrect</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Paramètres</string>
 
 
     <!-- About -->
-
     <string name="about_version_title">Version</string>
     <string name="about_version">Vous utilisez actuellement la <strong>v0.7.0</strong></string>
     <string name="about_maintainer_title">Responsable</string>
