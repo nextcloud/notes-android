@@ -47,7 +47,7 @@
     <!-- Error -->
     <string name="error_json">JSON-Fehler</string>
     <string name="error_io">IO-Fehler</string>
-    <string name="error_invalid login">Login fehlgeschlagen</string>
+    <string name="error_invalid_login">Login fehlgeschlagen</string>
     <string name="error_url_malformed">URL nicht korrekt</string>
     <string name="error_username_password_invalid">Benutzername / Passwort nicht korrekt</string>
 

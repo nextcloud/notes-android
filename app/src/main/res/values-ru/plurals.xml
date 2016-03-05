@@ -2,7 +2,7 @@
 <resources>
     <plurals
         name="ab_selected">
-        <item quantity="one">%d выбрано</item>
+        <item quantity="one">%d выбрана</item>
         <item quantity="few">%d выбрано</item>
         <item quantity="many">%d выбрано</item>
         <item quantity="other">%d выбрано</item>
