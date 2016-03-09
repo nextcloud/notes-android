@@ -2,85 +2,87 @@
 <resources>
 
     <string name="app_name">ownCloud Notes</string>
-    <string name="no_notes">пока никаких заметок</string>
-    <string name="action_create">новые заметки</string>
-    <string name="action_settings">настройки</string>
-    <string name="action_create_save">запомнить</string>
-    <string name="action_create_cancel">прервать</string>
-    <string name="action_edit_editing">обработать</string>
-    <string name="action_edit_save">запомнить</string>
-    <string name="action_edit_saving">запомнить&#8230;</string>
-    <string name="action_edit_saved">в памяти</string>
-    <string name="action_edit_cancel">прервать</string>
-    <string name="action_select_note">выбрать заметку</string>
-    <string name="action_about">о ownCloud Notes</string>
-    <string name="menu_delete">удалить</string>
-    <string name="menu_copy">скопировать</string>
-    <string name="menu_edit">обработать</string>
-    <string name="menu_share">поделиться</string>
-    <string name="menu_about">о ownCloud Notes</string>
+    <string name="no_notes">Заметок пока нет</string>
+    <string name="action_about">О программе</string>
+    <string name="action_create">Новая заметка</string>
+    <string name="action_create_cancel">Отмена</string>
+    <string name="action_create_save">Сохранить</string>
+    <string name="action_edit_cancel">Отмена</string>
+    <string name="action_edit_editing">Редактировать</string>
+    <string name="action_edit_save">Сохранить</string>
+    <string name="action_edit_saved">Сохранено</string>
+    <string name="action_select_note">Выбрать заметку</string>
+    <string name="action_settings">Настройки</string>
+    <string name="menu_about">О программе</string>
+    <string name="menu_copy">Копировать</string>
+    <string name="menu_edit">Редактировать</string>
+    <string name="action_edit_saving">Сохранение …</string>
+    <string name="menu_delete">Удалить</string>
+    <string name="menu_share">Поделиться</string>
 
-    <string name="copy">копия</string>
+    <string name="copy">Копировать</string>
 
-    <string name="listview_updated_today">сегодня</string>
-    <string name="listview_updated_yesterday">вчера</string>
-    <string name="listview_updated_this_week">это неделя</string>
-    <string name="listview_updated_this_month">этот месяц</string>
-    <string name="listview_updated_earlier">ранее</string>
+    <string name="listview_updated_today">Сегодня</string>
+    <string name="listview_updated_yesterday">Вчера</string>
+    <string name="listview_updated_this_week">Эта неделя</string>
+    <string name="listview_updated_this_month">Этот месяц</string>
+    <string name="listview_updated_earlier">Ранее</string>
 
     <!-- Settings -->
 
-    <string name="settings_server">сервер</string>
-    <string name="settings_url">адрес сервера</string>
-    <string name="settings_url_check_description">показывает,что заданный адрес доступен.</string>
-    <string name="settings_url_warn_http">ВНИМАНИЕ: "http" не надёжен. пожалуйста используйте "https"</string>
-    <string name="settings_username">логин</string>
-    <string name="settings_password">пароль</string>
-    <string name="settings_password_check_description">показывает, что данные доступа корректны</string>
-    <string name="settings_submit">соединить</string>
-    <string name="settings_submitting">соединяет&#8230;</string>
+    <string name="settings_url_warn_http">ВНИМАНИЕ: "http" ненадёжен. Пожалуйста, используйте "https"</string>
+    <string name="settings_submitting">Соединение …</string>
+    <string name="settings_password">Пароль</string>
+    <string name="settings_password_check_description">Показывает, если учётные данные являются правильными.</string>
+    <string name="settings_server">Сервер</string>
+    <string name="settings_submit">Соединить</string>
+    <string name="settings_url">Адрес сервера</string>
+    <string name="settings_url_check_description"> Показывает, если адрес доступен.</string>
+    <string name="settings_username">Логин</string>
 
     <!-- Network -->
 
-    <string name="network_connecting">соединение производится</string>
-    <string name="network_connected">соединено</string>
-    <string name="network_disconnected">связь не доступна</string>
+    <string name="network_connecting">Соединение</string>
+    <string name="network_connected">Соединено</string>
+    <string name="network_disconnected">Сеть недоступна</string>
 
     <!-- Error -->
-
-    <string name="error_url_malformed">не правильно задан адрес</string>
-    <string name="error_json">JSON ошибка</string>
-    <string name="error_io">IO ошибка</string>
-    <string name="error_username_password_invalid">данные доступа не корректны</string>
+    <string name="error_invalid_login">Неверный логин</string>
+    <string name="error_io">Ошибка ввода/вывода</string>
+    <string name="error_json">Ошибка JSON</string>
+    <string name="error_url_malformed">Неверный адрес</string>
+    <string name="error_username_password_invalid">Неправильный логин или пароль</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">настройки</string>
+    <string name="snackbar_settings">Настройки</string>
 
     <!-- About -->
-
-    <string name="about_version_title">версия</string>
-    <string name="about_version">вы сейчас используете <strong>v0.7.0</strong></string>
-    <string name="about_maintainer_title">руководитель</string>
+    <string name="about_version">Вы используете <strong>v0.7.0</strong></string>
     <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
-    <string name="about_developers_title">разработчики</string>
+    <string name="about_developers_title">Разработчики</string>
     <string name="about_developers">Stefan Niedermann, HeaDBanGer84</string>
-    <string name="about_translators_title">переводчики</string>
-    <string name="about_translators">pejakm (Serbian), ageru (Français (France))</string>
-    <string name="about_testers_title">испытатели</string>
+    <string name="about_translators">pejakm (Сербский), ageru (Французский), proninyaroslav (Русский)</string>
     <string name="about_testers">Jan C. Borchardt</string>
-    <string name="about_source_title">код программы</string>
-    <string name="about_source">программа выставленна на GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
-    <string name="about_issues_title">заявки</string>
-    <string name="about_issues">вы можете свои пожелания и предложения по функциональности ownCloud Notes изложить в GitHub системе заявок: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
-    <string name="about_app_license_title">лицензия программы</string>
-    <string name="about_app_license">это программа лицензированна под GNU GENERAL PUBLIC LICENSE v3+.</string>
-    <string name="about_app_license_button">просмотреть лицензию</string>
-    <string name="about_app_icon_disclaimer_title">логотип программы</string>
-    <string name="about_app_icon_disclaimer"><p>первоначальый логотип был составлен <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> на <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
-    <string name="about_icons_disclaimer_title">логотипы</string>
-    <string name="about_icons_disclaimer"><p>все дальнейшие логотипы, которые используются в этой программе являются <a href="https://materialdesignicons.com/" title="Link to Website">Material Design логотипы</a> от Google Inc. и лицензированно под Creative Commons License.</p></string>
+    <string name="about_source">Проект размещён на GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues">Вы можете сообщать об ошибках, предложениях об улучшении и пожеланиях в систему тикетов GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_app_license_title">Лицензия программы</string>
+    <string name="about_app_license">Программа выпускается под лицензией GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Посмотреть лицензию</string>
+    <string name="about_app_icon_disclaimer"><p>Первоначальный логотип был сделан <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> на <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
+    <string name="about_icons_disclaimer"><p>Все дальнейшие значки, которые используются в этой программе, являются <a href="https://materialdesignicons.com/" title="Link to Website">Material Design значки</a> от Google Inc. и лицензированны под Creative Commons License.</p></string>
 
-    <string name="about_credits_tab_title">титры</string>
-    <string name="about_contribution_tab_title">учавствовать</string>
-    <string name="about_license_tab_title">лицензия</string>
+    <string name="about_contribution_tab_title">Учавствовать</string>
+    <string name="about_app_icon_disclaimer_title">Значок программы</string>
+    <string name="about_credits_tab_title">Заслуги</string>
+    <string name="about_icons_disclaimer_title">Значки</string>
+    <string name="about_issues_title">Тикеты</string>
+    <string name="about_license_tab_title">Лицензия</string>
+    <string name="about_maintainer_title">Сопровождающий</string>
+    <string name="about_source_title">Исходный код</string>
+    <string name="about_testers_title">Тестеры</string>
+    <string name="about_translators_title">Переводчики</string>
+    <string name="about_version_title">Версия</string>
+
+    <string name="widget_all_notes_title">Все заметки</string>
+    <string name="widget_single_note_title">Одна заметка</string>
 </resources>

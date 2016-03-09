@@ -239,7 +239,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Log.e("Note", "invalid login");
                 btn_submit.setText(R.string.settings_submit);
                 setInputsEnabled(true);
-                Toast.makeText(getApplicationContext(), getString(R.string.invalid_login), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.error_invalid_login), Toast.LENGTH_LONG).show();
             }
         }
 

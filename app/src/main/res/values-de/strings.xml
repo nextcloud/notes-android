@@ -47,7 +47,7 @@
     <!-- Error -->
     <string name="error_json">JSON-Fehler</string>
     <string name="error_io">IO-Fehler</string>
-    <string name="error_invalid login">Login fehlgeschlagen</string>
+    <string name="error_invalid_login">Login fehlgeschlagen</string>
     <string name="error_url_malformed">URL nicht korrekt</string>
     <string name="error_username_password_invalid">Benutzername / Passwort nicht korrekt</string>
 
@@ -62,7 +62,7 @@
     <string name="about_developers_title">Entwickler</string>
     <string name="about_developers">Stefan Niedermann, HeaDBanGer84</string>
     <string name="about_translators_title">Übersetzer</string>
-    <string name="about_translators">pejakm (Serbe), ageru (Français (France))</string>
+    <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian)</string>
     <string name="about_testers_title">Tester</string>
     <string name="about_testers">Jan C. Borchardt</string>
     <string name="about_source_title">Quellcode</string>
