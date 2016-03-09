@@ -226,9 +226,26 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @SuppressWarnings("UnusedReturnValue")
     public int updateNoteAndSync(Note note) {
         SQLiteDatabase db = this.getWritableDatabase();
+        DBStatus newStatus = DBStatus.LOCAL_EDITED;
+        Cursor cursor =
+                db.query(table_notes,
+                        columns,
+                        key_id + " = ? AND " + key_status + " != ?",
+                        new String[]{String.valueOf(note.getId()), DBStatus.LOCAL_DELETED.getTitle()},
+                        null,
+                        null,
+                        null,
+                        null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            if (DBStatus.valueOf(cursor.getString(1)) == DBStatus.LOCAL_CREATED) {
+                newStatus = DBStatus.LOCAL_CREATED;
+            }
+            cursor.close();
+        }
         ContentValues values = new ContentValues();
         values.put(key_id, note.getId());
-        values.put(key_status, DBStatus.LOCAL_EDITED.getTitle());
+        values.put(key_status, newStatus.getTitle());
         values.put(key_title, note.getTitle());
         values.put(key_modified, note.getModified(DATE_FORMAT));
         values.put(key_content, note.getContent());
