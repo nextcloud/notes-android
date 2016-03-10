@@ -238,7 +238,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                         null);
         if (cursor != null) {
             cursor.moveToFirst();
-            if (DBStatus.valueOf(cursor.getString(1)) == DBStatus.LOCAL_CREATED) {
+            String status = cursor.getString(1);
+            if (!"".equals(status) && DBStatus.valueOf(status) == DBStatus.LOCAL_CREATED) {
                 newStatus = DBStatus.LOCAL_CREATED;
             }
             cursor.close();
