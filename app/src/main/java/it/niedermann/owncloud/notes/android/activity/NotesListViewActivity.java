@@ -103,7 +103,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 setListView(db.getNotes());
             }
         });
-        db.synchronizeWithServer();
+        db.getNoteServerSyncHelper().downloadNotes();
     }
 
     /**
