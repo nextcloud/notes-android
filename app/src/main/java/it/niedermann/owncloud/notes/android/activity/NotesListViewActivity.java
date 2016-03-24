@@ -92,7 +92,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
      * Performs a server synchronization and set the RecyclerView
      */
     private void refresh() {
-        swipeRefreshLayout.setRefreshing(true);
         db.getNoteServerSyncHelper().addCallback(new ICallback() {
             @Override
             public void onFinish() {
