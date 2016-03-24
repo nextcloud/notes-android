@@ -64,7 +64,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         // Display Data
         db = new NoteSQLiteOpenHelper(this);
-        db.synchronizeWithServer();
         setListView(db.getNotes());
 
         // Pull to Refresh
@@ -72,23 +71,40 @@ public class NotesListViewActivity extends AppCompatActivity implements
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                db.getNoteServerSyncHelper().addCallback(new ICallback() {
-                    @Override
-                    public void onFinish() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        adapter.clearSelection();
-                        if (mActionMode != null) {
-                            mActionMode.finish();
-                        }
-                        setListView(db.getNotes());
-                    }
-                });
-                db.synchronizeWithServer();
+                refresh();
             }
         });
 
         // Floating Action Button
         findViewById(R.id.fab_create).setOnClickListener(this);
+    }
+
+    /**
+     * Perform refresh on every time the activity gets visible
+     */
+    @Override
+    protected void onResume() {
+        refresh();
+        super.onResume();
+    }
+
+    /**
+     * Performs a server synchronization and set the RecyclerView
+     */
+    private void refresh() {
+        swipeRefreshLayout.setRefreshing(true);
+        db.getNoteServerSyncHelper().addCallback(new ICallback() {
+            @Override
+            public void onFinish() {
+                swipeRefreshLayout.setRefreshing(false);
+                adapter.clearSelection();
+                if (mActionMode != null) {
+                    mActionMode.finish();
+                }
+                setListView(db.getNotes());
+            }
+        });
+        db.synchronizeWithServer();
     }
 
     /**
