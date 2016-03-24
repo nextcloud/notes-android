@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,6 +43,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         noteContent = (TextView) findViewById(R.id.single_note_content);
         noteContent.setText(note.getSpannableContent());
         findViewById(R.id.fab_edit).setOnClickListener(this);
+        ((TextView) findViewById(R.id.single_note_content)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
