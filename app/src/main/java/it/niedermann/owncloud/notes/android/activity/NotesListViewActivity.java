@@ -163,9 +163,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
             Note currentNote = noteList.get(i);
             if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
                 // < 10 minutes but after 00:00 today
-                if (i > 0) {
+                //if (i > 0) {
                     //itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
-                }
+                //}
                 todaySet = true;
             } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
                 // between today 00:00 and yesterday 00:00
@@ -366,7 +366,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     public boolean onNoteLongClick(int position, View v) {
         boolean selected = adapter.select(position);
         if (selected) {
-            v.setSelected(selected);
+            v.setSelected(true);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));

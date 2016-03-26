@@ -155,12 +155,15 @@ public class NoteServerSyncHelper {
     }
 
     private class UploadEditedNotesTask extends AsyncTask<Object, Void, Note> {
+        private String noteContent;
+
         @Override
         protected Note doInBackground(Object... params) {
             operationsCount++;
+            Note oldNote = (Note) params[0];
+            noteContent = oldNote.getContent();
             try {
-                Note oldNote = (Note) params[0];
-                return client.editNote(oldNote.getId(), oldNote.getContent());
+                return client.editNote(oldNote.getId(), noteContent);
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
@@ -169,9 +172,10 @@ public class NoteServerSyncHelper {
 
         @Override
         protected void onPostExecute(Note note) {
-            if (note != null) {
-                // Note has been deleted on server?
-                // Maybe handle with Pop-Up and ask if Note should be local deleted or recreated on server.
+            if (note == null) {
+                // Note has been deleted on server -> recreate
+                db.addNoteAndSync(noteContent);
+            } else {
                 db.updateNote(note);
             }
             asyncTaskFinished();
