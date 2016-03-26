@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
@@ -34,9 +35,40 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ItemAdapter.noteClickListener = noteClickListener;
     }
 
-    public void add(Note createdNote) {
-        itemList.add(0, createdNote);
+    public void add(Note note) {
+        itemList.add(0, note);
         notifyDataSetChanged();
+    }
+
+    /**
+     * Compares the given List of notes to the current internal holded notes and updates the list if necessairy
+     * @param newNotes List of more up to date notes
+     */
+    public void checkForUpdates(List<Note> newNotes) {
+        for(Note newNote : newNotes) {
+            boolean foundNewNoteInOldList = false;
+            for(Item oldItem : itemList) {
+                if(!oldItem.isSection()) {
+                    Note oldNote = (Note) oldItem;
+                    if(newNote.getId() == oldNote.getId()) {
+                        // Notes have the same id, check which is newer
+                        if(newNote.getModified().after(oldNote.getModified())) {
+                            Log.v("Note", "Replacing old Note with new Note (new Note is more up to date)");
+                            int indexOfOldNote = itemList.indexOf(oldNote);
+                            itemList.remove(indexOfOldNote);
+                            itemList.add(indexOfOldNote, newNote);
+                            this.notifyDataSetChanged();
+                        }
+                        foundNewNoteInOldList = true;
+                        break;
+                    }
+                }
+            }
+            if(!foundNewNoteInOldList) {
+                Log.v("Note", "new note not found -- adding now.... " + newNote);
+                add(newNote);
+            }
+        }
     }
 
     // Create new views (invoked by the layout manager)

@@ -100,7 +100,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 if (mActionMode != null) {
                     mActionMode.finish();
                 }
-                setListView(db.getNotes());
+                if(adapter == null) {
+                    setListView(db.getNotes());
+                } else { // Do not reinstanciate but only update the adapter
+                    adapter.checkForUpdates(db.getNotes());
+                }
             }
         });
         db.getNoteServerSyncHelper().downloadNotes();
