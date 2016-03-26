@@ -71,7 +71,18 @@ public class NotesListViewActivity extends AppCompatActivity implements
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refresh();
+                db.getNoteServerSyncHelper().addCallback(new ICallback() {
+                    @Override
+                    public void onFinish() {
+                        swipeRefreshLayout.setRefreshing(false);
+                        adapter.clearSelection();
+                        if (mActionMode != null) {
+                            mActionMode.finish();
+                        }
+                        setListView(db.getNotes());
+                    }
+                });
+                db.getNoteServerSyncHelper().downloadNotes();
             }
         });
 
@@ -84,14 +95,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     @Override
     protected void onResume() {
-        refresh();
-        super.onResume();
-    }
-
-    /**
-     * Performs a server synchronization and set the RecyclerView
-     */
-    private void refresh() {
         db.getNoteServerSyncHelper().addCallback(new ICallback() {
             @Override
             public void onFinish() {
@@ -100,14 +103,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 if (mActionMode != null) {
                     mActionMode.finish();
                 }
-                if(adapter == null) {
-                    setListView(db.getNotes());
-                } else { // Do not reinstanciate but only update the adapter
-                    adapter.checkForUpdates(db.getNotes());
-                }
+                adapter.checkForUpdates(db.getNotes());
             }
         });
         db.getNoteServerSyncHelper().downloadNotes();
+        super.onResume();
     }
 
     /**

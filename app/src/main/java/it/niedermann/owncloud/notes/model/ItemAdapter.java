@@ -8,17 +8,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    /**
-     * Sections and Note-Items
-     */
-    private static final int count_types = 2;
     private static final int section_type = 0;
     private static final int note_type = 1;
     private static NoteClickListener noteClickListener;
@@ -31,13 +26,22 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.selected = new ArrayList<>();
     }
 
+    /**
+     * Sets the given NoteClickListener that should be notified on clicks
+     * @param noteClickListener NoteClickListener
+     */
     public static void setNoteClickListener(NoteClickListener noteClickListener) {
         ItemAdapter.noteClickListener = noteClickListener;
     }
 
+    /**
+     * Adds the given note to the top of the list.
+     * @param note Note that should be added.
+     */
     public void add(Note note) {
         itemList.add(0, note);
-        notifyDataSetChanged();
+        notifyItemInserted(0);
+        notifyItemChanged(0);
     }
 
     /**
@@ -57,7 +61,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             int indexOfOldNote = itemList.indexOf(oldNote);
                             itemList.remove(indexOfOldNote);
                             itemList.add(indexOfOldNote, newNote);
-                            this.notifyDataSetChanged();
+                            this.notifyItemChanged(indexOfOldNote);
                         }
                         foundNewNoteInOldList = true;
                         break;
@@ -124,7 +128,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Log.v("Note", "Position: " + position);
         for (int i = 0; i < selected.size(); i++) {
             Log.v("Note", "Compare: " + selected.get(i) + " == " + position);
-            if (selected.get(i) == position) {
+            if (selected.get(i).equals(position)) {
                 //position was selected and removed
                 selected.remove(i);
                 Log.v("Note", "Return: true");
