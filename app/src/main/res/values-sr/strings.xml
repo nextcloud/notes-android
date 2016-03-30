@@ -60,7 +60,7 @@
     <!-- About -->
 
     <string name="about_version_title">Издање</string>
-    <string name="about_version">Текуће издање је <strong>0.8.0</strong></string>
+    <string name="about_version">Текуће издање је <strong>0.8.1</strong></string>
     <string name="about_maintainer_title">Главни програмер</string>
     <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">Програмери</string>

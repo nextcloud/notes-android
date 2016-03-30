@@ -59,7 +59,7 @@
     <!-- About -->
 
     <string name="about_version_title">տարբերակ</string>
-    <string name="about_version">դուք օգտագործում եք <strong>v0.8.0</strong></string>
+    <string name="about_version">դուք օգտագործում եք <strong>v0.8.1</strong></string>
     <string name="about_maintainer_title">ղեկավար</string>
     <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">ծրագրավորող</string>
