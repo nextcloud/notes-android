@@ -12,7 +12,6 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -354,9 +353,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
             Item item = adapter.getItem(position);
             intent.putExtra(SELECTED_NOTE, (Note) item);
             intent.putExtra(SELECTED_NOTE_POSITION, position);
-            Log.v("Note",
-                    "notePosition | NotesListViewActivity wurde abgesendet "
-                            + position);
             startActivityForResult(intent, show_single_note_cmd);
 
         }

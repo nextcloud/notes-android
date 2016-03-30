@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     if(newNote.getId() == oldNote.getId()) {
                         // Notes have the same id, check which is newer
                         if(newNote.getModified().after(oldNote.getModified())) {
-                            Log.v("Note", "Replacing old Note with new Note (new Note is more up to date)");
+                            // Replace old note with new note because new note has been edited more recently
                             int indexOfOldNote = itemList.indexOf(oldNote);
                             itemList.remove(indexOfOldNote);
                             itemList.add(indexOfOldNote, newNote);
@@ -69,10 +68,11 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             }
             if(!foundNewNoteInOldList) {
-                Log.v("Note", "new note not found -- adding now.... " + newNote);
+                // Add new note because it could not be found in the itemList
                 add(newNote);
             }
         }
+        //TODO check if a note has been deleted on server??
     }
 
     // Create new views (invoked by the layout manager)
@@ -86,10 +86,6 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.fragment_notes_list_note_item, parent, false);
-            // set the view's size, margins, paddings and layout parameters
-            // ...
-            //TODO
-
             return new NoteViewHolder(v);
         }
     }
@@ -125,18 +121,14 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public boolean deselect(Integer position) {
-        Log.v("Note", "Position: " + position);
         for (int i = 0; i < selected.size(); i++) {
-            Log.v("Note", "Compare: " + selected.get(i) + " == " + position);
             if (selected.get(i).equals(position)) {
                 //position was selected and removed
                 selected.remove(i);
-                Log.v("Note", "Return: true");
                 return true;
             }
         }
         // position was not selected
-        Log.v("Note", "Return: false");
         return false;
     }
 
