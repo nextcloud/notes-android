@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swiperefreshlayout"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
@@ -17,7 +17,8 @@
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg_normal">
+            android:background="@color/bg_normal"
+            android:scrollbars="vertical">
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
