@@ -1,13 +1,30 @@
-# Bug Report
+## Bug Report (template)
 
-Source: Google Play Store, F-Droid or self-built?
+**Source:** Google Play Store, F-Droid or self-built?
 
-Version: vx.x.x (e. g. v0.5.1)
+**Android Version:** e. g. v6.0.1 Marshmallow
 
-Device: e. g. Motorola Moto G 2015
+**App Version:** e. g. v0.5.1
 
-Steps to reproduce:
+**Device**: e. g. Motorola Moto G 2015
+
+**Steps to reproduce:**
   1. open the app
   2. click on a note
   3. use the top left back-arrow
   4. ...
+
+### Copy & Paste
+    **Source:** Google Play Store, F-Droid or self-built?
+    
+    **Android Version:** e. g. v6.0.1 Marshmallow
+    
+    **App Version:** e. g. v0.5.1
+    
+    **Device**: e. g. Motorola Moto G 2015
+    
+    **Steps to reproduce:**
+      1. open the app
+      2. click on a note
+      3. use the top left back-arrow
+      4. ...`
