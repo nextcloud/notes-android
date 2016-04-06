@@ -307,10 +307,13 @@ public class NotesListViewActivity extends AppCompatActivity implements
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
             db = new NoteSQLiteOpenHelper(this);
+            adapter.removeAll();
+            swipeRefreshLayout.setRefreshing(true);
             db.getNoteServerSyncHelper().addCallback(new ICallback() {
                 @Override
                 public void onFinish() {
                     setListView(db.getNotes());
+                    swipeRefreshLayout.setRefreshing(false);
                 }
             });
             db.synchronizeWithServer();
@@ -345,8 +348,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 mActionMode.finish();
             }
         } else {
-
-
             Intent intent = new Intent(getApplicationContext(),
                     NoteActivity.class);
 

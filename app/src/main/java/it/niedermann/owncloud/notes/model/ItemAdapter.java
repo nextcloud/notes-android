@@ -44,6 +44,14 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     /**
+     * Removes all items from the adapter.
+     */
+    public void removeAll() {
+        itemList.clear();
+        notifyDataSetChanged();
+    }
+
+    /**
      * Compares the given List of notes to the current internal holded notes and updates the list if necessairy
      * @param newNotes List of more up to date notes
      */

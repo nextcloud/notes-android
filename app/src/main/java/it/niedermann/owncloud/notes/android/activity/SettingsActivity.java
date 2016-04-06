@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
 
 /**
@@ -227,8 +226,8 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.putBoolean(SETTINGS_FIRST_RUN, false);
                 editor.apply();
 
-                NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(getApplicationContext());
-                db.synchronizeWithServer();
+                //NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(getApplicationContext());
+                //db.synchronizeWithServer();
 
                 final Intent data = new Intent();
                 //FIXME send correct note back to NotesListView
