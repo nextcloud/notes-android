@@ -60,7 +60,7 @@
     <string name="about_version">Вы используете <strong>v0.8.1</strong></string>
     <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">Разработчики</string>
-    <string name="about_developers">Stefan Niedermann, HeaDBanGer84</string>
+    <string name="about_developers">Stefan Niedermann, HeaDBanGer84, Felix Edelmann</string>
     <string name="about_translators">pejakm (Сербский), ageru (Французский), proninyaroslav (Русский)</string>
     <string name="about_testers">Jan C. Borchardt</string>
     <string name="about_source">Проект размещён на GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
