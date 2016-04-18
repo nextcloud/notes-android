@@ -3,6 +3,8 @@
     <plurals
         name="ab_selected">
         <item quantity="one">%d vybrán</item>
-        <item quantity="other">%d vybrány</item>
+        <item quantity="two">%d vybrány</item>
+        <item quantity="few">%d vybrány</item>
+        <item quantity="other">%d vybráno</item>
     </plurals>
 </resources>
