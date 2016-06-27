@@ -47,7 +47,7 @@
     <string name="network_disconnected">Сеть недоступна</string>
 
     <!-- Error -->
-    <string name="error_invalid_login">Неверный логин</string>
+    <string name="error_invalid_login">Неверный логин: %1$s</string>
     <string name="error_io">Ошибка ввода/вывода</string>
     <string name="error_json">Ошибка JSON</string>
     <string name="error_url_malformed">Неверный адрес</string>
