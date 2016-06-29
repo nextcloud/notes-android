@@ -17,4 +17,12 @@ public enum DBStatus {
     DBStatus(String title) {
         this.title = title;
     }
+
+    public static DBStatus parse(String str) {
+        if(str.isEmpty()) {
+            return DBStatus.VOID;
+        } else {
+            return DBStatus.valueOf(str);
+        }
+    }
 }
