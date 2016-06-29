@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.util.NoteUtil;
@@ -112,7 +113,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return requested Note
      */
     @SuppressWarnings("unused")
-    public Note getNote(long id) {
+    public DBNote getNote(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor =
                 db.query(table_notes,
@@ -134,7 +135,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Note note = new Note(Long.valueOf(cursor != null ? cursor.getString(0) : null), modified, cursor != null ? cursor.getString(2) : null, cursor.getString(4));
+        DBNote note = new DBNote(Long.valueOf(cursor != null ? cursor.getString(0) : null), modified, cursor != null ? cursor.getString(2) : null, cursor.getString(4), DBStatus.parse(cursor.getString(1)));
         cursor.close();
         return note;
     }
@@ -144,8 +145,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @return List&lt;Note&gt;
      */
-    public List<Note> getNotes() {
-        List<Note> notes = new ArrayList<>();
+    public List<DBNote> getNotes() {
+        List<DBNote> notes = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle()});
         if (cursor.moveToFirst()) {
@@ -158,7 +159,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                notes.add(new Note(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4)));
+                notes.add(new DBNote(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4), DBStatus.parse(cursor.getString(1))));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -170,8 +171,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @return List&lt;Note&gt;
      */
-    public List<Note> searchNotes(String query) {
-        List<Note> notes = new ArrayList<>();
+    public List<DBNote> searchNotes(String query) {
+        List<DBNote> notes = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? AND " + key_content + " LIKE ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "%" + query + "%"});
         if (cursor.moveToFirst()) {
@@ -184,7 +185,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                notes.add(new Note(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4)));
+                notes.add(new DBNote(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4), DBStatus.parse(cursor.getString(1))));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -224,7 +225,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return The number of the Rows affected.
      */
     @SuppressWarnings("UnusedReturnValue")
-    public int updateNoteAndSync(Note note) {
+    public int updateNoteAndSync(DBNote note) {
         SQLiteDatabase db = this.getWritableDatabase();
         DBStatus newStatus = DBStatus.LOCAL_EDITED;
         Cursor cursor =
@@ -239,11 +240,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         if (cursor != null) {
             cursor.moveToFirst();
             String status = cursor.getString(1);
-            if (!"".equals(status) && DBStatus.valueOf(status) == DBStatus.LOCAL_CREATED) {
+            if (DBStatus.parse(status) == DBStatus.LOCAL_CREATED) {
                 newStatus = DBStatus.LOCAL_CREATED;
             }
             cursor.close();
         }
+        note.setStatus(newStatus);
         ContentValues values = new ContentValues();
         values.put(key_id, note.getId());
         values.put(key_status, newStatus.getTitle());

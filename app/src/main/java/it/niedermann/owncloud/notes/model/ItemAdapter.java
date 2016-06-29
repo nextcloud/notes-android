@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * Adds the given note to the top of the list.
      * @param note Note that should be added.
      */
-    public void add(Note note) {
+    public void add(DBNote note) {
         itemList.add(0, note);
         notifyItemInserted(0);
         notifyItemChanged(0);
@@ -55,12 +56,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * Compares the given List of notes to the current internal holded notes and updates the list if necessairy
      * @param newNotes List of more up to date notes
      */
-    public void checkForUpdates(List<Note> newNotes) {
-        for(Note newNote : newNotes) {
+    public void checkForUpdates(List<DBNote> newNotes) {
+        for(DBNote newNote : newNotes) {
             boolean foundNewNoteInOldList = false;
             for(Item oldItem : itemList) {
                 if(!oldItem.isSection()) {
-                    Note oldNote = (Note) oldItem;
+                    DBNote oldNote = (DBNote) oldItem;
                     if(newNote.getId() == oldNote.getId()) {
                         // Notes have the same id, check which is newer
                         if(newNote.getModified().after(oldNote.getModified())) {
@@ -109,9 +110,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((SectionViewHolder) holder).sectionTitle.setText(section.geTitle());
             ((SectionViewHolder) holder).setPosition(position);
         } else {
-            Note note = (Note) item;
+            DBNote note = (DBNote) item;
             ((NoteViewHolder) holder).noteTitle.setText(note.getTitle());
             ((NoteViewHolder) holder).noteExcerpt.setText(note.getExcerpt());
+            ((NoteViewHolder) holder).noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.GONE : View.VISIBLE);
             ((NoteViewHolder) holder).setPosition(position);
         }
     }
@@ -168,12 +170,14 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         // each data item is just a string in this case
         public TextView noteTitle;
         public TextView noteExcerpt;
+        public ImageView noteStatus;
         public int position = -1;
 
         private NoteViewHolder(View v) {
             super(v);
             this.noteTitle = (TextView) v.findViewById(R.id.noteTitle);
             this.noteExcerpt = (TextView) v.findViewById(R.id.noteExcerpt);
+            this.noteStatus = (ImageView) v.findViewById(R.id.noteStatus);
             v.setOnClickListener(this);
             v.setOnLongClickListener(this);
         }

@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.Note;
@@ -128,7 +129,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
      * @param noteList List&lt;Note&gt;
      */
     @SuppressWarnings("WeakerAccess")
-    public void setListView(List<Note> noteList) {
+    public void setListView(List<DBNote> noteList) {
         List<Item> itemList = new ArrayList<>();
         // #12 Create Sections depending on Time
         // TODO Move to ItemAdapter?
@@ -288,7 +289,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 //not need because of db.synchronisation in createActivity
 
-                Note createdNote = (Note) data.getExtras().getSerializable(
+                DBNote createdNote = (DBNote) data.getExtras().getSerializable(
                         CREATED_NOTE);
                 adapter.add(createdNote);
                 //setListView(db.getNotes());
@@ -299,7 +300,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                         SELECTED_NOTE_POSITION);
                 adapter.remove(adapter.getItem(notePosition));
                 if (resultCode == RESULT_OK) {
-                    Note editedNote = (Note) data.getExtras().getSerializable(
+                    DBNote editedNote = (DBNote) data.getExtras().getSerializable(
                             NoteActivity.EDIT_NOTE);
                     adapter.add(editedNote);
                 }
