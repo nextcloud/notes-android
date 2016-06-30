@@ -69,7 +69,7 @@
     <string name="about_source_title">Código fonte</string>
     <string name="about_source">Este projeto está alojado no GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Problemas</string>
-    <string name="about_issues">Pode reportar erros, propor melhorias e pedir funcionalidades no seguidor de erros do GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Pode reportar erros, propor melhorias e pedir funcionalidades no seguidor de problemas do GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">Licença da aplicação</string>
     <string name="about_app_license">Esta aplicação está licenciada sob a licença GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Ver licença</string>
