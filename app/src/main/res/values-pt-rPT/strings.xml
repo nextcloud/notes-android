@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ownCloud Notes</string>
+    <string name="no_notes">Sem notas ainda</string>
+    <string name="action_create">Nova nota</string>
+    <string name="action_settings">Definições</string>
+    <string name="action_create_save">Guardar</string>
+    <string name="action_create_cancel">Cancelar</string>
+    <string name="action_edit_editing">Editar</string>
+    <string name="action_edit_save">Guardar</string>
+    <string name="action_edit_saving">A guardar &#8230;</string>
+    <string name="action_edit_saved">Guardado</string>
+    <string name="action_edit_cancel">Cancelar</string>
+    <string name="action_about">Sobre</string>
+    <string name="action_select_note">Selecionar nota</string>
+    <string name="menu_delete">Eliminar</string>
+    <string name="menu_copy">Copiar</string>
+    <string name="menu_edit">Editar</string>
+    <string name="menu_share">Partilhar</string>
+    <string name="menu_about">Sobre</string>
+
+    <string name="copy">Copiar</string>
+
+    <string name="listview_updated_today">Hoje</string>
+    <string name="listview_updated_yesterday">Ontem</string>
+    <string name="listview_updated_this_week">Esta semana</string>
+    <string name="listview_updated_this_month">Este mês</string>
+    <string name="listview_updated_earlier">Anteriormente</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Servidor</string>
+    <string name="settings_url">Endereço do servidor</string>
+    <string name="settings_url_check_description">Mostra se o endereço pode ser acedido.</string>
+    <string name="settings_url_warn_http">AVISO: "http" é inseguro. Por favor utilize "https".</string>
+    <string name="settings_username">Nome de utilizador</string>
+    <string name="settings_password">Palavra-passe</string>
+    <string name="settings_password_check_description">Mostra se as credenciais estão corretas.</string>
+    <string name="settings_submit">Conectar</string>
+    <string name="settings_submitting">A conectar &#8230;</string>
+
+    <!-- Network -->
+    <string name="network_connecting">A conectar</string>
+    <string name="network_connected">Conectado</string>
+    <string name="network_disconnected">Rede não disponível</string>
+
+    <!-- Error -->
+    <string name="error_json">Erro JSON</string>
+    <string name="error_io">Erro IO</string>
+    <string name="error_invalid_login">Início de sessão inválido</string>
+    <string name="error_url_malformed">Endereço do servidor errado</string>
+    <string name="error_username_password_invalid">Nome de utilizador ou palavra-passe errados</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Definições</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Versão</string>
+    <string name="about_version">Está atualmente a usar a versão <strong>v0.8.1</strong></string>
+    <string name="about_maintainer_title">Mantenedor</string>
+    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_developers_title">Desenvolvedores</string>
+    <string name="about_developers">Stefan Niedermann, HeaDBanGer84, Felix Edelmann</string>
+    <string name="about_translators_title">Tradutores</string>
+    <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian)</string>
+    <string name="about_testers_title">Experimentadores</string>
+    <string name="about_testers">Jan C. Borchardt</string>
+    <string name="about_source_title">Código fonte</string>
+    <string name="about_source">Este projeto está alojado no GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues_title">Problemas</string>
+    <string name="about_issues">Pode reportar erros, propor melhorias e pedir funcionalidades no seguidor de erros do GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_app_license_title">Licença da aplicação</string>
+    <string name="about_app_license">Esta aplicação está licenciada sob a licença GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Ver licença</string>
+    <string name="about_app_icon_disclaimer_title">Ícone da aplicação</string>
+    <string name="about_app_icon_disclaimer"><p>Ícone original criado por <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> de <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Ícones</string>
+    <string name="about_icons_disclaimer"><p>Todos os restantes ícones usados por esta aplicação são <a href="https://materialdesignicons.com/" title="Link to Website">Material Design Icons</a> criados por Google Inc. e licenciados sob uma licença Creative Commons.</p></string>
+
+    <string name="about_credits_tab_title">Créditos</string>
+    <string name="about_contribution_tab_title">Contribuição</string>
+    <string name="about_license_tab_title">Licença</string>
+
+    <string name="widget_all_notes_title">Todas as notas</string>
+    <string name="widget_single_note_title">Nota única</string>
+</resources>
