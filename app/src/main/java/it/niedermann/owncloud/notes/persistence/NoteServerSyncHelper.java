@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -8,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -15,12 +17,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NotesClient;
+import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
 
 /**
  * Helps to synchronize the Database to the Server.
@@ -206,7 +210,7 @@ public class NoteServerSyncHelper {
     }
 
     private class DownloadNotesTask extends AsyncTask<Object, Void, List<Note>> {
-        private boolean serverError = false;
+        private LoginStatus status = null;
 
         @Override
         protected List<Note> doInBackground(Object... params) {
@@ -214,9 +218,12 @@ public class NoteServerSyncHelper {
             List<Note> notes = new ArrayList<>();
             try {
                 notes = client.getNotes();
-            } catch (IOException | JSONException e) {
-                serverError = true;
+                status = LoginStatus.OK;
+            } catch (IOException e) {
                 e.printStackTrace();
+                status = LoginStatus.CONNECTION_FAILED;
+            } catch (JSONException e) {
+                status = LoginStatus.JSON_FAILED;
             }
             return notes;
         }
@@ -224,8 +231,11 @@ public class NoteServerSyncHelper {
         @Override
         protected void onPostExecute(List<Note> result) {
             // Clear Database only if there was no Server Error
-            if (!serverError) {
+            if (status==LoginStatus.OK) {
                 db.clearDatabase();
+            } else {
+                Context c = db.getContext();
+                Toast.makeText(c, c.getString(R.string.error_sync, c.getString(status.str)), Toast.LENGTH_LONG).show();
             }
             for (Note note : result) {
                 db.addNote(note);

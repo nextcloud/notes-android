@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
+import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
 
 /**
  * Allows to set Settings like URL, Username and Password for Server-Synchronization
@@ -194,7 +195,7 @@ public class SettingsActivity extends AppCompatActivity {
     /**
      * If Log-In-Credentials are correct, save Credentials to Shared Preferences and finish First Run Wizard.
      */
-    private class LoginValidatorAsyncTask extends AsyncTask<String, Void, Boolean> {
+    private class LoginValidatorAsyncTask extends AsyncTask<String, Void, LoginStatus> {
         String url, username, password;
 
         @Override
@@ -208,7 +209,7 @@ public class SettingsActivity extends AppCompatActivity {
          * @return isValidLogin Boolean
          */
         @Override
-        protected Boolean doInBackground(String... params) {
+        protected LoginStatus doInBackground(String... params) {
             url = params[0];
             username = params[1];
             password = params[2];
@@ -216,8 +217,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Boolean isValidLogin) {
-            if (isValidLogin) {
+        protected void onPostExecute(LoginStatus status) {
+            if (LoginStatus.OK.equals(status)) {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(SETTINGS_URL, url);
                 editor.putString(SETTINGS_USERNAME, username);
@@ -238,7 +239,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Log.e("Note", "invalid login");
                 btn_submit.setText(R.string.settings_submit);
                 setInputsEnabled(true);
-                Toast.makeText(getApplicationContext(), getString(R.string.error_invalid_login), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.error_invalid_login, getString(status.str)), Toast.LENGTH_LONG).show();
             }
         }
 

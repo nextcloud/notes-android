@@ -45,9 +45,11 @@
     <string name="network_disconnected">No network available</string>
 
     <!-- Error -->
-    <string name="error_json">JSON error</string>
-    <string name="error_io">IO error</string>
-    <string name="error_invalid_login">Invalid login</string>
+    <string name="error_sync">Synchronization failed: %1$s</string>
+    <string name="error_invalid_login">Invalid login: %1$s</string>
+    <string name="error_json">is the owncloud Notes app activated on the server?</string>
+    <string name="error_io">server connection is broken</string>
+    <string name="error_server">URL/Server has errors</string>
     <string name="error_url_malformed">Wrong server address</string>
     <string name="error_username_password_invalid">Wrong username or password</string>
 

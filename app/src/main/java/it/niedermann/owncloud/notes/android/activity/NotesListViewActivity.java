@@ -106,7 +106,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 adapter.checkForUpdates(db.getNotes());
             }
         });
-        db.getNoteServerSyncHelper().downloadNotes();
+        if (!PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+            db.getNoteServerSyncHelper().downloadNotes();
+        }
         super.onResume();
     }
 
