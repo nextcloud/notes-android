@@ -19,6 +19,7 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.util.ICallback;
@@ -103,7 +104,7 @@ public class NoteServerSyncHelper {
     }
 
     public void uploadEditedNotes() {
-        List<Note> notes = db.getNotesByStatus(DBStatus.LOCAL_EDITED);
+        List<DBNote> notes = db.getNotesByStatus(DBStatus.LOCAL_EDITED);
         for (Note note : notes) {
             UploadEditedNotesTask editedNotesTask = new UploadEditedNotesTask();
             editedNotesTask.execute(note);
@@ -111,7 +112,7 @@ public class NoteServerSyncHelper {
     }
 
     public void uploadNewNotes() {
-        List<Note> notes = db.getNotesByStatus(DBStatus.LOCAL_CREATED);
+        List<DBNote> notes = db.getNotesByStatus(DBStatus.LOCAL_CREATED);
         for (Note note : notes) {
             UploadNewNoteTask newNotesTask = new UploadNewNoteTask();
             newNotesTask.execute(note);
@@ -119,7 +120,7 @@ public class NoteServerSyncHelper {
     }
 
     public void uploadDeletedNotes() {
-        List<Note> notes = db.getNotesByStatus(DBStatus.LOCAL_DELETED);
+        List<DBNote> notes = db.getNotesByStatus(DBStatus.LOCAL_DELETED);
         for (Note note : notes) {
             UploadDeletedNoteTask deletedNotesTask = new UploadDeletedNoteTask();
             deletedNotesTask.execute(note);

@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.util.NoteUtil;
@@ -112,7 +113,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return requested Note
      */
     @SuppressWarnings("unused")
-    public Note getNote(long id) {
+    public DBNote getNote(long id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor =
                 db.query(table_notes,
@@ -134,20 +135,21 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Note note = new Note(Long.valueOf(cursor != null ? cursor.getString(0) : null), modified, cursor != null ? cursor.getString(2) : null, cursor.getString(4));
+        DBNote note = new DBNote(Long.valueOf(cursor != null ? cursor.getString(0) : null), modified, cursor != null ? cursor.getString(2) : null, cursor.getString(4), DBStatus.parse(cursor.getString(1)));
         cursor.close();
         return note;
     }
 
     /**
-     * Returns a list of all Notes in the Database
-     *
-     * @return List&lt;Note&gt;
+     * Query the database with a custom raw query.
+     * @param sql              SQL query
+     * @param selectionArgs    Arguments for the SQL query
+     * @return List of Notes
      */
-    public List<Note> getNotes() {
-        List<Note> notes = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle()});
+    private List<DBNote> getNotesRawQuery(String sql, String[] selectionArgs) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+        List<DBNote> notes = new ArrayList<>();
         if (cursor.moveToFirst()) {
             do {
                 Calendar modified = Calendar.getInstance();
@@ -158,7 +160,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                notes.add(new Note(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4)));
+                notes.add(new DBNote(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4), DBStatus.parse(cursor.getString(1))));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -170,25 +172,17 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @return List&lt;Note&gt;
      */
-    public List<Note> searchNotes(String query) {
-        List<Note> notes = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? AND " + key_content + " LIKE ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "%" + query + "%"});
-        if (cursor.moveToFirst()) {
-            do {
-                Calendar modified = Calendar.getInstance();
-                try {
-                    String modifiedStr = cursor.getString(3);
-                    if (modifiedStr != null)
-                        modified.setTime(new SimpleDateFormat(DATE_FORMAT, Locale.GERMANY).parse(modifiedStr));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                notes.add(new Note(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4)));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return notes;
+    public List<DBNote> getNotes() {
+        return getNotesRawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle()});
+    }
+
+    /**
+     * Returns a list of all Notes in the Database
+     *
+     * @return List&lt;Note&gt;
+     */
+    public List<DBNote> searchNotes(String query) {
+        return getNotesRawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ? AND " + key_content + " LIKE ? ORDER BY " + key_modified + " DESC", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "%" + query + "%"});
     }
 
     /**
@@ -196,25 +190,16 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @return List&lt;Note&gt;
      */
-    public List<Note> getNotesByStatus(DBStatus status) {
-        List<Note> notes = new ArrayList<>();
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " = ?", new String[]{status.getTitle()});
-        if (cursor.moveToFirst()) {
-            do {
-                Calendar modified = Calendar.getInstance();
-                try {
-                    String modifiedStr = cursor.getString(3);
-                    if (modifiedStr != null)
-                        modified.setTime(new SimpleDateFormat(DATE_FORMAT, Locale.GERMANY).parse(modifiedStr));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                notes.add(new Note(Long.valueOf(cursor.getString(0)), modified, cursor.getString(2), cursor.getString(4)));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return notes;
+    public List<DBNote> getNotesByStatus(DBStatus status) {
+        return getNotesRawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " = ?", new String[]{status.getTitle()});
+    }
+    /**
+     * Returns a list of all Notes in the Database with were modified locally
+     *
+     * @return List&lt;Note&gt;
+     */
+    public List<DBNote> getLocalModifiedNotes() {
+        return getNotesRawQuery("SELECT * FROM " + table_notes + " WHERE " + key_status + " != ?", new String[]{DBStatus.VOID.getTitle()});
     }
 
     /**
@@ -224,7 +209,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return The number of the Rows affected.
      */
     @SuppressWarnings("UnusedReturnValue")
-    public int updateNoteAndSync(Note note) {
+    public int updateNoteAndSync(DBNote note) {
         SQLiteDatabase db = this.getWritableDatabase();
         DBStatus newStatus = DBStatus.LOCAL_EDITED;
         Cursor cursor =
@@ -239,11 +224,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         if (cursor != null) {
             cursor.moveToFirst();
             String status = cursor.getString(1);
-            if (!"".equals(status) && DBStatus.valueOf(status) == DBStatus.LOCAL_CREATED) {
+            if (DBStatus.parse(status) == DBStatus.LOCAL_CREATED) {
                 newStatus = DBStatus.LOCAL_CREATED;
             }
             cursor.close();
         }
+        note.setStatus(newStatus);
         ContentValues values = new ContentValues();
         values.put(key_id, note.getId());
         values.put(key_status, newStatus.getTitle());

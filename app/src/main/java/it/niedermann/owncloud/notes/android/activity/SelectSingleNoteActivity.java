@@ -15,6 +15,7 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.widget.SingleNoteWidget;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.Note;
@@ -61,7 +62,7 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements ItemA
      *
      * @param noteList List&lt;Note&gt;
      */
-    private void setListView(List<Note> noteList) {
+    private void setListView(List<DBNote> noteList) {
         List<Item> itemList = new ArrayList<>();
         itemList.addAll(noteList);
         adapter = new ItemAdapter(itemList);

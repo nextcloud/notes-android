@@ -16,6 +16,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
@@ -24,7 +25,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 public class EditNoteActivity extends AppCompatActivity {
     private final long DELAY = 1000; // in ms
     private EditText content = null;
-    private Note note = null;
+    private DBNote note = null;
     private Timer timer = new Timer();
     private ActionBar actionBar;
 
@@ -32,7 +33,7 @@ public class EditNoteActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        note = (Note) getIntent().getSerializableExtra(
+        note = (DBNote) getIntent().getSerializableExtra(
                 NoteActivity.EDIT_NOTE);
         content = (EditText) findViewById(R.id.editContent);
         content.setEnabled(false);
