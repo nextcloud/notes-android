@@ -41,11 +41,11 @@
 
         <ImageView
             android:id="@+id/noteStatus"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/ic_sync_error_holo"/>
+            android:src="@drawable/ic_sync_alert_black_18dp"/>
 
     </RelativeLayout>
 
