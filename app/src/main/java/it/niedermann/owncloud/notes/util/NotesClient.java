@@ -18,7 +18,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import it.niedermann.owncloud.notes.model.Note;
+import it.niedermann.owncloud.notes.model.OwnCloudNote;
 
 public class NotesClient {
 
@@ -41,9 +41,9 @@ public class NotesClient {
         this.password = password;
     }
 
-    public List<Note> getNotes() throws JSONException,
+    public List<OwnCloudNote> getNotes() throws JSONException,
             IOException {
-        List<Note> notesList = new ArrayList<>();
+        List<OwnCloudNote> notesList = new ArrayList<>();
         JSONArray notes = new JSONArray(requestServer("notes", METHOD_GET, null));
         long noteId = 0;
         String noteTitle = "";
@@ -68,7 +68,7 @@ public class NotesClient {
                         .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
             }
             notesList
-                    .add(new Note(noteId, noteModified, noteTitle, noteContent));
+                    .add(new OwnCloudNote(noteId, noteModified, noteTitle, noteContent));
         }
         return notesList;
     }
@@ -83,7 +83,7 @@ public class NotesClient {
      * @throws IOException
      */
     @SuppressWarnings("unused")
-    public Note getNoteById(long id) throws
+    public OwnCloudNote getNoteById(long id) throws
             JSONException, IOException {
         long noteId = 0;
         String noteTitle = "";
@@ -106,7 +106,7 @@ public class NotesClient {
             noteModified
                     .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
         }
-        return new Note(noteId, noteModified, noteTitle, noteContent);
+        return new OwnCloudNote(noteId, noteModified, noteTitle, noteContent);
     }
 
     /**
@@ -117,7 +117,7 @@ public class NotesClient {
      * @throws JSONException
      * @throws IOException
      */
-    public Note createNote(String content) throws
+    public OwnCloudNote createNote(String content) throws
             JSONException, IOException {
         long noteId = 0;
         String noteTitle = "";
@@ -143,10 +143,10 @@ public class NotesClient {
             noteModified
                     .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
         }
-        return new Note(noteId, noteModified, noteTitle, noteContent);
+        return new OwnCloudNote(noteId, noteModified, noteTitle, noteContent);
     }
 
-    public Note editNote(long noteId, String content)
+    public OwnCloudNote editNote(long noteId, String content)
             throws JSONException, IOException {
         String noteTitle = "";
         Calendar noteModified = null;
@@ -164,7 +164,7 @@ public class NotesClient {
             noteModified
                     .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
         }
-        return new Note(noteId, noteModified, noteTitle, content);
+        return new OwnCloudNote(noteId, noteModified, noteTitle, content);
     }
 
     public void deleteNote(long noteId) throws

@@ -15,7 +15,6 @@ import java.util.List;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 /**
@@ -62,13 +61,13 @@ public class AllNotesWidget extends AppWidgetProvider {
             mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
             NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(mContext);
-            db.synchronizeWithServer();
+            db.getNoteServerSyncHelper().scheduleSync(false);
             mWidgetItems = db.getNotes();
-            mWidgetItems.add(new DBNote(0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", DBStatus.VOID));
+            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", DBStatus.VOID));
         }
 
         public void onCreate() {
-            mWidgetItems.add(new DBNote(0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", DBStatus.VOID));
+            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", DBStatus.VOID));
         }
 
         @Override

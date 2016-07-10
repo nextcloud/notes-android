@@ -18,7 +18,6 @@ import it.niedermann.owncloud.notes.android.widget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
-import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 /**
@@ -39,7 +38,7 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements ItemA
         setContentView(R.layout.activity_select_single_note);
         // Display Data
         db = new NoteSQLiteOpenHelper(this);
-        db.synchronizeWithServer();
+        db.getNoteServerSyncHelper().scheduleSync(false);
         setListView(db.getNotes());
 
 
@@ -80,7 +79,7 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements ItemA
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
         appWidgetManager.updateAppWidget(appWidgetId, views);
-        SingleNoteWidget.updateAppWidget((Note) adapter.getItem(position), context, appWidgetManager, appWidgetId);
+        SingleNoteWidget.updateAppWidget((DBNote) adapter.getItem(position), context, appWidgetManager, appWidgetId);
 
         Intent resultValue = new Intent();
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

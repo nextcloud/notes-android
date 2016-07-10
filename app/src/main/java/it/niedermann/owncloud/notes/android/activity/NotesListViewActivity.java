@@ -12,6 +12,7 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +25,6 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
-import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.model.SectionItem;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
@@ -82,7 +82,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                         setListView(db.getNotes());
                     }
                 });
-                db.getNoteServerSyncHelper().downloadNotes();
+                db.getNoteServerSyncHelper().scheduleSync(false);
             }
         });
 
@@ -103,11 +103,12 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 if (mActionMode != null) {
                     mActionMode.finish();
                 }
-                adapter.checkForUpdates(db.getNotes());
+                // adapter.checkForUpdates(db.getNotes()); // FIXME deactivated, since it doesn't remove remotely deleted notes
+                setListView(db.getNotes());
             }
         });
         if (!PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
-            db.getNoteServerSyncHelper().downloadNotes();
+            db.getNoteServerSyncHelper().scheduleSync(false);
         }
         super.onResume();
     }
@@ -132,6 +133,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     @SuppressWarnings("WeakerAccess")
     public void setListView(List<DBNote> noteList) {
+        Log.d(getClass().getSimpleName(), "setListView("+noteList.size()+" notes)");
+        //db.debugPrintFullDB(); // FIXME remove
+
         List<Item> itemList = new ArrayList<>();
         // #12 Create Sections depending on Time
         // TODO Move to ItemAdapter?
@@ -162,7 +166,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         month.set(Calendar.SECOND, 0);
         month.set(Calendar.MILLISECOND, 0);
         for (int i = 0; i < noteList.size(); i++) {
-            Note currentNote = noteList.get(i);
+            DBNote currentNote = noteList.get(i);
             if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
                 // < 10 minutes but after 00:00 today
                 //if (i > 0) {
@@ -319,7 +323,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     swipeRefreshLayout.setRefreshing(false);
                 }
             });
-            db.synchronizeWithServer();
+            db.getNoteServerSyncHelper().scheduleSync(false);
         }
     }
 
@@ -355,7 +359,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     NoteActivity.class);
 
             Item item = adapter.getItem(position);
-            intent.putExtra(SELECTED_NOTE, (Note) item);
+            intent.putExtra(SELECTED_NOTE, (DBNote) item);
             intent.putExtra(SELECTED_NOTE_POSITION, position);
             startActivityForResult(intent, show_single_note_cmd);
 
@@ -413,7 +417,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 case R.id.menu_delete:
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
-                        Note note = (Note) adapter.getItem(i);
+                        DBNote note = (DBNote) adapter.getItem(i);
                         db.deleteNoteAndSync(note.getId());
                         // Not needed because of dbsync
                         //adapter.remove(note);
