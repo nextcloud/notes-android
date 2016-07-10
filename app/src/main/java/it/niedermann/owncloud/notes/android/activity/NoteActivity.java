@@ -12,13 +12,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.model.Note;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 public class NoteActivity extends AppCompatActivity implements View.OnClickListener {
     public final static String EDIT_NOTE = "it.niedermann.owncloud.notes.edit_note_id";
     public final static int EDIT_NOTE_CMD = 1;
-    private Note note = null;
+    private DBNote note = null;
     private int notePosition = 0;
     private TextView noteContent = null;
     private ActionBar actionBar = null;
@@ -27,10 +27,10 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_note);
-        note = (Note) getIntent().getSerializableExtra(
+        note = (DBNote) getIntent().getSerializableExtra(
                 NotesListViewActivity.SELECTED_NOTE);
         if (savedInstanceState != null) {
-            note = (Note) savedInstanceState.getSerializable("note");
+            note = (DBNote) savedInstanceState.getSerializable("note");
         }
         notePosition = getIntent().getIntExtra(
                 NotesListViewActivity.SELECTED_NOTE_POSITION, 0);
@@ -114,7 +114,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == EDIT_NOTE_CMD) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                Note editedNote = (Note) data.getExtras().getSerializable(
+                DBNote editedNote = (DBNote) data.getExtras().getSerializable(
                         EDIT_NOTE);
                 if (editedNote != null) {
                     note = editedNote;

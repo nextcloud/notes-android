@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
@@ -106,7 +105,7 @@ public class EditNoteActivity extends AppCompatActivity {
     private void saveData() {
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setSubtitle(getResources().getString(R.string.action_edit_saving));
+            ab.setSubtitle(getString(R.string.action_edit_saving));
         }
         // #74
         note.setModified(Calendar.getInstance());
@@ -127,7 +126,7 @@ public class EditNoteActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        getSupportActionBar().setSubtitle(null);
+                                        getSupportActionBar().setSubtitle(getString(R.string.action_edit_editing));
                                     }
                                 });
                             }
