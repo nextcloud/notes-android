@@ -165,7 +165,9 @@ public class NoteServerSyncHelper {
             Log.d(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
             dbHelper.debugPrintFullDB();
             pushLocalChanges();
-            pullRemoteChanges();
+            if(!onlyLocalChanges) {
+                pullRemoteChanges();
+            }
             dbHelper.debugPrintFullDB();
             Log.d(getClass().getSimpleName(), "SYNCHRONIZATION FINISHED");
             return null;
