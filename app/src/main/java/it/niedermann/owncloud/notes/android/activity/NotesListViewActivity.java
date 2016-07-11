@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,6 +29,7 @@ import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.SectionItem;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.util.NotesClientUtil;
 
 public class NotesListViewActivity extends AppCompatActivity implements
         ItemAdapter.NoteClickListener, View.OnClickListener {
@@ -71,17 +73,22 @@ public class NotesListViewActivity extends AppCompatActivity implements
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                db.getNoteServerSyncHelper().addCallback(new ICallback() {
-                    @Override
-                    public void onFinish() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        adapter.clearSelection();
-                        if (mActionMode != null) {
-                            mActionMode.finish();
+                if(db.getNoteServerSyncHelper().isSyncPossible()) {
+                    db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
+                        @Override
+                        public void onFinish() {
+                            swipeRefreshLayout.setRefreshing(false);
+                            adapter.clearSelection();
+                            if (mActionMode != null) {
+                                mActionMode.finish();
+                            }
+                            setListView(db.getNotes());
                         }
-                        setListView(db.getNotes());
-                    }
-                });
+                    });
+                } else {
+                    swipeRefreshLayout.setRefreshing(false);
+                    Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+                }
                 db.getNoteServerSyncHelper().scheduleSync(false);
             }
         });
@@ -95,19 +102,19 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     @Override
     protected void onResume() {
-        db.getNoteServerSyncHelper().addCallback(new ICallback() {
-            @Override
-            public void onFinish() {
-                swipeRefreshLayout.setRefreshing(false);
-                adapter.clearSelection();
-                if (mActionMode != null) {
-                    mActionMode.finish();
+        if (db.getNoteServerSyncHelper().isSyncPossible() && !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+            db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
+                @Override
+                public void onFinish() {
+                    swipeRefreshLayout.setRefreshing(false);
+                    adapter.clearSelection();
+                    if (mActionMode != null) {
+                        mActionMode.finish();
+                    }
+                    // adapter.checkForUpdates(db.getNotes()); // FIXME deactivated, since it doesn't remove remotely deleted notes
+                    setListView(db.getNotes());
                 }
-                // adapter.checkForUpdates(db.getNotes()); // FIXME deactivated, since it doesn't remove remotely deleted notes
-                setListView(db.getNotes());
-            }
-        });
-        if (!PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+            });
             db.getNoteServerSyncHelper().scheduleSync(false);
         }
         super.onResume();
@@ -314,15 +321,19 @@ public class NotesListViewActivity extends AppCompatActivity implements
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
             db = new NoteSQLiteOpenHelper(this);
-            adapter.removeAll();
-            swipeRefreshLayout.setRefreshing(true);
-            db.getNoteServerSyncHelper().addCallback(new ICallback() {
-                @Override
-                public void onFinish() {
-                    setListView(db.getNotes());
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            });
+            if(db.getNoteServerSyncHelper().isSyncPossible()) {
+                adapter.removeAll();
+                swipeRefreshLayout.setRefreshing(true);
+                db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
+                    @Override
+                    public void onFinish() {
+                        setListView(db.getNotes());
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            } else {
+                Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+            }
             db.getNoteServerSyncHelper().scheduleSync(false);
         }
     }

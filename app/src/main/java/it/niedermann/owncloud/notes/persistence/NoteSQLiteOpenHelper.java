@@ -38,7 +38,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String key_content = "CONTENT";
     private static final String[] columns = {key_id, key_remote_id, key_status, key_title, key_modified, key_content};
 
-    @Deprecated
     private NoteServerSyncHelper serverSyncHelper = null;
     private Context context = null;
 
@@ -48,7 +47,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         serverSyncHelper = NoteServerSyncHelper.getInstance(this);
     }
 
-    @Deprecated
     public NoteServerSyncHelper getNoteServerSyncHelper() {
         return serverSyncHelper;
     }
@@ -243,9 +241,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * Updates a single Note and sets a synchronization Flag.
      *
      * @param note Note - Note with the updated Information
-     * @return The number of the Rows affected.
      */
     public void updateNoteAndSync(DBNote note) {
+        // TODO check if the content has really changed
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

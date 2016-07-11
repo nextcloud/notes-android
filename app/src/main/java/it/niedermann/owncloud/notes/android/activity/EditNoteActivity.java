@@ -27,6 +27,7 @@ public class EditNoteActivity extends AppCompatActivity {
     private DBNote note = null;
     private Timer timer = new Timer();
     private ActionBar actionBar;
+    private NoteSQLiteOpenHelper db;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class EditNoteActivity extends AppCompatActivity {
         content.setEnabled(false);
         content.setText(note.getContent());
         content.setEnabled(true);
+        db = new NoteSQLiteOpenHelper(this);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(note.getTitle());
@@ -59,18 +61,20 @@ public class EditNoteActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(final Editable s) {
-                timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                saveData();
-                            }
-                        });
-                    }
-                }, DELAY);
+                if(db.getNoteServerSyncHelper().isSyncPossible()) {
+                    timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    saveDataWithUI();
+                                }
+                            });
+                        }
+                    }, DELAY);
+                }
             }
         });
     }
@@ -102,7 +106,7 @@ public class EditNoteActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveData() {
+    private void saveDataWithUI() {
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setSubtitle(getString(R.string.action_edit_saving));
@@ -112,8 +116,7 @@ public class EditNoteActivity extends AppCompatActivity {
         note.setContent(((EditText) findViewById(R.id.editContent)).getText().toString());
         // #80
         note.setTitle(NoteUtil.generateNoteTitle(note.getContent()));
-        NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(this);
-        db.getNoteServerSyncHelper().addCallback(new ICallback() {
+        db.getNoteServerSyncHelper().addCallbackPush(new ICallback() {
             @Override
             public void onFinish() {
                 runOnUiThread(new Runnable() {
@@ -143,6 +146,9 @@ public class EditNoteActivity extends AppCompatActivity {
                 }*/
             }
         });
+        saveData();
+    }
+    private void saveData() {
         db.updateNoteAndSync(note);
     }
 }

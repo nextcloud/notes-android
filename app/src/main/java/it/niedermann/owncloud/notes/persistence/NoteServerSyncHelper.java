@@ -8,11 +8,8 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.util.LongSparseArray;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -58,12 +55,12 @@ public class NoteServerSyncHelper {
         return instance;
     }
 
-    private NoteSQLiteOpenHelper dbHelper;
-    private Context appContext;
+    private final NoteSQLiteOpenHelper dbHelper;
+    private final Context appContext;
 
     // Track network connection changes using a BroadcastReceiver
     private boolean networkConnected = false;
-    private BroadcastReceiver networkReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             ConnectivityManager connMgr = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -83,23 +80,16 @@ public class NoteServerSyncHelper {
     private boolean syncActive = false;
     private boolean syncScheduled = false;
 
+    // list of callbacks for both parts of synchronziation
+    private List<ICallback> callbacksPush = new ArrayList<>();
+    private List<ICallback> callbacksPull = new ArrayList<>();
 
-    private Handler handler = null;
-    private List<ICallback> callbacks = new ArrayList<>();
+
 
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.dbHelper = db;
         this.appContext = db.getContext().getApplicationContext();
 
-        handler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                for (ICallback callback : callbacks) {
-                    callback.onFinish();
-                }
-                callbacks.clear();
-            }
-        };
         // Registers BroadcastReceiver to track network connection changes.
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
@@ -110,17 +100,33 @@ public class NoteServerSyncHelper {
         super.finalize();
     }
 
+
+    public boolean isSyncPossible() {
+        return networkConnected;
+    }
+
+
     /**
-     * Adds a callback method to the NoteServerSyncHelper.
-     * All callbacks will be executed once all synchronize operations are done.
+     * Adds a callback method to the NoteServerSyncHelper for the synchronization part push local changes to the server.
+     * All callbacks will be executed once the synchronization operations are done.
      * After execution the callback will be deleted, so it has to be added again if it shall be
      * executed the next time all synchronize operations are finished.
      *
      * @param callback Implementation of ICallback, contains one method that shall be executed.
      */
-    @Deprecated
-    public void addCallback(ICallback callback) {
-        callbacks.add(callback);
+    public void addCallbackPush(ICallback callback) {
+        callbacksPush.add(callback);
+    }
+    /**
+     * Adds a callback method to the NoteServerSyncHelper for the synchronization part pull remote changes from the server.
+     * All callbacks will be executed once the synchronization operations are done.
+     * After execution the callback will be deleted, so it has to be added again if it shall be
+     * executed the next time all synchronize operations are finished.
+     *
+     * @param callback Implementation of ICallback, contains one method that shall be executed.
+     */
+    public void addCallbackPull(ICallback callback) {
+        callbacksPull.add(callback);
     }
 
 
@@ -131,9 +137,16 @@ public class NoteServerSyncHelper {
      */
     public void scheduleSync(boolean onlyLocalChanges) {
         Log.d(getClass().getSimpleName(), "Sync requested ("+(onlyLocalChanges?"onlyLocalChanges":"full")+"; "+(networkConnected?"network connected":"network NOT connected")+", "+(syncActive?"sync active":"sync NOT active")+") ...");
-        if(networkConnected && (!syncActive || onlyLocalChanges)) {
+        if(isSyncPossible() && (!syncActive || onlyLocalChanges)) {
             Log.d(getClass().getSimpleName(), "... starting now");
-            new SyncTask(onlyLocalChanges).execute();
+            SyncTask syncTask = new SyncTask(onlyLocalChanges);
+            syncTask.addCallbacks(callbacksPush);
+            callbacksPush = new ArrayList<>();
+            if(!onlyLocalChanges) {
+                syncTask.addCallbacks(callbacksPull);
+                callbacksPull = new ArrayList<>();
+            }
+            syncTask.execute();
         } else if(!onlyLocalChanges) {
             Log.d(getClass().getSimpleName(), "... scheduled");
             syncScheduled = true;
@@ -144,10 +157,15 @@ public class NoteServerSyncHelper {
 
     private class SyncTask extends AsyncTask<Void, Void, Void> {
         private final boolean onlyLocalChanges;
+        private final List<ICallback> callbacks = new ArrayList<>();
         private NotesClient client;
 
         public SyncTask(boolean onlyLocalChanges) {
             this.onlyLocalChanges = onlyLocalChanges;
+        }
+
+        public void addCallbacks(List<ICallback> callbacks) {
+            this.callbacks.addAll(callbacks);
         }
 
         @Override
@@ -273,10 +291,13 @@ public class NoteServerSyncHelper {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             syncActive = false;
+            // notify callbacks
+            for (ICallback callback : callbacks) {
+                callback.onFinish();
+            }
+            // start next sync if scheduled meanwhile
             if(syncScheduled) {
                 scheduleSync(false);
-            } else {
-                asyncTaskFinished();
             }
         }
     }
@@ -287,13 +308,5 @@ public class NoteServerSyncHelper {
         String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
         String password = preferences.getString(SettingsActivity.SETTINGS_PASSWORD, SettingsActivity.DEFAULT_SETTINGS);
         return new NotesClient(url, username, password);
-    }
-
-    /**
-     * Helper method to check if all synchronize operations are done yet.
-     */
-    @Deprecated
-    private void asyncTaskFinished() {
-        handler.obtainMessage(1).sendToTarget();
     }
 }
