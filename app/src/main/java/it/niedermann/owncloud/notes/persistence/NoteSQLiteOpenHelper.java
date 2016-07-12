@@ -258,7 +258,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Updates a single Note with data from the server, (if it was not modified locally). This is used by the synchronization task, hence no Synchronization will be triggered. Use updateNoteAndSync() instead!
+     * Updates a single Note with data from the server, (if it was not modified locally).
+     * Thereby, an optimistic concurrency control is realized in order to prevent conflicts arising due to parallel changes from the UI and synchronization.
+     * This is used by the synchronization task, hence no Synchronization will be triggered. Use updateNoteAndSync() instead!
      *
      * @param id local ID of Note
      * @param remoteNote Note from the server.
@@ -324,6 +326,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     /**
      * Delete a single Note from the Database, if it has a specific DBStatus.
+     * Thereby, an optimistic concurrency control is realized in order to prevent conflicts arising due to parallel changes from the UI and synchronization.
      *
      * @param id long - ID of the Note that should be deleted.
      * @param forceDBStatus DBStatus, e.g., if Note was marked as LOCAL_DELETED (for NoteSQLiteOpenHelper.SyncTask.pushLocalChanges()) or is unchanged VOID (for NoteSQLiteOpenHelper.SyncTask.pullRemoteChanges())

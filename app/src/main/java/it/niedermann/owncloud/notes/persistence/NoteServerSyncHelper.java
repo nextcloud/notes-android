@@ -101,6 +101,12 @@ public class NoteServerSyncHelper {
     }
 
 
+    /**
+     * Synchronization is only possible, if there is an active network connection.
+     * NoteServerSyncHelper observes changes in the network connection.
+     * The current state can be retrieved with this method.
+     * @return true if sync is possible, otherwise false.
+     */
     public boolean isSyncPossible() {
         return networkConnected;
     }
@@ -155,6 +161,10 @@ public class NoteServerSyncHelper {
         }
     }
 
+    /**
+     * SyncTask is an AsyncTask which performs the synchronization in a background thread.
+     * Synchronization consists of two parts: pushLocalChanges and pullRemoteChanges.
+     */
     private class SyncTask extends AsyncTask<Void, Void, Void> {
         private final boolean onlyLocalChanges;
         private final List<ICallback> callbacks = new ArrayList<>();
@@ -210,6 +220,7 @@ public class NoteServerSyncHelper {
                                 remoteNote = client.editNote(note.getRemoteId(), note.getContent());
                             }
                             // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
+                            // Please note, thas dbHelper.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
                                 Log.d(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
                                 remoteNote = client.createNote(note.getContent());
@@ -229,13 +240,14 @@ public class NoteServerSyncHelper {
                             } else {
                                 Log.d(getClass().getSimpleName(), "   ...delete (only local, since it was not synchronized)");
                             }
+                            // Please note, thas dbHelper.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             dbHelper.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
                             break;
                         default:
                             throw new IllegalStateException("Unknown State of Note: "+note);
                     }
                 } catch (IOException | JSONException e) {
-                    // FIXME Fehlerbehandlung sichtbar machen
+                    // FIXME make some errors visible in the UI
                     e.printStackTrace();
                 }
             }

@@ -8,6 +8,10 @@ import java.util.Locale;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
+/**
+ * OwnCloudNote represents a remote note from an OwnCloud server.
+ * It can be directly generated from the JSON answer from the server.
+ */
 public class OwnCloudNote implements Serializable {
     private long remoteId = 0;
     private String title = "";

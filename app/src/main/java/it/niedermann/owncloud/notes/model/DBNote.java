@@ -6,6 +6,10 @@ import java.util.Calendar;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
+/**
+ * DBNote represents a single note from the local SQLite database with all attributes.
+ * It extends OwnCloudNote with attributes required for local data management.
+ */
 public class DBNote extends OwnCloudNote implements Item, Serializable {
 
     private long id;

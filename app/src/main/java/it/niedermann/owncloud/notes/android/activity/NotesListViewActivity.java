@@ -140,9 +140,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     @SuppressWarnings("WeakerAccess")
     public void setListView(List<DBNote> noteList) {
-        Log.d(getClass().getSimpleName(), "setListView("+noteList.size()+" notes)");
-        //db.debugPrintFullDB(); // FIXME remove
-
         List<Item> itemList = new ArrayList<>();
         // #12 Create Sections depending on Time
         // TODO Move to ItemAdapter?

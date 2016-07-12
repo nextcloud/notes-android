@@ -40,6 +40,11 @@ public enum DBStatus {
         this.title = title;
     }
 
+    /**
+     * Parse a String an get the appropriate DBStatus enum element.
+     * @param str    The String containing the DBStatus identifier. Must not null.
+     * @return  The DBStatus fitting to the String.
+     */
     public static DBStatus parse(String str) {
         if(str.isEmpty()) {
             return DBStatus.VOID;
