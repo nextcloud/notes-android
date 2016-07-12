@@ -243,7 +243,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param note Note - Note with the updated Information
      */
     public void updateNoteAndSync(DBNote note) {
-        // TODO check if the content has really changed
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -251,9 +250,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_title, note.getTitle());
         values.put(key_modified, note.getModified(DATE_FORMAT));
         values.put(key_content, note.getContent());
-        db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
+        int rows = db.update(table_notes, values, key_id + " = ? AND " + key_content + " != ?", new String[]{String.valueOf(note.getId()), note.getContent()});
         db.close();
-        getNoteServerSyncHelper().scheduleSync(true);
+        if(rows > 0) {
+            getNoteServerSyncHelper().scheduleSync(true);
+        }
     }
 
     /**
