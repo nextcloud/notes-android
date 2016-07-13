@@ -82,7 +82,7 @@ public class EditNoteActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         content.setEnabled(false);
-        saveData();
+        saveData(null);
         Intent data = new Intent();
         data.setAction(Intent.ACTION_VIEW);
         data.putExtra(NoteActivity.EDIT_NOTE, note);
@@ -95,7 +95,7 @@ public class EditNoteActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 content.setEnabled(false);
-                saveData();
+                saveData(null);
                 Intent data = new Intent();
                 data.setAction(Intent.ACTION_VIEW);
                 data.putExtra(NoteActivity.EDIT_NOTE, note);
@@ -116,7 +116,7 @@ public class EditNoteActivity extends AppCompatActivity {
         note.setContent(((EditText) findViewById(R.id.editContent)).getText().toString());
         // #80
         note.setTitle(NoteUtil.generateNoteTitle(note.getContent()));
-        db.getNoteServerSyncHelper().addCallbackPush(new ICallback() {
+        saveData(new ICallback() {
             @Override
             public void onFinish() {
                 runOnUiThread(new Runnable() {
@@ -146,9 +146,8 @@ public class EditNoteActivity extends AppCompatActivity {
                 }*/
             }
         });
-        saveData();
     }
-    private void saveData() {
-        db.updateNoteAndSync(note);
+    private void saveData(ICallback callback) {
+        db.updateNoteAndSync(note, callback);
     }
 }

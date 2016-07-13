@@ -17,6 +17,7 @@ import java.util.Locale;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.OwnCloudNote;
+import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
@@ -241,19 +242,28 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * Updates a single Note and sets a synchronization Flag.
      *
      * @param note Note - Note with the updated Information
+     * @param callback When the synchronization is finished, this callback will be invoked (optional).
      */
-    public void updateNoteAndSync(DBNote note) {
-        note.setStatus(DBStatus.LOCAL_EDITED);
+    public void updateNoteAndSync(DBNote note, ICallback callback) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(key_status, note.getStatus().getTitle());
+        values.put(key_status, DBStatus.LOCAL_EDITED.getTitle());
         values.put(key_title, note.getTitle());
         values.put(key_modified, note.getModified(DATE_FORMAT));
         values.put(key_content, note.getContent());
         int rows = db.update(table_notes, values, key_id + " = ? AND " + key_content + " != ?", new String[]{String.valueOf(note.getId()), note.getContent()});
         db.close();
+        // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if(rows > 0) {
-            getNoteServerSyncHelper().scheduleSync(true);
+            note.setStatus(DBStatus.LOCAL_EDITED);
+            if(callback!=null) {
+                serverSyncHelper.addCallbackPush(callback);
+            }
+            serverSyncHelper.scheduleSync(true);
+        } else {
+            if(callback!=null) {
+                callback.onFinish();
+            }
         }
     }
 
