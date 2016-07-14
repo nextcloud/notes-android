@@ -24,8 +24,8 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class EditNoteActivity extends AppCompatActivity {
     private static final String LOG_TAG = "EditNote/SAVE";
-    private final long DELAY = 1000; // in ms
-    private final long DELAY_AFTER_SYNC = 4000; // in ms
+    private final long DELAY = 2000; // in ms
+    private final long DELAY_AFTER_SYNC = 5000; // in ms
     private EditText content = null;
     private DBNote note = null;
     private Timer timer, timerNextSync;
@@ -79,7 +79,7 @@ public class EditNoteActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        saveDataWithUI();
+                                        autoSave();
                                     }
                                 });
                             }
@@ -137,7 +137,7 @@ public class EditNoteActivity extends AppCompatActivity {
     /**
      * Saves the current changes and show the status in the ActionBar
      */
-    private void saveDataWithUI() {
+    private void autoSave() {
         Log.d(LOG_TAG, "START save+sync");
         saveActive = true;
         ActionBar ab = getSupportActionBar();
@@ -182,7 +182,7 @@ public class EditNoteActivity extends AppCompatActivity {
                                     Log.d(LOG_TAG, "FINISH, no new changes");
                                 } else {
                                     Log.d(LOG_TAG, "content has changed meanwhile -> restart save");
-                                    saveDataWithUI();
+                                    autoSave();
                                 }
                             }
                         });
