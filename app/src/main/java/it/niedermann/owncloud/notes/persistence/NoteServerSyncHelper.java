@@ -295,7 +295,7 @@ public class NoteServerSyncHelper {
                 status = LoginStatus.JSON_FAILED;
             }
             if (status!=LoginStatus.OK) {
-                Toast.makeText(appContext, appContext.getString(R.string.error_sync, appContext.getString(status.str)), Toast.LENGTH_LONG).show();
+                //Toast.makeText(appContext, appContext.getString(R.string.error_sync, appContext.getString(status.str)), Toast.LENGTH_LONG).show(); // FIXME move to onPostExecute!
             }
         }
 
