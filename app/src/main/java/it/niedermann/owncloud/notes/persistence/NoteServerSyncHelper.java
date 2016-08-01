@@ -191,13 +191,13 @@ public class NoteServerSyncHelper {
         protected LoginStatus doInBackground(Void... voids) {
             client = createNotesClient(); // recreate NoteClients on every sync in case the connection settings was changed
             Log.d(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
-            dbHelper.debugPrintFullDB();
+            //dbHelper.debugPrintFullDB();
             LoginStatus status = LoginStatus.OK;
             pushLocalChanges();
             if(!onlyLocalChanges) {
                 status = pullRemoteChanges();
             }
-            dbHelper.debugPrintFullDB();
+            //dbHelper.debugPrintFullDB();
             Log.d(getClass().getSimpleName(), "SYNCHRONIZATION FINISHED");
             return status;
         }
