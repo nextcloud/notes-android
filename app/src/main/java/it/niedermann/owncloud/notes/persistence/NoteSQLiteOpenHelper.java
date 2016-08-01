@@ -304,8 +304,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         } else {
             // used by: NoteServerSyncHelper.SyncTask.pullRemoteChanges()
             // update only, if not modified locally
-            whereClause = key_id + " = ? AND " + key_status + " = ?";
-            whereArgs = new String[]{String.valueOf(id), DBStatus.VOID.getTitle()};
+            whereClause = key_id + " = ? AND " + key_status + " = ? AND ("+key_modified+"!=? OR "+key_content+"!=?)";
+            whereArgs = new String[]{String.valueOf(id), DBStatus.VOID.getTitle(), remoteNote.getModified(DATE_FORMAT), remoteNote.getContent()};
         }
         int i = db.update(table_notes, values, whereClause, whereArgs);
         db.close();
