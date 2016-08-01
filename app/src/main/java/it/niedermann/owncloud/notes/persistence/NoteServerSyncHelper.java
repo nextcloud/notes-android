@@ -165,7 +165,7 @@ public class NoteServerSyncHelper {
      * SyncTask is an AsyncTask which performs the synchronization in a background thread.
      * Synchronization consists of two parts: pushLocalChanges and pullRemoteChanges.
      */
-    private class SyncTask extends AsyncTask<Void, Void, Void> {
+    private class SyncTask extends AsyncTask<Void, Void, LoginStatus> {
         private final boolean onlyLocalChanges;
         private final List<ICallback> callbacks = new ArrayList<>();
         private NotesClient client;
@@ -188,17 +188,18 @@ public class NoteServerSyncHelper {
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected LoginStatus doInBackground(Void... voids) {
             client = createNotesClient(); // recreate NoteClients on every sync in case the connection settings was changed
             Log.d(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
             dbHelper.debugPrintFullDB();
+            LoginStatus status = LoginStatus.OK;
             pushLocalChanges();
             if(!onlyLocalChanges) {
-                pullRemoteChanges();
+                status = pullRemoteChanges();
             }
             dbHelper.debugPrintFullDB();
             Log.d(getClass().getSimpleName(), "SYNCHRONIZATION FINISHED");
-            return null;
+            return status;
         }
 
         /**
@@ -256,7 +257,7 @@ public class NoteServerSyncHelper {
         /**
          * Pull remote Changes: update or create each remote note (if local pendant has no changes) and remove remotely deleted notes.
          */
-        private void pullRemoteChanges() {
+        private LoginStatus pullRemoteChanges() {
             Log.d(getClass().getSimpleName(), "pullRemoteChanges()");
             LoginStatus status = null;
             try {
@@ -289,19 +290,19 @@ public class NoteServerSyncHelper {
                 }
                 status = LoginStatus.OK;
             } catch (IOException e) {
-                e.printStackTrace();
                 status = LoginStatus.CONNECTION_FAILED;
             } catch (JSONException e) {
                 status = LoginStatus.JSON_FAILED;
             }
-            if (status!=LoginStatus.OK) {
-                //Toast.makeText(appContext, appContext.getString(R.string.error_sync, appContext.getString(status.str)), Toast.LENGTH_LONG).show(); // FIXME move to onPostExecute!
-            }
+            return status;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+        protected void onPostExecute(LoginStatus status) {
+            super.onPostExecute(status);
+            if (status!=LoginStatus.OK) {
+                Toast.makeText(appContext, appContext.getString(R.string.error_sync, appContext.getString(status.str)), Toast.LENGTH_LONG).show();
+            }
             syncActive = false;
             // notify callbacks
             for (ICallback callback : callbacks) {
