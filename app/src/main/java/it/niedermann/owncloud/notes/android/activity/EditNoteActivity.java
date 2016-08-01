@@ -144,12 +144,7 @@ public class EditNoteActivity extends AppCompatActivity {
         if (ab != null) {
             ab.setSubtitle(getString(R.string.action_edit_saving));
         }
-        // #74
-        note.setModified(Calendar.getInstance());
-        note.setContent(getContent());
-        // #80
-        note.setTitle(NoteUtil.generateNoteTitle(note.getContent()));
-        final String content = note.getContent();
+        final String content = getContent();
         saveData(new ICallback() {
             @Override
             public void onFinish() {
@@ -205,6 +200,9 @@ public class EditNoteActivity extends AppCompatActivity {
      * @param callback
      */
     private void saveData(ICallback callback) {
+        note.setModified(Calendar.getInstance());
+        note.setContent(getContent());
+        note.setTitle(NoteUtil.generateNoteTitle(note.getContent()));
         db.updateNoteAndSync(note, callback);
     }
 }
