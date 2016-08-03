@@ -40,7 +40,6 @@ public class EditNoteActivity extends AppCompatActivity {
         note = (DBNote) getIntent().getSerializableExtra(
                 NoteActivity.EDIT_NOTE);
         content = (EditText) findViewById(R.id.editContent);
-        content.setEnabled(false);
         content.setText(note.getContent());
         content.setEnabled(true);
         db = new NoteSQLiteOpenHelper(this);
@@ -140,9 +139,8 @@ public class EditNoteActivity extends AppCompatActivity {
     private void autoSave() {
         Log.d(LOG_TAG, "START save+sync");
         saveActive = true;
-        ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setSubtitle(getString(R.string.action_edit_saving));
+        if (actionBar != null) {
+            actionBar.setSubtitle(getString(R.string.action_edit_saving));
         }
         final String content = getContent();
         saveData(new ICallback() {
@@ -150,7 +148,8 @@ public class EditNoteActivity extends AppCompatActivity {
             public void onFinish() {
                 // AFTER SYNCHRONIZATION
                 Log.d(LOG_TAG, "...sync finished");
-                getSupportActionBar().setSubtitle(getResources().getString(R.string.action_edit_saved));
+                actionBar.setTitle(note.getTitle());
+                actionBar.setSubtitle(getResources().getString(R.string.action_edit_saved));
                 Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
                     @Override
                     public void run() {
@@ -158,7 +157,7 @@ public class EditNoteActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 // AFTER 1 SECOND: set ActionBar to default title
-                                getSupportActionBar().setSubtitle(getString(R.string.action_edit_editing));
+                                actionBar.setSubtitle(getString(R.string.action_edit_editing));
                             }
                         });
                     }
@@ -200,9 +199,6 @@ public class EditNoteActivity extends AppCompatActivity {
      * @param callback
      */
     private void saveData(ICallback callback) {
-        note.setModified(Calendar.getInstance());
-        note.setContent(getContent());
-        note.setTitle(NoteUtil.generateNoteTitle(note.getContent()));
-        db.updateNoteAndSync(note, callback);
+        note = db.updateNoteAndSync(note, getContent(), callback);
     }
 }

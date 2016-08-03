@@ -239,31 +239,37 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Updates a single Note and sets a synchronization Flag.
+     * Updates a single Note with a new content.
+     * The title is derived from the new content automatically, and modified date as well as DBStatus are updated, too -- if the content differs to the state in the database.
      *
-     * @param note Note - Note with the updated Information
+     * @param oldNote Note to be changed
+     * @param newContent New content
      * @param callback When the synchronization is finished, this callback will be invoked (optional).
+     * @return changed note if differs from database, otherwise the old note.
      */
-    public void updateNoteAndSync(DBNote note, ICallback callback) {
+    public DBNote updateNoteAndSync(DBNote oldNote, String newContent, ICallback callback) {
+        debugPrintFullDB();
+        DBNote newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNoteTitle(newContent), newContent, DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(key_status, DBStatus.LOCAL_EDITED.getTitle());
-        values.put(key_title, note.getTitle());
-        values.put(key_modified, note.getModified(DATE_FORMAT));
-        values.put(key_content, note.getContent());
-        int rows = db.update(table_notes, values, key_id + " = ? AND " + key_content + " != ?", new String[]{String.valueOf(note.getId()), note.getContent()});
+        values.put(key_status, newNote.getStatus().getTitle());
+        values.put(key_title, newNote.getTitle());
+        values.put(key_modified, newNote.getModified(DATE_FORMAT));
+        values.put(key_content, newNote.getContent());
+        int rows = db.update(table_notes, values, key_id + " = ? AND " + key_content + " != ?", new String[]{String.valueOf(newNote.getId()), newNote.getContent()});
         db.close();
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if(rows > 0) {
-            note.setStatus(DBStatus.LOCAL_EDITED);
             if(callback!=null) {
                 serverSyncHelper.addCallbackPush(callback);
             }
             serverSyncHelper.scheduleSync(true);
+            return newNote;
         } else {
             if(callback!=null) {
                 callback.onFinish();
             }
+            return oldNote;
         }
     }
 
