@@ -51,6 +51,19 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private NoteSQLiteOpenHelper db = null;
     private SearchView searchView = null;
 
+    private ICallback syncCallBack = new ICallback() {
+        @Override
+        public void onFinish() {
+            adapter.clearSelection();
+            if (mActionMode != null) {
+                mActionMode.finish();
+            }
+            // adapter.checkForUpdates(db.getNotes()); // FIXME deactivated, since it doesn't remove remotely deleted notes
+            setListView(db.getNotes());
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,24 +87,14 @@ public class NotesListViewActivity extends AppCompatActivity implements
             @Override
             public void onRefresh() {
                 if(db.getNoteServerSyncHelper().isSyncPossible()) {
-                    db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
-                        @Override
-                        public void onFinish() {
-                            swipeRefreshLayout.setRefreshing(false);
-                            adapter.clearSelection();
-                            if (mActionMode != null) {
-                                mActionMode.finish();
-                            }
-                            setListView(db.getNotes());
-                        }
-                    });
+                    synchronize();
                 } else {
                     swipeRefreshLayout.setRefreshing(false);
                     Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
                 }
-                db.getNoteServerSyncHelper().scheduleSync(false);
             }
         });
+        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
 
         // Floating Action Button
         findViewById(R.id.fab_create).setOnClickListener(this);
@@ -103,19 +106,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         if (db.getNoteServerSyncHelper().isSyncPossible() && !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
-            db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
-                @Override
-                public void onFinish() {
-                    swipeRefreshLayout.setRefreshing(false);
-                    adapter.clearSelection();
-                    if (mActionMode != null) {
-                        mActionMode.finish();
-                    }
-                    // adapter.checkForUpdates(db.getNotes()); // FIXME deactivated, since it doesn't remove remotely deleted notes
-                    setListView(db.getNotes());
-                }
-            });
-            db.getNoteServerSyncHelper().scheduleSync(false);
+            synchronize();
         }
         super.onResume();
     }
@@ -321,17 +312,10 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if(db.getNoteServerSyncHelper().isSyncPossible()) {
                 adapter.removeAll();
                 swipeRefreshLayout.setRefreshing(true);
-                db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
-                    @Override
-                    public void onFinish() {
-                        setListView(db.getNotes());
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-                });
+                synchronize();
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
             }
-            db.getNoteServerSyncHelper().scheduleSync(false);
         }
     }
 
@@ -393,6 +377,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
         } else {
             searchView.setIconified(true);
         }
+    }
+
+    private void synchronize() {
+        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
+        db.getNoteServerSyncHelper().scheduleSync(false);
     }
 
     /**
