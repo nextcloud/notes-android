@@ -25,6 +25,7 @@ public class NotesClientUtil {
         OK(0),
         AUTH_FAILED(R.string.error_username_password_invalid),
         CONNECTION_FAILED(R.string.error_io),
+        NO_NETWORK(R.string.error_no_network),
         JSON_FAILED(R.string.error_json),
         SERVER_FAILED(R.string.error_server);
 

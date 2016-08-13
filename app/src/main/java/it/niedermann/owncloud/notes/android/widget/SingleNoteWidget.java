@@ -12,7 +12,7 @@ import android.widget.RemoteViews;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.NoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
-import it.niedermann.owncloud.notes.model.Note;
+import it.niedermann.owncloud.notes.model.DBNote;
 
 /**
  * Widget which displays a single selected note.
@@ -20,7 +20,7 @@ import it.niedermann.owncloud.notes.model.Note;
  */
 public class SingleNoteWidget extends AppWidgetProvider {
 
-    public static void updateAppWidget(Note note, Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+    public static void updateAppWidget(DBNote note, Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
         if (note != null) {
             updateViews.setTextViewText(R.id.single_note_content, note.getSpannableContent());

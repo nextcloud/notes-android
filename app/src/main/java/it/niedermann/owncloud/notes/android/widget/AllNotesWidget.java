@@ -13,7 +13,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.model.Note;
+import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 /**
@@ -51,7 +52,7 @@ public class AllNotesWidget extends AppWidgetProvider {
 
     class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         private static final int mCount = 10;
-        private List<Note> mWidgetItems = new ArrayList<>();
+        private List<DBNote> mWidgetItems = new ArrayList<>();
         private Context mContext;
         private int mAppWidgetId;
 
@@ -60,13 +61,13 @@ public class AllNotesWidget extends AppWidgetProvider {
             mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
             NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(mContext);
-            db.synchronizeWithServer();
+            db.getNoteServerSyncHelper().scheduleSync(false);
             mWidgetItems = db.getNotes();
-            mWidgetItems.add(new Note(0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung"));
+            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", DBStatus.VOID));
         }
 
         public void onCreate() {
-            mWidgetItems.add(new Note(0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung"));
+            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", DBStatus.VOID));
         }
 
         @Override

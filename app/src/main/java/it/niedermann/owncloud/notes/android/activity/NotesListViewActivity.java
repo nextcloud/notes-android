@@ -12,21 +12,24 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
-import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.model.SectionItem;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.util.NotesClientUtil;
 
 public class NotesListViewActivity extends AppCompatActivity implements
         ItemAdapter.NoteClickListener, View.OnClickListener {
@@ -47,6 +50,19 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private SwipeRefreshLayout swipeRefreshLayout = null;
     private NoteSQLiteOpenHelper db = null;
     private SearchView searchView = null;
+
+    private ICallback syncCallBack = new ICallback() {
+        @Override
+        public void onFinish() {
+            adapter.clearSelection();
+            if (mActionMode != null) {
+                mActionMode.finish();
+            }
+            // adapter.checkForUpdates(db.getNotes()); // FIXME deactivated, since it doesn't remove remotely deleted notes
+            setListView(db.getNotes());
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,20 +86,15 @@ public class NotesListViewActivity extends AppCompatActivity implements
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                db.getNoteServerSyncHelper().addCallback(new ICallback() {
-                    @Override
-                    public void onFinish() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        adapter.clearSelection();
-                        if (mActionMode != null) {
-                            mActionMode.finish();
-                        }
-                        setListView(db.getNotes());
-                    }
-                });
-                db.getNoteServerSyncHelper().downloadNotes();
+                if(db.getNoteServerSyncHelper().isSyncPossible()) {
+                    synchronize();
+                } else {
+                    swipeRefreshLayout.setRefreshing(false);
+                    Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+                }
             }
         });
+        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
 
         // Floating Action Button
         findViewById(R.id.fab_create).setOnClickListener(this);
@@ -94,19 +105,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     @Override
     protected void onResume() {
-        db.getNoteServerSyncHelper().addCallback(new ICallback() {
-            @Override
-            public void onFinish() {
-                swipeRefreshLayout.setRefreshing(false);
-                adapter.clearSelection();
-                if (mActionMode != null) {
-                    mActionMode.finish();
-                }
-                adapter.checkForUpdates(db.getNotes());
-            }
-        });
-        if (!PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
-            db.getNoteServerSyncHelper().downloadNotes();
+        if (db.getNoteServerSyncHelper().isSyncPossible() && !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+            synchronize();
         }
         super.onResume();
     }
@@ -130,7 +130,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
      * @param noteList List&lt;Note&gt;
      */
     @SuppressWarnings("WeakerAccess")
-    public void setListView(List<Note> noteList) {
+    public void setListView(List<DBNote> noteList) {
         List<Item> itemList = new ArrayList<>();
         // #12 Create Sections depending on Time
         // TODO Move to ItemAdapter?
@@ -161,7 +161,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         month.set(Calendar.SECOND, 0);
         month.set(Calendar.MILLISECOND, 0);
         for (int i = 0; i < noteList.size(); i++) {
-            Note currentNote = noteList.get(i);
+            DBNote currentNote = noteList.get(i);
             if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
                 // < 10 minutes but after 00:00 today
                 //if (i > 0) {
@@ -290,7 +290,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 //not need because of db.synchronisation in createActivity
 
-                Note createdNote = (Note) data.getExtras().getSerializable(
+                DBNote createdNote = (DBNote) data.getExtras().getSerializable(
                         CREATED_NOTE);
                 adapter.add(createdNote);
                 //setListView(db.getNotes());
@@ -301,7 +301,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                         SELECTED_NOTE_POSITION);
                 adapter.remove(adapter.getItem(notePosition));
                 if (resultCode == RESULT_OK) {
-                    Note editedNote = (Note) data.getExtras().getSerializable(
+                    DBNote editedNote = (DBNote) data.getExtras().getSerializable(
                             NoteActivity.EDIT_NOTE);
                     adapter.add(editedNote);
                 }
@@ -309,16 +309,13 @@ public class NotesListViewActivity extends AppCompatActivity implements
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
             db = new NoteSQLiteOpenHelper(this);
-            adapter.removeAll();
-            swipeRefreshLayout.setRefreshing(true);
-            db.getNoteServerSyncHelper().addCallback(new ICallback() {
-                @Override
-                public void onFinish() {
-                    setListView(db.getNotes());
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            });
-            db.synchronizeWithServer();
+            if(db.getNoteServerSyncHelper().isSyncPossible()) {
+                adapter.removeAll();
+                swipeRefreshLayout.setRefreshing(true);
+                synchronize();
+            } else {
+                Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -354,7 +351,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     NoteActivity.class);
 
             Item item = adapter.getItem(position);
-            intent.putExtra(SELECTED_NOTE, (Note) item);
+            intent.putExtra(SELECTED_NOTE, (DBNote) item);
             intent.putExtra(SELECTED_NOTE_POSITION, position);
             startActivityForResult(intent, show_single_note_cmd);
 
@@ -380,6 +377,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
         } else {
             searchView.setIconified(true);
         }
+    }
+
+    private void synchronize() {
+        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
+        db.getNoteServerSyncHelper().scheduleSync(false);
     }
 
     /**
@@ -412,7 +414,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 case R.id.menu_delete:
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
-                        Note note = (Note) adapter.getItem(i);
+                        DBNote note = (DBNote) adapter.getItem(i);
                         db.deleteNoteAndSync(note.getId());
                         // Not needed because of dbsync
                         //adapter.remove(note);
