@@ -12,6 +12,8 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.support.v7.widget.helper.ItemTouchHelper.SimpleCallback;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -131,7 +133,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     @SuppressWarnings("WeakerAccess")
     public void setListView(List<DBNote> noteList) {
-        List<Item> itemList = new ArrayList<>();
+        final List<Item> itemList = new ArrayList<>();
         // #12 Create Sections depending on Time
         // TODO Move to ItemAdapter?
         boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
@@ -198,9 +200,45 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         adapter = new ItemAdapter(itemList);
         ItemAdapter.setNoteClickListener(this);
-        listView = (RecyclerView) findViewById(R.id.list_view);
+        listView = (RecyclerView) findViewById(R.id.recycler_view);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
+        ItemTouchHelper touchHelper = new ItemTouchHelper(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            /**
+             * Disable swipe on sections
+             *
+             * @param recyclerView RecyclerView
+             * @param viewHolder   RecyclerView.ViewHoler
+             * @return 0 if section, otherwise super()
+             */
+            @Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                if (viewHolder instanceof ItemAdapter.SectionViewHolder) return 0;
+                return super.getSwipeDirs(recyclerView, viewHolder);
+            }
+
+            /**
+             * Delete note if note is swiped to left or right
+             *
+             * @param viewHolder RecyclerView.ViewHoler
+             * @param direction  int
+             */
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
+                    DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                    db.deleteNoteAndSync((dbNote).getId());
+                    adapter.remove(dbNote);
+                    Log.v("Note", "Item deleted through swipe ----------------------------------------------");
+                }
+            }
+        });
+        touchHelper.attachToRecyclerView(listView);
     }
 
     /**

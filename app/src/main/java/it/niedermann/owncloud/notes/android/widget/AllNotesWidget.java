@@ -90,7 +90,7 @@ public class AllNotesWidget extends AppWidgetProvider {
             // Construct a remote views item based on the app widget item XML file,
             // and set the text based on the position.
             RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.fragment_notes_list_note_item);
-            rv.setTextViewText(R.id.list_view, mWidgetItems.get(position).getTitle());
+            rv.setTextViewText(R.id.recycler_view, mWidgetItems.get(position).getTitle());
 
             // Return the remote views object.
             return rv;

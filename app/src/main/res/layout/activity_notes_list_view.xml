@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,16 +10,17 @@
         android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/bg_normal"
         tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
         tools:ignore="MergeRootFrame">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_view"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg_normal"
-            android:scrollbars="vertical">
-        </android.support.v7.widget.RecyclerView>
+            android:background="@color/bg_highlighted"
+            android:scrollbars="vertical" />
+
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
@@ -28,4 +29,4 @@
         android:src="@drawable/ic_action_new"
         app:backgroundTint="@color/primary"
         app:rippleColor="@color/primary_dark"/>
-</merge>
+</RelativeLayout>

@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 24
+    buildToolsVersion '24.0.1'
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 11
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 13
         versionName "0.8.1"
     }
@@ -21,9 +21,9 @@ android {
 
 dependencies {
     compile 'com.commit451:bypasses:1.0.1'
-    compile 'com.android.support:support-v4:23.1.1'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:design:23.1.1'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-v4:24.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
+    compile 'com.android.support:recyclerview-v7:24.2.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
