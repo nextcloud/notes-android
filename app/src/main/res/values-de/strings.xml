@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ownCloud Notes</string>
     <string name="no_notes">Noch keine Notizen vorhanden</string>
     <string name="action_create">Neue Notiz</string>
     <string name="action_settings">Einstellungen</string>
@@ -86,4 +85,5 @@
 
     <string name="widget_all_notes_title">Alle Notizen</string>
     <string name="widget_single_note_title">Eine Notiz</string>
+    <string name="app_name">Notizen</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">оунКлауд белешке</string>
+    <string name="app_name">белешке</string>
     <string name="no_notes">Још нема белешки</string>
     <string name="action_create">Нова белешка</string>
     <string name="action_settings">Поставке</string>

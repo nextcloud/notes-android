@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ownCloud Notes</string>
+    <string name="app_name">Notes</string>
     <string name="no_notes">No notes yet</string>
     <string name="action_create">New note</string>
     <string name="action_settings">Settings</string>

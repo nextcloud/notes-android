@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ownCloud zápisník</string>
+    <string name="app_name">zápisník</string>
     <string name="no_notes">Zatím bez zápisků</string>
     <string name="action_create">Nový zápisek</string>
     <string name="action_settings">Nastavení</string>
