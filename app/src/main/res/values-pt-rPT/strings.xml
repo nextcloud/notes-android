@@ -57,7 +57,7 @@
 
     <!-- About -->
     <string name="about_version_title">Versão</string>
-    <string name="about_version">Está atualmente a usar a versão <strong>v0.8.1</strong></string>
+    <string name="about_version">Está atualmente a usar a versão <strong>v0.9.0</strong></string>
     <string name="about_maintainer_title">Mantenedor</string>
     <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">Desenvolvedores</string>

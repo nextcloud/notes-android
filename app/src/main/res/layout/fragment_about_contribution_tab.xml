@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_source_title"/>
+            android:text="@string/about_source_title" />
 
         <TextView
             android:id="@+id/about_source"
@@ -22,14 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/about_source"/>
+            android:text="@string/about_source" />
 
         <TextView
             android:id="@+id/about_issues_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_issues_title"/>
+            android:text="@string/about_issues_title" />
 
         <TextView
             android:id="@+id/about_issues"
@@ -37,6 +37,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/about_issues"/>
+            android:text="@string/about_issues" />
     </LinearLayout>
 </ScrollView>

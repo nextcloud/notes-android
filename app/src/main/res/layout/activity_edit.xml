@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/editContentContainer"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editContentContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -19,6 +18,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textMultiLine|textCapSentences"
-            android:padding="16dp"/>
+            android:padding="16dp" />
     </ScrollView>
 </LinearLayout>

@@ -52,7 +52,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         if (preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
             first_run = true;
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            }
         }
 
         field_url = (EditText) findViewById(R.id.settings_url);
