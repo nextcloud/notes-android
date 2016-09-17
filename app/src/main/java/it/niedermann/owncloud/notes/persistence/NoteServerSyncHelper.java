@@ -100,6 +100,9 @@ public class NoteServerSyncHelper {
         super.finalize();
     }
 
+    public static boolean isConfigured(Context context) {
+        return !PreferenceManager.getDefaultSharedPreferences(context).getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS).isEmpty();
+    }
 
     /**
      * Synchronization is only possible, if there is an active network connection.
@@ -108,7 +111,7 @@ public class NoteServerSyncHelper {
      * @return true if sync is possible, otherwise false.
      */
     public boolean isSyncPossible() {
-        return networkConnected;
+        return networkConnected && isConfigured(appContext);
     }
 
 
