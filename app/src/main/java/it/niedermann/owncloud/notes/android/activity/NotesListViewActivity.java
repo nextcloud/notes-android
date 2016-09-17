@@ -30,6 +30,7 @@ import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.SectionItem;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
 
@@ -72,7 +73,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         // First Run Wizard
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
-        if (preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+        if (!NoteServerSyncHelper.isConfigured(this)) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
         }
@@ -107,7 +108,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     @Override
     protected void onResume() {
-        if (db.getNoteServerSyncHelper().isSyncPossible() && !PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+        if (db.getNoteServerSyncHelper().isSyncPossible()) {
             synchronize();
         }
         super.onResume();

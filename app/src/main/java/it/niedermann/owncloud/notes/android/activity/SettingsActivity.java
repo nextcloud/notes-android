@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
 
@@ -28,7 +29,6 @@ import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
  */
 public class SettingsActivity extends AppCompatActivity {
 
-    public static final String SETTINGS_FIRST_RUN = "firstRun";
     public static final String SETTINGS_URL = "settingsUrl";
     public static final String SETTINGS_USERNAME = "settingsUsername";
     public static final String SETTINGS_PASSWORD = "settingsPassword";
@@ -50,7 +50,7 @@ public class SettingsActivity extends AppCompatActivity {
         preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
 
-        if (preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+        if (!NoteServerSyncHelper.isConfigured(this)) {
             first_run = true;
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
@@ -223,8 +223,6 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.putString(SETTINGS_URL, url);
                 editor.putString(SETTINGS_USERNAME, username);
                 editor.putString(SETTINGS_PASSWORD, password);
-                // Now it is no more First Run
-                editor.putBoolean(SETTINGS_FIRST_RUN, false);
                 editor.apply();
 
                 //NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(getApplicationContext());
