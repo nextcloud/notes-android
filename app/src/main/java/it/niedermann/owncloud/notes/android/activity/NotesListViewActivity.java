@@ -93,7 +93,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     synchronize();
                 } else {
                     swipeRefreshLayout.setRefreshing(false);
-                    Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+                    Log.d("Sync not possible", "NotesListViewActivity/SwipeRefreshLayout.OnRefreshListener (isConfigured="+db.getNoteServerSyncHelper().isConfigured(getApplicationContext())+")");
+                    Toast.makeText(getApplicationContext(), R.string.error_sync_not_possible, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -353,7 +354,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 swipeRefreshLayout.setRefreshing(true);
                 synchronize();
             } else {
-                Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+                Log.d("Sync not possible", "NotesListViewActivity#onActivityResult/server settings (isConfigured="+db.getNoteServerSyncHelper().isConfigured(getApplicationContext())+")");
+                Toast.makeText(getApplicationContext(), R.string.error_sync_not_possible, Toast.LENGTH_LONG).show();
             }
         }
     }

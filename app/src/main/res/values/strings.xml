@@ -45,6 +45,7 @@
     <string name="network_disconnected">No network available</string>
 
     <!-- Error -->
+    <string name="error_sync_not_possible">Please connect to the network and setup your account</string>
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_invalid_login">Invalid login: %1$s</string>
     <string name="error_json">is the owncloud Notes app activated on the server?</string>
