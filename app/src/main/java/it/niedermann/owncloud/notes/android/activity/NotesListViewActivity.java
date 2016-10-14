@@ -37,9 +37,7 @@ import it.niedermann.owncloud.notes.util.NotesClientUtil;
 public class NotesListViewActivity extends AppCompatActivity implements
         ItemAdapter.NoteClickListener, View.OnClickListener {
 
-    public final static String SELECTED_NOTE = "it.niedermann.owncloud.notes.clicked_note";
     public final static String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
-    public final static String SELECTED_NOTE_POSITION = "it.niedermann.owncloud.notes.clicked_note_position";
     public final static String CREDENTIALS_CHANGED = "it.niedermann.owncloud.notes.CREDENTIALS_CHANGED";
 
     private final static int create_note_cmd = 0;
@@ -336,12 +334,10 @@ public class NotesListViewActivity extends AppCompatActivity implements
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
-                int notePosition = data.getExtras().getInt(
-                        SELECTED_NOTE_POSITION);
+                int notePosition = data.getExtras().getInt(EditNoteActivity.PARAM_NOTE_POSITION);
                 adapter.remove(adapter.getItem(notePosition));
                 if (resultCode == RESULT_OK) {
-                    DBNote editedNote = (DBNote) data.getExtras().getSerializable(
-                            NoteActivity.EDIT_NOTE);
+                    DBNote editedNote = (DBNote) data.getExtras().getSerializable(EditNoteActivity.PARAM_NOTE);
                     adapter.add(editedNote);
                 }
             }
@@ -386,12 +382,10 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 mActionMode.finish();
             }
         } else {
-            Intent intent = new Intent(getApplicationContext(),
-                    NoteActivity.class);
-
             Item item = adapter.getItem(position);
-            intent.putExtra(SELECTED_NOTE, (DBNote) item);
-            intent.putExtra(SELECTED_NOTE_POSITION, position);
+            Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
+            intent.putExtra(EditNoteActivity.PARAM_NOTE, (DBNote) item);
+            intent.putExtra(EditNoteActivity.PARAM_NOTE_POSITION, position);
             startActivityForResult(intent, show_single_note_cmd);
 
         }
