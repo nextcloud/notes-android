@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.util;
 
+import java.util.regex.Pattern;
+
 import in.uncod.android.bypass.Bypass;
 
 /**
@@ -9,6 +11,12 @@ import in.uncod.android.bypass.Bypass;
 public class NoteUtil {
     private static final Bypass bypass = new Bypass();
 
+    private static final Pattern pLists = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
+    private static final Pattern pHeadings = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
+    private static final Pattern pHeadingLine = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
+    private static final Pattern pEmphasis = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
+    private static final Pattern pSpace1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
+    private static final Pattern pSpace2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
 
     /**
      * Parses a MarkDown-String and returns a Spannable
@@ -41,7 +49,15 @@ public class NoteUtil {
      * @return Plain Text-String
      */
     public static String removeMarkDown(String s) {
-        return s == null ? "" : s.replaceAll("[#*-]", "").trim();
+        if(s==null)
+            return "";
+        s = pLists.matcher(s).replaceAll("");
+        s = pHeadings.matcher(s).replaceAll("$1");
+        s = pHeadingLine.matcher(s).replaceAll("");
+        s = pEmphasis.matcher(s).replaceAll("$2");
+        s = pSpace1.matcher(s).replaceAll("");
+        s = pSpace2.matcher(s).replaceAll("");
+        return s;
     }
 
     /**
