@@ -14,6 +14,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,8 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
+
+import static it.niedermann.owncloud.notes.R.drawable.settings;
 
 /**
  * Allows to set Settings like URL, Username and Password for Server-Synchronization
@@ -41,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText field_password = null;
     private Button btn_submit = null;
     private boolean first_run = false;
+    private boolean showNotification = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +61,18 @@ public class SettingsActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             }
         }
+        showNotification = preferences.getBoolean("showNotification", false);
+        CheckBox cb;
+        cb = (CheckBox)findViewById(R.id.settings_notification);
+        cb.setChecked(showNotification);
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("showNotification", isChecked);
+                editor.commit();
+            }
+        });
 
         field_url = (EditText) findViewById(R.id.settings_url);
         field_username = (EditText) findViewById(R.id.settings_username);
@@ -131,7 +148,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
-
     /**
      * Prevent pressing back button on first run
      */

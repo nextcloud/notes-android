@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,7 +56,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private SwipeRefreshLayout swipeRefreshLayout = null;
     private NoteSQLiteOpenHelper db = null;
     private SearchView searchView = null;
-
     private ICallback syncCallBack = new ICallback() {
         @Override
         public void onFinish() {
@@ -101,6 +103,38 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         // Floating Action Button
         findViewById(R.id.fab_create).setOnClickListener(this);
+
+        // Show persistant notification for creating a new note
+        checkNotificationSetting();
+    }
+
+    protected void checkNotificationSetting(){
+        SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
+        Boolean showNotification = preferences.getBoolean("showNotification", false);
+        if(showNotification==true){
+            // add notification
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+            PendingIntent newNoteIntent = PendingIntent.getActivity(this, 0,
+                    new Intent(this, CreateNoteActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP),
+                    0);
+            builder.setSmallIcon(R.drawable.ic_action_new)
+                    .setContentTitle(getString(R.string.action_create))
+                    .setContentText("")
+                    .setOngoing(true)
+                    .setContentIntent(newNoteIntent)
+                    .setVisibility(NotificationCompat.VISIBILITY_SECRET);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(
+                    NOTIFICATION_SERVICE);
+
+            notificationManager.notify(10, builder.build());
+        }
+        else{
+            // remove notification
+            NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+            nMgr.cancel(10);
+        }
     }
 
     /**
@@ -108,6 +142,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     @Override
     protected void onResume() {
+        // Show persistant notification for creating a new note
+        checkNotificationSetting();
         if (db.getNoteServerSyncHelper().isSyncPossible()) {
             synchronize();
         }

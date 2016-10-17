@@ -64,4 +64,13 @@
         android:layout_height="wrap_content"
         android:shadowColor="@color/fg_default_low"
         android:text="@string/settings_submit" />
+
+    <CheckBox
+        android:id="@+id/settings_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_notification"
+        android:key="notificationCheckbox"
+        android:defaultValue="false"
+        android:paddingTop="10pt"/>
 </LinearLayout>
