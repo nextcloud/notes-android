@@ -78,13 +78,27 @@ public class NoteUtil {
     }
 
     /**
+     * Truncates a string to a desired maximum length.
+     * Like String.substring(int,int), but throw no exception if desired length is longer than the string.
+     * @param str String to truncate
+     * @param len Maximum length of the resulting string
+     * @return truncated string
+     */
+    public static String truncateString(String str, int len) {
+        return str.substring(0, Math.min(len, str.length()));
+    }
+
+    /**
      * Generates an excerpt of a content String (reads second line which is not empty)
      *
      * @param content String
      * @return excerpt String
      */
     public static String generateNoteExcerpt(String content) {
-        return getLineWithoutMarkDown(content, 1);
+        if (content.contains("\n"))
+            return truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 200).replace("\n", "   ");
+        else
+            return "";
     }
 
     /**

@@ -63,9 +63,9 @@ public class NoteUtilTest extends TestCase {
     }
 
     public void testGenerateNoteExcerpt() {
-        assertEquals("Test", NoteUtil.generateNoteExcerpt("Test"));
+        assertEquals("", NoteUtil.generateNoteExcerpt("Test"));
         assertEquals("Foo", NoteUtil.generateNoteExcerpt("Test\nFoo"));
-        assertEquals("Foo", NoteUtil.generateNoteExcerpt("Test\nFoo\nBar"));
+        assertEquals("Foo   Bar", NoteUtil.generateNoteExcerpt("Test\nFoo\nBar"));
         assertEquals("", NoteUtil.generateNoteExcerpt(""));
     }
 }
