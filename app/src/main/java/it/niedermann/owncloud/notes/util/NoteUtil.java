@@ -79,7 +79,10 @@ public class NoteUtil {
      * @return excerpt String
      */
     public static String generateNoteExcerpt(String content) {
-        return truncateString(removeMarkDown(content.replaceAll("^.*\n", "")).trim(), 200).replace("\n", "   ");
+        if (content.contains("\n"))
+            return truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 200).replace("\n", "   ");
+        else
+            return "";
     }
 
     /**
