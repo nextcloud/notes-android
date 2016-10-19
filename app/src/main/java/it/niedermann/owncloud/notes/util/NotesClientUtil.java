@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.util.Base64;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -80,10 +81,13 @@ public class NotesClientUtil {
                 return LoginStatus.SERVER_FAILED;
             }
         } catch (MalformedURLException e) {
+            Log.e(NotesClientUtil.class.getSimpleName(), "Exception", e);
             return LoginStatus.CONNECTION_FAILED;
         } catch (IOException e) {
+            Log.e(NotesClientUtil.class.getSimpleName(), "Exception", e);
             return LoginStatus.CONNECTION_FAILED;
         } catch (JSONException e) {
+            Log.e(NotesClientUtil.class.getSimpleName(), "Exception", e);
             return LoginStatus.JSON_FAILED;
         }
     }
