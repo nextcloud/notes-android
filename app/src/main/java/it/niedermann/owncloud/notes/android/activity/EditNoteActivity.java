@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
@@ -20,14 +20,19 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
-import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class EditNoteActivity extends AppCompatActivity {
+
+    public static final String PARAM_NOTE = "note";
+    public static final String PARAM_NOTE_POSITION = "note_position";
+
     private static final String LOG_TAG = "EditNote/SAVE";
-    private final long DELAY = 2000; // in ms
-    private final long DELAY_AFTER_SYNC = 5000; // in ms
+    private static final long DELAY = 2000; // in ms
+    private static final long DELAY_AFTER_SYNC = 5000; // in ms
+
     private EditText content = null;
     private DBNote note = null;
+    private int notePosition = 0;
     private Timer timer, timerNextSync;
     private boolean saveActive = false;
     private ActionBar actionBar;
@@ -37,8 +42,15 @@ public class EditNoteActivity extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
-        note = (DBNote) getIntent().getSerializableExtra(
-                NoteActivity.EDIT_NOTE);
+        if (savedInstanceState == null) {
+            Log.d(getClass().getSimpleName(), "Starting from Intent");
+            note = (DBNote) getIntent().getSerializableExtra(PARAM_NOTE);
+            notePosition = getIntent().getIntExtra(PARAM_NOTE_POSITION, 0);
+        } else {
+            Log.d(getClass().getSimpleName(), "Starting from SavedState");
+            note = (DBNote) savedInstanceState.getSerializable(PARAM_NOTE);
+            notePosition = savedInstanceState.getInt(PARAM_NOTE_POSITION);
+        }
         content = (EditText) findViewById(R.id.editContent);
         content.setText(note.getContent());
         content.setEnabled(true);
@@ -51,13 +63,11 @@ public class EditNoteActivity extends AppCompatActivity {
         }
         content.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                                          int after) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onTextChanged(final CharSequence s, int start, int before,
-                                      int count) {
+            public void onTextChanged(final CharSequence s, int start, int before, int count) {
                 if (timer != null) {
                     timer.cancel();
                     timer = null;
@@ -90,18 +100,69 @@ public class EditNoteActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putSerializable(PARAM_NOTE, note);
+        outState.putInt(PARAM_NOTE_POSITION, notePosition);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public void onBackPressed() {
         saveAndClose();
     }
 
+    /**
+     * Main-Menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_note_list_view, menu);
+        return true;
+    }
+
+    /**
+     * Main-Menu-Handler
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        NoteSQLiteOpenHelper db;
         switch (item.getItemId()) {
             case android.R.id.home:
                 saveAndClose();
                 return true;
+            case R.id.menu_delete:
+                db = new NoteSQLiteOpenHelper(this);
+                db.deleteNoteAndSync(note.getId());
+                Intent data = new Intent();
+                data.putExtra(PARAM_NOTE_POSITION, notePosition);
+                setResult(RESULT_FIRST_USER, data);
+                finish();
+                return true;
+            case R.id.menu_preview:
+                saveData(null);
+                Intent previewIntent = new Intent(getApplicationContext(), NoteActivity.class);
+                previewIntent.putExtra(NoteActivity.PARAM_NOTE, note);
+                startActivity(previewIntent);
+                return true;
+            case R.id.menu_share:
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, note.getTitle());
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, note.getContent());
+                startActivity(shareIntent);
+                return true;
+            /*case R.id.menu_copy:
+                db = new NoteSQLiteOpenHelper(this);
+                Note newNote = db.getNote(db.addNoteAndSync(note.getContent()));
+                newNote.setTitle(note.getTitle() + " (" + getResources().getString(R.string.copy) + ")");
+                db.updateNote(newNote);
+                finish();
+                return true;*/
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -120,7 +181,8 @@ public class EditNoteActivity extends AppCompatActivity {
         saveData(null);
         Intent data = new Intent();
         data.setAction(Intent.ACTION_VIEW);
-        data.putExtra(NoteActivity.EDIT_NOTE, note);
+        data.putExtra(PARAM_NOTE, note);
+        data.putExtra(PARAM_NOTE_POSITION, notePosition);
         setResult(RESULT_OK, data);
         finish();
     }

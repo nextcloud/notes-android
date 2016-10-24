@@ -16,6 +16,7 @@
     <string name="menu_delete">Löschen</string>
     <string name="menu_copy">Kopieren</string>
     <string name="menu_edit">Bearbeiten</string>
+    <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
     <string name="menu_about">Über</string>
 

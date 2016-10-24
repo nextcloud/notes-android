@@ -2,6 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_preview"
+        android:icon="@drawable/ic_eye_white_24dp"
+        android:orderInCategory="80"
+        android:title="@string/menu_preview"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/menu_share"
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:icon="@drawable/ic_action_share"

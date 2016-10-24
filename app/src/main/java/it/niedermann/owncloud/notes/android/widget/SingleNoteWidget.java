@@ -10,8 +10,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.NoteActivity;
-import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
 
 /**
@@ -24,8 +23,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
         RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
         if (note != null) {
             updateViews.setTextViewText(R.id.single_note_content, note.getSpannableContent());
-            Intent intent = new Intent(context, NoteActivity.class);
-            intent.putExtra(NotesListViewActivity.SELECTED_NOTE, note);
+            Intent intent = new Intent(context, EditNoteActivity.class);
+            intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
             // http://stackoverflow.com/questions/4011178/multiple-instances-of-widget-only-updating-last-widget
             Uri data = Uri.withAppendedPath(
                     Uri.parse("notes" + "://widget/id/")
