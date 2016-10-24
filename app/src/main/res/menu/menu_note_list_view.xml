@@ -21,6 +21,12 @@
         app:showAsAction="never"
         android:title="@string/menu_copy"/-->
     <item
+        android:id="@+id/menu_cancel"
+        android:icon="@drawable/ic_action_cancel"
+        android:orderInCategory="110"
+        android:title="@string/menu_cancel"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menu_delete"
         android:icon="@drawable/ic_action_delete"
         android:orderInCategory="120"

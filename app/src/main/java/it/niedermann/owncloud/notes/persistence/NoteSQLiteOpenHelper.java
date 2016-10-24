@@ -243,13 +243,18 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * The title is derived from the new content automatically, and modified date as well as DBStatus are updated, too -- if the content differs to the state in the database.
      *
      * @param oldNote Note to be changed
-     * @param newContent New content
+     * @param newContent New content. If this is <code>null</code>, then <code>oldNote</code> is saved again (useful for undoing changes).
      * @param callback When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
     public DBNote updateNoteAndSync(DBNote oldNote, String newContent, ICallback callback) {
         debugPrintFullDB();
-        DBNote newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNoteTitle(newContent), newContent, DBStatus.LOCAL_EDITED);
+        DBNote newNote;
+        if(newContent==null) {
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), DBStatus.LOCAL_EDITED);
+        } else {
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNoteTitle(newContent), newContent, DBStatus.LOCAL_EDITED);
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, newNote.getStatus().getTitle());

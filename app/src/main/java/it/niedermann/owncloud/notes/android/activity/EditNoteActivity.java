@@ -24,6 +24,7 @@ import it.niedermann.owncloud.notes.util.ICallback;
 public class EditNoteActivity extends AppCompatActivity {
 
     public static final String PARAM_NOTE = "note";
+    public static final String PARAM_ORIGINAL_NOTE = "original_note";
     public static final String PARAM_NOTE_POSITION = "note_position";
 
     private static final String LOG_TAG = "EditNote/SAVE";
@@ -31,7 +32,7 @@ public class EditNoteActivity extends AppCompatActivity {
     private static final long DELAY_AFTER_SYNC = 5000; // in ms
 
     private EditText content = null;
-    private DBNote note = null;
+    private DBNote note, originalNote;
     private int notePosition = 0;
     private Timer timer, timerNextSync;
     private boolean saveActive = false;
@@ -44,11 +45,12 @@ public class EditNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         if (savedInstanceState == null) {
             Log.d(getClass().getSimpleName(), "Starting from Intent");
-            note = (DBNote) getIntent().getSerializableExtra(PARAM_NOTE);
+            note = originalNote = (DBNote) getIntent().getSerializableExtra(PARAM_NOTE);
             notePosition = getIntent().getIntExtra(PARAM_NOTE_POSITION, 0);
         } else {
             Log.d(getClass().getSimpleName(), "Starting from SavedState");
             note = (DBNote) savedInstanceState.getSerializable(PARAM_NOTE);
+            originalNote = (DBNote) savedInstanceState.getSerializable(PARAM_ORIGINAL_NOTE);
             notePosition = savedInstanceState.getInt(PARAM_NOTE_POSITION);
         }
         content = (EditText) findViewById(R.id.editContent);
@@ -102,13 +104,14 @@ public class EditNoteActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(PARAM_NOTE, note);
+        outState.putSerializable(PARAM_ORIGINAL_NOTE, originalNote);
         outState.putInt(PARAM_NOTE_POSITION, notePosition);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onBackPressed() {
-        saveAndClose();
+        saveAndClose(true);
     }
 
     /**
@@ -126,13 +129,17 @@ public class EditNoteActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        NoteSQLiteOpenHelper db;
         switch (item.getItemId()) {
             case android.R.id.home:
-                saveAndClose();
+                saveAndClose(true);
+                return true;
+            case R.id.menu_cancel:
+                Log.d(LOG_TAG, "CANCEL: changed:  "+note);
+                Log.d(LOG_TAG, "CANCEL: original: "+originalNote);
+                note = db.updateNoteAndSync(originalNote, null, null);
+                saveAndClose(false);
                 return true;
             case R.id.menu_delete:
-                db = new NoteSQLiteOpenHelper(this);
                 db.deleteNoteAndSync(note.getId());
                 Intent data = new Intent();
                 data.putExtra(PARAM_NOTE_POSITION, notePosition);
@@ -168,7 +175,7 @@ public class EditNoteActivity extends AppCompatActivity {
     /**
      * Saves all changes and closes the Activity
      */
-    private void saveAndClose() {
+    private void saveAndClose(boolean save) {
         content.setEnabled(false);
         if(timer!=null) {
             timer.cancel();
@@ -178,7 +185,12 @@ public class EditNoteActivity extends AppCompatActivity {
             timerNextSync.cancel();
             timerNextSync = null;
         }
-        saveData(null);
+        if(save) {
+            Log.d(LOG_TAG, "saveAndClose with SAVE");
+            saveData(null);
+        } else {
+            Log.d(LOG_TAG, "saveAndClose WITHOUT save");
+        }
         Intent data = new Intent();
         data.setAction(Intent.ACTION_VIEW);
         data.putExtra(PARAM_NOTE, note);
@@ -261,6 +273,7 @@ public class EditNoteActivity extends AppCompatActivity {
      * @param callback
      */
     private void saveData(ICallback callback) {
+        Log.d(LOG_TAG, "saveData()");
         note = db.updateNoteAndSync(note, getContent(), callback);
     }
 }

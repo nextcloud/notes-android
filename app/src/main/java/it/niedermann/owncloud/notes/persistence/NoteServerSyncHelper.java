@@ -222,13 +222,13 @@ public class NoteServerSyncHelper {
                             // if note is not new, try to edit it.
                             if (note.getRemoteId()>0) {
                                 Log.d(getClass().getSimpleName(), "   ...try to edit");
-                                remoteNote = client.editNote(note.getRemoteId(), note.getContent());
+                                remoteNote = client.editNote(note);
                             }
                             // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
                             // Please note, thas dbHelper.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
                                 Log.d(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
-                                remoteNote = client.createNote(note.getContent());
+                                remoteNote = client.createNote(note);
                                 dbHelper.updateNote(note.getId(), remoteNote, note);
                             } else {
                                 dbHelper.updateNote(note.getId(), remoteNote, note);
