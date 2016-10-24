@@ -39,6 +39,7 @@
     <string name="settings_password_check_description">Shows if the credentials are correct.</string>
     <string name="settings_submit">Connect</string>
     <string name="settings_submitting">Connecting &#8230;</string>
+    <string name="settings_notification">Enable to show a persistant notification for quickly creating new notes.</string>
 
     <!-- Network -->
     <string name="network_connecting">Connecting</string>
