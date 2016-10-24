@@ -172,6 +172,7 @@ public class NoteServerSyncHelper {
         private final boolean onlyLocalChanges;
         private final List<ICallback> callbacks = new ArrayList<>();
         private NotesClient client;
+        private List<Throwable> exceptions = new ArrayList<>();
 
         public SyncTask(boolean onlyLocalChanges) {
             this.onlyLocalChanges = onlyLocalChanges;
@@ -293,8 +294,12 @@ public class NoteServerSyncHelper {
                 }
                 status = LoginStatus.OK;
             } catch (IOException e) {
+                Log.e(getClass().getSimpleName(), "Exception", e);
+                exceptions.add(e);
                 status = LoginStatus.CONNECTION_FAILED;
             } catch (JSONException e) {
+                Log.e(getClass().getSimpleName(), "Exception", e);
+                exceptions.add(e);
                 status = LoginStatus.JSON_FAILED;
             }
             return status;
@@ -305,6 +310,9 @@ public class NoteServerSyncHelper {
             super.onPostExecute(status);
             if (status!=LoginStatus.OK) {
                 Toast.makeText(appContext, appContext.getString(R.string.error_sync, appContext.getString(status.str)), Toast.LENGTH_LONG).show();
+                for (Throwable e : exceptions) {
+                    Toast.makeText(appContext, e.getClass().getName() + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
             syncActive = false;
             // notify callbacks
