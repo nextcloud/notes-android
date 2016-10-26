@@ -41,41 +41,40 @@ public class NotesClient {
         this.password = password;
     }
 
-    public List<OwnCloudNote> getNotes() throws JSONException,
-            IOException {
-        List<OwnCloudNote> notesList = new ArrayList<>();
-        JSONArray notes = new JSONArray(requestServer("notes", METHOD_GET, null));
+    private OwnCloudNote getNoteFromJSON(JSONObject json) throws JSONException {
         long noteId = 0;
         String noteTitle = "";
         String noteContent = "";
         Calendar noteModified = null;
-        JSONObject currentItem;
-        for (int i = 0; i < notes.length(); i++) {
-            currentItem = notes.getJSONObject(i);
+        if (!json.isNull(key_id)) {
+            noteId = json.getLong(key_id);
+        }
+        if (!json.isNull(key_title)) {
+            noteTitle = json.getString(key_title);
+        }
+        if (!json.isNull(key_content)) {
+            noteContent = json.getString(key_content);
+        }
+        if (!json.isNull(key_modified)) {
+            noteModified = GregorianCalendar.getInstance();
+            noteModified
+                    .setTimeInMillis(json.getLong(key_modified) * 1000);
+        }
+        return new OwnCloudNote(noteId, noteModified, noteTitle, noteContent);
+    }
 
-            if (!currentItem.isNull(key_id)) {
-                noteId = currentItem.getLong(key_id);
-            }
-            if (!currentItem.isNull(key_title)) {
-                noteTitle = currentItem.getString(key_title);
-            }
-            if (!currentItem.isNull(key_content)) {
-                noteContent = currentItem.getString(key_content);
-            }
-            if (!currentItem.isNull(key_modified)) {
-                noteModified = GregorianCalendar.getInstance();
-                noteModified
-                        .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
-            }
-            notesList
-                    .add(new OwnCloudNote(noteId, noteModified, noteTitle, noteContent));
+    public List<OwnCloudNote> getNotes() throws JSONException, IOException {
+        List<OwnCloudNote> notesList = new ArrayList<>();
+        JSONArray notes = new JSONArray(requestServer("notes", METHOD_GET, null));
+        for (int i = 0; i < notes.length(); i++) {
+            JSONObject json = notes.getJSONObject(i);
+            notesList.add(getNoteFromJSON(json));
         }
         return notesList;
     }
 
     /**
      * Fetches a Note by ID from Server
-     * TODO Maybe fetch only id, title and modified from server until a note has been opened?
      *
      * @param id long - ID of the wanted note
      * @return Requested Note
@@ -83,88 +82,33 @@ public class NotesClient {
      * @throws IOException
      */
     @SuppressWarnings("unused")
-    public OwnCloudNote getNoteById(long id) throws
-            JSONException, IOException {
-        long noteId = 0;
-        String noteTitle = "";
-        String noteContent = "";
-        Calendar noteModified = null;
-        JSONObject currentItem = new JSONObject(
-                requestServer("notes/" + id, METHOD_GET, null));
+    public OwnCloudNote getNoteById(long id) throws JSONException, IOException {
+        JSONObject json = new JSONObject(requestServer("notes/" + id, METHOD_GET, null));
+        return getNoteFromJSON(json);
+    }
 
-        if (!currentItem.isNull(key_id)) {
-            noteId = currentItem.getLong(key_id);
-        }
-        if (!currentItem.isNull(key_title)) {
-            noteTitle = currentItem.getString(key_title);
-        }
-        if (!currentItem.isNull(key_content)) {
-            noteContent = currentItem.getString(key_content);
-        }
-        if (!currentItem.isNull(key_modified)) {
-            noteModified = GregorianCalendar.getInstance();
-            noteModified
-                    .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
-        }
-        return new OwnCloudNote(noteId, noteModified, noteTitle, noteContent);
+    private OwnCloudNote putNote(OwnCloudNote note, String path)  throws JSONException, IOException {
+        JSONObject paramObject = new JSONObject();
+        paramObject.accumulate(key_content, note.getContent());
+        paramObject.accumulate(key_modified, note.getModified().getTimeInMillis()/1000);
+        JSONObject json = new JSONObject(requestServer(path, METHOD_PUT, paramObject));
+        return getNoteFromJSON(json);
     }
 
     /**
      * Creates a Note on the Server
      *
-     * @param content String - Content of the new Note
+     * @param note {@link OwnCloudNote} - the new Note
      * @return Created Note including generated Title, ID and lastModified-Date
      * @throws JSONException
      * @throws IOException
      */
-    public OwnCloudNote createNote(String content) throws
-            JSONException, IOException {
-        long noteId = 0;
-        String noteTitle = "";
-        String noteContent = "";
-        Calendar noteModified = null;
-
-        JSONObject paramObject = new JSONObject();
-        paramObject.accumulate(key_content, content);
-        JSONObject currentItem = new JSONObject(requestServer("notes", METHOD_POST,
-                paramObject));
-
-        if (!currentItem.isNull(key_id)) {
-            noteId = currentItem.getLong(key_id);
-        }
-        if (!currentItem.isNull(key_title)) {
-            noteTitle = currentItem.getString(key_title);
-        }
-        if (!currentItem.isNull(key_content)) {
-            noteContent = currentItem.getString(key_content);
-        }
-        if (!currentItem.isNull(key_modified)) {
-            noteModified = GregorianCalendar.getInstance();
-            noteModified
-                    .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
-        }
-        return new OwnCloudNote(noteId, noteModified, noteTitle, noteContent);
+    public OwnCloudNote createNote(OwnCloudNote note) throws JSONException, IOException {
+        return putNote(note, "notes");
     }
 
-    public OwnCloudNote editNote(long noteId, String content)
-            throws JSONException, IOException {
-        String noteTitle = "";
-        Calendar noteModified = null;
-
-        JSONObject paramObject = new JSONObject();
-        paramObject.accumulate(key_content, content);
-        JSONObject currentItem = new JSONObject(requestServer(
-                "notes/" + noteId, METHOD_PUT, paramObject));
-
-        if (!currentItem.isNull(key_title)) {
-            noteTitle = currentItem.getString(key_title);
-        }
-        if (!currentItem.isNull(key_modified)) {
-            noteModified = GregorianCalendar.getInstance();
-            noteModified
-                    .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
-        }
-        return new OwnCloudNote(noteId, noteModified, noteTitle, content);
+    public OwnCloudNote editNote(OwnCloudNote note) throws JSONException, IOException {
+        return putNote(note, "notes/" + note.getRemoteId());
     }
 
     public void deleteNote(long noteId) throws
