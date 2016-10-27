@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.util.Base64;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -87,11 +88,11 @@ public class NotesClient {
         return getNoteFromJSON(json);
     }
 
-    private OwnCloudNote putNote(OwnCloudNote note, String path)  throws JSONException, IOException {
+    private OwnCloudNote putNote(OwnCloudNote note, String path, String method)  throws JSONException, IOException {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(key_content, note.getContent());
         paramObject.accumulate(key_modified, note.getModified().getTimeInMillis()/1000);
-        JSONObject json = new JSONObject(requestServer(path, METHOD_PUT, paramObject));
+        JSONObject json = new JSONObject(requestServer(path, method, paramObject));
         return getNoteFromJSON(json);
     }
 
@@ -104,11 +105,11 @@ public class NotesClient {
      * @throws IOException
      */
     public OwnCloudNote createNote(OwnCloudNote note) throws JSONException, IOException {
-        return putNote(note, "notes");
+        return putNote(note, "notes", METHOD_POST);
     }
 
     public OwnCloudNote editNote(OwnCloudNote note) throws JSONException, IOException {
-        return putNote(note, "notes/" + note.getRemoteId());
+        return putNote(note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
     public void deleteNote(long noteId) throws
@@ -139,7 +140,9 @@ public class NotesClient {
                         + new String(Base64.encode((username + ":"
                         + password).getBytes(), Base64.NO_WRAP)));
         con.setConnectTimeout(10 * 1000); // 10 seconds
+        Log.d(getClass().getSimpleName(), method + " " + targetURL);
         if (params != null) {
+            Log.d(getClass().getSimpleName(), "Params: "+params);
             con.setFixedLengthStreamingMode(params.toString().getBytes().length);
             con.setRequestProperty("Content-Type", application_json);
             con.setDoOutput(true);
