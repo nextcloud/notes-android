@@ -45,6 +45,16 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     /**
+     * Replaces a note with an updated version
+     * @param note Note with the changes.
+     * @param position position in the list of the node
+     */
+    public void replace(DBNote note, int position) {
+        itemList.set(position, note);
+        notifyItemChanged(position);
+    }
+
+    /**
      * Removes all items from the adapter.
      */
     public void removeAll() {
