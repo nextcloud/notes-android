@@ -59,13 +59,10 @@
     <string name="about_version_title">Verze</string>
     <string name="about_version">Právě používáte <strong>%1$s</strong></string>
     <string name="about_maintainer_title">Správce</string>
-    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">Vývojáři</string>
-    <string name="about_developers">Stefan Niedermann, HeaDBanGer84, Felix Edelmann</string>
     <string name="about_translators_title">Překladatelé</string>
     <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian), mist (Czech)</string>
     <string name="about_testers_title">Testeři</string>
-    <string name="about_testers">Jan C. Borchardt</string>
     <string name="about_source_title">Source code</string>
     <string name="about_source">Projekt je hostovaný na GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Chyby</string>

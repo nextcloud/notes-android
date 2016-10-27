@@ -62,13 +62,10 @@
     <string name="about_version_title">Издање</string>
     <string name="about_version">Текуће издање је <strong>%1$s</strong></string>
     <string name="about_maintainer_title">Главни програмер</string>
-    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">Програмери</string>
-    <string name="about_developers">Стефан Нидерман (Stefan Niedermann), HeaDBanGer84, Felix Edelmann</string>
     <string name="about_translators_title">Преводиоци</string>
     <string name="about_translators">Младен Пејаковић (српски), ageru (Français (France)), proninyaroslav (Russian), mist (Czech)</string>
     <string name="about_testers_title">Тестери</string>
-    <string name="about_testers">Јан Борхарт (Jan C. Borchardt)</string>
     <string name="about_source_title">Изворни кôд</string>
     <string name="about_source">Пројекат је хостован на Гитхабу: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Грешке</string>
