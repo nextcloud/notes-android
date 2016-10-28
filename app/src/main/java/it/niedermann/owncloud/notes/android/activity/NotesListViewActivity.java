@@ -371,10 +371,18 @@ public class NotesListViewActivity extends AppCompatActivity implements
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
                 int notePosition = data.getExtras().getInt(EditNoteActivity.PARAM_NOTE_POSITION);
-                adapter.remove(adapter.getItem(notePosition));
+                Item oldItem = adapter.getItem(notePosition);
+                if(resultCode == RESULT_FIRST_USER) {
+                    adapter.remove(oldItem);
+                }
                 if (resultCode == RESULT_OK) {
                     DBNote editedNote = (DBNote) data.getExtras().getSerializable(EditNoteActivity.PARAM_NOTE);
-                    adapter.add(editedNote);
+                    if(oldItem instanceof DBNote && !editedNote.getModified().after(((DBNote)oldItem).getModified())) {
+                        adapter.replace(editedNote, notePosition);
+                    } else {
+                        adapter.remove(oldItem);
+                        adapter.add(editedNote);
+                    }
                 }
             }
         } else if (requestCode == server_settings) {
