@@ -65,13 +65,13 @@
     <string name="about_version_title">Version</string>
     <string name="about_version">You are currently using <strong>%1$s</strong></string>
     <string name="about_maintainer_title">Maintainer</string>
-    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_maintainer" translatable="false"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">Developers</string>
-    <string name="about_developers">Stefan Niedermann, HeaDBanGer84, Felix Edelmann</string>
+    <string name="about_developers" translatable="false">Stefan Niedermann, Kristof Hamann, HeaDBanGer84, Felix Edelmann</string>
     <string name="about_translators_title">Translators</string>
     <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian), mist (Czech)</string>
     <string name="about_testers_title">Testers</string>
-    <string name="about_testers">Jan C. Borchardt</string>
+    <string name="about_testers" translatable="false">Jan C. Borchardt</string>
     <string name="about_source_title">Source code</string>
     <string name="about_source">This project is hosted on GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Issues</string>

@@ -59,13 +59,10 @@
     <string name="about_version_title">Versão</string>
     <string name="about_version">Está atualmente a usar a versão <strong>%1$s</strong></string>
     <string name="about_maintainer_title">Mantenedor</string>
-    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">Desenvolvedores</string>
-    <string name="about_developers">Stefan Niedermann, HeaDBanGer84, Felix Edelmann</string>
     <string name="about_translators_title">Tradutores</string>
     <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian)</string>
     <string name="about_testers_title">Experimentadores</string>
-    <string name="about_testers">Jan C. Borchardt</string>
     <string name="about_source_title">Código fonte</string>
     <string name="about_source">Este projeto está alojado no GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Problemas</string>
