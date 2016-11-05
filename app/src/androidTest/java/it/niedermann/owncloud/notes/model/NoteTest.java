@@ -11,7 +11,7 @@ import java.util.Calendar;
 public class NoteTest extends TestCase {
 
     public void testMarkDownStrip() {
-        OwnCloudNote note = new OwnCloudNote(0, Calendar.getInstance(), "#Title", "");
+        OwnCloudNote note = new OwnCloudNote(0, Calendar.getInstance(), "#Title", "", false);
         assertTrue("Title".equals(note.getTitle()));
         note.setTitle("* Aufzählung");
         assertTrue("Aufzählung".equals(note.getTitle()));

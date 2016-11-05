@@ -229,10 +229,8 @@ public class NoteServerSyncHelper {
                             if (remoteNote == null) {
                                 Log.d(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
                                 remoteNote = client.createNote(note);
-                                dbHelper.updateNote(note.getId(), remoteNote, note);
-                            } else {
-                                dbHelper.updateNote(note.getId(), remoteNote, note);
                             }
+                            dbHelper.updateNote(note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if(note.getRemoteId()>0) {
@@ -252,8 +250,8 @@ public class NoteServerSyncHelper {
                             throw new IllegalStateException("Unknown State of Note: "+note);
                     }
                 } catch (IOException | JSONException e) {
-                    // FIXME make some errors visible in the UI
-                    e.printStackTrace();
+                    Log.e(getClass().getSimpleName(), "Exception", e);
+                    exceptions.add(e);
                 }
             }
         }

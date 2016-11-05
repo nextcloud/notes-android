@@ -124,6 +124,14 @@ public class EditNoteActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
+        itemFavorite.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_outline_white_24dp);
+        itemFavorite.setChecked(note.isFavorite());
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     /**
      * Main-Menu-Handler
      */
@@ -145,6 +153,10 @@ public class EditNoteActivity extends AppCompatActivity {
                 data.putExtra(PARAM_NOTE_POSITION, notePosition);
                 setResult(RESULT_FIRST_USER, data);
                 finish();
+                return true;
+            case R.id.menu_favorite:
+                db.toggleFavorite(note, null);
+                invalidateOptionsMenu();
                 return true;
             case R.id.menu_preview:
                 saveData(null);

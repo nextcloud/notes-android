@@ -64,11 +64,11 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements ItemA
     private void setListView(List<DBNote> noteList) {
         List<Item> itemList = new ArrayList<>();
         itemList.addAll(noteList);
-        adapter = new ItemAdapter(itemList);
+        adapter = new ItemAdapter(this);
+        adapter.setItemList(itemList);
         listView = (RecyclerView) findViewById(R.id.select_single_note_list_view);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
-        ItemAdapter.setNoteClickListener(this);
     }
 
     @Override
@@ -85,6 +85,10 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements ItemA
         resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         setResult(RESULT_OK, resultValue);
         finish();
+    }
+
+    @Override
+    public void onNoteFavoriteClick(int position, View v) {
     }
 
     @Override
