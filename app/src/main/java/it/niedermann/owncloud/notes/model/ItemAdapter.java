@@ -16,22 +16,23 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int section_type = 0;
     private static final int note_type = 1;
-    private static NoteClickListener noteClickListener;
+    private final NoteClickListener noteClickListener;
     private List<Item> itemList = null;
     private List<Integer> selected = null;
-    public ItemAdapter(List<Item> itemList) {
-        //super(context, android.R.layout.simple_list_item_1, itemList);
-        super();
-        this.itemList = itemList;
+
+    public ItemAdapter(NoteClickListener noteClickListener) {
+        this.itemList = new ArrayList<>();
         this.selected = new ArrayList<>();
+        this.noteClickListener = noteClickListener;
     }
 
     /**
-     * Sets the given NoteClickListener that should be notified on clicks
-     * @param noteClickListener NoteClickListener
+     * Updates the item list and notifies respective view to update.
+     * @param itemList
      */
-    public static void setNoteClickListener(NoteClickListener noteClickListener) {
-        ItemAdapter.noteClickListener = noteClickListener;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
+        notifyDataSetChanged();
     }
 
     /**
@@ -62,42 +63,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    /**
-     * Compares the given List of notes to the current internal holded notes and updates the list if necessairy
-     * @param newNotes List of more up to date notes
-     */
-    public void checkForUpdates(List<DBNote> newNotes) {
-        for(DBNote newNote : newNotes) {
-            boolean foundNewNoteInOldList = false;
-            for(Item oldItem : itemList) {
-                if(!oldItem.isSection()) {
-                    DBNote oldNote = (DBNote) oldItem;
-                    if(newNote.getId() == oldNote.getId()) {
-                        // Notes have the same id, check which is newer
-                        if(newNote.getModified().after(oldNote.getModified())) {
-                            // Replace old note with new note because new note has been edited more recently
-                            int indexOfOldNote = itemList.indexOf(oldNote);
-                            itemList.remove(indexOfOldNote);
-                            itemList.add(indexOfOldNote, newNote);
-                            this.notifyItemChanged(indexOfOldNote);
-                        }
-                        foundNewNoteInOldList = true;
-                        break;
-                    }
-                }
-            }
-            if(!foundNewNoteInOldList) {
-                // Add new note because it could not be found in the itemList
-                add(newNote);
-            }
-        }
-        //TODO check if a note has been deleted on server??
-    }
-
     // Create new views (invoked by the layout manager)
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                      int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v;
         if (viewType == section_type) {
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_notes_list_section_item, parent, false);
@@ -111,7 +79,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         Item item = itemList.get(position);
@@ -120,11 +88,19 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((SectionViewHolder) holder).sectionTitle.setText(section.geTitle());
             ((SectionViewHolder) holder).setPosition(position);
         } else {
-            DBNote note = (DBNote) item;
-            ((NoteViewHolder) holder).noteTitle.setText(note.getTitle());
-            ((NoteViewHolder) holder).noteExcerpt.setText(note.getExcerpt());
-            ((NoteViewHolder) holder).noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.GONE : View.VISIBLE);
-            ((NoteViewHolder) holder).setPosition(position);
+            final DBNote note = (DBNote) item;
+            final NoteViewHolder nvHolder = ((NoteViewHolder) holder);
+            nvHolder.noteTitle.setText(note.getTitle());
+            nvHolder.noteExcerpt.setText(note.getExcerpt());
+            nvHolder.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.GONE : View.VISIBLE);
+            nvHolder.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_grey600_24dp : R.drawable.ic_star_outline_grey600_24dp);
+            nvHolder.noteFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    noteClickListener.onNoteFavoriteClick(position, view);
+                }
+            });
+            nvHolder.setPosition(position);
         }
     }
 
@@ -173,14 +149,16 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface NoteClickListener {
         void onNoteClick(int position, View v);
+        void onNoteFavoriteClick(int position, View v);
         boolean onNoteLongClick(int position, View v);
     }
 
-    public static class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
+    public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         // each data item is just a string in this case
         public TextView noteTitle;
         public TextView noteExcerpt;
         public ImageView noteStatus;
+        public ImageView noteFavorite;
         public int position = -1;
 
         private NoteViewHolder(View v) {
@@ -188,6 +166,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             this.noteTitle = (TextView) v.findViewById(R.id.noteTitle);
             this.noteExcerpt = (TextView) v.findViewById(R.id.noteExcerpt);
             this.noteStatus = (ImageView) v.findViewById(R.id.noteStatus);
+            this.noteFavorite = (ImageView) v.findViewById(R.id.noteFavorite);
             v.setOnClickListener(this);
             v.setOnLongClickListener(this);
         }

@@ -16,8 +16,8 @@ public class DBNote extends OwnCloudNote implements Item, Serializable {
     private DBStatus status;
     private String excerpt = "";
 
-    public DBNote(long id, long remoteId, Calendar modified, String title, String content, DBStatus status) {
-        super(remoteId, modified, title, content);
+    public DBNote(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, DBStatus status) {
+        super(remoteId, modified, title, content, favorite);
         this.id = id;
         setExcerpt(content);
         this.status = status;
@@ -60,6 +60,6 @@ public class DBNote extends OwnCloudNote implements Item, Serializable {
 
     @Override
     public String toString() {
-        return "#" + getId() + "/R"+getRemoteId()+" " + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + ") " + getStatus();
+        return "#" + getId() + "/R"+getRemoteId()+" " + (isFavorite() ? " (*) " : "     ") + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + ") " + getStatus();
     }
 }

@@ -17,13 +17,15 @@ public class OwnCloudNote implements Serializable {
     private String title = "";
     private Calendar modified = null;
     private String content = "";
+    private boolean favorite = false;
 
-    public OwnCloudNote(long remoteId, Calendar modified, String title, String content) {
+    public OwnCloudNote(long remoteId, Calendar modified, String title, String content, boolean favorite) {
         this.remoteId = remoteId;
         if (title != null)
             setTitle(title);
         setTitle(title);
         setContent(content);
+        setFavorite(favorite);
         this.modified = modified;
     }
 
@@ -65,8 +67,16 @@ public class OwnCloudNote implements Serializable {
         this.content = content;
     }
 
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
     @Override
     public String toString() {
-        return "#" + getRemoteId() + " " + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + ")";
+        return "#" + getRemoteId() + " " + (isFavorite() ? " (*) " : "     ") + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + ")";
     }
 }

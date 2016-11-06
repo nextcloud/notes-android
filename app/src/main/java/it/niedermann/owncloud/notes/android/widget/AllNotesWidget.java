@@ -63,11 +63,11 @@ public class AllNotesWidget extends AppWidgetProvider {
             NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(mContext);
             db.getNoteServerSyncHelper().scheduleSync(false);
             mWidgetItems = db.getNotes();
-            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", DBStatus.VOID));
+            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", false, DBStatus.VOID));
         }
 
         public void onCreate() {
-            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", DBStatus.VOID));
+            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", false, DBStatus.VOID));
         }
 
         @Override

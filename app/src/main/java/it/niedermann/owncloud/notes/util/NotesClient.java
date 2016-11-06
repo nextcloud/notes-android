@@ -30,6 +30,7 @@ public class NotesClient {
     private static final String key_id = "id";
     private static final String key_title = "title";
     private static final String key_content = "content";
+    private static final String key_favorite = "favorite";
     private static final String key_modified = "modified";
     private static final String application_json = "application/json";
     private String url = "";
@@ -47,6 +48,7 @@ public class NotesClient {
         String noteTitle = "";
         String noteContent = "";
         Calendar noteModified = null;
+        boolean noteFavorite = false;
         if (!json.isNull(key_id)) {
             noteId = json.getLong(key_id);
         }
@@ -58,10 +60,12 @@ public class NotesClient {
         }
         if (!json.isNull(key_modified)) {
             noteModified = GregorianCalendar.getInstance();
-            noteModified
-                    .setTimeInMillis(json.getLong(key_modified) * 1000);
+            noteModified.setTimeInMillis(json.getLong(key_modified) * 1000);
         }
-        return new OwnCloudNote(noteId, noteModified, noteTitle, noteContent);
+        if (!json.isNull(key_favorite)) {
+            noteFavorite = json.getBoolean(key_favorite);
+        }
+        return new OwnCloudNote(noteId, noteModified, noteTitle, noteContent, noteFavorite);
     }
 
     public List<OwnCloudNote> getNotes() throws JSONException, IOException {
@@ -92,6 +96,7 @@ public class NotesClient {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(key_content, note.getContent());
         paramObject.accumulate(key_modified, note.getModified().getTimeInMillis()/1000);
+        paramObject.accumulate(key_favorite, note.isFavorite());
         JSONObject json = new JSONObject(requestServer(path, method, paramObject));
         return getNoteFromJSON(json);
     }

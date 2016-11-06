@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
@@ -61,8 +62,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (mActionMode != null) {
                 mActionMode.finish();
             }
-            // adapter.checkForUpdates(db.getNotes()); // FIXME deactivated, since it doesn't remove remotely deleted notes
-            setListView(db.getNotes());
+            refreshList();
             swipeRefreshLayout.setRefreshing(false);
         }
     };
@@ -82,7 +82,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         // Display Data
         db = new NoteSQLiteOpenHelper(this);
-        setListView(db.getNotes());
+        initList();
+        refreshList();
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
@@ -144,6 +145,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
         checkNotificationSetting();
         if (db.getNoteServerSyncHelper().isSyncPossible()) {
             synchronize();
+        } else {
+            refreshList();
         }
         super.onResume();
     }
@@ -162,79 +165,110 @@ public class NotesListViewActivity extends AppCompatActivity implements
     }
 
     /**
-     * Allows other classes to set a List of Notes.
-     *
-     * @param noteList List&lt;Note&gt;
+     * Allows other classes to refresh the List of Notes. Starts an AsyncTask which loads the data in the background.
      */
-    @SuppressWarnings("WeakerAccess")
-    public void setListView(List<DBNote> noteList) {
-        final List<Item> itemList = new ArrayList<>();
-        // #12 Create Sections depending on Time
-        // TODO Move to ItemAdapter?
-        boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
-        todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
-        Calendar recent = Calendar.getInstance();
-        Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
-        Calendar yesterday = Calendar.getInstance();
-        yesterday.set(Calendar.DAY_OF_YEAR, yesterday.get(Calendar.DAY_OF_YEAR) - 1);
-        yesterday.set(Calendar.HOUR_OF_DAY, 0);
-        yesterday.set(Calendar.MINUTE, 0);
-        yesterday.set(Calendar.SECOND, 0);
-        yesterday.set(Calendar.MILLISECOND, 0);
-        Calendar week = Calendar.getInstance();
-        week.set(Calendar.DAY_OF_WEEK, week.getFirstDayOfWeek());
-        week.set(Calendar.HOUR_OF_DAY, 0);
-        week.set(Calendar.MINUTE, 0);
-        week.set(Calendar.SECOND, 0);
-        week.set(Calendar.MILLISECOND, 0);
-        Calendar month = Calendar.getInstance();
-        month.set(Calendar.DAY_OF_MONTH, 0);
-        month.set(Calendar.HOUR_OF_DAY, 0);
-        month.set(Calendar.MINUTE, 0);
-        month.set(Calendar.SECOND, 0);
-        month.set(Calendar.MILLISECOND, 0);
-        for (int i = 0; i < noteList.size(); i++) {
-            DBNote currentNote = noteList.get(i);
-            if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
-                // < 10 minutes but after 00:00 today
-                //if (i > 0) {
-                    //itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
-                //}
-                todaySet = true;
-            } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
-                // between today 00:00 and yesterday 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
-                }
-                yesterdaySet = true;
-            } else if (!weekSet && currentNote.getModified().getTimeInMillis() < yesterday.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= week.getTimeInMillis()) {
-                // between yesterday 00:00 and start of the week 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_week)));
-                }
-                weekSet = true;
-            } else if (!monthSet && currentNote.getModified().getTimeInMillis() < week.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= month.getTimeInMillis()) {
-                // between start of the week 00:00 and start of the month 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_month)));
-                }
-                monthSet = true;
-            } else if (!earlierSet && currentNote.getModified().getTimeInMillis() < month.getTimeInMillis()) {
-                // before start of the month 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_earlier)));
-                }
-                earlierSet = true;
+    public void refreshList() {
+        new RefreshListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    private class RefreshListTask extends AsyncTask<Void, Void, List<Item>> {
+
+        private CharSequence query = null;
+
+        @Override
+        protected void onPreExecute() {
+            if(searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
+                query = searchView.getQuery();
             }
-            itemList.add(currentNote);
         }
 
-        adapter = new ItemAdapter(itemList);
-        ItemAdapter.setNoteClickListener(this);
+        @Override
+        protected List<Item> doInBackground(Void... voids) {
+            List<DBNote> noteList;
+            if (query==null) {
+                noteList = db.getNotes();
+            } else {
+                noteList = db.searchNotes(query);
+            }
+
+            final List<Item> itemList = new ArrayList<>();
+            // #12 Create Sections depending on Time
+            // TODO Move to ItemAdapter?
+            boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
+            todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
+            Calendar recent = Calendar.getInstance();
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.HOUR_OF_DAY, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
+            Calendar yesterday = Calendar.getInstance();
+            yesterday.set(Calendar.DAY_OF_YEAR, yesterday.get(Calendar.DAY_OF_YEAR) - 1);
+            yesterday.set(Calendar.HOUR_OF_DAY, 0);
+            yesterday.set(Calendar.MINUTE, 0);
+            yesterday.set(Calendar.SECOND, 0);
+            yesterday.set(Calendar.MILLISECOND, 0);
+            Calendar week = Calendar.getInstance();
+            week.set(Calendar.DAY_OF_WEEK, week.getFirstDayOfWeek());
+            week.set(Calendar.HOUR_OF_DAY, 0);
+            week.set(Calendar.MINUTE, 0);
+            week.set(Calendar.SECOND, 0);
+            week.set(Calendar.MILLISECOND, 0);
+            Calendar month = Calendar.getInstance();
+            month.set(Calendar.DAY_OF_MONTH, 0);
+            month.set(Calendar.HOUR_OF_DAY, 0);
+            month.set(Calendar.MINUTE, 0);
+            month.set(Calendar.SECOND, 0);
+            month.set(Calendar.MILLISECOND, 0);
+            for (int i = 0; i < noteList.size(); i++) {
+                DBNote currentNote = noteList.get(i);
+                if (currentNote.isFavorite()) {
+                    // don't show as new section
+                } else if (!todaySet && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
+                    // after 00:00 today
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
+                    }
+                    todaySet = true;
+                } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
+                    // between today 00:00 and yesterday 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
+                    }
+                    yesterdaySet = true;
+                } else if (!weekSet && currentNote.getModified().getTimeInMillis() < yesterday.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= week.getTimeInMillis()) {
+                    // between yesterday 00:00 and start of the week 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_week)));
+                    }
+                    weekSet = true;
+                } else if (!monthSet && currentNote.getModified().getTimeInMillis() < week.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= month.getTimeInMillis()) {
+                    // between start of the week 00:00 and start of the month 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_month)));
+                    }
+                    monthSet = true;
+                } else if (!earlierSet && currentNote.getModified().getTimeInMillis() < month.getTimeInMillis()) {
+                    // before start of the month 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_earlier)));
+                    }
+                    earlierSet = true;
+                }
+                itemList.add(currentNote);
+            }
+
+            return itemList;
+        }
+
+        @Override
+        protected void onPostExecute(List<Item> items) {
+            adapter.setItemList(items);
+        }
+    }
+
+    public void initList() {
+        adapter = new ItemAdapter(this);
         listView = (RecyclerView) findViewById(R.id.recycler_view);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
@@ -296,31 +330,17 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                search(newText.trim());
+                refreshList();
                 return true;
             }
         });
         return true;
     }
 
-    private void search(final String query) {
-        new Thread() {
-            @Override
-            public void run() {
-                if (query.length() > 0) {
-                    setListView(db.searchNotes(query));
-                } else {
-                    setListView(db.getNotes());
-                }
-                listView.scrollToPosition(0);
-            }
-        }.run();
-    }
-
     @Override
     protected void onNewIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            search(intent.getStringExtra(SearchManager.QUERY));
+            searchView.setQuery(intent.getStringExtra(SearchManager.QUERY), true);
         }
         super.onNewIntent(intent);
     }
@@ -377,12 +397,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 }
                 if (resultCode == RESULT_OK) {
                     DBNote editedNote = (DBNote) data.getExtras().getSerializable(EditNoteActivity.PARAM_NOTE);
-                    if(oldItem instanceof DBNote && !editedNote.getModified().after(((DBNote)oldItem).getModified())) {
-                        adapter.replace(editedNote, notePosition);
-                    } else {
-                        adapter.remove(oldItem);
-                        adapter.add(editedNote);
-                    }
+                    adapter.replace(editedNote, notePosition);
+                    refreshList();
                 }
             }
         } else if (requestCode == server_settings) {
@@ -436,6 +452,15 @@ public class NotesListViewActivity extends AppCompatActivity implements
     }
 
     @Override
+    public void onNoteFavoriteClick(int position, View view) {
+        DBNote note = (DBNote) adapter.getItem(position);
+        NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(view.getContext());
+        db.toggleFavorite(note, syncCallBack);
+        adapter.notifyItemChanged(position);
+        refreshList();
+    }
+
+    @Override
     public boolean onNoteLongClick(int position, View v) {
         boolean selected = adapter.select(position);
         if (selected) {
@@ -464,8 +489,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     /**
      * Handler for the MultiSelect Actions
      */
-    private class MultiSelectedActionModeCallback implements
-            ActionMode.Callback {
+    private class MultiSelectedActionModeCallback implements ActionMode.Callback {
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -499,7 +523,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
                     searchView.setIconified(true);
-                    setListView(db.getNotes());
+                    refreshList();
                     return true;
                 default:
                     return false;
