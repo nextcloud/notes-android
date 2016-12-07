@@ -1,5 +1,5 @@
-# ownCloud Notes
-An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
+# Nextcloud Notes
+An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
 ## :arrow_forward: Access
 
@@ -16,15 +16,16 @@ An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
 ## :rocket: Features
 * List, create, edit, share, search and delete notes
 * Share text and links as new note into the app
+* Mark notes as favorite
 * Bulk delete
 * Render MarkDown (using [Bypass](https://github.com/Uncodin/bypass))
 * English, German, Russian, Armenian, French and Serbian UI
 
 ## :checkered_flag: Planned features
-* Table layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
+* Tablet layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
 * Simple widget for individual note ([#5](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/5))
 * Make a widget for all notes ([#15](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/15))
-* Handle internationalization ([#14](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/14))
+* In-note search ([#106](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/106))
 
 ## :eyes: Screenshots
 ![Demo 1](/demo-1.png)
@@ -39,8 +40,8 @@ An android client for [ownCloud Notes App](https://github.com/owncloud/notes/).
 * Send me a bottle of your favorite beer :beers: :wink:
 
 ## :link: Requirements
-* [ownCloud](https://github.com/owncloud/) instance running
-* [ownCloud Notes](https://github.com/owncloud/notes) app enabled
+* [Nextcloud](https://nextcloud.com/) instance running
+* [Nextcloud Notes](https://github.com/nextcloud/notes) app enabled
 
 ## :notebook: License
 This project is licensed under the [GNU GENERAL PUBLIC LICENSE](/LICENSE).

@@ -2,7 +2,7 @@
 <resources>
     <!-- Colors -->
 
-    <color name="primary">#1d2d44</color>
+    <color name="primary">#0082C9</color>
     <color name="primary_dark">#112233</color>
 
     <color name="separator">#d2d2d2</color>
