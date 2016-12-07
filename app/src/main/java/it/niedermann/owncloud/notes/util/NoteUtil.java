@@ -2,15 +2,11 @@ package it.niedermann.owncloud.notes.util;
 
 import java.util.regex.Pattern;
 
-import in.uncod.android.bypass.Bypass;
-
 /**
  * Provides basic functionality for Note operations.
  * Created by stefan on 06.10.15.
  */
 public class NoteUtil {
-    private static final Bypass bypass = new Bypass();
-
     private static final Pattern pLists = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
     private static final Pattern pHeadings = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
     private static final Pattern pHeadingLine = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
@@ -18,29 +14,6 @@ public class NoteUtil {
     private static final Pattern pSpace1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
     private static final Pattern pSpace2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
 
-    /**
-     * Parses a MarkDown-String and returns a Spannable
-     *
-     * @param s String - MarkDown
-     * @return Spannable
-     */
-    public static CharSequence parseMarkDown(String s) {
-        /*
-         * Appends two spaces at the end of every line to force a line break.
-         *
-         * @see #24
-         */
-        StringBuilder sb = new StringBuilder();
-        for (String line : s.split("\n")) {
-            sb.append(line);
-            // If line is not a list item
-            if (!line.trim().matches("^([\\-*]|[0-9]+\\.)(.)*")) {
-                sb.append("  ");
-            }
-            sb.append("\n");
-        }
-        return bypass.markdownToSpannable(sb.toString());
-    }
 
     /**
      * Strips all MarkDown from the given String

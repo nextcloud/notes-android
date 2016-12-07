@@ -43,11 +43,6 @@ public class DBNote extends OwnCloudNote implements Item, Serializable {
         excerpt = NoteUtil.generateNoteExcerpt(content);
     }
 
-    public CharSequence getSpannableContent() {
-        // TODO Cache the generated CharSequence not possible because CharSequence does not implement Serializable
-        return NoteUtil.parseMarkDown(getContent());
-    }
-
     public void setContent(String content) {
         super.setContent(content);
         setExcerpt(content);

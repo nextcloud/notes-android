@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="24" />
+        android:targetSdkVersion="25" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -58,8 +58,8 @@
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
             android:label="@string/menu_edit"
-            android:windowSoftInputMode="stateVisible"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"></activity>
+            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+            android:windowSoftInputMode="stateVisible"></activity>
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"
             android:label="@string/menu_about"
