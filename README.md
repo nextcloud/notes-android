@@ -28,8 +28,8 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 * In-note search ([#106](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/106))
 
 ## :eyes: Screenshots
-![Demo 1](/demo-1.png)
-![Demo 2](/demo-2.png)
+![Screenshot of list view](/demo-list.png)
+![Screenshot of edit view](/demo-edit.png)
 
 ## :wrench: Contribution
 * Test the app with different devices
