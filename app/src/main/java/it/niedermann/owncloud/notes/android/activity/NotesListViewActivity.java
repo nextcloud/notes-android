@@ -383,22 +383,23 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 //not need because of db.synchronisation in createActivity
 
-                DBNote createdNote = (DBNote) data.getExtras().getSerializable(
-                        CREATED_NOTE);
+                DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
                 adapter.add(createdNote);
                 //setListView(db.getNotes());
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
                 int notePosition = data.getExtras().getInt(EditNoteActivity.PARAM_NOTE_POSITION);
-                Item oldItem = adapter.getItem(notePosition);
-                if(resultCode == RESULT_FIRST_USER) {
-                    adapter.remove(oldItem);
-                }
-                if (resultCode == RESULT_OK) {
-                    DBNote editedNote = (DBNote) data.getExtras().getSerializable(EditNoteActivity.PARAM_NOTE);
-                    adapter.replace(editedNote, notePosition);
-                    refreshList();
+                if(adapter.getItemCount()>notePosition) {
+                    Item oldItem = adapter.getItem(notePosition);
+                    if (resultCode == RESULT_FIRST_USER) {
+                        adapter.remove(oldItem);
+                    }
+                    if (resultCode == RESULT_OK) {
+                        DBNote editedNote = (DBNote) data.getExtras().getSerializable(EditNoteActivity.PARAM_NOTE);
+                        adapter.replace(editedNote, notePosition);
+                        refreshList();
+                    }
                 }
             }
         } else if (requestCode == server_settings) {
