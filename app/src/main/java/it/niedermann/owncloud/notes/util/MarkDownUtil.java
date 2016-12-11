@@ -21,6 +21,11 @@ public class MarkDownUtil {
      */
     public static RxMDConfiguration getMarkDownConfiguration(Context context) {
         return new RxMDConfiguration.Builder(context)
+                .setHeader2RelativeSize(1.35f)
+                .setHeader3RelativeSize(1.25f)
+                .setHeader4RelativeSize(1.15f)
+                .setHeader5RelativeSize(1.1f)
+                .setHeader6RelativeSize(1.05f)
                 .setLinkColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null))
                 .build();
     }
