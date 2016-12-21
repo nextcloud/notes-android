@@ -19,7 +19,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import it.niedermann.owncloud.notes.model.OwnCloudNote;
+import it.niedermann.owncloud.notes.model.CloudNote;
 
 public class NotesClient {
 
@@ -43,7 +43,7 @@ public class NotesClient {
         this.password = password;
     }
 
-    private OwnCloudNote getNoteFromJSON(JSONObject json) throws JSONException {
+    private CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
         long noteId = 0;
         String noteTitle = "";
         String noteContent = "";
@@ -65,11 +65,11 @@ public class NotesClient {
         if (!json.isNull(key_favorite)) {
             noteFavorite = json.getBoolean(key_favorite);
         }
-        return new OwnCloudNote(noteId, noteModified, noteTitle, noteContent, noteFavorite);
+        return new CloudNote(noteId, noteModified, noteTitle, noteContent, noteFavorite);
     }
 
-    public List<OwnCloudNote> getNotes() throws JSONException, IOException {
-        List<OwnCloudNote> notesList = new ArrayList<>();
+    public List<CloudNote> getNotes() throws JSONException, IOException {
+        List<CloudNote> notesList = new ArrayList<>();
         JSONArray notes = new JSONArray(requestServer("notes", METHOD_GET, null));
         for (int i = 0; i < notes.length(); i++) {
             JSONObject json = notes.getJSONObject(i);
@@ -87,12 +87,12 @@ public class NotesClient {
      * @throws IOException
      */
     @SuppressWarnings("unused")
-    public OwnCloudNote getNoteById(long id) throws JSONException, IOException {
+    public CloudNote getNoteById(long id) throws JSONException, IOException {
         JSONObject json = new JSONObject(requestServer("notes/" + id, METHOD_GET, null));
         return getNoteFromJSON(json);
     }
 
-    private OwnCloudNote putNote(OwnCloudNote note, String path, String method)  throws JSONException, IOException {
+    private CloudNote putNote(CloudNote note, String path, String method)  throws JSONException, IOException {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(key_content, note.getContent());
         paramObject.accumulate(key_modified, note.getModified().getTimeInMillis()/1000);
@@ -104,16 +104,16 @@ public class NotesClient {
     /**
      * Creates a Note on the Server
      *
-     * @param note {@link OwnCloudNote} - the new Note
+     * @param note {@link CloudNote} - the new Note
      * @return Created Note including generated Title, ID and lastModified-Date
      * @throws JSONException
      * @throws IOException
      */
-    public OwnCloudNote createNote(OwnCloudNote note) throws JSONException, IOException {
+    public CloudNote createNote(CloudNote note) throws JSONException, IOException {
         return putNote(note, "notes", METHOD_POST);
     }
 
-    public OwnCloudNote editNote(OwnCloudNote note) throws JSONException, IOException {
+    public CloudNote editNote(CloudNote note) throws JSONException, IOException {
         return putNote(note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 

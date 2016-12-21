@@ -16,7 +16,7 @@ import java.util.Locale;
 
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.OwnCloudNote;
+import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -102,7 +102,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @SuppressWarnings("UnusedReturnValue")
     public long addNoteAndSync(String content) {
-        OwnCloudNote note = new OwnCloudNote(0, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, false);
+        CloudNote note = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, false);
         return addNoteAndSync(note);
     }
 
@@ -112,7 +112,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param note Note
      */
     @SuppressWarnings("UnusedReturnValue")
-    public long addNoteAndSync(OwnCloudNote note) {
+    public long addNoteAndSync(CloudNote note) {
         DBNote dbNote =  new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), DBStatus.LOCAL_EDITED);
         long id = addNote(dbNote);
         getNoteServerSyncHelper().scheduleSync(true);
@@ -123,9 +123,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * Inserts a note directly into the Database.
      * No Synchronisation will be triggered! Use addNoteAndSync()!
      *
-     * @param note Note to be added. Remotely created Notes must be of type OwnCloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
+     * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
      */
-    long addNote(OwnCloudNote note) {
+    long addNote(CloudNote note) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         if(note instanceof DBNote) {
@@ -323,7 +323,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @return The number of the Rows affected.
      */
-    int updateNote(long id, OwnCloudNote remoteNote, DBNote forceUnchangedDBNoteState) {
+    int updateNote(long id, CloudNote remoteNote, DBNote forceUnchangedDBNoteState) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.

@@ -25,9 +25,9 @@ import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
+import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.OwnCloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NotesClient;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
@@ -215,7 +215,7 @@ public class NoteServerSyncHelper {
             for (DBNote note : notes) {
                 Log.d(getClass().getSimpleName(), "   Process Local Note: "+note);
                 try {
-                    OwnCloudNote remoteNote=null;
+                    CloudNote remoteNote=null;
                     switch(note.getStatus()) {
                         case LOCAL_EDITED:
                             Log.d(getClass().getSimpleName(), "   ...create/edit");
@@ -272,10 +272,10 @@ public class NoteServerSyncHelper {
                 for (DBNote note : localNotes) {
                     localIDmap.put(note.getRemoteId(), note.getId());
                 }
-                List<OwnCloudNote> remoteNotes = client.getNotes();
+                List<CloudNote> remoteNotes = client.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
-                for (OwnCloudNote remoteNote : remoteNotes) {
+                for (CloudNote remoteNote : remoteNotes) {
                     Log.d(getClass().getSimpleName(), "   Process Remote Note: "+remoteNote);
                     remoteIDs.add(remoteNote.getRemoteId());
                     if(localIDmap.containsKey(remoteNote.getRemoteId())) {
