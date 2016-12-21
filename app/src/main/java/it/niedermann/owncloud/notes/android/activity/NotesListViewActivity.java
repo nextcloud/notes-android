@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -300,10 +301,22 @@ public class NotesListViewActivity extends AppCompatActivity implements
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-                    DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                    final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
                     db.deleteNoteAndSync((dbNote).getId());
                     adapter.remove(dbNote);
+                    refreshList();
                     Log.v("Note", "Item deleted through swipe ----------------------------------------------");
+                    Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.action_undo, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    db.addNoteAndSync(dbNote);
+                                    refreshList();
+                                    Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
+                                            .show();
+                                }
+                            })
+                            .show();
                 }
             }
         });
@@ -475,7 +488,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        if (searchView.isIconified()) {
+        if (searchView==null || searchView.isIconified()) {
             super.onBackPressed();
         } else {
             searchView.setIconified(true);

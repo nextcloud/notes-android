@@ -102,8 +102,19 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @SuppressWarnings("UnusedReturnValue")
     public long addNoteAndSync(String content) {
-        DBNote note = new DBNote(0, 0, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, false, DBStatus.LOCAL_EDITED);
-        long id = addNote(note);
+        OwnCloudNote note = new OwnCloudNote(0, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, false);
+        return addNoteAndSync(note);
+    }
+
+    /**
+     * Creates a new Note in the Database and adds a Synchronization Flag.
+     *
+     * @param note Note
+     */
+    @SuppressWarnings("UnusedReturnValue")
+    public long addNoteAndSync(OwnCloudNote note) {
+        DBNote dbNote =  new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), DBStatus.LOCAL_EDITED);
+        long id = addNote(dbNote);
         getNoteServerSyncHelper().scheduleSync(true);
         return id;
     }
