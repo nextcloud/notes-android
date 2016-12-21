@@ -474,7 +474,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        if (searchView.isIconified()) {
+        if (searchView==null || searchView.isIconified()) {
             super.onBackPressed();
         } else {
             searchView.setIconified(true);
