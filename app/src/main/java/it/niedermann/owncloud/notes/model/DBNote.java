@@ -8,9 +8,9 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
  * DBNote represents a single note from the local SQLite database with all attributes.
- * It extends OwnCloudNote with attributes required for local data management.
+ * It extends CloudNote with attributes required for local data management.
  */
-public class DBNote extends OwnCloudNote implements Item, Serializable {
+public class DBNote extends CloudNote implements Item, Serializable {
 
     private long id;
     private DBStatus status;

@@ -9,17 +9,17 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
- * OwnCloudNote represents a remote note from an OwnCloud server.
+ * CloudNote represents a remote note from an OwnCloud server.
  * It can be directly generated from the JSON answer from the server.
  */
-public class OwnCloudNote implements Serializable {
+public class CloudNote implements Serializable {
     private long remoteId = 0;
     private String title = "";
     private Calendar modified = null;
     private String content = "";
     private boolean favorite = false;
 
-    public OwnCloudNote(long remoteId, Calendar modified, String title, String content, boolean favorite) {
+    public CloudNote(long remoteId, Calendar modified, String title, String content, boolean favorite) {
         this.remoteId = remoteId;
         if (title != null)
             setTitle(title);
