@@ -14,6 +14,9 @@
     <string name="action_edit_cancel">Cancel</string>
     <string name="action_about">About</string>
     <string name="action_select_note">Select note</string>
+    <string name="action_note_deleted">Note is deleted</string>
+    <string name="action_note_restored">Note is restored</string>
+    <string name="action_undo">Undo</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_copy">Copy</string>
     <string name="menu_edit">Edit</string>
