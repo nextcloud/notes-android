@@ -10,6 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.yydcdut.rxmarkdown.RxMDEditText;
+import com.yydcdut.rxmarkdown.RxMarkdown;
+import com.yydcdut.rxmarkdown.factory.EditFactory;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,6 +25,8 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import rx.Subscriber;
 
 public class EditNoteActivity extends AppCompatActivity {
 
@@ -31,7 +38,7 @@ public class EditNoteActivity extends AppCompatActivity {
     private static final long DELAY = 2000; // in ms
     private static final long DELAY_AFTER_SYNC = 5000; // in ms
 
-    private EditText content = null;
+    private RxMDEditText content = null;
     private DBNote note, originalNote;
     private int notePosition = 0;
     private Timer timer, timerNextSync;
@@ -53,9 +60,29 @@ public class EditNoteActivity extends AppCompatActivity {
             originalNote = (DBNote) savedInstanceState.getSerializable(PARAM_ORIGINAL_NOTE);
             notePosition = savedInstanceState.getInt(PARAM_NOTE_POSITION);
         }
-        content = (EditText) findViewById(R.id.editContent);
+        content = (RxMDEditText) findViewById(R.id.editContent);
         content.setText(note.getContent());
         content.setEnabled(true);
+
+        RxMarkdown.live(content)
+                .config(MarkDownUtil.getMarkDownConfiguration(getApplicationContext()))
+                .factory(EditFactory.create())
+                .intoObservable()
+                .subscribe(new Subscriber<CharSequence>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(CharSequence charSequence) {
+                        content.setText(charSequence, TextView.BufferType.SPANNABLE);
+                    }
+                });
+
         db = new NoteSQLiteOpenHelper(this);
         actionBar = getSupportActionBar();
         if (actionBar != null) {

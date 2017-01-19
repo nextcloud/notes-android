@@ -22,7 +22,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
     public static void updateAppWidget(DBNote note, Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews updateViews = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
         if (note != null) {
-            updateViews.setTextViewText(R.id.single_note_content, note.getSpannableContent());
+            //TODO switch to RxMD
+            //updateViews.setTextViewText(R.id.single_note_content, note.getSpannableContent());
             Intent intent = new Intent(context, EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
             // http://stackoverflow.com/questions/4011178/multiple-instances-of-widget-only-updating-last-widget

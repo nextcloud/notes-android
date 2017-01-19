@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -300,10 +301,22 @@ public class NotesListViewActivity extends AppCompatActivity implements
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-                    DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                    final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
                     db.deleteNoteAndSync((dbNote).getId());
                     adapter.remove(dbNote);
+                    refreshList();
                     Log.v("Note", "Item deleted through swipe ----------------------------------------------");
+                    Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.action_undo, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    db.addNoteAndSync(dbNote);
+                                    refreshList();
+                                    Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
+                                            .show();
+                                }
+                            })
+                            .show();
                 }
             }
         });
@@ -383,22 +396,23 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 //not need because of db.synchronisation in createActivity
 
-                DBNote createdNote = (DBNote) data.getExtras().getSerializable(
-                        CREATED_NOTE);
+                DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
                 adapter.add(createdNote);
                 //setListView(db.getNotes());
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
                 int notePosition = data.getExtras().getInt(EditNoteActivity.PARAM_NOTE_POSITION);
-                Item oldItem = adapter.getItem(notePosition);
-                if(resultCode == RESULT_FIRST_USER) {
-                    adapter.remove(oldItem);
-                }
-                if (resultCode == RESULT_OK) {
-                    DBNote editedNote = (DBNote) data.getExtras().getSerializable(EditNoteActivity.PARAM_NOTE);
-                    adapter.replace(editedNote, notePosition);
-                    refreshList();
+                if(adapter.getItemCount()>notePosition) {
+                    Item oldItem = adapter.getItem(notePosition);
+                    if (resultCode == RESULT_FIRST_USER) {
+                        adapter.remove(oldItem);
+                    }
+                    if (resultCode == RESULT_OK) {
+                        DBNote editedNote = (DBNote) data.getExtras().getSerializable(EditNoteActivity.PARAM_NOTE);
+                        adapter.replace(editedNote, notePosition);
+                        refreshList();
+                    }
                 }
             }
         } else if (requestCode == server_settings) {
@@ -474,7 +488,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        if (searchView.isIconified()) {
+        if (searchView==null || searchView.isIconified()) {
             super.onBackPressed();
         } else {
             searchView.setIconified(true);

@@ -12,6 +12,9 @@
     <string name="action_edit_saved">Gespeichert</string>
     <string name="action_edit_cancel">Abbrechen</string>
     <string name="action_select_note">Notiz auswählen</string>
+    <string name="action_note_deleted">Notiz wurde gelöscht</string>
+    <string name="action_note_restored">Notiz wurde wiederhergestellt</string>
+    <string name="action_undo">Rückgängig</string>
     <string name="action_about">Über</string>
     <string name="menu_delete">Löschen</string>
     <string name="menu_copy">Kopieren</string>

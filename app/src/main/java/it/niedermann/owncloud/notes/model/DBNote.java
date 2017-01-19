@@ -8,9 +8,9 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
  * DBNote represents a single note from the local SQLite database with all attributes.
- * It extends OwnCloudNote with attributes required for local data management.
+ * It extends CloudNote with attributes required for local data management.
  */
-public class DBNote extends OwnCloudNote implements Item, Serializable {
+public class DBNote extends CloudNote implements Item, Serializable {
 
     private long id;
     private DBStatus status;
@@ -41,11 +41,6 @@ public class DBNote extends OwnCloudNote implements Item, Serializable {
 
     private void setExcerpt(String content) {
         excerpt = NoteUtil.generateNoteExcerpt(content);
-    }
-
-    public CharSequence getSpannableContent() {
-        // TODO Cache the generated CharSequence not possible because CharSequence does not implement Serializable
-        return NoteUtil.parseMarkDown(getContent());
     }
 
     public void setContent(String content) {

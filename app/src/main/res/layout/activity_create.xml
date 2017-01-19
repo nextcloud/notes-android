@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
+        <com.yydcdut.rxmarkdown.RxMDEditText
             android:id="@+id/createContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

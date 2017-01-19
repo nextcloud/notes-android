@@ -5,19 +5,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.widget.TextView;
+
+import com.yydcdut.rxmarkdown.RxMDEditText;
+import com.yydcdut.rxmarkdown.RxMarkdown;
+import com.yydcdut.rxmarkdown.factory.EditFactory;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import rx.Subscriber;
 
 public class CreateNoteActivity extends AppCompatActivity {
-    private EditText editTextField = null;
+    private RxMDEditText editTextField = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
-        editTextField = (EditText) findViewById(R.id.createContent);
+        editTextField = (RxMDEditText) findViewById(R.id.createContent);
 
         // Get intent, action and MIME type
         Intent intent = getIntent();
@@ -29,6 +35,25 @@ public class CreateNoteActivity extends AppCompatActivity {
                 editTextField.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
             }
         }
+
+        RxMarkdown.live(editTextField)
+                .config(MarkDownUtil.getMarkDownConfiguration(getApplicationContext()))
+                .factory(EditFactory.create())
+                .intoObservable()
+                .subscribe(new Subscriber<CharSequence>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(CharSequence charSequence) {
+                        editTextField.setText(charSequence, TextView.BufferType.SPANNABLE);
+                    }
+                });
     }
 
     @Override
