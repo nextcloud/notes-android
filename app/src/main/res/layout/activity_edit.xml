@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/editCoordinator"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+<LinearLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/editContentContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="it.niedermann.owncloud.notes.android.activity.CreateNoteActivity">
+<!--
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Note may be outdated. Updating ..."
+        android:textColor="@color/primary_dark"
+        android:background="@color/bg_highlighted"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        />
 
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_highlighted"
+        android:indeterminate="true"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separator"/>
+-->
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -21,3 +51,4 @@
             android:padding="16dp" />
     </ScrollView>
 </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

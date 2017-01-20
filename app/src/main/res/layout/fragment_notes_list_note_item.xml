@@ -23,16 +23,30 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/noteExcerpt"
-        android:layout_width="fill_parent"
+        android:id="@+id/noteCategory"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_below="@id/noteTitle"
+        android:maxLines="1"
+        android:textColor="@drawable/list_item_color_selector"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/noteExcerpt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/noteCategory"
+        android:layout_toEndOf="@id/noteCategory"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_below="@id/noteTitle"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_below="@id/noteTitle"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@drawable/list_item_color_selector_low"

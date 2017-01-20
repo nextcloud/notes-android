@@ -91,6 +91,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             final DBNote note = (DBNote) item;
             final NoteViewHolder nvHolder = ((NoteViewHolder) holder);
             nvHolder.noteTitle.setText(note.getTitle());
+            nvHolder.noteCategory.setVisibility(note.getCategory().isEmpty() ? View.GONE : View.VISIBLE);
+            nvHolder.noteCategory.setText(note.getCategory());
             nvHolder.noteExcerpt.setText(note.getExcerpt());
             nvHolder.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.GONE : View.VISIBLE);
             nvHolder.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_grey600_24dp : R.drawable.ic_star_outline_grey600_24dp);
@@ -156,6 +158,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         // each data item is just a string in this case
         public TextView noteTitle;
+        public TextView noteCategory;
         public TextView noteExcerpt;
         public ImageView noteStatus;
         public ImageView noteFavorite;
@@ -164,6 +167,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         private NoteViewHolder(View v) {
             super(v);
             this.noteTitle = (TextView) v.findViewById(R.id.noteTitle);
+            this.noteCategory = (TextView) v.findViewById(R.id.noteCategory);
             this.noteExcerpt = (TextView) v.findViewById(R.id.noteExcerpt);
             this.noteStatus = (ImageView) v.findViewById(R.id.noteStatus);
             this.noteFavorite = (ImageView) v.findViewById(R.id.noteFavorite);
