@@ -262,10 +262,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         Map<Long, SyncDataEntry> result = new HashMap<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(table_notes, new String[]{ key_id, key_remote_id, key_etag }, key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, null, null, null);
-        if (cursor.moveToFirst()) {
-            while(cursor.moveToNext()) {
-                result.put(cursor.getLong(1), new SyncDataEntry(cursor.getLong(0), cursor.getLong(1), cursor.getString(2)));
-            }
+        while(cursor.moveToNext()) {
+            result.put(cursor.getLong(1), new SyncDataEntry(cursor.getLong(0), cursor.getLong(1), cursor.getString(2)));
         }
         cursor.close();
         return result;
