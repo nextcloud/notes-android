@@ -31,6 +31,8 @@ public class NotesClient {
     private static final String key_title = "title";
     private static final String key_content = "content";
     private static final String key_favorite = "favorite";
+    private static final String key_category = "category";
+    private static final String key_etag = "etag";
     private static final String key_modified = "modified";
     private static final String application_json = "application/json";
     private String url = "";
@@ -44,28 +46,36 @@ public class NotesClient {
     }
 
     private CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
-        long noteId = 0;
-        String noteTitle = "";
-        String noteContent = "";
-        Calendar noteModified = null;
-        boolean noteFavorite = false;
+        long id = 0;
+        String title = "";
+        String content = "";
+        Calendar modified = null;
+        boolean favorite = false;
+        String category = null;
+        String etag = null;
         if (!json.isNull(key_id)) {
-            noteId = json.getLong(key_id);
+            id = json.getLong(key_id);
         }
         if (!json.isNull(key_title)) {
-            noteTitle = json.getString(key_title);
+            title = json.getString(key_title);
         }
         if (!json.isNull(key_content)) {
-            noteContent = json.getString(key_content);
+            content = json.getString(key_content);
         }
         if (!json.isNull(key_modified)) {
-            noteModified = GregorianCalendar.getInstance();
-            noteModified.setTimeInMillis(json.getLong(key_modified) * 1000);
+            modified = GregorianCalendar.getInstance();
+            modified.setTimeInMillis(json.getLong(key_modified) * 1000);
         }
         if (!json.isNull(key_favorite)) {
-            noteFavorite = json.getBoolean(key_favorite);
+            favorite = json.getBoolean(key_favorite);
         }
-        return new CloudNote(noteId, noteModified, noteTitle, noteContent, noteFavorite);
+        if (!json.isNull(key_category)) {
+            category = json.getString(key_category);
+        }
+        if (!json.isNull(key_etag)) {
+            etag = json.getString(key_etag);
+        }
+        return new CloudNote(id, modified, title, content, favorite, category, etag);
     }
 
     public List<CloudNote> getNotes() throws JSONException, IOException {
@@ -141,18 +151,17 @@ public class NotesClient {
         con.setRequestMethod(method);
         con.setRequestProperty(
                 "Authorization",
-                "Basic "
-                        + new String(Base64.encode((username + ":"
-                        + password).getBytes(), Base64.NO_WRAP)));
+                "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
         con.setConnectTimeout(10 * 1000); // 10 seconds
         Log.d(getClass().getSimpleName(), method + " " + targetURL);
         if (params != null) {
+            byte[] paramData = params.toString().getBytes();
             Log.d(getClass().getSimpleName(), "Params: "+params);
-            con.setFixedLengthStreamingMode(params.toString().getBytes().length);
+            con.setFixedLengthStreamingMode(paramData.length);
             con.setRequestProperty("Content-Type", application_json);
             con.setDoOutput(true);
             OutputStream os = con.getOutputStream();
-            os.write(params.toString().getBytes());
+            os.write(paramData);
             os.flush();
             os.close();
         }
