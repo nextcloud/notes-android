@@ -86,7 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String url = field_url.getText().toString();
+                String url = field_url.getText().toString().trim();
 
                 if (!url.endsWith("/")) {
                     url += "/";
@@ -159,7 +159,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void login() {
-        String url = field_url.getText().toString();
+        String url = field_url.getText().toString().trim();
         String username = field_username.getText().toString();
         String password = field_password.getText().toString();
 
