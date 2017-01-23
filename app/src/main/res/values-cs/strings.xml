@@ -38,16 +38,14 @@
     <string name="settings_password_check_description">Ukáže, zdali jsou údaje správné.</string>
     <string name="settings_submit">Připojit</string>
     <string name="settings_submitting">Spojuji &#8230;</string>
-
     <!-- Network -->
     <string name="network_connecting">Spojuji</string>
     <string name="network_connected">Připojeno</string>
     <string name="network_disconnected">Síť není k dispozici</string>
 
-    <!-- Error -->
+    <string name="error_invalid_login">Chybný login</string>
     <string name="error_json">JSON error</string>
     <string name="error_io">IO error</string>
-    <string name="error_invalid_login">Chybný login</string>
     <string name="error_url_malformed">Chybná adresa serveru</string>
     <string name="error_username_password_invalid">Chybné jméno nebo heslo</string>
 

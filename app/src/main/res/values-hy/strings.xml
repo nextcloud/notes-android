@@ -12,8 +12,8 @@
     <string name="action_edit_saving">հիշել&#8230;</string>
     <string name="action_edit_saved">պահպանված է</string>
     <string name="action_edit_cancel">ընդհատել</string>
-    <string name="action_select_note">ընտրելգրառումը</string>
     <string name="action_about">էջի վերաբերյալ</string>
+    <string name="action_select_note">ընտրելգրառումը</string>
     <string name="menu_delete">հեռացնել</string>
     <string name="menu_copy">պատճենահանել</string>
     <string name="menu_edit">մշակել</string>
@@ -29,7 +29,6 @@
     <string name="listview_updated_earlier">ավելի վաղ</string>
 
     <!-- Settings -->
-
     <string name="settings_server">սերվեր</string>
     <string name="settings_url">սերվերի հասցեն</string>
     <string name="settings_url_check_description">ցույց է տալիս, որ տրված հասցեն հասանելի է</string>
@@ -39,25 +38,21 @@
     <string name="settings_password_check_description">ցույց է տալիս, որ մուտքագրված տվյալները ճիշտ են.</string>
     <string name="settings_submit">միացնել</string>
     <string name="settings_submitting">միացված է&#8230;</string>
-
     <!-- Network -->
-
     <string name="network_connecting">միանում է</string>
     <string name="network_connected">միացված է</string>
     <string name="network_disconnected">կապն անհասանելի է</string>
 
-    <!-- Error -->
-
-    <string name="error_url_malformed">հասցեն սխալ է</string>
     <string name="error_json">JSON սխալ</string>
     <string name="error_io">IO սխալ</string>
+    <string name="error_url_malformed">հասցեն սխալ է</string>
     <string name="error_username_password_invalid">մուտքագրված տվյալները սխալ են</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">կարգավորումներ</string>
 
-    <!-- About -->
 
+    <!-- About -->
     <string name="about_version_title">տարբերակ</string>
     <string name="about_version">դուք օգտագործում եք <strong>%1$s</strong></string>
     <string name="about_maintainer_title">ղեկավար</string>
@@ -80,4 +75,5 @@
     <string name="about_credits_tab_title">անվանացանկ</string>
     <string name="about_contribution_tab_title">մասնակցել</string>
     <string name="about_license_tab_title">լիցենզիա</string>
-</resources>
+
+    </resources>
