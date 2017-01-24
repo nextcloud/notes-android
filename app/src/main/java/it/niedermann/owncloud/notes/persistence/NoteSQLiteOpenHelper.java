@@ -85,7 +85,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 key_modified + " TEXT, " +
                 key_content + " TEXT, " +
                 key_favorite + " INTEGER DEFAULT 0, " +
-                key_category + " TEXT NOT NULL, " +
+                key_category + " TEXT NOT NULL DEFAULT '', " +
                 key_etag + " TEXT)");
         createIndexes(db);
     }
@@ -108,7 +108,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
         if(oldVersion<7) {
             dropIndexes(db);
-            db.execSQL("ALTER TABLE "+table_notes+" ADD COLUMN "+key_category+" TEXT NOT NULL");
+            db.execSQL("ALTER TABLE "+table_notes+" ADD COLUMN "+key_category+" TEXT NOT NULL DEFAULT ''");
             db.execSQL("ALTER TABLE "+table_notes+" ADD COLUMN "+key_etag+" TEXT");
             createIndexes(db);
         }
@@ -119,6 +119,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     private void recreateDatabase(SQLiteDatabase db) {
+        dropIndexes(db);
         db.execSQL("DROP TABLE "+table_notes);
         onCreate(db);
     }
