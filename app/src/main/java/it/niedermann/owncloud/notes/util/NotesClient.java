@@ -150,9 +150,7 @@ public class NotesClient {
         if(etags!=null) {
             for (SyncDataEntry entry : etags) {
                 if (entry.getEtag() != null) {
-                    if (etagsBuilder.length() > 0)
-                        etagsBuilder.append(",");
-                    etagsBuilder.append(entry.getRemoteId()).append("-").append(entry.getEtag());
+                    etagsBuilder.append(entry.getEtag());
                 }
             }
         }
