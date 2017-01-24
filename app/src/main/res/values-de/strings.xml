@@ -44,6 +44,8 @@
     <string name="settings_password_check_description">Zeigt an, ob die angegebenen Zugangsdaten korrekt sind.</string>
     <string name="settings_submit">Verbinden</string>
     <string name="settings_submitting">Verbindet&#8230;</string>
+    <string name="settings_notification">Aktivieren um eine dauerhafte Benachrichtigung zur schnellen Eingabe von Notizen anzuzeigen.</string>
+
     <!-- Network -->
     <string name="network_connecting">Verbindung wird hergestellt</string>
     <string name="network_connected">Verbunden</string>

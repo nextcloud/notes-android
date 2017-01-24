@@ -14,9 +14,15 @@
     <string name="action_edit_cancel">Annuler</string>
     <string name="action_about">À propos</string>
     <string name="action_select_note">Choisir une note</string>
+    <string name="action_note_deleted">Note supprimée</string>
+    <string name="action_note_restored">Note restaurée</string>
+    <string name="action_undo">Annuler</string>
     <string name="menu_delete">Supprimer</string>
     <string name="menu_copy">Copier</string>
     <string name="menu_edit">Éditer</string>
+    <string name="menu_cancel">Annuler</string>
+    <string name="menu_favorite">Favoris</string>
+    <string name="menu_preview">Aperçu</string>
     <string name="menu_share">Partager</string>
     <string name="menu_about">À propos</string>
 
@@ -38,14 +44,20 @@
     <string name="settings_password_check_description">Visible si les informations d\'authentification sont correctes.</string>
     <string name="settings_submit">Se connecter</string>
     <string name="settings_submitting">Connexion en cours&#8230;</string>
+    <string name="settings_notification">Activer pour montrer une notification permanente pour créer rapidement de nouvelles notes.</string>
+
     <!-- Network -->
     <string name="network_connecting">Connexion en cours</string>
     <string name="network_connected">Connecté</string>
     <string name="network_disconnected">Aucune connexion réseau disponible</string>
 
+    <!-- Error -->
+    <string name="error_sync">Échec de synchronisation : %1$s</string>
     <string name="error_invalid_login">Détails de connexion incorrects: %1$s</string>
     <string name="error_json">Erreur de JSON</string>
     <string name="error_io">Erreur d\'E/S</string>
+    <string name="error_no_network">pas de connexion réseau</string>
+    <string name="error_server">URL/Serveur a des erreurs</string>
     <string name="error_url_malformed">Adresse du serveur incorrecte</string>
     <string name="error_username_password_invalid">Identifiant ou mot de passe incorrect</string>
 
