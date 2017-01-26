@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notater</string>
+    <string name="no_notes">Ingen notater enda</string>
+    <string name="action_create">Nytt notat</string>
+    <string name="action_settings">Innstillinger</string>
+    <string name="action_create_save">Lagre</string>
+    <string name="action_create_cancel">Avbryt</string>
+    <string name="action_edit_editing">Endre</string>
+    <string name="action_edit_save">Lagre</string>
+    <string name="action_edit_saving">Lagrer &#8230;</string>
+    <string name="action_edit_saved">Lagret</string>
+    <string name="action_edit_cancel">Avbryt</string>
+    <string name="action_about">Om</string>
+    <string name="action_select_note">Velg notat</string>
+    <string name="action_note_deleted">Notatet er valgt</string>
+    <string name="action_note_restored">Notatet er gjenopprettet</string>
+    <string name="action_undo">Angre</string>
+    <string name="menu_delete">Slett</string>
+    <string name="menu_copy">Kopie</string>
+    <string name="menu_edit">Endre</string>
+    <string name="menu_cancel">Avbryt</string>
+    <string name="menu_favorite">Favoritt</string>
+    <string name="menu_preview">Forhåndsvis</string>
+    <string name="menu_share">Del</string>
+    <string name="menu_about">Om</string>
+
+    <string name="copy">Kopier</string>
+
+    <string name="listview_updated_today">Idag</string>
+    <string name="listview_updated_yesterday">Igår</string>
+    <string name="listview_updated_this_week">Denne uken</string>
+    <string name="listview_updated_this_month">Denne måneden</string>
+    <string name="listview_updated_earlier">Tidligere</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Tjener</string>
+    <string name="settings_url">Tjeneradresse</string>
+    <string name="settings_url_check_description">Vises hvis adressen kan pinges.</string>
+    <string name="settings_url_warn_http">ADVARSEL: \"http\" er usikker. Vennligst bruk \"https\".</string>
+    <string name="settings_username">Brukernavn</string>
+    <string name="settings_password">Passord</string>
+    <string name="settings_password_check_description">Vis hvis påloggingsinformasjon er riktig.</string>
+    <string name="settings_submit">Koble til</string>
+    <string name="settings_submitting">Kobler &#8230;</string>
+    <!-- Network -->
+    <string name="network_connecting">Kobler til</string>
+    <string name="network_connected">Koblet til</string>
+    <string name="network_disconnected">Ingen nettverk tilgjengelig</string>
+
+    <!-- Error -->
+    <string name="error_sync">Synkronisering feilet: %1$s</string>
+    <string name="error_invalid_login">Ugyldig pålogging: %1$s</string>
+    <string name="error_url_malformed">Feil på tjeneradresse</string>
+    <string name="error_username_password_invalid">Feil brukernavn eller passord</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Innstillinger</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Versjon</string>
+    <string name="about_version">Du bruker <strong>%1$s</strong></string>
+    <string name="about_maintainer_title">Vedlikeholder</string>
+    <string name="about_developers_title">Utvikler</string>
+    <string name="about_translators_title">Oversetter</string>
+    <string name="about_translators">Sølve_Salvesen (norsk bokmål)</string>
+    <string name="about_testers_title">Testere</string>
+    <string name="about_source_title">Kildekode</string>
+    <string name="about_issues_title">Feil</string>
+    <string name="about_app_license_title">Lisens</string>
+    <string name="about_app_license_button">Vis lisens</string>
+    <string name="about_app_icon_disclaimer_title">App ikon</string>
+    <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_license_tab_title">Lisens</string>
+
+    <string name="widget_all_notes_title">Alle notater</string>
+    <string name="widget_single_note_title">Enkeltnotat</string>
+</resources>

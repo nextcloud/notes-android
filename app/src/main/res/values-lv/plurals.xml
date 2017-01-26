@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="ab_selected">
+        <item quantity="zero">%d atlasīts</item>
+        <item quantity="one">%d atlasīts</item>
+        <item quantity="other">%d atlasīts</item>
+    </plurals>
+</resources>

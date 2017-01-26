@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Poznámky</string>
+    <string name="no_notes">Zatím žádné poznámky</string>
+    <string name="action_create">Nová poznámka</string>
+    <string name="action_settings">Nastavení</string>
+    <string name="action_create_save">Uložit</string>
+    <string name="action_create_cancel">Zrušit</string>
+    <string name="action_edit_editing">Upravit</string>
+    <string name="action_edit_save">Uložit</string>
+    <string name="action_edit_saving">Ukládání &#8230;</string>
+    <string name="action_edit_saved">Uloženo</string>
+    <string name="action_edit_cancel">Zrušit</string>
+    <string name="action_about">O aplikaci</string>
+    <string name="action_select_note">Vybrat poznámku</string>
+    <string name="action_note_deleted">Poznámka smazána</string>
+    <string name="action_note_restored">Poznámka obnovena</string>
+    <string name="action_undo">Zpět</string>
+    <string name="menu_delete">Smazat</string>
+    <string name="menu_copy">Kopírovat</string>
+    <string name="menu_edit">Upravit</string>
+    <string name="menu_cancel">Zrušit</string>
+    <string name="menu_favorite">Oblíbený</string>
+    <string name="menu_preview">Náhled</string>
+    <string name="menu_share">Sdílet</string>
+    <string name="menu_about">O aplikaci</string>
+
+    <string name="copy">Kopírovat</string>
+
+    <string name="listview_updated_today">Dnes</string>
+    <string name="listview_updated_yesterday">Včera</string>
+    <string name="listview_updated_this_week">Tento týden</string>
+    <string name="listview_updated_this_month">Tento měsíc</string>
+    <string name="listview_updated_earlier">Dříve</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Server</string>
+    <string name="settings_url">Adresa serveru</string>
+    <string name="settings_url_check_description">Ukáže, zda adresa odpovídá na ping.</string>
+    <string name="settings_url_warn_http">POZOR: \"http\" není bezpečné. Prosím použijte \"https\"</string>
+    <string name="settings_username">Uživatelské jméno</string>
+    <string name="settings_password">Heslo</string>
+    <string name="settings_password_check_description">Ukáže, zda jsou přihlašovací údaje správné.</string>
+    <string name="settings_submit">Připojit</string>
+    <string name="settings_submitting">Připojování &#8230;</string>
+    <string name="settings_notification">Povolte pro zobrazení stálé notifikace, která Vám pomůže rychle vytvářet nové poznámky.</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Připojování</string>
+    <string name="network_connected">Připojeno</string>
+    <string name="network_disconnected">Síť není dostupná</string>
+
+    <!-- Error -->
+    <string name="error_sync">Synchronizace selhala: %1$s</string>
+    <string name="error_invalid_login">Neplatné přihlášení: %1$s</string>
+    <string name="error_json">jsou owncloud Poznámky na serveru aktivní?</string>
+    <string name="error_io">spojení se serverem je nefunkční</string>
+    <string name="error_no_network">žádné síťové spojení</string>
+    <string name="error_server">Chyby v URL/Serveru</string>
+    <string name="error_url_malformed">Špatná serverová adresa</string>
+    <string name="error_username_password_invalid">Špatné uživatelské jméno nebo heslo</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Nastavení</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Verze</string>
+    <string name="about_version">Právě používáte <strong>%1$s</strong></string>
+    <string name="about_maintainer_title">Tvůrci</string>
+    <string name="about_developers_title">Vývojáři</string>
+    <string name="about_translators_title">Překladatelé</string>
+    <string name="about_testers_title">Testeři</string>
+    <string name="about_source_title">Zdrojový kód</string>
+    <string name="about_source">Tento projekt je hostován na GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues_title">Problémy</string>
+    <string name="about_issues">Chyby, nápady na vylepšení a nové funkce můžete nahlásit na GitHub issue tracker: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_app_license_title">Licence aplikace</string>
+    <string name="about_app_license">Tato aplikace je licencována pod GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Zobrazit licenci</string>
+    <string name="about_app_icon_disclaimer_title">Ikona aplikace</string>
+    <string name="about_app_icon_disclaimer"><p>Originální ikonu vytvořil <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> z <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Ikony</string>
+    <string name="about_icons_disclaimer"><p>Všechny další ikony, které tato aplikace využívá jsou <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Material Design Icons</a> vytvořeno Google Inc. a licencováno pod Creative Commons License.</p></string>
+
+    <string name="about_credits_tab_title">Zásluhy</string>
+    <string name="about_contribution_tab_title">Příspěvek</string>
+    <string name="about_license_tab_title">Licence</string>
+
+    <string name="widget_all_notes_title">Všechny poznámky</string>
+    <string name="widget_single_note_title">Jedna poznámka</string>
+</resources>

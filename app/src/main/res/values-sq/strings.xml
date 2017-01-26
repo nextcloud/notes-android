@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shënime</string>
+    <string name="no_notes">Nuk ka shënime</string>
+    <string name="action_create">Shënim i ri</string>
+    <string name="action_settings">Konfigurimet</string>
+    <string name="action_create_save">Ruaj</string>
+    <string name="action_create_cancel">Anullo</string>
+    <string name="action_edit_editing">Modifiko</string>
+    <string name="action_edit_save">Ruaj</string>
+    <string name="action_edit_saving">Duke ruajtur &#8230;</string>
+    <string name="action_edit_saved">U ruajt</string>
+    <string name="action_edit_cancel">Anullo</string>
+    <string name="action_about">Rreth Nesh</string>
+    <string name="action_select_note">Selekto shënimin</string>
+    <string name="action_note_deleted">Shënimi është fshirë</string>
+    <string name="action_note_restored">Shënimi është rikthyer</string>
+    <string name="action_undo">Zhbëj</string>
+    <string name="menu_delete">Fshij</string>
+    <string name="menu_copy">Kopjo</string>
+    <string name="menu_edit">Modifiko</string>
+    <string name="menu_cancel">Anullo</string>
+    <string name="menu_favorite">E preferuar</string>
+    <string name="menu_preview">Parapamje</string>
+    <string name="menu_share">Ndaj</string>
+    <string name="menu_about">Rreth nesh</string>
+
+    <string name="copy">Kopjo</string>
+
+    <string name="listview_updated_today">Sot</string>
+    <string name="listview_updated_yesterday">Dje</string>
+    <string name="listview_updated_this_week">Këtë javë</string>
+    <string name="listview_updated_this_month">Këtë muaj</string>
+    <string name="listview_updated_earlier">Më herët</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Serveri</string>
+    <string name="settings_url">Adresa e serverit</string>
+    <string name="settings_url_check_description">Tregon nëse adresa po bëhet ping</string>
+    <string name="settings_url_warn_http">PARALAJMËRIM: \"http\" nuk është e sigurt. Ju lutemi përdorni \"https\".</string>
+    <string name="settings_username">Emri i përdoruesit</string>
+    <string name="settings_password">Fjalëkalimi</string>
+    <string name="settings_password_check_description">Tregon nëse kredencialet janë të sakta</string>
+    <string name="settings_submit">Lidhu</string>
+    <string name="settings_submitting">Duke u lidhur &#8230;</string>
+    <string name="settings_notification">Aktivizo shfaqjen e një njoftimi të qëndrueshëm për të krijuar shpejt shënime të reja.</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Duke u lidhur</string>
+    <string name="network_connected">Të lidhur</string>
+    <string name="network_disconnected">Asnjë rrjet në gjëndje</string>
+
+    <!-- Error -->
+    <string name="error_sync">Sinkronizimi dështoi: %1$s</string>
+    <string name="error_invalid_login">Identifikim jo i vlefshëm: %1$s</string>
+    <string name="error_json">është aplikacioni i shënimeve i ownCloud i aktivizuar në server? </string>
+    <string name="error_io">lidhja me serverin u thye</string>
+    <string name="error_no_network">asnjë lidhje në rrjet</string>
+    <string name="error_server">URL/Server ka gabime</string>
+    <string name="error_url_malformed">Adres e gabuar e serverit </string>
+    <string name="error_username_password_invalid">Emër përdoruesi ose fjalëkalim i gabuar</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Konfigurimet</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Versioni</string>
+    <string name="about_version">Për momentin ju po përdorni <strong>%1$s</strong></string>
+    <string name="about_maintainer_title">Mirëmbajtësi</string>
+    <string name="about_developers_title">Zhvilluesit</string>
+    <string name="about_translators_title">Përkthyesit</string>
+    <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian), mist (Czech)</string>
+    <string name="about_testers_title">Testuesit</string>
+    <string name="about_source_title">Kodi burim</string>
+    <string name="about_source">Ky projekt ruhet në GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues_title">Çështjet</string>
+    <string name="about_issues">Ju mund të raportoni buge, përmirësoni propozimet dhe të paraqisni propozime në gjurmuesin e çështjeve të GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_app_license_title">Liçensa e aplikacionit</string>
+    <string name="about_app_license">Ky aplikacion është liçensuar nën GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Trego liçensën</string>
+    <string name="about_app_icon_disclaimer_title">Ikona e aplikacionit</string>
+    <string name="about_app_icon_disclaimer"><p>Ikona origjinale u bë nga <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> nga <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Ikonat</string>
+    <string name="about_icons_disclaimer"><p>Të gjitha ikonat vijuese të përdorura nga ky aplikacion janë <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Ikona Material Design </a> të bëra nga Google Inc. dhe të liçensuara nën Liçensën Creative Commons.</p></string>
+
+    <string name="about_credits_tab_title">Kreditet</string>
+    <string name="about_contribution_tab_title">Kontributi</string>
+    <string name="about_license_tab_title">Liçensë</string>
+
+    <string name="widget_all_notes_title">Të gjitha shënimet</string>
+    <string name="widget_single_note_title">Një shënim i vetëm</string>
+</resources>

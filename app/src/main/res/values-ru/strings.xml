@@ -14,9 +14,15 @@
     <string name="action_edit_cancel">Отмена</string>
     <string name="action_about">О программе</string>
     <string name="action_select_note">Выбрать заметку</string>
+    <string name="action_note_deleted">Заметка удалена</string>
+    <string name="action_note_restored">Заметка восстановлена</string>
+    <string name="action_undo">Отменить</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_copy">Копировать</string>
     <string name="menu_edit">Редактировать</string>
+    <string name="menu_cancel">Отмена</string>
+    <string name="menu_favorite">Избранное</string>
+    <string name="menu_preview">Предварительный просмотр</string>
     <string name="menu_share">Поделиться</string>
     <string name="menu_about">О программе</string>
 
@@ -38,14 +44,20 @@
     <string name="settings_password_check_description">Показывает, если учётные данные являются правильными.</string>
     <string name="settings_submit">Соединить</string>
     <string name="settings_submitting">Соединение …</string>
+    <string name="settings_notification">Включить показ постоянного уведомления для быстрого создания новых заметок.</string>
+
     <!-- Network -->
     <string name="network_connecting">Соединение</string>
     <string name="network_connected">Соединено</string>
     <string name="network_disconnected">Сеть недоступна</string>
 
+    <!-- Error -->
+    <string name="error_sync">Синхронизация не удалась: %1$s</string>
     <string name="error_invalid_login">Неверный логин: %1$s</string>
     <string name="error_json">Ошибка JSON</string>
     <string name="error_io">Ошибка ввода/вывода</string>
+    <string name="error_no_network">нет подключения к сети</string>
+    <string name="error_server">Ошибка в URL или адресе сервера</string>
     <string name="error_url_malformed">Неверный адрес</string>
     <string name="error_username_password_invalid">Неправильный логин или пароль</string>
 

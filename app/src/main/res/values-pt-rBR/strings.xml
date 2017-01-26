@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notas</string>
+    <string name="no_notes">Nenhuma nota ainda</string>
+    <string name="action_create">Nova nota</string>
+    <string name="action_settings">Configurações</string>
+    <string name="action_create_save">Salvar</string>
+    <string name="action_create_cancel">Cancelar</string>
+    <string name="action_edit_editing">Editar</string>
+    <string name="action_edit_save">Salvar</string>
+    <string name="action_edit_saving">Salvando &#8230;</string>
+    <string name="action_edit_saved">Salvo</string>
+    <string name="action_edit_cancel">Cancelar</string>
+    <string name="action_about">Sobre</string>
+    <string name="action_select_note">Selecionar nota</string>
+    <string name="action_note_deleted">A nota está eliminada</string>
+    <string name="action_note_restored">Nota está restaurada</string>
+    <string name="action_undo">Desfazer</string>
+    <string name="menu_delete">Eliminar</string>
+    <string name="menu_copy">Copiar</string>
+    <string name="menu_edit">Editar</string>
+    <string name="menu_cancel">Cancelar</string>
+    <string name="menu_favorite">Favorito</string>
+    <string name="menu_preview">Prever</string>
+    <string name="menu_share">Compartilhar</string>
+    <string name="menu_about">Sobre</string>
+
+    <string name="copy">Copiar</string>
+
+    <string name="listview_updated_today">Hoje</string>
+    <string name="listview_updated_yesterday">Ontem</string>
+    <string name="listview_updated_this_week">Esta semanna</string>
+    <string name="listview_updated_this_month">Este mês</string>
+    <string name="listview_updated_earlier">Mais cedo</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Servidor</string>
+    <string name="settings_url">Endereço do servidor</string>
+    <string name="settings_url_check_description">Mostra se o endereço pode ser pingado.</string>
+    <string name="settings_url_warn_http">AVISO: \"http\" é inseguro. Utilize \"https\".</string>
+    <string name="settings_username">Nome de usuário</string>
+    <string name="settings_password">Senha</string>
+    <string name="settings_password_check_description">Mostra se as credenciais estão corretas.</string>
+    <string name="settings_submit">Conectar</string>
+    <string name="settings_submitting">Conectando &#8230;</string>
+    <string name="settings_notification">Habilite para mostrar uma notificação persistente para criar rapidamente novas notas.</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Conectando</string>
+    <string name="network_connected">Conectado</string>
+    <string name="network_disconnected">Nenhuma rede disponível</string>
+
+    <!-- Error -->
+    <string name="error_sync">A sincronização falhou: %1$s</string>
+    <string name="error_invalid_login">Login inválido: %1$s</string>
+    <string name="error_json">O aplicativo owncloud Notes está ativado no servidor?</string>
+    <string name="error_io">não existe conexão com o servidor </string>
+    <string name="error_no_network">não existe conexão de rede</string>
+    <string name="error_server">URL/Servidor tem erros</string>
+    <string name="error_url_malformed">Endereço incorreto do servidor</string>
+    <string name="error_username_password_invalid">Nome de usuário ou senha errado</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Configurações</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Versão</string>
+    <string name="about_version">Você está usando <strong>%1$s</strong></string>
+    <string name="about_maintainer_title">Mantenedor</string>
+    <string name="about_developers_title">Desenvolvedores</string>
+    <string name="about_translators_title">Tradutores </string>
+    <string name="about_translators">pejakm (Serbe), ageru (Francês (France)), proninyaroslav (Russian), mist (Czech)</string>
+    <string name="about_testers_title">Testadores</string>
+    <string name="about_source_title">Código fonte</string>
+    <string name="about_source">Este projeto está hospedado no GitHub:<a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues_title">Problemas</string>
+    <string name="about_issues">Você pode relatar bugs, propostas de aprimoramento e solicitações de recursos no rastreador de problemas do GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_app_license_title">Licença de aplicativo</string>
+    <string name="about_app_license">Esta aplicação está licenciada sob a GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Ver licença</string>
+    <string name="about_app_icon_disclaimer_title">Ícone do aplicativo</string>
+    <string name="about_app_icon_disclaimer"><p>Ícone original feito por<a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> da <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Ícones</string>
+    <string name="about_icons_disclaimer"><p>Todos os outros ícones usados por este aplicativo são <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Material Design Icons</a>Feita pela Google Inc. e licenciada sob uma licença Creative Commons.</p></string>
+
+    <string name="about_credits_tab_title">Créditos</string>
+    <string name="about_contribution_tab_title">Contribuição</string>
+    <string name="about_license_tab_title">Licença</string>
+
+    <string name="widget_all_notes_title">Todas as notas</string>
+    <string name="widget_single_note_title">Nota simples</string>
+</resources>
