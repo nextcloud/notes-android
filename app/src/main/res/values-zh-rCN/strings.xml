@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">笔记</string>
+    <string name="no_notes">没有笔记</string>
+    <string name="action_create">新建笔记</string>
+    <string name="action_settings">设置</string>
+    <string name="action_create_save">保存</string>
+    <string name="action_create_cancel">取消</string>
+    <string name="action_edit_editing">编辑</string>
+    <string name="action_edit_save">保存</string>
+    <string name="action_edit_saving">保存 &#8230;</string>
+    <string name="action_edit_saved">已保存</string>
+    <string name="action_edit_cancel">取消</string>
+    <string name="action_about">关于</string>
+    <string name="action_select_note">选择笔记</string>
+    <string name="action_note_deleted">笔记已删除</string>
+    <string name="action_note_restored">笔记已保存</string>
+    <string name="action_undo">撤销</string>
+    <string name="menu_delete">删除</string>
+    <string name="menu_copy">复制</string>
+    <string name="menu_edit">编辑</string>
+    <string name="menu_cancel">取消</string>
+    <string name="menu_favorite">收藏</string>
+    <string name="menu_preview">预览</string>
+    <string name="menu_share">分享</string>
+    <string name="menu_about">关于</string>
+
+    <string name="copy">复制</string>
+
+    <string name="listview_updated_today">今天</string>
+    <string name="listview_updated_yesterday">昨天</string>
+    <string name="listview_updated_this_week">本周</string>
+    <string name="listview_updated_this_month">本月</string>
+    <string name="listview_updated_earlier">更早</string>
+
+    <!-- Settings -->
+    <string name="settings_server">服务器</string>
+    <string name="settings_url">服务器地址</string>
+    <string name="settings_url_check_description">测试服务器是否可Ping通.</string>
+    <string name="settings_url_warn_http">警告:“http”是不安全的，请使用“https”。</string>
+    <string name="settings_username">用户名</string>
+    <string name="settings_password">密码</string>
+    <string name="settings_password_check_description">测试证书是否正确.</string>
+    <string name="settings_submit">连接</string>
+    <string name="settings_submitting">连接 &#8230;</string>
+    <string name="settings_notification">启用永久通知以快速创建笔记。</string>
+
+    <!-- Network -->
+    <string name="network_connecting">正在连接</string>
+    <string name="network_connected">已连接</string>
+    <string name="network_disconnected">网络不可以</string>
+
+    <!-- Error -->
+    <string name="error_sync">同步失败: %1$s</string>
+    <string name="error_invalid_login">无效的注册: %1$s</string>
+    <string name="error_json">是否在服务器上激活owncloud Notes应用程序？</string>
+    <string name="error_io">与服务器连接中断</string>
+    <string name="error_no_network">没有网络连接</string>
+    <string name="error_server">URL/服务器错误</string>
+    <string name="error_url_malformed">错误的服务器地址</string>
+    <string name="error_username_password_invalid">用户名或密码错误</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">设置</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">版本</string>
+    <string name="about_version">你正在使用<strong>%1$s</strong></string>
+    <string name="about_maintainer_title">维护者</string>
+    <string name="about_developers_title">开发者</string>
+    <string name="about_translators_title">翻译人员</string>
+    <string name="about_testers_title">测试人员</string>
+    <string name="about_source_title">源代码</string>
+    <string name="about_source">本项目托管在GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues_title">问题</string>
+    <string name="about_app_license_title">应用授权</string>
+    <string name="about_app_license">此程序通过GNU通用公共许可证V3+授权。</string>
+    <string name="about_app_license_button">查看授权</string>
+    <string name="about_license_tab_title">授权</string>
+
+    <string name="widget_all_notes_title">所有笔记</string>
+    </resources>
