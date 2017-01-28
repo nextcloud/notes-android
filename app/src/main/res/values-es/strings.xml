@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notas</string>
+    <string name="no_notes">Sin notas aun</string>
+    <string name="action_create">Nueva nota</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_create_save">Guardar</string>
+    <string name="action_create_cancel">Cancelar</string>
+    <string name="action_edit_editing">Editar</string>
+    <string name="action_edit_save">Guardar</string>
+    <string name="action_edit_saving">Guardando &#8230;</string>
+    <string name="action_edit_saved">Guardado</string>
+    <string name="action_edit_cancel">Cancelar</string>
+    <string name="action_about">Acerca</string>
+    <string name="action_select_note">Seleccionar nota</string>
+    <string name="action_note_deleted">La nota es borrada</string>
+    <string name="action_note_restored">La nota es restaurada</string>
+    <string name="action_undo">Deshacer</string>
+    <string name="menu_delete">Borrar</string>
+    <string name="menu_copy">Copiar</string>
+    <string name="menu_edit">Editar</string>
+    <string name="menu_cancel">Cancelar</string>
+    <string name="menu_favorite">Favorito</string>
+    <string name="menu_preview">Previsualizar</string>
+    <string name="menu_share">Compartir</string>
+    <string name="menu_about">Acerca de</string>
+
+    <string name="copy">Copiar</string>
+
+    <string name="listview_updated_today">Hoy</string>
+    <string name="listview_updated_yesterday">Ayer</string>
+    <string name="listview_updated_this_week">Esta semana</string>
+    <string name="listview_updated_this_month">Este mes</string>
+    <string name="listview_updated_earlier">Recientemente</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Servidor</string>
+    <string name="settings_url">Dirección de Servidor</string>
+    <string name="settings_url_check_description">Muestra si la dirección puede ser encontrada.</string>
+    <string name="settings_url_warn_http">AVISO: \"http\" es inseguro. Por favor, use \"https\".</string>
+    <string name="settings_username">Nombre de usuario</string>
+    <string name="settings_password">Contraseña</string>
+    <string name="settings_password_check_description">Aparece si las credenciales son correctas.</string>
+    <string name="settings_submit">Conectar</string>
+    <string name="settings_submitting">Conectando &#8230;</string>
+    <string name="settings_notification">Activar para mostrar una notificación persistente para crear notas nuevas rápidamente.</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Conectando</string>
+    <string name="network_connected">Conectado</string>
+    <string name="network_disconnected">No hay redes disponibles</string>
+
+    <!-- Error -->
+    <string name="error_sync">Falló la sincronización: %1$s</string>
+    <string name="error_invalid_login">Login inválido: %1$s</string>
+    <string name="error_json">¿Está la app de Notas activada en el servidor?</string>
+    <string name="error_io">se ha roto la conexión con el servidor</string>
+    <string name="error_no_network">no hay conexión a la red</string>
+    <string name="error_server">URL/servidor tiene errores</string>
+    <string name="error_url_malformed">Dirección del servidor errónea</string>
+    <string name="error_username_password_invalid">Usuario o contraseña erróneos</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Configuración</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Versión</string>
+    <string name="about_version">Está usando ahora <strong>%1$s</strong></string>
+    <string name="about_maintainer_title">Mantenedor</string>
+    <string name="about_developers_title">Desarrolladores</string>
+    <string name="about_translators_title">Traductores</string>
+    <string name="about_translators">pejakm (serbio), ageru (Francés [Francia]), proninyaroslav (ruso), mist (checo)</string>
+    <string name="about_testers_title">Testers</string>
+    <string name="about_source_title">Código fuente</string>
+    <string name="about_source">Este proyecto se aloja en GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/nextcloud-notes/</a></string>
+    <string name="about_issues_title">Problemas</string>
+    <string name="about_issues">Puedes informar de errores, proponer mejoras y pedir características en el tracker de GitHub: <a href=\"https://github.com/stefan-niedermann/nextcloud-notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_app_license_title">Licencia de la aplicación</string>
+    <string name="about_app_license">Esta aplicación está bajo la Licencia Pública General GNU v3+.</string>
+    <string name="about_app_license_button">Ver licencia</string>
+    <string name="about_app_icon_disclaimer_title">Icono de la app</string>
+    <string name="about_app_icon_disclaimer"><p>Icono original por <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> en <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Iconos</string>
+    <string name="about_icons_disclaimer"><p>Todos los demás iconos usados por esta app son <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">iconos Material Design</a> hechos por Google Inc. y licenciados bajo una licencia Creative Commons.</p></string>
+
+    <string name="about_credits_tab_title">Créditos</string>
+    <string name="about_contribution_tab_title">Contribución</string>
+    <string name="about_license_tab_title">Licencia</string>
+
+    <string name="widget_all_notes_title">Todas las notas</string>
+    <string name="widget_single_note_title">Nota única</string>
+</resources>
