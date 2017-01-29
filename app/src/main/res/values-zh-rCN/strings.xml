@@ -78,7 +78,13 @@
     <string name="about_app_license_title">应用授权</string>
     <string name="about_app_license">此程序通过GNU通用公共许可证V3+授权。</string>
     <string name="about_app_license_button">查看授权</string>
+    <string name="about_app_icon_disclaimer_title">应用图标</string>
+    <string name="about_app_icon_disclaimer"><p>原始图标由 <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> 在 <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a> 创作的</p></string>
+    <string name="about_icons_disclaimer_title">图标</string>
+    <string name="about_credits_tab_title">致谢</string>
+    <string name="about_contribution_tab_title">贡献</string>
     <string name="about_license_tab_title">授权</string>
 
     <string name="widget_all_notes_title">所有笔记</string>
-    </resources>
+    <string name="widget_single_note_title">单个笔记</string>
+</resources>
