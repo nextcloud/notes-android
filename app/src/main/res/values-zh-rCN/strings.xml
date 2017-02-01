@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">笔记</string>
-    <string name="no_notes">没有笔记</string>
-    <string name="action_create">新建笔记</string>
+    <string name="app_name">便笺</string>
+    <string name="no_notes">没有便笺</string>
+    <string name="action_create">新建便笺</string>
     <string name="action_settings">设置</string>
     <string name="action_create_save">保存</string>
     <string name="action_create_cancel">取消</string>
@@ -13,9 +13,9 @@
     <string name="action_edit_saved">已保存</string>
     <string name="action_edit_cancel">取消</string>
     <string name="action_about">关于</string>
-    <string name="action_select_note">选择笔记</string>
-    <string name="action_note_deleted">笔记已删除</string>
-    <string name="action_note_restored">笔记已保存</string>
+    <string name="action_select_note">选择便笺</string>
+    <string name="action_note_deleted">便笺已删除</string>
+    <string name="action_note_restored">便笺已保存</string>
     <string name="action_undo">撤销</string>
     <string name="menu_delete">删除</string>
     <string name="menu_copy">复制</string>
@@ -44,7 +44,7 @@
     <string name="settings_password_check_description">测试证书是否正确.</string>
     <string name="settings_submit">连接</string>
     <string name="settings_submitting">连接 &#8230;</string>
-    <string name="settings_notification">启用永久通知以快速创建笔记。</string>
+    <string name="settings_notification">启用永久通知以快速创建便笺。</string>
 
     <!-- Network -->
     <string name="network_connecting">正在连接</string>
@@ -53,7 +53,7 @@
 
     <!-- Error -->
     <string name="error_sync">同步失败: %1$s</string>
-    <string name="error_invalid_login">无效的注册: %1$s</string>
+    <string name="error_invalid_login">无效的登录: %1$s</string>
     <string name="error_json">是否在服务器上激活owncloud Notes应用程序？</string>
     <string name="error_io">与服务器连接中断</string>
     <string name="error_no_network">没有网络连接</string>
@@ -71,20 +71,24 @@
     <string name="about_maintainer_title">维护者</string>
     <string name="about_developers_title">开发者</string>
     <string name="about_translators_title">翻译人员</string>
+    <string name="about_translators">pejakm (塞尔维亚语), ageru (Français (法语)), proninyaroslav (俄语), mist (捷克语)</string>
     <string name="about_testers_title">测试人员</string>
     <string name="about_source_title">源代码</string>
     <string name="about_source">本项目托管在GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">问题</string>
+    <string name="about_issues">你可以报告缺陷, 优化建议和特性要求在 GitHub 发布管理器: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">应用授权</string>
     <string name="about_app_license">此程序通过GNU通用公共许可证V3+授权。</string>
     <string name="about_app_license_button">查看授权</string>
     <string name="about_app_icon_disclaimer_title">应用图标</string>
     <string name="about_app_icon_disclaimer"><p>原始图标由 <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> 在 <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a> 创作的</p></string>
     <string name="about_icons_disclaimer_title">图标</string>
+    <string name="about_icons_disclaimer"><p>这个应用程序使用的所有更多的图标 <a href=\"https://materialdesignicons.com/\" title=\"链接站点\">材料设计图标</a> 由谷歌公司推出. 在知识共享协议下授权.</p></string>
+
     <string name="about_credits_tab_title">致谢</string>
     <string name="about_contribution_tab_title">贡献</string>
     <string name="about_license_tab_title">授权</string>
 
-    <string name="widget_all_notes_title">所有笔记</string>
-    <string name="widget_single_note_title">单个笔记</string>
+    <string name="widget_all_notes_title">所有便笺</string>
+    <string name="widget_single_note_title">单个便笺</string>
 </resources>
