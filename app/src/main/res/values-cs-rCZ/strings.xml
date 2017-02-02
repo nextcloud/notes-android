@@ -71,6 +71,7 @@
     <string name="about_maintainer_title">Tvůrci</string>
     <string name="about_developers_title">Vývojáři</string>
     <string name="about_translators_title">Překladatelé</string>
+    <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian), mist (Czech)</string>
     <string name="about_testers_title">Testeři</string>
     <string name="about_source_title">Zdrojový kód</string>
     <string name="about_source">Tento projekt je hostován na GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
