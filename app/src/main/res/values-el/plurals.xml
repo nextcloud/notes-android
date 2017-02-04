@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="ab_selected">
+        <item quantity="one">%d επιλέχθηκαν</item>
+        <item quantity="other">%d επιλέχθηκαν</item>
+    </plurals>
+</resources>
