@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Note</string>
+    <string name="no_notes">Nessuna nota</string>
+    <string name="action_create">Nuova nota</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="action_create_save">Salva</string>
+    <string name="action_create_cancel">Annulla</string>
+    <string name="action_edit_editing">Modifica</string>
+    <string name="action_edit_save">Salva</string>
+    <string name="action_edit_saving">Salvataggio di &#8230;</string>
+    <string name="action_edit_saved">Salvata</string>
+    <string name="action_edit_cancel">Annulla</string>
+    <string name="action_about">Informazioni</string>
+    <string name="action_select_note">Seleziona nota</string>
+    <string name="action_note_deleted">Nota eliminata</string>
+    <string name="action_note_restored">Nota ripristinata</string>
+    <string name="action_undo">Annulla</string>
+    <string name="menu_delete">Elimina</string>
+    <string name="menu_copy">Copia</string>
+    <string name="menu_edit">Modifica</string>
+    <string name="menu_cancel">Annulla</string>
+    <string name="menu_favorite">Preferito</string>
+    <string name="menu_preview">Anteprima</string>
+    <string name="menu_share">Condividi</string>
+    <string name="menu_about">Informazioni</string>
+
+    <string name="copy">Copia</string>
+
+    <string name="listview_updated_today">Oggi</string>
+    <string name="listview_updated_yesterday">Ieri</string>
+    <string name="listview_updated_this_week">Questa settimana</string>
+    <string name="listview_updated_this_month">Questo mese</string>
+    <!-- Settings -->
+    <string name="settings_server">Server</string>
+    <string name="settings_url">Indirizzo del server</string>
+    <string name="settings_url_check_description">Mostra se l\'indirizzo può rispondere al ping.</string>
+    <string name="settings_url_warn_http">AVVISO: \"http\" non è sicuro. Utlizza \"https\".</string>
+    <string name="settings_username">Nome utente</string>
+    <string name="settings_password">Password</string>
+    <string name="settings_password_check_description">Mostra se le credenziali sono corrette.</string>
+    <string name="settings_submit">Connetti</string>
+    <string name="settings_submitting">Connessione a &#8230;</string>
+    <!-- Network -->
+    <string name="network_connecting">Connessione in corso</string>
+    <string name="network_connected">Connesso</string>
+    <string name="network_disconnected">Rete non disponibile</string>
+
+    <!-- Error -->
+    <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
+    <string name="error_invalid_login">Accesso non valido: %1$s</string>
+    <string name="error_io">la connessione al server è interrotta</string>
+    <string name="error_no_network">nessuna connessione di rete</string>
+    <string name="error_url_malformed">Indirizzo del server errato</string>
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Impostazioni</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Versione</string>
+    <string name="about_version">Stai utilizzando <strong>%1$s</strong></string>
+    <string name="about_maintainer_title">Responsabile</string>
+    <string name="about_developers_title">Sviluppatori</string>
+    <string name="about_translators_title">Traduttori</string>
+    <string name="about_translators">pejakm (serbo), ageru (francese (Francia)), proninyaroslav (russo), mist (ceco)</string>
+    <string name="about_source_title">Codice sorgente</string>
+    <string name="about_issues_title">Problemi</string>
+    <string name="about_app_license_title">Licenza applicazione</string>
+    <string name="about_app_license">Questa applicazione è rilasciata nei termini della licenza GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Visualizza licenza</string>
+    <string name="about_app_icon_disclaimer_title">Icona applicazione</string>
+    <string name="about_app_icon_disclaimer"><p>Icona originale creata da <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> da <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_icons_disclaimer_title">Icone</string>
+    <string name="about_credits_tab_title">Riconoscimenti</string>
+    <string name="about_contribution_tab_title">Contributi</string>
+    <string name="about_license_tab_title">Licenza</string>
+
+    <string name="widget_all_notes_title">Tutte le note</string>
+    <string name="widget_single_note_title">Nota singola</string>
+</resources>
