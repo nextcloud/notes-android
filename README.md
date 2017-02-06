@@ -33,7 +33,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 * Test the app with different devices
 * Write issues in the [issue tracker](https://github.com/stefan-niedermann/OwnCloud-Notes/issues)
 * Provide pull requests
-* Translate this app
+* Translate this app on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
 * Buy this app on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
 * Send me a bottle of your favorite beer :beers: :wink:
 
