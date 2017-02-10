@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="ab_selected">
+        <item quantity="one">%d zaznaczone</item>
+        <item quantity="few">%d zaznaczonych</item>
+        <item quantity="other">%d zaznaczonych</item>
+    </plurals>
+</resources>
