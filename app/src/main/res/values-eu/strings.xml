@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Oharrak</string>
+    <string name="no_notes">Ez dago oharrik</string>
+    <string name="action_create">Ohar berria</string>
+    <string name="action_settings">Ezarpenak</string>
+    <string name="action_create_save">Gorde</string>
+    <string name="action_create_cancel">Ezeztatu</string>
+    <string name="action_edit_editing">Aldatu</string>
+    <string name="action_edit_save">Gorde</string>
+    <string name="action_edit_saving">Gordetzen &#8230;</string>
+    <string name="action_edit_saved">Gordeta</string>
+    <string name="action_edit_cancel">Ezeztatu</string>
+    <string name="action_about">Honi buruz</string>
+    <string name="action_select_note">Oharra aukeratu </string>
+    <string name="action_note_deleted">Oharra aukeratuta</string>
+    <string name="action_note_restored">Oharra berreskuratuta</string>
+    <string name="action_undo">Desegin</string>
+    <string name="menu_delete">Ezabatu</string>
+    <string name="menu_copy">Kopiatu</string>
+    <string name="menu_edit">Aldatu</string>
+    <string name="menu_cancel">Ezeztatu</string>
+    <string name="menu_favorite">Gogokoa</string>
+    <string name="menu_preview">Aurreikusi</string>
+    <string name="menu_share">Partekatu</string>
+    <string name="menu_about">Honi buruz</string>
+
+    <string name="copy">Kopiatu</string>
+
+    <string name="listview_updated_today">Gaur</string>
+    <string name="listview_updated_yesterday">Atzo</string>
+    <string name="listview_updated_this_week">Aste honetan</string>
+    <string name="listview_updated_this_month">Hilabete honetan</string>
+    <string name="listview_updated_earlier">Lehenago</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Zerbitzaria</string>
+    <string name="settings_url">Zerbitzariaren helbidea</string>
+    <string name="settings_url_check_description">Erakusten du ea helbideari ping egin daiteken</string>
+    <string name="settings_url_warn_http">ERNE: \"http\" ez da segurua. Mesedez, erabili \"https\".</string>
+    <string name="settings_username">Erabiltzaile izena</string>
+    <string name="settings_password">Pasahitza</string>
+    <string name="settings_password_check_description">Erakusten du kredentzialak zuzenak diren.</string>
+    <string name="settings_submit">Konektatu</string>
+    <string name="settings_submitting">Konektatzen &#8230;</string>
+    <string name="settings_notification">Aktibatu jakinarazpen iraunkor bat erakusteko ohar berri bat azkar sortzeko .</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Konektatzen</string>
+    <string name="network_connected">Konektatuta</string>
+    <string name="network_disconnected">Sarea ez dago eskuragarri</string>
+
+    <!-- Error -->
+    <string name="error_sync">Sinkronizazioa huts egin du: %1$s</string>
+    <string name="error_invalid_login">Login-a ez du balio: %1$s</string>
+    <string name="error_json">Badago OwnCloud Oharr aplikazioa zerbitzarian aktibatua?</string>
+    <string name="error_io">Konexioa zerbitzariarekin ez dabil</string>
+    <string name="error_no_network">Ez dago sare-konexiorik</string>
+    <string name="error_server">URL/Zerbitzaria akatsak ditu</string>
+    <string name="error_url_malformed">Zerbitzari helbide okerra</string>
+    <string name="error_username_password_invalid">Erabiltzaile edo pasahitz okerra</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Ezarpenak</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Vertsioa</string>
+    <string name="about_version">Une honetan <strong>%1$s</strong> erabiltzen ari zara</string>
+    <string name="about_maintainer_title">Mantentzailea</string>
+    <string name="about_developers_title">Garatzaileak</string>
+    <string name="about_translators_title">Itzultzaileak</string>
+    <string name="about_translators">pejakm (Serbia), ageru (Frantzesa (Frantzia)), proninyaroslav (Errusiera), mist (Txekiera)</string>
+    <string name="about_testers_title">Frogatzaileak</string>
+    <string name="about_source_title">Iturburu-kodea</string>
+    <string name="about_source">Proiektu hau GitHub-en ostatatuta dago: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_issues_title">Arazoak</string>
+    <string name="about_issues">GitHub-en akatsak salatu, hobekuntzak proposatu eta ezaugarri berriak eskatu ditzakezu hurrengo harian: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_app_license_title">Aplikazio lizentzia</string>
+    <string name="about_app_license">Aplikazio hau GNU GENERAL PUBLIC LICENSE v3+ lizentziapean dago.</string>
+    <string name="about_app_license_button">Lizentzia ikusi</string>
+    <string name="about_app_icon_disclaimer_title">Aplikazio irudia</string>
+    <string name="about_app_icon_disclaimer"><p>Jatorrizko irudia<a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> -ek egin du <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a>-tik</p></string>
+    <string name="about_icons_disclaimer_title">Irudiak</string>
+    <string name="about_icons_disclaimer"><p>Aplikazio honetan erabilitako beste irudi gustiak <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Material Design Irudiak</a> dira, Google Inc.-ek eginak eta Creative Commons Lizentziapean.</p></string>
+
+    <string name="about_credits_tab_title">Kredituak</string>
+    <string name="about_contribution_tab_title">Kontribuzio</string>
+    <string name="about_license_tab_title">Lizentzia</string>
+
+    <string name="widget_all_notes_title">Ohar guztiak</string>
+    <string name="widget_single_note_title">Ohar bakarra</string>
+</resources>

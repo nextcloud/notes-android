@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Notes</string>
+    <string name="app_name">Заметки</string>
     <string name="no_notes">Заметок пока нет</string>
     <string name="action_create">Новая заметка</string>
     <string name="action_settings">Настройки</string>
