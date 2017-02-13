@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Poznámky</string>
+    <string name="no_notes">Zatiaľ nie sú žiadne poznámky</string>
+    <string name="action_create">Nová poznámka</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_create_save">Uložiť</string>
+    <string name="action_create_cancel">Zrušiť</string>
+    <string name="action_edit_editing">Upraviť</string>
+    <string name="action_edit_save">Uložiť</string>
+    <string name="action_edit_saving">Ukladám &#8230;</string>
+    <string name="action_edit_saved">Uložené</string>
+    <string name="action_edit_cancel">Zrušiť</string>
+    <string name="action_about">O</string>
+    <string name="action_select_note">Vybrať poznámku</string>
+    <string name="action_note_deleted">Poznámka je zmazaná</string>
+    <string name="action_note_restored">Poznámka je obnovená</string>
+    <string name="action_undo">Vrátiť</string>
+    <string name="menu_delete">Zmazať</string>
+    <string name="menu_copy">Kopírovať</string>
+    <string name="menu_edit">Upraviť</string>
+    <string name="menu_cancel">Zrušiť</string>
+    <string name="menu_favorite">Obľúbené</string>
+    <string name="menu_preview">Náhľad</string>
+    <string name="menu_share">Sprístupniť</string>
+    <string name="menu_about">O</string>
+
+    <string name="copy">Kopírovať</string>
+
+    <string name="listview_updated_today">Dnes</string>
+    <string name="listview_updated_yesterday">Včera</string>
+    <string name="listview_updated_this_week">Tento týždeň</string>
+    <string name="listview_updated_this_month">Tento mesiac</string>
+    <string name="listview_updated_earlier">Skôr</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Server</string>
+    <string name="settings_url">Adresa servera</string>
+    <string name="settings_url_check_description">Ukáže či je adresa pingnuteľná.</string>
+    <string name="settings_url_warn_http">VAROVANIE: \"http\" nie je bezpečné. Použite prosím \"https\".</string>
+    <string name="settings_username">Meno používateľa</string>
+    <string name="settings_password">Heslo</string>
+    <string name="settings_password_check_description">Zobrazí či sú správne prihlasovacie údaje.</string>
+    <string name="settings_submit">Pripojiť</string>
+    <string name="settings_submitting">Pripájam &#8230;</string>
+    <string name="settings_notification">Aktivovať zobrazovanie stáleho oznámenia rýchleho vytvorenia nových poznámok.</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Pripájam</string>
+    <string name="network_connected">Pripojené</string>
+    <string name="network_disconnected">Nie je dostupná žiadna sieť</string>
+
+    <!-- Error -->
+    <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
+    <string name="error_invalid_login">Neplatné prihlásenie: %1$s</string>
+    <string name="error_json">máte povolenú aplikáciu owncloud Poznámky na serveri?</string>
+    <string name="error_io">pripojenie na server bolo prerušené</string>
+    <string name="error_no_network">nie je pripojenie k sieti</string>
+    <string name="error_url_malformed">Nesprávna adresa servera</string>
+    <string name="error_username_password_invalid">Nesprávne meno používateľa alebo heslo</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Nastavenia</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Verzia</string>
+    <string name="about_version">Momentálne používate <strong>%1$s</strong></string>
+    <string name="about_maintainer_title">Udržovateľ</string>
+    <string name="about_developers_title">Vývojári</string>
+    <string name="about_translators_title">Prekladatelia</string>
+    <string name="about_testers_title">Testeri</string>
+    <string name="about_source_title">Zdrojový kód</string>
+    <string name="about_issues_title">Problémy</string>
+    <string name="about_app_license_title">Licencia aplikácie</string>
+    <string name="about_app_license_button">Zobraziť licenciu</string>
+    <string name="about_app_icon_disclaimer_title">Ikona aplikácie</string>
+    <string name="about_icons_disclaimer_title">Ikony</string>
+    <string name="about_contribution_tab_title">Príspevok</string>
+    <string name="about_license_tab_title">Licencia</string>
+
+    <string name="widget_all_notes_title">Všetky poznámky</string>
+    <string name="widget_single_note_title">Jedna poznámka</string>
+</resources>

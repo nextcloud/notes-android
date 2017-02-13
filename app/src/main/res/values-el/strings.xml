@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Σημειώσεις</string>
+    <string name="no_notes">Δεν υπάρχουν ακόμα σημειώσεις</string>
+    <string name="action_create">Νέα σημείωση</string>
+    <string name="action_settings">Ρυθμίσεις</string>
+    <string name="action_create_save">Αποθήκευση</string>
+    <string name="action_create_cancel">Άκυρο</string>
+    <string name="action_edit_editing">Επεξεργασία</string>
+    <string name="action_edit_save">Αποθήκευση</string>
+    <string name="action_edit_saving">Αποθήκευση &#8230;</string>
+    <string name="action_edit_saved">Αποθηκεύτηκε</string>
+    <string name="action_edit_cancel">Άκυρο</string>
+    <string name="action_about">Περί</string>
+    <string name="action_select_note">Επιλογή σημείωσης</string>
+    <string name="action_note_deleted">Η σημείωση διαγράφηκε</string>
+    <string name="action_note_restored">Η σημείωση επαναφέρθηκε</string>
+    <string name="menu_delete">Διαγραφή</string>
+    <string name="menu_copy">Αντιγραφή</string>
+    <string name="menu_edit">Επεξεργασία</string>
+    <string name="menu_cancel">Άκυρο</string>
+    <string name="menu_favorite">Αγαπημένο</string>
+    <string name="menu_share">Διαμοιρασμός</string>
+    <string name="menu_about">Περί</string>
+
+    <string name="copy">Αντιγραφή</string>
+
+    <string name="listview_updated_today">Σήμερα</string>
+    <string name="listview_updated_yesterday">Χθες</string>
+    <string name="listview_updated_this_week">Αυτή την εβδομάδα</string>
+    <string name="listview_updated_this_month">Αυτό το μήνα</string>
+    <string name="listview_updated_earlier">Νωρίτερα</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Διακομιστής</string>
+    <string name="settings_url">Διεύθυνση διακομιστή</string>
+    <string name="settings_username">Όνομα χρήστη</string>
+    <string name="settings_password">Συνθηματικό</string>
+    <string name="settings_submit">Σύνδεση</string>
+    <!-- Network -->
+    <string name="network_connecting">Συνδέεται</string>
+    <string name="network_connected">Συνδέθηκε</string>
+    <string name="network_disconnected">Δεν υπάρχει διαθέσιμο δίκτυο</string>
+
+    <!-- Error -->
+    <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
+    <string name="error_no_network">δεν υπάρχει σύνδεση δικτύου</string>
+    <string name="error_url_malformed">Εσφαλμένη διεύθυνση διακομιστή</string>
+    <string name="error_username_password_invalid">Εσφαλμένο όνομα χρήστη ή συνθηματικό</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Ρυθμίσεις</string>
+
+
+    <!-- About -->
+    <string name="about_version_title">Έκδοση</string>
+    <string name="about_maintainer_title">Συντηρητής</string>
+    <string name="about_developers_title">Προγραμματιστές</string>
+    <string name="about_translators_title">Μεταφραστές</string>
+    <string name="about_translators">pejakm (Σέρβικα), ageru (Γαλλικά (France)), proninyaroslav (Ρώσικα), mist (Τσέχικα)</string>
+    <string name="about_testers_title">Δοκιμαστές</string>
+    <string name="about_source_title">Πηγαίος κώδικας</string>
+    <string name="about_app_license_title">Άδεια χρήσης εφαρμογής</string>
+    <string name="about_app_license_button">Προβολή άδειας χρήσης</string>
+    <string name="about_app_icon_disclaimer_title">Εικονίδιο εφαρμογής</string>
+    <string name="about_icons_disclaimer_title">Εικονίδια</string>
+    <string name="about_credits_tab_title">Μνεία</string>
+    <string name="about_contribution_tab_title">Συνεισφορά</string>
+    <string name="about_license_tab_title">Άδεια χρήσης</string>
+
+    <string name="widget_all_notes_title">Όλες οι σημειώσεις</string>
+    <string name="widget_single_note_title">Απλή σημείωση</string>
+</resources>
