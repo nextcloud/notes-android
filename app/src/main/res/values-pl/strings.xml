@@ -54,8 +54,8 @@
     <!-- Error -->
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_invalid_login">Niepoprawny login: %1$s</string>
-    <string name="error_json">czy aplikacja owncloud Notatki została aktywowana na serwerze?</string>
-    <string name="error_io">połączenie z serwerem jest zepsute</string>
+    <string name="error_json">czy aplikacja Nextcloud Notes została aktywowana na serwerze?</string>
+    <string name="error_io">połączenie z serwerem jest nieprawidłowe</string>
     <string name="error_no_network">brak połączenia sieciowego</string>
     <string name="error_server">URL/Server zawiera błędy</string>
     <string name="error_url_malformed">Błędny adres serwera</string>
@@ -75,8 +75,8 @@
     <string name="about_testers_title">Testerzy</string>
     <string name="about_source_title">Kod źródłowy</string>
     <string name="about_source">Ten projekt jest hostowany na GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
-    <string name="about_issues_title">Wydania</string>
-    <string name="about_issues">Możesz zgłaszać błędy, propozycje rozbudowy czy prośby o nowe funkcjonalności na GitHubowym trakerze błędów: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues_title">Problemy</string>
+    <string name="about_issues">Możesz zgłaszać błędy, propozycje rozbudowy lub prośby o nowe funkcjonalności na GitHubie: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">Licencja aplikacji</string>
     <string name="about_app_license">Aplikacja jest chroniona licencją GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobacz licencję</string>
