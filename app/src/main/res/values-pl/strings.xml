@@ -37,14 +37,14 @@
     <!-- Settings -->
     <string name="settings_server">Serwer</string>
     <string name="settings_url">Adres serwera</string>
-    <string name="settings_url_check_description">Pokazuje czy adres może zostać spingowany</string>
+    <string name="settings_url_check_description">Pokazuje czy adres może zostać pingnięty.</string>
     <string name="settings_url_warn_http">OSTRZEŻENIE: \"http\" nie jest bezpieczne. Proszę użyć \"https\".</string>
     <string name="settings_username">Nazwa użytkownika</string>
     <string name="settings_password">Hasło</string>
     <string name="settings_password_check_description">Pokazuje czy dane dostępowe są poprawne.</string>
     <string name="settings_submit">Połącz</string>
     <string name="settings_submitting">Łączenie &#8230;</string>
-    <string name="settings_notification">Włącz aby pokazać stałe powiadomienie do szybkiego tworzenia nowych notatek.</string>
+    <string name="settings_notification">Włącz, aby pokazać stałe powiadomienie do szybkiego tworzenia nowych notatek.</string>
 
     <!-- Network -->
     <string name="network_connecting">Łączenie</string>
@@ -57,7 +57,7 @@
     <string name="error_json">czy aplikacja Nextcloud Notes została aktywowana na serwerze?</string>
     <string name="error_io">połączenie z serwerem jest nieprawidłowe</string>
     <string name="error_no_network">brak połączenia sieciowego</string>
-    <string name="error_server">URL/Server zawiera błędy</string>
+    <string name="error_server">URL/Serwer zawiera błędy</string>
     <string name="error_url_malformed">Błędny adres serwera</string>
     <string name="error_username_password_invalid">Zła nazwa użytkownika lub hasło</string>
 
