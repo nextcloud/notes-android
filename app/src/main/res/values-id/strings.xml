@@ -38,7 +38,7 @@
     <string name="settings_server">Peladen</string>
     <string name="settings_url">Alamat peladen</string>
     <string name="settings_url_check_description">Tampilkan jika alamat dapat diping.</string>
-    <string name="settings_url_warn_http">PERHATIAN: \"http\" tidak aman. Harap gunakan \"https\".</string>
+    <string name="settings_url_warn_http">PERHATIAN: "http" tidak aman. Harap gunakan "https".</string>
     <string name="settings_username">Nama pengguna</string>
     <string name="settings_password">Sandi</string>
     <string name="settings_password_check_description">Tampilkan jika sandi benar</string>
@@ -74,16 +74,16 @@
     <string name="about_translators">pejakm (Serbia), ageru (Perancis (Perancis)), proninyaroslav (Rusia), mist (Chechnya)</string>
     <string name="about_testers_title">Penguji</string>
     <string name="about_source_title">Kode sumber</string>
-    <string name="about_source">Proyek ini dihosting di GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Proyek ini dihosting di GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Isu</string>
-    <string name="about_issues">Anda dapat melaporkan kutu, meningkatkan proposal dan permintaan fitur di pelacak isu GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Anda dapat melaporkan kutu, meningkatkan proposal dan permintaan fitur di pelacak isu GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">Lisensi apl</string>
     <string name="about_app_license">Aplikasi ini dilisensikan dibawah GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Lihat lisensi</string>
     <string name="about_app_icon_disclaimer_title">Ikon apl</string>
-    <string name="about_app_icon_disclaimer"><p>Ikon asli dibuat oleh <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> dari <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Ikon asli dibuat oleh <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> dari <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Ikon</string>
-    <string name="about_icons_disclaimer"><p>Semua ikon selanjutnya yang digunakan apl ini adalah <a href=\"https://materialdesignicons.com/\" title=\"Tautan ke Situs\">Ikon Material Design</a> dibuat oleh Google Inc. dan dilisensikan dibawah Lisensi Creative Commons</p></string>
+    <string name="about_icons_disclaimer"><p>Semua ikon selanjutnya yang digunakan apl ini adalah <a href="https://materialdesignicons.com/" title="Tautan ke Situs">Ikon Material Design</a> dibuat oleh Google Inc. dan dilisensikan dibawah Lisensi Creative Commons</p></string>
 
     <string name="about_credits_tab_title">Kredit</string>
     <string name="about_contribution_tab_title">Kontribusi</string>

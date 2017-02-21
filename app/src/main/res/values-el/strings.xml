@@ -38,7 +38,7 @@
     <string name="settings_server">Διακομιστής</string>
     <string name="settings_url">Διεύθυνση διακομιστή</string>
     <string name="settings_url_check_description">Εμφανίζει εάν μπορεί να γίνει ping στην διεύθυνση.</string>
-    <string name="settings_url_warn_http">ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Το \"http\" δεν είναι ασφαλές. Παρακαλούμε χρησιμοποιήστε το \"https\".</string>
+    <string name="settings_url_warn_http">ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Το "http" δεν είναι ασφαλές. Παρακαλούμε χρησιμοποιήστε το "https".</string>
     <string name="settings_username">Όνομα χρήστη</string>
     <string name="settings_password">Συνθηματικό</string>
     <string name="settings_password_check_description">Εμφανίζει εάν τα διαπιστευτήρια είναι σωστά.</string>
@@ -79,9 +79,9 @@
     <string name="about_app_license">Αυτή η εφαρμογή υπόκεινται στην άδεια χρήσης GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Προβολή άδειας χρήσης</string>
     <string name="about_app_icon_disclaimer_title">Εικονίδιο εφαρμογής</string>
-    <string name="about_app_icon_disclaimer"><p>Το αυθεντικό εικονίδιο κατασκευάστηκε από τον <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> από το <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Το αυθεντικό εικονίδιο κατασκευάστηκε από τον <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> από το <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Εικονίδια</string>
-    <string name="about_icons_disclaimer"><p>Όλα τα υπόλοιπα εικονίδια που χρησιμοποιούνται από αυτή την εφαρμογή είναι <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Εικονίδια Υλικού Σχεδίασης</a> κατασκευασμένα από την Google Inc. και έχουν άδεια χρήσης: Creative Commons License.</p></string>
+    <string name="about_icons_disclaimer"><p>Όλα τα υπόλοιπα εικονίδια που χρησιμοποιούνται από αυτή την εφαρμογή είναι <a href="https://materialdesignicons.com/" title="Link to Website">Εικονίδια Υλικού Σχεδίασης</a> κατασκευασμένα από την Google Inc. και έχουν άδεια χρήσης: Creative Commons License.</p></string>
 
     <string name="about_credits_tab_title">Μνεία</string>
     <string name="about_contribution_tab_title">Συνεισφορά</string>

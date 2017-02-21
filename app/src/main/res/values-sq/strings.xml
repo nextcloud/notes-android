@@ -38,7 +38,7 @@
     <string name="settings_server">Serveri</string>
     <string name="settings_url">Adresa e serverit</string>
     <string name="settings_url_check_description">Tregon nëse adresa po bëhet ping</string>
-    <string name="settings_url_warn_http">PARALAJMËRIM: \"http\" nuk është e sigurt. Ju lutemi përdorni \"https\".</string>
+    <string name="settings_url_warn_http">PARALAJMËRIM: "http" nuk është e sigurt. Ju lutemi përdorni "https".</string>
     <string name="settings_username">Emri i përdoruesit</string>
     <string name="settings_password">Fjalëkalimi</string>
     <string name="settings_password_check_description">Tregon nëse kredencialet janë të sakta</string>
@@ -74,16 +74,16 @@
     <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian), mist (Czech)</string>
     <string name="about_testers_title">Testuesit</string>
     <string name="about_source_title">Kodi burim</string>
-    <string name="about_source">Ky projekt ruhet në GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Ky projekt ruhet në GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Çështjet</string>
-    <string name="about_issues">Ju mund të raportoni buge, përmirësoni propozimet dhe të paraqisni propozime në gjurmuesin e çështjeve të GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Ju mund të raportoni buge, përmirësoni propozimet dhe të paraqisni propozime në gjurmuesin e çështjeve të GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">Liçensa e aplikacionit</string>
     <string name="about_app_license">Ky aplikacion është liçensuar nën GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Trego liçensën</string>
     <string name="about_app_icon_disclaimer_title">Ikona e aplikacionit</string>
-    <string name="about_app_icon_disclaimer"><p>Ikona origjinale u bë nga <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> nga <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Ikona origjinale u bë nga <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> nga <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Ikonat</string>
-    <string name="about_icons_disclaimer"><p>Të gjitha ikonat vijuese të përdorura nga ky aplikacion janë <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Ikona Material Design </a> të bëra nga Google Inc. dhe të liçensuara nën Liçensën Creative Commons.</p></string>
+    <string name="about_icons_disclaimer"><p>Të gjitha ikonat vijuese të përdorura nga ky aplikacion janë <a href="https://materialdesignicons.com/" title="Link to Website">Ikona Material Design </a> të bëra nga Google Inc. dhe të liçensuara nën Liçensën Creative Commons.</p></string>
 
     <string name="about_credits_tab_title">Kreditet</string>
     <string name="about_contribution_tab_title">Kontributi</string>

@@ -38,7 +38,7 @@
     <string name="settings_server">Server</string>
     <string name="settings_url">Server adres</string>
     <string name="settings_url_check_description">Ping mogelijkheid van adres weergeven.</string>
-    <string name="settings_url_warn_http">WAARSCHUWING: \"http\" in niet veilig. Gebruik \"https\".</string>
+    <string name="settings_url_warn_http">WAARSCHUWING: "http" in niet veilig. Gebruik "https".</string>
     <string name="settings_username">Gebruikersnaam</string>
     <string name="settings_password">Wachtwoord</string>
     <string name="settings_password_check_description">Certificaat correctheid weergeven.</string>
@@ -74,16 +74,16 @@
     <string name="about_translators">pejakm (Servisch), ageru (Français (Frans)), proninyaroslav (Russisch), mist (Tsjechisch)</string>
     <string name="about_testers_title">Testers</string>
     <string name="about_source_title">Broncode</string>
-    <string name="about_source">Dit is een GitHub project: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Dit is een GitHub project: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Kwesties</string>
-    <string name="about_issues">Je kan een bug, wijzigingen of functie verzoek melden bij de GitHub issue tracker: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Je kan een bug, wijzigingen of functie verzoek melden bij de GitHub issue tracker: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">App licentie</string>
     <string name="about_app_license">Deze applicatie valt onder de GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Licentie weergeven</string>
     <string name="about_app_icon_disclaimer_title">App pictogram</string>
-    <string name="about_app_icon_disclaimer"><p>Het originele pictogram is gemaakt door <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> van <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Het originele pictogram is gemaakt door <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> van <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">pictogram</string>
-    <string name="about_icons_disclaimer"><p>Alle pictogram\'s gebruikt door deze app zijn <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Materiaal ontwerp pictogram\'s</a> gemaakt door Google Inc. en vallen onder de Creatieve Content Licentie.</p></string>
+    <string name="about_icons_disclaimer"><p>Alle pictogram\'s gebruikt door deze app zijn <a href="https://materialdesignicons.com/" title="Link to Website">Materiaal ontwerp pictogram\'s</a> gemaakt door Google Inc. en vallen onder de Creatieve Content Licentie.</p></string>
 
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Bijdrage</string>

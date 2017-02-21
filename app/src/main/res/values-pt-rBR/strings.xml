@@ -38,7 +38,7 @@
     <string name="settings_server">Servidor</string>
     <string name="settings_url">Endereço do servidor</string>
     <string name="settings_url_check_description">Mostra se o endereço pode ser pingado.</string>
-    <string name="settings_url_warn_http">AVISO: \"http\" é inseguro. Utilize \"https\".</string>
+    <string name="settings_url_warn_http">AVISO: "http" é inseguro. Utilize "https".</string>
     <string name="settings_username">Nome de usuário</string>
     <string name="settings_password">Senha</string>
     <string name="settings_password_check_description">Mostra se as credenciais estão corretas.</string>
@@ -74,16 +74,16 @@
     <string name="about_translators">pejakm (Serbe), ageru (Francês (France)), proninyaroslav (Russian), mist (Czech)</string>
     <string name="about_testers_title">Testadores</string>
     <string name="about_source_title">Código fonte</string>
-    <string name="about_source">Este projeto está hospedado no GitHub:<a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Este projeto está hospedado no GitHub:<a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Problemas</string>
-    <string name="about_issues">Você pode relatar bugs, propostas de aprimoramento e solicitações de recursos no rastreador de problemas do GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Você pode relatar bugs, propostas de aprimoramento e solicitações de recursos no rastreador de problemas do GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">Licença de aplicativo</string>
     <string name="about_app_license">Esta aplicação está licenciada sob a GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Ver licença</string>
     <string name="about_app_icon_disclaimer_title">Ícone do aplicativo</string>
-    <string name="about_app_icon_disclaimer"><p>Ícone original feito por<a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> da <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Ícone original feito por<a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> da <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Ícones</string>
-    <string name="about_icons_disclaimer"><p>Todos os outros ícones usados por este aplicativo são <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Material Design Icons</a>Feita pela Google Inc. e licenciada sob uma licença Creative Commons.</p></string>
+    <string name="about_icons_disclaimer"><p>Todos os outros ícones usados por este aplicativo são <a href="https://materialdesignicons.com/" title="Link to Website">Material Design Icons</a>Feita pela Google Inc. e licenciada sob uma licença Creative Commons.</p></string>
 
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribuição</string>
