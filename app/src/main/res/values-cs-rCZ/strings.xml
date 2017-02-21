@@ -38,7 +38,7 @@
     <string name="settings_server">Server</string>
     <string name="settings_url">Adresa serveru</string>
     <string name="settings_url_check_description">Ukáže, zda adresa odpovídá na ping.</string>
-    <string name="settings_url_warn_http">POZOR: \"http\" není bezpečné. Prosím použijte \"https\"</string>
+    <string name="settings_url_warn_http">POZOR: "http" není bezpečné. Prosím použijte "https"</string>
     <string name="settings_username">Uživatelské jméno</string>
     <string name="settings_password">Heslo</string>
     <string name="settings_password_check_description">Ukáže, zda jsou přihlašovací údaje správné.</string>
@@ -74,16 +74,16 @@
     <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian), mist (Czech)</string>
     <string name="about_testers_title">Testeři</string>
     <string name="about_source_title">Zdrojový kód</string>
-    <string name="about_source">Tento projekt je hostován na GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Tento projekt je hostován na GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Problémy</string>
-    <string name="about_issues">Chyby, nápady na vylepšení a nové funkce můžete nahlásit na GitHub issue tracker: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Chyby, nápady na vylepšení a nové funkce můžete nahlásit na GitHub issue tracker: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">Licence aplikace</string>
     <string name="about_app_license">Tato aplikace je licencována pod GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobrazit licenci</string>
     <string name="about_app_icon_disclaimer_title">Ikona aplikace</string>
-    <string name="about_app_icon_disclaimer"><p>Originální ikonu vytvořil <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> z <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Originální ikonu vytvořil <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> z <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Ikony</string>
-    <string name="about_icons_disclaimer"><p>Všechny další ikony, které tato aplikace využívá jsou <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Material Design Icons</a> vytvořeno Google Inc. a licencováno pod Creative Commons License.</p></string>
+    <string name="about_icons_disclaimer"><p>Všechny další ikony, které tato aplikace využívá jsou <a href="https://materialdesignicons.com/" title="Link to Website">Material Design Icons</a> vytvořeno Google Inc. a licencováno pod Creative Commons License.</p></string>
 
     <string name="about_credits_tab_title">Zásluhy</string>
     <string name="about_contribution_tab_title">Příspěvek</string>

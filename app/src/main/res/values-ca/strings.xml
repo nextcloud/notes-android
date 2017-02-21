@@ -38,7 +38,7 @@
     <string name="settings_server">Servidor</string>
     <string name="settings_url">Adreça del servidor</string>
     <string name="settings_url_check_description">Mostra si es pot fer ping a l\\\'adreça</string>
-    <string name="settings_url_warn_http">ATENCIÓ: \"http\" és insegur. Si us plau utilitzeu \"https\".</string>
+    <string name="settings_url_warn_http">ATENCIÓ: "http" és insegur. Si us plau utilitzeu "https".</string>
     <string name="settings_username">Nom d\\\'usuari</string>
     <string name="settings_password">Contrasenya</string>
     <string name="settings_password_check_description">Mostar si les credencials son correctes</string>
@@ -74,13 +74,13 @@
     <string name="about_translators">pejakm (Serbi), ageru (Francès (França)), proninyaroslav (Rus), mist (txec)</string>
     <string name="about_testers_title">Provadors</string>
     <string name="about_source_title">Codi font</string>
-    <string name="about_source">Aquest projecte es troba a GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Aquest projecte es troba a GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">Problemes</string>
     <string name="about_app_license_title">Llicència de l\\\'aplicació</string>
     <string name="about_app_license">Aquesta aplicació està llicenciada sota GNU GENERAL PUBLIC LICENSE v3+</string>
     <string name="about_app_license_button">Veure llicència</string>
     <string name="about_app_icon_disclaimer_title">Icona de l\\\'aplicació</string>
-    <string name="about_app_icon_disclaimer"><p>Icona original feta per <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> des de <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Icona original feta per <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> des de <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Icones</string>
     <string name="about_credits_tab_title">Crèdits</string>
     <string name="about_contribution_tab_title">Contribució</string>

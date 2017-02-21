@@ -36,7 +36,7 @@
     <string name="settings_server">Server</string>
     <string name="settings_url">Indirizzo del server</string>
     <string name="settings_url_check_description">Mostra se l\'indirizzo può rispondere al ping.</string>
-    <string name="settings_url_warn_http">AVVISO: \"http\" non è sicuro. Utlizza \"https\".</string>
+    <string name="settings_url_warn_http">AVVISO: "http" non è sicuro. Utlizza "https".</string>
     <string name="settings_username">Nome utente</string>
     <string name="settings_password">Password</string>
     <string name="settings_password_check_description">Mostra se le credenziali sono corrette.</string>
@@ -70,7 +70,7 @@
     <string name="about_app_license">Questa applicazione è rilasciata nei termini della licenza GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Visualizza licenza</string>
     <string name="about_app_icon_disclaimer_title">Icona applicazione</string>
-    <string name="about_app_icon_disclaimer"><p>Icona originale creata da <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> da <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
+    <string name="about_app_icon_disclaimer"><p>Icona originale creata da <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> da <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Icone</string>
     <string name="about_credits_tab_title">Riconoscimenti</string>
     <string name="about_contribution_tab_title">Contributi</string>

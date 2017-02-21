@@ -74,16 +74,16 @@
     <string name="about_translators">pejakm (塞尔维亚语), ageru (Français (法语)), proninyaroslav (俄语), mist (捷克语)</string>
     <string name="about_testers_title">测试人员</string>
     <string name="about_source_title">源代码</string>
-    <string name="about_source">本项目托管在GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">本项目托管在GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
     <string name="about_issues_title">问题</string>
-    <string name="about_issues">你可以报告缺陷, 优化建议和特性要求在 GitHub 发布管理器: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">你可以报告缺陷, 优化建议和特性要求在 GitHub 发布管理器: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
     <string name="about_app_license_title">应用授权</string>
     <string name="about_app_license">此程序通过GNU通用公共许可证V3+授权。</string>
     <string name="about_app_license_button">查看授权</string>
     <string name="about_app_icon_disclaimer_title">应用图标</string>
-    <string name="about_app_icon_disclaimer"><p>原始图标由 <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> 在 <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a> 创作的</p></string>
+    <string name="about_app_icon_disclaimer"><p>原始图标由 <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> 在 <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a> 创作的</p></string>
     <string name="about_icons_disclaimer_title">图标</string>
-    <string name="about_icons_disclaimer"><p>这个应用程序使用的所有更多的图标 <a href=\"https://materialdesignicons.com/\" title=\"链接站点\">材料设计图标</a> 由谷歌公司推出. 在知识共享协议下授权.</p></string>
+    <string name="about_icons_disclaimer"><p>这个应用程序使用的所有更多的图标 <a href="https://materialdesignicons.com/" title="链接站点">材料设计图标</a> 由谷歌公司推出. 在知识共享协议下授权.</p></string>
 
     <string name="about_credits_tab_title">致谢</string>
     <string name="about_contribution_tab_title">贡献</string>

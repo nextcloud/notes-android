@@ -38,7 +38,7 @@
     <string name="settings_server">Server</string>
     <string name="settings_url">Adresa servera</string>
     <string name="settings_url_check_description">Ukáže či je adresa pingnuteľná.</string>
-    <string name="settings_url_warn_http">VAROVANIE: \"http\" nie je bezpečné. Použite prosím \"https\".</string>
+    <string name="settings_url_warn_http">VAROVANIE: "http" nie je bezpečné. Použite prosím "https".</string>
     <string name="settings_username">Meno používateľa</string>
     <string name="settings_password">Heslo</string>
     <string name="settings_password_check_description">Zobrazí či sú správne prihlasovacie údaje.</string>
