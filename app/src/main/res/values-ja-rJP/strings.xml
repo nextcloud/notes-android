@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Plurals -->
     <plurals name="ab_selected">
-        <item quantity="one">%d selezionata</item>
-        <item quantity="other">%d selezionate</item>
+        <item quantity="other">%d選択されています</item>
     </plurals>
 </resources>

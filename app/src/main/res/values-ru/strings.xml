@@ -67,28 +67,33 @@
 
     <!-- About -->
     <string name="about_version_title">Версия</string>
-    <string name="about_version">Вы используете <strong>%1$s</strong></string>
+    <string name="about_version">Вы используете &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Сопровождающий</string>
     <string name="about_developers_title">Разработчики</string>
     <string name="about_translators_title">Переводчики</string>
-    <string name="about_translators">pejakm (Сербский), ageru (Французский), proninyaroslav (Русский), mist (Чешский)</string>
     <string name="about_testers_title">Тестеры</string>
     <string name="about_source_title">Исходный код</string>
-    <string name="about_source">Проект размещён на GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Проект размещён на GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">Тикеты</string>
-    <string name="about_issues">Вы можете сообщать об ошибках, предложениях об улучшении и пожеланиях в систему тикетов GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Вы можете сообщать об ошибках, предложениях об улучшении и пожеланиях в систему тикетов GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">Лицензия программы</string>
     <string name="about_app_license">Программа выпускается под лицензией GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Посмотреть лицензию</string>
-    <string name="about_app_icon_disclaimer_title">Значок программы</string>
-    <string name="about_app_icon_disclaimer"><p>Первоначальный логотип был сделан <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> на <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Значки</string>
-    <string name="about_icons_disclaimer"><p>Все дальнейшие значки, которые используются в этой программе, являются <a href="https://materialdesignicons.com/" title="Link to Website">Material Design значки</a> от Google Inc. и лицензированны под Creative Commons License.</p></string>
-
+    <string name="about_icons_disclaimer">&lt;p>Первоначальный логотип был сделан %1$s&lt;/p>&lt;p>Все дальнейшие значки, которые используются в этой программе, являются &lt;a href="https://materialdesignicons.com/" title="Link to Website">Material Design значки&lt;/a> от Google Inc. и лицензированны под Creative Commons License.&lt;/p></string>
     <string name="about_credits_tab_title">Заслуги</string>
     <string name="about_contribution_tab_title">Учавствовать</string>
     <string name="about_license_tab_title">Лицензия</string>
 
     <string name="widget_all_notes_title">Все заметки</string>
     <string name="widget_single_note_title">Одна заметка</string>
+
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d выбрана</item>
+        <item quantity="few">%d выбрано</item>
+        <item quantity="many">%d выбрано</item>
+        <item quantity="other">%d выбрано</item>
+    </plurals>
 </resources>

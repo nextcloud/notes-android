@@ -59,18 +59,15 @@
 
     <!-- About -->
     <string name="about_version_title">Versione</string>
-    <string name="about_version">Stai utilizzando <strong>%1$s</strong></string>
+    <string name="about_version">Stai utilizzando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Responsabile</string>
     <string name="about_developers_title">Sviluppatori</string>
     <string name="about_translators_title">Traduttori</string>
-    <string name="about_translators">pejakm (serbo), ageru (francese (Francia)), proninyaroslav (russo), mist (ceco)</string>
     <string name="about_source_title">Codice sorgente</string>
     <string name="about_issues_title">Problemi</string>
     <string name="about_app_license_title">Licenza applicazione</string>
     <string name="about_app_license">Questa applicazione è rilasciata nei termini della licenza GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Visualizza licenza</string>
-    <string name="about_app_icon_disclaimer_title">Icona applicazione</string>
-    <string name="about_app_icon_disclaimer"><p>Icona originale creata da <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> da <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Icone</string>
     <string name="about_credits_tab_title">Riconoscimenti</string>
     <string name="about_contribution_tab_title">Contributi</string>
@@ -78,4 +75,11 @@
 
     <string name="widget_all_notes_title">Tutte le note</string>
     <string name="widget_single_note_title">Nota singola</string>
+
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d selezionata</item>
+        <item quantity="other">%d selezionate</item>
+    </plurals>
 </resources>

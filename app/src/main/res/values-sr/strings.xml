@@ -54,26 +54,30 @@
 
     <!-- About -->
     <string name="about_version_title">Издање</string>
-    <string name="about_version">Текуће издање је <strong>%1$s</strong></string>
+    <string name="about_version">Текуће издање је &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Главни програмер</string>
     <string name="about_developers_title">Програмери</string>
     <string name="about_translators_title">Преводиоци</string>
-    <string name="about_translators">Младен Пејаковић (српски), ageru (Français (France)), proninyaroslav (Russian), mist (Czech)</string>
     <string name="about_testers_title">Тестери</string>
     <string name="about_source_title">Изворни кôд</string>
-    <string name="about_source">Пројекат је хостован на Гитхабу: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Пројекат је хостован на Гитхабу: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">Грешке</string>
-    <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу пријава: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу пријава: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">Лиценца апликације</string>
     <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом Општом јавном лиценцом (ГПЛ) в3+.</string>
     <string name="about_app_license_button">Прикажи лиценцу</string>
-    <string name="about_app_icon_disclaimer_title">Икона апликације</string>
-    <string name="about_app_icon_disclaimer"><p>Изворни аутор <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> са <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Иконе</string>
-    <string name="about_icons_disclaimer"><p>Све остале иконе ове апликације су <a href="https://materialdesignicons.com/" title="веза на вебсајт">иконе материјал дизајна</a> које је креирао Google Inc. и лиценциране су Creative Commons лиценцом.</p></string>
-
+    <string name="about_icons_disclaimer">&lt;p>Изворни аутор %1$s&lt;/p>&lt;p>Све остале иконе ове апликације су &lt;a href="https://materialdesignicons.com/" title="веза на вебсајт">иконе материјал дизајна&lt;/a> које је креирао Google Inc. и лиценциране су Creative Commons лиценцом.&lt;/p></string>
     <string name="about_credits_tab_title">Заслуге</string>
     <string name="about_contribution_tab_title">Допринос</string>
     <string name="about_license_tab_title">Лиценца</string>
 
-    </resources>
+    
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d изабрана</item>
+        <item quantity="few">%d изабрана</item>
+        <item quantity="other">%d изабрана</item>
+    </plurals>
+</resources>

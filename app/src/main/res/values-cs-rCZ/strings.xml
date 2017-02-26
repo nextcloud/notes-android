@@ -67,28 +67,32 @@
 
     <!-- About -->
     <string name="about_version_title">Verze</string>
-    <string name="about_version">Právě používáte <strong>%1$s</strong></string>
+    <string name="about_version">Právě používáte &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Tvůrci</string>
     <string name="about_developers_title">Vývojáři</string>
     <string name="about_translators_title">Překladatelé</string>
-    <string name="about_translators">pejakm (Serbe), ageru (Français (France)), proninyaroslav (Russian), mist (Czech)</string>
     <string name="about_testers_title">Testeři</string>
     <string name="about_source_title">Zdrojový kód</string>
-    <string name="about_source">Tento projekt je hostován na GitHub: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Tento projekt je hostován na GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">Problémy</string>
-    <string name="about_issues">Chyby, nápady na vylepšení a nové funkce můžete nahlásit na GitHub issue tracker: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Chyby, nápady na vylepšení a nové funkce můžete nahlásit na GitHub issue tracker: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licence aplikace</string>
     <string name="about_app_license">Tato aplikace je licencována pod GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobrazit licenci</string>
-    <string name="about_app_icon_disclaimer_title">Ikona aplikace</string>
-    <string name="about_app_icon_disclaimer"><p>Originální ikonu vytvořil <a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> z <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Ikony</string>
-    <string name="about_icons_disclaimer"><p>Všechny další ikony, které tato aplikace využívá jsou <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Material Design Icons</a> vytvořeno Google Inc. a licencováno pod Creative Commons License.</p></string>
-
+    <string name="about_icons_disclaimer">&lt;p>Originální ikonu vytvořil %1$s&lt;/p>&lt;p>Všechny další ikony, které tato aplikace využívá jsou &lt;a href="https://materialdesignicons.com/" title="Link to Website">Material Design Icons&lt;/a> vytvořeno Google Inc. a licencováno pod Creative Commons License.&lt;/p></string>
     <string name="about_credits_tab_title">Zásluhy</string>
     <string name="about_contribution_tab_title">Příspěvek</string>
     <string name="about_license_tab_title">Licence</string>
 
     <string name="widget_all_notes_title">Všechny poznámky</string>
     <string name="widget_single_note_title">Jedna poznámka</string>
+
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d vybrán</item>
+        <item quantity="few">%d vybrány</item>
+        <item quantity="other">%d vybráno</item>
+    </plurals>
 </resources>
