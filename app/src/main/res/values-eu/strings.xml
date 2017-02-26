@@ -67,24 +67,20 @@
 
     <!-- About -->
     <string name="about_version_title">Vertsioa</string>
-    <string name="about_version">Une honetan <strong>%1$s</strong> erabiltzen ari zara</string>
+    <string name="about_version">Une honetan &lt;strong>%1$s&lt;/strong> erabiltzen ari zara</string>
     <string name="about_maintainer_title">Mantentzailea</string>
     <string name="about_developers_title">Garatzaileak</string>
     <string name="about_translators_title">Itzultzaileak</string>
-    <string name="about_translators">pejakm (Serbia), ageru (Frantzesa (Frantzia)), proninyaroslav (Errusiera), mist (Txekiera)</string>
     <string name="about_testers_title">Frogatzaileak</string>
     <string name="about_source_title">Iturburu-kodea</string>
-    <string name="about_source">Proiektu hau GitHub-en ostatatuta dago: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/\">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Proiektu hau GitHub-en ostatatuta dago: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">Arazoak</string>
-    <string name="about_issues">GitHub-en akatsak salatu, hobekuntzak proposatu eta ezaugarri berriak eskatu ditzakezu hurrengo harian: <a href=\"https://github.com/stefan-niedermann/OwnCloud-Notes/issues\">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">GitHub-en akatsak salatu, hobekuntzak proposatu eta ezaugarri berriak eskatu ditzakezu hurrengo harian: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">Aplikazio lizentzia</string>
     <string name="about_app_license">Aplikazio hau GNU GENERAL PUBLIC LICENSE v3+ lizentziapean dago.</string>
     <string name="about_app_license_button">Lizentzia ikusi</string>
-    <string name="about_app_icon_disclaimer_title">Aplikazio irudia</string>
-    <string name="about_app_icon_disclaimer"><p>Jatorrizko irudia<a href=\"http://jancborchardt.net/\" title=\"Jan C. Borchardt\">Jan C. Borchardt</a> -ek egin du <a href=\"https://github.com/owncloud/notes/commits/master/img/notes.svg\" title=\"GitHub\">www.github.com</a>-tik</p></string>
     <string name="about_icons_disclaimer_title">Irudiak</string>
-    <string name="about_icons_disclaimer"><p>Aplikazio honetan erabilitako beste irudi gustiak <a href=\"https://materialdesignicons.com/\" title=\"Link to Website\">Material Design Irudiak</a> dira, Google Inc.-ek eginak eta Creative Commons Lizentziapean.</p></string>
-
+    <string name="about_icons_disclaimer">&lt;p>Jatorrizko irudia%1$s-tik&lt;/p>&lt;p>Aplikazio honetan erabilitako beste irudi gustiak &lt;a href="https://materialdesignicons.com/" title="Link to Website">Material Design Irudiak&lt;/a> dira, Google Inc.-ek eginak eta Creative Commons Lizentziapean.&lt;/p></string>
     <string name="about_credits_tab_title">Kredituak</string>
     <string name="about_contribution_tab_title">Kontribuzio</string>
     <string name="about_license_tab_title">Lizentzia</string>
