@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    compile 'com.yydcdut:rxmarkdown:0.0.7'
+    compile 'com.yydcdut:rxmarkdown:0.0.8-beta'
     compile 'io.reactivex:rxandroid:1.2.0'
     compile 'io.reactivex:rxjava:1.1.5'
     compile 'com.android.support:support-v4:25.0.1'

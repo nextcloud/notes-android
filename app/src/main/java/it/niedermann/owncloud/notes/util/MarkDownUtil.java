@@ -26,6 +26,7 @@ public class MarkDownUtil {
                 .setHeader4RelativeSize(1.15f)
                 .setHeader5RelativeSize(1.1f)
                 .setHeader6RelativeSize(1.05f)
+                .setHorizontalRulesHeight(1)
                 .setLinkColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null))
                 .build();
     }
