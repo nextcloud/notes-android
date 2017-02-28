@@ -14,8 +14,8 @@
     <string name="action_edit_cancel">Cancel·lar</string>
     <string name="action_about">Sobre</string>
     <string name="action_select_note">Selecciona una nota</string>
-    <string name="action_note_deleted">S\'ha esborrat la nota</string>
-    <string name="action_note_restored">S\'ha restaurat la nota</string>
+    <string name="action_note_deleted">S\\\'ha esborrat la nota</string>
+    <string name="action_note_restored">S\\\'ha restaurat la nota</string>
     <string name="action_undo">Des-fes</string>
     <string name="menu_delete">Esborrar</string>
     <string name="menu_copy">Copiar</string>
@@ -37,9 +37,9 @@
     <!-- Settings -->
     <string name="settings_server">Servidor</string>
     <string name="settings_url">Adreça del servidor</string>
-    <string name="settings_url_check_description">Mostra si es pot fer ping a l\'adreça</string>
+    <string name="settings_url_check_description">Mostra si es pot fer ping a l\\\'adreça</string>
     <string name="settings_url_warn_http">ATENCIÓ: \"http\" és insegur. Si us plau utilitzeu \"https\".</string>
-    <string name="settings_username">Nom d\'usuari</string>
+    <string name="settings_username">Nom d\\\'usuari</string>
     <string name="settings_password">Contrasenya</string>
     <string name="settings_password_check_description">Mostar si les credencials son correctes</string>
     <string name="settings_submit">Connecta</string>
@@ -55,27 +55,24 @@
     <string name="error_sync">Error en la sincronització: %1$s</string>
     <string name="error_invalid_login">Inici de sessió invàlid: %1$s</string>
     <string name="error_json">El servidor té les owncloud app activades?</string>
-    <string name="error_io">S\'ha trencat la connecció amb el servidor</string>
+    <string name="error_io">S\\\'ha trencat la connecció amb el servidor</string>
     <string name="error_no_network">No hi ha connexió a la xarxa</string>
-    <string name="error_server">L\'URL/Server conté errors</string>
+    <string name="error_server">L\\\'URL/Server conté errors</string>
     <string name="error_url_malformed">Adreça del servidor incorrecta</string>
     <string name="error_username_password_invalid">Usuari o contrasenya erroni</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Paràmetres</string>
 
-
     <!-- About -->
     <string name="about_version_title">Versió</string>
-    <string name="about_version">Esteu utilitzant &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Manteniment</string>
     <string name="about_developers_title">Desenvolupadors</string>
     <string name="about_translators_title">Traductors</string>
     <string name="about_testers_title">Provadors</string>
     <string name="about_source_title">Codi font</string>
-    <string name="about_source">Aquest projecte es troba a GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemes</string>
-    <string name="about_app_license_title">Llicència de l\'aplicació</string>
+    <string name="about_app_license_title">Llicència de l\\\'aplicació</string>
     <string name="about_app_license">Aquesta aplicació està llicenciada sota GNU GENERAL PUBLIC LICENSE v3+</string>
     <string name="about_app_license_button">Veure llicència</string>
     <string name="about_icons_disclaimer_title">Icones</string>
@@ -87,9 +84,4 @@
     <string name="widget_single_note_title">Una nota</string>
 
 
-    <!-- Plurals -->
-    <plurals name="ab_selected">
-        <item quantity="one">%d seleccionat</item>
-        <item quantity="other">%d seleccionats</item>
-    </plurals>
-</resources>
+    </resources>

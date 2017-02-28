@@ -64,23 +64,18 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Instellingen</string>
 
-
     <!-- About -->
     <string name="about_version_title">Versie</string>
-    <string name="about_version">Je gebruikt nu &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Beheerder</string>
     <string name="about_developers_title">Ontwikkelaar</string>
     <string name="about_translators_title">Vertalers</string>
     <string name="about_testers_title">Testers</string>
     <string name="about_source_title">Broncode</string>
-    <string name="about_source">Dit is een GitHub project: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">Kwesties</string>
-    <string name="about_issues">Je kan een bug, wijzigingen of functie verzoek melden bij de GitHub issue tracker: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">App licentie</string>
     <string name="about_app_license">Deze applicatie valt onder de GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Licentie weergeven</string>
     <string name="about_icons_disclaimer_title">pictogram</string>
-    <string name="about_icons_disclaimer">&lt;p>Het originele pictogram is gemaakt door %1$s&lt;/p>&lt;p>Alle pictogram\'s gebruikt door deze app zijn &lt;a href="https://materialdesignicons.com/" title="Link to Website">Materiaal ontwerp pictogram\'s&lt;/a> gemaakt door Google Inc. en vallen onder de Creatieve Content Licentie.&lt;/p></string>
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Bijdrage</string>
     <string name="about_license_tab_title">Licentie</string>
@@ -89,9 +84,4 @@
     <string name="widget_single_note_title">Enkele notitie</string>
 
 
-    <!-- Plurals -->
-    <plurals name="ab_selected">
-        <item quantity="one">%d geselecteerd</item>
-        <item quantity="other">%d geselecteerd</item>
-    </plurals>
-</resources>
+    </resources>

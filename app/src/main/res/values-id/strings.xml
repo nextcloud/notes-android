@@ -64,23 +64,18 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Pengaturan</string>
 
-
     <!-- About -->
     <string name="about_version_title">Versi</string>
-    <string name="about_version">Anda saat ini menggunakan &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Pengelola</string>
     <string name="about_developers_title">Pengembang</string>
     <string name="about_translators_title">Penerjemah</string>
     <string name="about_testers_title">Penguji</string>
     <string name="about_source_title">Kode sumber</string>
-    <string name="about_source">Proyek ini dihosting di GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">Isu</string>
-    <string name="about_issues">Anda dapat melaporkan kutu, meningkatkan proposal dan permintaan fitur di pelacak isu GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">Lisensi apl</string>
     <string name="about_app_license">Aplikasi ini dilisensikan dibawah GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Lihat lisensi</string>
     <string name="about_icons_disclaimer_title">Ikon</string>
-    <string name="about_icons_disclaimer">&lt;p>Ikon asli dibuat oleh %1$s&lt;/p>&lt;p>Semua ikon selanjutnya yang digunakan apl ini adalah &lt;a href="https://materialdesignicons.com/" title="Tautan ke Situs">Ikon Material Design&lt;/a> dibuat oleh Google Inc. dan dilisensikan dibawah Lisensi Creative Commons&lt;/p></string>
     <string name="about_credits_tab_title">Kredit</string>
     <string name="about_contribution_tab_title">Kontribusi</string>
     <string name="about_license_tab_title">Lisensi</string>
@@ -89,8 +84,4 @@
     <string name="widget_single_note_title">Satu catatan</string>
 
 
-    <!-- Plurals -->
-    <plurals name="ab_selected">
-        <item quantity="other">%d terpilih</item>
-    </plurals>
-</resources>
+    </resources>

@@ -64,23 +64,25 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Configuración</string>
 
-
     <!-- About -->
     <string name="about_version_title">Versión</string>
-    <string name="about_version">Está usando ahora &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">Se encuentra actualmente usando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mantenedor</string>
     <string name="about_developers_title">Desarrolladores</string>
     <string name="about_translators_title">Traductores</string>
+    <string name="about_translators_transifex">Comunidad de Nextcloud en &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testers</string>
     <string name="about_source_title">Código fuente</string>
-    <string name="about_source">Este proyecto se aloja en GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
+    <string name="about_source">Este proyecto es alojado en GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemas</string>
-    <string name="about_issues">Puedes informar de errores, proponer mejoras y pedir características en el tracker de GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
+    <string name="about_issues">Puede reporta errores, proponer mejoras y solicitar características en el sistema de seguimiento de GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Traducir</string>
+    <string name="about_translate">Únase al equipo de Nextcloud en Transifex y ayúdenos a traducir esta aplicación: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licencia de la aplicación</string>
     <string name="about_app_license">Esta aplicación está bajo la Licencia Pública General GNU v3+.</string>
     <string name="about_app_license_button">Ver licencia</string>
     <string name="about_icons_disclaimer_title">Iconos</string>
-    <string name="about_icons_disclaimer">&lt;p>Icono original por %1$s&lt;/p>&lt;p>Todos los demás iconos usados por esta app son &lt;a href="https://materialdesignicons.com/" title="Link to Website">iconos Material Design&lt;/a> hechos por Google Inc. y licenciados bajo una licencia Creative Commons.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Icono original hecho por %1$s&lt;/p>&lt;p>Todos los demás íconos usados por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> hechos por Google Inc. y están bajo una Licencia Creative Commons.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribución</string>
     <string name="about_license_tab_title">Licencia</string>
@@ -91,7 +93,7 @@
 
     <!-- Plurals -->
     <plurals name="ab_selected">
-        <item quantity="one">%d seleccionado</item>
+        <item quantity="one">%d selecionado</item>
         <item quantity="other">%d seleccionados</item>
     </plurals>
 </resources>

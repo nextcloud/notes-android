@@ -61,16 +61,13 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Iestatījumi</string>
 
-
     <!-- About -->
     <string name="about_version_title">Versija</string>
-    <string name="about_version">Jūs šobrīd izmantojat &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Uzturētājs</string>
     <string name="about_developers_title">Izstrādātāji</string>
     <string name="about_translators_title">Tulkotāji</string>
     <string name="about_testers_title">Testētāji</string>
     <string name="about_source_title">Izejas kods</string>
-    <string name="about_source">Šis projekts atrodas uz GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">Programmas licence</string>
     <string name="about_app_license">Šī lietojumprogramma tiek licencēta zem GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Skatīt licenci</string>
@@ -82,10 +79,4 @@
     <string name="widget_single_note_title">Viena piezīme</string>
 
 
-    <!-- Plurals -->
-    <plurals name="ab_selected">
-        <item quantity="zero">%d atlasīts</item>
-        <item quantity="one">%d atlasīts</item>
-        <item quantity="other">%d atlasīts</item>
-    </plurals>
-</resources>
+    </resources>

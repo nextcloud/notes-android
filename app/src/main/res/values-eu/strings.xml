@@ -64,27 +64,24 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Ezarpenak</string>
 
-
     <!-- About -->
     <string name="about_version_title">Vertsioa</string>
-    <string name="about_version">Une honetan &lt;strong>%1$s&lt;/strong> erabiltzen ari zara</string>
     <string name="about_maintainer_title">Mantentzailea</string>
     <string name="about_developers_title">Garatzaileak</string>
     <string name="about_translators_title">Itzultzaileak</string>
     <string name="about_testers_title">Frogatzaileak</string>
     <string name="about_source_title">Iturburu-kodea</string>
-    <string name="about_source">Proiektu hau GitHub-en ostatatuta dago: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">Arazoak</string>
-    <string name="about_issues">GitHub-en akatsak salatu, hobekuntzak proposatu eta ezaugarri berriak eskatu ditzakezu hurrengo harian: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">Aplikazio lizentzia</string>
     <string name="about_app_license">Aplikazio hau GNU GENERAL PUBLIC LICENSE v3+ lizentziapean dago.</string>
     <string name="about_app_license_button">Lizentzia ikusi</string>
     <string name="about_icons_disclaimer_title">Irudiak</string>
-    <string name="about_icons_disclaimer">&lt;p>Jatorrizko irudia%1$s-tik&lt;/p>&lt;p>Aplikazio honetan erabilitako beste irudi gustiak &lt;a href="https://materialdesignicons.com/" title="Link to Website">Material Design Irudiak&lt;/a> dira, Google Inc.-ek eginak eta Creative Commons Lizentziapean.&lt;/p></string>
     <string name="about_credits_tab_title">Kredituak</string>
     <string name="about_contribution_tab_title">Kontribuzio</string>
     <string name="about_license_tab_title">Lizentzia</string>
 
     <string name="widget_all_notes_title">Ohar guztiak</string>
     <string name="widget_single_note_title">Ohar bakarra</string>
-</resources>
+
+
+    </resources>

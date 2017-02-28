@@ -64,23 +64,18 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Konfigurimet</string>
 
-
     <!-- About -->
     <string name="about_version_title">Versioni</string>
-    <string name="about_version">Për momentin ju po përdorni &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mirëmbajtësi</string>
     <string name="about_developers_title">Zhvilluesit</string>
     <string name="about_translators_title">Përkthyesit</string>
     <string name="about_testers_title">Testuesit</string>
     <string name="about_source_title">Kodi burim</string>
-    <string name="about_source">Ky projekt ruhet në GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">Çështjet</string>
-    <string name="about_issues">Ju mund të raportoni buge, përmirësoni propozimet dhe të paraqisni propozime në gjurmuesin e çështjeve të GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">Liçensa e aplikacionit</string>
     <string name="about_app_license">Ky aplikacion është liçensuar nën GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Trego liçensën</string>
     <string name="about_icons_disclaimer_title">Ikonat</string>
-    <string name="about_icons_disclaimer">&lt;p>Ikona origjinale u bë nga %1$s&lt;/p>&lt;p>Të gjitha ikonat vijuese të përdorura nga ky aplikacion janë &lt;a href="https://materialdesignicons.com/" title="Link to Website">Ikona Material Design &lt;/a> të bëra nga Google Inc. dhe të liçensuara nën Liçensën Creative Commons.&lt;/p></string>
     <string name="about_credits_tab_title">Kreditet</string>
     <string name="about_contribution_tab_title">Kontributi</string>
     <string name="about_license_tab_title">Liçensë</string>
@@ -89,9 +84,4 @@
     <string name="widget_single_note_title">Një shënim i vetëm</string>
 
 
-    <!-- Plurals -->
-    <plurals name="ab_selected">
-        <item quantity="one">%d të përzgjedhura</item>
-        <item quantity="other">%d të përzgjedhura</item>
-    </plurals>
-</resources>
+    </resources>

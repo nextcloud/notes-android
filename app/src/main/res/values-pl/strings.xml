@@ -64,23 +64,25 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Ustawienia</string>
 
-
     <!-- About -->
     <string name="about_version_title">Wersja</string>
     <string name="about_version">Aktualnie używasz &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Opiekun</string>
     <string name="about_developers_title">Deweloperzy</string>
     <string name="about_translators_title">Tłumacze</string>
+    <string name="about_translators_transifex">Społeczność Nextclouda na &lt;a href=\"%1$s\">Transifeksie&lt;/a></string>
     <string name="about_testers_title">Testerzy</string>
     <string name="about_source_title">Kod źródłowy</string>
-    <string name="about_source">Ten projekt jest hostowany na GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
+    <string name="about_source">Projekt prowadzony jest na GitHubie: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemy</string>
-    <string name="about_issues">Możesz zgłaszać błędy, propozycje rozbudowy lub prośby o nowe funkcjonalności na GitHubie: &lt;a href="%1$s">%1$s&lt;/a></string>
+    <string name="about_issues">Możesz zgłaszać błędy, propozycje rozbudowy lub prośby o nowe funkcjonalności na GitHubie: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Tłumacz</string>
+    <string name="about_translate">Aby pomóc nam w tłumaczeniu tej aplikacji przyłącz się do zespołu Nextclouda na Transifeksie &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licencja aplikacji</string>
     <string name="about_app_license">Aplikacja jest chroniona licencją GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobacz licencję</string>
     <string name="about_icons_disclaimer_title">Ikony</string>
-    <string name="about_icons_disclaimer">&lt;p>Oryginalna ikona została wykonana przez %1$s&lt;/p>&lt;p>Pozostałe ikony użyte w aplikacji są &lt;a href="https://materialdesignicons.com/" title="Link to Website">Ikonami Material Design&lt;/a> wykonanymi przez Google Inc. i są chronione licencją Creative Commons License.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Oryginalne ikony wykonane są przez %1$s&lt;/p>&lt;p>Pozostałe ikony użyte w aplikacji są &lt;a href=\"https://materialdesignicons.com/\">Ikonami Material Design&lt;/a> wykonanymi przez Google Inc. i są chronione licencją Creative Commons License.&lt;/p></string>
     <string name="about_credits_tab_title">O</string>
     <string name="about_contribution_tab_title">Wkład</string>
     <string name="about_license_tab_title">Licencja</string>
@@ -91,8 +93,9 @@
 
     <!-- Plurals -->
     <plurals name="ab_selected">
-        <item quantity="one">%d zaznaczone</item>
-        <item quantity="few">%d zaznaczonych</item>
-        <item quantity="other">%d zaznaczonych</item>
+        <item quantity="one">%d wybrano</item>
+        <item quantity="few">%d wybrano</item>
+        <item quantity="many">%d wybrano</item>
+        <item quantity="other">%d wybrano</item>
     </plurals>
 </resources>

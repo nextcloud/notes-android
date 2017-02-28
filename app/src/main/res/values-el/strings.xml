@@ -64,10 +64,8 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Ρυθμίσεις</string>
 
-
     <!-- About -->
     <string name="about_version_title">Έκδοση</string>
-    <string name="about_version">Προς το παρόν χρησιμοποιείτε &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Συντηρητής</string>
     <string name="about_developers_title">Προγραμματιστές</string>
     <string name="about_translators_title">Μεταφραστές</string>
@@ -78,7 +76,6 @@
     <string name="about_app_license">Αυτή η εφαρμογή υπόκεινται στην άδεια χρήσης GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Προβολή άδειας χρήσης</string>
     <string name="about_icons_disclaimer_title">Εικονίδια</string>
-    <string name="about_icons_disclaimer">&lt;p>Το αυθεντικό εικονίδιο κατασκευάστηκε από τον %1$s&lt;/p>&lt;p>Όλα τα υπόλοιπα εικονίδια που χρησιμοποιούνται από αυτή την εφαρμογή είναι &lt;a href="https://materialdesignicons.com/" title="Link to Website">Εικονίδια Υλικού Σχεδίασης&lt;/a> κατασκευασμένα από την Google Inc. και έχουν άδεια χρήσης: Creative Commons License.&lt;/p></string>
     <string name="about_credits_tab_title">Μνεία</string>
     <string name="about_contribution_tab_title">Συνεισφορά</string>
     <string name="about_license_tab_title">Άδεια χρήσης</string>
@@ -87,9 +84,4 @@
     <string name="widget_single_note_title">Απλή σημείωση</string>
 
 
-    <!-- Plurals -->
-    <plurals name="ab_selected">
-        <item quantity="one">%d επιλέχθηκε</item>
-        <item quantity="other">%d επιλέχθηκαν</item>
-    </plurals>
-</resources>
+    </resources>

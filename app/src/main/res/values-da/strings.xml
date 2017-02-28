@@ -58,7 +58,6 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Indstillinger</string>
 
-
     <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_maintainer_title">Maintainer</string>
@@ -66,21 +65,12 @@
     <string name="about_translators_title">Oversættere</string>
     <string name="about_testers_title">Testere</string>
     <string name="about_source_title">Kildekode</string>
-    <string name="about_source">Dette projekt er hosted på GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">App licens</string>
     <string name="about_app_license">Denne applikation er licenseret under GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Vis licens</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
-    <string name="about_icons_disclaimer">&lt;p>Det original ikon er lavet af %1$s&lt;/p>&lt;p>Alle andre ikoner brugt i denne app er &lt;a href="https://materialdesignicons.com/" title="Link to Website">Material Design ikoner&lt;/a> af Google Inc. licenseret under en Creative Commons Licens.&lt;/p></string>
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_license_tab_title">Licens</string>
 
     <string name="widget_all_notes_title">Alle noter</string>
-    
-
-    <!-- Plurals -->
-    <plurals name="ab_selected">
-        <item quantity="one">%d valgt</item>
-        <item quantity="other">%d selected</item>
-    </plurals>
-</resources>
+    </resources>

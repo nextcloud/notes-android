@@ -64,23 +64,18 @@
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">设置</string>
 
-
     <!-- About -->
     <string name="about_version_title">版本</string>
-    <string name="about_version">你正在使用&lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">维护者</string>
     <string name="about_developers_title">开发者</string>
     <string name="about_translators_title">翻译人员</string>
     <string name="about_testers_title">测试人员</string>
     <string name="about_source_title">源代码</string>
-    <string name="about_source">本项目托管在GitHub: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_issues_title">问题</string>
-    <string name="about_issues">你可以报告缺陷, 优化建议和特性要求在 GitHub 发布管理器: &lt;a href="%1$s">%1$s&lt;/a></string>
     <string name="about_app_license_title">应用授权</string>
     <string name="about_app_license">此程序通过GNU通用公共许可证V3+授权。</string>
     <string name="about_app_license_button">查看授权</string>
     <string name="about_icons_disclaimer_title">图标</string>
-    <string name="about_icons_disclaimer">&lt;p>原始图标由 %1$s 创作的&lt;/p>&lt;p>这个应用程序使用的所有更多的图标 &lt;a href="https://materialdesignicons.com/" title="链接站点">材料设计图标&lt;/a> 由谷歌公司推出. 在知识共享协议下授权.&lt;/p></string>
     <string name="about_credits_tab_title">致谢</string>
     <string name="about_contribution_tab_title">贡献</string>
     <string name="about_license_tab_title">授权</string>
@@ -89,8 +84,4 @@
     <string name="widget_single_note_title">单个便笺</string>
 
 
-    <!-- Plurals -->
-    <plurals name="ab_selected">
-        <item quantity="other">%d 已选择</item>
-    </plurals>
-</resources>
+    </resources>
