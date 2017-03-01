@@ -66,23 +66,23 @@
 
     <!-- About -->
     <string name="about_version_title">Version</string>
-    <string name="about_version">Aktuell nutzt Du &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">Du benutzt gerade &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Maintainer</string>
     <string name="about_developers_title">Entwickler</string>
     <string name="about_translators_title">Übersetzer</string>
-    <string name="about_translators_transifex">Nextcloud Gemeinschaft auf &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud-Gemeinschaft auf &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Tester</string>
     <string name="about_source_title">Quellcode</string>
-    <string name="about_source">Dieses Projekt wird gehosted auf GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Dieses Projekt wird auf GitHub verwaltet: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Tickets</string>
-    <string name="about_issues">Du kannst Fehler, Erweiterungsvorschläge und Funktions-Anfragen beim GitHub Fehler-Tracker melden: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Du kannst Fehler, Verbesserungsvorschläge oder Wünsche für neue Funktionen im GitHub Ticket-System erfassen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Übersetzen</string>
     <string name="about_translate">Trete dem Nextcloud-Team auf Transifex bei und helfe uns diese App zu übersetzen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">App Lizenz</string>
     <string name="about_app_license">Diese Applikation ist lizenziert unter der GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Lizenz ansehen</string>
     <string name="about_icons_disclaimer_title">Icons</string>
-    <string name="about_icons_disclaimer">&lt;p>Original icon erstellt von %1$s&lt;/p>&lt;p>Alle weiteren von dieser Apss benutzten Icons sind &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> erstellt von  Google Inc. und lizensiert unter einer Creative Commons Lizenz.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Das ursprüngliche Icon wurde erstellt von %1$s&lt;/p>&lt;p>Alle weiteren von dieser Apss benutzten Icons sind &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> erstellt von  Google Inc. und lizensiert unter einer Creative Commons Lizenz.&lt;/p></string>
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Mitmachen</string>
     <string name="about_license_tab_title">Lizenz</string>
