@@ -27,6 +27,7 @@ public class NoteActivity extends AppCompatActivity {
 
     private DBNote note = null;
     private RxMDTextView noteContent = null;
+    private ActionBar actionBar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,26 +37,14 @@ public class NoteActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             note = (DBNote) savedInstanceState.getSerializable(PARAM_NOTE);
         }
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(note.getTitle());
             actionBar.setSubtitle(DateUtils.getRelativeDateTimeString(getApplicationContext(), note.getModified().getTimeInMillis(), DateUtils.MINUTE_IN_MILLIS, DateUtils.WEEK_IN_MILLIS, 0));
         }
         noteContent = (RxMDTextView) findViewById(R.id.single_note_content);
 
-        String content = note.getContent();
-        // The following replaceAll adds links ()[] to all URLs that are not in an existing link.
-        // This regular expression consists of three parts:
-        // 1. (?<![(])
-        //    negative look-behind: no opening bracket "(" directly before the URL
-        //    This prevents replacement in target part of Markdown link: [](URL)
-        // 2. (https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])
-        //    URL pattern: matches all addresses beginning with http:// or https://
-        // 3. (?![^\\[]*\\])
-        //    negative look-ahead: no closing bracket "]" after the URL (otherwise there have to be an opening bracket "[" before)
-        //    This prevents replacement in label part of Markdown link: [...URL...]()
-        content = content.replaceAll("(?<![(])(https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])(?![^\\[]*\\])", "[$1]($1)");
-        RxMarkdown.with(content, this)
+        RxMarkdown.with(note.getContent(), this)
                 .config(MarkDownUtil.getMarkDownConfiguration(getApplicationContext()))
                 .factory(TextFactory.create())
                 .intoObservable()
@@ -68,7 +57,7 @@ public class NoteActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.v(getClass().getSimpleName(), "RxMarkdown error", e);
+                        Log.v("Note View -------------", e.getStackTrace().toString());
                     }
 
                     @Override
@@ -76,7 +65,7 @@ public class NoteActivity extends AppCompatActivity {
                         noteContent.setText(charSequence, TextView.BufferType.SPANNABLE);
                     }
                 });
-        noteContent.setText(content);
+        noteContent.setText(note.getContent());
         findViewById(R.id.fab_edit).setVisibility(View.GONE);
         ((TextView) findViewById(R.id.single_note_content)).setMovementMethod(LinkMovementMethod.getInstance());
     }
