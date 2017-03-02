@@ -156,7 +156,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
-        // each data item is just a string in this case
+        public View noteSwipeable;
+        public ImageView noteDeleteLeft, noteDeleteRight;
         public TextView noteTitle;
         public TextView noteCategory;
         public TextView noteExcerpt;
@@ -166,6 +167,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private NoteViewHolder(View v) {
             super(v);
+            this.noteSwipeable = v.findViewById(R.id.noteSwipeable);
+            this.noteDeleteLeft = (ImageView) v.findViewById(R.id.noteDeleteLeft);
+            this.noteDeleteRight = (ImageView) v.findViewById(R.id.noteDeleteRight);
             this.noteTitle = (TextView) v.findViewById(R.id.noteTitle);
             this.noteCategory = (TextView) v.findViewById(R.id.noteCategory);
             this.noteExcerpt = (TextView) v.findViewById(R.id.noteExcerpt);
@@ -187,6 +191,11 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         public boolean onLongClick(View v) {
             return noteClickListener.onNoteLongClick(position, v);
+        }
+
+        public void showSwipeDelete(boolean left) {
+            noteDeleteLeft.setVisibility(left ? View.VISIBLE : View.INVISIBLE);
+            noteDeleteRight.setVisibility(left ? View.INVISIBLE : View.VISIBLE);
         }
     }
 
