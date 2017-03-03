@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.model;
 import java.io.Serializable;
 import java.util.Calendar;
 
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
@@ -16,8 +15,8 @@ public class DBNote extends CloudNote implements Item, Serializable {
     private DBStatus status;
     private String excerpt = "";
 
-    public DBNote(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, DBStatus status) {
-        super(remoteId, modified, title, content, favorite);
+    public DBNote(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status) {
+        super(remoteId, modified, title, content, favorite, category, etag);
         this.id = id;
         setExcerpt(content);
         this.status = status;
@@ -55,6 +54,6 @@ public class DBNote extends CloudNote implements Item, Serializable {
 
     @Override
     public String toString() {
-        return "#" + getId() + "/R"+getRemoteId()+" " + (isFavorite() ? " (*) " : "     ") + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + ") " + getStatus();
+        return "#"+getId()+"/" + super.toString() + " " + getStatus();
     }
 }

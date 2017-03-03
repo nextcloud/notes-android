@@ -17,7 +17,6 @@ import org.json.JSONException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +27,7 @@ import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
+import it.niedermann.owncloud.notes.model.SyncDataEntry;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NotesClient;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
@@ -197,12 +197,16 @@ public class NoteServerSyncHelper {
             Log.d(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
             //dbHelper.debugPrintFullDB();
             LoginStatus status = LoginStatus.OK;
+            long timeBeforePush = System.currentTimeMillis();
             pushLocalChanges();
+            long timePush = System.currentTimeMillis() - timeBeforePush;
+            long timeBeforePull = System.currentTimeMillis();
             if(!onlyLocalChanges) {
                 status = pullRemoteChanges();
             }
-            //dbHelper.debugPrintFullDB();
-            Log.d(getClass().getSimpleName(), "SYNCHRONIZATION FINISHED");
+            long timePull = System.currentTimeMillis() - timeBeforePull;
+            dbHelper.debugPrintFullDB();
+            Log.i(getClass().getSimpleName(), "SYNCHRONIZATION FINISHED ("+timePush+"ms/"+timePull+"ms)");
             return status;
         }
 
@@ -267,33 +271,38 @@ public class NoteServerSyncHelper {
             Log.d(getClass().getSimpleName(), "pullRemoteChanges()");
             LoginStatus status = null;
             try {
-                List<DBNote> localNotes = dbHelper.getNotes();
-                Map<Long, Long> localIDmap = new HashMap<>();
-                for (DBNote note : localNotes) {
-                    localIDmap.put(note.getRemoteId(), note.getId());
-                }
-                List<CloudNote> remoteNotes = client.getNotes();
+                long timeStart = System.currentTimeMillis();
+                Map<Long, SyncDataEntry> syncDataMap = dbHelper.getSyncData();
+                long timePre = System.currentTimeMillis() - timeStart;
+                List<CloudNote> remoteNotes = client.getNotes(syncDataMap.values());
+                long timeBeforeProcess = System.currentTimeMillis();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
                 for (CloudNote remoteNote : remoteNotes) {
                     Log.d(getClass().getSimpleName(), "   Process Remote Note: "+remoteNote);
                     remoteIDs.add(remoteNote.getRemoteId());
-                    if(localIDmap.containsKey(remoteNote.getRemoteId())) {
+                    if(remoteNote.getModified()==null) {
+                        Log.d(getClass().getSimpleName(), "   ... unchanged");
+                    } else if(syncDataMap.containsKey(remoteNote.getRemoteId())) {
                         Log.d(getClass().getSimpleName(), "   ... found -> Update");
-                        dbHelper.updateNote(localIDmap.get(remoteNote.getRemoteId()), remoteNote, null);
+                        dbHelper.updateNote(syncDataMap.get(remoteNote.getRemoteId()).getId(), remoteNote, null);
                     } else {
                         Log.d(getClass().getSimpleName(), "   ... create");
                         dbHelper.addNote(remoteNote);
                     }
                 }
+                long timeProcessing = System.currentTimeMillis()-timeBeforeProcess;
                 Log.d(getClass().getSimpleName(), "   Remove remotely deleted Notes (only those without local changes)");
                 // remove remotely deleted notes (only those without local changes)
-                for (DBNote note : localNotes) {
-                    if(note.getStatus()==DBStatus.VOID && !remoteIDs.contains(note.getRemoteId())) {
-                        Log.d(getClass().getSimpleName(), "   ... remove "+note);
-                        dbHelper.deleteNote(note.getId(), DBStatus.VOID);
+                long timeBeforeDelete = System.currentTimeMillis();
+                for (SyncDataEntry entry : syncDataMap.values()) {
+                    if(!remoteIDs.contains(entry.getRemoteId())) {
+                        Log.d(getClass().getSimpleName(), "   ... remove "+entry.getId());
+                        dbHelper.deleteNote(entry.getId(), DBStatus.VOID);
                     }
                 }
+                long timeDelete = System.currentTimeMillis()-timeBeforeDelete;
+                Log.i(getClass().getSimpleName(), "pullRemoteChanges: pre: "+timePre+"ms; post: "+timeProcessing+"ms; delete: "+timeDelete+"ms");
                 status = LoginStatus.OK;
             } catch (IOException e) {
                 Log.e(getClass().getSimpleName(), "Exception", e);

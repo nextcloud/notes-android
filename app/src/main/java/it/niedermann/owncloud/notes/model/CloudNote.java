@@ -18,14 +18,18 @@ public class CloudNote implements Serializable {
     private Calendar modified = null;
     private String content = "";
     private boolean favorite = false;
+    private String category = "";
+    private String etag = "";
 
-    public CloudNote(long remoteId, Calendar modified, String title, String content, boolean favorite) {
+    public CloudNote(long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag) {
         this.remoteId = remoteId;
         if (title != null)
             setTitle(title);
         setTitle(title);
         setContent(content);
         setFavorite(favorite);
+        setCategory(category);
+        setEtag(etag);
         this.modified = modified;
     }
 
@@ -51,8 +55,9 @@ public class CloudNote implements Serializable {
     }
 
     public String getModified(String format) {
-        return new SimpleDateFormat(format, Locale.GERMANY)
-                .format(this.getModified().getTimeInMillis());
+        if(modified==null)
+            return null;
+        return new SimpleDateFormat(format, Locale.GERMANY) .format(this.getModified().getTimeInMillis());
     }
 
     public void setModified(Calendar modified) {
@@ -75,8 +80,24 @@ public class CloudNote implements Serializable {
         this.favorite = favorite;
     }
 
+    public String getEtag() {
+        return etag;
+    }
+
+    public void setEtag(String etag) {
+        this.etag = etag;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category==null ? "" : category;
+    }
+
     @Override
     public String toString() {
-        return "#" + getRemoteId() + " " + (isFavorite() ? " (*) " : "     ") + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + ")";
+        return "R" + getRemoteId() + " " + (isFavorite() ? " (*) " : "     ") + getCategory() + " / " + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + " / " + getEtag() + ")";
     }
 }

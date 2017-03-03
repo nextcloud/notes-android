@@ -83,7 +83,7 @@ public class EditNoteActivity extends AppCompatActivity {
                     }
                 });
 
-        db = new NoteSQLiteOpenHelper(this);
+        db = NoteSQLiteOpenHelper.getInstance(this);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(note.getTitle());
@@ -126,6 +126,7 @@ public class EditNoteActivity extends AppCompatActivity {
                 }
             }
         });
+        // Snackbar.make(findViewById(R.id.editCoordinator), "Note may be outdated. Please connect to the network to update.", Snackbar.LENGTH_INDEFINITE).show();
     }
 
     @Override

@@ -72,7 +72,7 @@ public class CreateNoteActivity extends AppCompatActivity {
             case R.id.action_create_save:
                 editTextField.setEnabled(false);
                 String content = editTextField.getText().toString();
-                NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(this);
+                NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(this);
                 Intent data = new Intent();
                 data.putExtra(NotesListViewActivity.CREATED_NOTE, db.getNote(db.addNoteAndSync(content)));
                 setResult(RESULT_OK, data);
