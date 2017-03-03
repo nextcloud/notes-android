@@ -17,7 +17,6 @@ import org.json.JSONException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -267,20 +266,16 @@ public class NoteServerSyncHelper {
             Log.d(getClass().getSimpleName(), "pullRemoteChanges()");
             LoginStatus status = null;
             try {
-                List<DBNote> localNotes = dbHelper.getNotes();
-                Map<Long, Long> localIDmap = new HashMap<>();
-                for (DBNote note : localNotes) {
-                    localIDmap.put(note.getRemoteId(), note.getId());
-                }
+                Map<Long, Long> idMap = dbHelper.getIdMap();
                 List<CloudNote> remoteNotes = client.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
                 for (CloudNote remoteNote : remoteNotes) {
                     Log.d(getClass().getSimpleName(), "   Process Remote Note: "+remoteNote);
                     remoteIDs.add(remoteNote.getRemoteId());
-                    if(localIDmap.containsKey(remoteNote.getRemoteId())) {
+                    if(idMap.containsKey(remoteNote.getRemoteId())) {
                         Log.d(getClass().getSimpleName(), "   ... found -> Update");
-                        dbHelper.updateNote(localIDmap.get(remoteNote.getRemoteId()), remoteNote, null);
+                        dbHelper.updateNote(idMap.get(remoteNote.getRemoteId()), remoteNote, null);
                     } else {
                         Log.d(getClass().getSimpleName(), "   ... create");
                         dbHelper.addNote(remoteNote);
@@ -288,10 +283,10 @@ public class NoteServerSyncHelper {
                 }
                 Log.d(getClass().getSimpleName(), "   Remove remotely deleted Notes (only those without local changes)");
                 // remove remotely deleted notes (only those without local changes)
-                for (DBNote note : localNotes) {
-                    if(note.getStatus()==DBStatus.VOID && !remoteIDs.contains(note.getRemoteId())) {
-                        Log.d(getClass().getSimpleName(), "   ... remove "+note);
-                        dbHelper.deleteNote(note.getId(), DBStatus.VOID);
+                for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
+                    if(!remoteIDs.contains(entry.getKey())) {
+                        Log.d(getClass().getSimpleName(), "   ... remove "+entry.getValue());
+                        dbHelper.deleteNote(entry.getValue(), DBStatus.VOID);
                     }
                 }
                 status = LoginStatus.OK;

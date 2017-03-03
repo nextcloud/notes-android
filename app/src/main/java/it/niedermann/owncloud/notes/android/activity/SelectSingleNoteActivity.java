@@ -37,7 +37,7 @@ public class SelectSingleNoteActivity extends AppCompatActivity implements ItemA
         setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_select_single_note);
         // Display Data
-        db = new NoteSQLiteOpenHelper(this);
+        db = NoteSQLiteOpenHelper.getInstance(this);
         db.getNoteServerSyncHelper().scheduleSync(false);
         setListView(db.getNotes());
 

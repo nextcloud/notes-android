@@ -60,14 +60,14 @@ public class AllNotesWidget extends AppWidgetProvider {
             mContext = context;
             mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
-            NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(mContext);
+            NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(mContext);
             db.getNoteServerSyncHelper().scheduleSync(false);
             mWidgetItems = db.getNotes();
-            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", false, DBStatus.VOID));
+            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", false, null, null, DBStatus.VOID));
         }
 
         public void onCreate() {
-            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", false, DBStatus.VOID));
+            mWidgetItems.add(new DBNote(0, 0, Calendar.getInstance(), "Test-Titel", "Test-Beschreibung", false, null, null, DBStatus.VOID));
         }
 
         @Override

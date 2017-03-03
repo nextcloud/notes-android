@@ -82,7 +82,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_notes_list_view);
 
         // Display Data
-        db = new NoteSQLiteOpenHelper(this);
+        db = NoteSQLiteOpenHelper.getInstance(this);
         initList();
         refreshList();
 
@@ -417,7 +417,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             }
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
-            db = new NoteSQLiteOpenHelper(this);
+            db = NoteSQLiteOpenHelper.getInstance(this);
             if(db.getNoteServerSyncHelper().isSyncPossible()) {
                 adapter.removeAll();
                 swipeRefreshLayout.setRefreshing(true);
@@ -468,7 +468,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     @Override
     public void onNoteFavoriteClick(int position, View view) {
         DBNote note = (DBNote) adapter.getItem(position);
-        NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(view.getContext());
+        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(view.getContext());
         db.toggleFavorite(note, syncCallBack);
         adapter.notifyItemChanged(position);
         refreshList();
