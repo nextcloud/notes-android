@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="it.niedermann.owncloud.notes"
-    android:versionCode="14"
-    android:versionName="0.9.0">
-
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="25" />
+    package="it.niedermann.owncloud.notes">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -19,10 +13,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/OwnCloud">
-        <!-- Apps -->
+
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:label="@string/app_name">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,15 +31,20 @@
                 android:name="android.app.default_searchable"
                 android:value="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
         </activity>
+
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.NoteActivity"
             android:label="@string/app_name"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"></activity>
+            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
+            />
+
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.SettingsActivity"
             android:label="@string/app_name"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            android:windowSoftInputMode="stateVisible"></activity>
+            android:windowSoftInputMode="stateVisible"
+            />
+
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.CreateNoteActivity"
             android:label="@string/action_create"
@@ -55,51 +55,19 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
             android:label="@string/menu_edit"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            android:windowSoftInputMode="stateVisible"></activity>
+            android:windowSoftInputMode="stateVisible"
+            />
+
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"
             android:label="@string/menu_about"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"></activity>
+            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+            />
 
-        <!-- All Notes Widget -->
-
-        <!--receiver
-            android:name="it.niedermann.owncloud.notes.android.widget.AllNotesWidget"
-            android:label="@string/widget_all_notes_title">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/all_notes_widget_provider_info" />
-        </receiver>
-        <service android:name=".android.widget.AllNotesWidget$StackWidgetService" /-->
-
-        <!-- Single Note Widget -->
-
-        <!--receiver
-            android:name="it.niedermann.owncloud.notes.android.widget.SingleNoteWidget"
-            android:label="@string/widget_single_note_title">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/single_note_widget_provider_info" />
-        </receiver>
-
-        <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity"
-            android:label="@string/action_select_note">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity-->
     </application>
 </manifest>
