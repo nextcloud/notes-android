@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notițe</string>
+    <string name="no_notes">Nu există notițe</string>
+    <string name="action_create">Notă nouă</string>
+    <string name="action_settings">Setări</string>
+    <string name="action_create_save">Salvează</string>
+    <string name="action_create_cancel">Anulează</string>
+    <string name="action_edit_editing">Editează</string>
+    <string name="action_edit_save">Salvează</string>
+    <string name="action_edit_saving">Se salvează &#8230;</string>
+    <string name="action_edit_saved">Salvat</string>
+    <string name="action_edit_cancel">Anulat</string>
+    <string name="action_about">Despre</string>
+    <string name="action_select_note">Selectează o notă</string>
+    <string name="action_note_deleted">Nota este ștearsă</string>
+    <string name="action_note_restored">Nota este restaurată</string>
+    <string name="action_undo">Undo</string>
+    <string name="menu_delete">Șterge</string>
+    <string name="menu_copy">Copiază</string>
+    <string name="menu_edit">Editează</string>
+    <string name="menu_cancel">Anulează</string>
+    <string name="menu_favorite">Favorit</string>
+    <string name="menu_preview">Previzualizare</string>
+    <string name="menu_share">Partajează</string>
+    <string name="menu_about">Despre</string>
+
+    <string name="copy">Copiază</string>
+
+    <string name="listview_updated_today">Azi</string>
+    <string name="listview_updated_yesterday">Ieri</string>
+    <string name="listview_updated_this_week">Săptămâna asta</string>
+    <string name="listview_updated_this_month">Luna asta</string>
+    <string name="listview_updated_earlier">Anterior</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Server</string>
+    <string name="settings_url">Adresa serverului</string>
+    <string name="settings_url_check_description">Arată dacă se poate face \'ping\' la adresă.</string>
+    <string name="settings_url_warn_http">ATENȚIE: \"http\" este nesigur. Vă rugăm utilizați \"https\".</string>
+    <string name="settings_username">Nume utilizator</string>
+    <string name="settings_password">Parolă</string>
+    <string name="settings_password_check_description">Arată dacă datele de înregistrare sunt corecte.</string>
+    <string name="settings_submit">Conectare</string>
+    <string name="settings_submitting">Se conectează &#8230;</string>
+    <string name="settings_notification">Activează afișarea unei notificări persistente pentru crearea de notițe noi.</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Se conectează</string>
+    <string name="network_connected">Conectat</string>
+    <string name="network_disconnected">Nici o rețea disponibilă</string>
+
+    <!-- Error -->
+    <string name="error_sync">Sincronizare eșuată: %1$s</string>
+    <string name="error_invalid_login">Autentificare invalidă: %1$s</string>
+    <string name="error_json">este aplicația owncloud Notes activată pe server?</string>
+    <string name="error_io">conexiunea la server este întreruptă</string>
+    <string name="error_no_network">nu există conexiunea la rețea</string>
+    <string name="error_server">există erori de URL/Server</string>
+    <string name="error_url_malformed">Adresă greșită a serverului</string>
+    <string name="error_username_password_invalid">Nume de utilizator sau parolă greșite</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Setări</string>
+
+    <!-- About -->
+    <string name="about_version_title">Versiune</string>
+    <string name="about_version">Momentan utilizezi &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_developers_title">Dezvoltatori</string>
+    <string name="about_translators_title">Traducători</string>
+    <string name="about_translators_transifex">Comunitatea Nextcloud la &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">Testeri</string>
+    <string name="about_source_title">Cod sursă</string>
+    <string name="about_source">Acest proiect este găzduit pe GitHub &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Probleme</string>
+    <string name="about_issues">Poți raporta bug-uri, propuneri de îmbunătățiri și cerințe de caracteristici pe tracker-ul de probleme de pe GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Tradu</string>
+    <string name="about_translate">Alătură-te echipei Nextcloud pe Transifex și ajută-ne să traducem această aplicație: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Licența aplicației</string>
+    <string name="about_app_license">Această aplicație este licențiată sub GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Vezi licența</string>
+    <string name="about_icons_disclaimer_title">Pictograme</string>
+    <string name="about_icons_disclaimer">&lt;p>Pictograma originală realizată de %1$s&lt;/p>&lt;p>Orice alte pictograme utilizate de această aplicație sunt &lt;a href=\"https://materialdesignicons.com/\">Pictograme Material Design &lt;/a> realizate de Google Inc. și licențiate sub o Licență Creative Commons.&lt;/p></string>
+    <string name="about_credits_tab_title">Realizatori</string>
+    <string name="about_contribution_tab_title">Contribuții</string>
+    <string name="about_license_tab_title">Licență</string>
+
+    <string name="widget_all_notes_title">Toate notițele</string>
+    <string name="widget_single_note_title">O singură notiță</string>
+
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d selecționat</item>
+        <item quantity="few">%d selecționate</item>
+        <item quantity="other">%d selecționate</item>
+    </plurals>
+</resources>
