@@ -1,6 +1,7 @@
 # Nextcloud Notes
 An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
+[![Build Status](https://travis-ci.org/stefan-niedermann/nextcloud-notes.svg?branch=master)](https://travis-ci.org/stefan-niedermann/nextcloud-notes)
 [![GitHub issues](https://img.shields.io/github/issues/stefan-niedermann/Owncloud-Notes.svg)](https://github.com/stefan-niedermann/Owncloud-Notes/issues)
 [![GitHub stars](https://img.shields.io/github/stars/stefan-niedermann/Owncloud-Notes.svg)](https://github.com/stefan-niedermann/Owncloud-Notes/stargazers)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/stefan-niedermann/Owncloud-Notes/master/LICENSE)
