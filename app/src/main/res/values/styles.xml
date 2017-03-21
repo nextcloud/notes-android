@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="OwnCloud" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="Nextcloud" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <!-- Main theme colors -->
         <!-- App Bar -->
         <item name="colorPrimary">@color/primary</item>
@@ -9,7 +9,7 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <!-- Snackbar Action Link -->
         <item name="colorAccent">@color/primary</item>
-        <item name="android:buttonStyle">@style/ocbutton</item>
+        <item name="android:buttonStyle">@style/ncbutton</item>
         <item name="android:windowBackground">@color/bg_normal</item>
     </style>
 
@@ -22,7 +22,7 @@
         <item name="android:layout_alignParentRight">true</item>
     </style>
 
-    <style name="ocbutton" parent="android:style/Widget.Button">
+    <style name="ncbutton" parent="android:style/Widget.Button">
         <item name="android:background">@color/primary</item>
         <item name="android:textColor">@drawable/button_selector</item>
         <item name="android:padding">@dimen/button_padding</item>
