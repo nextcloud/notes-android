@@ -54,7 +54,7 @@
     <!-- Error -->
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_invalid_login">Invalid login: %1$s</string>
-    <string name="error_json">is the owncloud Notes app activated on the server?</string>
+    <string name="error_json">is the Notes app activated on the server?</string>
     <string name="error_io">server connection is broken</string>
     <string name="error_no_network">no network connection</string>
     <string name="error_server">URL/Server has errors</string>
