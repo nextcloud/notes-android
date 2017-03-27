@@ -1,5 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">Minnispunktar</string>
+    <string name="no_notes">Engir minnispunktar ennþá</string>
+    <string name="action_create">Nýr minnispunktur</string>
+    <string name="action_settings">Stillingar</string>
+    <string name="action_create_save">Vista</string>
+    <string name="action_create_cancel">Hætta við</string>
+    <string name="action_edit_editing">Breyta</string>
+    <string name="action_edit_save">Vista</string>
+    <string name="action_edit_saving">Vista &#8230;</string>
+    <string name="action_edit_saved">Vistað</string>
+    <string name="action_edit_cancel">Hætta við</string>
+    <string name="action_about">Um hugbúnaðinn</string>
+    <string name="action_select_note">Eyða minnispunkti</string>
+    <string name="action_note_deleted">Minnispunkti var eytt</string>
+    <string name="action_note_restored">Minnispunktur endurheimtur</string>
+    <string name="action_undo">Afturkalla</string>
+    <string name="menu_delete">Eyða</string>
+    <string name="menu_copy">Afrita</string>
+    <string name="menu_edit">Breyta</string>
+    <string name="menu_cancel">Hætta við</string>
+    <string name="menu_favorite">Eftirlæti</string>
+    <string name="menu_preview">Forskoðun</string>
+    <string name="menu_share">Deila</string>
+    <string name="menu_about">Um hugbúnaðinn</string>
+
+    <string name="copy">Afrita</string>
+
+    <string name="listview_updated_today">Í dag</string>
+    <string name="listview_updated_yesterday">Í gær</string>
+    <string name="listview_updated_this_week">Í þessari viku</string>
+    <string name="listview_updated_this_month">Í þessum mánuði</string>
+    <string name="listview_updated_earlier">Fyrr</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Þjónn</string>
+    <string name="settings_url">Vistfang þjóns</string>
+    <string name="settings_url_check_description">Sýnir hvort hægt sé að ná sambandi (ping) við vistfangið.</string>
+    <string name="settings_url_warn_http">AÐVÖRUN: \"http\" er óöruggt. Endilega nota \"https\".</string>
+    <string name="settings_username">Notandanafn</string>
+    <string name="settings_password">Lykilorð</string>
+    <string name="settings_password_check_description">Sýnir hvort auðkenni séu rétt.</string>
+    <string name="settings_submit">Tengjast</string>
+    <string name="settings_submitting">Tengist &#8230;</string>
+    <string name="settings_notification">Virkja þetta til að birta viðvarandi tilkynningu um hvernig eigi að búa til nýja minnispunkta.</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Tengist</string>
+    <string name="network_connected">Tengt</string>
+    <string name="network_disconnected">Ekkert net tiltækt</string>
+
+    <!-- Error -->
+    <string name="error_sync">Samstilling mistókst: %1$s</string>
+    <string name="error_invalid_login">Ógild innskráning: %1$s</string>
+    <string name="error_io">tenging við þjón rofnaði</string>
+    <string name="error_no_network">engin nettenging</string>
+    <string name="error_server">Villur í URL-slóð/þjóni</string>
+    <string name="error_url_malformed">Rangt vistfang þjóns</string>
+    <string name="error_username_password_invalid">Rangt notandanafn eða lykilorð</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Stillingar</string>
+
+    <!-- About -->
+    <string name="about_version_title">Útgáfa</string>
+    <string name="about_version">Þú ert núna að nota &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Umsjónarmaður</string>
+    <string name="about_developers_title">Forritarar</string>
+    <string name="about_translators_title">Þýðendur</string>
+    <string name="about_translators_transifex">Nextcloud samfélagið á &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">Prófarar</string>
+    <string name="about_source_title">Frumkóði</string>
+    <string name="about_source">Þetta verkefni er hýst á GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Villutilkynningar</string>
+    <string name="about_issues">Þú getur tilkynnt um villur, beðið um viðbótareiginleika og betrumbætur á GitHub villuskrásetjaranum: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Þýða</string>
+    <string name="about_translate">Gakktu í Nextcloud-teymið á Transifex og hjálpaðu okkur að þýða þetta forrit: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Notkunarleyfi forritsins</string>
+    <string name="about_app_license">Þessu forriti er dreift með almenna GNU GENERAL PUBLIC notkunarleyfinu v3+.</string>
+    <string name="about_app_license_button">Skoða notkunarleyfi</string>
+    <string name="about_icons_disclaimer_title">Táknmyndir</string>
+    <string name="about_icons_disclaimer">&lt;p>Upprunaleg táknmynd er gerð af %1$s&lt;/p>&lt;p>Allar aðrar táknmyndir eru úr &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> safninu frá Google Inc. og eru þær gefnar út með Creative Commons notkunarleyfi.&lt;/p></string>
+    <string name="about_credits_tab_title">Þakkir til</string>
+    <string name="about_contribution_tab_title">Framlög</string>
+    <string name="about_license_tab_title">Notkunarleyfi</string>
+
+    <string name="widget_all_notes_title">Allir minnispunktar</string>
+    <string name="widget_single_note_title">Stakur minnispunktur</string>
+
+
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d valið</item>

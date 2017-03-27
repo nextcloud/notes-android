@@ -54,7 +54,6 @@
     <!-- Error -->
     <string name="error_sync">Synchronizace selhala: %1$s</string>
     <string name="error_invalid_login">Neplatné přihlášení: %1$s</string>
-    <string name="error_json">jsou owncloud Poznámky na serveru aktivní?</string>
     <string name="error_io">spojení se serverem je nefunkční</string>
     <string name="error_no_network">žádné síťové spojení</string>
     <string name="error_server">Chyby v URL/Serveru</string>

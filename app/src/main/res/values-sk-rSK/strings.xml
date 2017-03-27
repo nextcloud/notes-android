@@ -54,7 +54,6 @@
     <!-- Error -->
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_invalid_login">Neplatné prihlásenie: %1$s</string>
-    <string name="error_json">máte povolenú aplikáciu owncloud Poznámky na serveri?</string>
     <string name="error_io">pripojenie na server bolo prerušené</string>
     <string name="error_no_network">nie je pripojenie k sieti</string>
     <string name="error_url_malformed">Nesprávna adresa servera</string>

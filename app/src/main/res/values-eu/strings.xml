@@ -54,7 +54,6 @@
     <!-- Error -->
     <string name="error_sync">Sinkronizazioa huts egin du: %1$s</string>
     <string name="error_invalid_login">Login-a ez du balio: %1$s</string>
-    <string name="error_json">Badago OwnCloud Oharr aplikazioa zerbitzarian aktibatua?</string>
     <string name="error_io">Konexioa zerbitzariarekin ez dabil</string>
     <string name="error_no_network">Ez dago sare-konexiorik</string>
     <string name="error_server">URL/Zerbitzaria akatsak ditu</string>

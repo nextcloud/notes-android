@@ -2,25 +2,25 @@
 <resources>
 
     <string name="app_name">Notities</string>
-    <string name="no_notes">Begin de eerste notitie</string>
+    <string name="no_notes">Nog geen notities</string>
     <string name="action_create">Nieuwe notitie</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_create_save">Opslaan</string>
-    <string name="action_create_cancel">Annuleer</string>
-    <string name="action_edit_editing">Bewerk</string>
+    <string name="action_create_cancel">Annuleren</string>
+    <string name="action_edit_editing">Bewerken</string>
     <string name="action_edit_save">Opslaan</string>
-    <string name="action_edit_saving">Opslaan &#8230;</string>
+    <string name="action_edit_saving">Opslaan&#160;&#8230;</string>
     <string name="action_edit_saved">Opgeslagen</string>
-    <string name="action_edit_cancel">Annuleer</string>
+    <string name="action_edit_cancel">Annuleren</string>
     <string name="action_about">Over</string>
-    <string name="action_select_note">Selecteer notitie</string>
+    <string name="action_select_note">Notitie selecteren</string>
     <string name="action_note_deleted">Notitie is verwijderd</string>
     <string name="action_note_restored">Notitie is hersteld</string>
     <string name="action_undo">Ongedaan maken</string>
     <string name="menu_delete">Verwijderen</string>
-    <string name="menu_copy">Kopie</string>
-    <string name="menu_edit">Bewerk</string>
-    <string name="menu_cancel">Annuleer</string>
+    <string name="menu_copy">Kopiëren</string>
+    <string name="menu_edit">Bewerken</string>
+    <string name="menu_cancel">Annuleren</string>
     <string name="menu_favorite">Favoriet</string>
     <string name="menu_preview">Voorbeeldweergave</string>
     <string name="menu_share">Delen</string>
@@ -36,29 +36,29 @@
 
     <!-- Settings -->
     <string name="settings_server">Server</string>
-    <string name="settings_url">Server adres</string>
-    <string name="settings_url_check_description">Ping mogelijkheid van adres weergeven.</string>
-    <string name="settings_url_warn_http">WAARSCHUWING: \"http\" in niet veilig. Gebruik \"https\".</string>
+    <string name="settings_url">Serveradres</string>
+    <string name="settings_url_check_description">Toont of naar adres gepingd kan worden.</string>
+    <string name="settings_url_warn_http">WAARSCHUWING: \"http\" is niet veilig. Gebruik \"https\".</string>
     <string name="settings_username">Gebruikersnaam</string>
     <string name="settings_password">Wachtwoord</string>
-    <string name="settings_password_check_description">Certificaat correctheid weergeven.</string>
-    <string name="settings_submit">Vervbinden</string>
-    <string name="settings_submitting">Verbinden &#8230;</string>
-    <string name="settings_notification">Continue notificatie aanzetten om snel notitie te maken.</string>
+    <string name="settings_password_check_description">Aanmeldgegevens op juistheid controleren.</string>
+    <string name="settings_submit">Verbinden</string>
+    <string name="settings_submitting">Verbinden&#160;&#8230;</string>
+    <string name="settings_notification">Continue notificatie aanzetten om snel notities te maken.</string>
 
     <!-- Network -->
-    <string name="network_connecting">Vervbinden</string>
+    <string name="network_connecting">Verbinden</string>
     <string name="network_connected">Verbonden</string>
     <string name="network_disconnected">Netwerk niet beschikbaar</string>
 
     <!-- Error -->
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
-    <string name="error_invalid_login">Ongeldig login: %1$s</string>
-    <string name="error_json">Is de onwcloud Notes app geactiveerd op de server?</string>
-    <string name="error_io">Server verbinding is verbroken</string>
-    <string name="error_no_network">Geen netwerkverbinding</string>
-    <string name="error_server">URL/Server heeft onjuistheden</string>
-    <string name="error_url_malformed">Verkeerde serveradres</string>
+    <string name="error_invalid_login">Ongeldige login: %1$s</string>
+    <string name="error_json">is de Notities app op de server geactiveerd?</string>
+    <string name="error_io">serververbinding is verbroken</string>
+    <string name="error_no_network">geen netwerkverbinding</string>
+    <string name="error_server">URL/server heeft fouten</string>
+    <string name="error_url_malformed">Verkeerd serveradres</string>
     <string name="error_username_password_invalid">Verkeerde gebruikersnaam of wachtwoord</string>
 
     <!-- Snackbar Actions -->
@@ -68,21 +68,21 @@
     <string name="about_version_title">Versie</string>
     <string name="about_version">Je gebruikt nu &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Beheerder</string>
-    <string name="about_developers_title">Ontwikkelaar</string>
+    <string name="about_developers_title">Ontwikkelaars</string>
     <string name="about_translators_title">Vertalers</string>
-    <string name="about_translators_transifex">Nextcloud community op &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud-gemeenschap op &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testers</string>
     <string name="about_source_title">Broncode</string>
     <string name="about_source">Dit project wordt gehost op GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_issues_title">Kwesties</string>
-    <string name="about_issues">Je kunt bugs rapporteren, verbeteringen voorstellen en functionele aanpassingen aanvragen via de GitHub issue tracker: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Problemen</string>
+    <string name="about_issues">Je kunt bugs rapporteren, verbeteringen voorstellen en functionele aanpassingen aanvragen via de issue-tracker op GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Vertalen</string>
-    <string name="about_translate">Doe mee met het Nextcloud team op Transifex en help ons deze app te vertalen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">App licentie</string>
+    <string name="about_translate">Doe mee met het Nextcloud-team op Transifex en help ons deze app te vertalen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Applicentie</string>
     <string name="about_app_license">Deze applicatie valt onder de GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Licentie weergeven</string>
-    <string name="about_icons_disclaimer_title">pictogram</string>
-    <string name="about_icons_disclaimer">&lt;p>Origineel pictogram gemaakt door %1$s&lt;/p>&lt;p>Alle andere pictogrammen gebruikt door deze app zijn &lt;a href=\"https://materialdesignicons.com/\">Material Design Pictogrammen&lt;/a> gemaakt door Google Inc. en gelicenseerd onder een Creative Commons Licentie.&lt;/p></string>
+    <string name="about_icons_disclaimer_title">Pictogrammen</string>
+    <string name="about_icons_disclaimer">&lt;p>Origineel icoon gemaakt door %1$s&lt;/p>&lt;p>Alle andere pictogrammen gebruikt door deze app zijn &lt;a href=\"https://materialdesignicons.com/\">Material Design-pictogrammen&lt;/a> gemaakt door Google Inc. en gelicenseerd onder een Creative Commons Licentie.&lt;/p></string>
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Bijdrage</string>
     <string name="about_license_tab_title">Licentie</string>

@@ -54,7 +54,6 @@
     <!-- Error -->
     <string name="error_sync">Synkronisering feilet: %1$s</string>
     <string name="error_invalid_login">Ugyldig pålogging: %1$s</string>
-    <string name="error_json">er Notes app\'en aktivert på tjeneren?</string>
     <string name="error_io">tilkoblingen til tjener er avbrutt</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
     <string name="error_server">URL/Tjener er feil</string>
@@ -66,16 +65,24 @@
 
     <!-- About -->
     <string name="about_version_title">Versjon</string>
+    <string name="about_version">Du bruker &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Vedlikeholder</string>
     <string name="about_developers_title">Utvikler</string>
     <string name="about_translators_title">Oversetter</string>
+    <string name="about_translators_transifex">Nextcloud fellesskapet på &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testere</string>
     <string name="about_source_title">Kildekode</string>
+    <string name="about_source">Dette prosjektet er på GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Feil</string>
+    <string name="about_issues">Du kan rapportere feil, forbedringforslag og funksjonønsker på GitHub saksporeren: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Oversett</string>
+    <string name="about_translate">Bli med i Nextcloud fellesskapet på Transifex og hjelp oss med å oversette denne appen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Lisens</string>
     <string name="about_app_license">Dette programmet er lisensiert under GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Vis lisens</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_icons_disclaimer">&lt;p>Orginalt ikon er laget av %1$s&lt;/p>&lt;p>Alle øvrige ikoner brukt i denne appen er &lt;a href=\"https://materialdesignicons.com/\">Material Design Ikoner&lt;/a> laget av Google Inc. og lisensiert under Creative Commons License.&lt;/p></string>
+    <string name="about_credits_tab_title">Kreditter til</string>
     <string name="about_contribution_tab_title">Bidragsytere</string>
     <string name="about_license_tab_title">Lisens</string>
 
@@ -83,4 +90,9 @@
     <string name="widget_single_note_title">Enkeltnotat</string>
 
 
-    </resources>
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d er valgt</item>
+        <item quantity="other">%d er valgt</item>
+    </plurals>
+</resources>

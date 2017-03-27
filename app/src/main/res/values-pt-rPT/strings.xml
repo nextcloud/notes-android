@@ -44,7 +44,6 @@
     <string name="network_disconnected">Rede não disponível</string>
 
     <string name="error_invalid_login">Início de sessão inválido</string>
-    <string name="error_json">Erro JSON</string>
     <string name="error_io">Erro IO</string>
     <string name="error_url_malformed">Endereço do servidor errado</string>
     <string name="error_username_password_invalid">Nome de utilizador ou palavra-passe errados</string>
