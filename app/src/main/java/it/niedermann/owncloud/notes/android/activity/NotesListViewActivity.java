@@ -10,8 +10,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.view.ActionMode;
@@ -24,6 +28,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -68,6 +75,12 @@ public class NotesListViewActivity extends AppCompatActivity implements
             swipeRefreshLayout.setRefreshing(false);
         }
     };
+    private String[] mSidebarEntryTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private CharSequence mDrawerTitle;
+    private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +120,67 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
         // Show persistant notification for creating a new note
         checkNotificationSetting();
+
+        initSidebar();
+    }
+
+    private void initSidebar() {
+        mSidebarEntryTitles = new String[]{"Alle Notizen", "Favoriten"};
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.fragment_drawer_item, mSidebarEntryTitles);
+        mDrawerList.setAdapter(mAdapter);
+
+        // Set the adapter for the list view
+        //mDrawerList.setAdapter(new ArrayAdapter<String>(this,
+        //       R.layout.drawer_list_item, mSidebarEntryTitles));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Create a new fragment
+                /** Swaps fragments in the main content view */
+                Fragment fragment = new Fragment();
+                Bundle args = new Bundle();
+                fragment.setArguments(args);
+
+                // Insert the fragment by replacing any existing fragment
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .commit();
+
+                Log.v("Note Sidebar", "Item clicked");
+
+                // Highlight the selected item, update the title, and close the drawer
+                mDrawerList.setItemChecked(position, true);
+                setTitle(mSidebarEntryTitles[position]);
+                mDrawerLayout.closeDrawer(mDrawerList);
+            }
+        });
+
+        mTitle = mDrawerTitle = getTitle();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.about_app_icon_author, R.string.about_app_license_button) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle(mTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle(mDrawerTitle);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
     }
 
     protected void checkNotificationSetting(){
@@ -171,102 +245,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
      */
     public void refreshList() {
         new RefreshListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-    private class RefreshListTask extends AsyncTask<Void, Void, List<Item>> {
-
-        private CharSequence query = null;
-
-        @Override
-        protected void onPreExecute() {
-            if(searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
-                query = searchView.getQuery();
-            }
-        }
-
-        @Override
-        protected List<Item> doInBackground(Void... voids) {
-            List<DBNote> noteList;
-            if (query==null) {
-                noteList = db.getNotes();
-            } else {
-                noteList = db.searchNotes(query);
-            }
-
-            final List<Item> itemList = new ArrayList<>();
-            // #12 Create Sections depending on Time
-            // TODO Move to ItemAdapter?
-            boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
-            todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
-            Calendar recent = Calendar.getInstance();
-            Calendar today = Calendar.getInstance();
-            today.set(Calendar.HOUR_OF_DAY, 0);
-            today.set(Calendar.MINUTE, 0);
-            today.set(Calendar.SECOND, 0);
-            today.set(Calendar.MILLISECOND, 0);
-            Calendar yesterday = Calendar.getInstance();
-            yesterday.set(Calendar.DAY_OF_YEAR, yesterday.get(Calendar.DAY_OF_YEAR) - 1);
-            yesterday.set(Calendar.HOUR_OF_DAY, 0);
-            yesterday.set(Calendar.MINUTE, 0);
-            yesterday.set(Calendar.SECOND, 0);
-            yesterday.set(Calendar.MILLISECOND, 0);
-            Calendar week = Calendar.getInstance();
-            week.set(Calendar.DAY_OF_WEEK, week.getFirstDayOfWeek());
-            week.set(Calendar.HOUR_OF_DAY, 0);
-            week.set(Calendar.MINUTE, 0);
-            week.set(Calendar.SECOND, 0);
-            week.set(Calendar.MILLISECOND, 0);
-            Calendar month = Calendar.getInstance();
-            month.set(Calendar.DAY_OF_MONTH, 0);
-            month.set(Calendar.HOUR_OF_DAY, 0);
-            month.set(Calendar.MINUTE, 0);
-            month.set(Calendar.SECOND, 0);
-            month.set(Calendar.MILLISECOND, 0);
-            for (int i = 0; i < noteList.size(); i++) {
-                DBNote currentNote = noteList.get(i);
-                if (currentNote.isFavorite()) {
-                    // don't show as new section
-                } else if (!todaySet && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
-                    // after 00:00 today
-                    if (i > 0) {
-                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
-                    }
-                    todaySet = true;
-                } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
-                    // between today 00:00 and yesterday 00:00
-                    if (i > 0) {
-                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
-                    }
-                    yesterdaySet = true;
-                } else if (!weekSet && currentNote.getModified().getTimeInMillis() < yesterday.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= week.getTimeInMillis()) {
-                    // between yesterday 00:00 and start of the week 00:00
-                    if (i > 0) {
-                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_week)));
-                    }
-                    weekSet = true;
-                } else if (!monthSet && currentNote.getModified().getTimeInMillis() < week.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= month.getTimeInMillis()) {
-                    // between start of the week 00:00 and start of the month 00:00
-                    if (i > 0) {
-                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_month)));
-                    }
-                    monthSet = true;
-                } else if (!earlierSet && currentNote.getModified().getTimeInMillis() < month.getTimeInMillis()) {
-                    // before start of the month 00:00
-                    if (i > 0) {
-                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_earlier)));
-                    }
-                    earlierSet = true;
-                }
-                itemList.add(currentNote);
-            }
-
-            return itemList;
-        }
-
-        @Override
-        protected void onPostExecute(List<Item> items) {
-            adapter.setItemList(items);
-        }
     }
 
     public void initList() {
@@ -513,6 +491,102 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private void synchronize() {
         db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
         db.getNoteServerSyncHelper().scheduleSync(false);
+    }
+
+    private class RefreshListTask extends AsyncTask<Void, Void, List<Item>> {
+
+        private CharSequence query = null;
+
+        @Override
+        protected void onPreExecute() {
+            if (searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
+                query = searchView.getQuery();
+            }
+        }
+
+        @Override
+        protected List<Item> doInBackground(Void... voids) {
+            List<DBNote> noteList;
+            if (query == null) {
+                noteList = db.getNotes();
+            } else {
+                noteList = db.searchNotes(query);
+            }
+
+            final List<Item> itemList = new ArrayList<>();
+            // #12 Create Sections depending on Time
+            // TODO Move to ItemAdapter?
+            boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
+            todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
+            Calendar recent = Calendar.getInstance();
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.HOUR_OF_DAY, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
+            Calendar yesterday = Calendar.getInstance();
+            yesterday.set(Calendar.DAY_OF_YEAR, yesterday.get(Calendar.DAY_OF_YEAR) - 1);
+            yesterday.set(Calendar.HOUR_OF_DAY, 0);
+            yesterday.set(Calendar.MINUTE, 0);
+            yesterday.set(Calendar.SECOND, 0);
+            yesterday.set(Calendar.MILLISECOND, 0);
+            Calendar week = Calendar.getInstance();
+            week.set(Calendar.DAY_OF_WEEK, week.getFirstDayOfWeek());
+            week.set(Calendar.HOUR_OF_DAY, 0);
+            week.set(Calendar.MINUTE, 0);
+            week.set(Calendar.SECOND, 0);
+            week.set(Calendar.MILLISECOND, 0);
+            Calendar month = Calendar.getInstance();
+            month.set(Calendar.DAY_OF_MONTH, 0);
+            month.set(Calendar.HOUR_OF_DAY, 0);
+            month.set(Calendar.MINUTE, 0);
+            month.set(Calendar.SECOND, 0);
+            month.set(Calendar.MILLISECOND, 0);
+            for (int i = 0; i < noteList.size(); i++) {
+                DBNote currentNote = noteList.get(i);
+                if (currentNote.isFavorite()) {
+                    // don't show as new section
+                } else if (!todaySet && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
+                    // after 00:00 today
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
+                    }
+                    todaySet = true;
+                } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
+                    // between today 00:00 and yesterday 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
+                    }
+                    yesterdaySet = true;
+                } else if (!weekSet && currentNote.getModified().getTimeInMillis() < yesterday.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= week.getTimeInMillis()) {
+                    // between yesterday 00:00 and start of the week 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_week)));
+                    }
+                    weekSet = true;
+                } else if (!monthSet && currentNote.getModified().getTimeInMillis() < week.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= month.getTimeInMillis()) {
+                    // between start of the week 00:00 and start of the month 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_month)));
+                    }
+                    monthSet = true;
+                } else if (!earlierSet && currentNote.getModified().getTimeInMillis() < month.getTimeInMillis()) {
+                    // before start of the month 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_earlier)));
+                    }
+                    earlierSet = true;
+                }
+                itemList.add(currentNote);
+            }
+
+            return itemList;
+        }
+
+        @Override
+        protected void onPostExecute(List<Item> items) {
+            adapter.setItemList(items);
+        }
     }
 
     /**
