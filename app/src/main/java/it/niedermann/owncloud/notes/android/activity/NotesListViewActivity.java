@@ -10,8 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -25,6 +23,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.support.v7.widget.helper.ItemTouchHelper.SimpleCallback;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +45,8 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
+
+import static android.os.Build.VERSION.SDK_INT;
 
 public class NotesListViewActivity extends AppCompatActivity implements
         ItemAdapter.NoteClickListener, View.OnClickListener {
@@ -75,10 +76,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
             swipeRefreshLayout.setRefreshing(false);
         }
     };
-    private String[] mSidebarEntryTitles;
-    private DrawerLayout mDrawerLayout;
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
 
@@ -105,7 +102,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if(db.getNoteServerSyncHelper().isSyncPossible()) {
+                if (db.getNoteServerSyncHelper().isSyncPossible()) {
                     synchronize();
                 } else {
                     swipeRefreshLayout.setRefreshing(false);
@@ -125,69 +122,45 @@ public class NotesListViewActivity extends AppCompatActivity implements
     }
 
     private void initSidebar() {
-        mSidebarEntryTitles = new String[]{"Alle Notizen", "Favoriten"};
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        ArrayAdapter<String> mAdapter = new ArrayAdapter<>(this, R.layout.fragment_drawer_item, mSidebarEntryTitles);
-        mDrawerList.setAdapter(mAdapter);
-
-        // Set the adapter for the list view
-        //mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-        //       R.layout.drawer_list_item, mSidebarEntryTitles));
-        // Set the list's click listener
+        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.fragment_drawer_item, new String[]{
+                "Alle Notizen",
+                "Favoriten"
+        }));
+        final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Create a new fragment
-                /** Swaps fragments in the main content view */
-                Fragment fragment = new Fragment();
-                Bundle args = new Bundle();
-                fragment.setArguments(args);
-
-                // Insert the fragment by replacing any existing fragment
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.content_frame, fragment)
-                        .commit();
-
-                Log.v("Note Sidebar", "Item clicked");
-
-                // Highlight the selected item, update the title, and close the drawer
-                mDrawerList.setItemChecked(position, true);
-                setTitle(mSidebarEntryTitles[position]);
-                mDrawerLayout.closeDrawer(mDrawerList);
+                if (SDK_INT >= 14) {
+                    mDrawerLayout.closeDrawer(Gravity.START);
+                } else {
+                    mDrawerLayout.closeDrawer(Gravity.LEFT);
+                }
             }
         });
-
-        mTitle = mDrawerTitle = getTitle();
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.string.about_app_icon_author, R.string.about_app_license_button) {
-
-            /** Called when a drawer has settled in a completely closed state. */
+        mDrawerLayout.addDrawerListener(new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.drawer_opened, R.string.drawer_closed) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
-            /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getSupportActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
-        };
+        });
 
-        // Set the drawer toggle as the DrawerListener
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        mTitle = mDrawerTitle = getTitle();
     }
 
-    protected void checkNotificationSetting(){
+    protected void checkNotificationSetting() {
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
         Boolean showNotification = preferences.getBoolean("showNotification", false);
-        if(showNotification==true){
+        if (showNotification == true) {
             // add notification
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
             PendingIntent newNoteIntent = PendingIntent.getActivity(this, 0,
@@ -204,8 +177,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     NOTIFICATION_SERVICE);
 
             notificationManager.notify(10, builder.build());
-        }
-        else{
+        } else {
             // remove notification
             NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
             nMgr.cancel(10);
@@ -303,7 +275,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
                 // show delete icon on the right side
-                noteViewHolder.showSwipeDelete(dX>0);
+                noteViewHolder.showSwipeDelete(dX > 0);
                 // move only swipeable part of item (not leave-behind)
                 getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.noteSwipeable, dX, dY, actionState, isCurrentlyActive);
             }
@@ -396,7 +368,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
                 int notePosition = data.getExtras().getInt(EditNoteActivity.PARAM_NOTE_POSITION);
-                if(adapter.getItemCount()>notePosition) {
+                if (adapter.getItemCount() > notePosition) {
                     Item oldItem = adapter.getItem(notePosition);
                     if (resultCode == RESULT_FIRST_USER) {
                         adapter.remove(oldItem);
@@ -411,7 +383,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
             db = NoteSQLiteOpenHelper.getInstance(this);
-            if(db.getNoteServerSyncHelper().isSyncPossible()) {
+            if (db.getNoteServerSyncHelper().isSyncPossible()) {
                 adapter.removeAll();
                 swipeRefreshLayout.setRefreshing(true);
                 synchronize();
@@ -481,7 +453,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        if (searchView==null || searchView.isIconified()) {
+        if (searchView == null || searchView.isIconified()) {
             super.onBackPressed();
         } else {
             searchView.setIconified(true);
