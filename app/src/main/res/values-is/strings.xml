@@ -54,6 +54,7 @@
     <!-- Error -->
     <string name="error_sync">Samstilling mistókst: %1$s</string>
     <string name="error_invalid_login">Ógild innskráning: %1$s</string>
+    <string name="error_json">er minnispunktaforritið virkt á þjóninum?</string>
     <string name="error_io">tenging við þjón rofnaði</string>
     <string name="error_no_network">engin nettenging</string>
     <string name="error_server">Villur í URL-slóð/þjóni</string>
