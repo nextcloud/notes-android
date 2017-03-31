@@ -51,8 +51,7 @@
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.CreateNoteActivity"
             android:label="@string/action_create"
-            android:windowSoftInputMode="stateVisible"
-            android:exported="true">
+            android:windowSoftInputMode="stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
