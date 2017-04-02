@@ -179,6 +179,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     long addNote(CloudNote note) {
         SQLiteDatabase db = this.getWritableDatabase();
+        db.acquireReference();
         ContentValues values = new ContentValues();
         if(note instanceof DBNote) {
             DBNote dbNote = (DBNote)note;
@@ -309,6 +310,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         note.setFavorite(!note.isFavorite());
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
+        db.acquireReference();
         ContentValues values = new ContentValues();
         values.put(key_status, note.getStatus().getTitle());
         values.put(key_favorite, note.isFavorite()?"1":"0");
@@ -338,6 +340,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNoteTitle(newContent), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED);
         }
         SQLiteDatabase db = this.getWritableDatabase();
+        db.acquireReference();
         ContentValues values = new ContentValues();
         values.put(key_status, newNote.getStatus().getTitle());
         values.put(key_title, newNote.getTitle());
@@ -373,7 +376,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     int updateNote(long id, CloudNote remoteNote, DBNote forceUnchangedDBNoteState) {
         SQLiteDatabase db = this.getWritableDatabase();
-
+        db.acquireReference();
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
         ContentValues values = new ContentValues();
         values.put(key_remote_id, remoteNote.getRemoteId());
@@ -420,6 +423,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @SuppressWarnings("UnusedReturnValue")
     public int deleteNoteAndSync(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
+        db.acquireReference();
         ContentValues values = new ContentValues();
         values.put(key_status, DBStatus.LOCAL_DELETED.getTitle());
         int i = db.update(table_notes,
@@ -440,6 +444,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     void deleteNote(long id, DBStatus forceDBStatus) {
         SQLiteDatabase db = this.getWritableDatabase();
+        db.acquireReference();
         db.delete(table_notes,
                 key_id + " = ? AND " + key_status + " = ?",
                 new String[]{String.valueOf(id), forceDBStatus.getTitle()});
