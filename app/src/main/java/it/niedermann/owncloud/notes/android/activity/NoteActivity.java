@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,9 +15,13 @@ import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 import com.yydcdut.rxmarkdown.factory.TextFactory;
 
+import java.util.List;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.NoteUtil;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -27,12 +32,41 @@ public class NoteActivity extends AppCompatActivity {
 
     private DBNote note = null;
     private RxMDTextView noteContent = null;
+    private NoteSQLiteOpenHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_note);
-        note = (DBNote) getIntent().getSerializableExtra(PARAM_NOTE);
+        // Get intent, action and MIME type
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        String data = intent.getDataString();
+
+        if (data != null) {
+            Log.d(getClass().getSimpleName(), "requested data:" + data);
+        }
+
+        if (Intent.ACTION_VIEW.equals(action) && data != null) {
+
+            db = NoteSQLiteOpenHelper.getInstance(this);
+            String[] uriPart = data.split("/");
+            if (uriPart.length > 3) {
+                String noteTitle = uriPart[3];
+                noteTitle = noteTitle.replace("_", "%");
+                Log.d(getClass().getSimpleName(), "Search title like: " + noteTitle);
+                List<DBNote> searchNotes = db.searchNotesByTitle(noteTitle);
+                Log.d(getClass().getSimpleName(), "Found notes: " + searchNotes.size());
+                if (searchNotes.size() > 0) {
+                    note = searchNotes.get(0);
+                }
+            }
+            if (note == null) {
+                note = (DBNote) db.getNotes().get(0);
+            }
+        } else {
+            note = (DBNote) getIntent().getSerializableExtra(PARAM_NOTE);
+        }
         if (savedInstanceState != null) {
             note = (DBNote) savedInstanceState.getSerializable(PARAM_NOTE);
         }
@@ -57,7 +91,7 @@ public class NoteActivity extends AppCompatActivity {
          *    This prevents replacement in label part of Markdown link: [...URL...]()
          */
         content = content.replaceAll("(?<![(])(https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])(?![^\\[]*\\])", "[$1]($1)");
-
+        content = content.replaceAll("<?note://([-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])>?", "content://it.niedermann.owncloud.notes.android.activity.NoteActivity/$1");
         RxMarkdown.with(content, this)
                 .config(MarkDownUtil.getMarkDownConfiguration(getApplicationContext()))
                 .factory(TextFactory.create())

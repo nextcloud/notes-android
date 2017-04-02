@@ -216,6 +216,15 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Returns a list of all Notes in the Database
+     *
+     * @return List&lt;Note&gt;
+     */
+    public List<DBNote> searchNotesByTitle(CharSequence query) {
+        return getNotesCustom(key_status + " != ? AND " + key_title + " like ?", new String[]{DBStatus.LOCAL_DELETED.getTitle(),  "" + query }, default_order);
+    }
+
+    /**
      * Query the database with a custom raw query.
      * @param selection      A filter declaring which rows to return, formatted as an SQL WHERE clause (excluding the WHERE itself).
      * @param selectionArgs  You may include ?s in selection, which will be replaced by the values from selectionArgs, in order that they appear in the selection. The values will be bound as Strings.

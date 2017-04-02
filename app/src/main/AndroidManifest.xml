@@ -61,7 +61,13 @@
             android:label="@string/menu_edit"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateVisible"
-            />
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" android:host="*" android:pathPattern=".*" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"
