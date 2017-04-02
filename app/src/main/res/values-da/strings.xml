@@ -49,7 +49,6 @@
     <string name="network_disconnected">Intet netværk tilgængeligt</string>
 
     <string name="error_invalid_login">Ugyldigt login: %1$s</string>
-    <string name="error_json">er ownCloud/Nextcloud Notes app aktiveret på serveren?</string>
     <string name="error_no_network">ingen netværksforbindelse</string>
     <string name="error_server">URL/Server har fejl</string>
     <string name="error_url_malformed">Forkert serveradresse</string>

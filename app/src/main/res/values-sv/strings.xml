@@ -1,5 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">Anteckningar</string>
+    <string name="no_notes">Inga anteckningar än</string>
+    <string name="action_create">Ny anteckning</string>
+    <string name="action_settings">Inställningar</string>
+    <string name="action_create_save">Spara</string>
+    <string name="action_create_cancel">Avbryt</string>
+    <string name="action_edit_editing">Redigera</string>
+    <string name="action_edit_save">Spara</string>
+    <string name="action_edit_saving">Sparar &#8230;</string>
+    <string name="action_edit_saved">Sparad</string>
+    <string name="action_edit_cancel">Avbryt</string>
+    <string name="action_about">Om</string>
+    <string name="action_select_note">Välj anteckning</string>
+    <string name="action_note_deleted">Anteckning borttagen</string>
+    <string name="action_note_restored">Anteckning återställd</string>
+    <string name="action_undo">Gör om</string>
+    <string name="menu_delete">Radera</string>
+    <string name="menu_copy">Kopiera</string>
+    <string name="menu_edit">Redigera</string>
+    <string name="menu_cancel">Avbryt</string>
+    <string name="menu_favorite">Favorit</string>
+    <string name="menu_preview">Förhandsvisning</string>
+    <string name="menu_share">Dela</string>
+    <string name="menu_about">Om</string>
+
+    <string name="copy">Kopiera</string>
+
+    <string name="listview_updated_today">Idag</string>
+    <string name="listview_updated_yesterday">Igår</string>
+    <string name="listview_updated_this_week">Denna vecka</string>
+    <string name="listview_updated_this_month">Denna månad</string>
+    <string name="listview_updated_earlier">Tidigare</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Server</string>
+    <string name="settings_url">Serveradress</string>
+    <string name="settings_url_check_description">Visar om adressen kan pingas.</string>
+    <string name="settings_url_warn_http">VARNING: \"http\" är osäkert. Vänligen använd \"https\".</string>
+    <string name="settings_username">Användarnamn</string>
+    <string name="settings_password">Lösenord</string>
+    <string name="settings_password_check_description">Visar om uppgifterna är korrekta.</string>
+    <string name="settings_submit">Anslut</string>
+    <string name="settings_submitting">Ansluter &#8230;</string>
+    <!-- Network -->
+    <string name="network_connecting">Ansluter</string>
+    <string name="network_connected">Ansluten</string>
+    <string name="network_disconnected">Inget nätverk tillgängligt</string>
+
+    <!-- Error -->
+    <string name="error_sync">Synkronisering misslyckades: %1$s</string>
+    <string name="error_io">serveranslutningen är trasig</string>
+    <string name="error_no_network">ingen nätverksanslutning</string>
+    <string name="error_url_malformed">Felaktig serveradress</string>
+    <string name="error_username_password_invalid">Fel användarnamn eller lösenord</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Inställningar</string>
+
+    <!-- About -->
+    <string name="about_version_title">Version</string>
+    <string name="about_version">Du använder just nu &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_developers_title">Utvecklare</string>
+    <string name="about_translators_title">Översättare</string>
+    <string name="about_testers_title">Testare</string>
+    <string name="about_source_title">Källkod</string>
+    <string name="about_issues_title">Problem</string>
+    <string name="about_translate_title">Översätt</string>
+    <string name="about_app_license_title">App-licens</string>
+    <string name="about_app_license_button">Visa licens</string>
+    <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_license_tab_title">Licens</string>
+
+    <string name="widget_all_notes_title">Alla anteckningar</string>
+    <string name="widget_single_note_title">Enstaka anteckning</string>
+
+
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d vald</item>

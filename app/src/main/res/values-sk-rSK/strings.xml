@@ -54,9 +54,10 @@
     <!-- Error -->
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_invalid_login">Neplatné prihlásenie: %1$s</string>
-    <string name="error_json">máte povolenú aplikáciu owncloud Poznámky na serveri?</string>
+    <string name="error_json">máte povolenú aplikáciu Poznámky na serveri?</string>
     <string name="error_io">pripojenie na server bolo prerušené</string>
     <string name="error_no_network">nie je pripojenie k sieti</string>
+    <string name="error_server">URL/Server obsahuje chyby</string>
     <string name="error_url_malformed">Nesprávna adresa servera</string>
     <string name="error_username_password_invalid">Nesprávne meno používateľa alebo heslo</string>
 
@@ -65,15 +66,24 @@
 
     <!-- About -->
     <string name="about_version_title">Verzia</string>
+    <string name="about_version">Momentálne používate &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Udržovateľ</string>
     <string name="about_developers_title">Vývojári</string>
     <string name="about_translators_title">Prekladatelia</string>
+    <string name="about_translators_transifex">Nextcloud komunita na &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testeri</string>
     <string name="about_source_title">Zdrojový kód</string>
+    <string name="about_source">Tento projekt je prevádzkovaný na GitHube: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problémy</string>
+    <string name="about_issues">Návrhy na vylepšenia, požiadavky na nové funkcie a chyby možete nahlásiť na GitHub sledovači problémov: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Preložiť</string>
+    <string name="about_translate">Pripojte sa do tímu Nextcloud na stránke Transifex a pomožte nám s prekladom tejto aplikácie: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licencia aplikácie</string>
+    <string name="about_app_license">Táto aplikácie je licencovaná pod GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobraziť licenciu</string>
     <string name="about_icons_disclaimer_title">Ikony</string>
+    <string name="about_icons_disclaimer">&lt;p>Originálna ikona vytvorená %1$s&lt;/p>&lt;p>Všetky ostatné ikony použité touto aplikáciou sú &lt;a href=\"https://materialdesignicons.com/\">Materiálové ikony designu&lt;/a> vytvorené spoločnosťou Google Inc. a licencované pod Creative Commons License.&lt;/p></string>
+    <string name="about_credits_tab_title">Zásluhy</string>
     <string name="about_contribution_tab_title">Príspevok</string>
     <string name="about_license_tab_title">Licencia</string>
 
@@ -81,4 +91,10 @@
     <string name="widget_single_note_title">Jedna poznámka</string>
 
 
-    </resources>
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d vybraný</item>
+        <item quantity="few">%d vybraných</item>
+        <item quantity="other">%d vybraný</item>
+    </plurals>
+</resources>

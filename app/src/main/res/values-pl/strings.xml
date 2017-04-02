@@ -54,7 +54,7 @@
     <!-- Error -->
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_invalid_login">Niepoprawny login: %1$s</string>
-    <string name="error_json">czy aplikacja Nextcloud Notes została aktywowana na serwerze?</string>
+    <string name="error_json">Czy aplikacja Notatki jest włączona na serwerze?</string>
     <string name="error_io">połączenie z serwerem jest nieprawidłowe</string>
     <string name="error_no_network">brak połączenia sieciowego</string>
     <string name="error_server">URL/Serwer zawiera błędy</string>

@@ -54,7 +54,7 @@
     <!-- Error -->
     <string name="error_sync">Синхронизация не удалась: %1$s</string>
     <string name="error_invalid_login">Неверный логин: %1$s</string>
-    <string name="error_json">Ошибка JSON</string>
+    <string name="error_json">Включено ли приложение «Заметки» на сервере?</string>
     <string name="error_io">Ошибка ввода/вывода</string>
     <string name="error_no_network">нет подключения к сети</string>
     <string name="error_server">Ошибка в URL или адресе сервера</string>

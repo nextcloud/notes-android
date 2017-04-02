@@ -1,7 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">ノート</string>
+    <string name="no_notes">まだノートはありません</string>
+    <string name="action_create">新しいノート</string>
+    <string name="action_settings">設定</string>
+    <string name="action_create_save">保存</string>
+    <string name="action_create_cancel">キャンセル</string>
+    <string name="action_edit_editing">編集</string>
+    <string name="action_edit_save">保存</string>
+    <string name="action_edit_saving">保存中&#8230;</string>
+    <string name="action_edit_saved">保存しました</string>
+    <string name="action_edit_cancel">キャンセル</string>
+    <string name="action_about">アプリについて</string>
+    <string name="action_select_note">ノートを選択</string>
+    <string name="action_note_deleted">ノートを削除しました</string>
+    <string name="action_note_restored">ノートが復元されました</string>
+    <string name="action_undo">元に戻す</string>
+    <string name="menu_delete">削除</string>
+    <string name="menu_copy">コピー</string>
+    <string name="menu_edit">編集</string>
+    <string name="menu_cancel">キャンセル</string>
+    <string name="menu_favorite">お気に入り</string>
+    <string name="menu_preview">プレビュー</string>
+    <string name="menu_share">共有</string>
+    <string name="menu_about">アプリについて</string>
+
+    <string name="copy">コピー</string>
+
+    <string name="listview_updated_today">今日</string>
+    <string name="listview_updated_yesterday">昨日</string>
+    <string name="listview_updated_this_week">今週</string>
+    <string name="listview_updated_this_month">今月</string>
+    <string name="listview_updated_earlier">早期</string>
+
+    <!-- Settings -->
+    <string name="settings_server">サーバー</string>
+    <string name="settings_url">サーバーアドレス</string>
+    <string name="settings_url_check_description">アドレスに ping できるかどうかを表示します。</string>
+    <string name="settings_url_warn_http">警告: \"http\" は安全ではありません。 \"https\" を使用してください。</string>
+    <string name="settings_username">ユーザー名</string>
+    <string name="settings_password">パスワード</string>
+    <string name="settings_password_check_description">資格情報が正しいかどうかを表示します。</string>
+    <string name="settings_submit">接続</string>
+    <string name="settings_submitting">接続中&#8230;</string>
+    <string name="settings_notification">新しいノートをすばやく作成するための、永続通知の表示を有効にします。</string>
+
+    <!-- Network -->
+    <string name="network_connecting">接続中</string>
+    <string name="network_connected">接続しました</string>
+    <string name="network_disconnected">ネットワークが利用できません</string>
+
+    <!-- Error -->
+    <string name="error_sync">同期に失敗しました: %1$s</string>
+    <string name="error_invalid_login">ログインが無効: %1$s</string>
+    <string name="error_json">ノートアプリはサーバー上で有効になっていますか?</string>
+    <string name="error_io">サーバー接続が壊れています</string>
+    <string name="error_no_network">ネットワーク接続がありません</string>
+    <string name="error_server">URL/サーバーにエラーがあります</string>
+    <string name="error_url_malformed">サーバーアドレスが間違っています</string>
+    <string name="error_username_password_invalid">ユーザー名またはパスワードが間違っています</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">設定</string>
+
+    <!-- About -->
+    <string name="about_version_title">バージョン</string>
+    <string name="about_version">現在 &lt;strong>%1$s&lt;/strong> を使用しています</string>
+    <string name="about_maintainer_title">管理者</string>
+    <string name="about_developers_title">開発者</string>
+    <string name="about_translators_title">翻訳者</string>
+    <string name="about_translators_transifex">&lt;a href=\"%1$s\">Transifex&lt;/a> のNextcloud コミュニティ</string>
+    <string name="about_testers_title">テスター</string>
+    <string name="about_source_title">ソースコード</string>
+    <string name="about_source">このプロジェクトは GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a> にホストされています</string>
+    <string name="about_issues_title">問題</string>
+    <string name="about_issues">GitHub の問題追跡ツールで、バグ、拡張の提案、機能のリクエストを報告できます: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">翻訳</string>
+    <string name="about_translate">Transexex の Nextcloud チームに参加して、このアプリの翻訳を手伝ってください: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">アプリ ライセンス</string>
+    <string name="about_app_license">このアプリケーションは GNU GENERAL PUBLIC LICENSE v3+ でライセンスされています。</string>
+    <string name="about_app_license_button">ライセンスを表示</string>
+    <string name="about_icons_disclaimer_title">アイコン</string>
+    <string name="about_icons_disclaimer">&lt;p>オリジナルアイコンの作成者 %1$s&lt;/p>&lt;p>このアプリで使用されているすべてのアイコンは Google Inc. が作成した &lt;a href=\"https://materialdesignicons.com/\">マテリアルデザイン アイコン&lt;/a> で、クリエイティブコモンズライセンスの下でライセンスされています。&lt;/p></string>
+    <string name="about_credits_tab_title">クレジット</string>
+    <string name="about_contribution_tab_title">貢献</string>
+    <string name="about_license_tab_title">ライセンス</string>
+
+    <string name="widget_all_notes_title">すべてのノート</string>
+    <string name="widget_single_note_title">一つのノート</string>
+
+
     <!-- Plurals -->
     <plurals name="ab_selected">
-        <item quantity="other">%d選択されています</item>
+        <item quantity="other">%d 選択済</item>
     </plurals>
 </resources>

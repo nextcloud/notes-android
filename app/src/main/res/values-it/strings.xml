@@ -32,6 +32,8 @@
     <string name="listview_updated_yesterday">Ieri</string>
     <string name="listview_updated_this_week">Questa settimana</string>
     <string name="listview_updated_this_month">Questo mese</string>
+    <string name="listview_updated_earlier">Prima</string>
+
     <!-- Settings -->
     <string name="settings_server">Server</string>
     <string name="settings_url">Indirizzo del server</string>
@@ -42,6 +44,8 @@
     <string name="settings_password_check_description">Mostra se le credenziali sono corrette.</string>
     <string name="settings_submit">Connetti</string>
     <string name="settings_submitting">Connessione a &#8230;</string>
+    <string name="settings_notification">Abilita la visualizzazione di una notifica persistente per creare rapidamente nuove note.</string>
+
     <!-- Network -->
     <string name="network_connecting">Connessione in corso</string>
     <string name="network_connected">Connesso</string>
@@ -61,18 +65,23 @@
 
     <!-- About -->
     <string name="about_version_title">Versione</string>
+    <string name="about_version">Stai utilizzando attualmente &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Responsabile</string>
     <string name="about_developers_title">Sviluppatori</string>
     <string name="about_translators_title">Traduttori</string>
     <string name="about_translators_transifex">La comunità Nextcloud su &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Tester</string>
     <string name="about_source_title">Codice sorgente</string>
+    <string name="about_source">Questo progetto è ospitato su GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemi</string>
+    <string name="about_issues">Puoi segnalare bug, proporre miglioramenti e richiedere funzionalità tramite il sistema di tracciamento dei problemi di GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traduci</string>
+    <string name="about_translate">Unisciti alla squadra di Nextcloud su Transifex e aiutaci a tradurre questa applicazione: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licenza applicazione</string>
     <string name="about_app_license">Questa applicazione è rilasciata nei termini della licenza GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Visualizza licenza</string>
     <string name="about_icons_disclaimer_title">Icone</string>
+    <string name="about_icons_disclaimer">&lt;p>Icona originale prodotta da %1$s&lt;/p>&lt;p>Tutte le altre icone utilizzate da questa applicazione sono &lt;a href=\"https://materialdesignicons.com/\">Icone Material Design&lt;/a> realizzate da Google Inc. e rilasciate nei termini di una licenza Creative Commons.&lt;/p></string>
     <string name="about_credits_tab_title">Riconoscimenti</string>
     <string name="about_contribution_tab_title">Contributi</string>
     <string name="about_license_tab_title">Licenza</string>

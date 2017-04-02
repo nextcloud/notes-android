@@ -54,7 +54,6 @@
     <!-- Error -->
     <string name="error_sync">同步失败: %1$s</string>
     <string name="error_invalid_login">无效的登录: %1$s</string>
-    <string name="error_json">是否在服务器上激活owncloud Notes应用程序？</string>
     <string name="error_io">与服务器连接中断</string>
     <string name="error_no_network">没有网络连接</string>
     <string name="error_server">URL/服务器错误</string>
@@ -70,15 +69,19 @@
     <string name="about_maintainer_title">维护者</string>
     <string name="about_developers_title">开发者</string>
     <string name="about_translators_title">翻译人员</string>
-    <string name="about_translators_transifex">Nextcloud社区在&lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud 社区在 &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">测试人员</string>
     <string name="about_source_title">源代码</string>
-    <string name="about_source">此项目是在GitHub：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">此项目托管在 GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">问题</string>
+    <string name="about_issues">您可以在 GitHub issue tracker 上报告 bug, 改进建议以及新的特性需求: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">翻译</string>
+    <string name="about_translate">在 Transifex 上加入 Nextcloud 团队并帮助我们翻译这个应用: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">应用授权</string>
     <string name="about_app_license">此程序通过GNU通用公共许可证V3+授权。</string>
     <string name="about_app_license_button">查看授权</string>
     <string name="about_icons_disclaimer_title">图标</string>
+    <string name="about_icons_disclaimer">&lt;p>原创图标来自 %1$s&lt;/p>&lt;p>本应用中使用的其他图标来自 Google Inc. 基于创作共用协议提供的 &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a>.&lt;/p></string>
     <string name="about_credits_tab_title">致谢</string>
     <string name="about_contribution_tab_title">贡献</string>
     <string name="about_license_tab_title">授权</string>
@@ -87,4 +90,8 @@
     <string name="widget_single_note_title">单个便笺</string>
 
 
-    </resources>
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="other">已选择 %d 个</item>
+    </plurals>
+</resources>

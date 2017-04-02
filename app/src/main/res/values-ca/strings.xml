@@ -54,7 +54,6 @@
     <!-- Error -->
     <string name="error_sync">Error en la sincronització: %1$s</string>
     <string name="error_invalid_login">Inici de sessió invàlid: %1$s</string>
-    <string name="error_json">El servidor té les owncloud app activades?</string>
     <string name="error_io">S\\\'ha trencat la connecció amb el servidor</string>
     <string name="error_no_network">No hi ha connexió a la xarxa</string>
     <string name="error_server">L\\\'URL/Server conté errors</string>
@@ -71,7 +70,10 @@
     <string name="about_translators_title">Traductors</string>
     <string name="about_testers_title">Provadors</string>
     <string name="about_source_title">Codi font</string>
+    <string name="about_source">Aquest projecte està hostatjat a Github: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemes</string>
+    <string name="about_translate_title">Tradueix</string>
+    <string name="about_translate">Uneix-te a l\'equip Nextcloud a Transifex i ajuda\'ns a traduïr aquesta aplicacio: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Llicència de l\\\'aplicació</string>
     <string name="about_app_license">Aquesta aplicació està llicenciada sota GNU GENERAL PUBLIC LICENSE v3+</string>
     <string name="about_app_license_button">Veure llicència</string>
@@ -84,4 +86,9 @@
     <string name="widget_single_note_title">Una nota</string>
 
 
-    </resources>
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d escollit</item>
+        <item quantity="other">%d escollits</item>
+    </plurals>
+</resources>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Бележки</string>
+    <string name="no_notes">Няма открити бележки</string>
+    <string name="action_create">Нова бележка</string>
+    <string name="action_settings">Настройки</string>
+    <string name="action_create_save">Запис</string>
+    <string name="action_create_cancel">Отказ</string>
+    <string name="action_edit_editing">Редакция</string>
+    <string name="action_edit_save">Запис</string>
+    <string name="action_edit_saving">Записване &#8230;</string>
+    <string name="action_edit_saved">Запазено</string>
+    <string name="action_edit_cancel">Отказ</string>
+    <string name="action_about">Относно</string>
+    <string name="action_select_note">Избор на бележка</string>
+    <string name="action_note_deleted">Бележката е изтрита</string>
+    <string name="action_note_restored">Бележката е възстановена</string>
+    <string name="action_undo">Отмяна</string>
+    <string name="menu_delete">Изтриване</string>
+    <string name="menu_copy">Копиране</string>
+    <string name="menu_edit">Редакция</string>
+    <string name="menu_cancel">Отказ</string>
+    <string name="menu_favorite">Любим</string>
+    <string name="menu_preview">Преглед</string>
+    <string name="menu_share">Споделяне</string>
+    <string name="menu_about">Относно</string>
+
+    <string name="copy">Копиране</string>
+
+    <string name="listview_updated_today">Днес</string>
+    <string name="listview_updated_yesterday">Вчера</string>
+    <string name="listview_updated_this_week">Тази седмица</string>
+    <string name="listview_updated_this_month">Този месец</string>
+    <!-- Settings -->
+    <string name="settings_server">Сървър</string>
+    <string name="settings_url">Адрес на сървъра</string>
+    <string name="settings_username">Потребител</string>
+    <string name="settings_password">Парола</string>
+    <string name="settings_submit">Свързване</string>
+    <string name="settings_submitting">Свързване &#8230;</string>
+    <!-- Network -->
+    <string name="network_connecting">Свързване</string>
+    <string name="network_connected">Свързан</string>
+    <string name="network_disconnected">Няма налична мрежа</string>
+
+    <!-- Error -->
+    <string name="error_sync">Синхронизацията е неуспешна: %1$s</string>
+    <string name="error_invalid_login">Невалиден вход: %1$s</string>
+    <string name="error_io">връзката със сървъра е прекъснала</string>
+    <string name="error_no_network">няма връзка с интернет</string>
+    <string name="error_server">URL/Сървъра съдържа грешки</string>
+    <string name="error_url_malformed">Грешен адрес на сървъра</string>
+    <string name="error_username_password_invalid">Грешно потребителско име или парола</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Настройки</string>
+
+    <!-- About -->
+    <string name="about_version_title">Версия</string>
+    <string name="about_version">В момента ползвате &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Отговорник</string>
+    <string name="about_developers_title">Разработчици</string>
+    <string name="about_translators_title">Преводачи</string>
+    <string name="about_translators_transifex">Nextcloud общност на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">Тестери</string>
+    <string name="about_source_title">Изходен код</string>
+    <string name="about_translate_title">Превод</string>
+    <string name="about_translate">Присъединете към Nextcloud тима на Transifex и помогнете за превода на това приложение: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Лиценз на приложението</string>
+    <string name="about_app_license">Това приложение се разпространява под лиценза за GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Преглед на лиценз</string>
+    <string name="about_icons_disclaimer_title">Икони</string>
+    <string name="about_contribution_tab_title">Принос</string>
+    <string name="about_license_tab_title">Лиценз</string>
+
+    <string name="widget_all_notes_title">Всички бележки</string>
+    <string name="widget_single_note_title">Единична бележка</string>
+
+
+    </resources>

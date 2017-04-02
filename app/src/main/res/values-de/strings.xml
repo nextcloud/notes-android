@@ -54,7 +54,7 @@
     <!-- Error -->
     <string name="error_sync">Synchronisation fehlgeschlagen: %1$s</string>
     <string name="error_invalid_login">Login fehlgeschlagen: %1$s</string>
-    <string name="error_json">ist die Server-App ownCloud Notes aktiviert?</string>
+    <string name="error_json">ist die Notes-App auf dem Server aktiviert?</string>
     <string name="error_io">Server-Verbindung nicht möglich</string>
     <string name="error_no_network">keine Netzwerk-Verbindung</string>
     <string name="error_server">URL/Server fehlerhaft</string>
