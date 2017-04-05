@@ -54,6 +54,7 @@
     <!-- Error -->
     <string name="error_sync">A sincronização falhou: %1$s</string>
     <string name="error_invalid_login">Login inválido: %1$s</string>
+    <string name="error_json">A aplicação Notes está activada no servidor?</string>
     <string name="error_io">não existe conexão com o servidor </string>
     <string name="error_no_network">não existe conexão de rede</string>
     <string name="error_server">URL/Servidor tem erros</string>

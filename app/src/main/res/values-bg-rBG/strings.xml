@@ -78,4 +78,9 @@
     <string name="widget_single_note_title">Единична бележка</string>
 
 
-    </resources>
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d избранa</item>
+        <item quantity="other">%d избрани</item>
+    </plurals>
+</resources>
