@@ -54,6 +54,7 @@
     <!-- Error -->
     <string name="error_sync">同步失败: %1$s</string>
     <string name="error_invalid_login">无效的登录: %1$s</string>
+    <string name="error_json">服务器上的笔记应用是否启用？</string>
     <string name="error_io">与服务器连接中断</string>
     <string name="error_no_network">没有网络连接</string>
     <string name="error_server">URL/服务器错误</string>
