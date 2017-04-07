@@ -66,7 +66,7 @@
 
     <!-- About -->
     <string name="about_version_title">Versão</string>
-    <string name="about_version">Você está usando atualmente &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">Atualmente você está usando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mantenedor</string>
     <string name="about_developers_title">Desenvolvedores</string>
     <string name="about_translators_title">Tradutores </string>
@@ -75,7 +75,7 @@
     <string name="about_source_title">Código fonte</string>
     <string name="about_source">Este projeto está hospedado no GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemas</string>
-    <string name="about_issues">Você pode relatar bugs, propostas de aprimoramento e solicitações de recursos no rastreador de problemas do GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Você pode relatar bugs, enviar propostas de aprimoramento e solicitações de recursos no rastreador de problemas do GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traduzir</string>
     <string name="about_translate">Junte-se à equipe do Nextcloud no Transifex e ajude-nos a traduzir este aplicativo: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licença de aplicativo</string>
