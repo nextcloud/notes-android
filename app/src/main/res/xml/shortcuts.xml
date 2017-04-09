@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="it.niedermann.owncloud.notes"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_new_theme"
+        android:shortcutShortLabel="@string/action_create"
+        android:shortcutLongLabel="@string/shortcut_create_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="it.niedermann.owncloud.notes"
+            android:targetClass="it.niedermann.owncloud.notes.android.activity.CreateNoteActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+</shortcuts>
