@@ -100,9 +100,6 @@
     <string name="widget_all_notes_title">All notes</string>
     <string name="widget_single_note_title">Single note</string>
 
-    <string name="drawer_opened">Drawer opened</string>
-    <string name="drawer_closed">Drawer closed</string>
-
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Create a new note</string>
 
