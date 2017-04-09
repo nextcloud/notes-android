@@ -1,30 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/swiperefreshlayout"
+    <!-- The main content view -->
+    <FrameLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/bg_normal"
-        tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-        tools:ignore="MergeRootFrame">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <android.support.v4.widget.SwipeRefreshLayout xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/swiperefreshlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/bg_highlighted"
-            android:scrollbars="vertical" />
+            android:layout_height="match_parent"
+            android:background="@color/bg_normal"
+            tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+            tools:ignore="MergeRootFrame">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_highlighted"
+                android:scrollbars="vertical" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_create"
-        style="@style/fab"
-        android:src="@drawable/ic_action_new"
-        app:backgroundTint="@color/primary"
-        app:rippleColor="@color/primary_dark" />
-</RelativeLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_create"
+            style="@style/fab"
+            android:src="@drawable/ic_action_new"
+            app:backgroundTint="@color/primary"
+            app:rippleColor="@color/primary_dark" />
+
+    </FrameLayout>
+
+
+    <!-- The navigation drawer -->
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#111"
+        android:backgroundTint="@color/bg_normal"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
+
+</android.support.v4.widget.DrawerLayout>
