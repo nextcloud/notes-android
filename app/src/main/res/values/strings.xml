@@ -105,7 +105,6 @@
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Create a new note</string>
-    <string name="shortcut_create_disabled">New note is disabled</string>
 
     <!-- Plurals -->
     <plurals name="ab_selected">
