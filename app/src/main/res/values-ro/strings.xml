@@ -54,6 +54,7 @@
     <!-- Error -->
     <string name="error_sync">Sincronizare eșuată: %1$s</string>
     <string name="error_invalid_login">Autentificare invalidă: %1$s</string>
+    <string name="error_json">Este aplicația Notes activata pe server?</string>
     <string name="error_io">conexiunea la server este întreruptă</string>
     <string name="error_no_network">nu există conexiunea la rețea</string>
     <string name="error_server">există erori de URL/Server</string>
