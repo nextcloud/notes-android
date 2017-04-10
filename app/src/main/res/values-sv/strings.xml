@@ -76,7 +76,6 @@
     <string name="widget_all_notes_title">Alla anteckningar</string>
     <string name="widget_single_note_title">Enstaka anteckning</string>
 
-
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d vald</item>

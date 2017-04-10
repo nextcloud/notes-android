@@ -90,7 +90,6 @@
     <string name="widget_all_notes_title">Toutes les notes</string>
     <string name="widget_single_note_title">Une seule note</string>
 
-
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d sélectionné</item>

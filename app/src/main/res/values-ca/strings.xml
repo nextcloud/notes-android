@@ -85,7 +85,6 @@
     <string name="widget_all_notes_title">Totes les notes</string>
     <string name="widget_single_note_title">Una nota</string>
 
-
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d escollit</item>

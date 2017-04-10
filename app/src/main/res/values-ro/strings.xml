@@ -90,7 +90,6 @@
     <string name="widget_all_notes_title">Toate notițele</string>
     <string name="widget_single_note_title">O singură notiță</string>
 
-
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d selecționat</item>

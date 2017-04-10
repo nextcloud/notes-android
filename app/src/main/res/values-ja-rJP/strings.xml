@@ -90,7 +90,6 @@
     <string name="widget_all_notes_title">すべてのノート</string>
     <string name="widget_single_note_title">一つのノート</string>
 
-
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="other">%d 選択済</item>

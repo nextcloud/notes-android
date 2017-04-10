@@ -89,7 +89,6 @@
     <string name="widget_all_notes_title">Të gjitha shënimet</string>
     <string name="widget_single_note_title">Një shënim i vetëm</string>
 
-
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d të përzgjedhura</item>
