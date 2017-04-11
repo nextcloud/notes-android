@@ -3,11 +3,13 @@ package it.niedermann.owncloud.notes.android.activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
@@ -56,6 +58,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private ActionMode mActionMode;
     private SwipeRefreshLayout swipeRefreshLayout = null;
     private NoteSQLiteOpenHelper db = null;
+    private Vibrator vibrator = null;
     private SearchView searchView = null;
     private ICallback syncCallBack = new ICallback() {
         @Override
@@ -81,6 +84,8 @@ public class NotesListViewActivity extends AppCompatActivity implements
         }
 
         setContentView(R.layout.activity_notes_list_view);
+
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         // Display Data
         db = NoteSQLiteOpenHelper.getInstance(this);
@@ -275,6 +280,9 @@ public class NotesListViewActivity extends AppCompatActivity implements
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         ItemTouchHelper touchHelper = new ItemTouchHelper(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            private boolean active=false;
+
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
@@ -323,6 +331,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                if(!active && isCurrentlyActive) {
+                    active=true;
+                    vibrator.vibrate(20);
+                    Log.v(getClass().getSimpleName(), "vibrate");
+                }
                 ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
                 // show delete icon on the right side
                 noteViewHolder.showSwipeDelete(dX>0);
@@ -333,6 +346,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             @Override
             public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 getDefaultUIUtil().clearView(((ItemAdapter.NoteViewHolder) viewHolder).noteSwipeable);
+                active=false;
             }
         });
         touchHelper.attachToRecyclerView(listView);
