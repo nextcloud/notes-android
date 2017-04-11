@@ -12,10 +12,10 @@
     <string name="action_edit_saving">Guardando &#8230;</string>
     <string name="action_edit_saved">Guardado</string>
     <string name="action_edit_cancel">Cancelar</string>
-    <string name="action_about">Acerca</string>
+    <string name="action_about">Acerca de</string>
     <string name="action_select_note">Seleccionar nota</string>
-    <string name="action_note_deleted">La nota es borrada</string>
-    <string name="action_note_restored">La nota es restaurada</string>
+    <string name="action_note_deleted">La nota fue borrada</string>
+    <string name="action_note_restored">La nota fue restaurada</string>
     <string name="action_undo">Deshacer</string>
     <string name="menu_delete">Borrar</string>
     <string name="menu_copy">Copiar</string>
@@ -41,10 +41,10 @@
     <string name="settings_url_warn_http">AVISO: \"http\" es inseguro. Por favor, use \"https\".</string>
     <string name="settings_username">Nombre de usuario</string>
     <string name="settings_password">Contraseña</string>
-    <string name="settings_password_check_description">Aparece si las credenciales son correctas.</string>
+    <string name="settings_password_check_description">Muestra si las credenciales son correctas.</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando &#8230;</string>
-    <string name="settings_notification">Activar para mostrar una notificación persistente para crear notas nuevas rápidamente.</string>
+    <string name="settings_notification">Habilita para mostrar una notificación persistente para crear nuevas notas rápidamente.</string>
 
     <!-- Network -->
     <string name="network_connecting">Conectando</string>
@@ -53,7 +53,7 @@
 
     <!-- Error -->
     <string name="error_sync">Falló la sincronización: %1$s</string>
-    <string name="error_invalid_login">Login inválido: %1$s</string>
+    <string name="error_invalid_login">Acceso inválido: %1$s</string>
     <string name="error_json">¿Está la app de Notas activada en el servidor?</string>
     <string name="error_io">se ha roto la conexión con el servidor</string>
     <string name="error_no_network">no hay conexión a la red</string>
@@ -66,14 +66,14 @@
 
     <!-- About -->
     <string name="about_version_title">Versión</string>
-    <string name="about_version">Se encuentra actualmente usando &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">Esta actualmente usando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mantenedor</string>
     <string name="about_developers_title">Desarrolladores</string>
     <string name="about_translators_title">Traductores</string>
     <string name="about_translators_transifex">Comunidad de Nextcloud en &lt;a href=\"%1$s\">Transifex&lt;/a></string>
-    <string name="about_testers_title">Testers</string>
+    <string name="about_testers_title">Ensayadores</string>
     <string name="about_source_title">Código fuente</string>
-    <string name="about_source">Este proyecto es alojado en GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Este proyecto está alojado en GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemas</string>
     <string name="about_issues">Puede reporta errores, proponer mejoras y solicitar características en el sistema de seguimiento de GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traducir</string>
@@ -81,14 +81,17 @@
     <string name="about_app_license_title">Licencia de la aplicación</string>
     <string name="about_app_license">Esta aplicación está bajo la Licencia Pública General GNU v3+.</string>
     <string name="about_app_license_button">Ver licencia</string>
-    <string name="about_icons_disclaimer_title">Iconos</string>
-    <string name="about_icons_disclaimer">&lt;p>Icono original hecho por %1$s&lt;/p>&lt;p>Todos los demás íconos usados por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> hechos por Google Inc. y están bajo una Licencia Creative Commons.&lt;/p></string>
+    <string name="about_icons_disclaimer_title">Íconos</string>
+    <string name="about_icons_disclaimer">&lt;p>Ícono original hecho por %1$s&lt;/p>&lt;p>Todos los demás íconos usados por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> hecho por Google Inc. y autorizado por Creative Commons License.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribución</string>
     <string name="about_license_tab_title">Licencia</string>
 
     <string name="widget_all_notes_title">Todas las notas</string>
     <string name="widget_single_note_title">Nota única</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Crear una nota nueva</string>
 
     <!-- Plurals -->
     <plurals name="ab_selected">

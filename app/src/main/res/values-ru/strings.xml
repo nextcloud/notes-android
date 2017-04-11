@@ -90,6 +90,9 @@
     <string name="widget_all_notes_title">Все заметки</string>
     <string name="widget_single_note_title">Одна заметка</string>
 
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Создать новую заметку</string>
+
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d выбран</item>

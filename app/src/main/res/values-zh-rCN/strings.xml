@@ -90,6 +90,9 @@
     <string name="widget_all_notes_title">所有便笺</string>
     <string name="widget_single_note_title">单个便笺</string>
 
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">创建新便笺</string>
+
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="other">已选择 %d 个</item>

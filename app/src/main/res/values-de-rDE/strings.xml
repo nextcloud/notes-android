@@ -90,6 +90,9 @@
     <string name="widget_all_notes_title">Alle Notizen</string>
     <string name="widget_single_note_title">Eine Notiz</string>
 
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Neue Notiz erstellen</string>
+
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d ausgewählt</item>
