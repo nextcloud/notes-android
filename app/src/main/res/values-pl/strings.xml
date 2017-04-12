@@ -90,6 +90,9 @@
     <string name="widget_all_notes_title">Wszystkie notatki</string>
     <string name="widget_single_note_title">Pojedyncza notatka</string>
 
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Utwórz nową notatkę</string>
+
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d wybrano</item>
