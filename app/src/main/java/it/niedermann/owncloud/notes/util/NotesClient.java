@@ -14,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 
 import at.bitfire.cert4android.CustomCertManager;
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
@@ -94,7 +95,8 @@ public class NotesClient {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis()/1000);
-        paramObject.accumulate(JSON_FAVORITE, note.isFavorite());
+		paramObject.accumulate(JSON_FAVORITE, note.isFavorite());
+		paramObject.accumulate(JSON_CATEGORY, note.getCategory());
         return new NoteResponse(requestServer(ccm, path, method, paramObject, null));
     }
 
@@ -138,6 +140,7 @@ public class NotesClient {
         con.setRequestProperty(
                 "Authorization",
                 "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
+		con.setRequestProperty("User-Agent", "nextcloud-notes/" + BuildConfig.VERSION_NAME + " (Android)");
         if(lastETag!=null && METHOD_GET.equals(method)) {
             con.setRequestProperty("If-None-Match", lastETag);
         }

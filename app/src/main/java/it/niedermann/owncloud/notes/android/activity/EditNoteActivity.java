@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -22,13 +24,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 
-public class EditNoteActivity extends AppCompatActivity {
+public class EditNoteActivity extends AppCompatActivity implements CategoryDialogFragment.CategoryDialogListener {
 
     public static final String PARAM_NOTE = "note";
     public static final String PARAM_ORIGINAL_NOTE = "original_note";
@@ -185,6 +188,9 @@ public class EditNoteActivity extends AppCompatActivity {
                 db.toggleFavorite(note, null);
                 invalidateOptionsMenu();
                 return true;
+            case R.id.menu_category:
+                showCategorySelector();
+                return true;
             case R.id.menu_preview:
                 saveData(null);
                 Intent previewIntent = new Intent(getApplicationContext(), NoteActivity.class);
@@ -209,6 +215,28 @@ public class EditNoteActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Opens a dialog in order to chose a category
+     */
+    private void showCategorySelector() {
+        final String fragmentId = "fragment_category";
+        FragmentManager manager = getFragmentManager();
+        Fragment frag = manager.findFragmentByTag(fragmentId);
+        if(frag!=null) {
+            manager.beginTransaction().remove(frag).commit();
+        }
+        Bundle arguments = new Bundle();
+        arguments.putString(CategoryDialogFragment.PARAM_CATEGORY, note.getCategory());
+        CategoryDialogFragment categoryFragment = new CategoryDialogFragment();
+        categoryFragment.setArguments(arguments);
+        categoryFragment.show(manager, fragmentId);
+    }
+
+    @Override
+    public void onCategoryChosen(String category) {
+        note.setCategory(category);
     }
 
     /**
@@ -295,14 +323,6 @@ public class EditNoteActivity extends AppCompatActivity {
                         });
                     }
                 }, DELAY_AFTER_SYNC);
-
-                /* TODO Notify widgets
-
-                int widgetIDs[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
-
-                for (int id : widgetIDs) {
-                    AppWidgetManager.getInstance(getApplication()).notifyAppWidgetViewDataChanged(id, R.layout.widget_single_note);
-                }*/
             }
         });
     }
