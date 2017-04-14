@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">Notas</string>
-    <string name="no_notes">Nenhuma nota ainda</string>
-    <string name="action_create">Nova nota</string>
+    <string name="no_notes">Nenhuma anotação ainda</string>
+    <string name="action_create">Nova anotação</string>
     <string name="action_settings">Configurações</string>
     <string name="action_create_save">Salvar</string>
     <string name="action_create_cancel">Cancelar</string>
@@ -13,11 +13,11 @@
     <string name="action_edit_saved">Salvo</string>
     <string name="action_edit_cancel">Cancelar</string>
     <string name="action_about">Sobre</string>
-    <string name="action_select_note">Selecionar nota</string>
-    <string name="action_note_deleted">A nota está eliminada</string>
-    <string name="action_note_restored">Nota está restaurada</string>
+    <string name="action_select_note">Selecionar anotação</string>
+    <string name="action_note_deleted">Anotação excluída</string>
+    <string name="action_note_restored">Anotação restaurada</string>
     <string name="action_undo">Desfazer</string>
-    <string name="menu_delete">Eliminar</string>
+    <string name="menu_delete">Excluir</string>
     <string name="menu_copy">Copiar</string>
     <string name="menu_edit">Editar</string>
     <string name="menu_cancel">Cancelar</string>
@@ -37,14 +37,14 @@
     <!-- Settings -->
     <string name="settings_server">Servidor</string>
     <string name="settings_url">Endereço do servidor</string>
-    <string name="settings_url_check_description">Mostra se o endereço pode ser pingado.</string>
+    <string name="settings_url_check_description">Mostra se o endereço pode ser encontrado.</string>
     <string name="settings_url_warn_http">AVISO: \"http\" é inseguro. Utilize \"https\".</string>
-    <string name="settings_username">Nome de usuário</string>
+    <string name="settings_username">Nome do usuário</string>
     <string name="settings_password">Senha</string>
     <string name="settings_password_check_description">Mostra se as credenciais estão corretas.</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando &#8230;</string>
-    <string name="settings_notification">Habilite para mostrar uma notificação persistente para criar rapidamente novas notas.</string>
+    <string name="settings_notification">Habilite para mostrar uma notificação persistente para rapidamente criar novas anotações.</string>
 
     <!-- Network -->
     <string name="network_connecting">Conectando</string>
@@ -54,12 +54,12 @@
     <!-- Error -->
     <string name="error_sync">A sincronização falhou: %1$s</string>
     <string name="error_invalid_login">Login inválido: %1$s</string>
-    <string name="error_json">A aplicação Notes está activada no servidor?</string>
+    <string name="error_json">A aplicação Notes está ativada no servidor?</string>
     <string name="error_io">não existe conexão com o servidor </string>
     <string name="error_no_network">não existe conexão de rede</string>
     <string name="error_server">URL/Servidor tem erros</string>
     <string name="error_url_malformed">Endereço incorreto do servidor</string>
-    <string name="error_username_password_invalid">Nome de usuário ou senha errado</string>
+    <string name="error_username_password_invalid">Nome de usuário ou senha errados</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Configurações</string>
@@ -78,20 +78,20 @@
     <string name="about_issues">Você pode relatar bugs, enviar propostas de aprimoramento e solicitações de recursos no rastreador de problemas do GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traduzir</string>
     <string name="about_translate">Junte-se à equipe do Nextcloud no Transifex e ajude-nos a traduzir este aplicativo: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">Licença de aplicativo</string>
+    <string name="about_app_license_title">Licença do aplicativo</string>
     <string name="about_app_license">Esta aplicação está licenciada sob a GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Ver licença</string>
     <string name="about_icons_disclaimer_title">Ícones</string>
-    <string name="about_icons_disclaimer">&lt;p>Ícone original feito por %1$s&lt;/p>&lt;p>Todos os outros ícones usados por este aplicativo são &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> Feita pela Google Inc. e licenciada sob uma licença Creative Commons.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Ícone original feito por %1$s&lt;/p>&lt;p>Todos os outros ícones usados por este aplicativo são &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitos pela Google Inc. e licenciada sob uma licença Creative Commons.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribuição</string>
     <string name="about_license_tab_title">Licença</string>
 
-    <string name="widget_all_notes_title">Todas as notas</string>
-    <string name="widget_single_note_title">Nota simples</string>
+    <string name="widget_all_notes_title">Todas as anotações</string>
+    <string name="widget_single_note_title">Nnotação simples</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_create_long">Criar uma nova nota</string>
+    <string name="shortcut_create_long">Criar uma nova anotação</string>
 
     <!-- Plurals -->
     <plurals name="ab_selected">

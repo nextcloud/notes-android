@@ -82,4 +82,7 @@
     <string name="widget_all_notes_title">Όλες οι σημειώσεις</string>
     <string name="widget_single_note_title">Απλή σημείωση</string>
 
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>
+
     </resources>
