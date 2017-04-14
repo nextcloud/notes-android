@@ -8,6 +8,11 @@
         android:checkable="true"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/menu_category"
+        android:orderInCategory="60"
+        android:title="@string/menu_change_category"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/menu_preview"
         android:icon="@drawable/ic_eye_white_24dp"
         android:orderInCategory="80"
