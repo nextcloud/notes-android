@@ -70,13 +70,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_create_save:
-                editTextField.setEnabled(false);
-                String content = editTextField.getText().toString();
-                NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(this);
-                Intent data = new Intent();
-                data.putExtra(NotesListViewActivity.CREATED_NOTE, db.getNote(db.addNoteAndSync(content)));
-                setResult(RESULT_OK, data);
-                finish();
+                saveAndClose(false);
                 return true;
             case R.id.action_create_cancel:
                 finish();
@@ -84,5 +78,26 @@ public class CreateNoteActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        saveAndClose(true);
+    }
+
+    /**
+     * Saves as new note and closes the Activity.
+     * @param implicit If <code>true</code>, the note is only saved if non-empty.
+     */
+    private void saveAndClose(boolean implicit) {
+        editTextField.setEnabled(false);
+        String content = editTextField.getText().toString();
+        if(!implicit || !content.isEmpty()) {
+            NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(this);
+            Intent data = new Intent();
+            data.putExtra(NotesListViewActivity.CREATED_NOTE, db.getNote(db.addNoteAndSync(content)));
+            setResult(RESULT_OK, data);
+        }
+        finish();
     }
 }
