@@ -41,6 +41,7 @@
     <string name="settings_url_warn_http">WARNING: "http" is unsafe. Please use "https".</string>
     <string name="settings_username">Username</string>
     <string name="settings_password">Password</string>
+    <string name="settings_password_unchanged">Password (not changed)</string>
     <string name="settings_password_check_description">Shows if the credentials are correct.</string>
     <string name="settings_submit">Connect</string>
     <string name="settings_submitting">Connecting &#8230;</string>
