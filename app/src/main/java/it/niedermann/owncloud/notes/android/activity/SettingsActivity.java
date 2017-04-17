@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -43,6 +44,8 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText field_url = null;
     private EditText field_username = null;
     private EditText field_password = null;
+    private TextInputLayout password_wrapper = null;
+    private String old_password = "";
     private Button btn_submit = null;
     private boolean first_run = false;
     private boolean showNotification = false;
@@ -77,6 +80,7 @@ public class SettingsActivity extends AppCompatActivity {
         field_url = (EditText) findViewById(R.id.settings_url);
         field_username = (EditText) findViewById(R.id.settings_username);
         field_password = (EditText) findViewById(R.id.settings_password);
+        password_wrapper = (TextInputLayout) findViewById(R.id.settings_password_wrapper);
         btn_submit = (Button) findViewById(R.id.settings_submit);
 
         field_url.addTextChangedListener(new TextWatcher() {
@@ -130,7 +134,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Load current Preferences
         field_url.setText(preferences.getString(SETTINGS_URL, DEFAULT_SETTINGS));
         field_username.setText(preferences.getString(SETTINGS_USERNAME, DEFAULT_SETTINGS));
-        field_password.setText(preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS));
+        old_password = preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS);
 
         field_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -139,6 +143,13 @@ public class SettingsActivity extends AppCompatActivity {
                 return true;
             }
         });
+        field_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                setPasswordHint(hasFocus);
+            }
+        });
+        setPasswordHint(false);
 
         btn_submit.setEnabled(false);
         btn_submit.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +159,12 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setPasswordHint(boolean hasFocus) {
+        boolean unchangedHint = !hasFocus && field_password.getText().toString().isEmpty() && !old_password.isEmpty();
+        password_wrapper.setHint(getString(unchangedHint ? R.string.settings_password_unchanged : R.string.settings_password));
+    }
+
     /**
      * Prevent pressing back button on first run
      */
@@ -162,6 +179,9 @@ public class SettingsActivity extends AppCompatActivity {
         String url = field_url.getText().toString().trim();
         String username = field_username.getText().toString();
         String password = field_password.getText().toString();
+        if(password.isEmpty()) {
+            password = old_password;
+        }
 
         if (!url.endsWith("/")) {
             url += "/";
@@ -243,11 +263,7 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.putString(SETTINGS_PASSWORD, password);
                 editor.apply();
 
-                //NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(getApplicationContext());
-                //db.synchronizeWithServer();
-
                 final Intent data = new Intent();
-                //FIXME send correct note back to NotesListView
                 data.putExtra(NotesListViewActivity.CREDENTIALS_CHANGED, CREDENTIALS_CHANGED);
                 setResult(RESULT_OK, data);
                 finish();
