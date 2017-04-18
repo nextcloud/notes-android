@@ -57,7 +57,7 @@
     <string name="error_json">A aplicação Notes está ativada no servidor?</string>
     <string name="error_io">não existe conexão com o servidor </string>
     <string name="error_no_network">não existe conexão de rede</string>
-    <string name="error_server">URL/Servidor tem erros</string>
+    <string name="error_server">URL do servidor tem erros</string>
     <string name="error_url_malformed">Endereço incorreto do servidor</string>
     <string name="error_username_password_invalid">Nome de usuário ou senha errados</string>
 

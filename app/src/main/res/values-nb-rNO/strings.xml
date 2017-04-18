@@ -54,6 +54,7 @@
     <!-- Error -->
     <string name="error_sync">Synkronisering feilet: %1$s</string>
     <string name="error_invalid_login">Ugyldig pålogging: %1$s</string>
+    <string name="error_json">er Notis-programmet aktivert på tjeneren?</string>
     <string name="error_io">tilkoblingen til tjener er avbrutt</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
     <string name="error_server">URL/Tjener er feil</string>
