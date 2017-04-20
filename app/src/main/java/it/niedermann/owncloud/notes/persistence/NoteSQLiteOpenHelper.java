@@ -199,7 +199,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_category, note.getCategory());
         values.put(key_etag, note.getEtag());
         long id = db.insert(table_notes, null, values);
-        db.close();
         return id;
     }
 
@@ -313,7 +312,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_status, note.getStatus().getTitle());
         values.put(key_favorite, note.isFavorite()?"1":"0");
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
-        db.close();
         if(callback!=null) {
             serverSyncHelper.addCallbackPush(callback);
         }
@@ -344,7 +342,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_modified, newNote.getModified(DATE_FORMAT));
         values.put(key_content, newNote.getContent());
         int rows = db.update(table_notes, values, key_id + " = ? AND " + key_content + " != ?", new String[]{String.valueOf(newNote.getId()), newNote.getContent()});
-        db.close();
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if(rows > 0) {
             if(callback!=null) {
@@ -405,7 +402,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             whereArgs = new String[]{String.valueOf(id), DBStatus.VOID.getTitle(), remoteNote.getModified(DATE_FORMAT), remoteNote.getTitle(), remoteNote.isFavorite()?"1":"0", remoteNote.getCategory(), remoteNote.getEtag(), remoteNote.getContent()};
         }
         int i = db.update(table_notes, values, whereClause, whereArgs);
-        db.close();
         Log.d(getClass().getSimpleName(), "updateNote: "+remoteNote+" || forceUnchangedDBNoteState: "+forceUnchangedDBNoteState+"  => "+i+" rows updated");
         return i;
     }
@@ -426,7 +422,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 values,
                 key_id + " = ?",
                 new String[]{String.valueOf(id)});
-        db.close();
         getNoteServerSyncHelper().scheduleSync(true);
         return i;
     }
@@ -443,6 +438,5 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         db.delete(table_notes,
                 key_id + " = ? AND " + key_status + " = ?",
                 new String[]{String.valueOf(id), forceDBStatus.getTitle()});
-        db.close();
     }
 }
