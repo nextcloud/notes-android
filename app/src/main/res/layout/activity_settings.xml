@@ -8,6 +8,14 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
 
+    <TextView
+        android:id="@+id/settings_server_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_server_header"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/settings_url_wrapper"
         android:layout_width="match_parent"
@@ -70,6 +78,15 @@
         android:shadowColor="@color/fg_default_low"
         android:text="@string/settings_submit" />
 
+    <TextView
+        android:id="@+id/settings_notification_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="@string/settings_notification_header"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
     <CheckBox
         android:id="@+id/settings_notification"
         android:layout_width="wrap_content"
@@ -77,4 +94,25 @@
         android:defaultValue="false"
         android:key="notificationCheckbox"
         android:text="@string/settings_notification" />
+
+    <TextView
+        android:id="@+id/settings_cert_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:text="@string/settings_cert_header"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/settings_cert_trust_system"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_cert_trust_system" />
+
+    <Button
+        android:id="@+id/settings_cert_reset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_cert_reset" />
 </LinearLayout>

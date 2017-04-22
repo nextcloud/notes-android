@@ -35,6 +35,7 @@
     <string name="listview_updated_earlier">Früher</string>
 
     <!-- Settings -->
+    <string name="settings_server_header">Server Einstellungen</string>
     <string name="settings_server">Server</string>
     <string name="settings_url">Server-Adresse</string>
     <string name="settings_url_check_description">Zeigt an, ob die angegebene URL erreichbar ist.</string>
@@ -44,7 +45,16 @@
     <string name="settings_password_check_description">Zeigt an, ob die angegebenen Zugangsdaten korrekt sind.</string>
     <string name="settings_submit">Verbinden</string>
     <string name="settings_submitting">Verbindet&#8230;</string>
+    <string name="settings_notification_header">Benachrichtigung</string>
     <string name="settings_notification">Aktivieren, um eine dauerhafte Benachrichtigung zur schnellen Eingabe von Notizen anzuzeigen.</string>
+    <string name="settings_cert_header">Zertifikate</string>
+    <string name="settings_cert_trust_system">Zertifikaten aus System Trust Store vertrauen.</string>
+    <string name="settings_cert_reset">Bisher akzeptierte/abgelehnte Zertifikate zurücksetzen</string>
+    <string name="settings_cert_reset_toast">Informationen über Zertifikate zurückgesetzt.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Notizen - Verbindungssicherheit</string>
+    <string name="trust_certificate_unknown_certificate_found">Der Server nutzt ein unbekanntes Zertifikat. Soll diesem Zertifikat vertraut werden?</string>
 
     <!-- Network -->
     <string name="network_connecting">Verbinde</string>

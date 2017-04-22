@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.util;
 
+import android.content.Context;
 import android.util.Base64;
 import android.util.Log;
 
@@ -13,12 +14,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.model.CloudNote;
 
 public class NotesClient {
@@ -78,9 +79,9 @@ public class NotesClient {
         return new CloudNote(id, modified, title, content, favorite, category, etag);
     }
 
-    public List<CloudNote> getNotes() throws JSONException, IOException {
+    public List<CloudNote> getNotes(Context ctx) throws JSONException, IOException {
         List<CloudNote> notesList = new ArrayList<>();
-        JSONArray notes = new JSONArray(requestServer("notes", METHOD_GET, null));
+        JSONArray notes = new JSONArray(requestServer(ctx, "notes", METHOD_GET, null));
         for (int i = 0; i < notes.length(); i++) {
             JSONObject json = notes.getJSONObject(i);
             notesList.add(getNoteFromJSON(json));
@@ -97,17 +98,17 @@ public class NotesClient {
      * @throws IOException
      */
     @SuppressWarnings("unused")
-    public CloudNote getNoteById(long id) throws JSONException, IOException {
-        JSONObject json = new JSONObject(requestServer("notes/" + id, METHOD_GET, null));
+    public CloudNote getNoteById(Context ctx, long id) throws JSONException, IOException {
+        JSONObject json = new JSONObject(requestServer(ctx, "notes/" + id, METHOD_GET, null));
         return getNoteFromJSON(json);
     }
 
-    private CloudNote putNote(CloudNote note, String path, String method)  throws JSONException, IOException {
+    private CloudNote putNote(Context ctx, CloudNote note, String path, String method)  throws JSONException, IOException {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(key_content, note.getContent());
         paramObject.accumulate(key_modified, note.getModified().getTimeInMillis()/1000);
         paramObject.accumulate(key_favorite, note.isFavorite());
-        JSONObject json = new JSONObject(requestServer(path, method, paramObject));
+        JSONObject json = new JSONObject(requestServer(ctx, path, method, paramObject));
         return getNoteFromJSON(json);
     }
 
@@ -119,17 +120,17 @@ public class NotesClient {
      * @throws JSONException
      * @throws IOException
      */
-    public CloudNote createNote(CloudNote note) throws JSONException, IOException {
-        return putNote(note, "notes", METHOD_POST);
+    public CloudNote createNote(Context ctx, CloudNote note) throws JSONException, IOException {
+        return putNote(ctx, note, "notes", METHOD_POST);
     }
 
-    public CloudNote editNote(CloudNote note) throws JSONException, IOException {
-        return putNote(note, "notes/" + note.getRemoteId(), METHOD_PUT);
+    public CloudNote editNote(Context ctx, CloudNote note) throws JSONException, IOException {
+        return putNote(ctx, note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
-    public void deleteNote(long noteId) throws
+    public void deleteNote(Context ctx, long noteId) throws
             IOException {
-        this.requestServer("notes/" + noteId, METHOD_DELETE, null);
+        this.requestServer(ctx, "notes/" + noteId, METHOD_DELETE, null);
     }
 
     /**
@@ -142,34 +143,39 @@ public class NotesClient {
      * @throws MalformedURLException
      * @throws IOException
      */
-    private String requestServer(String target, String method, JSONObject params)
+    private String requestServer(Context ctx, String target, String method, JSONObject params)
             throws IOException {
         StringBuffer result = new StringBuffer();
         String targetURL = url + "index.php/apps/notes/api/v0.2/" + target;
-        HttpURLConnection con = (HttpURLConnection) new URL(targetURL)
-                .openConnection();
-        con.setRequestMethod(method);
-        con.setRequestProperty(
-                "Authorization",
-                "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
-        con.setConnectTimeout(10 * 1000); // 10 seconds
-        Log.d(getClass().getSimpleName(), method + " " + targetURL);
-        if (params != null) {
-            byte[] paramData = params.toString().getBytes();
-            Log.d(getClass().getSimpleName(), "Params: "+params);
-            con.setFixedLengthStreamingMode(paramData.length);
-            con.setRequestProperty("Content-Type", application_json);
-            con.setDoOutput(true);
-            OutputStream os = con.getOutputStream();
-            os.write(paramData);
-            os.flush();
-            os.close();
+        CustomCertManager ccm = SupportUtil.getCertManager(ctx);
+        try {
+            HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, targetURL);
+            con.setRequestMethod(method);
+            con.setRequestProperty(
+                    "Authorization",
+                    "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
+            con.setConnectTimeout(10 * 1000); // 10 seconds
+            Log.d(getClass().getSimpleName(), method + " " + targetURL);
+            if (params != null) {
+                byte[] paramData = params.toString().getBytes();
+                Log.d(getClass().getSimpleName(), "Params: " + params);
+                con.setFixedLengthStreamingMode(paramData.length);
+                con.setRequestProperty("Content-Type", application_json);
+                con.setDoOutput(true);
+                OutputStream os = con.getOutputStream();
+                os.write(paramData);
+                os.flush();
+                os.close();
+            }
+            BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+        } finally {
+            ccm.close();
         }
-        BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String line;
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
+
         return result.toString();
     }
 }
