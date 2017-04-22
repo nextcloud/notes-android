@@ -1,0 +1,3 @@
+[submodule "cert4android"]
+	path = cert4android
+	url = https://gitlab.com/bitfireAT/cert4android.git

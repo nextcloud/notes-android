@@ -15,9 +15,9 @@ public class NotesClientUtilTest extends TestCase {
     }
 
     public void testIsValidURLTest() {
-        assertTrue(NotesClientUtil.isValidURL("https://demo.owncloud.org/"));
-        assertFalse(NotesClientUtil.isValidURL("https://www.example.com/"));
-        assertFalse(NotesClientUtil.isValidURL("htp://www.example.com/"));
-        assertFalse(NotesClientUtil.isValidURL(null));
+        assertTrue(NotesClientUtil.isValidURL(null, "https://demo.owncloud.org/"));
+        assertFalse(NotesClientUtil.isValidURL(null, "https://www.example.com/"));
+        assertFalse(NotesClientUtil.isValidURL(null, "htp://www.example.com/"));
+        assertFalse(NotesClientUtil.isValidURL(null, null));
     }
 }

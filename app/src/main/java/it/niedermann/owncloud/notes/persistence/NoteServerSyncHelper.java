@@ -222,7 +222,7 @@ public class NoteServerSyncHelper {
                             if (note.getRemoteId()>0) {
                                 Log.d(getClass().getSimpleName(), "   ...try to edit");
                                 try {
-                                    remoteNote = client.editNote(note);
+                                    remoteNote = client.editNote(appContext, note);
                                 } catch(FileNotFoundException e) {
                                     // Note does not exists anymore
                                 }
@@ -231,7 +231,7 @@ public class NoteServerSyncHelper {
                             // Please note, thas dbHelper.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
                                 Log.d(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
-                                remoteNote = client.createNote(note);
+                                remoteNote = client.createNote(appContext, note);
                             }
                             dbHelper.updateNote(note.getId(), remoteNote, note);
                             break;
@@ -239,7 +239,7 @@ public class NoteServerSyncHelper {
                             if(note.getRemoteId()>0) {
                                 Log.d(getClass().getSimpleName(), "   ...delete (from server and local)");
                                 try {
-                                    client.deleteNote(note.getRemoteId());
+                                    client.deleteNote(appContext, note.getRemoteId());
                                 } catch (FileNotFoundException e) {
                                     Log.d(getClass().getSimpleName(), "   ...Note does not exist on server (anymore?) -> delete locally");
                                 }
@@ -267,7 +267,7 @@ public class NoteServerSyncHelper {
             LoginStatus status = null;
             try {
                 Map<Long, Long> idMap = dbHelper.getIdMap();
-                List<CloudNote> remoteNotes = client.getNotes();
+                List<CloudNote> remoteNotes = client.getNotes(appContext);
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
                 for (CloudNote remoteNote : remoteNotes) {

@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
@@ -47,8 +48,10 @@ public class SettingsActivity extends AppCompatActivity {
     private TextInputLayout password_wrapper = null;
     private String old_password = "";
     private Button btn_submit = null;
+    private Button btn_cert_reset = null;
     private boolean first_run = false;
     private boolean showNotification = false;
+    private boolean trustSystemCerts = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,29 @@ public class SettingsActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putBoolean("showNotification", isChecked);
                 editor.commit();
+            }
+        });
+
+        trustSystemCerts = preferences.getBoolean("trustSystemCerts", true);
+        cb = (CheckBox)findViewById(R.id.settings_cert_trust_system);
+        cb.setChecked(trustSystemCerts);
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("trustSystemCerts", isChecked);
+                editor.commit();
+            }
+        });
+
+        btn_cert_reset = (Button) findViewById(R.id.settings_cert_reset);
+        btn_cert_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CustomCertManager ccm = new CustomCertManager(getApplicationContext(), true);
+                ccm.resetCertificates();
+                ccm.close();
+                Toast.makeText(getApplicationContext(), getString(R.string.settings_cert_reset_toast), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -215,7 +241,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            return NotesClientUtil.isValidURL(params[0]);
+            return NotesClientUtil.isValidURL(getApplicationContext(), params[0]);
         }
 
         @Override
@@ -251,7 +277,7 @@ public class SettingsActivity extends AppCompatActivity {
             url = params[0];
             username = params[1];
             password = params[2];
-            return NotesClientUtil.isValidLogin(url, username, password);
+            return NotesClientUtil.isValidLogin(getApplicationContext(), url, username, password);
         }
 
         @Override

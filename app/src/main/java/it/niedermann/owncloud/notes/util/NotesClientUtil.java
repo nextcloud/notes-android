@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.util;
 
+import android.content.Context;
 import android.util.Base64;
 import android.util.Log;
 
@@ -12,8 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 
+import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
 
 /**
@@ -52,11 +53,11 @@ public class NotesClientUtil {
      * @param password String
      * @return Username and Password are a valid Login-Combination for the given URL.
      */
-    public static LoginStatus isValidLogin(String url, String username, String password) {
+    public static LoginStatus isValidLogin(Context ctx, String url, String username, String password) {
+        CustomCertManager ccm = SupportUtil.getCertManager(ctx);
         try {
             String targetURL = url + "index.php/apps/notes/api/v0.2/notes";
-            HttpURLConnection con = (HttpURLConnection) new URL(targetURL)
-                    .openConnection();
+            HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, targetURL);
             con.setRequestMethod("GET");
             con.setRequestProperty(
                     "Authorization",
@@ -89,6 +90,8 @@ public class NotesClientUtil {
         } catch (JSONException e) {
             Log.e(NotesClientUtil.class.getSimpleName(), "Exception", e);
             return LoginStatus.JSON_FAILED;
+        } finally {
+            ccm.close();
         }
     }
 
@@ -98,11 +101,11 @@ public class NotesClientUtil {
      * @param url String URL to server
      * @return true if there is a installed instance, false if not
      */
-    public static boolean isValidURL(String url) {
+    public static boolean isValidURL(Context ctx, String url) {
         StringBuilder result = new StringBuilder();
+        CustomCertManager ccm = SupportUtil.getCertManager(ctx);
         try {
-            HttpURLConnection con = (HttpURLConnection) new URL(url + "status.php")
-                    .openConnection();
+            HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, url + "status.php");
             con.setRequestMethod(NotesClient.METHOD_GET);
             con.setConnectTimeout(10 * 1000); // 10 seconds
             BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -114,6 +117,8 @@ public class NotesClientUtil {
             return response.getBoolean("installed");
         } catch (IOException | JSONException | NullPointerException e) {
             return false;
+        } finally {
+            ccm.close();
         }
     }
 
