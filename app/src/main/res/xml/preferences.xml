@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/settings_server">
+        <Preference android:title="@string/settings_server_settings">
+            <intent android:targetPackage="it.niedermann.owncloud.notes"
+                    android:targetClass="it.niedermann.owncloud.notes.android.activity.SettingsActivity" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_notification_category">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="showNotification"
+            android:title="@string/settings_notification" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_cert_category">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="trustSystemCerts"
+            android:title="@string/settings_cert_trust_system" />
+        <Preference
+            android:key="resetTrust"
+            android:title="@string/settings_cert_reset" />
+    </PreferenceCategory>
+</PreferenceScreen>

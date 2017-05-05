@@ -384,7 +384,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         int id = item.getItemId();
         switch (id) {
             case R.id.action_settings:
-                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                Intent settingsIntent = new Intent(this, PreferencesActivity.class);
                 startActivityForResult(settingsIntent, server_settings);
                 return true;
             case R.id.action_about:
