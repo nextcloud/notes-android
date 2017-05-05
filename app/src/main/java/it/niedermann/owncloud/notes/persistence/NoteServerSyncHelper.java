@@ -1,13 +1,16 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -75,6 +79,16 @@ public class NoteServerSyncHelper {
         }
     };
 
+    private boolean cert4androidReady = false;
+
+    public boolean isCert4androidReady() {
+        return cert4androidReady;
+    }
+
+    public void setCert4androidReady(boolean cert4androidReady) {
+        this.cert4androidReady = cert4androidReady;
+    }
+
     // current state of the synchronization
     private boolean syncActive = false;
     private boolean syncScheduled = false;
@@ -110,7 +124,7 @@ public class NoteServerSyncHelper {
      * @return true if sync is possible, otherwise false.
      */
     public boolean isSyncPossible() {
-        return networkConnected && isConfigured(appContext);
+        return networkConnected && isConfigured(appContext) && isCert4androidReady();
     }
 
 

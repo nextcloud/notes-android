@@ -1,10 +1,14 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.IBinder;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -16,9 +20,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import at.bitfire.cert4android.CustomCertService;
+import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -56,6 +61,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         this.context = context.getApplicationContext();
         serverSyncHelper = NoteServerSyncHelper.getInstance(this);
         //recreateDatabase(getWritableDatabase());
+        context.bindService(new Intent(context, CustomCertService.class), certService, Context.BIND_AUTO_CREATE);
     }
 
     public static NoteSQLiteOpenHelper getInstance(Context context) {
@@ -67,6 +73,26 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public NoteServerSyncHelper getNoteServerSyncHelper() {
         return serverSyncHelper;
+    }
+
+    private final ServiceConnection certService = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            getNoteServerSyncHelper().setCert4androidReady(true);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            getNoteServerSyncHelper().setCert4androidReady(false);
+        }
+    };
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        if (context != null && certService != null) {
+            context.unbindService(certService);
+        }
     }
 
     /**
