@@ -37,4 +37,8 @@
         <item name="android:padding">@dimen/button_padding</item>
         <item name="android:elevation">@dimen/button_elevation</item>
     </style>
+
+    <style name="SplashTheme" parent="OwnCloud">
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
 </resources>
