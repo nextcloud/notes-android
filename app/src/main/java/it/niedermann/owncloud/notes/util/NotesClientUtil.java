@@ -53,8 +53,7 @@ public class NotesClientUtil {
      * @param password String
      * @return Username and Password are a valid Login-Combination for the given URL.
      */
-    public static LoginStatus isValidLogin(Context ctx, String url, String username, String password) {
-        CustomCertManager ccm = SupportUtil.getCertManager(ctx);
+    public static LoginStatus isValidLogin(CustomCertManager ccm, String url, String username, String password) {
         try {
             String targetURL = url + "index.php/apps/notes/api/v0.2/notes";
             HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, targetURL);
@@ -90,8 +89,6 @@ public class NotesClientUtil {
         } catch (JSONException e) {
             Log.e(NotesClientUtil.class.getSimpleName(), "Exception", e);
             return LoginStatus.JSON_FAILED;
-        } finally {
-            ccm.close();
         }
     }
 
@@ -101,9 +98,8 @@ public class NotesClientUtil {
      * @param url String URL to server
      * @return true if there is a installed instance, false if not
      */
-    public static boolean isValidURL(Context ctx, String url) {
+    public static boolean isValidURL(CustomCertManager ccm, String url) {
         StringBuilder result = new StringBuilder();
-        CustomCertManager ccm = SupportUtil.getCertManager(ctx);
         try {
             HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, url + "status.php");
             con.setRequestMethod(NotesClient.METHOD_GET);
@@ -117,8 +113,6 @@ public class NotesClientUtil {
             return response.getBoolean("installed");
         } catch (IOException | JSONException | NullPointerException e) {
             return false;
-        } finally {
-            ccm.close();
         }
     }
 

@@ -21,10 +21,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
+import it.niedermann.owncloud.notes.util.SupportUtil;
 
 import static it.niedermann.owncloud.notes.R.drawable.settings;
 
@@ -48,10 +50,18 @@ public class SettingsActivity extends AppCompatActivity {
     private String old_password = "";
     private Button btn_submit = null;
     private boolean first_run = false;
+    private CustomCertManager customCertManager = null;
+
+    @Override
+    protected void finalize() throws Throwable {
+        customCertManager.close();
+        super.finalize();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        customCertManager = SupportUtil.getCertManager(getApplicationContext());
         setContentView(R.layout.activity_settings);
 
         preferences = PreferenceManager
@@ -202,7 +212,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            return NotesClientUtil.isValidURL(getApplicationContext(), params[0]);
+            return NotesClientUtil.isValidURL(customCertManager, params[0]);
         }
 
         @Override
@@ -238,7 +248,7 @@ public class SettingsActivity extends AppCompatActivity {
             url = params[0];
             username = params[1];
             password = params[2];
-            return NotesClientUtil.isValidLogin(getApplicationContext(), url, username, password);
+            return NotesClientUtil.isValidLogin(customCertManager, url, username, password);
         }
 
         @Override
