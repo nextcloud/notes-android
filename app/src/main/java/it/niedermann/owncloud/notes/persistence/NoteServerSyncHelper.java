@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Set;
 
 import at.bitfire.cert4android.CustomCertManager;
+import at.bitfire.cert4android.CustomCertService;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -34,6 +35,7 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NotesClient;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
+import it.niedermann.owncloud.notes.util.SupportUtil;
 
 /**
  * Helps to synchronize the Database to the Server.
@@ -60,6 +62,7 @@ public class NoteServerSyncHelper {
 
     private final NoteSQLiteOpenHelper dbHelper;
     private final Context appContext;
+    private final CustomCertManager customCertManager;
 
     // Track network connection changes using a BroadcastReceiver
     private boolean networkConnected = false;
@@ -80,14 +83,16 @@ public class NoteServerSyncHelper {
     };
 
     private boolean cert4androidReady = false;
-
-    public boolean isCert4androidReady() {
-        return cert4androidReady;
-    }
-
-    public void setCert4androidReady(boolean cert4androidReady) {
-        this.cert4androidReady = cert4androidReady;
-    }
+    private final ServiceConnection certService = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            cert4androidReady = true;
+        }
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            cert4androidReady = false;
+        }
+    };
 
     // current state of the synchronization
     private boolean syncActive = false;
@@ -102,14 +107,19 @@ public class NoteServerSyncHelper {
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.dbHelper = db;
         this.appContext = db.getContext().getApplicationContext();
+        this.customCertManager = SupportUtil.getCertManager(appContext);
 
         // Registers BroadcastReceiver to track network connection changes.
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        // bind to certifciate service to block sync attempts if service is not ready
+        appContext.bindService(new Intent(appContext, CustomCertService.class), certService, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     protected void finalize() throws Throwable {
         appContext.unregisterReceiver(networkReceiver);
+        appContext.unbindService(certService);
+        customCertManager.close();
         super.finalize();
     }
 
@@ -118,13 +128,14 @@ public class NoteServerSyncHelper {
     }
 
     /**
-     * Synchronization is only possible, if there is an active network connection.
+     * Synchronization is only possible, if there is an active network connection and
+     * Cert4Android service is available.
      * NoteServerSyncHelper observes changes in the network connection.
      * The current state can be retrieved with this method.
      * @return true if sync is possible, otherwise false.
      */
     public boolean isSyncPossible() {
-        return networkConnected && isConfigured(appContext) && isCert4androidReady();
+        return networkConnected && isConfigured(appContext) && cert4androidReady;
     }
 
 
@@ -236,7 +247,7 @@ public class NoteServerSyncHelper {
                             if (note.getRemoteId()>0) {
                                 Log.d(getClass().getSimpleName(), "   ...try to edit");
                                 try {
-                                    remoteNote = client.editNote(appContext, note);
+                                    remoteNote = client.editNote(customCertManager, note);
                                 } catch(FileNotFoundException e) {
                                     // Note does not exists anymore
                                 }
@@ -245,7 +256,7 @@ public class NoteServerSyncHelper {
                             // Please note, thas dbHelper.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
                                 Log.d(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
-                                remoteNote = client.createNote(appContext, note);
+                                remoteNote = client.createNote(customCertManager, note);
                             }
                             dbHelper.updateNote(note.getId(), remoteNote, note);
                             break;
@@ -253,7 +264,7 @@ public class NoteServerSyncHelper {
                             if(note.getRemoteId()>0) {
                                 Log.d(getClass().getSimpleName(), "   ...delete (from server and local)");
                                 try {
-                                    client.deleteNote(appContext, note.getRemoteId());
+                                    client.deleteNote(customCertManager, note.getRemoteId());
                                 } catch (FileNotFoundException e) {
                                     Log.d(getClass().getSimpleName(), "   ...Note does not exist on server (anymore?) -> delete locally");
                                 }
@@ -281,7 +292,7 @@ public class NoteServerSyncHelper {
             LoginStatus status = null;
             try {
                 Map<Long, Long> idMap = dbHelper.getIdMap();
-                List<CloudNote> remoteNotes = client.getNotes(appContext);
+                List<CloudNote> remoteNotes = client.getNotes(customCertManager);
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
                 for (CloudNote remoteNote : remoteNotes) {

@@ -79,9 +79,9 @@ public class NotesClient {
         return new CloudNote(id, modified, title, content, favorite, category, etag);
     }
 
-    public List<CloudNote> getNotes(Context ctx) throws JSONException, IOException {
+    public List<CloudNote> getNotes(CustomCertManager ccm) throws JSONException, IOException {
         List<CloudNote> notesList = new ArrayList<>();
-        JSONArray notes = new JSONArray(requestServer(ctx, "notes", METHOD_GET, null));
+        JSONArray notes = new JSONArray(requestServer(ccm, "notes", METHOD_GET, null));
         for (int i = 0; i < notes.length(); i++) {
             JSONObject json = notes.getJSONObject(i);
             notesList.add(getNoteFromJSON(json));
@@ -98,17 +98,17 @@ public class NotesClient {
      * @throws IOException
      */
     @SuppressWarnings("unused")
-    public CloudNote getNoteById(Context ctx, long id) throws JSONException, IOException {
-        JSONObject json = new JSONObject(requestServer(ctx, "notes/" + id, METHOD_GET, null));
+    public CloudNote getNoteById(CustomCertManager ccm, long id) throws JSONException, IOException {
+        JSONObject json = new JSONObject(requestServer(ccm, "notes/" + id, METHOD_GET, null));
         return getNoteFromJSON(json);
     }
 
-    private CloudNote putNote(Context ctx, CloudNote note, String path, String method)  throws JSONException, IOException {
+    private CloudNote putNote(CustomCertManager ccm, CloudNote note, String path, String method)  throws JSONException, IOException {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(key_content, note.getContent());
         paramObject.accumulate(key_modified, note.getModified().getTimeInMillis()/1000);
         paramObject.accumulate(key_favorite, note.isFavorite());
-        JSONObject json = new JSONObject(requestServer(ctx, path, method, paramObject));
+        JSONObject json = new JSONObject(requestServer(ccm, path, method, paramObject));
         return getNoteFromJSON(json);
     }
 
@@ -120,17 +120,17 @@ public class NotesClient {
      * @throws JSONException
      * @throws IOException
      */
-    public CloudNote createNote(Context ctx, CloudNote note) throws JSONException, IOException {
-        return putNote(ctx, note, "notes", METHOD_POST);
+    public CloudNote createNote(CustomCertManager ccm, CloudNote note) throws JSONException, IOException {
+        return putNote(ccm, note, "notes", METHOD_POST);
     }
 
-    public CloudNote editNote(Context ctx, CloudNote note) throws JSONException, IOException {
-        return putNote(ctx, note, "notes/" + note.getRemoteId(), METHOD_PUT);
+    public CloudNote editNote(CustomCertManager ccm, CloudNote note) throws JSONException, IOException {
+        return putNote(ccm, note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
-    public void deleteNote(Context ctx, long noteId) throws
+    public void deleteNote(CustomCertManager ccm, long noteId) throws
             IOException {
-        this.requestServer(ctx, "notes/" + noteId, METHOD_DELETE, null);
+        this.requestServer(ccm, "notes/" + noteId, METHOD_DELETE, null);
     }
 
     /**
@@ -143,37 +143,32 @@ public class NotesClient {
      * @throws MalformedURLException
      * @throws IOException
      */
-    private String requestServer(Context ctx, String target, String method, JSONObject params)
+    private String requestServer(CustomCertManager ccm, String target, String method, JSONObject params)
             throws IOException {
         StringBuffer result = new StringBuffer();
         String targetURL = url + "index.php/apps/notes/api/v0.2/" + target;
-        CustomCertManager ccm = SupportUtil.getCertManager(ctx);
-        try {
-            HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, targetURL);
-            con.setRequestMethod(method);
-            con.setRequestProperty(
-                    "Authorization",
-                    "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
-            con.setConnectTimeout(10 * 1000); // 10 seconds
-            Log.d(getClass().getSimpleName(), method + " " + targetURL);
-            if (params != null) {
-                byte[] paramData = params.toString().getBytes();
-                Log.d(getClass().getSimpleName(), "Params: " + params);
-                con.setFixedLengthStreamingMode(paramData.length);
-                con.setRequestProperty("Content-Type", application_json);
-                con.setDoOutput(true);
-                OutputStream os = con.getOutputStream();
-                os.write(paramData);
-                os.flush();
-                os.close();
-            }
-            BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String line;
-            while ((line = rd.readLine()) != null) {
-                result.append(line);
-            }
-        } finally {
-            ccm.close();
+        HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, targetURL);
+        con.setRequestMethod(method);
+        con.setRequestProperty(
+                "Authorization",
+                "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
+        con.setConnectTimeout(10 * 1000); // 10 seconds
+        Log.d(getClass().getSimpleName(), method + " " + targetURL);
+        if (params != null) {
+            byte[] paramData = params.toString().getBytes();
+            Log.d(getClass().getSimpleName(), "Params: " + params);
+            con.setFixedLengthStreamingMode(paramData.length);
+            con.setRequestProperty("Content-Type", application_json);
+            con.setDoOutput(true);
+            OutputStream os = con.getOutputStream();
+            os.write(paramData);
+            os.flush();
+            os.close();
+        }
+        BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String line;
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
         }
 
         return result.toString();
