@@ -2,9 +2,9 @@
 An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
 [![Build Status](https://travis-ci.org/stefan-niedermann/nextcloud-notes.svg?branch=master)](https://travis-ci.org/stefan-niedermann/nextcloud-notes)
-[![GitHub issues](https://img.shields.io/github/issues/stefan-niedermann/Owncloud-Notes.svg)](https://github.com/stefan-niedermann/Owncloud-Notes/issues)
-[![GitHub stars](https://img.shields.io/github/stars/stefan-niedermann/Owncloud-Notes.svg)](https://github.com/stefan-niedermann/Owncloud-Notes/stargazers)
-[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/stefan-niedermann/Owncloud-Notes/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/issues)
+[![GitHub stars](https://img.shields.io/github/stars/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/stefan-niedermann/nextcloud-notes/master/LICENSE)
 
 ## :arrow_forward: Access
 
@@ -25,14 +25,14 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 * English, German, Russian, Armenian, French and Serbian UI
 
 ## :checkered_flag: Planned features
-* Tablet layout ([#8](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/8))
-* Simple widget for individual note ([#5](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/5))
-* Make a widget for all notes ([#15](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/15))
-* In-note search ([#106](https://github.com/stefan-niedermann/OwnCloud-Notes/issues/106))
+* Tablet layout ([#8](https://github.com/stefan-niedermann/nextcloud-notes/issues/8))
+* Simple widget for individual note ([#5](https://github.com/stefan-niedermann/nextcloud-notes/issues/5))
+* Make a widget for all notes ([#15](https://github.com/stefan-niedermann/nextcloud-notes/issues/15))
+* In-note search ([#106](https://github.com/stefan-niedermann/nextcloud-notes/issues/106))
 
 ## :wrench: Contribution
 * Test the app with different devices
-* Write issues in the [issue tracker](https://github.com/stefan-niedermann/OwnCloud-Notes/issues)
+* Write issues in the [issue tracker](https://github.com/stefan-niedermann/nextcloud-notes/issues)
 * Provide pull requests
 * Translate this app on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
 * Buy this app on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
