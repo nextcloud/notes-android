@@ -50,7 +50,8 @@
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.PreferencesActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateVisible"
+            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+            android:windowSoftInputMode="stateHidden"
             />
 
         <activity
