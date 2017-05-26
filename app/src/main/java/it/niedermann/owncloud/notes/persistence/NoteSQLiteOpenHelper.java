@@ -251,9 +251,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public void debugPrintFullDB() {
         List<DBNote> notes = getNotesCustom("", new String[]{}, default_order);
-        Log.d(getClass().getSimpleName(), "Full Database ("+notes.size()+" notes):");
+        Log.v(getClass().getSimpleName(), "Full Database ("+notes.size()+" notes):");
         for (DBNote note : notes) {
-            Log.d(getClass().getSimpleName(), "     "+note);
+            Log.v(getClass().getSimpleName(), "     "+note);
         }
     }
 

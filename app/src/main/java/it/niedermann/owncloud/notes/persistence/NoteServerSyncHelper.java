@@ -35,6 +35,7 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NotesClient;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
+import it.niedermann.owncloud.notes.util.ServerResponse;
 import it.niedermann.owncloud.notes.util.SupportUtil;
 
 /**
@@ -218,7 +219,7 @@ public class NoteServerSyncHelper {
         @Override
         protected LoginStatus doInBackground(Void... voids) {
             client = createNotesClient(); // recreate NoteClients on every sync in case the connection settings was changed
-            Log.d(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
+            Log.i(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
             //dbHelper.debugPrintFullDB();
             LoginStatus status = LoginStatus.OK;
             pushLocalChanges();
@@ -226,7 +227,7 @@ public class NoteServerSyncHelper {
                 status = pullRemoteChanges();
             }
             //dbHelper.debugPrintFullDB();
-            Log.d(getClass().getSimpleName(), "SYNCHRONIZATION FINISHED");
+            Log.i(getClass().getSimpleName(), "SYNCHRONIZATION FINISHED");
             return status;
         }
 
@@ -242,12 +243,12 @@ public class NoteServerSyncHelper {
                     CloudNote remoteNote=null;
                     switch(note.getStatus()) {
                         case LOCAL_EDITED:
-                            Log.d(getClass().getSimpleName(), "   ...create/edit");
+                            Log.v(getClass().getSimpleName(), "   ...create/edit");
                             // if note is not new, try to edit it.
                             if (note.getRemoteId()>0) {
-                                Log.d(getClass().getSimpleName(), "   ...try to edit");
+                                Log.v(getClass().getSimpleName(), "   ...try to edit");
                                 try {
-                                    remoteNote = client.editNote(customCertManager, note);
+                                    remoteNote = client.editNote(customCertManager, note).getNote();
                                 } catch(FileNotFoundException e) {
                                     // Note does not exists anymore
                                 }
@@ -255,21 +256,21 @@ public class NoteServerSyncHelper {
                             // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
                             // Please note, thas dbHelper.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
-                                Log.d(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
-                                remoteNote = client.createNote(customCertManager, note);
+                                Log.v(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
+                                remoteNote = client.createNote(customCertManager, note).getNote();
                             }
                             dbHelper.updateNote(note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if(note.getRemoteId()>0) {
-                                Log.d(getClass().getSimpleName(), "   ...delete (from server and local)");
+                                Log.v(getClass().getSimpleName(), "   ...delete (from server and local)");
                                 try {
                                     client.deleteNote(customCertManager, note.getRemoteId());
                                 } catch (FileNotFoundException e) {
-                                    Log.d(getClass().getSimpleName(), "   ...Note does not exist on server (anymore?) -> delete locally");
+                                    Log.v(getClass().getSimpleName(), "   ...Note does not exist on server (anymore?) -> delete locally");
                                 }
                             } else {
-                                Log.d(getClass().getSimpleName(), "   ...delete (only local, since it was not synchronized)");
+                                Log.v(getClass().getSimpleName(), "   ...delete (only local, since it was not synchronized)");
                             }
                             // Please note, thas dbHelper.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             dbHelper.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
@@ -289,20 +290,26 @@ public class NoteServerSyncHelper {
          */
         private LoginStatus pullRemoteChanges() {
             Log.d(getClass().getSimpleName(), "pullRemoteChanges()");
-            LoginStatus status = null;
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+            String lastETag = preferences.getString(SettingsActivity.SETTINGS_KEY_ETAG, null);
+            long lastModified = preferences.getLong(SettingsActivity.SETTINGS_KEY_LAST_MODIFIED, 0);
+            LoginStatus status;
             try {
                 Map<Long, Long> idMap = dbHelper.getIdMap();
-                List<CloudNote> remoteNotes = client.getNotes(customCertManager);
+                ServerResponse.NotesResponse response = client.getNotes(customCertManager, lastModified, lastETag);
+                List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
                 for (CloudNote remoteNote : remoteNotes) {
-                    Log.d(getClass().getSimpleName(), "   Process Remote Note: "+remoteNote);
+                    Log.v(getClass().getSimpleName(), "   Process Remote Note: "+remoteNote);
                     remoteIDs.add(remoteNote.getRemoteId());
-                    if(idMap.containsKey(remoteNote.getRemoteId())) {
-                        Log.d(getClass().getSimpleName(), "   ... found -> Update");
+                    if(remoteNote.getModified()==null) {
+                        Log.v(getClass().getSimpleName(), "   ... unchanged");
+                    } else if(idMap.containsKey(remoteNote.getRemoteId())) {
+                        Log.v(getClass().getSimpleName(), "   ... found -> Update");
                         dbHelper.updateNote(idMap.get(remoteNote.getRemoteId()), remoteNote, null);
                     } else {
-                        Log.d(getClass().getSimpleName(), "   ... create");
+                        Log.v(getClass().getSimpleName(), "   ... create");
                         dbHelper.addNote(remoteNote);
                     }
                 }
@@ -310,10 +317,29 @@ public class NoteServerSyncHelper {
                 // remove remotely deleted notes (only those without local changes)
                 for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
                     if(!remoteIDs.contains(entry.getKey())) {
-                        Log.d(getClass().getSimpleName(), "   ... remove "+entry.getValue());
+                        Log.v(getClass().getSimpleName(), "   ... remove "+entry.getValue());
                         dbHelper.deleteNote(entry.getValue(), DBStatus.VOID);
                     }
                 }
+                status = LoginStatus.OK;
+
+                // update ETag and Last-Modified in order to reduce size of next response
+                SharedPreferences.Editor editor = preferences.edit();
+                String etag = response.getETag();
+                if(etag!=null && !etag.isEmpty()) {
+                    editor.putString(SettingsActivity.SETTINGS_KEY_ETAG, etag);
+                } else {
+                    editor.remove(SettingsActivity.SETTINGS_KEY_ETAG);
+                }
+                long modified = response.getLastModified();
+                if(modified!=0) {
+                    editor.putLong(SettingsActivity.SETTINGS_KEY_LAST_MODIFIED, modified);
+                } else {
+                    editor.remove(SettingsActivity.SETTINGS_KEY_LAST_MODIFIED);
+                }
+                editor.apply();
+            } catch (ServerResponse.NotModifiedException e) {
+                Log.d(getClass().getSimpleName(), "No changes, nothing to do.");
                 status = LoginStatus.OK;
             } catch (IOException e) {
                 Log.e(getClass().getSimpleName(), "Exception", e);

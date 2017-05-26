@@ -39,6 +39,8 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String SETTINGS_URL = "settingsUrl";
     public static final String SETTINGS_USERNAME = "settingsUsername";
     public static final String SETTINGS_PASSWORD = "settingsPassword";
+    public static final String SETTINGS_KEY_ETAG = "notes_last_etag";
+    public static final String SETTINGS_KEY_LAST_MODIFIED = "notes_last_modified";
     public static final String DEFAULT_SETTINGS = "";
     public static final int CREDENTIALS_CHANGED = 3;
 
@@ -258,6 +260,8 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.putString(SETTINGS_URL, url);
                 editor.putString(SETTINGS_USERNAME, username);
                 editor.putString(SETTINGS_PASSWORD, password);
+                editor.remove(SETTINGS_KEY_ETAG);
+                editor.remove(SETTINGS_KEY_LAST_MODIFIED);
                 editor.apply();
 
                 final Intent data = new Intent();
