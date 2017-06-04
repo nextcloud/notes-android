@@ -52,6 +52,7 @@
     <string name="network_disconnected">Kein Netzwerk verfügbar</string>
 
     <!-- Error -->
+    <string name="error_sync_not_possible">Bitte Netzwerk verbinden und Account einstellen</string>
     <string name="error_sync">Synchronisation fehlgeschlagen: %1$s</string>
     <string name="error_invalid_login">Login fehlgeschlagen: %1$s</string>
     <string name="error_json">ist die Notes-App auf dem Server aktiviert?</string>
