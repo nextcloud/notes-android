@@ -333,7 +333,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 if(!active && isCurrentlyActive) {
                     active=true;
-                    vibrator.vibrate(20);
+                    vibrator.vibrate(100);
                     Log.v(getClass().getSimpleName(), "vibrate");
                 }
                 ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
