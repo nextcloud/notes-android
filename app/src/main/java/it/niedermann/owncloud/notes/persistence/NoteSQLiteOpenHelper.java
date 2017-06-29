@@ -113,6 +113,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        recreateDatabase(db);
+    }
+
     private void clearDatabase(SQLiteDatabase db) {
         db.delete(table_notes, null, null);
     }
