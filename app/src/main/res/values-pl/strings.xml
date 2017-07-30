@@ -35,16 +35,27 @@
     <string name="listview_updated_earlier">Wcześniej</string>
 
     <!-- Settings -->
+    <string name="settings_server_settings">Ustawienia Konta</string>
     <string name="settings_server">Serwer</string>
     <string name="settings_url">Adres serwera</string>
     <string name="settings_url_check_description">Pokazuje czy adres może zostać pingnięty.</string>
     <string name="settings_url_warn_http">OSTRZEŻENIE: \"http\" nie jest bezpieczne. Proszę użyć \"https\".</string>
     <string name="settings_username">Nazwa użytkownika</string>
     <string name="settings_password">Hasło</string>
+    <string name="settings_password_unchanged">Hasło (nie zmienione)</string>
     <string name="settings_password_check_description">Pokazuje czy dane dostępowe są poprawne.</string>
     <string name="settings_submit">Połącz</string>
     <string name="settings_submitting">Łączenie &#8230;</string>
+    <string name="settings_notification_category">Notyfikacja</string>
     <string name="settings_notification">Włącz, aby pokazać stałe powiadomienie do szybkiego tworzenia nowych notatek.</string>
+    <string name="settings_cert_category">Certyfikaty</string>
+    <string name="settings_cert_trust_system">Zaufane certyfikaty z systemowego magazynu</string>
+    <string name="settings_cert_reset">Resetuj zaufany magazyn</string>
+    <string name="settings_cert_reset_toast">Wyczyszczono przechowywane zaufane informacje.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Notatki - Bezpieczeństwo połączenia</string>
+    <string name="trust_certificate_unknown_certificate_found">Notatki napotkały niezaufany certyfikat. Chcesz mu zaufać?</string>
 
     <!-- Network -->
     <string name="network_connecting">Łączenie</string>

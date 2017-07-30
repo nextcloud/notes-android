@@ -35,16 +35,27 @@
     <string name="listview_updated_earlier">Daha eski</string>
 
     <!-- Settings -->
+    <string name="settings_server_settings">Hesap Ayarları</string>
     <string name="settings_server">Sunucu</string>
     <string name="settings_url">Sunucu adresi</string>
     <string name="settings_url_check_description">Adresin pinglenebildiğini gösterir.</string>
     <string name="settings_url_warn_http">UYARI: \"http\" güvenli değildir. Lütfen \"https\" kullanın.</string>
     <string name="settings_username">Kullanıcı Adı</string>
     <string name="settings_password">Parola</string>
+    <string name="settings_password_unchanged">Parola (değiştirilmedi)</string>
     <string name="settings_password_check_description">Oturum açma bilgilerinin doğru olduğunu gösterir.</string>
     <string name="settings_submit">Bağlan</string>
     <string name="settings_submitting">Bağlanılıyor &#8230;</string>
+    <string name="settings_notification_category">Bildirim</string>
     <string name="settings_notification">Hızlıca not eklemek için ısrarlı bir bildirim görüntülensin.</string>
+    <string name="settings_cert_category">Sertifikalar</string>
+    <string name="settings_cert_trust_system">Sistem güvenlik kasasındaki sertifikalara güvenilsin.</string>
+    <string name="settings_cert_reset">Güvenlik kasasını sıfırla</string>
+    <string name="settings_cert_reset_toast">Kasadaki güvenlik bilgileri silindi.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Notlar - Bağlantı güvenliği</string>
+    <string name="trust_certificate_unknown_certificate_found">Notlar bilinmeyen bir sertifika kullanıyor. Bu sertifikaya güvenmek ister misiniz?</string>
 
     <!-- Network -->
     <string name="network_connecting">Bağlanılıyor</string>
@@ -59,7 +70,7 @@
     <string name="error_no_network">ağ bağlantısı yok</string>
     <string name="error_server">Adres/Sunucu sorunu</string>
     <string name="error_url_malformed">Sunucu adresi yanlış</string>
-    <string name="error_username_password_invalid">Kullanıcı adı ya da parola hatalı</string>
+    <string name="error_username_password_invalid">Kullanıcı adı ya da parola yanlış</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Ayarlar</string>

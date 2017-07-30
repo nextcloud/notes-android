@@ -35,16 +35,27 @@
     <string name="listview_updated_earlier">Νωρίτερα</string>
 
     <!-- Settings -->
+    <string name="settings_server_settings">Ρυθμίσεις λογαριασμού</string>
     <string name="settings_server">Διακομιστής</string>
     <string name="settings_url">Διεύθυνση διακομιστή</string>
     <string name="settings_url_check_description">Εμφανίζει εάν μπορεί να γίνει ping στην διεύθυνση.</string>
     <string name="settings_url_warn_http">ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Το \"http\" δεν είναι ασφαλές. Παρακαλούμε χρησιμοποιήστε το \"https\".</string>
     <string name="settings_username">Όνομα χρήστη</string>
     <string name="settings_password">Συνθηματικό</string>
+    <string name="settings_password_unchanged">Συνθηματικό (δεν άλλαξε)</string>
     <string name="settings_password_check_description">Εμφανίζει εάν τα διαπιστευτήρια είναι σωστά.</string>
     <string name="settings_submit">Σύνδεση</string>
     <string name="settings_submitting">Συνδέεται &#8230;</string>
+    <string name="settings_notification_category">Ειδοποιήσεις</string>
     <string name="settings_notification">Ενεργοποίηση για εμφάνιση μόνιμης ειδοποίησης για γρήγορη δημιουργία νέων σημειώσεων.</string>
+    <string name="settings_cert_category">Πιστοποιητικά</string>
+    <string name="settings_cert_trust_system">Πιστοποιητικά αξιοπιστίας από το κατάστημα εμπιστοσύνης συστήματος.</string>
+    <string name="settings_cert_reset">Επαναφορά αποθήκης έμπιστων πιστοποιητικών</string>
+    <string name="settings_cert_reset_toast">Οι αποθηκευμένες πληροφορίες εμπιστοσύνης εκκαθαρίστηκαν.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Σημειώσεις - Ασφάλεια σύνδεσης</string>
+    <string name="trust_certificate_unknown_certificate_found">Οι Σημειώσεις έχουν συναντήσει ένα άγνωστο πιστοποιητικό. Θέλετε να το εμπιστεύεστε;</string>
 
     <!-- Network -->
     <string name="network_connecting">Συνδέεται</string>
@@ -54,9 +65,10 @@
     <!-- Error -->
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_invalid_login">Μη έγκυρη είσοδος: %1$s</string>
-    <string name="error_io">η σύνδεση διακομιστή είναι προβληματική</string>
+    <string name="error_json">Είναι η εφαρμογή Σημειώσεις ενεργοποιημένη στον εξυπηρετητή Nextcloud;</string>
+    <string name="error_io">η σύνδεση του διακομιστή είναι προβληματική</string>
     <string name="error_no_network">δεν υπάρχει σύνδεση δικτύου</string>
-    <string name="error_server">Σφάλματα URL/Διακομιστή</string>
+    <string name="error_server">URL/Διακομιστής έχει σφάλματα</string>
     <string name="error_url_malformed">Εσφαλμένη διεύθυνση διακομιστή</string>
     <string name="error_username_password_invalid">Εσφαλμένο όνομα χρήστη ή συνθηματικό</string>
 
@@ -65,16 +77,23 @@
 
     <!-- About -->
     <string name="about_version_title">Έκδοση</string>
+    <string name="about_version">Προς το παρόν χρησιμοποιείτε &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Συντηρητής</string>
     <string name="about_developers_title">Προγραμματιστές</string>
     <string name="about_translators_title">Μεταφραστές</string>
+    <string name="about_translators_transifex">Nextcloud κοινότητα στο &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Δοκιμαστές</string>
     <string name="about_source_title">Πηγαίος κώδικας</string>
-    <string name="about_issues_title">Θεματα</string>
+    <string name="about_source">Το project φιλοξενείται στο Github: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Ζητήματα</string>
+    <string name="about_issues">Μπορείτε να αναφέρετε σφάλματα, να προτείνετε βελτιώσεις και να κάνετε αιτήματα χαρακτηριστικών στο Github &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Μετάφρασε</string>
+    <string name="about_translate">Λάβε μέρος στην ομάδα του Nextcloud στο Transifex και βοήθησε μας να μεταφράσουμε αυτή την εφαρμογή: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Άδεια χρήσης εφαρμογής</string>
     <string name="about_app_license">Αυτή η εφαρμογή υπόκεινται στην άδεια χρήσης GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Προβολή άδειας χρήσης</string>
     <string name="about_icons_disclaimer_title">Εικονίδια</string>
+    <string name="about_icons_disclaimer">&lt;p>Το πρωτότυπο εικονίδιο δημιουργήθηκε από %1$s&lt;/p>&lt;p>Όλα τα υπόλοιπα εικονίδια που χρησιμοποιούνται από αυτή την εφαρμογή είναι τα &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> δημιουργημένα από την Google Inc. και είναι αδειοδοτημένα υπό μία Creative Commons License.&lt;/p></string>
     <string name="about_credits_tab_title">Μνεία</string>
     <string name="about_contribution_tab_title">Συνεισφορά</string>
     <string name="about_license_tab_title">Άδεια χρήσης</string>
@@ -85,4 +104,9 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>
 
-    </resources>
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d επιλέχτηκε</item>
+        <item quantity="other">%d επιλέχτηκαν</item>
+    </plurals>
+</resources>

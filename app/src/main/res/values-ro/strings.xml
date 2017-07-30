@@ -34,7 +34,6 @@
     <string name="listview_updated_this_month">Luna asta</string>
     <string name="listview_updated_earlier">Anterior</string>
 
-    <!-- Settings -->
     <string name="settings_server">Server</string>
     <string name="settings_url">Adresa serverului</string>
     <string name="settings_url_check_description">Arată dacă se poate face \'ping\' la adresă.</string>
@@ -45,7 +44,6 @@
     <string name="settings_submit">Conectare</string>
     <string name="settings_submitting">Se conectează &#8230;</string>
     <string name="settings_notification">Activează afișarea unei notificări persistente pentru crearea de notițe noi.</string>
-
     <!-- Network -->
     <string name="network_connecting">Se conectează</string>
     <string name="network_connected">Conectat</string>
