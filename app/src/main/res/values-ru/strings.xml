@@ -35,16 +35,27 @@
     <string name="listview_updated_earlier">Ранее</string>
 
     <!-- Settings -->
+    <string name="settings_server_settings">Настройки аккаунта</string>
     <string name="settings_server">Сервер</string>
     <string name="settings_url">Адрес сервера</string>
     <string name="settings_url_check_description"> Показывает, если адрес доступен.</string>
     <string name="settings_url_warn_http">ВНИМАНИЕ: "http" ненадёжен. Пожалуйста, используйте "https"</string>
     <string name="settings_username">Логин</string>
     <string name="settings_password">Пароль</string>
+    <string name="settings_password_unchanged">Пароль (не изменён)</string>
     <string name="settings_password_check_description">Показывает, если учётные данные являются правильными.</string>
     <string name="settings_submit">Соединить</string>
     <string name="settings_submitting">Соединение …</string>
+    <string name="settings_notification_category">Уведомления</string>
     <string name="settings_notification">Включить показ постоянного уведомления для быстрого создания новых заметок.</string>
+    <string name="settings_cert_category">Сертификаты</string>
+    <string name="settings_cert_trust_system">Доверенные сертификаты из системного хранилища.</string>
+    <string name="settings_cert_reset">Очистить хранилище сертификатов</string>
+    <string name="settings_cert_reset_toast">Сохранённая информация удалена.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Заметки — Безопасность подключения</string>
+    <string name="trust_certificate_unknown_certificate_found">Приложению предлагается неизвестный сертификат. Доверять ему?</string>
 
     <!-- Network -->
     <string name="network_connecting">Соединение</string>

@@ -34,18 +34,17 @@
     <string name="listview_updated_this_month">今月</string>
     <string name="listview_updated_earlier">早期</string>
 
-    <!-- Settings -->
     <string name="settings_server">サーバー</string>
     <string name="settings_url">サーバーアドレス</string>
     <string name="settings_url_check_description">アドレスに ping できるかどうかを表示します。</string>
     <string name="settings_url_warn_http">警告: \"http\" は安全ではありません。 \"https\" を使用してください。</string>
     <string name="settings_username">ユーザー名</string>
     <string name="settings_password">パスワード</string>
+    <string name="settings_password_unchanged">パスワード (変更されていません)</string>
     <string name="settings_password_check_description">資格情報が正しいかどうかを表示します。</string>
     <string name="settings_submit">接続</string>
     <string name="settings_submitting">接続中&#8230;</string>
     <string name="settings_notification">新しいノートをすばやく作成するための、永続通知の表示を有効にします。</string>
-
     <!-- Network -->
     <string name="network_connecting">接続中</string>
     <string name="network_connected">接続しました</string>
