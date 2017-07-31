@@ -237,6 +237,7 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
     @Override
     public void onCategoryChosen(String category) {
         note.setCategory(category);
+        autoSave();
     }
 
     /**
