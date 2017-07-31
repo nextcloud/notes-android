@@ -108,24 +108,22 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
 
             @Override
             public void afterTextChanged(final Editable s) {
-                if(db.getNoteServerSyncHelper().isSyncPossible()) {
-                    if(timer != null) {
-                        timer.cancel();
-                    }
-                    if(!saveActive) {
-                        timer = new Timer();
-                        timer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        autoSave();
-                                    }
-                                });
-                            }
-                        }, DELAY);
-                    }
+                if(timer != null) {
+                    timer.cancel();
+                }
+                if(!saveActive) {
+                    timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    autoSave();
+                                }
+                            });
+                        }
+                    }, DELAY);
                 }
             }
         });
@@ -288,6 +286,15 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
         saveData(new ICallback() {
             @Override
             public void onFinish() {
+                onSaved();
+            }
+
+            @Override
+            public void onScheduled() {
+                onSaved();
+            }
+
+            public void onSaved() {
                 // AFTER SYNCHRONIZATION
                 Log.d(LOG_TAG, "...sync finished");
                 actionBar.setTitle(note.getTitle());

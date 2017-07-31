@@ -6,4 +6,5 @@ package it.niedermann.owncloud.notes.util;
  */
 public interface ICallback {
     void onFinish();
+    void onScheduled();
 }
