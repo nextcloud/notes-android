@@ -184,8 +184,14 @@ public class NoteServerSyncHelper {
         } else if(!onlyLocalChanges) {
             Log.d(getClass().getSimpleName(), "... scheduled");
             syncScheduled = true;
+            for (ICallback callback : callbacksPush) {
+                callback.onScheduled();
+            }
         } else {
             Log.d(getClass().getSimpleName(), "... do nothing");
+            for (ICallback callback : callbacksPush) {
+                callback.onScheduled();
+            }
         }
     }
 

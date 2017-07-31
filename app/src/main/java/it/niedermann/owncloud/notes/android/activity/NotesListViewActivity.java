@@ -67,7 +67,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
             refreshList();
             swipeRefreshLayout.setRefreshing(false);
         }
-    };
+
+		@Override
+		public void onScheduled() {
+		}
+	};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
