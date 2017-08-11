@@ -4,7 +4,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 [![Build Status](https://travis-ci.org/stefan-niedermann/nextcloud-notes.svg?branch=master)](https://travis-ci.org/stefan-niedermann/nextcloud-notes)
 [![GitHub issues](https://img.shields.io/github/issues/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/issues)
 [![GitHub stars](https://img.shields.io/github/stars/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/stargazers)
-[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/stefan-niedermann/nextcloud-notes/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-GPL-blue.svg)](https://raw.githubusercontent.com/stefan-niedermann/nextcloud-notes/master/LICENSE)
 
 ## :arrow_forward: Access
 
