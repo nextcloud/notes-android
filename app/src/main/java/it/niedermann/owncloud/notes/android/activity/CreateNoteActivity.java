@@ -13,15 +13,24 @@ import com.yydcdut.rxmarkdown.factory.EditFactory;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 
 public class CreateNoteActivity extends AppCompatActivity {
+    private final static int server_settings = 2;
+
     private RxMDEditText editTextField = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (!NoteServerSyncHelper.isConfigured(this)) {
+            Intent  settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivityForResult(settingsIntent, server_settings);
+        }
+
         setContentView(R.layout.activity_create);
         editTextField = (RxMDEditText) findViewById(R.id.createContent);
 
@@ -94,10 +103,22 @@ public class CreateNoteActivity extends AppCompatActivity {
         String content = editTextField.getText().toString();
         if(!implicit || !content.isEmpty()) {
             NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(this);
-            Intent data = new Intent();
+            Intent data = new Intent(this, NotesListViewActivity.class);
             data.putExtra(NotesListViewActivity.CREATED_NOTE, db.getNote(db.addNoteAndSync(content)));
             setResult(RESULT_OK, data);
         }
         finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == server_settings) {
+            if (resultCode != RESULT_OK) {
+                // User has not setup the server config and no note can be created
+                finish();
+            }
+        }
     }
 }

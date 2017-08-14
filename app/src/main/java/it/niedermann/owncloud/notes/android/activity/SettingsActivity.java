@@ -164,6 +164,18 @@ public class SettingsActivity extends AppCompatActivity {
         password_wrapper.setHint(getString(unchangedHint ? R.string.settings_password_unchanged : R.string.settings_password));
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Occurs in this scenario: User opens the app but doesn't configure the server settings, they then add the Create Note widget to home screen and configure
+        // server settings there. The stale SettingsActivity is then displayed hence finish() here to close it down.
+        if ((first_run) && (NoteServerSyncHelper.isConfigured(this))) {
+            finish();
+        }
+    }
+
     /**
      * Prevent pressing back button on first run
      */
