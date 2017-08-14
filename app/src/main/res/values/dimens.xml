@@ -9,4 +9,5 @@
     <dimen name="button_padding">16dp</dimen>
     <dimen name="button_elevation">5dp</dimen>
 
+    <dimen name="widget_margin">0dp</dimen>
 </resources>
