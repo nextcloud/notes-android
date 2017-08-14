@@ -93,5 +93,17 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/create_note_widget_provider" />
         </receiver>
+
+        <receiver   android:name=".android.activity.SingleNoteWidget"
+            android:label="@string/widget_single_note_title">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/single_note_widget_provider_info" />
+        </receiver>
     </application>
 </manifest>
