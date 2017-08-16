@@ -79,10 +79,18 @@
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"
             android:label="@string/menu_about"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            />
+            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
 
-        <receiver   android:name=".android.activity.CreateNoteWidget"
+        <activity
+            android:name="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".android.activity.CreateNoteWidget"
             android:label="@string/widget_create_note">
 
             <intent-filter>
@@ -94,7 +102,9 @@
                 android:resource="@xml/create_note_widget_provider" />
         </receiver>
 
-        <receiver   android:name=".android.activity.SingleNoteWidget"
+        <receiver
+            android:id="@+id/SingleNoteWidget"
+            android:name="it.niedermann.owncloud.notes.android.activity.SingleNoteWidget"
             android:label="@string/widget_single_note_title">
 
             <intent-filter>
