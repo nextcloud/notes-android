@@ -12,6 +12,7 @@ import com.yydcdut.rxmarkdown.RxMarkdown;
 import com.yydcdut.rxmarkdown.factory.EditFactory;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;

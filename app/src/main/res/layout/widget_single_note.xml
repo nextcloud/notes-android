@@ -6,12 +6,18 @@
     android:orientation="vertical">
 
     <com.yydcdut.rxmarkdown.RxMDTextView
-        android:id="@+id/single_note_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_transparent"
+
+         />
+</FrameLayout>
+
+
+<!--
+<TextView
+        android:id="@+id/single_note_content"
+        android:background="@color/bg_normal"
         android:padding="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/fg_contrast" />
-
-</FrameLayout>
+        android:textColor="@color/fg_default"
+-->

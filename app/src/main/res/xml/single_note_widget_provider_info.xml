@@ -4,6 +4,8 @@
     android:initialLayout="@layout/widget_single_note"
     android:minHeight="72dp"
     android:minWidth="146dp"
+    android:minResizeHeight="80dp"
+    android:minResizeWidth="80dp"
     android:previewImage="@drawable/single_note_widget"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="86400000"
