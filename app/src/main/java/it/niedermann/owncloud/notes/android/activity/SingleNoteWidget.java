@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -25,6 +26,7 @@ import com.yydcdut.rxmarkdown.loader.DefaultLoader;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -37,52 +39,35 @@ import com.yydcdut.rxmarkdown.factory.EditFactory;
 
 public class SingleNoteWidget extends AppWidgetProvider {
 
+    private DBNote note, originalNote;
+    private int notePosition = 0;
+    private NoteSQLiteOpenHelper db = null;
+
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
     }
 
+    @Override
+    public void onDisabled(Context context) {
+        super.onDisabled(context);
+
+        // TODO Confirm this is called when each _instance_ is removed by the user
+
+        // TODO remove entry from shared prefs when widget is removed
+    }
+
+    /**
+     *
+     * @param noteID    The noteID of the single note to be displayed by this widget
+     */
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
+                                int appWidgetId, int noteID) {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
 
-        SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        int widgetID = sharedprefs.getInt("widgetID", -1);
 
-        if (widgetID == appWidgetId) {
-            // Widget exists
-        }
-/**        final RxMDTextView content = new RxMDTextView(context);
-
-        RxMarkdown.with("test string for markdown", context.getApplicationContext())
-                .config(MarkDownUtil.getMarkDownConfiguration(context))
-                .factory(TextFactory.create())
-         .intoObservable()
-         .subscribeOn(Schedulers.computation())
-         .observeOn(AndroidSchedulers.mainThread())
-         .subscribe(new Subscriber<CharSequence>() {
-        @Override
-        public void onCompleted() {}
-
-        @Override
-        public void onError(Throwable e) {
-        Log.d("SingleNoteWidget", "onError: " + e);
-        }
-
-        @Override
-        public void onNext(CharSequence charSequence) {
-            content.setText(charSequence, TextView.BufferType.SPANNABLE);
-        }
-        });
-
-        content.setText("## testestetstet");
-
-        Log.d("SingleNoteWidget", "RxMD: " + content); */
-        //views.setTextViewText(R.id.single_note_content, "## Markdown here");
-
-        Log.d("updateAppWidget", "WidgetID: " + appWidgetId);
 
         // Construct the RemoteViews object
         //        views.setTextViewText(0, "test");
@@ -98,7 +83,39 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
+
+            SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(context);
+            int noteID = sharedprefs.getInt("widget" + appWidgetId, -1);
+
+            if (noteID >= 0) {
+                // Widget exists
+
+
+                db = NoteSQLiteOpenHelper.getInstance(context);
+
+
+
+                // TODO Ask the user which note they want to be displayed
+                note = db.getNote(noteID);
+
+
+                // Notify the widget of the extra data to be displayed
+
+                // note = originalNote = (DBNote);
+                // notePosition = getIntent().getIntExtra(PARAM_NOTE_POSITION, 0);
+
+                Intent intent = getIntent();
+                Bundle extras = intent.getExtras();
+                int mAppWidgetId = 0;
+
+                if (extras != null) {
+                    mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+                }
+
+
+
+                updateAppWidget(context, appWidgetManager, appWidgetId, noteID);
+            }
         }
     }
 }
