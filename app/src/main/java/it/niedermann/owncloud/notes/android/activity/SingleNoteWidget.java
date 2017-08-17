@@ -5,7 +5,10 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -44,7 +47,13 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
 
+        SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(context);
 
+        int widgetID = sharedprefs.getInt("widgetID", -1);
+
+        if (widgetID == appWidgetId) {
+            // Widget exists
+        }
 /**        final RxMDTextView content = new RxMDTextView(context);
 
         RxMarkdown.with("test string for markdown", context.getApplicationContext())
@@ -73,6 +82,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
         Log.d("SingleNoteWidget", "RxMD: " + content); */
         //views.setTextViewText(R.id.single_note_content, "## Markdown here");
 
+        Log.d("updateAppWidget", "WidgetID: " + appWidgetId);
 
         // Construct the RemoteViews object
         //        views.setTextViewText(0, "test");
