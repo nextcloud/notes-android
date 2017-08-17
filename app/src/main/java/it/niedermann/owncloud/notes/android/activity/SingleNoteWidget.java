@@ -103,7 +103,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
                 // note = originalNote = (DBNote);
                 // notePosition = getIntent().getIntExtra(PARAM_NOTE_POSITION, 0);
-
+/**
                 Intent intent = getIntent();
                 Bundle extras = intent.getExtras();
                 int mAppWidgetId = 0;
@@ -112,7 +112,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
                     mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
                 }
 
-
+*/
 
                 updateAppWidget(context, appWidgetManager, appWidgetId, noteID);
             }
