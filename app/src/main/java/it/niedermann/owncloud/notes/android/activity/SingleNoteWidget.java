@@ -76,9 +76,9 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         // Construct the RemoteViews object
         //        views.setTextViewText(0, "test");
-//        Intent intent = new Intent(context, CreateNoteActivity.class);
-  //      PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    //    views.setOnClickPendingIntent(R.id.widget_create_note, pendingIntent);
+        Intent intent = new Intent(context, EditNoteActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        views.setOnClickPendingIntent(R.id.single_note, pendingIntent);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
