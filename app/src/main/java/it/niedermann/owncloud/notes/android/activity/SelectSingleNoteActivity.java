@@ -33,8 +33,16 @@ public class SelectSingleNoteActivity extends Activity {
 
         db = NoteSQLiteOpenHelper.getInstance(this);
 
+        int noteID = 6;
+
+        for (int i = 6; note == null; i++) {
+            note = db.getNote(i);
+        }
+
+
         // TODO Ask the user which note they want to be displayed
-        note = db.getNote(4);
+//        note = db.getNote(noteID);
+
 
         // Notify the widget of the extra data to be displayed
 
@@ -53,7 +61,7 @@ public class SelectSingleNoteActivity extends Activity {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
 
         RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.widget_single_note);
-   //     views.setTextViewText(R.id.single_note_content, note.getContent());
+        views.setTextViewText(R.id.single_note_content, note.getContent());
         appWidgetManager.updateAppWidget(mAppWidgetId, views);
 
         Intent retIntent = new Intent();
