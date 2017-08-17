@@ -5,19 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.yydcdut.rxmarkdown.RxMDTextView
+
+    <TextView
+        android:id="@+id/single_note_content"
+        android:background="@color/bg_normal"
+        android:padding="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/fg_default"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
 
          />
 </FrameLayout>
 
 
 <!--
-<TextView
-        android:id="@+id/single_note_content"
-        android:background="@color/bg_normal"
-        android:padding="10dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/fg_default"
+ <com.yydcdut.rxmarkdown.RxMDTextView
+
 -->
