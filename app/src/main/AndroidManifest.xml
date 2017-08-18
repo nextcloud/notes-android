@@ -89,6 +89,15 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="it.niedermann.owncloud.notes.android.activity.TestActivity"
+            android:theme="@style/SelectSingleNote">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name=".android.activity.CreateNoteWidget"
             android:label="@string/widget_create_note">
