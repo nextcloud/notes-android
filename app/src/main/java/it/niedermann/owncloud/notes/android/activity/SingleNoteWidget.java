@@ -39,9 +39,10 @@ import com.yydcdut.rxmarkdown.factory.EditFactory;
 
 public class SingleNoteWidget extends AppWidgetProvider {
 
-    private DBNote note, originalNote;
+//    private DBNote note;
     private int notePosition = 0;
-    private NoteSQLiteOpenHelper db = null;
+    public static final String WIDGET_KEY = "single_note_widget";
+    private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
     @Override
     public void onEnabled(Context context) {
@@ -53,29 +54,48 @@ public class SingleNoteWidget extends AppWidgetProvider {
         super.onDisabled(context);
 
         // TODO Confirm this is called when each _instance_ is removed by the user
-
         // TODO remove entry from shared prefs when widget is removed
+
+        Log.d(TAG, "onDisabled: ");
     }
 
-    /**
-     *
-     * @param noteID    The noteID of the single note to be displayed by this widget
-     */
+
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId, int noteID) {
+                                int appWidgetId) {
 
+        DBNote note;
+        NoteSQLiteOpenHelper db = null;
+        SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(context);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
+        int noteID = sharedprefs.getInt(WIDGET_KEY + appWidgetId, -1);
+
+        Log.d("updateAppWidget", "appWidgetId: " + appWidgetId);
+        Log.d("updateAppWidget", "noteID: " + noteID);
+
+        if (noteID >= 0) {
+            // Widget exists
+
+            db = NoteSQLiteOpenHelper.getInstance(context);
+            note = db.getNote(noteID);
 
 
+            // Construct the RemoteViews object
+            //        views.setTextViewText(0, "test");
 
-
-        // Construct the RemoteViews object
-        //        views.setTextViewText(0, "test");
-        Intent intent = new Intent(context, EditNoteActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.single_note, pendingIntent);
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
+            // TODO: If the user has clicked the widget and then clicked Home,
+            // another click on the widget will open another edit window
+            Intent intent = new Intent(context, EditNoteActivity.class);
+            intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setOnClickPendingIntent(R.id.single_note, pendingIntent);
+            // Instruct the widget manager to update the widget
+            views.setTextViewText(R.id.single_note_content, note.getContent());
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        } else {
+            Log.d("updateAppWidget", "Note not found");
+            views.setTextViewText(R.id.single_note_content, "Note not found");
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
     }
 
     @Override
@@ -83,39 +103,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
-
-            SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(context);
-            int noteID = sharedprefs.getInt("widget" + appWidgetId, -1);
-
-            if (noteID >= 0) {
-                // Widget exists
-
-
-                db = NoteSQLiteOpenHelper.getInstance(context);
-
-
-
-                // TODO Ask the user which note they want to be displayed
-                note = db.getNote(noteID);
-
-
-                // Notify the widget of the extra data to be displayed
-
-                // note = originalNote = (DBNote);
-                // notePosition = getIntent().getIntExtra(PARAM_NOTE_POSITION, 0);
-/**
-                Intent intent = getIntent();
-                Bundle extras = intent.getExtras();
-                int mAppWidgetId = 0;
-
-                if (extras != null) {
-                    mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
-                }
-
-*/
-
-                updateAppWidget(context, appWidgetManager, appWidgetId, noteID);
-            }
+            updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
 }
+

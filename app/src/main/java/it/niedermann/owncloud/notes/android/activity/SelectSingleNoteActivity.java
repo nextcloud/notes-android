@@ -1,15 +1,13 @@
 package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.Activity;
-import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetManager;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -29,25 +27,15 @@ public class SelectSingleNoteActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_select_single_note);
         setResult(RESULT_CANCELED);
 
         db = NoteSQLiteOpenHelper.getInstance(this);
-
         int noteID = 6;
 
         for (int i = 6; note == null; i++) {
             note = db.getNote(i);
         }
-
-
-        // TODO Ask the user which note they want to be displayed
-//        note = db.getNote(noteID);
-
-
-        // Notify the widget of the extra data to be displayed
-
-        // note = originalNote = (DBNote);
-        // notePosition = getIntent().getIntExtra(PARAM_NOTE_POSITION, 0);
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -57,18 +45,25 @@ public class SelectSingleNoteActivity extends Activity {
             mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
-
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
 
-        RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.widget_single_note);
-        views.setTextViewText(R.id.single_note_content, note.getContent());
-        appWidgetManager.updateAppWidget(mAppWidgetId, views);
+        Log.d("SelectSingleNote", "mAppWidgetId: " + mAppWidgetId);
 
-        Intent retIntent = new Intent();
+        // TODO Ask the user which note they want to be displayed
+//        note = db.getNote(noteID);
+
+        SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
+
+        Log.d("SelectSingleNote", "Adding noteID (" + noteID + ") to sharedPrefs");
+        // TODO Add widgetID to this key
+        sp.putInt(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, noteID);
+        sp.apply();
+
+        Intent retIntent = new Intent(this, SingleNoteWidget.class);
         retIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
+        retIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         setResult(RESULT_OK, retIntent);
 
         Log.d("SelectSingleNote", "note: " + note.getTitle());
-        finish();
     }
 }
