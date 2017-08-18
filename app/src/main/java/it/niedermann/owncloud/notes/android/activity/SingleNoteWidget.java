@@ -59,6 +59,18 @@ public class SingleNoteWidget extends AppWidgetProvider {
         Log.d(TAG, "onDisabled: ");
     }
 
+    @Override
+    public void onDeleted(Context context, int[] appWidgetIds) {
+        super.onDeleted(context, appWidgetIds);
+
+        SharedPreferences.Editor sharedprefs = PreferenceManager.getDefaultSharedPreferences(context).edit();
+
+        for (int appWidgetId : appWidgetIds) {
+            Log.d(TAG, "Removing " + WIDGET_KEY + appWidgetId + " from sharedprefs");
+            sharedprefs.remove(WIDGET_KEY + appWidgetIds);
+        }
+        sharedprefs.apply();
+    }
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {

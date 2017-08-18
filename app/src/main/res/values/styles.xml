@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="OwnCloud" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="OwnCloud" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Main theme colors -->
         <!-- App Bar -->
         <item name="colorPrimary">@color/primary</item>
@@ -11,6 +11,18 @@
         <item name="colorAccent">@color/primary</item>
         <item name="android:buttonStyle">@style/ocbutton</item>
         <item name="android:windowBackground">@color/bg_normal</item>
+    </style>
+
+    <style name="SelectSingleNote" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@color/bg_highlighted</item>
+        <item name="android:textColor">@color/primary_dark</item>
+        <item name="colorAccent">@color/primary</item>
+        <item name="colorPrimaryDark">@color/bg_normal</item>
+        <item name="colorPrimary">@color/cardview_dark_background</item>
+        <item name="android:textColorPrimaryInverse">@color/primary</item>
+        <item name="android:colorBackground">@color/bg_normal</item>
+        <item name="android:windowBackground">@color/bg_normal</item>
+        <item name="android:textColorPrimary">@color/primary</item>
     </style>
 
     <!--

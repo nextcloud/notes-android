@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SelectSingleNote" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@color/bg_highlighted</item>
+        <item name="android:textColor">@color/primary_dark</item>
+        <item name="colorAccent">@color/primary</item>
+        <item name="colorPrimaryDark">@color/bg_normal</item>
+        <item name="colorPrimary">@color/cardview_dark_background</item>
+        <item name="android:textColorPrimaryInverse">@color/primary</item>
+        <item name="android:colorBackground">@color/bg_normal</item>
+        <item name="android:windowBackground">@color/bg_normal</item>
+        <item name="android:textColorPrimary">@color/primary</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
+    </style>
+</resources>
