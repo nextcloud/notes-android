@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/widget_background"
     android:padding="8dp"
+    android:clickable="true"
     >
 
     <TextView
@@ -14,21 +15,10 @@
         android:textColor="@color/fg_default"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="0dp"
+        android:layout_margin="8dp"
          />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_launcher"
-        android:padding="0dp"
-        android:layout_margin="0dp"
-        />
-
 </RelativeLayout>
-
-
 <!--
  <com.yydcdut.rxmarkdown.RxMDTextView
-
 -->

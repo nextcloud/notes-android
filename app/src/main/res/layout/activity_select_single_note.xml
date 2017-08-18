@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/select_single_note"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/select_single_note_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="#00ffffff"
-        android:dividerHeight="0dp"></android.support.v7.widget.RecyclerView>
+        android:dividerHeight="0dp"
+        android:scrollbars="vertical"
+        android:background="@color/bg_highlighted">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"/>
 </LinearLayout>
