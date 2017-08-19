@@ -2,10 +2,6 @@
 <resources>
 
     <style name="SelectSingleNote" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
-    </style>
-
-    <style name="WindowTitleBackground">
-        <item name="android:background">@color/fg_default_high</item>
+        <item name="android:windowTitleBackgroundStyle">@color/fg_default_high</item>
     </style>
 </resources>
