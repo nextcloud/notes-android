@@ -36,12 +36,17 @@ import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 import com.yydcdut.rxmarkdown.factory.EditFactory;
 
+import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
+
 
 public class SingleNoteWidget extends AppWidgetProvider {
 
 //    private DBNote note;
     private int notePosition = 0;
     public static final String WIDGET_KEY = "single_note_widget";
+
+    // TODO Tidy this name
+    public static final String INIT = "init";
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
     @Override
@@ -67,7 +72,9 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         for (int appWidgetId : appWidgetIds) {
             Log.d(TAG, "Removing " + WIDGET_KEY + appWidgetId + " from sharedprefs");
-            sharedprefs.remove(WIDGET_KEY + appWidgetIds);
+            Log.d(TAG, "Removing " + WIDGET_KEY + appWidgetId + INIT + " from sharedprefs");
+            sharedprefs.remove(WIDGET_KEY + appWidgetId);
+            sharedprefs.remove(WIDGET_KEY + appWidgetId + INIT);
         }
         sharedprefs.apply();
     }
@@ -79,14 +86,16 @@ public class SingleNoteWidget extends AppWidgetProvider {
         NoteSQLiteOpenHelper db = null;
         SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(context);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
-        int noteID = sharedprefs.getInt(WIDGET_KEY + appWidgetId, -1);
+        Log.d(TAG, "updateAppWidget: " + appWidgetId);
+        long noteID = sharedprefs.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1);
+        boolean isInitialised = sharedprefs.getBoolean(SingleNoteWidget.WIDGET_KEY + appWidgetId + INIT, false);
 
         Log.d("updateAppWidget", "appWidgetId: " + appWidgetId);
         Log.d("updateAppWidget", "noteID: " + noteID);
-
-        if (noteID >= 0) {
+        Log.d(TAG, "updateAppWidget: init: " + isInitialised);
+        if (noteID >= 0 && isInitialised) {
             // Widget exists
-
+            Log.d("updateAppWidget", "noteID: " + noteID);
             db = NoteSQLiteOpenHelper.getInstance(context);
             note = db.getNote(noteID);
 
@@ -113,9 +122,22 @@ public class SingleNoteWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
+        Log.d(TAG, "onUpdate: ");
         // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
+        }
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        Log.d(TAG, "onReceive: ");
+        int[] mAppWidgetIds = intent.getExtras().getIntArray(AppWidgetManager.EXTRA_APPWIDGET_ID);
+        if (intent.getAction() == ACTION_APPWIDGET_UPDATE) {
+            onUpdate(context, appWidgetManager, mAppWidgetIds);
         }
     }
 }

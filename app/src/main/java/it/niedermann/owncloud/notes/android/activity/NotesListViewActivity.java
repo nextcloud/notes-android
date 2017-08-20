@@ -338,6 +338,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
         touchHelper.attachToRecyclerView(listView);
     }
 
+    public ItemAdapter getItemAdapter() {
+        // TODO If initialised
+        return adapter;
+    }
+
     /**
      * Adds the Menu Items to the Action Bar.
      *
