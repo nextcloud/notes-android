@@ -13,12 +13,12 @@
         <item name="android:windowTitleBackgroundStyle">@color/bg_normal</item>
     </style>
 
-    <style name="SelectSingleNote">
-        <item name="android:colorPrimary">@color/bg_highlighted</item>
-        <item name="colorPrimary">@color/bg_highlighted</item>
-        <item name="android:textColorPrimaryInverse">@color/primary</item>
-        <item name="android:textColorPrimary">@color/primary</item>
+    <style name="SelectSingleNoteTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/SSNActionBarTheme</item>
+    </style>
 
+    <style name="SSNActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#000000</item>
     </style>
 
     <!--
