@@ -264,6 +264,10 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
         data.putExtra(PARAM_NOTE, note);
         data.putExtra(PARAM_NOTE_POSITION, notePosition);
         setResult(RESULT_OK, data);
+
+        // TODO Notify any widgets of note edit
+
+
         finish();
     }
 
