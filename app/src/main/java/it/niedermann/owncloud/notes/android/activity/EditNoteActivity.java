@@ -2,6 +2,8 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -267,6 +269,12 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
 
         // TODO Notify any widgets of note edit
 
+
+        Intent intent = new Intent(this, SingleNoteWidget.class);
+        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+        int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+        sendBroadcast(intent);
 
         finish();
     }
