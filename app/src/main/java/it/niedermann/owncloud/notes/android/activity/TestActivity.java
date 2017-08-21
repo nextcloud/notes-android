@@ -26,12 +26,13 @@ import static android.R.string.cancel;
 
 /**
  * Created by dbailey on 18/08/2017.
+ * TODO replace all "dbailey" occurences
  */
 
 public class TestActivity extends NotesListViewActivity {
 
-    private NoteSQLiteOpenHelper db = null;
-    private ItemAdapter adapter = null;
+//    private NoteSQLiteOpenHelper db = null;
+//    private ItemAdapter adapter = null;
 
     private static final String TAG = TestActivity.class.getSimpleName();
 
@@ -39,23 +40,16 @@ public class TestActivity extends NotesListViewActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        db = NoteSQLiteOpenHelper.getInstance(this);
-
+  //      db = NoteSQLiteOpenHelper.getInstance(this);
         this.setResult(Activity.RESULT_CANCELED);
-
-//        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
- //       setContentView(R.layout.activity_notes_list_view);
-
-   //     getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.activity_select_single_note);
-
         findViewById(R.id.fab_create).setVisibility(View.INVISIBLE);
         getSupportActionBar().setTitle(R.string.activity_select_single_note);
+        // TODO fix colouring
         final int colorPrimary = getResources().getColor(R.color.fg_default);
         String htmlColor = String.format(Locale.US, "#%06X", (0xFFFFFF & Color.argb(0, Color.red(colorPrimary), Color.green(colorPrimary), Color.blue(colorPrimary))));
         getSupportActionBar().setTitle(Html.fromHtml("<font color=\"" + htmlColor + "\">" + getString(R.string.app_name) + "</font>"));
 
         initList();
-        adapter = getItemAdapter();
     }
 
     @Override
@@ -64,30 +58,28 @@ public class TestActivity extends NotesListViewActivity {
     @Override
     public void onNoteClick(int position, View v) {
 
-        // ItemAdapter adapter = new ItemAdapter(this);
+        ItemAdapter adapter = getItemAdapter();
+        Item        item = adapter.getItem(position);
+        DBNote      note = (DBNote) item;
+        long        noteID = note.getId();
+        Intent      intent = getIntent();
+        Bundle      extras = intent.getExtras();
+        int         mAppWidgetId = 0;
 
         Log.d(TAG, "onNoteClick: Position: " + position);
-        Item item = adapter.getItem(position);
-        DBNote note = (DBNote) item;
-        long noteID = note.getId();
         Log.d(TAG, "onNoteClick: noteID: " + noteID);
-
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        int mAppWidgetId = 0;
 
         if (extras != null) {
             mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
+//        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
 
         Log.d("SelectSingleNote", "mAppWidgetId: " + mAppWidgetId);
 
         SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
 
         Log.d("SelectSingleNote", "Adding noteID (" + noteID + ") to sharedPrefs");
-        // TODO Add widgetID to this key
         sp.putLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, noteID);
         sp.putBoolean(SingleNoteWidget.WIDGET_KEY + mAppWidgetId + SingleNoteWidget.INIT, true);
         sp.apply();
@@ -108,11 +100,4 @@ public class TestActivity extends NotesListViewActivity {
 
     @Override
     public void onNoteFavoriteClick(int position, View view) { }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        // TODO
-    }
 }
