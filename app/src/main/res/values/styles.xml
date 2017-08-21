@@ -15,6 +15,9 @@
 
     <style name="SelectSingleNote">
         <item name="android:colorPrimary">@color/bg_highlighted</item>
+        <item name="colorPrimary">@color/bg_highlighted</item>
+        <item name="android:textColorPrimaryInverse">@color/primary</item>
+        <item name="android:textColorPrimary">@color/primary</item>
 
     </style>
 

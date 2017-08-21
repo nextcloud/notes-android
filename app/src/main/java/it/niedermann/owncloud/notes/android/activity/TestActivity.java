@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+
+import java.util.Locale;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -46,6 +50,9 @@ public class TestActivity extends NotesListViewActivity {
 
         findViewById(R.id.fab_create).setVisibility(View.INVISIBLE);
         getSupportActionBar().setTitle(R.string.activity_select_single_note);
+        final int colorPrimary = getResources().getColor(R.color.fg_default);
+        String htmlColor = String.format(Locale.US, "#%06X", (0xFFFFFF & Color.argb(0, Color.red(colorPrimary), Color.green(colorPrimary), Color.blue(colorPrimary))));
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"" + htmlColor + "\">" + getString(R.string.app_name) + "</font>"));
 
         initList();
         adapter = getItemAdapter();
@@ -101,4 +108,11 @@ public class TestActivity extends NotesListViewActivity {
 
     @Override
     public void onNoteFavoriteClick(int position, View view) { }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        // TODO
+    }
 }

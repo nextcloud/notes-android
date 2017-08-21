@@ -3,5 +3,9 @@
 
     <style name="SelectSingleNote" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowTitleBackgroundStyle">@color/fg_default_high</item>
+        <item name="colorPrimary">@color/bg_highlighted</item>
+        <item name="android:textColorPrimaryInverse">@color/primary</item>
+        <item name="android:navigationBarColor">@color/primary</item>
+        <item name="android:textColorPrimary">@color/primary</item>
     </style>
 </resources>

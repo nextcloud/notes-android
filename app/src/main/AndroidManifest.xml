@@ -82,14 +82,6 @@
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity">
-
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
-            </intent-filter>
-        </activity>
-
-        <activity
             android:name="it.niedermann.owncloud.notes.android.activity.TestActivity"
             android:theme="@style/SelectSingleNote">
 
