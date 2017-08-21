@@ -19,6 +19,7 @@
 
     <style name="SSNActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">#000000</item>
+        <item name="android:textColor">@color/primary</item>
     </style>
 
     <!--
