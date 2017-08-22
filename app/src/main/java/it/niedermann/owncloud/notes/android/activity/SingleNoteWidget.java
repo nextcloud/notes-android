@@ -57,8 +57,12 @@ public class SingleNoteWidget extends AppWidgetProvider {
             DBNote note = db.getNote(noteID);
 
             /**
+<<<<<<< HEAD
              * TODO: Fix Single Note widget tap.
              * If the user has clicked the widget and then clicked Home,
+=======
+             * TODO: If the user has clicked the widget and then clicked Home,
+>>>>>>> 420336611ae7e65e3628ea36616205a12be07e19
              * another click on the widget will open another edit window
              */
             /**

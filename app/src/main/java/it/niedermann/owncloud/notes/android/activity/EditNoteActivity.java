@@ -269,7 +269,6 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
 
         // TODO Notify any widgets of note edit
 
-
         Intent intent = new Intent(this, SingleNoteWidget.class);
         intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
         int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
