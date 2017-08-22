@@ -1,66 +1,85 @@
 package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.Activity;
-import android.appwidget.AppWidgetHostView;
 import android.appwidget.AppWidgetManager;
-import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.Html;
 import android.util.Log;
-import android.widget.RemoteViews;
+import android.view.Menu;
+import android.view.View;
+
+import java.util.Locale;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.model.Item;
+import it.niedermann.owncloud.notes.model.ItemAdapter;
 
-public class SelectSingleNoteActivity extends Activity {
+/**
+ * Created by Daniel Bailey on 18/08/2017.
+ */
 
-    public static final String PARAM_NOTE = "note";
-    public static final String PARAM_ORIGINAL_NOTE = "original_note";
-    public static final String PARAM_NOTE_POSITION = "note_position";
+public class SelectSingleNoteActivity extends NotesListViewActivity {
 
-    private DBNote note, originalNote;
-    private int notePosition = 0;
-    private NoteSQLiteOpenHelper db = null;
+    private static final String TAG = SelectSingleNoteActivity.class.getSimpleName();
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setResult(RESULT_CANCELED);
 
-        db = NoteSQLiteOpenHelper.getInstance(this);
+        this.setResult(Activity.RESULT_CANCELED);
+        findViewById(R.id.fab_create).setVisibility(View.INVISIBLE);
+        getSupportActionBar().setTitle(R.string.activity_select_single_note);
 
-        // TODO Ask the user which note they want to be displayed
-        note = db.getNote(4);
+        // TODO SelectSingleNote theme
+        SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
+        swipeRefreshLayout.setEnabled(false);
+        swipeRefreshLayout.setRefreshing(false);
+        initList();
+    }
 
-        // Notify the widget of the extra data to be displayed
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) { return true; }
 
-        // note = originalNote = (DBNote);
-        // notePosition = getIntent().getIntExtra(PARAM_NOTE_POSITION, 0);
+    @Override
+    public void onNoteClick(int position, View v) {
 
+        ItemAdapter adapter = getItemAdapter();
+        Item item = adapter.getItem(position);
+        DBNote note = (DBNote) item;
+        long noteID = note.getId();
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        int mAppWidgetId = 0;
+        int mAppWidgetId = -1;
 
         if (extras != null) {
             mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
+        SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
 
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
+        sp.putLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, noteID);
+        sp.putBoolean(SingleNoteWidget.WIDGET_KEY + mAppWidgetId + SingleNoteWidget.INIT, true);
+        sp.apply();
 
-        RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.widget_single_note);
-   //     views.setTextViewText(R.id.single_note_content, note.getContent());
-        appWidgetManager.updateAppWidget(mAppWidgetId, views);
-
-        Intent retIntent = new Intent();
+        int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
+        Intent retIntent = new Intent(this, SingleNoteWidget.class);
         retIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-        setResult(RESULT_OK, retIntent);
-
-        Log.d("SelectSingleNote", "note: " + note.getTitle());
+        retIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        this.sendBroadcast(retIntent);
+        this.setResult(RESULT_OK, retIntent);
         finish();
     }
+
+    @Override
+    public boolean onNoteLongClick(int position, View v) { return false; }
+
+    @Override
+    public void onNoteFavoriteClick(int position, View view) { }
 }

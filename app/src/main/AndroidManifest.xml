@@ -79,10 +79,12 @@
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"
             android:label="@string/menu_about"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
+            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+            />
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity">
+            android:name="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity"
+            android:theme="@style/SelectSingleNoteTheme">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>

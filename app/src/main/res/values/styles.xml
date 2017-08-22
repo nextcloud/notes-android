@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="OwnCloud" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="OwnCloud" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Main theme colors -->
         <!-- App Bar -->
         <item name="colorPrimary">@color/primary</item>
@@ -10,7 +10,16 @@
         <!-- Snackbar Action Link -->
         <item name="colorAccent">@color/primary</item>
         <item name="android:buttonStyle">@style/ocbutton</item>
-        <item name="android:windowBackground">@color/bg_normal</item>
+        <item name="android:windowTitleBackgroundStyle">@color/bg_normal</item>
+    </style>
+
+    <!-- TODO Theme for Single Note Widget selection activity -->
+    <style name="SelectSingleNoteTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/SSNActionBarTheme</item>
+    </style>
+    <style name="SSNActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#000000</item>
+        <item name="android:textColor">@color/primary</item>
     </style>
 
     <!--

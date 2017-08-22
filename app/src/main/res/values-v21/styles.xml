@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <!-- TODO Theme for Single Note Widget selection activity -->
+        <style name="SelectSingleNoteTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+                <item name="android:actionBarStyle">@style/SSNActionBarTheme</item>
+        </style>
+        <style name="SSNActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+                <item name="android:background">#000000</item>
+                <item name="android:textColor">@color/primary</item>
+        </style>
+</resources>

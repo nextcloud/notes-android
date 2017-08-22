@@ -3,92 +3,105 @@ package it.niedermann.owncloud.notes.android.activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.TextView;
-
-import com.yydcdut.rxmarkdown.RxMDConfiguration;
-import com.yydcdut.rxmarkdown.RxMDEditText;
-import com.yydcdut.rxmarkdown.RxMDTextView;
-import com.yydcdut.rxmarkdown.RxMarkdown;
-import com.yydcdut.rxmarkdown.callback.OnLinkClickCallback;
-import com.yydcdut.rxmarkdown.factory.EditFactory;
-import com.yydcdut.rxmarkdown.factory.TextFactory;
-import com.yydcdut.rxmarkdown.loader.DefaultLoader;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.util.MarkDownUtil;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
-import com.yydcdut.rxmarkdown.RxMDEditText;
-import com.yydcdut.rxmarkdown.RxMarkdown;
-import com.yydcdut.rxmarkdown.factory.EditFactory;
+import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
+import static android.appwidget.AppWidgetManager.getInstance;
 
 
 public class SingleNoteWidget extends AppWidgetProvider {
+
+    public static final String  WIDGET_KEY = "single_note_widget";
+    public static final String  INIT = "INIT";
+    private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
     }
 
+    @Override
+    public void onDeleted(Context context, int[] appWidgetIds) {
+        super.onDeleted(context, appWidgetIds);
+
+        SharedPreferences.Editor sharedprefs = PreferenceManager.getDefaultSharedPreferences(context).edit();
+
+        for (int appWidgetId : appWidgetIds) {
+            Log.d(TAG, "Removing " + WIDGET_KEY + appWidgetId + " from sharedprefs");
+            Log.d(TAG, "Removing " + WIDGET_KEY + appWidgetId + INIT + " from sharedprefs");
+            sharedprefs.remove(WIDGET_KEY + appWidgetId);
+            sharedprefs.remove(WIDGET_KEY + appWidgetId + INIT);
+        }
+        sharedprefs.apply();
+    }
+
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
+        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(context);
+        SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(context);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
+        long noteID = sharedprefs.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1);
+        boolean isInitialised = sharedprefs.getBoolean(SingleNoteWidget.WIDGET_KEY + appWidgetId + INIT, false);
 
+        if (noteID >= 0 && isInitialised) {
 
-/**        final RxMDTextView content = new RxMDTextView(context);
+            DBNote note = db.getNote(noteID);
 
-        RxMarkdown.with("test string for markdown", context.getApplicationContext())
-                .config(MarkDownUtil.getMarkDownConfiguration(context))
-                .factory(TextFactory.create())
-         .intoObservable()
-         .subscribeOn(Schedulers.computation())
-         .observeOn(AndroidSchedulers.mainThread())
-         .subscribe(new Subscriber<CharSequence>() {
-        @Override
-        public void onCompleted() {}
+            /**
+             * TODO: Fix Single Note widget tap.
+             * If the user has clicked the widget and then clicked Home,
+             * another click on the widget will open another edit window
+             */
+            /**
+             Intent intent = new Intent(context, EditNoteActivity.class);
+            intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
+             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+             views.setOnClickPendingIntent(R.id.single_note, pendingIntent);
+             */
+            views.setTextViewText(R.id.single_note_content, note.getContent());
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        } else {
 
-        @Override
-        public void onError(Throwable e) {
-        Log.d("SingleNoteWidget", "onError: " + e);
+            Log.e(TAG, "Note not found");
+            views.setTextViewText(R.id.single_note_content, "Note not found");
+            appWidgetManager.updateAppWidget(appWidgetId, views);
         }
-
-        @Override
-        public void onNext(CharSequence charSequence) {
-            content.setText(charSequence, TextView.BufferType.SPANNABLE);
-        }
-        });
-
-        content.setText("## testestetstet");
-
-        Log.d("SingleNoteWidget", "RxMD: " + content); */
-        //views.setTextViewText(R.id.single_note_content, "## Markdown here");
-
-
-        // Construct the RemoteViews object
-        //        views.setTextViewText(0, "test");
-//        Intent intent = new Intent(context, CreateNoteActivity.class);
-  //      PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    //    views.setOnClickPendingIntent(R.id.widget_create_note, pendingIntent);
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
-        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
     }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int ids[] = appWidgetManager.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class));
+
+        for (int appWidgetId : ids) {
+            if (intent.getAction() == ACTION_APPWIDGET_UPDATE) {
+                updateAppWidget(context, appWidgetManager, appWidgetId);
+            }
+        }
+
+        super.onReceive(context, intent);
+    }
+
+
 }
+
