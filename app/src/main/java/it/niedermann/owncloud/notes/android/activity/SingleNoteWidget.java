@@ -135,10 +135,13 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         Log.d(TAG, "onReceive: ");
-        int[] mAppWidgetIds = intent.getExtras().getIntArray(AppWidgetManager.EXTRA_APPWIDGET_ID);
+
         if (intent.getAction() == ACTION_APPWIDGET_UPDATE) {
-            onUpdate(context, appWidgetManager, mAppWidgetIds);
+            int mAppWidgetId = intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_IDS);
+            updateAppWidget(context, appWidgetManager, mAppWidgetId);
         }
     }
+
+
 }
 
