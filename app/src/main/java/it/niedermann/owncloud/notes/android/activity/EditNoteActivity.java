@@ -267,14 +267,6 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
         data.putExtra(PARAM_NOTE_POSITION, notePosition);
         setResult(RESULT_OK, data);
 
-        // TODO Notify any widgets of note edit
-
-        Intent intent = new Intent(this, SingleNoteWidget.class);
-        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
-        sendBroadcast(intent);
-
         finish();
     }
 
@@ -346,5 +338,15 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
     private void saveData(ICallback callback) {
         Log.d(LOG_TAG, "saveData()");
         note = db.updateNoteAndSync(note, getContent(), callback);
+
+        /** Notify SingleNoteWidget that a note has been changed
+         *  TODO: Probably should check to see if the edited note actually
+         *  has a widget that needs updating.
+         */
+        Intent intent = new Intent(this, SingleNoteWidget.class);
+        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+//        int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
+//        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+        sendBroadcast(intent);
     }
 }

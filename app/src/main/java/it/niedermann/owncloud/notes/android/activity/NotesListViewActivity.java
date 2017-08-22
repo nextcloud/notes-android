@@ -339,8 +339,11 @@ public class NotesListViewActivity extends AppCompatActivity implements
     }
 
     public ItemAdapter getItemAdapter() {
-        // TODO If initialised
         return adapter;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
     }
 
     /**

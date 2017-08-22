@@ -21,6 +21,9 @@
         android:layout_marginBottom="6dp"
          />
 </RelativeLayout>
+
 <!--
+    TODO: Markdown support
+
  <com.yydcdut.rxmarkdown.RxMDTextView
 -->

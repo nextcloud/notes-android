@@ -2,11 +2,13 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
@@ -31,11 +33,14 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-  //      db = NoteSQLiteOpenHelper.getInstance(this);
         this.setResult(Activity.RESULT_CANCELED);
         findViewById(R.id.fab_create).setVisibility(View.INVISIBLE);
         getSupportActionBar().setTitle(R.string.activity_select_single_note);
 
+        // TODO SelectSingleNote theme
+        SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
+        swipeRefreshLayout.setEnabled(false);
+        swipeRefreshLayout.setRefreshing(false);
         initList();
     }
 
@@ -63,6 +68,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         sp.putBoolean(SingleNoteWidget.WIDGET_KEY + mAppWidgetId + SingleNoteWidget.INIT, true);
         sp.apply();
 
+        int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
         Intent retIntent = new Intent(this, SingleNoteWidget.class);
         retIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
         retIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);

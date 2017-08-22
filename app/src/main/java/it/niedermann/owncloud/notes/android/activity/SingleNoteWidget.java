@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.android.activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
+import static android.appwidget.AppWidgetManager.getInstance;
 
 
 public class SingleNoteWidget extends AppWidgetProvider {
@@ -57,12 +59,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
             DBNote note = db.getNote(noteID);
 
             /**
-<<<<<<< HEAD
              * TODO: Fix Single Note widget tap.
              * If the user has clicked the widget and then clicked Home,
-=======
-             * TODO: If the user has clicked the widget and then clicked Home,
->>>>>>> 420336611ae7e65e3628ea36616205a12be07e19
              * another click on the widget will open another edit window
              */
             /**
@@ -91,14 +89,17 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int ids[] = appWidgetManager.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class));
 
-        if (intent.getAction() == ACTION_APPWIDGET_UPDATE) {
-            int mAppWidgetId = intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID);
-            updateAppWidget(context, appWidgetManager, mAppWidgetId);
+        for (int appWidgetId : ids) {
+            if (intent.getAction() == ACTION_APPWIDGET_UPDATE) {
+                updateAppWidget(context, appWidgetManager, appWidgetId);
+            }
         }
+
+        super.onReceive(context, intent);
     }
 
 
