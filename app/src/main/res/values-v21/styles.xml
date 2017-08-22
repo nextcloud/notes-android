@@ -2,6 +2,7 @@
 <resources>
 
     <style name="SelectSingleNote" parent="Theme.AppCompat.Light.DarkActionBar">
+<<<<<<< HEAD
         <item name="android:background">@color/bg_highlighted</item>
         <item name="android:textColor">@color/primary_dark</item>
         <item name="colorAccent">@color/primary</item>
@@ -12,5 +13,8 @@
         <item name="android:windowBackground">@color/bg_normal</item>
         <item name="android:textColorPrimary">@color/primary</item>
         <item name="android:statusBarColor">@color/primary_dark</item>
+=======
+        <item name="android:windowTitleBackgroundStyle">@color/fg_default_high</item>
+>>>>>>> 7951365... .
     </style>
 </resources>

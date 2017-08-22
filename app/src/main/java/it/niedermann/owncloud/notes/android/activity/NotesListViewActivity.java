@@ -476,7 +476,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
             intent.putExtra(EditNoteActivity.PARAM_NOTE, (DBNote) item);
             intent.putExtra(EditNoteActivity.PARAM_NOTE_POSITION, position);
             startActivityForResult(intent, show_single_note_cmd);
-
         }
     }
 
