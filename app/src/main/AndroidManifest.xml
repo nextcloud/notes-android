@@ -74,6 +74,7 @@
             android:label="@string/menu_edit"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateVisible"
+            android:launchMode="singleTask"
             />
 
         <activity

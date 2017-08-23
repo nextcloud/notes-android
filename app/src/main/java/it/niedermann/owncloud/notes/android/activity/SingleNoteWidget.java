@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -59,18 +60,10 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
             DBNote note = db.getNote(noteID);
 
-            /**
-             * TODO: Fix Single Note widget tap.
-             * If the user has clicked the widget and then clicked Home,
-             * another click on the widget will open another edit window
-             */
-            /**
-             Intent intent = new Intent(context, EditNoteActivity.class);
+            Intent intent = new Intent(context, EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
-             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-             views.setOnClickPendingIntent(R.id.single_note, pendingIntent);
-             */
-
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setOnClickPendingIntent(R.id.widget_single_note, pendingIntent);
 
             views.setTextViewText(R.id.single_note_content, note.getContent());
             appWidgetManager.updateAppWidget(appWidgetId, views);
