@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.android.activity;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -15,9 +14,11 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
-import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
-import static android.appwidget.AppWidgetManager.getInstance;
+/** TODO Widget should update when a background refresh is performed
+ *  for ex., when a user has updated the note on the web frontend.
+ */
 
+import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
 
 public class SingleNoteWidget extends AppWidgetProvider {
 
@@ -69,6 +70,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
              PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
              views.setOnClickPendingIntent(R.id.single_note, pendingIntent);
              */
+
+
             views.setTextViewText(R.id.single_note_content, note.getContent());
             appWidgetManager.updateAppWidget(appWidgetId, views);
         } else {
