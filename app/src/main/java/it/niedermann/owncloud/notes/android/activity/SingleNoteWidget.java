@@ -56,17 +56,21 @@ public class SingleNoteWidget extends AppWidgetProvider {
         long noteID = sharedprefs.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1);
         boolean isInitialised = sharedprefs.getBoolean(SingleNoteWidget.WIDGET_KEY + appWidgetId + INIT, false);
 
-        if (noteID >= 0 && isInitialised) {
+        if (noteID >= 0) {
+            if (isInitialised) {
 
-            DBNote note = db.getNote(noteID);
+                DBNote note = db.getNote(noteID);
 
-            Intent intent = new Intent(context, EditNoteActivity.class);
-            intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            views.setOnClickPendingIntent(R.id.widget_single_note, pendingIntent);
+                Intent intent = new Intent(context, EditNoteActivity.class);
+                intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
+                PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                views.setOnClickPendingIntent(R.id.widget_single_note, pendingIntent);
 
-            views.setTextViewText(R.id.single_note_content, note.getContent());
-            appWidgetManager.updateAppWidget(appWidgetId, views);
+                views.setTextViewText(R.id.single_note_content, note.getContent());
+                appWidgetManager.updateAppWidget(appWidgetId, views);
+            } else {
+                Log.e(TAG, "Widget not initialised");
+            }
         } else {
 
             Log.e(TAG, "Note not found");
