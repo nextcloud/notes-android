@@ -10,7 +10,6 @@
 
     <TextView
         android:id="@+id/single_note_content"
-        android:padding="0dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/fg_default"
         android:layout_width="match_parent"
