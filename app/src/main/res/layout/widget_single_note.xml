@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/widget_background"
-    android:padding="@dimen/widget_padding"
+    android:padding="@dimen/widget_single_note_padding"
     android:clickable="true">
 
     <TextView
