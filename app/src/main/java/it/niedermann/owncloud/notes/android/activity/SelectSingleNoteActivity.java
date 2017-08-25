@@ -5,12 +5,15 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.View;
-
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
@@ -32,7 +35,14 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         findViewById(R.id.fab_create).setVisibility(View.INVISIBLE);
         getSupportActionBar().setTitle(R.string.activity_select_single_note);
 
-        // TODO SelectSingleNote theme
+        ColorDrawable colorDrawable = new ColorDrawable(getColor(R.color.bg_highlighted));
+        getSupportActionBar().setBackgroundDrawable(colorDrawable);
+
+        Spannable title = new SpannableString(getSupportActionBar().getTitle());
+        title.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.primary)), 0,
+                            title.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        getSupportActionBar().setTitle(title);
+
         SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setRefreshing(false);
