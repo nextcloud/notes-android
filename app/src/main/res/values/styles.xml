@@ -12,16 +12,7 @@
         <item name="android:buttonStyle">@style/ocbutton</item>
         <item name="android:windowTitleBackgroundStyle">@color/bg_normal</item>
     </style>
-
-    <!-- TODO Theme for Single Note Widget selection activity -->
-    <style name="SelectSingleNoteTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/SSNActionBarTheme</item>
-    </style>
-    <style name="SSNActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">#000000</item>
-        <item name="android:textColor">@color/primary</item>
-    </style>
-
+    
     <!--
         cert4android is using these styles and we want the same button style in the trust activity
     -->

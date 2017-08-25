@@ -97,7 +97,4 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         super.onReceive(context, intent);
     }
-
-
 }
-
