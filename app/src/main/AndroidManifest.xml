@@ -84,8 +84,7 @@
             />
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity"
-            android:theme="@style/SelectSingleNoteTheme">
+            android:name="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>

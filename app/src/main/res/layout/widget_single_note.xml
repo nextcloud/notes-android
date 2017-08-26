@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/widget_background"
-    android:padding="@dimen/widget_padding"
+    android:padding="@dimen/widget_single_note_padding"
     android:clickable="true">
 
     <TextView
         android:id="@+id/single_note_content"
-        android:padding="0dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/fg_default"
         android:layout_width="match_parent"
@@ -21,5 +20,5 @@
 <!--
     TODO: Markdown support
 
- <com.yydcdut.rxmarkdown.RxMDTextView
+    <com.yydcdut.rxmarkdown.RxMDTextView
 -->
