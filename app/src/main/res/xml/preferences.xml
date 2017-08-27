@@ -9,11 +9,14 @@
         </Preference>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_other_category">
+    <PreferenceCategory android:title="@string/settings_notification_category">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="showNotification"
             android:title="@string/settings_notification" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_view_category">
         <ListPreference
             android:defaultValue="edit"
             android:key="noteMode"

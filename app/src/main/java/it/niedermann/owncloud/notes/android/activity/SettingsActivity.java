@@ -39,6 +39,8 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String SETTINGS_URL = "settingsUrl";
     public static final String SETTINGS_USERNAME = "settingsUsername";
     public static final String SETTINGS_PASSWORD = "settingsPassword";
+    public static final String SETTINGS_KEY_ETAG = "notes_last_etag";
+    public static final String SETTINGS_KEY_LAST_MODIFIED = "notes_last_modified";
     public static final String DEFAULT_SETTINGS = "";
     public static final int CREDENTIALS_CHANGED = 3;
 
@@ -162,6 +164,18 @@ public class SettingsActivity extends AppCompatActivity {
         password_wrapper.setHint(getString(unchangedHint ? R.string.settings_password_unchanged : R.string.settings_password));
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Occurs in this scenario: User opens the app but doesn't configure the server settings, they then add the Create Note widget to home screen and configure
+        // server settings there. The stale SettingsActivity is then displayed hence finish() here to close it down.
+        if ((first_run) && (NoteServerSyncHelper.isConfigured(this))) {
+            finish();
+        }
+    }
+
     /**
      * Prevent pressing back button on first run
      */
@@ -258,6 +272,8 @@ public class SettingsActivity extends AppCompatActivity {
                 editor.putString(SETTINGS_URL, url);
                 editor.putString(SETTINGS_USERNAME, username);
                 editor.putString(SETTINGS_PASSWORD, password);
+                editor.remove(SETTINGS_KEY_ETAG);
+                editor.remove(SETTINGS_KEY_LAST_MODIFIED);
                 editor.apply();
 
                 final Intent data = new Intent();

@@ -34,7 +34,6 @@
     <string name="listview_updated_this_month">Tento mesiac</string>
     <string name="listview_updated_earlier">Skôr</string>
 
-    <!-- Settings -->
     <string name="settings_server">Server</string>
     <string name="settings_url">Adresa servera</string>
     <string name="settings_url_check_description">Ukáže či je adresa pingnuteľná.</string>
@@ -45,7 +44,6 @@
     <string name="settings_submit">Pripojiť</string>
     <string name="settings_submitting">Pripájam &#8230;</string>
     <string name="settings_notification">Aktivovať zobrazovanie stáleho oznámenia rýchleho vytvorenia nových poznámok.</string>
-
     <!-- Network -->
     <string name="network_connecting">Pripájam</string>
     <string name="network_connected">Pripojené</string>

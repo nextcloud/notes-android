@@ -113,6 +113,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        recreateDatabase(db);
+    }
+
     private void clearDatabase(SQLiteDatabase db) {
         db.delete(table_notes, null, null);
     }
@@ -251,9 +256,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public void debugPrintFullDB() {
         List<DBNote> notes = getNotesCustom("", new String[]{}, default_order);
-        Log.d(getClass().getSimpleName(), "Full Database ("+notes.size()+" notes):");
+        Log.v(getClass().getSimpleName(), "Full Database ("+notes.size()+" notes):");
         for (DBNote note : notes) {
-            Log.d(getClass().getSimpleName(), "     "+note);
+            Log.v(getClass().getSimpleName(), "     "+note);
         }
     }
 
@@ -328,7 +333,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return changed note if differs from database, otherwise the old note.
      */
     public DBNote updateNoteAndSync(DBNote oldNote, String newContent, ICallback callback) {
-        debugPrintFullDB();
+        //debugPrintFullDB();
         DBNote newNote;
         if(newContent==null) {
             newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED);
@@ -339,9 +344,10 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(key_status, newNote.getStatus().getTitle());
         values.put(key_title, newNote.getTitle());
+        values.put(key_category, newNote.getCategory());
         values.put(key_modified, newNote.getModified(DATE_FORMAT));
         values.put(key_content, newNote.getContent());
-        int rows = db.update(table_notes, values, key_id + " = ? AND " + key_content + " != ?", new String[]{String.valueOf(newNote.getId()), newNote.getContent()});
+        int rows = db.update(table_notes, values, key_id + " = ? AND (" + key_content + " != ? OR " + key_category + " != ?)", new String[]{String.valueOf(newNote.getId()), newNote.getContent(), newNote.getCategory()});
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if(rows > 0) {
             if(callback!=null) {

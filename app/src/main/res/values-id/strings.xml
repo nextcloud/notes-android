@@ -34,18 +34,17 @@
     <string name="listview_updated_this_month">Bulan ini</string>
     <string name="listview_updated_earlier">Terdahulu</string>
 
-    <!-- Settings -->
     <string name="settings_server">Peladen</string>
     <string name="settings_url">Alamat peladen</string>
     <string name="settings_url_check_description">Tampilkan jika alamat dapat diping.</string>
     <string name="settings_url_warn_http">PERHATIAN: \"http\" tidak aman. Harap gunakan \"https\".</string>
     <string name="settings_username">Nama pengguna</string>
     <string name="settings_password">Sandi</string>
+    <string name="settings_password_unchanged">Sandi (tidak berubah)</string>
     <string name="settings_password_check_description">Tampilkan jika sandi benar</string>
     <string name="settings_submit">Sambung</string>
     <string name="settings_submitting">Menyambungkan &#8230;</string>
     <string name="settings_notification">Aktifkan untuk menampilkan notifikasi tetap untuk membuat catatan baru dengan cepat.</string>
-
     <!-- Network -->
     <string name="network_connecting">Menyambungkan</string>
     <string name="network_connected">Tersambung</string>
@@ -54,6 +53,7 @@
     <!-- Error -->
     <string name="error_sync">Sinkronisasi gagal: %1$s</string>
     <string name="error_invalid_login">Masuk log salah: %1$s</string>
+    <string name="error_json">Apakah apl Notes telah diaktifkan dipeladen?</string>
     <string name="error_io">koneksi peladen gagal</string>
     <string name="error_no_network">tidak ada koneksi jaringan</string>
     <string name="error_server">URL/Peladan telah galat</string>
@@ -88,6 +88,9 @@
 
     <string name="widget_all_notes_title">Semua catatan</string>
     <string name="widget_single_note_title">Satu catatan</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Buat catatan baru</string>
 
     <!-- Plurals -->
     <plurals name="ab_selected">

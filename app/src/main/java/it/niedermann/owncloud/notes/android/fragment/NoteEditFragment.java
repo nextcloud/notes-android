@@ -1,8 +1,9 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -33,7 +34,7 @@ import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 
-public class NoteEditFragment extends Fragment implements NoteFragmentI {
+public class NoteEditFragment extends Fragment implements NoteFragmentI, CategoryDialogFragment.CategoryDialogListener {
 
     public static final String PARAM_NOTE = "note";
 
@@ -70,7 +71,45 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
         super.onPrepareOptionsMenu(menu);
         MenuItem itemPreview = menu.findItem(R.id.menu_preview);
         itemPreview.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_eye_white_24dp));
+        MenuItem itemCategory = menu.findItem(R.id.menu_category);
+        itemCategory.setVisible(true);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_category:
+                showCategorySelector();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * Opens a dialog in order to chose a category
+     */
+    private void showCategorySelector() {
+        final String fragmentId = "fragment_category";
+        FragmentManager manager = getFragmentManager();
+        Fragment frag = manager.findFragmentByTag(fragmentId);
+        if(frag!=null) {
+            manager.beginTransaction().remove(frag).commit();
+        }
+        Bundle arguments = new Bundle();
+        arguments.putString(CategoryDialogFragment.PARAM_CATEGORY, note.getCategory());
+        CategoryDialogFragment categoryFragment = new CategoryDialogFragment();
+        categoryFragment.setTargetFragment(this, 1);
+        categoryFragment.setArguments(arguments);
+        categoryFragment.show(manager, fragmentId);
+    }
+
+    @Override
+    public void onCategoryChosen(String category) {
+        note.setCategory(category);
+        autoSave();
+    }
+
 
     @Nullable
     @Override
@@ -123,26 +162,22 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
 
             @Override
             public void afterTextChanged(final Editable s) {
-                if (db.getNoteServerSyncHelper().isSyncPossible() && note != null) {
-                    if (timer != null) {
-                        timer.cancel();
-                    }
-                    if (!saveActive) {
-                        timer = new Timer();
-                        timer.schedule(new TimerTask() {
-                            @Override
-                            public void run() {
-                                if (getActivity() != null) {
-                                    getActivity().runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            autoSave();
-                                        }
-                                    });
+                if(timer != null) {
+                    timer.cancel();
+                }
+                if(!saveActive) {
+                    timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    autoSave();
                                 }
-                            }
-                        }, DELAY);
-                    }
+                            });
+                        }
+                    }, DELAY);
                 }
             }
         });
@@ -189,6 +224,15 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
         saveData(new ICallback() {
             @Override
             public void onFinish() {
+                onSaved();
+            }
+
+            @Override
+            public void onScheduled() {
+                onSaved();
+            }
+
+            public void onSaved() {
                 // AFTER SYNCHRONIZATION
                 Log.d(LOG_TAG, "...sync finished");
                 if (getActivity() != null && actionBar != null) {
@@ -233,13 +277,6 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
                     }, DELAY_AFTER_SYNC);
                 }
 
-                /* TODO Notify widgets
-
-                int widgetIDs[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
-
-                for (int id : widgetIDs) {
-                    AppWidgetManager.getInstance(getApplication()).notifyAppWidgetViewDataChanged(id, R.layout.widget_single_note);
-                }*/
             }
         });
     }

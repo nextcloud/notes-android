@@ -1,12 +1,11 @@
 package it.niedermann.owncloud.notes.android.activity;
 
-import android.content.Context;
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +63,7 @@ public class EditNoteActivity extends AppCompatActivity {
         } else if (mode.equals("last") && "preview".equals(lastMode)) {
             createPreviewFragment(note);
         /* TODO enhancement: store last mode in note
+           for cross device functionality per note mode should be stored on the server.
         } else if(mode.equals("note") && "preview".equals(note.getMode())) {
             createPreviewFragment(note);
          */
@@ -75,13 +75,13 @@ public class EditNoteActivity extends AppCompatActivity {
     private void createEditFragment(DBNote note) {
         configureActionBar(note, false);
         fragment = NoteEditFragment.newInstance(note);
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, (Fragment) fragment).commit();
+        getFragmentManager().beginTransaction().replace(android.R.id.content, (Fragment) fragment).commit();
     }
 
     private void createPreviewFragment(DBNote note) {
         configureActionBar(note, true);
         fragment = NotePreviewFragment.newInstance(note);
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, (Fragment) fragment).commit();
+        getFragmentManager().beginTransaction().replace(android.R.id.content, (Fragment) fragment).commit();
     }
 
     private void configureActionBar(DBNote note, boolean timestamp) {
@@ -191,7 +191,9 @@ public class EditNoteActivity extends AppCompatActivity {
      * Send result and closes the Activity
      */
     private void close(DBNote note) {
-        /* TODO enhancement: store last mode in note */
+        /* TODO enhancement: store last mode in note
+        * for cross device functionality per note mode should be stored on the server.
+        */
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (fragment instanceof NoteEditFragment) {
             preferences.edit().putString("noteLastMode", "edit").commit();

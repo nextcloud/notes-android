@@ -1,8 +1,8 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -56,6 +56,8 @@ public class NotePreviewFragment extends Fragment implements NoteFragmentI {
         super.onPrepareOptionsMenu(menu);
         MenuItem itemPreview = menu.findItem(R.id.menu_preview);
         itemPreview.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_edit_24dp));
+        MenuItem itemCategory = menu.findItem(R.id.menu_category);
+        itemCategory.setVisible(false);
     }
 
     @Nullable

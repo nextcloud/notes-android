@@ -34,7 +34,6 @@
     <string name="listview_updated_this_month">Aquest mes</string>
     <string name="listview_updated_earlier">Aviat</string>
 
-    <!-- Settings -->
     <string name="settings_server">Servidor</string>
     <string name="settings_url">Adreça del servidor</string>
     <string name="settings_url_check_description">Mostra si es pot fer ping a l\\\'adreça</string>
@@ -45,7 +44,6 @@
     <string name="settings_submit">Connecta</string>
     <string name="settings_submitting">Conectant &#8230;</string>
     <string name="settings_notification">Habilitar per a mostrar una notificació permanent per a crear noves notes ràpidament</string>
-
     <!-- Network -->
     <string name="network_connecting">Connectant</string>
     <string name="network_connected">Connectant</string>
