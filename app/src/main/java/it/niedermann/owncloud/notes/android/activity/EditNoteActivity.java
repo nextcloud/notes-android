@@ -2,8 +2,6 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -38,6 +36,7 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
     public static final String PARAM_NOTE = "note";
     public static final String PARAM_ORIGINAL_NOTE = "original_note";
     public static final String PARAM_NOTE_POSITION = "note_position";
+    public static final String PARAM_WIDGET_SRC = "WIDGET_SRC";
 
     private static final String LOG_TAG = "EditNote/SAVE";
     private static final long DELAY = 2000; // in ms
@@ -65,6 +64,15 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
             originalNote = (DBNote) savedInstanceState.getSerializable(PARAM_ORIGINAL_NOTE);
             notePosition = savedInstanceState.getInt(PARAM_NOTE_POSITION);
         }
+        db = NoteSQLiteOpenHelper.getInstance(this);
+
+        if (getIntent().getBooleanExtra(PARAM_WIDGET_SRC, false)) {
+            // TODO Only sync the note in question
+            // TODO There is an interval here where the user can edit
+            // the note before remote changes are synchronised
+            db.getNoteServerSyncHelper().scheduleSync(false);
+        }
+
         content = (RxMDEditText) findViewById(R.id.editContent);
         content.setText(note.getContent());
         content.setEnabled(true);
@@ -88,7 +96,6 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
                     }
                 });
 
-        db = NoteSQLiteOpenHelper.getInstance(this);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(note.getTitle());
@@ -343,6 +350,11 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
          *  TODO: Probably should check to see if the edited note actually
          *  has a widget that needs updating.
          */
+        updateSingleNoteWidgets();
+    }
+
+    public void updateSingleNoteWidgets() {
+
         Intent intent = new Intent(this, SingleNoteWidget.class);
         intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
 //        int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));

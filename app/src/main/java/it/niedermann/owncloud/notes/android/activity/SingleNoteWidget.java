@@ -15,11 +15,11 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
+import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
+
 /** TODO Widget should update when a background refresh is performed
  *  for ex., when a user has updated the note on the web frontend.
  */
-
-import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
 
 public class SingleNoteWidget extends AppWidgetProvider {
 
@@ -63,6 +63,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
                 Intent intent = new Intent(context, EditNoteActivity.class);
                 intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
+                intent.putExtra(EditNoteActivity.PARAM_WIDGET_SRC, true);
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 views.setOnClickPendingIntent(R.id.widget_single_note, pendingIntent);
 
