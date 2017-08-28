@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import it.niedermann.owncloud.notes.R;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
+ * It targetFragment is set it must implement the interface {@link CategoryDialogListener}.
  * The calling Activity must implement the interface {@link CategoryDialogListener}.
  */
 public class CategoryDialogFragment extends DialogFragment {
@@ -46,7 +48,13 @@ public class CategoryDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.action_edit_save, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        CategoryDialogListener listener = (CategoryDialogListener) getActivity();
+                        CategoryDialogListener listener;
+                        Fragment target = getTargetFragment();
+                        if(target != null && target instanceof CategoryDialogListener) {
+                            listener = (CategoryDialogListener) target;
+                        } else {
+                            listener = (CategoryDialogListener) getActivity();
+                        }
                         listener.onCategoryChosen(textCategory.getText().toString());
                     }
                 })

@@ -16,6 +16,16 @@
             android:title="@string/settings_notification" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/settings_view_category">
+        <ListPreference
+            android:defaultValue="edit"
+            android:key="noteMode"
+            android:title="@string/settings_note_mode"
+            android:summary="%s"
+            android:entries="@array/noteMode_entries"
+            android:entryValues="@array/noteMode_values" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/settings_cert_category">
         <CheckBoxPreference
             android:defaultValue="true"
