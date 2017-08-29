@@ -342,6 +342,14 @@ public class NotesListViewActivity extends AppCompatActivity implements
         touchHelper.attachToRecyclerView(listView);
     }
 
+    public ItemAdapter getItemAdapter() {
+        return adapter;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
+    }
+
     /**
      * Adds the Menu Items to the Action Bar.
      *
@@ -480,7 +488,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
             intent.putExtra(EditNoteActivity.PARAM_NOTE, (DBNote) item);
             intent.putExtra(EditNoteActivity.PARAM_NOTE_POSITION, position);
             startActivityForResult(intent, show_single_note_cmd);
-
         }
     }
 

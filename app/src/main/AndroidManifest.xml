@@ -74,6 +74,7 @@
             android:label="@string/menu_edit"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateVisible"
+            android:launchMode="singleTask"
             />
 
         <activity
@@ -82,7 +83,16 @@
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             />
 
-        <receiver   android:name=".android.activity.CreateNoteWidget"
+        <activity
+            android:name="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".android.activity.CreateNoteWidget"
             android:label="@string/widget_create_note">
 
             <intent-filter>
@@ -92,6 +102,20 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/create_note_widget_provider" />
+        </receiver>
+
+        <receiver
+            android:id="@+id/SingleNoteWidget"
+            android:name="it.niedermann.owncloud.notes.android.activity.SingleNoteWidget"
+            android:label="@string/widget_single_note_title">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/single_note_widget_provider_info" />
         </receiver>
     </application>
 </manifest>

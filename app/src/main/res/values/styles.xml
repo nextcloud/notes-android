@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="OwnCloud" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="OwnCloud" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Main theme colors -->
         <!-- App Bar -->
         <item name="colorPrimary">@color/primary</item>
@@ -10,9 +10,9 @@
         <!-- Snackbar Action Link -->
         <item name="colorAccent">@color/primary</item>
         <item name="android:buttonStyle">@style/ocbutton</item>
-        <item name="android:windowBackground">@color/bg_normal</item>
+        <item name="android:windowTitleBackgroundStyle">@color/bg_normal</item>
     </style>
-
+    
     <!--
         cert4android is using these styles and we want the same button style in the trust activity
     -->

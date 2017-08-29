@@ -115,6 +115,8 @@
     <string name="widget_single_note_title">Single note</string>
     <string name="widget_create_note">Create Note</string>
 
+    <string name="activity_select_single_note">Select note</string>
+
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Create a new note</string>
 
