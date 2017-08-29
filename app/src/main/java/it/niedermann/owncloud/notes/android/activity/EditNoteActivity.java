@@ -70,7 +70,7 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
             // TODO Only sync the note in question
             // TODO There is an interval here where the user can edit
             // the note before remote changes are synchronised
-            db.getNoteServerSyncHelper().scheduleSync(false);
+//            db.getNoteServerSyncHelper().scheduleSync(false);
         }
 
         content = (RxMDEditText) findViewById(R.id.editContent);
