@@ -49,6 +49,8 @@
     <string name="settings_password_check_description">Shows if the credentials are correct.</string>
     <string name="settings_submit">Connect</string>
     <string name="settings_submitting">Connecting &#8230;</string>
+    <string name="settings_view_category">View Settings</string>
+    <string name="settings_note_mode">How should notes be opened</string>
     <string name="settings_notification_category">Notification</string>
     <string name="settings_notification">Enable to show a persistant notification for quickly creating new notes.</string>
     <string name="settings_cert_category">Certificates</string>

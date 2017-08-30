@@ -46,6 +46,7 @@
     <string name="settings_password_check_description">Zeigt an, ob die angegebenen Zugangsdaten korrekt sind.</string>
     <string name="settings_submit">Verbinden</string>
     <string name="settings_submitting">Verbindet&#8230;</string>
+    <string name="settings_view_category">Darstellung</string>
     <string name="settings_notification_category">Benachrichtigung</string>
     <string name="settings_notification">Aktivieren, um eine dauerhafte Benachrichtigung zur schnellen Eingabe von Notizen anzuzeigen.</string>
     <string name="settings_cert_category">Zertifikate</string>
