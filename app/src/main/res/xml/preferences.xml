@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="@string/settings_server">
         <Preference android:title="@string/settings_server_settings">
@@ -9,30 +8,36 @@
         </Preference>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_notification_category">
+    <PreferenceCategory android:title="@string/settings_view_category">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="showNotification"
-            android:title="@string/settings_notification" />
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="@string/settings_view_category">
+            android:title="@string/settings_notification_title"
+            android:summary="@string/settings_notification"
+            />
         <ListPreference
             android:defaultValue="edit"
             android:key="noteMode"
             android:title="@string/settings_note_mode"
             android:summary="%s"
             android:entries="@array/noteMode_entries"
-            android:entryValues="@array/noteMode_values" />
+            android:entryValues="@array/noteMode_values"
+            />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_cert_category">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="trustSystemCerts"
-            android:title="@string/settings_cert_trust_system" />
+            android:title="@string/settings_cert_trust_system"
+            android:summaryOn="@string/settings_cert_trust_system_on"
+            android:summaryOff="@string/settings_cert_trust_system_off"
+            />
         <Preference
             android:key="resetTrust"
-            android:title="@string/settings_cert_reset" />
+            android:title="@string/settings_cert_reset"
+            android:summary="@string/settings_cert_reset_summary"
+            />
     </PreferenceCategory>
+
 </PreferenceScreen>

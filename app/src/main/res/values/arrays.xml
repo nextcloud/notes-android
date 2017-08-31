@@ -5,9 +5,4 @@
         <item>preview</item>
         <item>last</item>
     </string-array>
-    <string-array name="noteMode_entries">
-        <item>Always open notes in Edit mode</item>
-        <item>Always open notes in Preview mode</item>
-        <item>Remember my last selection</item>
-    </string-array>
 </resources>

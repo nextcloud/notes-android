@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="noteMode_entries">
-        <item>Immer zum Bearbeiten öffnen</item>
-        <item>Immer Vorschau öffnen</item>
-        <item>Letzte Einstellung merken</item>
-    </string-array>
-</resources>
