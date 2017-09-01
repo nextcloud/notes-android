@@ -27,6 +27,7 @@ public class EditNoteActivity extends AppCompatActivity {
     public static final String PARAM_NOTE = "note";
     public static final String PARAM_ORIGINAL_NOTE = "original_note";
     public static final String PARAM_NOTE_POSITION = "note_position";
+    public static final String PARAM_WIDGET_SRC = "WIDGET_SRC";
 
     private static final String LOG_TAG = "EditNote/SAVE";
     private static final long DELAY = 2000; // in ms
@@ -206,6 +207,15 @@ public class EditNoteActivity extends AppCompatActivity {
         data.putExtra(PARAM_NOTE, note);
         data.putExtra(PARAM_NOTE_POSITION, notePosition);
         setResult(RESULT_OK, data);
+        updateSingleNoteWidgets();
         finish();
+    }
+
+
+    public void updateSingleNoteWidgets() {
+
+        Intent intent = new Intent(this, SingleNoteWidget.class);
+        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+        sendBroadcast(intent);
     }
 }
