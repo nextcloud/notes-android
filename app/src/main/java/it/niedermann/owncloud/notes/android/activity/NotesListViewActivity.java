@@ -342,6 +342,14 @@ public class NotesListViewActivity extends AppCompatActivity implements
         touchHelper.attachToRecyclerView(listView);
     }
 
+    public ItemAdapter getItemAdapter() {
+        return adapter;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
+    }
+
     /**
      * Adds the Menu Items to the Action Bar.
      *
