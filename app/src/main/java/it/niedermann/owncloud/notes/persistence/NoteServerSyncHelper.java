@@ -70,15 +70,9 @@ public class NoteServerSyncHelper {
     private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            ConnectivityManager connMgr = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
-            if(activeInfo != null && activeInfo.isConnected()) {
-                Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network connection established.");
-                networkConnected = true;
+            updateNetworkStatus();
+            if(isSyncPossible()) {
                 scheduleSync(false);
-            } else {
-                networkConnected = false;
-                Log.d(NoteServerSyncHelper.class.getSimpleName(), "No network connection.");
             }
         }
     };
@@ -88,6 +82,9 @@ public class NoteServerSyncHelper {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             cert4androidReady = true;
+            if(isSyncPossible()) {
+                scheduleSync(false);
+            }
         }
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
@@ -112,6 +109,7 @@ public class NoteServerSyncHelper {
 
         // Registers BroadcastReceiver to track network connection changes.
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        updateNetworkStatus();
         // bind to certifciate service to block sync attempts if service is not ready
         appContext.bindService(new Intent(appContext, CustomCertService.class), certService, Context.BIND_AUTO_CREATE);
     }
@@ -170,7 +168,8 @@ public class NoteServerSyncHelper {
      * @param onlyLocalChanges Whether to only push local changes to the server or to also load the whole list of notes from the server.
      */
     public void scheduleSync(boolean onlyLocalChanges) {
-        Log.d(getClass().getSimpleName(), "Sync requested ("+(onlyLocalChanges?"onlyLocalChanges":"full")+"; "+(networkConnected?"network connected":"network NOT connected")+", "+(syncActive?"sync active":"sync NOT active")+") ...");
+        Log.d(getClass().getSimpleName(), "Sync requested ("+(onlyLocalChanges?"onlyLocalChanges":"full")+"; "+(syncActive?"sync active":"sync NOT active")+") ...");
+        Log.d(getClass().getSimpleName(), "(network:"+networkConnected + "; conf:"+isConfigured(appContext)+"; cert4android:"+cert4androidReady+")");
         if(isSyncPossible() && (!syncActive || onlyLocalChanges)) {
             Log.d(getClass().getSimpleName(), "... starting now");
             SyncTask syncTask = new SyncTask(onlyLocalChanges);
@@ -192,6 +191,18 @@ public class NoteServerSyncHelper {
             for (ICallback callback : callbacksPush) {
                 callback.onScheduled();
             }
+        }
+    }
+
+    private void updateNetworkStatus() {
+        ConnectivityManager connMgr = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+        if(activeInfo != null && activeInfo.isConnected()) {
+            Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network connection established.");
+            networkConnected = true;
+        } else {
+            networkConnected = false;
+            Log.d(NoteServerSyncHelper.class.getSimpleName(), "No network connection.");
         }
     }
 
