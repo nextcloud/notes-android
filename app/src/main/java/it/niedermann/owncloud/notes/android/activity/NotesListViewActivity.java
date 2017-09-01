@@ -68,10 +68,10 @@ public class NotesListViewActivity extends AppCompatActivity implements
             swipeRefreshLayout.setRefreshing(false);
         }
 
-		@Override
-		public void onScheduled() {
-		}
-	};
+        @Override
+        public void onScheduled() {
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +104,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 }
             }
         });
-        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
 
         // Floating Action Button
         findViewById(R.id.fab_create).setOnClickListener(this);
@@ -142,17 +141,16 @@ public class NotesListViewActivity extends AppCompatActivity implements
         }
     }
 
-    /**
-     * Perform refresh on every time the activity gets visible
-     */
     @Override
     protected void onResume() {
         // Show persistant notification for creating a new note
         checkNotificationSetting();
+
+        // refresh and sync every time the activity gets visible
+        refreshList();
+        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
         if (db.getNoteServerSyncHelper().isSyncPossible()) {
             synchronize();
-        } else {
-            refreshList();
         }
         super.onResume();
     }
