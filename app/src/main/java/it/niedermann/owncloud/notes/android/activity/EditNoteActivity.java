@@ -207,15 +207,7 @@ public class EditNoteActivity extends AppCompatActivity {
         data.putExtra(PARAM_NOTE, note);
         data.putExtra(PARAM_NOTE_POSITION, notePosition);
         setResult(RESULT_OK, data);
-        updateSingleNoteWidgets();
+        db.updateSingleNoteWidgets();
         finish();
-    }
-
-
-    public void updateSingleNoteWidgets() {
-
-        Intent intent = new Intent(this, SingleNoteWidget.class);
-        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        sendBroadcast(intent);
     }
 }

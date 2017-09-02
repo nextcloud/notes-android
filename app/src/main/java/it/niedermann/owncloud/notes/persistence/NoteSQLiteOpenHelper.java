@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.persistence;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import it.niedermann.owncloud.notes.android.activity.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -444,5 +446,16 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         db.delete(table_notes,
                 key_id + " = ? AND " + key_status + " = ?",
                 new String[]{String.valueOf(id), forceDBStatus.getTitle()});
+    }
+
+
+    /**
+     * Update single note widget, if the note data was changed.
+     * TODO This should be replaced by using the observer pattern
+     */
+    public void updateSingleNoteWidgets() {
+        Intent intent = new Intent(getContext(), SingleNoteWidget.class);
+        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+        getContext().sendBroadcast(intent);
     }
 }

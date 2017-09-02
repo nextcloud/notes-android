@@ -384,6 +384,7 @@ public class NoteServerSyncHelper {
             for (ICallback callback : callbacks) {
                 callback.onFinish();
             }
+            dbHelper.updateSingleNoteWidgets();
             // start next sync if scheduled meanwhile
             if(syncScheduled) {
                 scheduleSync(false);
