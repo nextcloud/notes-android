@@ -40,8 +40,6 @@ import it.niedermann.owncloud.notes.util.SupportUtil;
 
 /**
  * Helps to synchronize the Database to the Server.
- * <p/>
- * Created by stefan on 20.09.15.
  */
 public class NoteServerSyncHelper {
 

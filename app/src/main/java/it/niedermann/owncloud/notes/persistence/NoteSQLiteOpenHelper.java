@@ -26,8 +26,6 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
- * <p/>
- * Created by stefan on 19.09.15.
  */
 public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 

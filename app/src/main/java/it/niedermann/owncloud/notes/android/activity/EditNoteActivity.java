@@ -4,16 +4,13 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.InputMethodManager;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
@@ -30,8 +27,6 @@ public class EditNoteActivity extends AppCompatActivity {
     public static final String PARAM_WIDGET_SRC = "WIDGET_SRC";
 
     private static final String LOG_TAG = "EditNote/SAVE";
-    private static final long DELAY = 2000; // in ms
-    private static final long DELAY_AFTER_SYNC = 5000; // in ms
 
     private DBNote originalNote;
     private int notePosition = 0;
@@ -41,7 +36,7 @@ public class EditNoteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DBNote note = null;
+        DBNote note;
 
         if (savedInstanceState == null) {
             Log.d(getClass().getSimpleName(), "Starting from Intent");

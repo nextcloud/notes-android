@@ -17,10 +17,6 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
 
-/** TODO Widget should update when a background refresh is performed
- *  for ex., when a user has updated the note on the web frontend.
- */
-
 public class SingleNoteWidget extends AppWidgetProvider {
 
     public static final String  WIDGET_KEY = "single_note_widget";
@@ -47,9 +43,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
         sharedprefs.apply();
     }
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
-
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(context);
         SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(context);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
@@ -58,22 +52,18 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         if (noteID >= 0) {
             if (isInitialised) {
-
                 DBNote note = db.getNote(noteID);
-
                 Intent intent = new Intent(context, EditNoteActivity.class);
                 intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
                 intent.putExtra(EditNoteActivity.PARAM_WIDGET_SRC, true);
                 PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 views.setOnClickPendingIntent(R.id.widget_single_note, pendingIntent);
-
                 views.setTextViewText(R.id.single_note_content, note.getContent());
                 appWidgetManager.updateAppWidget(appWidgetId, views);
             } else {
                 Log.e(TAG, "Widget not initialised");
             }
         } else {
-
             Log.e(TAG, "Note not found");
             views.setTextViewText(R.id.single_note_content, "Note not found");
             appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -82,7 +72,6 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -90,16 +79,14 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int ids[] = appWidgetManager.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class));
 
         for (int appWidgetId : ids) {
-            if (intent.getAction() == ACTION_APPWIDGET_UPDATE) {
+            if (ACTION_APPWIDGET_UPDATE.equals(intent.getAction())) {
                 updateAppWidget(context, appWidgetManager, appWidgetId);
             }
         }
-
         super.onReceive(context, intent);
     }
 }

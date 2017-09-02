@@ -2,7 +2,6 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -15,24 +14,19 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.View;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 
-/**
- * Created by Daniel Bailey on 18/08/2017.
- */
-
 public class SelectSingleNoteActivity extends NotesListViewActivity {
-
-    private static final String TAG = SelectSingleNoteActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.setResult(Activity.RESULT_CANCELED);
+        setResult(Activity.RESULT_CANCELED);
         findViewById(R.id.fab_create).setVisibility(View.INVISIBLE);
         getSupportActionBar().setTitle(R.string.activity_select_single_note);
 
@@ -42,8 +36,11 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         }
 
         Spannable title = new SpannableString(getSupportActionBar().getTitle());
-        title.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.primary)), 0,
-                title.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        title.setSpan(
+                new ForegroundColorSpan(getResources().getColor(R.color.primary)),
+                0,
+                title.length(),
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         getSupportActionBar().setTitle(title);
 
         SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
@@ -53,11 +50,12 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) { return true; }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
 
     @Override
     public void onNoteClick(int position, View v) {
-
         ItemAdapter adapter = getItemAdapter();
         Item item = adapter.getItem(position);
         DBNote note = (DBNote) item;
@@ -76,18 +74,20 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         sp.putBoolean(SingleNoteWidget.WIDGET_KEY + mAppWidgetId + SingleNoteWidget.INIT, true);
         sp.apply();
 
-        int ids[] = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), SingleNoteWidget.class));
         Intent retIntent = new Intent(this, SingleNoteWidget.class);
         retIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
         retIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        this.sendBroadcast(retIntent);
-        this.setResult(RESULT_OK, retIntent);
+        sendBroadcast(retIntent);
+        setResult(RESULT_OK, retIntent);
         finish();
     }
 
     @Override
-    public boolean onNoteLongClick(int position, View v) { return false; }
+    public boolean onNoteLongClick(int position, View v) {
+        return false;
+    }
 
     @Override
-    public void onNoteFavoriteClick(int position, View view) { }
+    public void onNoteFavoriteClick(int position, View view) {
+    }
 }
