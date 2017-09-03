@@ -40,7 +40,7 @@ public class CategoryDialogFragment extends DialogFragment {
         if(savedInstanceState==null) {
             textCategory.setText(getArguments().getString(PARAM_CATEGORY));
         }
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(getActivity(), R.style.ocAlertDialog)
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setMessage(R.string.change_category_message)
