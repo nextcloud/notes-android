@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -34,7 +33,7 @@ import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 
-public class NoteEditFragment extends Fragment implements NoteFragmentI, CategoryDialogFragment.CategoryDialogListener {
+public class NoteEditFragment extends Fragment implements NoteFragmentI {
 
     public static final String PARAM_NOTE = "note";
 
@@ -71,45 +70,7 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI, Categor
         super.onPrepareOptionsMenu(menu);
         MenuItem itemPreview = menu.findItem(R.id.menu_preview);
         itemPreview.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_eye_white_24dp));
-        MenuItem itemCategory = menu.findItem(R.id.menu_category);
-        itemCategory.setVisible(true);
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_category:
-                showCategorySelector();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /**
-     * Opens a dialog in order to chose a category
-     */
-    private void showCategorySelector() {
-        final String fragmentId = "fragment_category";
-        FragmentManager manager = getFragmentManager();
-        Fragment frag = manager.findFragmentByTag(fragmentId);
-        if(frag!=null) {
-            manager.beginTransaction().remove(frag).commit();
-        }
-        Bundle arguments = new Bundle();
-        arguments.putString(CategoryDialogFragment.PARAM_CATEGORY, note.getCategory());
-        CategoryDialogFragment categoryFragment = new CategoryDialogFragment();
-        categoryFragment.setTargetFragment(this, 1);
-        categoryFragment.setArguments(arguments);
-        categoryFragment.show(manager, fragmentId);
-    }
-
-    @Override
-    public void onCategoryChosen(String category) {
-        note.setCategory(category);
-        autoSave();
-    }
-
 
     @Nullable
     @Override

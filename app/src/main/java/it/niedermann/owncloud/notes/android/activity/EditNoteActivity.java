@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,13 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteFragmentI;
 import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
-public class EditNoteActivity extends AppCompatActivity {
+public class EditNoteActivity extends AppCompatActivity implements CategoryDialogFragment.CategoryDialogListener {
 
     public static final String PARAM_NOTE = "note";
     public static final String PARAM_ORIGINAL_NOTE = "original_note";
@@ -155,6 +157,9 @@ public class EditNoteActivity extends AppCompatActivity {
                 db.toggleFavorite(fragment.getNote(), null);
                 prepareFavoriteOption(item);
                 return true;
+            case R.id.menu_category:
+                showCategorySelector();
+                return true;
             case R.id.menu_preview:
                 if (fragment instanceof NoteEditFragment) {
                     createPreviewFragment(fragment.getNote());
@@ -181,6 +186,30 @@ public class EditNoteActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Opens a dialog in order to chose a category
+     */
+    private void showCategorySelector() {
+        final String fragmentId = "fragment_category";
+        FragmentManager manager = getFragmentManager();
+        Fragment frag = manager.findFragmentByTag(fragmentId);
+        if(frag!=null) {
+            manager.beginTransaction().remove(frag).commit();
+        }
+        Bundle arguments = new Bundle();
+        arguments.putString(CategoryDialogFragment.PARAM_CATEGORY, fragment.getNote().getCategory());
+        CategoryDialogFragment categoryFragment = new CategoryDialogFragment();
+        categoryFragment.setArguments(arguments);
+        categoryFragment.show(manager, fragmentId);
+    }
+
+    @Override
+    public void onCategoryChosen(String category) {
+        DBNote note = fragment.getNote();
+        note.setCategory(category);
+        db.updateNoteAndSync(note, note.getContent(), null);
     }
 
     /**
