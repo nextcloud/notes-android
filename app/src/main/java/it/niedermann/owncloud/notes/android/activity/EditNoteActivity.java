@@ -66,6 +66,10 @@ public class EditNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         DBNote note;
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String mode = preferences.getString(PREF_NOTE_MODE, PREF_MODE_EDIT);
+        String lastMode = preferences.getString(PREF_NOTE_LAST_MODE, PREF_MODE_EDIT);
+
         if (savedInstanceState == null) {
             Log.d(getClass().getSimpleName(), "Starting from Intent");
             note = originalNote = (DBNote) getIntent().getSerializableExtra(PARAM_NOTE);
@@ -75,13 +79,11 @@ public class EditNoteActivity extends AppCompatActivity {
             note = (DBNote) savedInstanceState.getSerializable(PARAM_NOTE);
             originalNote = (DBNote) savedInstanceState.getSerializable(PARAM_ORIGINAL_NOTE);
             notePosition = savedInstanceState.getInt(PARAM_NOTE_POSITION);
+            mode = savedInstanceState.getString(PREF_NOTE_MODE);
         }
 
         db = NoteSQLiteOpenHelper.getInstance(this);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String mode = preferences.getString(PREF_NOTE_MODE, PREF_MODE_EDIT);
-        String lastMode = preferences.getString(PREF_NOTE_LAST_MODE, PREF_MODE_EDIT);
         if (PREF_MODE_PREVIEW.equals(mode)) {
             createPreviewFragment(note);
         } else if (PREF_MODE_LAST.equals(mode) && PREF_MODE_PREVIEW.equals(lastMode)) {
@@ -127,6 +129,10 @@ public class EditNoteActivity extends AppCompatActivity {
         outState.putSerializable(PARAM_NOTE, fragment.getNote());
         outState.putSerializable(PARAM_ORIGINAL_NOTE, originalNote);
         outState.putInt(PARAM_NOTE_POSITION, notePosition);
+        if(fragment instanceof  NotePreviewFragment)
+            outState.putString(PREF_NOTE_MODE, PREF_MODE_PREVIEW);
+        else
+            outState.putString(PREF_NOTE_MODE, PREF_MODE_EDIT);
         super.onSaveInstanceState(outState);
     }
 
