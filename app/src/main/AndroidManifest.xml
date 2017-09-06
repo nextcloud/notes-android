@@ -68,7 +68,7 @@
             android:label="@string/menu_edit"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateVisible"
-            android:launchMode="singleTask"
+            android:launchMode="singleInstance"
             />
 
         <activity
@@ -111,5 +111,10 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/single_note_widget_provider_info" />
         </receiver>
+
+        <service
+            android:name=".persistence.SingleNoteWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 </manifest>
