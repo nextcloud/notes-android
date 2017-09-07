@@ -131,12 +131,13 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
                     timer.schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    autoSave();
-                                }
-                            });
+                            if(getActivity() != null)
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        autoSave();
+                                    }
+                                });
                         }
                     }, DELAY);
                 }
