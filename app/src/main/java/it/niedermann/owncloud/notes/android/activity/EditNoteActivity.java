@@ -86,9 +86,7 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
 
         db = NoteSQLiteOpenHelper.getInstance(this);
 
-        if (PREF_MODE_PREVIEW.equals(mode)) {
-            createPreviewFragment(note);
-        } else if (PREF_MODE_LAST.equals(mode) && PREF_MODE_PREVIEW.equals(lastMode)) {
+        if (PREF_MODE_PREVIEW.equals(mode) || (PREF_MODE_LAST.equals(mode) && PREF_MODE_PREVIEW.equals(lastMode))) {
             createPreviewFragment(note);
         /* TODO enhancement: store last mode in note
            for cross device functionality per note mode should be stored on the server.
@@ -195,11 +193,10 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
                 showCategorySelector();
                 return true;
             case R.id.menu_preview:
-                if (fragment instanceof NoteEditFragment) {
-                    createPreviewFragment(fragment.getNote());
-                } else {
-                    createEditFragment(fragment.getNote());
-                }
+                createPreviewFragment(fragment.getNote());
+                return true;
+            case R.id.menu_edit:
+                createEditFragment(fragment.getNote());
                 return true;
             case R.id.menu_share:
                 Intent shareIntent = new Intent();

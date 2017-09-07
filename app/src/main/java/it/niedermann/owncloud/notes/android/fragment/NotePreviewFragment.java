@@ -54,8 +54,8 @@ public class NotePreviewFragment extends Fragment implements NoteFragmentI {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem itemPreview = menu.findItem(R.id.menu_preview);
-        itemPreview.setIcon(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_edit_24dp));
+        menu.findItem(R.id.menu_edit).setVisible(true);
+        menu.findItem(R.id.menu_preview).setVisible(false);
     }
 
     @Nullable
