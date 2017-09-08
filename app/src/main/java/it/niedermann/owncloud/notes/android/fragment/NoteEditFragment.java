@@ -55,7 +55,9 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
     }
 
     public DBNote getNote() {
-        saveData(null);
+        cancelTimers();
+        if (!getContent().equals(note.getContent()))
+            saveData(null);
         return note;
     }
 
@@ -149,6 +151,10 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
     @Override
     public void onPause() {
         super.onPause();
+        cancelTimers();
+    }
+
+    private void cancelTimers() {
         if (timer != null) {
             timer.cancel();
             timer = null;
@@ -157,6 +163,7 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
             timerNextSync.cancel();
             timerNextSync = null;
         }
+        saveActive = false;
     }
 
     private RxMDEditText getContentView() {
