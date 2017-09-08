@@ -11,13 +11,13 @@
     <PreferenceCategory android:title="@string/settings_view_category">
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="showNotification"
+            android:key="@string/pref_key_show_notification"
             android:title="@string/settings_notification_title"
             android:summary="@string/settings_notification"
             />
         <ListPreference
-            android:defaultValue="edit"
-            android:key="noteMode"
+            android:defaultValue="@string/pref_value_mode_edit"
+            android:key="@string/pref_key_note_mode"
             android:title="@string/settings_note_mode"
             android:summary="%s"
             android:entries="@array/noteMode_entries"
@@ -28,13 +28,13 @@
     <PreferenceCategory android:title="@string/settings_cert_category">
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="trustSystemCerts"
+            android:key="@string/pref_key_trust_system_certs"
             android:title="@string/settings_cert_trust_system"
             android:summaryOn="@string/settings_cert_trust_system_on"
             android:summaryOff="@string/settings_cert_trust_system_off"
             />
         <Preference
-            android:key="resetTrust"
+            android:key="@string/pref_key_reset_trust"
             android:title="@string/settings_cert_reset"
             android:summary="@string/settings_cert_reset_summary"
             />

@@ -115,7 +115,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
     protected void checkNotificationSetting(){
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
-        Boolean showNotification = preferences.getBoolean("showNotification", false);
+        Boolean showNotification = preferences.getBoolean(getString(R.string.pref_key_show_notification), false);
         if(showNotification==true){
             // add notification
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
