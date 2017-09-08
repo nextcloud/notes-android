@@ -125,6 +125,17 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Create a new note</string>
 
+    <!-- Key / Values for preferences -->
+    <string name="pref_key_trust_system_certs" translatable="false">trustSystemCerts</string>
+    <string name="pref_key_reset_trust" translatable="false">resetTrust</string>
+    <string name="pref_key_show_notification" translatable="false">showNotification</string>
+    <string name="pref_key_note_mode" translatable="false">noteMode</string>
+    <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
+    <string name="pref_value_mode_edit" translatable="false">edit</string>
+    <string name="pref_value_mode_preview" translatable="false">preview</string>
+    <string name="pref_value_mode_last" translatable="false">last</string>
+    <string name="pref_value_mode_note" translatable="false">note</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in edit mode</item>

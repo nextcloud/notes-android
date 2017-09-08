@@ -30,34 +30,6 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
 
     private static final String LOG_TAG = "EditNote/SAVE";
 
-    /**
-     * Preference key to store the open mode set by the user.
-     */
-    private static final String PREF_NOTE_MODE = "noteMode";
-    /**
-     * Preference key to store last mode used by the user.
-     * Value is updated when the Activity is closed.
-     * Supported values: PREF_MODE_EDIT, PREF_MODE_PREVIEW
-     */
-    private static final String PREF_NOTE_LAST_MODE = "noteLastMode";
-    /**
-     * Preference value indicating that the note should be opened in edit mode.
-     */
-    private static final String PREF_MODE_EDIT = "edit";
-    /**
-     * Preference value indicating that the note should be opened in preview mode.
-     */
-    private static final String PREF_MODE_PREVIEW = "preview";
-    /**
-     * Preference value indicating that the note should be opened according to the mode stored in PREF_NOTE_LAST_MODE.
-     */
-    private static final String PREF_MODE_LAST = "last";
-    /**
-     * Preference value indicating that the note should be opened according to the mode stored in note itself (on the server).
-     * Possible enhancement. Currently not implemented.
-     */
-    private static final String PREF_MODE_NOTE = "note";
-
     private DBNote originalNote;
     private int notePosition = 0;
     private NoteSQLiteOpenHelper db;
@@ -67,10 +39,15 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DBNote note;
+        final String prefKeyNoteMode = getString(R.string.pref_key_note_mode);
+        final String prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
+        final String prefValueEdit = getString(R.string.pref_value_mode_edit);
+        final String prefValuePreview = getString(R.string.pref_value_mode_preview);
+        final String prefValueLast = getString(R.string.pref_value_mode_last);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String mode = preferences.getString(PREF_NOTE_MODE, PREF_MODE_EDIT);
-        String lastMode = preferences.getString(PREF_NOTE_LAST_MODE, PREF_MODE_EDIT);
+        String mode = preferences.getString(prefKeyNoteMode, prefValueEdit);
+        String lastMode = preferences.getString(prefKeyLastMode, prefValueEdit);
 
         if (savedInstanceState == null) {
             Log.d(getClass().getSimpleName(), "Starting from Intent");
@@ -81,16 +58,16 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
             note = (DBNote) savedInstanceState.getSerializable(PARAM_NOTE);
             originalNote = (DBNote) savedInstanceState.getSerializable(PARAM_ORIGINAL_NOTE);
             notePosition = savedInstanceState.getInt(PARAM_NOTE_POSITION);
-            mode = savedInstanceState.getString(PREF_NOTE_MODE);
+            mode = savedInstanceState.getString(prefKeyNoteMode);
         }
 
         db = NoteSQLiteOpenHelper.getInstance(this);
 
-        if (PREF_MODE_PREVIEW.equals(mode) || (PREF_MODE_LAST.equals(mode) && PREF_MODE_PREVIEW.equals(lastMode))) {
+        if (prefValuePreview.equals(mode) || (prefValueLast.equals(mode) && prefValuePreview.equals(lastMode))) {
             createPreviewFragment(note);
         /* TODO enhancement: store last mode in note
            for cross device functionality per note mode should be stored on the server.
-        } else if(PREF_MODE_NOTE.equals(mode) && PREF_MODE_PREVIEW.equals(note.getMode())) {
+        } else if(prefValueLast.equals(mode) && prefValuePreview.equals(note.getMode())) {
             createPreviewFragment(note);
          */
         } else {
@@ -129,10 +106,11 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
         outState.putSerializable(PARAM_NOTE, fragment.getNote());
         outState.putSerializable(PARAM_ORIGINAL_NOTE, originalNote);
         outState.putInt(PARAM_NOTE_POSITION, notePosition);
+        final String prefKeyNoteMode = getString(R.string.pref_key_note_mode);
         if(fragment instanceof  NotePreviewFragment)
-            outState.putString(PREF_NOTE_MODE, PREF_MODE_PREVIEW);
+            outState.putString(prefKeyNoteMode, getString(R.string.pref_value_mode_preview));
         else
-            outState.putString(PREF_NOTE_MODE, PREF_MODE_EDIT);
+            outState.putString(prefKeyNoteMode, getString(R.string.pref_value_mode_edit));
         super.onSaveInstanceState(outState);
     }
 
@@ -251,10 +229,11 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
         * for cross device functionality per note mode should be stored on the server.
         */
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final String prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
         if (fragment instanceof NoteEditFragment) {
-            preferences.edit().putString(PREF_NOTE_LAST_MODE, PREF_MODE_EDIT).apply();
+            preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_edit)).apply();
         } else {
-            preferences.edit().putString(PREF_NOTE_LAST_MODE, PREF_MODE_PREVIEW).apply();
+            preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_preview)).apply();
         }
 
         Intent data = new Intent();

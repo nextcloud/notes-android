@@ -21,6 +21,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 
 import at.bitfire.cert4android.CustomCertManager;
+import it.niedermann.owncloud.notes.R;
 
 /**
  * Some helper functionality in alike the Android support library.
@@ -84,6 +85,6 @@ public class SupportUtil {
 
     public static CustomCertManager getCertManager(Context ctx) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
-        return new CustomCertManager(ctx, preferences.getBoolean("trustSystemCerts", true));
+        return new CustomCertManager(ctx, preferences.getBoolean(ctx.getString(R.string.pref_key_trust_system_certs), true));
     }
 }
