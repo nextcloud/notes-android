@@ -71,7 +71,6 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
 
         sp.putLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, noteID);
-        sp.putBoolean(SingleNoteWidget.WIDGET_KEY + mAppWidgetId + SingleNoteWidget.INIT, true);
         sp.apply();
 
         Intent retIntent = new Intent(this, SingleNoteWidget.class);
