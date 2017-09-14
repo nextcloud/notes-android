@@ -26,7 +26,6 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
     public static final String PARAM_NOTE = "note";
     public static final String PARAM_ORIGINAL_NOTE = "original_note";
     public static final String PARAM_NOTE_POSITION = "note_position";
-    public static final String PARAM_WIDGET_SRC = "WIDGET_SRC";
 
     private static final String LOG_TAG = "EditNote/SAVE";
 
@@ -262,6 +261,7 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
         data.putExtra(PARAM_NOTE_POSITION, notePosition);
         setResult(RESULT_OK, data);
         db.updateSingleNoteWidgets();
+        db.updateNoteListWidgets();
         finish();
     }
 }

@@ -45,23 +45,22 @@ public class SingleNoteWidget extends AppWidgetProvider {
                                                     templateIntent,
                                                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-
             Intent serviceIntent = new Intent(context, SingleNoteWidgetService.class);
             RemoteViews views = new RemoteViews(context.getPackageName(),
                                                         R.layout.widget_single_note);
 
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
-
             views.setPendingIntentTemplate(R.id.single_note_widget_lv, templatePendingIntent);
             views.setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent);
             views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
+
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
 
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
-
+    
     @Override
     public void onReceive(Context context, Intent intent) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
@@ -77,5 +76,4 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         super.onReceive(context, intent);
     }
-    
 }

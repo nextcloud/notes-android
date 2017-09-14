@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Widget header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@color/primary"
+        android:padding="2dp">
+
+        <ImageView
+            android:id="@+id/widget_note_header_icon"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="6dp"/>
+
+        <TextView
+            android:id="@+id/widget_note_list_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            android:textColor="@color/fg_contrast"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/widget_note_header_icon"
+            android:gravity="center_vertical"
+            android:paddingLeft="6dp"
+            />
+
+        <ImageView
+            android:id="@+id/widget_note_list_create_icon"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_new"
+            android:layout_alignParentRight="true"
+            android:paddingRight="6dp"/>
+
+    </RelativeLayout>
+    <!-- End header -->
+
+    <ListView
+        android:id="@+id/note_list_widget_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/widget_background"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/fg_default" />
+
+</LinearLayout>

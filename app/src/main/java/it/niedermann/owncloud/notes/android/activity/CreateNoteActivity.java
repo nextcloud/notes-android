@@ -27,7 +27,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         if (!NoteServerSyncHelper.isConfigured(this)) {
-            Intent  settingsIntent = new Intent(this, SettingsActivity.class);
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
         }
 

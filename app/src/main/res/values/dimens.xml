@@ -9,7 +9,13 @@
     <dimen name="button_padding">16dp</dimen>
     <dimen name="button_elevation">5dp</dimen>
 
+    <!-- Widgets -->
     <dimen name="widget_margin">8dp</dimen>
     <dimen name="widget_single_note_padding">10dp</dimen>
     <dimen name="widget_create_note_padding">0dp</dimen>
+
+    <!-- Used to pad each entry in the note list -->
+    <dimen name="widget_note_list_header_padding">4dp</dimen>
+    <dimen name="widget_note_list_entry_top_bottom">6dp</dimen>
+    <dimen name="widget_note_list_entry_sides">6dp</dimen>
 </resources>

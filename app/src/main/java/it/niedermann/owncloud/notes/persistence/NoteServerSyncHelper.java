@@ -38,6 +38,8 @@ import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 import it.niedermann.owncloud.notes.util.SupportUtil;
 
+import static android.content.ContentValues.TAG;
+
 /**
  * Helps to synchronize the Database to the Server.
  */
@@ -382,7 +384,9 @@ public class NoteServerSyncHelper {
             for (ICallback callback : callbacks) {
                 callback.onFinish();
             }
+            Log.d(TAG, "onPostExecute: Update widgets");
             dbHelper.updateSingleNoteWidgets();
+            dbHelper.updateNoteListWidgets();
             // start next sync if scheduled meanwhile
             if(syncScheduled) {
                 scheduleSync(false);

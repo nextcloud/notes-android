@@ -85,6 +85,14 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="it.niedermann.owncloud.notes.android.activity.NoteListWidgetConfiguration">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name=".android.activity.CreateNoteWidget"
             android:label="@string/widget_create_note">
@@ -112,8 +120,26 @@
                 android:resource="@xml/single_note_widget_provider_info" />
         </receiver>
 
+        <receiver
+            android:id="@+id/NoteListWidget"
+            android:name="it.niedermann.owncloud.notes.android.activity.NoteListWidget"
+            android:label="@string/widget_note_list_title">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/note_list_widget_provider_info" />
+        </receiver>
+
         <service
             android:name=".persistence.SingleNoteWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".persistence.NoteListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
     </application>
