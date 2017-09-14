@@ -17,10 +17,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import it.niedermann.owncloud.notes.android.activity.NoteListWidget;
 import it.niedermann.owncloud.notes.android.activity.SingleNoteWidget;
+import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -464,6 +465,16 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public void updateSingleNoteWidgets() {
         Intent intent = new Intent(getContext(), SingleNoteWidget.class);
+        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
+        getContext().sendBroadcast(intent);
+    }
+
+    /**
+     * Update note list widgets, if the note data was changed.
+     * TODO This should be replaced by using the observer pattern
+     */
+    public void updateNoteListWidgets() {
+        Intent intent = new Intent(getContext(), NoteListWidget.class);
         intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
         getContext().sendBroadcast(intent);
     }

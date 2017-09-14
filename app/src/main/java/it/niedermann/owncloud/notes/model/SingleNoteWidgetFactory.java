@@ -77,7 +77,8 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public RemoteViews getViewAt(int position) {
         RemoteViews note_content = new RemoteViews(mContext.getPackageName(),
-                R.layout.widget_single_note_content);
+                                                    R.layout.widget_single_note_content);
+
         SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         long noteID = sharedprefs.getLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, -1);
 
@@ -89,7 +90,6 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
             final Bundle extras = new Bundle();
 
             extras.putSerializable(EditNoteActivity.PARAM_NOTE, note);
-            extras.putBoolean(EditNoteActivity.PARAM_WIDGET_SRC, true);
 
             fillInIntent.putExtras(extras);
             fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
