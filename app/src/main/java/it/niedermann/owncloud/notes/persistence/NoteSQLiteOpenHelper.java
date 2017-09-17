@@ -228,6 +228,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     private List<DBNote> getNotesCustom(String selection, String[] selectionArgs, String orderBy) {
         SQLiteDatabase db = getReadableDatabase();
+        if(selectionArgs.length > 2) {
+            Log.v("Note", selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
+        }
         Cursor cursor = db.query(table_notes, columns, selection, selectionArgs, null, null, orderBy);
         List<DBNote> notes = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -288,7 +291,15 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return List&lt;Note&gt;
      */
     public List<DBNote> searchNotes(CharSequence query) {
-        return getNotesCustom(key_status + " != ? AND " + key_content + " LIKE ?", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "%" + query + "%"}, default_order);
+        return getNotesCustom(
+                key_status + " != ? AND ("
+                        + key_content + " LIKE ? OR "
+                        + key_category + " LIKE ?" +
+                ")", new String[]{
+                        DBStatus.LOCAL_DELETED.getTitle(),
+                        "%" + query + "%",
+                        "%" + query + "%"
+                }, default_order);
     }
 
     /**
