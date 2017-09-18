@@ -1,38 +1,19 @@
 package it.niedermann.owncloud.notes.util;
 
-import in.uncod.android.bypass.Bypass;
+import java.util.regex.Pattern;
 
 /**
  * Provides basic functionality for Note operations.
  * Created by stefan on 06.10.15.
  */
 public class NoteUtil {
-    private static final Bypass bypass = new Bypass();
+    private static final Pattern pLists = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
+    private static final Pattern pHeadings = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
+    private static final Pattern pHeadingLine = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
+    private static final Pattern pEmphasis = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
+    private static final Pattern pSpace1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
+    private static final Pattern pSpace2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
 
-
-    /**
-     * Parses a MarkDown-String and returns a Spannable
-     *
-     * @param s String - MarkDown
-     * @return Spannable
-     */
-    public static CharSequence parseMarkDown(String s) {
-        /*
-         * Appends two spaces at the end of every line to force a line break.
-         *
-         * @see #24
-         */
-        StringBuilder sb = new StringBuilder();
-        for (String line : s.split("\n")) {
-            sb.append(line);
-            // If line is not a list item
-            if (!line.trim().matches("^([\\-*]|[0-9]+\\.)(.)*")) {
-                sb.append("  ");
-            }
-            sb.append("\n");
-        }
-        return bypass.markdownToSpannable(sb.toString());
-    }
 
     /**
      * Strips all MarkDown from the given String
@@ -41,7 +22,15 @@ public class NoteUtil {
      * @return Plain Text-String
      */
     public static String removeMarkDown(String s) {
-        return s == null ? "" : s.replaceAll("[#*-]", "").trim();
+        if(s==null)
+            return "";
+        s = pLists.matcher(s).replaceAll("");
+        s = pHeadings.matcher(s).replaceAll("$1");
+        s = pHeadingLine.matcher(s).replaceAll("");
+        s = pEmphasis.matcher(s).replaceAll("$2");
+        s = pSpace1.matcher(s).replaceAll("");
+        s = pSpace2.matcher(s).replaceAll("");
+        return s;
     }
 
     /**
@@ -62,13 +51,27 @@ public class NoteUtil {
     }
 
     /**
+     * Truncates a string to a desired maximum length.
+     * Like String.substring(int,int), but throw no exception if desired length is longer than the string.
+     * @param str String to truncate
+     * @param len Maximum length of the resulting string
+     * @return truncated string
+     */
+    public static String truncateString(String str, int len) {
+        return str.substring(0, Math.min(len, str.length()));
+    }
+
+    /**
      * Generates an excerpt of a content String (reads second line which is not empty)
      *
      * @param content String
      * @return excerpt String
      */
     public static String generateNoteExcerpt(String content) {
-        return getLineWithoutMarkDown(content, 1);
+        if (content.contains("\n"))
+            return truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 200).replace("\n", "   ");
+        else
+            return "";
     }
 
     /**

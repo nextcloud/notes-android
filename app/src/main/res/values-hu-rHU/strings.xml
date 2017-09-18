@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d kiválasztott</item>
+        <item quantity="other">%d kiválasztott</item>
+    </plurals>
+</resources>

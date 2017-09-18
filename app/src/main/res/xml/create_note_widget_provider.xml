@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:initialKeyguardLayout="@layout/widget_create_note"
+    android:initialLayout="@layout/widget_create_note"
+    android:minHeight="40dp"
+    android:minWidth="40dp"
+    android:previewImage="@drawable/ic_widget_create"
+    android:updatePeriodMillis="86400000"
+    android:widgetCategory="home_screen"
+    android:text="@string/widget_create_note"
+    android:resizeMode="none">
+</appwidget-provider>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="noteMode_values">
+        <item>@string/pref_value_mode_edit</item>
+        <item>@string/pref_value_mode_preview</item>
+        <item>@string/pref_value_mode_last</item>
+    </string-array>
+</resources>

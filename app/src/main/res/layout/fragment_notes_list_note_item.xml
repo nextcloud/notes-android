@@ -1,49 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_attention">
+
+    <ImageView
+        android:id="@+id/noteDeleteLeft"
+        android:layout_marginLeft="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:src="@drawable/ic_action_delete"
+        android:layout_gravity="left"
+        />
+
+    <ImageView
+        android:id="@+id/noteDeleteRight"
+        android:layout_marginRight="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:src="@drawable/ic_action_delete"
+        android:layout_gravity="right"
+        />
 
     <RelativeLayout
-        android:id="@+id/noteItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/list_item_background_selector"
-        android:padding="16dp">
+        android:id="@+id/noteSwipeable"
+        >
 
         <TextView
             android:id="@+id/noteTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="false"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignWithParentIfMissing="true"
-            android:ellipsize="end"
-            android:gravity="center_vertical"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginRight="70dp"
+            android:ellipsize="marquee"
+            android:maxLines="1"
             android:textColor="@drawable/list_item_color_selector"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/noteCategory"
+            android:layout_width="wrap_content"
+            android:background="@drawable/border"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_below="@id/noteTitle"
+            android:maxLines="1"
+            android:textColor="@drawable/list_item_color_selector"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/noteExcerpt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/noteCategory"
+            android:layout_toEndOf="@id/noteCategory"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_below="@id/noteTitle"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@drawable/list_item_color_selector_low"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/noteStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_sync_alert_grey600_18dp"
+            android:layout_toEndOf="@id/noteTitle"
+            android:layout_toRightOf="@id/noteTitle"
+            android:layout_marginStart="-65dp"
+            android:layout_marginLeft="-65dp"
+            android:layout_alignBaseline="@id/noteTitle"
+            android:baseline="14dp"
+            />
+
+        <ImageView
+            android:id="@+id/noteFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginRight="6dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/noteTitle"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:textColor="@drawable/list_item_color_selector_low"
-            android:textSize="14sp"/>
+            android:layout_alignBaseline="@id/noteTitle"
+            android:baseline="29dp"
+             />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/noteExcerpt"
+            android:layout_marginTop="16dp"
+            android:src="@color/separator" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="1px"
-        android:src="@color/separator"/>
-</RelativeLayout>
+</FrameLayout>

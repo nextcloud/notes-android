@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Noter</string>
+    <string name="no_notes">Ingen noter endnu</string>
+    <string name="action_create">Ny note</string>
+    <string name="action_settings">Indstillinger</string>
+    <string name="action_create_save">Gem</string>
+    <string name="action_create_cancel">Annullér</string>
+    <string name="action_edit_editing">Redigér</string>
+    <string name="action_edit_save">Gem</string>
+    <string name="action_edit_saving">Gemmer &#8230;</string>
+    <string name="action_edit_saved">Gemt</string>
+    <string name="action_edit_cancel">Annullér</string>
+    <string name="action_about">Om</string>
+    <string name="action_select_note">Vælg note</string>
+    <string name="action_note_deleted">Noten er slettet</string>
+    <string name="action_note_restored">Noten er genskabt</string>
+    <string name="action_undo">Fortryd</string>
+    <string name="menu_delete">Slet</string>
+    <string name="menu_copy">Kopiér</string>
+    <string name="menu_edit">Redigér</string>
+    <string name="menu_cancel">Annullér</string>
+    <string name="menu_favorite">Foretrukken</string>
+    <string name="menu_preview">Vis eksempel</string>
+    <string name="menu_share">Del</string>
+    <string name="menu_about">Om</string>
+
+    <string name="copy">Kopiér</string>
+
+    <string name="listview_updated_today">I dag</string>
+    <string name="listview_updated_yesterday">I går</string>
+    <string name="listview_updated_this_week">Denne uge</string>
+    <string name="listview_updated_this_month">Denne måned</string>
+    <string name="listview_updated_earlier">Tidligere</string>
+
+    <!-- Settings -->
+    <string name="settings_server">Server</string>
+    <string name="settings_url">Server adresse</string>
+    <string name="settings_url_check_description">Viser om adressen kan pinges.</string>
+    <string name="settings_url_warn_http">Advarsel: \"http\" er ikke sikker, benyt venligst \"https\".</string>
+    <string name="settings_username">Brugernavn</string>
+    <string name="settings_password">Adgangskode</string>
+    <string name="settings_submit">Tilslut</string>
+    <string name="settings_submitting">Tilslutter &#8230;</string>
+    <!-- Network -->
+    <string name="network_connecting">Tilslutter</string>
+    <string name="network_connected">Tilsluttet</string>
+    <string name="network_disconnected">Intet netværk tilgængeligt</string>
+
+    <string name="error_invalid_login">Ugyldigt login: %1$s</string>
+    <string name="error_no_network">ingen netværksforbindelse</string>
+    <string name="error_server">URL/Server har fejl</string>
+    <string name="error_url_malformed">Forkert serveradresse</string>
+    <string name="error_username_password_invalid">Forkert brugernavn eller adgangskode</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Indstillinger</string>
+
+    <!-- About -->
+    <string name="about_version_title">Version</string>
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_developers_title">Udviklere</string>
+    <string name="about_translators_title">Oversættere</string>
+    <string name="about_testers_title">Testere</string>
+    <string name="about_source_title">Kildekode</string>
+    <string name="about_app_license_title">App licens</string>
+    <string name="about_app_license">Denne applikation er licenseret under GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Vis licens</string>
+    <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_license_tab_title">Licens</string>
+
+    <string name="widget_all_notes_title">Alle noter</string>
+    </resources>

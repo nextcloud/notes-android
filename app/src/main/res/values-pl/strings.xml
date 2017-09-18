@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notatki</string>
+    <string name="no_notes">Brak notatek</string>
+    <string name="action_create">Nowa notatka</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="action_create_save">Zapisz</string>
+    <string name="action_create_cancel">Anuluj</string>
+    <string name="action_edit_editing">Edytuj</string>
+    <string name="action_edit_save">Zapisz</string>
+    <string name="action_edit_saving">Zapisywanie &#8230;</string>
+    <string name="action_edit_saved">Zapisano</string>
+    <string name="action_edit_cancel">Anuluj</string>
+    <string name="action_about">O aplikacji</string>
+    <string name="action_select_note">Wybierz notatkę</string>
+    <string name="action_note_deleted">Notatka została usunięta</string>
+    <string name="action_note_restored">Notatka została przywrócona</string>
+    <string name="action_undo">Cofnij</string>
+    <string name="menu_delete">Usuń</string>
+    <string name="menu_copy">Kopiuj</string>
+    <string name="menu_edit">Edytuj</string>
+    <string name="menu_cancel">Anuluj</string>
+    <string name="menu_favorite">Ulubiona</string>
+    <string name="menu_preview">Podgląd</string>
+    <string name="menu_share">Udostępnij</string>
+    <string name="menu_about">O</string>
+
+    <string name="copy">Kopiuj</string>
+
+    <string name="listview_updated_today">Dzisiaj</string>
+    <string name="listview_updated_yesterday">Wczoraj</string>
+    <string name="listview_updated_this_week">W tym tygodniu</string>
+    <string name="listview_updated_this_month">W tym miesiącu</string>
+    <string name="listview_updated_earlier">Wcześniej</string>
+
+    <!-- Settings -->
+    <string name="settings_server_settings">Ustawienia Konta</string>
+    <string name="settings_server">Serwer</string>
+    <string name="settings_url">Adres serwera</string>
+    <string name="settings_url_check_description">Pokazuje czy adres może zostać pingnięty.</string>
+    <string name="settings_url_warn_http">OSTRZEŻENIE: \"http\" nie jest bezpieczne. Proszę użyć \"https\".</string>
+    <string name="settings_username">Nazwa użytkownika</string>
+    <string name="settings_password">Hasło</string>
+    <string name="settings_password_unchanged">Hasło (nie zmienione)</string>
+    <string name="settings_password_check_description">Pokazuje czy dane dostępowe są poprawne.</string>
+    <string name="settings_submit">Połącz</string>
+    <string name="settings_submitting">Łączenie &#8230;</string>
+    <string name="settings_notification_category">Notyfikacja</string>
+    <string name="settings_notification">Włącz, aby pokazać stałe powiadomienie do szybkiego tworzenia nowych notatek.</string>
+    <string name="settings_cert_category">Certyfikaty</string>
+    <string name="settings_cert_trust_system">Zaufane certyfikaty z systemowego magazynu</string>
+    <string name="settings_cert_reset">Resetuj zaufany magazyn</string>
+    <string name="settings_cert_reset_toast">Wyczyszczono przechowywane zaufane informacje.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Notatki - Bezpieczeństwo połączenia</string>
+    <string name="trust_certificate_unknown_certificate_found">Notatki napotkały niezaufany certyfikat. Chcesz mu zaufać?</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Łączenie</string>
+    <string name="network_connected">Połączony</string>
+    <string name="network_disconnected">Brak dostępnych sieci</string>
+
+    <!-- Error -->
+    <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
+    <string name="error_invalid_login">Niepoprawny login: %1$s</string>
+    <string name="error_json">Czy aplikacja Notatki jest włączona na serwerze?</string>
+    <string name="error_io">połączenie z serwerem jest nieprawidłowe</string>
+    <string name="error_no_network">brak połączenia sieciowego</string>
+    <string name="error_server">URL/Serwer zawiera błędy</string>
+    <string name="error_url_malformed">Błędny adres serwera</string>
+    <string name="error_username_password_invalid">Zła nazwa użytkownika lub hasło</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Ustawienia</string>
+
+    <!-- About -->
+    <string name="about_version_title">Wersja</string>
+    <string name="about_version">Aktualnie używasz &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Opiekun</string>
+    <string name="about_developers_title">Deweloperzy</string>
+    <string name="about_translators_title">Tłumacze</string>
+    <string name="about_translators_transifex">Społeczność Nextclouda na &lt;a href=\"%1$s\">Transifeksie&lt;/a></string>
+    <string name="about_testers_title">Testerzy</string>
+    <string name="about_source_title">Kod źródłowy</string>
+    <string name="about_source">Projekt prowadzony jest na GitHubie: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Problemy</string>
+    <string name="about_issues">Możesz zgłaszać błędy, propozycje rozbudowy lub prośby o nowe funkcjonalności na GitHubie: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Tłumacz</string>
+    <string name="about_translate">Aby pomóc nam w tłumaczeniu tej aplikacji przyłącz się do zespołu Nextclouda na Transifeksie &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Licencja aplikacji</string>
+    <string name="about_app_license">Aplikacja jest chroniona licencją GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Zobacz licencję</string>
+    <string name="about_icons_disclaimer_title">Ikony</string>
+    <string name="about_icons_disclaimer">&lt;p>Oryginalne ikony wykonane są przez %1$s&lt;/p>&lt;p>Pozostałe ikony użyte w aplikacji są &lt;a href=\"https://materialdesignicons.com/\">Ikonami Material Design&lt;/a> wykonanymi przez Google Inc. i są chronione licencją Creative Commons License.&lt;/p></string>
+    <string name="about_credits_tab_title">O</string>
+    <string name="about_contribution_tab_title">Wkład</string>
+    <string name="about_license_tab_title">Licencja</string>
+
+    <string name="widget_all_notes_title">Wszystkie notatki</string>
+    <string name="widget_single_note_title">Pojedyncza notatka</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Utwórz nową notatkę</string>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d wybrano</item>
+        <item quantity="few">%d wybrano</item>
+        <item quantity="many">%d wybrano</item>
+        <item quantity="other">%d wybrano</item>
+    </plurals>
+</resources>

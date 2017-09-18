@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notes</string>
+    <string name="no_notes">No notes yet</string>
+    <string name="action_create">New note</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_create_save">Save</string>
+    <string name="action_create_cancel">Cancel</string>
+    <string name="action_edit_editing">Edit</string>
+    <string name="action_edit_save">Save</string>
+    <string name="action_edit_saving">Saving &#8230;</string>
+    <string name="action_edit_saved">Saved</string>
+    <string name="action_edit_cancel">Cancel</string>
+    <string name="action_about">About</string>
+    <string name="action_select_note">Select note</string>
+    <string name="action_note_deleted">Note is deleted</string>
+    <string name="action_note_restored">Note is restored</string>
+    <string name="action_undo">Undo</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_copy">Copy</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_cancel">Cancel</string>
+    <string name="menu_favorite">Favourite</string>
+    <string name="menu_preview">Preview</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_about">About</string>
+
+    <string name="copy">Copy</string>
+
+    <string name="listview_updated_today">Today</string>
+    <string name="listview_updated_yesterday">Yesterday</string>
+    <string name="listview_updated_this_week">This week</string>
+    <string name="listview_updated_this_month">This month</string>
+    <string name="listview_updated_earlier">Earlier</string>
+
+    <!-- Settings -->
+    <string name="settings_server_settings">Account Settings</string>
+    <string name="settings_server">Server</string>
+    <string name="settings_url">Server address</string>
+    <string name="settings_url_check_description">Shows if the address can be pinged.</string>
+    <string name="settings_url_warn_http">WARNING: \"http\" is unsafe. Please use \"https\".</string>
+    <string name="settings_username">Username</string>
+    <string name="settings_password">Password</string>
+    <string name="settings_password_unchanged">Password (not changed)</string>
+    <string name="settings_password_check_description">Shows if the credentials are correct.</string>
+    <string name="settings_submit">Connect</string>
+    <string name="settings_submitting">Connecting &#8230;</string>
+    <string name="settings_notification_category">Notification</string>
+    <string name="settings_notification">Enable to show a persistent notification for quickly creating new notes.</string>
+    <string name="settings_cert_category">Certificates</string>
+    <string name="settings_cert_trust_system">Trust certificates from system trust store.</string>
+    <string name="settings_cert_reset">Reset trust store</string>
+    <string name="settings_cert_reset_toast">Stored trust information cleared.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Notes - Connection security</string>
+    <string name="trust_certificate_unknown_certificate_found">Notes has encountered an unknown certificate. Do you want to trust it?</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Connecting</string>
+    <string name="network_connected">Connected</string>
+    <string name="network_disconnected">No network available</string>
+
+    <!-- Error -->
+    <string name="error_sync">Synchronisation failed: %1$s</string>
+    <string name="error_invalid_login">Invalid login: %1$s</string>
+    <string name="error_json">is the Notes app activated on the server?</string>
+    <string name="error_io">server connection is broken</string>
+    <string name="error_no_network">no network connection</string>
+    <string name="error_server">URL/Server has errors</string>
+    <string name="error_url_malformed">Wrong server address</string>
+    <string name="error_username_password_invalid">Wrong username or password</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Settings</string>
+
+    <!-- About -->
+    <string name="about_version_title">Version</string>
+    <string name="about_version">You are currently using &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Maintainer</string>
+    <string name="about_developers_title">Developers</string>
+    <string name="about_translators_title">Translators</string>
+    <string name="about_translators_transifex">Nextcloud community on &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">Testers</string>
+    <string name="about_source_title">Source code</string>
+    <string name="about_source">This project is hosted on GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Issues</string>
+    <string name="about_issues">You can report bugs, enhancement proposals and feature requests at the GitHub issue tracker: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Translate</string>
+    <string name="about_translate">Join the Nextcloud team on Transifex and help us to translate this app: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">App licence</string>
+    <string name="about_app_license">This application is licensed under the GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">View licence</string>
+    <string name="about_icons_disclaimer_title">Icons</string>
+    <string name="about_icons_disclaimer">&lt;p>Original icon made by %1$s&lt;/p>&lt;p>All further icons used by this app are &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> made by Google Inc. and licensed under a Creative Commons License.&lt;/p></string>
+    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_contribution_tab_title">Contribution</string>
+    <string name="about_license_tab_title">Licence</string>
+
+    <string name="widget_all_notes_title">All notes</string>
+    <string name="widget_single_note_title">Single note</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Create a new note</string>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d selected</item>
+        <item quantity="other">%d selected</item>
+    </plurals>
+</resources>

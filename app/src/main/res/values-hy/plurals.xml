@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <plurals
-        name="ab_selected">
-        <item quantity="one">%d ընտրված է</item>
-        <item quantity="other">%d ընտրված է</item>
-    </plurals>
-</resources>

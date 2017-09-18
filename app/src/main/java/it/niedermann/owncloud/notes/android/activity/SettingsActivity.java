@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -14,12 +15,20 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
+import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
+import it.niedermann.owncloud.notes.util.SupportUtil;
+
+import static it.niedermann.owncloud.notes.R.drawable.settings;
 
 /**
  * Allows to set Settings like URL, Username and Password for Server-Synchronization
@@ -27,10 +36,11 @@ import it.niedermann.owncloud.notes.util.NotesClientUtil;
  */
 public class SettingsActivity extends AppCompatActivity {
 
-    public static final String SETTINGS_FIRST_RUN = "firstRun";
     public static final String SETTINGS_URL = "settingsUrl";
     public static final String SETTINGS_USERNAME = "settingsUsername";
     public static final String SETTINGS_PASSWORD = "settingsPassword";
+    public static final String SETTINGS_KEY_ETAG = "notes_last_etag";
+    public static final String SETTINGS_KEY_LAST_MODIFIED = "notes_last_modified";
     public static final String DEFAULT_SETTINGS = "";
     public static final int CREDENTIALS_CHANGED = 3;
 
@@ -38,25 +48,38 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText field_url = null;
     private EditText field_username = null;
     private EditText field_password = null;
+    private TextInputLayout password_wrapper = null;
+    private String old_password = "";
     private Button btn_submit = null;
     private boolean first_run = false;
+    private CustomCertManager customCertManager = null;
+
+    @Override
+    protected void finalize() throws Throwable {
+        customCertManager.close();
+        super.finalize();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        customCertManager = SupportUtil.getCertManager(getApplicationContext());
         setContentView(R.layout.activity_settings);
 
         preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
 
-        if (preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+        if (!NoteServerSyncHelper.isConfigured(this)) {
             first_run = true;
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            }
         }
 
         field_url = (EditText) findViewById(R.id.settings_url);
         field_username = (EditText) findViewById(R.id.settings_username);
         field_password = (EditText) findViewById(R.id.settings_password);
+        password_wrapper = (TextInputLayout) findViewById(R.id.settings_password_wrapper);
         btn_submit = (Button) findViewById(R.id.settings_submit);
 
         field_url.addTextChangedListener(new TextWatcher() {
@@ -66,7 +89,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String url = field_url.getText().toString();
+                String url = field_url.getText().toString().trim();
 
                 if (!url.endsWith("/")) {
                     url += "/";
@@ -110,7 +133,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Load current Preferences
         field_url.setText(preferences.getString(SETTINGS_URL, DEFAULT_SETTINGS));
         field_username.setText(preferences.getString(SETTINGS_USERNAME, DEFAULT_SETTINGS));
-        field_password.setText(preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS));
+        old_password = preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS);
 
         field_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -119,6 +142,13 @@ public class SettingsActivity extends AppCompatActivity {
                 return true;
             }
         });
+        field_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                setPasswordHint(hasFocus);
+            }
+        });
+        setPasswordHint(false);
 
         btn_submit.setEnabled(false);
         btn_submit.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +157,23 @@ public class SettingsActivity extends AppCompatActivity {
                 login();
             }
         });
+    }
+
+    private void setPasswordHint(boolean hasFocus) {
+        boolean unchangedHint = !hasFocus && field_password.getText().toString().isEmpty() && !old_password.isEmpty();
+        password_wrapper.setHint(getString(unchangedHint ? R.string.settings_password_unchanged : R.string.settings_password));
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Occurs in this scenario: User opens the app but doesn't configure the server settings, they then add the Create Note widget to home screen and configure
+        // server settings there. The stale SettingsActivity is then displayed hence finish() here to close it down.
+        if ((first_run) && (NoteServerSyncHelper.isConfigured(this))) {
+            finish();
+        }
     }
 
     /**
@@ -140,9 +187,12 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void login() {
-        String url = field_url.getText().toString();
+        String url = field_url.getText().toString().trim();
         String username = field_username.getText().toString();
         String password = field_password.getText().toString();
+        if(password.isEmpty()) {
+            password = old_password;
+        }
 
         if (!url.endsWith("/")) {
             url += "/";
@@ -176,7 +226,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            return NotesClientUtil.isValidURL(params[0]);
+            return NotesClientUtil.isValidURL(customCertManager, params[0]);
         }
 
         @Override
@@ -194,7 +244,7 @@ public class SettingsActivity extends AppCompatActivity {
     /**
      * If Log-In-Credentials are correct, save Credentials to Shared Preferences and finish First Run Wizard.
      */
-    private class LoginValidatorAsyncTask extends AsyncTask<String, Void, Boolean> {
+    private class LoginValidatorAsyncTask extends AsyncTask<String, Void, LoginStatus> {
         String url, username, password;
 
         @Override
@@ -208,29 +258,25 @@ public class SettingsActivity extends AppCompatActivity {
          * @return isValidLogin Boolean
          */
         @Override
-        protected Boolean doInBackground(String... params) {
+        protected LoginStatus doInBackground(String... params) {
             url = params[0];
             username = params[1];
             password = params[2];
-            return NotesClientUtil.isValidLogin(url, username, password);
+            return NotesClientUtil.isValidLogin(customCertManager, url, username, password);
         }
 
         @Override
-        protected void onPostExecute(Boolean isValidLogin) {
-            if (isValidLogin) {
+        protected void onPostExecute(LoginStatus status) {
+            if (LoginStatus.OK.equals(status)) {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(SETTINGS_URL, url);
                 editor.putString(SETTINGS_USERNAME, username);
                 editor.putString(SETTINGS_PASSWORD, password);
-                // Now it is no more First Run
-                editor.putBoolean(SETTINGS_FIRST_RUN, false);
+                editor.remove(SETTINGS_KEY_ETAG);
+                editor.remove(SETTINGS_KEY_LAST_MODIFIED);
                 editor.apply();
 
-                //NoteSQLiteOpenHelper db = new NoteSQLiteOpenHelper(getApplicationContext());
-                //db.synchronizeWithServer();
-
                 final Intent data = new Intent();
-                //FIXME send correct note back to NotesListView
                 data.putExtra(NotesListViewActivity.CREDENTIALS_CHANGED, CREDENTIALS_CHANGED);
                 setResult(RESULT_OK, data);
                 finish();
@@ -238,7 +284,7 @@ public class SettingsActivity extends AppCompatActivity {
                 Log.e("Note", "invalid login");
                 btn_submit.setText(R.string.settings_submit);
                 setInputsEnabled(true);
-                Toast.makeText(getApplicationContext(), getString(R.string.error_invalid_login), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.error_invalid_login, getString(status.str)), Toast.LENGTH_LONG).show();
             }
         }
 

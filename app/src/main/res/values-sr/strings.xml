@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">оунКлауд белешке</string>
+    <string name="app_name">белешке</string>
     <string name="no_notes">Још нема белешки</string>
     <string name="action_create">Нова белешка</string>
     <string name="action_settings">Поставке</string>
@@ -14,9 +14,15 @@
     <string name="action_edit_cancel">Одустани</string>
     <string name="action_about">О програму</string>
     <string name="action_select_note">Изабери белешку</string>
+    <string name="action_note_deleted">Белешка је избрисана</string>
+    <string name="action_note_restored">Белешка је враћена</string>
+    <string name="action_undo">Опозови</string>
     <string name="menu_delete">Обриши</string>
     <string name="menu_copy">Копирај</string>
     <string name="menu_edit">Уреди</string>
+    <string name="menu_cancel">Откажи</string>
+    <string name="menu_favorite">Омиљени</string>
+    <string name="menu_preview">Преглед</string>
     <string name="menu_share">Подели</string>
     <string name="menu_about">О програму</string>
 
@@ -28,60 +34,60 @@
     <string name="listview_updated_this_month">овога месеца</string>
     <string name="listview_updated_earlier">раније</string>
 
-    <!-- Settings -->
-
     <string name="settings_server">Сервер</string>
     <string name="settings_url">Адреса сервера</string>
     <string name="settings_url_check_description">Приказ доступности УРЛ-а.</string>
     <string name="settings_url_warn_http">УПОЗОРЕЊЕ: „http“ протокол није безбедан. Користите „https“.</string>
     <string name="settings_username">Корисничко име</string>
     <string name="settings_password">Лозинка</string>
+    <string name="settings_password_unchanged">Лозинка(није промењено)</string>
     <string name="settings_password_check_description">Приказ тачности акредитива.</string>
     <string name="settings_submit">Повежи</string>
     <string name="settings_submitting">Повезујем се&#8230;</string>
-
     <!-- Network -->
-
     <string name="network_connecting">Веза је успостављена</string>
     <string name="network_connected">Повезан</string>
     <string name="network_disconnected">Мрежа није доступна</string>
 
     <!-- Error -->
-
-    <string name="error_url_malformed">УРЛ унакажен</string>
-    <string name="error_json">ЈСОН грешка</string>
+    <string name="error_sync">Синхронизација није успела%1$s</string>
+    <string name="error_invalid_login">Неисправна лозинка:%1$s</string>
+    <string name="error_json">да ли је Notes app активиран на серверу?</string>
     <string name="error_io">У/И грешка</string>
+    <string name="error_no_network">нема интернет конекције</string>
+    <string name="error_server">URL/Server грешка</string>
+    <string name="error_url_malformed">УРЛ унакажен</string>
     <string name="error_username_password_invalid">Корисничко име или лозинка нису тачни</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Поставке</string>
 
-
     <!-- About -->
-
     <string name="about_version_title">Издање</string>
-    <string name="about_version">Текуће издање је <strong>0.8.1</strong></string>
+    <string name="about_version">Тренутно користите &lt;јака>%1$s&lt;/јака></string>
     <string name="about_maintainer_title">Главни програмер</string>
-    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
     <string name="about_developers_title">Програмери</string>
-    <string name="about_developers">Стефан Нидерман (Stefan Niedermann), HeaDBanGer84, Felix Edelmann</string>
     <string name="about_translators_title">Преводиоци</string>
-    <string name="about_translators">Младен Пејаковић (српски), ageru (Français (France)), proninyaroslav (Russian)</string>
+    <string name="about_translators_transifex">Nextcloud организација на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Тестери</string>
-    <string name="about_testers">Јан Борхарт (Jan C. Borchardt)</string>
     <string name="about_source_title">Изворни кôд</string>
-    <string name="about_source">Пројекат је хостован на Гитхабу: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
+    <string name="about_source">Овај пројекат је приказан на  GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Грешке</string>
-    <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу пријава: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу пријава: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Преведи</string>
+    <string name="about_translate">Придружите се Nextcloud тиму на Transifex-у и помозите нам да преведемо ову апликацију: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Лиценца апликације</string>
     <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом Општом јавном лиценцом (ГПЛ) в3+.</string>
     <string name="about_app_license_button">Прикажи лиценцу</string>
-    <string name="about_app_icon_disclaimer_title">Икона апликације</string>
-    <string name="about_app_icon_disclaimer"><p>Изворни аутор <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> са <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
     <string name="about_icons_disclaimer_title">Иконе</string>
-    <string name="about_icons_disclaimer"><p>Све остале иконе ове апликације су <a href="https://materialdesignicons.com/" title="веза на вебсајт">иконе материјал дизајна</a> које је креирао Google Inc. и лиценциране су Creative Commons лиценцом.</p></string>
-
     <string name="about_credits_tab_title">Заслуге</string>
     <string name="about_contribution_tab_title">Допринос</string>
     <string name="about_license_tab_title">Лиценца</string>
-</resources>
+
+    <string name="widget_all_notes_title">Све белешке</string>
+    <string name="widget_single_note_title">Белешка</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Направи нову белешку</string>
+
+    </resources>

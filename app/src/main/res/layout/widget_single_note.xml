@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/single_note"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_single_note"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/widget_background"
+    android:padding="@dimen/widget_single_note_padding"
+    android:clickable="true">
 
     <TextView
         android:id="@+id/single_note_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/fg_default"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_transparent"
-        android:padding="10dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/fg_contrast" />
+        />
+</RelativeLayout>
 
-</FrameLayout>
+    <!--
+        TODO: Markdown support
+
+        <com.yydcdut.rxmarkdown.RxMDTextView
+    -->

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notas</string>
+    <string name="no_notes">Nenhuma anotação ainda</string>
+    <string name="action_create">Nova nota</string>
+    <string name="action_settings">Configurações</string>
+    <string name="action_create_save">Salvar</string>
+    <string name="action_create_cancel">Cancelar</string>
+    <string name="action_edit_editing">Editar</string>
+    <string name="action_edit_save">Salvar</string>
+    <string name="action_edit_saving">Salvando &#8230;</string>
+    <string name="action_edit_saved">Salvo</string>
+    <string name="action_edit_cancel">Cancelar</string>
+    <string name="action_about">Sobre</string>
+    <string name="action_select_note">Selecionar anotação</string>
+    <string name="action_note_deleted">Anotação excluída</string>
+    <string name="action_note_restored">Anotação restaurada</string>
+    <string name="action_undo">Desfazer</string>
+    <string name="menu_delete">Excluir</string>
+    <string name="menu_copy">Copiar</string>
+    <string name="menu_edit">Editar</string>
+    <string name="menu_cancel">Cancelar</string>
+    <string name="menu_favorite">Favorito</string>
+    <string name="menu_preview">Prever</string>
+    <string name="menu_share">Compartilhar</string>
+    <string name="menu_about">Sobre</string>
+
+    <string name="copy">Copiar</string>
+
+    <string name="listview_updated_today">Hoje</string>
+    <string name="listview_updated_yesterday">Ontem</string>
+    <string name="listview_updated_this_week">Esta semanna</string>
+    <string name="listview_updated_this_month">Este mês</string>
+    <string name="listview_updated_earlier">Mais cedo</string>
+
+    <!-- Settings -->
+    <string name="settings_server_settings">Configurações da Conta</string>
+    <string name="settings_server">Servidor</string>
+    <string name="settings_url">Endereço do servidor</string>
+    <string name="settings_url_check_description">Mostra se o endereço pode ser encontrado.</string>
+    <string name="settings_url_warn_http">AVISO: \"http\" é inseguro. Utilize \"https\".</string>
+    <string name="settings_username">Nome do usuário</string>
+    <string name="settings_password">Senha</string>
+    <string name="settings_password_unchanged">Senha (não alterada)</string>
+    <string name="settings_password_check_description">Mostra se as credenciais estão corretas.</string>
+    <string name="settings_submit">Conectar</string>
+    <string name="settings_submitting">Conectando &#8230;</string>
+    <string name="settings_notification_category">Notificação</string>
+    <string name="settings_notification">Habilite para mostrar uma notificação persistente para rapidamente criar novas anotações.</string>
+    <string name="settings_cert_category">Certificados</string>
+    <string name="settings_cert_trust_system">Certificados confiáveis da loja de confiança do sistema.</string>
+    <string name="settings_cert_reset">Redefinir loja confiável</string>
+    <string name="settings_cert_reset_toast">Informação confiável armazenada limpa.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Anotações - Segurança da conexão</string>
+    <string name="trust_certificate_unknown_certificate_found">As anotações encontraram um certificado desconhecido. Quer confiar nele?</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Conectando</string>
+    <string name="network_connected">Conectado</string>
+    <string name="network_disconnected">Nenhuma rede disponível</string>
+
+    <!-- Error -->
+    <string name="error_sync">A sincronização falhou: %1$s</string>
+    <string name="error_invalid_login">Login inválido: %1$s</string>
+    <string name="error_json">O aplicativo Notes está ativado no servidor?</string>
+    <string name="error_io">não existe conexão com o servidor </string>
+    <string name="error_no_network">não existe conexão de rede</string>
+    <string name="error_server">URL do servidor tem erros</string>
+    <string name="error_url_malformed">Endereço incorreto do servidor</string>
+    <string name="error_username_password_invalid">Nome de usuário ou senha errados</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Configurações</string>
+
+    <!-- About -->
+    <string name="about_version_title">Versão</string>
+    <string name="about_version">Atualmente você está usando &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Mantenedor</string>
+    <string name="about_developers_title">Desenvolvedores</string>
+    <string name="about_translators_title">Tradutores </string>
+    <string name="about_translators_transifex">Nextcloud comunidade &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">Testadores</string>
+    <string name="about_source_title">Código fonte</string>
+    <string name="about_source">Este projeto está hospedado no GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Problemas</string>
+    <string name="about_issues">Você pode relatar bugs, enviar propostas de aprimoramento e solicitações de recursos no rastreador de problemas do GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Traduzir</string>
+    <string name="about_translate">Junte-se à equipe do Nextcloud no Transifex e ajude-nos a traduzir este aplicativo: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Licença do aplicativo</string>
+    <string name="about_app_license">Este aplicativo está licenciado sob a GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Ver licença</string>
+    <string name="about_icons_disclaimer_title">Ícones</string>
+    <string name="about_icons_disclaimer">&lt;p>Ícone original feito por %1$s&lt;/p>&lt;p>Todos os outros ícones usados por este aplicativo são &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitos pela Google Inc. e licenciada sob uma licença Creative Commons.&lt;/p></string>
+    <string name="about_credits_tab_title">Créditos</string>
+    <string name="about_contribution_tab_title">Contribuição</string>
+    <string name="about_license_tab_title">Licença</string>
+
+    <string name="widget_all_notes_title">Todas as anotações</string>
+    <string name="widget_single_note_title">Anotação simples</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Criar uma nova anotação</string>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d selecionados</item>
+        <item quantity="other">%d selecionado</item>
+    </plurals>
+</resources>

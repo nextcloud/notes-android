@@ -1,94 +1,92 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.app.Activity;
 import android.appwidget.AppWidgetManager;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
 import android.view.View;
-import android.widget.RemoteViews;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.widget.SingleNoteWidget;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
-import it.niedermann.owncloud.notes.model.Note;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
-/**
- * Configuration Activity to select a single note which should be displayed in the SingleNoteWidget
- * Created by stefan on 08.10.15.
- */
-public class SelectSingleNoteActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener {
-
-    int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-    private NoteSQLiteOpenHelper db = null;
-    private RecyclerView listView = null;
-    private ItemAdapter adapter = null;
+public class SelectSingleNoteActivity extends NotesListViewActivity {
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setResult(RESULT_CANCELED);
-        setContentView(R.layout.activity_select_single_note);
-        // Display Data
-        db = new NoteSQLiteOpenHelper(this);
-        db.synchronizeWithServer();
-        setListView(db.getNotes());
 
+        setResult(Activity.RESULT_CANCELED);
+        findViewById(R.id.fab_create).setVisibility(View.INVISIBLE);
+        getSupportActionBar().setTitle(R.string.activity_select_single_note);
 
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        if (extras != null) {
-            appWidgetId = extras.getInt(
-                    AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    AppWidgetManager.INVALID_APPWIDGET_ID);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ColorDrawable colorDrawable = new ColorDrawable(getColor(R.color.bg_highlighted));
+            getSupportActionBar().setBackgroundDrawable(colorDrawable);
         }
 
-        // If they gave us an intent without the widget id, just bail.
-        if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
-            finish();
-        }
+        Spannable title = new SpannableString(getSupportActionBar().getTitle());
+        title.setSpan(
+                new ForegroundColorSpan(getResources().getColor(R.color.primary)),
+                0,
+                title.length(),
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        getSupportActionBar().setTitle(title);
+
+        SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
+        swipeRefreshLayout.setEnabled(false);
+        swipeRefreshLayout.setRefreshing(false);
+        initList();
     }
 
-    /**
-     * Allows other classes to set a List of Notes.
-     *
-     * @param noteList List&lt;Note&gt;
-     */
-    private void setListView(List<Note> noteList) {
-        List<Item> itemList = new ArrayList<>();
-        itemList.addAll(noteList);
-        adapter = new ItemAdapter(itemList);
-        listView = (RecyclerView) findViewById(R.id.select_single_note_list_view);
-        listView.setAdapter(adapter);
-        listView.setLayoutManager(new LinearLayoutManager(this));
-        ItemAdapter.setNoteClickListener(this);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 
     @Override
     public void onNoteClick(int position, View v) {
-        final Context context = SelectSingleNoteActivity.this;
+        ItemAdapter adapter = getItemAdapter();
+        Item item = adapter.getItem(position);
+        DBNote note = (DBNote) item;
+        long noteID = note.getId();
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        int mAppWidgetId = -1;
 
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        if (extras != null) {
+            mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+        }
 
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
-        appWidgetManager.updateAppWidget(appWidgetId, views);
-        SingleNoteWidget.updateAppWidget((Note) adapter.getItem(position), context, appWidgetManager, appWidgetId);
+        SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
 
-        Intent resultValue = new Intent();
-        resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        setResult(RESULT_OK, resultValue);
+        sp.putLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, noteID);
+        sp.apply();
+
+        Intent retIntent = new Intent(this, SingleNoteWidget.class);
+        retIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
+        retIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        sendBroadcast(retIntent);
+        setResult(RESULT_OK, retIntent);
         finish();
     }
 
     @Override
     public boolean onNoteLongClick(int position, View v) {
         return false;
+    }
+
+    @Override
+    public void onNoteFavoriteClick(int position, View view) {
     }
 }

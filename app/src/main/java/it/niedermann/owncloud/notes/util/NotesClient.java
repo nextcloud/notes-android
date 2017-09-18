@@ -1,8 +1,8 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.util.Base64;
+import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,24 +12,53 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
 
-import it.niedermann.owncloud.notes.model.Note;
+import at.bitfire.cert4android.CustomCertManager;
+import it.niedermann.owncloud.notes.BuildConfig;
+import it.niedermann.owncloud.notes.model.CloudNote;
+import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
+import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
 
 public class NotesClient {
+
+    /**
+     * This entity class is used to return relevant data of the HTTP reponse.
+     */
+    public static class ResponseData {
+        private final String content;
+        private final String etag;
+        private final long lastModified;
+
+        public ResponseData(String content, String etag, long lastModified) {
+                this.content = content;
+                this.etag = etag;
+                this.lastModified = lastModified;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public String getETag() {
+            return etag;
+        }
+
+        public long getLastModified() {
+            return lastModified;
+        }
+    }
 
     public static final String METHOD_GET = "GET";
     public static final String METHOD_PUT = "PUT";
     public static final String METHOD_POST = "POST";
     public static final String METHOD_DELETE = "DELETE";
-    private static final String key_id = "id";
-    private static final String key_title = "title";
-    private static final String key_content = "content";
-    private static final String key_modified = "modified";
+    public static final String JSON_ID = "id";
+    public static final String JSON_TITLE = "title";
+    public static final String JSON_CONTENT = "content";
+    public static final String JSON_FAVORITE = "favorite";
+    public static final String JSON_CATEGORY = "category";
+    public static final String JSON_ETAG = "etag";
+    public static final String JSON_MODIFIED = "modified";
     private static final String application_json = "application/json";
     private String url = "";
     private String username = "";
@@ -41,41 +70,16 @@ public class NotesClient {
         this.password = password;
     }
 
-    public List<Note> getNotes() throws JSONException,
-            IOException {
-        List<Note> notesList = new ArrayList<>();
-        JSONArray notes = new JSONArray(requestServer("notes", METHOD_GET, null));
-        long noteId = 0;
-        String noteTitle = "";
-        String noteContent = "";
-        Calendar noteModified = null;
-        JSONObject currentItem;
-        for (int i = 0; i < notes.length(); i++) {
-            currentItem = notes.getJSONObject(i);
-
-            if (!currentItem.isNull(key_id)) {
-                noteId = currentItem.getLong(key_id);
-            }
-            if (!currentItem.isNull(key_title)) {
-                noteTitle = currentItem.getString(key_title);
-            }
-            if (!currentItem.isNull(key_content)) {
-                noteContent = currentItem.getString(key_content);
-            }
-            if (!currentItem.isNull(key_modified)) {
-                noteModified = GregorianCalendar.getInstance();
-                noteModified
-                        .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
-            }
-            notesList
-                    .add(new Note(noteId, noteModified, noteTitle, noteContent));
+    public NotesResponse getNotes(CustomCertManager ccm, long lastModified, String lastETag) throws JSONException, IOException {
+        String url = "notes";
+        if(lastModified>0) {
+            url += "?pruneBefore="+lastModified;
         }
-        return notesList;
+        return new NotesResponse(requestServer(ccm, url, METHOD_GET, null, lastETag));
     }
 
     /**
      * Fetches a Note by ID from Server
-     * TODO Maybe fetch only id, title and modified from server until a note has been opened?
      *
      * @param id long - ID of the wanted note
      * @return Requested Note
@@ -83,93 +87,37 @@ public class NotesClient {
      * @throws IOException
      */
     @SuppressWarnings("unused")
-    public Note getNoteById(long id) throws
-            JSONException, IOException {
-        long noteId = 0;
-        String noteTitle = "";
-        String noteContent = "";
-        Calendar noteModified = null;
-        JSONObject currentItem = new JSONObject(
-                requestServer("notes/" + id, METHOD_GET, null));
+    public NoteResponse getNoteById(CustomCertManager ccm, long id) throws JSONException, IOException {
+        return new NoteResponse(requestServer(ccm, "notes/" + id, METHOD_GET, null, null));
+    }
 
-        if (!currentItem.isNull(key_id)) {
-            noteId = currentItem.getLong(key_id);
-        }
-        if (!currentItem.isNull(key_title)) {
-            noteTitle = currentItem.getString(key_title);
-        }
-        if (!currentItem.isNull(key_content)) {
-            noteContent = currentItem.getString(key_content);
-        }
-        if (!currentItem.isNull(key_modified)) {
-            noteModified = GregorianCalendar.getInstance();
-            noteModified
-                    .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
-        }
-        return new Note(noteId, noteModified, noteTitle, noteContent);
+    private NoteResponse putNote(CustomCertManager ccm, CloudNote note, String path, String method)  throws JSONException, IOException {
+        JSONObject paramObject = new JSONObject();
+        paramObject.accumulate(JSON_CONTENT, note.getContent());
+        paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis()/1000);
+		paramObject.accumulate(JSON_FAVORITE, note.isFavorite());
+		paramObject.accumulate(JSON_CATEGORY, note.getCategory());
+        return new NoteResponse(requestServer(ccm, path, method, paramObject, null));
     }
 
     /**
      * Creates a Note on the Server
      *
-     * @param content String - Content of the new Note
+     * @param note {@link CloudNote} - the new Note
      * @return Created Note including generated Title, ID and lastModified-Date
      * @throws JSONException
      * @throws IOException
      */
-    public Note createNote(String content) throws
-            JSONException, IOException {
-        long noteId = 0;
-        String noteTitle = "";
-        String noteContent = "";
-        Calendar noteModified = null;
-
-        JSONObject paramObject = new JSONObject();
-        paramObject.accumulate(key_content, content);
-        JSONObject currentItem = new JSONObject(requestServer("notes", METHOD_POST,
-                paramObject));
-
-        if (!currentItem.isNull(key_id)) {
-            noteId = currentItem.getLong(key_id);
-        }
-        if (!currentItem.isNull(key_title)) {
-            noteTitle = currentItem.getString(key_title);
-        }
-        if (!currentItem.isNull(key_content)) {
-            noteContent = currentItem.getString(key_content);
-        }
-        if (!currentItem.isNull(key_modified)) {
-            noteModified = GregorianCalendar.getInstance();
-            noteModified
-                    .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
-        }
-        return new Note(noteId, noteModified, noteTitle, noteContent);
+    public NoteResponse createNote(CustomCertManager ccm, CloudNote note) throws JSONException, IOException {
+        return putNote(ccm, note, "notes", METHOD_POST);
     }
 
-    public Note editNote(long noteId, String content)
-            throws JSONException, IOException {
-        String noteTitle = "";
-        Calendar noteModified = null;
-
-        JSONObject paramObject = new JSONObject();
-        paramObject.accumulate(key_content, content);
-        JSONObject currentItem = new JSONObject(requestServer(
-                "notes/" + noteId, METHOD_PUT, paramObject));
-
-        if (!currentItem.isNull(key_title)) {
-            noteTitle = currentItem.getString(key_title);
-        }
-        if (!currentItem.isNull(key_modified)) {
-            noteModified = GregorianCalendar.getInstance();
-            noteModified
-                    .setTimeInMillis(currentItem.getLong(key_modified) * 1000);
-        }
-        return new Note(noteId, noteModified, noteTitle, content);
+    public NoteResponse editNote(CustomCertManager ccm, CloudNote note) throws JSONException, IOException {
+        return putNote(ccm, note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
-    public void deleteNote(long noteId) throws
-            IOException {
-        this.requestServer("notes/" + noteId, METHOD_DELETE, null);
+    public void deleteNote(CustomCertManager ccm, long noteId) throws IOException {
+        this.requestServer(ccm, "notes/" + noteId, METHOD_DELETE, null, null);
     }
 
     /**
@@ -182,33 +130,54 @@ public class NotesClient {
      * @throws MalformedURLException
      * @throws IOException
      */
-    private String requestServer(String target, String method, JSONObject params)
+    private ResponseData requestServer(CustomCertManager ccm, String target, String method, JSONObject params, String lastETag)
             throws IOException {
         StringBuffer result = new StringBuffer();
+        // setup connection
         String targetURL = url + "index.php/apps/notes/api/v0.2/" + target;
-        HttpURLConnection con = (HttpURLConnection) new URL(targetURL)
-                .openConnection();
+        HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, targetURL);
         con.setRequestMethod(method);
         con.setRequestProperty(
                 "Authorization",
-                "Basic "
-                        + new String(Base64.encode((username + ":"
-                        + password).getBytes(), Base64.NO_WRAP)));
+                "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
+		con.setRequestProperty("User-Agent", "nextcloud-notes/" + BuildConfig.VERSION_NAME + " (Android)");
+        if(lastETag!=null && METHOD_GET.equals(method)) {
+            con.setRequestProperty("If-None-Match", lastETag);
+        }
         con.setConnectTimeout(10 * 1000); // 10 seconds
+        Log.d(getClass().getSimpleName(), method + " " + targetURL);
+        // send request data (optional)
+        byte[] paramData=null;
         if (params != null) {
-            con.setFixedLengthStreamingMode(params.toString().getBytes().length);
+            paramData = params.toString().getBytes();
+            Log.d(getClass().getSimpleName(), "Params: " + params);
+            con.setFixedLengthStreamingMode(paramData.length);
             con.setRequestProperty("Content-Type", application_json);
             con.setDoOutput(true);
             OutputStream os = con.getOutputStream();
-            os.write(params.toString().getBytes());
+            os.write(paramData);
             os.flush();
             os.close();
         }
-        BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        // read response data
+        int responseCode = con.getResponseCode();
+        Log.d(getClass().getSimpleName(), "HTTP response code: "+responseCode);
+
+        if(responseCode==HttpURLConnection.HTTP_NOT_MODIFIED) {
+            throw new ServerResponse.NotModifiedException();
+        }
+
+   	    BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String line;
         while ((line = rd.readLine()) != null) {
             result.append(line);
         }
-        return result.toString();
+        // create response object
+        String etag = con.getHeaderField("ETag");
+        long lastModified = con.getHeaderFieldDate("Last-Modified", 0) / 1000;
+        Log.i(getClass().getSimpleName(), "Result length:  " + result.length() + (paramData == null ? "" : "; Request length: " + paramData.length));
+        Log.d(getClass().getSimpleName(), "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + con.getHeaderField("Last-Modified") + ")");
+        // return these header fields since they should only be saved after successful processing the result!
+        return new ResponseData(result.toString(), etag, lastModified);
     }
 }

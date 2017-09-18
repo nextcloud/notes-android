@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_app_license_title"/>
+            android:text="@string/about_app_license_title" />
 
         <TextView
             android:id="@+id/about_app_license"
@@ -22,35 +22,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/about_app_license"/>
+            android:text="@string/about_app_license" />
 
         <Button
             android:id="@+id/about_app_license_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_app_license_button"/>
-
-        <TextView
-            android:id="@+id/about_app_icon_disclaimer_title"
-            style="?android:attr/listSeparatorTextViewStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_app_icon_disclaimer_title"/>
-
-        <TextView
-            android:id="@+id/about_app_icon_disclaimer"
-            style="?android:attr/editTextPreferenceStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/about_app_icon_disclaimer"/>
+            android:text="@string/about_app_license_button" />
 
         <TextView
             android:id="@+id/about_icons_disclaimer_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_icons_disclaimer_title"/>
+            android:layout_marginTop="16dp"
+            android:text="@string/about_icons_disclaimer_title" />
 
         <TextView
             android:id="@+id/about_icons_disclaimer"
@@ -58,6 +44,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/about_icons_disclaimer"/>
+            android:text="@string/about_icons_disclaimer" />
     </LinearLayout>
 </ScrollView>

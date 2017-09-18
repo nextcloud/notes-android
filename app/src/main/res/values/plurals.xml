@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <plurals
-        name="ab_selected">
-        <item quantity="other">%d selected</item>
-    </plurals>
-</resources>

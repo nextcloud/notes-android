@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ownCloud Notes</string>
+    <string name="app_name">Заметки</string>
     <string name="no_notes">Заметок пока нет</string>
-    <string name="action_about">О программе</string>
     <string name="action_create">Новая заметка</string>
-    <string name="action_create_cancel">Отмена</string>
+    <string name="action_settings">Настройки</string>
     <string name="action_create_save">Сохранить</string>
-    <string name="action_edit_cancel">Отмена</string>
+    <string name="action_create_cancel">Отмена</string>
     <string name="action_edit_editing">Редактировать</string>
     <string name="action_edit_save">Сохранить</string>
+    <string name="action_edit_saving">Сохранение …</string>
     <string name="action_edit_saved">Сохранено</string>
+    <string name="action_edit_cancel">Отмена</string>
+    <string name="action_about">О программе</string>
     <string name="action_select_note">Выбрать заметку</string>
-    <string name="action_settings">Настройки</string>
-    <string name="menu_about">О программе</string>
+    <string name="action_note_deleted">Заметка удалена</string>
+    <string name="action_note_restored">Заметка восстановлена</string>
+    <string name="action_undo">Отменить</string>
+    <string name="menu_delete">Удалить</string>
     <string name="menu_copy">Копировать</string>
     <string name="menu_edit">Редактировать</string>
-    <string name="action_edit_saving">Сохранение …</string>
-    <string name="menu_delete">Удалить</string>
+    <string name="menu_cancel">Отмена</string>
+    <string name="menu_favorite">Избранное</string>
+    <string name="menu_preview">Предварительный просмотр</string>
     <string name="menu_share">Поделиться</string>
+    <string name="menu_about">О программе</string>
 
     <string name="copy">Копировать</string>
 
@@ -29,27 +35,40 @@
     <string name="listview_updated_earlier">Ранее</string>
 
     <!-- Settings -->
-
-    <string name="settings_url_warn_http">ВНИМАНИЕ: "http" ненадёжен. Пожалуйста, используйте "https"</string>
-    <string name="settings_submitting">Соединение …</string>
-    <string name="settings_password">Пароль</string>
-    <string name="settings_password_check_description">Показывает, если учётные данные являются правильными.</string>
+    <string name="settings_server_settings">Настройки аккаунта</string>
     <string name="settings_server">Сервер</string>
-    <string name="settings_submit">Соединить</string>
     <string name="settings_url">Адрес сервера</string>
     <string name="settings_url_check_description"> Показывает, если адрес доступен.</string>
+    <string name="settings_url_warn_http">ВНИМАНИЕ: "http" ненадёжен. Пожалуйста, используйте "https"</string>
     <string name="settings_username">Логин</string>
+    <string name="settings_password">Пароль</string>
+    <string name="settings_password_unchanged">Пароль (не изменён)</string>
+    <string name="settings_password_check_description">Показывает, если учётные данные являются правильными.</string>
+    <string name="settings_submit">Соединить</string>
+    <string name="settings_submitting">Соединение …</string>
+    <string name="settings_notification_category">Уведомления</string>
+    <string name="settings_notification">Включить показ постоянного уведомления для быстрого создания новых заметок.</string>
+    <string name="settings_cert_category">Сертификаты</string>
+    <string name="settings_cert_trust_system">Доверенные сертификаты из системного хранилища.</string>
+    <string name="settings_cert_reset">Очистить хранилище сертификатов</string>
+    <string name="settings_cert_reset_toast">Сохранённая информация удалена.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Заметки — Безопасность подключения</string>
+    <string name="trust_certificate_unknown_certificate_found">Приложению предлагается неизвестный сертификат. Доверять ему?</string>
 
     <!-- Network -->
-
     <string name="network_connecting">Соединение</string>
     <string name="network_connected">Соединено</string>
     <string name="network_disconnected">Сеть недоступна</string>
 
     <!-- Error -->
-    <string name="error_invalid_login">Неверный логин</string>
+    <string name="error_sync">Синхронизация не удалась: %1$s</string>
+    <string name="error_invalid_login">Неверный логин: %1$s</string>
+    <string name="error_json">Включено ли приложение «Заметки» на сервере?</string>
     <string name="error_io">Ошибка ввода/вывода</string>
-    <string name="error_json">Ошибка JSON</string>
+    <string name="error_no_network">нет подключения к сети</string>
+    <string name="error_server">Ошибка в URL или адресе сервера</string>
     <string name="error_url_malformed">Неверный адрес</string>
     <string name="error_username_password_invalid">Неправильный логин или пароль</string>
 
@@ -57,32 +76,39 @@
     <string name="snackbar_settings">Настройки</string>
 
     <!-- About -->
-    <string name="about_version">Вы используете <strong>v0.8.1</strong></string>
-    <string name="about_maintainer"><a href="http://www.niedermann.it/">Niedermann IT-Dienstleistungen</a></string>
+    <string name="about_version_title">Версия</string>
+    <string name="about_version">Вы используете &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Сопровождающий</string>
     <string name="about_developers_title">Разработчики</string>
-    <string name="about_developers">Stefan Niedermann, HeaDBanGer84, Felix Edelmann</string>
-    <string name="about_translators">pejakm (Сербский), ageru (Французский), proninyaroslav (Русский)</string>
-    <string name="about_testers">Jan C. Borchardt</string>
-    <string name="about_source">Проект размещён на GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/">https://github.com/stefan-niedermann/OwnCloud-Notes/</a></string>
-    <string name="about_issues">Вы можете сообщать об ошибках, предложениях об улучшении и пожеланиях в систему тикетов GitHub: <a href="https://github.com/stefan-niedermann/OwnCloud-Notes/issues">https://github.com/stefan-niedermann/OwnCloud-Notes/issues</a></string>
+    <string name="about_translators_title">Переводчики</string>
+    <string name="about_translators_transifex">Сообщество Nextcloud на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">Тестеры</string>
+    <string name="about_source_title">Исходный код</string>
+    <string name="about_source">Этот проект размещён на GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Тикеты</string>
+    <string name="about_issues">Вы можете сообщать об ошибках, предложениях об улучшении и пожеланиях в систему тикетов GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Перевести</string>
+    <string name="about_translate">Включайтесь в команду Nextcloud на сайте Transifex и помогайте переводить это приложение: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Лицензия программы</string>
     <string name="about_app_license">Программа выпускается под лицензией GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Посмотреть лицензию</string>
-    <string name="about_app_icon_disclaimer"><p>Первоначальный логотип был сделан <a href="http://jancborchardt.net/" title="Jan C. Borchardt">Jan C. Borchardt</a> на <a href="https://github.com/owncloud/notes/commits/master/img/notes.svg" title="GitHub">www.github.com</a></p></string>
-    <string name="about_icons_disclaimer"><p>Все дальнейшие значки, которые используются в этой программе, являются <a href="https://materialdesignicons.com/" title="Link to Website">Material Design значки</a> от Google Inc. и лицензированны под Creative Commons License.</p></string>
-
-    <string name="about_contribution_tab_title">Учавствовать</string>
-    <string name="about_app_icon_disclaimer_title">Значок программы</string>
-    <string name="about_credits_tab_title">Заслуги</string>
     <string name="about_icons_disclaimer_title">Значки</string>
-    <string name="about_issues_title">Тикеты</string>
+    <string name="about_icons_disclaimer">&lt;p>Оригинальные значки были созданы  %1$s&lt;/p>&lt;p>Все дальнейшие значки, которые используются в этой программе, являются &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> от Google Inc. и лицензированны под Creative Commons License.&lt;/p></string>
+    <string name="about_credits_tab_title">Заслуги</string>
+    <string name="about_contribution_tab_title">Учавствовать</string>
     <string name="about_license_tab_title">Лицензия</string>
-    <string name="about_maintainer_title">Сопровождающий</string>
-    <string name="about_source_title">Исходный код</string>
-    <string name="about_testers_title">Тестеры</string>
-    <string name="about_translators_title">Переводчики</string>
-    <string name="about_version_title">Версия</string>
 
     <string name="widget_all_notes_title">Все заметки</string>
     <string name="widget_single_note_title">Одна заметка</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Создать новую заметку</string>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d выбран</item>
+        <item quantity="few">%d выбрано</item>
+        <item quantity="many">%d выбрано</item>
+        <item quantity="other">%d выбрано</item>
+    </plurals>
 </resources>

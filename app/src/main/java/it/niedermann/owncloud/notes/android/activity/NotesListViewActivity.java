@@ -1,39 +1,49 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.support.v7.widget.helper.ItemTouchHelper.SimpleCallback;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
-import it.niedermann.owncloud.notes.model.Note;
 import it.niedermann.owncloud.notes.model.SectionItem;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.util.NotesClientUtil;
 
 public class NotesListViewActivity extends AppCompatActivity implements
         ItemAdapter.NoteClickListener, View.OnClickListener {
 
-    public final static String SELECTED_NOTE = "it.niedermann.owncloud.notes.clicked_note";
     public final static String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
-    public final static String SELECTED_NOTE_POSITION = "it.niedermann.owncloud.notes.clicked_note_position";
     public final static String CREDENTIALS_CHANGED = "it.niedermann.owncloud.notes.CREDENTIALS_CHANGED";
 
     private final static int create_note_cmd = 0;
@@ -47,6 +57,21 @@ public class NotesListViewActivity extends AppCompatActivity implements
     private SwipeRefreshLayout swipeRefreshLayout = null;
     private NoteSQLiteOpenHelper db = null;
     private SearchView searchView = null;
+    private ICallback syncCallBack = new ICallback() {
+        @Override
+        public void onFinish() {
+            adapter.clearSelection();
+            if (mActionMode != null) {
+                mActionMode.finish();
+            }
+            refreshList();
+            swipeRefreshLayout.setRefreshing(false);
+        }
+
+        @Override
+        public void onScheduled() {
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +79,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         // First Run Wizard
         SharedPreferences preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
-        if (preferences.getBoolean(SettingsActivity.SETTINGS_FIRST_RUN, true)) {
+        if (!NoteServerSyncHelper.isConfigured(this)) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
         }
@@ -62,50 +87,71 @@ public class NotesListViewActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_notes_list_view);
 
         // Display Data
-        db = new NoteSQLiteOpenHelper(this);
-        setListView(db.getNotes());
+        db = NoteSQLiteOpenHelper.getInstance(this);
+        initList();
+        refreshList();
 
         // Pull to Refresh
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshlayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                db.getNoteServerSyncHelper().addCallback(new ICallback() {
-                    @Override
-                    public void onFinish() {
-                        swipeRefreshLayout.setRefreshing(false);
-                        adapter.clearSelection();
-                        if (mActionMode != null) {
-                            mActionMode.finish();
-                        }
-                        setListView(db.getNotes());
-                    }
-                });
-                db.getNoteServerSyncHelper().downloadNotes();
+                if(db.getNoteServerSyncHelper().isSyncPossible()) {
+                    synchronize();
+                } else {
+                    swipeRefreshLayout.setRefreshing(false);
+                    Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         // Floating Action Button
         findViewById(R.id.fab_create).setOnClickListener(this);
+
+        // Show persistant notification for creating a new note
+        checkNotificationSetting();
     }
 
-    /**
-     * Perform refresh on every time the activity gets visible
-     */
+    protected void checkNotificationSetting(){
+        SharedPreferences preferences = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
+        Boolean showNotification = preferences.getBoolean(getString(R.string.pref_key_show_notification), false);
+        if(showNotification==true){
+            // add notification
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+            PendingIntent newNoteIntent = PendingIntent.getActivity(this, 0,
+                    new Intent(this, CreateNoteActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP),
+                    0);
+            builder.setSmallIcon(R.drawable.ic_action_new)
+                    .setContentTitle(getString(R.string.action_create))
+                    .setContentText("")
+                    .setOngoing(true)
+                    .setContentIntent(newNoteIntent)
+                    .setVisibility(NotificationCompat.VISIBILITY_SECRET);
+            NotificationManager notificationManager = (NotificationManager) getSystemService(
+                    NOTIFICATION_SERVICE);
+
+            notificationManager.notify(10, builder.build());
+        }
+        else{
+            // remove notification
+            NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
+            nMgr.cancel(10);
+        }
+    }
+
     @Override
     protected void onResume() {
-        db.getNoteServerSyncHelper().addCallback(new ICallback() {
-            @Override
-            public void onFinish() {
-                swipeRefreshLayout.setRefreshing(false);
-                adapter.clearSelection();
-                if (mActionMode != null) {
-                    mActionMode.finish();
-                }
-                adapter.checkForUpdates(db.getNotes());
-            }
-        });
-        db.getNoteServerSyncHelper().downloadNotes();
+        // Show persistant notification for creating a new note
+        checkNotificationSetting();
+
+        // refresh and sync every time the activity gets visible
+        refreshList();
+        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
+        if (db.getNoteServerSyncHelper().isSyncPossible()) {
+            synchronize();
+        }
         super.onResume();
     }
 
@@ -123,82 +169,183 @@ public class NotesListViewActivity extends AppCompatActivity implements
     }
 
     /**
-     * Allows other classes to set a List of Notes.
-     *
-     * @param noteList List&lt;Note&gt;
+     * Allows other classes to refresh the List of Notes. Starts an AsyncTask which loads the data in the background.
      */
-    @SuppressWarnings("WeakerAccess")
-    public void setListView(List<Note> noteList) {
-        List<Item> itemList = new ArrayList<>();
-        // #12 Create Sections depending on Time
-        // TODO Move to ItemAdapter?
-        boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
-        todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
-        Calendar recent = Calendar.getInstance();
-        Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
-        Calendar yesterday = Calendar.getInstance();
-        yesterday.set(Calendar.DAY_OF_YEAR, yesterday.get(Calendar.DAY_OF_YEAR) - 1);
-        yesterday.set(Calendar.HOUR_OF_DAY, 0);
-        yesterday.set(Calendar.MINUTE, 0);
-        yesterday.set(Calendar.SECOND, 0);
-        yesterday.set(Calendar.MILLISECOND, 0);
-        Calendar week = Calendar.getInstance();
-        week.set(Calendar.DAY_OF_WEEK, week.getFirstDayOfWeek());
-        week.set(Calendar.HOUR_OF_DAY, 0);
-        week.set(Calendar.MINUTE, 0);
-        week.set(Calendar.SECOND, 0);
-        week.set(Calendar.MILLISECOND, 0);
-        Calendar month = Calendar.getInstance();
-        month.set(Calendar.DAY_OF_MONTH, 0);
-        month.set(Calendar.HOUR_OF_DAY, 0);
-        month.set(Calendar.MINUTE, 0);
-        month.set(Calendar.SECOND, 0);
-        month.set(Calendar.MILLISECOND, 0);
-        for (int i = 0; i < noteList.size(); i++) {
-            Note currentNote = noteList.get(i);
-            if (!todaySet && recent.getTimeInMillis() - currentNote.getModified().getTimeInMillis() >= 600000 && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
-                // < 10 minutes but after 00:00 today
-                //if (i > 0) {
-                    //itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
-                //}
-                todaySet = true;
-            } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
-                // between today 00:00 and yesterday 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
-                }
-                yesterdaySet = true;
-            } else if (!weekSet && currentNote.getModified().getTimeInMillis() < yesterday.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= week.getTimeInMillis()) {
-                // between yesterday 00:00 and start of the week 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_week)));
-                }
-                weekSet = true;
-            } else if (!monthSet && currentNote.getModified().getTimeInMillis() < week.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= month.getTimeInMillis()) {
-                // between start of the week 00:00 and start of the month 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_month)));
-                }
-                monthSet = true;
-            } else if (!earlierSet && currentNote.getModified().getTimeInMillis() < month.getTimeInMillis()) {
-                // before start of the month 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_earlier)));
-                }
-                earlierSet = true;
+    public void refreshList() {
+        new RefreshListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    private class RefreshListTask extends AsyncTask<Void, Void, List<Item>> {
+
+        private CharSequence query = null;
+
+        @Override
+        protected void onPreExecute() {
+            if(searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
+                query = searchView.getQuery();
             }
-            itemList.add(currentNote);
         }
 
-        adapter = new ItemAdapter(itemList);
-        ItemAdapter.setNoteClickListener(this);
-        listView = (RecyclerView) findViewById(R.id.list_view);
+        @Override
+        protected List<Item> doInBackground(Void... voids) {
+            List<DBNote> noteList;
+            if (query==null) {
+                noteList = db.getNotes();
+            } else {
+                noteList = db.searchNotes(query);
+            }
+
+            final List<Item> itemList = new ArrayList<>();
+            // #12 Create Sections depending on Time
+            // TODO Move to ItemAdapter?
+            boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
+            todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
+            Calendar recent = Calendar.getInstance();
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.HOUR_OF_DAY, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
+            Calendar yesterday = Calendar.getInstance();
+            yesterday.set(Calendar.DAY_OF_YEAR, yesterday.get(Calendar.DAY_OF_YEAR) - 1);
+            yesterday.set(Calendar.HOUR_OF_DAY, 0);
+            yesterday.set(Calendar.MINUTE, 0);
+            yesterday.set(Calendar.SECOND, 0);
+            yesterday.set(Calendar.MILLISECOND, 0);
+            Calendar week = Calendar.getInstance();
+            week.set(Calendar.DAY_OF_WEEK, week.getFirstDayOfWeek());
+            week.set(Calendar.HOUR_OF_DAY, 0);
+            week.set(Calendar.MINUTE, 0);
+            week.set(Calendar.SECOND, 0);
+            week.set(Calendar.MILLISECOND, 0);
+            Calendar month = Calendar.getInstance();
+            month.set(Calendar.DAY_OF_MONTH, 0);
+            month.set(Calendar.HOUR_OF_DAY, 0);
+            month.set(Calendar.MINUTE, 0);
+            month.set(Calendar.SECOND, 0);
+            month.set(Calendar.MILLISECOND, 0);
+            for (int i = 0; i < noteList.size(); i++) {
+                DBNote currentNote = noteList.get(i);
+                if (currentNote.isFavorite()) {
+                    // don't show as new section
+                } else if (!todaySet && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
+                    // after 00:00 today
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_today)));
+                    }
+                    todaySet = true;
+                } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
+                    // between today 00:00 and yesterday 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_yesterday)));
+                    }
+                    yesterdaySet = true;
+                } else if (!weekSet && currentNote.getModified().getTimeInMillis() < yesterday.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= week.getTimeInMillis()) {
+                    // between yesterday 00:00 and start of the week 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_week)));
+                    }
+                    weekSet = true;
+                } else if (!monthSet && currentNote.getModified().getTimeInMillis() < week.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= month.getTimeInMillis()) {
+                    // between start of the week 00:00 and start of the month 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_this_month)));
+                    }
+                    monthSet = true;
+                } else if (!earlierSet && currentNote.getModified().getTimeInMillis() < month.getTimeInMillis()) {
+                    // before start of the month 00:00
+                    if (i > 0) {
+                        itemList.add(new SectionItem(getResources().getString(R.string.listview_updated_earlier)));
+                    }
+                    earlierSet = true;
+                }
+                itemList.add(currentNote);
+            }
+
+            return itemList;
+        }
+
+        @Override
+        protected void onPostExecute(List<Item> items) {
+            adapter.setItemList(items);
+        }
+    }
+
+    public void initList() {
+        adapter = new ItemAdapter(this);
+        listView = (RecyclerView) findViewById(R.id.recycler_view);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
+        ItemTouchHelper touchHelper = new ItemTouchHelper(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            /**
+             * Disable swipe on sections
+             *
+             * @param recyclerView RecyclerView
+             * @param viewHolder   RecyclerView.ViewHoler
+             * @return 0 if section, otherwise super()
+             */
+            @Override
+            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                if (viewHolder instanceof ItemAdapter.SectionViewHolder) return 0;
+                return super.getSwipeDirs(recyclerView, viewHolder);
+            }
+
+            /**
+             * Delete note if note is swiped to left or right
+             *
+             * @param viewHolder RecyclerView.ViewHoler
+             * @param direction  int
+             */
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
+                    final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                    db.deleteNoteAndSync((dbNote).getId());
+                    adapter.remove(dbNote);
+                    refreshList();
+                    Log.v("Note", "Item deleted through swipe ----------------------------------------------");
+                    Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.action_undo, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    db.addNoteAndSync(dbNote);
+                                    refreshList();
+                                    Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
+                                            .show();
+                                }
+                            })
+                            .show();
+                }
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
+                // show delete icon on the right side
+                noteViewHolder.showSwipeDelete(dX>0);
+                // move only swipeable part of item (not leave-behind)
+                getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.noteSwipeable, dX, dY, actionState, isCurrentlyActive);
+            }
+
+            @Override
+            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                getDefaultUIUtil().clearView(((ItemAdapter.NoteViewHolder) viewHolder).noteSwipeable);
+            }
+        });
+        touchHelper.attachToRecyclerView(listView);
+    }
+
+    public ItemAdapter getItemAdapter() {
+        return adapter;
+    }
+
+    public SwipeRefreshLayout getSwipeRefreshLayout() {
+        return swipeRefreshLayout;
     }
 
     /**
@@ -221,31 +368,17 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                search(newText.trim());
+                refreshList();
                 return true;
             }
         });
         return true;
     }
 
-    private void search(final String query) {
-        new Thread() {
-            @Override
-            public void run() {
-                if (query.length() > 0) {
-                    setListView(db.searchNotes(query));
-                } else {
-                    setListView(db.getNotes());
-                }
-                listView.scrollToPosition(0);
-            }
-        }.run();
-    }
-
     @Override
     protected void onNewIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            search(intent.getStringExtra(SearchManager.QUERY));
+            searchView.setQuery(intent.getStringExtra(SearchManager.QUERY), true);
         }
         super.onNewIntent(intent);
     }
@@ -261,7 +394,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
         int id = item.getItemId();
         switch (id) {
             case R.id.action_settings:
-                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                Intent settingsIntent = new Intent(this, PreferencesActivity.class);
                 startActivityForResult(settingsIntent, server_settings);
                 return true;
             case R.id.action_about:
@@ -288,35 +421,35 @@ public class NotesListViewActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 //not need because of db.synchronisation in createActivity
 
-                Note createdNote = (Note) data.getExtras().getSerializable(
-                        CREATED_NOTE);
+                DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
                 adapter.add(createdNote);
                 //setListView(db.getNotes());
             }
         } else if (requestCode == show_single_note_cmd) {
             if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
-                int notePosition = data.getExtras().getInt(
-                        SELECTED_NOTE_POSITION);
-                adapter.remove(adapter.getItem(notePosition));
-                if (resultCode == RESULT_OK) {
-                    Note editedNote = (Note) data.getExtras().getSerializable(
-                            NoteActivity.EDIT_NOTE);
-                    adapter.add(editedNote);
+                int notePosition = data.getExtras().getInt(EditNoteActivity.PARAM_NOTE_POSITION);
+                if(adapter.getItemCount()>notePosition) {
+                    Item oldItem = adapter.getItem(notePosition);
+                    if (resultCode == RESULT_FIRST_USER) {
+                        adapter.remove(oldItem);
+                    }
+                    if (resultCode == RESULT_OK) {
+                        DBNote editedNote = (DBNote) data.getExtras().getSerializable(EditNoteActivity.PARAM_NOTE);
+                        adapter.replace(editedNote, notePosition);
+                        refreshList();
+                    }
                 }
             }
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
-            db = new NoteSQLiteOpenHelper(this);
-            adapter.removeAll();
-            swipeRefreshLayout.setRefreshing(true);
-            db.getNoteServerSyncHelper().addCallback(new ICallback() {
-                @Override
-                public void onFinish() {
-                    setListView(db.getNotes());
-                    swipeRefreshLayout.setRefreshing(false);
-                }
-            });
-            db.synchronizeWithServer();
+            db = NoteSQLiteOpenHelper.getInstance(this);
+            if(db.getNoteServerSyncHelper().isSyncPossible()) {
+                adapter.removeAll();
+                swipeRefreshLayout.setRefreshing(true);
+                synchronize();
+            } else {
+                Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -348,15 +481,22 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 mActionMode.finish();
             }
         } else {
-            Intent intent = new Intent(getApplicationContext(),
-                    NoteActivity.class);
-
             Item item = adapter.getItem(position);
-            intent.putExtra(SELECTED_NOTE, (Note) item);
-            intent.putExtra(SELECTED_NOTE_POSITION, position);
+            Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
+            intent.putExtra(EditNoteActivity.PARAM_NOTE, (DBNote) item);
+            intent.putExtra(EditNoteActivity.PARAM_NOTE_POSITION, position);
             startActivityForResult(intent, show_single_note_cmd);
 
         }
+    }
+
+    @Override
+    public void onNoteFavoriteClick(int position, View view) {
+        DBNote note = (DBNote) adapter.getItem(position);
+        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(view.getContext());
+        db.toggleFavorite(note, syncCallBack);
+        adapter.notifyItemChanged(position);
+        refreshList();
     }
 
     @Override
@@ -373,18 +513,22 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        if (searchView.isIconified()) {
+        if (searchView==null || searchView.isIconified()) {
             super.onBackPressed();
         } else {
             searchView.setIconified(true);
         }
     }
 
+    private void synchronize() {
+        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
+        db.getNoteServerSyncHelper().scheduleSync(false);
+    }
+
     /**
      * Handler for the MultiSelect Actions
      */
-    private class MultiSelectedActionModeCallback implements
-            ActionMode.Callback {
+    private class MultiSelectedActionModeCallback implements ActionMode.Callback {
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -410,7 +554,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 case R.id.menu_delete:
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
-                        Note note = (Note) adapter.getItem(i);
+                        DBNote note = (DBNote) adapter.getItem(i);
                         db.deleteNoteAndSync(note.getId());
                         // Not needed because of dbsync
                         //adapter.remove(note);
@@ -418,7 +562,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
                     searchView.setIconified(true);
-                    setListView(db.getNotes());
+                    refreshList();
                     return true;
                 default:
                     return false;
