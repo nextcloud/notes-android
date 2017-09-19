@@ -50,7 +50,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
             Intent intent = new Intent(context, EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE, note);
             intent.putExtra(EditNoteActivity.PARAM_WIDGET_SRC, true);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setOnClickPendingIntent(R.id.widget_single_note, pendingIntent);
             views.setTextViewText(R.id.single_note_content, note.getContent());
             appWidgetManager.updateAppWidget(appWidgetId, views);
