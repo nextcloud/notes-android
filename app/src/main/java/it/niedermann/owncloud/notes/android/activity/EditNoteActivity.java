@@ -75,6 +75,26 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        DBNote note = (DBNote) intent.getSerializableExtra(PARAM_NOTE);
+
+        // Does the note retrieved from the intent match the note currently
+        // being displayed by the app
+        if ((note.getId()) != fragment.getNote().getId()) {
+            originalNote = note;
+            createEditFragment(note);
+        }
+    }
+
     private void createEditFragment(DBNote note) {
         configureActionBar(note, false);
         fragment = NoteEditFragment.newInstance(note);
