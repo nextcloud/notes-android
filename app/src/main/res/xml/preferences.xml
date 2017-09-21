@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
     <PreferenceCategory android:title="@string/settings_server">
         <Preference android:title="@string/settings_server_settings">
             <intent
@@ -17,6 +16,13 @@
             android:summary="%s"
             android:entries="@array/noteMode_entries"
             android:entryValues="@array/noteMode_values" />
+
+        <SwitchPreference
+            android:defaultValue="@string/pref_value_theme_light"
+            android:key="@string/pref_key_theme"
+            android:title="@string/settings_theme_title"
+            android:summary="%s"
+            />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_cert_category">

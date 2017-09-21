@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colors -->
+
+    <color name="primary_dark">#286090</color>
+
+    <color name="separator">#444</color>
+
+    <color name="bg_highlighted">#111</color>
+    <color name="bg_normal">#222222</color>
+    <color name="bg_attention">#ff3333</color>
+    <color name="fg_default">#eeeeee</color>
+    <color name="fg_default_selection">#cccccc</color>
+    <color name="fg_default_low">#aaaaaa</color>
+    <color name="fg_default_high">#666666</color>
+    <color name="fg_contrast">#000000</color>
+
+    <color name="category_background">@color/primary</color>
+    <color name="category_border">@color/primary</color>
+</resources>

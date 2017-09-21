@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Main theme colors -->
         <!-- App Bar -->
         <item name="colorPrimary">@color/primary</item>
@@ -19,6 +19,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Preferences" parent="AppTheme">
+        <item name="android:textColor">@color/fg_default</item>
+        <item name="android:textColorSecondary">@color/fg_default_low</item>
+    </style>
+
     <!--
         cert4android is using these styles and we want the same button style in the trust activity
     -->
@@ -28,8 +33,13 @@
 
     <style name="Widget.AppCompat.Button.Borderless.Colored" parent="Widget.AppCompat.Button.Borderless"></style>
 
-    <style name="ocAlertDialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+    <style name="ocAlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/primary</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:textColorPrimary">@color/fg_default</item>
+        <item name="android:alertDialogTheme">@style/cloudbutton</item>
+        <item name="android:windowBackground">@color/bg_normal</item>
     </style>
 
     <style name="fab">

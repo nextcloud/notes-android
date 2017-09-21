@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name="it.niedermann.owncloud.notes.util.Notes"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -54,7 +55,9 @@
             android:name="it.niedermann.owncloud.notes.android.activity.PreferencesActivity"
             android:label="@string/action_settings"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/Preferences"
+            />
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
