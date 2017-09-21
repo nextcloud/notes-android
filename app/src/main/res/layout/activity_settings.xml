@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/settings_url"
-            android:inputType="textUri" />
+            android:inputType="textUri"
+            android:textColor="@color/fg_default" />
     </android.support.design.widget.TextInputLayout>
 
     <TextView
@@ -44,7 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/settings_username"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/fg_default" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -58,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/settings_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/fg_default" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -67,7 +70,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10pt"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:shadowColor="@color/fg_default_low"
-        android:text="@string/settings_submit" />
+        android:text="@string/settings_submit"/>
 
 </LinearLayout>

@@ -1,6 +1,8 @@
 package it.niedermann.owncloud.notes.model;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -98,7 +100,23 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
                 icon.setVisibility(View.GONE);
             }
             view.setBackgroundColor(isSelected ? view.getResources().getColor(R.color.bg_highlighted) : Color.TRANSPARENT);
+
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(view.getContext());
+            boolean darkTheme = sp.getBoolean(view.getContext().getString(R.string.pref_key_theme), false);
             int textColor = view.getResources().getColor(isSelected ? R.color.primary_dark : R.color.fg_default);
+
+            if(darkTheme) {
+                // TODO dirty. Fix if statement.
+                if((item.label != view.getContext().getString(R.string.action_settings)) &&
+                   (item.label != view.getContext().getString(R.string.simple_about))) {
+                    textColor = view.getResources().getColor(isSelected ? R.color.fg_default :
+                                                                          R.color.fg_default_high);
+                    view.setBackgroundColor(isSelected ?
+                                            view.getResources().getColor(R.color.bg_highlighted) :
+                                            Color.TRANSPARENT);
+                }
+            }
+
             name.setTextColor(textColor);
             count.setTextColor(textColor);
             icon.setColorFilter(isSelected ? textColor : 0);
