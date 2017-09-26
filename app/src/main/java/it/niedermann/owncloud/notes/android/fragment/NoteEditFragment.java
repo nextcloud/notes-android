@@ -2,8 +2,9 @@ package it.niedermann.owncloud.notes.android.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -11,20 +12,13 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 import com.yydcdut.rxmarkdown.factory.EditFactory;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -38,13 +32,16 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
     public static final String PARAM_NOTE = "note";
 
     private static final String LOG_TAG = "NoteEditFragment";
-    private static final long DELAY = 2000; // in ms
-    private static final long DELAY_AFTER_SYNC = 5000; // in ms
+    private static final String LOG_TAG_AUTOSAVE = "AutoSave";
+
+    private static final long DELAY = 2000; // Wait for this time after typing before saving
+    private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
+    private static final long DELAY_SHOW_SAVED = 1000; // How long "saved" is shown
 
     private DBNote note;
-    private Timer timer, timerNextSync;
-    private boolean saveActive = false;
     private NoteSQLiteOpenHelper db;
+    private Handler handler;
+    private boolean saveActive, unsavedEdit;
 
     public static NoteEditFragment newInstance(DBNote note) {
         NoteEditFragment f = new NoteEditFragment();
@@ -65,6 +62,7 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        handler = new Handler(Looper.getMainLooper());
     }
 
     @Override
@@ -109,61 +107,68 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
                         content.setText(charSequence, TextView.BufferType.SPANNABLE);
                     }
                 });
+    }
 
-        content.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    private final TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(final CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(final Editable s) {
+            unsavedEdit = true;
+            if(!saveActive) {
+                handler.removeCallbacks(runAutoSave);
+                handler.postDelayed(runAutoSave, DELAY);
             }
+        }
+    };
 
-            @Override
-            public void onTextChanged(final CharSequence s, int start, int before, int count) {
-                if (timer != null) {
-                    timer.cancel();
-                    timer = null;
-                }
-            }
-
-            @Override
-            public void afterTextChanged(final Editable s) {
-                if(timer != null) {
-                    timer.cancel();
-                }
-                if(!saveActive) {
-                    timer = new Timer();
-                    timer.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            if(getActivity() != null)
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        autoSave();
-                                    }
-                                });
-                        }
-                    }, DELAY);
-                }
-            }
-        });
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getContentView().addTextChangedListener(textWatcher);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        getContentView().removeTextChangedListener(textWatcher);
         cancelTimers();
     }
 
+    private final Runnable runAutoSave = new Runnable() {
+        @Override
+        public void run() {
+            if(unsavedEdit) {
+                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: start AutoSave");
+                autoSave();
+            } else {
+                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: nothing changed");
+            }
+        }
+    };
+
+    private final Runnable runResetActionBar = new Runnable() {
+        @Override
+        public void run() {
+            ActionBar actionBar = getActionBar();
+            if(actionBar == null) {
+                Log.w(LOG_TAG_AUTOSAVE, "runResetActionBar: ActionBar NOT AVAILABLE!");
+                return;
+            }
+            Log.d(LOG_TAG_AUTOSAVE, "runResetActionBar: reset action bar");
+            actionBar.setSubtitle(getString(R.string.action_edit_editing));
+        }
+    };
+
     private void cancelTimers() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
-        if (timerNextSync != null) {
-            timerNextSync.cancel();
-            timerNextSync = null;
-        }
-        saveActive = false;
+        handler.removeCallbacks(runAutoSave);
+        handler.removeCallbacks(runResetActionBar);
     }
 
     private RxMDEditText getContentView() {
@@ -176,20 +181,32 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
      * @return String of the current content.
      */
     private String getContent() {
-        return ((EditText) getContentView()).getText().toString();
+        return getContentView().getText().toString();
+    }
+
+    private ActionBar getActionBar() {
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        if(activity == null) {
+            return null;
+        }
+        return activity.getSupportActionBar();
     }
 
     /**
      * Saves the current changes and show the status in the ActionBar
      */
     private void autoSave() {
-        Log.d(LOG_TAG, "START save+sync");
-        final ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        Log.d(LOG_TAG_AUTOSAVE, "STARTAUTOSAVE");
+        ActionBar actionBar = getActionBar();
+        // if fragment is not attached to activity, then there is nothing to save
+        if (getActivity() == null) {
+            Log.w(LOG_TAG_AUTOSAVE, "autoSave: Activity NOT AVAILABLE!");
+            return;
+        }
         saveActive = true;
         if (actionBar != null) {
             actionBar.setSubtitle(getString(R.string.action_edit_saving));
         }
-        final String content = getContent();
         saveData(new ICallback() {
             @Override
             public void onFinish() {
@@ -201,50 +218,23 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
                 onSaved();
             }
 
-            public void onSaved() {
+            private void onSaved() {
                 // AFTER SYNCHRONIZATION
-                Log.d(LOG_TAG, "...sync finished");
-                if (getActivity() != null && actionBar != null) {
-                    actionBar.setTitle(note.getTitle());
-                    actionBar.setSubtitle(getResources().getString(R.string.action_edit_saved));
-                    Executors.newSingleThreadScheduledExecutor().schedule(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (getActivity() != null) {
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        // AFTER 1 SECOND: set ActionBar to default title
-                                        if (getActivity() != null && actionBar != null)
-                                            actionBar.setSubtitle(getString(R.string.action_edit_editing));
-                                    }
-                                });
-                            }
-                        }
-                    }, 1, TimeUnit.SECONDS);
-
-                    timerNextSync = new Timer();
-                    timerNextSync.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (getActivity() != null) {
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        // AFTER "DELAY_AFTER_SYNC" SECONDS: allow next auto-save or start it directly
-                                        if (getContent().equals(content)) {
-                                            saveActive = false;
-                                            Log.d(LOG_TAG, "FINISH, no new changes");
-                                        } else {
-                                            Log.d(LOG_TAG, "content has changed meanwhile -> restart save");
-                                            autoSave();
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    }, DELAY_AFTER_SYNC);
+                Log.d(LOG_TAG_AUTOSAVE, "FINISHED AUTOSAVE");
+                saveActive = false;
+                ActionBar actionBar = getActionBar();
+                if (actionBar == null) {
+                    Log.w(LOG_TAG_AUTOSAVE, "autoSave/onSaved: ActionBar NOT AVAILABLE!");
+                    return;
                 }
+                actionBar.setTitle(note.getTitle());
+                actionBar.setSubtitle(getResources().getString(R.string.action_edit_saved));
+
+                // AFTER "DELAY_SHOW_SAVED": set ActionBar to default title
+                handler.postDelayed(runResetActionBar, DELAY_SHOW_SAVED);
+
+                // AFTER "DELAY_AFTER_SYNC" SECONDS: allow next auto-save or start it directly
+                handler.postDelayed(runAutoSave, DELAY_AFTER_SYNC);
 
             }
         });
@@ -253,10 +243,11 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
     /**
      * Save the current state in the database and schedule synchronization if needed.
      *
-     * @param callback
+     * @param callback Observer which is called after save/synchronization
      */
     private void saveData(ICallback callback) {
         Log.d(LOG_TAG, "saveData()");
         note = db.updateNoteAndSync(note, getContent(), callback);
+        unsavedEdit = false;
     }
 }
