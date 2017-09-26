@@ -2,24 +2,29 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_attention">
+    android:background="@color/bg_attention"
+    >
 
     <ImageView
         android:id="@+id/noteDeleteLeft"
         android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:src="@drawable/ic_action_delete"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
+        android:contentDescription="@string/menu_delete"
         />
 
     <ImageView
         android:id="@+id/noteDeleteRight"
         android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:src="@drawable/ic_action_delete"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
+        android:contentDescription="@string/menu_delete"
         />
 
     <RelativeLayout
@@ -44,7 +49,8 @@
             android:ellipsize="marquee"
             android:maxLines="1"
             android:textColor="@drawable/list_item_color_selector"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            />
 
         <TextView
             android:id="@+id/noteCategory"
@@ -52,8 +58,8 @@
             android:background="@drawable/border"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
@@ -62,7 +68,8 @@
             android:layout_below="@id/noteTitle"
             android:maxLines="1"
             android:textColor="@drawable/list_item_color_selector"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            />
 
         <TextView
             android:id="@+id/noteExcerpt"
@@ -76,12 +83,13 @@
             android:layout_marginLeft="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="1dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@drawable/list_item_color_selector_low"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            />
 
         <ImageView
             android:id="@+id/noteStatus"
@@ -107,14 +115,16 @@
             android:layout_alignParentRight="true"
             android:layout_alignBaseline="@id/noteTitle"
             android:baseline="29dp"
-             />
+            />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_below="@id/noteExcerpt"
             android:layout_marginTop="16dp"
-            android:src="@color/separator" />
+            android:src="@color/separator"
+            />
+
     </RelativeLayout>
 
 </FrameLayout>
