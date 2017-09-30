@@ -13,8 +13,8 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 [![Donate with PayPal](https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K7HVLE6J7SXXA)
 
 ## :eyes: Screenshots
-![Screenshot of list view](/demo-list.png)
-![Screenshot of edit view](/demo-edit.png)
+![Screenshot of list view](/fastlane/metadata/en-US/images/phoneScreenshots/1.png)
+![Screenshot of edit view](/fastlane/metadata/en-US/images/phoneScreenshots/2.png)
 
 ## :rocket: Features
 * List, create, edit, share, search and delete notes

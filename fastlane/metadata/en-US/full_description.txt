@@ -1,0 +1,19 @@
+Companion app to Nextcloud Notes.
+
+Features
+
+    List, create, edit, share, search and delete notes
+    Share text and links as new note into the app
+    Mark notes as favorite
+    Bulk delete
+    Render MarkDown (using RxMarkdown)
+    Multi-Lingual User-Interface
+
+Requirements
+
+    Nextcloud instance running
+    Nextcloud Notes app enabled
+
+Alternatives
+
+If you dislike this app and you are looking for alternatives: Have a look at MyOwnNotes.

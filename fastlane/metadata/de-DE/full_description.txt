@@ -1,0 +1,19 @@
+Companion App für Nextcloud Notes.
+
+Features
+
+    Anzeigen, Erstellen, Bearbeiten, Teilen, Durchsuchen und Löschen von Notizen
+    Text und Links als neue Notiz in die App teilen
+    Notizen als Favoriten markieren
+    Massenhaftes Löschen von Notizen
+    Rendert MarkDown (mit RxMarkdown)
+    Mehrsprachiges User-Interface
+
+Voraussetzungen
+
+    Laufende Nextcloud Instanz
+    Aktivierte Nextcloud Notes App
+
+Alternativen
+
+Wenn Sie eine Alternative für diese App suchen, versuchen Sie es mit MyOwnNotes.
