@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Notas</string>
-    <string name="no_notes">Sin notas aun</string>
+    <string name="no_notes">No hay notas todavía</string>
     <string name="action_create">Nueva nota</string>
     <string name="action_settings">Ajustes</string>
     <string name="action_create_save">Guardar</string>
@@ -21,11 +21,14 @@
     <string name="menu_copy">Copiar</string>
     <string name="menu_edit">Editar</string>
     <string name="menu_cancel">Cancelar</string>
+    <string name="menu_change_category">Categoría</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Previsualizar</string>
     <string name="menu_share">Compartir</string>
     <string name="menu_about">Acerca de</string>
 
+    <string name="change_category_title">Escoge categoría</string>
+    <string name="change_category_message">Por favor, introduce un nombre de categoría</string>
     <string name="copy">Copiar</string>
 
     <string name="listview_updated_today">Hoy</string>
@@ -46,12 +49,17 @@
     <string name="settings_password_check_description">Muestra si las credenciales son correctas.</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando &#8230;</string>
-    <string name="settings_notification_category">Notificación</string>
-    <string name="settings_notification">Habilita para mostrar una notificación persistente para crear nuevas notas rápidamente.</string>
+    <string name="settings_view_category">Ver configuración</string>
+    <string name="settings_note_mode">Mostrar modo para las notas</string>
+    <string name="settings_notification_title">\"Crear nota\" como notificación</string>
+    <string name="settings_notification">Activar para mostrar una notificación persistente para crear nuevas notas rápidamente</string>
     <string name="settings_cert_category">Certificados</string>
-    <string name="settings_cert_trust_system">Confiar en los certificados almacenados en el sistema</string>
-    <string name="settings_cert_reset">Restablecer almacenaje de certificados</string>
-    <string name="settings_cert_reset_toast">La información de certificados almacenados ha sido borrada.</string>
+    <string name="settings_cert_trust_system">Confiar en los certificados del sistema</string>
+    <string name="settings_cert_trust_system_on">Se confiará en las autoridades de certificación —CAs— del sistema y añadidas por el usuario (recomendado)</string>
+    <string name="settings_cert_trust_system_off">No se confiará en las CAs del sistema y añadidas por el usuario</string>
+    <string name="settings_cert_reset">Restablecer almacenaje de certificados (marcados como fiables o no)</string>
+    <string name="settings_cert_reset_summary">Resetea todos los certificados personalizados en los que se había confiado</string>
+    <string name="settings_cert_reset_toast">Todos los certificados personalizados han sido eliminados</string>
 
     <!-- Certificates -->
     <string name="certificate_notification_connection_security">Notas - Seguridad de la conexión</string>
@@ -100,9 +108,19 @@
 
     <string name="widget_all_notes_title">Todas las notas</string>
     <string name="widget_single_note_title">Nota única</string>
+    <string name="widget_create_note">Crear nota</string>
+
+    <string name="activity_select_single_note">Selecciona nota</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear una nota nueva</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Abrir en modo edición</item>
+        <item>Abrir en modo visualización</item>
+        <item>Recordar mi última selección</item>
+    </string-array>
 
     <!-- Plurals -->
     <plurals name="ab_selected">

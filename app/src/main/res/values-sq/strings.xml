@@ -21,11 +21,14 @@
     <string name="menu_copy">Kopjo</string>
     <string name="menu_edit">Modifiko</string>
     <string name="menu_cancel">Anullo</string>
+    <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">E preferuar</string>
     <string name="menu_preview">Parapamje</string>
     <string name="menu_share">Ndaj</string>
     <string name="menu_about">Rreth nesh</string>
 
+    <string name="change_category_title">Zgjidh kategorinë</string>
+    <string name="change_category_message">Ju lutemi shkruani një emër kategorie</string>
     <string name="copy">Kopjo</string>
 
     <string name="listview_updated_today">Sot</string>
@@ -46,15 +49,9 @@
     <string name="settings_password_check_description">Tregon nëse kredencialet janë të sakta</string>
     <string name="settings_submit">Lidhu</string>
     <string name="settings_submitting">Duke u lidhur &#8230;</string>
-    <string name="settings_notification_category">Njoftim</string>
-    <string name="settings_notification">Aktivizo shfaqjen e një njoftimi të qëndrueshëm për të krijuar shpejt shënime të reja.</string>
     <string name="settings_cert_category">Çertifikatat</string>
-    <string name="settings_cert_trust_system">Besojuni çertifikatave nga dyqani i besuar i sistemit.</string>
-    <string name="settings_cert_reset">Kthe në gjendjen fillestare dyqanin e besuar.</string>
-    <string name="settings_cert_reset_toast">Informacioni i besimit i ruajtur u fshi.</string>
-
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Notes - Siguria e lidhjes</string>
+    <string name="certificate_notification_connection_security">Shënime - Siguria e lidhjes</string>
     <string name="trust_certificate_unknown_certificate_found">Notes ka ndeshur një çertifikatë të panjohur.  Dëshironi ta shënoni si të besuar?</string>
 
     <!-- Network -->
@@ -65,7 +62,7 @@
     <!-- Error -->
     <string name="error_sync">Sinkronizimi dështoi: %1$s</string>
     <string name="error_invalid_login">Identifikim jo i vlefshëm: %1$s</string>
-    <string name="error_json">A është aplikacioni i Notes i aktivizuar në server?</string>
+    <string name="error_json">a është aplikacioni i Notes i aktivizuar në server?</string>
     <string name="error_io">lidhja me serverin u thye</string>
     <string name="error_no_network">asnjë lidhje në rrjet</string>
     <string name="error_server">URL/Server ka gabime</string>
@@ -100,7 +97,6 @@
 
     <string name="widget_all_notes_title">Të gjitha shënimet</string>
     <string name="widget_single_note_title">Një shënim i vetëm</string>
-
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Krijo një shënim të ri</string>
 

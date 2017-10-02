@@ -21,11 +21,14 @@
     <string name="menu_copy">Copiar</string>
     <string name="menu_edit">Editar</string>
     <string name="menu_cancel">Cancelar</string>
+    <string name="menu_change_category">Categoría</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Vista previa</string>
     <string name="menu_share">Compartir</string>
     <string name="menu_about">Acerca de</string>
 
+    <string name="change_category_title">Elige categoría</string>
+    <string name="change_category_message">Favor de ingresar nombre de categoría</string>
     <string name="copy">Copiar</string>
 
     <string name="listview_updated_today">Hoy</string>
@@ -34,6 +37,8 @@
     <string name="listview_updated_this_month">Este mes</string>
     <string name="listview_updated_earlier">Anterior</string>
 
+    <!-- Settings -->
+    <string name="settings_server_settings">Configuraciones  de la cuenta</string>
     <string name="settings_server">Servidor</string>
     <string name="settings_url">Dirección del servidor</string>
     <string name="settings_url_check_description">Muestra si se puede hacer ping a la dirección</string>
@@ -44,7 +49,12 @@
     <string name="settings_password_check_description">Muestra si las credenciales son correctas.</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando &#8230;</string>
-    <string name="settings_notification">Habilitar para mostrar una notificación persistente para crear nuevas notas rápidamente .</string>
+    <string name="settings_cert_category">Certificados</string>
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Notas - Seguridad de conexión</string>
+    <string name="trust_certificate_unknown_certificate_found">Notas ha encontrado un certificado desconocido.
+Desea confiar en el mismo?</string>
+
     <!-- Network -->
     <string name="network_connecting">Conectando</string>
     <string name="network_connected">Conectado</string>
@@ -88,6 +98,7 @@
 
     <string name="widget_all_notes_title">Todas la notas</string>
     <string name="widget_single_note_title">Única nota</string>
+    <string name="widget_create_note">Crear Nota</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear una nota nueva</string>

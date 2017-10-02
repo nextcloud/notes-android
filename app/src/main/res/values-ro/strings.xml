@@ -43,7 +43,6 @@
     <string name="settings_password_check_description">Arată dacă datele de înregistrare sunt corecte.</string>
     <string name="settings_submit">Conectare</string>
     <string name="settings_submitting">Se conectează &#8230;</string>
-    <string name="settings_notification">Activează afișarea unei notificări persistente pentru crearea de notițe noi.</string>
     <!-- Network -->
     <string name="network_connecting">Se conectează</string>
     <string name="network_connected">Conectat</string>
@@ -87,7 +86,6 @@
 
     <string name="widget_all_notes_title">Toate notițele</string>
     <string name="widget_single_note_title">O singură notiță</string>
-
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d selecționat</item>

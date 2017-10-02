@@ -68,14 +68,14 @@
     <string name="about_maintainer_title">Главни програмер</string>
     <string name="about_developers_title">Програмери</string>
     <string name="about_translators_title">Преводиоци</string>
-    <string name="about_translators_transifex">Nextcloud организација на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Некстклауд заједница на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Тестери</string>
     <string name="about_source_title">Изворни кôд</string>
     <string name="about_source">Овај пројекат је приказан на  GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Грешке</string>
     <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу пријава: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Преведи</string>
-    <string name="about_translate">Придружите се Nextcloud тиму на Transifex-у и помозите нам да преведемо ову апликацију: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Придружите се Некстклауд тиму на Transifex-у и помозите нам да преведемо ову апликацију: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Лиценца апликације</string>
     <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом Општом јавном лиценцом (ГПЛ) в3+.</string>
     <string name="about_app_license_button">Прикажи лиценцу</string>
@@ -86,7 +86,6 @@
 
     <string name="widget_all_notes_title">Све белешке</string>
     <string name="widget_single_note_title">Белешка</string>
-
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Направи нову белешку</string>
 
