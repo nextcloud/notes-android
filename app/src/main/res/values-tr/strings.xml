@@ -21,11 +21,14 @@
     <string name="menu_copy">Kopyala</string>
     <string name="menu_edit">Düzenle</string>
     <string name="menu_cancel">İptal</string>
+    <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Sık Kullanılanlara Ekle</string>
     <string name="menu_preview">Önizleme</string>
     <string name="menu_share">Paylaş</string>
     <string name="menu_about">Hakkında</string>
 
+    <string name="change_category_title">Kategori seçin</string>
+    <string name="change_category_message">Lütfen bir kategori adı yazın</string>
     <string name="copy">Kopyala</string>
 
     <string name="listview_updated_today">Bugün</string>
@@ -46,12 +49,17 @@
     <string name="settings_password_check_description">Oturum açma bilgilerinin doğru olduğunu gösterir.</string>
     <string name="settings_submit">Bağlan</string>
     <string name="settings_submitting">Bağlanılıyor &#8230;</string>
-    <string name="settings_notification_category">Bildirim</string>
-    <string name="settings_notification">Hızlıca not eklemek için ısrarlı bir bildirim görüntülensin.</string>
+    <string name="settings_view_category">Ayarları görüntüle</string>
+    <string name="settings_note_mode">Notların görüntülenme kipi</string>
+    <string name="settings_notification_title">Bildirim olarak \"Not ekle\"</string>
+    <string name="settings_notification">Yeni notları hızlı eklemek için kalıcı olarak görüntülenen bir bildirim kullanılsın.</string>
     <string name="settings_cert_category">Sertifikalar</string>
-    <string name="settings_cert_trust_system">Sistem güvenlik kasasındaki sertifikalara güvenilsin.</string>
-    <string name="settings_cert_reset">Güvenlik kasasını sıfırla</string>
-    <string name="settings_cert_reset_toast">Kasadaki güvenlik bilgileri silindi.</string>
+    <string name="settings_cert_trust_system">Sistem sertifikalarına güvenilsin</string>
+    <string name="settings_cert_trust_system_on">Sistem ve kullanıcı tarafından eklenen sertifika otoritelerine güvenilir (önerilir)</string>
+    <string name="settings_cert_trust_system_off">Sistem ve kullanıcı tarafından eklenen sertifika otoritelerine güvenilmez</string>
+    <string name="settings_cert_reset">Güvenilen ve güvenilmeyen sertifikaları sıfırla</string>
+    <string name="settings_cert_reset_summary">Tüm özel sertifika güvenmelerini sıfırlar</string>
+    <string name="settings_cert_reset_toast">Tüm özel sertifikalar temizlendi</string>
 
     <!-- Certificates -->
     <string name="certificate_notification_connection_security">Notlar - Bağlantı güvenliği</string>
@@ -100,9 +108,19 @@
 
     <string name="widget_all_notes_title">Tum notlar</string>
     <string name="widget_single_note_title">Tek not</string>
+    <string name="widget_create_note">Not Ekle</string>
+
+    <string name="activity_select_single_note">Not seçin</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Yeni not ekle</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Düzenleme kipinde aç</item>
+        <item>Önizleme kipinde aç</item>
+        <item>Son seçimim hatırlansın</item>
+    </string-array>
 
     <!-- Plurals -->
     <plurals name="ab_selected">

@@ -44,7 +44,6 @@
     <string name="settings_password_check_description">Tampilkan jika sandi benar</string>
     <string name="settings_submit">Sambung</string>
     <string name="settings_submitting">Menyambungkan &#8230;</string>
-    <string name="settings_notification">Aktifkan untuk menampilkan notifikasi tetap untuk membuat catatan baru dengan cepat.</string>
     <!-- Network -->
     <string name="network_connecting">Menyambungkan</string>
     <string name="network_connected">Tersambung</string>
@@ -88,7 +87,6 @@
 
     <string name="widget_all_notes_title">Semua catatan</string>
     <string name="widget_single_note_title">Satu catatan</string>
-
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Buat catatan baru</string>
 

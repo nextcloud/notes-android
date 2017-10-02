@@ -21,11 +21,14 @@
     <string name="menu_copy">Αντιγραφή</string>
     <string name="menu_edit">Επεξεργασία</string>
     <string name="menu_cancel">Ακύρωση</string>
+    <string name="menu_change_category">Κατηγορία</string>
     <string name="menu_favorite">Αγαπημένο</string>
     <string name="menu_preview">Προεπισκόπηση</string>
     <string name="menu_share">Διαμοιρασμός</string>
     <string name="menu_about">Περί</string>
 
+    <string name="change_category_title">Επιλογή κατηγορίας</string>
+    <string name="change_category_message">Παρακαλώ δώστε ένα όνομα κατηγορίας</string>
     <string name="copy">Αντιγραφή</string>
 
     <string name="listview_updated_today">Σήμερα</string>
@@ -46,13 +49,7 @@
     <string name="settings_password_check_description">Εμφανίζει εάν τα διαπιστευτήρια είναι σωστά.</string>
     <string name="settings_submit">Σύνδεση</string>
     <string name="settings_submitting">Συνδέεται &#8230;</string>
-    <string name="settings_notification_category">Ειδοποιήσεις</string>
-    <string name="settings_notification">Ενεργοποίηση για εμφάνιση μόνιμης ειδοποίησης για γρήγορη δημιουργία νέων σημειώσεων.</string>
     <string name="settings_cert_category">Πιστοποιητικά</string>
-    <string name="settings_cert_trust_system">Πιστοποιητικά αξιοπιστίας από το κατάστημα εμπιστοσύνης συστήματος.</string>
-    <string name="settings_cert_reset">Επαναφορά αποθήκης έμπιστων πιστοποιητικών</string>
-    <string name="settings_cert_reset_toast">Οι αποθηκευμένες πληροφορίες εμπιστοσύνης εκκαθαρίστηκαν.</string>
-
     <!-- Certificates -->
     <string name="certificate_notification_connection_security">Σημειώσεις - Ασφάλεια σύνδεσης</string>
     <string name="trust_certificate_unknown_certificate_found">Οι Σημειώσεις έχουν συναντήσει ένα άγνωστο πιστοποιητικό. Θέλετε να το εμπιστεύεστε;</string>
@@ -100,7 +97,6 @@
 
     <string name="widget_all_notes_title">Όλες οι σημειώσεις</string>
     <string name="widget_single_note_title">Απλή σημείωση</string>
-
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>
 

@@ -21,11 +21,14 @@
     <string name="menu_copy">复制</string>
     <string name="menu_edit">编辑</string>
     <string name="menu_cancel">取消</string>
+    <string name="menu_change_category">类别</string>
     <string name="menu_favorite">收藏</string>
     <string name="menu_preview">预览</string>
     <string name="menu_share">分享</string>
     <string name="menu_about">关于</string>
 
+    <string name="change_category_title">选择类别</string>
+    <string name="change_category_message">请输入一个类别名称</string>
     <string name="copy">复制</string>
 
     <string name="listview_updated_today">今天</string>
@@ -46,12 +49,17 @@
     <string name="settings_password_check_description">测试证书是否正确.</string>
     <string name="settings_submit">连接</string>
     <string name="settings_submitting">连接 &#8230;</string>
-    <string name="settings_notification_category">消息提醒</string>
-    <string name="settings_notification">启用永久通知以快速创建便笺。</string>
+    <string name="settings_view_category">预览设置</string>
+    <string name="settings_note_mode">笔记的显示模式</string>
+    <string name="settings_notification_title">“新建笔记” 作为提醒</string>
+    <string name="settings_notification">开启用来快速创建新笔记的持久通知显示。</string>
     <string name="settings_cert_category">证书</string>
-    <string name="settings_cert_trust_system">信任的证书来自系统信任存储区。</string>
-    <string name="settings_cert_reset">重置信任存储区</string>
-    <string name="settings_cert_reset_toast">已储存信任信息清理完毕。</string>
+    <string name="settings_cert_trust_system">信任系统证书</string>
+    <string name="settings_cert_trust_system_on">系统和用户添加的 CAs 将被信任（推荐）</string>
+    <string name="settings_cert_trust_system_off">系统和用户添加的 CAs 将不被信任</string>
+    <string name="settings_cert_reset">重置证书</string>
+    <string name="settings_cert_reset_summary">重置所有自定义证书的证书</string>
+    <string name="settings_cert_reset_toast">所有自定义证书已被清理</string>
 
     <!-- Certificates -->
     <string name="certificate_notification_connection_security">Notes - 安全连接</string>
@@ -100,9 +108,19 @@
 
     <string name="widget_all_notes_title">所有便笺</string>
     <string name="widget_single_note_title">单个便笺</string>
+    <string name="widget_create_note">创建笔记</string>
+
+    <string name="activity_select_single_note">选择笔记</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">创建新便笺</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>以编辑模式打开</item>
+        <item>以预览模式打开</item>
+        <item>记住我上一次的选择</item>
+    </string-array>
 
     <!-- Plurals -->
     <plurals name="ab_selected">
