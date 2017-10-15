@@ -1,10 +1,8 @@
 package it.niedermann.owncloud.notes.model;
 
-/**
- * Created by stefan on 23.10.15.
- */
 public class SectionItem implements Item {
-    String title = "";
+
+    private String title;
 
     public SectionItem(String title) {
         this.title = title;

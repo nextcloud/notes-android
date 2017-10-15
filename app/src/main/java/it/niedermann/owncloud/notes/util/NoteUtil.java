@@ -1,5 +1,8 @@
 package it.niedermann.owncloud.notes.util;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.regex.Pattern;
 
 /**
@@ -21,7 +24,8 @@ public class NoteUtil {
      * @param s String - MarkDown
      * @return Plain Text-String
      */
-    public static String removeMarkDown(String s) {
+    @NonNull
+    public static String removeMarkDown(@Nullable String s) {
         if(s==null)
             return "";
         s = pLists.matcher(s).replaceAll("");
@@ -46,7 +50,7 @@ public class NoteUtil {
      * @param line String - a single Line which ends with \n
      * @return boolean isEmpty
      */
-    public static boolean isEmptyLine(String line) {
+    public static boolean isEmptyLine(@Nullable String line) {
         return removeMarkDown(line).trim().length() == 0;
     }
 
@@ -57,7 +61,8 @@ public class NoteUtil {
      * @param len Maximum length of the resulting string
      * @return truncated string
      */
-    public static String truncateString(String str, int len) {
+    @NonNull
+    public static String truncateString(@NonNull String str, int len) {
         return str.substring(0, Math.min(len, str.length()));
     }
 
@@ -67,7 +72,8 @@ public class NoteUtil {
      * @param content String
      * @return excerpt String
      */
-    public static String generateNoteExcerpt(String content) {
+    @NonNull
+    public static String generateNoteExcerpt(@NonNull String content) {
         if (content.contains("\n"))
             return truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 200).replace("\n", "   ");
         else
@@ -80,7 +86,8 @@ public class NoteUtil {
      * @param content String
      * @return excerpt String
      */
-    public static String generateNoteTitle(String content) {
+    @NonNull
+    public static String generateNoteTitle(@NonNull String content) {
         return getLineWithoutMarkDown(content, 0);
     }
 
@@ -91,7 +98,8 @@ public class NoteUtil {
      * @param lineNumber int
      * @return lineContent String
      */
-    public static String getLineWithoutMarkDown(String content, int lineNumber) {
+    @NonNull
+    public static String getLineWithoutMarkDown(@NonNull String content, int lineNumber) {
         String line = "";
         if (content.contains("\n")) {
             String[] lines = content.split("\n");
@@ -106,5 +114,10 @@ public class NoteUtil {
             line = content;
         }
         return line;
+    }
+
+    @NonNull
+    public static String extendCategory(@NonNull String category) {
+        return category.replace("/", " / ");
     }
 }

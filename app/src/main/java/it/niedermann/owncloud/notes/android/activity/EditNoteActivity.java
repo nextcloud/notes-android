@@ -236,8 +236,7 @@ public class EditNoteActivity extends AppCompatActivity implements CategoryDialo
     @Override
     public void onCategoryChosen(String category) {
         DBNote note = fragment.getNote();
-        note.setCategory(category);
-        db.updateNoteAndSync(note, note.getContent(), null);
+        db.setCategory(note, category, null);
     }
 
     /**

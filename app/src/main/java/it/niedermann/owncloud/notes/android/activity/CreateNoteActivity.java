@@ -12,15 +12,19 @@ import com.yydcdut.rxmarkdown.RxMarkdown;
 import com.yydcdut.rxmarkdown.syntax.edit.EditFactory;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 
 public class CreateNoteActivity extends AppCompatActivity {
+
+    public static final String PARAM_CATEGORY = "category";
     private final static int server_settings = 2;
 
     private RxMDEditText editTextField = null;
+    private Category categoryPreselection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,10 @@ public class CreateNoteActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
+
+        if(intent.hasExtra(PARAM_CATEGORY)) {
+            categoryPreselection = (Category) intent.getSerializableExtra(PARAM_CATEGORY);
+        }
 
         if (Intent.ACTION_SEND.equals(action) && type != null) {
             if ("text/plain".equals(type)) {
@@ -104,7 +112,9 @@ public class CreateNoteActivity extends AppCompatActivity {
         if(!implicit || !content.isEmpty()) {
             NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(this);
             Intent data = new Intent(this, NotesListViewActivity.class);
-            data.putExtra(NotesListViewActivity.CREATED_NOTE, db.getNote(db.addNoteAndSync(content)));
+            String category = categoryPreselection==null ? null : categoryPreselection.category;
+            boolean favorite = categoryPreselection!=null && categoryPreselection.favorite!=null ? categoryPreselection.favorite : false;
+            data.putExtra(NotesListViewActivity.CREATED_NOTE, db.getNote(db.addNoteAndSync(content, category, favorite)));
             setResult(RESULT_OK, data);
         }
         finish();

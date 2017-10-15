@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.util;
 
+import android.support.annotation.WorkerThread;
 import android.util.Base64;
 import android.util.Log;
 
@@ -19,6 +20,7 @@ import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
 
+@WorkerThread
 public class NotesClient {
 
     /**
@@ -95,10 +97,11 @@ public class NotesClient {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis()/1000);
-		paramObject.accumulate(JSON_FAVORITE, note.isFavorite());
-		paramObject.accumulate(JSON_CATEGORY, note.getCategory());
+        paramObject.accumulate(JSON_FAVORITE, note.isFavorite());
+        paramObject.accumulate(JSON_CATEGORY, note.getCategory());
         return new NoteResponse(requestServer(ccm, path, method, paramObject, null));
     }
+
 
     /**
      * Creates a Note on the Server
@@ -140,7 +143,7 @@ public class NotesClient {
         con.setRequestProperty(
                 "Authorization",
                 "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
-		con.setRequestProperty("User-Agent", "nextcloud-notes/" + BuildConfig.VERSION_NAME + " (Android)");
+        con.setRequestProperty("User-Agent", "nextcloud-notes/" + BuildConfig.VERSION_NAME + " (Android)");
         if(lastETag!=null && METHOD_GET.equals(method)) {
             con.setRequestProperty("If-None-Match", lastETag);
         }
@@ -167,7 +170,7 @@ public class NotesClient {
             throw new ServerResponse.NotModifiedException();
         }
 
-   	    BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+           BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String line;
         while ((line = rd.readLine()) != null) {
             result.append(line);
