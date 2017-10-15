@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.model;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -18,9 +20,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int note_type = 1;
     private final NoteClickListener noteClickListener;
     private List<Item> itemList = null;
+    private boolean showCategory = true;
     private List<Integer> selected = null;
 
-    public ItemAdapter(NoteClickListener noteClickListener) {
+    public ItemAdapter(@NonNull NoteClickListener noteClickListener) {
         this.itemList = new ArrayList<>();
         this.selected = new ArrayList<>();
         this.noteClickListener = noteClickListener;
@@ -28,9 +31,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
      * Updates the item list and notifies respective view to update.
-     * @param itemList
+     * @param itemList    List of items to be set
      */
-    public void setItemList(List<Item> itemList) {
+    public void setItemList(@NonNull List<Item> itemList) {
         this.itemList = itemList;
         notifyDataSetChanged();
     }
@@ -39,7 +42,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * Adds the given note to the top of the list.
      * @param note Note that should be added.
      */
-    public void add(DBNote note) {
+    public void add(@NonNull DBNote note) {
         itemList.add(0, note);
         notifyItemInserted(0);
         notifyItemChanged(0);
@@ -50,7 +53,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * @param note Note with the changes.
      * @param position position in the list of the node
      */
-    public void replace(DBNote note, int position) {
+    public void replace(@NonNull DBNote note, int position) {
         itemList.set(position, note);
         notifyItemChanged(position);
     }
@@ -79,30 +82,29 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         Item item = itemList.get(position);
         if (item.isSection()) {
             SectionItem section = (SectionItem) item;
             ((SectionViewHolder) holder).sectionTitle.setText(section.geTitle());
-            ((SectionViewHolder) holder).setPosition(position);
         } else {
             final DBNote note = (DBNote) item;
             final NoteViewHolder nvHolder = ((NoteViewHolder) holder);
+            nvHolder.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
             nvHolder.noteTitle.setText(note.getTitle());
-            nvHolder.noteCategory.setVisibility(note.getCategory().isEmpty() ? View.GONE : View.VISIBLE);
-            nvHolder.noteCategory.setText(note.getCategory());
+            nvHolder.noteCategory.setVisibility(showCategory && !note.getCategory().isEmpty() ? View.VISIBLE : View.GONE);
+            nvHolder.noteCategory.setText(NoteUtil.extendCategory(note.getCategory()));
             nvHolder.noteExcerpt.setText(note.getExcerpt());
             nvHolder.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.GONE : View.VISIBLE);
             nvHolder.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_grey600_24dp : R.drawable.ic_star_outline_grey600_24dp);
             nvHolder.noteFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    noteClickListener.onNoteFavoriteClick(position, view);
+                    noteClickListener.onNoteFavoriteClick(holder.getAdapterPosition(), view);
                 }
             });
-            nvHolder.setPosition(position);
         }
     }
 
@@ -114,6 +116,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         selected.clear();
     }
 
+    @NonNull
     public List<Integer> getSelected() {
         return selected;
     }
@@ -134,9 +137,13 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return itemList.get(notePosition);
     }
 
-    public void remove(Item item) {
+    public void remove(@NonNull Item item) {
         itemList.remove(item);
         notifyDataSetChanged();
+    }
+
+    public void setShowCategory(boolean showCategory) {
+        this.showCategory = showCategory;
     }
 
     @Override
@@ -157,40 +164,35 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         public View noteSwipeable;
-        public ImageView noteDeleteLeft, noteDeleteRight;
-        public TextView noteTitle;
-        public TextView noteCategory;
-        public TextView noteExcerpt;
-        public ImageView noteStatus;
-        public ImageView noteFavorite;
-        public int position = -1;
+        ImageView noteDeleteLeft, noteDeleteRight;
+        TextView noteTitle;
+        TextView noteCategory;
+        TextView noteExcerpt;
+        ImageView noteStatus;
+        ImageView noteFavorite;
 
         private NoteViewHolder(View v) {
             super(v);
             this.noteSwipeable = v.findViewById(R.id.noteSwipeable);
-            this.noteDeleteLeft = (ImageView) v.findViewById(R.id.noteDeleteLeft);
-            this.noteDeleteRight = (ImageView) v.findViewById(R.id.noteDeleteRight);
-            this.noteTitle = (TextView) v.findViewById(R.id.noteTitle);
-            this.noteCategory = (TextView) v.findViewById(R.id.noteCategory);
-            this.noteExcerpt = (TextView) v.findViewById(R.id.noteExcerpt);
-            this.noteStatus = (ImageView) v.findViewById(R.id.noteStatus);
-            this.noteFavorite = (ImageView) v.findViewById(R.id.noteFavorite);
+            this.noteDeleteLeft = v.findViewById(R.id.noteDeleteLeft);
+            this.noteDeleteRight = v.findViewById(R.id.noteDeleteRight);
+            this.noteTitle = v.findViewById(R.id.noteTitle);
+            this.noteCategory = v.findViewById(R.id.noteCategory);
+            this.noteExcerpt = v.findViewById(R.id.noteExcerpt);
+            this.noteStatus = v.findViewById(R.id.noteStatus);
+            this.noteFavorite = v.findViewById(R.id.noteFavorite);
             v.setOnClickListener(this);
             v.setOnLongClickListener(this);
         }
 
-        public void setPosition(int pos) {
-            position = pos;
-        }
-
         @Override
         public void onClick(View v) {
-            noteClickListener.onNoteClick(position, v);
+            noteClickListener.onNoteClick(getAdapterPosition(), v);
         }
 
         @Override
         public boolean onLongClick(View v) {
-            return noteClickListener.onNoteLongClick(position, v);
+            return noteClickListener.onNoteLongClick(getAdapterPosition(), v);
         }
 
         public void showSwipeDelete(boolean left) {
@@ -200,16 +202,11 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class SectionViewHolder extends RecyclerView.ViewHolder {
-        public TextView sectionTitle;
-        public int position = -1;
+        private TextView sectionTitle;
 
         private SectionViewHolder(View v) {
             super(v);
-            this.sectionTitle = (TextView) v.findViewById(R.id.sectionTitle);
-        }
-
-        public void setPosition(int pos) {
-            position = pos;
+            this.sectionTitle = v.findViewById(R.id.sectionTitle);
         }
     }
 }

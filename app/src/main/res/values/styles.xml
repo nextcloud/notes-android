@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="OwnCloud" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <!-- Main theme colors -->
         <!-- App Bar -->
         <item name="colorPrimary">@color/primary</item>
@@ -9,8 +9,14 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <!-- Snackbar Action Link -->
         <item name="colorAccent">@color/primary</item>
+        <item name="windowActionModeOverlay">true</item>
         <item name="android:buttonStyle">@style/ocbutton</item>
         <item name="android:windowBackground">@color/bg_normal</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <!--
@@ -42,7 +48,13 @@
         <item name="android:elevation">@dimen/button_elevation</item>
     </style>
 
-    <style name="SplashTheme" parent="OwnCloud">
+    <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
+
+    <style name="NavigationItem">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">#de000000</item>
     </style>
 </resources>

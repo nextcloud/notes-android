@@ -1,6 +1,8 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import android.util.Base64;
 import android.util.Log;
 
@@ -31,8 +33,9 @@ public class NotesClientUtil {
         JSON_FAILED(R.string.error_json),
         SERVER_FAILED(R.string.error_server);
 
+        @StringRes
         public final int str;
-        LoginStatus(int str) {
+        LoginStatus(@StringRes int str) {
             this.str = str;
         }
     }

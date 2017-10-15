@@ -6,6 +6,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.WorkerThread;
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.text.ParseException;
@@ -22,6 +26,7 @@ import it.niedermann.owncloud.notes.android.activity.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
+import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -45,7 +50,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String key_category = "CATEGORY";
     private static final String key_etag = "ETAG";
     private static final String[] columns = {key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag };
-    private static final String default_order = key_favorite + " DESC, " + key_modified + " DESC";
+    private static final String default_order = key_modified + " DESC";
 
     private static NoteSQLiteOpenHelper instance;
 
@@ -159,8 +164,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param content String
      */
     @SuppressWarnings("UnusedReturnValue")
-    public long addNoteAndSync(String content) {
-        CloudNote note = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, false, null, null);
+    public long addNoteAndSync(String content, String category, boolean favorite) {
+        CloudNote note = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, favorite, category, null);
         return addNoteAndSync(note);
     }
 
@@ -204,8 +209,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_favorite, note.isFavorite());
         values.put(key_category, note.getCategory());
         values.put(key_etag, note.getEtag());
-        long id = db.insert(table_notes, null, values);
-        return id;
+        return db.insert(table_notes, null, values);
     }
 
     /**
@@ -227,7 +231,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param orderBy        How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER BY itself). Passing null will use the default sort order, which may be unordered.
      * @return List of Notes
      */
-    private List<DBNote> getNotesCustom(String selection, String[] selectionArgs, String orderBy) {
+    @NonNull
+    @WorkerThread
+    private List<DBNote> getNotesCustom(@NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy) {
         SQLiteDatabase db = getReadableDatabase();
         if(selectionArgs.length > 2) {
             Log.v("Note", selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
@@ -246,7 +252,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param cursor    database cursor
      * @return DBNote
      */
-    private DBNote getNoteFromCursor(Cursor cursor) {
+    @NonNull
+    private DBNote getNoteFromCursor(@NonNull Cursor cursor) {
         Calendar modified = Calendar.getInstance();
         try {
             String modifiedStr = cursor.getString(4);
@@ -266,6 +273,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
     }
 
+    @NonNull
+    @WorkerThread
     public Map<Long, Long> getIdMap() {
         Map<Long, Long> result = new HashMap<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -282,6 +291,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @return List&lt;Note&gt;
      */
+    @NonNull
+    @WorkerThread
     public List<DBNote> getNotes() {
         return getNotesCustom(key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, default_order);
     }
@@ -291,43 +302,111 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @return List&lt;Note&gt;
      */
-    public List<DBNote> searchNotes(CharSequence query) {
-        return getNotesCustom(
-                key_status + " != ? AND ("
-                        + key_content + " LIKE ? OR "
-                        + key_category + " LIKE ?" +
-                ")", new String[]{
-                        DBStatus.LOCAL_DELETED.getTitle(),
-                        "%" + query + "%",
-                        "%" + query + "%"
-                }, default_order);
+    @NonNull
+    @WorkerThread
+    public List<DBNote> searchNotes(@Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
+        List<String> where = new ArrayList<>();
+        List<String> args = new ArrayList<>();
+
+        where.add(key_status + " != ?");
+        args.add(DBStatus.LOCAL_DELETED.getTitle());
+
+        if(query != null) {
+            where.add(key_status + " != ?");
+            args.add(DBStatus.LOCAL_DELETED.getTitle());
+
+            where.add("(" + key_content + " LIKE ? OR " + key_category + " LIKE ?" + ")");
+            args.add("%" + query + "%");
+            args.add("%" + query + "%");
+        }
+
+        if(category != null) {
+            where.add(key_category + "=? OR "+key_category+" LIKE ?");
+            args.add(category);
+            args.add(category+"/%");
+        }
+
+        if(favorite != null) {
+            where.add(key_favorite + "=?");
+            args.add(favorite ? "1" : "0");
+        }
+
+        String order = category==null ? default_order : key_category + ", "+ key_title;
+        return getNotesCustom(TextUtils.join(" AND ", where), args.toArray(new String[] {}), order);
     }
 
-    /**
-     * Returns a list of all Notes in the Database with a sepcial status, e.g. Edited, Deleted,...
-     *
-     * @return List&lt;Note&gt;
-     */
-    public List<DBNote> getNotesByStatus(DBStatus status) {
-        return getNotesCustom(key_status + " = ?", new String[]{status.getTitle()}, null);
-    }
     /**
      * Returns a list of all Notes in the Database with were modified locally
      *
      * @return List&lt;Note&gt;
      */
+    @NonNull
+    @WorkerThread
     public List<DBNote> getLocalModifiedNotes() {
         return getNotesCustom(key_status + " != ?", new String[]{DBStatus.VOID.getTitle()}, null);
     }
 
+    @NonNull
+    @WorkerThread
+    public Map<String, Integer> getFavoritesCount() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                table_notes,
+                new String[] {key_favorite, "COUNT(*)"},
+                key_status + " != ?",
+                new String[]{DBStatus.LOCAL_DELETED.getTitle()},
+                key_favorite,
+                null,
+                key_favorite);
+        Map<String, Integer> favorites = new HashMap<>(cursor.getCount());
+        while (cursor.moveToNext()) {
+            favorites.put(cursor.getString(0), cursor.getInt(1));
+        }
+        cursor.close();
+        return favorites;
+    }
 
-    public void toggleFavorite(DBNote note, ICallback callback) {
+    @NonNull
+    @WorkerThread
+    public List<NavigationAdapter.NavigationItem> getCategories() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                table_notes,
+                new String[] {key_category, "COUNT(*)"},
+                key_status + " != ?",
+                new String[]{DBStatus.LOCAL_DELETED.getTitle()},
+                key_category,
+                null,
+                key_category);
+        List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
+        while (cursor.moveToNext()) {
+            categories.add(new NavigationAdapter.NavigationItem("category:"+cursor.getString(0), cursor.getString(0), cursor.getInt(1), NavigationAdapter.ICON_FOLDER));
+        }
+        cursor.close();
+        return categories;
+    }
+
+    public void toggleFavorite(@NonNull DBNote note, @Nullable ICallback callback) {
         note.setFavorite(!note.isFavorite());
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, note.getStatus().getTitle());
         values.put(key_favorite, note.isFavorite()?"1":"0");
+        db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
+        if(callback!=null) {
+            serverSyncHelper.addCallbackPush(callback);
+        }
+        serverSyncHelper.scheduleSync(true);
+    }
+
+    public void setCategory(@NonNull DBNote note, @NonNull String category, @Nullable ICallback callback) {
+        note.setCategory(category);
+        note.setStatus(DBStatus.LOCAL_EDITED);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_status, note.getStatus().getTitle());
+        values.put(key_category, note.getCategory());
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
         if(callback!=null) {
             serverSyncHelper.addCallbackPush(callback);
@@ -344,7 +423,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param callback When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
-    public DBNote updateNoteAndSync(DBNote oldNote, String newContent, ICallback callback) {
+    public DBNote updateNoteAndSync(@NonNull DBNote oldNote, @Nullable String newContent, @Nullable ICallback callback) {
         //debugPrintFullDB();
         DBNote newNote;
         if(newContent==null) {
@@ -386,7 +465,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @return The number of the Rows affected.
      */
-    int updateNote(long id, CloudNote remoteNote, DBNote forceUnchangedDBNoteState) {
+    int updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
@@ -451,7 +530,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param id long - ID of the Note that should be deleted.
      * @param forceDBStatus DBStatus, e.g., if Note was marked as LOCAL_DELETED (for NoteSQLiteOpenHelper.SyncTask.pushLocalChanges()) or is unchanged VOID (for NoteSQLiteOpenHelper.SyncTask.pullRemoteChanges())
      */
-    void deleteNote(long id, DBStatus forceDBStatus) {
+    void deleteNote(long id, @NonNull DBStatus forceDBStatus) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(table_notes,
                 key_id + " = ? AND " + key_status + " = ?",

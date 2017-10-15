@@ -4,15 +4,9 @@ import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.View;
 
@@ -27,31 +21,16 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ColorDrawable color;
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
 
         setResult(Activity.RESULT_CANCELED);
-        findViewById(R.id.fab_create).setVisibility(View.INVISIBLE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = new ColorDrawable(getColor(R.color.bg_highlighted));
-        } else {
-            color = new ColorDrawable(ContextCompat.getColor(getApplicationContext(),
-                                                                R.color.bg_highlighted));
+        findViewById(R.id.fab_create).setVisibility(View.GONE);
+        if(ab != null) {
+            ab.setTitle(R.string.activity_select_single_note);
         }
-
-        ab.setBackgroundDrawable(color);
-        ab.setTitle(R.string.activity_select_single_note);
-        Spannable title = new SpannableString(ab.getTitle());
-        title.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.primary)),
-                                                0,
-                                                title.length(),
-                                                Spannable.SPAN_INCLUSIVE_INCLUSIVE);
-        ab.setTitle(title);
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setRefreshing(false);
-        initList();
     }
 
     @Override
