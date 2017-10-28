@@ -67,7 +67,7 @@
             android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
             android:label="@string/menu_edit"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            android:windowSoftInputMode="stateVisible"
+            android:windowSoftInputMode="stateHidden"
             android:launchMode="singleInstance"
             />
 
