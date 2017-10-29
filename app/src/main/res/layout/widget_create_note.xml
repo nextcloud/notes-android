@@ -5,12 +5,14 @@
     android:layout_gravity="center_vertical"
     android:clickable="true"
     android:orientation="vertical"
-    android:padding="@dimen/widget_margin">
+    android:padding="@dimen/widget_margin"
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/ivCreateNoteBadge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:background="@drawable/ic_widget_create" />
+        android:background="@drawable/ic_widget_create"
+        android:contentDescription="@string/widget_create_note" />
 </LinearLayout>

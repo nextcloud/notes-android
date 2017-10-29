@@ -16,10 +16,13 @@ import it.niedermann.owncloud.notes.android.activity.SingleNoteWidget;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
-    private Context mContext;
-    private int mAppWidgetId;
+
+    private final Context mContext;
+    private final int mAppWidgetId;
+
     private NoteSQLiteOpenHelper db;
     private DBNote note;
+
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
     public SingleNoteWidgetFactory(Context context, Intent intent) {
@@ -55,24 +58,22 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         long noteID = sharedprefs.getLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, -1);
 
         if (noteID >= 0) {
-            if (db.getNote(noteID) == null) {
+            note = db.getNote(noteID);
+
+            if (note == null) {
                 Log.e(TAG, "Error: note not found");
-                note = null;
-            } else {
-                note = db.getNote(noteID);
             }
         }
     }
 
     @Override
     public void onDestroy() {
-        db.close();
+
     }
 
     /**
      * Returns the number of items in the data set. In this case, always 1 as a single note is
      * being displayed. Will return 0 when the note can't be displayed.
-     *
      */
     @Override
     public int getCount() {

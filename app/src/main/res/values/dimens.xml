@@ -14,8 +14,14 @@
     <dimen name="widget_single_note_padding">10dp</dimen>
     <dimen name="widget_create_note_padding">0dp</dimen>
 
-    <!-- Used to pad each entry in the note list -->
-    <dimen name="widget_note_list_header_padding">4dp</dimen>
-    <dimen name="widget_note_list_entry_top_bottom">6dp</dimen>
-    <dimen name="widget_note_list_entry_sides">6dp</dimen>
+    <dimen name="widget_note_list_hdr_padding">2dp</dimen>
+    <dimen name="widget_note_list_padding">4dp</dimen>
+    <dimen name="widget_note_list_header_height">36dp</dimen>
+    <dimen name="widget_note_list_icon_width">30dp</dimen>
+
+    <dimen name="widget_note_list_outer_padding">6dp</dimen>
+    <dimen name="widget_note_list_inner_padding">0dp</dimen>
+
+    <dimen name="widget_note_list_fav_icon_width">26dp</dimen>
+    <dimen name="widget_note_list_fav_icon_height">20dp</dimen>
 </resources>

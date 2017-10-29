@@ -3,15 +3,13 @@
     android:id="@+id/widget_single_note"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/widget_background"
-    >
+    android:background="@color/widget_background">
 
     <ListView
         android:id="@+id/single_note_widget_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/widget_single_note_padding"
-        />
+        android:padding="@dimen/widget_single_note_padding" />
 
     <TextView
         android:id="@+id/widget_single_note_placeholder_tv"
@@ -21,8 +19,7 @@
         android:text="@string/widget_single_note_placeholder_tv"
         android:textColor="@color/fg_default_high"
         android:textAlignment="center"
-        android:padding="@dimen/widget_single_note_padding"
-        />
+        android:padding="@dimen/widget_single_note_padding" />
 
 </RelativeLayout>
     <!--
