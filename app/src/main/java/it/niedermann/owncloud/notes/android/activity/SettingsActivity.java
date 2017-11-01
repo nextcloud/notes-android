@@ -15,20 +15,16 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
-import it.niedermann.owncloud.notes.util.SupportUtil;
-
-import static it.niedermann.owncloud.notes.R.drawable.settings;
 
 /**
  * Allows to set Settings like URL, Username and Password for Server-Synchronization
@@ -52,18 +48,10 @@ public class SettingsActivity extends AppCompatActivity {
     private String old_password = "";
     private Button btn_submit = null;
     private boolean first_run = false;
-    private CustomCertManager customCertManager = null;
-
-    @Override
-    protected void finalize() throws Throwable {
-        customCertManager.close();
-        super.finalize();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        customCertManager = SupportUtil.getCertManager(getApplicationContext());
         setContentView(R.layout.activity_settings);
 
         preferences = PreferenceManager
@@ -76,11 +64,11 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
-        field_url = (EditText) findViewById(R.id.settings_url);
-        field_username = (EditText) findViewById(R.id.settings_username);
-        field_password = (EditText) findViewById(R.id.settings_password);
-        password_wrapper = (TextInputLayout) findViewById(R.id.settings_password_wrapper);
-        btn_submit = (Button) findViewById(R.id.settings_submit);
+        field_url = findViewById(R.id.settings_url);
+        field_username = findViewById(R.id.settings_username);
+        field_password = findViewById(R.id.settings_password);
+        password_wrapper = findViewById(R.id.settings_password_wrapper);
+        btn_submit = findViewById(R.id.settings_submit);
 
         field_url.addTextChangedListener(new TextWatcher() {
             @Override
@@ -226,7 +214,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            return NotesClientUtil.isValidURL(customCertManager, params[0]);
+            CustomCertManager ccm = NoteServerSyncHelper.getInstance(NoteSQLiteOpenHelper.getInstance(getApplicationContext())).getCustomCertManager();
+            return NotesClientUtil.isValidURL(ccm, params[0]);
         }
 
         @Override
@@ -262,7 +251,8 @@ public class SettingsActivity extends AppCompatActivity {
             url = params[0];
             username = params[1];
             password = params[2];
-            return NotesClientUtil.isValidLogin(customCertManager, url, username, password);
+            CustomCertManager ccm = NoteServerSyncHelper.getInstance(NoteSQLiteOpenHelper.getInstance(getApplicationContext())).getCustomCertManager();
+            return NotesClientUtil.isValidLogin(ccm, url, username, password);
         }
 
         @Override

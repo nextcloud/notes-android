@@ -63,7 +63,8 @@ public class NoteServerSyncHelper {
 
     private final NoteSQLiteOpenHelper dbHelper;
     private final Context appContext;
-    private final CustomCertManager customCertManager;
+
+    private CustomCertManager customCertManager;
 
     // Track network connection changes using a BroadcastReceiver
     private boolean networkConnected = false;
@@ -105,7 +106,12 @@ public class NoteServerSyncHelper {
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.dbHelper = db;
         this.appContext = db.getContext().getApplicationContext();
-        this.customCertManager = SupportUtil.getCertManager(appContext);
+        new Thread() {
+            @Override
+            public void run() {
+                customCertManager = SupportUtil.getCertManager(appContext);
+            }
+        }.start();
 
         // Registers BroadcastReceiver to track network connection changes.
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
@@ -118,7 +124,9 @@ public class NoteServerSyncHelper {
     protected void finalize() throws Throwable {
         appContext.unregisterReceiver(networkReceiver);
         appContext.unbindService(certService);
-        customCertManager.close();
+        if(customCertManager!=null) {
+            customCertManager.close();
+        }
         super.finalize();
     }
 
@@ -137,6 +145,9 @@ public class NoteServerSyncHelper {
         return networkConnected && isConfigured(appContext) && cert4androidReady;
     }
 
+    public CustomCertManager getCustomCertManager() {
+        return customCertManager;
+    }
 
     /**
      * Adds a callback method to the NoteServerSyncHelper for the synchronization part push local changes to the server.

@@ -107,7 +107,6 @@
         </receiver>
 
         <receiver
-            android:id="@+id/SingleNoteWidget"
             android:name="it.niedermann.owncloud.notes.android.activity.SingleNoteWidget"
             android:label="@string/widget_single_note_title">
 
@@ -121,7 +120,6 @@
         </receiver>
 
         <receiver
-            android:id="@+id/NoteListWidget"
             android:name="it.niedermann.owncloud.notes.android.activity.NoteListWidget"
             android:label="@string/widget_note_list_title">
 
