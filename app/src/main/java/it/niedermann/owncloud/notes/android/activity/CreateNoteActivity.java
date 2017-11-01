@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
-import com.yydcdut.rxmarkdown.factory.EditFactory;
+import com.yydcdut.rxmarkdown.syntax.edit.EditFactory;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;

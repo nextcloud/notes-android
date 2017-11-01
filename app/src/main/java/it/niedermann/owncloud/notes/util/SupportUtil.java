@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.support.annotation.WorkerThread;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
@@ -83,8 +84,9 @@ public class SupportUtil {
         return httpCon;
     }
 
+    @WorkerThread
     public static CustomCertManager getCertManager(Context ctx) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
-        return new CustomCertManager(ctx, preferences.getBoolean(ctx.getString(R.string.pref_key_trust_system_certs), true));
+        return new CustomCertManager(ctx, preferences.getBoolean(ctx.getString(R.string.pref_key_trust_system_certs), true), null);
     }
 }
