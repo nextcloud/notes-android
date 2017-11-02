@@ -85,6 +85,9 @@ public class NoteEditFragment extends Fragment implements NoteFragmentI {
         note = (DBNote) getArguments().getSerializable(PARAM_NOTE);
         db = NoteSQLiteOpenHelper.getInstance(getActivity());
 
+        // workaround for issue yydcdut/RxMarkdown#41
+        note.setContent(note.getContent().replace("\r\n", "\n"));
+
         final RxMDEditText content = getContentView();
         content.setText(note.getContent());
         content.setEnabled(true);
