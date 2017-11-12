@@ -18,6 +18,8 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     private Context mContext;
     private int mAppWidgetId;
+    private NoteSQLiteOpenHelper db;
+    private DBNote note;
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
     public SingleNoteWidgetFactory(Context context, Intent intent) {
@@ -28,7 +30,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onCreate() {
-
+        db = NoteSQLiteOpenHelper.getInstance(mContext);
     }
 
     @Override
@@ -36,6 +38,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         return true;
     }
 
+    // TODO Set loading view
     @Override
     public RemoteViews getLoadingView() {
         return null;
@@ -48,57 +51,57 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDataSetChanged() {
+        SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        long noteID = sharedprefs.getLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, -1);
 
+        if (noteID >= 0) {
+            if (db.getNote(noteID) == null) {
+                Log.e(TAG, "Error: note not found");
+                note = null;
+            } else {
+                note = db.getNote(noteID);
+            }
+        }
     }
 
     @Override
     public void onDestroy() {
-
+        db.close();
     }
 
     /**
-     * getCount() always runs 1 because the list view only ever has a
-     * single note displayed
-     * @return
+     * Returns the number of items in the data set. In this case, always 1 as a single note is
+     * being displayed. Will return 0 when the note can't be displayed.
+     *
      */
     @Override
     public int getCount() {
-        return 1;
+        return (note != null) ? 1 : 0;
     }
 
     /**
-     * getViewAt -          Returns a RemoteView containing the note content in a TextView and
-     *                      a fillInIntent to handle the user tapping on the item in the list
-     *                      view.
+     * Returns a RemoteView containing the note content in a TextView and
+     * a fillInIntent to handle the user tapping on the item in the list view.
      *
      * @param   position    The position of the item in the list
      * @return              The RemoteView at the specified position in the list
      */
     @Override
     public RemoteViews getViewAt(int position) {
+        if (note == null) {
+            return null;
+        }
+
         RemoteViews note_content = new RemoteViews(mContext.getPackageName(),
                                                     R.layout.widget_single_note_content);
+        final Intent fillInIntent = new Intent();
+        final Bundle extras = new Bundle();
 
-        SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        long noteID = sharedprefs.getLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, -1);
-
-        if (noteID >= 0) {
-            NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(mContext);
-            DBNote note = db.getNote(noteID);
-
-            final Intent fillInIntent = new Intent();
-            final Bundle extras = new Bundle();
-
-            extras.putSerializable(EditNoteActivity.PARAM_NOTE, note);
-
-            fillInIntent.putExtras(extras);
-            fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv, note.getContent());
-        } else {
-            Log.e(TAG, "Note not found");
-            note_content.setTextViewText(R.id.single_note_content_tv, "Note not found");
-        }
+        extras.putSerializable(EditNoteActivity.PARAM_NOTE, note);
+        fillInIntent.putExtras(extras);
+        fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
+        note_content.setTextViewText(R.id.single_note_content_tv, note.getContent());
 
         return note_content;
     }

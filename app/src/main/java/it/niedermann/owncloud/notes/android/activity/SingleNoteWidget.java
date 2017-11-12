@@ -41,7 +41,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
             PendingIntent templatePendingIntent = PendingIntent.getActivity(
                                                     context,
-                                                    0,
+                                                    appWidgetId,
                                                     templateIntent,
                                                     PendingIntent.FLAG_UPDATE_CURRENT);
 
