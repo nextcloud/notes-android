@@ -218,7 +218,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param id int - ID of the requested Note
      * @return requested Note
      */
-    @SuppressWarnings("unused")
     public DBNote getNote(long id) {
         List<DBNote> notes = getNotesCustom(key_id + " = ? AND " + key_status + " != ?", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle()}, null);
         return notes.isEmpty() ? null : notes.get(0);

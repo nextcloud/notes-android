@@ -155,7 +155,7 @@ public class CategoryDialogFragment extends DialogFragment {
 
                     for (int i = 0; i < count; i++) {
                         final String value = originalData.get(i);
-                        final String valueText = value.toString().toLowerCase();
+                        final String valueText = value.toLowerCase();
 
                         // First match against the whole, non-splitted value
                         if (valueText.startsWith(prefixString)) {
