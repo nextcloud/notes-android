@@ -70,7 +70,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 
-        extras.putSerializable(EditNoteActivity.PARAM_NOTE, note);
+        extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         fillInIntent.putExtras(extras);
         fillInIntent.setData(Uri.parse(fillInIntent.toUri(Intent.URI_INTENT_SCHEME)));
         note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);

@@ -98,7 +98,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 
-        extras.putSerializable(EditNoteActivity.PARAM_NOTE, note);
+        extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         fillInIntent.putExtras(extras);
         fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);

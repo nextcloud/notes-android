@@ -1,14 +1,11 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -19,36 +16,19 @@ import com.yydcdut.rxmarkdown.RxMarkdown;
 import com.yydcdut.rxmarkdown.syntax.text.TextFactory;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
-import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class NotePreviewFragment extends Fragment implements NoteFragmentI {
+public class NotePreviewFragment extends BaseNoteFragment {
 
-    public static final String PARAM_NOTE = EditNoteActivity.PARAM_NOTE;
-
-    private DBNote note = null;
-
-    public static NotePreviewFragment newInstance(DBNote note) {
+    public static NotePreviewFragment newInstance(long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
         Bundle b = new Bundle();
-        b.putSerializable(PARAM_NOTE, note);
+        b.putSerializable(PARAM_NOTE_ID, noteId);
         f.setArguments(b);
         return f;
-    }
-
-    @Override
-    public DBNote getNote() {
-        return note;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -70,8 +50,7 @@ public class NotePreviewFragment extends Fragment implements NoteFragmentI {
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        note = (DBNote) getArguments().getSerializable(PARAM_NOTE);
-        final RxMDTextView noteContent = (RxMDTextView) getActivity().findViewById(R.id.single_note_content);
+        final RxMDTextView noteContent = getActivity().findViewById(R.id.single_note_content);
 
         String content = note.getContent();
         /*
@@ -113,4 +92,8 @@ public class NotePreviewFragment extends Fragment implements NoteFragmentI {
         ((TextView) getActivity().findViewById(R.id.single_note_content)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
+    @Override
+    protected String getContent() {
+        return note.getContent();
+    }
 }

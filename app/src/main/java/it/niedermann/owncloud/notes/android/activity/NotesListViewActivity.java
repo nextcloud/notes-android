@@ -542,21 +542,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 adapter.add(createdNote);
                 // TODO scroll to top
             }
-        } else if (requestCode == show_single_note_cmd) {
-            if (resultCode == RESULT_OK || resultCode == RESULT_FIRST_USER) {
-                int notePosition = data.getExtras().getInt(EditNoteActivity.PARAM_NOTE_POSITION);
-                if(adapter.getItemCount()>notePosition) {
-                    Item oldItem = adapter.getItem(notePosition);
-                    if (resultCode == RESULT_FIRST_USER) {
-                        adapter.remove(oldItem);
-                    }
-                    if (resultCode == RESULT_OK) {
-                        DBNote editedNote = (DBNote) data.getExtras().getSerializable(EditNoteActivity.PARAM_NOTE);
-                        adapter.replace(editedNote, notePosition);
-                        refreshLists();
-                    }
-                }
-            }
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
             db = NoteSQLiteOpenHelper.getInstance(this);
@@ -598,10 +583,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 mActionMode.finish();
             }
         } else {
-            Item item = adapter.getItem(position);
+            DBNote note = (DBNote) adapter.getItem(position);
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
-            intent.putExtra(EditNoteActivity.PARAM_NOTE, (DBNote) item);
-            intent.putExtra(EditNoteActivity.PARAM_NOTE_POSITION, position);
+            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
             startActivityForResult(intent, show_single_note_cmd);
 
         }
