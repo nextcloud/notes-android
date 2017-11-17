@@ -189,13 +189,18 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         });
     }
 
-    private void setupNavigationList(String selectedItem) {
+    private void setupNavigationList(final String selectedItem) {
         itemRecent = new NavigationAdapter.NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.action_recent), null, R.drawable.ic_clock_grey600_24dp);
         itemStarred = new NavigationAdapter.NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.action_starred), null, R.drawable.ic_star_grey600_24dp);
         adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
+                selectItem(item, true);
+            }
+
+            private void selectItem(NavigationAdapter.NavigationItem item, boolean closeNavigation) {
                 adapterCategories.setSelectedItem(item.id);
+
                 // update current selection
                 if(itemRecent == item) {
                     navigationSelection = new Category(null, null);
@@ -206,6 +211,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 } else {
                     navigationSelection = new Category(item.label, null);
                 }
+
                 // auto-close sub-folder in Navigation if selection is outside of that folder
                 if(navigationOpen != null) {
                     int slashIndex = navigationSelection.category==null ? -1 : navigationSelection.category.indexOf('/');
@@ -214,8 +220,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         navigationOpen = null;
                     }
                 }
+
                 // update views
-                drawerLayout.closeDrawers();
+                if(closeNavigation) {
+                    drawerLayout.closeDrawers();
+                }
                 refreshLists();
             }
 
@@ -223,7 +232,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             public void onIconClick(NavigationAdapter.NavigationItem item) {
                 if(item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(navigationOpen)) {
                     navigationOpen = item.label;
-                    refreshLists();
+                    selectItem(item, false);
                 } else if(item.icon== NavigationAdapter.ICON_MULTIPLE || item.icon==NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(navigationOpen)) {
                     navigationOpen = null;
                     refreshLists();
@@ -286,6 +295,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 } else if(belongsToLastPrimaryCategory) {
                     if(isCategoryOpen) {
                         item.label = currentPrimaryCategory + "/" + currentSecondaryCategory;
+                        item.id = "category:"+item.label;
                         item.icon = NavigationAdapter.ICON_SUB_FOLDER;
                         items.add(item);
                         lastSecondaryCategory = item;
@@ -299,6 +309,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         item.icon = NavigationAdapter.ICON_MULTIPLE_OPEN;
                     } else {
                         item.label = currentPrimaryCategory;
+                        item.id = "category:"+item.label;
                     }
                     items.add(item);
                     lastPrimaryCategory = item;
