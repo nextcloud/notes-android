@@ -18,8 +18,8 @@ import it.niedermann.owncloud.notes.persistence.NoteListWidgetService;
 
 public class NoteListWidget extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                    int appWidgetId) {
+    private static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                                        int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
 
         // Launch application when user taps the header icon or app title
@@ -58,7 +58,7 @@ public class NoteListWidget extends AppWidgetProvider {
         serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
         views.setPendingIntentTemplate(R.id.note_list_widget_lv, templatePI);
         views.setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent);
-        views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_entry_content_tv);
+        views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

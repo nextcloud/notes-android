@@ -11,7 +11,3 @@
     android:widgetCategory="keyguard|home_screen"
     android:previewImage="@drawable/note_list_widget_preview"
     />
-
-<!--
-    TODO    Preview image must show the new placement of the favourite icon
--->

@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.model;
 
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,15 +19,12 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
  */
 
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
-    private Context mContext;
-    private int mAppWidgetId;
+    private final Context mContext;
     private NoteSQLiteOpenHelper db;
     private List<DBNote> dbNotes;
 
     public NoteListWidgetFactory(Context context, Intent intent) {
         mContext = context;
-        mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                            AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
     @Override
@@ -55,6 +51,10 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
      */
     @Override
     public int getCount() {
+        if (dbNotes == null) {
+            return 0;
+        }
+
         return dbNotes.size();
     }
 
