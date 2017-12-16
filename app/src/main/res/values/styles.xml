@@ -13,6 +13,20 @@
         <item name="android:windowBackground">@color/bg_normal</item>
     </style>
 
+    <style name="Nextcloud.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <!-- Main theme colors -->
+        <!-- App Bar -->
+        <item name="colorPrimary">@color/primary</item>
+        <!-- Status Bar and contextual Status Bars -->
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <!-- Snackbar Action Link -->
+        <item name="colorAccent">@color/primary</item>
+        <item name="android:buttonStyle">@style/ncbutton</item>
+        <item name="android:windowBackground">@color/bg_normal</item>
+    </style>
+
     <style name="fab">
         <item name="android:layout_margin">16dp</item>
         <item name="android:layout_width">wrap_content</item>
@@ -27,5 +41,9 @@
         <item name="android:textColor">@drawable/button_selector</item>
         <item name="android:padding">@dimen/button_padding</item>
         <item name="android:elevation">@dimen/button_elevation</item>
+    </style>
+
+    <style name="NavigationView_ItemTextAppearance">
+        <item name="android:ellipsize">end</item>
     </style>
 </resources>

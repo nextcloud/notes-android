@@ -9,4 +9,6 @@
     <dimen name="button_padding">16dp</dimen>
     <dimen name="button_elevation">5dp</dimen>
 
+    <dimen name="nav_drawer_header_height">140dp</dimen>
+
 </resources>

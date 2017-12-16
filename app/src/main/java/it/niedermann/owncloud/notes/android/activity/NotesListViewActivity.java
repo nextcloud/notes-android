@@ -48,7 +48,7 @@ import it.niedermann.owncloud.notes.util.NotesClientUtil;
 
 import static android.os.Build.VERSION.SDK_INT;
 
-public class NotesListViewActivity extends AppCompatActivity implements
+public class NotesListViewActivity extends DrawerActivity implements
         ItemAdapter.NoteClickListener, View.OnClickListener {
 
     public final static String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
@@ -56,7 +56,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
 
     private final static int create_note_cmd = 0;
     private final static int show_single_note_cmd = 1;
-    private final static int server_settings = 2;
     private final static int about = 3;
 
     private RecyclerView listView = null;
@@ -87,7 +86,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                 .getDefaultSharedPreferences(getApplicationContext());
         if (!NoteServerSyncHelper.isConfigured(this)) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            startActivityForResult(settingsIntent, server_settings);
+            startActivityForResult(settingsIntent, DrawerActivity.RESULT_CODE_SERVER_SETTINGS);
         }
 
         setContentView(R.layout.activity_notes_list_view);
@@ -118,42 +117,10 @@ public class NotesListViewActivity extends AppCompatActivity implements
         // Show persistant notification for creating a new note
         checkNotificationSetting();
 
-        initSidebar();
-    }
+        // setup toolbar
+        setupToolbar();
 
-    private void initSidebar() {
-        ListView mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.fragment_drawer_item, new String[]{
-                "Alle Notizen",
-                "Favoriten"
-        }));
-        final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (SDK_INT >= 14) {
-                    mDrawerLayout.closeDrawer(Gravity.START);
-                } else {
-                    mDrawerLayout.closeDrawer(Gravity.LEFT);
-                }
-            }
-        });
-        mDrawerLayout.addDrawerListener(new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.string.drawer_opened, R.string.drawer_closed) {
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle(mDrawerTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        });
-
-        mTitle = mDrawerTitle = getTitle();
+        setupDrawer(R.id.nav_all_notes);
     }
 
     protected void checkNotificationSetting() {
@@ -333,14 +300,6 @@ public class NotesListViewActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.action_settings:
-                Intent settingsIntent = new Intent(this, SettingsActivity.class);
-                startActivityForResult(settingsIntent, server_settings);
-                return true;
-            case R.id.action_about:
-                Intent aboutIntent = new Intent(this, AboutActivity.class);
-                startActivityForResult(aboutIntent, about);
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -380,7 +339,7 @@ public class NotesListViewActivity extends AppCompatActivity implements
                     }
                 }
             }
-        } else if (requestCode == server_settings) {
+        } else if (requestCode == DrawerActivity.RESULT_CODE_SERVER_SETTINGS) {
             // Create new Instance with new URL and credentials
             db = NoteSQLiteOpenHelper.getInstance(this);
             if (db.getNoteServerSyncHelper().isSyncPossible()) {
