@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/drawer_menu_standard"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_all_notes"
+            android:icon="@drawable/file_document_box"
+            android:title="@string/action_notes" />
+    </group>
+
+    <group
+        android:id="@+id/drawer_menu_misc"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_settings"
+            android:icon="@drawable/settings"
+            android:title="@string/action_settings" />
+        <item
+            android:id="@+id/action_about"
+            android:icon="@drawable/information_outline"
+            android:title="@string/action_about" />
+    </group>
+
+</menu>
