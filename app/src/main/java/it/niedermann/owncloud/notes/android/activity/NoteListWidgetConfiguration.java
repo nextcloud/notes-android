@@ -12,10 +12,6 @@ import android.widget.Toast;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 
-/**
- * Created by dan0xii on 04/10/17.
- */
-
 public class NoteListWidgetConfiguration extends AppCompatActivity {
     private static final String TAG = Activity.class.getSimpleName();
 
@@ -28,6 +24,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
 
         if (intent.getExtras() == null) {
             finish();
+            return;
         }
 
         int mAppWidgetId = intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
@@ -39,10 +36,9 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
             // TODO Present user with app login screen
             Log.w(TAG, "onCreate: user not logged in");
         } else {
-            Intent retIntent = new Intent();
+            Intent retIntent = new Intent(this, NoteListWidget.class);
             retIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
             retIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            retIntent = new Intent(this, NoteListWidget.class);
             sendBroadcast(retIntent);
             setResult(RESULT_OK, retIntent);
         }
