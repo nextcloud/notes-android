@@ -116,7 +116,7 @@ public class CategoryDialogFragment extends DialogFragment {
 
     private static class FolderArrayAdapter extends ArrayAdapter<String> {
 
-        private List<String> originalData;
+        private List<String> originalData = new ArrayList<>();
         private Filter filter;
 
         private FolderArrayAdapter(@NonNull Context context, int resource) {
