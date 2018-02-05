@@ -1,8 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">Jegyzetek</string>
+    <string name="no_notes">Még nincsenek jegyzetek</string>
+    <string name="action_create">Új jegyzet</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="action_search">Keresés</string>
+    <string name="action_create_save">Mentés</string>
+    <string name="action_create_cancel">Mégsem</string>
+    <string name="action_edit_editing">Szerkesztés</string>
+    <string name="action_edit_save">Mentés</string>
+    <string name="action_edit_saving">Mentés &#8230;</string>
+    <string name="action_edit_saved">Elmentve</string>
+    <string name="action_edit_cancel">Mégsem</string>
+    <string name="action_about">Névjegy</string>
+    <string name="action_select_note">Jegyzet választás</string>
+    <string name="action_note_deleted">Jegyzet törölve</string>
+    <string name="action_note_restored">Jegyzet visszaállítva</string>
+    <string name="action_undo">Visszavon</string>
+    <string name="action_drawer_open">navigáció megnyitása</string>
+    <string name="action_drawer_close">navigáció bezárása</string>
+    <string name="action_recent">Friss</string>
+    <string name="action_starred">Csillagozott</string>
+    <string name="action_uncategorized">Kategorizálatlan</string>
+    <string name="menu_delete">Törlés</string>
+    <string name="menu_copy">Másol</string>
+    <string name="menu_edit">Szerkesztés</string>
+    <string name="menu_cancel">Mégsem</string>
+    <string name="menu_change_category">Kategória</string>
+    <string name="menu_favorite">Kedvenc</string>
+    <string name="menu_preview">Előnézet</string>
+    <string name="menu_share">Megosztás</string>
+    <string name="menu_about">Névjegy</string>
+
+    <string name="change_category_title">Kategória választás</string>
+    <string name="copy">Másol</string>
+
+    <string name="listview_updated_today">Ma</string>
+    <string name="listview_updated_yesterday">Tegnap</string>
+    <string name="listview_updated_this_week">Ezen a héten</string>
+    <string name="listview_updated_this_month">Ebben a hónapban</string>
+    <string name="listview_updated_earlier">Korábban</string>
+
+    <!-- Settings -->
+    <string name="settings_server_settings">Fiók beállítások</string>
+    <string name="settings_server">Kiszolgáló</string>
+    <string name="settings_url">A szerver címe</string>
+    <string name="settings_url_check_description">Mutatja, hogy cím pingelhető-e.</string>
+    <string name="settings_url_warn_http">Figyelem: a \"http\" biztonságtalan. Kérjük használj \"https\"-t.</string>
+    <string name="settings_username">Felhasználónév</string>
+    <string name="settings_password">Jelszó</string>
+    <string name="settings_password_unchanged">Jelszó (módosítatlan)</string>
+    <string name="settings_password_check_description">Mutatja ha a hitelesítőadatok helyesek.</string>
+    <string name="settings_submit">Kapcsolódás</string>
+    <string name="settings_submitting">Kapcsolódás &#8230;</string>
+    <string name="settings_view_category">Beállítások megtekintése</string>
+    <string name="settings_note_mode">Jegyzetmegjelenítési módok</string>
+    <string name="settings_notification_title">\"Jegyzet létrehozása\" értesítésként</string>
+    <string name="settings_notification">Kapcsold be, hogy folyamatosan legyen kint egy értesítés a gyors jegyzet létrehozáshoz</string>
+    <string name="settings_cert_category">Tanúsítványok</string>
+    <string name="settings_cert_trust_system">Megbízás a rendszertanúsítványokban</string>
+    <string name="settings_cert_trust_system_on">A rendszer és felhasználó által hozzáadott CA-k megbízhatók (javasolt)</string>
+    <string name="settings_cert_trust_system_off">A rendszer és felhasználó által hozzáadott CA-k nem megbízhatók</string>
+    <string name="settings_cert_reset">(Nem)megbízható tanúsítványok alaphelyzetbe</string>
+    <string name="settings_cert_reset_summary">Minden tanúsítvány megbízhatóságának visszaállítása</string>
+    <string name="settings_cert_reset_toast">Minden saját tanúsítvány eltávolítva</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Jegyzetek - kapcsolatbiztonság</string>
+    <string name="trust_certificate_unknown_certificate_found">A jegyzetek ismeretlen tanúsítványba ütközött. Megbízol benne?</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Csatlakozás</string>
+    <string name="network_connected">Csatlakozva</string>
+    <string name="network_disconnected">Nincs hálózat</string>
+
+    <!-- Error -->
+    <string name="error_sync">sikertelen szinkronizálás: %1$s</string>
+    <string name="error_invalid_login">Érvénytelen belépés: %1$s</string>
+    <string name="error_json">be van kapcsolva a Jegyzetek app a szerveren?</string>
+    <string name="error_io">szerverkapcsolat sérült</string>
+    <string name="error_no_network">Nincs hálózati kapcsolat</string>
+    <string name="error_server">URL/Szerver hibákat tartalmaz</string>
+    <string name="error_url_malformed">Hibás szervercím</string>
+    <string name="error_username_password_invalid">Hibás felhasználónév vagy jelszó</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Beállítások</string>
+
+    <!-- About -->
+    <string name="about_version_title">Verzió</string>
+    <string name="about_version">Jelenleg ezt használod: &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Karbantartó</string>
+    <string name="about_developers_title">Fejlesztők</string>
+    <string name="about_translators_title">Fordítók</string>
+    <string name="about_translators_transifex">Nextcloud közösség a &lt;a href=\"%1$s\">Transifex&lt;/a>-en</string>
+    <string name="about_testers_title">Tesztelők</string>
+    <string name="about_source_title">Forráskód</string>
+    <string name="about_source">Ez a projek a GitHub-on: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Esetek</string>
+    <string name="about_issues">Jelenthetsz hibákat, javasolhatsz javításokat, kérhetsz bővítéseket a GitHub esetkezelőjében: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Fordítás</string>
+    <string name="about_translate">Csatlakozz a Nextcloud csapathoz a Transifex-en és segíts lefordítani az alkalmazást: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">App licensz</string>
+    <string name="about_app_license">Ez az alkalmazás GNU GENERAL PUBLIC LICENSE v3+-al kerül kiadásra.</string>
+    <string name="about_app_license_button">Licensz megtekintése</string>
+    <string name="about_icons_disclaimer_title">Ikonok</string>
+    <string name="about_icons_disclaimer">&lt;p>Eredeti ikont készítette %1$s&lt;/p>&lt;p>Minden egyéb az app által használt ikon &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> készítette a Google Inc. és Apache 2.0 Licence alá esik.&lt;/p></string>
+    <string name="about_credits_tab_title">Érdemek</string>
+    <string name="about_contribution_tab_title">Közreműködés</string>
+    <string name="about_license_tab_title">Licenc</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Jegyzet lista</string>
+    <string name="widget_note_list_placeholder">Nincsenek jegyzetek</string>
+    <string name="widget_single_note_title">Egyszeri jegyzet</string>
+    <string name="widget_single_note_placeholder_tv">Jegyzet nem található</string>
+    <string name="widget_create_note">Jegyzet létrehozása</string>
+    <string name="widget_not_logged_in">Kérlek jelentkezz be a Jegyzetekbe mielőtt ezt a widget-et használnád</string>
+    <string name="widget_entry_fav_contentDescription">Csillag ikon a kedvencek jelölésére</string>
+    <string name="widget_app_launcher_contentDescription">Elindítja az alkalmazást</string>
+
+    <string name="activity_select_single_note">Jegyzet kiválasztása</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Új jegyzet létrehozása</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Megnyitás szerkesztésre</item>
+        <item>Megnyitás előnézetre</item>
+        <item>Jegyezd meg a döntésem</item>
+    </string-array>
+
     <!-- Plurals -->
     <plurals name="ab_selected">
-        <item quantity="one">%d kiválasztott</item>
-        <item quantity="other">%d kiválasztott</item>
+        <item quantity="one">%d kiválasztva</item>
+        <item quantity="other">%d kiválasztva</item>
     </plurals>
 </resources>

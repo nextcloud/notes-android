@@ -5,6 +5,7 @@
     <string name="no_notes">没有便笺</string>
     <string name="action_create">新建便笺</string>
     <string name="action_settings">设置</string>
+    <string name="action_search">搜索</string>
     <string name="action_create_save">保存</string>
     <string name="action_create_cancel">取消</string>
     <string name="action_edit_editing">编辑</string>
@@ -14,9 +15,14 @@
     <string name="action_edit_cancel">取消</string>
     <string name="action_about">关于</string>
     <string name="action_select_note">选择便笺</string>
-    <string name="action_note_deleted">便笺已删除</string>
-    <string name="action_note_restored">便笺已保存</string>
+    <string name="action_note_deleted">已删除的笔记</string>
+    <string name="action_note_restored">已恢复笔记</string>
     <string name="action_undo">撤销</string>
+    <string name="action_drawer_open">打开导航</string>
+    <string name="action_drawer_close">关闭导航</string>
+    <string name="action_recent">最近</string>
+    <string name="action_starred">已加星标</string>
+    <string name="action_uncategorized">未分类</string>
     <string name="menu_delete">删除</string>
     <string name="menu_copy">复制</string>
     <string name="menu_edit">编辑</string>
@@ -28,7 +34,6 @@
     <string name="menu_about">关于</string>
 
     <string name="change_category_title">选择类别</string>
-    <string name="change_category_message">请输入一个类别名称</string>
     <string name="copy">复制</string>
 
     <string name="listview_updated_today">今天</string>
@@ -41,12 +46,10 @@
     <string name="settings_server_settings">账户设置</string>
     <string name="settings_server">服务器</string>
     <string name="settings_url">服务器地址</string>
-    <string name="settings_url_check_description">测试服务器是否可Ping通.</string>
     <string name="settings_url_warn_http">警告:“http”是不安全的，请使用“https”。</string>
     <string name="settings_username">用户名</string>
     <string name="settings_password">密码</string>
     <string name="settings_password_unchanged">密码(没修改)</string>
-    <string name="settings_password_check_description">测试证书是否正确.</string>
     <string name="settings_submit">连接</string>
     <string name="settings_submitting">连接 &#8230;</string>
     <string name="settings_view_category">预览设置</string>
@@ -101,14 +104,17 @@
     <string name="about_app_license">此程序通过GNU通用公共许可证V3+授权。</string>
     <string name="about_app_license_button">查看授权</string>
     <string name="about_icons_disclaimer_title">图标</string>
-    <string name="about_icons_disclaimer">&lt;p>原创图标来自 %1$s&lt;/p>&lt;p>本应用中使用的其他图标来自 Google Inc. 基于创作共用协议提供的 &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a>.&lt;/p></string>
     <string name="about_credits_tab_title">致谢</string>
     <string name="about_contribution_tab_title">贡献</string>
     <string name="about_license_tab_title">授权</string>
 
-    <string name="widget_all_notes_title">所有便笺</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">笔记列表</string>
+    <string name="widget_note_list_placeholder">没有笔记</string>
     <string name="widget_single_note_title">单个便笺</string>
+    <string name="widget_single_note_placeholder_tv">未找到笔记</string>
     <string name="widget_create_note">创建笔记</string>
+    <string name="widget_app_launcher_contentDescription">启动应用程序</string>
 
     <string name="activity_select_single_note">选择笔记</string>
 

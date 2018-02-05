@@ -14,8 +14,6 @@
     <string name="action_edit_cancel">Cancelar</string>
     <string name="action_about">Sobre</string>
     <string name="action_select_note">Selecionar nota</string>
-    <string name="action_note_deleted">Nota eliminada</string>
-    <string name="action_note_restored">Nota restaurada</string>
     <string name="action_undo">Anular</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_copy">Copiar</string>
@@ -28,7 +26,6 @@
     <string name="menu_about">Sobre</string>
 
     <string name="change_category_title">Escolher categoria</string>
-    <string name="change_category_message">Por favor introduza um nome para a categoria</string>
     <string name="copy">Copiar</string>
 
     <string name="listview_updated_today">Hoje</string>
@@ -41,16 +38,13 @@
     <string name="settings_server_settings">Definições da conta</string>
     <string name="settings_server">Servidor</string>
     <string name="settings_url">Endereço do servidor</string>
-    <string name="settings_url_check_description">Mostra se o endereço pode ser acedido.</string>
     <string name="settings_url_warn_http">AVISO: "http" é inseguro. Por favor use "https".</string>
     <string name="settings_username">Nome de utilizador</string>
     <string name="settings_password">Palavra-passe</string>
     <string name="settings_password_unchanged">Palavra-passe (não alterada)</string>
-    <string name="settings_password_check_description">Mostra se as credenciais estão corretas.</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">A conectar &#8230;</string>
     <string name="settings_view_category">Definições de visualização</string>
-    <string name="settings_note_mode">Modo de exibição das notas</string>
     <string name="settings_notification_title">\"Criar nota\" como notificação</string>
     <string name="settings_notification">Ativar para mostrar uma notificação persistente para criar novas notas rapidamente.</string>
     <string name="settings_cert_category">Certificados</string>
@@ -101,15 +95,12 @@
     <string name="about_app_license">Esta aplicação está licenciada sob a licença GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Ver licença</string>
     <string name="about_icons_disclaimer_title">Ícones</string>
-    <string name="about_icons_disclaimer">&lt;p>Ícone original criado por %1$s&lt;/p>&lt;p>Todos os restantes ícones usados por esta aplicação são &lt;a href="https://materialdesignicons.com/">Material Design Icons&lt;/a> criados por Google Inc. e licenciados sob uma licença Creative Commons.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribuição</string>
     <string name="about_license_tab_title">Licença</string>
 
-    <string name="widget_all_notes_title">Todas as notas</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="widget_create_note">Criar nota</string>
-
     <string name="activity_select_single_note">Selecionar nota</string>
 
     <!-- Shortcuts -->

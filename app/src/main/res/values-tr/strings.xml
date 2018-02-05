@@ -5,6 +5,7 @@
     <string name="no_notes">Henüz bir not yok</string>
     <string name="action_create">Not ekle</string>
     <string name="action_settings">Ayarlar</string>
+    <string name="action_search">Arama</string>
     <string name="action_create_save">Kaydet</string>
     <string name="action_create_cancel">İptal</string>
     <string name="action_edit_editing">Düzenle</string>
@@ -17,6 +18,11 @@
     <string name="action_note_deleted">Not silindi</string>
     <string name="action_note_restored">Not geri yüklendi</string>
     <string name="action_undo">Geri al</string>
+    <string name="action_drawer_open">gezinmeyi aç</string>
+    <string name="action_drawer_close">gezinmeyi kapat</string>
+    <string name="action_recent">Son</string>
+    <string name="action_starred">Yıldızlı</string>
+    <string name="action_uncategorized">Kategorisiz</string>
     <string name="menu_delete">Sil</string>
     <string name="menu_copy">Kopyala</string>
     <string name="menu_edit">Düzenle</string>
@@ -28,7 +34,6 @@
     <string name="menu_about">Hakkında</string>
 
     <string name="change_category_title">Kategori seçin</string>
-    <string name="change_category_message">Lütfen bir kategori adı yazın</string>
     <string name="copy">Kopyala</string>
 
     <string name="listview_updated_today">Bugün</string>
@@ -106,9 +111,15 @@
     <string name="about_contribution_tab_title">Katkı</string>
     <string name="about_license_tab_title">Lisans</string>
 
-    <string name="widget_all_notes_title">Tum notlar</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Not listesi</string>
+    <string name="widget_note_list_placeholder">Herhangi bir not yok</string>
     <string name="widget_single_note_title">Tek not</string>
+    <string name="widget_single_note_placeholder_tv">Not bulunamadı</string>
     <string name="widget_create_note">Not Ekle</string>
+    <string name="widget_not_logged_in">Bu aracı kullanabilmek için lütfen Notlar üzerinde oturum açın</string>
+    <string name="widget_entry_fav_contentDescription">Sık kullanılan ögeler için kullanılacak yıldız simgesi</string>
+    <string name="widget_app_launcher_contentDescription">Uygulamayı başlatır</string>
 
     <string name="activity_select_single_note">Not seçin</string>
 

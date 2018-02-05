@@ -1,77 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">белешке</string>
+    <string name="app_name">Белешке</string>
     <string name="no_notes">Још нема белешки</string>
     <string name="action_create">Нова белешка</string>
     <string name="action_settings">Поставке</string>
+    <string name="action_search">Тражи</string>
     <string name="action_create_save">Сачувај</string>
     <string name="action_create_cancel">Одустани</string>
     <string name="action_edit_editing">Уреди</string>
     <string name="action_edit_save">Сачувај</string>
-    <string name="action_edit_saving">Уписујем&#8230;</string>
-    <string name="action_edit_saved">Уписано</string>
+    <string name="action_edit_saving">Чувам &#8230;</string>
+    <string name="action_edit_saved">Сачувано</string>
     <string name="action_edit_cancel">Одустани</string>
     <string name="action_about">О програму</string>
     <string name="action_select_note">Изабери белешку</string>
-    <string name="action_note_deleted">Белешка је избрисана</string>
-    <string name="action_note_restored">Белешка је враћена</string>
+    <string name="action_note_deleted">Белешка обрисана</string>
+    <string name="action_note_restored">Белешка повраћена</string>
     <string name="action_undo">Опозови</string>
+    <string name="action_drawer_open">отвори навигацију</string>
+    <string name="action_drawer_close">затвори навигацију</string>
+    <string name="action_recent">Скорашње</string>
+    <string name="action_starred">Означено звездицом</string>
+    <string name="action_uncategorized">Некатегоризовано</string>
     <string name="menu_delete">Обриши</string>
     <string name="menu_copy">Копирај</string>
     <string name="menu_edit">Уреди</string>
     <string name="menu_cancel">Откажи</string>
-    <string name="menu_favorite">Омиљени</string>
+    <string name="menu_change_category">Категорија</string>
+    <string name="menu_favorite">Омиљене</string>
     <string name="menu_preview">Преглед</string>
     <string name="menu_share">Подели</string>
     <string name="menu_about">О програму</string>
 
+    <string name="change_category_title">Одаберите категорију</string>
     <string name="copy">Копирај</string>
 
-    <string name="listview_updated_today">данас</string>
-    <string name="listview_updated_yesterday">јуче</string>
-    <string name="listview_updated_this_week">ове седмице</string>
-    <string name="listview_updated_this_month">овога месеца</string>
-    <string name="listview_updated_earlier">раније</string>
+    <string name="listview_updated_today">Данас</string>
+    <string name="listview_updated_yesterday">Јуче</string>
+    <string name="listview_updated_this_week">Ове седмице</string>
+    <string name="listview_updated_this_month">Овог месеца</string>
+    <string name="listview_updated_earlier">Раније</string>
 
+    <!-- Settings -->
+    <string name="settings_server_settings">Поставке налога</string>
     <string name="settings_server">Сервер</string>
     <string name="settings_url">Адреса сервера</string>
-    <string name="settings_url_check_description">Приказ доступности УРЛ-а.</string>
+    <string name="settings_url_check_description">Приказује да ли адреса може да да се пингује.</string>
     <string name="settings_url_warn_http">УПОЗОРЕЊЕ: „http“ протокол није безбедан. Користите „https“.</string>
     <string name="settings_username">Корисничко име</string>
     <string name="settings_password">Лозинка</string>
-    <string name="settings_password_unchanged">Лозинка(није промењено)</string>
-    <string name="settings_password_check_description">Приказ тачности акредитива.</string>
-    <string name="settings_submit">Повежи</string>
+    <string name="settings_password_unchanged">Лозинка (није промењено)</string>
+    <string name="settings_password_check_description">Прикзује да ли су акредитиви исправни.</string>
+    <string name="settings_submit">Повежи се</string>
     <string name="settings_submitting">Повезујем се&#8230;</string>
+    <string name="settings_view_category">Поставке прегледа</string>
+    <string name="settings_note_mode">Начин приказа за Белешке</string>
+    <string name="settings_notification_title">\"Направи белешку\" као обавештење</string>
+    <string name="settings_notification">Укључите да омогућите стално видљиво обавештење за креирање нових белешки.</string>
+    <string name="settings_cert_category">Сертификати</string>
+    <string name="settings_cert_trust_system">Веруј системским сертификатима</string>
+    <string name="settings_cert_trust_system_on">Вероваће се системским сертификатима и кориснички доданим сертификационим центрима (CA)</string>
+    <string name="settings_cert_trust_system_off">Неће се веровати системским сертификатима и кориснички доданим сертификационим центрима</string>
+    <string name="settings_cert_reset">Ресетуј којим се сертификатима (не) верује</string>
+    <string name="settings_cert_reset_summary">Ресетуј поверење свих кориснички прилагођеним сертификатима</string>
+    <string name="settings_cert_reset_toast">Сви кориснички поверљиви сертификати су очишћени</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Белешке - безбедност конекције</string>
+    <string name="trust_certificate_unknown_certificate_found">Белешке су наишле на непознати сертификат. Да ли желите да му верујете?</string>
+
     <!-- Network -->
-    <string name="network_connecting">Веза је успостављена</string>
+    <string name="network_connecting">Повезујем се</string>
     <string name="network_connected">Повезан</string>
     <string name="network_disconnected">Мрежа није доступна</string>
 
     <!-- Error -->
     <string name="error_sync">Синхронизација није успела%1$s</string>
     <string name="error_invalid_login">Неисправна лозинка:%1$s</string>
-    <string name="error_json">да ли је Notes app активиран на серверу?</string>
-    <string name="error_io">У/И грешка</string>
+    <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
+    <string name="error_io">веза са сервером је пукла</string>
     <string name="error_no_network">нема интернет конекције</string>
     <string name="error_server">URL/Server грешка</string>
-    <string name="error_url_malformed">УРЛ унакажен</string>
+    <string name="error_url_malformed">Погрешна адреса сервера</string>
     <string name="error_username_password_invalid">Корисничко име или лозинка нису тачни</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Поставке</string>
 
     <!-- About -->
-    <string name="about_version_title">Издање</string>
-    <string name="about_version">Тренутно користите &lt;јака>%1$s&lt;/јака></string>
-    <string name="about_maintainer_title">Главни програмер</string>
+    <string name="about_version_title">Верзија</string>
+    <string name="about_version">Тренутно користите &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Одржаваоц</string>
     <string name="about_developers_title">Програмери</string>
     <string name="about_translators_title">Преводиоци</string>
     <string name="about_translators_transifex">Некстклауд заједница на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Тестери</string>
     <string name="about_source_title">Изворни кôд</string>
-    <string name="about_source">Овај пројекат је приказан на  GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Овај пројекат се држи на  GitHub-у: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Грешке</string>
     <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу пријава: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Преведи</string>
@@ -80,13 +106,37 @@
     <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом Општом јавном лиценцом (ГПЛ) в3+.</string>
     <string name="about_app_license_button">Прикажи лиценцу</string>
     <string name="about_icons_disclaimer_title">Иконе</string>
+    <string name="about_icons_disclaimer">&lt;p>Оригиналне иконе направио %1$s&lt;/p>&lt;p>Све остале иконе коришћене у овој апликацији су &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> направљене од стране Google Inc. и лиценциране под Apache 2.0 лиценцом.&lt;/p></string>
     <string name="about_credits_tab_title">Заслуге</string>
     <string name="about_contribution_tab_title">Допринос</string>
     <string name="about_license_tab_title">Лиценца</string>
 
-    <string name="widget_all_notes_title">Све белешке</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Листа белешки</string>
+    <string name="widget_note_list_placeholder">Нема белешки</string>
     <string name="widget_single_note_title">Белешка</string>
+    <string name="widget_single_note_placeholder_tv">Белешка није нађена</string>
+    <string name="widget_create_note">Направи белешку</string>
+    <string name="widget_not_logged_in">Пријавите се на Белешке пре коришћења овог елемента</string>
+    <string name="widget_entry_fav_contentDescription">Икона да се стави звезда на ставку</string>
+    <string name="widget_app_launcher_contentDescription">Покреће апликацију</string>
+
+    <string name="activity_select_single_note">Одабери белешку</string>
+
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Направи нову белешку</string>
 
-    </resources>
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Отвори у режиму уређивања</item>
+        <item>Отвори у режиму прегледа</item>
+        <item>Запамти мој последњи избор</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d означена</item>
+        <item quantity="few">%d означене</item>
+        <item quantity="other">%d означених</item>
+    </plurals>
+</resources>

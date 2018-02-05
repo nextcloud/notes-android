@@ -5,6 +5,7 @@
     <string name="no_notes">No hay notas todavía</string>
     <string name="action_create">Nueva nota</string>
     <string name="action_settings">Ajustes</string>
+    <string name="action_search">Buscar</string>
     <string name="action_create_save">Guardar</string>
     <string name="action_create_cancel">Cancelar</string>
     <string name="action_edit_editing">Editar</string>
@@ -14,9 +15,14 @@
     <string name="action_edit_cancel">Cancelar</string>
     <string name="action_about">Acerca de</string>
     <string name="action_select_note">Seleccionar nota</string>
-    <string name="action_note_deleted">Nota borrada</string>
+    <string name="action_note_deleted">Nota eliminada</string>
     <string name="action_note_restored">Nota restaurada</string>
     <string name="action_undo">Deshacer</string>
+    <string name="action_drawer_open">abrir navegación</string>
+    <string name="action_drawer_close">cerrar navegación</string>
+    <string name="action_recent">Reciente</string>
+    <string name="action_starred">Favoritos</string>
+    <string name="action_uncategorized">Sin categoría</string>
     <string name="menu_delete">Borrar</string>
     <string name="menu_copy">Copiar</string>
     <string name="menu_edit">Editar</string>
@@ -28,7 +34,6 @@
     <string name="menu_about">Acerca de</string>
 
     <string name="change_category_title">Escoge categoría</string>
-    <string name="change_category_message">Por favor, introduce un nombre de categoría</string>
     <string name="copy">Copiar</string>
 
     <string name="listview_updated_today">Hoy</string>
@@ -41,7 +46,7 @@
     <string name="settings_server_settings">Ajustes de cuenta</string>
     <string name="settings_server">Servidor</string>
     <string name="settings_url">Dirección de servidor</string>
-    <string name="settings_url_check_description">Muestra si la dirección puede ser encontrada.</string>
+    <string name="settings_url_check_description">Muestra si se puede hacer ping a la dirección.</string>
     <string name="settings_url_warn_http">AVISO: \"http\" es inseguro. Por favor, use \"https\".</string>
     <string name="settings_username">Nombre de usuario</string>
     <string name="settings_password">Contraseña</string>
@@ -50,7 +55,7 @@
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando &#8230;</string>
     <string name="settings_view_category">Ver configuración</string>
-    <string name="settings_note_mode">Mostrar modo para las notas</string>
+    <string name="settings_note_mode">Modo de visualización para Notas</string>
     <string name="settings_notification_title">\"Crear nota\" como notificación</string>
     <string name="settings_notification">Activar para mostrar una notificación persistente para crear nuevas notas rápidamente</string>
     <string name="settings_cert_category">Certificados</string>
@@ -101,14 +106,20 @@
     <string name="about_app_license">Esta aplicación está bajo la Licencia Pública General GNU v3+.</string>
     <string name="about_app_license_button">Ver licencia</string>
     <string name="about_icons_disclaimer_title">Íconos</string>
-    <string name="about_icons_disclaimer">&lt;p>Ícono original hecho por %1$s&lt;/p>&lt;p>Todos los demás íconos usados por esta aplicación son los &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> hechos por Google Inc. y su uso está autorizado por la Creative Commons License.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p> Icono original hecho por %1$s&lt;/p>&lt;p>Los demás iconos usados por esta app son &lt;a href=\"https://materialdesignicons.com/\">iconos Material Design&lt;/a> hechos por Google Inc. y licenciados bajo la licencia Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribuir</string>
     <string name="about_license_tab_title">Licencia</string>
 
-    <string name="widget_all_notes_title">Todas las notas</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_note_list_placeholder">No hay notas</string>
     <string name="widget_single_note_title">Nota única</string>
+    <string name="widget_single_note_placeholder_tv">Nota no encontrada</string>
     <string name="widget_create_note">Crear nota</string>
+    <string name="widget_not_logged_in">Por favor, inicia sesión en Notas antes de usar este widget</string>
+    <string name="widget_entry_fav_contentDescription">Icono de estrella usado para denotar un objeto marcado como favorito</string>
+    <string name="widget_app_launcher_contentDescription">Lanza la app</string>
 
     <string name="activity_select_single_note">Selecciona nota</string>
 

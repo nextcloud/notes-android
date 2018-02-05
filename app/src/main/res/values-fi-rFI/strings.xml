@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Muistiinpanot</string>
+    <string name="no_notes">Ei muistiinpanoja</string>
+    <string name="action_create">Uusi muistiinpano</string>
+    <string name="action_settings">Asetukset</string>
+    <string name="action_search">Etsi</string>
+    <string name="action_create_save">Tallenna</string>
+    <string name="action_create_cancel">Peruuta</string>
+    <string name="action_edit_editing">Muokkaa</string>
+    <string name="action_edit_save">Tallenna</string>
+    <string name="action_edit_saving">Tallennetaan...</string>
+    <string name="action_edit_saved">Tallennettu</string>
+    <string name="action_edit_cancel">Peruuta</string>
+    <string name="action_about">Tietoja</string>
+    <string name="action_select_note">Valitse muistiinpano</string>
+    <string name="action_note_deleted">Muistiinpano poistettu</string>
+    <string name="action_note_restored">Muistiinpano palautettu</string>
+    <string name="action_undo">Kumoa</string>
+    <string name="action_recent">Viimeisimmät</string>
+    <string name="action_starred">Tähdellä merkityt</string>
+    <string name="action_uncategorized">Luokittelemattomat</string>
+    <string name="menu_delete">Poista</string>
+    <string name="menu_copy">Kopioi</string>
+    <string name="menu_edit">Muokkaa</string>
+    <string name="menu_cancel">Peruuta</string>
+    <string name="menu_change_category">Luokka</string>
+    <string name="menu_favorite">Suosikki</string>
+    <string name="menu_preview">Esikatselu</string>
+    <string name="menu_share">Jaa</string>
+    <string name="menu_about">Tietoja</string>
+
+    <string name="copy">Kopioi</string>
+
+    <string name="listview_updated_today">Tänään</string>
+    <string name="listview_updated_yesterday">Eilen</string>
+    <string name="listview_updated_this_week">Tämä viikko</string>
+    <string name="listview_updated_this_month">Tämä kuukausi</string>
+    <string name="listview_updated_earlier">Aikaisemmat</string>
+
+    <!-- Settings -->
+    <string name="settings_server_settings">Tilin asetukset</string>
+    <string name="settings_server">Palvelin</string>
+    <string name="settings_url">Palvelimen osoite</string>
+    <string name="settings_url_warn_http">VAROITUS: \"http\" on suojaamaton. Käytä \"https\"-yhteyttä.</string>
+    <string name="settings_username">Käyttäjätunnus</string>
+    <string name="settings_password">Salasana</string>
+    <string name="settings_password_unchanged">Salasana (ei muutettu)</string>
+    <string name="settings_submit">Yhdistä</string>
+    <string name="settings_submitting">Yhdistetään...</string>
+    <string name="settings_cert_category">Varmenteet</string>
+    <string name="settings_cert_trust_system">Luota järjestelmävarmenteisiin</string>
+    <!-- Network -->
+    <string name="network_connecting">Yhdistetään</string>
+    <string name="network_connected">Yhdistetty</string>
+    <string name="network_disconnected">Verkkoa ei ole saatavilla</string>
+
+    <!-- Error -->
+    <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
+    <string name="error_invalid_login">Virheellinen kirjautuminen: %1$s</string>
+    <string name="error_io">palvelinyhteys on rikki</string>
+    <string name="error_no_network">ei verkkoyhteyttä</string>
+    <string name="error_url_malformed">Virheellinen palvelimen osoite</string>
+    <string name="error_username_password_invalid">Väärä käyttäjätunnus tai salasana</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Asetukset</string>
+
+    <!-- About -->
+    <string name="about_version_title">Versio</string>
+    <string name="about_version">Käytössäsi on nyt &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Ylläpitäjät</string>
+    <string name="about_developers_title">Kehittäjät</string>
+    <string name="about_translators_title">Kääntäjät</string>
+    <string name="about_translators_transifex">Nextcloud-yhteisö &lt;a href=\"%1$s\">Transifex-palvelussa&lt;/a></string>
+    <string name="about_testers_title">Testaajat</string>
+    <string name="about_source_title">Lähdekoodi</string>
+    <string name="about_issues_title">Ongelmat</string>
+    <string name="about_translate_title">Käännä</string>
+    <string name="about_translate">Liity Nextcloud-yhteisöön Transifex-palvelussa ja auta meitä kääntämään tämä sovellus: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Sovelluslisenssi</string>
+    <string name="about_app_license">Tämä sovellus on GNU GENERAL PUBLIC LICENSE v3+ -lisensoitu.</string>
+    <string name="about_app_license_button">Näytä lisenssi</string>
+    <string name="about_icons_disclaimer_title">Kuvakkeet</string>
+    <string name="about_license_tab_title">Lisenssi</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Muistiinpanolista</string>
+    <string name="widget_note_list_placeholder">Ei muistiinpanoja</string>
+    <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
+    <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
+    <string name="widget_create_note">Luo muistiinpano</string>
+    <string name="activity_select_single_note">Valitse muistiinpano</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Luo uusi muistiinpano</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Avaa muokkaustilassa</item>
+        <item>Avaa esikatselutilassa</item>
+        <item>Muista viimeisin valintani</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d valittu</item>
+        <item quantity="other">%d valittu</item>
+    </plurals>
+</resources>

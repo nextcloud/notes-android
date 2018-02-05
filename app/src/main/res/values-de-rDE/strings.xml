@@ -5,6 +5,7 @@
     <string name="no_notes">Noch keine Notizen vorhanden</string>
     <string name="action_create">Neue Notiz</string>
     <string name="action_settings">Einstellungen</string>
+    <string name="action_search">Suche</string>
     <string name="action_create_save">Speichern</string>
     <string name="action_create_cancel">Abbrechen</string>
     <string name="action_edit_editing">Bearbeiten</string>
@@ -14,9 +15,14 @@
     <string name="action_edit_cancel">Abbrechen</string>
     <string name="action_about">Über</string>
     <string name="action_select_note">Notiz auswählen</string>
-    <string name="action_note_deleted">Notiz wurde gelöscht</string>
-    <string name="action_note_restored">Notiz wurde wiederhergestellt</string>
+    <string name="action_note_deleted">Notiz gelöscht</string>
+    <string name="action_note_restored">Notiz wiederhergestellt</string>
     <string name="action_undo">Rückgängig</string>
+    <string name="action_drawer_open">Navigation öffnen</string>
+    <string name="action_drawer_close">Navigation schließen</string>
+    <string name="action_recent">Zuletzt geändert</string>
+    <string name="action_starred">Favoriten</string>
+    <string name="action_uncategorized">Ohne Kategorie</string>
     <string name="menu_delete">Löschen</string>
     <string name="menu_copy">Kopieren</string>
     <string name="menu_edit">Bearbeiten</string>
@@ -28,7 +34,6 @@
     <string name="menu_about">Über</string>
 
     <string name="change_category_title">Kategorie wählen</string>
-    <string name="change_category_message">Bitte Kategorienamen eingeben</string>
     <string name="copy">Kopieren</string>
 
     <string name="listview_updated_today">Heute</string>
@@ -41,7 +46,7 @@
     <string name="settings_server_settings"> Konto-Einstellungen </string>
     <string name="settings_server">Server</string>
     <string name="settings_url">Server-Adresse</string>
-    <string name="settings_url_check_description">Zeigt an, ob die angegebene URL erreichbar ist.</string>
+    <string name="settings_url_check_description">Zeigt an, ob die angegebene Adresse erreichbar ist.</string>
     <string name="settings_url_warn_http">WARNUNG: "http" ist unsicher. Bitte benutzen Sie "https".</string>
     <string name="settings_username">Benutzername</string>
     <string name="settings_password">Passwort</string>
@@ -101,14 +106,20 @@
     <string name="about_app_license">Diese Applikation ist lizenziert unter der GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Lizenz ansehen</string>
     <string name="about_icons_disclaimer_title">Icons</string>
-    <string name="about_icons_disclaimer">&lt;p>Das ursprüngliche Icon wurde erstellt von %1$s&lt;/p>&lt;p>Alle weiteren von dieser App benutzten Icons sind &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> erstellt von  Google Inc. und lizensiert unter einer Creative Commons Lizenz.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Das ursprüngliche Icon wurde erstellt von %1$s&lt;/p>&lt;p>Alle weiteren von dieser App benutzten Icons sind &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> erstellt von  Google Inc. und lizenziert unter einer Apache 2.0 Lizenz.&lt;/p></string>
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Mitmachen</string>
     <string name="about_license_tab_title">Lizenz</string>
 
-    <string name="widget_all_notes_title">Alle Notizen</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Liste der Notizen</string>
+    <string name="widget_note_list_placeholder">Keine Notizen</string>
     <string name="widget_single_note_title">Eine Notiz</string>
+    <string name="widget_single_note_placeholder_tv">Notiz nicht gefunden</string>
     <string name="widget_create_note">Notiz erstellen</string>
+    <string name="widget_not_logged_in">Bitte melden Sie sich bei Notes vor Nutzung des Widgets an</string>
+    <string name="widget_entry_fav_contentDescription">Das Stern-Symbol markiert den Eintrag als Favorit</string>
+    <string name="widget_app_launcher_contentDescription">Startet die App</string>
 
     <string name="activity_select_single_note">Notiz auswählen</string>
 

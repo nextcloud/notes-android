@@ -5,6 +5,7 @@
     <string name="no_notes">Заметок пока нет</string>
     <string name="action_create">Новая заметка</string>
     <string name="action_settings">Настройки</string>
+    <string name="action_search">Поиск</string>
     <string name="action_create_save">Сохранить</string>
     <string name="action_create_cancel">Отмена</string>
     <string name="action_edit_editing">Редактировать</string>
@@ -17,6 +18,11 @@
     <string name="action_note_deleted">Заметка удалена</string>
     <string name="action_note_restored">Заметка восстановлена</string>
     <string name="action_undo">Отменить</string>
+    <string name="action_drawer_open">открыть навигацию</string>
+    <string name="action_drawer_close">закрыть навигацию</string>
+    <string name="action_recent">Недавние</string>
+    <string name="action_starred">Отобранные</string>
+    <string name="action_uncategorized">Без категории</string>
     <string name="menu_delete">Удалить</string>
     <string name="menu_copy">Копировать</string>
     <string name="menu_edit">Редактировать</string>
@@ -28,7 +34,6 @@
     <string name="menu_about">О программе</string>
 
     <string name="change_category_title">Выберите категорию</string>
-    <string name="change_category_message">Пожалуйста введите название категории</string>
     <string name="copy">Копировать</string>
 
     <string name="listview_updated_today">Сегодня</string>
@@ -41,12 +46,12 @@
     <string name="settings_server_settings">Настройки аккаунта</string>
     <string name="settings_server">Сервер</string>
     <string name="settings_url">Адрес сервера</string>
-    <string name="settings_url_check_description"> Показывает, если адрес доступен.</string>
-    <string name="settings_url_warn_http">ВНИМАНИЕ: "http" ненадёжен. Пожалуйста, используйте "https"</string>
+    <string name="settings_url_check_description"> Показывает доступность адреса.</string>
+    <string name="settings_url_warn_http">ВНИМАНИЕ: использование «http» небезопасно. Используйте «https».</string>
     <string name="settings_username">Логин</string>
     <string name="settings_password">Пароль</string>
     <string name="settings_password_unchanged">Пароль (не изменён)</string>
-    <string name="settings_password_check_description">Показывает, если учётные данные являются правильными.</string>
+    <string name="settings_password_check_description">Показывает, верно ли указаны учётные данные.</string>
     <string name="settings_submit">Соединить</string>
     <string name="settings_submitting">Соединение …</string>
     <string name="settings_view_category">Просмотр настроек</string>
@@ -94,21 +99,27 @@
     <string name="about_source_title">Исходный код</string>
     <string name="about_source">Этот проект размещён на GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Тикеты</string>
-    <string name="about_issues">Вы можете сообщать об ошибках, предложениях об улучшении и пожеланиях в систему тикетов GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Вы можете сообщить об ошибках, внести предложения об улучшениях и пожеланиях в системе тикетов GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Перевести</string>
     <string name="about_translate">Включайтесь в команду Nextcloud на сайте Transifex и помогайте переводить это приложение: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Лицензия программы</string>
     <string name="about_app_license">Программа выпускается под лицензией GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Посмотреть лицензию</string>
     <string name="about_icons_disclaimer_title">Значки</string>
-    <string name="about_icons_disclaimer">&lt;p>Оригинальные значки были созданы  %1$s&lt;/p>&lt;p>Все дальнейшие значки, которые используются в этой программе, являются &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> от Google Inc. и лицензированны под Creative Commons License.&lt;/p></string>
-    <string name="about_credits_tab_title">Заслуги</string>
-    <string name="about_contribution_tab_title">Учавствовать</string>
+    <string name="about_icons_disclaimer">&lt;p>Исходные значки были созданы  %1$s&lt;/p>&lt;p>Все дальнейшие значки, которые используются в этой программе, являются &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> от Google Inc. и защищены лицензией использования Apache 2.0. &lt;/p></string>
+    <string name="about_credits_tab_title">Сообщество</string>
+    <string name="about_contribution_tab_title">Участие</string>
     <string name="about_license_tab_title">Лицензия</string>
 
-    <string name="widget_all_notes_title">Все заметки</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Список заметок</string>
+    <string name="widget_note_list_placeholder">Заметок нет</string>
     <string name="widget_single_note_title">Одна заметка</string>
+    <string name="widget_single_note_placeholder_tv">Заметка не найдена</string>
     <string name="widget_create_note">Создать заметку</string>
+    <string name="widget_not_logged_in">Для использования виджета необходимо выполнить вход в приложении «Заметки»</string>
+    <string name="widget_entry_fav_contentDescription">Используйте звёздочку для исключения заметки из избранного</string>
+    <string name="widget_app_launcher_contentDescription">Запуск приложения</string>
 
     <string name="activity_select_single_note">Выберите заметку</string>
 
@@ -117,9 +128,9 @@
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
-        <item>Открыть в режиме редактирования</item>
-        <item>Открыть в режиме просмотра</item>
-        <item>Запомнить выбор</item>
+        <item>Открывать в режиме редактирования</item>
+        <item>Открывать в режиме просмотра</item>
+        <item>Запоминать выбранный режим</item>
     </string-array>
 
     <!-- Plurals -->

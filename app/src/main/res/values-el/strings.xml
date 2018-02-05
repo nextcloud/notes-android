@@ -5,6 +5,7 @@
     <string name="no_notes">Δεν υπάρχουν ακόμα σημειώσεις</string>
     <string name="action_create">Νέα σημείωση</string>
     <string name="action_settings">Ρυθμίσεις</string>
+    <string name="action_search">Ψάχνει</string>
     <string name="action_create_save">Αποθήκευση</string>
     <string name="action_create_cancel">Ακύρωση</string>
     <string name="action_edit_editing">Επεξεργασία</string>
@@ -14,9 +15,14 @@
     <string name="action_edit_cancel">Ακύρωση</string>
     <string name="action_about">Περί</string>
     <string name="action_select_note">Επιλογή σημείωσης</string>
-    <string name="action_note_deleted">Η σημείωση διαγράφηκε</string>
-    <string name="action_note_restored">Η σημείωση επαναφέρθηκε</string>
+    <string name="action_note_deleted">Η σημείωση διαγράφηκε.</string>
+    <string name="action_note_restored">Έγινε επαναφορά της σημείωσης.</string>
     <string name="action_undo">Αναίρεση</string>
+    <string name="action_drawer_open">Άνοιγμα πλοήγησης</string>
+    <string name="action_drawer_close">Κλείσιμο πλοήγησης</string>
+    <string name="action_recent">Πρόσφατα</string>
+    <string name="action_starred">Με αστέρι</string>
+    <string name="action_uncategorized">Μή-κατηγοριοποιημένα</string>
     <string name="menu_delete">Διαγραφή</string>
     <string name="menu_copy">Αντιγραφή</string>
     <string name="menu_edit">Επεξεργασία</string>
@@ -28,7 +34,6 @@
     <string name="menu_about">Περί</string>
 
     <string name="change_category_title">Επιλογή κατηγορίας</string>
-    <string name="change_category_message">Παρακαλώ δώστε ένα όνομα κατηγορίας</string>
     <string name="copy">Αντιγραφή</string>
 
     <string name="listview_updated_today">Σήμερα</string>
@@ -41,15 +46,17 @@
     <string name="settings_server_settings">Ρυθμίσεις λογαριασμού</string>
     <string name="settings_server">Διακομιστής</string>
     <string name="settings_url">Διεύθυνση διακομιστή</string>
-    <string name="settings_url_check_description">Εμφανίζει εάν μπορεί να γίνει ping στην διεύθυνση.</string>
     <string name="settings_url_warn_http">ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Το \"http\" δεν είναι ασφαλές. Παρακαλούμε χρησιμοποιήστε το \"https\".</string>
     <string name="settings_username">Όνομα χρήστη</string>
     <string name="settings_password">Συνθηματικό</string>
     <string name="settings_password_unchanged">Συνθηματικό (δεν άλλαξε)</string>
-    <string name="settings_password_check_description">Εμφανίζει εάν τα διαπιστευτήρια είναι σωστά.</string>
     <string name="settings_submit">Σύνδεση</string>
     <string name="settings_submitting">Συνδέεται &#8230;</string>
+    <string name="settings_view_category">Προβολή ρυθμίσεων</string>
+    <string name="settings_note_mode">Λειτουργία προβολής σημειώσεων</string>
     <string name="settings_cert_category">Πιστοποιητικά</string>
+    <string name="settings_cert_trust_system">Εμπιστοσύνη πιστοποιητικών συστήματος.</string>
+    <string name="settings_cert_reset">Επαναφορά (μη) έμπιστων πιστοποιητικών</string>
     <!-- Certificates -->
     <string name="certificate_notification_connection_security">Σημειώσεις - Ασφάλεια σύνδεσης</string>
     <string name="trust_certificate_unknown_certificate_found">Οι Σημειώσεις έχουν συναντήσει ένα άγνωστο πιστοποιητικό. Θέλετε να το εμπιστεύεστε;</string>
@@ -90,15 +97,29 @@
     <string name="about_app_license">Αυτή η εφαρμογή υπόκεινται στην άδεια χρήσης GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Προβολή άδειας χρήσης</string>
     <string name="about_icons_disclaimer_title">Εικονίδια</string>
-    <string name="about_icons_disclaimer">&lt;p>Το πρωτότυπο εικονίδιο δημιουργήθηκε από %1$s&lt;/p>&lt;p>Όλα τα υπόλοιπα εικονίδια που χρησιμοποιούνται από αυτή την εφαρμογή είναι τα &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> δημιουργημένα από την Google Inc. και είναι αδειοδοτημένα υπό μία Creative Commons License.&lt;/p></string>
     <string name="about_credits_tab_title">Μνεία</string>
     <string name="about_contribution_tab_title">Συνεισφορά</string>
     <string name="about_license_tab_title">Άδεια χρήσης</string>
 
-    <string name="widget_all_notes_title">Όλες οι σημειώσεις</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Λίστα σημειώσεων</string>
+    <string name="widget_note_list_placeholder">Καμία σημείωση</string>
     <string name="widget_single_note_title">Απλή σημείωση</string>
+    <string name="widget_single_note_placeholder_tv">Η σημείωση δεν βρέθηκε</string>
+    <string name="widget_create_note">Δημιουργία Σημείωσης</string>
+    <string name="widget_not_logged_in">Παρακαλούμε συνδεθείτε στις Σημειώσεις πρωτού να χρησιμοποιήσετε αυτό το γραφικό στοιχείο.</string>
+    <string name="widget_entry_fav_contentDescription">Το εικονίδιο με το αστέρι χρησιμοποιείται για να οριστεί ένα αντικείμενο ως αγαπημένο</string>
+    <string name="widget_app_launcher_contentDescription">Εκκινεί την εφαρμογή</string>
+
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Άνοιγμα σε λειτουργία τροποποίησης</item>
+        <item>Άνοιγμα σε λειτουργία προεπισκόπισης</item>
+        <item>Να θυμάσαι την τελευταία μου επιλογή</item>
+    </string-array>
 
     <!-- Plurals -->
     <plurals name="ab_selected">

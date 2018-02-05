@@ -5,6 +5,7 @@
     <string name="no_notes">Nessuna nota</string>
     <string name="action_create">Nuova nota</string>
     <string name="action_settings">Impostazioni</string>
+    <string name="action_search">Cerca</string>
     <string name="action_create_save">Salva</string>
     <string name="action_create_cancel">Annulla</string>
     <string name="action_edit_editing">Modifica</string>
@@ -17,6 +18,11 @@
     <string name="action_note_deleted">Nota eliminata</string>
     <string name="action_note_restored">Nota ripristinata</string>
     <string name="action_undo">Annulla</string>
+    <string name="action_drawer_open">apri navigazione</string>
+    <string name="action_drawer_close">chiudi navigazione</string>
+    <string name="action_recent">Recenti</string>
+    <string name="action_starred">Preferiti</string>
+    <string name="action_uncategorized">Senza categoria</string>
     <string name="menu_delete">Elimina</string>
     <string name="menu_copy">Copia</string>
     <string name="menu_edit">Modifica</string>
@@ -28,7 +34,6 @@
     <string name="menu_about">Informazioni</string>
 
     <string name="change_category_title">Scegli categoria</string>
-    <string name="change_category_message">Digita il nome di una categoria</string>
     <string name="copy">Copia</string>
 
     <string name="listview_updated_today">Oggi</string>
@@ -101,14 +106,20 @@
     <string name="about_app_license">Questa applicazione è rilasciata nei termini della licenza GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Visualizza licenza</string>
     <string name="about_icons_disclaimer_title">Icone</string>
-    <string name="about_icons_disclaimer">&lt;p>Icona originale prodotta da %1$s&lt;/p>&lt;p>Tutte le altre icone utilizzate da questa applicazione sono &lt;a href=\"https://materialdesignicons.com/\">Icone Material Design&lt;/a> realizzate da Google Inc. e rilasciate nei termini di una licenza Creative Commons.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Icona originale realizzata da %1$s&lt;/p>&lt;p>Tutte le altre icone utilizzate da questa applicazione sono &lt;a href=\"https://materialdesignicons.com/\">Icone Material Design&lt;/a> realizzate da Google Inc. e rilasciate nei termini della licenza Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Riconoscimenti</string>
     <string name="about_contribution_tab_title">Contributi</string>
     <string name="about_license_tab_title">Licenza</string>
 
-    <string name="widget_all_notes_title">Tutte le note</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Elenco di note</string>
+    <string name="widget_note_list_placeholder">Nessuna nota</string>
     <string name="widget_single_note_title">Nota singola</string>
+    <string name="widget_single_note_placeholder_tv">Nota non trovata</string>
     <string name="widget_create_note">Crea nota</string>
+    <string name="widget_not_logged_in">Accedi a Note prima di utilizzare questo widget</string>
+    <string name="widget_entry_fav_contentDescription">L\'icona della stella è utilizzata per marcare un elemento come preferito</string>
+    <string name="widget_app_launcher_contentDescription">Avvia l\'applicazione</string>
 
     <string name="activity_select_single_note">Seleziona nota</string>
 

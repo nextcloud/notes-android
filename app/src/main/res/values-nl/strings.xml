@@ -5,6 +5,7 @@
     <string name="no_notes">Nog geen notities</string>
     <string name="action_create">Nieuwe notitie</string>
     <string name="action_settings">Instellingen</string>
+    <string name="action_search">Zoeken</string>
     <string name="action_create_save">Opslaan</string>
     <string name="action_create_cancel">Annuleren</string>
     <string name="action_edit_editing">Bewerken</string>
@@ -14,9 +15,14 @@
     <string name="action_edit_cancel">Annuleren</string>
     <string name="action_about">Over</string>
     <string name="action_select_note">Notitie selecteren</string>
-    <string name="action_note_deleted">Notitie is verwijderd</string>
-    <string name="action_note_restored">Notitie is hersteld</string>
+    <string name="action_note_deleted">Notitie verwijderd</string>
+    <string name="action_note_restored">Notitie hersteld</string>
     <string name="action_undo">Ongedaan maken</string>
+    <string name="action_drawer_open">open navigatie</string>
+    <string name="action_drawer_close">sluit navigatie</string>
+    <string name="action_recent">Recent</string>
+    <string name="action_starred">Gemarkeerd</string>
+    <string name="action_uncategorized">Ongecategorizeerd</string>
     <string name="menu_delete">Verwijderen</string>
     <string name="menu_copy">Kopiëren</string>
     <string name="menu_edit">Bewerken</string>
@@ -28,7 +34,6 @@
     <string name="menu_about">Over</string>
 
     <string name="change_category_title">Kies categorie</string>
-    <string name="change_category_message">Voer een categorie naam in</string>
     <string name="copy">Kopie</string>
 
     <string name="listview_updated_today">Vandaag</string>
@@ -41,12 +46,12 @@
     <string name="settings_server_settings">Account instellingen</string>
     <string name="settings_server">Server</string>
     <string name="settings_url">Serveradres</string>
-    <string name="settings_url_check_description">Toont of naar adres gepingd kan worden.</string>
+    <string name="settings_url_check_description">Toont of het adres gepingt kan worden.</string>
     <string name="settings_url_warn_http">WAARSCHUWING: \"http\" is niet veilig. Gebruik \"https\".</string>
     <string name="settings_username">Gebruikersnaam</string>
     <string name="settings_password">Wachtwoord</string>
     <string name="settings_password_unchanged">Wachtwoord (niet gewijzigd)</string>
-    <string name="settings_password_check_description">Aanmeldgegevens op juistheid controleren.</string>
+    <string name="settings_password_check_description">Toont of de login-gegevens correct zijn.</string>
     <string name="settings_submit">Verbinden</string>
     <string name="settings_submitting">Verbinden&#160;&#8230;</string>
     <string name="settings_view_category">Bekijk instellingen</string>
@@ -101,14 +106,20 @@
     <string name="about_app_license">Deze applicatie valt onder de GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Licentie weergeven</string>
     <string name="about_icons_disclaimer_title">Pictogrammen</string>
-    <string name="about_icons_disclaimer">&lt;p>Origineel icoon gemaakt door %1$s&lt;/p>&lt;p>Alle andere pictogrammen gebruikt door deze app zijn &lt;a href=\"https://materialdesignicons.com/\">Material Design-pictogrammen&lt;/a> gemaakt door Google Inc. en gelicenseerd onder een Creative Commons Licentie.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Originele pictogram gemaakt door %1$s&lt;/p>&lt;p>Alle volgende pictogrammen gebruikt door deze app zijn &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> gemaakt door Google Inc. en gelicenseerd onder de Apache 2.0 Licensie.&lt;/p></string>
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Bijdrage</string>
     <string name="about_license_tab_title">Licentie</string>
 
-    <string name="widget_all_notes_title">Alle notities</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Notitielijst</string>
+    <string name="widget_note_list_placeholder">Geen notities</string>
     <string name="widget_single_note_title">Enkele notitie</string>
+    <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
     <string name="widget_create_note">Maak notitie</string>
+    <string name="widget_not_logged_in">Login bij Notities voordat je deze widget gebruikt</string>
+    <string name="widget_entry_fav_contentDescription">Sterpictogram gebruikt om object als favoriet te markeren</string>
+    <string name="widget_app_launcher_contentDescription">Start app</string>
 
     <string name="activity_select_single_note">Selecteer notitie</string>
 

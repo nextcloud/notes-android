@@ -5,6 +5,7 @@
     <string name="no_notes">Ingen noter endnu</string>
     <string name="action_create">Ny note</string>
     <string name="action_settings">Indstillinger</string>
+    <string name="action_search">Søg</string>
     <string name="action_create_save">Gem</string>
     <string name="action_create_cancel">Annullér</string>
     <string name="action_edit_editing">Redigér</string>
@@ -14,9 +15,14 @@
     <string name="action_edit_cancel">Annullér</string>
     <string name="action_about">Om</string>
     <string name="action_select_note">Vælg note</string>
-    <string name="action_note_deleted">Noten er slettet</string>
-    <string name="action_note_restored">Noten er genskabt</string>
+    <string name="action_note_deleted">Note slettet</string>
+    <string name="action_note_restored">Note gendannet</string>
     <string name="action_undo">Fortryd</string>
+    <string name="action_drawer_open">Åben navigation</string>
+    <string name="action_drawer_close">Luk navigation</string>
+    <string name="action_recent">Seneste</string>
+    <string name="action_starred">Stjernemarkeret</string>
+    <string name="action_uncategorized">Ikke kategoriseret</string>
     <string name="menu_delete">Slet</string>
     <string name="menu_copy">Kopiér</string>
     <string name="menu_edit">Redigér</string>
@@ -28,7 +34,6 @@
     <string name="menu_about">Om</string>
 
     <string name="change_category_title">Vælg kategori</string>
-    <string name="change_category_message">Indtast venligst et kategorinavn </string>
     <string name="copy">Kopiér</string>
 
     <string name="listview_updated_today">I dag</string>
@@ -41,24 +46,39 @@
     <string name="settings_server_settings">Kontoindstillinger</string>
     <string name="settings_server">Server</string>
     <string name="settings_url">Server adresse</string>
-    <string name="settings_url_check_description">Viser om adressen kan pinges.</string>
+    <string name="settings_url_check_description">Viser hvorvidt  adressen kan blive pinget.</string>
     <string name="settings_url_warn_http">Advarsel: \"http\" er ikke sikker, benyt venligst \"https\".</string>
     <string name="settings_username">Brugernavn</string>
     <string name="settings_password">Adgangskode</string>
     <string name="settings_password_unchanged">Password (uændret)</string>
-    <string name="settings_password_check_description">Viser om brugeroplysningerne er korrekte.</string>
+    <string name="settings_password_check_description">Viser hvorvidt brugeroplysningerne er korrekte.</string>
     <string name="settings_submit">Tilslut</string>
     <string name="settings_submitting">Tilslutter &#8230;</string>
     <string name="settings_view_category">Vis indstillinger</string>
-    <string name="settings_note_mode">Vis mode for noter</string>
+    <string name="settings_note_mode">Display tilstand for noter</string>
     <string name="settings_notification_title">\"Opret note\" som notifikation</string>
+    <string name="settings_notification">Aktiver for at vise vedvarende notifikationer for hurtigt at oprette nye noter.</string>
     <string name="settings_cert_category">Certifikater</string>
+    <string name="settings_cert_trust_system">Stol på systemcertifikater</string>
+    <string name="settings_cert_trust_system_on">System og bruger tilføjede CA\'er stoles der på (anbefalet)</string>
+    <string name="settings_cert_trust_system_off">System og bruger tilføjede CA\\'er stoles der ikke på</string>
+    <string name="settings_cert_reset">Nulstil (ikke)betroede certifikater</string>
+    <string name="settings_cert_reset_summary">Nulstiller alle brugerdefinerede certifikater</string>
+    <string name="settings_cert_reset_toast">Alle brugerdefinerede certifikater er fjernet</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Noter - forbindelsessikkerhed</string>
+    <string name="trust_certificate_unknown_certificate_found">Noter er stødt på et ukendt certifikat. Stoler du på det?</string>
+
     <!-- Network -->
     <string name="network_connecting">Tilslutter</string>
     <string name="network_connected">Tilsluttet</string>
     <string name="network_disconnected">Intet netværk tilgængeligt</string>
 
+    <!-- Error -->
+    <string name="error_sync">Synkronisering fejlede: %1$s</string>
     <string name="error_invalid_login">Ugyldigt login: %1$s</string>
+    <string name="error_json">er Notes appen aktiveret på serveren?</string>
     <string name="error_io">serverforbindelsen  er ødelagt</string>
     <string name="error_no_network">ingen netværksforbindelse</string>
     <string name="error_server">URL/Server har fejl</string>
@@ -70,24 +90,36 @@
 
     <!-- About -->
     <string name="about_version_title">Version</string>
+    <string name="about_version">Du bruger lige nu &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Maintainer</string>
     <string name="about_developers_title">Udviklere</string>
     <string name="about_translators_title">Oversættere</string>
+    <string name="about_translators_transifex">Nextcloud community på &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testere</string>
     <string name="about_source_title">Kildekode</string>
+    <string name="about_source">Dette projekt er hosted på GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemer</string>
+    <string name="about_issues">Du kan reportere forslag til forbedringer og feature idéer på Github: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Oversæt</string>
+    <string name="about_translate">Join the Nextcloud team on Transifex and help us to translate this app: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">App licens</string>
     <string name="about_app_license">Denne applikation er licenseret under GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Vis licens</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
+    <string name="about_icons_disclaimer">&lt;p>Originale ikom lavet af %1$s&lt;/p>&lt;p>Alle andre ikoner brugt i denne app er &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> lavet af Google Inc. up licenseret under the Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Credits</string>
     <string name="about_contribution_tab_title">Bidrag</string>
     <string name="about_license_tab_title">Licens</string>
 
-    <string name="widget_all_notes_title">Alle noter</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Noteliste </string>
+    <string name="widget_note_list_placeholder">Ingen noter</string>
     <string name="widget_single_note_title">Enkel note</string>
+    <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
     <string name="widget_create_note">Opret note</string>
+    <string name="widget_not_logged_in">Log venligst ind i Notes før du bruger denne widget</string>
+    <string name="widget_entry_fav_contentDescription">Stjerne ikon bruges til at markere som favorit</string>
+    <string name="widget_app_launcher_contentDescription">Åbner app</string>
 
     <string name="activity_select_single_note">Vælg note</string>
 

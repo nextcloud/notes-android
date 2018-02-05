@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ჩანაწერები</string>
+    <string name="no_notes">ჯერ ჩანაწერები არაა</string>
+    <string name="action_create">ახალი ჩანაწერი</string>
+    <string name="action_settings">პარამეტრები</string>
+    <string name="action_search">ძიება</string>
+    <string name="action_create_save">შენახვა</string>
+    <string name="action_create_cancel">უარყოფა</string>
+    <string name="action_edit_editing">შეცვლა</string>
+    <string name="action_edit_save">შენახვა</string>
+    <string name="action_edit_saving">ინახება &#8230;</string>
+    <string name="action_edit_saved">შენახულია</string>
+    <string name="action_edit_cancel">უარყოფა</string>
+    <string name="action_about">ჩვენს შესახებ</string>
+    <string name="action_select_note">აირჩიეთ ჩანაწერი</string>
+    <string name="action_note_deleted">ჩანაწერი გაუქმდა</string>
+    <string name="action_note_restored">ჩანაწერი აღდგა</string>
+    <string name="action_undo">დაბრუნება</string>
+    <string name="action_drawer_open">ნავიგაციის გახსნა</string>
+    <string name="action_drawer_close">ნავიგაციის დახურვა</string>
+    <string name="action_recent">ახალი</string>
+    <string name="action_starred">ვარსკლავიანი</string>
+    <string name="action_uncategorized">არაკატეგორიზირებული</string>
+    <string name="menu_delete">გაუქმება</string>
+    <string name="menu_copy">კოპირება</string>
+    <string name="menu_edit">შეცვლა</string>
+    <string name="menu_cancel">უარყოფა</string>
+    <string name="menu_change_category">კატეგორია</string>
+    <string name="menu_favorite">რჩეული</string>
+    <string name="menu_preview">წინასწარი ჩვენება</string>
+    <string name="menu_share">გაზიარება</string>
+    <string name="menu_about">ჩვენს შესახებ</string>
+
+    <string name="change_category_title">აირჩიეთ კატეგორია</string>
+    <string name="copy">კოპირება</string>
+
+    <string name="listview_updated_today">დღეს</string>
+    <string name="listview_updated_yesterday">გუშინ</string>
+    <string name="listview_updated_this_week">ამ კვირაში</string>
+    <string name="listview_updated_this_month">ამ თვეში</string>
+    <string name="listview_updated_earlier">ადრე</string>
+
+    <!-- Settings -->
+    <string name="settings_server_settings">ანგარიშის პარამეტრები</string>
+    <string name="settings_server">სერვერი</string>
+    <string name="settings_url">სერვერის მისამართი</string>
+    <string name="settings_url_check_description">აჩვენებს იპინგება თუ არა მისამართი</string>
+    <string name="settings_url_warn_http">გაფრთხილება: \"http\" არაა უსაფრთხო. გამოიყენეთ \"https\".</string>
+    <string name="settings_username">მოხმარებლის სახელი</string>
+    <string name="settings_password">პაროლი</string>
+    <string name="settings_password_unchanged">პაროლი (არაა შეცვლილი)</string>
+    <string name="settings_password_check_description">აცვენებს უფლებამოსილებების სისწორეს</string>
+    <string name="settings_submit">დაკავშირება</string>
+    <string name="settings_submitting">ხდება დაკავშირება &#8230;</string>
+    <string name="settings_view_category">პარამეტრების ჩვენება</string>
+    <string name="settings_note_mode">ჩანაწერების ჩვენების რეჟიმი</string>
+    <string name="settings_notification_title">\"შექმენით ჩანაწერი\" როგორც შეტყობინება</string>
+    <string name="settings_notification">ჩანაწერების სწრაფი შექმნისთვის მუდმივი შეტყობინების ამოქმედება.</string>
+    <string name="settings_cert_category">სერტიფიკატები</string>
+    <string name="settings_cert_trust_system">ენდეთ სისტემის სერტიფიკატებს</string>
+    <string name="settings_cert_trust_system_on">სისტემისა და მომხმარებლის მიერ დამატებული სერტიფიკატის ხელმძღვანელობა მიჩნეულ იქნება სანდოდ (რეკომენდირებულია)</string>
+    <string name="settings_cert_trust_system_off">სისტემისა და მომხმარებლის მიერ დამატებული სერტიფიკატის ხელმძღვანელობა არ იქნება მიჩნეული სანდოდ</string>
+    <string name="settings_cert_reset">(არა)სანდრო სერტიფიკატების საწყის მდოგმარეობაში დაბრუნება</string>
+    <string name="settings_cert_reset_summary">აბრუნებს საწყის მდგომარეობაში ყველა კერძო სერტიფიკატს</string>
+    <string name="settings_cert_reset_toast">ყველა კერძო სერტიფიკატი გასუფთავდა</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">ჩანაწერები - კავშირის უსაფრთხოება</string>
+    <string name="trust_certificate_unknown_certificate_found">ჩანაწერს შეხვდა ამოუცნობი სერტიფიკატი. გავხადოთ ის სისტემისთვის სანდო?</string>
+
+    <!-- Network -->
+    <string name="network_connecting">მყარდება კავშირი</string>
+    <string name="network_connected">კავშირი დამყარებულია</string>
+    <string name="network_disconnected">არც ერთი ქსელი არაა ხელმისაწვდომი</string>
+
+    <!-- Error -->
+    <string name="error_sync">სინქრონიზაცია დასრულდა წარუმატებლად: %1$s</string>
+    <string name="error_invalid_login">არასწორი ლოგინი: %1$s</string>
+    <string name="error_json">გააქტიურებულია თუ არა ჩანაწერების აპლიკაცია სერვერზე?</string>
+    <string name="error_io">სერვერთან კავშირი გაწყვეტილია</string>
+    <string name="error_no_network">ქსელთან კავშირი არაა</string>
+    <string name="error_server">URL-ს/სერვერს აქვს შეცდომა</string>
+    <string name="error_url_malformed">არასწორი სერვერის მისამართი</string>
+    <string name="error_username_password_invalid">არასწორი მომხმარებელი ან პაროლი</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">პარამეტრები</string>
+
+    <!-- About -->
+    <string name="about_version_title">ვერსია</string>
+    <string name="about_version">ახლა იყენებთ &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">შემნარჩუნებელი</string>
+    <string name="about_developers_title">დეველოპერები</string>
+    <string name="about_translators_title">მთარგმნელები</string>
+    <string name="about_translators_transifex">Nextcloud საზოგადოება &lt;a href=\"%1$s\">Transifex&lt;/a>-ზე</string>
+    <string name="about_testers_title">შემმოწმებლები</string>
+    <string name="about_source_title">კოდი</string>
+    <string name="about_source">პროექტი განთავსებულია GitHub-ზე: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">პრობლემები</string>
+    <string name="about_issues">GitHub-ის საკითხების მეშვეობით შეგიძლიათ მოიხსენიოთ შეცდომები, წარდაგინოთ დახვეწის წინადადებები და მოთხოვოთ ფუნქციები: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">გადათარგმნეთ</string>
+    <string name="about_translate">შემოგვიერთდით Nextcloud გუნდში Transifex-ზე და დაგვეხმარეთ გადავთარგმნოთ აპლიკაცია: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">აპლიკაციის ლიცენზია</string>
+    <string name="about_app_license">აპლიკაცია ლიცენზირებულია GNU GENERAL PUBLIC LICENCE v3+-ით.</string>
+    <string name="about_app_license_button">ლიცენზიის ჩვენება</string>
+    <string name="about_icons_disclaimer_title">პიქტოგრამები</string>
+    <string name="about_icons_disclaimer">&lt;p>ორიგინალი პიქტოგრამა დაამზადა %1$s-მ&lt;/p>&lt;p>ყველა დანარჩენი Google Inc.-ის მიერ დამზადებული &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> და Apache 2.0-ით ლიცენზირებული პიქტოგრამაა.&lt;/p></string>
+    <string name="about_credits_tab_title">კრედიტები</string>
+    <string name="about_contribution_tab_title">წვლილის შეტანა</string>
+    <string name="about_license_tab_title">ლიცენზია</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">ჩანაწერების სია</string>
+    <string name="widget_note_list_placeholder">ჩანაწერები არაა</string>
+    <string name="widget_single_note_title">ერთი ჩანაწერი</string>
+    <string name="widget_single_note_placeholder_tv">ჩანაწერი ვერ იქნა ნაპოვნი</string>
+    <string name="widget_create_note">ჩანაწერის შექმნა</string>
+    <string name="widget_not_logged_in">ამ ხელსაწყოს გამოსაყენებლად ჯერ გაიარეთ ავტორიზაცია Note-ში</string>
+    <string name="widget_entry_fav_contentDescription">ვარსკლავის პიქტოგრამა რომელიც გამოიყენება ელემენტების რჩეულად მოსანიშნად</string>
+    <string name="widget_app_launcher_contentDescription">რთავს აპლიკაციას</string>
+
+    <string name="activity_select_single_note">აირჩიეთ ჩანაწერი</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">შექმენით ახალი ჩანაწერი</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>გახსენით ცვლილების რეჟიმში</item>
+        <item>გახსენით წინასწარი ჩვენების რეჟიმში</item>
+        <item>დაიმახსოვრე ჩემი ბოლო არჩევანი</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="other">%d არჩეულია</item>
+    </plurals>
+</resources>
