@@ -178,9 +178,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     public long addNoteAndSync(CloudNote note) {
         DBNote dbNote =  new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED);
         long id = addNote(dbNote);
+        notifyNotesChanged();
         getNoteServerSyncHelper().scheduleSync(true);
-        updateSingleNoteWidgets();
-        updateNoteListWidgets();
         return id;
     }
 
@@ -442,8 +441,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         int rows = db.update(table_notes, values, key_id + " = ? AND (" + key_content + " != ? OR " + key_category + " != ?)", new String[]{String.valueOf(newNote.getId()), newNote.getContent(), newNote.getCategory()});
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if(rows > 0) {
-            updateSingleNoteWidgets();
-            updateNoteListWidgets();
+            notifyNotesChanged();
             if(callback!=null) {
                 serverSyncHelper.addCallbackPush(callback);
             }
@@ -522,10 +520,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 values,
                 key_id + " = ?",
                 new String[]{String.valueOf(id)});
+        notifyNotesChanged();
         getNoteServerSyncHelper().scheduleSync(true);
-        updateSingleNoteWidgets();
-        updateNoteListWidgets();
-
         return i;
     }
 
@@ -543,12 +539,18 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id), forceDBStatus.getTitle()});
     }
 
+    /**
+     * Notify about changed notes.
+     */
+    void notifyNotesChanged() {
+        updateSingleNoteWidgets();
+        updateNoteListWidgets();
+    }
 
     /**
      * Update single note widget, if the note data was changed.
-     * TODO This should be replaced by using the observer pattern
      */
-    public void updateSingleNoteWidgets() {
+    private void updateSingleNoteWidgets() {
         Intent intent = new Intent(getContext(), SingleNoteWidget.class);
         intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
         getContext().sendBroadcast(intent);
@@ -556,9 +558,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     /**
      * Update note list widgets, if the note data was changed.
-     * TODO This should be replaced by using the observer pattern
      */
-    public void updateNoteListWidgets() {
+    private void updateNoteListWidgets() {
         Intent intent = new Intent(getContext(), NoteListWidget.class);
         intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
         getContext().sendBroadcast(intent);
