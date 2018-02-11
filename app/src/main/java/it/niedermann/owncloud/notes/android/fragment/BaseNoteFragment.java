@@ -139,8 +139,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     protected void saveNote(@Nullable ICallback callback) {
         Log.d(getClass().getSimpleName(), "saveData()");
         note = db.updateNoteAndSync(note, getContent(), callback);
-        db.updateSingleNoteWidgets();
-        db.updateNoteListWidgets();
         listener.onNoteUpdated(note);
     }
     protected abstract String getContent();
