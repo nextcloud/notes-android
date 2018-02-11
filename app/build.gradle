@@ -7,8 +7,8 @@ android {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 18
-        versionName "0.12.1"
+        versionCode 20
+        versionName "0.13.1"
     }
     buildTypes {
         release {
