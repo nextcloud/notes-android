@@ -87,6 +87,6 @@ public class SupportUtil {
     @WorkerThread
     public static CustomCertManager getCertManager(Context ctx) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(ctx);
-        return new CustomCertManager(ctx, preferences.getBoolean(ctx.getString(R.string.pref_key_trust_system_certs), true), null);
+        return new CustomCertManager(ctx, preferences.getBoolean(ctx.getString(R.string.pref_key_trust_system_certs), true));
     }
 }
