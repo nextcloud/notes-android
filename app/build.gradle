@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 20
         versionName "0.13.1"
     }
@@ -27,7 +28,7 @@ dependencies {
 
     compile 'com.yydcdut:rxmarkdown:0.1.1-beta'
 
-    def supportLibVersion = '26.1.0'
+    def supportLibVersion = '27.0.2'
     compile "com.android.support:support-v4:${supportLibVersion}"
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:design:${supportLibVersion}"
