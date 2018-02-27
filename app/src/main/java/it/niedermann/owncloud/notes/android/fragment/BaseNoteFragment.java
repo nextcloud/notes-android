@@ -6,6 +6,8 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -120,8 +122,10 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, note.getTitle());
                 shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, note.getContent());
-                startActivity(shareIntent);
-                return true;
+
+                ShareActionProvider actionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+                actionProvider.setShareIntent(shareIntent);
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }
