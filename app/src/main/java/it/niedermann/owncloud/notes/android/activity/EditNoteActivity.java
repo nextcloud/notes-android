@@ -44,6 +44,10 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         super.onNewIntent(intent);
         Log.d(getClass().getSimpleName(), "onNewIntent: "+intent.getLongExtra(PARAM_NOTE_ID, 0));
         setIntent(intent);
+        if(fragment != null) {
+            getFragmentManager().beginTransaction().detach(fragment).commit();
+            fragment = null;
+        }
         createFragmentByPreference();
     }
 
