@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.yydcdut.rxmarkdown.RxMDTextView;
@@ -48,9 +47,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
-        final RxMDTextView noteContent = getActivity().findViewById(R.id.single_note_content);
+        final RxMDTextView noteContent = getView().findViewById(R.id.single_note_content);
 
         String content = note.getContent();
         /*
@@ -89,7 +86,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
                     }
                 });
         noteContent.setText(content);
-        ((TextView) getActivity().findViewById(R.id.single_note_content)).setMovementMethod(LinkMovementMethod.getInstance());
+        noteContent.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override

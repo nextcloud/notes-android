@@ -139,7 +139,7 @@ public class NoteEditFragment extends BaseNoteFragment {
     }
 
     private RxMDEditText getContentView() {
-        return (RxMDEditText) getActivity().findViewById(R.id.editContent);
+        return (RxMDEditText) getView().findViewById(R.id.editContent);
     }
 
     /**
