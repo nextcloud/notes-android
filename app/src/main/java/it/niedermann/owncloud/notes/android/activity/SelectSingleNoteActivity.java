@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;

@@ -1,14 +1,7 @@
-package it.niedermann.owncloud.notes.persistence;
+package it.niedermann.owncloud.notes.android.appwidget;
 
 import android.content.Intent;
 import android.widget.RemoteViewsService;
-
-import it.niedermann.owncloud.notes.model.SingleNoteWidgetFactory;
-
-/**
- * Created by dan0xii on 06/09/17.
- *
- */
 
 public class SingleNoteWidgetService extends RemoteViewsService {
     @Override

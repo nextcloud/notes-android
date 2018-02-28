@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.android.activity;
+package it.niedermann.owncloud.notes.android.appwidget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.CreateNoteActivity;
 
 /**
  * Implementation of App Widget functionality.

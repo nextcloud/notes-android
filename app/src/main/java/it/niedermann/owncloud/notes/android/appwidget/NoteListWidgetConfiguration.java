@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.android.activity;
+package it.niedermann.owncloud.notes.android.appwidget;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;

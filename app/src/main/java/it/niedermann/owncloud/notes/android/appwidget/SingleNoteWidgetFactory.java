@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.model;
+package it.niedermann.owncloud.notes.android.appwidget;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.widget.RemoteViewsService;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
-import it.niedermann.owncloud.notes.android.activity.SingleNoteWidget;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
@@ -25,7 +25,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
-    public SingleNoteWidgetFactory(Context context, Intent intent) {
+    SingleNoteWidgetFactory(Context context, Intent intent) {
         mContext = context;
         mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                                             AppWidgetManager.INVALID_APPWIDGET_ID);

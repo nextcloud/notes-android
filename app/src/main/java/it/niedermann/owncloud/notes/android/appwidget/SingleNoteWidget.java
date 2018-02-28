@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.android.activity;
+package it.niedermann.owncloud.notes.android.appwidget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -12,7 +12,7 @@ import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.persistence.SingleNoteWidgetService;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 
 import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
 

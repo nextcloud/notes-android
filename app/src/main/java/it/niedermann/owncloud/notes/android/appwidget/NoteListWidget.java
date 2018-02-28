@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.android.activity;
+package it.niedermann.owncloud.notes.android.appwidget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -10,11 +10,9 @@ import android.net.Uri;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.persistence.NoteListWidgetService;
-
-/**
- * Created by dan0xii on 13/09/2017.
- */
+import it.niedermann.owncloud.notes.android.activity.CreateNoteActivity;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
+import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 
 public class NoteListWidget extends AppWidgetProvider {
 

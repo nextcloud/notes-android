@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.model;
+package it.niedermann.owncloud.notes.android.appwidget;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,18 +12,15 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
+import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
-
-/**
- * Created by dan0xii on 13/09/2017.
- */
 
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     private final Context mContext;
     private NoteSQLiteOpenHelper db;
     private List<DBNote> dbNotes;
 
-    public NoteListWidgetFactory(Context context, Intent intent) {
+    NoteListWidgetFactory(Context context, Intent intent) {
         mContext = context;
     }
 

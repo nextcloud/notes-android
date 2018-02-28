@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import it.niedermann.owncloud.notes.android.activity.NoteListWidget;
-import it.niedermann.owncloud.notes.android.activity.SingleNoteWidget;
+import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
+import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
