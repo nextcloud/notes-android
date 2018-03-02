@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.yydcdut.rxmarkdown.RxMDEditText;
@@ -18,6 +19,7 @@ import com.yydcdut.rxmarkdown.RxMarkdown;
 import com.yydcdut.rxmarkdown.syntax.edit.EditFactory;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
@@ -35,7 +37,15 @@ public class NoteEditFragment extends BaseNoteFragment {
     public static NoteEditFragment newInstance(long noteId) {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
-        b.putSerializable(PARAM_NOTE_ID, noteId);
+        b.putLong(PARAM_NOTE_ID, noteId);
+        f.setArguments(b);
+        return f;
+    }
+
+    public static NoteEditFragment newInstanceWithNewNote(CloudNote newNote) {
+        NoteEditFragment f = new NoteEditFragment();
+        Bundle b = new Bundle();
+        b.putSerializable(PARAM_NEWNOTE, newNote);
         f.setArguments(b);
         return f;
     }
@@ -62,6 +72,10 @@ public class NoteEditFragment extends BaseNoteFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        if(note.getContent().isEmpty()) {
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        }
 
         // workaround for issue yydcdut/RxMarkdown#41
         note.setContent(note.getContent().replace("\r\n", "\n"));
@@ -139,7 +153,7 @@ public class NoteEditFragment extends BaseNoteFragment {
     }
 
     private RxMDEditText getContentView() {
-        return (RxMDEditText) getView().findViewById(R.id.editContent);
+        return getView().findViewById(R.id.editContent);
     }
 
     /**

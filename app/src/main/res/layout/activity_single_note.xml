@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/editContentContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="it.niedermann.owncloud.notes.android.activity.CreateNoteActivity">
+    tools:context="it.niedermann.owncloud.notes.android.activity.EditNoteActivity">
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.yydcdut.rxmarkdown.RxMDTextView
+     <com.yydcdut.rxmarkdown.RxMDTextView
             android:id="@+id/single_note_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +15,5 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/fg_default"
             android:textIsSelectable="true" />
-    </ScrollView>
 
-
-</LinearLayout>
+</ScrollView>
