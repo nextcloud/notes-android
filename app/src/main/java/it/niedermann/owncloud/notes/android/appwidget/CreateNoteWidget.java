@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.CreateNoteActivity;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 
 /**
  * Implementation of App Widget functionality.
@@ -20,7 +20,7 @@ public class CreateNoteWidget extends AppWidgetProvider {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_create_note);
-        Intent intent = new Intent(context, CreateNoteActivity.class);
+        Intent intent = new Intent(context, EditNoteActivity.class);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.widget_create_note, pendingIntent);

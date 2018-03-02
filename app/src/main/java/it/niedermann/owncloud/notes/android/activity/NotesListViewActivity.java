@@ -182,8 +182,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         findViewById(R.id.fab_create).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createIntent = new Intent(getApplicationContext(), CreateNoteActivity.class);
-                createIntent.putExtra(CreateNoteActivity.PARAM_CATEGORY, navigationSelection);
+                Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, navigationSelection);
                 startActivityForResult(createIntent, create_note_cmd);
             }
         });
@@ -362,7 +362,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             // add notification
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
             PendingIntent newNoteIntent = PendingIntent.getActivity(this, 0,
-                    new Intent(this, CreateNoteActivity.class)
+                    new Intent(this, EditNoteActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP),
                     0);
             builder.setSmallIcon(R.drawable.ic_action_new)

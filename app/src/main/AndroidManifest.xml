@@ -57,23 +57,18 @@
             />
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.CreateNoteActivity"
-            android:label="@string/action_create"
-            android:windowSoftInputMode="stateVisible">
+            android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
+            android:label="@string/menu_edit"
+            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:launchMode="singleTask"
+            >
             <intent-filter android:label="@string/action_create">
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
-            android:label="@string/menu_edit"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask"
-            />
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"

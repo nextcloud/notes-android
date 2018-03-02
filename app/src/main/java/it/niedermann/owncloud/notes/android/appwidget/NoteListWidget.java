@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.CreateNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 
@@ -35,7 +34,7 @@ public class NoteListWidget extends AppWidgetProvider {
         views.setOnClickPendingIntent(R.id.widget_note_list_title, pendingIntent);
 
         // Launch create note activity if user taps "+" sign in header
-        intent = new Intent(context, CreateNoteActivity.class);
+        intent = new Intent(context, EditNoteActivity.class);
         pendingIntent = PendingIntent.getActivity(
                                                     context,
                                                     0,

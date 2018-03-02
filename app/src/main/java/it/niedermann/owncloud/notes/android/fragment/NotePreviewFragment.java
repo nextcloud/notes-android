@@ -25,7 +25,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
     public static NotePreviewFragment newInstance(long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
         Bundle b = new Bundle();
-        b.putSerializable(PARAM_NOTE_ID, noteId);
+        b.putLong(PARAM_NOTE_ID, noteId);
         f.setArguments(b);
         return f;
     }

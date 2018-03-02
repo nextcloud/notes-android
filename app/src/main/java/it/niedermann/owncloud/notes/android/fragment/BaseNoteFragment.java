@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
@@ -26,10 +27,12 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     public static final String PARAM_NOTE_ID = "noteId";
+    public static final String PARAM_NEWNOTE = "newNote";
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
     protected DBNote note;
+    @Nullable
     private DBNote originalNote;
     private NoteSQLiteOpenHelper db;
     private NoteFragmentListener listener;
@@ -39,7 +42,16 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         super.onCreate(savedInstanceState);
         if(savedInstanceState==null) {
             long id = getArguments().getLong(PARAM_NOTE_ID);
-            note = originalNote = db.getNote(id);
+            if(id>0) {
+                note = originalNote = db.getNote(id);
+            } else {
+                CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
+                if(cloudNote == null) {
+                    throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE +" is missing.");
+                }
+                note = db.getNote(db.addNoteAndSync(cloudNote));
+                originalNote = null;
+            }
         } else {
             note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
             originalNote = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
@@ -101,11 +113,15 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_cancel:
-                db.updateNoteAndSync(originalNote, null, null);
+                if(originalNote == null) {
+                    db.deleteNoteAndSync(note.getId());
+                } else {
+                    db.updateNoteAndSync(originalNote, null, null);
+                }
                 listener.close();
                 return true;
             case R.id.menu_delete:
-                db.deleteNoteAndSync(originalNote.getId());
+                db.deleteNoteAndSync(note.getId());
                 listener.close();
                 return true;
             case R.id.menu_favorite:
@@ -133,6 +149,12 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     public void onPrepareClose() {
         saveNote(null);
+    }
+
+    public void onFinalClose() {
+        if(originalNote==null && getContent().isEmpty()) {
+            db.deleteNoteAndSync(note.getId());
+        }
     }
 
     /**
