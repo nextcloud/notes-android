@@ -68,7 +68,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private ActionBarDrawerToggle drawerToggle;
     private ItemAdapter adapter = null;
     private NavigationAdapter adapterCategories;
-    private NavigationAdapter.NavigationItem itemRecent, itemStarred, itemUncategorized;
+    private NavigationAdapter.NavigationItem itemRecent, itemFavorites, itemUncategorized;
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
@@ -190,8 +190,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void setupNavigationList(final String selectedItem) {
-        itemRecent = new NavigationAdapter.NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.action_recent), null, R.drawable.ic_clock_grey600_24dp);
-        itemStarred = new NavigationAdapter.NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.action_starred), null, R.drawable.ic_star_grey600_24dp);
+        itemRecent = new NavigationAdapter.NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.label_all_notes), null, R.drawable.ic_clock_grey600_24dp);
+        itemFavorites = new NavigationAdapter.NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_grey600_24dp);
         adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
@@ -204,7 +204,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 // update current selection
                 if(itemRecent == item) {
                     navigationSelection = new Category(null, null);
-                } else if(itemStarred == item) {
+                } else if(itemFavorites == item) {
                     navigationSelection = new Category(null, true);
                 } else if(itemUncategorized == item) {
                     navigationSelection = new Category("", null);
@@ -261,12 +261,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             Map<String, Integer> favorites = db.getFavoritesCount();
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
-            itemStarred.count = numFavorites;
+            itemFavorites.count = numFavorites;
             itemRecent.count = numFavorites + numNonFavorites;
 
             ArrayList<NavigationAdapter.NavigationItem> items = new ArrayList<>();
             items.add(itemRecent);
-            items.add(itemStarred);
+            items.add(itemFavorites);
             NavigationAdapter.NavigationItem lastPrimaryCategory = null, lastSecondaryCategory = null;
             for (NavigationAdapter.NavigationItem item : categories) {
                 int slashIndex = item.label.indexOf('/');
@@ -460,11 +460,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 subtitle = NoteUtil.extendCategory(navigationSelection.category);
             }
         } else if(navigationSelection.favorite!=null && navigationSelection.favorite) {
-            subtitle = getString(R.string.action_starred);
+            subtitle = getString(R.string.label_favorites);
         } else {
-            subtitle = getString(R.string.action_recent);
+            subtitle = getString(R.string.app_name);
         }
-        getSupportActionBar().setSubtitle(subtitle);
+        setTitle(subtitle);
         CharSequence query = null;
         if(searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
             query = searchView.getQuery();
