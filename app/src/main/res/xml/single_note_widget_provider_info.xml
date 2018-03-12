@@ -4,7 +4,7 @@
     android:configure="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity"
     android:minHeight="110dp"
     android:minWidth="180dp"
-    android:minResizeHeight="80dp"
+    android:minResizeHeight="40dp"
     android:minResizeWidth="80dp"
     android:autoAdvanceViewId="@id/single_note_widget_lv"
     android:previewImage="@drawable/single_note_widget3"
