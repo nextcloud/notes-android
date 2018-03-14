@@ -146,5 +146,17 @@
             android:name=".android.appwidget.NoteListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
+        <service
+            android:name="it.niedermann.owncloud.notes.android.quicksettings.NewNoteTileService"
+            android:icon="@drawable/ic_quicksettings_new"
+            android:label="@string/action_create"
+            android:description="@string/action_create"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
     </application>
 </manifest>
