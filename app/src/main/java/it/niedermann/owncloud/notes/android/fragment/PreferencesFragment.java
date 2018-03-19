@@ -39,7 +39,7 @@ public class PreferencesFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Boolean darkTheme = (Boolean) newValue;
-                Notes.setTheme(darkTheme);
+                Notes.setAppTheme(darkTheme);
                 getActivity().setResult(Activity.RESULT_OK);
                 getActivity().finish();
 
