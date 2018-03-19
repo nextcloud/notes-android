@@ -1,8 +1,6 @@
 package it.niedermann.owncloud.notes.model;
 
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.NoteUtil;
+import it.niedermann.owncloud.notes.util.Notes;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.ViewHolder> {
 
@@ -100,13 +99,9 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
                 icon.setVisibility(View.GONE);
             }
             view.setBackgroundColor(isSelected ? view.getResources().getColor(R.color.bg_highlighted) : Color.TRANSPARENT);
-
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(view.getContext());
-            boolean darkTheme = sp.getBoolean(view.getContext().getString(R.string.pref_key_theme), false);
             int textColor = view.getResources().getColor(isSelected ? R.color.primary_dark : R.color.fg_default);
 
-            if(darkTheme) {
-                // TODO dirty. Fix if statement.
+            if (enableHighlighting && Notes.getAppTheme(view.getContext())) {
                 if((item.label != view.getContext().getString(R.string.action_settings)) &&
                    (item.label != view.getContext().getString(R.string.simple_about))) {
                     textColor = view.getResources().getColor(isSelected ? R.color.fg_default :
@@ -134,9 +129,15 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
     private String selectedItem = null;
     @NonNull
     private ClickListener clickListener;
+    private boolean enableHighlighting = true;
 
     public NavigationAdapter(@NonNull ClickListener clickListener) {
         this.clickListener = clickListener;
+    }
+
+    public NavigationAdapter(@NonNull ClickListener clickListener, boolean enableHighlighting) {
+        this.clickListener = clickListener;
+        this.enableHighlighting = enableHighlighting;
     }
 
     @NonNull
