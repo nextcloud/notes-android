@@ -6,7 +6,7 @@ import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
-import it.niedermann.owncloud.notes.android.activity.CreateNoteActivity;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 
 /**
  * This {@link TileService} adds a quick settings tile that leads to the new note view.
@@ -25,7 +25,7 @@ public class NewNoteTileService extends TileService {
     @Override
     public void onClick() {
         // create new note intent
-        final Intent newNoteIntent = new Intent(getApplicationContext(), CreateNoteActivity.class);
+        final Intent newNoteIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
         // ensure it won't open twice if already running
         newNoteIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
