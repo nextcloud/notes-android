@@ -9,7 +9,7 @@
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="it.niedermann.owncloud.notes"
-            android:targetClass="it.niedermann.owncloud.notes.android.activity.CreateNoteActivity" />
+            android:targetClass="it.niedermann.owncloud.notes.android.activity.EditNoteActivity" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 </shortcuts>

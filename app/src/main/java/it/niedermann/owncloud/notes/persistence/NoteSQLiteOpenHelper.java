@@ -165,7 +165,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @SuppressWarnings("UnusedReturnValue")
     public long addNoteAndSync(String content, String category, boolean favorite) {
-        CloudNote note = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, favorite, category, null);
+        CloudNote note = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, getContext()), content, favorite, category, null);
         return addNoteAndSync(note);
     }
 
@@ -429,7 +429,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         if(newContent==null) {
             newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED);
         } else {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNoteTitle(newContent), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED);
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED);
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

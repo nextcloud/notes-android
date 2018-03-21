@@ -1,9 +1,12 @@
 package it.niedermann.owncloud.notes.util;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.util.regex.Pattern;
+
+import it.niedermann.owncloud.notes.R;
 
 /**
  * Provides basic functionality for Note operations.
@@ -50,7 +53,7 @@ public class NoteUtil {
      * @param line String - a single Line which ends with \n
      * @return boolean isEmpty
      */
-    public static boolean isEmptyLine(@Nullable String line) {
+    private static boolean isEmptyLine(@Nullable String line) {
         return removeMarkDown(line).trim().length() == 0;
     }
 
@@ -62,7 +65,7 @@ public class NoteUtil {
      * @return truncated string
      */
     @NonNull
-    public static String truncateString(@NonNull String str, int len) {
+    private static String truncateString(@NonNull String str, int len) {
         return str.substring(0, Math.min(len, str.length()));
     }
 
@@ -80,6 +83,15 @@ public class NoteUtil {
             return "";
     }
 
+    @NonNull
+    public static String generateNonEmptyNoteTitle(@NonNull String content, Context context) {
+        String title = generateNoteTitle(content);
+        if(title.isEmpty()) {
+            title = context.getString(R.string.action_create);
+        }
+        return title;
+    }
+
     /**
      * Generates a title of a content String (reads fist linew which is not empty)
      *
@@ -87,7 +99,7 @@ public class NoteUtil {
      * @return excerpt String
      */
     @NonNull
-    public static String generateNoteTitle(@NonNull String content) {
+    static String generateNoteTitle(@NonNull String content) {
         return getLineWithoutMarkDown(content, 0);
     }
 
@@ -99,7 +111,7 @@ public class NoteUtil {
      * @return lineContent String
      */
     @NonNull
-    public static String getLineWithoutMarkDown(@NonNull String content, int lineNumber) {
+    private static String getLineWithoutMarkDown(@NonNull String content, int lineNumber) {
         String line = "";
         if (content.contains("\n")) {
             String[] lines = content.split("\n");
