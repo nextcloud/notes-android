@@ -97,24 +97,24 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        if(oldVersion<3) {
+        if (oldVersion < 3) {
             recreateDatabase(db);
         }
-        if(oldVersion<4) {
+        if (oldVersion < 4) {
             clearDatabase(db);
         }
-        if(oldVersion<5) {
-            db.execSQL("ALTER TABLE "+table_notes+" ADD COLUMN "+key_remote_id+" INTEGER");
-            db.execSQL("UPDATE "+table_notes+" SET "+key_remote_id+"="+key_id+" WHERE ("+key_remote_id+" IS NULL OR "+key_remote_id+"=0) AND "+key_status+"!=?", new String[]{DBStatus.LOCAL_CREATED.getTitle()});
-            db.execSQL("UPDATE "+table_notes+" SET "+key_remote_id+"=0, "+key_status+"=? WHERE "+key_status+"=?", new String[]{DBStatus.LOCAL_EDITED.getTitle(), DBStatus.LOCAL_CREATED.getTitle()});
+        if (oldVersion < 5) {
+            db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_remote_id + " INTEGER");
+            db.execSQL("UPDATE " + table_notes + " SET " + key_remote_id + "=" + key_id + " WHERE (" + key_remote_id + " IS NULL OR " + key_remote_id + "=0) AND " + key_status + "!=?", new String[]{DBStatus.LOCAL_CREATED.getTitle()});
+            db.execSQL("UPDATE " + table_notes + " SET " + key_remote_id + "=0, " + key_status + "=? WHERE " + key_status + "=?", new String[]{DBStatus.LOCAL_EDITED.getTitle(), DBStatus.LOCAL_CREATED.getTitle()});
         }
-        if(oldVersion<6) {
-            db.execSQL("ALTER TABLE "+table_notes+" ADD COLUMN "+key_favorite+" INTEGER DEFAULT 0");
+        if (oldVersion < 6) {
+            db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_favorite + " INTEGER DEFAULT 0");
         }
-        if(oldVersion<7) {
+        if (oldVersion < 7) {
             dropIndexes(db);
-            db.execSQL("ALTER TABLE "+table_notes+" ADD COLUMN "+key_category+" TEXT NOT NULL DEFAULT ''");
-            db.execSQL("ALTER TABLE "+table_notes+" ADD COLUMN "+key_etag+" TEXT");
+            db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_category + " TEXT NOT NULL DEFAULT ''");
+            db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_etag + " TEXT");
             createIndexes(db);
         }
     }

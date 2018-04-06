@@ -114,16 +114,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setupNotesList();
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
-
-        // Show persistant notification for creating a new note
-        checkNotificationSetting();
     }
 
     @Override
     protected void onResume() {
-        // Show persistant notification for creating a new note
-        checkNotificationSetting();
-
         // refresh and sync every time the activity gets visible
         refreshLists();
         db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
@@ -355,33 +349,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         listNavigationMenu.setAdapter(adapterMenu);
     }
 
-    protected void checkNotificationSetting() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        boolean showNotification = preferences.getBoolean(getString(R.string.pref_key_show_notification), false);
-        if (showNotification) {
-            // add notification
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-            PendingIntent newNoteIntent = PendingIntent.getActivity(this, 0,
-                    new Intent(this, EditNoteActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP),
-                    0);
-            builder.setSmallIcon(R.drawable.ic_action_new)
-                    .setContentTitle(getString(R.string.action_create))
-                    .setContentText("")
-                    .setOngoing(true)
-                    .setContentIntent(newNoteIntent)
-                    .setVisibility(NotificationCompat.VISIBILITY_SECRET);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(
-                    NOTIFICATION_SERVICE);
-
-            notificationManager.notify(10, builder.build());
-        } else {
-            // remove notification
-            NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(NOTIFICATION_SERVICE);
-            nMgr.cancel(10);
-        }
-    }
-
     public void initList() {
         adapter = new ItemAdapter(this);
         RecyclerView listView = findViewById(R.id.recycler_view);
@@ -499,7 +466,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         getMenuInflater().inflate(R.menu.menu_list_view, menu);
         // Associate searchable configuration with the SearchView
         final MenuItem item = menu.findItem(R.id.search);
-        searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView = (SearchView) item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
