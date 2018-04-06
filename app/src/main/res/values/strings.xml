@@ -99,7 +99,7 @@
     <string name="about_maintainer_title">Maintainer</string>
     <string name="about_maintainer" translatable="false">&lt;a href="https://www.niedermann.it/">Niedermann IT-Dienstleistungen&lt;/a></string>
     <string name="about_developers_title">Developers</string>
-    <string name="about_developers" translatable="false">Stefan Niedermann, Kristof Hamann, HeaDBanGer84, Felix Edelmann</string>
+    <string name="about_developers" translatable="false">Stefan Niedermann, Kristof Hamann, HeaDBanGer84, Felix Edelmann, Daniel Bailey</string>
     <string name="about_translators_title">Translators</string>
     <string name="about_translators_transifex">Nextcloud community on &lt;a href="%1$s">Transifex&lt;/a></string>
     <string name="about_testers_title">Testers</string>
