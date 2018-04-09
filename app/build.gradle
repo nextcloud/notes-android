@@ -29,6 +29,7 @@ dependencies {
     implementation 'com.yydcdut:rxmarkdown:0.1.1-beta'
 
     def supportLibVersion = '27.1.1'
+
     implementation "com.android.support:support-v4:${supportLibVersion}"
     implementation "com.android.support:appcompat-v7:${supportLibVersion}"
     implementation "com.android.support:design:${supportLibVersion}"

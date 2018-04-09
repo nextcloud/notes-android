@@ -75,7 +75,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         if (note.isFavorite()) {
             note_content.setViewVisibility(R.id.widget_entry_fav_icon, View.VISIBLE);
         } else {
-            note_content.setViewVisibility(R.id.widget_entry_fav_icon, View.GONE);
+            note_content.setViewVisibility(R.id.widget_entry_fav_icon, View.INVISIBLE);
         }
         note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
 
