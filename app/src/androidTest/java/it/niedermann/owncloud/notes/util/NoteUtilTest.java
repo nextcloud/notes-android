@@ -2,6 +2,9 @@ package it.niedermann.owncloud.notes.util;
 
 import junit.framework.TestCase;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 /**
  * Tests the NoteUtil
  * Created by stefan on 06.10.15.
@@ -39,19 +42,39 @@ public class NoteUtilTest extends TestCase {
     }
 
     public void testIsEmptyLine() {
-        assertTrue(NoteUtil.isEmptyLine(" "));
-        assertTrue(NoteUtil.isEmptyLine("\n"));
-        assertTrue(NoteUtil.isEmptyLine("\n "));
-        assertTrue(NoteUtil.isEmptyLine(" \n"));
-        assertTrue(NoteUtil.isEmptyLine(" \n "));
-        assertFalse(NoteUtil.isEmptyLine("a \n "));
+        try {
+            Method m = NoteUtil.class.getDeclaredMethod("isEmptyLine");
+            m.setAccessible(true);
+            assertTrue((Boolean) m.invoke(null, " "));
+            assertTrue((Boolean) m.invoke(null, "\n"));
+            assertTrue((Boolean) m.invoke(null, "\n "));
+            assertTrue((Boolean) m.invoke(null, " \n"));
+            assertTrue((Boolean) m.invoke(null, " \n "));
+            assertFalse((Boolean) m.invoke(null, "a \n "));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     public void testGetLineWithoutMarkDown() {
-        assertEquals("Test", NoteUtil.getLineWithoutMarkDown("Test", 0));
-        assertEquals("Test", NoteUtil.getLineWithoutMarkDown("\nTest", 0));
-        assertEquals("Foo", NoteUtil.getLineWithoutMarkDown("Foo\nBar", 0));
-        assertEquals("Bar", NoteUtil.getLineWithoutMarkDown("Foo\nBar", 1));
+        try {
+            Method m = NoteUtil.class.getDeclaredMethod("isEmptyLine");
+            m.setAccessible(true);
+            assertEquals("Test", (String) m.invoke(null, "Test", 0));
+            assertEquals("Test", (String) m.invoke(null, "\nTest", 0));
+            assertEquals("Foo", (String) m.invoke(null, "Foo\nBar", 0));
+            assertEquals("Bar", (String) m.invoke(null, "Foo\nBar", 1));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     public void testGenerateNoteTitle() {

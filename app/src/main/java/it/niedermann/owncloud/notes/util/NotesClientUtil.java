@@ -51,6 +51,27 @@ public class NotesClientUtil {
     }
 
     /**
+     * Strips the api part from the path of a given url, handles trailing slash and missing protocol
+     * @param url String
+     * @return formatted URL
+     */
+    public static String formatURL(String url) {
+        if (!url.endsWith("/")) {
+            url += "/";
+        }
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            url = "https://" + url;
+        }
+        String[] replacements = new String[] {"notes/", "v0.2/", "api/", "notes/", "apps/", "index.php/"};
+        for(String replacement: replacements) {
+            if(url.endsWith(replacement)) {
+                url = url.substring(0, url.length() - replacement.length());
+            }
+        }
+        return url;
+    }
+
+    /**
      * @param url      String
      * @param username String
      * @param password String

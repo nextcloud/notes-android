@@ -178,16 +178,13 @@ public class SettingsActivity extends AppCompatActivity {
         String url = field_url.getText().toString().trim();
         String username = field_username.getText().toString();
         String password = field_password.getText().toString();
+
         if(password.isEmpty()) {
             password = old_password;
         }
 
-        if (!url.endsWith("/")) {
-            url += "/";
-        }
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            url = "https://" + url;
-        }
+        url = NotesClientUtil.formatURL(url);
+
         new LoginValidatorAsyncTask().execute(url, username, password);
     }
 
