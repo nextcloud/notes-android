@@ -7,7 +7,7 @@
     android:minResizeHeight="40dp"
     android:minResizeWidth="80dp"
     android:autoAdvanceViewId="@id/single_note_widget_lv"
-    android:previewImage="@drawable/single_note_widget3"
+    android:previewImage="@drawable/single_note_widget"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="0"
     android:widgetCategory="keyguard|home_screen" />

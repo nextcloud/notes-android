@@ -16,7 +16,7 @@
             android:id="@+id/widget_note_header_icon"
             android:layout_width="@dimen/widget_note_list_icon_width"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_launcher"
+            android:src="@mipmap/ic_launcher"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
