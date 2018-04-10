@@ -6,21 +6,21 @@
 
     <ImageView
         android:id="@+id/noteDeleteLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_gravity="start"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/button_padding"
+        android:layout_marginStart="@dimen/button_padding"
         android:contentDescription="@string/menu_delete"
         android:src="@drawable/ic_action_delete" />
 
     <ImageView
         android:id="@+id/noteDeleteRight"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="@dimen/button_padding"
+        android:layout_marginRight="@dimen/button_padding"
         android:contentDescription="@string/menu_delete"
         android:src="@drawable/ic_action_delete" />
 
