@@ -70,7 +70,7 @@
                     android:baseline="14dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_sync_alert_grey600_18dp" />
+                    android:src="@drawable/ic_sync_blue_18dp" />
             </android.support.v7.widget.LinearLayoutCompat>
 
 
