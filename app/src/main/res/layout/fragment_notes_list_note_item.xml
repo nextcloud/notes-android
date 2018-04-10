@@ -18,7 +18,7 @@
         android:id="@+id/noteDeleteRight"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="@dimen/button_padding"
         android:layout_marginRight="@dimen/button_padding"
         android:contentDescription="@string/menu_delete"
