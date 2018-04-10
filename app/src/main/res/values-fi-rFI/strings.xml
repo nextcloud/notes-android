@@ -19,7 +19,6 @@
     <string name="action_note_restored">Muistiinpano palautettu</string>
     <string name="action_undo">Kumoa</string>
     <string name="action_recent">Viimeisimmät</string>
-    <string name="action_starred">Tähdellä merkityt</string>
     <string name="action_uncategorized">Luokittelemattomat</string>
     <string name="menu_delete">Poista</string>
     <string name="menu_copy">Kopioi</string>
@@ -91,6 +90,7 @@
     <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
     <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
     <string name="widget_create_note">Luo muistiinpano</string>
+    <string name="widget_entry_fav_contentDescription">Tähden kuvalla merkitään suosikki</string>
     <string name="activity_select_single_note">Valitse muistiinpano</string>
 
     <!-- Shortcuts -->
