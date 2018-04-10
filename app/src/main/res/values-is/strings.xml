@@ -15,9 +15,9 @@
     <string name="action_edit_cancel">Hætta við</string>
     <string name="action_about">Um hugbúnaðinn</string>
     <string name="action_select_note">Eyða minnispunkti</string>
+    <string name="action_note_restored">Minnispunktur endurheimtur</string>
     <string name="action_undo">Afturkalla</string>
     <string name="action_recent">Nýlegt</string>
-    <string name="action_starred">Stjörnumerkt</string>
     <string name="action_uncategorized">Óflokkað</string>
     <string name="menu_delete">Eyða</string>
     <string name="menu_copy">Afrita</string>
@@ -49,8 +49,6 @@
     <string name="settings_submit">Tengjast</string>
     <string name="settings_submitting">Tengist &#8230;</string>
     <string name="settings_view_category">Skoða stillingar</string>
-    <string name="settings_notification_title">\"Búa til minnispunkt\" sem tilkynning</string>
-    <string name="settings_notification">Virkjaðu þetta til að birta viðvarandi tilkynningu sem gefur fljótvirkan aðgang í að búa til nýja minnispunkta.</string>
     <string name="settings_cert_category">Skilríki</string>
     <string name="settings_cert_trust_system">Treysta skilríkjum kerfis</string>
     <string name="settings_cert_trust_system_on">Vottunaraðilum kerfis og þeim sem notandi bætir við verður treyst (mælt með þessu)</string>

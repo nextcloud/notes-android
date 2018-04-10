@@ -3,6 +3,8 @@
 
     <string name="app_name">Σημειώσεις</string>
     <string name="no_notes">Δεν υπάρχουν ακόμα σημειώσεις</string>
+    <string name="label_all_notes">Όλες οι σημειώσεις</string>
+    <string name="label_favorites">Αγαπημένα</string>
     <string name="action_create">Νέα σημείωση</string>
     <string name="action_settings">Ρυθμίσεις</string>
     <string name="action_search">Ψάχνει</string>
@@ -21,7 +23,6 @@
     <string name="action_drawer_open">Άνοιγμα πλοήγησης</string>
     <string name="action_drawer_close">Κλείσιμο πλοήγησης</string>
     <string name="action_recent">Πρόσφατα</string>
-    <string name="action_starred">Με αστέρι</string>
     <string name="action_uncategorized">Μή-κατηγοριοποιημένα</string>
     <string name="menu_delete">Διαγραφή</string>
     <string name="menu_copy">Αντιγραφή</string>
