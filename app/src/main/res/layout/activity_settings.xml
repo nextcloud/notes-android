@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/settings_url_wrapper"
@@ -65,6 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10pt"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:shadowColor="@color/fg_default_low"
         android:text="@string/settings_submit" />
 
