@@ -9,13 +9,13 @@
     <string name="action_settings">Поставке</string>
     <string name="action_search">Тражи</string>
     <string name="action_create_save">Сачувај</string>
-    <string name="action_create_cancel">Одустани</string>
-    <string name="action_edit_editing">Уреди</string>
+    <string name="simple_cancel">Одустани</string>
+    <string name="simple_edit">Уреди</string>
     <string name="action_edit_save">Сачувај</string>
     <string name="action_edit_saving">Чувам &#8230;</string>
     <string name="action_edit_saved">Сачувано</string>
     <string name="action_edit_cancel">Одустани</string>
-    <string name="action_about">О програму</string>
+    <string name="simple_about">О програму</string>
     <string name="action_select_note">Изабери белешку</string>
     <string name="action_note_deleted">Белешка обрисана</string>
     <string name="action_note_restored">Белешка повраћена</string>

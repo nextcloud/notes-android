@@ -6,13 +6,13 @@
     <string name="action_create">Catatan baru</string>
     <string name="action_settings">Pengaturan</string>
     <string name="action_create_save">Simpan</string>
-    <string name="action_create_cancel">Batal</string>
-    <string name="action_edit_editing">Sunting</string>
+    <string name="simple_cancel">Batal</string>
+    <string name="simple_edit">Sunting</string>
     <string name="action_edit_save">Simpan</string>
     <string name="action_edit_saving">Menyimpan &#8230;</string>
     <string name="action_edit_saved">Tersimpan</string>
     <string name="action_edit_cancel">Batal</string>
-    <string name="action_about">Tentang</string>
+    <string name="simple_about">Tentang</string>
     <string name="action_select_note">Pilih catatan</string>
     <string name="action_note_deleted">Catatan dihapus</string>
     <string name="action_note_restored">Catatan dipulihkan</string>

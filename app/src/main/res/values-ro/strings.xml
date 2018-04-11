@@ -6,13 +6,13 @@
     <string name="action_create">Notă nouă</string>
     <string name="action_settings">Setări</string>
     <string name="action_create_save">Salvează</string>
-    <string name="action_create_cancel">Anulează</string>
-    <string name="action_edit_editing">Editează</string>
+    <string name="simple_cancel">Anulează</string>
+    <string name="simple_edit">Editează</string>
     <string name="action_edit_save">Salvează</string>
     <string name="action_edit_saving">Se salvează &#8230;</string>
     <string name="action_edit_saved">Salvat</string>
     <string name="action_edit_cancel">Anulat</string>
-    <string name="action_about">Despre</string>
+    <string name="simple_about">Despre</string>
     <string name="action_select_note">Selectează o notă</string>
     <string name="action_note_deleted">Nota este ștearsă</string>
     <string name="action_note_restored">Nota este restaurată</string>

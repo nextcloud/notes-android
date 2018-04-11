@@ -58,7 +58,7 @@
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
-            android:label="@string/menu_edit"
+            android:label="@string/simple_edit"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateHidden"
             android:launchMode="singleTask">
@@ -71,7 +71,7 @@
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"
-            android:label="@string/menu_about"
+            android:label="@string/simple_about"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
 
         <activity

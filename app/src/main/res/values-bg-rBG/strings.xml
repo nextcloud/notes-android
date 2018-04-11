@@ -6,13 +6,13 @@
     <string name="action_create">Нова бележка</string>
     <string name="action_settings">Настройки</string>
     <string name="action_create_save">Запис</string>
-    <string name="action_create_cancel">Отказ</string>
-    <string name="action_edit_editing">Редакция</string>
+    <string name="simple_cancel">Отказ</string>
+    <string name="simple_edit">Редакция</string>
     <string name="action_edit_save">Запис</string>
     <string name="action_edit_saving">Записване &#8230;</string>
     <string name="action_edit_saved">Запазено</string>
     <string name="action_edit_cancel">Отказ</string>
-    <string name="action_about">Относно</string>
+    <string name="simple_about">Относно</string>
     <string name="action_select_note">Избор на бележка</string>
     <string name="action_note_deleted">Бележката е изтрита</string>
     <string name="action_note_restored">Бележката е възстановена</string>

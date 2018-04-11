@@ -7,13 +7,13 @@
     <string name="action_settings">Inställningar</string>
     <string name="action_search">Sök</string>
     <string name="action_create_save">Spara</string>
-    <string name="action_create_cancel">Avbryt</string>
-    <string name="action_edit_editing">Redigera</string>
+    <string name="simple_cancel">Avbryt</string>
+    <string name="simple_edit">Redigera</string>
     <string name="action_edit_save">Spara</string>
     <string name="action_edit_saving">Sparar &#8230;</string>
     <string name="action_edit_saved">Sparad</string>
     <string name="action_edit_cancel">Avbryt</string>
-    <string name="action_about">Om</string>
+    <string name="simple_about">Om</string>
     <string name="action_select_note">Välj anteckning</string>
     <string name="action_note_deleted">Anteckningen raderad</string>
     <string name="action_note_restored">Anteckningen återskapad</string>

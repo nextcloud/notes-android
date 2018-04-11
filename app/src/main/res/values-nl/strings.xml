@@ -9,13 +9,13 @@
     <string name="action_settings">Instellingen</string>
     <string name="action_search">Zoeken</string>
     <string name="action_create_save">Opslaan</string>
-    <string name="action_create_cancel">Annuleren</string>
-    <string name="action_edit_editing">Bewerken</string>
+    <string name="simple_cancel">Annuleren</string>
+    <string name="simple_edit">Bewerken</string>
     <string name="action_edit_save">Opslaan</string>
     <string name="action_edit_saving">Opslaan &#8230;</string>
     <string name="action_edit_saved">Opgeslagen</string>
     <string name="action_edit_cancel">Annuleren</string>
-    <string name="action_about">Over</string>
+    <string name="simple_about">Over</string>
     <string name="action_select_note">Notitie selecteren</string>
     <string name="action_note_deleted">Notitie verwijderd</string>
     <string name="action_note_restored">Notitie hersteld</string>

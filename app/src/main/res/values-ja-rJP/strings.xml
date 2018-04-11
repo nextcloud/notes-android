@@ -7,13 +7,13 @@
     <string name="action_settings">設定</string>
     <string name="action_search">検索</string>
     <string name="action_create_save">保存</string>
-    <string name="action_create_cancel">キャンセル</string>
-    <string name="action_edit_editing">編集</string>
+    <string name="simple_cancel">キャンセル</string>
+    <string name="simple_edit">編集</string>
     <string name="action_edit_save">保存</string>
     <string name="action_edit_saving">保存中&#8230;</string>
     <string name="action_edit_saved">保存しました</string>
     <string name="action_edit_cancel">キャンセル</string>
-    <string name="action_about">アプリについて</string>
+    <string name="simple_about">アプリについて</string>
     <string name="action_select_note">ノートを選択</string>
     <string name="action_undo">元に戻す</string>
     <string name="menu_delete">削除</string>

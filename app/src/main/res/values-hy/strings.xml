@@ -6,13 +6,13 @@
     <string name="action_create">նոր գրառում</string>
     <string name="action_settings">կարգավորումներ</string>
     <string name="action_create_save">հիշել</string>
-    <string name="action_create_cancel">չեղարկել</string>
-    <string name="action_edit_editing">մշակել</string>
+    <string name="simple_cancel">չեղարկել</string>
+    <string name="simple_edit">մշակել</string>
     <string name="action_edit_save">հիշել</string>
     <string name="action_edit_saving">հիշել&#8230;</string>
     <string name="action_edit_saved">պահպանված է</string>
     <string name="action_edit_cancel">ընդհատել</string>
-    <string name="action_about">էջի վերաբերյալ</string>
+    <string name="simple_about">էջի վերաբերյալ</string>
     <string name="action_select_note">ընտրելգրառումը</string>
     <string name="menu_delete">հեռացնել</string>
     <string name="menu_copy">պատճենահանել</string>

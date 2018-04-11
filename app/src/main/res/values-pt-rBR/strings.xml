@@ -9,13 +9,13 @@
     <string name="action_settings">Configurações</string>
     <string name="action_search">Pesquisar</string>
     <string name="action_create_save">Salvar</string>
-    <string name="action_create_cancel">Cancelar</string>
-    <string name="action_edit_editing">Editar</string>
+    <string name="simple_cancel">Cancelar</string>
+    <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Salvar</string>
     <string name="action_edit_saving">Salvando&#8230;</string>
     <string name="action_edit_saved">Salvo</string>
     <string name="action_edit_cancel">Cancelar</string>
-    <string name="action_about">Sobre</string>
+    <string name="simple_about">Sobre</string>
     <string name="action_select_note">Selecionar anotação</string>
     <string name="action_note_deleted">Anotação excluída</string>
     <string name="action_note_restored">Anotação restaurada</string>

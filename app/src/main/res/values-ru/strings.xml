@@ -9,13 +9,13 @@
     <string name="action_settings">Настройки</string>
     <string name="action_search">Поиск</string>
     <string name="action_create_save">Сохранить</string>
-    <string name="action_create_cancel">Отмена</string>
-    <string name="action_edit_editing">Редактировать</string>
+    <string name="simple_cancel">Отмена</string>
+    <string name="simple_edit">Редактировать</string>
     <string name="action_edit_save">Сохранить</string>
     <string name="action_edit_saving">Сохранение …</string>
     <string name="action_edit_saved">Сохранено</string>
     <string name="action_edit_cancel">Отмена</string>
-    <string name="action_about">О программе</string>
+    <string name="simple_about">О программе</string>
     <string name="action_select_note">Выбрать заметку</string>
     <string name="action_note_deleted">Заметка удалена</string>
     <string name="action_note_restored">Заметка восстановлена</string>

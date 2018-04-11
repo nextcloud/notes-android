@@ -6,7 +6,7 @@
         android:id="@+id/menu_edit"
         android:icon="@drawable/ic_action_edit"
         android:orderInCategory="100"
-        android:title="@string/menu_edit"
+        android:title="@string/simple_edit"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_share"

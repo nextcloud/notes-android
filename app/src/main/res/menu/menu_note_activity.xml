@@ -11,6 +11,6 @@
         android:id="@+id/menu_edit"
         android:icon="@drawable/ic_action_edit_24dp"
         android:orderInCategory="50"
-        android:title="@string/menu_edit"
+        android:title="@string/simple_edit"
         app:showAsAction="ifRoom" />
 </menu>

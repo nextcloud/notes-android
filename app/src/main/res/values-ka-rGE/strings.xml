@@ -7,13 +7,13 @@
     <string name="action_settings">პარამეტრები</string>
     <string name="action_search">ძიება</string>
     <string name="action_create_save">შენახვა</string>
-    <string name="action_create_cancel">უარყოფა</string>
-    <string name="action_edit_editing">შეცვლა</string>
+    <string name="simple_cancel">უარყოფა</string>
+    <string name="simple_edit">შეცვლა</string>
     <string name="action_edit_save">შენახვა</string>
     <string name="action_edit_saving">ინახება &#8230;</string>
     <string name="action_edit_saved">შენახულია</string>
     <string name="action_edit_cancel">უარყოფა</string>
-    <string name="action_about">ჩვენს შესახებ</string>
+    <string name="simple_about">ჩვენს შესახებ</string>
     <string name="action_select_note">აირჩიეთ ჩანაწერი</string>
     <string name="action_note_deleted">ჩანაწერი გაუქმდა</string>
     <string name="action_note_restored">ჩანაწერი აღდგა</string>

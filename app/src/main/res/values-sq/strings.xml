@@ -7,13 +7,13 @@
     <string name="action_settings">Konfigurimet</string>
     <string name="action_search">Kërko</string>
     <string name="action_create_save">Ruaj</string>
-    <string name="action_create_cancel">Anullo</string>
-    <string name="action_edit_editing">Modifiko</string>
+    <string name="simple_cancel">Anullo</string>
+    <string name="simple_edit">Modifiko</string>
     <string name="action_edit_save">Ruaj</string>
     <string name="action_edit_saving">Duke ruajtur &#8230;</string>
     <string name="action_edit_saved">U ruajt</string>
     <string name="action_edit_cancel">Anullo</string>
-    <string name="action_about">Rreth Nesh</string>
+    <string name="simple_about">Rreth Nesh</string>
     <string name="action_select_note">Selekto shënimin</string>
     <string name="action_note_deleted">Shënimi u fshi</string>
     <string name="action_note_restored">Shënimi i rivendos</string>

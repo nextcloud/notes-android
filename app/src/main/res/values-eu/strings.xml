@@ -6,13 +6,13 @@
     <string name="action_create">Ohar berria</string>
     <string name="action_settings">Ezarpenak</string>
     <string name="action_create_save">Gorde</string>
-    <string name="action_create_cancel">Ezeztatu</string>
-    <string name="action_edit_editing">Aldatu</string>
+    <string name="simple_cancel">Ezeztatu</string>
+    <string name="simple_edit">Aldatu</string>
     <string name="action_edit_save">Gorde</string>
     <string name="action_edit_saving">Gordetzen &#8230;</string>
     <string name="action_edit_saved">Gordeta</string>
     <string name="action_edit_cancel">Ezeztatu</string>
-    <string name="action_about">Honi buruz</string>
+    <string name="simple_about">Honi buruz</string>
     <string name="action_select_note">Oharra aukeratu </string>
     <string name="action_note_deleted">Oharra aukeratuta</string>
     <string name="action_note_restored">Oharra berreskuratuta</string>

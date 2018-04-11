@@ -328,7 +328,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private void setupNavigationMenu() {
         final NavigationAdapter.NavigationItem itemSettings = new NavigationAdapter.NavigationItem("settings", getString(R.string.action_settings), null, R.drawable.ic_settings_grey600_24dp);
-        final NavigationAdapter.NavigationItem itemAbout = new NavigationAdapter.NavigationItem("about", getString(R.string.action_about), null, R.drawable.ic_information_outline_grey600_24dp);
+        final NavigationAdapter.NavigationItem itemAbout = new NavigationAdapter.NavigationItem("about", getString(R.string.simple_about), null, R.drawable.ic_information_outline_grey600_24dp);
 
         ArrayList<NavigationAdapter.NavigationItem> itemsMenu = new ArrayList<>();
         itemsMenu.add(itemSettings);

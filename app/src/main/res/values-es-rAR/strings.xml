@@ -6,13 +6,13 @@
     <string name="action_create">Nueva nota</string>
     <string name="action_settings">Configuraciones</string>
     <string name="action_create_save">Guardar</string>
-    <string name="action_create_cancel">Cancelar</string>
-    <string name="action_edit_editing">Editar</string>
+    <string name="simple_cancel">Cancelar</string>
+    <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
     <string name="action_edit_saving">Guardando &#8230;</string>
     <string name="action_edit_saved">Guardado</string>
     <string name="action_edit_cancel">Cancelar</string>
-    <string name="action_about">Acerca de</string>
+    <string name="simple_about">Acerca de</string>
     <string name="action_select_note">Seleccionar nota</string>
     <string name="action_note_deleted">La nota ha sido borrada</string>
     <string name="action_note_restored">La nota ha sido restaurada</string>
