@@ -3,6 +3,8 @@ package it.niedermann.owncloud.notes.android;
 import android.content.Context;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.WindowManager;
 
 /**
  * Extension of the {@link AppCompatAutoCompleteTextView}, but this one is always open, i.e. you can see the list of suggestions even the TextView is empty.
@@ -42,7 +44,13 @@ public class AlwaysAutoCompleteTextView extends AppCompatAutoCompleteTextView {
 	}
 
 	public void showFullDropDown() {
-		performFiltering(getText(), 0);
-		showDropDown();
+		try {
+			performFiltering(getText(), 0);
+			showDropDown();
+		} catch (WindowManager.BadTokenException e) {
+			// https://github.com/stefan-niedermann/nextcloud-notes/issues/366
+			e.printStackTrace();
+			Log.e(AlwaysAutoCompleteTextView.class.getSimpleName(), "Exception", e);
+		}
 	}
 }
