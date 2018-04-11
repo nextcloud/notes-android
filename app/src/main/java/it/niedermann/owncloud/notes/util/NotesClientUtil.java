@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.util;
 
-import android.content.Context;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.util.Base64;
 import android.util.Log;
@@ -35,6 +33,7 @@ public class NotesClientUtil {
 
         @StringRes
         public final int str;
+
         LoginStatus(@StringRes int str) {
             this.str = str;
         }
@@ -52,6 +51,7 @@ public class NotesClientUtil {
 
     /**
      * Strips the api part from the path of a given url, handles trailing slash and missing protocol
+     *
      * @param url String
      * @return formatted URL
      */
@@ -62,9 +62,9 @@ public class NotesClientUtil {
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = "https://" + url;
         }
-        String[] replacements = new String[] {"notes/", "v0.2/", "api/", "notes/", "apps/", "index.php/"};
-        for(String replacement: replacements) {
-            if(url.endsWith(replacement)) {
+        String[] replacements = new String[]{"notes/", "v0.2/", "api/", "notes/", "apps/", "index.php/"};
+        for (String replacement : replacements) {
+            if (url.endsWith(replacement)) {
                 url = url.substring(0, url.length() - replacement.length());
             }
         }

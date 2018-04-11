@@ -54,6 +54,6 @@ public class DBNote extends CloudNote implements Item, Serializable {
 
     @Override
     public String toString() {
-        return "#"+getId()+"/" + super.toString() + " " + getStatus();
+        return "#" + getId() + "/" + super.toString() + " " + getStatus();
     }
 }

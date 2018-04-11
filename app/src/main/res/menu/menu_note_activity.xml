@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_preview"
         android:icon="@drawable/ic_eye_white_24dp"
         android:orderInCategory="50"
         android:title="@string/menu_preview"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_edit"
         android:icon="@drawable/ic_action_edit_24dp"
         android:orderInCategory="50"
         android:title="@string/menu_edit"
-        app:showAsAction="ifRoom"
-        />
+        app:showAsAction="ifRoom" />
 </menu>

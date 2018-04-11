@@ -28,7 +28,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
         }
 
         int mAppWidgetId = intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                                        AppWidgetManager.INVALID_APPWIDGET_ID);
+                AppWidgetManager.INVALID_APPWIDGET_ID);
 
         if (!(NoteServerSyncHelper.isConfigured(this))) {
             Toast.makeText(this, R.string.widget_not_logged_in, Toast.LENGTH_LONG).show();

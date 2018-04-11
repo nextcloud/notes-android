@@ -28,7 +28,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     SingleNoteWidgetFactory(Context context, Intent intent) {
         mContext = context;
         mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                            AppWidgetManager.INVALID_APPWIDGET_ID);
+                AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
     @Override
@@ -84,8 +84,8 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
      * Returns a RemoteView containing the note content in a TextView and
      * a fillInIntent to handle the user tapping on the item in the list view.
      *
-     * @param   position    The position of the item in the list
-     * @return              The RemoteView at the specified position in the list
+     * @param position The position of the item in the list
+     * @return The RemoteView at the specified position in the list
      */
     @Override
     public RemoteViews getViewAt(int position) {
@@ -94,7 +94,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         }
 
         RemoteViews note_content = new RemoteViews(mContext.getPackageName(),
-                                                    R.layout.widget_single_note_content);
+                R.layout.widget_single_note_content);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 

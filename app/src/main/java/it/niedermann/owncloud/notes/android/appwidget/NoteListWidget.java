@@ -22,13 +22,13 @@ public class NoteListWidget extends AppWidgetProvider {
         // Launch application when user taps the header icon or app title
         Intent intent = new Intent("android.intent.action.MAIN");
         intent.setComponent(new ComponentName(context.getPackageName(),
-                                                NotesListViewActivity.class.getName()));
+                NotesListViewActivity.class.getName()));
 
         PendingIntent pendingIntent = PendingIntent.getActivity(
-                                                            context,
-                                                            0,
-                                                            intent,
-                                                            PendingIntent.FLAG_UPDATE_CURRENT);
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         views.setOnClickPendingIntent(R.id.widget_note_header_icon, pendingIntent);
         views.setOnClickPendingIntent(R.id.widget_note_list_title, pendingIntent);
@@ -36,19 +36,19 @@ public class NoteListWidget extends AppWidgetProvider {
         // Launch create note activity if user taps "+" sign in header
         intent = new Intent(context, EditNoteActivity.class);
         pendingIntent = PendingIntent.getActivity(
-                                                    context,
-                                                    0,
-                                                    intent,
-                                                    PendingIntent.FLAG_UPDATE_CURRENT);
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
         views.setOnClickPendingIntent(R.id.widget_note_list_create_icon, pendingIntent);
 
         Intent templateIntent = new Intent(context, EditNoteActivity.class);
         PendingIntent templatePI = PendingIntent.getActivity(
-                                                            context,
-                                                            0,
-                                                            templateIntent,
-                                                            PendingIntent.FLAG_UPDATE_CURRENT);
+                context,
+                0,
+                templateIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
         Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
 
         serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);

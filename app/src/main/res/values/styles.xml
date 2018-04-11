@@ -10,7 +10,7 @@
         <!-- Snackbar Action Link -->
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="android:buttonStyle">@style/ocbutton</item>
+        <item name="android:buttonStyle">@style/cloudbutton</item>
         <item name="android:windowBackground">@color/bg_normal</item>
     </style>
 
@@ -22,11 +22,11 @@
     <!--
         cert4android is using these styles and we want the same button style in the trust activity
     -->
-    <style name="Widget.AppCompat.Button.Borderless" parent="ocbutton">
+    <style name="Widget.AppCompat.Button.Borderless" parent="cloudbutton">
         <item name="android:layout_margin">2dp</item>
     </style>
-    <style name="Widget.AppCompat.Button.Borderless.Colored" parent="Widget.AppCompat.Button.Borderless">
-    </style>
+
+    <style name="Widget.AppCompat.Button.Borderless.Colored" parent="Widget.AppCompat.Button.Borderless"></style>
 
     <style name="ocAlertDialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/primary</item>
@@ -41,7 +41,7 @@
         <item name="android:layout_alignParentRight">true</item>
     </style>
 
-    <style name="ocbutton" parent="android:style/Widget.Button">
+    <style name="cloudbutton" parent="android:style/Widget.Button">
         <item name="android:background">@color/primary</item>
         <item name="android:textColor">@drawable/button_selector</item>
         <item name="android:padding">@dimen/button_padding</item>

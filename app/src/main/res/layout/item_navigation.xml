@@ -1,44 +1,40 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:paddingLeft="6dp"
-				android:paddingStart="6dp"
-				android:paddingRight="8dp"
-				android:paddingEnd="8dp"
-	>
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="6dp"
+    android:paddingStart="6dp"
+    android:paddingRight="8dp"
+    android:paddingEnd="8dp">
 
-	<ImageView
-		android:id="@+id/navigationItemIcon"
-		android:layout_width="44dp"
-		android:layout_height="44dp"
-		android:padding="10dp"
-		android:scaleType="center"
-		android:src="@drawable/ic_folder_grey600_24dp"
-		/>
+    <ImageView
+        android:id="@+id/navigationItemIcon"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:padding="10dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_folder_grey600_24dp" />
 
-	<TextView
-		android:id="@+id/navigationItemCount"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_alignParentRight="true"
-		android:layout_alignParentEnd="true"
-		android:layout_centerVertical="true"
-		android:padding="8dp"
-		android:textAppearance="@style/NavigationItem"
-		/>
+    <TextView
+        android:id="@+id/navigationItemCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:padding="8dp"
+        android:textAppearance="@style/NavigationItem" />
 
-	<TextView
-		android:id="@+id/navigationItemLabel"
-		android:layout_height="wrap_content"
-		android:layout_width="match_parent"
-		android:layout_toStartOf="@id/navigationItemCount"
-		android:layout_toLeftOf="@id/navigationItemCount"
-		android:layout_centerVertical="true"
-		android:layout_marginLeft="64dp"
-		android:layout_marginStart="64dp"
-		android:ellipsize="end"
-		android:lines="1"
-		android:textAppearance="@style/NavigationItem"
-		/>
+    <TextView
+        android:id="@+id/navigationItemLabel"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_toStartOf="@id/navigationItemCount"
+        android:layout_toLeftOf="@id/navigationItemCount"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textAppearance="@style/NavigationItem" />
 
 </RelativeLayout>

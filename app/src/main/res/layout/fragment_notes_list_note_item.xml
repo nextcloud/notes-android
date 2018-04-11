@@ -35,7 +35,7 @@
             android:layout_centerVertical="true"
             android:padding="16dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
 
         <android.support.v7.widget.LinearLayoutCompat
@@ -52,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_background_selector">
+
                 <TextView
                     android:id="@+id/noteTitle"
                     android:layout_width="wrap_content"
@@ -110,7 +111,7 @@
                     android:layout_marginLeft="8dp"
                     android:singleLine="true"
                     android:textColor="@drawable/list_item_color_selector"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
             </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v7.widget.LinearLayoutCompat>

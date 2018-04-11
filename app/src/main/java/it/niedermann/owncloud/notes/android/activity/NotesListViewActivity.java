@@ -1,19 +1,13 @@
 package it.niedermann.owncloud.notes.android.activity;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -35,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -64,7 +60,22 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private final static int server_settings = 2;
     private final static int about = 3;
 
-    private DrawerLayout drawerLayout;
+
+    @BindView(R.id.notesListActivityActionBar)
+    Toolbar toolbar;
+    @BindView(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
+    @BindView(R.id.swiperefreshlayout)
+    SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.fab_create)
+    View fabCreate;
+    @BindView(R.id.navigationList)
+    RecyclerView listNavigationCategories;
+    @BindView(R.id.navigationMenu)
+    RecyclerView listNavigationMenu;
+    @BindView(R.id.recycler_view)
+    RecyclerView listView;
+
     private ActionBarDrawerToggle drawerToggle;
     private ItemAdapter adapter = null;
     private NavigationAdapter adapterCategories;
@@ -72,7 +83,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
-    private SwipeRefreshLayout swipeRefreshLayout = null;
     private NoteSQLiteOpenHelper db = null;
     private SearchView searchView = null;
     private ICallback syncCallBack = new ICallback() {
@@ -99,14 +109,15 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
         }
-        String categoryAdapterSelectedItem=ADAPTER_KEY_RECENT;
-        if(savedInstanceState!=null) {
+        String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
+        if (savedInstanceState != null) {
             navigationSelection = (Category) savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
             navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
 
         setContentView(R.layout.drawer_layout);
+        ButterKnife.bind(this);
 
         db = NoteSQLiteOpenHelper.getInstance(this);
 
@@ -148,9 +159,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void setupActionBar() {
-        Toolbar toolbar = findViewById(R.id.notesListActivityActionBar);
         setSupportActionBar(toolbar);
-        drawerLayout = findViewById(R.id.drawerLayout);
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerLayout.addDrawerListener(drawerToggle);
@@ -159,11 +168,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private void setupNotesList() {
         initList();
         // Pull to Refresh
-        swipeRefreshLayout = findViewById(R.id.swiperefreshlayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if(db.getNoteServerSyncHelper().isSyncPossible()) {
+                if (db.getNoteServerSyncHelper().isSyncPossible()) {
                     synchronize();
                 } else {
                     swipeRefreshLayout.setRefreshing(false);
@@ -173,7 +181,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         });
 
         // Floating Action Button
-        findViewById(R.id.fab_create).setOnClickListener(new View.OnClickListener() {
+        fabCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
@@ -196,27 +204,27 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 adapterCategories.setSelectedItem(item.id);
 
                 // update current selection
-                if(itemRecent == item) {
+                if (itemRecent == item) {
                     navigationSelection = new Category(null, null);
-                } else if(itemFavorites == item) {
+                } else if (itemFavorites == item) {
                     navigationSelection = new Category(null, true);
-                } else if(itemUncategorized == item) {
+                } else if (itemUncategorized == item) {
                     navigationSelection = new Category("", null);
                 } else {
                     navigationSelection = new Category(item.label, null);
                 }
 
                 // auto-close sub-folder in Navigation if selection is outside of that folder
-                if(navigationOpen != null) {
-                    int slashIndex = navigationSelection.category==null ? -1 : navigationSelection.category.indexOf('/');
-                    String rootCategory = slashIndex<0 ? navigationSelection.category : navigationSelection.category.substring(0, slashIndex);
+                if (navigationOpen != null) {
+                    int slashIndex = navigationSelection.category == null ? -1 : navigationSelection.category.indexOf('/');
+                    String rootCategory = slashIndex < 0 ? navigationSelection.category : navigationSelection.category.substring(0, slashIndex);
                     if (!navigationOpen.equals(rootCategory)) {
                         navigationOpen = null;
                     }
                 }
 
                 // update views
-                if(closeNavigation) {
+                if (closeNavigation) {
                     drawerLayout.closeDrawers();
                 }
                 refreshLists();
@@ -224,10 +232,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
             @Override
             public void onIconClick(NavigationAdapter.NavigationItem item) {
-                if(item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(navigationOpen)) {
+                if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(navigationOpen)) {
                     navigationOpen = item.label;
                     selectItem(item, false);
-                } else if(item.icon== NavigationAdapter.ICON_MULTIPLE || item.icon==NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(navigationOpen)) {
+                } else if (item.icon == NavigationAdapter.ICON_MULTIPLE || item.icon == NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(navigationOpen)) {
                     navigationOpen = null;
                     refreshLists();
                 } else {
@@ -236,7 +244,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
         });
         adapterCategories.setSelectedItem(selectedItem);
-        RecyclerView listNavigationCategories = findViewById(R.id.navigationList);
         listNavigationCategories.setAdapter(adapterCategories);
     }
 
@@ -244,7 +251,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
             List<NavigationAdapter.NavigationItem> categories = db.getCategories();
-            if(!categories.isEmpty() && categories.get(0).label.isEmpty()) {
+            if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
                 itemUncategorized.label = getString(R.string.action_uncategorized);
                 itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
@@ -264,32 +271,32 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             NavigationAdapter.NavigationItem lastPrimaryCategory = null, lastSecondaryCategory = null;
             for (NavigationAdapter.NavigationItem item : categories) {
                 int slashIndex = item.label.indexOf('/');
-                String currentPrimaryCategory = slashIndex<0 ? item.label : item.label.substring(0, slashIndex);
+                String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
                 String currentSecondaryCategory = null;
                 boolean isCategoryOpen = currentPrimaryCategory.equals(navigationOpen);
 
-                if(isCategoryOpen && !currentPrimaryCategory.equals(item.label)) {
-                    String currentCategorySuffix = item.label.substring(navigationOpen.length()+1);
+                if (isCategoryOpen && !currentPrimaryCategory.equals(item.label)) {
+                    String currentCategorySuffix = item.label.substring(navigationOpen.length() + 1);
                     int subSlashIndex = currentCategorySuffix.indexOf('/');
-                    currentSecondaryCategory = subSlashIndex<0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
+                    currentSecondaryCategory = subSlashIndex < 0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
                 }
 
-                boolean belongsToLastPrimaryCategory = lastPrimaryCategory!=null && currentPrimaryCategory.equals(lastPrimaryCategory.label);
-                boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory!=null && lastSecondaryCategory.label.equals(currentPrimaryCategory+"/"+currentSecondaryCategory);
+                boolean belongsToLastPrimaryCategory = lastPrimaryCategory != null && currentPrimaryCategory.equals(lastPrimaryCategory.label);
+                boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentPrimaryCategory + "/" + currentSecondaryCategory);
 
-                if(isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory!=null) {
-                    lastPrimaryCategory = new NavigationAdapter.NavigationItem("category:"+currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
+                if (isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory != null) {
+                    lastPrimaryCategory = new NavigationAdapter.NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
                     items.add(lastPrimaryCategory);
                     belongsToLastPrimaryCategory = true;
                 }
 
-                if(belongsToLastPrimaryCategory && belongsToLastSecondaryCategory) {
+                if (belongsToLastPrimaryCategory && belongsToLastSecondaryCategory) {
                     lastSecondaryCategory.count += item.count;
                     lastSecondaryCategory.icon = NavigationAdapter.ICON_SUB_MULTIPLE;
-                } else if(belongsToLastPrimaryCategory) {
-                    if(isCategoryOpen) {
+                } else if (belongsToLastPrimaryCategory) {
+                    if (isCategoryOpen) {
                         item.label = currentPrimaryCategory + "/" + currentSecondaryCategory;
-                        item.id = "category:"+item.label;
+                        item.id = "category:" + item.label;
                         item.icon = NavigationAdapter.ICON_SUB_FOLDER;
                         items.add(item);
                         lastSecondaryCategory = item;
@@ -299,11 +306,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         lastSecondaryCategory = null;
                     }
                 } else {
-                    if(isCategoryOpen) {
+                    if (isCategoryOpen) {
                         item.icon = NavigationAdapter.ICON_MULTIPLE_OPEN;
                     } else {
                         item.label = currentPrimaryCategory;
-                        item.id = "category:"+item.label;
+                        item.id = "category:" + item.label;
                     }
                     items.add(item);
                     lastPrimaryCategory = item;
@@ -330,10 +337,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         NavigationAdapter adapterMenu = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
-                if(item == itemSettings) {
+                if (item == itemSettings) {
                     Intent settingsIntent = new Intent(getApplicationContext(), PreferencesActivity.class);
                     startActivityForResult(settingsIntent, server_settings);
-                } else if(item == itemAbout) {
+                } else if (item == itemAbout) {
                     Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
                     startActivityForResult(aboutIntent, about);
                 }
@@ -345,13 +352,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
         });
         adapterMenu.setItems(itemsMenu);
-        RecyclerView listNavigationMenu = findViewById(R.id.navigationMenu);
         listNavigationMenu.setAdapter(adapterMenu);
     }
 
     public void initList() {
         adapter = new ItemAdapter(this);
-        RecyclerView listView = findViewById(R.id.recycler_view);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
         ItemTouchHelper touchHelper = new ItemTouchHelper(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -405,7 +410,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
                 // show delete icon on the right side
-                noteViewHolder.showSwipeDelete(dX>0);
+                noteViewHolder.showSwipeDelete(dX > 0);
                 // move only swipeable part of item (not leave-behind)
                 getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.noteSwipeable, dX, dY, actionState, isCurrentlyActive);
             }
@@ -420,20 +425,20 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private void refreshLists() {
         String subtitle = "";
-        if(navigationSelection.category!=null) {
-            if(navigationSelection.category.isEmpty()) {
+        if (navigationSelection.category != null) {
+            if (navigationSelection.category.isEmpty()) {
                 subtitle = getString(R.string.action_uncategorized);
             } else {
                 subtitle = NoteUtil.extendCategory(navigationSelection.category);
             }
-        } else if(navigationSelection.favorite!=null && navigationSelection.favorite) {
+        } else if (navigationSelection.favorite != null && navigationSelection.favorite) {
             subtitle = getString(R.string.label_favorites);
         } else {
             subtitle = getString(R.string.app_name);
         }
         setTitle(subtitle);
         CharSequence query = null;
-        if(searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
+        if (searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
             query = searchView.getQuery();
         }
         LoadNotesListTask.NotesLoadedListener callback = new LoadNotesListTask.NotesLoadedListener() {
@@ -512,7 +517,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
             db = NoteSQLiteOpenHelper.getInstance(this);
-            if(db.getNoteServerSyncHelper().isSyncPossible()) {
+            if (db.getNoteServerSyncHelper().isSyncPossible()) {
                 adapter.removeAll();
                 swipeRefreshLayout.setRefreshing(true);
                 synchronize();
@@ -581,7 +586,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     @Override
     public void onBackPressed() {
-        if (searchView==null || searchView.isIconified()) {
+        if (searchView == null || searchView.isIconified()) {
             super.onBackPressed();
         } else {
             searchView.setIconified(true);

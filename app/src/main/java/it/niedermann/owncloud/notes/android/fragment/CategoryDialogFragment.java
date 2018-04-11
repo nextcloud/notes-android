@@ -17,6 +17,8 @@ import android.widget.Filter;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.AlwaysAutoCompleteTextView;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
@@ -35,6 +37,7 @@ public class CategoryDialogFragment extends DialogFragment {
     public interface CategoryDialogListener {
         /**
          * This method is called after the user has chosen a category.
+         *
          * @param category Name of the category which was chosen by the user.
          */
         void onCategoryChosen(String category);
@@ -42,14 +45,15 @@ public class CategoryDialogFragment extends DialogFragment {
 
     public static final String PARAM_CATEGORY = "category";
 
-    private AlwaysAutoCompleteTextView textCategory;
+    @BindView(R.id.editCategory)
+    AlwaysAutoCompleteTextView textCategory;
     private FolderArrayAdapter adapter;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_change_category, null);
-        textCategory = dialogView.findViewById(R.id.editCategory);
-        if(savedInstanceState==null) {
+        ButterKnife.bind(this, dialogView);
+        if (savedInstanceState == null) {
             textCategory.setText(getArguments().getString(PARAM_CATEGORY));
         }
         adapter = new FolderArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item);
@@ -64,7 +68,7 @@ public class CategoryDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         CategoryDialogListener listener;
                         Fragment target = getTargetFragment();
-                        if(target != null && target instanceof CategoryDialogListener) {
+                        if (target != null && target instanceof CategoryDialogListener) {
                             listener = (CategoryDialogListener) target;
                         } else {
                             listener = (CategoryDialogListener) getActivity();
@@ -94,8 +98,8 @@ public class CategoryDialogFragment extends DialogFragment {
             NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
             List<NavigationAdapter.NavigationItem> items = db.getCategories();
             List<String> categories = new ArrayList<>();
-            for(NavigationAdapter.NavigationItem item : items) {
-                if(!item.label.isEmpty()) {
+            for (NavigationAdapter.NavigationItem item : items) {
+                if (!item.label.isEmpty()) {
                     categories.add(item.label);
                 }
             }
@@ -105,7 +109,7 @@ public class CategoryDialogFragment extends DialogFragment {
         @Override
         protected void onPostExecute(List<String> categories) {
             adapter.setData(categories);
-            if(textCategory.getText().length()==0) {
+            if (textCategory.getText().length() == 0) {
                 textCategory.showFullDropDown();
             } else {
                 textCategory.dismissDropDown();
@@ -132,7 +136,7 @@ public class CategoryDialogFragment extends DialogFragment {
         @NonNull
         @Override
         public Filter getFilter() {
-            if(filter==null) {
+            if (filter == null) {
                 filter = new FolderFilter();
             }
             return filter;

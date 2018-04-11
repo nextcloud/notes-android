@@ -23,6 +23,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     public interface NoteFragmentListener {
         void close();
+
         void onNoteUpdated(DBNote note);
     }
 
@@ -40,14 +41,14 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState==null) {
+        if (savedInstanceState == null) {
             long id = getArguments().getLong(PARAM_NOTE_ID);
-            if(id>0) {
+            if (id > 0) {
                 note = originalNote = db.getNote(id);
             } else {
                 CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
-                if(cloudNote == null) {
-                    throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE +" is missing.");
+                if (cloudNote == null) {
+                    throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE + " is missing.");
                 }
                 note = db.getNote(db.addNoteAndSync(cloudNote));
                 originalNote = null;
@@ -64,8 +65,8 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         super.onAttach(activity);
         try {
             listener = (NoteFragmentListener) activity;
-        } catch(ClassCastException e) {
-            throw new ClassCastException(activity.getClass()+" must implement "+NoteFragmentListener.class);
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.getClass() + " must implement " + NoteFragmentListener.class);
         }
         db = NoteSQLiteOpenHelper.getInstance(activity);
     }
@@ -113,7 +114,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_cancel:
-                if(originalNote == null) {
+                if (originalNote == null) {
                     db.deleteNoteAndSync(note.getId());
                 } else {
                     db.updateNoteAndSync(originalNote, null, null);
@@ -152,7 +153,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     public void onFinalClose() {
-        if(originalNote==null && getContent().isEmpty()) {
+        if (originalNote == null && getContent().isEmpty()) {
             db.deleteNoteAndSync(note.getId());
         }
     }
@@ -167,6 +168,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         note = db.updateNoteAndSync(note, getContent(), callback);
         listener.onNoteUpdated(note);
     }
+
     protected abstract String getContent();
 
     /**
@@ -176,7 +178,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         final String fragmentId = "fragment_category";
         FragmentManager manager = getFragmentManager();
         Fragment frag = manager.findFragmentByTag(fragmentId);
-        if(frag!=null) {
+        if (frag != null) {
             manager.beginTransaction().remove(frag).commit();
         }
         Bundle arguments = new Bundle();

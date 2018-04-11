@@ -44,7 +44,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     /**
      * getCount()
      *
-     * @return  Total number of entries
+     * @return Total number of entries
      */
     @Override
     public int getCount() {
@@ -62,7 +62,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         }
 
         RemoteViews note_content = new RemoteViews(mContext.getPackageName(),
-                                                    R.layout.widget_entry);
+                R.layout.widget_entry);
         DBNote note = dbNotes.get(i);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();

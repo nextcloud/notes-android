@@ -11,6 +11,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -31,7 +33,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
      * Updates the item list and notifies respective view to update.
-     * @param itemList    List of items to be set
+     *
+     * @param itemList List of items to be set
      */
     public void setItemList(@NonNull List<Item> itemList) {
         this.itemList = itemList;
@@ -40,6 +43,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
      * Adds the given note to the top of the list.
+     *
      * @param note Note that should be added.
      */
     public void add(@NonNull DBNote note) {
@@ -50,7 +54,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
      * Replaces a note with an updated version
-     * @param note Note with the changes.
+     *
+     * @param note     Note with the changes.
      * @param position position in the list of the node
      */
     public void replace(@NonNull DBNote note, int position) {
@@ -158,31 +163,35 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface NoteClickListener {
         void onNoteClick(int position, View v);
+
         void onNoteFavoriteClick(int position, View v);
+
         boolean onNoteLongClick(int position, View v);
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
+        @BindView(R.id.noteSwipeable)
         public View noteSwipeable;
-        ImageView noteDeleteLeft, noteDeleteRight;
+        @BindView(R.id.noteDeleteLeft)
+        ImageView noteDeleteLeft;
+        @BindView(R.id.noteDeleteRight)
+        ImageView noteDeleteRight;
+        @BindView(R.id.noteTitle)
         TextView noteTitle;
+        @BindView(R.id.noteCategory)
         TextView noteCategory;
+        @BindView(R.id.noteExcerpt)
         TextView noteExcerpt;
+        @BindView(R.id.noteStatus)
         ImageView noteStatus;
+        @BindView(R.id.noteFavorite)
         ImageView noteFavorite;
 
-        private NoteViewHolder(View v) {
-            super(v);
-            this.noteSwipeable = v.findViewById(R.id.noteSwipeable);
-            this.noteDeleteLeft = v.findViewById(R.id.noteDeleteLeft);
-            this.noteDeleteRight = v.findViewById(R.id.noteDeleteRight);
-            this.noteTitle = v.findViewById(R.id.noteTitle);
-            this.noteCategory = v.findViewById(R.id.noteCategory);
-            this.noteExcerpt = v.findViewById(R.id.noteExcerpt);
-            this.noteStatus = v.findViewById(R.id.noteStatus);
-            this.noteFavorite = v.findViewById(R.id.noteFavorite);
-            v.setOnClickListener(this);
-            v.setOnLongClickListener(this);
+        private NoteViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+            view.setOnClickListener(this);
+            view.setOnLongClickListener(this);
         }
 
         @Override
@@ -202,11 +211,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class SectionViewHolder extends RecyclerView.ViewHolder {
-        private TextView sectionTitle;
+        @BindView(R.id.sectionTitle)
+        TextView sectionTitle;
 
-        private SectionViewHolder(View v) {
-            super(v);
-            this.sectionTitle = v.findViewById(R.id.sectionTitle);
+        private SectionViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
         }
     }
 }

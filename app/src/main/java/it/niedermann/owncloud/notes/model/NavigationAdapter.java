@@ -14,6 +14,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -53,18 +55,22 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
     class ViewHolder extends RecyclerView.ViewHolder {
         @NonNull
         private final View view;
-        @NonNull
-        private final TextView name, count;
-        @NonNull
-        private final ImageView icon;
+
+        @BindView(R.id.navigationItemLabel)
+        TextView name;
+
+        @BindView(R.id.navigationItemCount)
+        TextView count;
+
+        @BindView(R.id.navigationItemIcon)
+        ImageView icon;
+
         private NavigationItem currentItem;
 
         ViewHolder(@NonNull View itemView, @NonNull final ClickListener clickListener) {
             super(itemView);
             view = itemView;
-            name = itemView.findViewById(R.id.navigationItemLabel);
-            count = itemView.findViewById(R.id.navigationItemCount);
-            icon = itemView.findViewById(R.id.navigationItemIcon);
+            ButterKnife.bind(this, view);
             icon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -83,9 +89,9 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
             currentItem = item;
             boolean isSelected = item.id.equals(selectedItem);
             name.setText(NoteUtil.extendCategory(item.label));
-            count.setVisibility(item.count==null ? View.GONE : View.VISIBLE);
+            count.setVisibility(item.count == null ? View.GONE : View.VISIBLE);
             count.setText(String.valueOf(item.count));
-            if(item.icon > 0) {
+            if (item.icon > 0) {
                 icon.setImageDrawable(icon.getResources().getDrawable(item.icon));
                 icon.setVisibility(View.VISIBLE);
             } else {
@@ -101,6 +107,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
 
     public interface ClickListener {
         void onItemClick(NavigationItem item);
+
         void onIconClick(NavigationItem item);
     }
 
@@ -140,6 +147,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         selectedItem = id;
         notifyDataSetChanged();
     }
+
     public String getSelectedItem() {
         return selectedItem;
     }

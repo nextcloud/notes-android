@@ -29,7 +29,7 @@ public class NoteUtil {
      */
     @NonNull
     public static String removeMarkDown(@Nullable String s) {
-        if(s==null)
+        if (s == null)
             return "";
         s = pLists.matcher(s).replaceAll("");
         s = pHeadings.matcher(s).replaceAll("$1");
@@ -60,6 +60,7 @@ public class NoteUtil {
     /**
      * Truncates a string to a desired maximum length.
      * Like String.substring(int,int), but throw no exception if desired length is longer than the string.
+     *
      * @param str String to truncate
      * @param len Maximum length of the resulting string
      * @return truncated string
@@ -86,7 +87,7 @@ public class NoteUtil {
     @NonNull
     public static String generateNonEmptyNoteTitle(@NonNull String content, Context context) {
         String title = generateNoteTitle(content);
-        if(title.isEmpty()) {
+        if (title.isEmpty()) {
             title = context.getString(R.string.action_create);
         }
         return title;

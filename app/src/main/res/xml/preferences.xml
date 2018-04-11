@@ -3,8 +3,9 @@
 
     <PreferenceCategory android:title="@string/settings_server">
         <Preference android:title="@string/settings_server_settings">
-            <intent android:targetPackage="it.niedermann.owncloud.notes"
-                    android:targetClass="it.niedermann.owncloud.notes.android.activity.SettingsActivity" />
+            <intent
+                android:targetPackage="it.niedermann.owncloud.notes"
+                android:targetClass="it.niedermann.owncloud.notes.android.activity.SettingsActivity" />
         </Preference>
     </PreferenceCategory>
 
@@ -15,8 +16,7 @@
             android:title="@string/settings_note_mode"
             android:summary="%s"
             android:entries="@array/noteMode_entries"
-            android:entryValues="@array/noteMode_values"
-            />
+            android:entryValues="@array/noteMode_values" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_cert_category">
@@ -25,13 +25,11 @@
             android:key="@string/pref_key_trust_system_certs"
             android:title="@string/settings_cert_trust_system"
             android:summaryOn="@string/settings_cert_trust_system_on"
-            android:summaryOff="@string/settings_cert_trust_system_off"
-            />
+            android:summaryOff="@string/settings_cert_trust_system_off" />
         <Preference
             android:key="@string/pref_key_reset_trust"
             android:title="@string/settings_cert_reset"
-            android:summary="@string/settings_cert_reset_summary"
-            />
+            android:summary="@string/settings_cert_reset_summary" />
     </PreferenceCategory>
 
 </PreferenceScreen>

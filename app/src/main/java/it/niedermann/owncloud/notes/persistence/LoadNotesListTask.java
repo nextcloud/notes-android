@@ -54,7 +54,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         List<Item> itemList = new ArrayList<>();
         String currentCategory = category.category;
         for (DBNote note : noteList) {
-            if(currentCategory != null && !currentCategory.equals(note.getCategory())) {
+            if (currentCategory != null && !currentCategory.equals(note.getCategory())) {
                 itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory())));
             }
             itemList.add(note);
@@ -136,6 +136,6 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 
     @Override
     protected void onPostExecute(List<Item> items) {
-        callback.onNotesLoaded(items, category.category==null);
+        callback.onNotesLoaded(items, category.category == null);
     }
 }

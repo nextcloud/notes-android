@@ -11,46 +11,46 @@ import android.view.WindowManager;
  */
 public class AlwaysAutoCompleteTextView extends AppCompatAutoCompleteTextView {
 
-	private int myThreshold;
+    private int myThreshold;
 
-	public AlwaysAutoCompleteTextView(Context context) {
-		super(context);
-	}
+    public AlwaysAutoCompleteTextView(Context context) {
+        super(context);
+    }
 
-	public AlwaysAutoCompleteTextView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-	}
+    public AlwaysAutoCompleteTextView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
 
-	public AlwaysAutoCompleteTextView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public AlwaysAutoCompleteTextView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	@Override
-	public void setThreshold(int threshold) {
-		if (threshold < 0) {
-			threshold = 0;
-		}
-		myThreshold = threshold;
-	}
+    @Override
+    public void setThreshold(int threshold) {
+        if (threshold < 0) {
+            threshold = 0;
+        }
+        myThreshold = threshold;
+    }
 
-	@Override
-	public boolean enoughToFilter() {
-		return getText().length() >= myThreshold;
-	}
+    @Override
+    public boolean enoughToFilter() {
+        return getText().length() >= myThreshold;
+    }
 
-	@Override
-	public int getThreshold() {
-		return myThreshold;
-	}
+    @Override
+    public int getThreshold() {
+        return myThreshold;
+    }
 
-	public void showFullDropDown() {
-		try {
-			performFiltering(getText(), 0);
-			showDropDown();
-		} catch (WindowManager.BadTokenException e) {
-			// https://github.com/stefan-niedermann/nextcloud-notes/issues/366
-			e.printStackTrace();
-			Log.e(AlwaysAutoCompleteTextView.class.getSimpleName(), "Exception", e);
-		}
-	}
+    public void showFullDropDown() {
+        try {
+            performFiltering(getText(), 0);
+            showDropDown();
+        } catch (WindowManager.BadTokenException e) {
+            // https://github.com/stefan-niedermann/nextcloud-notes/issues/366
+            e.printStackTrace();
+            Log.e(AlwaysAutoCompleteTextView.class.getSimpleName(), "Exception", e);
+        }
+    }
 }

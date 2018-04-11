@@ -10,6 +10,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.View;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -18,16 +20,22 @@ import it.niedermann.owncloud.notes.model.ItemAdapter;
 
 public class SelectSingleNoteActivity extends NotesListViewActivity {
 
+    @BindView(R.id.fab_create)
+    View fabCreate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        android.support.v7.app.ActionBar ab = getSupportActionBar();
         SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
 
         setResult(Activity.RESULT_CANCELED);
-        findViewById(R.id.fab_create).setVisibility(View.GONE);
-        if(ab != null) {
+
+        ButterKnife.bind(this);
+        fabCreate.setVisibility(View.GONE);
+
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        if (ab != null) {
             ab.setTitle(R.string.activity_select_single_note);
         }
         swipeRefreshLayout.setEnabled(false);
