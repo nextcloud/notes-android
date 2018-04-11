@@ -9,13 +9,13 @@
     <string name="action_settings">Ρυθμίσεις</string>
     <string name="action_search">Ψάχνει</string>
     <string name="action_create_save">Αποθήκευση</string>
-    <string name="action_create_cancel">Ακύρωση</string>
-    <string name="action_edit_editing">Επεξεργασία</string>
+    <string name="simple_cancel">Ακύρωση</string>
+    <string name="simple_edit">Επεξεργασία</string>
     <string name="action_edit_save">Αποθήκευση</string>
     <string name="action_edit_saving">Γίνεται αποθήκευση &#8230;</string>
     <string name="action_edit_saved">Αποθηκεύτηκε</string>
     <string name="action_edit_cancel">Ακύρωση</string>
-    <string name="action_about">Περί</string>
+    <string name="simple_about">Περί</string>
     <string name="action_select_note">Επιλογή σημείωσης</string>
     <string name="action_note_deleted">Η σημείωση διαγράφηκε.</string>
     <string name="action_note_restored">Έγινε επαναφορά της σημείωσης.</string>

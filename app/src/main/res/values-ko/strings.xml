@@ -7,13 +7,13 @@
     <string name="action_settings">설정</string>
     <string name="action_search">검색</string>
     <string name="action_create_save">저장</string>
-    <string name="action_create_cancel">취소</string>
-    <string name="action_edit_editing">편집</string>
+    <string name="simple_cancel">취소</string>
+    <string name="simple_edit">편집</string>
     <string name="action_edit_save">저장</string>
     <string name="action_edit_saving">저장 중&#8230;</string>
     <string name="action_edit_saved">저장됨</string>
     <string name="action_edit_cancel">취소</string>
-    <string name="action_about">정보</string>
+    <string name="simple_about">정보</string>
     <string name="action_select_note">메모 선택</string>
     <string name="action_note_deleted">메모 삭제됨</string>
     <string name="action_note_restored">메모 복원됨</string>

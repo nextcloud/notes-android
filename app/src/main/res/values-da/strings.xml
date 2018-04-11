@@ -9,13 +9,13 @@
     <string name="action_settings">Indstillinger</string>
     <string name="action_search">Søg</string>
     <string name="action_create_save">Gem</string>
-    <string name="action_create_cancel">Annullér</string>
-    <string name="action_edit_editing">Redigér</string>
+    <string name="simple_cancel">Annullér</string>
+    <string name="simple_edit">Redigér</string>
     <string name="action_edit_save">Gem</string>
     <string name="action_edit_saving">Gemmer &#8230;</string>
     <string name="action_edit_saved">Gemt</string>
     <string name="action_edit_cancel">Annullér</string>
-    <string name="action_about">Om</string>
+    <string name="simple_about">Om</string>
     <string name="action_select_note">Vælg note</string>
     <string name="action_note_deleted">Note slettet</string>
     <string name="action_note_restored">Note gendannet</string>

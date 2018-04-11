@@ -6,13 +6,13 @@
     <string name="action_create">Jauna piezīme</string>
     <string name="action_settings">Iestatījumi</string>
     <string name="action_create_save">Saglabāt</string>
-    <string name="action_create_cancel">Atcelt</string>
-    <string name="action_edit_editing">Rediģēt</string>
+    <string name="simple_cancel">Atcelt</string>
+    <string name="simple_edit">Rediģēt</string>
     <string name="action_edit_save">Saglabāt</string>
     <string name="action_edit_saving">Saglabā &#8230;</string>
     <string name="action_edit_saved">Saglabāts</string>
     <string name="action_edit_cancel">Atcelt</string>
-    <string name="action_about">Par</string>
+    <string name="simple_about">Par</string>
     <string name="action_select_note">Izvēlieties piezīmi</string>
     <string name="action_note_deleted">Piezīme ir dzēsta</string>
     <string name="action_note_restored">Piezīme restaurēta</string>

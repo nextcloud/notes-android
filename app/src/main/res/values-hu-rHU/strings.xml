@@ -9,13 +9,13 @@
     <string name="action_settings">Beállítások</string>
     <string name="action_search">Keresés</string>
     <string name="action_create_save">Mentés</string>
-    <string name="action_create_cancel">Mégsem</string>
-    <string name="action_edit_editing">Szerkesztés</string>
+    <string name="simple_cancel">Mégsem</string>
+    <string name="simple_edit">Szerkesztés</string>
     <string name="action_edit_save">Mentés</string>
     <string name="action_edit_saving">Mentés &#8230;</string>
     <string name="action_edit_saved">Elmentve</string>
     <string name="action_edit_cancel">Mégsem</string>
-    <string name="action_about">Névjegy</string>
+    <string name="simple_about">Névjegy</string>
     <string name="action_select_note">Jegyzet választás</string>
     <string name="action_note_deleted">Jegyzet törölve</string>
     <string name="action_note_restored">Jegyzet visszaállítva</string>

@@ -9,13 +9,13 @@
     <string name="action_settings">Ustawienia</string>
     <string name="action_search">Szukaj</string>
     <string name="action_create_save">Zapisz</string>
-    <string name="action_create_cancel">Anuluj</string>
-    <string name="action_edit_editing">Edytuj</string>
+    <string name="simple_cancel">Anuluj</string>
+    <string name="simple_edit">Edytuj</string>
     <string name="action_edit_save">Zapisz</string>
     <string name="action_edit_saving">Zapisywanie &#8230;</string>
     <string name="action_edit_saved">Zapisano</string>
     <string name="action_edit_cancel">Anuluj</string>
-    <string name="action_about">O aplikacji</string>
+    <string name="simple_about">O aplikacji</string>
     <string name="action_select_note">Wybierz notatkę</string>
     <string name="action_note_deleted">Notatka usunięta</string>
     <string name="action_note_restored">Notatka przywrócona</string>

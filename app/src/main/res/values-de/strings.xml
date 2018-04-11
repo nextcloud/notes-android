@@ -9,13 +9,13 @@
     <string name="action_settings">Einstellungen</string>
     <string name="action_search">Suche</string>
     <string name="action_create_save">Speichern</string>
-    <string name="action_create_cancel">Abbrechen</string>
-    <string name="action_edit_editing">Bearbeiten</string>
+    <string name="simple_cancel">Abbrechen</string>
+    <string name="simple_edit">Bearbeiten</string>
     <string name="action_edit_save">Speichern</string>
     <string name="action_edit_saving">Speichern&#8230;</string>
     <string name="action_edit_saved">Gespeichert</string>
     <string name="action_edit_cancel">Abbrechen</string>
-    <string name="action_about">Über</string>
+    <string name="simple_about">Über</string>
     <string name="action_select_note">Notiz auswählen</string>
     <string name="action_note_deleted">Notiz gelöscht</string>
     <string name="action_note_restored">Notiz wiederhergestellt</string>

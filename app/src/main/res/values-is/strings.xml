@@ -7,13 +7,13 @@
     <string name="action_settings">Stillingar</string>
     <string name="action_search">Leita</string>
     <string name="action_create_save">Vista</string>
-    <string name="action_create_cancel">Hætta við</string>
-    <string name="action_edit_editing">Breyta</string>
+    <string name="simple_cancel">Hætta við</string>
+    <string name="simple_edit">Breyta</string>
     <string name="action_edit_save">Vista</string>
     <string name="action_edit_saving">Vista &#8230;</string>
     <string name="action_edit_saved">Vistað</string>
     <string name="action_edit_cancel">Hætta við</string>
-    <string name="action_about">Um hugbúnaðinn</string>
+    <string name="simple_about">Um hugbúnaðinn</string>
     <string name="action_select_note">Eyða minnispunkti</string>
     <string name="action_note_restored">Minnispunktur endurheimtur</string>
     <string name="action_undo">Afturkalla</string>

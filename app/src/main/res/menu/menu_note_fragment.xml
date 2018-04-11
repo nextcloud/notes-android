@@ -23,7 +23,7 @@
         android:id="@+id/menu_cancel"
         android:icon="@drawable/ic_action_cancel"
         android:orderInCategory="110"
-        android:title="@string/menu_cancel"
+        android:title="@string/simple_cancel"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_delete"

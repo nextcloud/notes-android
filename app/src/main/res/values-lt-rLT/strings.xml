@@ -9,13 +9,13 @@
     <string name="action_settings">Nustatymai</string>
     <string name="action_search">Paieška</string>
     <string name="action_create_save">Įrašyti</string>
-    <string name="action_create_cancel">Atsisakyti</string>
-    <string name="action_edit_editing">Redaguoti</string>
+    <string name="simple_cancel">Atsisakyti</string>
+    <string name="simple_edit">Redaguoti</string>
     <string name="action_edit_save">Įrašyti</string>
     <string name="action_edit_saving">Įrašoma &#8230;</string>
     <string name="action_edit_saved">Įrašyta</string>
     <string name="action_edit_cancel">Atsisakyti</string>
-    <string name="action_about">Apie</string>
+    <string name="simple_about">Apie</string>
     <string name="action_select_note">Sukurti</string>
     <string name="action_note_deleted">Pastaba ištrinta</string>
     <string name="action_note_restored">Pastaba atstatyta</string>

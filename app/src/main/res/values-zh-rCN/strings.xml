@@ -7,13 +7,13 @@
     <string name="action_settings">设置</string>
     <string name="action_search">搜索</string>
     <string name="action_create_save">保存</string>
-    <string name="action_create_cancel">取消</string>
-    <string name="action_edit_editing">编辑</string>
+    <string name="simple_cancel">取消</string>
+    <string name="simple_edit">编辑</string>
     <string name="action_edit_save">保存</string>
     <string name="action_edit_saving">保存 &#8230;</string>
     <string name="action_edit_saved">已保存</string>
     <string name="action_edit_cancel">取消</string>
-    <string name="action_about">关于</string>
+    <string name="simple_about">关于</string>
     <string name="action_select_note">选择便笺</string>
     <string name="action_note_deleted">已删除的笔记</string>
     <string name="action_note_restored">已恢复笔记</string>

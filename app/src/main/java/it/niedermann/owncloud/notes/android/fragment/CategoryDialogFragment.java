@@ -76,7 +76,7 @@ public class CategoryDialogFragment extends DialogFragment {
                         listener.onCategoryChosen(textCategory.getText().toString());
                     }
                 })
-                .setNegativeButton(R.string.action_edit_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.simple_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // do nothing

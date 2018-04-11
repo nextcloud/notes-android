@@ -7,13 +7,13 @@
     <string name="action_settings">Nastavení</string>
     <string name="action_search">Hledat</string>
     <string name="action_create_save">Uložit</string>
-    <string name="action_create_cancel">Zrušit</string>
-    <string name="action_edit_editing">Upravit</string>
+    <string name="simple_cancel">Zrušit</string>
+    <string name="simple_edit">Upravit</string>
     <string name="action_edit_save">Uložit</string>
     <string name="action_edit_saving">Ukládání &#8230;</string>
     <string name="action_edit_saved">Uloženo</string>
     <string name="action_edit_cancel">Zrušit</string>
-    <string name="action_about">O aplikaci</string>
+    <string name="simple_about">O aplikaci</string>
     <string name="action_select_note">Vybrat poznámku</string>
     <string name="action_note_deleted">Poznámka byla smazána</string>
     <string name="action_note_restored">Poznámka byla obnovena</string>
