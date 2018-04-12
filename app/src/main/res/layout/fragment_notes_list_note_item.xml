@@ -6,23 +6,23 @@
 
     <ImageView
         android:id="@+id/noteDeleteLeft"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/button_padding"
         android:layout_marginStart="@dimen/button_padding"
         android:contentDescription="@string/menu_delete"
-        android:src="@drawable/ic_action_delete" />
+        android:src="@drawable/ic_delete_white_32dp" />
 
     <ImageView
         android:id="@+id/noteDeleteRight"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="@dimen/button_padding"
         android:layout_marginRight="@dimen/button_padding"
         android:contentDescription="@string/menu_delete"
-        android:src="@drawable/ic_action_delete" />
+        android:src="@drawable/ic_delete_white_32dp" />
 
     <android.support.v7.widget.LinearLayoutCompat
         android:id="@+id/noteSwipeable"
