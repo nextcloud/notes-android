@@ -5,10 +5,16 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.Category;
@@ -19,15 +25,10 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 
-    public interface NotesLoadedListener {
-        void onNotesLoaded(List<Item> notes, boolean showCategory);
-    }
-
     private final Context context;
     private final NotesLoadedListener callback;
     private final Category category;
     private final CharSequence searchQuery;
-
     public LoadNotesListTask(@NonNull Context context, @NonNull NotesLoadedListener callback, @NonNull Category category, @Nullable CharSequence searchQuery) {
         this.context = context;
         this.callback = callback;
@@ -48,6 +49,39 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         }
     }
 
+    private DBNote colorTheNote(DBNote dbNote) {
+        if (!TextUtils.isEmpty(searchQuery)) {
+            SpannableString spannableString = new SpannableString(dbNote.getTitle());
+            Matcher matcher = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
+            while (matcher.find()) {
+                spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.primary_dark)),
+                        matcher.start(), matcher.end(), 0);
+            }
+
+            dbNote.setTitle(Html.toHtml(spannableString));
+
+            spannableString = new SpannableString(dbNote.getCategory());
+            matcher = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
+            while (matcher.find()) {
+                spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.primary_dark)),
+                        matcher.start(), matcher.end(), 0);
+            }
+
+            dbNote.setCategory(Html.toHtml(spannableString));
+
+            spannableString = new SpannableString(dbNote.getExcerpt());
+            matcher = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
+            while (matcher.find()) {
+                spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.primary_dark)),
+                        matcher.start(), matcher.end(), 0);
+            }
+
+            dbNote.setExcerptDirectly(Html.toHtml(spannableString));
+        }
+
+        return dbNote;
+    }
+
     @NonNull
     @WorkerThread
     private List<Item> fillListByCategory(@NonNull List<DBNote> noteList) {
@@ -57,7 +91,8 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             if (currentCategory != null && !currentCategory.equals(note.getCategory())) {
                 itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory())));
             }
-            itemList.add(note);
+
+            itemList.add(colorTheNote(note));
             currentCategory = note.getCategory();
         }
         return itemList;
@@ -128,7 +163,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
                 }
                 earlierSet = true;
             }
-            itemList.add(currentNote);
+            itemList.add(colorTheNote(currentNote));
         }
 
         return itemList;
@@ -137,5 +172,9 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     @Override
     protected void onPostExecute(List<Item> items) {
         callback.onNotesLoaded(items, category.category == null);
+    }
+
+    public interface NotesLoadedListener {
+        void onNotesLoaded(List<Item> notes, boolean showCategory);
     }
 }

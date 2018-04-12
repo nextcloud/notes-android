@@ -16,6 +16,7 @@
     <color name="fg_default_low">#666666</color>
     <color name="fg_default_high">#cccccc</color>
     <color name="fg_contrast">#ffffff</color>
+    <color name="icon_grey">#757575</color>
 
     <color name="widget_background">#E6FFFFFF</color>
 </resources>

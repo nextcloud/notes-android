@@ -318,7 +318,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             where.add(key_status + " != ?");
             args.add(DBStatus.LOCAL_DELETED.getTitle());
 
-            where.add("(" + key_content + " LIKE ? OR " + key_category + " LIKE ?" + ")");
+            where.add("(" + key_title + " LIKE ? OR " + key_content + " LIKE ? OR " + key_category + " LIKE ?" + ")");
+            args.add("%" + query + "%");
             args.add("%" + query + "%");
             args.add("%" + query + "%");
         }

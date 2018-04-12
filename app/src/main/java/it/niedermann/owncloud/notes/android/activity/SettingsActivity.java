@@ -224,8 +224,8 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean o) {
             if (o) {
-                Drawable actionDoneDark = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_action_done_dark);
-                actionDoneDark.setBounds(0, 0, 50, 50);
+                Drawable actionDoneDark = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_check_grey600_24dp);
+                actionDoneDark.setBounds( 0, 0, actionDoneDark.getIntrinsicWidth(), actionDoneDark.getIntrinsicHeight() );
                 field_url.setCompoundDrawables(null, null, actionDoneDark, null);
             } else {
                 field_url.setCompoundDrawables(null, null, null, null);
