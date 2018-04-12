@@ -39,7 +39,7 @@
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_create"
         style="@style/fab"
-        android:src="@drawable/ic_action_new"
+        android:src="@drawable/ic_add_white_24dp"
         app:backgroundTint="@color/primary"
         app:rippleColor="@color/primary_dark" />
 </android.support.design.widget.CoordinatorLayout>

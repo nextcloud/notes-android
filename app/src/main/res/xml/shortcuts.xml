@@ -3,7 +3,7 @@
     <shortcut
         android:shortcutId="it.niedermann.owncloud.notes"
         android:enabled="true"
-        android:icon="@drawable/ic_action_new_theme"
+        android:icon="@drawable/ic_add_blue_24dp"
         android:shortcutShortLabel="@string/action_create"
         android:shortcutLongLabel="@string/shortcut_create_long">
         <intent
