@@ -6,7 +6,9 @@ import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -23,6 +25,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -68,7 +72,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.fab_create)
-    View fabCreate;
+    FloatingActionButton fabCreate;
     @BindView(R.id.navigationList)
     RecyclerView listNavigationCategories;
     @BindView(R.id.navigationMenu)
@@ -441,6 +445,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         if (searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
             query = searchView.getQuery();
         }
+
         LoadNotesListTask.NotesLoadedListener callback = new LoadNotesListTask.NotesLoadedListener() {
             @Override
             public void onNotesLoaded(List<Item> notes, boolean showCategory) {
@@ -472,6 +477,34 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         // Associate searchable configuration with the SearchView
         final MenuItem item = menu.findItem(R.id.search);
         searchView = (SearchView) item.getActionView();
+
+        final LinearLayout searchEditFrame = searchView.findViewById(android.support.v7.appcompat.R.id
+                .search_edit_frame);
+
+        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            int oldVisibility = -1;
+            @Override
+            public void onGlobalLayout() {
+                int currentVisibility = searchEditFrame.getVisibility();
+
+                if (currentVisibility != oldVisibility) {
+                    if (currentVisibility == View.VISIBLE) {
+                        fabCreate.hide();
+                    } else {
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                fabCreate.show();
+                            }
+                        }, 150);
+                    }
+
+                    oldVisibility = currentVisibility;
+                }
+            }
+
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
