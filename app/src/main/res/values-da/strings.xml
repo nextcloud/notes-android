@@ -9,13 +9,9 @@
     <string name="action_settings">Indstillinger</string>
     <string name="action_search">Søg</string>
     <string name="action_create_save">Gem</string>
-    <string name="simple_cancel">Annullér</string>
-    <string name="simple_edit">Redigér</string>
     <string name="action_edit_save">Gem</string>
     <string name="action_edit_saving">Gemmer &#8230;</string>
     <string name="action_edit_saved">Gemt</string>
-    <string name="action_edit_cancel">Annullér</string>
-    <string name="simple_about">Om</string>
     <string name="action_select_note">Vælg note</string>
     <string name="action_note_deleted">Note slettet</string>
     <string name="action_note_restored">Note gendannet</string>
@@ -25,17 +21,11 @@
     <string name="action_recent">Seneste</string>
     <string name="action_uncategorized">Ikke kategoriseret</string>
     <string name="menu_delete">Slet</string>
-    <string name="menu_copy">Kopiér</string>
-    <string name="menu_edit">Redigér</string>
-    <string name="menu_cancel">Annullér</string>
     <string name="menu_change_category">Katergori</string>
     <string name="menu_favorite">Foretrukken</string>
     <string name="menu_preview">Vis eksempel</string>
     <string name="menu_share">Del</string>
     <string name="menu_about">Om</string>
-
-    <string name="change_category_title">Vælg kategori</string>
-    <string name="copy">Kopiér</string>
 
     <string name="listview_updated_today">I dag</string>
     <string name="listview_updated_yesterday">I går</string>
@@ -117,7 +107,6 @@
     <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
     <string name="widget_create_note">Opret note</string>
     <string name="widget_not_logged_in">Log venligst ind i Notes før du bruger denne widget</string>
-    <string name="widget_entry_fav_contentDescription">Stjerne ikon bruges til at markere som favorit</string>
     <string name="widget_app_launcher_contentDescription">Åbner app</string>
 
     <string name="activity_select_single_note">Vælg note</string>

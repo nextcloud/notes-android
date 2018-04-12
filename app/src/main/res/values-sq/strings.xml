@@ -7,13 +7,9 @@
     <string name="action_settings">Konfigurimet</string>
     <string name="action_search">Kërko</string>
     <string name="action_create_save">Ruaj</string>
-    <string name="simple_cancel">Anullo</string>
-    <string name="simple_edit">Modifiko</string>
     <string name="action_edit_save">Ruaj</string>
     <string name="action_edit_saving">Duke ruajtur &#8230;</string>
     <string name="action_edit_saved">U ruajt</string>
-    <string name="action_edit_cancel">Anullo</string>
-    <string name="simple_about">Rreth Nesh</string>
     <string name="action_select_note">Selekto shënimin</string>
     <string name="action_note_deleted">Shënimi u fshi</string>
     <string name="action_note_restored">Shënimi i rivendos</string>
@@ -23,17 +19,11 @@
     <string name="action_recent">Së fundmi</string>
     <string name="action_uncategorized">Të pakategorizuara</string>
     <string name="menu_delete">Fshij</string>
-    <string name="menu_copy">Kopjo</string>
-    <string name="menu_edit">Modifiko</string>
-    <string name="menu_cancel">Anullo</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">E preferuar</string>
     <string name="menu_preview">Parapamje</string>
     <string name="menu_share">Ndaj</string>
     <string name="menu_about">Rreth nesh</string>
-
-    <string name="change_category_title">Zgjidh kategorinë</string>
-    <string name="copy">Kopjo</string>
 
     <string name="listview_updated_today">Sot</string>
     <string name="listview_updated_yesterday">Dje</string>
@@ -115,7 +105,6 @@
     <string name="widget_single_note_placeholder_tv">Shënimi nuk u gjet</string>
     <string name="widget_create_note">Krijoni shënim</string>
     <string name="widget_not_logged_in">Ju lutemi identifikohuni në aplikacion përpara se të përdorni këtë widget</string>
-    <string name="widget_entry_fav_contentDescription">Ikona e yllit përdoret për të treguar artikullin si të preferuar</string>
     <string name="widget_app_launcher_contentDescription">Hape aplikacionin</string>
 
     <string name="activity_select_single_note">Zgjidh shënimin</string>

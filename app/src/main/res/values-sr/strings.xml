@@ -9,13 +9,9 @@
     <string name="action_settings">Поставке</string>
     <string name="action_search">Тражи</string>
     <string name="action_create_save">Сачувај</string>
-    <string name="simple_cancel">Одустани</string>
-    <string name="simple_edit">Уреди</string>
     <string name="action_edit_save">Сачувај</string>
     <string name="action_edit_saving">Чувам &#8230;</string>
     <string name="action_edit_saved">Сачувано</string>
-    <string name="action_edit_cancel">Одустани</string>
-    <string name="simple_about">О програму</string>
     <string name="action_select_note">Изабери белешку</string>
     <string name="action_note_deleted">Белешка обрисана</string>
     <string name="action_note_restored">Белешка повраћена</string>
@@ -25,17 +21,11 @@
     <string name="action_recent">Скорашње</string>
     <string name="action_uncategorized">Некатегоризовано</string>
     <string name="menu_delete">Обриши</string>
-    <string name="menu_copy">Копирај</string>
-    <string name="menu_edit">Уреди</string>
-    <string name="menu_cancel">Откажи</string>
     <string name="menu_change_category">Категорија</string>
     <string name="menu_favorite">Омиљене</string>
     <string name="menu_preview">Преглед</string>
     <string name="menu_share">Подели</string>
     <string name="menu_about">О програму</string>
-
-    <string name="change_category_title">Одаберите категорију</string>
-    <string name="copy">Копирај</string>
 
     <string name="listview_updated_today">Данас</string>
     <string name="listview_updated_yesterday">Јуче</string>
@@ -117,7 +107,6 @@
     <string name="widget_single_note_placeholder_tv">Белешка није нађена</string>
     <string name="widget_create_note">Направи белешку</string>
     <string name="widget_not_logged_in">Пријавите се на Белешке пре коришћења овог елемента</string>
-    <string name="widget_entry_fav_contentDescription">Икона да се стави звезда на ставку</string>
     <string name="widget_app_launcher_contentDescription">Покреће апликацију</string>
 
     <string name="activity_select_single_note">Одабери белешку</string>

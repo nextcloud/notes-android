@@ -9,13 +9,9 @@
     <string name="action_settings">Instellingen</string>
     <string name="action_search">Zoeken</string>
     <string name="action_create_save">Opslaan</string>
-    <string name="simple_cancel">Annuleren</string>
-    <string name="simple_edit">Bewerken</string>
     <string name="action_edit_save">Opslaan</string>
     <string name="action_edit_saving">Opslaan &#8230;</string>
     <string name="action_edit_saved">Opgeslagen</string>
-    <string name="action_edit_cancel">Annuleren</string>
-    <string name="simple_about">Over</string>
     <string name="action_select_note">Notitie selecteren</string>
     <string name="action_note_deleted">Notitie verwijderd</string>
     <string name="action_note_restored">Notitie hersteld</string>
@@ -25,17 +21,11 @@
     <string name="action_recent">Recent</string>
     <string name="action_uncategorized">Ongecategorizeerd</string>
     <string name="menu_delete">Verwijderen</string>
-    <string name="menu_copy">Kopiëren</string>
-    <string name="menu_edit">Bewerken</string>
-    <string name="menu_cancel">Annuleren</string>
     <string name="menu_change_category">Categorie</string>
     <string name="menu_favorite">Favoriet</string>
     <string name="menu_preview">Voorbeeldweergave</string>
     <string name="menu_share">Delen</string>
     <string name="menu_about">Over</string>
-
-    <string name="change_category_title">Kies categorie</string>
-    <string name="copy">Kopie</string>
 
     <string name="listview_updated_today">Vandaag</string>
     <string name="listview_updated_yesterday">Gisteren</string>
@@ -117,7 +107,6 @@
     <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
     <string name="widget_create_note">Maak notitie</string>
     <string name="widget_not_logged_in">Login bij Notities voordat je deze widget gebruikt</string>
-    <string name="widget_entry_fav_contentDescription">Sterpictogram gebruikt om object als favoriet te markeren</string>
     <string name="widget_app_launcher_contentDescription">Start app</string>
 
     <string name="activity_select_single_note">Selecteer notitie</string>

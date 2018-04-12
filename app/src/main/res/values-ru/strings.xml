@@ -9,13 +9,9 @@
     <string name="action_settings">Настройки</string>
     <string name="action_search">Поиск</string>
     <string name="action_create_save">Сохранить</string>
-    <string name="simple_cancel">Отмена</string>
-    <string name="simple_edit">Редактировать</string>
     <string name="action_edit_save">Сохранить</string>
     <string name="action_edit_saving">Сохранение …</string>
     <string name="action_edit_saved">Сохранено</string>
-    <string name="action_edit_cancel">Отмена</string>
-    <string name="simple_about">О программе</string>
     <string name="action_select_note">Выбрать заметку</string>
     <string name="action_note_deleted">Заметка удалена</string>
     <string name="action_note_restored">Заметка восстановлена</string>
@@ -25,17 +21,11 @@
     <string name="action_recent">Недавние</string>
     <string name="action_uncategorized">Без категории</string>
     <string name="menu_delete">Удалить</string>
-    <string name="menu_copy">Копировать</string>
-    <string name="menu_edit">Редактировать</string>
-    <string name="menu_cancel">Отмена</string>
     <string name="menu_change_category">Категория</string>
     <string name="menu_favorite">Избранное</string>
     <string name="menu_preview">Предварительный просмотр</string>
     <string name="menu_share">Поделиться</string>
     <string name="menu_about">О программе</string>
-
-    <string name="change_category_title">Выберите категорию</string>
-    <string name="copy">Копировать</string>
 
     <string name="listview_updated_today">Сегодня</string>
     <string name="listview_updated_yesterday">Вчера</string>
@@ -117,7 +107,6 @@
     <string name="widget_single_note_placeholder_tv">Заметка не найдена</string>
     <string name="widget_create_note">Создать заметку</string>
     <string name="widget_not_logged_in">Для использования виджета необходимо выполнить вход в приложении «Заметки»</string>
-    <string name="widget_entry_fav_contentDescription">Используйте звёздочку для исключения заметки из избранного</string>
     <string name="widget_app_launcher_contentDescription">Запуск приложения</string>
 
     <string name="activity_select_single_note">Выберите заметку</string>

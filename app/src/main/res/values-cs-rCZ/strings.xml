@@ -7,13 +7,9 @@
     <string name="action_settings">Nastavení</string>
     <string name="action_search">Hledat</string>
     <string name="action_create_save">Uložit</string>
-    <string name="simple_cancel">Zrušit</string>
-    <string name="simple_edit">Upravit</string>
     <string name="action_edit_save">Uložit</string>
     <string name="action_edit_saving">Ukládání &#8230;</string>
     <string name="action_edit_saved">Uloženo</string>
-    <string name="action_edit_cancel">Zrušit</string>
-    <string name="simple_about">O aplikaci</string>
     <string name="action_select_note">Vybrat poznámku</string>
     <string name="action_note_deleted">Poznámka byla smazána</string>
     <string name="action_note_restored">Poznámka byla obnovena</string>
@@ -23,17 +19,11 @@
     <string name="action_recent">Nedávné</string>
     <string name="action_uncategorized">Nezařazeno</string>
     <string name="menu_delete">Smazat</string>
-    <string name="menu_copy">Kopírovat</string>
-    <string name="menu_edit">Upravit</string>
-    <string name="menu_cancel">Zrušit</string>
     <string name="menu_change_category">Kategorie</string>
     <string name="menu_favorite">Oblíbený</string>
     <string name="menu_preview">Náhled</string>
     <string name="menu_share">Sdílet</string>
     <string name="menu_about">O aplikaci</string>
-
-    <string name="change_category_title">Vyberte kategorii</string>
-    <string name="copy">Kopírovat</string>
 
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
@@ -115,7 +105,6 @@
     <string name="widget_single_note_placeholder_tv">Poznámka nenalezena</string>
     <string name="widget_create_note">Vytvořit poznámku</string>
     <string name="widget_not_logged_in">Před použitím widgetu se, prosím, přihlašte do aplikace Poznámky</string>
-    <string name="widget_entry_fav_contentDescription">Hvězdička slouží k označení oblíbené položky</string>
     <string name="widget_app_launcher_contentDescription">Spustí aplikaci</string>
 
     <string name="activity_select_single_note">Vybrat poznámku</string>

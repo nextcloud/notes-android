@@ -9,13 +9,9 @@
     <string name="action_settings">Impostazioni</string>
     <string name="action_search">Cerca</string>
     <string name="action_create_save">Salva</string>
-    <string name="simple_cancel">Annulla</string>
-    <string name="simple_edit">Modifica</string>
     <string name="action_edit_save">Salva</string>
     <string name="action_edit_saving">Salvataggio di &#8230;</string>
     <string name="action_edit_saved">Salvata</string>
-    <string name="action_edit_cancel">Annulla</string>
-    <string name="simple_about">Informazioni</string>
     <string name="action_select_note">Seleziona nota</string>
     <string name="action_note_deleted">Nota eliminata</string>
     <string name="action_note_restored">Nota ripristinata</string>
@@ -25,17 +21,11 @@
     <string name="action_recent">Recenti</string>
     <string name="action_uncategorized">Senza categoria</string>
     <string name="menu_delete">Elimina</string>
-    <string name="menu_copy">Copia</string>
-    <string name="menu_edit">Modifica</string>
-    <string name="menu_cancel">Annulla</string>
     <string name="menu_change_category">Categoria</string>
     <string name="menu_favorite">Preferito</string>
     <string name="menu_preview">Anteprima</string>
     <string name="menu_share">Condividi</string>
     <string name="menu_about">Informazioni</string>
-
-    <string name="change_category_title">Scegli categoria</string>
-    <string name="copy">Copia</string>
 
     <string name="listview_updated_today">Oggi</string>
     <string name="listview_updated_yesterday">Ieri</string>
@@ -117,7 +107,6 @@
     <string name="widget_single_note_placeholder_tv">Nota non trovata</string>
     <string name="widget_create_note">Crea nota</string>
     <string name="widget_not_logged_in">Accedi a Note prima di utilizzare questo widget</string>
-    <string name="widget_entry_fav_contentDescription">L\'icona della stella è utilizzata per marcare un elemento come preferito</string>
     <string name="widget_app_launcher_contentDescription">Avvia l\'applicazione</string>
 
     <string name="activity_select_single_note">Seleziona nota</string>

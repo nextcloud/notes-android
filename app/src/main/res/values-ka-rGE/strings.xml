@@ -7,13 +7,9 @@
     <string name="action_settings">პარამეტრები</string>
     <string name="action_search">ძიება</string>
     <string name="action_create_save">შენახვა</string>
-    <string name="simple_cancel">უარყოფა</string>
-    <string name="simple_edit">შეცვლა</string>
     <string name="action_edit_save">შენახვა</string>
     <string name="action_edit_saving">ინახება &#8230;</string>
     <string name="action_edit_saved">შენახულია</string>
-    <string name="action_edit_cancel">უარყოფა</string>
-    <string name="simple_about">ჩვენს შესახებ</string>
     <string name="action_select_note">აირჩიეთ ჩანაწერი</string>
     <string name="action_note_deleted">ჩანაწერი გაუქმდა</string>
     <string name="action_note_restored">ჩანაწერი აღდგა</string>
@@ -23,17 +19,11 @@
     <string name="action_recent">ახალი</string>
     <string name="action_uncategorized">არაკატეგორიზირებული</string>
     <string name="menu_delete">გაუქმება</string>
-    <string name="menu_copy">კოპირება</string>
-    <string name="menu_edit">შეცვლა</string>
-    <string name="menu_cancel">უარყოფა</string>
     <string name="menu_change_category">კატეგორია</string>
     <string name="menu_favorite">რჩეული</string>
     <string name="menu_preview">წინასწარი ჩვენება</string>
     <string name="menu_share">გაზიარება</string>
     <string name="menu_about">ჩვენს შესახებ</string>
-
-    <string name="change_category_title">აირჩიეთ კატეგორია</string>
-    <string name="copy">კოპირება</string>
 
     <string name="listview_updated_today">დღეს</string>
     <string name="listview_updated_yesterday">გუშინ</string>
@@ -115,7 +105,6 @@
     <string name="widget_single_note_placeholder_tv">ჩანაწერი ვერ იქნა ნაპოვნი</string>
     <string name="widget_create_note">ჩანაწერის შექმნა</string>
     <string name="widget_not_logged_in">ამ ხელსაწყოს გამოსაყენებლად ჯერ გაიარეთ ავტორიზაცია Note-ში</string>
-    <string name="widget_entry_fav_contentDescription">ვარსკლავის პიქტოგრამა რომელიც გამოიყენება ელემენტების რჩეულად მოსანიშნად</string>
     <string name="widget_app_launcher_contentDescription">რთავს აპლიკაციას</string>
 
     <string name="activity_select_single_note">აირჩიეთ ჩანაწერი</string>
