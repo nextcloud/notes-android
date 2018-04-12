@@ -14,14 +14,14 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_share"
-        android:icon="@drawable/ic_action_share"
+        android:icon="@drawable/ic_share_white_24dp"
         android:orderInCategory="100"
         android:title="@string/menu_share"
         app:showAsAction="never"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
     <item
         android:id="@+id/menu_cancel"
-        android:icon="@drawable/ic_action_cancel"
+        android:icon="@drawable/ic_clear_white_24dp"
         android:orderInCategory="110"
         android:title="@string/simple_cancel"
         app:showAsAction="never" />
