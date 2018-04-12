@@ -103,7 +103,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     private void prepareFavoriteOption(MenuItem item) {
-        item.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_outline_white_24dp);
+        item.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
         item.setChecked(note.isFavorite());
     }
 
