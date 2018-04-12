@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 
 import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
@@ -89,14 +90,17 @@ public class NotesClientUtil {
                             + password).getBytes(), Base64.NO_WRAP)));
             con.setConnectTimeout(10 * 1000); // 10 seconds
             con.connect();
+
+            Log.v(NotesClientUtil.class.getSimpleName(), "Establishing connection to server");
             if (con.getResponseCode() == 200) {
+                Log.v(NotesClientUtil.class.getSimpleName(), "" + con.getResponseMessage());
                 StringBuilder result = new StringBuilder();
                 BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String line;
                 while ((line = rd.readLine()) != null) {
                     result.append(line);
                 }
-                System.out.println(result.toString());
+                Log.v(NotesClientUtil.class.getSimpleName(), result.toString());
                 new JSONArray(result.toString());
                 return LoginStatus.OK;
             } else if (con.getResponseCode() >= 401 && con.getResponseCode() <= 403) {
@@ -104,7 +108,7 @@ public class NotesClientUtil {
             } else {
                 return LoginStatus.SERVER_FAILED;
             }
-        } catch (MalformedURLException e) {
+        } catch (MalformedURLException | SocketTimeoutException  e) {
             Log.e(NotesClientUtil.class.getSimpleName(), "Exception", e);
             return LoginStatus.CONNECTION_FAILED;
         } catch (IOException e) {

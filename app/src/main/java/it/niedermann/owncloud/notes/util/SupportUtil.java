@@ -8,6 +8,7 @@ import android.support.annotation.WorkerThread;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -79,8 +80,10 @@ public class SupportUtil {
                 sslContext.init(null, new TrustManager[]{ccm}, null);
                 httpsCon.setSSLSocketFactory(sslContext.getSocketFactory());
             } catch (NoSuchAlgorithmException e) {
+                Log.e(SupportUtil.class.getSimpleName(), "Exception", e);
                 // ignore, use default TrustManager
             } catch (KeyManagementException e) {
+                Log.e(SupportUtil.class.getSimpleName(), "Exception", e);
                 // ignore, use default TrustManager
             }
         }

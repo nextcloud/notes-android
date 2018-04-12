@@ -191,7 +191,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         url = NotesClientUtil.formatURL(url);
 
-        new LoginValidatorAsyncTask().execute(url, username, password);
+        new LoginValidatorAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url, username, password);
     }
 
     private void handleSubmitButtonEnabled(Editable url, Editable username) {
