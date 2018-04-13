@@ -24,5 +24,5 @@
         android:paddingEnd="16dp"
         android:paddingTop="48dp"
         android:textColor="@color/fg_default_selection"
-        android:textSize="14sp" />
+        android:textSize="@dimen/secondary_font_size" />
 </RelativeLayout>
