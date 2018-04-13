@@ -53,7 +53,7 @@
     </style>
 
     <style name="NavigationItem">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/secondary_font_size</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">#de000000</item>
     </style>
