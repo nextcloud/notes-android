@@ -14,20 +14,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
-        android:background="@color/bg_highlighted"
+        android:background="@color/bg_normal"
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
+        android:paddingLeft="56dp"
         android:paddingRight="16dp"
-        android:paddingTop="8dp"
+        android:paddingTop="48dp"
         android:textColor="@color/fg_default_selection"
         android:textSize="12sp" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="1px"
-        android:layout_below="@id/sectionTitle"
-        android:src="@color/separator" />
 </RelativeLayout>
