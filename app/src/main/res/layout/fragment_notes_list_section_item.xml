@@ -19,8 +19,10 @@
         android:gravity="center_vertical"
         android:paddingBottom="8dp"
         android:paddingLeft="56dp"
+        android:paddingStart="56dp"
         android:paddingRight="16dp"
+        android:paddingEnd="16dp"
         android:paddingTop="48dp"
         android:textColor="@color/fg_default_selection"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 </RelativeLayout>
