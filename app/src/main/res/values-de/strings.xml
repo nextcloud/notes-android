@@ -9,9 +9,12 @@
     <string name="action_settings">Einstellungen</string>
     <string name="action_search">Suche</string>
     <string name="action_create_save">Speichern</string>
+    <string name="simple_cancel">Abbrechen</string>
+    <string name="simple_edit">Bearbeiten</string>
     <string name="action_edit_save">Speichern</string>
     <string name="action_edit_saving">Speichern&#8230;</string>
     <string name="action_edit_saved">Gespeichert</string>
+    <string name="simple_about">Über</string>
     <string name="action_select_note">Notiz auswählen</string>
     <string name="action_note_deleted">Notiz gelöscht</string>
     <string name="action_note_restored">Notiz wiederhergestellt</string>
@@ -26,6 +29,8 @@
     <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
     <string name="menu_about">Über</string>
+
+    <string name="change_category_title">Kategorie auswählen</string>
 
     <string name="listview_updated_today">Heute</string>
     <string name="listview_updated_yesterday">Gestern</string>
@@ -107,6 +112,7 @@
     <string name="widget_single_note_placeholder_tv">Notiz nicht gefunden</string>
     <string name="widget_create_note">Notiz erstellen</string>
     <string name="widget_not_logged_in">Bitte melde dich bei Notes vor Nutzung des Widgets an</string>
+    <string name="widget_entry_fav_contentDescription">Das Stern-Symbol markiert den Eintrag als Favorit</string>
     <string name="widget_app_launcher_contentDescription">Startet die App</string>
 
     <string name="activity_select_single_note">Notiz auswählen</string>
