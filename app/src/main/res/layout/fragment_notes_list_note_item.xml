@@ -60,7 +60,7 @@
                     android:singleLine="true"
                     android:layout_weight="1"
                     android:textColor="@drawable/list_item_color_selector"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/primary_font_size" />
 
                 <ImageView
                     android:id="@+id/noteStatus"
@@ -93,7 +93,7 @@
                     android:paddingTop="1dp"
                     android:layout_weight="1"
                     android:textColor="@drawable/list_item_color_selector_low"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/secondary_font_size" />
 
                 <TextView
                     android:id="@+id/noteCategory"
@@ -111,7 +111,7 @@
                     android:layout_marginLeft="8dp"
                     android:singleLine="true"
                     android:textColor="@drawable/list_item_color_selector"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/secondary_font_size" />
             </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v7.widget.LinearLayoutCompat>
