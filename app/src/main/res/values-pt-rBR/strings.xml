@@ -9,9 +9,12 @@
     <string name="action_settings">Configurações</string>
     <string name="action_search">Pesquisar</string>
     <string name="action_create_save">Salvar</string>
+    <string name="simple_cancel">Cancelar</string>
+    <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Salvar</string>
     <string name="action_edit_saving">Salvando&#8230;</string>
     <string name="action_edit_saved">Salvo</string>
+    <string name="simple_about">Sobre</string>
     <string name="action_select_note">Selecionar anotação</string>
     <string name="action_note_deleted">Anotação excluída</string>
     <string name="action_note_restored">Anotação restaurada</string>
@@ -26,6 +29,8 @@
     <string name="menu_preview">Prever</string>
     <string name="menu_share">Compartilhar</string>
     <string name="menu_about">Sobre</string>
+
+    <string name="change_category_title">Escolher uma categoria</string>
 
     <string name="listview_updated_today">Hoje</string>
     <string name="listview_updated_yesterday">Ontem</string>
@@ -107,6 +112,7 @@
     <string name="widget_single_note_placeholder_tv">Anotação não encontrada</string>
     <string name="widget_create_note">Criar anotação</string>
     <string name="widget_not_logged_in">Faça login no Notes antes de usar este widget</string>
+    <string name="widget_entry_fav_contentDescription">O ícone da estrela é usado para marcar um item como favorito</string>
     <string name="widget_app_launcher_contentDescription">Lançar o aplicativo</string>
 
     <string name="activity_select_single_note">Selecionar anotação</string>
