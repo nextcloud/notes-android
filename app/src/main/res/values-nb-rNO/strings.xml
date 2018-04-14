@@ -9,9 +9,12 @@
     <string name="action_settings">Innstillinger</string>
     <string name="action_search">Søk</string>
     <string name="action_create_save">Lagre</string>
+    <string name="simple_cancel">Avbryt</string>
+    <string name="simple_edit">Rediger</string>
     <string name="action_edit_save">Lagre</string>
     <string name="action_edit_saving">Lagrer &#8230;</string>
     <string name="action_edit_saved">Lagret</string>
+    <string name="simple_about">Om</string>
     <string name="action_select_note">Velg notat</string>
     <string name="action_note_deleted">Notat slettet</string>
     <string name="action_note_restored">Notat gjenopprettet</string>
