@@ -192,7 +192,7 @@ public class NoteServerSyncHelper {
                 syncTask.addCallbacks(callbacksPull);
                 callbacksPull = new ArrayList<>();
             }
-            syncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            syncTask.execute();
         } else if (!onlyLocalChanges) {
             Log.d(getClass().getSimpleName(), "... scheduled");
             syncScheduled = true;
