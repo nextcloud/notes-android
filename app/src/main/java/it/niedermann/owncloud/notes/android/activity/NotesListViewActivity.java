@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.android.activity;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -404,7 +402,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     case ItemTouchHelper.RIGHT: {
                         final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
                         db.toggleFavorite(dbNote, null);
-                        adapter.notifyItemChanged(viewHolder.getAdapterPosition());
                         refreshLists();
                         break;
                     }
@@ -414,8 +411,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
-                // show delete icon on the right side
-                noteViewHolder.showSwipeDelete(dX>0);
+                // show swipe icon on the side
+                noteViewHolder.showSwipe(dX>0);
                 // move only swipeable part of item (not leave-behind)
                 getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.noteSwipeable, dX, dY, actionState, isCurrentlyActive);
             }

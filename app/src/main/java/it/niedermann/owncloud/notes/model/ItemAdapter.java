@@ -164,6 +164,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         public View noteSwipeable;
+        View noteSwipeFrame;
         ImageView noteFavoriteLeft, noteDeleteRight;
         TextView noteTitle;
         TextView noteCategory;
@@ -173,6 +174,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private NoteViewHolder(View v) {
             super(v);
+            this.noteSwipeFrame = v.findViewById(R.id.noteSwipeFrame);
             this.noteSwipeable = v.findViewById(R.id.noteSwipeable);
             this.noteFavoriteLeft = v.findViewById(R.id.noteFavoriteLeft);
             this.noteDeleteRight = v.findViewById(R.id.noteDeleteRight);
@@ -195,9 +197,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return noteClickListener.onNoteLongClick(getAdapterPosition(), v);
         }
 
-        public void showSwipeDelete(boolean left) {
+        public void showSwipe(boolean left) {
             noteFavoriteLeft.setVisibility(left ? View.VISIBLE : View.INVISIBLE);
             noteDeleteRight.setVisibility(left ? View.INVISIBLE : View.VISIBLE);
+            noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
         }
     }
 
