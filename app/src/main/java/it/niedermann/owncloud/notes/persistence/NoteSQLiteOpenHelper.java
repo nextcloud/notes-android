@@ -50,7 +50,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String key_category = "CATEGORY";
     private static final String key_etag = "ETAG";
     private static final String[] columns = {key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag};
-    private static final String default_order = key_modified + " DESC";
+    private static final String default_order = key_favorite + " DESC, " + key_modified + " DESC";
 
     private static NoteSQLiteOpenHelper instance;
 
