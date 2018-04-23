@@ -22,33 +22,37 @@ import it.niedermann.owncloud.notes.util.MarkDownUtil;
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private MarkdownProcessor markdownProcessor;
-    private final Context mContext;
-    private final int mAppWidgetId;
+    private final Context context;
+    private final int appWidgetId;
 
     private NoteSQLiteOpenHelper db;
     private DBNote note;
+    private SharedPreferences sp;
+    private static Boolean darkTheme;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
     SingleNoteWidgetFactory(Context context, Intent intent) {
-        mContext = context;
-        markdownProcessor = new MarkdownProcessor(mContext);
+        this.context = context;
+        markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
-        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(mContext).build());
-        mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                AppWidgetManager.INVALID_APPWIDGET_ID);
+        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context).build());
+        appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                                          AppWidgetManager.INVALID_APPWIDGET_ID);
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this.context);
+        darkTheme = sp.getBoolean(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, false);
     }
 
     @Override
     public void onCreate() {
-        db = NoteSQLiteOpenHelper.getInstance(mContext);
+        db = NoteSQLiteOpenHelper.getInstance(context);
     }
 
 
     @Override
     public void onDataSetChanged() {
-        SharedPreferences sharedprefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        long noteID = sharedprefs.getLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, -1);
+        long noteID = sp.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1);
 
         if (noteID >= 0) {
             note = db.getNote(noteID);
@@ -86,16 +90,24 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
             return null;
         }
 
-        RemoteViews note_content = new RemoteViews(mContext.getPackageName(),
-                R.layout.widget_single_note_content);
+        RemoteViews note_content;
+
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         fillInIntent.putExtras(extras);
         fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-        note_content.setTextViewText(R.id.single_note_content_tv, markdownProcessor.parse(note.getContent()));
+        if (darkTheme) {
+            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
+            note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
+            note_content.setTextViewText(R.id.single_note_content_tv_dark, markdownProcessor.parse(note.getContent()));
+
+        } else {
+            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
+            note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
+            note_content.setTextViewText(R.id.single_note_content_tv, markdownProcessor.parse(note.getContent()));
+        }
 
         return note_content;
     }

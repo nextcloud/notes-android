@@ -8,17 +8,6 @@
         android:id="@+id/nlw_config_recyclerv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        />
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
-    <!--
-    <Switch
-        android:id="@+id/nlw_config_theme_sw"
-        android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:padding="@dimen/widget_note_list_outer_padding"
-        android:text="Dark theme"
-        android:layout_alignParentBottom="true"
-        />
-    -->
 </RelativeLayout>

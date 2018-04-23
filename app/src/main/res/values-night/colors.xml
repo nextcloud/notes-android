@@ -17,4 +17,7 @@
 
     <color name="category_background">@color/primary</color>
     <color name="category_border">@color/primary</color>
+
+    <color name="widget_background">#222</color>
+    <color name="widget_fg_default_low">#aaaaaa</color>
 </resources>
