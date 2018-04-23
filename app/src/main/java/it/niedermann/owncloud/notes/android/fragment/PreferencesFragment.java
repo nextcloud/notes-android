@@ -30,7 +30,7 @@ public class PreferencesFragment extends PreferenceFragment {
             }
         });
 
-        final SwitchPreference themePref = (SwitchPreference) findPreference("darkTheme");
+        final SwitchPreference themePref = (SwitchPreference) findPreference(getString(R.string.pref_key_theme));
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         Boolean darkTheme = sp.getBoolean(getString(R.string.pref_key_theme), false);
 

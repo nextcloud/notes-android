@@ -22,6 +22,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final Context context;
     private final int displayMode;
     private final int appWidgetId;
+    private final boolean darkTheme;
     private String category;
     private final SharedPreferences sp;
     private NoteSQLiteOpenHelper db;
@@ -33,27 +34,52 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                                             AppWidgetManager.INVALID_APPWIDGET_ID);
         sp = PreferenceManager.getDefaultSharedPreferences(this.context);
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
+        darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
     }
 
     @Override
     public void onCreate() {
         db = NoteSQLiteOpenHelper.getInstance(context);
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
+        RemoteViews views;
+        if (darkTheme) {
+            views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list_dark);
+        } else {
+            views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
+        }
 
         switch (displayMode)
         {
             case NoteListWidget.NLW_DISPLAY_ALL:
-                views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.app_name));
-                break;
-            case NoteListWidget.NLW_DISPLAY_STARRED:
-                views.setTextViewText(R.id.widget_note_list_title_tv, "Starred");
-                break;
-            case NoteListWidget.NLW_DISPLAY_CATEGORY:
-                category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, null);
-                if (category.equals("")) {
-                    views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.action_uncategorized));
+                if (darkTheme) {
+                    views.setTextViewText(R.id.widget_note_list_title_tv_dark, context.getString(R.string.app_name));
                 } else {
-                    views.setTextViewText(R.id.widget_note_list_title_tv, category);
+                    views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.app_name));
+                }
+                break;
+
+            case NoteListWidget.NLW_DISPLAY_STARRED:
+                if (darkTheme) {
+                    views.setTextViewText(R.id.widget_note_list_title_tv_dark, context.getString(R.string.label_favorites));
+                } else {
+                    views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.label_favorites));
+                }
+                break;
+
+            case NoteListWidget.NLW_DISPLAY_CATEGORY:
+                category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
+                if (category.equals("")) {
+                    if (darkTheme) {
+                        views.setTextViewText(R.id.widget_note_list_title_tv_dark, context.getString(R.string.action_uncategorized));
+                    } else {
+                        views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.action_uncategorized));
+                    }
+
+                } else {
+                    if (darkTheme) {
+                        views.setTextViewText(R.id.widget_note_list_title_tv_dark, category);
+                    } else {
+                        views.setTextViewText(R.id.widget_note_list_title_tv, category);
+                    }
                 }
                 break;
         }
@@ -94,12 +120,12 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public RemoteViews getViewAt(int i) {
+        RemoteViews note_content;
+
         if (dbNotes == null || dbNotes.get(i) == null) {
             return null;
         }
 
-        RemoteViews note_content = new RemoteViews(context.getPackageName(),
-                                                    R.layout.widget_entry);
         DBNote note = dbNotes.get(i);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
@@ -107,14 +133,30 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         fillInIntent.putExtras(extras);
         fillInIntent.setData(Uri.parse(fillInIntent.toUri(Intent.URI_INTENT_SCHEME)));
-        note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
+
+        if (darkTheme) {
+            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_dark);
+            note_content.setOnClickFillInIntent(R.id.widget_note_list_entry_dark, fillInIntent);
+            note_content.setTextViewText(R.id.widget_entry_content_tv_dark, note.getTitle());
+        } else {
+            note_content = new RemoteViews( context.getPackageName(), R.layout.widget_entry);
+            note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
+            note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
+        }
 
         if (note.isFavorite()) {
-            note_content.setViewVisibility(R.id.widget_entry_fav_icon, View.VISIBLE);
+            if (darkTheme) {
+                note_content.setViewVisibility(R.id.widget_entry_fav_icon_dark, View.VISIBLE);
+            } else {
+                note_content.setViewVisibility(R.id.widget_entry_fav_icon, View.VISIBLE);
+            }
         } else {
-            note_content.setViewVisibility(R.id.widget_entry_fav_icon, View.INVISIBLE);
+            if (darkTheme) {
+                note_content.setViewVisibility(R.id.widget_entry_fav_icon_dark, View.INVISIBLE);
+            } else {
+                note_content.setViewVisibility(R.id.widget_entry_fav_icon, View.INVISIBLE);
+            }
         }
-        note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
 
         return note_content;
     }
