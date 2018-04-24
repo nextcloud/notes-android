@@ -125,8 +125,6 @@
     <string name="widget_not_logged_in">Please login to Notes before using this widget</string>
     <string name="widget_entry_fav_contentDescription">Star icon is used to denote an item as a favourite</string>
     <string name="widget_app_launcher_contentDescription">Launches app</string>
-    <string name="nlw_display_all">@string/label_all_notes</string>
-    <string name="nlw_display_starred">@string/label_favorites</string>
 
     <string name="activity_select_single_note">Select note</string>
 
