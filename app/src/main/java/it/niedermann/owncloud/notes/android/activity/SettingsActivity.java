@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -14,10 +17,19 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import at.bitfire.cert4android.CustomCertManager;
 import butterknife.BindView;
@@ -41,11 +53,16 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String SETTINGS_KEY_LAST_MODIFIED = "notes_last_modified";
     public static final String DEFAULT_SETTINGS = "";
     public static final int CREDENTIALS_CHANGED = 3;
+    
+    public static final String LOGIN_URL_DATA_KEY_VALUE_SEPARATOR = ":";
+    public static final String WEBDAV_PATH_4_0_AND_LATER = "/remote.php/webdav";
 
     private SharedPreferences preferences = null;
 
     @BindView(R.id.settings_url)
     EditText field_url;
+    @BindView(R.id.settings_username_wrapper)
+    TextInputLayout username_wrapper;
     @BindView(R.id.settings_username)
     EditText field_username;
     @BindView(R.id.settings_password)
@@ -57,8 +74,11 @@ public class SettingsActivity extends AppCompatActivity {
     @BindView(R.id.settings_url_warn_http)
     View urlWarnHttp;
     private String old_password = "";
+    
+    private WebView webView;
 
     private boolean first_run = false;
+    private boolean useWebLogin = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,6 +96,32 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
+        setupListener();
+
+        // Load current Preferences
+        field_url.setText(preferences.getString(SETTINGS_URL, DEFAULT_SETTINGS));
+        field_username.setText(preferences.getString(SETTINGS_USERNAME, DEFAULT_SETTINGS));
+        old_password = preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS);
+
+        field_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                login();
+                return true;
+            }
+        });
+        field_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                setPasswordHint(hasFocus);
+            }
+        });
+        setPasswordHint(false);
+
+        handleSubmitButtonEnabled();
+    }
+    
+    private void setupListener() {
         field_url.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -99,7 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
                     urlWarnHttp.setVisibility(View.GONE);
                 }
 
-                handleSubmitButtonEnabled(field_url.getText(), field_username.getText());
+                handleSubmitButtonEnabled();
             }
 
             @Override
@@ -115,7 +161,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                handleSubmitButtonEnabled(field_url.getText(), field_username.getText());
+                handleSubmitButtonEnabled();
             }
 
             @Override
@@ -124,27 +170,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        // Load current Preferences
-        field_url.setText(preferences.getString(SETTINGS_URL, DEFAULT_SETTINGS));
-        field_username.setText(preferences.getString(SETTINGS_USERNAME, DEFAULT_SETTINGS));
-        old_password = preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS);
-
-        field_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                login();
-                return true;
-            }
-        });
-        field_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                setPasswordHint(hasFocus);
-            }
-        });
-        setPasswordHint(false);
-
-        btn_submit.setEnabled(false);
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -180,7 +205,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    private void login() {
+    private void legacyLogin() {
         String url = field_url.getText().toString().trim();
         String username = field_username.getText().toString();
         String password = field_password.getText().toString();
@@ -194,8 +219,174 @@ public class SettingsActivity extends AppCompatActivity {
         new LoginValidatorAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url, username, password);
     }
 
-    private void handleSubmitButtonEnabled(Editable url, Editable username) {
-        if (field_username.getText().length() > 0 && field_url.getText().length() > 0) {
+    private void login() {
+        if (useWebLogin) {
+            webLogin();
+        } else {
+            legacyLogin();
+        }
+    }
+    
+    private void webLogin() {
+        setContentView(R.layout.activity_settings_webview);
+        webView = findViewById(R.id.login_webview);
+        webView.setVisibility(View.GONE);
+
+        final ProgressBar progressBar = findViewById(R.id.login_webview_progress_bar);
+
+        WebSettings settings = webView.getSettings();
+        settings.setAllowFileAccess(false);
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setUserAgentString(getWebLoginUserAgent());
+        settings.setSaveFormData(false);
+        settings.setSavePassword(false);
+
+        Map<String, String> headers = new HashMap<>();
+        headers.put("OCS-APIREQUEST", "true");
+
+        
+        webView.loadUrl(normalizeUrlSuffix(field_url.getText().toString()) + "index.php/login/flow", headers);
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url.startsWith("nc://login/")) {
+                    parseAndLoginFromWebView(url);
+                    return true;
+                }
+                return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+
+                progressBar.setVisibility(View.GONE);
+                webView.setVisibility(View.VISIBLE);
+            }
+
+//            @Override
+//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//                X509Certificate cert = SsoWebViewClient.getX509CertificateFromError(error);
+//
+//                try {
+//                    if (cert != null && NetworkUtils.isCertInKnownServersStore(cert, getApplicationContext())) {
+//                        handler.proceed();
+//                    } else {
+//                        showUntrustedCertDialog(cert, error, handler);
+//                    }
+//                } catch (Exception e) {
+//                    Log.e("Note", "Cert could not be verified");
+//                }
+//            }
+        });
+
+        // show snackbar after 60s to switch back to old login method
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Snackbar.make(webView, R.string.fallback_weblogin_text, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.fallback_weblogin_back, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                initLegacyLogin(field_url.getText().toString());
+                            }
+                        }).show();
+            }
+        }, 60 * 1000);
+    }
+
+    private String getWebLoginUserAgent() {
+        return Build.MANUFACTURER.substring(0, 1).toUpperCase(Locale.getDefault()) +
+                Build.MANUFACTURER.substring(1).toLowerCase(Locale.getDefault()) + " " + Build.MODEL;
+    }
+
+    private void parseAndLoginFromWebView(String dataString) {
+        String prefix = "nc://login/";
+        LoginUrlInfo loginUrlInfo = parseLoginDataUrl(prefix, dataString);
+
+        if (loginUrlInfo != null) {
+            String url = normalizeUrlSuffix(loginUrlInfo.serverAddress);
+
+            new LoginValidatorAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url, loginUrlInfo.username, 
+                    loginUrlInfo.password);
+        }
+    }
+
+    /**
+     * parses a URI string and returns a login data object with the information from the URI string.
+     *
+     * @param prefix     URI beginning, e.g. cloud://login/
+     * @param dataString the complete URI
+     * @return login data
+     * @throws IllegalArgumentException when
+     */
+    private LoginUrlInfo parseLoginDataUrl(String prefix, String dataString) throws IllegalArgumentException {
+        if (dataString.length() < prefix.length()) {
+            throw new IllegalArgumentException("Invalid login URL detected");
+        }
+        LoginUrlInfo loginUrlInfo = new LoginUrlInfo();
+
+        // format is basically xxx://login/server:xxx&user:xxx&password while all variables are optional
+        String data = dataString.substring(prefix.length());
+
+        // parse data
+        String[] values = data.split("&");
+
+        if (values.length < 1 || values.length > 3) {
+            // error illegal number of URL elements detected
+            throw new IllegalArgumentException("Illegal number of login URL elements detected: " + values.length);
+        }
+
+        for (String value : values) {
+            if (value.startsWith("user" + LOGIN_URL_DATA_KEY_VALUE_SEPARATOR)) {
+                loginUrlInfo.username = URLDecoder.decode(
+                        value.substring(("user" + LOGIN_URL_DATA_KEY_VALUE_SEPARATOR).length()));
+            } else if (value.startsWith("password" + LOGIN_URL_DATA_KEY_VALUE_SEPARATOR)) {
+                loginUrlInfo.password = URLDecoder.decode(
+                        value.substring(("password" + LOGIN_URL_DATA_KEY_VALUE_SEPARATOR).length()));
+            } else if (value.startsWith("server" + LOGIN_URL_DATA_KEY_VALUE_SEPARATOR)) {
+                loginUrlInfo.serverAddress = URLDecoder.decode(
+                        value.substring(("server" + LOGIN_URL_DATA_KEY_VALUE_SEPARATOR).length()));
+            } else {
+                // error illegal URL element detected
+                throw new IllegalArgumentException("Illegal magic login URL element detected: " + value);
+            }
+        }
+
+        return loginUrlInfo;
+    }
+
+    private String normalizeUrlSuffix(String url) {
+        if (url.toLowerCase(Locale.ROOT).endsWith(WEBDAV_PATH_4_0_AND_LATER)) {
+            return url.substring(0, url.length() - WEBDAV_PATH_4_0_AND_LATER.length());
+        }
+        
+        if (!url.endsWith("/")) {
+            return url + "/";
+        }
+
+        return url;
+    }
+    
+    private void initLegacyLogin(String oldUrl) {
+        useWebLogin = false;
+
+        webView.setVisibility(View.INVISIBLE);
+        setContentView(R.layout.activity_settings);
+
+        ButterKnife.bind(this);
+        setupListener();
+        
+        field_url.setText(oldUrl);
+        username_wrapper.setVisibility(View.VISIBLE);
+        password_wrapper.setVisibility(View.VISIBLE);
+    }
+
+    private void handleSubmitButtonEnabled() {
+        if (field_url.getText().length() > 0 && (username_wrapper.getVisibility() == View.GONE || 
+                (username_wrapper.getVisibility() == View.VISIBLE && field_username.getText().length() > 0))) {
             btn_submit.setEnabled(true);
         } else {
             btn_submit.setEnabled(false);
@@ -292,5 +483,14 @@ public class SettingsActivity extends AppCompatActivity {
             field_username.setEnabled(enabled);
             field_password.setEnabled(enabled);
         }
+    }
+
+    /**
+     * Data object holding the login url fields.
+     */
+    public class LoginUrlInfo {
+        String serverAddress;
+        String username;
+        String password;
     }
 }
