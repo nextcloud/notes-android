@@ -4,14 +4,20 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.text.Editable;
+import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yydcdut.rxmarkdown.RxMDEditText;
@@ -22,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
+import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
@@ -32,12 +39,43 @@ public class NoteEditFragment extends BaseNoteFragment {
 
     private static final long DELAY = 2000; // Wait for this time after typing before saving
     private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
-
-    private Handler handler;
-    private boolean saveActive, unsavedEdit;
-
     @BindView(R.id.editContent)
     RxMDEditText editContent;
+    private Handler handler;
+    private boolean saveActive, unsavedEdit;
+    private final Runnable runAutoSave = new Runnable() {
+        @Override
+        public void run() {
+            if (unsavedEdit) {
+                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: start AutoSave");
+                autoSave();
+            } else {
+                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: nothing changed");
+            }
+        }
+    };
+    private final TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(final CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(final Editable s) {
+            unsavedEdit = true;
+            if (!saveActive) {
+                handler.removeCallbacks(runAutoSave);
+                handler.postDelayed(runAutoSave, DELAY);
+            }
+        }
+    };
+    private android.support.v7.widget.SearchView searchView;
+
+    private String searchQuery = null;
+    private MenuItem searchMenuItem;
 
     public static NoteEditFragment newInstance(long noteId) {
         NoteEditFragment f = new NoteEditFragment();
@@ -66,6 +104,51 @@ public class NoteEditFragment extends BaseNoteFragment {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(true);
+        searchMenuItem = menu.findItem(R.id.search);
+        searchMenuItem.setVisible(true);
+
+        searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
+
+        final LinearLayout searchEditFrame = searchView.findViewById(android.support.v7.appcompat.R.id
+                .search_edit_frame);
+
+        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            int oldVisibility = -1;
+            @Override
+            public void onGlobalLayout() {
+                int currentVisibility = searchEditFrame.getVisibility();
+
+                if (currentVisibility != oldVisibility) {
+                    if (currentVisibility != View.VISIBLE) {
+                        colorWithText("");
+                    }
+
+                    oldVisibility = currentVisibility;
+                }
+            }
+
+        });
+
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                colorWithText(newText);
+                return true;
+            }
+        });
+    }
+
+    private void colorWithText(String newText) {
+        if (ViewCompat.isAttachedToWindow(editContent)) {
+            editContent.setText(DisplayUtils.searchAndColor(editContent.getText().toString(), new SpannableString
+                            (editContent.getText()), newText, getResources().getColor(R.color.primary)),
+                    TextView.BufferType.SPANNABLE);
+        }
     }
 
     @Nullable
@@ -79,6 +162,16 @@ public class NoteEditFragment extends BaseNoteFragment {
         super.onActivityCreated(savedInstanceState);
 
         ButterKnife.bind(this, getView());
+
+        if (savedInstanceState != null) {
+            searchQuery = savedInstanceState.getString("searchQuery", "");
+
+            if (!TextUtils.isEmpty(searchQuery)) {
+                searchMenuItem.expandActionView();
+                searchView.setQuery(searchQuery, true);
+                searchView.clearFocus();
+            }
+        }
 
         if (note.getContent().isEmpty()) {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -110,25 +203,6 @@ public class NoteEditFragment extends BaseNoteFragment {
                 });
     }
 
-    private final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(final CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(final Editable s) {
-            unsavedEdit = true;
-            if (!saveActive) {
-                handler.removeCallbacks(runAutoSave);
-                handler.postDelayed(runAutoSave, DELAY);
-            }
-        }
-    };
-
     @Override
     public void onResume() {
         super.onResume();
@@ -141,18 +215,6 @@ public class NoteEditFragment extends BaseNoteFragment {
         editContent.removeTextChangedListener(textWatcher);
         cancelTimers();
     }
-
-    private final Runnable runAutoSave = new Runnable() {
-        @Override
-        public void run() {
-            if (unsavedEdit) {
-                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: start AutoSave");
-                autoSave();
-            } else {
-                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: nothing changed");
-            }
-        }
-    };
 
     private void cancelTimers() {
         handler.removeCallbacks(runAutoSave);
@@ -202,4 +264,13 @@ public class NoteEditFragment extends BaseNoteFragment {
             }
         });
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (searchView != null && TextUtils.isEmpty(searchView.getQuery().toString())) {
+            outState.putString("searchQuery", searchView.getQuery().toString());
+        }
+    }
+
 }
