@@ -52,9 +52,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     public final static String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public final static String CREDENTIALS_CHANGED = "it.niedermann.owncloud.notes.CREDENTIALS_CHANGED";
+    public static final String ADAPTER_KEY_RECENT = "recent";
+    public static final String ADAPTER_KEY_STARRED = "starred";
 
-    private static final String ADAPTER_KEY_RECENT = "recent";
-    private static final String ADAPTER_KEY_STARRED = "starred";
     private static final String SAVED_STATE_NAVIGATION_SELECTION = "navigationSelection";
     private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
     private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
@@ -231,7 +231,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 if (closeNavigation) {
                     drawerLayout.closeDrawers();
                 }
-                refreshLists();
+                refreshLists(true);
             }
 
             @Override
@@ -428,6 +428,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void refreshLists() {
+        refreshLists(false);
+    }
+    private void refreshLists(final boolean scrollToTop) {
         String subtitle = "";
         if (navigationSelection.category != null) {
             if (navigationSelection.category.isEmpty()) {
@@ -451,6 +454,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             public void onNotesLoaded(List<Item> notes, boolean showCategory) {
                 adapter.setShowCategory(showCategory);
                 adapter.setItemList(notes);
+                if(scrollToTop) {
+                    listView.scrollToPosition(0);
+                }
             }
         };
         new LoadNotesListTask(getApplicationContext(), callback, navigationSelection, query).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -545,8 +551,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
                 DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
                 adapter.add(createdNote);
-                // TODO scroll to top
             }
+            listView.scrollToPosition(0);
         } else if (requestCode == server_settings) {
             // Create new Instance with new URL and credentials
             db = NoteSQLiteOpenHelper.getInstance(this);
