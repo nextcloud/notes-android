@@ -119,6 +119,8 @@ public class NoteEditFragment extends BaseNoteFragment {
             }
             searchView.setQuery(searchQuery, true);
             searchView.clearFocus();
+        }  else {
+            searchMenuItem.collapseActionView();
         }
 
         final LinearLayout searchEditFrame = searchView.findViewById(android.support.v7.appcompat.R.id
