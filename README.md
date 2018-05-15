@@ -11,6 +11,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 [![Download from Google Play](http://www.android.com/images/brand/android_app_on_play_large.png)](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
 [![Nextcloud Notes App on fdroid.org](https://camo.githubusercontent.com/7df0eafa4433fa4919a56f87c3d99cf81b68d01c/68747470733a2f2f662d64726f69642e6f72672f77696b692f696d616765732f632f63342f462d44726f69642d627574746f6e5f617661696c61626c652d6f6e2e706e67)](https://f-droid.org/repository/browse/?fdid=it.niedermann.owncloud.notes)
 [![Donate with PayPal](https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K7HVLE6J7SXXA)
+[![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/stefan-niedermann/donate)
 
 ## :eyes: Screenshots
 ![Screenshot of list view](/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png)
