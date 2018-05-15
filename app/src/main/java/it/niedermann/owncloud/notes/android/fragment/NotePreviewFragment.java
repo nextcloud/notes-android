@@ -38,10 +38,12 @@ public class NotePreviewFragment extends BaseNoteFragment {
     private String searchQuery = null;
     private SearchView searchView;
 
+    private static boolean isNewFragment = false;
     public static NotePreviewFragment newInstance(long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
         Bundle b = new Bundle();
         b.putLong(PARAM_NOTE_ID, noteId);
+        isNewFragment = true;
         f.setArguments(b);
         return f;
     }
@@ -51,13 +53,16 @@ public class NotePreviewFragment extends BaseNoteFragment {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(true);
         menu.findItem(R.id.menu_preview).setVisible(false);
-
         MenuItem searchMenuItem = menu.findItem(R.id.search);
 
         searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
 
         if (!TextUtils.isEmpty(searchQuery)) {
-            searchMenuItem.expandActionView();
+            if (!isNewFragment) {
+                searchMenuItem.expandActionView();
+            } else {
+                searchMenuItem.collapseActionView();
+            }
             searchView.setQuery(searchQuery, true);
             searchView.clearFocus();
         }

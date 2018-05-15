@@ -76,11 +76,13 @@ public class NoteEditFragment extends BaseNoteFragment {
 
     private String searchQuery = null;
     private MenuItem searchMenuItem;
+    private static boolean isNewFragment = false;
 
     public static NoteEditFragment newInstance(long noteId) {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
         b.putLong(PARAM_NOTE_ID, noteId);
+        isNewFragment = true;
         f.setArguments(b);
         return f;
     }
@@ -89,6 +91,7 @@ public class NoteEditFragment extends BaseNoteFragment {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
         b.putSerializable(PARAM_NEWNOTE, newNote);
+        isNewFragment = true;
         f.setArguments(b);
         return f;
     }
@@ -109,7 +112,11 @@ public class NoteEditFragment extends BaseNoteFragment {
         searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
 
         if (!TextUtils.isEmpty(searchQuery)) {
-            searchMenuItem.expandActionView();
+            if (!isNewFragment) {
+                searchMenuItem.expandActionView();
+            } else {
+                searchMenuItem.collapseActionView();
+            }
             searchView.setQuery(searchQuery, true);
             searchView.clearFocus();
         }
