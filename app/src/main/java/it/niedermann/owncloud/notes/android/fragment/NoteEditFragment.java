@@ -109,6 +109,12 @@ public class NoteEditFragment extends BaseNoteFragment {
 
         searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
 
+        if (!TextUtils.isEmpty(searchQuery)) {
+            searchMenuItem.expandActionView();
+            searchView.setQuery(searchQuery, true);
+            searchView.clearFocus();
+        }
+
         final LinearLayout searchEditFrame = searchView.findViewById(android.support.v7.appcompat.R.id
                 .search_edit_frame);
 
@@ -121,6 +127,7 @@ public class NoteEditFragment extends BaseNoteFragment {
                 if (currentVisibility != oldVisibility) {
                     if (currentVisibility != View.VISIBLE) {
                         colorWithText("");
+                        searchQuery = "";
                     }
 
                     oldVisibility = currentVisibility;
@@ -137,6 +144,7 @@ public class NoteEditFragment extends BaseNoteFragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                searchQuery = newText;
                 colorWithText(newText);
                 return true;
             }
@@ -165,12 +173,6 @@ public class NoteEditFragment extends BaseNoteFragment {
 
         if (savedInstanceState != null) {
             searchQuery = savedInstanceState.getString("searchQuery", "");
-
-            if (!TextUtils.isEmpty(searchQuery)) {
-                searchMenuItem.expandActionView();
-                searchView.setQuery(searchQuery, true);
-                searchView.clearFocus();
-            }
         }
 
         if (note.getContent().isEmpty()) {
@@ -268,7 +270,7 @@ public class NoteEditFragment extends BaseNoteFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (searchView != null && TextUtils.isEmpty(searchView.getQuery().toString())) {
+        if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
             outState.putString("searchQuery", searchView.getQuery().toString());
         }
     }
