@@ -105,7 +105,6 @@ public class NoteEditFragment extends BaseNoteFragment {
         menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(true);
         searchMenuItem = menu.findItem(R.id.search);
-        searchMenuItem.setVisible(true);
 
         searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
 
