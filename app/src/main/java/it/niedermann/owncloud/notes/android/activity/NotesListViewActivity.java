@@ -52,9 +52,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     public final static String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public final static String CREDENTIALS_CHANGED = "it.niedermann.owncloud.notes.CREDENTIALS_CHANGED";
+    public static final String ADAPTER_KEY_RECENT = "recent";
+    public static final String ADAPTER_KEY_STARRED = "starred";
 
-    private static final String ADAPTER_KEY_RECENT = "recent";
-    private static final String ADAPTER_KEY_STARRED = "starred";
     private static final String SAVED_STATE_NAVIGATION_SELECTION = "navigationSelection";
     private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
     private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
