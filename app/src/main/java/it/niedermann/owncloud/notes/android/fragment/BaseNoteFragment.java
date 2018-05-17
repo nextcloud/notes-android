@@ -8,16 +8,25 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
+import android.text.SpannableString;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 
 public abstract class BaseNoteFragment extends Fragment implements CategoryDialogFragment.CategoryDialogListener {
@@ -33,11 +42,31 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
+    protected SearchView searchView;
+    protected MenuItem searchMenuItem;
+
+    protected String searchQuery = null;
+
     protected DBNote note;
     @Nullable
     private DBNote originalNote;
     private NoteSQLiteOpenHelper db;
     private NoteFragmentListener listener;
+
+    private TextView activeTextView;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            searchQuery = savedInstanceState.getString("searchQuery", "");
+        }
+    }
+
+    protected void setActiveTextView(TextView textView) {
+        activeTextView = textView;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,6 +118,18 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         super.onSaveInstanceState(outState);
         outState.putSerializable(SAVEDKEY_NOTE, note);
         outState.putSerializable(SAVEDKEY_ORIGINAL_NOTE, originalNote);
+
+        if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
+            outState.putString("searchQuery", searchView.getQuery().toString());
+        }
+    }
+
+    private void colorWithText(String newText) {
+        if (activeTextView != null && ViewCompat.isAttachedToWindow(activeTextView)) {
+            activeTextView.setText(DisplayUtils.searchAndColor(activeTextView.getText().toString(), new SpannableString
+                            (activeTextView.getText()), newText, getResources().getColor(R.color.primary)),
+                    TextView.BufferType.SPANNABLE);
+        }
     }
 
     @Override
@@ -101,6 +142,52 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         super.onPrepareOptionsMenu(menu);
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
+
+        searchMenuItem = menu.findItem(R.id.search);
+        searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
+
+        if (!TextUtils.isEmpty(searchQuery)) {
+            searchView.setQuery(searchQuery, true);
+            searchView.clearFocus();
+        } else {
+            searchMenuItem.collapseActionView();
+        }
+
+        final LinearLayout searchEditFrame = searchView.findViewById(android.support.v7.appcompat.R.id
+                .search_edit_frame);
+
+        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            int oldVisibility = -1;
+            @Override
+            public void onGlobalLayout() {
+                int currentVisibility = searchEditFrame.getVisibility();
+
+                if (currentVisibility != oldVisibility) {
+                    if (currentVisibility != View.VISIBLE) {
+                        colorWithText("");
+                        searchQuery = "";
+                    }
+
+                    oldVisibility = currentVisibility;
+                }
+            }
+
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchQuery = newText;
+                colorWithText(newText);
+                return true;
+            }
+        });
+
     }
 
     private void prepareFavoriteOption(MenuItem item) {

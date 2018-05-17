@@ -4,20 +4,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
 import android.text.Editable;
-import android.text.SpannableString;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yydcdut.rxmarkdown.RxMDEditText;
@@ -28,7 +22,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
@@ -74,15 +67,11 @@ public class NoteEditFragment extends BaseNoteFragment {
     };
     private android.support.v7.widget.SearchView searchView;
 
-    private String searchQuery = null;
-    private MenuItem searchMenuItem;
-    private static boolean isNewFragment = false;
 
     public static NoteEditFragment newInstance(long noteId) {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
         b.putLong(PARAM_NOTE_ID, noteId);
-        isNewFragment = true;
         f.setArguments(b);
         return f;
     }
@@ -91,7 +80,6 @@ public class NoteEditFragment extends BaseNoteFragment {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
         b.putSerializable(PARAM_NEWNOTE, newNote);
-        isNewFragment = true;
         f.setArguments(b);
         return f;
     }
@@ -107,64 +95,6 @@ public class NoteEditFragment extends BaseNoteFragment {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(true);
-        searchMenuItem = menu.findItem(R.id.search);
-
-        searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
-
-        if (!TextUtils.isEmpty(searchQuery)) {
-            if (!isNewFragment) {
-                searchMenuItem.expandActionView();
-            } else {
-                searchMenuItem.collapseActionView();
-            }
-            searchView.setQuery(searchQuery, true);
-            searchView.clearFocus();
-        }  else {
-            searchMenuItem.collapseActionView();
-        }
-
-        final LinearLayout searchEditFrame = searchView.findViewById(android.support.v7.appcompat.R.id
-                .search_edit_frame);
-
-        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            int oldVisibility = -1;
-            @Override
-            public void onGlobalLayout() {
-                int currentVisibility = searchEditFrame.getVisibility();
-
-                if (currentVisibility != oldVisibility) {
-                    if (currentVisibility != View.VISIBLE) {
-                        colorWithText("");
-                        searchQuery = "";
-                    }
-
-                    oldVisibility = currentVisibility;
-                }
-            }
-
-        });
-
-        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                searchQuery = newText;
-                colorWithText(newText);
-                return true;
-            }
-        });
-    }
-
-    private void colorWithText(String newText) {
-        if (ViewCompat.isAttachedToWindow(editContent)) {
-            editContent.setText(DisplayUtils.searchAndColor(editContent.getText().toString(), new SpannableString
-                            (editContent.getText()), newText, getResources().getColor(R.color.primary)),
-                    TextView.BufferType.SPANNABLE);
-        }
     }
 
     @Nullable
@@ -179,9 +109,7 @@ public class NoteEditFragment extends BaseNoteFragment {
 
         ButterKnife.bind(this, getView());
 
-        if (savedInstanceState != null) {
-            searchQuery = savedInstanceState.getString("searchQuery", "");
-        }
+        setActiveTextView(editContent);
 
         if (note.getContent().isEmpty()) {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -274,13 +202,4 @@ public class NoteEditFragment extends BaseNoteFragment {
             }
         });
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
-            outState.putString("searchQuery", searchView.getQuery().toString());
-        }
-    }
-
 }
