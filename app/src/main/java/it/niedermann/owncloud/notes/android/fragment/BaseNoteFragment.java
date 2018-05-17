@@ -147,6 +147,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
 
         if (!TextUtils.isEmpty(searchQuery)) {
+            searchMenuItem.expandActionView();
             searchView.setQuery(searchQuery, true);
             searchView.clearFocus();
         } else {
