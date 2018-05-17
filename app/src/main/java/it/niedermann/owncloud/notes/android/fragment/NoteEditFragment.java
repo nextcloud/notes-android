@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -95,6 +96,10 @@ public class NoteEditFragment extends BaseNoteFragment {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(true);
+
+        if (TextUtils.isEmpty(searchQuery)) {
+            searchMenuItem.collapseActionView();
+        }
     }
 
     @Nullable

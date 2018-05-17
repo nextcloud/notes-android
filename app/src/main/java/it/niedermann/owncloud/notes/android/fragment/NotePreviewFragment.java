@@ -27,12 +27,10 @@ public class NotePreviewFragment extends BaseNoteFragment {
     @BindView(R.id.single_note_content)
     RxMDTextView noteContent;
 
-    private static boolean isNewFragment = false;
     public static NotePreviewFragment newInstance(long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
         Bundle b = new Bundle();
         b.putLong(PARAM_NOTE_ID, noteId);
-        isNewFragment = true;
         f.setArguments(b);
         return f;
     }

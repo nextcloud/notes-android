@@ -54,6 +54,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private NoteFragmentListener listener;
 
     private TextView activeTextView;
+    private boolean isNew;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         if (savedInstanceState != null) {
             searchQuery = savedInstanceState.getString("searchQuery", "");
         }
+
     }
 
     protected void setActiveTextView(TextView textView) {
@@ -72,6 +74,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
+            isNew = true;
             long id = getArguments().getLong(PARAM_NOTE_ID);
             if (id > 0) {
                 note = originalNote = db.getNote(id);
@@ -84,6 +87,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 originalNote = null;
             }
         } else {
+            isNew = false;
             note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
             originalNote = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
         }
@@ -146,13 +150,14 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         searchMenuItem = menu.findItem(R.id.search);
         searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
 
-        if (!TextUtils.isEmpty(searchQuery)) {
+        if (!TextUtils.isEmpty(searchQuery) && isNew) {
             searchMenuItem.expandActionView();
             searchView.setQuery(searchQuery, true);
             searchView.clearFocus();
         } else {
             searchMenuItem.collapseActionView();
         }
+
 
         final LinearLayout searchEditFrame = searchView.findViewById(android.support.v7.appcompat.R.id
                 .search_edit_frame);
