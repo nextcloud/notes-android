@@ -131,6 +131,7 @@
     <plurals name="ab_selected">
         <item quantity="one">%d vybraný</item>
         <item quantity="few">%d vybraných</item>
+        <item quantity="many">%d vybraný</item>
         <item quantity="other">%d vybraný</item>
     </plurals>
 </resources>

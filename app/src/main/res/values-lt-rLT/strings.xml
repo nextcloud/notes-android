@@ -125,6 +125,7 @@
     <plurals name="ab_selected">
         <item quantity="one">%d pasirinkta</item>
         <item quantity="few">%d pasirinkta</item>
+        <item quantity="many">%d pasirinkta</item>
         <item quantity="other">%d pasirinkta</item>
     </plurals>
 </resources>
