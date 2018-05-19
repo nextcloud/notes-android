@@ -9,9 +9,12 @@
     <string name="action_settings">Поставке</string>
     <string name="action_search">Тражи</string>
     <string name="action_create_save">Сачувај</string>
+    <string name="simple_cancel">Поништи</string>
+    <string name="simple_edit">Измени</string>
     <string name="action_edit_save">Сачувај</string>
     <string name="action_edit_saving">Чувам &#8230;</string>
     <string name="action_edit_saved">Сачувано</string>
+    <string name="simple_about">О програму</string>
     <string name="action_select_note">Изабери белешку</string>
     <string name="action_note_deleted">Белешка обрисана</string>
     <string name="action_note_restored">Белешка повраћена</string>
@@ -26,6 +29,8 @@
     <string name="menu_preview">Преглед</string>
     <string name="menu_share">Подели</string>
     <string name="menu_about">О програму</string>
+
+    <string name="change_category_title">Одаберите категорију</string>
 
     <string name="listview_updated_today">Данас</string>
     <string name="listview_updated_yesterday">Јуче</string>
@@ -47,6 +52,7 @@
     <string name="settings_submitting">Повезујем се&#8230;</string>
     <string name="settings_view_category">Поставке прегледа</string>
     <string name="settings_note_mode">Начин приказа за Белешке</string>
+    <string name="settings_theme_title">Тема</string>
     <string name="settings_cert_category">Сертификати</string>
     <string name="settings_cert_trust_system">Веруј системским сертификатима</string>
     <string name="settings_cert_trust_system_on">Вероваће се системским сертификатима и кориснички доданим сертификационим центрима (CA)</string>
@@ -107,12 +113,16 @@
     <string name="widget_single_note_placeholder_tv">Белешка није нађена</string>
     <string name="widget_create_note">Направи белешку</string>
     <string name="widget_not_logged_in">Пријавите се на Белешке пре коришћења овог елемента</string>
+    <string name="widget_entry_fav_contentDescription">Звездица се користила да означи да је ставка омиљена</string>
     <string name="widget_app_launcher_contentDescription">Покреће апликацију</string>
 
     <string name="activity_select_single_note">Одабери белешку</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Направи нову белешку</string>
+
+    <string name="pref_value_theme_light">Светла</string>
+    <string name="pref_value_theme_dark">Тамна</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

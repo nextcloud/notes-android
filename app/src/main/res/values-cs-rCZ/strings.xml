@@ -123,6 +123,7 @@
     <plurals name="ab_selected">
         <item quantity="one">vybrán %d</item>
         <item quantity="few">vybrány %d</item>
+        <item quantity="many">vybráno %d</item>
         <item quantity="other">vybráno %d</item>
     </plurals>
 </resources>

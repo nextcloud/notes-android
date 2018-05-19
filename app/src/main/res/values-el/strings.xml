@@ -101,6 +101,8 @@
     <string name="widget_not_logged_in">Παρακαλούμε συνδεθείτε στις Σημειώσεις πρωτού να χρησιμοποιήσετε αυτό το γραφικό στοιχείο.</string>
     <string name="widget_app_launcher_contentDescription">Εκκινεί την εφαρμογή</string>
 
+    <string name="activity_select_single_note">Επιλογή σημείωσης</string>
+
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>
 
