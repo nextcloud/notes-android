@@ -66,8 +66,6 @@ public class NoteEditFragment extends BaseNoteFragment {
             }
         }
     };
-    private android.support.v7.widget.SearchView searchView;
-
 
     public static NoteEditFragment newInstance(long noteId) {
         NoteEditFragment f = new NoteEditFragment();
