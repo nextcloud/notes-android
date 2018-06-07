@@ -558,7 +558,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             db = NoteSQLiteOpenHelper.getInstance(this);
             if (db.getNoteServerSyncHelper().isSyncPossible()) {
                 adapter.removeAll();
-                swipeRefreshLayout.setRefreshing(true);
                 synchronize();
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
@@ -633,6 +632,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void synchronize() {
+        swipeRefreshLayout.setRefreshing(true);
         db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
         db.getNoteServerSyncHelper().scheduleSync(false);
     }
