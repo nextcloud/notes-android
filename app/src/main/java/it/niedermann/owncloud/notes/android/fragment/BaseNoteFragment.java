@@ -79,6 +79,12 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        saveNote(null);
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         listener = null;
@@ -155,11 +161,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
-    public void onPrepareClose() {
-        saveNote(null);
-    }
-
-    public void onFinalClose() {
+    public void onCloseNote() {
         if (originalNote == null && getContent().isEmpty()) {
             db.deleteNoteAndSync(note.getId());
         }
