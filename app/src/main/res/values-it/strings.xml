@@ -52,6 +52,7 @@
     <string name="settings_submitting">Connessione a &#8230;</string>
     <string name="settings_view_category">impostazioni di visualizzazione</string>
     <string name="settings_note_mode">Modalità  di visualizzazione delle note</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_category">Certificati</string>
     <string name="settings_cert_trust_system">Considera affidabili i certificati di sistema</string>
     <string name="settings_cert_trust_system_on">Le CA di sistema e aggiunte dall\'utente saranno considerate affidabili (consigliato)</string>
@@ -119,6 +120,9 @@
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crea una nuova nota</string>
+
+    <string name="pref_value_theme_light">Chiaro</string>
+    <string name="pref_value_theme_dark">Scuro</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

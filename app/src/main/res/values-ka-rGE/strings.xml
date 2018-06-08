@@ -121,6 +121,7 @@
 
     <!-- Plurals -->
     <plurals name="ab_selected">
+        <item quantity="one">%d არჩეულია</item>
         <item quantity="other">%d არჩეულია</item>
     </plurals>
 </resources>

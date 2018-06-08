@@ -3,6 +3,7 @@
 
     <string name="app_name">便笺</string>
     <string name="no_notes">没有便笺</string>
+    <string name="label_all_notes">所有便笺</string>
     <string name="action_create">新建便笺</string>
     <string name="action_settings">设置</string>
     <string name="action_search">搜索</string>

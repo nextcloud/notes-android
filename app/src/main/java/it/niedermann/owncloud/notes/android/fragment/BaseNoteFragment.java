@@ -79,6 +79,12 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        saveNote(null);
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         listener = null;
@@ -155,11 +161,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
-    public void onPrepareClose() {
-        saveNote(null);
-    }
-
-    public void onFinalClose() {
+    public void onCloseNote() {
         if (originalNote == null && getContent().isEmpty()) {
             db.deleteNoteAndSync(note.getId());
         }
@@ -172,8 +174,13 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
      */
     protected void saveNote(@Nullable ICallback callback) {
         Log.d(getClass().getSimpleName(), "saveData()");
-        note = db.updateNoteAndSync(note, getContent(), callback);
-        listener.onNoteUpdated(note);
+        String newContent = getContent();
+        if(note.getContent().equals(newContent)) {
+            Log.v(getClass().getSimpleName(), "... not saving, since nothing has changed");
+        } else {
+            note = db.updateNoteAndSync(note, newContent, callback);
+            listener.onNoteUpdated(note);
+        }
     }
 
     protected abstract String getContent();

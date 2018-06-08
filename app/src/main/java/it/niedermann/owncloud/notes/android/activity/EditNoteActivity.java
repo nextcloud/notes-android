@@ -148,7 +148,6 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     @Override
     public void onBackPressed() {
-        fragment.onPrepareClose();
         close();
     }
 
@@ -162,15 +161,12 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                fragment.onPrepareClose();
                 close();
                 return true;
             case R.id.menu_preview:
-                fragment.onPrepareClose();
                 launchExistingNote(getNoteId(), false);
                 return true;
             case R.id.menu_edit:
-                fragment.onPrepareClose();
                 launchExistingNote(getNoteId(), true);
                 return true;
             default:
@@ -193,7 +189,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         } else {
             preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_preview)).apply();
         }
-        fragment.onFinalClose();
+        fragment.onCloseNote();
         finish();
     }
 
