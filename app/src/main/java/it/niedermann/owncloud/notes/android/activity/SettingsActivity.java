@@ -3,6 +3,8 @@ package it.niedermann.owncloud.notes.android.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
+import android.net.http.SslCertificate;
+import android.net.http.SslError;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,12 +29,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayInputStream;
 import java.net.URLDecoder;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import at.bitfire.cert4android.CustomCertManager;
+import at.bitfire.cert4android.IOnCertificateDecision;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -226,7 +235,31 @@ public class SettingsActivity extends AppCompatActivity {
             legacyLogin();
         }
     }
-    
+
+    /**
+     * Obtain the X509Certificate from SslError
+     *
+     * @param error SslError
+     * @return X509Certificate from error
+     */
+    public static X509Certificate getX509CertificateFromError(SslError error) {
+        Bundle bundle = SslCertificate.saveState(error.getCertificate());
+        X509Certificate x509Certificate;
+        byte[] bytes = bundle.getByteArray("x509-certificate");
+        if (bytes == null) {
+            x509Certificate = null;
+        } else {
+            try {
+                CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
+                Certificate cert = certFactory.generateCertificate(new ByteArrayInputStream(bytes));
+                x509Certificate = (X509Certificate) cert;
+            } catch (CertificateException e) {
+                x509Certificate = null;
+            }
+        }
+        return x509Certificate;
+    }
+
     private void webLogin() {
         setContentView(R.layout.activity_settings_webview);
         webView = findViewById(R.id.login_webview);
@@ -266,20 +299,38 @@ public class SettingsActivity extends AppCompatActivity {
                 webView.setVisibility(View.VISIBLE);
             }
 
-//            @Override
-//            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-//                X509Certificate cert = SsoWebViewClient.getX509CertificateFromError(error);
-//
-//                try {
-//                    if (cert != null && NetworkUtils.isCertInKnownServersStore(cert, getApplicationContext())) {
-//                        handler.proceed();
-//                    } else {
-//                        showUntrustedCertDialog(cert, error, handler);
-//                    }
-//                } catch (Exception e) {
-//                    Log.e("Note", "Cert could not be verified");
-//                }
-//            }
+            @Override
+            public void onReceivedSslError(WebView view, final SslErrorHandler handler, SslError error) {
+                X509Certificate cert = getX509CertificateFromError(error);
+
+                try {
+                    final boolean[] accepted = new boolean[1];
+                    NoteServerSyncHelper.getInstance(NoteSQLiteOpenHelper.getInstance(getApplicationContext()))
+                            .checkCertificate(cert.getEncoded(), new IOnCertificateDecision.Stub() {
+                                @Override
+                                public void accept() {
+                                    Log.d("Note", "cert accepted");
+                                    handler.proceed();
+                                    accepted[0] = true;
+                                }
+                                @Override
+                                public void reject() {
+                                    Log.d("Note", "cert rejected");
+                                    handler.cancel();
+                                }
+                            });
+
+                    if (!accepted[0]) {
+                        // this should never happen, submit button is only enabled if url has been validated
+                        Log.e("Note", "No response from certificate service");
+                        handler.cancel();
+                    }
+                } catch (Exception e) {
+                    Log.e("Note", "Cert could not be verified");
+                    handler.cancel();
+                }
+            }
+
         });
 
         // show snackbar after 60s to switch back to old login method
@@ -385,7 +436,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void handleSubmitButtonEnabled() {
-        if (field_url.getText().length() > 0 && (username_wrapper.getVisibility() == View.GONE || 
+        // drawable[2] is not null if url is valid, see URLValidatorAsyncTask::onPostExecute
+        if (field_url.getCompoundDrawables()[2] != null && (username_wrapper.getVisibility() == View.GONE ||
                 (username_wrapper.getVisibility() == View.VISIBLE && field_username.getText().length() > 0))) {
             btn_submit.setEnabled(true);
         } else {
@@ -403,6 +455,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            btn_submit.setEnabled(false);
             field_url.setCompoundDrawables(null, null, null, null);
         }
 
@@ -421,6 +474,7 @@ public class SettingsActivity extends AppCompatActivity {
             } else {
                 field_url.setCompoundDrawables(null, null, null, null);
             }
+            handleSubmitButtonEnabled();
         }
     }
 
