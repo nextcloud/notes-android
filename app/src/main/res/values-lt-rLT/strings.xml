@@ -35,7 +35,6 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Paskyros nustatymai</string>
-    <string name="settings_server">Serveris</string>
     <string name="settings_url">Serverio adresas</string>
     <string name="settings_url_check_description">Parodo, ar adresas yra pasiekiamas.</string>
     <string name="settings_url_warn_http">ĮSPĖJIMAS: \"http\" protokolas yra nesaugus. Prašome naudoti \"https\".</string>
@@ -45,7 +44,6 @@
     <string name="settings_password_check_description">Parodo, ar teisingi prisijungimo duomenys</string>
     <string name="settings_submit">Prisijungti</string>
     <string name="settings_submitting">Jungiamasi &#8230;</string>
-    <string name="settings_view_category">Žiūrėti nustatymus</string>
     <string name="settings_note_mode">Pastabų atvaizdavimas</string>
     <string name="settings_cert_category">Sertifikatai</string>
     <string name="settings_cert_trust_system">Pasitikėti sistemos sertifikatais</string>

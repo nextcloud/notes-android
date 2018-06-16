@@ -44,7 +44,6 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Account Settings</string>
-    <string name="settings_server">Server</string>
     <string name="settings_url">Server address</string>
     <string name="settings_url_check_description">Shows whether the address can be pinged.</string>
     <string name="settings_url_warn_http">WARNING: \"http\" is unsafe. Please use \"https\".</string>
@@ -54,7 +53,6 @@
     <string name="settings_password_check_description">Displays whether the credentials are correct.</string>
     <string name="settings_submit">Connect</string>
     <string name="settings_submitting">Connecting &#8230;</string>
-    <string name="settings_view_category">View settings</string>
     <string name="settings_note_mode">Display mode for Notes</string>
     <string name="settings_notification_title">\"Create note\" as notification</string>
     <string name="settings_notification">Enable to show a persistent notification for quickly creating new notes.</string>
