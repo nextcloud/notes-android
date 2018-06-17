@@ -390,31 +390,40 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
              */
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-                    final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                    db.deleteNoteAndSync((dbNote).getId());
-                    adapter.remove(dbNote);
-                    refreshLists();
-                    Log.v("Note", "Item deleted through swipe ----------------------------------------------");
-                    Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, 7 * 1000)
-                            .setAction(R.string.action_undo, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    db.addNoteAndSync(dbNote);
-                                    refreshLists();
-                                    Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
-                                            .show();
-                                }
-                            })
-                            .show();
+                switch(direction) {
+                    case ItemTouchHelper.LEFT: {
+                        final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                        db.deleteNoteAndSync((dbNote).getId());
+                        adapter.remove(dbNote);
+                        refreshLists();
+                        Log.v("Note", "Item deleted through swipe ----------------------------------------------");
+                        Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
+                                .setAction(R.string.action_undo, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        db.addNoteAndSync(dbNote);
+                                        refreshLists();
+                                        Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
+                                                .show();
+                                    }
+                                })
+                                .show();
+                        break;
+                    }
+                    case ItemTouchHelper.RIGHT: {
+                        final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                        db.toggleFavorite(dbNote, null);
+                        refreshLists();
+                        break;
+                    }
                 }
             }
 
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
-                // show delete icon on the right side
-                noteViewHolder.showSwipeDelete(dX > 0);
+                // show swipe icon on the side
+                noteViewHolder.showSwipe(dX>0);
                 // move only swipeable part of item (not leave-behind)
                 getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.noteSwipeable, dX, dY, actionState, isCurrentlyActive);
             }
