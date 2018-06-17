@@ -172,11 +172,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         @BindView(R.id.noteSwipeable)
         public View noteSwipeable;
-        @BindView(R.id.noteDeleteLeft)
-        ImageView noteDeleteLeft;
-        @BindView(R.id.noteDeleteRight)
-        ImageView noteDeleteRight;
-        @BindView(R.id.noteTitle)
+        View noteSwipeFrame;
+        ImageView noteFavoriteLeft, noteDeleteRight;
         TextView noteTitle;
         @BindView(R.id.noteCategory)
         TextView noteCategory;
@@ -187,11 +184,19 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @BindView(R.id.noteFavorite)
         ImageView noteFavorite;
 
-        private NoteViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-            view.setOnClickListener(this);
-            view.setOnLongClickListener(this);
+        private NoteViewHolder(View v) {
+            super(v);
+            this.noteSwipeFrame = v.findViewById(R.id.noteSwipeFrame);
+            this.noteSwipeable = v.findViewById(R.id.noteSwipeable);
+            this.noteFavoriteLeft = v.findViewById(R.id.noteFavoriteLeft);
+            this.noteDeleteRight = v.findViewById(R.id.noteDeleteRight);
+            this.noteTitle = v.findViewById(R.id.noteTitle);
+            this.noteCategory = v.findViewById(R.id.noteCategory);
+            this.noteExcerpt = v.findViewById(R.id.noteExcerpt);
+            this.noteStatus = v.findViewById(R.id.noteStatus);
+            this.noteFavorite = v.findViewById(R.id.noteFavorite);
+            v.setOnClickListener(this);
+            v.setOnLongClickListener(this);
         }
 
         @Override
@@ -204,9 +209,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return noteClickListener.onNoteLongClick(getAdapterPosition(), v);
         }
 
-        public void showSwipeDelete(boolean left) {
-            noteDeleteLeft.setVisibility(left ? View.VISIBLE : View.INVISIBLE);
+        public void showSwipe(boolean left) {
+            noteFavoriteLeft.setVisibility(left ? View.VISIBLE : View.INVISIBLE);
             noteDeleteRight.setVisibility(left ? View.INVISIBLE : View.VISIBLE);
+            noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
         }
     }
 
