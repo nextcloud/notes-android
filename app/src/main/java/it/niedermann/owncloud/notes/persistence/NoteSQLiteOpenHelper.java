@@ -12,13 +12,10 @@ import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
@@ -35,9 +32,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
  */
 public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
-    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
-    private static final int database_version = 7;
+    private static final int database_version = 8;
     private static final String database_name = "OWNCLOUD_NOTES";
     private static final String table_notes = "NOTES";
     private static final String key_id = "ID";
@@ -82,18 +77,23 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + table_notes + " ( " +
+        createTable(db, table_notes);
+    }
+
+    private void createTable(SQLiteDatabase db, String tableName) {
+        db.execSQL("CREATE TABLE " + tableName + " ( " +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_remote_id + " INTEGER, " +
                 key_status + " VARCHAR(50), " +
                 key_title + " TEXT, " +
-                key_modified + " TEXT, " +
+                key_modified + " INTEGER DEFAULT 0, " +
                 key_content + " TEXT, " +
                 key_favorite + " INTEGER DEFAULT 0, " +
                 key_category + " TEXT NOT NULL DEFAULT '', " +
                 key_etag + " TEXT)");
         createIndexes(db);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -116,6 +116,14 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_category + " TEXT NOT NULL DEFAULT ''");
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_etag + " TEXT");
             createIndexes(db);
+        }
+        if (oldVersion < 8) {
+            final String table_temp = "NOTES_TEMP";
+            createTable(db, table_temp);
+            db.execSQL(String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s,%s,%s) ", table_temp, key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag)
+                    + String.format("SELECT %s,%s,%s,%s,strftime('%%s',%s),%s,%s,%s,%s FROM %s", key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_notes));
+            db.execSQL(String.format("DROP TABLE %s", table_notes));
+            db.execSQL(String.format("ALTER TABLE %s RENAME TO %s", table_temp, table_notes));
         }
     }
 
@@ -206,7 +214,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             values.put(key_remote_id, note.getRemoteId());
         }
         values.put(key_title, note.getTitle());
-        values.put(key_modified, note.getModified(NoteSQLiteOpenHelper.DATE_FORMAT));
+        values.put(key_modified, note.getModified().getTimeInMillis() / 1000);
         values.put(key_content, note.getContent());
         values.put(key_favorite, note.isFavorite());
         values.put(key_category, note.getCategory());
@@ -258,13 +266,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull
     private DBNote getNoteFromCursor(@NonNull Cursor cursor) {
         Calendar modified = Calendar.getInstance();
-        try {
-            String modifiedStr = cursor.getString(4);
-            if (modifiedStr != null)
-                modified.setTime(new SimpleDateFormat(DATE_FORMAT, Locale.GERMANY).parse(modifiedStr));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        modified.setTimeInMillis(cursor.getLong(4) * 1000);
         return new DBNote(cursor.getLong(0), cursor.getLong(1), modified, cursor.getString(3), cursor.getString(5), cursor.getInt(6) > 0, cursor.getString(7), cursor.getString(8), DBStatus.parse(cursor.getString(2)));
     }
 
@@ -440,7 +442,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_status, newNote.getStatus().getTitle());
         values.put(key_title, newNote.getTitle());
         values.put(key_category, newNote.getCategory());
-        values.put(key_modified, newNote.getModified(DATE_FORMAT));
+        values.put(key_modified, newNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, newNote.getContent());
         int rows = db.update(table_notes, values, key_id + " = ? AND (" + key_content + " != ? OR " + key_category + " != ?)", new String[]{String.valueOf(newNote.getId()), newNote.getContent(), newNote.getCategory()});
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
@@ -482,7 +484,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.clear();
         values.put(key_status, DBStatus.VOID.getTitle());
         values.put(key_title, remoteNote.getTitle());
-        values.put(key_modified, remoteNote.getModified(DATE_FORMAT));
+        values.put(key_modified, remoteNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, remoteNote.getContent());
         values.put(key_favorite, remoteNote.isFavorite());
         values.put(key_category, remoteNote.getCategory());
@@ -500,7 +502,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             // used by: NoteServerSyncHelper.SyncTask.pullRemoteChanges()
             // update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
             whereClause = key_id + " = ? AND " + key_status + " = ? AND (" + key_modified + "!=? OR " + key_title + "!=? OR " + key_favorite + "!=? OR " + key_category + "!=? OR " + (remoteNote.getEtag() != null ? key_etag + " IS NULL OR " : "") + key_etag + "!=? OR " + key_content + "!=?)";
-            whereArgs = new String[]{String.valueOf(id), DBStatus.VOID.getTitle(), remoteNote.getModified(DATE_FORMAT), remoteNote.getTitle(), remoteNote.isFavorite() ? "1" : "0", remoteNote.getCategory(), remoteNote.getEtag(), remoteNote.getContent()};
+            whereArgs = new String[]{String.valueOf(id), DBStatus.VOID.getTitle(), Long.toString(remoteNote.getModified().getTimeInMillis() / 1000), remoteNote.getTitle(), remoteNote.isFavorite() ? "1" : "0", remoteNote.getCategory(), remoteNote.getEtag(), remoteNote.getContent()};
         }
         int i = db.update(table_notes, values, whereClause, whereArgs);
         Log.d(getClass().getSimpleName(), "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "  => " + i + " rows updated");
