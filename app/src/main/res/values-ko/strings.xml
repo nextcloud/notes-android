@@ -7,13 +7,9 @@
     <string name="action_settings">설정</string>
     <string name="action_search">검색</string>
     <string name="action_create_save">저장</string>
-    <string name="action_create_cancel">취소</string>
-    <string name="action_edit_editing">편집</string>
     <string name="action_edit_save">저장</string>
     <string name="action_edit_saving">저장 중&#8230;</string>
     <string name="action_edit_saved">저장됨</string>
-    <string name="action_edit_cancel">취소</string>
-    <string name="action_about">정보</string>
     <string name="action_select_note">메모 선택</string>
     <string name="action_note_deleted">메모 삭제됨</string>
     <string name="action_note_restored">메모 복원됨</string>
@@ -23,17 +19,11 @@
     <string name="action_recent">최근 항목</string>
     <string name="action_uncategorized">분류 없음</string>
     <string name="menu_delete">삭제</string>
-    <string name="menu_copy">복사</string>
-    <string name="menu_edit">편집</string>
-    <string name="menu_cancel">취소</string>
     <string name="menu_change_category">분류</string>
     <string name="menu_favorite">즐겨찾기</string>
     <string name="menu_preview">미리 보기</string>
     <string name="menu_share">공유</string>
     <string name="menu_about">정보</string>
-
-    <string name="change_category_title">분류 선택</string>
-    <string name="copy">복사</string>
 
     <string name="listview_updated_today">오늘</string>
     <string name="listview_updated_yesterday">어제</string>
@@ -115,7 +105,6 @@
     <string name="widget_single_note_placeholder_tv">메모 없음</string>
     <string name="widget_create_note">새 메모</string>
     <string name="widget_not_logged_in">이 위젯을 사용하려면 먼저 로그인하십시오</string>
-    <string name="widget_entry_fav_contentDescription">즐겨찾기에 항목을 추가하려면 별표 아이콘 사용</string>
     <string name="widget_app_launcher_contentDescription">앱 실행</string>
 
     <string name="activity_select_single_note">메모 선택</string>

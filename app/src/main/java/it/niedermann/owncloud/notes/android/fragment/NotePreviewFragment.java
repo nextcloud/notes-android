@@ -14,6 +14,8 @@ import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 import com.yydcdut.rxmarkdown.syntax.text.TextFactory;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
@@ -21,6 +23,9 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class NotePreviewFragment extends BaseNoteFragment {
+
+    @BindView(R.id.single_note_content)
+    RxMDTextView noteContent;
 
     public static NotePreviewFragment newInstance(long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
@@ -46,8 +51,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        final RxMDTextView noteContent = getView().findViewById(R.id.single_note_content);
+        ButterKnife.bind(this, getView());
 
         String content = note.getContent();
         /*

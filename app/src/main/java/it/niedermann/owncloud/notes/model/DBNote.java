@@ -38,6 +38,10 @@ public class DBNote extends CloudNote implements Item, Serializable {
         return excerpt;
     }
 
+    public void setExcerptDirectly(String content) {
+        excerpt = content;
+    }
+
     private void setExcerpt(String content) {
         excerpt = NoteUtil.generateNoteExcerpt(content);
     }
@@ -54,6 +58,6 @@ public class DBNote extends CloudNote implements Item, Serializable {
 
     @Override
     public String toString() {
-        return "#"+getId()+"/" + super.toString() + " " + getStatus();
+        return "#" + getId() + "/" + super.toString() + " " + getStatus();
     }
 }

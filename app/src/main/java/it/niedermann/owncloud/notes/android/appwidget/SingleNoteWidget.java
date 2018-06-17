@@ -18,12 +18,12 @@ import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
 
 public class SingleNoteWidget extends AppWidgetProvider {
 
-    public static final String  WIDGET_KEY = "single_note_widget";
+    public static final String WIDGET_KEY = "single_note_widget";
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         SharedPreferences.Editor editor = PreferenceManager
-                                            .getDefaultSharedPreferences(context).edit();
+                .getDefaultSharedPreferences(context).edit();
 
         for (int appWidgetId : appWidgetIds) {
             editor.remove(WIDGET_KEY + appWidgetId);
@@ -40,14 +40,14 @@ public class SingleNoteWidget extends AppWidgetProvider {
             templateIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
             PendingIntent templatePendingIntent = PendingIntent.getActivity(
-                                                    context,
-                                                    appWidgetId,
-                                                    templateIntent,
-                                                    PendingIntent.FLAG_UPDATE_CURRENT);
+                    context,
+                    appWidgetId,
+                    templateIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
 
             Intent serviceIntent = new Intent(context, SingleNoteWidgetService.class);
             RemoteViews views = new RemoteViews(context.getPackageName(),
-                                                        R.layout.widget_single_note);
+                    R.layout.widget_single_note);
 
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
@@ -60,17 +60,17 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
-    
+
     @Override
     public void onReceive(Context context, Intent intent) {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         int ids[] = appWidgetManager.getAppWidgetIds(new ComponentName(context,
-                                                                        SingleNoteWidget.class));
+                SingleNoteWidget.class));
 
         for (int appWidgetId : ids) {
             if (ACTION_APPWIDGET_UPDATE.equals(intent.getAction())) {
                 appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId,
-                                                                R.id.single_note_widget_lv);
+                        R.id.single_note_widget_lv);
             }
         }
 

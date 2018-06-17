@@ -8,8 +8,8 @@ android {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 21
-        versionName "0.14.0"
+        versionCode 29
+        versionName "0.17.0"
     }
     buildTypes {
         release {
@@ -28,12 +28,16 @@ dependencies {
 
     implementation 'com.yydcdut:rxmarkdown:0.1.1-beta'
 
+
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
     def supportLibVersion = '27.1.1'
 
-    implementation "com.android.support:support-v4:${supportLibVersion}"
     implementation "com.android.support:appcompat-v7:${supportLibVersion}"
     implementation "com.android.support:design:${supportLibVersion}"
     implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
-    implementation "com.android.support:cardview-v7:${supportLibVersion}" // needed for cert4android (conflict resolution)
+    // needed for cert4android (conflict resolution)
+    implementation "com.android.support:cardview-v7:${supportLibVersion}"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

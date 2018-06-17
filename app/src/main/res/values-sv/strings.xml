@@ -7,13 +7,9 @@
     <string name="action_settings">Inställningar</string>
     <string name="action_search">Sök</string>
     <string name="action_create_save">Spara</string>
-    <string name="action_create_cancel">Avbryt</string>
-    <string name="action_edit_editing">Redigera</string>
     <string name="action_edit_save">Spara</string>
     <string name="action_edit_saving">Sparar &#8230;</string>
     <string name="action_edit_saved">Sparad</string>
-    <string name="action_edit_cancel">Avbryt</string>
-    <string name="action_about">Om</string>
     <string name="action_select_note">Välj anteckning</string>
     <string name="action_note_deleted">Anteckningen raderad</string>
     <string name="action_note_restored">Anteckningen återskapad</string>
@@ -23,17 +19,11 @@
     <string name="action_recent">Nya</string>
     <string name="action_uncategorized">Okategoriserade</string>
     <string name="menu_delete">Radera</string>
-    <string name="menu_copy">Kopiera</string>
-    <string name="menu_edit">Redigera</string>
-    <string name="menu_cancel">Avbryt</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Förhandsvisning</string>
     <string name="menu_share">Dela</string>
     <string name="menu_about">Om</string>
-
-    <string name="change_category_title">Välj kategori</string>
-    <string name="copy">Kopiera</string>
 
     <string name="listview_updated_today">Idag</string>
     <string name="listview_updated_yesterday">Igår</string>
@@ -115,7 +105,6 @@
     <string name="widget_single_note_placeholder_tv">Anteckning hittades inte</string>
     <string name="widget_create_note">Skapa anteckning</string>
     <string name="widget_not_logged_in">Vänligen logga in i Anteckningar innan denna används</string>
-    <string name="widget_entry_fav_contentDescription">Stjärnikon används för att ange objekt som favorit</string>
     <string name="widget_app_launcher_contentDescription">Startar app</string>
 
     <string name="activity_select_single_note">Välj anteckning</string>

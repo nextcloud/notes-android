@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name="it.niedermann.owncloud.notes.util.Notes"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,13 +23,15 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -40,31 +43,28 @@
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
-            <meta-data android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.SettingsActivity"
             android:label="@string/settings_server_settings"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.PreferencesActivity"
-            android:windowSoftInputMode="stateVisible"
-            />
+            android:windowSoftInputMode="stateVisible" />
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.PreferencesActivity"
             android:label="@string/action_settings"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateHidden"
+            android:theme="@style/Preferences"
             />
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
-            android:label="@string/menu_edit"
+            android:label="@string/simple_edit"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateHidden"
-            android:launchMode="singleTask"
-            >
+            android:launchMode="singleTask">
             <intent-filter android:label="@string/action_create">
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -74,24 +74,21 @@
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"
-            android:label="@string/menu_about"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            />
+            android:label="@string/simple_about"
+            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
 
         <activity
             android:name=".android.activity.SelectSingleNoteActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".android.appwidget.NoteListWidgetConfiguration">
+        <activity android:name=".android.appwidget.NoteListWidgetConfiguration">
 
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
 
@@ -149,8 +146,7 @@
             android:description="@string/action_create"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
-                <action
-                    android:name="android.service.quicksettings.action.QS_TILE"/>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
         </service>
 

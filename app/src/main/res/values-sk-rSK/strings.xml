@@ -9,13 +9,12 @@
     <string name="action_settings">Settings</string>
     <string name="action_search">Hľadať</string>
     <string name="action_create_save">Uložiť</string>
-    <string name="action_create_cancel">Zrušiť</string>
-    <string name="action_edit_editing">Upraviť</string>
+    <string name="simple_cancel">Zrušiť</string>
+    <string name="simple_edit">Upraviť</string>
     <string name="action_edit_save">Uložiť</string>
     <string name="action_edit_saving">Ukladám &#8230;</string>
     <string name="action_edit_saved">Uložené</string>
-    <string name="action_edit_cancel">Zrušiť</string>
-    <string name="action_about">O</string>
+    <string name="simple_about">O aplikácii</string>
     <string name="action_select_note">Vybrať poznámku</string>
     <string name="action_note_deleted">Poznámka vymazaná</string>
     <string name="action_note_restored">Poznámka obnovená</string>
@@ -25,9 +24,6 @@
     <string name="action_recent">Nedávne</string>
     <string name="action_uncategorized">Nezaradené</string>
     <string name="menu_delete">Zmazať</string>
-    <string name="menu_copy">Kopírovať</string>
-    <string name="menu_edit">Upraviť</string>
-    <string name="menu_cancel">Zrušiť</string>
     <string name="menu_change_category">Kategória</string>
     <string name="menu_favorite">Obľúbené</string>
     <string name="menu_preview">Náhľad</string>
@@ -35,7 +31,6 @@
     <string name="menu_about">O</string>
 
     <string name="change_category_title">Vybrať kategóriu</string>
-    <string name="copy">Kopírovať</string>
 
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
@@ -136,6 +131,7 @@
     <plurals name="ab_selected">
         <item quantity="one">%d vybraný</item>
         <item quantity="few">%d vybraných</item>
+        <item quantity="many">%d vybraný</item>
         <item quantity="other">%d vybraný</item>
     </plurals>
 </resources>

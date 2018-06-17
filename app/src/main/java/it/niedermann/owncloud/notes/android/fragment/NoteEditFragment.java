@@ -18,6 +18,8 @@ import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 import com.yydcdut.rxmarkdown.syntax.edit.EditFactory;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
@@ -33,6 +35,9 @@ public class NoteEditFragment extends BaseNoteFragment {
 
     private Handler handler;
     private boolean saveActive, unsavedEdit;
+
+    @BindView(R.id.editContent)
+    RxMDEditText editContent;
 
     public static NoteEditFragment newInstance(long noteId) {
         NoteEditFragment f = new NoteEditFragment();
@@ -73,18 +78,19 @@ public class NoteEditFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(note.getContent().isEmpty()) {
+        ButterKnife.bind(this, getView());
+
+        if (note.getContent().isEmpty()) {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
 
         // workaround for issue yydcdut/RxMarkdown#41
         note.setContent(note.getContent().replace("\r\n", "\n"));
 
-        final RxMDEditText content = getContentView();
-        content.setText(note.getContent());
-        content.setEnabled(true);
+        editContent.setText(note.getContent());
+        editContent.setEnabled(true);
 
-        RxMarkdown.live(content)
+        RxMarkdown.live(editContent)
                 .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()))
                 .factory(EditFactory.create())
                 .intoObservable()
@@ -99,7 +105,7 @@ public class NoteEditFragment extends BaseNoteFragment {
 
                     @Override
                     public void onNext(CharSequence charSequence) {
-                        content.setText(charSequence, TextView.BufferType.SPANNABLE);
+                        editContent.setText(charSequence, TextView.BufferType.SPANNABLE);
                     }
                 });
     }
@@ -116,7 +122,7 @@ public class NoteEditFragment extends BaseNoteFragment {
         @Override
         public void afterTextChanged(final Editable s) {
             unsavedEdit = true;
-            if(!saveActive) {
+            if (!saveActive) {
                 handler.removeCallbacks(runAutoSave);
                 handler.postDelayed(runAutoSave, DELAY);
             }
@@ -126,20 +132,20 @@ public class NoteEditFragment extends BaseNoteFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getContentView().addTextChangedListener(textWatcher);
+        editContent.addTextChangedListener(textWatcher);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        getContentView().removeTextChangedListener(textWatcher);
+        editContent.removeTextChangedListener(textWatcher);
         cancelTimers();
     }
 
     private final Runnable runAutoSave = new Runnable() {
         @Override
         public void run() {
-            if(unsavedEdit) {
+            if (unsavedEdit) {
                 Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: start AutoSave");
                 autoSave();
             } else {
@@ -152,10 +158,6 @@ public class NoteEditFragment extends BaseNoteFragment {
         handler.removeCallbacks(runAutoSave);
     }
 
-    private RxMDEditText getContentView() {
-        return getView().findViewById(R.id.editContent);
-    }
-
     /**
      * Gets the current content of the EditText field in the UI.
      *
@@ -163,7 +165,7 @@ public class NoteEditFragment extends BaseNoteFragment {
      */
     @Override
     protected String getContent() {
-        return getContentView().getText().toString();
+        return editContent.getText().toString();
     }
 
     @Override

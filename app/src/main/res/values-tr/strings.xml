@@ -9,13 +9,12 @@
     <string name="action_settings">Ayarlar</string>
     <string name="action_search">Arama</string>
     <string name="action_create_save">Kaydet</string>
-    <string name="action_create_cancel">İptal</string>
-    <string name="action_edit_editing">Düzenle</string>
+    <string name="simple_cancel">İptal</string>
+    <string name="simple_edit">Düzenle</string>
     <string name="action_edit_save">Kaydet</string>
     <string name="action_edit_saving">Kaydediliyor &#8230;</string>
     <string name="action_edit_saved">Kaydedildi</string>
-    <string name="action_edit_cancel">İptal</string>
-    <string name="action_about">Hakkında</string>
+    <string name="simple_about">Hakkında</string>
     <string name="action_select_note">Not seçin</string>
     <string name="action_note_deleted">Not silindi</string>
     <string name="action_note_restored">Not geri yüklendi</string>
@@ -25,17 +24,13 @@
     <string name="action_recent">Son</string>
     <string name="action_uncategorized">Kategorisiz</string>
     <string name="menu_delete">Sil</string>
-    <string name="menu_copy">Kopyala</string>
-    <string name="menu_edit">Düzenle</string>
-    <string name="menu_cancel">İptal</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Sık Kullanılanlara Ekle</string>
     <string name="menu_preview">Önizleme</string>
     <string name="menu_share">Paylaş</string>
     <string name="menu_about">Hakkında</string>
 
-    <string name="change_category_title">Kategori seçin</string>
-    <string name="copy">Kopyala</string>
+    <string name="change_category_title">Bir kategori seçin</string>
 
     <string name="listview_updated_today">Bugün</string>
     <string name="listview_updated_yesterday">Dün</string>
@@ -57,6 +52,7 @@
     <string name="settings_submitting">Bağlanılıyor &#8230;</string>
     <string name="settings_view_category">Ayarları görüntüle</string>
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_category">Sertifikalar</string>
     <string name="settings_cert_trust_system">Sistem sertifikalarına güvenilsin</string>
     <string name="settings_cert_trust_system_on">Sistem ve kullanıcı tarafından eklenen sertifika otoritelerine güvenilir (önerilir)</string>
@@ -124,6 +120,9 @@
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Yeni not ekle</string>
+
+    <string name="pref_value_theme_light">Açık</string>
+    <string name="pref_value_theme_dark">Koyu</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

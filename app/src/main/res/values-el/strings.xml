@@ -9,13 +9,9 @@
     <string name="action_settings">Ρυθμίσεις</string>
     <string name="action_search">Ψάχνει</string>
     <string name="action_create_save">Αποθήκευση</string>
-    <string name="action_create_cancel">Ακύρωση</string>
-    <string name="action_edit_editing">Επεξεργασία</string>
     <string name="action_edit_save">Αποθήκευση</string>
     <string name="action_edit_saving">Γίνεται αποθήκευση &#8230;</string>
     <string name="action_edit_saved">Αποθηκεύτηκε</string>
-    <string name="action_edit_cancel">Ακύρωση</string>
-    <string name="action_about">Περί</string>
     <string name="action_select_note">Επιλογή σημείωσης</string>
     <string name="action_note_deleted">Η σημείωση διαγράφηκε.</string>
     <string name="action_note_restored">Έγινε επαναφορά της σημείωσης.</string>
@@ -25,17 +21,11 @@
     <string name="action_recent">Πρόσφατα</string>
     <string name="action_uncategorized">Μή-κατηγοριοποιημένα</string>
     <string name="menu_delete">Διαγραφή</string>
-    <string name="menu_copy">Αντιγραφή</string>
-    <string name="menu_edit">Επεξεργασία</string>
-    <string name="menu_cancel">Ακύρωση</string>
     <string name="menu_change_category">Κατηγορία</string>
     <string name="menu_favorite">Αγαπημένο</string>
     <string name="menu_preview">Προεπισκόπηση</string>
     <string name="menu_share">Διαμοιρασμός</string>
     <string name="menu_about">Περί</string>
-
-    <string name="change_category_title">Επιλογή κατηγορίας</string>
-    <string name="copy">Αντιγραφή</string>
 
     <string name="listview_updated_today">Σήμερα</string>
     <string name="listview_updated_yesterday">Χθες</string>
@@ -109,8 +99,9 @@
     <string name="widget_single_note_placeholder_tv">Η σημείωση δεν βρέθηκε</string>
     <string name="widget_create_note">Δημιουργία Σημείωσης</string>
     <string name="widget_not_logged_in">Παρακαλούμε συνδεθείτε στις Σημειώσεις πρωτού να χρησιμοποιήσετε αυτό το γραφικό στοιχείο.</string>
-    <string name="widget_entry_fav_contentDescription">Το εικονίδιο με το αστέρι χρησιμοποιείται για να οριστεί ένα αντικείμενο ως αγαπημένο</string>
     <string name="widget_app_launcher_contentDescription">Εκκινεί την εφαρμογή</string>
+
+    <string name="activity_select_single_note">Επιλογή σημείωσης</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>

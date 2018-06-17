@@ -9,13 +9,9 @@
     <string name="action_settings">Nustatymai</string>
     <string name="action_search">Paieška</string>
     <string name="action_create_save">Įrašyti</string>
-    <string name="action_create_cancel">Atsisakyti</string>
-    <string name="action_edit_editing">Redaguoti</string>
     <string name="action_edit_save">Įrašyti</string>
     <string name="action_edit_saving">Įrašoma &#8230;</string>
     <string name="action_edit_saved">Įrašyta</string>
-    <string name="action_edit_cancel">Atsisakyti</string>
-    <string name="action_about">Apie</string>
     <string name="action_select_note">Sukurti</string>
     <string name="action_note_deleted">Pastaba ištrinta</string>
     <string name="action_note_restored">Pastaba atstatyta</string>
@@ -25,17 +21,11 @@
     <string name="action_recent">Naujausi</string>
     <string name="action_uncategorized">Nekategorizuotas</string>
     <string name="menu_delete">Ištrinti</string>
-    <string name="menu_copy">Kopijuoti</string>
-    <string name="menu_edit">Redaguoti</string>
-    <string name="menu_cancel">Atsisakyti</string>
     <string name="menu_change_category">Kategorija</string>
     <string name="menu_favorite">Mėgiamas</string>
     <string name="menu_preview">Peržiūra</string>
     <string name="menu_share">Dalintis</string>
     <string name="menu_about">Apie</string>
-
-    <string name="change_category_title">Kategorija</string>
-    <string name="copy">Kopijuoti</string>
 
     <string name="listview_updated_today">Šiandien</string>
     <string name="listview_updated_yesterday">Vakar</string>
@@ -117,7 +107,6 @@
     <string name="widget_single_note_placeholder_tv">Pastaba nerasta</string>
     <string name="widget_create_note">Sukurti užrašą</string>
     <string name="widget_not_logged_in">Prieš naudodami šį valdiklį, prisijunkite prie Pastabų</string>
-    <string name="widget_entry_fav_contentDescription">Žvaigždutės piktograma, skirta pažymėti elementą kaip mėgstamą</string>
     <string name="widget_app_launcher_contentDescription">Paleidžia programėlę</string>
 
     <string name="activity_select_single_note">Pasirinkti užrašą</string>
@@ -136,6 +125,7 @@
     <plurals name="ab_selected">
         <item quantity="one">%d pasirinkta</item>
         <item quantity="few">%d pasirinkta</item>
+        <item quantity="many">%d pasirinkta</item>
         <item quantity="other">%d pasirinkta</item>
     </plurals>
 </resources>

@@ -6,13 +6,13 @@
     <string name="action_create">Nový zápisek</string>
     <string name="action_settings">Nastavení</string>
     <string name="action_create_save">Uložit</string>
-    <string name="action_create_cancel">Storno</string>
-    <string name="action_edit_editing">Upravit</string>
+    <string name="simple_cancel">Storno</string>
+    <string name="simple_edit">Upravit</string>
     <string name="action_edit_save">Uložit</string>
     <string name="action_edit_saving">Ukládám &#8230;</string>
     <string name="action_edit_saved">Uloženo</string>
     <string name="action_edit_cancel">Storno</string>
-    <string name="action_about">O aplikaci</string>
+    <string name="simple_about">O aplikaci</string>
     <string name="action_select_note">Vybrat zápisek</string>
     <string name="menu_delete">Smazat</string>
     <string name="menu_copy">Kopírovat</string>

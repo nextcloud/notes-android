@@ -20,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import at.bitfire.cert4android.CustomCertManager;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
@@ -41,18 +43,28 @@ public class SettingsActivity extends AppCompatActivity {
     public static final int CREDENTIALS_CHANGED = 3;
 
     private SharedPreferences preferences = null;
-    private EditText field_url = null;
-    private EditText field_username = null;
-    private EditText field_password = null;
-    private TextInputLayout password_wrapper = null;
+
+    @BindView(R.id.settings_url)
+    EditText field_url;
+    @BindView(R.id.settings_username)
+    EditText field_username;
+    @BindView(R.id.settings_password)
+    EditText field_password;
+    @BindView(R.id.settings_password_wrapper)
+    TextInputLayout password_wrapper;
+    @BindView(R.id.settings_submit)
+    Button btn_submit;
+    @BindView(R.id.settings_url_warn_http)
+    View urlWarnHttp;
     private String old_password = "";
-    private Button btn_submit = null;
+
     private boolean first_run = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        ButterKnife.bind(this);
 
         preferences = PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext());
@@ -63,12 +75,6 @@ public class SettingsActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             }
         }
-
-        field_url = findViewById(R.id.settings_url);
-        field_username = findViewById(R.id.settings_username);
-        field_password = findViewById(R.id.settings_password);
-        password_wrapper = findViewById(R.id.settings_password_wrapper);
-        btn_submit = findViewById(R.id.settings_submit);
 
         field_url.addTextChangedListener(new TextWatcher() {
             @Override
@@ -88,9 +94,9 @@ public class SettingsActivity extends AppCompatActivity {
                 new URLValidatorAsyncTask().execute(url);
 
                 if (NotesClientUtil.isHttp(url)) {
-                    findViewById(R.id.settings_url_warn_http).setVisibility(View.VISIBLE);
+                    urlWarnHttp.setVisibility(View.VISIBLE);
                 } else {
-                    findViewById(R.id.settings_url_warn_http).setVisibility(View.GONE);
+                    urlWarnHttp.setVisibility(View.GONE);
                 }
 
                 handleSubmitButtonEnabled(field_url.getText(), field_username.getText());
@@ -179,13 +185,13 @@ public class SettingsActivity extends AppCompatActivity {
         String username = field_username.getText().toString();
         String password = field_password.getText().toString();
 
-        if(password.isEmpty()) {
+        if (password.isEmpty()) {
             password = old_password;
         }
 
         url = NotesClientUtil.formatURL(url);
 
-        new LoginValidatorAsyncTask().execute(url, username, password);
+        new LoginValidatorAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url, username, password);
     }
 
     private void handleSubmitButtonEnabled(Editable url, Editable username) {
@@ -206,7 +212,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            ((EditText) findViewById(R.id.settings_url)).setCompoundDrawables(null, null, null, null);
+            field_url.setCompoundDrawables(null, null, null, null);
         }
 
         @Override
@@ -218,11 +224,11 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean o) {
             if (o) {
-                Drawable actionDoneDark = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_action_done_dark);
-                actionDoneDark.setBounds(0, 0, 50, 50);
-                ((EditText) findViewById(R.id.settings_url)).setCompoundDrawables(null, null, actionDoneDark, null);
+                Drawable actionDoneDark = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_check_grey600_24dp);
+                actionDoneDark.setBounds( 0, 0, actionDoneDark.getIntrinsicWidth(), actionDoneDark.getIntrinsicHeight() );
+                field_url.setCompoundDrawables(null, null, actionDoneDark, null);
             } else {
-                ((EditText) findViewById(R.id.settings_url)).setCompoundDrawables(null, null, null, null);
+                field_url.setCompoundDrawables(null, null, null, null);
             }
         }
     }

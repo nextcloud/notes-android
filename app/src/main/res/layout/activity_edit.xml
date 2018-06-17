@@ -13,6 +13,6 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textMultiLine|textCapSentences"
-            android:padding="16dp" />
-
+            android:padding="16dp"
+            android:textColor="@color/fg_default"/>
 </ScrollView>

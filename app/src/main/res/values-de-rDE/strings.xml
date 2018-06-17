@@ -9,13 +9,12 @@
     <string name="action_settings">Einstellungen</string>
     <string name="action_search">Suche</string>
     <string name="action_create_save">Speichern</string>
-    <string name="action_create_cancel">Abbrechen</string>
-    <string name="action_edit_editing">Bearbeiten</string>
+    <string name="simple_cancel">Abbrechen</string>
+    <string name="simple_edit">Bearbeiten</string>
     <string name="action_edit_save">Speichern</string>
     <string name="action_edit_saving">Speichern&#8230;</string>
     <string name="action_edit_saved">Gespeichert</string>
-    <string name="action_edit_cancel">Abbrechen</string>
-    <string name="action_about">Über</string>
+    <string name="simple_about">Über</string>
     <string name="action_select_note">Notiz auswählen</string>
     <string name="action_note_deleted">Notiz gelöscht</string>
     <string name="action_note_restored">Notiz wiederhergestellt</string>
@@ -25,17 +24,13 @@
     <string name="action_recent">Zuletzt geändert</string>
     <string name="action_uncategorized">Ohne Kategorie</string>
     <string name="menu_delete">Löschen</string>
-    <string name="menu_copy">Kopieren</string>
-    <string name="menu_edit">Bearbeiten</string>
-    <string name="menu_cancel">Abbrechen</string>
     <string name="menu_change_category">Kategorie</string>
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
     <string name="menu_about">Über</string>
 
-    <string name="change_category_title">Kategorie wählen</string>
-    <string name="copy">Kopieren</string>
+    <string name="change_category_title">Kategorie auswählen</string>
 
     <string name="listview_updated_today">Heute</string>
     <string name="listview_updated_yesterday">Gestern</string>
@@ -57,6 +52,7 @@
     <string name="settings_submitting">Verbindet&#8230;</string>
     <string name="settings_view_category">Darstellung</string>
     <string name="settings_note_mode">Anzeigemodus für Notizen</string>
+    <string name="settings_theme_title">Theme</string>
     <string name="settings_cert_category">Zertifikate</string>
     <string name="settings_cert_trust_system">System-Zertifikaten vertrauen</string>
     <string name="settings_cert_trust_system_on">System- und installierten CAs wird vertraut (empfohlen)</string>
@@ -124,6 +120,9 @@
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Neue Notiz erstellen</string>
+
+    <string name="pref_value_theme_light">Hell</string>
+    <string name="pref_value_theme_dark">Dunkel</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

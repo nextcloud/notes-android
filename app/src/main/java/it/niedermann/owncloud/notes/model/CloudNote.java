@@ -55,9 +55,9 @@ public class CloudNote implements Serializable {
     }
 
     public String getModified(String format) {
-        if(modified==null)
+        if (modified == null)
             return null;
-        return new SimpleDateFormat(format, Locale.GERMANY) .format(this.getModified().getTimeInMillis());
+        return new SimpleDateFormat(format, Locale.GERMANY).format(this.getModified().getTimeInMillis());
     }
 
     public void setModified(Calendar modified) {
@@ -93,7 +93,7 @@ public class CloudNote implements Serializable {
     }
 
     public void setCategory(String category) {
-        this.category = category==null ? "" : category;
+        this.category = category == null ? "" : category;
     }
 
     @Override

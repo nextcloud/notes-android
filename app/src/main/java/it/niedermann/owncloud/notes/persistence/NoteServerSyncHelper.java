@@ -49,11 +49,12 @@ public class NoteServerSyncHelper {
      * Get (or create) instance from NoteServerSyncHelper.
      * This has to be a singleton in order to realize correct registering and unregistering of
      * the BroadcastReceiver, which listens on changes of network connectivity.
+     *
      * @param dbHelper NoteSQLiteOpenHelper
      * @return NoteServerSyncHelper
      */
     public static synchronized NoteServerSyncHelper getInstance(NoteSQLiteOpenHelper dbHelper) {
-        if(instance==null) {
+        if (instance == null) {
             instance = new NoteServerSyncHelper(dbHelper);
         }
         return instance;
@@ -70,7 +71,7 @@ public class NoteServerSyncHelper {
         @Override
         public void onReceive(Context context, Intent intent) {
             updateNetworkStatus();
-            if(isSyncPossible()) {
+            if (isSyncPossible()) {
                 scheduleSync(false);
             }
         }
@@ -81,10 +82,11 @@ public class NoteServerSyncHelper {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             cert4androidReady = true;
-            if(isSyncPossible()) {
+            if (isSyncPossible()) {
                 scheduleSync(false);
             }
         }
+
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             cert4androidReady = false;
@@ -98,7 +100,6 @@ public class NoteServerSyncHelper {
     // list of callbacks for both parts of synchronziation
     private List<ICallback> callbacksPush = new ArrayList<>();
     private List<ICallback> callbacksPull = new ArrayList<>();
-
 
 
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
@@ -122,7 +123,7 @@ public class NoteServerSyncHelper {
     protected void finalize() throws Throwable {
         appContext.unregisterReceiver(networkReceiver);
         appContext.unbindService(certService);
-        if(customCertManager!=null) {
+        if (customCertManager != null) {
             customCertManager.close();
         }
         super.finalize();
@@ -137,6 +138,7 @@ public class NoteServerSyncHelper {
      * Cert4Android service is available.
      * NoteServerSyncHelper observes changes in the network connection.
      * The current state can be retrieved with this method.
+     *
      * @return true if sync is possible, otherwise false.
      */
     public boolean isSyncPossible() {
@@ -158,6 +160,7 @@ public class NoteServerSyncHelper {
     public void addCallbackPush(ICallback callback) {
         callbacksPush.add(callback);
     }
+
     /**
      * Adds a callback method to the NoteServerSyncHelper for the synchronization part pull remote changes from the server.
      * All callbacks will be executed once the synchronization operations are done.
@@ -174,22 +177,23 @@ public class NoteServerSyncHelper {
     /**
      * Schedules a synchronization and start it directly, if the network is connected and no
      * synchronization is currently running.
+     *
      * @param onlyLocalChanges Whether to only push local changes to the server or to also load the whole list of notes from the server.
      */
     public void scheduleSync(boolean onlyLocalChanges) {
-        Log.d(getClass().getSimpleName(), "Sync requested ("+(onlyLocalChanges?"onlyLocalChanges":"full")+"; "+(syncActive?"sync active":"sync NOT active")+") ...");
-        Log.d(getClass().getSimpleName(), "(network:"+networkConnected + "; conf:"+isConfigured(appContext)+"; cert4android:"+cert4androidReady+")");
-        if(isSyncPossible() && (!syncActive || onlyLocalChanges)) {
+        Log.d(getClass().getSimpleName(), "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (syncActive ? "sync active" : "sync NOT active") + ") ...");
+        Log.d(getClass().getSimpleName(), "(network:" + networkConnected + "; conf:" + isConfigured(appContext) + "; cert4android:" + cert4androidReady + ")");
+        if (isSyncPossible() && (!syncActive || onlyLocalChanges)) {
             Log.d(getClass().getSimpleName(), "... starting now");
             SyncTask syncTask = new SyncTask(onlyLocalChanges);
             syncTask.addCallbacks(callbacksPush);
             callbacksPush = new ArrayList<>();
-            if(!onlyLocalChanges) {
+            if (!onlyLocalChanges) {
                 syncTask.addCallbacks(callbacksPull);
                 callbacksPull = new ArrayList<>();
             }
             syncTask.execute();
-        } else if(!onlyLocalChanges) {
+        } else if (!onlyLocalChanges) {
             Log.d(getClass().getSimpleName(), "... scheduled");
             syncScheduled = true;
             for (ICallback callback : callbacksPush) {
@@ -204,9 +208,9 @@ public class NoteServerSyncHelper {
     }
 
     private void updateNetworkStatus() {
-        ConnectivityManager connMgr = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
-        if(activeInfo != null && activeInfo.isConnected()) {
+        if (activeInfo != null && activeInfo.isConnected()) {
             Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network connection established.");
             networkConnected = true;
         } else {
@@ -236,7 +240,7 @@ public class NoteServerSyncHelper {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if(!onlyLocalChanges && syncScheduled) {
+            if (!onlyLocalChanges && syncScheduled) {
                 syncScheduled = false;
             }
             syncActive = true;
@@ -249,7 +253,7 @@ public class NoteServerSyncHelper {
             //dbHelper.debugPrintFullDB();
             LoginStatus status = LoginStatus.OK;
             pushLocalChanges();
-            if(!onlyLocalChanges) {
+            if (!onlyLocalChanges) {
                 status = pullRemoteChanges();
             }
             //dbHelper.debugPrintFullDB();
@@ -264,18 +268,18 @@ public class NoteServerSyncHelper {
             Log.d(getClass().getSimpleName(), "pushLocalChanges()");
             List<DBNote> notes = dbHelper.getLocalModifiedNotes();
             for (DBNote note : notes) {
-                Log.d(getClass().getSimpleName(), "   Process Local Note: "+note);
+                Log.d(getClass().getSimpleName(), "   Process Local Note: " + note);
                 try {
-                    CloudNote remoteNote=null;
-                    switch(note.getStatus()) {
+                    CloudNote remoteNote = null;
+                    switch (note.getStatus()) {
                         case LOCAL_EDITED:
                             Log.v(getClass().getSimpleName(), "   ...create/edit");
                             // if note is not new, try to edit it.
-                            if (note.getRemoteId()>0) {
+                            if (note.getRemoteId() > 0) {
                                 Log.v(getClass().getSimpleName(), "   ...try to edit");
                                 try {
                                     remoteNote = client.editNote(customCertManager, note).getNote();
-                                } catch(FileNotFoundException e) {
+                                } catch (FileNotFoundException e) {
                                     // Note does not exists anymore
                                 }
                             }
@@ -288,7 +292,7 @@ public class NoteServerSyncHelper {
                             dbHelper.updateNote(note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
-                            if(note.getRemoteId()>0) {
+                            if (note.getRemoteId() > 0) {
                                 Log.v(getClass().getSimpleName(), "   ...delete (from server and local)");
                                 try {
                                     client.deleteNote(customCertManager, note.getRemoteId());
@@ -302,7 +306,7 @@ public class NoteServerSyncHelper {
                             dbHelper.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
                             break;
                         default:
-                            throw new IllegalStateException("Unknown State of Note: "+note);
+                            throw new IllegalStateException("Unknown State of Note: " + note);
                     }
                 } catch (IOException | JSONException e) {
                     Log.e(getClass().getSimpleName(), "Exception", e);
@@ -327,11 +331,11 @@ public class NoteServerSyncHelper {
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
                 for (CloudNote remoteNote : remoteNotes) {
-                    Log.v(getClass().getSimpleName(), "   Process Remote Note: "+remoteNote);
+                    Log.v(getClass().getSimpleName(), "   Process Remote Note: " + remoteNote);
                     remoteIDs.add(remoteNote.getRemoteId());
-                    if(remoteNote.getModified()==null) {
+                    if (remoteNote.getModified() == null) {
                         Log.v(getClass().getSimpleName(), "   ... unchanged");
-                    } else if(idMap.containsKey(remoteNote.getRemoteId())) {
+                    } else if (idMap.containsKey(remoteNote.getRemoteId())) {
                         Log.v(getClass().getSimpleName(), "   ... found -> Update");
                         dbHelper.updateNote(idMap.get(remoteNote.getRemoteId()), remoteNote, null);
                     } else {
@@ -342,8 +346,8 @@ public class NoteServerSyncHelper {
                 Log.d(getClass().getSimpleName(), "   Remove remotely deleted Notes (only those without local changes)");
                 // remove remotely deleted notes (only those without local changes)
                 for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
-                    if(!remoteIDs.contains(entry.getKey())) {
-                        Log.v(getClass().getSimpleName(), "   ... remove "+entry.getValue());
+                    if (!remoteIDs.contains(entry.getKey())) {
+                        Log.v(getClass().getSimpleName(), "   ... remove " + entry.getValue());
                         dbHelper.deleteNote(entry.getValue(), DBStatus.VOID);
                     }
                 }
@@ -352,13 +356,13 @@ public class NoteServerSyncHelper {
                 // update ETag and Last-Modified in order to reduce size of next response
                 SharedPreferences.Editor editor = preferences.edit();
                 String etag = response.getETag();
-                if(etag!=null && !etag.isEmpty()) {
+                if (etag != null && !etag.isEmpty()) {
                     editor.putString(SettingsActivity.SETTINGS_KEY_ETAG, etag);
                 } else {
                     editor.remove(SettingsActivity.SETTINGS_KEY_ETAG);
                 }
                 long modified = response.getLastModified();
-                if(modified!=0) {
+                if (modified != 0) {
                     editor.putLong(SettingsActivity.SETTINGS_KEY_LAST_MODIFIED, modified);
                 } else {
                     editor.remove(SettingsActivity.SETTINGS_KEY_LAST_MODIFIED);
@@ -382,7 +386,7 @@ public class NoteServerSyncHelper {
         @Override
         protected void onPostExecute(LoginStatus status) {
             super.onPostExecute(status);
-            if (status!=LoginStatus.OK) {
+            if (status != LoginStatus.OK) {
                 Toast.makeText(appContext, appContext.getString(R.string.error_sync, appContext.getString(status.str)), Toast.LENGTH_LONG).show();
                 for (Throwable e : exceptions) {
                     Toast.makeText(appContext, e.getClass().getName() + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -395,7 +399,7 @@ public class NoteServerSyncHelper {
             }
             dbHelper.notifyNotesChanged();
             // start next sync if scheduled meanwhile
-            if(syncScheduled) {
+            if (syncScheduled) {
                 scheduleSync(false);
             }
         }

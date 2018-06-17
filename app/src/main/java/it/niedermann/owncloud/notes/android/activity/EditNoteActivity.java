@@ -47,9 +47,9 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(getClass().getSimpleName(), "onNewIntent: "+intent.getLongExtra(PARAM_NOTE_ID, 0));
+        Log.d(getClass().getSimpleName(), "onNewIntent: " + intent.getLongExtra(PARAM_NOTE_ID, 0));
         setIntent(intent);
-        if(fragment != null) {
+        if (fragment != null) {
             getFragmentManager().beginTransaction().detach(fragment).commit();
             fragment = null;
         }
@@ -66,7 +66,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
      */
     private void launchNoteFragment() {
         long noteId = getNoteId();
-        if(noteId>0) {
+        if (noteId > 0) {
             launchExistingNote(noteId);
         } else {
             launchNewNote();
@@ -76,6 +76,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     /**
      * Starts a {@link NoteEditFragment} or {@link NotePreviewFragment} for an existing note.
      * The type of fragment (view-mode) is chosen based on the user preferences.
+     *
      * @param noteId ID of the existing note.
      */
     private void launchExistingNote(long noteId) {
@@ -97,23 +98,24 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     /**
      * Starts a {@link NoteEditFragment} or {@link NotePreviewFragment} for an existing note.
+     *
      * @param noteId ID of the existing note.
-     * @param edit View-mode of the fragment:
-     *            <code>true</code> for {@link NoteEditFragment},
-     *            <code>false</code> for {@link NotePreviewFragment}.
+     * @param edit   View-mode of the fragment:
+     *               <code>true</code> for {@link NoteEditFragment},
+     *               <code>false</code> for {@link NotePreviewFragment}.
      */
     private void launchExistingNote(long noteId, boolean edit) {
         // save state of the fragment in order to resume with the same note and originalNote
         Fragment.SavedState savedState = null;
-        if(fragment != null) {
+        if (fragment != null) {
             savedState = getFragmentManager().saveFragmentInstanceState(fragment);
         }
-        if(edit) {
+        if (edit) {
             fragment = NoteEditFragment.newInstance(noteId);
         } else {
             fragment = NotePreviewFragment.newInstance(noteId);
         }
-        if(savedState != null) {
+        if (savedState != null) {
             fragment.setInitialSavedState(savedState);
         }
         getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
@@ -128,10 +130,10 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
         String category = null;
         boolean favorite = false;
-        if(intent.hasExtra(PARAM_CATEGORY)) {
+        if (intent.hasExtra(PARAM_CATEGORY)) {
             Category categoryPreselection = (Category) intent.getSerializableExtra(PARAM_CATEGORY);
             category = categoryPreselection.category;
-            favorite = categoryPreselection.favorite!=null ? categoryPreselection.favorite : false;
+            favorite = categoryPreselection.favorite != null ? categoryPreselection.favorite : false;
         }
 
         String content = "";
@@ -146,7 +148,6 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     @Override
     public void onBackPressed() {
-        fragment.onPrepareClose();
         close();
     }
 
@@ -160,15 +161,12 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                fragment.onPrepareClose();
                 close();
                 return true;
             case R.id.menu_preview:
-                fragment.onPrepareClose();
                 launchExistingNote(getNoteId(), false);
                 return true;
             case R.id.menu_edit:
-                fragment.onPrepareClose();
                 launchExistingNote(getNoteId(), true);
                 return true;
             default:
@@ -182,8 +180,8 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
      */
     public void close() {
         /* TODO enhancement: store last mode in note
-        * for cross device functionality per note mode should be stored on the server.
-        */
+         * for cross device functionality per note mode should be stored on the server.
+         */
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final String prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
         if (fragment instanceof NoteEditFragment) {
@@ -191,7 +189,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         } else {
             preferences.edit().putString(prefKeyLastMode, getString(R.string.pref_value_mode_preview)).apply();
         }
-        fragment.onFinalClose();
+        fragment.onCloseNote();
         finish();
     }
 

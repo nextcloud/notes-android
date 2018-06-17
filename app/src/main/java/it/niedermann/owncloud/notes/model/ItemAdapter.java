@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.model;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -31,7 +33,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
      * Updates the item list and notifies respective view to update.
-     * @param itemList    List of items to be set
+     *
+     * @param itemList List of items to be set
      */
     public void setItemList(@NonNull List<Item> itemList) {
         this.itemList = itemList;
@@ -40,6 +43,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
      * Adds the given note to the top of the list.
+     *
      * @param note Note that should be added.
      */
     public void add(@NonNull DBNote note) {
@@ -50,7 +54,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
      * Replaces a note with an updated version
-     * @param note Note with the changes.
+     *
+     * @param note     Note with the changes.
      * @param position position in the list of the node
      */
     public void replace(@NonNull DBNote note, int position) {
@@ -93,12 +98,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             final DBNote note = (DBNote) item;
             final NoteViewHolder nvHolder = ((NoteViewHolder) holder);
             nvHolder.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
-            nvHolder.noteTitle.setText(note.getTitle());
+            nvHolder.noteTitle.setText(Html.fromHtml(note.getTitle()));
             nvHolder.noteCategory.setVisibility(showCategory && !note.getCategory().isEmpty() ? View.VISIBLE : View.GONE);
-            nvHolder.noteCategory.setText(NoteUtil.extendCategory(note.getCategory()));
-            nvHolder.noteExcerpt.setText(note.getExcerpt());
+            nvHolder.noteCategory.setText(Html.fromHtml(note.getCategory()));
+            nvHolder.noteExcerpt.setText(Html.fromHtml(note.getExcerpt()));
             nvHolder.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
-            nvHolder.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_grey600_24dp : R.drawable.ic_star_outline_grey600_24dp);
+            nvHolder.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_grey600_24dp : R.drawable.ic_star_border_grey600_24dp);
             nvHolder.noteFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -158,18 +163,25 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface NoteClickListener {
         void onNoteClick(int position, View v);
+
         void onNoteFavoriteClick(int position, View v);
+
         boolean onNoteLongClick(int position, View v);
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
+        @BindView(R.id.noteSwipeable)
         public View noteSwipeable;
         View noteSwipeFrame;
         ImageView noteFavoriteLeft, noteDeleteRight;
         TextView noteTitle;
+        @BindView(R.id.noteCategory)
         TextView noteCategory;
+        @BindView(R.id.noteExcerpt)
         TextView noteExcerpt;
+        @BindView(R.id.noteStatus)
         ImageView noteStatus;
+        @BindView(R.id.noteFavorite)
         ImageView noteFavorite;
 
         private NoteViewHolder(View v) {
@@ -205,11 +217,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public static class SectionViewHolder extends RecyclerView.ViewHolder {
-        private TextView sectionTitle;
+        @BindView(R.id.sectionTitle)
+        TextView sectionTitle;
 
-        private SectionViewHolder(View v) {
-            super(v);
-            this.sectionTitle = v.findViewById(R.id.sectionTitle);
+        private SectionViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
         }
     }
 }

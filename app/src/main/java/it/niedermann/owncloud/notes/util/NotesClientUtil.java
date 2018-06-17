@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.util;
 
-import android.content.Context;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.util.Base64;
 import android.util.Log;
@@ -15,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 
 import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
@@ -35,6 +34,7 @@ public class NotesClientUtil {
 
         @StringRes
         public final int str;
+
         LoginStatus(@StringRes int str) {
             this.str = str;
         }
@@ -52,6 +52,7 @@ public class NotesClientUtil {
 
     /**
      * Strips the api part from the path of a given url, handles trailing slash and missing protocol
+     *
      * @param url String
      * @return formatted URL
      */
@@ -62,9 +63,9 @@ public class NotesClientUtil {
         if (!url.startsWith("http://") && !url.startsWith("https://")) {
             url = "https://" + url;
         }
-        String[] replacements = new String[] {"notes/", "v0.2/", "api/", "notes/", "apps/", "index.php/"};
-        for(String replacement: replacements) {
-            if(url.endsWith(replacement)) {
+        String[] replacements = new String[]{"notes/", "v0.2/", "api/", "notes/", "apps/", "index.php/"};
+        for (String replacement : replacements) {
+            if (url.endsWith(replacement)) {
                 url = url.substring(0, url.length() - replacement.length());
             }
         }
@@ -89,14 +90,17 @@ public class NotesClientUtil {
                             + password).getBytes(), Base64.NO_WRAP)));
             con.setConnectTimeout(10 * 1000); // 10 seconds
             con.connect();
+
+            Log.v(NotesClientUtil.class.getSimpleName(), "Establishing connection to server");
             if (con.getResponseCode() == 200) {
+                Log.v(NotesClientUtil.class.getSimpleName(), "" + con.getResponseMessage());
                 StringBuilder result = new StringBuilder();
                 BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
                 String line;
                 while ((line = rd.readLine()) != null) {
                     result.append(line);
                 }
-                System.out.println(result.toString());
+                Log.v(NotesClientUtil.class.getSimpleName(), result.toString());
                 new JSONArray(result.toString());
                 return LoginStatus.OK;
             } else if (con.getResponseCode() >= 401 && con.getResponseCode() <= 403) {
@@ -104,7 +108,7 @@ public class NotesClientUtil {
             } else {
                 return LoginStatus.SERVER_FAILED;
             }
-        } catch (MalformedURLException e) {
+        } catch (MalformedURLException | SocketTimeoutException  e) {
             Log.e(NotesClientUtil.class.getSimpleName(), "Exception", e);
             return LoginStatus.CONNECTION_FAILED;
         } catch (IOException e) {

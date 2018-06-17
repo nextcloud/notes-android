@@ -7,13 +7,13 @@
     <string name="action_settings">Asetukset</string>
     <string name="action_search">Etsi</string>
     <string name="action_create_save">Tallenna</string>
-    <string name="action_create_cancel">Peruuta</string>
-    <string name="action_edit_editing">Muokkaa</string>
+    <string name="simple_cancel">Peruuta</string>
+    <string name="simple_edit">Muokkaa</string>
     <string name="action_edit_save">Tallenna</string>
     <string name="action_edit_saving">Tallennetaan...</string>
     <string name="action_edit_saved">Tallennettu</string>
     <string name="action_edit_cancel">Peruuta</string>
-    <string name="action_about">Tietoja</string>
+    <string name="simple_about">Tietoja</string>
     <string name="action_select_note">Valitse muistiinpano</string>
     <string name="action_note_deleted">Muistiinpano poistettu</string>
     <string name="action_note_restored">Muistiinpano palautettu</string>

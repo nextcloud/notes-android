@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Main theme colors -->
         <!-- App Bar -->
         <item name="colorPrimary">@color/primary</item>
@@ -10,7 +10,7 @@
         <!-- Snackbar Action Link -->
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="android:buttonStyle">@style/ocbutton</item>
+        <item name="android:buttonStyle">@style/cloudbutton</item>
         <item name="android:windowBackground">@color/bg_normal</item>
     </style>
 
@@ -19,17 +19,27 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Preferences" parent="AppTheme">
+        <item name="android:textColor">@color/fg_default</item>
+        <item name="android:textColorSecondary">@color/fg_default_low</item>
+    </style>
+
     <!--
         cert4android is using these styles and we want the same button style in the trust activity
     -->
-    <style name="Widget.AppCompat.Button.Borderless" parent="ocbutton">
+    <style name="Widget.AppCompat.Button.Borderless" parent="cloudbutton">
         <item name="android:layout_margin">2dp</item>
     </style>
-    <style name="Widget.AppCompat.Button.Borderless.Colored" parent="Widget.AppCompat.Button.Borderless">
-    </style>
 
-    <style name="ocAlertDialog" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+    <style name="Widget.AppCompat.Button.Borderless.Colored" parent="Widget.AppCompat.Button.Borderless"></style>
+
+    <style name="ocAlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/primary</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:textColorPrimary">@color/fg_default</item>
+        <item name="android:alertDialogTheme">@style/cloudbutton</item>
+        <item name="android:windowBackground">@color/bg_normal</item>
     </style>
 
     <style name="fab">
@@ -41,7 +51,7 @@
         <item name="android:layout_alignParentRight">true</item>
     </style>
 
-    <style name="ocbutton" parent="android:style/Widget.Button">
+    <style name="cloudbutton" parent="android:style/Widget.Button">
         <item name="android:background">@color/primary</item>
         <item name="android:textColor">@drawable/button_selector</item>
         <item name="android:padding">@dimen/button_padding</item>
@@ -53,7 +63,7 @@
     </style>
 
     <style name="NavigationItem">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/secondary_font_size</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">#de000000</item>
     </style>

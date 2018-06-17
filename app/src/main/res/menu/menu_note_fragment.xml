@@ -9,26 +9,26 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_category"
+        android:icon="@drawable/ic_folder_white_24dp"
         android:orderInCategory="100"
         android:title="@string/menu_change_category"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_share"
-        android:icon="@drawable/ic_action_share"
+        android:icon="@drawable/ic_share_white_24dp"
         android:orderInCategory="100"
         android:title="@string/menu_share"
         app:showAsAction="never"
-        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
-        />
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
     <item
         android:id="@+id/menu_cancel"
-        android:icon="@drawable/ic_action_cancel"
+        android:icon="@drawable/ic_clear_white_24dp"
         android:orderInCategory="110"
-        android:title="@string/menu_cancel"
+        android:title="@string/simple_cancel"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_delete"
-        android:icon="@drawable/ic_action_delete"
+        android:icon="@drawable/ic_delete_white_24dp"
         android:orderInCategory="120"
         android:title="@string/menu_delete"
         app:showAsAction="never" />

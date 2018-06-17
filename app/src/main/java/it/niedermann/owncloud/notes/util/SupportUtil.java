@@ -8,6 +8,7 @@ import android.support.annotation.WorkerThread;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -32,10 +33,11 @@ public class SupportUtil {
 
     /**
      * Creates a {@link Spanned} from a HTML string on all SDK versions.
-     * @see Html#fromHtml(String)
-     * @see Html#fromHtml(String, int)
+     *
      * @param source Source string with HTML markup
      * @return Spannable for using in a {@link TextView}
+     * @see Html#fromHtml(String)
+     * @see Html#fromHtml(String, int)
      */
     public static Spanned fromHtml(String source) {
         if (Build.VERSION.SDK_INT >= 24) {
@@ -47,9 +49,10 @@ public class SupportUtil {
 
     /**
      * Fills a {@link TextView} with HTML content and activates links in that {@link TextView}.
-     * @param view          The {@link TextView} which should be filled.
-     * @param stringId      The string resource containing HTML tags (escaped by <code>&lt;</code>)
-     * @param formatArgs    Arguments for the string resource.
+     *
+     * @param view       The {@link TextView} which should be filled.
+     * @param stringId   The string resource containing HTML tags (escaped by <code>&lt;</code>)
+     * @param formatArgs Arguments for the string resource.
      */
     public static void setHtml(TextView view, int stringId, Object... formatArgs) {
         view.setText(SupportUtil.fromHtml(view.getResources().getString(stringId, formatArgs)));
@@ -59,6 +62,7 @@ public class SupportUtil {
     /**
      * Create a new {@link HttpURLConnection} for strUrl.
      * If protocol equals https, then install CustomCertManager in {@link SSLContext}.
+     *
      * @param ccm
      * @param strUrl
      * @return HttpURLConnection with custom trust manager
@@ -76,8 +80,10 @@ public class SupportUtil {
                 sslContext.init(null, new TrustManager[]{ccm}, null);
                 httpsCon.setSSLSocketFactory(sslContext.getSocketFactory());
             } catch (NoSuchAlgorithmException e) {
+                Log.e(SupportUtil.class.getSimpleName(), "Exception", e);
                 // ignore, use default TrustManager
             } catch (KeyManagementException e) {
+                Log.e(SupportUtil.class.getSimpleName(), "Exception", e);
                 // ignore, use default TrustManager
             }
         }

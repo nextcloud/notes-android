@@ -32,9 +32,9 @@ public class NotesClient {
         private final long lastModified;
 
         public ResponseData(String content, String etag, long lastModified) {
-                this.content = content;
-                this.etag = etag;
-                this.lastModified = lastModified;
+            this.content = content;
+            this.etag = etag;
+            this.lastModified = lastModified;
         }
 
         public String getContent() {
@@ -74,8 +74,8 @@ public class NotesClient {
 
     public NotesResponse getNotes(CustomCertManager ccm, long lastModified, String lastETag) throws JSONException, IOException {
         String url = "notes";
-        if(lastModified>0) {
-            url += "?pruneBefore="+lastModified;
+        if (lastModified > 0) {
+            url += "?pruneBefore=" + lastModified;
         }
         return new NotesResponse(requestServer(ccm, url, METHOD_GET, null, lastETag));
     }
@@ -93,10 +93,10 @@ public class NotesClient {
         return new NoteResponse(requestServer(ccm, "notes/" + id, METHOD_GET, null, null));
     }
 
-    private NoteResponse putNote(CustomCertManager ccm, CloudNote note, String path, String method)  throws JSONException, IOException {
+    private NoteResponse putNote(CustomCertManager ccm, CloudNote note, String path, String method) throws JSONException, IOException {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
-        paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis()/1000);
+        paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
         paramObject.accumulate(JSON_FAVORITE, note.isFavorite());
         paramObject.accumulate(JSON_CATEGORY, note.getCategory());
         return new NoteResponse(requestServer(ccm, path, method, paramObject, null));
@@ -143,14 +143,16 @@ public class NotesClient {
         con.setRequestProperty(
                 "Authorization",
                 "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
+        // https://github.com/square/retrofit/issues/805#issuecomment-93426183
+        con.setRequestProperty( "Connection", "Close");
         con.setRequestProperty("User-Agent", "nextcloud-notes/" + BuildConfig.VERSION_NAME + " (Android)");
-        if(lastETag!=null && METHOD_GET.equals(method)) {
+        if (lastETag != null && METHOD_GET.equals(method)) {
             con.setRequestProperty("If-None-Match", lastETag);
         }
         con.setConnectTimeout(10 * 1000); // 10 seconds
         Log.d(getClass().getSimpleName(), method + " " + targetURL);
         // send request data (optional)
-        byte[] paramData=null;
+        byte[] paramData = null;
         if (params != null) {
             paramData = params.toString().getBytes();
             Log.d(getClass().getSimpleName(), "Params: " + params);
@@ -164,13 +166,13 @@ public class NotesClient {
         }
         // read response data
         int responseCode = con.getResponseCode();
-        Log.d(getClass().getSimpleName(), "HTTP response code: "+responseCode);
+        Log.d(getClass().getSimpleName(), "HTTP response code: " + responseCode);
 
-        if(responseCode==HttpURLConnection.HTTP_NOT_MODIFIED) {
+        if (responseCode == HttpURLConnection.HTTP_NOT_MODIFIED) {
             throw new ServerResponse.NotModifiedException();
         }
 
-           BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String line;
         while ((line = rd.readLine()) != null) {
             result.append(line);

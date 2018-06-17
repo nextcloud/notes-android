@@ -9,13 +9,9 @@
     <string name="action_settings">Ustawienia</string>
     <string name="action_search">Szukaj</string>
     <string name="action_create_save">Zapisz</string>
-    <string name="action_create_cancel">Anuluj</string>
-    <string name="action_edit_editing">Edytuj</string>
     <string name="action_edit_save">Zapisz</string>
     <string name="action_edit_saving">Zapisywanie &#8230;</string>
     <string name="action_edit_saved">Zapisano</string>
-    <string name="action_edit_cancel">Anuluj</string>
-    <string name="action_about">O aplikacji</string>
     <string name="action_select_note">Wybierz notatkę</string>
     <string name="action_note_deleted">Notatka usunięta</string>
     <string name="action_note_restored">Notatka przywrócona</string>
@@ -25,17 +21,11 @@
     <string name="action_recent">Ostatnie</string>
     <string name="action_uncategorized">Bez kategorii</string>
     <string name="menu_delete">Usuń</string>
-    <string name="menu_copy">Kopiuj</string>
-    <string name="menu_edit">Edytuj</string>
-    <string name="menu_cancel">Anuluj</string>
     <string name="menu_change_category">Kategoria</string>
     <string name="menu_favorite">Ulubiona</string>
     <string name="menu_preview">Podgląd</string>
     <string name="menu_share">Udostępnij</string>
     <string name="menu_about">O</string>
-
-    <string name="change_category_title">Wybierz kategorię</string>
-    <string name="copy">Kopiuj</string>
 
     <string name="listview_updated_today">Dzisiaj</string>
     <string name="listview_updated_yesterday">Wczoraj</string>
@@ -117,7 +107,6 @@
     <string name="widget_single_note_placeholder_tv">Nie znaleziono notatki</string>
     <string name="widget_create_note">Utwórz notatkę</string>
     <string name="widget_not_logged_in">Zanim użyjesz widgetu zaloguj się wpierw do Notatek</string>
-    <string name="widget_entry_fav_contentDescription">Ikona gwiazdy użyta do oznaczenia elementu jako ulubiony</string>
     <string name="widget_app_launcher_contentDescription">Uruchamia aplikację</string>
 
     <string name="activity_select_single_note">Wybierz notatkę</string>

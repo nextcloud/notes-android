@@ -9,13 +9,12 @@
     <string name="action_settings">Innstillinger</string>
     <string name="action_search">Søk</string>
     <string name="action_create_save">Lagre</string>
-    <string name="action_create_cancel">Avbryt</string>
-    <string name="action_edit_editing">Rediger</string>
+    <string name="simple_cancel">Avbryt</string>
+    <string name="simple_edit">Rediger</string>
     <string name="action_edit_save">Lagre</string>
     <string name="action_edit_saving">Lagrer &#8230;</string>
     <string name="action_edit_saved">Lagret</string>
-    <string name="action_edit_cancel">Avbryt</string>
-    <string name="action_about">Om</string>
+    <string name="simple_about">Om</string>
     <string name="action_select_note">Velg notat</string>
     <string name="action_note_deleted">Notat slettet</string>
     <string name="action_note_restored">Notat gjenopprettet</string>
@@ -25,17 +24,11 @@
     <string name="action_recent">Nylig</string>
     <string name="action_uncategorized">Ukategorisert</string>
     <string name="menu_delete">Slett</string>
-    <string name="menu_copy">Kopie</string>
-    <string name="menu_edit">Rediger</string>
-    <string name="menu_cancel">Avbryt</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Favoritt</string>
     <string name="menu_preview">Forhåndsvis</string>
     <string name="menu_share">Del</string>
     <string name="menu_about">Om</string>
-
-    <string name="change_category_title">Velg kateogri</string>
-    <string name="copy">Kopier</string>
 
     <string name="listview_updated_today">Idag</string>
     <string name="listview_updated_yesterday">Igår</string>
@@ -117,7 +110,6 @@
     <string name="widget_single_note_placeholder_tv">Notatet ble ikke funnet</string>
     <string name="widget_create_note">Opprett notat</string>
     <string name="widget_not_logged_in">Logg inn i Notater før du bruker dette miniprogrammet</string>
-    <string name="widget_entry_fav_contentDescription">Stjerneikon brukt for å markere element som favoritt</string>
     <string name="widget_app_launcher_contentDescription">Starter programmet</string>
 
     <string name="activity_select_single_note">Velg notat</string>

@@ -9,13 +9,12 @@
     <string name="action_settings">Impostazioni</string>
     <string name="action_search">Cerca</string>
     <string name="action_create_save">Salva</string>
-    <string name="action_create_cancel">Annulla</string>
-    <string name="action_edit_editing">Modifica</string>
+    <string name="simple_cancel">Annulla</string>
+    <string name="simple_edit">Modifica</string>
     <string name="action_edit_save">Salva</string>
     <string name="action_edit_saving">Salvataggio di &#8230;</string>
     <string name="action_edit_saved">Salvata</string>
-    <string name="action_edit_cancel">Annulla</string>
-    <string name="action_about">Informazioni</string>
+    <string name="simple_about">Informazioni</string>
     <string name="action_select_note">Seleziona nota</string>
     <string name="action_note_deleted">Nota eliminata</string>
     <string name="action_note_restored">Nota ripristinata</string>
@@ -25,17 +24,13 @@
     <string name="action_recent">Recenti</string>
     <string name="action_uncategorized">Senza categoria</string>
     <string name="menu_delete">Elimina</string>
-    <string name="menu_copy">Copia</string>
-    <string name="menu_edit">Modifica</string>
-    <string name="menu_cancel">Annulla</string>
     <string name="menu_change_category">Categoria</string>
     <string name="menu_favorite">Preferito</string>
     <string name="menu_preview">Anteprima</string>
     <string name="menu_share">Condividi</string>
     <string name="menu_about">Informazioni</string>
 
-    <string name="change_category_title">Scegli categoria</string>
-    <string name="copy">Copia</string>
+    <string name="change_category_title">Scegli una categoria</string>
 
     <string name="listview_updated_today">Oggi</string>
     <string name="listview_updated_yesterday">Ieri</string>
@@ -57,6 +52,7 @@
     <string name="settings_submitting">Connessione a &#8230;</string>
     <string name="settings_view_category">impostazioni di visualizzazione</string>
     <string name="settings_note_mode">Modalità  di visualizzazione delle note</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_category">Certificati</string>
     <string name="settings_cert_trust_system">Considera affidabili i certificati di sistema</string>
     <string name="settings_cert_trust_system_on">Le CA di sistema e aggiunte dall\'utente saranno considerate affidabili (consigliato)</string>
@@ -124,6 +120,9 @@
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crea una nuova nota</string>
+
+    <string name="pref_value_theme_light">Chiaro</string>
+    <string name="pref_value_theme_dark">Scuro</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentContributingTab;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentCreditsTab;
@@ -15,18 +17,19 @@ import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentLicenseT
 
 public class AboutActivity extends AppCompatActivity {
 
+    @BindView(R.id.pager)
+    ViewPager mViewPager;
+    @BindView(R.id.tabs)
+    TabLayout mTabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_about);
-
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
-        TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
+        ButterKnife.bind(this);
 
         mViewPager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewPager);
-
     }
 
     private class TabsPagerAdapter extends FragmentPagerAdapter {

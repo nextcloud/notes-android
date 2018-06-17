@@ -2,8 +2,6 @@ package it.niedermann.owncloud.notes.util;
 
 import junit.framework.TestCase;
 
-import java.lang.reflect.Method;
-
 /**
  * Tests the NotesClientUtil
  * Created by stefan on 24.09.15.
