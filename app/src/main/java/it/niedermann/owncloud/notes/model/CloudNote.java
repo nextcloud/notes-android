@@ -98,6 +98,7 @@ public class CloudNote implements Serializable {
 
     @Override
     public String toString() {
-        return "R" + getRemoteId() + " " + (isFavorite() ? " (*) " : "     ") + getCategory() + " / " + getTitle() + " (" + getModified(NoteSQLiteOpenHelper.DATE_FORMAT) + " / " + getEtag() + ")";
+        final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+        return "R" + getRemoteId() + " " + (isFavorite() ? " (*) " : "     ") + getCategory() + " / " + getTitle() + " (" + getModified(DATE_FORMAT) + " / " + getEtag() + ")";
     }
 }
