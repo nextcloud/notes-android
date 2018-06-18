@@ -16,6 +16,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 
+import static android.support.v7.widget.RecyclerView.NO_POSITION;
+
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int section_type = 0;
@@ -201,7 +203,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-            noteClickListener.onNoteClick(getAdapterPosition(), v);
+            final int adapterPosition = getAdapterPosition();
+            if (adapterPosition != NO_POSITION) {
+                noteClickListener.onNoteClick(adapterPosition, v);
+            }
         }
 
         @Override
