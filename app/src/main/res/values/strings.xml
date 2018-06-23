@@ -130,6 +130,7 @@
     <string name="shortcut_create_long">Create a new note</string>
 
     <!-- Key / Values for preferences -->
+    <string name="pref_key_certs" translatable="false">certificates</string>
     <string name="pref_key_trust_system_certs" translatable="false">trustSystemCerts</string>
     <string name="pref_key_reset_trust" translatable="false">resetTrust</string>
     <string name="pref_key_note_mode" translatable="false">noteMode</string>
