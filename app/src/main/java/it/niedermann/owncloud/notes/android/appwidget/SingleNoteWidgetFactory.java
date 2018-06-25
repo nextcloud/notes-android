@@ -36,21 +36,6 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         db = NoteSQLiteOpenHelper.getInstance(mContext);
     }
 
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
-
-    // TODO Set loading view
-    @Override
-    public RemoteViews getLoadingView() {
-        return null;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return 1;
-    }
 
     @Override
     public void onDataSetChanged() {
@@ -107,8 +92,25 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         return note_content;
     }
 
+
+    // TODO Set loading view
+    @Override
+    public RemoteViews getLoadingView() {
+        return null;
+    }
+
+    @Override
+    public int getViewTypeCount() {
+        return 1;
+    }
+
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return true;
     }
 }
