@@ -26,6 +26,7 @@ public class NoteListWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
 
         for (int appWidgetId : appWidgetIds) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -62,7 +63,7 @@ public class NoteListWidget extends AppWidgetProvider {
                                                                 0, templateIntent,
                                                                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-            if (displayMode == 2) {
+            if (displayMode == NLW_DISPLAY_CATEGORY) {
                 serviceIntent.putExtra(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, category);
             }
             serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
@@ -71,12 +72,12 @@ public class NoteListWidget extends AppWidgetProvider {
             views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
-
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
         int appWidgetIds[] = awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class));
 
@@ -85,8 +86,6 @@ public class NoteListWidget extends AppWidgetProvider {
                 awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
             }
         }
-
-        super.onReceive(context, intent);
     }
 
     @Override
