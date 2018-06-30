@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <Preference
-        android:icon="@drawable/ic_account_circle_grey_24dp"
+        android:icon="@drawable/ic_account_circle_grey_48dp"
         android:title="@string/settings_server_settings">
         <intent
             android:targetClass="it.niedermann.owncloud.notes.android.activity.SettingsActivity"
@@ -13,14 +13,14 @@
         android:defaultValue="@string/pref_value_mode_edit"
         android:entries="@array/noteMode_entries"
         android:entryValues="@array/noteMode_values"
-        android:icon="@drawable/ic_remove_red_eye_grey_24dp"
+        android:icon="@drawable/ic_remove_red_eye_grey_48dp"
         android:key="@string/pref_key_note_mode"
         android:summary="%s"
         android:title="@string/settings_note_mode" />
 
     <SwitchPreference
         android:defaultValue="@string/pref_value_theme_light"
-        android:icon="@drawable/ic_brightness_2_grey_24dp"
+        android:icon="@drawable/ic_brightness_2_grey_48dp"
         android:key="@string/pref_key_theme"
         android:summary="%s"
         android:title="@string/settings_theme_title" />
@@ -28,7 +28,7 @@
     <PreferenceScreen
         android:key="@string/pref_key_certs"
         android:persistent="false"
-        android:icon="@drawable/ic_https_grey_24dp"
+        android:icon="@drawable/ic_https_grey_48dp"
         android:title="@string/settings_cert_category">
         <CheckBoxPreference
             android:defaultValue="true"
