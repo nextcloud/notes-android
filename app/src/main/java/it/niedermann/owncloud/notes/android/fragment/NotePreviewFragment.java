@@ -2,6 +2,10 @@ package it.niedermann.owncloud.notes.android.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.content.res.TypedArrayUtils;
+import android.support.v4.text.TextUtilsCompat;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,14 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.yydcdut.markdown.callback.OnTodoClickCallback;
 import com.yydcdut.markdown.syntax.text.TextFactory;
+import com.yydcdut.rxmarkdown.RxMDConfiguration;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.ICallback;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -69,7 +75,27 @@ public class NotePreviewFragment extends BaseNoteFragment {
         content = content.replaceAll("(?<![(])(https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])(?![^\\[]*\\])", "[$1]($1)");
 
         RxMarkdown.with(content, getActivity())
-                .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()))
+                .config(new RxMDConfiguration.Builder(getActivity().getApplicationContext())
+                        .setHeader2RelativeSize(1.35f)
+                        .setHeader3RelativeSize(1.25f)
+                        .setHeader4RelativeSize(1.15f)
+                        .setHeader5RelativeSize(1.1f)
+                        .setHeader6RelativeSize(1.05f)
+                        .setHorizontalRulesHeight(2)
+                        .setOnTodoClickCallback(new OnTodoClickCallback() {
+                            @Override
+                            public CharSequence onTodoClicked(View view, String line, int lineNumber) {
+                                String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
+                                if(lines.length >= lineNumber) {
+                                    lines[lineNumber] = line + lines[lineNumber].charAt(lines[lineNumber].length() - 1);
+                                }
+                                noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
+                                saveNote(null);
+                                return line;
+                            }
+                        })
+                        .setLinkFontColor(ResourcesCompat.getColor(getActivity().getApplicationContext().getResources(), R.color.primary, null))
+                        .build())
                 .factory(TextFactory.create())
                 .intoObservable()
                 .subscribeOn(Schedulers.computation())
@@ -95,6 +121,6 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
     @Override
     protected String getContent() {
-        return note.getContent();
+        return noteContent.getText().toString();
     }
 }
