@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -75,27 +76,22 @@ public class NotePreviewFragment extends BaseNoteFragment {
         content = content.replaceAll("(?<![(])(https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])(?![^\\[]*\\])", "[$1]($1)");
 
         RxMarkdown.with(content, getActivity())
-                .config(new RxMDConfiguration.Builder(getActivity().getApplicationContext())
-                        .setHeader2RelativeSize(1.35f)
-                        .setHeader3RelativeSize(1.25f)
-                        .setHeader4RelativeSize(1.15f)
-                        .setHeader5RelativeSize(1.1f)
-                        .setHeader6RelativeSize(1.05f)
-                        .setHorizontalRulesHeight(2)
+                .config(
+                    MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
                         .setOnTodoClickCallback(new OnTodoClickCallback() {
-                            @Override
-                            public CharSequence onTodoClicked(View view, String line, int lineNumber) {
+                                @Override
+                                public CharSequence onTodoClicked(View view, String line, int lineNumber) {
                                 String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
                                 if(lines.length >= lineNumber) {
-                                    lines[lineNumber] = line + lines[lineNumber].charAt(lines[lineNumber].length() - 1);
+                                    lines[lineNumber] = line;
                                 }
                                 noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
                                 saveNote(null);
                                 return line;
                             }
-                        })
-                        .setLinkFontColor(ResourcesCompat.getColor(getActivity().getApplicationContext().getResources(), R.color.primary, null))
-                        .build())
+                        }
+                    ).build()
+                )
                 .factory(TextFactory.create())
                 .intoObservable()
                 .subscribeOn(Schedulers.computation())

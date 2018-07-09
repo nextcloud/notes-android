@@ -91,7 +91,7 @@ public class NoteEditFragment extends BaseNoteFragment {
         editContent.setEnabled(true);
 
         RxMarkdown.live(editContent)
-                .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()))
+                .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()).build())
                 .factory(EditFactory.create())
                 .intoObservable()
                 .subscribe(new Subscriber<CharSequence>() {

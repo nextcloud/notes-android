@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.content.res.ResourcesCompat;
 
 import com.yydcdut.rxmarkdown.RxMDConfiguration;
+import com.yydcdut.rxmarkdown.RxMDConfiguration.Builder;
 
 import it.niedermann.owncloud.notes.R;
 
@@ -19,7 +20,7 @@ public class MarkDownUtil {
      * @param context Context
      * @return RxMDConfiguration
      */
-    public static RxMDConfiguration getMarkDownConfiguration(Context context) {
+    public static Builder getMarkDownConfiguration(Context context) {
         return new RxMDConfiguration.Builder(context)
                 .setHeader2RelativeSize(1.35f)
                 .setHeader3RelativeSize(1.25f)
@@ -27,7 +28,6 @@ public class MarkDownUtil {
                 .setHeader5RelativeSize(1.1f)
                 .setHeader6RelativeSize(1.05f)
                 .setHorizontalRulesHeight(2)
-                .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null))
-                .build();
+                .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null));
     }
 }
