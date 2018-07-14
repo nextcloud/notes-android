@@ -39,7 +39,6 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Axustes da Conta</string>
-    <string name="settings_server">Servidor</string>
     <string name="settings_url">Enderezo do servidor</string>
     <string name="settings_url_check_description">Amosa se pódeselle facer ping ao enderezo.</string>
     <string name="settings_url_warn_http">AVISO: «http» non é seguro. Por favor empregue «https».</string>
