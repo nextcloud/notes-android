@@ -37,7 +37,6 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">アカウント設定</string>
-    <string name="settings_server">サーバー</string>
     <string name="settings_url">サーバーアドレス</string>
     <string name="settings_url_warn_http">警告: \"http\" は安全ではありません。 \"https\" を使用してください。</string>
     <string name="settings_username">ユーザー名</string>

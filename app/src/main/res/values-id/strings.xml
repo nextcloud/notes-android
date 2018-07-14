@@ -34,7 +34,6 @@
     <string name="listview_updated_this_month">Bulan ini</string>
     <string name="listview_updated_earlier">Terdahulu</string>
 
-    <string name="settings_server">Peladen</string>
     <string name="settings_url">Alamat peladen</string>
     <string name="settings_url_check_description">Tampilkan jika alamat dapat diping.</string>
     <string name="settings_url_warn_http">PERHATIAN: \"http\" tidak aman. Harap gunakan \"https\".</string>
