@@ -39,7 +39,6 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Configuraciones  de la cuenta</string>
-    <string name="settings_server">Servidor</string>
     <string name="settings_url">Dirección del servidor</string>
     <string name="settings_url_check_description">Muestra si se puede hacer ping a la dirección</string>
     <string name="settings_url_warn_http">ADVERTENCIA: \"http\" no es seguro. Favor de usar \"https\".</string>
