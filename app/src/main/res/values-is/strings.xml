@@ -40,6 +40,7 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Stillingar aðgangs</string>
+    <string name="settings_server">Þjónn</string>
     <string name="settings_url">Vistfang þjóns</string>
     <string name="settings_url_check_description">Sýnir hvort hægt sé að ná sambandi (ping) við vistfangið.</string>
     <string name="settings_url_warn_http">AÐVÖRUN: \"http\" er óöruggt. Endilega nota \"https\".</string>
@@ -49,6 +50,7 @@
     <string name="settings_password_check_description">Sýnir hvort auðkenni séu rétt.</string>
     <string name="settings_submit">Tengjast</string>
     <string name="settings_submitting">Tengist &#8230;</string>
+    <string name="settings_view_category">Skoða stillingar</string>
     <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
     <string name="settings_theme_title">Þema</string>
     <string name="settings_cert_category">Skilríki</string>

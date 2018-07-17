@@ -29,6 +29,7 @@
     <string name="listview_updated_earlier">ավելի վաղ</string>
 
     <!-- Settings -->
+    <string name="settings_server">սերվեր</string>
     <string name="settings_url">սերվերի հասցեն</string>
     <string name="settings_url_check_description">ցույց է տալիս, որ տրված հասցեն հասանելի է</string>
     <string name="settings_url_warn_http">ՈՒՇԱԴՐՈՒԹՅՈՒՆ: "http" պարունակում է վտանգ. առաջարկում ենք օգտագործել "https".</string>

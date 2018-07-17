@@ -40,6 +40,7 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Настройки аккаунта</string>
+    <string name="settings_server">Сервер</string>
     <string name="settings_url">Адрес сервера</string>
     <string name="settings_url_check_description"> Показывает доступность адреса.</string>
     <string name="settings_url_warn_http">ВНИМАНИЕ: использование «http» небезопасно. Используйте «https».</string>
@@ -49,6 +50,7 @@
     <string name="settings_password_check_description">Показывает, верно ли указаны учётные данные.</string>
     <string name="settings_submit">Соединить</string>
     <string name="settings_submitting">Соединение …</string>
+    <string name="settings_view_category">Просмотр настроек</string>
     <string name="settings_note_mode">Режим показа заметок</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_cert_category">Сертификаты</string>

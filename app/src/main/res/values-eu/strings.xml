@@ -34,6 +34,7 @@
     <string name="listview_updated_this_month">Hilabete honetan</string>
     <string name="listview_updated_earlier">Lehenago</string>
 
+    <string name="settings_server">Zerbitzaria</string>
     <string name="settings_url">Zerbitzariaren helbidea</string>
     <string name="settings_url_check_description">Erakusten du ea helbideari ping egin daiteken</string>
     <string name="settings_url_warn_http">ERNE: \"http\" ez da segurua. Mesedez, erabili \"https\".</string>

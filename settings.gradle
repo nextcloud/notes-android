@@ -1,2 +1,3 @@
 include ':app'
 include ':cert4android'
+project(':cert4android').projectDir=new File('../cert4android')

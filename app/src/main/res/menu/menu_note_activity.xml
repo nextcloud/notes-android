@@ -13,4 +13,11 @@
         android:orderInCategory="50"
         android:title="@string/simple_edit"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_reminder"
+        android:icon="@drawable/ic_add_alert_white_24dp"
+        android:orderInCategory="50"
+        android:title="@string/menu_reminder"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
 </menu>

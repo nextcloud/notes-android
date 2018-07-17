@@ -131,6 +131,12 @@
                 android:resource="@xml/note_list_widget_provider_info" />
         </receiver>
 
+        <receiver android:name=".util.ReminderReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="it.niedermann.owncloud.notes" />
+            </intent-filter>
+        </receiver>
+
         <service
             android:name=".android.appwidget.SingleNoteWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />

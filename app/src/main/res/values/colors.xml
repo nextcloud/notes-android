@@ -23,7 +23,4 @@
 
     <color name="category_background">#FFF</color>
     <color name="category_border">@color/primary</color>
-
-    <color name="black">#000000</color>
-    <color name="white">#ffffff</color>
 </resources>

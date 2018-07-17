@@ -26,6 +26,7 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Definições da conta</string>
+    <string name="settings_server">Servidor</string>
     <string name="settings_url">Endereço do servidor</string>
     <string name="settings_url_warn_http">AVISO: "http" é inseguro. Por favor use "https".</string>
     <string name="settings_username">Nome de utilizador</string>
@@ -33,6 +34,7 @@
     <string name="settings_password_unchanged">Palavra-passe (não alterada)</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">A conectar &#8230;</string>
+    <string name="settings_view_category">Definições de visualização</string>
     <string name="settings_cert_category">Certificados</string>
     <string name="settings_cert_trust_system">Confiar nos certificados do sistema</string>
     <string name="settings_cert_trust_system_on">As ACs do sistema e adicionadas pelo utilizador serão confiadas (recomendado)</string>

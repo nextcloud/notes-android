@@ -34,6 +34,7 @@
     <string name="listview_updated_this_month">Aquest mes</string>
     <string name="listview_updated_earlier">Aviat</string>
 
+    <string name="settings_server">Servidor</string>
     <string name="settings_url">Adreça del servidor</string>
     <string name="settings_url_check_description">Mostra si es pot fer ping a l\\\'adreça</string>
     <string name="settings_url_warn_http">ATENCIÓ: \"http\" és insegur. Si us plau utilitzeu \"https\".</string>

@@ -34,6 +34,7 @@
     <string name="listview_updated_this_month">Luna asta</string>
     <string name="listview_updated_earlier">Anterior</string>
 
+    <string name="settings_server">Server</string>
     <string name="settings_url">Adresa serverului</string>
     <string name="settings_url_check_description">Arată dacă se poate face \'ping\' la adresă.</string>
     <string name="settings_url_warn_http">ATENȚIE: \"http\" este nesigur. Vă rugăm utilizați \"https\".</string>
