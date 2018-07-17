@@ -12,6 +12,9 @@ import it.niedermann.owncloud.notes.android.activity.SplashscreenActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
+/**
+ * Creates a notification with the note title and note content.
+ */
 public class ReminderReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

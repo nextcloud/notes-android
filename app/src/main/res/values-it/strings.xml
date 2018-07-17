@@ -136,4 +136,10 @@
         <item quantity="one">%d selezionato</item>
         <item quantity="other">%d selezionati</item>
     </plurals>
+    <string name="menu_reminder">Promemoria</string>
+    <string name="dialog_reminder_title">Aggiungi un promemoria</string>
+    <string name="dialog_reminder_time">Ora</string>
+    <string name="dialog_reminder_date">Data</string>
+    <string name="dialog_reminder_accept">Imposta</string>
+    <string name="dialog_reminder_cancel">Annulla</string>
 </resources>
