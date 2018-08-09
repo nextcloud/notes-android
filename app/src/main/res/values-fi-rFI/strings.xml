@@ -40,6 +40,7 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Tilin asetukset</string>
+    <string name="settings_server">Palvelin</string>
     <string name="settings_url">Palvelimen osoite</string>
     <string name="settings_url_warn_http">VAROITUS: \"http\" on suojaamaton. Käytä \"https\"-yhteyttä.</string>
     <string name="settings_username">Käyttäjätunnus</string>

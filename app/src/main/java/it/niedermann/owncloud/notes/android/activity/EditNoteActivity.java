@@ -1,6 +1,8 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.app.AlarmManager;
 import android.app.Fragment;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,17 +19,20 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
 import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
+import it.niedermann.owncloud.notes.android.fragment.ReminderDialogFragment;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.util.NoteUtil;
+import it.niedermann.owncloud.notes.util.ReminderReceiver;
 
-public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener {
+public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener, ReminderDialogFragment.ReminderDialogListener {
 
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_CATEGORY = "category";
 
     private BaseNoteFragment fragment;
+    private int reminderId = 0;  // unique id used to set the reminder. It is set in onNoteUpdated()
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -195,11 +200,22 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     @Override
     public void onNoteUpdated(DBNote note) {
+        reminderId = (int) note.getId();
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(note.getTitle());
             String subtitle = note.getCategory().isEmpty() ? getString(R.string.action_uncategorized) : NoteUtil.extendCategory(note.getCategory());
             actionBar.setSubtitle(subtitle);
         }
+    }
+
+    @Override
+    public void onDateTimeSet(Calendar calendar) {
+        Intent intent = new Intent(this, ReminderReceiver.class);
+        intent.setAction("it.niedermann.owncloud.notes");
+        intent.putExtra(PARAM_NOTE_ID, reminderId);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, reminderId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
 }

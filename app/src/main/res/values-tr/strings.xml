@@ -40,6 +40,7 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Hesap Ayarları</string>
+    <string name="settings_server">Sunucu</string>
     <string name="settings_url">Sunucu adresi</string>
     <string name="settings_url_check_description">Adresin pinglenebildiğini gösterir.</string>
     <string name="settings_url_warn_http">UYARI: \"http\" güvenli değildir. Lütfen \"https\" kullanın.</string>
@@ -49,6 +50,7 @@
     <string name="settings_password_check_description">Oturum açma bilgilerinin doğru olduğunu gösterir.</string>
     <string name="settings_submit">Bağlan</string>
     <string name="settings_submitting">Bağlanılıyor &#8230;</string>
+    <string name="settings_view_category">Ayarları görüntüle</string>
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_category">Sertifikalar</string>

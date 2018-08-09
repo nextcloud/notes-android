@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -13,6 +14,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import java.util.Calendar;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -157,6 +160,9 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 }
 
                 return false;
+            case R.id.menu_reminder:
+                DialogFragment reminderFragment = new ReminderDialogFragment();
+                reminderFragment.show(this.getFragmentManager(), "reminder");
             default:
                 return super.onOptionsItemSelected(item);
         }

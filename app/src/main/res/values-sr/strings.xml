@@ -40,6 +40,7 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Поставке налога</string>
+    <string name="settings_server">Сервер</string>
     <string name="settings_url">Адреса сервера</string>
     <string name="settings_url_check_description">Приказује да ли адреса може да да се пингује.</string>
     <string name="settings_url_warn_http">УПОЗОРЕЊЕ: „http“ протокол није безбедан. Користите „https“.</string>
@@ -49,6 +50,7 @@
     <string name="settings_password_check_description">Прикзује да ли су акредитиви исправни.</string>
     <string name="settings_submit">Повежи се</string>
     <string name="settings_submitting">Повезујем се&#8230;</string>
+    <string name="settings_view_category">Поставке прегледа</string>
     <string name="settings_note_mode">Начин приказа за Белешке</string>
     <string name="settings_theme_title">Тема</string>
     <string name="settings_cert_category">Сертификати</string>

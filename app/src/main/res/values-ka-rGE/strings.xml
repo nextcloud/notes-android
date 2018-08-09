@@ -33,6 +33,7 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">ანგარიშის პარამეტრები</string>
+    <string name="settings_server">სერვერი</string>
     <string name="settings_url">სერვერის მისამართი</string>
     <string name="settings_url_check_description">აჩვენებს იპინგება თუ არა მისამართი</string>
     <string name="settings_url_warn_http">გაფრთხილება: \"http\" არაა უსაფრთხო. გამოიყენეთ \"https\".</string>
@@ -42,6 +43,7 @@
     <string name="settings_password_check_description">აცვენებს უფლებამოსილებების სისწორეს</string>
     <string name="settings_submit">დაკავშირება</string>
     <string name="settings_submitting">ხდება დაკავშირება &#8230;</string>
+    <string name="settings_view_category">პარამეტრების ჩვენება</string>
     <string name="settings_note_mode">ჩანაწერების ჩვენების რეჟიმი</string>
     <string name="settings_cert_category">სერტიფიკატები</string>
     <string name="settings_cert_trust_system">ენდეთ სისტემის სერტიფიკატებს</string>
