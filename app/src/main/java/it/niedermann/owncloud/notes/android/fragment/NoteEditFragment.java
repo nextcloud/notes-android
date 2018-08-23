@@ -1,8 +1,11 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -108,6 +111,11 @@ public class NoteEditFragment extends BaseNoteFragment {
                         editContent.setText(charSequence, TextView.BufferType.SPANNABLE);
                     }
                 });
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        if(sp.getBoolean("font", false)) {
+            editContent.setTypeface(Typeface.MONOSPACE);
+        }
     }
 
     private final TextWatcher textWatcher = new TextWatcher() {

@@ -1,6 +1,9 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
@@ -91,6 +94,11 @@ public class NotePreviewFragment extends BaseNoteFragment {
                 });
         noteContent.setText(content);
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        if(sp.getBoolean("font", false)) {
+            noteContent.setTypeface(Typeface.MONOSPACE);
+        }
     }
 
     @Override
