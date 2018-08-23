@@ -200,7 +200,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private void setupNavigationList(final String selectedItem) {
         itemRecent = new NavigationAdapter.NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.label_all_notes), null, R.drawable.ic_access_time_grey600_24dp);
-        itemFavorites = new NavigationAdapter.NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_grey600_24dp);
+        itemFavorites = new NavigationAdapter.NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_yellow_24dp);
         adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
