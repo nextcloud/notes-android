@@ -12,8 +12,8 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="@dimen/button_padding"
         android:layout_marginStart="@dimen/button_padding"
-        android:contentDescription="@string/menu_delete"
-        android:src="@drawable/ic_star_white_24dp" />
+        android:contentDescription="@string/menu_favorite"
+        android:src="@drawable/ic_star_yellow_24dp" />
 
     <ImageView
         android:id="@+id/noteDeleteRight"
