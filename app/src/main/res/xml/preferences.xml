@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/settings_server">
-        <Preference android:title="@string/settings_server_settings">
-            <intent
-                android:targetPackage="it.niedermann.owncloud.notes"
-                android:targetClass="it.niedermann.owncloud.notes.android.activity.SettingsActivity" />
-        </Preference>
-    </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_view_category">
-        <ListPreference
-            android:defaultValue="@string/pref_value_mode_edit"
-            android:key="@string/pref_key_note_mode"
-            android:title="@string/settings_note_mode"
-            android:summary="%s"
-            android:entries="@array/noteMode_entries"
-            android:entryValues="@array/noteMode_values" />
+    <Preference
+        android:icon="@drawable/ic_account_circle_grey_24dp"
+        android:title="@string/settings_server_settings">
+        <intent
+            android:targetClass="it.niedermann.owncloud.notes.android.activity.SettingsActivity"
+            android:targetPackage="it.niedermann.owncloud.notes" />
+    </Preference>
 
-        <SwitchPreference
-            android:defaultValue="@string/pref_value_theme_light"
-            android:key="@string/pref_key_theme"
-            android:title="@string/settings_theme_title"
-            android:summary="%s"
-            />
-    </PreferenceCategory>
+    <ListPreference
+        android:defaultValue="@string/pref_value_mode_edit"
+        android:entries="@array/noteMode_entries"
+        android:entryValues="@array/noteMode_values"
+        android:icon="@drawable/ic_remove_red_eye_grey_24dp"
+        android:key="@string/pref_key_note_mode"
+        android:summary="%s"
+        android:title="@string/settings_note_mode" />
 
-    <PreferenceCategory android:title="@string/settings_cert_category">
+    <SwitchPreference
+        android:defaultValue="@string/pref_value_theme_light"
+        android:icon="@drawable/ic_brightness_2_grey_24dp"
+        android:key="@string/pref_key_theme"
+        android:summary="%s"
+        android:title="@string/settings_theme_title" />
+
+    <PreferenceScreen
+        android:key="@string/pref_key_certs"
+        android:persistent="false"
+        android:icon="@drawable/ic_https_grey_24dp"
+        android:title="@string/settings_cert_category">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key_trust_system_certs"
@@ -36,6 +40,6 @@
             android:key="@string/pref_key_reset_trust"
             android:title="@string/settings_cert_reset"
             android:summary="@string/settings_cert_reset_summary" />
-    </PreferenceCategory>
+    </PreferenceScreen>
 
 </PreferenceScreen>

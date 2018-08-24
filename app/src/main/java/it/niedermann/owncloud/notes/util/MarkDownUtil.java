@@ -21,6 +21,7 @@ public class MarkDownUtil {
      */
     public static RxMDConfiguration getMarkDownConfiguration(Context context) {
         return new RxMDConfiguration.Builder(context)
+                .setUnOrderListColor(ResourcesCompat.getColor(context.getResources(), R.color.fg_default, null))
                 .setHeader2RelativeSize(1.35f)
                 .setHeader3RelativeSize(1.25f)
                 .setHeader4RelativeSize(1.15f)

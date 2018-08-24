@@ -93,6 +93,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        saveNote(null);
         outState.putSerializable(SAVEDKEY_NOTE, note);
         outState.putSerializable(SAVEDKEY_ORIGINAL_NOTE, originalNote);
     }

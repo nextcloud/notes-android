@@ -36,7 +36,6 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Konta iestatījumi</string>
-    <string name="settings_server">Serveris</string>
     <string name="settings_url">Servera adrese</string>
     <string name="settings_url_check_description">Parāda, ja adresi var nopingot.</string>
     <string name="settings_url_warn_http">BRĪDINĀJUMS: \"http\" ir nedrošs, lietojiet \"https\" !!!</string>

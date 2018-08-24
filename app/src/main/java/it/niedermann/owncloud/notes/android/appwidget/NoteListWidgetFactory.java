@@ -39,17 +39,16 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     public void onCreate() {
         db = NoteSQLiteOpenHelper.getInstance(context);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
-        AppWidgetManager awm = AppWidgetManager.getInstance(context);
 
         switch (displayMode)
         {
-            case 0:
+            case NoteListWidget.NLW_DISPLAY_ALL:
                 views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.app_name));
                 break;
-            case 1:
+            case NoteListWidget.NLW_DISPLAY_STARRED:
                 views.setTextViewText(R.id.widget_note_list_title_tv, "Starred");
                 break;
-            case 2:
+            case NoteListWidget.NLW_DISPLAY_CATEGORY:
                 category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, null);
                 if (category.equals("")) {
                     views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.action_uncategorized));
@@ -58,8 +57,6 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                 }
                 break;
         }
-
-        awm.updateAppWidget(appWidgetId, views);
     }
 
     @Override
