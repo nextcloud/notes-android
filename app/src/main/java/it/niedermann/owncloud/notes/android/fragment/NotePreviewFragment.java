@@ -61,19 +61,6 @@ public class NotePreviewFragment extends BaseNoteFragment {
         ButterKnife.bind(this, getView());
 
         String content = note.getContent();
-        /*
-         * The following replaceAll adds links ()[] to all URLs that are not in an existing link.
-         * This regular expression consists of three parts:
-         * 1. (?<![(])
-         *    negative look-behind: no opening bracket "(" directly before the URL
-         *    This prevents replacement in target part of Markdown link: [](URL)
-         * 2. (https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])
-         *    URL pattern: matches all addresses beginning with http:// or https://
-         * 3. (?![^\\[]*\\])
-         *    negative look-ahead: no closing bracket "]" after the URL (otherwise there have to be an opening bracket "[" before)
-         *    This prevents replacement in label part of Markdown link: [...URL...]()
-         */
-        content = content.replaceAll("(?<![(])(https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])(?![^\\[]*\\])", "[$1]($1)");
 
         RxMarkdown.with(content, getActivity())
                 .config(
