@@ -57,6 +57,9 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                 }
                 break;
         }
+
+        AppWidgetManager awm = AppWidgetManager.getInstance(context);
+        awm.updateAppWidget(appWidgetId, views);
     }
 
     @Override
