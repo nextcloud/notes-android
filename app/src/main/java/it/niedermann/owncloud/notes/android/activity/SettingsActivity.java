@@ -76,6 +76,13 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
+        field_url.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                new URLValidatorAsyncTask().execute(NotesClientUtil.formatURL(field_url.getText().toString()));
+            }
+        });
+
         field_url.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -83,15 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String url = field_url.getText().toString().trim();
-
-                if (!url.endsWith("/")) {
-                    url += "/";
-                }
-                if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                    url = "https://" + url;
-                }
-                new URLValidatorAsyncTask().execute(url);
+                String url = NotesClientUtil.formatURL(field_url.getText().toString());
 
                 if (NotesClientUtil.isHttp(url)) {
                     urlWarnHttp.setVisibility(View.VISIBLE);

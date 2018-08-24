@@ -24,7 +24,7 @@ public class PreferencesFragment extends PreferenceFragment {
         resetTrust.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                CustomCertManager.resetCertificates(getActivity());
+                CustomCertManager.Companion.resetCertificates(getActivity());
                 Toast.makeText(getActivity(), getString(R.string.settings_cert_reset_toast), Toast.LENGTH_SHORT).show();
                 return true;
             }

@@ -39,8 +39,7 @@
     <string name="listview_updated_earlier">Früher</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings"> Konto-Einstellungen </string>
-    <string name="settings_server">Server</string>
+    <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Server-Adresse</string>
     <string name="settings_url_check_description">Zeigt an, ob die angegebene Adresse erreichbar ist.</string>
     <string name="settings_url_warn_http">WARNUNG: "http" ist unsicher. Bitte benutzen Sie "https".</string>
@@ -50,9 +49,9 @@
     <string name="settings_password_check_description">Zeigt an, ob die angegebenen Zugangsdaten korrekt sind.</string>
     <string name="settings_submit">Verbinden</string>
     <string name="settings_submitting">Verbindet&#8230;</string>
-    <string name="settings_view_category">Darstellung</string>
     <string name="settings_note_mode">Anzeigemodus für Notizen</string>
-    <string name="settings_cert_category">Zertifikate</string>
+    <string name="settings_theme_title">Theme</string>
+    <string name="settings_cert_category">Zertifikate verwalten</string>
     <string name="settings_cert_trust_system">System-Zertifikaten vertrauen</string>
     <string name="settings_cert_trust_system_on">System- und installierten CAs wird vertraut (empfohlen)</string>
     <string name="settings_cert_trust_system_off">System- und installierten CAs wird nicht vertraut</string>
@@ -119,6 +118,9 @@
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Neue Notiz erstellen</string>
+
+    <string name="pref_value_theme_light">Hell</string>
+    <string name="pref_value_theme_dark">Dunkel</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

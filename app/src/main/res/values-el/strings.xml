@@ -35,7 +35,6 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Ρυθμίσεις λογαριασμού</string>
-    <string name="settings_server">Διακομιστής</string>
     <string name="settings_url">Διεύθυνση διακομιστή</string>
     <string name="settings_url_warn_http">ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Το \"http\" δεν είναι ασφαλές. Παρακαλούμε χρησιμοποιήστε το \"https\".</string>
     <string name="settings_username">Όνομα χρήστη</string>
@@ -43,7 +42,6 @@
     <string name="settings_password_unchanged">Συνθηματικό (δεν άλλαξε)</string>
     <string name="settings_submit">Σύνδεση</string>
     <string name="settings_submitting">Συνδέεται &#8230;</string>
-    <string name="settings_view_category">Προβολή ρυθμίσεων</string>
     <string name="settings_note_mode">Λειτουργία προβολής σημειώσεων</string>
     <string name="settings_cert_category">Πιστοποιητικά</string>
     <string name="settings_cert_trust_system">Εμπιστοσύνη πιστοποιητικών συστήματος.</string>
@@ -100,6 +98,8 @@
     <string name="widget_create_note">Δημιουργία Σημείωσης</string>
     <string name="widget_not_logged_in">Παρακαλούμε συνδεθείτε στις Σημειώσεις πρωτού να χρησιμοποιήσετε αυτό το γραφικό στοιχείο.</string>
     <string name="widget_app_launcher_contentDescription">Εκκινεί την εφαρμογή</string>
+
+    <string name="activity_select_single_note">Επιλογή σημείωσης</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>

@@ -9,9 +9,12 @@
     <string name="action_settings">Ajustes</string>
     <string name="action_search">Buscar</string>
     <string name="action_create_save">Guardar</string>
+    <string name="simple_cancel">Cancelar</string>
+    <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
     <string name="action_edit_saving">Guardando &#8230;</string>
     <string name="action_edit_saved">Guardado</string>
+    <string name="simple_about">Acerca de</string>
     <string name="action_select_note">Seleccionar nota</string>
     <string name="action_note_deleted">Nota eliminada</string>
     <string name="action_note_restored">Nota restaurada</string>
@@ -27,6 +30,8 @@
     <string name="menu_share">Compartir</string>
     <string name="menu_about">Acerca de</string>
 
+    <string name="change_category_title">Escoge una categoría</string>
+
     <string name="listview_updated_today">Hoy</string>
     <string name="listview_updated_yesterday">Ayer</string>
     <string name="listview_updated_this_week">Esta semana</string>
@@ -35,7 +40,6 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Ajustes de cuenta</string>
-    <string name="settings_server">Servidor</string>
     <string name="settings_url">Dirección de servidor</string>
     <string name="settings_url_check_description">Muestra si se puede hacer ping a la dirección.</string>
     <string name="settings_url_warn_http">AVISO: \"http\" es inseguro. Por favor, use \"https\".</string>
@@ -45,8 +49,8 @@
     <string name="settings_password_check_description">Muestra si las credenciales son correctas.</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando &#8230;</string>
-    <string name="settings_view_category">Ver configuración</string>
     <string name="settings_note_mode">Modo de visualización para Notas</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_category">Certificados</string>
     <string name="settings_cert_trust_system">Confiar en los certificados del sistema</string>
     <string name="settings_cert_trust_system_on">Se confiará en las autoridades de certificación —CAs— del sistema y añadidas por el usuario (recomendado)</string>
@@ -107,12 +111,16 @@
     <string name="widget_single_note_placeholder_tv">Nota no encontrada</string>
     <string name="widget_create_note">Crear nota</string>
     <string name="widget_not_logged_in">Por favor, inicia sesión en Notas antes de usar este widget</string>
+    <string name="widget_entry_fav_contentDescription">El icono de estrella se usa para indicar que el elemento es un favorito</string>
     <string name="widget_app_launcher_contentDescription">Lanza la app</string>
 
     <string name="activity_select_single_note">Selecciona nota</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear una nota nueva</string>
+
+    <string name="pref_value_theme_light">Claro</string>
+    <string name="pref_value_theme_dark">Oscuro</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

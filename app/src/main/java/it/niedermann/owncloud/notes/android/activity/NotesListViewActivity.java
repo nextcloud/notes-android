@@ -2,11 +2,14 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -331,10 +334,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void setupNavigationMenu() {
+        final NavigationAdapter.NavigationItem itemTrashbin = new NavigationAdapter.NavigationItem("trashbin", getString(R.string.action_trashbin), null, R.drawable.ic_delete_grey600_24dp);
         final NavigationAdapter.NavigationItem itemSettings = new NavigationAdapter.NavigationItem("settings", getString(R.string.action_settings), null, R.drawable.ic_settings_grey600_24dp);
         final NavigationAdapter.NavigationItem itemAbout = new NavigationAdapter.NavigationItem("about", getString(R.string.simple_about), null, R.drawable.ic_info_outline_grey600_24dp);
 
         ArrayList<NavigationAdapter.NavigationItem> itemsMenu = new ArrayList<>();
+        itemsMenu.add(itemTrashbin);
         itemsMenu.add(itemSettings);
         itemsMenu.add(itemAbout);
 
@@ -347,6 +352,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 } else if (item == itemAbout) {
                     Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
                     startActivityForResult(aboutIntent, about);
+                } else if (item == itemTrashbin) {
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url + "index.php/apps/files/?dir=/&view=trashbin")));
                 }
             }
 
@@ -390,31 +399,40 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
              */
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-                    final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                    db.deleteNoteAndSync((dbNote).getId());
-                    adapter.remove(dbNote);
-                    refreshLists();
-                    Log.v("Note", "Item deleted through swipe ----------------------------------------------");
-                    Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, 7 * 1000)
-                            .setAction(R.string.action_undo, new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    db.addNoteAndSync(dbNote);
-                                    refreshLists();
-                                    Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
-                                            .show();
-                                }
-                            })
-                            .show();
+                switch(direction) {
+                    case ItemTouchHelper.LEFT: {
+                        final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                        db.deleteNoteAndSync((dbNote).getId());
+                        adapter.remove(dbNote);
+                        refreshLists();
+                        Log.v("Note", "Item deleted through swipe ----------------------------------------------");
+                        Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
+                                .setAction(R.string.action_undo, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        db.addNoteAndSync(dbNote);
+                                        refreshLists();
+                                        Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
+                                                .show();
+                                    }
+                                })
+                                .show();
+                        break;
+                    }
+                    case ItemTouchHelper.RIGHT: {
+                        final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                        db.toggleFavorite(dbNote, null);
+                        refreshLists();
+                        break;
+                    }
                 }
             }
 
             @Override
             public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
-                // show delete icon on the right side
-                noteViewHolder.showSwipeDelete(dX > 0);
+                // show swipe icon on the side
+                noteViewHolder.showSwipe(dX>0);
                 // move only swipeable part of item (not leave-behind)
                 getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.noteSwipeable, dX, dY, actionState, isCurrentlyActive);
             }
@@ -558,7 +576,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             db = NoteSQLiteOpenHelper.getInstance(this);
             if (db.getNoteServerSyncHelper().isSyncPossible()) {
                 adapter.removeAll();
-                swipeRefreshLayout.setRefreshing(true);
                 synchronize();
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
@@ -633,6 +650,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void synchronize() {
+        swipeRefreshLayout.setRefreshing(true);
         db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
         db.getNoteServerSyncHelper().scheduleSync(false);
     }

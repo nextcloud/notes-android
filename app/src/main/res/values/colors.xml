@@ -10,7 +10,8 @@
     <color name="bg_transparent">#aa000000</color>
     <color name="bg_highlighted">#f3f3f3</color>
     <color name="bg_normal">#ffffff</color>
-    <color name="bg_attention">#662020</color>
+    <color name="bg_attention">#d40000</color>
+    <color name="bg_warning">#ffcc00</color>
     <color name="fg_default">#000000</color>
     <color name="fg_default_selection">#333333</color>
     <color name="fg_default_low">#666666</color>
@@ -22,4 +23,7 @@
 
     <color name="category_background">#FFF</color>
     <color name="category_border">@color/primary</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
 </resources>
