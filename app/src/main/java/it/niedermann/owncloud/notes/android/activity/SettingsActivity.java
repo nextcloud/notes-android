@@ -104,7 +104,7 @@ public class SettingsActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             }
         }
-
+  
         setupListener();
 
         // Load current Preferences
@@ -131,6 +131,13 @@ public class SettingsActivity extends AppCompatActivity {
     }
     
     private void setupListener() {
+        field_url.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                new URLValidatorAsyncTask().execute(field_url.getText().toString());
+            }
+        });
+      
         field_url.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -146,7 +153,6 @@ public class SettingsActivity extends AppCompatActivity {
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     url = "https://" + url;
                 }
-                new URLValidatorAsyncTask().execute(url);
 
                 if (NotesClientUtil.isHttp(url)) {
                     urlWarnHttp.setVisibility(View.VISIBLE);
