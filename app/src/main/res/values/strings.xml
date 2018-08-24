@@ -142,6 +142,8 @@
     <string name="pref_value_mode_note" translatable="false">note</string>
     <string name="pref_value_theme_light">Light</string>
     <string name="pref_value_theme_dark">Dark</string>
+    <string name="fallback_weblogin_text">Revert to old login method</string>
+    <string name="fallback_weblogin_back">Back</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
