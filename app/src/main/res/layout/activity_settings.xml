@@ -38,7 +38,8 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/settings_username_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/settings_username"
@@ -53,7 +54,8 @@
         android:id="@+id/settings_password_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/settings_password"
