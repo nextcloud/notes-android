@@ -49,8 +49,8 @@ public class DisplayUtils {
 
 
         while (m.find()) {
-            int start = text.indexOf(m.group());
-            int end = text.indexOf(m.group()) + m.group().length();
+            int start = m.start();
+            int end = m.end();
             spannable.setSpan(new ForegroundColorSpan(color), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             spannable.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
