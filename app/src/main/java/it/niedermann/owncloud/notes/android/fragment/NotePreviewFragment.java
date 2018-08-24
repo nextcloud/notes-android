@@ -78,7 +78,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
         RxMarkdown.with(content, getActivity())
                 .config(
                     MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
-                        .setOnTodoClickCallback(new OnTodoClickCallback() {
+                        /*.setOnTodoClickCallback(new OnTodoClickCallback() {
                                 @Override
                                 public CharSequence onTodoClicked(View view, String line, int lineNumber) {
                                 String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
@@ -90,7 +90,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                 return line;
                             }
                         }
-                    ).build()
+                    )*/.build()
                 )
                 .factory(TextFactory.create())
                 .intoObservable()
@@ -117,6 +117,6 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
     @Override
     protected String getContent() {
-        return noteContent.getText().toString();
+        return note.getContent();
     }
 }
