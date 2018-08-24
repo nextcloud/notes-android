@@ -354,8 +354,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     startActivityForResult(aboutIntent, about);
                 } else if (item == itemTrashbin) {
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS) + "index.php/apps/files/?dir=/&view=trashbin")));
+                    String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url + "index.php/apps/files/?dir=/&view=trashbin")));
                 }
             }
 
