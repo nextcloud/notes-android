@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.android.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
@@ -17,12 +19,20 @@ import com.yydcdut.rxmarkdown.syntax.text.TextFactory;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.NotesClientUtil;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class NotePreviewFragment extends BaseNoteFragment {
+
+    private NoteSQLiteOpenHelper db = null;
+
+    @BindView(R.id.swiperefreshlayout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.single_note_content)
     RxMDTextView noteContent;
@@ -91,6 +101,32 @@ public class NotePreviewFragment extends BaseNoteFragment {
                 });
         noteContent.setText(content);
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
+
+        db = NoteSQLiteOpenHelper.getInstance(getActivity().getApplicationContext());
+        // Pull to Refresh
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (db.getNoteServerSyncHelper().isSyncPossible()) {
+                    swipeRefreshLayout.setRefreshing(true);
+                    db.getNoteServerSyncHelper().addCallbackPull( new ICallback() {
+                        @Override
+                        public void onFinish() {
+                            noteContent.setText(db.getNote(note.getId()).getContent(), TextView.BufferType.SPANNABLE);
+                            swipeRefreshLayout.setRefreshing(false);
+                        }
+
+                        @Override
+                        public void onScheduled() {
+                        }
+                    });
+                    db.getNoteServerSyncHelper().scheduleSync(false);
+                } else {
+                    swipeRefreshLayout.setRefreshing(false);
+                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override
