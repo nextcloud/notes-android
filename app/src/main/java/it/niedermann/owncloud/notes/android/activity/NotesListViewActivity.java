@@ -421,7 +421,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     }
                     case ItemTouchHelper.RIGHT: {
                         final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.toggleFavorite(dbNote, null);
+                        db.toggleFavorite(dbNote, syncCallBack);
                         refreshLists();
                         break;
                     }
