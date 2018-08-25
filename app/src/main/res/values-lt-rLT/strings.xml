@@ -9,9 +9,11 @@
     <string name="action_settings">Nustatymai</string>
     <string name="action_search">Paieška</string>
     <string name="action_create_save">Įrašyti</string>
+    <string name="simple_cancel">Atsisakyti</string>
     <string name="action_edit_save">Įrašyti</string>
     <string name="action_edit_saving">Įrašoma &#8230;</string>
     <string name="action_edit_saved">Įrašyta</string>
+    <string name="simple_about">Apie</string>
     <string name="action_select_note">Sukurti</string>
     <string name="action_note_deleted">Pastaba ištrinta</string>
     <string name="action_note_restored">Pastaba atstatyta</string>
@@ -33,8 +35,6 @@
     <string name="listview_updated_this_month">Šis mėnesis</string>
     <string name="listview_updated_earlier">Ankstesnis</string>
 
-    <!-- Settings -->
-    <string name="settings_server_settings">Paskyros nustatymai</string>
     <string name="settings_url">Serverio adresas</string>
     <string name="settings_url_check_description">Parodo, ar adresas yra pasiekiamas.</string>
     <string name="settings_url_warn_http">ĮSPĖJIMAS: \"http\" protokolas yra nesaugus. Prašome naudoti \"https\".</string>
@@ -45,7 +45,7 @@
     <string name="settings_submit">Prisijungti</string>
     <string name="settings_submitting">Jungiamasi &#8230;</string>
     <string name="settings_note_mode">Pastabų atvaizdavimas</string>
-    <string name="settings_cert_category">Sertifikatai</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_trust_system">Pasitikėti sistemos sertifikatais</string>
     <string name="settings_cert_trust_system_on">Sistemos ir vartotojų pridėti CA bus laikomi patikimais (rekomenduojama)</string>
     <string name="settings_cert_trust_system_off">Sistemos ir vartotojų pridėti CA bus laikomi nepatikimais</string>

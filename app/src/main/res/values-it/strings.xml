@@ -39,7 +39,7 @@
     <string name="listview_updated_earlier">Prima</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Impostazioni account</string>
+    <string name="settings_server_settings">Account</string>
     <string name="settings_url">Indirizzo del server</string>
     <string name="settings_url_check_description">Mostra se l\'indirizzo può rispondere al ping.</string>
     <string name="settings_url_warn_http">AVVISO: \"http\" non è sicuro. Utlizza \"https\".</string>
@@ -51,7 +51,7 @@
     <string name="settings_submitting">Connessione a &#8230;</string>
     <string name="settings_note_mode">Modalità  di visualizzazione delle note</string>
     <string name="settings_theme_title">Tema</string>
-    <string name="settings_cert_category">Certificati</string>
+    <string name="settings_cert_category">Gestisci certificati</string>
     <string name="settings_cert_trust_system">Considera affidabili i certificati di sistema</string>
     <string name="settings_cert_trust_system_on">Le CA di sistema e aggiunte dall\'utente saranno considerate affidabili (consigliato)</string>
     <string name="settings_cert_trust_system_off">Le CA di sistema e aggiunte dall\'utente non saranno considerate affidabili</string>

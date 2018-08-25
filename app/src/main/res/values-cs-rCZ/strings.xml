@@ -3,13 +3,18 @@
 
     <string name="app_name">Poznámky</string>
     <string name="no_notes">Zatím žádné poznámky</string>
+    <string name="label_all_notes">Všechny poznámky</string>
+    <string name="label_favorites">Oblíbené</string>
     <string name="action_create">Nová poznámka</string>
     <string name="action_settings">Nastavení</string>
     <string name="action_search">Hledat</string>
     <string name="action_create_save">Uložit</string>
+    <string name="simple_cancel">Storno</string>
+    <string name="simple_edit">Upravit</string>
     <string name="action_edit_save">Uložit</string>
     <string name="action_edit_saving">Ukládání &#8230;</string>
     <string name="action_edit_saved">Uloženo</string>
+    <string name="simple_about">O aplikaci</string>
     <string name="action_select_note">Vybrat poznámku</string>
     <string name="action_note_deleted">Poznámka byla smazána</string>
     <string name="action_note_restored">Poznámka byla obnovena</string>
@@ -25,6 +30,8 @@
     <string name="menu_share">Sdílet</string>
     <string name="menu_about">O aplikaci</string>
 
+    <string name="change_category_title">Zvolte kategorii</string>
+
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týden</string>
@@ -32,7 +39,7 @@
     <string name="listview_updated_earlier">Dříve</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Nastavení účtu</string>
+    <string name="settings_server_settings">Účet</string>
     <string name="settings_url">Adresa serveru</string>
     <string name="settings_url_check_description">Značí, zda lze adresu pingnout.</string>
     <string name="settings_url_warn_http">POZOR: \"http\" není bezpečné. Prosím použijte \"https\"</string>
@@ -43,7 +50,8 @@
     <string name="settings_submit">Připojit</string>
     <string name="settings_submitting">Připojování &#8230;</string>
     <string name="settings_note_mode">Režim zobrazení pro poznámky</string>
-    <string name="settings_cert_category">Certifikáty</string>
+    <string name="settings_theme_title">Motiv</string>
+    <string name="settings_cert_category">Spravovat certifikáty</string>
     <string name="settings_cert_trust_system">Důvěřovat systémovým certifikátům</string>
     <string name="settings_cert_trust_system_on">Systémové a uživatelsky přidané CA budou důvěryhodné (doporučeno)</string>
     <string name="settings_cert_trust_system_off">Systémové a uživatelsky přidané CA nebudou důvěryhodné</string>
@@ -103,12 +111,16 @@
     <string name="widget_single_note_placeholder_tv">Poznámka nenalezena</string>
     <string name="widget_create_note">Vytvořit poznámku</string>
     <string name="widget_not_logged_in">Před použitím widgetu se, prosím, přihlašte do aplikace Poznámky</string>
+    <string name="widget_entry_fav_contentDescription">Ikonka hvězdy označí položku jako oblíbenou</string>
     <string name="widget_app_launcher_contentDescription">Spustí aplikaci</string>
 
     <string name="activity_select_single_note">Vybrat poznámku</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Vytvořit novou poznámku</string>
+
+    <string name="pref_value_theme_light">Světlý</string>
+    <string name="pref_value_theme_dark">Tmavé</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

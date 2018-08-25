@@ -33,8 +33,6 @@
     <string name="listview_updated_this_month">Denne måned</string>
     <string name="listview_updated_earlier">Tidligere</string>
 
-    <!-- Settings -->
-    <string name="settings_server_settings">Kontoindstillinger</string>
     <string name="settings_url">Server adresse</string>
     <string name="settings_url_check_description">Viser hvorvidt  adressen kan blive pinget.</string>
     <string name="settings_url_warn_http">Advarsel: \"http\" er ikke sikker, benyt venligst \"https\".</string>
@@ -45,7 +43,6 @@
     <string name="settings_submit">Tilslut</string>
     <string name="settings_submitting">Tilslutter &#8230;</string>
     <string name="settings_note_mode">Display tilstand for noter</string>
-    <string name="settings_cert_category">Certifikater</string>
     <string name="settings_cert_trust_system">Stol på systemcertifikater</string>
     <string name="settings_cert_trust_system_on">System og bruger tilføjede CA\'er stoles der på (anbefalet)</string>
     <string name="settings_cert_trust_system_off">System og bruger tilføjede CA\\'er stoles der ikke på</string>
