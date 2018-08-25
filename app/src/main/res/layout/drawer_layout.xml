@@ -43,6 +43,11 @@
                         android:src="@mipmap/ic_launcher"
                         android:contentDescription="@string/app_name" />
 
+
+                    <android.support.v7.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -52,6 +57,13 @@
                         android:text="@string/app_name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
+                    <TextView
+                        android:id="@+id/account"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="12dp"
+                        android:layout_gravity="center_vertical"/>
+                    </android.support.v7.widget.LinearLayoutCompat>
                 </LinearLayout>
 
                 <android.support.v7.widget.RecyclerView
