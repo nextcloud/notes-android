@@ -31,8 +31,6 @@
     <string name="listview_updated_this_month">ამ თვეში</string>
     <string name="listview_updated_earlier">ადრე</string>
 
-    <!-- Settings -->
-    <string name="settings_server_settings">ანგარიშის პარამეტრები</string>
     <string name="settings_url">სერვერის მისამართი</string>
     <string name="settings_url_check_description">აჩვენებს იპინგება თუ არა მისამართი</string>
     <string name="settings_url_warn_http">გაფრთხილება: \"http\" არაა უსაფრთხო. გამოიყენეთ \"https\".</string>
@@ -43,7 +41,6 @@
     <string name="settings_submit">დაკავშირება</string>
     <string name="settings_submitting">ხდება დაკავშირება &#8230;</string>
     <string name="settings_note_mode">ჩანაწერების ჩვენების რეჟიმი</string>
-    <string name="settings_cert_category">სერტიფიკატები</string>
     <string name="settings_cert_trust_system">ენდეთ სისტემის სერტიფიკატებს</string>
     <string name="settings_cert_trust_system_on">სისტემისა და მომხმარებლის მიერ დამატებული სერტიფიკატის ხელმძღვანელობა მიჩნეულ იქნება სანდოდ (რეკომენდირებულია)</string>
     <string name="settings_cert_trust_system_off">სისტემისა და მომხმარებლის მიერ დამატებული სერტიფიკატის ხელმძღვანელობა არ იქნება მიჩნეული სანდოდ</string>

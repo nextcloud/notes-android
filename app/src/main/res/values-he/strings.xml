@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">פתקים</string>
+    <string name="no_notes">אין פתקים עדיין</string>
+    <string name="label_all_notes">כל הפתקים</string>
+    <string name="label_favorites">מועדפים</string>
+    <string name="action_create">פתק חדש</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="action_search">חיפוש</string>
+    <string name="action_create_save">שמירה</string>
+    <string name="simple_cancel">ביטול</string>
+    <string name="simple_edit">עריכה</string>
+    <string name="action_edit_save">שמירה</string>
+    <string name="action_edit_saving">מתבצעת שמירה &#8230;</string>
+    <string name="action_edit_saved">נשמר</string>
+    <string name="simple_about">על אודות</string>
+    <string name="action_select_note">בחירת פתק</string>
+    <string name="action_note_deleted">פתק נמחק</string>
+    <string name="action_note_restored">פתק שוחזר</string>
+    <string name="action_undo">ביטול</string>
+    <string name="action_drawer_open">פתיחת ניווט</string>
+    <string name="action_drawer_close">סגירת ניווט</string>
+    <string name="action_recent">אחרונים</string>
+    <string name="action_uncategorized">ללא קטגוריה</string>
+    <string name="menu_delete">מחיקה</string>
+    <string name="menu_change_category">קטגוריה</string>
+    <string name="menu_favorite">סימון כמועדף</string>
+    <string name="menu_preview">תצוגה מקדימה</string>
+    <string name="menu_share">שיתוף</string>
+    <string name="menu_about">על אודות</string>
+
+    <string name="change_category_title">בחירת קטגוריה</string>
+
+    <string name="listview_updated_today">היום</string>
+    <string name="listview_updated_yesterday">אתמול</string>
+    <string name="listview_updated_this_week">השבוע</string>
+    <string name="listview_updated_this_month">החודש</string>
+    <string name="listview_updated_earlier">לפני כן</string>
+
+    <string name="settings_url">כתובת שרת</string>
+    <string name="settings_url_check_description">מציג אם ניתן לשלוח פינג לשרת.</string>
+    <string name="settings_url_warn_http">אזהרה: „http” אינו מאובטח. נא להשתמש ב־„https”.</string>
+    <string name="settings_username">שם משתמש</string>
+    <string name="settings_password">ססמה</string>
+    <string name="settings_password_unchanged">ססמה (לא השתנתה)</string>
+    <string name="settings_password_check_description">להציג אם פרטי הזיהוי נכונים.</string>
+    <string name="settings_submit">התחברות</string>
+    <string name="settings_submitting">מתבצעת התחברות &#8230;</string>
+    <string name="settings_note_mode">מצב תצוגת פתקים</string>
+    <string name="settings_theme_title">ערכת עיצוב</string>
+    <string name="settings_cert_trust_system">מתן אמון באישורי המערכת</string>
+    <string name="settings_cert_trust_system_on">מתן אמון אוטומטית ברשויות אישורים של המערכת ובאלו שנוספו על ידי המשתמש (מומלץ)</string>
+    <string name="settings_cert_trust_system_off">לא לתת אמון ברשויות אישורים של המערכת ובאלו שנוספו על ידי המשתמש</string>
+    <string name="settings_cert_reset">איפוס אישורים שאושרו או נדחו</string>
+    <string name="settings_cert_reset_summary">איפוס האמון בכל האישורים בהתאמה אישית</string>
+    <string name="settings_cert_reset_toast">כל האישורים בהתאמה אישית פונו</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">פתקים - אבטחת חיבור</string>
+    <string name="trust_certificate_unknown_certificate_found">היישומון פתקים נתקל באישור בלתי מוכר. לתת בו אמון?</string>
+
+    <!-- Network -->
+    <string name="network_connecting">מתבצע חיבור</string>
+    <string name="network_connected">מחובר</string>
+    <string name="network_disconnected">אין רשת זמינה</string>
+
+    <!-- Error -->
+    <string name="error_sync">הסנכרון נכשל: %1$s</string>
+    <string name="error_invalid_login">כניסה שגויה: %1$s</string>
+    <string name="error_json">האם יישומון הפתקים מופעל בשרת?</string>
+    <string name="error_io">החיבור לשרת משובש</string>
+    <string name="error_no_network">אין חיבור לרשת</string>
+    <string name="error_server">בכתובת/שרת ישנן תקלות</string>
+    <string name="error_url_malformed">כתובת השרת שגויה</string>
+    <string name="error_username_password_invalid">שם משתמש או ססמה שגויים</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">הגדרות</string>
+
+    <!-- About -->
+    <string name="about_version_title">גרסה</string>
+    <string name="about_version">הניצולת עומדת על &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">מתחזק</string>
+    <string name="about_developers_title">מפתחים</string>
+    <string name="about_translators_title">מתרגמים</string>
+    <string name="about_translators_transifex">קהילת Nextcloud ב־&lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">בודקים</string>
+    <string name="about_source_title">קוד מקור</string>
+    <string name="about_source">מיזם זה מתארח ב־GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">תקלו</string>
+    <string name="about_issues">ניתן לדווח על תקלות, הצעות לשיפורים ובקשת תכונות חדשות בעוקב התקלות של GitHub:‏ &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">תרגום</string>
+    <string name="about_translate">ניתן להצטרף לצוות של Nextcloud ב־Transifex ולסייע לנו לתרגם את היישומון הזה: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">רישיון היישומון</string>
+    <string name="about_app_license">היישומון מוגן ברישיון הציבורי הכללי של GNU גרסה 3 ומעלה.</string>
+    <string name="about_app_license_button">הצגת הרישיון</string>
+    <string name="about_icons_disclaimer_title">סמלים</string>
+    <string name="about_icons_disclaimer">&lt;p>הסמל המקורי נוצר על ידי %1$s&lt;/p>&lt;p>כל הסמלים הנוספים בהם נעשה שימוש ביישומון זה הם &lt;a href=\"https://materialdesignicons.com/\">סמלי Material Design&lt;/a> שנוצרו ע״י Google בע״מ וכפופים לרישיון Apache 2.0.&lt;/p></string>
+    <string name="about_credits_tab_title">תודות</string>
+    <string name="about_contribution_tab_title">תרומה</string>
+    <string name="about_license_tab_title">רישיון</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">רשימת פתקים</string>
+    <string name="widget_note_list_placeholder">אין פתקים</string>
+    <string name="widget_single_note_title">פתק בודד</string>
+    <string name="widget_single_note_placeholder_tv">לא נמצא פתק</string>
+    <string name="widget_create_note">יצירת פתק</string>
+    <string name="widget_not_logged_in">נא להיכנס לפתקים לפני השימוש בחלונית הזאת</string>
+    <string name="widget_entry_fav_contentDescription">סמל הכוכב משמש לציון פריט כמועדף</string>
+    <string name="widget_app_launcher_contentDescription">יישומון שיגור</string>
+
+    <string name="activity_select_single_note">נא לבחור פתק</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">יצירת פתק חדש</string>
+
+    <string name="pref_value_theme_light">בהיר</string>
+    <string name="pref_value_theme_dark">כהה</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>פתיחה במצב עריכה</item>
+        <item>פתיחה במצב תצוגה מקדימה</item>
+        <item>שמירת הבחירה האחרונה שלי</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">נבחר %d</item>
+        <item quantity="two">נבחרו %d</item>
+        <item quantity="many">נבחרו %d</item>
+        <item quantity="other">נבחרו %d</item>
+    </plurals>
+</resources>

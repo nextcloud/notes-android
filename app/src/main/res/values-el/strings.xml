@@ -33,8 +33,6 @@
     <string name="listview_updated_this_month">Αυτό το μήνα</string>
     <string name="listview_updated_earlier">Νωρίτερα</string>
 
-    <!-- Settings -->
-    <string name="settings_server_settings">Ρυθμίσεις λογαριασμού</string>
     <string name="settings_url">Διεύθυνση διακομιστή</string>
     <string name="settings_url_warn_http">ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Το \"http\" δεν είναι ασφαλές. Παρακαλούμε χρησιμοποιήστε το \"https\".</string>
     <string name="settings_username">Όνομα χρήστη</string>
@@ -43,7 +41,6 @@
     <string name="settings_submit">Σύνδεση</string>
     <string name="settings_submitting">Συνδέεται &#8230;</string>
     <string name="settings_note_mode">Λειτουργία προβολής σημειώσεων</string>
-    <string name="settings_cert_category">Πιστοποιητικά</string>
     <string name="settings_cert_trust_system">Εμπιστοσύνη πιστοποιητικών συστήματος.</string>
     <string name="settings_cert_reset">Επαναφορά (μη) έμπιστων πιστοποιητικών</string>
     <!-- Certificates -->

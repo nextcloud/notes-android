@@ -38,8 +38,6 @@
     <string name="listview_updated_this_month">Ebben a hónapban</string>
     <string name="listview_updated_earlier">Korábban</string>
 
-    <!-- Settings -->
-    <string name="settings_server_settings">Fiók beállítások</string>
     <string name="settings_url">A szerver címe</string>
     <string name="settings_url_check_description">Mutatja, hogy cím pingelhető-e.</string>
     <string name="settings_url_warn_http">Figyelem: a \"http\" biztonságtalan. Kérjük használj \"https\"-t.</string>
@@ -51,7 +49,6 @@
     <string name="settings_submitting">Kapcsolódás &#8230;</string>
     <string name="settings_note_mode">Jegyzetmegjelenítési módok</string>
     <string name="settings_theme_title">Téma</string>
-    <string name="settings_cert_category">Tanúsítványok</string>
     <string name="settings_cert_trust_system">Megbízás a rendszertanúsítványokban</string>
     <string name="settings_cert_trust_system_on">A rendszer és felhasználó által hozzáadott CA-k megbízhatók (javasolt)</string>
     <string name="settings_cert_trust_system_off">A rendszer és felhasználó által hozzáadott CA-k nem megbízhatók</string>
