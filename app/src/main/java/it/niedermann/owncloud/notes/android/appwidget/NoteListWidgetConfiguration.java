@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -68,7 +67,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
         itemFavorites = new NavigationAdapter.NavigationItem(NotesListViewActivity.ADAPTER_KEY_STARRED,
                                                             getString(R.string.label_favorites),
                                                             null,
-                                                            R.drawable.ic_star_grey600_24dp);
+                                                            R.drawable.ic_star_yellow_24dp);
         RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
 
