@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.yydcdut.markdown.syntax.edit.EditFactory;
 import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
-import com.yydcdut.rxmarkdown.syntax.edit.EditFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,7 +91,7 @@ public class NoteEditFragment extends BaseNoteFragment {
         editContent.setEnabled(true);
 
         RxMarkdown.live(editContent)
-                .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()))
+                .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()).build())
                 .factory(EditFactory.create())
                 .intoObservable()
                 .subscribe(new Subscriber<CharSequence>() {
