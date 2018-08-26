@@ -40,6 +40,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="24dp"
+                        android:layout_gravity="center_vertical"
                         android:src="@mipmap/ic_launcher"
                         android:contentDescription="@string/app_name" />
 
@@ -47,22 +48,21 @@
                     <android.support.v7.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="12dp"
+                        android:paddingStart="12dp"
+                        android:paddingTop="24dp"
                         android:orientation="vertical">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="24dp"
-                        android:paddingLeft="12dp"
-                        android:layout_gravity="center_vertical"
                         android:text="@string/app_name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                     <TextView
                         android:id="@+id/account"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="12dp"
-                        android:layout_gravity="center_vertical"/>
+                        android:layout_height="wrap_content"/>
                     </android.support.v7.widget.LinearLayoutCompat>
                 </LinearLayout>
 
