@@ -30,7 +30,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:layout_weight="1"
-        android:textColor="@color/black"
+        android:textColor="@color/widget_fg_default"
         android:lines="1"
         android:ellipsize="end" />
 
