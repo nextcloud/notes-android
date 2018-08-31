@@ -107,7 +107,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
             public void onIconClick(NavigationAdapter.NavigationItem item) {
                 onItemClick(item);
             }
-        }, false);
+        });
 
         recyclerView = findViewById(R.id.nlw_config_recyclerv);
         recyclerView.setHasFixedSize(true);

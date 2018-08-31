@@ -10,13 +10,18 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.yydcdut.markdown.MarkdownProcessor;
+import com.yydcdut.markdown.syntax.text.TextFactory;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.util.MarkDownUtil;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
+    private MarkdownProcessor markdownProcessor;
     private final Context mContext;
     private final int mAppWidgetId;
 
@@ -27,6 +32,9 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     SingleNoteWidgetFactory(Context context, Intent intent) {
         mContext = context;
+        markdownProcessor = new MarkdownProcessor(mContext);
+        markdownProcessor.factory(TextFactory.create());
+        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(mContext).build());
         mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
     }
@@ -87,7 +95,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         fillInIntent.putExtras(extras);
         fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-        note_content.setTextViewText(R.id.single_note_content_tv, note.getContent());
+        note_content.setTextViewText(R.id.single_note_content_tv, markdownProcessor.parse(note.getContent()));
 
         return note_content;
     }
