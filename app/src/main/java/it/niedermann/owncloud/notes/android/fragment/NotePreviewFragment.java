@@ -5,6 +5,10 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.content.res.TypedArrayUtils;
+import android.support.v4.text.TextUtilsCompat;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,13 +17,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.yydcdut.markdown.callback.OnTodoClickCallback;
+import com.yydcdut.markdown.syntax.text.TextFactory;
+import com.yydcdut.rxmarkdown.RxMDConfiguration;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
-import com.yydcdut.rxmarkdown.syntax.text.TextFactory;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -57,22 +64,24 @@ public class NotePreviewFragment extends BaseNoteFragment {
         ButterKnife.bind(this, getView());
 
         String content = note.getContent();
-        /*
-         * The following replaceAll adds links ()[] to all URLs that are not in an existing link.
-         * This regular expression consists of three parts:
-         * 1. (?<![(])
-         *    negative look-behind: no opening bracket "(" directly before the URL
-         *    This prevents replacement in target part of Markdown link: [](URL)
-         * 2. (https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])
-         *    URL pattern: matches all addresses beginning with http:// or https://
-         * 3. (?![^\\[]*\\])
-         *    negative look-ahead: no closing bracket "]" after the URL (otherwise there have to be an opening bracket "[" before)
-         *    This prevents replacement in label part of Markdown link: [...URL...]()
-         */
-        content = content.replaceAll("(?<![(])(https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])(?![^\\[]*\\])", "[$1]($1)");
 
         RxMarkdown.with(content, getActivity())
-                .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()))
+                .config(
+                    MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
+                        /*.setOnTodoClickCallback(new OnTodoClickCallback() {
+                                @Override
+                                public CharSequence onTodoClicked(View view, String line, int lineNumber) {
+                                String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
+                                if(lines.length >= lineNumber) {
+                                    lines[lineNumber] = line;
+                                }
+                                noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
+                                saveNote(null);
+                                return line;
+                            }
+                        }
+                    )*/.build()
+                )
                 .factory(TextFactory.create())
                 .intoObservable()
                 .subscribeOn(Schedulers.computation())

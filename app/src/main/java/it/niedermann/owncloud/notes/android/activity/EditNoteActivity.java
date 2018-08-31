@@ -198,8 +198,9 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(note.getTitle());
-            String subtitle = note.getCategory().isEmpty() ? getString(R.string.action_uncategorized) : NoteUtil.extendCategory(note.getCategory());
-            actionBar.setSubtitle(subtitle);
+            if(!note.getCategory().isEmpty()) {
+                actionBar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
+            }
         }
     }
 }

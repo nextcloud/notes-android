@@ -39,7 +39,7 @@
     <string name="listview_updated_earlier">Mais cedo</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Configurações da Conta</string>
+    <string name="settings_server_settings">Conta</string>
     <string name="settings_url">Endereço do servidor</string>
     <string name="settings_url_check_description">Mostra se o endereço pode ser alcançado.</string>
     <string name="settings_url_warn_http">AVISO: \"http\" é inseguro. Utilize \"https\".</string>
@@ -51,7 +51,7 @@
     <string name="settings_submitting">Conectando&#8230;</string>
     <string name="settings_note_mode">Mostra os modos para Anotações</string>
     <string name="settings_theme_title">Tema</string>
-    <string name="settings_cert_category">Certificados</string>
+    <string name="settings_cert_category">Gerenciar certificados</string>
     <string name="settings_cert_trust_system">Certificados de sistema confiáveis</string>
     <string name="settings_cert_trust_system_on">CAs de sistema e adicionados pelo usuário serão confiáveis (recomendado)</string>
     <string name="settings_cert_trust_system_off">CAs de sistema e adicionados pelo usuário não serão confiáveis</string>

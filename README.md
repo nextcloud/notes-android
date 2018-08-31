@@ -14,6 +14,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 [![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/stefan-niedermann/donate)
 
 ## :eyes: Screenshots
+
 ![Screenshot of list view](/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png)
 ![Screenshot of edit view](/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png)
 
@@ -23,19 +24,20 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 * Mark notes as favorite
 * Bulk delete
 * Render MarkDown (using [RxMarkdown](https://github.com/yydcdut/RxMarkdown))
-* English, German, Russian, Armenian, French and Serbian UI
+* Translated in many languages on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
 
 ## :checkered_flag: Planned features
-* Tablet layout ([#8](https://github.com/stefan-niedermann/nextcloud-notes/issues/8))
-* Simple widget for individual note ([#5](https://github.com/stefan-niedermann/nextcloud-notes/issues/5))
-* Make a widget for all notes ([#15](https://github.com/stefan-niedermann/nextcloud-notes/issues/15))
 * In-note search ([#106](https://github.com/stefan-niedermann/nextcloud-notes/issues/106))
+* Toggle checkboxes in view mode ([#451](https://github.com/stefan-niedermann/nextcloud-notes/issues/451))
+* Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))
+* Trashbin ([#238](https://github.com/stefan-niedermann/nextcloud-notes/issues/238))
 
-## :wrench: Contribution
+## :family: Join the team
 * Test the app with different devices
-* Write issues in the [issue tracker](https://github.com/stefan-niedermann/nextcloud-notes/issues)
-* Provide pull requests
-* Translate this app on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
+* Report issues in the [issue tracker](https://github.com/stefan-niedermann/nextcloud-notes/issues)
+* [Pick a good first issue](https://github.com/nextcloud/server/labels/good%20first%20issue) :notebook:
+* Create a [Pull Request](https://opensource.guide/how-to-contribute/#opening-a-pull-request)
+* Help translating this app on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/) :flags:
 * Buy this app on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
 * Send me a bottle of your favorite beer :beers: :wink:
 
