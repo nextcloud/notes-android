@@ -138,27 +138,26 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_dark);
             note_content.setOnClickFillInIntent(R.id.widget_note_list_entry_dark, fillInIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv_dark, note.getTitle());
-        } else {
-            note_content = new RemoteViews( context.getPackageName(), R.layout.widget_entry);
-            note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
-            note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
-        }
 
-        if (note.isFavorite()) {
-            if (darkTheme) {
-                note_content.setViewVisibility(R.id.widget_entry_fav_icon_dark, View.VISIBLE);
+            if (note.isFavorite()) {
+                note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, R.drawable.ic_star_yellow_24dp);
             } else {
-                note_content.setViewVisibility(R.id.widget_entry_fav_icon, View.VISIBLE);
+                note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, R.drawable.ic_star_grey_ccc_24dp);
             }
         } else {
-            if (darkTheme) {
-                note_content.setViewVisibility(R.id.widget_entry_fav_icon_dark, View.INVISIBLE);
+            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry);
+            note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
+            note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
+
+            if (note.isFavorite()) {
+                note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_star_yellow_24dp);
             } else {
-                note_content.setViewVisibility(R.id.widget_entry_fav_icon, View.INVISIBLE);
+                note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_star_grey_ccc_24dp);
             }
         }
 
         return note_content;
+
     }
 
     @Override
