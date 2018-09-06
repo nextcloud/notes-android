@@ -369,12 +369,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         });
 
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
-        String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS).replace("https://", "").replace("http://", "");
-        if(!SettingsActivity.DEFAULT_SETTINGS.equals(username) && !SettingsActivity.DEFAULT_SETTINGS.equals(url)) {
-            this.account.setText(username + "@" + url.substring(0, url.length() - 1));
-        }
+        this.updateUsernameInDrawer();
         final NotesListViewActivity that = this;
         this.account.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -595,11 +590,21 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             // Create new Instance with new URL and credentials
             db = NoteSQLiteOpenHelper.getInstance(this);
             if (db.getNoteServerSyncHelper().isSyncPossible()) {
+                this.updateUsernameInDrawer();
                 adapter.removeAll();
                 synchronize();
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private void updateUsernameInDrawer() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
+        String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS).replace("https://", "").replace("http://", "");
+        if(!SettingsActivity.DEFAULT_SETTINGS.equals(username) && !SettingsActivity.DEFAULT_SETTINGS.equals(url)) {
+            this.account.setText(username + "@" + url.substring(0, url.length() - 1));
         }
     }
 
