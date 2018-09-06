@@ -372,7 +372,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
         String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS).replace("https://", "").replace("http://", "");
-        this.account.setText(username + "@" + url.substring(0, url.length() - 1));
+        if(!SettingsActivity.DEFAULT_SETTINGS.equals(username) && !SettingsActivity.DEFAULT_SETTINGS.equals(url)) {
+            this.account.setText(username + "@" + url.substring(0, url.length() - 1));
+        }
         final NotesListViewActivity that = this;
         this.account.setOnClickListener(new View.OnClickListener() {
             @Override
