@@ -7,6 +7,7 @@
     <string name="label_favorites">Favoriten</string>
     <string name="action_create">Neue Notiz</string>
     <string name="action_settings">Einstellungen</string>
+    <string name="action_trashbin">Gelöschte Notizen</string>
     <string name="action_search">Suche</string>
     <string name="action_create_save">Speichern</string>
     <string name="simple_cancel">Abbrechen</string>

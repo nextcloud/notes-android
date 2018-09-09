@@ -7,6 +7,7 @@
     <string name="label_favorites">Sık Kullanılanlar</string>
     <string name="action_create">Not ekle</string>
     <string name="action_settings">Ayarlar</string>
+    <string name="action_trashbin">Silinmiş notlar</string>
     <string name="action_search">Arama</string>
     <string name="action_create_save">Kaydet</string>
     <string name="simple_cancel">İptal</string>

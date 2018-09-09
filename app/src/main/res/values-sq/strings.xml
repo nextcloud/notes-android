@@ -3,13 +3,19 @@
 
     <string name="app_name">Shënime</string>
     <string name="no_notes">Nuk ka shënime</string>
+    <string name="label_all_notes">Të gjitha shënimet</string>
+    <string name="label_favorites">Të preferuarat</string>
     <string name="action_create">Shënim i ri</string>
     <string name="action_settings">Konfigurimet</string>
+    <string name="action_trashbin">Shënimet e fshira</string>
     <string name="action_search">Kërko</string>
     <string name="action_create_save">Ruaj</string>
+    <string name="simple_cancel">Anullo</string>
+    <string name="simple_edit">Redakto</string>
     <string name="action_edit_save">Ruaj</string>
     <string name="action_edit_saving">Duke ruajtur &#8230;</string>
     <string name="action_edit_saved">U ruajt</string>
+    <string name="simple_about">Rreth </string>
     <string name="action_select_note">Selekto shënimin</string>
     <string name="action_note_deleted">Shënimi u fshi</string>
     <string name="action_note_restored">Shënimi i rivendos</string>
@@ -25,12 +31,16 @@
     <string name="menu_share">Ndaj</string>
     <string name="menu_about">Rreth nesh</string>
 
+    <string name="change_category_title">Zgjidh një kategori</string>
+
     <string name="listview_updated_today">Sot</string>
     <string name="listview_updated_yesterday">Dje</string>
     <string name="listview_updated_this_week">Këtë javë</string>
     <string name="listview_updated_this_month">Këtë muaj</string>
     <string name="listview_updated_earlier">Më herët</string>
 
+    <!-- Settings -->
+    <string name="settings_server_settings">Llogari</string>
     <string name="settings_url">Adresa e serverit</string>
     <string name="settings_url_check_description">Tregon nëse adresa mund të bëhet ping.</string>
     <string name="settings_url_warn_http">PARALAJMËRIM: \"http\" nuk është e sigurt. Ju lutemi përdorni \"https\".</string>
@@ -41,6 +51,8 @@
     <string name="settings_submit">Lidhu</string>
     <string name="settings_submitting">Duke u lidhur &#8230;</string>
     <string name="settings_note_mode">Mënyra e paraqitjes për Shënimet</string>
+    <string name="settings_theme_title">Temë</string>
+    <string name="settings_cert_category">Menaxhoni certifikatat</string>
     <string name="settings_cert_trust_system">Beso tek çertifikatat e sistemit</string>
     <string name="settings_cert_trust_system_on">Sistemi dhe përdoruesit e shtuar CAs do të besohen (rekomandohet)</string>
     <string name="settings_cert_trust_system_off">Sistemi dhe përdoruesit e shtuar CAs nuk do të besohen</string>
@@ -100,12 +112,16 @@
     <string name="widget_single_note_placeholder_tv">Shënimi nuk u gjet</string>
     <string name="widget_create_note">Krijoni shënim</string>
     <string name="widget_not_logged_in">Ju lutemi identifikohuni në aplikacion përpara se të përdorni këtë widget</string>
+    <string name="widget_entry_fav_contentDescription">Ikona e yllit përdoret për të treguar artikullin si të preferuar</string>
     <string name="widget_app_launcher_contentDescription">Hape aplikacionin</string>
 
     <string name="activity_select_single_note">Zgjidh shënimin</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Krijo një shënim të ri</string>
+
+    <string name="pref_value_theme_light">E çelët</string>
+    <string name="pref_value_theme_dark">E errët</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
