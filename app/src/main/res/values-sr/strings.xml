@@ -7,6 +7,7 @@
     <string name="label_favorites">Омиљене</string>
     <string name="action_create">Нова белешка</string>
     <string name="action_settings">Поставке</string>
+    <string name="action_trashbin">Обрисане белешке</string>
     <string name="action_search">Тражи</string>
     <string name="action_create_save">Сачувај</string>
     <string name="simple_cancel">Поништи</string>
