@@ -7,6 +7,7 @@
     <string name="label_favorites">Oblíbené</string>
     <string name="action_create">Nová poznámka</string>
     <string name="action_settings">Nastavení</string>
+    <string name="action_trashbin">Smazané poznámky</string>
     <string name="action_search">Hledat</string>
     <string name="action_create_save">Uložit</string>
     <string name="simple_cancel">Storno</string>
@@ -89,7 +90,7 @@
     <string name="about_translators_title">Překladatelé</string>
     <string name="about_translators_transifex">Nextcloud komunita na &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testeři</string>
-    <string name="about_source_title">Zdrojový kód</string>
+    <string name="about_source_title">Zdrojové kódy</string>
     <string name="about_source">Tento projekt je hostován na GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problémy</string>
     <string name="about_issues">Můžete nahlásit chyby, návrhy a požadavky na zlepšení na GitHub issue tracker: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
@@ -124,7 +125,7 @@
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
-        <item>Otevřít v editačním režimu</item>
+        <item>Otevřít v režimu úprav</item>
         <item>Otevřít v náhledovém režimu</item>
         <item>Zapamatovat si můj poslední výběr</item>
     </string-array>
