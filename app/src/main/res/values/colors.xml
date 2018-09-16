@@ -19,13 +19,12 @@
     <color name="fg_contrast">#ffffff</color>
     <color name="icon_grey">#757575</color>
 
-    <color name="widget_background">#bfFFFFFF</color>
+    <color name="widget_background">#DFFFFFFF</color>
     <color name="widget_fg_default">#000000</color>
     <color name="widget_fg_contrast">#ffffff</color>
 
     <color name="category_background">#FFF</color>
     <color name="category_border">@color/primary</color>
-    <color name="background_material_light">#db3232</color>
 
     <!-- Dark Theme -->
     <!-- Defined here until appwidgets can use night/colors -->
