@@ -13,7 +13,7 @@
         android:layout_marginLeft="@dimen/button_padding"
         android:layout_marginStart="@dimen/button_padding"
         android:contentDescription="@string/menu_favorite"
-        android:src="@drawable/ic_star_yellow_24dp" />
+        android:src="@drawable/ic_star_white_24dp" />
 
     <ImageView
         android:id="@+id/noteDeleteRight"
