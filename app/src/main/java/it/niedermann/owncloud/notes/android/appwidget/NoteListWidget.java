@@ -26,6 +26,8 @@ public class NoteListWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
+
         RemoteViews views;
 
         for (int appWidgetId : appWidgetIds) {
@@ -88,12 +90,12 @@ public class NoteListWidget extends AppWidgetProvider {
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
-
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
         int appWidgetIds[] = awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class));
 
@@ -106,8 +108,6 @@ public class NoteListWidget extends AppWidgetProvider {
                 }
             }
         }
-
-        super.onReceive(context, intent);
     }
 
     @Override
