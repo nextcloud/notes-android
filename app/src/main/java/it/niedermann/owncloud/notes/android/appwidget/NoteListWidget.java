@@ -24,10 +24,7 @@ public class NoteListWidget extends AppWidgetProvider {
     public static final int NLW_DISPLAY_CATEGORY = 2;
     private static boolean darkTheme;
 
-    @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
-
+    static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         RemoteViews views;
 
         for (int appWidgetId : appWidgetIds) {
@@ -88,24 +85,26 @@ public class NoteListWidget extends AppWidgetProvider {
                 views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
             }
 
-            appWidgetManager.updateAppWidget(appWidgetId, views);
+            awm.updateAppWidget(appWidgetId, views);
         }
+    }
+
+    @Override
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
+        updateAppWidget(context, appWidgetManager, appWidgetIds);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
-        int appWidgetIds[] = awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class));
 
-        for (int appWidgetId : appWidgetIds) {
-            if (intent.getAction().equals(awm.ACTION_APPWIDGET_UPDATE)) {
-                if (darkTheme) {
-                    awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv_dark);
-                } else {
-                    awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
-                }
+        if (intent.getAction().equals(awm.ACTION_APPWIDGET_UPDATE)) {
+            if (intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
+                updateAppWidget(context, awm, new int[] { intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1) });
+            } else {
+                updateAppWidget(context, awm, awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class)));
             }
         }
     }

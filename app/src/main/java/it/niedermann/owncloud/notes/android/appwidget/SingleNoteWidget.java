@@ -20,68 +20,57 @@ public class SingleNoteWidget extends AppWidgetProvider {
     public static final String DARK_THEME_KEY = "SNW_darkTheme";
     public static final String WIDGET_KEY = "single_note_widget";
 
-    static void updateAppWidget(Context context, AppWidgetManager awm, int appWidgetId) {
+    static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         Intent templateIntent = new Intent(context, EditNoteActivity.class);
         templateIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
-        // onUpdate has been triggered before the user finished configuring the widget
-        if ((sp.getLong(WIDGET_KEY + appWidgetId, -1)) == -1) {
-            return;
+        for (int appWidgetId : appWidgetIds) {
+            // onUpdate has been triggered before the user finished configuring the widget
+            if ((sp.getLong(WIDGET_KEY + appWidgetId, -1)) == -1) {
+                return;
+            }
+
+            darkTheme = sp.getBoolean(DARK_THEME_KEY + appWidgetId, false);
+
+            PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
+                                                                            PendingIntent.FLAG_UPDATE_CURRENT);
+
+            Intent serviceIntent = new Intent(context, SingleNoteWidgetService.class);
+            serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+            serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
+
+            RemoteViews views;
+
+            if (darkTheme) {
+                views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_dark);
+                views.setPendingIntentTemplate(R.id.single_note_widget_lv_dark, templatePendingIntent);
+                views.setRemoteAdapter(R.id.single_note_widget_lv_dark, serviceIntent);
+                views.setEmptyView(R.id.single_note_widget_lv_dark, R.id.widget_single_note_placeholder_tv_dark);
+            } else {
+                views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
+                views.setPendingIntentTemplate(R.id.single_note_widget_lv, templatePendingIntent);
+                views.setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent);
+                views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
+            }
+
+            awm.updateAppWidget(appWidgetId, views);
         }
-
-        darkTheme = sp.getBoolean(DARK_THEME_KEY + appWidgetId, false);
-
-        PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
-                                                                        PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Intent serviceIntent = new Intent(context, SingleNoteWidgetService.class);
-        serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
-
-        RemoteViews views;
-
-        if (darkTheme) {
-            views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_dark);
-            views.setPendingIntentTemplate(R.id.single_note_widget_lv_dark, templatePendingIntent);
-            views.setRemoteAdapter(R.id.single_note_widget_lv_dark, serviceIntent);
-            views.setEmptyView(R.id.single_note_widget_lv_dark, R.id.widget_single_note_placeholder_tv_dark);
-        } else {
-            views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
-            views.setPendingIntentTemplate(R.id.single_note_widget_lv, templatePendingIntent);
-            views.setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent);
-            views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
-        }
-
-        awm.updateAppWidget(appWidgetId, views);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
-        }
-
         super.onUpdate(context, appWidgetManager, appWidgetIds);
+        updateAppWidget(context, appWidgetManager, appWidgetIds);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        AppWidgetManager awm = AppWidgetManager.getInstance(context);
-        int ids[] = awm.getAppWidgetIds(new ComponentName(context,
-                                        SingleNoteWidget.class));
-
-        for (int appWidgetId : ids) {
-            if (intent.getAction().equals(awm.ACTION_APPWIDGET_UPDATE)) {
-                if (darkTheme) {
-                    awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv_dark);
-                } else {
-                    awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv);
-                }
-            }
-        }
-
         super.onReceive(context, intent);
+        AppWidgetManager awm = AppWidgetManager.getInstance(context);
+
+        updateAppWidget(context, AppWidgetManager.getInstance(context),
+                        (awm.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class))));
     }
 
     @Override
