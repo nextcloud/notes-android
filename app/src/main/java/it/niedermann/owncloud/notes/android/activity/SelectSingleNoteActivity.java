@@ -68,9 +68,9 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
 
         Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
                                         getApplicationContext(), SingleNoteWidget.class);
-        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[] {appWidgetId});
-        getApplicationContext().sendBroadcast(updateIntent);
+        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         setResult(RESULT_OK, updateIntent);
+        getApplicationContext().sendBroadcast(updateIntent);
         finish();
     }
 }
