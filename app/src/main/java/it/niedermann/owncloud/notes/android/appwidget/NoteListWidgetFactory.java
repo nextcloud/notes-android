@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -35,57 +34,12 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         sp = PreferenceManager.getDefaultSharedPreferences(this.context);
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
         darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
+        category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
     }
 
     @Override
     public void onCreate() {
         db = NoteSQLiteOpenHelper.getInstance(context);
-        RemoteViews views;
-        if (darkTheme) {
-            views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list_dark);
-        } else {
-            views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
-        }
-
-        switch (displayMode)
-        {
-            case NoteListWidget.NLW_DISPLAY_ALL:
-                if (darkTheme) {
-                    views.setTextViewText(R.id.widget_note_list_title_tv_dark, context.getString(R.string.app_name));
-                } else {
-                    views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.app_name));
-                }
-                break;
-
-            case NoteListWidget.NLW_DISPLAY_STARRED:
-                if (darkTheme) {
-                    views.setTextViewText(R.id.widget_note_list_title_tv_dark, context.getString(R.string.label_favorites));
-                } else {
-                    views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.label_favorites));
-                }
-                break;
-
-            case NoteListWidget.NLW_DISPLAY_CATEGORY:
-                category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
-                if (category.equals("")) {
-                    if (darkTheme) {
-                        views.setTextViewText(R.id.widget_note_list_title_tv_dark, context.getString(R.string.action_uncategorized));
-                    } else {
-                        views.setTextViewText(R.id.widget_note_list_title_tv, context.getString(R.string.action_uncategorized));
-                    }
-
-                } else {
-                    if (darkTheme) {
-                        views.setTextViewText(R.id.widget_note_list_title_tv_dark, category);
-                    } else {
-                        views.setTextViewText(R.id.widget_note_list_title_tv, category);
-                    }
-                }
-                break;
-        }
-
-        AppWidgetManager awm = AppWidgetManager.getInstance(context);
-        awm.updateAppWidget(appWidgetId, views);
     }
 
     @Override

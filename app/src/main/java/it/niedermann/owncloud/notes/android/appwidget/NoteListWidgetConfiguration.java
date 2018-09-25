@@ -57,6 +57,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
         }
 
         if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
+            Log.d(TAG, "INVALID_APPWIDGET_ID");
             finish();
         }
 
@@ -94,9 +95,9 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
 
                 Intent updateIntent = new Intent(   AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
                                                     getApplicationContext(), NoteListWidget.class);
-                updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[] {appWidgetId});
-                getApplicationContext().sendBroadcast(updateIntent);
+                updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 setResult(RESULT_OK, updateIntent);
+                getApplicationContext().sendBroadcast(updateIntent);
                 finish();
             }
 

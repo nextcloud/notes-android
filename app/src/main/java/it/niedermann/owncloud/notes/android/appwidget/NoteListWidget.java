@@ -22,10 +22,10 @@ public class NoteListWidget extends AppWidgetProvider {
     public static final int NLW_DISPLAY_ALL = 0;
     public static final int NLW_DISPLAY_STARRED = 1;
     public static final int NLW_DISPLAY_CATEGORY = 2;
-    private static boolean darkTheme;
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         RemoteViews views;
+        boolean darkTheme;
 
         for (int appWidgetId : appWidgetIds) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -69,6 +69,7 @@ public class NoteListWidget extends AppWidgetProvider {
 
             if (darkTheme) {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list_dark);
+                views.setTextViewText(R.id.widget_note_list_title_tv_dark, getWidgetTitle(context, displayMode, category));
                 views.setOnClickPendingIntent(R.id.widget_note_header_icon_dark, openAppI);
                 views.setOnClickPendingIntent(R.id.widget_note_list_title_tv_dark, openAppI);
                 views.setOnClickPendingIntent(R.id.widget_note_list_create_icon_dark, newNoteI);
@@ -77,6 +78,7 @@ public class NoteListWidget extends AppWidgetProvider {
                 views.setEmptyView(R.id.note_list_widget_lv_dark, R.id.widget_note_list_placeholder_tv_dark);
             } else {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
+                views.setTextViewText(R.id.widget_note_list_title_tv, getWidgetTitle(context, displayMode, category));
                 views.setOnClickPendingIntent(R.id.widget_note_header_icon, openAppI);
                 views.setOnClickPendingIntent(R.id.widget_note_list_title_tv, openAppI);
                 views.setOnClickPendingIntent(R.id.widget_note_list_create_icon, newNoteI);
@@ -122,5 +124,21 @@ public class NoteListWidget extends AppWidgetProvider {
         }
 
         editor.apply();
+    }
+
+    private static String getWidgetTitle(Context context, int displayMode, String category) {
+        switch (displayMode)
+        {
+            case NoteListWidget.NLW_DISPLAY_ALL: return context.getString(R.string.app_name);
+            case NoteListWidget.NLW_DISPLAY_STARRED: return context.getString(R.string.label_favorites);
+            case NoteListWidget.NLW_DISPLAY_CATEGORY:
+                if (category.equals("")) {
+                    return context.getString(R.string.action_uncategorized);
+                } else {
+                    return category;
+                }
+        }
+
+        return null;
     }
 }
