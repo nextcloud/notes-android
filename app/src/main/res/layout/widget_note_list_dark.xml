@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/fg_default_dark_theme"
-        android:divider="@color/fg_default_high"/>
+        android:divider="@color/fg_default_low_dark_theme"/>
 
     <TextView
         android:id="@+id/widget_note_list_placeholder_tv_dark"
@@ -72,7 +72,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/widget_note_list_placeholder"
-        android:textColor="@color/fg_default_high"
-        android:background="@color/widget_background_dark_theme"/>
+        android:textColor="@color/fg_default_dark_theme" />
 
 </LinearLayout>
