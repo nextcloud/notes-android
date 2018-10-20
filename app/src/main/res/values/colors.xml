@@ -28,8 +28,6 @@
 
     <!-- Dark Theme -->
     <!-- Defined here until appwidgets can use night/colors -->
-    <color name="separator_dark_theme">#666666</color>
-
     <color name="bg_transparent_dark_theme">#aa000000</color>
     <color name="bg_highlighted_dark_theme">#f3f3f3</color>
     <color name="bg_normal_dark_theme">#222</color>
@@ -42,4 +40,5 @@
     <color name="fg_contrast_dark_theme">#ffffff</color>
 
     <color name="widget_background_dark_theme">#bf222222</color>
+    <color name="widget_fg_dark_theme">#ffffff</color>
 </resources>

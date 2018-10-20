@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/widget_single_note_placeholder_tv"
-        android:textColor="@color/fg_default_high"
+        android:textColor="@color/fg_default_high_dark_theme"
         android:textAlignment="center"
         android:padding="@dimen/widget_single_note_padding" />
 
