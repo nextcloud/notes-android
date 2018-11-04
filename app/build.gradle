@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
@@ -34,12 +34,10 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    def supportLibVersion = '28.0.0'
-
-    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
-    implementation "com.android.support:design:${supportLibVersion}"
-    implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.1.0-alpha01'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
     // needed for cert4android (conflict resolution)
-    implementation "com.android.support:cardview-v7:${supportLibVersion}"
+    implementation 'androidx.cardview:cardview:1.0.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.View;
 
@@ -34,7 +34,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         ButterKnife.bind(this);
         fabCreate.setVisibility(View.GONE);
 
-        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        androidx.appcompat.app.ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setTitle(R.string.activity_select_single_note);
         }

@@ -45,7 +45,7 @@
     <string name="settings_note_mode">Display tilstand for noter</string>
     <string name="settings_cert_trust_system">Stol på systemcertifikater</string>
     <string name="settings_cert_trust_system_on">System og bruger tilføjede CA\'er stoles der på (anbefalet)</string>
-    <string name="settings_cert_trust_system_off">System og bruger tilføjede CA\\'er stoles der ikke på</string>
+    <string name="settings_cert_trust_system_off">System og bruger tilføjede CA\'er stoles der ikke på</string>
     <string name="settings_cert_reset">Nulstil (ikke)betroede certifikater</string>
     <string name="settings_cert_reset_summary">Nulstiller alle brugerdefinerede certifikater</string>
     <string name="settings_cert_reset_toast">Alle brugerdefinerede certifikater er fjernet</string>
