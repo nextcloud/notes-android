@@ -76,6 +76,7 @@ public class NoteListWidget extends AppWidgetProvider {
                 views.setPendingIntentTemplate(R.id.note_list_widget_lv_dark, templatePI);
                 views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv_dark, serviceIntent);
                 views.setEmptyView(R.id.note_list_widget_lv_dark, R.id.widget_note_list_placeholder_tv_dark);
+                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv_dark);
             } else {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
                 views.setTextViewText(R.id.widget_note_list_title_tv, getWidgetTitle(context, displayMode, category));
@@ -85,6 +86,7 @@ public class NoteListWidget extends AppWidgetProvider {
                 views.setPendingIntentTemplate(R.id.note_list_widget_lv, templatePI);
                 views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv, serviceIntent);
                 views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
+                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
             }
 
             awm.updateAppWidget(appWidgetId, views);
