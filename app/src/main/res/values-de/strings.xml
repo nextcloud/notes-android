@@ -77,7 +77,7 @@
     <string name="error_no_network">keine Netzwerk-Verbindung</string>
     <string name="error_server">URL/Server fehlerhaft</string>
     <string name="error_url_malformed">URL nicht korrekt</string>
-    <string name="error_username_password_invalid">Benutzername / Passwort nicht korrekt</string>
+    <string name="error_username_password_invalid">Falscher Benutzername oder Passwort</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Einstellungen</string>
