@@ -47,11 +47,13 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 views.setPendingIntentTemplate(R.id.single_note_widget_lv_dark, templatePendingIntent);
                 views.setRemoteAdapter(R.id.single_note_widget_lv_dark, serviceIntent);
                 views.setEmptyView(R.id.single_note_widget_lv_dark, R.id.widget_single_note_placeholder_tv_dark);
+                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv_dark);
             } else {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
                 views.setPendingIntentTemplate(R.id.single_note_widget_lv, templatePendingIntent);
                 views.setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent);
                 views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
+                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv);
             }
 
             awm.updateAppWidget(appWidgetId, views);
