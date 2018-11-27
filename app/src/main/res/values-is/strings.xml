@@ -7,6 +7,7 @@
     <string name="label_favorites">Eftirlæti</string>
     <string name="action_create">Nýr minnispunktur</string>
     <string name="action_settings">Stillingar</string>
+    <string name="action_trashbin">Eyddir minnispunktar</string>
     <string name="action_search">Leita</string>
     <string name="action_create_save">Vista</string>
     <string name="simple_cancel">Hætta við</string>

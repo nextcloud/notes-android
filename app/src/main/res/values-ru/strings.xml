@@ -7,6 +7,7 @@
     <string name="label_favorites">Избранные</string>
     <string name="action_create">Новая заметка</string>
     <string name="action_settings">Настройки</string>
+    <string name="action_trashbin">Удалённые заметки</string>
     <string name="action_search">Поиск</string>
     <string name="action_create_save">Сохранить</string>
     <string name="simple_cancel">Отмена</string>
@@ -79,7 +80,7 @@
     <string name="error_username_password_invalid">Неправильный логин или пароль</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Настройки</string>
+    <string name="snackbar_settings">Параметры</string>
 
     <!-- About -->
     <string name="about_version_title">Версия</string>
@@ -95,8 +96,8 @@
     <string name="about_issues">Вы можете сообщить об ошибках, внести предложения об улучшениях и пожеланиях в системе тикетов GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Перевести</string>
     <string name="about_translate">Включайтесь в команду Nextcloud на сайте Transifex и помогайте переводить это приложение: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">Лицензия программы</string>
-    <string name="about_app_license">Программа выпускается под лицензией GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_title">Лицензия приложения</string>
+    <string name="about_app_license">Лицензия на программу предоставляется в соответствии с условиями Открытого лицензионного соглашения GNU (GNU GPL) версии 3+.</string>
     <string name="about_app_license_button">Посмотреть лицензию</string>
     <string name="about_icons_disclaimer_title">Значки</string>
     <string name="about_icons_disclaimer">&lt;p>Исходные значки были созданы  %1$s&lt;/p>&lt;p>Все дальнейшие значки, которые используются в этой программе, являются &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> от Google Inc. и защищены лицензией использования Apache 2.0. &lt;/p></string>

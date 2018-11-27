@@ -3,8 +3,11 @@
 
     <string name="app_name">Muistiinpanot</string>
     <string name="no_notes">Ei muistiinpanoja</string>
+    <string name="label_all_notes">Kaikki muistiinpanot</string>
+    <string name="label_favorites">Suosikit</string>
     <string name="action_create">Uusi muistiinpano</string>
     <string name="action_settings">Asetukset</string>
+    <string name="action_trashbin">Poistetut muistiinpanot</string>
     <string name="action_search">Etsi</string>
     <string name="action_create_save">Tallenna</string>
     <string name="simple_cancel">Peruuta</string>
@@ -12,7 +15,6 @@
     <string name="action_edit_save">Tallenna</string>
     <string name="action_edit_saving">Tallennetaan...</string>
     <string name="action_edit_saved">Tallennettu</string>
-    <string name="action_edit_cancel">Peruuta</string>
     <string name="simple_about">Tietoja</string>
     <string name="action_select_note">Valitse muistiinpano</string>
     <string name="action_note_deleted">Muistiinpano poistettu</string>
@@ -21,16 +23,13 @@
     <string name="action_recent">Viimeisimmät</string>
     <string name="action_uncategorized">Luokittelemattomat</string>
     <string name="menu_delete">Poista</string>
-    <string name="menu_copy">Kopioi</string>
-    <string name="menu_edit">Muokkaa</string>
-    <string name="menu_cancel">Peruuta</string>
     <string name="menu_change_category">Luokka</string>
     <string name="menu_favorite">Suosikki</string>
     <string name="menu_preview">Esikatselu</string>
     <string name="menu_share">Jaa</string>
     <string name="menu_about">Tietoja</string>
 
-    <string name="copy">Kopioi</string>
+    <string name="change_category_title">Valitse luokka</string>
 
     <string name="listview_updated_today">Tänään</string>
     <string name="listview_updated_yesterday">Eilen</string>
@@ -39,15 +38,17 @@
     <string name="listview_updated_earlier">Aikaisemmat</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Tilin asetukset</string>
+    <string name="settings_server_settings">Tili</string>
     <string name="settings_url">Palvelimen osoite</string>
     <string name="settings_url_warn_http">VAROITUS: \"http\" on suojaamaton. Käytä \"https\"-yhteyttä.</string>
     <string name="settings_username">Käyttäjätunnus</string>
     <string name="settings_password">Salasana</string>
     <string name="settings_password_unchanged">Salasana (ei muutettu)</string>
+    <string name="settings_password_check_description">Näyttää ovatko tilitiedot oikein.</string>
     <string name="settings_submit">Yhdistä</string>
     <string name="settings_submitting">Yhdistetään...</string>
-    <string name="settings_cert_category">Varmenteet</string>
+    <string name="settings_theme_title">Teema</string>
+    <string name="settings_cert_category">Hallitse varmenteita</string>
     <string name="settings_cert_trust_system">Luota järjestelmävarmenteisiin</string>
     <!-- Network -->
     <string name="network_connecting">Yhdistetään</string>
@@ -89,11 +90,13 @@
     <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
     <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
     <string name="widget_create_note">Luo muistiinpano</string>
-    <string name="widget_entry_fav_contentDescription">Tähden kuvalla merkitään suosikki</string>
     <string name="activity_select_single_note">Valitse muistiinpano</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Luo uusi muistiinpano</string>
+
+    <string name="pref_value_theme_light">Vaalea</string>
+    <string name="pref_value_theme_dark">Tumma</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

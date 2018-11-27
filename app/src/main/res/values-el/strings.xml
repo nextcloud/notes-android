@@ -7,11 +7,15 @@
     <string name="label_favorites">Αγαπημένα</string>
     <string name="action_create">Νέα σημείωση</string>
     <string name="action_settings">Ρυθμίσεις</string>
+    <string name="action_trashbin">Διεγραμμένες σημειώσεις</string>
     <string name="action_search">Ψάχνει</string>
     <string name="action_create_save">Αποθήκευση</string>
+    <string name="simple_cancel">Άκυρο</string>
+    <string name="simple_edit">Επεξεργασία</string>
     <string name="action_edit_save">Αποθήκευση</string>
     <string name="action_edit_saving">Γίνεται αποθήκευση &#8230;</string>
     <string name="action_edit_saved">Αποθηκεύτηκε</string>
+    <string name="simple_about">Περί</string>
     <string name="action_select_note">Επιλογή σημείωσης</string>
     <string name="action_note_deleted">Η σημείωση διαγράφηκε.</string>
     <string name="action_note_restored">Έγινε επαναφορά της σημείωσης.</string>
@@ -27,12 +31,16 @@
     <string name="menu_share">Διαμοιρασμός</string>
     <string name="menu_about">Περί</string>
 
+    <string name="change_category_title">Επιλογή κατηγορίας</string>
+
     <string name="listview_updated_today">Σήμερα</string>
     <string name="listview_updated_yesterday">Χθες</string>
     <string name="listview_updated_this_week">Αυτή την εβδομάδα</string>
     <string name="listview_updated_this_month">Αυτό το μήνα</string>
     <string name="listview_updated_earlier">Νωρίτερα</string>
 
+    <!-- Settings -->
+    <string name="settings_server_settings">Λογαριαμός</string>
     <string name="settings_url">Διεύθυνση διακομιστή</string>
     <string name="settings_url_warn_http">ΠΡΟΕΙΔΟΠΟΙΗΣΗ: Το \"http\" δεν είναι ασφαλές. Παρακαλούμε χρησιμοποιήστε το \"https\".</string>
     <string name="settings_username">Όνομα χρήστη</string>
@@ -41,6 +49,8 @@
     <string name="settings_submit">Σύνδεση</string>
     <string name="settings_submitting">Συνδέεται &#8230;</string>
     <string name="settings_note_mode">Λειτουργία προβολής σημειώσεων</string>
+    <string name="settings_theme_title">Θέμα</string>
+    <string name="settings_cert_category">Διαχείριση πιστοποιητικών</string>
     <string name="settings_cert_trust_system">Εμπιστοσύνη πιστοποιητικών συστήματος.</string>
     <string name="settings_cert_reset">Επαναφορά (μη) έμπιστων πιστοποιητικών</string>
     <!-- Certificates -->
@@ -100,6 +110,9 @@
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>
+
+    <string name="pref_value_theme_light">Φωτεινό</string>
+    <string name="pref_value_theme_dark">Σκοτεινό</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

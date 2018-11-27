@@ -7,6 +7,7 @@
     <string name="label_favorites">Favorieten</string>
     <string name="action_create">Nieuwe notitie</string>
     <string name="action_settings">Instellingen</string>
+    <string name="action_trashbin">Verwijder notities</string>
     <string name="action_search">Zoeken</string>
     <string name="action_create_save">Opslaan</string>
     <string name="simple_cancel">Annuleren</string>
@@ -22,7 +23,7 @@
     <string name="action_drawer_open">open navigatie</string>
     <string name="action_drawer_close">sluit navigatie</string>
     <string name="action_recent">Recent</string>
-    <string name="action_uncategorized">Ongecategorizeerd</string>
+    <string name="action_uncategorized">Niet gecategoriseerd</string>
     <string name="menu_delete">Verwijderen</string>
     <string name="menu_change_category">Categorie</string>
     <string name="menu_favorite">Favoriet</string>
