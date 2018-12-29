@@ -517,7 +517,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         final MenuItem item = menu.findItem(R.id.search);
         searchView = (SearchView) item.getActionView();
 
-        final LinearLayout searchEditFrame = searchView.findViewById(androidx.appcompat.appcompat.R.id
+        final LinearLayout searchEditFrame = searchView.findViewById(R.id
                 .search_edit_frame);
 
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
