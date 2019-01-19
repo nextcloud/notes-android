@@ -31,4 +31,17 @@ public class MarkDownUtil {
                 .setHorizontalRulesHeight(2)
                 .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null));
     }
+
+    public static Builder getMarkDownConfiguration(Context context, Boolean darkTheme) {
+        return new RxMDConfiguration.Builder(context)
+                .setUnOrderListColor(ResourcesCompat.getColor(context.getResources(),
+                                    darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
+                .setHeader2RelativeSize(1.35f)
+                .setHeader3RelativeSize(1.25f)
+                .setHeader4RelativeSize(1.15f)
+                .setHeader5RelativeSize(1.1f)
+                .setHeader6RelativeSize(1.05f)
+                .setHorizontalRulesHeight(2)
+                .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null));
+    }
 }

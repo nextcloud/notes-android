@@ -34,14 +34,13 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     SingleNoteWidgetFactory(Context context, Intent intent) {
         this.context = context;
-        markdownProcessor = new MarkdownProcessor(this.context);
-        markdownProcessor.factory(TextFactory.create());
-        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context).build());
         appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                          AppWidgetManager.INVALID_APPWIDGET_ID);
-
+                                         AppWidgetManager.INVALID_APPWIDGET_ID);
         sp = PreferenceManager.getDefaultSharedPreferences(this.context);
         darkTheme = sp.getBoolean(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, false);
+        markdownProcessor = new MarkdownProcessor(this.context);
+        markdownProcessor.factory(TextFactory.create());
+        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkTheme).build());
     }
 
     @Override
