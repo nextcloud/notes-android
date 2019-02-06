@@ -9,4 +9,8 @@
         android:icon="@drawable/ic_format_bold_black_24dp"
         android:title="@string/simple_bold"
         app:showAsAction="ifRoom" />
+    <item android:id="@+id/link"
+        android:icon="@drawable/ic_insert_link_black_24dp"
+        android:title="@string/simple_link"
+        app:showAsAction="ifRoom" />
 </menu>

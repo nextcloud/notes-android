@@ -7,16 +7,16 @@ import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import it.niedermann.owncloud.notes.R;
 
 public class StyleCallback implements ActionMode.Callback {
 
-    private TextView textView;
+    private EditText editText;
 
-    public StyleCallback(TextView textView) {
-        this.textView = textView;
+    public StyleCallback(EditText editText) {
+        this.editText = editText;
     }
 
     @Override
@@ -34,29 +34,39 @@ public class StyleCallback implements ActionMode.Callback {
 
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        int start = textView.getSelectionStart();
-        int end = textView.getSelectionEnd();
-        SpannableStringBuilder ssb = new SpannableStringBuilder(textView.getText());
+        int start = editText.getSelectionStart();
+        int end = editText.getSelectionEnd();
+        SpannableStringBuilder ssb = new SpannableStringBuilder(editText.getText());
         final String markdown;
+
 
         switch(item.getItemId()) {
             case R.id.bold:
                 markdown = "**";
-                ssb.insert(end, markdown);
-                ssb.insert(start, markdown);
-                textView.getText().charAt(start);
-                textView.getText().charAt(start + 1);
-                end += markdown.length() * 2;
-                ssb.setSpan(new StyleSpan(Typeface.BOLD), start, end, 1);
-                textView.setText(ssb);
-            break;
+                if (hasAlreadyMarkdown(start, end, markdown)) {
+                    this.removeMarkdown(ssb, start, end, markdown);
+                } else {
+                    this.addMarkdown(ssb, start, end, markdown, Typeface.BOLD);
+                }
+                editText.setText(ssb);
+                break;
             case R.id.italic:
                 markdown = "*";
-                ssb.insert(end, markdown);
-                ssb.insert(start, markdown);
-                end += markdown.length() * 2;
-                ssb.setSpan(new StyleSpan(Typeface.ITALIC), start, end, 1);
-                textView.setText(ssb);
+                if (hasAlreadyMarkdown(start, end, markdown)) {
+                    this.removeMarkdown(ssb, start, end, markdown);
+                } else {
+                    this.addMarkdown(ssb, start, end, markdown, Typeface.ITALIC);
+                }
+                editText.setText(ssb);
+                break;
+            case R.id.link:
+                ssb.insert(end, "]()");
+                ssb.insert(start, "[");
+                end++;
+                ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
+                editText.setText(ssb);
+                editText.setSelection(end + 2); // after <end>](
+                return true;
         }
         return false;
     }
@@ -64,5 +74,25 @@ public class StyleCallback implements ActionMode.Callback {
     @Override
     public void onDestroyActionMode(ActionMode mode) {
 
+    }
+
+    private boolean hasAlreadyMarkdown(int start, int end, String markdown) {
+        return start > markdown.length() && markdown.contentEquals(editText.getText().subSequence(start - markdown.length(), start)) &&
+                editText.getText().length() > end + markdown.length() && markdown.contentEquals(editText.getText().subSequence(end, end + markdown.length()));
+    }
+
+    private void removeMarkdown(SpannableStringBuilder ssb, int start, int end, String markdown) {
+        ssb.delete(start - markdown.length(), start);
+        ssb.delete(end - markdown.length(), end);
+        ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
+    }
+
+    private void addMarkdown(SpannableStringBuilder ssb, int start, int end, String markdown, int typeface) {
+        ssb.insert(end, markdown);
+        ssb.insert(start, markdown);
+        editText.getText().charAt(start);
+        editText.getText().charAt(start + 1);
+        end += markdown.length() * 2;
+        ssb.setSpan(new StyleSpan(typeface), start, end, 1);
     }
 }
