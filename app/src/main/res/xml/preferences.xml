@@ -25,6 +25,13 @@
         android:summary="%s"
         android:title="@string/settings_theme_title" />
 
+    <SwitchPreference
+        android:defaultValue="@string/pref_value_wifi_and_mobile"
+        android:icon="@drawable/ic_insert_link_black_24dp"
+        android:key="@string/pref_key_wifi_only"
+        android:summary="%s"
+        android:title="@string/settings_theme_wifi_only" />
+
     <PreferenceScreen
         android:key="@string/pref_key_certs"
         android:persistent="false"

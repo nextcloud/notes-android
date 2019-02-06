@@ -142,7 +142,16 @@ public class NoteServerSyncHelper {
      * @return true if sync is possible, otherwise false.
      */
     public boolean isSyncPossible() {
-        return networkConnected && isConfigured(appContext) && cert4androidReady;
+        boolean onlyWifiGuard = true;
+        if(
+            PreferenceManager.getDefaultSharedPreferences(this.appContext)
+                .getBoolean("wifiOnly", false) &&
+                !((ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE)).getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
+            onlyWifiGuard = false;
+            Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network available, but no wifi.");
+        }
+
+        return networkConnected && isConfigured(appContext) && cert4androidReady && onlyWifiGuard;
     }
 
     public CustomCertManager getCustomCertManager() {

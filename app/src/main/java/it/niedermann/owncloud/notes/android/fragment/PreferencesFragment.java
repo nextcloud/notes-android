@@ -7,9 +7,10 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
-import androidx.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.Notes;
@@ -30,21 +31,28 @@ public class PreferencesFragment extends PreferenceFragment {
             }
         });
 
-        final SwitchPreference themePref = (SwitchPreference) findPreference(getString(R.string.pref_key_theme));
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
 
+        final SwitchPreference themePref = (SwitchPreference) findPreference(getString(R.string.pref_key_theme));
         themePref.setSummary(sp.getBoolean(getString(R.string.pref_key_theme), false) ?
-                            getString(R.string.pref_value_theme_dark) : getString(R.string.pref_value_theme_light));
-        themePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                Boolean darkTheme = (Boolean) newValue;
-                Notes.setAppTheme(darkTheme);
-                getActivity().setResult(Activity.RESULT_OK);
-                getActivity().finish();
+                getString(R.string.pref_value_theme_dark) : getString(R.string.pref_value_theme_light));
+        themePref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+            Boolean darkTheme = (Boolean) newValue;
+            Notes.setAppTheme(darkTheme);
+            getActivity().setResult(Activity.RESULT_OK);
+            getActivity().finish();
+            return true;
+        });
 
-                return true;
-            }
+        final SwitchPreference wifiOnlyPref = (SwitchPreference) findPreference(getString(R.string.pref_key_wifi_only));
+        wifiOnlyPref.setSummary(sp.getBoolean(getString(R.string.pref_key_wifi_only), false) ?
+                getString(R.string.pref_value_wifi_and_mobile) : getString(R.string.pref_value_wifi_only));
+        wifiOnlyPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+            Boolean syncOnWifiOnly = (Boolean) newValue;
+            wifiOnlyPref.setSummary(sp.getBoolean(getString(R.string.pref_key_wifi_only), false) ?
+                    getString(R.string.pref_value_wifi_and_mobile) : getString(R.string.pref_value_wifi_only));
+            Log.v("Notes", "syncOnWifiOnly: " + syncOnWifiOnly);
+            return true;
         });
     }
 }

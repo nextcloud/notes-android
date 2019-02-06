@@ -55,6 +55,7 @@
     <string name="settings_submitting">Connecting &#8230;</string>
     <string name="settings_note_mode">Display mode for Notes</string>
     <string name="settings_theme_title">Theme</string>
+    <string name="settings_theme_wifi_only">Sync</string>
     <string name="settings_cert_category">Manage certificates</string>
     <string name="settings_cert_trust_system">Trust system certificates</string>
     <string name="settings_cert_trust_system_on">System and user-added CAs will be trusted (recommended)</string>
@@ -139,6 +140,7 @@
     <string name="pref_key_reset_trust" translatable="false">resetTrust</string>
     <string name="pref_key_note_mode" translatable="false">noteMode</string>
     <string name="pref_key_theme" translatable="false">darkTheme</string>
+    <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>
     <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
@@ -146,6 +148,8 @@
     <string name="pref_value_mode_note" translatable="false">note</string>
     <string name="pref_value_theme_light">Light</string>
     <string name="pref_value_theme_dark">Dark</string>
+    <string name="pref_value_wifi_only">Sync only on Wi-Fi</string>
+    <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
