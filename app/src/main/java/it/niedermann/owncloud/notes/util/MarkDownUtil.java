@@ -1,7 +1,7 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
-import android.support.v4.content.res.ResourcesCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.yydcdut.rxmarkdown.RxMDConfiguration;
 import com.yydcdut.rxmarkdown.RxMDConfiguration.Builder;

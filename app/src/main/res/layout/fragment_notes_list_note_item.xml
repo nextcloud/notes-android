@@ -25,7 +25,7 @@
         android:contentDescription="@string/menu_delete"
         android:src="@drawable/ic_delete_white_32dp" />
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/noteSwipeable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,7 +58,7 @@
         </FrameLayout>
 
 
-        <android.support.v7.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:orientation="vertical"
             android:background="@drawable/list_item_background_selector">
 
-            <android.support.v7.widget.LinearLayoutCompat
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_background_selector">
@@ -81,10 +81,10 @@
                     android:layout_weight="1"
                     android:textColor="@drawable/list_item_color_selector"
                     android:textSize="@dimen/primary_font_size" />
-            </android.support.v7.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-            <android.support.v7.widget.LinearLayoutCompat
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/list_item_background_selector">
@@ -121,9 +121,9 @@
                     android:singleLine="true"
                     android:textColor="@drawable/list_item_color_selector"
                     android:textSize="@dimen/secondary_font_size" />
-            </android.support.v7.widget.LinearLayoutCompat>
-        </android.support.v7.widget.LinearLayoutCompat>
-    </android.support.v7.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <ImageView
         android:layout_width="match_parent"
