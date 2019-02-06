@@ -23,11 +23,11 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 * Share text and links as new note into the app
 * Mark notes as favorite
 * Bulk delete
+* In-note search ([#106](https://github.com/stefan-niedermann/nextcloud-notes/issues/106))
 * Render MarkDown (using [RxMarkdown](https://github.com/yydcdut/RxMarkdown))
 * Translated in many languages on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
 
 ## :checkered_flag: Planned features
-* In-note search ([#106](https://github.com/stefan-niedermann/nextcloud-notes/issues/106))
 * Toggle checkboxes in view mode ([#451](https://github.com/stefan-niedermann/nextcloud-notes/issues/451))
 * Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))
 * Trashbin ([#238](https://github.com/stefan-niedermann/nextcloud-notes/issues/238))
