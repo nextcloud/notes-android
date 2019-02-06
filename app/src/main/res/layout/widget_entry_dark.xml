@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_note_list_entry_dark"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:padding="@dimen/widget_note_list_padding">
+
+    <ImageView
+        android:id="@+id/widget_entry_fav_icon_dark"
+        android:layout_width="@dimen/widget_note_list_fav_icon_width"
+        android:layout_height="@dimen/widget_note_list_fav_icon_height"
+        android:layout_gravity="center_vertical"
+        android:foregroundGravity="center_vertical"
+        android:paddingStart="@dimen/widget_note_list_inner_padding"
+        android:paddingLeft="@dimen/widget_note_list_inner_padding"
+        android:paddingEnd="@dimen/widget_note_list_outer_padding"
+        android:paddingRight="@dimen/widget_note_list_outer_padding"
+        android:src="@drawable/ic_star_yellow_24dp"
+        android:contentDescription="@string/widget_entry_fav_contentDescription" />
+
+    <TextView
+        android:id="@+id/widget_entry_content_tv_dark"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/widget_note_list_inner_padding"
+        android:paddingLeft="@dimen/widget_note_list_inner_padding"
+        android:paddingEnd="@dimen/widget_note_list_outer_padding"
+        android:paddingRight="@dimen/widget_note_list_outer_padding"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:textColor="@color/fg_default_dark_theme"
+        android:lines="1"
+        android:ellipsize="end" />
+
+</LinearLayout>

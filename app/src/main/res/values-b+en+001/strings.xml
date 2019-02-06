@@ -38,8 +38,6 @@
     <string name="listview_updated_this_month">This month</string>
     <string name="listview_updated_earlier">Earlier</string>
 
-    <!-- Settings -->
-    <string name="settings_server_settings">Account</string>
     <string name="settings_url">Server address</string>
     <string name="settings_url_check_description">Shows whether the address can be pinged.</string>
     <string name="settings_url_warn_http">WARNING: \"http\" is unsafe. Please use \"https\".</string>
@@ -51,7 +49,6 @@
     <string name="settings_submitting">Connecting &#8230;</string>
     <string name="settings_note_mode">Display mode for Notes</string>
     <string name="settings_theme_title">Theme</string>
-    <string name="settings_cert_category">Manage certificates</string>
     <string name="settings_cert_trust_system">Trust system certificates</string>
     <string name="settings_cert_trust_system_on">System and user-added CAs will be trusted (recommended)</string>
     <string name="settings_cert_trust_system_off">System and user-added CAs won\'t be trusted</string>

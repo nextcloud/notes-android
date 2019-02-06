@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -199,8 +199,9 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(note.getTitle());
-            String subtitle = note.getCategory().isEmpty() ? getString(R.string.action_uncategorized) : NoteUtil.extendCategory(note.getCategory());
-            actionBar.setSubtitle(subtitle);
+            if(!note.getCategory().isEmpty()) {
+                actionBar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
+            }
         }
     }
 }

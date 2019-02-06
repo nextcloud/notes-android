@@ -15,75 +15,100 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 
-import static android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE;
-
 public class NoteListWidget extends AppWidgetProvider {
     public static final String WIDGET_MODE_KEY = "NLW_mode";
     public static final String WIDGET_CATEGORY_KEY = "NLW_cat";
+    public static final String DARK_THEME_KEY = "NLW_darkTheme";
     public static final int NLW_DISPLAY_ALL = 0;
     public static final int NLW_DISPLAY_STARRED = 1;
     public static final int NLW_DISPLAY_CATEGORY = 2;
 
-    @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
+    static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
+        RemoteViews views;
+        boolean darkTheme;
 
         for (int appWidgetId : appWidgetIds) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
             int displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
-            String category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, null);
-            Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
 
+            // onUpdate has been triggered before the user finished configuring the widget
+            if (displayMode == -1) {
+                return;
+            }
+
+            String category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, null);
+            darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
+
+            Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             serviceIntent.putExtra(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, displayMode);
+            serviceIntent.putExtra(NoteListWidget.DARK_THEME_KEY + appWidgetId, darkTheme);
+            serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
+
+            if (displayMode == NLW_DISPLAY_CATEGORY) {
+                serviceIntent.putExtra(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, category);
+            }
 
             // Launch application when user taps the header icon or app title
             Intent intent = new Intent("android.intent.action.MAIN");
             intent.setComponent(new ComponentName(context.getPackageName(),
                                                   NotesListViewActivity.class.getName()));
 
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
-                                                                    intent,
-                                                                    PendingIntent.FLAG_UPDATE_CURRENT);
-
-            views.setOnClickPendingIntent(R.id.widget_note_header_icon, pendingIntent);
-            views.setOnClickPendingIntent(R.id.widget_note_list_title_tv, pendingIntent);
-
-            // Launch create note activity if user taps "+" sign in header
-            intent = new Intent(context, EditNoteActivity.class);
-            pendingIntent = PendingIntent.getActivity(context,0,
-                                                        intent,
-                                                        PendingIntent.FLAG_UPDATE_CURRENT);
-
-            views.setOnClickPendingIntent(R.id.widget_note_list_create_icon, pendingIntent);
-
-            Intent templateIntent = new Intent(context, EditNoteActivity.class);
-            PendingIntent templatePI = PendingIntent.getActivity(context,
-                                                                0, templateIntent,
+            // Open the main app if the user taps the widget header
+            PendingIntent openAppI = PendingIntent.getActivity( context, 0, intent,
                                                                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-            if (displayMode == NLW_DISPLAY_CATEGORY) {
-                serviceIntent.putExtra(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, category);
+            // Launch create note activity if user taps "+" icon on header
+            PendingIntent newNoteI = PendingIntent.getActivity( context,0,
+                                                                (new Intent(context, EditNoteActivity.class)),
+                                                                PendingIntent.FLAG_UPDATE_CURRENT);
+
+            PendingIntent templatePI = PendingIntent.getActivity(context,0,
+                                                                (new Intent(context, EditNoteActivity.class)),
+                                                                PendingIntent.FLAG_UPDATE_CURRENT);
+
+            if (darkTheme) {
+                views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list_dark);
+                views.setTextViewText(R.id.widget_note_list_title_tv_dark, getWidgetTitle(context, displayMode, category));
+                views.setOnClickPendingIntent(R.id.widget_note_header_icon_dark, openAppI);
+                views.setOnClickPendingIntent(R.id.widget_note_list_title_tv_dark, openAppI);
+                views.setOnClickPendingIntent(R.id.widget_note_list_create_icon_dark, newNoteI);
+                views.setPendingIntentTemplate(R.id.note_list_widget_lv_dark, templatePI);
+                views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv_dark, serviceIntent);
+                views.setEmptyView(R.id.note_list_widget_lv_dark, R.id.widget_note_list_placeholder_tv_dark);
+                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv_dark);
+            } else {
+                views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
+                views.setTextViewText(R.id.widget_note_list_title_tv, getWidgetTitle(context, displayMode, category));
+                views.setOnClickPendingIntent(R.id.widget_note_header_icon, openAppI);
+                views.setOnClickPendingIntent(R.id.widget_note_list_title_tv, openAppI);
+                views.setOnClickPendingIntent(R.id.widget_note_list_create_icon, newNoteI);
+                views.setPendingIntentTemplate(R.id.note_list_widget_lv, templatePI);
+                views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv, serviceIntent);
+                views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
+                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
             }
-            serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
-            views.setPendingIntentTemplate(R.id.note_list_widget_lv, templatePI);
-            views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv, serviceIntent);
-            views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
-            appWidgetManager.updateAppWidget(appWidgetId, views);
+
+            awm.updateAppWidget(appWidgetId, views);
         }
+    }
+
+    @Override
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
+        updateAppWidget(context, appWidgetManager, appWidgetIds);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
-        int appWidgetIds[] = awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class));
 
-        for (int appWidgetId : appWidgetIds) {
-            if (ACTION_APPWIDGET_UPDATE.equals(intent.getAction())) {
-                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
+        if (intent.getAction().equals(awm.ACTION_APPWIDGET_UPDATE)) {
+            if (intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
+                updateAppWidget(context, awm, new int[] { intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1) });
+            } else {
+                updateAppWidget(context, awm, awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class)));
             }
         }
     }
@@ -92,14 +117,30 @@ public class NoteListWidget extends AppWidgetProvider {
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
 
-        SharedPreferences.Editor editor = PreferenceManager
-                                            .getDefaultSharedPreferences(context).edit();
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
 
         for (int appWidgetId : appWidgetIds) {
             editor.remove(WIDGET_MODE_KEY + appWidgetId);
             editor.remove(WIDGET_CATEGORY_KEY + appWidgetId);
+            editor.remove(DARK_THEME_KEY + appWidgetId);
         }
 
         editor.apply();
+    }
+
+    private static String getWidgetTitle(Context context, int displayMode, String category) {
+        switch (displayMode)
+        {
+            case NoteListWidget.NLW_DISPLAY_ALL: return context.getString(R.string.app_name);
+            case NoteListWidget.NLW_DISPLAY_STARRED: return context.getString(R.string.label_favorites);
+            case NoteListWidget.NLW_DISPLAY_CATEGORY:
+                if (category.equals("")) {
+                    return context.getString(R.string.action_uncategorized);
+                } else {
+                    return category;
+                }
+        }
+
+        return null;
     }
 }

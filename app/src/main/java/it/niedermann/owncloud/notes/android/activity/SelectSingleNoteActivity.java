@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.Menu;
 import android.view.View;
 
@@ -17,6 +17,7 @@ import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
+import it.niedermann.owncloud.notes.util.Notes;
 
 public class SelectSingleNoteActivity extends NotesListViewActivity {
 
@@ -26,15 +27,14 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setResult(Activity.RESULT_CANCELED);
 
         SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
-
-        setResult(Activity.RESULT_CANCELED);
 
         ButterKnife.bind(this);
         fabCreate.setVisibility(View.GONE);
 
-        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        androidx.appcompat.app.ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setTitle(R.string.activity_select_single_note);
         }
@@ -53,33 +53,24 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         Item item = adapter.getItem(position);
         DBNote note = (DBNote) item;
         long noteID = note.getId();
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        int mAppWidgetId = -1;
+        final Bundle extras = getIntent().getExtras();
 
-        if (extras != null) {
-            mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+        if (extras == null) {
+            finish();
         }
 
+        int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
 
-        sp.putLong(SingleNoteWidget.WIDGET_KEY + mAppWidgetId, noteID);
+        sp.putLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, noteID);
+        sp.putBoolean(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()));
         sp.apply();
 
-        Intent retIntent = new Intent(this, SingleNoteWidget.class);
-        retIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-        retIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        sendBroadcast(retIntent);
-        setResult(RESULT_OK, retIntent);
+        Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
+                                        getApplicationContext(), SingleNoteWidget.class);
+        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        setResult(RESULT_OK, updateIntent);
+        getApplicationContext().sendBroadcast(updateIntent);
         finish();
-    }
-
-    @Override
-    public boolean onNoteLongClick(int position, View v) {
-        return false;
-    }
-
-    @Override
-    public void onNoteFavoriteClick(int position, View view) {
     }
 }

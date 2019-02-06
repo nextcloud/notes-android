@@ -7,12 +7,11 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,11 +23,12 @@ import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
+import it.niedermann.owncloud.notes.util.Notes;
 
 public class NoteListWidgetConfiguration extends AppCompatActivity {
     private static final String TAG = Activity.class.getSimpleName();
 
-    private int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+    private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent, itemFavorites;
@@ -46,18 +46,18 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
             // TODO Present user with app login screen
             Log.w(TAG, "onCreate: user not logged in");
             finish();
-
         }
 
         db = NoteSQLiteOpenHelper.getInstance(this);
         final Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
-            mAppWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
+            appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
                                             AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
-        if (mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
+        if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
+            Log.d(TAG, "INVALID_APPWIDGET_ID");
             finish();
         }
 
@@ -68,7 +68,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
         itemFavorites = new NavigationAdapter.NavigationItem(NotesListViewActivity.ADAPTER_KEY_STARRED,
                                                             getString(R.string.label_favorites),
                                                             null,
-                                                            R.drawable.ic_star_grey600_24dp);
+                                                            R.drawable.ic_star_yellow_24dp);
         RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
 
@@ -78,37 +78,33 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
                 SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
 
                 if (item == itemRecent) {
-                    sp.putInt(NoteListWidget.WIDGET_MODE_KEY +
-                                    mAppWidgetId, NoteListWidget.NLW_DISPLAY_ALL);
+                    sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_ALL);
                 } else if (item == itemFavorites) {
-                    sp.putInt(NoteListWidget.WIDGET_MODE_KEY +
-                                    mAppWidgetId, NoteListWidget.NLW_DISPLAY_STARRED);
+                    sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_STARRED);
                 } else {
                     String category = "";
                     if (!item.label.equals(getString(R.string.action_uncategorized))) {
                         category = item.label;
                     }
-                    sp.putInt(NoteListWidget.WIDGET_MODE_KEY +
-                                    mAppWidgetId, NoteListWidget.NLW_DISPLAY_CATEGORY);
-                    sp.putString(NoteListWidget.WIDGET_CATEGORY_KEY +
-                                    mAppWidgetId, category);
+                    sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_CATEGORY);
+                    sp.putString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, category);
                 }
 
+                sp.putBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()));
                 sp.apply();
 
-                Intent updateIntent = new Intent(getApplicationContext(), NoteListWidget.class);
-
-                updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-                updateIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-                sendBroadcast(updateIntent);
+                Intent updateIntent = new Intent(   AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
+                                                    getApplicationContext(), NoteListWidget.class);
+                updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 setResult(RESULT_OK, updateIntent);
+                getApplicationContext().sendBroadcast(updateIntent);
                 finish();
             }
 
             public void onIconClick(NavigationAdapter.NavigationItem item) {
                 onItemClick(item);
             }
-        }, false);
+        });
 
         recyclerView = findViewById(R.id.nlw_config_recyclerv);
         recyclerView.setHasFixedSize(true);
