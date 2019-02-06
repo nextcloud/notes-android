@@ -6,9 +6,9 @@
         android:id="@+id/search"
         android:title="@string/action_search"
         android:icon="@drawable/ic_search_white_24dp"
-        android:orderInCategory="70"
+        android:orderInCategory="50"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="collapseActionView|ifRoom" />
+        app:showAsAction="ifRoom|collapseActionView" />
 
     <item
         android:id="@+id/menu_favorite"
