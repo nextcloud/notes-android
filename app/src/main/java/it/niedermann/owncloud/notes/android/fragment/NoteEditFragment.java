@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,12 +17,14 @@ import com.yydcdut.markdown.syntax.edit.EditFactory;
 import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.StyleCallback;
 import rx.Subscriber;
 
 public class NoteEditFragment extends BaseNoteFragment {
@@ -120,23 +121,24 @@ public class NoteEditFragment extends BaseNoteFragment {
         editContent.setEnabled(true);
 
         RxMarkdown.live(editContent)
-                .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()).build())
-                .factory(EditFactory.create())
-                .intoObservable()
-                .subscribe(new Subscriber<CharSequence>() {
-                    @Override
-                    public void onCompleted() {
-                    }
+            .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()).build())
+            .factory(EditFactory.create())
+            .intoObservable()
+            .subscribe(new Subscriber<CharSequence>() {
+                @Override
+                public void onCompleted() {
+                }
 
-                    @Override
-                    public void onError(Throwable e) {
-                    }
+                @Override
+                public void onError(Throwable e) {
+                }
 
-                    @Override
-                    public void onNext(CharSequence charSequence) {
-                        editContent.setText(charSequence, TextView.BufferType.SPANNABLE);
-                    }
-                });
+                @Override
+                public void onNext(CharSequence charSequence) {
+                    editContent.setText(charSequence, TextView.BufferType.SPANNABLE);
+                }
+            });
+        editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
     }
 
     @Override

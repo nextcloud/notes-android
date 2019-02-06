@@ -1,11 +1,6 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.content.res.TypedArrayUtils;
-import androidx.core.text.TextUtilsCompat;
-
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +13,7 @@ import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
