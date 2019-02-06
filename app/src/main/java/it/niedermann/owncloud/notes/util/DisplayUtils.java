@@ -20,7 +20,6 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.graphics.Typeface;
-import android.support.annotation.ColorInt;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.style.CharacterStyle;
@@ -29,6 +28,8 @@ import android.text.style.StyleSpan;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import androidx.annotation.ColorInt;
 
 public class DisplayUtils {
 

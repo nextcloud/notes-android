@@ -6,16 +6,8 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.ShareActionProvider;
 import android.text.SpannableString;
 import android.text.TextUtils;
-import androidx.annotation.Nullable;
-import androidx.core.view.MenuItemCompat;
-import androidx.appcompat.widget.ShareActionProvider;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +17,11 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
+import androidx.core.view.ViewCompat;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -158,7 +155,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         prepareFavoriteOption(itemFavorite);
 
         searchMenuItem = menu.findItem(R.id.search);
-        searchView = (android.support.v7.widget.SearchView) searchMenuItem.getActionView();
+        searchView = (SearchView) searchMenuItem.getActionView();
 
         if (!TextUtils.isEmpty(searchQuery) && isNew) {
             searchMenuItem.expandActionView();
@@ -169,7 +166,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
 
 
-        final LinearLayout searchEditFrame = searchView.findViewById(android.support.v7.appcompat.R.id
+        final LinearLayout searchEditFrame = searchView.findViewById(R.id
                 .search_edit_frame);
 
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
