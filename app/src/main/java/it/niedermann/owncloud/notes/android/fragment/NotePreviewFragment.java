@@ -57,6 +57,8 @@ public class NotePreviewFragment extends BaseNoteFragment {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, getView());
 
+        setActiveTextView(noteContent);
+
         String content = note.getContent();
 
         RxMarkdown.with(content, getActivity())

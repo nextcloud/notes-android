@@ -32,12 +32,39 @@ public class NoteEditFragment extends BaseNoteFragment {
 
     private static final long DELAY = 2000; // Wait for this time after typing before saving
     private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
-
-    private Handler handler;
-    private boolean saveActive, unsavedEdit;
-
     @BindView(R.id.editContent)
     RxMDEditText editContent;
+    private Handler handler;
+    private boolean saveActive, unsavedEdit;
+    private final Runnable runAutoSave = new Runnable() {
+        @Override
+        public void run() {
+            if (unsavedEdit) {
+                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: start AutoSave");
+                autoSave();
+            } else {
+                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: nothing changed");
+            }
+        }
+    };
+    private final TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(final CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(final Editable s) {
+            unsavedEdit = true;
+            if (!saveActive) {
+                handler.removeCallbacks(runAutoSave);
+                handler.postDelayed(runAutoSave, DELAY);
+            }
+        }
+    };
 
     public static NoteEditFragment newInstance(long noteId) {
         NoteEditFragment f = new NoteEditFragment();
@@ -80,6 +107,8 @@ public class NoteEditFragment extends BaseNoteFragment {
 
         ButterKnife.bind(this, getView());
 
+        setActiveTextView(editContent);
+
         if (note.getContent().isEmpty()) {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
@@ -110,25 +139,6 @@ public class NoteEditFragment extends BaseNoteFragment {
                 });
     }
 
-    private final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(final CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(final Editable s) {
-            unsavedEdit = true;
-            if (!saveActive) {
-                handler.removeCallbacks(runAutoSave);
-                handler.postDelayed(runAutoSave, DELAY);
-            }
-        }
-    };
-
     @Override
     public void onResume() {
         super.onResume();
@@ -141,18 +151,6 @@ public class NoteEditFragment extends BaseNoteFragment {
         editContent.removeTextChangedListener(textWatcher);
         cancelTimers();
     }
-
-    private final Runnable runAutoSave = new Runnable() {
-        @Override
-        public void run() {
-            if (unsavedEdit) {
-                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: start AutoSave");
-                autoSave();
-            } else {
-                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: nothing changed");
-            }
-        }
-    };
 
     private void cancelTimers() {
         handler.removeCallbacks(runAutoSave);

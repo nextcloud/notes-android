@@ -6,18 +6,27 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.core.view.MenuItemCompat;
-import androidx.appcompat.widget.ShareActionProvider;
+import android.text.SpannableString;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewTreeObserver;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.view.MenuItemCompat;
+import androidx.core.view.ViewCompat;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 
 public abstract class BaseNoteFragment extends Fragment implements CategoryDialogFragment.CategoryDialogListener {
@@ -33,16 +42,39 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
+    protected SearchView searchView;
+    protected MenuItem searchMenuItem;
+
+    protected String searchQuery = null;
+
     protected DBNote note;
     @Nullable
     private DBNote originalNote;
     private NoteSQLiteOpenHelper db;
     private NoteFragmentListener listener;
 
+    private TextView activeTextView;
+    private boolean isNew;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            searchQuery = savedInstanceState.getString("searchQuery", "");
+        }
+
+    }
+
+    protected void setActiveTextView(TextView textView) {
+        activeTextView = textView;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
+            isNew = true;
             long id = getArguments().getLong(PARAM_NOTE_ID);
             if (id > 0) {
                 note = originalNote = db.getNote(id);
@@ -55,6 +87,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 originalNote = null;
             }
         } else {
+            isNew = false;
             note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
             originalNote = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
         }
@@ -96,6 +129,18 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         saveNote(null);
         outState.putSerializable(SAVEDKEY_NOTE, note);
         outState.putSerializable(SAVEDKEY_ORIGINAL_NOTE, originalNote);
+
+        if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
+            outState.putString("searchQuery", searchView.getQuery().toString());
+        }
+    }
+
+    private void colorWithText(String newText) {
+        if (activeTextView != null && ViewCompat.isAttachedToWindow(activeTextView)) {
+            activeTextView.setText(DisplayUtils.searchAndColor(activeTextView.getText().toString(), new SpannableString
+                            (activeTextView.getText()), newText, getResources().getColor(R.color.primary)),
+                    TextView.BufferType.SPANNABLE);
+        }
     }
 
     @Override
@@ -108,6 +153,54 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         super.onPrepareOptionsMenu(menu);
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
+
+        searchMenuItem = menu.findItem(R.id.search);
+        searchView = (SearchView) searchMenuItem.getActionView();
+
+        if (!TextUtils.isEmpty(searchQuery) && isNew) {
+            searchMenuItem.expandActionView();
+            searchView.setQuery(searchQuery, true);
+            searchView.clearFocus();
+        } else {
+            searchMenuItem.collapseActionView();
+        }
+
+
+        final LinearLayout searchEditFrame = searchView.findViewById(R.id
+                .search_edit_frame);
+
+        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            int oldVisibility = -1;
+            @Override
+            public void onGlobalLayout() {
+                int currentVisibility = searchEditFrame.getVisibility();
+
+                if (currentVisibility != oldVisibility) {
+                    if (currentVisibility != View.VISIBLE) {
+                        colorWithText("");
+                        searchQuery = "";
+                    }
+
+                    oldVisibility = currentVisibility;
+                }
+            }
+
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchQuery = newText;
+                colorWithText(newText);
+                return true;
+            }
+        });
+
     }
 
     private void prepareFavoriteOption(MenuItem item) {
