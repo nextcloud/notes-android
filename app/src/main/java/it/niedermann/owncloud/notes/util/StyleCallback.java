@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.util;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
+import android.util.SparseIntArray;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +25,23 @@ public class StyleCallback implements ActionMode.Callback {
         MenuInflater inflater = mode.getMenuInflater();
         inflater.inflate(R.menu.style, menu);
         menu.removeItem(android.R.id.selectAll);
+
+        SparseIntArray styleFormatMap = new SparseIntArray();
+        styleFormatMap.append(R.id.bold, Typeface.BOLD);
+        styleFormatMap.append(R.id.italic, Typeface.ITALIC);
+
+        MenuItem item;
+        CharSequence title;
+        SpannableStringBuilder ssb;
+
+        for (int i = 0; i < styleFormatMap.size(); i++) {
+            item = menu.findItem(styleFormatMap.keyAt(i));
+            title = item.getTitle();
+            ssb = new SpannableStringBuilder(title);
+            ssb.setSpan(new StyleSpan(styleFormatMap.valueAt(i)), 0, title.length(), 0);
+            item.setTitle(ssb);
+        }
+
         return true;
     }
 
