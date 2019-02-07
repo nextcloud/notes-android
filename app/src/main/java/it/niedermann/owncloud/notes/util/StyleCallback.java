@@ -67,6 +67,7 @@ public class StyleCallback implements ActionMode.Callback {
                     this.addMarkdown(ssb, start, end, markdown, Typeface.BOLD);
                 }
                 editText.setText(ssb);
+                editText.setSelection(end + markdown.length() * 2);
                 break;
             case R.id.italic:
                 markdown = "*";
@@ -76,6 +77,7 @@ public class StyleCallback implements ActionMode.Callback {
                     this.addMarkdown(ssb, start, end, markdown, Typeface.ITALIC);
                 }
                 editText.setText(ssb);
+                editText.setSelection(end + markdown.length() * 2);
                 break;
             case R.id.link:
                 ssb.insert(end, "]()");
