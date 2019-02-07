@@ -4,11 +4,6 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.support.v4.text.TextUtilsCompat;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,20 +62,20 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
         RxMarkdown.with(content, getActivity())
                 .config(
-                    MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
-                        /*.setOnTodoClickCallback(new OnTodoClickCallback() {
-                                @Override
-                                public CharSequence onTodoClicked(View view, String line, int lineNumber) {
-                                String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
-                                if(lines.length >= lineNumber) {
-                                    lines[lineNumber] = line;
+                        MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
+                                /*.setOnTodoClickCallback(new OnTodoClickCallback() {
+                                        @Override
+                                        public CharSequence onTodoClicked(View view, String line, int lineNumber) {
+                                        String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
+                                        if(lines.length >= lineNumber) {
+                                            lines[lineNumber] = line;
+                                        }
+                                        noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
+                                        saveNote(null);
+                                        return line;
+                                    }
                                 }
-                                noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
-                                saveNote(null);
-                                return line;
-                            }
-                        }
-                    )*/.build()
+                            )*/.build()
                 )
                 .factory(TextFactory.create())
                 .intoObservable()
@@ -105,7 +100,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        if(sp.getBoolean("font", false)) {
+        if (sp.getBoolean("font", false)) {
             noteContent.setTypeface(Typeface.MONOSPACE);
         }
     }

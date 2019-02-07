@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -150,25 +149,6 @@ public class NoteEditFragment extends BaseNoteFragment {
         }
     }
 
-    private final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(final CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(final Editable s) {
-            unsavedEdit = true;
-            if (!saveActive) {
-                handler.removeCallbacks(runAutoSave);
-                handler.postDelayed(runAutoSave, DELAY);
-            }
-        }
-    };
-
     @Override
     public void onResume() {
         super.onResume();
@@ -181,18 +161,6 @@ public class NoteEditFragment extends BaseNoteFragment {
         editContent.removeTextChangedListener(textWatcher);
         cancelTimers();
     }
-
-    private final Runnable runAutoSave = new Runnable() {
-        @Override
-        public void run() {
-            if (unsavedEdit) {
-                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: start AutoSave");
-                autoSave();
-            } else {
-                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: nothing changed");
-            }
-        }
-    };
 
     private void cancelTimers() {
         handler.removeCallbacks(runAutoSave);
