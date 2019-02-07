@@ -22,13 +22,10 @@ public class PreferencesFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.preferences);
 
         Preference resetTrust = findPreference(getString(R.string.pref_key_reset_trust));
-        resetTrust.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                CustomCertManager.Companion.resetCertificates(getActivity());
-                Toast.makeText(getActivity(), getString(R.string.settings_cert_reset_toast), Toast.LENGTH_SHORT).show();
-                return true;
-            }
+        resetTrust.setOnPreferenceClickListener((Preference preference) -> {
+            CustomCertManager.Companion.resetCertificates(getActivity());
+            Toast.makeText(getActivity(), getString(R.string.settings_cert_reset_toast), Toast.LENGTH_SHORT).show();
+            return true;
         });
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
@@ -45,12 +42,18 @@ public class PreferencesFragment extends PreferenceFragment {
         });
 
         final SwitchPreference wifiOnlyPref = (SwitchPreference) findPreference(getString(R.string.pref_key_wifi_only));
-        wifiOnlyPref.setSummary(sp.getBoolean(getString(R.string.pref_key_wifi_only), false) ?
-                getString(R.string.pref_value_wifi_and_mobile) : getString(R.string.pref_value_wifi_only));
+        wifiOnlyPref.setSummary(
+                sp.getBoolean(getString(R.string.pref_key_wifi_only), false)
+                        ? getString(R.string.pref_value_wifi_only)
+                        : getString(R.string.pref_value_wifi_and_mobile)
+        );
         wifiOnlyPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
             Boolean syncOnWifiOnly = (Boolean) newValue;
-            wifiOnlyPref.setSummary(sp.getBoolean(getString(R.string.pref_key_wifi_only), false) ?
-                    getString(R.string.pref_value_wifi_and_mobile) : getString(R.string.pref_value_wifi_only));
+            wifiOnlyPref.setSummary(
+                    syncOnWifiOnly
+                            ? getString(R.string.pref_value_wifi_only)
+                            : getString(R.string.pref_value_wifi_and_mobile)
+            );
             Log.v("Notes", "syncOnWifiOnly: " + syncOnWifiOnly);
             return true;
         });
