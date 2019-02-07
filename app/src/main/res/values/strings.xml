@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Saving &#8230;</string>
     <string name="action_edit_saved">Saved</string>
     <string name="simple_about">About</string>
+    <string name="simple_bold">Bold</string>
+    <string name="simple_link">Link</string>
+    <string name="simple_italic">Italic</string>
     <string name="action_select_note">Select note</string>
     <string name="action_note_deleted">Note deleted</string>
     <string name="action_note_restored">Note restored</string>

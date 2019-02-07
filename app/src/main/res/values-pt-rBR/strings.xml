@@ -7,6 +7,7 @@
     <string name="label_favorites">Favoritos</string>
     <string name="action_create">Nova nota</string>
     <string name="action_settings">Configurações</string>
+    <string name="action_trashbin">Anotações excluídas</string>
     <string name="action_search">Pesquisar</string>
     <string name="action_create_save">Salvar</string>
     <string name="simple_cancel">Cancelar</string>

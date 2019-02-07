@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -115,6 +115,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         } else {
             fragment = NotePreviewFragment.newInstance(noteId);
         }
+
         if (savedState != null) {
             fragment.setInitialSavedState(savedState);
         }

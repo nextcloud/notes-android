@@ -1,7 +1,7 @@
 package it.niedermann.owncloud.notes.android;
 
 import android.content.Context;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.WindowManager;

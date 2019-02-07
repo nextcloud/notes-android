@@ -17,16 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.yydcdut.markdown.callback.OnTodoClickCallback;
 import com.yydcdut.markdown.syntax.text.TextFactory;
-import com.yydcdut.rxmarkdown.RxMDConfiguration;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -62,6 +60,8 @@ public class NotePreviewFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, getView());
+
+        setActiveTextView(noteContent);
 
         String content = note.getContent();
 

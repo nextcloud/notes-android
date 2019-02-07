@@ -5,7 +5,7 @@
     <color name="primary">#0082C9</color>
     <color name="primary_dark">#286090</color>
 
-    <color name="separator">#d2d2d2</color>
+    <color name="separator">#fbfbfb</color>
 
     <color name="bg_transparent">#aa000000</color>
     <color name="bg_highlighted">#f3f3f3</color>
@@ -19,11 +19,26 @@
     <color name="fg_contrast">#ffffff</color>
     <color name="icon_grey">#757575</color>
 
-    <color name="widget_background">#FFFFFF</color>
+    <color name="widget_background">#DFFFFFFF</color>
+    <color name="widget_fg_default">#000000</color>
+    <color name="widget_fg_contrast">#ffffff</color>
 
     <color name="category_background">#FFF</color>
     <color name="category_border">@color/primary</color>
 
-    <color name="widget_fg_default">#000000</color>
-    <color name="widget_fg_contrast">#ffffff</color>
+    <!-- Dark Theme -->
+    <!-- Defined here until appwidgets can use night/colors -->
+    <color name="bg_transparent_dark_theme">#aa000000</color>
+    <color name="bg_highlighted_dark_theme">#f3f3f3</color>
+    <color name="bg_normal_dark_theme">#222</color>
+    <color name="bg_attention_dark_theme">#d40000</color>
+    <color name="bg_warning_dark_theme">#ffcc00</color>
+    <color name="fg_default_dark_theme">#eeeeee</color>
+    <color name="fg_default_selection_dark_theme">#333333</color>
+    <color name="fg_default_low_dark_theme">#666666</color>
+    <color name="fg_default_high_dark_theme">#cccccc</color>
+    <color name="fg_contrast_dark_theme">#ffffff</color>
+
+    <color name="widget_background_dark_theme">#bf222222</color>
+    <color name="widget_fg_dark_theme">#ffffff</color>
 </resources>

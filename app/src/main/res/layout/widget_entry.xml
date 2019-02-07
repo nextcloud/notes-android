@@ -28,10 +28,9 @@
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
         android:paddingRight="@dimen/widget_note_list_outer_padding"
         android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
         android:layout_weight="1"
         android:textColor="@color/widget_fg_default"
-        android:lines="1"
-        android:ellipsize="end" />
+        android:ellipsize="end"
+        android:lines="1" />
 
 </LinearLayout>

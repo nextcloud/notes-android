@@ -21,12 +21,14 @@ import com.yydcdut.markdown.syntax.edit.EditFactory;
 import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.StyleCallback;
 import rx.Subscriber;
 
 public class NoteEditFragment extends BaseNoteFragment {
@@ -35,12 +37,39 @@ public class NoteEditFragment extends BaseNoteFragment {
 
     private static final long DELAY = 2000; // Wait for this time after typing before saving
     private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
-
-    private Handler handler;
-    private boolean saveActive, unsavedEdit;
-
     @BindView(R.id.editContent)
     RxMDEditText editContent;
+    private Handler handler;
+    private boolean saveActive, unsavedEdit;
+    private final Runnable runAutoSave = new Runnable() {
+        @Override
+        public void run() {
+            if (unsavedEdit) {
+                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: start AutoSave");
+                autoSave();
+            } else {
+                Log.d(LOG_TAG_AUTOSAVE, "runAutoSave: nothing changed");
+            }
+        }
+    };
+    private final TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(final CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(final Editable s) {
+            unsavedEdit = true;
+            if (!saveActive) {
+                handler.removeCallbacks(runAutoSave);
+                handler.postDelayed(runAutoSave, DELAY);
+            }
+        }
+    };
 
     public static NoteEditFragment newInstance(long noteId) {
         NoteEditFragment f = new NoteEditFragment();
@@ -83,6 +112,8 @@ public class NoteEditFragment extends BaseNoteFragment {
 
         ButterKnife.bind(this, getView());
 
+        setActiveTextView(editContent);
+
         if (note.getContent().isEmpty()) {
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         }
@@ -94,17 +125,17 @@ public class NoteEditFragment extends BaseNoteFragment {
         editContent.setEnabled(true);
 
         RxMarkdown.live(editContent)
-                .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()).build())
-                .factory(EditFactory.create())
-                .intoObservable()
-                .subscribe(new Subscriber<CharSequence>() {
-                    @Override
-                    public void onCompleted() {
-                    }
+            .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()).build())
+            .factory(EditFactory.create())
+            .intoObservable()
+            .subscribe(new Subscriber<CharSequence>() {
+                @Override
+                public void onCompleted() {
+                }
 
-                    @Override
-                    public void onError(Throwable e) {
-                    }
+                @Override
+                public void onError(Throwable e) {
+                }
 
                     @Override
                     public void onNext(CharSequence charSequence) {
@@ -112,6 +143,7 @@ public class NoteEditFragment extends BaseNoteFragment {
                     }
                 });
 
+        editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         if(sp.getBoolean("font", false)) {
             editContent.setTypeface(Typeface.MONOSPACE);

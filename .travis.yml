@@ -6,10 +6,11 @@ android:
   components:
     - tools
     - build-tools-27.0.3
-    - android-27
+    - android-28
     - extra-android-m2repository
 
 before_install:
     - yes | sdkmanager "platforms;android-27"
+    - yes | sdkmanager "platforms;android-28"
 
 script: ./gradlew testDebug
