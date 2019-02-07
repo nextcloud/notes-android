@@ -40,7 +40,7 @@ public class StyleCallback implements ActionMode.Callback {
         final String markdown;
 
 
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.bold:
                 markdown = "**";
                 if (hasAlreadyMarkdown(start, end, markdown)) {
@@ -82,9 +82,10 @@ public class StyleCallback implements ActionMode.Callback {
     }
 
     private void removeMarkdown(SpannableStringBuilder ssb, int start, int end, String markdown) {
-        ssb.delete(start - markdown.length(), start);
-        ssb.delete(end - markdown.length(), end);
-        ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
+        // FIXME disabled, because it does not work properly and might cause data loss
+        // ssb.delete(start - markdown.length(), start);
+        // ssb.delete(end - markdown.length(), end);
+        // ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
     }
 
     private void addMarkdown(SpannableStringBuilder ssb, int start, int end, String markdown, int typeface) {
