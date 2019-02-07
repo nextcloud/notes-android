@@ -7,9 +7,9 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
-import androidx.annotation.Nullable;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import at.bitfire.cert4android.CustomCertManager;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.Notes;
@@ -41,7 +41,7 @@ public class PreferencesFragment extends PreferenceFragment {
                 Boolean darkTheme = (Boolean) newValue;
                 Notes.setAppTheme(darkTheme);
                 getActivity().setResult(Activity.RESULT_OK);
-                getActivity().finish();
+                getActivity().recreate();
 
                 return true;
             }
