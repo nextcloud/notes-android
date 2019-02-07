@@ -27,7 +27,7 @@
 
     <SwitchPreference
         android:defaultValue="@string/pref_value_wifi_and_mobile"
-        android:icon="@drawable/ic_insert_link_black_24dp"
+        android:icon="@drawable/ic_sync_black_24dp"
         android:key="@string/pref_key_wifi_only"
         android:summary="%s"
         android:title="@string/settings_theme_wifi_only" />
