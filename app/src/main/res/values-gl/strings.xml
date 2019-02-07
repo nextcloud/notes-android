@@ -3,33 +3,35 @@
 
     <string name="app_name">Notas</string>
     <string name="no_notes">Aínda non hai notas</string>
+    <string name="label_all_notes">Todas as notas</string>
+    <string name="label_favorites">Favoritas</string>
     <string name="action_create">Nova nota</string>
     <string name="action_settings">Axustes</string>
+    <string name="action_trashbin">Notas eliminadas</string>
+    <string name="action_search">Buscar</string>
     <string name="action_create_save">Gardar</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Gardar</string>
     <string name="action_edit_saving">Gardando &#8230;</string>
     <string name="action_edit_saved">Gardado</string>
-    <string name="action_edit_cancel">Cancelar</string>
-    <string name="simple_about">Acerca de</string>
+    <string name="simple_about">Sobre</string>
     <string name="action_select_note">Seleccionar nota</string>
     <string name="action_note_deleted">A nota foi eliminada</string>
     <string name="action_note_restored">A nota foi restaurada</string>
     <string name="action_undo">Desfacer</string>
+    <string name="action_drawer_open">abrir a navegación</string>
+    <string name="action_drawer_close">pechar a navegación</string>
+    <string name="action_recent">Recente</string>
+    <string name="action_uncategorized">Sen categorizar</string>
     <string name="menu_delete">Eliminar</string>
-    <string name="menu_copy">Copiar</string>
-    <string name="menu_edit">Editar</string>
-    <string name="menu_cancel">Cancelar</string>
     <string name="menu_change_category">Categoría</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Vista previa</string>
     <string name="menu_share">Compartir</string>
-    <string name="menu_about">Acerca de</string>
+    <string name="menu_about">Sobre</string>
 
-    <string name="change_category_title">Elixa categoría</string>
-    <string name="change_category_message">Por favor introduza un nome de categoría</string>
-    <string name="copy">Copiar</string>
+    <string name="change_category_title">Escolla unha categoría</string>
 
     <string name="listview_updated_today">Hoxe</string>
     <string name="listview_updated_yesterday">Onte</string>
@@ -38,17 +40,26 @@
     <string name="listview_updated_earlier">Recentemente</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Axustes da Conta</string>
+    <string name="settings_server_settings">Conta</string>
     <string name="settings_url">Enderezo do servidor</string>
-    <string name="settings_url_check_description">Amosa se pódeselle facer ping ao enderezo.</string>
-    <string name="settings_url_warn_http">AVISO: «http» non é seguro. Por favor empregue «https».</string>
+    <string name="settings_url_check_description">Amosa se se lle pode facer ping ao enderezo</string>
+    <string name="settings_url_warn_http">AVISO: «http» non é seguro. Empregue «https».</string>
     <string name="settings_username">Nome de usuario</string>
     <string name="settings_password">Contrasinal</string>
     <string name="settings_password_unchanged">Contrasinal (sen cambiar)</string>
     <string name="settings_password_check_description">Amosa se as credenciais son correctas.</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando con &#8230;</string>
-    <string name="settings_cert_category">Certificados</string>
+    <string name="settings_note_mode">Modo de vista das notas</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_cert_category">Administrar certificados</string>
+    <string name="settings_cert_trust_system">Confiar nos certificados do sistema</string>
+    <string name="settings_cert_trust_system_on">Confiaráse nas Entidades de Acreditación -CA- do sistema e nas engadidas polo usuario (recomendado)</string>
+    <string name="settings_cert_trust_system_off">Non se confiará nas Entidade de Acreditación -CA- do sistema nin nas engadidas polo usuario</string>
+    <string name="settings_cert_reset">Restabelecer os certificados fiábeis e non fiábeis</string>
+    <string name="settings_cert_reset_summary">Restabelece a confianza en todos os certificados personalizados</string>
+    <string name="settings_cert_reset_toast">Limpáronse todos os certificados personalizados</string>
+
     <!-- Certificates -->
     <string name="certificate_notification_connection_security">Notas - Seguridade da conexión</string>
     <string name="trust_certificate_unknown_certificate_found">Notas atopou un certificado descoñecido. Quere confiar nel?</string>
@@ -56,15 +67,15 @@
     <!-- Network -->
     <string name="network_connecting">Conectando</string>
     <string name="network_connected">Conectado</string>
-    <string name="network_disconnected">Non hai conexión á rede</string>
+    <string name="network_disconnected">Non hai redes dispoñíbeis</string>
 
     <!-- Error -->
-    <string name="error_sync">Produciuse unha falla na sincronización: %1$s</string>
+    <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_invalid_login">Acceso incorrecto: %1$s</string>
-    <string name="error_json">está activada a aplicación de Notas no servidor?</string>
+    <string name="error_json">está activado o aplicativo «Notes» no servidor?</string>
     <string name="error_io">interrompeuse a conexión co servidor</string>
-    <string name="error_no_network">Sen conexión á rede</string>
-    <string name="error_server">Hai erros na URL/Servidor</string>
+    <string name="error_no_network">Sen conexión de rede</string>
+    <string name="error_server">hai erros no URL/Servidor</string>
     <string name="error_url_malformed">Enderezo do servidor incorrecto</string>
     <string name="error_username_password_invalid">Nome de usuario ou contrasinal incorrecto</string>
 
@@ -75,28 +86,53 @@
     <string name="about_version_title">Versión</string>
     <string name="about_version">Agora está a usando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mantedor</string>
-    <string name="about_developers_title">Programadores</string>
+    <string name="about_developers_title">Desenvolvedores</string>
     <string name="about_translators_title">Tradutores</string>
     <string name="about_translators_transifex">A comunidade de Nextcloud en &lt;a href=\\"%1$s\\">Transifex&lt;/a></string>
     <string name="about_testers_title">Probadores</string>
     <string name="about_source_title">Código fonte</string>
-    <string name="about_source">Este proxecto está aloxado en GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
+    <string name="about_source">Este proxecto está hospedado en GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemas</string>
-    <string name="about_issues">Vostede pode informar de fallas, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de problemas do GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
+    <string name="about_issues">Vostede pode informar de fallos, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de erros do GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traducir</string>
-    <string name="about_translate">Únase ao equipo Nextcloud en Transifex e axúdenos a traducir esta aplicación: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">Licenza da aplicación</string>
-    <string name="about_app_license">Esta aplicación está licenciada baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
+    <string name="about_translate">Únase ao equipo Nextcloud en Transifex e axúdenos a traducir este aplicativo: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Licenza do aplicativo</string>
+    <string name="about_app_license">Este aplicativo está licenciado baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
     <string name="about_app_license_button">Ver a licenza</string>
     <string name="about_icons_disclaimer_title">Iconas</string>
-    <string name="about_icons_disclaimer">&lt;p>Icona orixinal feita por %1$s&lt;/p>&lt;p>As outras iconas usadas por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitos por Google Inc. e licenciados baixo unha Licenza Creative Commons.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Iconas orixinais feitas por %1$s&lt;/p>&lt;p>As outras iconas usadas por este aplicativo son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitos por Google Inc. e licenciados baixo unha Licenza Creative Commons.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Colaboración</string>
     <string name="about_license_tab_title">Licenza</string>
 
-    <string name="widget_all_notes_title">Todas as notas</string>
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_note_list_placeholder">Non hai notas</string>
     <string name="widget_single_note_title">Nota única</string>
-    <!-- Shortcuts -->
-    <string name="shortcut_create_long">Crear unha nova nota</string>
+    <string name="widget_single_note_placeholder_tv">Non se atopou ningunha nota</string>
+    <string name="widget_create_note">Crear unha nota</string>
+    <string name="widget_not_logged_in">Acceda a Notas antes de empregar este trebello</string>
+    <string name="widget_entry_fav_contentDescription">A icona de estrela empregase para indicar que o elemento é un favorito</string>
+    <string name="widget_app_launcher_contentDescription">Inicia o apli</string>
 
-    </resources>
+    <string name="activity_select_single_note">Seleccionar unha nota</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Crear unha nota nova</string>
+
+    <string name="pref_value_theme_light">Claro</string>
+    <string name="pref_value_theme_dark">Escuro</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Abrir en modo de edición</item>
+        <item>Abrir en modo de vista previa</item>
+        <item>Lembrar a miña última selección</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d seleccionado</item>
+        <item quantity="other">%d seleccionados</item>
+    </plurals>
+</resources>
