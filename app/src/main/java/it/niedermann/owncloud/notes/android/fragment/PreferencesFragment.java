@@ -42,18 +42,8 @@ public class PreferencesFragment extends PreferenceFragment {
         });
 
         final SwitchPreference wifiOnlyPref = (SwitchPreference) findPreference(getString(R.string.pref_key_wifi_only));
-        wifiOnlyPref.setSummary(
-                sp.getBoolean(getString(R.string.pref_key_wifi_only), false)
-                        ? getString(R.string.pref_value_wifi_only)
-                        : getString(R.string.pref_value_wifi_and_mobile)
-        );
         wifiOnlyPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
             Boolean syncOnWifiOnly = (Boolean) newValue;
-            wifiOnlyPref.setSummary(
-                    syncOnWifiOnly
-                            ? getString(R.string.pref_value_wifi_only)
-                            : getString(R.string.pref_value_wifi_and_mobile)
-            );
             Log.v("Notes", "syncOnWifiOnly: " + syncOnWifiOnly);
             return true;
         });
