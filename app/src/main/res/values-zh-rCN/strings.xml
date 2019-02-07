@@ -42,11 +42,11 @@
     <!-- Settings -->
     <string name="settings_server_settings">账户设置</string>
     <string name="settings_url">服务器地址</string>
-    <string name="settings_url_check_description">测试服务器是否可Ping通.</string>
-    <string name="settings_url_warn_http">警告:“http”是不安全的，请使用“https”。</string>
+    <string name="settings_url_check_description">测试服务器是否可Ping通。</string>
+    <string name="settings_url_warn_http">警告：“http”是不安全的，请使用“https”。</string>
     <string name="settings_username">用户名</string>
     <string name="settings_password">密码</string>
-    <string name="settings_password_unchanged">密码(没修改)</string>
+    <string name="settings_password_unchanged">密码（未修改）</string>
     <string name="settings_password_check_description">显示证书是否正确。</string>
     <string name="settings_submit">连接</string>
     <string name="settings_submitting">连接 &#8230;</string>
@@ -62,7 +62,7 @@
 
     <!-- Certificates -->
     <string name="certificate_notification_connection_security">Notes - 安全连接</string>
-    <string name="trust_certificate_unknown_certificate_found">Note 遇到未知的证书，是否信任它？</string>
+    <string name="trust_certificate_unknown_certificate_found">Notes 遇到未知的证书，是否信任它？</string>
 
     <!-- Network -->
     <string name="network_connecting">正在连接</string>
@@ -70,12 +70,12 @@
     <string name="network_disconnected">网络不可以</string>
 
     <!-- Error -->
-    <string name="error_sync">同步失败: %1$s</string>
-    <string name="error_invalid_login">无效的登录: %1$s</string>
+    <string name="error_sync">同步失败：%1$s</string>
+    <string name="error_invalid_login">无效的登录：%1$s</string>
     <string name="error_json">服务器上的笔记应用是否启用？</string>
     <string name="error_io">与服务器连接中断</string>
     <string name="error_no_network">没有网络连接</string>
-    <string name="error_server">URL/服务器错误</string>
+    <string name="error_server">URL 或服务器错误</string>
     <string name="error_url_malformed">错误的服务器地址</string>
     <string name="error_username_password_invalid">用户名或密码错误</string>
 
@@ -84,20 +84,20 @@
 
     <!-- About -->
     <string name="about_version_title">版本</string>
-    <string name="about_version">你正在使用&lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">您正在使用&lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">维护者</string>
     <string name="about_developers_title">开发者</string>
     <string name="about_translators_title">翻译人员</string>
     <string name="about_translators_transifex">Nextcloud 社区在 &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">测试人员</string>
     <string name="about_source_title">源代码</string>
-    <string name="about_source">此项目托管在 GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">此项目托管在 GitHub：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">问题</string>
-    <string name="about_issues">您可以在 GitHub issue tracker 上报告 bug, 改进建议以及新的特性需求: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">您可以在 GitHub issue tracker 上报告 bug，改进建议以及新的特性需求：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">翻译</string>
-    <string name="about_translate">在 Transifex 上加入 Nextcloud 团队并帮助我们翻译这个应用: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">在 Transifex 上加入 Nextcloud 团队并帮助我们翻译这个应用：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">应用授权</string>
-    <string name="about_app_license">此程序通过GNU通用公共许可证V3+授权。</string>
+    <string name="about_app_license">此程序通过 GNU 通用公共许可证 V3+ 授权。</string>
     <string name="about_app_license_button">查看授权</string>
     <string name="about_icons_disclaimer_title">图标</string>
     <string name="about_icons_disclaimer">&lt;p>原创图标来自 %1$s&lt;/p>&lt;p>本应用中使用的其他图标来自 Google Inc. 基于创作共用协议提供的 &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a>.&lt;/p></string>
@@ -111,7 +111,7 @@
     <string name="widget_single_note_title">单个便笺</string>
     <string name="widget_single_note_placeholder_tv">未找到笔记</string>
     <string name="widget_create_note">创建笔记</string>
-    <string name="widget_not_logged_in">请在使用此小部件之前登录Notes</string>
+    <string name="widget_not_logged_in">请在使用此小部件之前登录 Notes</string>
     <string name="widget_entry_fav_contentDescription">标星项目为收藏</string>
     <string name="widget_app_launcher_contentDescription">启动应用程序</string>
 
