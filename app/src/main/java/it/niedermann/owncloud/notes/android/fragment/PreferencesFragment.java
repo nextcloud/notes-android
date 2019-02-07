@@ -37,7 +37,7 @@ public class PreferencesFragment extends PreferenceFragment {
             Boolean darkTheme = (Boolean) newValue;
             Notes.setAppTheme(darkTheme);
             getActivity().setResult(Activity.RESULT_OK);
-            getActivity().finish();
+            getActivity().recreate();
             return true;
         });
 
