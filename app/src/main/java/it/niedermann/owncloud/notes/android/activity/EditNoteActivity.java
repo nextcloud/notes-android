@@ -5,14 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.Calendar;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
@@ -24,6 +24,8 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener {
 
+    private static final String INTENT_GOOGLE_ASSISTANT = "com.google.android.gm.action.AUTO_SEND";
+    private static final String MIMETYPE_TEXT_PLAIN = "text/plain";
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_CATEGORY = "category";
 
@@ -138,7 +140,11 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         }
 
         String content = "";
-        if (Intent.ACTION_SEND.equals(intent.getAction()) && "text/plain".equals(intent.getType())) {
+        if (
+                MIMETYPE_TEXT_PLAIN.equals(intent.getType()) &&
+                        (Intent.ACTION_SEND.equals(intent.getAction()) ||
+                                INTENT_GOOGLE_ASSISTANT.equals(intent.getAction()))
+                ) {
             content = intent.getStringExtra(Intent.EXTRA_TEXT);
         }
 
@@ -199,7 +205,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(note.getTitle());
-            if(!note.getCategory().isEmpty()) {
+            if (!note.getCategory().isEmpty()) {
                 actionBar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
         }
