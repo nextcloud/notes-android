@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.util;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
+import android.util.SparseIntArray;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +25,23 @@ public class StyleCallback implements ActionMode.Callback {
         MenuInflater inflater = mode.getMenuInflater();
         inflater.inflate(R.menu.style, menu);
         menu.removeItem(android.R.id.selectAll);
+
+        SparseIntArray styleFormatMap = new SparseIntArray();
+        styleFormatMap.append(R.id.bold, Typeface.BOLD);
+        styleFormatMap.append(R.id.italic, Typeface.ITALIC);
+
+        MenuItem item;
+        CharSequence title;
+        SpannableStringBuilder ssb;
+
+        for (int i = 0; i < styleFormatMap.size(); i++) {
+            item = menu.findItem(styleFormatMap.keyAt(i));
+            title = item.getTitle();
+            ssb = new SpannableStringBuilder(title);
+            ssb.setSpan(new StyleSpan(styleFormatMap.valueAt(i)), 0, title.length(), 0);
+            item.setTitle(ssb);
+        }
+
         return true;
     }
 
@@ -40,7 +58,7 @@ public class StyleCallback implements ActionMode.Callback {
         final String markdown;
 
 
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.bold:
                 markdown = "**";
                 if (hasAlreadyMarkdown(start, end, markdown)) {
@@ -49,6 +67,7 @@ public class StyleCallback implements ActionMode.Callback {
                     this.addMarkdown(ssb, start, end, markdown, Typeface.BOLD);
                 }
                 editText.setText(ssb);
+                editText.setSelection(end + markdown.length() * 2);
                 break;
             case R.id.italic:
                 markdown = "*";
@@ -58,6 +77,7 @@ public class StyleCallback implements ActionMode.Callback {
                     this.addMarkdown(ssb, start, end, markdown, Typeface.ITALIC);
                 }
                 editText.setText(ssb);
+                editText.setSelection(end + markdown.length() * 2);
                 break;
             case R.id.link:
                 ssb.insert(end, "]()");
@@ -82,9 +102,10 @@ public class StyleCallback implements ActionMode.Callback {
     }
 
     private void removeMarkdown(SpannableStringBuilder ssb, int start, int end, String markdown) {
-        ssb.delete(start - markdown.length(), start);
-        ssb.delete(end - markdown.length(), end);
-        ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
+        // FIXME disabled, because it does not work properly and might cause data loss
+        // ssb.delete(start - markdown.length(), start);
+        // ssb.delete(end - markdown.length(), end);
+        // ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
     }
 
     private void addMarkdown(SpannableStringBuilder ssb, int start, int end, String markdown, int typeface) {
