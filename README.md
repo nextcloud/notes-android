@@ -26,10 +26,10 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 * In-note search ([#106](https://github.com/stefan-niedermann/nextcloud-notes/issues/106))
 * Render MarkDown (using [RxMarkdown](https://github.com/yydcdut/RxMarkdown))
 * Translated in many languages on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
+* Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))
 
 ## :checkered_flag: Planned features
 * Toggle checkboxes in view mode ([#451](https://github.com/stefan-niedermann/nextcloud-notes/issues/451))
-* Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))
 * Trashbin ([#238](https://github.com/stefan-niedermann/nextcloud-notes/issues/238))
 
 ## :family: Join the team
