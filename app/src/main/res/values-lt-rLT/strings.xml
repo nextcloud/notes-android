@@ -10,6 +10,7 @@
     <string name="action_search">Paieška</string>
     <string name="action_create_save">Įrašyti</string>
     <string name="simple_cancel">Atsisakyti</string>
+    <string name="simple_edit">Taisyti</string>
     <string name="action_edit_save">Įrašyti</string>
     <string name="action_edit_saving">Įrašoma &#8230;</string>
     <string name="action_edit_saved">Įrašyta</string>
@@ -111,6 +112,9 @@
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Sukurti naują užrašą</string>
+
+    <string name="pref_value_theme_light">Šviesi</string>
+    <string name="pref_value_theme_dark">Tamsi</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

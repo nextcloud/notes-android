@@ -15,8 +15,9 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :eyes: Screenshots
 
-![Screenshot of list view](/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png)
-![Screenshot of edit view](/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png)
+| Navi | List View | Edit Mode |
+| :--: | :--: | :--: |
+| ![Screenshot of categories in sidebar](/fastlane/metadata/android/en-US/images/phoneScreenshots/5.png) | ![Screenshot of list view](/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Screenshot of edit view](/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) |
 
 ## :rocket: Features
 * List, create, edit, share, search and delete notes
@@ -26,10 +27,10 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 * In-note search ([#106](https://github.com/stefan-niedermann/nextcloud-notes/issues/106))
 * Render MarkDown (using [RxMarkdown](https://github.com/yydcdut/RxMarkdown))
 * Translated in many languages on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
+* Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))
 
 ## :checkered_flag: Planned features
 * Toggle checkboxes in view mode ([#451](https://github.com/stefan-niedermann/nextcloud-notes/issues/451))
-* Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))
 * Trashbin ([#238](https://github.com/stefan-niedermann/nextcloud-notes/issues/238))
 
 ## :family: Join the team

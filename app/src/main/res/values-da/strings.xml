@@ -7,11 +7,15 @@
     <string name="label_favorites">Foretrukne</string>
     <string name="action_create">Ny note</string>
     <string name="action_settings">Indstillinger</string>
+    <string name="action_trashbin">Slettede noter</string>
     <string name="action_search">Søg</string>
     <string name="action_create_save">Gem</string>
+    <string name="simple_cancel">Annuller</string>
+    <string name="simple_edit">Rediger</string>
     <string name="action_edit_save">Gem</string>
     <string name="action_edit_saving">Gemmer &#8230;</string>
     <string name="action_edit_saved">Gemt</string>
+    <string name="simple_about">Om</string>
     <string name="action_select_note">Vælg note</string>
     <string name="action_note_deleted">Note slettet</string>
     <string name="action_note_restored">Note gendannet</string>
@@ -27,12 +31,16 @@
     <string name="menu_share">Del</string>
     <string name="menu_about">Om</string>
 
+    <string name="change_category_title">Vælg en kategori</string>
+
     <string name="listview_updated_today">I dag</string>
     <string name="listview_updated_yesterday">I går</string>
     <string name="listview_updated_this_week">Denne uge</string>
     <string name="listview_updated_this_month">Denne måned</string>
     <string name="listview_updated_earlier">Tidligere</string>
 
+    <!-- Settings -->
+    <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Server adresse</string>
     <string name="settings_url_check_description">Viser hvorvidt  adressen kan blive pinget.</string>
     <string name="settings_url_warn_http">Advarsel: \"http\" er ikke sikker, benyt venligst \"https\".</string>
@@ -43,6 +51,8 @@
     <string name="settings_submit">Tilslut</string>
     <string name="settings_submitting">Tilslutter &#8230;</string>
     <string name="settings_note_mode">Display tilstand for noter</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_cert_category">Håndter certifikater</string>
     <string name="settings_cert_trust_system">Stol på systemcertifikater</string>
     <string name="settings_cert_trust_system_on">System og bruger tilføjede CA\'er stoles der på (anbefalet)</string>
     <string name="settings_cert_trust_system_off">System og bruger tilføjede CA\'er stoles der ikke på</string>
@@ -102,12 +112,16 @@
     <string name="widget_single_note_placeholder_tv">Note ikke fundet</string>
     <string name="widget_create_note">Opret note</string>
     <string name="widget_not_logged_in">Log venligst ind i Notes før du bruger denne widget</string>
+    <string name="widget_entry_fav_contentDescription">Stjerne ikon bruges til at markere som favorit</string>
     <string name="widget_app_launcher_contentDescription">Åbner app</string>
 
     <string name="activity_select_single_note">Vælg note</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Opret en ny note</string>
+
+    <string name="pref_value_theme_light">Lys</string>
+    <string name="pref_value_theme_dark">Mørk</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
