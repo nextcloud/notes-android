@@ -312,6 +312,7 @@ public class SettingsActivity extends AppCompatActivity {
                                     handler.proceed();
                                     accepted[0] = true;
                                 }
+
                                 @Override
                                 public void reject() {
                                     Log.d("Note", "cert rejected");
@@ -333,17 +334,14 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         // show snackbar after 60s to switch back to old login method
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Snackbar.make(webView, R.string.fallback_weblogin_text, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.fallback_weblogin_back, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                initLegacyLogin(field_url.getText().toString());
-                            }
-                        }).show();
-            }
+        new Handler().postDelayed(() -> {
+            Snackbar.make(webView, R.string.fallback_weblogin_text, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.fallback_weblogin_back, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initLegacyLogin(field_url.getText().toString());
+                    }
+                }).show();
         }, 60 * 1000);
     }
 
@@ -468,7 +466,7 @@ public class SettingsActivity extends AppCompatActivity {
         protected void onPostExecute(Boolean o) {
             if (o) {
                 Drawable actionDoneDark = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_check_grey600_24dp);
-                actionDoneDark.setBounds( 0, 0, actionDoneDark.getIntrinsicWidth(), actionDoneDark.getIntrinsicHeight() );
+                actionDoneDark.setBounds(0, 0, actionDoneDark.getIntrinsicWidth(), actionDoneDark.getIntrinsicHeight());
                 field_url.setCompoundDrawables(null, null, actionDoneDark, null);
             } else {
                 field_url.setCompoundDrawables(null, null, null, null);
