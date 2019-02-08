@@ -67,8 +67,8 @@ public class NoteServerSyncHelper {
 
     // Track network connection changes using a BroadcastReceiver
     private boolean networkConnected = false;
-    private String syncOnlyOnWifiKey = "";
-    private boolean syncOnlyOnWifi = false;
+    private String syncOnlyOnWifiKey;
+    private boolean syncOnlyOnWifi;
 
     private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
         @Override
