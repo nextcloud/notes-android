@@ -13,7 +13,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 [![Donate with PayPal](https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K7HVLE6J7SXXA)
 [![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/stefan-niedermann/donate)
 
-## :eyes: Screenshots#
+## :eyes: Screenshots
 
 | Navi | List View | Edit Mode |
 | :--: | :--: | :--: |
