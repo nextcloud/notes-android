@@ -70,6 +70,13 @@ public class NoteServerSyncHelper {
     private String syncOnlyOnWifiKey;
     private boolean syncOnlyOnWifi;
 
+    private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = (SharedPreferences prefs, String key) -> {
+        if (syncOnlyOnWifiKey.equals(key)) {
+            syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
+            updateNetworkStatus();
+        }
+    };
+
     private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -120,12 +127,6 @@ public class NoteServerSyncHelper {
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.appContext);
-        SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = (SharedPreferences changedPrefs, String key) -> {
-            if (syncOnlyOnWifiKey.equals(key)) {
-                syncOnlyOnWifi = changedPrefs.getBoolean(syncOnlyOnWifiKey, false);
-                updateNetworkStatus();
-            }
-        };
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
         syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
