@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.util;
 
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.util.SparseIntArray;
 import android.view.ActionMode;
@@ -80,12 +81,22 @@ public class StyleCallback implements ActionMode.Callback {
                 editText.setSelection(end + markdown.length() * 2);
                 break;
             case R.id.link:
-                ssb.insert(end, "]()");
-                ssb.insert(start, "[");
+                boolean textToFormatIsLink = TextUtils.indexOf(editText.getText().subSequence(start, end), "http") == 0;
+                if(textToFormatIsLink) {
+                    ssb.insert(end, ")");
+                    ssb.insert(start, "[](");
+                } else {
+                    ssb.insert(end, "]()");
+                    ssb.insert(start, "[");
+                }
                 end++;
                 ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
                 editText.setText(ssb);
-                editText.setSelection(end + 2); // after <end>](
+                if(textToFormatIsLink) {
+                    editText.setSelection(start + 1);
+                } else {
+                    editText.setSelection(end + 2); // after <end>](
+                }
                 return true;
         }
         return false;
