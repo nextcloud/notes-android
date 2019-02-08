@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.SwipeRefreshLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swiperefreshlayout"
     android:layout_width="match_parent"
@@ -8,22 +8,22 @@
     android:background="@color/bg_normal"
     tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
     tools:ignore="MergeRootFrame">
-<ScrollView
-    android:id="@+id/editContentContainer"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="it.niedermann.owncloud.notes.android.activity.EditNoteActivity">
 
-    <com.yydcdut.rxmarkdown.RxMDTextView
-        android:id="@+id/single_note_content"
+    <ScrollView
+        android:id="@+id/editContentContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/fg_default"
-        android:background="@color/bg_normal"
-        android:textIsSelectable="true" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="it.niedermann.owncloud.notes.android.activity.EditNoteActivity">
 
-</ScrollView>
-</android.support.v4.widget.SwipeRefreshLayout>
+        <com.yydcdut.rxmarkdown.RxMDTextView
+            android:id="@+id/single_note_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_normal"
+            android:padding="16dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/fg_default"
+            android:textIsSelectable="true" />
+    </ScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
