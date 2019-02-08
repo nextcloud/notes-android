@@ -67,6 +67,15 @@ public class NoteServerSyncHelper {
 
     // Track network connection changes using a BroadcastReceiver
     private boolean networkConnected = false;
+    boolean syncOnlyOnWifi = false;
+
+    private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = (SharedPreferences prefs, String key) -> {
+        if ("wifiOnly".equals(key)) {
+            syncOnlyOnWifi = prefs.getBoolean("wifiOnly", false);
+            updateNetworkStatus();
+        }
+    };
+
     private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -114,6 +123,11 @@ public class NoteServerSyncHelper {
 
         // Registers BroadcastReceiver to track network connection changes.
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.appContext);
+        prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
+        syncOnlyOnWifi = prefs.getBoolean("wifiOnly", false);
+
         updateNetworkStatus();
         // bind to certifciate service to block sync attempts if service is not ready
         appContext.bindService(new Intent(appContext, CustomCertService.class), certService, Context.BIND_AUTO_CREATE);
@@ -142,16 +156,7 @@ public class NoteServerSyncHelper {
      * @return true if sync is possible, otherwise false.
      */
     public boolean isSyncPossible() {
-        boolean onlyWifiGuard = true;
-        if(
-            PreferenceManager.getDefaultSharedPreferences(this.appContext)
-                .getBoolean("wifiOnly", false) &&
-                !((ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE)).getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected()) {
-            onlyWifiGuard = false;
-            Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network available, but no wifi.");
-        }
-
-        return networkConnected && isConfigured(appContext) && cert4androidReady && onlyWifiGuard;
+        return networkConnected && isConfigured(appContext) && cert4androidReady;
     }
 
     public CustomCertManager getCustomCertManager() {
@@ -219,9 +224,18 @@ public class NoteServerSyncHelper {
     private void updateNetworkStatus() {
         ConnectivityManager connMgr = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+
         if (activeInfo != null && activeInfo.isConnected()) {
-            Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network connection established.");
-            networkConnected = true;
+            networkConnected =
+                    !syncOnlyOnWifi || ((ConnectivityManager) appContext
+                            .getSystemService(Context.CONNECTIVITY_SERVICE))
+                            .getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+
+            if (networkConnected) {
+                Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network connection established.");
+            } else {
+                Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network connected, but not used because only synced on wifi.");
+            }
         } else {
             networkConnected = false;
             Log.d(NoteServerSyncHelper.class.getSimpleName(), "No network connection.");

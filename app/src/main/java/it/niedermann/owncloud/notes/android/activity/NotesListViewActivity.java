@@ -10,20 +10,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import androidx.annotation.Nullable;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ActionMode;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,10 +19,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -389,7 +391,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         listView.setLayoutManager(new LinearLayoutManager(this));
         ItemTouchHelper touchHelper = new ItemTouchHelper(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
             }
 
@@ -401,7 +403,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
              * @return 0 if section, otherwise super()
              */
             @Override
-            public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
                 if (viewHolder instanceof ItemAdapter.SectionViewHolder) return 0;
                 return super.getSwipeDirs(recyclerView, viewHolder);
             }
@@ -413,8 +415,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
              * @param direction  int
              */
             @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                switch(direction) {
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                switch (direction) {
                     case ItemTouchHelper.LEFT: {
                         final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
                         db.deleteNoteAndSync((dbNote).getId());
@@ -444,16 +446,16 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
 
             @Override
-            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
                 ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
                 // show swipe icon on the side
-                noteViewHolder.showSwipe(dX>0);
+                noteViewHolder.showSwipe(dX > 0);
                 // move only swipeable part of item (not leave-behind)
                 getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.noteSwipeable, dX, dY, actionState, isCurrentlyActive);
             }
 
             @Override
-            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
                 getDefaultUIUtil().clearView(((ItemAdapter.NoteViewHolder) viewHolder).noteSwipeable);
             }
         });
@@ -463,6 +465,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private void refreshLists() {
         refreshLists(false);
     }
+
     private void refreshLists(final boolean scrollToTop) {
         String subtitle = "";
         if (navigationSelection.category != null) {
@@ -487,7 +490,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             public void onNotesLoaded(List<Item> notes, boolean showCategory) {
                 adapter.setShowCategory(showCategory);
                 adapter.setItemList(notes);
-                if(scrollToTop) {
+                if (scrollToTop) {
                     listView.scrollToPosition(0);
                 }
             }
@@ -522,6 +525,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             int oldVisibility = -1;
+
             @Override
             public void onGlobalLayout() {
                 int currentVisibility = searchEditFrame.getVisibility();
@@ -582,8 +586,17 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             if (resultCode == RESULT_OK) {
                 //not need because of db.synchronisation in createActivity
 
-                DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
-                adapter.add(createdNote);
+                Bundle bundle = data.getExtras();
+                if (bundle != null) {
+                    DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
+                    if (createdNote != null) {
+                        adapter.add(createdNote);
+                    } else {
+                        Log.w(NotesListViewActivity.class.getSimpleName(), "createdNote is null");
+                    }
+                } else {
+                    Log.w(NotesListViewActivity.class.getSimpleName(), "bundle is null");
+                }
             }
             listView.scrollToPosition(0);
         } else if (requestCode == server_settings) {
@@ -602,8 +615,13 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private void updateUsernameInDrawer() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
-        String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS).replace("https://", "").replace("http://", "");
-        if(!SettingsActivity.DEFAULT_SETTINGS.equals(username) && !SettingsActivity.DEFAULT_SETTINGS.equals(url)) {
+        String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
+        if (url != null) {
+            url = url.replace("https://", "").replace("http://", "");
+        } else {
+            Log.w(NotesListViewActivity.class.getSimpleName(), "url is null");
+        }
+        if (!SettingsActivity.DEFAULT_SETTINGS.equals(username) && !SettingsActivity.DEFAULT_SETTINGS.equals(url)) {
             this.account.setText(username + "@" + url.substring(0, url.length() - 1));
         }
     }
