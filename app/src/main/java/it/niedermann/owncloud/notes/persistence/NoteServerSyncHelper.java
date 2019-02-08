@@ -67,14 +67,8 @@ public class NoteServerSyncHelper {
 
     // Track network connection changes using a BroadcastReceiver
     private boolean networkConnected = false;
-    boolean syncOnlyOnWifi = false;
-
-    private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = (SharedPreferences prefs, String key) -> {
-        if ("wifiOnly".equals(key)) {
-            syncOnlyOnWifi = prefs.getBoolean("wifiOnly", false);
-            updateNetworkStatus();
-        }
-    };
+    private String syncOnlyOnWifiKey = "";
+    private boolean syncOnlyOnWifi = false;
 
     private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
         @Override
@@ -114,6 +108,7 @@ public class NoteServerSyncHelper {
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.dbHelper = db;
         this.appContext = db.getContext().getApplicationContext();
+        this.syncOnlyOnWifiKey = appContext.getResources().getString(R.string.pref_key_wifi_only);
         new Thread() {
             @Override
             public void run() {
@@ -125,8 +120,14 @@ public class NoteServerSyncHelper {
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.appContext);
+        SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = (SharedPreferences changedPrefs, String key) -> {
+            if (syncOnlyOnWifiKey.equals(key)) {
+                syncOnlyOnWifi = changedPrefs.getBoolean(syncOnlyOnWifiKey, false);
+                updateNetworkStatus();
+            }
+        };
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
-        syncOnlyOnWifi = prefs.getBoolean("wifiOnly", false);
+        syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
         updateNetworkStatus();
         // bind to certifciate service to block sync attempts if service is not ready
