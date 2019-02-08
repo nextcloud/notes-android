@@ -11,9 +11,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String SETTINGS_KEY_LAST_MODIFIED = "notes_last_modified";
     public static final String DEFAULT_SETTINGS = "";
     public static final int CREDENTIALS_CHANGED = 3;
-    
+
     public static final String LOGIN_URL_DATA_KEY_VALUE_SEPARATOR = ":";
     public static final String WEBDAV_PATH_4_0_AND_LATER = "/remote.php/webdav";
 
@@ -83,7 +83,7 @@ public class SettingsActivity extends AppCompatActivity {
     @BindView(R.id.settings_url_warn_http)
     View urlWarnHttp;
     private String old_password = "";
-    
+
     private WebView webView;
 
     private boolean first_run = false;
@@ -129,8 +129,14 @@ public class SettingsActivity extends AppCompatActivity {
 
         handleSubmitButtonEnabled();
     }
-    
+
     private void setupListener() {
+        field_url.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                new URLValidatorAsyncTask().execute(NotesClientUtil.formatURL(field_url.getText().toString()));
+            }
+        });
         field_url.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -138,15 +144,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String url = field_url.getText().toString().trim();
-
-                if (!url.endsWith("/")) {
-                    url += "/";
-                }
-                if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                    url = "https://" + url;
-                }
-                new URLValidatorAsyncTask().execute(url);
+                String url = NotesClientUtil.formatURL(field_url.getText().toString());
 
                 if (NotesClientUtil.isHttp(url)) {
                     urlWarnHttp.setVisibility(View.VISIBLE);
@@ -278,7 +276,7 @@ public class SettingsActivity extends AppCompatActivity {
         Map<String, String> headers = new HashMap<>();
         headers.put("OCS-APIREQUEST", "true");
 
-        
+
         webView.loadUrl(normalizeUrlSuffix(field_url.getText().toString()) + "index.php/login/flow", headers);
 
         webView.setWebViewClient(new WebViewClient() {
@@ -360,7 +358,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (loginUrlInfo != null) {
             String url = normalizeUrlSuffix(loginUrlInfo.serverAddress);
 
-            new LoginValidatorAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url, loginUrlInfo.username, 
+            new LoginValidatorAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url, loginUrlInfo.username,
                     loginUrlInfo.password);
         }
     }
@@ -413,14 +411,14 @@ public class SettingsActivity extends AppCompatActivity {
         if (url.toLowerCase(Locale.ROOT).endsWith(WEBDAV_PATH_4_0_AND_LATER)) {
             return url.substring(0, url.length() - WEBDAV_PATH_4_0_AND_LATER.length());
         }
-        
+
         if (!url.endsWith("/")) {
             return url + "/";
         }
 
         return url;
     }
-    
+
     private void initLegacyLogin(String oldUrl) {
         useWebLogin = false;
 
@@ -429,7 +427,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         setupListener();
-        
+
         field_url.setText(oldUrl);
         username_wrapper.setVisibility(View.VISIBLE);
         password_wrapper.setVisibility(View.VISIBLE);

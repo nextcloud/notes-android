@@ -1,10 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <string name="app_name">Notes</string>
+    <string name="no_notes">Ni še dodane nobene zabeležke</string>
+    <string name="label_all_notes">Vse zabeležke</string>
+    <string name="label_favorites">Priljubljene</string>
+    <string name="action_create">Nova zabeležka</string>
+    <string name="action_settings">Nastavitve</string>
+    <string name="action_trashbin">Izbrisane zabeležke</string>
+    <string name="action_search">Poišči</string>
+    <string name="action_create_save">Shrani</string>
+    <string name="simple_cancel">Prekliči</string>
+    <string name="simple_edit">Uredi</string>
+    <string name="action_edit_save">Shrani</string>
+    <string name="action_edit_saving">Poteka shranjevanje&#8230;</string>
+    <string name="action_edit_saved">Shranjeno</string>
+    <string name="simple_about">O programu</string>
+    <string name="action_select_note">Izbor zabeležke</string>
+    <string name="action_note_deleted">Zabeležka je izbrisana</string>
+    <string name="action_note_restored">Zabeležka je obnovljena</string>
+    <string name="action_undo">Razveljavi</string>
+    <string name="action_drawer_open">odpri iskalnik</string>
+    <string name="action_drawer_close">zapri iskalnik</string>
+    <string name="action_recent">Nedavno</string>
+    <string name="action_uncategorized">Neopredeljeno</string>
+    <string name="menu_delete">Izbriši</string>
+    <string name="menu_change_category">Kategorija</string>
+    <string name="menu_favorite">Priljubljena</string>
+    <string name="menu_preview">Predogled</string>
+    <string name="menu_share">Souporaba</string>
+    <string name="menu_about">O programu</string>
+
+    <string name="change_category_title">Izbor kategorije</string>
+
+    <string name="listview_updated_today">Danes</string>
+    <string name="listview_updated_yesterday">Včeraj</string>
+    <string name="listview_updated_this_week">Zadnji teden</string>
+    <string name="listview_updated_this_month">Zadnji mesec</string>
+    <string name="listview_updated_earlier">Starejše</string>
+
+    <!-- Settings -->
+    <string name="settings_server_settings">Račun</string>
+    <string name="settings_url">Naslov strežnika</string>
+    <string name="settings_url_check_description">Pokaže, ali je naslov mogoče pripeti.</string>
+    <string name="settings_url_warn_http">OPOZORILO: protokol »http« ni varen. Priporočljivo je uporabiti protokol »https«.</string>
+    <string name="settings_username">Uporabniško ime</string>
+    <string name="settings_password">Geslo</string>
+    <string name="settings_password_unchanged">Geslo (ni spremenjeno)</string>
+    <string name="settings_password_check_description">Pokaže, ali so poverila pravilna.</string>
+    <string name="settings_submit">Poveži</string>
+    <string name="settings_submitting">Poteka vzpostavljanje povezave z&#8230;</string>
+    <string name="settings_note_mode">Prikazni način za zabeležke</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_cert_category">Upravljanje s potrdili</string>
+    <string name="settings_cert_trust_system">Zaupaj sistemskim potrdilom</string>
+    <string name="settings_cert_trust_system_on">Sistemska in s strani uporabnika dodana potrdila CA bodo obravnavana kot varna (priporočljivo)</string>
+    <string name="settings_cert_trust_system_off">Sistemska in s strani uporabnika dodana potrdila CA ne bodo obravnavana kot varna</string>
+    <string name="settings_cert_reset">Ponastavi (ne)zaupanja vredna potrdila</string>
+    <string name="settings_cert_reset_summary">Ponastavi zaupanje vseh uporabniških potrdil</string>
+    <string name="settings_cert_reset_toast">Vsa uporabniška potrdila so počiščena.</string>
+
+    <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Beležka Notes – varnost povezave</string>
+    <string name="trust_certificate_unknown_certificate_found">Program je zaznal uporabo neznanega potrdila. Ali želite potrditi zaupanje v potrdilo?</string>
+
+    <!-- Network -->
+    <string name="network_connecting">Poteka vzpostavljanje povezave ...</string>
+    <string name="network_connected">Povezano</string>
+    <string name="network_disconnected">Na voljo ni nobenega omrežja</string>
+
+    <!-- Error -->
+    <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
+    <string name="error_invalid_login">Neveljavna prijava: %1$s</string>
+    <string name="error_json">Ali je program Beležka Notes nameščen na strežniku?</string>
+    <string name="error_io">povezava s strežnikom je okvarjena</string>
+    <string name="error_no_network">ni omrežne povezave</string>
+    <string name="error_server">naslov/strežnik je naveden napačno</string>
+    <string name="error_url_malformed">Napačen naslov strežnika</string>
+    <string name="error_username_password_invalid">Napačno uporabniško ime ali geslo</string>
+
+    <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Nastavitve</string>
+
+    <!-- About -->
+    <string name="about_version_title">Različica</string>
+    <string name="about_version">Trenutno je v uporabi &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Vzdrževalec</string>
+    <string name="about_developers_title">Razvijalci</string>
+    <string name="about_translators_title">Prevajalci</string>
+    <string name="about_translators_transifex">Skupnost Nextcloud na &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">Preizkuševalci</string>
+    <string name="about_source_title">Izvorna koda</string>
+    <string name="about_source">Projekt uporablja okolje GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Odzivi</string>
+    <string name="about_issues">Poročila o hroščih, predloge za izboljšave in prošnje za nove programske zmožnosti je mogoče objaviti na sledilniku GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Prevodi</string>
+    <string name="about_translate">Za urejanje prevodov Projekta Nextcloud se uporablja spletno okolje Transifex: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Dovoljenje za uporabo</string>
+    <string name="about_app_license">Program je objavljen pod pogoji Splošnega javnega dovoljenja (GNU GPL) različice 3 ali novejše.</string>
+    <string name="about_app_license_button">Podrobno besedilo dovoljenja</string>
+    <string name="about_icons_disclaimer_title">Ikone</string>
+    <string name="about_icons_disclaimer">&lt;p>Ikono programa je ustvaril %1$s&lt;/p>&lt;p>Vse ostale ikone, uporabljene v programu, so del zbirke  &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a>, ki jo je pod pogoji dovoljenja Apache 2.0 objavilo podjetje Google Inc.&lt;/p></string>
+    <string name="about_credits_tab_title">Zasluge</string>
+    <string name="about_contribution_tab_title">Skupnost</string>
+    <string name="about_license_tab_title">Dovoljenje</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Seznam zabeležk</string>
+    <string name="widget_note_list_placeholder">Ni zabeležk</string>
+    <string name="widget_single_note_title">Samostojna zabeležka</string>
+    <string name="widget_single_note_placeholder_tv">Zabeležke ni mogoče najti</string>
+    <string name="widget_create_note">Ustvari zabeležko</string>
+    <string name="widget_not_logged_in">Pred uporabo gradnika se je treba prijaviti v program Beležka Notes</string>
+    <string name="widget_entry_fav_contentDescription">Zvezdica označuje priljubljene predmete</string>
+    <string name="widget_app_launcher_contentDescription">Zažene program</string>
+
+    <string name="activity_select_single_note">Izbor zabeležke</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Ustvari novo zabeležko</string>
+
+    <string name="pref_value_theme_light">Svetla</string>
+    <string name="pref_value_theme_dark">Temna</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Odpre se v urejevalnem načinu</item>
+        <item>Odpre se v predogledu</item>
+        <item>Zapomni si zadnjo izbiro</item>
+    </string-array>
+
     <!-- Plurals -->
     <plurals name="ab_selected">
-        <item quantity="one">%d izbran(a)</item>
-        <item quantity="two">%d izbrana(i)</item>
-        <item quantity="few">%d izbranih</item>
+        <item quantity="one">%d izbrana</item>
+        <item quantity="two">%d izbrani</item>
+        <item quantity="few">%d izbrane</item>
         <item quantity="other">%d izbranih</item>
     </plurals>
 </resources>

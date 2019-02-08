@@ -1,7 +1,9 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.preference.PreferenceManager;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,10 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
-import com.yydcdut.rxmarkdown.syntax.text.TextFactory;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -53,23 +56,27 @@ public class NotePreviewFragment extends BaseNoteFragment {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, getView());
 
+        setActiveTextView(noteContent);
+
         String content = note.getContent();
-        /*
-         * The following replaceAll adds links ()[] to all URLs that are not in an existing link.
-         * This regular expression consists of three parts:
-         * 1. (?<![(])
-         *    negative look-behind: no opening bracket "(" directly before the URL
-         *    This prevents replacement in target part of Markdown link: [](URL)
-         * 2. (https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])
-         *    URL pattern: matches all addresses beginning with http:// or https://
-         * 3. (?![^\\[]*\\])
-         *    negative look-ahead: no closing bracket "]" after the URL (otherwise there have to be an opening bracket "[" before)
-         *    This prevents replacement in label part of Markdown link: [...URL...]()
-         */
-        content = content.replaceAll("(?<![(])(https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])(?![^\\[]*\\])", "[$1]($1)");
 
         RxMarkdown.with(content, getActivity())
-                .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()))
+                .config(
+                        MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
+                                /*.setOnTodoClickCallback(new OnTodoClickCallback() {
+                                        @Override
+                                        public CharSequence onTodoClicked(View view, String line, int lineNumber) {
+                                        String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
+                                        if(lines.length >= lineNumber) {
+                                            lines[lineNumber] = line;
+                                        }
+                                        noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
+                                        saveNote(null);
+                                        return line;
+                                    }
+                                }
+                            )*/.build()
+                )
                 .factory(TextFactory.create())
                 .intoObservable()
                 .subscribeOn(Schedulers.computation())
@@ -91,6 +98,11 @@ public class NotePreviewFragment extends BaseNoteFragment {
                 });
         noteContent.setText(content);
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        if (sp.getBoolean("font", false)) {
+            noteContent.setTypeface(Typeface.MONOSPACE);
+        }
     }
 
     @Override

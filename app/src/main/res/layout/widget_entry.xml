@@ -16,7 +16,7 @@
         android:paddingLeft="@dimen/widget_note_list_inner_padding"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
         android:paddingRight="@dimen/widget_note_list_outer_padding"
-        android:src="@drawable/ic_star_grey600_24dp"
+        android:src="@drawable/ic_star_yellow_24dp"
         android:contentDescription="@string/widget_entry_fav_contentDescription" />
 
     <TextView
@@ -28,10 +28,9 @@
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
         android:paddingRight="@dimen/widget_note_list_outer_padding"
         android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
         android:layout_weight="1"
-        android:textColor="@color/black"
-        android:lines="1"
-        android:ellipsize="end" />
+        android:textColor="@color/widget_fg_default"
+        android:ellipsize="end"
+        android:lines="1" />
 
 </LinearLayout>

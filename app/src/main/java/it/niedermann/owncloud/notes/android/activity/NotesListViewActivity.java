@@ -2,31 +2,35 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.support.v7.widget.helper.ItemTouchHelper.SimpleCallback;
+import android.preference.PreferenceManager;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -69,6 +73,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     Toolbar toolbar;
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.account)
+    TextView account;
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.fab_create)
@@ -197,7 +203,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private void setupNavigationList(final String selectedItem) {
         itemRecent = new NavigationAdapter.NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.label_all_notes), null, R.drawable.ic_access_time_grey600_24dp);
-        itemFavorites = new NavigationAdapter.NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_grey600_24dp);
+        itemFavorites = new NavigationAdapter.NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_yellow_24dp);
         adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
@@ -331,10 +337,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void setupNavigationMenu() {
+        final NavigationAdapter.NavigationItem itemTrashbin = new NavigationAdapter.NavigationItem("trashbin", getString(R.string.action_trashbin), null, R.drawable.ic_delete_grey600_24dp);
         final NavigationAdapter.NavigationItem itemSettings = new NavigationAdapter.NavigationItem("settings", getString(R.string.action_settings), null, R.drawable.ic_settings_grey600_24dp);
         final NavigationAdapter.NavigationItem itemAbout = new NavigationAdapter.NavigationItem("about", getString(R.string.simple_about), null, R.drawable.ic_info_outline_grey600_24dp);
 
         ArrayList<NavigationAdapter.NavigationItem> itemsMenu = new ArrayList<>();
+        itemsMenu.add(itemTrashbin);
         itemsMenu.add(itemSettings);
         itemsMenu.add(itemAbout);
 
@@ -347,6 +355,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 } else if (item == itemAbout) {
                     Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
                     startActivityForResult(aboutIntent, about);
+                } else if (item == itemTrashbin) {
+                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url + "index.php/apps/files/?dir=/&view=trashbin")));
                 }
             }
 
@@ -355,6 +367,18 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 onItemClick(item);
             }
         });
+
+
+        this.updateUsernameInDrawer();
+        final NotesListViewActivity that = this;
+        this.account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent settingsIntent = new Intent(that, SettingsActivity.class);
+                startActivityForResult(settingsIntent, server_settings);
+            }
+        });
+
         adapterMenu.setItems(itemsMenu);
         listNavigationMenu.setAdapter(adapterMenu);
     }
@@ -412,7 +436,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     }
                     case ItemTouchHelper.RIGHT: {
                         final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.toggleFavorite(dbNote, null);
+                        db.toggleFavorite(dbNote, syncCallBack);
                         refreshLists();
                         break;
                     }
@@ -493,7 +517,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         final MenuItem item = menu.findItem(R.id.search);
         searchView = (SearchView) item.getActionView();
 
-        final LinearLayout searchEditFrame = searchView.findViewById(android.support.v7.appcompat.R.id
+        final LinearLayout searchEditFrame = searchView.findViewById(R.id
                 .search_edit_frame);
 
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -566,11 +590,21 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             // Create new Instance with new URL and credentials
             db = NoteSQLiteOpenHelper.getInstance(this);
             if (db.getNoteServerSyncHelper().isSyncPossible()) {
+                this.updateUsernameInDrawer();
                 adapter.removeAll();
                 synchronize();
             } else {
                 Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private void updateUsernameInDrawer() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
+        String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS).replace("https://", "").replace("http://", "");
+        if(!SettingsActivity.DEFAULT_SETTINGS.equals(username) && !SettingsActivity.DEFAULT_SETTINGS.equals(url)) {
+            this.account.setText(username + "@" + url.substring(0, url.length() - 1));
         }
     }
 

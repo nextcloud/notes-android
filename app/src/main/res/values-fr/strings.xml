@@ -7,6 +7,7 @@
     <string name="label_favorites">Favoris</string>
     <string name="action_create">Nouvelle note</string>
     <string name="action_settings">Paramètres</string>
+    <string name="action_trashbin">Notes supprimées</string>
     <string name="action_search">Rechercher</string>
     <string name="action_create_save">Sauvegarder</string>
     <string name="simple_cancel">Annuler</string>
@@ -39,7 +40,7 @@
     <string name="listview_updated_earlier">Plus tôt</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Paramètres du compte</string>
+    <string name="settings_server_settings">Compte</string>
     <string name="settings_url">Adresse du serveur</string>
     <string name="settings_url_check_description">Visible si l\'adresse répond aux pings.</string>
     <string name="settings_url_warn_http">ATTENTION : "http" n\'est pas sécurisé. Veuillez utiliser "https".</string>
@@ -51,7 +52,7 @@
     <string name="settings_submitting">Connexion en cours&#8230;</string>
     <string name="settings_note_mode">Mode d\'affichage pour les notes</string>
     <string name="settings_theme_title">Thème</string>
-    <string name="settings_cert_category">Certificats</string>
+    <string name="settings_cert_category">Gérer les certificats</string>
     <string name="settings_cert_trust_system">Faire confiance aux certificats du système</string>
     <string name="settings_cert_trust_system_on">Les Autorités de Certification du système, ainsi que celles ajoutées manuellement seront considérées comme totalement fiables (recommandé)</string>
     <string name="settings_cert_trust_system_off">Les Autorités de Certification du système, ainsi que celles ajoutées manuellement ne seront pas considérées comme fiables</string>
@@ -70,7 +71,7 @@
 
     <!-- Error -->
     <string name="error_sync">Échec de synchronisation : %1$s</string>
-    <string name="error_invalid_login">Détails de connexion incorrects: %1$s</string>
+    <string name="error_invalid_login">Identifiant incorrect : %1$s</string>
     <string name="error_json">Est-ce que l\'application Notes est activée sur le serveur ?</string>
     <string name="error_io">Erreur d\'E/S</string>
     <string name="error_no_network">pas de connexion réseau</string>

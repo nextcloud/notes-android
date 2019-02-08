@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin">
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_url_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:hint="@string/settings_url"
             android:inputType="textUri"
             android:textColor="@color/fg_default" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/settings_url_warn_http"
@@ -35,7 +35,7 @@
         android:textColor="@color/fg_contrast"
         android:visibility="gone" />
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_username_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,9 +48,9 @@
             android:hint="@string/settings_username"
             android:inputType="text"
             android:textColor="@color/fg_default" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/settings_password_wrapper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             android:hint="@string/settings_password"
             android:inputType="textPassword"
             android:textColor="@color/fg_default" />
-    </android.support.design.widget.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/settings_submit"

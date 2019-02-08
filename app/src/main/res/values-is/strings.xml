@@ -7,6 +7,7 @@
     <string name="label_favorites">Eftirlæti</string>
     <string name="action_create">Nýr minnispunktur</string>
     <string name="action_settings">Stillingar</string>
+    <string name="action_trashbin">Eyddir minnispunktar</string>
     <string name="action_search">Leita</string>
     <string name="action_create_save">Vista</string>
     <string name="simple_cancel">Hætta við</string>
@@ -39,7 +40,7 @@
     <string name="listview_updated_earlier">Fyrr</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Stillingar aðgangs</string>
+    <string name="settings_server_settings">Aðgangur</string>
     <string name="settings_url">Vistfang þjóns</string>
     <string name="settings_url_check_description">Sýnir hvort hægt sé að ná sambandi (ping) við vistfangið.</string>
     <string name="settings_url_warn_http">AÐVÖRUN: \"http\" er óöruggt. Endilega nota \"https\".</string>
@@ -51,7 +52,7 @@
     <string name="settings_submitting">Tengist &#8230;</string>
     <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
     <string name="settings_theme_title">Þema</string>
-    <string name="settings_cert_category">Skilríki</string>
+    <string name="settings_cert_category">Sýsla með skilríki</string>
     <string name="settings_cert_trust_system">Treysta skilríkjum kerfis</string>
     <string name="settings_cert_trust_system_on">Vottunaraðilum kerfis og þeim sem notandi bætir við verður treyst (mælt með þessu)</string>
     <string name="settings_cert_trust_system_off">Vottunaraðilum kerfis og þeim sem notandi bætir við verður ekki treyst</string>
