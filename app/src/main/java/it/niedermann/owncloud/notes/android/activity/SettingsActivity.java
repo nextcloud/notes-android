@@ -10,10 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,6 +25,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.io.ByteArrayInputStream;
 import java.net.URLDecoder;
 import java.security.cert.Certificate;
@@ -39,6 +38,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import at.bitfire.cert4android.CustomCertManager;
 import at.bitfire.cert4android.IOnCertificateDecision;
 import butterknife.BindView;
