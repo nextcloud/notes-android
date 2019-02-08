@@ -3,13 +3,17 @@
 
     <string name="app_name">Anteckningar</string>
     <string name="no_notes">Inga anteckningar än</string>
+    <string name="label_favorites">Favoriter</string>
     <string name="action_create">Ny anteckning</string>
     <string name="action_settings">Inställningar</string>
     <string name="action_search">Sök</string>
     <string name="action_create_save">Spara</string>
+    <string name="simple_cancel">Avbryt</string>
+    <string name="simple_edit">Redigera</string>
     <string name="action_edit_save">Spara</string>
     <string name="action_edit_saving">Sparar &#8230;</string>
     <string name="action_edit_saved">Sparad</string>
+    <string name="simple_about">Om</string>
     <string name="action_select_note">Välj anteckning</string>
     <string name="action_note_deleted">Anteckningen raderad</string>
     <string name="action_note_restored">Anteckningen återskapad</string>
@@ -25,6 +29,8 @@
     <string name="menu_share">Dela</string>
     <string name="menu_about">Om</string>
 
+    <string name="change_category_title">Välj en kategori</string>
+
     <string name="listview_updated_today">Idag</string>
     <string name="listview_updated_yesterday">Igår</string>
     <string name="listview_updated_this_week">Denna vecka</string>
@@ -32,7 +38,7 @@
     <string name="listview_updated_earlier">Tidigare</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Kontoinställningar</string>
+    <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Serveradress</string>
     <string name="settings_url_check_description">Visar om adressen kan pingas.</string>
     <string name="settings_url_warn_http">VARNING: \"http\" är osäkert. Vänligen använd \"https\".</string>
@@ -43,7 +49,8 @@
     <string name="settings_submit">Anslut</string>
     <string name="settings_submitting">Ansluter &#8230;</string>
     <string name="settings_note_mode">Visningslägen för Anteckningar</string>
-    <string name="settings_cert_category">Certifikat</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_cert_category">Hantera certifikat</string>
     <string name="settings_cert_trust_system">Lita på systemcertifikat</string>
     <string name="settings_cert_trust_system_on">System- och användartillagda CAs kommer vara betrodda (rekommenderas)</string>
     <string name="settings_cert_trust_system_off">System- och användartillagda CAs kommer inte vara betrodda</string>
@@ -79,7 +86,7 @@
     <string name="about_maintainer_title">Underhållare</string>
     <string name="about_developers_title">Utvecklare</string>
     <string name="about_translators_title">Översättare</string>
-    <string name="about_translators_transifex">Nextcloud community på &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud-gemenskapen på &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testare</string>
     <string name="about_source_title">Källkod</string>
     <string name="about_source">Detta projekt finns på GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
@@ -103,12 +110,16 @@
     <string name="widget_single_note_placeholder_tv">Anteckning hittades inte</string>
     <string name="widget_create_note">Skapa anteckning</string>
     <string name="widget_not_logged_in">Vänligen logga in i Anteckningar innan denna används</string>
+    <string name="widget_entry_fav_contentDescription">Stjärnan används för att beteckna ett objekt som favorit</string>
     <string name="widget_app_launcher_contentDescription">Startar app</string>
 
     <string name="activity_select_single_note">Välj anteckning</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Skapa en ny anteckning</string>
+
+    <string name="pref_value_theme_light">Ljus</string>
+    <string name="pref_value_theme_dark">Mörk</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

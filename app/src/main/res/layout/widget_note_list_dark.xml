@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/widget_background_dark_theme">
+
+    <!-- Widget header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/widget_note_list_hdr_dark"
+        android:layout_height="@dimen/widget_note_list_header_height"
+        android:background="@color/primary"
+        android:padding="@dimen/widget_note_list_hdr_padding">
+
+        <ImageView
+            android:id="@+id/widget_note_header_icon_dark"
+            android:layout_width="@dimen/widget_note_list_icon_width"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:paddingStart="4dp"
+            android:paddingEnd="@dimen/widget_note_list_inner_padding"
+            android:paddingLeft="4dp"
+            android:paddingRight="@dimen/widget_note_list_inner_padding"
+            android:contentDescription="@string/widget_app_launcher_contentDescription" />
+
+        <TextView
+            android:id="@+id/widget_note_list_title_tv_dark"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/fg_default_dark_theme"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/widget_note_header_icon_dark"
+            android:layout_toEndOf="@id/widget_note_header_icon_dark"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/widget_note_list_outer_padding"
+            android:paddingEnd="@dimen/widget_note_list_inner_padding"
+            android:paddingLeft="@dimen/widget_note_list_outer_padding"
+            android:paddingRight="@dimen/widget_note_list_inner_padding" />
+
+        <ImageView
+            android:id="@+id/widget_note_list_create_icon_dark"
+            android:layout_width="@dimen/widget_note_list_icon_width"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_add_white_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="@dimen/widget_note_list_inner_padding"
+            android:paddingEnd="@dimen/widget_note_list_outer_padding"
+            android:paddingLeft="@dimen/widget_note_list_inner_padding"
+            android:paddingRight="@dimen/widget_note_list_outer_padding"
+            android:contentDescription="@string/widget_create_note" />
+
+    </RelativeLayout>
+    <!-- End header -->
+
+    <ListView
+        android:id="@+id/note_list_widget_lv_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/fg_default_dark_theme"
+        android:divider="@color/fg_default_low_dark_theme"/>
+
+    <TextView
+        android:id="@+id/widget_note_list_placeholder_tv_dark"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/widget_note_list_placeholder"
+        android:textColor="@color/fg_default_dark_theme" />
+
+</LinearLayout>

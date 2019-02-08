@@ -7,6 +7,7 @@
     <string name="label_favorites">Sık Kullanılanlar</string>
     <string name="action_create">Not ekle</string>
     <string name="action_settings">Ayarlar</string>
+    <string name="action_trashbin">Silinmiş notlar</string>
     <string name="action_search">Arama</string>
     <string name="action_create_save">Kaydet</string>
     <string name="simple_cancel">İptal</string>
@@ -39,7 +40,7 @@
     <string name="listview_updated_earlier">Daha eski</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Hesap Ayarları</string>
+    <string name="settings_server_settings">Hesap</string>
     <string name="settings_url">Sunucu adresi</string>
     <string name="settings_url_check_description">Adresin pinglenebildiğini gösterir.</string>
     <string name="settings_url_warn_http">UYARI: \"http\" güvenli değildir. Lütfen \"https\" kullanın.</string>
@@ -51,7 +52,7 @@
     <string name="settings_submitting">Bağlanılıyor &#8230;</string>
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
     <string name="settings_theme_title">Tema</string>
-    <string name="settings_cert_category">Sertifikalar</string>
+    <string name="settings_cert_category">Sertifika yönetimi</string>
     <string name="settings_cert_trust_system">Sistem sertifikalarına güvenilsin</string>
     <string name="settings_cert_trust_system_on">Sistem ve kullanıcı tarafından eklenen sertifika otoritelerine güvenilir (önerilir)</string>
     <string name="settings_cert_trust_system_off">Sistem ve kullanıcı tarafından eklenen sertifika otoritelerine güvenilmez</string>
@@ -117,7 +118,7 @@
     <string name="activity_select_single_note">Not seçin</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_create_long">Yeni not ekle</string>
+    <string name="shortcut_create_long">Not ekle</string>
 
     <string name="pref_value_theme_light">Açık</string>
     <string name="pref_value_theme_dark">Koyu</string>

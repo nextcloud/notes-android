@@ -1,10 +1,10 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.graphics.Color;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.NoteUtil;
-import it.niedermann.owncloud.notes.util.Notes;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.ViewHolder> {
 
@@ -101,17 +100,6 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
             view.setBackgroundColor(isSelected ? view.getResources().getColor(R.color.bg_highlighted) : Color.TRANSPARENT);
             int textColor = view.getResources().getColor(isSelected ? R.color.primary_dark : R.color.fg_default);
 
-            if (enableHighlighting && Notes.getAppTheme(view.getContext())) {
-                if((item.label != view.getContext().getString(R.string.action_settings)) &&
-                   (item.label != view.getContext().getString(R.string.simple_about))) {
-                    textColor = view.getResources().getColor(isSelected ? R.color.fg_default :
-                                                                          R.color.fg_default_high);
-                    view.setBackgroundColor(isSelected ?
-                                            view.getResources().getColor(R.color.bg_highlighted) :
-                                            Color.TRANSPARENT);
-                }
-            }
-
             name.setTextColor(textColor);
             count.setTextColor(textColor);
             icon.setColorFilter(isSelected ? textColor : 0);
@@ -129,15 +117,9 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
     private String selectedItem = null;
     @NonNull
     private ClickListener clickListener;
-    private boolean enableHighlighting = true;
 
     public NavigationAdapter(@NonNull ClickListener clickListener) {
         this.clickListener = clickListener;
-    }
-
-    public NavigationAdapter(@NonNull ClickListener clickListener, boolean enableHighlighting) {
-        this.clickListener = clickListener;
-        this.enableHighlighting = enableHighlighting;
     }
 
     @NonNull

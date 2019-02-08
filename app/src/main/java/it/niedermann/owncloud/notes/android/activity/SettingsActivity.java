@@ -6,9 +6,9 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -79,7 +79,7 @@ public class SettingsActivity extends AppCompatActivity {
         field_url.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                new URLValidatorAsyncTask().execute(getNormalizedUrl());
+                new URLValidatorAsyncTask().execute(NotesClientUtil.formatURL(field_url.getText().toString()));
             }
         });
 
@@ -90,7 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String url = getNormalizedUrl();
+                String url = NotesClientUtil.formatURL(field_url.getText().toString());
 
                 if (NotesClientUtil.isHttp(url)) {
                     urlWarnHttp.setVisibility(View.VISIBLE);
@@ -199,23 +199,6 @@ public class SettingsActivity extends AppCompatActivity {
         } else {
             btn_submit.setEnabled(false);
         }
-    }
-
-    /**
-     * Takes care about protocol and a slash at the end.
-     * @return normalized Url
-     */
-    private String getNormalizedUrl() {
-        String url = field_url.getText().toString().trim();
-
-        if (!url.endsWith("/")) {
-            url += "/";
-        }
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            url = "https://" + url;
-        }
-
-        return url;
     }
 
     /************************************ Async Tasks ************************************/

@@ -1,8 +1,9 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.preference.PreferenceManager;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +13,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.yydcdut.markdown.callback.OnTodoClickCallback;
 import com.yydcdut.markdown.syntax.text.TextFactory;
-import com.yydcdut.rxmarkdown.RxMDConfiguration;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -65,24 +65,26 @@ public class NotePreviewFragment extends BaseNoteFragment {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, getView());
 
+        setActiveTextView(noteContent);
+
         String content = note.getContent();
 
         RxMarkdown.with(content, getActivity())
                 .config(
-                    MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
-                        /*.setOnTodoClickCallback(new OnTodoClickCallback() {
-                                @Override
-                                public CharSequence onTodoClicked(View view, String line, int lineNumber) {
-                                String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
-                                if(lines.length >= lineNumber) {
-                                    lines[lineNumber] = line;
+                        MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
+                                /*.setOnTodoClickCallback(new OnTodoClickCallback() {
+                                        @Override
+                                        public CharSequence onTodoClicked(View view, String line, int lineNumber) {
+                                        String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
+                                        if(lines.length >= lineNumber) {
+                                            lines[lineNumber] = line;
+                                        }
+                                        noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
+                                        saveNote(null);
+                                        return line;
+                                    }
                                 }
-                                noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
-                                saveNote(null);
-                                return line;
-                            }
-                        }
-                    )*/.build()
+                            )*/.build()
                 )
                 .factory(TextFactory.create())
                 .intoObservable()
@@ -131,6 +133,11 @@ public class NotePreviewFragment extends BaseNoteFragment {
                 }
             }
         });
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        if (sp.getBoolean("font", false)) {
+            noteContent.setTypeface(Typeface.MONOSPACE);
+        }
     }
 
     @Override

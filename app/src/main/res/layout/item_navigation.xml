@@ -12,6 +12,7 @@
         android:layout_height="44dp"
         android:padding="10dp"
         android:scaleType="center"
+        android:focusable="false"
         android:src="@drawable/ic_folder_grey600_24dp" />
 
     <TextView

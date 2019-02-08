@@ -31,8 +31,6 @@
     <string name="listview_updated_this_month">이번 달</string>
     <string name="listview_updated_earlier">오래됨</string>
 
-    <!-- Settings -->
-    <string name="settings_server_settings">계정 설정</string>
     <string name="settings_url">서버 주소</string>
     <string name="settings_url_check_description">지정한 주소에 핑을 보낼 수 있는지 표시합니다.</string>
     <string name="settings_url_warn_http">경고: "http"는 안전하지 않습니다. "https"를 사용하십시오.</string>
@@ -43,7 +41,6 @@
     <string name="settings_submit">연결</string>
     <string name="settings_submitting">연결 중&#8230;</string>
     <string name="settings_note_mode">메모 표시 모드</string>
-    <string name="settings_cert_category">인증서</string>
     <string name="settings_cert_trust_system">시스템 인증서 신뢰</string>
     <string name="settings_cert_trust_system_on">시스템 및 사용자 CA를 신뢰함(추천)</string>
     <string name="settings_cert_trust_system_off">시스템 및 사용자 CA를 신뢰하지 않음</string>
