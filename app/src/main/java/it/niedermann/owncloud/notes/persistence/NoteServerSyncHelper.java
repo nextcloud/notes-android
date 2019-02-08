@@ -70,6 +70,9 @@ public class NoteServerSyncHelper {
     private String syncOnlyOnWifiKey;
     private boolean syncOnlyOnWifi;
 
+    /**
+     * @see <a href="https://stackoverflow.com/a/3104265">Do not make this a local variable.</a>
+     */
     private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = (SharedPreferences prefs, String key) -> {
         if (syncOnlyOnWifiKey.equals(key)) {
             syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
