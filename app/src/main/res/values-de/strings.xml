@@ -50,7 +50,6 @@
     <string name="settings_password_check_description">Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).</string>
     <string name="settings_submit">Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).</string>
     <string name="settings_submitting">Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).&#8230;</string>
-    <string name="settings_note_mode">Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).</string>
     <string name="settings_theme_title">Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).</string>
     <string name="settings_cert_category">Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).</string>
     <string name="settings_cert_trust_system">Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).</string>
@@ -122,7 +121,6 @@
 
     <string name="pref_value_theme_light">Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).</string>
     <string name="pref_value_theme_dark">Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Benötigt keine Übersetzung. Für Android wird nur die formelle Übersetzung verwendet (de_DE).</item>

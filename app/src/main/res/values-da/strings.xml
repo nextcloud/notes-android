@@ -20,7 +20,7 @@
     <string name="action_note_deleted">Note slettet</string>
     <string name="action_note_restored">Note gendannet</string>
     <string name="action_undo">Fortryd</string>
-    <string name="action_drawer_open">Åben navigation</string>
+    <string name="action_drawer_open">åbnn navigation</string>
     <string name="action_drawer_close">Luk navigation</string>
     <string name="action_recent">Seneste</string>
     <string name="action_uncategorized">Ikke kategoriseret</string>
@@ -50,7 +50,6 @@
     <string name="settings_password_check_description">Viser hvorvidt brugeroplysningerne er korrekte.</string>
     <string name="settings_submit">Tilslut</string>
     <string name="settings_submitting">Tilslutter &#8230;</string>
-    <string name="settings_note_mode">Display tilstand for noter</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_category">Håndter certifikater</string>
     <string name="settings_cert_trust_system">Stol på systemcertifikater</string>
@@ -122,11 +121,10 @@
 
     <string name="pref_value_theme_light">Lys</string>
     <string name="pref_value_theme_dark">Mørk</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
-        <item>Åben i rediger tilstand</item>
-        <item>Åben i preview mode</item>
+        <item>Åbn i redigeringstilstand</item>
+        <item>Åbn forhåndsvisning</item>
         <item>Husk mine sidste selektion</item>
     </string-array>
 

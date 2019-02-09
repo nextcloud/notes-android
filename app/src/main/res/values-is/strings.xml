@@ -50,7 +50,6 @@
     <string name="settings_password_check_description">Sýnir hvort auðkenni séu rétt.</string>
     <string name="settings_submit">Tengjast</string>
     <string name="settings_submitting">Tengist &#8230;</string>
-    <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
     <string name="settings_theme_title">Þema</string>
     <string name="settings_cert_category">Sýsla með skilríki</string>
     <string name="settings_cert_trust_system">Treysta skilríkjum kerfis</string>
@@ -122,7 +121,6 @@
 
     <string name="pref_value_theme_light">Ljóst</string>
     <string name="pref_value_theme_dark">Dökkt</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>
