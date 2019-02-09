@@ -19,12 +19,6 @@
         android:title="@string/settings_note_mode" />
 
     <SwitchPreference
-        android:defaultValue="@string/pref_value_wifi_and_mobile"
-        android:icon="@drawable/ic_sync_black_24dp"
-        android:key="@string/pref_key_wifi_only"
-        android:title="@string/settings_wifi_only" />
-
-    <SwitchPreference
         android:defaultValue="@string/pref_value_theme_light"
         android:icon="@drawable/ic_brightness_2_grey_24dp"
         android:key="@string/pref_key_theme"
@@ -35,6 +29,12 @@
         android:icon="@drawable/ic_text_fields_black_24dp"
         android:key="@string/pref_key_font"
         android:title="@string/settings_font_title" />
+
+    <SwitchPreference
+        android:defaultValue="@string/pref_value_wifi_and_mobile"
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:key="@string/pref_key_wifi_only"
+        android:title="@string/settings_wifi_only" />
 
     <PreferenceScreen
         android:key="@string/pref_key_certs"
