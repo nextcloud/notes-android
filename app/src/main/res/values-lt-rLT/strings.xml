@@ -5,7 +5,6 @@
     <string name="no_notes">Nėra užrašų</string>
     <string name="label_all_notes">Visos pastabos</string>
     <string name="label_favorites">Mėgstamiausi</string>
-    <string name="action_create">Naujas įvykis</string>
     <string name="action_settings">Nustatymai</string>
     <string name="action_search">Paieška</string>
     <string name="action_create_save">Įrašyti</string>
@@ -36,6 +35,8 @@
     <string name="listview_updated_this_month">Šis mėnesis</string>
     <string name="listview_updated_earlier">Ankstesnis</string>
 
+    <!-- Settings -->
+    <string name="settings_server_settings">Paskyra</string>
     <string name="settings_url">Serverio adresas</string>
     <string name="settings_url_check_description">Parodo, ar adresas yra pasiekiamas.</string>
     <string name="settings_url_warn_http">ĮSPĖJIMAS: \"http\" protokolas yra nesaugus. Prašome naudoti \"https\".</string>
@@ -45,7 +46,6 @@
     <string name="settings_password_check_description">Parodo, ar teisingi prisijungimo duomenys</string>
     <string name="settings_submit">Prisijungti</string>
     <string name="settings_submitting">Jungiamasi &#8230;</string>
-    <string name="settings_note_mode">Pastabų atvaizdavimas</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_trust_system">Pasitikėti sistemos sertifikatais</string>
     <string name="settings_cert_trust_system_on">Sistemos ir vartotojų pridėti CA bus laikomi patikimais (rekomenduojama)</string>
@@ -79,23 +79,23 @@
     <!-- About -->
     <string name="about_version_title">Versija</string>
     <string name="about_version">Jūs dabar naudojate &lt;strong>%1$s&lt;/strong></string>
-    <string name="about_maintainer_title">Aptarnautojai</string>
+    <string name="about_maintainer_title">Prižiūrėtojas</string>
     <string name="about_developers_title">Plėtotojai</string>
     <string name="about_translators_title">Vertėjai</string>
     <string name="about_translators_transifex">Nextcloud bendruomenė &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testuotojai</string>
-    <string name="about_source_title">Išeities kodas</string>
+    <string name="about_source_title">Pradinis kodas</string>
     <string name="about_source">Šis projektas talpinamas GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemos</string>
     <string name="about_issues">Galite pranešti apie riktus, pasiūlymus ar funkcinius pageidavimus GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Versti</string>
     <string name="about_translate">Prisijunkite prie Nextcloud komandos Transefix ir padėkite mums išversti šią programėlę: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Programėlės licencija</string>
-    <string name="about_app_license">Ši programėlė licencijuojama pagal GNU GENERAL PUBLIC LICENCE v3+.</string>
+    <string name="about_app_license">Ši programėlė yra licencijuota pagal GNU BENDRĄJĄ VIEŠĄJĄ LICENCIJĄ v3+.</string>
     <string name="about_app_license_button">Rodyti licenciją</string>
     <string name="about_icons_disclaimer_title">Piktogramos</string>
     <string name="about_icons_disclaimer">&lt;programėlė&lt;p>Originali piktograma padaryta %1$s&lt;/p>&lt;p>Visos šios programėlės naudojamos piktogramos yra &lt;a href=\"https://materialdesignicons.com/\"></string>
-    <string name="about_credits_tab_title">Kūrėjai</string>
+    <string name="about_credits_tab_title">Padėkos</string>
     <string name="about_contribution_tab_title">Prisidėjo</string>
     <string name="about_license_tab_title">Licencija</string>
 
@@ -115,7 +115,6 @@
 
     <string name="pref_value_theme_light">Šviesi</string>
     <string name="pref_value_theme_dark">Tamsi</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atidaryti redagavimo režimu</item>

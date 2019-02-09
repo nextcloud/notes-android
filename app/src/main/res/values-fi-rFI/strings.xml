@@ -97,7 +97,6 @@
 
     <string name="pref_value_theme_light">Vaalea</string>
     <string name="pref_value_theme_dark">Tumma</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>

@@ -50,7 +50,6 @@
     <string name="settings_password_check_description">Paraqet në qoftë se kredencialet janë të sakta.</string>
     <string name="settings_submit">Lidhu</string>
     <string name="settings_submitting">Duke u lidhur &#8230;</string>
-    <string name="settings_note_mode">Mënyra e paraqitjes për Shënimet</string>
     <string name="settings_theme_title">Temë</string>
     <string name="settings_cert_category">Menaxhoni certifikatat</string>
     <string name="settings_cert_trust_system">Beso tek çertifikatat e sistemit</string>
@@ -122,7 +121,6 @@
 
     <string name="pref_value_theme_light">E çelët</string>
     <string name="pref_value_theme_dark">E errët</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Hapur në modalitetin e redaktimit</item>

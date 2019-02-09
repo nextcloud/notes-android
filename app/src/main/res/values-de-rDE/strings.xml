@@ -50,7 +50,6 @@
     <string name="settings_password_check_description">Zeigt an, ob die angegebenen Zugangsdaten korrekt sind.</string>
     <string name="settings_submit">Verbinden</string>
     <string name="settings_submitting">Verbindet&#8230;</string>
-    <string name="settings_note_mode">Anzeigemodus für Notizen</string>
     <string name="settings_theme_title">Theme</string>
     <string name="settings_cert_category">Zertifikate verwalten</string>
     <string name="settings_cert_trust_system">System-Zertifikaten vertrauen</string>
@@ -122,7 +121,6 @@
 
     <string name="pref_value_theme_light">Hell</string>
     <string name="pref_value_theme_dark">Dunkel</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Im Bearbeitungsmodus öffnen</item>

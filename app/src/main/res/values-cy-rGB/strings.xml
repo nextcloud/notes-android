@@ -50,7 +50,6 @@
     <string name="settings_password_check_description">Yn dangos p\'un ai yw\'ch manylion yn gywir</string>
     <string name="settings_submit">Cysylltu</string>
     <string name="settings_submitting">Cysylltu i &#8230;</string>
-    <string name="settings_note_mode">Y modd dangos ar gyfer Notes</string>
     <string name="settings_theme_title">Thema</string>
     <string name="settings_cert_category">Rheoli tystysgrifau</string>
     <string name="settings_cert_trust_system">Tysytysgrfiau\'r system ymddiriedaeth</string>
@@ -122,7 +121,6 @@
 
     <string name="pref_value_theme_light">Golau</string>
     <string name="pref_value_theme_dark">Tywyll</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Agor yn y modd golygu</item>
