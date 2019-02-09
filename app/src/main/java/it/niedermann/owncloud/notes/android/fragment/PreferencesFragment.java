@@ -1,11 +1,9 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.util.Log;
 import android.widget.Toast;
@@ -28,11 +26,7 @@ public class PreferencesFragment extends PreferenceFragment {
             return true;
         });
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-
         final SwitchPreference themePref = (SwitchPreference) findPreference(getString(R.string.pref_key_theme));
-        themePref.setSummary(sp.getBoolean(getString(R.string.pref_key_theme), false) ?
-                getString(R.string.pref_value_theme_dark) : getString(R.string.pref_value_theme_light));
         themePref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
             Boolean darkTheme = (Boolean) newValue;
             Notes.setAppTheme(darkTheme);
