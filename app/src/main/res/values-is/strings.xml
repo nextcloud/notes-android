@@ -50,7 +50,6 @@
     <string name="settings_password_check_description">Sýnir hvort auðkenni séu rétt.</string>
     <string name="settings_submit">Tengjast</string>
     <string name="settings_submitting">Tengist &#8230;</string>
-    <string name="settings_theme_title">Þema</string>
     <string name="settings_cert_category">Sýsla með skilríki</string>
     <string name="settings_cert_trust_system">Treysta skilríkjum kerfis</string>
     <string name="settings_cert_trust_system_on">Vottunaraðilum kerfis og þeim sem notandi bætir við verður treyst (mælt með þessu)</string>

@@ -43,7 +43,6 @@
     <string name="settings_password_check_description">Mostra si les credencials són correctes.</string>
     <string name="settings_submit">Connecta</string>
     <string name="settings_submitting">S\'està connectant &#8230;</string>
-    <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_category">Gestiona els certificats</string>
     <!-- Network -->
     <string name="network_connecting">S\'està connectant</string>
