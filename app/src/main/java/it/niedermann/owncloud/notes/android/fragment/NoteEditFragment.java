@@ -145,7 +145,7 @@ public class NoteEditFragment extends BaseNoteFragment {
 
             editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-            if (sp.getBoolean("font", false)) {
+            if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
                 editContent.setTypeface(Typeface.MONOSPACE);
             }
         } else {

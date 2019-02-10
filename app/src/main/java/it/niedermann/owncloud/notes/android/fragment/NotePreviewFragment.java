@@ -100,7 +100,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        if (sp.getBoolean("font", false)) {
+        if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             noteContent.setTypeface(Typeface.MONOSPACE);
         }
     }
