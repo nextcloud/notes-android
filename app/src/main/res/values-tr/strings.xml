@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Kaydediliyor &#8230;</string>
     <string name="action_edit_saved">Kaydedildi</string>
     <string name="simple_about">Hakkında</string>
+    <string name="simple_bold">Koyu</string>
+    <string name="simple_link">Bağlantı</string>
+    <string name="simple_italic">Yatık</string>
     <string name="action_select_note">Not seçin</string>
     <string name="action_note_deleted">Not silindi</string>
     <string name="action_note_restored">Not geri yüklendi</string>
@@ -50,7 +53,8 @@
     <string name="settings_password_check_description">Oturum açma bilgilerinin doğru olduğunu gösterir.</string>
     <string name="settings_submit">Bağlan</string>
     <string name="settings_submitting">Bağlanılıyor &#8230;</string>
-    <string name="settings_theme_title">Tema</string>
+    <string name="settings_note_mode">Notların görüntülenme kipi</string>
+    <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
     <string name="settings_cert_category">Sertifika yönetimi</string>
     <string name="settings_cert_trust_system">Sistem sertifikalarına güvenilsin</string>
     <string name="settings_cert_trust_system_on">Sistem ve kullanıcı tarafından eklenen sertifika otoritelerine güvenilir (önerilir)</string>
@@ -121,6 +125,7 @@
 
     <string name="pref_value_theme_light">Açık</string>
     <string name="pref_value_theme_dark">Koyu</string>
+    <string name="pref_value_font_normal">Normal</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>

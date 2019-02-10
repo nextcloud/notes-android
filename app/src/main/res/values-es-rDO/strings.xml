@@ -47,7 +47,6 @@
     <string name="settings_password_check_description">Muestra si las credenciales son correctas.</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando &#8230;</string>
-    <string name="settings_theme_title">Tema</string>
     <string name="settings_cert_trust_system">Confiar en los certificados del sistema</string>
     <string name="settings_cert_trust_system_on">Los CAs del sistema y del usuario serán de confianza (recomendado)</string>
     <string name="settings_cert_trust_system_off">Los CAs del sistema y de usuarios no serán de confianza</string>
