@@ -6,9 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import com.google.android.material.textfield.TextInputLayout;
-import androidx.core.content.ContextCompat;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,6 +16,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import at.bitfire.cert4android.CustomCertManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,11 +77,8 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
 
-        field_url.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                new URLValidatorAsyncTask().execute(NotesClientUtil.formatURL(field_url.getText().toString()));
-            }
+        field_url.setOnFocusChangeListener((View v, boolean hasFocus) -> {
+            new URLValidatorAsyncTask().execute(NotesClientUtil.formatURL(field_url.getText().toString()));
         });
 
         field_url.addTextChangedListener(new TextWatcher() {
@@ -128,27 +126,18 @@ public class SettingsActivity extends AppCompatActivity {
         field_username.setText(preferences.getString(SETTINGS_USERNAME, DEFAULT_SETTINGS));
         old_password = preferences.getString(SETTINGS_PASSWORD, DEFAULT_SETTINGS);
 
-        field_password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                login();
-                return true;
-            }
+        field_password.setOnEditorActionListener((TextView v, int actionId, KeyEvent event) -> {
+            login();
+            return true;
         });
-        field_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                setPasswordHint(hasFocus);
-            }
+        field_password.setOnFocusChangeListener((View v, boolean hasFocus) -> {
+            setPasswordHint(hasFocus);
         });
         setPasswordHint(false);
 
         btn_submit.setEnabled(false);
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
+        btn_submit.setOnClickListener((View v) -> {
+            login();
         });
     }
 

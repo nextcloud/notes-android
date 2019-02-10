@@ -109,43 +109,47 @@ public class NoteEditFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ButterKnife.bind(this, getView());
+        if(getView() != null) {
+            ButterKnife.bind(this, getView());
 
-        setActiveTextView(editContent);
+            setActiveTextView(editContent);
 
-        if (note.getContent().isEmpty()) {
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        }
+            if (note.getContent().isEmpty()) {
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            }
 
-        // workaround for issue yydcdut/RxMarkdown#41
-        note.setContent(note.getContent().replace("\r\n", "\n"));
+            // workaround for issue yydcdut/RxMarkdown#41
+            note.setContent(note.getContent().replace("\r\n", "\n"));
 
-        editContent.setText(note.getContent());
-        editContent.setEnabled(true);
+            editContent.setText(note.getContent());
+            editContent.setEnabled(true);
 
-        RxMarkdown.live(editContent)
-            .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()).build())
-            .factory(EditFactory.create())
-            .intoObservable()
-            .subscribe(new Subscriber<CharSequence>() {
-                @Override
-                public void onCompleted() {
-                }
+            RxMarkdown.live(editContent)
+                    .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()).build())
+                    .factory(EditFactory.create())
+                    .intoObservable()
+                    .subscribe(new Subscriber<CharSequence>() {
+                        @Override
+                        public void onCompleted() {
+                        }
 
-                @Override
-                public void onError(Throwable e) {
-                }
+                        @Override
+                        public void onError(Throwable e) {
+                        }
 
-                    @Override
-                    public void onNext(CharSequence charSequence) {
-                        editContent.setText(charSequence, TextView.BufferType.SPANNABLE);
-                    }
-                });
+                        @Override
+                        public void onNext(CharSequence charSequence) {
+                            editContent.setText(charSequence, TextView.BufferType.SPANNABLE);
+                        }
+                    });
 
-        editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        if(sp.getBoolean("font", false)) {
-            editContent.setTypeface(Typeface.MONOSPACE);
+            editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+            if (sp.getBoolean("font", false)) {
+                editContent.setTypeface(Typeface.MONOSPACE);
+            }
+        } else {
+            Log.e(NoteEditFragment.class.getSimpleName(), "getView() is null");
         }
     }
 

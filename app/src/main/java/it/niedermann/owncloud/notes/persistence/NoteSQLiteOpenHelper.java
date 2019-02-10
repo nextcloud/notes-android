@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -18,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -49,14 +49,13 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static NoteSQLiteOpenHelper instance;
 
-    private NoteServerSyncHelper serverSyncHelper = null;
-    private Context context = null;
+    private NoteServerSyncHelper serverSyncHelper;
+    private Context context;
 
     private NoteSQLiteOpenHelper(Context context) {
         super(context, database_name, null, database_version);
         this.context = context.getApplicationContext();
         serverSyncHelper = NoteServerSyncHelper.getInstance(this);
-        //recreateDatabase(getWritableDatabase());
     }
 
     public static NoteSQLiteOpenHelper getInstance(Context context) {

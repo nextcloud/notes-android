@@ -180,26 +180,20 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private void setupNotesList() {
         initList();
         // Pull to Refresh
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                    synchronize();
-                } else {
-                    swipeRefreshLayout.setRefreshing(false);
-                    Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
-                }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            if (db.getNoteServerSyncHelper().isSyncPossible()) {
+                synchronize();
+            } else {
+                swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
             }
         });
 
         // Floating Action Button
-        fabCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
-                createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, navigationSelection);
-                startActivityForResult(createIntent, create_note_cmd);
-            }
+        fabCreate.setOnClickListener((View view) -> {
+            Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+            createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, navigationSelection);
+            startActivityForResult(createIntent, create_note_cmd);
         });
     }
 
@@ -373,12 +367,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         this.updateUsernameInDrawer();
         final NotesListViewActivity that = this;
-        this.account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent settingsIntent = new Intent(that, SettingsActivity.class);
-                startActivityForResult(settingsIntent, server_settings);
-            }
+        this.account.setOnClickListener((View v) -> {
+            Intent settingsIntent = new Intent(that, SettingsActivity.class);
+            startActivityForResult(settingsIntent, server_settings);
         });
 
         adapterMenu.setItems(itemsMenu);
@@ -424,14 +415,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         refreshLists();
                         Log.v("Note", "Item deleted through swipe ----------------------------------------------");
                         Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
-                                .setAction(R.string.action_undo, new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        db.addNoteAndSync(dbNote);
-                                        refreshLists();
-                                        Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
-                                                .show();
-                                    }
+                                .setAction(R.string.action_undo, (View v) -> {
+                                    db.addNoteAndSync(dbNote);
+                                    refreshLists();
+                                    Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
+                                            .show();
                                 })
                                 .show();
                         break;
@@ -485,14 +473,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             query = searchView.getQuery();
         }
 
-        LoadNotesListTask.NotesLoadedListener callback = new LoadNotesListTask.NotesLoadedListener() {
-            @Override
-            public void onNotesLoaded(List<Item> notes, boolean showCategory) {
-                adapter.setShowCategory(showCategory);
-                adapter.setItemList(notes);
-                if (scrollToTop) {
-                    listView.scrollToPosition(0);
-                }
+        LoadNotesListTask.NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
+            adapter.setShowCategory(showCategory);
+            adapter.setItemList(notes);
+            if (scrollToTop) {
+                listView.scrollToPosition(0);
             }
         };
         new LoadNotesListTask(getApplicationContext(), callback, navigationSelection, query).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -534,11 +519,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     if (currentVisibility == View.VISIBLE) {
                         fabCreate.hide();
                     } else {
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                fabCreate.show();
-                            }
+                        new Handler().postDelayed(() -> {
+                            fabCreate.show();
                         }, 150);
                     }
 

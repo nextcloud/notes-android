@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -17,6 +17,7 @@ import android.widget.Filter;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -68,7 +69,7 @@ public class CategoryDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         CategoryDialogListener listener;
                         Fragment target = getTargetFragment();
-                        if (target != null && target instanceof CategoryDialogListener) {
+                        if (target instanceof CategoryDialogListener) {
                             listener = (CategoryDialogListener) target;
                         } else {
                             listener = (CategoryDialogListener) getActivity();
@@ -88,7 +89,11 @@ public class CategoryDialogFragment extends DialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        if (getDialog().getWindow() != null) {
+            getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        } else {
+            Log.w(CategoryDialogFragment.class.getSimpleName(), "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
+        }
     }
 
 
