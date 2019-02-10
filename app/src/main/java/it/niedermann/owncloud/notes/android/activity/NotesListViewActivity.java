@@ -582,15 +582,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
             listView.scrollToPosition(0);
         } else if (requestCode == server_settings) {
-            // Create new Instance with new URL and credentials
-            db = NoteSQLiteOpenHelper.getInstance(this);
-            if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                this.updateUsernameInDrawer();
-                adapter.removeAll();
-                synchronize();
-            } else {
-                Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
-            }
+            // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
+            // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
+            recreate();
         }
     }
 
