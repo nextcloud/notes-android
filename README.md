@@ -8,9 +8,15 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :arrow_forward: Access
 
-[![Download from Google Play](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
-[![Nextcloud Notes App on fdroid.org](https://camo.githubusercontent.com/7df0eafa4433fa4919a56f87c3d99cf81b68d01c/68747470733a2f2f662d64726f69642e6f72672f77696b692f696d616765732f632f63342f462d44726f69642d627574746f6e5f617661696c61626c652d6f6e2e706e67)](https://f-droid.org/repository/browse/?fdid=it.niedermann.owncloud.notes)
-[![Donate with PayPal](https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K7HVLE6J7SXXA)
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+      alt="Get it on Play Store"
+      height="80">](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
+[<img src="https://f-droid.org/badge/get-it-on.png"
+      alt="Get it on F-Droid"
+      height="80">](https://f-droid.org/repository/browse/?fdid=it.niedermann.owncloud.notes)
+[<img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/be5ad29a95ff890faee0b46d702b714b0a04aadc/paypal-donate-button.png"
+      alt="Donate with PayPal"
+      height="80">](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K7HVLE6J7SXXA)
 [![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/stefan-niedermann/donate)
 
 ## :eyes: Screenshots
