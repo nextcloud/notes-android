@@ -1,0 +1,1 @@
+- Übersetzungsfehler behoben (#536, #534)
