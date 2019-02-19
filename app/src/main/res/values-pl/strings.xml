@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Notatki</string>
-    <string name="no_notes">Brak notatek</string>
+    <string name="no_notes">Nie ma jeszcze notatek</string>
     <string name="label_all_notes">Wszystkie notatki</string>
     <string name="label_favorites">Ulubione</string>
     <string name="action_create">Nowa notatka</string>
@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Zapisywanie &#8230;</string>
     <string name="action_edit_saved">Zapisano</string>
     <string name="simple_about">O aplikacji</string>
+    <string name="simple_bold">Pogrubienie</string>
+    <string name="simple_link">Odnośnik</string>
+    <string name="simple_italic">Kursywa</string>
     <string name="action_select_note">Wybierz notatkę</string>
     <string name="action_note_deleted">Notatka usunięta</string>
     <string name="action_note_restored">Notatka przywrócona</string>
@@ -29,7 +32,7 @@
     <string name="menu_favorite">Ulubiona</string>
     <string name="menu_preview">Podgląd</string>
     <string name="menu_share">Udostępnij</string>
-    <string name="menu_about">O</string>
+    <string name="menu_about">O aplikacji</string>
 
     <string name="change_category_title">Wybierz kategorię</string>
 
@@ -42,25 +45,29 @@
     <!-- Settings -->
     <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Adres serwera</string>
-    <string name="settings_url_check_description">Pokazuje czy adres może być pingowany.</string>
-    <string name="settings_url_warn_http">OSTRZEŻENIE: \"http\" nie jest bezpieczne. Proszę użyć \"https\".</string>
+    <string name="settings_url_check_description">Pokazuje, czy adres można pingować.</string>
+    <string name="settings_url_warn_http">OSTRZEŻENIE: \"http\" jest niebezpieczne. Proszę użyć \"https\".</string>
     <string name="settings_username">Nazwa użytkownika</string>
     <string name="settings_password">Hasło</string>
     <string name="settings_password_unchanged">Hasło (nie zmienione)</string>
-    <string name="settings_password_check_description">Wyświetla czy poświadczenia są poprawne.</string>
+    <string name="settings_password_check_description">Wyświetla, czy dane logowania są poprawne.</string>
     <string name="settings_submit">Połącz</string>
     <string name="settings_submitting">Łączenie &#8230;</string>
+    <string name="settings_note_mode">Tryb wyświetlania notatek</string>
+    <string name="settings_theme_title">Ciemny motyw</string>
+    <string name="settings_font_title">Czcionka monospace</string>
+    <string name="settings_wifi_only">Synchronizuj tylko przez Wi-Fi</string>
     <string name="settings_cert_category">Zarządzaj certyfikatami</string>
-    <string name="settings_cert_trust_system">Ufaj systemowym certyfikatom</string>
-    <string name="settings_cert_trust_system_on">Systemowe i dodane przez użytkownika CA /Certification Authority/ staną się zaufanymi (zalecane)</string>
-    <string name="settings_cert_trust_system_off">Systemowe i dodane przez użytkownika CA /Certification Authority/ nie staną się zaufanymi</string>
+    <string name="settings_cert_trust_system">Zaufaj certyfikatom systemowym</string>
+    <string name="settings_cert_trust_system_on">Systemowe i dodane przez użytkownika certyfikaty będą zaufane (zalecane)</string>
+    <string name="settings_cert_trust_system_off">Systemowe i dodane przez użytkownika certyfikaty nie będą zaufane</string>
     <string name="settings_cert_reset">Zresetuj (nie)zaufane certyfikaty</string>
-    <string name="settings_cert_reset_summary">Resetuje zaufanie wszystkich certyfikatów</string>
-    <string name="settings_cert_reset_toast">Wszystkie własne certyfikaty zostały wyczyszczone.</string>
+    <string name="settings_cert_reset_summary">Resetuje wszystkie zaufane niestandardowe certyfikaty</string>
+    <string name="settings_cert_reset_toast">Wszystkie certyfikaty niestandardowe zostały wyczyszczone</string>
 
     <!-- Certificates -->
     <string name="certificate_notification_connection_security">Notatki - Bezpieczeństwo połączenia</string>
-    <string name="trust_certificate_unknown_certificate_found">Notatki napotkały niezaufany certyfikat. Chcesz mu zaufać?</string>
+    <string name="trust_certificate_unknown_certificate_found">Notes napotkał nieznany certyfikat. Czy chcesz mu zaufać?</string>
 
     <!-- Network -->
     <string name="network_connecting">Łączenie</string>
@@ -70,12 +77,12 @@
     <!-- Error -->
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_invalid_login">Niepoprawny login: %1$s</string>
-    <string name="error_json">Czy aplikacja Notatki jest włączona na serwerze?</string>
+    <string name="error_json">czy aplikacja Notes jest aktywowana na serwerze?</string>
     <string name="error_io">połączenie z serwerem jest nieprawidłowe</string>
     <string name="error_no_network">brak połączenia sieciowego</string>
     <string name="error_server">URL/Serwer zawiera błędy</string>
     <string name="error_url_malformed">Błędny adres serwera</string>
-    <string name="error_username_password_invalid">Zła nazwa użytkownika lub hasło</string>
+    <string name="error_username_password_invalid">Nieprawidłowa nazwa użytkownika lub hasło</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Ustawienia</string>
@@ -86,20 +93,20 @@
     <string name="about_maintainer_title">Opiekun</string>
     <string name="about_developers_title">Deweloperzy</string>
     <string name="about_translators_title">Tłumacze</string>
-    <string name="about_translators_transifex">Społeczność Nextclouda na &lt;a href=\"%1$s\">Transifeksie&lt;/a></string>
+    <string name="about_translators_transifex">Społeczność Nextcloud na &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testerzy</string>
     <string name="about_source_title">Kod źródłowy</string>
-    <string name="about_source">Projekt prowadzony jest na GitHubie: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Ten projekt jest hostowany na GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemy</string>
-    <string name="about_issues">Możesz zgłaszać błędy, propozycje rozbudowy lub prośby o nowe funkcjonalności na GitHubie: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_translate_title">Tłumacz</string>
-    <string name="about_translate">Aby pomóc nam w tłumaczeniu tej aplikacji przyłącz się do zespołu Nextclouda na Transifeksie &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Możesz zgłaszać błędy, propozycje ulepszeń i prośby o funkcje w liście problemów na GitHub &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Tłumaczyć</string>
+    <string name="about_translate">Dołącz do zespołu Nextcloud w Transifex i pomóż nam przetłumaczyć tę aplikację: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licencja aplikacji</string>
     <string name="about_app_license">Aplikacja jest chroniona licencją GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobacz licencję</string>
     <string name="about_icons_disclaimer_title">Ikony</string>
-    <string name="about_icons_disclaimer">&lt;p>Oryginalna ikona utworzona %1$s&lt;/p>&lt;p>Wszystkie pozostałe użyte przez tę aplikację są własnością href=\"https://materialdesignicons.com/\">Material Design Icons/a> utworzone przez Google Inc. licencjonowane zgodnie z licencją Apache 2.0./p></string>
-    <string name="about_credits_tab_title">O</string>
+    <string name="about_icons_disclaimer">&lt;p>Oryginalna ikona wykonana przez %1$s&lt;/p>&lt;p>Wszystkie dodatkowe ikony używane przez tę aplikację są &lt;href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> wykonane przez Google Inc. i licencjonowane na podstawie licencji Apache 2.0.&lt;/p></string>
+    <string name="about_credits_tab_title">Autorzy</string>
     <string name="about_contribution_tab_title">Wkład</string>
     <string name="about_license_tab_title">Licencja</string>
 
@@ -109,8 +116,8 @@
     <string name="widget_single_note_title">Pojedyncza notatka</string>
     <string name="widget_single_note_placeholder_tv">Nie znaleziono notatki</string>
     <string name="widget_create_note">Utwórz notatkę</string>
-    <string name="widget_not_logged_in">Zanim użyjesz widgetu zaloguj się wpierw do Notatek</string>
-    <string name="widget_entry_fav_contentDescription">Ikona gwiazdy służy do oznaczenia elementu jako ulubionego</string>
+    <string name="widget_not_logged_in">Proszę, zaloguj się do Notes przed użyciem tego widgetu</string>
+    <string name="widget_entry_fav_contentDescription">Ikona gwiazdki służy do oznaczenia przedmiotu jako ulubionego</string>
     <string name="widget_app_launcher_contentDescription">Uruchamia aplikację</string>
 
     <string name="activity_select_single_note">Wybierz notatkę</string>
@@ -120,6 +127,9 @@
 
     <string name="pref_value_theme_light">Jasny</string>
     <string name="pref_value_theme_dark">Ciemny</string>
+    <string name="pref_value_font_normal">Podstawowy</string>
+    <string name="pref_value_wifi_and_mobile">Synchronizacja w sieci Wi-Fi i komórkowej transmisji danych</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otwórz w trybie edycji</item>

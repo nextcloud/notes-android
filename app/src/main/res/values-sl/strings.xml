@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Poteka shranjevanje&#8230;</string>
     <string name="action_edit_saved">Shranjeno</string>
     <string name="simple_about">O programu</string>
+    <string name="simple_bold">Krepko</string>
+    <string name="simple_link">Povezava</string>
+    <string name="simple_italic">Ležeče</string>
     <string name="action_select_note">Izbor zabeležke</string>
     <string name="action_note_deleted">Zabeležka je izbrisana</string>
     <string name="action_note_restored">Zabeležka je obnovljena</string>
@@ -50,6 +53,10 @@
     <string name="settings_password_check_description">Pokaže, ali so poverila pravilna.</string>
     <string name="settings_submit">Poveži</string>
     <string name="settings_submitting">Poteka vzpostavljanje povezave z&#8230;</string>
+    <string name="settings_note_mode">Način odpiranja zabeležk</string>
+    <string name="settings_theme_title">Temna tema</string>
+    <string name="settings_font_title">Pisava enotne širine</string>
+    <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
     <string name="settings_cert_category">Upravljanje s potrdili</string>
     <string name="settings_cert_trust_system">Zaupaj sistemskim potrdilom</string>
     <string name="settings_cert_trust_system_on">Sistemska in s strani uporabnika dodana potrdila CA bodo obravnavana kot varna (priporočljivo)</string>
@@ -120,10 +127,13 @@
 
     <string name="pref_value_theme_light">Svetla</string>
     <string name="pref_value_theme_dark">Temna</string>
+    <string name="pref_value_font_normal">Običajno</string>
+    <string name="pref_value_wifi_and_mobile">Usklajuj na Wi-Fi in mobilni povezavi</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
-        <item>Odpre se v urejevalnem načinu</item>
-        <item>Odpre se v predogledu</item>
+        <item>Zabeležka se odpre v urejevalnem načinu</item>
+        <item>Zabeležka se odpre v predogledu</item>
         <item>Zapomni si zadnjo izbiro</item>
     </string-array>
 
