@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Чувам &#8230;</string>
     <string name="action_edit_saved">Сачувано</string>
     <string name="simple_about">О програму</string>
+    <string name="simple_bold">Подебљано</string>
+    <string name="simple_link">Веза</string>
+    <string name="simple_italic">Курзив</string>
     <string name="action_select_note">Изабери белешку</string>
     <string name="action_note_deleted">Белешка обрисана</string>
     <string name="action_note_restored">Белешка повраћена</string>
@@ -50,6 +53,10 @@
     <string name="settings_password_check_description">Прикзује да ли су акредитиви исправни.</string>
     <string name="settings_submit">Повежи се</string>
     <string name="settings_submitting">Повезујем се&#8230;</string>
+    <string name="settings_note_mode">Режим приказа белешки</string>
+    <string name="settings_theme_title">Тамна тема</string>
+    <string name="settings_font_title">Фонт фиксне ширине</string>
+    <string name="settings_wifi_only">Синхронизуј само преко Wi-Fi-а</string>
     <string name="settings_cert_category">Управљај сертификатима</string>
     <string name="settings_cert_trust_system">Веруј системским сертификатима</string>
     <string name="settings_cert_trust_system_on">Вероваће се системским сертификатима и кориснички доданим сертификационим центрима (CA)</string>
@@ -120,6 +127,9 @@
 
     <string name="pref_value_theme_light">Светла</string>
     <string name="pref_value_theme_dark">Тамна</string>
+    <string name="pref_value_font_normal">Обично</string>
+    <string name="pref_value_wifi_and_mobile">Синхронизуј и на Wi-Fi-у и на мобилној конекцији</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>
