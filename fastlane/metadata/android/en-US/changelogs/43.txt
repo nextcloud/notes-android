@@ -1,0 +1,1 @@
+- Updated translations for da, nb, pl, sl, sr and sv (#541)
