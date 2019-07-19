@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,13 +15,15 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.yydcdut.markdown.syntax.edit.EditFactory;
 import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -115,7 +118,14 @@ public class NoteEditFragment extends BaseNoteFragment {
             setActiveTextView(editContent);
 
             if (note.getContent().isEmpty()) {
+                editContent.requestFocus();
+
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+                InputMethodManager imm = (InputMethodManager)
+                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
+
             }
 
             // workaround for issue yydcdut/RxMarkdown#41
