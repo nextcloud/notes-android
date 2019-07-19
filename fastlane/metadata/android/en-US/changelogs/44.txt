@@ -1,0 +1,2 @@
+- Change dark primary color to primary color in status bar
+- App shortcuts for fav / recent notes and settings (#554)

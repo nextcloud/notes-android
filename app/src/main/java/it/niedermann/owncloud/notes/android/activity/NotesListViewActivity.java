@@ -19,13 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -39,6 +32,14 @@ import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -56,10 +57,13 @@ import it.niedermann.owncloud.notes.util.NotesClientUtil;
 
 public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener {
 
-    public final static String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
-    public final static String CREDENTIALS_CHANGED = "it.niedermann.owncloud.notes.CREDENTIALS_CHANGED";
+    public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
+    public static final String CREDENTIALS_CHANGED = "it.niedermann.owncloud.notes.CREDENTIALS_CHANGED";
     public static final String ADAPTER_KEY_RECENT = "recent";
     public static final String ADAPTER_KEY_STARRED = "starred";
+    public static final String ACTION_FAVORITES = "it.niedermann.owncloud.notes.favorites";
+    public static final String ACTION_RECENT = "it.niedermann.owncloud.notes.recent";
+
 
     private static final String SAVED_STATE_NAVIGATION_SELECTION = "navigationSelection";
     private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
@@ -122,7 +126,14 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             startActivityForResult(settingsIntent, server_settings);
         }
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
+            if(ACTION_RECENT.equals(getIntent().getAction())) {
+                categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
+            } else if(ACTION_FAVORITES.equals(getIntent().getAction())) {
+                categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
+                navigationSelection = new Category(null, true);
+            }
+        } else {
             navigationSelection = (Category) savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
             navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
