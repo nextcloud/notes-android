@@ -30,7 +30,7 @@
     <string name="menu_delete">Sil</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Sık Kullanılanlara Ekle</string>
-    <string name="menu_preview">Önizleme</string>
+    <string name="menu_preview">Ön izleme</string>
     <string name="menu_share">Paylaş</string>
     <string name="menu_about">Hakkında</string>
 
@@ -133,7 +133,7 @@
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>
-        <item>Önizleme kipinde aç</item>
+        <item>Ön izleme kipinde aç</item>
         <item>Son seçimim hatırlansın</item>
     </string-array>
 

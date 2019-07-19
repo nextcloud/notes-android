@@ -46,7 +46,7 @@
     <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Adres serwera</string>
     <string name="settings_url_check_description">Pokazuje, czy adres można pingować.</string>
-    <string name="settings_url_warn_http">OSTRZEŻENIE: \"http\" jest niebezpieczne. Proszę użyć \"https\".</string>
+    <string name="settings_url_warn_http">OSTRZEŻENIE: \"http\" jest niebezpieczne. Proszę użyć \"https\". </string>
     <string name="settings_username">Nazwa użytkownika</string>
     <string name="settings_password">Hasło</string>
     <string name="settings_password_unchanged">Hasło (nie zmienione)</string>
@@ -82,7 +82,7 @@
     <string name="error_no_network">brak połączenia sieciowego</string>
     <string name="error_server">URL/Serwer zawiera błędy</string>
     <string name="error_url_malformed">Błędny adres serwera</string>
-    <string name="error_username_password_invalid">Nieprawidłowa nazwa użytkownika lub hasło</string>
+    <string name="error_username_password_invalid">Zła nazwa użytkownika lub hasło</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Ustawienia</string>
@@ -98,14 +98,14 @@
     <string name="about_source_title">Kod źródłowy</string>
     <string name="about_source">Ten projekt jest hostowany na GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemy</string>
-    <string name="about_issues">Możesz zgłaszać błędy, propozycje ulepszeń i prośby o funkcje w liście problemów na GitHub &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Możesz zgłaszać błędy, propozycje ulepszeń i prośby o funkcje w liście problemów na GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Tłumaczyć</string>
-    <string name="about_translate">Dołącz do zespołu Nextcloud w Transifex i pomóż nam przetłumaczyć tę aplikację: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Dołącz do zespołu Nextcloud na Transifex i pomóż nam przetłumaczyć tę aplikację: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licencja aplikacji</string>
     <string name="about_app_license">Aplikacja jest chroniona licencją GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobacz licencję</string>
     <string name="about_icons_disclaimer_title">Ikony</string>
-    <string name="about_icons_disclaimer">&lt;p>Oryginalna ikona wykonana przez %1$s&lt;/p>&lt;p>Wszystkie dodatkowe ikony używane przez tę aplikację są &lt;href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> wykonane przez Google Inc. i licencjonowane na podstawie licencji Apache 2.0.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Oryginalna ikona wykonana przez %1$s&lt;/p>&lt;p>Wszystkie pozostałe ikony używane przez tę aplikację są &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> wykonane przez Google Inc. i licencjonowane na podstawie Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Autorzy</string>
     <string name="about_contribution_tab_title">Wkład</string>
     <string name="about_license_tab_title">Licencja</string>
@@ -116,8 +116,8 @@
     <string name="widget_single_note_title">Pojedyncza notatka</string>
     <string name="widget_single_note_placeholder_tv">Nie znaleziono notatki</string>
     <string name="widget_create_note">Utwórz notatkę</string>
-    <string name="widget_not_logged_in">Proszę, zaloguj się do Notes przed użyciem tego widgetu</string>
-    <string name="widget_entry_fav_contentDescription">Ikona gwiazdki służy do oznaczenia przedmiotu jako ulubionego</string>
+    <string name="widget_not_logged_in">Zaloguj się do Notes przed użyciem tego widgetu</string>
+    <string name="widget_entry_fav_contentDescription">Ikona gwiazdki służy do oznaczenia pozycji jako ulubiona</string>
     <string name="widget_app_launcher_contentDescription">Uruchamia aplikację</string>
 
     <string name="activity_select_single_note">Wybierz notatkę</string>
@@ -139,9 +139,9 @@
 
     <!-- Plurals -->
     <plurals name="ab_selected">
-        <item quantity="one">%d wybrano</item>
-        <item quantity="few">%d wybrano</item>
-        <item quantity="many">%d wybrano</item>
-        <item quantity="other">%d wybrano</item>
+        <item quantity="one">%d wybrany</item>
+        <item quantity="few">%d wybrane</item>
+        <item quantity="many">%d wybranych</item>
+        <item quantity="other">%d wybranych</item>
     </plurals>
 </resources>

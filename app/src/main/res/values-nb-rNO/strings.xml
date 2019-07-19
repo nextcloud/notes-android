@@ -44,7 +44,7 @@
 
     <!-- Settings -->
     <string name="settings_server_settings">Konto</string>
-    <string name="settings_url">Tjeneradresse</string>
+    <string name="settings_url">Serveradresse</string>
     <string name="settings_url_check_description">Viser hvorvidt adressen kan pinges.</string>
     <string name="settings_url_warn_http">ADVARSEL: \"http\" er usikker. Bruk \"https\".</string>
     <string name="settings_username">Brukernavn</string>
@@ -77,11 +77,11 @@
     <!-- Error -->
     <string name="error_sync">Synkronisering mislyktes: %1$s</string>
     <string name="error_invalid_login">Ugyldig pålogging: %1$s</string>
-    <string name="error_json">er Notat-programmet påslått på tjeneren?</string>
-    <string name="error_io">tilkoblingen til tjener er avbrutt</string>
+    <string name="error_json">er Notat-appen påslått på serveren?</string>
+    <string name="error_io">tilkoblingen til server er avbrutt</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
-    <string name="error_server">URL/Tjener har feil</string>
-    <string name="error_url_malformed">Feil på tjeneradresse</string>
+    <string name="error_server">URL/Server har feil</string>
+    <string name="error_url_malformed">Feil på serveradresse</string>
     <string name="error_username_password_invalid">Feil brukernavn eller passord</string>
 
     <!-- Snackbar Actions -->
@@ -100,12 +100,12 @@
     <string name="about_issues_title">Feil</string>
     <string name="about_issues">Du kan rapportere inn feil, forbedringforslag og funksjonønsker på GitHub-saksporeren: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Oversett</string>
-    <string name="about_translate">Ta del i Nextcloud-fellesskapet på Transifex og hjelp oss med å oversette dette programmet: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Ta del i Nextcloud-fellesskapet på Transifex og hjelp oss med å oversette denne appen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Lisens</string>
-    <string name="about_app_license">Dette programmet er lisensiert under GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license">Denne appen er lisensiert under GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Vis lisens</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
-    <string name="about_icons_disclaimer">&lt;p>Orginalt ikon er laget av %1$s&lt;/p>&lt;p>Alle øvrige ikoner brukt i dette programmet er &lt;a href=\"https://materialdesignicons.com/\">Materielt design-ikoner&lt;/a> laget av Google Inc. og lisensiert under Apache 2.0-lisens.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Orginalt ikon er laget av %1$s&lt;/p>&lt;p>Alle øvrige ikoner brukt i denne appen er &lt;a href=\"https://materialdesignicons.com/\">Materielt design-ikoner&lt;/a> laget av Google Inc. og lisensiert under Apache 2.0-lisens.&lt;/p></string>
     <string name="about_credits_tab_title">Bidragsytere</string>
     <string name="about_contribution_tab_title">Bidragsytere</string>
     <string name="about_license_tab_title">Lisens</string>
@@ -118,7 +118,7 @@
     <string name="widget_create_note">Opprett notat</string>
     <string name="widget_not_logged_in">Logg inn i Notater før du bruker dette miniprogrammet</string>
     <string name="widget_entry_fav_contentDescription">Stjerne ikon er brukt for å angi et element som en favoritt</string>
-    <string name="widget_app_launcher_contentDescription">Starter programmet</string>
+    <string name="widget_app_launcher_contentDescription">Åpner appen</string>
 
     <string name="activity_select_single_note">Velg notat</string>
 
