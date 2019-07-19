@@ -9,10 +9,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.Calendar;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Calendar;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
@@ -24,6 +25,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener {
 
+    public static final String ACTION_SHORTCUT = "it.niedermann.owncloud.notes.shortcut";
     private static final String INTENT_GOOGLE_ASSISTANT = "com.google.android.gm.action.AUTO_SEND";
     private static final String MIMETYPE_TEXT_PLAIN = "text/plain";
     public static final String PARAM_NOTE_ID = "noteId";

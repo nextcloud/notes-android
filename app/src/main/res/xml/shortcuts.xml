@@ -12,40 +12,4 @@
             android:targetClass="it.niedermann.owncloud.notes.android.activity.EditNoteActivity" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
-    <shortcut
-        android:shortcutId="it.niedermann.owncloud.notes.recent"
-        android:enabled="true"
-        android:icon="@drawable/ic_access_time_grey600_24dp"
-        android:shortcutShortLabel="@string/action_recent"
-        >
-        <intent
-            android:action="it.niedermann.owncloud.notes.recent"
-            android:targetPackage="it.niedermann.owncloud.notes"
-            android:targetClass="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
-        <categories android:name="android.shortcut.conversation" />
-    </shortcut>
-    <shortcut
-        android:shortcutId="it.niedermann.owncloud.notes.favorite"
-        android:enabled="true"
-        android:icon="@drawable/ic_star_grey_ccc_24dp"
-        android:shortcutShortLabel="@string/label_favorites"
-        >
-        <intent
-            android:action="it.niedermann.owncloud.notes.favorites"
-            android:targetPackage="it.niedermann.owncloud.notes"
-            android:targetClass="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
-        <categories android:name="android.shortcut.conversation" />
-    </shortcut>
-    <shortcut
-        android:shortcutId="it.niedermann.owncloud.notes.settings"
-        android:enabled="true"
-        android:icon="@drawable/ic_settings_grey600_24dp"
-        android:shortcutShortLabel="@string/action_settings"
-        >
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="it.niedermann.owncloud.notes"
-            android:targetClass="it.niedermann.owncloud.notes.android.activity.PreferencesActivity" />
-        <categories android:name="android.shortcut.conversation" />
-    </shortcut>
 </shortcuts>

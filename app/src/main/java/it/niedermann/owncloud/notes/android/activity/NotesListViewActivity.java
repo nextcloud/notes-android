@@ -3,8 +3,11 @@ package it.niedermann.owncloud.notes.android.activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
+import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -54,6 +57,8 @@ import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
+
+import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 
 public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener {
 
@@ -110,6 +115,29 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
             refreshLists();
             swipeRefreshLayout.setRefreshing(false);
+            new Thread(() -> {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+                    ShortcutManager shortcutManager = getApplicationContext().getSystemService(ShortcutManager.class);
+                    if (!shortcutManager.isRateLimitingActive()) {
+                        List<ShortcutInfo> newShortcuts = new ArrayList<>();
+
+                        for (DBNote note : db.getRecentNotes()) {
+                            Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                            intent.setAction(ACTION_SHORTCUT);
+
+                            newShortcuts.add(new ShortcutInfo.Builder(getApplicationContext(), note.getId() + "")
+                                    .setShortLabel(note.getTitle())
+                                    .setIcon(Icon.createWithResource(getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                    .setIntent(intent)
+                                    .build());
+                        }
+                        Log.d(getClass().getSimpleName(), "Update dynamic shortcuts");
+                        shortcutManager.removeAllDynamicShortcuts();
+                        shortcutManager.addDynamicShortcuts(newShortcuts);
+                    }
+                }
+            }).run();
         }
 
         @Override
@@ -127,9 +155,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         }
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
         if (savedInstanceState == null) {
-            if(ACTION_RECENT.equals(getIntent().getAction())) {
+            if (ACTION_RECENT.equals(getIntent().getAction())) {
                 categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-            } else if(ACTION_FAVORITES.equals(getIntent().getAction())) {
+            } else if (ACTION_FAVORITES.equals(getIntent().getAction())) {
                 categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
                 navigationSelection = new Category(null, true);
             }
