@@ -21,6 +21,7 @@ import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener {
@@ -36,6 +37,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
         if (savedInstanceState == null) {
             launchNoteFragment();

@@ -98,6 +98,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".android.activity.ExceptionActivity"
+            android:process=":error_activity" />
+
         <receiver
             android:name=".android.appwidget.CreateNoteWidget"
             android:label="@string/widget_create_note">
