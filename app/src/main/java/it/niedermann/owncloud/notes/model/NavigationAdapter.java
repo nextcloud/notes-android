@@ -1,15 +1,16 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.graphics.Color;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,18 +72,8 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
             super(itemView);
             view = itemView;
             ButterKnife.bind(this, view);
-            icon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clickListener.onIconClick(currentItem);
-                }
-            });
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    clickListener.onItemClick(currentItem);
-                }
-            });
+            icon.setOnClickListener(view -> clickListener.onIconClick(currentItem));
+            itemView.setOnClickListener(view -> clickListener.onItemClick(currentItem));
         }
 
         void assignItem(@NonNull NavigationItem item) {
