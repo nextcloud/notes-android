@@ -89,13 +89,13 @@
 
     <!-- About -->
     <string name="about_version_title">Versão</string>
-    <string name="about_version">Atualmente você está usando &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">Você está usando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mantenedor</string>
     <string name="about_developers_title">Desenvolvedores</string>
     <string name="about_translators_title">Tradutores </string>
-    <string name="about_translators_transifex">Nextcloud comunidade &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Comunidade Nextcloud no &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testadores</string>
-    <string name="about_source_title">Código fonte</string>
+    <string name="about_source_title">Código-fonte</string>
     <string name="about_source">Este projeto está hospedado no GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemas</string>
     <string name="about_issues">Você pode relatar bugs, enviar propostas de aprimoramento e solicitações de recursos no rastreador de problemas do GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
@@ -105,7 +105,7 @@
     <string name="about_app_license">Este aplicativo está licenciado sob a GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Ver licença</string>
     <string name="about_icons_disclaimer_title">Ícones</string>
-    <string name="about_icons_disclaimer">&lt;p>Ícone original feito por %1$s&lt;/p>&lt;p>Todos os ícones futuros usados por este aplicativo são &lt;a href=\"https://materialdesignicons.com/\">Ícones de Design de Material&lt;/a> criados por Google Inc. e estão sob a Licença Apache 2.0.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Ícone original feito por %1$s&lt;/p>&lt;p>Todos os ícones adicionais usados por este aplicativo são &lt;a href=\"https://materialdesignicons.com/\">Ícones de Design de Material&lt;/a> criados por Google Inc. e estão sob a Licença Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribuição</string>
     <string name="about_license_tab_title">Licença</string>
