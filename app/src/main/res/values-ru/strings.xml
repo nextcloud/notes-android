@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Сохранение …</string>
     <string name="action_edit_saved">Сохранено</string>
     <string name="simple_about">О программе</string>
+    <string name="simple_bold">Жирный</string>
+    <string name="simple_link">Ссылка</string>
+    <string name="simple_italic">Курсив</string>
     <string name="action_select_note">Выбрать заметку</string>
     <string name="action_note_deleted">Заметка удалена</string>
     <string name="action_note_restored">Заметка восстановлена</string>
@@ -40,7 +43,7 @@
     <string name="listview_updated_earlier">Ранее</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Аккаунт</string>
+    <string name="settings_server_settings">Учётная запись</string>
     <string name="settings_url">Адрес сервера</string>
     <string name="settings_url_check_description"> Показывает доступность адреса.</string>
     <string name="settings_url_warn_http">ВНИМАНИЕ: использование «http» небезопасно. Используйте «https».</string>
@@ -50,6 +53,10 @@
     <string name="settings_password_check_description">Показывает, верно ли указаны учётные данные.</string>
     <string name="settings_submit">Соединить</string>
     <string name="settings_submitting">Соединение …</string>
+    <string name="settings_note_mode">Режим показа заметок</string>
+    <string name="settings_theme_title">Темная тема</string>
+    <string name="settings_font_title">Моноширинный шрифт</string>
+    <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>
     <string name="settings_cert_category">Управление сертификатами</string>
     <string name="settings_cert_trust_system">Доверять системным сертификатам</string>
     <string name="settings_cert_trust_system_on">Доверять системным и добавленным пользователем центрам авторизации (рекомендуется)</string>
@@ -120,6 +127,9 @@
 
     <string name="pref_value_theme_light">Светлая</string>
     <string name="pref_value_theme_dark">Тёмная</string>
+    <string name="pref_value_font_normal">Обычный</string>
+    <string name="pref_value_wifi_and_mobile">Синхр. по Wi-Fi и мобильной связи</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>
