@@ -3,13 +3,14 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.app.DialogFragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
+import android.widget.EditText;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -22,7 +23,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.AlwaysAutoCompleteTextView;
+import it.niedermann.owncloud.notes.model.CategoryAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
@@ -52,10 +53,12 @@ public class CategoryDialogFragment extends DialogFragment {
 
     private long accountId;
 
-    @BindView(R.id.editCategory)
-    AlwaysAutoCompleteTextView textCategory;
+    @BindView(R.id.search)
+    EditText editCategory;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
 
-    private FolderArrayAdapter adapter;
+    private CategoryAdapter adapter;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -74,27 +77,31 @@ public class CategoryDialogFragment extends DialogFragment {
         ButterKnife.bind(this, dialogView);
         if (savedInstanceState == null) {
             if(getArguments() != null && getArguments().containsKey(PARAM_CATEGORY)) {
-                textCategory.setText(getArguments().getString(PARAM_CATEGORY));
+                editCategory.setText(getArguments().getString(PARAM_CATEGORY));
             }
         }
-        adapter = new FolderArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item);
-        textCategory.setAdapter(adapter);
+        adapter = new CategoryAdapter();
+        recyclerView.setAdapter(adapter);
         new LoadCategoriesTask().execute();
         return new AlertDialog.Builder(getActivity(), R.style.ncAlertDialog)
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setCancelable(true)
-                .setPositiveButton(R.string.action_edit_save, (dialog, which) -> {
-                    CategoryDialogListener listener;
-                    Fragment target = getTargetFragment();
-                    if (target instanceof CategoryDialogListener) {
-                        listener = (CategoryDialogListener) target;
-                    } else {
-                        listener = (CategoryDialogListener) getActivity();
-                    }
-                    listener.onCategoryChosen(textCategory.getText().toString());
+
+//        @Override
+//        public void onClick(DialogInterface dialog, int which) {
+//            CategoryDialogListener listener;
+//            Fragment target = getTargetFragment();
+//            if (target instanceof CategoryDialogListener) {
+//                listener = (CategoryDialogListener) target;
+//            } else {
+//                listener = (CategoryDialogListener) getActivity();
+//            }
+////                        listener.onCategoryChosen(textCategory.getText().toString());
+//        }
+                .setNegativeButton(R.string.simple_cancel, (dialog, which) -> {
+                    // do nothing
                 })
-                .setNegativeButton(R.string.simple_cancel, null)
                 .create();
     }
 
@@ -125,90 +132,13 @@ public class CategoryDialogFragment extends DialogFragment {
 
         @Override
         protected void onPostExecute(List<String> categories) {
-            adapter.setData(categories);
-            if (textCategory.getText().length() == 0) {
-                textCategory.showFullDropDown();
-            } else {
-                textCategory.dismissDropDown();
-            }
-        }
-    }
-
-
-    private static class FolderArrayAdapter extends ArrayAdapter<String> {
-
-        private List<String> originalData = new ArrayList<>();
-        private Filter filter;
-
-        private FolderArrayAdapter(@NonNull Context context, int resource) {
-            super(context, resource);
-        }
-
-        public void setData(List<String> data) {
-            originalData = data;
-            clear();
-            addAll(data);
-        }
-
-        @NonNull
-        @Override
-        public Filter getFilter() {
-            if (filter == null) {
-                filter = new FolderFilter();
-            }
-            return filter;
-        }
-
-        /* This implementation is based on ArrayAdapter.ArrayFilter */
-        private class FolderFilter extends Filter {
-            @Override
-            protected FilterResults performFiltering(CharSequence prefix) {
-                final FilterResults results = new FilterResults();
-
-                if (prefix == null || prefix.length() == 0) {
-                    final ArrayList<String> list = new ArrayList<>(originalData);
-                    results.values = list;
-                    results.count = list.size();
-                } else {
-                    final String prefixString = prefix.toString().toLowerCase();
-                    final int count = originalData.size();
-                    final ArrayList<String> newValues = new ArrayList<>();
-
-                    for (int i = 0; i < count; i++) {
-                        final String value = originalData.get(i);
-                        final String valueText = value.toLowerCase();
-
-                        // First match against the whole, non-splitted value
-                        if (valueText.startsWith(prefixString)) {
-                            newValues.add(value);
-                        } else {
-                            final String[] words = valueText.split("/");
-                            for (String word : words) {
-                                if (word.startsWith(prefixString)) {
-                                    newValues.add(value);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    results.values = newValues;
-                    results.count = newValues.size();
-                }
-
-                return results;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                clear();
-                addAll((List<String>) results.values);
-                if (results.count > 0) {
-                    notifyDataSetChanged();
-                } else {
-                    notifyDataSetInvalidated();
-                }
-            }
+            adapter.setCategoryList(categories);
+//TODO show creation entry
+//            if (textCategory.getText().length() == 0) {
+//                textCategory.showFullDropDown();
+//            } else {
+//                textCategory.dismissDropDown();
+//            }
         }
     }
 }
