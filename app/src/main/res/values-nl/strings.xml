@@ -130,6 +130,11 @@
     <string name="pref_value_theme_dark">Donker</string>
     <string name="pref_value_font_normal">Normaal</string>
     <string name="pref_value_wifi_and_mobile">Sync met Wi-Fi en mobiele data</string>
+    <string name="simple_error">Fout</string>
+    <string name="simple_close">Sluiten</string>
+    <string name="simple_copy">Kopiëren</string>
+    <string name="simple_exception">Uitzondering</string>
+    <string name="copied_to_clipboard">Gekopieerd naar het klembord</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

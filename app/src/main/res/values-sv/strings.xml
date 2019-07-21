@@ -129,6 +129,11 @@
     <string name="pref_value_theme_dark">Mörk</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobil data</string>
+    <string name="simple_error">Fel</string>
+    <string name="simple_close">Stäng</string>
+    <string name="simple_copy">Kopiera</string>
+    <string name="simple_exception">Undantag</string>
+    <string name="copied_to_clipboard">Kopierat till urklipp</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

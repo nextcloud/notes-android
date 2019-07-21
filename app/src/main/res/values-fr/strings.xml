@@ -14,7 +14,7 @@
     <string name="simple_edit">Modifier</string>
     <string name="action_edit_save">Sauvegarder</string>
     <string name="action_edit_saving">Enregistrement de &#8230;</string>
-    <string name="action_edit_saved">Sauvegardé</string>
+    <string name="action_edit_saved">Enregistré</string>
     <string name="simple_about">À propos</string>
     <string name="simple_bold">Gras</string>
     <string name="simple_link">Lien</string>
@@ -129,6 +129,11 @@
     <string name="pref_value_theme_dark">Sombre</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synchroniser en Wifi et données mobiles</string>
+    <string name="simple_error">Erreur</string>
+    <string name="simple_close">Fermer</string>
+    <string name="simple_copy">Copier</string>
+    <string name="simple_exception">Exception</string>
+    <string name="copied_to_clipboard">Copié dans le presse-papier</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
