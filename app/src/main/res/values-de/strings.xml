@@ -129,6 +129,11 @@
     <string name="pref_value_theme_dark">Dunkel</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Über WLAN und mobile Daten synchronisieren</string>
+    <string name="simple_error">Fehler</string>
+    <string name="simple_close">Schließen</string>
+    <string name="simple_copy">Kopieren</string>
+    <string name="simple_exception">Ausnahme</string>
+    <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

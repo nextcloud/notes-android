@@ -129,7 +129,6 @@
     <string name="pref_value_theme_dark">ダーク</string>
     <string name="pref_value_font_normal">ノーマル</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fiおよびモバイル接続時に同期する</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>
