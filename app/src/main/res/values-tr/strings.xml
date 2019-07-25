@@ -129,6 +129,12 @@
     <string name="pref_value_theme_dark">Koyu</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fi ve mobil veri ile eşitlensin</string>
+    <string name="simple_error">Hata</string>
+    <string name="simple_close">Kapat</string>
+    <string name="simple_copy">Kopyala</string>
+    <string name="simple_exception">İstisna</string>
+    <string name="copied_to_clipboard">Panoya kopyalandı</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>

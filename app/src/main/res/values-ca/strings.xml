@@ -129,6 +129,12 @@
     <string name="pref_value_theme_dark">Fosc</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronitza per Wi-Fi i dades mòbils</string>
+    <string name="simple_error">Error</string>
+    <string name="simple_close">Tanca</string>
+    <string name="simple_copy">Copia</string>
+    <string name="simple_exception">Excepció</string>
+    <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Obre en mode d\'edició</item>
