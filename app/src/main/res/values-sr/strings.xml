@@ -129,6 +129,12 @@
     <string name="pref_value_theme_dark">Тамна</string>
     <string name="pref_value_font_normal">Нормална</string>
     <string name="pref_value_wifi_and_mobile">Синхронизуј и на бежичној и на мобилној вези</string>
+    <string name="simple_error">Грешка</string>
+    <string name="simple_close">Затвори</string>
+    <string name="simple_copy">Копирај</string>
+    <string name="simple_exception">Изузетак</string>
+    <string name="copied_to_clipboard">Копирано у оставу</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>
