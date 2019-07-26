@@ -3,9 +3,11 @@ package it.niedermann.owncloud.notes.persistence;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ShortcutManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -15,10 +17,12 @@ import androidx.annotation.WorkerThread;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -311,7 +315,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull
     @WorkerThread
     public List<DBNote> getRecentNotes() {
-        return getNotesCustom(key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()},  key_modified + " DESC", "4");
+        return getNotesCustom(key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, key_modified + " DESC", "4");
     }
 
     /**
@@ -539,6 +543,17 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)});
         notifyNotesChanged();
         getNoteServerSyncHelper().scheduleSync(true);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
+            shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
+                String shortcutId = id + "";
+                if (shortcut.getId().equals(shortcutId)) {
+                    Log.v(NoteSQLiteOpenHelper.class.getSimpleName(), "Removing shortcut for " + shortcutId);
+                    shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), context.getResources().getString(R.string.note_has_been_deleted));
+                }
+            });
+        }
         return i;
     }
 

@@ -3,7 +3,11 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
+import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -22,12 +26,17 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.ShareActionProvider;
 import androidx.core.view.MenuItemCompat;
 import androidx.core.view.ViewCompat;
+
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
+
+import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
+import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 
 public abstract class BaseNoteFragment extends Fragment implements CategoryDialogFragment.CategoryDialogListener {
 
@@ -37,6 +46,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         void onNoteUpdated(DBNote note);
     }
 
+    private static final int MENU_ID_PIN = -1;
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_NEWNOTE = "newNote";
     private static final String SAVEDKEY_NOTE = "note";
@@ -146,6 +156,10 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
+
+        if (isRequestPinShortcutSupported(getActivity()) && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
+        }
     }
 
     @Override
@@ -171,6 +185,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             int oldVisibility = -1;
+
             @Override
             public void onGlobalLayout() {
                 int currentVisibility = searchEditFrame.getVisibility();
@@ -250,6 +265,33 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 }
 
                 return false;
+            case MENU_ID_PIN:
+                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    ShortcutManager shortcutManager = getActivity().getSystemService(ShortcutManager.class);
+
+                    if (shortcutManager.isRequestPinShortcutSupported()) {
+                        Intent intent = new Intent(getActivity(), EditNoteActivity.class);
+                        intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                        intent.setAction(ACTION_SHORTCUT);
+
+                        ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
+                                .setShortLabel(note.getTitle())
+                                .setIcon(Icon.createWithResource(getActivity().getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                .setIntent(intent)
+                                .build();
+
+                        Intent pinnedShortcutCallbackIntent =
+                                shortcutManager.createShortcutResultIntent(pinShortcutInfo);
+
+                        PendingIntent successCallback = PendingIntent.getBroadcast(getActivity(), /* request code */ 0,
+                                pinnedShortcutCallbackIntent, /* flags */ 0);
+
+                        shortcutManager.requestPinShortcut(pinShortcutInfo,
+                                successCallback.getIntentSender());
+                    }
+                }
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -269,7 +311,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     protected void saveNote(@Nullable ICallback callback) {
         Log.d(getClass().getSimpleName(), "saveData()");
         String newContent = getContent();
-        if(note.getContent().equals(newContent)) {
+        if (note.getContent().equals(newContent)) {
             Log.v(getClass().getSimpleName(), "... not saving, since nothing has changed");
         } else {
             note = db.updateNoteAndSync(note, newContent, callback);
