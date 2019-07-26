@@ -129,6 +129,12 @@
     <string name="pref_value_theme_dark">Ciemny</string>
     <string name="pref_value_font_normal">Podstawowy</string>
     <string name="pref_value_wifi_and_mobile">Synchronizacja w sieci Wi-Fi i komórkowej transmisji danych</string>
+    <string name="simple_error">Błąd</string>
+    <string name="simple_close">Zamknij </string>
+    <string name="simple_copy">Kopiuj</string>
+    <string name="simple_exception">Wyjątek</string>
+    <string name="copied_to_clipboard">Skopiowano do schowka</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otwórz w trybie edycji</item>
