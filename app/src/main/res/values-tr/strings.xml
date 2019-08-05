@@ -134,6 +134,8 @@
     <string name="simple_copy">Kopyala</string>
     <string name="simple_exception">İstisna</string>
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
+    <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
+    <string name="note_has_been_deleted">Bu not silinmiş</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

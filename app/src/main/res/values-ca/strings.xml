@@ -7,7 +7,7 @@
     <string name="label_favorites">Preferides</string>
     <string name="action_create">Crea una nota</string>
     <string name="action_settings">Paràmetres</string>
-    <string name="action_trashbin">Notes eliminades</string>
+    <string name="action_trashbin">Notes suprimides</string>
     <string name="action_search">Cerca</string>
     <string name="action_create_save">Desa</string>
     <string name="simple_cancel">Cancel·la</string>
@@ -134,6 +134,8 @@
     <string name="simple_copy">Copia</string>
     <string name="simple_exception">Excepció</string>
     <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
+    <string name="pin_to_homescreen">Fixar a la pantalla d\'inici</string>
+    <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -129,6 +129,14 @@
     <string name="pref_value_theme_dark">Tmavé</string>
     <string name="pref_value_font_normal">Normální</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovat přes Wi-Fi a mobilní data</string>
+    <string name="simple_error">Chyba</string>
+    <string name="simple_close">Zavřít</string>
+    <string name="simple_copy">Zkopírovat</string>
+    <string name="simple_exception">Výjimka</string>
+    <string name="copied_to_clipboard">Zkopírováno do schránky</string>
+    <string name="pin_to_homescreen">Připnout na domovskou obrazovku</string>
+    <string name="note_has_been_deleted">Tato poznámka byla smazána</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otevřít v režimu úprav</item>

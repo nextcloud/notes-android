@@ -134,6 +134,8 @@
     <string name="simple_copy">Копирај</string>
     <string name="simple_exception">Изузетак</string>
     <string name="copied_to_clipboard">Копирано у оставу</string>
+    <string name="pin_to_homescreen">Закачи на почетни екран</string>
+    <string name="note_has_been_deleted">Ова белешка је обрисана</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

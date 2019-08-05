@@ -133,7 +133,6 @@
     <string name="simple_copy">Kopiatu</string>
     <string name="simple_exception">Salbuespena</string>
     <string name="copied_to_clipboard">Arbelera kopiatua</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>
