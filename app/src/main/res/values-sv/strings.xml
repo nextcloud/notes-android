@@ -134,6 +134,8 @@
     <string name="simple_copy">Kopiera</string>
     <string name="simple_exception">Undantag</string>
     <string name="copied_to_clipboard">Kopierat till urklipp</string>
+    <string name="pin_to_homescreen">Fäst på hemskärmen</string>
+    <string name="note_has_been_deleted">Denna anteckning har raderats</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

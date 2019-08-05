@@ -134,6 +134,8 @@
     <string name="simple_copy">复制</string>
     <string name="simple_exception">异常</string>
     <string name="copied_to_clipboard">复制到剪贴板</string>
+    <string name="pin_to_homescreen">固定到主屏幕</string>
+    <string name="note_has_been_deleted">此便签已被删除</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

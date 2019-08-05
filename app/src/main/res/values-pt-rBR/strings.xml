@@ -134,6 +134,8 @@
     <string name="simple_copy">Copiar</string>
     <string name="simple_exception">Exceção</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
+    <string name="pin_to_homescreen">Fixar na tela inicial</string>
+    <string name="note_has_been_deleted">A anotação foi excluída</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

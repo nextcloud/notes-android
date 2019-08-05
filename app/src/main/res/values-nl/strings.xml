@@ -135,6 +135,8 @@
     <string name="simple_copy">Kopiëren</string>
     <string name="simple_exception">Uitzondering</string>
     <string name="copied_to_clipboard">Gekopieerd naar het klembord</string>
+    <string name="pin_to_homescreen">Vastmaken op startscherm</string>
+    <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

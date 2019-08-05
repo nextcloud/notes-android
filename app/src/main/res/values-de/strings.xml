@@ -134,6 +134,8 @@
     <string name="simple_copy">Kopieren</string>
     <string name="simple_exception">Ausnahme</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
+    <string name="pin_to_homescreen">An Startbildschirm anheften</string>
+    <string name="note_has_been_deleted">Diese Notiz wurde gelöscht</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -134,6 +134,8 @@
     <string name="simple_copy">Copier</string>
     <string name="simple_exception">Exception</string>
     <string name="copied_to_clipboard">Copié dans le presse-papier</string>
+    <string name="pin_to_homescreen">Épingler sur la page d’accueil</string>
+    <string name="note_has_been_deleted">Cette note a été supprimée</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

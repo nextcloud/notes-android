@@ -129,6 +129,12 @@
     <string name="pref_value_theme_dark">כהה</string>
     <string name="pref_value_font_normal">רגיל</string>
     <string name="pref_value_wifi_and_mobile">עדכון דרך רשת אלחוטית ונתונים סלולריים</string>
+    <string name="simple_error">שגיאה</string>
+    <string name="simple_close">סגור</string>
+    <string name="simple_copy">העתק</string>
+    <string name="pin_to_homescreen">הוסף למסך הבית</string>
+    <string name="note_has_been_deleted">פתק זה נמחק</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>
