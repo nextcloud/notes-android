@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -155,6 +156,7 @@ public class NoteEditFragment extends BaseNoteFragment {
 
             editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+            editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
                 editContent.setTypeface(Typeface.MONOSPACE);
             }
