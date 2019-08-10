@@ -150,7 +150,6 @@
     <string name="pref_value_mode_preview" translatable="false">preview</string>
     <string name="pref_value_mode_last" translatable="false">last</string>
     <string name="pref_value_mode_note" translatable="false">note</string>
-    <string name="pref_value_font_size_tiny" translatable="false">tiny</string>
     <string name="pref_value_font_size_small" translatable="false">small</string>
     <string name="pref_value_font_size_medium" translatable="false">medium</string>
     <string name="pref_value_font_size_large" translatable="false">large</string>
@@ -175,7 +174,6 @@
 
     <!-- Array: font size -->
     <string-array name="fontSize_entries">
-        <item>Tiny</item>
         <item>Small</item>
         <item>Medium</item>
         <item>Large</item>

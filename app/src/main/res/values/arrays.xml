@@ -6,7 +6,6 @@
         <item>@string/pref_value_mode_last</item>
     </string-array>
     <string-array name="fontSize_values">
-        <item>@string/pref_value_font_size_tiny</item>
         <item>@string/pref_value_font_size_small</item>
         <item>@string/pref_value_font_size_medium</item>
         <item>@string/pref_value_font_size_large</item>
