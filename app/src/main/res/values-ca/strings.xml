@@ -72,14 +72,14 @@
     <!-- Network -->
     <string name="network_connecting">S\'està connectant</string>
     <string name="network_connected">S\'ha connectat</string>
-    <string name="network_disconnected">No hi ha cap connexió disponible</string>
+    <string name="network_disconnected">No hi ha cap xarxa disponible</string>
 
     <!-- Error -->
     <string name="error_sync">Ha fallat la sincronització: %1$s</string>
     <string name="error_invalid_login">Inici de sessió no vàlid: %1$s</string>
-    <string name="error_json">L\'aplicació Notes està activada al servidor?</string>
-    <string name="error_io">S\'ha trencat la connexió amb el servidor</string>
-    <string name="error_no_network">No hi ha connexió a la xarxa</string>
+    <string name="error_json">l\'aplicació Notes està activada al servidor?</string>
+    <string name="error_io">s\'ha trencat la connexió amb el servidor</string>
+    <string name="error_no_network">no hi ha connexió a la xarxa</string>
     <string name="error_server">L\'URL o el servidor contenen errors</string>
     <string name="error_url_malformed">L\'adreça del servidor és incorrecta</string>
     <string name="error_username_password_invalid">El nom d\'usuari o la contrasenya són incorrectes</string>
@@ -90,19 +90,19 @@
     <!-- About -->
     <string name="about_version_title">Versió</string>
     <string name="about_version">Actualment esteu utilitzant la versió &lt;strong>%1$s&lt;/strong></string>
-    <string name="about_maintainer_title">Manteniment</string>
-    <string name="about_developers_title">Desenvolupament</string>
-    <string name="about_translators_title">Traducció</string>
+    <string name="about_maintainer_title">Mantenidor</string>
+    <string name="about_developers_title">Desenvolupadors</string>
+    <string name="about_translators_title">Traductors</string>
     <string name="about_translators_transifex">Comunitat del Nextcloud a &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Verificadors</string>
     <string name="about_source_title">Codi font</string>
-    <string name="about_source">Aquest projecte està allotjat a Github: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Aquest projecte està allotjat a GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Incidències</string>
     <string name="about_issues">Podeu informar d\'errors, proposar millores i demanar noves funcionalitats al seguiment d\'incidències de GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Tradueix</string>
     <string name="about_translate">Uniu-vos a l\'equip de Nextcloud a Transifex i ajudeu-nos a traduir aquesta aplicació: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Llicència de l\'aplicació</string>
-    <string name="about_app_license">Aquesta aplicació està llicenciada sota GNU GENERAL PUBLIC LICENSE v3+</string>
+    <string name="about_app_license">Aquesta aplicació està llicenciada sota la Llicència Pública General de GNU v3+</string>
     <string name="about_app_license_button">Mostra la llicència</string>
     <string name="about_icons_disclaimer_title">Icones</string>
     <string name="about_icons_disclaimer">&lt;p>Icona original feta per %1$s&lt;/p>&lt;p>Totes les demés icones emprades per aquesta aplicació són &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> fetes per Google Inc. i llicenciades sota la Llicència Apache 2.0.&lt;/p></string>
@@ -134,7 +134,7 @@
     <string name="simple_copy">Copia</string>
     <string name="simple_exception">Excepció</string>
     <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
-    <string name="pin_to_homescreen">Fixar a la pantalla d\'inici</string>
+    <string name="pin_to_homescreen">Fixa-ho a la pantalla d\'inici</string>
     <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
 
     <!-- Array: note modes -->
