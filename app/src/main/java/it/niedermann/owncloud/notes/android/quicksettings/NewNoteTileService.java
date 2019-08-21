@@ -27,15 +27,8 @@ public class NewNoteTileService extends TileService {
         // create new note intent
         final Intent newNoteIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
         // ensure it won't open twice if already running
-        newNoteIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-
+        newNoteIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         // ask to unlock the screen if locked, then start new note intent
-        unlockAndRun(new Runnable() {
-            @Override
-            public void run() {
-                startActivityAndCollapse(newNoteIntent);
-            }
-        });
-
+        unlockAndRun(() -> startActivityAndCollapse(newNoteIntent));
     }
 }
