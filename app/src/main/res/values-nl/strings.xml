@@ -57,6 +57,7 @@
     <string name="settings_note_mode">Weergavemode voor notities</string>
     <string name="settings_theme_title">Donker thema</string>
     <string name="settings_font_title">Monospace lettertype</string>
+    <string name="settings_font_size">Fontgrootte</string>
     <string name="settings_wifi_only">Sync alleen met Wi-Fi</string>
     <string name="settings_cert_category">Beheren certificaten</string>
     <string name="settings_cert_trust_system">Vertrouw systeem certificaten</string>
@@ -143,6 +144,13 @@
         <item>Open in wijzigen modus</item>
         <item>Open in voorbeeldweergave modus</item>
         <item>Onthoud je laatste selectie</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Klein</item>
+        <item>Gemiddeld</item>
+        <item>Groot</item>
     </string-array>
 
     <!-- Plurals -->
