@@ -1,0 +1,2 @@
+- #581 Reference to cert4android invalid
+- #582 update dependencies
