@@ -1,6 +1,8 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
+
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.yydcdut.rxmarkdown.RxMDConfiguration;
@@ -22,14 +24,15 @@ public class MarkDownUtil {
      */
     public static Builder getMarkDownConfiguration(Context context) {
         return new RxMDConfiguration.Builder(context)
-                .setUnOrderListColor(ResourcesCompat.getColor(context.getResources(), R.color.fg_default, null))
+                .setUnOrderListColor(ContextCompat.getColor(context, R.color.fg_default))
+                .setCodeBgColor(ContextCompat.getColor(context, R.color.fg_default_high))
                 .setHeader2RelativeSize(1.35f)
                 .setHeader3RelativeSize(1.25f)
                 .setHeader4RelativeSize(1.15f)
                 .setHeader5RelativeSize(1.1f)
                 .setHeader6RelativeSize(1.05f)
                 .setHorizontalRulesHeight(2)
-                .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null));
+                .setLinkFontColor(ContextCompat.getColor(context, R.color.primary));
     }
 
     public static Builder getMarkDownConfiguration(Context context, Boolean darkTheme) {
