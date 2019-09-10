@@ -56,6 +56,7 @@
     <string name="settings_note_mode">Režim zobrazovania poznámok</string>
     <string name="settings_theme_title">Tmavý motív vzhľadu</string>
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
+    <string name="settings_font_size">Veľkosť písma</string>
     <string name="settings_wifi_only">Synchronizovať len na Wi-Fi</string>
     <string name="settings_cert_category">Spravovať certifikáty</string>
     <string name="settings_cert_trust_system">Dôverovať systémovým certifikátom</string>
@@ -129,11 +130,26 @@
     <string name="pref_value_theme_dark">Tmavý</string>
     <string name="pref_value_font_normal">Normálne</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovať na Wi-Fi a mobilných dátach</string>
+    <string name="simple_error">Chyba</string>
+    <string name="simple_close">Zatvoriť</string>
+    <string name="simple_copy">Kopírovať</string>
+    <string name="simple_exception">Výnimka</string>
+    <string name="copied_to_clipboard">Skopírované do schránky</string>
+    <string name="pin_to_homescreen">Pripnúť na domovskú obrazovku</string>
+    <string name="note_has_been_deleted">Táto poznámka bola vymazaná</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
         <item>Otvoriť v režime ukážky</item>
         <item>Zapamätať si môj posledný výber</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Malá</item>
+        <item>Stredná</item>
+        <item>Veľká</item>
     </string-array>
 
     <!-- Plurals -->

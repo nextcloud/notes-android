@@ -56,6 +56,7 @@
     <string name="settings_note_mode">Режим показа заметок</string>
     <string name="settings_theme_title">Темная тема</string>
     <string name="settings_font_title">Моноширинный шрифт</string>
+    <string name="settings_font_size">Размер шрифта</string>
     <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>
     <string name="settings_cert_category">Управление сертификатами</string>
     <string name="settings_cert_trust_system">Доверять системным сертификатам</string>
@@ -129,11 +130,26 @@
     <string name="pref_value_theme_dark">Тёмная</string>
     <string name="pref_value_font_normal">Обычный</string>
     <string name="pref_value_wifi_and_mobile">Синхр. по Wi-Fi и мобильной связи</string>
+    <string name="simple_error">Ошибка</string>
+    <string name="simple_close">Закрыть</string>
+    <string name="simple_copy">Копировать</string>
+    <string name="simple_exception">Исключение</string>
+    <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
+    <string name="pin_to_homescreen">Введите PIN-код для домашнего экрана</string>
+    <string name="note_has_been_deleted">Запись была удалена</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>
         <item>Открывать в режиме просмотра</item>
         <item>Запоминать выбранный режим</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Маленький</item>
+        <item>Средний</item>
+        <item>Большой</item>
     </string-array>
 
     <!-- Plurals -->

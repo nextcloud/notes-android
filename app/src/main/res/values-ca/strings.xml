@@ -91,9 +91,9 @@
     <!-- About -->
     <string name="about_version_title">Versió</string>
     <string name="about_version">Actualment esteu utilitzant la versió &lt;strong>%1$s&lt;/strong></string>
-    <string name="about_maintainer_title">Mantenidor</string>
-    <string name="about_developers_title">Desenvolupadors</string>
-    <string name="about_translators_title">Traductors</string>
+    <string name="about_maintainer_title">Manteniment</string>
+    <string name="about_developers_title">Desenvolupament</string>
+    <string name="about_translators_title">Traducció</string>
     <string name="about_translators_transifex">Comunitat del Nextcloud a &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Verificadors</string>
     <string name="about_source_title">Codi font</string>
