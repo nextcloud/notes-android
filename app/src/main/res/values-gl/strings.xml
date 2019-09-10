@@ -56,6 +56,7 @@
     <string name="settings_note_mode">Modo de vista das notas</string>
     <string name="settings_theme_title">Tema escuro</string>
     <string name="settings_font_title">Letra monoespazada</string>
+    <string name="settings_font_size">Tamaño da letra</string>
     <string name="settings_wifi_only">Sincronizar só con WiFi</string>
     <string name="settings_cert_category">Administrar certificados</string>
     <string name="settings_cert_trust_system">Confiar nos certificados do sistema</string>
@@ -142,6 +143,13 @@
         <item>Abrir en modo de edición</item>
         <item>Abrir en modo de vista previa</item>
         <item>Lembrar a miña última selección</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Pequena</item>
+        <item>Mediana</item>
+        <item>Grande</item>
     </string-array>
 
     <!-- Plurals -->

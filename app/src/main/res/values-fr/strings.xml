@@ -9,10 +9,10 @@
     <string name="action_settings">Paramètres</string>
     <string name="action_trashbin">Notes supprimées</string>
     <string name="action_search">Rechercher</string>
-    <string name="action_create_save">Sauvegarder</string>
+    <string name="action_create_save">Enregistrer</string>
     <string name="simple_cancel">Annuler</string>
     <string name="simple_edit">Modifier</string>
-    <string name="action_edit_save">Sauvegarder</string>
+    <string name="action_edit_save">Enregistrer</string>
     <string name="action_edit_saving">Enregistrement de &#8230;</string>
     <string name="action_edit_saved">Enregistré</string>
     <string name="simple_about">À propos</string>
