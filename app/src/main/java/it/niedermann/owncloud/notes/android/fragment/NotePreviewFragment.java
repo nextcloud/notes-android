@@ -63,7 +63,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
         RxMarkdown.with(content, getActivity())
                 .config(
-                        MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
+                        MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
                                 /*.setOnTodoClickCallback(new OnTodoClickCallback() {
                                         @Override
                                         public CharSequence onTodoClicked(View view, String line, int lineNumber) {
