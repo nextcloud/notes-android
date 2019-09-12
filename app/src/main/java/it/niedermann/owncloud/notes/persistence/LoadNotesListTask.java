@@ -60,15 +60,6 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 
             dbNote.setTitle(Html.toHtml(spannableString));
 
-            spannableString = new SpannableString(dbNote.getCategory());
-            matcher = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
-            while (matcher.find()) {
-                spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.primary_dark)),
-                        matcher.start(), matcher.end(), 0);
-            }
-
-            dbNote.setCategory(Html.toHtml(spannableString));
-
             spannableString = new SpannableString(dbNote.getExcerpt());
             matcher = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
             while (matcher.find()) {
