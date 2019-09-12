@@ -343,7 +343,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
 
         if (category != null) {
-            where.add(key_category + "=? OR " + key_category + " LIKE ?");
+            where.add("(" + key_category + "=? OR " + key_category + " LIKE ? )");
             args.add(category);
             args.add(category + "/%");
         }
