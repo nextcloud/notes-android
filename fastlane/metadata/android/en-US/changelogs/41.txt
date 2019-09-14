@@ -1,0 +1,1 @@
+- Switching theme must recreate MainActivity (#529)

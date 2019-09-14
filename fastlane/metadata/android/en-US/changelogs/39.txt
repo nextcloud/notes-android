@@ -1,0 +1,6 @@
+- In-note-search (#106, #400)
+- New setting: Use monospace font (#359)
+- Context based formatting (#363)
+- Migrate to AndroidX (#492, #500)
+- Remove borders between notes in list (#498, #524)
+- Markdown util needs to hardcode unordered list colour (#517)

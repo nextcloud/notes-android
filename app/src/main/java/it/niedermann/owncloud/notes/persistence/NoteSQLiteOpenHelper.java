@@ -3,21 +3,26 @@ package it.niedermann.owncloud.notes.persistence;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ShortcutManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -49,14 +54,13 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static NoteSQLiteOpenHelper instance;
 
-    private NoteServerSyncHelper serverSyncHelper = null;
-    private Context context = null;
+    private NoteServerSyncHelper serverSyncHelper;
+    private Context context;
 
     private NoteSQLiteOpenHelper(Context context) {
         super(context, database_name, null, database_version);
         this.context = context.getApplicationContext();
         serverSyncHelper = NoteServerSyncHelper.getInstance(this);
-        //recreateDatabase(getWritableDatabase());
     }
 
     public static NoteSQLiteOpenHelper getInstance(Context context) {
@@ -244,11 +248,17 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull
     @WorkerThread
     private List<DBNote> getNotesCustom(@NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy) {
+        return this.getNotesCustom(selection, selectionArgs, orderBy, null);
+    }
+
+    @NonNull
+    @WorkerThread
+    private List<DBNote> getNotesCustom(@NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy, @Nullable String limit) {
         SQLiteDatabase db = getReadableDatabase();
         if (selectionArgs.length > 2) {
             Log.v("Note", selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
         }
-        Cursor cursor = db.query(table_notes, columns, selection, selectionArgs, null, null, orderBy);
+        Cursor cursor = db.query(table_notes, columns, selection, selectionArgs, null, null, orderBy, limit);
         List<DBNote> notes = new ArrayList<>();
         while (cursor.moveToNext()) {
             notes.add(getNoteFromCursor(cursor));
@@ -302,6 +312,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         return getNotesCustom(key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, default_order);
     }
 
+    @NonNull
+    @WorkerThread
+    public List<DBNote> getRecentNotes() {
+        return getNotesCustom(key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, key_modified + " DESC", "4");
+    }
+
     /**
      * Returns a list of all Notes in the Database
      *
@@ -327,7 +343,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
 
         if (category != null) {
-            where.add(key_category + "=? OR " + key_category + " LIKE ?");
+            where.add("(" + key_category + "=? OR " + key_category + " LIKE ? )");
             args.add(category);
             args.add(category + "/%");
         }
@@ -527,6 +543,17 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(id)});
         notifyNotesChanged();
         getNoteServerSyncHelper().scheduleSync(true);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
+            shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
+                String shortcutId = id + "";
+                if (shortcut.getId().equals(shortcutId)) {
+                    Log.v(NoteSQLiteOpenHelper.class.getSimpleName(), "Removing shortcut for " + shortcutId);
+                    shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), context.getResources().getString(R.string.note_has_been_deleted));
+                }
+            });
+        }
         return i;
     }
 

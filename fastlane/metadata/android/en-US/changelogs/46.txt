@@ -1,0 +1,3 @@
+- #567 Enable pinning notes as shortcut
+- #575 Added preference "Font Size"
+- Fix "New note" tile

@@ -6,7 +6,7 @@
         <!-- App Bar -->
         <item name="colorPrimary">@color/primary</item>
         <!-- Status Bar and contextual Status Bars -->
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimaryDark">@color/primary</item>
         <!-- Snackbar Action Link -->
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionModeOverlay">true</item>
@@ -36,7 +36,7 @@
     <style name="ocAlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/primary</item>
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorPrimaryDark">@color/primary</item>
         <item name="android:textColorPrimary">@color/fg_default</item>
         <item name="android:alertDialogTheme">@style/cloudbutton</item>
         <item name="android:windowBackground">@color/bg_normal</item>

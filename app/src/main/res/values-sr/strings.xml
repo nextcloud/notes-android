@@ -16,9 +16,12 @@
     <string name="action_edit_saving">Чувам &#8230;</string>
     <string name="action_edit_saved">Сачувано</string>
     <string name="simple_about">О програму</string>
+    <string name="simple_bold">Подебљано</string>
+    <string name="simple_link">Веза</string>
+    <string name="simple_italic">Курзив</string>
     <string name="action_select_note">Изабери белешку</string>
     <string name="action_note_deleted">Белешка обрисана</string>
-    <string name="action_note_restored">Белешка повраћена</string>
+    <string name="action_note_restored">Белешка враћена</string>
     <string name="action_undo">Опозови</string>
     <string name="action_drawer_open">отвори навигацију</string>
     <string name="action_drawer_close">затвори навигацију</string>
@@ -50,18 +53,21 @@
     <string name="settings_password_check_description">Прикзује да ли су акредитиви исправни.</string>
     <string name="settings_submit">Повежи се</string>
     <string name="settings_submitting">Повезујем се&#8230;</string>
-    <string name="settings_note_mode">Начин приказа за Белешке</string>
-    <string name="settings_theme_title">Тема</string>
+    <string name="settings_note_mode">Режим приказа белешки</string>
+    <string name="settings_theme_title">Тамна тема</string>
+    <string name="settings_font_title">Фонт фиксне ширине</string>
+    <string name="settings_font_size">Величина фонта</string>
+    <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
     <string name="settings_cert_category">Управљај сертификатима</string>
     <string name="settings_cert_trust_system">Веруј системским сертификатима</string>
     <string name="settings_cert_trust_system_on">Вероваће се системским сертификатима и кориснички доданим сертификационим центрима (CA)</string>
-    <string name="settings_cert_trust_system_off">Неће се веровати системским сертификатима и кориснички доданим сертификационим центрима</string>
+    <string name="settings_cert_trust_system_off">Неће се веровати системским сертификатима и кориснички додатим сертификационим центрима</string>
     <string name="settings_cert_reset">Ресетуј којим се сертификатима (не) верује</string>
     <string name="settings_cert_reset_summary">Ресетуј поверење свих кориснички прилагођеним сертификатима</string>
     <string name="settings_cert_reset_toast">Сви кориснички поверљиви сертификати су очишћени</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Белешке - безбедност конекције</string>
+    <string name="certificate_notification_connection_security">Белешке - безбедност везе</string>
     <string name="trust_certificate_unknown_certificate_found">Белешке су наишле на непознати сертификат. Да ли желите да му верујете?</string>
 
     <!-- Network -->
@@ -71,13 +77,13 @@
 
     <!-- Error -->
     <string name="error_sync">Синхронизација није успела%1$s</string>
-    <string name="error_invalid_login">Неисправна лозинка:%1$s</string>
+    <string name="error_invalid_login">Неисправна пријава:%1$s</string>
     <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
-    <string name="error_io">веза са сервером је пукла</string>
-    <string name="error_no_network">нема интернет конекције</string>
-    <string name="error_server">URL/Server грешка</string>
+    <string name="error_io">веза са сервером је прекинута</string>
+    <string name="error_no_network">нема мрежне везе</string>
+    <string name="error_server">УРЛ/сервер имају грешку</string>
     <string name="error_url_malformed">Погрешна адреса сервера</string>
-    <string name="error_username_password_invalid">Корисничко име или лозинка нису тачни</string>
+    <string name="error_username_password_invalid">Погрешно корисничко име или лозинка</string>
 
     <!-- Snackbar Actions -->
     <string name="snackbar_settings">Поставке</string>
@@ -88,19 +94,19 @@
     <string name="about_maintainer_title">Одржаваоц</string>
     <string name="about_developers_title">Програмери</string>
     <string name="about_translators_title">Преводиоци</string>
-    <string name="about_translators_transifex">Некстклауд заједница на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Некстклауд заједница на &lt;a href=\"%1$s\">Трансифексу&lt;/a></string>
     <string name="about_testers_title">Тестери</string>
     <string name="about_source_title">Изворни кôд</string>
-    <string name="about_source">Овај пројекат се држи на  GitHub-у: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_issues_title">Грешке</string>
-    <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу пријава: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Овај пројекат се одржава на Гитхабу: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Проблеми</string>
+    <string name="about_issues">Пријаве грешака, предлоге и захтеве можете да оставите на Гитхабовом пратиоцу проблема: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Преведи</string>
-    <string name="about_translate">Придружите се Некстклауд тиму на Transifex-у и помозите нам да преведемо ову апликацију: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Придружите се Некстклауд тиму на Трансифексу и помозите нам да преведемо ову апликацију: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Лиценца апликације</string>
-    <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом Општом јавном лиценцом (ГПЛ) в3+.</string>
+    <string name="about_app_license">Ова апликација је лиценцирана под ГНУовом општом јавном лиценцом в3+.</string>
     <string name="about_app_license_button">Прикажи лиценцу</string>
     <string name="about_icons_disclaimer_title">Иконе</string>
-    <string name="about_icons_disclaimer">&lt;p>Оригиналне иконе направио %1$s&lt;/p>&lt;p>Све остале иконе коришћене у овој апликацији су &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> направљене од стране Google Inc. и лиценциране под Apache 2.0 лиценцом.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Оригиналне иконе направио %1$s&lt;/p>&lt;p>Све остале иконе коришћене у овој апликацији су &lt;a href=\"https://materialdesignicons.com/\">Иконе материјал дизајна&lt;/a> направљене од стране Гугла и лиценциране под Апач 2.0 лиценцом.&lt;/p></string>
     <string name="about_credits_tab_title">Заслуге</string>
     <string name="about_contribution_tab_title">Допринос</string>
     <string name="about_license_tab_title">Лиценца</string>
@@ -111,8 +117,8 @@
     <string name="widget_single_note_title">Белешка</string>
     <string name="widget_single_note_placeholder_tv">Белешка није нађена</string>
     <string name="widget_create_note">Направи белешку</string>
-    <string name="widget_not_logged_in">Пријавите се на Белешке пре коришћења овог елемента</string>
-    <string name="widget_entry_fav_contentDescription">Звездица се користила да означи да је ставка омиљена</string>
+    <string name="widget_not_logged_in">Пријавите се на Белешке пре коришћења овог виџета</string>
+    <string name="widget_entry_fav_contentDescription">Икона звезде се користи да означи ставку као омиљену</string>
     <string name="widget_app_launcher_contentDescription">Покреће апликацију</string>
 
     <string name="activity_select_single_note">Одабери белешку</string>
@@ -122,12 +128,28 @@
 
     <string name="pref_value_theme_light">Светла</string>
     <string name="pref_value_theme_dark">Тамна</string>
+    <string name="pref_value_font_normal">Нормална</string>
+    <string name="pref_value_wifi_and_mobile">Синхронизуј и на бежичној и на мобилној вези</string>
+    <string name="simple_error">Грешка</string>
+    <string name="simple_close">Затвори</string>
+    <string name="simple_copy">Копирај</string>
+    <string name="simple_exception">Изузетак</string>
+    <string name="copied_to_clipboard">Копирано у оставу</string>
+    <string name="pin_to_homescreen">Закачи на почетни екран</string>
+    <string name="note_has_been_deleted">Ова белешка је обрисана</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>
         <item>Отвори у режиму прегледа</item>
         <item>Запамти мој последњи избор</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Мали</item>
+        <item>Средњи</item>
+        <item>Велики</item>
     </string-array>
 
     <!-- Plurals -->

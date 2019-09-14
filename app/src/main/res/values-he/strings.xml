@@ -16,6 +16,9 @@
     <string name="action_edit_saving">מתבצעת שמירה &#8230;</string>
     <string name="action_edit_saved">נשמר</string>
     <string name="simple_about">על אודות</string>
+    <string name="simple_bold">מודגש</string>
+    <string name="simple_link">קישור</string>
+    <string name="simple_italic">נטוי</string>
     <string name="action_select_note">בחירת פתק</string>
     <string name="action_note_deleted">פתק נמחק</string>
     <string name="action_note_restored">פתק שוחזר</string>
@@ -51,7 +54,9 @@
     <string name="settings_submit">התחברות</string>
     <string name="settings_submitting">מתבצעת התחברות &#8230;</string>
     <string name="settings_note_mode">מצב תצוגת פתקים</string>
-    <string name="settings_theme_title">ערכת עיצוב</string>
+    <string name="settings_theme_title">ערכת עיצוב כהה</string>
+    <string name="settings_font_title">גופן ברוחב אחיד</string>
+    <string name="settings_wifi_only">סנכרון רק דרך רשת אלחוטית</string>
     <string name="settings_cert_category">ניהול אישורים</string>
     <string name="settings_cert_trust_system">מתן אמון באישורי המערכת</string>
     <string name="settings_cert_trust_system_on">מתן אמון אוטומטית ברשויות אישורים של המערכת ובאלו שנוספו על ידי המשתמש (מומלץ)</string>
@@ -122,6 +127,13 @@
 
     <string name="pref_value_theme_light">בהיר</string>
     <string name="pref_value_theme_dark">כהה</string>
+    <string name="pref_value_font_normal">רגיל</string>
+    <string name="pref_value_wifi_and_mobile">עדכון דרך רשת אלחוטית ונתונים סלולריים</string>
+    <string name="simple_error">שגיאה</string>
+    <string name="simple_close">סגור</string>
+    <string name="simple_copy">העתק</string>
+    <string name="pin_to_homescreen">הוסף למסך הבית</string>
+    <string name="note_has_been_deleted">פתק זה נמחק</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -1,0 +1,6 @@
+- In-Notiz-Suche (#106, #400)
+- Neue Einstellungsmöglichkeit: Monospace-Schriftart verwenden (#359)
+- Kontextbasierte Formatierung (#363)
+- Migration zu AndroidX (#492, #500)
+- Trennlinien in Listenansicht entfernt (#498, #524)
+- Markdown-Util benötigt hardcodierte Farbe für unsortierte Listen (#517)

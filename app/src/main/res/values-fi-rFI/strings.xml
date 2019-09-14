@@ -16,10 +16,15 @@
     <string name="action_edit_saving">Tallennetaan...</string>
     <string name="action_edit_saved">Tallennettu</string>
     <string name="simple_about">Tietoja</string>
+    <string name="simple_bold">Lihavoitu</string>
+    <string name="simple_link">Linkki</string>
+    <string name="simple_italic">Kursivoitu</string>
     <string name="action_select_note">Valitse muistiinpano</string>
     <string name="action_note_deleted">Muistiinpano poistettu</string>
     <string name="action_note_restored">Muistiinpano palautettu</string>
     <string name="action_undo">Kumoa</string>
+    <string name="action_drawer_open">avaa navigaatio</string>
+    <string name="action_drawer_close">sulje navigaatio</string>
     <string name="action_recent">Viimeisimmät</string>
     <string name="action_uncategorized">Luokittelemattomat</string>
     <string name="menu_delete">Poista</string>
@@ -47,7 +52,10 @@
     <string name="settings_password_check_description">Näyttää ovatko tilitiedot oikein.</string>
     <string name="settings_submit">Yhdistä</string>
     <string name="settings_submitting">Yhdistetään...</string>
-    <string name="settings_theme_title">Teema</string>
+    <string name="settings_note_mode">Muistiinpanojen esitystapa</string>
+    <string name="settings_theme_title">Tumma teema</string>
+    <string name="settings_font_title">Tasalevyinen fontti</string>
+    <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
     <string name="settings_cert_category">Hallitse varmenteita</string>
     <string name="settings_cert_trust_system">Luota järjestelmävarmenteisiin</string>
     <!-- Network -->
@@ -75,6 +83,7 @@
     <string name="about_translators_transifex">Nextcloud-yhteisö &lt;a href=\"%1$s\">Transifex-palvelussa&lt;/a></string>
     <string name="about_testers_title">Testaajat</string>
     <string name="about_source_title">Lähdekoodi</string>
+    <string name="about_source">Tämä projekti toimii GitHubissa: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Ongelmat</string>
     <string name="about_translate_title">Käännä</string>
     <string name="about_translate">Liity Nextcloud-yhteisöön Transifex-palvelussa ja auta meitä kääntämään tämä sovellus: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
@@ -82,6 +91,7 @@
     <string name="about_app_license">Tämä sovellus on GNU GENERAL PUBLIC LICENSE v3+ -lisensoitu.</string>
     <string name="about_app_license_button">Näytä lisenssi</string>
     <string name="about_icons_disclaimer_title">Kuvakkeet</string>
+    <string name="about_credits_tab_title">Tekijät</string>
     <string name="about_license_tab_title">Lisenssi</string>
 
     <!-- Widgets -->
@@ -97,7 +107,7 @@
 
     <string name="pref_value_theme_light">Vaalea</string>
     <string name="pref_value_theme_dark">Tumma</string>
-
+    <string name="pref_value_wifi_and_mobile">Synkronoi wifi- ja mobiilidatayhteydellä</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>
