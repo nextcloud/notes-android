@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,18 +10,21 @@ import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.yydcdut.markdown.syntax.edit.EditFactory;
 import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -109,43 +113,55 @@ public class NoteEditFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ButterKnife.bind(this, getView());
+        if(getView() != null) {
+            ButterKnife.bind(this, getView());
 
-        setActiveTextView(editContent);
+            setActiveTextView(editContent);
 
-        if (note.getContent().isEmpty()) {
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        }
+            if (note.getContent().isEmpty()) {
+                editContent.requestFocus();
 
-        // workaround for issue yydcdut/RxMarkdown#41
-        note.setContent(note.getContent().replace("\r\n", "\n"));
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-        editContent.setText(note.getContent());
-        editContent.setEnabled(true);
+                InputMethodManager imm = (InputMethodManager)
+                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
 
-        RxMarkdown.live(editContent)
-            .config(MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext()).build())
-            .factory(EditFactory.create())
-            .intoObservable()
-            .subscribe(new Subscriber<CharSequence>() {
-                @Override
-                public void onCompleted() {
-                }
+            }
 
-                @Override
-                public void onError(Throwable e) {
-                }
+            // workaround for issue yydcdut/RxMarkdown#41
+            note.setContent(note.getContent().replace("\r\n", "\n"));
 
-                    @Override
-                    public void onNext(CharSequence charSequence) {
-                        editContent.setText(charSequence, TextView.BufferType.SPANNABLE);
-                    }
-                });
+            editContent.setText(note.getContent());
+            editContent.setEnabled(true);
 
-        editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        if(sp.getBoolean("font", false)) {
-            editContent.setTypeface(Typeface.MONOSPACE);
+            RxMarkdown.live(editContent)
+                    .config(MarkDownUtil.getMarkDownConfiguration(editContent.getContext()).build())
+                    .factory(EditFactory.create())
+                    .intoObservable()
+                    .subscribe(new Subscriber<CharSequence>() {
+                        @Override
+                        public void onCompleted() {
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                        }
+
+                        @Override
+                        public void onNext(CharSequence charSequence) {
+                            editContent.setText(charSequence, TextView.BufferType.SPANNABLE);
+                        }
+                    });
+
+            editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+            editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
+            if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
+                editContent.setTypeface(Typeface.MONOSPACE);
+            }
+        } else {
+            Log.e(NoteEditFragment.class.getSimpleName(), "getView() is null");
         }
     }
 

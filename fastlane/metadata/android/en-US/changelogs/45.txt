@@ -1,0 +1,1 @@
+- #567 Enable pinning notes as shortcut

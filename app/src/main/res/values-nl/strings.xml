@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Opslaan &#8230;</string>
     <string name="action_edit_saved">Opgeslagen</string>
     <string name="simple_about">Over</string>
+    <string name="simple_bold">Vet</string>
+    <string name="simple_link">Link</string>
+    <string name="simple_italic">Scheef</string>
     <string name="action_select_note">Notitie selecteren</string>
     <string name="action_note_deleted">Notitie verwijderd</string>
     <string name="action_note_restored">Notitie hersteld</string>
@@ -51,8 +54,11 @@
     <string name="settings_password_check_description">Toont of de login-gegevens correct zijn.</string>
     <string name="settings_submit">Verbinden</string>
     <string name="settings_submitting">Verbinden&#160;&#8230;</string>
-    <string name="settings_note_mode">Laat modus zien voor notities</string>
-    <string name="settings_theme_title">Thema</string>
+    <string name="settings_note_mode">Weergavemode voor notities</string>
+    <string name="settings_theme_title">Donker thema</string>
+    <string name="settings_font_title">Monospace lettertype</string>
+    <string name="settings_font_size">Fontgrootte</string>
+    <string name="settings_wifi_only">Sync alleen met Wi-Fi</string>
     <string name="settings_cert_category">Beheren certificaten</string>
     <string name="settings_cert_trust_system">Vertrouw systeem certificaten</string>
     <string name="settings_cert_trust_system_on">Systeem en door gebruiker toegevoegde CA\'s worden vertrouwd (aanbevolen)</string>
@@ -123,12 +129,28 @@
 
     <string name="pref_value_theme_light">Licht</string>
     <string name="pref_value_theme_dark">Donker</string>
+    <string name="pref_value_font_normal">Normaal</string>
+    <string name="pref_value_wifi_and_mobile">Sync met Wi-Fi en mobiele data</string>
+    <string name="simple_error">Fout</string>
+    <string name="simple_close">Sluiten</string>
+    <string name="simple_copy">Kopiëren</string>
+    <string name="simple_exception">Uitzondering</string>
+    <string name="copied_to_clipboard">Gekopieerd naar het klembord</string>
+    <string name="pin_to_homescreen">Vastmaken op startscherm</string>
+    <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wijzigen modus</item>
         <item>Open in voorbeeldweergave modus</item>
         <item>Onthoud je laatste selectie</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Klein</item>
+        <item>Gemiddeld</item>
+        <item>Groot</item>
     </string-array>
 
     <!-- Plurals -->

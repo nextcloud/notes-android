@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Guardando &#8230;</string>
     <string name="action_edit_saved">Guardado</string>
     <string name="simple_about">Acerca de</string>
+    <string name="simple_bold">Negrita</string>
+    <string name="simple_link">Enlace</string>
+    <string name="simple_italic">Cursiva</string>
     <string name="action_select_note">Seleccionar nota</string>
     <string name="action_note_deleted">Nota eliminada</string>
     <string name="action_note_restored">Nota restaurada</string>
@@ -50,8 +53,11 @@
     <string name="settings_password_check_description">Muestra si las credenciales son correctas.</string>
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando &#8230;</string>
-    <string name="settings_note_mode">Modo de visualización para Notas</string>
-    <string name="settings_theme_title">Tema</string>
+    <string name="settings_note_mode">Modo de visualización para notas</string>
+    <string name="settings_theme_title">Tema oscuro</string>
+    <string name="settings_font_title">Tipo de letra monoespaciado</string>
+    <string name="settings_font_size">Tamaño de fuente</string>
+    <string name="settings_wifi_only">Sincronizar solo sobre Wi-Fi</string>
     <string name="settings_cert_category">Configuración de certificados</string>
     <string name="settings_cert_trust_system">Confiar en los certificados del sistema</string>
     <string name="settings_cert_trust_system_on">Se confiará en las autoridades de certificación —CAs— del sistema y añadidas por el usuario (recomendado)</string>
@@ -122,12 +128,28 @@
 
     <string name="pref_value_theme_light">Claro</string>
     <string name="pref_value_theme_dark">Oscuro</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_wifi_and_mobile">Sincronizar sobre Wi-Fi y datos móviles</string>
+    <string name="simple_error">Error</string>
+    <string name="simple_close">Cerrar</string>
+    <string name="simple_copy">Copiar</string>
+    <string name="simple_exception">Excepción</string>
+    <string name="copied_to_clipboard">Copiado al portapapeles</string>
+    <string name="pin_to_homescreen">Acoplar a la pantalla de inicio</string>
+    <string name="note_has_been_deleted">Esta nota ha sido borrada</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>
         <item>Abrir en modo visualización</item>
         <item>Recordar mi última selección</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Pequeña</item>
+        <item>Media</item>
+        <item>Grande</item>
     </string-array>
 
     <!-- Plurals -->

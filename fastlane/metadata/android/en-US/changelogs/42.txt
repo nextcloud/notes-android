@@ -1,0 +1,1 @@
+- Fixed translation bug (#536, #534)

@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Kaydediliyor &#8230;</string>
     <string name="action_edit_saved">Kaydedildi</string>
     <string name="simple_about">Hakkında</string>
+    <string name="simple_bold">Koyu</string>
+    <string name="simple_link">Bağlantı</string>
+    <string name="simple_italic">Yatık</string>
     <string name="action_select_note">Not seçin</string>
     <string name="action_note_deleted">Not silindi</string>
     <string name="action_note_restored">Not geri yüklendi</string>
@@ -27,7 +30,7 @@
     <string name="menu_delete">Sil</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Sık Kullanılanlara Ekle</string>
-    <string name="menu_preview">Önizleme</string>
+    <string name="menu_preview">Ön izleme</string>
     <string name="menu_share">Paylaş</string>
     <string name="menu_about">Hakkında</string>
 
@@ -51,7 +54,10 @@
     <string name="settings_submit">Bağlan</string>
     <string name="settings_submitting">Bağlanılıyor &#8230;</string>
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
-    <string name="settings_theme_title">Tema</string>
+    <string name="settings_theme_title">Koyu tema</string>
+    <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
+    <string name="settings_font_size">Yazı boyutu</string>
+    <string name="settings_wifi_only">Yalnız Wi-Fi ile eşitlensin</string>
     <string name="settings_cert_category">Sertifika yönetimi</string>
     <string name="settings_cert_trust_system">Sistem sertifikalarına güvenilsin</string>
     <string name="settings_cert_trust_system_on">Sistem ve kullanıcı tarafından eklenen sertifika otoritelerine güvenilir (önerilir)</string>
@@ -122,12 +128,28 @@
 
     <string name="pref_value_theme_light">Açık</string>
     <string name="pref_value_theme_dark">Koyu</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_wifi_and_mobile">Wi-Fi ve mobil veri ile eşitlensin</string>
+    <string name="simple_error">Hata</string>
+    <string name="simple_close">Kapat</string>
+    <string name="simple_copy">Kopyala</string>
+    <string name="simple_exception">İstisna</string>
+    <string name="copied_to_clipboard">Panoya kopyalandı</string>
+    <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
+    <string name="note_has_been_deleted">Bu not silinmiş</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>
-        <item>Önizleme kipinde aç</item>
+        <item>Ön izleme kipinde aç</item>
         <item>Son seçimim hatırlansın</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Küçük</item>
+        <item>Orta</item>
+        <item>Büyük</item>
     </string-array>
 
     <!-- Plurals -->

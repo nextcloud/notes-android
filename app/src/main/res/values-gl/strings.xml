@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Gardando &#8230;</string>
     <string name="action_edit_saved">Gardado</string>
     <string name="simple_about">Sobre</string>
+    <string name="simple_bold">Negra</string>
+    <string name="simple_link">Ligazón</string>
+    <string name="simple_italic">Itálica</string>
     <string name="action_select_note">Seleccionar nota</string>
     <string name="action_note_deleted">A nota foi eliminada</string>
     <string name="action_note_restored">A nota foi restaurada</string>
@@ -51,7 +54,10 @@
     <string name="settings_submit">Conectar</string>
     <string name="settings_submitting">Conectando con &#8230;</string>
     <string name="settings_note_mode">Modo de vista das notas</string>
-    <string name="settings_theme_title">Tema</string>
+    <string name="settings_theme_title">Tema escuro</string>
+    <string name="settings_font_title">Letra monoespazada</string>
+    <string name="settings_font_size">Tamaño da letra</string>
+    <string name="settings_wifi_only">Sincronizar só con WiFi</string>
     <string name="settings_cert_category">Administrar certificados</string>
     <string name="settings_cert_trust_system">Confiar nos certificados do sistema</string>
     <string name="settings_cert_trust_system_on">Confiaráse nas Entidades de Acreditación -CA- do sistema e nas engadidas polo usuario (recomendado)</string>
@@ -122,12 +128,28 @@
 
     <string name="pref_value_theme_light">Claro</string>
     <string name="pref_value_theme_dark">Escuro</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_wifi_and_mobile">Sincronización con WiFi e con datos móbiles</string>
+    <string name="simple_error">Erro</string>
+    <string name="simple_close">Pechar</string>
+    <string name="simple_copy">Copiar</string>
+    <string name="simple_exception">Excepción</string>
+    <string name="copied_to_clipboard">Copiado no portapapeis.</string>
+    <string name="pin_to_homescreen">Ancorar na pantalla de inicio</string>
+    <string name="note_has_been_deleted">Esta nota foi eliminada</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>
         <item>Abrir en modo de vista previa</item>
         <item>Lembrar a miña última selección</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Pequena</item>
+        <item>Mediana</item>
+        <item>Grande</item>
     </string-array>
 
     <!-- Plurals -->

@@ -1,0 +1,3 @@
+- Change dark primary color to primary color in status bar
+- Dynamic app shortcuts for recent notes (#554)
+- UncaughtExceptionHandler

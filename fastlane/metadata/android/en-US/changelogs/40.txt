@@ -1,0 +1,1 @@
+- New setting: Synchronize on WiFi only (#519)

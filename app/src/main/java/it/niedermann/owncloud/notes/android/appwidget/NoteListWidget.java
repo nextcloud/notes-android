@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
@@ -52,20 +53,20 @@ public class NoteListWidget extends AppWidgetProvider {
             // Launch application when user taps the header icon or app title
             Intent intent = new Intent("android.intent.action.MAIN");
             intent.setComponent(new ComponentName(context.getPackageName(),
-                                                  NotesListViewActivity.class.getName()));
+                    NotesListViewActivity.class.getName()));
 
             // Open the main app if the user taps the widget header
-            PendingIntent openAppI = PendingIntent.getActivity( context, 0, intent,
-                                                                PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent openAppI = PendingIntent.getActivity(context, 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
 
             // Launch create note activity if user taps "+" icon on header
-            PendingIntent newNoteI = PendingIntent.getActivity( context,0,
-                                                                (new Intent(context, EditNoteActivity.class)),
-                                                                PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent newNoteI = PendingIntent.getActivity(context, 0,
+                    (new Intent(context, EditNoteActivity.class)),
+                    PendingIntent.FLAG_UPDATE_CURRENT);
 
-            PendingIntent templatePI = PendingIntent.getActivity(context,0,
-                                                                (new Intent(context, EditNoteActivity.class)),
-                                                                PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent templatePI = PendingIntent.getActivity(context, 0,
+                    (new Intent(context, EditNoteActivity.class)),
+                    PendingIntent.FLAG_UPDATE_CURRENT);
 
             if (darkTheme) {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list_dark);
@@ -104,12 +105,20 @@ public class NoteListWidget extends AppWidgetProvider {
         super.onReceive(context, intent);
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
 
-        if (intent.getAction().equals(awm.ACTION_APPWIDGET_UPDATE)) {
-            if (intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
-                updateAppWidget(context, awm, new int[] { intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1) });
-            } else {
-                updateAppWidget(context, awm, awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class)));
+        if (intent.getAction() != null) {
+            if (intent.getAction().equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+                if (intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)) {
+                    if (intent.getExtras() != null) {
+                        updateAppWidget(context, awm, new int[]{intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)});
+                    } else {
+                        Log.w(NoteListWidget.class.getSimpleName(), "intent.getExtras() is null");
+                    }
+                } else {
+                    updateAppWidget(context, awm, awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class)));
+                }
             }
+        } else {
+            Log.w(NoteListWidget.class.getSimpleName(), "intent.getAction() is null");
         }
     }
 
@@ -129,10 +138,11 @@ public class NoteListWidget extends AppWidgetProvider {
     }
 
     private static String getWidgetTitle(Context context, int displayMode, String category) {
-        switch (displayMode)
-        {
-            case NoteListWidget.NLW_DISPLAY_ALL: return context.getString(R.string.app_name);
-            case NoteListWidget.NLW_DISPLAY_STARRED: return context.getString(R.string.label_favorites);
+        switch (displayMode) {
+            case NoteListWidget.NLW_DISPLAY_ALL:
+                return context.getString(R.string.app_name);
+            case NoteListWidget.NLW_DISPLAY_STARRED:
+                return context.getString(R.string.label_favorites);
             case NoteListWidget.NLW_DISPLAY_CATEGORY:
                 if (category.equals("")) {
                     return context.getString(R.string.action_uncategorized);

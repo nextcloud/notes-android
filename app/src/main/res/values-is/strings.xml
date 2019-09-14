@@ -16,6 +16,9 @@
     <string name="action_edit_saving">Vista &#8230;</string>
     <string name="action_edit_saved">Vistað</string>
     <string name="simple_about">Um hugbúnaðinn</string>
+    <string name="simple_bold">Feitletrað</string>
+    <string name="simple_link">Tengill</string>
+    <string name="simple_italic">Skáletrað</string>
     <string name="action_select_note">Eyða minnispunkti</string>
     <string name="action_note_deleted">Minnispunkti var eytt</string>
     <string name="action_note_restored">Minnispunktur endurheimtur</string>
@@ -51,7 +54,9 @@
     <string name="settings_submit">Tengjast</string>
     <string name="settings_submitting">Tengist &#8230;</string>
     <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
-    <string name="settings_theme_title">Þema</string>
+    <string name="settings_theme_title">Dökkt þema</string>
+    <string name="settings_font_title">Jafnbreitt letur</string>
+    <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
     <string name="settings_cert_category">Sýsla með skilríki</string>
     <string name="settings_cert_trust_system">Treysta skilríkjum kerfis</string>
     <string name="settings_cert_trust_system_on">Vottunaraðilum kerfis og þeim sem notandi bætir við verður treyst (mælt með þessu)</string>
@@ -122,7 +127,8 @@
 
     <string name="pref_value_theme_light">Ljóst</string>
     <string name="pref_value_theme_dark">Dökkt</string>
-
+    <string name="pref_value_font_normal">Venjulegt</string>
+    <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>

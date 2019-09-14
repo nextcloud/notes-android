@@ -1,0 +1,1 @@
+- Theme-Wechsel muss die MainActivity komplett neu erstellen (#529)

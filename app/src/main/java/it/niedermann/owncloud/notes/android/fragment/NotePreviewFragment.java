@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -62,7 +63,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
         RxMarkdown.with(content, getActivity())
                 .config(
-                        MarkDownUtil.getMarkDownConfiguration(getActivity().getApplicationContext())
+                        MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
                                 /*.setOnTodoClickCallback(new OnTodoClickCallback() {
                                         @Override
                                         public CharSequence onTodoClicked(View view, String line, int lineNumber) {
@@ -100,7 +101,8 @@ public class NotePreviewFragment extends BaseNoteFragment {
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-        if (sp.getBoolean("font", false)) {
+        noteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
+        if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             noteContent.setTypeface(Typeface.MONOSPACE);
         }
     }
