@@ -345,7 +345,7 @@ public class SettingsActivity extends AppCompatActivity {
                         initLegacyLogin(field_url.getText().toString());
                     }
                 }).show();
-        }, 2 * 1000);
+        }, 45 * 1000);
     }
 
     private String getWebLoginUserAgent() {
