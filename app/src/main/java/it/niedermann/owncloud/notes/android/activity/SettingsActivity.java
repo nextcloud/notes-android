@@ -281,7 +281,7 @@ public class SettingsActivity extends AppCompatActivity {
         headers.put("OCS-APIREQUEST", "true");
 
 
-        webView.loadUrl(normalizeUrlSuffix(field_url.getText().toString()) + "index.php/login/flow", headers);
+        webView.loadUrl(normalizeUrlSuffix(NotesClientUtil.formatURL(field_url.getText().toString())) + "index.php/login/flow", headers);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -345,7 +345,7 @@ public class SettingsActivity extends AppCompatActivity {
                         initLegacyLogin(field_url.getText().toString());
                     }
                 }).show();
-        }, 60 * 1000);
+        }, 2 * 1000);
     }
 
     private String getWebLoginUserAgent() {
@@ -423,6 +423,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void initLegacyLogin(String oldUrl) {
         useWebLogin = false;
+        new URLValidatorAsyncTask().execute(NotesClientUtil.formatURL(field_url.getText().toString()));
 
         webView.setVisibility(View.INVISIBLE);
         setContentView(R.layout.activity_settings);
@@ -437,7 +438,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void handleSubmitButtonEnabled() {
         // drawable[2] is not null if url is valid, see URLValidatorAsyncTask::onPostExecute
-        if (field_url.getCompoundDrawables()[2] != null && (username_wrapper.getVisibility() == View.GONE ||
+        if (useWebLogin || field_url.getCompoundDrawables()[2] != null && (username_wrapper.getVisibility() == View.GONE ||
                 (username_wrapper.getVisibility() == View.VISIBLE && field_username.getText().length() > 0))) {
             btn_submit.setEnabled(true);
         } else {
