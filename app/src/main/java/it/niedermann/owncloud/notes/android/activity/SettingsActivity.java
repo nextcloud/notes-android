@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -308,7 +310,7 @@ public class SettingsActivity extends AppCompatActivity {
                 try {
                     final boolean[] accepted = new boolean[1];
                     NoteServerSyncHelper.getInstance(NoteSQLiteOpenHelper.getInstance(getApplicationContext()))
-                            .checkCertificate(cert.getEncoded(), new IOnCertificateDecision.Stub() {
+                            .checkCertificate(cert.getEncoded(), true, new IOnCertificateDecision.Stub() {
                                 @Override
                                 public void accept() {
                                     Log.d("Note", "cert accepted");
@@ -322,15 +324,9 @@ public class SettingsActivity extends AppCompatActivity {
                                     handler.cancel();
                                 }
                             });
-
-                    if (!accepted[0]) {
-                        // this should never happen, submit button is only enabled if url has been validated
-                        Log.e("Note", "No response from certificate service");
-                        handler.cancel();
-                    }
                 } catch (Exception e) {
                     Log.e("Note", "Cert could not be verified");
-                    handler.cancel();
+                    handler.proceed();
                 }
             }
 

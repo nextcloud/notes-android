@@ -174,8 +174,8 @@ public class NoteServerSyncHelper {
         return customCertManager;
     }
 
-    public void checkCertificate(byte[] cert, IOnCertificateDecision callback) throws RemoteException {
-        iCustomCertService.checkTrusted(cert, true, false, callback);
+    public void checkCertificate(byte[] cert, boolean foreground, IOnCertificateDecision callback) throws RemoteException {
+        iCustomCertService.checkTrusted(cert, true, foreground, callback);
     }
 
     /**
