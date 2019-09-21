@@ -32,4 +32,6 @@
 
     <dimen name="widget_note_list_fav_icon_width">26dp</dimen>
     <dimen name="widget_note_list_fav_icon_height">20dp</dimen>
+    <dimen name="header_padding">16dp</dimen>
+    <dimen name="avatar_size">64dp</dimen>
 </resources>
