@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -36,6 +38,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -85,6 +89,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     Toolbar toolbar;
     @BindView(R.id.drawerLayout)
     DrawerLayout drawerLayout;
+    @BindView(R.id.current_account_image)
+    AppCompatImageView currentAccountImage;
+    @BindView(R.id.header_view)
+    RelativeLayout headerView;
     @BindView(R.id.account)
     TextView account;
     @BindView(R.id.swiperefreshlayout)
@@ -198,13 +206,13 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.syncState();
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(SAVED_STATE_NAVIGATION_SELECTION, navigationSelection);
         outState.putString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION, adapterCategories.getSelectedItem());
@@ -408,7 +416,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         this.updateUsernameInDrawer();
         final NotesListViewActivity that = this;
-        this.account.setOnClickListener((View v) -> {
+        this.headerView.setOnClickListener((View v) -> {
             Intent settingsIntent = new Intent(that, SettingsActivity.class);
             startActivityForResult(settingsIntent, server_settings);
         });
@@ -634,12 +642,18 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
         String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
         if (url != null) {
-            url = url.replace("https://", "").replace("http://", "");
+            String croppedUrl = url.replace("https://", "").replace("http://", "");
+            if (!SettingsActivity.DEFAULT_SETTINGS.equals(username) && !SettingsActivity.DEFAULT_SETTINGS.equals(url)) {
+                this.account.setText(username + "@" + croppedUrl.substring(0, croppedUrl.length() - 1));
+                Glide
+                        .with(this)
+                        .load(url + "/index.php/avatar/" + Uri.encode(username) + "/64")
+                        .error(R.mipmap.ic_launcher_round)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(this.currentAccountImage);
+            }
         } else {
             Log.w(NotesListViewActivity.class.getSimpleName(), "url is null");
-        }
-        if (!SettingsActivity.DEFAULT_SETTINGS.equals(username) && !SettingsActivity.DEFAULT_SETTINGS.equals(url)) {
-            this.account.setText(username + "@" + url.substring(0, url.length() - 1));
         }
     }
 
