@@ -648,7 +648,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 Glide
                         .with(this)
                         .load(url + "/index.php/avatar/" + Uri.encode(username) + "/64")
-                        .error(R.mipmap.ic_launcher_round)
+                        .error(R.mipmap.ic_launcher)
                         .apply(RequestOptions.circleCropTransform())
                         .into(this.currentAccountImage);
             }
