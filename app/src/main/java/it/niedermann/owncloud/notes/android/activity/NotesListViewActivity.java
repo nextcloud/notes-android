@@ -42,6 +42,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.exceptions.AndroidGetAccountsPermissionNotGranted;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotInstalledException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
+import com.nextcloud.android.sso.ui.UiExceptionManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +62,10 @@ import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
+import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
@@ -80,6 +88,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
 
     private final static int create_note_cmd = 0;
+    private final static int add_account = 4;
     private final static int show_single_note_cmd = 1;
     private final static int server_settings = 2;
     private final static int about = 3;
@@ -130,7 +139,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     if (!shortcutManager.isRateLimitingActive()) {
                         List<ShortcutInfo> newShortcuts = new ArrayList<>();
 
-                        for (DBNote note : db.getRecentNotes()) {
+                        for (DBNote note : db.getRecentNotes(0)) {
                             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
                             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
                             intent.setAction(ACTION_SHORTCUT);
@@ -158,11 +167,32 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
-        // First Run Wizard
-        if (!NoteServerSyncHelper.isConfigured(this)) {
-            Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            startActivityForResult(settingsIntent, server_settings);
+
+
+        db = NoteSQLiteOpenHelper.getInstance(this);
+
+        try {
+            Log.v("Notes", "current sso account " + SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoCurrentAccountSelectedException e) {
+            if (!db.hasAccounts()) {
+                try {
+                    AccountImporter.pickNewAccount(this);
+                } catch (NextcloudFilesAppNotInstalledException e1) {
+                    UiExceptionManager.showDialogForException(this, e);
+                    Log.w(NotesListViewActivity.class.toString(), "=============================================================");
+                    Log.w(NotesListViewActivity.class.toString(), "Nextcloud app is not installed. Cannot choose account");
+                    e.printStackTrace();
+                } catch (AndroidGetAccountsPermissionNotGranted e2) {
+                    AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
+                }
+            } else {
+                LocalAccount localAccount = db.getAccount(1);
+                SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName());
+            }
         }
+
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
         if (savedInstanceState == null) {
             if (ACTION_RECENT.equals(getIntent().getAction())) {
@@ -179,8 +209,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         setContentView(R.layout.drawer_layout);
         ButterKnife.bind(this);
-
-        db = NoteSQLiteOpenHelper.getInstance(this);
 
         setupActionBar();
         setupNotesList();
@@ -305,7 +333,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
-            List<NavigationAdapter.NavigationItem> categories = db.getCategories();
+            List<NavigationAdapter.NavigationItem> categories = db.getCategories(0);
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
                 itemUncategorized.label = getString(R.string.action_uncategorized);
@@ -314,7 +342,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 itemUncategorized = null;
             }
 
-            Map<String, Integer> favorites = db.getFavoritesCount();
+            Map<String, Integer> favorites = db.getFavoritesCount(0);
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
             itemFavorites.count = numFavorites;
@@ -611,6 +639,14 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
+            Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
+            db.addAccount(account.url, account.userId);
+            SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
+        });
+
         // Check which request we're responding to
         if (requestCode == create_note_cmd) {
             // Make sure the request was successful
@@ -634,6 +670,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
             recreate();
+        } else if (requestCode == add_account) {
+
         }
     }
 

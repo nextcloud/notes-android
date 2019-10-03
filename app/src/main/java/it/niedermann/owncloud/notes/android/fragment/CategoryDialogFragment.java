@@ -14,10 +14,11 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -101,7 +102,7 @@ public class CategoryDialogFragment extends DialogFragment {
         @Override
         protected List<String> doInBackground(Void... voids) {
             NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
-            List<NavigationAdapter.NavigationItem> items = db.getCategories();
+            List<NavigationAdapter.NavigationItem> items = db.getCategories(0);
             List<String> categories = new ArrayList<>();
             for (NavigationAdapter.NavigationItem item : items) {
                 if (!item.label.isEmpty()) {

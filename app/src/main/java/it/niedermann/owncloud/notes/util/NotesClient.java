@@ -1,8 +1,9 @@
 package it.niedermann.owncloud.notes.util;
 
-import androidx.annotation.WorkerThread;
 import android.util.Base64;
 import android.util.Log;
+
+import androidx.annotation.WorkerThread;
 
 import org.json.JSONException;
 import org.json.JSONObject;

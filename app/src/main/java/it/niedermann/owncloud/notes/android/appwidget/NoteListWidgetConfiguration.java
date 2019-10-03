@@ -7,12 +7,13 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +125,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
             NavigationAdapter.NavigationItem itemUncategorized;
-            List<NavigationAdapter.NavigationItem> categories = db.getCategories();
+            List<NavigationAdapter.NavigationItem> categories = db.getCategories(0);
 
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
@@ -132,7 +133,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
                 itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
             }
 
-            Map<String, Integer> favorites = db.getFavoritesCount();
+            Map<String, Integer> favorites = db.getFavoritesCount(0);
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
             itemFavorites.count = numFavorites;

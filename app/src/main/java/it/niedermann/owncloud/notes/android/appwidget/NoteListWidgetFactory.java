@@ -45,7 +45,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     @Override
     public void onDataSetChanged() {
         if (displayMode == NoteListWidget.NLW_DISPLAY_ALL) {
-            dbNotes = db.getNotes();
+            dbNotes = db.getNotes(0);
         } else if (displayMode == NoteListWidget.NLW_DISPLAY_STARRED) {
             dbNotes = db.searchNotes(null,null, true);
         } else if (displayMode == NoteListWidget.NLW_DISPLAY_CATEGORY) {

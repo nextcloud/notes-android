@@ -12,6 +12,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 public class DBNote extends CloudNote implements Item, Serializable {
 
     private long id;
+    private long accountId;
     private DBStatus status;
     private String excerpt = "";
 
@@ -24,6 +25,10 @@ public class DBNote extends CloudNote implements Item, Serializable {
 
     public long getId() {
         return id;
+    }
+
+    public long getAccountId() {
+        return accountId;
     }
 
     public DBStatus getStatus() {
@@ -58,6 +63,11 @@ public class DBNote extends CloudNote implements Item, Serializable {
 
     @Override
     public String toString() {
-        return "#" + getId() + "/" + super.toString() + " " + getStatus();
+        return "DBNote{" +
+                "id=" + id +
+                ", accountId=" + accountId +
+                ", status=" + status +
+                ", excerpt='" + excerpt + '\'' +
+                '}';
     }
 }

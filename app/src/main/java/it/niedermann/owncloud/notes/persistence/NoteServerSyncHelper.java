@@ -304,7 +304,7 @@ public class NoteServerSyncHelper {
          */
         private void pushLocalChanges() {
             Log.d(getClass().getSimpleName(), "pushLocalChanges()");
-            List<DBNote> notes = dbHelper.getLocalModifiedNotes();
+            List<DBNote> notes = dbHelper.getLocalModifiedNotes(0);
             for (DBNote note : notes) {
                 Log.d(getClass().getSimpleName(), "   Process Local Note: " + note);
                 try {
