@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -27,6 +28,8 @@ import java.util.Set;
 
 import at.bitfire.cert4android.CustomCertManager;
 import at.bitfire.cert4android.CustomCertService;
+import at.bitfire.cert4android.ICustomCertService;
+import at.bitfire.cert4android.IOnCertificateDecision;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -64,6 +67,7 @@ public class NoteServerSyncHelper {
     private final Context appContext;
 
     private CustomCertManager customCertManager;
+    private ICustomCertService iCustomCertService;
 
     // Track network connection changes using a BroadcastReceiver
     private boolean networkConnected = false;
@@ -94,6 +98,7 @@ public class NoteServerSyncHelper {
     private final ServiceConnection certService = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            iCustomCertService = ICustomCertService.Stub.asInterface(iBinder);
             cert4androidReady = true;
             if (isSyncPossible()) {
                 scheduleSync(false);
@@ -103,6 +108,7 @@ public class NoteServerSyncHelper {
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             cert4androidReady = false;
+            iCustomCertService = null;
         }
     };
 
@@ -166,6 +172,10 @@ public class NoteServerSyncHelper {
 
     public CustomCertManager getCustomCertManager() {
         return customCertManager;
+    }
+
+    public void checkCertificate(byte[] cert, boolean foreground, IOnCertificateDecision callback) throws RemoteException {
+        iCustomCertService.checkTrusted(cert, true, foreground, callback);
     }
 
     /**

@@ -88,4 +88,10 @@ public class AboutActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish(); // close this activity as oppose to navigating up
+        return true;
+    }
 }

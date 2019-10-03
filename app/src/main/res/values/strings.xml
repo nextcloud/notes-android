@@ -165,6 +165,8 @@
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="pin_to_homescreen">Pin to homescreen</string>
     <string name="note_has_been_deleted">This note has been deleted</string>
+    <string name="fallback_weblogin_text">Revert to old login method</string>
+    <string name="fallback_weblogin_back">Back</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
