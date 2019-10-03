@@ -56,6 +56,7 @@
     <string name="settings_note_mode">Režim zobrazení pro poznámky</string>
     <string name="settings_theme_title">Tmavý motiv vzhledu</string>
     <string name="settings_font_title">Písmo s pevnou šířkou</string>
+    <string name="settings_font_size">Velikost písma</string>
     <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
     <string name="settings_cert_category">Spravovat certifikáty</string>
     <string name="settings_cert_trust_system">Důvěřovat systémovým certifikátům</string>
@@ -142,6 +143,13 @@
         <item>Otevřít v režimu úprav</item>
         <item>Otevřít v náhledovém režimu</item>
         <item>Zapamatovat si můj poslední výběr</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Malé</item>
+        <item>Střední</item>
+        <item>Velké</item>
     </string-array>
 
     <!-- Plurals -->

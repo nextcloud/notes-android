@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Notities</string>
+    <string name="app_name_long">Nextcloud Notities</string>
     <string name="no_notes">Nog geen notities</string>
     <string name="label_all_notes">Alle notities</string>
     <string name="label_favorites">Favorieten</string>

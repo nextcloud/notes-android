@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Anteckningar</string>
+    <string name="app_name_long">Nextcloud anteckningar</string>
     <string name="no_notes">Inga anteckningar än</string>
     <string name="label_all_notes">Alla anteckningar</string>
     <string name="label_favorites">Favoriter</string>

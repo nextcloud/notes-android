@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">便签</string>
+    <string name="app_name_long">Nextcloud 笔记</string>
     <string name="no_notes">还没有便签</string>
     <string name="label_all_notes">所有便签</string>
     <string name="label_favorites">收藏</string>
@@ -54,7 +55,7 @@
     <string name="settings_submit">连接</string>
     <string name="settings_submitting">连接 &#8230;</string>
     <string name="settings_note_mode">笔记的显示模式</string>
-    <string name="settings_theme_title">暗色主题</string>
+    <string name="settings_theme_title">深色主题</string>
     <string name="settings_font_title">等宽字体</string>
     <string name="settings_font_size">字体大小</string>
     <string name="settings_wifi_only">仅在Wi-Fi下同步</string>
@@ -126,8 +127,8 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">创建新便笺</string>
 
-    <string name="pref_value_theme_light">亮色主题</string>
-    <string name="pref_value_theme_dark">暗色主题</string>
+    <string name="pref_value_theme_light">浅色主题</string>
+    <string name="pref_value_theme_dark">深色主题</string>
     <string name="pref_value_font_normal">普通</string>
     <string name="pref_value_wifi_and_mobile">在有Wi-Fi和移动数据时同步</string>
     <string name="simple_error">错误</string>
