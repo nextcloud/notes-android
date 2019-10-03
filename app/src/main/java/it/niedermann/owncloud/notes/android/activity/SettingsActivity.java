@@ -16,8 +16,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.SslErrorHandler;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -335,12 +333,7 @@ public class SettingsActivity extends AppCompatActivity {
         // show snackbar after 60s to switch back to old login method
         new Handler().postDelayed(() -> {
             Snackbar.make(webView, R.string.fallback_weblogin_text, Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.fallback_weblogin_back, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        initLegacyLogin(field_url.getText().toString());
-                    }
-                }).show();
+                .setAction(R.string.fallback_weblogin_back, (View.OnClickListener) v -> initLegacyLogin(field_url.getText().toString())).show();
         }, 45 * 1000);
     }
 
