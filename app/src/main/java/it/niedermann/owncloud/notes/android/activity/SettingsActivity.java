@@ -52,6 +52,9 @@ import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
 
+import static android.os.Process.killProcess;
+import static android.os.Process.myPid;
+
 /**
  * Allows to set Settings like URL, Username and Password for Server-Synchronization
  * Created by stefan on 22.09.15.
@@ -320,6 +323,7 @@ public class SettingsActivity extends AppCompatActivity {
                                 public void reject() {
                                     Log.d("Note", "cert rejected");
                                     handler.cancel();
+                                    killProcess(myPid());
                                 }
                             });
                 } catch (Exception e) {
