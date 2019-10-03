@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Notas</string>
+    <string name="app_name_long">Notas do Nextcloud</string>
     <string name="no_notes">Aínda non hai notas</string>
     <string name="label_all_notes">Todas as notas</string>
     <string name="label_favorites">Favoritas</string>
@@ -78,7 +79,7 @@
     <!-- Error -->
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_invalid_login">Acceso incorrecto: %1$s</string>
-    <string name="error_json">está activado o aplicativo «Notes» no servidor?</string>
+    <string name="error_json">está activada a aplicación «Notes» no servidor?</string>
     <string name="error_io">interrompeuse a conexión co servidor</string>
     <string name="error_no_network">Sen conexión de rede</string>
     <string name="error_server">hai erros no URL/Servidor</string>
@@ -101,12 +102,12 @@
     <string name="about_issues_title">Problemas</string>
     <string name="about_issues">Vostede pode informar de fallos, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de erros do GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traducir</string>
-    <string name="about_translate">Únase ao equipo Nextcloud en Transifex e axúdenos a traducir este aplicativo: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">Licenza do aplicativo</string>
-    <string name="about_app_license">Este aplicativo está licenciado baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
+    <string name="about_translate">Únase ao equipo Nextcloud en Transifex e axúdenos a traducir esta aplicación: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Licenza da aplicación</string>
+    <string name="about_app_license">Esta aplicación está licenciada baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
     <string name="about_app_license_button">Ver a licenza</string>
     <string name="about_icons_disclaimer_title">Iconas</string>
-    <string name="about_icons_disclaimer">&lt;p>Iconas orixinais feitas por %1$s&lt;/p>&lt;p>As outras iconas usadas por este aplicativo son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitos por Google Inc. e licenciados baixo unha Licenza Creative Commons.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Iconas orixinais feitas por %1$s&lt;/p>&lt;p>As outras iconas usadas por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitos por Google Inc. e licenciados baixo unha licenza Creative Commons.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Colaboración</string>
     <string name="about_license_tab_title">Licenza</string>
@@ -119,7 +120,7 @@
     <string name="widget_create_note">Crear unha nota</string>
     <string name="widget_not_logged_in">Acceda a Notas antes de empregar este trebello</string>
     <string name="widget_entry_fav_contentDescription">A icona de estrela empregase para indicar que o elemento é un favorito</string>
-    <string name="widget_app_launcher_contentDescription">Inicia o apli</string>
+    <string name="widget_app_launcher_contentDescription">Inicia a apli</string>
 
     <string name="activity_select_single_note">Seleccionar unha nota</string>
 

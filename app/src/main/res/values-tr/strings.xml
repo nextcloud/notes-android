@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Notlar</string>
+    <string name="app_name_long">Nextcloud Notlar</string>
     <string name="no_notes">Henüz bir not yok</string>
     <string name="label_all_notes">Tum notlar</string>
     <string name="label_favorites">Sık Kullanılanlar</string>
