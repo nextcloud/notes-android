@@ -658,4 +658,13 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         return account;
     }
+
+    public void setAccount(int id, String url, String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_id, id);
+        values.put(key_url, url);
+        values.put(key_username, username);
+        db.update(table_accounts, values, key_id + " = ?", new String[] {id + ""});
+    }
 }

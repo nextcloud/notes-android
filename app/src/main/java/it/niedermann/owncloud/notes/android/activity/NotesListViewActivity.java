@@ -88,7 +88,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
 
     private final static int create_note_cmd = 0;
-    private final static int add_account = 4;
     private final static int show_single_note_cmd = 1;
     private final static int server_settings = 2;
     private final static int about = 3;
@@ -445,8 +444,16 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         this.updateUsernameInDrawer();
         final NotesListViewActivity that = this;
         this.headerView.setOnClickListener((View v) -> {
-            Intent settingsIntent = new Intent(that, SettingsActivity.class);
-            startActivityForResult(settingsIntent, server_settings);
+            try {
+                AccountImporter.pickNewAccount(this);
+            } catch (NextcloudFilesAppNotInstalledException e1) {
+                UiExceptionManager.showDialogForException(this, e1);
+                Log.w(NotesListViewActivity.class.toString(), "=============================================================");
+                Log.w(NotesListViewActivity.class.toString(), "Nextcloud app is not installed. Cannot choose account");
+                e1.printStackTrace();
+            } catch (AndroidGetAccountsPermissionNotGranted e2) {
+                AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
+            }
         });
 
         adapterMenu.setItems(itemsMenu);
@@ -643,7 +650,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-            db.addAccount(account.url, account.userId);
+            if(db.hasAccounts()) {
+                // FIXME hardcoded accountId
+                db.setAccount(1, account.url, account.userId);
+            } else {
+                db.addAccount(account.url, account.userId);
+            }
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
         });
 
@@ -670,8 +682,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
             recreate();
-        } else if (requestCode == add_account) {
-
         }
     }
 
