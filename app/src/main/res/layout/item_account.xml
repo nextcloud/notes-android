@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingLeft="6dp"
+    android:paddingStart="6dp"
+    android:paddingRight="8dp"
+    android:paddingEnd="8dp">
+
+    <ImageView
+        android:id="@+id/accountItemAvatar"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:padding="10dp"
+        android:scaleType="center"
+        android:focusable="false"
+        android:src="@drawable/ic_account_circle_grey_24dp"
+        android:contentDescription="@null" />
+
+    <TextView
+        android:id="@+id/accountItemLabel"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textAppearance="@style/NavigationItem"
+        tools:hint="Username"/>
+
+</RelativeLayout>

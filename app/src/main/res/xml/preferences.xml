@@ -5,7 +5,7 @@
         android:icon="@drawable/ic_account_circle_grey_24dp"
         android:title="@string/settings_server_settings">
         <intent
-            android:targetClass="it.niedermann.owncloud.notes.android.activity.SettingsActivity"
+            android:targetClass="it.niedermann.owncloud.notes.android.activity.AccountActivity"
             android:targetPackage="it.niedermann.owncloud.notes" />
     </Preference>
 

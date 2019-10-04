@@ -10,6 +10,10 @@ import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
@@ -26,15 +30,22 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final SharedPreferences sp;
     private NoteSQLiteOpenHelper db;
     private List<DBNote> dbNotes;
+    private long accountId;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
         appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                            AppWidgetManager.INVALID_APPWIDGET_ID);
+                AppWidgetManager.INVALID_APPWIDGET_ID);
         sp = PreferenceManager.getDefaultSharedPreferences(this.context);
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
         darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
         category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
+
+        try {
+            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -45,11 +56,11 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     @Override
     public void onDataSetChanged() {
         if (displayMode == NoteListWidget.NLW_DISPLAY_ALL) {
-            dbNotes = db.getNotes(0);
+            dbNotes = db.getNotes(accountId);
         } else if (displayMode == NoteListWidget.NLW_DISPLAY_STARRED) {
-            dbNotes = db.searchNotes(null,null, true);
+            dbNotes = db.searchNotes(accountId, null, null, true);
         } else if (displayMode == NoteListWidget.NLW_DISPLAY_CATEGORY) {
-            dbNotes = db.searchNotes(null, category,  null);
+            dbNotes = db.searchNotes(accountId, null, category, null);
         }
     }
 

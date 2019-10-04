@@ -46,7 +46,7 @@
         </activity>
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.SettingsActivity"
+            android:name="it.niedermann.owncloud.notes.android.activity.AccountActivity"
             android:label="@string/settings_server_settings"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.PreferencesActivity"
             android:windowSoftInputMode="stateVisible" />

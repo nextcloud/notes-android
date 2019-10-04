@@ -10,6 +10,9 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
@@ -24,6 +27,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private MarkdownProcessor markdownProcessor;
     private final Context context;
     private final int appWidgetId;
+    private long accountId;
 
     private NoteSQLiteOpenHelper db;
     private DBNote note;
@@ -41,6 +45,11 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkTheme).build());
+        try {
+            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -54,7 +63,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         long noteID = sp.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1);
 
         if (noteID >= 0) {
-            note = db.getNote(noteID);
+            note = db.getNote(accountId, noteID);
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");

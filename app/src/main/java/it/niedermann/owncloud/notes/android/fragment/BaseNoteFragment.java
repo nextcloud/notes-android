@@ -28,10 +28,15 @@ import androidx.appcompat.widget.ShareActionProvider;
 import androidx.core.view.MenuItemCompat;
 import androidx.core.view.ViewCompat;
 
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
@@ -58,6 +63,8 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     protected String searchQuery = null;
 
+    private LocalAccount localAccount;
+
     protected DBNote note;
     @Nullable
     private DBNote originalNote;
@@ -75,6 +82,11 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             searchQuery = savedInstanceState.getString("searchQuery", "");
         }
 
+        try {
+            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext()).name);
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void setActiveTextView(TextView textView) {
@@ -88,13 +100,13 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             isNew = true;
             long id = getArguments().getLong(PARAM_NOTE_ID);
             if (id > 0) {
-                note = originalNote = db.getNote(id);
+                note = originalNote = db.getNote(localAccount.getId(), id);
             } else {
                 CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
                 if (cloudNote == null) {
                     throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE + " is missing.");
                 }
-                note = db.getNote(db.addNoteAndSync(cloudNote));
+                note = db.getNote(localAccount.getId(), db.addNoteAndSync(note.getAccountId(), cloudNote));
                 originalNote = null;
             }
         } else {
@@ -234,7 +246,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 if (originalNote == null) {
                     db.deleteNoteAndSync(note.getId());
                 } else {
-                    db.updateNoteAndSync(originalNote, null, null);
+                    db.updateNoteAndSync(localAccount.getId(), originalNote, null, null);
                 }
                 listener.close();
                 return true;
@@ -315,7 +327,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         if (note.getContent().equals(newContent)) {
             Log.v(getClass().getSimpleName(), "... not saving, since nothing has changed");
         } else {
-            note = db.updateNoteAndSync(note, newContent, callback);
+            note = db.updateNoteAndSync(localAccount.getId(), note, newContent, callback);
             listener.onNoteUpdated(note);
         }
     }

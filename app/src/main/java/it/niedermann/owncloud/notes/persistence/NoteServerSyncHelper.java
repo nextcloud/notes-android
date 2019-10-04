@@ -26,10 +26,11 @@ import java.util.Map;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
+import it.niedermann.owncloud.notes.android.activity.AccountActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
+import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NotesClient;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
@@ -59,6 +60,7 @@ public class NoteServerSyncHelper {
 
     private final NoteSQLiteOpenHelper dbHelper;
     private final Context appContext;
+    private LocalAccount localAccount;
 
     // Track network connection changes using a BroadcastReceiver
     private boolean networkConnected = false;
@@ -98,6 +100,11 @@ public class NoteServerSyncHelper {
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.dbHelper = db;
         this.appContext = db.getContext().getApplicationContext();
+        try {
+            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
         this.syncOnlyOnWifiKey = appContext.getResources().getString(R.string.pref_key_wifi_only);
 
         // Registers BroadcastReceiver to track network connection changes.
@@ -263,8 +270,7 @@ public class NoteServerSyncHelper {
          */
         private void pushLocalChanges() {
             Log.d(getClass().getSimpleName(), "pushLocalChanges()");
-            // FIXME hardcoded accountId
-            List<DBNote> notes = dbHelper.getLocalModifiedNotes(1);
+            List<DBNote> notes = dbHelper.getLocalModifiedNotes(localAccount.getId());
             for (DBNote note : notes) {
                 Log.d(getClass().getSimpleName(), "   Process Local Note: " + note);
                 try {
@@ -311,8 +317,8 @@ public class NoteServerSyncHelper {
         private LoginStatus pullRemoteChanges() {
             Log.d(getClass().getSimpleName(), "pullRemoteChanges()");
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
-            String lastETag = preferences.getString(SettingsActivity.SETTINGS_KEY_ETAG, null);
-            long lastModified = preferences.getLong(SettingsActivity.SETTINGS_KEY_LAST_MODIFIED, 0);
+            String lastETag = preferences.getString(AccountActivity.SETTINGS_KEY_ETAG, null);
+            long lastModified = preferences.getLong(AccountActivity.SETTINGS_KEY_LAST_MODIFIED, 0);
             LoginStatus status;
             try {
                 Map<Long, Long> idMap = dbHelper.getIdMap();
@@ -330,7 +336,7 @@ public class NoteServerSyncHelper {
                         dbHelper.updateNote(idMap.get(remoteNote.getRemoteId()), remoteNote, null);
                     } else {
                         Log.v(getClass().getSimpleName(), "   ... create");
-                        dbHelper.addNote(remoteNote);
+                        dbHelper.addNote(localAccount.getId(), remoteNote);
                     }
                 }
                 Log.d(getClass().getSimpleName(), "   Remove remotely deleted Notes (only those without local changes)");
@@ -347,15 +353,15 @@ public class NoteServerSyncHelper {
                 SharedPreferences.Editor editor = preferences.edit();
                 String etag = response.getETag();
                 if (etag != null && !etag.isEmpty()) {
-                    editor.putString(SettingsActivity.SETTINGS_KEY_ETAG, etag);
+                    editor.putString(AccountActivity.SETTINGS_KEY_ETAG, etag);
                 } else {
-                    editor.remove(SettingsActivity.SETTINGS_KEY_ETAG);
+                    editor.remove(AccountActivity.SETTINGS_KEY_ETAG);
                 }
                 long modified = response.getLastModified();
                 if (modified != 0) {
-                    editor.putLong(SettingsActivity.SETTINGS_KEY_LAST_MODIFIED, modified);
+                    editor.putLong(AccountActivity.SETTINGS_KEY_LAST_MODIFIED, modified);
                 } else {
-                    editor.remove(SettingsActivity.SETTINGS_KEY_LAST_MODIFIED);
+                    editor.remove(AccountActivity.SETTINGS_KEY_LAST_MODIFIED);
                 }
                 editor.apply();
             } catch (ServerResponse.NotModifiedException e) {

@@ -76,12 +76,10 @@ import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACT
 public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener {
 
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
-    public static final String CREDENTIALS_CHANGED = "it.niedermann.owncloud.notes.CREDENTIALS_CHANGED";
     public static final String ADAPTER_KEY_RECENT = "recent";
     public static final String ADAPTER_KEY_STARRED = "starred";
     public static final String ACTION_FAVORITES = "it.niedermann.owncloud.notes.favorites";
     public static final String ACTION_RECENT = "it.niedermann.owncloud.notes.recent";
-
 
     private static final String SAVED_STATE_NAVIGATION_SELECTION = "navigationSelection";
     private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
@@ -92,6 +90,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private final static int server_settings = 2;
     private final static int about = 3;
 
+    private LocalAccount localAccount;
 
     @BindView(R.id.notesListActivityActionBar)
     Toolbar toolbar;
@@ -138,7 +137,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     if (!shortcutManager.isRateLimitingActive()) {
                         List<ShortcutInfo> newShortcuts = new ArrayList<>();
 
-                        for (DBNote note : db.getRecentNotes(0)) {
+                        for (DBNote note : db.getRecentNotes(localAccount.getId())) {
                             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
                             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
                             intent.setAction(ACTION_SHORTCUT);
@@ -171,24 +170,25 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         db = NoteSQLiteOpenHelper.getInstance(this);
 
         try {
-            Log.v("Notes", "current sso account " + SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+            localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+            Log.v("Notes", "current sso account " + localAccount.getAccountName());
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
         } catch (NoCurrentAccountSelectedException e) {
-            if (!db.hasAccounts()) {
+            if (db.hasAccounts()) {
+                localAccount = db.getAccount(1);
+                SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName());
+            } else {
                 try {
                     AccountImporter.pickNewAccount(this);
                 } catch (NextcloudFilesAppNotInstalledException e1) {
-                    UiExceptionManager.showDialogForException(this, e);
+                    UiExceptionManager.showDialogForException(this, e1);
                     Log.w(NotesListViewActivity.class.toString(), "=============================================================");
                     Log.w(NotesListViewActivity.class.toString(), "Nextcloud app is not installed. Cannot choose account");
                     e.printStackTrace();
                 } catch (AndroidGetAccountsPermissionNotGranted e2) {
                     AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
                 }
-            } else {
-                LocalAccount localAccount = db.getAccount(1);
-                SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName());
             }
         }
 
@@ -332,8 +332,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
-            // FIXME hardcoded accountId
-            List<NavigationAdapter.NavigationItem> categories = db.getCategories(1);
+            List<NavigationAdapter.NavigationItem> categories = db.getCategories(localAccount.getId());
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
                 itemUncategorized.label = getString(R.string.action_uncategorized);
@@ -342,8 +341,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 itemUncategorized = null;
             }
 
-            // FIXME hardcoded accountId
-            Map<String, Integer> favorites = db.getFavoritesCount(1);
+            Map<String, Integer> favorites = db.getFavoritesCount(localAccount.getId());
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
             itemFavorites.count = numFavorites;
@@ -430,8 +428,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
                     startActivityForResult(aboutIntent, about);
                 } else if (item == itemTrashbin) {
-                    // FIXME hardcoded accountId
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(db.getAccount(1).getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
                 }
             }
 
@@ -501,7 +498,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         Log.v("Note", "Item deleted through swipe ----------------------------------------------");
                         Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
                                 .setAction(R.string.action_undo, (View v) -> {
-                                    db.addNoteAndSync(dbNote);
+                                    db.addNoteAndSync(dbNote.getAccountId(), dbNote);
                                     refreshLists();
                                     Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
                                             .show();
@@ -565,7 +562,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 listView.scrollToPosition(0);
             }
         };
-        new LoadNotesListTask(getApplicationContext(), callback, navigationSelection, query).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new LoadNotesListTask(localAccount.getId(), getApplicationContext(), callback, navigationSelection, query).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
@@ -651,12 +648,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-            if(db.hasAccounts()) {
-                // FIXME hardcoded accountId
-                db.setAccount(1, account.url, account.userId);
-            } else {
-                db.addAccount(account.url, account.userId);
-            }
+            db.addAccount(account.url, account.userId, account.name);
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
         });
 

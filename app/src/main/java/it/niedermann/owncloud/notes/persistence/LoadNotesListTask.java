@@ -2,13 +2,14 @@ package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,18 +30,20 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     private final NotesLoadedListener callback;
     private final Category category;
     private final CharSequence searchQuery;
-    public LoadNotesListTask(@NonNull Context context, @NonNull NotesLoadedListener callback, @NonNull Category category, @Nullable CharSequence searchQuery) {
+    private final long accountId;
+    public LoadNotesListTask(long accountId, @NonNull Context context, @NonNull NotesLoadedListener callback, @NonNull Category category, @Nullable CharSequence searchQuery) {
         this.context = context;
         this.callback = callback;
         this.category = category;
         this.searchQuery = searchQuery;
+        this.accountId = accountId;
     }
 
     @Override
     protected List<Item> doInBackground(Void... voids) {
         List<DBNote> noteList;
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(context);
-        noteList = db.searchNotes(searchQuery, category.category, category.favorite);
+        noteList = db.searchNotes(accountId, searchQuery, category.category, category.favorite);
 
         if (category.category == null) {
             return fillListByTime(noteList);

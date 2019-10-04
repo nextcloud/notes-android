@@ -80,12 +80,12 @@ public class NotesClient {
             mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
                 @Override
                 public void onConnected() {
-
+                    Log.v("Notes", "SSO API connected");
                 }
 
                 @Override
                 public void onError(Exception ex) {
-
+                    ex.printStackTrace();
                 }
             });
         } catch (NextcloudFilesAppAccountNotFoundException e) {
@@ -156,8 +156,6 @@ public class NotesClient {
                 .setMethod(method)
                 .setUrl("/index.php/apps/notes/api/v0.2/" + target);
 
-        Log.v("Notes", "NextcloudRequest Params: " + params);
-
         Map<String, List<String>> header = new HashMap<>();
         if (params != null) {
             header.put("Content-Type", Collections.singletonList(application_json));
@@ -173,6 +171,7 @@ public class NotesClient {
         StringBuilder result = new StringBuilder();
 
         try {
+            Log.v("Notes", "NextcloudRequest: " + nextcloudRequest.toString());
             InputStream inputStream = mNextcloudAPI.performNetworkRequest(nextcloudRequest);
             Log.v("Notes", "NextcloudRequest: " + nextcloudRequest.toString());
             BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
