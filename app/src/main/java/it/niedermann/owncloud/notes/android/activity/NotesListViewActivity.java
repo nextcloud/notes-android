@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -227,7 +228,13 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         accountChooser.removeAllViews();
         for (LocalAccount account : db.getAccounts()) {
             View v = getLayoutInflater().inflate(R.layout.item_account, null);
-            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(account.getUserName());
+            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(account.getAccountName());
+            Glide
+                    .with(this)
+                    .load(account.getUrl() + "/index.php/avatar/" + Uri.encode(account.getUserName()) + "/64")
+                    .error(R.drawable.ic_account_circle_grey_24dp)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
             v.setOnClickListener(clickedView -> {
                 SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.getAccountName());
                 db.getNoteServerSyncHelper().updateAccount();
