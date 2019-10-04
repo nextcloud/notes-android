@@ -88,6 +88,7 @@ public class NoteServerSyncHelper {
     // current state of the synchronization
     private boolean syncActive = false;
     private boolean syncScheduled = false;
+    private NotesClient notesClient;
 
     // list of callbacks for both parts of synchronziation
     private List<ICallback> callbacksPush = new ArrayList<>();
@@ -101,6 +102,7 @@ public class NoteServerSyncHelper {
 
         // Registers BroadcastReceiver to track network connection changes.
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        notesClient = new NotesClient(appContext);
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.appContext);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
@@ -223,7 +225,6 @@ public class NoteServerSyncHelper {
     private class SyncTask extends AsyncTask<Void, Void, LoginStatus> {
         private final boolean onlyLocalChanges;
         private final List<ICallback> callbacks = new ArrayList<>();
-        private NotesClient client;
         private List<Throwable> exceptions = new ArrayList<>();
 
         public SyncTask(boolean onlyLocalChanges) {
@@ -245,7 +246,6 @@ public class NoteServerSyncHelper {
 
         @Override
         protected LoginStatus doInBackground(Void... voids) {
-            client = new NotesClient(appContext); // recreate NoteClients on every sync in case the connection settings was changed
             Log.i(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
             //dbHelper.debugPrintFullDB();
             LoginStatus status = LoginStatus.OK;
@@ -275,20 +275,20 @@ public class NoteServerSyncHelper {
                             // if note is not new, try to edit it.
                             if (note.getRemoteId() > 0) {
                                 Log.v(getClass().getSimpleName(), "   ...try to edit");
-                                remoteNote = client.editNote(note).getNote();
+                                remoteNote = notesClient.editNote(note).getNote();
                             }
                             // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
                             // Please note, thas dbHelper.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
                                 Log.v(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
-                                remoteNote = client.createNote(note).getNote();
+                                remoteNote = notesClient.createNote(note).getNote();
                             }
                             dbHelper.updateNote(note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() > 0) {
                                 Log.v(getClass().getSimpleName(), "   ...delete (from server and local)");
-                                client.deleteNote(note.getRemoteId());
+                                notesClient.deleteNote(note.getRemoteId());
                             } else {
                                 Log.v(getClass().getSimpleName(), "   ...delete (only local, since it was not synchronized)");
                             }
@@ -316,7 +316,7 @@ public class NoteServerSyncHelper {
             LoginStatus status;
             try {
                 Map<Long, Long> idMap = dbHelper.getIdMap();
-                ServerResponse.NotesResponse response = client.getNotes(lastModified, lastETag);
+                ServerResponse.NotesResponse response = notesClient.getNotes(lastModified, lastETag);
                 List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
