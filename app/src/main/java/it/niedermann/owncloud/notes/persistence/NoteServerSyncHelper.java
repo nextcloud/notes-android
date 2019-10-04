@@ -76,19 +76,6 @@ public class NoteServerSyncHelper {
         }
     };
 
-    public void updateAccount(){
-        try {
-            if(notesClient != null) {
-                this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
-                notesClient.updateAccount(localAccount.getToken());
-            }
-            Log.v("Notes", "NextcloudRequest account: " + localAccount);
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
-        Log.v("Note", "Reinstanziation NotesClient because of SSO acc changed");
-    };
-
     private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -129,6 +116,23 @@ public class NoteServerSyncHelper {
         syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
         updateNetworkStatus();
+    }
+
+    public void updateAccount() {
+        try {
+            this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
+            if (notesClient == null) {
+                if(this.localAccount != null) {
+                    notesClient = new NotesClient(appContext, localAccount.getToken());
+                }
+            } else {
+                notesClient.updateAccount(localAccount.getToken());
+            }
+            Log.v("Notes", "NextcloudRequest account: " + localAccount);
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
+        Log.v("Note", "Reinstanziation NotesClient because of SSO acc changed");
     }
 
     @Override
@@ -282,7 +286,7 @@ public class NoteServerSyncHelper {
          * Push local changes: for each locally created/edited/deleted Note, use NotesClient in order to push the changed to the server.
          */
         private void pushLocalChanges() {
-            if(localAccount == null) {
+            if (localAccount == null) {
                 return;
             }
             Log.d(getClass().getSimpleName(), "pushLocalChanges()");
@@ -331,7 +335,7 @@ public class NoteServerSyncHelper {
          * Pull remote Changes: update or create each remote note (if local pendant has no changes) and remove remotely deleted notes.
          */
         private LoginStatus pullRemoteChanges() {
-            if(localAccount == null) {
+            if (localAccount == null) {
                 return LoginStatus.NO_NETWORK;
             }
             Log.d(getClass().getSimpleName(), "pullRemoteChanges() for account " + localAccount.getAccountName());
