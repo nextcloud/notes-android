@@ -193,9 +193,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         boolean ssoAnnouncmentShown = prefs.getBoolean("sp_sso_announchment_shown", false);
         if(!ssoAnnouncmentShown) {
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    .setTitle("Announcment")
+                    .setTitle("Single-Sign-On")
                     .setCancelable(false)
-                    .setMessage("The android app will beginning with the next major version depend on the great Single-Sign-On-Feature of Nextcloud.\n\nPlease make sure, you have installed at least version 3.8.0 of the files app and select at the first run the same account which you are already using.")
+                    .setMessage("The Notes app will beginning with the next major version use the great Single-Sign-On-Feature of Nextcloud.\n\nThis will increase the security, reliability and comfort for you.\n\nPlease make sure, you have installed at least version 3.8.0 of the files app and select at the first run the same account which you are already using.")
                     .setNegativeButton("More information", (a, b) -> {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/stefan-niedermann/nextcloud-notes/blob/master/SSO%20Announcment.md")));
                     })
