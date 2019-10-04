@@ -118,7 +118,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 key_url + " TEXT, " +
                 key_username + " TEXT, " +
                 key_account_name + " TEXT UNIQUE, " +
-                key_display_name + " TEXT)");
+                key_display_name + " TEXT, " +
+                key_token + " TEXT)");
         createAccountIndexes(db);
     }
 

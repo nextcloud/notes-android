@@ -74,7 +74,7 @@ public class NotesClient {
     public static final String JSON_MODIFIED = "modified";
     private static final String application_json = "application/json";
 
-    public NotesClient(Context context) {
+    public NotesClient(Context context, String token) {
         this.context = context;
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
@@ -95,7 +95,7 @@ public class NotesClient {
         }
     }
     
-    public void updateAccount() {
+    public void updateAccount(String token) {
         if(mNextcloudAPI != null) {
             mNextcloudAPI.stop();
         }
