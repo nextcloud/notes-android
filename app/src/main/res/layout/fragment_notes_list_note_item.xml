@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/noteSwipeFrame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,9 +14,9 @@
         android:layout_marginLeft="@dimen/button_padding"
         android:layout_marginStart="@dimen/button_padding"
         android:contentDescription="@string/menu_favorite"
-        android:src="@drawable/ic_star_white_24dp" />
+        app:srcCompat="@drawable/ic_star_white_24dp" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/noteDeleteRight"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -23,7 +24,7 @@
         android:layout_marginEnd="@dimen/button_padding"
         android:layout_marginRight="@dimen/button_padding"
         android:contentDescription="@string/menu_delete"
-        android:src="@drawable/ic_delete_white_32dp" />
+        app:srcCompat="@drawable/ic_delete_white_32dp" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/noteSwipeable"
@@ -45,7 +46,7 @@
                 android:layout_height="match_parent" />
 
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/noteStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,7 +55,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_gravity="center_vertical|end"
                 android:baseline="14dp"
-                android:src="@drawable/ic_sync_blue_18dp" />
+                app:srcCompat="@drawable/ic_sync_blue_18dp" />
         </FrameLayout>
 
 

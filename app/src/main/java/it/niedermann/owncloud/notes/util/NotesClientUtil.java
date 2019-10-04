@@ -10,6 +10,9 @@ import it.niedermann.owncloud.notes.R;
  */
 public class NotesClientUtil {
 
+    public static final String SETTINGS_KEY_ETAG = "notes_last_etag";
+    public static final String SETTINGS_KEY_LAST_MODIFIED = "notes_last_modified";
+
     public enum LoginStatus {
         OK(0),
         CONNECTION_FAILED(R.string.error_io),

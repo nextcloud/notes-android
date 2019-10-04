@@ -168,6 +168,7 @@
     <string name="note_has_been_deleted">This note has been deleted</string>
     <string name="fallback_weblogin_text">Revert to old login method</string>
     <string name="fallback_weblogin_back">Back</string>
+    <string name="add_account">Add account</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

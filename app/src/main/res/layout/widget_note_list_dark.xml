@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/widget_background_dark_theme">
 
@@ -46,7 +47,7 @@
             android:id="@+id/widget_note_list_create_icon_dark"
             android:layout_width="@dimen/widget_note_list_icon_width"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_add_white_24dp"
+            app:srcCompat="@drawable/ic_add_white_24dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:paddingStart="@dimen/widget_note_list_inner_padding"

@@ -15,6 +15,7 @@ android {
         targetSdkVersion 28
         versionCode 48
         versionName "1.0.0"
+//        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {

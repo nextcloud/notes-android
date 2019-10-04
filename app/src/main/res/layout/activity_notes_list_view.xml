@@ -41,7 +41,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_create"
         style="@style/fab"
-        android:src="@drawable/ic_add_white_24dp"
+        app:srcCompat="@drawable/ic_add_white_24dp"
         android:title="@string/action_create"
         app:backgroundTint="@color/primary"
         app:rippleColor="@color/primary_dark" />

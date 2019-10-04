@@ -29,6 +29,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback;
@@ -92,6 +93,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private LocalAccount localAccount;
 
+    @BindView(R.id.accountNavigation)
+    LinearLayout accountNavigation;
+    @BindView(R.id.accountChooser)
+    LinearLayout accountChooser;
     @BindView(R.id.notesListActivityActionBar)
     Toolbar toolbar;
     @BindView(R.id.drawerLayout)
@@ -160,6 +165,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         public void onScheduled() {
         }
     };
+    private boolean accountChooserActive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,12 +189,14 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
-        setupNavigationList(categoryAdapterSelectedItem);
-        setupActionBar();
-        setupNavigationMenu();
-        setupNotesList();
 
         db = NoteSQLiteOpenHelper.getInstance(this);
+
+        setupHeader();
+        setupActionBar();
+        setupNavigationList(categoryAdapterSelectedItem);
+        setupNavigationMenu();
+        setupNotesList();
 
         try {
             localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
@@ -213,6 +221,54 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 }
             }
         }
+    }
+
+    private void setupHeader() {
+        accountChooser.removeAllViews();
+        for (LocalAccount account : db.getAccounts()) {
+            View v = getLayoutInflater().inflate(R.layout.item_account, null);
+            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(account.getUserName());
+            v.setOnClickListener(clickedView -> {
+                SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.getAccountName());
+                db.getNoteServerSyncHelper().updateAccount();
+                localAccount = db.getLocalAccountByAccountName(account.getAccountName());
+                db.getNoteServerSyncHelper().updateAccount();
+                synchronize();
+                refreshLists();
+                setupHeader();
+                updateUsernameInDrawer();
+                headerView.performClick();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            });
+            accountChooser.addView(v);
+        }
+        View addButton = getLayoutInflater().inflate(R.layout.item_account, null);
+        ((TextView) addButton.findViewById(R.id.accountItemLabel)).setText(getString(R.string.add_account));
+        ((AppCompatImageView) addButton.findViewById(R.id.accountItemAvatar)).setImageResource(R.drawable.ic_person_add_grey600_24dp);
+        addButton.setOnClickListener((btn) -> {
+            try {
+                AccountImporter.pickNewAccount(this);
+            } catch (NextcloudFilesAppNotInstalledException e1) {
+                UiExceptionManager.showDialogForException(this, e1);
+                Log.w(NotesListViewActivity.class.toString(), "=============================================================");
+                Log.w(NotesListViewActivity.class.toString(), "Nextcloud app is not installed. Cannot choose account");
+                e1.printStackTrace();
+            } catch (AndroidGetAccountsPermissionNotGranted e2) {
+                AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
+            }
+        });
+        accountChooser.addView(addButton);
+        headerView.setOnClickListener((view) -> {
+            if (this.accountChooserActive) {
+                accountChooser.setVisibility(View.GONE);
+                accountNavigation.setVisibility(View.VISIBLE);
+            } else {
+                accountChooser.setVisibility(View.VISIBLE);
+                accountNavigation.setVisibility(View.GONE);
+
+            }
+            this.accountChooserActive = !this.accountChooserActive;
+        });
     }
 
     @Override
@@ -641,6 +697,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             localAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name, account.token));
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
             db.getNoteServerSyncHelper().updateAccount();
+            synchronize();
+            refreshLists();
+            setupHeader();
+            drawerLayout.closeDrawer(GravityCompat.START);
         });
 
         // Check which request we're responding to
@@ -665,15 +725,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         } else if (requestCode == server_settings) {
             // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
-
-            try {
-                localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
-                db.getNoteServerSyncHelper().updateAccount();
-                synchronize();
-                refreshLists();
-            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                e.printStackTrace();
-            }
             recreate();
         }
     }

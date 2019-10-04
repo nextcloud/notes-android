@@ -92,8 +92,21 @@
                         android:textColor="@color/fg_contrast"
                         android:textSize="12sp"
                         tools:text="user@nextcloud.example.com"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_arrow_drop_down_white_24dp"
+                        android:layout_alignEnd="@+id/account"
+                        android:layout_alignRight="@+id/account"
+                        android:layout_alignBottom="@+id/account" />
                 </RelativeLayout>
 
+                <LinearLayout
+                    android:id="@+id/accountNavigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/navigationList"
                     android:layout_width="match_parent"
@@ -102,11 +115,6 @@
                     android:paddingBottom="8dp"
                     app:layoutManager="LinearLayoutManager" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/separator" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/navigationMenu"
                     android:layout_width="match_parent"
@@ -114,7 +122,16 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     app:layoutManager="LinearLayoutManager" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/accountChooser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"/>
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

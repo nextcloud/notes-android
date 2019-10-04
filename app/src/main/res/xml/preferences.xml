@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <Preference
-        android:icon="@drawable/ic_account_circle_grey_24dp"
-        android:title="@string/settings_server_settings">
-        <intent
-            android:targetClass="it.niedermann.owncloud.notes.android.activity.AccountActivity"
-            android:targetPackage="it.niedermann.owncloud.notes" />
-    </Preference>
-
     <ListPreference
         android:defaultValue="@string/pref_value_mode_edit"
         android:entries="@array/noteMode_entries"
