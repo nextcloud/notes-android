@@ -111,6 +111,12 @@ public class NoteServerSyncHelper {
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         notesClient = new NotesClient(appContext);
         SingleAccountHelper.registerSharedPreferenceChangeListener(appContext, (sharedPreferences, key) -> {
+            try {
+                this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
+                Log.v("Notes", "NextcloudRequest account: " + localAccount);
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                e.printStackTrace();
+            }
             notesClient = new NotesClient(appContext);
         });
 
@@ -272,6 +278,9 @@ public class NoteServerSyncHelper {
          * Push local changes: for each locally created/edited/deleted Note, use NotesClient in order to push the changed to the server.
          */
         private void pushLocalChanges() {
+            if(localAccount == null) {
+                return;
+            }
             Log.d(getClass().getSimpleName(), "pushLocalChanges()");
             List<DBNote> notes = dbHelper.getLocalModifiedNotes(localAccount.getId());
             for (DBNote note : notes) {
@@ -318,6 +327,9 @@ public class NoteServerSyncHelper {
          * Pull remote Changes: update or create each remote note (if local pendant has no changes) and remove remotely deleted notes.
          */
         private LoginStatus pullRemoteChanges() {
+            if(localAccount == null) {
+                return LoginStatus.NO_NETWORK;
+            }
             Log.d(getClass().getSimpleName(), "pullRemoteChanges()");
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
             String lastETag = preferences.getString(localAccount.getId() + "_" + AccountActivity.SETTINGS_KEY_ETAG, null);

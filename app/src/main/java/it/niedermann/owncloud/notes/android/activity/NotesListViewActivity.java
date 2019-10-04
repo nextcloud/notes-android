@@ -166,6 +166,27 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         super.onCreate(savedInstanceState);
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
+        setContentView(R.layout.drawer_layout);
+        ButterKnife.bind(this);
+
+
+        String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
+        if (savedInstanceState == null) {
+            if (ACTION_RECENT.equals(getIntent().getAction())) {
+                categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
+            } else if (ACTION_FAVORITES.equals(getIntent().getAction())) {
+                categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
+                navigationSelection = new Category(null, true);
+            }
+        } else {
+            navigationSelection = (Category) savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
+            navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
+            categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
+        }
+        setupNavigationList(categoryAdapterSelectedItem);
+        setupActionBar();
+        setupNavigationMenu();
+        setupNotesList();
 
         db = NoteSQLiteOpenHelper.getInstance(this);
 
@@ -191,35 +212,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 }
             }
         }
-
-        setContentView(R.layout.drawer_layout);
-        ButterKnife.bind(this);
-
-        if(localAccount != null) {
-            String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-            if (savedInstanceState == null) {
-                if (ACTION_RECENT.equals(getIntent().getAction())) {
-                    categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-                } else if (ACTION_FAVORITES.equals(getIntent().getAction())) {
-                    categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
-                    navigationSelection = new Category(null, true);
-                }
-            } else {
-                navigationSelection = (Category) savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
-                navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
-                categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
-            }
-            setupActionBar();
-            setupNotesList();
-            setupNavigationList(categoryAdapterSelectedItem);
-            setupNavigationMenu();
-        }
     }
 
     @Override
     protected void onResume() {
         // refresh and sync every time the activity gets
-        if(localAccount != null) {
+        if (localAccount != null) {
             refreshLists();
             db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
             if (db.getNoteServerSyncHelper().isSyncPossible()) {
@@ -232,7 +230,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        if(localAccount != null) {
+        if (localAccount != null) {
             drawerToggle.syncState();
         }
     }
@@ -240,7 +238,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if(localAccount != null) {
+        if (localAccount != null) {
             drawerToggle.syncState();
         }
     }
@@ -248,7 +246,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(localAccount != null) {
+        if (localAccount != null) {
             outState.putSerializable(SAVED_STATE_NAVIGATION_SELECTION, navigationSelection);
             outState.putString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION, adapterCategories.getSelectedItem());
             outState.putString(SAVED_STATE_NAVIGATION_OPEN, navigationOpen);
@@ -645,11 +643,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
             localAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name));
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
-
-            setupActionBar();
-            setupNotesList();
-            setupNavigationList(ADAPTER_KEY_RECENT);
-            setupNavigationMenu();
         });
 
         // Check which request we're responding to
@@ -691,13 +684,13 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             String url = a.url;
             if (url != null) {
                 String croppedUrl = new URL(url).getHost();
-                    this.account.setText(a.userId + "@" + croppedUrl);
-                    Glide
-                            .with(this)
-                            .load(url + "/index.php/avatar/" + Uri.encode(a.userId) + "/64")
-                            .error(R.mipmap.ic_launcher)
-                            .apply(RequestOptions.circleCropTransform())
-                            .into(this.currentAccountImage);
+                this.account.setText(a.userId + "@" + croppedUrl);
+                Glide
+                        .with(this)
+                        .load(url + "/index.php/avatar/" + Uri.encode(a.userId) + "/64")
+                        .error(R.mipmap.ic_launcher)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(this.currentAccountImage);
             } else {
                 Log.w(NotesListViewActivity.class.getSimpleName(), "url is null");
             }
