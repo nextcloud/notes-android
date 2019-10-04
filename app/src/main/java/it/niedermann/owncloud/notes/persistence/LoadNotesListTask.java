@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.NonNull;
@@ -96,68 +97,16 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     @WorkerThread
     private List<Item> fillListByTime(@NonNull List<DBNote> noteList) {
         List<Item> itemList = new ArrayList<>();
-        // #12 Create Sections depending on Time
-        boolean todaySet, yesterdaySet, weekSet, monthSet, earlierSet;
-        todaySet = yesterdaySet = weekSet = monthSet = earlierSet = false;
-        Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
-        Calendar yesterday = Calendar.getInstance();
-        yesterday.set(Calendar.DAY_OF_YEAR, yesterday.get(Calendar.DAY_OF_YEAR) - 1);
-        yesterday.set(Calendar.HOUR_OF_DAY, 0);
-        yesterday.set(Calendar.MINUTE, 0);
-        yesterday.set(Calendar.SECOND, 0);
-        yesterday.set(Calendar.MILLISECOND, 0);
-        Calendar week = Calendar.getInstance();
-        week.set(Calendar.DAY_OF_WEEK, week.getFirstDayOfWeek());
-        week.set(Calendar.HOUR_OF_DAY, 0);
-        week.set(Calendar.MINUTE, 0);
-        week.set(Calendar.SECOND, 0);
-        week.set(Calendar.MILLISECOND, 0);
-        Calendar month = Calendar.getInstance();
-        month.set(Calendar.DAY_OF_MONTH, 0);
-        month.set(Calendar.HOUR_OF_DAY, 0);
-        month.set(Calendar.MINUTE, 0);
-        month.set(Calendar.SECOND, 0);
-        month.set(Calendar.MILLISECOND, 0);
+        Timeslotter timeslotter = new Timeslotter();
+        String lastTimeslot = null;
         for (int i = 0; i < noteList.size(); i++) {
             DBNote currentNote = noteList.get(i);
-            if (currentNote.isFavorite()) {
-                // don't show as new section
-            } else if (!todaySet && currentNote.getModified().getTimeInMillis() >= today.getTimeInMillis()) {
-                // after 00:00 today
-                if (i > 0) {
-                    itemList.add(new SectionItem(context.getResources().getString(R.string.listview_updated_today)));
-                }
-                todaySet = true;
-            } else if (!yesterdaySet && currentNote.getModified().getTimeInMillis() < today.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= yesterday.getTimeInMillis()) {
-                // between today 00:00 and yesterday 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(context.getResources().getString(R.string.listview_updated_yesterday)));
-                }
-                yesterdaySet = true;
-            } else if (!weekSet && currentNote.getModified().getTimeInMillis() < yesterday.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= week.getTimeInMillis()) {
-                // between yesterday 00:00 and start of the week 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(context.getResources().getString(R.string.listview_updated_this_week)));
-                }
-                weekSet = true;
-            } else if (!monthSet && currentNote.getModified().getTimeInMillis() < week.getTimeInMillis() && currentNote.getModified().getTimeInMillis() >= month.getTimeInMillis()) {
-                // between start of the week 00:00 and start of the month 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(context.getResources().getString(R.string.listview_updated_this_month)));
-                }
-                monthSet = true;
-            } else if (!earlierSet && currentNote.getModified().getTimeInMillis() < month.getTimeInMillis()) {
-                // before start of the month 00:00
-                if (i > 0) {
-                    itemList.add(new SectionItem(context.getResources().getString(R.string.listview_updated_earlier)));
-                }
-                earlierSet = true;
+            String timeslot = timeslotter.getTimeslot(currentNote);
+            if(i > 0 && !timeslot.equals(lastTimeslot)) {
+                itemList.add(new SectionItem(timeslot));
             }
             itemList.add(colorTheNote(currentNote));
+            lastTimeslot = timeslot;
         }
 
         return itemList;
@@ -170,5 +119,54 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 
     public interface NotesLoadedListener {
         void onNotesLoaded(List<Item> notes, boolean showCategory);
+    }
+
+    private class Timeslotter {
+        private final List<Timeslot> timeslots = new ArrayList<>();
+        private final Calendar lastYear;
+
+        Timeslotter() {
+            Calendar now = Calendar.getInstance();
+            int month = now.get(Calendar.MONTH);
+            int day = now.get(Calendar.DAY_OF_MONTH);
+            int offsetWeekStart = (now.get(Calendar.DAY_OF_WEEK) - now.getFirstDayOfWeek() + 7) % 7;
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_today), month, day));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_yesterday), month,day - 1));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_week), month,day - offsetWeekStart));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_week), month,day - offsetWeekStart - 7));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_month), month,1));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_month), month - 1, 1));
+            lastYear = Calendar.getInstance();
+            lastYear.set(now.get(Calendar.YEAR) - 1, 0, 1, 0, 0, 0);
+        }
+
+        String getTimeslot(DBNote note) {
+            if (note.isFavorite()) {
+                return "";
+            }
+            Calendar modified = note.getModified();
+            for (Timeslot timeslot : timeslots) {
+                if (!modified.before(timeslot.time)) {
+                    return timeslot.label;
+                }
+            }
+            if (!modified.before(this.lastYear)) {
+                // use YEAR and MONTH in a format based on current locale
+                return DateUtils.formatDateTime(context, modified.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_NO_MONTH_DAY);
+            } else {
+                return Integer.toString(modified.get(Calendar.YEAR));
+            }
+        }
+
+        private class Timeslot {
+            final String label;
+            final Calendar time;
+
+            Timeslot(String label, int month, int day) {
+                this.label = label;
+                this.time = Calendar.getInstance();
+                this.time.set(this.time.get(Calendar.YEAR), month, day, 0, 0, 0);
+            }
+        }
     }
 }

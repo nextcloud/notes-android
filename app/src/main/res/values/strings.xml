@@ -40,8 +40,9 @@
     <string name="listview_updated_today">Today</string>
     <string name="listview_updated_yesterday">Yesterday</string>
     <string name="listview_updated_this_week">This week</string>
+    <string name="listview_updated_last_week">Last week</string>
     <string name="listview_updated_this_month">This month</string>
-    <string name="listview_updated_earlier">Earlier</string>
+    <string name="listview_updated_last_month">Last month</string>
 
     <!-- Settings -->
     <string name="settings_server_settings">Account</string>
