@@ -320,8 +320,8 @@ public class NoteServerSyncHelper {
         private LoginStatus pullRemoteChanges() {
             Log.d(getClass().getSimpleName(), "pullRemoteChanges()");
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
-            String lastETag = preferences.getString(AccountActivity.SETTINGS_KEY_ETAG, null);
-            long lastModified = preferences.getLong(AccountActivity.SETTINGS_KEY_LAST_MODIFIED, 0);
+            String lastETag = preferences.getString(localAccount.getId() + "_" + AccountActivity.SETTINGS_KEY_ETAG, null);
+            long lastModified = preferences.getLong(localAccount.getId() + "_" + AccountActivity.SETTINGS_KEY_LAST_MODIFIED, 0);
             LoginStatus status;
             try {
                 Map<Long, Long> idMap = dbHelper.getIdMap();
@@ -355,15 +355,15 @@ public class NoteServerSyncHelper {
                 SharedPreferences.Editor editor = preferences.edit();
                 String etag = response.getETag();
                 if (etag != null && !etag.isEmpty()) {
-                    editor.putString(AccountActivity.SETTINGS_KEY_ETAG, etag);
+                    editor.putString(localAccount.getId() + "_" + AccountActivity.SETTINGS_KEY_ETAG, etag);
                 } else {
-                    editor.remove(AccountActivity.SETTINGS_KEY_ETAG);
+                    editor.remove(localAccount.getId() + "_" + AccountActivity.SETTINGS_KEY_ETAG);
                 }
                 long modified = response.getLastModified();
                 if (modified != 0) {
-                    editor.putLong(AccountActivity.SETTINGS_KEY_LAST_MODIFIED, modified);
+                    editor.putLong(localAccount.getId() + "_" + AccountActivity.SETTINGS_KEY_LAST_MODIFIED, modified);
                 } else {
-                    editor.remove(AccountActivity.SETTINGS_KEY_LAST_MODIFIED);
+                    editor.remove(localAccount.getId() + "_" + AccountActivity.SETTINGS_KEY_LAST_MODIFIED);
                 }
                 editor.apply();
                 return LoginStatus.OK;
