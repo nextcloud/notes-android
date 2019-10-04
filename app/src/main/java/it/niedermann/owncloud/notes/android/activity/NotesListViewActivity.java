@@ -332,7 +332,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
-            List<NavigationAdapter.NavigationItem> categories = db.getCategories(0);
+            // FIXME hardcoded accountId
+            List<NavigationAdapter.NavigationItem> categories = db.getCategories(1);
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
                 itemUncategorized.label = getString(R.string.action_uncategorized);
@@ -341,7 +342,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 itemUncategorized = null;
             }
 
-            Map<String, Integer> favorites = db.getFavoritesCount(0);
+            // FIXME hardcoded accountId
+            Map<String, Integer> favorites = db.getFavoritesCount(1);
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
             itemFavorites.count = numFavorites;

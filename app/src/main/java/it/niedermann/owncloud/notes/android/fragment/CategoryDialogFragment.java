@@ -102,7 +102,8 @@ public class CategoryDialogFragment extends DialogFragment {
         @Override
         protected List<String> doInBackground(Void... voids) {
             NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
-            List<NavigationAdapter.NavigationItem> items = db.getCategories(0);
+            // FIXME hardcoded accountId
+            List<NavigationAdapter.NavigationItem> items = db.getCategories(1);
             List<String> categories = new ArrayList<>();
             for (NavigationAdapter.NavigationItem item : items) {
                 if (!item.label.isEmpty()) {

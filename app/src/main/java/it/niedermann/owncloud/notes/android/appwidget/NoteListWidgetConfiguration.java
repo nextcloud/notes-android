@@ -125,7 +125,8 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
             NavigationAdapter.NavigationItem itemUncategorized;
-            List<NavigationAdapter.NavigationItem> categories = db.getCategories(0);
+            // FIXME hardcoded accountId
+            List<NavigationAdapter.NavigationItem> categories = db.getCategories(1);
 
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
@@ -133,7 +134,8 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
                 itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
             }
 
-            Map<String, Integer> favorites = db.getFavoritesCount(0);
+            // FIXME hardcoded accountId
+            Map<String, Integer> favorites = db.getFavoritesCount(1);
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
             itemFavorites.count = numFavorites;
