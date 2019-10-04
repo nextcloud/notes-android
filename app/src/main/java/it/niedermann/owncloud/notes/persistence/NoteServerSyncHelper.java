@@ -1,24 +1,23 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.IBinder;
-import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+
 import org.json.JSONException;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,10 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import at.bitfire.cert4android.CustomCertManager;
-import at.bitfire.cert4android.CustomCertService;
-import at.bitfire.cert4android.ICustomCertService;
-import at.bitfire.cert4android.IOnCertificateDecision;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.SettingsActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -39,7 +34,6 @@ import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NotesClient;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
 import it.niedermann.owncloud.notes.util.ServerResponse;
-import it.niedermann.owncloud.notes.util.SupportUtil;
 
 /**
  * Helps to synchronize the Database to the Server.
@@ -66,9 +60,6 @@ public class NoteServerSyncHelper {
     private final NoteSQLiteOpenHelper dbHelper;
     private final Context appContext;
 
-    private CustomCertManager customCertManager;
-    private ICustomCertService iCustomCertService;
-
     // Track network connection changes using a BroadcastReceiver
     private boolean networkConnected = false;
     private String syncOnlyOnWifiKey;
@@ -94,24 +85,6 @@ public class NoteServerSyncHelper {
         }
     };
 
-    private boolean cert4androidReady = false;
-    private final ServiceConnection certService = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            iCustomCertService = ICustomCertService.Stub.asInterface(iBinder);
-            cert4androidReady = true;
-            if (isSyncPossible()) {
-                scheduleSync(false);
-            }
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            cert4androidReady = false;
-            iCustomCertService = null;
-        }
-    };
-
     // current state of the synchronization
     private boolean syncActive = false;
     private boolean syncScheduled = false;
@@ -125,12 +98,6 @@ public class NoteServerSyncHelper {
         this.dbHelper = db;
         this.appContext = db.getContext().getApplicationContext();
         this.syncOnlyOnWifiKey = appContext.getResources().getString(R.string.pref_key_wifi_only);
-        new Thread() {
-            @Override
-            public void run() {
-                customCertManager = SupportUtil.getCertManager(appContext);
-            }
-        }.start();
 
         // Registers BroadcastReceiver to track network connection changes.
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
@@ -140,42 +107,35 @@ public class NoteServerSyncHelper {
         syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
         updateNetworkStatus();
-        // bind to certifciate service to block sync attempts if service is not ready
-        appContext.bindService(new Intent(appContext, CustomCertService.class), certService, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     protected void finalize() throws Throwable {
         appContext.unregisterReceiver(networkReceiver);
-        appContext.unbindService(certService);
-        if (customCertManager != null) {
-            customCertManager.close();
-        }
         super.finalize();
     }
 
     public static boolean isConfigured(Context context) {
-        return !PreferenceManager.getDefaultSharedPreferences(context).getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS).isEmpty();
+        try {
+            SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+            return true;
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            return false;
+        } catch (NoCurrentAccountSelectedException e) {
+            return false;
+        }
     }
 
     /**
      * Synchronization is only possible, if there is an active network connection and
-     * Cert4Android service is available.
+     * SingleSignOn is available
      * NoteServerSyncHelper observes changes in the network connection.
      * The current state can be retrieved with this method.
      *
      * @return true if sync is possible, otherwise false.
      */
     public boolean isSyncPossible() {
-        return networkConnected && isConfigured(appContext) && cert4androidReady;
-    }
-
-    public CustomCertManager getCustomCertManager() {
-        return customCertManager;
-    }
-
-    public void checkCertificate(byte[] cert, boolean foreground, IOnCertificateDecision callback) throws RemoteException {
-        iCustomCertService.checkTrusted(cert, true, foreground, callback);
+        return networkConnected && isConfigured(appContext);
     }
 
     /**
@@ -211,7 +171,6 @@ public class NoteServerSyncHelper {
      */
     public void scheduleSync(boolean onlyLocalChanges) {
         Log.d(getClass().getSimpleName(), "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (syncActive ? "sync active" : "sync NOT active") + ") ...");
-        Log.d(getClass().getSimpleName(), "(network:" + networkConnected + "; conf:" + isConfigured(appContext) + "; cert4android:" + cert4androidReady + ")");
         if (isSyncPossible() && (!syncActive || onlyLocalChanges)) {
             Log.d(getClass().getSimpleName(), "... starting now");
             SyncTask syncTask = new SyncTask(onlyLocalChanges);
@@ -286,7 +245,7 @@ public class NoteServerSyncHelper {
 
         @Override
         protected LoginStatus doInBackground(Void... voids) {
-            client = createNotesClient(appContext); // recreate NoteClients on every sync in case the connection settings was changed
+            client = new NotesClient(appContext); // recreate NoteClients on every sync in case the connection settings was changed
             Log.i(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
             //dbHelper.debugPrintFullDB();
             LoginStatus status = LoginStatus.OK;
@@ -316,28 +275,20 @@ public class NoteServerSyncHelper {
                             // if note is not new, try to edit it.
                             if (note.getRemoteId() > 0) {
                                 Log.v(getClass().getSimpleName(), "   ...try to edit");
-                                try {
-                                    remoteNote = client.editNote(customCertManager, note).getNote();
-                                } catch (FileNotFoundException e) {
-                                    // Note does not exists anymore
-                                }
+                                remoteNote = client.editNote(note).getNote();
                             }
                             // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
                             // Please note, thas dbHelper.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
                                 Log.v(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
-                                remoteNote = client.createNote(customCertManager, note).getNote();
+                                remoteNote = client.createNote(note).getNote();
                             }
                             dbHelper.updateNote(note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() > 0) {
                                 Log.v(getClass().getSimpleName(), "   ...delete (from server and local)");
-                                try {
-                                    client.deleteNote(note.getRemoteId());
-                                } catch (FileNotFoundException e) {
-                                    Log.v(getClass().getSimpleName(), "   ...Note does not exist on server (anymore?) -> delete locally");
-                                }
+                                client.deleteNote(note.getRemoteId());
                             } else {
                                 Log.v(getClass().getSimpleName(), "   ...delete (only local, since it was not synchronized)");
                             }
@@ -347,7 +298,7 @@ public class NoteServerSyncHelper {
                         default:
                             throw new IllegalStateException("Unknown State of Note: " + note);
                     }
-                } catch (IOException | JSONException e) {
+                } catch (JSONException e) {
                     Log.e(getClass().getSimpleName(), "Exception", e);
                     exceptions.add(e);
                 }
@@ -442,13 +393,5 @@ public class NoteServerSyncHelper {
                 scheduleSync(false);
             }
         }
-    }
-
-    private NotesClient createNotesClient(Context context) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext.getApplicationContext());
-        String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
-        String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
-        String password = preferences.getString(SettingsActivity.SETTINGS_PASSWORD, SettingsActivity.DEFAULT_SETTINGS);
-        return new NotesClient(context, url, username, password);
     }
 }

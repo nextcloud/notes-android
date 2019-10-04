@@ -32,8 +32,6 @@ android {
 }
 
 dependencies {
-    implementation project(':cert4android')
-
     implementation 'com.github.nextcloud:Android-SingleSignOn:master-SNAPSHOT'
 
     implementation 'io.reactivex:rxandroid:1.2.1'

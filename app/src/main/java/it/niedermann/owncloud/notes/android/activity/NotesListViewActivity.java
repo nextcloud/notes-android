@@ -2,7 +2,6 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
@@ -12,7 +11,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -51,6 +49,8 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.nextcloud.android.sso.ui.UiExceptionManager;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -192,6 +192,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
         }
 
+        setContentView(R.layout.drawer_layout);
+        ButterKnife.bind(this);
+
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
         if (savedInstanceState == null) {
             if (ACTION_RECENT.equals(getIntent().getAction())) {
@@ -205,9 +208,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
-
-        setContentView(R.layout.drawer_layout);
-        ButterKnife.bind(this);
 
         setupActionBar();
         setupNotesList();
@@ -428,9 +428,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
                     startActivityForResult(aboutIntent, about);
                 } else if (item == itemTrashbin) {
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url + "index.php/apps/files/?dir=/&view=trashbin")));
+                    // FIXME hardcoded accountId
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(db.getAccount(1).getUrl() + "index.php/apps/files/?dir=/&view=trashbin")));
                 }
             }
 
@@ -686,22 +685,25 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void updateUsernameInDrawer() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
-        String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
-        if (url != null) {
-            String croppedUrl = url.replace("https://", "").replace("http://", "");
-            if (!SettingsActivity.DEFAULT_SETTINGS.equals(username) && !SettingsActivity.DEFAULT_SETTINGS.equals(url)) {
-                this.account.setText(username + "@" + croppedUrl.substring(0, croppedUrl.length() - 1));
-                Glide
-                        .with(this)
-                        .load(url + "/index.php/avatar/" + Uri.encode(username) + "/64")
-                        .error(R.mipmap.ic_launcher)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(this.currentAccountImage);
+        try {
+            SingleSignOnAccount a = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+            String url = a.url;
+            if (url != null) {
+                String croppedUrl = new URL(url).getHost();
+                    this.account.setText(a.userId + "@" + croppedUrl);
+                    Glide
+                            .with(this)
+                            .load(url + "/index.php/avatar/" + Uri.encode(a.userId) + "/64")
+                            .error(R.mipmap.ic_launcher)
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(this.currentAccountImage);
+            } else {
+                Log.w(NotesListViewActivity.class.getSimpleName(), "url is null");
             }
-        } else {
-            Log.w(NotesListViewActivity.class.getSimpleName(), "url is null");
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
     }
 

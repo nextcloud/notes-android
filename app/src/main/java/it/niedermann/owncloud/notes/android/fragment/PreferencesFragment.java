@@ -9,7 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import at.bitfire.cert4android.CustomCertManager;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.Notes;
 
@@ -21,7 +21,6 @@ public class PreferencesFragment extends PreferenceFragment {
 
         Preference resetTrust = findPreference(getString(R.string.pref_key_reset_trust));
         resetTrust.setOnPreferenceClickListener((Preference preference) -> {
-            CustomCertManager.Companion.resetCertificates(getActivity());
             Toast.makeText(getActivity(), getString(R.string.settings_cert_reset_toast), Toast.LENGTH_SHORT).show();
             return true;
         });

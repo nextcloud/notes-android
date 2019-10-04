@@ -155,6 +155,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         if (oldVersion < 9) {
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_account_id + " INTEGER NOT NULL DEFAULT 0");
             createAccountTable(db, table_accounts);
+            ContentValues values = new ContentValues();
+            values.put(key_account_id, 1);
+            db.update(table_notes, values, key_account_id + " = ?", new String[] {"NULL"});
         }
     }
 
@@ -244,7 +247,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             values.put(key_status, dbNote.getStatus().getTitle());
             values.put(key_account_id, dbNote.getAccountId());
         } else {
+            // FIXME hardcoded accountId
             values.put(key_status, DBStatus.VOID.getTitle());
+            values.put(key_account_id, 1);
         }
         if (note.getRemoteId() > 0) {
             values.put(key_remote_id, note.getRemoteId());
