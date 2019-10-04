@@ -57,8 +57,8 @@ public class NoteServerSyncHelper {
         return instance;
     }
 
-    private final NoteSQLiteOpenHelper dbHelper;
-    private final Context appContext;
+    private NoteSQLiteOpenHelper dbHelper;
+    private Context appContext = null;
     private LocalAccount localAccount;
 
     // Track network connection changes using a BroadcastReceiver
@@ -74,6 +74,17 @@ public class NoteServerSyncHelper {
             syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
             updateNetworkStatus();
         }
+    };
+
+    public void updateAccount(){
+        try {
+            this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
+            Log.v("Notes", "NextcloudRequest account: " + localAccount);
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
+        Log.v("Note", "Reinstanziation NotesClient because of SSO acc changed");
+        notesClient.updateAccount();
     };
 
     private final BroadcastReceiver networkReceiver = new BroadcastReceiver() {
@@ -110,15 +121,6 @@ public class NoteServerSyncHelper {
         // Registers BroadcastReceiver to track network connection changes.
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         notesClient = new NotesClient(appContext);
-        SingleAccountHelper.registerSharedPreferenceChangeListener(appContext, (sharedPreferences, key) -> {
-            try {
-                this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
-                Log.v("Notes", "NextcloudRequest account: " + localAccount);
-            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                e.printStackTrace();
-            }
-            notesClient = new NotesClient(appContext);
-        });
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.appContext);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);

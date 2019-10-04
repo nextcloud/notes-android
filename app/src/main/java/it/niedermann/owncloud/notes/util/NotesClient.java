@@ -31,6 +31,7 @@ import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
 @WorkerThread
 public class NotesClient {
 
+    private final Context context;
     private NextcloudAPI mNextcloudAPI;
 
     /**
@@ -74,6 +75,30 @@ public class NotesClient {
     private static final String application_json = "application/json";
 
     public NotesClient(Context context) {
+        this.context = context;
+        try {
+            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+            Log.v("Notes", "NextcloudRequest account: " + ssoAccount.name);
+            mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
+                @Override
+                public void onConnected() {
+                    Log.v("Notes", "SSO API connected");
+                }
+
+                @Override
+                public void onError(Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateAccount() {
+        if(mNextcloudAPI != null) {
+            mNextcloudAPI.stop();
+        }
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
             Log.v("Notes", "NextcloudRequest account: " + ssoAccount.name);

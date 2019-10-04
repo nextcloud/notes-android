@@ -75,6 +75,7 @@ public class AccountActivity extends AppCompatActivity {
     private View.OnClickListener generateOnClickListenerFor(LocalAccount account) {
         return v -> {
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.getAccountName());
+            db.getNoteServerSyncHelper().updateAccount();
             finish();
         };
     }
@@ -88,6 +89,7 @@ public class AccountActivity extends AppCompatActivity {
             ;
             LocalAccount generatedAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name));
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
+            db.getNoteServerSyncHelper().updateAccount();
 
             View v = getLayoutInflater().inflate(R.layout.item_account, null);
             ((TextView) v.findViewById(R.id.accountItemLabel)).setText(generatedAccount.getUserName());

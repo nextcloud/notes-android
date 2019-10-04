@@ -199,6 +199,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             if (db.hasAccounts()) {
                 localAccount = db.getAccount(1);
                 SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName());
+                db.getNoteServerSyncHelper().updateAccount();
             } else {
                 try {
                     AccountImporter.pickNewAccount(this);
@@ -639,6 +640,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
             localAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name));
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
+            db.getNoteServerSyncHelper().updateAccount();
         });
 
         // Check which request we're responding to
