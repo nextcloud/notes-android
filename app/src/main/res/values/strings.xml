@@ -138,6 +138,10 @@
     <string name="pin_to_homescreen">Pin to homescreen</string>
     <string name="note_has_been_deleted">This note has been deleted</string>
     <string name="add_account">Add account</string>
+    <string name="category_music">Music</string>
+    <string name="category_movies">Movies</string>
+    <string name="category_movie">Movie</string>
+    <string name="category_work">Work</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

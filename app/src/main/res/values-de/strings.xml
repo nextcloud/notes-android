@@ -129,4 +129,7 @@
         <item quantity="one">%d ausgewählt</item>
         <item quantity="other">%d ausgewählt</item>
     </plurals>
+    <string name="category_music">Musik</string>
+    <string name="category_movies">Filme</string>
+    <string name="category_movie">Film</string>
 </resources>
