@@ -78,8 +78,10 @@ public class NoteServerSyncHelper {
 
     public void updateAccount(){
         try {
-            this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
-            notesClient.updateAccount(localAccount.getToken());
+            if(notesClient != null) {
+                this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
+                notesClient.updateAccount(localAccount.getToken());
+            }
             Log.v("Notes", "NextcloudRequest account: " + localAccount);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();

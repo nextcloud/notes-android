@@ -78,6 +78,7 @@ public class NotesClient {
         this.context = context;
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+            ssoAccount.token = token;
             Log.v("Notes", "NextcloudRequest account: " + ssoAccount.name);
             mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
                 @Override
@@ -101,6 +102,7 @@ public class NotesClient {
         }
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+            ssoAccount.token = token;
             Log.v("Notes", "NextcloudRequest account: " + ssoAccount.name);
             mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
                 @Override
