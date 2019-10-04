@@ -449,20 +449,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
 
         this.updateUsernameInDrawer();
-        final NotesListViewActivity that = this;
-        this.headerView.setOnClickListener((View v) -> {
-            try {
-                AccountImporter.pickNewAccount(this);
-            } catch (NextcloudFilesAppNotInstalledException e1) {
-                UiExceptionManager.showDialogForException(this, e1);
-                Log.w(NotesListViewActivity.class.toString(), "=============================================================");
-                Log.w(NotesListViewActivity.class.toString(), "Nextcloud app is not installed. Cannot choose account");
-                e1.printStackTrace();
-            } catch (AndroidGetAccountsPermissionNotGranted e2) {
-                AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
-            }
-        });
-
         adapterMenu.setItems(itemsMenu);
         listNavigationMenu.setAdapter(adapterMenu);
     }
