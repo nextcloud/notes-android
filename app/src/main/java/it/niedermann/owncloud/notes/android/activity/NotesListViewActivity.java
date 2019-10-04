@@ -638,7 +638,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-            localAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name));
+            localAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name, account.token));
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
             db.getNoteServerSyncHelper().updateAccount();
         });

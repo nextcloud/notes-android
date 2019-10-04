@@ -7,6 +7,7 @@ public class LocalAccount {
     private String accountName;
     private String url;
     private String displayName;
+    private String token;
 
     public long getId() {
         return id;
@@ -48,6 +49,14 @@ public class LocalAccount {
         this.accountName = accountName;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     @Override
     public String toString() {
         return "LocalAccount{" +
@@ -56,6 +65,7 @@ public class LocalAccount {
                 ", accountName='" + accountName + '\'' +
                 ", url='" + url + '\'' +
                 ", displayName='" + displayName + '\'' +
+                ", token='" + token + '\'' +
                 '}';
     }
 }

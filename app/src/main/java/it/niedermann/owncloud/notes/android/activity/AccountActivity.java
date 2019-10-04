@@ -86,8 +86,8 @@ public class AccountActivity extends AppCompatActivity {
 
         AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-            ;
-            LocalAccount generatedAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name));
+
+            LocalAccount generatedAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name, account.token));
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
             db.getNoteServerSyncHelper().updateAccount();
 

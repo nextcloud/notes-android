@@ -51,6 +51,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String key_account_name = "ACCOUNT_NAME";
     private static final String key_username = "USERNAME";
     private static final String key_display_name = "DISPLAY_NAME";
+    private static final String key_token = "TOKEN";
 
     private static final String key_status = "STATUS";
     private static final String key_title = "TITLE";
@@ -639,18 +640,19 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         return DatabaseUtils.queryNumEntries(getReadableDatabase(), table_accounts) > 0;
     }
 
-    public long addAccount(String url, String username, String accountName) {
+    public long addAccount(String url, String username, String accountName, String token) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_url, url);
         values.put(key_username, username);
         values.put(key_account_name, accountName);
+        values.put(key_token, token);
         return db.insert(table_accounts, null, values);
     }
 
     public LocalAccount getAccount(long i) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name}, key_id + " = ?", new String[]{i + ""}, null, null, null, null);
+        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name, key_token}, key_id + " = ?", new String[]{i + ""}, null, null, null, null);
         LocalAccount account = new LocalAccount();
         while (cursor.moveToNext()) {
             account.setId(cursor.getLong(0));
@@ -658,6 +660,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             account.setAccountName(cursor.getString(2));
             account.setUserName(cursor.getString(3));
             account.setDisplayName(cursor.getString(4));
+            account.setToken(cursor.getString(5));
         }
         cursor.close();
         return account;
@@ -665,7 +668,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public List<LocalAccount> getAccounts() {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name}, null, null, null, null, null);
+        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name, key_token}, null, null, null, null, null);
         List<LocalAccount> accounts = new ArrayList<>();
         while (cursor.moveToNext()) {
             LocalAccount account = new LocalAccount();
@@ -674,25 +677,16 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             account.setAccountName(cursor.getString(2));
             account.setUserName(cursor.getString(3));
             account.setDisplayName(cursor.getString(4));
+            account.setToken(cursor.getString(5));
             accounts.add(account);
         }
         cursor.close();
         return accounts;
     }
 
-    public void setAccount(int id, String url, String username, String accountName) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(key_id, id);
-        values.put(key_url, url);
-        values.put(key_account_name, accountName);
-        values.put(key_username, username);
-        db.update(table_accounts, values, key_id + " = ?", new String[] {id + ""});
-    }
-
     public LocalAccount getLocalAccountByAccountName(String accountName) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
+        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name, key_token}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
         LocalAccount account = new LocalAccount();
         while (cursor.moveToNext()) {
             account.setId(cursor.getLong(0));
@@ -700,6 +694,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             account.setAccountName(cursor.getString(2));
             account.setUserName(cursor.getString(3));
             account.setDisplayName(cursor.getString(4));
+            account.setToken(cursor.getString(5));
         }
         cursor.close();
         return account;
