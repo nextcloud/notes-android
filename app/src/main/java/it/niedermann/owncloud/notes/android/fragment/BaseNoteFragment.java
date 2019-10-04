@@ -107,7 +107,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 if (cloudNote == null) {
                     throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE + " is missing.");
                 }
-                note = db.getNote(localAccount.getId(), db.addNoteAndSync(note.getAccountId(), cloudNote));
+                note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
                 originalNote = null;
             }
         } else {
