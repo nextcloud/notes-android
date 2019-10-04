@@ -81,12 +81,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         if (savedInstanceState != null) {
             searchQuery = savedInstanceState.getString("searchQuery", "");
         }
-
-        try {
-            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext()).name);
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
     }
 
     protected void setActiveTextView(TextView textView) {
@@ -96,6 +90,13 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try {
+            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext()).name);
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
+
         if (savedInstanceState == null) {
             isNew = true;
             long id = getArguments().getLong(PARAM_NOTE_ID);

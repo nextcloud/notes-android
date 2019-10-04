@@ -645,7 +645,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         return db.insert(table_accounts, null, values);
     }
 
-    public LocalAccount getAccount(int i) {
+    public LocalAccount getAccount(long i) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name}, key_id + " = ?", new String[]{i + ""}, null, null, null, null);
         LocalAccount account = new LocalAccount();
