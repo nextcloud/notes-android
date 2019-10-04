@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:paddingLeft="6dp"
     android:paddingStart="6dp"
     android:paddingRight="8dp"
@@ -38,6 +39,7 @@
         android:layout_marginStart="64dp"
         android:ellipsize="end"
         android:lines="1"
-        android:textAppearance="@style/NavigationItem" />
+        android:textAppearance="@style/NavigationItem"
+        tools:text="Category 1" />
 
 </RelativeLayout>
