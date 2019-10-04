@@ -18,7 +18,6 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import org.json.JSONException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -102,6 +101,7 @@ public class NoteServerSyncHelper {
         this.appContext = db.getContext().getApplicationContext();
         try {
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
+            Log.v("Notes", "NextcloudRequest account: " + localAccount);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
         }
@@ -347,7 +347,6 @@ public class NoteServerSyncHelper {
                         dbHelper.deleteNote(entry.getValue(), DBStatus.VOID);
                     }
                 }
-                status = LoginStatus.OK;
 
                 // update ETag and Last-Modified in order to reduce size of next response
                 SharedPreferences.Editor editor = preferences.edit();
@@ -364,13 +363,7 @@ public class NoteServerSyncHelper {
                     editor.remove(AccountActivity.SETTINGS_KEY_LAST_MODIFIED);
                 }
                 editor.apply();
-            } catch (ServerResponse.NotModifiedException e) {
-                Log.d(getClass().getSimpleName(), "No changes, nothing to do.");
-                status = LoginStatus.OK;
-            } catch (IOException e) {
-                Log.e(getClass().getSimpleName(), "Exception", e);
-                exceptions.add(e);
-                status = LoginStatus.CONNECTION_FAILED;
+                return LoginStatus.OK;
             } catch (JSONException e) {
                 Log.e(getClass().getSimpleName(), "Exception", e);
                 exceptions.add(e);

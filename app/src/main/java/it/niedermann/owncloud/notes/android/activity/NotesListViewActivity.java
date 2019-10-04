@@ -171,7 +171,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         try {
             localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
-            Log.v("Notes", "current sso account " + localAccount.getAccountName());
+            Log.v("Notes", "NextcloudRequest account: " + localAccount);
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
         } catch (NoCurrentAccountSelectedException e) {
@@ -195,33 +195,36 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setContentView(R.layout.drawer_layout);
         ButterKnife.bind(this);
 
-        String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-        if (savedInstanceState == null) {
-            if (ACTION_RECENT.equals(getIntent().getAction())) {
-                categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-            } else if (ACTION_FAVORITES.equals(getIntent().getAction())) {
-                categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
-                navigationSelection = new Category(null, true);
+        if(localAccount != null) {
+            String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
+            if (savedInstanceState == null) {
+                if (ACTION_RECENT.equals(getIntent().getAction())) {
+                    categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
+                } else if (ACTION_FAVORITES.equals(getIntent().getAction())) {
+                    categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
+                    navigationSelection = new Category(null, true);
+                }
+            } else {
+                navigationSelection = (Category) savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
+                navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
+                categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
             }
-        } else {
-            navigationSelection = (Category) savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
-            navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
-            categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
+            setupActionBar();
+            setupNotesList();
+            setupNavigationList(categoryAdapterSelectedItem);
+            setupNavigationMenu();
         }
-
-        setupActionBar();
-        setupNotesList();
-        setupNavigationList(categoryAdapterSelectedItem);
-        setupNavigationMenu();
     }
 
     @Override
     protected void onResume() {
-        // refresh and sync every time the activity gets visible
-        refreshLists();
-        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
-        if (db.getNoteServerSyncHelper().isSyncPossible()) {
-            synchronize();
+        // refresh and sync every time the activity gets
+        if(localAccount != null) {
+            refreshLists();
+            db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
+            if (db.getNoteServerSyncHelper().isSyncPossible()) {
+                synchronize();
+            }
         }
         super.onResume();
     }
@@ -229,21 +232,27 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        drawerToggle.syncState();
+        if(localAccount != null) {
+            drawerToggle.syncState();
+        }
     }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        drawerToggle.syncState();
+        if(localAccount != null) {
+            drawerToggle.syncState();
+        }
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(SAVED_STATE_NAVIGATION_SELECTION, navigationSelection);
-        outState.putString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION, adapterCategories.getSelectedItem());
-        outState.putString(SAVED_STATE_NAVIGATION_OPEN, navigationOpen);
+        if(localAccount != null) {
+            outState.putSerializable(SAVED_STATE_NAVIGATION_SELECTION, navigationSelection);
+            outState.putString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION, adapterCategories.getSelectedItem());
+            outState.putString(SAVED_STATE_NAVIGATION_OPEN, navigationOpen);
+        }
     }
 
     private void setupActionBar() {

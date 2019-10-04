@@ -17,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
@@ -77,6 +76,7 @@ public class NotesClient {
     public NotesClient(Context context) {
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+            Log.v("Notes", "NextcloudRequest account: " + ssoAccount.name);
             mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
                 @Override
                 public void onConnected() {
@@ -88,14 +88,12 @@ public class NotesClient {
                     ex.printStackTrace();
                 }
             });
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
-            // TODO handle errors
-        } catch (NoCurrentAccountSelectedException e) {
-            // TODO handle errors
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
         }
     }
 
-    public NotesResponse getNotes(long lastModified, String lastETag) throws JSONException, IOException {
+    public NotesResponse getNotes(long lastModified, String lastETag) {
         String url = "notes";
         if (lastModified > 0) {
             url += "?pruneBefore=" + lastModified;
