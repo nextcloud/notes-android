@@ -286,7 +286,7 @@ public class NoteServerSyncHelper {
 
         @Override
         protected LoginStatus doInBackground(Void... voids) {
-            client = createNotesClient(); // recreate NoteClients on every sync in case the connection settings was changed
+            client = createNotesClient(appContext); // recreate NoteClients on every sync in case the connection settings was changed
             Log.i(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
             //dbHelper.debugPrintFullDB();
             LoginStatus status = LoginStatus.OK;
@@ -304,7 +304,8 @@ public class NoteServerSyncHelper {
          */
         private void pushLocalChanges() {
             Log.d(getClass().getSimpleName(), "pushLocalChanges()");
-            List<DBNote> notes = dbHelper.getLocalModifiedNotes(0);
+            // FIXME hardcoded accountId
+            List<DBNote> notes = dbHelper.getLocalModifiedNotes(1);
             for (DBNote note : notes) {
                 Log.d(getClass().getSimpleName(), "   Process Local Note: " + note);
                 try {
@@ -333,7 +334,7 @@ public class NoteServerSyncHelper {
                             if (note.getRemoteId() > 0) {
                                 Log.v(getClass().getSimpleName(), "   ...delete (from server and local)");
                                 try {
-                                    client.deleteNote(customCertManager, note.getRemoteId());
+                                    client.deleteNote(note.getRemoteId());
                                 } catch (FileNotFoundException e) {
                                     Log.v(getClass().getSimpleName(), "   ...Note does not exist on server (anymore?) -> delete locally");
                                 }
@@ -364,7 +365,7 @@ public class NoteServerSyncHelper {
             LoginStatus status;
             try {
                 Map<Long, Long> idMap = dbHelper.getIdMap();
-                ServerResponse.NotesResponse response = client.getNotes(customCertManager, lastModified, lastETag);
+                ServerResponse.NotesResponse response = client.getNotes(lastModified, lastETag);
                 List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
@@ -443,11 +444,11 @@ public class NoteServerSyncHelper {
         }
     }
 
-    private NotesClient createNotesClient() {
+    private NotesClient createNotesClient(Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext.getApplicationContext());
         String url = preferences.getString(SettingsActivity.SETTINGS_URL, SettingsActivity.DEFAULT_SETTINGS);
         String username = preferences.getString(SettingsActivity.SETTINGS_USERNAME, SettingsActivity.DEFAULT_SETTINGS);
         String password = preferences.getString(SettingsActivity.SETTINGS_PASSWORD, SettingsActivity.DEFAULT_SETTINGS);
-        return new NotesClient(url, username, password);
+        return new NotesClient(context, url, username, password);
     }
 }

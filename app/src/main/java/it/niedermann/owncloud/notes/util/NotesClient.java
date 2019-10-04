@@ -1,28 +1,39 @@
 package it.niedermann.owncloud.notes.util;
 
-import android.util.Base64;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.WorkerThread;
+
+import com.google.gson.GsonBuilder;
+import com.nextcloud.android.sso.aidl.NextcloudRequest;
+import com.nextcloud.android.sso.api.NextcloudAPI;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import at.bitfire.cert4android.CustomCertManager;
-import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
 
 @WorkerThread
 public class NotesClient {
+
+    private NextcloudAPI mNextcloudAPI;
 
     /**
      * This entity class is used to return relevant data of the HTTP reponse.
@@ -63,22 +74,34 @@ public class NotesClient {
     public static final String JSON_ETAG = "etag";
     public static final String JSON_MODIFIED = "modified";
     private static final String application_json = "application/json";
-    private String url = "";
-    private String username = "";
-    private String password = "";
 
-    public NotesClient(String url, String username, String password) {
-        this.url = url;
-        this.username = username;
-        this.password = password;
+    public NotesClient(Context context, String url, String username, String password) {
+        try {
+            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+            mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
+                @Override
+                public void onConnected() {
+
+                }
+
+                @Override
+                public void onError(Exception ex) {
+
+                }
+            });
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            // TODO handle errors
+        } catch (NoCurrentAccountSelectedException e) {
+            // TODO handle errors
+        }
     }
 
-    public NotesResponse getNotes(CustomCertManager ccm, long lastModified, String lastETag) throws JSONException, IOException {
+    public NotesResponse getNotes(long lastModified, String lastETag) throws JSONException, IOException {
         String url = "notes";
         if (lastModified > 0) {
             url += "?pruneBefore=" + lastModified;
         }
-        return new NotesResponse(requestServer(ccm, url, METHOD_GET, null, lastETag));
+        return new NotesResponse(requestServer(url, METHOD_GET, null, lastETag));
     }
 
     /**
@@ -90,17 +113,17 @@ public class NotesClient {
      * @throws IOException
      */
     @SuppressWarnings("unused")
-    public NoteResponse getNoteById(CustomCertManager ccm, long id) throws JSONException, IOException {
-        return new NoteResponse(requestServer(ccm, "notes/" + id, METHOD_GET, null, null));
+    public NoteResponse getNoteById(long id) throws JSONException, IOException {
+        return new NoteResponse(requestServer("notes/" + id, METHOD_GET, null, null));
     }
 
-    private NoteResponse putNote(CustomCertManager ccm, CloudNote note, String path, String method) throws JSONException, IOException {
+    private NoteResponse putNote(CloudNote note, String path, String method) throws JSONException, IOException {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
         paramObject.accumulate(JSON_FAVORITE, note.isFavorite());
         paramObject.accumulate(JSON_CATEGORY, note.getCategory());
-        return new NoteResponse(requestServer(ccm, path, method, paramObject, null));
+        return new NoteResponse(requestServer(path, method, paramObject, null));
     }
 
 
@@ -113,15 +136,15 @@ public class NotesClient {
      * @throws IOException
      */
     public NoteResponse createNote(CustomCertManager ccm, CloudNote note) throws JSONException, IOException {
-        return putNote(ccm, note, "notes", METHOD_POST);
+        return putNote(note, "notes", METHOD_POST);
     }
 
     public NoteResponse editNote(CustomCertManager ccm, CloudNote note) throws JSONException, IOException {
-        return putNote(ccm, note, "notes/" + note.getRemoteId(), METHOD_PUT);
+        return putNote(note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
-    public void deleteNote(CustomCertManager ccm, long noteId) throws IOException {
-        this.requestServer(ccm, "notes/" + noteId, METHOD_DELETE, null, null);
+    public void deleteNote(long noteId) throws IOException {
+        this.requestServer("notes/" + noteId, METHOD_DELETE, null, null);
     }
 
     /**
@@ -131,59 +154,102 @@ public class NotesClient {
      * @param method GET, POST, DELETE or PUT
      * @param params JSON Object which shall be transferred to the server.
      * @return Body of answer
-     * @throws MalformedURLException
-     * @throws IOException
      */
-    private ResponseData requestServer(CustomCertManager ccm, String target, String method, JSONObject params, String lastETag)
-            throws IOException {
-        StringBuffer result = new StringBuffer();
-        // setup connection
-        String targetURL = url + "index.php/apps/notes/api/v0.2/" + target;
-        HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, targetURL);
-        con.setRequestMethod(method);
-        con.setRequestProperty(
-                "Authorization",
-                "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
-        // https://github.com/square/retrofit/issues/805#issuecomment-93426183
-        con.setRequestProperty( "Connection", "Close");
-        con.setRequestProperty("User-Agent", "nextcloud-notes/" + BuildConfig.VERSION_NAME + " (Android)");
-        if (lastETag != null && METHOD_GET.equals(method)) {
-            con.setRequestProperty("If-None-Match", lastETag);
-        }
-        con.setConnectTimeout(10 * 1000); // 10 seconds
-        Log.d(getClass().getSimpleName(), method + " " + targetURL);
-        // send request data (optional)
-        byte[] paramData = null;
+    private ResponseData requestServer(String target, String method, JSONObject params, String lastETag) {
+
+
+        NextcloudRequest.Builder requestBuilder = new NextcloudRequest.Builder()
+                .setMethod(method)
+                .setUrl("/index.php/apps/notes/api/v0.2/" + target);
+
+        Log.v("Notes", "NextcloudRequest Params: " + params);
+
+        Map<String, List<String>> header = new HashMap<>();
         if (params != null) {
-            paramData = params.toString().getBytes();
-            Log.d(getClass().getSimpleName(), "Params: " + params);
-            con.setFixedLengthStreamingMode(paramData.length);
-            con.setRequestProperty("Content-Type", application_json);
-            con.setDoOutput(true);
-            OutputStream os = con.getOutputStream();
-            os.write(paramData);
-            os.flush();
-            os.close();
+            header.put("Content-Type", Collections.singletonList(application_json));
+            requestBuilder.setRequestBody(params.toString());
         }
-        // read response data
-        int responseCode = con.getResponseCode();
-        Log.d(getClass().getSimpleName(), "HTTP response code: " + responseCode);
-
-        if (responseCode == HttpURLConnection.HTTP_NOT_MODIFIED) {
-            throw new ServerResponse.NotModifiedException();
+        if (lastETag != null && METHOD_GET.equals(method)) {
+            header.put("If-None-Match", Collections.singletonList(lastETag));
+            requestBuilder.setHeader(header);
         }
 
-        BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String line;
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
+        NextcloudRequest nextcloudRequest = requestBuilder.build();
+
+        StringBuilder result = new StringBuilder();
+
+        try {
+            InputStream inputStream = mNextcloudAPI.performNetworkRequest(nextcloudRequest);
+            Log.v("Notes", "NextcloudRequest: " + nextcloudRequest.toString());
+            BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        // create response object
-        String etag = con.getHeaderField("ETag");
-        long lastModified = con.getHeaderFieldDate("Last-Modified", 0) / 1000;
-        Log.i(getClass().getSimpleName(), "Result length:  " + result.length() + (paramData == null ? "" : "; Request length: " + paramData.length));
-        Log.d(getClass().getSimpleName(), "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + con.getHeaderField("Last-Modified") + ")");
+        String etag = "";
+        if (nextcloudRequest.getHeader().get("ETag") != null) {
+            etag = nextcloudRequest.getHeader().get("ETag").get(0);
+        }
+        long lastModified = 0;
+        if (nextcloudRequest.getHeader().get("Last-Modified") != null)
+            lastModified = Long.parseLong(nextcloudRequest.getHeader().get("Last-Modified").get(0)) / 1000;
+        Log.d(getClass().getSimpleName(), "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
         // return these header fields since they should only be saved after successful processing the result!
         return new ResponseData(result.toString(), etag, lastModified);
+
+
+//        StringBuffer result = new StringBuffer();
+//        // setup connection
+//        String targetURL = url + "index.php/apps/notes/api/v0.2/" + target;
+//        HttpURLConnection con = SupportUtil.getHttpURLConnection(ccm, targetURL);
+//        con.setRequestMethod(method);
+//        con.setRequestProperty(
+//                "Authorization",
+//                "Basic " + Base64.encodeToString((username + ":" + password).getBytes(), Base64.NO_WRAP));
+//        // https://github.com/square/retrofit/issues/805#issuecomment-93426183
+//        con.setRequestProperty("Connection", "Close");
+//        con.setRequestProperty("User-Agent", "nextcloud-notes/" + BuildConfig.VERSION_NAME + " (Android)");
+//        if (lastETag != null && METHOD_GET.equals(method)) {
+//            con.setRequestProperty("If-None-Match", lastETag);
+//        }
+//        con.setConnectTimeout(10 * 1000); // 10 seconds
+//        Log.d(getClass().getSimpleName(), method + " " + targetURL);
+//        // send request data (optional)
+//        byte[] paramData = null;
+//        if (params != null) {
+//            paramData = params.toString().getBytes();
+//            Log.d(getClass().getSimpleName(), "Params: " + params);
+//            con.setFixedLengthStreamingMode(paramData.length);
+//            con.setRequestProperty("Content-Type", application_json);
+//            con.setDoOutput(true);
+//            OutputStream os = con.getOutputStream();
+//            os.write(paramData);
+//            os.flush();
+//            os.close();
+//        }
+//        // read response data
+//        int responseCode = con.getResponseCode();
+//        Log.d(getClass().getSimpleName(), "HTTP response code: " + responseCode);
+//
+//        if (responseCode == HttpURLConnection.HTTP_NOT_MODIFIED) {
+//            throw new ServerResponse.NotModifiedException();
+//        }
+//
+//        BufferedReader rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+//        String line;
+//        while ((line = rd.readLine()) != null) {
+//            result.append(line);
+//        }
+//        // create response object
+//        String etag = con.getHeaderField("ETag");
+//        long lastModified = con.getHeaderFieldDate("Last-Modified", 0) / 1000;
+//        Log.i(getClass().getSimpleName(), "Result length:  " + result.length() + (paramData == null ? "" : "; Request length: " + paramData.length));
+//        Log.d(getClass().getSimpleName(), "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + con.getHeaderField("Last-Modified") + ")");
+//        // return these header fields since they should only be saved after successful processing the result!
+//        return new ResponseData(result.toString(), etag, lastModified);
     }
 }

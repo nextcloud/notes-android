@@ -16,11 +16,12 @@ public class DBNote extends CloudNote implements Item, Serializable {
     private DBStatus status;
     private String excerpt = "";
 
-    public DBNote(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status) {
+    public DBNote(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId) {
         super(remoteId, modified, title, content, favorite, category, etag);
         this.id = id;
         setExcerpt(content);
         this.status = status;
+        this.accountId = accountId;
     }
 
     public long getId() {

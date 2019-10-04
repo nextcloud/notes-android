@@ -219,7 +219,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @SuppressWarnings("UnusedReturnValue")
     public long addNoteAndSync(CloudNote note) {
-        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED);
+        // FIXME hardcoded accountId
+        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, 1);
         long id = addNote(dbNote);
         notifyNotesChanged();
         getNoteServerSyncHelper().scheduleSync(true);
@@ -241,6 +242,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 values.put(key_id, dbNote.getId());
             }
             values.put(key_status, dbNote.getStatus().getTitle());
+            values.put(key_account_id, dbNote.getAccountId());
         } else {
             values.put(key_status, DBStatus.VOID.getTitle());
         }
@@ -307,7 +309,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private DBNote getNoteFromCursor(@NonNull Cursor cursor) {
         Calendar modified = Calendar.getInstance();
         modified.setTimeInMillis(cursor.getLong(4) * 1000);
-        return new DBNote(cursor.getLong(0), cursor.getLong(1), modified, cursor.getString(3), cursor.getString(5), cursor.getInt(6) > 0, cursor.getString(7), cursor.getString(8), DBStatus.parse(cursor.getString(2)));
+        // FIXME hardcoded accountId
+        return new DBNote(cursor.getLong(0), cursor.getLong(1), modified, cursor.getString(3), cursor.getString(5), cursor.getInt(6) > 0, cursor.getString(7), cursor.getString(8), DBStatus.parse(cursor.getString(2)), 1);
     }
 
     public void debugPrintFullDB() {
@@ -479,9 +482,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         //debugPrintFullDB();
         DBNote newNote;
         if (newContent == null) {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED);
+            // FIXME hardcoded accountId
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, 1);
         } else {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED);
+            // FIXME hardcoded accountId
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, 1);
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
