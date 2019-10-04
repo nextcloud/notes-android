@@ -1,6 +1,8 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.app.AlertDialog;
 import android.app.SearchManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
@@ -186,6 +188,27 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setupNotesList();
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean ssoAnnouncmentShown = prefs.getBoolean("sp_sso_announchment_shown", false);
+        if(!ssoAnnouncmentShown) {
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle("Announcment")
+                    .setCancelable(false)
+                    .setMessage("The android app will beginning with the next major version depend on the great Single-Sign-On-Feature of Nextcloud.\n\nPlease make sure, you have installed at least version 3.8.0 of the files app and select at the first run the same account which you are already using.")
+                    .setNegativeButton("More information", (a, b) -> {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/stefan-niedermann/nextcloud-notes/blob/master/SSO%20Announcment.md")));
+                    })
+                    .setPositiveButton("Understood" , (a, b) -> {
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putBoolean("sp_sso_announchment_shown", true);
+                        editor.apply();
+                    })
+                    .show();
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.fg_default));
+            dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.fg_default));
+        }
+
     }
 
     @Override
