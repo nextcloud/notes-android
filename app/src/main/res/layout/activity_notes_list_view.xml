@@ -19,7 +19,8 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:elevation="4dp" />
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:tools="http://schemas.android.com/tools"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/swiperefreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

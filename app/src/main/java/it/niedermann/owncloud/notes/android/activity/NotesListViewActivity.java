@@ -315,6 +315,17 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private void setupNotesList() {
         initList();
+
+        ((RecyclerView) findViewById(R.id.recycler_view)).addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (dy > 0)
+                    fabCreate.hide();
+                else if (dy < 0)
+                    fabCreate.show();
+            }
+        });
+
         // Pull to Refresh
         swipeRefreshLayout.setOnRefreshListener(() -> {
             if (db.getNoteServerSyncHelper().isSyncPossible()) {
@@ -583,7 +594,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void refreshLists(final boolean scrollToTop) {
-        String subtitle = "";
+        fabCreate.show();
+        String subtitle;
         if (navigationSelection.category != null) {
             if (navigationSelection.category.isEmpty()) {
                 subtitle = getString(R.string.action_uncategorized);
