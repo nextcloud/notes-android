@@ -2,45 +2,28 @@
 <resources>
 
     <string name="app_name">메모</string>
-    <string name="no_notes">아직 메모 없음</string>
     <string name="action_create">새 메모</string>
     <string name="action_settings">설정</string>
     <string name="action_search">검색</string>
-    <string name="action_create_save">저장</string>
     <string name="action_edit_save">저장</string>
-    <string name="action_edit_saving">저장 중&#8230;</string>
-    <string name="action_edit_saved">저장됨</string>
     <string name="simple_about">정보</string>
-    <string name="action_select_note">메모 선택</string>
     <string name="action_note_deleted">메모 삭제됨</string>
     <string name="action_note_restored">메모 복원됨</string>
     <string name="action_undo">실행 취소</string>
     <string name="action_drawer_open">탐색 열기</string>
     <string name="action_drawer_close">탐색 닫기</string>
-    <string name="action_recent">최근 항목</string>
     <string name="action_uncategorized">분류 없음</string>
     <string name="menu_delete">삭제</string>
     <string name="menu_change_category">분류</string>
     <string name="menu_favorite">즐겨찾기</string>
     <string name="menu_preview">미리 보기</string>
     <string name="menu_share">공유</string>
-    <string name="menu_about">정보</string>
 
     <string name="listview_updated_today">오늘</string>
     <string name="listview_updated_yesterday">어제</string>
     <string name="listview_updated_this_week">이번 주</string>
     <string name="listview_updated_this_month">이번 달</string>
-    <string name="listview_updated_earlier">오래됨</string>
 
-    <string name="settings_url">서버 주소</string>
-    <string name="settings_url_check_description">지정한 주소에 핑을 보낼 수 있는지 표시합니다.</string>
-    <string name="settings_url_warn_http">경고: "http"는 안전하지 않습니다. "https"를 사용하십시오.</string>
-    <string name="settings_username">사용자 이름</string>
-    <string name="settings_password">암호</string>
-    <string name="settings_password_unchanged">암호(변경되지 않음)</string>
-    <string name="settings_password_check_description">인증 정보가 올바른지 표시합니다.</string>
-    <string name="settings_submit">연결</string>
-    <string name="settings_submitting">연결 중&#8230;</string>
     <string name="settings_cert_trust_system">시스템 인증서 신뢰</string>
     <string name="settings_cert_trust_system_on">시스템 및 사용자 CA를 신뢰함(추천)</string>
     <string name="settings_cert_trust_system_off">시스템 및 사용자 CA를 신뢰하지 않음</string>
@@ -49,26 +32,16 @@
     <string name="settings_cert_reset_toast">모든 사용자 정의 인증서를 삭제함</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">메모 - 연결 보안</string>
-    <string name="trust_certificate_unknown_certificate_found">알 수 없는 인증서를 받았습니다. 신뢰하시겠습니까?</string>
 
     <!-- Network -->
-    <string name="network_connecting">연결 중</string>
-    <string name="network_connected">연결됨</string>
-    <string name="network_disconnected">네트워크를 사용할 수 없음</string>
 
     <!-- Error -->
     <string name="error_sync">동기화 실패: %1$s</string>
-    <string name="error_invalid_login">잘못된 로그인: %1$s</string>
     <string name="error_json">서버에 메모 앱이 활성화되어 있습니까?</string>
     <string name="error_io">서버 연결이 끊어짐</string>
     <string name="error_no_network">네트워크 연결 없음</string>
-    <string name="error_server">URL/서버에 오류 발생</string>
-    <string name="error_url_malformed">잘못된 서버 주소</string>
-    <string name="error_username_password_invalid">잘못된 사용자 이름이나 암호</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">설정</string>
 
     <!-- About -->
     <string name="about_version_title">버전</string>

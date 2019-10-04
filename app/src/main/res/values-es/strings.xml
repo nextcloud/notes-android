@@ -3,37 +3,30 @@
 
     <string name="app_name">Notas</string>
     <string name="app_name_long">Nextcloud Notas</string>
-    <string name="no_notes">Aún no hay notas</string>
     <string name="label_all_notes">Todas las notas</string>
     <string name="label_favorites">Favoritos</string>
     <string name="action_create">Nueva nota</string>
     <string name="action_settings">Ajustes</string>
     <string name="action_trashbin">Notas eliminadas</string>
     <string name="action_search">Buscar</string>
-    <string name="action_create_save">Guardar</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
-    <string name="action_edit_saving">Guardando &#8230;</string>
-    <string name="action_edit_saved">Guardado</string>
     <string name="simple_about">Acerca de</string>
     <string name="simple_bold">Negrita</string>
     <string name="simple_link">Enlace</string>
     <string name="simple_italic">Cursiva</string>
-    <string name="action_select_note">Seleccionar nota</string>
     <string name="action_note_deleted">Nota eliminada</string>
     <string name="action_note_restored">Nota restaurada</string>
     <string name="action_undo">Deshacer</string>
     <string name="action_drawer_open">abrir navegación</string>
     <string name="action_drawer_close">cerrar navegación</string>
-    <string name="action_recent">Reciente</string>
     <string name="action_uncategorized">Sin categoría</string>
     <string name="menu_delete">Borrar</string>
     <string name="menu_change_category">Categoría</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Previsualizar</string>
     <string name="menu_share">Compartir</string>
-    <string name="menu_about">Acerca de</string>
 
     <string name="change_category_title">Escoge una categoría</string>
 
@@ -41,19 +34,8 @@
     <string name="listview_updated_yesterday">Ayer</string>
     <string name="listview_updated_this_week">Esta semana</string>
     <string name="listview_updated_this_month">Este mes</string>
-    <string name="listview_updated_earlier">Recientemente</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Cuenta</string>
-    <string name="settings_url">Dirección de servidor</string>
-    <string name="settings_url_check_description">Muestra si se puede hacer ping a la dirección.</string>
-    <string name="settings_url_warn_http">AVISO: \"http\" es inseguro. Por favor, use \"https\".</string>
-    <string name="settings_username">Nombre de usuario</string>
-    <string name="settings_password">Contraseña</string>
-    <string name="settings_password_unchanged">Contraseña (no cambiada)</string>
-    <string name="settings_password_check_description">Muestra si las credenciales son correctas.</string>
-    <string name="settings_submit">Conectar</string>
-    <string name="settings_submitting">Conectando &#8230;</string>
     <string name="settings_note_mode">Modo de visualización para notas</string>
     <string name="settings_theme_title">Tema oscuro</string>
     <string name="settings_font_title">Tipo de letra monoespaciado</string>
@@ -68,26 +50,16 @@
     <string name="settings_cert_reset_toast">Todos los certificados personalizados han sido eliminados</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Notas - Seguridad de la conexión</string>
-    <string name="trust_certificate_unknown_certificate_found">Notas ha encontrado un certificado desconocido. ¿Quiere confiar en él?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Conectando</string>
-    <string name="network_connected">Conectado</string>
-    <string name="network_disconnected">No hay redes disponibles</string>
 
     <!-- Error -->
     <string name="error_sync">Fallo en la sincronización: %1$s</string>
-    <string name="error_invalid_login">Acceso inválido: %1$s</string>
     <string name="error_json">¿Está la app de Notas activada en el servidor?</string>
     <string name="error_io">se ha perdido la conexión con el servidor</string>
     <string name="error_no_network">no hay conexión a la red</string>
-    <string name="error_server">La URL o servidor tiene errores</string>
-    <string name="error_url_malformed">Dirección del servidor errónea</string>
-    <string name="error_username_password_invalid">Usuario o contraseña erróneos</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Configuración</string>
 
     <!-- About -->
     <string name="about_version_title">Versión</string>
@@ -128,7 +100,6 @@
     <string name="shortcut_create_long">Crear una nota nueva</string>
 
     <string name="pref_value_theme_light">Claro</string>
-    <string name="pref_value_theme_dark">Oscuro</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar sobre Wi-Fi y datos móviles</string>
     <string name="simple_error">Error</string>

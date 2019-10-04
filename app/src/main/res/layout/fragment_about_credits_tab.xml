@@ -10,7 +10,6 @@
         android:padding="@dimen/activity_horizontal_margin">
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -23,7 +22,6 @@
             android:textSize="26sp" />
 
         <TextView
-            android:id="@+id/about_version_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +36,6 @@
             android:text="@string/about_version" />
 
         <TextView
-            android:id="@+id/about_maintainer_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,14 +50,12 @@
             android:text="@string/about_maintainer" />
 
         <TextView
-            android:id="@+id/about_developers_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_developers_title" />
 
         <TextView
-            android:id="@+id/about_developers"
             style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,7 +63,6 @@
             android:text="@string/about_developers" />
 
         <TextView
-            android:id="@+id/about_translators_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,14 +77,12 @@
             android:text="@string/about_translators_transifex" />
 
         <TextView
-            android:id="@+id/about_testers_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_testers_title" />
 
         <TextView
-            android:id="@+id/about_testers"
             style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

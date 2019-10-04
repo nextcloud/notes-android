@@ -2,37 +2,22 @@
 <resources>
 
     <string name="app_name">Notas</string>
-    <string name="no_notes">Sem notas ainda</string>
     <string name="action_create">Nova nota</string>
     <string name="action_settings">Definições</string>
-    <string name="action_create_save">Guardar</string>
     <string name="action_edit_save">Guardar</string>
-    <string name="action_edit_saving">A guardar &#8230;</string>
-    <string name="action_edit_saved">Guardado</string>
-    <string name="action_select_note">Selecionar nota</string>
     <string name="action_undo">Anular</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_change_category">Categoria</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Pré-visualizar</string>
     <string name="menu_share">Partilhar</string>
-    <string name="menu_about">Sobre</string>
 
     <string name="listview_updated_today">Hoje</string>
     <string name="listview_updated_yesterday">Ontem</string>
     <string name="listview_updated_this_week">Esta semana</string>
     <string name="listview_updated_this_month">Este mês</string>
-    <string name="listview_updated_earlier">Anteriormente</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Definições da conta</string>
-    <string name="settings_url">Endereço do servidor</string>
-    <string name="settings_url_warn_http">AVISO: "http" é inseguro. Por favor use "https".</string>
-    <string name="settings_username">Nome de utilizador</string>
-    <string name="settings_password">Palavra-passe</string>
-    <string name="settings_password_unchanged">Palavra-passe (não alterada)</string>
-    <string name="settings_submit">Conectar</string>
-    <string name="settings_submitting">A conectar &#8230;</string>
     <string name="settings_cert_category">Certificados</string>
     <string name="settings_cert_trust_system">Confiar nos certificados do sistema</string>
     <string name="settings_cert_trust_system_on">As ACs do sistema e adicionadas pelo utilizador serão confiadas (recomendado)</string>
@@ -42,26 +27,16 @@
     <string name="settings_cert_reset_toast">Todos os certificados personalizados foram removidos</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Notas - Segurança da ligação</string>
-    <string name="trust_certificate_unknown_certificate_found">Notas encontrou um certificado desconhecido. Pretende confiar?</string>
 
     <!-- Network -->
-    <string name="network_connecting">A conectar</string>
-    <string name="network_connected">Conectado</string>
-    <string name="network_disconnected">Rede indisponível</string>
 
     <!-- Error -->
     <string name="error_sync">A sincronização falhou: %1$s</string>
-    <string name="error_invalid_login">Início de sessão inválido: %1$s</string>
     <string name="error_json">a aplicação Notas está ativada no servidor?</string>
     <string name="error_io">sem ligação ao servidor</string>
     <string name="error_no_network">sem ligação à rede</string>
-    <string name="error_server">O URL/servidor contém erros</string>
-    <string name="error_url_malformed">Endereço do servidor inválido</string>
-    <string name="error_username_password_invalid">Nome de utilizador ou palavra-passe errados</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Definições</string>
 
     <!-- About -->
     <string name="about_version_title">Versão</string>

@@ -3,37 +3,30 @@
 
     <string name="app_name">Notes</string>
     <string name="app_name_long">Nextcloud Notes</string>
-    <string name="no_notes">No notes yet</string>
     <string name="label_all_notes">All notes</string>
     <string name="label_favorites">Favorites</string>
     <string name="action_create">New note</string>
     <string name="action_settings">Settings</string>
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_search">Search</string>
-    <string name="action_create_save">Save</string>
     <string name="simple_cancel">Cancel</string>
     <string name="simple_edit">Edit</string>
     <string name="action_edit_save">Save</string>
-    <string name="action_edit_saving">Saving &#8230;</string>
-    <string name="action_edit_saved">Saved</string>
     <string name="simple_about">About</string>
     <string name="simple_bold">Bold</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Italic</string>
-    <string name="action_select_note">Select note</string>
     <string name="action_note_deleted">Note deleted</string>
     <string name="action_note_restored">Note restored</string>
     <string name="action_undo">Undo</string>
     <string name="action_drawer_open">open navigation</string>
     <string name="action_drawer_close">close navigation</string>
-    <string name="action_recent">Recent</string>
     <string name="action_uncategorized">Uncategorized</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_change_category">Category</string>
     <string name="menu_favorite">Favorite</string>
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
-    <string name="menu_about">About</string>
 
     <string name="change_category_title">Choose a category</string>
 
@@ -45,16 +38,6 @@
     <string name="listview_updated_last_month">Last month</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Account</string>
-    <string name="settings_url">Server address</string>
-    <string name="settings_url_check_description">Shows whether the address can be pinged.</string>
-    <string name="settings_url_warn_http">WARNING: "http" is unsafe. Please use "https".</string>
-    <string name="settings_username">Username</string>
-    <string name="settings_password">Password</string>
-    <string name="settings_password_unchanged">Password (not changed)</string>
-    <string name="settings_password_check_description">Displays whether the credentials are correct.</string>
-    <string name="settings_submit">Connect</string>
-    <string name="settings_submitting">Connecting &#8230;</string>
     <string name="settings_note_mode">Display mode for notes</string>
     <string name="settings_theme_title">Dark theme</string>
     <string name="settings_font_title">Monospace font</string>
@@ -69,26 +52,16 @@
     <string name="settings_cert_reset_toast">All custom certificates have been cleared</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Notes - Connection security</string>
-    <string name="trust_certificate_unknown_certificate_found">Notes has encountered an unknown certificate. Do you want to trust it?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Connecting</string>
-    <string name="network_connected">Connected</string>
-    <string name="network_disconnected">No network available</string>
 
     <!-- Error -->
     <string name="error_sync">Synchronization failed: %1$s</string>
-    <string name="error_invalid_login">Invalid login: %1$s</string>
     <string name="error_json">is the Notes app activated on the server?</string>
     <string name="error_io">server connection is broken</string>
     <string name="error_no_network">no network connection</string>
-    <string name="error_server">URL/Server has errors</string>
-    <string name="error_url_malformed">Wrong server address</string>
-    <string name="error_username_password_invalid">Wrong username or password</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Settings</string>
 
     <!-- URLs -->
     <string name="url_source" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes</string>
@@ -151,12 +124,10 @@
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
     <string name="pref_value_mode_last" translatable="false">last</string>
-    <string name="pref_value_mode_note" translatable="false">note</string>
     <string name="pref_value_font_size_small" translatable="false">small</string>
     <string name="pref_value_font_size_medium" translatable="false">medium</string>
     <string name="pref_value_font_size_large" translatable="false">large</string>
     <string name="pref_value_theme_light">Light</string>
-    <string name="pref_value_theme_dark">Dark</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
     <string name="simple_error">Error</string>
@@ -166,8 +137,6 @@
     <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="pin_to_homescreen">Pin to homescreen</string>
     <string name="note_has_been_deleted">This note has been deleted</string>
-    <string name="fallback_weblogin_text">Revert to old login method</string>
-    <string name="fallback_weblogin_back">Back</string>
     <string name="add_account">Add account</string>
 
     <!-- Array: note modes -->

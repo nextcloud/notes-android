@@ -2,37 +2,30 @@
 <resources>
 
     <string name="app_name">Muistiinpanot</string>
-    <string name="no_notes">Ei muistiinpanoja</string>
     <string name="label_all_notes">Kaikki muistiinpanot</string>
     <string name="label_favorites">Suosikit</string>
     <string name="action_create">Uusi muistiinpano</string>
     <string name="action_settings">Asetukset</string>
     <string name="action_trashbin">Poistetut muistiinpanot</string>
     <string name="action_search">Etsi</string>
-    <string name="action_create_save">Tallenna</string>
     <string name="simple_cancel">Peruuta</string>
     <string name="simple_edit">Muokkaa</string>
     <string name="action_edit_save">Tallenna</string>
-    <string name="action_edit_saving">Tallennetaan...</string>
-    <string name="action_edit_saved">Tallennettu</string>
     <string name="simple_about">Tietoja</string>
     <string name="simple_bold">Lihavoitu</string>
     <string name="simple_link">Linkki</string>
     <string name="simple_italic">Kursivoitu</string>
-    <string name="action_select_note">Valitse muistiinpano</string>
     <string name="action_note_deleted">Muistiinpano poistettu</string>
     <string name="action_note_restored">Muistiinpano palautettu</string>
     <string name="action_undo">Kumoa</string>
     <string name="action_drawer_open">avaa navigaatio</string>
     <string name="action_drawer_close">sulje navigaatio</string>
-    <string name="action_recent">Viimeisimmät</string>
     <string name="action_uncategorized">Luokittelemattomat</string>
     <string name="menu_delete">Poista</string>
     <string name="menu_change_category">Luokka</string>
     <string name="menu_favorite">Suosikki</string>
     <string name="menu_preview">Esikatselu</string>
     <string name="menu_share">Jaa</string>
-    <string name="menu_about">Tietoja</string>
 
     <string name="change_category_title">Valitse luokka</string>
 
@@ -40,18 +33,8 @@
     <string name="listview_updated_yesterday">Eilen</string>
     <string name="listview_updated_this_week">Tämä viikko</string>
     <string name="listview_updated_this_month">Tämä kuukausi</string>
-    <string name="listview_updated_earlier">Aikaisemmat</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Tili</string>
-    <string name="settings_url">Palvelimen osoite</string>
-    <string name="settings_url_warn_http">VAROITUS: \"http\" on suojaamaton. Käytä \"https\"-yhteyttä.</string>
-    <string name="settings_username">Käyttäjätunnus</string>
-    <string name="settings_password">Salasana</string>
-    <string name="settings_password_unchanged">Salasana (ei muutettu)</string>
-    <string name="settings_password_check_description">Näyttää ovatko tilitiedot oikein.</string>
-    <string name="settings_submit">Yhdistä</string>
-    <string name="settings_submitting">Yhdistetään...</string>
     <string name="settings_note_mode">Muistiinpanojen esitystapa</string>
     <string name="settings_theme_title">Tumma teema</string>
     <string name="settings_font_title">Tasalevyinen fontti</string>
@@ -59,20 +42,13 @@
     <string name="settings_cert_category">Hallitse varmenteita</string>
     <string name="settings_cert_trust_system">Luota järjestelmävarmenteisiin</string>
     <!-- Network -->
-    <string name="network_connecting">Yhdistetään</string>
-    <string name="network_connected">Yhdistetty</string>
-    <string name="network_disconnected">Verkkoa ei ole saatavilla</string>
 
     <!-- Error -->
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
-    <string name="error_invalid_login">Virheellinen kirjautuminen: %1$s</string>
     <string name="error_io">palvelinyhteys on rikki</string>
     <string name="error_no_network">ei verkkoyhteyttä</string>
-    <string name="error_url_malformed">Virheellinen palvelimen osoite</string>
-    <string name="error_username_password_invalid">Väärä käyttäjätunnus tai salasana</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Asetukset</string>
 
     <!-- About -->
     <string name="about_version_title">Versio</string>
@@ -106,7 +82,6 @@
     <string name="shortcut_create_long">Luo uusi muistiinpano</string>
 
     <string name="pref_value_theme_light">Vaalea</string>
-    <string name="pref_value_theme_dark">Tumma</string>
     <string name="pref_value_wifi_and_mobile">Synkronoi wifi- ja mobiilidatayhteydellä</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

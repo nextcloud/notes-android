@@ -2,68 +2,36 @@
 <resources>
 
     <string name="app_name">Piezīmes</string>
-    <string name="no_notes">Nav nevienas piezīmes</string>
     <string name="action_create">Jauna piezīme</string>
     <string name="action_settings">Iestatījumi</string>
-    <string name="action_create_save">Saglabāt</string>
     <string name="simple_cancel">Atcelt</string>
     <string name="simple_edit">Rediģēt</string>
     <string name="action_edit_save">Saglabāt</string>
-    <string name="action_edit_saving">Saglabā &#8230;</string>
-    <string name="action_edit_saved">Saglabāts</string>
-    <string name="action_edit_cancel">Atcelt</string>
     <string name="simple_about">Par</string>
-    <string name="action_select_note">Izvēlieties piezīmi</string>
     <string name="action_note_deleted">Piezīme ir dzēsta</string>
     <string name="action_note_restored">Piezīme restaurēta</string>
     <string name="action_undo">Atsaukt</string>
     <string name="menu_delete">Dzēst</string>
-    <string name="menu_copy">Kopēt</string>
-    <string name="menu_edit">Rediģēt</string>
-    <string name="menu_cancel">Atcelt</string>
     <string name="menu_favorite">Izlase</string>
     <string name="menu_preview">Priekšskatīt</string>
     <string name="menu_share">Koplietot</string>
-    <string name="menu_about">Par</string>
-
-    <string name="copy">Kopēt</string>
 
     <string name="listview_updated_today">Šodien</string>
     <string name="listview_updated_yesterday">Vakar</string>
     <string name="listview_updated_this_week">Šonedēļ</string>
     <string name="listview_updated_this_month">Šis mēnesis</string>
-    <string name="listview_updated_earlier">Agrāk</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Konta iestatījumi</string>
-    <string name="settings_url">Servera adrese</string>
-    <string name="settings_url_check_description">Parāda, ja adresi var nopingot.</string>
-    <string name="settings_url_warn_http">BRĪDINĀJUMS: \"http\" ir nedrošs, lietojiet \"https\" !!!</string>
-    <string name="settings_username">Lietotājvārds</string>
-    <string name="settings_password">Parole</string>
-    <string name="settings_password_unchanged">Parole (nemainīta)</string>
-    <string name="settings_password_check_description">Rāda, vai akreditācijas dati ir pareizi.</string>
-    <string name="settings_submit">Savienoties</string>
-    <string name="settings_submitting">Savienojuma izveide &#8230;</string>
-    <string name="settings_notification_category">Paziņojums</string>
     <string name="settings_cert_category">Sertifikāts</string>
     <string name="settings_cert_trust_system">Uzticams sertifikāts no sistēmas uzticamās noliktavas</string>
     <!-- Network -->
-    <string name="network_connecting">Savienojuma izveide</string>
-    <string name="network_connected">Savienots</string>
-    <string name="network_disconnected">Nav pieejams tīkls</string>
 
     <!-- Error -->
     <string name="error_sync">Sinhronizācija neizdevās: %1$s</string>
-    <string name="error_invalid_login">Nederīgs lietotājvārds: %1$s</string>
     <string name="error_io">servera savienojums ir pārtraukts</string>
     <string name="error_no_network">nav tīkla savienojumu</string>
-    <string name="error_server">URL/Serverim ir kļūdas</string>
-    <string name="error_url_malformed">Nepareiza servera adrese</string>
-    <string name="error_username_password_invalid">Nepareizs lietotājvārds vai parole</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Iestatījumi</string>
 
     <!-- About -->
     <string name="about_version_title">Versija</string>
@@ -80,7 +48,6 @@
     <string name="about_credits_tab_title">Kredīti</string>
     <string name="about_license_tab_title">Licence</string>
 
-    <string name="widget_all_notes_title">Visas piezīmes</string>
     <string name="widget_single_note_title">Viena piezīme</string>
 
     <!-- Shortcuts -->

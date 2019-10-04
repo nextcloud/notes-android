@@ -2,54 +2,27 @@
 <resources>
 
     <string name="app_name">zápisník</string>
-    <string name="no_notes">Zatím bez zápisků</string>
     <string name="action_create">Nový zápisek</string>
     <string name="action_settings">Nastavení</string>
-    <string name="action_create_save">Uložit</string>
     <string name="simple_cancel">Storno</string>
     <string name="simple_edit">Upravit</string>
     <string name="action_edit_save">Uložit</string>
-    <string name="action_edit_saving">Ukládám &#8230;</string>
-    <string name="action_edit_saved">Uloženo</string>
-    <string name="action_edit_cancel">Storno</string>
     <string name="simple_about">O aplikaci</string>
-    <string name="action_select_note">Vybrat zápisek</string>
     <string name="menu_delete">Smazat</string>
-    <string name="menu_copy">Kopírovat</string>
-    <string name="menu_edit">Upravit</string>
     <string name="menu_share">Sdílet</string>
-    <string name="menu_about">O aplikaci</string>
-
-    <string name="copy">Kopírovat</string>
 
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týden</string>
     <string name="listview_updated_this_month">Tento měsíc</string>
-    <string name="listview_updated_earlier">Dřívější</string>
 
     <!-- Settings -->
-    <string name="settings_url">Adresa serveru</string>
-    <string name="settings_url_check_description">Ukáže, zdali lze na server provést ping.</string>
-    <string name="settings_url_warn_http">POZOR: "http" není bezpečné. Použijte "https".</string>
-    <string name="settings_username">Přihlašovací jméno</string>
-    <string name="settings_password">Heslo</string>
-    <string name="settings_password_check_description">Ukáže, zdali jsou údaje správné.</string>
-    <string name="settings_submit">Připojit</string>
-    <string name="settings_submitting">Spojuji &#8230;</string>
     <!-- Network -->
-    <string name="network_connecting">Spojuji</string>
-    <string name="network_connected">Připojeno</string>
-    <string name="network_disconnected">Síť není k dispozici</string>
 
-    <string name="error_invalid_login">Chybný login</string>
     <string name="error_json">JSON error</string>
     <string name="error_io">IO error</string>
-    <string name="error_url_malformed">Chybná adresa serveru</string>
-    <string name="error_username_password_invalid">Chybné jméno nebo heslo</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Nastavení</string>
 
 
     <!-- About -->
@@ -72,7 +45,6 @@
     <string name="about_contribution_tab_title">Připěvatelé</string>
     <string name="about_license_tab_title">Licence</string>
 
-    <string name="widget_all_notes_title">Všechny zápisky</string>
     <string name="widget_single_note_title">Jeden zápisek</string>
 
 

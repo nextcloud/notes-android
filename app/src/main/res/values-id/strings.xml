@@ -2,64 +2,34 @@
 <resources>
 
     <string name="app_name">Catatan</string>
-    <string name="no_notes">Belum ada catatan</string>
     <string name="action_create">Catatan baru</string>
     <string name="action_settings">Pengaturan</string>
-    <string name="action_create_save">Simpan</string>
     <string name="simple_cancel">Batal</string>
     <string name="simple_edit">Sunting</string>
     <string name="action_edit_save">Simpan</string>
-    <string name="action_edit_saving">Menyimpan &#8230;</string>
-    <string name="action_edit_saved">Tersimpan</string>
-    <string name="action_edit_cancel">Batal</string>
     <string name="simple_about">Tentang</string>
-    <string name="action_select_note">Pilih catatan</string>
     <string name="action_note_deleted">Catatan dihapus</string>
     <string name="action_note_restored">Catatan dipulihkan</string>
     <string name="action_undo">Undo</string>
     <string name="menu_delete">Hapus</string>
-    <string name="menu_copy">Salin</string>
-    <string name="menu_edit">Sunting</string>
-    <string name="menu_cancel">Batal</string>
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Pratinjau</string>
     <string name="menu_share">Bagikan</string>
-    <string name="menu_about">Tentang</string>
-
-    <string name="copy">Salin</string>
 
     <string name="listview_updated_today">Hari ini</string>
     <string name="listview_updated_yesterday">Kemarin</string>
     <string name="listview_updated_this_week">Pekan ini</string>
     <string name="listview_updated_this_month">Bulan ini</string>
-    <string name="listview_updated_earlier">Terdahulu</string>
 
-    <string name="settings_url">Alamat peladen</string>
-    <string name="settings_url_check_description">Tampilkan jika alamat dapat diping.</string>
-    <string name="settings_url_warn_http">PERHATIAN: \"http\" tidak aman. Harap gunakan \"https\".</string>
-    <string name="settings_username">Nama pengguna</string>
-    <string name="settings_password">Sandi</string>
-    <string name="settings_password_unchanged">Sandi (tidak berubah)</string>
-    <string name="settings_password_check_description">Tampilkan jika sandi benar</string>
-    <string name="settings_submit">Sambung</string>
-    <string name="settings_submitting">Menyambungkan &#8230;</string>
     <!-- Network -->
-    <string name="network_connecting">Menyambungkan</string>
-    <string name="network_connected">Tersambung</string>
-    <string name="network_disconnected">Jaringan tidak tersedia</string>
 
     <!-- Error -->
     <string name="error_sync">Sinkronisasi gagal: %1$s</string>
-    <string name="error_invalid_login">Masuk log salah: %1$s</string>
     <string name="error_json">Apakah apl Notes telah diaktifkan dipeladen?</string>
     <string name="error_io">koneksi peladen gagal</string>
     <string name="error_no_network">tidak ada koneksi jaringan</string>
-    <string name="error_server">URL/Peladan telah galat</string>
-    <string name="error_url_malformed">Alamat peladen salah</string>
-    <string name="error_username_password_invalid">Nama pengguna dan sandi salah</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Pengaturan</string>
 
     <!-- About -->
     <string name="about_version_title">Versi</string>
@@ -84,7 +54,6 @@
     <string name="about_contribution_tab_title">Kontribusi</string>
     <string name="about_license_tab_title">Lisensi</string>
 
-    <string name="widget_all_notes_title">Semua catatan</string>
     <string name="widget_single_note_title">Satu catatan</string>
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Buat catatan baru</string>

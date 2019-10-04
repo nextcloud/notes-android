@@ -3,37 +3,30 @@
 
     <string name="app_name">Notes</string>
     <string name="app_name_long">Nextcloud Notes</string>
-    <string name="no_notes">Aucune note pour l\'instant</string>
     <string name="label_all_notes">Toutes les notes</string>
     <string name="label_favorites">Favoris</string>
     <string name="action_create">Nouvelle note</string>
     <string name="action_settings">Paramètres</string>
     <string name="action_trashbin">Notes supprimées</string>
     <string name="action_search">Rechercher</string>
-    <string name="action_create_save">Enregistrer</string>
     <string name="simple_cancel">Annuler</string>
     <string name="simple_edit">Modifier</string>
     <string name="action_edit_save">Enregistrer</string>
-    <string name="action_edit_saving">Enregistrement de &#8230;</string>
-    <string name="action_edit_saved">Enregistré</string>
     <string name="simple_about">À propos</string>
     <string name="simple_bold">Gras</string>
     <string name="simple_link">Lien</string>
     <string name="simple_italic">Italique</string>
-    <string name="action_select_note">Choisir une note</string>
     <string name="action_note_deleted">Note supprimée</string>
     <string name="action_note_restored">Note restaurée</string>
     <string name="action_undo">Annuler</string>
     <string name="action_drawer_open">ouvrir la navigation</string>
     <string name="action_drawer_close">fermer la navigation</string>
-    <string name="action_recent">Récent</string>
     <string name="action_uncategorized">Non catégorisé</string>
     <string name="menu_delete">Supprimer</string>
     <string name="menu_change_category">Catégorie</string>
     <string name="menu_favorite">Favoris</string>
     <string name="menu_preview">Aperçu</string>
     <string name="menu_share">Partager</string>
-    <string name="menu_about">À propos</string>
 
     <string name="change_category_title">Choisir une catégorie</string>
 
@@ -41,19 +34,8 @@
     <string name="listview_updated_yesterday">Hier</string>
     <string name="listview_updated_this_week">Cette semaine</string>
     <string name="listview_updated_this_month">Ce mois-ci</string>
-    <string name="listview_updated_earlier">Plus tôt</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Compte</string>
-    <string name="settings_url">Adresse du serveur</string>
-    <string name="settings_url_check_description">Visible si l\'adresse répond aux pings.</string>
-    <string name="settings_url_warn_http">ATTENTION : "http" n\'est pas sécurisé. Veuillez utiliser "https".</string>
-    <string name="settings_username">Identifiant</string>
-    <string name="settings_password">Mot de passe</string>
-    <string name="settings_password_unchanged">Mot de passe (non modifié)</string>
-    <string name="settings_password_check_description">Visible si les informations d\'identification sont correctes.</string>
-    <string name="settings_submit">Se connecter</string>
-    <string name="settings_submitting">Connexion en cours&#8230;</string>
     <string name="settings_note_mode">Mode d\'affichage des notes</string>
     <string name="settings_theme_title">Thème sombre</string>
     <string name="settings_font_title">Texte monospace</string>
@@ -68,26 +50,16 @@
     <string name="settings_cert_reset_toast">Tous les certificats personnalisés ont été effacés</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Notes - Sécurité de la connexion</string>
-    <string name="trust_certificate_unknown_certificate_found">Notes a rencontré un certificat inconnu. Voulez-vous lui faire confiance?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Connexion en cours</string>
-    <string name="network_connected">Connecté</string>
-    <string name="network_disconnected">Aucune connexion réseau disponible</string>
 
     <!-- Error -->
     <string name="error_sync">Échec de synchronisation : %1$s</string>
-    <string name="error_invalid_login">Identifiant incorrect : %1$s</string>
     <string name="error_json">Est-ce que l\'application Notes est activée sur le serveur ?</string>
     <string name="error_io">Erreur d\'E/S</string>
     <string name="error_no_network">pas de connexion réseau</string>
-    <string name="error_server">URL/Serveur a des erreurs</string>
-    <string name="error_url_malformed">Adresse du serveur incorrecte</string>
-    <string name="error_username_password_invalid">Identifiant ou mot de passe incorrect</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Paramètres</string>
 
     <!-- About -->
     <string name="about_version_title">Version</string>
@@ -128,7 +100,6 @@
     <string name="shortcut_create_long">Créer une nouvelle note</string>
 
     <string name="pref_value_theme_light">Clair</string>
-    <string name="pref_value_theme_dark">Sombre</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synchroniser en Wifi et données mobiles</string>
     <string name="simple_error">Erreur</string>
