@@ -332,13 +332,13 @@ public class NoteServerSyncHelper {
             if(localAccount == null) {
                 return LoginStatus.NO_NETWORK;
             }
-            Log.d(getClass().getSimpleName(), "pullRemoteChanges()");
+            Log.d(getClass().getSimpleName(), "pullRemoteChanges() for account " + localAccount.getAccountName());
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
             String lastETag = preferences.getString(localAccount.getId() + "_" + AccountActivity.SETTINGS_KEY_ETAG, null);
             long lastModified = preferences.getLong(localAccount.getId() + "_" + AccountActivity.SETTINGS_KEY_LAST_MODIFIED, 0);
             LoginStatus status;
             try {
-                Map<Long, Long> idMap = dbHelper.getIdMap();
+                Map<Long, Long> idMap = dbHelper.getIdMap(localAccount.getId());
                 ServerResponse.NotesResponse response = notesClient.getNotes(lastModified, lastETag);
                 List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();

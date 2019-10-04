@@ -668,7 +668,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
             try {
                 localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+                db.getNoteServerSyncHelper().updateAccount();
                 synchronize();
+                refreshLists();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 e.printStackTrace();
             }

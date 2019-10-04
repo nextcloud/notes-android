@@ -325,10 +325,10 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @NonNull
     @WorkerThread
-    public Map<Long, Long> getIdMap() {
+    public Map<Long, Long> getIdMap(long accountId) {
         Map<Long, Long> result = new HashMap<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_notes, new String[]{key_remote_id, key_id}, key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, null, null, null);
+        Cursor cursor = db.query(table_notes, new String[]{key_remote_id, key_id}, key_status + " != ? AND " + key_account_id + " = ? ", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, null, null);
         while (cursor.moveToNext()) {
             result.put(cursor.getLong(0), cursor.getLong(1));
         }
@@ -366,6 +366,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
         where.add(key_status + " != ?");
         args.add(DBStatus.LOCAL_DELETED.getTitle());
+
+        where.add(key_account_id + " = ?");
+        args.add("" + accountId);
 
         if (query != null) {
             where.add(key_status + " != ?");

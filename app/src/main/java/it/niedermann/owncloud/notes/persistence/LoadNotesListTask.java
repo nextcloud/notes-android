@@ -32,6 +32,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     private final Category category;
     private final CharSequence searchQuery;
     private final long accountId;
+
     public LoadNotesListTask(long accountId, @NonNull Context context, @NonNull NotesLoadedListener callback, @NonNull Category category, @Nullable CharSequence searchQuery) {
         this.context = context;
         this.callback = callback;
