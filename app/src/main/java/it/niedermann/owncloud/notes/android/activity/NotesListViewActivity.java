@@ -230,17 +230,13 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        if (localAccount != null) {
-            drawerToggle.syncState();
-        }
+        drawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if (localAccount != null) {
-            drawerToggle.syncState();
-        }
+        drawerToggle.syncState();
     }
 
     @Override
