@@ -67,12 +67,16 @@ public class AccountActivity extends AppCompatActivity {
         for(LocalAccount account: db.getAccounts()) {
             View v = getLayoutInflater().inflate(R.layout.item_account, null);
             ((TextView) v.findViewById(R.id.accountItemLabel)).setText(account.getUserName());
-            v.setOnClickListener(clickedView -> {
-                SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.getAccountName());
-                finish();
-            });
+            v.setOnClickListener(generateOnClickListenerFor(account));
             accountsLayout.addView(v);
         }
+    }
+
+    private View.OnClickListener generateOnClickListenerFor(LocalAccount account) {
+        return v -> {
+            SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.getAccountName());
+            finish();
+        };
     }
 
     @Override
@@ -81,8 +85,14 @@ public class AccountActivity extends AppCompatActivity {
 
         AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-            db.addAccount(account.url, account.userId, account.name);
+            ;
+            LocalAccount generatedAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name));
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
+
+            View v = getLayoutInflater().inflate(R.layout.item_account, null);
+            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(generatedAccount.getUserName());
+            v.setOnClickListener(generateOnClickListenerFor(generatedAccount));
+            accountsLayout.addView(v);
         });
     }
 }

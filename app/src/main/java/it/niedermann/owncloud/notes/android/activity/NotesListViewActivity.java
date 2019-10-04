@@ -688,6 +688,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         } else if (requestCode == server_settings) {
             // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
+
+            try {
+                localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                e.printStackTrace();
+            }
             recreate();
         }
     }

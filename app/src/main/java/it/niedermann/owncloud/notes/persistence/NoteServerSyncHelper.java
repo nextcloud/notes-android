@@ -110,6 +110,9 @@ public class NoteServerSyncHelper {
         // Registers BroadcastReceiver to track network connection changes.
         appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         notesClient = new NotesClient(appContext);
+        SingleAccountHelper.registerSharedPreferenceChangeListener(appContext, (sharedPreferences, key) -> {
+            notesClient = new NotesClient(appContext);
+        });
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.appContext);
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);

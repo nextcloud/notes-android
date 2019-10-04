@@ -268,7 +268,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return requested Note
      */
     public DBNote getNote(long accountId, long id) {
-        List<DBNote> notes = getNotesCustom(accountId, key_id + " = ? AND " + key_status + " != ?", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle()}, null);
+        List<DBNote> notes = getNotesCustom(accountId, key_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null);
         return notes.isEmpty() ? null : notes.get(0);
     }
 
