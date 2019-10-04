@@ -429,7 +429,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     startActivityForResult(aboutIntent, about);
                 } else if (item == itemTrashbin) {
                     // FIXME hardcoded accountId
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(db.getAccount(1).getUrl() + "index.php/apps/files/?dir=/&view=trashbin")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(db.getAccount(1).getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
                 }
             }
 
