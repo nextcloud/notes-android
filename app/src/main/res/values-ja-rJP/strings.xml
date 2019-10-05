@@ -40,8 +40,6 @@
     <string name="listview_updated_yesterday">昨日</string>
     <string name="listview_updated_this_week">今週</string>
     <string name="listview_updated_this_month">今月</string>
-    <string name="listview_updated_earlier">以前</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">アカウント</string>
     <string name="settings_url">サーバーアドレス</string>
@@ -137,7 +135,6 @@
     <string name="copied_to_clipboard">クリップボードにコピー</string>
     <string name="pin_to_homescreen">ホームスクリーンにピン留めする</string>
     <string name="note_has_been_deleted">ノートが削除されました</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>

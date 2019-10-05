@@ -40,8 +40,6 @@
     <string name="listview_updated_yesterday">Ddoe</string>
     <string name="listview_updated_this_week">Wythnos yma</string>
     <string name="listview_updated_this_month">Mis yma</string>
-    <string name="listview_updated_earlier">Cynharach</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Cyfrif</string>
     <string name="settings_url">Cyfeiriad gweinydd</string>

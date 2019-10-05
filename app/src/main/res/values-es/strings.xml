@@ -41,8 +41,6 @@
     <string name="listview_updated_yesterday">Ayer</string>
     <string name="listview_updated_this_week">Esta semana</string>
     <string name="listview_updated_this_month">Este mes</string>
-    <string name="listview_updated_earlier">Recientemente</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Cuenta</string>
     <string name="settings_url">Dirección de servidor</string>
@@ -138,7 +136,6 @@
     <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <string name="pin_to_homescreen">Acoplar a la pantalla de inicio</string>
     <string name="note_has_been_deleted">Esta nota ha sido borrada</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>

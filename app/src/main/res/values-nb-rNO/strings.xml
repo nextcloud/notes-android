@@ -40,8 +40,6 @@
     <string name="listview_updated_yesterday">I går</string>
     <string name="listview_updated_this_week">Denne uken</string>
     <string name="listview_updated_this_month">Denne måneden</string>
-    <string name="listview_updated_earlier">Tidligere</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Serveradresse</string>

@@ -41,8 +41,6 @@
     <string name="listview_updated_yesterday">Igår</string>
     <string name="listview_updated_this_week">Denna vecka</string>
     <string name="listview_updated_this_month">Denna månad</string>
-    <string name="listview_updated_earlier">Tidigare</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Serveradress</string>
@@ -138,6 +136,8 @@
     <string name="copied_to_clipboard">Kopierat till urklipp</string>
     <string name="pin_to_homescreen">Fäst på hemskärmen</string>
     <string name="note_has_been_deleted">Denna anteckning har raderats</string>
+    <string name="fallback_weblogin_text">Återgå till gammal inloggningsmetod</string>
+    <string name="fallback_weblogin_back">Tillbaka</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -37,8 +37,6 @@
     <string name="listview_updated_yesterday">Tegnap</string>
     <string name="listview_updated_this_week">Ezen a héten</string>
     <string name="listview_updated_this_month">Ebben a hónapban</string>
-    <string name="listview_updated_earlier">Korábban</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Fiók</string>
     <string name="settings_url">A szerver címe</string>

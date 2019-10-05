@@ -40,8 +40,6 @@
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týždeň</string>
     <string name="listview_updated_this_month">Tento mesiac</string>
-    <string name="listview_updated_earlier">Skôr</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Účet</string>
     <string name="settings_url">Adresa servera</string>
@@ -137,7 +135,6 @@
     <string name="copied_to_clipboard">Skopírované do schránky</string>
     <string name="pin_to_homescreen">Pripnúť na domovskú obrazovku</string>
     <string name="note_has_been_deleted">Táto poznámka bola vymazaná</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>

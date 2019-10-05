@@ -41,8 +41,6 @@
     <string name="listview_updated_yesterday">Ahir</string>
     <string name="listview_updated_this_week">Aquesta setmana</string>
     <string name="listview_updated_this_month">Aquest mes</string>
-    <string name="listview_updated_earlier">Abans</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Compte</string>
     <string name="settings_url">Adreça del servidor</string>
@@ -138,6 +136,8 @@
     <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
     <string name="pin_to_homescreen">Fixa-ho a la pantalla d\'inici</string>
     <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
+    <string name="fallback_weblogin_text">Tornar a l\'antic mètode d\'inici de sessió</string>
+    <string name="fallback_weblogin_back">Enrere</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

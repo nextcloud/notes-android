@@ -41,8 +41,6 @@
     <string name="listview_updated_yesterday">昨天</string>
     <string name="listview_updated_this_week">本周</string>
     <string name="listview_updated_this_month">本月</string>
-    <string name="listview_updated_earlier">更早</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">账户设置</string>
     <string name="settings_url">服务器地址</string>
@@ -138,7 +136,6 @@
     <string name="copied_to_clipboard">复制到剪贴板</string>
     <string name="pin_to_homescreen">固定到主屏幕</string>
     <string name="note_has_been_deleted">此便签已被删除</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>

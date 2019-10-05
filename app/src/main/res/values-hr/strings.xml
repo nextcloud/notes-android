@@ -40,8 +40,6 @@
     <string name="listview_updated_yesterday">Jučer</string>
     <string name="listview_updated_this_week">Ovaj tjedan</string>
     <string name="listview_updated_this_month">Ovaj mjesec</string>
-    <string name="listview_updated_earlier">Ranije</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Račun</string>
     <string name="settings_url">Adresa poslužitelja</string>
@@ -137,7 +135,6 @@
     <string name="copied_to_clipboard">Kopirano u međuspremnik</string>
     <string name="pin_to_homescreen">Prikvačite na početni zaslon</string>
     <string name="note_has_been_deleted">Bilješka je izbrisana</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>
