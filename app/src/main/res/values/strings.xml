@@ -168,6 +168,10 @@
     <string name="note_has_been_deleted">This note has been deleted</string>
     <string name="fallback_weblogin_text">Revert to old login method</string>
     <string name="fallback_weblogin_back">Back</string>
+    <string name="sso_announcment_title">Single-Sign-On</string>
+    <string name="sso_announcment_message">The Notes app will beginning with the next major version use the great Single-Sign-On-Feature of Nextcloud.  This will increase the security, reliability and comfort for you.  Please make sure, you have installed at least version 3.8.0 of the files app and select at the first run the same account which you are already using.</string>
+    <string name="sso_announcment_more_info">More information</string>
+    <string name="sso_announcment_understood">Understood</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
