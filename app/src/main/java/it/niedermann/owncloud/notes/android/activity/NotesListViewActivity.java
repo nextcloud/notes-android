@@ -268,16 +268,20 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 drawerLayout.closeDrawer(GravityCompat.START);
             });
             v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
-                if(account.getId() == localAccount.getId()) {
-                    // TODO handle if current account has been deleted
-                }
                 db.deleteAccount(account.getId());
-                localAccount = db.getLocalAccountByAccountName(account.getAccountName());
-                db.getNoteServerSyncHelper().updateAccount();
-                synchronize();
-                refreshLists();
+                if(account.getId() == localAccount.getId()) {
+                    List<LocalAccount> remainingAccounts = db.getAccounts();
+                    if(remainingAccounts.size() > 0) {
+                        localAccount = remainingAccounts.get(0);
+                        SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName());
+                        db.getNoteServerSyncHelper().updateAccount();
+                        synchronize();
+                        updateUsernameInDrawer();
+                    }
+                } else {
+                    // Ask to import new account
+                }
                 setupHeader();
-                updateUsernameInDrawer();
                 headerView.performClick();
                 drawerLayout.closeDrawer(GravityCompat.START);
             });
