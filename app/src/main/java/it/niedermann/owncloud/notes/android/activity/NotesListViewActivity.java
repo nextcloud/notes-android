@@ -739,6 +739,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             synchronize();
             refreshLists();
             setupHeader();
+            updateUsernameInDrawer();
             drawerLayout.closeDrawer(GravityCompat.START);
         });
 
