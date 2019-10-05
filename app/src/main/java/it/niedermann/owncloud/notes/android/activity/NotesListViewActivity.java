@@ -285,7 +285,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         localAccount = null;
                         SingleAccountHelper.setCurrentAccount(getApplicationContext(), null);
                         db.getNoteServerSyncHelper().updateAccount();
-                        askForNewAccount();
+                        recreate();
                     }
                 }
                 setupHeader();
@@ -552,7 +552,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
                     startActivityForResult(aboutIntent, about);
                 } else if (item == itemTrashbin) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
+                    if(localAccount != null) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
+                    }
                 }
             }
 
