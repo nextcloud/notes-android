@@ -26,7 +26,8 @@
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:padding="8dp"
-        android:textAppearance="@style/NavigationItem" />
+        android:textAppearance="@style/NavigationItem"
+        tools:text="37"/>
 
     <TextView
         android:id="@+id/navigationItemLabel"
