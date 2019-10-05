@@ -267,6 +267,20 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 headerView.performClick();
                 drawerLayout.closeDrawer(GravityCompat.START);
             });
+            v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
+                if(account.getId() == localAccount.getId()) {
+                    // TODO handle if current account has been deleted
+                }
+                db.deleteAccount(account.getId());
+                localAccount = db.getLocalAccountByAccountName(account.getAccountName());
+                db.getNoteServerSyncHelper().updateAccount();
+                synchronize();
+                refreshLists();
+                setupHeader();
+                updateUsernameInDrawer();
+                headerView.performClick();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            });
             accountChooser.addView(v);
         }
         View addButton = getLayoutInflater().inflate(R.layout.item_account, null);
@@ -284,6 +298,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
             }
         });
+        addButton.findViewById(R.id.delete).setVisibility(View.GONE);
         accountChooser.addView(addButton);
         headerView.setOnClickListener((view) -> {
             if (this.accountChooserActive) {

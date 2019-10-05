@@ -711,4 +711,16 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         return account;
     }
+
+    public void deleteAccount(long accountId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int deletedAccounts = db.delete(table_accounts, key_id + " = ?", new String[] {accountId + ""});
+        if(deletedAccounts < 1) {
+            throw new IllegalArgumentException("The given accountId does not delete any row");
+        } else if(deletedAccounts > 1) {
+            Log.e(NoteSQLiteOpenHelper.class.getSimpleName(), "AccountId '" + accountId + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
+        }
+        int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{accountId + ""});
+        Log.v(NoteSQLiteOpenHelper.class.getSimpleName(), "Deleted " + deletedNotes + " notes from account " + accountId);
+    }
 }
