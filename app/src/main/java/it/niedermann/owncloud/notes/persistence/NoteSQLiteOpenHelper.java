@@ -157,6 +157,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
         if (oldVersion < 9) {
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_account_id + " INTEGER NOT NULL DEFAULT 0");
+            createIndex(db, table_notes, key_account_id);
             createAccountTable(db, table_accounts);
             ContentValues values = new ContentValues();
             values.put(key_account_id, 1);
@@ -189,6 +190,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private void createNotesIndexes(SQLiteDatabase db) {
         createIndex(db, table_notes, key_remote_id);
+        createIndex(db, table_notes, key_account_id);
         createIndex(db, table_notes, key_status);
         createIndex(db, table_notes, key_favorite);
         createIndex(db, table_notes, key_category);
@@ -196,6 +198,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     private void createAccountIndexes(SQLiteDatabase db) {
+        createIndex(db, table_accounts, key_account_name);
     }
 
     private void createIndex(SQLiteDatabase db, String table, String column) {
