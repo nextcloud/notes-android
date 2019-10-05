@@ -42,8 +42,6 @@
     <string name="listview_updated_yesterday">Gisteren</string>
     <string name="listview_updated_this_week">Deze week</string>
     <string name="listview_updated_this_month">Deze maand</string>
-    <string name="listview_updated_earlier">Eerder</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Account</string>
     <string name="settings_url">Serveradres</string>
@@ -139,6 +137,8 @@
     <string name="copied_to_clipboard">Gekopieerd naar het klembord</string>
     <string name="pin_to_homescreen">Vastmaken op startscherm</string>
     <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
+    <string name="fallback_weblogin_text">Terug naar vorige inlogmethode</string>
+    <string name="fallback_weblogin_back">Terug</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

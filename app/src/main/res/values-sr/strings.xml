@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Белешке</string>
+    <string name="app_name_long">Некстклауд Белешке</string>
     <string name="no_notes">Још нема белешки</string>
     <string name="label_all_notes">Све белешке</string>
     <string name="label_favorites">Омиљене</string>
@@ -40,8 +41,6 @@
     <string name="listview_updated_yesterday">Јуче</string>
     <string name="listview_updated_this_week">Ове седмице</string>
     <string name="listview_updated_this_month">Овог месеца</string>
-    <string name="listview_updated_earlier">Раније</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Налог</string>
     <string name="settings_url">Адреса сервера</string>
@@ -137,7 +136,6 @@
     <string name="copied_to_clipboard">Копирано у оставу</string>
     <string name="pin_to_homescreen">Закачи на почетни екран</string>
     <string name="note_has_been_deleted">Ова белешка је обрисана</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>

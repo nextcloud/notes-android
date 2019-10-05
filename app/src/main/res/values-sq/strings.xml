@@ -37,8 +37,6 @@
     <string name="listview_updated_yesterday">Dje</string>
     <string name="listview_updated_this_week">Këtë javë</string>
     <string name="listview_updated_this_month">Këtë muaj</string>
-    <string name="listview_updated_earlier">Më herët</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Llogari</string>
     <string name="settings_url">Adresa e serverit</string>

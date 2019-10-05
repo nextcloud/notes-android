@@ -41,8 +41,6 @@
     <string name="listview_updated_yesterday">Dün</string>
     <string name="listview_updated_this_week">Bu hafta</string>
     <string name="listview_updated_this_month">Bu ay</string>
-    <string name="listview_updated_earlier">Daha eski</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Hesap</string>
     <string name="settings_url">Sunucu adresi</string>
@@ -138,6 +136,8 @@
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
     <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
     <string name="note_has_been_deleted">Bu not silinmiş</string>
+    <string name="fallback_weblogin_text">Eski oturum açma yöntemi kullanılsın</string>
+    <string name="fallback_weblogin_back">Geri</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

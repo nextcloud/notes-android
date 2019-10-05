@@ -40,8 +40,6 @@
     <string name="listview_updated_yesterday">Í gær</string>
     <string name="listview_updated_this_week">Í þessari viku</string>
     <string name="listview_updated_this_month">Í þessum mánuði</string>
-    <string name="listview_updated_earlier">Fyrr</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Aðgangur</string>
     <string name="settings_url">Vistfang þjóns</string>

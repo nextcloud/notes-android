@@ -40,8 +40,6 @@
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týden</string>
     <string name="listview_updated_this_month">Tento měsíc</string>
-    <string name="listview_updated_earlier">Dříve</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Účet</string>
     <string name="settings_url">Adresa serveru</string>
@@ -137,7 +135,6 @@
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <string name="pin_to_homescreen">Připnout na domovskou obrazovku</string>
     <string name="note_has_been_deleted">Tato poznámka byla smazána</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otevřít v režimu úprav</item>

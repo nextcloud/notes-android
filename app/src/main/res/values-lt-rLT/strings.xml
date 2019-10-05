@@ -35,8 +35,6 @@
     <string name="listview_updated_yesterday">Vakar</string>
     <string name="listview_updated_this_week">Šį savaitė</string>
     <string name="listview_updated_this_month">Šis mėnesis</string>
-    <string name="listview_updated_earlier">Ankstesnis</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Paskyra</string>
     <string name="settings_url">Serverio adresas</string>

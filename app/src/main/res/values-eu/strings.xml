@@ -40,8 +40,6 @@
     <string name="listview_updated_yesterday">Atzo</string>
     <string name="listview_updated_this_week">Aste honetan</string>
     <string name="listview_updated_this_month">Hilabete honetan</string>
-    <string name="listview_updated_earlier">Lehenago</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Kontua</string>
     <string name="settings_url">Zerbitzariaren helbidea</string>

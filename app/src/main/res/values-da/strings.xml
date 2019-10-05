@@ -40,8 +40,6 @@
     <string name="listview_updated_yesterday">I går</string>
     <string name="listview_updated_this_week">Denne uge</string>
     <string name="listview_updated_this_month">Denne måned</string>
-    <string name="listview_updated_earlier">Tidligere</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Server adresse</string>
@@ -137,7 +135,6 @@
     <string name="copied_to_clipboard">Kopieret til udklipsholder</string>
     <string name="pin_to_homescreen">Fastgør til hjemmeskærm</string>
     <string name="note_has_been_deleted">Denne note er blevet slettet</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>

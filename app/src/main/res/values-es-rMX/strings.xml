@@ -36,8 +36,6 @@
     <string name="listview_updated_yesterday">Ayer</string>
     <string name="listview_updated_this_week">Esta semana</string>
     <string name="listview_updated_this_month">Este mes</string>
-    <string name="listview_updated_earlier">Anterior</string>
-
     <string name="settings_url">Dirección del servidor</string>
     <string name="settings_url_check_description">Muestra si a la dirección se le puede hacer un ping. </string>
     <string name="settings_url_warn_http">ADVERTENCIA: \"http\" no es seguro. Por favor usa \"https\".</string>

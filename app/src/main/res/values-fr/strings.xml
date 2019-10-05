@@ -41,8 +41,6 @@
     <string name="listview_updated_yesterday">Hier</string>
     <string name="listview_updated_this_week">Cette semaine</string>
     <string name="listview_updated_this_month">Ce mois-ci</string>
-    <string name="listview_updated_earlier">Plus tôt</string>
-
     <!-- Settings -->
     <string name="settings_server_settings">Compte</string>
     <string name="settings_url">Adresse du serveur</string>
@@ -138,6 +136,8 @@
     <string name="copied_to_clipboard">Copié dans le presse-papier</string>
     <string name="pin_to_homescreen">Épingler sur la page d’accueil</string>
     <string name="note_has_been_deleted">Cette note a été supprimée</string>
+    <string name="fallback_weblogin_text">Revenir à l\'ancienne méthode de connexion</string>
+    <string name="fallback_weblogin_back">Retour</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
