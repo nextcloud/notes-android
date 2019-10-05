@@ -210,16 +210,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName());
                 db.getNoteServerSyncHelper().updateAccount();
             } else {
-                try {
-                    AccountImporter.pickNewAccount(this);
-                } catch (NextcloudFilesAppNotInstalledException e1) {
-                    UiExceptionManager.showDialogForException(this, e1);
-                    Log.w(NotesListViewActivity.class.toString(), "=============================================================");
-                    Log.w(NotesListViewActivity.class.toString(), "Nextcloud app is not installed. Cannot choose account");
-                    e.printStackTrace();
-                } catch (AndroidGetAccountsPermissionNotGranted e2) {
-                    AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
-                }
+                askForNewAccount();
             }
         }
 
@@ -242,6 +233,19 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         //    dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.fg_default));
         //    dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.fg_default));
         //}
+    }
+
+    private void askForNewAccount() {
+        try {
+            AccountImporter.pickNewAccount(this);
+        } catch (NextcloudFilesAppNotInstalledException e1) {
+            UiExceptionManager.showDialogForException(this, e1);
+            Log.w(NotesListViewActivity.class.toString(), "=============================================================");
+            Log.w(NotesListViewActivity.class.toString(), "Nextcloud app is not installed. Cannot choose account");
+            e1.printStackTrace();
+        } catch (AndroidGetAccountsPermissionNotGranted e2) {
+            AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
+        }
     }
 
     private void setupHeader() {
@@ -277,9 +281,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         db.getNoteServerSyncHelper().updateAccount();
                         synchronize();
                         updateUsernameInDrawer();
+                    } else {
+                        localAccount = null;
+                        SingleAccountHelper.setCurrentAccount(getApplicationContext(), null);
+                        db.getNoteServerSyncHelper().updateAccount();
+                        askForNewAccount();
                     }
-                } else {
-                    // Ask to import new account
                 }
                 setupHeader();
                 headerView.performClick();
