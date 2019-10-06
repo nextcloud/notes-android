@@ -198,7 +198,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     private void createAccountIndexes(SQLiteDatabase db) {
+        createIndex(db, table_accounts, key_url);
+        createIndex(db, table_accounts, key_username);
         createIndex(db, table_accounts, key_account_name);
+        createIndex(db, table_accounts, key_display_name);
+        createIndex(db, table_accounts, key_token);
     }
 
     private void createIndex(SQLiteDatabase db, String table, String column) {
