@@ -45,16 +45,16 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkTheme).build());
-        try {
-            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void onCreate() {
         db = NoteSQLiteOpenHelper.getInstance(context);
+        try {
+            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -104,6 +104,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         final Bundle extras = new Bundle();
 
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+        extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
         fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         if (darkTheme) {
