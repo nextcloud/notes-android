@@ -362,6 +362,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
         Bundle arguments = new Bundle();
         arguments.putString(CategoryDialogFragment.PARAM_CATEGORY, note.getCategory());
+        arguments.putLong(CategoryDialogFragment.PARAM_ACCOUNT_ID, note.getAccountId());
         CategoryDialogFragment categoryFragment = new CategoryDialogFragment();
         categoryFragment.setArguments(arguments);
         categoryFragment.setTargetFragment(this, 0);
