@@ -43,13 +43,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
-import com.nextcloud.android.sso.exceptions.AndroidGetAccountsPermissionNotGranted;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotInstalledException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
-import com.nextcloud.android.sso.ui.UiExceptionManager;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -74,6 +71,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
 public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener {
 
@@ -199,18 +197,16 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setupNavigationMenu();
         setupNotesList();
 
-        try {
-            localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+        try { // to get current account from SingleAccountHelper
+            selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
             Log.v("Notes", "NextcloudRequest account: " + localAccount);
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
         } catch (NoCurrentAccountSelectedException e) {
-            if (db.hasAccounts()) {
-                localAccount = db.getAccount(1);
-                SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName());
-                db.getNoteServerSyncHelper().updateAccount();
+            if (db.hasAccounts()) { // If nothing is stored in SingleAccountHelper, check db for accounts
+                selectAccount(db.getAccounts().get(0).getAccountName());
             } else {
-                askForNewAccount();
+                askForNewAccount(this);
             }
         }
 
@@ -233,95 +229,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         //    dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.fg_default));
         //    dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.fg_default));
         //}
-    }
-
-    private void askForNewAccount() {
-        try {
-            AccountImporter.pickNewAccount(this);
-        } catch (NextcloudFilesAppNotInstalledException e1) {
-            UiExceptionManager.showDialogForException(this, e1);
-            Log.w(NotesListViewActivity.class.toString(), "=============================================================");
-            Log.w(NotesListViewActivity.class.toString(), "Nextcloud app is not installed. Cannot choose account");
-            e1.printStackTrace();
-        } catch (AndroidGetAccountsPermissionNotGranted e2) {
-            AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
-        }
-    }
-
-    private void setupHeader() {
-        accountChooser.removeAllViews();
-        for (LocalAccount account : db.getAccounts()) {
-            View v = getLayoutInflater().inflate(R.layout.item_account, null);
-            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(account.getAccountName());
-            Glide
-                    .with(this)
-                    .load(account.getUrl() + "/index.php/avatar/" + Uri.encode(account.getUserName()) + "/64")
-                    .error(R.drawable.ic_account_circle_grey_24dp)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
-            v.setOnClickListener(clickedView -> {
-                SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.getAccountName());
-                db.getNoteServerSyncHelper().updateAccount();
-                localAccount = db.getLocalAccountByAccountName(account.getAccountName());
-                db.getNoteServerSyncHelper().updateAccount();
-                synchronize();
-                refreshLists();
-                setupHeader();
-                updateUsernameInDrawer();
-                headerView.performClick();
-                drawerLayout.closeDrawer(GravityCompat.START);
-            });
-            v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
-                db.deleteAccount(account.getId());
-                if(account.getId() == localAccount.getId()) {
-                    List<LocalAccount> remainingAccounts = db.getAccounts();
-                    if(remainingAccounts.size() > 0) {
-                        localAccount = remainingAccounts.get(0);
-                        SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName());
-                        db.getNoteServerSyncHelper().updateAccount();
-                        synchronize();
-                        updateUsernameInDrawer();
-                    } else {
-                        localAccount = null;
-                        SingleAccountHelper.setCurrentAccount(getApplicationContext(), null);
-                        db.getNoteServerSyncHelper().updateAccount();
-                        recreate();
-                    }
-                }
-                setupHeader();
-                headerView.performClick();
-                drawerLayout.closeDrawer(GravityCompat.START);
-            });
-            accountChooser.addView(v);
-        }
-        View addButton = getLayoutInflater().inflate(R.layout.item_account, null);
-        ((TextView) addButton.findViewById(R.id.accountItemLabel)).setText(getString(R.string.add_account));
-        ((AppCompatImageView) addButton.findViewById(R.id.accountItemAvatar)).setImageResource(R.drawable.ic_person_add_grey600_24dp);
-        addButton.setOnClickListener((btn) -> {
-            try {
-                AccountImporter.pickNewAccount(this);
-            } catch (NextcloudFilesAppNotInstalledException e1) {
-                UiExceptionManager.showDialogForException(this, e1);
-                Log.w(NotesListViewActivity.class.toString(), "=============================================================");
-                Log.w(NotesListViewActivity.class.toString(), "Nextcloud app is not installed. Cannot choose account");
-                e1.printStackTrace();
-            } catch (AndroidGetAccountsPermissionNotGranted e2) {
-                AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
-            }
-        });
-        addButton.findViewById(R.id.delete).setVisibility(View.GONE);
-        accountChooser.addView(addButton);
-        headerView.setOnClickListener((view) -> {
-            if (this.accountChooserActive) {
-                accountChooser.setVisibility(View.GONE);
-                accountNavigation.setVisibility(View.VISIBLE);
-            } else {
-                accountChooser.setVisibility(View.VISIBLE);
-                accountNavigation.setVisibility(View.GONE);
-
-            }
-            this.accountChooserActive = !this.accountChooserActive;
-        });
     }
 
     @Override
@@ -357,6 +264,70 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             outState.putString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION, adapterCategories.getSelectedItem());
             outState.putString(SAVED_STATE_NAVIGATION_OPEN, navigationOpen);
         }
+    }
+
+    private void selectAccount(String accountName) {
+        SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
+        localAccount = db.getLocalAccountByAccountName(accountName);
+        db.getNoteServerSyncHelper().updateAccount();
+        synchronize();
+        refreshLists();
+        setupHeader();
+        setupNavigationList(ADAPTER_KEY_RECENT);
+        updateUsernameInDrawer();
+    }
+
+    private void setupHeader() {
+        accountChooser.removeAllViews();
+        for (LocalAccount account : db.getAccounts()) {
+            View v = getLayoutInflater().inflate(R.layout.item_account, null);
+            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(account.getAccountName());
+            Glide
+                    .with(this)
+                    .load(account.getUrl() + "/index.php/avatar/" + Uri.encode(account.getUserName()) + "/64")
+                    .error(R.drawable.ic_account_circle_grey_24dp)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
+            v.setOnClickListener(clickedView -> {
+                selectAccount(account.getAccountName());
+                headerView.performClick();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            });
+            v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
+                db.deleteAccount(account.getId());
+                if (account.getId() == localAccount.getId()) {
+                    List<LocalAccount> remainingAccounts = db.getAccounts();
+                    if (remainingAccounts.size() > 0) {
+                        localAccount = remainingAccounts.get(0);
+                        selectAccount(localAccount.getAccountName());
+                    } else {
+                        selectAccount(null);
+                        askForNewAccount(this);
+                    }
+                }
+                setupHeader();
+                headerView.performClick();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            });
+            accountChooser.addView(v);
+        }
+        View addButton = getLayoutInflater().inflate(R.layout.item_account, null);
+        ((TextView) addButton.findViewById(R.id.accountItemLabel)).setText(getString(R.string.add_account));
+        ((AppCompatImageView) addButton.findViewById(R.id.accountItemAvatar)).setImageResource(R.drawable.ic_person_add_grey600_24dp);
+        addButton.setOnClickListener((btn) -> askForNewAccount(this));
+        addButton.findViewById(R.id.delete).setVisibility(View.GONE);
+        accountChooser.addView(addButton);
+        headerView.setOnClickListener((view) -> {
+            if (this.accountChooserActive) {
+                accountChooser.setVisibility(View.GONE);
+                accountNavigation.setVisibility(View.VISIBLE);
+            } else {
+                accountChooser.setVisibility(View.VISIBLE);
+                accountNavigation.setVisibility(View.GONE);
+
+            }
+            this.accountChooserActive = !this.accountChooserActive;
+        });
     }
 
     private void setupActionBar() {
@@ -456,6 +427,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
+            if(localAccount == null) {
+                return new ArrayList<>();
+            }
             List<NavigationAdapter.NavigationItem> categories = db.getCategories(localAccount.getId());
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
@@ -552,7 +526,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
                     startActivityForResult(aboutIntent, about);
                 } else if (item == itemTrashbin) {
-                    if(localAccount != null) {
+                    if (localAccount != null) {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
                     }
                 }
@@ -649,6 +623,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void refreshLists(final boolean scrollToTop) {
+        if (localAccount == null) {
+            fabCreate.hide();
+            adapter.removeAll();
+            return;
+        }
         fabCreate.show();
         String subtitle;
         if (navigationSelection.category != null) {
@@ -761,13 +740,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-            localAccount = db.getAccount(db.addAccount(account.url, account.userId, account.name, account.token));
-            SingleAccountHelper.setCurrentAccount(getApplicationContext(), account.name);
-            db.getNoteServerSyncHelper().updateAccount();
-            synchronize();
-            refreshLists();
-            setupHeader();
-            updateUsernameInDrawer();
+            db.addAccount(account.url, account.userId, account.name, account.token);
+            selectAccount(account.name);
+            headerView.performClick();
             drawerLayout.closeDrawer(GravityCompat.START);
         });
 
@@ -799,23 +774,31 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private void updateUsernameInDrawer() {
         try {
-            SingleSignOnAccount a = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-            String url = a.url;
+            String url = localAccount.getUrl();
             if (url != null) {
-                String croppedUrl = new URL(url).getHost();
-                this.account.setText(a.userId + "@" + croppedUrl);
+                String croppedUrl = url;
+                try {
+                    croppedUrl = new URL(url).getHost();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                this.account.setText(localAccount.getUserName() + "@" + croppedUrl);
                 Glide
                         .with(this)
-                        .load(url + "/index.php/avatar/" + Uri.encode(a.userId) + "/64")
+                        .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
                         .error(R.mipmap.ic_launcher)
                         .apply(RequestOptions.circleCropTransform())
                         .into(this.currentAccountImage);
             } else {
                 Log.w(NotesListViewActivity.class.getSimpleName(), "url is null");
             }
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        } catch (NullPointerException e) {
+            this.account.setText(R.string.app_name_long);
+            Glide
+                    .with(this)
+                    .load(R.mipmap.ic_launcher)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(this.currentAccountImage);
             e.printStackTrace();
         }
     }

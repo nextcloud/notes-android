@@ -704,6 +704,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     public LocalAccount getLocalAccountByAccountName(String accountName) {
+        if(accountName == null) {
+            return null;
+        }
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name, key_token}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
         LocalAccount account = new LocalAccount();
