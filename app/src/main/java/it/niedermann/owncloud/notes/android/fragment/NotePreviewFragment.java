@@ -13,11 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
-import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -31,10 +32,11 @@ public class NotePreviewFragment extends BaseNoteFragment {
     @BindView(R.id.single_note_content)
     RxMDTextView noteContent;
 
-    public static NotePreviewFragment newInstance(long noteId) {
+    public static NotePreviewFragment newInstance(long accountId, long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
         Bundle b = new Bundle();
         b.putLong(PARAM_NOTE_ID, noteId);
+        b.putLong(PARAM_ACCOUNT_ID, accountId);
         f.setArguments(b);
         return f;
     }

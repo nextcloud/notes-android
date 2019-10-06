@@ -74,10 +74,11 @@ public class NoteEditFragment extends BaseNoteFragment {
         }
     };
 
-    public static NoteEditFragment newInstance(long noteId) {
+    public static NoteEditFragment newInstance(long accountId, long noteId) {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
         b.putLong(PARAM_NOTE_ID, noteId);
+        b.putLong(PARAM_ACCOUNT_ID, accountId);
         f.setArguments(b);
         return f;
     }

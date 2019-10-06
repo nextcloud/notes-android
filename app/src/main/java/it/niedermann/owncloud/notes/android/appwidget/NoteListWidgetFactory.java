@@ -40,17 +40,16 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
         darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
         category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
-
-        try {
-            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void onCreate() {
         db = NoteSQLiteOpenHelper.getInstance(context);
+        try {
+            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -96,6 +95,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         final Bundle extras = new Bundle();
 
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+        extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
         fillInIntent.setData(Uri.parse(fillInIntent.toUri(Intent.URI_INTENT_SCHEME)));
 

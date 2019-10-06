@@ -54,6 +54,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     private static final int MENU_ID_PIN = -1;
     public static final String PARAM_NOTE_ID = "noteId";
+    public static final String PARAM_ACCOUNT_ID = "accountId";
     public static final String PARAM_NEWNOTE = "newNote";
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
@@ -101,6 +102,13 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             isNew = true;
             long id = getArguments().getLong(PARAM_NOTE_ID);
             if (id > 0) {
+                long accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
+                if(accountId > 0) {
+                    /* Switch account if account id has been provided */
+                    this.localAccount = db.getAccount(accountId);
+                    SingleAccountHelper.setCurrentAccount(getActivity().getApplicationContext(), localAccount.getAccountName());
+                    db.getNoteServerSyncHelper().updateAccount();
+                }
                 note = originalNote = db.getNote(localAccount.getId(), id);
             } else {
                 CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
