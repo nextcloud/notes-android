@@ -19,6 +19,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     public static final String DARK_THEME_KEY = "SNW_darkTheme";
     public static final String WIDGET_KEY = "single_note_widget";
+    public static final String ACCOUNT_ID_KEY = "SNW_accountId";
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -55,7 +56,6 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
                 awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv);
             }
-
             awm.updateAppWidget(appWidgetId, views);
         }
     }
@@ -82,7 +82,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         for (int appWidgetId : appWidgetIds) {
             editor.remove(WIDGET_KEY + appWidgetId);
-            editor.remove(NoteListWidget.DARK_THEME_KEY + appWidgetId);
+            editor.remove(DARK_THEME_KEY + appWidgetId);
+            editor.remove(ACCOUNT_ID_KEY + appWidgetId);
         }
 
         editor.apply();

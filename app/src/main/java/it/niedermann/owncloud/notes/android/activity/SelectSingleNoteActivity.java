@@ -66,6 +66,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
 
         sp.putLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, noteID);
+        sp.putLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, note.getAccountId());
         sp.putBoolean(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()));
         sp.apply();
 

@@ -27,7 +27,6 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private MarkdownProcessor markdownProcessor;
     private final Context context;
     private final int appWidgetId;
-    private long accountId;
 
     private NoteSQLiteOpenHelper db;
     private DBNote note;
@@ -50,11 +49,11 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onCreate() {
         db = NoteSQLiteOpenHelper.getInstance(context);
-        try {
-            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
+//        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+//            e.printStackTrace();
+//        }
     }
 
 
@@ -63,7 +62,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         long noteID = sp.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1);
 
         if (noteID >= 0) {
-            note = db.getNote(accountId, noteID);
+            note = db.getNote(sp.getLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, -1), noteID);
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");
