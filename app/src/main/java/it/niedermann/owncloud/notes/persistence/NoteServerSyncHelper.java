@@ -101,7 +101,7 @@ public class NoteServerSyncHelper {
         try {
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
             notesClient = new NotesClient(appContext);
-            Log.v("Notes", "NextcloudRequest account: " + localAccount);
+            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
         }
@@ -127,11 +127,11 @@ public class NoteServerSyncHelper {
             } else {
                 notesClient.updateAccount();
             }
-            Log.v("Notes", "NextcloudRequest account: " + localAccount);
+            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
         }
-        Log.v("Note", "Reinstanziation NotesClient because of SSO acc changed");
+        Log.v(getClass().getSimpleName(), "Reinstanziation NotesClient because of SSO acc changed");
     }
 
     @Override

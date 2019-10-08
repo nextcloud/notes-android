@@ -199,7 +199,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         try { // to get current account from SingleAccountHelper
             selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
-            Log.v("Notes", "NextcloudRequest account: " + localAccount);
+            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
         } catch (NoCurrentAccountSelectedException e) {
@@ -583,7 +583,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         db.deleteNoteAndSync((dbNote).getId());
                         adapter.remove(dbNote);
                         refreshLists();
-                        Log.v("Note", "Item deleted through swipe ----------------------------------------------");
+                        Log.v(getClass().getSimpleName(), "Item deleted through swipe ----------------------------------------------");
                         Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
                                 .setAction(R.string.action_undo, (View v) -> {
                                     db.addNoteAndSync(dbNote.getAccountId(), dbNote);
@@ -741,7 +741,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         super.onActivityResult(requestCode, resultCode, data);
 
         AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-            Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
+            Log.v(getClass().getSimpleName(), "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
             db.addAccount(account.url, account.userId, account.name);
             selectAccount(account.name);
             clickHeader();
@@ -801,7 +801,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     .load(R.mipmap.ic_launcher)
                     .apply(RequestOptions.circleCropTransform())
                     .into(this.currentAccountImage);
-            e.printStackTrace();
+            Log.w(getClass().getSimpleName(), "Tried to update username in drawer, but localAccount was null");
         }
     }
 

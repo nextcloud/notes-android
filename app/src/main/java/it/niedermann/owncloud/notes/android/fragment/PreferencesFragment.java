@@ -37,7 +37,7 @@ public class PreferencesFragment extends PreferenceFragment {
         final SwitchPreference wifiOnlyPref = (SwitchPreference) findPreference(getString(R.string.pref_key_wifi_only));
         wifiOnlyPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
             Boolean syncOnWifiOnly = (Boolean) newValue;
-            Log.v("Notes", "syncOnWifiOnly: " + syncOnWifiOnly);
+            Log.v(getClass().getSimpleName(), "syncOnWifiOnly: " + syncOnWifiOnly);
             return true;
         });
     }

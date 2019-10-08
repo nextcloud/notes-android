@@ -306,7 +306,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private List<DBNote> getNotesCustom(long accountId, @NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy, @Nullable String limit) {
         SQLiteDatabase db = getReadableDatabase();
         if (selectionArgs.length > 2) {
-            Log.v("Note", selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
+            Log.v(getClass().getSimpleName(), selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
         }
         Cursor cursor = db.query(table_notes, columns, selection, selectionArgs, null, null, orderBy, limit);
         List<DBNote> notes = new ArrayList<>();
