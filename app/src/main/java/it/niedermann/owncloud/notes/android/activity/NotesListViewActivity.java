@@ -290,7 +290,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
             v.setOnClickListener(clickedView -> {
                 selectAccount(account.getAccountName());
-                headerView.performClick();
+                clickHeader();
                 drawerLayout.closeDrawer(GravityCompat.START);
             });
             v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
@@ -306,7 +306,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     }
                 }
                 setupHeader();
-                headerView.performClick();
+                clickHeader();
                 drawerLayout.closeDrawer(GravityCompat.START);
             });
             accountChooser.addView(v);
@@ -317,17 +317,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         addButton.setOnClickListener((btn) -> askForNewAccount(this));
         addButton.findViewById(R.id.delete).setVisibility(View.GONE);
         accountChooser.addView(addButton);
-        headerView.setOnClickListener((view) -> {
-            if (this.accountChooserActive) {
-                accountChooser.setVisibility(View.GONE);
-                accountNavigation.setVisibility(View.VISIBLE);
-            } else {
-                accountChooser.setVisibility(View.VISIBLE);
-                accountNavigation.setVisibility(View.GONE);
-
-            }
-            this.accountChooserActive = !this.accountChooserActive;
-        });
+        headerView.setOnClickListener(view -> clickHeader());
     }
 
     private void setupActionBar() {
@@ -422,6 +412,18 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         });
         adapterCategories.setSelectedItem(selectedItem);
         listNavigationCategories.setAdapter(adapterCategories);
+    }
+
+    private void clickHeader() {
+        if (this.accountChooserActive) {
+            accountChooser.setVisibility(View.GONE);
+            accountNavigation.setVisibility(View.VISIBLE);
+        } else {
+            accountChooser.setVisibility(View.VISIBLE);
+            accountNavigation.setVisibility(View.GONE);
+
+        }
+        this.accountChooserActive = !this.accountChooserActive;
     }
 
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
@@ -742,7 +744,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
             db.addAccount(account.url, account.userId, account.name);
             selectAccount(account.name);
-            headerView.performClick();
+            clickHeader();
             drawerLayout.closeDrawer(GravityCompat.START);
         });
 
