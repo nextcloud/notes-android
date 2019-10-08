@@ -740,7 +740,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
             Log.v("Notes", "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-            db.addAccount(account.url, account.userId, account.name, account.token);
+            db.addAccount(account.url, account.userId, account.name);
             selectAccount(account.name);
             headerView.performClick();
             drawerLayout.closeDrawer(GravityCompat.START);

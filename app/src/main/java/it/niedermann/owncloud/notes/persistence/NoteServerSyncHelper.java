@@ -34,9 +34,6 @@ import it.niedermann.owncloud.notes.util.NotesClient;
 import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 
-import static it.niedermann.owncloud.notes.util.NotesClientUtil.SETTINGS_KEY_ETAG;
-import static it.niedermann.owncloud.notes.util.NotesClientUtil.SETTINGS_KEY_LAST_MODIFIED;
-
 /**
  * Helps to synchronize the Database to the Server.
  */
@@ -103,7 +100,7 @@ public class NoteServerSyncHelper {
         this.appContext = db.getContext().getApplicationContext();
         try {
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
-            notesClient = new NotesClient(appContext, localAccount.getToken());
+            notesClient = new NotesClient(appContext);
             Log.v("Notes", "NextcloudRequest account: " + localAccount);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
@@ -124,11 +121,11 @@ public class NoteServerSyncHelper {
         try {
             this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
             if (notesClient == null) {
-                if(this.localAccount != null) {
-                    notesClient = new NotesClient(appContext, localAccount.getToken());
+                if (this.localAccount != null) {
+                    notesClient = new NotesClient(appContext);
                 }
             } else {
-                notesClient.updateAccount(localAccount.getToken());
+                notesClient.updateAccount();
             }
             Log.v("Notes", "NextcloudRequest account: " + localAccount);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -341,13 +338,10 @@ public class NoteServerSyncHelper {
                 return LoginStatus.NO_NETWORK;
             }
             Log.d(getClass().getSimpleName(), "pullRemoteChanges() for account " + localAccount.getAccountName());
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
-            String lastETag = preferences.getString(localAccount.getId() + "_" + SETTINGS_KEY_ETAG, null);
-            long lastModified = preferences.getLong(localAccount.getId() + "_" + SETTINGS_KEY_LAST_MODIFIED, 0);
             LoginStatus status;
             try {
                 Map<Long, Long> idMap = dbHelper.getIdMap(localAccount.getId());
-                ServerResponse.NotesResponse response = notesClient.getNotes(lastModified, lastETag);
+                ServerResponse.NotesResponse response = notesClient.getNotes(localAccount.getModified(), localAccount.getEtag());
                 List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
@@ -374,20 +368,10 @@ public class NoteServerSyncHelper {
                 }
 
                 // update ETag and Last-Modified in order to reduce size of next response
-                SharedPreferences.Editor editor = preferences.edit();
-                String etag = response.getETag();
-                if (etag != null && !etag.isEmpty()) {
-                    editor.putString(localAccount.getId() + "_" + SETTINGS_KEY_ETAG, etag);
-                } else {
-                    editor.remove(localAccount.getId() + "_" + SETTINGS_KEY_ETAG);
-                }
-                long modified = response.getLastModified();
-                if (modified != 0) {
-                    editor.putLong(localAccount.getId() + "_" + SETTINGS_KEY_LAST_MODIFIED, modified);
-                } else {
-                    editor.remove(localAccount.getId() + "_" + SETTINGS_KEY_LAST_MODIFIED);
-                }
-                editor.apply();
+                localAccount.setETag(response.getETag());
+                localAccount.setModified(response.getLastModified());
+                dbHelper.updateETag(localAccount.getId(), localAccount.getEtag());
+                dbHelper.updateModified(localAccount.getId(), localAccount.getModified());
                 return LoginStatus.OK;
             } catch (JSONException e) {
                 Log.e(getClass().getSimpleName(), "Exception", e);

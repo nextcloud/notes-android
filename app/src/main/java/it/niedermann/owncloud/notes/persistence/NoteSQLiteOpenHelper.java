@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.persistence;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ShortcutManager;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -51,8 +53,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String key_url = "URL";
     private static final String key_account_name = "ACCOUNT_NAME";
     private static final String key_username = "USERNAME";
-    private static final String key_display_name = "DISPLAY_NAME";
-    private static final String key_token = "TOKEN";
 
     private static final String key_status = "STATUS";
     private static final String key_title = "TITLE";
@@ -98,7 +98,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         createAccountTable(db, table_accounts);
     }
 
-    private void createNotesTable(SQLiteDatabase db, String tableName) {
+    private void createNotesTable(@NonNull SQLiteDatabase db, @NonNull String tableName) {
         db.execSQL("CREATE TABLE " + tableName + " ( " +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_remote_id + " INTEGER, " +
@@ -113,14 +113,14 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         createNotesIndexes(db);
     }
 
-    private void createAccountTable(SQLiteDatabase db, String tableName) {
+    private void createAccountTable(@NonNull SQLiteDatabase db, @NonNull String tableName) {
         db.execSQL("CREATE TABLE " + tableName + " ( " +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_url + " TEXT, " +
                 key_username + " TEXT, " +
                 key_account_name + " TEXT UNIQUE, " +
-                key_display_name + " TEXT, " +
-                key_token + " TEXT)");
+                key_etag + " TEXT, " +
+                key_modified + " INTEGER)");
         createAccountIndexes(db);
     }
 
@@ -161,7 +161,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             createAccountTable(db, table_accounts);
             ContentValues values = new ContentValues();
             values.put(key_account_id, 1);
-            db.update(table_notes, values, key_account_id + " = ?", new String[] {"NULL"});
+            db.update(table_notes, values, key_account_id + " = ?", new String[]{"NULL"});
+
+            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+            editor.remove("notes_last_etag");
+            editor.remove("notes_last_modified");
+            editor.apply();
         }
     }
 
@@ -201,8 +206,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         createIndex(db, table_accounts, key_url);
         createIndex(db, table_accounts, key_username);
         createIndex(db, table_accounts, key_account_name);
-        createIndex(db, table_accounts, key_display_name);
-        createIndex(db, table_accounts, key_token);
+        createIndex(db, table_accounts, key_etag);
+        createIndex(db, table_accounts, key_modified);
     }
 
     private void createIndex(SQLiteDatabase db, String table, String column) {
@@ -453,11 +458,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             Resources res = context.getResources();
             String category = cursor.getString(0).toLowerCase();
             int icon = NavigationAdapter.ICON_FOLDER;
-            if(category.equals(res.getString(R.string.category_music).toLowerCase())) {
+            if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
                 icon = R.drawable.ic_library_music_grey600_24dp;
-            } else if(category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
+            } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
                 icon = R.drawable.ic_local_movies_grey600_24dp;
-            } else if(category.equals(res.getString(R.string.category_work).toLowerCase())) {
+            } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
                 icon = R.drawable.ic_work_grey600_24dp;
             }
             categories.add(new NavigationAdapter.NavigationItem("category:" + cursor.getString(0), cursor.getString(0), cursor.getInt(1), icon));
@@ -659,27 +664,26 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         return DatabaseUtils.queryNumEntries(getReadableDatabase(), table_accounts) > 0;
     }
 
-    public long addAccount(String url, String username, String accountName, String token) {
+    public void addAccount(String url, String username, String accountName) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_url, url);
         values.put(key_username, username);
         values.put(key_account_name, accountName);
-        values.put(key_token, token);
-        return db.insert(table_accounts, null, values);
+        db.insert(table_accounts, null, values);
     }
 
     public LocalAccount getAccount(long i) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name, key_token}, key_id + " = ?", new String[]{i + ""}, null, null, null, null);
+        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, key_id + " = ?", new String[]{i + ""}, null, null, null, null);
         LocalAccount account = new LocalAccount();
         while (cursor.moveToNext()) {
             account.setId(cursor.getLong(0));
             account.setUrl(cursor.getString(1));
             account.setAccountName(cursor.getString(2));
             account.setUserName(cursor.getString(3));
-            account.setDisplayName(cursor.getString(4));
-            account.setToken(cursor.getString(5));
+            account.setETag(cursor.getString(4));
+            account.setModified(cursor.getLong(5));
         }
         cursor.close();
         return account;
@@ -687,7 +691,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public List<LocalAccount> getAccounts() {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name, key_token}, null, null, null, null, null);
+        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, null, null, null, null, null);
         List<LocalAccount> accounts = new ArrayList<>();
         while (cursor.moveToNext()) {
             LocalAccount account = new LocalAccount();
@@ -695,8 +699,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             account.setUrl(cursor.getString(1));
             account.setAccountName(cursor.getString(2));
             account.setUserName(cursor.getString(3));
-            account.setDisplayName(cursor.getString(4));
-            account.setToken(cursor.getString(5));
+            account.setETag(cursor.getString(4));
+            account.setModified(cursor.getLong(5));
             accounts.add(account);
         }
         cursor.close();
@@ -704,19 +708,19 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     public LocalAccount getLocalAccountByAccountName(String accountName) {
-        if(accountName == null) {
+        if (accountName == null) {
             return null;
         }
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_display_name, key_token}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
+        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
         LocalAccount account = new LocalAccount();
         while (cursor.moveToNext()) {
             account.setId(cursor.getLong(0));
             account.setUrl(cursor.getString(1));
             account.setAccountName(cursor.getString(2));
             account.setUserName(cursor.getString(3));
-            account.setDisplayName(cursor.getString(4));
-            account.setToken(cursor.getString(5));
+            account.setETag(cursor.getString(4));
+            account.setModified(cursor.getLong(5));
         }
         cursor.close();
         return account;
@@ -724,13 +728,37 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public void deleteAccount(long accountId) {
         SQLiteDatabase db = this.getWritableDatabase();
-        int deletedAccounts = db.delete(table_accounts, key_id + " = ?", new String[] {accountId + ""});
-        if(deletedAccounts < 1) {
+        int deletedAccounts = db.delete(table_accounts, key_id + " = ?", new String[]{accountId + ""});
+        if (deletedAccounts < 1) {
             throw new IllegalArgumentException("The given accountId does not delete any row");
-        } else if(deletedAccounts > 1) {
-            Log.e(NoteSQLiteOpenHelper.class.getSimpleName(), "AccountId '" + accountId + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
+        } else if (deletedAccounts > 1) {
+            Log.e(getClass().getSimpleName(), "AccountId '" + accountId + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
         }
-        int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{accountId + ""});
-        Log.v(NoteSQLiteOpenHelper.class.getSimpleName(), "Deleted " + deletedNotes + " notes from account " + accountId);
+        final int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{accountId + ""});
+        Log.v(getClass().getSimpleName(), "Deleted " + deletedNotes + " notes from account " + accountId);
+    }
+
+    void updateETag(long accountId, String etag) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_etag, etag);
+        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{accountId + ""});
+        if (updatedRows == 1) {
+            Log.v(getClass().getSimpleName(), "Updated etag to " + etag + " for accountId = " + accountId);
+        } else {
+            Log.e(getClass().getSimpleName(), "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and etag = " + etag);
+        }
+    }
+
+    void updateModified(long accountId, long modified) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_modified, modified);
+        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{accountId + ""});
+        if (updatedRows == 1) {
+            Log.v(getClass().getSimpleName(), "Updated modified to " + modified + " for accountId = " + accountId);
+        } else {
+            Log.e(getClass().getSimpleName(), "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and modified = " + modified);
+        }
     }
 }

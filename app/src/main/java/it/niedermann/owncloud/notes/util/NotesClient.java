@@ -74,11 +74,10 @@ public class NotesClient {
     public static final String JSON_MODIFIED = "modified";
     private static final String application_json = "application/json";
 
-    public NotesClient(Context context, String token) {
+    public NotesClient(Context context) {
         this.context = context;
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
-            ssoAccount.token = token;
             Log.v("Notes", "NextcloudRequest account: " + ssoAccount.name);
             mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
                 @Override
@@ -96,13 +95,12 @@ public class NotesClient {
         }
     }
     
-    public void updateAccount(String token) {
+    public void updateAccount() {
         if(mNextcloudAPI != null) {
             mNextcloudAPI.stop();
         }
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
-            ssoAccount.token = token;
             Log.v("Notes", "NextcloudRequest account: " + ssoAccount.name);
             mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
                 @Override
@@ -186,7 +184,7 @@ public class NotesClient {
             header.put("Content-Type", Collections.singletonList(application_json));
             requestBuilder.setRequestBody(params.toString());
         }
-        if (lastETag != null && METHOD_GET.equals(method)) {
+        if (lastETag != null && !lastETag.isEmpty() && METHOD_GET.equals(method)) {
             header.put("If-None-Match", Collections.singletonList(lastETag));
             requestBuilder.setHeader(header);
         }

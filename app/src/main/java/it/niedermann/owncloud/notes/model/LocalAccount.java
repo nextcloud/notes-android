@@ -6,8 +6,8 @@ public class LocalAccount {
     private String userName;
     private String accountName;
     private String url;
-    private String displayName;
-    private String token;
+    private String etag;
+    private long modified;
 
     public long getId() {
         return id;
@@ -33,12 +33,12 @@ public class LocalAccount {
         this.url = url;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getEtag() {
+        return etag;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setETag(String etag) {
+        this.etag = etag;
     }
 
     public String getAccountName() {
@@ -49,12 +49,12 @@ public class LocalAccount {
         this.accountName = accountName;
     }
 
-    public String getToken() {
-        return token;
+    public long getModified() {
+        return modified;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setModified(long modified) {
+        this.modified = modified;
     }
 
     @Override
@@ -64,8 +64,8 @@ public class LocalAccount {
                 ", userName='" + userName + '\'' +
                 ", accountName='" + accountName + '\'' +
                 ", url='" + url + '\'' +
-                ", displayName='" + displayName + '\'' +
-                ", token='" + token + '\'' +
+                ", etag='" + etag + '\'' +
+                ", modified='" + modified + '\'' +
                 '}';
     }
 }
