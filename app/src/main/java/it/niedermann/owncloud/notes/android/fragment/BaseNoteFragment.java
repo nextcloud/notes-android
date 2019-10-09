@@ -103,7 +103,9 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             long id = getArguments().getLong(PARAM_NOTE_ID);
             if (id > 0) {
                 long accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
+                Log.d(getClass().getSimpleName(), "onCreate: accountId: " + accountId);
                 if(accountId > 0) {
+                    Log.d(getClass().getSimpleName(), "onCreate: switching from " + this.localAccount + " to " + accountId);
                     /* Switch account if account id has been provided */
                     this.localAccount = db.getAccount(accountId);
                     SingleAccountHelper.setCurrentAccount(getActivity().getApplicationContext(), localAccount.getAccountName());

@@ -40,16 +40,12 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
         darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
         category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
+        accountId = sp.getLong(NoteListWidget.WIDGET_ACCOUNT_KEY + appWidgetId, -1);
     }
 
     @Override
     public void onCreate() {
         db = NoteSQLiteOpenHelper.getInstance(context);
-        try {
-            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
+import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 
 public class SingleNoteWidget extends AppWidgetProvider {
     private static boolean darkTheme;
@@ -32,6 +33,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 return;
             }
 
+            templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, sp.getLong(ACCOUNT_ID_KEY + appWidgetId, -1));
             darkTheme = sp.getBoolean(DARK_THEME_KEY + appWidgetId, false);
 
             PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,

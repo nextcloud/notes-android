@@ -99,6 +99,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
                     sp.putString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, category);
                 }
 
+                sp.putLong(NoteListWidget.WIDGET_ACCOUNT_KEY + appWidgetId, localAccount.getId());
                 sp.putBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()));
                 sp.apply();
 

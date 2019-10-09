@@ -12,13 +12,21 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
+import it.niedermann.owncloud.notes.model.LocalAccount;
+
+import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
 public class NoteListWidget extends AppWidgetProvider {
     public static final String WIDGET_MODE_KEY = "NLW_mode";
     public static final String WIDGET_CATEGORY_KEY = "NLW_cat";
+    public static final String WIDGET_ACCOUNT_KEY = "NLW_account";
     public static final String DARK_THEME_KEY = "NLW_darkTheme";
     public static final int NLW_DISPLAY_ALL = 0;
     public static final int NLW_DISPLAY_STARRED = 1;
@@ -43,6 +51,7 @@ public class NoteListWidget extends AppWidgetProvider {
             Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             serviceIntent.putExtra(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, displayMode);
+            // serviceIntent.putExtra(NoteListWidget.WIDGET_ACCOUNT_KEY + appWidgetId, );
             serviceIntent.putExtra(NoteListWidget.DARK_THEME_KEY + appWidgetId, darkTheme);
             serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
@@ -131,6 +140,7 @@ public class NoteListWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             editor.remove(WIDGET_MODE_KEY + appWidgetId);
             editor.remove(WIDGET_CATEGORY_KEY + appWidgetId);
+            editor.remove(WIDGET_ACCOUNT_KEY + appWidgetId);
             editor.remove(DARK_THEME_KEY + appWidgetId);
         }
 

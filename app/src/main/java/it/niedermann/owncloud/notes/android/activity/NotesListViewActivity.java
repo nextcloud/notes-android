@@ -197,19 +197,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setupNavigationMenu();
         setupNotesList();
 
-        try { // to get current account from SingleAccountHelper
-            selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
-            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoCurrentAccountSelectedException e) {
-            if (db.hasAccounts()) { // If nothing is stored in SingleAccountHelper, check db for accounts
-                selectAccount(db.getAccounts().get(0).getAccountName());
-            } else {
-                askForNewAccount(this);
-            }
-        }
-
         //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         //boolean ssoAnnouncmentShown = prefs.getBoolean("sp_sso_announchment_shown", false);
         //if (!ssoAnnouncmentShown) {
@@ -233,6 +220,27 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     @Override
     protected void onResume() {
+        // TODO This needs to skip if there are no detected changes between localAccount id
+        // and current active single sign on account
+        try {
+            selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+        } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
+            handleNotAuthorizedAccount();
+        }
+
+        try { // to get current account from SingleAccountHelper
+            selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoCurrentAccountSelectedException e) {
+            if (db.hasAccounts()) { // If nothing is stored in SingleAccountHelper, check db for accounts
+                selectAccount(db.getAccounts().get(0).getAccountName());
+            } else {
+                askForNewAccount(this);
+            }
+        }
+
         // refresh and sync every time the activity gets
         if (localAccount != null) {
             refreshLists();
@@ -727,6 +735,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             searchView.setQuery(intent.getStringExtra(SearchManager.QUERY), true);
         }
         super.onNewIntent(intent);
+        Log.d(getClass().getSimpleName(), "onNewIntent: ");
     }
 
     /**
