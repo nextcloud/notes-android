@@ -295,9 +295,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
                     Log.d(getClass().getSimpleName(), "Permission granted!");
                     ArrayList<Account> possiblePreviousAccounts = new ArrayList<>();
-                    possiblePreviousAccounts.add(new Account(notAuthorizedAccount, Constants.ACCOUNT_TYPE_PROD));
-                    possiblePreviousAccounts.add(new Account(notAuthorizedAccount, Constants.ACCOUNT_TYPE_DEV));
-                    Intent intent = AccountManager.newChooseAccountIntent(possiblePreviousAccounts.get(0), possiblePreviousAccounts, new String[]{Constants.ACCOUNT_TYPE_PROD, Constants.ACCOUNT_TYPE_DEV},
+                    Intent intent = AccountManager.newChooseAccountIntent(new Account(notAuthorizedAccount, Constants.ACCOUNT_TYPE_PROD), null, new String[]{Constants.ACCOUNT_TYPE_PROD, Constants.ACCOUNT_TYPE_DEV},
                             true, "Choose the same account you were already using.", null, null, null);
                     startActivityForResult(intent, CHOOSE_ACCOUNT_SSO);
                 }
