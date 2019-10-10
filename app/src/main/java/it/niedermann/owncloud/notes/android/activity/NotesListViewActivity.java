@@ -200,9 +200,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         try { // to get current account from SingleAccountHelper
             selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
             Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoCurrentAccountSelectedException e) {
+        } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
             if (db.hasAccounts()) { // If nothing is stored in SingleAccountHelper, check db for accounts
                 selectAccount(db.getAccounts().get(0).getAccountName());
             } else {
@@ -740,14 +738,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-            Log.v(getClass().getSimpleName(), "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-            db.addAccount(account.url, account.userId, account.name);
-            selectAccount(account.name);
-            clickHeader();
-            drawerLayout.closeDrawer(GravityCompat.START);
-        });
-
         // Check which request we're responding to
         if (requestCode == create_note_cmd) {
             // Make sure the request was successful
@@ -771,6 +761,14 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
             recreate();
+        } else {
+            AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
+                Log.v(getClass().getSimpleName(), "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
+                db.addAccount(account.url, account.userId, account.name);
+                selectAccount(account.name);
+                clickHeader();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            });
         }
     }
 

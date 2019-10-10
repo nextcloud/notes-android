@@ -1,9 +1,14 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.Manifest;
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.pm.ShortcutManager;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -18,7 +23,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.core.content.ContextCompat;
 
+import com.nextcloud.android.sso.Constants;
+import com.nextcloud.android.sso.exceptions.AndroidGetAccountsPermissionNotGranted;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -27,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -36,6 +48,8 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
+
+import static com.nextcloud.android.sso.AccountImporter.CHOOSE_ACCOUNT_SSO;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
@@ -72,13 +86,13 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private NoteSQLiteOpenHelper(Context context) {
         super(context, database_name, null, database_version);
-        this.context = context.getApplicationContext();
+        this.context = context;
         serverSyncHelper = NoteServerSyncHelper.getInstance(this);
     }
 
     public static NoteSQLiteOpenHelper getInstance(Context context) {
         if (instance == null)
-            return instance = new NoteSQLiteOpenHelper(context.getApplicationContext());
+            return instance = new NoteSQLiteOpenHelper(context);
         else
             return instance;
     }
@@ -163,10 +177,74 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             values.put(key_account_id, 1);
             db.update(table_notes, values, key_account_id + " = ?", new String[]{"NULL"});
 
-            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
-            editor.remove("notes_last_etag");
-            editor.remove("notes_last_modified");
-            editor.apply();
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+            String username = sharedPreferences.getString("settingsUsername", "");
+            String url = sharedPreferences.getString("settingsUrl", "");
+            if (url != null && url.endsWith("/")) {
+                url = url.substring(0, url.length() - 1);
+                try {
+                    String accountName = username + "@" + new URL(url).getHost();
+
+                    ContentValues migratedAccountValues = new ContentValues();
+                    migratedAccountValues.put(key_url, url);
+                    migratedAccountValues.put(key_username, username);
+                    migratedAccountValues.put(key_account_name, accountName);
+                    db.insert(table_accounts, null, migratedAccountValues);
+
+                    if (context instanceof NotesListViewActivity) {
+                        // Partially copied from AccountImporter
+                        Activity activity = (Activity) context;
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                            // Do something for lollipop and above versions
+                                Log.d(getClass().getSimpleName(), "Permission not granted!");
+                                throw new AndroidGetAccountsPermissionNotGranted();
+                            } else {
+                            if (ContextCompat.checkSelfPermission(context, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+                                Log.d(getClass().getSimpleName(), "Permission granted!");
+                                ArrayList<Account> accs = new ArrayList<>();
+                                accs.add(new Account(accountName, Constants.ACCOUNT_TYPE_PROD));
+                                accs.add(new Account(accountName, Constants.ACCOUNT_TYPE_DEV));
+                                Intent intent = AccountManager.newChooseAccountIntent(accs.get(0), accs, new String[]{Constants.ACCOUNT_TYPE_PROD, Constants.ACCOUNT_TYPE_DEV},
+                                        true, null, null, null, null);
+                                activity.startActivityForResult(intent, CHOOSE_ACCOUNT_SSO);
+                            }
+                        }
+//                    ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.GET_ACCOUNTS},
+//                            REQUEST_GET_ACCOUNTS_PERMISSION);
+//                        Account ac = AccountImporter.getAccountForName(context, accountName);
+//                        ArrayList<Account> li = new ArrayList<>();
+//                        li.add(ac);
+//                        Intent intent = AccountManager.newChooseAccountIntent(ac,
+//                                li,
+//                                new String[]{Constants.ACCOUNT_TYPE_PROD, Constants.ACCOUNT_TYPE_DEV},
+//                                true,
+//                                null,
+//                                null,
+//                                null,
+//                                null);
+//                        ((NotesListViewActivity) context).startActivityForResult(intent, CHOOSE_ACCOUNT_SSO);
+                    }
+
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.remove("notes_last_etag");
+                    editor.remove("notes_last_modified");
+                    editor.remove("settingsUrl");
+                    editor.remove("settingsUsername");
+                    editor.remove("settingsPassword");
+                    editor.apply();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+//                } catch (NextcloudFilesAppNotSupportedException e) {
+//                    e.printStackTrace();
+//                } catch (NextcloudFilesAppAccountPermissionNotGrantedException e) {
+//                    e.printStackTrace();
+                } catch (AndroidGetAccountsPermissionNotGranted androidGetAccountsPermissionNotGranted) {
+                    androidGetAccountsPermissionNotGranted.printStackTrace();
+                }
+            }
         }
     }
 

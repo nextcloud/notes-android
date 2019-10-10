@@ -76,23 +76,7 @@ public class NotesClient {
 
     public NotesClient(Context context) {
         this.context = context;
-        try {
-            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
-            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + ssoAccount.name);
-            mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
-                @Override
-                public void onConnected() {
-                    Log.v(getClass().getSimpleName(), "SSO API connected");
-                }
-
-                @Override
-                public void onError(Exception ex) {
-                    ex.printStackTrace();
-                }
-            });
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
+        updateAccount();
     }
     
     public void updateAccount() {

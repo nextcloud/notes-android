@@ -98,13 +98,7 @@ public class NoteServerSyncHelper {
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.dbHelper = db;
         this.appContext = db.getContext().getApplicationContext();
-        try {
-            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
-            notesClient = new NotesClient(appContext);
-            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
+        updateAccount();
         this.syncOnlyOnWifiKey = appContext.getResources().getString(R.string.pref_key_wifi_only);
 
         // Registers BroadcastReceiver to track network connection changes.
