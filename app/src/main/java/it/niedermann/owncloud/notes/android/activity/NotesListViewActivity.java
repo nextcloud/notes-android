@@ -268,12 +268,14 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void selectAccount(String accountName) {
+        fabCreate.hide();
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
         localAccount = db.getLocalAccountByAccountName(accountName);
         try {
             db.getNoteServerSyncHelper().updateAccount();
             synchronize();
             refreshLists();
+            fabCreate.show();
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             handleNotAuthorizedAccount();
         }
@@ -283,6 +285,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void handleNotAuthorizedAccount() {
+        fabCreate.hide();
         swipeRefreshLayout.setRefreshing(false);
         if (db.hasAccounts()) { // If nothing is stored in SingleAccountHelper, check db for accounts
             String notAuthorizedAccount = db.getAccounts().get(0).getAccountName();
