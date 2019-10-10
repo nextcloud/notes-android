@@ -94,40 +94,40 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
         try {
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext()).name);
+
+            if (savedInstanceState == null) {
+                isNew = true;
+                long id = getArguments().getLong(PARAM_NOTE_ID);
+                if (id > 0) {
+                    long accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
+                    if(accountId > 0) {
+                        /* Switch account if account id has been provided */
+                        this.localAccount = db.getAccount(accountId);
+                        SingleAccountHelper.setCurrentAccount(getActivity().getApplicationContext(), localAccount.getAccountName());
+                        try {
+                            db.getNoteServerSyncHelper().updateAccount();
+                        } catch(NextcloudFilesAppAccountNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    note = originalNote = db.getNote(localAccount.getId(), id);
+                } else {
+                    CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
+                    if (cloudNote == null) {
+                        throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE + " is missing.");
+                    }
+                    note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
+                    originalNote = null;
+                }
+            } else {
+                isNew = false;
+                note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
+                originalNote = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
+            }
+            setHasOptionsMenu(true);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
         }
-
-        if (savedInstanceState == null) {
-            isNew = true;
-            long id = getArguments().getLong(PARAM_NOTE_ID);
-            if (id > 0) {
-                long accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
-                if(accountId > 0) {
-                    /* Switch account if account id has been provided */
-                    this.localAccount = db.getAccount(accountId);
-                    SingleAccountHelper.setCurrentAccount(getActivity().getApplicationContext(), localAccount.getAccountName());
-                    try {
-                        db.getNoteServerSyncHelper().updateAccount();
-                    } catch(NextcloudFilesAppAccountNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                }
-                note = originalNote = db.getNote(localAccount.getId(), id);
-            } else {
-                CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
-                if (cloudNote == null) {
-                    throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE + " is missing.");
-                }
-                note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
-                originalNote = null;
-            }
-        } else {
-            isNew = false;
-            note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
-            originalNote = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
-        }
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -336,12 +336,16 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
      */
     protected void saveNote(@Nullable ICallback callback) {
         Log.d(getClass().getSimpleName(), "saveData()");
-        String newContent = getContent();
-        if (note.getContent().equals(newContent)) {
-            Log.v(getClass().getSimpleName(), "... not saving, since nothing has changed");
+        if(note != null) {
+            String newContent = getContent();
+            if (note.getContent().equals(newContent)) {
+                Log.v(getClass().getSimpleName(), "... not saving, since nothing has changed");
+            } else {
+                note = db.updateNoteAndSync(localAccount.getId(), note, newContent, callback);
+                listener.onNoteUpdated(note);
+            }
         } else {
-            note = db.updateNoteAndSync(localAccount.getId(), note, newContent, callback);
-            listener.onNoteUpdated(note);
+            Log.e(getClass().getSimpleName(), "note is null");
         }
     }
 

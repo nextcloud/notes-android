@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
@@ -211,12 +212,17 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     @Override
     public void onNoteUpdated(DBNote note) {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
+        ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
+        if (note != null) {
             actionBar.setTitle(note.getTitle());
             if (!note.getCategory().isEmpty()) {
                 actionBar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
+        } else {
+            // Maybe account is not authenticated -> note == null
+            Log.e(getClass().getSimpleName(), "note is null, start NotesListViewActivity");
+            startActivity(new Intent(this, NotesListViewActivity.class));
+            finish();
         }
     }
 }
