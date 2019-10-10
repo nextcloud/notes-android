@@ -1,11 +1,7 @@
 package it.niedermann.owncloud.notes.android.activity;
 
-import android.Manifest;
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
@@ -13,7 +9,6 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -35,7 +30,6 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -49,14 +43,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
-import com.nextcloud.android.sso.Constants;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -76,8 +67,8 @@ import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
+import it.niedermann.owncloud.notes.util.SSOUtil;
 
-import static com.nextcloud.android.sso.AccountImporter.CHOOSE_ACCOUNT_SSO;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
@@ -287,22 +278,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private void handleNotAuthorizedAccount() {
         fabCreate.hide();
         swipeRefreshLayout.setRefreshing(false);
-        if (db.hasAccounts()) { // If nothing is stored in SingleAccountHelper, check db for accounts
-            String notAuthorizedAccount = db.getAccounts().get(0).getAccountName();
-
-            // Partially copied from AccountImporter
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-                // FIXME Do something for lollipop and above versions
-                Log.e(getClass().getSimpleName(), "Permission not granted.");
-            } else {
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
-                    Log.d(getClass().getSimpleName(), "Permission granted!");
-                    ArrayList<Account> possiblePreviousAccounts = new ArrayList<>();
-                    Intent intent = AccountManager.newChooseAccountIntent(new Account(notAuthorizedAccount, Constants.ACCOUNT_TYPE_PROD), null, new String[]{Constants.ACCOUNT_TYPE_PROD, Constants.ACCOUNT_TYPE_DEV},
-                            true, "Choose the same account you were already using.", null, null, null);
-                    startActivityForResult(intent, CHOOSE_ACCOUNT_SSO);
-                }
-            }
+        if (db.hasAccounts()) {
+            SSOUtil.authorizeExistingAccount(this, db.getAccounts().get(0).getAccountName());
         } else {
             askForNewAccount(this);
         }
@@ -460,7 +437,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
-            if(localAccount == null) {
+            if (localAccount == null) {
                 return new ArrayList<>();
             }
             List<NavigationAdapter.NavigationItem> categories = db.getCategories(localAccount.getId());
@@ -726,9 +703,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     if (currentVisibility == View.VISIBLE) {
                         fabCreate.hide();
                     } else {
-                        new Handler().postDelayed(() -> {
-                            fabCreate.show();
-                        }, 150);
+                        new Handler().postDelayed(() -> fabCreate.show(), 150);
                     }
 
                     oldVisibility = currentVisibility;
@@ -809,13 +784,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         try {
             String url = localAccount.getUrl();
             if (url != null) {
-                String croppedUrl = url;
-                try {
-                    croppedUrl = new URL(url).getHost();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-                this.account.setText(localAccount.getUserName() + "@" + croppedUrl);
+                this.account.setText(localAccount.getAccountName());
                 Glide
                         .with(this)
                         .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
@@ -825,7 +794,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             } else {
                 Log.w(NotesListViewActivity.class.getSimpleName(), "url is null");
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException e) { // No local account - show generic header
             this.account.setText(R.string.app_name_long);
             Glide
                     .with(this)
@@ -846,7 +815,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 v.setSelected(true);
             }
             int size = adapter.getSelected().size();
-            mActionMode.setTitle(String.valueOf(getResources().getQuantityString(R.plurals.ab_selected, size, size)));
+            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, size, size));
             int checkedItemCount = adapter.getSelected().size();
             boolean hasCheckedItems = checkedItemCount > 0;
 
