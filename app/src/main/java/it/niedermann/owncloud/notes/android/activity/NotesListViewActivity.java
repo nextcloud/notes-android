@@ -1,7 +1,11 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.Manifest;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
@@ -9,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -30,6 +35,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -43,6 +49,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.Constants;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
@@ -70,6 +77,7 @@ import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
 
+import static com.nextcloud.android.sso.AccountImporter.CHOOSE_ACCOUNT_SSO;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
@@ -197,15 +205,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setupNavigationMenu();
         setupNotesList();
 
-        try { // to get current account from SingleAccountHelper
+        try {
             selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
-            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
-            if (db.hasAccounts()) { // If nothing is stored in SingleAccountHelper, check db for accounts
-                selectAccount(db.getAccounts().get(0).getAccountName());
-            } else {
-                askForNewAccount(this);
-            }
+            handleNotAuthorizedAccount();
         }
 
         //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -267,12 +270,41 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private void selectAccount(String accountName) {
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
         localAccount = db.getLocalAccountByAccountName(accountName);
-        db.getNoteServerSyncHelper().updateAccount();
-        synchronize();
-        refreshLists();
+        try {
+            db.getNoteServerSyncHelper().updateAccount();
+            synchronize();
+            refreshLists();
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            handleNotAuthorizedAccount();
+        }
         setupHeader();
         setupNavigationList(ADAPTER_KEY_RECENT);
         updateUsernameInDrawer();
+    }
+
+    private void handleNotAuthorizedAccount() {
+        swipeRefreshLayout.setRefreshing(false);
+        if (db.hasAccounts()) { // If nothing is stored in SingleAccountHelper, check db for accounts
+            String notAuthorizedAccount = db.getAccounts().get(0).getAccountName();
+
+            // Partially copied from AccountImporter
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                // FIXME Do something for lollipop and above versions
+                Log.e(getClass().getSimpleName(), "Permission not granted.");
+            } else {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
+                    Log.d(getClass().getSimpleName(), "Permission granted!");
+                    ArrayList<Account> possiblePreviousAccounts = new ArrayList<>();
+                    possiblePreviousAccounts.add(new Account(notAuthorizedAccount, Constants.ACCOUNT_TYPE_PROD));
+                    possiblePreviousAccounts.add(new Account(notAuthorizedAccount, Constants.ACCOUNT_TYPE_DEV));
+                    Intent intent = AccountManager.newChooseAccountIntent(possiblePreviousAccounts.get(0), possiblePreviousAccounts, new String[]{Constants.ACCOUNT_TYPE_PROD, Constants.ACCOUNT_TYPE_DEV},
+                            true, "Choose the same account you were already using.", null, null, null);
+                    startActivityForResult(intent, CHOOSE_ACCOUNT_SSO);
+                }
+            }
+        } else {
+            askForNewAccount(this);
+        }
     }
 
     private void setupHeader() {
@@ -287,9 +319,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     .apply(RequestOptions.circleCropTransform())
                     .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
             v.setOnClickListener(clickedView -> {
-                selectAccount(account.getAccountName());
                 clickHeader();
                 drawerLayout.closeDrawer(GravityCompat.START);
+                selectAccount(account.getAccountName());
             });
             v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
                 db.deleteAccount(account.getId());
@@ -390,7 +422,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
                 // update views
                 if (closeNavigation) {
-                    drawerLayout.closeDrawers();
+                    drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 refreshLists(true);
             }

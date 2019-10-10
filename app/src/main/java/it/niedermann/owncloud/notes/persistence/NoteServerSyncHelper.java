@@ -98,7 +98,11 @@ public class NoteServerSyncHelper {
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.dbHelper = db;
         this.appContext = db.getContext().getApplicationContext();
-        updateAccount();
+        try {
+            updateAccount();
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            e.printStackTrace();
+        }
         this.syncOnlyOnWifiKey = appContext.getResources().getString(R.string.pref_key_wifi_only);
 
         // Registers BroadcastReceiver to track network connection changes.
@@ -111,7 +115,7 @@ public class NoteServerSyncHelper {
         updateNetworkStatus();
     }
 
-    public void updateAccount() {
+    public void updateAccount() throws NextcloudFilesAppAccountNotFoundException {
         try {
             this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
             if (notesClient == null) {
@@ -122,7 +126,7 @@ public class NoteServerSyncHelper {
                 notesClient.updateAccount();
             }
             Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+        } catch (NoCurrentAccountSelectedException e) {
             e.printStackTrace();
         }
         Log.v(getClass().getSimpleName(), "Reinstanziation NotesClient because of SSO acc changed");
