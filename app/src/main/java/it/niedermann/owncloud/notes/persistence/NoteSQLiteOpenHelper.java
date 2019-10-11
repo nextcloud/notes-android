@@ -583,9 +583,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param id                        local ID of Note
      * @param remoteNote                Note from the server.
      * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
-     * @return The number of the Rows affected.
      */
-    int updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
+    void updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
@@ -620,7 +619,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
         int i = db.update(table_notes, values, whereClause, whereArgs);
         Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "  => " + i + " rows updated");
-        return i;
     }
 
     /**

@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
@@ -63,6 +64,8 @@ public class NotesClient {
         }
     }
 
+    private static final String HEADER_ETAG = "ETag";
+    private static final String HEADER_LAST_MODIFIED = "Last-Modified";
     public static final String METHOD_GET = "GET";
     public static final String METHOD_PUT = "PUT";
     public static final String METHOD_POST = "POST";
@@ -112,17 +115,6 @@ public class NotesClient {
         return new NotesResponse(requestServer(url, METHOD_GET, null, lastETag));
     }
 
-    /**
-     * Fetches a Note by ID from Server
-     *
-     * @param id long - ID of the wanted note
-     * @return Requested Note
-     */
-    @SuppressWarnings("unused")
-    public NoteResponse getNoteById(long id) {
-        return new NoteResponse(requestServer("notes/" + id, METHOD_GET, null, null));
-    }
-
     private NoteResponse putNote(CloudNote note, String path, String method) throws JSONException {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
@@ -131,7 +123,6 @@ public class NotesClient {
         paramObject.accumulate(JSON_CATEGORY, note.getCategory());
         return new NoteResponse(requestServer(path, method, paramObject, null));
     }
-
 
     /**
      * Creates a Note on the Server
@@ -193,12 +184,12 @@ public class NotesClient {
             e.printStackTrace();
         }
         String etag = "";
-        if (nextcloudRequest.getHeader().get("ETag") != null) {
-            etag = nextcloudRequest.getHeader().get("ETag").get(0);
+        if (nextcloudRequest.getHeader().get(HEADER_ETAG) != null) {
+            etag = Objects.requireNonNull(nextcloudRequest.getHeader().get(HEADER_ETAG)).get(0);
         }
         long lastModified = 0;
-        if (nextcloudRequest.getHeader().get("Last-Modified") != null)
-            lastModified = Long.parseLong(nextcloudRequest.getHeader().get("Last-Modified").get(0)) / 1000;
+        if (nextcloudRequest.getHeader().get(HEADER_LAST_MODIFIED) != null)
+            lastModified = Long.parseLong(Objects.requireNonNull(nextcloudRequest.getHeader().get(HEADER_LAST_MODIFIED)).get(0)) / 1000;
         Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
         // return these header fields since they should only be saved after successful processing the result!
         return new ResponseData(result.toString(), etag, lastModified);

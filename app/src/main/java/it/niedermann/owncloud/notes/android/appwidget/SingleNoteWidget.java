@@ -15,7 +15,6 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 
 public class SingleNoteWidget extends AppWidgetProvider {
-    private static boolean darkTheme;
 
     public static final String DARK_THEME_KEY = "SNW_darkTheme";
     public static final String WIDGET_KEY = "single_note_widget";
@@ -32,7 +31,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 return;
             }
 
-            darkTheme = sp.getBoolean(DARK_THEME_KEY + appWidgetId, false);
+            boolean darkTheme = sp.getBoolean(DARK_THEME_KEY + appWidgetId, false);
 
             PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
                                                                             PendingIntent.FLAG_UPDATE_CURRENT);

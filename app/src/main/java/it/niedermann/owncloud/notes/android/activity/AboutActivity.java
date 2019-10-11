@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -37,26 +38,23 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private class TabsPagerAdapter extends FragmentPagerAdapter {
-        private final int PAGE_COUNT = 3;
 
-        public TabsPagerAdapter(FragmentManager fragmentManager) {
+        TabsPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
         @Override
         public int getCount() {
-            return PAGE_COUNT;
+            return 3;
         }
 
         /**
          * return the right fragment for the given position
          */
+        @NonNull
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case 0:
-                    return new AboutFragmentCreditsTab();
-
                 case 1:
                     return new AboutFragmentContributingTab();
 
@@ -64,7 +62,7 @@ public class AboutActivity extends AppCompatActivity {
                     return new AboutFragmentLicenseTab();
 
                 default:
-                    return null;
+                    return new AboutFragmentCreditsTab();
             }
         }
 

@@ -62,6 +62,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
             finish();
         }
 
+        assert extras != null;
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(this).edit();
 

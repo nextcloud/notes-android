@@ -20,7 +20,7 @@ public class SupportUtil {
      * @see Html#fromHtml(String)
      * @see Html#fromHtml(String, int)
      */
-    public static Spanned fromHtml(String source) {
+    private static Spanned fromHtml(String source) {
         if (Build.VERSION.SDK_INT >= 24) {
             return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
         } else {

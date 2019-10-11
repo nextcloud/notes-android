@@ -357,6 +357,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         final String prefValueLarge = getString(R.string.pref_value_font_size_large);
         String fontSize = sp.getString(getString(R.string.pref_key_font_size), prefValueMedium);
 
+        assert fontSize != null;
         if (fontSize.equals(prefValueSmall)) {
             return getResources().getDimension(R.dimen.note_font_size_small);
         } else if (fontSize.equals(prefValueMedium)) {
