@@ -703,7 +703,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_url, url);
         values.put(key_username, username);
         values.put(key_account_name, accountName);
-        db.insert(table_accounts, null, values);
+        db.insertOrThrow(table_accounts, null, values);
     }
 
     public LocalAccount getAccount(long accountId) {

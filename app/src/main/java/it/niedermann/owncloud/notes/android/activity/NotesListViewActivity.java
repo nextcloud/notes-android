@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Canvas;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
@@ -30,6 +31,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -91,6 +93,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private LocalAccount localAccount;
 
+    @BindView(R.id.coordinatorLayout)
+    CoordinatorLayout coordinatorLayout;
     @BindView(R.id.accountNavigation)
     LinearLayout accountNavigation;
     @BindView(R.id.accountChooser)
@@ -772,7 +776,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         } else {
             AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
                 Log.v(getClass().getSimpleName(), "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-                db.addAccount(account.url, account.userId, account.name);
+                try {
+                    db.addAccount(account.url, account.userId, account.name);
+                } catch(SQLiteConstraintException e) {
+                    Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                }
                 selectAccount(account.name);
                 clickHeader();
                 drawerLayout.closeDrawer(GravityCompat.START);
