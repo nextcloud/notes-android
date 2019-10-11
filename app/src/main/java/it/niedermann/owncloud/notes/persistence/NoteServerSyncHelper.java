@@ -39,6 +39,8 @@ import it.niedermann.owncloud.notes.util.ServerResponse;
  */
 public class NoteServerSyncHelper {
 
+    private static final String TAG = NoteServerSyncHelper.class.getSimpleName();
+
     private static NoteServerSyncHelper instance;
 
     /**
@@ -99,10 +101,8 @@ public class NoteServerSyncHelper {
         this.dbHelper = db;
         this.appContext = db.getContext().getApplicationContext();
         try {
-            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
-            notesClient = new NotesClient(appContext);
-            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            updateAccount();
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
         }
         this.syncOnlyOnWifiKey = appContext.getResources().getString(R.string.pref_key_wifi_only);
@@ -117,7 +117,7 @@ public class NoteServerSyncHelper {
         updateNetworkStatus();
     }
 
-    public void updateAccount() {
+    public void updateAccount() throws NextcloudFilesAppAccountNotFoundException {
         try {
             this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
             if (notesClient == null) {
@@ -127,11 +127,11 @@ public class NoteServerSyncHelper {
             } else {
                 notesClient.updateAccount();
             }
-            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            Log.v(TAG, "NextcloudRequest account: " + localAccount);
+        } catch (NoCurrentAccountSelectedException e) {
             e.printStackTrace();
         }
-        Log.v(getClass().getSimpleName(), "Reinstanziation NotesClient because of SSO acc changed");
+        Log.v(TAG, "Reinstanziation NotesClient because of SSO acc changed");
     }
 
     @Override
@@ -195,9 +195,9 @@ public class NoteServerSyncHelper {
      * @param onlyLocalChanges Whether to only push local changes to the server or to also load the whole list of notes from the server.
      */
     public void scheduleSync(boolean onlyLocalChanges) {
-        Log.d(getClass().getSimpleName(), "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (syncActive ? "sync active" : "sync NOT active") + ") ...");
+        Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (syncActive ? "sync active" : "sync NOT active") + ") ...");
         if (isSyncPossible() && (!syncActive || onlyLocalChanges)) {
-            Log.d(getClass().getSimpleName(), "... starting now");
+            Log.d(TAG, "... starting now");
             SyncTask syncTask = new SyncTask(onlyLocalChanges);
             syncTask.addCallbacks(callbacksPush);
             callbacksPush = new ArrayList<>();
@@ -207,13 +207,13 @@ public class NoteServerSyncHelper {
             }
             syncTask.execute();
         } else if (!onlyLocalChanges) {
-            Log.d(getClass().getSimpleName(), "... scheduled");
+            Log.d(TAG, "... scheduled");
             syncScheduled = true;
             for (ICallback callback : callbacksPush) {
                 callback.onScheduled();
             }
         } else {
-            Log.d(getClass().getSimpleName(), "... do nothing");
+            Log.d(TAG, "... do nothing");
             for (ICallback callback : callbacksPush) {
                 callback.onScheduled();
             }
@@ -231,13 +231,13 @@ public class NoteServerSyncHelper {
                             .getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
 
             if (networkConnected) {
-                Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network connection established.");
+                Log.d(TAG, "Network connection established.");
             } else {
-                Log.d(NoteServerSyncHelper.class.getSimpleName(), "Network connected, but not used because only synced on wifi.");
+                Log.d(TAG, "Network connected, but not used because only synced on wifi.");
             }
         } else {
             networkConnected = false;
-            Log.d(NoteServerSyncHelper.class.getSimpleName(), "No network connection.");
+            Log.d(TAG, "No network connection.");
         }
     }
 
@@ -269,7 +269,7 @@ public class NoteServerSyncHelper {
 
         @Override
         protected LoginStatus doInBackground(Void... voids) {
-            Log.i(getClass().getSimpleName(), "STARTING SYNCHRONIZATION");
+            Log.i(TAG, "STARTING SYNCHRONIZATION");
             //dbHelper.debugPrintFullDB();
             LoginStatus status = LoginStatus.OK;
             pushLocalChanges();
@@ -277,7 +277,7 @@ public class NoteServerSyncHelper {
                 status = pullRemoteChanges();
             }
             //dbHelper.debugPrintFullDB();
-            Log.i(getClass().getSimpleName(), "SYNCHRONIZATION FINISHED");
+            Log.i(TAG, "SYNCHRONIZATION FINISHED");
             return status;
         }
 
@@ -288,34 +288,34 @@ public class NoteServerSyncHelper {
             if (localAccount == null) {
                 return;
             }
-            Log.d(getClass().getSimpleName(), "pushLocalChanges()");
+            Log.d(TAG, "pushLocalChanges()");
             List<DBNote> notes = dbHelper.getLocalModifiedNotes(localAccount.getId());
             for (DBNote note : notes) {
-                Log.d(getClass().getSimpleName(), "   Process Local Note: " + note);
+                Log.d(TAG, "   Process Local Note: " + note);
                 try {
                     CloudNote remoteNote = null;
                     switch (note.getStatus()) {
                         case LOCAL_EDITED:
-                            Log.v(getClass().getSimpleName(), "   ...create/edit");
+                            Log.v(TAG, "   ...create/edit");
                             // if note is not new, try to edit it.
                             if (note.getRemoteId() > 0) {
-                                Log.v(getClass().getSimpleName(), "   ...try to edit");
+                                Log.v(TAG, "   ...try to edit");
                                 remoteNote = notesClient.editNote(note).getNote();
                             }
                             // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
                             // Please note, thas dbHelper.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
-                                Log.v(getClass().getSimpleName(), "   ...Note does not exist on server -> (re)create");
+                                Log.v(TAG, "   ...Note does not exist on server -> (re)create");
                                 remoteNote = notesClient.createNote(note).getNote();
                             }
                             dbHelper.updateNote(note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() > 0) {
-                                Log.v(getClass().getSimpleName(), "   ...delete (from server and local)");
+                                Log.v(TAG, "   ...delete (from server and local)");
                                 notesClient.deleteNote(note.getRemoteId());
                             } else {
-                                Log.v(getClass().getSimpleName(), "   ...delete (only local, since it was not synchronized)");
+                                Log.v(TAG, "   ...delete (only local, since it was not synchronized)");
                             }
                             // Please note, thas dbHelper.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             dbHelper.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
@@ -324,7 +324,7 @@ public class NoteServerSyncHelper {
                             throw new IllegalStateException("Unknown State of Note: " + note);
                     }
                 } catch (JSONException e) {
-                    Log.e(getClass().getSimpleName(), "Exception", e);
+                    Log.e(TAG, "Exception", e);
                     exceptions.add(e);
                 }
             }
@@ -337,7 +337,7 @@ public class NoteServerSyncHelper {
             if (localAccount == null) {
                 return LoginStatus.NO_NETWORK;
             }
-            Log.d(getClass().getSimpleName(), "pullRemoteChanges() for account " + localAccount.getAccountName());
+            Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             LoginStatus status;
             try {
                 Map<Long, Long> idMap = dbHelper.getIdMap(localAccount.getId());
@@ -346,23 +346,23 @@ public class NoteServerSyncHelper {
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
                 for (CloudNote remoteNote : remoteNotes) {
-                    Log.v(getClass().getSimpleName(), "   Process Remote Note: " + remoteNote);
+                    Log.v(TAG, "   Process Remote Note: " + remoteNote);
                     remoteIDs.add(remoteNote.getRemoteId());
                     if (remoteNote.getModified() == null) {
-                        Log.v(getClass().getSimpleName(), "   ... unchanged");
+                        Log.v(TAG, "   ... unchanged");
                     } else if (idMap.containsKey(remoteNote.getRemoteId())) {
-                        Log.v(getClass().getSimpleName(), "   ... found -> Update");
+                        Log.v(TAG, "   ... found -> Update");
                         dbHelper.updateNote(idMap.get(remoteNote.getRemoteId()), remoteNote, null);
                     } else {
-                        Log.v(getClass().getSimpleName(), "   ... create");
+                        Log.v(TAG, "   ... create");
                         dbHelper.addNote(localAccount.getId(), remoteNote);
                     }
                 }
-                Log.d(getClass().getSimpleName(), "   Remove remotely deleted Notes (only those without local changes)");
+                Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
                 // remove remotely deleted notes (only those without local changes)
                 for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
                     if (!remoteIDs.contains(entry.getKey())) {
-                        Log.v(getClass().getSimpleName(), "   ... remove " + entry.getValue());
+                        Log.v(TAG, "   ... remove " + entry.getValue());
                         dbHelper.deleteNote(entry.getValue(), DBStatus.VOID);
                     }
                 }
@@ -374,7 +374,7 @@ public class NoteServerSyncHelper {
                 dbHelper.updateModified(localAccount.getId(), localAccount.getModified());
                 return LoginStatus.OK;
             } catch (JSONException e) {
-                Log.e(getClass().getSimpleName(), "Exception", e);
+                Log.e(TAG, "Exception", e);
                 exceptions.add(e);
                 status = LoginStatus.JSON_FAILED;
             }

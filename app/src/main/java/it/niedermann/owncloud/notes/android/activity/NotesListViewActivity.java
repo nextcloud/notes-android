@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Canvas;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
@@ -30,6 +31,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -48,8 +50,6 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -69,11 +69,14 @@ import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 import it.niedermann.owncloud.notes.util.NotesClientUtil;
+import it.niedermann.owncloud.notes.util.SSOUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
 public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener {
+
+    private static final String TAG = NotesListViewActivity.class.getSimpleName();
 
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
@@ -92,6 +95,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private LocalAccount localAccount;
 
+    @BindView(R.id.coordinatorLayout)
+    CoordinatorLayout coordinatorLayout;
     @BindView(R.id.accountNavigation)
     LinearLayout accountNavigation;
     @BindView(R.id.accountChooser)
@@ -152,7 +157,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                                     .setIntent(intent)
                                     .build());
                         }
-                        Log.d(getClass().getSimpleName(), "Update dynamic shortcuts");
+                        Log.d(TAG, "Update dynamic shortcuts");
                         shortcutManager.removeAllDynamicShortcuts();
                         shortcutManager.addDynamicShortcuts(newShortcuts);
                     }
@@ -228,19 +233,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             handleNotAuthorizedAccount();
         }
 
-        try { // to get current account from SingleAccountHelper
-            selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
-            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + localAccount);
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoCurrentAccountSelectedException e) {
-            if (db.hasAccounts()) { // If nothing is stored in SingleAccountHelper, check db for accounts
-                selectAccount(db.getAccounts().get(0).getAccountName());
-            } else {
-                askForNewAccount(this);
-            }
-        }
-
         // refresh and sync every time the activity gets
         if (localAccount != null) {
             refreshLists();
@@ -275,14 +267,30 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void selectAccount(String accountName) {
+        fabCreate.hide();
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
         localAccount = db.getLocalAccountByAccountName(accountName);
-        db.getNoteServerSyncHelper().updateAccount();
-        synchronize();
-        refreshLists();
+        try {
+            db.getNoteServerSyncHelper().updateAccount();
+            synchronize();
+            refreshLists();
+            fabCreate.show();
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            handleNotAuthorizedAccount();
+        }
         setupHeader();
         setupNavigationList(ADAPTER_KEY_RECENT);
         updateUsernameInDrawer();
+    }
+
+    private void handleNotAuthorizedAccount() {
+        fabCreate.hide();
+        swipeRefreshLayout.setRefreshing(false);
+        if (db.hasAccounts()) {
+            SSOUtil.authorizeExistingAccount(this, db.getAccounts().get(0).getAccountName());
+        } else {
+            askForNewAccount(this);
+        }
     }
 
     private void setupHeader() {
@@ -297,9 +305,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     .apply(RequestOptions.circleCropTransform())
                     .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
             v.setOnClickListener(clickedView -> {
-                selectAccount(account.getAccountName());
                 clickHeader();
                 drawerLayout.closeDrawer(GravityCompat.START);
+                selectAccount(account.getAccountName());
             });
             v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
                 db.deleteAccount(account.getId());
@@ -400,7 +408,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
                 // update views
                 if (closeNavigation) {
-                    drawerLayout.closeDrawers();
+                    drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 refreshLists(true);
             }
@@ -437,7 +445,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
-            if(localAccount == null) {
+            if (localAccount == null) {
                 return new ArrayList<>();
             }
             List<NavigationAdapter.NavigationItem> categories = db.getCategories(localAccount.getId());
@@ -591,7 +599,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         db.deleteNoteAndSync((dbNote).getId());
                         adapter.remove(dbNote);
                         refreshLists();
-                        Log.v(getClass().getSimpleName(), "Item deleted through swipe ----------------------------------------------");
+                        Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
                                 .setAction(R.string.action_undo, (View v) -> {
                                     db.addNoteAndSync(dbNote.getAccountId(), dbNote);
@@ -703,9 +711,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     if (currentVisibility == View.VISIBLE) {
                         fabCreate.hide();
                     } else {
-                        new Handler().postDelayed(() -> {
-                            fabCreate.show();
-                        }, 150);
+                        new Handler().postDelayed(() -> fabCreate.show(), 150);
                     }
 
                     oldVisibility = currentVisibility;
@@ -735,7 +741,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             searchView.setQuery(intent.getStringExtra(SearchManager.QUERY), true);
         }
         super.onNewIntent(intent);
-        Log.d(getClass().getSimpleName(), "onNewIntent: ");
     }
 
     /**
@@ -749,14 +754,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-            Log.v(getClass().getSimpleName(), "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-            db.addAccount(account.url, account.userId, account.name);
-            selectAccount(account.name);
-            clickHeader();
-            drawerLayout.closeDrawer(GravityCompat.START);
-        });
-
         // Check which request we're responding to
         if (requestCode == create_note_cmd) {
             // Make sure the request was successful
@@ -769,10 +766,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     if (createdNote != null) {
                         adapter.add(createdNote);
                     } else {
-                        Log.w(NotesListViewActivity.class.getSimpleName(), "createdNote is null");
+                        Log.w(TAG, "createdNote is null");
                     }
                 } else {
-                    Log.w(NotesListViewActivity.class.getSimpleName(), "bundle is null");
+                    Log.w(TAG, "bundle is null");
                 }
             }
             listView.scrollToPosition(0);
@@ -780,6 +777,20 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
             recreate();
+        } else {
+            AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
+                Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
+                try {
+                    db.addAccount(account.url, account.userId, account.name);
+                } catch(SQLiteConstraintException e) {
+                    if(db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
+                        Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                    }
+                }
+                selectAccount(account.name);
+                clickHeader();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            });
         }
     }
 
@@ -787,13 +798,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         try {
             String url = localAccount.getUrl();
             if (url != null) {
-                String croppedUrl = url;
-                try {
-                    croppedUrl = new URL(url).getHost();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-                this.account.setText(localAccount.getUserName() + "@" + croppedUrl);
+                this.account.setText(localAccount.getAccountName());
                 Glide
                         .with(this)
                         .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
@@ -801,16 +806,16 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         .apply(RequestOptions.circleCropTransform())
                         .into(this.currentAccountImage);
             } else {
-                Log.w(NotesListViewActivity.class.getSimpleName(), "url is null");
+                Log.w(TAG, "url is null");
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException e) { // No local account - show generic header
             this.account.setText(R.string.app_name_long);
             Glide
                     .with(this)
                     .load(R.mipmap.ic_launcher)
                     .apply(RequestOptions.circleCropTransform())
                     .into(this.currentAccountImage);
-            Log.w(getClass().getSimpleName(), "Tried to update username in drawer, but localAccount was null");
+            Log.w(TAG, "Tried to update username in drawer, but localAccount was null");
         }
     }
 
@@ -824,7 +829,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 v.setSelected(true);
             }
             int size = adapter.getSelected().size();
-            mActionMode.setTitle(String.valueOf(getResources().getQuantityString(R.plurals.ab_selected, size, size)));
+            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, size, size));
             int checkedItemCount = adapter.getSelected().size();
             boolean hasCheckedItems = checkedItemCount > 0;
 

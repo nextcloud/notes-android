@@ -6,26 +6,16 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 /**
  * Some helper functionality in alike the Android support library.
  * Currently, it offers methods for working with HTML string resources.
  */
 public class SupportUtil {
 
-    /**
-     * Creates a {@link Spanned} from a HTML string on all SDK versions.
-     *
-     * @param source Source string with HTML markup
-     * @return Spannable for using in a {@link TextView}
-     * @see Html#fromHtml(String)
-     * @see Html#fromHtml(String, int)
-     */
-    public static Spanned fromHtml(String source) {
-        if (Build.VERSION.SDK_INT >= 24) {
-            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            return Html.fromHtml(source);
-        }
+    private SupportUtil() {
+
     }
 
     /**
@@ -35,8 +25,24 @@ public class SupportUtil {
      * @param stringId   The string resource containing HTML tags (escaped by <code>&lt;</code>)
      * @param formatArgs Arguments for the string resource.
      */
-    public static void setHtml(TextView view, int stringId, Object... formatArgs) {
+    public static void setHtml(@NonNull TextView view, int stringId, Object... formatArgs) {
         view.setText(SupportUtil.fromHtml(view.getResources().getString(stringId, formatArgs)));
         view.setMovementMethod(LinkMovementMethod.getInstance());
+    }
+
+    /**
+     * Creates a {@link Spanned} from a HTML string on all SDK versions.
+     *
+     * @param source Source string with HTML markup
+     * @return Spannable for using in a {@link TextView}
+     * @see Html#fromHtml(String)
+     * @see Html#fromHtml(String, int)
+     */
+    private static Spanned fromHtml(String source) {
+        if (Build.VERSION.SDK_INT >= 24) {
+            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(source);
+        }
     }
 }

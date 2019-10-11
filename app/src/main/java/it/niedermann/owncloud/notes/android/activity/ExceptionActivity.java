@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
     public static final String KEY_THROWABLE = "T";
 
+    @SuppressLint("SetTextI18n") // only used for logging
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_exception);

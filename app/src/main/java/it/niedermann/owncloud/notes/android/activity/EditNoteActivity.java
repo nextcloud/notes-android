@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
@@ -25,6 +26,8 @@ import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener {
+
+    private static final String TAG = EditNoteActivity.class.getSimpleName();
 
     public static final String ACTION_SHORTCUT = "it.niedermann.owncloud.notes.shortcut";
     private static final String INTENT_GOOGLE_ASSISTANT = "com.google.android.gm.action.AUTO_SEND";
@@ -54,7 +57,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(getClass().getSimpleName(), "onNewIntent: " + intent.getLongExtra(PARAM_NOTE_ID, 0));
+        Log.d(TAG, "onNewIntent: " + intent.getLongExtra(PARAM_NOTE_ID, 0));
         setIntent(intent);
         if (fragment != null) {
             getFragmentManager().beginTransaction().detach(fragment).commit();
@@ -211,12 +214,17 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     @Override
     public void onNoteUpdated(DBNote note) {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
+        ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
+        if (note != null) {
             actionBar.setTitle(note.getTitle());
             if (!note.getCategory().isEmpty()) {
                 actionBar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
+        } else {
+            // Maybe account is not authenticated -> note == null
+            Log.e(TAG, "note is null, start NotesListViewActivity");
+            startActivity(new Intent(this, NotesListViewActivity.class));
+            finish();
         }
     }
 }

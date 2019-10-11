@@ -25,6 +25,8 @@ import com.yydcdut.markdown.syntax.edit.EditFactory;
 import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -114,9 +116,9 @@ public class NoteEditFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(getView() != null) {
-            ButterKnife.bind(this, getView());
+        ButterKnife.bind(this, Objects.requireNonNull(getView()));
 
+        if(note != null) {
             setActiveTextView(editContent);
 
             if (note.getContent().isEmpty()) {
@@ -161,8 +163,6 @@ public class NoteEditFragment extends BaseNoteFragment {
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
                 editContent.setTypeface(Typeface.MONOSPACE);
             }
-        } else {
-            Log.e(NoteEditFragment.class.getSimpleName(), "getView() is null");
         }
     }
 

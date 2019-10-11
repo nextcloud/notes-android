@@ -12,7 +12,6 @@ public class NotesClientUtil {
 
     public enum LoginStatus {
         OK(0),
-        CONNECTION_FAILED(R.string.error_io),
         NO_NETWORK(R.string.error_no_network),
         JSON_FAILED(R.string.error_json);
 

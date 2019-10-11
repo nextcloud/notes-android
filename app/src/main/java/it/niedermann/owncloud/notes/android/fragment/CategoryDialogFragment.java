@@ -32,6 +32,8 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
  */
 public class CategoryDialogFragment extends DialogFragment {
 
+    private static final String TAG = CategoryDialogFragment.class.getSimpleName();
+
     /**
      * Interface that must be implemented by the calling Activity.
      */
@@ -91,7 +93,7 @@ public class CategoryDialogFragment extends DialogFragment {
         if (getDialog().getWindow() != null) {
             getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         } else {
-            Log.w(CategoryDialogFragment.class.getSimpleName(), "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
+            Log.w(TAG, "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
         }
     }
 

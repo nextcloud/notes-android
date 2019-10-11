@@ -26,16 +26,16 @@ import android.text.style.CharacterStyle;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 
+import androidx.annotation.ColorInt;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import androidx.annotation.ColorInt;
 
 public class DisplayUtils {
 
     public static Spannable searchAndColor(String text, Spannable spannable, String searchText, @ColorInt int color) {
 
-        Object spansToRemove[] = spannable.getSpans(0, text.length(), Object.class);
+        Object[] spansToRemove = spannable.getSpans(0, text.length(), Object.class);
         for(Object span: spansToRemove){
             if(span instanceof CharacterStyle)
                 spannable.removeSpan(span);
