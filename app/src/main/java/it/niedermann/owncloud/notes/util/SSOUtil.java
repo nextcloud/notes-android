@@ -54,7 +54,7 @@ public class SSOUtil {
      * @param accountName account that should be preselected
      */
     public static void authorizeExistingAccount(@NonNull Activity activity, @NonNull String accountName) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
                 Log.w(TAG, "Permission not granted.");
                 // Well... do you want to use this SSO account or not?
