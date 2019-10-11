@@ -96,8 +96,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        createNotesTable(db, table_notes);
         createAccountTable(db, table_accounts);
+        createNotesTable(db, table_notes);
     }
 
     private void createNotesTable(@NonNull SQLiteDatabase db, @NonNull String tableName) {
@@ -111,7 +111,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 key_content + " TEXT, " +
                 key_favorite + " INTEGER DEFAULT 0, " +
                 key_category + " TEXT NOT NULL DEFAULT '', " +
-                key_etag + " TEXT)");
+                key_etag + " TEXT," +
+                "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
         createNotesIndexes(db);
     }
 
@@ -158,13 +159,14 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             db.execSQL(String.format("ALTER TABLE %s RENAME TO %s", table_temp, table_notes));
         }
         if (oldVersion < 9) {
+            // Create accounts table
+            createAccountTable(db, table_accounts);
+
+            // Add accountId to notes table
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_account_id + " INTEGER NOT NULL DEFAULT 0");
             createIndex(db, table_notes, key_account_id);
-            createAccountTable(db, table_accounts);
-            ContentValues values = new ContentValues();
-            values.put(key_account_id, 1);
-            db.update(table_notes, values, key_account_id + " = ?", new String[]{"NULL"});
 
+            // Migrate existing account from SharedPreferences
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             String username = sharedPreferences.getString("settingsUsername", "");
             String url = sharedPreferences.getString("settingsUrl", "");
@@ -179,6 +181,21 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                     migratedAccountValues.put(key_account_name, accountName);
                     db.insert(table_accounts, null, migratedAccountValues);
 
+                    // After successful insertion of migrated account, set accountId to 1 in each note
+                    ContentValues values = new ContentValues();
+                    values.put(key_account_id, 1);
+                    db.update(table_notes, values, key_account_id + " = ?", new String[]{"NULL"});
+
+                    // Add FOREIGN_KEY constraint
+                    final String table_temp = "NOTES_TEMP";
+                    db.execSQL(String.format("ALTER TABLE %s RENAME TO %s", table_notes, table_temp));
+                    createNotesTable(db, table_notes);
+
+                    db.execSQL(String.format("INSERT INTO %s(%s,%s, %s,%s,%s,%s,%s,%s,%s,%s) ", table_notes, key_id, key_account_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag)
+                            + String.format("SELECT %s,%s,%s, %s,%s,strftime('%%s',%s),%s,%s,%s,%s FROM %s", key_id, key_account_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_temp));
+                    db.execSQL(String.format("DROP TABLE %s;", table_temp));
+
+                    // Clean up no longer needed SharedPreferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.remove("notes_last_etag");
                     editor.remove("notes_last_modified");
@@ -250,20 +267,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     /**
      * Creates a new Note in the Database and adds a Synchronization Flag.
      *
-     * @param content String
-     */
-    @SuppressWarnings("UnusedReturnValue")
-    public long addNoteAndSync(String content, String category, boolean favorite, long accountId) {
-        CloudNote note = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, getContext()), content, favorite, category, null);
-        return addNoteAndSync(accountId, note);
-    }
-
-    /**
-     * Creates a new Note in the Database and adds a Synchronization Flag.
-     *
      * @param note Note
      */
-    @SuppressWarnings("UnusedReturnValue")
     public long addNoteAndSync(long accountId, CloudNote note) {
         DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId);
         long id = addNote(accountId, dbNote);
