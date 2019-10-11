@@ -779,7 +779,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 try {
                     db.addAccount(account.url, account.userId, account.name);
                 } catch(SQLiteConstraintException e) {
-                    Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                    if(db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
+                        Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                    }
                 }
                 selectAccount(account.name);
                 clickHeader();
