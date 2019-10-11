@@ -46,6 +46,8 @@ import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACT
 
 public abstract class BaseNoteFragment extends Fragment implements CategoryDialogFragment.CategoryDialogListener {
 
+    private static final String TAG = BaseNoteFragment.class.getSimpleName();
+
     public interface NoteFragmentListener {
         void close();
 
@@ -335,17 +337,17 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
      * @param callback Observer which is called after save/synchronization
      */
     protected void saveNote(@Nullable ICallback callback) {
-        Log.d(getClass().getSimpleName(), "saveData()");
+        Log.d(TAG, "saveData()");
         if(note != null) {
             String newContent = getContent();
             if (note.getContent().equals(newContent)) {
-                Log.v(getClass().getSimpleName(), "... not saving, since nothing has changed");
+                Log.v(TAG, "... not saving, since nothing has changed");
             } else {
                 note = db.updateNoteAndSync(localAccount.getId(), note, newContent, callback);
                 listener.onNoteUpdated(note);
             }
         } else {
-            Log.e(getClass().getSimpleName(), "note is null");
+            Log.e(TAG, "note is null");
         }
     }
 

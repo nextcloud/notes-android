@@ -31,6 +31,8 @@ import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
 @WorkerThread
 public class NotesClient {
 
+    private static final String TAG = NotesClient.class.getSimpleName();
+
     private final Context context;
     private NextcloudAPI mNextcloudAPI;
 
@@ -85,11 +87,11 @@ public class NotesClient {
         }
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
-            Log.v(getClass().getSimpleName(), "NextcloudRequest account: " + ssoAccount.name);
+            Log.v(TAG, "NextcloudRequest account: " + ssoAccount.name);
             mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
                 @Override
                 public void onConnected() {
-                    Log.v(getClass().getSimpleName(), "SSO API connected");
+                    Log.v(TAG, "SSO API connected");
                 }
 
                 @Override
@@ -178,9 +180,9 @@ public class NotesClient {
         StringBuilder result = new StringBuilder();
 
         try {
-            Log.v(getClass().getSimpleName(), "NextcloudRequest: " + nextcloudRequest.toString());
+            Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
             InputStream inputStream = mNextcloudAPI.performNetworkRequest(nextcloudRequest);
-            Log.v(getClass().getSimpleName(), "NextcloudRequest: " + nextcloudRequest.toString());
+            Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
             BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while ((line = rd.readLine()) != null) {
@@ -197,7 +199,7 @@ public class NotesClient {
         long lastModified = 0;
         if (nextcloudRequest.getHeader().get("Last-Modified") != null)
             lastModified = Long.parseLong(nextcloudRequest.getHeader().get("Last-Modified").get(0)) / 1000;
-        Log.d(getClass().getSimpleName(), "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
+        Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
         // return these header fields since they should only be saved after successful processing the result!
         return new ResponseData(result.toString(), etag, lastModified);
     }

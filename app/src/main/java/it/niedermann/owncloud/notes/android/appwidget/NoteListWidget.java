@@ -17,6 +17,7 @@ import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 
 public class NoteListWidget extends AppWidgetProvider {
+    private static final String TAG = NoteListWidget.class.getSimpleName();
     public static final String WIDGET_MODE_KEY = "NLW_mode";
     public static final String WIDGET_CATEGORY_KEY = "NLW_cat";
     public static final String DARK_THEME_KEY = "NLW_darkTheme";
@@ -111,14 +112,14 @@ public class NoteListWidget extends AppWidgetProvider {
                     if (intent.getExtras() != null) {
                         updateAppWidget(context, awm, new int[]{intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)});
                     } else {
-                        Log.w(NoteListWidget.class.getSimpleName(), "intent.getExtras() is null");
+                        Log.w(TAG, "intent.getExtras() is null");
                     }
                 } else {
                     updateAppWidget(context, awm, awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class)));
                 }
             }
         } else {
-            Log.w(NoteListWidget.class.getSimpleName(), "intent.getAction() is null");
+            Log.w(TAG, "intent.getAction() is null");
         }
     }
 

@@ -44,6 +44,8 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
  */
 public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
+    private static final String TAG = NoteSQLiteOpenHelper.class.getSimpleName();
+
     private static final int database_version = 9;
     private static final String database_name = "OWNCLOUD_NOTES";
     private static final String table_notes = "NOTES";
@@ -204,12 +206,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                     editor.remove("settingsPassword");
                     editor.apply();
                 } catch (MalformedURLException e) {
-                    Log.e(getClass().getSimpleName(), "Previous URL could not be parsed. Recreating database...");
+                    Log.e(TAG, "Previous URL could not be parsed. Recreating database...");
                     e.printStackTrace();
                     recreateDatabase(db);
                 }
             } else {
-                Log.e(getClass().getSimpleName(), "Previous URL is null. Recreating database...");
+                Log.e(TAG, "Previous URL is null. Recreating database...");
                 recreateDatabase(db);
             }
         }
@@ -339,7 +341,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private List<DBNote> getNotesCustom(long accountId, @NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy, @Nullable String limit) {
         SQLiteDatabase db = getReadableDatabase();
         if (selectionArgs.length > 2) {
-            Log.v(getClass().getSimpleName(), selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
+            Log.v(TAG, selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
         }
         Cursor cursor = db.query(table_notes, columns, selection, selectionArgs, null, null, orderBy, limit);
         List<DBNote> notes = new ArrayList<>();
@@ -365,9 +367,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public void debugPrintFullDB(long accountId) {
         List<DBNote> notes = getNotesCustom(accountId, "", new String[]{}, default_order);
-        Log.v(getClass().getSimpleName(), "Full Database (" + notes.size() + " notes):");
+        Log.v(TAG, "Full Database (" + notes.size() + " notes):");
         for (DBNote note : notes) {
-            Log.v(getClass().getSimpleName(), "     " + note);
+            Log.v(TAG, "     " + note);
         }
     }
 
@@ -617,7 +619,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             whereArgs = new String[]{String.valueOf(id), DBStatus.VOID.getTitle(), Long.toString(remoteNote.getModified().getTimeInMillis() / 1000), remoteNote.getTitle(), remoteNote.isFavorite() ? "1" : "0", remoteNote.getCategory(), remoteNote.getEtag(), remoteNote.getContent()};
         }
         int i = db.update(table_notes, values, whereClause, whereArgs);
-        Log.d(getClass().getSimpleName(), "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "  => " + i + " rows updated");
+        Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "  => " + i + " rows updated");
         return i;
     }
 
@@ -645,7 +647,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
                 String shortcutId = id + "";
                 if (shortcut.getId().equals(shortcutId)) {
-                    Log.v(NoteSQLiteOpenHelper.class.getSimpleName(), "Removing shortcut for " + shortcutId);
+                    Log.v(TAG, "Removing shortcut for " + shortcutId);
                     shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), context.getResources().getString(R.string.note_has_been_deleted));
                 }
             });
@@ -765,10 +767,10 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         if (deletedAccounts < 1) {
             throw new IllegalArgumentException("The given accountId does not delete any row");
         } else if (deletedAccounts > 1) {
-            Log.e(getClass().getSimpleName(), "AccountId '" + accountId + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
+            Log.e(TAG, "AccountId '" + accountId + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
         }
         final int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{accountId + ""});
-        Log.v(getClass().getSimpleName(), "Deleted " + deletedNotes + " notes from account " + accountId);
+        Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + accountId);
     }
 
     void updateETag(long accountId, String etag) {
@@ -777,9 +779,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_etag, etag);
         final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{accountId + ""});
         if (updatedRows == 1) {
-            Log.v(getClass().getSimpleName(), "Updated etag to " + etag + " for accountId = " + accountId);
+            Log.v(TAG, "Updated etag to " + etag + " for accountId = " + accountId);
         } else {
-            Log.e(getClass().getSimpleName(), "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and etag = " + etag);
+            Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and etag = " + etag);
         }
     }
 
@@ -789,9 +791,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_modified, modified);
         final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{accountId + ""});
         if (updatedRows == 1) {
-            Log.v(getClass().getSimpleName(), "Updated modified to " + modified + " for accountId = " + accountId);
+            Log.v(TAG, "Updated modified to " + modified + " for accountId = " + accountId);
         } else {
-            Log.e(getClass().getSimpleName(), "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and modified = " + modified);
+            Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and modified = " + modified);
         }
     }
 }

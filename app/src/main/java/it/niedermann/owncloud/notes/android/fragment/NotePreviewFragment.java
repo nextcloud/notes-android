@@ -28,6 +28,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class NotePreviewFragment extends BaseNoteFragment {
+    
+    private static final String TAG = NotePreviewFragment.class.getSimpleName();
 
     @BindView(R.id.single_note_content)
     RxMDTextView noteContent;
@@ -91,7 +93,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.v(getClass().getSimpleName(), "RxMarkdown error", e);
+                        Log.v(TAG, "RxMarkdown error", e);
                     }
 
                     @Override

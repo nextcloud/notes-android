@@ -14,6 +14,9 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.Notes;
 
 public class PreferencesFragment extends PreferenceFragment {
+
+    private static final String TAG = PreferencesFragment.class.getSimpleName();
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,7 @@ public class PreferencesFragment extends PreferenceFragment {
         final SwitchPreference wifiOnlyPref = (SwitchPreference) findPreference(getString(R.string.pref_key_wifi_only));
         wifiOnlyPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
             Boolean syncOnWifiOnly = (Boolean) newValue;
-            Log.v(getClass().getSimpleName(), "syncOnWifiOnly: " + syncOnWifiOnly);
+            Log.v(TAG, "syncOnWifiOnly: " + syncOnWifiOnly);
             return true;
         });
     }

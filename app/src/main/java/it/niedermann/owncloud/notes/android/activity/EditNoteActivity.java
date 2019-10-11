@@ -27,6 +27,8 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener {
 
+    private static final String TAG = EditNoteActivity.class.getSimpleName();
+
     public static final String ACTION_SHORTCUT = "it.niedermann.owncloud.notes.shortcut";
     private static final String INTENT_GOOGLE_ASSISTANT = "com.google.android.gm.action.AUTO_SEND";
     private static final String MIMETYPE_TEXT_PLAIN = "text/plain";
@@ -55,7 +57,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(getClass().getSimpleName(), "onNewIntent: " + intent.getLongExtra(PARAM_NOTE_ID, 0));
+        Log.d(TAG, "onNewIntent: " + intent.getLongExtra(PARAM_NOTE_ID, 0));
         setIntent(intent);
         if (fragment != null) {
             getFragmentManager().beginTransaction().detach(fragment).commit();
@@ -220,7 +222,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
             }
         } else {
             // Maybe account is not authenticated -> note == null
-            Log.e(getClass().getSimpleName(), "note is null, start NotesListViewActivity");
+            Log.e(TAG, "note is null, start NotesListViewActivity");
             startActivity(new Intent(this, NotesListViewActivity.class));
             finish();
         }

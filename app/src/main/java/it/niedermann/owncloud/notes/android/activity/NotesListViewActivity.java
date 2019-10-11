@@ -76,6 +76,8 @@ import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
 public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener {
 
+    private static final String TAG = NotesListViewActivity.class.getSimpleName();
+
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
     public static final String ADAPTER_KEY_STARRED = "starred";
@@ -155,7 +157,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                                     .setIntent(intent)
                                     .build());
                         }
-                        Log.d(getClass().getSimpleName(), "Update dynamic shortcuts");
+                        Log.d(TAG, "Update dynamic shortcuts");
                         shortcutManager.removeAllDynamicShortcuts();
                         shortcutManager.addDynamicShortcuts(newShortcuts);
                     }
@@ -595,7 +597,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         db.deleteNoteAndSync((dbNote).getId());
                         adapter.remove(dbNote);
                         refreshLists();
-                        Log.v(getClass().getSimpleName(), "Item deleted through swipe ----------------------------------------------");
+                        Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
                                 .setAction(R.string.action_undo, (View v) -> {
                                     db.addNoteAndSync(dbNote.getAccountId(), dbNote);
@@ -762,10 +764,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     if (createdNote != null) {
                         adapter.add(createdNote);
                     } else {
-                        Log.w(NotesListViewActivity.class.getSimpleName(), "createdNote is null");
+                        Log.w(TAG, "createdNote is null");
                     }
                 } else {
-                    Log.w(NotesListViewActivity.class.getSimpleName(), "bundle is null");
+                    Log.w(TAG, "bundle is null");
                 }
             }
             listView.scrollToPosition(0);
@@ -775,7 +777,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             recreate();
         } else {
             AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-                Log.v(getClass().getSimpleName(), "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
+                Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
                 try {
                     db.addAccount(account.url, account.userId, account.name);
                 } catch(SQLiteConstraintException e) {
@@ -802,7 +804,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         .apply(RequestOptions.circleCropTransform())
                         .into(this.currentAccountImage);
             } else {
-                Log.w(NotesListViewActivity.class.getSimpleName(), "url is null");
+                Log.w(TAG, "url is null");
             }
         } catch (NullPointerException e) { // No local account - show generic header
             this.account.setText(R.string.app_name_long);
@@ -811,7 +813,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     .load(R.mipmap.ic_launcher)
                     .apply(RequestOptions.circleCropTransform())
                     .into(this.currentAccountImage);
-            Log.w(getClass().getSimpleName(), "Tried to update username in drawer, but localAccount was null");
+            Log.w(TAG, "Tried to update username in drawer, but localAccount was null");
         }
     }
 
