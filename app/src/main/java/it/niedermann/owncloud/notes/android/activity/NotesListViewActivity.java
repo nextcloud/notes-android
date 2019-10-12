@@ -225,11 +225,13 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     @Override
     protected void onResume() {
-        // TODO This needs to skip if there are no detected changes between localAccount id
-        // and current active single sign on account
         try {
-            selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+            String ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name;
+            if(localAccount == null || !localAccount.getAccountName().equals(ssoAccount)) {
+                selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+            }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
+            // FIXME this pops up a dialog to import, but canceling this dialog leads to onResume() being called again
             handleNotAuthorizedAccount();
         }
 
