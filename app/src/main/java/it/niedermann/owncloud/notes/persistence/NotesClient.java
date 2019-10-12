@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.util;
+package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
 import android.util.Log;
@@ -64,12 +64,22 @@ public class NotesClient {
         }
     }
 
-    private static final String HEADER_ETAG = "ETag";
-    private static final String HEADER_LAST_MODIFIED = "Last-Modified";
-    public static final String METHOD_GET = "GET";
-    public static final String METHOD_PUT = "PUT";
-    public static final String METHOD_POST = "POST";
-    public static final String METHOD_DELETE = "DELETE";
+    private static final String API_PATH = "/index.php/apps/notes/api/v0.2/";
+
+    private static final String GET_PARAM_KEY_PRUNE_BEFORE = "pruneBefore";
+
+    private static final String HEADER_KEY_ETAG = "ETag";
+    private static final String HEADER_KEY_LAST_MODIFIED = "Last-Modified";
+    private static final String HEADER_KEY_CONTENT_TYPE = "Content-Type";
+    private static final String HEADER_KEY_IF_NONE_MATCH = "If-None-Match";
+
+    private static final String HEADER_VALUE_APPLICATION_JSON = "application/json";
+
+    private static final String METHOD_GET = "GET";
+    private static final String METHOD_PUT = "PUT";
+    private static final String METHOD_POST = "POST";
+    private static final String METHOD_DELETE = "DELETE";
+
     public static final String JSON_ID = "id";
     public static final String JSON_TITLE = "title";
     public static final String JSON_CONTENT = "content";
@@ -77,7 +87,6 @@ public class NotesClient {
     public static final String JSON_CATEGORY = "category";
     public static final String JSON_ETAG = "etag";
     public static final String JSON_MODIFIED = "modified";
-    private static final String application_json = "application/json";
 
     public NotesClient(Context context) {
         this.context = context;
@@ -110,7 +119,7 @@ public class NotesClient {
     public NotesResponse getNotes(long lastModified, String lastETag) {
         String url = "notes";
         if (lastModified > 0) {
-            url += "?pruneBefore=" + lastModified;
+            url += "?" + GET_PARAM_KEY_PRUNE_BEFORE + "=" + lastModified;
         }
         return new NotesResponse(requestServer(url, METHOD_GET, null, lastETag));
     }
@@ -154,15 +163,15 @@ public class NotesClient {
     private ResponseData requestServer(String target, String method, JSONObject params, String lastETag) {
         NextcloudRequest.Builder requestBuilder = new NextcloudRequest.Builder()
                 .setMethod(method)
-                .setUrl("/index.php/apps/notes/api/v0.2/" + target);
+                .setUrl(API_PATH + target);
 
         Map<String, List<String>> header = new HashMap<>();
         if (params != null) {
-            header.put("Content-Type", Collections.singletonList(application_json));
+            header.put(HEADER_KEY_CONTENT_TYPE, Collections.singletonList(HEADER_VALUE_APPLICATION_JSON));
             requestBuilder.setRequestBody(params.toString());
         }
         if (lastETag != null && !lastETag.isEmpty() && METHOD_GET.equals(method)) {
-            header.put("If-None-Match", Collections.singletonList(lastETag));
+            header.put(HEADER_KEY_IF_NONE_MATCH, Collections.singletonList(lastETag));
             requestBuilder.setHeader(header);
         }
 
@@ -184,12 +193,12 @@ public class NotesClient {
             e.printStackTrace();
         }
         String etag = "";
-        if (nextcloudRequest.getHeader().get(HEADER_ETAG) != null) {
-            etag = Objects.requireNonNull(nextcloudRequest.getHeader().get(HEADER_ETAG)).get(0);
+        if (nextcloudRequest.getHeader().get(HEADER_KEY_ETAG) != null) {
+            etag = Objects.requireNonNull(nextcloudRequest.getHeader().get(HEADER_KEY_ETAG)).get(0);
         }
         long lastModified = 0;
-        if (nextcloudRequest.getHeader().get(HEADER_LAST_MODIFIED) != null)
-            lastModified = Long.parseLong(Objects.requireNonNull(nextcloudRequest.getHeader().get(HEADER_LAST_MODIFIED)).get(0)) / 1000;
+        if (nextcloudRequest.getHeader().get(HEADER_KEY_LAST_MODIFIED) != null)
+            lastModified = Long.parseLong(Objects.requireNonNull(nextcloudRequest.getHeader().get(HEADER_KEY_LAST_MODIFIED)).get(0)) / 1000;
         Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
         // return these header fields since they should only be saved after successful processing the result!
         return new ResponseData(result.toString(), etag, lastModified);

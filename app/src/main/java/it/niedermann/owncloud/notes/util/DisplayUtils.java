@@ -33,6 +33,10 @@ import java.util.regex.Pattern;
 
 public class DisplayUtils {
 
+    private DisplayUtils() {
+
+    }
+
     public static Spannable searchAndColor(String text, Spannable spannable, String searchText, @ColorInt int color) {
 
         Object[] spansToRemove = spannable.getSpans(0, text.length(), Object.class);

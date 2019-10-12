@@ -29,9 +29,8 @@ import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
+import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.util.ICallback;
-import it.niedermann.owncloud.notes.util.NotesClient;
-import it.niedermann.owncloud.notes.util.NotesClientUtil.LoginStatus;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 
 /**

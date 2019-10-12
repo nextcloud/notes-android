@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.model.CloudNote;
+import it.niedermann.owncloud.notes.persistence.NotesClient;
 
 /**
  * Provides entity classes for handling server responses with a single note ({@link NoteResponse}) or a list of notes ({@link NotesResponse}).
