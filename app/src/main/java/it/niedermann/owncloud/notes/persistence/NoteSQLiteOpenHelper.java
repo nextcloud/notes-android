@@ -393,6 +393,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull
     @WorkerThread
     public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
+        validateAccountId(accountId);
         List<String> where = new ArrayList<>();
         List<String> args = new ArrayList<>();
 

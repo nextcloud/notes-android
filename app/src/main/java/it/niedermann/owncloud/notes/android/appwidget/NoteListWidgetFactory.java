@@ -10,10 +10,6 @@ import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
-import com.nextcloud.android.sso.helper.SingleAccountHelper;
-
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
@@ -50,12 +46,16 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onDataSetChanged() {
-        if (displayMode == NoteListWidget.NLW_DISPLAY_ALL) {
-            dbNotes = db.getNotes(accountId);
-        } else if (displayMode == NoteListWidget.NLW_DISPLAY_STARRED) {
-            dbNotes = db.searchNotes(accountId, null, null, true);
-        } else if (displayMode == NoteListWidget.NLW_DISPLAY_CATEGORY) {
-            dbNotes = db.searchNotes(accountId, null, category, null);
+        try {
+            if (displayMode == NoteListWidget.NLW_DISPLAY_ALL) {
+                dbNotes = db.getNotes(accountId);
+            } else if (displayMode == NoteListWidget.NLW_DISPLAY_STARRED) {
+                dbNotes = db.searchNotes(accountId, null, null, true);
+            } else if (displayMode == NoteListWidget.NLW_DISPLAY_CATEGORY) {
+                dbNotes = db.searchNotes(accountId, null, category, null);
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
     }
 

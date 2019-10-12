@@ -93,6 +93,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private final static int server_settings = 2;
     private final static int about = 3;
 
+    /**
+     * Used to detect the onResume() call after the import dialog has been displayed.
+     * https://github.com/stefan-niedermann/nextcloud-notes/pull/599/commits/f40eab402d122f113020200751894fa39c8b9fcc#r334239634
+     */
+    private boolean notAuthorizedAccountHandled = false;
+
     private LocalAccount localAccount;
 
     @BindView(R.id.coordinatorLayout)
@@ -231,8 +237,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
             }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
-            // FIXME this pops up a dialog to import, but canceling this dialog leads to onResume() being called again
-            handleNotAuthorizedAccount();
+            if(!notAuthorizedAccountHandled) {
+                handleNotAuthorizedAccount();
+            }
         }
 
         // refresh and sync every time the activity gets
@@ -293,6 +300,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         } else {
             askForNewAccount(this);
         }
+        notAuthorizedAccountHandled = true;
     }
 
     private void setupHeader() {
