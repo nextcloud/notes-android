@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -199,8 +201,26 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                             + String.format("SELECT %s,%s,%s, %s,%s,strftime('%%s',%s),%s,%s,%s,%s FROM %s", key_id, key_account_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_temp));
                     db.execSQL(String.format("DROP TABLE %s;", table_temp));
 
-                    // Clean up no longer needed SharedPreferences
+                    AppWidgetManager awm = AppWidgetManager.getInstance(context);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    // Add accountId '1' to any existing (and configured) appwidgets
+                    int[] appWidgetIdsNLW = awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class));
+                    int[] appWidgetIdsSNW = awm.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class));
+
+                    for (int appWidgetId : appWidgetIdsNLW) {
+                        if (sharedPreferences.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1) >=0) {
+                            editor.putLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, 1);
+                        }
+                    }
+
+                    for (int appWidgetId : appWidgetIdsSNW) {
+                        if (sharedPreferences.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1) >= 0) {
+                            editor.putLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, 1);
+                        }
+                    }
+
+                    // Clean up no longer needed SharedPreferences
                     editor.remove("notes_last_etag");
                     editor.remove("notes_last_modified");
                     editor.remove("settingsUrl");

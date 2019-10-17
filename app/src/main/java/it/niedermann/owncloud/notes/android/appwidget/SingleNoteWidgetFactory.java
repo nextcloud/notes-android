@@ -49,11 +49,6 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onCreate() {
         db = NoteSQLiteOpenHelper.getInstance(context);
-//        try {
-//            accountId = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name).getId();
-//        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-//            e.printStackTrace();
-//        }
     }
 
 
