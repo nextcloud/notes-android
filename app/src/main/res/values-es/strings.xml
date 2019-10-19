@@ -40,7 +40,10 @@
     <string name="listview_updated_today">Hoy</string>
     <string name="listview_updated_yesterday">Ayer</string>
     <string name="listview_updated_this_week">Esta semana</string>
+    <string name="listview_updated_last_week">La semana pasada</string>
     <string name="listview_updated_this_month">Este mes</string>
+    <string name="listview_updated_last_month">El mes pasado</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Cuenta</string>
     <string name="settings_url">Dirección de servidor</string>
@@ -136,6 +139,13 @@
     <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <string name="pin_to_homescreen">Acoplar a la pantalla de inicio</string>
     <string name="note_has_been_deleted">Esta nota ha sido borrada</string>
+    <string name="fallback_weblogin_text">Volver al método de registro antiguo</string>
+    <string name="fallback_weblogin_back">Volver</string>
+    <string name="sso_announcment_title">Autenticación única</string>
+    <string name="sso_announcment_message">La app de Notas comenzará con la siguiente versión mayor a usar la característica de autenticación única de Nextclodu. Esto incrementará la seguridad, fiabilidad y confort para ti. Por favor, asegúrate tener instalada al menos la versión 3.8,0 de la app de Archivos de Nextcloud y selecciona en la primera ejecución la misma cuenta que ya estás usando.</string>
+    <string name="sso_announcment_more_info">Más información</string>
+    <string name="sso_announcment_understood">Entendido</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>

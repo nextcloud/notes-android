@@ -41,7 +41,10 @@
     <string name="listview_updated_today">Vandaag</string>
     <string name="listview_updated_yesterday">Gisteren</string>
     <string name="listview_updated_this_week">Deze week</string>
+    <string name="listview_updated_last_week">Vorige week</string>
     <string name="listview_updated_this_month">Deze maand</string>
+    <string name="listview_updated_last_month">Vorige maand</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Account</string>
     <string name="settings_url">Serveradres</string>
@@ -139,6 +142,10 @@
     <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
     <string name="fallback_weblogin_text">Terug naar vorige inlogmethode</string>
     <string name="fallback_weblogin_back">Terug</string>
+    <string name="sso_announcment_title">Single-Sign-On</string>
+    <string name="sso_announcment_message">De Notes app zal de Single-Sign-On feature van Nextcloud gebruiken in de volgende \'major\' versie. Dit verbetert de beveiliging, betrouwbaarheid en het comfort voor u. U heeft versie 3.8.0 of hoger nodig van de Bestanden app, en selecteer voor het eerste gebruik dezelfde account die u nu gebruikt.</string>
+    <string name="sso_announcment_more_info">Meer informatie</string>
+    <string name="sso_announcment_understood">Begrepen</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

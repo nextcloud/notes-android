@@ -40,7 +40,10 @@
     <string name="listview_updated_today">今天</string>
     <string name="listview_updated_yesterday">昨天</string>
     <string name="listview_updated_this_week">本周</string>
+    <string name="listview_updated_last_week">上周</string>
     <string name="listview_updated_this_month">本月</string>
+    <string name="listview_updated_last_month">上月</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">账户设置</string>
     <string name="settings_url">服务器地址</string>
@@ -136,6 +139,13 @@
     <string name="copied_to_clipboard">复制到剪贴板</string>
     <string name="pin_to_homescreen">固定到主屏幕</string>
     <string name="note_has_been_deleted">此便签已被删除</string>
+    <string name="fallback_weblogin_text">回退到旧的登录方式</string>
+    <string name="fallback_weblogin_back">返回</string>
+    <string name="sso_announcment_title">单点登录</string>
+    <string name="sso_announcment_message">笔记应用将在下个大版本中使用Nextcloud很棒的单点登录功能。这将增加安全性、可靠性和易用性。请确认，您已安装版本至少为3.8.0的文件应用并在第一次运行时选择您已在使用的同一个账号。</string>
+    <string name="sso_announcment_more_info">更多信息</string>
+    <string name="sso_announcment_understood">我知道了</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>

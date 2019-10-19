@@ -40,7 +40,10 @@
     <string name="listview_updated_today">Avui</string>
     <string name="listview_updated_yesterday">Ahir</string>
     <string name="listview_updated_this_week">Aquesta setmana</string>
+    <string name="listview_updated_last_week">La setmana passada</string>
     <string name="listview_updated_this_month">Aquest mes</string>
+    <string name="listview_updated_last_month">El mes passat</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Compte</string>
     <string name="settings_url">Adreça del servidor</string>
@@ -138,6 +141,10 @@
     <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
     <string name="fallback_weblogin_text">Tornar a l\'antic mètode d\'inici de sessió</string>
     <string name="fallback_weblogin_back">Enrere</string>
+    <string name="sso_announcment_title">Entrada simple</string>
+    <string name="sso_announcment_message">L\'aplicació Notes començarà amb la propera versió principal amb la gran característica de Single-Sign-On-On-Nextcloud. D’aquesta manera augmentareu la seguretat, la fiabilitat i el confort. Assegureu-vos que heu instal·lat almenys la versió 3.8.0 de l\'aplicació de fitxers i seleccioneu a la primera obertura el mateix compte que ja esteu utilitzant.</string>
+    <string name="sso_announcment_more_info">Més informació</string>
+    <string name="sso_announcment_understood">Entès</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

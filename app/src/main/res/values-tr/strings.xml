@@ -40,7 +40,10 @@
     <string name="listview_updated_today">Bugün</string>
     <string name="listview_updated_yesterday">Dün</string>
     <string name="listview_updated_this_week">Bu hafta</string>
+    <string name="listview_updated_last_week">Geçen hafta</string>
     <string name="listview_updated_this_month">Bu ay</string>
+    <string name="listview_updated_last_month">Geçen ay</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Hesap</string>
     <string name="settings_url">Sunucu adresi</string>
@@ -138,6 +141,10 @@
     <string name="note_has_been_deleted">Bu not silinmiş</string>
     <string name="fallback_weblogin_text">Eski oturum açma yöntemi kullanılsın</string>
     <string name="fallback_weblogin_back">Geri</string>
+    <string name="sso_announcment_title">Tek Oturum Açma</string>
+    <string name="sso_announcment_message">Notes uygulamasının gelecek büyük sürümü harika Nextcloud Tek Oturum Açma özelliğini kullanacak. Böylece kullanım kolaylığı sağlamanın yanında güvenlik ve kararlılık da arttırılacak. Lütfen Files uygulamasının son yayınlanmış 3.8.0 sürümünü kullandığınızdan ve ilk çalıştırmada kullandığınız aynı hesabı seçtiğinizden emin olun.</string>
+    <string name="sso_announcment_more_info">Ayrıntılı bilgi alın</string>
+    <string name="sso_announcment_understood">Anladım</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
