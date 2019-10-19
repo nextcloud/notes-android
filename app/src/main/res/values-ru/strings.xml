@@ -45,14 +45,14 @@
     <string name="settings_url">Адрес сервера</string>
     <string name="settings_url_check_description"> Показывает доступность адреса.</string>
     <string name="settings_url_warn_http">ВНИМАНИЕ: использование «http» небезопасно. Используйте «https».</string>
-    <string name="settings_username">Логин</string>
+    <string name="settings_username">Имя пользователя</string>
     <string name="settings_password">Пароль</string>
     <string name="settings_password_unchanged">Пароль (не изменён)</string>
     <string name="settings_password_check_description">Показывает, верно ли указаны учётные данные.</string>
     <string name="settings_submit">Соединить</string>
-    <string name="settings_submitting">Соединение …</string>
+    <string name="settings_submitting">Соединение&#8230;</string>
     <string name="settings_note_mode">Режим показа заметок</string>
-    <string name="settings_theme_title">Темная тема</string>
+    <string name="settings_theme_title">Тёмное оформление</string>
     <string name="settings_font_title">Моноширинный шрифт</string>
     <string name="settings_font_size">Размер шрифта</string>
     <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>
@@ -80,7 +80,7 @@
     <string name="error_io">Ошибка ввода/вывода</string>
     <string name="error_no_network">нет подключения к сети</string>
     <string name="error_server">Ошибка в URL или адресе сервера</string>
-    <string name="error_url_malformed">Неверный адрес</string>
+    <string name="error_url_malformed">Неверный адрес сервера</string>
     <string name="error_username_password_invalid">Неправильный логин или пароль</string>
 
     <!-- Snackbar Actions -->
@@ -135,6 +135,9 @@
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
     <string name="pin_to_homescreen">Введите PIN-код для домашнего экрана</string>
     <string name="note_has_been_deleted">Запись была удалена</string>
+    <string name="fallback_weblogin_text">Использовать прежний метод авторизации</string>
+    <string name="fallback_weblogin_back">Назад</string>
+    <string name="sso_announcment_more_info">Дополнительные сведения</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>

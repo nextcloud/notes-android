@@ -40,7 +40,10 @@
     <string name="listview_updated_today">Oggi</string>
     <string name="listview_updated_yesterday">Ieri</string>
     <string name="listview_updated_this_week">Questa settimana</string>
+    <string name="listview_updated_last_week">Ultima settimana</string>
     <string name="listview_updated_this_month">Questo mese</string>
+    <string name="listview_updated_last_month">Ultimo mese</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Account</string>
     <string name="settings_url">Indirizzo del server</string>
@@ -138,6 +141,10 @@
     <string name="note_has_been_deleted">Questa nota è stata eliminata</string>
     <string name="fallback_weblogin_text">Torna al vecchio metodo di accesso</string>
     <string name="fallback_weblogin_back">Indietro</string>
+    <string name="sso_announcment_title">Single-Sign-On</string>
+    <string name="sso_announcment_message">L\'applicazione Note inizierà dalla prossima versione principale a utilzzare la funzionalità di Single-Sign-On di Nextcloud. Questo aumenterà la sicurezza, l\'affidabilità e la comodità di utilizzo. Assicurati di aver installato almeno la versione 3.8.0 dell\'applicazione File e seleziona, alla prima esecuzione, lo stesso account che stai già utilizzando.</string>
+    <string name="sso_announcment_more_info">Altre informazioni</string>
+    <string name="sso_announcment_understood">Ricevuto</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

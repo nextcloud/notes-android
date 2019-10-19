@@ -40,7 +40,10 @@
     <string name="listview_updated_today">Hoje</string>
     <string name="listview_updated_yesterday">Ontem</string>
     <string name="listview_updated_this_week">Esta semanna</string>
+    <string name="listview_updated_last_week">Última semana</string>
     <string name="listview_updated_this_month">Este mês</string>
+    <string name="listview_updated_last_month">Último mês</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Conta</string>
     <string name="settings_url">Endereço do servidor</string>
@@ -138,6 +141,10 @@
     <string name="note_has_been_deleted">A anotação foi excluída</string>
     <string name="fallback_weblogin_text">Reverter ao antigo sistema de login</string>
     <string name="fallback_weblogin_back">Voltar</string>
+    <string name="sso_announcment_title">Logon único</string>
+    <string name="sso_announcment_message">O aplicativo Notes começará com a próxima versão principal. Use o recurso Logon único do Nextcloud. Isso aumentará a segurança, confiabilidade e conforto para você. Certifique-se de que instalou pelo menos a versão 3.8.0 dos arquivos do aplicativo e selecione na primeira execução a mesma conta que você já está usando.</string>
+    <string name="sso_announcment_more_info">Mais informações</string>
+    <string name="sso_announcment_understood">Entendido</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

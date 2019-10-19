@@ -40,7 +40,10 @@
     <string name="listview_updated_today">Idag</string>
     <string name="listview_updated_yesterday">Igår</string>
     <string name="listview_updated_this_week">Denna vecka</string>
+    <string name="listview_updated_last_week">Förra veckan</string>
     <string name="listview_updated_this_month">Denna månad</string>
+    <string name="listview_updated_last_month">Förra månaden</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Serveradress</string>
@@ -138,6 +141,10 @@
     <string name="note_has_been_deleted">Denna anteckning har raderats</string>
     <string name="fallback_weblogin_text">Återgå till gammal inloggningsmetod</string>
     <string name="fallback_weblogin_back">Tillbaka</string>
+    <string name="sso_announcment_title">Single-Sign-On</string>
+    <string name="sso_announcment_message">Notes-appen börjar med nästa större version att använda funktionen Single-Sign-On i Nextcloud. Detta kommer att öka säkerheten, tillförlitligheten och komforten för dig. Se till att du har installerat minst version 3.8.0 av fil-appen och välj vid första inloggningen samma konto som du redan använder.</string>
+    <string name="sso_announcment_more_info">Mer information</string>
+    <string name="sso_announcment_understood">Jag förstår</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
