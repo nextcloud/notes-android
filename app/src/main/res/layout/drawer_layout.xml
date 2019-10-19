@@ -21,6 +21,7 @@
         android:fitsSystemWindows="true">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -70,7 +71,7 @@
                         android:shadowDy="0"
                         android:shadowRadius="2"
                         android:text="@string/app_name_long"
-                        android:textColor="@color/fg_contrast"
+                        android:textColor="@android:color/white"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -89,7 +90,7 @@
                         android:shadowDx="0.5"
                         android:shadowDy="0"
                         android:shadowRadius="2"
-                        android:textColor="@color/fg_contrast"
+                        android:textColor="@android:color/white"
                         android:textSize="12sp"
                         tools:text="user@nextcloud.example.com"/>
                 </RelativeLayout>
