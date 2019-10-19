@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">ノート</string>
+    <string name="app_name_long">Nextcloud ノート</string>
     <string name="no_notes">まだノートはありません</string>
     <string name="label_all_notes">すべてのノート</string>
     <string name="label_favorites">お気に入り</string>
@@ -39,7 +40,10 @@
     <string name="listview_updated_today">今日</string>
     <string name="listview_updated_yesterday">昨日</string>
     <string name="listview_updated_this_week">今週</string>
+    <string name="listview_updated_last_week">先週</string>
     <string name="listview_updated_this_month">今月</string>
+    <string name="listview_updated_last_month">先月</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">アカウント</string>
     <string name="settings_url">サーバーアドレス</string>
@@ -135,6 +139,13 @@
     <string name="copied_to_clipboard">クリップボードにコピー</string>
     <string name="pin_to_homescreen">ホームスクリーンにピン留めする</string>
     <string name="note_has_been_deleted">ノートが削除されました</string>
+    <string name="fallback_weblogin_text">古いログイン方法へ戻す</string>
+    <string name="fallback_weblogin_back">戻る</string>
+    <string name="sso_announcment_title">シングルサインオン</string>
+    <string name="sso_announcment_message">Notes アプリは次のメジャーバージョンから Nextcloud の偉大なシングルサインオン機能の使用を開始する予定です。これによりセキュリティ、信頼性、快適さが向上します。バージョン 3.8.0 以上の Nextcloud ファイルアプリがインストールされていることを確認し、初回起動時には現在使用しているアカウントと同じアカウントを選択してください。</string>
+    <string name="sso_announcment_more_info">詳細情報</string>
+    <string name="sso_announcment_understood">理解しました</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>

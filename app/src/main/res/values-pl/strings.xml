@@ -40,7 +40,10 @@
     <string name="listview_updated_today">Dzisiaj</string>
     <string name="listview_updated_yesterday">Wczoraj</string>
     <string name="listview_updated_this_week">W tym tygodniu</string>
+    <string name="listview_updated_last_week">W zeszłym tygodniu</string>
     <string name="listview_updated_this_month">W tym miesiącu</string>
+    <string name="listview_updated_last_month">W zeszłym miesiącu</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Adres serwera</string>
@@ -138,6 +141,10 @@
     <string name="note_has_been_deleted">Ta notatka została usunięta</string>
     <string name="fallback_weblogin_text">Przywróć starą metodę logowania</string>
     <string name="fallback_weblogin_back">Wstecz</string>
+    <string name="sso_announcment_title">Pojedyncze logowanie (SSO)</string>
+    <string name="sso_announcment_message">Aplikacja Notes będzie korzystać z doskonałej funkcji pojedynczego logowania w Nextcloud, która rozpocznie się od kolejnej głównej wersji. Zwiększy to bezpieczeństwo, niezawodność i komfort. Upewnij się, że masz zainstalowaną aplikację do plików co najmniej wersję 3.8.0, a następnie wybierz przy pierwszym uruchomieniu to samo konto, którego już używasz.</string>
+    <string name="sso_announcment_more_info">Więcej informacji</string>
+    <string name="sso_announcment_understood">Zrozumiano</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

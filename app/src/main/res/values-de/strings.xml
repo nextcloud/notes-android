@@ -40,7 +40,10 @@
     <string name="listview_updated_today">Heute</string>
     <string name="listview_updated_yesterday">Gestern</string>
     <string name="listview_updated_this_week">Diese Woche</string>
+    <string name="listview_updated_last_week">Letzte Woche</string>
     <string name="listview_updated_this_month">Diesen Monat</string>
+    <string name="listview_updated_last_month">Letzten Monat</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Konto</string>
     <string name="settings_url">Serveradresse</string>
@@ -138,6 +141,10 @@
     <string name="note_has_been_deleted">Diese Notiz wurde gelöscht</string>
     <string name="fallback_weblogin_text">Zur alten Anmeldemethode zurückkehren</string>
     <string name="fallback_weblogin_back">Zurück</string>
+    <string name="sso_announcment_title">Single-Sign-On</string>
+    <string name="sso_announcment_message">Ab der nächsten Version wie die Notes-App die  großartige Single-Sign-On Funktion von Naxtcloud verwenden. Dies wird die Sicherheit, Zuverlässigkeit und den Komfort für Sie erhöhen. Bitte stellen Sie sicher, das Sie Version 3.8.0 oder neuer der Android-Nextcloud-App installliert haben und wählen Sie beim ersten Start das selbe Konto das Sie bereits nutzen.</string>
+    <string name="sso_announcment_more_info">Weitere Informationen</string>
+    <string name="sso_announcment_understood">Verstanden</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

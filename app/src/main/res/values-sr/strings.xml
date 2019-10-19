@@ -40,7 +40,10 @@
     <string name="listview_updated_today">Данас</string>
     <string name="listview_updated_yesterday">Јуче</string>
     <string name="listview_updated_this_week">Ове седмице</string>
+    <string name="listview_updated_last_week">Прошле недеље</string>
     <string name="listview_updated_this_month">Овог месеца</string>
+    <string name="listview_updated_last_month">Прошлог месеца</string>
+
     <!-- Settings -->
     <string name="settings_server_settings">Налог</string>
     <string name="settings_url">Адреса сервера</string>
@@ -136,6 +139,13 @@
     <string name="copied_to_clipboard">Копирано у оставу</string>
     <string name="pin_to_homescreen">Закачи на почетни екран</string>
     <string name="note_has_been_deleted">Ова белешка је обрисана</string>
+    <string name="fallback_weblogin_text">Врати се на стари начин пријаве</string>
+    <string name="fallback_weblogin_back">Назад</string>
+    <string name="sso_announcment_title">Једнократно пријављивање</string>
+    <string name="sso_announcment_message">Апликација белешки ће од следеће главне верзије почети да користи сјајну могућност Некстклауда - једнократно пријављивање. Ово ће повећати безбедност, поузданост и Ваш комфор. Проверите да имате бар верзију 3.8.0 апликације Фајлова и при првом покретању одаберите исти налог који сада користите.</string>
+    <string name="sso_announcment_more_info">Још информација</string>
+    <string name="sso_announcment_understood">Разумео</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>
