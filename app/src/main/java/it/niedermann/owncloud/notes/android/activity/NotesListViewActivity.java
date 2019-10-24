@@ -69,7 +69,6 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
-import it.niedermann.owncloud.notes.util.SSOUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
@@ -295,11 +294,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private void handleNotAuthorizedAccount() {
         fabCreate.hide();
         swipeRefreshLayout.setRefreshing(false);
-        if (db.hasAccounts()) {
-            SSOUtil.authorizeExistingAccount(this, db.getAccounts().get(0).getAccountName());
-        } else {
-            askForNewAccount(this);
-        }
+        askForNewAccount(this);
         notAuthorizedAccountHandled = true;
     }
 
