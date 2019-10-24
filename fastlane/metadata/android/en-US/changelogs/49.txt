@@ -1,1 +1,1 @@
-- Announcment for Nextcloud Single-Sign-On
+- #606 Wrong account name color in dark mode

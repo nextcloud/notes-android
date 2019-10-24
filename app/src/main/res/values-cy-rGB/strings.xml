@@ -33,7 +33,6 @@
     <string name="listview_updated_yesterday">Ddoe</string>
     <string name="listview_updated_this_week">Wythnos yma</string>
     <string name="listview_updated_this_month">Mis yma</string>
-
     <!-- Settings -->
     <string name="settings_note_mode">Modd arddangos nodiadau</string>
     <string name="settings_theme_title">Thema tywyll</string>

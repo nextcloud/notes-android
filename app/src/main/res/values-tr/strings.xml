@@ -3,39 +3,58 @@
 
     <string name="app_name">Notlar</string>
     <string name="app_name_long">Nextcloud Notlar</string>
+    <string name="no_notes">Henüz bir not yok</string>
     <string name="label_all_notes">Tum notlar</string>
     <string name="label_favorites">Sık Kullanılanlar</string>
     <string name="action_create">Not ekle</string>
     <string name="action_settings">Ayarlar</string>
     <string name="action_trashbin">Silinmiş notlar</string>
     <string name="action_search">Arama</string>
+    <string name="action_create_save">Kaydet</string>
     <string name="simple_cancel">İptal</string>
     <string name="simple_edit">Düzenle</string>
     <string name="action_edit_save">Kaydet</string>
+    <string name="action_edit_saving">Kaydediliyor &#8230;</string>
+    <string name="action_edit_saved">Kaydedildi</string>
     <string name="simple_about">Hakkında</string>
     <string name="simple_bold">Koyu</string>
     <string name="simple_link">Bağlantı</string>
     <string name="simple_italic">Yatık</string>
+    <string name="action_select_note">Not seçin</string>
     <string name="action_note_deleted">Not silindi</string>
     <string name="action_note_restored">Not geri yüklendi</string>
     <string name="action_undo">Geri al</string>
     <string name="action_drawer_open">gezinmeyi aç</string>
     <string name="action_drawer_close">gezinmeyi kapat</string>
+    <string name="action_recent">Son</string>
     <string name="action_uncategorized">Kategorisiz</string>
     <string name="menu_delete">Sil</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Sık Kullanılanlara Ekle</string>
     <string name="menu_preview">Ön izleme</string>
     <string name="menu_share">Paylaş</string>
+    <string name="menu_about">Hakkında</string>
 
     <string name="change_category_title">Bir kategori seçin</string>
 
     <string name="listview_updated_today">Bugün</string>
     <string name="listview_updated_yesterday">Dün</string>
     <string name="listview_updated_this_week">Bu hafta</string>
+    <string name="listview_updated_last_week">Geçen hafta</string>
     <string name="listview_updated_this_month">Bu ay</string>
+    <string name="listview_updated_last_month">Geçen ay</string>
 
     <!-- Settings -->
+    <string name="settings_server_settings">Hesap</string>
+    <string name="settings_url">Sunucu adresi</string>
+    <string name="settings_url_check_description">Adresin pinglenebildiğini gösterir.</string>
+    <string name="settings_url_warn_http">UYARI: \"http\" güvenli değildir. Lütfen \"https\" kullanın.</string>
+    <string name="settings_username">Kullanıcı Adı</string>
+    <string name="settings_password">Parola</string>
+    <string name="settings_password_unchanged">Parola (değiştirilmedi)</string>
+    <string name="settings_password_check_description">Oturum açma bilgilerinin doğru olduğunu gösterir.</string>
+    <string name="settings_submit">Bağlan</string>
+    <string name="settings_submitting">Bağlanılıyor &#8230;</string>
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
     <string name="settings_theme_title">Koyu tema</string>
     <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
@@ -50,16 +69,26 @@
     <string name="settings_cert_reset_toast">Tüm özel sertifikalar temizlendi</string>
 
     <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Notlar - Bağlantı güvenliği</string>
+    <string name="trust_certificate_unknown_certificate_found">Notlar bilinmeyen bir sertifika kullanıyor. Bu sertifikaya güvenmek ister misiniz?</string>
 
     <!-- Network -->
+    <string name="network_connecting">Bağlanılıyor</string>
+    <string name="network_connected">Bağlandı</string>
+    <string name="network_disconnected">Kullanılabilecek bir ağ yok</string>
 
     <!-- Error -->
     <string name="error_sync">Eşitlenemedi: %1$s</string>
+    <string name="error_invalid_login">Oturum açılamadı: %1$s</string>
     <string name="error_json">Notlar uygulaması sunucu üzerinde etkinleştirilmiş mi?</string>
     <string name="error_io">sunucu bağlantısı kesildi</string>
     <string name="error_no_network">ağ bağlantısı yok</string>
+    <string name="error_server">Adres/Sunucu sorunu</string>
+    <string name="error_url_malformed">Sunucu adresi yanlış</string>
+    <string name="error_username_password_invalid">Kullanıcı adı ya da parola yanlış</string>
 
     <!-- Snackbar Actions -->
+    <string name="snackbar_settings">Ayarlar</string>
 
     <!-- About -->
     <string name="about_version_title">Sürüm</string>
@@ -100,6 +129,7 @@
     <string name="shortcut_create_long">Not ekle</string>
 
     <string name="pref_value_theme_light">Açık</string>
+    <string name="pref_value_theme_dark">Koyu</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fi ve mobil veri ile eşitlensin</string>
     <string name="simple_error">Hata</string>
@@ -109,6 +139,12 @@
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
     <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
     <string name="note_has_been_deleted">Bu not silinmiş</string>
+    <string name="fallback_weblogin_text">Eski oturum açma yöntemi kullanılsın</string>
+    <string name="fallback_weblogin_back">Geri</string>
+    <string name="sso_announcment_title">Tek Oturum Açma</string>
+    <string name="sso_announcment_message">Notes uygulamasının gelecek büyük sürümü harika Nextcloud Tek Oturum Açma özelliğini kullanacak. Böylece kullanım kolaylığı sağlamanın yanında güvenlik ve kararlılık da arttırılacak. Lütfen Files uygulamasının son yayınlanmış 3.8.0 sürümünü kullandığınızdan ve ilk çalıştırmada kullandığınız aynı hesabı seçtiğinizden emin olun.</string>
+    <string name="sso_announcment_more_info">Ayrıntılı bilgi alın</string>
+    <string name="sso_announcment_understood">Anladım</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

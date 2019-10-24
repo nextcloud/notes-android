@@ -33,7 +33,6 @@
     <string name="listview_updated_yesterday">אתמול</string>
     <string name="listview_updated_this_week">השבוע</string>
     <string name="listview_updated_this_month">החודש</string>
-
     <!-- Settings -->
     <string name="settings_note_mode">מצב תצוגת פתקים</string>
     <string name="settings_theme_title">ערכת עיצוב כהה</string>
@@ -105,7 +104,6 @@
     <string name="simple_copy">העתק</string>
     <string name="pin_to_homescreen">הוסף למסך הבית</string>
     <string name="note_has_been_deleted">פתק זה נמחק</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>

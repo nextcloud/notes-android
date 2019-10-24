@@ -33,7 +33,9 @@
     <string name="listview_updated_today">Hoxe</string>
     <string name="listview_updated_yesterday">Onte</string>
     <string name="listview_updated_this_week">Esta semana</string>
+    <string name="listview_updated_last_week">A semana pasada</string>
     <string name="listview_updated_this_month">Este mes</string>
+    <string name="listview_updated_last_month">O mes pasado</string>
 
     <!-- Settings -->
     <string name="settings_note_mode">Modo de vista das notas</string>
@@ -109,6 +111,12 @@
     <string name="copied_to_clipboard">Copiado no portapapeis.</string>
     <string name="pin_to_homescreen">Ancorar na pantalla de inicio</string>
     <string name="note_has_been_deleted">Esta nota foi eliminada</string>
+    <string name="fallback_weblogin_text">Volver ao método de acceso antigo</string>
+    <string name="fallback_weblogin_back">Atrás</string>
+    <string name="sso_announcment_title">Inicio de sesión único</string>
+    <string name="sso_announcment_message">A aplicación de Notas comezará coa seguinte versión principal, empregando a magnífica característica de «Inicio de sesión único» do Nextcloud. Isto aumentará a seguridade, a fiabilidade e o confort para vostede. Asegúrese de ter instalado polo menos a versión 3.8.0 da aplicación de ficheiros e seleccione na primeira execución a mesma conta que xa estás a empregar.</string>
+    <string name="sso_announcment_more_info">Máis información</string>
+    <string name="sso_announcment_understood">Entendido</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

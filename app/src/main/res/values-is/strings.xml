@@ -33,7 +33,6 @@
     <string name="listview_updated_yesterday">Í gær</string>
     <string name="listview_updated_this_week">Í þessari viku</string>
     <string name="listview_updated_this_month">Í þessum mánuði</string>
-
     <!-- Settings -->
     <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
     <string name="settings_theme_title">Dökkt þema</string>

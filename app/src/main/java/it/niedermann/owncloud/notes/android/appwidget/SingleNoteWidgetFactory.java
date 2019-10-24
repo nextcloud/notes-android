@@ -10,9 +10,6 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
-import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
@@ -57,6 +54,9 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         long noteID = sp.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1);
 
         if (noteID >= 0) {
+            Log.v(TAG, "Fetch note for account " + SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId);
+            Log.v(TAG, "Fetch note for account " + sp.getLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, -1));
+            Log.v(TAG, "Fetch note with id " + noteID);
             note = db.getNote(sp.getLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, -1), noteID);
 
             if (note == null) {

@@ -32,7 +32,9 @@
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týden</string>
+    <string name="listview_updated_last_week">Minulý týden</string>
     <string name="listview_updated_this_month">Tento měsíc</string>
+    <string name="listview_updated_last_month">Minulý měsíc</string>
 
     <!-- Settings -->
     <string name="settings_note_mode">Režim zobrazení pro poznámky</string>
@@ -108,7 +110,8 @@
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <string name="pin_to_homescreen">Připnout na domovskou obrazovku</string>
     <string name="note_has_been_deleted">Tato poznámka byla smazána</string>
-
+    <string name="sso_announcment_title">Sjednocené přihlašování</string>
+    <string name="sso_announcment_more_info">Více informací</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otevřít v režimu úprav</item>

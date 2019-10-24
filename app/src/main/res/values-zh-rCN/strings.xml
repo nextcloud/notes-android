@@ -3,39 +3,58 @@
 
     <string name="app_name">便签</string>
     <string name="app_name_long">Nextcloud 笔记</string>
+    <string name="no_notes">还没有便签</string>
     <string name="label_all_notes">所有便签</string>
     <string name="label_favorites">收藏</string>
     <string name="action_create">新建便签</string>
     <string name="action_settings">设置</string>
     <string name="action_trashbin">已删除的笔记</string>
     <string name="action_search">搜索</string>
+    <string name="action_create_save">保存</string>
     <string name="simple_cancel">取消</string>
     <string name="simple_edit">编辑</string>
     <string name="action_edit_save">保存</string>
+    <string name="action_edit_saving">正在保存 &#8230;</string>
+    <string name="action_edit_saved">已保存</string>
     <string name="simple_about">关于</string>
     <string name="simple_bold">粗体</string>
     <string name="simple_link">链接</string>
     <string name="simple_italic">斜体</string>
+    <string name="action_select_note">选择便签</string>
     <string name="action_note_deleted">已删除的便签</string>
     <string name="action_note_restored">已恢复便签</string>
     <string name="action_undo">撤销</string>
     <string name="action_drawer_open">打开导航</string>
     <string name="action_drawer_close">关闭导航</string>
+    <string name="action_recent">最近</string>
     <string name="action_uncategorized">未分类</string>
     <string name="menu_delete">删除</string>
     <string name="menu_change_category">类别</string>
     <string name="menu_favorite">收藏</string>
     <string name="menu_preview">预览</string>
     <string name="menu_share">共享</string>
+    <string name="menu_about">关于</string>
 
     <string name="change_category_title">选择一个分类</string>
 
     <string name="listview_updated_today">今天</string>
     <string name="listview_updated_yesterday">昨天</string>
     <string name="listview_updated_this_week">本周</string>
+    <string name="listview_updated_last_week">上周</string>
     <string name="listview_updated_this_month">本月</string>
+    <string name="listview_updated_last_month">上月</string>
 
     <!-- Settings -->
+    <string name="settings_server_settings">账户设置</string>
+    <string name="settings_url">服务器地址</string>
+    <string name="settings_url_check_description">测试服务器是否可Ping通。</string>
+    <string name="settings_url_warn_http">警告：“http”是不安全的，请使用“https”。</string>
+    <string name="settings_username">用户名</string>
+    <string name="settings_password">密码</string>
+    <string name="settings_password_unchanged">密码（未修改）</string>
+    <string name="settings_password_check_description">显示证书是否正确。</string>
+    <string name="settings_submit">连接</string>
+    <string name="settings_submitting">连接 &#8230;</string>
     <string name="settings_note_mode">笔记的显示模式</string>
     <string name="settings_theme_title">深色主题</string>
     <string name="settings_font_title">等宽字体</string>
@@ -50,16 +69,26 @@
     <string name="settings_cert_reset_toast">所有自定义证书已被清理</string>
 
     <!-- Certificates -->
+    <string name="certificate_notification_connection_security">Notes - 安全连接</string>
+    <string name="trust_certificate_unknown_certificate_found">Notes 遇到未知的证书，是否信任它？</string>
 
     <!-- Network -->
+    <string name="network_connecting">正在连接</string>
+    <string name="network_connected">已连接</string>
+    <string name="network_disconnected">网络不可以</string>
 
     <!-- Error -->
     <string name="error_sync">同步失败：%1$s</string>
+    <string name="error_invalid_login">无效的登录：%1$s</string>
     <string name="error_json">服务器上的笔记应用是否启用？</string>
     <string name="error_io">与服务器连接中断</string>
     <string name="error_no_network">没有网络连接</string>
+    <string name="error_server">URL 或服务器错误</string>
+    <string name="error_url_malformed">错误的服务器地址</string>
+    <string name="error_username_password_invalid">用户名或密码错误</string>
 
     <!-- Snackbar Actions -->
+    <string name="snackbar_settings">设置</string>
 
     <!-- About -->
     <string name="about_version_title">版本</string>
@@ -100,6 +129,7 @@
     <string name="shortcut_create_long">创建新便笺</string>
 
     <string name="pref_value_theme_light">浅色主题</string>
+    <string name="pref_value_theme_dark">深色主题</string>
     <string name="pref_value_font_normal">普通</string>
     <string name="pref_value_wifi_and_mobile">在有Wi-Fi和移动数据时同步</string>
     <string name="simple_error">错误</string>
@@ -109,6 +139,12 @@
     <string name="copied_to_clipboard">复制到剪贴板</string>
     <string name="pin_to_homescreen">固定到主屏幕</string>
     <string name="note_has_been_deleted">此便签已被删除</string>
+    <string name="fallback_weblogin_text">回退到旧的登录方式</string>
+    <string name="fallback_weblogin_back">返回</string>
+    <string name="sso_announcment_title">单点登录</string>
+    <string name="sso_announcment_message">笔记应用将在下个大版本中使用Nextcloud很棒的单点登录功能。这将增加安全性、可靠性和易用性。请确认，您已安装版本至少为3.8.0的文件应用并在第一次运行时选择您已在使用的同一个账号。</string>
+    <string name="sso_announcment_more_info">更多信息</string>
+    <string name="sso_announcment_understood">我知道了</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
