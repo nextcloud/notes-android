@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -17,9 +16,6 @@ import it.niedermann.owncloud.notes.persistence.NotesClient;
  * Provides entity classes for handling server responses with a single note ({@link NoteResponse}) or a list of notes ({@link NotesResponse}).
  */
 public class ServerResponse {
-
-    public static class NotModifiedException extends IOException {
-    }
 
     public static class NoteResponse extends ServerResponse {
         public NoteResponse(NotesClient.ResponseData response) {

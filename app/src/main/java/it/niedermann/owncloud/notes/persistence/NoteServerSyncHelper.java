@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
@@ -325,6 +326,12 @@ public class NoteServerSyncHelper {
                 } catch (JSONException e) {
                     Log.e(TAG, "Exception", e);
                     exceptions.add(e);
+                } catch (NextcloudHttpRequestFailedException e) {
+                    if(e.getStatusCode() == 304) {
+                        Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
+                    } else {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -376,6 +383,14 @@ public class NoteServerSyncHelper {
                 Log.e(TAG, "Exception", e);
                 exceptions.add(e);
                 status = LoginStatus.JSON_FAILED;
+            } catch (NextcloudHttpRequestFailedException e) {
+                if(e.getStatusCode() == 304) {
+                    Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
+                    return LoginStatus.OK;
+                } else {
+                    e.printStackTrace();
+                    return LoginStatus.JSON_FAILED;
+                }
             }
             return status;
         }

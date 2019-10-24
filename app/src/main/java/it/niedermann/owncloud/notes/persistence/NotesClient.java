@@ -3,12 +3,15 @@ package it.niedermann.owncloud.notes.persistence;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.WorkerThread;
+
 import com.google.gson.GsonBuilder;
 import com.nextcloud.android.sso.aidl.NextcloudRequest;
 import com.nextcloud.android.sso.api.AidlNetworkRequest;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.Response;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
@@ -18,14 +21,13 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import androidx.annotation.WorkerThread;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
@@ -89,12 +91,12 @@ public class NotesClient {
     public static final String JSON_ETAG = "etag";
     public static final String JSON_MODIFIED = "modified";
 
-    public NotesClient(Context context) {
+    NotesClient(Context context) {
         this.context = context;
         updateAccount();
     }
     
-    public void updateAccount() {
+    void updateAccount() {
         if(mNextcloudAPI != null) {
             mNextcloudAPI.stop();
         }
@@ -117,7 +119,7 @@ public class NotesClient {
         }
     }
 
-    public NotesResponse getNotes(long lastModified, String lastETag) {
+    NotesResponse getNotes(long lastModified, String lastETag) throws NextcloudHttpRequestFailedException {
         String url = "notes";
         if (lastModified > 0) {
             url += "?" + GET_PARAM_KEY_PRUNE_BEFORE + "=" + lastModified;
@@ -125,7 +127,7 @@ public class NotesClient {
         return new NotesResponse(requestServer(url, METHOD_GET, null, lastETag));
     }
 
-    private NoteResponse putNote(CloudNote note, String path, String method) throws JSONException {
+    private NoteResponse putNote(CloudNote note, String path, String method) throws JSONException, NextcloudHttpRequestFailedException {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
@@ -140,17 +142,22 @@ public class NotesClient {
      * @param note {@link CloudNote} - the new Note
      * @return Created Note including generated Title, ID and lastModified-Date
      * @throws JSONException
+     * @throws NextcloudHttpRequestFailedException
      */
-    public NoteResponse createNote(CloudNote note) throws JSONException {
+    NoteResponse createNote(CloudNote note) throws JSONException, NextcloudHttpRequestFailedException {
         return putNote(note, "notes", METHOD_POST);
     }
 
-    public NoteResponse editNote(CloudNote note) throws JSONException {
+    NoteResponse editNote(CloudNote note) throws JSONException, NextcloudHttpRequestFailedException {
         return putNote(note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
-    public void deleteNote(long noteId) {
-        this.requestServer("notes/" + noteId, METHOD_DELETE, null, null);
+    void deleteNote(long noteId) {
+        try {
+            this.requestServer("notes/" + noteId, METHOD_DELETE, null, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -161,7 +168,7 @@ public class NotesClient {
      * @param params JSON Object which shall be transferred to the server.
      * @return Body of answer
      */
-    private ResponseData requestServer(String target, String method, JSONObject params, String lastETag) {
+    private ResponseData requestServer(String target, String method, JSONObject params, String lastETag) throws NextcloudHttpRequestFailedException {
         NextcloudRequest.Builder requestBuilder = new NextcloudRequest.Builder()
                 .setMethod(method)
                 .setUrl(API_PATH + target);
@@ -190,24 +197,27 @@ public class NotesClient {
                 result.append(line);
             }
             response.getInputStream().close();
-        
+
             String etag = "";
             AidlNetworkRequest.PlainHeader eTagHeader = response.getPlainHeader(HEADER_KEY_ETAG);
             if (eTagHeader != null) {
                 etag = Objects.requireNonNull(eTagHeader.getValue());
             }
-            
+
             long lastModified = 0;
             AidlNetworkRequest.PlainHeader lastModifiedHeader = response.getPlainHeader(HEADER_KEY_LAST_MODIFIED);
             if (lastModifiedHeader != null)
-                lastModified = new SimpleDateFormat("EEE, d MMM YYYY HH:mm:ss Z").parse((Objects.requireNonNull(lastModifiedHeader.getValue()))).getTime() / 1000;
+                lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1000;
             Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
             // return these header fields since they should only be saved after successful processing the result!
             return new ResponseData(result.toString(), etag, lastModified);
-
         } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseData("", "", 0); // dummy please change
+            if(e instanceof NextcloudHttpRequestFailedException) {
+                throw (NextcloudHttpRequestFailedException) e;
+            } else {
+                e.printStackTrace();
+            }
         }
+        return null;
     }
 }
