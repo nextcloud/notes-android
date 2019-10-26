@@ -189,7 +189,7 @@ public class NotesClient {
 
         try {
             Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
-            Response response = mNextcloudAPI.performNetworkRequest(nextcloudRequest);
+            Response response = mNextcloudAPI.performNewNetworkRequest(nextcloudRequest);
             Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getInputStream()));
             String line;
