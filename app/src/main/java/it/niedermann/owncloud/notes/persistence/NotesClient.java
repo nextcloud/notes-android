@@ -3,8 +3,6 @@ package it.niedermann.owncloud.notes.persistence;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.annotation.WorkerThread;
-
 import com.google.gson.GsonBuilder;
 import com.nextcloud.android.sso.aidl.NextcloudRequest;
 import com.nextcloud.android.sso.api.AidlNetworkRequest;
@@ -28,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import androidx.annotation.WorkerThread;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
@@ -189,19 +188,19 @@ public class NotesClient {
 
         try {
             Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
-            Response response = mNextcloudAPI.performNewNetworkRequest(nextcloudRequest);
+            Response response = mNextcloudAPI.performNetworkRequestV2(nextcloudRequest);
             Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
-            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getInputStream()));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
             String line;
             while ((line = rd.readLine()) != null) {
                 result.append(line);
             }
-            response.getInputStream().close();
+            response.getBody().close();
 
             String etag = "";
             AidlNetworkRequest.PlainHeader eTagHeader = response.getPlainHeader(HEADER_KEY_ETAG);
             if (eTagHeader != null) {
-                etag = Objects.requireNonNull(eTagHeader.getValue());
+                etag = Objects.requireNonNull(eTagHeader.getValue()).replace("\"", "");
             }
 
             long lastModified = 0;
