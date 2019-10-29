@@ -45,6 +45,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
@@ -783,19 +784,23 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
             recreate();
         } else {
-            AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-                Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-                try {
-                    db.addAccount(account.url, account.userId, account.name);
-                } catch(SQLiteConstraintException e) {
-                    if(db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
-                        Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+            try {
+                AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
+                    Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
+                    try {
+                        db.addAccount(account.url, account.userId, account.name);
+                    } catch(SQLiteConstraintException e) {
+                        if(db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
+                            Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                        }
                     }
-                }
-                selectAccount(account.name);
-                clickHeader();
-                drawerLayout.closeDrawer(GravityCompat.START);
-            });
+                    selectAccount(account.name);
+                    clickHeader();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                });
+            } catch (AccountImportCancelledException e) {
+                Log.i(TAG, "AccountImport has been cancelled.");
+            }
         }
     }
 
