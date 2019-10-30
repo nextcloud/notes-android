@@ -6,7 +6,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -21,12 +20,6 @@ public class PreferencesFragment extends PreferenceFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-
-        Preference resetTrust = findPreference(getString(R.string.pref_key_reset_trust));
-        resetTrust.setOnPreferenceClickListener((Preference preference) -> {
-            Toast.makeText(getActivity(), getString(R.string.settings_cert_reset_toast), Toast.LENGTH_SHORT).show();
-            return true;
-        });
 
         final SwitchPreference themePref = (SwitchPreference) findPreference(getString(R.string.pref_key_theme));
         themePref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
