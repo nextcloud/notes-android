@@ -749,6 +749,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         super.onNewIntent(intent);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AccountImporter.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
     /**
      * Handles the Results of started Sub Activities (Created Note, Edited Note)
      *
