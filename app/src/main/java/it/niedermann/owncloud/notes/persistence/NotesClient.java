@@ -119,11 +119,9 @@ public class NotesClient {
     }
 
     NotesResponse getNotes(long lastModified, String lastETag) throws NextcloudHttpRequestFailedException {
-        String url = "notes";
-        if (lastModified > 0) {
-            url += "?" + GET_PARAM_KEY_PRUNE_BEFORE + "=" + lastModified;
-        }
-        return new NotesResponse(requestServer(url, METHOD_GET, null, lastETag));
+        Map<String, String> parameter = new HashMap<>();
+        parameter.put(GET_PARAM_KEY_PRUNE_BEFORE, Long.toString(lastModified));
+        return new NotesResponse(requestServer("notes", METHOD_GET, parameter, null, lastETag));
     }
 
     private NoteResponse putNote(CloudNote note, String path, String method) throws JSONException, NextcloudHttpRequestFailedException {
@@ -132,7 +130,7 @@ public class NotesClient {
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
         paramObject.accumulate(JSON_FAVORITE, note.isFavorite());
         paramObject.accumulate(JSON_CATEGORY, note.getCategory());
-        return new NoteResponse(requestServer(path, method, paramObject, null));
+        return new NoteResponse(requestServer(path, method, null, paramObject, null));
     }
 
     /**
@@ -153,7 +151,7 @@ public class NotesClient {
 
     void deleteNote(long noteId) {
         try {
-            this.requestServer("notes/" + noteId, METHOD_DELETE, null, null);
+            this.requestServer("notes/" + noteId, METHOD_DELETE, null, null, null);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -164,21 +162,26 @@ public class NotesClient {
      *
      * @param target Filepath to the wanted function
      * @param method GET, POST, DELETE or PUT
-     * @param params JSON Object which shall be transferred to the server.
+     * @param parameter optional headers to be sent
+     * @param requestBody JSON Object which shall be transferred to the server.
+     * @param lastETag optional ETag of last response
      * @return Body of answer
      */
-    private ResponseData requestServer(String target, String method, JSONObject params, String lastETag) throws NextcloudHttpRequestFailedException {
+    private ResponseData requestServer(String target, String method, Map<String, String> parameter, JSONObject requestBody, String lastETag) throws NextcloudHttpRequestFailedException {
         NextcloudRequest.Builder requestBuilder = new NextcloudRequest.Builder()
                 .setMethod(method)
                 .setUrl(API_PATH + target);
+        if(parameter != null) {
+            requestBuilder.setParameter(parameter);
+        }
 
         Map<String, List<String>> header = new HashMap<>();
-        if (params != null) {
+        if (requestBody != null) {
             header.put(HEADER_KEY_CONTENT_TYPE, Collections.singletonList(HEADER_VALUE_APPLICATION_JSON));
-            requestBuilder.setRequestBody(params.toString());
+            requestBuilder.setRequestBody(requestBody.toString());
         }
         if (lastETag != null && !lastETag.isEmpty() && METHOD_GET.equals(method)) {
-            header.put(HEADER_KEY_IF_NONE_MATCH, Collections.singletonList(lastETag));
+            header.put(HEADER_KEY_IF_NONE_MATCH, Collections.singletonList('"' + lastETag + '"'));
             requestBuilder.setHeader(header);
         }
 
