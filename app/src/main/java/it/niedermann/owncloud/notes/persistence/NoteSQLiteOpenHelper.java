@@ -198,7 +198,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                     createNotesTable(db, table_notes);
 
                     db.execSQL(String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ", table_notes, key_id,            key_account_id,  key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag)
-                            + String.format("SELECT %s,%s,%s,%s,%s,strftime('%%s',%s),%s,%s,%s,%s FROM %s", key_id, values.get(key_account_id), key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_temp));
+                            + String.format("SELECT %s,%s,%s,%s,%s,%s,%s,%s,%s,%s FROM %s", key_id, values.get(key_account_id), key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_temp));
                     db.execSQL(String.format("DROP TABLE %s;", table_temp));
 
                     AppWidgetManager awm = AppWidgetManager.getInstance(context);
