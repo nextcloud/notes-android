@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -153,15 +154,20 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         List<ShortcutInfo> newShortcuts = new ArrayList<>();
 
                         for (DBNote note : db.getRecentNotes(localAccount.getId())) {
-                            Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
-                            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-                            intent.setAction(ACTION_SHORTCUT);
+                            if (!TextUtils.isEmpty(note.getTitle())) {
+                                Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                                intent.setAction(ACTION_SHORTCUT);
 
-                            newShortcuts.add(new ShortcutInfo.Builder(getApplicationContext(), note.getId() + "")
-                                    .setShortLabel(note.getTitle())
-                                    .setIcon(Icon.createWithResource(getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                    .setIntent(intent)
-                                    .build());
+                                newShortcuts.add(new ShortcutInfo.Builder(getApplicationContext(), note.getId() + "")
+                                        .setShortLabel(note.getTitle() + "")
+                                        .setIcon(Icon.createWithResource(getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                        .setIntent(intent)
+                                        .build());
+                            } else {
+                                // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
+                                Log.e(TAG, "shortLabel cannot be empty " + note);
+                            }
                         }
                         Log.d(TAG, "Update dynamic shortcuts");
                         shortcutManager.removeAllDynamicShortcuts();
@@ -213,11 +219,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     protected void onResume() {
         try {
             String ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name;
-            if(localAccount == null || !localAccount.getAccountName().equals(ssoAccount)) {
+            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount)) {
                 selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
             }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
-            if(!notAuthorizedAccountHandled) {
+            if (!notAuthorizedAccountHandled) {
                 handleNotAuthorizedAccount();
             }
         }
@@ -775,8 +781,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
                     try {
                         db.addAccount(account.url, account.userId, account.name);
-                    } catch(SQLiteConstraintException e) {
-                        if(db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
+                    } catch (SQLiteConstraintException e) {
+                        if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
                             Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
                         }
                     }

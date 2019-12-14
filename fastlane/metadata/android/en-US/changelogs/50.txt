@@ -1,4 +1,5 @@
 - #171 Multiple NC Servers
 - #375 Hardcoded list for special category images
 - #418 Implement Single-Sign-On
+- #613 Crash on start. shortLabel cannot be empty
 - Hide FAB when scrolling down
