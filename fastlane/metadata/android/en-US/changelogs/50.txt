@@ -5,3 +5,5 @@
 - #418 Implement Single-Sign-On
 - #613 Crash on start. shortLabel cannot be empty
 - Hide FAB when scrolling down
+
+Special thanks to @dan0xii @korelstar and @tobiasKaminsky
