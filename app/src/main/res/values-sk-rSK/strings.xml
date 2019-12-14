@@ -2,37 +2,30 @@
 <resources>
 
     <string name="app_name">Poznámky</string>
-    <string name="no_notes">Zatiaľ nie sú žiadne poznámky</string>
     <string name="label_all_notes">Všetky poznámky</string>
     <string name="label_favorites">Obľúbené</string>
     <string name="action_create">Nová poznámka</string>
     <string name="action_settings">Settings</string>
     <string name="action_trashbin">Zmazané poznámky</string>
     <string name="action_search">Hľadať</string>
-    <string name="action_create_save">Uložiť</string>
     <string name="simple_cancel">Zrušiť</string>
     <string name="simple_edit">Upraviť</string>
     <string name="action_edit_save">Uložiť</string>
-    <string name="action_edit_saving">Ukladám &#8230;</string>
-    <string name="action_edit_saved">Uložené</string>
     <string name="simple_about">O aplikácii</string>
     <string name="simple_bold">Tučné</string>
     <string name="simple_link">Odkaz</string>
     <string name="simple_italic">Kurzíva</string>
-    <string name="action_select_note">Vybrať poznámku</string>
     <string name="action_note_deleted">Poznámka vymazaná</string>
     <string name="action_note_restored">Poznámka obnovená</string>
     <string name="action_undo">Vrátiť</string>
     <string name="action_drawer_open">otvoriť navigáciu</string>
     <string name="action_drawer_close">zavrieť navigáciu</string>
-    <string name="action_recent">Nedávne</string>
     <string name="action_uncategorized">Nezaradené</string>
     <string name="menu_delete">Zmazať</string>
     <string name="menu_change_category">Kategória</string>
     <string name="menu_favorite">Obľúbené</string>
     <string name="menu_preview">Náhľad</string>
     <string name="menu_share">Sprístupniť</string>
-    <string name="menu_about">O</string>
 
     <string name="change_category_title">Vybrať kategóriu</string>
 
@@ -41,50 +34,22 @@
     <string name="listview_updated_this_week">Tento týždeň</string>
     <string name="listview_updated_this_month">Tento mesiac</string>
     <!-- Settings -->
-    <string name="settings_server_settings">Účet</string>
-    <string name="settings_url">Adresa servera</string>
-    <string name="settings_url_check_description">Zobrazuje či môže byť adresa pingnutá.</string>
-    <string name="settings_url_warn_http">VAROVANIE: \"http\" nie je bezpečné. Použite prosím \"https\".</string>
-    <string name="settings_username">Meno používateľa</string>
-    <string name="settings_password">Heslo</string>
-    <string name="settings_password_unchanged">Heslo (nezmenené)</string>
-    <string name="settings_password_check_description">Zobrazuje či sú platné overenia.</string>
-    <string name="settings_submit">Pripojiť</string>
-    <string name="settings_submitting">Pripájam &#8230;</string>
     <string name="settings_note_mode">Režim zobrazovania poznámok</string>
     <string name="settings_theme_title">Tmavý motív vzhľadu</string>
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
     <string name="settings_font_size">Veľkosť písma</string>
     <string name="settings_wifi_only">Synchronizovať len na Wi-Fi</string>
-    <string name="settings_cert_category">Spravovať certifikáty</string>
-    <string name="settings_cert_trust_system">Dôverovať systémovým certifikátom</string>
-    <string name="settings_cert_trust_system_on">Systémove a používateľské Certifikačné autority (CA) budú dôveryhodné (odporúčané)</string>
-    <string name="settings_cert_trust_system_off">Systémové a používateľské certifikačné autority (CA) budú nedôveryhodné</string>
-    <string name="settings_cert_reset">Obnoviť (ne)dôveryhodné certifikáty</string>
-    <string name="settings_cert_reset_summary">Obnoví dôveru všetkých vlastných certifikátov</string>
-    <string name="settings_cert_reset_toast">Všetky vlastné certifikáty boli odstránené</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Poznámky - Zabezpečenie pripojenia</string>
-    <string name="trust_certificate_unknown_certificate_found">Poznámky sa stretli s neznámym certifikátom. Chcete mu dôverovať?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Pripájam</string>
-    <string name="network_connected">Pripojené</string>
-    <string name="network_disconnected">Nie je dostupná žiadna sieť</string>
 
     <!-- Error -->
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
-    <string name="error_invalid_login">Neplatné prihlásenie: %1$s</string>
     <string name="error_json">máte povolenú aplikáciu Poznámky na serveri?</string>
-    <string name="error_io">pripojenie na server bolo prerušené</string>
     <string name="error_no_network">nie je pripojenie k sieti</string>
-    <string name="error_server">URL/Server obsahuje chyby</string>
-    <string name="error_url_malformed">Nesprávna adresa servera</string>
-    <string name="error_username_password_invalid">Nesprávne meno používateľa alebo heslo</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Nastavenia</string>
 
     <!-- About -->
     <string name="about_version_title">Verzia</string>
@@ -125,7 +90,6 @@
     <string name="shortcut_create_long">Vytvoriť novú poznámku</string>
 
     <string name="pref_value_theme_light">Svetlý</string>
-    <string name="pref_value_theme_dark">Tmavý</string>
     <string name="pref_value_font_normal">Normálne</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovať na Wi-Fi a mobilných dátach</string>
     <string name="simple_error">Chyba</string>

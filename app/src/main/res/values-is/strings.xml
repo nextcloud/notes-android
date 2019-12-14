@@ -38,13 +38,6 @@
     <string name="settings_theme_title">Dökkt þema</string>
     <string name="settings_font_title">Jafnbreitt letur</string>
     <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
-    <string name="settings_cert_category">Sýsla með skilríki</string>
-    <string name="settings_cert_trust_system">Treysta skilríkjum kerfis</string>
-    <string name="settings_cert_trust_system_on">Vottunaraðilum kerfis og þeim sem notandi bætir við verður treyst (mælt með þessu)</string>
-    <string name="settings_cert_trust_system_off">Vottunaraðilum kerfis og þeim sem notandi bætir við verður ekki treyst</string>
-    <string name="settings_cert_reset">Endurstilla (van)treyst skilríki</string>
-    <string name="settings_cert_reset_summary">Frumstillir traust allra sérsniðinna skilríkja</string>
-    <string name="settings_cert_reset_toast">Öll sérsniðin skilríki hafa verið hreinsuð út</string>
 
     <!-- Certificates -->
 
@@ -53,7 +46,6 @@
     <!-- Error -->
     <string name="error_sync">Samstilling mistókst: %1$s</string>
     <string name="error_json">er minnispunktaforritið virkt á þjóninum?</string>
-    <string name="error_io">tenging við þjón rofnaði</string>
     <string name="error_no_network">engin nettenging</string>
 
     <!-- Snackbar Actions -->

@@ -26,7 +26,6 @@
     <!-- Error -->
     <string name="error_sync">Sinkronisasi gagal: %1$s</string>
     <string name="error_json">Apakah apl Notes telah diaktifkan dipeladen?</string>
-    <string name="error_io">koneksi peladen gagal</string>
     <string name="error_no_network">tidak ada koneksi jaringan</string>
 
     <!-- Snackbar Actions -->

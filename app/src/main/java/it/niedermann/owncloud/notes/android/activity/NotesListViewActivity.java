@@ -207,26 +207,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
         setupNotesList();
-
-        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        //boolean ssoAnnouncmentShown = prefs.getBoolean("sp_sso_announchment_shown", false);
-        //if (!ssoAnnouncmentShown) {
-        //    AlertDialog dialog = new AlertDialog.Builder(this)
-        //            .setTitle(R.string.sso_announcment_title)
-        //            .setCancelable(false)
-        //            .setMessage(R.string.sso_announcment_message)
-        //            .setNegativeButton(R.string.sso_announcment_more_info, (a, b) -> {
-        //                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/stefan-niedermann/nextcloud-notes/blob/master/SSO%20Announcment.md")));
-        //            })
-        //            .setPositiveButton(R.string.sso_announcment_understood, (a, b) -> {
-        //                SharedPreferences.Editor editor = prefs.edit();
-        //                editor.putBoolean("sp_sso_announchment_shown", true);
-        //                editor.apply();
-        //            })
-        //            .show();
-        //    dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.fg_default));
-        //    dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.fg_default));
-        //}
     }
 
     @Override

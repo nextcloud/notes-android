@@ -3,37 +3,30 @@
 
     <string name="app_name">Notatki</string>
     <string name="app_name_long">Nextcloud Notes</string>
-    <string name="no_notes">Nie ma jeszcze notatek</string>
     <string name="label_all_notes">Wszystkie notatki</string>
     <string name="label_favorites">Ulubione</string>
     <string name="action_create">Nowa notatka</string>
     <string name="action_settings">Ustawienia</string>
     <string name="action_trashbin">Usunięte notatki</string>
     <string name="action_search">Szukaj</string>
-    <string name="action_create_save">Zapisz</string>
     <string name="simple_cancel">Anuluj</string>
     <string name="simple_edit">Edytuj</string>
     <string name="action_edit_save">Zapisz</string>
-    <string name="action_edit_saving">Zapisywanie &#8230;</string>
-    <string name="action_edit_saved">Zapisano</string>
     <string name="simple_about">O aplikacji</string>
     <string name="simple_bold">Pogrubienie</string>
     <string name="simple_link">Odnośnik</string>
     <string name="simple_italic">Kursywa</string>
-    <string name="action_select_note">Wybierz notatkę</string>
     <string name="action_note_deleted">Notatka usunięta</string>
     <string name="action_note_restored">Notatka przywrócona</string>
     <string name="action_undo">Cofnij</string>
     <string name="action_drawer_open">Otwórz okno nawigacji</string>
     <string name="action_drawer_close">Zamknij okno nawigacji</string>
-    <string name="action_recent">Ostatnie</string>
     <string name="action_uncategorized">Bez kategorii</string>
     <string name="menu_delete">Usuń</string>
     <string name="menu_change_category">Kategoria</string>
     <string name="menu_favorite">Ulubiona</string>
     <string name="menu_preview">Podgląd</string>
     <string name="menu_share">Udostępnij</string>
-    <string name="menu_about">O aplikacji</string>
 
     <string name="change_category_title">Wybierz kategorię</string>
 
@@ -45,50 +38,22 @@
     <string name="listview_updated_last_month">W zeszłym miesiącu</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Konto</string>
-    <string name="settings_url">Adres serwera</string>
-    <string name="settings_url_check_description">Pokazuje, czy adres można pingować.</string>
-    <string name="settings_url_warn_http">OSTRZEŻENIE: \"http\" jest niebezpieczne. Proszę użyć \"https\". </string>
-    <string name="settings_username">Nazwa użytkownika</string>
-    <string name="settings_password">Hasło</string>
-    <string name="settings_password_unchanged">Hasło (nie zmienione)</string>
-    <string name="settings_password_check_description">Wyświetla, czy dane logowania są poprawne.</string>
-    <string name="settings_submit">Połącz</string>
-    <string name="settings_submitting">Łączenie &#8230;</string>
     <string name="settings_note_mode">Tryb wyświetlania notatek</string>
     <string name="settings_theme_title">Ciemny motyw</string>
     <string name="settings_font_title">Czcionka monospace</string>
     <string name="settings_font_size">Rozmiar czcionki</string>
     <string name="settings_wifi_only">Synchronizuj tylko przez Wi-Fi</string>
-    <string name="settings_cert_category">Zarządzaj certyfikatami</string>
-    <string name="settings_cert_trust_system">Zaufaj certyfikatom systemowym</string>
-    <string name="settings_cert_trust_system_on">Systemowe i dodane przez użytkownika certyfikaty będą zaufane (zalecane)</string>
-    <string name="settings_cert_trust_system_off">Systemowe i dodane przez użytkownika certyfikaty nie będą zaufane</string>
-    <string name="settings_cert_reset">Zresetuj (nie)zaufane certyfikaty</string>
-    <string name="settings_cert_reset_summary">Resetuje wszystkie zaufane niestandardowe certyfikaty</string>
-    <string name="settings_cert_reset_toast">Wszystkie certyfikaty niestandardowe zostały wyczyszczone</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Notatki - Bezpieczeństwo połączenia</string>
-    <string name="trust_certificate_unknown_certificate_found">Notes napotkał nieznany certyfikat. Czy chcesz mu zaufać?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Łączenie</string>
-    <string name="network_connected">Połączony</string>
-    <string name="network_disconnected">Brak dostępnych sieci</string>
 
     <!-- Error -->
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
-    <string name="error_invalid_login">Niepoprawny login: %1$s</string>
     <string name="error_json">czy aplikacja Notes jest aktywowana na serwerze?</string>
-    <string name="error_io">połączenie z serwerem jest nieprawidłowe</string>
     <string name="error_no_network">brak połączenia sieciowego</string>
-    <string name="error_server">URL/Serwer zawiera błędy</string>
-    <string name="error_url_malformed">Błędny adres serwera</string>
-    <string name="error_username_password_invalid">Zła nazwa użytkownika lub hasło</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Ustawienia</string>
 
     <!-- About -->
     <string name="about_version_title">Wersja</string>
@@ -129,7 +94,6 @@
     <string name="shortcut_create_long">Utwórz nową notatkę</string>
 
     <string name="pref_value_theme_light">Jasny</string>
-    <string name="pref_value_theme_dark">Ciemny</string>
     <string name="pref_value_font_normal">Podstawowy</string>
     <string name="pref_value_wifi_and_mobile">Synchronizacja w sieci Wi-Fi i komórkowej transmisji danych</string>
     <string name="simple_error">Błąd</string>
@@ -139,12 +103,6 @@
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <string name="pin_to_homescreen">Przypnij do ekranu głównego</string>
     <string name="note_has_been_deleted">Ta notatka została usunięta</string>
-    <string name="fallback_weblogin_text">Przywróć starą metodę logowania</string>
-    <string name="fallback_weblogin_back">Wstecz</string>
-    <string name="sso_announcment_title">Pojedyncze logowanie (SSO)</string>
-    <string name="sso_announcment_message">Aplikacja Notes będzie korzystać z doskonałej funkcji pojedynczego logowania w Nextcloud, która rozpocznie się od kolejnej głównej wersji. Zwiększy to bezpieczeństwo, niezawodność i komfort. Upewnij się, że masz zainstalowaną aplikację do plików co najmniej wersję 3.8.0, a następnie wybierz przy pierwszym uruchomieniu to samo konto, którego już używasz.</string>
-    <string name="sso_announcment_more_info">Więcej informacji</string>
-    <string name="sso_announcment_understood">Zrozumiano</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

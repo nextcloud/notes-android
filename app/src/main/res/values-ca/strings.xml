@@ -43,13 +43,6 @@
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
     <string name="settings_wifi_only">Sincronitza només per Wi-Fi</string>
-    <string name="settings_cert_category">Gestiona els certificats</string>
-    <string name="settings_cert_trust_system">Confia en els certificats del sistema</string>
-    <string name="settings_cert_trust_system_on">Es confiarà en els CAs afegits pel sistema i per l\'usuari (recomanat)</string>
-    <string name="settings_cert_trust_system_off">No es confiarà en els CAs afegits pel sistema ni per l\'usuari</string>
-    <string name="settings_cert_reset">Restableix els certificats confiats i desconfiats</string>
-    <string name="settings_cert_reset_summary">Restableix la confiança de tots els certificats personalitzats</string>
-    <string name="settings_cert_reset_toast">Tots els certificats personalitzats han estat suprimits</string>
 
     <!-- Certificates -->
 
@@ -58,7 +51,6 @@
     <!-- Error -->
     <string name="error_sync">Ha fallat la sincronització: %1$s</string>
     <string name="error_json">l\'aplicació Notes està activada al servidor?</string>
-    <string name="error_io">s\'ha trencat la connexió amb el servidor</string>
     <string name="error_no_network">no hi ha connexió a la xarxa</string>
 
     <!-- Snackbar Actions -->
@@ -111,12 +103,6 @@
     <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
     <string name="pin_to_homescreen">Fixa-ho a la pantalla d\'inici</string>
     <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
-    <string name="fallback_weblogin_text">Tornar a l\'antic mètode d\'inici de sessió</string>
-    <string name="fallback_weblogin_back">Enrere</string>
-    <string name="sso_announcment_title">Entrada simple</string>
-    <string name="sso_announcment_message">L\'aplicació Notes començarà amb la propera versió principal amb la gran característica de Single-Sign-On-On-Nextcloud. D’aquesta manera augmentareu la seguretat, la fiabilitat i el confort. Assegureu-vos que heu instal·lat almenys la versió 3.8.0 de l\'aplicació de fitxers i seleccioneu a la primera obertura el mateix compte que ja esteu utilitzant.</string>
-    <string name="sso_announcment_more_info">Més informació</string>
-    <string name="sso_announcment_understood">Entès</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

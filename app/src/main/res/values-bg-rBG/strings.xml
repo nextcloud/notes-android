@@ -24,7 +24,6 @@
 
     <!-- Error -->
     <string name="error_sync">Синхронизацията е неуспешна: %1$s</string>
-    <string name="error_io">връзката със сървъра е прекъснала</string>
     <string name="error_no_network">няма връзка с интернет</string>
 
     <!-- Snackbar Actions -->

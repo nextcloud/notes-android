@@ -38,13 +38,6 @@
     <string name="settings_theme_title">Thema tywyll</string>
     <string name="settings_font_title">Font monofwlch</string>
     <string name="settings_wifi_only">Cysoni dros Wi-Fi yn unig</string>
-    <string name="settings_cert_category">Rheoli tystysgrifau</string>
-    <string name="settings_cert_trust_system">Tysytysgrfiau\'r system ymddiriedaeth</string>
-    <string name="settings_cert_trust_system_on">CA\'r system a\'r rhai ychwanegwyd gan y defnyddiwr yn gymeradwy (argymell)</string>
-    <string name="settings_cert_trust_system_off">CA\'r system a\'r rhai ychwanegwyd gan y defnyddiwr ddim yn gymeradwy</string>
-    <string name="settings_cert_reset">Ailosod tystysgrifau cymeradwy/anghymeradwy</string>
-    <string name="settings_cert_reset_summary">Ailosod ymddiriedaeth pob tytysgrif gyfaddas</string>
-    <string name="settings_cert_reset_toast">Mae\'r holl dystysgrifau cyfaddas wedi eu clirio</string>
 
     <!-- Certificates -->
 
@@ -53,7 +46,6 @@
     <!-- Error -->
     <string name="error_sync">Methodd y cydweddiad: %1$s</string>
     <string name="error_json">A yw\'r ap Nodiadau yn weithredol ar y gweinydd?</string>
-    <string name="error_io">mae cysylltiad y gweinydd wedi torri</string>
     <string name="error_no_network">dim cysylltiad rthwydwaith</string>
 
     <!-- Snackbar Actions -->

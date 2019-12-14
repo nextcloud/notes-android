@@ -20,7 +20,6 @@
     <!-- Network -->
 
     <string name="error_json">JSON սխալ</string>
-    <string name="error_io">IO սխալ</string>
 
     <!-- Snackbar Actions -->
 

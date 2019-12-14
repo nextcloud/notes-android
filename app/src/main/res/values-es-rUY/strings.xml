@@ -23,13 +23,6 @@
     <string name="listview_updated_this_week">Esta semana</string>
     <string name="listview_updated_this_month">Este mes</string>
 
-    <string name="settings_cert_trust_system">Confiar en los certificados del sistema</string>
-    <string name="settings_cert_trust_system_on">Los CAs del sistema y del usuario serán de confianza (recomendado)</string>
-    <string name="settings_cert_trust_system_off">Los CAs del sistema y de usuarios no serán de confianza</string>
-    <string name="settings_cert_reset">Reiniciar los certificados (no) de confianza</string>
-    <string name="settings_cert_reset_summary">Reinicia la confizanza de todos los certificados personalizados</string>
-    <string name="settings_cert_reset_toast">Todos los certificados personalizados han sido borrados</string>
-
     <!-- Certificates -->
 
     <!-- Network -->
@@ -37,7 +30,6 @@
     <!-- Error -->
     <string name="error_sync">Falló la sincronización: %1$s</string>
     <string name="error_json">¿Se encuentra activiada la aplicación de Notes en el servidor?</string>
-    <string name="error_io">se ha interrumpido al conexión al servidor</string>
     <string name="error_no_network">no hay conexión a red</string>
 
     <!-- Snackbar Actions -->

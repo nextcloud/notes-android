@@ -43,13 +43,6 @@
     <string name="settings_font_title">Letra monoespazada</string>
     <string name="settings_font_size">Tamaño da letra</string>
     <string name="settings_wifi_only">Sincronizar só con WiFi</string>
-    <string name="settings_cert_category">Administrar certificados</string>
-    <string name="settings_cert_trust_system">Confiar nos certificados do sistema</string>
-    <string name="settings_cert_trust_system_on">Confiaráse nas Entidades de Acreditación -CA- do sistema e nas engadidas polo usuario (recomendado)</string>
-    <string name="settings_cert_trust_system_off">Non se confiará nas Entidade de Acreditación -CA- do sistema nin nas engadidas polo usuario</string>
-    <string name="settings_cert_reset">Restabelecer os certificados fiábeis e non fiábeis</string>
-    <string name="settings_cert_reset_summary">Restabelece a confianza en todos os certificados personalizados</string>
-    <string name="settings_cert_reset_toast">Limpáronse todos os certificados personalizados</string>
 
     <!-- Certificates -->
 
@@ -58,7 +51,6 @@
     <!-- Error -->
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_json">está activada a aplicación «Notes» no servidor?</string>
-    <string name="error_io">interrompeuse a conexión co servidor</string>
     <string name="error_no_network">Sen conexión de rede</string>
 
     <!-- Snackbar Actions -->
@@ -111,12 +103,6 @@
     <string name="copied_to_clipboard">Copiado no portapapeis.</string>
     <string name="pin_to_homescreen">Ancorar na pantalla de inicio</string>
     <string name="note_has_been_deleted">Esta nota foi eliminada</string>
-    <string name="fallback_weblogin_text">Volver ao método de acceso antigo</string>
-    <string name="fallback_weblogin_back">Atrás</string>
-    <string name="sso_announcment_title">Inicio de sesión único</string>
-    <string name="sso_announcment_message">A aplicación de Notas comezará coa seguinte versión principal, empregando a magnífica característica de «Inicio de sesión único» do Nextcloud. Isto aumentará a seguridade, a fiabilidade e o confort para vostede. Asegúrese de ter instalado polo menos a versión 3.8.0 da aplicación de ficheiros e seleccione na primeira execución a mesma conta que xa estás a empregar.</string>
-    <string name="sso_announcment_more_info">Máis información</string>
-    <string name="sso_announcment_understood">Entendido</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

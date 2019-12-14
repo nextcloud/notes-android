@@ -39,13 +39,10 @@
     <string name="settings_theme_title">Tumma teema</string>
     <string name="settings_font_title">Tasalevyinen fontti</string>
     <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
-    <string name="settings_cert_category">Hallitse varmenteita</string>
-    <string name="settings_cert_trust_system">Luota järjestelmävarmenteisiin</string>
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
-    <string name="error_io">palvelinyhteys on rikki</string>
     <string name="error_no_network">ei verkkoyhteyttä</string>
 
     <!-- Snackbar Actions -->

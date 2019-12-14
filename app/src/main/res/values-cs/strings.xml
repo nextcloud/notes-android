@@ -20,7 +20,6 @@
     <!-- Network -->
 
     <string name="error_json">JSON error</string>
-    <string name="error_io">IO error</string>
 
     <!-- Snackbar Actions -->
 

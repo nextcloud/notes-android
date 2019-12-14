@@ -32,9 +32,6 @@
     <string name="listview_updated_this_month">Αυτό το μήνα</string>
     <!-- Settings -->
     <string name="settings_wifi_only">Συγχρονισμός μόνο σε Wi-Fi</string>
-    <string name="settings_cert_category">Διαχείριση πιστοποιητικών</string>
-    <string name="settings_cert_trust_system">Εμπιστοσύνη πιστοποιητικών συστήματος.</string>
-    <string name="settings_cert_reset">Επαναφορά (μη) έμπιστων πιστοποιητικών</string>
     <!-- Certificates -->
 
     <!-- Network -->
@@ -42,7 +39,6 @@
     <!-- Error -->
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_json">Είναι η εφαρμογή Σημειώσεις ενεργοποιημένη στον εξυπηρετητή Nextcloud;</string>
-    <string name="error_io">η σύνδεση του διακομιστή είναι προβληματική</string>
     <string name="error_no_network">δεν υπάρχει σύνδεση δικτύου</string>
 
     <!-- Snackbar Actions -->

@@ -3,37 +3,30 @@
 
     <string name="app_name">ノート</string>
     <string name="app_name_long">Nextcloud ノート</string>
-    <string name="no_notes">まだノートはありません</string>
     <string name="label_all_notes">すべてのノート</string>
     <string name="label_favorites">お気に入り</string>
     <string name="action_create">新しいノート</string>
     <string name="action_settings">設定</string>
     <string name="action_trashbin">ゴミ箱</string>
     <string name="action_search">検索</string>
-    <string name="action_create_save">保存</string>
     <string name="simple_cancel">キャンセル</string>
     <string name="simple_edit">編集</string>
     <string name="action_edit_save">保存</string>
-    <string name="action_edit_saving">保存中&#8230;</string>
-    <string name="action_edit_saved">保存しました</string>
     <string name="simple_about">バージョン情報</string>
     <string name="simple_bold">太字</string>
     <string name="simple_link">リンク</string>
     <string name="simple_italic">斜体</string>
-    <string name="action_select_note">ノートを選択</string>
     <string name="action_note_deleted">ノートが削除されました</string>
     <string name="action_note_restored">ノートが復元されました</string>
     <string name="action_undo">元に戻す</string>
     <string name="action_drawer_open">ナビゲーションを開く</string>
     <string name="action_drawer_close">ナビゲーションを閉じる</string>
-    <string name="action_recent">最新</string>
     <string name="action_uncategorized">未分類</string>
     <string name="menu_delete">削除</string>
     <string name="menu_change_category">カテゴリ</string>
     <string name="menu_favorite">お気に入り</string>
     <string name="menu_preview">プレビュー</string>
     <string name="menu_share">共有</string>
-    <string name="menu_about">アプリについて</string>
 
     <string name="change_category_title">カテゴリを選択</string>
 
@@ -45,50 +38,22 @@
     <string name="listview_updated_last_month">先月</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">アカウント</string>
-    <string name="settings_url">サーバーアドレス</string>
-    <string name="settings_url_check_description">アドレスにpingを実行できるかどうかを表示します。</string>
-    <string name="settings_url_warn_http">警告: \"http\" は安全ではありません。 \"https\" を使用してください。</string>
-    <string name="settings_username">ユーザー名</string>
-    <string name="settings_password">パスワード</string>
-    <string name="settings_password_unchanged">パスワード (変更されていません)</string>
-    <string name="settings_password_check_description">資格情報が正しいかどうかを表示します。</string>
-    <string name="settings_submit">接続</string>
-    <string name="settings_submitting">接続中&#8230;</string>
     <string name="settings_note_mode">ノートの表示モード</string>
     <string name="settings_theme_title">ダークテーマ</string>
     <string name="settings_font_title">モノスペースフォント</string>
     <string name="settings_font_size">フォントサイズ</string>
     <string name="settings_wifi_only">Wi-Fi接続時のみ同期する</string>
-    <string name="settings_cert_category">証明書を管理する</string>
-    <string name="settings_cert_trust_system">システム証明書を信頼する</string>
-    <string name="settings_cert_trust_system_on">システムおよびユーザーが追加した CA は信頼される（推奨）</string>
-    <string name="settings_cert_trust_system_off">システムおよびユーザーが追加した CA は信頼されません</string>
-    <string name="settings_cert_reset">信頼できる（できない）証明書をリセットする</string>
-    <string name="settings_cert_reset_summary">すべてのカスタム証明書の信頼をリセットします。</string>
-    <string name="settings_cert_reset_toast">すべてのカスタム証明書がクリアされました</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">ノート - セキュリティ接続</string>
-    <string name="trust_certificate_unknown_certificate_found">ノートで未知の証明書が発見されました。これを信頼しますか？</string>
 
     <!-- Network -->
-    <string name="network_connecting">接続中</string>
-    <string name="network_connected">接続しました</string>
-    <string name="network_disconnected">ネットワークが利用できません</string>
 
     <!-- Error -->
     <string name="error_sync">同期に失敗しました: %1$s</string>
-    <string name="error_invalid_login">ログインが無効: %1$s</string>
     <string name="error_json">ノートアプリはサーバー上で有効になっていますか?</string>
-    <string name="error_io">サーバー接続が壊れています</string>
     <string name="error_no_network">ネットワーク接続がありません</string>
-    <string name="error_server">URL/サーバーにエラーがあります</string>
-    <string name="error_url_malformed">サーバーアドレスが間違っています</string>
-    <string name="error_username_password_invalid">ユーザー名またはパスワードが間違っています</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">設定</string>
 
     <!-- About -->
     <string name="about_version_title">バージョン</string>
@@ -129,7 +94,6 @@
     <string name="shortcut_create_long">新しいノートを作成</string>
 
     <string name="pref_value_theme_light">ライト</string>
-    <string name="pref_value_theme_dark">ダーク</string>
     <string name="pref_value_font_normal">ノーマル</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fiおよびモバイル接続時に同期する</string>
     <string name="simple_error">エラー</string>
@@ -139,12 +103,6 @@
     <string name="copied_to_clipboard">クリップボードにコピー</string>
     <string name="pin_to_homescreen">ホームスクリーンにピン留めする</string>
     <string name="note_has_been_deleted">ノートが削除されました</string>
-    <string name="fallback_weblogin_text">古いログイン方法へ戻す</string>
-    <string name="fallback_weblogin_back">戻る</string>
-    <string name="sso_announcment_title">シングルサインオン</string>
-    <string name="sso_announcment_message">Notes アプリは次のメジャーバージョンから Nextcloud の偉大なシングルサインオン機能の使用を開始する予定です。これによりセキュリティ、信頼性、快適さが向上します。バージョン 3.8.0 以上の Nextcloud ファイルアプリがインストールされていることを確認し、初回起動時には現在使用しているアカウントと同じアカウントを選択してください。</string>
-    <string name="sso_announcment_more_info">詳細情報</string>
-    <string name="sso_announcment_understood">理解しました</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

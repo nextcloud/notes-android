@@ -30,13 +30,6 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Display mode for Notes</string>
-    <string name="settings_cert_category">Manage certificates</string>
-    <string name="settings_cert_trust_system">Trust system certificates</string>
-    <string name="settings_cert_trust_system_on">System and user-added CAs will be trusted (recommended)</string>
-    <string name="settings_cert_trust_system_off">System and user-added CAs won\'t be trusted</string>
-    <string name="settings_cert_reset">Reset (un)trusted certificates</string>
-    <string name="settings_cert_reset_summary">Resets trust of all custom certificates</string>
-    <string name="settings_cert_reset_toast">All custom certificates have been cleared</string>
 
     <!-- Certificates -->
 
@@ -45,7 +38,6 @@
     <!-- Error -->
     <string name="error_sync">Synchronisation failed: %1$s</string>
     <string name="error_json">is the Notes app activated on the server?</string>
-    <string name="error_io">server connection is broken</string>
     <string name="error_no_network">no network connection</string>
 
     <!-- Snackbar Actions -->

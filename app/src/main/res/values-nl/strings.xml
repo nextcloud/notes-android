@@ -3,37 +3,30 @@
 
     <string name="app_name">Notities</string>
     <string name="app_name_long">Nextcloud Notities</string>
-    <string name="no_notes">Nog geen notities</string>
     <string name="label_all_notes">Alle notities</string>
     <string name="label_favorites">Favorieten</string>
     <string name="action_create">Nieuwe notitie</string>
     <string name="action_settings">Instellingen</string>
     <string name="action_trashbin">Verwijder notities</string>
     <string name="action_search">Zoeken</string>
-    <string name="action_create_save">Opslaan</string>
     <string name="simple_cancel">Annuleren</string>
     <string name="simple_edit">Bewerken</string>
     <string name="action_edit_save">Opslaan</string>
-    <string name="action_edit_saving">Opslaan &#8230;</string>
-    <string name="action_edit_saved">Opgeslagen</string>
     <string name="simple_about">Over</string>
     <string name="simple_bold">Vet</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Scheef</string>
-    <string name="action_select_note">Notitie selecteren</string>
     <string name="action_note_deleted">Notitie verwijderd</string>
     <string name="action_note_restored">Notitie hersteld</string>
     <string name="action_undo">Ongedaan maken</string>
     <string name="action_drawer_open">open navigatie</string>
     <string name="action_drawer_close">sluit navigatie</string>
-    <string name="action_recent">Recent</string>
     <string name="action_uncategorized">Niet gecategoriseerd</string>
     <string name="menu_delete">Verwijderen</string>
     <string name="menu_change_category">Categorie</string>
     <string name="menu_favorite">Favoriet</string>
     <string name="menu_preview">Voorbeeldweergave</string>
     <string name="menu_share">Delen</string>
-    <string name="menu_about">Over</string>
 
     <string name="change_category_title">Kies een categorie
 </string>
@@ -46,50 +39,22 @@
     <string name="listview_updated_last_month">Vorige maand</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Account</string>
-    <string name="settings_url">Serveradres</string>
-    <string name="settings_url_check_description">Toont of het adres gepingt kan worden.</string>
-    <string name="settings_url_warn_http">WAARSCHUWING: \"http\" is niet veilig. Gebruik \"https\".</string>
-    <string name="settings_username">Gebruikersnaam</string>
-    <string name="settings_password">Wachtwoord</string>
-    <string name="settings_password_unchanged">Wachtwoord (niet gewijzigd)</string>
-    <string name="settings_password_check_description">Toont of de login-gegevens correct zijn.</string>
-    <string name="settings_submit">Verbinden</string>
-    <string name="settings_submitting">Verbinden&#160;&#8230;</string>
     <string name="settings_note_mode">Weergavemode voor notities</string>
     <string name="settings_theme_title">Donker thema</string>
     <string name="settings_font_title">Monospace lettertype</string>
     <string name="settings_font_size">Fontgrootte</string>
     <string name="settings_wifi_only">Sync alleen met Wi-Fi</string>
-    <string name="settings_cert_category">Beheren certificaten</string>
-    <string name="settings_cert_trust_system">Vertrouw systeem certificaten</string>
-    <string name="settings_cert_trust_system_on">Systeem en door gebruiker toegevoegde CA\'s worden vertrouwd (aanbevolen)</string>
-    <string name="settings_cert_trust_system_off">Systeem en door gebruiker toegevoegde CAs worden niet vertrouwd</string>
-    <string name="settings_cert_reset">Reset (niet) vertrouwde certificaten</string>
-    <string name="settings_cert_reset_summary">Reset alle vertrouwde zelf aangemaakte certficaten</string>
-    <string name="settings_cert_reset_toast">Alle zelf aangemaakte certificaten zijn verwijderd</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Notities -  Connectie veiligheid</string>
-    <string name="trust_certificate_unknown_certificate_found">Notities heeft een onbekend certificaat. Wil je het vertrouwen?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Verbinden</string>
-    <string name="network_connected">Verbonden</string>
-    <string name="network_disconnected">Netwerk niet beschikbaar</string>
 
     <!-- Error -->
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
-    <string name="error_invalid_login">Ongeldige login: %1$s</string>
     <string name="error_json">is de Notities app op de server geactiveerd?</string>
-    <string name="error_io">serververbinding is verbroken</string>
     <string name="error_no_network">geen netwerkverbinding</string>
-    <string name="error_server">URL/server heeft fouten</string>
-    <string name="error_url_malformed">Verkeerd serveradres</string>
-    <string name="error_username_password_invalid">Verkeerde gebruikersnaam of wachtwoord</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Instellingen</string>
 
     <!-- About -->
     <string name="about_version_title">Versie</string>
@@ -130,7 +95,6 @@
     <string name="shortcut_create_long">Maak een nieuwe notitie</string>
 
     <string name="pref_value_theme_light">Licht</string>
-    <string name="pref_value_theme_dark">Donker</string>
     <string name="pref_value_font_normal">Normaal</string>
     <string name="pref_value_wifi_and_mobile">Sync met Wi-Fi en mobiele data</string>
     <string name="simple_error">Fout</string>
@@ -140,12 +104,6 @@
     <string name="copied_to_clipboard">Gekopieerd naar het klembord</string>
     <string name="pin_to_homescreen">Vastmaken op startscherm</string>
     <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
-    <string name="fallback_weblogin_text">Terug naar vorige inlogmethode</string>
-    <string name="fallback_weblogin_back">Terug</string>
-    <string name="sso_announcment_title">Single-Sign-On</string>
-    <string name="sso_announcment_message">De Notes app zal de Single-Sign-On feature van Nextcloud gebruiken in de volgende \'major\' versie. Dit verbetert de beveiliging, betrouwbaarheid en het comfort voor u. U heeft versie 3.8.0 of hoger nodig van de Bestanden app, en selecteer voor het eerste gebruik dezelfde account die u nu gebruikt.</string>
-    <string name="sso_announcment_more_info">Meer informatie</string>
-    <string name="sso_announcment_understood">Begrepen</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

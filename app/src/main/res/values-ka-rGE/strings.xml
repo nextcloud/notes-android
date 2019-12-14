@@ -23,13 +23,6 @@
     <string name="listview_updated_this_week">ამ კვირაში</string>
     <string name="listview_updated_this_month">ამ თვეში</string>
 
-    <string name="settings_cert_trust_system">ენდეთ სისტემის სერტიფიკატებს</string>
-    <string name="settings_cert_trust_system_on">სისტემისა და მომხმარებლის მიერ დამატებული სერტიფიკატის ხელმძღვანელობა მიჩნეულ იქნება სანდოდ (რეკომენდირებულია)</string>
-    <string name="settings_cert_trust_system_off">სისტემისა და მომხმარებლის მიერ დამატებული სერტიფიკატის ხელმძღვანელობა არ იქნება მიჩნეული სანდოდ</string>
-    <string name="settings_cert_reset">(არა)სანდრო სერტიფიკატების საწყის მდოგმარეობაში დაბრუნება</string>
-    <string name="settings_cert_reset_summary">აბრუნებს საწყის მდგომარეობაში ყველა კერძო სერტიფიკატს</string>
-    <string name="settings_cert_reset_toast">ყველა კერძო სერტიფიკატი გასუფთავდა</string>
-
     <!-- Certificates -->
 
     <!-- Network -->
@@ -37,7 +30,6 @@
     <!-- Error -->
     <string name="error_sync">სინქრონიზაცია დასრულდა წარუმატებლად: %1$s</string>
     <string name="error_json">გააქტიურებულია თუ არა ჩანაწერების აპლიკაცია სერვერზე?</string>
-    <string name="error_io">სერვერთან კავშირი გაწყვეტილია</string>
     <string name="error_no_network">ქსელთან კავშირი არაა</string>
 
     <!-- Snackbar Actions -->

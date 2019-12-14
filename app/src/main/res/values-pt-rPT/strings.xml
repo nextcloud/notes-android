@@ -18,13 +18,6 @@
     <string name="listview_updated_this_month">Este mês</string>
 
     <!-- Settings -->
-    <string name="settings_cert_category">Certificados</string>
-    <string name="settings_cert_trust_system">Confiar nos certificados do sistema</string>
-    <string name="settings_cert_trust_system_on">As ACs do sistema e adicionadas pelo utilizador serão confiadas (recomendado)</string>
-    <string name="settings_cert_trust_system_off">As ACs do sistema e adicionadas pelo utilizador não serão confiadas</string>
-    <string name="settings_cert_reset">Remover os certificados (não) confiados</string>
-    <string name="settings_cert_reset_summary">Remove a confiança de todos os certificados personalizados</string>
-    <string name="settings_cert_reset_toast">Todos os certificados personalizados foram removidos</string>
 
     <!-- Certificates -->
 
@@ -33,7 +26,6 @@
     <!-- Error -->
     <string name="error_sync">A sincronização falhou: %1$s</string>
     <string name="error_json">a aplicação Notas está ativada no servidor?</string>
-    <string name="error_io">sem ligação ao servidor</string>
     <string name="error_no_network">sem ligação à rede</string>
 
     <!-- Snackbar Actions -->

@@ -3,37 +3,30 @@
 
     <string name="app_name">Notas</string>
     <string name="app_name_long">Notas Nextcloud</string>
-    <string name="no_notes">Nenhuma anotação ainda</string>
     <string name="label_all_notes">Todas notas</string>
     <string name="label_favorites">Favoritos</string>
     <string name="action_create">Nova nota</string>
     <string name="action_settings">Configurações</string>
     <string name="action_trashbin">Anotações excluídas</string>
     <string name="action_search">Pesquisar</string>
-    <string name="action_create_save">Salvar</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Salvar</string>
-    <string name="action_edit_saving">Salvando&#8230;</string>
-    <string name="action_edit_saved">Salvo</string>
     <string name="simple_about">Sobre</string>
     <string name="simple_bold">Negrito</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Itálico</string>
-    <string name="action_select_note">Selecionar anotação</string>
     <string name="action_note_deleted">Anotação excluída</string>
     <string name="action_note_restored">Anotação restaurada</string>
     <string name="action_undo">Desfazer</string>
     <string name="action_drawer_open">abrir navegação</string>
     <string name="action_drawer_close">fechar navegação</string>
-    <string name="action_recent">Recente</string>
     <string name="action_uncategorized">Sem categoria</string>
     <string name="menu_delete">Excluir</string>
     <string name="menu_change_category">Categoria</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Prever</string>
     <string name="menu_share">Compartilhar</string>
-    <string name="menu_about">Sobre</string>
 
     <string name="change_category_title">Escolher uma categoria</string>
 
@@ -45,50 +38,22 @@
     <string name="listview_updated_last_month">Último mês</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Conta</string>
-    <string name="settings_url">Endereço do servidor</string>
-    <string name="settings_url_check_description">Mostra se o endereço pode ser alcançado.</string>
-    <string name="settings_url_warn_http">AVISO: \"http\" é inseguro. Utilize \"https\".</string>
-    <string name="settings_username">Nome do usuário</string>
-    <string name="settings_password">Senha</string>
-    <string name="settings_password_unchanged">Senha (não alterada)</string>
-    <string name="settings_password_check_description">Mostra se a senha está correta.</string>
-    <string name="settings_submit">Conectar</string>
-    <string name="settings_submitting">Conectando&#8230;</string>
     <string name="settings_note_mode">Modo de exibição de notas</string>
     <string name="settings_theme_title">Tema escuro</string>
     <string name="settings_font_title"> Fonte monospaçada</string>
     <string name="settings_font_size">Tamanho da fonte</string>
     <string name="settings_wifi_only">Sincronizar somente por Wi-Fi</string>
-    <string name="settings_cert_category">Gerenciar certificados</string>
-    <string name="settings_cert_trust_system">Certificados de sistema confiáveis</string>
-    <string name="settings_cert_trust_system_on">CAs de sistema e adicionados pelo usuário serão confiáveis (recomendado)</string>
-    <string name="settings_cert_trust_system_off">CAs de sistema e adicionados pelo usuário não serão confiáveis</string>
-    <string name="settings_cert_reset">Redefine certificados confiáveis e não confiáveis</string>
-    <string name="settings_cert_reset_summary">Redefine confiança de todos os certificados personalizados</string>
-    <string name="settings_cert_reset_toast">Todos os certificados personalizados foram limpos</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Anotações - Segurança da conexão</string>
-    <string name="trust_certificate_unknown_certificate_found">As anotações encontraram um certificado desconhecido. Quer confiar nele?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Conectando</string>
-    <string name="network_connected">Conectado</string>
-    <string name="network_disconnected">Nenhuma rede disponível</string>
 
     <!-- Error -->
     <string name="error_sync">A sincronização falhou: %1$s</string>
-    <string name="error_invalid_login">Login inválido: %1$s</string>
     <string name="error_json">O aplicativo Notes está ativado no servidor?</string>
-    <string name="error_io">não existe conexão com o servidor </string>
     <string name="error_no_network">não existe conexão de rede</string>
-    <string name="error_server">URL do servidor tem erros</string>
-    <string name="error_url_malformed">Endereço incorreto do servidor</string>
-    <string name="error_username_password_invalid">Nome de usuário ou senha errados</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Configurações</string>
 
     <!-- About -->
     <string name="about_version_title">Versão</string>
@@ -129,7 +94,6 @@
     <string name="shortcut_create_long">Criar uma nova anotação</string>
 
     <string name="pref_value_theme_light">Claro</string>
-    <string name="pref_value_theme_dark">Escuro</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar por Wi-Fi e dados móveis</string>
     <string name="simple_error">Erro</string>
@@ -139,12 +103,6 @@
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="pin_to_homescreen">Fixar na tela inicial</string>
     <string name="note_has_been_deleted">A anotação foi excluída</string>
-    <string name="fallback_weblogin_text">Reverter ao antigo sistema de login</string>
-    <string name="fallback_weblogin_back">Voltar</string>
-    <string name="sso_announcment_title">Logon único</string>
-    <string name="sso_announcment_message">O aplicativo Notes começará com a próxima versão principal. Use o recurso Logon único do Nextcloud. Isso aumentará a segurança, confiabilidade e conforto para você. Certifique-se de que instalou pelo menos a versão 3.8.0 dos arquivos do aplicativo e selecione na primeira execução a mesma conta que você já está usando.</string>
-    <string name="sso_announcment_more_info">Mais informações</string>
-    <string name="sso_announcment_understood">Entendido</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

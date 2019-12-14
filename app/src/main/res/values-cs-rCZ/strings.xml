@@ -42,13 +42,6 @@
     <string name="settings_font_title">Písmo s pevnou šířkou</string>
     <string name="settings_font_size">Velikost písma</string>
     <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
-    <string name="settings_cert_category">Spravovat certifikáty</string>
-    <string name="settings_cert_trust_system">Důvěřovat systémovým certifikátům</string>
-    <string name="settings_cert_trust_system_on">Systémové a uživatelsky přidané CA budou důvěryhodné (doporučeno)</string>
-    <string name="settings_cert_trust_system_off">Systémové a uživatelsky přidané CA nebudou důvěryhodné</string>
-    <string name="settings_cert_reset">Obnovit úložiště (ne)důvěryhodných certifikátů</string>
-    <string name="settings_cert_reset_summary">Obnoví výchozí nastavení důvěry vlastních certifikátů</string>
-    <string name="settings_cert_reset_toast">Všechny vlastní certifikáty byly odebrány</string>
 
     <!-- Certificates -->
 
@@ -57,7 +50,6 @@
     <!-- Error -->
     <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
     <string name="error_json">je aplikace Poznámky aktivní na serveru?</string>
-    <string name="error_io">spojení se serverem není funkční</string>
     <string name="error_no_network">žádné síťové spojení</string>
 
     <!-- Snackbar Actions -->
@@ -110,8 +102,6 @@
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <string name="pin_to_homescreen">Připnout na domovskou obrazovku</string>
     <string name="note_has_been_deleted">Tato poznámka byla smazána</string>
-    <string name="sso_announcment_title">Sjednocené přihlašování</string>
-    <string name="sso_announcment_more_info">Více informací</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otevřít v režimu úprav</item>

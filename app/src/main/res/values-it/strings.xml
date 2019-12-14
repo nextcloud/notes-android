@@ -3,37 +3,30 @@
 
     <string name="app_name">Note</string>
     <string name="app_name_long">Note di Nextcloud</string>
-    <string name="no_notes">Nessuna nota</string>
     <string name="label_all_notes">Tutte le note</string>
     <string name="label_favorites">Preferite</string>
     <string name="action_create">Nuova nota</string>
     <string name="action_settings">Impostazioni</string>
     <string name="action_trashbin">Note eliminate</string>
     <string name="action_search">Cerca</string>
-    <string name="action_create_save">Salva</string>
     <string name="simple_cancel">Annulla</string>
     <string name="simple_edit">Modifica</string>
     <string name="action_edit_save">Salva</string>
-    <string name="action_edit_saving">Salvataggio di &#8230;</string>
-    <string name="action_edit_saved">Salvata</string>
     <string name="simple_about">Informazioni</string>
     <string name="simple_bold">Grassetto</string>
     <string name="simple_link">Collegamento</string>
     <string name="simple_italic">Corsivo</string>
-    <string name="action_select_note">Seleziona nota</string>
     <string name="action_note_deleted">Nota eliminata</string>
     <string name="action_note_restored">Nota ripristinata</string>
     <string name="action_undo">Annulla</string>
     <string name="action_drawer_open">apri navigazione</string>
     <string name="action_drawer_close">chiudi navigazione</string>
-    <string name="action_recent">Recenti</string>
     <string name="action_uncategorized">Senza categoria</string>
     <string name="menu_delete">Elimina</string>
     <string name="menu_change_category">Categoria</string>
     <string name="menu_favorite">Preferito</string>
     <string name="menu_preview">Anteprima</string>
     <string name="menu_share">Condividi</string>
-    <string name="menu_about">Informazioni</string>
 
     <string name="change_category_title">Scegli una categoria</string>
 
@@ -45,50 +38,22 @@
     <string name="listview_updated_last_month">Ultimo mese</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Account</string>
-    <string name="settings_url">Indirizzo del server</string>
-    <string name="settings_url_check_description">Mostra se l\'indirizzo può rispondere al ping.</string>
-    <string name="settings_url_warn_http">AVVISO: \"http\" non è sicuro. Utlizza \"https\".</string>
-    <string name="settings_username">Nome utente</string>
-    <string name="settings_password">Password</string>
-    <string name="settings_password_unchanged">Password (non cambiata)</string>
-    <string name="settings_password_check_description">Mostra se le credenziali sono corrette.</string>
-    <string name="settings_submit">Connetti</string>
-    <string name="settings_submitting">Connessione a &#8230;</string>
     <string name="settings_note_mode">Modalità di visualizzazione delle note</string>
     <string name="settings_theme_title">Tema scuro</string>
     <string name="settings_font_title">Carattere a spaziatura fissa</string>
     <string name="settings_font_size">Dimensiine carattere</string>
     <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
-    <string name="settings_cert_category">Gestisci certificati</string>
-    <string name="settings_cert_trust_system">Considera affidabili i certificati di sistema</string>
-    <string name="settings_cert_trust_system_on">Le CA di sistema e aggiunte dall\'utente saranno considerate affidabili (consigliato)</string>
-    <string name="settings_cert_trust_system_off">Le CA di sistema e aggiunte dall\'utente non saranno considerate affidabili</string>
-    <string name="settings_cert_reset">Ripristina certificati (in)affidabili</string>
-    <string name="settings_cert_reset_summary">Ripristina l\'affidabilità dei certificati personalizzati</string>
-    <string name="settings_cert_reset_toast">Tutti i certificati personalizzati sono stati cancellati</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Note - Sicurezza della connessione</string>
-    <string name="trust_certificate_unknown_certificate_found">Note ha rilevato un certificato sconosciuto. Vuoi considerarlo affidabile?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Connessione in corso</string>
-    <string name="network_connected">Connesso</string>
-    <string name="network_disconnected">Rete non disponibile</string>
 
     <!-- Error -->
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
-    <string name="error_invalid_login">Accesso non valido: %1$s</string>
     <string name="error_json">L\'applicazione Notes è stata attivata sul server?</string>
-    <string name="error_io">la connessione al server è interrotta</string>
     <string name="error_no_network">nessuna connessione di rete</string>
-    <string name="error_server">Errore URL/Server</string>
-    <string name="error_url_malformed">Indirizzo del server errato</string>
-    <string name="error_username_password_invalid">Nome utente o password errati</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Impostazioni</string>
 
     <!-- About -->
     <string name="about_version_title">Versione</string>
@@ -129,7 +94,6 @@
     <string name="shortcut_create_long">Crea una nuova nota</string>
 
     <string name="pref_value_theme_light">Chiaro</string>
-    <string name="pref_value_theme_dark">Scuro</string>
     <string name="pref_value_font_normal">Normale</string>
     <string name="pref_value_wifi_and_mobile">Sincronizza su Wi-FI e dati mobili</string>
     <string name="simple_error">Errore</string>
@@ -139,12 +103,6 @@
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="pin_to_homescreen">Appunta alla schermata iniziale</string>
     <string name="note_has_been_deleted">Questa nota è stata eliminata</string>
-    <string name="fallback_weblogin_text">Torna al vecchio metodo di accesso</string>
-    <string name="fallback_weblogin_back">Indietro</string>
-    <string name="sso_announcment_title">Single-Sign-On</string>
-    <string name="sso_announcment_message">L\'applicazione Note inizierà dalla prossima versione principale a utilzzare la funzionalità di Single-Sign-On di Nextcloud. Questo aumenterà la sicurezza, l\'affidabilità e la comodità di utilizzo. Assicurati di aver installato almeno la versione 3.8.0 dell\'applicazione File e seleziona, alla prima esecuzione, lo stesso account che stai già utilizzando.</string>
-    <string name="sso_announcment_more_info">Altre informazioni</string>
-    <string name="sso_announcment_understood">Ricevuto</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
