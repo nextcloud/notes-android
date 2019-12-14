@@ -29,8 +29,8 @@ public class SSOUtil {
             AccountImporter.pickNewAccount(activity);
         } catch (NextcloudFilesAppNotInstalledException e1) {
             UiExceptionManager.showDialogForException(activity, e1);
-            Log.w(SSOUtil.class.toString(), "=============================================================");
-            Log.w(SSOUtil.class.toString(), "Nextcloud app is not installed. Cannot choose account");
+            Log.w(TAG, "=============================================================");
+            Log.w(TAG, "Nextcloud app is not installed. Cannot choose account");
             e1.printStackTrace();
         } catch (AndroidGetAccountsPermissionNotGranted e2) {
             AccountImporter.requestAndroidAccountPermissionsAndPickAccount(activity);
