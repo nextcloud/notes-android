@@ -50,6 +50,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :link: Requirements
 * [Nextcloud](https://nextcloud.com/) instance running
+* [Nextcloud Files](https://github.com/nextcloud/android) app enabled (> 3.9.0)
 * [Nextcloud Notes](https://github.com/nextcloud/notes) app enabled
 
 ## :notebook: License
