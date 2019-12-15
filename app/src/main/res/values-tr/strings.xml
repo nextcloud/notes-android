@@ -53,8 +53,6 @@
     <string name="error_json">Notlar uygulaması sunucu üzerinde etkinleştirilmiş mi?</string>
     <string name="error_no_network">ağ bağlantısı yok</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Sürüm</string>
     <string name="about_version">Şu anda &lt;strong>%1$s&lt;/strong> kullanıyorsunuz</string>
@@ -84,7 +82,7 @@
     <string name="widget_single_note_title">Tek not</string>
     <string name="widget_single_note_placeholder_tv">Not bulunamadı</string>
     <string name="widget_create_note">Not Ekle</string>
-    <string name="widget_not_logged_in">Bu aracı kullanabilmek için lütfen Notlar üzerinde oturum açın</string>
+    <string name="widget_not_logged_in">Bu pano bileşenini kullanabilmek için lütfen Notlar üzerinde oturum açın</string>
     <string name="widget_entry_fav_contentDescription">Sık kullanılan ögeler için kullanılacak yıldız simgesi</string>
     <string name="widget_app_launcher_contentDescription">Uygulamayı başlatır</string>
 
@@ -103,7 +101,6 @@
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
     <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
     <string name="note_has_been_deleted">Bu not silinmiş</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>

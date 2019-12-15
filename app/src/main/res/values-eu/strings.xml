@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Oharrak</string>
+    <string name="app_name_long">Nextcloud Oharrak</string>
     <string name="label_all_notes">Ohar guztiak</string>
     <string name="label_favorites">Gogokoak</string>
     <string name="action_create">Ohar berria</string>
@@ -32,10 +33,15 @@
     <string name="listview_updated_today">Gaur</string>
     <string name="listview_updated_yesterday">Atzo</string>
     <string name="listview_updated_this_week">Aste honetan</string>
+    <string name="listview_updated_last_week">Joan den astean</string>
     <string name="listview_updated_this_month">Hilabete honetan</string>
+    <string name="listview_updated_last_month">Joan den hilabetean</string>
+
     <!-- Settings -->
     <string name="settings_note_mode">Erakutsi oharren modua</string>
     <string name="settings_theme_title">Gai iluna</string>
+    <string name="settings_font_title">Zabalera bakarreko letra mota</string>
+    <string name="settings_font_size">Letra tamaina</string>
     <string name="settings_wifi_only">Sinkronizatu wifi bidez bakarrik</string>
 
     <!-- Certificates -->
@@ -46,8 +52,6 @@
     <string name="error_sync">Sinkronizazioa huts egin du: %1$s</string>
     <string name="error_json">Oharrak aplikazioa zerbitzariak aktibatuta al dago?</string>
     <string name="error_no_network">Ez dago sare-konexiorik</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">Bertsioa</string>
@@ -95,11 +99,20 @@
     <string name="simple_copy">Kopiatu</string>
     <string name="simple_exception">Salbuespena</string>
     <string name="copied_to_clipboard">Arbelera kopiatua</string>
+    <string name="pin_to_homescreen">Hasierako pantailara egokitu</string>
+    <string name="note_has_been_deleted">Ohar hau ezabatu da</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>
         <item>Ireki aurrebista moduan</item>
         <item>Gogoratu nire azken hautaketa</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Txikia</item>
+        <item>Ertaina</item>
+        <item>Handia</item>
     </string-array>
 
     <!-- Plurals -->

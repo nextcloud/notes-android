@@ -53,8 +53,6 @@
     <string name="error_json">Ali je program Beležka Notes nameščen na strežniku?</string>
     <string name="error_no_network">ni omrežne povezave</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Različica</string>
     <string name="about_version">Trenutno je v uporabi &lt;strong>%1$s&lt;/strong></string>
@@ -103,7 +101,6 @@
     <string name="copied_to_clipboard">Kopirano v odložišče</string>
     <string name="pin_to_homescreen">Pripni na osnovni zaslon</string>
     <string name="note_has_been_deleted">Ta zabeležka je bila izbrisana</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>

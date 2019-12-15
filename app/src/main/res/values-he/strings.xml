@@ -48,8 +48,6 @@
     <string name="error_json">האם יישומון הפתקים מופעל בשרת?</string>
     <string name="error_no_network">אין חיבור לרשת</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">גרסה</string>
     <string name="about_version">הניצולת עומדת על &lt;strong>%1$s&lt;/strong></string>
