@@ -53,8 +53,6 @@
     <string name="error_json">Est-ce que l\'application Notes est activée sur le serveur ?</string>
     <string name="error_no_network">pas de connexion réseau</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">Vous utilisez actuellement la &lt;strong>%1$s&lt;/strong></string>
@@ -103,7 +101,6 @@
     <string name="copied_to_clipboard">Copié dans le presse-papier</string>
     <string name="pin_to_homescreen">Épingler sur la page d’accueil</string>
     <string name="note_has_been_deleted">Cette note a été supprimée</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ouvrir en mode édition</item>

@@ -48,8 +48,6 @@
     <string name="error_json">is the Notes app activated on the server?</string>
     <string name="error_no_network">no network connection</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">You are currently using &lt;strong>%1$s&lt;/strong></string>

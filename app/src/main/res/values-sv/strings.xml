@@ -53,8 +53,6 @@
     <string name="error_json">är anteckningar-appen aktiverad på servern?</string>
     <string name="error_no_network">ingen nätverksanslutning</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">Du använder just nu &lt;strong>%1$s&lt;/strong></string>
@@ -69,7 +67,7 @@
     <string name="about_issues">Du kan rapportera buggar, förbättringsförslag och funktionsönskningar på GitHubs problemhanterare: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Översätt</string>
     <string name="about_translate">Gå med i Nextcloud-gruppen på Transifex och hjälp oss översätta denna app: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">App-licens</string>
+    <string name="about_app_license_title">Applicens</string>
     <string name="about_app_license">Denna app är licensierad under GNU GENERAL PUBLIC LICENSE v3+</string>
     <string name="about_app_license_button">Visa licens</string>
     <string name="about_icons_disclaimer_title">Ikoner</string>
@@ -103,7 +101,6 @@
     <string name="copied_to_clipboard">Kopierat till urklipp</string>
     <string name="pin_to_homescreen">Fäst på hemskärmen</string>
     <string name="note_has_been_deleted">Denna anteckning har raderats</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>

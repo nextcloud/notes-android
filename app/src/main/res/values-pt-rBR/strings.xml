@@ -53,8 +53,6 @@
     <string name="error_json">O aplicativo Notes está ativado no servidor?</string>
     <string name="error_no_network">não existe conexão de rede</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Versão</string>
     <string name="about_version">Você está usando &lt;strong>%1$s&lt;/strong></string>
@@ -103,7 +101,6 @@
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="pin_to_homescreen">Fixar na tela inicial</string>
     <string name="note_has_been_deleted">A anotação foi excluída</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir em modo de edição</item>

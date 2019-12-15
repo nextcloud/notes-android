@@ -49,8 +49,6 @@
     <string name="error_json">er Notes appen aktiveret på serveren?</string>
     <string name="error_no_network">ingen netværksforbindelse</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">Du bruger lige nu &lt;strong>%1$s&lt;/strong></string>

@@ -53,8 +53,6 @@
     <string name="error_json">ist die Notes-App auf dem Server aktiviert?</string>
     <string name="error_no_network">keine Netzwerk-Verbindung</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">Sie benutzen gerade &lt;strong>%1$s&lt;/strong></string>
@@ -103,7 +101,6 @@
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="pin_to_homescreen">An Startbildschirm anheften</string>
     <string name="note_has_been_deleted">Diese Notiz wurde gelöscht</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Im Bearbeitungsmodus öffnen</item>
@@ -123,7 +120,4 @@
         <item quantity="one">%d ausgewählt</item>
         <item quantity="other">%d ausgewählt</item>
     </plurals>
-    <string name="category_music">Musik</string>
-    <string name="category_movies">Filme</string>
-    <string name="category_movie">Film</string>
 </resources>

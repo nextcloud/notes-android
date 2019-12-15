@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Poznámky</string>
+    <string name="app_name_long">Nextcloud poznámky</string>
     <string name="label_all_notes">Všechny poznámky</string>
     <string name="label_favorites">Oblíbené</string>
     <string name="action_create">Nová poznámka</string>
@@ -15,8 +16,8 @@
     <string name="simple_bold">Tučné</string>
     <string name="simple_link">Odkaz</string>
     <string name="simple_italic">Skloněné</string>
-    <string name="action_note_deleted">Poznámka byla smazána</string>
-    <string name="action_note_restored">Poznámka byla obnovena</string>
+    <string name="action_note_deleted">Poznámka smazána</string>
+    <string name="action_note_restored">Poznámka obnovena</string>
     <string name="action_undo">Zpět</string>
     <string name="action_drawer_open">otevřít navigační panel</string>
     <string name="action_drawer_close">zavřít navigační panel</string>
@@ -39,7 +40,7 @@
     <!-- Settings -->
     <string name="settings_note_mode">Režim zobrazení pro poznámky</string>
     <string name="settings_theme_title">Tmavý motiv vzhledu</string>
-    <string name="settings_font_title">Písmo s pevnou šířkou</string>
+    <string name="settings_font_title">Písmo se znaky všemi stejně širokými</string>
     <string name="settings_font_size">Velikost písma</string>
     <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
 
@@ -49,10 +50,8 @@
 
     <!-- Error -->
     <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
-    <string name="error_json">je aplikace Poznámky aktivní na serveru?</string>
+    <string name="error_json">je na serveru aktivní aplikace Poznámky?</string>
     <string name="error_no_network">žádné síťové spojení</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">Verze</string>
@@ -63,9 +62,9 @@
     <string name="about_translators_transifex">Nextcloud komunita na &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testeři</string>
     <string name="about_source_title">Zdrojové kódy</string>
-    <string name="about_source">Tento projekt je hostován na GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Tento projekt je hostován na portálu GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problémy</string>
-    <string name="about_issues">Můžete nahlásit chyby, návrhy a požadavky na zlepšení na GitHub issue tracker: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Chyby, návrhy na zlepšení a další funkce je možné posílat prostřednictvím systému správy hlášení na portálu GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Překládat</string>
     <string name="about_translate">Připojte se k týmu na službě Transifex a pomozte nám přelkládat tuto aplikaci: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licence aplikace</string>
@@ -84,7 +83,7 @@
     <string name="widget_single_note_placeholder_tv">Poznámka nenalezena</string>
     <string name="widget_create_note">Vytvořit poznámku</string>
     <string name="widget_not_logged_in">Abyste mohli tento widget používat, přihlaste se  do aplikacie Poznámky</string>
-    <string name="widget_entry_fav_contentDescription">Ikonka hvězdy označí položku jako oblíbenou</string>
+    <string name="widget_entry_fav_contentDescription">Ikonka hvězdičky označí položku jako oblíbenou</string>
     <string name="widget_app_launcher_contentDescription">Spustí aplikaci</string>
 
     <string name="activity_select_single_note">Vybrat poznámku</string>

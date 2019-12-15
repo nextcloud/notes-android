@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Poznámky</string>
+    <string name="app_name_long">Nextcloud poznámky</string>
     <string name="label_all_notes">Všetky poznámky</string>
     <string name="label_favorites">Obľúbené</string>
     <string name="action_create">Nová poznámka</string>
@@ -32,7 +33,10 @@
     <string name="listview_updated_today">Dnes</string>
     <string name="listview_updated_yesterday">Včera</string>
     <string name="listview_updated_this_week">Tento týždeň</string>
+    <string name="listview_updated_last_week">Minulý týždeň</string>
     <string name="listview_updated_this_month">Tento mesiac</string>
+    <string name="listview_updated_last_month">Minulý mesiac</string>
+
     <!-- Settings -->
     <string name="settings_note_mode">Režim zobrazovania poznámok</string>
     <string name="settings_theme_title">Tmavý motív vzhľadu</string>
@@ -48,8 +52,6 @@
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_json">máte povolenú aplikáciu Poznámky na serveri?</string>
     <string name="error_no_network">nie je pripojenie k sieti</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">Verzia</string>

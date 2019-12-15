@@ -54,8 +54,6 @@
     <string name="error_json">is de Notities app op de server geactiveerd?</string>
     <string name="error_no_network">geen netwerkverbinding</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Versie</string>
     <string name="about_version">Je gebruikt nu &lt;strong>%1$s&lt;/strong></string>
@@ -104,7 +102,6 @@
     <string name="copied_to_clipboard">Gekopieerd naar het klembord</string>
     <string name="pin_to_homescreen">Vastmaken op startscherm</string>
     <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wijzigen modus</item>

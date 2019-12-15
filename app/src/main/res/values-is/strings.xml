@@ -37,6 +37,7 @@
     <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
     <string name="settings_theme_title">Dökkt þema</string>
     <string name="settings_font_title">Jafnbreitt letur</string>
+    <string name="settings_font_size">Leturstærð</string>
     <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
 
     <!-- Certificates -->
@@ -47,8 +48,6 @@
     <string name="error_sync">Samstilling mistókst: %1$s</string>
     <string name="error_json">er minnispunktaforritið virkt á þjóninum?</string>
     <string name="error_no_network">engin nettenging</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">Útgáfa</string>
@@ -91,11 +90,24 @@
     <string name="pref_value_theme_light">Ljóst</string>
     <string name="pref_value_font_normal">Venjulegt</string>
     <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
+    <string name="simple_error">Villa</string>
+    <string name="simple_close">Loka</string>
+    <string name="simple_copy">Afrita</string>
+    <string name="simple_exception">Undantekning</string>
+    <string name="copied_to_clipboard">Afritað á klippispjaldið</string>
+    <string name="pin_to_homescreen">Festa á heimaskjá</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>
         <item>Opna í forskoðunarham</item>
         <item>Muna það sem ég valdi síðast</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Lítið</item>
+        <item>miðlungs</item>
+        <item>Stórt</item>
     </string-array>
 
     <!-- Plurals -->
