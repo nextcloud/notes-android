@@ -27,11 +27,14 @@ public class DatabaseIndexUtil {
     }
 
     public static void dropIndexes(@NonNull SQLiteDatabase db) {
-        Cursor c = db.query("sqlite_master", new String[]{"name"}, "type=?", new String[]{"index"}, null, null, null);
-        while (c.moveToNext()) {
-            Log.v(TAG, "Deleting database index: DROP INDEX " + c.getString(0));
-            db.execSQL("DROP INDEX " + c.getString(0));
+        try (Cursor c = db.query("sqlite_master", new String[]{"name", "sql"}, "type=?", new String[]{"index"}, null, null, null)) {
+            while (c.moveToNext()) {
+                // Skip automatic indexes which we can't drop manually
+                if (c.getString(1) != null) {
+                    Log.v(TAG, "Deleting database index: DROP INDEX " + c.getString(0));
+                    db.execSQL("DROP INDEX " + c.getString(0));
+                }
+            }
         }
-        c.close();
     }
 }
