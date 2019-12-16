@@ -104,7 +104,7 @@ public class StyleCallback implements ActionMode.Callback {
                 try {
                     editText.onTextContextMenuItem(item.getItemId());
                     return true;
-                } catch (Exception e) {
+                } catch (IndexOutOfBoundsException e) {
                     e.printStackTrace();
                     editText.setSelection(0, 0);
                     editText.clearFocus();
