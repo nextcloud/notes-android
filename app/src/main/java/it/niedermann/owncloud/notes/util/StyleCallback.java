@@ -82,7 +82,7 @@ public class StyleCallback implements ActionMode.Callback {
                 break;
             case R.id.link:
                 boolean textToFormatIsLink = TextUtils.indexOf(editText.getText().subSequence(start, end), "http") == 0;
-                if(textToFormatIsLink) {
+                if (textToFormatIsLink) {
                     ssb.insert(end, ")");
                     ssb.insert(start, "[](");
                 } else {
@@ -92,12 +92,25 @@ public class StyleCallback implements ActionMode.Callback {
                 end++;
                 ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
                 editText.setText(ssb);
-                if(textToFormatIsLink) {
+                if (textToFormatIsLink) {
                     editText.setSelection(start + 1);
                 } else {
                     editText.setSelection(end + 2); // after <end>](
                 }
                 return true;
+            case android.R.id.cut: {
+                // https://github.com/stefan-niedermann/nextcloud-notes/issues/604
+                // https://github.com/stefan-niedermann/nextcloud-notes/issues/477
+                try {
+                    editText.onTextContextMenuItem(item.getItemId());
+                    return true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    editText.setSelection(0, 0);
+                    editText.clearFocus();
+                    return true;
+                }
+            }
         }
         return false;
     }
