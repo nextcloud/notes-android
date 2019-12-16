@@ -101,6 +101,13 @@
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="pin_to_homescreen">An Startbildschirm anheften</string>
     <string name="note_has_been_deleted">Diese Notiz wurde gelöscht</string>
+    <string name="add_account">Konto hinzufügen</string>
+    <string name="category_music">Musik</string>
+    <string name="category_movies">Filme</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Arbeit</string>
+    <string name="account_already_imported">Konto wurde bereits importiert</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Im Bearbeitungsmodus öffnen</item>
