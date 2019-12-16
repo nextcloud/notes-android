@@ -26,6 +26,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 | ![Screenshot of categories in sidebar](/fastlane/metadata/android/en-US/images/phoneScreenshots/5.png) | ![Screenshot of list view](/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Screenshot of edit view](/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) |
 
 ## :rocket: Features
+* Multiple accounts
 * List, create, edit, share, search and delete notes
 * Share text and links as new note into the app
 * Mark notes as favorite
@@ -55,6 +56,3 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :notebook: License
 This project is licensed under the [GNU GENERAL PUBLIC LICENSE](/LICENSE).
-
-## :twisted_rightwards_arrows: Alternatives
-If you dislike this app and you are looking for alternatives: Have a look at [MyOwnNotes](https://github.com/aykit/MyOwnNotes).

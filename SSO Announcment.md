@@ -1,6 +1,6 @@
 # SSO Announcment
 
-The next version of Notes for android will depend on Nextcloud Single-Sign-On.
+Beginning with version `v2.0.0`, Notes for android will depend on Nextcloud Single-Sign-On.
 
 ## What do you need to do?
 
