@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Užrašai</string>
+    <string name="app_name_long">Nextcloud užrašai</string>
     <string name="label_all_notes">Visi užrašai</string>
     <string name="label_favorites">Mėgstami</string>
     <string name="action_create">Nauji užrašai</string>
@@ -27,6 +28,8 @@
     <string name="menu_preview">Peržiūra</string>
     <string name="menu_share">Bendrinti</string>
 
+    <string name="change_category_title">Pasirinkite kategoriją</string>
+
     <string name="listview_updated_today">Šiandien</string>
     <string name="listview_updated_yesterday">Vakar</string>
     <string name="listview_updated_this_week">Šią savaitę</string>
@@ -39,6 +42,8 @@
     <string name="settings_theme_title">Tamsus apipavidalinimas</string>
     <string name="settings_font_title">Lygiaplotis šriftas</string>
     <string name="settings_font_size">Šrifto dydis</string>
+    <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
+
     <!-- Certificates -->
 
     <!-- Network -->
@@ -78,6 +83,7 @@
     <string name="widget_single_note_placeholder_tv">Užrašai nerasti</string>
     <string name="widget_create_note">Sukurti užrašus</string>
     <string name="widget_not_logged_in">Prieš naudodami šį valdiklį, prisijunkite prie Užrašų</string>
+    <string name="widget_entry_fav_contentDescription">Žvaigždės piktograma yra naudojama pažymėti elementą kaip mėgstamą</string>
     <string name="widget_app_launcher_contentDescription">Paleidžia programėlę</string>
 
     <string name="activity_select_single_note">Pasirinkti užrašus</string>
@@ -87,10 +93,21 @@
 
     <string name="pref_value_theme_light">Šviesus</string>
     <string name="pref_value_font_normal">Normalus</string>
+    <string name="pref_value_wifi_and_mobile">Sinchronizuoti naudojant belaidį (Wi-Fi) ir mobiliuosius duomenis</string>
     <string name="simple_error">Klaida</string>
     <string name="simple_close">Užverti</string>
     <string name="simple_copy">Kopijuoti</string>
+    <string name="simple_exception">Išimtis</string>
     <string name="copied_to_clipboard">Nukopijuota į iškarpinę</string>
+    <string name="pin_to_homescreen">Prisegti prie pradžios ekrano</string>
+    <string name="note_has_been_deleted">Šie užrašai ištrinti</string>
+    <string name="add_account">Pridėti paskyrą</string>
+    <string name="category_music">Muzika</string>
+    <string name="category_movies">Filmai</string>
+    <string name="category_movie">Filmas</string>
+    <string name="category_work">Darbas</string>
+    <string name="account_already_imported">Paskyra jau buvo importuota</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>

@@ -101,6 +101,13 @@
     <string name="copied_to_clipboard">复制到剪贴板</string>
     <string name="pin_to_homescreen">固定到主屏幕</string>
     <string name="note_has_been_deleted">此便签已被删除</string>
+    <string name="add_account">添加帐号</string>
+    <string name="category_music">音乐</string>
+    <string name="category_movies">影片</string>
+    <string name="category_movie">影片</string>
+    <string name="category_work">工作</string>
+    <string name="account_already_imported">账号已被导入</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>

@@ -101,6 +101,13 @@
     <string name="copied_to_clipboard">Kopierat till urklipp</string>
     <string name="pin_to_homescreen">Fäst på hemskärmen</string>
     <string name="note_has_been_deleted">Denna anteckning har raderats</string>
+    <string name="add_account">Lägg till konto</string>
+    <string name="category_music">Musik</string>
+    <string name="category_movies">Filmer</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Arbete</string>
+    <string name="account_already_imported">Kontot har redan importerats</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>
