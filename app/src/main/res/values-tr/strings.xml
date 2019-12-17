@@ -101,6 +101,13 @@
     <string name="copied_to_clipboard">Panoya kopyalandı</string>
     <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
     <string name="note_has_been_deleted">Bu not silinmiş</string>
+    <string name="add_account">Hesap ekle</string>
+    <string name="category_music">Müzik</string>
+    <string name="category_movies">Filmler</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">İş</string>
+    <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>
