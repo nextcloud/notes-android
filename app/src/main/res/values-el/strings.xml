@@ -37,7 +37,10 @@
     <string name="listview_updated_this_month">Αυτό το μήνα</string>
     <string name="listview_updated_last_month">Προηγούμενος μήνας</string>
 
+    <!-- Settings -->
+    <string name="settings_note_mode">Κατάσταση οθόνης για σημειώσεις</string>
     <string name="settings_theme_title">Σκούρο θέμα</string>
+    <string name="settings_font_title">Γραμματοσειρά monospace</string>
     <string name="settings_font_size">Μέγεθος γραμματοσειράς</string>
     <string name="settings_wifi_only">Συγχρονισμός μόνο σε Wi-Fi</string>
 
@@ -68,6 +71,7 @@
     <string name="about_app_license">Αυτή η εφαρμογή υπόκεινται στην άδεια χρήσης GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Προβολή άδειας χρήσης</string>
     <string name="about_icons_disclaimer_title">Εικονίδια</string>
+    <string name="about_icons_disclaimer">&lt;p>Τα αυθεντικά εικονίδια δημιουργήθηκαν από %1$s&lt;/p>&lt; p> Όλα τα υπόλοιπα αυτής της εφαρμογής είναι &lt; href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> made by Google Inc. and licensed under the Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Μνεία</string>
     <string name="about_contribution_tab_title">Συνεισφορά</string>
     <string name="about_license_tab_title">Άδεια χρήσης</string>
@@ -79,6 +83,7 @@
     <string name="widget_single_note_placeholder_tv">Η σημείωση δεν βρέθηκε</string>
     <string name="widget_create_note">Δημιουργία Σημείωσης</string>
     <string name="widget_not_logged_in">Παρακαλούμε συνδεθείτε στις Σημειώσεις πρωτού να χρησιμοποιήσετε αυτό το γραφικό στοιχείο.</string>
+    <string name="widget_entry_fav_contentDescription">Το εικονίδιο Αστέρι χρησιμέυει για την σήμανση ως αγαπημένο</string>
     <string name="widget_app_launcher_contentDescription">Εκκινεί την εφαρμογή</string>
 
     <string name="activity_select_single_note">Επιλογή σημείωσης</string>
@@ -96,6 +101,13 @@
     <string name="copied_to_clipboard">Αντιγράφηκε στο πρόχειρο</string>
     <string name="pin_to_homescreen">Καρφίτσωμα στην αρχική αθόνη</string>
     <string name="note_has_been_deleted">Αυτή η σημείωση έχει διαγραφεί</string>
+    <string name="add_account">Προσθήκη λογαριασμού</string>
+    <string name="category_music">Μουσική</string>
+    <string name="category_movies">Ταινίες</string>
+    <string name="category_movie">Ταινία</string>
+    <string name="category_work">Εργασία</string>
+    <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Άνοιγμα σε λειτουργία τροποποίησης</item>
