@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
+import androidx.annotation.NonNull;
+
 public class LocalAccount {
 
     private long id;
@@ -57,6 +59,7 @@ public class LocalAccount {
         this.modified = modified;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "LocalAccount{" +

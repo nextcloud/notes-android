@@ -1,13 +1,14 @@
 package it.niedermann.owncloud.notes.model;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int section_type = 0;
     private static final int note_type = 1;
     private final NoteClickListener noteClickListener;
-    private List<Item> itemList = null;
+    private List<Item> itemList;
     private boolean showCategory = true;
-    private List<Integer> selected = null;
+    private List<Integer> selected;
 
     public ItemAdapter(@NonNull NoteClickListener noteClickListener) {
         this.itemList = new ArrayList<>();
@@ -55,17 +56,6 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     /**
-     * Replaces a note with an updated version
-     *
-     * @param note     Note with the changes.
-     * @param position position in the list of the node
-     */
-    public void replace(@NonNull DBNote note, int position) {
-        itemList.set(position, note);
-        notifyItemChanged(position);
-    }
-
-    /**
      * Removes all items from the adapter.
      */
     public void removeAll() {
@@ -74,8 +64,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     // Create new views (invoked by the layout manager)
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
         if (viewType == section_type) {
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_notes_list_section_item, parent, false);
@@ -89,7 +80,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         Item item = itemList.get(position);
@@ -106,12 +97,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             nvHolder.noteExcerpt.setText(Html.fromHtml(note.getExcerpt()));
             nvHolder.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
             nvHolder.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp);
-            nvHolder.noteFavorite.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    noteClickListener.onNoteFavoriteClick(holder.getAdapterPosition(), view);
-                }
-            });
+            nvHolder.noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(holder.getAdapterPosition(), view));
         }
     }
 
@@ -128,16 +114,15 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return selected;
     }
 
-    public boolean deselect(Integer position) {
+    public void deselect(Integer position) {
         for (int i = 0; i < selected.size(); i++) {
             if (selected.get(i).equals(position)) {
                 //position was selected and removed
                 selected.remove(i);
-                return true;
+                return;
             }
         }
         // position was not selected
-        return false;
     }
 
     public Item getItem(int notePosition) {

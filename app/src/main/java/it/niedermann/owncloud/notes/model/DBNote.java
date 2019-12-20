@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.Calendar;
 
@@ -62,6 +64,7 @@ public class DBNote extends CloudNote implements Item, Serializable {
         return false;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "DBNote{" +

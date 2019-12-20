@@ -354,7 +354,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     protected float getFontSizeFromPreferences(SharedPreferences sp) {
         final String prefValueSmall = getString(R.string.pref_value_font_size_small);
         final String prefValueMedium = getString(R.string.pref_value_font_size_medium);
-        final String prefValueLarge = getString(R.string.pref_value_font_size_large);
+        // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
         String fontSize = sp.getString(getString(R.string.pref_key_font_size), prefValueMedium);
 
         assert fontSize != null;

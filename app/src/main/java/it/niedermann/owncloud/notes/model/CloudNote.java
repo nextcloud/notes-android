@@ -1,11 +1,12 @@
 package it.niedermann.owncloud.notes.model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
@@ -20,6 +21,7 @@ public class CloudNote implements Serializable {
     private boolean favorite = false;
     private String category = "";
     private String etag = "";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
     public CloudNote(long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag) {
         this.remoteId = remoteId;
@@ -96,9 +98,9 @@ public class CloudNote implements Serializable {
         this.category = category == null ? "" : category;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
         return "R" + getRemoteId() + " " + (isFavorite() ? " (*) " : "     ") + getCategory() + " / " + getTitle() + " (" + getModified(DATE_FORMAT) + " / " + getEtag() + ")";
     }
 }
