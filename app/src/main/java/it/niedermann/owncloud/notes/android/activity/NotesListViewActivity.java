@@ -128,6 +128,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     RecyclerView listNavigationMenu;
     @BindView(R.id.recycler_view)
     RecyclerView listView;
+    @BindView(R.id.empty_content_view)
+    RelativeLayout emptyContentView;
 
     private ActionBarDrawerToggle drawerToggle;
     private ItemAdapter adapter = null;
@@ -660,6 +662,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         LoadNotesListTask.NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
             adapter.setShowCategory(showCategory);
             adapter.setItemList(notes);
+            if(notes.size() > 0) {
+                emptyContentView.setVisibility(View.GONE);
+            } else {
+                emptyContentView.setVisibility(View.VISIBLE);
+            }
             if (scrollToTop) {
                 listView.scrollToPosition(0);
             }
