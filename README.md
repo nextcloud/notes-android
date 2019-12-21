@@ -2,6 +2,7 @@
 An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
 [![Build Status](https://travis-ci.org/stefan-niedermann/nextcloud-notes.svg?branch=master)](https://travis-ci.org/stefan-niedermann/nextcloud-notes)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9f784826834042e8b512d531cab84711)](https://www.codacy.com/manual/info_147/nextcloud-notes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stefan-niedermann/nextcloud-notes&amp;utm_campaign=Badge_Grade)
 [![GitHub issues](https://img.shields.io/github/issues/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/issues)
 [![GitHub stars](https://img.shields.io/github/stars/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/stargazers)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
