@@ -107,7 +107,6 @@
     <string name="category_movie">Filma</string>
     <string name="category_work">Lana</string>
     <string name="account_already_imported">Kontua dagoeneko inportatu da</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>

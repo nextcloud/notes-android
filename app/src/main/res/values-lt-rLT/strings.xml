@@ -107,7 +107,6 @@
     <string name="category_movie">Filmas</string>
     <string name="category_work">Darbas</string>
     <string name="account_already_imported">Paskyra jau buvo importuota</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>
