@@ -107,7 +107,6 @@
     <string name="category_movie">Ταινία</string>
     <string name="category_work">Εργασία</string>
     <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Άνοιγμα σε λειτουργία τροποποίησης</item>

@@ -107,7 +107,6 @@
     <string name="category_movie">Филм</string>
     <string name="category_work">Посао</string>
     <string name="account_already_imported">Налог је већ увезен</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>

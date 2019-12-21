@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">便签</string>
+    <string name="app_name">笔记</string>
     <string name="app_name_long">Nextcloud 笔记</string>
-    <string name="label_all_notes">所有便签</string>
+    <string name="label_all_notes">所有笔记</string>
     <string name="label_favorites">收藏</string>
-    <string name="action_create">新建便签</string>
+    <string name="action_create">新建笔记</string>
     <string name="action_settings">设置</string>
     <string name="action_trashbin">已删除的笔记</string>
     <string name="action_search">搜索</string>
@@ -16,14 +16,14 @@
     <string name="simple_bold">粗体</string>
     <string name="simple_link">链接</string>
     <string name="simple_italic">斜体</string>
-    <string name="action_note_deleted">已删除的便签</string>
+    <string name="action_note_deleted">已删除的笔记</string>
     <string name="action_note_restored">已恢复便签</string>
     <string name="action_undo">撤销</string>
     <string name="action_drawer_open">打开导航</string>
     <string name="action_drawer_close">关闭导航</string>
     <string name="action_uncategorized">未分类</string>
     <string name="menu_delete">删除</string>
-    <string name="menu_change_category">类别</string>
+    <string name="menu_change_category">分类</string>
     <string name="menu_favorite">收藏</string>
     <string name="menu_preview">预览</string>
     <string name="menu_share">共享</string>
@@ -79,7 +79,7 @@
     <!-- Widgets -->
     <string name="widget_note_list_title">笔记列表</string>
     <string name="widget_note_list_placeholder">没有笔记</string>
-    <string name="widget_single_note_title">单个便笺</string>
+    <string name="widget_single_note_title">单个笔记</string>
     <string name="widget_single_note_placeholder_tv">未找到笔记</string>
     <string name="widget_create_note">创建笔记</string>
     <string name="widget_not_logged_in">请在使用此小部件之前登录 Notes</string>
@@ -100,14 +100,13 @@
     <string name="simple_exception">异常</string>
     <string name="copied_to_clipboard">复制到剪贴板</string>
     <string name="pin_to_homescreen">固定到主屏幕</string>
-    <string name="note_has_been_deleted">此便签已被删除</string>
+    <string name="note_has_been_deleted">此笔记已被删除</string>
     <string name="add_account">添加帐号</string>
     <string name="category_music">音乐</string>
     <string name="category_movies">影片</string>
     <string name="category_movie">影片</string>
     <string name="category_work">工作</string>
     <string name="account_already_imported">账号已被导入</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>
