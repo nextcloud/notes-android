@@ -51,7 +51,7 @@ public class ServerResponse {
     }
 
     protected String getContent() {
-        return response.getContent();
+        return response == null ? null : response.getContent();
     }
 
     public String getETag() {

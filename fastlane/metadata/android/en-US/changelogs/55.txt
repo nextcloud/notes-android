@@ -8,6 +8,7 @@
 - #604 Crash upon cutting the last item of a bullet list
 - #613 Crash on start. shortLabel cannot be empty
 - #619 Skip dropping automatic indices (Thanks to @Unpublished)
+- #630 Note list widget now missing "+" button
 - Hide FAB when scrolling down
 - Translation updates
 

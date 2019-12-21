@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:background="@color/widget_background">
+    android:background="@color/widget_background"
+    android:orientation="vertical">
 
     <!-- Widget header -->
     <RelativeLayout
@@ -50,7 +49,7 @@
             android:id="@+id/widget_note_list_create_icon"
             android:layout_width="@dimen/widget_note_list_icon_width"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_add_white_24dp"
+            android:src="@drawable/ic_add_white_24dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:paddingStart="@dimen/widget_note_list_inner_padding"
