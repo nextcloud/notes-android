@@ -107,6 +107,7 @@
     <string name="category_movie">Film</string>
     <string name="category_work">Arbete</string>
     <string name="account_already_imported">Kontot har redan importerats</string>
+    <string name="no_notes_yet">Inga anteckningar än</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>

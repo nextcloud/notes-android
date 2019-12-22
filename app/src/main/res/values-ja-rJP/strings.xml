@@ -101,6 +101,11 @@
     <string name="copied_to_clipboard">クリップボードにコピー</string>
     <string name="pin_to_homescreen">ホームスクリーンにピン留めする</string>
     <string name="note_has_been_deleted">ノートが削除されました</string>
+    <string name="add_account">アカウントを追加</string>
+    <string name="category_music">音楽</string>
+    <string name="category_movies">動画</string>
+    <string name="category_work">業種</string>
+    <string name="no_notes_yet">まだノートはありません</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>

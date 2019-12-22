@@ -107,6 +107,9 @@
     <string name="category_movie">Film</string>
     <string name="category_work">Lavoro</string>
     <string name="account_already_imported">L\'account è già stato importato</string>
+    <string name="no_notes_yet">Ancora nessuna nota</string>
+    <string name="no_notes_yet_description">Premi il pulsante + per creare una nuova nota</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Apri in modalità modifica</item>

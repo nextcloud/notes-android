@@ -101,6 +101,11 @@
     <string name="copied_to_clipboard">Kopirano v odložišče</string>
     <string name="pin_to_homescreen">Pripni na osnovni zaslon</string>
     <string name="note_has_been_deleted">Ta zabeležka je bila izbrisana</string>
+    <string name="add_account">Dodaj račun</string>
+    <string name="category_music">Glasba</string>
+    <string name="category_movies">Video</string>
+    <string name="category_work">Službeni naslov</string>
+    <string name="no_notes_yet">Ni še dodane nobene zabeležke</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>

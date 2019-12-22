@@ -37,6 +37,7 @@
     <string name="settings_note_mode">מצב תצוגת פתקים</string>
     <string name="settings_theme_title">ערכת עיצוב כהה</string>
     <string name="settings_font_title">גופן ברוחב אחיד</string>
+    <string name="settings_font_size">גודל גופן</string>
     <string name="settings_wifi_only">סנכרון רק דרך רשת אלחוטית</string>
 
     <!-- Certificates -->
@@ -92,13 +93,25 @@
     <string name="simple_error">שגיאה</string>
     <string name="simple_close">סגור</string>
     <string name="simple_copy">העתק</string>
+    <string name="copied_to_clipboard">הועתק ללוח הגזירים</string>
     <string name="pin_to_homescreen">הוסף למסך הבית</string>
     <string name="note_has_been_deleted">פתק זה נמחק</string>
+    <string name="add_account">הוספת חשבון</string>
+    <string name="category_music">מוזיקה</string>
+    <string name="category_movies">סרטים</string>
+    <string name="category_work">עבודה</string>
+    <string name="no_notes_yet">אין פתקים עדיין</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>
         <item>פתיחה במצב תצוגה מקדימה</item>
         <item>שמירת הבחירה האחרונה שלי</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>קטן</item>
+        <item>גדול</item>
     </string-array>
 
     <!-- Plurals -->

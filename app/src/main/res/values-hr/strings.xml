@@ -101,6 +101,12 @@
     <string name="copied_to_clipboard">Kopirano u međuspremnik</string>
     <string name="pin_to_homescreen">Prikvačite na početni zaslon</string>
     <string name="note_has_been_deleted">Bilješka je izbrisana</string>
+    <string name="add_account">Dodaj račun</string>
+    <string name="category_music">Glazba</string>
+    <string name="category_movies">Filmovi</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Posao</string>
+    <string name="no_notes_yet">Još nema bilješki</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>
