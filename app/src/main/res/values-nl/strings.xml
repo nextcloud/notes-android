@@ -102,6 +102,11 @@
     <string name="copied_to_clipboard">Gekopieerd naar het klembord</string>
     <string name="pin_to_homescreen">Vastmaken op startscherm</string>
     <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
+    <string name="add_account">Account toevoegen</string>
+    <string name="category_music">Muziek</string>
+    <string name="category_movies">Films</string>
+    <string name="category_work">Werk</string>
+    <string name="no_notes_yet">Nog geen notities</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wijzigen modus</item>

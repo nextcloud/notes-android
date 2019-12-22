@@ -101,6 +101,11 @@
     <string name="copied_to_clipboard">Skopírované do schránky</string>
     <string name="pin_to_homescreen">Pripnúť na domovskú obrazovku</string>
     <string name="note_has_been_deleted">Táto poznámka bola vymazaná</string>
+    <string name="add_account">Pridať účet</string>
+    <string name="category_music">Hudba</string>
+    <string name="category_movies">Videá</string>
+    <string name="category_work">Práca</string>
+    <string name="no_notes_yet">Zatiaľ nie sú žiadne poznámky</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>

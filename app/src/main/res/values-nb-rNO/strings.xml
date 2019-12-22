@@ -101,6 +101,11 @@
     <string name="copied_to_clipboard">Kopiert til utklippstavlen</string>
     <string name="pin_to_homescreen">Fest til hjemmeskjermen</string>
     <string name="note_has_been_deleted">Dette notatet har blitt slettet</string>
+    <string name="add_account">Legg til en konto</string>
+    <string name="category_music">Musikk</string>
+    <string name="category_movies">Filmer</string>
+    <string name="category_work">Arbeid</string>
+    <string name="no_notes_yet">Ingen notater enda</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åpne i redigeringsmodus</item>

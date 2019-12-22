@@ -12,6 +12,9 @@
     <string name="simple_edit">Redakto</string>
     <string name="action_edit_save">Ruaj</string>
     <string name="simple_about">Rreth </string>
+    <string name="simple_bold">I theksuar</string>
+    <string name="simple_link">Lidhje</string>
+    <string name="simple_italic">I pjerrët</string>
     <string name="action_note_deleted">Shënimi u fshi</string>
     <string name="action_note_restored">Shënimi i rivendos</string>
     <string name="action_undo">Zhbëj</string>
@@ -30,8 +33,7 @@
     <string name="listview_updated_yesterday">Dje</string>
     <string name="listview_updated_this_week">Këtë javë</string>
     <string name="listview_updated_this_month">Këtë muaj</string>
-    <!-- Settings -->
-
+    <string name="settings_theme_title">Temë e errët</string>
     <!-- Certificates -->
 
     <!-- Network -->
@@ -40,8 +42,6 @@
     <string name="error_sync">Sinkronizimi dështoi: %1$s</string>
     <string name="error_json">a është aplikacioni i Notes i aktivizuar në server?</string>
     <string name="error_no_network">asnjë lidhje në rrjet</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">Versioni</string>
@@ -82,6 +82,17 @@
     <string name="shortcut_create_long">Krijo një shënim të ri</string>
 
     <string name="pref_value_theme_light">E çelët</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="simple_error">Error</string>
+    <string name="simple_close">Mbylleni</string>
+    <string name="simple_copy">Kopjo</string>
+    <string name="simple_exception">Përjashtim</string>
+    <string name="copied_to_clipboard">U kopjua në clipboard</string>
+    <string name="add_account">Shtoni llogari</string>
+    <string name="category_music">Muzik</string>
+    <string name="category_movies">Filma</string>
+    <string name="category_work">Punë</string>
+    <string name="no_notes_yet">Nuk ka shënime</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Hapur në modalitetin e redaktimit</item>

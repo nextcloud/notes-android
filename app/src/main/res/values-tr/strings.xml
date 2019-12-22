@@ -107,6 +107,7 @@
     <string name="category_movie">Film</string>
     <string name="category_work">İş</string>
     <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
+    <string name="no_notes_yet">Henüz bir not yok</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>

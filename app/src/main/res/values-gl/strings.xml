@@ -107,6 +107,9 @@
     <string name="category_movie">Filme</string>
     <string name="category_work">Traballo</string>
     <string name="account_already_imported">A conta xa foi importada</string>
+    <string name="no_notes_yet">Aínda non hai notas</string>
+    <string name="no_notes_yet_description">Prema o botón + para crear unha nota nova</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>

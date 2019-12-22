@@ -96,6 +96,12 @@
     <string name="simple_exception">Undantekning</string>
     <string name="copied_to_clipboard">Afritað á klippispjaldið</string>
     <string name="pin_to_homescreen">Festa á heimaskjá</string>
+    <string name="add_account">Bæta við notandaaðgangi</string>
+    <string name="category_music">Tónlist</string>
+    <string name="category_movies">Kvikmyndir</string>
+    <string name="category_movie">Kvikmynd</string>
+    <string name="category_work">Vinna</string>
+    <string name="no_notes_yet">Engir minnispunktar ennþá</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>
