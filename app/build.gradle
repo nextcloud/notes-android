@@ -15,6 +15,7 @@ android {
         targetSdkVersion 28
         versionCode 55
         versionName "2.1.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 //        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -49,6 +50,10 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "com.google.android.material:material:1.0.0"
+
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support:support-annotations:24.0.0'
+    androidTestImplementation 'com.android.support.test:runner:0.5'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }

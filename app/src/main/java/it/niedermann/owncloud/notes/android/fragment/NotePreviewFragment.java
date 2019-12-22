@@ -1,7 +1,9 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.method.LinkMovementMethod;
@@ -19,22 +21,31 @@ import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
+import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class NotePreviewFragment extends BaseNoteFragment {
-    
+
     private static final String TAG = NotePreviewFragment.class.getSimpleName();
 
     @BindView(R.id.single_note_content)
     RxMDTextView noteContent;
+
+    private NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
 
     public static NotePreviewFragment newInstance(long accountId, long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
@@ -66,6 +77,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
         setActiveTextView(noteContent);
 
         String content = note.getContent();
+        content = NoteLinksUtils.replaceNoteLinksWithDummyUrls(content, getExistingNoteRemoteIds());
 
         RxMarkdown.with(content, getActivity())
                 .config(
@@ -82,7 +94,21 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                         return line;
                                     }
                                 }
-                            )*/.build()
+                            )*/
+                                .setOnLinkClickCallback((view, link) -> {
+                                    if (NoteLinksUtils.isNoteLink(link)) {
+                                        long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
+                                        DBNote note = db.getNoteByRemoteId(this.note.getAccountId(), noteRemoteId);
+                                        Intent intent = new Intent(getActivity().getApplicationContext(), EditNoteActivity.class);
+                                        intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                                        startActivity(intent);
+                                    }
+                                    else {
+                                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                                        startActivity(browserIntent);
+                                    }
+                                })
+                                .build()
                 )
                 .factory(TextFactory.create())
                 .intoObservable()
@@ -111,6 +137,15 @@ public class NotePreviewFragment extends BaseNoteFragment {
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             noteContent.setTypeface(Typeface.MONOSPACE);
         }
+    }
+
+    private Set<String> getExistingNoteRemoteIds() {
+        List<DBNote> notes = db.getNotes(note.getAccountId());
+        Set<String> noteRemoteIds = new HashSet<>();
+        for (DBNote note : notes) {
+            noteRemoteIds.add(String.valueOf(note.getRemoteId()));
+        }
+        return noteRemoteIds;
     }
 
     @Override

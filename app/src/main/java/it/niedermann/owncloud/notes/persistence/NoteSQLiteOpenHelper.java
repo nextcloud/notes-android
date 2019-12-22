@@ -320,6 +320,16 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         List<DBNote> notes = getNotesCustom(accountId, key_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null);
         return notes.isEmpty() ? null : notes.get(0);
     }
+    /**
+     * Get a single Note by remote Id (aka. nextcloud file id)
+     *
+     * @param id int - remote ID of the requested Note
+     * @return requested Note
+     */
+    public DBNote getNoteByRemoteId(long accountId, long id) {
+        List<DBNote> notes = getNotesCustom(accountId, key_remote_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null);
+        return notes.isEmpty() ? null : notes.get(0);
+    }
 
     /**
      * Query the database with a custom raw query.
