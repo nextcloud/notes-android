@@ -13,7 +13,10 @@ Features
 
 Voraussetzungen
 
-    Laufende Nextcloud Instanz
-    Aktivierte Nextcloud Files App (> 3.9.0)
-    Aktivierte Nextcloud Notes App
+    Laufende Nextcloud¹ Instanz
+    Aktivierte Nextcloud Files App² (> 3.9.0)
+    Aktivierte Nextcloud Notes App³
 
+¹ https://nextcloud.com/
+² https://github.com/nextcloud/android
+³ https://github.com/nextcloud/notes

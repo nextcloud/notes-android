@@ -13,6 +13,10 @@ Features
 
 Requirements
 
-    Nextcloud instance running
-    Nextcloud Files app enabled (> 3.9.0)
-    Nextcloud Notes app enabled
+    Nextcloud¹ instance running
+    Nextcloud Files app² enabled (> 3.9.0)
+    Nextcloud Notes app³ enabled
+
+¹ https://nextcloud.com/
+² https://github.com/nextcloud/android
+³ https://github.com/nextcloud/notes
