@@ -100,6 +100,7 @@
     <string name="add_account">Добавить аккаунт</string>
     <string name="category_music">Музыка</string>
     <string name="category_movies">Фильмы</string>
+    <string name="category_movie">Фильм</string>
     <string name="category_work">Рабочий</string>
     <string name="no_notes_yet">Заметок пока нет</string>
     <!-- Array: note modes -->
