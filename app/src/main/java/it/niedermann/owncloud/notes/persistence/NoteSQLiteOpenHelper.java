@@ -405,7 +405,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 cursor.getString(7),
                 DBStatus.parse(cursor.getString(2)),
                 accountId,
-                pruneContent ? cursor.getString(8) : ""
+                cursor.getString(8)
         );
     }
 
