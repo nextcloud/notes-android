@@ -72,7 +72,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
                         matcher.start(), matcher.end(), 0);
             }
 
-            dbNote.setExcerptDirectly(Html.toHtml(spannableString));
+            dbNote.setExcerpt(Html.toHtml(spannableString));
         }
 
         return dbNote;
