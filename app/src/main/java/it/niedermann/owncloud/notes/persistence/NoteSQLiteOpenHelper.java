@@ -322,9 +322,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             }
             values.put(key_status, dbNote.getStatus().getTitle());
             values.put(key_account_id, dbNote.getAccountId());
+            values.put(key_excerpt, dbNote.getExcerpt());
         } else {
             values.put(key_status, DBStatus.VOID.getTitle());
             values.put(key_account_id, accountId);
+            values.put(key_excerpt, NoteUtil.generateNoteExcerpt(note.getContent()));
         }
         if (note.getRemoteId() > 0) {
             values.put(key_remote_id, note.getRemoteId());
@@ -335,7 +337,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_favorite, note.isFavorite());
         values.put(key_category, note.getCategory());
         values.put(key_etag, note.getEtag());
-        values.put(key_excerpt, NoteUtil.generateNoteExcerpt(note.getContent()));
         return db.insert(table_notes, null, values);
     }
 
