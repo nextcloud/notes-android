@@ -266,7 +266,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 db.update(table_notes, values, key_id + " = ? ", new String[]{cursor.getString(0)});
             }
             cursor.close();
-            DatabaseIndexUtil.createIndex(db, table_notes, key_excerpt);
         }
     }
 
@@ -283,7 +282,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     private static void createNotesIndexes(@NonNull SQLiteDatabase db) {
-        DatabaseIndexUtil.createIndex(db, table_notes, key_remote_id, key_account_id, key_status, key_favorite, key_category, key_modified, key_excerpt);
+        DatabaseIndexUtil.createIndex(db, table_notes, key_remote_id, key_account_id, key_status, key_favorite, key_category, key_modified);
     }
 
     private static void createAccountIndexes(@NonNull SQLiteDatabase db) {
