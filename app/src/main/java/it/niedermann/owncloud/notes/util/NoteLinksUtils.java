@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class NoteLinksUtils {
 
     @VisibleForTesting
-    static final String RELATIVE_LINK_WORKAROUND_PREFIX = "https://dummy-hostname.nextcloudnotes/";
+    static final String RELATIVE_LINK_WORKAROUND_PREFIX = "https://nextcloudnotes/notes/";
 
     private static final String linksThatLookLikeNoteLinksRegEx = "\\[[^\\]]*\\]\\((\\d+)\\)";
     private static final String replaceNoteRemoteIdsRegEx = "\\[([^\\]]*)\\]\\((%s)\\)";
