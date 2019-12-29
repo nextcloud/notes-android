@@ -160,7 +160,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @BindView(R.id.noteSwipeable)
         public View noteSwipeable;
         View noteSwipeFrame;
-        ImageView noteFavoriteLeft, noteDeleteRight;
+        ImageView noteFavoriteLeft;
+        ImageView noteDeleteRight;
         TextView noteTitle;
         @BindView(R.id.noteCategory)
         TextView noteCategory;

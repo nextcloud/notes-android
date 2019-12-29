@@ -176,7 +176,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         shortcutManager.addDynamicShortcuts(newShortcuts);
                     }
                 }
-            }).run();
+            }).start();
         }
 
         @Override
@@ -381,11 +381,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 adapterCategories.setSelectedItem(item.id);
 
                 // update current selection
-                if (itemRecent == item) {
+                if (itemRecent.equals(item)) {
                     navigationSelection = new Category(null, null);
-                } else if (itemFavorites == item) {
+                } else if (itemFavorites.equals(item)) {
                     navigationSelection = new Category(null, true);
-                } else if (itemUncategorized == item) {
+                } else if (itemUncategorized.equals(item)) {
                     navigationSelection = new Category("", null);
                 } else {
                     navigationSelection = new Category(item.label, null);
@@ -531,16 +531,14 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         NavigationAdapter adapterMenu = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
-                if (item == itemSettings) {
+                if (itemSettings.equals(item)) {
                     Intent settingsIntent = new Intent(getApplicationContext(), PreferencesActivity.class);
                     startActivityForResult(settingsIntent, server_settings);
-                } else if (item == itemAbout) {
+                } else if (itemAbout.equals(item)) {
                     Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
                     startActivityForResult(aboutIntent, about);
-                } else if (item == itemTrashbin) {
-                    if (localAccount != null) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
-                    }
+                } else if (itemTrashbin.equals(item) && localAccount != null) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
                 }
             }
 
@@ -662,7 +660,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         LoadNotesListTask.NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
             adapter.setShowCategory(showCategory);
             adapter.setItemList(notes);
-            if(notes.size() > 0) {
+            if (notes.size() > 0) {
                 emptyContentView.setVisibility(View.GONE);
             } else {
                 emptyContentView.setVisibility(View.VISIBLE);

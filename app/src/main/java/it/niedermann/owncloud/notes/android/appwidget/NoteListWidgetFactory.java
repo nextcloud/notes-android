@@ -20,19 +20,17 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     private final Context context;
     private final int displayMode;
-    private final int appWidgetId;
     private final boolean darkTheme;
     private String category;
-    private final SharedPreferences sp;
     private NoteSQLiteOpenHelper db;
     private List<DBNote> dbNotes;
     private long accountId;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
-        appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+        final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
-        sp = PreferenceManager.getDefaultSharedPreferences(this.context);
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.context);
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
         darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
         category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");

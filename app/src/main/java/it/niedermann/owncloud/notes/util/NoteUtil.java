@@ -15,10 +15,6 @@ import it.niedermann.owncloud.notes.R;
  */
 public class NoteUtil {
 
-    private NoteUtil() {
-
-    }
-
     private static final Pattern pLists = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
     private static final Pattern pHeadings = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
     private static final Pattern pHeadingLine = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
@@ -26,6 +22,9 @@ public class NoteUtil {
     private static final Pattern pSpace1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
     private static final Pattern pSpace2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
 
+    private NoteUtil() {
+
+    }
 
     /**
      * Strips all MarkDown from the given String

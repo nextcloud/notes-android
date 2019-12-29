@@ -147,7 +147,7 @@ public class NoteListWidget extends AppWidgetProvider {
             case NoteListWidget.NLW_DISPLAY_STARRED:
                 return context.getString(R.string.label_favorites);
             case NoteListWidget.NLW_DISPLAY_CATEGORY:
-                if (category.equals("")) {
+                if ("".equals(category)) {
                     return context.getString(R.string.action_uncategorized);
                 } else {
                     return category;

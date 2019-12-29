@@ -48,12 +48,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
 
-    public interface NoteFragmentListener {
-        void close();
-
-        void onNoteUpdated(DBNote note);
-    }
-
     private static final int MENU_ID_PIN = -1;
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_ACCOUNT_ID = "accountId";
@@ -392,5 +386,11 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public void onCategoryChosen(String category) {
         db.setCategory(note, category, null);
         listener.onNoteUpdated(note);
+    }
+
+    public interface NoteFragmentListener {
+        void close();
+
+        void onNoteUpdated(DBNote note);
     }
 }

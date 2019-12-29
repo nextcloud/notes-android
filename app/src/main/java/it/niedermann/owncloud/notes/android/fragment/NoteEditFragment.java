@@ -145,10 +145,12 @@ public class NoteEditFragment extends BaseNoteFragment {
                     .subscribe(new Subscriber<CharSequence>() {
                         @Override
                         public void onCompleted() {
+                            // Nothing to do here
                         }
 
                         @Override
                         public void onError(Throwable e) {
+                            e.printStackTrace();
                         }
 
                         @Override

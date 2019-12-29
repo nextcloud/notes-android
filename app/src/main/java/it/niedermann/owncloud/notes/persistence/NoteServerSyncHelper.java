@@ -44,21 +44,6 @@ public class NoteServerSyncHelper {
 
     private static NoteServerSyncHelper instance;
 
-    /**
-     * Get (or create) instance from NoteServerSyncHelper.
-     * This has to be a singleton in order to realize correct registering and unregistering of
-     * the BroadcastReceiver, which listens on changes of network connectivity.
-     *
-     * @param dbHelper NoteSQLiteOpenHelper
-     * @return NoteServerSyncHelper
-     */
-    public static synchronized NoteServerSyncHelper getInstance(NoteSQLiteOpenHelper dbHelper) {
-        if (instance == null) {
-            instance = new NoteServerSyncHelper(dbHelper);
-        }
-        return instance;
-    }
-
     private NoteSQLiteOpenHelper dbHelper;
     private Context appContext = null;
     private LocalAccount localAccount;
@@ -116,6 +101,21 @@ public class NoteServerSyncHelper {
         syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
         updateNetworkStatus();
+    }
+
+    /**
+     * Get (or create) instance from NoteServerSyncHelper.
+     * This has to be a singleton in order to realize correct registering and unregistering of
+     * the BroadcastReceiver, which listens on changes of network connectivity.
+     *
+     * @param dbHelper NoteSQLiteOpenHelper
+     * @return NoteServerSyncHelper
+     */
+    public static synchronized NoteServerSyncHelper getInstance(NoteSQLiteOpenHelper dbHelper) {
+        if (instance == null) {
+            instance = new NoteServerSyncHelper(dbHelper);
+        }
+        return instance;
     }
 
     public void updateAccount() throws NextcloudFilesAppAccountNotFoundException {
