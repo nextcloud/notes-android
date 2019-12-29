@@ -33,15 +33,15 @@
     <string name="listview_updated_today">Oggi</string>
     <string name="listview_updated_yesterday">Ieri</string>
     <string name="listview_updated_this_week">Questa settimana</string>
-    <string name="listview_updated_last_week">Ultima settimana</string>
+    <string name="listview_updated_last_week">Settimana scorsa</string>
     <string name="listview_updated_this_month">Questo mese</string>
-    <string name="listview_updated_last_month">Ultimo mese</string>
+    <string name="listview_updated_last_month">Mese scorso</string>
 
     <!-- Settings -->
     <string name="settings_note_mode">Modalità di visualizzazione delle note</string>
     <string name="settings_theme_title">Tema scuro</string>
     <string name="settings_font_title">Carattere a spaziatura fissa</string>
-    <string name="settings_font_size">Dimensiine carattere</string>
+    <string name="settings_font_size">Dimensione carattere</string>
     <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
 
     <!-- Certificates -->
@@ -83,7 +83,7 @@
     <string name="widget_single_note_placeholder_tv">Nota non trovata</string>
     <string name="widget_create_note">Crea nota</string>
     <string name="widget_not_logged_in">Accedi a Note prima di utilizzare questo widget</string>
-    <string name="widget_entry_fav_contentDescription">L\'icona della stella è utilizzata per marcare un elemento come preferito</string>
+    <string name="widget_entry_fav_contentDescription">L\'icona a stella è utilizzata per marcare un elemento come preferito</string>
     <string name="widget_app_launcher_contentDescription">Avvia l\'applicazione</string>
 
     <string name="activity_select_single_note">Seleziona nota</string>
@@ -129,4 +129,5 @@
         <item quantity="one">%d selezionato</item>
         <item quantity="other">%d selezionati</item>
     </plurals>
+    <string name="error_files_app">L\'app files è installata?</string>
 </resources>
