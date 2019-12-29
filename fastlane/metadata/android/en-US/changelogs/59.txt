@@ -1,1 +1,2 @@
 - Disable accountchooser after added a new account
+- Enable ripple effect on selecting a note
