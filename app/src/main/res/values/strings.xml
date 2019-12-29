@@ -52,6 +52,7 @@
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_json">is the Notes app activated on the server?</string>
     <string name="error_no_network">no network connection</string>
+    <string name="error_files_app">do you have installed the files app?</string>
 
     <!-- Snackbar Actions -->
 

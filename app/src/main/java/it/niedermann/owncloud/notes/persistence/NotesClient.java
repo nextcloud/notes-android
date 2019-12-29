@@ -3,11 +3,14 @@ package it.niedermann.owncloud.notes.persistence;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.WorkerThread;
+
 import com.google.gson.GsonBuilder;
 import com.nextcloud.android.sso.aidl.NextcloudRequest;
 import com.nextcloud.android.sso.api.AidlNetworkRequest;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.Response;
+import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -26,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import androidx.annotation.WorkerThread;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
@@ -118,13 +120,13 @@ public class NotesClient {
         }
     }
 
-    NotesResponse getNotes(long lastModified, String lastETag) throws NextcloudHttpRequestFailedException {
+    NotesResponse getNotes(long lastModified, String lastETag) throws NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
         Map<String, String> parameter = new HashMap<>();
         parameter.put(GET_PARAM_KEY_PRUNE_BEFORE, Long.toString(lastModified));
         return new NotesResponse(requestServer("notes", METHOD_GET, parameter, null, lastETag));
     }
 
-    private NoteResponse putNote(CloudNote note, String path, String method) throws JSONException, NextcloudHttpRequestFailedException {
+    private NoteResponse putNote(CloudNote note, String path, String method) throws JSONException, NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
@@ -141,11 +143,11 @@ public class NotesClient {
      * @throws JSONException
      * @throws NextcloudHttpRequestFailedException
      */
-    NoteResponse createNote(CloudNote note) throws JSONException, NextcloudHttpRequestFailedException {
+    NoteResponse createNote(CloudNote note) throws JSONException, NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
         return putNote(note, "notes", METHOD_POST);
     }
 
-    NoteResponse editNote(CloudNote note) throws JSONException, NextcloudHttpRequestFailedException {
+    NoteResponse editNote(CloudNote note) throws JSONException, NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
         return putNote(note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
@@ -167,7 +169,7 @@ public class NotesClient {
      * @param lastETag optional ETag of last response
      * @return Body of answer
      */
-    private ResponseData requestServer(String target, String method, Map<String, String> parameter, JSONObject requestBody, String lastETag) throws NextcloudHttpRequestFailedException {
+    private ResponseData requestServer(String target, String method, Map<String, String> parameter, JSONObject requestBody, String lastETag) throws NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
         NextcloudRequest.Builder requestBuilder = new NextcloudRequest.Builder()
                 .setMethod(method)
                 .setUrl(API_PATH + target);
@@ -216,6 +218,8 @@ public class NotesClient {
         } catch (Exception e) {
             if(e instanceof NextcloudHttpRequestFailedException) {
                 throw (NextcloudHttpRequestFailedException) e;
+            } else if(e instanceof NextcloudApiNotRespondingException) {
+                throw (NextcloudApiNotRespondingException) e;
             } else {
                 e.printStackTrace();
             }

@@ -46,7 +46,7 @@ public class ServerResponse {
 
     private final NotesClient.ResponseData response;
 
-    public ServerResponse(NotesClient.ResponseData response) {
+    ServerResponse(NotesClient.ResponseData response) {
         this.response = response;
     }
 
@@ -62,7 +62,7 @@ public class ServerResponse {
         return response.getLastModified();
     }
 
-    protected CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
+    CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
         long id = 0;
         String title = "";
         String content = "";
