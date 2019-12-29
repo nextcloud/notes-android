@@ -1,3 +1,4 @@
 - Disable accountchooser after added a new account
 - Enable ripple effect on selecting a note
 - Handle not installed Files app more gracefully
+- Fix some codacy issues
