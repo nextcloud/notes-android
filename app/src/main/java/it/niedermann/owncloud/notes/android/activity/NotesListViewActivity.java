@@ -794,7 +794,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         }
                     }
                     selectAccount(account.name);
-                    clickHeader();
+                    this.accountChooserActive = false;
+                    accountChooser.setVisibility(View.GONE);
+                    accountNavigation.setVisibility(View.VISIBLE);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 });
             } catch (AccountImportCancelledException e) {
