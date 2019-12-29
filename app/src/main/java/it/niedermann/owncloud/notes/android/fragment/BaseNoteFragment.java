@@ -93,39 +93,40 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
         try {
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext()).name);
-
-            if (savedInstanceState == null) {
-                long id = getArguments().getLong(PARAM_NOTE_ID);
-                if (id > 0) {
-                    long accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
-                    if (accountId > 0) {
-                        /* Switch account if account id has been provided */
-                        this.localAccount = db.getAccount(accountId);
-                        SingleAccountHelper.setCurrentAccount(getActivity().getApplicationContext(), localAccount.getAccountName());
-                        try {
-                            db.getNoteServerSyncHelper().updateAccount();
-                        } catch (NextcloudFilesAppAccountNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    isNew = false;
-                    note = originalNote = db.getNote(localAccount.getId(), id);
-                } else {
-                    CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
-                    if (cloudNote == null) {
-                        throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE + " is missing.");
-                    }
-                    note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
-                    originalNote = null;
-                }
-            } else {
-                note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
-                originalNote = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
-            }
-            setHasOptionsMenu(true);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            this.localAccount = db.getAccount(0);
             e.printStackTrace();
         }
+        if (savedInstanceState == null) {
+
+            long id = getArguments().getLong(PARAM_NOTE_ID);
+            if (id > 0) {
+                long accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
+                if (accountId > 0) {
+                    /* Switch account if account id has been provided */
+                    this.localAccount = db.getAccount(accountId);
+                    SingleAccountHelper.setCurrentAccount(getActivity().getApplicationContext(), localAccount.getAccountName());
+                    try {
+                        db.getNoteServerSyncHelper().updateAccount();
+                    } catch (NextcloudFilesAppAccountNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }isNew = false;
+                note = originalNote = db.getNote(localAccount.getId(), id);
+            } else {
+                CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
+                if (cloudNote == null) {
+                    throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE + " is missing.");
+                }
+                note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
+                originalNote = null;
+            }
+        } else {
+
+            note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
+            originalNote = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
+        }
+        setHasOptionsMenu(true);
     }
 
     @Override

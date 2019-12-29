@@ -136,6 +136,7 @@
     <string name="account_already_imported">Account has already been imported</string>
     <string name="no_notes_yet">No notes yet</string>
     <string name="no_notes_yet_description">Press + button to create a new note</string>
+    <string name="local_account">Local account</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Could not load preview. Please check whether there is a two-digit numbered list item without content.</string>
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>

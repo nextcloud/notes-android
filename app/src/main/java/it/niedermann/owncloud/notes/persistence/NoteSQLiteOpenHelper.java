@@ -52,7 +52,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static final String TAG = NoteSQLiteOpenHelper.class.getSimpleName();
 
-    private static final int database_version = 10;
+    private static final int database_version = 11;
 
     private static final String database_name = "OWNCLOUD_NOTES";
     private static final String table_notes = "NOTES";
@@ -269,6 +269,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             }
             cursor.close();
         }
+        if (oldVersion < 11) {
+            ContentValues migratedAccountValues = new ContentValues();
+            migratedAccountValues.put(key_id, 0);
+            db.insert(table_accounts, null, migratedAccountValues);
+        }
     }
 
     @Override
@@ -440,7 +445,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @NonNull
     private DBNote getNoteFromCursor(long accountId, @NonNull Cursor cursor, boolean pruneContent) {
-        validateAccountId(accountId);
         Calendar modified = Calendar.getInstance();
         modified.setTimeInMillis(cursor.getLong(4) * 1000);
 
@@ -460,7 +464,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     public void debugPrintFullDB(long accountId) {
-        validateAccountId(accountId);
         List<DBNote> notes = getNotesCustom(accountId, "", new String[]{}, default_order, false);
         Log.v(TAG, "Full Database (" + notes.size() + " notes):");
         for (DBNote note : notes) {
@@ -471,7 +474,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull
     @WorkerThread
     public Map<Long, Long> getIdMap(long accountId) {
-        validateAccountId(accountId);
         Map<Long, Long> result = new HashMap<>();
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(table_notes, new String[]{key_remote_id, key_id}, key_status + " != ? AND " + key_account_id + " = ? ", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, null, null);
@@ -490,14 +492,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull
     @WorkerThread
     public List<DBNote> getNotes(long accountId) {
-        validateAccountId(accountId);
         return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, default_order, false);
     }
 
     @NonNull
     @WorkerThread
     public List<DBNote> getRecentNotes(long accountId) {
-        validateAccountId(accountId);
         return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, key_modified + " DESC", "4", true);
     }
 
@@ -509,7 +509,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull
     @WorkerThread
     public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
-        validateAccountId(accountId);
         List<String> where = new ArrayList<>();
         List<String> args = new ArrayList<>();
 
@@ -552,14 +551,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull
     @WorkerThread
     List<DBNote> getLocalModifiedNotes(long accountId) {
-        validateAccountId(accountId);
         return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.VOID.getTitle(), "" + accountId}, null, false);
     }
 
     @NonNull
     @WorkerThread
     public Map<String, Integer> getFavoritesCount(long accountId) {
-        validateAccountId(accountId);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(
                 table_notes,
@@ -580,7 +577,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     @NonNull
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
-        validateAccountId(accountId);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(
                 table_notes,
@@ -818,7 +814,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @return a LocalAccount object for the given accountId
      */
     public LocalAccount getAccount(long accountId) {
-        validateAccountId(accountId);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, key_id + " = ?", new String[]{accountId + ""}, null, null, null, null);
         LocalAccount account = new LocalAccount();
@@ -878,7 +873,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
      */
     public void deleteAccount(long accountId) throws IllegalArgumentException {
-        validateAccountId(accountId);
         SQLiteDatabase db = this.getWritableDatabase();
         int deletedAccounts = db.delete(table_accounts, key_id + " = ?", new String[]{accountId + ""});
         if (deletedAccounts < 1) {
@@ -892,7 +886,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     void updateETag(long accountId, String etag) {
-        validateAccountId(accountId);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_etag, etag);
@@ -905,7 +898,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     void updateModified(long accountId, long modified) {
-        validateAccountId(accountId);
         if (modified < 0) {
             throw new IllegalArgumentException("modified must be greater or equal 0");
         }
@@ -917,12 +909,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             Log.v(TAG, "Updated modified to " + modified + " for accountId = " + accountId);
         } else {
             Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and modified = " + modified);
-        }
-    }
-
-    private static void validateAccountId(long accountId) {
-        if (accountId < 1) {
-            throw new IllegalArgumentException("accountId must be greater than 0");
         }
     }
 }

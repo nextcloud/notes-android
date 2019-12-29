@@ -237,9 +237,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         // refresh and sync every time the activity gets
         if (localAccount != null) {
             refreshLists();
-            db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
-            if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                synchronize();
+            if(localAccount.getId() != 0) {
+                db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
+                if (db.getNoteServerSyncHelper().isSyncPossible()) {
+                    synchronize();
+                }
             }
         }
         super.onResume();
@@ -295,13 +297,18 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         accountChooser.removeAllViews();
         for (LocalAccount localAccount : db.getAccounts()) {
             View v = getLayoutInflater().inflate(R.layout.item_account, null);
-            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(localAccount.getAccountName());
-            Glide
-                    .with(this)
-                    .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
-                    .error(R.drawable.ic_account_circle_grey_24dp)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
+            if(account.getId() == 0) {
+                ((TextView) v.findViewById(R.id.accountItemLabel)).setText(R.string.local_account);
+                v.findViewById(R.id.delete).setVisibility(View.GONE);
+            } else {
+                ((TextView) v.findViewById(R.id.accountItemLabel)).setText(localAccount.getAccountName());
+                Glide
+                        .with(this)
+                        .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
+                        .error(R.drawable.ic_account_circle_grey_24dp)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
+            }
             v.setOnClickListener(clickedView -> {
                 clickHeader();
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -924,7 +931,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void synchronize() {
-        swipeRefreshLayout.setRefreshing(true);
+        if(localAccount != null && localAccount.getId() != 0) {
+            swipeRefreshLayout.setRefreshing(true);
+        }
         db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
         db.getNoteServerSyncHelper().scheduleSync(false);
     }
