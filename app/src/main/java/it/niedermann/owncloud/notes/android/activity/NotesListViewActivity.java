@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -130,6 +131,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     RecyclerView listView;
     @BindView(R.id.empty_content_view)
     RelativeLayout emptyContentView;
+    @BindView(R.id.progress_circular)
+    ProgressBar progressBar;
 
     private ActionBarDrawerToggle drawerToggle;
     private ItemAdapter adapter = null;
@@ -638,6 +641,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             adapter.removeAll();
             return;
         }
+        emptyContentView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         fabCreate.show();
         String subtitle;
         if (navigationSelection.category != null) {
@@ -660,6 +665,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         LoadNotesListTask.NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
             adapter.setShowCategory(showCategory);
             adapter.setItemList(notes);
+            progressBar.setVisibility(View.GONE);
             if (notes.size() > 0) {
                 emptyContentView.setVisibility(View.GONE);
             } else {

@@ -34,7 +34,8 @@
                 <RelativeLayout
                     android:id="@+id/empty_content_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -63,8 +64,13 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="20dp"
                         android:text="@string/no_notes_yet_description" />
-
                 </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
