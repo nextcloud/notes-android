@@ -215,14 +215,10 @@ public class NotesClient {
             Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
             // return these header fields since they should only be saved after successful processing the result!
             return new ResponseData(result.toString(), etag, lastModified);
+        } catch(NextcloudApiNotRespondingException | NextcloudHttpRequestFailedException e) {
+            throw e;
         } catch (Exception e) {
-            if(e instanceof NextcloudHttpRequestFailedException) {
-                throw (NextcloudHttpRequestFailedException) e;
-            } else if(e instanceof NextcloudApiNotRespondingException) {
-                throw (NextcloudApiNotRespondingException) e;
-            } else {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
         }
         return null;
     }
