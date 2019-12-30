@@ -15,22 +15,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
-import androidx.annotation.Nullable;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
-import it.niedermann.owncloud.notes.util.NotesClientUtil;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -119,27 +118,24 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
         db = NoteSQLiteOpenHelper.getInstance(getActivity().getApplicationContext());
         // Pull to Refresh
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                    swipeRefreshLayout.setRefreshing(true);
-                    db.getNoteServerSyncHelper().addCallbackPull( new ICallback() {
-                        @Override
-                        public void onFinish() {
-                            noteContent.setText(db.getNote(note.getId()).getContent(), TextView.BufferType.SPANNABLE);
-                            swipeRefreshLayout.setRefreshing(false);
-                        }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            if (db.getNoteServerSyncHelper().isSyncPossible()) {
+                swipeRefreshLayout.setRefreshing(true);
+                db.getNoteServerSyncHelper().addCallbackPull( new ICallback() {
+                    @Override
+                    public void onFinish() {
+                        noteContent.setText(db.getNote(note.getAccountId(), note.getId()).getContent(), TextView.BufferType.SPANNABLE);
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
 
-                        @Override
-                        public void onScheduled() {
-                        }
-                    });
-                    db.getNoteServerSyncHelper().scheduleSync(false);
-                } else {
-                    swipeRefreshLayout.setRefreshing(false);
-                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_sync, getString(NotesClientUtil.LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
-                }
+                    @Override
+                    public void onScheduled() {
+                    }
+                });
+                db.getNoteServerSyncHelper().scheduleSync(false);
+            } else {
+                swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
             }
         });
 
