@@ -5,21 +5,19 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMDTextView;
-import com.yydcdut.rxmarkdown.RxMarkdown;
 
 import java.util.Objects;
 
@@ -30,15 +28,14 @@ import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class NotePreviewFragment extends BaseNoteFragment {
 
     private static final String TAG = NotePreviewFragment.class.getSimpleName();
 
     private NoteSQLiteOpenHelper db = null;
+
+    MarkdownProcessor markdownProcessor;
 
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -72,48 +69,11 @@ public class NotePreviewFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
-
+        markdownProcessor = new MarkdownProcessor(getActivity());
+        markdownProcessor.factory(TextFactory.create());
+        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(noteContent.getContext()).build());
         setActiveTextView(noteContent);
-
-        String content = note.getContent();
-
-        RxMarkdown.with(content, getActivity())
-                .config(
-                        MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
-                                /*.setOnTodoClickCallback(new OnTodoClickCallback() {
-                                        @Override
-                                        public CharSequence onTodoClicked(View view, String line, int lineNumber) {
-                                        String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
-                                        if(lines.length >= lineNumber) {
-                                            lines[lineNumber] = line;
-                                        }
-                                        noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
-                                        saveNote(null);
-                                        return line;
-                                    }
-                                }
-                            )*/.build()
-                )
-                .factory(TextFactory.create())
-                .intoObservable()
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<CharSequence>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.v(TAG, "RxMarkdown error", e);
-                    }
-
-                    @Override
-                    public void onNext(CharSequence charSequence) {
-                        noteContent.setText(charSequence, TextView.BufferType.SPANNABLE);
-                    }
-                });
-        noteContent.setText(content);
+        noteContent.setText(markdownProcessor.parse(note.getContent()));
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
         db = NoteSQLiteOpenHelper.getInstance(getActivity().getApplicationContext());
@@ -124,7 +84,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
                 db.getNoteServerSyncHelper().addCallbackPull( new ICallback() {
                     @Override
                     public void onFinish() {
-                        noteContent.setText(db.getNote(note.getAccountId(), note.getId()).getContent(), TextView.BufferType.SPANNABLE);
+                        noteContent.setText(markdownProcessor.parse(db.getNote(note.getAccountId(), note.getId()).getContent()));
                         swipeRefreshLayout.setRefreshing(false);
                     }
 
