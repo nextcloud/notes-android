@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
@@ -26,10 +27,13 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener {
 
+    private static final String TAG = EditNoteActivity.class.getSimpleName();
+
     public static final String ACTION_SHORTCUT = "it.niedermann.owncloud.notes.shortcut";
     private static final String INTENT_GOOGLE_ASSISTANT = "com.google.android.gm.action.AUTO_SEND";
     private static final String MIMETYPE_TEXT_PLAIN = "text/plain";
     public static final String PARAM_NOTE_ID = "noteId";
+    public static final String PARAM_ACCOUNT_ID = "accountId";
     public static final String PARAM_CATEGORY = "category";
 
     private BaseNoteFragment fragment;
@@ -53,7 +57,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(getClass().getSimpleName(), "onNewIntent: " + intent.getLongExtra(PARAM_NOTE_ID, 0));
+        Log.d(TAG, "onNewIntent: " + intent.getLongExtra(PARAM_NOTE_ID, 0));
         setIntent(intent);
         if (fragment != null) {
             getFragmentManager().beginTransaction().detach(fragment).commit();
@@ -66,6 +70,10 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         return getIntent().getLongExtra(PARAM_NOTE_ID, 0);
     }
 
+    private long getAccountId() {
+        return getIntent().getLongExtra(PARAM_ACCOUNT_ID, 0);
+    }
+
     /**
      * Starts the note fragment for an existing note or a new note.
      * The actual behavior is triggered by the activity's intent.
@@ -73,7 +81,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     private void launchNoteFragment() {
         long noteId = getNoteId();
         if (noteId > 0) {
-            launchExistingNote(noteId);
+            launchExistingNote(getAccountId(), noteId);
         } else {
             launchNewNote();
         }
@@ -85,7 +93,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
      *
      * @param noteId ID of the existing note.
      */
-    private void launchExistingNote(long noteId) {
+    private void launchExistingNote(long accountId, long noteId) {
         final String prefKeyNoteMode = getString(R.string.pref_key_note_mode);
         final String prefKeyLastMode = getString(R.string.pref_key_last_note_mode);
         final String prefValueEdit = getString(R.string.pref_value_mode_edit);
@@ -99,7 +107,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         if (prefValuePreview.equals(mode) || (prefValueLast.equals(mode) && prefValuePreview.equals(lastMode))) {
             editMode = false;
         }
-        launchExistingNote(noteId, editMode);
+        launchExistingNote(accountId, noteId, editMode);
     }
 
     /**
@@ -110,16 +118,16 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
      *               <code>true</code> for {@link NoteEditFragment},
      *               <code>false</code> for {@link NotePreviewFragment}.
      */
-    private void launchExistingNote(long noteId, boolean edit) {
+    private void launchExistingNote(long accountId, long noteId, boolean edit) {
         // save state of the fragment in order to resume with the same note and originalNote
         Fragment.SavedState savedState = null;
         if (fragment != null) {
             savedState = getFragmentManager().saveFragmentInstanceState(fragment);
         }
         if (edit) {
-            fragment = NoteEditFragment.newInstance(noteId);
+            fragment = NoteEditFragment.newInstance(accountId, noteId);
         } else {
-            fragment = NotePreviewFragment.newInstance(noteId);
+            fragment = NotePreviewFragment.newInstance(accountId, noteId);
         }
 
         if (savedState != null) {
@@ -175,10 +183,10 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
                 close();
                 return true;
             case R.id.menu_preview:
-                launchExistingNote(getNoteId(), false);
+                launchExistingNote(getAccountId(), getNoteId(), false);
                 return true;
             case R.id.menu_edit:
-                launchExistingNote(getNoteId(), true);
+                launchExistingNote(getAccountId(), getNoteId(), true);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -206,12 +214,17 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     @Override
     public void onNoteUpdated(DBNote note) {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
+        ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
+        if (note != null) {
             actionBar.setTitle(note.getTitle());
             if (!note.getCategory().isEmpty()) {
                 actionBar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
+        } else {
+            // Maybe account is not authenticated -> note == null
+            Log.e(TAG, "note is null, start NotesListViewActivity");
+            startActivity(new Intent(this, NotesListViewActivity.class));
+            finish();
         }
     }
 }

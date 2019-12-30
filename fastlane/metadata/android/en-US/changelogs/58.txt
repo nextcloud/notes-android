@@ -1,0 +1,9 @@
+⚠️ Requires at least Files app¹ version 3.9.0 ⚠️
+
+- #154 Improve user experience on slower devices
+- #528 & #641 Save the excerpt in a separate column
+- Translation updates
+
+Special thanks to @dan0xii @korelstar and @tobiasKaminsky
+
+¹ https://github.com/nextcloud/android

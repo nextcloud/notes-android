@@ -17,8 +17,10 @@ import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 
 public class NoteListWidget extends AppWidgetProvider {
+    private static final String TAG = NoteListWidget.class.getSimpleName();
     public static final String WIDGET_MODE_KEY = "NLW_mode";
     public static final String WIDGET_CATEGORY_KEY = "NLW_cat";
+    public static final String ACCOUNT_ID_KEY = "NLW_account";
     public static final String DARK_THEME_KEY = "NLW_darkTheme";
     public static final int NLW_DISPLAY_ALL = 0;
     public static final int NLW_DISPLAY_STARRED = 1;
@@ -111,14 +113,14 @@ public class NoteListWidget extends AppWidgetProvider {
                     if (intent.getExtras() != null) {
                         updateAppWidget(context, awm, new int[]{intent.getExtras().getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, -1)});
                     } else {
-                        Log.w(NoteListWidget.class.getSimpleName(), "intent.getExtras() is null");
+                        Log.w(TAG, "intent.getExtras() is null");
                     }
                 } else {
                     updateAppWidget(context, awm, awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class)));
                 }
             }
         } else {
-            Log.w(NoteListWidget.class.getSimpleName(), "intent.getAction() is null");
+            Log.w(TAG, "intent.getAction() is null");
         }
     }
 
@@ -131,6 +133,7 @@ public class NoteListWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             editor.remove(WIDGET_MODE_KEY + appWidgetId);
             editor.remove(WIDGET_CATEGORY_KEY + appWidgetId);
+            editor.remove(ACCOUNT_ID_KEY + appWidgetId);
             editor.remove(DARK_THEME_KEY + appWidgetId);
         }
 
@@ -144,7 +147,7 @@ public class NoteListWidget extends AppWidgetProvider {
             case NoteListWidget.NLW_DISPLAY_STARRED:
                 return context.getString(R.string.label_favorites);
             case NoteListWidget.NLW_DISPLAY_CATEGORY:
-                if (category.equals("")) {
+                if ("".equals(category)) {
                     return context.getString(R.string.action_uncategorized);
                 } else {
                     return category;

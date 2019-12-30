@@ -1,0 +1,1 @@
+- #606 Wrong account name color in dark mode

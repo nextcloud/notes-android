@@ -2,91 +2,56 @@
 <resources>
 
     <string name="app_name">Notes</string>
-    <string name="no_notes">Encara no hi ha notes</string>
+    <string name="app_name_long">Notes de Nextcloud</string>
     <string name="label_all_notes">Totes les notes</string>
     <string name="label_favorites">Preferides</string>
     <string name="action_create">Crea una nota</string>
     <string name="action_settings">Paràmetres</string>
     <string name="action_trashbin">Notes suprimides</string>
     <string name="action_search">Cerca</string>
-    <string name="action_create_save">Desa</string>
     <string name="simple_cancel">Cancel·la</string>
     <string name="simple_edit">Edita</string>
     <string name="action_edit_save">Desa</string>
-    <string name="action_edit_saving">S\'està desant &#8230;</string>
-    <string name="action_edit_saved">S\'ha desat</string>
     <string name="simple_about">Quant a</string>
     <string name="simple_bold">Negreta</string>
     <string name="simple_link">Enllaç</string>
     <string name="simple_italic">Cursiva</string>
-    <string name="action_select_note">Selecciona una nota</string>
     <string name="action_note_deleted">S\'ha suprimit la nota</string>
     <string name="action_note_restored">S\'ha restaurat la nota</string>
     <string name="action_undo">Desfés</string>
     <string name="action_drawer_open">obre la navegació</string>
     <string name="action_drawer_close">tanca la navegació</string>
-    <string name="action_recent">Recents</string>
     <string name="action_uncategorized">Sense categoria</string>
     <string name="menu_delete">Suprimeix</string>
     <string name="menu_change_category">Categoria</string>
     <string name="menu_favorite">Preferida</string>
     <string name="menu_preview">Previsualitza</string>
     <string name="menu_share">Comparteix</string>
-    <string name="menu_about">Quant a</string>
 
     <string name="change_category_title">Tria una categoria</string>
 
     <string name="listview_updated_today">Avui</string>
     <string name="listview_updated_yesterday">Ahir</string>
     <string name="listview_updated_this_week">Aquesta setmana</string>
+    <string name="listview_updated_last_week">La setmana passada</string>
     <string name="listview_updated_this_month">Aquest mes</string>
-    <string name="listview_updated_earlier">Abans</string>
+    <string name="listview_updated_last_month">El mes passat</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Compte</string>
-    <string name="settings_url">Adreça del servidor</string>
-    <string name="settings_url_check_description">Mostra si es pot fer ping a l\'adreça.</string>
-    <string name="settings_url_warn_http">ATENCIÓ: \"http\" és insegur. Si us plau feu servir \"https\".</string>
-    <string name="settings_username">Nom d\'usuari</string>
-    <string name="settings_password">Contrasenya</string>
-    <string name="settings_password_unchanged">Contrasenya (sense canvis)</string>
-    <string name="settings_password_check_description">Mostra si les credencials són correctes.</string>
-    <string name="settings_submit">Connecta</string>
-    <string name="settings_submitting">S\'està connectant &#8230;</string>
     <string name="settings_note_mode">Mode de visualització per les notes</string>
     <string name="settings_theme_title">Tema fosc</string>
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
     <string name="settings_wifi_only">Sincronitza només per Wi-Fi</string>
-    <string name="settings_cert_category">Gestiona els certificats</string>
-    <string name="settings_cert_trust_system">Confia en els certificats del sistema</string>
-    <string name="settings_cert_trust_system_on">Es confiarà en els CAs afegits pel sistema i per l\'usuari (recomanat)</string>
-    <string name="settings_cert_trust_system_off">No es confiarà en els CAs afegits pel sistema ni per l\'usuari</string>
-    <string name="settings_cert_reset">Restableix els certificats confiats i desconfiats</string>
-    <string name="settings_cert_reset_summary">Restableix la confiança de tots els certificats personalitzats</string>
-    <string name="settings_cert_reset_toast">Tots els certificats personalitzats han estat suprimits</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Notes - Seguretat de la connexió</string>
-    <string name="trust_certificate_unknown_certificate_found">Notes ha trobat un certificat desconegut. Voleu confiar-hi?</string>
 
     <!-- Network -->
-    <string name="network_connecting">S\'està connectant</string>
-    <string name="network_connected">S\'ha connectat</string>
-    <string name="network_disconnected">No hi ha cap xarxa disponible</string>
 
     <!-- Error -->
     <string name="error_sync">Ha fallat la sincronització: %1$s</string>
-    <string name="error_invalid_login">Inici de sessió no vàlid: %1$s</string>
     <string name="error_json">l\'aplicació Notes està activada al servidor?</string>
-    <string name="error_io">s\'ha trencat la connexió amb el servidor</string>
     <string name="error_no_network">no hi ha connexió a la xarxa</string>
-    <string name="error_server">L\'URL o el servidor contenen errors</string>
-    <string name="error_url_malformed">L\'adreça del servidor és incorrecta</string>
-    <string name="error_username_password_invalid">El nom d\'usuari o la contrasenya són incorrectes</string>
-
-    <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Paràmetres</string>
 
     <!-- About -->
     <string name="about_version_title">Versió</string>
@@ -127,7 +92,6 @@
     <string name="shortcut_create_long">Crea una nota nova</string>
 
     <string name="pref_value_theme_light">Clar</string>
-    <string name="pref_value_theme_dark">Fosc</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronitza per Wi-Fi i dades mòbils</string>
     <string name="simple_error">Error</string>
@@ -137,7 +101,11 @@
     <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
     <string name="pin_to_homescreen">Fixa-ho a la pantalla d\'inici</string>
     <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
-
+    <string name="add_account">Afegeix un compte</string>
+    <string name="category_music">Música</string>
+    <string name="category_movies">Peŀlícules</string>
+    <string name="category_work">Feina</string>
+    <string name="no_notes_yet">Encara no hi ha notes</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Obre en mode d\'edició</item>

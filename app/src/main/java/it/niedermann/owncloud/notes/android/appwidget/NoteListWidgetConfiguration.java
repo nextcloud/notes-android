@@ -7,12 +7,17 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.util.Log;
-import android.widget.Toast;
+
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +25,18 @@ import java.util.Map;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
+import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.Notes;
 
 public class NoteListWidgetConfiguration extends AppCompatActivity {
     private static final String TAG = Activity.class.getSimpleName();
 
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+
+
+    LocalAccount localAccount = null;
 
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent, itemFavorites;
@@ -40,15 +48,16 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
         setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_note_list_configuration);
 
-        if (!(NoteServerSyncHelper.isConfigured(this))) {
+        db = NoteSQLiteOpenHelper.getInstance(this);
+        try {
+            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
             Toast.makeText(this, R.string.widget_not_logged_in, Toast.LENGTH_LONG).show();
-
             // TODO Present user with app login screen
             Log.w(TAG, "onCreate: user not logged in");
             finish();
         }
-
-        db = NoteSQLiteOpenHelper.getInstance(this);
         final Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
@@ -77,9 +86,9 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
             public void onItemClick(NavigationAdapter.NavigationItem item) {
                 SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
 
-                if (item == itemRecent) {
+                if (itemRecent.equals(item)) {
                     sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_ALL);
-                } else if (item == itemFavorites) {
+                } else if (itemFavorites.equals(item)) {
                     sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_STARRED);
                 } else {
                     String category = "";
@@ -90,6 +99,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
                     sp.putString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, category);
                 }
 
+                sp.putLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, localAccount.getId());
                 sp.putBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()));
                 sp.apply();
 
@@ -116,15 +126,17 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
+            if (localAccount == null) {
+                return new ArrayList<>();
+            }
             NavigationAdapter.NavigationItem itemUncategorized;
-            List<NavigationAdapter.NavigationItem> categories = db.getCategories();
+            List<NavigationAdapter.NavigationItem> categories = db.getCategories(localAccount.getId());
 
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
@@ -132,7 +144,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
                 itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
             }
 
-            Map<String, Integer> favorites = db.getFavoritesCount();
+            Map<String, Integer> favorites = db.getFavoritesCount(localAccount.getId());
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
             itemFavorites.count = numFavorites;

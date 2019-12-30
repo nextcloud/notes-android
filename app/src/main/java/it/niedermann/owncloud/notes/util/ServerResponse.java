@@ -4,21 +4,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.model.CloudNote;
+import it.niedermann.owncloud.notes.persistence.NotesClient;
 
 /**
  * Provides entity classes for handling server responses with a single note ({@link NoteResponse}) or a list of notes ({@link NotesResponse}).
  */
 public class ServerResponse {
-
-    public static class NotModifiedException extends IOException {
-    }
 
     public static class NoteResponse extends ServerResponse {
         public NoteResponse(NotesClient.ResponseData response) {
@@ -49,12 +46,12 @@ public class ServerResponse {
 
     private final NotesClient.ResponseData response;
 
-    public ServerResponse(NotesClient.ResponseData response) {
+    ServerResponse(NotesClient.ResponseData response) {
         this.response = response;
     }
 
     protected String getContent() {
-        return response.getContent();
+        return response == null ? null : response.getContent();
     }
 
     public String getETag() {
@@ -65,7 +62,7 @@ public class ServerResponse {
         return response.getLastModified();
     }
 
-    protected CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
+    CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
         long id = 0;
         String title = "";
         String content = "";

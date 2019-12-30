@@ -1,13 +1,20 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ShortcutManager;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -15,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -28,7 +37,9 @@ import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
+import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
+import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -37,19 +48,33 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
  */
 public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
-    private static final int database_version = 8;
+    private static final String TAG = NoteSQLiteOpenHelper.class.getSimpleName();
+
+    private static final int database_version = 10;
+
     private static final String database_name = "OWNCLOUD_NOTES";
     private static final String table_notes = "NOTES";
+    private static final String table_accounts = "ACCOUNTS";
+
     private static final String key_id = "ID";
+
+    private static final String key_url = "URL";
+    private static final String key_account_name = "ACCOUNT_NAME";
+    private static final String key_username = "USERNAME";
+
+    private static final String key_account_id = "ACCOUNT_ID";
     private static final String key_remote_id = "REMOTEID";
     private static final String key_status = "STATUS";
     private static final String key_title = "TITLE";
     private static final String key_modified = "MODIFIED";
     private static final String key_content = "CONTENT";
+    private static final String key_excerpt = "EXCERPT";
     private static final String key_favorite = "FAVORITE";
     private static final String key_category = "CATEGORY";
     private static final String key_etag = "ETAG";
-    private static final String[] columns = {key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag};
+
+    private static final String[] columnsWithoutContent = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt};
+    private static final String[] columns               = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt, key_content};
     private static final String default_order = key_favorite + " DESC, " + key_modified + " DESC";
 
     private static NoteSQLiteOpenHelper instance;
@@ -59,13 +84,13 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private NoteSQLiteOpenHelper(Context context) {
         super(context, database_name, null, database_version);
-        this.context = context.getApplicationContext();
+        this.context = context;
         serverSyncHelper = NoteServerSyncHelper.getInstance(this);
     }
 
     public static NoteSQLiteOpenHelper getInstance(Context context) {
         if (instance == null)
-            return instance = new NoteSQLiteOpenHelper(context.getApplicationContext());
+            return instance = new NoteSQLiteOpenHelper(context);
         else
             return instance;
     }
@@ -81,23 +106,37 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        createTable(db, table_notes);
+        createAccountTable(db, table_accounts);
+        createNotesTable(db, table_notes);
     }
 
-    private void createTable(SQLiteDatabase db, String tableName) {
+    private void createNotesTable(@NonNull SQLiteDatabase db, @NonNull String tableName) {
         db.execSQL("CREATE TABLE " + tableName + " ( " +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_remote_id + " INTEGER, " +
+                key_account_id + " INTEGER, " +
                 key_status + " VARCHAR(50), " +
                 key_title + " TEXT, " +
                 key_modified + " INTEGER DEFAULT 0, " +
                 key_content + " TEXT, " +
                 key_favorite + " INTEGER DEFAULT 0, " +
                 key_category + " TEXT NOT NULL DEFAULT '', " +
-                key_etag + " TEXT)");
-        createIndexes(db);
+                key_etag + " TEXT," +
+                key_excerpt + " TEXT NOT NULL DEFAULT '', " +
+                "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
+        createNotesIndexes(db);
     }
 
+    private void createAccountTable(@NonNull SQLiteDatabase db, @NonNull String tableName) {
+        db.execSQL("CREATE TABLE " + tableName + " ( " +
+                key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                key_url + " TEXT, " +
+                key_username + " TEXT, " +
+                key_account_name + " TEXT UNIQUE, " +
+                key_etag + " TEXT, " +
+                key_modified + " INTEGER)");
+        createAccountIndexes(db);
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -105,7 +144,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             recreateDatabase(db);
         }
         if (oldVersion < 4) {
-            clearDatabase(db);
+            db.delete(table_notes, null, null);
+            db.delete(table_accounts, null, null);
         }
         if (oldVersion < 5) {
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_remote_id + " INTEGER");
@@ -116,18 +156,116 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_favorite + " INTEGER DEFAULT 0");
         }
         if (oldVersion < 7) {
-            dropIndexes(db);
+            DatabaseIndexUtil.dropIndexes(db);
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_category + " TEXT NOT NULL DEFAULT ''");
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_etag + " TEXT");
-            createIndexes(db);
+            createNotesIndexes(db);
         }
         if (oldVersion < 8) {
             final String table_temp = "NOTES_TEMP";
-            createTable(db, table_temp);
+            createNotesTable(db, table_temp);
             db.execSQL(String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s,%s,%s) ", table_temp, key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag)
                     + String.format("SELECT %s,%s,%s,%s,strftime('%%s',%s),%s,%s,%s,%s FROM %s", key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_notes));
             db.execSQL(String.format("DROP TABLE %s", table_notes));
             db.execSQL(String.format("ALTER TABLE %s RENAME TO %s", table_temp, table_notes));
+        }
+        if (oldVersion < 9) {
+            // Create accounts table
+            createAccountTable(db, table_accounts);
+
+            // Add accountId to notes table
+            db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_account_id + " INTEGER NOT NULL DEFAULT 0");
+            DatabaseIndexUtil.createIndex(db, table_notes, key_account_id);
+
+            // Migrate existing account from SharedPreferences
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            String username = sharedPreferences.getString("settingsUsername", "");
+            String url = sharedPreferences.getString("settingsUrl", "");
+            if (url != null && url.endsWith("/")) {
+                url = url.substring(0, url.length() - 1);
+                try {
+                    String accountName = username + "@" + new URL(url).getHost();
+
+                    ContentValues migratedAccountValues = new ContentValues();
+                    migratedAccountValues.put(key_url, url);
+                    migratedAccountValues.put(key_username, username);
+                    migratedAccountValues.put(key_account_name, accountName);
+                    db.insert(table_accounts, null, migratedAccountValues);
+
+                    // After successful insertion of migrated account, set accountId to 1 in each note
+                    ContentValues values = new ContentValues();
+                    values.put(key_account_id, 1);
+                    db.update(table_notes, values, key_account_id + " = ?", new String[]{"NULL"});
+
+                    // Add FOREIGN_KEY constraint
+                    final String table_temp = "NOTES_TEMP";
+                    db.execSQL(String.format("ALTER TABLE %s RENAME TO %s", table_notes, table_temp));
+
+                    db.execSQL("CREATE TABLE " + table_notes + " ( " +
+                            key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                            key_remote_id + " INTEGER, " +
+                            key_account_id + " INTEGER, " +
+                            key_status + " VARCHAR(50), " +
+                            key_title + " TEXT, " +
+                            key_modified + " INTEGER DEFAULT 0, " +
+                            key_content + " TEXT, " +
+                            key_favorite + " INTEGER DEFAULT 0, " +
+                            key_category + " TEXT NOT NULL DEFAULT '', " +
+                            key_etag + " TEXT," +
+                            "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
+                    DatabaseIndexUtil.createIndex(db, table_notes, key_remote_id, key_account_id, key_status, key_favorite, key_category, key_modified);
+
+                    db.execSQL(String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ", table_notes, key_id, key_account_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag)
+                            + String.format("SELECT %s,%s,%s,%s,%s,%s,%s,%s,%s,%s FROM %s", key_id, values.get(key_account_id), key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_temp));
+                    db.execSQL(String.format("DROP TABLE %s;", table_temp));
+
+                    AppWidgetManager awm = AppWidgetManager.getInstance(context);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                    // Add accountId '1' to any existing (and configured) appwidgets
+                    int[] appWidgetIdsNLW = awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class));
+                    int[] appWidgetIdsSNW = awm.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class));
+
+                    for (int appWidgetId : appWidgetIdsNLW) {
+                        if (sharedPreferences.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1) >= 0) {
+                            editor.putLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, 1);
+                        }
+                    }
+
+                    for (int appWidgetId : appWidgetIdsSNW) {
+                        if (sharedPreferences.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1) >= 0) {
+                            editor.putLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, 1);
+                        }
+                    }
+
+                    notifyNotesChanged();
+
+                    // Clean up no longer needed SharedPreferences
+                    editor.remove("notes_last_etag");
+                    editor.remove("notes_last_modified");
+                    editor.remove("settingsUrl");
+                    editor.remove("settingsUsername");
+                    editor.remove("settingsPassword");
+                    editor.apply();
+                } catch (MalformedURLException e) {
+                    Log.e(TAG, "Previous URL could not be parsed. Recreating database...");
+                    e.printStackTrace();
+                    recreateDatabase(db);
+                }
+            } else {
+                Log.e(TAG, "Previous URL is null. Recreating database...");
+                recreateDatabase(db);
+            }
+        }
+        if (oldVersion < 10) {
+            db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_excerpt + " INTEGER NOT NULL DEFAULT ''");
+            Cursor cursor = db.query(table_notes, new String[]{key_id, key_content}, null, null, null, null, null, null);
+            while (cursor.moveToNext()) {
+                ContentValues values = new ContentValues();
+                values.put(key_excerpt, NoteUtil.generateNoteExcerpt(cursor.getString(1)));
+                db.update(table_notes, values, key_id + " = ? ", new String[]{cursor.getString(0)});
+            }
+            cursor.close();
         }
     }
 
@@ -136,35 +274,19 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         recreateDatabase(db);
     }
 
-    private void clearDatabase(SQLiteDatabase db) {
-        db.delete(table_notes, null, null);
-    }
-
     private void recreateDatabase(SQLiteDatabase db) {
-        dropIndexes(db);
-        db.execSQL("DROP TABLE " + table_notes);
+        DatabaseIndexUtil.dropIndexes(db);
+        db.execSQL("DROP TABLE IF EXISTS " + table_notes);
+        db.execSQL("DROP TABLE IF EXISTS " + table_accounts);
         onCreate(db);
     }
 
-    private void dropIndexes(SQLiteDatabase db) {
-        Cursor c = db.query("sqlite_master", new String[]{"name"}, "type=?", new String[]{"index"}, null, null, null);
-        while (c.moveToNext()) {
-            db.execSQL("DROP INDEX " + c.getString(0));
-        }
-        c.close();
+    private static void createNotesIndexes(@NonNull SQLiteDatabase db) {
+        DatabaseIndexUtil.createIndex(db, table_notes, key_remote_id, key_account_id, key_status, key_favorite, key_category, key_modified);
     }
 
-    private void createIndexes(SQLiteDatabase db) {
-        createIndex(db, table_notes, key_remote_id);
-        createIndex(db, table_notes, key_status);
-        createIndex(db, table_notes, key_favorite);
-        createIndex(db, table_notes, key_category);
-        createIndex(db, table_notes, key_modified);
-    }
-
-    private void createIndex(SQLiteDatabase db, String table, String column) {
-        String indexName = table + "_" + column + "_idx";
-        db.execSQL("CREATE INDEX IF NOT EXISTS " + indexName + " ON " + table + "(" + column + ")");
+    private static void createAccountIndexes(@NonNull SQLiteDatabase db) {
+        DatabaseIndexUtil.createIndex(db, table_accounts, key_url, key_username, key_account_name, key_etag, key_modified);
     }
 
     public Context getContext() {
@@ -174,23 +296,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     /**
      * Creates a new Note in the Database and adds a Synchronization Flag.
      *
-     * @param content String
-     */
-    @SuppressWarnings("UnusedReturnValue")
-    public long addNoteAndSync(String content, String category, boolean favorite) {
-        CloudNote note = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, getContext()), content, favorite, category, null);
-        return addNoteAndSync(note);
-    }
-
-    /**
-     * Creates a new Note in the Database and adds a Synchronization Flag.
-     *
      * @param note Note
      */
-    @SuppressWarnings("UnusedReturnValue")
-    public long addNoteAndSync(CloudNote note) {
-        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED);
-        long id = addNote(dbNote);
+    public long addNoteAndSync(long accountId, CloudNote note) {
+        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()));
+        long id = addNote(accountId, dbNote);
         notifyNotesChanged();
         getNoteServerSyncHelper().scheduleSync(true);
         return id;
@@ -202,7 +312,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
      */
-    long addNote(CloudNote note) {
+    long addNote(long accountId, CloudNote note) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         if (note instanceof DBNote) {
@@ -211,8 +321,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 values.put(key_id, dbNote.getId());
             }
             values.put(key_status, dbNote.getStatus().getTitle());
+            values.put(key_account_id, dbNote.getAccountId());
+            values.put(key_excerpt, dbNote.getExcerpt());
         } else {
             values.put(key_status, DBStatus.VOID.getTitle());
+            values.put(key_account_id, accountId);
+            values.put(key_excerpt, NoteUtil.generateNoteExcerpt(note.getContent()));
         }
         if (note.getRemoteId() > 0) {
             values.put(key_remote_id, note.getRemoteId());
@@ -232,8 +346,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param id int - ID of the requested Note
      * @return requested Note
      */
-    public DBNote getNote(long id) {
-        List<DBNote> notes = getNotesCustom(key_id + " = ? AND " + key_status + " != ?", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle()}, null);
+    public DBNote getNote(long accountId, long id) {
+        List<DBNote> notes = getNotesCustom(accountId, key_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, false);
         return notes.isEmpty() ? null : notes.get(0);
     }
 
@@ -247,21 +361,21 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @NonNull
     @WorkerThread
-    private List<DBNote> getNotesCustom(@NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy) {
-        return this.getNotesCustom(selection, selectionArgs, orderBy, null);
+    private List<DBNote> getNotesCustom(long accountId, @NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy, boolean pruneContent) {
+        return this.getNotesCustom(accountId, selection, selectionArgs, orderBy, null, pruneContent);
     }
 
     @NonNull
     @WorkerThread
-    private List<DBNote> getNotesCustom(@NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy, @Nullable String limit) {
+    private List<DBNote> getNotesCustom(long accountId, @NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy, @Nullable String limit, boolean pruneContent) {
         SQLiteDatabase db = getReadableDatabase();
         if (selectionArgs.length > 2) {
-            Log.v("Note", selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
+            Log.v(TAG, selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
         }
-        Cursor cursor = db.query(table_notes, columns, selection, selectionArgs, null, null, orderBy, limit);
+        Cursor cursor = db.query(table_notes, pruneContent ? columnsWithoutContent : columns, selection, selectionArgs, null, null, orderBy, limit);
         List<DBNote> notes = new ArrayList<>();
         while (cursor.moveToNext()) {
-            notes.add(getNoteFromCursor(cursor));
+            notes.add(getNoteFromCursor(accountId, cursor, pruneContent));
         }
         cursor.close();
         return notes;
@@ -271,29 +385,46 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * Creates a DBNote object from the current row of a Cursor.
      *
      * @param cursor database cursor
+     * @param pruneContent
      * @return DBNote
      */
     @NonNull
-    private DBNote getNoteFromCursor(@NonNull Cursor cursor) {
+    private DBNote getNoteFromCursor(long accountId, @NonNull Cursor cursor, boolean pruneContent) {
+        validateAccountId(accountId);
         Calendar modified = Calendar.getInstance();
         modified.setTimeInMillis(cursor.getLong(4) * 1000);
-        return new DBNote(cursor.getLong(0), cursor.getLong(1), modified, cursor.getString(3), cursor.getString(5), cursor.getInt(6) > 0, cursor.getString(7), cursor.getString(8), DBStatus.parse(cursor.getString(2)));
+
+        return new DBNote(
+                cursor.getLong(0),
+                cursor.getLong(1),
+                modified,
+                cursor.getString(3),
+                pruneContent ? "" : cursor.getString(9),
+                cursor.getInt(5) > 0,
+                cursor.getString(6),
+                cursor.getString(7),
+                DBStatus.parse(cursor.getString(2)),
+                accountId,
+                cursor.getString(8)
+        );
     }
 
-    public void debugPrintFullDB() {
-        List<DBNote> notes = getNotesCustom("", new String[]{}, default_order);
-        Log.v(getClass().getSimpleName(), "Full Database (" + notes.size() + " notes):");
+    public void debugPrintFullDB(long accountId) {
+        validateAccountId(accountId);
+        List<DBNote> notes = getNotesCustom(accountId, "", new String[]{}, default_order, false);
+        Log.v(TAG, "Full Database (" + notes.size() + " notes):");
         for (DBNote note : notes) {
-            Log.v(getClass().getSimpleName(), "     " + note);
+            Log.v(TAG, "     " + note);
         }
     }
 
     @NonNull
     @WorkerThread
-    public Map<Long, Long> getIdMap() {
+    public Map<Long, Long> getIdMap(long accountId) {
+        validateAccountId(accountId);
         Map<Long, Long> result = new HashMap<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_notes, new String[]{key_remote_id, key_id}, key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, null, null, null);
+        Cursor cursor = db.query(table_notes, new String[]{key_remote_id, key_id}, key_status + " != ? AND " + key_account_id + " = ? ", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, null, null);
         while (cursor.moveToNext()) {
             result.put(cursor.getLong(0), cursor.getLong(1));
         }
@@ -308,14 +439,16 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @NonNull
     @WorkerThread
-    public List<DBNote> getNotes() {
-        return getNotesCustom(key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, default_order);
+    public List<DBNote> getNotes(long accountId) {
+        validateAccountId(accountId);
+        return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, default_order, false);
     }
 
     @NonNull
     @WorkerThread
-    public List<DBNote> getRecentNotes() {
-        return getNotesCustom(key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, key_modified + " DESC", "4");
+    public List<DBNote> getRecentNotes(long accountId) {
+        validateAccountId(accountId);
+        return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, key_modified + " DESC", "4", true);
     }
 
     /**
@@ -325,12 +458,16 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @NonNull
     @WorkerThread
-    public List<DBNote> searchNotes(@Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
+    public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
+        validateAccountId(accountId);
         List<String> where = new ArrayList<>();
         List<String> args = new ArrayList<>();
 
         where.add(key_status + " != ?");
         args.add(DBStatus.LOCAL_DELETED.getTitle());
+
+        where.add(key_account_id + " = ?");
+        args.add("" + accountId);
 
         if (query != null) {
             where.add(key_status + " != ?");
@@ -354,7 +491,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
 
         String order = category == null ? default_order : key_category + ", " + key_title;
-        return getNotesCustom(TextUtils.join(" AND ", where), args.toArray(new String[]{}), order);
+        return getNotesCustom(accountId, TextUtils.join(" AND ", where), args.toArray(new String[]{}), order, true);
     }
 
     /**
@@ -364,19 +501,21 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @NonNull
     @WorkerThread
-    public List<DBNote> getLocalModifiedNotes() {
-        return getNotesCustom(key_status + " != ?", new String[]{DBStatus.VOID.getTitle()}, null);
+    List<DBNote> getLocalModifiedNotes(long accountId) {
+        validateAccountId(accountId);
+        return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.VOID.getTitle(), "" + accountId}, null, false);
     }
 
     @NonNull
     @WorkerThread
-    public Map<String, Integer> getFavoritesCount() {
+    public Map<String, Integer> getFavoritesCount(long accountId) {
+        validateAccountId(accountId);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(
                 table_notes,
                 new String[]{key_favorite, "COUNT(*)"},
-                key_status + " != ?",
-                new String[]{DBStatus.LOCAL_DELETED.getTitle()},
+                key_status + " != ? AND " + key_account_id + " = ?",
+                new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId},
                 key_favorite,
                 null,
                 key_favorite);
@@ -390,19 +529,30 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @NonNull
     @WorkerThread
-    public List<NavigationAdapter.NavigationItem> getCategories() {
+    public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
+        validateAccountId(accountId);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(
                 table_notes,
                 new String[]{key_category, "COUNT(*)"},
-                key_status + " != ?",
-                new String[]{DBStatus.LOCAL_DELETED.getTitle()},
+                key_status + " != ? AND " + key_account_id + " = ?",
+                new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId},
                 key_category,
                 null,
                 key_category);
         List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
-            categories.add(new NavigationAdapter.NavigationItem("category:" + cursor.getString(0), cursor.getString(0), cursor.getInt(1), NavigationAdapter.ICON_FOLDER));
+            Resources res = context.getResources();
+            String category = cursor.getString(0).toLowerCase();
+            int icon = NavigationAdapter.ICON_FOLDER;
+            if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
+                icon = R.drawable.ic_library_music_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
+                icon = R.drawable.ic_local_movies_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
+                icon = R.drawable.ic_work_grey600_24dp;
+            }
+            categories.add(new NavigationAdapter.NavigationItem("category:" + cursor.getString(0), cursor.getString(0), cursor.getInt(1), icon));
         }
         cursor.close();
         return categories;
@@ -445,13 +595,13 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
-    public DBNote updateNoteAndSync(@NonNull DBNote oldNote, @Nullable String newContent, @Nullable ICallback callback) {
+    public DBNote updateNoteAndSync(long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ICallback callback) {
         //debugPrintFullDB();
         DBNote newNote;
         if (newContent == null) {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED);
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, oldNote.getExcerpt());
         } else {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED);
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(newContent));
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -460,6 +610,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_category, newNote.getCategory());
         values.put(key_modified, newNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, newNote.getContent());
+        values.put(key_excerpt, newNote.getExcerpt());
         int rows = db.update(table_notes, values, key_id + " = ? AND (" + key_content + " != ? OR " + key_category + " != ?)", new String[]{String.valueOf(newNote.getId()), newNote.getContent(), newNote.getCategory()});
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if (rows > 0) {
@@ -485,9 +636,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param id                        local ID of Note
      * @param remoteNote                Note from the server.
      * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
-     * @return The number of the Rows affected.
      */
-    int updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
+    void updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
@@ -505,6 +655,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_favorite, remoteNote.isFavorite());
         values.put(key_category, remoteNote.getCategory());
         values.put(key_etag, remoteNote.getEtag());
+        values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent()));
         String whereClause;
         String[] whereArgs;
         if (forceUnchangedDBNoteState != null) {
@@ -521,8 +672,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             whereArgs = new String[]{String.valueOf(id), DBStatus.VOID.getTitle(), Long.toString(remoteNote.getModified().getTimeInMillis() / 1000), remoteNote.getTitle(), remoteNote.isFavorite() ? "1" : "0", remoteNote.getCategory(), remoteNote.getEtag(), remoteNote.getContent()};
         }
         int i = db.update(table_notes, values, whereClause, whereArgs);
-        Log.d(getClass().getSimpleName(), "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "  => " + i + " rows updated");
-        return i;
+        Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "  => " + i + " rows updated");
     }
 
     /**
@@ -530,10 +680,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * from the Server.
      *
      * @param id long - ID of the Note that should be deleted
-     * @return Affected rows
      */
-    @SuppressWarnings("UnusedReturnValue")
-    public int deleteNoteAndSync(long id) {
+    public void deleteNoteAndSync(long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, DBStatus.LOCAL_DELETED.getTitle());
@@ -549,12 +697,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
                 String shortcutId = id + "";
                 if (shortcut.getId().equals(shortcutId)) {
-                    Log.v(NoteSQLiteOpenHelper.class.getSimpleName(), "Removing shortcut for " + shortcutId);
+                    Log.v(TAG, "Removing shortcut for " + shortcutId);
                     shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), context.getResources().getString(R.string.note_has_been_deleted));
                 }
             });
         }
-        return i;
     }
 
     /**
@@ -575,25 +722,157 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * Notify about changed notes.
      */
     void notifyNotesChanged() {
-        updateSingleNoteWidgets();
-        updateNoteListWidgets();
+        updateSingleNoteWidgets(getContext());
+        updateNoteListWidgets(getContext());
     }
 
     /**
      * Update single note widget, if the note data was changed.
      */
-    private void updateSingleNoteWidgets() {
-        Intent intent = new Intent(getContext(), SingleNoteWidget.class);
+    private static void updateSingleNoteWidgets(Context context) {
+        Intent intent = new Intent(context, SingleNoteWidget.class);
         intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        getContext().sendBroadcast(intent);
+        context.sendBroadcast(intent);
     }
 
     /**
      * Update note list widgets, if the note data was changed.
      */
-    private void updateNoteListWidgets() {
-        Intent intent = new Intent(getContext(), NoteListWidget.class);
+    private static void updateNoteListWidgets(Context context) {
+        Intent intent = new Intent(context, NoteListWidget.class);
         intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        getContext().sendBroadcast(intent);
+        context.sendBroadcast(intent);
+    }
+
+    public boolean hasAccounts() {
+        return DatabaseUtils.queryNumEntries(getReadableDatabase(), table_accounts) > 0;
+    }
+
+    /**
+     * @param url         URL to the root of the used Nextcloud instance without trailing slash
+     * @param username    Username of the account
+     * @param accountName Composed by the username and the host of the URL, separated by @-sign
+     * @throws SQLiteConstraintException in case accountName already exists
+     */
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName) throws SQLiteConstraintException {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_url, url);
+        values.put(key_username, username);
+        values.put(key_account_name, accountName);
+        db.insertOrThrow(table_accounts, null, values);
+    }
+
+    /**
+     * @param accountId account which should be read
+     * @return a LocalAccount object for the given accountId
+     */
+    public LocalAccount getAccount(long accountId) {
+        validateAccountId(accountId);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, key_id + " = ?", new String[]{accountId + ""}, null, null, null, null);
+        LocalAccount account = new LocalAccount();
+        while (cursor.moveToNext()) {
+            account.setId(cursor.getLong(0));
+            account.setUrl(cursor.getString(1));
+            account.setAccountName(cursor.getString(2));
+            account.setUserName(cursor.getString(3));
+            account.setETag(cursor.getString(4));
+            account.setModified(cursor.getLong(5));
+        }
+        cursor.close();
+        return account;
+    }
+
+    public List<LocalAccount> getAccounts() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, null, null, null, null, null);
+        List<LocalAccount> accounts = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            LocalAccount account = new LocalAccount();
+            account.setId(cursor.getLong(0));
+            account.setUrl(cursor.getString(1));
+            account.setAccountName(cursor.getString(2));
+            account.setUserName(cursor.getString(3));
+            account.setETag(cursor.getString(4));
+            account.setModified(cursor.getLong(5));
+            accounts.add(account);
+        }
+        cursor.close();
+        return accounts;
+    }
+
+    @Nullable
+    public LocalAccount getLocalAccountByAccountName(String accountName) {
+        if (accountName == null) {
+            Log.e(TAG, "accountName is null");
+            return null;
+        }
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
+        LocalAccount account = new LocalAccount();
+        while (cursor.moveToNext()) {
+            account.setId(cursor.getLong(0));
+            account.setUrl(cursor.getString(1));
+            account.setAccountName(cursor.getString(2));
+            account.setUserName(cursor.getString(3));
+            account.setETag(cursor.getString(4));
+            account.setModified(cursor.getLong(5));
+        }
+        cursor.close();
+        return account;
+    }
+
+    /**
+     * @param accountId the id of the account that should be deleted
+     * @throws IllegalArgumentException if no account has been deleted by the given accountId
+     */
+    public void deleteAccount(long accountId) throws IllegalArgumentException {
+        validateAccountId(accountId);
+        SQLiteDatabase db = this.getWritableDatabase();
+        int deletedAccounts = db.delete(table_accounts, key_id + " = ?", new String[]{accountId + ""});
+        if (deletedAccounts < 1) {
+            Log.e(TAG, "AccountId '" + accountId + "' did not delete any account");
+            throw new IllegalArgumentException("The given accountId does not delete any row");
+        } else if (deletedAccounts > 1) {
+            Log.e(TAG, "AccountId '" + accountId + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
+        }
+        final int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{accountId + ""});
+        Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + accountId);
+    }
+
+    void updateETag(long accountId, String etag) {
+        validateAccountId(accountId);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_etag, etag);
+        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{accountId + ""});
+        if (updatedRows == 1) {
+            Log.v(TAG, "Updated etag to " + etag + " for accountId = " + accountId);
+        } else {
+            Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and etag = " + etag);
+        }
+    }
+
+    void updateModified(long accountId, long modified) {
+        validateAccountId(accountId);
+        if (modified < 0) {
+            throw new IllegalArgumentException("modified must be greater or equal 0");
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_modified, modified);
+        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{accountId + ""});
+        if (updatedRows == 1) {
+            Log.v(TAG, "Updated modified to " + modified + " for accountId = " + accountId);
+        } else {
+            Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and modified = " + modified);
+        }
+    }
+
+    private static void validateAccountId(long accountId) {
+        if (accountId < 1) {
+            throw new IllegalArgumentException("accountId must be greater than 0");
+        }
     }
 }

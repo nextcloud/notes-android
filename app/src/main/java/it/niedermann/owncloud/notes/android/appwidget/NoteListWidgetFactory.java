@@ -20,21 +20,21 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     private final Context context;
     private final int displayMode;
-    private final int appWidgetId;
     private final boolean darkTheme;
     private String category;
-    private final SharedPreferences sp;
     private NoteSQLiteOpenHelper db;
     private List<DBNote> dbNotes;
+    private long accountId;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
-        appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                            AppWidgetManager.INVALID_APPWIDGET_ID);
-        sp = PreferenceManager.getDefaultSharedPreferences(this.context);
+        final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                AppWidgetManager.INVALID_APPWIDGET_ID);
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.context);
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
         darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
         category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
+        accountId = sp.getLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, -1);
     }
 
     @Override
@@ -44,12 +44,16 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onDataSetChanged() {
-        if (displayMode == NoteListWidget.NLW_DISPLAY_ALL) {
-            dbNotes = db.getNotes();
-        } else if (displayMode == NoteListWidget.NLW_DISPLAY_STARRED) {
-            dbNotes = db.searchNotes(null,null, true);
-        } else if (displayMode == NoteListWidget.NLW_DISPLAY_CATEGORY) {
-            dbNotes = db.searchNotes(null, category,  null);
+        try {
+            if (displayMode == NoteListWidget.NLW_DISPLAY_ALL) {
+                dbNotes = db.getNotes(accountId);
+            } else if (displayMode == NoteListWidget.NLW_DISPLAY_STARRED) {
+                dbNotes = db.searchNotes(accountId, null, null, true);
+            } else if (displayMode == NoteListWidget.NLW_DISPLAY_CATEGORY) {
+                dbNotes = db.searchNotes(accountId, null, category, null);
+            }
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
     }
 
@@ -85,6 +89,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         final Bundle extras = new Bundle();
 
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+        extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
         fillInIntent.setData(Uri.parse(fillInIntent.toUri(Intent.URI_INTENT_SCHEME)));
 

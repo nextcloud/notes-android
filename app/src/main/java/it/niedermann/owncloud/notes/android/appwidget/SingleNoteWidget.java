@@ -13,12 +13,13 @@ import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
+import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 
 public class SingleNoteWidget extends AppWidgetProvider {
-    private static boolean darkTheme;
 
     public static final String DARK_THEME_KEY = "SNW_darkTheme";
     public static final String WIDGET_KEY = "single_note_widget";
+    public static final String ACCOUNT_ID_KEY = "SNW_accountId";
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -31,7 +32,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 return;
             }
 
-            darkTheme = sp.getBoolean(DARK_THEME_KEY + appWidgetId, false);
+            boolean darkTheme = sp.getBoolean(DARK_THEME_KEY + appWidgetId, false);
+            templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, sp.getLong(ACCOUNT_ID_KEY + appWidgetId, -1));
 
             PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
                                                                             PendingIntent.FLAG_UPDATE_CURRENT);
@@ -55,7 +57,6 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
                 awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv);
             }
-
             awm.updateAppWidget(appWidgetId, views);
         }
     }
@@ -82,7 +83,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         for (int appWidgetId : appWidgetIds) {
             editor.remove(WIDGET_KEY + appWidgetId);
-            editor.remove(NoteListWidget.DARK_THEME_KEY + appWidgetId);
+            editor.remove(DARK_THEME_KEY + appWidgetId);
+            editor.remove(ACCOUNT_ID_KEY + appWidgetId);
         }
 
         editor.apply();

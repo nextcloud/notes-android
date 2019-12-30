@@ -25,6 +25,8 @@ import com.yydcdut.markdown.syntax.edit.EditFactory;
 import com.yydcdut.rxmarkdown.RxMDEditText;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -74,10 +76,11 @@ public class NoteEditFragment extends BaseNoteFragment {
         }
     };
 
-    public static NoteEditFragment newInstance(long noteId) {
+    public static NoteEditFragment newInstance(long accountId, long noteId) {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
         b.putLong(PARAM_NOTE_ID, noteId);
+        b.putLong(PARAM_ACCOUNT_ID, accountId);
         f.setArguments(b);
         return f;
     }
@@ -113,9 +116,9 @@ public class NoteEditFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(getView() != null) {
-            ButterKnife.bind(this, getView());
+        ButterKnife.bind(this, Objects.requireNonNull(getView()));
 
+        if(note != null) {
             setActiveTextView(editContent);
 
             if (note.getContent().isEmpty()) {
@@ -142,10 +145,12 @@ public class NoteEditFragment extends BaseNoteFragment {
                     .subscribe(new Subscriber<CharSequence>() {
                         @Override
                         public void onCompleted() {
+                            // Nothing to do here
                         }
 
                         @Override
                         public void onError(Throwable e) {
+                            e.printStackTrace();
                         }
 
                         @Override
@@ -160,8 +165,6 @@ public class NoteEditFragment extends BaseNoteFragment {
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
                 editContent.setTypeface(Typeface.MONOSPACE);
             }
-        } else {
-            Log.e(NoteEditFragment.class.getSimpleName(), "getView() is null");
         }
     }
 

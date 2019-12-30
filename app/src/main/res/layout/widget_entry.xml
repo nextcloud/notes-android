@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/widget_note_list_entry"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
@@ -16,7 +17,7 @@
         android:paddingLeft="@dimen/widget_note_list_inner_padding"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
         android:paddingRight="@dimen/widget_note_list_outer_padding"
-        android:src="@drawable/ic_star_yellow_24dp"
+        app:srcCompat="@drawable/ic_star_yellow_24dp"
         android:contentDescription="@string/widget_entry_fav_contentDescription" />
 
     <TextView

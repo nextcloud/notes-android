@@ -2,37 +2,30 @@
 <resources>
 
     <string name="app_name">Nodiadau</string>
-    <string name="no_notes">Dim nodiadau eto</string>
     <string name="label_all_notes">Pob nodyn</string>
     <string name="label_favorites">Ffefrynnau</string>
     <string name="action_create">Nodyn newydd</string>
     <string name="action_settings">Gosodiadau</string>
     <string name="action_trashbin">Nodiadau wedi\'u dileu</string>
     <string name="action_search">Chwilio</string>
-    <string name="action_create_save">Cadw</string>
     <string name="simple_cancel">Diddymu</string>
     <string name="simple_edit">Golygu</string>
     <string name="action_edit_save">Cadw</string>
-    <string name="action_edit_saving">Yn cadw &#8230;</string>
-    <string name="action_edit_saved">Wedi\'u cadw</string>
     <string name="simple_about">Ynghylch</string>
     <string name="simple_bold">Trwm</string>
     <string name="simple_link">Dolen</string>
     <string name="simple_italic">Italig</string>
-    <string name="action_select_note">Dewis nodyn</string>
     <string name="action_note_deleted">Nodyn wedi\'i ddileu</string>
     <string name="action_note_restored">Nodyn wedi\'i adfer</string>
     <string name="action_undo">Dadwneud</string>
     <string name="action_drawer_open">agor llywio</string>
     <string name="action_drawer_close">cau llywio</string>
-    <string name="action_recent">Diweddar</string>
     <string name="action_uncategorized">Dim categori</string>
     <string name="menu_delete">Dileu</string>
     <string name="menu_change_category">Categori</string>
     <string name="menu_favorite">Ffefryn</string>
     <string name="menu_preview">Rhagolwg</string>
     <string name="menu_share">Rhannu</string>
-    <string name="menu_about">Ynghylch</string>
 
     <string name="change_category_title">Dewis categori</string>
 
@@ -40,52 +33,20 @@
     <string name="listview_updated_yesterday">Ddoe</string>
     <string name="listview_updated_this_week">Wythnos yma</string>
     <string name="listview_updated_this_month">Mis yma</string>
-    <string name="listview_updated_earlier">Cynharach</string>
-
     <!-- Settings -->
-    <string name="settings_server_settings">Cyfrif</string>
-    <string name="settings_url">Cyfeiriad gweinydd</string>
-    <string name="settings_url_check_description">Yn dangos a oes modd pingio\'r cyfeiriad</string>
-    <string name="settings_url_warn_http">RHYBUDD: \"mae http\" yn anniogel. Defnyddiwch \"https\".</string>
-    <string name="settings_username">Enw defnyddiwr</string>
-    <string name="settings_password">Cyfrinair</string>
-    <string name="settings_password_unchanged">Cyfrinair (heb ei newid)</string>
-    <string name="settings_password_check_description">Yn dangos p\'un ai yw\'ch manylion yn gywir</string>
-    <string name="settings_submit">Cysylltu</string>
-    <string name="settings_submitting">Cysylltu i &#8230;</string>
     <string name="settings_note_mode">Modd arddangos nodiadau</string>
     <string name="settings_theme_title">Thema tywyll</string>
     <string name="settings_font_title">Font monofwlch</string>
     <string name="settings_wifi_only">Cysoni dros Wi-Fi yn unig</string>
-    <string name="settings_cert_category">Rheoli tystysgrifau</string>
-    <string name="settings_cert_trust_system">Tysytysgrfiau\'r system ymddiriedaeth</string>
-    <string name="settings_cert_trust_system_on">CA\'r system a\'r rhai ychwanegwyd gan y defnyddiwr yn gymeradwy (argymell)</string>
-    <string name="settings_cert_trust_system_off">CA\'r system a\'r rhai ychwanegwyd gan y defnyddiwr ddim yn gymeradwy</string>
-    <string name="settings_cert_reset">Ailosod tystysgrifau cymeradwy/anghymeradwy</string>
-    <string name="settings_cert_reset_summary">Ailosod ymddiriedaeth pob tytysgrif gyfaddas</string>
-    <string name="settings_cert_reset_toast">Mae\'r holl dystysgrifau cyfaddas wedi eu clirio</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Nodiadau - Diogelwch cysylltiad</string>
-    <string name="trust_certificate_unknown_certificate_found">Mae Nodiadau wedi canfod tystysgrif anhysbys. Ydych chi\'n ymddiried ynddi?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Yn cysylltu</string>
-    <string name="network_connected">Wedi cysylltu</string>
-    <string name="network_disconnected">Dim rhwydwaith ar gael</string>
 
     <!-- Error -->
     <string name="error_sync">Methodd y cydweddiad: %1$s</string>
-    <string name="error_invalid_login">Mewngofnod annilys: %1$s</string>
     <string name="error_json">A yw\'r ap Nodiadau yn weithredol ar y gweinydd?</string>
-    <string name="error_io">mae cysylltiad y gweinydd wedi torri</string>
     <string name="error_no_network">dim cysylltiad rthwydwaith</string>
-    <string name="error_server">Mae gan URL/gweinydd wallau</string>
-    <string name="error_url_malformed">Cyfeiriad gweinydd anghywir</string>
-    <string name="error_username_password_invalid">Enw defnyddiwr neu gyfrinair anghywir</string>
-
-    <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Gosodiadau</string>
 
     <!-- About -->
     <string name="about_version_title">Fersiwn</string>
@@ -126,9 +87,13 @@
     <string name="shortcut_create_long">Creu nodyn newydd</string>
 
     <string name="pref_value_theme_light">Golau</string>
-    <string name="pref_value_theme_dark">Tywyll</string>
     <string name="pref_value_font_normal">Arferol</string>
     <string name="pref_value_wifi_and_mobile">Cysoni dros Wi-Fi a data symudol</string>
+    <string name="simple_error">Gwall</string>
+    <string name="simple_close">Cau</string>
+    <string name="simple_copy">Copïo</string>
+    <string name="category_work">Gwaith</string>
+    <string name="no_notes_yet">Dim nodiadau eto</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Agor yn y modd golygu</item>

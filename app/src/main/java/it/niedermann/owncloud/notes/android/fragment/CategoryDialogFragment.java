@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,10 +13,11 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -32,6 +32,8 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
  */
 public class CategoryDialogFragment extends DialogFragment {
 
+    private static final String TAG = CategoryDialogFragment.class.getSimpleName();
+
     /**
      * Interface that must be implemented by the calling Activity.
      */
@@ -44,10 +46,14 @@ public class CategoryDialogFragment extends DialogFragment {
         void onCategoryChosen(String category);
     }
 
+    public static final String PARAM_ACCOUNT_ID = "account_id";
     public static final String PARAM_CATEGORY = "category";
+
+    private long accountId;
 
     @BindView(R.id.editCategory)
     AlwaysAutoCompleteTextView textCategory;
+
     private FolderArrayAdapter adapter;
 
     @Override
@@ -56,6 +62,7 @@ public class CategoryDialogFragment extends DialogFragment {
         ButterKnife.bind(this, dialogView);
         if (savedInstanceState == null) {
             textCategory.setText(getArguments().getString(PARAM_CATEGORY));
+            accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
         }
         adapter = new FolderArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item);
         textCategory.setAdapter(adapter);
@@ -64,24 +71,18 @@ public class CategoryDialogFragment extends DialogFragment {
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setCancelable(true)
-                .setPositiveButton(R.string.action_edit_save, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        CategoryDialogListener listener;
-                        Fragment target = getTargetFragment();
-                        if (target instanceof CategoryDialogListener) {
-                            listener = (CategoryDialogListener) target;
-                        } else {
-                            listener = (CategoryDialogListener) getActivity();
-                        }
-                        listener.onCategoryChosen(textCategory.getText().toString());
+                .setPositiveButton(R.string.action_edit_save, (dialog, which) -> {
+                    CategoryDialogListener listener;
+                    Fragment target = getTargetFragment();
+                    if (target instanceof CategoryDialogListener) {
+                        listener = (CategoryDialogListener) target;
+                    } else {
+                        listener = (CategoryDialogListener) getActivity();
                     }
+                    listener.onCategoryChosen(textCategory.getText().toString());
                 })
-                .setNegativeButton(R.string.simple_cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-                    }
+                .setNegativeButton(R.string.simple_cancel, (dialog, which) -> {
+                    // do nothing
                 })
                 .create();
     }
@@ -92,7 +93,7 @@ public class CategoryDialogFragment extends DialogFragment {
         if (getDialog().getWindow() != null) {
             getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         } else {
-            Log.w(CategoryDialogFragment.class.getSimpleName(), "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
+            Log.w(TAG, "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
         }
     }
 
@@ -101,7 +102,7 @@ public class CategoryDialogFragment extends DialogFragment {
         @Override
         protected List<String> doInBackground(Void... voids) {
             NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
-            List<NavigationAdapter.NavigationItem> items = db.getCategories();
+            List<NavigationAdapter.NavigationItem> items = db.getCategories(accountId);
             List<String> categories = new ArrayList<>();
             for (NavigationAdapter.NavigationItem item : items) {
                 if (!item.label.isEmpty()) {

@@ -2,6 +2,7 @@ Companion App für Nextcloud Notes.
 
 Features
 
+    Mehrere Accounts
     Anzeigen, Erstellen, Bearbeiten, Teilen, Durchsuchen und Löschen von Notizen
     Kategorien verwalten
     Text und Links als neue Notiz in die App teilen
@@ -12,9 +13,10 @@ Features
 
 Voraussetzungen
 
-    Laufende Nextcloud Instanz
-    Aktivierte Nextcloud Notes App
+    Laufende Nextcloud¹ Instanz
+    Aktivierte Nextcloud Files App² (> 3.9.0)
+    Aktivierte Nextcloud Notes App³
 
-Alternativen
-
-Wenn Sie eine Alternative für diese App suchen, versuchen Sie es mit MyOwnNotes.
+¹ https://nextcloud.com/
+² https://github.com/nextcloud/android
+³ https://github.com/nextcloud/notes

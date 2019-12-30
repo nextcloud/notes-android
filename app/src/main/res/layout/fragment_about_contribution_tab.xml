@@ -10,7 +10,6 @@
         android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
-            android:id="@+id/about_source_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,7 +24,6 @@
             android:text="@string/about_source" />
 
         <TextView
-            android:id="@+id/about_issues_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +38,6 @@
             android:text="@string/about_issues" />
 
         <TextView
-            android:id="@+id/about_translate_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

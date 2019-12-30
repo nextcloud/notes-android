@@ -2,86 +2,54 @@
 <resources>
 
     <string name="app_name">Jegyzetek</string>
-    <string name="no_notes">Még nincsenek jegyzetek</string>
     <string name="label_all_notes">Minden jegyzet</string>
     <string name="label_favorites">Kedvencek</string>
     <string name="action_create">Új jegyzet</string>
     <string name="action_settings">Beállítások</string>
     <string name="action_trashbin">Törölt jegyzetek</string>
     <string name="action_search">Keresés</string>
-    <string name="action_create_save">Mentés</string>
     <string name="simple_cancel">Mégsem</string>
     <string name="simple_edit">Szerkesztés</string>
     <string name="action_edit_save">Mentés</string>
-    <string name="action_edit_saving">Mentés &#8230;</string>
-    <string name="action_edit_saved">Elmentve</string>
     <string name="simple_about">Névjegy</string>
-    <string name="action_select_note">Jegyzet választás</string>
+    <string name="simple_bold">Vastag</string>
+    <string name="simple_link">Hivatkozás</string>
+    <string name="simple_italic">Dőlt</string>
     <string name="action_note_deleted">Jegyzet törölve</string>
     <string name="action_note_restored">Jegyzet visszaállítva</string>
     <string name="action_undo">Visszavonás</string>
     <string name="action_drawer_open">navigáció megnyitása</string>
     <string name="action_drawer_close">navigáció bezárása</string>
-    <string name="action_recent">Friss</string>
     <string name="action_uncategorized">Kategorizálatlan</string>
     <string name="menu_delete">Törlés</string>
     <string name="menu_change_category">Kategória</string>
     <string name="menu_favorite">Kedvenc</string>
     <string name="menu_preview">Előnézet</string>
     <string name="menu_share">Megosztás</string>
-    <string name="menu_about">Névjegy</string>
 
     <string name="change_category_title">Válasszon kategóriát</string>
 
     <string name="listview_updated_today">Ma</string>
     <string name="listview_updated_yesterday">Tegnap</string>
     <string name="listview_updated_this_week">Ezen a héten</string>
+    <string name="listview_updated_last_week">Előző hét</string>
     <string name="listview_updated_this_month">Ebben a hónapban</string>
-    <string name="listview_updated_earlier">Korábban</string>
+    <string name="listview_updated_last_month">Előző hónap</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Fiók</string>
-    <string name="settings_url">A szerver címe</string>
-    <string name="settings_url_check_description">Mutatja, hogy a cím pingelhető-e.</string>
-    <string name="settings_url_warn_http">Figyelem: a \"http\" nem biztonságos. Kérjük használj \"https\"-t!</string>
-    <string name="settings_username">Felhasználónév</string>
-    <string name="settings_password">Jelszó</string>
-    <string name="settings_password_unchanged">Jelszó (módosítatlan)</string>
-    <string name="settings_password_check_description">Mutatja ha a hitelesítőadatok helyesek.</string>
-    <string name="settings_submit">Kapcsolódás</string>
-    <string name="settings_submitting">Kapcsolódás &#8230;</string>
     <string name="settings_note_mode">Jegyzet módok megjelenítés</string>
     <string name="settings_theme_title">Sötét téma</string>
+    <string name="settings_font_size">Betű méret</string>
     <string name="settings_wifi_only">Szinkronizáció csak Wifin keresztül</string>
-    <string name="settings_cert_category">Tanúsítványok kezelése</string>
-    <string name="settings_cert_trust_system">Megbízás a rendszertanúsítványokban</string>
-    <string name="settings_cert_trust_system_on">A rendszer és felhasználó által hozzáadott CA-k megbízhatók (javasolt)</string>
-    <string name="settings_cert_trust_system_off">A rendszer és felhasználó által hozzáadott CA-k nem megbízhatók</string>
-    <string name="settings_cert_reset">(Nem)megbízható tanúsítványok alaphelyzetbe</string>
-    <string name="settings_cert_reset_summary">Minden tanúsítvány megbízhatóságának visszaállítása</string>
-    <string name="settings_cert_reset_toast">Minden saját tanúsítvány eltávolítva</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Jegyzetek - kapcsolatbiztonság</string>
-    <string name="trust_certificate_unknown_certificate_found">A jegyzetek ismeretlen tanúsítványba ütközött. Megbízol benne?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Csatlakozás</string>
-    <string name="network_connected">Csatlakozva</string>
-    <string name="network_disconnected">Nincs hálózat</string>
 
     <!-- Error -->
     <string name="error_sync">sikertelen szinkronizálás: %1$s</string>
-    <string name="error_invalid_login">Érvénytelen belépés: %1$s</string>
     <string name="error_json">be van kapcsolva a Jegyzetek app a szerveren?</string>
-    <string name="error_io">szerverkapcsolat sérült</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
-    <string name="error_server">URL/Szerver hibákat tartalmaz</string>
-    <string name="error_url_malformed">Hibás szervercím</string>
-    <string name="error_username_password_invalid">Hibás felhasználónév vagy jelszó</string>
-
-    <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Beállítások</string>
 
     <!-- About -->
     <string name="about_version_title">Verzió</string>
@@ -122,12 +90,29 @@
     <string name="shortcut_create_long">Új jegyzet létrehozása</string>
 
     <string name="pref_value_theme_light">Világos</string>
-    <string name="pref_value_theme_dark">Sötét</string>
+    <string name="pref_value_font_normal">Normál</string>
+    <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fin és mobil adatkapcsolaton</string>
+    <string name="simple_error">Hiba</string>
+    <string name="simple_close">Bezár</string>
+    <string name="simple_copy">Másolás</string>
+    <string name="simple_exception">Kivétel</string>
+    <string name="copied_to_clipboard">Vágólapra másolva</string>
+    <string name="add_account">Fiók hozzáadása</string>
+    <string name="category_music">Zene</string>
+    <string name="category_movies">Filmek</string>
+    <string name="category_work">Munkahelyi</string>
+    <string name="no_notes_yet">Még nincsenek jegyzetek</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>
         <item>Megnyitás előnézetre</item>
         <item>Jegyezd meg a döntésem</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Kicsi</item>
+        <item>Nagy</item>
     </string-array>
 
     <!-- Plurals -->

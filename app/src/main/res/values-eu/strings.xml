@@ -2,89 +2,56 @@
 <resources>
 
     <string name="app_name">Oharrak</string>
-    <string name="no_notes">Ez dago oharrik</string>
+    <string name="app_name_long">Nextcloud Oharrak</string>
     <string name="label_all_notes">Ohar guztiak</string>
     <string name="label_favorites">Gogokoak</string>
     <string name="action_create">Ohar berria</string>
     <string name="action_settings">Ezarpenak</string>
     <string name="action_trashbin">Ezabatutako oharrak</string>
     <string name="action_search">Bilatu</string>
-    <string name="action_create_save">Gorde</string>
     <string name="simple_cancel">Utzi</string>
     <string name="simple_edit">Editatu</string>
     <string name="action_edit_save">Gorde</string>
-    <string name="action_edit_saving">Gordetzen &#8230;</string>
-    <string name="action_edit_saved">Gordeta</string>
     <string name="simple_about">Honi buruz</string>
     <string name="simple_bold">Lodia</string>
     <string name="simple_link">Esteka</string>
     <string name="simple_italic">Etzana</string>
-    <string name="action_select_note">Oharra aukeratu </string>
     <string name="action_note_deleted">Oharra ezabatua</string>
     <string name="action_note_restored">Oharra berreskuratuta</string>
     <string name="action_undo">Desegin</string>
     <string name="action_drawer_open">ireki nabigazioa</string>
     <string name="action_drawer_close">itxi nabigazioa</string>
-    <string name="action_recent">Azkenak</string>
     <string name="action_uncategorized">Kategoria gabe</string>
     <string name="menu_delete">Ezabatu</string>
     <string name="menu_change_category">Kategoria</string>
     <string name="menu_favorite">Gogokoa</string>
     <string name="menu_preview">Aurreikusi</string>
     <string name="menu_share">Partekatu</string>
-    <string name="menu_about">Honi buruz</string>
 
     <string name="change_category_title">Hautatu kategoria bat</string>
 
     <string name="listview_updated_today">Gaur</string>
     <string name="listview_updated_yesterday">Atzo</string>
     <string name="listview_updated_this_week">Aste honetan</string>
+    <string name="listview_updated_last_week">Joan den astean</string>
     <string name="listview_updated_this_month">Hilabete honetan</string>
-    <string name="listview_updated_earlier">Lehenago</string>
+    <string name="listview_updated_last_month">Joan den hilabetean</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Kontua</string>
-    <string name="settings_url">Zerbitzariaren helbidea</string>
-    <string name="settings_url_check_description">Helbideari ping egin dakiokeen erakusten du.</string>
-    <string name="settings_url_warn_http">ABISUA: \"http\" ez da segurua. Mesedez, erabili \"https\".</string>
-    <string name="settings_username">Erabiltzaile izena</string>
-    <string name="settings_password">Pasahitza</string>
-    <string name="settings_password_unchanged">Pasahitza (aldatu gabea)</string>
-    <string name="settings_password_check_description">Kredentzialak zuzenak diren erakusten du.</string>
-    <string name="settings_submit">Konektatu</string>
-    <string name="settings_submitting">Konektatzen &#8230;</string>
     <string name="settings_note_mode">Erakutsi oharren modua</string>
     <string name="settings_theme_title">Gai iluna</string>
+    <string name="settings_font_title">Zabalera bakarreko letra mota</string>
+    <string name="settings_font_size">Letra tamaina</string>
     <string name="settings_wifi_only">Sinkronizatu wifi bidez bakarrik</string>
-    <string name="settings_cert_category">Kudeatu ziurtagiriak</string>
-    <string name="settings_cert_trust_system">Fidatu sistemako ziurtagirietaz</string>
-    <string name="settings_cert_trust_system_on">Sistemako eta erabiltzaileak gehitutako ziurtagiriak fidagarritzat joko dira (aholkatua)</string>
-    <string name="settings_cert_trust_system_off">Sistemako eta erabiltzaileak gehitutako ziurtagiriak ez dira fidagarritzat joko</string>
-    <string name="settings_cert_reset">Leheneratu ziurtagiri (ez) fidagarriak</string>
-    <string name="settings_cert_reset_summary">Ziurtagiri pertsonalizatu guztien fidagarritasuna leheneratzen du</string>
-    <string name="settings_cert_reset_toast">Ziurtagiri pertsonalizatu guztiak garbitu dira</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Oharrak - Konexioaren segurtasuna</string>
-    <string name="trust_certificate_unknown_certificate_found">Oharrak aplikazioak ziurtagiri ezezagun bat aurkitu du. Honetaz fidatu nahi duzu?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Konektatzen</string>
-    <string name="network_connected">Konektatuta</string>
-    <string name="network_disconnected">Sarea ez dago eskuragarri</string>
 
     <!-- Error -->
     <string name="error_sync">Sinkronizazioa huts egin du: %1$s</string>
-    <string name="error_invalid_login">Login-a ez du balio: %1$s</string>
     <string name="error_json">Oharrak aplikazioa zerbitzariak aktibatuta al dago?</string>
-    <string name="error_io">Konexioa zerbitzariarekin ez dabil</string>
     <string name="error_no_network">Ez dago sare-konexiorik</string>
-    <string name="error_server">URL/Zerbitzaria erroreak ditu</string>
-    <string name="error_url_malformed">Zerbitzari helbide okerra</string>
-    <string name="error_username_password_invalid">Erabiltzaile edo pasahitz okerra</string>
-
-    <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Ezarpenak</string>
 
     <!-- About -->
     <string name="about_version_title">Bertsioa</string>
@@ -125,7 +92,6 @@
     <string name="shortcut_create_long">Sortu ohar berria</string>
 
     <string name="pref_value_theme_light">Argia</string>
-    <string name="pref_value_theme_dark">Iluna</string>
     <string name="pref_value_font_normal">Normala</string>
     <string name="pref_value_wifi_and_mobile">Sinkronizatu wifi eta datu mugikorrekin</string>
     <string name="simple_error">Errorea</string>
@@ -133,11 +99,29 @@
     <string name="simple_copy">Kopiatu</string>
     <string name="simple_exception">Salbuespena</string>
     <string name="copied_to_clipboard">Arbelera kopiatua</string>
+    <string name="pin_to_homescreen">Hasierako pantailara egokitu</string>
+    <string name="note_has_been_deleted">Ohar hau ezabatu da</string>
+    <string name="add_account">Gehitu kontua</string>
+    <string name="category_music">Musika</string>
+    <string name="category_movies">Filmak</string>
+    <string name="category_movie">Filma</string>
+    <string name="category_work">Lana</string>
+    <string name="account_already_imported">Kontua dagoeneko inportatu da</string>
+    <string name="no_notes_yet">Ez dago oharrik</string>
+    <string name="no_notes_yet_description">Sakatu + botoia ohar berria sortzeko</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>
         <item>Ireki aurrebista moduan</item>
         <item>Gogoratu nire azken hautaketa</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Txikia</item>
+        <item>Ertaina</item>
+        <item>Handia</item>
     </string-array>
 
     <!-- Plurals -->

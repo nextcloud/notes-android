@@ -2,91 +2,56 @@
 <resources>
 
     <string name="app_name">Notes</string>
-    <string name="no_notes">Ni še dodane nobene zabeležke</string>
+    <string name="app_name_long">Nextcloud Notes</string>
     <string name="label_all_notes">Vse zabeležke</string>
     <string name="label_favorites">Priljubljene</string>
     <string name="action_create">Nova zabeležka</string>
     <string name="action_settings">Nastavitve</string>
     <string name="action_trashbin">Izbrisane zabeležke</string>
     <string name="action_search">Poišči</string>
-    <string name="action_create_save">Shrani</string>
     <string name="simple_cancel">Prekliči</string>
     <string name="simple_edit">Uredi</string>
     <string name="action_edit_save">Shrani</string>
-    <string name="action_edit_saving">Poteka shranjevanje&#8230;</string>
-    <string name="action_edit_saved">Shranjeno</string>
     <string name="simple_about">O programu</string>
     <string name="simple_bold">Krepko</string>
     <string name="simple_link">Povezava</string>
     <string name="simple_italic">Ležeče</string>
-    <string name="action_select_note">Izbor zabeležke</string>
     <string name="action_note_deleted">Zabeležka je izbrisana</string>
     <string name="action_note_restored">Zabeležka je obnovljena</string>
     <string name="action_undo">Razveljavi</string>
     <string name="action_drawer_open">odpri iskalnik</string>
     <string name="action_drawer_close">zapri iskalnik</string>
-    <string name="action_recent">Nedavno</string>
     <string name="action_uncategorized">Neopredeljeno</string>
     <string name="menu_delete">Izbriši</string>
     <string name="menu_change_category">Kategorija</string>
     <string name="menu_favorite">Priljubljena</string>
     <string name="menu_preview">Predogled</string>
     <string name="menu_share">Souporaba</string>
-    <string name="menu_about">O programu</string>
 
     <string name="change_category_title">Izbor kategorije</string>
 
     <string name="listview_updated_today">Danes</string>
     <string name="listview_updated_yesterday">Včeraj</string>
     <string name="listview_updated_this_week">Zadnji teden</string>
+    <string name="listview_updated_last_week">Zadnji teden</string>
     <string name="listview_updated_this_month">Zadnji mesec</string>
-    <string name="listview_updated_earlier">Starejše</string>
+    <string name="listview_updated_last_month">Zadnji mesec</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Račun</string>
-    <string name="settings_url">Naslov strežnika</string>
-    <string name="settings_url_check_description">Pokaže, ali je naslov mogoče pripeti.</string>
-    <string name="settings_url_warn_http">OPOZORILO: protokol »http« ni varen. Priporočljivo je uporabiti protokol »https«.</string>
-    <string name="settings_username">Uporabniško ime</string>
-    <string name="settings_password">Geslo</string>
-    <string name="settings_password_unchanged">Geslo (ni spremenjeno)</string>
-    <string name="settings_password_check_description">Pokaže, ali so poverila pravilna.</string>
-    <string name="settings_submit">Poveži</string>
-    <string name="settings_submitting">Poteka vzpostavljanje povezave z&#8230;</string>
     <string name="settings_note_mode">Način odpiranja zabeležk</string>
     <string name="settings_theme_title">Temna tema</string>
     <string name="settings_font_title">Pisava enotne širine</string>
     <string name="settings_font_size">Velikost pisave</string>
     <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
-    <string name="settings_cert_category">Upravljanje s potrdili</string>
-    <string name="settings_cert_trust_system">Zaupaj sistemskim potrdilom</string>
-    <string name="settings_cert_trust_system_on">Sistemska in s strani uporabnika dodana potrdila CA bodo obravnavana kot varna (priporočljivo)</string>
-    <string name="settings_cert_trust_system_off">Sistemska in s strani uporabnika dodana potrdila CA ne bodo obravnavana kot varna</string>
-    <string name="settings_cert_reset">Ponastavi (ne)zaupanja vredna potrdila</string>
-    <string name="settings_cert_reset_summary">Ponastavi zaupanje vseh uporabniških potrdil</string>
-    <string name="settings_cert_reset_toast">Vsa uporabniška potrdila so počiščena.</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Beležka Notes – varnost povezave</string>
-    <string name="trust_certificate_unknown_certificate_found">Program je zaznal uporabo neznanega potrdila. Ali želite potrditi zaupanje v potrdilo?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Poteka vzpostavljanje povezave ...</string>
-    <string name="network_connected">Povezano</string>
-    <string name="network_disconnected">Na voljo ni nobenega omrežja</string>
 
     <!-- Error -->
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
-    <string name="error_invalid_login">Neveljavna prijava: %1$s</string>
     <string name="error_json">Ali je program Beležka Notes nameščen na strežniku?</string>
-    <string name="error_io">povezava s strežnikom je okvarjena</string>
     <string name="error_no_network">ni omrežne povezave</string>
-    <string name="error_server">naslov/strežnik je naveden napačno</string>
-    <string name="error_url_malformed">Napačen naslov strežnika</string>
-    <string name="error_username_password_invalid">Napačno uporabniško ime ali geslo</string>
-
-    <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Nastavitve</string>
 
     <!-- About -->
     <string name="about_version_title">Različica</string>
@@ -127,7 +92,6 @@
     <string name="shortcut_create_long">Ustvari novo zabeležko</string>
 
     <string name="pref_value_theme_light">Svetla</string>
-    <string name="pref_value_theme_dark">Temna</string>
     <string name="pref_value_font_normal">Običajno</string>
     <string name="pref_value_wifi_and_mobile">Usklajuj na Wi-Fi in mobilni povezavi</string>
     <string name="simple_error">Napaka</string>
@@ -137,6 +101,14 @@
     <string name="copied_to_clipboard">Kopirano v odložišče</string>
     <string name="pin_to_homescreen">Pripni na osnovni zaslon</string>
     <string name="note_has_been_deleted">Ta zabeležka je bila izbrisana</string>
+    <string name="add_account">Dodaj račun</string>
+    <string name="category_music">Glasba</string>
+    <string name="category_movies">Video</string>
+    <string name="category_movie">Video</string>
+    <string name="category_work">Delo</string>
+    <string name="account_already_imported">Račun je že bil uvožen</string>
+    <string name="no_notes_yet">Ni še dodane nobene zabeležke</string>
+    <string name="no_notes_yet_description">Pritisnite gumb + za novo zabeležko</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

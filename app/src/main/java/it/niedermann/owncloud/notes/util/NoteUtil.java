@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -13,6 +14,7 @@ import it.niedermann.owncloud.notes.R;
  * Created by stefan on 06.10.15.
  */
 public class NoteUtil {
+
     private static final Pattern pLists = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
     private static final Pattern pHeadings = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
     private static final Pattern pHeadingLine = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
@@ -20,6 +22,9 @@ public class NoteUtil {
     private static final Pattern pSpace1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
     private static final Pattern pSpace2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
 
+    private NoteUtil() {
+
+    }
 
     /**
      * Strips all MarkDown from the given String

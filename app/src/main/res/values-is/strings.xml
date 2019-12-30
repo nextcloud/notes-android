@@ -2,37 +2,30 @@
 <resources>
 
     <string name="app_name">Minnispunktar</string>
-    <string name="no_notes">Engir minnispunktar ennþá</string>
     <string name="label_all_notes">Allir minnispunktar</string>
     <string name="label_favorites">Eftirlæti</string>
     <string name="action_create">Nýr minnispunktur</string>
     <string name="action_settings">Stillingar</string>
     <string name="action_trashbin">Eyddir minnispunktar</string>
     <string name="action_search">Leita</string>
-    <string name="action_create_save">Vista</string>
     <string name="simple_cancel">Hætta við</string>
     <string name="simple_edit">Breyta</string>
     <string name="action_edit_save">Vista</string>
-    <string name="action_edit_saving">Vista &#8230;</string>
-    <string name="action_edit_saved">Vistað</string>
     <string name="simple_about">Um hugbúnaðinn</string>
     <string name="simple_bold">Feitletrað</string>
     <string name="simple_link">Tengill</string>
     <string name="simple_italic">Skáletrað</string>
-    <string name="action_select_note">Eyða minnispunkti</string>
     <string name="action_note_deleted">Minnispunkti var eytt</string>
     <string name="action_note_restored">Minnispunktur endurheimtur</string>
     <string name="action_undo">Afturkalla</string>
     <string name="action_drawer_open">opna stýringu</string>
     <string name="action_drawer_close">loka stýringu</string>
-    <string name="action_recent">Nýlegt</string>
     <string name="action_uncategorized">Óflokkað</string>
     <string name="menu_delete">Eyða</string>
     <string name="menu_change_category">Flokkur</string>
     <string name="menu_favorite">Eftirlæti</string>
     <string name="menu_preview">Forskoðun</string>
     <string name="menu_share">Deila</string>
-    <string name="menu_about">Um hugbúnaðinn</string>
 
     <string name="change_category_title">Veldu flokk</string>
 
@@ -40,52 +33,21 @@
     <string name="listview_updated_yesterday">Í gær</string>
     <string name="listview_updated_this_week">Í þessari viku</string>
     <string name="listview_updated_this_month">Í þessum mánuði</string>
-    <string name="listview_updated_earlier">Fyrr</string>
-
     <!-- Settings -->
-    <string name="settings_server_settings">Aðgangur</string>
-    <string name="settings_url">Vistfang þjóns</string>
-    <string name="settings_url_check_description">Sýnir hvort hægt sé að ná sambandi (ping) við vistfangið.</string>
-    <string name="settings_url_warn_http">AÐVÖRUN: \"http\" er óöruggt. Endilega nota \"https\".</string>
-    <string name="settings_username">Notandanafn</string>
-    <string name="settings_password">Lykilorð</string>
-    <string name="settings_password_unchanged">Lykilorð (óbreytt)</string>
-    <string name="settings_password_check_description">Sýnir hvort auðkenni séu rétt.</string>
-    <string name="settings_submit">Tengjast</string>
-    <string name="settings_submitting">Tengist &#8230;</string>
     <string name="settings_note_mode">Birtingarhamur minnispunkta</string>
     <string name="settings_theme_title">Dökkt þema</string>
     <string name="settings_font_title">Jafnbreitt letur</string>
+    <string name="settings_font_size">Leturstærð</string>
     <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
-    <string name="settings_cert_category">Sýsla með skilríki</string>
-    <string name="settings_cert_trust_system">Treysta skilríkjum kerfis</string>
-    <string name="settings_cert_trust_system_on">Vottunaraðilum kerfis og þeim sem notandi bætir við verður treyst (mælt með þessu)</string>
-    <string name="settings_cert_trust_system_off">Vottunaraðilum kerfis og þeim sem notandi bætir við verður ekki treyst</string>
-    <string name="settings_cert_reset">Endurstilla (van)treyst skilríki</string>
-    <string name="settings_cert_reset_summary">Frumstillir traust allra sérsniðinna skilríkja</string>
-    <string name="settings_cert_reset_toast">Öll sérsniðin skilríki hafa verið hreinsuð út</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Minnispunktar - Öryggi tengingar</string>
-    <string name="trust_certificate_unknown_certificate_found">Minnispunktaforritið rakst á óþekkt skilríki. Viltu treysta því?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Tengist</string>
-    <string name="network_connected">Tengt</string>
-    <string name="network_disconnected">Ekkert net tiltækt</string>
 
     <!-- Error -->
     <string name="error_sync">Samstilling mistókst: %1$s</string>
-    <string name="error_invalid_login">Ógild innskráning: %1$s</string>
     <string name="error_json">er minnispunktaforritið virkt á þjóninum?</string>
-    <string name="error_io">tenging við þjón rofnaði</string>
     <string name="error_no_network">engin nettenging</string>
-    <string name="error_server">Villur í URL-slóð/þjóni</string>
-    <string name="error_url_malformed">Rangt vistfang þjóns</string>
-    <string name="error_username_password_invalid">Rangt notandanafn eða lykilorð</string>
-
-    <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Stillingar</string>
 
     <!-- About -->
     <string name="about_version_title">Útgáfa</string>
@@ -126,14 +88,32 @@
     <string name="shortcut_create_long">Búa til nýjan minnispunkt</string>
 
     <string name="pref_value_theme_light">Ljóst</string>
-    <string name="pref_value_theme_dark">Dökkt</string>
     <string name="pref_value_font_normal">Venjulegt</string>
     <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
+    <string name="simple_error">Villa</string>
+    <string name="simple_close">Loka</string>
+    <string name="simple_copy">Afrita</string>
+    <string name="simple_exception">Undantekning</string>
+    <string name="copied_to_clipboard">Afritað á klippispjaldið</string>
+    <string name="pin_to_homescreen">Festa á heimaskjá</string>
+    <string name="add_account">Bæta við notandaaðgangi</string>
+    <string name="category_music">Tónlist</string>
+    <string name="category_movies">Kvikmyndir</string>
+    <string name="category_movie">Kvikmynd</string>
+    <string name="category_work">Vinna</string>
+    <string name="no_notes_yet">Engir minnispunktar ennþá</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>
         <item>Opna í forskoðunarham</item>
         <item>Muna það sem ég valdi síðast</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Lítið</item>
+        <item>miðlungs</item>
+        <item>Stórt</item>
     </string-array>
 
     <!-- Plurals -->

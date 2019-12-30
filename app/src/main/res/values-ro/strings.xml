@@ -2,63 +2,33 @@
 <resources>
 
     <string name="app_name">Notițe</string>
-    <string name="no_notes">Nu există notițe</string>
     <string name="action_create">Notă nouă</string>
     <string name="action_settings">Setări</string>
-    <string name="action_create_save">Salvează</string>
     <string name="simple_cancel">Anulează</string>
     <string name="simple_edit">Editează</string>
     <string name="action_edit_save">Salvează</string>
-    <string name="action_edit_saving">Se salvează &#8230;</string>
-    <string name="action_edit_saved">Salvat</string>
-    <string name="action_edit_cancel">Anulat</string>
     <string name="simple_about">Despre</string>
-    <string name="action_select_note">Selectează o notă</string>
     <string name="action_note_deleted">Nota este ștearsă</string>
     <string name="action_note_restored">Nota este restaurată</string>
     <string name="action_undo">Undo</string>
     <string name="menu_delete">Șterge</string>
-    <string name="menu_copy">Copiază</string>
-    <string name="menu_edit">Editează</string>
-    <string name="menu_cancel">Anulează</string>
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Previzualizare</string>
     <string name="menu_share">Partajează</string>
-    <string name="menu_about">Despre</string>
-
-    <string name="copy">Copiază</string>
 
     <string name="listview_updated_today">Azi</string>
     <string name="listview_updated_yesterday">Ieri</string>
     <string name="listview_updated_this_week">Săptămâna asta</string>
     <string name="listview_updated_this_month">Luna asta</string>
-    <string name="listview_updated_earlier">Anterior</string>
 
-    <string name="settings_url">Adresa serverului</string>
-    <string name="settings_url_check_description">Arată dacă se poate face \'ping\' la adresă.</string>
-    <string name="settings_url_warn_http">ATENȚIE: \"http\" este nesigur. Vă rugăm utilizați \"https\".</string>
-    <string name="settings_username">Nume utilizator</string>
-    <string name="settings_password">Parolă</string>
-    <string name="settings_password_check_description">Arată dacă datele de înregistrare sunt corecte.</string>
-    <string name="settings_submit">Conectare</string>
-    <string name="settings_submitting">Se conectează &#8230;</string>
     <!-- Network -->
-    <string name="network_connecting">Se conectează</string>
-    <string name="network_connected">Conectat</string>
-    <string name="network_disconnected">Nici o rețea disponibilă</string>
 
     <!-- Error -->
     <string name="error_sync">Sincronizare eșuată: %1$s</string>
-    <string name="error_invalid_login">Autentificare invalidă: %1$s</string>
     <string name="error_json">Este aplicația Notes activata pe server?</string>
-    <string name="error_io">conexiunea la server este întreruptă</string>
     <string name="error_no_network">nu există conexiunea la rețea</string>
-    <string name="error_server">există erori de URL/Server</string>
-    <string name="error_url_malformed">Adresă greșită a serverului</string>
-    <string name="error_username_password_invalid">Nume de utilizator sau parolă greșite</string>
 
     <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Setări</string>
 
     <!-- About -->
     <string name="about_version_title">Versiune</string>
@@ -83,7 +53,6 @@
     <string name="about_contribution_tab_title">Contribuții</string>
     <string name="about_license_tab_title">Licență</string>
 
-    <string name="widget_all_notes_title">Toate notițele</string>
     <string name="widget_single_note_title">O singură notiță</string>
     <!-- Plurals -->
     <plurals name="ab_selected">

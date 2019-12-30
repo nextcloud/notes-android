@@ -2,34 +2,30 @@
 <resources>
 
     <string name="app_name">Shënime</string>
-    <string name="no_notes">Nuk ka shënime</string>
     <string name="label_all_notes">Të gjitha shënimet</string>
     <string name="label_favorites">Të preferuarat</string>
     <string name="action_create">Shënim i ri</string>
     <string name="action_settings">Konfigurimet</string>
     <string name="action_trashbin">Shënimet e fshira</string>
     <string name="action_search">Kërko</string>
-    <string name="action_create_save">Ruaj</string>
     <string name="simple_cancel">Anullo</string>
     <string name="simple_edit">Redakto</string>
     <string name="action_edit_save">Ruaj</string>
-    <string name="action_edit_saving">Duke ruajtur &#8230;</string>
-    <string name="action_edit_saved">U ruajt</string>
     <string name="simple_about">Rreth </string>
-    <string name="action_select_note">Selekto shënimin</string>
+    <string name="simple_bold">I theksuar</string>
+    <string name="simple_link">Lidhje</string>
+    <string name="simple_italic">I pjerrët</string>
     <string name="action_note_deleted">Shënimi u fshi</string>
     <string name="action_note_restored">Shënimi i rivendos</string>
     <string name="action_undo">Zhbëj</string>
     <string name="action_drawer_open">hape lundrimin</string>
     <string name="action_drawer_close">mbylle lundrimin</string>
-    <string name="action_recent">Së fundmi</string>
     <string name="action_uncategorized">Të pakategorizuara</string>
     <string name="menu_delete">Fshij</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">E preferuar</string>
     <string name="menu_preview">Parapamje</string>
     <string name="menu_share">Ndaj</string>
-    <string name="menu_about">Rreth nesh</string>
 
     <string name="change_category_title">Zgjidh një kategori</string>
 
@@ -37,48 +33,15 @@
     <string name="listview_updated_yesterday">Dje</string>
     <string name="listview_updated_this_week">Këtë javë</string>
     <string name="listview_updated_this_month">Këtë muaj</string>
-    <string name="listview_updated_earlier">Më herët</string>
-
-    <!-- Settings -->
-    <string name="settings_server_settings">Llogari</string>
-    <string name="settings_url">Adresa e serverit</string>
-    <string name="settings_url_check_description">Tregon nëse adresa mund të bëhet ping.</string>
-    <string name="settings_url_warn_http">PARALAJMËRIM: \"http\" nuk është e sigurt. Ju lutemi përdorni \"https\".</string>
-    <string name="settings_username">Emri i përdoruesit</string>
-    <string name="settings_password">Fjalëkalimi</string>
-    <string name="settings_password_unchanged">Fjalëkalimi (nuk u ndryshua)</string>
-    <string name="settings_password_check_description">Paraqet në qoftë se kredencialet janë të sakta.</string>
-    <string name="settings_submit">Lidhu</string>
-    <string name="settings_submitting">Duke u lidhur &#8230;</string>
-    <string name="settings_cert_category">Menaxhoni certifikatat</string>
-    <string name="settings_cert_trust_system">Beso tek çertifikatat e sistemit</string>
-    <string name="settings_cert_trust_system_on">Sistemi dhe përdoruesit e shtuar CAs do të besohen (rekomandohet)</string>
-    <string name="settings_cert_trust_system_off">Sistemi dhe përdoruesit e shtuar CAs nuk do të besohen</string>
-    <string name="settings_cert_reset">Rivendosni certifikatat e (pa)besuara</string>
-    <string name="settings_cert_reset_summary">Rivendos besimin e të gjitha certifikatave të personalizuara</string>
-    <string name="settings_cert_reset_toast">Të gjitha certifikatat doganore janë pastruar</string>
-
+    <string name="settings_theme_title">Temë e errët</string>
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Shënime - Siguria e lidhjes</string>
-    <string name="trust_certificate_unknown_certificate_found">Notes ka ndeshur një çertifikatë të panjohur.  Dëshironi ta shënoni si të besuar?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Duke u lidhur</string>
-    <string name="network_connected">Të lidhur</string>
-    <string name="network_disconnected">Asnjë rrjet në gjëndje</string>
 
     <!-- Error -->
     <string name="error_sync">Sinkronizimi dështoi: %1$s</string>
-    <string name="error_invalid_login">Identifikim jo i vlefshëm: %1$s</string>
     <string name="error_json">a është aplikacioni i Notes i aktivizuar në server?</string>
-    <string name="error_io">lidhja me serverin u thye</string>
     <string name="error_no_network">asnjë lidhje në rrjet</string>
-    <string name="error_server">URL/Server ka gabime</string>
-    <string name="error_url_malformed">Adres e gabuar e serverit </string>
-    <string name="error_username_password_invalid">Emër përdoruesi ose fjalëkalim i gabuar</string>
-
-    <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Konfigurimet</string>
 
     <!-- About -->
     <string name="about_version_title">Versioni</string>
@@ -119,7 +82,17 @@
     <string name="shortcut_create_long">Krijo një shënim të ri</string>
 
     <string name="pref_value_theme_light">E çelët</string>
-    <string name="pref_value_theme_dark">E errët</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="simple_error">Error</string>
+    <string name="simple_close">Mbylleni</string>
+    <string name="simple_copy">Kopjo</string>
+    <string name="simple_exception">Përjashtim</string>
+    <string name="copied_to_clipboard">U kopjua në clipboard</string>
+    <string name="add_account">Shtoni llogari</string>
+    <string name="category_music">Muzik</string>
+    <string name="category_movies">Filma</string>
+    <string name="category_work">Punë</string>
+    <string name="no_notes_yet">Nuk ka shënime</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Hapur në modalitetin e redaktimit</item>

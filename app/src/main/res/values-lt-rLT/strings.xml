@@ -2,83 +2,56 @@
 <resources>
 
     <string name="app_name">Užrašai</string>
-    <string name="no_notes">Nėra užrašų</string>
-    <string name="label_all_notes">Visos pastabos</string>
-    <string name="label_favorites">Svarbiausi</string>
+    <string name="app_name_long">Nextcloud užrašai</string>
+    <string name="label_all_notes">Visi užrašai</string>
+    <string name="label_favorites">Mėgstami</string>
+    <string name="action_create">Nauji užrašai</string>
     <string name="action_settings">Nustatymai</string>
-    <string name="action_search">Paieška</string>
-    <string name="action_create_save">Įrašyti</string>
+    <string name="action_trashbin">Ištrinti užrašai</string>
+    <string name="action_search">Ieškoti</string>
     <string name="simple_cancel">Atsisakyti</string>
     <string name="simple_edit">Taisyti</string>
     <string name="action_edit_save">Įrašyti</string>
-    <string name="action_edit_saving">Įrašoma &#8230;</string>
-    <string name="action_edit_saved">Įrašyta</string>
     <string name="simple_about">Apie</string>
     <string name="simple_bold">Pusjuodis</string>
+    <string name="simple_link">Nuoroda</string>
     <string name="simple_italic">Kursyvas</string>
-    <string name="action_select_note">Sukurti</string>
-    <string name="action_note_deleted">Pastaba ištrinta</string>
-    <string name="action_note_restored">Pastaba atstatyta</string>
-    <string name="action_undo">anuliuoti</string>
-    <string name="action_drawer_open">Atidaryti naršymą</string>
-    <string name="action_drawer_close">Uždaryti naršymą</string>
-    <string name="action_recent">Naujausi</string>
+    <string name="action_note_deleted">Užrašai ištrinti</string>
+    <string name="action_note_restored">Užrašai atkurti</string>
+    <string name="action_undo">Atšaukti</string>
+    <string name="action_drawer_open">atverti naršymą</string>
+    <string name="action_drawer_close">užverti naršymą</string>
     <string name="action_uncategorized">Nekategorizuotas</string>
     <string name="menu_delete">Ištrinti</string>
     <string name="menu_change_category">Kategorija</string>
-    <string name="menu_favorite">Svarbiausias</string>
+    <string name="menu_favorite">Mėgstami</string>
     <string name="menu_preview">Peržiūra</string>
-    <string name="menu_share">Dalintis</string>
-    <string name="menu_about">Apie</string>
+    <string name="menu_share">Bendrinti</string>
+
+    <string name="change_category_title">Pasirinkite kategoriją</string>
 
     <string name="listview_updated_today">Šiandien</string>
     <string name="listview_updated_yesterday">Vakar</string>
-    <string name="listview_updated_this_week">Šį savaitė</string>
-    <string name="listview_updated_this_month">Šis mėnesis</string>
-    <string name="listview_updated_earlier">Ankstesnis</string>
+    <string name="listview_updated_this_week">Šią savaitę</string>
+    <string name="listview_updated_last_week">Praeitą savaitę</string>
+    <string name="listview_updated_this_month">Šį mėnesį</string>
+    <string name="listview_updated_last_month">Praeitą mėnesį</string>
 
     <!-- Settings -->
-    <string name="settings_server_settings">Paskyra</string>
-    <string name="settings_url">Serverio adresas</string>
-    <string name="settings_url_check_description">Parodo, ar adresas yra pasiekiamas.</string>
-    <string name="settings_url_warn_http">ĮSPĖJIMAS: \"http\" protokolas yra nesaugus. Prašome naudoti \"https\".</string>
-    <string name="settings_username">Naudotojo vardas</string>
-    <string name="settings_password">Slaptažodis</string>
-    <string name="settings_password_unchanged">Slaptažodis (nepakeistas)</string>
-    <string name="settings_password_check_description">Parodo, ar teisingi prisijungimo duomenys</string>
-    <string name="settings_submit">Prisijungti</string>
-    <string name="settings_submitting">Jungiamasi &#8230;</string>
+    <string name="settings_note_mode">Užrašų rodinio veiksena</string>
     <string name="settings_theme_title">Tamsus apipavidalinimas</string>
     <string name="settings_font_title">Lygiaplotis šriftas</string>
-    <string name="settings_cert_category">Tvarkyti liudijimus</string>
-    <string name="settings_cert_trust_system">Pasitikėti sistemos sertifikatais</string>
-    <string name="settings_cert_trust_system_on">Sistemos ir vartotojų pridėti CA bus laikomi patikimais (rekomenduojama)</string>
-    <string name="settings_cert_trust_system_off">Sistemos ir vartotojų pridėti CA bus laikomi nepatikimais</string>
-    <string name="settings_cert_reset">Atstatyti (ne)patikimus sertifikatus</string>
-    <string name="settings_cert_reset_summary">Atstatyti visų nestandartinių sertifikatų patikimumą</string>
-    <string name="settings_cert_reset_toast">Visi nestandartiniai sertifikatai buvo išvalyti</string>
+    <string name="settings_font_size">Šrifto dydis</string>
+    <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
 
     <!-- Certificates -->
-    <string name="certificate_notification_connection_security">Užrašai - Prisijungimo saugumas</string>
-    <string name="trust_certificate_unknown_certificate_found">Užrašai susidūrė su nežinomu sertifikatu. Ar laikyti jį patikimu?</string>
 
     <!-- Network -->
-    <string name="network_connecting">Jungiamasi</string>
-    <string name="network_connected">Prisijungta</string>
-    <string name="network_disconnected">Jokie tinklai neprieinami</string>
 
     <!-- Error -->
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
-    <string name="error_invalid_login">Neteisingas prisijungimo vardas: %1$s</string>
     <string name="error_json">Ar užrašų programėlė aktyvuota serveryje?</string>
-    <string name="error_io">Ryšys su serveriu neveikia</string>
     <string name="error_no_network">nėra tinklo ryšio</string>
-    <string name="error_server">URL/Serveryje yra klaidų</string>
-    <string name="error_url_malformed">Neteisingas serverio adresas</string>
-    <string name="error_username_password_invalid">Neteisingas naudotojo vardas ar slaptažodis</string>
-
-    <!-- Snackbar Actions -->
-    <string name="snackbar_settings">Nustatymai</string>
 
     <!-- About -->
     <string name="about_version_title">Versija</string>
@@ -86,14 +59,14 @@
     <string name="about_maintainer_title">Prižiūrėtojas</string>
     <string name="about_developers_title">Plėtotojai</string>
     <string name="about_translators_title">Vertėjai</string>
-    <string name="about_translators_transifex">Nextcloud bendruomenė &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud bendruomenė, esanti &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testuotojai</string>
     <string name="about_source_title">Pradinis kodas</string>
     <string name="about_source">Šis projektas talpinamas GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemos</string>
-    <string name="about_issues">Galite pranešti apie riktus, pasiūlymus ar funkcinius pageidavimus GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Galite pranešti apie klaidas, pasiūlymus ar užklausti ypatybių mūsų GitHub puslapyje: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Versti</string>
-    <string name="about_translate">Prisijunkite prie Nextcloud komandos Transefix ir padėkite mums išversti šią programėlę: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Prisijunkite prie Nextcloud komandos, esančios Transifex ir padėkite mums išversti šią programėlę: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Programėlės licencija</string>
     <string name="about_app_license">Ši programėlė yra licencijuota pagal GNU BENDRĄJĄ VIEŠĄJĄ LICENCIJĄ v3+.</string>
     <string name="about_app_license_button">Rodyti licenciją</string>
@@ -104,26 +77,51 @@
     <string name="about_license_tab_title">Licencija</string>
 
     <!-- Widgets -->
-    <string name="widget_note_list_title">Pastabų sąrašas</string>
-    <string name="widget_note_list_placeholder">Pastabų nėra</string>
-    <string name="widget_single_note_title">Vienas užrašas</string>
-    <string name="widget_single_note_placeholder_tv">Pastaba nerasta</string>
-    <string name="widget_create_note">Sukurti užrašą</string>
-    <string name="widget_not_logged_in">Prieš naudodami šį valdiklį, prisijunkite prie Pastabų</string>
+    <string name="widget_note_list_title">Užrašų sąrašas</string>
+    <string name="widget_note_list_placeholder">Užrašų nėra</string>
+    <string name="widget_single_note_title">Vieni užrašai</string>
+    <string name="widget_single_note_placeholder_tv">Užrašai nerasti</string>
+    <string name="widget_create_note">Sukurti užrašus</string>
+    <string name="widget_not_logged_in">Prieš naudodami šį valdiklį, prisijunkite prie Užrašų</string>
+    <string name="widget_entry_fav_contentDescription">Žvaigždės piktograma yra naudojama pažymėti elementą kaip mėgstamą</string>
     <string name="widget_app_launcher_contentDescription">Paleidžia programėlę</string>
 
-    <string name="activity_select_single_note">Pasirinkti užrašą</string>
+    <string name="activity_select_single_note">Pasirinkti užrašus</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_create_long">Sukurti naują užrašą</string>
+    <string name="shortcut_create_long">Sukurti naujus užrašus</string>
 
-    <string name="pref_value_theme_light">Šviesi</string>
-    <string name="pref_value_theme_dark">Tamsi</string>
+    <string name="pref_value_theme_light">Šviesus</string>
+    <string name="pref_value_font_normal">Normalus</string>
+    <string name="pref_value_wifi_and_mobile">Sinchronizuoti naudojant belaidį (Wi-Fi) ir mobiliuosius duomenis</string>
+    <string name="simple_error">Klaida</string>
+    <string name="simple_close">Užverti</string>
+    <string name="simple_copy">Kopijuoti</string>
+    <string name="simple_exception">Išimtis</string>
+    <string name="copied_to_clipboard">Nukopijuota į iškarpinę</string>
+    <string name="pin_to_homescreen">Prisegti prie pradžios ekrano</string>
+    <string name="note_has_been_deleted">Šie užrašai ištrinti</string>
+    <string name="add_account">Pridėti paskyrą</string>
+    <string name="category_music">Muzika</string>
+    <string name="category_movies">Filmai</string>
+    <string name="category_movie">Filmas</string>
+    <string name="category_work">Darbas</string>
+    <string name="account_already_imported">Paskyra jau buvo importuota</string>
+    <string name="no_notes_yet">Nėra užrašų</string>
+    <string name="no_notes_yet_description">Norėdami sukurti užrašus, paspauskite mygtuką +</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
-        <item>Atidaryti redagavimo režimu</item>
-        <item>Atidaryti peržiūros režimu</item>
-        <item>Atsiminti paskutinį pasirinkimą</item>
+        <item>Atverti redagavimo veiksenoje</item>
+        <item>Atverti peržiūros veiksenoje</item>
+        <item>Prisiminti paskutinį pasirinkimą</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Mažas</item>
+        <item>Vidutinis</item>
+        <item>Didelis</item>
     </string-array>
 
     <!-- Plurals -->

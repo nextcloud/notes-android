@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 
 public class ExceptionActivity extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
     public static final String KEY_THROWABLE = "T";
 
+    @SuppressLint("SetTextI18n") // only used for logging
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_exception);
@@ -38,7 +41,7 @@ public class ExceptionActivity extends AppCompatActivity {
         throwable.printStackTrace();
         Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.simple_error));
         this.message.setText(throwable.getMessage());
-        this.stacktrace.setText(getStacktraceOf(throwable));
+        this.stacktrace.setText("Version: " + BuildConfig.VERSION_NAME + "\n\n" + getStacktraceOf(throwable));
     }
 
     private String getStacktraceOf(Throwable e) {

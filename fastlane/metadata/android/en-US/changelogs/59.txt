@@ -1,0 +1,10 @@
+⚠️ Requires at least Files app¹ version 3.9.0 ⚠️
+
+- Disable accountchooser after added a new account
+- Enable ripple effect on selecting a note
+- Handle not installed Files app more gracefully
+- Fix some codacy issues
+
+Special thanks to @dan0xii @korelstar and @tobiasKaminsky
+
+¹ https://github.com/nextcloud/android

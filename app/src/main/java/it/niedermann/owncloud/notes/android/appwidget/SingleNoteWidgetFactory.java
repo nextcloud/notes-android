@@ -54,7 +54,10 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         long noteID = sp.getLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, -1);
 
         if (noteID >= 0) {
-            note = db.getNote(noteID);
+            Log.v(TAG, "Fetch note for account " + SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId);
+            Log.v(TAG, "Fetch note for account " + sp.getLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, -1));
+            Log.v(TAG, "Fetch note with id " + noteID);
+            note = db.getNote(sp.getLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, -1), noteID);
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");
@@ -95,6 +98,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         final Bundle extras = new Bundle();
 
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+        extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
         fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         if (darkTheme) {

@@ -10,14 +10,12 @@
         android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
-            android:id="@+id/about_app_license_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_app_license_title" />
 
         <TextView
-            android:id="@+id/about_app_license"
             style="?android:attr/editTextPreferenceStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +29,6 @@
             android:text="@string/about_app_license_button" />
 
         <TextView
-            android:id="@+id/about_icons_disclaimer_title"
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
