@@ -97,6 +97,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                         saveNote(null);
                                     } catch (IndexOutOfBoundsException e) {
                                         Toast.makeText(getActivity(), "Checkbox could not be toggled.", Toast.LENGTH_SHORT).show();
+                                        e.printStackTrace();
                                     }
                                     return line;
                                 }
