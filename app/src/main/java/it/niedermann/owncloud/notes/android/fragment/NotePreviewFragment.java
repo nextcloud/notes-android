@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -76,28 +75,28 @@ public class NotePreviewFragment extends BaseNoteFragment {
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
                 MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
-                        .setOnTodoClickCallback((view, line, lineNumber) -> {
-                                    String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
-                                    /*
-                                     * Workaround for a bug when checkbox is the last line:
-                                     * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
-                                     */
-                                    if ((lines.length - 1) == lineNumber) {
-                                        if(lines[lineNumber].contains("- [ ]")) {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [ ]", "- [x]");
-                                        } else {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [x]", "- [ ]");
-                                        }
-
-                                    } else if (lines.length >= lineNumber) {
-                                        lines[lineNumber] = line;
-                                    }
-                                    changedText = TextUtils.join("\n", lines);
-                                    noteContent.setText(markdownProcessor.parse(changedText));
-                                    saveNote(null);
-                                    return line;
-                                }
-                        )
+//                        .setOnTodoClickCallback((view, line, lineNumber) -> {
+//                                    String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
+//                                    /*
+//                                     * Workaround for a bug when checkbox is the last line:
+//                                     * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
+//                                     */
+//                                    if ((lines.length - 1) == lineNumber) {
+//                                        if(lines[lineNumber].contains("- [ ]")) {
+//                                            lines[lineNumber] = lines[lineNumber].replace("- [ ]", "- [x]");
+//                                        } else {
+//                                            lines[lineNumber] = lines[lineNumber].replace("- [x]", "- [ ]");
+//                                        }
+//
+//                                    } else if (lines.length >= lineNumber) {
+//                                        lines[lineNumber] = line;
+//                                    }
+//                                    changedText = TextUtils.join("\n", lines);
+//                                    noteContent.setText(markdownProcessor.parse(changedText));
+//                                    saveNote(null);
+//                                    return line;
+//                                }
+//                        )
                         .build());
         setActiveTextView(noteContent);
         noteContent.setText(markdownProcessor.parse(note.getContent()));
