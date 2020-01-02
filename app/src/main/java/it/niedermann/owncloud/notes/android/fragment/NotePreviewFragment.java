@@ -80,7 +80,21 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                     try {
                                         String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
                                         /*
-                                         * Workaround for multiple bugs:
+                                         * Workaround for RxMarkdown-bug:
+                                         * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
+                                         * Find number of lines starting with ``` before lineNumber
+                                         */
+                                        for(int i = 0; i < lines.length; i++) {
+                                            if(lines[i].startsWith("```")) {
+                                                lineNumber++;
+                                            }
+                                            if(i == lineNumber) {
+                                                break;
+                                            }
+                                        }
+
+                                        /*
+                                         * Workaround for multiple RxMarkdown-bugs:
                                          * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
                                          * When (un)checking a checkbox, every markdown gets stripped in the given line argument
                                          */
