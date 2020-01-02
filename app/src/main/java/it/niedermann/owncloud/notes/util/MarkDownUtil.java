@@ -2,7 +2,6 @@ package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
 
-import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.yydcdut.rxmarkdown.RxMDConfiguration;
@@ -23,28 +22,23 @@ public class MarkDownUtil {
      * @return RxMDConfiguration
      */
     public static Builder getMarkDownConfiguration(Context context) {
-        return new RxMDConfiguration.Builder(context)
-                .setUnOrderListColor(ContextCompat.getColor(context, R.color.fg_default))
-                .setCodeBgColor(ContextCompat.getColor(context, R.color.fg_default_high))
-                .setHeader2RelativeSize(1.35f)
-                .setHeader3RelativeSize(1.25f)
-                .setHeader4RelativeSize(1.15f)
-                .setHeader5RelativeSize(1.1f)
-                .setHeader6RelativeSize(1.05f)
-                .setHorizontalRulesHeight(2)
-                .setLinkFontColor(ContextCompat.getColor(context, R.color.primary));
+        return getMarkDownConfiguration(context, Notes.getAppTheme(context));
     }
 
     public static Builder getMarkDownConfiguration(Context context, Boolean darkTheme) {
         return new RxMDConfiguration.Builder(context)
                 .setUnOrderListColor(ResourcesCompat.getColor(context.getResources(),
-                                    darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
+                        darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
                 .setHeader2RelativeSize(1.35f)
                 .setHeader3RelativeSize(1.25f)
                 .setHeader4RelativeSize(1.15f)
                 .setHeader5RelativeSize(1.1f)
                 .setHeader6RelativeSize(1.05f)
                 .setHorizontalRulesHeight(2)
+                .setTodoColor(ResourcesCompat.getColor(context.getResources(),
+                        Notes.getAppTheme(context) ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
+                .setTodoDoneColor(ResourcesCompat.getColor(context.getResources(),
+                        Notes.getAppTheme(context) ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
                 .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null));
     }
 }
