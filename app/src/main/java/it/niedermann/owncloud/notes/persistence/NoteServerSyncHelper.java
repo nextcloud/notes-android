@@ -383,20 +383,27 @@ public class NoteServerSyncHelper {
                 dbHelper.updateETag(localAccount.getId(), localAccount.getEtag());
                 dbHelper.updateModified(localAccount.getId(), localAccount.getModified());
                 return LoginStatus.OK;
-            } catch (JSONException e) {
+            } catch (JSONException | NullPointerException e) {
                 Log.e(TAG, "Exception", e);
                 exceptions.add(e);
                 status = LoginStatus.JSON_FAILED;
             } catch (NextcloudHttpRequestFailedException e) {
+                Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
                 if (e.getStatusCode() == 304) {
-                    Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
                     return LoginStatus.OK;
                 } else {
                     e.printStackTrace();
+                    exceptions.add(e);
                     return LoginStatus.JSON_FAILED;
                 }
             } catch (NextcloudApiNotRespondingException e) {
+                e.printStackTrace();
+                exceptions.add(e);
                 return LoginStatus.PROBLEM_WITH_FILES_APP;
+            } catch (Exception e) {
+                e.printStackTrace();
+                exceptions.add(e);
+                return LoginStatus.UNKNOWN_PROBLEM;
             }
             return status;
         }
