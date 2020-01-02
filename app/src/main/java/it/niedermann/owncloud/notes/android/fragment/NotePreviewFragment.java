@@ -116,7 +116,8 @@ public class NotePreviewFragment extends BaseNoteFragment {
                 db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
                     @Override
                     public void onFinish() {
-                        noteContent.setText(markdownProcessor.parse(db.getNote(note.getAccountId(), note.getId()).getContent()));
+                        note = db.getNote(note.getAccountId(), note.getId());
+                        noteContent.setText(markdownProcessor.parse(note.getContent()));
                         swipeRefreshLayout.setRefreshing(false);
                     }
 
