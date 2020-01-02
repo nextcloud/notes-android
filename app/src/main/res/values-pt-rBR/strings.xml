@@ -53,8 +53,6 @@
     <string name="error_json">O aplicativo Notes está ativado no servidor?</string>
     <string name="error_no_network">não existe conexão de rede</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Versão</string>
     <string name="about_version">Você está usando &lt;strong>%1$s&lt;/strong></string>
@@ -103,6 +101,14 @@
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="pin_to_homescreen">Fixar na tela inicial</string>
     <string name="note_has_been_deleted">A anotação foi excluída</string>
+    <string name="add_account">Adicionar conta</string>
+    <string name="category_music">Música</string>
+    <string name="category_movies">Filmes</string>
+    <string name="category_movie">Filme</string>
+    <string name="category_work">Trabalho</string>
+    <string name="account_already_imported">Conta já foi importada</string>
+    <string name="no_notes_yet">Nenhuma anotação ainda</string>
+    <string name="no_notes_yet_description">Pressione o botão + para criar uma nova nota</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

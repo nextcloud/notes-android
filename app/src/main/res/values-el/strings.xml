@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Σημειώσεις</string>
+    <string name="app_name_long">Nextcloud Σημειώσεις</string>
     <string name="label_all_notes">Όλες οι σημειώσεις</string>
     <string name="label_favorites">Αγαπημένα</string>
     <string name="action_create">Νέα σημείωση</string>
@@ -12,6 +13,9 @@
     <string name="simple_edit">Επεξεργασία</string>
     <string name="action_edit_save">Αποθήκευση</string>
     <string name="simple_about">Περί</string>
+    <string name="simple_bold">Έντονα</string>
+    <string name="simple_link">Σύνδεσμος</string>
+    <string name="simple_italic">Πλάγια</string>
     <string name="action_note_deleted">Η σημείωση διαγράφηκε.</string>
     <string name="action_note_restored">Έγινε επαναφορά της σημείωσης.</string>
     <string name="action_undo">Αναίρεση</string>
@@ -29,9 +33,17 @@
     <string name="listview_updated_today">Σήμερα</string>
     <string name="listview_updated_yesterday">Χθες</string>
     <string name="listview_updated_this_week">Αυτή την εβδομάδα</string>
+    <string name="listview_updated_last_week">Προηγούμενη εβδομάδα</string>
     <string name="listview_updated_this_month">Αυτό το μήνα</string>
+    <string name="listview_updated_last_month">Προηγούμενος μήνας</string>
+
     <!-- Settings -->
+    <string name="settings_note_mode">Κατάσταση οθόνης για σημειώσεις</string>
+    <string name="settings_theme_title">Σκούρο θέμα</string>
+    <string name="settings_font_title">Γραμματοσειρά monospace</string>
+    <string name="settings_font_size">Μέγεθος γραμματοσειράς</string>
     <string name="settings_wifi_only">Συγχρονισμός μόνο σε Wi-Fi</string>
+
     <!-- Certificates -->
 
     <!-- Network -->
@@ -40,8 +52,6 @@
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_json">Είναι η εφαρμογή Σημειώσεις ενεργοποιημένη στον εξυπηρετητή Nextcloud;</string>
     <string name="error_no_network">δεν υπάρχει σύνδεση δικτύου</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">Έκδοση</string>
@@ -61,6 +71,7 @@
     <string name="about_app_license">Αυτή η εφαρμογή υπόκεινται στην άδεια χρήσης GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Προβολή άδειας χρήσης</string>
     <string name="about_icons_disclaimer_title">Εικονίδια</string>
+    <string name="about_icons_disclaimer">&lt;p>Τα αυθεντικά εικονίδια δημιουργήθηκαν από %1$s&lt;/p>&lt; p> Όλα τα υπόλοιπα αυτής της εφαρμογής είναι &lt; href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> made by Google Inc. and licensed under the Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Μνεία</string>
     <string name="about_contribution_tab_title">Συνεισφορά</string>
     <string name="about_license_tab_title">Άδεια χρήσης</string>
@@ -72,6 +83,7 @@
     <string name="widget_single_note_placeholder_tv">Η σημείωση δεν βρέθηκε</string>
     <string name="widget_create_note">Δημιουργία Σημείωσης</string>
     <string name="widget_not_logged_in">Παρακαλούμε συνδεθείτε στις Σημειώσεις πρωτού να χρησιμοποιήσετε αυτό το γραφικό στοιχείο.</string>
+    <string name="widget_entry_fav_contentDescription">Το εικονίδιο Αστέρι χρησιμέυει για την σήμανση ως αγαπημένο</string>
     <string name="widget_app_launcher_contentDescription">Εκκινεί την εφαρμογή</string>
 
     <string name="activity_select_single_note">Επιλογή σημείωσης</string>
@@ -80,12 +92,36 @@
     <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>
 
     <string name="pref_value_theme_light">Φωτεινό</string>
+    <string name="pref_value_font_normal">Κανονικό</string>
     <string name="pref_value_wifi_and_mobile">Συγχρονισμός μόνο σε Wi-Fi και δεδομένα κινητού</string>
+    <string name="simple_error">Σφάλμα</string>
+    <string name="simple_close">Κλείσιμο</string>
+    <string name="simple_copy">Αντιγραφή</string>
+    <string name="simple_exception">Εξαίρεση</string>
+    <string name="copied_to_clipboard">Αντιγράφηκε στο πρόχειρο</string>
+    <string name="pin_to_homescreen">Καρφίτσωμα στην αρχική αθόνη</string>
+    <string name="note_has_been_deleted">Αυτή η σημείωση έχει διαγραφεί</string>
+    <string name="add_account">Προσθήκη λογαριασμού</string>
+    <string name="category_music">Μουσική</string>
+    <string name="category_movies">Ταινίες</string>
+    <string name="category_movie">Ταινία</string>
+    <string name="category_work">Εργασία</string>
+    <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
+    <string name="no_notes_yet">Δεν υπάρχουν ακόμα σημειώσεις</string>
+    <string name="no_notes_yet_description">Πιέστε το κουμπί + για νέα σημείωση</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Άνοιγμα σε λειτουργία τροποποίησης</item>
         <item>Άνοιγμα σε λειτουργία προεπισκόπισης</item>
         <item>Να θυμάσαι την τελευταία μου επιλογή</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Μικρό</item>
+        <item>Μεσαίο</item>
+        <item>Μεγάλο</item>
     </string-array>
 
     <!-- Plurals -->

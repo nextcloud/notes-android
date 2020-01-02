@@ -53,8 +53,6 @@
     <string name="error_json">¿Está la app de Notas activada en el servidor?</string>
     <string name="error_no_network">no hay conexión a la red</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Versión</string>
     <string name="about_version">Esta actualmente usando &lt;strong>%1$s&lt;/strong></string>
@@ -103,6 +101,14 @@
     <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <string name="pin_to_homescreen">Acoplar a la pantalla de inicio</string>
     <string name="note_has_been_deleted">Esta nota ha sido borrada</string>
+    <string name="add_account">Agregar cuenta</string>
+    <string name="category_music">Música</string>
+    <string name="category_movies">Películas</string>
+    <string name="category_movie">Película</string>
+    <string name="category_work">Trabajo</string>
+    <string name="account_already_imported">La cuenta ha ha sido importada</string>
+    <string name="no_notes_yet">Aún no hay notas</string>
+    <string name="no_notes_yet_description">rear una nota nueva</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -49,8 +49,6 @@
     <string name="error_json">Включено ли приложение «Заметки» на сервере?</string>
     <string name="error_no_network">нет подключения к сети</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Версия</string>
     <string name="about_version">Вы используете &lt;strong>%1$s&lt;/strong></string>
@@ -99,6 +97,12 @@
     <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
     <string name="pin_to_homescreen">Введите PIN-код для домашнего экрана</string>
     <string name="note_has_been_deleted">Запись была удалена</string>
+    <string name="add_account">Добавить аккаунт</string>
+    <string name="category_music">Музыка</string>
+    <string name="category_movies">Фильмы</string>
+    <string name="category_movie">Фильм</string>
+    <string name="category_work">Рабочий</string>
+    <string name="no_notes_yet">Заметок пока нет</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>

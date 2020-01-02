@@ -2,11 +2,15 @@
 <resources>
 
     <string name="app_name">메모</string>
+    <string name="label_favorites">즐겨찾기</string>
     <string name="action_create">새 메모</string>
     <string name="action_settings">설정</string>
     <string name="action_search">검색</string>
+    <string name="simple_cancel">취소</string>
+    <string name="simple_edit">편집</string>
     <string name="action_edit_save">저장</string>
     <string name="simple_about">정보</string>
+    <string name="simple_link">링크</string>
     <string name="action_note_deleted">메모 삭제됨</string>
     <string name="action_note_restored">메모 복원됨</string>
     <string name="action_undo">실행 취소</string>
@@ -23,7 +27,7 @@
     <string name="listview_updated_yesterday">어제</string>
     <string name="listview_updated_this_week">이번 주</string>
     <string name="listview_updated_this_month">이번 달</string>
-
+    <string name="settings_theme_title">어두운 테마</string>
     <!-- Certificates -->
 
     <!-- Network -->
@@ -32,8 +36,6 @@
     <string name="error_sync">동기화 실패: %1$s</string>
     <string name="error_json">서버에 메모 앱이 활성화되어 있습니까?</string>
     <string name="error_no_network">네트워크 연결 없음</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">버전</string>
@@ -72,6 +74,18 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">새 메모 쓰기</string>
 
+    <string name="pref_value_theme_light">밝게</string>
+    <string name="pref_value_font_normal">일반</string>
+    <string name="simple_error">오류</string>
+    <string name="simple_close">닫기</string>
+    <string name="simple_copy">복사</string>
+    <string name="simple_exception">예외</string>
+    <string name="copied_to_clipboard">클립보드로 복사됨</string>
+    <string name="add_account">계정 추가</string>
+    <string name="category_music">음악</string>
+    <string name="category_movies">영화</string>
+    <string name="category_work">직장</string>
+    <string name="no_notes_yet">아직 메모 없음</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>편집 모드로 열기</item>

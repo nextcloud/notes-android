@@ -53,8 +53,6 @@
     <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
     <string name="error_no_network">нема мрежне везе</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Верзија</string>
     <string name="about_version">Тренутно користите &lt;strong>%1$s&lt;/strong></string>
@@ -103,6 +101,14 @@
     <string name="copied_to_clipboard">Копирано у оставу</string>
     <string name="pin_to_homescreen">Закачи на почетни екран</string>
     <string name="note_has_been_deleted">Ова белешка је обрисана</string>
+    <string name="add_account">Додај налог</string>
+    <string name="category_music">Музика</string>
+    <string name="category_movies">Филмови</string>
+    <string name="category_movie">Филм</string>
+    <string name="category_work">Посао</string>
+    <string name="account_already_imported">Налог је већ увезен</string>
+    <string name="no_notes_yet">Још нема белешки</string>
+    <string name="no_notes_yet_description">Притисните + дугме да направите нову белешку</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

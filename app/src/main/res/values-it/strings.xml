@@ -53,8 +53,6 @@
     <string name="error_json">L\'applicazione Notes è stata attivata sul server?</string>
     <string name="error_no_network">nessuna connessione di rete</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Versione</string>
     <string name="about_version">Stai utilizzando attualmente &lt;strong>%1$s&lt;/strong></string>
@@ -103,6 +101,14 @@
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="pin_to_homescreen">Appunta alla schermata iniziale</string>
     <string name="note_has_been_deleted">Questa nota è stata eliminata</string>
+    <string name="add_account">Aggiungi account</string>
+    <string name="category_music">Musica</string>
+    <string name="category_movies">Film</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Lavoro</string>
+    <string name="account_already_imported">L\'account è già stato importato</string>
+    <string name="no_notes_yet">Ancora nessuna nota</string>
+    <string name="no_notes_yet_description">Premi il pulsante + per creare una nuova nota</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

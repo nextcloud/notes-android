@@ -4,34 +4,44 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMDTextView;
-import com.yydcdut.rxmarkdown.RxMarkdown;
 
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.model.LoginStatus;
+import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class NotePreviewFragment extends BaseNoteFragment {
-    
+
     private static final String TAG = NotePreviewFragment.class.getSimpleName();
+
+    private NoteSQLiteOpenHelper db = null;
+
+    private String changedText;
+
+    MarkdownProcessor markdownProcessor;
+
+    @BindView(R.id.swiperefreshlayout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.single_note_content)
     RxMDTextView noteContent;
@@ -62,49 +72,79 @@ public class NotePreviewFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
-
-        setActiveTextView(noteContent);
-
-        String content = note.getContent();
-
-        RxMarkdown.with(content, getActivity())
-                .config(
-                        MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
-                                /*.setOnTodoClickCallback(new OnTodoClickCallback() {
-                                        @Override
-                                        public CharSequence onTodoClicked(View view, String line, int lineNumber) {
+        markdownProcessor = new MarkdownProcessor(getActivity());
+        markdownProcessor.factory(TextFactory.create());
+        markdownProcessor.config(
+                MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
+                        .setOnTodoClickCallback((view, line, lineNumber) -> {
+                                    try {
                                         String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
-                                        if(lines.length >= lineNumber) {
-                                            lines[lineNumber] = line;
+                                        /*
+                                         * Workaround for RxMarkdown-bug:
+                                         * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
+                                         * Find number of lines starting with ``` before lineNumber
+                                         */
+                                        for(int i = 0; i < lines.length; i++) {
+                                            if(lines[i].startsWith("```")) {
+                                                lineNumber++;
+                                            }
+                                            if(i == lineNumber) {
+                                                break;
+                                            }
                                         }
-                                        noteContent.setText(TextUtils.join("\n", lines), TextView.BufferType.SPANNABLE);
+
+                                        /*
+                                         * Workaround for multiple RxMarkdown-bugs:
+                                         * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
+                                         * When (un)checking a checkbox, every markdown gets stripped in the given line argument
+                                         */
+                                        if (lines[lineNumber].startsWith("- [ ]") || lines[lineNumber].startsWith("* [ ]")) {
+                                            lines[lineNumber] = lines[lineNumber].replace("- [ ]", "- [x]");
+                                            lines[lineNumber] = lines[lineNumber].replace("* [ ]", "* [x]");
+                                        } else {
+                                            lines[lineNumber] = lines[lineNumber].replace("- [x]", "- [ ]");
+                                            lines[lineNumber] = lines[lineNumber].replace("* [x]", "* [ ]");
+                                        }
+
+                                        changedText = TextUtils.join("\n", lines);
+                                        noteContent.setText(markdownProcessor.parse(changedText));
                                         saveNote(null);
-                                        return line;
+                                    } catch (IndexOutOfBoundsException e) {
+                                        Toast.makeText(getActivity(), "Checkbox could not be toggled.", Toast.LENGTH_SHORT).show();
+                                        e.printStackTrace();
                                     }
+                                    return line;
                                 }
-                            )*/.build()
-                )
-                .factory(TextFactory.create())
-                .intoObservable()
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<CharSequence>() {
+                        )
+                        .build());
+        setActiveTextView(noteContent);
+        noteContent.setText(markdownProcessor.parse(note.getContent()));
+        changedText = note.getContent();
+        noteContent.setMovementMethod(LinkMovementMethod.getInstance());
+
+        db = NoteSQLiteOpenHelper.getInstance(getActivity().getApplicationContext());
+        // Pull to Refresh
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            if (db.getNoteServerSyncHelper().isSyncPossible()) {
+                swipeRefreshLayout.setRefreshing(true);
+                db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
                     @Override
-                    public void onCompleted() {
+                    public void onFinish() {
+                        note = db.getNote(note.getAccountId(), note.getId());
+                        noteContent.setText(markdownProcessor.parse(note.getContent()));
+                        swipeRefreshLayout.setRefreshing(false);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
-                        Log.v(TAG, "RxMarkdown error", e);
-                    }
-
-                    @Override
-                    public void onNext(CharSequence charSequence) {
-                        noteContent.setText(charSequence, TextView.BufferType.SPANNABLE);
+                    public void onScheduled() {
                     }
                 });
-        noteContent.setText(content);
-        noteContent.setMovementMethod(LinkMovementMethod.getInstance());
+                db.getNoteServerSyncHelper().scheduleSync(false);
+            } else {
+                swipeRefreshLayout.setRefreshing(false);
+                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+            }
+        });
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         noteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
@@ -115,6 +155,6 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
     @Override
     protected String getContent() {
-        return note.getContent();
+        return changedText;
     }
 }

@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Notatki</string>
-    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="app_name_long">Notatki Nextcloud</string>
     <string name="label_all_notes">Wszystkie notatki</string>
     <string name="label_favorites">Ulubione</string>
     <string name="action_create">Nowa notatka</string>
@@ -53,8 +53,6 @@
     <string name="error_json">czy aplikacja Notes jest aktywowana na serwerze?</string>
     <string name="error_no_network">brak połączenia sieciowego</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Wersja</string>
     <string name="about_version">Aktualnie używasz &lt;strong>%1$s&lt;/strong></string>
@@ -103,6 +101,14 @@
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <string name="pin_to_homescreen">Przypnij do ekranu głównego</string>
     <string name="note_has_been_deleted">Ta notatka została usunięta</string>
+    <string name="add_account">Dodaj konto</string>
+    <string name="category_music">Muzyka</string>
+    <string name="category_movies">Filmy</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Praca</string>
+    <string name="account_already_imported">Konto zostało już zaimportowane</string>
+    <string name="no_notes_yet">Brak notatek</string>
+    <string name="no_notes_yet_description">Naciśnij przycisk +, aby utworzyć nową notatkę</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

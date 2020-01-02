@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -42,21 +43,6 @@ public class NoteServerSyncHelper {
     private static final String TAG = NoteServerSyncHelper.class.getSimpleName();
 
     private static NoteServerSyncHelper instance;
-
-    /**
-     * Get (or create) instance from NoteServerSyncHelper.
-     * This has to be a singleton in order to realize correct registering and unregistering of
-     * the BroadcastReceiver, which listens on changes of network connectivity.
-     *
-     * @param dbHelper NoteSQLiteOpenHelper
-     * @return NoteServerSyncHelper
-     */
-    public static synchronized NoteServerSyncHelper getInstance(NoteSQLiteOpenHelper dbHelper) {
-        if (instance == null) {
-            instance = new NoteServerSyncHelper(dbHelper);
-        }
-        return instance;
-    }
 
     private NoteSQLiteOpenHelper dbHelper;
     private Context appContext = null;
@@ -115,6 +101,21 @@ public class NoteServerSyncHelper {
         syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
         updateNetworkStatus();
+    }
+
+    /**
+     * Get (or create) instance from NoteServerSyncHelper.
+     * This has to be a singleton in order to realize correct registering and unregistering of
+     * the BroadcastReceiver, which listens on changes of network connectivity.
+     *
+     * @param dbHelper NoteSQLiteOpenHelper
+     * @return NoteServerSyncHelper
+     */
+    public static synchronized NoteServerSyncHelper getInstance(NoteSQLiteOpenHelper dbHelper) {
+        if (instance == null) {
+            instance = new NoteServerSyncHelper(dbHelper);
+        }
+        return instance;
     }
 
     public void updateAccount() throws NextcloudFilesAppAccountNotFoundException {
@@ -327,11 +328,14 @@ public class NoteServerSyncHelper {
                     Log.e(TAG, "Exception", e);
                     exceptions.add(e);
                 } catch (NextcloudHttpRequestFailedException e) {
-                    if(e.getStatusCode() == 304) {
+                    if (e.getStatusCode() == 304) {
                         Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
                     } else {
                         e.printStackTrace();
                     }
+                } catch (NextcloudApiNotRespondingException e) {
+                    Log.e(TAG, "Exception", e);
+                    e.printStackTrace();
                 }
             }
         }
@@ -379,18 +383,27 @@ public class NoteServerSyncHelper {
                 dbHelper.updateETag(localAccount.getId(), localAccount.getEtag());
                 dbHelper.updateModified(localAccount.getId(), localAccount.getModified());
                 return LoginStatus.OK;
-            } catch (JSONException e) {
+            } catch (JSONException | NullPointerException e) {
                 Log.e(TAG, "Exception", e);
                 exceptions.add(e);
                 status = LoginStatus.JSON_FAILED;
             } catch (NextcloudHttpRequestFailedException e) {
-                if(e.getStatusCode() == 304) {
-                    Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
+                Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
+                if (e.getStatusCode() == 304) {
                     return LoginStatus.OK;
                 } else {
                     e.printStackTrace();
+                    exceptions.add(e);
                     return LoginStatus.JSON_FAILED;
                 }
+            } catch (NextcloudApiNotRespondingException e) {
+                e.printStackTrace();
+                exceptions.add(e);
+                return LoginStatus.PROBLEM_WITH_FILES_APP;
+            } catch (Exception e) {
+                e.printStackTrace();
+                exceptions.add(e);
+                return LoginStatus.UNKNOWN_PROBLEM;
             }
             return status;
         }

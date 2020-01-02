@@ -32,20 +32,24 @@
     <string name="listview_updated_today">Tänään</string>
     <string name="listview_updated_yesterday">Eilen</string>
     <string name="listview_updated_this_week">Tämä viikko</string>
+    <string name="listview_updated_last_week">Viime viikolla</string>
     <string name="listview_updated_this_month">Tämä kuukausi</string>
+    <string name="listview_updated_last_month">Viime kuussa</string>
 
     <!-- Settings -->
     <string name="settings_note_mode">Muistiinpanojen esitystapa</string>
     <string name="settings_theme_title">Tumma teema</string>
     <string name="settings_font_title">Tasalevyinen fontti</string>
+    <string name="settings_font_size">Fontin koko</string>
     <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
+
+    <!-- Certificates -->
+
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
     <string name="error_no_network">ei verkkoyhteyttä</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">Versio</string>
@@ -79,12 +83,31 @@
     <string name="shortcut_create_long">Luo uusi muistiinpano</string>
 
     <string name="pref_value_theme_light">Vaalea</string>
+    <string name="pref_value_font_normal">Normaali</string>
     <string name="pref_value_wifi_and_mobile">Synkronoi wifi- ja mobiilidatayhteydellä</string>
+    <string name="simple_error">Virhe</string>
+    <string name="simple_close">Sulje</string>
+    <string name="simple_copy">Kopioi</string>
+    <string name="simple_exception">Poikkeus</string>
+    <string name="copied_to_clipboard">Kopioitu leikepöydälle</string>
+    <string name="pin_to_homescreen">Kiinnitä kotinäyttöön</string>
+    <string name="add_account">Lisää tili</string>
+    <string name="category_music">Musiikki</string>
+    <string name="category_movies">Elokuvat</string>
+    <string name="category_work">Työ</string>
+    <string name="no_notes_yet">Ei muistiinpanoja</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>
         <item>Avaa esikatselutilassa</item>
         <item>Muista viimeisin valintani</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Pieni</item>
+        <item>Normaali</item>
+        <item>Suuri</item>
     </string-array>
 
     <!-- Plurals -->

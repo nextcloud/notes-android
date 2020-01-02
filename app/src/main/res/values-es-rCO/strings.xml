@@ -6,11 +6,13 @@
     <string name="label_favorites">Favoritos</string>
     <string name="action_create">Nota nueva</string>
     <string name="action_settings">Configuraciones</string>
+    <string name="action_trashbin">Notas borradas</string>
     <string name="action_search">Buscar</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
     <string name="simple_about">Acerca de</string>
+    <string name="simple_link">Liga</string>
     <string name="action_note_deleted">Nota borrada</string>
     <string name="action_note_restored">Nota restaurada</string>
     <string name="action_undo">Deshacer</string>
@@ -29,7 +31,6 @@
     <string name="listview_updated_yesterday">Ayer</string>
     <string name="listview_updated_this_week">Esta semana</string>
     <string name="listview_updated_this_month">Este mes</string>
-
     <!-- Certificates -->
 
     <!-- Network -->
@@ -38,8 +39,6 @@
     <string name="error_sync">Falló la sincronización: %1$s</string>
     <string name="error_json">¿Se encuentra activiada la aplicación de Notes en el servidor?</string>
     <string name="error_no_network">no hay conexión a red</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">Versión</string>
@@ -80,6 +79,14 @@
     <string name="shortcut_create_long">Crear una nota nueva</string>
 
     <string name="pref_value_theme_light">Claro</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="simple_error">Error</string>
+    <string name="simple_close">Cerrar</string>
+    <string name="simple_copy">Copiar</string>
+    <string name="copied_to_clipboard">Copiado al portapapeles</string>
+    <string name="add_account">Agregar cuenta</string>
+    <string name="category_work">Trabajo</string>
+    <string name="no_notes_yet">Aún no hay notas</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>

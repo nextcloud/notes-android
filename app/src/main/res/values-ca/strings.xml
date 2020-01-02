@@ -53,8 +53,6 @@
     <string name="error_json">l\'aplicació Notes està activada al servidor?</string>
     <string name="error_no_network">no hi ha connexió a la xarxa</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Versió</string>
     <string name="about_version">Actualment esteu utilitzant la versió &lt;strong>%1$s&lt;/strong></string>
@@ -103,7 +101,11 @@
     <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
     <string name="pin_to_homescreen">Fixa-ho a la pantalla d\'inici</string>
     <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
-
+    <string name="add_account">Afegeix un compte</string>
+    <string name="category_music">Música</string>
+    <string name="category_movies">Peŀlícules</string>
+    <string name="category_work">Feina</string>
+    <string name="no_notes_yet">Encara no hi ha notes</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Obre en mode d\'edició</item>

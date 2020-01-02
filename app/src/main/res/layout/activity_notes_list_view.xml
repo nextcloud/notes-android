@@ -26,16 +26,60 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/bg_normal"
-            tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            tools:ignore="MergeRootFrame">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity">
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/bg_highlighted"
-                android:scrollbars="vertical" />
+                android:layout_height="match_parent">
 
+                <RelativeLayout
+                    android:id="@+id/empty_content_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"
+                        android:layout_above="@id/empty_content_view_title"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="10dp"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_launcher_foreground"
+                        android:tint="@color/fg_default_high" />
+
+                    <TextView
+                        android:id="@+id/empty_content_view_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/no_notes_yet"
+                        android:textSize="26sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/empty_content_view_title"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/no_notes_yet_description" />
+                </RelativeLayout>
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg_highlighted"
+                    android:scrollbars="vertical"
+                    tools:listitem="@layout/fragment_notes_list_note_item"/>
+            </FrameLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>

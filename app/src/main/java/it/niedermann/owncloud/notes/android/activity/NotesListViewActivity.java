@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -128,6 +129,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     RecyclerView listNavigationMenu;
     @BindView(R.id.recycler_view)
     RecyclerView listView;
+    @BindView(R.id.empty_content_view)
+    RelativeLayout emptyContentView;
+    @BindView(R.id.progress_circular)
+    ProgressBar progressBar;
 
     private ActionBarDrawerToggle drawerToggle;
     private ItemAdapter adapter = null;
@@ -174,7 +179,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         shortcutManager.addDynamicShortcuts(newShortcuts);
                     }
                 }
-            }).run();
+            }).start();
         }
 
         @Override
@@ -379,11 +384,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 adapterCategories.setSelectedItem(item.id);
 
                 // update current selection
-                if (itemRecent == item) {
+                if (itemRecent.equals(item)) {
                     navigationSelection = new Category(null, null);
-                } else if (itemFavorites == item) {
+                } else if (itemFavorites.equals(item)) {
                     navigationSelection = new Category(null, true);
-                } else if (itemUncategorized == item) {
+                } else if (itemUncategorized.equals(item)) {
                     navigationSelection = new Category("", null);
                 } else {
                     navigationSelection = new Category(item.label, null);
@@ -529,16 +534,14 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         NavigationAdapter adapterMenu = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
-                if (item == itemSettings) {
+                if (itemSettings.equals(item)) {
                     Intent settingsIntent = new Intent(getApplicationContext(), PreferencesActivity.class);
                     startActivityForResult(settingsIntent, server_settings);
-                } else if (item == itemAbout) {
+                } else if (itemAbout.equals(item)) {
                     Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
                     startActivityForResult(aboutIntent, about);
-                } else if (item == itemTrashbin) {
-                    if (localAccount != null) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
-                    }
+                } else if (itemTrashbin.equals(item) && localAccount != null) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
                 }
             }
 
@@ -638,6 +641,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             adapter.removeAll();
             return;
         }
+        emptyContentView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
         fabCreate.show();
         String subtitle;
         if (navigationSelection.category != null) {
@@ -660,6 +665,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         LoadNotesListTask.NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
             adapter.setShowCategory(showCategory);
             adapter.setItemList(notes);
+            progressBar.setVisibility(View.GONE);
+            if (notes.size() > 0) {
+                emptyContentView.setVisibility(View.GONE);
+            } else {
+                emptyContentView.setVisibility(View.VISIBLE);
+            }
             if (scrollToTop) {
                 listView.scrollToPosition(0);
             }
@@ -787,7 +798,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         }
                     }
                     selectAccount(account.name);
-                    clickHeader();
+                    this.accountChooserActive = false;
+                    accountChooser.setVisibility(View.GONE);
+                    accountNavigation.setVisibility(View.VISIBLE);
                     drawerLayout.closeDrawer(GravityCompat.START);
                 });
             } catch (AccountImportCancelledException e) {

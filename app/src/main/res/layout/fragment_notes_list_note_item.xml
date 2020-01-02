@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/noteSwipeFrame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,11 +17,11 @@
         android:contentDescription="@string/menu_favorite"
         app:srcCompat="@drawable/ic_star_white_24dp" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/noteDeleteRight"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_gravity="right|end|center_vertical"
+        android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="@dimen/button_padding"
         android:layout_marginRight="@dimen/button_padding"
         android:contentDescription="@string/menu_delete"
@@ -37,14 +38,13 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
-
             <ImageView
                 android:id="@+id/noteFavorite"
                 android:contentDescription="@string/menu_favorite"
                 android:padding="16dp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
-
+                android:layout_height="match_parent"
+                tools:src="@drawable/ic_star_yellow_24dp"/>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/noteStatus"
@@ -65,14 +65,15 @@
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
             android:paddingRight="16dp"
+            android:paddingEnd="16dp"
+            android:paddingLeft="0dp"
+            android:paddingStart="0dp"
             android:paddingBottom="16dp"
-            android:orientation="vertical"
-            android:background="@drawable/list_item_background_selector">
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/list_item_background_selector">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/noteTitle"
@@ -81,15 +82,14 @@
                     android:singleLine="true"
                     android:layout_weight="1"
                     android:textColor="@drawable/list_item_color_selector"
-                    android:textSize="@dimen/primary_font_size" />
+                    android:textSize="@dimen/primary_font_size"
+                    tools:text="The title of the note"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/list_item_background_selector">
-
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/noteExcerpt"
@@ -103,7 +103,8 @@
                     android:paddingTop="1dp"
                     android:layout_weight="1"
                     android:textColor="@drawable/list_item_color_selector_low"
-                    android:textSize="@dimen/secondary_font_size" />
+                    android:textSize="@dimen/secondary_font_size"
+                    tools:text="This is the content of the first line."/>
 
                 <TextView
                     android:id="@+id/noteCategory"
@@ -121,7 +122,8 @@
                     android:layout_marginLeft="8dp"
                     android:singleLine="true"
                     android:textColor="@drawable/list_item_color_selector"
-                    android:textSize="@dimen/secondary_font_size" />
+                    android:textSize="@dimen/secondary_font_size"
+                    tools:text="My fancy category"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -129,6 +131,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:contentDescription="@null"
         android:src="@color/separator" />
 
 </FrameLayout>

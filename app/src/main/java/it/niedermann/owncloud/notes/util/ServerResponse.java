@@ -46,12 +46,12 @@ public class ServerResponse {
 
     private final NotesClient.ResponseData response;
 
-    public ServerResponse(NotesClient.ResponseData response) {
+    ServerResponse(NotesClient.ResponseData response) {
         this.response = response;
     }
 
     protected String getContent() {
-        return response.getContent();
+        return response == null ? null : response.getContent();
     }
 
     public String getETag() {
@@ -62,7 +62,7 @@ public class ServerResponse {
         return response.getLastModified();
     }
 
-    protected CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
+    CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
         long id = 0;
         String title = "";
         String content = "";

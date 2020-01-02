@@ -48,8 +48,6 @@
     <string name="error_json">A yw\'r ap Nodiadau yn weithredol ar y gweinydd?</string>
     <string name="error_no_network">dim cysylltiad rthwydwaith</string>
 
-    <!-- Snackbar Actions -->
-
     <!-- About -->
     <string name="about_version_title">Fersiwn</string>
     <string name="about_version">Ar hyn o bryd rydych yn defnyddio &lt;strong>%1$s&lt;/strong></string>
@@ -91,6 +89,11 @@
     <string name="pref_value_theme_light">Golau</string>
     <string name="pref_value_font_normal">Arferol</string>
     <string name="pref_value_wifi_and_mobile">Cysoni dros Wi-Fi a data symudol</string>
+    <string name="simple_error">Gwall</string>
+    <string name="simple_close">Cau</string>
+    <string name="simple_copy">Copïo</string>
+    <string name="category_work">Gwaith</string>
+    <string name="no_notes_yet">Dim nodiadau eto</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Agor yn y modd golygu</item>

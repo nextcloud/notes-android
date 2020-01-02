@@ -52,6 +52,8 @@
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_json">is the Notes app activated on the server?</string>
     <string name="error_no_network">no network connection</string>
+    <string name="error_files_app">do you have installed the files app?</string>
+    <string name="error_unknown">an unknown error happened.</string>
 
     <!-- Snackbar Actions -->
 
@@ -132,6 +134,8 @@
     <string name="category_movie">Movie</string>
     <string name="category_work">Work</string>
     <string name="account_already_imported">Account has already been imported</string>
+    <string name="no_notes_yet">No notes yet</string>
+    <string name="no_notes_yet_description">Press + button to create a new note</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

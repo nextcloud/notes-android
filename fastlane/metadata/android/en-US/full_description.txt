@@ -2,6 +2,7 @@ Companion app to Nextcloud Notes.
 
 Features
 
+    Multiple accounts
     List, create, edit, share, search and delete notes
     Manage categories
     Share text and links as new note into the app
@@ -12,9 +13,10 @@ Features
 
 Requirements
 
-    Nextcloud instance running
-    Nextcloud Notes app enabled
+    Nextcloud¹ instance running
+    Nextcloud Files app² enabled (> 3.9.0)
+    Nextcloud Notes app³ enabled
 
-Alternatives
-
-If you dislike this app and you are looking for alternatives: Have a look at MyOwnNotes.
+¹ https://nextcloud.com/
+² https://github.com/nextcloud/android
+³ https://github.com/nextcloud/notes

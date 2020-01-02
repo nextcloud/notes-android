@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Notater</string>
+    <string name="app_name_long">Nextcloud Notes</string>
     <string name="label_all_notes">Alle notater</string>
     <string name="label_favorites">Favoritter</string>
     <string name="action_create">Nytt notat</string>
@@ -32,11 +33,15 @@
     <string name="listview_updated_today">Idag</string>
     <string name="listview_updated_yesterday">I går</string>
     <string name="listview_updated_this_week">Denne uken</string>
+    <string name="listview_updated_last_week">Forrige uke</string>
     <string name="listview_updated_this_month">Denne måneden</string>
+    <string name="listview_updated_last_month">Forrige måned</string>
+
     <!-- Settings -->
     <string name="settings_note_mode">Visningsmodus for notater</string>
     <string name="settings_theme_title">Mørkt tema</string>
     <string name="settings_font_title">Monospace font</string>
+    <string name="settings_font_size">Skriftstørrelse</string>
     <string name="settings_wifi_only">Synkroniser kun med WiFi</string>
 
     <!-- Certificates -->
@@ -47,8 +52,6 @@
     <string name="error_sync">Synkronisering mislyktes: %1$s</string>
     <string name="error_json">er Notat-appen påslått på serveren?</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
-
-    <!-- Snackbar Actions -->
 
     <!-- About -->
     <string name="about_version_title">Versjon</string>
@@ -91,11 +94,30 @@
     <string name="pref_value_theme_light">Lys</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synkroniser med WiFi og mobil data</string>
+    <string name="simple_error">Feil</string>
+    <string name="simple_close">Lukk</string>
+    <string name="simple_copy">Kopier</string>
+    <string name="simple_exception">Avbrudd</string>
+    <string name="copied_to_clipboard">Kopiert til utklippstavlen</string>
+    <string name="pin_to_homescreen">Fest til hjemmeskjermen</string>
+    <string name="note_has_been_deleted">Dette notatet har blitt slettet</string>
+    <string name="add_account">Legg til en konto</string>
+    <string name="category_music">Musikk</string>
+    <string name="category_movies">Filmer</string>
+    <string name="category_work">Arbeid</string>
+    <string name="no_notes_yet">Ingen notater enda</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åpne i redigeringsmodus</item>
         <item>Åpne i forhåndsvisningsmodus</item>
         <item>Husk mitt siste valg</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Liten</item>
+        <item>Medium</item>
+        <item>Stor</item>
     </string-array>
 
     <!-- Plurals -->

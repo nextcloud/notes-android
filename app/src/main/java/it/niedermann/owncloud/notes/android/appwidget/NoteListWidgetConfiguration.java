@@ -86,9 +86,9 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
             public void onItemClick(NavigationAdapter.NavigationItem item) {
                 SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
 
-                if (item == itemRecent) {
+                if (itemRecent.equals(item)) {
                     sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_ALL);
-                } else if (item == itemFavorites) {
+                } else if (itemFavorites.equals(item)) {
                     sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_STARRED);
                 } else {
                     String category = "";

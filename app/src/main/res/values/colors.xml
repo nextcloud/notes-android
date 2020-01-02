@@ -7,7 +7,7 @@
 
     <color name="separator">#fbfbfb</color>
 
-    <color name="bg_highlighted">#f3f3f3</color>
+    <color name="bg_highlighted">#eee</color>
     <color name="bg_normal">#ffffff</color>
     <color name="bg_attention">#d40000</color>
     <color name="bg_warning">#ffcc00</color>

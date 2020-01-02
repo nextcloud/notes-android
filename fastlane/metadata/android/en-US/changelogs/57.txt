@@ -1,0 +1,17 @@
+⚠️ Requires at least Files app¹ version 3.9.0 ⚠️
+
+- #33  Empty state for no notes
+- #171 Multiple NC Servers
+- #375 Hardcoded list for special category images
+- #418 Implement Single-Sign-On
+- #477 Crash when cutting title
+- #604 Crash upon cutting the last item of a bullet list
+- #613 Crash on start. shortLabel cannot be empty
+- #619 Skip dropping automatic indices (Thanks to @Unpublished)
+- #630 Note list widget now missing "+" button
+- Hide FAB when scrolling down
+- Translation updates
+
+Special thanks to @dan0xii @korelstar and @tobiasKaminsky
+
+¹ https://github.com/nextcloud/android
