@@ -53,7 +53,7 @@
     <string name="error_json">is the Notes app activated on the server?</string>
     <string name="error_no_network">no network connection</string>
     <string name="error_files_app">do you have installed the files app?</string>
-    <string name="error_unknown">an unknown error happened.</string>
+    <string name="error_unknown">An unknown error has occurred</string>
 
     <!-- Snackbar Actions -->
 
