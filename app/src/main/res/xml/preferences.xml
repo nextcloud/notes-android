@@ -37,4 +37,9 @@
         android:key="@string/pref_key_wifi_only"
         android:title="@string/settings_wifi_only" />
 
+    <SwitchPreference
+        android:defaultValue="true"
+        android:icon="@drawable/ic_delete_grey600_24dp"
+        android:key="@string/pref_key_swipe_delete"
+        android:title="@string/settings_swipe_delete" />
 </PreferenceScreen>

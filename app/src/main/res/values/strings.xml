@@ -43,6 +43,7 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Font size</string>
     <string name="settings_wifi_only">Sync only on Wi-Fi</string>
+    <string name="settings_swipe_delete">Delete note on swipe</string>
 
     <!-- Certificates -->
 
@@ -112,6 +113,7 @@
     <string name="pref_key_font_size" translatable="false">fontSize</string>
     <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>
     <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
+    <string name="pref_key_swipe_delete" translatable="false">swipeDelete</string>
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
     <string name="pref_value_mode_last" translatable="false">last</string>
@@ -121,6 +123,7 @@
     <string name="pref_value_theme_light">Light</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
+    <string name="pref_value_swipe_delete_enabled">Enable note delete on swipe</string>
     <string name="simple_error">Error</string>
     <string name="simple_close">Close</string>
     <string name="simple_copy">Copy</string>

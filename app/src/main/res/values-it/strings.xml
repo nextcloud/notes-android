@@ -43,7 +43,7 @@
     <string name="settings_font_title">Carattere a spaziatura fissa</string>
     <string name="settings_font_size">Dimensiine carattere</string>
     <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
-
+    <string name="settings_swipe_delete">Cancella nota con swipe</string>
     <!-- Certificates -->
 
     <!-- Network -->

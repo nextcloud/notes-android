@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
@@ -12,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -561,7 +563,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         adapter = new ItemAdapter(this);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
-        ItemTouchHelper touchHelper = new ItemTouchHelper(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        boolean swipeDelete = preferences.getBoolean(getString(R.string.pref_key_swipe_delete), true);
+        int swipeDirections = swipeDelete ? (ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) : ItemTouchHelper.RIGHT;
+
+        ItemTouchHelper touchHelper = new ItemTouchHelper(new SimpleCallback(0, swipeDirections) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -590,19 +596,21 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 switch (direction) {
                     case ItemTouchHelper.LEFT: {
-                        final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.deleteNoteAndSync((dbNote).getId());
-                        adapter.remove(dbNote);
-                        refreshLists();
-                        Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
-                        Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
-                                .setAction(R.string.action_undo, (View v) -> {
-                                    db.addNoteAndSync(dbNote.getAccountId(), dbNote);
-                                    refreshLists();
-                                    Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
-                                            .show();
-                                })
-                                .show();
+                        if (swipeDelete) {
+                            final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                            db.deleteNoteAndSync((dbNote).getId());
+                            adapter.remove(dbNote);
+                            refreshLists();
+                            Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
+                            Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
+                                    .setAction(R.string.action_undo, (View v) -> {
+                                        db.addNoteAndSync(dbNote.getAccountId(), dbNote);
+                                        refreshLists();
+                                        Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
+                                                .show();
+                                    })
+                                    .show();
+                        }
                         break;
                     }
                     case ItemTouchHelper.RIGHT: {
