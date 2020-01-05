@@ -590,8 +590,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 switch (direction) {
                     case ItemTouchHelper.LEFT: {
-                        final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.deleteNoteAndSync((dbNote).getId());
+                        final DBNote dbNoteWithoutContent = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                        final DBNote dbNote = db.getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
+                        db.deleteNoteAndSync(dbNote.getId());
                         adapter.remove(dbNote);
                         refreshLists();
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
