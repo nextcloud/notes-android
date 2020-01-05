@@ -52,6 +52,8 @@
     <string name="error_sync">Eşitlenemedi: %1$s</string>
     <string name="error_json">Notlar uygulaması sunucu üzerinde etkinleştirilmiş mi?</string>
     <string name="error_no_network">ağ bağlantısı yok</string>
+    <string name="error_files_app">dosyalar uygulamasını kurdunuz mu?</string>
+    <string name="error_unknown">Bilinmeyen bir sorun çıktı</string>
 
     <!-- About -->
     <string name="about_version_title">Sürüm</string>

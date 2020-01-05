@@ -52,6 +52,8 @@
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
     <string name="error_json">Ar užrašų programėlė aktyvuota serveryje?</string>
     <string name="error_no_network">nėra tinklo ryšio</string>
+    <string name="error_files_app">ar esate įdiegę failų programėlę?</string>
+    <string name="error_unknown">Įvyko nežinoma klaida</string>
 
     <!-- About -->
     <string name="about_version_title">Versija</string>

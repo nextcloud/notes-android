@@ -52,6 +52,7 @@
     <string name="error_sync">Synkronisering mislyktes: %1$s</string>
     <string name="error_json">er Notat-appen påslått på serveren?</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
+    <string name="error_unknown">En ukjent feil oppstod</string>
 
     <!-- About -->
     <string name="about_version_title">Versjon</string>

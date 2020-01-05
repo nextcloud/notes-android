@@ -52,6 +52,8 @@
     <string name="error_sync">Sinkronizazioa huts egin du: %1$s</string>
     <string name="error_json">Oharrak aplikazioa zerbitzariak aktibatuta al dago?</string>
     <string name="error_no_network">Ez dago sare-konexiorik</string>
+    <string name="error_files_app">fitxategien aplikazioa instalatu al duzu?</string>
+    <string name="error_unknown">Errore ezezagun bat gertatu da</string>
 
     <!-- About -->
     <string name="about_version_title">Bertsioa</string>

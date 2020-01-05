@@ -52,6 +52,8 @@
     <string name="error_sync">同期に失敗しました: %1$s</string>
     <string name="error_json">ノートアプリはサーバー上で有効になっていますか?</string>
     <string name="error_no_network">ネットワーク接続がありません</string>
+    <string name="error_files_app">ファイルアプリはインストールしましたか？</string>
+    <string name="error_unknown">不明なエラーが発生しました</string>
 
     <!-- About -->
     <string name="about_version_title">バージョン</string>
@@ -104,8 +106,12 @@
     <string name="add_account">アカウントを追加</string>
     <string name="category_music">音楽</string>
     <string name="category_movies">動画</string>
+    <string name="category_movie">ムービー</string>
     <string name="category_work">業種</string>
+    <string name="account_already_imported">アカウントはすでにインポートされています</string>
     <string name="no_notes_yet">まだノートはありません</string>
+    <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>

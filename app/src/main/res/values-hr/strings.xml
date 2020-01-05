@@ -52,6 +52,7 @@
     <string name="error_sync">Sinkronizacija nije uspjela: %1$s</string>
     <string name="error_json">je li aplikacija Bilješke aktivirana na poslužitelju?</string>
     <string name="error_no_network">nema veze s mrežom</string>
+    <string name="error_unknown">Došlo je do nepoznate pogreške</string>
 
     <!-- About -->
     <string name="about_version_title">Inačica</string>

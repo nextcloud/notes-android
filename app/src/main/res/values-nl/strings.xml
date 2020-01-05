@@ -53,6 +53,8 @@
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_json">is de Notities app op de server geactiveerd?</string>
     <string name="error_no_network">geen netwerkverbinding</string>
+    <string name="error_files_app">hen je de Bestanden app geïnstalleerd?</string>
+    <string name="error_unknown">Er trad een onbekende fout op.</string>
 
     <!-- About -->
     <string name="about_version_title">Versie</string>
@@ -105,6 +107,7 @@
     <string name="add_account">Account toevoegen</string>
     <string name="category_music">Muziek</string>
     <string name="category_movies">Films</string>
+    <string name="category_movie">Film</string>
     <string name="category_work">Werk</string>
     <string name="no_notes_yet">Nog geen notities</string>
     <!-- Array: note modes -->

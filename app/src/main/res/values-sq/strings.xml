@@ -42,7 +42,6 @@
     <string name="error_sync">Sinkronizimi dështoi: %1$s</string>
     <string name="error_json">a është aplikacioni i Notes i aktivizuar në server?</string>
     <string name="error_no_network">asnjë lidhje në rrjet</string>
-
     <!-- About -->
     <string name="about_version_title">Versioni</string>
     <string name="about_version">Ju tani jeni duke përdorur &lt;strong>%1$s&lt;/strong></string>
