@@ -48,6 +48,7 @@
     <string name="error_sync">Samstilling mistókst: %1$s</string>
     <string name="error_json">er minnispunktaforritið virkt á þjóninum?</string>
     <string name="error_no_network">engin nettenging</string>
+    <string name="error_unknown">Óþekkt villa kom upp</string>
 
     <!-- About -->
     <string name="about_version_title">Útgáfa</string>

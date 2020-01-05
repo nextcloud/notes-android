@@ -51,7 +51,9 @@
     <!-- Error -->
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_json">está activada a aplicación «Notes» no servidor?</string>
-    <string name="error_no_network">Sen conexión de rede</string>
+    <string name="error_no_network">sen conexión de rede</string>
+    <string name="error_files_app">instalou a aplicación de ficheiros?</string>
+    <string name="error_unknown">Produciuse un erro descoñecido</string>
 
     <!-- About -->
     <string name="about_version_title">Versión</string>

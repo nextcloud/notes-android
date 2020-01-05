@@ -52,6 +52,8 @@
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_json">máte povolenú aplikáciu Poznámky na serveri?</string>
     <string name="error_no_network">nie je pripojenie k sieti</string>
+    <string name="error_files_app">máte nainštalovanú apku Súbory?</string>
+    <string name="error_unknown">Vyskytla sa neznáma chyba</string>
 
     <!-- About -->
     <string name="about_version_title">Verzia</string>

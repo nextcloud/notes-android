@@ -48,7 +48,6 @@
     <string name="error_sync">Synchronisation failed: %1$s</string>
     <string name="error_json">is the Notes app activated on the server?</string>
     <string name="error_no_network">no network connection</string>
-
     <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">You are currently using &lt;strong>%1$s&lt;/strong></string>

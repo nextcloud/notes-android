@@ -52,6 +52,8 @@
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
     <string name="error_json">är anteckningar-appen aktiverad på servern?</string>
     <string name="error_no_network">ingen nätverksanslutning</string>
+    <string name="error_files_app">har du installerat filappen?</string>
+    <string name="error_unknown">Ett okänt fel uppstod</string>
 
     <!-- About -->
     <string name="about_version_title">Version</string>

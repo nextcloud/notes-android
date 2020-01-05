@@ -48,6 +48,7 @@
     <string name="error_sync">Синхронизация не удалась: %1$s</string>
     <string name="error_json">Включено ли приложение «Заметки» на сервере?</string>
     <string name="error_no_network">нет подключения к сети</string>
+    <string name="error_unknown">Произошла неизвестная ошибка</string>
 
     <!-- About -->
     <string name="about_version_title">Версия</string>
