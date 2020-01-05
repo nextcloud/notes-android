@@ -36,7 +36,6 @@
     <string name="error_sync">동기화 실패: %1$s</string>
     <string name="error_json">서버에 메모 앱이 활성화되어 있습니까?</string>
     <string name="error_no_network">네트워크 연결 없음</string>
-
     <!-- About -->
     <string name="about_version_title">버전</string>
     <string name="about_version">&lt;strong>%1$s&lt;/strong> 사용 중</string>

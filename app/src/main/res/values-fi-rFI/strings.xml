@@ -50,6 +50,7 @@
     <!-- Error -->
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
     <string name="error_no_network">ei verkkoyhteyttä</string>
+    <string name="error_unknown">Tapahtui tuntematon virhe</string>
 
     <!-- About -->
     <string name="about_version_title">Versio</string>

@@ -48,6 +48,7 @@
     <string name="error_sync">הסנכרון נכשל: %1$s</string>
     <string name="error_json">האם יישומון הפתקים מופעל בשרת?</string>
     <string name="error_no_network">אין חיבור לרשת</string>
+    <string name="error_unknown">אירעה שגיאה בלתי ידועה</string>
 
     <!-- About -->
     <string name="about_version_title">גרסה</string>

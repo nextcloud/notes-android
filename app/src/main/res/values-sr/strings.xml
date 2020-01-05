@@ -52,6 +52,7 @@
     <string name="error_sync">Синхронизација није успела%1$s</string>
     <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
     <string name="error_no_network">нема мрежне везе</string>
+    <string name="error_unknown">Десила се непозната грешка</string>
 
     <!-- About -->
     <string name="about_version_title">Верзија</string>

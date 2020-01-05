@@ -52,6 +52,8 @@
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_json">Είναι η εφαρμογή Σημειώσεις ενεργοποιημένη στον εξυπηρετητή Nextcloud;</string>
     <string name="error_no_network">δεν υπάρχει σύνδεση δικτύου</string>
+    <string name="error_files_app">εγκαταστάθηκε η εφαρμογή αρχείων?</string>
+    <string name="error_unknown">Ένα άγνωστο σφάλμα προέκυψε</string>
 
     <!-- About -->
     <string name="about_version_title">Έκδοση</string>

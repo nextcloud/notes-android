@@ -47,7 +47,6 @@
     <string name="error_sync">Methodd y cydweddiad: %1$s</string>
     <string name="error_json">A yw\'r ap Nodiadau yn weithredol ar y gweinydd?</string>
     <string name="error_no_network">dim cysylltiad rthwydwaith</string>
-
     <!-- About -->
     <string name="about_version_title">Fersiwn</string>
     <string name="about_version">Ar hyn o bryd rydych yn defnyddio &lt;strong>%1$s&lt;/strong></string>
