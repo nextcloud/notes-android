@@ -1,0 +1,4 @@
+- #663 Swipe to delete gesture is way to sensitive
+
+Requires at least Files app¹ version 3.9.0
+¹ https://github.com/nextcloud/android

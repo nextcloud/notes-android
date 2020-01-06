@@ -636,6 +636,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
 
             @Override
+            public float getSwipeEscapeVelocity(float defaultValue) {
+                return defaultValue * 3;
+            }
+
+            @Override
             public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
                 getDefaultUIUtil().clearView(((ItemAdapter.NoteViewHolder) viewHolder).noteSwipeable);
             }
