@@ -598,6 +598,17 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
                                 .setAction(R.string.action_undo, (View v) -> {
+                                    db.getNoteServerSyncHelper().addCallbackPush(new ICallback() {
+                                        @Override
+                                        public void onFinish() {
+                                            refreshLists();
+                                        }
+
+                                        @Override
+                                        public void onScheduled() {
+
+                                        }
+                                    });
                                     db.addNoteAndSync(dbNote.getAccountId(), dbNote);
                                     refreshLists();
                                     Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
