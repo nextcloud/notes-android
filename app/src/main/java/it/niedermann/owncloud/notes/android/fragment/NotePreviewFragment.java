@@ -118,7 +118,14 @@ public class NotePreviewFragment extends BaseNoteFragment {
                         )
                         .build());
         setActiveTextView(noteContent);
-        noteContent.setText(markdownProcessor.parse(note.getContent()));
+        try {
+            noteContent.setText(markdownProcessor.parse(note.getContent()));
+        } catch (StringIndexOutOfBoundsException e) {
+            // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
+            noteContent.setText(note.getContent());
+            Toast.makeText(noteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
         changedText = note.getContent();
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
