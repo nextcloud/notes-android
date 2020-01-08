@@ -111,7 +111,6 @@
     <string name="account_already_imported">Conta já foi importada</string>
     <string name="no_notes_yet">Nenhuma anotação ainda</string>
     <string name="no_notes_yet_description">Pressione o botão + para criar uma nova nota</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir em modo de edição</item>
