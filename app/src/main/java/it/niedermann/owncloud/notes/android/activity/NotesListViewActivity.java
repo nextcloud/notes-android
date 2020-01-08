@@ -388,7 +388,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     navigationSelection = new Category(null, null);
                 } else if (itemFavorites.equals(item)) {
                     navigationSelection = new Category(null, true);
-                } else if (itemUncategorized.equals(item)) {
+                } else if (itemUncategorized != null && itemUncategorized.equals(item)) {
                     navigationSelection = new Category("", null);
                 } else {
                     navigationSelection = new Category(item.label, null);
