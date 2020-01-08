@@ -111,7 +111,6 @@
     <string name="account_already_imported">Ce compte a déjà été importé</string>
     <string name="no_notes_yet">Aucune note pour l\'instant</string>
     <string name="no_notes_yet_description">Créez une nouvelle note avec le bouton +</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ouvrir en mode édition</item>

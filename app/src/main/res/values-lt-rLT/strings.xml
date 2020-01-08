@@ -111,7 +111,6 @@
     <string name="account_already_imported">Paskyra jau buvo importuota</string>
     <string name="no_notes_yet">Nėra užrašų</string>
     <string name="no_notes_yet_description">Norėdami sukurti užrašus, paspauskite mygtuką +</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>
