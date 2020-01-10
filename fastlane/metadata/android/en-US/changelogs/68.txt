@@ -1,0 +1,5 @@
+- #331 Blue bar below textarea looks strange
+- #538 Text area should cover whole screen
+
+Requires at least Files app¹ version 3.9.0
+¹ https://github.com/nextcloud/android

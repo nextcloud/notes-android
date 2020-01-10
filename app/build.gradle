@@ -13,8 +13,8 @@ android {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 67
-        versionName "2.4.4"
+        versionCode 68
+        versionName "2.4.5"
 //        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {

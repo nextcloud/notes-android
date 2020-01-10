@@ -8,12 +8,13 @@
     tools:context="it.niedermann.owncloud.notes.android.activity.EditNoteActivity">
 
     <com.yydcdut.rxmarkdown.RxMDEditText
-            android:id="@+id/editContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="top"
-            android:ems="10"
-            android:inputType="textMultiLine|textCapSentences"
-            android:padding="16dp"
-            android:textColor="@color/fg_default"/>
+        android:id="@+id/editContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="top"
+        android:inputType="textMultiLine|textCapSentences"
+        android:padding="16dp"
+        android:textColor="@color/fg_default" />
 </ScrollView>
