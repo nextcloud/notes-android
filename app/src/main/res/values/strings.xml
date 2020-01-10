@@ -137,6 +137,7 @@
     <string name="no_notes_yet">No notes yet</string>
     <string name="no_notes_yet_description">Press + button to create a new note</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Could not load preview. Please check whether there is a two-digit numbered list item without content.</string>
+    <string name="simple_more">More</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

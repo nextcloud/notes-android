@@ -75,7 +75,7 @@ public class ExceptionActivity extends AppCompatActivity {
         this.stacktrace.setText(debugInfo + "\n\n" + getStacktraceOf(throwable));
     }
 
-    private String getStacktraceOf(Throwable e) {
+    public static String getStacktraceOf(Throwable e) {
         StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
         return sw.toString();

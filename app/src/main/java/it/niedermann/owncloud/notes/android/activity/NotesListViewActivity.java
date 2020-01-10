@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,6 +68,7 @@ import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
@@ -76,7 +76,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
-public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener {
+public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.HasView {
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
 
@@ -359,7 +359,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 synchronize();
             } else {
                 swipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(getApplicationContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+                Snackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -437,6 +437,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         }
         this.accountChooserActive = !this.accountChooserActive;
+    }
+
+    @Override
+    public CoordinatorLayout getView() {
+        return this.coordinatorLayout;
     }
 
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {

@@ -129,7 +129,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
         changedText = note.getContent();
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        db = NoteSQLiteOpenHelper.getInstance(getActivity().getApplicationContext());
+        db = NoteSQLiteOpenHelper.getInstance(getActivity());
         // Pull to Refresh
         swipeRefreshLayout.setOnRefreshListener(() -> {
             if (db.getNoteServerSyncHelper().isSyncPossible()) {

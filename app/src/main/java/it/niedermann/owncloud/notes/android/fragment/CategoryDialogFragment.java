@@ -67,7 +67,7 @@ public class CategoryDialogFragment extends DialogFragment {
         adapter = new FolderArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item);
         textCategory.setAdapter(adapter);
         new LoadCategoriesTask().execute();
-        return new AlertDialog.Builder(getActivity(), R.style.ocAlertDialog)
+        return new AlertDialog.Builder(getActivity(), R.style.ncAlertDialog)
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setCancelable(true)
@@ -81,9 +81,7 @@ public class CategoryDialogFragment extends DialogFragment {
                     }
                     listener.onCategoryChosen(textCategory.getText().toString());
                 })
-                .setNegativeButton(R.string.simple_cancel, (dialog, which) -> {
-                    // do nothing
-                })
+                .setNegativeButton(R.string.simple_cancel, null)
                 .create();
     }
 

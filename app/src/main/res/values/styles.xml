@@ -31,9 +31,7 @@
         <item name="android:layout_margin">2dp</item>
     </style>
 
-    <style name="Widget.AppCompat.Button.Borderless.Colored" parent="Widget.AppCompat.Button.Borderless"></style>
-
-    <style name="ocAlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
+    <style name="ncAlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/primary</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary</item>

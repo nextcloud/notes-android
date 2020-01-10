@@ -10,14 +10,11 @@ import com.nextcloud.android.sso.aidl.NextcloudRequest;
 import com.nextcloud.android.sso.api.AidlNetworkRequest;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.Response;
-import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -120,13 +117,13 @@ public class NotesClient {
         }
     }
 
-    NotesResponse getNotes(long lastModified, String lastETag) throws NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
+    NotesResponse getNotes(long lastModified, String lastETag) throws Exception {
         Map<String, String> parameter = new HashMap<>();
         parameter.put(GET_PARAM_KEY_PRUNE_BEFORE, Long.toString(lastModified));
         return new NotesResponse(requestServer("notes", METHOD_GET, parameter, null, lastETag));
     }
 
-    private NoteResponse putNote(CloudNote note, String path, String method) throws JSONException, NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
+    private NoteResponse putNote(CloudNote note, String path, String method) throws Exception {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
@@ -140,14 +137,13 @@ public class NotesClient {
      *
      * @param note {@link CloudNote} - the new Note
      * @return Created Note including generated Title, ID and lastModified-Date
-     * @throws JSONException
-     * @throws NextcloudHttpRequestFailedException
+     * @throws Exception
      */
-    NoteResponse createNote(CloudNote note) throws JSONException, NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
+    NoteResponse createNote(CloudNote note) throws Exception {
         return putNote(note, "notes", METHOD_POST);
     }
 
-    NoteResponse editNote(CloudNote note) throws JSONException, NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
+    NoteResponse editNote(CloudNote note) throws Exception {
         return putNote(note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
@@ -169,7 +165,7 @@ public class NotesClient {
      * @param lastETag optional ETag of last response
      * @return Body of answer
      */
-    private ResponseData requestServer(String target, String method, Map<String, String> parameter, JSONObject requestBody, String lastETag) throws NextcloudHttpRequestFailedException, NextcloudApiNotRespondingException {
+    private ResponseData requestServer(String target, String method, Map<String, String> parameter, JSONObject requestBody, String lastETag) throws Exception {
         NextcloudRequest.Builder requestBuilder = new NextcloudRequest.Builder()
                 .setMethod(method)
                 .setUrl(API_PATH + target);
@@ -191,35 +187,28 @@ public class NotesClient {
 
         StringBuilder result = new StringBuilder();
 
-        try {
-            Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
-            Response response = mNextcloudAPI.performNetworkRequestV2(nextcloudRequest);
-            Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
-            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
-            String line;
-            while ((line = rd.readLine()) != null) {
-                result.append(line);
-            }
-            response.getBody().close();
-
-            String etag = "";
-            AidlNetworkRequest.PlainHeader eTagHeader = response.getPlainHeader(HEADER_KEY_ETAG);
-            if (eTagHeader != null) {
-                etag = Objects.requireNonNull(eTagHeader.getValue()).replace("\"", "");
-            }
-
-            long lastModified = 0;
-            AidlNetworkRequest.PlainHeader lastModifiedHeader = response.getPlainHeader(HEADER_KEY_LAST_MODIFIED);
-            if (lastModifiedHeader != null)
-                lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1000;
-            Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
-            // return these header fields since they should only be saved after successful processing the result!
-            return new ResponseData(result.toString(), etag, lastModified);
-        } catch(NextcloudApiNotRespondingException | NextcloudHttpRequestFailedException e) {
-            throw e;
-        } catch (Exception e) {
-            e.printStackTrace();
+        Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
+        Response response = mNextcloudAPI.performNetworkRequestV2(nextcloudRequest);
+        Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
+        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
+        String line;
+        while ((line = rd.readLine()) != null) {
+            result.append(line);
         }
-        return null;
+        response.getBody().close();
+
+        String etag = "";
+        AidlNetworkRequest.PlainHeader eTagHeader = response.getPlainHeader(HEADER_KEY_ETAG);
+        if (eTagHeader != null) {
+            etag = Objects.requireNonNull(eTagHeader.getValue()).replace("\"", "");
+        }
+
+        long lastModified = 0;
+        AidlNetworkRequest.PlainHeader lastModifiedHeader = response.getPlainHeader(HEADER_KEY_LAST_MODIFIED);
+        if (lastModifiedHeader != null)
+            lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1000;
+        Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
+        // return these header fields since they should only be saved after successful processing the result!
+        return new ResponseData(result.toString(), etag, lastModified);
     }
 }

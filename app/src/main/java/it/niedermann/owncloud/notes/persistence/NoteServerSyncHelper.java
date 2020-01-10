@@ -1,6 +1,8 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.BroadcastReceiver;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,8 +12,12 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
@@ -20,6 +26,8 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import org.json.JSONException;
 
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +35,7 @@ import java.util.Map;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.ExceptionActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -34,6 +43,8 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.ServerResponse;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 /**
  * Helps to synchronize the Database to the Server.
@@ -45,7 +56,7 @@ public class NoteServerSyncHelper {
     private static NoteServerSyncHelper instance;
 
     private NoteSQLiteOpenHelper dbHelper;
-    private Context appContext = null;
+    private Context context;
     private LocalAccount localAccount;
 
     // Track network connection changes using a BroadcastReceiver
@@ -85,18 +96,18 @@ public class NoteServerSyncHelper {
 
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
         this.dbHelper = db;
-        this.appContext = db.getContext().getApplicationContext();
+        this.context = db.getContext();
         try {
             updateAccount();
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
         }
-        this.syncOnlyOnWifiKey = appContext.getResources().getString(R.string.pref_key_wifi_only);
+        this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
 
         // Registers BroadcastReceiver to track network connection changes.
-        appContext.registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        context.getApplicationContext().registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.appContext);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context.getApplicationContext());
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
         syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
@@ -120,10 +131,10 @@ public class NoteServerSyncHelper {
 
     public void updateAccount() throws NextcloudFilesAppAccountNotFoundException {
         try {
-            this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(appContext).name);
+            this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context.getApplicationContext()).name);
             if (notesClient == null) {
                 if (this.localAccount != null) {
-                    notesClient = new NotesClient(appContext);
+                    notesClient = new NotesClient(context);
                 }
             } else {
                 notesClient.updateAccount();
@@ -137,11 +148,11 @@ public class NoteServerSyncHelper {
 
     @Override
     protected void finalize() throws Throwable {
-        appContext.unregisterReceiver(networkReceiver);
+        context.getApplicationContext().unregisterReceiver(networkReceiver);
         super.finalize();
     }
 
-    public static boolean isConfigured(Context context) {
+    private static boolean isConfigured(Context context) {
         try {
             SingleAccountHelper.getCurrentSingleSignOnAccount(context);
             return true;
@@ -161,7 +172,7 @@ public class NoteServerSyncHelper {
      * @return true if sync is possible, otherwise false.
      */
     public boolean isSyncPossible() {
-        return networkConnected && isConfigured(appContext);
+        return networkConnected && isConfigured(context.getApplicationContext());
     }
 
     /**
@@ -222,12 +233,12 @@ public class NoteServerSyncHelper {
     }
 
     private void updateNetworkStatus() {
-        ConnectivityManager connMgr = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
 
         if (activeInfo != null && activeInfo.isConnected()) {
             networkConnected =
-                    !syncOnlyOnWifi || ((ConnectivityManager) appContext
+                    !syncOnlyOnWifi || ((ConnectivityManager) context.getApplicationContext()
                             .getSystemService(Context.CONNECTIVITY_SERVICE))
                             .getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
 
@@ -251,11 +262,11 @@ public class NoteServerSyncHelper {
         private final List<ICallback> callbacks = new ArrayList<>();
         private List<Throwable> exceptions = new ArrayList<>();
 
-        public SyncTask(boolean onlyLocalChanges) {
+        SyncTask(boolean onlyLocalChanges) {
             this.onlyLocalChanges = onlyLocalChanges;
         }
 
-        public void addCallbacks(List<ICallback> callbacks) {
+        void addCallbacks(List<ICallback> callbacks) {
             this.callbacks.addAll(callbacks);
         }
 
@@ -324,18 +335,14 @@ public class NoteServerSyncHelper {
                         default:
                             throw new IllegalStateException("Unknown State of Note: " + note);
                     }
-                } catch (JSONException e) {
-                    Log.e(TAG, "Exception", e);
-                    exceptions.add(e);
                 } catch (NextcloudHttpRequestFailedException e) {
                     if (e.getStatusCode() == 304) {
                         Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
                     } else {
-                        e.printStackTrace();
+                        exceptions.add(e);
                     }
-                } catch (NextcloudApiNotRespondingException e) {
-                    Log.e(TAG, "Exception", e);
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    exceptions.add(e);
                 }
             }
         }
@@ -384,7 +391,6 @@ public class NoteServerSyncHelper {
                 dbHelper.updateModified(localAccount.getId(), localAccount.getModified());
                 return LoginStatus.OK;
             } catch (JSONException | NullPointerException e) {
-                Log.e(TAG, "Exception", e);
                 exceptions.add(e);
                 status = LoginStatus.JSON_FAILED;
             } catch (NextcloudHttpRequestFailedException e) {
@@ -392,16 +398,16 @@ public class NoteServerSyncHelper {
                 if (e.getStatusCode() == 304) {
                     return LoginStatus.OK;
                 } else {
-                    e.printStackTrace();
                     exceptions.add(e);
                     return LoginStatus.JSON_FAILED;
                 }
             } catch (NextcloudApiNotRespondingException e) {
-                e.printStackTrace();
                 exceptions.add(e);
                 return LoginStatus.PROBLEM_WITH_FILES_APP;
+            } catch (SocketTimeoutException | ConnectException e) {
+                exceptions.add(e);
+                return LoginStatus.NO_NETWORK;
             } catch (Exception e) {
-                e.printStackTrace();
                 exceptions.add(e);
                 return LoginStatus.UNKNOWN_PROBLEM;
             }
@@ -412,9 +418,35 @@ public class NoteServerSyncHelper {
         protected void onPostExecute(LoginStatus status) {
             super.onPostExecute(status);
             if (status != LoginStatus.OK) {
-                Toast.makeText(appContext, appContext.getString(R.string.error_sync, appContext.getString(status.str)), Toast.LENGTH_LONG).show();
-                for (Throwable e : exceptions) {
-                    Toast.makeText(appContext, e.getClass().getName() + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
+                String statusMessage = context.getApplicationContext().getString(R.string.error_sync, context.getApplicationContext().getString(status.str));
+                if (context instanceof HasView) {
+                    Snackbar.make(((HasView) context).getView(), statusMessage, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.simple_more, v -> {
+                                StringBuilder exceptionString = new StringBuilder();
+                                for (Throwable e : exceptions) {
+                                    exceptionString.append(ExceptionActivity.getStacktraceOf(e));
+                                }
+                                new AlertDialog.Builder(context, R.style.ncAlertDialog)
+                                        .setTitle(statusMessage)
+                                        .setMessage(exceptionString.toString())
+                                        .setPositiveButton(android.R.string.copy, (a, b) -> {
+                                            final ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
+                                            ClipData clipData = ClipData.newPlainText(context.getString(R.string.simple_exception), "```\n" + exceptionString + "\n```");
+                                            clipboardManager.setPrimaryClip(clipData);
+                                            Toast.makeText(context, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
+                                            a.dismiss();
+                                        })
+                                        .setNegativeButton(R.string.simple_close, null)
+                                        .create()
+                                        .show();
+                            })
+                            .show();
+                } else {
+                    Toast.makeText(context.getApplicationContext(), statusMessage, Toast.LENGTH_LONG).show();
+                    for (Throwable e : exceptions) {
+                        Log.e(TAG, e.getMessage(), e);
+                        Toast.makeText(context.getApplicationContext(), e.getClass().getName() + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 }
             }
             syncActive = false;
@@ -428,5 +460,9 @@ public class NoteServerSyncHelper {
                 scheduleSync(false);
             }
         }
+    }
+
+    public interface HasView {
+        public View getView();
     }
 }
