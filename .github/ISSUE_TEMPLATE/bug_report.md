@@ -23,6 +23,11 @@ Steps to reproduce the behavior:
 **Screenshots**
 <!-- If applicable, add screenshots to help explain your problem. -->
 
+**Server**
+ - Nextcloud-Version: 
+ - Nextcloud Notes-Version (server app): 
+ - PHP-Version:
+
 **Smartphone (please complete the following information):**
  - Device: [e.g. Samsung Galaxy S10]
  - Android-Version: [e.g. 8]
