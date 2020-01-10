@@ -76,7 +76,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
-public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.HasView {
+public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.ViewProvider {
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
 
@@ -292,27 +292,27 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private void setupHeader() {
         accountChooser.removeAllViews();
-        for (LocalAccount account : db.getAccounts()) {
+        for (LocalAccount localAccount : db.getAccounts()) {
             View v = getLayoutInflater().inflate(R.layout.item_account, null);
-            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(account.getAccountName());
+            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(localAccount.getAccountName());
             Glide
                     .with(this)
-                    .load(account.getUrl() + "/index.php/avatar/" + Uri.encode(account.getUserName()) + "/64")
+                    .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
                     .error(R.drawable.ic_account_circle_grey_24dp)
                     .apply(RequestOptions.circleCropTransform())
                     .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
             v.setOnClickListener(clickedView -> {
                 clickHeader();
                 drawerLayout.closeDrawer(GravityCompat.START);
-                selectAccount(account.getAccountName());
+                selectAccount(localAccount.getAccountName());
             });
             v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
-                db.deleteAccount(account.getId());
-                if (account.getId() == localAccount.getId()) {
+                db.deleteAccount(localAccount.getId());
+                if (localAccount.getId() == this.localAccount.getId()) {
                     List<LocalAccount> remainingAccounts = db.getAccounts();
                     if (remainingAccounts.size() > 0) {
-                        localAccount = remainingAccounts.get(0);
-                        selectAccount(localAccount.getAccountName());
+                        this.localAccount = remainingAccounts.get(0);
+                        selectAccount(this.localAccount.getAccountName());
                     } else {
                         selectAccount(null);
                         askForNewAccount(this);

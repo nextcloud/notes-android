@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -35,12 +36,12 @@ import java.util.Map;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.ExceptionActivity;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.LoginStatus;
+import it.niedermann.owncloud.notes.util.ExceptionUtil;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 
@@ -418,20 +419,20 @@ public class NoteServerSyncHelper {
         protected void onPostExecute(LoginStatus status) {
             super.onPostExecute(status);
             if (status != LoginStatus.OK) {
+                for (Throwable e : exceptions) {
+                    Log.e(TAG, e.getMessage(), e);
+                }
                 String statusMessage = context.getApplicationContext().getString(R.string.error_sync, context.getApplicationContext().getString(status.str));
-                if (context instanceof HasView) {
-                    Snackbar.make(((HasView) context).getView(), statusMessage, Snackbar.LENGTH_LONG)
+                if (context instanceof ViewProvider && context instanceof Activity) {
+                    Snackbar.make(((ViewProvider) context).getView(), statusMessage, Snackbar.LENGTH_LONG)
                             .setAction(R.string.simple_more, v -> {
-                                StringBuilder exceptionString = new StringBuilder();
-                                for (Throwable e : exceptions) {
-                                    exceptionString.append(ExceptionActivity.getStacktraceOf(e));
-                                }
+                                String debugInfos = ExceptionUtil.getDebugInfos((Activity) context, exceptions);
                                 new AlertDialog.Builder(context, R.style.ncAlertDialog)
                                         .setTitle(statusMessage)
-                                        .setMessage(exceptionString.toString())
+                                        .setMessage(debugInfos)
                                         .setPositiveButton(android.R.string.copy, (a, b) -> {
                                             final ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
-                                            ClipData clipData = ClipData.newPlainText(context.getString(R.string.simple_exception), "```\n" + exceptionString + "\n```");
+                                            ClipData clipData = ClipData.newPlainText(context.getString(R.string.simple_exception), "```\n" + debugInfos + "\n```");
                                             clipboardManager.setPrimaryClip(clipData);
                                             Toast.makeText(context, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
                                             a.dismiss();
@@ -444,7 +445,6 @@ public class NoteServerSyncHelper {
                 } else {
                     Toast.makeText(context.getApplicationContext(), statusMessage, Toast.LENGTH_LONG).show();
                     for (Throwable e : exceptions) {
-                        Log.e(TAG, e.getMessage(), e);
                         Toast.makeText(context.getApplicationContext(), e.getClass().getName() + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
@@ -462,7 +462,7 @@ public class NoteServerSyncHelper {
         }
     }
 
-    public interface HasView {
-        public View getView();
+    public interface ViewProvider {
+        View getView();
     }
 }
