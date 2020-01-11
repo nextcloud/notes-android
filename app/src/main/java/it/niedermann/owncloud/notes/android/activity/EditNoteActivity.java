@@ -16,7 +16,6 @@ import java.util.Calendar;
 import java.util.Objects;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.fragment.AccountChooserDialogFragment;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
 import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
@@ -27,7 +26,9 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
-public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener, AccountChooserDialogFragment.AccountChooserListener {
+import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+
+public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener, AccountChooserListener {
 
     private static final String TAG = EditNoteActivity.class.getSimpleName();
 

@@ -20,10 +20,11 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
-public class AccountChooserDialogFragment extends DialogFragment {
+public class AccountChooserDialogFragment extends DialogFragment implements AccountChooserListener {
     private AccountChooserListener accountChooserListener;
     @BindView(R.id.accounts_list)
     RecyclerView accountRecyclerView;
@@ -53,7 +54,7 @@ public class AccountChooserDialogFragment extends DialogFragment {
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
         List<LocalAccount> accountsList = db.getAccounts();
 
-        RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, accountChooserListener, getActivity());
+        RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, getActivity());
         accountRecyclerView.setAdapter(adapter);
 
         return new AlertDialog.Builder(getActivity(), R.style.ncAlertDialog)
@@ -74,7 +75,9 @@ public class AccountChooserDialogFragment extends DialogFragment {
         return new AccountChooserDialogFragment();
     }
 
-    public interface AccountChooserListener {
-        void onAccountChosen(LocalAccount account);
+    @Override
+    public void onAccountChosen(LocalAccount account) {
+        accountChooserListener.onAccountChosen(account);
+        dismiss();
     }
 }

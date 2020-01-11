@@ -59,6 +59,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.android.fragment.AccountChooserDialogFragment;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
@@ -76,7 +78,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
-public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.ViewProvider {
+public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
 
@@ -953,7 +955,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.menu_delete:
+                case R.id.menu_delete: {
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
                         DBNote note = (DBNote) adapter.getItem(i);
@@ -966,6 +968,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     searchView.setIconified(true);
                     refreshLists();
                     return true;
+                }
+                case R.id.menu_move: {
+                    AccountChooserDialogFragment.newInstance().show(getFragmentManager(), NotesListViewActivity.class.getCanonicalName());
+                    return true;
+                }
                 default:
                     return false;
             }
@@ -977,5 +984,19 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             mActionMode = null;
             adapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onAccountChosen(LocalAccount account) {
+        List<Integer> selection = adapter.getSelected();
+        for (Integer i : selection) {
+            DBNote note = (DBNote) adapter.getItem(i);
+            db.moveNoteToAnotherAccount(note.getAccountId(),db.getNote(note.getAccountId(), note.getId()), account.getId());
+        }
+
+        mActionMode.finish(); // Act// ion picked, so close the CAB
+        //after delete selection has to be cleared
+        searchView.setIconified(true);
+        refreshLists();
     }
 }

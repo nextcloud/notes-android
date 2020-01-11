@@ -27,11 +27,11 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @NonNull
     private List<LocalAccount> localAccounts;
     @NonNull
-    private AccountChooserDialogFragment.AccountChooserListener accountChooserListener;
+    private AccountChooserListener accountChooserListener;
     @NonNull
     private Context context;
 
-    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull AccountChooserDialogFragment.AccountChooserListener accountChooserListener, @NonNull Context context) {
+    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull AccountChooserListener accountChooserListener, @NonNull Context context) {
         super();
         this.localAccounts = localAccounts;
         this.accountChooserListener = accountChooserListener;
@@ -82,4 +82,7 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
+    public interface AccountChooserListener {
+        void onAccountChosen(LocalAccount account);
+    }
 }
