@@ -16,16 +16,18 @@ import java.util.Calendar;
 import java.util.Objects;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.fragment.AccountChooserDialogFragment;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
 import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
-public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener {
+public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener, AccountChooserDialogFragment.AccountChooserListener {
 
     private static final String TAG = EditNoteActivity.class.getSimpleName();
 
@@ -226,5 +228,10 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
             startActivity(new Intent(this, NotesListViewActivity.class));
             finish();
         }
+    }
+
+    @Override
+    public void onAccountChosen(LocalAccount account) {
+        fragment.moveNote(account);
     }
 }

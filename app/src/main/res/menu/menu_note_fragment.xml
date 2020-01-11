@@ -30,15 +30,21 @@
         app:showAsAction="never"
         app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider" />
     <item
+        android:id="@+id/menu_move"
+        android:icon="@drawable/ic_send_white_24dp"
+        android:orderInCategory="120"
+        android:title="@string/simple_move"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menu_cancel"
         android:icon="@drawable/ic_clear_white_24dp"
-        android:orderInCategory="120"
-        android:title="@string/simple_cancel"
+        android:orderInCategory="130"
+        android:title="@android:string/cancel"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_delete"
         android:icon="@drawable/ic_delete_white_24dp"
-        android:orderInCategory="130"
+        android:orderInCategory="140"
         android:title="@string/menu_delete"
         app:showAsAction="never" />
 

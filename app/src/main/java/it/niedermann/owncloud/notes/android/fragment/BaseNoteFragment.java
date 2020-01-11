@@ -96,13 +96,13 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 long id = getArguments().getLong(PARAM_NOTE_ID);
                 if (id > 0) {
                     long accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
-                    if(accountId > 0) {
+                    if (accountId > 0) {
                         /* Switch account if account id has been provided */
                         this.localAccount = db.getAccount(accountId);
                         SingleAccountHelper.setCurrentAccount(getActivity().getApplicationContext(), localAccount.getAccountName());
                         try {
                             db.getNoteServerSyncHelper().updateAccount();
-                        } catch(NextcloudFilesAppAccountNotFoundException e) {
+                        } catch (NextcloudFilesAppAccountNotFoundException e) {
                             e.printStackTrace();
                         }
                     }
@@ -271,6 +271,9 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             case R.id.menu_category:
                 showCategorySelector();
                 return true;
+            case R.id.menu_move:
+                AccountChooserDialogFragment.newInstance().show(getFragmentManager(), BaseNoteFragment.class.getCanonicalName());
+                return true;
             case R.id.menu_share:
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
@@ -332,7 +335,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
      */
     protected void saveNote(@Nullable ICallback callback) {
         Log.d(TAG, "saveData()");
-        if(note != null) {
+        if (note != null) {
             String newContent = getContent();
             if (note.getContent().equals(newContent)) {
                 Log.v(TAG, "... not saving, since nothing has changed");
@@ -386,6 +389,11 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public void onCategoryChosen(String category) {
         db.setCategory(note, category, null);
         listener.onNoteUpdated(note);
+    }
+
+    public void moveNote(LocalAccount account) {
+        db.moveNoteToAnotherAccount(note.getAccountId(), note, account.getId());
+        listener.close();
     }
 
     public interface NoteFragmentListener {

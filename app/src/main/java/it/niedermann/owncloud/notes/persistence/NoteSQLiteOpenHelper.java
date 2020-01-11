@@ -340,6 +340,15 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         return db.insert(table_notes, null, values);
     }
 
+    public void moveNoteToAnotherAccount(long oldAccountId, DBNote note, long newAccountId) {
+        // Add new note
+        addNoteAndSync(newAccountId, new CloudNote(0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), null));
+        deleteNoteAndSync(note.getId());
+
+        notifyNotesChanged();
+        getNoteServerSyncHelper().scheduleSync(true);
+    }
+
     /**
      * Get a single Note by ID
      *
