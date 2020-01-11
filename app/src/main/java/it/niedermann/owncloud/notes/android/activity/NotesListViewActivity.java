@@ -148,7 +148,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private ICallback syncCallBack = new ICallback() {
         @Override
         public void onFinish() {
-            adapter.clearSelection();
+            adapter.clearSelection(listView);
             if (mActionMode != null) {
                 mActionMode.finish();
             }
@@ -973,14 +973,13 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     AccountChooserDialogFragment.newInstance().show(getFragmentManager(), NotesListViewActivity.class.getCanonicalName());
                     return true;
                 }
-                default:
-                    return false;
             }
+            return false;
         }
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            adapter.clearSelection();
+            adapter.clearSelection(listView);
             mActionMode = null;
             adapter.notifyDataSetChanged();
         }
@@ -988,14 +987,21 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     @Override
     public void onAccountChosen(LocalAccount account) {
-        List<Integer> selection = adapter.getSelected();
+        List<Integer> selection = new ArrayList<>(adapter.getSelected());
+
+        adapter.deselect(0);
         for (Integer i : selection) {
             DBNote note = (DBNote) adapter.getItem(i);
             db.moveNoteToAnotherAccount(note.getAccountId(),db.getNote(note.getAccountId(), note.getId()), account.getId());
+            RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
+            if(viewHolder != null) {
+                viewHolder.itemView.setSelected(false);
+            } else {
+                Log.w(TAG, "Could not found viewholder to remove selection");
+            }
         }
 
-        mActionMode.finish(); // Act// ion picked, so close the CAB
-        //after delete selection has to be cleared
+        mActionMode.finish();
         searchView.setIconified(true);
         refreshLists();
     }

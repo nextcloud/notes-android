@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import it.niedermann.owncloud.notes.R;
 import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final String TAG = ItemAdapter.class.getCanonicalName();
 
     private static final int section_type = 0;
     private static final int note_type = 1;
@@ -105,7 +108,15 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return !selected.contains(position) && selected.add(position);
     }
 
-    public void clearSelection() {
+    public void clearSelection(RecyclerView recyclerView) {
+        for (Integer i : getSelected()) {
+            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);
+            if(viewHolder != null) {
+                viewHolder.itemView.setSelected(false);
+            } else {
+                Log.w(TAG, "Could not found viewholder to remove selection");
+            }
+        }
         selected.clear();
     }
 
