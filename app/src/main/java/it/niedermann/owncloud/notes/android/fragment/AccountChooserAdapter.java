@@ -1,16 +1,19 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -25,10 +28,10 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private List<LocalAccount> localAccounts;
     @NonNull
     private AccountChooserDialogFragment.AccountChooserListener accountChooserListener;
-    @Nullable
+    @NonNull
     private Context context;
 
-    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull AccountChooserDialogFragment.AccountChooserListener accountChooserListener, @Nullable Context context) {
+    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull AccountChooserDialogFragment.AccountChooserListener accountChooserListener, @NonNull Context context) {
         super();
         this.localAccounts = localAccounts;
         this.accountChooserListener = accountChooserListener;
@@ -50,15 +53,14 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             accountChooserListener.onAccountChosen(localAccount);
         });
 
-//            if (context != null) {
-//                try {
-////                    ViewUtil.addAvatar(context, acHolder.avatar, SingleAccountHelper.getCurrentSingleSignOnAccount(context).url, ac.getUser().getUid(), R.drawable.ic_person_grey600_24dp);
-//                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
+        Glide
+                .with(context)
+                .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
+                .error(R.drawable.ic_account_circle_grey_24dp)
+                .apply(RequestOptions.circleCropTransform())
+                .into(accountChooserViewHolder.avatar);
 
-        accountChooserViewHolder.username.setText(localAccount.getUserName() + localAccount.getUrl());
+        accountChooserViewHolder.username.setText(localAccount.getAccountName());
     }
 
     @Override
@@ -68,7 +70,7 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     static class AccountChooserViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.accountLayout)
-        RelativeLayout accountLayout;
+        LinearLayout accountLayout;
         @BindView(R.id.accountItemAvatar)
         ImageView avatar;
         @BindView(R.id.accountItemLabel)
