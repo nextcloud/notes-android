@@ -1,0 +1,4 @@
+- #659 Display better hint when files app version is not supported
+
+Requires at least Files app¹ version 3.9.0
+¹ https://github.com/nextcloud/android
