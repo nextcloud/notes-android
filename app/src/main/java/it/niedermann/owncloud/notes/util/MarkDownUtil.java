@@ -36,9 +36,9 @@ public class MarkDownUtil {
                 .setHeader6RelativeSize(1.05f)
                 .setHorizontalRulesHeight(2)
                 .setTodoColor(ResourcesCompat.getColor(context.getResources(),
-                        Notes.getAppTheme(context) ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
+                        darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
                 .setTodoDoneColor(ResourcesCompat.getColor(context.getResources(),
-                        Notes.getAppTheme(context) ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
+                        darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
                 .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null));
     }
 }
