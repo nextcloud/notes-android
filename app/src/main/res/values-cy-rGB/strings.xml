@@ -93,6 +93,8 @@
     <string name="simple_copy">Copïo</string>
     <string name="category_work">Gwaith</string>
     <string name="no_notes_yet">Dim nodiadau eto</string>
+    <string name="simple_more">Rhagor</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Agor yn y modd golygu</item>

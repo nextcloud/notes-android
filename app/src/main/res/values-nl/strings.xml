@@ -53,7 +53,7 @@
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_json">is de Notities app op de server geactiveerd?</string>
     <string name="error_no_network">geen netwerkverbinding</string>
-    <string name="error_files_app">hen je de Bestanden app geïnstalleerd?</string>
+    <string name="error_files_app">heb je de Bestanden app geïnstalleerd?</string>
     <string name="error_unknown">Er trad een onbekende fout op.</string>
 
     <!-- About -->
@@ -109,7 +109,12 @@
     <string name="category_movies">Films</string>
     <string name="category_movie">Film</string>
     <string name="category_work">Werk</string>
+    <string name="account_already_imported">Account is al geïmporteerd</string>
     <string name="no_notes_yet">Nog geen notities</string>
+    <string name="no_notes_yet_description">druk op de + knop om een nieuwe notitie te maken</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Kon geen voorbeeld laden. Controleer of er een lege genummerde lijst is met twee cijfers is.</string>
+    <string name="simple_more">meer</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wijzigen modus</item>
