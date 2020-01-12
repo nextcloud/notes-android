@@ -4,8 +4,8 @@ import android.content.Context;
 
 import androidx.core.content.res.ResourcesCompat;
 
-import com.yydcdut.rxmarkdown.RxMDConfiguration;
-import com.yydcdut.rxmarkdown.RxMDConfiguration.Builder;
+import com.yydcdut.markdown.MarkdownConfiguration;
+import com.yydcdut.markdown.MarkdownConfiguration.Builder;
 
 import it.niedermann.owncloud.notes.R;
 
@@ -26,7 +26,7 @@ public class MarkDownUtil {
     }
 
     public static Builder getMarkDownConfiguration(Context context, Boolean darkTheme) {
-        return new RxMDConfiguration.Builder(context)
+        return new MarkdownConfiguration.Builder(context)
                 .setUnOrderListColor(ResourcesCompat.getColor(context.getResources(),
                         darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
                 .setHeader2RelativeSize(1.35f)

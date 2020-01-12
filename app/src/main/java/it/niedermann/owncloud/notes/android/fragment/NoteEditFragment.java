@@ -17,13 +17,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.yydcdut.markdown.MarkdownEditText;
+import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.edit.EditFactory;
-import com.yydcdut.rxmarkdown.RxMDEditText;
-import com.yydcdut.rxmarkdown.RxMarkdown;
 
 import java.util.Objects;
 
@@ -34,7 +33,6 @@ import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.StyleCallback;
-import rx.Subscriber;
 
 public class NoteEditFragment extends BaseNoteFragment {
 
@@ -43,7 +41,7 @@ public class NoteEditFragment extends BaseNoteFragment {
     private static final long DELAY = 2000; // Wait for this time after typing before saving
     private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
     @BindView(R.id.editContent)
-    RxMDEditText editContent;
+    MarkdownEditText editContent;
     private Handler handler;
     private boolean saveActive, unsavedEdit;
     private final Runnable runAutoSave = new Runnable() {
@@ -138,26 +136,10 @@ public class NoteEditFragment extends BaseNoteFragment {
             editContent.setText(note.getContent());
             editContent.setEnabled(true);
 
-            RxMarkdown.live(editContent)
-                    .config(MarkDownUtil.getMarkDownConfiguration(editContent.getContext()).build())
-                    .factory(EditFactory.create())
-                    .intoObservable()
-                    .subscribe(new Subscriber<CharSequence>() {
-                        @Override
-                        public void onCompleted() {
-                            // Nothing to do here
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            e.printStackTrace();
-                        }
-
-                        @Override
-                        public void onNext(CharSequence charSequence) {
-                            editContent.setText(charSequence, TextView.BufferType.SPANNABLE);
-                        }
-                    });
+            MarkdownProcessor markdownProcessor = new MarkdownProcessor(getActivity());
+            markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(editContent.getContext()).build());
+            markdownProcessor.factory(EditFactory.create());
+            markdownProcessor.live(editContent);
 
             editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
