@@ -17,8 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.yydcdut.markdown.MarkdownProcessor;
+import com.yydcdut.markdown.MarkdownTextView;
 import com.yydcdut.markdown.syntax.text.TextFactory;
-import com.yydcdut.rxmarkdown.RxMDTextView;
 
 import java.util.Objects;
 
@@ -44,7 +44,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
     SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.single_note_content)
-    RxMDTextView noteContent;
+    MarkdownTextView noteContent;
 
     public static NotePreviewFragment newInstance(long accountId, long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
@@ -72,7 +72,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
-        markdownProcessor = new MarkdownProcessor(getActivity());
+        markdownProcessor = new MarkdownProcessor(getContext());
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
                 MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
@@ -120,6 +120,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
         setActiveTextView(noteContent);
         try {
             noteContent.setText(markdownProcessor.parse(note.getContent()));
+            onResume();
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
             noteContent.setText(note.getContent());

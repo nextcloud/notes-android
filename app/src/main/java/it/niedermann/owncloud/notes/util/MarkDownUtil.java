@@ -39,6 +39,9 @@ public class MarkDownUtil {
                         darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
                 .setTodoDoneColor(ResourcesCompat.getColor(context.getResources(),
                         darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
-                .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null));
+                .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null))
+                .setRxMDImageLoader(new NotesImageLoader(context))
+                .setDefaultImageSize(400, 300);
     }
 }
+
