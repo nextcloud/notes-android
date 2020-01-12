@@ -111,6 +111,9 @@
     <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
     <string name="no_notes_yet">Henüz bir not yok</string>
     <string name="no_notes_yet_description">Yeni bir not eklemek için + tuşuna basın</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Ön izleme yüklenemedi. Lütfen içeriği olmayan iki haneli rakamdan oluşan bir liste ögesi bulunduğundan emin olun.</string>
+    <string name="simple_more">Daha Fazla</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>

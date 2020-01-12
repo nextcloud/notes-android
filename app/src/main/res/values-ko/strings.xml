@@ -85,6 +85,8 @@
     <string name="category_movies">영화</string>
     <string name="category_work">직장</string>
     <string name="no_notes_yet">아직 메모 없음</string>
+    <string name="simple_more">더 보기</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>편집 모드로 열기</item>

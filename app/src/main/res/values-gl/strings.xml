@@ -111,6 +111,9 @@
     <string name="account_already_imported">A conta xa foi importada</string>
     <string name="no_notes_yet">Aínda non hai notas</string>
     <string name="no_notes_yet_description">Prema o botón + para crear unha nota nova</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Non foi posíbel cargar a vista previa. Verifique se hai un elemento da lista numerada de dous díxitos sen contido.</string>
+    <string name="simple_more">Máis</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>

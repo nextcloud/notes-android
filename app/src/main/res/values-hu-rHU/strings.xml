@@ -103,6 +103,8 @@
     <string name="category_movies">Filmek</string>
     <string name="category_work">Munkahelyi</string>
     <string name="no_notes_yet">Még nincsenek jegyzetek</string>
+    <string name="simple_more">Több</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>

@@ -111,6 +111,9 @@
     <string name="account_already_imported">Kontot har redan importerats</string>
     <string name="no_notes_yet">Inga anteckningar än</string>
     <string name="no_notes_yet_description">Tryck på + knappen för att skapa en ny anteckning</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Det gick inte att ladda förhandsgranskning. Kontrollera om det finns ett tvåsiffrigt listobjekt utan innehåll.</string>
+    <string name="simple_more">Mer</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>

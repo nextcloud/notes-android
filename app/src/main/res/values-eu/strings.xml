@@ -111,6 +111,8 @@
     <string name="account_already_imported">Kontua dagoeneko inportatu da</string>
     <string name="no_notes_yet">Ez dago oharrik</string>
     <string name="no_notes_yet_description">Sakatu + botoia ohar berria sortzeko</string>
+    <string name="simple_more">Gehiago</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>

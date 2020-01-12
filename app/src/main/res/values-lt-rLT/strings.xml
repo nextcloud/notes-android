@@ -111,6 +111,9 @@
     <string name="account_already_imported">Paskyra jau buvo importuota</string>
     <string name="no_notes_yet">Nėra užrašų</string>
     <string name="no_notes_yet_description">Norėdami sukurti užrašus, paspauskite mygtuką +</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Nepavyko įkelti peržiūros. Patikrinkite ar yra dviejų skaitmenų sąrašo su numeriais elementas be jokio turinio.</string>
+    <string name="simple_more">Daugiau</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>

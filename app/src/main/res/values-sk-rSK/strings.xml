@@ -111,6 +111,8 @@
     <string name="account_already_imported">Účet už bol importovaný</string>
     <string name="no_notes_yet">Zatiaľ nie sú žiadne poznámky</string>
     <string name="no_notes_yet_description">Ťuknutím na tlačidlo + vytvoríte novú poznámku</string>
+    <string name="simple_more">Viac</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
