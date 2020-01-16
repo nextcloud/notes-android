@@ -113,6 +113,7 @@
     <string name="no_notes_yet_description">Drücke den \"+\"-Knopf um eine neue Notiz zu erstellen</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Die Vorschau konnte nicht geladen werden. Bitte prüfen Sie, ob ein zweistellig numerierter Listeneintrag ohne Inhalt vorhanden ist.</string>
     <string name="simple_more">mehr</string>
+    <string name="error_files_app_version_too_old">Ist Ihre Datei-App aktuell?</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

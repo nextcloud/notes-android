@@ -93,7 +93,6 @@
     <string name="category_work">Punë</string>
     <string name="no_notes_yet">Nuk ka shënime</string>
     <string name="simple_more">More</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Hapur në modalitetin e redaktimit</item>

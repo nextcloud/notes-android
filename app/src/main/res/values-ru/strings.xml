@@ -105,7 +105,6 @@
     <string name="category_work">Рабочий</string>
     <string name="no_notes_yet">Заметок пока нет</string>
     <string name="simple_more">Больше</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>

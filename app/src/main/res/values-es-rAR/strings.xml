@@ -104,7 +104,6 @@
     <string name="no_notes_yet_description">Presione el botón + para crear una nueva nota</string>
     <string name="could_not_load_preview_two_digit_numbered_list">No se pudo cargar la vista previa. Compruebe si hay un elemento de lista numerada de dos dígitos sin contenido.</string>
     <string name="simple_more">Más</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo editor</item>

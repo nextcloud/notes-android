@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">یادداشت ها</string>
+    <string name="app_name_long">یادداشت های نکست کلود</string>
+    <string name="label_all_notes">همه یادداشت ها</string>
+    <string name="label_favorites">Favorites</string>
+    <string name="action_create">یادداشت جدید</string>
+    <string name="action_settings">تنظیمات</string>
+    <string name="action_trashbin">یادداشتهای حذف شده</string>
+    <string name="action_search">جستجو</string>
+    <string name="simple_cancel">لغو</string>
+    <string name="simple_edit">ویرایش</string>
+    <string name="action_edit_save">ذخیره</string>
+    <string name="simple_about">درباره</string>
+    <string name="simple_bold">درشت</string>
+    <string name="simple_link">Link</string>
+    <string name="simple_italic">Italic</string>
+    <string name="action_undo">برگرداندن</string>
+    <string name="menu_delete">حذف</string>
+    <string name="menu_change_category">دسته‌بندی</string>
+    <string name="menu_favorite">برگزیده</string>
+    <string name="menu_preview">پیش نمایش</string>
+    <string name="menu_share">هم‌رسانی</string>
+
+    <string name="listview_updated_today">Today</string>
+    <string name="listview_updated_yesterday">دیروز</string>
+    <string name="listview_updated_last_month">ماه گذشته</string>
+
+    <!-- Settings -->
+    <string name="settings_note_mode">حالت نمایش یادداشت ها</string>
+    <string name="settings_theme_title">تم تاریک</string>
+    <string name="settings_font_title">فونت Monospace</string>
+    <string name="settings_font_size">اندازهٔ قلم</string>
+    <string name="settings_wifi_only">همگام سازی فقط در Wi-Fi</string>
+
+    <string name="error_json">آیا برنامه یادداشت ها روی سرور فعال می شود؟</string>
+    <string name="error_no_network">بدون اتصال به شبکه</string>
+    <string name="error_files_app">آیا برنامه فایل ها را نصب کرده اید؟</string>
+    <string name="error_unknown">خطایی ناشناخته اتفاق افتاده است</string>
+
+    <!-- About -->
+    <string name="about_version_title">نسخه</string>
+    <string name="about_maintainer_title">نگهدار</string>
+    <string name="about_developers_title">Developers</string>
+    <string name="about_translators_title">مترجم</string>
+    <string name="about_testers_title">آزمایش کنندگان</string>
+    <string name="about_source_title">کد منبع</string>
+    <string name="about_issues_title">مسائل</string>
+    <string name="about_translate_title">Translate</string>
+    <string name="about_app_license_title">مجوز برنامه</string>
+    <string name="about_app_license">این برنامه تحت مجوز GNU GENERAL PUBLIC LICENSE v3 + مجاز است.</string>
+    <string name="about_app_license_button">مشاهده مجوز</string>
+    <string name="about_icons_disclaimer_title">آیکون ها</string>
+    <string name="about_credits_tab_title">اعتبارات</string>
+    <string name="about_contribution_tab_title">مشارکت</string>
+    <string name="about_license_tab_title">License</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">لیست یادداشت</string>
+    <string name="widget_note_list_placeholder">بدون یادداشت</string>
+    <string name="widget_single_note_title">یادداشت واحد</string>
+    <string name="widget_single_note_placeholder_tv">یادداشت یافت نشد</string>
+    <string name="widget_create_note">ساختن یادداشت</string>
+    <string name="widget_not_logged_in">لطفاً قبل از استفاده از این ویجت به یادداشت ها وارد شوید</string>
+    <string name="widget_entry_fav_contentDescription">از نماد ستاره برای مشخص کردن یک مورد به عنوان مورد علاقه استفاده می شود</string>
+    <string name="widget_app_launcher_contentDescription">برنامه راه اندازی می شود</string>
+
+    <string name="activity_select_single_note">انتخاب یادداشت</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">ساختن یادداشت جدید</string>
+
+    <string name="pref_value_theme_light">روشن</string>
+    <string name="pref_value_font_normal">معمولی</string>
+    <string name="pref_value_wifi_and_mobile">همگام سازی داده های Wi-Fi و تلفن همراه</string>
+    <string name="simple_error">خطا</string>
+    <string name="simple_close">بستن</string>
+    <string name="simple_copy">کپی کردن</string>
+    <string name="simple_exception">استثنا</string>
+    <string name="copied_to_clipboard">در حافظه رونویسی شد</string>
+    <string name="pin_to_homescreen">پین به صفحه اصلی</string>
+    <string name="note_has_been_deleted">این یادداشت حذف شده است</string>
+    <string name="add_account">ایحاد حساب کاربری</string>
+    <string name="category_music">موسیقی</string>
+    <string name="category_movies">فیلم ها</string>
+    <string name="category_movie">فیلم</string>
+    <string name="category_work">کار</string>
+    <string name="account_already_imported">حساب قبلاً وارد شده است</string>
+    <string name="no_notes_yet">هنوز هیچ یادداشتی وجود ندارد</string>
+    <string name="no_notes_yet_description">دکمه + را فشار دهید تا یک یادداشت جدید ایجاد کنید</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">پیش نمایش بارگیری نشد. لطفاً بررسی کنید که آیا یک مورد لیست شماره ای دو رقمی بدون محتوا وجود دارد یا خیر.</string>
+    <string name="simple_more">بیش‌تر</string>
+    <string name="error_files_app_version_too_old">نسخه برنامه فایلهای شما به روز است؟</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>در حالت ویرایش باز کنید</item>
+        <item>در حالت پیش نمایش باز کنید</item>
+        <item>آخرین انتخاب من را به خاطر بسپار</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>کوچک</item>
+        <item>متوسط</item>
+        <item>بزرگ</item>
+    </string-array>
+
+    </resources>

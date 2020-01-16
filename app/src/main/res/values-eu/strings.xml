@@ -111,7 +111,9 @@
     <string name="account_already_imported">Kontua dagoeneko inportatu da</string>
     <string name="no_notes_yet">Ez dago oharrik</string>
     <string name="no_notes_yet_description">Sakatu + botoia ohar berria sortzeko</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Ezin izan da aurrebista kargatu. Egiaztatu bi digitu dituen edukirik gabeko elementuren bat dagoen zerrendan</string>
     <string name="simple_more">Gehiago</string>
+    <string name="error_files_app_version_too_old">Zure files aplikazioaren bertsioa egunean dago?</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

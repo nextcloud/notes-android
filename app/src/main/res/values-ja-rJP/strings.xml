@@ -112,7 +112,6 @@
     <string name="no_notes_yet">まだノートはありません</string>
     <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
     <string name="simple_more">さらに表示</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>
