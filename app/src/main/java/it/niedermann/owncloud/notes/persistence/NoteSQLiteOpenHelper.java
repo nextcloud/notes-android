@@ -28,8 +28,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
@@ -320,6 +322,32 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         List<DBNote> notes = getNotesCustom(accountId, key_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null);
         return notes.isEmpty() ? null : notes.get(0);
     }
+
+    /**
+     * Gets all the remoteIds of all not deleted notes of an account
+     *
+     * @param accountId get the remoteIds from all notes of this account
+     * @return set of remoteIds from all notes
+     */
+    public Set<String> getRemoteIds(long accountId) {
+        Cursor cursor = getReadableDatabase()
+                .query(
+                        table_notes,
+                        new String[]{ key_remote_id },
+                        key_status + " != ? AND " + key_account_id + " = ?",
+                        new String[]{ DBStatus.LOCAL_DELETED.getTitle(), "" + accountId },
+                        null,
+                        null,
+                        null
+                );
+        Set<String> remoteIds = new HashSet<>();
+        while (cursor.moveToNext()) {
+            remoteIds.add(cursor.getString(0));
+        }
+        cursor.close();
+        return remoteIds;
+    }
+
     /**
      * Get a single Note by remote Id (aka. nextcloud file id)
      *

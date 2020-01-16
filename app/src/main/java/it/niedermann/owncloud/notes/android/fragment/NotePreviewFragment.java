@@ -21,10 +21,7 @@ import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMDTextView;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,7 +71,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
         setActiveTextView(noteContent);
 
         String content = note.getContent();
-        content = NoteLinksUtils.replaceNoteLinksWithDummyUrls(content, getExistingNoteRemoteIds());
+        content = NoteLinksUtils.replaceNoteLinksWithDummyUrls(content, db.getRemoteIds(note.getAccountId()));
 
         RxMarkdown.with(content, getActivity())
                 .config(
@@ -134,15 +131,6 @@ public class NotePreviewFragment extends BaseNoteFragment {
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             noteContent.setTypeface(Typeface.MONOSPACE);
         }
-    }
-
-    private Set<String> getExistingNoteRemoteIds() {
-        List<DBNote> notes = db.getNotes(note.getAccountId());
-        Set<String> noteRemoteIds = new HashSet<>();
-        for (DBNote note : notes) {
-            noteRemoteIds.add(String.valueOf(note.getRemoteId()));
-        }
-        return noteRemoteIds;
     }
 
     @Override
