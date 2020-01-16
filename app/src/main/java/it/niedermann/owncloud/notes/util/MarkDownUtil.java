@@ -6,6 +6,8 @@ import androidx.core.content.res.ResourcesCompat;
 
 import com.yydcdut.markdown.MarkdownConfiguration;
 import com.yydcdut.markdown.MarkdownConfiguration.Builder;
+import com.yydcdut.markdown.theme.ThemeDefault;
+import com.yydcdut.markdown.theme.ThemeSonsOfObsidian;
 
 import it.niedermann.owncloud.notes.R;
 
@@ -35,6 +37,7 @@ public class MarkDownUtil {
                 .setHeader5RelativeSize(1.1f)
                 .setHeader6RelativeSize(1.05f)
                 .setHorizontalRulesHeight(2)
+                .setTheme(darkTheme ? new ThemeSonsOfObsidian() : new ThemeDefault())
                 .setTodoColor(ResourcesCompat.getColor(context.getResources(),
                         darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
                 .setTodoDoneColor(ResourcesCompat.getColor(context.getResources(),
