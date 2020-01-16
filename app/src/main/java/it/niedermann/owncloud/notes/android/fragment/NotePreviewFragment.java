@@ -31,7 +31,6 @@ import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 import rx.Subscriber;
@@ -44,8 +43,6 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
     @BindView(R.id.single_note_content)
     RxMDTextView noteContent;
-
-    private NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
 
     public static NotePreviewFragment newInstance(long accountId, long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();

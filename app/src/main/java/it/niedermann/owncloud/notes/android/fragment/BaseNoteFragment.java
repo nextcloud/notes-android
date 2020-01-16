@@ -71,7 +71,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     protected DBNote note;
     @Nullable
     private DBNote originalNote;
-    private NoteSQLiteOpenHelper db;
+    protected NoteSQLiteOpenHelper db;
     private NoteFragmentListener listener;
 
     private TextView activeTextView;
