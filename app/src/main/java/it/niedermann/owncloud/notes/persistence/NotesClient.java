@@ -37,7 +37,7 @@ public class NotesClient {
 
     private static final String TAG = NotesClient.class.getSimpleName();
 
-    private final Context context;
+    private final Context appContext;
     private NextcloudAPI mNextcloudAPI;
 
     /**
@@ -91,8 +91,8 @@ public class NotesClient {
     public static final String JSON_ETAG = "etag";
     public static final String JSON_MODIFIED = "modified";
 
-    NotesClient(Context context) {
-        this.context = context;
+    NotesClient(Context appContext) {
+        this.appContext = appContext;
         updateAccount();
     }
 
@@ -101,9 +101,9 @@ public class NotesClient {
             mNextcloudAPI.stop();
         }
         try {
-            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(appContext);
             Log.v(TAG, "NextcloudRequest account: " + ssoAccount.name);
-            mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
+            mNextcloudAPI = new NextcloudAPI(appContext, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
                 @Override
                 public void onConnected() {
                     Log.v(TAG, "SSO API connected");
@@ -215,7 +215,7 @@ public class NotesClient {
             return new ResponseData(result.toString(), etag, lastModified);
         } catch (NullPointerException e) {
             int MIN_NEXTCLOUD_FILES_APP_VERSION_CODE = 30090000;
-            PackageInfo pInfo = context.getPackageManager().getPackageInfo("com.nextcloud.client", 0);
+            PackageInfo pInfo = appContext.getPackageManager().getPackageInfo("com.nextcloud.client", 0);
             if (pInfo.versionCode < MIN_NEXTCLOUD_FILES_APP_VERSION_CODE) {
                 throw new NextcloudFilesAppNotSupportedException();
             } else {

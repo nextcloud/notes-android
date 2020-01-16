@@ -136,7 +136,7 @@ public class NoteServerSyncHelper {
             this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context.getApplicationContext()).name);
             if (notesClient == null) {
                 if (this.localAccount != null) {
-                    notesClient = new NotesClient(context);
+                    notesClient = new NotesClient(context.getApplicationContext());
                 }
             } else {
                 notesClient.updateAccount();
