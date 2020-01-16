@@ -24,6 +24,7 @@ Steps to reproduce the behavior:
 <!-- If applicable, add screenshots to help explain your problem. -->
 
 **Server**
+ - Nextcloud Notes-Version (android app): 
  - Nextcloud-Version: 
  - Nextcloud Notes-Version (server app): 
  - PHP-Version:
