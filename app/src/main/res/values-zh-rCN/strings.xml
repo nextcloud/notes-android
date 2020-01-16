@@ -113,6 +113,7 @@
     <string name="no_notes_yet_description">按 + 按钮创建新笔记</string>
     <string name="could_not_load_preview_two_digit_numbered_list">无法加载预览。 请检查是否有两位数字编号的列表项没有内容。</string>
     <string name="simple_more">更多</string>
+    <string name="error_files_app_version_too_old">您的 文件 应用是最新版本吗？</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

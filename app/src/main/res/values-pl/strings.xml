@@ -113,6 +113,7 @@
     <string name="no_notes_yet_description">Naciśnij przycisk +, aby utworzyć nową notatkę</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Nie można załadować podglądu. Sprawdź, czy istnieje dwucyfrowa pozycja listy bez zawartości.</string>
     <string name="simple_more">Więcej</string>
+    <string name="error_files_app_version_too_old">Czy Twoja wersja aplikacji do plików jest aktualna?</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

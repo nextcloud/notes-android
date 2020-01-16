@@ -110,7 +110,6 @@
     <string name="account_already_imported">Račun je već uvezen</string>
     <string name="no_notes_yet">Još nema bilješki</string>
     <string name="simple_more">Više</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>

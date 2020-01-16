@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Beleške</string>
+    <string name="app_name_long">Nekstklaud Beleške</string>
+    <string name="label_all_notes">Sve beleške</string>
+    <string name="label_favorites">Omiljene</string>
+    <string name="action_create">Nova beleška</string>
+    <string name="action_settings">Postavke</string>
+    <string name="action_trashbin">Obrisane beleške</string>
+    <string name="action_search">Traži</string>
+    <string name="simple_cancel">Poništi</string>
+    <string name="simple_edit">Izmeni</string>
+    <string name="action_edit_save">Sačuvaj</string>
+    <string name="simple_about">O programu</string>
+    <string name="simple_bold">Podebljano</string>
+    <string name="simple_link">Veza</string>
+    <string name="simple_italic">Kurziv</string>
+    <string name="action_note_deleted">Beleška obrisana</string>
+    <string name="action_note_restored">Beleška vraćena</string>
+    <string name="action_undo">Opozovi</string>
+    <string name="action_drawer_open">otvori navigaciju</string>
+    <string name="action_drawer_close">zatvori navigaciju</string>
+    <string name="action_uncategorized">Nekategorizovano</string>
+    <string name="menu_delete">Obriši</string>
+    <string name="menu_change_category">Kategorija</string>
+    <string name="menu_favorite">Omiljene</string>
+    <string name="menu_preview">Pregled</string>
+    <string name="menu_share">Podeli</string>
+
+    <string name="change_category_title">Odaberite kategoriju</string>
+
+    <string name="listview_updated_today">Danas</string>
+    <string name="listview_updated_yesterday">Juče</string>
+    <string name="listview_updated_this_week">Ove sedmice</string>
+    <string name="listview_updated_last_week">Prošle nedelje</string>
+    <string name="listview_updated_this_month">Ovog meseca</string>
+    <string name="listview_updated_last_month">Prošlog meseca</string>
+
+    <!-- Settings -->
+    <string name="settings_note_mode">Režim prikaza beleški</string>
+    <string name="settings_theme_title">Tamna tema</string>
+    <string name="settings_font_title">Font fiksne širine</string>
+    <string name="settings_font_size">Veličina fonta</string>
+    <string name="settings_wifi_only">Sinhronizuj samo preko bežične veze</string>
+
+    <!-- Certificates -->
+
+    <!-- Network -->
+
+    <!-- Error -->
+    <string name="error_sync">Sinhronizacija nije uspela%1$s</string>
+    <string name="error_json">Da li je aplikacija Beleški aktivirana na serveru?</string>
+    <string name="error_no_network">nema mrežne veze</string>
+    <string name="error_unknown">Desila se nepoznata greška</string>
+
+    <!-- About -->
+    <string name="about_version_title">Verzija</string>
+    <string name="about_version">Trenutno koristite &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Održavaoc</string>
+    <string name="about_developers_title">Programeri</string>
+    <string name="about_translators_title">Prevodioci</string>
+    <string name="about_translators_transifex">Nekstklaud zajednica na &lt;a href=\"%1$s\">Transifeksu&lt;/a></string>
+    <string name="about_testers_title">Testeri</string>
+    <string name="about_source_title">Izvorni kôd</string>
+    <string name="about_source">Ovaj projekat se održava na Githabu: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Problemi</string>
+    <string name="about_issues">Prijave grešaka, predloge i zahteve možete da ostavite na Githabovom pratiocu problema: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Prevedi</string>
+    <string name="about_translate">Pridružite se Nekstklaud timu na Transifeksu i pomozite nam da prevedemo ovu aplikaciju: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Licenca aplikacije</string>
+    <string name="about_app_license">Ova aplikacija je licencirana pod GNUovom opštom javnom licencom v3+.</string>
+    <string name="about_app_license_button">Prikaži licencu</string>
+    <string name="about_icons_disclaimer_title">Ikone</string>
+    <string name="about_icons_disclaimer">&lt;p>Originalne ikone napravio %1$s&lt;/p>&lt;p>Sve ostale ikone korišćene u ovoj aplikaciji su &lt;a href=\"https://materialdesignicons.com/\">Ikone materijal dizajna&lt;/a> napravljene od strane Gugla i licencirane pod Apač 2.0 licencom.&lt;/p></string>
+    <string name="about_credits_tab_title">Zasluge</string>
+    <string name="about_contribution_tab_title">Doprinos</string>
+    <string name="about_license_tab_title">Licenca</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Lista beleški</string>
+    <string name="widget_note_list_placeholder">Nema beleški</string>
+    <string name="widget_single_note_title">Beleška</string>
+    <string name="widget_single_note_placeholder_tv">Beleška nije nađena</string>
+    <string name="widget_create_note">Napravi belešku</string>
+    <string name="widget_not_logged_in">Prijavite se na Beleške pre korišćenja ovog vidžeta</string>
+    <string name="widget_entry_fav_contentDescription">Ikona zvezde se koristi da označi stavku kao omiljenu</string>
+    <string name="widget_app_launcher_contentDescription">Pokreće aplikaciju</string>
+
+    <string name="activity_select_single_note">Odaberi belešku</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Napravi novu belešku</string>
+
+    <string name="pref_value_theme_light">Svetla</string>
+    <string name="pref_value_font_normal">Normalna</string>
+    <string name="pref_value_wifi_and_mobile">Sinhronizuj i na bežičnoj i na mobilnoj vezi</string>
+    <string name="simple_error">Greška</string>
+    <string name="simple_close">Zatvori</string>
+    <string name="simple_copy">Kopiraj</string>
+    <string name="simple_exception">Izuzetak</string>
+    <string name="copied_to_clipboard">Kopirano u ostavu</string>
+    <string name="pin_to_homescreen">Zakači na početni ekran</string>
+    <string name="note_has_been_deleted">Ova beleška je obrisana</string>
+    <string name="add_account">Dodaj nalog</string>
+    <string name="category_music">Muzika</string>
+    <string name="category_movies">Filmovi</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Posao</string>
+    <string name="account_already_imported">Nalog je već uvezen</string>
+    <string name="no_notes_yet">Još nema beleški</string>
+    <string name="no_notes_yet_description">Pritisnite + dugme da napravite novu belešku</string>
+    <string name="simple_more">Još</string>
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Otvori u režimu uređivanja</item>
+        <item>Otvori u režimu pregleda</item>
+        <item>Zapamti moj poslednji izbor</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Mali</item>
+        <item>Srednji</item>
+        <item>Veliki</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d označena</item>
+        <item quantity="few">%d označene</item>
+        <item quantity="other">%d označenih</item>
+    </plurals>
+</resources>

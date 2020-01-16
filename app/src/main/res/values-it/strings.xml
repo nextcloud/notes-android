@@ -113,6 +113,7 @@
     <string name="no_notes_yet_description">Premi il pulsante + per creare una nuova nota</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Impossibile caricare l\'anteprima. Controlla se c\'è un elemento dell\'elenco numerato con due cifre senza contenuto.</string>
     <string name="simple_more">Altro</string>
+    <string name="error_files_app_version_too_old">La tua applicazione File è aggiornata?</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -114,6 +114,7 @@
     <string name="no_notes_yet_description">druk op de + knop om een nieuwe notitie te maken</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Kon geen voorbeeld laden. Controleer of er een lege genummerde lijst is met twee cijfers is.</string>
     <string name="simple_more">meer</string>
+    <string name="error_files_app_version_too_old">Is je Bestanden app versie is up to date?</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
