@@ -69,7 +69,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private NoteFragmentListener listener;
 
     private TextView activeTextView;
-    private boolean isNew;
+    private boolean isNew = true;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -92,7 +92,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext()).name);
 
             if (savedInstanceState == null) {
-                isNew = true;
                 long id = getArguments().getLong(PARAM_NOTE_ID);
                 if (id > 0) {
                     long accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
@@ -106,6 +105,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                             e.printStackTrace();
                         }
                     }
+                    isNew = false;
                     note = originalNote = db.getNote(localAccount.getId(), id);
                 } else {
                     CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
@@ -116,7 +116,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                     originalNote = null;
                 }
             } else {
-                isNew = false;
                 note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
                 originalNote = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
             }
@@ -189,6 +188,8 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         super.onPrepareOptionsMenu(menu);
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
+
+        menu.findItem(R.id.menu_delete).setVisible(!isNew);
 
         searchMenuItem = menu.findItem(R.id.search);
         searchView = (SearchView) searchMenuItem.getActionView();
