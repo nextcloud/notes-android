@@ -62,6 +62,25 @@ public class NoteEditFragment extends BaseNoteFragment {
 
         @Override
         public void onTextChanged(final CharSequence s, int start, int before, int count) {
+            if (count == 1 && s.charAt(start) == '\n') { // 'Enter' was pressed
+                // Find start of line
+                int startOfLine = start;
+                while (startOfLine > 0 && s.charAt(startOfLine - 1) != '\n') {
+                    startOfLine--;
+                }
+                String line = s.subSequence(startOfLine, start).toString();
+
+                if (line.equals("- [ ] ")) {
+                    String newStr = new StringBuilder(s).replace(startOfLine, startOfLine + 7, "\n").toString();
+                    editContent.setText(newStr);
+                    editContent.setSelection(startOfLine + 1);
+                } else if(line.startsWith("- [ ] ") ) {
+                    // Line contains checkbox
+                    String newStr = new StringBuilder(s).insert(start + count, "- [ ] ").toString();
+                    editContent.setText(newStr);
+                    editContent.setSelection(start + 7);
+                }
+            }
         }
 
         @Override
@@ -116,7 +135,7 @@ public class NoteEditFragment extends BaseNoteFragment {
 
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
 
-        if(note != null) {
+        if (note != null) {
             setActiveTextView(editContent);
 
             if (note.getContent().isEmpty()) {
