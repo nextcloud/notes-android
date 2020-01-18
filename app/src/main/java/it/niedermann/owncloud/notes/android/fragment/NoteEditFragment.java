@@ -32,6 +32,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.NotesTextWatcher;
 import it.niedermann.owncloud.notes.util.StyleCallback;
 
 public class NoteEditFragment extends BaseNoteFragment {
@@ -55,43 +56,7 @@ public class NoteEditFragment extends BaseNoteFragment {
             }
         }
     };
-    private final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(final CharSequence s, int start, int before, int count) {
-            if (count == 1 && s.charAt(start) == '\n') { // 'Enter' was pressed
-                // Find start of line
-                int startOfLine = start;
-                while (startOfLine > 0 && s.charAt(startOfLine - 1) != '\n') {
-                    startOfLine--;
-                }
-                String line = s.subSequence(startOfLine, start).toString();
-
-                if (line.equals("- [ ] ")) {
-                    String newStr = new StringBuilder(s).replace(startOfLine, startOfLine + 7, "\n").toString();
-                    editContent.setText(newStr);
-                    editContent.setSelection(startOfLine + 1);
-                } else if(line.startsWith("- [ ] ") ) {
-                    // Line contains checkbox
-                    String newStr = new StringBuilder(s).insert(start + count, "- [ ] ").toString();
-                    editContent.setText(newStr);
-                    editContent.setSelection(start + 7);
-                }
-            }
-        }
-
-        @Override
-        public void afterTextChanged(final Editable s) {
-            unsavedEdit = true;
-            if (!saveActive) {
-                handler.removeCallbacks(runAutoSave);
-                handler.postDelayed(runAutoSave, DELAY);
-            }
-        }
-    };
+    private TextWatcher textWatcher;
 
     public static NoteEditFragment newInstance(long accountId, long noteId) {
         NoteEditFragment f = new NoteEditFragment();
@@ -134,6 +99,17 @@ public class NoteEditFragment extends BaseNoteFragment {
         super.onActivityCreated(savedInstanceState);
 
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
+
+        textWatcher = new NotesTextWatcher(editContent) {
+            @Override
+            public void afterTextChanged(final Editable s) {
+                unsavedEdit = true;
+                if (!saveActive) {
+                    handler.removeCallbacks(runAutoSave);
+                    handler.postDelayed(runAutoSave, DELAY);
+                }
+            }
+        };
 
         if (note != null) {
             setActiveTextView(editContent);
