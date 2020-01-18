@@ -1,8 +1,8 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,11 +35,15 @@ public class AccountChooserDialogFragment extends DialogFragment implements Acco
     public AccountChooserDialogFragment() {
     }
 
+    /*
+     * This is used instead of onAttach(Context context) for supporting < API 23
+     * TODO Switch to androidx for fragments
+     */
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof AccountChooserListener) {
-            this.accountChooserListener = (AccountChooserListener) context;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof AccountChooserListener) {
+            this.accountChooserListener = (AccountChooserListener) activity;
         } else {
             throw new ClassCastException("Caller must implement " + AccountChooserListener.class.getCanonicalName());
         }
