@@ -18,7 +18,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 [<img src="https://f-droid.org/badge/get-it-on.png"
       alt="Get it on F-Droid"
       height="80">](https://f-droid.org/repository/browse/?fdid=it.niedermann.owncloud.notes)
-[<img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/be5ad29a95ff890faee0b46d702b714b0a04aadc/paypal-donate-button.png"
+[<img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png"
       alt="Donate with PayPal"
       height="80">](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K7HVLE6J7SXXA)
 [![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/stefan-niedermann/donate)
