@@ -1,3 +1,4 @@
+- Move notes to another account (#655)
 - Internal Note Links (#646, #623, #202)
 
 Requires at least Files app¹ version 3.9.0
