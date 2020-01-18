@@ -1,7 +1,9 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -25,16 +27,14 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 
 public class NotePreviewFragment extends BaseNoteFragment {
-
-    private static final String TAG = NotePreviewFragment.class.getSimpleName();
-
-    private NoteSQLiteOpenHelper db = null;
 
     private String changedText;
 
@@ -72,7 +72,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
-        markdownProcessor = new MarkdownProcessor(getContext());
+        markdownProcessor = new MarkdownProcessor(getActivity());
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
                 MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
@@ -116,14 +116,27 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                     return line;
                                 }
                         )
+                        .setOnLinkClickCallback((view, link) -> {
+                            if (NoteLinksUtils.isNoteLink(link)) {
+                                long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
+                                long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
+                                Intent intent = new Intent(getActivity().getApplicationContext(), EditNoteActivity.class);
+                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
+                                startActivity(intent);
+                            }
+                            else {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                                startActivity(browserIntent);
+                            }
+                        })
                         .build());
         setActiveTextView(noteContent);
         try {
-            noteContent.setText(markdownProcessor.parse(note.getContent()));
+            noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
             onResume();
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-            noteContent.setText(note.getContent());
+            noteContent.setText(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
             Toast.makeText(noteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
@@ -139,7 +152,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
                     @Override
                     public void onFinish() {
                         note = db.getNote(note.getAccountId(), note.getId());
-                        noteContent.setText(markdownProcessor.parse(note.getContent()));
+                        noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
                         swipeRefreshLayout.setRefreshing(false);
                     }
 

@@ -2,7 +2,7 @@ package it.niedermann.owncloud.notes.model;
 
 import junit.framework.TestCase;
 
-import java.util.Calendar;
+import it.niedermann.owncloud.notes.util.NoteUtil;
 
 /**
  * Tests the Note Model
@@ -11,9 +11,7 @@ import java.util.Calendar;
 public class NoteTest extends TestCase {
 
     public void testMarkDownStrip() {
-        CloudNote note = new CloudNote(0, Calendar.getInstance(), "#Title", "", false, null, null);
-        assertTrue("Title".equals(note.getTitle()));
-        note.setTitle("* Aufzählung");
-        assertTrue("Aufzählung".equals(note.getTitle()));
+        assertEquals("Title", NoteUtil.removeMarkDown("# Title"));
+        assertEquals("Aufzählung", NoteUtil.removeMarkDown("* Aufzählung"));
     }
 }
