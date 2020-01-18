@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '29.0.1'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 71
         versionName "2.4.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
