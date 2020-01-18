@@ -103,6 +103,7 @@
     <string name="category_movie">Kvikmynd</string>
     <string name="category_work">Vinna</string>
     <string name="no_notes_yet">Engir minnispunktar ennþá</string>
+    <string name="simple_more">Meira</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>

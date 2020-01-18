@@ -102,6 +102,7 @@
     <string name="category_movies">סרטים</string>
     <string name="category_work">עבודה</string>
     <string name="no_notes_yet">אין פתקים עדיין</string>
+    <string name="simple_more">עוד</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>

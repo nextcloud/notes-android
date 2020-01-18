@@ -1,0 +1,5 @@
+- Fix IllegalArgumentException when closing the app via back button and reopen it
+- Dark mode colors with markdown (#677)
+
+Requires at least Files app¹ version 3.9.0
+¹ https://github.com/nextcloud/android

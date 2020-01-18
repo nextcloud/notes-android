@@ -111,6 +111,10 @@
     <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
     <string name="no_notes_yet">Δεν υπάρχουν ακόμα σημειώσεις</string>
     <string name="no_notes_yet_description">Πιέστε το κουμπί + για νέα σημείωση</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Δεν ήταν δυνατή η φόρτωση της προεπισκόπησης. Ελέγξτε αν υπάρχει στη λίστα κενό διψήφιο αριθμημένο στοιχείο.</string>
+    <string name="simple_more">Περισσότερα</string>
+    <string name="error_files_app_version_too_old">Είναι ενημερωμένη η εφαρμογή αρχείων?</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Άνοιγμα σε λειτουργία τροποποίησης</item>

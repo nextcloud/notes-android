@@ -2,29 +2,48 @@
 <resources>
 
     <string name="app_name">Notas</string>
+    <string name="app_name_long">Notas de Nextcloud</string>
+    <string name="label_all_notes">Todas la notas</string>
+    <string name="label_favorites">Favoritos</string>
     <string name="action_create">Nueva nota</string>
     <string name="action_settings">Configuraciones</string>
+    <string name="action_trashbin">Notas borradas</string>
+    <string name="action_search">Buscar</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
     <string name="simple_about">Acerca de</string>
-    <string name="action_note_deleted">La nota ha sido borrada</string>
-    <string name="action_note_restored">La nota ha sido restaurada</string>
+    <string name="simple_bold">Negrita</string>
+    <string name="simple_link">Link</string>
+    <string name="simple_italic">Itálico</string>
+    <string name="action_note_deleted">Nota eliminada</string>
+    <string name="action_note_restored">Nota restaurada</string>
     <string name="action_undo">Deshacer</string>
+    <string name="action_drawer_open">abir navegación</string>
+    <string name="action_drawer_close">cerrar navegación</string>
+    <string name="action_uncategorized">Sin categoría</string>
     <string name="menu_delete">Borrar</string>
     <string name="menu_change_category">Categoría</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Vista previa</string>
     <string name="menu_share">Compartir</string>
 
-    <string name="change_category_title">Elige categoría</string>
+    <string name="change_category_title">Elegir categoría</string>
 
     <string name="listview_updated_today">Hoy</string>
     <string name="listview_updated_yesterday">Ayer</string>
     <string name="listview_updated_this_week">Esta semana</string>
+    <string name="listview_updated_last_week">Semana pasada</string>
     <string name="listview_updated_this_month">Este mes</string>
+    <string name="listview_updated_last_month">Mes pasado</string>
 
     <!-- Settings -->
+    <string name="settings_note_mode">Modo de visualización para notas</string>
+    <string name="settings_theme_title">Tema oscuro</string>
+    <string name="settings_font_title">Fuente monoespaciada</string>
+    <string name="settings_font_size">Tamaño de fuente</string>
+    <string name="settings_wifi_only">SIncronizar sólo por Wi-Fi</string>
+
     <!-- Certificates -->
 
     <!-- Network -->
@@ -33,8 +52,7 @@
     <string name="error_sync">Falló la sincronización: %1$s</string>
     <string name="error_json">¿Se encuentra activiada la aplicación de Notes en el servidor?</string>
     <string name="error_no_network">no hay conexión a red</string>
-
-    <!-- Snackbar Actions -->
+    <string name="error_unknown">Se presentó un error desconocido</string>
 
     <!-- About -->
     <string name="about_version_title">Versión</string>
@@ -54,16 +72,51 @@
     <string name="about_app_license">Esta aplicación está licenciada bajo la LICENCIA GENERAL PUBLICA GNU v3+</string>
     <string name="about_app_license_button">Ver licencia</string>
     <string name="about_icons_disclaimer_title">Íconos</string>
-    <string name="about_icons_disclaimer">&lt;p>Ícono original hecho por %1$s&lt;/p>&lt;p>El resto de los íconos usados por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> hechos por Google Inc. y licenciados bajo una Licencia Creative Commons.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Contribución</string>
     <string name="about_license_tab_title">Licencia</string>
 
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_note_list_placeholder">Sin notas</string>
     <string name="widget_single_note_title">Única nota</string>
+    <string name="widget_single_note_placeholder_tv">Nota no encontrada</string>
     <string name="widget_create_note">Crear Nota</string>
+    <string name="activity_select_single_note">Seleccionar nota</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear una nota nueva</string>
+
+    <string name="pref_value_theme_light">Claro</string>
+    <string name="pref_value_font_normal">Normal</string>
+    <string name="simple_error">Error</string>
+    <string name="simple_close">Cerrar</string>
+    <string name="simple_copy">Copiar</string>
+    <string name="simple_exception">Excepción</string>
+    <string name="copied_to_clipboard">Copiado al portapapeles</string>
+    <string name="add_account">Agregar cuenta</string>
+    <string name="category_music">Música</string>
+    <string name="category_movies">Películas</string>
+    <string name="category_movie">Película</string>
+    <string name="category_work">Trabajo</string>
+    <string name="account_already_imported">La cuenta ya ha sido importada</string>
+    <string name="no_notes_yet">Aún no hay notas</string>
+    <string name="no_notes_yet_description">Presione el botón + para crear una nueva nota</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">No se pudo cargar la vista previa. Compruebe si hay un elemento de lista numerada de dos dígitos sin contenido.</string>
+    <string name="simple_more">Más</string>
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Abrir en modo editor</item>
+        <item>Abrir en modo de vista previa</item>
+        <item>Recordar última selección</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Pequeño</item>
+        <item>Medio</item>
+        <item>Grande</item>
+    </string-array>
 
     <!-- Plurals -->
     <plurals name="ab_selected">

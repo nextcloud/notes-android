@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.util.Log;
 
 import androidx.annotation.WorkerThread;
@@ -11,6 +12,7 @@ import com.nextcloud.android.sso.api.AidlNetworkRequest;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.Response;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotSupportedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
@@ -35,7 +37,7 @@ public class NotesClient {
 
     private static final String TAG = NotesClient.class.getSimpleName();
 
-    private final Context context;
+    private final Context appContext;
     private NextcloudAPI mNextcloudAPI;
 
     /**
@@ -89,19 +91,19 @@ public class NotesClient {
     public static final String JSON_ETAG = "etag";
     public static final String JSON_MODIFIED = "modified";
 
-    NotesClient(Context context) {
-        this.context = context;
+    NotesClient(Context appContext) {
+        this.appContext = appContext;
         updateAccount();
     }
-    
+
     void updateAccount() {
-        if(mNextcloudAPI != null) {
+        if (mNextcloudAPI != null) {
             mNextcloudAPI.stop();
         }
         try {
-            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(appContext);
             Log.v(TAG, "NextcloudRequest account: " + ssoAccount.name);
-            mNextcloudAPI = new NextcloudAPI(context, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
+            mNextcloudAPI = new NextcloudAPI(appContext, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
                 @Override
                 public void onConnected() {
                     Log.v(TAG, "SSO API connected");
@@ -158,18 +160,18 @@ public class NotesClient {
     /**
      * Request-Method for POST, PUT with or without JSON-Object-Parameter
      *
-     * @param target Filepath to the wanted function
-     * @param method GET, POST, DELETE or PUT
-     * @param parameter optional headers to be sent
+     * @param target      Filepath to the wanted function
+     * @param method      GET, POST, DELETE or PUT
+     * @param parameter   optional headers to be sent
      * @param requestBody JSON Object which shall be transferred to the server.
-     * @param lastETag optional ETag of last response
+     * @param lastETag    optional ETag of last response
      * @return Body of answer
      */
     private ResponseData requestServer(String target, String method, Map<String, String> parameter, JSONObject requestBody, String lastETag) throws Exception {
         NextcloudRequest.Builder requestBuilder = new NextcloudRequest.Builder()
                 .setMethod(method)
                 .setUrl(API_PATH + target);
-        if(parameter != null) {
+        if (parameter != null) {
             requestBuilder.setParameter(parameter);
         }
 
@@ -188,27 +190,37 @@ public class NotesClient {
         StringBuilder result = new StringBuilder();
 
         Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
-        Response response = mNextcloudAPI.performNetworkRequestV2(nextcloudRequest);
-        Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
-        BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
-        String line;
-        while ((line = rd.readLine()) != null) {
-            result.append(line);
-        }
-        response.getBody().close();
+        try {
+            Response response = mNextcloudAPI.performNetworkRequestV2(nextcloudRequest);
+            Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
+            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
+            String line;
+            while ((line = rd.readLine()) != null) {
+                result.append(line);
+            }
+            response.getBody().close();
 
-        String etag = "";
-        AidlNetworkRequest.PlainHeader eTagHeader = response.getPlainHeader(HEADER_KEY_ETAG);
-        if (eTagHeader != null) {
-            etag = Objects.requireNonNull(eTagHeader.getValue()).replace("\"", "");
-        }
+            String etag = "";
+            AidlNetworkRequest.PlainHeader eTagHeader = response.getPlainHeader(HEADER_KEY_ETAG);
+            if (eTagHeader != null) {
+                etag = Objects.requireNonNull(eTagHeader.getValue()).replace("\"", "");
+            }
 
-        long lastModified = 0;
-        AidlNetworkRequest.PlainHeader lastModifiedHeader = response.getPlainHeader(HEADER_KEY_LAST_MODIFIED);
-        if (lastModifiedHeader != null)
-            lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1000;
-        Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
-        // return these header fields since they should only be saved after successful processing the result!
-        return new ResponseData(result.toString(), etag, lastModified);
+            long lastModified = 0;
+            AidlNetworkRequest.PlainHeader lastModifiedHeader = response.getPlainHeader(HEADER_KEY_LAST_MODIFIED);
+            if (lastModifiedHeader != null)
+                lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1000;
+            Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
+            // return these header fields since they should only be saved after successful processing the result!
+            return new ResponseData(result.toString(), etag, lastModified);
+        } catch (NullPointerException e) {
+            int MIN_NEXTCLOUD_FILES_APP_VERSION_CODE = 30090000;
+            PackageInfo pInfo = appContext.getPackageManager().getPackageInfo("com.nextcloud.client", 0);
+            if (pInfo.versionCode < MIN_NEXTCLOUD_FILES_APP_VERSION_CODE) {
+                throw new NextcloudFilesAppNotSupportedException();
+            } else {
+                throw e;
+            }
+        }
     }
 }

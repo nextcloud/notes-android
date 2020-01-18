@@ -103,6 +103,7 @@
     <string name="category_movies">Film</string>
     <string name="category_work">Arbejde</string>
     <string name="no_notes_yet">Ingen noter endnu</string>
+    <string name="simple_more">Mere</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>

@@ -111,6 +111,10 @@
     <string name="account_already_imported">Ce compte a déjà été importé</string>
     <string name="no_notes_yet">Aucune note pour l\'instant</string>
     <string name="no_notes_yet_description">Créez une nouvelle note avec le bouton +</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Impossible de charger l\'aperçu. Merci de vérifier qu\'il existe un élément de liste numéroté à deux chiffres sans contenu. </string>
+    <string name="simple_more">Plus</string>
+    <string name="error_files_app_version_too_old">Votre application fichiers est-elle à jour?</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ouvrir en mode édition</item>

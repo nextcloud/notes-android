@@ -21,6 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotSupportedException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
@@ -135,7 +136,7 @@ public class NoteServerSyncHelper {
             this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context.getApplicationContext()).name);
             if (notesClient == null) {
                 if (this.localAccount != null) {
-                    notesClient = new NotesClient(context);
+                    notesClient = new NotesClient(context.getApplicationContext());
                 }
             } else {
                 notesClient.updateAccount();
@@ -402,6 +403,9 @@ public class NoteServerSyncHelper {
                     exceptions.add(e);
                     return LoginStatus.JSON_FAILED;
                 }
+            } catch (NextcloudFilesAppNotSupportedException e) {
+                exceptions.add(e);
+                return LoginStatus.FILES_APP_VERSION_TOO_OLD;
             } catch (NextcloudApiNotRespondingException e) {
                 exceptions.add(e);
                 return LoginStatus.PROBLEM_WITH_FILES_APP;

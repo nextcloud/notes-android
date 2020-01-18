@@ -139,6 +139,7 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Could not load preview. Please check whether there is a two-digit numbered list item without content.</string>
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
+    <string name="error_files_app_version_too_old">Is your files app version up to date?</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

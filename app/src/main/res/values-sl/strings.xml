@@ -111,6 +111,10 @@
     <string name="account_already_imported">Račun je že bil uvožen</string>
     <string name="no_notes_yet">Ni še dodane nobene zabeležke</string>
     <string name="no_notes_yet_description">Pritisnite gumb + za novo zabeležko</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Predogleda ni mogoče naložiti. Preverite, ali je morda vpisan  dvoštevilčen predmet seznama brez vsebine.</string>
+    <string name="simple_more">Več</string>
+    <string name="error_files_app_version_too_old">Ali je nameščena zadnja različica programa?</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>

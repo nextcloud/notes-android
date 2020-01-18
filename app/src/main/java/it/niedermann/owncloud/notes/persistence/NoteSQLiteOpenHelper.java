@@ -28,8 +28,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
@@ -361,6 +363,45 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * Gets all the remoteIds of all not deleted notes of an account
+     *
+     * @param accountId get the remoteIds from all notes of this account
+     * @return set of remoteIds from all notes
+     */
+    public Set<String> getRemoteIds(long accountId) {
+        Cursor cursor = getReadableDatabase()
+                .query(
+                        table_notes,
+                        new String[]{ key_remote_id },
+                        key_status + " != ? AND " + key_account_id + " = ?",
+                        new String[]{ DBStatus.LOCAL_DELETED.getTitle(), "" + accountId },
+                        null,
+                        null,
+                        null
+                );
+        Set<String> remoteIds = new HashSet<>();
+        while (cursor.moveToNext()) {
+            remoteIds.add(cursor.getString(0));
+        }
+        cursor.close();
+        return remoteIds;
+    }
+
+    /**
+     * Get a single Note by remote Id (aka. nextcloud file id)
+     *
+     * @param remoteId int - remote ID of the requested Note
+     * @return requested Note
+     */
+    public long getLocalIdByRemoteId(long accountId, long remoteId) {
+        List<DBNote> notes = getNotesCustom(accountId, key_remote_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(remoteId), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, true);
+        if(notes.isEmpty() || notes.get(0) == null) {
+            throw new IllegalArgumentException("There is no note with remoteId \"" + remoteId + "\"");
+        }
+        return notes.get(0).getId();
+    }
+
+    /**
      * Query the database with a custom raw query.
      *
      * @param selection     A filter declaring which rows to return, formatted as an SQL WHERE clause (excluding the WHERE itself).
@@ -394,7 +435,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * Creates a DBNote object from the current row of a Cursor.
      *
      * @param cursor database cursor
-     * @param pruneContent
+     * @param pruneContent whether or not the content should be pruned for performance reasons
      * @return DBNote
      */
     @NonNull
