@@ -602,7 +602,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                         adapter.remove(dbNote);
                         refreshLists();
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
-                        Snackbar.make(swipeRefreshLayout, R.string.action_note_deleted, Snackbar.LENGTH_LONG)
+                        Snackbar.make(swipeRefreshLayout, getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
                                 .setAction(R.string.action_undo, (View v) -> {
                                     db.getNoteServerSyncHelper().addCallbackPush(new ICallback() {
                                         @Override
@@ -617,7 +617,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                                     });
                                     db.addNoteAndSync(dbNote.getAccountId(), dbNote);
                                     refreshLists();
-                                    Snackbar.make(swipeRefreshLayout, R.string.action_note_restored, Snackbar.LENGTH_SHORT)
+                                    Snackbar.make(swipeRefreshLayout, getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                             .show();
                                 })
                                 .show();
@@ -955,17 +955,44 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.menu_delete: {
+                    List<DBNote> deletedNotes = new ArrayList<>();
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
                         DBNote note = (DBNote) adapter.getItem(i);
+                        deletedNotes.add(db.getNote(note.getAccountId(), note.getId()));
                         db.deleteNoteAndSync(note.getId());
-                        // Not needed because of dbsync
-                        //adapter.remove(note);
                     }
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
                     searchView.setIconified(true);
                     refreshLists();
+                    String deletedSnackbarTitle = deletedNotes.size() == 1
+                            ? getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
+                            : getString(R.string.bulk_notes_deleted, deletedNotes.size());
+                    Snackbar.make(swipeRefreshLayout, deletedSnackbarTitle, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.action_undo, (View v) -> {
+                                db.getNoteServerSyncHelper().addCallbackPush(new ICallback() {
+                                    @Override
+                                    public void onFinish() {
+                                        refreshLists();
+                                    }
+
+                                    @Override
+                                    public void onScheduled() {
+
+                                    }
+                                });
+                                for (DBNote deletedNote : deletedNotes) {
+                                    db.addNoteAndSync(deletedNote.getAccountId(), deletedNote);
+                                }
+                                refreshLists();
+                                String restoreSnackbarTitle = deletedNotes.size() == 1
+                                        ? getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
+                                        : getString(R.string.bulk_notes_restored, deletedNotes.size());
+                                Snackbar.make(swipeRefreshLayout, restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
+                                        .show();
+                            })
+                            .show();
                     return true;
                 }
                 case R.id.menu_move: {
@@ -991,9 +1018,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         adapter.deselect(0);
         for (Integer i : selection) {
             DBNote note = (DBNote) adapter.getItem(i);
-            db.moveNoteToAnotherAccount(note.getAccountId(),db.getNote(note.getAccountId(), note.getId()), account.getId());
+            db.moveNoteToAnotherAccount(note.getAccountId(), db.getNote(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
-            if(viewHolder != null) {
+            if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);
             } else {
                 Log.w(TAG, "Could not found viewholder to remove selection");
