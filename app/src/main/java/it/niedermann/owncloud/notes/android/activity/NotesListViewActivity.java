@@ -970,7 +970,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     return true;
                 }
                 case R.id.menu_move: {
-                    AccountChooserDialogFragment.newInstance().show(getFragmentManager(), NotesListViewActivity.class.getCanonicalName());
+                    AccountChooserDialogFragment.newInstance().show(getSupportFragmentManager(), NotesListViewActivity.class.getCanonicalName());
                     return true;
                 }
             }

@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.android.activity;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -49,7 +49,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         if (savedInstanceState == null) {
             launchNoteFragment();
         } else {
-            fragment = (BaseNoteFragment) getFragmentManager().findFragmentById(android.R.id.content);
+            fragment = (BaseNoteFragment) getSupportFragmentManager().findFragmentById(android.R.id.content);
         }
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -63,7 +63,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         Log.d(TAG, "onNewIntent: " + intent.getLongExtra(PARAM_NOTE_ID, 0));
         setIntent(intent);
         if (fragment != null) {
-            getFragmentManager().beginTransaction().detach(fragment).commit();
+            getSupportFragmentManager().beginTransaction().detach(fragment).commit();
             fragment = null;
         }
         launchNoteFragment();
@@ -125,7 +125,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         // save state of the fragment in order to resume with the same note and originalNote
         Fragment.SavedState savedState = null;
         if (fragment != null) {
-            savedState = getFragmentManager().saveFragmentInstanceState(fragment);
+            savedState = getSupportFragmentManager().saveFragmentInstanceState(fragment);
         }
         if (edit) {
             fragment = NoteEditFragment.newInstance(accountId, noteId);
@@ -136,7 +136,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         if (savedState != null) {
             fragment.setInitialSavedState(savedState);
         }
-        getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
     }
 
     /**
@@ -159,13 +159,13 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
                 MIMETYPE_TEXT_PLAIN.equals(intent.getType()) &&
                         (Intent.ACTION_SEND.equals(intent.getAction()) ||
                                 INTENT_GOOGLE_ASSISTANT.equals(intent.getAction()))
-                ) {
+        ) {
             content = intent.getStringExtra(Intent.EXTRA_TEXT);
         }
 
         CloudNote newNote = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, category, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
-        getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
     }
 
     @Override
