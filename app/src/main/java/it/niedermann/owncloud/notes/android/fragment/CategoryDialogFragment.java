@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,8 +47,8 @@ public class CategoryDialogFragment extends DialogFragment {
         void onCategoryChosen(String category);
     }
 
-    public static final String PARAM_ACCOUNT_ID = "account_id";
-    public static final String PARAM_CATEGORY = "category";
+    static final String PARAM_ACCOUNT_ID = "account_id";
+    static final String PARAM_CATEGORY = "category";
 
     private long accountId;
 
@@ -57,12 +58,24 @@ public class CategoryDialogFragment extends DialogFragment {
     private FolderArrayAdapter adapter;
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if(getArguments() != null && getArguments().containsKey(PARAM_ACCOUNT_ID)) {
+            accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
+        } else {
+            throw new IllegalArgumentException("Provide at least \"" + PARAM_ACCOUNT_ID + "\"");
+        }
+    }
+
+    @NonNull
+    @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View dialogView = getActivity().getLayoutInflater().inflate(R.layout.dialog_change_category, null);
+        View dialogView = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_change_category, null);
         ButterKnife.bind(this, dialogView);
         if (savedInstanceState == null) {
-            textCategory.setText(getArguments().getString(PARAM_CATEGORY));
-            accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
+            if(getArguments() != null && getArguments().containsKey(PARAM_CATEGORY)) {
+                textCategory.setText(getArguments().getString(PARAM_CATEGORY));
+            }
         }
         adapter = new FolderArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item);
         textCategory.setAdapter(adapter);

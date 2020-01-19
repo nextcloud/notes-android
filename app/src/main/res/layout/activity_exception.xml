@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,11 +27,15 @@
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/activity_margin"
         android:layout_weight="1"
+        android:background="@color/bg_highlighted"
+        android:padding="8dp"
         android:scrollbars="horizontal|vertical"
         android:textIsSelectable="true"
-        app:fontFamily="monospace" />
+        android:typeface="monospace"
+        tools:text="@string/android_get_accounts_permission_not_granted_exception_message" />
 
     <LinearLayout
+        style="?android:buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
@@ -41,17 +44,25 @@
 
         <Button
             android:id="@+id/close"
+            style="?android:buttonBarButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight=".5"
             android:text="@string/simple_close" />
 
         <Button
             android:id="@+id/copy"
+            style="?android:buttonBarButtonStyle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
             android:layout_weight=".5"
-            android:text="@string/simple_copy" />
+            android:background="@color/primary"
+            android:foreground="?attr/selectableItemBackground"
+            android:text="@string/simple_copy"
+            android:textColor="@color/fg_contrast"
+            tools:ignore="UnusedAttribute" />
 
     </LinearLayout>
 </LinearLayout>

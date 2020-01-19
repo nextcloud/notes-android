@@ -5,12 +5,11 @@
     android:orientation="vertical"
     android:padding="?dialogPreferredPadding">
 
-	<it.niedermann.owncloud.notes.android.AlwaysAutoCompleteTextView
-		android:id="@+id/editCategory"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:completionThreshold="1"
-		android:inputType="text"
-		android:textColor="@color/fg_default"
-		/>
+    <it.niedermann.owncloud.notes.android.AlwaysAutoCompleteTextView
+        android:id="@+id/editCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:completionThreshold="1"
+        android:inputType="text"
+        android:textColor="@color/fg_default" />
 </LinearLayout>

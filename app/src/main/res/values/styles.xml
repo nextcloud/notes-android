@@ -2,15 +2,10 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.DarkActionBar">
-        <!-- Main theme colors -->
-        <!-- App Bar -->
         <item name="colorPrimary">@color/primary</item>
-        <!-- Status Bar and contextual Status Bars -->
         <item name="colorPrimaryDark">@color/primary</item>
-        <!-- Snackbar Action Link -->
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="android:buttonStyle">@style/cloudbutton</item>
         <item name="android:windowBackground">@color/bg_normal</item>
     </style>
 
@@ -24,19 +19,11 @@
         <item name="android:textColorSecondary">@color/fg_default_low</item>
     </style>
 
-    <!--
-        cert4android is using these styles and we want the same button style in the trust activity
-    -->
-    <style name="Widget.AppCompat.Button.Borderless" parent="cloudbutton">
-        <item name="android:layout_margin">2dp</item>
-    </style>
-
     <style name="ncAlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/primary</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary</item>
         <item name="android:textColorPrimary">@color/fg_default</item>
-        <item name="android:alertDialogTheme">@style/cloudbutton</item>
         <item name="android:windowBackground">@color/bg_normal</item>
     </style>
 
@@ -47,13 +34,6 @@
         <item name="android:layout_gravity">end|bottom</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_alignParentRight">true</item>
-    </style>
-
-    <style name="cloudbutton" parent="android:style/Widget.Button">
-        <item name="android:background">@color/primary</item>
-        <item name="android:textColor">@drawable/button_selector</item>
-        <item name="android:padding">@dimen/button_padding</item>
-        <item name="android:elevation">@dimen/button_elevation</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">

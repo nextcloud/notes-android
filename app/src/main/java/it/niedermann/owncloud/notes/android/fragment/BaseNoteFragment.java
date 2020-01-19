@@ -32,8 +32,11 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundExce
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
+import java.util.Objects;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
+import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.LocalAccount;
@@ -44,7 +47,7 @@ import it.niedermann.owncloud.notes.util.ICallback;
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 
-public abstract class BaseNoteFragment extends Fragment implements CategoryDialogFragment.CategoryDialogListener {
+public abstract class BaseNoteFragment extends Fragment implements CategoryDialogListener {
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
 
@@ -273,7 +276,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 showCategorySelector();
                 return true;
             case R.id.menu_move:
-                AccountChooserDialogFragment.newInstance().show(getFragmentManager(), BaseNoteFragment.class.getCanonicalName());
+                AccountChooserDialogFragment.newInstance().show(Objects.requireNonNull(getFragmentManager()), BaseNoteFragment.class.getCanonicalName());
                 return true;
             case R.id.menu_share:
                 Intent shareIntent = new Intent();
@@ -293,7 +296,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 return false;
             case MENU_ID_PIN:
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    ShortcutManager shortcutManager = getActivity().getSystemService(ShortcutManager.class);
+                    ShortcutManager shortcutManager = Objects.requireNonNull(getActivity()).getSystemService(ShortcutManager.class);
 
                     if (shortcutManager.isRequestPinShortcutSupported()) {
                         Intent intent = new Intent(getActivity(), EditNoteActivity.class);
@@ -349,7 +352,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
-    protected float getFontSizeFromPreferences(SharedPreferences sp) {
+    float getFontSizeFromPreferences(SharedPreferences sp) {
         final String prefValueSmall = getString(R.string.pref_value_font_size_small);
         final String prefValueMedium = getString(R.string.pref_value_font_size_medium);
         // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
@@ -372,7 +375,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
      */
     private void showCategorySelector() {
         final String fragmentId = "fragment_category";
-        FragmentManager manager = getFragmentManager();
+        FragmentManager manager = Objects.requireNonNull(getFragmentManager());
         Fragment frag = manager.findFragmentByTag(fragmentId);
         if (frag != null) {
             manager.beginTransaction().remove(frag).commit();

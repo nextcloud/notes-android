@@ -198,7 +198,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setContentView(R.layout.drawer_layout);
         ButterKnife.bind(this);
 
-
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
         if (savedInstanceState == null) {
             if (ACTION_RECENT.equals(getIntent().getAction())) {
