@@ -2,17 +2,12 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteConstraintException;
-import android.graphics.Canvas;
-import android.graphics.drawable.Icon;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,8 +30,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.ItemTouchHelper.SimpleCallback;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -59,8 +52,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
+import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
-import it.niedermann.owncloud.notes.android.fragment.AccountChooserDialogFragment;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
@@ -68,14 +62,15 @@ import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
+import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
+import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
-import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
 public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
@@ -136,10 +131,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @BindView(R.id.progress_circular)
     ProgressBar progressBar;
 
+    protected ItemAdapter adapter = null;
+
     private ActionBarDrawerToggle drawerToggle;
-    private ItemAdapter adapter = null;
     private NavigationAdapter adapterCategories;
-    private NavigationAdapter.NavigationItem itemRecent, itemFavorites, itemUncategorized;
+    private NavigationItem itemRecent, itemFavorites, itemUncategorized;
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
@@ -154,34 +150,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
             refreshLists();
             swipeRefreshLayout.setRefreshing(false);
-            new Thread(() -> {
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-                    ShortcutManager shortcutManager = getApplicationContext().getSystemService(ShortcutManager.class);
-                    if (!shortcutManager.isRateLimitingActive()) {
-                        List<ShortcutInfo> newShortcuts = new ArrayList<>();
-
-                        for (DBNote note : db.getRecentNotes(localAccount.getId())) {
-                            if (!TextUtils.isEmpty(note.getTitle())) {
-                                Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
-                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-                                intent.setAction(ACTION_SHORTCUT);
-
-                                newShortcuts.add(new ShortcutInfo.Builder(getApplicationContext(), note.getId() + "")
-                                        .setShortLabel(note.getTitle() + "")
-                                        .setIcon(Icon.createWithResource(getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                        .setIntent(intent)
-                                        .build());
-                            } else {
-                                // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
-                                Log.e(TAG, "shortLabel cannot be empty " + note);
-                            }
-                        }
-                        Log.d(TAG, "Update dynamic shortcuts");
-                        shortcutManager.removeAllDynamicShortcuts();
-                        shortcutManager.addDynamicShortcuts(newShortcuts);
-                    }
-                }
-            }).start();
         }
 
         @Override
@@ -373,15 +341,15 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void setupNavigationList(final String selectedItem) {
-        itemRecent = new NavigationAdapter.NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.label_all_notes), null, R.drawable.ic_access_time_grey600_24dp);
-        itemFavorites = new NavigationAdapter.NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_yellow_24dp);
+        itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.label_all_notes), null, R.drawable.ic_access_time_grey600_24dp);
+        itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_yellow_24dp);
         adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
-            public void onItemClick(NavigationAdapter.NavigationItem item) {
+            public void onItemClick(NavigationItem item) {
                 selectItem(item, true);
             }
 
-            private void selectItem(NavigationAdapter.NavigationItem item, boolean closeNavigation) {
+            private void selectItem(NavigationItem item, boolean closeNavigation) {
                 adapterCategories.setSelectedItem(item.id);
 
                 // update current selection
@@ -412,7 +380,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
 
             @Override
-            public void onIconClick(NavigationAdapter.NavigationItem item) {
+            public void onIconClick(NavigationItem item) {
                 if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(navigationOpen)) {
                     navigationOpen = item.label;
                     selectItem(item, false);
@@ -445,13 +413,13 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         return this.coordinatorLayout;
     }
 
-    private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
+    private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationItem>> {
         @Override
-        protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
+        protected List<NavigationItem> doInBackground(Void... voids) {
             if (localAccount == null) {
                 return new ArrayList<>();
             }
-            List<NavigationAdapter.NavigationItem> categories = db.getCategories(localAccount.getId());
+            List<NavigationItem> categories = db.getCategories(localAccount.getId());
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
                 itemUncategorized.label = getString(R.string.action_uncategorized);
@@ -466,11 +434,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             itemFavorites.count = numFavorites;
             itemRecent.count = numFavorites + numNonFavorites;
 
-            ArrayList<NavigationAdapter.NavigationItem> items = new ArrayList<>();
+            ArrayList<NavigationItem> items = new ArrayList<>();
             items.add(itemRecent);
             items.add(itemFavorites);
-            NavigationAdapter.NavigationItem lastPrimaryCategory = null, lastSecondaryCategory = null;
-            for (NavigationAdapter.NavigationItem item : categories) {
+            NavigationItem lastPrimaryCategory = null, lastSecondaryCategory = null;
+            for (NavigationItem item : categories) {
                 int slashIndex = item.label.indexOf('/');
                 String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
                 String currentSecondaryCategory = null;
@@ -486,7 +454,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentPrimaryCategory + "/" + currentSecondaryCategory);
 
                 if (isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory != null) {
-                    lastPrimaryCategory = new NavigationAdapter.NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
+                    lastPrimaryCategory = new NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
                     items.add(lastPrimaryCategory);
                     belongsToLastPrimaryCategory = true;
                 }
@@ -522,24 +490,24 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         }
 
         @Override
-        protected void onPostExecute(List<NavigationAdapter.NavigationItem> items) {
+        protected void onPostExecute(List<NavigationItem> items) {
             adapterCategories.setItems(items);
         }
     }
 
     private void setupNavigationMenu() {
-        final NavigationAdapter.NavigationItem itemTrashbin = new NavigationAdapter.NavigationItem("trashbin", getString(R.string.action_trashbin), null, R.drawable.ic_delete_grey600_24dp);
-        final NavigationAdapter.NavigationItem itemSettings = new NavigationAdapter.NavigationItem("settings", getString(R.string.action_settings), null, R.drawable.ic_settings_grey600_24dp);
-        final NavigationAdapter.NavigationItem itemAbout = new NavigationAdapter.NavigationItem("about", getString(R.string.simple_about), null, R.drawable.ic_info_outline_grey600_24dp);
+        final NavigationItem itemTrashbin = new NavigationItem("trashbin", getString(R.string.action_trashbin), null, R.drawable.ic_delete_grey600_24dp);
+        final NavigationItem itemSettings = new NavigationItem("settings", getString(R.string.action_settings), null, R.drawable.ic_settings_grey600_24dp);
+        final NavigationItem itemAbout = new NavigationItem("about", getString(R.string.simple_about), null, R.drawable.ic_info_outline_grey600_24dp);
 
-        ArrayList<NavigationAdapter.NavigationItem> itemsMenu = new ArrayList<>();
+        ArrayList<NavigationItem> itemsMenu = new ArrayList<>();
         itemsMenu.add(itemTrashbin);
         itemsMenu.add(itemSettings);
         itemsMenu.add(itemAbout);
 
         NavigationAdapter adapterMenu = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
-            public void onItemClick(NavigationAdapter.NavigationItem item) {
+            public void onItemClick(NavigationItem item) {
                 if (itemSettings.equals(item)) {
                     Intent settingsIntent = new Intent(getApplicationContext(), PreferencesActivity.class);
                     startActivityForResult(settingsIntent, server_settings);
@@ -552,7 +520,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
 
             @Override
-            public void onIconClick(NavigationAdapter.NavigationItem item) {
+            public void onIconClick(NavigationItem item) {
                 onItemClick(item);
             }
         });
@@ -567,91 +535,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         adapter = new ItemAdapter(this);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
-        ItemTouchHelper touchHelper = new ItemTouchHelper(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            /**
-             * Disable swipe on sections
-             *
-             * @param recyclerView RecyclerView
-             * @param viewHolder   RecyclerView.ViewHoler
-             * @return 0 if section, otherwise super()
-             */
-            @Override
-            public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                if (viewHolder instanceof ItemAdapter.SectionViewHolder) return 0;
-                return super.getSwipeDirs(recyclerView, viewHolder);
-            }
-
-            /**
-             * Delete note if note is swiped to left or right
-             *
-             * @param viewHolder RecyclerView.ViewHoler
-             * @param direction  int
-             */
-            @Override
-            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                switch (direction) {
-                    case ItemTouchHelper.LEFT: {
-                        final DBNote dbNoteWithoutContent = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        final DBNote dbNote = db.getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
-                        db.deleteNoteAndSync(dbNote.getId());
-                        adapter.remove(dbNote);
-                        refreshLists();
-                        Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
-                        Snackbar.make(swipeRefreshLayout, getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
-                                .setAction(R.string.action_undo, (View v) -> {
-                                    db.getNoteServerSyncHelper().addCallbackPush(new ICallback() {
-                                        @Override
-                                        public void onFinish() {
-                                            refreshLists();
-                                        }
-
-                                        @Override
-                                        public void onScheduled() {
-
-                                        }
-                                    });
-                                    db.addNoteAndSync(dbNote.getAccountId(), dbNote);
-                                    refreshLists();
-                                    Snackbar.make(swipeRefreshLayout, getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
-                                            .show();
-                                })
-                                .show();
-                        break;
-                    }
-                    case ItemTouchHelper.RIGHT: {
-                        final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.toggleFavorite(dbNote, syncCallBack);
-                        refreshLists();
-                        break;
-                    }
-                }
-            }
-
-            @Override
-            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
-                // show swipe icon on the side
-                noteViewHolder.showSwipe(dX > 0);
-                // move only swipeable part of item (not leave-behind)
-                getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.noteSwipeable, dX, dY, actionState, isCurrentlyActive);
-            }
-
-            @Override
-            public float getSwipeEscapeVelocity(float defaultValue) {
-                return defaultValue * 3;
-            }
-
-            @Override
-            public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                getDefaultUIUtil().clearView(((ItemAdapter.NoteViewHolder) viewHolder).noteSwipeable);
-            }
-        });
-        touchHelper.attachToRecyclerView(listView);
+        new NotesListViewItemTouchHelper(this, this, db, adapter, syncCallBack, this::refreshLists).attachToRecyclerView(listView);
     }
 
     private void refreshLists() {
@@ -685,7 +569,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             query = searchView.getQuery();
         }
 
-        LoadNotesListTask.NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
+        NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
             adapter.setShowCategory(showCategory);
             adapter.setItemList(notes);
             progressBar.setVisibility(View.GONE);
@@ -702,13 +586,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-    public ItemAdapter getItemAdapter() {
-        return adapter;
-    }
-
-    public SwipeRefreshLayout getSwipeRefreshLayout() {
-        return swipeRefreshLayout;
-    }
 
     /**
      * Adds the Menu Items to the Action Bar.
@@ -878,7 +755,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 // SingleSelectedActionModeCallback());
                 // } else {
                 // there are some selected items, start the actionMode
-                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
+                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
+                        this, this, db, mActionMode, adapter, listView, this::refreshLists, getSupportFragmentManager(), searchView
+                ));
                 // }
             } else if (!hasCheckedItems && mActionMode != null) {
                 // there no selected items, finish the actionMode
@@ -907,7 +786,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         boolean selected = adapter.select(position);
         if (selected) {
             v.setSelected(true);
-            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback());
+            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
+                    this, this, db, mActionMode, adapter, listView, this::refreshLists, getSupportFragmentManager(), searchView
+            ));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
         }
@@ -927,88 +808,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         swipeRefreshLayout.setRefreshing(true);
         db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
         db.getNoteServerSyncHelper().scheduleSync(false);
-    }
-
-    /**
-     * Handler for the MultiSelect Actions
-     */
-    private class MultiSelectedActionModeCallback implements ActionMode.Callback {
-
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            // inflate contextual menu
-            mode.getMenuInflater().inflate(R.menu.menu_list_context_multiple, menu);
-            return true;
-        }
-
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false;
-        }
-
-        /**
-         * @param mode ActionMode - used to close the Action Bar after all work is done.
-         * @param item MenuItem - the item in the List that contains the Node
-         * @return boolean
-         */
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.menu_delete: {
-                    List<DBNote> deletedNotes = new ArrayList<>();
-                    List<Integer> selection = adapter.getSelected();
-                    for (Integer i : selection) {
-                        DBNote note = (DBNote) adapter.getItem(i);
-                        deletedNotes.add(db.getNote(note.getAccountId(), note.getId()));
-                        db.deleteNoteAndSync(note.getId());
-                    }
-                    mode.finish(); // Action picked, so close the CAB
-                    //after delete selection has to be cleared
-                    searchView.setIconified(true);
-                    refreshLists();
-                    String deletedSnackbarTitle = deletedNotes.size() == 1
-                            ? getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
-                            : getString(R.string.bulk_notes_deleted, deletedNotes.size());
-                    Snackbar.make(swipeRefreshLayout, deletedSnackbarTitle, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.action_undo, (View v) -> {
-                                db.getNoteServerSyncHelper().addCallbackPush(new ICallback() {
-                                    @Override
-                                    public void onFinish() {
-                                        refreshLists();
-                                    }
-
-                                    @Override
-                                    public void onScheduled() {
-
-                                    }
-                                });
-                                for (DBNote deletedNote : deletedNotes) {
-                                    db.addNoteAndSync(deletedNote.getAccountId(), deletedNote);
-                                }
-                                refreshLists();
-                                String restoreSnackbarTitle = deletedNotes.size() == 1
-                                        ? getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
-                                        : getString(R.string.bulk_notes_restored, deletedNotes.size());
-                                Snackbar.make(swipeRefreshLayout, restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
-                                        .show();
-                            })
-                            .show();
-                    return true;
-                }
-                case R.id.menu_move: {
-                    AccountChooserDialogFragment.newInstance().show(getSupportFragmentManager(), NotesListViewActivity.class.getCanonicalName());
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-            adapter.clearSelection(listView);
-            mActionMode = null;
-            adapter.notifyDataSetChanged();
-        }
     }
 
     @Override
