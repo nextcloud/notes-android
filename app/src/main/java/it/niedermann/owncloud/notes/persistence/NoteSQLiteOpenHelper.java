@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -34,6 +36,7 @@ import java.util.Map;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -44,6 +47,8 @@ import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
+
+import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
@@ -774,6 +779,37 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     void notifyNotesChanged() {
         updateSingleNoteWidgets(getContext());
         updateNoteListWidgets(getContext());
+    }
+
+    void updateDynamicShortcuts(long accountId) {
+        new Thread(() -> {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+                ShortcutManager shortcutManager = context.getApplicationContext().getSystemService(ShortcutManager.class);
+                if (!shortcutManager.isRateLimitingActive()) {
+                    List<ShortcutInfo> newShortcuts = new ArrayList<>();
+
+                    for (DBNote note : getRecentNotes(accountId)) {
+                        if (!TextUtils.isEmpty(note.getTitle())) {
+                            Intent intent = new Intent(context.getApplicationContext(), EditNoteActivity.class);
+                            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                            intent.setAction(ACTION_SHORTCUT);
+
+                            newShortcuts.add(new ShortcutInfo.Builder(context.getApplicationContext(), note.getId() + "")
+                                    .setShortLabel(note.getTitle() + "")
+                                    .setIcon(Icon.createWithResource(context.getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                    .setIntent(intent)
+                                    .build());
+                        } else {
+                            // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
+                            Log.e(TAG, "shortLabel cannot be empty " + note);
+                        }
+                    }
+                    Log.d(TAG, "Update dynamic shortcuts");
+                    shortcutManager.removeAllDynamicShortcuts();
+                    shortcutManager.addDynamicShortcuts(newShortcuts);
+                }
+            }
+        }).start();
     }
 
     /**

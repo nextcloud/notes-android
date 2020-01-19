@@ -9,15 +9,12 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
-import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.Notes;
 
@@ -31,8 +28,6 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         super.onCreate(savedInstanceState);
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
         setResult(Activity.RESULT_CANCELED);
-
-        SwipeRefreshLayout swipeRefreshLayout = getSwipeRefreshLayout();
 
         ButterKnife.bind(this);
         fabCreate.setVisibility(View.GONE);
@@ -52,7 +47,6 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
 
     @Override
     public void onNoteClick(int position, View v) {
-        ItemAdapter adapter = getItemAdapter();
         Item item = adapter.getItem(position);
         DBNote note = (DBNote) item;
         long noteID = note.getId();
