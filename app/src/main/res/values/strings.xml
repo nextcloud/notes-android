@@ -16,8 +16,8 @@
     <string name="simple_bold">Bold</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Italic</string>
-    <string name="action_note_deleted">Note deleted</string>
-    <string name="action_note_restored">Note restored</string>
+    <string name="action_note_deleted">Deleted %1$s</string>
+    <string name="action_note_restored">Restored %1$s</string>
     <string name="action_undo">Undo</string>
     <string name="action_drawer_open">open navigation</string>
     <string name="action_drawer_close">close navigation</string>
@@ -141,6 +141,8 @@
     <string name="simple_move">Move</string>
     <string name="error_files_app_version_too_old">Is your files app version up to date?</string>
     <string name="checkbox_could_not_be_toggled">Checkbox could not be toggled.</string>
+    <string name="bulk_notes_deleted">Deleted %1$d notes</string>
+    <string name="bulk_notes_restored">Restored %1$d notes</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
