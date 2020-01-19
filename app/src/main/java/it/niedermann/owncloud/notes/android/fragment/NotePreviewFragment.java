@@ -38,7 +38,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
     private String changedText;
 
-    MarkdownProcessor markdownProcessor;
+    private MarkdownProcessor markdownProcessor;
 
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -65,14 +65,14 @@ public class NotePreviewFragment extends BaseNoteFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_single_note, container, false);
+        return inflater.inflate(R.layout.fragment_note_preview, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
-        markdownProcessor = new MarkdownProcessor(getActivity());
+        markdownProcessor = new MarkdownProcessor(Objects.requireNonNull(getActivity()));
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
                 MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
@@ -110,7 +110,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                         noteContent.setText(markdownProcessor.parse(changedText));
                                         saveNote(null);
                                     } catch (IndexOutOfBoundsException e) {
-                                        Toast.makeText(getActivity(), "Checkbox could not be toggled.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getActivity(), R.string.checkbox_could_not_be_toggled, Toast.LENGTH_SHORT).show();
                                         e.printStackTrace();
                                     }
                                     return line;
@@ -167,7 +167,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
             }
         });
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getActivity()).getApplicationContext());
         noteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             noteContent.setTypeface(Typeface.MONOSPACE);

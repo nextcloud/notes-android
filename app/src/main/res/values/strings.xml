@@ -140,6 +140,7 @@
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
     <string name="error_files_app_version_too_old">Is your files app version up to date?</string>
+    <string name="checkbox_could_not_be_toggled">Checkbox could not be toggled.</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
