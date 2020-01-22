@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.MarkdownTextView;
 import com.yydcdut.markdown.syntax.text.TextFactory;
@@ -48,6 +49,12 @@ public class NotePreviewFragment extends BaseNoteFragment {
     @BindView(R.id.editContentContainer)
     ScrollView scrollView;
 
+    @BindView(R.id.searchNext)
+    FloatingActionButton searchNext;
+
+    @BindView(R.id.searchPrev)
+    FloatingActionButton searchPrev;
+
     @BindView(R.id.single_note_content)
     MarkdownTextView noteContent;
 
@@ -70,6 +77,16 @@ public class NotePreviewFragment extends BaseNoteFragment {
     @Override
     public ScrollView getScrollView() {
         return scrollView;
+    }
+
+    @Override
+    protected View getSearchNextButton() {
+        return searchNext;
+    }
+
+    @Override
+    protected View getSearchPrevButton() {
+        return searchPrev;
     }
 
     @Override
