@@ -149,6 +149,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 3) {
             recreateDatabase(db);
+            return;
         }
         if (oldVersion < 4) {
             db.delete(table_notes, null, null);
@@ -166,11 +167,22 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             DatabaseIndexUtil.dropIndexes(db);
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_category + " TEXT NOT NULL DEFAULT ''");
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_etag + " TEXT");
-            createNotesIndexes(db);
+            DatabaseIndexUtil.createIndex(db, table_notes, key_remote_id, key_status, key_favorite, key_category, key_modified);
         }
         if (oldVersion < 8) {
             final String table_temp = "NOTES_TEMP";
-            createNotesTable(db, table_temp);
+            db.execSQL("CREATE TABLE " + table_temp + " ( " +
+                    key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    key_remote_id + " INTEGER, " +
+                    key_account_id + " INTEGER, " +
+                    key_status + " VARCHAR(50), " +
+                    key_title + " TEXT, " +
+                    key_modified + " INTEGER DEFAULT 0, " +
+                    key_content + " TEXT, " +
+                    key_favorite + " INTEGER DEFAULT 0, " +
+                    key_category + " TEXT NOT NULL DEFAULT '', " +
+                    key_etag + " TEXT)");
+            createNotesIndexes(db);
             db.execSQL(String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s,%s,%s) ", table_temp, key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag)
                     + String.format("SELECT %s,%s,%s,%s,strftime('%%s',%s),%s,%s,%s,%s FROM %s", key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_notes));
             db.execSQL(String.format("DROP TABLE %s", table_notes));
