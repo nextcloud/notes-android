@@ -9,6 +9,7 @@ import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -238,11 +240,42 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             public boolean onQueryTextChange(String newText) {
                 searchQuery = newText;
                 colorWithText(newText);
+                jumpToFirstNote(newText);
                 return true;
             }
         });
 
     }
+
+    private void jumpToFirstNote(String newText) {
+        if (newText == null || newText.isEmpty()) {
+            // No search term
+            return;
+        }
+        String currentContent = getContent().toLowerCase();
+        int indexOfNewText = currentContent.indexOf(newText.toLowerCase());
+        if (indexOfNewText <= 0) {
+            // Search term not in text
+            return;
+        }
+        String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
+        int numberLine = -1;
+
+        for (int i = 0; i < textUntilFirstOccurrence.length(); i++) {
+            if (textUntilFirstOccurrence.charAt(i) == '\n') {
+                numberLine++;
+            }
+        }
+
+        Layout textViewLayout = getLayout();
+        if (numberLine >= 0) {
+            getScrollView().smoothScrollTo(0, textViewLayout.getLineTop(numberLine));
+        }
+    }
+
+    protected abstract ScrollView getScrollView();
+
+    protected abstract Layout getLayout();
 
     private void prepareFavoriteOption(MenuItem item) {
         item.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
@@ -358,7 +391,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
         String fontSize = sp.getString(getString(R.string.pref_key_font_size), prefValueMedium);
 
-        assert fontSize != null;
         if (fontSize.equals(prefValueSmall)) {
             return getResources().getDimension(R.dimen.note_font_size_small);
         } else if (fontSize.equals(prefValueMedium)) {
