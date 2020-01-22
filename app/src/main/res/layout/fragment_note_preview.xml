@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swiperefreshlayout"
     android:layout_width="match_parent"
@@ -9,21 +9,41 @@
     tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
     tools:ignore="MergeRootFrame">
 
-    <ScrollView
-        android:id="@+id/editContentContainer"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="it.niedermann.owncloud.notes.android.activity.EditNoteActivity">
+        android:layout_height="match_parent">
 
-        <com.yydcdut.markdown.MarkdownTextView
-            android:id="@+id/single_note_content"
+        <ScrollView
+            android:id="@+id/editContentContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/bg_normal"
-            android:padding="16dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/fg_default"
-            android:textIsSelectable="true" />
-    </ScrollView>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="it.niedermann.owncloud.notes.android.activity.EditNoteActivity">
+
+            <com.yydcdut.markdown.MarkdownTextView
+                android:id="@+id/single_note_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_normal"
+                android:padding="16dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/fg_default"
+                android:textIsSelectable="true" />
+        </ScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/searchPrev"
+            style="@style/fab"
+            android:layout_gravity="bottom|end"
+            android:translationY="-56dp"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_keyboard_arrow_up_white_24dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/searchNext"
+            style="@style/fab"
+            android:layout_gravity="bottom|end"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_keyboard_arrow_down_white_24dp" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

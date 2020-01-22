@@ -188,6 +188,8 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
+    private int occurence = 1;
+
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -230,6 +232,16 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
         });
 
+        View next = getSearchNextButton();
+        if (next != null) {
+            next.setOnClickListener(v -> jumpToNthNote(searchQuery, occurence, true));
+        }
+
+        View prev = getSearchPrevButton();
+        if (prev != null) {
+            prev.setOnClickListener(v -> jumpToNthNote(searchQuery, occurence, false));
+        }
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -238,24 +250,30 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                occurence = 1;
                 searchQuery = newText;
                 colorWithText(newText);
-                jumpToFirstNote(newText);
+                jumpToNthNote(newText);
                 return true;
             }
         });
 
     }
 
-    private void jumpToFirstNote(String newText) {
+    private void jumpToNthNote(String newText) {
+        jumpToNthNote(newText, 1, true);
+    }
+
+    private void jumpToNthNote(String newText, int occurrence, boolean directionForward) {
         if (newText == null || newText.isEmpty()) {
             // No search term
             return;
         }
         String currentContent = getContent().toLowerCase();
-        int indexOfNewText = currentContent.indexOf(newText.toLowerCase());
+        int indexOfNewText = indexOfNth(currentContent, newText.toLowerCase(), 0, occurrence);
         if (indexOfNewText <= 0) {
             // Search term not in text
+            occurence = 1;
             return;
         }
         String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
@@ -267,15 +285,33 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             }
         }
 
-        Layout textViewLayout = getLayout();
         if (numberLine >= 0) {
-            getScrollView().smoothScrollTo(0, textViewLayout.getLineTop(numberLine));
+            getScrollView().smoothScrollTo(0, getLayout().getLineTop(numberLine));
         }
+        if(directionForward) {
+            this.occurence++;
+        } else {
+            this.occurence--;
+        }
+    }
+
+    private static int indexOfNth(String input, String value, int startIndex, int nth) {
+        if (nth < 1)
+            throw new IllegalArgumentException("Param 'nth' must be greater than 0!");
+        if (nth == 1)
+            return input.indexOf(value, startIndex);
+        int idx = input.indexOf(value, startIndex);
+        if (idx == -1)
+            return -1;
+        return indexOfNth(input, value, idx + 1, --nth);
     }
 
     protected abstract ScrollView getScrollView();
 
     protected abstract Layout getLayout();
+
+    protected abstract View getSearchNextButton();
+    protected abstract View getSearchPrevButton();
 
     private void prepareFavoriteOption(MenuItem item) {
         item.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);

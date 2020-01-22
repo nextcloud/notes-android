@@ -22,6 +22,7 @@ import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yydcdut.markdown.MarkdownEditText;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.edit.EditFactory;
@@ -43,6 +44,12 @@ public class NoteEditFragment extends BaseNoteFragment {
 
     private static final long DELAY = 2000; // Wait for this time after typing before saving
     private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
+
+    @BindView(R.id.searchNext)
+    FloatingActionButton searchNext;
+
+    @BindView(R.id.searchPrev)
+    FloatingActionButton searchPrev;
 
     @BindView(R.id.scrollView)
     ScrollView scrollView;
@@ -103,6 +110,16 @@ public class NoteEditFragment extends BaseNoteFragment {
     @Override
     protected Layout getLayout() {
         return editContent.getLayout();
+    }
+
+    @Override
+    protected View getSearchNextButton() {
+        return searchNext;
+    }
+
+    @Override
+    protected View getSearchPrevButton() {
+        return searchPrev;
     }
 
     @Nullable
