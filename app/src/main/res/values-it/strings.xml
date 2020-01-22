@@ -16,8 +16,8 @@
     <string name="simple_bold">Grassetto</string>
     <string name="simple_link">Collegamento</string>
     <string name="simple_italic">Corsivo</string>
-    <string name="action_note_deleted">Nota eliminata</string>
-    <string name="action_note_restored">Nota ripristinata</string>
+    <string name="action_note_deleted">Eliminato %1$s</string>
+    <string name="action_note_restored">Ripristinato %1$s</string>
     <string name="action_undo">Annulla</string>
     <string name="action_drawer_open">apri navigazione</string>
     <string name="action_drawer_close">chiudi navigazione</string>
@@ -113,7 +113,11 @@
     <string name="no_notes_yet_description">Premi il pulsante + per creare una nuova nota</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Impossibile caricare l\'anteprima. Controlla se c\'è un elemento dell\'elenco numerato con due cifre senza contenuto.</string>
     <string name="simple_more">Altro</string>
+    <string name="simple_move">Sposta</string>
     <string name="error_files_app_version_too_old">La tua applicazione File è aggiornata?</string>
+    <string name="checkbox_could_not_be_toggled">Errore sul cambio di stato della checkbox.</string>
+    <string name="bulk_notes_deleted">Eliminate %1$d note</string>
+    <string name="bulk_notes_restored">Ripristinate %1$d note</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

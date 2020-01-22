@@ -15,8 +15,6 @@
     <string name="simple_bold">מודגש</string>
     <string name="simple_link">קישור</string>
     <string name="simple_italic">נטוי</string>
-    <string name="action_note_deleted">פתק נמחק</string>
-    <string name="action_note_restored">פתק שוחזר</string>
     <string name="action_undo">ביטול</string>
     <string name="action_drawer_open">פתיחת ניווט</string>
     <string name="action_drawer_close">סגירת ניווט</string>
@@ -103,6 +101,7 @@
     <string name="category_work">עבודה</string>
     <string name="no_notes_yet">אין פתקים עדיין</string>
     <string name="simple_more">עוד</string>
+    <string name="simple_move">העברה</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>

@@ -16,8 +16,8 @@
     <string name="simple_bold">Negrita</string>
     <string name="simple_link">Enlace</string>
     <string name="simple_italic">Cursiva</string>
-    <string name="action_note_deleted">Nota eliminada</string>
-    <string name="action_note_restored">Nota restaurada</string>
+    <string name="action_note_deleted">Borrado %1$s</string>
+    <string name="action_note_restored">Restaurado %1$s</string>
     <string name="action_undo">Deshacer</string>
     <string name="action_drawer_open">abrir navegación</string>
     <string name="action_drawer_close">cerrar navegación</string>
@@ -113,7 +113,11 @@
     <string name="no_notes_yet_description">rear una nota nueva</string>
     <string name="could_not_load_preview_two_digit_numbered_list">No se ha podido cargar la vista previa. Por favor, comprueba si hay un ítem de lista numerada de dos dígitos sin contenido.</string>
     <string name="simple_more">Más</string>
+    <string name="simple_move">Mover</string>
     <string name="error_files_app_version_too_old">¿Está actualizada la versión de su aplicación de archivos?</string>
+    <string name="checkbox_could_not_be_toggled">No se ha podido cambiar el estado del checkbox</string>
+    <string name="bulk_notes_deleted">Borradas %1$d notas</string>
+    <string name="bulk_notes_restored">Restauradas %1$d notas</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
