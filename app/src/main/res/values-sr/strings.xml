@@ -16,8 +16,6 @@
     <string name="simple_bold">Подебљано</string>
     <string name="simple_link">Веза</string>
     <string name="simple_italic">Курзив</string>
-    <string name="action_note_deleted">Белешка обрисана</string>
-    <string name="action_note_restored">Белешка враћена</string>
     <string name="action_undo">Опозови</string>
     <string name="action_drawer_open">отвори навигацију</string>
     <string name="action_drawer_close">затвори навигацију</string>
@@ -111,6 +109,7 @@
     <string name="no_notes_yet">Још нема белешки</string>
     <string name="no_notes_yet_description">Притисните + дугме да направите нову белешку</string>
     <string name="simple_more">Још</string>
+    <string name="simple_move">Помери</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>

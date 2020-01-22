@@ -16,8 +16,6 @@
     <string name="simple_bold">Podebljano</string>
     <string name="simple_link">Veza</string>
     <string name="simple_italic">Kurziv</string>
-    <string name="action_note_deleted">Beleška obrisana</string>
-    <string name="action_note_restored">Beleška vraćena</string>
     <string name="action_undo">Opozovi</string>
     <string name="action_drawer_open">otvori navigaciju</string>
     <string name="action_drawer_close">zatvori navigaciju</string>
@@ -111,6 +109,7 @@
     <string name="no_notes_yet">Još nema beleški</string>
     <string name="no_notes_yet_description">Pritisnite + dugme da napravite novu belešku</string>
     <string name="simple_more">Još</string>
+    <string name="simple_move">Premesti</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u režimu uređivanja</item>

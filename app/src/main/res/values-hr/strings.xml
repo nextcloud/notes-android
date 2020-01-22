@@ -16,8 +16,6 @@
     <string name="simple_bold">Podebljano</string>
     <string name="simple_link">Poveznica</string>
     <string name="simple_italic">U kurzivu</string>
-    <string name="action_note_deleted">Bilješka je izbrisana</string>
-    <string name="action_note_restored">Bilješka je vraćena</string>
     <string name="action_undo">Poništi</string>
     <string name="action_drawer_open">otvori navigaciju</string>
     <string name="action_drawer_close">zatvori navigaciju</string>
@@ -113,8 +111,8 @@
     <string name="no_notes_yet_description">Stvori novu bilješku s pomoću gumba +</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Nije moguće učitati pretpregled. Provjerite postoji li dvoznamenkasta stavka bez sadržaja na numeriranom popisu.</string>
     <string name="simple_more">Više</string>
+    <string name="simple_move">Premjesti</string>
     <string name="error_files_app_version_too_old">Koristite li se najnovijom inačicom aplikacije za upravljanje datotekama?</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>

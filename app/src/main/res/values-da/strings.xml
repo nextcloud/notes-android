@@ -15,8 +15,6 @@
     <string name="simple_bold">Fed</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Kursiv</string>
-    <string name="action_note_deleted">Note slettet</string>
-    <string name="action_note_restored">Note gendannet</string>
     <string name="action_undo">Fortryd</string>
     <string name="action_drawer_open">åbnn navigation</string>
     <string name="action_drawer_close">Luk navigation</string>
@@ -104,6 +102,7 @@
     <string name="category_work">Arbejde</string>
     <string name="no_notes_yet">Ingen noter endnu</string>
     <string name="simple_more">Mere</string>
+    <string name="simple_move">Flyt</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>
