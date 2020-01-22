@@ -269,10 +269,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                     Log.e(TAG, "Previous URL could not be parsed. Recreating database...");
                     e.printStackTrace();
                     recreateDatabase(db);
+                    return;
                 }
             } else {
                 Log.e(TAG, "Previous URL is null. Recreating database...");
                 recreateDatabase(db);
+                return;
             }
         }
         if (oldVersion < 10) {
