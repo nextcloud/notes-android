@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
 
@@ -41,8 +43,13 @@ public class NoteEditFragment extends BaseNoteFragment {
 
     private static final long DELAY = 2000; // Wait for this time after typing before saving
     private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
+
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
+
     @BindView(R.id.editContent)
     MarkdownEditText editContent;
+
     private Handler handler;
     private boolean saveActive, unsavedEdit;
     private final Runnable runAutoSave = new Runnable() {
@@ -86,6 +93,16 @@ public class NoteEditFragment extends BaseNoteFragment {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(true);
+    }
+
+    @Override
+    public ScrollView getScrollView() {
+        return scrollView;
+    }
+
+    @Override
+    protected Layout getLayout() {
+        return editContent.getLayout();
     }
 
     @Nullable

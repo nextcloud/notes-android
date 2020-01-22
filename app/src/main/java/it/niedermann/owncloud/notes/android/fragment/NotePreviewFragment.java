@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -43,6 +45,9 @@ public class NotePreviewFragment extends BaseNoteFragment {
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    @BindView(R.id.editContentContainer)
+    ScrollView scrollView;
+
     @BindView(R.id.single_note_content)
     MarkdownTextView noteContent;
 
@@ -62,9 +67,20 @@ public class NotePreviewFragment extends BaseNoteFragment {
         menu.findItem(R.id.menu_preview).setVisible(false);
     }
 
+    @Override
+    public ScrollView getScrollView() {
+        return scrollView;
+    }
+
+    @Override
+    protected Layout getLayout() {
+        return noteContent.getLayout();
+    }
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
+            container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_note_preview, container, false);
     }
 
@@ -84,11 +100,11 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                          * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
                                          * Find number of lines starting with ``` before lineNumber
                                          */
-                                        for(int i = 0; i < lines.length; i++) {
-                                            if(lines[i].startsWith("```")) {
+                                        for (int i = 0; i < lines.length; i++) {
+                                            if (lines[i].startsWith("```")) {
                                                 lineNumber++;
                                             }
-                                            if(i == lineNumber) {
+                                            if (i == lineNumber) {
                                                 break;
                                             }
                                         }
@@ -123,8 +139,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                 Intent intent = new Intent(getActivity().getApplicationContext(), EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
                                 startActivity(browserIntent);
                             }
