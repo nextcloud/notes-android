@@ -174,7 +174,6 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE " + table_temp + " ( " +
                     key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     key_remote_id + " INTEGER, " +
-                    key_account_id + " INTEGER, " +
                     key_status + " VARCHAR(50), " +
                     key_title + " TEXT, " +
                     key_modified + " INTEGER DEFAULT 0, " +
@@ -182,7 +181,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                     key_favorite + " INTEGER DEFAULT 0, " +
                     key_category + " TEXT NOT NULL DEFAULT '', " +
                     key_etag + " TEXT)");
-            createNotesIndexes(db);
+            DatabaseIndexUtil.createIndex(db, table_temp, key_remote_id, key_status, key_favorite, key_category, key_modified);
             db.execSQL(String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s,%s,%s) ", table_temp, key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag)
                     + String.format("SELECT %s,%s,%s,%s,strftime('%%s',%s),%s,%s,%s,%s FROM %s", key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_notes));
             db.execSQL(String.format("DROP TABLE %s", table_notes));
