@@ -114,6 +114,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
     @Override
     protected Layout getLayout() {
+        editContent.onPreDraw();
         return editContent.getLayout();
     }
 
