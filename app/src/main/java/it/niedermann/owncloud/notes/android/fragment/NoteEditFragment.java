@@ -39,7 +39,7 @@ import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NotesTextWatcher;
 import it.niedermann.owncloud.notes.util.StyleCallback;
 
-public class NoteEditFragment extends BaseNoteFragment {
+public class NoteEditFragment extends SearchableBaseNoteFragment {
 
     private static final String LOG_TAG_AUTOSAVE = "AutoSave";
 
