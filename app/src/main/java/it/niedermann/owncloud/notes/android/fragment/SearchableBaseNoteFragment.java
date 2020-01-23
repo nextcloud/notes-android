@@ -1,28 +1,25 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.os.Bundle;
-import android.text.SpannableString;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.view.ViewCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.util.DisplayUtils;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
-    private TextView activeTextView;
     private int currentOccurrence = 1;
     private int occurrenceCount = 0;
 
@@ -36,6 +33,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
         if (savedInstanceState != null) {
             searchQuery = savedInstanceState.getString("searchQuery", "");
+            currentOccurrence = savedInstanceState.getInt("currentOccurrence", 1);
+            // TODO if search is open
+            if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
+                colorWithText(searchQuery);
+                jumpToOccurrence();
+            }
         }
     }
 
@@ -128,20 +131,19 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
         if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
             outState.putString("searchQuery", searchView.getQuery().toString());
+            outState.putInt("currentOccurrence", currentOccurrence);
         }
     }
 
-    void setActiveTextView(TextView textView) {
-        activeTextView = textView;
-    }
+    protected abstract void colorWithText(String newText);
 
-    private void colorWithText(String newText) {
-        if (activeTextView != null && ViewCompat.isAttachedToWindow(activeTextView)) {
-            activeTextView.setText(DisplayUtils.searchAndColor(activeTextView.getText().toString(), new SpannableString
-                            (activeTextView.getText()), newText, getResources().getColor(R.color.primary)),
-                    TextView.BufferType.SPANNABLE);
-        }
-    }
+    protected abstract ScrollView getScrollView();
+
+    protected abstract Layout getLayout();
+
+    protected abstract FloatingActionButton getSearchNextButton();
+
+    protected abstract FloatingActionButton getSearchPrevButton();
 
     private void showSearchFabs() {
         FloatingActionButton next = getSearchNextButton();
@@ -166,6 +168,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     }
 
     private void jumpToOccurrence() {
+        if (getContent() == null || getContent().isEmpty()) {
+            return;
+        }
         if (searchQuery == null || searchQuery.isEmpty()) {
             // No search term
             return;
