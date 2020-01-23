@@ -14,7 +14,7 @@
         tools:ignore="MergeRootFrame">
 
         <ScrollView
-            android:id="@+id/editContentContainer"
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -37,13 +37,17 @@
         style="@style/fab"
         android:layout_gravity="bottom|end"
         android:translationY="-56dp"
+        android:visibility="gone"
         app:fabSize="mini"
-        app:srcCompat="@drawable/ic_keyboard_arrow_up_white_24dp" />
+        app:srcCompat="@drawable/ic_keyboard_arrow_up_white_24dp"
+        tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/searchNext"
         style="@style/fab"
         android:layout_gravity="bottom|end"
+        android:visibility="gone"
         app:fabSize="mini"
-        app:srcCompat="@drawable/ic_keyboard_arrow_down_white_24dp" />
+        app:srcCompat="@drawable/ic_keyboard_arrow_down_white_24dp"
+        tools:visibility="visible" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
