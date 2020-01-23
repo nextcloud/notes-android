@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,6 +23,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
 import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
+import it.niedermann.owncloud.notes.android.fragment.NoteReadonlyFragment;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -179,21 +179,17 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         Intent intent = getIntent();
         StringBuilder text = new StringBuilder();
         try {
-            InputStream inputStream = getContentResolver().openInputStream(intent.getData());
-            BufferedReader r = new BufferedReader(new InputStreamReader(inputStream));
+            InputStream inputStream = getContentResolver().openInputStream(Objects.requireNonNull(intent.getData()));
+            BufferedReader r = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
             String mLine;
             while ((mLine = r.readLine()) != null) {
                 text.append(mLine).append('\n');
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.v("YEY", text.toString());
 
-
-        fragment = NotePreviewFragment.newReadonlyInstance(text.toString());
+        fragment = NoteReadonlyFragment.newInstance(text.toString());
         getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
     }
 

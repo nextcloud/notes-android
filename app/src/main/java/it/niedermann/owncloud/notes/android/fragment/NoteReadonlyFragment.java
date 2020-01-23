@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Layout;
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -35,16 +34,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
-import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 
-public class NotePreviewFragment extends SearchableBaseNoteFragment {
-
-    private String changedText;
+public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
 
     private MarkdownProcessor markdownProcessor;
 
@@ -63,11 +59,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
     @BindView(R.id.single_note_content)
     MarkdownTextView noteContent;
 
-    public static NotePreviewFragment newInstance(long accountId, long noteId) {
-        NotePreviewFragment f = new NotePreviewFragment();
+    public static NoteReadonlyFragment newInstance(String content) {
+        NoteReadonlyFragment f = new NoteReadonlyFragment();
         Bundle b = new Bundle();
-        b.putLong(PARAM_NOTE_ID, noteId);
-        b.putLong(PARAM_ACCOUNT_ID, accountId);
+        b.putString(PARAM_CONTENT, content);
         f.setArguments(b);
         return f;
     }
@@ -75,8 +70,15 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_edit).setVisible(true);
+        menu.findItem(R.id.menu_favorite).setVisible(false);
+        menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(false);
+        menu.findItem(R.id.menu_cancel).setVisible(false);
+        menu.findItem(R.id.menu_delete).setVisible(false);
+        menu.findItem(R.id.menu_share).setVisible(false);
+        menu.findItem(R.id.menu_move).setVisible(false);
+        menu.findItem(R.id.menu_category).setVisible(false);
+        menu.findItem(MENU_ID_PIN).setVisible(false);
     }
 
     @Override
@@ -115,46 +117,6 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
                 MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
-                        .setOnTodoClickCallback((view, line, lineNumber) -> {
-                                    try {
-                                        String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
-                                        /*
-                                         * Workaround for RxMarkdown-bug:
-                                         * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
-                                         * Find number of lines starting with ``` before lineNumber
-                                         */
-                                        for (int i = 0; i < lines.length; i++) {
-                                            if (lines[i].startsWith("```")) {
-                                                lineNumber++;
-                                            }
-                                            if (i == lineNumber) {
-                                                break;
-                                            }
-                                        }
-
-                                        /*
-                                         * Workaround for multiple RxMarkdown-bugs:
-                                         * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
-                                         * When (un)checking a checkbox, every markdown gets stripped in the given line argument
-                                         */
-                                        if (lines[lineNumber].startsWith("- [ ]") || lines[lineNumber].startsWith("* [ ]")) {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [ ]", "- [x]");
-                                            lines[lineNumber] = lines[lineNumber].replace("* [ ]", "* [x]");
-                                        } else {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [x]", "- [ ]");
-                                            lines[lineNumber] = lines[lineNumber].replace("* [x]", "* [ ]");
-                                        }
-
-                                        changedText = TextUtils.join("\n", lines);
-                                        noteContent.setText(markdownProcessor.parse(changedText));
-                                        saveNote(null);
-                                    } catch (IndexOutOfBoundsException e) {
-                                        Toast.makeText(getActivity(), R.string.checkbox_could_not_be_toggled, Toast.LENGTH_SHORT).show();
-                                        e.printStackTrace();
-                                    }
-                                    return line;
-                                }
-                        )
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
@@ -169,46 +131,33 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
                         })
                         .build());
         try {
-            noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
+            noteContent.setText(markdownProcessor.parse(note.getContent()));
             onResume();
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-            noteContent.setText(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
             Toast.makeText(noteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-        changedText = note.getContent();
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
         db = NoteSQLiteOpenHelper.getInstance(getActivity());
-        // Pull to Refresh
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                swipeRefreshLayout.setRefreshing(true);
-                db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
-                    @Override
-                    public void onFinish() {
-                        note = db.getNote(note.getAccountId(), note.getId());
-                        noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-
-                    @Override
-                    public void onScheduled() {
-                    }
-                });
-                db.getNoteServerSyncHelper().scheduleSync(false);
-            } else {
-                swipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
-            }
-        });
+        swipeRefreshLayout.setEnabled(false);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getActivity()).getApplicationContext());
         noteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             noteContent.setTypeface(Typeface.MONOSPACE);
         }
+    }
+
+    @Override
+    public void onCloseNote() {
+        // Do nothing
+    }
+
+    @Override
+    protected void saveNote(@Nullable ICallback callback) {
+        // Do nothing
     }
 
     @Override
@@ -222,6 +171,6 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
 
     @Override
     protected String getContent() {
-        return changedText;
+        return note.getContent();
     }
 }

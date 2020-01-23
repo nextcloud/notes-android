@@ -45,7 +45,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
 
-    private static final int MENU_ID_PIN = -1;
+    protected static final int MENU_ID_PIN = -1;
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_ACCOUNT_ID = "accountId";
     public static final String PARAM_CONTENT = "content";
@@ -62,7 +62,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private NoteFragmentListener listener;
 
     boolean isNew = true;
-    boolean isReadonly = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -93,7 +92,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                         if (content == null) {
                             throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                         } else {
-                            isReadonly = true;
                             note = new DBNote(-1, -1, null, NoteUtil.generateNonEmptyNoteTitle(content, getContext()), content, false, "", null, DBStatus.VOID, -1, "");
                         }
                     } else {
