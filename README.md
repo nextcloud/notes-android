@@ -21,7 +21,9 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 [<img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png"
       alt="Donate with PayPal"
       height="80">](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K7HVLE6J7SXXA)
-[![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/stefan-niedermann/donate)
+[<img src="https://raw.githubusercontent.com/stefan-niedermann/DonateButtons/master/LiberaPay.png"
+      alt="Donate using Liberapay"
+      height="80">](https://liberapay.com/stefan-niedermann/donate)
 
 ## :eyes: Screenshots
 
