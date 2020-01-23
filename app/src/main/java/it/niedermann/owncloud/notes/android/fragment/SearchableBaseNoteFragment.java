@@ -34,11 +34,6 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         if (savedInstanceState != null) {
             searchQuery = savedInstanceState.getString("searchQuery", "");
             currentOccurrence = savedInstanceState.getInt("currentOccurrence", 1);
-            // TODO if search is open
-            if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
-                colorWithText(searchQuery);
-                jumpToOccurrence();
-            }
         }
     }
 
@@ -74,6 +69,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                         searchQuery = "";
                         hideSearchFabs();
                     } else {
+                        jumpToOccurrence();
+                        colorWithText(searchQuery);
+                        occurrenceCount = countOccurrences(getContent(), searchQuery);
                         showSearchFabs();
                     }
 
@@ -111,7 +109,6 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 searchQuery = newText;
-                colorWithText(newText);
                 occurrenceCount = countOccurrences(getContent(), searchQuery);
                 if (occurrenceCount > 1) {
                     showSearchFabs();
@@ -120,6 +117,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 }
                 currentOccurrence = 1;
                 jumpToOccurrence();
+                colorWithText(searchQuery);
                 return true;
             }
         });

@@ -96,6 +96,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
 
     @Override
     protected Layout getLayout() {
+        noteContent.onPreDraw();
         return noteContent.getLayout();
     }
 
