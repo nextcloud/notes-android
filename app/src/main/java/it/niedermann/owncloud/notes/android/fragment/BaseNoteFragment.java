@@ -229,11 +229,19 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                     if (currentVisibility != View.VISIBLE) {
                         colorWithText("");
                         searchQuery = "";
-                        if(prev != null) { prev.hide(); }
-                        if(next != null) { next.hide(); }
+                        if (prev != null) {
+                            prev.hide();
+                        }
+                        if (next != null) {
+                            next.hide();
+                        }
                     } else {
-                        if(prev != null) { prev.show(); }
-                        if(next != null) { next.show(); }
+                        if (prev != null) {
+                            prev.show();
+                        }
+                        if (next != null) {
+                            next.show();
+                        }
                     }
 
                     oldVisibility = currentVisibility;
@@ -287,8 +295,12 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         String currentContent = getContent().toLowerCase();
         int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, occurrence);
         if (indexOfNewText <= 0) {
-            // Search term not in text
-            occurrence = 1;
+            // Search term is not n times in text
+            // Go back to first search result
+            if (occurrence != 1) {
+                occurrence = 1;
+                jumpToOccurrence();
+            }
             return;
         }
         String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
