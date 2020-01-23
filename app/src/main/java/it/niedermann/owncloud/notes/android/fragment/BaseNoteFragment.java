@@ -190,7 +190,8 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
-    private int occurrence = 1;
+    private int currentOccurrence = 1;
+    private int occurrenceCount = 0;
 
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
@@ -215,9 +216,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         final LinearLayout searchEditFrame = searchView.findViewById(R.id
                 .search_edit_frame);
 
-        FloatingActionButton next = getSearchNextButton();
-        FloatingActionButton prev = getSearchPrevButton();
-
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             int oldVisibility = -1;
 
@@ -229,19 +227,9 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                     if (currentVisibility != View.VISIBLE) {
                         colorWithText("");
                         searchQuery = "";
-                        if (prev != null) {
-                            prev.hide();
-                        }
-                        if (next != null) {
-                            next.hide();
-                        }
+                        hideSearchFabs();
                     } else {
-                        if (prev != null) {
-                            prev.show();
-                        }
-                        if (next != null) {
-                            next.show();
-                        }
+                        showSearchFabs();
                     }
 
                     oldVisibility = currentVisibility;
@@ -249,16 +237,20 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             }
 
         });
+
+        FloatingActionButton next = getSearchNextButton();
+        FloatingActionButton prev = getSearchPrevButton();
+
         if (next != null) {
             next.setOnClickListener(v -> {
-                occurrence++;
+                currentOccurrence++;
                 jumpToOccurrence();
             });
         }
 
         if (prev != null) {
             prev.setOnClickListener(v -> {
-                occurrence--;
+                currentOccurrence--;
                 jumpToOccurrence();
             });
         }
@@ -266,7 +258,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                occurrence++;
+                currentOccurrence++;
                 jumpToOccurrence();
                 return true;
             }
@@ -275,11 +267,39 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             public boolean onQueryTextChange(String newText) {
                 searchQuery = newText;
                 colorWithText(newText);
-                occurrence = 1;
+                occurrenceCount = countOccurrences(getContent(), searchQuery);
+                if(occurrenceCount > 1) {
+                    showSearchFabs();
+                } else {
+                    hideSearchFabs();
+                }
+                currentOccurrence = 1;
                 jumpToOccurrence();
                 return true;
             }
         });
+    }
+
+    private void hideSearchFabs() {
+        FloatingActionButton next = getSearchNextButton();
+        FloatingActionButton prev = getSearchPrevButton();
+        if (prev != null) {
+            prev.hide();
+        }
+        if (next != null) {
+            next.hide();
+        }
+    }
+
+    private void showSearchFabs() {
+        FloatingActionButton next = getSearchNextButton();
+        FloatingActionButton prev = getSearchPrevButton();
+        if (prev != null) {
+            prev.show();
+        }
+        if (next != null) {
+            next.show();
+        }
     }
 
     private void jumpToOccurrence() {
@@ -287,18 +307,19 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             // No search term
             return;
         }
-        if (occurrence < 1) {
-            // TODO find last occurrence
-            occurrence = 1;
+        if (currentOccurrence < 1) {
+            // if currentOccurrence is lower than 1, jump to last occurrence
+            currentOccurrence = occurrenceCount;
+            jumpToOccurrence();
             return;
         }
         String currentContent = getContent().toLowerCase();
-        int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, occurrence);
+        int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, currentOccurrence);
         if (indexOfNewText <= 0) {
             // Search term is not n times in text
             // Go back to first search result
-            if (occurrence != 1) {
-                occurrence = 1;
+            if (currentOccurrence != 1) {
+                currentOccurrence = 1;
                 jumpToOccurrence();
             }
             return;
@@ -320,6 +341,25 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         if (idx == -1)
             return -1;
         return indexOfNth(input, value, idx + 1, --nth);
+    }
+
+    private static int countOccurrences(String haystack, String needle) {
+        if(haystack == null || haystack.isEmpty() || needle == null || needle.isEmpty()) {
+            return 0;
+        }
+        haystack = haystack.toLowerCase();
+        needle = needle.toLowerCase();
+        int lastIndex = 0;
+        int count = 0;
+
+        while (lastIndex != -1) {
+            lastIndex = haystack.indexOf(needle, lastIndex);
+            if (lastIndex != -1) {
+                count++;
+                lastIndex += needle.length();
+            }
+        }
+        return count;
     }
 
     protected abstract ScrollView getScrollView();
