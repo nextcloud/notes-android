@@ -127,11 +127,9 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         if (fragment != null) {
             savedState = getSupportFragmentManager().saveFragmentInstanceState(fragment);
         }
-        if (edit) {
-            fragment = NoteEditFragment.newInstance(accountId, noteId);
-        } else {
-            fragment = NotePreviewFragment.newInstance(accountId, noteId);
-        }
+        fragment = edit
+                ? NoteEditFragment.newInstance(accountId, noteId)
+                : NotePreviewFragment.newInstance(accountId, noteId);
 
         if (savedState != null) {
             fragment.setInitialSavedState(savedState);

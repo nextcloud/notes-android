@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.Layout;
+import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
@@ -19,9 +20,11 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yydcdut.markdown.MarkdownEditText;
@@ -34,6 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
+import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NotesTextWatcher;
@@ -147,8 +151,6 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         };
 
         if (note != null) {
-            setActiveTextView(editContent);
-
             if (note.getContent().isEmpty()) {
                 editContent.requestFocus();
 
@@ -240,5 +242,14 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
             }
         });
+    }
+
+    @Override
+    protected void colorWithText(String newText) {
+        if (editContent != null && ViewCompat.isAttachedToWindow(editContent)) {
+            editContent.setText(DisplayUtils.searchAndColor(getContent(), new SpannableString
+                            (getContent()), newText, getResources().getColor(R.color.primary)),
+                    TextView.BufferType.SPANNABLE);
+        }
     }
 }
