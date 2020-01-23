@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,11 +21,13 @@ import it.niedermann.owncloud.notes.R;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
+    private static final String TAG = SearchableBaseNoteFragment.class.getCanonicalName();
+    private static final String saved_instance_key_searchQuery = "searchQuery";
+    private static final String saved_instance_key_currentOccurrence = "currentOccurrence";
+
     private int currentOccurrence = 1;
     private int occurrenceCount = 0;
-
     private SearchView searchView;
-
     private String searchQuery = null;
 
     @Override
@@ -32,8 +35,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         super.onActivityCreated(savedInstanceState);
 
         if (savedInstanceState != null) {
-            searchQuery = savedInstanceState.getString("searchQuery", "");
-            currentOccurrence = savedInstanceState.getInt("currentOccurrence", 1);
+            searchQuery = savedInstanceState.getString(saved_instance_key_searchQuery, "");
+            currentOccurrence = savedInstanceState.getInt(saved_instance_key_currentOccurrence, 1);
         }
     }
 
@@ -128,8 +131,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         super.onSaveInstanceState(outState);
 
         if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
-            outState.putString("searchQuery", searchView.getQuery().toString());
-            outState.putInt("currentOccurrence", currentOccurrence);
+            outState.putString(saved_instance_key_searchQuery, searchView.getQuery().toString());
+            outState.putInt(saved_instance_key_currentOccurrence, currentOccurrence);
         }
     }
 
@@ -166,7 +169,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     }
 
     private void jumpToOccurrence() {
+        if (getLayout() == null) {
+            Log.w(TAG, "getLayout() is null");
+            return;
+        }
         if (getContent() == null || getContent().isEmpty()) {
+            Log.w(TAG, "getContent() returned " + getContent());
             return;
         }
         if (searchQuery == null || searchQuery.isEmpty()) {
