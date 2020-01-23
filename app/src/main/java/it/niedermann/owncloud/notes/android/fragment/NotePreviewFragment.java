@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -46,7 +47,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @BindView(R.id.editContentContainer)
+    @BindView(R.id.scrollView)
     ScrollView scrollView;
 
     @BindView(R.id.searchNext)
@@ -68,7 +69,7 @@ public class NotePreviewFragment extends BaseNoteFragment {
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(true);
         menu.findItem(R.id.menu_preview).setVisible(false);

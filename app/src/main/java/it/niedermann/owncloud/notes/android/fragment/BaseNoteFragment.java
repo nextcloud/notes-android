@@ -87,7 +87,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
-    protected void setActiveTextView(TextView textView) {
+    void setActiveTextView(TextView textView) {
         activeTextView = textView;
     }
 
@@ -226,6 +226,11 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                     if (currentVisibility != View.VISIBLE) {
                         colorWithText("");
                         searchQuery = "";
+                        getSearchPrevButton().hide();
+                        getSearchNextButton().hide();
+                    } else {
+                        getSearchPrevButton().show();
+                        getSearchNextButton().show();
                     }
 
                     oldVisibility = currentVisibility;
@@ -253,7 +258,9 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                occurence++;
+                jumpToNthNote(searchQuery);
+                return true;
             }
 
             @Override
@@ -288,6 +295,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         int numberLine = -1;
 
         for (int i = 0; i < textUntilFirstOccurrence.length(); i++) {
+            // FIXME Doesn't count long lines with line breaks!
             if (textUntilFirstOccurrence.charAt(i) == '\n') {
                 numberLine++;
             }
