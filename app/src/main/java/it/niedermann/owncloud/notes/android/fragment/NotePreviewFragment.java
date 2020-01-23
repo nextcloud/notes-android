@@ -25,6 +25,7 @@ import androidx.core.view.ViewCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.yydcdut.markdown.MarkdownConfiguration;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.MarkdownTextView;
 import com.yydcdut.markdown.syntax.text.TextFactory;
@@ -62,6 +63,14 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
 
     @BindView(R.id.single_note_content)
     MarkdownTextView noteContent;
+
+    public static NotePreviewFragment newReadonlyInstance(String content) {
+        NotePreviewFragment f = new NotePreviewFragment();
+        Bundle b = new Bundle();
+        b.putString(PARAM_CONTENT, content);
+        f.setArguments(b);
+        return f;
+    }
 
     public static NotePreviewFragment newInstance(long accountId, long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
@@ -113,61 +122,62 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
         markdownProcessor = new MarkdownProcessor(Objects.requireNonNull(getActivity()));
         markdownProcessor.factory(TextFactory.create());
-        markdownProcessor.config(
-                MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
-                        .setOnTodoClickCallback((view, line, lineNumber) -> {
-                                    try {
-                                        String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
-                                        /*
-                                         * Workaround for RxMarkdown-bug:
-                                         * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
-                                         * Find number of lines starting with ``` before lineNumber
-                                         */
-                                        for (int i = 0; i < lines.length; i++) {
-                                            if (lines[i].startsWith("```")) {
-                                                lineNumber++;
-                                            }
-                                            if (i == lineNumber) {
-                                                break;
-                                            }
-                                        }
-
-                                        /*
-                                         * Workaround for multiple RxMarkdown-bugs:
-                                         * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
-                                         * When (un)checking a checkbox, every markdown gets stripped in the given line argument
-                                         */
-                                        if (lines[lineNumber].startsWith("- [ ]") || lines[lineNumber].startsWith("* [ ]")) {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [ ]", "- [x]");
-                                            lines[lineNumber] = lines[lineNumber].replace("* [ ]", "* [x]");
-                                        } else {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [x]", "- [ ]");
-                                            lines[lineNumber] = lines[lineNumber].replace("* [x]", "* [ ]");
-                                        }
-
-                                        changedText = TextUtils.join("\n", lines);
-                                        noteContent.setText(markdownProcessor.parse(changedText));
-                                        saveNote(null);
-                                    } catch (IndexOutOfBoundsException e) {
-                                        Toast.makeText(getActivity(), R.string.checkbox_could_not_be_toggled, Toast.LENGTH_SHORT).show();
-                                        e.printStackTrace();
-                                    }
-                                    return line;
+        MarkdownConfiguration.Builder config = MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
+                .setOnLinkClickCallback((view, link) -> {
+                    if (NoteLinksUtils.isNoteLink(link)) {
+                        long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
+                        long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
+                        Intent intent = new Intent(getActivity().getApplicationContext(), EditNoteActivity.class);
+                        intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
+                        startActivity(intent);
+                    } else {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                        startActivity(browserIntent);
+                    }
+                });
+        if (!isReadonly) {
+            config.setOnTodoClickCallback((view, line, lineNumber) -> {
+                        try {
+                            String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
+                            /*
+                             * Workaround for RxMarkdown-bug:
+                             * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
+                             * Find number of lines starting with ``` before lineNumber
+                             */
+                            for (int i = 0; i < lines.length; i++) {
+                                if (lines[i].startsWith("```")) {
+                                    lineNumber++;
                                 }
-                        )
-                        .setOnLinkClickCallback((view, link) -> {
-                            if (NoteLinksUtils.isNoteLink(link)) {
-                                long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-                                long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
-                                Intent intent = new Intent(getActivity().getApplicationContext(), EditNoteActivity.class);
-                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
-                                startActivity(intent);
-                            } else {
-                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-                                startActivity(browserIntent);
+                                if (i == lineNumber) {
+                                    break;
+                                }
                             }
-                        })
-                        .build());
+
+                            /*
+                             * Workaround for multiple RxMarkdown-bugs:
+                             * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
+                             * When (un)checking a checkbox, every markdown gets stripped in the given line argument
+                             */
+                            if (lines[lineNumber].startsWith("- [ ]") || lines[lineNumber].startsWith("* [ ]")) {
+                                lines[lineNumber] = lines[lineNumber].replace("- [ ]", "- [x]");
+                                lines[lineNumber] = lines[lineNumber].replace("* [ ]", "* [x]");
+                            } else {
+                                lines[lineNumber] = lines[lineNumber].replace("- [x]", "- [ ]");
+                                lines[lineNumber] = lines[lineNumber].replace("* [x]", "* [ ]");
+                            }
+
+                            changedText = TextUtils.join("\n", lines);
+                            noteContent.setText(markdownProcessor.parse(changedText));
+                            saveNote(null);
+                        } catch (IndexOutOfBoundsException e) {
+                            Toast.makeText(getActivity(), R.string.checkbox_could_not_be_toggled, Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                        return line;
+                    }
+            );
+        }
+        markdownProcessor.config(config.build());
         try {
             noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
             onResume();

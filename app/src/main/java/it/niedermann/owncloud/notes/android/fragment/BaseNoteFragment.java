@@ -32,9 +32,11 @@ import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
@@ -46,6 +48,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private static final int MENU_ID_PIN = -1;
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_ACCOUNT_ID = "accountId";
+    public static final String PARAM_CONTENT = "content";
     public static final String PARAM_NEWNOTE = "newNote";
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
@@ -59,11 +62,11 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private NoteFragmentListener listener;
 
     boolean isNew = true;
+    boolean isReadonly = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         try {
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext()).name);
 
@@ -85,11 +88,18 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                     note = originalNote = db.getNote(localAccount.getId(), id);
                 } else {
                     CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
+                    String content = getArguments().getString(PARAM_CONTENT);
                     if (cloudNote == null) {
-                        throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE + " is missing.");
+                        if (content == null) {
+                            throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
+                        } else {
+                            isReadonly = true;
+                            note = new DBNote(-1, -1, null, NoteUtil.generateNonEmptyNoteTitle(content, getContext()), content, false, "", null, DBStatus.VOID, -1, "");
+                        }
+                    } else {
+                        note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
+                        originalNote = null;
                     }
-                    note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
-                    originalNote = null;
                 }
             } else {
                 note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
