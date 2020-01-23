@@ -12,6 +12,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -19,6 +23,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
 import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
+import it.niedermann.owncloud.notes.android.fragment.NoteReadonlyFragment;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -86,7 +91,11 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         if (noteId > 0) {
             launchExistingNote(getAccountId(), noteId);
         } else {
-            launchNewNote();
+            if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+                launchReadonlyNote();
+            } else {
+                launchNewNote();
+            }
         }
     }
 
@@ -163,6 +172,24 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
         CloudNote newNote = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, category, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+    }
+
+    private void launchReadonlyNote() {
+        Intent intent = getIntent();
+        StringBuilder content = new StringBuilder();
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(Objects.requireNonNull(intent.getData()));
+            BufferedReader r = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
+            String line;
+            while ((line = r.readLine()) != null) {
+                content.append(line).append('\n');
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        fragment = NoteReadonlyFragment.newInstance(content.toString());
         getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
     }
 
