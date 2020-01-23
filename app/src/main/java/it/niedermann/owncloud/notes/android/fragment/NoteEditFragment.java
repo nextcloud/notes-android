@@ -113,12 +113,12 @@ public class NoteEditFragment extends BaseNoteFragment {
     }
 
     @Override
-    protected View getSearchNextButton() {
+    protected FloatingActionButton getSearchNextButton() {
         return searchNext;
     }
 
     @Override
-    protected View getSearchPrevButton() {
+    protected FloatingActionButton getSearchPrevButton() {
         return searchPrev;
     }
 
