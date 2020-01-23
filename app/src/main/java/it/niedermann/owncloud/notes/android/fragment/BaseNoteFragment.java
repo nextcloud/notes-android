@@ -10,24 +10,16 @@ import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
-import android.text.SpannableString;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.ShareActionProvider;
 import androidx.core.view.MenuItemCompat;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -45,7 +37,6 @@ import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
-import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
@@ -62,11 +53,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
-    protected SearchView searchView;
-    protected MenuItem searchMenuItem;
-
-    protected String searchQuery = null;
-
     private LocalAccount localAccount;
 
     protected DBNote note;
@@ -75,21 +61,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     protected NoteSQLiteOpenHelper db;
     private NoteFragmentListener listener;
 
-    private TextView activeTextView;
-    private boolean isNew = true;
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            searchQuery = savedInstanceState.getString("searchQuery", "");
-        }
-    }
-
-    void setActiveTextView(TextView textView) {
-        activeTextView = textView;
-    }
+    boolean isNew = true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -167,18 +139,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         saveNote(null);
         outState.putSerializable(SAVEDKEY_NOTE, note);
         outState.putSerializable(SAVEDKEY_ORIGINAL_NOTE, originalNote);
-
-        if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
-            outState.putString("searchQuery", searchView.getQuery().toString());
-        }
-    }
-
-    private void colorWithText(String newText) {
-        if (activeTextView != null && ViewCompat.isAttachedToWindow(activeTextView)) {
-            activeTextView.setText(DisplayUtils.searchAndColor(activeTextView.getText().toString(), new SpannableString
-                            (activeTextView.getText()), newText, getResources().getColor(R.color.primary)),
-                    TextView.BufferType.SPANNABLE);
-        }
     }
 
     @Override
@@ -190,9 +150,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
-    private int currentOccurrence = 1;
-    private int occurrenceCount = 0;
-
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -200,166 +157,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         prepareFavoriteOption(itemFavorite);
 
         menu.findItem(R.id.menu_delete).setVisible(!isNew);
-
-        searchMenuItem = menu.findItem(R.id.search);
-        searchView = (SearchView) searchMenuItem.getActionView();
-
-        if (!TextUtils.isEmpty(searchQuery) && isNew) {
-            searchMenuItem.expandActionView();
-            searchView.setQuery(searchQuery, true);
-            searchView.clearFocus();
-        } else {
-            searchMenuItem.collapseActionView();
-        }
-
-
-        final LinearLayout searchEditFrame = searchView.findViewById(R.id
-                .search_edit_frame);
-
-        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            int oldVisibility = -1;
-
-            @Override
-            public void onGlobalLayout() {
-                int currentVisibility = searchEditFrame.getVisibility();
-
-                if (currentVisibility != oldVisibility) {
-                    if (currentVisibility != View.VISIBLE) {
-                        colorWithText("");
-                        searchQuery = "";
-                        hideSearchFabs();
-                    } else {
-                        showSearchFabs();
-                    }
-
-                    oldVisibility = currentVisibility;
-                }
-            }
-
-        });
-
-        FloatingActionButton next = getSearchNextButton();
-        FloatingActionButton prev = getSearchPrevButton();
-
-        if (next != null) {
-            next.setOnClickListener(v -> {
-                currentOccurrence++;
-                jumpToOccurrence();
-            });
-        }
-
-        if (prev != null) {
-            prev.setOnClickListener(v -> {
-                currentOccurrence--;
-                jumpToOccurrence();
-            });
-        }
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                currentOccurrence++;
-                jumpToOccurrence();
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                searchQuery = newText;
-                colorWithText(newText);
-                occurrenceCount = countOccurrences(getContent(), searchQuery);
-                if(occurrenceCount > 1) {
-                    showSearchFabs();
-                } else {
-                    hideSearchFabs();
-                }
-                currentOccurrence = 1;
-                jumpToOccurrence();
-                return true;
-            }
-        });
-    }
-
-    private void hideSearchFabs() {
-        FloatingActionButton next = getSearchNextButton();
-        FloatingActionButton prev = getSearchPrevButton();
-        if (prev != null) {
-            prev.hide();
-        }
-        if (next != null) {
-            next.hide();
-        }
-    }
-
-    private void showSearchFabs() {
-        FloatingActionButton next = getSearchNextButton();
-        FloatingActionButton prev = getSearchPrevButton();
-        if (prev != null) {
-            prev.show();
-        }
-        if (next != null) {
-            next.show();
-        }
-    }
-
-    private void jumpToOccurrence() {
-        if (searchQuery == null || searchQuery.isEmpty()) {
-            // No search term
-            return;
-        }
-        if (currentOccurrence < 1) {
-            // if currentOccurrence is lower than 1, jump to last occurrence
-            currentOccurrence = occurrenceCount;
-            jumpToOccurrence();
-            return;
-        }
-        String currentContent = getContent().toLowerCase();
-        int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, currentOccurrence);
-        if (indexOfNewText <= 0) {
-            // Search term is not n times in text
-            // Go back to first search result
-            if (currentOccurrence != 1) {
-                currentOccurrence = 1;
-                jumpToOccurrence();
-            }
-            return;
-        }
-        String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
-        int numberLine = getLayout().getLineForOffset(textUntilFirstOccurrence.length());
-
-        if (numberLine >= 0) {
-            getScrollView().smoothScrollTo(0, getLayout().getLineTop(numberLine));
-        }
-    }
-
-    private static int indexOfNth(String input, String value, int startIndex, int nth) {
-        if (nth < 1)
-            throw new IllegalArgumentException("Param 'nth' must be greater than 0!");
-        if (nth == 1)
-            return input.indexOf(value, startIndex);
-        int idx = input.indexOf(value, startIndex);
-        if (idx == -1)
-            return -1;
-        return indexOfNth(input, value, idx + 1, --nth);
-    }
-
-    private static int countOccurrences(String haystack, String needle) {
-        if(haystack == null || haystack.isEmpty() || needle == null || needle.isEmpty()) {
-            return 0;
-        }
-        haystack = haystack.toLowerCase();
-        needle = needle.toLowerCase();
-        int lastIndex = 0;
-        int count = 0;
-
-        while (lastIndex != -1) {
-            lastIndex = haystack.indexOf(needle, lastIndex);
-            if (lastIndex != -1) {
-                count++;
-                lastIndex += needle.length();
-            }
-        }
-        return count;
     }
 
     protected abstract ScrollView getScrollView();
