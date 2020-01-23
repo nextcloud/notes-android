@@ -38,7 +38,7 @@ import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 
-public class NotePreviewFragment extends BaseNoteFragment {
+public class NotePreviewFragment extends SearchableBaseNoteFragment {
 
     private String changedText;
 
