@@ -190,7 +190,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
-    private int occurence = 1;
+    private int occurrence = 1;
 
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
@@ -215,6 +215,9 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         final LinearLayout searchEditFrame = searchView.findViewById(R.id
                 .search_edit_frame);
 
+        FloatingActionButton next = getSearchNextButton();
+        FloatingActionButton prev = getSearchPrevButton();
+
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             int oldVisibility = -1;
 
@@ -226,11 +229,11 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                     if (currentVisibility != View.VISIBLE) {
                         colorWithText("");
                         searchQuery = "";
-                        getSearchPrevButton().hide();
-                        getSearchNextButton().hide();
+                        if(prev != null) { prev.hide(); }
+                        if(next != null) { next.hide(); }
                     } else {
-                        getSearchPrevButton().show();
-                        getSearchNextButton().show();
+                        if(prev != null) { prev.show(); }
+                        if(next != null) { next.show(); }
                     }
 
                     oldVisibility = currentVisibility;
@@ -238,28 +241,25 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             }
 
         });
-
-        View next = getSearchNextButton();
         if (next != null) {
             next.setOnClickListener(v -> {
-                occurence++;
-                jumpToNthNote(searchQuery);
+                occurrence++;
+                jumpToOccurrence();
             });
         }
 
-        View prev = getSearchPrevButton();
         if (prev != null) {
             prev.setOnClickListener(v -> {
-                occurence--;
-                jumpToNthNote(searchQuery);
+                occurrence--;
+                jumpToOccurrence();
             });
         }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                occurence++;
-                jumpToNthNote(searchQuery);
+                occurrence++;
+                jumpToOccurrence();
                 return true;
             }
 
@@ -267,39 +267,32 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             public boolean onQueryTextChange(String newText) {
                 searchQuery = newText;
                 colorWithText(newText);
-                occurence = 1;
-                jumpToNthNote(newText);
+                occurrence = 1;
+                jumpToOccurrence();
                 return true;
             }
         });
     }
 
-    private void jumpToNthNote(String newText) {
-        if (newText == null || newText.isEmpty()) {
+    private void jumpToOccurrence() {
+        if (searchQuery == null || searchQuery.isEmpty()) {
             // No search term
             return;
         }
-        if (occurence < 1) {
-            // TODO find last occurence
-            occurence = 1;
+        if (occurrence < 1) {
+            // TODO find last occurrence
+            occurrence = 1;
             return;
         }
         String currentContent = getContent().toLowerCase();
-        int indexOfNewText = indexOfNth(currentContent, newText.toLowerCase(), 0, occurence);
+        int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, occurrence);
         if (indexOfNewText <= 0) {
             // Search term not in text
-            occurence = 1;
+            occurrence = 1;
             return;
         }
         String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
-        int numberLine = -1;
-
-        for (int i = 0; i < textUntilFirstOccurrence.length(); i++) {
-            // FIXME Doesn't count long lines with line breaks!
-            if (textUntilFirstOccurrence.charAt(i) == '\n') {
-                numberLine++;
-            }
-        }
+        int numberLine = getLayout().getLineForOffset(textUntilFirstOccurrence.length());
 
         if (numberLine >= 0) {
             getScrollView().smoothScrollTo(0, getLayout().getLineTop(numberLine));
