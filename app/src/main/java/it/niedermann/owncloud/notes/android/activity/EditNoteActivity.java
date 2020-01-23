@@ -177,19 +177,19 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     private void launchReadonlyNote() {
         Intent intent = getIntent();
-        StringBuilder text = new StringBuilder();
+        StringBuilder content = new StringBuilder();
         try {
             InputStream inputStream = getContentResolver().openInputStream(Objects.requireNonNull(intent.getData()));
             BufferedReader r = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
-            String mLine;
-            while ((mLine = r.readLine()) != null) {
-                text.append(mLine).append('\n');
+            String line;
+            while ((line = r.readLine()) != null) {
+                content.append(line).append('\n');
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        fragment = NoteReadonlyFragment.newInstance(text.toString());
+        fragment = NoteReadonlyFragment.newInstance(content.toString());
         getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
     }
 
