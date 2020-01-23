@@ -1,7 +1,7 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
-import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.ShareActionProvider;
@@ -30,6 +31,7 @@ import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
@@ -131,14 +133,14 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
         try {
-            listener = (NoteFragmentListener) activity;
+            listener = (NoteFragmentListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.getClass() + " must implement " + NoteFragmentListener.class);
+            throw new ClassCastException(context.getClass() + " must implement " + NoteFragmentListener.class);
         }
-        db = NoteSQLiteOpenHelper.getInstance(activity);
+        db = NoteSQLiteOpenHelper.getInstance(context);
     }
 
     @Override
@@ -160,7 +162,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         saveNote(null);
         outState.putSerializable(SAVEDKEY_NOTE, note);
@@ -180,10 +182,10 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
 
-        if (isRequestPinShortcutSupported(getActivity()) && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (isRequestPinShortcutSupported(Objects.requireNonNull(getActivity())) && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
     }
@@ -191,7 +193,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private int occurence = 1;
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
@@ -234,12 +236,18 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
         View next = getSearchNextButton();
         if (next != null) {
-            next.setOnClickListener(v -> jumpToNthNote(searchQuery, occurence, true));
+            next.setOnClickListener(v -> {
+                occurence++;
+                jumpToNthNote(searchQuery);
+            });
         }
 
         View prev = getSearchPrevButton();
         if (prev != null) {
-            prev.setOnClickListener(v -> jumpToNthNote(searchQuery, occurence, false));
+            prev.setOnClickListener(v -> {
+                occurence--;
+                jumpToNthNote(searchQuery);
+            });
         }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -250,27 +258,27 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                occurence = 1;
                 searchQuery = newText;
                 colorWithText(newText);
+                occurence = 1;
                 jumpToNthNote(newText);
                 return true;
             }
         });
-
     }
 
     private void jumpToNthNote(String newText) {
-        jumpToNthNote(newText, 1, true);
-    }
-
-    private void jumpToNthNote(String newText, int occurrence, boolean directionForward) {
         if (newText == null || newText.isEmpty()) {
             // No search term
             return;
         }
+        if (occurence < 1) {
+            // TODO find last occurence
+            occurence = 1;
+            return;
+        }
         String currentContent = getContent().toLowerCase();
-        int indexOfNewText = indexOfNth(currentContent, newText.toLowerCase(), 0, occurrence);
+        int indexOfNewText = indexOfNth(currentContent, newText.toLowerCase(), 0, occurence);
         if (indexOfNewText <= 0) {
             // Search term not in text
             occurence = 1;
@@ -287,11 +295,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
         if (numberLine >= 0) {
             getScrollView().smoothScrollTo(0, getLayout().getLineTop(numberLine));
-        }
-        if(directionForward) {
-            this.occurence++;
-        } else {
-            this.occurence--;
         }
     }
 
@@ -310,8 +313,9 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     protected abstract Layout getLayout();
 
-    protected abstract View getSearchNextButton();
-    protected abstract View getSearchPrevButton();
+    protected abstract FloatingActionButton getSearchNextButton();
+
+    protected abstract FloatingActionButton getSearchPrevButton();
 
     private void prepareFavoriteOption(MenuItem item) {
         item.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
