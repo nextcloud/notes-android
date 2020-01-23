@@ -169,7 +169,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     }
 
     private void jumpToOccurrence() {
-        if (getLayout() == null) {
+        Layout layout = getLayout();
+        if (layout == null) {
             Log.w(TAG, "getLayout() is null");
             return;
         }
@@ -199,10 +200,10 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             return;
         }
         String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
-        int numberLine = getLayout().getLineForOffset(textUntilFirstOccurrence.length());
+        int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
 
         if (numberLine >= 0) {
-            getScrollView().smoothScrollTo(0, getLayout().getLineTop(numberLine));
+            getScrollView().smoothScrollTo(0, layout.getLineTop(numberLine));
         }
     }
 
