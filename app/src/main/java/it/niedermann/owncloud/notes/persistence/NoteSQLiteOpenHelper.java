@@ -81,7 +81,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String key_etag = "ETAG";
 
     private static final String[] columnsWithoutContent = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt};
-    private static final String[] columns               = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt, key_content};
+    private static final String[] columns = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt, key_content};
     private static final String default_order = key_favorite + " DESC, " + key_modified + " DESC";
 
     private static NoteSQLiteOpenHelper instance;
@@ -390,9 +390,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         Cursor cursor = getReadableDatabase()
                 .query(
                         table_notes,
-                        new String[]{ key_remote_id },
+                        new String[]{key_remote_id},
                         key_status + " != ? AND " + key_account_id + " = ?",
-                        new String[]{ DBStatus.LOCAL_DELETED.getTitle(), "" + accountId },
+                        new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId},
                         null,
                         null,
                         null
@@ -413,7 +413,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public long getLocalIdByRemoteId(long accountId, long remoteId) {
         List<DBNote> notes = getNotesCustom(accountId, key_remote_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(remoteId), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, true);
-        if(notes.isEmpty() || notes.get(0) == null) {
+        if (notes.isEmpty() || notes.get(0) == null) {
             throw new IllegalArgumentException("There is no note with remoteId \"" + remoteId + "\"");
         }
         return notes.get(0).getId();
@@ -452,7 +452,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     /**
      * Creates a DBNote object from the current row of a Cursor.
      *
-     * @param cursor database cursor
+     * @param cursor       database cursor
      * @param pruneContent whether or not the content should be pruned for performance reasons
      * @return DBNote
      */
@@ -605,6 +605,38 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 new String[]{key_category, "COUNT(*)"},
                 key_status + " != ? AND " + key_account_id + " = ?",
                 new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId},
+                key_category,
+                null,
+                key_category);
+        List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
+        while (cursor.moveToNext()) {
+            Resources res = context.getResources();
+            String category = cursor.getString(0).toLowerCase();
+            int icon = NavigationAdapter.ICON_FOLDER;
+            if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
+                icon = R.drawable.ic_library_music_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
+                icon = R.drawable.ic_local_movies_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
+                icon = R.drawable.ic_work_grey600_24dp;
+            }
+            categories.add(new NavigationAdapter.NavigationItem("category:" + cursor.getString(0), cursor.getString(0), cursor.getInt(1), icon));
+        }
+        cursor.close();
+        return categories;
+    }
+
+    // TODO merge with getCategories(long accountId)
+    @NonNull
+    @WorkerThread
+    public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
+        validateAccountId(accountId);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                table_notes,
+                new String[]{key_category, "COUNT(*)"},
+                key_status + " != ? AND " + key_account_id + " = ? AND " + key_category + " LIKE ?",
+                new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId, "%" + search + "%"},
                 key_category,
                 null,
                 key_category);
