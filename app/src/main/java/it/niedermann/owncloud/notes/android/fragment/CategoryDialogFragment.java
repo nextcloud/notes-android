@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -36,6 +37,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     private static final String TAG = CategoryDialogFragment.class.getSimpleName();
     private static final String STATE_CATEGORY = "category";
 
+    private NoteSQLiteOpenHelper db;
     private CategoryDialogListener listener;
 
     /**
@@ -79,6 +81,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
         } else {
             throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getCanonicalName());
         }
+        db = NoteSQLiteOpenHelper.getInstance(getActivity());
     }
 
     @NonNull
@@ -95,9 +98,24 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
             editCategory.setText(savedInstanceState.getString(STATE_CATEGORY));
         }
 
-        adapter = new CategoryAdapter((String category) -> {
-            listener.onCategoryChosen(category);
-            dismiss();
+        adapter = new CategoryAdapter(Objects.requireNonNull(getContext()), new CategoryAdapter.CategoryListener() {
+            @Override
+            public void onCategoryChosen(String category) {
+                listener.onCategoryChosen(category);
+                dismiss();
+            }
+
+            @Override
+            public void onCategoryAdded() {
+                listener.onCategoryChosen(editCategory.getText().toString());
+                dismiss();
+            }
+
+            @Override
+            public void onCategoryCleared() {
+                listener.onCategoryChosen("");
+                dismiss();
+            }
         });
 
         recyclerView.setAdapter(adapter);
@@ -110,12 +128,12 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                new LoadCategoriesTask().execute(editCategory.getText().toString());
+                // Nothing to do here...
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Nothing to do here....
+                new LoadCategoriesTask().execute(editCategory.getText().toString());
             }
         });
 
@@ -137,6 +155,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        editCategory.requestFocus();
         if (getDialog().getWindow() != null) {
             getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         } else {
@@ -146,17 +165,17 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
 
 
     private class LoadCategoriesTask extends AsyncTask<String, Void, List<NavigationAdapter.NavigationItem>> {
+        String currentSearchString;
+
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(String... searchText) {
-            NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
-            return (searchText[0] == null || searchText[0].length() == 0)
-                    ? db.getCategories(accountId)
-                    : db.searchCategories(accountId, searchText[0]);
+            currentSearchString = searchText[0];
+            return db.searchCategories(accountId, currentSearchString);
         }
 
         @Override
         protected void onPostExecute(List<NavigationAdapter.NavigationItem> categories) {
-            adapter.setCategoryList(categories);
+            adapter.setCategoryList(categories, currentSearchString);
         }
     }
 }

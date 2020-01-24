@@ -635,8 +635,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(
                 table_notes,
                 new String[]{key_category, "COUNT(*)"},
-                key_status + " != ? AND " + key_account_id + " = ? AND " + key_category + " LIKE ?",
-                new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId, "%" + search + "%"},
+                key_status + " != ? AND " + key_account_id + " = ? AND " + key_category + " LIKE ? AND " + key_category + " != \"\"",
+                new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId), "%" + (search == null ? search : search.trim()) + "%"},
                 key_category,
                 null,
                 key_category);
