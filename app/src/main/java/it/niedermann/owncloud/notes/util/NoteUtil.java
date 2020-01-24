@@ -105,7 +105,7 @@ public class NoteUtil {
      * @return excerpt String
      */
     @NonNull
-    static String generateNoteTitle(@NonNull String content) {
+    public static String generateNoteTitle(@NonNull String content) {
         return getLineWithoutMarkDown(content, 0);
     }
 

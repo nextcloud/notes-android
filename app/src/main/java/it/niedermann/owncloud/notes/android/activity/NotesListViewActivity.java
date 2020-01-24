@@ -336,6 +336,10 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         fabCreate.setOnClickListener((View view) -> {
             Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
             createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, navigationSelection);
+            if (searchView != null && !searchView.isIconified() && searchView.getQuery().length() > 0) {
+                createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, searchView.getQuery().toString());
+                invalidateOptionsMenu();
+            }
             startActivityForResult(createIntent, create_note_cmd);
         });
     }
@@ -800,7 +804,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         if (searchView == null || searchView.isIconified()) {
             super.onBackPressed();
         } else {
-            searchView.setIconified(true);
+            invalidateOptionsMenu();
         }
     }
 

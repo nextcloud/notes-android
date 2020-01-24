@@ -43,6 +43,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_ACCOUNT_ID = "accountId";
     public static final String PARAM_CATEGORY = "category";
+    public static final String PARAM_CONTENT = "content";
 
     private BaseNoteFragment fragment;
 
@@ -163,13 +164,19 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
         String content = "";
         if (
+                intent.hasExtra(Intent.EXTRA_TEXT) &&
                 MIMETYPE_TEXT_PLAIN.equals(intent.getType()) &&
                         (Intent.ACTION_SEND.equals(intent.getAction()) ||
                                 INTENT_GOOGLE_ASSISTANT.equals(intent.getAction()))
         ) {
             content = intent.getStringExtra(Intent.EXTRA_TEXT);
+        } else if (intent.hasExtra(PARAM_CONTENT)) {
+            content = intent.getStringExtra(PARAM_CONTENT);
         }
 
+        if (content == null) {
+            content = "";
+        }
         CloudNote newNote = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, category, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
         getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
