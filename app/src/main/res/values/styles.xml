@@ -14,8 +14,6 @@
     <style name="Preferences" parent="AppTheme">
         <item name="android:textColor">@color/fg_default</item>
         <item name="android:textColorSecondary">@color/fg_default_low</item>
-        <item name="windowActionBar">true</item>
-        <item name="windowNoTitle">false</item>
     </style>
 
     <style name="ncAlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
