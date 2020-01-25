@@ -58,6 +58,7 @@ public abstract class LockedActivity extends AppCompatActivity {
                     Log.v(TAG, "Successfully unlocked device");
                     Notes.unlock();
                 } else {
+                    Log.e(TAG, "Result code of unlocking was " + resultCode);
                     finish();
                 }
                 break;
