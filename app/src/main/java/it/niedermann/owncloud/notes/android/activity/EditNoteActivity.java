@@ -259,7 +259,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         if (note != null) {
             toolbar.setTitle(note.getTitle());
             if (note.getCategory().isEmpty()) {
-                toolbar.setSubtitle(null)
+                toolbar.setSubtitle(null);
             } else {
                 toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
