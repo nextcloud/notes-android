@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">İşaret kutusunun işareti değiştirilemedi.</string>
     <string name="bulk_notes_deleted">%1$d not silindi</string>
     <string name="bulk_notes_restored">%1$dnot geri yüklendi</string>
+    <string name="category_readonly">Salt okunur</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

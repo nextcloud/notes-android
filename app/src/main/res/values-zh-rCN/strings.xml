@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">无法切换复选框。</string>
     <string name="bulk_notes_deleted">删除了 %1$d 条笔记</string>
     <string name="bulk_notes_restored">恢复了 %1$d 条笔记</string>
+    <string name="category_readonly">只读</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

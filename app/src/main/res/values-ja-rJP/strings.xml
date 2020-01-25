@@ -111,6 +111,8 @@
     <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
     <string name="simple_more">さらに表示</string>
     <string name="simple_move">移動</string>
+    <string name="category_readonly">読み込み専用</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>

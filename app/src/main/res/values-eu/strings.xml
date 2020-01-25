@@ -16,6 +16,8 @@
     <string name="simple_bold">Lodia</string>
     <string name="simple_link">Esteka</string>
     <string name="simple_italic">Etzana</string>
+    <string name="action_note_deleted">%1$s ezabatuta</string>
+    <string name="action_note_restored">%1$szaharberrituta</string>
     <string name="action_undo">Desegin</string>
     <string name="action_drawer_open">ireki nabigazioa</string>
     <string name="action_drawer_close">itxi nabigazioa</string>
@@ -113,6 +115,8 @@
     <string name="simple_more">Gehiago</string>
     <string name="simple_move">Mugitu</string>
     <string name="error_files_app_version_too_old">Zure files aplikazioaren bertsioa egunean dago?</string>
+    <string name="category_readonly">Irakurtzeko soilik</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>

@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">Não foi possível alternar a caixa de seleção.</string>
     <string name="bulk_notes_deleted"> %1$d notas excluídas</string>
     <string name="bulk_notes_restored">%1$d notas restauradas</string>
+    <string name="category_readonly">Somente leitura</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -110,6 +110,8 @@
     <string name="no_notes_yet_description">Притисните + дугме да направите нову белешку</string>
     <string name="simple_more">Још</string>
     <string name="simple_move">Помери</string>
+    <string name="category_readonly">Само за читање</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>

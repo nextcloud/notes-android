@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">Nie można zmienić pola wyboru.</string>
     <string name="bulk_notes_deleted">Usunięto notatki %1$d</string>
     <string name="bulk_notes_restored">Przywrócono notatki %1$d</string>
+    <string name="category_readonly">Tylko do odczytu</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

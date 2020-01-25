@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">Δεν ήταν δυνατή η εναλλαγή του πλαισίου ελέγχου.</string>
     <string name="bulk_notes_deleted">Διεγραμμένες %1$d σημειώσεις</string>
     <string name="bulk_notes_restored">Επαναφέρθηκαν %1$dσημειώσεις</string>
+    <string name="category_readonly">Μόνο για ανάγνωση</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

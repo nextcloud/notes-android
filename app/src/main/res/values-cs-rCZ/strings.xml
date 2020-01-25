@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">Zaškrtávací kolonku se nepodařilo přepnout.</string>
     <string name="bulk_notes_deleted">Smazáno %1$d poznámek</string>
     <string name="bulk_notes_restored">Obnoveno %1$d poznámek</string>
+    <string name="category_readonly">Pouze pro čtení</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">Non foi posíbel cambiar a caixa de selección.</string>
     <string name="bulk_notes_deleted">Foron eliminadas %1$d notas</string>
     <string name="bulk_notes_restored">Foron restauradas %1$d notas</string>
+    <string name="category_readonly">Só lectura</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
