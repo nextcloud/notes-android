@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -45,28 +47,31 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         NavigationItem category = categories.get(position);
         CategoryViewHolder categoryViewHolder = (CategoryViewHolder) holder;
-        categoryViewHolder.categoryWrapper.setOnClickListener((v) -> {
-            switch (category.id) {
-                case addItemId: {
-                    listener.onCategoryAdded();
-                    break;
-                }
-                case clearItemId: {
-                    listener.onCategoryCleared();
-                    break;
-                }
-                default: {
-                    listener.onCategoryChosen(category.label);
-                }
+
+        switch (category.id) {
+            case addItemId: {
+                Drawable wrapDrawable = DrawableCompat.wrap(context.getResources().getDrawable(category.icon));
+                DrawableCompat.setTint(wrapDrawable, context.getResources().getColor(R.color.icon_color_default));
+                categoryViewHolder.icon.setImageDrawable(wrapDrawable);
+                categoryViewHolder.categoryWrapper.setOnClickListener((v) -> listener.onCategoryAdded());
+                break;
             }
-        });
+            case clearItemId: {
+                categoryViewHolder.icon.setImageDrawable(context.getResources().getDrawable(category.icon));
+                categoryViewHolder.categoryWrapper.setOnClickListener((v) -> listener.onCategoryCleared());
+                break;
+            }
+            default: {
+                categoryViewHolder.icon.setImageDrawable(context.getResources().getDrawable(category.icon));
+                categoryViewHolder.categoryWrapper.setOnClickListener((v) -> listener.onCategoryChosen(category.label));
+            }
+        }
         categoryViewHolder.category.setText(NoteUtil.extendCategory(category.label));
         if (category.count > 0) {
             categoryViewHolder.count.setText(String.valueOf(category.count));
         } else {
             categoryViewHolder.count.setVisibility(View.GONE);
         }
-        categoryViewHolder.icon.setImageDrawable(context.getResources().getDrawable(category.icon));
     }
 
     @Override

@@ -17,6 +17,8 @@
     <color name="fg_default_high">#cccccc</color>
     <color name="fg_contrast">#ffffff</color>
 
+    <color name="icon_color_default">#757575</color>
+
     <color name="widget_background">#DFFFFFFF</color>
     <color name="widget_fg_default">#000000</color>
     <color name="widget_fg_contrast">#ffffff</color>
