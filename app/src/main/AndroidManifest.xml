@@ -49,7 +49,6 @@
             android:label="@string/action_settings"
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateHidden"
-            android:theme="@style/Preferences"
             />
 
         <activity
