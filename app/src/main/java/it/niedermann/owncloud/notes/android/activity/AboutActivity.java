@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.android.activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,9 +17,8 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentContributingTab;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentCreditsTab;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentLicenseTab;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
 
-public class AboutActivity extends AppCompatActivity {
+public class AboutActivity extends LockedActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -32,7 +30,7 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
+
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
 

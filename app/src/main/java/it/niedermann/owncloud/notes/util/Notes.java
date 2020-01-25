@@ -4,10 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
 import androidx.appcompat.app.AppCompatDelegate;
 
 public class Notes extends Application {
     private static final String DARK_THEME = "darkTheme";
+    private static boolean locked = true;
 
     @Override
     public void onCreate() {
@@ -26,5 +28,17 @@ public class Notes extends Application {
     public static boolean getAppTheme(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getBoolean(DARK_THEME, false);
+    }
+
+    public static boolean isLocked() {
+        return locked;
+    }
+
+    public static void lock() {
+        locked = true;
+    }
+
+    public static void unlock() {
+        locked = false;
     }
 }

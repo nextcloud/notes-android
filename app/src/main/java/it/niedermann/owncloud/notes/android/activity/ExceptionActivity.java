@@ -33,9 +33,11 @@ public class ExceptionActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n") // only used for logging
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_exception);
         ButterKnife.bind(this);
-        super.onCreate(savedInstanceState);
+
         setSupportActionBar(toolbar);
         throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
         throwable.printStackTrace();

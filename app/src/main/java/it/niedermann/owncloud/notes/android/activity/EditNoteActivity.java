@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
@@ -30,12 +29,11 @@ import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
 
-public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener, AccountChooserListener {
+public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountChooserListener {
 
     private static final String TAG = EditNoteActivity.class.getSimpleName();
 
@@ -55,10 +53,8 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
         setContentView(R.layout.activity_edit);
-
         ButterKnife.bind(this);
 
         if (savedInstanceState == null) {

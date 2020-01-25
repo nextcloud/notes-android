@@ -1,8 +1,6 @@
 package it.niedermann.owncloud.notes.android.activity;
 
-import android.app.KeyguardManager;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteConstraintException;
@@ -24,7 +22,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
@@ -69,13 +66,12 @@ import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
-public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
+public class NotesListViewActivity extends LockedActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
 
@@ -93,7 +89,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private static final int show_single_note_cmd = 1;
     private static final int server_settings = 2;
     private static final int about = 3;
-    private static final int unlock = 4;
 
     /**
      * Used to detect the onResume() call after the import dialog has been displayed.
@@ -164,7 +159,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
         setContentView(R.layout.drawer_layout);
         ButterKnife.bind(this);
@@ -190,17 +184,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
         setupNotesList();
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
-            if (keyguardManager != null) {
-                Intent i = keyguardManager.createConfirmDeviceCredentialIntent(getString(R.string.unlock_notes), null);
-                i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivityForResult(i, unlock);
-            } else {
-                Log.e(TAG, "Keyguard manager is null");
-            }
-        }
     }
 
     @Override
@@ -706,10 +689,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
                 // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
                 recreate();
-                break;
-            }
-            case unlock: {
-                Log.v(TAG, "Successfully unlocked device " + (resultCode == RESULT_OK));
                 break;
             }
             default: {
