@@ -144,6 +144,7 @@
     <string name="bulk_notes_deleted">Deleted %1$d notes</string>
     <string name="bulk_notes_restored">Restored %1$d notes</string>
     <string name="category_readonly">Read only</string>
+    <string name="unlock_notes">Unlock notes</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

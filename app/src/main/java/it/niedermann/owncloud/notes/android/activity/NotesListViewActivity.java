@@ -89,10 +89,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
     private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
 
-    private final static int create_note_cmd = 0;
-    private final static int show_single_note_cmd = 1;
-    private final static int server_settings = 2;
-    private final static int about = 3;
+    private static final int create_note_cmd = 0;
+    private static final int show_single_note_cmd = 1;
+    private static final int server_settings = 2;
+    private static final int about = 3;
+    private static final int unlock = 4;
 
     /**
      * Used to detect the onResume() call after the import dialog has been displayed.
@@ -193,12 +194,11 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
             if (keyguardManager != null) {
-                Intent i = keyguardManager.createConfirmDeviceCredentialIntent(null, null);
+                Intent i = keyguardManager.createConfirmDeviceCredentialIntent(getString(R.string.unlock_notes), null);
                 i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                startActivityForResult(i, 999);
+                startActivityForResult(i, unlock);
             } else {
                 Log.e(TAG, "Keyguard manager is null");
-//            finishWithResult(-45);
             }
         }
     }
@@ -671,7 +671,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     /**
-     * Handles the Results of started Sub Activities (Created Note, Edited Note)
+     * Handles the Results of started Sub Activities (Edited notes, settings)
      *
      * @param requestCode int to distinguish between the different Sub Activities
      * @param resultCode  int Return Code
@@ -681,48 +681,57 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Check which request we're responding to
-        if (requestCode == create_note_cmd) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
-                //not need because of db.synchronisation in createActivity
+        switch (requestCode) {
+            case create_note_cmd: {
+                // Make sure the request was successful
+                if (resultCode == RESULT_OK) {
+                    //not need because of db.synchronisation in createActivity
 
-                Bundle bundle = data.getExtras();
-                if (bundle != null) {
-                    DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
-                    if (createdNote != null) {
-                        adapter.add(createdNote);
-                    } else {
-                        Log.w(TAG, "createdNote is null");
-                    }
-                } else {
-                    Log.w(TAG, "bundle is null");
-                }
-            }
-            listView.scrollToPosition(0);
-        } else if (requestCode == server_settings) {
-            // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
-            // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
-            recreate();
-        } else {
-            try {
-                AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-                    Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-                    try {
-                        db.addAccount(account.url, account.userId, account.name);
-                    } catch (SQLiteConstraintException e) {
-                        if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
-                            Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
+                        if (createdNote != null) {
+                            adapter.add(createdNote);
+                        } else {
+                            Log.w(TAG, "createdNote is null");
                         }
+                    } else {
+                        Log.w(TAG, "bundle is null");
                     }
-                    selectAccount(account.name);
-                    this.accountChooserActive = false;
-                    accountChooser.setVisibility(View.GONE);
-                    accountNavigation.setVisibility(View.VISIBLE);
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                });
-            } catch (AccountImportCancelledException e) {
-                Log.i(TAG, "AccountImport has been cancelled.");
+                }
+                listView.scrollToPosition(0);
+                break;
+            }
+            case server_settings: {
+                // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
+                // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
+                recreate();
+                break;
+            }
+            case unlock: {
+                Log.v(TAG, "Successfully unlocked device " + (resultCode == RESULT_OK));
+                break;
+            }
+            default: {
+                try {
+                    AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
+                        Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
+                        try {
+                            db.addAccount(account.url, account.userId, account.name);
+                        } catch (SQLiteConstraintException e) {
+                            if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
+                                Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                            }
+                        }
+                        selectAccount(account.name);
+                        this.accountChooserActive = false;
+                        accountChooser.setVisibility(View.GONE);
+                        accountNavigation.setVisibility(View.VISIBLE);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                    });
+                } catch (AccountImportCancelledException e) {
+                    Log.i(TAG, "AccountImport has been cancelled.");
+                }
             }
         }
     }
