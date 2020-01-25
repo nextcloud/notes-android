@@ -11,8 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.util.Objects;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -41,7 +39,7 @@ public class ExceptionActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
         throwable.printStackTrace();
-        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.simple_error));
+        toolbar.setTitle(getString(R.string.simple_error));
         this.message.setText(throwable.getMessage());
         this.stacktrace.setText(ExceptionUtil.getDebugInfos(this, throwable));
     }
