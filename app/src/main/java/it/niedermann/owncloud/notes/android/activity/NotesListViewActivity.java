@@ -1,6 +1,8 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.app.KeyguardManager;
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteConstraintException;
@@ -187,6 +189,18 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
         setupNotesList();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+            if (keyguardManager != null) {
+                Intent i = keyguardManager.createConfirmDeviceCredentialIntent(null, null);
+                i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivityForResult(i, 999);
+            } else {
+                Log.e(TAG, "Keyguard manager is null");
+//            finishWithResult(-45);
+            }
+        }
     }
 
     @Override
