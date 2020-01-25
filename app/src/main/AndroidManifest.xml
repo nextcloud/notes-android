@@ -30,8 +30,7 @@
 
         <activity
             android:name="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
 
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -85,8 +84,7 @@
             android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
 
         <activity
-            android:name=".android.activity.SelectSingleNoteActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".android.activity.SelectSingleNoteActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
