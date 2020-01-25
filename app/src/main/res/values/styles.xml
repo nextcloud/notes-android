@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="AppTheme" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary</item>
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionModeOverlay">true</item>
-        <item name="android:windowBackground">@color/bg_normal</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="ncAlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
         <item name="colorAccent">@color/primary</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary</item>
-        <item name="android:textColorPrimary">@color/fg_default</item>
         <item name="android:windowBackground">@color/bg_normal</item>
     </style>
 
@@ -30,11 +26,5 @@
 
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splashscreen</item>
-    </style>
-
-    <style name="NavigationItem">
-        <item name="android:textSize">@dimen/secondary_font_size</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">#de000000</item>
     </style>
 </resources>
