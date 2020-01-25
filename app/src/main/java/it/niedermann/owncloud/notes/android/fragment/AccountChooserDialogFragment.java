@@ -48,7 +48,7 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.choose_account, null);
+        View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_choose_account, null);
         ButterKnife.bind(this, view);
 
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());

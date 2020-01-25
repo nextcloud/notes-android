@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/bg_highlighted"
                     android:scrollbars="vertical"
-                    tools:listitem="@layout/fragment_notes_list_note_item"/>
+                    tools:listitem="@layout/item_notes_list_note_item"/>
             </FrameLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
