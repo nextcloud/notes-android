@@ -5,17 +5,14 @@ import android.content.Context;
 import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
 /**
  * Utility class with methods for handling device credentials.
  */
-@RequiresApi(Build.VERSION_CODES.M)
-class DeviceCredentialUtils {
+public class DeviceCredentialUtil {
 
-    private static final String TAG = DeviceCredentialUtils.class.getCanonicalName();
+    private static final String TAG = DeviceCredentialUtil.class.getCanonicalName();
 
-    private DeviceCredentialUtils() {
+    private DeviceCredentialUtil() {
         // utility class -> private constructor
     }
 
@@ -23,7 +20,12 @@ class DeviceCredentialUtils {
         KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 
         if (keyguardManager != null) {
-            return keyguardManager.isKeyguardSecure();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                return keyguardManager.isKeyguardSecure();
+            } else {
+                Log.i(TAG, "No credentials are available on Android " + Build.VERSION.CODENAME);
+                return false;
+            }
         } else {
             Log.e(TAG, "Keyguard manager is null");
             return false;

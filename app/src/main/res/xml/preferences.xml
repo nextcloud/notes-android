@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <SwitchPreference
+        android:defaultValue="@string/pref_value_lock"
+        android:icon="@drawable/ic_lock_grey600_24dp"
+        android:key="@string/pref_key_lock"
+        android:layout="@layout/item_pref"
+        android:summary="@string/simple_beta"
+        android:title="@string/settings_lock" />
+
     <ListPreference
         android:defaultValue="@string/pref_value_mode_edit"
         android:entries="@array/noteMode_entries"

@@ -43,6 +43,7 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Font size</string>
     <string name="settings_wifi_only">Sync only on Wi-Fi</string>
+    <string name="settings_lock">Password protection</string>
 
     <!-- Certificates -->
 
@@ -111,6 +112,7 @@
     <string name="pref_key_font" translatable="false">font</string>
     <string name="pref_key_font_size" translatable="false">fontSize</string>
     <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>
+    <string name="pref_key_lock" translatable="false">lock</string>
     <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
@@ -121,6 +123,7 @@
     <string name="pref_value_theme_light">Light</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
+    <string name="pref_value_lock">Password protection</string>
     <string name="simple_error">Error</string>
     <string name="simple_close">Close</string>
     <string name="simple_copy">Copy</string>
@@ -145,6 +148,7 @@
     <string name="bulk_notes_restored">Restored %1$d notes</string>
     <string name="category_readonly">Read only</string>
     <string name="unlock_notes">Unlock notes</string>
+    <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -4,11 +4,15 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
 public class Notes extends Application {
+    private static final String TAG = Notes.class.getCanonicalName();
+
     private static final String DARK_THEME = "darkTheme";
+    private static boolean lockedPreference = false;
     private static boolean locked = true;
 
     @Override
@@ -30,8 +34,13 @@ public class Notes extends Application {
         return prefs.getBoolean(DARK_THEME, false);
     }
 
+    public static void setLockedPreference(boolean lockedPreference) {
+        Log.d(TAG, "New locked preference: " + lockedPreference);
+        Notes.lockedPreference = lockedPreference;
+    }
+
     public static boolean isLocked() {
-        return locked;
+        return lockedPreference && locked;
     }
 
     public static void lock() {
