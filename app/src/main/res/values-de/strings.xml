@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">Kontrollkästchen konnte nicht umgeschaltet werden.</string>
     <string name="bulk_notes_deleted">%1$d Notizen gelöscht</string>
     <string name="bulk_notes_restored">%1$dNotizen wiederhergestellt</string>
+    <string name="category_readonly">Schreibgeschützt</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

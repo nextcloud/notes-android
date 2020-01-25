@@ -102,6 +102,8 @@
     <string name="no_notes_yet">אין פתקים עדיין</string>
     <string name="simple_more">עוד</string>
     <string name="simple_move">העברה</string>
+    <string name="category_readonly">קריאה בלבד</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>

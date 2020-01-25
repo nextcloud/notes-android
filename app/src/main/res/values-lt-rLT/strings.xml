@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">Nepavyko perjungti žymimojo langelio.</string>
     <string name="bulk_notes_deleted">Ištrinti %1$d užrašai</string>
     <string name="bulk_notes_restored">Atkurti %1$d užrašai</string>
+    <string name="category_readonly">Tik skaitymui</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

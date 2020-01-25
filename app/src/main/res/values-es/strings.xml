@@ -118,6 +118,7 @@
     <string name="checkbox_could_not_be_toggled">No se ha podido cambiar el estado del checkbox</string>
     <string name="bulk_notes_deleted">Borradas %1$d notas</string>
     <string name="bulk_notes_restored">Restauradas %1$d notas</string>
+    <string name="category_readonly">Solo lectura</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -113,6 +113,8 @@
     <string name="simple_more">Više</string>
     <string name="simple_move">Premjesti</string>
     <string name="error_files_app_version_too_old">Koristite li se najnovijom inačicom aplikacije za upravljanje datotekama?</string>
+    <string name="category_readonly">Samo za čitanje</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>
