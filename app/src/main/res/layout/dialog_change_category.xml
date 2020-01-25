@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/editCategoryLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="?dialogPreferredPadding">
+    android:paddingStart="?dialogPreferredPadding"
+    android:paddingLeft="?dialogPreferredPadding"
+    android:paddingEnd="?dialogPreferredPadding"
+    android:paddingRight="?dialogPreferredPadding">
 
-    <it.niedermann.owncloud.notes.android.AlwaysAutoCompleteTextView
-        android:id="@+id/editCategory"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:completionThreshold="1"
-        android:inputType="text"
-        android:textColor="@color/fg_default" />
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_category" />
 </LinearLayout>

@@ -254,7 +254,9 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     public void onNoteUpdated(DBNote note) {
         if (note != null) {
             toolbar.setTitle(note.getTitle());
-            if (!note.getCategory().isEmpty()) {
+            if (note.getCategory().isEmpty()) {
+                toolbar.setSubtitle(null);
+            } else {
                 toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
         } else {

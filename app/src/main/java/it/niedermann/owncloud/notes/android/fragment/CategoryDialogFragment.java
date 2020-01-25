@@ -2,27 +2,28 @@ package it.niedermann.owncloud.notes.android.fragment;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.AlwaysAutoCompleteTextView;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
@@ -31,9 +32,13 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
  * It targetFragment is set it must implement the interface {@link CategoryDialogListener}.
  * The calling Activity must implement the interface {@link CategoryDialogListener}.
  */
-public class CategoryDialogFragment extends DialogFragment {
+public class CategoryDialogFragment extends AppCompatDialogFragment {
 
     private static final String TAG = CategoryDialogFragment.class.getSimpleName();
+    private static final String STATE_CATEGORY = "category";
+
+    private NoteSQLiteOpenHelper db;
+    private CategoryDialogListener listener;
 
     /**
      * Interface that must be implemented by the calling Activity.
@@ -52,19 +57,31 @@ public class CategoryDialogFragment extends DialogFragment {
 
     private long accountId;
 
-    @BindView(R.id.editCategory)
-    AlwaysAutoCompleteTextView textCategory;
+    @BindView(R.id.search)
+    EditText editCategory;
 
-    private FolderArrayAdapter adapter;
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
+
+    private CategoryAdapter adapter;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(getArguments() != null && getArguments().containsKey(PARAM_ACCOUNT_ID)) {
+        if (getArguments() != null && getArguments().containsKey(PARAM_ACCOUNT_ID)) {
             accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
         } else {
             throw new IllegalArgumentException("Provide at least \"" + PARAM_ACCOUNT_ID + "\"");
         }
+        Fragment target = getTargetFragment();
+        if (target instanceof CategoryDialogListener) {
+            listener = (CategoryDialogListener) target;
+        } else if (getActivity() instanceof CategoryDialogListener) {
+            listener = (CategoryDialogListener) getActivity();
+        } else {
+            throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getCanonicalName());
+        }
+        db = NoteSQLiteOpenHelper.getInstance(getActivity());
     }
 
     @NonNull
@@ -72,143 +89,95 @@ public class CategoryDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View dialogView = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_change_category, null);
         ButterKnife.bind(this, dialogView);
+
         if (savedInstanceState == null) {
-            if(getArguments() != null && getArguments().containsKey(PARAM_CATEGORY)) {
-                textCategory.setText(getArguments().getString(PARAM_CATEGORY));
+            if (getArguments() != null && getArguments().containsKey(PARAM_CATEGORY)) {
+                editCategory.setText(getArguments().getString(PARAM_CATEGORY));
             }
+        } else if (savedInstanceState.containsKey(STATE_CATEGORY)) {
+            editCategory.setText(savedInstanceState.getString(STATE_CATEGORY));
         }
-        adapter = new FolderArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item);
-        textCategory.setAdapter(adapter);
-        new LoadCategoriesTask().execute();
+
+        adapter = new CategoryAdapter(Objects.requireNonNull(getContext()), new CategoryAdapter.CategoryListener() {
+            @Override
+            public void onCategoryChosen(String category) {
+                listener.onCategoryChosen(category);
+                dismiss();
+            }
+
+            @Override
+            public void onCategoryAdded() {
+                listener.onCategoryChosen(editCategory.getText().toString());
+                dismiss();
+            }
+
+            @Override
+            public void onCategoryCleared() {
+                listener.onCategoryChosen("");
+                dismiss();
+            }
+        });
+
+        recyclerView.setAdapter(adapter);
+        new LoadCategoriesTask().execute("");
+        editCategory.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Nothing to do here...
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Nothing to do here...
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                new LoadCategoriesTask().execute(editCategory.getText().toString());
+            }
+        });
+
         return new AlertDialog.Builder(getActivity(), R.style.ncAlertDialog)
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setCancelable(true)
-                .setPositiveButton(R.string.action_edit_save, (dialog, which) -> {
-                    CategoryDialogListener listener;
-                    Fragment target = getTargetFragment();
-                    if (target instanceof CategoryDialogListener) {
-                        listener = (CategoryDialogListener) target;
-                    } else {
-                        listener = (CategoryDialogListener) getActivity();
-                    }
-                    listener.onCategoryChosen(textCategory.getText().toString());
-                })
+                .setPositiveButton(R.string.action_edit_save, (dialog, which) -> listener.onCategoryChosen(editCategory.getText().toString()))
                 .setNegativeButton(R.string.simple_cancel, null)
                 .create();
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(STATE_CATEGORY, editCategory.getText().toString());
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (getDialog().getWindow() != null) {
-            getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-        } else {
-            Log.w(TAG, "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
-        }
-    }
-
-
-    private class LoadCategoriesTask extends AsyncTask<Void, Void, List<String>> {
-        @Override
-        protected List<String> doInBackground(Void... voids) {
-            NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
-            List<NavigationAdapter.NavigationItem> items = db.getCategories(accountId);
-            List<String> categories = new ArrayList<>();
-            for (NavigationAdapter.NavigationItem item : items) {
-                if (!item.label.isEmpty()) {
-                    categories.add(item.label);
-                }
-            }
-            return categories;
-        }
-
-        @Override
-        protected void onPostExecute(List<String> categories) {
-            adapter.setData(categories);
-            if (textCategory.getText().length() == 0) {
-                textCategory.showFullDropDown();
+        if (editCategory.getText() == null || editCategory.getText().length() == 0) {
+            editCategory.requestFocus();
+            if (getDialog().getWindow() != null) {
+                getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
             } else {
-                textCategory.dismissDropDown();
+                Log.w(TAG, "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
             }
         }
     }
 
 
-    private static class FolderArrayAdapter extends ArrayAdapter<String> {
+    private class LoadCategoriesTask extends AsyncTask<String, Void, List<NavigationAdapter.NavigationItem>> {
+        String currentSearchString;
 
-        private List<String> originalData = new ArrayList<>();
-        private Filter filter;
-
-        private FolderArrayAdapter(@NonNull Context context, int resource) {
-            super(context, resource);
-        }
-
-        public void setData(List<String> data) {
-            originalData = data;
-            clear();
-            addAll(data);
-        }
-
-        @NonNull
         @Override
-        public Filter getFilter() {
-            if (filter == null) {
-                filter = new FolderFilter();
-            }
-            return filter;
+        protected List<NavigationAdapter.NavigationItem> doInBackground(String... searchText) {
+            currentSearchString = searchText[0];
+            return db.searchCategories(accountId, currentSearchString);
         }
 
-        /* This implementation is based on ArrayAdapter.ArrayFilter */
-        private class FolderFilter extends Filter {
-            @Override
-            protected FilterResults performFiltering(CharSequence prefix) {
-                final FilterResults results = new FilterResults();
-
-                if (prefix == null || prefix.length() == 0) {
-                    final ArrayList<String> list = new ArrayList<>(originalData);
-                    results.values = list;
-                    results.count = list.size();
-                } else {
-                    final String prefixString = prefix.toString().toLowerCase();
-                    final int count = originalData.size();
-                    final ArrayList<String> newValues = new ArrayList<>();
-
-                    for (int i = 0; i < count; i++) {
-                        final String value = originalData.get(i);
-                        final String valueText = value.toLowerCase();
-
-                        // First match against the whole, non-splitted value
-                        if (valueText.startsWith(prefixString)) {
-                            newValues.add(value);
-                        } else {
-                            final String[] words = valueText.split("/");
-                            for (String word : words) {
-                                if (word.startsWith(prefixString)) {
-                                    newValues.add(value);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    results.values = newValues;
-                    results.count = newValues.size();
-                }
-
-                return results;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                clear();
-                addAll((List<String>) results.values);
-                if (results.count > 0) {
-                    notifyDataSetChanged();
-                } else {
-                    notifyDataSetInvalidated();
-                }
-            }
+        @Override
+        protected void onPostExecute(List<NavigationAdapter.NavigationItem> categories) {
+            adapter.setCategoryList(categories, currentSearchString);
         }
     }
 }

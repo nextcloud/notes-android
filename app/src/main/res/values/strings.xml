@@ -147,6 +147,8 @@
     <string name="bulk_notes_deleted">Deleted %1$d notes</string>
     <string name="bulk_notes_restored">Restored %1$d notes</string>
     <string name="category_readonly">Read only</string>
+    <string name="no_category">No category</string>
+    <string name="add_category">Add %1$s</string>
     <string name="unlock_notes">Unlock notes</string>
     <string name="simple_beta">Beta</string>
 

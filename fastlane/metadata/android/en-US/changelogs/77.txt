@@ -1,4 +1,5 @@
 - Header title not aligned (#466)
+- Enhance category handling (#378)
 
 Requires at least Files app¹ version 3.9.0
 ¹ https://github.com/nextcloud/android

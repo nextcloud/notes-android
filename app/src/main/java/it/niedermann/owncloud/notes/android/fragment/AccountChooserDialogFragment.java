@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.Accou
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
-public class AccountChooserDialogFragment extends DialogFragment implements AccountChooserListener {
+public class AccountChooserDialogFragment extends AppCompatDialogFragment implements AccountChooserListener {
     private AccountChooserListener accountChooserListener;
     @BindView(R.id.accounts_list)
     RecyclerView accountRecyclerView;
