@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_margin">
+    android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStartWithNavigation="0dp"
+        app:elevation="4dp"
+        app:titleMarginStart="0dp"
+        tools:title="@string/simple_exception" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/message"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_margin"
-            android:layout_weight="1"
-            android:hint="An error appeared."
-            tools:ignore="HardcodedText" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin"
+        android:hint="An error appeared."
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/stacktrace"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/activity_margin"
+        android:layout_marginStart="@dimen/activity_margin"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_weight="1"
         android:background="@color/bg_highlighted"
         android:padding="8dp"
@@ -38,6 +45,7 @@
         style="?android:buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:gravity="end"
         android:orientation="horizontal"
         android:weightSum="1.0">

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeight">
+
+    <ImageView
+        android:id="@android:id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:padding="16dp"
+        tools:src="@drawable/ic_settings_grey600_24dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        tools:ignore="RtlSymmetry">
+
+
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:singleLine="true"
+            android:textColor="@color/fg_default"
+            tools:text="@string/action_settings" />
+
+        <TextView
+            android:id="@android:id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:textColor="@color/fg_default_low"
+            tools:text="This is a summary" />
+    </LinearLayout>
+
+    <!-- Preference should place its actual preference widget here. -->
+    <LinearLayout
+        android:id="@android:id/widget_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="16dp" />
+
+</LinearLayout>

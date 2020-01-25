@@ -119,6 +119,7 @@
     <string name="checkbox_could_not_be_toggled">Keuzevakje kon niet worden omgeschakeld.</string>
     <string name="bulk_notes_deleted">Verwijderde %1$d notities</string>
     <string name="bulk_notes_restored">Herstelde %1$d notities</string>
+    <string name="category_readonly">Alleen lezen</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

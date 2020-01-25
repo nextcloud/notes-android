@@ -32,10 +32,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         ButterKnife.bind(this);
         fabCreate.setVisibility(View.GONE);
 
-        androidx.appcompat.app.ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setTitle(R.string.activity_select_single_note);
-        }
+        toolbar.setTitle(R.string.activity_select_single_note);
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setRefreshing(false);
     }

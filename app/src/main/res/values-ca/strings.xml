@@ -107,6 +107,8 @@
     <string name="no_notes_yet">Encara no hi ha notes</string>
     <string name="simple_more">Més</string>
     <string name="simple_move">Mou</string>
+    <string name="category_readonly">Només de lectura</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Obre en mode d\'edició</item>

@@ -115,9 +115,10 @@
     <string name="simple_more">Altro</string>
     <string name="simple_move">Sposta</string>
     <string name="error_files_app_version_too_old">La tua applicazione File è aggiornata?</string>
-    <string name="checkbox_could_not_be_toggled">Errore sul cambio di stato della checkbox.</string>
+    <string name="checkbox_could_not_be_toggled">La casella di selezione non può essere commutata.</string>
     <string name="bulk_notes_deleted">Eliminate %1$d note</string>
     <string name="bulk_notes_restored">Ripristinate %1$d note</string>
+    <string name="category_readonly">Sola lettura</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

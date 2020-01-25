@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import java.io.BufferedReader;
@@ -19,6 +19,8 @@ import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
@@ -45,6 +47,9 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     public static final String PARAM_CATEGORY = "category";
     public static final String PARAM_CONTENT = "content";
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     private BaseNoteFragment fragment;
 
     @Override
@@ -52,15 +57,17 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         super.onCreate(savedInstanceState);
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
+        setContentView(R.layout.activity_edit);
+
+        ButterKnife.bind(this);
+
         if (savedInstanceState == null) {
             launchNoteFragment();
         } else {
-            fragment = (BaseNoteFragment) getSupportFragmentManager().findFragmentById(android.R.id.content);
+            fragment = (BaseNoteFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_view);
         }
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -144,7 +151,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         if (savedState != null) {
             fragment.setInitialSavedState(savedState);
         }
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
 
     /**
@@ -179,7 +186,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         }
         CloudNote newNote = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, category, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
 
     private void launchReadonlyNote() {
@@ -197,7 +204,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         }
 
         fragment = NoteReadonlyFragment.newInstance(content.toString());
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
 
     @Override
@@ -249,13 +256,12 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     @Override
     public void onNoteUpdated(DBNote note) {
-        ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
         if (note != null) {
-            actionBar.setTitle(note.getTitle());
+            toolbar.setTitle(note.getTitle());
             if (note.getCategory().isEmpty()) {
-                actionBar.setSubtitle(null);
+                toolbar.setSubtitle(null)
             } else {
-                actionBar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
+                toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
         } else {
             // Maybe account is not authenticated -> note == null
