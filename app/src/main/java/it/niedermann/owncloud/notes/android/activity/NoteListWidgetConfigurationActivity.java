@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.android.appwidget;
+package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
@@ -11,8 +11,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -23,15 +21,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
+import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.Notes;
 
-public class NoteListWidgetConfiguration extends AppCompatActivity {
+public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private static final String TAG = Activity.class.getSimpleName();
+
+    @BindView(R.id.recycler_view)
+    RecyclerView recyclerView;
 
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
@@ -45,8 +48,11 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setResult(RESULT_CANCELED);
+
         setContentView(R.layout.activity_note_list_configuration);
+        ButterKnife.bind(this);
+
+        setResult(RESULT_CANCELED);
 
         db = NoteSQLiteOpenHelper.getInstance(this);
         try {
@@ -62,7 +68,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
 
         if (extras != null) {
             appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                            AppWidgetManager.INVALID_APPWIDGET_ID);
+                    AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
         if (appWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
@@ -71,15 +77,13 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
         }
 
         itemRecent = new NavigationAdapter.NavigationItem(NotesListViewActivity.ADAPTER_KEY_RECENT,
-                                                            getString(R.string.label_all_notes),
-                                                            null,
-                                                            R.drawable.ic_access_time_grey600_24dp);
+                getString(R.string.label_all_notes),
+                null,
+                R.drawable.ic_access_time_grey600_24dp);
         itemFavorites = new NavigationAdapter.NavigationItem(NotesListViewActivity.ADAPTER_KEY_STARRED,
-                                                            getString(R.string.label_favorites),
-                                                            null,
-                                                            R.drawable.ic_star_yellow_24dp);
-        RecyclerView recyclerView;
-        RecyclerView.LayoutManager layoutManager;
+                getString(R.string.label_favorites),
+                null,
+                R.drawable.ic_star_yellow_24dp);
 
         adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
@@ -103,8 +107,8 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
                 sp.putBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()));
                 sp.apply();
 
-                Intent updateIntent = new Intent(   AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
-                                                    getApplicationContext(), NoteListWidget.class);
+                Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
+                        getApplicationContext(), NoteListWidget.class);
                 updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 setResult(RESULT_OK, updateIntent);
                 getApplicationContext().sendBroadcast(updateIntent);
@@ -116,10 +120,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.nlw_config_recyclerv);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterCategories);
     }
 

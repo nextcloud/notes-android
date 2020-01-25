@@ -11,13 +11,16 @@ import androidx.appcompat.app.AppCompatDelegate;
 public class Notes extends Application {
     private static final String TAG = Notes.class.getCanonicalName();
 
-    private static final String DARK_THEME = "darkTheme";
+    private static final String PREF_KEY_DARK_THEME = "darkTheme";
+    private static final String PREF_KEY_LOCKED = "lock";
     private static boolean lockedPreference = false;
     private static boolean locked = true;
 
     @Override
     public void onCreate() {
         setAppTheme(getAppTheme(getApplicationContext()));
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        lockedPreference = prefs.getBoolean(PREF_KEY_LOCKED, false);
         super.onCreate();
     }
 
@@ -31,7 +34,7 @@ public class Notes extends Application {
 
     public static boolean getAppTheme(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getBoolean(DARK_THEME, false);
+        return prefs.getBoolean(PREF_KEY_DARK_THEME, false);
     }
 
     public static void setLockedPreference(boolean lockedPreference) {
