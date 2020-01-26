@@ -20,11 +20,10 @@
             app:contentInsetStartWithNavigation="0dp"
             tools:title="@string/app_name"
             tools:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:theme="@style/toolbarStyle"
             app:elevation="4dp" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/swiperefreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

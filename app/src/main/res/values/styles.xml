@@ -7,6 +7,9 @@
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionModeOverlay">true</item>
     </style>
+    <style name="toolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorAccent">#fff</item>
+    </style>
 
     <style name="fab">
         <item name="android:layout_margin">16dp</item>
