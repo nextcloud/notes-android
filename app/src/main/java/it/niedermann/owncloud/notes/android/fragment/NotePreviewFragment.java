@@ -34,7 +34,6 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.DisplayUtils;
@@ -159,9 +158,12 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
                                 long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
-                                Intent intent = new Intent(getActivity().getApplicationContext(), EditNoteActivity.class);
-                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
-                                startActivity(intent);
+
+                                NotePreviewFragment next = NotePreviewFragment.newInstance(this.note.getAccountId(), noteLocalId);
+                                getActivity().getSupportFragmentManager().beginTransaction()
+                                        .add(((ViewGroup)getView().getParent()).getId(), next)
+                                        .addToBackStack(null)
+                                        .commit();
                             } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
                                 startActivity(browserIntent);

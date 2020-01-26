@@ -208,11 +208,6 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     }
 
     @Override
-    public void onBackPressed() {
-        close();
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_note_activity, menu);
         return super.onCreateOptionsMenu(menu);
