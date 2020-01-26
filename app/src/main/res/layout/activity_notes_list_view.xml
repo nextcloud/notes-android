@@ -16,64 +16,32 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:titleMarginStart="0dp"
-            app:contentInsetStartWithNavigation="0dp"
-            tools:title="@string/app_name"
-            tools:navigationIcon="@drawable/ic_arrow_back_white_24dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:elevation="4dp" />
+            app:contentInsetStartWithNavigation="0dp"
+            app:elevation="4dp"
+            app:titleMarginStart="0dp"
+            tools:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+            tools:title="@string/app_name" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/swiperefreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/bg_normal"
             tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity">
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:id="@+id/empty_content_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleX="1.5"
-                        android:scaleY="1.5"
-                        android:layout_above="@id/empty_content_view_title"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="10dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_launcher_foreground"
-                        android:tint="@color/fg_default_high" />
-
-                    <TextView
-                        android:id="@+id/empty_content_view_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="@string/no_notes_yet"
-                        android:textSize="26sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/empty_content_view_title"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="20dp"
-                        android:text="@string/no_notes_yet_description" />
-                </RelativeLayout>
+                <include layout="@layout/empty_content_view" />
 
                 <ProgressBar
                     android:id="@+id/progress_circular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    tools:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
@@ -81,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/bg_highlighted"
                     android:scrollbars="vertical"
-                    tools:listitem="@layout/item_notes_list_note_item"/>
+                    tools:listitem="@layout/item_notes_list_note_item" />
             </FrameLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -90,8 +58,8 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_create"
         style="@style/fab"
-        app:srcCompat="@drawable/ic_add_white_24dp"
         android:title="@string/action_create"
         app:backgroundTint="@color/primary"
-        app:rippleColor="@color/primary_dark" />
+        app:rippleColor="@color/primary_dark"
+        app:srcCompat="@drawable/ic_add_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
