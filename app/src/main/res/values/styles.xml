@@ -8,20 +8,11 @@
         <item name="windowActionModeOverlay">true</item>
     </style>
 
-    <style name="ncAlertDialog" parent="@style/Theme.AppCompat.DayNight.Dialog.Alert">
-        <item name="colorAccent">@color/primary</item>
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary</item>
-        <item name="android:windowBackground">@color/bg_normal</item>
-    </style>
-
     <style name="fab">
         <item name="android:layout_margin">16dp</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">end|bottom</item>
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_alignParentRight">true</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">

@@ -19,11 +19,11 @@
 
     <color name="icon_color_default">#757575</color>
 
-    <color name="widget_background">#DFFFFFFF</color>
+    <color name="widget_background">#dfffffff</color>
     <color name="widget_fg_default">#000000</color>
     <color name="widget_fg_contrast">#ffffff</color>
 
-    <color name="category_background">#FFF</color>
+    <color name="category_background">#ffffff</color>
     <color name="category_border">@color/primary</color>
 
     <!-- Dark Theme -->

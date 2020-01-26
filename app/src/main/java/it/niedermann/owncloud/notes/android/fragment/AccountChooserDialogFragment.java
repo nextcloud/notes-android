@@ -57,7 +57,7 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
         RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, getActivity());
         accountRecyclerView.setAdapter(adapter);
 
-        return new AlertDialog.Builder(getActivity(), R.style.ncAlertDialog)
+        return new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null)
