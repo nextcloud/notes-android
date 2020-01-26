@@ -41,7 +41,7 @@ import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NotesTextWatcher;
-import it.niedermann.owncloud.notes.util.StyleCallback;
+import it.niedermann.owncloud.notes.util.ContextBasedFormattingCallback;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
 
@@ -174,7 +174,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             markdownProcessor.factory(EditFactory.create());
             markdownProcessor.live(editContent);
 
-            editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
+            editContent.setCustomSelectionActionModeCallback(new ContextBasedFormattingCallback(this.editContent));
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
             editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {

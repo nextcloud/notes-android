@@ -1,9 +1,13 @@
 package it.niedermann.owncloud.notes.util;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -11,13 +15,21 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Objects;
+
 import it.niedermann.owncloud.notes.R;
 
-public class StyleCallback implements ActionMode.Callback {
+import static android.content.Context.CLIPBOARD_SERVICE;
+
+public class ContextBasedFormattingCallback implements ActionMode.Callback {
+
+    private static final String TAG = ContextBasedFormattingCallback.class.getCanonicalName();
 
     private EditText editText;
 
-    public StyleCallback(EditText editText) {
+    public ContextBasedFormattingCallback(EditText editText) {
         this.editText = editText;
     }
 
@@ -60,7 +72,7 @@ public class StyleCallback implements ActionMode.Callback {
 
 
         switch (item.getItemId()) {
-            case R.id.bold:
+            case R.id.bold: {
                 markdown = "**";
                 if (hasAlreadyMarkdown(start, end, markdown)) {
                     this.removeMarkdown(ssb, start, end, markdown);
@@ -69,8 +81,9 @@ public class StyleCallback implements ActionMode.Callback {
                 }
                 editText.setText(ssb);
                 editText.setSelection(end + markdown.length() * 2);
-                break;
-            case R.id.italic:
+                return true;
+            }
+            case R.id.italic: {
                 markdown = "*";
                 if (hasAlreadyMarkdown(start, end, markdown)) {
                     this.removeMarkdown(ssb, start, end, markdown);
@@ -79,14 +92,21 @@ public class StyleCallback implements ActionMode.Callback {
                 }
                 editText.setText(ssb);
                 editText.setSelection(end + markdown.length() * 2);
-                break;
-            case R.id.link:
+                return true;
+            }
+            case R.id.link: {
                 boolean textToFormatIsLink = TextUtils.indexOf(editText.getText().subSequence(start, end), "http") == 0;
                 if (textToFormatIsLink) {
                     ssb.insert(end, ")");
                     ssb.insert(start, "[](");
                 } else {
-                    ssb.insert(end, "]()");
+                    String clipboardURL = getClipboardURLorNull(editText.getContext());
+                    if (clipboardURL != null) {
+                        ssb.insert(end, "](" + clipboardURL + ")");
+                        end += clipboardURL.length();
+                    } else {
+                        ssb.insert(end, "]()");
+                    }
                     ssb.insert(start, "[");
                 }
                 end++;
@@ -98,6 +118,7 @@ public class StyleCallback implements ActionMode.Callback {
                     editText.setSelection(end + 2); // after <end>](
                 }
                 return true;
+            }
             case android.R.id.cut: {
                 // https://github.com/stefan-niedermann/nextcloud-notes/issues/604
                 // https://github.com/stefan-niedermann/nextcloud-notes/issues/477
@@ -113,6 +134,19 @@ public class StyleCallback implements ActionMode.Callback {
             }
         }
         return false;
+    }
+
+    private static String getClipboardURLorNull(Context context) {
+        String clipboardURL = null;
+        ClipData clipboardData = Objects.requireNonNull(((ClipboardManager) Objects.requireNonNull(context.getSystemService(CLIPBOARD_SERVICE))).getPrimaryClip());
+        if (clipboardData.getItemCount() > 0) {
+            try {
+                clipboardURL = new URL(clipboardData.getItemAt(0).getText().toString()).toString();
+            } catch (MalformedURLException e) {
+                Log.d(TAG, "Clipboard does not contain a valid URL: " + clipboardURL);
+            }
+        }
+        return clipboardURL;
     }
 
     @Override

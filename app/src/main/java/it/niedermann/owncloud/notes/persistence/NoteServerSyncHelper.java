@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -17,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
@@ -427,11 +427,11 @@ public class NoteServerSyncHelper {
                     Log.e(TAG, e.getMessage(), e);
                 }
                 String statusMessage = context.getApplicationContext().getString(R.string.error_sync, context.getApplicationContext().getString(status.str));
-                if (context instanceof ViewProvider && context instanceof Activity) {
+                if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
                     Snackbar.make(((ViewProvider) context).getView(), statusMessage, Snackbar.LENGTH_LONG)
                             .setAction(R.string.simple_more, v -> {
-                                String debugInfos = ExceptionUtil.getDebugInfos((Activity) context, exceptions);
-                                new AlertDialog.Builder(context, R.style.ncAlertDialog)
+                                String debugInfos = ExceptionUtil.getDebugInfos((AppCompatActivity) context, exceptions);
+                                new AlertDialog.Builder(context)
                                         .setTitle(statusMessage)
                                         .setMessage(debugInfos)
                                         .setPositiveButton(android.R.string.copy, (a, b) -> {

@@ -30,7 +30,7 @@
             android:ellipsize="marquee"
             android:fadingEdge="horizontal"
             android:singleLine="true"
-            android:textColor="@color/fg_default"
+            android:textColor="?android:textColorPrimary"
             tools:text="@string/action_settings" />
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
-            android:textColor="@color/fg_default_low"
+            android:textColor="?android:textColorSecondary"
             tools:text="This is a summary" />
     </LinearLayout>
 

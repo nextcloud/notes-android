@@ -28,7 +28,7 @@
         android:layout_weight="1"
         android:ellipsize="middle"
         android:singleLine="true"
-        android:textColor="@color/fg_default"
+        android:textColor="?android:textColorPrimary"
         tools:hint="@string/menu_change_category" />
 
     <TextView
