@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.Accou
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
-public class AccountChooserDialogFragment extends DialogFragment implements AccountChooserListener {
+public class AccountChooserDialogFragment extends AppCompatDialogFragment implements AccountChooserListener {
     private AccountChooserListener accountChooserListener;
     @BindView(R.id.accounts_list)
     RecyclerView accountRecyclerView;
@@ -48,7 +48,7 @@ public class AccountChooserDialogFragment extends DialogFragment implements Acco
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.choose_account, null);
+        View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_choose_account, null);
         ButterKnife.bind(this, view);
 
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
@@ -57,7 +57,7 @@ public class AccountChooserDialogFragment extends DialogFragment implements Acco
         RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, getActivity());
         accountRecyclerView.setAdapter(adapter);
 
-        return new AlertDialog.Builder(getActivity(), R.style.ncAlertDialog)
+        return new AlertDialog.Builder(getActivity())
                 .setView(view)
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null)

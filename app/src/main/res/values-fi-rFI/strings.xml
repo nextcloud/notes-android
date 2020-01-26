@@ -15,8 +15,6 @@
     <string name="simple_bold">Lihavoitu</string>
     <string name="simple_link">Linkki</string>
     <string name="simple_italic">Kursivoitu</string>
-    <string name="action_note_deleted">Muistiinpano poistettu</string>
-    <string name="action_note_restored">Muistiinpano palautettu</string>
     <string name="action_undo">Kumoa</string>
     <string name="action_drawer_open">avaa navigaatio</string>
     <string name="action_drawer_close">sulje navigaatio</string>
@@ -98,6 +96,9 @@
     <string name="category_work">Työ</string>
     <string name="no_notes_yet">Ei muistiinpanoja</string>
     <string name="simple_more">Lisää</string>
+    <string name="simple_move">Siirrä</string>
+    <string name="category_readonly">Vain luku</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>

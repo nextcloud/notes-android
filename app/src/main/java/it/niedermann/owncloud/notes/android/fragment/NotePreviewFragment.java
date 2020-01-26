@@ -6,6 +6,8 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Layout;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
@@ -13,11 +15,16 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.MarkdownTextView;
 import com.yydcdut.markdown.syntax.text.TextFactory;
@@ -30,11 +37,12 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 
-public class NotePreviewFragment extends BaseNoteFragment {
+public class NotePreviewFragment extends SearchableBaseNoteFragment {
 
     private String changedText;
 
@@ -42,6 +50,15 @@ public class NotePreviewFragment extends BaseNoteFragment {
 
     @BindView(R.id.swiperefreshlayout)
     SwipeRefreshLayout swipeRefreshLayout;
+
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
+
+    @BindView(R.id.searchNext)
+    FloatingActionButton searchNext;
+
+    @BindView(R.id.searchPrev)
+    FloatingActionButton searchPrev;
 
     @BindView(R.id.single_note_content)
     MarkdownTextView noteContent;
@@ -56,15 +73,37 @@ public class NotePreviewFragment extends BaseNoteFragment {
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(true);
         menu.findItem(R.id.menu_preview).setVisible(false);
     }
 
+    @Override
+    public ScrollView getScrollView() {
+        return scrollView;
+    }
+
+    @Override
+    protected FloatingActionButton getSearchNextButton() {
+        return searchNext;
+    }
+
+    @Override
+    protected FloatingActionButton getSearchPrevButton() {
+        return searchPrev;
+    }
+
+    @Override
+    protected Layout getLayout() {
+        noteContent.onPreDraw();
+        return noteContent.getLayout();
+    }
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
+            container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_note_preview, container, false);
     }
 
@@ -84,11 +123,11 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                          * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
                                          * Find number of lines starting with ``` before lineNumber
                                          */
-                                        for(int i = 0; i < lines.length; i++) {
-                                            if(lines[i].startsWith("```")) {
+                                        for (int i = 0; i < lines.length; i++) {
+                                            if (lines[i].startsWith("```")) {
                                                 lineNumber++;
                                             }
-                                            if(i == lineNumber) {
+                                            if (i == lineNumber) {
                                                 break;
                                             }
                                         }
@@ -123,14 +162,12 @@ public class NotePreviewFragment extends BaseNoteFragment {
                                 Intent intent = new Intent(getActivity().getApplicationContext(), EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
                                 startActivity(browserIntent);
                             }
                         })
                         .build());
-        setActiveTextView(noteContent);
         try {
             noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
             onResume();
@@ -171,6 +208,15 @@ public class NotePreviewFragment extends BaseNoteFragment {
         noteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             noteContent.setTypeface(Typeface.MONOSPACE);
+        }
+    }
+
+    @Override
+    protected void colorWithText(String newText) {
+        if (noteContent != null && ViewCompat.isAttachedToWindow(noteContent)) {
+            noteContent.setText(markdownProcessor.parse(DisplayUtils.searchAndColor(getContent(), new SpannableString
+                            (getContent()), newText, getResources().getColor(R.color.primary))),
+                    TextView.BufferType.SPANNABLE);
         }
     }
 

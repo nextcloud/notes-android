@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '29.0.1'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -12,11 +12,10 @@ android {
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 71
-        versionName "2.4.8"
+        targetSdkVersion 29
+        versionCode 75
+        versionName "2.8.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-//        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -45,7 +44,8 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
-    implementation "androidx.fragment:fragment:1.1.0"
+    implementation "androidx.fragment:fragment:1.2.0"
+    implementation "androidx.preference:preference:1.1.0"
     implementation "androidx.appcompat:appcompat:1.1.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation "com.google.android.material:material:1.0.0"

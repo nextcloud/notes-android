@@ -16,8 +16,8 @@
     <string name="simple_bold">Fet</string>
     <string name="simple_link">Länk</string>
     <string name="simple_italic">Kursiv</string>
-    <string name="action_note_deleted">Anteckningen raderad</string>
-    <string name="action_note_restored">Anteckningen återskapad</string>
+    <string name="action_note_deleted">Raderade %1$s</string>
+    <string name="action_note_restored">Återställde %1$s</string>
     <string name="action_undo">Gör om</string>
     <string name="action_drawer_open">Öppen navigering</string>
     <string name="action_drawer_close">stäng navigering</string>
@@ -113,7 +113,12 @@
     <string name="no_notes_yet_description">Tryck på + knappen för att skapa en ny anteckning</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Det gick inte att ladda förhandsgranskning. Kontrollera om det finns ett tvåsiffrigt listobjekt utan innehåll.</string>
     <string name="simple_more">Mer</string>
+    <string name="simple_move">Flytta</string>
     <string name="error_files_app_version_too_old">Är din fil-app av senaste version?</string>
+    <string name="checkbox_could_not_be_toggled">Kunde inte ändra kryssrutan.</string>
+    <string name="bulk_notes_deleted">Raderade %1$d anteckningar</string>
+    <string name="bulk_notes_restored">Återställde %1$d anteckningar</string>
+    <string name="category_readonly">Läsbehörighet</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

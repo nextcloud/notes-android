@@ -16,8 +16,8 @@
     <string name="simple_bold">Pogrubienie</string>
     <string name="simple_link">Odnośnik</string>
     <string name="simple_italic">Kursywa</string>
-    <string name="action_note_deleted">Notatka usunięta</string>
-    <string name="action_note_restored">Notatka przywrócona</string>
+    <string name="action_note_deleted">Usunięto %1$s</string>
+    <string name="action_note_restored">Przywrócono %1$s</string>
     <string name="action_undo">Cofnij</string>
     <string name="action_drawer_open">Otwórz okno nawigacji</string>
     <string name="action_drawer_close">Zamknij okno nawigacji</string>
@@ -113,7 +113,12 @@
     <string name="no_notes_yet_description">Naciśnij przycisk +, aby utworzyć nową notatkę</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Nie można załadować podglądu. Sprawdź, czy istnieje dwucyfrowa pozycja listy bez zawartości.</string>
     <string name="simple_more">Więcej</string>
+    <string name="simple_move">Przenieś</string>
     <string name="error_files_app_version_too_old">Czy Twoja wersja aplikacji do plików jest aktualna?</string>
+    <string name="checkbox_could_not_be_toggled">Nie można zmienić pola wyboru.</string>
+    <string name="bulk_notes_deleted">Usunięto notatki %1$d</string>
+    <string name="bulk_notes_restored">Przywrócono notatki %1$d</string>
+    <string name="category_readonly">Tylko do odczytu</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -1,46 +1,46 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:paddingLeft="6dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:paddingStart="6dp"
-    android:paddingRight="8dp"
-    android:paddingEnd="8dp">
+    android:paddingLeft="6dp"
+    android:paddingEnd="8dp"
+    android:paddingRight="8dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/navigationItemIcon"
         android:layout_width="44dp"
         android:layout_height="44dp"
+        android:contentDescription="@null"
+        android:focusable="false"
         android:padding="10dp"
         android:scaleType="center"
-        android:focusable="false"
-        app:srcCompat="@drawable/ic_folder_grey600_24dp"
-        android:contentDescription="@null" />
+        app:srcCompat="@drawable/ic_folder_grey600_24dp" />
 
     <TextView
         android:id="@+id/navigationItemCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:padding="8dp"
-        android:textAppearance="@style/NavigationItem"
-        tools:text="37"/>
+        android:textColor="?android:textColorPrimary"
+        tools:text="37" />
 
     <TextView
         android:id="@+id/navigationItemLabel"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
         android:layout_toStartOf="@id/navigationItemCount"
         android:layout_toLeftOf="@id/navigationItemCount"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="64dp"
-        android:layout_marginStart="64dp"
         android:ellipsize="end"
         android:lines="1"
-        android:textAppearance="@style/NavigationItem"
+        android:textColor="?android:textColorSecondary"
         tools:text="Category 1" />
 
 </RelativeLayout>

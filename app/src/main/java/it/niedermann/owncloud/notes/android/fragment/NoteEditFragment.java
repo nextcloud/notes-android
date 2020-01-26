@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.text.Editable;
+import android.text.Layout;
+import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
@@ -17,9 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yydcdut.markdown.MarkdownEditText;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.edit.EditFactory;
@@ -30,18 +37,31 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
+import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
-import it.niedermann.owncloud.notes.util.StyleCallback;
+import it.niedermann.owncloud.notes.util.NotesTextWatcher;
+import it.niedermann.owncloud.notes.util.ContextBasedFormattingCallback;
 
-public class NoteEditFragment extends BaseNoteFragment {
+public class NoteEditFragment extends SearchableBaseNoteFragment {
 
     private static final String LOG_TAG_AUTOSAVE = "AutoSave";
 
     private static final long DELAY = 2000; // Wait for this time after typing before saving
     private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
+
+    @BindView(R.id.searchNext)
+    FloatingActionButton searchNext;
+
+    @BindView(R.id.searchPrev)
+    FloatingActionButton searchPrev;
+
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
+
     @BindView(R.id.editContent)
     MarkdownEditText editContent;
+
     private Handler handler;
     private boolean saveActive, unsavedEdit;
     private final Runnable runAutoSave = new Runnable() {
@@ -55,24 +75,7 @@ public class NoteEditFragment extends BaseNoteFragment {
             }
         }
     };
-    private final TextWatcher textWatcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        }
-
-        @Override
-        public void onTextChanged(final CharSequence s, int start, int before, int count) {
-        }
-
-        @Override
-        public void afterTextChanged(final Editable s) {
-            unsavedEdit = true;
-            if (!saveActive) {
-                handler.removeCallbacks(runAutoSave);
-                handler.postDelayed(runAutoSave, DELAY);
-            }
-        }
-    };
+    private TextWatcher textWatcher;
 
     public static NoteEditFragment newInstance(long accountId, long noteId) {
         NoteEditFragment f = new NoteEditFragment();
@@ -98,10 +101,31 @@ public class NoteEditFragment extends BaseNoteFragment {
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_edit).setVisible(false);
         menu.findItem(R.id.menu_preview).setVisible(true);
+    }
+
+    @Override
+    public ScrollView getScrollView() {
+        return scrollView;
+    }
+
+    @Override
+    protected Layout getLayout() {
+        editContent.onPreDraw();
+        return editContent.getLayout();
+    }
+
+    @Override
+    protected FloatingActionButton getSearchNextButton() {
+        return searchNext;
+    }
+
+    @Override
+    protected FloatingActionButton getSearchPrevButton() {
+        return searchPrev;
     }
 
     @Nullable
@@ -116,9 +140,18 @@ public class NoteEditFragment extends BaseNoteFragment {
 
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
 
-        if(note != null) {
-            setActiveTextView(editContent);
+        textWatcher = new NotesTextWatcher(editContent) {
+            @Override
+            public void afterTextChanged(final Editable s) {
+                unsavedEdit = true;
+                if (!saveActive) {
+                    handler.removeCallbacks(runAutoSave);
+                    handler.postDelayed(runAutoSave, DELAY);
+                }
+            }
+        };
 
+        if (note != null) {
             if (note.getContent().isEmpty()) {
                 editContent.requestFocus();
 
@@ -141,7 +174,7 @@ public class NoteEditFragment extends BaseNoteFragment {
             markdownProcessor.factory(EditFactory.create());
             markdownProcessor.live(editContent);
 
-            editContent.setCustomSelectionActionModeCallback(new StyleCallback(this.editContent));
+            editContent.setCustomSelectionActionModeCallback(new ContextBasedFormattingCallback(this.editContent));
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
             editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
@@ -210,5 +243,14 @@ public class NoteEditFragment extends BaseNoteFragment {
 
             }
         });
+    }
+
+    @Override
+    protected void colorWithText(String newText) {
+        if (editContent != null && ViewCompat.isAttachedToWindow(editContent)) {
+            editContent.setText(DisplayUtils.searchAndColor(getContent(), new SpannableString
+                            (getContent()), newText, getResources().getColor(R.color.primary)),
+                    TextView.BufferType.SPANNABLE);
+        }
     }
 }

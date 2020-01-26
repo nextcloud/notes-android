@@ -8,17 +8,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
 import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
+import it.niedermann.owncloud.notes.android.fragment.NoteReadonlyFragment;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -38,6 +45,10 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_ACCOUNT_ID = "accountId";
     public static final String PARAM_CATEGORY = "category";
+    public static final String PARAM_CONTENT = "content";
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     private BaseNoteFragment fragment;
 
@@ -46,15 +57,17 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         super.onCreate(savedInstanceState);
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
+        setContentView(R.layout.activity_edit);
+
+        ButterKnife.bind(this);
+
         if (savedInstanceState == null) {
             launchNoteFragment();
         } else {
-            fragment = (BaseNoteFragment) getSupportFragmentManager().findFragmentById(android.R.id.content);
+            fragment = (BaseNoteFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_view);
         }
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
+        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -86,7 +99,11 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         if (noteId > 0) {
             launchExistingNote(getAccountId(), noteId);
         } else {
-            launchNewNote();
+            if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+                launchReadonlyNote();
+            } else {
+                launchNewNote();
+            }
         }
     }
 
@@ -127,16 +144,14 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         if (fragment != null) {
             savedState = getSupportFragmentManager().saveFragmentInstanceState(fragment);
         }
-        if (edit) {
-            fragment = NoteEditFragment.newInstance(accountId, noteId);
-        } else {
-            fragment = NotePreviewFragment.newInstance(accountId, noteId);
-        }
+        fragment = edit
+                ? NoteEditFragment.newInstance(accountId, noteId)
+                : NotePreviewFragment.newInstance(accountId, noteId);
 
         if (savedState != null) {
             fragment.setInitialSavedState(savedState);
         }
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
 
     /**
@@ -156,16 +171,40 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
         String content = "";
         if (
+                intent.hasExtra(Intent.EXTRA_TEXT) &&
                 MIMETYPE_TEXT_PLAIN.equals(intent.getType()) &&
                         (Intent.ACTION_SEND.equals(intent.getAction()) ||
                                 INTENT_GOOGLE_ASSISTANT.equals(intent.getAction()))
         ) {
             content = intent.getStringExtra(Intent.EXTRA_TEXT);
+        } else if (intent.hasExtra(PARAM_CONTENT)) {
+            content = intent.getStringExtra(PARAM_CONTENT);
         }
 
+        if (content == null) {
+            content = "";
+        }
         CloudNote newNote = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, category, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
-        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
+    }
+
+    private void launchReadonlyNote() {
+        Intent intent = getIntent();
+        StringBuilder content = new StringBuilder();
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(Objects.requireNonNull(intent.getData()));
+            BufferedReader r = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)));
+            String line;
+            while ((line = r.readLine()) != null) {
+                content.append(line).append('\n');
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        fragment = NoteReadonlyFragment.newInstance(content.toString());
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
 
     @Override
@@ -217,11 +256,12 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     @Override
     public void onNoteUpdated(DBNote note) {
-        ActionBar actionBar = Objects.requireNonNull(getSupportActionBar());
         if (note != null) {
-            actionBar.setTitle(note.getTitle());
-            if (!note.getCategory().isEmpty()) {
-                actionBar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
+            toolbar.setTitle(note.getTitle());
+            if (note.getCategory().isEmpty()) {
+                toolbar.setSubtitle(null);
+            } else {
+                toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
         } else {
             // Maybe account is not authenticated -> note == null

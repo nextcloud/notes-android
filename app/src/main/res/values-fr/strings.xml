@@ -16,8 +16,8 @@
     <string name="simple_bold">Gras</string>
     <string name="simple_link">Lien</string>
     <string name="simple_italic">Italique</string>
-    <string name="action_note_deleted">Note supprimée</string>
-    <string name="action_note_restored">Note restaurée</string>
+    <string name="action_note_deleted">%1$s supprimé</string>
+    <string name="action_note_restored">%1$s restauré</string>
     <string name="action_undo">Annuler</string>
     <string name="action_drawer_open">ouvrir la navigation</string>
     <string name="action_drawer_close">fermer la navigation</string>
@@ -113,7 +113,12 @@
     <string name="no_notes_yet_description">Créez une nouvelle note avec le bouton +</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Impossible de charger l\'aperçu. Merci de vérifier qu\'il existe un élément de liste numéroté à deux chiffres sans contenu. </string>
     <string name="simple_more">Plus</string>
+    <string name="simple_move">Déplacer</string>
     <string name="error_files_app_version_too_old">Votre application fichiers est-elle à jour?</string>
+    <string name="checkbox_could_not_be_toggled">Impossible de modifier l\'état de la case à cocher.</string>
+    <string name="bulk_notes_deleted">%1$d notes supprimées</string>
+    <string name="bulk_notes_restored">%1$d notes restaurées</string>
+    <string name="category_readonly">Lecture seule</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

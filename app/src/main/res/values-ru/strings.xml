@@ -15,8 +15,6 @@
     <string name="simple_bold">Жирный</string>
     <string name="simple_link">Ссылка</string>
     <string name="simple_italic">Курсив</string>
-    <string name="action_note_deleted">Заметка удалена</string>
-    <string name="action_note_restored">Заметка восстановлена</string>
     <string name="action_undo">Отменить</string>
     <string name="action_drawer_open">открыть навигацию</string>
     <string name="action_drawer_close">закрыть навигацию</string>
@@ -105,6 +103,9 @@
     <string name="category_work">Рабочий</string>
     <string name="no_notes_yet">Заметок пока нет</string>
     <string name="simple_more">Больше</string>
+    <string name="simple_move">Переместить</string>
+    <string name="category_readonly">Только для чтения</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>

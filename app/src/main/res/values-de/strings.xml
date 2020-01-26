@@ -16,8 +16,8 @@
     <string name="simple_bold">Fett</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Kursiv</string>
-    <string name="action_note_deleted">Notiz gelöscht</string>
-    <string name="action_note_restored">Notiz wiederhergestellt</string>
+    <string name="action_note_deleted">Gelöscht %1$s</string>
+    <string name="action_note_restored">Wiederhergestellt %1$s</string>
     <string name="action_undo">Rückgängig</string>
     <string name="action_drawer_open">Navigation öffnen</string>
     <string name="action_drawer_close">Navigation schließen</string>
@@ -113,7 +113,12 @@
     <string name="no_notes_yet_description">Drücke den \"+\"-Knopf um eine neue Notiz zu erstellen</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Die Vorschau konnte nicht geladen werden. Bitte prüfen Sie, ob ein zweistellig numerierter Listeneintrag ohne Inhalt vorhanden ist.</string>
     <string name="simple_more">mehr</string>
+    <string name="simple_move">Verschieben</string>
     <string name="error_files_app_version_too_old">Ist Ihre Datei-App aktuell?</string>
+    <string name="checkbox_could_not_be_toggled">Kontrollkästchen konnte nicht umgeschaltet werden.</string>
+    <string name="bulk_notes_deleted">%1$d Notizen gelöscht</string>
+    <string name="bulk_notes_restored">%1$dNotizen wiederhergestellt</string>
+    <string name="category_readonly">Schreibgeschützt</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

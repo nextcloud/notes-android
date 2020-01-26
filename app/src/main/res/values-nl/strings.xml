@@ -16,8 +16,8 @@
     <string name="simple_bold">Vet</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Scheef</string>
-    <string name="action_note_deleted">Notitie verwijderd</string>
-    <string name="action_note_restored">Notitie hersteld</string>
+    <string name="action_note_deleted">Verwijderd %1$s</string>
+    <string name="action_note_restored">Hersteld %1$s</string>
     <string name="action_undo">Ongedaan maken</string>
     <string name="action_drawer_open">open navigatie</string>
     <string name="action_drawer_close">sluit navigatie</string>
@@ -114,7 +114,12 @@
     <string name="no_notes_yet_description">druk op de + knop om een nieuwe notitie te maken</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Kon geen voorbeeld laden. Controleer of er een lege genummerde lijst is met twee cijfers is.</string>
     <string name="simple_more">meer</string>
+    <string name="simple_move">Verplaatsen</string>
     <string name="error_files_app_version_too_old">Is je Bestanden app versie is up to date?</string>
+    <string name="checkbox_could_not_be_toggled">Keuzevakje kon niet worden omgeschakeld.</string>
+    <string name="bulk_notes_deleted">Verwijderde %1$d notities</string>
+    <string name="bulk_notes_restored">Herstelde %1$d notities</string>
+    <string name="category_readonly">Alleen lezen</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

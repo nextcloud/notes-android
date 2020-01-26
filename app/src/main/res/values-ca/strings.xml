@@ -16,8 +16,6 @@
     <string name="simple_bold">Negreta</string>
     <string name="simple_link">Enllaç</string>
     <string name="simple_italic">Cursiva</string>
-    <string name="action_note_deleted">S\'ha suprimit la nota</string>
-    <string name="action_note_restored">S\'ha restaurat la nota</string>
     <string name="action_undo">Desfés</string>
     <string name="action_drawer_open">obre la navegació</string>
     <string name="action_drawer_close">tanca la navegació</string>
@@ -108,6 +106,9 @@
     <string name="category_work">Feina</string>
     <string name="no_notes_yet">Encara no hi ha notes</string>
     <string name="simple_more">Més</string>
+    <string name="simple_move">Mou</string>
+    <string name="category_readonly">Només de lectura</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Obre en mode d\'edició</item>

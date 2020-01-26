@@ -72,11 +72,11 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
         if (viewType == section_type) {
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_notes_list_section_item, parent, false);
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_notes_list_section_item, parent, false);
             return new SectionViewHolder(v);
         } else {
             v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.fragment_notes_list_note_item, parent, false);
+                    .inflate(R.layout.item_notes_list_note_item, parent, false);
             return new NoteViewHolder(v);
         }
     }

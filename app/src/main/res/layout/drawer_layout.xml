@@ -65,7 +65,7 @@
                         android:layout_marginEnd="@dimen/header_padding"
                         android:layout_marginRight="@dimen/header_padding"
                         android:ellipsize="end"
-                        android:shadowColor="@color/fg_default"
+                        android:shadowColor="@android:color/black"
                         android:shadowDx="0.5"
                         android:shadowDy="0"
                         android:shadowRadius="2"
@@ -85,7 +85,7 @@
                         android:layout_marginRight="@dimen/header_padding"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:shadowColor="@color/fg_default"
+                        android:shadowColor="@android:color/black"
                         android:shadowDx="0.5"
                         android:shadowDy="0"
                         android:shadowRadius="2"
@@ -107,21 +107,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/navigationList"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    app:layoutManager="LinearLayoutManager" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/navigationMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    app:layoutManager="LinearLayoutManager" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/navigationList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        app:layoutManager="LinearLayoutManager"
+                        tools:listitem="@layout/item_navigation" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/navigationMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        app:layoutManager="LinearLayoutManager"
+                        tools:listitem="@layout/item_navigation" />
                 </LinearLayout>
 
                 <LinearLayout

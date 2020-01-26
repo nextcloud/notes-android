@@ -9,8 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Objects;
+import androidx.appcompat.widget.Toolbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,6 +21,8 @@ public class ExceptionActivity extends AppCompatActivity {
 
     Throwable throwable;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.message)
     TextView message;
     @BindView(R.id.stacktrace)
@@ -35,9 +36,10 @@ public class ExceptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exception);
         ButterKnife.bind(this);
         super.onCreate(savedInstanceState);
+        setSupportActionBar(toolbar);
         throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
         throwable.printStackTrace();
-        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.simple_error));
+        toolbar.setTitle(getString(R.string.simple_error));
         this.message.setText(throwable.getMessage());
         this.stacktrace.setText(ExceptionUtil.getDebugInfos(this, throwable));
     }

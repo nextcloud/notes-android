@@ -16,8 +16,8 @@
     <string name="simple_bold">Pusjuodis</string>
     <string name="simple_link">Nuoroda</string>
     <string name="simple_italic">Kursyvas</string>
-    <string name="action_note_deleted">Užrašai ištrinti</string>
-    <string name="action_note_restored">Užrašai atkurti</string>
+    <string name="action_note_deleted">%1$s ištrinti</string>
+    <string name="action_note_restored">%1$s atkurti</string>
     <string name="action_undo">Atšaukti</string>
     <string name="action_drawer_open">atverti naršymą</string>
     <string name="action_drawer_close">užverti naršymą</string>
@@ -113,7 +113,12 @@
     <string name="no_notes_yet_description">Norėdami sukurti užrašus, paspauskite mygtuką +</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Nepavyko įkelti peržiūros. Patikrinkite ar yra dviejų skaitmenų sąrašo su numeriais elementas be jokio turinio.</string>
     <string name="simple_more">Daugiau</string>
+    <string name="simple_move">Perkelti</string>
     <string name="error_files_app_version_too_old">Ar jūsų failų programėlė yra naujausios versijos?</string>
+    <string name="checkbox_could_not_be_toggled">Nepavyko perjungti žymimojo langelio.</string>
+    <string name="bulk_notes_deleted">Ištrinti %1$d užrašai</string>
+    <string name="bulk_notes_restored">Atkurti %1$d užrašai</string>
+    <string name="category_readonly">Tik skaitymui</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

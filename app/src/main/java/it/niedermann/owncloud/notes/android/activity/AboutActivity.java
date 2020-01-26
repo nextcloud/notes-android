@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -21,6 +22,8 @@ import it.niedermann.owncloud.notes.util.ExceptionHandler;
 
 public class AboutActivity extends AppCompatActivity {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.pager)
     ViewPager mViewPager;
     @BindView(R.id.tabs)
@@ -33,6 +36,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
 
+        setSupportActionBar(toolbar);
         mViewPager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
         mTabLayout.setupWithViewPager(mViewPager);
     }

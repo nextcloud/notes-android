@@ -16,8 +16,8 @@
     <string name="simple_bold">Negrito</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Itálico</string>
-    <string name="action_note_deleted">Anotação excluída</string>
-    <string name="action_note_restored">Anotação restaurada</string>
+    <string name="action_note_deleted">%1$s Excluído</string>
+    <string name="action_note_restored">%1$s Restaurado</string>
     <string name="action_undo">Desfazer</string>
     <string name="action_drawer_open">abrir navegação</string>
     <string name="action_drawer_close">fechar navegação</string>
@@ -113,7 +113,12 @@
     <string name="no_notes_yet_description">Pressione o botão + para criar uma nova nota</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Não foi possível carregar a visualização. Verifique se há um item da lista numerada de dois dígitos sem conteúdo.</string>
     <string name="simple_more">Mais</string>
+    <string name="simple_move">Mover</string>
     <string name="error_files_app_version_too_old">A versão do aplicativo files está atualizada?</string>
+    <string name="checkbox_could_not_be_toggled">Não foi possível alternar a caixa de seleção.</string>
+    <string name="bulk_notes_deleted"> %1$d notas excluídas</string>
+    <string name="bulk_notes_restored">%1$d notas restauradas</string>
+    <string name="category_readonly">Somente leitura</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -7,7 +7,7 @@
         android:shortcutShortLabel="@string/action_create"
         android:shortcutLongLabel="@string/shortcut_create_long">
         <intent
-            android:action="android.intent.action.VIEW"
+            android:action="android.intent.action.CREATE_DOCUMENT"
             android:targetPackage="it.niedermann.owncloud.notes"
             android:targetClass="it.niedermann.owncloud.notes.android.activity.EditNoteActivity" />
         <categories android:name="android.shortcut.conversation" />

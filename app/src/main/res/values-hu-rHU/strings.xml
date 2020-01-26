@@ -15,8 +15,6 @@
     <string name="simple_bold">Vastag</string>
     <string name="simple_link">Hivatkozás</string>
     <string name="simple_italic">Dőlt</string>
-    <string name="action_note_deleted">Jegyzet törölve</string>
-    <string name="action_note_restored">Jegyzet visszaállítva</string>
     <string name="action_undo">Visszavonás</string>
     <string name="action_drawer_open">navigáció megnyitása</string>
     <string name="action_drawer_close">navigáció bezárása</string>
@@ -104,6 +102,9 @@
     <string name="category_work">Munkahelyi</string>
     <string name="no_notes_yet">Még nincsenek jegyzetek</string>
     <string name="simple_more">Több</string>
+    <string name="simple_move">Áthelyezés</string>
+    <string name="category_readonly">Csak olvasható</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>

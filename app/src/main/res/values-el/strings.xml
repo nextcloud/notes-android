@@ -16,8 +16,8 @@
     <string name="simple_bold">Έντονα</string>
     <string name="simple_link">Σύνδεσμος</string>
     <string name="simple_italic">Πλάγια</string>
-    <string name="action_note_deleted">Η σημείωση διαγράφηκε.</string>
-    <string name="action_note_restored">Έγινε επαναφορά της σημείωσης.</string>
+    <string name="action_note_deleted">Διεγραμμένα %1$s</string>
+    <string name="action_note_restored">Επαναφέρθηκαν %1$s</string>
     <string name="action_undo">Αναίρεση</string>
     <string name="action_drawer_open">Άνοιγμα πλοήγησης</string>
     <string name="action_drawer_close">Κλείσιμο πλοήγησης</string>
@@ -113,7 +113,12 @@
     <string name="no_notes_yet_description">Πιέστε το κουμπί + για νέα σημείωση</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Δεν ήταν δυνατή η φόρτωση της προεπισκόπησης. Ελέγξτε αν υπάρχει στη λίστα κενό διψήφιο αριθμημένο στοιχείο.</string>
     <string name="simple_more">Περισσότερα</string>
+    <string name="simple_move">Μετακίνηση</string>
     <string name="error_files_app_version_too_old">Είναι ενημερωμένη η εφαρμογή αρχείων?</string>
+    <string name="checkbox_could_not_be_toggled">Δεν ήταν δυνατή η εναλλαγή του πλαισίου ελέγχου.</string>
+    <string name="bulk_notes_deleted">Διεγραμμένες %1$d σημειώσεις</string>
+    <string name="bulk_notes_restored">Επαναφέρθηκαν %1$dσημειώσεις</string>
+    <string name="category_readonly">Μόνο για ανάγνωση</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

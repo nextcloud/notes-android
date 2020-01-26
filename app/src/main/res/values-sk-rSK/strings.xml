@@ -16,8 +16,8 @@
     <string name="simple_bold">Tučné</string>
     <string name="simple_link">Odkaz</string>
     <string name="simple_italic">Kurzíva</string>
-    <string name="action_note_deleted">Poznámka vymazaná</string>
-    <string name="action_note_restored">Poznámka obnovená</string>
+    <string name="action_note_deleted">Vymazané %1$s</string>
+    <string name="action_note_restored">Obnovené %1$s</string>
     <string name="action_undo">Vrátiť</string>
     <string name="action_drawer_open">otvoriť navigáciu</string>
     <string name="action_drawer_close">zavrieť navigáciu</string>
@@ -111,8 +111,14 @@
     <string name="account_already_imported">Účet už bol importovaný</string>
     <string name="no_notes_yet">Zatiaľ nie sú žiadne poznámky</string>
     <string name="no_notes_yet_description">Ťuknutím na tlačidlo + vytvoríte novú poznámku</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Nie je možné načítať náhľad. Skontrolujte či je tu položka dvojčíslicového zoznamu bez obsahu.</string>
     <string name="simple_more">Viac</string>
+    <string name="simple_move">Presunúť</string>
     <string name="error_files_app_version_too_old">Je vami používaná apka Súbory aktuálna?</string>
+    <string name="checkbox_could_not_be_toggled">Nepodarilo sa prepnúť zaškrtávaciu kolónku.</string>
+    <string name="bulk_notes_deleted">Vymazaných %1$d poznámok</string>
+    <string name="bulk_notes_restored">Obnovených %1$d poznámok</string>
+    <string name="category_readonly">Iba na čítanie</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
