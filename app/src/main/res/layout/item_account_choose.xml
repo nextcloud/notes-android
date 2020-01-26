@@ -26,8 +26,7 @@
         android:singleLine="true"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
-        android:textColor="@color/fg_default"
-        android:textAppearance="@style/NavigationItem"
+        android:textColor="?android:textColorPrimary"
         tools:hint="Username"/>
 
 </LinearLayout>

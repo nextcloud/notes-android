@@ -30,8 +30,7 @@
         android:layout_marginEnd="64dp"
         android:ellipsize="middle"
         android:singleLine="true"
-        android:textColor="@color/fg_default"
-        android:textAppearance="@style/NavigationItem"
+        android:textColor="?android:textColorPrimary"
         tools:hint="Username"/>
 
     <androidx.appcompat.widget.AppCompatImageView

@@ -137,7 +137,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
             }
         });
 
-        return new AlertDialog.Builder(getActivity(), R.style.ncAlertDialog)
+        return new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setCancelable(true)
