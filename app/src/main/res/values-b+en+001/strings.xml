@@ -98,7 +98,6 @@
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
     <string name="category_readonly">Read only</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in edit mode</item>

@@ -119,6 +119,8 @@
     <string name="bulk_notes_deleted">Ištrinti %1$d užrašai</string>
     <string name="bulk_notes_restored">Atkurti %1$d užrašai</string>
     <string name="category_readonly">Tik skaitymui</string>
+    <string name="no_category">Be kategorijos</string>
+    <string name="add_category">Pridėti %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

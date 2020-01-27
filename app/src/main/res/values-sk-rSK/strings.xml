@@ -119,7 +119,6 @@
     <string name="bulk_notes_deleted">Vymazaných %1$d poznámok</string>
     <string name="bulk_notes_restored">Obnovených %1$d poznámok</string>
     <string name="category_readonly">Iba na čítanie</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
