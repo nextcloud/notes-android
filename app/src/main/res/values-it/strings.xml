@@ -119,6 +119,8 @@
     <string name="bulk_notes_deleted">Eliminate %1$d note</string>
     <string name="bulk_notes_restored">Ripristinate %1$d note</string>
     <string name="category_readonly">Sola lettura</string>
+    <string name="no_category">Nessuna categoria</string>
+    <string name="add_category">Aggiungi %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

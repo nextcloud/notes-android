@@ -119,6 +119,8 @@
     <string name="bulk_notes_deleted">删除了 %1$d 条笔记</string>
     <string name="bulk_notes_restored">恢复了 %1$d 条笔记</string>
     <string name="category_readonly">只读</string>
+    <string name="no_category">没有分类</string>
+    <string name="add_category">添加 %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

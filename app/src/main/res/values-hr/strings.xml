@@ -114,6 +114,7 @@
     <string name="simple_move">Premjesti</string>
     <string name="error_files_app_version_too_old">Koristite li se najnovijom inačicom aplikacije za upravljanje datotekama?</string>
     <string name="category_readonly">Samo za čitanje</string>
+    <string name="add_category">Dodaj %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

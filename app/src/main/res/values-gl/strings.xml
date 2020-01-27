@@ -119,6 +119,8 @@
     <string name="bulk_notes_deleted">Foron eliminadas %1$d notas</string>
     <string name="bulk_notes_restored">Foron restauradas %1$d notas</string>
     <string name="category_readonly">Só lectura</string>
+    <string name="no_category">Sen categoría</string>
+    <string name="add_category">Engadir %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
