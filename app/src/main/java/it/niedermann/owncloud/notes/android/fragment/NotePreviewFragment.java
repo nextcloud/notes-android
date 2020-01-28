@@ -169,8 +169,11 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
                         })
                         .build());
         try {
-            noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
-            onResume();
+            CharSequence parsedMarkdown = markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
+            noteContent.setText(parsedMarkdown);
+            if (MarkDownUtil.containsImageSpan(parsedMarkdown)) {
+                noteContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            }
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
             noteContent.setText(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
