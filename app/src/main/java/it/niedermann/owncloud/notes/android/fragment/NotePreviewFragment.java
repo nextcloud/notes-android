@@ -171,6 +171,12 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
         try {
             CharSequence parsedMarkdown = markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
             noteContent.setText(parsedMarkdown);
+            /*
+             * Workaround for RxMarkdown-bug:
+             * When a CharSequence contains images, the images are not properly rendered with active hardware acceleration.
+             * They will only get rendered when hitting the android "recent" menu button and select the same activity again.
+             * Keeps hardware acceleration on for text-only notes for a smoother scrolling experience.
+             */
             if (MarkDownUtil.containsImageSpan(parsedMarkdown)) {
                 noteContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
             }
