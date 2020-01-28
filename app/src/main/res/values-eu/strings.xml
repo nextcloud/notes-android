@@ -115,7 +115,11 @@
     <string name="simple_more">Gehiago</string>
     <string name="simple_move">Mugitu</string>
     <string name="error_files_app_version_too_old">Zure files aplikazioaren bertsioa egunean dago?</string>
+    <string name="checkbox_could_not_be_toggled">Egiaztapen-laukiaren egoera ezin izan da aldatu.</string>
+    <string name="bulk_notes_deleted"> %1$d ohar ezabatu dira</string>
+    <string name="bulk_notes_restored">%1$d ohar leheneratu dira</string>
     <string name="category_readonly">Irakurtzeko soilik</string>
+    <string name="add_category">Gehitu %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

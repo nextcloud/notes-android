@@ -104,7 +104,6 @@
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
     <string name="category_readonly">Solo lectura</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo editor</item>

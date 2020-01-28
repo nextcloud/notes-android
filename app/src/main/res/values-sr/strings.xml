@@ -111,6 +111,7 @@
     <string name="simple_more">Још</string>
     <string name="simple_move">Помери</string>
     <string name="category_readonly">Само за читање</string>
+    <string name="add_category">Додај %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

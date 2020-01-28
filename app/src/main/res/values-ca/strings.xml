@@ -108,6 +108,7 @@
     <string name="simple_more">Més</string>
     <string name="simple_move">Mou</string>
     <string name="category_readonly">Només de lectura</string>
+    <string name="add_category">Afegeix %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

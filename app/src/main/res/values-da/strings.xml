@@ -104,7 +104,6 @@
     <string name="simple_more">Mere</string>
     <string name="simple_move">Flyt</string>
     <string name="category_readonly">Skrivebeskyttet</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>

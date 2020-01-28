@@ -119,6 +119,7 @@
     <string name="bulk_notes_deleted">Raderade %1$d anteckningar</string>
     <string name="bulk_notes_restored">Återställde %1$d anteckningar</string>
     <string name="category_readonly">Läsbehörighet</string>
+    <string name="add_category">Lägg till %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

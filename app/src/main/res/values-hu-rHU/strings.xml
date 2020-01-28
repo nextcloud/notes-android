@@ -104,6 +104,7 @@
     <string name="simple_more">Több</string>
     <string name="simple_move">Áthelyezés</string>
     <string name="category_readonly">Csak olvasható</string>
+    <string name="add_category">%1$s hozzáadása</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
