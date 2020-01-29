@@ -5,20 +5,21 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.NetworkType;
+import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
+
+import static java.util.concurrent.TimeUnit.MINUTES;
 
 public class SyncWorker extends Worker {
 
     private static final String WORKER_TAG = "background_synchronization";
     private static final String TAG = SyncWorker.class.getCanonicalName();
-    private static final Constraints constraints = new Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build();
 
     public SyncWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -29,15 +30,10 @@ public class SyncWorker extends Worker {
     synchronized public Result doWork() {
         Log.v(TAG, "Starting background synchronization");
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getApplicationContext());
-        db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
+        db.getNoteServerSyncHelper().addCallbackPull(new ISyncCallback() {
             @Override
             synchronized public void onFinish() {
                 SyncWorker.this.notify();
-            }
-
-            @Override
-            public void onScheduled() {
-
             }
         });
 
@@ -53,30 +49,13 @@ public class SyncWorker extends Worker {
         }
     }
 
-//    public static void update(@NonNull Context context) {
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-//        update(context, sharedPreferences.getString(context.getString(R.string.pref_key_background_sync), context.getString(R.string.pref_value_background_15_minutes)));
-//    }
-//
-//    public static void update(@NonNull Context context, String preferenceValue) {
-//        if (context.getString(R.string.pref_value_background_sync_off).equals(preferenceValue)) {
-//            deregister(context);
-//        } else {
-//            int repeatInterval = 15;
-//            TimeUnit unit = TimeUnit.MINUTES;
-//            if (context.getString(R.string.pref_value_background_1_hour).equals(preferenceValue)) {
-//                repeatInterval = 1;
-//                unit = TimeUnit.HOURS;
-//            } else if (context.getString(R.string.pref_value_background_6_hours).equals(preferenceValue)) {
-//                repeatInterval = 6;
-//                unit = TimeUnit.HOURS;
-//            }
-//            PeriodicWorkRequest work = new PeriodicWorkRequest.Builder(SyncWorker.class, repeatInterval, unit)
-//                    .setConstraints(constraints).build();
-//            Log.v(TAG, "Registering worker running each " + repeatInterval + " " + unit);
-//            WorkManager.getInstance(context.getApplicationContext()).enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, work);
-//        }
-//    }
+    public static void register(@NonNull Context context) {
+        Log.v(TAG, "Registering worker running each " + 15 + " " + MINUTES);
+        WorkManager
+                .getInstance(context.getApplicationContext())
+                .enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, new PeriodicWorkRequest.Builder(SyncWorker.class, 15, MINUTES)
+                        .setConstraints(new Constraints.Builder().setRequiredNetworkType(NetworkType.UNMETERED).build()).build());
+    }
 
     private static void deregister(@NonNull Context context) {
         Log.v(TAG, "Deregistering all workers with tag \"" + WORKER_TAG + "\"");
