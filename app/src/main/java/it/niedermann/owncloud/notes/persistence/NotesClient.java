@@ -35,7 +35,7 @@ public class NotesClient {
     private static final String TAG = NotesClient.class.getSimpleName();
 
     private final Context appContext;
-    private Map<SingleSignOnAccount, NextcloudAPI> mNextcloudAPIs = new HashMap<>();
+    private static Map<String, NextcloudAPI> mNextcloudAPIs = new HashMap<>();
 
     /**
      * This entity class is used to return relevant data of the HTTP reponse.
@@ -45,7 +45,7 @@ public class NotesClient {
         private final String etag;
         private final long lastModified;
 
-        public ResponseData(String content, String etag, long lastModified) {
+        ResponseData(String content, String etag, long lastModified) {
             this.content = content;
             this.etag = etag;
             this.lastModified = lastModified;
@@ -164,7 +164,7 @@ public class NotesClient {
 
         try {
             Log.v(TAG, ssoAccount.name + " => " + nextcloudRequest.getMethod() + " " + nextcloudRequest.getUrl() +  " ");
-            Response response = getNextcloudAPI(ssoAccount).performNetworkRequestV2(nextcloudRequest);
+            Response response = getNextcloudAPI(appContext, ssoAccount).performNetworkRequestV2(nextcloudRequest);
             Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
             String line;
@@ -197,12 +197,12 @@ public class NotesClient {
         }
     }
 
-    private NextcloudAPI getNextcloudAPI(SingleSignOnAccount ssoAccount) {
+    private static NextcloudAPI getNextcloudAPI(Context appContext, SingleSignOnAccount ssoAccount) {
 //        if (mNextcloudAPI != null) {
 //            mNextcloudAPI.stop();
 //        }
-        if (mNextcloudAPIs.containsKey(ssoAccount)) {
-            return mNextcloudAPIs.get(ssoAccount);
+        if (mNextcloudAPIs.containsKey(ssoAccount.name)) {
+            return mNextcloudAPIs.get(ssoAccount.name);
         } else {
             Log.v(TAG, "NextcloudRequest account: " + ssoAccount.name);
             NextcloudAPI nextcloudAPI = new NextcloudAPI(appContext, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
@@ -216,7 +216,7 @@ public class NotesClient {
                     ex.printStackTrace();
                 }
             });
-            mNextcloudAPIs.put(ssoAccount, nextcloudAPI);
+            mNextcloudAPIs.put(ssoAccount.name, nextcloudAPI);
             return nextcloudAPI;
         }
     }

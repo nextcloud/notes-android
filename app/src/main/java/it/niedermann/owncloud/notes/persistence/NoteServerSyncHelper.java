@@ -93,13 +93,13 @@ public class NoteServerSyncHelper {
     };
 
     // current state of the synchronization
-    private Map<SingleSignOnAccount, Boolean> syncActive = new HashMap<>();
-    private Map<SingleSignOnAccount, Boolean> syncScheduled = new HashMap<>();
+    private Map<String, Boolean> syncActive = new HashMap<>();
+    private Map<String, Boolean> syncScheduled = new HashMap<>();
     private NotesClient notesClient;
 
     // list of callbacks for both parts of synchronziation
-    private Map<SingleSignOnAccount, List<ISyncCallback>> callbacksPush = new HashMap<>();
-    private Map<SingleSignOnAccount, List<ISyncCallback>> callbacksPull = new HashMap<>();
+    private Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
+    private Map<String, List<ISyncCallback>> callbacksPull = new HashMap<>();
 
 
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
@@ -171,10 +171,10 @@ public class NoteServerSyncHelper {
      * @param callback Implementation of ISyncCallback, contains one method that shall be executed.
      */
     public void addCallbackPush(SingleSignOnAccount ssoAccount, ISyncCallback callback) {
-        if (!callbacksPush.containsKey(ssoAccount)) {
-            callbacksPush.put(ssoAccount, new ArrayList<>());
+        if (!callbacksPush.containsKey(ssoAccount.name)) {
+            callbacksPush.put(ssoAccount.name, new ArrayList<>());
         }
-        Objects.requireNonNull(callbacksPush.get(ssoAccount)).add(callback);
+        Objects.requireNonNull(callbacksPush.get(ssoAccount.name)).add(callback);
     }
 
     /**
@@ -186,10 +186,10 @@ public class NoteServerSyncHelper {
      * @param callback Implementation of ISyncCallback, contains one method that shall be executed.
      */
     public void addCallbackPull(SingleSignOnAccount ssoAccount, ISyncCallback callback) {
-        if (!callbacksPull.containsKey(ssoAccount)) {
-            callbacksPull.put(ssoAccount, new ArrayList<>());
+        if (!callbacksPull.containsKey(ssoAccount.name)) {
+            callbacksPull.put(ssoAccount.name, new ArrayList<>());
         }
-        Objects.requireNonNull(callbacksPull.get(ssoAccount)).add(callback);
+        Objects.requireNonNull(callbacksPull.get(ssoAccount.name)).add(callback);
     }
 
 
@@ -200,32 +200,32 @@ public class NoteServerSyncHelper {
      * @param onlyLocalChanges Whether to only push local changes to the server or to also load the whole list of notes from the server.
      */
     public void scheduleSync(SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
-        if (syncActive.get(ssoAccount) == null) {
-            syncActive.put(ssoAccount, false);
+        if (syncActive.get(ssoAccount.name) == null) {
+            syncActive.put(ssoAccount.name, false);
         }
-        Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (syncActive.get(ssoAccount) ? "sync active" : "sync NOT active") + ") ...");
-        if (isSyncPossible() && (!syncActive.get(ssoAccount) || onlyLocalChanges)) {
+        Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (syncActive.get(ssoAccount.name) ? "sync active" : "sync NOT active") + ") ...");
+        if (isSyncPossible() && (!syncActive.get(ssoAccount.name) || onlyLocalChanges)) {
             Log.d(TAG, "... starting now");
             SyncTask syncTask = new SyncTask(db.getLocalAccountByAccountName(ssoAccount.name), ssoAccount, onlyLocalChanges);
-            syncTask.addCallbacks(ssoAccount, callbacksPush.get(ssoAccount));
-            callbacksPush.put(ssoAccount, new ArrayList<>());
+            syncTask.addCallbacks(ssoAccount, callbacksPush.get(ssoAccount.name));
+            callbacksPush.put(ssoAccount.name, new ArrayList<>());
             if (!onlyLocalChanges) {
-                syncTask.addCallbacks(ssoAccount, callbacksPull.get(ssoAccount));
-                callbacksPull.put(ssoAccount, new ArrayList<>());
+                syncTask.addCallbacks(ssoAccount, callbacksPull.get(ssoAccount.name));
+                callbacksPull.put(ssoAccount.name, new ArrayList<>());
             }
             syncTask.execute();
         } else if (!onlyLocalChanges) {
             Log.d(TAG, "... scheduled");
-            syncScheduled.put(ssoAccount, true);
-            if(callbacksPush.containsKey(ssoAccount) && callbacksPush.get(ssoAccount) != null) {
-                for (ISyncCallback callback : callbacksPush.get(ssoAccount)) {
+            syncScheduled.put(ssoAccount.name, true);
+            if(callbacksPush.containsKey(ssoAccount.name) && callbacksPush.get(ssoAccount.name) != null) {
+                for (ISyncCallback callback : callbacksPush.get(ssoAccount.name)) {
                     callback.onScheduled();
                 }
             }
         } else {
             Log.d(TAG, "... do nothing");
-            if(callbacksPull.containsKey(ssoAccount) && callbacksPull.get(ssoAccount) != null) {
-                for (ISyncCallback callback : callbacksPush.get(ssoAccount)) {
+            if(callbacksPull.containsKey(ssoAccount.name) && callbacksPull.get(ssoAccount.name) != null) {
+                for (ISyncCallback callback : callbacksPush.get(ssoAccount.name)) {
                     callback.onScheduled();
                 }
             }
@@ -261,7 +261,7 @@ public class NoteServerSyncHelper {
         private final LocalAccount localAccount;
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
-        private final Map<SingleSignOnAccount, List<ISyncCallback>> callbacks = new HashMap<>();
+        private final Map<String, List<ISyncCallback>> callbacks = new HashMap<>();
         private List<Throwable> exceptions = new ArrayList<>();
 
         SyncTask(LocalAccount localAccount, SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
@@ -271,19 +271,19 @@ public class NoteServerSyncHelper {
         }
 
         void addCallbacks(SingleSignOnAccount ssoAccount, List<ISyncCallback> callbacks) {
-            this.callbacks.put(ssoAccount, callbacks);
+            this.callbacks.put(ssoAccount.name, callbacks);
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            if (!syncScheduled.containsKey(ssoAccount) || syncScheduled.get(ssoAccount) == null) {
-                syncScheduled.put(ssoAccount, false);
+            if (!syncScheduled.containsKey(ssoAccount.name) || syncScheduled.get(ssoAccount.name) == null) {
+                syncScheduled.put(ssoAccount.name, false);
             }
-            if (!onlyLocalChanges && syncScheduled.get(ssoAccount)) {
-                syncScheduled.put(ssoAccount, false);
+            if (!onlyLocalChanges && syncScheduled.get(ssoAccount.name)) {
+                syncScheduled.put(ssoAccount.name, false);
             }
-            syncActive.put(ssoAccount, true);
+            syncActive.put(ssoAccount.name, true);
         }
 
         @Override
@@ -458,17 +458,17 @@ public class NoteServerSyncHelper {
                     }
                 }
             }
-            syncActive.put(ssoAccount, false);
+            syncActive.put(ssoAccount.name, false);
             // notify callbacks
-            if (callbacks.containsKey(ssoAccount) && callbacks.get(ssoAccount) != null) {
-                for (ISyncCallback callback : callbacks.get(ssoAccount)) {
+            if (callbacks.containsKey(ssoAccount.name) && callbacks.get(ssoAccount.name) != null) {
+                for (ISyncCallback callback : callbacks.get(ssoAccount.name)) {
                     callback.onFinish();
                 }
             }
             db.notifyNotesChanged();
             db.updateDynamicShortcuts(localAccount.getId());
             // start next sync if scheduled meanwhile
-            if (syncScheduled.containsKey(ssoAccount) && syncScheduled.get(ssoAccount) != null && syncScheduled.get(ssoAccount)) {
+            if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && syncScheduled.get(ssoAccount.name)) {
                 scheduleSync(ssoAccount, false);
             }
         }
