@@ -36,7 +36,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.DisplayUtils;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 
@@ -157,7 +157,7 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    protected void saveNote(@Nullable ICallback callback) {
+    protected void saveNote(@Nullable ISyncCallback callback) {
         // Do nothing
     }
 

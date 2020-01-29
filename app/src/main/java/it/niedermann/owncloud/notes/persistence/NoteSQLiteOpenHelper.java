@@ -45,7 +45,7 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
@@ -658,7 +658,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         return categories;
     }
 
-    public void toggleFavorite(@NonNull DBNote note, @Nullable ICallback callback) {
+    public void toggleFavorite(@NonNull DBNote note, @Nullable ISyncCallback callback) {
         note.setFavorite(!note.isFavorite());
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -672,7 +672,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         serverSyncHelper.scheduleSync(true);
     }
 
-    public void setCategory(@NonNull DBNote note, @NonNull String category, @Nullable ICallback callback) {
+    public void setCategory(@NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
         note.setCategory(category);
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -695,7 +695,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
-    public DBNote updateNoteAndSync(long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ICallback callback) {
+    public DBNote updateNoteAndSync(long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
         //debugPrintFullDB();
         DBNote newNote;
         if (newContent == null) {

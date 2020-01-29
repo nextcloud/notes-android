@@ -35,7 +35,7 @@ import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
@@ -257,7 +257,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
      *
      * @param callback Observer which is called after save/synchronization
      */
-    protected void saveNote(@Nullable ICallback callback) {
+    protected void saveNote(@Nullable ISyncCallback callback) {
         Log.d(TAG, "saveData()");
         if (note != null) {
             String newContent = getContent();
