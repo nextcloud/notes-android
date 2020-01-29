@@ -12,8 +12,6 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import it.niedermann.owncloud.notes.model.ISyncCallback;
-
 import static java.util.concurrent.TimeUnit.MINUTES;
 
 public class SyncWorker extends Worker {
@@ -27,26 +25,13 @@ public class SyncWorker extends Worker {
 
     @NonNull
     @Override
-    synchronized public Result doWork() {
+    public Result doWork() {
         Log.v(TAG, "Starting background synchronization");
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getApplicationContext());
-        db.getNoteServerSyncHelper().addCallbackPull(new ISyncCallback() {
-            @Override
-            synchronized public void onFinish() {
-                SyncWorker.this.notify();
-            }
-        });
-
+        db.getNoteServerSyncHelper().addCallbackPull(() -> Log.v(TAG, "Finished background synchronization"));
         db.getNoteServerSyncHelper().scheduleSync(false);
-
-        try {
-            wait();
-            Log.v(TAG, "Finished background synchronization");
-            return Result.success();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return Result.failure();
-        }
+        // TODO return result depending on callbackPull
+        return Result.success();
     }
 
     public static void register(@NonNull Context context) {
