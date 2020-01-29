@@ -177,9 +177,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
              * They will only get rendered when hitting the android "recent" menu button and select the same activity again.
              * Keeps hardware acceleration on for text-only notes for a smoother scrolling experience.
              */
-            if (MarkDownUtil.containsImageSpan(parsedMarkdown)) {
-                noteContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-            }
+            // FIXME Content isn't displayed when there are too many images on SOFTWARE_LAYER rendered
+            // if (MarkDownUtil.containsImageSpan(parsedMarkdown)) {
+            //     noteContent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+            // }
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
             noteContent.setText(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
