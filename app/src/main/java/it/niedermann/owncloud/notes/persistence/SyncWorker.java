@@ -12,6 +12,12 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
+
+import it.niedermann.owncloud.notes.model.LocalAccount;
+
 import static java.util.concurrent.TimeUnit.MINUTES;
 
 public class SyncWorker extends Worker {
@@ -28,8 +34,15 @@ public class SyncWorker extends Worker {
     public Result doWork() {
         Log.v(TAG, "Starting background synchronization");
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getApplicationContext());
-        db.getNoteServerSyncHelper().addCallbackPull(() -> Log.v(TAG, "Finished background synchronization"));
-        db.getNoteServerSyncHelper().scheduleSync(false);
+        for (LocalAccount account : db.getAccounts()) {
+            try {
+                SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
+                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> Log.v(TAG, "Finished background synchronization"));
+                db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
+            } catch (NextcloudFilesAppAccountNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
         // TODO return result depending on callbackPull
         return Result.success();
     }

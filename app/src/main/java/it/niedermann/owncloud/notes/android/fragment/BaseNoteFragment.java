@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.Objects;
 
@@ -33,9 +34,9 @@ import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.Cate
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
-import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
@@ -54,6 +55,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
     private LocalAccount localAccount;
+    private SingleSignOnAccount ssoAccount;
 
     protected DBNote note;
     @Nullable
@@ -67,7 +69,8 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext()).name);
+            this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext());
+            this.localAccount = db.getLocalAccountByAccountName(ssoAccount.name);
 
             if (savedInstanceState == null) {
                 long id = getArguments().getLong(PARAM_NOTE_ID);
@@ -77,11 +80,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                         /* Switch account if account id has been provided */
                         this.localAccount = db.getAccount(accountId);
                         SingleAccountHelper.setCurrentAccount(getActivity().getApplicationContext(), localAccount.getAccountName());
-                        try {
-                            db.getNoteServerSyncHelper().updateAccount();
-                        } catch (NextcloudFilesAppAccountNotFoundException e) {
-                            e.printStackTrace();
-                        }
                     }
                     isNew = false;
                     note = originalNote = db.getNote(localAccount.getId(), id);
@@ -95,7 +93,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                             note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "");
                         }
                     } else {
-                        note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
+                        note = db.getNote(localAccount.getId(), db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote));
                         originalNote = null;
                     }
                 }
@@ -177,18 +175,18 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         switch (item.getItemId()) {
             case R.id.menu_cancel:
                 if (originalNote == null) {
-                    db.deleteNoteAndSync(note.getId());
+                    db.deleteNoteAndSync(ssoAccount, note.getId());
                 } else {
-                    db.updateNoteAndSync(localAccount.getId(), originalNote, null, null);
+                    db.updateNoteAndSync(ssoAccount, localAccount.getId(), originalNote, null, null);
                 }
                 listener.close();
                 return true;
             case R.id.menu_delete:
-                db.deleteNoteAndSync(note.getId());
+                db.deleteNoteAndSync(ssoAccount, note.getId());
                 listener.close();
                 return true;
             case R.id.menu_favorite:
-                db.toggleFavorite(note, null);
+                db.toggleFavorite(ssoAccount, note, null);
                 listener.onNoteUpdated(note);
                 prepareFavoriteOption(item);
                 return true;
@@ -248,7 +246,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     public void onCloseNote() {
         if (originalNote == null && getContent().isEmpty()) {
-            db.deleteNoteAndSync(note.getId());
+            db.deleteNoteAndSync(ssoAccount, note.getId());
         }
     }
 
@@ -264,7 +262,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             if (note.getContent().equals(newContent)) {
                 Log.v(TAG, "... not saving, since nothing has changed");
             } else {
-                note = db.updateNoteAndSync(localAccount.getId(), note, newContent, callback);
+                note = db.updateNoteAndSync(ssoAccount, localAccount.getId(), note, newContent, callback);
                 listener.onNoteUpdated(note);
             }
         } else {
@@ -310,12 +308,12 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     @Override
     public void onCategoryChosen(String category) {
-        db.setCategory(note, category, null);
+        db.setCategory(ssoAccount, note, category, null);
         listener.onNoteUpdated(note);
     }
 
     public void moveNote(LocalAccount account) {
-        db.moveNoteToAnotherAccount(note.getAccountId(), note, account.getId());
+        db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
         listener.close();
     }
 

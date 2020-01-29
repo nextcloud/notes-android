@@ -99,6 +99,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
      */
     private boolean notAuthorizedAccountHandled = false;
 
+    private SingleSignOnAccount ssoAccount;
     private LocalAccount localAccount;
 
     @BindView(R.id.coordinatorLayout)
@@ -188,9 +189,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     protected void onResume() {
         try {
-            String ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name;
-            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount)) {
-                selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount.name)) {
+                selectAccount(ssoAccount.name);
             }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
             if (!notAuthorizedAccountHandled) {
@@ -201,7 +202,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         // refresh and sync every time the activity gets
         if (localAccount != null) {
             refreshLists();
-            db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
+            db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
             if (db.getNoteServerSyncHelper().isSyncPossible()) {
                 synchronize();
             }
@@ -234,18 +235,18 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private void selectAccount(String accountName) {
         fabCreate.hide();
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
-        localAccount = db.getLocalAccountByAccountName(accountName);
         try {
-            db.getNoteServerSyncHelper().updateAccount();
+            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+            localAccount = db.getLocalAccountByAccountName(accountName);
             synchronize();
             refreshLists();
             fabCreate.show();
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
-            handleNotAuthorizedAccount();
+            setupHeader();
+            setupNavigationList(ADAPTER_KEY_RECENT);
+            updateUsernameInDrawer();
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
         }
-        setupHeader();
-        setupNavigationList(ADAPTER_KEY_RECENT);
-        updateUsernameInDrawer();
     }
 
     private void handleNotAuthorizedAccount() {
@@ -776,7 +777,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     public void onNoteFavoriteClick(int position, View view) {
         DBNote note = (DBNote) adapter.getItem(position);
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(view.getContext());
-        db.toggleFavorite(note, syncCallBack);
+        db.toggleFavorite(ssoAccount, note, syncCallBack);
         adapter.notifyItemChanged(position);
         refreshLists();
     }
@@ -806,8 +807,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private void synchronize() {
         swipeRefreshLayout.setRefreshing(true);
-        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
-        db.getNoteServerSyncHelper().scheduleSync(false);
+        db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
+        db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
     }
 
     @Override
@@ -817,7 +818,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         adapter.deselect(0);
         for (Integer i : selection) {
             DBNote note = (DBNote) adapter.getItem(i);
-            db.moveNoteToAnotherAccount(note.getAccountId(), db.getNote(note.getAccountId(), note.getId()), account.getId());
+            db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), db.getNote(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);
