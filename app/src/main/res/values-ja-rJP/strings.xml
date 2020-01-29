@@ -16,8 +16,6 @@
     <string name="simple_bold">太字</string>
     <string name="simple_link">リンク</string>
     <string name="simple_italic">斜体</string>
-    <string name="action_note_deleted">ノートが削除されました</string>
-    <string name="action_note_restored">ノートが復元されました</string>
     <string name="action_undo">元に戻す</string>
     <string name="action_drawer_open">ナビゲーションを開く</string>
     <string name="action_drawer_close">ナビゲーションを閉じる</string>
@@ -112,6 +110,10 @@
     <string name="no_notes_yet">まだノートはありません</string>
     <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
     <string name="simple_more">さらに表示</string>
+    <string name="simple_move">移動</string>
+    <string name="category_readonly">読み込み専用</string>
+    <string name="add_category">%1$s を追加</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>

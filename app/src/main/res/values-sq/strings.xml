@@ -15,8 +15,6 @@
     <string name="simple_bold">I theksuar</string>
     <string name="simple_link">Lidhje</string>
     <string name="simple_italic">I pjerrët</string>
-    <string name="action_note_deleted">Shënimi u fshi</string>
-    <string name="action_note_restored">Shënimi i rivendos</string>
     <string name="action_undo">Zhbëj</string>
     <string name="action_drawer_open">hape lundrimin</string>
     <string name="action_drawer_close">mbylle lundrimin</string>
@@ -93,6 +91,8 @@
     <string name="category_work">Punë</string>
     <string name="no_notes_yet">Nuk ka shënime</string>
     <string name="simple_more">More</string>
+    <string name="simple_move">Zhvendos</string>
+    <string name="category_readonly">Vetëm i lexueshëm</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Hapur në modalitetin e redaktimit</item>

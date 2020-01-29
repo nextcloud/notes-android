@@ -1,0 +1,15 @@
+v2.6.0
+
+- Improved in-note search 🔎 (#106, #400, #550, #700)
+
+v2.5.0
+
+- Move notes to another account (#655)
+- Internal Note Links (#646, #623, #202)
+- Cancel and Delete are redundant on new note (#640)
+- Undo for bulk delete (#670)
+- Checklist auto-continuation (#688, #608)
+- Fix database upgrade issues (#696)
+
+Requires at least Files app¹ version 3.9.0
+¹ https://github.com/nextcloud/android

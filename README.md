@@ -21,7 +21,9 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 [<img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png"
       alt="Donate with PayPal"
       height="80">](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K7HVLE6J7SXXA)
-[![Donate using Liberapay](https://liberapay.com/assets/widgets/donate.svg)](https://liberapay.com/stefan-niedermann/donate)
+[<img src="https://raw.githubusercontent.com/stefan-niedermann/DonateButtons/master/LiberaPay.png"
+      alt="Donate using Liberapay"
+      height="80">](https://liberapay.com/stefan-niedermann/donate)
 
 ## :eyes: Screenshots
 
@@ -36,7 +38,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
   * Toggling checkboxes in view mode
   * Mark notes as favorite
   * Bulk delete
-  * In-note search ([#106](https://github.com/stefan-niedermann/nextcloud-notes/issues/106))
+  * In-note search
   * Render MarkDown (using [RxMarkdown](https://github.com/yydcdut/RxMarkdown))
   * Translated in many languages on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
   * Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))

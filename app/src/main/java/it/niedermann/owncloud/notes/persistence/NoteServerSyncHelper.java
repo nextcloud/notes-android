@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -17,6 +16,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
@@ -43,7 +43,7 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.util.ExceptionUtil;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
@@ -57,7 +57,7 @@ public class NoteServerSyncHelper {
 
     private static NoteServerSyncHelper instance;
 
-    private NoteSQLiteOpenHelper dbHelper;
+    private NoteSQLiteOpenHelper db;
     private Context context;
     private LocalAccount localAccount;
 
@@ -92,12 +92,12 @@ public class NoteServerSyncHelper {
     private NotesClient notesClient;
 
     // list of callbacks for both parts of synchronziation
-    private List<ICallback> callbacksPush = new ArrayList<>();
-    private List<ICallback> callbacksPull = new ArrayList<>();
+    private List<ISyncCallback> callbacksPush = new ArrayList<>();
+    private List<ISyncCallback> callbacksPull = new ArrayList<>();
 
 
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
-        this.dbHelper = db;
+        this.db = db;
         this.context = db.getContext();
         try {
             updateAccount();
@@ -133,7 +133,7 @@ public class NoteServerSyncHelper {
 
     public void updateAccount() throws NextcloudFilesAppAccountNotFoundException {
         try {
-            this.localAccount = dbHelper.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context.getApplicationContext()).name);
+            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context.getApplicationContext()).name);
             if (notesClient == null) {
                 if (this.localAccount != null) {
                     notesClient = new NotesClient(context.getApplicationContext());
@@ -183,9 +183,9 @@ public class NoteServerSyncHelper {
      * After execution the callback will be deleted, so it has to be added again if it shall be
      * executed the next time all synchronize operations are finished.
      *
-     * @param callback Implementation of ICallback, contains one method that shall be executed.
+     * @param callback Implementation of ISyncCallback, contains one method that shall be executed.
      */
-    public void addCallbackPush(ICallback callback) {
+    public void addCallbackPush(ISyncCallback callback) {
         callbacksPush.add(callback);
     }
 
@@ -195,9 +195,9 @@ public class NoteServerSyncHelper {
      * After execution the callback will be deleted, so it has to be added again if it shall be
      * executed the next time all synchronize operations are finished.
      *
-     * @param callback Implementation of ICallback, contains one method that shall be executed.
+     * @param callback Implementation of ISyncCallback, contains one method that shall be executed.
      */
-    public void addCallbackPull(ICallback callback) {
+    public void addCallbackPull(ISyncCallback callback) {
         callbacksPull.add(callback);
     }
 
@@ -223,12 +223,12 @@ public class NoteServerSyncHelper {
         } else if (!onlyLocalChanges) {
             Log.d(TAG, "... scheduled");
             syncScheduled = true;
-            for (ICallback callback : callbacksPush) {
+            for (ISyncCallback callback : callbacksPush) {
                 callback.onScheduled();
             }
         } else {
             Log.d(TAG, "... do nothing");
-            for (ICallback callback : callbacksPush) {
+            for (ISyncCallback callback : callbacksPush) {
                 callback.onScheduled();
             }
         }
@@ -261,14 +261,14 @@ public class NoteServerSyncHelper {
      */
     private class SyncTask extends AsyncTask<Void, Void, LoginStatus> {
         private final boolean onlyLocalChanges;
-        private final List<ICallback> callbacks = new ArrayList<>();
+        private final List<ISyncCallback> callbacks = new ArrayList<>();
         private List<Throwable> exceptions = new ArrayList<>();
 
         SyncTask(boolean onlyLocalChanges) {
             this.onlyLocalChanges = onlyLocalChanges;
         }
 
-        void addCallbacks(List<ICallback> callbacks) {
+        void addCallbacks(List<ISyncCallback> callbacks) {
             this.callbacks.addAll(callbacks);
         }
 
@@ -284,13 +284,13 @@ public class NoteServerSyncHelper {
         @Override
         protected LoginStatus doInBackground(Void... voids) {
             Log.i(TAG, "STARTING SYNCHRONIZATION");
-            //dbHelper.debugPrintFullDB();
+            //db.debugPrintFullDB();
             LoginStatus status = LoginStatus.OK;
             pushLocalChanges();
             if (!onlyLocalChanges) {
                 status = pullRemoteChanges();
             }
-            //dbHelper.debugPrintFullDB();
+            //db.debugPrintFullDB();
             Log.i(TAG, "SYNCHRONIZATION FINISHED");
             return status;
         }
@@ -303,7 +303,7 @@ public class NoteServerSyncHelper {
                 return;
             }
             Log.d(TAG, "pushLocalChanges()");
-            List<DBNote> notes = dbHelper.getLocalModifiedNotes(localAccount.getId());
+            List<DBNote> notes = db.getLocalModifiedNotes(localAccount.getId());
             for (DBNote note : notes) {
                 Log.d(TAG, "   Process Local Note: " + note);
                 try {
@@ -317,12 +317,12 @@ public class NoteServerSyncHelper {
                                 remoteNote = notesClient.editNote(note).getNote();
                             }
                             // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
-                            // Please note, thas dbHelper.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+                            // Please note, thas db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
                                 Log.v(TAG, "   ...Note does not exist on server -> (re)create");
                                 remoteNote = notesClient.createNote(note).getNote();
                             }
-                            dbHelper.updateNote(note.getId(), remoteNote, note);
+                            db.updateNote(note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() > 0) {
@@ -331,8 +331,8 @@ public class NoteServerSyncHelper {
                             } else {
                                 Log.v(TAG, "   ...delete (only local, since it was not synchronized)");
                             }
-                            // Please note, thas dbHelper.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            dbHelper.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
+                            // Please note, thas db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+                            db.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
                             break;
                         default:
                             throw new IllegalStateException("Unknown State of Note: " + note);
@@ -359,7 +359,7 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             LoginStatus status;
             try {
-                Map<Long, Long> idMap = dbHelper.getIdMap(localAccount.getId());
+                Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
                 ServerResponse.NotesResponse response = notesClient.getNotes(localAccount.getModified(), localAccount.getEtag());
                 List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
@@ -371,10 +371,10 @@ public class NoteServerSyncHelper {
                         Log.v(TAG, "   ... unchanged");
                     } else if (idMap.containsKey(remoteNote.getRemoteId())) {
                         Log.v(TAG, "   ... found -> Update");
-                        dbHelper.updateNote(idMap.get(remoteNote.getRemoteId()), remoteNote, null);
+                        db.updateNote(idMap.get(remoteNote.getRemoteId()), remoteNote, null);
                     } else {
                         Log.v(TAG, "   ... create");
-                        dbHelper.addNote(localAccount.getId(), remoteNote);
+                        db.addNote(localAccount.getId(), remoteNote);
                     }
                 }
                 Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
@@ -382,15 +382,15 @@ public class NoteServerSyncHelper {
                 for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
                     if (!remoteIDs.contains(entry.getKey())) {
                         Log.v(TAG, "   ... remove " + entry.getValue());
-                        dbHelper.deleteNote(entry.getValue(), DBStatus.VOID);
+                        db.deleteNote(entry.getValue(), DBStatus.VOID);
                     }
                 }
 
                 // update ETag and Last-Modified in order to reduce size of next response
                 localAccount.setETag(response.getETag());
                 localAccount.setModified(response.getLastModified());
-                dbHelper.updateETag(localAccount.getId(), localAccount.getEtag());
-                dbHelper.updateModified(localAccount.getId(), localAccount.getModified());
+                db.updateETag(localAccount.getId(), localAccount.getEtag());
+                db.updateModified(localAccount.getId(), localAccount.getModified());
                 return LoginStatus.OK;
             } catch (JSONException | NullPointerException e) {
                 exceptions.add(e);
@@ -427,11 +427,11 @@ public class NoteServerSyncHelper {
                     Log.e(TAG, e.getMessage(), e);
                 }
                 String statusMessage = context.getApplicationContext().getString(R.string.error_sync, context.getApplicationContext().getString(status.str));
-                if (context instanceof ViewProvider && context instanceof Activity) {
+                if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
                     Snackbar.make(((ViewProvider) context).getView(), statusMessage, Snackbar.LENGTH_LONG)
                             .setAction(R.string.simple_more, v -> {
-                                String debugInfos = ExceptionUtil.getDebugInfos((Activity) context, exceptions);
-                                new AlertDialog.Builder(context, R.style.ncAlertDialog)
+                                String debugInfos = ExceptionUtil.getDebugInfos((AppCompatActivity) context, exceptions);
+                                new AlertDialog.Builder(context)
                                         .setTitle(statusMessage)
                                         .setMessage(debugInfos)
                                         .setPositiveButton(android.R.string.copy, (a, b) -> {
@@ -455,10 +455,11 @@ public class NoteServerSyncHelper {
             }
             syncActive = false;
             // notify callbacks
-            for (ICallback callback : callbacks) {
+            for (ISyncCallback callback : callbacks) {
                 callback.onFinish();
             }
-            dbHelper.notifyNotesChanged();
+            db.notifyNotesChanged();
+            db.updateDynamicShortcuts(localAccount.getId());
             // start next sync if scheduled meanwhile
             if (syncScheduled) {
                 scheduleSync(false);

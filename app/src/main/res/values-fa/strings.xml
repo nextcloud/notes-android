@@ -91,8 +91,9 @@
     <string name="no_notes_yet_description">دکمه + را فشار دهید تا یک یادداشت جدید ایجاد کنید</string>
     <string name="could_not_load_preview_two_digit_numbered_list">پیش نمایش بارگیری نشد. لطفاً بررسی کنید که آیا یک مورد لیست شماره ای دو رقمی بدون محتوا وجود دارد یا خیر.</string>
     <string name="simple_more">بیش‌تر</string>
+    <string name="simple_move">انتقال</string>
     <string name="error_files_app_version_too_old">نسخه برنامه فایلهای شما به روز است؟</string>
-
+    <string name="category_readonly">فقط خواندنی</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>در حالت ویرایش باز کنید</item>

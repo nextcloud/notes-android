@@ -1,0 +1,6 @@
+- 🐞 Fixed not aligned header titles (#466)
+- 📁 Enhance category handling (#378)
+- 🔗 Directly insert Links from clipboard when using context based formatting
+
+Requires at least Files app¹ version 3.9.0
+¹ https://github.com/nextcloud/android

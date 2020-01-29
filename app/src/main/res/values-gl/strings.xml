@@ -16,8 +16,8 @@
     <string name="simple_bold">Negra</string>
     <string name="simple_link">Ligazón</string>
     <string name="simple_italic">Itálica</string>
-    <string name="action_note_deleted">A nota foi eliminada</string>
-    <string name="action_note_restored">A nota foi restaurada</string>
+    <string name="action_note_deleted">Eliminouse %1$s</string>
+    <string name="action_note_restored">Restaurouse %1$s</string>
     <string name="action_undo">Desfacer</string>
     <string name="action_drawer_open">abrir a navegación</string>
     <string name="action_drawer_close">pechar a navegación</string>
@@ -113,7 +113,14 @@
     <string name="no_notes_yet_description">Prema o botón + para crear unha nota nova</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Non foi posíbel cargar a vista previa. Verifique se hai un elemento da lista numerada de dous díxitos sen contido.</string>
     <string name="simple_more">Máis</string>
+    <string name="simple_move">Mover</string>
     <string name="error_files_app_version_too_old">A súa aplicación de ficheiros está actualizada?</string>
+    <string name="checkbox_could_not_be_toggled">Non foi posíbel cambiar a caixa de selección.</string>
+    <string name="bulk_notes_deleted">Foron eliminadas %1$d notas</string>
+    <string name="bulk_notes_restored">Foron restauradas %1$d notas</string>
+    <string name="category_readonly">Só lectura</string>
+    <string name="no_category">Sen categoría</string>
+    <string name="add_category">Engadir %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -1,11 +1,13 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
+import android.text.Spanned;
 
 import androidx.core.content.res.ResourcesCompat;
 
 import com.yydcdut.markdown.MarkdownConfiguration;
 import com.yydcdut.markdown.MarkdownConfiguration.Builder;
+import com.yydcdut.markdown.span.MDImageSpan;
 import com.yydcdut.markdown.theme.ThemeDefault;
 import com.yydcdut.markdown.theme.ThemeSonsOfObsidian;
 
@@ -45,6 +47,10 @@ public class MarkDownUtil {
                 .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null))
                 .setRxMDImageLoader(new NotesImageLoader(context))
                 .setDefaultImageSize(400, 300);
+    }
+
+    public static boolean containsImageSpan(CharSequence text) {
+        return ((Spanned) text).getSpans(0, text.length(), MDImageSpan.class).length > 0;
     }
 }
 

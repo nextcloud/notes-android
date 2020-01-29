@@ -1,7 +1,7 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
-import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
@@ -9,22 +9,15 @@ import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.ShareActionProvider;
 import androidx.core.view.MenuItemCompat;
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -39,10 +32,11 @@ import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
-import it.niedermann.owncloud.notes.util.DisplayUtils;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
+import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
@@ -51,17 +45,13 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
 
-    private static final int MENU_ID_PIN = -1;
+    protected static final int MENU_ID_PIN = -1;
     public static final String PARAM_NOTE_ID = "noteId";
     public static final String PARAM_ACCOUNT_ID = "accountId";
+    public static final String PARAM_CONTENT = "content";
     public static final String PARAM_NEWNOTE = "newNote";
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
-
-    protected SearchView searchView;
-    protected MenuItem searchMenuItem;
-
-    protected String searchQuery = null;
 
     private LocalAccount localAccount;
 
@@ -71,26 +61,11 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     protected NoteSQLiteOpenHelper db;
     private NoteFragmentListener listener;
 
-    private TextView activeTextView;
-    private boolean isNew = true;
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            searchQuery = savedInstanceState.getString("searchQuery", "");
-        }
-    }
-
-    protected void setActiveTextView(TextView textView) {
-        activeTextView = textView;
-    }
+    boolean isNew = true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         try {
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext()).name);
 
@@ -112,11 +87,17 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                     note = originalNote = db.getNote(localAccount.getId(), id);
                 } else {
                     CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
+                    String content = getArguments().getString(PARAM_CONTENT);
                     if (cloudNote == null) {
-                        throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given and argument " + PARAM_NEWNOTE + " is missing.");
+                        if (content == null) {
+                            throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
+                        } else {
+                            note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "");
+                        }
+                    } else {
+                        note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
+                        originalNote = null;
                     }
-                    note = db.getNote(localAccount.getId(), db.addNoteAndSync(localAccount.getId(), cloudNote));
-                    originalNote = null;
                 }
             } else {
                 note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
@@ -129,14 +110,14 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
         try {
-            listener = (NoteFragmentListener) activity;
+            listener = (NoteFragmentListener) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.getClass() + " must implement " + NoteFragmentListener.class);
+            throw new ClassCastException(context.getClass() + " must implement " + NoteFragmentListener.class);
         }
-        db = NoteSQLiteOpenHelper.getInstance(activity);
+        db = NoteSQLiteOpenHelper.getInstance(context);
     }
 
     @Override
@@ -158,90 +139,29 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         saveNote(null);
         outState.putSerializable(SAVEDKEY_NOTE, note);
         outState.putSerializable(SAVEDKEY_ORIGINAL_NOTE, originalNote);
-
-        if (searchView != null && !TextUtils.isEmpty(searchView.getQuery().toString())) {
-            outState.putString("searchQuery", searchView.getQuery().toString());
-        }
-    }
-
-    private void colorWithText(String newText) {
-        if (activeTextView != null && ViewCompat.isAttachedToWindow(activeTextView)) {
-            activeTextView.setText(DisplayUtils.searchAndColor(activeTextView.getText().toString(), new SpannableString
-                            (activeTextView.getText()), newText, getResources().getColor(R.color.primary)),
-                    TextView.BufferType.SPANNABLE);
-        }
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
 
-        if (isRequestPinShortcutSupported(getActivity()) && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (isRequestPinShortcutSupported(Objects.requireNonNull(getActivity())) && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
 
         menu.findItem(R.id.menu_delete).setVisible(!isNew);
-
-        searchMenuItem = menu.findItem(R.id.search);
-        searchView = (SearchView) searchMenuItem.getActionView();
-
-        if (!TextUtils.isEmpty(searchQuery) && isNew) {
-            searchMenuItem.expandActionView();
-            searchView.setQuery(searchQuery, true);
-            searchView.clearFocus();
-        } else {
-            searchMenuItem.collapseActionView();
-        }
-
-
-        final LinearLayout searchEditFrame = searchView.findViewById(R.id
-                .search_edit_frame);
-
-        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            int oldVisibility = -1;
-
-            @Override
-            public void onGlobalLayout() {
-                int currentVisibility = searchEditFrame.getVisibility();
-
-                if (currentVisibility != oldVisibility) {
-                    if (currentVisibility != View.VISIBLE) {
-                        colorWithText("");
-                        searchQuery = "";
-                    }
-
-                    oldVisibility = currentVisibility;
-                }
-            }
-
-        });
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                searchQuery = newText;
-                colorWithText(newText);
-                return true;
-            }
-        });
-
     }
 
     private void prepareFavoriteOption(MenuItem item) {
@@ -337,7 +257,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
      *
      * @param callback Observer which is called after save/synchronization
      */
-    protected void saveNote(@Nullable ICallback callback) {
+    protected void saveNote(@Nullable ISyncCallback callback) {
         Log.d(TAG, "saveData()");
         if (note != null) {
             String newContent = getContent();
@@ -358,7 +278,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
         String fontSize = sp.getString(getString(R.string.pref_key_font_size), prefValueMedium);
 
-        assert fontSize != null;
         if (fontSize.equals(prefValueSmall)) {
             return getResources().getDimension(R.dimen.note_font_size_small);
         } else if (fontSize.equals(prefValueMedium)) {

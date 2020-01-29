@@ -16,8 +16,8 @@
     <string name="simple_bold">Koyu</string>
     <string name="simple_link">Bağlantı</string>
     <string name="simple_italic">Yatık</string>
-    <string name="action_note_deleted">Not silindi</string>
-    <string name="action_note_restored">Not geri yüklendi</string>
+    <string name="action_note_deleted">%1$s silindi</string>
+    <string name="action_note_restored">%1$s geri yüklendi</string>
     <string name="action_undo">Geri al</string>
     <string name="action_drawer_open">gezinmeyi aç</string>
     <string name="action_drawer_close">gezinmeyi kapat</string>
@@ -113,7 +113,14 @@
     <string name="no_notes_yet_description">Yeni bir not eklemek için + tuşuna basın</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Ön izleme yüklenemedi. Lütfen içeriği olmayan iki haneli rakamdan oluşan bir liste ögesi bulunduğundan emin olun.</string>
     <string name="simple_more">Daha Fazla</string>
+    <string name="simple_move">Taşı</string>
     <string name="error_files_app_version_too_old">Dosyalar uygulamanızın sürümü güncel mi?</string>
+    <string name="checkbox_could_not_be_toggled">İşaret kutusunun işareti değiştirilemedi.</string>
+    <string name="bulk_notes_deleted">%1$d not silindi</string>
+    <string name="bulk_notes_restored">%1$dnot geri yüklendi</string>
+    <string name="category_readonly">Salt okunur</string>
+    <string name="no_category">Kategori yok</string>
+    <string name="add_category">%1$s ekle</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

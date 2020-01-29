@@ -15,8 +15,6 @@
     <string name="simple_bold">Feitletrað</string>
     <string name="simple_link">Tengill</string>
     <string name="simple_italic">Skáletrað</string>
-    <string name="action_note_deleted">Minnispunkti var eytt</string>
-    <string name="action_note_restored">Minnispunktur endurheimtur</string>
     <string name="action_undo">Afturkalla</string>
     <string name="action_drawer_open">opna stýringu</string>
     <string name="action_drawer_close">loka stýringu</string>
@@ -104,6 +102,10 @@
     <string name="category_work">Vinna</string>
     <string name="no_notes_yet">Engir minnispunktar ennþá</string>
     <string name="simple_more">Meira</string>
+    <string name="simple_move">Færa</string>
+    <string name="category_readonly">Skrifvarið</string>
+    <string name="add_category">Bæta við %1$s</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>

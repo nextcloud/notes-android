@@ -16,8 +16,6 @@
     <string name="simple_bold">Uthevet</string>
     <string name="simple_link">Lenke</string>
     <string name="simple_italic">Italic</string>
-    <string name="action_note_deleted">Notat slettet</string>
-    <string name="action_note_restored">Notat gjenopprettet</string>
     <string name="action_undo">Angre</string>
     <string name="action_drawer_open">åpne navigasjon</string>
     <string name="action_drawer_close">lukk navigasjon</string>
@@ -108,6 +106,8 @@
     <string name="category_work">Arbeid</string>
     <string name="no_notes_yet">Ingen notater enda</string>
     <string name="simple_more">Mer</string>
+    <string name="simple_move">Flytt</string>
+    <string name="category_readonly">Skrivebeskyttet</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åpne i redigeringsmodus</item>

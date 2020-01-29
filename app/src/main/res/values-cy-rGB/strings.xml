@@ -15,8 +15,6 @@
     <string name="simple_bold">Trwm</string>
     <string name="simple_link">Dolen</string>
     <string name="simple_italic">Italig</string>
-    <string name="action_note_deleted">Nodyn wedi\'i ddileu</string>
-    <string name="action_note_restored">Nodyn wedi\'i adfer</string>
     <string name="action_undo">Dadwneud</string>
     <string name="action_drawer_open">agor llywio</string>
     <string name="action_drawer_close">cau llywio</string>
@@ -94,6 +92,7 @@
     <string name="category_work">Gwaith</string>
     <string name="no_notes_yet">Dim nodiadau eto</string>
     <string name="simple_more">Rhagor</string>
+    <string name="simple_move">Symud</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Agor yn y modd golygu</item>

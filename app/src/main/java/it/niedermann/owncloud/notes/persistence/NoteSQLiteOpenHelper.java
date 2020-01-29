@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -13,6 +14,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
@@ -34,6 +36,7 @@ import java.util.Map;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -42,8 +45,10 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
+
+import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
@@ -76,7 +81,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String key_etag = "ETAG";
 
     private static final String[] columnsWithoutContent = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt};
-    private static final String[] columns               = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt, key_content};
+    private static final String[] columns = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt, key_content};
     private static final String default_order = key_favorite + " DESC, " + key_modified + " DESC";
 
     private static NoteSQLiteOpenHelper instance;
@@ -144,6 +149,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 3) {
             recreateDatabase(db);
+            return;
         }
         if (oldVersion < 4) {
             db.delete(table_notes, null, null);
@@ -161,11 +167,21 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             DatabaseIndexUtil.dropIndexes(db);
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_category + " TEXT NOT NULL DEFAULT ''");
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_etag + " TEXT");
-            createNotesIndexes(db);
+            DatabaseIndexUtil.createIndex(db, table_notes, key_remote_id, key_status, key_favorite, key_category, key_modified);
         }
         if (oldVersion < 8) {
             final String table_temp = "NOTES_TEMP";
-            createNotesTable(db, table_temp);
+            db.execSQL("CREATE TABLE " + table_temp + " ( " +
+                    key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    key_remote_id + " INTEGER, " +
+                    key_status + " VARCHAR(50), " +
+                    key_title + " TEXT, " +
+                    key_modified + " INTEGER DEFAULT 0, " +
+                    key_content + " TEXT, " +
+                    key_favorite + " INTEGER DEFAULT 0, " +
+                    key_category + " TEXT NOT NULL DEFAULT '', " +
+                    key_etag + " TEXT)");
+            DatabaseIndexUtil.createIndex(db, table_temp, key_remote_id, key_status, key_favorite, key_category, key_modified);
             db.execSQL(String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s,%s,%s) ", table_temp, key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag)
                     + String.format("SELECT %s,%s,%s,%s,strftime('%%s',%s),%s,%s,%s,%s FROM %s", key_id, key_remote_id, key_status, key_title, key_modified, key_content, key_favorite, key_category, key_etag, table_notes));
             db.execSQL(String.format("DROP TABLE %s", table_notes));
@@ -253,10 +269,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                     Log.e(TAG, "Previous URL could not be parsed. Recreating database...");
                     e.printStackTrace();
                     recreateDatabase(db);
+                    return;
                 }
             } else {
                 Log.e(TAG, "Previous URL is null. Recreating database...");
                 recreateDatabase(db);
+                return;
             }
         }
         if (oldVersion < 10) {
@@ -372,9 +390,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         Cursor cursor = getReadableDatabase()
                 .query(
                         table_notes,
-                        new String[]{ key_remote_id },
+                        new String[]{key_remote_id},
                         key_status + " != ? AND " + key_account_id + " = ?",
-                        new String[]{ DBStatus.LOCAL_DELETED.getTitle(), "" + accountId },
+                        new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId},
                         null,
                         null,
                         null
@@ -395,7 +413,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     public long getLocalIdByRemoteId(long accountId, long remoteId) {
         List<DBNote> notes = getNotesCustom(accountId, key_remote_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(remoteId), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, true);
-        if(notes.isEmpty() || notes.get(0) == null) {
+        if (notes.isEmpty() || notes.get(0) == null) {
             throw new IllegalArgumentException("There is no note with remoteId \"" + remoteId + "\"");
         }
         return notes.get(0).getId();
@@ -434,7 +452,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     /**
      * Creates a DBNote object from the current row of a Cursor.
      *
-     * @param cursor database cursor
+     * @param cursor       database cursor
      * @param pruneContent whether or not the content should be pruned for performance reasons
      * @return DBNote
      */
@@ -608,7 +626,39 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         return categories;
     }
 
-    public void toggleFavorite(@NonNull DBNote note, @Nullable ICallback callback) {
+    // TODO merge with getCategories(long accountId)
+    @NonNull
+    @WorkerThread
+    public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
+        validateAccountId(accountId);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                table_notes,
+                new String[]{key_category, "COUNT(*)"},
+                key_status + " != ? AND " + key_account_id + " = ? AND " + key_category + " LIKE ? AND " + key_category + " != \"\"",
+                new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId), "%" + (search == null ? search : search.trim()) + "%"},
+                key_category,
+                null,
+                key_category);
+        List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
+        while (cursor.moveToNext()) {
+            Resources res = context.getResources();
+            String category = cursor.getString(0).toLowerCase();
+            int icon = NavigationAdapter.ICON_FOLDER;
+            if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
+                icon = R.drawable.ic_library_music_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
+                icon = R.drawable.ic_local_movies_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
+                icon = R.drawable.ic_work_grey600_24dp;
+            }
+            categories.add(new NavigationAdapter.NavigationItem("category:" + cursor.getString(0), cursor.getString(0), cursor.getInt(1), icon));
+        }
+        cursor.close();
+        return categories;
+    }
+
+    public void toggleFavorite(@NonNull DBNote note, @Nullable ISyncCallback callback) {
         note.setFavorite(!note.isFavorite());
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -622,7 +672,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         serverSyncHelper.scheduleSync(true);
     }
 
-    public void setCategory(@NonNull DBNote note, @NonNull String category, @Nullable ICallback callback) {
+    public void setCategory(@NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
         note.setCategory(category);
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -645,7 +695,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
-    public DBNote updateNoteAndSync(long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ICallback callback) {
+    public DBNote updateNoteAndSync(long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
         //debugPrintFullDB();
         DBNote newNote;
         if (newContent == null) {
@@ -774,6 +824,37 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
     void notifyNotesChanged() {
         updateSingleNoteWidgets(getContext());
         updateNoteListWidgets(getContext());
+    }
+
+    void updateDynamicShortcuts(long accountId) {
+        new Thread(() -> {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+                ShortcutManager shortcutManager = context.getApplicationContext().getSystemService(ShortcutManager.class);
+                if (!shortcutManager.isRateLimitingActive()) {
+                    List<ShortcutInfo> newShortcuts = new ArrayList<>();
+
+                    for (DBNote note : getRecentNotes(accountId)) {
+                        if (!TextUtils.isEmpty(note.getTitle())) {
+                            Intent intent = new Intent(context.getApplicationContext(), EditNoteActivity.class);
+                            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                            intent.setAction(ACTION_SHORTCUT);
+
+                            newShortcuts.add(new ShortcutInfo.Builder(context.getApplicationContext(), note.getId() + "")
+                                    .setShortLabel(note.getTitle() + "")
+                                    .setIcon(Icon.createWithResource(context.getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                    .setIntent(intent)
+                                    .build());
+                        } else {
+                            // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
+                            Log.e(TAG, "shortLabel cannot be empty " + note);
+                        }
+                    }
+                    Log.d(TAG, "Update dynamic shortcuts");
+                    shortcutManager.removeAllDynamicShortcuts();
+                    shortcutManager.addDynamicShortcuts(newShortcuts);
+                }
+            }
+        }).start();
     }
 
     /**

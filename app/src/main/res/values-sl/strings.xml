@@ -16,8 +16,8 @@
     <string name="simple_bold">Krepko</string>
     <string name="simple_link">Povezava</string>
     <string name="simple_italic">Ležeče</string>
-    <string name="action_note_deleted">Zabeležka je izbrisana</string>
-    <string name="action_note_restored">Zabeležka je obnovljena</string>
+    <string name="action_note_deleted">Izbrisano %1$s</string>
+    <string name="action_note_restored">Obnovljeno %1$s</string>
     <string name="action_undo">Razveljavi</string>
     <string name="action_drawer_open">odpri iskalnik</string>
     <string name="action_drawer_close">zapri iskalnik</string>
@@ -113,7 +113,13 @@
     <string name="no_notes_yet_description">Pritisnite gumb + za novo zabeležko</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Predogleda ni mogoče naložiti. Preverite, ali je morda vpisan  dvoštevilčen predmet seznama brez vsebine.</string>
     <string name="simple_more">Več</string>
+    <string name="simple_move">Premakni</string>
     <string name="error_files_app_version_too_old">Ali je nameščena zadnja različica programa?</string>
+    <string name="checkbox_could_not_be_toggled">Izbirnega polja ni mogoče preklopiti.</string>
+    <string name="bulk_notes_deleted">Izbrisane %1$d zabeležke</string>
+    <string name="bulk_notes_restored">Obnovljene %1$d zabeležke</string>
+    <string name="category_readonly">Le za branje</string>
+    <string name="add_category">Dodaj %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
