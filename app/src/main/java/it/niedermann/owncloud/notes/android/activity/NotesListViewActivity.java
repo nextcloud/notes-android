@@ -56,6 +56,7 @@ import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.LocalAccount;
@@ -66,6 +67,7 @@ import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
+import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -139,20 +141,13 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private ActionMode mActionMode;
     private NoteSQLiteOpenHelper db = null;
     private SearchView searchView = null;
-    private ICallback syncCallBack = new ICallback() {
-        @Override
-        public void onFinish() {
-            adapter.clearSelection(listView);
-            if (mActionMode != null) {
-                mActionMode.finish();
-            }
-            refreshLists();
-            swipeRefreshLayout.setRefreshing(false);
+    private ISyncCallback syncCallBack = () -> {
+        adapter.clearSelection(listView);
+        if (mActionMode != null) {
+            mActionMode.finish();
         }
-
-        @Override
-        public void onScheduled() {
-        }
+        refreshLists();
+        swipeRefreshLayout.setRefreshing(false);
     };
     private boolean accountChooserActive;
 

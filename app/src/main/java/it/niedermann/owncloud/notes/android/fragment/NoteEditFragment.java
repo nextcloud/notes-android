@@ -38,7 +38,7 @@ import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.util.DisplayUtils;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NotesTextWatcher;
 import it.niedermann.owncloud.notes.util.ContextBasedFormattingCallback;
@@ -169,13 +169,13 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             editContent.setText(note.getContent());
             editContent.setEnabled(true);
 
-            MarkdownProcessor markdownProcessor = new MarkdownProcessor(getActivity());
+            MarkdownProcessor markdownProcessor = new MarkdownProcessor(getContext());
             markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(editContent.getContext()).build());
             markdownProcessor.factory(EditFactory.create());
             markdownProcessor.live(editContent);
 
             editContent.setCustomSelectionActionModeCallback(new ContextBasedFormattingCallback(this.editContent));
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
             editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
                 editContent.setTypeface(Typeface.MONOSPACE);
@@ -211,7 +211,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    protected void saveNote(@Nullable ICallback callback) {
+    protected void saveNote(@Nullable ISyncCallback callback) {
         super.saveNote(callback);
         unsavedEdit = false;
     }
@@ -222,7 +222,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     private void autoSave() {
         Log.d(LOG_TAG_AUTOSAVE, "STARTAUTOSAVE");
         saveActive = true;
-        saveNote(new ICallback() {
+        saveNote(new ISyncCallback() {
             @Override
             public void onFinish() {
                 onSaved();

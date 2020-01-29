@@ -119,6 +119,8 @@
     <string name="bulk_notes_deleted">Διεγραμμένες %1$d σημειώσεις</string>
     <string name="bulk_notes_restored">Επαναφέρθηκαν %1$dσημειώσεις</string>
     <string name="category_readonly">Μόνο για ανάγνωση</string>
+    <string name="no_category">Χωρίς κατηγορία</string>
+    <string name="add_category">Προσθήκη %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

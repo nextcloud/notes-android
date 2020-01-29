@@ -16,7 +16,7 @@ import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
@@ -27,7 +27,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             ViewProvider viewProvider,
             NoteSQLiteOpenHelper db,
             ItemAdapter adapter,
-            ICallback syncCallBack,
+            ISyncCallback syncCallBack,
             Runnable refreshLists
     ) {
         super(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -67,17 +67,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
                                 .setAction(R.string.action_undo, (View v) -> {
-                                    db.getNoteServerSyncHelper().addCallbackPush(new ICallback() {
-                                        @Override
-                                        public void onFinish() {
-                                            refreshLists.run();
-                                        }
-
-                                        @Override
-                                        public void onScheduled() {
-
-                                        }
-                                    });
+                                    db.getNoteServerSyncHelper().addCallbackPush(refreshLists::run);
                                     db.addNoteAndSync(dbNote.getAccountId(), dbNote);
                                     refreshLists.run();
                                     Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)

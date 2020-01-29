@@ -93,7 +93,6 @@
     <string name="simple_more">More</string>
     <string name="simple_move">Zhvendos</string>
     <string name="category_readonly">Vetëm i lexueshëm</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Hapur në modalitetin e redaktimit</item>

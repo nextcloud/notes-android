@@ -43,7 +43,7 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.util.ExceptionUtil;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
@@ -92,8 +92,8 @@ public class NoteServerSyncHelper {
     private NotesClient notesClient;
 
     // list of callbacks for both parts of synchronziation
-    private List<ICallback> callbacksPush = new ArrayList<>();
-    private List<ICallback> callbacksPull = new ArrayList<>();
+    private List<ISyncCallback> callbacksPush = new ArrayList<>();
+    private List<ISyncCallback> callbacksPull = new ArrayList<>();
 
 
     private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
@@ -183,9 +183,9 @@ public class NoteServerSyncHelper {
      * After execution the callback will be deleted, so it has to be added again if it shall be
      * executed the next time all synchronize operations are finished.
      *
-     * @param callback Implementation of ICallback, contains one method that shall be executed.
+     * @param callback Implementation of ISyncCallback, contains one method that shall be executed.
      */
-    public void addCallbackPush(ICallback callback) {
+    public void addCallbackPush(ISyncCallback callback) {
         callbacksPush.add(callback);
     }
 
@@ -195,9 +195,9 @@ public class NoteServerSyncHelper {
      * After execution the callback will be deleted, so it has to be added again if it shall be
      * executed the next time all synchronize operations are finished.
      *
-     * @param callback Implementation of ICallback, contains one method that shall be executed.
+     * @param callback Implementation of ISyncCallback, contains one method that shall be executed.
      */
-    public void addCallbackPull(ICallback callback) {
+    public void addCallbackPull(ISyncCallback callback) {
         callbacksPull.add(callback);
     }
 
@@ -223,12 +223,12 @@ public class NoteServerSyncHelper {
         } else if (!onlyLocalChanges) {
             Log.d(TAG, "... scheduled");
             syncScheduled = true;
-            for (ICallback callback : callbacksPush) {
+            for (ISyncCallback callback : callbacksPush) {
                 callback.onScheduled();
             }
         } else {
             Log.d(TAG, "... do nothing");
-            for (ICallback callback : callbacksPush) {
+            for (ISyncCallback callback : callbacksPush) {
                 callback.onScheduled();
             }
         }
@@ -261,14 +261,14 @@ public class NoteServerSyncHelper {
      */
     private class SyncTask extends AsyncTask<Void, Void, LoginStatus> {
         private final boolean onlyLocalChanges;
-        private final List<ICallback> callbacks = new ArrayList<>();
+        private final List<ISyncCallback> callbacks = new ArrayList<>();
         private List<Throwable> exceptions = new ArrayList<>();
 
         SyncTask(boolean onlyLocalChanges) {
             this.onlyLocalChanges = onlyLocalChanges;
         }
 
-        void addCallbacks(List<ICallback> callbacks) {
+        void addCallbacks(List<ISyncCallback> callbacks) {
             this.callbacks.addAll(callbacks);
         }
 
@@ -455,7 +455,7 @@ public class NoteServerSyncHelper {
             }
             syncActive = false;
             // notify callbacks
-            for (ICallback callback : callbacks) {
+            for (ISyncCallback callback : callbacks) {
                 callback.onFinish();
             }
             db.notifyNotesChanged();

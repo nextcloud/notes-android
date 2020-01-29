@@ -23,7 +23,6 @@ import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.util.ICallback;
 
 public class MultiSelectedActionModeCallback implements Callback {
 
@@ -87,17 +86,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                         : context.getString(R.string.bulk_notes_deleted, deletedNotes.size());
                 Snackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                         .setAction(R.string.action_undo, (View v) -> {
-                            db.getNoteServerSyncHelper().addCallbackPush(new ICallback() {
-                                @Override
-                                public void onFinish() {
-                                    refreshLists.run();
-                                }
-
-                                @Override
-                                public void onScheduled() {
-
-                                }
-                            });
+                            db.getNoteServerSyncHelper().addCallbackPush(refreshLists::run);
                             for (DBNote deletedNote : deletedNotes) {
                                 db.addNoteAndSync(deletedNote.getAccountId(), deletedNote);
                             }

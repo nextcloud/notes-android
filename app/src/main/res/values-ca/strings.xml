@@ -16,6 +16,8 @@
     <string name="simple_bold">Negreta</string>
     <string name="simple_link">Enllaç</string>
     <string name="simple_italic">Cursiva</string>
+    <string name="action_note_deleted">Esborrat %1$s</string>
+    <string name="action_note_restored">Restaurat %1$s</string>
     <string name="action_undo">Desfés</string>
     <string name="action_drawer_open">obre la navegació</string>
     <string name="action_drawer_close">tanca la navegació</string>
@@ -50,6 +52,7 @@
     <string name="error_sync">Ha fallat la sincronització: %1$s</string>
     <string name="error_json">l\'aplicació Notes està activada al servidor?</string>
     <string name="error_no_network">no hi ha connexió a la xarxa</string>
+    <string name="error_files_app">tens instal·lada l\'aplicació de fitxers?</string>
     <string name="error_unknown">S\'ha produït un error desconegut</string>
 
     <!-- About -->
@@ -103,11 +106,21 @@
     <string name="add_account">Afegeix un compte</string>
     <string name="category_music">Música</string>
     <string name="category_movies">Peŀlícules</string>
+    <string name="category_movie">Pel·lícula</string>
     <string name="category_work">Feina</string>
+    <string name="account_already_imported">El compta ja s\'ha importat</string>
     <string name="no_notes_yet">Encara no hi ha notes</string>
+    <string name="no_notes_yet_description">Prem el botó + per creat una nota nova</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">No s\'ha pogut carregar previsualització. Revisa si hi ha una llista numerada amb dos dígits sense contingut.</string>
     <string name="simple_more">Més</string>
     <string name="simple_move">Mou</string>
+    <string name="error_files_app_version_too_old">Tens l\'aplicació de fitxers al dia?</string>
+    <string name="checkbox_could_not_be_toggled">El selector no s\'ha pogut invertir.</string>
+    <string name="bulk_notes_deleted">S\'han esborrat %1$d notes</string>
+    <string name="bulk_notes_restored">S\'han restaurat %1$d notes</string>
     <string name="category_readonly">Només de lectura</string>
+    <string name="no_category">Sense categoria</string>
+    <string name="add_category">Afegeix %1$s</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

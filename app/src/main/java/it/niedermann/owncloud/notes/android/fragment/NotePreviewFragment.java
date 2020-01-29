@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yydcdut.markdown.MarkdownProcessor;
@@ -38,11 +39,10 @@ import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.DisplayUtils;
-import it.niedermann.owncloud.notes.util.ICallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 
-public class NotePreviewFragment extends SearchableBaseNoteFragment {
+public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
     private String changedText;
 
@@ -111,7 +111,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, Objects.requireNonNull(getView()));
-        markdownProcessor = new MarkdownProcessor(Objects.requireNonNull(getActivity()));
+        markdownProcessor = new MarkdownProcessor(getContext());
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
                 MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
@@ -169,8 +169,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
                         })
                         .build());
         try {
-            noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
-            onResume();
+            CharSequence parsedMarkdown = markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
+            noteContent.setText(parsedMarkdown);
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
             noteContent.setText(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
@@ -180,29 +180,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
         changedText = note.getContent();
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        db = NoteSQLiteOpenHelper.getInstance(getActivity());
-        // Pull to Refresh
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                swipeRefreshLayout.setRefreshing(true);
-                db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
-                    @Override
-                    public void onFinish() {
-                        note = db.getNote(note.getAccountId(), note.getId());
-                        noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
-
-                    @Override
-                    public void onScheduled() {
-                    }
-                });
-                db.getNoteServerSyncHelper().scheduleSync(false);
-            } else {
-                swipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
-            }
-        });
+        db = NoteSQLiteOpenHelper.getInstance(getContext());
+        swipeRefreshLayout.setOnRefreshListener(this);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getActivity()).getApplicationContext());
         noteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
@@ -223,5 +202,21 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
     @Override
     protected String getContent() {
         return changedText;
+    }
+
+    @Override
+    public void onRefresh() {
+        if (db.getNoteServerSyncHelper().isSyncPossible()) {
+            swipeRefreshLayout.setRefreshing(true);
+            db.getNoteServerSyncHelper().addCallbackPull(() -> {
+                note = db.getNote(note.getAccountId(), note.getId());
+                noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
+                swipeRefreshLayout.setRefreshing(false);
+            });
+            db.getNoteServerSyncHelper().scheduleSync(false);
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
+            Toast.makeText(getContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+        }
     }
 }
