@@ -10,4 +10,10 @@
         <item>@string/pref_value_font_size_medium</item>
         <item>@string/pref_value_font_size_large</item>
     </string-array>
+    <string-array name="sync_values">
+        <item>@string/pref_value_sync_off</item>
+        <item>@string/pref_value_sync_15_minutes</item>
+        <item>@string/pref_value_sync_1_hour</item>
+        <item>@string/pref_value_sync_6_hours</item>
+    </string-array>
 </resources>
