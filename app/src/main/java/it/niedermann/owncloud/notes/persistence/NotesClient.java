@@ -198,9 +198,6 @@ public class NotesClient {
     }
 
     private static NextcloudAPI getNextcloudAPI(Context appContext, SingleSignOnAccount ssoAccount) {
-//        if (mNextcloudAPI != null) {
-//            mNextcloudAPI.stop();
-//        }
         if (mNextcloudAPIs.containsKey(ssoAccount.name)) {
             return mNextcloudAPIs.get(ssoAccount.name);
         } else {
