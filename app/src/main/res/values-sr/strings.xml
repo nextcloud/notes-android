@@ -16,6 +16,8 @@
     <string name="simple_bold">Подебљано</string>
     <string name="simple_link">Веза</string>
     <string name="simple_italic">Курзив</string>
+    <string name="action_note_deleted">Обрисано %1$s</string>
+    <string name="action_note_restored">Повраћено %1$s</string>
     <string name="action_undo">Опозови</string>
     <string name="action_drawer_open">отвори навигацију</string>
     <string name="action_drawer_close">затвори навигацију</string>
@@ -50,6 +52,7 @@
     <string name="error_sync">Синхронизација није успела%1$s</string>
     <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
     <string name="error_no_network">нема мрежне везе</string>
+    <string name="error_files_app">да ли имате инсталирану апликацију за фајлове?</string>
     <string name="error_unknown">Десила се непозната грешка</string>
 
     <!-- About -->
@@ -108,9 +111,15 @@
     <string name="account_already_imported">Налог је већ увезен</string>
     <string name="no_notes_yet">Још нема белешки</string>
     <string name="no_notes_yet_description">Притисните + дугме да направите нову белешку</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Не могу да учитам преглед. Проверите да ли постоји двоцифрена ставка у листи без садржаја.</string>
     <string name="simple_more">Још</string>
     <string name="simple_move">Помери</string>
+    <string name="error_files_app_version_too_old">Да ли је Ваша апликација за фајлове на најновијој верзији?</string>
+    <string name="checkbox_could_not_be_toggled">Поље за потврду не може да се укључи/искључи.</string>
+    <string name="bulk_notes_deleted">Обрисано %1$d белешки</string>
+    <string name="bulk_notes_restored">Повраћено %1$d белешки</string>
     <string name="category_readonly">Само за читање</string>
+    <string name="no_category">Нема категорије</string>
     <string name="add_category">Додај %1$s</string>
 
     <!-- Array: note modes -->
