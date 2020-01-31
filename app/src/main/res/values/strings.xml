@@ -44,6 +44,7 @@
     <string name="settings_font_size">Font size</string>
     <string name="settings_wifi_only">Sync only on Wi-Fi</string>
     <string name="settings_lock">Password protection</string>
+    <string name="settings_background_sync">Background synchronization</string>
 
     <!-- Certificates -->
 
@@ -114,16 +115,23 @@
     <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>
     <string name="pref_key_lock" translatable="false">lock</string>
     <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
+    <string name="pref_key_background_sync" translatable="false">backgroundSync</string>
     <string name="pref_value_mode_edit" translatable="false">edit</string>
     <string name="pref_value_mode_preview" translatable="false">preview</string>
     <string name="pref_value_mode_last" translatable="false">last</string>
     <string name="pref_value_font_size_small" translatable="false">small</string>
     <string name="pref_value_font_size_medium" translatable="false">medium</string>
     <string name="pref_value_font_size_large" translatable="false">large</string>
+    <string name="pref_value_sync_off" translatable="false">off</string>
+    <string name="pref_value_sync_15_minutes" translatable="false">15_minutes</string>
+    <string name="pref_value_sync_1_hour" translatable="false">1_hour</string>
+    <string name="pref_value_sync_6_hours" translatable="false">6_hours</string>
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Light</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
     <string name="pref_value_lock">Password protection</string>
+
     <string name="simple_error">Error</string>
     <string name="simple_close">Close</string>
     <string name="simple_copy">Copy</string>
@@ -164,6 +172,14 @@
         <item>Small</item>
         <item>Medium</item>
         <item>Large</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Off</item>
+        <item>15 minutes</item>
+        <item>1 hour</item>
+        <item>6 hours</item>
     </string-array>
 
     <!-- Plurals -->

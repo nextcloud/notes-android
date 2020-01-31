@@ -45,9 +45,19 @@
 
     <SwitchPreference
         android:defaultValue="@string/pref_value_wifi_and_mobile"
-        android:icon="@drawable/ic_sync_black_24dp"
+        android:icon="@drawable/ic_network_wifi_grey600_24dp"
         android:key="@string/pref_key_wifi_only"
         android:layout="@layout/item_pref"
         android:title="@string/settings_wifi_only" />
+
+    <ListPreference
+        android:defaultValue="@string/pref_value_sync_off"
+        android:entries="@array/sync_entries"
+        android:entryValues="@array/sync_values"
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:key="@string/pref_key_background_sync"
+        android:layout="@layout/item_pref"
+        android:summary="%s"
+        android:title="@string/settings_background_sync" />
 
 </PreferenceScreen>

@@ -96,6 +96,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
      */
     private boolean notAuthorizedAccountHandled = false;
 
+    private SingleSignOnAccount ssoAccount;
     private LocalAccount localAccount;
 
     @BindView(R.id.coordinatorLayout)
@@ -182,23 +183,27 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     @Override
     protected void onResume() {
         try {
-            String ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name;
-            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount)) {
-                selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount.name)) {
+                selectAccount(ssoAccount.name);
             }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
+            if (localAccount == null) {
+                List<LocalAccount> localAccounts = db.getAccounts();
+                if (localAccounts.size() > 0) {
+                    localAccount = localAccounts.get(0);
+                }
+            }
             if (!notAuthorizedAccountHandled) {
                 handleNotAuthorizedAccount();
             }
         }
 
         // refresh and sync every time the activity gets
+        refreshLists();
         if (localAccount != null) {
-            refreshLists();
-            db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
-            if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                synchronize();
-            }
+            synchronize();
+            db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
         }
         super.onResume();
     }
@@ -230,13 +235,14 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
         localAccount = db.getLocalAccountByAccountName(accountName);
         try {
-            db.getNoteServerSyncHelper().updateAccount();
+            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
             synchronize();
-            refreshLists();
-            fabCreate.show();
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
             handleNotAuthorizedAccount();
         }
+        refreshLists();
+        fabCreate.show();
         setupHeader();
         setupNavigationList(ADAPTER_KEY_RECENT);
         updateUsernameInDrawer();
@@ -312,13 +318,12 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
             }
         });
 
-        // Pull to Refresh
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                synchronize();
-            } else {
+            if (ssoAccount == null) {
                 swipeRefreshLayout.setRefreshing(false);
-                Snackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Snackbar.LENGTH_LONG).show();
+                askForNewAccount(this);
+            } else {
+                synchronize();
             }
         });
 
@@ -529,7 +534,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         adapter = new ItemAdapter(this);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
-        new NotesListViewItemTouchHelper(this, this, db, adapter, syncCallBack, this::refreshLists).attachToRecyclerView(listView);
+        new NotesListViewItemTouchHelper(ssoAccount, this, this, db, adapter, syncCallBack, this::refreshLists).attachToRecyclerView(listView);
     }
 
     private void refreshLists() {
@@ -775,7 +780,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     public void onNoteFavoriteClick(int position, View view) {
         DBNote note = (DBNote) adapter.getItem(position);
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(view.getContext());
-        db.toggleFavorite(note, syncCallBack);
+        db.toggleFavorite(ssoAccount, note, syncCallBack);
         adapter.notifyItemChanged(position);
         refreshLists();
     }
@@ -804,10 +809,22 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     }
 
     private void synchronize() {
-        swipeRefreshLayout.setRefreshing(true);
-        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
-        db.getNoteServerSyncHelper().scheduleSync(false);
+        NoteServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
+        if (syncHelper.isSyncPossible()) {
+            swipeRefreshLayout.setRefreshing(true);
+            syncHelper.addCallbackPull(ssoAccount, syncCallBack);
+            syncHelper.scheduleSync(ssoAccount, false);
+        } else { // Sync is not possible
+            swipeRefreshLayout.setRefreshing(false);
+            if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
+                Log.d(TAG, "Network is connected, but sync is not possible");
+            } else {
+                Log.d(TAG, "Sync is not possible, because network is not connected");
+                Snackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Snackbar.LENGTH_LONG).show();
+            }
+        }
     }
+
 
     @Override
     public void onAccountChosen(LocalAccount account) {
@@ -816,7 +833,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         adapter.deselect(0);
         for (Integer i : selection) {
             DBNote note = (DBNote) adapter.getItem(i);
-            db.moveNoteToAnotherAccount(note.getAccountId(), db.getNote(note.getAccountId(), note.getId()), account.getId());
+            db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), db.getNote(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);

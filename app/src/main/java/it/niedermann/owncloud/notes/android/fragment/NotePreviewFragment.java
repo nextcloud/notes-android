@@ -26,6 +26,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.MarkdownTextView;
 import com.yydcdut.markdown.syntax.text.TextFactory;
@@ -41,6 +45,7 @@ import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
+import it.niedermann.owncloud.notes.util.SSOUtil;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
@@ -206,14 +211,19 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     @Override
     public void onRefresh() {
-        if (db.getNoteServerSyncHelper().isSyncPossible()) {
+        if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             swipeRefreshLayout.setRefreshing(true);
-            db.getNoteServerSyncHelper().addCallbackPull(() -> {
-                note = db.getNote(note.getAccountId(), note.getId());
-                noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
-                swipeRefreshLayout.setRefreshing(false);
-            });
-            db.getNoteServerSyncHelper().scheduleSync(false);
+            try {
+                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getContext());
+                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
+                    note = db.getNote(note.getAccountId(), note.getId());
+                    noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
+                    swipeRefreshLayout.setRefreshing(false);
+                });
+                db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                e.printStackTrace();
+            }
         } else {
             swipeRefreshLayout.setRefreshing(false);
             Toast.makeText(getContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();

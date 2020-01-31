@@ -261,7 +261,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             }
         } else {
             // Maybe account is not authenticated -> note == null
-            Log.e(TAG, "note is null, start NotesListViewActivity");
+            Log.e(TAG, "note is null, start " + NotesListViewActivity.class.getSimpleName());
             startActivity(new Intent(this, NotesListViewActivity.class));
             finish();
         }
