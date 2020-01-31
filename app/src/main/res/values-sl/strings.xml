@@ -119,6 +119,7 @@
     <string name="bulk_notes_deleted">Izbrisane %1$d zabeležke</string>
     <string name="bulk_notes_restored">Obnovljene %1$d zabeležke</string>
     <string name="category_readonly">Le za branje</string>
+    <string name="no_category">Brez kategorije</string>
     <string name="add_category">Dodaj %1$s</string>
 
     <!-- Array: note modes -->
