@@ -201,7 +201,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             String username = sharedPreferences.getString("settingsUsername", "");
             String url = sharedPreferences.getString("settingsUrl", "");
-            if (url != null && url.endsWith("/")) {
+            if (!url.isEmpty() && url.endsWith("/")) {
                 url = url.substring(0, url.length() - 1);
                 try {
                     String accountName = username + "@" + new URL(url).getHost();
@@ -274,7 +274,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                     return;
                 }
             } else {
-                Log.e(TAG, "Previous URL is null. Recreating database...");
+                Log.e(TAG, "Previous URL is empty or does not end with a '/' character. Recreating database...");
                 recreateDatabase(db);
                 return;
             }
