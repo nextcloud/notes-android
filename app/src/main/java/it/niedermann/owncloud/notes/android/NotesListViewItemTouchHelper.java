@@ -10,19 +10,21 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.model.ISyncCallback;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
     private static final String TAG = NotesListViewItemTouchHelper.class.getCanonicalName();
 
     public NotesListViewItemTouchHelper(
+            SingleSignOnAccount ssoAccount,
             Context context,
             ViewProvider viewProvider,
             NoteSQLiteOpenHelper db,
@@ -61,14 +63,14 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                     case ItemTouchHelper.LEFT: {
                         final DBNote dbNoteWithoutContent = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
                         final DBNote dbNote = db.getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
-                        db.deleteNoteAndSync(dbNote.getId());
+                        db.deleteNoteAndSync(ssoAccount, dbNote.getId());
                         adapter.remove(dbNote);
                         refreshLists.run();
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
                                 .setAction(R.string.action_undo, (View v) -> {
-                                    db.getNoteServerSyncHelper().addCallbackPush(refreshLists::run);
-                                    db.addNoteAndSync(dbNote.getAccountId(), dbNote);
+                                    db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
+                                    db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
                                     refreshLists.run();
                                     Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                             .show();
@@ -78,7 +80,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                     }
                     case ItemTouchHelper.RIGHT: {
                         final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.toggleFavorite(dbNote, syncCallBack);
+                        db.toggleFavorite(ssoAccount, dbNote, syncCallBack);
                         refreshLists.run();
                         break;
                     }

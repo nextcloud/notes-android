@@ -24,6 +24,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -199,7 +201,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
             String username = sharedPreferences.getString("settingsUsername", "");
             String url = sharedPreferences.getString("settingsUrl", "");
-            if (url != null && url.endsWith("/")) {
+            if (!url.isEmpty() && url.endsWith("/")) {
                 url = url.substring(0, url.length() - 1);
                 try {
                     String accountName = username + "@" + new URL(url).getHost();
@@ -272,7 +274,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                     return;
                 }
             } else {
-                Log.e(TAG, "Previous URL is null. Recreating database...");
+                Log.e(TAG, "Previous URL is empty or does not end with a '/' character. Recreating database...");
                 recreateDatabase(db);
                 return;
             }
@@ -318,11 +320,11 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @param note Note
      */
-    public long addNoteAndSync(long accountId, CloudNote note) {
+    public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
         DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()));
         long id = addNote(accountId, dbNote);
         notifyNotesChanged();
-        getNoteServerSyncHelper().scheduleSync(true);
+        getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
         return id;
     }
 
@@ -360,13 +362,13 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         return db.insert(table_notes, null, values);
     }
 
-    public void moveNoteToAnotherAccount(long oldAccountId, DBNote note, long newAccountId) {
+    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, DBNote note, long newAccountId) {
         // Add new note
-        addNoteAndSync(newAccountId, new CloudNote(0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), null));
-        deleteNoteAndSync(note.getId());
+        addNoteAndSync(ssoAccount, newAccountId, new CloudNote(0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), null));
+        deleteNoteAndSync(ssoAccount, note.getId());
 
         notifyNotesChanged();
-        getNoteServerSyncHelper().scheduleSync(true);
+        getNoteServerSyncHelper().scheduleSync(ssoAccount,true);
     }
 
     /**
@@ -658,7 +660,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         return categories;
     }
 
-    public void toggleFavorite(@NonNull DBNote note, @Nullable ISyncCallback callback) {
+    public void toggleFavorite(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @Nullable ISyncCallback callback) {
         note.setFavorite(!note.isFavorite());
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -667,12 +669,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_favorite, note.isFavorite() ? "1" : "0");
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
         if (callback != null) {
-            serverSyncHelper.addCallbackPush(callback);
+            serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
-        serverSyncHelper.scheduleSync(true);
+        serverSyncHelper.scheduleSync(ssoAccount, true);
     }
 
-    public void setCategory(@NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
+    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
         note.setCategory(category);
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
@@ -681,9 +683,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         values.put(key_category, note.getCategory());
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
         if (callback != null) {
-            serverSyncHelper.addCallbackPush(callback);
+            serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
-        serverSyncHelper.scheduleSync(true);
+        serverSyncHelper.scheduleSync(ssoAccount,true);
     }
 
     /**
@@ -695,7 +697,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
-    public DBNote updateNoteAndSync(long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
+    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
         //debugPrintFullDB();
         DBNote newNote;
         if (newContent == null) {
@@ -716,9 +718,9 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         if (rows > 0) {
             notifyNotesChanged();
             if (callback != null) {
-                serverSyncHelper.addCallbackPush(callback);
+                serverSyncHelper.addCallbackPush(ssoAccount, callback);
             }
-            serverSyncHelper.scheduleSync(true);
+            serverSyncHelper.scheduleSync(ssoAccount, true);
             return newNote;
         } else {
             if (callback != null) {
@@ -781,7 +783,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      *
      * @param id long - ID of the Note that should be deleted
      */
-    public void deleteNoteAndSync(long id) {
+    public void deleteNoteAndSync(SingleSignOnAccount ssoAccount, long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, DBStatus.LOCAL_DELETED.getTitle());
@@ -790,7 +792,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
                 key_id + " = ?",
                 new String[]{String.valueOf(id)});
         notifyNotesChanged();
-        getNoteServerSyncHelper().scheduleSync(true);
+        getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);

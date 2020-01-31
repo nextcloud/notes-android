@@ -12,6 +12,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,34 +74,39 @@ public class MultiSelectedActionModeCallback implements Callback {
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_delete: {
-                List<DBNote> deletedNotes = new ArrayList<>();
-                List<Integer> selection = adapter.getSelected();
-                for (Integer i : selection) {
-                    DBNote note = (DBNote) adapter.getItem(i);
-                    deletedNotes.add(db.getNote(note.getAccountId(), note.getId()));
-                    db.deleteNoteAndSync(note.getId());
+                try {
+                    SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+                    List<DBNote> deletedNotes = new ArrayList<>();
+                    List<Integer> selection = adapter.getSelected();
+                    for (Integer i : selection) {
+                        DBNote note = (DBNote) adapter.getItem(i);
+                        deletedNotes.add(db.getNote(note.getAccountId(), note.getId()));
+                        db.deleteNoteAndSync(ssoAccount, note.getId());
+                    }
+                    mode.finish(); // Action picked, so close the CAB
+                    //after delete selection has to be cleared
+                    searchView.setIconified(true);
+                    refreshLists.run();
+                    String deletedSnackbarTitle = deletedNotes.size() == 1
+                            ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
+                            : context.getString(R.string.bulk_notes_deleted, deletedNotes.size());
+                    Snackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.action_undo, (View v) -> {
+                                db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
+                                for (DBNote deletedNote : deletedNotes) {
+                                    db.addNoteAndSync(ssoAccount, deletedNote.getAccountId(), deletedNote);
+                                }
+                                refreshLists.run();
+                                String restoreSnackbarTitle = deletedNotes.size() == 1
+                                        ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
+                                        : context.getString(R.string.bulk_notes_restored, deletedNotes.size());
+                                Snackbar.make(viewProvider.getView(), restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
+                                        .show();
+                            })
+                            .show();
+                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                    e.printStackTrace();
                 }
-                mode.finish(); // Action picked, so close the CAB
-                //after delete selection has to be cleared
-                searchView.setIconified(true);
-                refreshLists.run();
-                String deletedSnackbarTitle = deletedNotes.size() == 1
-                        ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
-                        : context.getString(R.string.bulk_notes_deleted, deletedNotes.size());
-                Snackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.action_undo, (View v) -> {
-                            db.getNoteServerSyncHelper().addCallbackPush(refreshLists::run);
-                            for (DBNote deletedNote : deletedNotes) {
-                                db.addNoteAndSync(deletedNote.getAccountId(), deletedNote);
-                            }
-                            refreshLists.run();
-                            String restoreSnackbarTitle = deletedNotes.size() == 1
-                                    ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
-                                    : context.getString(R.string.bulk_notes_restored, deletedNotes.size());
-                            Snackbar.make(viewProvider.getView(), restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
-                                    .show();
-                        })
-                        .show();
                 return true;
             }
             case R.id.menu_move: {
