@@ -10,9 +10,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
-import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
@@ -27,6 +24,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
     private static final String TAG = NotesListViewItemTouchHelper.class.getCanonicalName();
 
     public NotesListViewItemTouchHelper(
+            SingleSignOnAccount ssoAccount,
             Context context,
             ViewProvider viewProvider,
             NoteSQLiteOpenHelper db,
@@ -61,36 +59,31 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
              */
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                try {
-                    SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
-                    switch (direction) {
-                        case ItemTouchHelper.LEFT: {
-                            final DBNote dbNoteWithoutContent = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                            final DBNote dbNote = db.getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
-                            db.deleteNoteAndSync(ssoAccount, dbNote.getId());
-                            adapter.remove(dbNote);
-                            refreshLists.run();
-                            Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
-                            Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
-                                    .setAction(R.string.action_undo, (View v) -> {
-                                        db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
-                                        db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
-                                        refreshLists.run();
-                                        Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
-                                                .show();
-                                    })
-                                    .show();
-                            break;
-                        }
-                        case ItemTouchHelper.RIGHT: {
-                            final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                            db.toggleFavorite(ssoAccount, dbNote, syncCallBack);
-                            refreshLists.run();
-                            break;
-                        }
+                switch (direction) {
+                    case ItemTouchHelper.LEFT: {
+                        final DBNote dbNoteWithoutContent = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                        final DBNote dbNote = db.getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
+                        db.deleteNoteAndSync(ssoAccount, dbNote.getId());
+                        adapter.remove(dbNote);
+                        refreshLists.run();
+                        Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
+                        Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
+                                .setAction(R.string.action_undo, (View v) -> {
+                                    db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
+                                    db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
+                                    refreshLists.run();
+                                    Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
+                                            .show();
+                                })
+                                .show();
+                        break;
                     }
-                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                    e.printStackTrace();
+                    case ItemTouchHelper.RIGHT: {
+                        final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                        db.toggleFavorite(ssoAccount, dbNote, syncCallBack);
+                        refreshLists.run();
+                        break;
+                    }
                 }
             }
 
