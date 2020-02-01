@@ -143,6 +143,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         textWatcher = new NotesTextWatcher(editContent) {
             @Override
             public void afterTextChanged(final Editable s) {
+                super.afterTextChanged(s);
                 unsavedEdit = true;
                 if (!saveActive) {
                     handler.removeCallbacks(runAutoSave);
