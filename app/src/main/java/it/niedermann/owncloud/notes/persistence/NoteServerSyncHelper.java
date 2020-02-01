@@ -364,6 +364,8 @@ public class NoteServerSyncHelper {
                 } catch (NextcloudHttpRequestFailedException e) {
                     if (e.getStatusCode() == 304) {
                         Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
+                    } else if(e.getStatusCode() == 507) {
+                        Log.d(TAG, "Server returned HTTP Status Code 507 - Insufficient Storage");
                     } else {
                         exceptions.add(e);
                     }
@@ -423,6 +425,9 @@ public class NoteServerSyncHelper {
                 Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
                 if (e.getStatusCode() == 304) {
                     return LoginStatus.OK;
+                } else if(e.getStatusCode() == 507) {
+                    exceptions.add(e);
+                    return LoginStatus.INSUFFICIENT_STORAGE;
                 } else {
                     exceptions.add(e);
                     return LoginStatus.JSON_FAILED;

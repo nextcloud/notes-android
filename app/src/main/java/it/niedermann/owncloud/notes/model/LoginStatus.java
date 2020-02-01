@@ -10,6 +10,7 @@ public enum LoginStatus {
     JSON_FAILED(R.string.error_json),
     PROBLEM_WITH_FILES_APP(R.string.error_files_app),
     FILES_APP_VERSION_TOO_OLD(R.string.error_files_app_version_too_old),
+    INSUFFICIENT_STORAGE(R.string.insufficient_storage),
     UNKNOWN_PROBLEM(R.string.error_unknown);
 
     @StringRes
