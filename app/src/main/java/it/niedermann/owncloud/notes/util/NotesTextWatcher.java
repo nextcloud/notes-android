@@ -20,6 +20,8 @@ public abstract class NotesTextWatcher implements TextWatcher {
     private static final String checkedStarCheckbox = "* [x] ";
     private static final int lengthCheckbox = 6;
 
+    private boolean resetSelection = false;
+    private boolean afterTextChangedHandeled = false;
     private int resetSelectionTo = -1;
 
     private EditText editText;
@@ -47,11 +49,13 @@ public abstract class NotesTextWatcher implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (resetSelectionTo >= 0) {
+        if (resetSelection && !afterTextChangedHandeled) {
             Log.v(TAG, "Resetting selection to " + resetSelectionTo);
-            int clone = resetSelectionTo; // Needs a clone because setNewText triggers this method again -> endless loop
+            afterTextChangedHandeled = true;
+            setNewText(new StringBuilder(s), resetSelectionTo);
+            afterTextChangedHandeled = false;
+            resetSelection = false;
             resetSelectionTo = -1;
-            setNewText(new StringBuilder(s), clone);
         }
     }
 
@@ -85,15 +89,16 @@ public abstract class NotesTextWatcher implements TextWatcher {
         if (line.startsWith(codeBlock)) {
             // "start" is the direct sibling of the codeBlock
             if (start - startOfLine == codeBlock.length()) {
-                if (resetSelectionTo == -1) {
+                if (!resetSelection) {
                     resetSelectionTo = editText.getSelectionEnd();
+                    resetSelection = true;
                     Log.v(TAG, "Entered a character directly behind a codeBlock - prepare selection reset to " + resetSelectionTo);
                 }
             }
         } else if (s.subSequence(startOfLine, start + count).toString().startsWith(codeBlock)) {
-            // FIXME If starting codeblock is completed with the third `-character, the application gets an endless loop
-            if (resetSelectionTo == -1) {
+            if (!resetSelection) {
                 resetSelectionTo = editText.getSelectionEnd();
+                resetSelection = true;
                 Log.v(TAG, "One completed a ``-codeBlock with the third `-character - prepare selection reset to " + resetSelectionTo);
             }
         }
