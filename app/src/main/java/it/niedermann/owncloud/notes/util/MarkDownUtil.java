@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Spanned;
 
 import androidx.core.content.res.ResourcesCompat;
@@ -39,6 +40,7 @@ public class MarkDownUtil {
                 .setHeader5RelativeSize(1.1f)
                 .setHeader6RelativeSize(1.05f)
                 .setHorizontalRulesHeight(2)
+                .setCodeBgColor(darkTheme ? ResourcesCompat.getColor(context.getResources(), R.color.fg_default_high, null) : Color.LTGRAY)
                 .setTheme(darkTheme ? new ThemeSonsOfObsidian() : new ThemeDefault())
                 .setTodoColor(ResourcesCompat.getColor(context.getResources(),
                         darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
