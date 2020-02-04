@@ -1,6 +1,7 @@
 - 🌓 Make background of dark theme darker (#557)
 - 🌓 Change the font color for Markdown (#716)
 - 🐞 Fix jumping cursor when handle code blocks (#558)
+- 💡 Lots of empty notes are created if the server is full (#679)
 
 Requires at least Files app¹ version 3.9.0
 ¹ https://github.com/nextcloud/android

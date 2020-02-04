@@ -7,12 +7,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,6 +49,7 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.LoginStatus;
+import it.niedermann.owncloud.notes.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.util.ExceptionUtil;
 import it.niedermann.owncloud.notes.util.SSOUtil;
 import it.niedermann.owncloud.notes.util.ServerResponse;
@@ -143,9 +146,9 @@ public class NoteServerSyncHelper {
 
     /**
      * Synchronization is only possible, if there is an active network connection.
-     *
+     * <p>
      * This method respects the user preference "Sync on Wi-Fi only".
-     *
+     * <p>
      * NoteServerSyncHelper observes changes in the network connection.
      * The current state can be retrieved with this method.
      *
@@ -276,7 +279,7 @@ public class NoteServerSyncHelper {
      * SyncTask is an AsyncTask which performs the synchronization in a background thread.
      * Synchronization consists of two parts: pushLocalChanges and pullRemoteChanges.
      */
-    private class SyncTask extends AsyncTask<Void, Void, LoginStatus> {
+    private class SyncTask extends AsyncTask<Void, Void, SyncResultStatus> {
         private final LocalAccount localAccount;
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
@@ -306,13 +309,13 @@ public class NoteServerSyncHelper {
         }
 
         @Override
-        protected LoginStatus doInBackground(Void... voids) {
+        protected SyncResultStatus doInBackground(Void... voids) {
             Log.i(TAG, "STARTING SYNCHRONIZATION");
             //db.debugPrintFullDB();
-            LoginStatus status = LoginStatus.OK;
-            pushLocalChanges();
+            SyncResultStatus status = new SyncResultStatus();
+            status.pushStatus = pushLocalChanges();
             if (!onlyLocalChanges) {
-                status = pullRemoteChanges();
+                status.pullStatus = pullRemoteChanges();
             }
             //db.debugPrintFullDB();
             Log.i(TAG, "SYNCHRONIZATION FINISHED");
@@ -322,9 +325,9 @@ public class NoteServerSyncHelper {
         /**
          * Push local changes: for each locally created/edited/deleted Note, use NotesClient in order to push the changed to the server.
          */
-        private void pushLocalChanges() {
+        private LoginStatus pushLocalChanges() {
             if (localAccount == null) {
-                return;
+                return LoginStatus.NO_NETWORK;
             }
             Log.d(TAG, "pushLocalChanges()");
             List<DBNote> notes = db.getLocalModifiedNotes(localAccount.getId());
@@ -355,7 +358,7 @@ public class NoteServerSyncHelper {
                             } else {
                                 Log.v(TAG, "   ...delete (only local, since it was not synchronized)");
                             }
-                            // Please note, thas db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+                            // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             db.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
                             break;
                         default:
@@ -364,13 +367,21 @@ public class NoteServerSyncHelper {
                 } catch (NextcloudHttpRequestFailedException e) {
                     if (e.getStatusCode() == 304) {
                         Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
+                        return LoginStatus.OK;
+                    } else if (e.getStatusCode() == 507) {
+                        exceptions.add(e);
+                        Log.d(TAG, "Server returned HTTP Status Code 507 - Insufficient Storage");
+                        return LoginStatus.INSUFFICIENT_STORAGE;
                     } else {
                         exceptions.add(e);
+                        return LoginStatus.JSON_FAILED;
                     }
                 } catch (Exception e) {
                     exceptions.add(e);
+                    return LoginStatus.UNKNOWN_PROBLEM;
                 }
             }
+            return LoginStatus.OK;
         }
 
         /**
@@ -381,7 +392,6 @@ public class NoteServerSyncHelper {
                 return LoginStatus.NO_NETWORK;
             }
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
-            LoginStatus status;
             try {
                 Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
                 ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getEtag());
@@ -418,11 +428,14 @@ public class NoteServerSyncHelper {
                 return LoginStatus.OK;
             } catch (JSONException | NullPointerException e) {
                 exceptions.add(e);
-                status = LoginStatus.JSON_FAILED;
+                return LoginStatus.JSON_FAILED;
             } catch (NextcloudHttpRequestFailedException e) {
                 Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
                 if (e.getStatusCode() == 304) {
                     return LoginStatus.OK;
+                } else if (e.getStatusCode() == 507) {
+                    exceptions.add(e);
+                    return LoginStatus.INSUFFICIENT_STORAGE;
                 } else {
                     exceptions.add(e);
                     return LoginStatus.JSON_FAILED;
@@ -440,22 +453,27 @@ public class NoteServerSyncHelper {
                 exceptions.add(e);
                 return LoginStatus.UNKNOWN_PROBLEM;
             }
-            return status;
         }
 
         @Override
-        protected void onPostExecute(LoginStatus status) {
+        protected void onPostExecute(SyncResultStatus status) {
             super.onPostExecute(status);
-            if (status != LoginStatus.OK) {
+            if (status.pullStatus != LoginStatus.OK || status.pushStatus != LoginStatus.OK) {
                 for (Throwable e : exceptions) {
                     Log.e(TAG, e.getMessage(), e);
                 }
-                String statusMessage = context.getApplicationContext().getString(R.string.error_sync, context.getApplicationContext().getString(status.str));
+                String statusMessage = context.getApplicationContext().getString(R.string.error_sync, context.getApplicationContext().getString(
+                        // Since we can only display one snackbar at a time, let's first fix the pullStatus errors.
+                        status.pushStatus == LoginStatus.OK
+                                ? status.pullStatus.str
+                                : status.pushStatus.str
+                        )
+                );
                 if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
                     Snackbar.make(((ViewProvider) context).getView(), statusMessage, Snackbar.LENGTH_LONG)
                             .setAction(R.string.simple_more, v -> {
                                 String debugInfos = ExceptionUtil.getDebugInfos((AppCompatActivity) context, exceptions);
-                                new AlertDialog.Builder(context)
+                                AlertDialog dialog = new AlertDialog.Builder(context)
                                         .setTitle(statusMessage)
                                         .setMessage(debugInfos)
                                         .setPositiveButton(android.R.string.copy, (a, b) -> {
@@ -466,8 +484,9 @@ public class NoteServerSyncHelper {
                                             a.dismiss();
                                         })
                                         .setNegativeButton(R.string.simple_close, null)
-                                        .create()
-                                        .show();
+                                        .create();
+                                dialog.show();
+                                ((TextView) dialog.findViewById(android.R.id.message)).setTypeface(Typeface.MONOSPACE);
                             })
                             .show();
                 } else {
