@@ -372,13 +372,11 @@ public class NoteServerSyncHelper {
                         exceptions.add(e);
                         Log.d(TAG, "Server returned HTTP Status Code 507 - Insufficient Storage");
                         status = LoginStatus.INSUFFICIENT_STORAGE;
+                        // } else if (e.getStatusCode == 409) {
+                        // TODO React to https://github.com/nextcloud/notes/issues/454 and set status to JSON_FAILED otherwise
                     } else {
                         exceptions.add(e);
-                        // Create note and sync it.
-                        // Delete it on server
-                        // Edit on android
-                        // Trying to sync fails with 500 OCA\Notes\Service\NoteDoesNotExistException
-                        // TODO Open issue in server repository and return LoginStatus.JSON_FAILED
+                        status = LoginStatus.JSON_FAILED;
                     }
                 } catch (Exception e) {
                     exceptions.add(e);
