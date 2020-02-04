@@ -51,10 +51,11 @@
 
     <!-- Error -->
     <string name="error_sync">Synchronization failed: %1$s</string>
-    <string name="error_json">is the Notes app activated on the server?</string>
-    <string name="error_no_network">no network connection</string>
-    <string name="error_files_app">do you have installed the files app?</string>
-    <string name="error_unknown">An unknown error has occurred</string>
+    <string name="error_json">Is the Notes app activated on the server?</string>
+    <string name="error_no_network">No network connection</string>
+    <string name="error_files_app">Do you have installed the files app?</string>
+    <string name="error_unknown">An unknown error has occurred.</string>
+    <string name="error_insufficient_storage">Your server storage is full.</string>
 
     <!-- Snackbar Actions -->
 
@@ -154,7 +155,6 @@
     <string name="category_readonly">Read only</string>
     <string name="no_category">No category</string>
     <string name="add_category">Add %1$s</string>
-    <string name="insufficient_storage">Your server is out of memory. Please delete some files to sync successfully.</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
