@@ -738,7 +738,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     @Override
     public void onNoteClick(int position, View v) {
-        if (mActionMode != null) {
+        boolean hasCheckedItems = adapter.getSelected().size() > 0;
+        if (hasCheckedItems) {
             if (!adapter.select(position)) {
                 v.setSelected(false);
                 adapter.deselect(position);
@@ -746,23 +747,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 v.setSelected(true);
             }
             int size = adapter.getSelected().size();
-            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, size, size));
-            int checkedItemCount = adapter.getSelected().size();
-            boolean hasCheckedItems = checkedItemCount > 0;
-
-            if (hasCheckedItems && mActionMode == null) {
-                // TODO differ if one or more items are selected
-                // if (checkedItemCount == 1) {
-                // mActionMode = startActionMode(new
-                // SingleSelectedActionModeCallback());
-                // } else {
-                // there are some selected items, start the actionMode
-                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                        this, this, db, mActionMode, adapter, listView, this::refreshLists, getSupportFragmentManager(), searchView
-                ));
-                // }
-            } else if (!hasCheckedItems && mActionMode != null) {
-                // there no selected items, finish the actionMode
+            if (size > 0) {
+                mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, size, size));
+            } else {
                 mActionMode.finish();
             }
         } else {
