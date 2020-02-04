@@ -462,10 +462,12 @@ public class NoteServerSyncHelper {
         @Override
         protected void onPostExecute(SyncResultStatus status) {
             super.onPostExecute(status);
-            if (status.pullStatus != LoginStatus.OK || status.pushStatus != LoginStatus.OK) {
+            if (exceptions != null) {
                 for (Throwable e : exceptions) {
                     Log.e(TAG, e.getMessage(), e);
                 }
+            }
+            if (status.pullStatus != LoginStatus.OK || status.pushStatus != LoginStatus.OK) {
                 String statusMessage = context.getApplicationContext().getString(R.string.error_sync, context.getApplicationContext().getString(
                         // Since we can only display one snackbar at a time, let's first fix the pullStatus errors.
                         status.pushStatus == LoginStatus.OK
