@@ -330,6 +330,7 @@ public class NoteServerSyncHelper {
                 return LoginStatus.NO_NETWORK;
             }
             Log.d(TAG, "pushLocalChanges()");
+            LoginStatus status = LoginStatus.OK;
             List<DBNote> notes = db.getLocalModifiedNotes(localAccount.getId());
             for (DBNote note : notes) {
                 Log.d(TAG, "   Process Local Note: " + note);
@@ -344,7 +345,7 @@ public class NoteServerSyncHelper {
                                 remoteNote = notesClient.editNote(ssoAccount, note).getNote();
                             }
                             // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
-                            // Please note, thas db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+                            // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
                                 Log.v(TAG, "   ...Note does not exist on server -> (re)create");
                                 remoteNote = notesClient.createNote(ssoAccount, note).getNote();
@@ -367,11 +368,10 @@ public class NoteServerSyncHelper {
                 } catch (NextcloudHttpRequestFailedException e) {
                     if (e.getStatusCode() == 304) {
                         Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
-                        return LoginStatus.OK;
                     } else if (e.getStatusCode() == 507) {
                         exceptions.add(e);
                         Log.d(TAG, "Server returned HTTP Status Code 507 - Insufficient Storage");
-                        return LoginStatus.INSUFFICIENT_STORAGE;
+                        status = LoginStatus.INSUFFICIENT_STORAGE;
                     } else {
                         exceptions.add(e);
                         // Create note and sync it.
@@ -379,14 +379,13 @@ public class NoteServerSyncHelper {
                         // Edit on android
                         // Trying to sync fails with 500 OCA\Notes\Service\NoteDoesNotExistException
                         // TODO Open issue in server repository and return LoginStatus.JSON_FAILED
-                        return LoginStatus.OK;
                     }
                 } catch (Exception e) {
                     exceptions.add(e);
-                    return LoginStatus.UNKNOWN_PROBLEM;
+                    status = LoginStatus.UNKNOWN_PROBLEM;
                 }
             }
-            return LoginStatus.OK;
+            return status;
         }
 
         /**
