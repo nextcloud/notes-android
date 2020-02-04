@@ -283,8 +283,8 @@ public class NoteServerSyncHelper {
         private final LocalAccount localAccount;
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
-        private final Map<String, List<ISyncCallback>> callbacks = new HashMap<>();
-        private List<Throwable> exceptions = new ArrayList<>();
+        @NonNull private final Map<String, List<ISyncCallback>> callbacks = new HashMap<>();
+        @NonNull private List<Throwable> exceptions = new ArrayList<>();
 
         SyncTask(@NonNull LocalAccount localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
             this.localAccount = localAccount;
@@ -344,6 +344,8 @@ public class NoteServerSyncHelper {
                                 Log.v(TAG, "   ...try to edit");
                                 remoteNote = notesClient.editNote(ssoAccount, note).getNote();
                             }
+                            // FIXME i do not think that this works properly since some versions.
+                            // TODO Checkout NextcloudHttpRequestFailedException and see https://github.com/nextcloud/notes/issues/454
                             // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
                             // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             if (remoteNote == null) {
@@ -373,7 +375,7 @@ public class NoteServerSyncHelper {
                         Log.d(TAG, "Server returned HTTP Status Code 507 - Insufficient Storage");
                         status = LoginStatus.INSUFFICIENT_STORAGE;
                         // } else if (e.getStatusCode == 409) {
-                        // TODO React to https://github.com/nextcloud/notes/issues/454 and set status to JSON_FAILED otherwise
+                        // TODO React to https://github.com/nextcloud/notes/issues/454
                     } else {
                         exceptions.add(e);
                         status = LoginStatus.JSON_FAILED;
@@ -457,10 +459,8 @@ public class NoteServerSyncHelper {
         @Override
         protected void onPostExecute(SyncResultStatus status) {
             super.onPostExecute(status);
-            if (exceptions != null) {
-                for (Throwable e : exceptions) {
-                    Log.e(TAG, e.getMessage(), e);
-                }
+            for (Throwable e : exceptions) {
+                Log.e(TAG, e.getMessage(), e);
             }
             if (status.pullStatus != LoginStatus.OK || status.pushStatus != LoginStatus.OK) {
                 String statusMessage = context.getApplicationContext().getString(R.string.error_sync, context.getApplicationContext().getString(
