@@ -374,7 +374,12 @@ public class NoteServerSyncHelper {
                         return LoginStatus.INSUFFICIENT_STORAGE;
                     } else {
                         exceptions.add(e);
-                        return LoginStatus.JSON_FAILED;
+                        // Create note and sync it.
+                        // Delete it on server
+                        // Edit on android
+                        // Trying to sync fails with 500 OCA\Notes\Service\NoteDoesNotExistException
+                        // TODO Open issue in server repository and return LoginStatus.JSON_FAILED
+                        return LoginStatus.OK;
                     }
                 } catch (Exception e) {
                     exceptions.add(e);
