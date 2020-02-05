@@ -13,8 +13,8 @@ android {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 78
-        versionName "2.10.0"
+        versionCode 79
+        versionName "2.10.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -44,11 +44,12 @@ dependencies {
     implementation 'com.jakewharton:butterknife:10.2.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
-    implementation "androidx.fragment:fragment:1.2.0"
-    implementation "androidx.preference:preference:1.1.0"
     implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation "androidx.fragment:fragment:1.2.1"
+    implementation "androidx.preference:preference:1.1.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation 'androidx.work:work-runtime:2.3.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'androidx.work:work-runtime:2.3.1'
     implementation "com.google.android.material:material:1.1.0"
 
     androidTestImplementation 'junit:junit:4.13'
