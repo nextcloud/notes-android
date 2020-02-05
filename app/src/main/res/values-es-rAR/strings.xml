@@ -41,17 +41,13 @@
     <string name="settings_font_title">Fuente monoespaciada</string>
     <string name="settings_font_size">Tamaño de fuente</string>
     <string name="settings_wifi_only">SIncronizar sólo por Wi-Fi</string>
-
     <!-- Certificates -->
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Falló la sincronización: %1$s</string>
-    <string name="error_json">¿Se encuentra activiada la aplicación de Notes en el servidor?</string>
-    <string name="error_no_network">no hay conexión a red</string>
-    <string name="error_unknown">Se presentó un error desconocido</string>
-
+    <string name="error_no_network">No hay conexión de red</string>
     <!-- About -->
     <string name="about_version_title">Versión</string>
     <string name="about_version">Actualmente usted está usando &lt;strong>%1$s&lt;/strong></string>
@@ -85,6 +81,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear una nota nueva</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Claro</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="simple_error">Error</string>
@@ -116,6 +113,13 @@
         <item>Pequeño</item>
         <item>Medio</item>
         <item>Grande</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>15 minutos</item>
+        <item>1 hora</item>
+        <item>6 horas</item>
     </string-array>
 
     <!-- Plurals -->

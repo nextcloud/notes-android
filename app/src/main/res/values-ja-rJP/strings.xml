@@ -41,6 +41,7 @@
     <string name="settings_font_title">モノスペースフォント</string>
     <string name="settings_font_size">フォントサイズ</string>
     <string name="settings_wifi_only">Wi-Fi接続時のみ同期する</string>
+    <string name="settings_background_sync">バックグラウンド同期</string>
 
     <!-- Certificates -->
 
@@ -48,11 +49,6 @@
 
     <!-- Error -->
     <string name="error_sync">同期に失敗しました: %1$s</string>
-    <string name="error_json">ノートアプリはサーバー上で有効になっていますか?</string>
-    <string name="error_no_network">ネットワーク接続がありません</string>
-    <string name="error_files_app">ファイルアプリはインストールしましたか？</string>
-    <string name="error_unknown">不明なエラーが発生しました</string>
-
     <!-- About -->
     <string name="about_version_title">バージョン</string>
     <string name="about_version">現在 &lt;strong>%1$s&lt;/strong> を使用しています</string>
@@ -91,9 +87,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">新しいノートを作成</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">ライト</string>
     <string name="pref_value_font_normal">ノーマル</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fiおよびモバイル接続時に同期する</string>
+
     <string name="simple_error">エラー</string>
     <string name="simple_close">閉じる</string>
     <string name="simple_copy">コピー</string>
@@ -126,6 +124,14 @@
         <item>小</item>
         <item>中</item>
         <item>大</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>オフ</item>
+        <item>15 分</item>
+        <item>1時間</item>
+        <item>6 時間</item>
     </string-array>
 
     <!-- Plurals -->

@@ -37,6 +37,7 @@
     <string name="settings_font_title">Моноширинный шрифт</string>
     <string name="settings_font_size">Размер шрифта</string>
     <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>
+    <string name="settings_background_sync">Синхр. в фоновом режиме</string>
 
     <!-- Certificates -->
 
@@ -44,10 +45,6 @@
 
     <!-- Error -->
     <string name="error_sync">Синхронизация не удалась: %1$s</string>
-    <string name="error_json">Включено ли приложение «Заметки» на сервере?</string>
-    <string name="error_no_network">нет подключения к сети</string>
-    <string name="error_unknown">Произошла неизвестная ошибка</string>
-
     <!-- About -->
     <string name="about_version_title">Версия</string>
     <string name="about_version">Вы используете &lt;strong>%1$s&lt;/strong></string>
@@ -86,9 +83,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Создать новую заметку</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Светлая</string>
     <string name="pref_value_font_normal">Обычный</string>
     <string name="pref_value_wifi_and_mobile">Синхр. по Wi-Fi и мобильной связи</string>
+
     <string name="simple_error">Ошибка</string>
     <string name="simple_close">Закрыть</string>
     <string name="simple_copy">Копировать</string>
@@ -119,6 +118,14 @@
         <item>Маленький</item>
         <item>Средний</item>
         <item>Большой</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Отключены</item>
+        <item>15 минут</item>
+        <item>1 час</item>
+        <item>6 часов</item>
     </string-array>
 
     <!-- Plurals -->

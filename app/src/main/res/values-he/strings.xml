@@ -37,17 +37,13 @@
     <string name="settings_font_title">גופן ברוחב אחיד</string>
     <string name="settings_font_size">גודל גופן</string>
     <string name="settings_wifi_only">סנכרון רק דרך רשת אלחוטית</string>
-
     <!-- Certificates -->
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">הסנכרון נכשל: %1$s</string>
-    <string name="error_json">האם יישומון הפתקים מופעל בשרת?</string>
-    <string name="error_no_network">אין חיבור לרשת</string>
-    <string name="error_unknown">אירעה שגיאה בלתי ידועה</string>
-
+    <string name="error_no_network">אין חיבור לאינטרנט</string>
     <!-- About -->
     <string name="about_version_title">גרסה</string>
     <string name="about_version">הניצולת עומדת על &lt;strong>%1$s&lt;/strong></string>
@@ -86,9 +82,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">יצירת פתק חדש</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">בהיר</string>
     <string name="pref_value_font_normal">רגיל</string>
     <string name="pref_value_wifi_and_mobile">עדכון דרך רשת אלחוטית ונתונים סלולריים</string>
+
     <string name="simple_error">שגיאה</string>
     <string name="simple_close">סגור</string>
     <string name="simple_copy">העתק</string>
@@ -114,6 +112,13 @@
     <string-array name="fontSize_entries">
         <item>קטן</item>
         <item>גדול</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>15 דקות</item>
+        <item>שעה</item>
+        <item>6 שעות</item>
     </string-array>
 
     <!-- Plurals -->

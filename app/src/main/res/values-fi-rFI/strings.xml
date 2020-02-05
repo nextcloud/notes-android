@@ -40,16 +40,13 @@
     <string name="settings_font_title">Tasalevyinen fontti</string>
     <string name="settings_font_size">Fontin koko</string>
     <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
-
     <!-- Certificates -->
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
-    <string name="error_no_network">ei verkkoyhteyttä</string>
-    <string name="error_unknown">Tapahtui tuntematon virhe</string>
-
+    <string name="error_no_network">Ei verkkoyhteyttä</string>
     <!-- About -->
     <string name="about_version_title">Versio</string>
     <string name="about_version">Käytössäsi on nyt &lt;strong>%1$s&lt;/strong></string>
@@ -81,9 +78,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Luo uusi muistiinpano</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Vaalea</string>
     <string name="pref_value_font_normal">Normaali</string>
     <string name="pref_value_wifi_and_mobile">Synkronoi wifi- ja mobiilidatayhteydellä</string>
+
     <string name="simple_error">Virhe</string>
     <string name="simple_close">Sulje</string>
     <string name="simple_copy">Kopioi</string>
@@ -112,6 +111,13 @@
         <item>Pieni</item>
         <item>Normaali</item>
         <item>Suuri</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>15 minuuttia</item>
+        <item>1 tunti</item>
+        <item>6 tuntia</item>
     </string-array>
 
     <!-- Plurals -->

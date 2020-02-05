@@ -43,6 +43,7 @@
     <string name="settings_font_title">Zabalera bakarreko letra mota</string>
     <string name="settings_font_size">Letra tamaina</string>
     <string name="settings_wifi_only">Sinkronizatu wifi bidez bakarrik</string>
+    <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
 
     <!-- Certificates -->
 
@@ -50,11 +51,7 @@
 
     <!-- Error -->
     <string name="error_sync">Sinkronizazioa huts egin du: %1$s</string>
-    <string name="error_json">Oharrak aplikazioa zerbitzariak aktibatuta al dago?</string>
-    <string name="error_no_network">Ez dago sare-konexiorik</string>
-    <string name="error_files_app">fitxategien aplikazioa instalatu al duzu?</string>
-    <string name="error_unknown">Errore ezezagun bat gertatu da</string>
-
+    <string name="error_no_network">Ez dago sare konexiorik</string>
     <!-- About -->
     <string name="about_version_title">Bertsioa</string>
     <string name="about_version"> &lt;strong>%1$s&lt;/strong> erabiltzen ari zara</string>
@@ -93,9 +90,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Sortu ohar berria</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Argia</string>
     <string name="pref_value_font_normal">Normala</string>
     <string name="pref_value_wifi_and_mobile">Sinkronizatu wifi eta datu mugikorrekin</string>
+
     <string name="simple_error">Errorea</string>
     <string name="simple_close">Itxi</string>
     <string name="simple_copy">Kopiatu</string>
@@ -133,6 +132,14 @@
         <item>Txikia</item>
         <item>Ertaina</item>
         <item>Handia</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Off</item>
+        <item>15 minutu</item>
+        <item>Ordu 1</item>
+        <item>6 ordu</item>
     </string-array>
 
     <!-- Plurals -->
