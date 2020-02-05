@@ -55,6 +55,8 @@ import it.niedermann.owncloud.notes.util.SSOUtil;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
+import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
+import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
 /**
  * Helps to synchronize the Database to the Server.
@@ -335,31 +337,43 @@ public class NoteServerSyncHelper {
             for (DBNote note : notes) {
                 Log.d(TAG, "   Process Local Note: " + note);
                 try {
-                    CloudNote remoteNote = null;
+                    CloudNote remoteNote;
                     switch (note.getStatus()) {
                         case LOCAL_EDITED:
                             Log.v(TAG, "   ...create/edit");
-                            // if note is not new, try to edit it.
                             if (note.getRemoteId() > 0) {
-                                Log.v(TAG, "   ...try to edit");
-                                remoteNote = notesClient.editNote(ssoAccount, note).getNote();
-                            }
-                            // FIXME i do not think that this works properly since some versions.
-                            // TODO Checkout NextcloudHttpRequestFailedException and see https://github.com/nextcloud/notes/issues/454
-                            // However, the note may be deleted on the server meanwhile; or was never synchronized -> (re)create
-                            // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            if (remoteNote == null) {
-                                Log.v(TAG, "   ...Note does not exist on server -> (re)create");
+                                Log.v(TAG, "   ...Note has remoteId -> try to edit");
+                                try {
+                                    remoteNote = notesClient.editNote(ssoAccount, note).getNote();
+                                } catch (NextcloudHttpRequestFailedException e) {
+                                    if (e.getStatusCode() == HTTP_NOT_FOUND) {
+                                        Log.v(TAG, "   ...Note does no longer exist on server -> recreate");
+                                        remoteNote = notesClient.createNote(ssoAccount, note).getNote();
+                                    } else {
+                                        throw e;
+                                    }
+                                }
+                            } else {
+                                Log.v(TAG, "   ...Note does not have a remoteId yet -> create");
                                 remoteNote = notesClient.createNote(ssoAccount, note).getNote();
                             }
+                            // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             db.updateNote(note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() > 0) {
                                 Log.v(TAG, "   ...delete (from server and local)");
-                                notesClient.deleteNote(ssoAccount, note.getRemoteId());
+                                try {
+                                    notesClient.deleteNote(ssoAccount, note.getRemoteId());
+                                } catch(NextcloudHttpRequestFailedException e) {
+                                    if(e.getStatusCode() == HTTP_NOT_FOUND) {
+                                        Log.v(TAG, "   ...delete (note has already been deleted remotely)");
+                                    } else {
+                                        throw e;
+                                    }
+                                }
                             } else {
-                                Log.v(TAG, "   ...delete (only local, since it was not synchronized)");
+                                Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
                             }
                             // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             db.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
@@ -368,14 +382,12 @@ public class NoteServerSyncHelper {
                             throw new IllegalStateException("Unknown State of Note: " + note);
                     }
                 } catch (NextcloudHttpRequestFailedException e) {
-                    if (e.getStatusCode() == 304) {
+                    if (e.getStatusCode() == HTTP_NOT_MODIFIED) {
                         Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
                     } else if (e.getStatusCode() == 507) {
                         exceptions.add(e);
                         Log.d(TAG, "Server returned HTTP Status Code 507 - Insufficient Storage");
                         status = LoginStatus.INSUFFICIENT_STORAGE;
-                        // } else if (e.getStatusCode == 409) {
-                        // TODO React to https://github.com/nextcloud/notes/issues/454
                     } else {
                         exceptions.add(e);
                         status = LoginStatus.JSON_FAILED;
