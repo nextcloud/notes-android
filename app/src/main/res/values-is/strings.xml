@@ -37,17 +37,13 @@
     <string name="settings_font_title">Jafnbreitt letur</string>
     <string name="settings_font_size">Leturstærð</string>
     <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
-
     <!-- Certificates -->
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Samstilling mistókst: %1$s</string>
-    <string name="error_json">er minnispunktaforritið virkt á þjóninum?</string>
-    <string name="error_no_network">engin nettenging</string>
-    <string name="error_unknown">Óþekkt villa kom upp</string>
-
+    <string name="error_no_network">Engin nettenging</string>
     <!-- About -->
     <string name="about_version_title">Útgáfa</string>
     <string name="about_version">Þú ert núna að nota &lt;strong>%1$s&lt;/strong></string>
@@ -86,9 +82,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Búa til nýjan minnispunkt</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Ljóst</string>
     <string name="pref_value_font_normal">Venjulegt</string>
     <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
+
     <string name="simple_error">Villa</string>
     <string name="simple_close">Loka</string>
     <string name="simple_copy">Afrita</string>
@@ -118,6 +116,14 @@
         <item>Lítið</item>
         <item>miðlungs</item>
         <item>Stórt</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Slökkt</item>
+        <item>15 mínútur</item>
+        <item>1 klukkustund</item>
+        <item>6 klukkustundir</item>
     </string-array>
 
     <!-- Plurals -->

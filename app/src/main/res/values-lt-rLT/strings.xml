@@ -43,6 +43,7 @@
     <string name="settings_font_title">Lygiaplotis šriftas</string>
     <string name="settings_font_size">Šrifto dydis</string>
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
+    <string name="settings_background_sync">Foninis sinchronizavimas</string>
 
     <!-- Certificates -->
 
@@ -50,11 +51,6 @@
 
     <!-- Error -->
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
-    <string name="error_json">Ar užrašų programėlė aktyvuota serveryje?</string>
-    <string name="error_no_network">nėra tinklo ryšio</string>
-    <string name="error_files_app">ar esate įdiegę failų programėlę?</string>
-    <string name="error_unknown">Įvyko nežinoma klaida</string>
-
     <!-- About -->
     <string name="about_version_title">Versija</string>
     <string name="about_version">Jūs dabar naudojate &lt;strong>%1$s&lt;/strong></string>
@@ -93,9 +89,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Sukurti naujus užrašus</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Šviesus</string>
     <string name="pref_value_font_normal">Normalus</string>
     <string name="pref_value_wifi_and_mobile">Sinchronizuoti naudojant belaidį (Wi-Fi) ir mobiliuosius duomenis</string>
+
     <string name="simple_error">Klaida</string>
     <string name="simple_close">Užverti</string>
     <string name="simple_copy">Kopijuoti</string>
@@ -134,6 +132,14 @@
         <item>Mažas</item>
         <item>Vidutinis</item>
         <item>Didelis</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Išjungta</item>
+        <item>15 minučių</item>
+        <item>1 valanda</item>
+        <item>6 valandos</item>
     </string-array>
 
     <!-- Plurals -->

@@ -43,18 +43,13 @@
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
     <string name="settings_font_size">Veľkosť písma</string>
     <string name="settings_wifi_only">Synchronizovať len na Wi-Fi</string>
-
     <!-- Certificates -->
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
-    <string name="error_json">máte povolenú aplikáciu Poznámky na serveri?</string>
-    <string name="error_no_network">nie je pripojenie k sieti</string>
-    <string name="error_files_app">máte nainštalovanú apku Súbory?</string>
-    <string name="error_unknown">Vyskytla sa neznáma chyba</string>
-
+    <string name="error_no_network">Bez sieťového pripojenia</string>
     <!-- About -->
     <string name="about_version_title">Verzia</string>
     <string name="about_version">Momentálne používate &lt;strong>%1$s&lt;/strong></string>
@@ -93,9 +88,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Vytvoriť novú poznámku</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Svetlý</string>
     <string name="pref_value_font_normal">Normálne</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovať na Wi-Fi a mobilných dátach</string>
+
     <string name="simple_error">Chyba</string>
     <string name="simple_close">Zatvoriť</string>
     <string name="simple_copy">Kopírovať</string>
@@ -131,6 +128,13 @@
         <item>Malá</item>
         <item>Stredná</item>
         <item>Veľká</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>15 minút</item>
+        <item>1 hodina</item>
+        <item>6 hodín</item>
     </string-array>
 
     <!-- Plurals -->

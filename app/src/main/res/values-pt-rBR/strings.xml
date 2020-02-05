@@ -43,6 +43,7 @@
     <string name="settings_font_title"> Fonte monospaçada</string>
     <string name="settings_font_size">Tamanho da fonte</string>
     <string name="settings_wifi_only">Sincronizar somente por Wi-Fi</string>
+    <string name="settings_background_sync">Sincronização em segundo plano</string>
 
     <!-- Certificates -->
 
@@ -50,11 +51,7 @@
 
     <!-- Error -->
     <string name="error_sync">A sincronização falhou: %1$s</string>
-    <string name="error_json">O aplicativo Notes está ativado no servidor?</string>
-    <string name="error_no_network">não existe conexão de rede</string>
-    <string name="error_files_app">Você instalou o aplicativo files?</string>
-    <string name="error_unknown">Um erro desconhecido ocorreu</string>
-
+    <string name="error_no_network">Sem conexão de rede</string>
     <!-- About -->
     <string name="about_version_title">Versão</string>
     <string name="about_version">Você está usando &lt;strong>%1$s&lt;/strong></string>
@@ -93,9 +90,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Criar uma nova anotação</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Claro</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar por Wi-Fi e dados móveis</string>
+
     <string name="simple_error">Erro</string>
     <string name="simple_close">Fechar</string>
     <string name="simple_copy">Copiar</string>
@@ -134,6 +133,14 @@
         <item>Pequena</item>
         <item>Média</item>
         <item>Grande</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Desligar</item>
+        <item>15 minutos</item>
+        <item>1 hora</item>
+        <item>6 horas</item>
     </string-array>
 
     <!-- Plurals -->

@@ -43,6 +43,7 @@
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
     <string name="settings_wifi_only">Sincronitza només per Wi-Fi</string>
+    <string name="settings_background_sync">Sincronització en segon pla</string>
 
     <!-- Certificates -->
 
@@ -50,11 +51,7 @@
 
     <!-- Error -->
     <string name="error_sync">Ha fallat la sincronització: %1$s</string>
-    <string name="error_json">l\'aplicació Notes està activada al servidor?</string>
-    <string name="error_no_network">no hi ha connexió a la xarxa</string>
-    <string name="error_files_app">tens instal·lada l\'aplicació de fitxers?</string>
-    <string name="error_unknown">S\'ha produït un error desconegut</string>
-
+    <string name="error_no_network">Sense connexió de xarxa</string>
     <!-- About -->
     <string name="about_version_title">Versió</string>
     <string name="about_version">Actualment esteu utilitzant la versió &lt;strong>%1$s&lt;/strong></string>
@@ -93,9 +90,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crea una nota nova</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Clar</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronitza per Wi-Fi i dades mòbils</string>
+
     <string name="simple_error">Error</string>
     <string name="simple_close">Tanca</string>
     <string name="simple_copy">Copia</string>
@@ -134,6 +133,14 @@
         <item>Petita</item>
         <item>Mitjana</item>
         <item>Gran</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Apagat</item>
+        <item>15 minuts</item>
+        <item>1 hora</item>
+        <item>6 hores</item>
     </string-array>
 
     <!-- Plurals -->
