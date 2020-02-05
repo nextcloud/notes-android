@@ -239,6 +239,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         localAccount = db.getLocalAccountByAccountName(accountName);
         try {
             ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+            new NotesListViewItemTouchHelper(ssoAccount, this, this, db, adapter, syncCallBack, this::refreshLists).attachToRecyclerView(listView);
             synchronize();
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
@@ -537,7 +538,6 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         adapter = new ItemAdapter(this);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
-        new NotesListViewItemTouchHelper(ssoAccount, this, this, db, adapter, syncCallBack, this::refreshLists).attachToRecyclerView(listView);
     }
 
     private void refreshLists() {
