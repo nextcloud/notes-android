@@ -122,12 +122,8 @@ public class NotesClient {
         return putNote(ssoAccount, note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
-    void deleteNote(SingleSignOnAccount ssoAccount, long noteId) {
-        try {
-            this.requestServer(ssoAccount, "notes/" + noteId, METHOD_DELETE, null, null, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    void deleteNote(SingleSignOnAccount ssoAccount, long noteId) throws Exception {
+        this.requestServer(ssoAccount, "notes/" + noteId, METHOD_DELETE, null, null, null);
     }
 
     /**
