@@ -43,6 +43,7 @@
     <string name="settings_font_title">Pisava enotne širine</string>
     <string name="settings_font_size">Velikost pisave</string>
     <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
+    <string name="settings_background_sync"> Usklajevanje v ozadju</string>
 
     <!-- Certificates -->
 
@@ -50,11 +51,7 @@
 
     <!-- Error -->
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
-    <string name="error_json">Ali je program Beležka Notes nameščen na strežniku?</string>
-    <string name="error_no_network">ni omrežne povezave</string>
-    <string name="error_files_app">Ali je program za upravljanje datotek »files« nameščen?</string>
-    <string name="error_unknown">Prišlo je do neznane napake!</string>
-
+    <string name="error_no_network">Ni omrežne povezave</string>
     <!-- About -->
     <string name="about_version_title">Različica</string>
     <string name="about_version">Trenutno je v uporabi &lt;strong>%1$s&lt;/strong></string>
@@ -93,9 +90,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Ustvari novo zabeležko</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Svetla</string>
     <string name="pref_value_font_normal">Običajno</string>
     <string name="pref_value_wifi_and_mobile">Usklajuj na Wi-Fi in mobilni povezavi</string>
+
     <string name="simple_error">Napaka</string>
     <string name="simple_close">Zapri</string>
     <string name="simple_copy">Kopiraj</string>
@@ -134,6 +133,14 @@
         <item>Majhna</item>
         <item>Srednja</item>
         <item>Velika</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Onemogočeno</item>
+        <item>15 minut</item>
+        <item>1 ura</item>
+        <item>6 ur</item>
     </string-array>
 
     <!-- Plurals -->

@@ -28,7 +28,7 @@
 
     <SwitchPreference
         android:defaultValue="@string/pref_value_font_normal"
-        android:icon="@drawable/ic_text_fields_black_24dp"
+        android:icon="@drawable/ic_text_format_grey600_24dp"
         android:key="@string/pref_key_font"
         android:layout="@layout/item_pref"
         android:title="@string/settings_font_title" />

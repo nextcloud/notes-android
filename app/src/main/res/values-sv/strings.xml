@@ -43,6 +43,7 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Teckenstorlek</string>
     <string name="settings_wifi_only">Synkronisera endast med Wi-Fi</string>
+    <string name="settings_background_sync">Bakgrundssynkronisering</string>
 
     <!-- Certificates -->
 
@@ -50,11 +51,7 @@
 
     <!-- Error -->
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
-    <string name="error_json">är anteckningar-appen aktiverad på servern?</string>
-    <string name="error_no_network">ingen nätverksanslutning</string>
-    <string name="error_files_app">har du installerat filappen?</string>
-    <string name="error_unknown">Ett okänt fel uppstod</string>
-
+    <string name="error_no_network">Ingen nätverksanslutning</string>
     <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">Du använder just nu &lt;strong>%1$s&lt;/strong></string>
@@ -93,9 +90,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Skapa en ny anteckning</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Ljus</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobil data</string>
+
     <string name="simple_error">Fel</string>
     <string name="simple_close">Stäng</string>
     <string name="simple_copy">Kopiera</string>
@@ -119,6 +118,7 @@
     <string name="bulk_notes_deleted">Raderade %1$d anteckningar</string>
     <string name="bulk_notes_restored">Återställde %1$d anteckningar</string>
     <string name="category_readonly">Läsbehörighet</string>
+    <string name="no_category">Ingen kategori</string>
     <string name="add_category">Lägg till %1$s</string>
 
     <!-- Array: note modes -->
@@ -133,6 +133,14 @@
         <item>Liten</item>
         <item>Medium</item>
         <item>Stor</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Av</item>
+        <item>15 minuter</item>
+        <item>1 timme</item>
+        <item>6 timmar</item>
     </string-array>
 
     <!-- Plurals -->

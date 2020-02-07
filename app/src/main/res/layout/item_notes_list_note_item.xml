@@ -128,10 +128,4 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:contentDescription="@null"
-        android:src="@color/separator" />
-
 </FrameLayout>

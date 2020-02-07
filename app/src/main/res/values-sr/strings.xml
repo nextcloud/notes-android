@@ -43,6 +43,7 @@
     <string name="settings_font_title">Фонт фиксне ширине</string>
     <string name="settings_font_size">Величина фонта</string>
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
+    <string name="settings_background_sync">Позадинска синхронизација</string>
 
     <!-- Certificates -->
 
@@ -50,11 +51,7 @@
 
     <!-- Error -->
     <string name="error_sync">Синхронизација није успела%1$s</string>
-    <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
-    <string name="error_no_network">нема мрежне везе</string>
-    <string name="error_files_app">да ли имате инсталирану апликацију за фајлове?</string>
-    <string name="error_unknown">Десила се непозната грешка</string>
-
+    <string name="error_no_network">Нема мрежне везе</string>
     <!-- About -->
     <string name="about_version_title">Верзија</string>
     <string name="about_version">Тренутно користите &lt;strong>%1$s&lt;/strong></string>
@@ -93,9 +90,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Направи нову белешку</string>
 
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_theme_light">Светла</string>
     <string name="pref_value_font_normal">Нормална</string>
     <string name="pref_value_wifi_and_mobile">Синхронизуј и на бежичној и на мобилној вези</string>
+
     <string name="simple_error">Грешка</string>
     <string name="simple_close">Затвори</string>
     <string name="simple_copy">Копирај</string>
@@ -134,6 +133,14 @@
         <item>Мали</item>
         <item>Средњи</item>
         <item>Велики</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Искључена</item>
+        <item>15 минута</item>
+        <item>1 сат</item>
+        <item>6 сати</item>
     </string-array>
 
     <!-- Plurals -->
