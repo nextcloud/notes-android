@@ -9,7 +9,6 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
-import com.bumptech.glide.module.LibraryGlideModule;
 
 import java.io.InputStream;
 
@@ -20,7 +19,7 @@ import java.io.InputStream;
  * annotation processor, this class will be automatically included.
  */
 @GlideModule
-public final class SingleSignOnLibraryGlideModule extends LibraryGlideModule {
+public final class SingleSignOnLibraryGlideModule extends AppGlideModule {
     @Override
     public void registerComponents(
             @NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
