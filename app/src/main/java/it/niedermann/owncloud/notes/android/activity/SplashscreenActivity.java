@@ -16,7 +16,7 @@ public class SplashscreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this, ExceptionActivity.class));
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
         Intent intent = new Intent(this, NotesListViewActivity.class);
         startActivity(intent);

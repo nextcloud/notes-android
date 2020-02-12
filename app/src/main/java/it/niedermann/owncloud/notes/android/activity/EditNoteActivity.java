@@ -55,7 +55,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this, ExceptionActivity.class));
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
         setContentView(R.layout.activity_edit);
 

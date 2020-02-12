@@ -155,7 +155,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this, ExceptionActivity.class));
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
         setContentView(R.layout.drawer_layout);
         ButterKnife.bind(this);

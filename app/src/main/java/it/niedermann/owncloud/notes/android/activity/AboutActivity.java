@@ -32,7 +32,7 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this, ExceptionActivity.class));
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);
 

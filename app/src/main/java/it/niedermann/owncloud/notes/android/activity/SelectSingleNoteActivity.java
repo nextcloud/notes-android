@@ -26,7 +26,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this, ExceptionActivity.class));
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
         setResult(Activity.RESULT_CANCELED);
 
         ButterKnife.bind(this);
