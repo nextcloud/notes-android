@@ -21,6 +21,7 @@ import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import it.niedermann.nextcloud.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
@@ -30,7 +31,6 @@ import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
@@ -55,7 +55,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this, ExceptionActivity.class));
 
         setContentView(R.layout.activity_edit);
 

@@ -51,6 +51,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import it.niedermann.nextcloud.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
@@ -68,7 +69,6 @@ import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
@@ -155,7 +155,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this, ExceptionActivity.class));
 
         setContentView(R.layout.drawer_layout);
         ButterKnife.bind(this);

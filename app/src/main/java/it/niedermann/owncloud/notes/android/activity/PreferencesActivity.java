@@ -8,9 +8,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import it.niedermann.nextcloud.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.PreferencesFragment;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
 
 /**
  * Allows to change application settings.
@@ -24,7 +24,7 @@ public class PreferencesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this, ExceptionActivity.class));
         setContentView(R.layout.activity_preferences);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);

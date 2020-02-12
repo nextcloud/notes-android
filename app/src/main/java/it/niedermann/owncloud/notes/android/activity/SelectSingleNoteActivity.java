@@ -11,11 +11,11 @@ import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import it.niedermann.nextcloud.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.Notes;
 
 public class SelectSingleNoteActivity extends NotesListViewActivity {
@@ -26,7 +26,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
+        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this, ExceptionActivity.class));
         setResult(Activity.RESULT_CANCELED);
 
         ButterKnife.bind(this);

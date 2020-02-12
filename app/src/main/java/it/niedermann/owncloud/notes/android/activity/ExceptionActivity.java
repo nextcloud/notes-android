@@ -14,8 +14,10 @@ import androidx.appcompat.widget.Toolbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.util.ExceptionUtil;
+
+import static it.niedermann.nextcloud.exception.ExceptionHandler.KEY_THROWABLE;
 
 public class ExceptionActivity extends AppCompatActivity {
 
@@ -28,8 +30,6 @@ public class ExceptionActivity extends AppCompatActivity {
     @BindView(R.id.stacktrace)
     TextView stacktrace;
 
-    public static final String KEY_THROWABLE = "T";
-
     @SuppressLint("SetTextI18n") // only used for logging
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,7 +38,6 @@ public class ExceptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
         throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
-        throwable.printStackTrace();
         toolbar.setTitle(getString(R.string.simple_error));
         this.message.setText(throwable.getMessage());
         this.stacktrace.setText(ExceptionUtil.getDebugInfos(this, throwable));
