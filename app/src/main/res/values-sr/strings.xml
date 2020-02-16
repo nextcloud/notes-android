@@ -51,7 +51,12 @@
 
     <!-- Error -->
     <string name="error_sync">Синхронизација није успела%1$s</string>
+    <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
     <string name="error_no_network">Нема мрежне везе</string>
+    <string name="error_files_app">Да ли имате инсталирану апликацију за фајлове?</string>
+    <string name="error_unknown">Десила се непозната грешка.</string>
+    <string name="error_insufficient_storage">Складиште на серверу је пуно.</string>
+
     <!-- About -->
     <string name="about_version_title">Верзија</string>
     <string name="about_version">Тренутно користите &lt;strong>%1$s&lt;/strong></string>

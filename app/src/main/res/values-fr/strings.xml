@@ -51,7 +51,12 @@
 
     <!-- Error -->
     <string name="error_sync">Échec de synchronisation : %1$s</string>
+    <string name="error_json">L\'application Notes est-elle activée sur le serveur ?</string>
     <string name="error_no_network">Aucune connexion réseau</string>
+    <string name="error_files_app">Avez-vous installé l\'application Fichiers ?</string>
+    <string name="error_unknown">Une erreur inconnue est survenue</string>
+    <string name="error_insufficient_storage">L\'espace de stockage de votre serveur est plein.</string>
+
     <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">Vous utilisez actuellement la &lt;strong>%1$s&lt;/strong></string>

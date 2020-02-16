@@ -51,6 +51,12 @@
 
     <!-- Error -->
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
+    <string name="error_json">Ar Užrašų programėlė yra aktyvuota serveryje?</string>
+    <string name="error_no_network">Nėra tinklo ryšio</string>
+    <string name="error_files_app">Ar esate įdiegę failų programėlę?</string>
+    <string name="error_unknown">Įvyko nežinoma klaida.</string>
+    <string name="error_insufficient_storage">Jūsų serverio saugykla yra pilna.</string>
+
     <!-- About -->
     <string name="about_version_title">Versija</string>
     <string name="about_version">Jūs dabar naudojate &lt;strong>%1$s&lt;/strong></string>
