@@ -245,7 +245,7 @@ public class NoteServerSyncHelper {
                 }
             } else {
                 Log.d(TAG, "... do nothing");
-                if (callbacksPull.containsKey(ssoAccount.name) && callbacksPull.get(ssoAccount.name) != null) {
+                if (callbacksPush.containsKey(ssoAccount.name) && callbacksPush.get(ssoAccount.name) != null) {
                     for (ISyncCallback callback : callbacksPush.get(ssoAccount.name)) {
                         callback.onScheduled();
                     }
