@@ -51,7 +51,12 @@
 
     <!-- Error -->
     <string name="error_sync">同步失败：%1$s</string>
+    <string name="error_json">是否已在服务器上启用了 笔记 应用？</string>
     <string name="error_no_network">没有网络连接</string>
+    <string name="error_files_app">您是否已安装 文件 应用程序？</string>
+    <string name="error_unknown">出现未知错误。</string>
+    <string name="error_insufficient_storage">您的服务器存储空间已满。</string>
+
     <!-- About -->
     <string name="about_version_title">版本</string>
     <string name="about_version">您正在使用&lt;strong>%1$s&lt;/strong></string>

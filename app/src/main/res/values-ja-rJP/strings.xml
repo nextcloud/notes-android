@@ -49,6 +49,7 @@
 
     <!-- Error -->
     <string name="error_sync">同期に失敗しました: %1$s</string>
+    <string name="error_no_network">ネットワークに接続されていません</string>
     <!-- About -->
     <string name="about_version_title">バージョン</string>
     <string name="about_version">現在 &lt;strong>%1$s&lt;/strong> を使用しています</string>
