@@ -51,6 +51,12 @@
 
     <!-- Error -->
     <string name="error_sync">Eşitlenemedi: %1$s</string>
+    <string name="error_json">Notlar uygulaması sunucu üzerinde etkinleştirilmiş mi?</string>
+    <string name="error_no_network">Ağ bağlantısı yok</string>
+    <string name="error_files_app">Dosyalar uygulamasını kurdunuz mu?</string>
+    <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
+    <string name="error_insufficient_storage">Sunucu depolama alanı doldu.</string>
+
     <!-- About -->
     <string name="about_version_title">Sürüm</string>
     <string name="about_version">Şu anda &lt;strong>%1$s&lt;/strong> kullanıyorsunuz</string>

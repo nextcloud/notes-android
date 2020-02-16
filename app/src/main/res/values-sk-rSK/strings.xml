@@ -43,13 +43,20 @@
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
     <string name="settings_font_size">Veľkosť písma</string>
     <string name="settings_wifi_only">Synchronizovať len na Wi-Fi</string>
+    <string name="settings_background_sync">Synchronizácia na pozadí</string>
+
     <!-- Certificates -->
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
+    <string name="error_json">Je na serveri aktivovaná aplikácia Notes?</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
+    <string name="error_files_app">Nainštalovali ste aplikáciu súbory?</string>
+    <string name="error_unknown">Vyskytla sa neznáma chyba</string>
+    <string name="error_insufficient_storage">Serverové úložisko je plné</string>
+
     <!-- About -->
     <string name="about_version_title">Verzia</string>
     <string name="about_version">Momentálne používate &lt;strong>%1$s&lt;/strong></string>
@@ -116,6 +123,9 @@
     <string name="bulk_notes_deleted">Vymazaných %1$d poznámok</string>
     <string name="bulk_notes_restored">Obnovených %1$d poznámok</string>
     <string name="category_readonly">Iba na čítanie</string>
+    <string name="no_category">Žiadna kategória</string>
+    <string name="add_category">Pridať %1$s</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
@@ -132,6 +142,7 @@
 
     <!-- Array: background synchronization -->
     <string-array name="sync_entries">
+        <item>Vypnúť</item>
         <item>15 minút</item>
         <item>1 hodina</item>
         <item>6 hodín</item>

@@ -45,6 +45,7 @@
 
     <!-- Error -->
     <string name="error_sync">Синхронизация не удалась: %1$s</string>
+    <string name="error_no_network">Нет подключения к сети</string>
     <!-- About -->
     <string name="about_version_title">Версия</string>
     <string name="about_version">Вы используете &lt;strong>%1$s&lt;/strong></string>
