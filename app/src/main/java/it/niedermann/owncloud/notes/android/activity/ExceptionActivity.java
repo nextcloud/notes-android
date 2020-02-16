@@ -38,6 +38,7 @@ public class ExceptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
         throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
+        throwable.printStackTrace();
         toolbar.setTitle(getString(R.string.simple_error));
         this.message.setText(throwable.getMessage());
         this.stacktrace.setText(ExceptionUtil.getDebugInfos(this, throwable));
