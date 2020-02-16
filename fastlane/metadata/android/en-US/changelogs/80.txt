@@ -1,1 +1,2 @@
 - 🐞 Fix NullPointerException in special sync cases
+- 🐞 API Level 15 cannot use ?android: attributes (#730)

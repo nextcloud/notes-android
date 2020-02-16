@@ -21,7 +21,7 @@
     <color name="widget_fg_default">#000000</color>
     <color name="widget_fg_contrast">#ffffff</color>
 
-    <color name="category_background">?android:colorBackground</color>
+    <color name="category_background">@color/bg_normal</color>
     <color name="category_border">@color/primary</color>
 
     <!-- Dark Theme -->
