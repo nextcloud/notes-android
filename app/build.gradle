@@ -46,7 +46,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
 
     implementation "androidx.appcompat:appcompat:1.1.0"
-    implementation "androidx.fragment:fragment:1.2.1"
+    implementation "androidx.fragment:fragment:1.2.2"
     implementation "androidx.preference:preference:1.1.0"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
