@@ -327,6 +327,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 swipeRefreshLayout.setRefreshing(false);
                 askForNewAccount(this);
             } else {
+                Log.i(TAG, "Clearing Glide memory cache");
+                Glide.get(this).clearMemory();
+                new Thread(() -> {
+                    Log.i(TAG, "Clearing Glide disk cache");
+                    Glide.get(getApplicationContext()).clearDiskCache();
+                }).start();
                 synchronize();
             }
         });
