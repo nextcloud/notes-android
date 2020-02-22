@@ -155,6 +155,7 @@
     <string name="category_readonly">Read only</string>
     <string name="no_category">No category</string>
     <string name="add_category">Add %1$s</string>
+    <string name="simple_checkbox">checkbox</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
