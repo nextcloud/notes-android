@@ -348,7 +348,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             startActivityForResult(createIntent, create_note_cmd);
         });
     }
-
+s
     private void setupNavigationList(final String selectedItem) {
         itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.label_all_notes), null, R.drawable.ic_access_time_grey600_24dp);
         itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_yellow_24dp);
