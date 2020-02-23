@@ -1,22 +1,27 @@
 Companion app to Nextcloud Notes.
 
-Features
+🚀 Funktionen
 
-    Multiple accounts
-    List, create, edit, share, search and delete notes
-    Manage categories
-    Share text and links as new note into the app
-    Mark notes as favorite
-    Bulk delete
-    Formatting with MarkDown (using RxMarkdown)
-    Multi-Lingual User-Interface
+  * Mehrere Konten 👥
+  * Erstellen, Bearbeiten, Teilen, Suchen und Löschen von Notizen 📝
+  * Texte und Links als neue Notizen in die App teilen 📩
+  * ToDos direkt in der Leseansicht abhaken ✅
+  * Notizen als Favoriten markieren⭐
+  * Massenhaftes Löschen 🗑️
+  * Notizen durchsuchen 🔍
+  * MarkDown-Rendering ✨
+  * Kontext-basierte Formatierung 🧰
+  * Dark Mode 🌙
+  * Übersetzt in viele Sprachen 🌎
 
-Requirements
 
-    Nextcloud¹ instance running
-    Nextcloud Files app² enabled (> 3.9.0)
-    Nextcloud Notes app³ enabled
+🔗 Voraussetzungen
 
-¹ https://nextcloud.com/
-² https://github.com/nextcloud/android
-³ https://github.com/nextcloud/notes
+  * Nextcloud (https://nextcloud.com/)
+  * Nextcloud Notes App (https://apps.nextcloud.com/apps/notes)
+  * Nextcloud Android Client (https://play.google.com/store/apps/details?id=com.nextcloud.client)
+
+
+👨‍👩‍👦 Mitwirken
+
+  * https://github.com/stefan-niedermann/nextcloud-notes#family-join-the-team
