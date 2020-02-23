@@ -35,7 +35,7 @@ public class NoteLinksUtilsTest {
                 " - are  \n" +
                 " - no  \n" +
                 "\n" +
-                "link elements.\n" +
+                "link eledments.\n" +
                 "\n" +
                 "----\n" +
                 "**Everything** else could be in here.\n" +
