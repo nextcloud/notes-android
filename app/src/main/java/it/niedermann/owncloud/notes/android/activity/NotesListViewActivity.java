@@ -50,6 +50,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import it.niedermann.nextcloud.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
@@ -324,6 +325,12 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                 swipeRefreshLayout.setRefreshing(false);
                 askForNewAccount(this);
             } else {
+                Log.i(TAG, "Clearing Glide memory cache");
+                Glide.get(this).clearMemory();
+                new Thread(() -> {
+                    Log.i(TAG, "Clearing Glide disk cache");
+                    Glide.get(getApplicationContext()).clearDiskCache();
+                }).start();
                 synchronize();
             }
         });

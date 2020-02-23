@@ -34,8 +34,6 @@ import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.MarkdownTextView;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
-import java.util.Objects;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
@@ -46,6 +44,11 @@ import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 import it.niedermann.owncloud.notes.util.SSOUtil;
+
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_CHECKED_MINUS;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_CHECKED_STAR;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_MINUS;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_STAR;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
@@ -115,8 +118,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ButterKnife.bind(this, Objects.requireNonNull(getView()));
-        markdownProcessor = new MarkdownProcessor(getContext());
+        ButterKnife.bind(this, requireView());
+        markdownProcessor = new MarkdownProcessor(requireContext());
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
                 MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
@@ -142,12 +145,12 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                                          * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
                                          * When (un)checking a checkbox, every markdown gets stripped in the given line argument
                                          */
-                                        if (lines[lineNumber].startsWith("- [ ]") || lines[lineNumber].startsWith("* [ ]")) {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [ ]", "- [x]");
-                                            lines[lineNumber] = lines[lineNumber].replace("* [ ]", "* [x]");
+                                        if (lines[lineNumber].startsWith(CHECKBOX_UNCHECKED_MINUS) || lines[lineNumber].startsWith(CHECKBOX_UNCHECKED_STAR)) {
+                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_UNCHECKED_MINUS, CHECKBOX_CHECKED_MINUS);
+                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_UNCHECKED_STAR, CHECKBOX_CHECKED_STAR);
                                         } else {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [x]", "- [ ]");
-                                            lines[lineNumber] = lines[lineNumber].replace("* [x]", "* [ ]");
+                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_MINUS, CHECKBOX_UNCHECKED_MINUS);
+                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_STAR, CHECKBOX_UNCHECKED_STAR);
                                         }
 
                                         changedText = TextUtils.join("\n", lines);
@@ -164,7 +167,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
                                 long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
-                                Intent intent = new Intent(getActivity().getApplicationContext(), EditNoteActivity.class);
+                                Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
                                 startActivity(intent);
                             } else {
@@ -188,7 +191,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         db = NoteSQLiteOpenHelper.getInstance(getContext());
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getActivity()).getApplicationContext());
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
         noteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             noteContent.setTypeface(Typeface.MONOSPACE);

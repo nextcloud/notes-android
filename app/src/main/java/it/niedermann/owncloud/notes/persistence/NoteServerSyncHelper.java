@@ -42,6 +42,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -50,7 +51,6 @@ import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.model.SyncResultStatus;
-import it.niedermann.owncloud.notes.util.ExceptionUtil;
 import it.niedermann.owncloud.notes.util.SSOUtil;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 
@@ -245,7 +245,7 @@ public class NoteServerSyncHelper {
                 }
             } else {
                 Log.d(TAG, "... do nothing");
-                if (callbacksPull.containsKey(ssoAccount.name) && callbacksPull.get(ssoAccount.name) != null) {
+                if (callbacksPush.containsKey(ssoAccount.name) && callbacksPush.get(ssoAccount.name) != null) {
                     for (ISyncCallback callback : callbacksPush.get(ssoAccount.name)) {
                         callback.onScheduled();
                     }

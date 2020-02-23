@@ -1,7 +1,7 @@
 # Nextcloud Notes
 An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
-[![Build Status](https://travis-ci.org/stefan-niedermann/nextcloud-notes.svg?branch=master)](https://travis-ci.org/stefan-niedermann/nextcloud-notes)
+[![Android CI](https://github.com/stefan-niedermann/nextcloud-notes/workflows/Android%20CI/badge.svg)](https://github.com/stefan-niedermann/nextcloud-notes/actions)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/9f784826834042e8b512d531cab84711)](https://www.codacy.com/manual/info_147/nextcloud-notes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stefan-niedermann/nextcloud-notes&amp;utm_campaign=Badge_Grade)
 [![GitHub issues](https://img.shields.io/github/issues/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/issues)
 [![GitHub stars](https://img.shields.io/github/stars/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/stargazers)
@@ -44,8 +44,8 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
   * Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))
 
 ## :checkered_flag: Planned features
-  * Move notes to another account ([#655](https://github.com/stefan-niedermann/nextcloud-notes/issues/655))
-  * Background synchronization ([#656](https://github.com/stefan-niedermann/nextcloud-notes/issues/656))
+  * Local accounts ([#615](https://github.com/stefan-niedermann/nextcloud-notes/issues/615))
+  * Password protection ([#354](https://github.com/stefan-niedermann/nextcloud-notes/issues/354))
   * Trashbin ([#238](https://github.com/stefan-niedermann/nextcloud-notes/issues/238))
 
 ## :family: Join the team

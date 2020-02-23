@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -31,17 +32,16 @@ import com.yydcdut.markdown.MarkdownEditText;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.edit.EditFactory;
 
-import java.util.Objects;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
+import it.niedermann.owncloud.notes.util.format.ContextBasedFormattingCallback;
+import it.niedermann.owncloud.notes.util.format.ContextBasedRangeFormattingCallback;
+import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NotesTextWatcher;
-import it.niedermann.owncloud.notes.util.ContextBasedFormattingCallback;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
 
@@ -138,7 +138,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ButterKnife.bind(this, Objects.requireNonNull(getView()));
+        ButterKnife.bind(this, requireView());
 
         textWatcher = new NotesTextWatcher(editContent) {
             @Override
@@ -175,7 +175,10 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             markdownProcessor.factory(EditFactory.create());
             markdownProcessor.live(editContent);
 
-            editContent.setCustomSelectionActionModeCallback(new ContextBasedFormattingCallback(this.editContent));
+            editContent.setCustomSelectionActionModeCallback(new ContextBasedRangeFormattingCallback(this.editContent));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                editContent.setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(this.editContent));
+            }
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
             editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
