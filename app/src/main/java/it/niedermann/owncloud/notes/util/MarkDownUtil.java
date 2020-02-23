@@ -64,14 +64,18 @@ public class MarkDownUtil {
         return ((Spanned) text).getSpans(0, text.length(), MDImageSpan.class).length > 0;
     }
 
+    public static boolean lineStartsWithCheckbox(@NonNull String line) {
+        return lineStartsWithCheckbox(line, true) || lineStartsWithCheckbox(line, false);
+    }
+
     public static boolean lineStartsWithCheckbox(@NonNull String line, boolean starAsLeadingCharacter) {
         return starAsLeadingCharacter
                 ? line.startsWith(CHECKBOX_UNCHECKED_STAR) || line.startsWith(CHECKBOX_CHECKED_STAR)
                 : line.startsWith(CHECKBOX_UNCHECKED_MINUS) || line.startsWith(CHECKBOX_CHECKED_MINUS);
     }
 
-    public static int getStartOfLine(@NonNull CharSequence s, int start) {
-        int startOfLine = start;
+    public static int getStartOfLine(@NonNull CharSequence s, int cursorPosition) {
+        int startOfLine = cursorPosition;
         while (startOfLine > 0 && s.charAt(startOfLine - 1) != '\n') {
             startOfLine--;
         }

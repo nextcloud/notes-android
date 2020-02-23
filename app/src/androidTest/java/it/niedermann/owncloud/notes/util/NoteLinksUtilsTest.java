@@ -46,6 +46,7 @@ public class NoteLinksUtilsTest {
 
     @Test
     public void doNotReplaceNormalLinks() {
+        //language=md
         String markdown = "[normal link](https://example.com) and another [note link](123456)";
         String result = NoteLinksUtils.replaceNoteLinksWithDummyUrls(markdown, Collections.singleton("123456"));
         Assert.assertEquals(String.format("[normal link](https://example.com) and another [note link](%s123456)", RELATIVE_LINK_WORKAROUND_PREFIX), result);
