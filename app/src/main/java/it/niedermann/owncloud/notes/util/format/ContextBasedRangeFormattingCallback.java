@@ -1,26 +1,18 @@
-package it.niedermann.owncloud.notes.util;
+package it.niedermann.owncloud.notes.util.format;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Objects;
-
 import it.niedermann.owncloud.notes.R;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
+import static it.niedermann.owncloud.notes.util.ClipboardUtil.getClipboardURLorNull;
 
 public class ContextBasedRangeFormattingCallback implements ActionMode.Callback {
 
@@ -132,19 +124,6 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
             }
         }
         return false;
-    }
-
-    private static String getClipboardURLorNull(Context context) {
-        String clipboardURL = null;
-        ClipData clipboardData = Objects.requireNonNull(((ClipboardManager) Objects.requireNonNull(context.getSystemService(CLIPBOARD_SERVICE))).getPrimaryClip());
-        if (clipboardData.getItemCount() > 0) {
-            try {
-                clipboardURL = new URL(clipboardData.getItemAt(0).getText().toString()).toString();
-            } catch (MalformedURLException e) {
-                Log.d(TAG, "Clipboard does not contain a valid URL: " + clipboardURL);
-            }
-        }
-        return clipboardURL;
     }
 
     @Override

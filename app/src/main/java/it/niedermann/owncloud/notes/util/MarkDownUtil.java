@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.text.Spanned;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.yydcdut.markdown.MarkdownConfiguration;
@@ -18,7 +19,15 @@ import it.niedermann.owncloud.notes.R;
  * Created by stefan on 07.12.16.
  */
 
+@SuppressWarnings("WeakerAccess")
 public class MarkDownUtil {
+
+    public static final String CHECKBOX_UNCHECKED_MINUS = "- [ ]";
+    public static final String CHECKBOX_UNCHECKED_MINUS_TRAILING_SPACE = CHECKBOX_UNCHECKED_MINUS + " ";
+    public static final String CHECKBOX_UNCHECKED_STAR = "* [ ]";
+    public static final String CHECKBOX_UNCHECKED_STAR_TRAILING_SPACE = CHECKBOX_UNCHECKED_STAR + " ";
+    public static final String CHECKBOX_CHECKED_MINUS = "- [x]";
+    public static final String CHECKBOX_CHECKED_STAR = "* [x]";
 
     /**
      * Ensures every instance of RxMD uses the same configuration
@@ -51,8 +60,22 @@ public class MarkDownUtil {
                 .setDefaultImageSize(400, 300);
     }
 
-    public static boolean containsImageSpan(CharSequence text) {
+    public static boolean containsImageSpan(@NonNull CharSequence text) {
         return ((Spanned) text).getSpans(0, text.length(), MDImageSpan.class).length > 0;
+    }
+
+    public static boolean lineStartsWithCheckbox(@NonNull String line, boolean starAsLeadingCharacter) {
+        return starAsLeadingCharacter
+                ? line.startsWith(CHECKBOX_UNCHECKED_STAR) || line.startsWith(CHECKBOX_CHECKED_STAR)
+                : line.startsWith(CHECKBOX_UNCHECKED_MINUS) || line.startsWith(CHECKBOX_CHECKED_MINUS);
+    }
+
+    public static int getStartOfLine(@NonNull CharSequence s, int start) {
+        int startOfLine = start;
+        while (startOfLine > 0 && s.charAt(startOfLine - 1) != '\n') {
+            startOfLine--;
+        }
+        return startOfLine;
     }
 }
 
