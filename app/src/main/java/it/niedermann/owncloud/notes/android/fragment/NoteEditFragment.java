@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -30,8 +31,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yydcdut.markdown.MarkdownEditText;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.edit.EditFactory;
-
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -139,7 +138,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ButterKnife.bind(this, Objects.requireNonNull(getView()));
+        ButterKnife.bind(this, requireView());
 
         textWatcher = new NotesTextWatcher(editContent) {
             @Override
@@ -177,7 +176,9 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             markdownProcessor.live(editContent);
 
             editContent.setCustomSelectionActionModeCallback(new ContextBasedRangeFormattingCallback(this.editContent));
-            editContent.setOnCreateContextMenuListener(new ContextBasedFormattingCallback(this.editContent));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                editContent.setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(this.editContent));
+            }
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
             editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {

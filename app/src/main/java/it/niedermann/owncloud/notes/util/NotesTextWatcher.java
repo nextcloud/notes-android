@@ -104,7 +104,7 @@ public abstract class NotesTextWatcher implements TextWatcher {
         }
     }
 
-    private static boolean lineStartsWithCheckbox(String line, boolean starAsLeadingCharacter) {
+    static boolean lineStartsWithCheckbox(String line, boolean starAsLeadingCharacter) {
         return starAsLeadingCharacter
                 ? line.startsWith(uncheckedStarCheckbox) || line.startsWith(checkedStarCheckbox)
                 : line.startsWith(uncheckedMinusCheckbox) || line.startsWith(checkedMinusCheckbox);

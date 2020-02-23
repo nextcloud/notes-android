@@ -11,7 +11,6 @@ import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.ActionMode;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
@@ -35,9 +34,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
 
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-        MenuInflater inflater = mode.getMenuInflater();
-        inflater.inflate(R.menu.context_based_range_formatting, menu);
-        menu.removeItem(android.R.id.selectAll);
+        mode.getMenuInflater().inflate(R.menu.context_based_range_formatting, menu);
 
         SparseIntArray styleFormatMap = new SparseIntArray();
         styleFormatMap.append(R.id.bold, Typeface.BOLD);
@@ -60,6 +57,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
 
     @Override
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        // TODO hide actions if not available?
         return false;
     }
 
@@ -151,7 +149,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-
+        // Nothing to do here...
     }
 
     private boolean hasAlreadyMarkdown(int start, int end, String markdown) {
