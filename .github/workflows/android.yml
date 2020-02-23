@@ -1,6 +1,6 @@
-name: Android Pull Request & Master CI
+name: Android CI
 
-on: [push, pull_request]
+on: push
 jobs:
   test:
     name: Run Unit Tests
