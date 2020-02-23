@@ -81,25 +81,32 @@
                         android:layout_below="@+id/app_name"
                         android:layout_marginStart="@dimen/header_padding"
                         android:layout_marginLeft="@dimen/header_padding"
-                        android:layout_marginEnd="@dimen/header_padding"
-                        android:layout_marginRight="@dimen/header_padding"
+                        android:layout_marginEnd="@dimen/widget_margin"
+                        android:layout_marginRight="@dimen/widget_margin"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:shadowColor="@android:color/black"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/account_arrow"
                         android:shadowDx="0.5"
                         android:shadowDy="0"
                         android:shadowRadius="2"
                         android:textColor="@android:color/white"
                         android:textSize="12sp"
-                        tools:text="user@nextcloud.example.com"/>
+                        tools:text="user@nextcloud.example.comuser@nextcloud.example.comuser@nextcloud.example.com"
+                        android:layout_alignParentLeft="true"
+                        android:layout_toLeftOf="@id/account_arrow" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/account_arrow"
                         app:srcCompat="@drawable/ic_arrow_drop_down_white_24dp"
-                        android:layout_alignEnd="@+id/account"
-                        android:layout_alignRight="@+id/account"
-                        android:layout_alignBottom="@+id/account" />
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignBottom="@+id/account"
+                        android:layout_marginEnd="@dimen/header_padding"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/header_padding" />
                 </RelativeLayout>
 
                 <LinearLayout
