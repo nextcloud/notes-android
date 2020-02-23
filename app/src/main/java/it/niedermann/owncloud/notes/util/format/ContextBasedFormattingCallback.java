@@ -46,7 +46,7 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
                 }
             }
             String line = text.subSequence(startOfLine, endOfLine).toString();
-            if (MarkDownUtil.lineStartsWithCheckbox(line, true) || MarkDownUtil.lineStartsWithCheckbox(line, false)) {
+            if (MarkDownUtil.lineStartsWithCheckbox(line)) {
                 menu.findItem(R.id.checkbox).setVisible(false);
                 Log.i(TAG, "Hide checkbox menu item because line starts already with checkbox");
             }
