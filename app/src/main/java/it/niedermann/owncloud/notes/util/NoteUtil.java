@@ -13,6 +13,7 @@ import it.niedermann.owncloud.notes.R;
  * Provides basic functionality for Note operations.
  * Created by stefan on 06.10.15.
  */
+@SuppressWarnings("WeakerAccess")
 public class NoteUtil {
 
     private static final Pattern pLists = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
@@ -58,7 +59,7 @@ public class NoteUtil {
      * @param line String - a single Line which ends with \n
      * @return boolean isEmpty
      */
-    private static boolean isEmptyLine(@Nullable String line) {
+    public static boolean isEmptyLine(@Nullable String line) {
         return removeMarkDown(line).trim().length() == 0;
     }
 
@@ -117,7 +118,7 @@ public class NoteUtil {
      * @return lineContent String
      */
     @NonNull
-    private static String getLineWithoutMarkDown(@NonNull String content, int lineNumber) {
+    public static String getLineWithoutMarkDown(@NonNull String content, int lineNumber) {
         String line = "";
         if (content.contains("\n")) {
             String[] lines = content.split("\n");

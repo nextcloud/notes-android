@@ -24,7 +24,7 @@ public class NoteLinksUtilsTest {
 
     @Test
     public void doNotChangeOtherMarkdownElements() {
-        //language=TEXT
+        //language=md
         String markdown = "\n" +
                 "# heading  \n" +
                 "  \n" +
