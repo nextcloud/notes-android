@@ -12,8 +12,10 @@ import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
+import it.niedermann.owncloud.notes.util.Notes;
 
 public class SingleNoteWidget extends AppWidgetProvider {
 
@@ -32,7 +34,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 return;
             }
 
-            boolean darkTheme = sp.getBoolean(DARK_THEME_KEY + appWidgetId, false);
+            String darkThemeName = sp.getString(DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
+            DarkModeSetting darkTheme = DarkModeSetting.valueOf(darkThemeName);
             templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, sp.getLong(ACCOUNT_ID_KEY + appWidgetId, -1));
 
             PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
@@ -44,7 +47,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
             RemoteViews views;
 
-            if (darkTheme) {
+            if (Notes.isDarkThemeActive(context, darkTheme)) {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_dark);
                 views.setPendingIntentTemplate(R.id.single_note_widget_lv_dark, templatePendingIntent);
                 views.setRemoteAdapter(R.id.single_note_widget_lv_dark, serviceIntent);

@@ -13,8 +13,10 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
+import it.niedermann.owncloud.notes.util.Notes;
 
 public class NoteListWidget extends AppWidgetProvider {
     private static final String TAG = NoteListWidget.class.getSimpleName();
@@ -28,7 +30,7 @@ public class NoteListWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         RemoteViews views;
-        boolean darkTheme;
+        String darkTheme;
 
         for (int appWidgetId : appWidgetIds) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -40,7 +42,7 @@ public class NoteListWidget extends AppWidgetProvider {
             }
 
             String category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, null);
-            darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
+            darkTheme = sp.getString(NoteListWidget.DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
 
             Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -70,7 +72,7 @@ public class NoteListWidget extends AppWidgetProvider {
                     (new Intent(context, EditNoteActivity.class)),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-            if (darkTheme) {
+            if (Notes.isDarkThemeActive(context, DarkModeSetting.valueOf(darkTheme))) {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list_dark);
                 views.setTextViewText(R.id.widget_note_list_title_tv_dark, getWidgetTitle(context, displayMode, category));
                 views.setOnClickPendingIntent(R.id.widget_note_header_icon_dark, openAppI);

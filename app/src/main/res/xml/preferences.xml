@@ -11,8 +11,11 @@
         android:summary="%s"
         android:title="@string/settings_note_mode" />
 
-    <SwitchPreference
-        android:defaultValue="@string/pref_value_theme_light"
+    <ListPreference
+        android:defaultValue="@string/pref_value_theme_system_default"
+        android:entries="@array/darkmode_entries"
+        android:entryValues="@array/darkMode_values"
+        android:summary="%s"
         android:icon="@drawable/ic_brightness_2_grey_24dp"
         android:key="@string/pref_key_theme"
         android:layout="@layout/item_pref"

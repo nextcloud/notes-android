@@ -14,10 +14,12 @@ import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.Notes;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
@@ -28,7 +30,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private NoteSQLiteOpenHelper db;
     private DBNote note;
     private final SharedPreferences sp;
-    private static Boolean darkTheme;
+    private static boolean darkModeActive;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
@@ -37,10 +39,11 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                                          AppWidgetManager.INVALID_APPWIDGET_ID);
         sp = PreferenceManager.getDefaultSharedPreferences(this.context);
-        darkTheme = sp.getBoolean(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, false);
+        String themeName = sp.getString(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
+        darkModeActive = Notes.isDarkThemeActive(context, DarkModeSetting.valueOf(themeName));
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
-        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkTheme).build());
+        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkModeActive).build());
     }
 
     @Override
@@ -101,7 +104,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
         fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        if (darkTheme) {
+        if (darkModeActive) {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
             note_content.setTextViewText(R.id.single_note_content_tv_dark, markdownProcessor.parse(note.getContent()));

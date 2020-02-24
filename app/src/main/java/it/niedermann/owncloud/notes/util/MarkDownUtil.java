@@ -36,7 +36,7 @@ public class MarkDownUtil {
      * @return RxMDConfiguration
      */
     public static Builder getMarkDownConfiguration(Context context) {
-        return getMarkDownConfiguration(context, Notes.getAppTheme(context));
+        return getMarkDownConfiguration(context, Notes.isDarkThemeActive(context));
     }
 
     public static Builder getMarkDownConfiguration(Context context, Boolean darkTheme) {
