@@ -48,7 +48,7 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_choose_account, null);
+        View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_choose_account, null);
         ButterKnife.bind(this, view);
 
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
@@ -67,7 +67,7 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        Objects.requireNonNull(requireDialog().getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

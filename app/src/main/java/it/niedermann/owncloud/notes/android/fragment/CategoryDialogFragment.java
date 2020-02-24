@@ -87,7 +87,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View dialogView = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_change_category, null);
+        View dialogView = requireActivity().getLayoutInflater().inflate(R.layout.dialog_change_category, null);
         ButterKnife.bind(this, dialogView);
 
         if (savedInstanceState == null) {
@@ -98,7 +98,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
             editCategory.setText(savedInstanceState.getString(STATE_CATEGORY));
         }
 
-        adapter = new CategoryAdapter(Objects.requireNonNull(getContext()), new CategoryAdapter.CategoryListener() {
+        adapter = new CategoryAdapter(requireContext(), new CategoryAdapter.CategoryListener() {
             @Override
             public void onCategoryChosen(String category) {
                 listener.onCategoryChosen(category);

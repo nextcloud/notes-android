@@ -148,7 +148,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
 
-        if (isRequestPinShortcutSupported(Objects.requireNonNull(getActivity())) && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (isRequestPinShortcutSupported(requireActivity()) && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
     }
@@ -214,7 +214,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 return false;
             case MENU_ID_PIN:
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    ShortcutManager shortcutManager = Objects.requireNonNull(getActivity()).getSystemService(ShortcutManager.class);
+                    ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
 
                     if (shortcutManager.isRequestPinShortcutSupported()) {
                         Intent intent = new Intent(getActivity(), EditNoteActivity.class);
