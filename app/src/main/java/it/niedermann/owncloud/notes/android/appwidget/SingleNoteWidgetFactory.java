@@ -30,7 +30,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private NoteSQLiteOpenHelper db;
     private DBNote note;
     private final SharedPreferences sp;
-    private static boolean darkModeActive;
+    private boolean darkModeActive;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
