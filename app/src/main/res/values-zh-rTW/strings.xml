@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">筆記</string>
+    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="label_all_notes">所有筆記</string>
+    <string name="label_favorites">我的最愛</string>
+    <string name="action_create">新筆記</string>
+    <string name="action_settings">設定</string>
+    <string name="action_trashbin">已刪除筆記</string>
+    <string name="action_search">搜尋</string>
+    <string name="simple_cancel">取消</string>
+    <string name="simple_edit">修改</string>
+    <string name="action_edit_save">儲存</string>
+    <string name="simple_about">關於</string>
+    <string name="simple_bold">粗體</string>
+    <string name="simple_link">連結</string>
+    <string name="simple_italic">斜體</string>
+    <string name="action_note_deleted">已刪除 %1$s</string>
+    <string name="action_note_restored">已還原 %1$s</string>
+    <string name="action_undo">上一步</string>
+    <string name="action_drawer_open">開啟導覽列</string>
+    <string name="action_drawer_close">關閉導覽列</string>
+    <string name="action_uncategorized">未分類</string>
+    <string name="menu_delete">刪除</string>
+    <string name="menu_change_category">分類</string>
+    <string name="menu_favorite">我的最愛</string>
+    <string name="menu_preview">預覽</string>
+    <string name="menu_share">分享</string>
+
+    <string name="change_category_title">選一個分類</string>
+
+    <string name="listview_updated_today">今日</string>
+    <string name="listview_updated_yesterday">昨日</string>
+    <string name="listview_updated_this_week">這星期</string>
+    <string name="listview_updated_last_week">上星期</string>
+    <string name="listview_updated_this_month">這個月</string>
+    <string name="listview_updated_last_month">上個月</string>
+
+    <!-- Settings -->
+    <string name="settings_note_mode">筆記顯示模式</string>
+    <string name="settings_theme_title">暗色主題</string>
+    <string name="settings_font_title">等寬</string>
+    <string name="settings_font_size">字體大小</string>
+    <string name="settings_wifi_only">只在有 Wi-Fi 時同步</string>
+    <string name="settings_background_sync">背景同步</string>
+
+    <!-- Certificates -->
+
+    <!-- Network -->
+
+    <!-- Error -->
+    <string name="error_sync">同步失敗：%1$s</string>
+    <string name="error_json">請看看 Notes App 是不是已經在伺服器上啟用了？</string>
+    <string name="error_no_network">沒有網路連線</string>
+    <string name="error_files_app">你有安裝 Files App 了嗎？</string>
+    <string name="error_unknown">發生未知錯誤。</string>
+    <string name="error_insufficient_storage">伺服器儲存空間已滿。</string>
+
+    <!-- About -->
+    <string name="about_version_title">版本</string>
+    <string name="about_version">您目前正在使用 &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">維護者</string>
+    <string name="about_developers_title">開發者</string>
+    <string name="about_translators_title">翻譯者</string>
+    <string name="about_translators_transifex">&lt;a href=\"%1$s\">Transifex&lt;/a> 上的 Nextcloud 社群</string>
+    <string name="about_testers_title">測試人員</string>
+    <string name="about_source_title">原始碼</string>
+    <string name="about_source">此專案寄存在 GitHub 上：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">問題</string>
+    <string name="about_issues">您可以在 GitHub 問題回報系統回報臭蟲、改善建議及功能需求：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">翻譯</string>
+    <string name="about_translate">歡迎加入 Transifex 的 Nextcloud 團隊並協助翻譯此 App：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">程式授權條款</string>
+    <string name="about_app_license">此程式依照 GNU GENERAL PUBLIC LICENSE v3+ 方式授權使用</string>
+    <string name="about_app_license_button">檢視授權條款</string>
+    <string name="about_icons_disclaimer_title">圖示</string>
+    <string name="about_icons_disclaimer">&lt;p>原創圖示由 %1$s 製作&lt;/p>&lt;p>其他 App 使用的圖示均為 Google Inc. 製作的 &lt;a href=\"https://materialdesignicons.com/\">Material Design 圖示&lt;/a>，並依 Apache 2.0 條款授權。&lt;/p></string>
+    <string name="about_credits_tab_title">致謝</string>
+    <string name="about_contribution_tab_title">貢獻</string>
+    <string name="about_license_tab_title">授權條款</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">筆記清單</string>
+    <string name="widget_note_list_placeholder">沒有筆記</string>
+    <string name="widget_single_note_title">單則筆記</string>
+    <string name="widget_single_note_placeholder_tv">找不到筆記</string>
+    <string name="widget_create_note">建立筆記</string>
+    <string name="widget_not_logged_in">在使用此小工具之前，請先登入到 Notes</string>
+    <string name="widget_entry_fav_contentDescription">星星圖示用來標示某則筆記在「我的最愛」中。</string>
+    <string name="widget_app_launcher_contentDescription">啟動 App</string>
+
+    <string name="activity_select_single_note">選擇筆記</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">建立新筆記</string>
+
+    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <string name="pref_value_theme_light">亮色</string>
+    <string name="pref_value_font_normal">一般</string>
+    <string name="pref_value_wifi_and_mobile">在使用 Wi-Fi 及行動網路時同步</string>
+
+    <string name="simple_error">錯誤</string>
+    <string name="simple_close">關閉</string>
+    <string name="simple_copy">複製</string>
+    <string name="simple_exception">例外</string>
+    <string name="copied_to_clipboard">已複製至剪貼簿</string>
+    <string name="pin_to_homescreen">釘選至主畫面</string>
+    <string name="note_has_been_deleted">此則筆記已被刪除</string>
+    <string name="add_account">新增帳戶</string>
+    <string name="category_music">音樂</string>
+    <string name="category_movies">電影</string>
+    <string name="category_movie">電影</string>
+    <string name="category_work">工作</string>
+    <string name="account_already_imported">已成功匯入帳戶</string>
+    <string name="no_notes_yet">尚沒有筆記</string>
+    <string name="no_notes_yet_description">請按 + 按鈕建立新筆記</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">無法載入預覽。請檢查是否有 2 位數，沒有內容的數字清單。</string>
+    <string name="simple_more">更多</string>
+    <string name="simple_move">移動</string>
+    <string name="error_files_app_version_too_old">您的 Files App 版本是否已更新至最新版？</string>
+    <string name="checkbox_could_not_be_toggled">無法切換核取方塊。</string>
+    <string name="bulk_notes_deleted">已刪除 %1$d 則筆記</string>
+    <string name="bulk_notes_restored">已還原 %1$d 則筆記</string>
+    <string name="category_readonly">唯讀</string>
+    <string name="no_category">沒有分類</string>
+    <string name="add_category">新增%1$s</string>
+    <string name="simple_checkbox">核取方塊</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>以編輯模式開啟</item>
+        <item>以預覽模式開啟</item>
+        <item>記住上次選擇</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>小</item>
+        <item>中</item>
+        <item>大</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>關閉</item>
+        <item>15 分鐘</item>
+        <item>1 小時</item>
+        <item>6 小時</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="other">已選擇 %d 則</item>
+    </plurals>
+</resources>

@@ -112,7 +112,6 @@
     <string name="simple_move">移動</string>
     <string name="category_readonly">読み込み専用</string>
     <string name="add_category">%1$s を追加</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>

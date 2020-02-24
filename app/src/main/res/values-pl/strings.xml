@@ -125,7 +125,6 @@
     <string name="category_readonly">Tylko do odczytu</string>
     <string name="no_category">Bez kategorii</string>
     <string name="add_category">Dodaj %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otwórz w trybie edycji</item>

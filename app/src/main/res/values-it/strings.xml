@@ -125,7 +125,6 @@
     <string name="category_readonly">Sola lettura</string>
     <string name="no_category">Nessuna categoria</string>
     <string name="add_category">Aggiungi %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Apri in modalità modifica</item>

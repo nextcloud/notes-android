@@ -119,7 +119,6 @@
     <string name="bulk_notes_restored">%1$d ohar leheneratu dira</string>
     <string name="category_readonly">Irakurtzeko soilik</string>
     <string name="add_category">Gehitu %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>

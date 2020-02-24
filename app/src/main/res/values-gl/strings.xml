@@ -125,7 +125,6 @@
     <string name="category_readonly">Só lectura</string>
     <string name="no_category">Sen categoría</string>
     <string name="add_category">Engadir %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>

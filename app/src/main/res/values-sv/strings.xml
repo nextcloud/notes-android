@@ -125,7 +125,6 @@
     <string name="category_readonly">Läsbehörighet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Lägg till %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>

@@ -120,7 +120,6 @@
     <string name="category_readonly">Només de lectura</string>
     <string name="no_category">Sense categoria</string>
     <string name="add_category">Afegeix %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Obre en mode d\'edició</item>
