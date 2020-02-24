@@ -21,10 +21,10 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final Context context;
     private final int displayMode;
     private final boolean darkTheme;
-    private String category;
+    private final String category;
+    private final long accountId;
     private NoteSQLiteOpenHelper db;
     private List<DBNote> dbNotes;
-    private long accountId;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;

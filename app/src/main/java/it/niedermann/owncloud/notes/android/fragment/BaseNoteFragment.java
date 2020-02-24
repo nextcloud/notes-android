@@ -26,8 +26,6 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.util.Objects;
-
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.CategoryDialogListener;
@@ -69,23 +67,23 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getActivity().getApplicationContext());
+            this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
             this.localAccount = db.getLocalAccountByAccountName(ssoAccount.name);
 
             if (savedInstanceState == null) {
-                long id = getArguments().getLong(PARAM_NOTE_ID);
+                long id = requireArguments().getLong(PARAM_NOTE_ID);
                 if (id > 0) {
-                    long accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
+                    long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
                     if (accountId > 0) {
                         /* Switch account if account id has been provided */
                         this.localAccount = db.getAccount(accountId);
-                        SingleAccountHelper.setCurrentAccount(getActivity().getApplicationContext(), localAccount.getAccountName());
+                        SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccount.getAccountName());
                     }
                     isNew = false;
                     note = originalNote = db.getNote(localAccount.getId(), id);
                 } else {
-                    CloudNote cloudNote = (CloudNote) getArguments().getSerializable(PARAM_NEWNOTE);
-                    String content = getArguments().getString(PARAM_CONTENT);
+                    CloudNote cloudNote = (CloudNote) requireArguments().getSerializable(PARAM_NEWNOTE);
+                    String content = requireArguments().getString(PARAM_CONTENT);
                     if (cloudNote == null) {
                         if (content == null) {
                             throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
@@ -194,7 +192,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 showCategorySelector();
                 return true;
             case R.id.menu_move:
-                AccountChooserDialogFragment.newInstance().show(Objects.requireNonNull(getFragmentManager()), BaseNoteFragment.class.getCanonicalName());
+                AccountChooserDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getCanonicalName());
                 return true;
             case R.id.menu_share:
                 Intent shareIntent = new Intent();
@@ -216,25 +214,31 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
 
-                    if (shortcutManager.isRequestPinShortcutSupported()) {
-                        Intent intent = new Intent(getActivity(), EditNoteActivity.class);
-                        intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-                        intent.setAction(ACTION_SHORTCUT);
+                    if(shortcutManager != null) {
+                        if (shortcutManager.isRequestPinShortcutSupported()) {
+                            Intent intent = new Intent(getActivity(), EditNoteActivity.class);
+                            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                            intent.setAction(ACTION_SHORTCUT);
 
-                        ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
-                                .setShortLabel(note.getTitle())
-                                .setIcon(Icon.createWithResource(getActivity().getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                .setIntent(intent)
-                                .build();
+                            ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
+                                    .setShortLabel(note.getTitle())
+                                    .setIcon(Icon.createWithResource(requireActivity().getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                    .setIntent(intent)
+                                    .build();
 
-                        Intent pinnedShortcutCallbackIntent =
-                                shortcutManager.createShortcutResultIntent(pinShortcutInfo);
+                            Intent pinnedShortcutCallbackIntent =
+                                    shortcutManager.createShortcutResultIntent(pinShortcutInfo);
 
-                        PendingIntent successCallback = PendingIntent.getBroadcast(getActivity(), /* request code */ 0,
-                                pinnedShortcutCallbackIntent, /* flags */ 0);
+                            PendingIntent successCallback = PendingIntent.getBroadcast(getActivity(), /* request code */ 0,
+                                    pinnedShortcutCallbackIntent, /* flags */ 0);
 
-                        shortcutManager.requestPinShortcut(pinShortcutInfo,
-                                successCallback.getIntentSender());
+                            shortcutManager.requestPinShortcut(pinShortcutInfo,
+                                    successCallback.getIntentSender());
+                        } else {
+                            Log.i(TAG, "RequestPinShortcut is not supported");
+                        }
+                    } else {
+                        Log.e(TAG, "ShortcutManager is null");
                     }
                 }
 
@@ -292,7 +296,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
      */
     private void showCategorySelector() {
         final String fragmentId = "fragment_category";
-        FragmentManager manager = Objects.requireNonNull(getFragmentManager());
+        FragmentManager manager = requireActivity().getSupportFragmentManager();
         Fragment frag = manager.findFragmentByTag(fragmentId);
         if (frag != null) {
             manager.beginTransaction().remove(frag).commit();

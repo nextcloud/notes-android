@@ -48,16 +48,16 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_choose_account, null);
+        View view = View.inflate(getContext(), R.layout.dialog_choose_account, null);
         ButterKnife.bind(this, view);
 
         NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
         List<LocalAccount> accountsList = db.getAccounts();
 
-        RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, getActivity());
+        RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, requireActivity());
         accountRecyclerView.setAdapter(adapter);
 
-        return new AlertDialog.Builder(getActivity())
+        return new AlertDialog.Builder(requireActivity())
                 .setView(view)
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null)

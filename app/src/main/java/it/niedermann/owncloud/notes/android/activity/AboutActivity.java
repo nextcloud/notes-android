@@ -44,7 +44,7 @@ public class AboutActivity extends AppCompatActivity {
     private class TabsPagerAdapter extends FragmentPagerAdapter {
 
         TabsPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
+            super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override

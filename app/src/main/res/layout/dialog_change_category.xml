@@ -16,6 +16,7 @@
             android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/change_category_title"
             android:importantForAutofill="no"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>

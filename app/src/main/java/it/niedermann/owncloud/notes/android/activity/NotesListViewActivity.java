@@ -142,7 +142,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private ActionMode mActionMode;
     private NoteSQLiteOpenHelper db = null;
     private SearchView searchView = null;
-    private ISyncCallback syncCallBack = () -> {
+    private final ISyncCallback syncCallBack = () -> {
         adapter.clearSelection(listView);
         if (mActionMode != null) {
             mActionMode.finish();
@@ -262,7 +262,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private void setupHeader() {
         accountChooser.removeAllViews();
         for (LocalAccount localAccount : db.getAccounts()) {
-            View v = getLayoutInflater().inflate(R.layout.item_account, null);
+            View v = View.inflate(this, R.layout.item_account, null);
             ((TextView) v.findViewById(R.id.accountItemLabel)).setText(localAccount.getAccountName());
             Glide
                     .with(this)
@@ -293,7 +293,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             });
             accountChooser.addView(v);
         }
-        View addButton = getLayoutInflater().inflate(R.layout.item_account, null);
+        View addButton = View.inflate(this, R.layout.item_account, null);
         ((TextView) addButton.findViewById(R.id.accountItemLabel)).setText(getString(R.string.add_account));
         ((AppCompatImageView) addButton.findViewById(R.id.accountItemAvatar)).setImageResource(R.drawable.ic_person_add_grey600_24dp);
         addButton.setOnClickListener((btn) -> askForNewAccount(this));

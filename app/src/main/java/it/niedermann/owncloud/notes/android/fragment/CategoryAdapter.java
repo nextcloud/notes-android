@@ -28,8 +28,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @NonNull
     private List<NavigationItem> categories = new ArrayList<>();
     @NonNull
-    private CategoryListener listener;
-    private Context context;
+    private final CategoryListener listener;
+    private final Context context;
 
     CategoryAdapter(@NonNull Context context, @NonNull CategoryListener categoryListener) {
         this.context = context;

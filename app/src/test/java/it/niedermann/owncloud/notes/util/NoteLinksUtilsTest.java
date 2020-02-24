@@ -40,6 +40,7 @@ public class NoteLinksUtilsTest extends TestCase {
         Assert.assertEquals(markdown, NoteLinksUtils.replaceNoteLinksWithDummyUrls(markdown, Collections.emptySet()));
     }
 
+    @SuppressWarnings("MarkdownUnresolvedFileReference")
     public void testDoNotReplaceNormalLinks() {
         //language=md
         String markdown = "[normal link](https://example.com) and another [note link](123456)";

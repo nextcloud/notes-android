@@ -88,8 +88,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static NoteSQLiteOpenHelper instance;
 
-    private NoteServerSyncHelper serverSyncHelper;
-    private Context context;
+    private final NoteServerSyncHelper serverSyncHelper;
+    private final Context context;
 
     private NoteSQLiteOpenHelper(Context context) {
         super(context, database_name, null, database_version);
@@ -115,12 +115,12 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        createAccountTable(db, table_accounts);
-        createNotesTable(db, table_notes);
+        createAccountTable(db);
+        createNotesTable(db);
     }
 
-    private void createNotesTable(@NonNull SQLiteDatabase db, @NonNull String tableName) {
-        db.execSQL("CREATE TABLE " + tableName + " ( " +
+    private void createNotesTable(@NonNull SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + table_notes + " ( " +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_remote_id + " INTEGER, " +
                 key_account_id + " INTEGER, " +
@@ -136,8 +136,8 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         createNotesIndexes(db);
     }
 
-    private void createAccountTable(@NonNull SQLiteDatabase db, @NonNull String tableName) {
-        db.execSQL("CREATE TABLE " + tableName + " ( " +
+    private void createAccountTable(@NonNull SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + table_accounts + " ( " +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_url + " TEXT, " +
                 key_username + " TEXT, " +
@@ -147,6 +147,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         createAccountIndexes(db);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 3) {
@@ -191,7 +192,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         }
         if (oldVersion < 9) {
             // Create accounts table
-            createAccountTable(db, table_accounts);
+            createAccountTable(db);
 
             // Add accountId to notes table
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_account_id + " INTEGER NOT NULL DEFAULT 0");

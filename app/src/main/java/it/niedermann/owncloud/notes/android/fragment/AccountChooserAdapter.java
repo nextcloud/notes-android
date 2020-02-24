@@ -25,11 +25,11 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @NonNull
-    private List<LocalAccount> localAccounts;
+    private final List<LocalAccount> localAccounts;
     @NonNull
-    private AccountChooserListener accountChooserListener;
+    private final AccountChooserListener accountChooserListener;
     @NonNull
-    private Context context;
+    private final Context context;
 
     AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull AccountChooserListener accountChooserListener, @NonNull Context context) {
         super();
@@ -49,9 +49,7 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         LocalAccount localAccount = localAccounts.get(position);
         AccountChooserViewHolder accountChooserViewHolder = (AccountChooserViewHolder) holder;
-        accountChooserViewHolder.accountLayout.setOnClickListener((v) -> {
-            accountChooserListener.onAccountChosen(localAccount);
-        });
+        accountChooserViewHolder.accountLayout.setOnClickListener((v) -> accountChooserListener.onAccountChosen(localAccount));
 
         Glide
                 .with(context)

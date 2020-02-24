@@ -107,7 +107,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
     private List<NavigationItem> items = new ArrayList<>();
     private String selectedItem = null;
     @NonNull
-    private ClickListener clickListener;
+    private final ClickListener clickListener;
 
     public NavigationAdapter(@NonNull ClickListener clickListener) {
         this.clickListener = clickListener;

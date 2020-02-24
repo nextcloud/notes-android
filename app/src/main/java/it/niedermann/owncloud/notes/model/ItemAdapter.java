@@ -29,7 +29,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final NoteClickListener noteClickListener;
     private List<Item> itemList;
     private boolean showCategory = true;
-    private List<Integer> selected;
+    private final List<Integer> selected;
 
     public ItemAdapter(@NonNull NoteClickListener noteClickListener) {
         this.itemList = new ArrayList<>();
@@ -170,10 +170,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
         @BindView(R.id.noteSwipeable)
         public View noteSwipeable;
-        View noteSwipeFrame;
-        ImageView noteFavoriteLeft;
-        ImageView noteDeleteRight;
-        TextView noteTitle;
+        final View noteSwipeFrame;
+        final ImageView noteFavoriteLeft;
+        final ImageView noteDeleteRight;
+        final TextView noteTitle;
         @BindView(R.id.noteCategory)
         TextView noteCategory;
         @BindView(R.id.noteExcerpt)

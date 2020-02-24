@@ -21,13 +21,13 @@ import it.niedermann.owncloud.notes.util.MarkDownUtil;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    private MarkdownProcessor markdownProcessor;
+    private final MarkdownProcessor markdownProcessor;
     private final Context context;
     private final int appWidgetId;
 
     private NoteSQLiteOpenHelper db;
     private DBNote note;
-    private SharedPreferences sp;
+    private final SharedPreferences sp;
     private static Boolean darkTheme;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();

@@ -21,7 +21,7 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
 
     private static final String TAG = ContextBasedFormattingCallback.class.getCanonicalName();
 
-    private EditText editText;
+    private final EditText editText;
 
     public ContextBasedFormattingCallback(EditText editText) {
         this.editText = editText;
