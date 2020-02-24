@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.util;
 import androidx.annotation.VisibleForTesting;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -95,12 +96,8 @@ public class NoteLinksUtils {
      * @see String#join(CharSequence, Iterable)
      */
     private static String join(CharSequence delimiter, Iterable<String> elements) {
-        if (delimiter == null) {
-            throw new NullPointerException("Parameter delimiter must not be null");
-        }
-        if (elements == null) {
-            throw new NullPointerException("Parameter elements must not be bull");
-        }
+        Objects.requireNonNull(delimiter);
+        Objects.requireNonNull(elements);
 
         StringBuilder builder = new StringBuilder();
         for (String item : elements) {
