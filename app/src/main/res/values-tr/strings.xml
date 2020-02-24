@@ -125,7 +125,6 @@
     <string name="category_readonly">Salt okunur</string>
     <string name="no_category">Kategori yok</string>
     <string name="add_category">%1$s ekle</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>

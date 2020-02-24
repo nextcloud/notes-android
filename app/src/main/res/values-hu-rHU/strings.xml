@@ -125,7 +125,6 @@
     <string name="category_readonly">Csak olvasható</string>
     <string name="no_category">Nincs kategória</string>
     <string name="add_category">%1$s hozzáadása</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>

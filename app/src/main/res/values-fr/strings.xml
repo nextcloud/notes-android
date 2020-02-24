@@ -125,6 +125,7 @@
     <string name="category_readonly">Lecture seule</string>
     <string name="no_category">Sans catégorie</string>
     <string name="add_category">Ajouter %1$s</string>
+    <string name="simple_checkbox">Case à cocher</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

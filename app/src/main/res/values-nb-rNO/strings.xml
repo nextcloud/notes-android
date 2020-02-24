@@ -106,6 +106,8 @@
     <string name="simple_more">Mer</string>
     <string name="simple_move">Flytt</string>
     <string name="category_readonly">Skrivebeskyttet</string>
+    <string name="simple_checkbox">Avkryssningsboks</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åpne i redigeringsmodus</item>

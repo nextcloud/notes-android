@@ -125,7 +125,6 @@
     <string name="category_readonly">فقط خواندنی</string>
     <string name="no_category">بدون دسته بندی</string>
     <string name="add_category">افزودن%1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>در حالت ویرایش باز کنید</item>
