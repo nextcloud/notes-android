@@ -18,9 +18,9 @@ public class NoteLinksUtils {
     /**
      * Replaces all links to other notes of the form `[<link-text>](<note-file-id>)`
      * in the markdown string with links to a dummy url.
-     * <p>
+     *
      * Why is this needed?
-     * See discussion in issue #623
+     *  See discussion in issue #623
      *
      * @return Markdown with all note-links replaced with dummy-url-links
      */
@@ -37,7 +37,6 @@ public class NoteLinksUtils {
         }
 
         String noteRemoteIdsCondition = join("|", noteRemoteIdsToReplace);
-
         Pattern replacePattern = Pattern.compile(String.format(replaceNoteRemoteIdsRegEx, noteRemoteIdsCondition));
         Matcher replaceMatcher = replacePattern.matcher(markdown);
         return replaceMatcher.replaceAll(String.format("[$1](%s$2)", RELATIVE_LINK_WORKAROUND_PREFIX));
