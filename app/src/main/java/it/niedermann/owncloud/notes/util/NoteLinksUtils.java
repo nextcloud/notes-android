@@ -1,9 +1,10 @@
 package it.niedermann.owncloud.notes.util;
 
+import android.text.TextUtils;
+
 import androidx.annotation.VisibleForTesting;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,7 +38,7 @@ public class NoteLinksUtils {
             }
         }
 
-        String noteRemoteIdsCondition = join("|", noteRemoteIdsToReplace);
+        String noteRemoteIdsCondition = TextUtils.join("|", noteRemoteIdsToReplace);
         Pattern replacePattern = Pattern.compile(String.format(replaceNoteRemoteIdsRegEx, noteRemoteIdsCondition));
         Matcher replaceMatcher = replacePattern.matcher(markdown);
         return replaceMatcher.replaceAll(String.format("[$1](%s$2)", RELATIVE_LINK_WORKAROUND_PREFIX));
@@ -61,52 +62,5 @@ public class NoteLinksUtils {
      */
     public static long extractNoteRemoteId(String link) {
         return Long.parseLong(link.replace(RELATIVE_LINK_WORKAROUND_PREFIX, ""));
-    }
-
-    /**
-     * Returns a new {@code String} composed of copies of the
-     * {@code CharSequence elements} joined together with a copy of the
-     * specified {@code delimiter}.
-     *
-     * <blockquote>For example,
-     * <pre>{@code
-     *     List<String> strings = new LinkedList<>();
-     *     strings.add("Java");strings.add("is");
-     *     strings.add("cool");
-     *     String message = String.join(" ", strings);
-     *     //message returned is: "Java is cool"
-     *
-     *     Set<String> strings = new LinkedHashSet<>();
-     *     strings.add("Java"); strings.add("is");
-     *     strings.add("very"); strings.add("cool");
-     *     String message = String.join("-", strings);
-     *     //message returned is: "Java-is-very-cool"
-     * }</pre></blockquote>
-     * <p>
-     * Note that if an individual element is {@code null}, then {@code "null"} is added.
-     *
-     * @param delimiter a sequence of characters that is used to separate each
-     *                  of the {@code elements} in the resulting {@code String}
-     * @param elements  an {@code Iterable} that will have its {@code elements}
-     *                  joined together.
-     * @return a new {@code String} that is composed from the {@code elements}
-     * argument
-     * @throws NullPointerException If {@code delimiter} or {@code elements}
-     *                              is {@code null}
-     * @see String#join(CharSequence, Iterable)
-     */
-    private static String join(CharSequence delimiter, Iterable<String> elements) {
-        Objects.requireNonNull(delimiter);
-        Objects.requireNonNull(elements);
-
-        StringBuilder builder = new StringBuilder();
-        for (String item : elements) {
-            builder.append(item);
-            builder.append(delimiter);
-        }
-        if (builder.length() > 0) {
-            builder.deleteCharAt(builder.length() - 1);
-        }
-        return builder.toString();
     }
 }
