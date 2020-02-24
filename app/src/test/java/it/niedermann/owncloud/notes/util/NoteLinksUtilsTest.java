@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.util;
 
-import androidx.test.filters.SmallTest;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import java.util.Set;
 import static it.niedermann.owncloud.notes.util.NoteLinksUtils.RELATIVE_LINK_WORKAROUND_PREFIX;
 
 
-@SmallTest
 public class NoteLinksUtilsTest {
 
     @Test
