@@ -73,15 +73,15 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             binding = ItemAccountChooseBinding.bind(view);
         }
 
-        LinearLayout getAccountLayout() {
+        private LinearLayout getAccountLayout() {
             return binding.accountLayout;
         }
 
-        ImageView getAvatar() {
+        private ImageView getAvatar() {
             return binding.accountItemAvatar;
         }
 
-        TextView getUsername() {
+        private TextView getUsername() {
             return binding.accountItemLabel;
         }
     }
