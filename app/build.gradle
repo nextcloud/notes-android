@@ -27,6 +27,10 @@ android {
         disable 'MissingTranslation'
         abortOnError false
     }
+
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
