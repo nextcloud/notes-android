@@ -101,7 +101,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private CoordinatorLayout coordinatorLayout;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private FloatingActionButton fabCreate;
+    protected FloatingActionButton fabCreate;
     private RecyclerView listView;
 
     protected ItemAdapter adapter = null;
