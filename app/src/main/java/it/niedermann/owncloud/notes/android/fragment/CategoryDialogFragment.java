@@ -16,13 +16,11 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 
@@ -38,6 +36,8 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
 
     private NoteSQLiteOpenHelper db;
     private CategoryDialogListener listener;
+
+    private EditText editCategory;
 
     /**
      * Interface that must be implemented by the calling Activity.
@@ -55,12 +55,6 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     static final String PARAM_CATEGORY = "category";
 
     private long accountId;
-
-    @BindView(R.id.search)
-    EditText editCategory;
-
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
 
     private CategoryAdapter adapter;
 
@@ -87,7 +81,8 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View dialogView = View.inflate(getContext(), R.layout.dialog_change_category, null);
-        ButterKnife.bind(this, dialogView);
+        DialogChangeCategoryBinding binding = DialogChangeCategoryBinding.bind(dialogView);
+        this.editCategory = binding.search;
 
         if (savedInstanceState == null) {
             if (requireArguments().containsKey(PARAM_CATEGORY)) {
@@ -117,7 +112,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
             }
         });
 
-        recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(adapter);
         new LoadCategoriesTask().execute("");
         editCategory.addTextChangedListener(new TextWatcher() {
             @Override
