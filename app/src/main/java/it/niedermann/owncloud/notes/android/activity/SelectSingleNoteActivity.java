@@ -9,6 +9,9 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.niedermann.nextcloud.exception.ExceptionHandler;
@@ -31,7 +34,8 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
 
         ButterKnife.bind(this);
         fabCreate.setVisibility(View.GONE);
-
+        Toolbar toolbar = binding.activityNotesListView.notesListActivityActionBar;
+        SwipeRefreshLayout swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         toolbar.setTitle(R.string.activity_select_single_note);
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setRefreshing(false);
