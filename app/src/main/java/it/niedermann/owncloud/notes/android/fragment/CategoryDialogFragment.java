@@ -16,7 +16,6 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -38,6 +37,8 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     private NoteSQLiteOpenHelper db;
     private CategoryDialogListener listener;
 
+    private EditText editCategory;
+
     /**
      * Interface that must be implemented by the calling Activity.
      */
@@ -54,9 +55,6 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     static final String PARAM_CATEGORY = "category";
 
     private long accountId;
-
-    private EditText editCategory;
-    private RecyclerView recyclerView;
 
     private CategoryAdapter adapter;
 
