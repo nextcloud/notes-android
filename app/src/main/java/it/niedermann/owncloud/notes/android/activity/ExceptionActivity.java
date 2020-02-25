@@ -11,9 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.R;
 
@@ -23,28 +20,30 @@ public class ExceptionActivity extends AppCompatActivity {
 
     Throwable throwable;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.message)
-    TextView message;
-    @BindView(R.id.stacktrace)
-    TextView stacktrace;
+    private TextView stacktrace;
 
     @SuppressLint("SetTextI18n") // only used for logging
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.activity_exception);
-        ButterKnife.bind(this);
         super.onCreate(savedInstanceState);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView message = findViewById(R.id.message);
+        stacktrace = findViewById(R.id.stacktrace);
+
+        findViewById(R.id.copy).setOnClickListener((v) -> copyStacktraceToClipboard());
+        findViewById(R.id.close).setOnClickListener((v) -> close());
+
         setSupportActionBar(toolbar);
         throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
         throwable.printStackTrace();
         toolbar.setTitle(getString(R.string.simple_error));
-        this.message.setText(throwable.getMessage());
-        this.stacktrace.setText(ExceptionUtil.getDebugInfos(this, throwable));
+        message.setText(throwable.getMessage());
+        stacktrace.setText(ExceptionUtil.getDebugInfos(this, throwable));
     }
 
-    @OnClick(R.id.copy)
+
     void copyStacktraceToClipboard() {
         final ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clipData = ClipData.newPlainText(getString(R.string.simple_exception), "```\n" + this.stacktrace.getText() + "\n```");
@@ -52,7 +51,6 @@ public class ExceptionActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick(R.id.close)
     void close() {
         finish();
     }
