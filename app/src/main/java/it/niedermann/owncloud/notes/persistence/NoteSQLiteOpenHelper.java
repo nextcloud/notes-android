@@ -297,7 +297,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             Map<String, ?> prefs = sharedPreferences.getAll();
             for (Map.Entry<String, ?> pref : prefs.entrySet()) {
                 String key = pref.getKey();
-                if (key.equals("darkTheme") || key.startsWith(NoteListWidget.DARK_THEME_KEY) || key.startsWith(SingleNoteWidget.DARK_THEME_KEY)) {
+                if ("darkTheme".equals(key) || key.startsWith(NoteListWidget.DARK_THEME_KEY) || key.startsWith(SingleNoteWidget.DARK_THEME_KEY)) {
                     Boolean darkTheme = (Boolean) pref.getValue();
                     editor.putString(pref.getKey(), darkTheme ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name());
                 }
