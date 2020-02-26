@@ -25,7 +25,13 @@ public class Notes extends Application {
 
     public static DarkModeSetting getAppTheme(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String mode = prefs.getString(DARK_THEME, DarkModeSetting.SYSTEM_DEFAULT.name());
+        String mode;
+        try {
+            mode = prefs.getString(DARK_THEME, DarkModeSetting.SYSTEM_DEFAULT.name());
+        } catch (ClassCastException e) {
+            boolean darkModeEnabled = prefs.getBoolean(DARK_THEME, false);
+            mode = darkModeEnabled ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name();
+        }
         return DarkModeSetting.valueOf(mode);
     }
 

@@ -34,12 +34,11 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 return;
             }
 
-            String darkThemeName = sp.getString(DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
-            DarkModeSetting darkTheme = DarkModeSetting.valueOf(darkThemeName);
+            DarkModeSetting darkTheme = getDarkThemeSetting(sp, appWidgetId);
             templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, sp.getLong(ACCOUNT_ID_KEY + appWidgetId, -1));
 
             PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
-                                                                            PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent.FLAG_UPDATE_CURRENT);
 
             Intent serviceIntent = new Intent(context, SingleNoteWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -76,7 +75,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
 
         updateAppWidget(context, AppWidgetManager.getInstance(context),
-                        (awm.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class))));
+                (awm.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class))));
     }
 
     @Override
@@ -92,5 +91,16 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         editor.apply();
         super.onDeleted(context, appWidgetIds);
+    }
+
+    public static DarkModeSetting getDarkThemeSetting(SharedPreferences sharedPreferences, int appWidgetId) {
+        try {
+            String themeName = sharedPreferences.getString(DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
+            return DarkModeSetting.valueOf(themeName);
+        } catch (ClassCastException e) {
+            //DARK_THEME was a boolean in older versions of the app. We thereofre have to still support the old setting.
+            boolean isDarkTheme = sharedPreferences.getBoolean(DARK_THEME_KEY + appWidgetId, false);
+            return isDarkTheme ? DarkModeSetting.DARK : DarkModeSetting.LIGHT;
+        }
     }
 }

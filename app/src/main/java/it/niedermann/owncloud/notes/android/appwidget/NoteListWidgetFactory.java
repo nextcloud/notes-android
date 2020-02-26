@@ -34,7 +34,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                 AppWidgetManager.INVALID_APPWIDGET_ID);
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.context);
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
-        String themeName = sp.getString(NoteListWidget.DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
+        String themeName = NoteListWidget.getDarkThemeSetting(sp, appWidgetId);
         DarkModeSetting theme = DarkModeSetting.valueOf(themeName);
         darkTheme = Notes.isDarkThemeActive(context, theme);
         category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");

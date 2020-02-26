@@ -42,7 +42,7 @@ public class NoteListWidget extends AppWidgetProvider {
             }
 
             String category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, null);
-            darkTheme = sp.getString(NoteListWidget.DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
+            darkTheme = getDarkThemeSetting(sp, appWidgetId);
 
             Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -157,5 +157,15 @@ public class NoteListWidget extends AppWidgetProvider {
         }
 
         return null;
+    }
+
+    public static String getDarkThemeSetting(SharedPreferences sharedPreferences, int appWidgetId) {
+        try {
+            return sharedPreferences.getString(DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
+        } catch (ClassCastException e) {
+            //DARK_THEME was a boolean in older versions of the app. We thereofre have to still support the old setting.
+            boolean isDarkTheme = sharedPreferences.getBoolean(DARK_THEME_KEY + appWidgetId, false);
+            return isDarkTheme ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name();
+        }
     }
 }

@@ -38,16 +38,17 @@ import java.util.Map;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
-import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
@@ -59,7 +60,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private static final String TAG = NoteSQLiteOpenHelper.class.getSimpleName();
 
-    private static final int database_version = 10;
+    private static final int database_version = 11;
 
     private static final String database_name = "OWNCLOUD_NOTES";
     private static final String table_notes = "NOTES";
@@ -290,6 +291,19 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
             }
             cursor.close();
         }
+        if (oldVersion < 11) {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            Map<String, ?> prefs = sharedPreferences.getAll();
+            for (Map.Entry<String, ?> pref : prefs.entrySet()) {
+                String key = pref.getKey();
+                if (key.equals("darkTheme") || key.startsWith(NoteListWidget.DARK_THEME_KEY) || key.startsWith(SingleNoteWidget.DARK_THEME_KEY)) {
+                    Boolean darkTheme = (Boolean) pref.getValue();
+                    editor.putString(pref.getKey(), darkTheme ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name());
+                }
+            }
+            editor.apply();
+        }
     }
 
     @Override
@@ -369,7 +383,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         deleteNoteAndSync(ssoAccount, note.getId());
 
         notifyNotesChanged();
-        getNoteServerSyncHelper().scheduleSync(ssoAccount,true);
+        getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
     }
 
     /**
@@ -686,7 +700,7 @@ public class NoteSQLiteOpenHelper extends SQLiteOpenHelper {
         if (callback != null) {
             serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
-        serverSyncHelper.scheduleSync(ssoAccount,true);
+        serverSyncHelper.scheduleSync(ssoAccount, true);
     }
 
     /**
