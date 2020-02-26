@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">Δημιουργία νέας σημείωσης</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Φωτεινό</string>
     <string name="pref_value_font_normal">Κανονικό</string>
     <string name="pref_value_wifi_and_mobile">Συγχρονισμός μόνο σε Wi-Fi και δεδομένα κινητού</string>
 

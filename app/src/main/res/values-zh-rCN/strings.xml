@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">创建新便笺</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">浅色主题</string>
     <string name="pref_value_font_normal">普通</string>
     <string name="pref_value_wifi_and_mobile">在有 Wi-Fi 和移动数据网络时同步</string>
 

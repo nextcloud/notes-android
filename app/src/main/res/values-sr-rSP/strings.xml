@@ -87,7 +87,6 @@
     <string name="shortcut_create_long">Napravi novu belešku</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Svetla</string>
     <string name="pref_value_font_normal">Normalna</string>
     <string name="pref_value_wifi_and_mobile">Sinhronizuj i na bežičnoj i na mobilnoj vezi</string>
 

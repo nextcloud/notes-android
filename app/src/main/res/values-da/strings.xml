@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">Opret en ny note</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Lys</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synk på Wi-Fi og mobil data</string>
 

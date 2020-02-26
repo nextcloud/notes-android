@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">ساختن یادداشت جدید</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">روشن</string>
     <string name="pref_value_font_normal">معمولی</string>
     <string name="pref_value_wifi_and_mobile">همگام سازی داده های Wi-Fi و تلفن همراه</string>
 
