@@ -16,6 +16,8 @@ import java.util.NoSuchElementException;
  * @see AppCompatDelegate#MODE_NIGHT_FOLLOW_SYSTEM
  */
 public enum DarkModeSetting {
+    // WARNING - The names of the constants must *NOT* be changed since they are used as keys in SharedPreferences
+
     /**
      * Always use light mode.
      */
