@@ -118,7 +118,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentNoteEditBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -143,10 +143,10 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             if (note.getContent().isEmpty()) {
                 binding.editContent.requestFocus();
 
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
                 InputMethodManager imm = (InputMethodManager)
-                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
 
             }
@@ -157,7 +157,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             binding.editContent.setText(note.getContent());
             binding.editContent.setEnabled(true);
 
-            MarkdownProcessor markdownProcessor = new MarkdownProcessor(getContext());
+            MarkdownProcessor markdownProcessor = new MarkdownProcessor(requireContext());
             markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(binding.editContent.getContext()).build());
             markdownProcessor.factory(EditFactory.create());
             markdownProcessor.live(binding.editContent);
@@ -166,7 +166,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 binding.editContent.setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(binding.editContent));
             }
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
             binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
                 binding.editContent.setTypeface(Typeface.MONOSPACE);

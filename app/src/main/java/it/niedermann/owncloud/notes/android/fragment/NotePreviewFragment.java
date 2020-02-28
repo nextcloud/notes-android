@@ -172,7 +172,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         changedText = note.getContent();
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        db = NotesDatabase.getInstance(getContext());
+        db = NotesDatabase.getInstance(requireContext());
         binding.swiperefreshlayout.setOnRefreshListener(this);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
@@ -201,7 +201,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
             try {
-                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getContext());
+                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
                 db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
                     note = db.getNote(note.getAccountId(), note.getId());
                     binding.singleNoteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
@@ -213,7 +213,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             }
         } else {
             binding.swiperefreshlayout.setRefreshing(false);
-            Toast.makeText(getContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
         }
     }
 }
