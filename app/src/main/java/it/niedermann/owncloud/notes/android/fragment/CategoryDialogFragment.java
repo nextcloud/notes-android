@@ -22,7 +22,7 @@ import java.util.List;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
@@ -34,7 +34,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     private static final String TAG = CategoryDialogFragment.class.getSimpleName();
     private static final String STATE_CATEGORY = "category";
 
-    private NoteSQLiteOpenHelper db;
+    private NotesDatabase db;
     private CategoryDialogListener listener;
 
     private EditText editCategory;
@@ -74,7 +74,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
         } else {
             throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getCanonicalName());
         }
-        db = NoteSQLiteOpenHelper.getInstance(getActivity());
+        db = NotesDatabase.getInstance(getActivity());
     }
 
     @NonNull

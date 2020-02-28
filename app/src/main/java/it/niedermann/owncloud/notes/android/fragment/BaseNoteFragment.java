@@ -34,7 +34,7 @@ import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
@@ -58,7 +58,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     protected DBNote note;
     @Nullable
     private DBNote originalNote;
-    protected NoteSQLiteOpenHelper db;
+    protected NotesDatabase db;
     private NoteFragmentListener listener;
 
     boolean isNew = true;
@@ -113,7 +113,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         } catch (ClassCastException e) {
             throw new ClassCastException(context.getClass() + " must implement " + NoteFragmentListener.class);
         }
-        db = NoteSQLiteOpenHelper.getInstance(context);
+        db = NotesDatabase.getInstance(context);
     }
 
     @Override

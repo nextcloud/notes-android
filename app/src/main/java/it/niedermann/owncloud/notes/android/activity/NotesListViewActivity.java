@@ -63,7 +63,7 @@ import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -112,7 +112,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
-    private NoteSQLiteOpenHelper db = null;
+    private NotesDatabase db = null;
     private SearchView searchView = null;
     private final ISyncCallback syncCallBack = () -> {
         adapter.clearSelection(listView);
@@ -150,7 +150,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
 
-        db = NoteSQLiteOpenHelper.getInstance(this);
+        db = NotesDatabase.getInstance(this);
 
         setupHeader();
         setupActionBar();
@@ -748,7 +748,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     public void onNoteFavoriteClick(int position, View view) {
         DBNote note = (DBNote) adapter.getItem(position);
-        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(view.getContext());
+        NotesDatabase db = NotesDatabase.getInstance(view.getContext());
         db.toggleFavorite(ssoAccount, note, syncCallBack);
         adapter.notifyItemChanged(position);
         refreshLists();

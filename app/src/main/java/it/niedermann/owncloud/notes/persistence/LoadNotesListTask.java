@@ -44,7 +44,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     @Override
     protected List<Item> doInBackground(Void... voids) {
         List<DBNote> noteList;
-        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(context);
+        NotesDatabase db = NotesDatabase.getInstance(context);
         noteList = db.searchNotes(accountId, searchQuery, category.category, category.favorite);
 
         if (category.category == null) {

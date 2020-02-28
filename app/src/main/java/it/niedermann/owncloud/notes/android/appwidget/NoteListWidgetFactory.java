@@ -16,7 +16,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.Notes;
 
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
@@ -25,7 +25,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final boolean darkTheme;
     private final String category;
     private final long accountId;
-    private NoteSQLiteOpenHelper db;
+    private NotesDatabase db;
     private List<DBNote> dbNotes;
 
     NoteListWidgetFactory(Context context, Intent intent) {
@@ -43,7 +43,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onCreate() {
-        db = NoteSQLiteOpenHelper.getInstance(context);
+        db = NotesDatabase.getInstance(context);
     }
 
     @Override
