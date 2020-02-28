@@ -9,7 +9,8 @@ final class NoteWidgetHelper {
         // Helper class for static methods
     }
 
-    static DarkModeSetting getDarkThemeSetting(SharedPreferences prefs, String darkModeKey, int appWidgetId) {
+    @SuppressWarnings("WeakerAccess") //Making it package-private would generate a warning in PMD
+    public static DarkModeSetting getDarkThemeSetting(SharedPreferences prefs, String darkModeKey, int appWidgetId) {
         try {
             String themeName = prefs.getString(darkModeKey + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
             return DarkModeSetting.valueOf(themeName);
