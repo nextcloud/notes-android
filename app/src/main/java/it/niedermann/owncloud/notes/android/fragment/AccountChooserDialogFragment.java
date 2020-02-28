@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 public class AccountChooserDialogFragment extends AppCompatDialogFragment implements AccountChooserListener {
     private AccountChooserListener accountChooserListener;
@@ -51,7 +51,7 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
         View view = View.inflate(getContext(), R.layout.dialog_choose_account, null);
         ButterKnife.bind(this, view);
 
-        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
+        NotesDatabase db = NotesDatabase.getInstance(getActivity());
         List<LocalAccount> accountsList = db.getAccounts();
 
         RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, requireActivity());

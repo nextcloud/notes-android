@@ -39,7 +39,7 @@ import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.LoginStatus;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
@@ -188,7 +188,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         changedText = note.getContent();
         noteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        db = NoteSQLiteOpenHelper.getInstance(getContext());
+        db = NotesDatabase.getInstance(getContext());
         swipeRefreshLayout.setOnRefreshListener(this);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());

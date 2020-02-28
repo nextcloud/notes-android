@@ -27,7 +27,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.Notes;
 
 public class NoteListWidgetConfiguration extends AppCompatActivity {
@@ -40,7 +40,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
 
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent, itemFavorites;
-    private NoteSQLiteOpenHelper db = null;
+    private NotesDatabase db = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
         setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_note_list_configuration);
 
-        db = NoteSQLiteOpenHelper.getInstance(this);
+        db = NotesDatabase.getInstance(this);
         try {
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {

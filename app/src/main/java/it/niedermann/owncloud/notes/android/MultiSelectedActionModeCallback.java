@@ -25,14 +25,14 @@ import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserDialogFragment;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 
 public class MultiSelectedActionModeCallback implements Callback {
 
     private final Context context;
     private final ViewProvider viewProvider;
-    private final NoteSQLiteOpenHelper db;
+    private final NotesDatabase db;
     private final ItemAdapter adapter;
     private final RecyclerView recyclerView;
     private final Runnable refreshLists;
@@ -40,7 +40,7 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            Context context, ViewProvider viewProvider, NoteSQLiteOpenHelper db, ActionMode actionMode, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
+            Context context, ViewProvider viewProvider, NotesDatabase db, ActionMode actionMode, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.viewProvider = viewProvider;
         this.db = db;

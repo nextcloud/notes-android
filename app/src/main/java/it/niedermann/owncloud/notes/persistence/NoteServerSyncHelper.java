@@ -67,7 +67,7 @@ public class NoteServerSyncHelper {
 
     private static NoteServerSyncHelper instance;
 
-    private final NoteSQLiteOpenHelper db;
+    private final NotesDatabase db;
     private final Context context;
 
     // Track network connection changes using a BroadcastReceiver
@@ -110,7 +110,7 @@ public class NoteServerSyncHelper {
     private final Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
     private final Map<String, List<ISyncCallback>> callbacksPull = new HashMap<>();
 
-    private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
+    private NoteServerSyncHelper(NotesDatabase db) {
         this.db = db;
         this.context = db.getContext();
         notesClient = new NotesClient(context.getApplicationContext());
@@ -134,7 +134,7 @@ public class NoteServerSyncHelper {
      * @param dbHelper NoteSQLiteOpenHelper
      * @return NoteServerSyncHelper
      */
-    public static synchronized NoteServerSyncHelper getInstance(NoteSQLiteOpenHelper dbHelper) {
+    public static synchronized NoteServerSyncHelper getInstance(NotesDatabase dbHelper) {
         if (instance == null) {
             instance = new NoteServerSyncHelper(dbHelper);
         }
