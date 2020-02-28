@@ -20,6 +20,8 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
+import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.DARK_THEME_KEY;
+
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private final MarkdownProcessor markdownProcessor;
@@ -36,9 +38,9 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     SingleNoteWidgetFactory(Context context, Intent intent) {
         this.context = context;
         appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                         AppWidgetManager.INVALID_APPWIDGET_ID);
+                AppWidgetManager.INVALID_APPWIDGET_ID);
         sp = PreferenceManager.getDefaultSharedPreferences(this.context);
-        darkModeActive = Notes.isDarkThemeActive(context, SingleNoteWidget.getDarkThemeSetting(sp, appWidgetId));
+        darkModeActive = Notes.isDarkThemeActive(context, NoteWidgetHelper.getDarkThemeSetting(sp, DARK_THEME_KEY, appWidgetId));
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkModeActive).build());

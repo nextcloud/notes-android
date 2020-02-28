@@ -34,7 +34,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 return;
             }
 
-            DarkModeSetting darkTheme = getDarkThemeSetting(sp, appWidgetId);
+            DarkModeSetting darkTheme = NoteWidgetHelper.getDarkThemeSetting(sp, DARK_THEME_KEY, appWidgetId);
             templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, sp.getLong(ACCOUNT_ID_KEY + appWidgetId, -1));
 
             PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
@@ -91,16 +91,5 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         editor.apply();
         super.onDeleted(context, appWidgetIds);
-    }
-
-    public static DarkModeSetting getDarkThemeSetting(SharedPreferences sharedPreferences, int appWidgetId) {
-        try {
-            String themeName = sharedPreferences.getString(DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
-            return DarkModeSetting.valueOf(themeName);
-        } catch (ClassCastException e) {
-            //DARK_THEME was a boolean in older versions of the app. We thereofre have to still support the old setting.
-            boolean isDarkTheme = sharedPreferences.getBoolean(DARK_THEME_KEY + appWidgetId, false);
-            return isDarkTheme ? DarkModeSetting.DARK : DarkModeSetting.LIGHT;
-        }
     }
 }

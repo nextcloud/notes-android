@@ -30,7 +30,7 @@ public class NoteListWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         RemoteViews views;
-        String darkTheme;
+        DarkModeSetting darkTheme;
 
         for (int appWidgetId : appWidgetIds) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -42,12 +42,12 @@ public class NoteListWidget extends AppWidgetProvider {
             }
 
             String category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, null);
-            darkTheme = getDarkThemeSetting(sp, appWidgetId);
+            darkTheme = NoteWidgetHelper.getDarkThemeSetting(sp, DARK_THEME_KEY, appWidgetId);
 
             Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             serviceIntent.putExtra(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, displayMode);
-            serviceIntent.putExtra(NoteListWidget.DARK_THEME_KEY + appWidgetId, darkTheme);
+            serviceIntent.putExtra(NoteListWidget.DARK_THEME_KEY + appWidgetId, darkTheme.name());
             serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
             if (displayMode == NLW_DISPLAY_CATEGORY) {
@@ -72,7 +72,7 @@ public class NoteListWidget extends AppWidgetProvider {
                     (new Intent(context, EditNoteActivity.class)),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-            if (Notes.isDarkThemeActive(context, DarkModeSetting.valueOf(darkTheme))) {
+            if (Notes.isDarkThemeActive(context, darkTheme)) {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list_dark);
                 views.setTextViewText(R.id.widget_note_list_title_tv_dark, getWidgetTitle(context, displayMode, category));
                 views.setOnClickPendingIntent(R.id.widget_note_header_icon_dark, openAppI);
@@ -157,15 +157,5 @@ public class NoteListWidget extends AppWidgetProvider {
         }
 
         return null;
-    }
-
-    public static String getDarkThemeSetting(SharedPreferences sharedPreferences, int appWidgetId) {
-        try {
-            return sharedPreferences.getString(DARK_THEME_KEY + appWidgetId, DarkModeSetting.SYSTEM_DEFAULT.name());
-        } catch (ClassCastException e) {
-            //DARK_THEME was a boolean in older versions of the app. We thereofre have to still support the old setting.
-            boolean isDarkTheme = sharedPreferences.getBoolean(DARK_THEME_KEY + appWidgetId, false);
-            return isDarkTheme ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name();
-        }
     }
 }

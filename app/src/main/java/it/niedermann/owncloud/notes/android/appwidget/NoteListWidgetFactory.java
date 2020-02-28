@@ -19,6 +19,8 @@ import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.Notes;
 
+import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.DARK_THEME_KEY;
+
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     private final Context context;
     private final int displayMode;
@@ -34,8 +36,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                 AppWidgetManager.INVALID_APPWIDGET_ID);
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.context);
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
-        String themeName = NoteListWidget.getDarkThemeSetting(sp, appWidgetId);
-        DarkModeSetting theme = DarkModeSetting.valueOf(themeName);
+        DarkModeSetting theme = NoteWidgetHelper.getDarkThemeSetting(sp, DARK_THEME_KEY, appWidgetId);
         darkTheme = Notes.isDarkThemeActive(context, theme);
         category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
         accountId = sp.getLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, -1);
