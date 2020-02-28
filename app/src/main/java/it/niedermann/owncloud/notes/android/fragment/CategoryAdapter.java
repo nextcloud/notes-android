@@ -15,9 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.databinding.ItemCategoryBinding;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -52,25 +51,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case addItemId: {
                 Drawable wrapDrawable = DrawableCompat.wrap(context.getResources().getDrawable(category.icon));
                 DrawableCompat.setTint(wrapDrawable, context.getResources().getColor(R.color.icon_color_default));
-                categoryViewHolder.icon.setImageDrawable(wrapDrawable);
-                categoryViewHolder.categoryWrapper.setOnClickListener((v) -> listener.onCategoryAdded());
+                categoryViewHolder.getIcon().setImageDrawable(wrapDrawable);
+                categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryAdded());
                 break;
             }
             case clearItemId: {
-                categoryViewHolder.icon.setImageDrawable(context.getResources().getDrawable(category.icon));
-                categoryViewHolder.categoryWrapper.setOnClickListener((v) -> listener.onCategoryCleared());
+                categoryViewHolder.getIcon().setImageDrawable(context.getResources().getDrawable(category.icon));
+                categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryCleared());
                 break;
             }
             default: {
-                categoryViewHolder.icon.setImageDrawable(context.getResources().getDrawable(category.icon));
-                categoryViewHolder.categoryWrapper.setOnClickListener((v) -> listener.onCategoryChosen(category.label));
+                categoryViewHolder.getIcon().setImageDrawable(context.getResources().getDrawable(category.icon));
+                categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryChosen(category.label));
             }
         }
-        categoryViewHolder.category.setText(NoteUtil.extendCategory(category.label));
+        categoryViewHolder.getCategory().setText(NoteUtil.extendCategory(category.label));
         if (category.count > 0) {
-            categoryViewHolder.count.setText(String.valueOf(category.count));
+            categoryViewHolder.getCount().setText(String.valueOf(category.count));
         } else {
-            categoryViewHolder.count.setVisibility(View.GONE);
+            categoryViewHolder.getCount().setVisibility(View.GONE);
         }
     }
 
@@ -80,21 +79,27 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     static class CategoryViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.categoryWrapper)
-        View categoryWrapper;
-
-        @BindView(R.id.icon)
-        AppCompatImageView icon;
-
-        @BindView(R.id.category)
-        TextView category;
-
-        @BindView(R.id.count)
-        TextView count;
+        private final ItemCategoryBinding binding;
 
         private CategoryViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
+            binding = ItemCategoryBinding.bind(view);
+        }
+
+        private View getCategoryWrapper() {
+            return binding.categoryWrapper;
+        }
+
+        private AppCompatImageView getIcon() {
+            return binding.icon;
+        }
+
+        private TextView getCategory() {
+            return binding.category;
+        }
+
+        private TextView getCount() {
+            return binding.count;
         }
     }
 

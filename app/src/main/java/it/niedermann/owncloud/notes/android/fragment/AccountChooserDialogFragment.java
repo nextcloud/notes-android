@@ -17,17 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import java.util.Objects;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 public class AccountChooserDialogFragment extends AppCompatDialogFragment implements AccountChooserListener {
     private AccountChooserListener accountChooserListener;
-    @BindView(R.id.accounts_list)
-    RecyclerView accountRecyclerView;
 
     /**
      * Use newInstance()-Method
@@ -49,16 +46,16 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = View.inflate(getContext(), R.layout.dialog_choose_account, null);
-        ButterKnife.bind(this, view);
+        DialogChooseAccountBinding binding = DialogChooseAccountBinding.bind(view);
 
         NotesDatabase db = NotesDatabase.getInstance(getActivity());
         List<LocalAccount> accountsList = db.getAccounts();
 
         RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, requireActivity());
-        accountRecyclerView.setAdapter(adapter);
+        binding.accountsList.setAdapter(adapter);
 
         return new AlertDialog.Builder(requireActivity())
-                .setView(view)
+                .setView(binding.getRoot())
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();

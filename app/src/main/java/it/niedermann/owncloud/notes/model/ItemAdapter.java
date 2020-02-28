@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemBinding;
+import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
 
 import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 
@@ -111,7 +111,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void clearSelection(RecyclerView recyclerView) {
         for (Integer i : getSelected()) {
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);
-            if(viewHolder != null) {
+            if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);
             } else {
                 Log.w(TAG, "Could not found viewholder to remove selection");
@@ -168,32 +168,23 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
-        @BindView(R.id.noteSwipeable)
         public View noteSwipeable;
-        final View noteSwipeFrame;
-        final ImageView noteFavoriteLeft;
-        final ImageView noteDeleteRight;
-        final TextView noteTitle;
-        @BindView(R.id.noteCategory)
-        TextView noteCategory;
-        @BindView(R.id.noteExcerpt)
-        TextView noteExcerpt;
-        @BindView(R.id.noteStatus)
-        ImageView noteStatus;
-        @BindView(R.id.noteFavorite)
-        ImageView noteFavorite;
+        private final ItemNotesListNoteItemBinding b;
+        private final TextView noteTitle;
+        private final TextView noteCategory;
+        private final TextView noteExcerpt;
+        private final ImageView noteStatus;
+        private final ImageView noteFavorite;
 
         private NoteViewHolder(View v) {
             super(v);
-            this.noteSwipeFrame = v.findViewById(R.id.noteSwipeFrame);
-            this.noteSwipeable = v.findViewById(R.id.noteSwipeable);
-            this.noteFavoriteLeft = v.findViewById(R.id.noteFavoriteLeft);
-            this.noteDeleteRight = v.findViewById(R.id.noteDeleteRight);
-            this.noteTitle = v.findViewById(R.id.noteTitle);
-            this.noteCategory = v.findViewById(R.id.noteCategory);
-            this.noteExcerpt = v.findViewById(R.id.noteExcerpt);
-            this.noteStatus = v.findViewById(R.id.noteStatus);
-            this.noteFavorite = v.findViewById(R.id.noteFavorite);
+            b = ItemNotesListNoteItemBinding.bind(v);
+            this.noteSwipeable = b.noteSwipeable;
+            this.noteTitle = b.noteTitle;
+            this.noteCategory = b.noteCategory;
+            this.noteExcerpt = b.noteExcerpt;
+            this.noteStatus = b.noteStatus;
+            this.noteFavorite = b.noteFavorite;
             v.setOnClickListener(this);
             v.setOnLongClickListener(this);
         }
@@ -212,19 +203,19 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         public void showSwipe(boolean left) {
-            noteFavoriteLeft.setVisibility(left ? View.VISIBLE : View.INVISIBLE);
-            noteDeleteRight.setVisibility(left ? View.INVISIBLE : View.VISIBLE);
-            noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
+            b.noteFavoriteLeft.setVisibility(left ? View.VISIBLE : View.INVISIBLE);
+            b.noteDeleteRight.setVisibility(left ? View.INVISIBLE : View.VISIBLE);
+            b.noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
         }
     }
 
     public static class SectionViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.sectionTitle)
-        TextView sectionTitle;
+        private TextView sectionTitle;
 
         private SectionViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
+            ItemNotesListSectionItemBinding binding = ItemNotesListSectionItemBinding.bind(view);
+            this.sectionTitle = binding.sectionTitle;
         }
     }
 }

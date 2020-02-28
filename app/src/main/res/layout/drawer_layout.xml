@@ -9,6 +9,7 @@
     tools:openDrawer="left">
 
     <include
+        android:id="@+id/activity_notes_list_view"
         layout="@layout/activity_notes_list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

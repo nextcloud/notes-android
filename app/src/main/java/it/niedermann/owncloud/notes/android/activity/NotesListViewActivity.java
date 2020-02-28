@@ -15,8 +15,6 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,7 +27,6 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -49,13 +46,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.nextcloud.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
@@ -101,36 +97,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     private SingleSignOnAccount ssoAccount;
     private LocalAccount localAccount;
 
-    @BindView(R.id.coordinatorLayout)
-    CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.accountNavigation)
-    LinearLayout accountNavigation;
-    @BindView(R.id.accountChooser)
-    LinearLayout accountChooser;
-    @BindView(R.id.notesListActivityActionBar)
-    Toolbar toolbar;
-    @BindView(R.id.drawerLayout)
-    DrawerLayout drawerLayout;
-    @BindView(R.id.current_account_image)
-    AppCompatImageView currentAccountImage;
-    @BindView(R.id.header_view)
-    RelativeLayout headerView;
-    @BindView(R.id.account)
-    TextView account;
-    @BindView(R.id.swiperefreshlayout)
-    SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.fab_create)
-    FloatingActionButton fabCreate;
-    @BindView(R.id.navigationList)
-    RecyclerView listNavigationCategories;
-    @BindView(R.id.navigationMenu)
-    RecyclerView listNavigationMenu;
-    @BindView(R.id.recycler_view)
-    RecyclerView listView;
-    @BindView(R.id.empty_content_view)
-    RelativeLayout emptyContentView;
-    @BindView(R.id.progress_circular)
-    ProgressBar progressBar;
+    protected DrawerLayoutBinding binding;
+
+    private CoordinatorLayout coordinatorLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    protected FloatingActionButton fabCreate;
+    private RecyclerView listView;
 
     protected ItemAdapter adapter = null;
 
@@ -157,8 +129,12 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         super.onCreate(savedInstanceState);
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
-        setContentView(R.layout.drawer_layout);
-        ButterKnife.bind(this);
+        binding = DrawerLayoutBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
+        this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
+        this.fabCreate = binding.activityNotesListView.fabCreate;
+        this.listView = binding.activityNotesListView.recyclerView;
 
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
         if (savedInstanceState == null) {
@@ -260,7 +236,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void setupHeader() {
-        accountChooser.removeAllViews();
+        binding.accountChooser.removeAllViews();
         for (LocalAccount localAccount : db.getAccounts()) {
             View v = View.inflate(this, R.layout.item_account, null);
             ((TextView) v.findViewById(R.id.accountItemLabel)).setText(localAccount.getAccountName());
@@ -272,7 +248,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
             v.setOnClickListener(clickedView -> {
                 clickHeader();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
                 selectAccount(localAccount.getAccountName());
             });
             v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
@@ -289,24 +265,25 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 }
                 setupHeader();
                 clickHeader();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             });
-            accountChooser.addView(v);
+            binding.accountChooser.addView(v);
         }
         View addButton = View.inflate(this, R.layout.item_account, null);
         ((TextView) addButton.findViewById(R.id.accountItemLabel)).setText(getString(R.string.add_account));
         ((AppCompatImageView) addButton.findViewById(R.id.accountItemAvatar)).setImageResource(R.drawable.ic_person_add_grey600_24dp);
         addButton.setOnClickListener((btn) -> askForNewAccount(this));
         addButton.findViewById(R.id.delete).setVisibility(View.GONE);
-        accountChooser.addView(addButton);
-        headerView.setOnClickListener(view -> clickHeader());
+        binding.accountChooser.addView(addButton);
+        binding.headerView.setOnClickListener(view -> clickHeader());
     }
 
     private void setupActionBar() {
+        Toolbar toolbar = binding.activityNotesListView.notesListActivityActionBar;
         setSupportActionBar(toolbar);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
+        drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
         drawerToggle.setDrawerIndicatorEnabled(true);
-        drawerLayout.addDrawerListener(drawerToggle);
+        binding.drawerLayout.addDrawerListener(drawerToggle);
     }
 
     private void setupNotesList() {
@@ -383,7 +360,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
                 // update views
                 if (closeNavigation) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                    binding.drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 refreshLists(true);
             }
@@ -402,16 +379,16 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
         });
         adapterCategories.setSelectedItem(selectedItem);
-        listNavigationCategories.setAdapter(adapterCategories);
+        binding.navigationList.setAdapter(adapterCategories);
     }
 
     private void clickHeader() {
         if (this.accountChooserActive) {
-            accountChooser.setVisibility(View.GONE);
-            accountNavigation.setVisibility(View.VISIBLE);
+            binding.accountChooser.setVisibility(View.GONE);
+            binding.accountNavigation.setVisibility(View.VISIBLE);
         } else {
-            accountChooser.setVisibility(View.VISIBLE);
-            accountNavigation.setVisibility(View.GONE);
+            binding.accountChooser.setVisibility(View.VISIBLE);
+            binding.accountNavigation.setVisibility(View.GONE);
 
         }
         this.accountChooserActive = !this.accountChooserActive;
@@ -537,7 +514,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         this.updateUsernameInDrawer();
         adapterMenu.setItems(itemsMenu);
-        listNavigationMenu.setAdapter(adapterMenu);
+        binding.navigationMenu.setAdapter(adapterMenu);
     }
 
     public void initList() {
@@ -556,8 +533,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             adapter.removeAll();
             return;
         }
+        View emptyContentView = binding.activityNotesListView.emptyContentView.getRoot();
         emptyContentView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
+        binding.activityNotesListView.progressCircular.setVisibility(View.VISIBLE);
         fabCreate.show();
         String subtitle;
         if (navigationSelection.category != null) {
@@ -580,7 +558,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
             adapter.setShowCategory(showCategory);
             adapter.setItemList(notes);
-            progressBar.setVisibility(View.GONE);
+            binding.activityNotesListView.progressCircular.setVisibility(View.GONE);
             if (notes.size() > 0) {
                 emptyContentView.setVisibility(View.GONE);
             } else {
@@ -707,9 +685,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     }
                     selectAccount(account.name);
                     this.accountChooserActive = false;
-                    accountChooser.setVisibility(View.GONE);
-                    accountNavigation.setVisibility(View.VISIBLE);
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                    binding.accountChooser.setVisibility(View.GONE);
+                    binding.accountNavigation.setVisibility(View.VISIBLE);
+                    binding.drawerLayout.closeDrawer(GravityCompat.START);
                 });
             } catch (AccountImportCancelledException e) {
                 Log.i(TAG, "AccountImport has been cancelled.");
@@ -721,23 +699,23 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         try {
             String url = localAccount.getUrl();
             if (url != null) {
-                this.account.setText(localAccount.getAccountName());
+                binding.account.setText(localAccount.getAccountName());
                 Glide
                         .with(this)
                         .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
                         .error(R.mipmap.ic_launcher)
                         .apply(RequestOptions.circleCropTransform())
-                        .into(this.currentAccountImage);
+                        .into(binding.currentAccountImage);
             } else {
                 Log.w(TAG, "url is null");
             }
         } catch (NullPointerException e) { // No local account - show generic header
-            this.account.setText(R.string.app_name_long);
+            binding.account.setText(R.string.app_name_long);
             Glide
                     .with(this)
                     .load(R.mipmap.ic_launcher)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(this.currentAccountImage);
+                    .into(binding.currentAccountImage);
             Log.w(TAG, "Tried to update username in drawer, but localAccount was null");
         }
     }

@@ -16,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.databinding.ItemNavigationBinding;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.ViewHolder> {
@@ -58,21 +57,25 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         @NonNull
         private final View view;
 
-        @BindView(R.id.navigationItemLabel)
-        TextView name;
+        @NonNull
+        private final ItemNavigationBinding binding;
 
-        @BindView(R.id.navigationItemCount)
-        TextView count;
-
-        @BindView(R.id.navigationItemIcon)
-        ImageView icon;
+        @NonNull
+        private final TextView name;
+        @NonNull
+        private final TextView count;
+        @NonNull
+        private final ImageView icon;
 
         private NavigationItem currentItem;
 
         ViewHolder(@NonNull View itemView, @NonNull final ClickListener clickListener) {
             super(itemView);
             view = itemView;
-            ButterKnife.bind(this, view);
+            binding = ItemNavigationBinding.bind(view);
+            this.name = binding.navigationItemLabel;
+            this.count = binding.navigationItemCount;
+            this.icon = binding.navigationItemIcon;
             icon.setOnClickListener(view -> clickListener.onIconClick(currentItem));
             itemView.setOnClickListener(view -> clickListener.onItemClick(currentItem));
         }
@@ -100,6 +103,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
 
     public interface ClickListener {
         void onItemClick(NavigationItem item);
+
         void onIconClick(NavigationItem item);
     }
 
