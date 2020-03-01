@@ -97,7 +97,6 @@
     <string name="shortcut_create_long">Maak een nieuwe notitie</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Licht</string>
     <string name="pref_value_font_normal">Normaal</string>
     <string name="pref_value_wifi_and_mobile">Sync met Wi-Fi en mobiele data</string>
 

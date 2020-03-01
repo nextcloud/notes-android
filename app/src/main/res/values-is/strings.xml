@@ -83,7 +83,6 @@
     <string name="shortcut_create_long">Búa til nýjan minnispunkt</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Ljóst</string>
     <string name="pref_value_font_normal">Venjulegt</string>
     <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
 

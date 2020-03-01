@@ -58,7 +58,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
 
         sp.putLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, noteID);
         sp.putLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, note.getAccountId());
-        sp.putBoolean(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()));
+        sp.putString(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()).name());
         sp.apply();
 
         Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,

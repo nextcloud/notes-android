@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">Направи нову белешку</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Светла</string>
     <string name="pref_value_font_normal">Нормална</string>
     <string name="pref_value_wifi_and_mobile">Синхронизуј и на бежичној и на мобилној вези</string>
 

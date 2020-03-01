@@ -79,7 +79,6 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear una nota nueva</string>
 
-    <string name="pref_value_theme_light">Claro</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="simple_error">Error</string>
     <string name="simple_close">Cerrar</string>
