@@ -103,7 +103,6 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
-        fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         if (darkModeActive) {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
