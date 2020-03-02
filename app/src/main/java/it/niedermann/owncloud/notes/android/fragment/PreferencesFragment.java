@@ -10,8 +10,9 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.util.DeviceCredentialUtil;
+import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
+import it.niedermann.owncloud.notes.util.DeviceCredentialUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
 public class PreferencesFragment extends PreferenceFragmentCompat {
@@ -37,10 +38,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
             });
         }
 
-        final SwitchPreference themePref = findPreference(getString(R.string.pref_key_theme));
+        final ListPreference themePref = findPreference(getString(R.string.pref_key_theme));
         assert themePref != null;
         themePref.setOnPreferenceChangeListener((preference, newValue) -> {
-            Notes.setAppTheme((Boolean) newValue);
+            Notes.setAppTheme(DarkModeSetting.valueOf((String) newValue));
             getActivity().setResult(Activity.RESULT_OK);
             getActivity().recreate();
             return true;

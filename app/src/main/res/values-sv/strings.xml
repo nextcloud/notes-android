@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">Skapa en ny anteckning</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Ljus</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobil data</string>
 
@@ -125,7 +124,6 @@
     <string name="category_readonly">Läsbehörighet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Lägg till %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>

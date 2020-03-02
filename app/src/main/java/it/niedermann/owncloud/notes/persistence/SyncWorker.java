@@ -37,7 +37,7 @@ public class SyncWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getApplicationContext());
+        NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
         for (LocalAccount account : db.getAccounts()) {
             try {
                 SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());

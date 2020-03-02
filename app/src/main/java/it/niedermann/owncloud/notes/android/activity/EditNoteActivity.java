@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import java.io.BufferedReader;
@@ -18,14 +17,12 @@ import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Objects;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import it.niedermann.nextcloud.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
 import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteReadonlyFragment;
+import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -46,8 +43,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     public static final String PARAM_CATEGORY = "category";
     public static final String PARAM_CONTENT = "content";
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    private ActivityEditBinding binding;
 
     private BaseNoteFragment fragment;
 
@@ -55,8 +51,8 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_edit);
-        ButterKnife.bind(this);
+        binding = ActivityEditBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         if (savedInstanceState == null) {
             launchNoteFragment();
@@ -64,7 +60,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             fragment = (BaseNoteFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_view);
         }
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar);
     }
 
     @Override
@@ -254,11 +250,11 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     @Override
     public void onNoteUpdated(DBNote note) {
         if (note != null) {
-            toolbar.setTitle(note.getTitle());
+            binding.toolbar.setTitle(note.getTitle());
             if (note.getCategory().isEmpty()) {
-                toolbar.setSubtitle(null);
+                binding.toolbar.setSubtitle(null);
             } else {
-                toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
+                binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
         } else {
             // Maybe account is not authenticated -> note == null

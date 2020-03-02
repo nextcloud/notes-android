@@ -91,7 +91,6 @@
     <string name="shortcut_create_long">Sortu ohar berria</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Argia</string>
     <string name="pref_value_font_normal">Normala</string>
     <string name="pref_value_wifi_and_mobile">Sinkronizatu wifi eta datu mugikorrekin</string>
 
@@ -119,7 +118,6 @@
     <string name="bulk_notes_restored">%1$d ohar leheneratu dira</string>
     <string name="category_readonly">Irakurtzeko soilik</string>
     <string name="add_category">Gehitu %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>

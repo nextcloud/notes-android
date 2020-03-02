@@ -1,9 +1,8 @@
 package it.niedermann.owncloud.notes.util;
 
-import androidx.test.filters.SmallTest;
+import junit.framework.TestCase;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,18 +11,15 @@ import java.util.Set;
 import static it.niedermann.owncloud.notes.util.NoteLinksUtils.RELATIVE_LINK_WORKAROUND_PREFIX;
 
 
-@SmallTest
-public class NoteLinksUtilsTest {
+public class NoteLinksUtilsTest extends TestCase {
 
-    @Test
-    public void emptyString() {
+    public void testEmptyString() {
         String markdown = "";
         String result = NoteLinksUtils.replaceNoteLinksWithDummyUrls(markdown, Collections.emptySet());
         Assert.assertEquals("", result);
     }
 
-    @Test
-    public void doNotChangeOtherMarkdownElements() {
+    public void testDoNotChangeOtherMarkdownElements() {
         //language=md
         String markdown = "\n" +
                 "# heading  \n" +
@@ -44,16 +40,15 @@ public class NoteLinksUtilsTest {
         Assert.assertEquals(markdown, NoteLinksUtils.replaceNoteLinksWithDummyUrls(markdown, Collections.emptySet()));
     }
 
-    @Test
-    public void doNotReplaceNormalLinks() {
+    @SuppressWarnings("MarkdownUnresolvedFileReference")
+    public void testDoNotReplaceNormalLinks() {
         //language=md
         String markdown = "[normal link](https://example.com) and another [note link](123456)";
         String result = NoteLinksUtils.replaceNoteLinksWithDummyUrls(markdown, Collections.singleton("123456"));
         Assert.assertEquals(String.format("[normal link](https://example.com) and another [note link](%s123456)", RELATIVE_LINK_WORKAROUND_PREFIX), result);
     }
 
-    @Test
-    public void replaceOnlyNotesInDB() {
+    public void testReplaceOnlyNotesInDB() {
         Set<String> remoteIdsOfExistingNotes = new HashSet<>();
         remoteIdsOfExistingNotes.add("123456");
         remoteIdsOfExistingNotes.add("321456");

@@ -13,8 +13,10 @@ import android.util.Log;
 import android.widget.RemoteViews;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
+import it.niedermann.owncloud.notes.util.Notes;
 
 public class NoteListWidget extends AppWidgetProvider {
     private static final String TAG = NoteListWidget.class.getSimpleName();
@@ -28,7 +30,7 @@ public class NoteListWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         RemoteViews views;
-        boolean darkTheme;
+        DarkModeSetting darkTheme;
 
         for (int appWidgetId : appWidgetIds) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
@@ -40,12 +42,12 @@ public class NoteListWidget extends AppWidgetProvider {
             }
 
             String category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, null);
-            darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
+            darkTheme = NoteWidgetHelper.getDarkThemeSetting(sp, DARK_THEME_KEY, appWidgetId);
 
             Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             serviceIntent.putExtra(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, displayMode);
-            serviceIntent.putExtra(NoteListWidget.DARK_THEME_KEY + appWidgetId, darkTheme);
+            serviceIntent.putExtra(NoteListWidget.DARK_THEME_KEY + appWidgetId, darkTheme.name());
             serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
             if (displayMode == NLW_DISPLAY_CATEGORY) {
@@ -70,7 +72,7 @@ public class NoteListWidget extends AppWidgetProvider {
                     (new Intent(context, EditNoteActivity.class)),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-            if (darkTheme) {
+            if (Notes.isDarkThemeActive(context, darkTheme)) {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list_dark);
                 views.setTextViewText(R.id.widget_note_list_title_tv_dark, getWidgetTitle(context, displayMode, category));
                 views.setOnClickPendingIntent(R.id.widget_note_header_icon_dark, openAppI);

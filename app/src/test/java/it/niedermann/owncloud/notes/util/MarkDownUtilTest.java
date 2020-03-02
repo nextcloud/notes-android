@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.util;
 
-import androidx.annotation.NonNull;
-
 import junit.framework.TestCase;
 
 import java.util.HashMap;
@@ -12,14 +10,6 @@ import java.util.Map;
  * Created by stefan on 06.10.15.
  */
 public class MarkDownUtilTest extends TestCase {
-
-    public static int getStartOfLine(@NonNull CharSequence s, int start) {
-        int startOfLine = start;
-        while (startOfLine > 0 && s.charAt(startOfLine - 1) != '\n') {
-            startOfLine--;
-        }
-        return startOfLine;
-    }
 
     public void testGetStartOfLine() {
         //language=md

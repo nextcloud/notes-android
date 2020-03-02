@@ -17,17 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import java.util.Objects;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 public class AccountChooserDialogFragment extends AppCompatDialogFragment implements AccountChooserListener {
     private AccountChooserListener accountChooserListener;
-    @BindView(R.id.accounts_list)
-    RecyclerView accountRecyclerView;
 
     /**
      * Use newInstance()-Method
@@ -48,17 +45,17 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_choose_account, null);
-        ButterKnife.bind(this, view);
+        View view = View.inflate(getContext(), R.layout.dialog_choose_account, null);
+        DialogChooseAccountBinding binding = DialogChooseAccountBinding.bind(view);
 
-        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(getActivity());
+        NotesDatabase db = NotesDatabase.getInstance(getActivity());
         List<LocalAccount> accountsList = db.getAccounts();
 
-        RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, getActivity());
-        accountRecyclerView.setAdapter(adapter);
+        RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, requireActivity());
+        binding.accountsList.setAdapter(adapter);
 
-        return new AlertDialog.Builder(getActivity())
-                .setView(view)
+        return new AlertDialog.Builder(requireActivity())
+                .setView(binding.getRoot())
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null)
                 .create();
@@ -67,7 +64,7 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Objects.requireNonNull(Objects.requireNonNull(getDialog()).getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        Objects.requireNonNull(requireDialog().getWindow()).setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

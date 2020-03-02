@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -21,20 +22,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.Notes;
 
 public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private static final String TAG = Activity.class.getSimpleName();
-
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
 
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
@@ -43,18 +39,15 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
 
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent, itemFavorites;
-    private NoteSQLiteOpenHelper db = null;
+    private NotesDatabase db = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_note_list_configuration);
-        ButterKnife.bind(this);
-
         setResult(RESULT_CANCELED);
+        setContentView(R.layout.activity_note_list_configuration);
 
-        db = NoteSQLiteOpenHelper.getInstance(this);
+        db = NotesDatabase.getInstance(this);
         try {
             this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -84,6 +77,8 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 getString(R.string.label_favorites),
                 null,
                 R.drawable.ic_star_yellow_24dp);
+        RecyclerView recyclerView;
+        RecyclerView.LayoutManager layoutManager;
 
         adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
             @Override
@@ -104,7 +99,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 }
 
                 sp.putLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, localAccount.getId());
-                sp.putBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()));
+                sp.putString(NoteListWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()).name());
                 sp.apply();
 
                 Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
@@ -120,7 +115,10 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
             }
         });
 
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterCategories);
     }
 

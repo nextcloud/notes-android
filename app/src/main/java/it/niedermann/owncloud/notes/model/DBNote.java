@@ -11,8 +11,8 @@ import java.util.Calendar;
  */
 public class DBNote extends CloudNote implements Item, Serializable {
 
-    private long id;
-    private long accountId;
+    private final long id;
+    private final long accountId;
     private DBStatus status;
     private String excerpt;
 

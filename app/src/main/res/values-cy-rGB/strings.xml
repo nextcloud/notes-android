@@ -83,7 +83,6 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Creu nodyn newydd</string>
 
-    <string name="pref_value_theme_light">Golau</string>
     <string name="pref_value_font_normal">Arferol</string>
     <string name="pref_value_wifi_and_mobile">Cysoni dros Wi-Fi a data symudol</string>
     <string name="simple_error">Gwall</string>

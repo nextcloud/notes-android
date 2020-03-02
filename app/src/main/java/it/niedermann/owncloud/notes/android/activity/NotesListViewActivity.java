@@ -15,8 +15,6 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,7 +26,6 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -48,13 +45,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import it.niedermann.nextcloud.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
@@ -66,8 +61,8 @@ import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
@@ -86,10 +81,10 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
     private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
 
-    private static final int create_note_cmd = 0;
-    private static final int show_single_note_cmd = 1;
-    private static final int server_settings = 2;
-    private static final int about = 3;
+    private final static int create_note_cmd = 0;
+    private final static int show_single_note_cmd = 1;
+    private final static int server_settings = 2;
+    private final static int about = 3;
 
     /**
      * Used to detect the onResume() call after the import dialog has been displayed.
@@ -100,36 +95,12 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private SingleSignOnAccount ssoAccount;
     private LocalAccount localAccount;
 
-    @BindView(R.id.coordinatorLayout)
-    CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.accountNavigation)
-    LinearLayout accountNavigation;
-    @BindView(R.id.accountChooser)
-    LinearLayout accountChooser;
-    @BindView(R.id.notesListActivityActionBar)
-    Toolbar toolbar;
-    @BindView(R.id.drawerLayout)
-    DrawerLayout drawerLayout;
-    @BindView(R.id.current_account_image)
-    AppCompatImageView currentAccountImage;
-    @BindView(R.id.header_view)
-    RelativeLayout headerView;
-    @BindView(R.id.account)
-    TextView account;
-    @BindView(R.id.swiperefreshlayout)
-    SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.fab_create)
-    FloatingActionButton fabCreate;
-    @BindView(R.id.navigationList)
-    RecyclerView listNavigationCategories;
-    @BindView(R.id.navigationMenu)
-    RecyclerView listNavigationMenu;
-    @BindView(R.id.recycler_view)
-    RecyclerView listView;
-    @BindView(R.id.empty_content_view)
-    RelativeLayout emptyContentView;
-    @BindView(R.id.progress_circular)
-    ProgressBar progressBar;
+    protected DrawerLayoutBinding binding;
+
+    private CoordinatorLayout coordinatorLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    protected FloatingActionButton fabCreate;
+    private RecyclerView listView;
 
     protected ItemAdapter adapter = null;
 
@@ -139,9 +110,9 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
-    private NoteSQLiteOpenHelper db = null;
+    private NotesDatabase db = null;
     private SearchView searchView = null;
-    private ISyncCallback syncCallBack = () -> {
+    private final ISyncCallback syncCallBack = () -> {
         adapter.clearSelection(listView);
         if (mActionMode != null) {
             mActionMode.finish();
@@ -155,8 +126,12 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.drawer_layout);
-        ButterKnife.bind(this);
+        binding = DrawerLayoutBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
+        this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
+        this.fabCreate = binding.activityNotesListView.fabCreate;
+        this.listView = binding.activityNotesListView.recyclerView;
 
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
         if (savedInstanceState == null) {
@@ -172,7 +147,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
 
-        db = NoteSQLiteOpenHelper.getInstance(this);
+        db = NotesDatabase.getInstance(this);
 
         setupHeader();
         setupActionBar();
@@ -258,9 +233,9 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     }
 
     private void setupHeader() {
-        accountChooser.removeAllViews();
+        binding.accountChooser.removeAllViews();
         for (LocalAccount localAccount : db.getAccounts()) {
-            View v = getLayoutInflater().inflate(R.layout.item_account, null);
+            View v = View.inflate(this, R.layout.item_account, null);
             ((TextView) v.findViewById(R.id.accountItemLabel)).setText(localAccount.getAccountName());
             Glide
                     .with(this)
@@ -270,7 +245,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                     .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
             v.setOnClickListener(clickedView -> {
                 clickHeader();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
                 selectAccount(localAccount.getAccountName());
             });
             v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
@@ -287,24 +262,25 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                 }
                 setupHeader();
                 clickHeader();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             });
-            accountChooser.addView(v);
+            binding.accountChooser.addView(v);
         }
-        View addButton = getLayoutInflater().inflate(R.layout.item_account, null);
+        View addButton = View.inflate(this, R.layout.item_account, null);
         ((TextView) addButton.findViewById(R.id.accountItemLabel)).setText(getString(R.string.add_account));
         ((AppCompatImageView) addButton.findViewById(R.id.accountItemAvatar)).setImageResource(R.drawable.ic_person_add_grey600_24dp);
         addButton.setOnClickListener((btn) -> askForNewAccount(this));
         addButton.findViewById(R.id.delete).setVisibility(View.GONE);
-        accountChooser.addView(addButton);
-        headerView.setOnClickListener(view -> clickHeader());
+        binding.accountChooser.addView(addButton);
+        binding.headerView.setOnClickListener(view -> clickHeader());
     }
 
     private void setupActionBar() {
+        Toolbar toolbar = binding.activityNotesListView.notesListActivityActionBar;
         setSupportActionBar(toolbar);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
+        drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
         drawerToggle.setDrawerIndicatorEnabled(true);
-        drawerLayout.addDrawerListener(drawerToggle);
+        binding.drawerLayout.addDrawerListener(drawerToggle);
     }
 
     private void setupNotesList() {
@@ -381,7 +357,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
                 // update views
                 if (closeNavigation) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                    binding.drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 refreshLists(true);
             }
@@ -400,16 +376,16 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
             }
         });
         adapterCategories.setSelectedItem(selectedItem);
-        listNavigationCategories.setAdapter(adapterCategories);
+        binding.navigationList.setAdapter(adapterCategories);
     }
 
     private void clickHeader() {
         if (this.accountChooserActive) {
-            accountChooser.setVisibility(View.GONE);
-            accountNavigation.setVisibility(View.VISIBLE);
+            binding.accountChooser.setVisibility(View.GONE);
+            binding.accountNavigation.setVisibility(View.VISIBLE);
         } else {
-            accountChooser.setVisibility(View.VISIBLE);
-            accountNavigation.setVisibility(View.GONE);
+            binding.accountChooser.setVisibility(View.VISIBLE);
+            binding.accountNavigation.setVisibility(View.GONE);
 
         }
         this.accountChooserActive = !this.accountChooserActive;
@@ -535,7 +511,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
         this.updateUsernameInDrawer();
         adapterMenu.setItems(itemsMenu);
-        listNavigationMenu.setAdapter(adapterMenu);
+        binding.navigationMenu.setAdapter(adapterMenu);
     }
 
     public void initList() {
@@ -554,8 +530,9 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
             adapter.removeAll();
             return;
         }
+        View emptyContentView = binding.activityNotesListView.emptyContentView.getRoot();
         emptyContentView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
+        binding.activityNotesListView.progressCircular.setVisibility(View.VISIBLE);
         fabCreate.show();
         String subtitle;
         if (navigationSelection.category != null) {
@@ -578,7 +555,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
             adapter.setShowCategory(showCategory);
             adapter.setItemList(notes);
-            progressBar.setVisibility(View.GONE);
+            binding.activityNotesListView.progressCircular.setVisibility(View.GONE);
             if (notes.size() > 0) {
                 emptyContentView.setVisibility(View.GONE);
             } else {
@@ -659,7 +636,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     }
 
     /**
-     * Handles the Results of started Sub Activities (Edited notes, settings)
+     * Handles the Results of started Sub Activities (Created Note, Edited Note)
      *
      * @param requestCode int to distinguish between the different Sub Activities
      * @param resultCode  int Return Code
@@ -669,53 +646,48 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode) {
-            case create_note_cmd: {
-                // Make sure the request was successful
-                if (resultCode == RESULT_OK) {
-                    //not need because of db.synchronisation in createActivity
+        // Check which request we're responding to
+        if (requestCode == create_note_cmd) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                //not need because of db.synchronisation in createActivity
 
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null) {
-                        DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
-                        if (createdNote != null) {
-                            adapter.add(createdNote);
-                        } else {
-                            Log.w(TAG, "createdNote is null");
-                        }
+                Bundle bundle = data.getExtras();
+                if (bundle != null) {
+                    DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
+                    if (createdNote != null) {
+                        adapter.add(createdNote);
                     } else {
-                        Log.w(TAG, "bundle is null");
+                        Log.w(TAG, "createdNote is null");
                     }
+                } else {
+                    Log.w(TAG, "bundle is null");
                 }
-                listView.scrollToPosition(0);
-                break;
             }
-            case server_settings: {
-                // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
-                // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
-                recreate();
-                break;
-            }
-            default: {
-                try {
-                    AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-                        Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-                        try {
-                            db.addAccount(account.url, account.userId, account.name);
-                        } catch (SQLiteConstraintException e) {
-                            if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
-                                Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
-                            }
+            listView.scrollToPosition(0);
+        } else if (requestCode == server_settings) {
+            // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
+            // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
+            recreate();
+        } else {
+            try {
+                AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
+                    Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
+                    try {
+                        db.addAccount(account.url, account.userId, account.name);
+                    } catch (SQLiteConstraintException e) {
+                        if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
+                            Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
                         }
-                        selectAccount(account.name);
-                        this.accountChooserActive = false;
-                        accountChooser.setVisibility(View.GONE);
-                        accountNavigation.setVisibility(View.VISIBLE);
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                    });
-                } catch (AccountImportCancelledException e) {
-                    Log.i(TAG, "AccountImport has been cancelled.");
-                }
+                    }
+                    selectAccount(account.name);
+                    this.accountChooserActive = false;
+                    binding.accountChooser.setVisibility(View.GONE);
+                    binding.accountNavigation.setVisibility(View.VISIBLE);
+                    binding.drawerLayout.closeDrawer(GravityCompat.START);
+                });
+            } catch (AccountImportCancelledException e) {
+                Log.i(TAG, "AccountImport has been cancelled.");
             }
         }
     }
@@ -724,23 +696,23 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         try {
             String url = localAccount.getUrl();
             if (url != null) {
-                this.account.setText(localAccount.getAccountName());
+                binding.account.setText(localAccount.getAccountName());
                 Glide
                         .with(this)
                         .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
                         .error(R.mipmap.ic_launcher)
                         .apply(RequestOptions.circleCropTransform())
-                        .into(this.currentAccountImage);
+                        .into(binding.currentAccountImage);
             } else {
                 Log.w(TAG, "url is null");
             }
         } catch (NullPointerException e) { // No local account - show generic header
-            this.account.setText(R.string.app_name_long);
+            binding.account.setText(R.string.app_name_long);
             Glide
                     .with(this)
                     .load(R.mipmap.ic_launcher)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(this.currentAccountImage);
+                    .into(binding.currentAccountImage);
             Log.w(TAG, "Tried to update username in drawer, but localAccount was null");
         }
     }
@@ -773,7 +745,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     @Override
     public void onNoteFavoriteClick(int position, View view) {
         DBNote note = (DBNote) adapter.getItem(position);
-        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(view.getContext());
+        NotesDatabase db = NotesDatabase.getInstance(view.getContext());
         db.toggleFavorite(ssoAccount, note, syncCallBack);
         adapter.notifyItemChanged(position);
         refreshLists();

@@ -97,7 +97,6 @@
     <string name="shortcut_create_long">Maak een nieuwe notitie</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Licht</string>
     <string name="pref_value_font_normal">Normaal</string>
     <string name="pref_value_wifi_and_mobile">Sync met Wi-Fi en mobiele data</string>
 
@@ -126,7 +125,6 @@
     <string name="category_readonly">Alleen lezen</string>
     <string name="no_category">Geen categorie</string>
     <string name="add_category">Toevoegen %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wijzigen modus</item>

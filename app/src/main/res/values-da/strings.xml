@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">Opret en ny note</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Lys</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synk på Wi-Fi og mobil data</string>
 
@@ -125,7 +124,6 @@
     <string name="category_readonly">Skrivebeskyttet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Tilføj %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>

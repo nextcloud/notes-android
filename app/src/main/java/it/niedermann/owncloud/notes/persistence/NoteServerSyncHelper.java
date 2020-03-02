@@ -67,8 +67,8 @@ public class NoteServerSyncHelper {
 
     private static NoteServerSyncHelper instance;
 
-    private NoteSQLiteOpenHelper db;
-    private Context context;
+    private final NotesDatabase db;
+    private final Context context;
 
     // Track network connection changes using a BroadcastReceiver
     private boolean isSyncPossible = false;
@@ -79,6 +79,7 @@ public class NoteServerSyncHelper {
     /**
      * @see <a href="https://stackoverflow.com/a/3104265">Do not make this a local variable.</a>
      */
+    @SuppressWarnings("FieldCanBeLocal")
     private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = (SharedPreferences prefs, String key) -> {
         if (syncOnlyOnWifiKey.equals(key)) {
             syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
@@ -101,15 +102,15 @@ public class NoteServerSyncHelper {
     };
 
     // current state of the synchronization
-    private Map<String, Boolean> syncActive = new HashMap<>();
-    private Map<String, Boolean> syncScheduled = new HashMap<>();
-    private NotesClient notesClient;
+    private final Map<String, Boolean> syncActive = new HashMap<>();
+    private final Map<String, Boolean> syncScheduled = new HashMap<>();
+    private final NotesClient notesClient;
 
     // list of callbacks for both parts of synchronziation
-    private Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
-    private Map<String, List<ISyncCallback>> callbacksPull = new HashMap<>();
+    private final Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
+    private final Map<String, List<ISyncCallback>> callbacksPull = new HashMap<>();
 
-    private NoteServerSyncHelper(NoteSQLiteOpenHelper db) {
+    private NoteServerSyncHelper(NotesDatabase db) {
         this.db = db;
         this.context = db.getContext();
         notesClient = new NotesClient(context.getApplicationContext());
@@ -133,7 +134,7 @@ public class NoteServerSyncHelper {
      * @param dbHelper NoteSQLiteOpenHelper
      * @return NoteServerSyncHelper
      */
-    public static synchronized NoteServerSyncHelper getInstance(NoteSQLiteOpenHelper dbHelper) {
+    public static synchronized NoteServerSyncHelper getInstance(NotesDatabase dbHelper) {
         if (instance == null) {
             instance = new NoteServerSyncHelper(dbHelper);
         }
@@ -286,7 +287,7 @@ public class NoteServerSyncHelper {
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
         @NonNull private final Map<String, List<ISyncCallback>> callbacks = new HashMap<>();
-        @NonNull private List<Throwable> exceptions = new ArrayList<>();
+        @NonNull private final List<Throwable> exceptions = new ArrayList<>();
 
         SyncTask(@NonNull LocalAccount localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
             this.localAccount = localAccount;

@@ -25,27 +25,25 @@ import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserDialogFragment;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 public class MultiSelectedActionModeCallback implements Callback {
 
-    private Context context;
-    private ViewProvider viewProvider;
-    private NoteSQLiteOpenHelper db;
-    private ActionMode actionMode;
-    private ItemAdapter adapter;
-    private RecyclerView recyclerView;
-    private Runnable refreshLists;
-    private FragmentManager fragmentManager;
-    private SearchView searchView;
+    private final Context context;
+    private final ViewProvider viewProvider;
+    private final NotesDatabase db;
+    private final ItemAdapter adapter;
+    private final RecyclerView recyclerView;
+    private final Runnable refreshLists;
+    private final FragmentManager fragmentManager;
+    private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            Context context, ViewProvider viewProvider, NoteSQLiteOpenHelper db, ActionMode actionMode, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
+            Context context, ViewProvider viewProvider, NotesDatabase db, ActionMode actionMode, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.viewProvider = viewProvider;
         this.db = db;
-        this.actionMode = actionMode;
         this.adapter = adapter;
         this.recyclerView = recyclerView;
         this.refreshLists = refreshLists;
@@ -120,7 +118,6 @@ public class MultiSelectedActionModeCallback implements Callback {
     @Override
     public void onDestroyActionMode(ActionMode mode) {
         adapter.clearSelection(recyclerView);
-        actionMode = null;
         adapter.notifyDataSetChanged();
     }
 }

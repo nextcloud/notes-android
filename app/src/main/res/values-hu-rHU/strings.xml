@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">Új jegyzet létrehozása</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Világos</string>
     <string name="pref_value_font_normal">Normál</string>
     <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fin és mobil adatkapcsolaton</string>
 
@@ -125,7 +124,6 @@
     <string name="category_readonly">Csak olvasható</string>
     <string name="no_category">Nincs kategória</string>
     <string name="add_category">%1$s hozzáadása</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>

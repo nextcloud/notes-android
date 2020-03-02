@@ -43,14 +43,14 @@
     <string name="settings_font_title">Nichtproportionale Schriftart</string>
     <string name="settings_font_size">Schriftgröße</string>
     <string name="settings_wifi_only">Nur über WLAN synchronisieren</string>
-    <string name="settings_background_sync">Hintergrundsynchronisation</string>
+    <string name="settings_background_sync">Hintergrundsynchronisierung</string>
 
     <!-- Certificates -->
 
     <!-- Network -->
 
     <!-- Error -->
-    <string name="error_sync">Synchronisation fehlgeschlagen: %1$s</string>
+    <string name="error_sync">Synchronisierung fehlgeschlagen: %1$s</string>
     <string name="error_json">Ist die Notes-App auf dem Server aktiviert?</string>
     <string name="error_no_network">Keine Netzwerkverbindung</string>
     <string name="error_files_app">Haben Sie die Dateien-App installiert?</string>
@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">Neue Notiz erstellen</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Hell</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Über WLAN und mobile Daten synchronisieren</string>
 
@@ -125,6 +124,7 @@
     <string name="category_readonly">Schreibgeschützt</string>
     <string name="no_category">Keine Kategorie</string>
     <string name="add_category">%1$s hinzufügen</string>
+    <string name="simple_checkbox">Checkbox</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

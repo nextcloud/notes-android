@@ -83,7 +83,6 @@
     <string name="shortcut_create_long">Búa til nýjan minnispunkt</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Ljóst</string>
     <string name="pref_value_font_normal">Venjulegt</string>
     <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
 
@@ -104,7 +103,6 @@
     <string name="simple_move">Færa</string>
     <string name="category_readonly">Skrifvarið</string>
     <string name="add_category">Bæta við %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>

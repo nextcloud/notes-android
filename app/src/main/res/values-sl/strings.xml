@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">Ustvari novo zabeležko</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Svetla</string>
     <string name="pref_value_font_normal">Običajno</string>
     <string name="pref_value_wifi_and_mobile">Usklajuj na Wi-Fi in mobilni povezavi</string>
 
@@ -125,7 +124,6 @@
     <string name="category_readonly">Le za branje</string>
     <string name="no_category">Brez kategorije</string>
     <string name="add_category">Dodaj %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>

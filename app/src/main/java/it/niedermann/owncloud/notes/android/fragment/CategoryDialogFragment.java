@@ -16,16 +16,13 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-import java.util.Objects;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
@@ -37,8 +34,10 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     private static final String TAG = CategoryDialogFragment.class.getSimpleName();
     private static final String STATE_CATEGORY = "category";
 
-    private NoteSQLiteOpenHelper db;
+    private NotesDatabase db;
     private CategoryDialogListener listener;
+
+    private EditText editCategory;
 
     /**
      * Interface that must be implemented by the calling Activity.
@@ -57,19 +56,13 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
 
     private long accountId;
 
-    @BindView(R.id.search)
-    EditText editCategory;
-
-    @BindView(R.id.recycler_view)
-    RecyclerView recyclerView;
-
     private CategoryAdapter adapter;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (getArguments() != null && getArguments().containsKey(PARAM_ACCOUNT_ID)) {
-            accountId = getArguments().getLong(PARAM_ACCOUNT_ID);
+        if (requireArguments() != null && requireArguments().containsKey(PARAM_ACCOUNT_ID)) {
+            accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
         } else {
             throw new IllegalArgumentException("Provide at least \"" + PARAM_ACCOUNT_ID + "\"");
         }
@@ -81,24 +74,25 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
         } else {
             throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getCanonicalName());
         }
-        db = NoteSQLiteOpenHelper.getInstance(getActivity());
+        db = NotesDatabase.getInstance(getActivity());
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View dialogView = Objects.requireNonNull(getActivity()).getLayoutInflater().inflate(R.layout.dialog_change_category, null);
-        ButterKnife.bind(this, dialogView);
+        View dialogView = View.inflate(getContext(), R.layout.dialog_change_category, null);
+        DialogChangeCategoryBinding binding = DialogChangeCategoryBinding.bind(dialogView);
+        this.editCategory = binding.search;
 
         if (savedInstanceState == null) {
-            if (getArguments() != null && getArguments().containsKey(PARAM_CATEGORY)) {
-                editCategory.setText(getArguments().getString(PARAM_CATEGORY));
+            if (requireArguments().containsKey(PARAM_CATEGORY)) {
+                editCategory.setText(requireArguments().getString(PARAM_CATEGORY));
             }
         } else if (savedInstanceState.containsKey(STATE_CATEGORY)) {
             editCategory.setText(savedInstanceState.getString(STATE_CATEGORY));
         }
 
-        adapter = new CategoryAdapter(Objects.requireNonNull(getContext()), new CategoryAdapter.CategoryListener() {
+        adapter = new CategoryAdapter(requireContext(), new CategoryAdapter.CategoryListener() {
             @Override
             public void onCategoryChosen(String category) {
                 listener.onCategoryChosen(category);
@@ -118,7 +112,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
             }
         });
 
-        recyclerView.setAdapter(adapter);
+        binding.recyclerView.setAdapter(adapter);
         new LoadCategoriesTask().execute("");
         editCategory.addTextChangedListener(new TextWatcher() {
             @Override

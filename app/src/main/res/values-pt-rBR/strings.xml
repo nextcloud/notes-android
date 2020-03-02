@@ -96,7 +96,6 @@
     <string name="shortcut_create_long">Criar uma nova anotação</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Claro</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar por Wi-Fi e dados móveis</string>
 
@@ -125,7 +124,6 @@
     <string name="category_readonly">Somente leitura</string>
     <string name="no_category">Sem categorias</string>
     <string name="add_category">Adicionar %1$s</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir em modo de edição</item>

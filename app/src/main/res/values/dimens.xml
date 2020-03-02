@@ -7,7 +7,6 @@
 
     <!-- Buttons -->
     <dimen name="button_padding">16dp</dimen>
-    <dimen name="button_elevation">5dp</dimen>
 
     <dimen name="primary_font_size">16sp</dimen>
     <dimen name="secondary_font_size">14sp</dimen>

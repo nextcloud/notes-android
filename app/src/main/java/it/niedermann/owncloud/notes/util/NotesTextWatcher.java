@@ -25,7 +25,7 @@ public abstract class NotesTextWatcher implements TextWatcher {
     private boolean afterTextChangedHandeled = false;
     private int resetSelectionTo = -1;
 
-    private EditText editText;
+    private final EditText editText;
 
     protected NotesTextWatcher(EditText editText) {
         this.editText = editText;

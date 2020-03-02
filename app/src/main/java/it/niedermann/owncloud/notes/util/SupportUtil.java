@@ -42,6 +42,7 @@ public class SupportUtil {
         if (Build.VERSION.SDK_INT >= 24) {
             return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
         } else {
+            //noinspection deprecation
             return Html.fromHtml(source);
         }
     }

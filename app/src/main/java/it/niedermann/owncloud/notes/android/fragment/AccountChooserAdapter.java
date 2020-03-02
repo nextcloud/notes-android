@@ -17,19 +17,18 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 
 public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @NonNull
-    private List<LocalAccount> localAccounts;
+    private final List<LocalAccount> localAccounts;
     @NonNull
-    private AccountChooserListener accountChooserListener;
+    private final AccountChooserListener accountChooserListener;
     @NonNull
-    private Context context;
+    private final Context context;
 
     AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull AccountChooserListener accountChooserListener, @NonNull Context context) {
         super();
@@ -49,18 +48,16 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         LocalAccount localAccount = localAccounts.get(position);
         AccountChooserViewHolder accountChooserViewHolder = (AccountChooserViewHolder) holder;
-        accountChooserViewHolder.accountLayout.setOnClickListener((v) -> {
-            accountChooserListener.onAccountChosen(localAccount);
-        });
+        accountChooserViewHolder.getAccountLayout().setOnClickListener((v) -> accountChooserListener.onAccountChosen(localAccount));
 
         Glide
                 .with(context)
                 .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
-                .into(accountChooserViewHolder.avatar);
+                .into(accountChooserViewHolder.getAvatar());
 
-        accountChooserViewHolder.username.setText(localAccount.getAccountName());
+        accountChooserViewHolder.getUsername().setText(localAccount.getAccountName());
     }
 
     @Override
@@ -69,16 +66,23 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     static class AccountChooserViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.accountLayout)
-        LinearLayout accountLayout;
-        @BindView(R.id.accountItemAvatar)
-        ImageView avatar;
-        @BindView(R.id.accountItemLabel)
-        TextView username;
+        private final ItemAccountChooseBinding binding;
 
         private AccountChooserViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
+            binding = ItemAccountChooseBinding.bind(view);
+        }
+
+        private LinearLayout getAccountLayout() {
+            return binding.accountLayout;
+        }
+
+        private ImageView getAvatar() {
+            return binding.accountItemAvatar;
+        }
+
+        private TextView getUsername() {
+            return binding.accountItemLabel;
         }
     }
 

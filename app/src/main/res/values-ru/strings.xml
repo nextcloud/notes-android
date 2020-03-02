@@ -85,7 +85,6 @@
     <string name="shortcut_create_long">Создать новую заметку</string>
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
-    <string name="pref_value_theme_light">Светлая</string>
     <string name="pref_value_font_normal">Обычный</string>
     <string name="pref_value_wifi_and_mobile">Синхр. по Wi-Fi и мобильной связи</string>
 
@@ -106,7 +105,6 @@
     <string name="simple_move">Переместить</string>
     <string name="category_readonly">Только для чтения</string>
     <string name="add_category">Добавить %1$s </string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>

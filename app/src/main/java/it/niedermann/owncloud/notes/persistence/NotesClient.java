@@ -35,7 +35,7 @@ public class NotesClient {
     private static final String TAG = NotesClient.class.getSimpleName();
 
     private final Context appContext;
-    private static Map<String, NextcloudAPI> mNextcloudAPIs = new HashMap<>();
+    private static final Map<String, NextcloudAPI> mNextcloudAPIs = new HashMap<>();
 
     /**
      * This entity class is used to return relevant data of the HTTP reponse.
@@ -112,7 +112,6 @@ public class NotesClient {
      *
      * @param note {@link CloudNote} - the new Note
      * @return Created Note including generated Title, ID and lastModified-Date
-     * @throws Exception
      */
     NoteResponse createNote(SingleSignOnAccount ssoAccount, CloudNote note) throws Exception {
         return putNote(ssoAccount, note, "notes", METHOD_POST);
