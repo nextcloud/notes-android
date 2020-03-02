@@ -26,7 +26,6 @@ public class SingleNoteWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         Intent templateIntent = new Intent(context, EditNoteActivity.class);
-        templateIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         for (int appWidgetId : appWidgetIds) {
             // onUpdate has been triggered before the user finished configuring the widget
