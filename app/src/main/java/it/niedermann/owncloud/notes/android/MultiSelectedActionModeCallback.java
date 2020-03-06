@@ -25,8 +25,8 @@ import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserDialogFragment;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 public class MultiSelectedActionModeCallback implements Callback {
 
@@ -111,8 +111,9 @@ public class MultiSelectedActionModeCallback implements Callback {
                 AccountChooserDialogFragment.newInstance().show(fragmentManager, NotesListViewActivity.class.getCanonicalName());
                 return true;
             }
+            default:
+                return false;
         }
-        return false;
     }
 
     @Override
