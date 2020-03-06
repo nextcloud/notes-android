@@ -26,6 +26,10 @@ public abstract class LockedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
+
+        if (isTaskRoot()) {
+            askToUnlock();
+        }
     }
 
     @Override
@@ -33,16 +37,6 @@ public abstract class LockedActivity extends AppCompatActivity {
         super.onResume();
 
         if (!isTaskRoot()) {
-            // TODO - Evaluate if this is really needed
-            askToUnlock();
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if (isTaskRoot()) {
             askToUnlock();
         }
     }
