@@ -128,7 +128,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         deleteNoteAndSync(ssoAccount, note.getId());
 
         notifyNotesChanged();
-        getNoteServerSyncHelper().scheduleSync(ssoAccount,true);
+        getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
     }
 
     /**
@@ -436,7 +436,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         if (callback != null) {
             serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
-        serverSyncHelper.scheduleSync(ssoAccount,true);
+        serverSyncHelper.scheduleSync(ssoAccount, true);
     }
 
     /**
@@ -538,7 +538,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, DBStatus.LOCAL_DELETED.getTitle());
-        int i = db.update(table_notes,
+        db.update(table_notes,
                 values,
                 key_id + " = ?",
                 new String[]{String.valueOf(id)});
