@@ -211,7 +211,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
                 return false;
             case MENU_ID_PIN:
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
 
                     if(shortcutManager != null) {
