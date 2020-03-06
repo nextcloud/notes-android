@@ -31,8 +31,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
         assert themePref != null;
         themePref.setOnPreferenceChangeListener((preference, newValue) -> {
             Notes.setAppTheme(DarkModeSetting.valueOf((String) newValue));
-            getActivity().setResult(Activity.RESULT_OK);
-            getActivity().recreate();
+            requireActivity().setResult(Activity.RESULT_OK);
+            requireActivity().recreate();
             return true;
         });
 
@@ -47,7 +47,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
         assert syncPref != null;
         syncPref.setOnPreferenceChangeListener((preference, newValue) -> {
             Log.v(TAG, "syncPref: " + preference + " - newValue: " + newValue);
-            SyncWorker.update(getContext(), newValue.toString());
+            SyncWorker.update(requireContext(), newValue.toString());
             return true;
         });
     }

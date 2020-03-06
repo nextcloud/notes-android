@@ -26,7 +26,7 @@ public class ClipboardUtil {
             try {
                 clipboardURL = new URL(clipboardData.getItemAt(0).getText().toString()).toString();
             } catch (MalformedURLException e) {
-                Log.d(TAG, "Clipboard does not contain a valid URL: " + clipboardURL);
+                Log.d(TAG, "Clipboard does not contain a valid URL: " + clipboardData.getItemAt(0).getText().toString());
             }
         }
         return clipboardURL;

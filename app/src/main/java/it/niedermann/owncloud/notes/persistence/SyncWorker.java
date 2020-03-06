@@ -16,6 +16,7 @@ import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.R;
@@ -23,7 +24,7 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 
 public class SyncWorker extends Worker {
 
-    private static final String TAG = SyncWorker.class.getCanonicalName();
+    private static final String TAG = Objects.requireNonNull(SyncWorker.class.getCanonicalName());
     private static final String WORKER_TAG = "background_synchronization";
 
     private static final Constraints constraints = new Constraints.Builder()

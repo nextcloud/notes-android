@@ -14,9 +14,9 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
  * It can be directly generated from the JSON answer from the server.
  */
 public class CloudNote implements Serializable {
-    private long remoteId = 0;
+    private long remoteId;
     private String title = "";
-    private Calendar modified = null;
+    private Calendar modified;
     private String content = "";
     private boolean favorite = false;
     private String category = "";
@@ -51,7 +51,6 @@ public class CloudNote implements Serializable {
         this.title = NoteUtil.removeMarkDown(title);
     }
 
-    @SuppressWarnings("WeakerAccess")
     public Calendar getModified() {
         return modified;
     }

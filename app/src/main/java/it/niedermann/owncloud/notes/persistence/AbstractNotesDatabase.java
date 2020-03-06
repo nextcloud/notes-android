@@ -32,6 +32,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
     private static final int database_version = 11;
+    @NonNull
     private final Context context;
 
     protected static final String database_name = "OWNCLOUD_NOTES";
@@ -55,12 +56,13 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_category = "CATEGORY";
     protected static final String key_etag = "ETAG";
 
-    protected AbstractNotesDatabase(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
+    protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory, database_version);
         this.context = context;
     }
 
 
+    @NonNull
     public Context getContext() {
         return context;
     }

@@ -145,7 +145,9 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
             }
 
             Map<String, Integer> favorites = db.getFavoritesCount(localAccount.getId());
+            //noinspection ConstantConditions
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
+            //noinspection ConstantConditions
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
             itemFavorites.count = numFavorites;
             itemRecent.count = numFavorites + numNonFavorites;

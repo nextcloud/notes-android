@@ -59,7 +59,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     private final NoteServerSyncHelper serverSyncHelper;
 
-    private NotesDatabase(Context context) {
+    private NotesDatabase(@NonNull Context context) {
         super(context, database_name, null);
         serverSyncHelper = NoteServerSyncHelper.getInstance(this);
     }
@@ -389,7 +389,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 table_notes,
                 new String[]{key_category, "COUNT(*)"},
                 key_status + " != ? AND " + key_account_id + " = ? AND " + key_category + " LIKE ? AND " + key_category + " != \"\"",
-                new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId), "%" + (search == null ? search : search.trim()) + "%"},
+                new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId), "%" + (search == null ? null : search.trim()) + "%"},
                 key_category,
                 null,
                 key_category);
