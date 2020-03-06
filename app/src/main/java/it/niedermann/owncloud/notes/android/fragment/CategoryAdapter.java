@@ -61,6 +61,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             default:
                 categoryViewHolder.getIcon().setImageDrawable(context.getResources().getDrawable(category.icon));
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryChosen(category.label));
+                break;
         }
         categoryViewHolder.getCategory().setText(NoteUtil.extendCategory(category.label));
         if (category.count != null && category.count > 0) {
