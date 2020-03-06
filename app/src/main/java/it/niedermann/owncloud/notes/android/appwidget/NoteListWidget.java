@@ -154,8 +154,8 @@ public class NoteListWidget extends AppWidgetProvider {
                 } else {
                     return category;
                 }
+            default:
+                return null;
         }
-
-        return null;
     }
 }
