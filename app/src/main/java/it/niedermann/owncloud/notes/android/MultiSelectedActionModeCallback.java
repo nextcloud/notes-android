@@ -71,7 +71,7 @@ public class MultiSelectedActionModeCallback implements Callback {
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_delete: {
+            case R.id.menu_delete:
                 try {
                     SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
                     List<DBNote> deletedNotes = new ArrayList<>();
@@ -106,11 +106,9 @@ public class MultiSelectedActionModeCallback implements Callback {
                     e.printStackTrace();
                 }
                 return true;
-            }
-            case R.id.menu_move: {
+            case R.id.menu_move:
                 AccountChooserDialogFragment.newInstance().show(fragmentManager, NotesListViewActivity.class.getCanonicalName());
                 return true;
-            }
             default:
                 return false;
         }
