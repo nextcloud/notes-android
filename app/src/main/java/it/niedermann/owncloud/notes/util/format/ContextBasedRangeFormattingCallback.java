@@ -145,7 +145,6 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
         ssb.insert(start, markdown);
         editText.getText().charAt(start);
         editText.getText().charAt(start + 1);
-        end += markdown.length() * 2;
-        ssb.setSpan(new StyleSpan(typeface), start, end, 1);
+        ssb.setSpan(new StyleSpan(typeface), start, end + markdown.length() * 2, 1);
     }
 }
