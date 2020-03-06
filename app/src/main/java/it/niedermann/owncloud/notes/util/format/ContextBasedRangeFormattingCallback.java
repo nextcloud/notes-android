@@ -122,8 +122,9 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
                     return true;
                 }
             }
+            default:
+                return false;
         }
-        return false;
     }
 
     @Override
