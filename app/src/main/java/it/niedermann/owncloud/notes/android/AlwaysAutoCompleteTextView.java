@@ -30,10 +30,7 @@ public class AlwaysAutoCompleteTextView extends AppCompatAutoCompleteTextView {
 
     @Override
     public void setThreshold(int threshold) {
-        if (threshold < 0) {
-            threshold = 0;
-        }
-        myThreshold = threshold;
+        myThreshold = Math.max(threshold, 0);
     }
 
     @Override
