@@ -141,7 +141,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             lastYear.set(now.get(Calendar.YEAR) - 1, 0, 1, 0, 0, 0);
         }
 
-        String getTimeslot(DBNote note) {
+        private String getTimeslot(DBNote note) {
             if (note.isFavorite()) {
                 return "";
             }

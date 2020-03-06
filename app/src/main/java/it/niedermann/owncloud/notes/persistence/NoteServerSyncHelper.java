@@ -295,7 +295,7 @@ public class NoteServerSyncHelper {
             this.onlyLocalChanges = onlyLocalChanges;
         }
 
-        void addCallbacks(SingleSignOnAccount ssoAccount, List<ISyncCallback> callbacks) {
+        private void addCallbacks(SingleSignOnAccount ssoAccount, List<ISyncCallback> callbacks) {
             this.callbacks.put(ssoAccount.name, callbacks);
         }
 
