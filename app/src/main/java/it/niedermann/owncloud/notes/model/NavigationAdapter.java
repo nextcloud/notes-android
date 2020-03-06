@@ -77,7 +77,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
             itemView.setOnClickListener(view -> clickListener.onItemClick(currentItem));
         }
 
-        void assignItem(@NonNull NavigationItem item) {
+        private void assignItem(@NonNull NavigationItem item) {
             currentItem = item;
             boolean isSelected = item.id.equals(selectedItem);
             name.setText(NoteUtil.extendCategory(item.label));
