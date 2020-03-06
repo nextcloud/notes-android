@@ -427,7 +427,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             ArrayList<NavigationItem> items = new ArrayList<>();
             items.add(itemRecent);
             items.add(itemFavorites);
-            NavigationItem lastPrimaryCategory = null, lastSecondaryCategory = null;
+            NavigationItem lastPrimaryCategory = null;
+            NavigationItem lastSecondaryCategory = null;
             for (NavigationItem item : categories) {
                 int slashIndex = item.label.indexOf('/');
                 String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
