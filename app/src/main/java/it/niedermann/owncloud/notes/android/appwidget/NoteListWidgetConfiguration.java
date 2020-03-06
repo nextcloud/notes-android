@@ -36,7 +36,7 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
 
-    LocalAccount localAccount = null;
+    private LocalAccount localAccount = null;
 
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent;
