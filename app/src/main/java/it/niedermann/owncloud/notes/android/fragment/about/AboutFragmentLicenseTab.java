@@ -16,7 +16,7 @@ import it.niedermann.owncloud.notes.util.SupportUtil;
 
 public class AboutFragmentLicenseTab extends Fragment {
 
-    void openLicense() {
+    private void openLicense() {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url_license))));
     }
 
