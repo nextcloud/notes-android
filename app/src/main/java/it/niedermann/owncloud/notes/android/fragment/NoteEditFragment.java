@@ -51,7 +51,8 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     private FragmentNoteEditBinding binding;
 
     private Handler handler;
-    private boolean saveActive, unsavedEdit;
+    private boolean saveActive;
+    private boolean unsavedEdit;
     private final Runnable runAutoSave = new Runnable() {
         @Override
         public void run() {
