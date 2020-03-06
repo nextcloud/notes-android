@@ -172,38 +172,30 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         Layout layout = getLayout();
         if (layout == null) {
             Log.w(TAG, "getLayout() is null");
-            return;
-        }
-        if (getContent() == null || getContent().isEmpty()) {
-            Log.w(TAG, "getContent() returned " + getContent());
-            return;
-        }
-        if (searchQuery == null || searchQuery.isEmpty()) {
-            // No search term
-            return;
-        }
-        if (currentOccurrence < 1) {
+        } else if (getContent() == null || getContent().isEmpty()) {
+            Log.w(TAG, "getContent is null or empty");
+        } else if (currentOccurrence < 1) {
             // if currentOccurrence is lower than 1, jump to last occurrence
             currentOccurrence = occurrenceCount;
             jumpToOccurrence();
-            return;
-        }
-        String currentContent = getContent().toLowerCase();
-        int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, currentOccurrence);
-        if (indexOfNewText <= 0) {
-            // Search term is not n times in text
-            // Go back to first search result
-            if (currentOccurrence != 1) {
-                currentOccurrence = 1;
-                jumpToOccurrence();
+        } else if (searchQuery != null && !searchQuery.isEmpty()) {
+            String currentContent = getContent().toLowerCase();
+            int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, currentOccurrence);
+            if (indexOfNewText <= 0) {
+                // Search term is not n times in text
+                // Go back to first search result
+                if (currentOccurrence != 1) {
+                    currentOccurrence = 1;
+                    jumpToOccurrence();
+                }
+                return;
             }
-            return;
-        }
-        String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
-        int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
+            String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
+            int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
 
-        if (numberLine >= 0) {
-            getScrollView().smoothScrollTo(0, layout.getLineTop(numberLine));
+            if (numberLine >= 0) {
+                getScrollView().smoothScrollTo(0, layout.getLineTop(numberLine));
+            }
         }
     }
 
