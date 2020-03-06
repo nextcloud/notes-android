@@ -88,12 +88,10 @@ public abstract class NotesTextWatcher implements TextWatcher {
                     Log.v(TAG, "Entered a character directly behind a codeBlock - prepare selection reset to " + resetSelectionTo);
                 }
             }
-        } else if (s.subSequence(startOfLine, start + count).toString().startsWith(codeBlock)) {
-            if (!resetSelection) {
+        } else if (s.subSequence(startOfLine, start + count).toString().startsWith(codeBlock) && !resetSelection) {
                 resetSelectionTo = editText.getSelectionEnd();
                 resetSelection = true;
                 Log.v(TAG, "One completed a ``-codeBlock with the third `-character - prepare selection reset to " + resetSelectionTo);
-            }
         }
     }
 
