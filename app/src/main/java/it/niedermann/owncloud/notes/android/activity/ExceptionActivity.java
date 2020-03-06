@@ -20,8 +20,6 @@ import static it.niedermann.nextcloud.exception.ExceptionHandler.KEY_THROWABLE;
 
 public class ExceptionActivity extends AppCompatActivity {
 
-    Throwable throwable;
-
     private TextView stacktrace;
 
     @SuppressLint("SetTextI18n") // only used for logging
@@ -38,7 +36,7 @@ public class ExceptionActivity extends AppCompatActivity {
         findViewById(R.id.close).setOnClickListener((v) -> close());
 
         setSupportActionBar(toolbar);
-        throwable = (Throwable) Objects.requireNonNull(getIntent().getSerializableExtra(KEY_THROWABLE));
+        Throwable throwable = (Throwable) Objects.requireNonNull(getIntent().getSerializableExtra(KEY_THROWABLE));
         throwable.printStackTrace();
         toolbar.setTitle(getString(R.string.simple_error));
         message.setText(throwable.getMessage());
@@ -46,7 +44,7 @@ public class ExceptionActivity extends AppCompatActivity {
     }
 
 
-    void copyStacktraceToClipboard() {
+    private void copyStacktraceToClipboard() {
         final ClipboardManager clipboardManager = (ClipboardManager) Objects.requireNonNull(getSystemService(CLIPBOARD_SERVICE));
         ClipData clipData = ClipData.newPlainText(getString(R.string.simple_exception), "```\n" + this.stacktrace.getText() + "\n```");
         clipboardManager.setPrimaryClip(clipData);
