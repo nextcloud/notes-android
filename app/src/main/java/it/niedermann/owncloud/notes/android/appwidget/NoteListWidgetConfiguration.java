@@ -39,7 +39,8 @@ public class NoteListWidgetConfiguration extends AppCompatActivity {
     LocalAccount localAccount = null;
 
     private NavigationAdapter adapterCategories;
-    private NavigationAdapter.NavigationItem itemRecent, itemFavorites;
+    private NavigationAdapter.NavigationItem itemRecent;
+    private NavigationAdapter.NavigationItem itemFavorites;
     private NotesDatabase db = null;
 
     @Override
