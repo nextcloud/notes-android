@@ -61,7 +61,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     protected NotesDatabase db;
     private NoteFragmentListener listener;
 
-    boolean isNew = true;
+    protected boolean isNew = true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -214,7 +214,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
 
-                    if(shortcutManager != null) {
+                    if (shortcutManager != null) {
                         if (shortcutManager.isRequestPinShortcutSupported()) {
                             Intent intent = new Intent(getActivity(), EditNoteActivity.class);
                             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
