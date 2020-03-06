@@ -108,7 +108,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
     private ActionBarDrawerToggle drawerToggle;
     private NavigationAdapter adapterCategories;
-    private NavigationItem itemRecent, itemFavorites, itemUncategorized;
+    private NavigationItem itemRecent;
+    private NavigationItem itemFavorites;
+    private NavigationItem itemUncategorized;
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
