@@ -274,7 +274,8 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
-    float getFontSizeFromPreferences(SharedPreferences sp) {
+    @SuppressWarnings("WeakerAccess") //PMD...
+    protected float getFontSizeFromPreferences(SharedPreferences sp) {
         final String prefValueSmall = getString(R.string.pref_value_font_size_small);
         final String prefValueMedium = getString(R.string.pref_value_font_size_medium);
         // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
