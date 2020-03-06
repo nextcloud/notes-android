@@ -44,7 +44,7 @@ public class NoteUtil {
         result = pEmphasis.matcher(result).replaceAll("$2");
         result = pSpace1.matcher(result).replaceAll("");
         result = pSpace2.matcher(result).replaceAll("");
-        return s;
+        return result;
     }
 
     /**
