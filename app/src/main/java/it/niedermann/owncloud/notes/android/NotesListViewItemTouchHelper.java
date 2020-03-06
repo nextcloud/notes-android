@@ -82,6 +82,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         db.toggleFavorite(ssoAccount, adapterNote, syncCallBack);
                         refreshLists.run();
                         break;
+                    default:
+                        //NoOp
                 }
             }
 
