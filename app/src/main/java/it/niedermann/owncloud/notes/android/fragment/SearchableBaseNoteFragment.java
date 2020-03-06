@@ -214,13 +214,11 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         if (haystack == null || haystack.isEmpty() || needle == null || needle.isEmpty()) {
             return 0;
         }
-        haystack = haystack.toLowerCase();
-        needle = needle.toLowerCase();
         int lastIndex = 0;
         int count = 0;
 
         while (lastIndex != -1) {
-            lastIndex = haystack.indexOf(needle, lastIndex);
+            lastIndex = haystack.toLowerCase().indexOf(needle.toLowerCase(), lastIndex);
             if (lastIndex != -1) {
                 count++;
                 lastIndex += needle.length();
