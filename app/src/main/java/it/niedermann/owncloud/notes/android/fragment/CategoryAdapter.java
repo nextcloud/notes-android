@@ -66,7 +66,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             }
         }
         categoryViewHolder.getCategory().setText(NoteUtil.extendCategory(category.label));
-        if (category.count > 0) {
+        if (category.count != null && category.count > 0) {
             categoryViewHolder.getCount().setText(String.valueOf(category.count));
         } else {
             categoryViewHolder.getCount().setVisibility(View.GONE);

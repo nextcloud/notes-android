@@ -61,7 +61,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (requireArguments() != null && requireArguments().containsKey(PARAM_ACCOUNT_ID)) {
+        if (getArguments() != null && requireArguments().containsKey(PARAM_ACCOUNT_ID)) {
             accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
         } else {
             throw new IllegalArgumentException("Provide at least \"" + PARAM_ACCOUNT_ID + "\"");
@@ -151,7 +151,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
         super.onActivityCreated(savedInstanceState);
         if (editCategory.getText() == null || editCategory.getText().length() == 0) {
             editCategory.requestFocus();
-            if (getDialog().getWindow() != null) {
+            if (getDialog() != null && getDialog().getWindow() != null) {
                 getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
             } else {
                 Log.w(TAG, "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");

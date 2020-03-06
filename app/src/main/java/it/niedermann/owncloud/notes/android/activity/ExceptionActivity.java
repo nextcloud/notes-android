@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.Objects;
+
 import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.R;
 
@@ -36,7 +38,7 @@ public class ExceptionActivity extends AppCompatActivity {
         findViewById(R.id.close).setOnClickListener((v) -> close());
 
         setSupportActionBar(toolbar);
-        throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
+        throwable = (Throwable) Objects.requireNonNull(getIntent().getSerializableExtra(KEY_THROWABLE));
         throwable.printStackTrace();
         toolbar.setTitle(getString(R.string.simple_error));
         message.setText(throwable.getMessage());
@@ -45,7 +47,7 @@ public class ExceptionActivity extends AppCompatActivity {
 
 
     void copyStacktraceToClipboard() {
-        final ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        final ClipboardManager clipboardManager = (ClipboardManager) Objects.requireNonNull(getSystemService(CLIPBOARD_SERVICE));
         ClipData clipData = ClipData.newPlainText(getString(R.string.simple_exception), "```\n" + this.stacktrace.getText() + "\n```");
         clipboardManager.setPrimaryClip(clipData);
         Toast.makeText(this, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
