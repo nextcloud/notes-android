@@ -51,7 +51,7 @@ public class ExceptionActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
     }
 
-    void close() {
+    private void close() {
         finish();
     }
 }
