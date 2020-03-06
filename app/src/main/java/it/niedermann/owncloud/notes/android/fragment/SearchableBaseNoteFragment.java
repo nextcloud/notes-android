@@ -207,7 +207,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         int idx = input.indexOf(value, startIndex);
         if (idx == -1)
             return -1;
-        return indexOfNth(input, value, idx + 1, --nth);
+        return indexOfNth(input, value, idx + 1, nth - 1);
     }
 
     private static int countOccurrences(String haystack, String needle) {
