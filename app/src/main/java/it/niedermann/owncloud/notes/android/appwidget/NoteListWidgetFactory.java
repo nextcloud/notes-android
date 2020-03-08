@@ -64,7 +64,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onDestroy() {
-
+        //NoOp
     }
 
     /**

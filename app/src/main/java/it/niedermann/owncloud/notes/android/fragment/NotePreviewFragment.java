@@ -94,7 +94,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup
             container, @Nullable Bundle savedInstanceState) {
         binding = FragmentNotePreviewBinding.inflate(inflater, container, false);
         return binding.getRoot();

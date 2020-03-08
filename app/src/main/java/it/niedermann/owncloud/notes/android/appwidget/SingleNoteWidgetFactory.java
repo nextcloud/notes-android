@@ -70,7 +70,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDestroy() {
-
+        //NoOp
     }
 
     /**

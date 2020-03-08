@@ -58,9 +58,6 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         private final View view;
 
         @NonNull
-        private final ItemNavigationBinding binding;
-
-        @NonNull
         private final TextView name;
         @NonNull
         private final TextView count;
@@ -72,7 +69,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         ViewHolder(@NonNull View itemView, @NonNull final ClickListener clickListener) {
             super(itemView);
             view = itemView;
-            binding = ItemNavigationBinding.bind(view);
+            ItemNavigationBinding binding = ItemNavigationBinding.bind(view);
             this.name = binding.navigationItemLabel;
             this.count = binding.navigationItemCount;
             this.icon = binding.navigationItemIcon;
@@ -80,7 +77,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
             itemView.setOnClickListener(view -> clickListener.onItemClick(currentItem));
         }
 
-        void assignItem(@NonNull NavigationItem item) {
+        private void assignItem(@NonNull NavigationItem item) {
             currentItem = item;
             boolean isSelected = item.id.equals(selectedItem);
             name.setText(NoteUtil.extendCategory(item.label));

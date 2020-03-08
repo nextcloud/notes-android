@@ -79,21 +79,15 @@ public abstract class NotesTextWatcher implements TextWatcher {
         // Find start of line
         int startOfLine = MarkDownUtil.getStartOfLine(s, start);
         String line = s.subSequence(startOfLine, start).toString();
-        if (line.startsWith(codeBlock)) {
-            // "start" is the direct sibling of the codeBlock
-            if (start - startOfLine == codeBlock.length()) {
-                if (!resetSelection) {
-                    resetSelectionTo = editText.getSelectionEnd();
-                    resetSelection = true;
-                    Log.v(TAG, "Entered a character directly behind a codeBlock - prepare selection reset to " + resetSelectionTo);
-                }
-            }
-        } else if (s.subSequence(startOfLine, start + count).toString().startsWith(codeBlock)) {
-            if (!resetSelection) {
-                resetSelectionTo = editText.getSelectionEnd();
-                resetSelection = true;
-                Log.v(TAG, "One completed a ``-codeBlock with the third `-character - prepare selection reset to " + resetSelectionTo);
-            }
+        // "start" is the direct sibling of the codeBlock
+        if (line.startsWith(codeBlock) && start - startOfLine == codeBlock.length() && !resetSelection) {
+            resetSelectionTo = editText.getSelectionEnd();
+            resetSelection = true;
+            Log.v(TAG, "Entered a character directly behind a codeBlock - prepare selection reset to " + resetSelectionTo);
+        } else if (s.subSequence(startOfLine, start + count).toString().startsWith(codeBlock) && !resetSelection) {
+            resetSelectionTo = editText.getSelectionEnd();
+            resetSelection = true;
+            Log.v(TAG, "One completed a ``-codeBlock with the third `-character - prepare selection reset to " + resetSelectionTo);
         }
     }
 

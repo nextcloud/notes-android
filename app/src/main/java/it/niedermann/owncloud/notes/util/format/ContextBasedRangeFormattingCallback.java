@@ -62,7 +62,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
 
 
         switch (item.getItemId()) {
-            case R.id.bold: {
+            case R.id.bold:
                 markdown = "**";
                 if (hasAlreadyMarkdown(start, end, markdown)) {
                     this.removeMarkdown(ssb, start, end, markdown);
@@ -72,8 +72,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
                 editText.setText(ssb);
                 editText.setSelection(end + markdown.length() * 2);
                 return true;
-            }
-            case R.id.italic: {
+            case R.id.italic:
                 markdown = "*";
                 if (hasAlreadyMarkdown(start, end, markdown)) {
                     this.removeMarkdown(ssb, start, end, markdown);
@@ -83,8 +82,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
                 editText.setText(ssb);
                 editText.setSelection(end + markdown.length() * 2);
                 return true;
-            }
-            case R.id.link: {
+            case R.id.link:
                 boolean textToFormatIsLink = TextUtils.indexOf(editText.getText().subSequence(start, end), "http") == 0;
                 if (textToFormatIsLink) {
                     ssb.insert(end, ")");
@@ -108,8 +106,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
                     editText.setSelection(end + 2); // after <end>](
                 }
                 return true;
-            }
-            case android.R.id.cut: {
+            case android.R.id.cut:
                 // https://github.com/stefan-niedermann/nextcloud-notes/issues/604
                 // https://github.com/stefan-niedermann/nextcloud-notes/issues/477
                 try {
@@ -121,9 +118,9 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
                     editText.clearFocus();
                     return true;
                 }
-            }
+            default:
+                return false;
         }
-        return false;
     }
 
     @Override
@@ -148,7 +145,6 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
         ssb.insert(start, markdown);
         editText.getText().charAt(start);
         editText.getText().charAt(start + 1);
-        end += markdown.length() * 2;
-        ssb.setSpan(new StyleSpan(typeface), start, end, 1);
+        ssb.setSpan(new StyleSpan(typeface), start, end + markdown.length() * 2, 1);
     }
 }

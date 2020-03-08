@@ -103,7 +103,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         for (int i = 0; i < noteList.size(); i++) {
             DBNote currentNote = noteList.get(i);
             String timeslot = timeslotter.getTimeslot(currentNote);
-            if(i > 0 && !timeslot.equals(lastTimeslot)) {
+            if (i > 0 && !timeslot.equals(lastTimeslot)) {
                 itemList.add(new SectionItem(timeslot));
             }
             itemList.add(colorTheNote(currentNote));
@@ -132,16 +132,16 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             int day = now.get(Calendar.DAY_OF_MONTH);
             int offsetWeekStart = (now.get(Calendar.DAY_OF_WEEK) - now.getFirstDayOfWeek() + 7) % 7;
             timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_today), month, day));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_yesterday), month,day - 1));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_week), month,day - offsetWeekStart));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_week), month,day - offsetWeekStart - 7));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_month), month,1));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_yesterday), month, day - 1));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_week), month, day - offsetWeekStart));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_week), month, day - offsetWeekStart - 7));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_month), month, 1));
             timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_month), month - 1, 1));
             lastYear = Calendar.getInstance();
             lastYear.set(now.get(Calendar.YEAR) - 1, 0, 1, 0, 0, 0);
         }
 
-        String getTimeslot(DBNote note) {
+        private String getTimeslot(DBNote note) {
             if (note.isFavorite()) {
                 return "";
             }
@@ -160,8 +160,8 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         }
 
         private class Timeslot {
-            final String label;
-            final Calendar time;
+            private final String label;
+            private final Calendar time;
 
             Timeslot(String label, int month, int day) {
                 this.label = label;

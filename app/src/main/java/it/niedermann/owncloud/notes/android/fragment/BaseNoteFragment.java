@@ -61,7 +61,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     protected NotesDatabase db;
     private NoteFragmentListener listener;
 
-    boolean isNew = true;
+    protected boolean isNew = true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -146,7 +146,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
 
-        if (isRequestPinShortcutSupported(requireActivity()) && android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (isRequestPinShortcutSupported(requireActivity()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
     }
@@ -198,8 +198,8 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, note.getTitle());
-                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, note.getContent());
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, note.getTitle());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, note.getContent());
 
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -211,7 +211,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
                 return false;
             case MENU_ID_PIN:
-                if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
 
                     if (shortcutManager != null) {
@@ -274,7 +274,8 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         }
     }
 
-    float getFontSizeFromPreferences(SharedPreferences sp) {
+    @SuppressWarnings("WeakerAccess") //PMD...
+    protected float getFontSizeFromPreferences(SharedPreferences sp) {
         final String prefValueSmall = getString(R.string.pref_value_font_size_small);
         final String prefValueMedium = getString(R.string.pref_value_font_size_medium);
         // final String prefValueLarge = getString(R.string.pref_value_font_size_large);

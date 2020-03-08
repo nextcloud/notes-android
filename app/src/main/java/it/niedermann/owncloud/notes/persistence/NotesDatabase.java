@@ -59,7 +59,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     private final NoteServerSyncHelper serverSyncHelper;
 
-    private NotesDatabase(Context context) {
+    private NotesDatabase(@NonNull Context context) {
         super(context, database_name, null);
         serverSyncHelper = NoteServerSyncHelper.getInstance(this);
     }
@@ -128,7 +128,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         deleteNoteAndSync(ssoAccount, note.getId());
 
         notifyNotesChanged();
-        getNoteServerSyncHelper().scheduleSync(ssoAccount,true);
+        getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
     }
 
     /**
@@ -389,7 +389,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 table_notes,
                 new String[]{key_category, "COUNT(*)"},
                 key_status + " != ? AND " + key_account_id + " = ? AND " + key_category + " LIKE ? AND " + key_category + " != \"\"",
-                new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId), "%" + (search == null ? search : search.trim()) + "%"},
+                new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId), "%" + (search == null ? null : search.trim()) + "%"},
                 key_category,
                 null,
                 key_category);
@@ -436,7 +436,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         if (callback != null) {
             serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
-        serverSyncHelper.scheduleSync(ssoAccount,true);
+        serverSyncHelper.scheduleSync(ssoAccount, true);
     }
 
     /**
@@ -538,7 +538,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, DBStatus.LOCAL_DELETED.getTitle());
-        int i = db.update(table_notes,
+        db.update(table_notes,
                 values,
                 key_id + " = ?",
                 new String[]{String.valueOf(id)});

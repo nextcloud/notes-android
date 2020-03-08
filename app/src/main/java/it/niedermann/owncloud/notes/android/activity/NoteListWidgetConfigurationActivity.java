@@ -35,10 +35,11 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
 
-    LocalAccount localAccount = null;
+    private LocalAccount localAccount = null;
 
     private NavigationAdapter adapterCategories;
-    private NavigationAdapter.NavigationItem itemRecent, itemFavorites;
+    private NavigationAdapter.NavigationItem itemRecent;
+    private NavigationAdapter.NavigationItem itemFavorites;
     private NotesDatabase db = null;
 
     @Override
@@ -144,7 +145,9 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
             }
 
             Map<String, Integer> favorites = db.getFavoritesCount(localAccount.getId());
+            //noinspection ConstantConditions
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
+            //noinspection ConstantConditions
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
             itemFavorites.count = numFavorites;
             itemRecent.count = numFavorites + numNonFavorites;

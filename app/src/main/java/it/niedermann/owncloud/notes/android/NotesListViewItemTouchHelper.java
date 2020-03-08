@@ -60,7 +60,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 switch (direction) {
-                    case ItemTouchHelper.LEFT: {
+                    case ItemTouchHelper.LEFT:
                         final DBNote dbNoteWithoutContent = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
                         final DBNote dbNote = db.getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
                         db.deleteNoteAndSync(ssoAccount, dbNote.getId());
@@ -77,13 +77,13 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                                 })
                                 .show();
                         break;
-                    }
-                    case ItemTouchHelper.RIGHT: {
-                        final DBNote dbNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.toggleFavorite(ssoAccount, dbNote, syncCallBack);
+                    case ItemTouchHelper.RIGHT:
+                        final DBNote adapterNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                        db.toggleFavorite(ssoAccount, adapterNote, syncCallBack);
                         refreshLists.run();
                         break;
-                    }
+                    default:
+                        //NoOp
                 }
             }
 

@@ -48,25 +48,23 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         CategoryViewHolder categoryViewHolder = (CategoryViewHolder) holder;
 
         switch (category.id) {
-            case addItemId: {
+            case addItemId:
                 Drawable wrapDrawable = DrawableCompat.wrap(context.getResources().getDrawable(category.icon));
                 DrawableCompat.setTint(wrapDrawable, context.getResources().getColor(R.color.icon_color_default));
                 categoryViewHolder.getIcon().setImageDrawable(wrapDrawable);
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryAdded());
                 break;
-            }
-            case clearItemId: {
+            case clearItemId:
                 categoryViewHolder.getIcon().setImageDrawable(context.getResources().getDrawable(category.icon));
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryCleared());
                 break;
-            }
-            default: {
+            default:
                 categoryViewHolder.getIcon().setImageDrawable(context.getResources().getDrawable(category.icon));
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryChosen(category.label));
-            }
+                break;
         }
         categoryViewHolder.getCategory().setText(NoteUtil.extendCategory(category.label));
-        if (category.count > 0) {
+        if (category.count != null && category.count > 0) {
             categoryViewHolder.getCount().setText(String.valueOf(category.count));
         } else {
             categoryViewHolder.getCount().setVisibility(View.GONE);

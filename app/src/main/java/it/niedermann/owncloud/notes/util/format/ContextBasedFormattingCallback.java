@@ -59,16 +59,15 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.checkbox: {
+            case R.id.checkbox:
                 insertCheckbox();
                 return true;
-            }
-            case R.id.link: {
+            case R.id.link:
                 insertLink();
                 return true;
-            }
+            default:
+                return false;
         }
-        return false;
     }
 
     private void insertCheckbox() {

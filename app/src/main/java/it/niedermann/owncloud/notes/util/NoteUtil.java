@@ -37,13 +37,14 @@ public class NoteUtil {
     public static String removeMarkDown(@Nullable String s) {
         if (s == null)
             return "";
-        s = pLists.matcher(s).replaceAll("");
-        s = pHeadings.matcher(s).replaceAll("$1");
-        s = pHeadingLine.matcher(s).replaceAll("");
-        s = pEmphasis.matcher(s).replaceAll("$2");
-        s = pSpace1.matcher(s).replaceAll("");
-        s = pSpace2.matcher(s).replaceAll("");
-        return s;
+        String result = s;
+        result = pLists.matcher(result).replaceAll("");
+        result = pHeadings.matcher(result).replaceAll("$1");
+        result = pHeadingLine.matcher(result).replaceAll("");
+        result = pEmphasis.matcher(result).replaceAll("$2");
+        result = pSpace1.matcher(result).replaceAll("");
+        result = pSpace2.matcher(result).replaceAll("");
+        return result;
     }
 
     /**

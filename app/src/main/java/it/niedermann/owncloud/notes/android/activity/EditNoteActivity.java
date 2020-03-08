@@ -157,7 +157,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         String category = null;
         boolean favorite = false;
         if (intent.hasExtra(PARAM_CATEGORY)) {
-            Category categoryPreselection = (Category) intent.getSerializableExtra(PARAM_CATEGORY);
+            Category categoryPreselection = (Category) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
             category = categoryPreselection.category;
             favorite = categoryPreselection.favorite != null ? categoryPreselection.favorite : false;
         }
@@ -165,7 +165,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         String content = "";
         if (
                 intent.hasExtra(Intent.EXTRA_TEXT) &&
-                MIMETYPE_TEXT_PLAIN.equals(intent.getType()) &&
+                        MIMETYPE_TEXT_PLAIN.equals(intent.getType()) &&
                         (Intent.ACTION_SEND.equals(intent.getAction()) ||
                                 INTENT_GOOGLE_ASSISTANT.equals(intent.getAction()))
         ) {
