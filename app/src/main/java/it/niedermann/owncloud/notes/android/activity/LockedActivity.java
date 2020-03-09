@@ -45,8 +45,38 @@ public abstract class LockedActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         if (isTaskRoot()) {
-            Notes.lock();
+            Notes.updateLastInteraction();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Notes.updateLastInteraction();
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode, @Nullable Bundle options) {
+        Notes.updateLastInteraction();
+        super.startActivityForResult(intent, requestCode, options);
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        Notes.updateLastInteraction();
+        super.startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        Notes.updateLastInteraction();
+        super.startActivity(intent);
+    }
+
+    @Override
+    public void startActivity(Intent intent, @Nullable Bundle options) {
+        Notes.updateLastInteraction();
+        super.startActivity(intent, options);
     }
 
     @Override

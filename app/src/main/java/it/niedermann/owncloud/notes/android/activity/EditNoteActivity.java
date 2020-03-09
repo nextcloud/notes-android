@@ -202,6 +202,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         close();
     }
 

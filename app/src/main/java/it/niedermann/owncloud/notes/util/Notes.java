@@ -15,9 +15,11 @@ public class Notes extends Application {
     private static final String TAG = Notes.class.getCanonicalName();
 
     private static final String DARK_THEME = "darkTheme";
+    private static final long LOCK_TIME = 30 * 1000;
     private static final String PREF_KEY_LOCKED = "lock";
     private static boolean lockedPreference = false;
-    private static boolean locked = true;
+    private static boolean isLocked = true;
+    private static long lastInteraction = 0;
 
     @Override
     public void onCreate() {
@@ -62,14 +64,17 @@ public class Notes extends Application {
     }
 
     public static boolean isLocked() {
-        return lockedPreference && locked;
-    }
-
-    public static void lock() {
-        locked = true;
+        if (!isLocked && System.currentTimeMillis() > (LOCK_TIME + lastInteraction)) {
+            isLocked = true;
+        }
+        return lockedPreference && isLocked;
     }
 
     public static void unlock() {
-        locked = false;
+        isLocked = false;
+    }
+
+    public static void updateLastInteraction() {
+        lastInteraction = System.currentTimeMillis();
     }
 }
