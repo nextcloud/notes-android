@@ -493,27 +493,26 @@ public class NoteServerSyncHelper {
                                         .setPositiveButton(android.R.string.copy, (a, b) -> {
                                             final ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
                                             ClipData clipData = ClipData.newPlainText(context.getString(R.string.simple_exception), "```\n" + debugInfos + "\n```");
-                                            clipboardManager.setPrimaryClip(clipData);
+                                            Objects.requireNonNull(clipboardManager).setPrimaryClip(clipData);
                                             Toast.makeText(context, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
                                             a.dismiss();
                                         })
                                         .setNegativeButton(R.string.simple_close, null)
                                         .create();
                                 dialog.show();
-                                ((TextView) dialog.findViewById(android.R.id.message)).setTypeface(Typeface.MONOSPACE);
+                                ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(Typeface.MONOSPACE);
                             })
                             .show();
                 } else {
-                    Toast.makeText(context.getApplicationContext(), statusMessage, Toast.LENGTH_LONG).show();
                     for (Throwable e : exceptions) {
-                        Toast.makeText(context.getApplicationContext(), e.getClass().getName() + ": " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e(TAG, statusMessage, e);
                     }
                 }
             }
             syncActive.put(ssoAccount.name, false);
             // notify callbacks
             if (callbacks.containsKey(ssoAccount.name) && callbacks.get(ssoAccount.name) != null) {
-                for (ISyncCallback callback : callbacks.get(ssoAccount.name)) {
+                for (ISyncCallback callback : Objects.requireNonNull(callbacks.get(ssoAccount.name))) {
                     callback.onFinish();
                 }
             }
