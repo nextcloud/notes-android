@@ -20,7 +20,7 @@
     <string name="action_note_restored">Hersteld %1$s</string>
     <string name="action_undo">Ongedaan maken</string>
     <string name="action_drawer_open">open navigatie</string>
-    <string name="action_drawer_close">sluit navigatie</string>
+    <string name="action_drawer_close">sluit navigatie</string>
     <string name="action_uncategorized">Niet gecategoriseerd</string>
     <string name="menu_delete">Verwijderen</string>
     <string name="menu_change_category">Categorie</string>
@@ -44,7 +44,7 @@
     <string name="settings_font_title">Monospace lettertype</string>
     <string name="settings_font_size">Fontgrootte</string>
     <string name="settings_wifi_only">Sync alleen met Wi-Fi</string>
-    <string name="settings_background_sync">Achtergrond synchronisatie</string>
+    <string name="settings_background_sync">Achtergrondsynchronisatie</string>
 
     <!-- Certificates -->
 
@@ -54,14 +54,14 @@
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_json">is de Notities app op de server geactiveerd?</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
-    <string name="error_files_app">heb je de bestanden app geïnstalleerd?</string>
+    <string name="error_files_app">Heb je de Bestanden app geïnstalleerd?</string>
     <string name="error_unknown">Er trad een onbekende fout op.</string>
     <string name="error_insufficient_storage">De serveropslag is vol.</string>
 
     <!-- About -->
     <string name="about_version_title">Versie</string>
     <string name="about_version">Je gebruikt nu &lt;strong>%1$s&lt;/strong></string>
-    <string name="about_maintainer_title">Beheerder</string>
+    <string name="about_maintainer_title">Projectleider</string>
     <string name="about_developers_title">Ontwikkelaars</string>
     <string name="about_translators_title">Vertalers</string>
     <string name="about_translators_transifex">Nextcloud-gemeenschap op &lt;a href=\"%1$s\">Transifex&lt;/a></string>
@@ -72,12 +72,12 @@
     <string name="about_issues">Je kunt bugs rapporteren, verbeteringen voorstellen en functionele aanpassingen aanvragen via de issue-tracker op GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Vertalen</string>
     <string name="about_translate">Doe mee met het Nextcloud-team op Transifex en help ons deze app te vertalen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">Applicentie</string>
+    <string name="about_app_license_title">App licentie</string>
     <string name="about_app_license">Deze applicatie valt onder de GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Licentie weergeven</string>
     <string name="about_icons_disclaimer_title">Pictogrammen</string>
     <string name="about_icons_disclaimer">&lt;p>Originele pictogram gemaakt door %1$s&lt;/p>&lt;p>Alle volgende pictogrammen gebruikt door deze app zijn &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> gemaakt door Google Inc. en gelicenseerd onder de Apache 2.0 Licensie.&lt;/p></string>
-    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_credits_tab_title">Verantwoording</string>
     <string name="about_contribution_tab_title">Bijdrage</string>
     <string name="about_license_tab_title">Licentie</string>
 
@@ -85,10 +85,10 @@
     <string name="widget_note_list_title">Notitielijst</string>
     <string name="widget_note_list_placeholder">Geen notities</string>
     <string name="widget_single_note_title">Enkele notitie</string>
-    <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
+    <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
     <string name="widget_create_note">Maak notitie</string>
     <string name="widget_not_logged_in">Login bij Notities voordat je deze widget gebruikt</string>
-    <string name="widget_entry_fav_contentDescription">Sterpictogram gebruikt om object als favoriet te markeren</string>
+    <string name="widget_entry_fav_contentDescription">\'Ster\'pictogram gebruikt om object als favoriet te markeren</string>
     <string name="widget_app_launcher_contentDescription">Start app</string>
 
     <string name="activity_select_single_note">Selecteer notitie</string>
@@ -114,20 +114,22 @@
     <string name="category_work">Werk</string>
     <string name="account_already_imported">Account is al geïmporteerd</string>
     <string name="no_notes_yet">Nog geen notities</string>
-    <string name="no_notes_yet_description">druk op de + knop om een nieuwe notitie te maken</string>
+    <string name="no_notes_yet_description">Druk op de + knop om een nieuwe notitie te maken</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Kon geen voorbeeld laden. Controleer of er een lege genummerde lijst is met twee cijfers is.</string>
-    <string name="simple_more">meer</string>
+    <string name="simple_more">Meer</string>
     <string name="simple_move">Verplaatsen</string>
-    <string name="error_files_app_version_too_old">Is je Bestanden app versie is up to date?</string>
+    <string name="error_files_app_version_too_old">Is je Bestanden app versie up-to-date?</string>
     <string name="checkbox_could_not_be_toggled">Keuzevakje kon niet worden omgeschakeld.</string>
     <string name="bulk_notes_deleted">Verwijderde %1$d notities</string>
     <string name="bulk_notes_restored">Herstelde %1$d notities</string>
     <string name="category_readonly">Alleen lezen</string>
     <string name="no_category">Geen categorie</string>
     <string name="add_category">Toevoegen %1$s</string>
+    <string name="simple_checkbox">Aanvinkvakje</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
-        <item>Open in wijzigen modus</item>
+        <item>Open in wbewerkmodus</item>
         <item>Open in voorbeeldweergave modus</item>
         <item>Onthoud je laatste selectie</item>
     </string-array>
@@ -145,6 +147,12 @@
         <item>15 minuten</item>
         <item>1 uur</item>
         <item>6 uur</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Licht</item>
+        <item>Donker</item>
+        <item>Systeemstandaard</item>
     </string-array>
 
     <!-- Plurals -->

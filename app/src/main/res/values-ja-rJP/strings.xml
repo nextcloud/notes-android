@@ -111,6 +111,8 @@
     <string name="simple_move">移動</string>
     <string name="category_readonly">読み込み専用</string>
     <string name="add_category">%1$s を追加</string>
+    <string name="simple_checkbox">チェックボックス</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>
@@ -131,6 +133,11 @@
         <item>15 分</item>
         <item>1時間</item>
         <item>6 時間</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>明るい</item>
+        <item>暗い</item>
     </string-array>
 
     <!-- Plurals -->

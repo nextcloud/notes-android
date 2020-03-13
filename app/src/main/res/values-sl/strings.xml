@@ -124,6 +124,8 @@
     <string name="category_readonly">Le za branje</string>
     <string name="no_category">Brez kategorije</string>
     <string name="add_category">Dodaj %1$s</string>
+    <string name="simple_checkbox">Izbirno polje</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>
@@ -144,6 +146,12 @@
         <item>15 minut</item>
         <item>1 ura</item>
         <item>6 ur</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Svetla</item>
+        <item>Temna</item>
+        <item>Sistemsko privzeto</item>
     </string-array>
 
     <!-- Plurals -->

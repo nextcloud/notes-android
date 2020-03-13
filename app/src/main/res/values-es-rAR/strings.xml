@@ -100,6 +100,8 @@
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
     <string name="category_readonly">Solo lectura</string>
+    <string name="simple_checkbox">Casilla de verificación</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo editor</item>
@@ -119,6 +121,11 @@
         <item>15 minutos</item>
         <item>1 hora</item>
         <item>6 horas</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Claro</item>
+        <item>Oscuro</item>
     </string-array>
 
     <!-- Plurals -->

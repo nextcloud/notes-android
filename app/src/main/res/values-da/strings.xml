@@ -124,6 +124,8 @@
     <string name="category_readonly">Skrivebeskyttet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Tilføj %1$s</string>
+    <string name="simple_checkbox">Afkrydsningsfeldt</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>
@@ -144,6 +146,11 @@
         <item>15 minutter</item>
         <item>1 time</item>
         <item>6 timer</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Lys</item>
+        <item>Mørk</item>
     </string-array>
 
     <!-- Plurals -->

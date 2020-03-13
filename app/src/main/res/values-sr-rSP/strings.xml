@@ -108,6 +108,8 @@
     <string name="simple_more">Još</string>
     <string name="simple_move">Premesti</string>
     <string name="add_category">Dodaj %1$s</string>
+    <string name="simple_checkbox">Štikliranje</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u režimu uređivanja</item>
@@ -128,6 +130,11 @@
         <item>15 minuta</item>
         <item>1 sat</item>
         <item>6 sati</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Svetla</item>
+        <item>Tamna</item>
     </string-array>
 
     <!-- Plurals -->

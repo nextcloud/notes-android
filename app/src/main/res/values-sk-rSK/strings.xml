@@ -124,6 +124,8 @@
     <string name="category_readonly">Iba na čítanie</string>
     <string name="no_category">Žiadna kategória</string>
     <string name="add_category">Pridať %1$s</string>
+    <string name="simple_checkbox">Zaškrtávacie políčko</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
@@ -144,6 +146,11 @@
         <item>15 minút</item>
         <item>1 hodina</item>
         <item>6 hodín</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Svetlý</item>
+        <item>Tmavý</item>
     </string-array>
 
     <!-- Plurals -->

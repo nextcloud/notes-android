@@ -124,6 +124,8 @@
     <string name="category_readonly">Μόνο για ανάγνωση</string>
     <string name="no_category">Χωρίς κατηγορία</string>
     <string name="add_category">Προσθήκη %1$s</string>
+    <string name="simple_checkbox">Πλαίσιο ελέγχου</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Άνοιγμα σε λειτουργία τροποποίησης</item>
@@ -144,6 +146,12 @@
         <item>15 λεπτά</item>
         <item>1 ώρα</item>
         <item>6 ώρες</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Φωτεινό</item>
+        <item>Σκούρο</item>
+        <item>Προεπιλογή Συστήματος</item>
     </string-array>
 
     <!-- Plurals -->

@@ -124,6 +124,8 @@
     <string name="category_readonly">只读</string>
     <string name="no_category">没有分类</string>
     <string name="add_category">添加 %1$s</string>
+    <string name="simple_checkbox">复选框</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>
@@ -144,6 +146,11 @@
         <item>15 分钟</item>
         <item>1 小时</item>
         <item>6 小时</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>浅色</item>
+        <item>深色</item>
     </string-array>
 
     <!-- Plurals -->
