@@ -60,7 +60,7 @@ public class Notes extends Application {
     }
 
     public static void setLockedPreference(boolean lockedPreference) {
-        Log.d(TAG, "New locked preference: " + lockedPreference);
+        Log.i(TAG, "New locked preference: " + lockedPreference);
         Notes.lockedPreference = lockedPreference;
     }
 

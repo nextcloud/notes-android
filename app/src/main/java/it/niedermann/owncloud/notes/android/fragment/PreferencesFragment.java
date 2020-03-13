@@ -29,13 +29,17 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
         addPreferencesFromResource(R.xml.preferences);
 
         final SwitchPreference lockPref = findPreference(getString(R.string.pref_key_lock));
-        if (!DeviceCredentialUtil.areCredentialsAvailable(getContext())) {
-            lockPref.setVisible(false);
+        if (lockPref != null) {
+            if (!DeviceCredentialUtil.areCredentialsAvailable(requireContext())) {
+                lockPref.setVisible(false);
+            } else {
+                lockPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                    Notes.setLockedPreference((Boolean) newValue);
+                    return true;
+                });
+            }
         } else {
-            lockPref.setOnPreferenceChangeListener((preference, newValue) -> {
-                Notes.setLockedPreference((Boolean) newValue);
-                return true;
-            });
+            Log.e(TAG, "Could not find \"" + getString(R.string.pref_key_lock) + "\"-preference.");
         }
 
         final ListPreference themePref = findPreference(getString(R.string.pref_key_theme));
@@ -50,14 +54,14 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
         final SwitchPreference wifiOnlyPref = findPreference(getString(R.string.pref_key_wifi_only));
         assert wifiOnlyPref != null;
         wifiOnlyPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            Log.v(TAG, "syncOnWifiOnly: " + newValue);
+            Log.i(TAG, "syncOnWifiOnly: " + newValue);
             return true;
         });
 
         final ListPreference syncPref = findPreference(getString(R.string.pref_key_background_sync));
         assert syncPref != null;
         syncPref.setOnPreferenceChangeListener((preference, newValue) -> {
-            Log.v(TAG, "syncPref: " + preference + " - newValue: " + newValue);
+            Log.i(TAG, "syncPref: " + preference + " - newValue: " + newValue);
             SyncWorker.update(requireContext(), newValue.toString());
             return true;
         });
