@@ -37,6 +37,8 @@
     <string name="settings_font_title">Jafnbreitt letur</string>
     <string name="settings_font_size">Leturstærð</string>
     <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
+    <string name="settings_background_sync">Samstilling í bakgrunni</string>
+
     <!-- Certificates -->
 
     <!-- Network -->
@@ -103,6 +105,8 @@
     <string name="simple_move">Færa</string>
     <string name="category_readonly">Skrifvarið</string>
     <string name="add_category">Bæta við %1$s</string>
+    <string name="simple_checkbox">Hakreitur</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>
@@ -123,6 +127,11 @@
         <item>15 mínútur</item>
         <item>1 klukkustund</item>
         <item>6 klukkustundir</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Ljóst</item>
+        <item>Dökkt</item>
     </string-array>
 
     <!-- Plurals -->

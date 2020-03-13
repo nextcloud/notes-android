@@ -75,7 +75,7 @@
     <string name="about_app_license">Esta aplicación está licenciada baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
     <string name="about_app_license_button">Ver a licenza</string>
     <string name="about_icons_disclaimer_title">Iconas</string>
-    <string name="about_icons_disclaimer">&lt;p>Iconas orixinais feitas por %1$s&lt;/p>&lt;p>As outras iconas usadas por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitos por Google Inc. e licenciados baixo unha licenza Creative Commons.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Iconas orixinais feitas por %1$s&lt;/p>&lt;p>As outras iconas usadas por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitas por Google Inc. e licenciadas baixo unha licenza Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Colaboración</string>
     <string name="about_license_tab_title">Licenza</string>
@@ -124,6 +124,8 @@
     <string name="category_readonly">Só lectura</string>
     <string name="no_category">Sen categoría</string>
     <string name="add_category">Engadir %1$s</string>
+    <string name="simple_checkbox">Caixa de verificación</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>
@@ -144,6 +146,12 @@
         <item>15 minutos</item>
         <item>1 hora</item>
         <item>6 horas</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Claro</item>
+        <item>Escuro</item>
+        <item>Predeterminado do sistema</item>
     </string-array>
 
     <!-- Plurals -->

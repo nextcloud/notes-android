@@ -100,6 +100,8 @@
     <string name="simple_more">עוד</string>
     <string name="simple_move">העברה</string>
     <string name="category_readonly">קריאה בלבד</string>
+    <string name="simple_checkbox">תיבת סימון</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>
@@ -118,6 +120,11 @@
         <item>15 דקות</item>
         <item>שעה</item>
         <item>6 שעות</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>בהירה</item>
+        <item>כהה</item>
     </string-array>
 
     <!-- Plurals -->

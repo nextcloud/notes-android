@@ -124,6 +124,8 @@
     <string name="category_readonly">Sola lettura</string>
     <string name="no_category">Nessuna categoria</string>
     <string name="add_category">Aggiungi %1$s</string>
+    <string name="simple_checkbox">Casella di selezione</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Apri in modalità modifica</item>
@@ -144,6 +146,12 @@
         <item>15 minuti</item>
         <item>1 ora</item>
         <item>6 ore</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Chiaro</item>
+        <item>Scuro</item>
+        <item>Predefiniti di sistema</item>
     </string-array>
 
     <!-- Plurals -->

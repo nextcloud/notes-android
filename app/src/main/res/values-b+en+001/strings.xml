@@ -96,6 +96,8 @@
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
     <string name="category_readonly">Read only</string>
+    <string name="simple_checkbox">Checkbox</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in edit mode</item>
@@ -114,6 +116,11 @@
         <item>15 minutes</item>
         <item>1 hour</item>
         <item>6 hours</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Light</item>
+        <item>Dark</item>
     </string-array>
 
     <!-- Plurals -->

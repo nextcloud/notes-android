@@ -97,6 +97,8 @@
     <string name="simple_move">Siirrä</string>
     <string name="category_readonly">Vain luku</string>
     <string name="add_category">Lisää %1$s</string>
+    <string name="simple_checkbox">Valintaruutu</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>
@@ -116,6 +118,11 @@
         <item>15 minuuttia</item>
         <item>1 tunti</item>
         <item>6 tuntia</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Vaalea</item>
+        <item>Tumma</item>
     </string-array>
 
     <!-- Plurals -->

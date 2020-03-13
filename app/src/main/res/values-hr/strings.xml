@@ -113,6 +113,8 @@
     <string name="error_files_app_version_too_old">Koristite li se najnovijom inačicom aplikacije za upravljanje datotekama?</string>
     <string name="category_readonly">Samo za čitanje</string>
     <string name="add_category">Dodaj %1$s</string>
+    <string name="simple_checkbox">Potvrdni okvir</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>
@@ -133,6 +135,11 @@
         <item>15 minuta</item>
         <item>1 sat</item>
         <item>6 sati</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Svijetlo</item>
+        <item>Tamno</item>
     </string-array>
 
     <!-- Plurals -->

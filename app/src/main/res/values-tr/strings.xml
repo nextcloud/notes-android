@@ -124,6 +124,8 @@
     <string name="category_readonly">Salt okunur</string>
     <string name="no_category">Kategori yok</string>
     <string name="add_category">%1$s ekle</string>
+    <string name="simple_checkbox">İşaret kutusu</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>
@@ -144,6 +146,12 @@
         <item>15 dakika</item>
         <item>1 saat</item>
         <item>6 saat</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Açık</item>
+        <item>Koyu</item>
+        <item>Sistem Varsayılanı</item>
     </string-array>
 
     <!-- Plurals -->

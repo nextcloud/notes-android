@@ -124,6 +124,8 @@
     <string name="category_readonly">Csak olvasható</string>
     <string name="no_category">Nincs kategória</string>
     <string name="add_category">%1$s hozzáadása</string>
+    <string name="simple_checkbox">Jelölőmező</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>
@@ -144,6 +146,11 @@
         <item>15 perc</item>
         <item>1 óra</item>
         <item>6 óra</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Világos</item>
+        <item>Sötét</item>
     </string-array>
 
     <!-- Plurals -->

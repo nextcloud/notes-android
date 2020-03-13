@@ -124,6 +124,8 @@
     <string name="category_readonly">Läsbehörighet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Lägg till %1$s</string>
+    <string name="simple_checkbox">Kryssruta</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>
@@ -144,6 +146,12 @@
         <item>15 minuter</item>
         <item>1 timme</item>
         <item>6 timmar</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Ljust</item>
+        <item>Mörkt</item>
+        <item>Systemstandard</item>
     </string-array>
 
     <!-- Plurals -->

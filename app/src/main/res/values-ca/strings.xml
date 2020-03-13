@@ -119,6 +119,8 @@
     <string name="category_readonly">Només de lectura</string>
     <string name="no_category">Sense categoria</string>
     <string name="add_category">Afegeix %1$s</string>
+    <string name="simple_checkbox">Casella de selecció</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Obre en mode d\'edició</item>
@@ -139,6 +141,11 @@
         <item>15 minuts</item>
         <item>1 hora</item>
         <item>6 hores</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Clar</item>
+        <item>Fosc</item>
     </string-array>
 
     <!-- Plurals -->

@@ -124,6 +124,8 @@
     <string name="category_readonly">Tik skaitymui</string>
     <string name="no_category">Be kategorijos</string>
     <string name="add_category">Pridėti %1$s</string>
+    <string name="simple_checkbox">Žymimasis langelis</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>
@@ -144,6 +146,12 @@
         <item>15 minučių</item>
         <item>1 valanda</item>
         <item>6 valandos</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Šviesus</item>
+        <item>Tamsus</item>
+        <item>Sistemos numatytasis</item>
     </string-array>
 
     <!-- Plurals -->

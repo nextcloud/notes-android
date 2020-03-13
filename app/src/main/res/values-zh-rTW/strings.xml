@@ -148,6 +148,12 @@
         <item>6 小時</item>
     </string-array>
 
+    <string-array name="darkmode_entries">
+        <item>亮色</item>
+        <item>暗色</item>
+        <item>系統預設值</item>
+    </string-array>
+
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="other">已選擇 %d 則</item>

@@ -124,6 +124,8 @@
     <string name="category_readonly">Само за читање</string>
     <string name="no_category">Нема категорије</string>
     <string name="add_category">Додај %1$s</string>
+    <string name="simple_checkbox">Штиклирање</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>
@@ -144,6 +146,12 @@
         <item>15 минута</item>
         <item>1 сат</item>
         <item>6 сати</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>светла</item>
+        <item>тамна</item>
+        <item>Системске подразумеване</item>
     </string-array>
 
     <!-- Plurals -->

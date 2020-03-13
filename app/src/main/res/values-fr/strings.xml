@@ -148,6 +148,12 @@
         <item>6 heures</item>
     </string-array>
 
+    <string-array name="darkmode_entries">
+        <item>Clair</item>
+        <item>Sombre</item>
+        <item>Défaut du système</item>
+    </string-array>
+
     <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d sélectionné</item>

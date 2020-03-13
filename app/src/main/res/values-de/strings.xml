@@ -124,7 +124,7 @@
     <string name="category_readonly">Schreibgeschützt</string>
     <string name="no_category">Keine Kategorie</string>
     <string name="add_category">%1$s hinzufügen</string>
-    <string name="simple_checkbox">Checkbox</string>
+    <string name="simple_checkbox">Kontrollkästchen</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
@@ -146,6 +146,12 @@
         <item>15 Minuten</item>
         <item>1 Stunde</item>
         <item>6 Stunden</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Hell</item>
+        <item>Dunkel</item>
+        <item>Systemstandard</item>
     </string-array>
 
     <!-- Plurals -->

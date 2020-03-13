@@ -124,6 +124,8 @@
     <string name="category_readonly">Tylko do odczytu</string>
     <string name="no_category">Bez kategorii</string>
     <string name="add_category">Dodaj %1$s</string>
+    <string name="simple_checkbox">Pole checkbox</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otwórz w trybie edycji</item>
@@ -144,6 +146,12 @@
         <item>15 minut</item>
         <item>1 godzina</item>
         <item>6 godzin</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Jasny</item>
+        <item>Ciemny</item>
+        <item>Domyślne ustawienia systemu</item>
     </string-array>
 
     <!-- Plurals -->
