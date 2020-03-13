@@ -128,8 +128,6 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Integer.parseInt("as");
-
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
