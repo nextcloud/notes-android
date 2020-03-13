@@ -9,23 +9,24 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 
 public class Notes extends Application {
     private static final String TAG = Notes.class.getCanonicalName();
 
-    private static final String DARK_THEME = "darkTheme";
     private static final long LOCK_TIME = 30 * 1000;
-    private static final String PREF_KEY_LOCKED = "lock";
     private static boolean lockedPreference = false;
     private static boolean isLocked = true;
     private static long lastInteraction = 0;
+    private static String PREF_KEY_THEME;
 
     @Override
     public void onCreate() {
+        PREF_KEY_THEME = getString(R.string.pref_key_theme);
         setAppTheme(getAppTheme(getApplicationContext()));
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        lockedPreference = prefs.getBoolean(PREF_KEY_LOCKED, false);
+        lockedPreference = prefs.getBoolean(getString(R.string.pref_key_lock), false);
         super.onCreate();
     }
 
@@ -37,9 +38,9 @@ public class Notes extends Application {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String mode;
         try {
-            mode = prefs.getString(DARK_THEME, DarkModeSetting.SYSTEM_DEFAULT.name());
+            mode = prefs.getString(PREF_KEY_THEME, DarkModeSetting.SYSTEM_DEFAULT.name());
         } catch (ClassCastException e) {
-            boolean darkModeEnabled = prefs.getBoolean(DARK_THEME, false);
+            boolean darkModeEnabled = prefs.getBoolean(PREF_KEY_THEME, false);
             mode = darkModeEnabled ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name();
         }
         return DarkModeSetting.valueOf(mode);
