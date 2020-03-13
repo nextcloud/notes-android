@@ -1,0 +1,1 @@
+- 🔒 Password protection (#354) - special thanks to @beatbrot

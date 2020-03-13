@@ -12,7 +12,7 @@ import android.view.View;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import it.niedermann.nextcloud.exception.ExceptionHandler;
+import it.niedermann.owncloud.notes.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.DBNote;

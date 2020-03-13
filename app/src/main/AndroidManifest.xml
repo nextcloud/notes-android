@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="it.niedermann.owncloud.notes.util.Notes"
+        android:name=".util.Notes"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +19,7 @@
         tools:targetApi="n">
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.SplashscreenActivity"
+            android:name=".android.activity.SplashscreenActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
         </activity>
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+            android:name=".android.activity.NotesListViewActivity"
             android:label="@string/app_name">
 
             <intent-filter>
@@ -43,24 +43,24 @@
                 android:resource="@xml/searchable" />
             <meta-data
                 android:name="android.app.default_searchable"
-                android:value="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
+                android:value=".android.activity.NotesListViewActivity" />
         </activity>
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.ExceptionActivity"
+            android:name=".android.activity.ExceptionActivity"
             android:label="@string/app_name" />
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.PreferencesActivity"
+            android:name=".android.activity.PreferencesActivity"
             android:label="@string/action_settings"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+            android:parentActivityName=".android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
+            android:name=".android.activity.EditNoteActivity"
             android:label="@string/simple_edit"
             android:launchMode="singleTask"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+            android:parentActivityName=".android.activity.NotesListViewActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter android:label="@string/action_create">
                 <action android:name="android.intent.action.SEND" />
@@ -84,9 +84,9 @@
         </activity>
 
         <activity
-            android:name="it.niedermann.owncloud.notes.android.activity.AboutActivity"
+            android:name=".android.activity.AboutActivity"
             android:label="@string/simple_about"
-            android:parentActivityName="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity" />
+            android:parentActivityName=".android.activity.NotesListViewActivity" />
 
         <activity android:name=".android.activity.SelectSingleNoteActivity">
             <intent-filter>
@@ -115,7 +115,7 @@
         </receiver>
 
         <receiver
-            android:name="it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget"
+            android:name=".android.appwidget.SingleNoteWidget"
             android:label="@string/widget_single_note_title">
 
             <intent-filter>
@@ -128,7 +128,7 @@
         </receiver>
 
         <receiver
-            android:name="it.niedermann.owncloud.notes.android.appwidget.NoteListWidget"
+            android:name=".android.appwidget.NoteListWidget"
             android:label="@string/widget_note_list_title">
 
             <intent-filter>
@@ -149,7 +149,7 @@
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <service
-            android:name="it.niedermann.owncloud.notes.android.quicksettings.NewNoteTileService"
+            android:name=".android.quicksettings.NewNoteTileService"
             android:description="@string/action_create"
             android:icon="@drawable/ic_quicksettings_new"
             android:label="@string/action_create"

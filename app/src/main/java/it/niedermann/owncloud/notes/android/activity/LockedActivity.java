@@ -10,7 +10,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import it.niedermann.nextcloud.exception.ExceptionHandler;
+import it.niedermann.owncloud.notes.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.util.Notes;
 

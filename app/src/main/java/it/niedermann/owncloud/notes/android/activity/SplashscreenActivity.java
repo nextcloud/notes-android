@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import it.niedermann.nextcloud.exception.ExceptionHandler;
+import it.niedermann.owncloud.notes.ExceptionHandler;
 
 
 /**

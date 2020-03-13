@@ -42,7 +42,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import it.niedermann.nextcloud.exception.ExceptionUtil;
+import it.niedermann.owncloud.notes.ExceptionUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
