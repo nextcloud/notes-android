@@ -43,6 +43,7 @@
     <string name="settings_font_title">Pisava enotne širine</string>
     <string name="settings_font_size">Velikost pisave</string>
     <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
+    <string name="settings_lock">Zaščita z geslom</string>
     <string name="settings_background_sync"> Usklajevanje v ozadju</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Običajno</string>
     <string name="pref_value_wifi_and_mobile">Usklajuj na Wi-Fi in mobilni povezavi</string>
+    <string name="pref_value_lock">Zaščita z geslom</string>
 
     <string name="simple_error">Napaka</string>
     <string name="simple_close">Zapri</string>
@@ -125,6 +127,8 @@
     <string name="no_category">Brez kategorije</string>
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Izbirno polje</string>
+    <string name="unlock_notes">Odkleni zabeležke</string>
+    <string name="simple_beta">Preizkusno</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -43,6 +43,7 @@
     <string name="settings_font_title">Фонт фиксне ширине</string>
     <string name="settings_font_size">Величина фонта</string>
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
+    <string name="settings_lock">Заштита лозинком</string>
     <string name="settings_background_sync">Позадинска синхронизација</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Нормална</string>
     <string name="pref_value_wifi_and_mobile">Синхронизуј и на бежичној и на мобилној вези</string>
+    <string name="pref_value_lock">Заштита лозинком</string>
 
     <string name="simple_error">Грешка</string>
     <string name="simple_close">Затвори</string>
@@ -125,6 +127,7 @@
     <string name="no_category">Нема категорије</string>
     <string name="add_category">Додај %1$s</string>
     <string name="simple_checkbox">Штиклирање</string>
+    <string name="simple_beta">Бета</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

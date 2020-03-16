@@ -43,6 +43,7 @@
     <string name="settings_font_title">Моноширинный шрифт</string>
     <string name="settings_font_size">Размер шрифта</string>
     <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>
+    <string name="settings_lock">Защита паролем</string>
     <string name="settings_background_sync">Синхр. в фоновом режиме</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Обычный</string>
     <string name="pref_value_wifi_and_mobile">Синхр. по Wi-Fi и мобильной связи</string>
+    <string name="pref_value_lock">Защита паролем</string>
 
     <string name="simple_error">Ошибка</string>
     <string name="simple_close">Закрыть</string>
@@ -125,6 +127,7 @@
     <string name="no_category">Без категории</string>
     <string name="add_category">Добавить %1$s </string>
     <string name="simple_checkbox">Флажок</string>
+    <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

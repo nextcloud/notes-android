@@ -37,6 +37,7 @@
     <string name="settings_font_title">גופן ברוחב אחיד</string>
     <string name="settings_font_size">גודל גופן</string>
     <string name="settings_wifi_only">סנכרון רק דרך רשת אלחוטית</string>
+    <string name="settings_lock">Password protection</string>
     <!-- Certificates -->
 
     <!-- Network -->
@@ -85,6 +86,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">רגיל</string>
     <string name="pref_value_wifi_and_mobile">עדכון דרך רשת אלחוטית ונתונים סלולריים</string>
+    <string name="pref_value_lock">Password protection</string>
 
     <string name="simple_error">שגיאה</string>
     <string name="simple_close">סגור</string>
@@ -101,7 +103,6 @@
     <string name="simple_move">העברה</string>
     <string name="category_readonly">קריאה בלבד</string>
     <string name="simple_checkbox">תיבת סימון</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>

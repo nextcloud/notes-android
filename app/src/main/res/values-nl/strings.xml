@@ -44,6 +44,7 @@
     <string name="settings_font_title">Monospace lettertype</string>
     <string name="settings_font_size">Fontgrootte</string>
     <string name="settings_wifi_only">Sync alleen met Wi-Fi</string>
+    <string name="settings_lock">Wachtwoordbeveiliging</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
 
     <!-- Certificates -->
@@ -99,6 +100,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normaal</string>
     <string name="pref_value_wifi_and_mobile">Sync met Wi-Fi en mobiele data</string>
+    <string name="pref_value_lock">Wachtwoordbeveiliging</string>
 
     <string name="simple_error">Fout</string>
     <string name="simple_close">Sluiten</string>
@@ -126,6 +128,7 @@
     <string name="no_category">Geen categorie</string>
     <string name="add_category">Toevoegen %1$s</string>
     <string name="simple_checkbox">Aanvinkvakje</string>
+    <string name="simple_beta">Bèta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

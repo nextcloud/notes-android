@@ -43,6 +43,7 @@
     <string name="settings_font_title">等寬</string>
     <string name="settings_font_size">字體大小</string>
     <string name="settings_wifi_only">只在有 Wi-Fi 時同步</string>
+    <string name="settings_lock">密碼保護</string>
     <string name="settings_background_sync">背景同步</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">一般</string>
     <string name="pref_value_wifi_and_mobile">在使用 Wi-Fi 及行動網路時同步</string>
+    <string name="pref_value_lock">密碼保護</string>
 
     <string name="simple_error">錯誤</string>
     <string name="simple_close">關閉</string>
@@ -125,7 +127,6 @@
     <string name="no_category">沒有分類</string>
     <string name="add_category">新增%1$s</string>
     <string name="simple_checkbox">核取方塊</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以編輯模式開啟</item>

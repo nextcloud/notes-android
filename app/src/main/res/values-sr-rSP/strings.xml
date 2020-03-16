@@ -41,6 +41,7 @@
     <string name="settings_font_title">Font fiksne širine</string>
     <string name="settings_font_size">Veličina fonta</string>
     <string name="settings_wifi_only">Sinhronizuj samo preko bežične veze</string>
+    <string name="settings_lock">Password protection</string>
     <!-- Certificates -->
 
     <!-- Network -->
@@ -89,6 +90,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normalna</string>
     <string name="pref_value_wifi_and_mobile">Sinhronizuj i na bežičnoj i na mobilnoj vezi</string>
+    <string name="pref_value_lock">Password protection</string>
 
     <string name="simple_error">Greška</string>
     <string name="simple_close">Zatvori</string>
@@ -109,7 +111,6 @@
     <string name="simple_move">Premesti</string>
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Štikliranje</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u režimu uređivanja</item>

@@ -43,6 +43,7 @@
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
     <string name="settings_wifi_only">Sincronitza només per Wi-Fi</string>
+    <string name="settings_lock">Protecció amb contrasenya</string>
     <string name="settings_background_sync">Sincronització en segon pla</string>
 
     <!-- Certificates -->
@@ -93,6 +94,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronitza per Wi-Fi i dades mòbils</string>
+    <string name="pref_value_lock">Protecció amb contrasenya</string>
 
     <string name="simple_error">Error</string>
     <string name="simple_close">Tanca</string>
@@ -120,6 +122,7 @@
     <string name="no_category">Sense categoria</string>
     <string name="add_category">Afegeix %1$s</string>
     <string name="simple_checkbox">Casella de selecció</string>
+    <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

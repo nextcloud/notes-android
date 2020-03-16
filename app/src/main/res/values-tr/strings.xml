@@ -43,6 +43,7 @@
     <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
     <string name="settings_font_size">Yazı boyutu</string>
     <string name="settings_wifi_only">Yalnız Wi-Fi ile eşitlensin</string>
+    <string name="settings_lock">Parola koruması</string>
     <string name="settings_background_sync">Arka planda eşitleme</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fi ve mobil veri ile eşitlensin</string>
+    <string name="pref_value_lock">Parola koruması</string>
 
     <string name="simple_error">Hata</string>
     <string name="simple_close">Kapat</string>
@@ -125,6 +127,7 @@
     <string name="no_category">Kategori yok</string>
     <string name="add_category">%1$s ekle</string>
     <string name="simple_checkbox">İşaret kutusu</string>
+    <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

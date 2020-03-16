@@ -43,6 +43,7 @@
     <string name="settings_font_title"> Fonte monospaçada</string>
     <string name="settings_font_size">Tamanho da fonte</string>
     <string name="settings_wifi_only">Sincronizar somente por Wi-Fi</string>
+    <string name="settings_lock">Proteger com senha</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar por Wi-Fi e dados móveis</string>
+    <string name="pref_value_lock">Proteger com senha</string>
 
     <string name="simple_error">Erro</string>
     <string name="simple_close">Fechar</string>
@@ -125,6 +127,7 @@
     <string name="no_category">Sem categorias</string>
     <string name="add_category">Adicionar %1$s</string>
     <string name="simple_checkbox">Caixa de marcação</string>
+    <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
