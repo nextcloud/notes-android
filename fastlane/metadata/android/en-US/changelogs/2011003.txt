@@ -1,0 +1,7 @@
+v2.11.3:
+
+- 🌎 Language updates
+
+v2.11.2:
+
+- 🐞 Stability improvements and bugfixes for synchronization and list widget
