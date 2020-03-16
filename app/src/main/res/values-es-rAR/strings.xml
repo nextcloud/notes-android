@@ -41,6 +41,7 @@
     <string name="settings_font_title">Fuente monoespaciada</string>
     <string name="settings_font_size">Tamaño de fuente</string>
     <string name="settings_wifi_only">SIncronizar sólo por Wi-Fi</string>
+    <string name="settings_lock">Protección con contraseña</string>
     <!-- Certificates -->
 
     <!-- Network -->
@@ -83,6 +84,8 @@
 
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_lock">Protección con contraseña</string>
+
     <string name="simple_error">Error</string>
     <string name="simple_close">Cerrar</string>
     <string name="simple_copy">Copiar</string>
@@ -101,7 +104,6 @@
     <string name="simple_move">Mover</string>
     <string name="category_readonly">Solo lectura</string>
     <string name="simple_checkbox">Casilla de verificación</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo editor</item>

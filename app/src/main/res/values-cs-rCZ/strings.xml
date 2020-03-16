@@ -43,6 +43,7 @@
     <string name="settings_font_title">Písmo se všemi znaky stejně širokými</string>
     <string name="settings_font_size">Velikost písmen</string>
     <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
+    <string name="settings_lock">Ochrana heslem</string>
     <string name="settings_background_sync">Synchronizace na pozadí</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normální</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovat přes Wi-Fi a mobilní data</string>
+    <string name="pref_value_lock">Ochrana heslem</string>
 
     <string name="simple_error">Chyba</string>
     <string name="simple_close">Zavřít</string>
@@ -125,6 +127,8 @@
     <string name="no_category">Žádná kategorie</string>
     <string name="add_category">Přidat %1$s</string>
     <string name="simple_checkbox">Zatržítko</string>
+    <string name="unlock_notes">Odemknout poznámky</string>
+    <string name="simple_beta">Vývojové</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

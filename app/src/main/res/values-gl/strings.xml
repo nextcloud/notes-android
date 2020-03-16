@@ -43,6 +43,7 @@
     <string name="settings_font_title">Letra monoespazada</string>
     <string name="settings_font_size">Tamaño da letra</string>
     <string name="settings_wifi_only">Sincronizar só con WiFi</string>
+    <string name="settings_lock">Protección por contrasinal</string>
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronización con WiFi e con datos móbiles</string>
+    <string name="pref_value_lock">Protección por contrasinal</string>
 
     <string name="simple_error">Erro</string>
     <string name="simple_close">Pechar</string>
@@ -125,6 +127,8 @@
     <string name="no_category">Sen categoría</string>
     <string name="add_category">Engadir %1$s</string>
     <string name="simple_checkbox">Caixa de verificación</string>
+    <string name="unlock_notes">Desbloquear notas</string>
+    <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

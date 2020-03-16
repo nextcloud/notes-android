@@ -41,6 +41,7 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Veličina fonta</string>
     <string name="settings_wifi_only">Sinkroniziraj samo putem bežične (Wi-Fi) mreže</string>
+    <string name="settings_lock">Zaštita zaporkom</string>
     <string name="settings_background_sync">Pozadinska sinkronizacija</string>
 
     <!-- Certificates -->
@@ -91,6 +92,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normalno</string>
     <string name="pref_value_wifi_and_mobile">Sinkronizacija putem bežičnih (Wi-Fi) i mobilnih podataka</string>
+    <string name="pref_value_lock">Zaštita zaporkom</string>
 
     <string name="simple_error">Pogreška</string>
     <string name="simple_close">Zatvorite</string>
@@ -114,6 +116,7 @@
     <string name="category_readonly">Samo za čitanje</string>
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Potvrdni okvir</string>
+    <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

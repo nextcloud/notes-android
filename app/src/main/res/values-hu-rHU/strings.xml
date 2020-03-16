@@ -43,6 +43,7 @@
     <string name="settings_font_title">Fix szélességű betűkészlet</string>
     <string name="settings_font_size">Betű méret</string>
     <string name="settings_wifi_only">Szinkronizáció csak Wifin keresztül</string>
+    <string name="settings_lock">Jelszavas védelem</string>
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normál</string>
     <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fin és mobil adatkapcsolaton</string>
+    <string name="pref_value_lock">Jelszavas védelem</string>
 
     <string name="simple_error">Hiba</string>
     <string name="simple_close">Bezár</string>
@@ -125,7 +127,6 @@
     <string name="no_category">Nincs kategória</string>
     <string name="add_category">%1$s hozzáadása</string>
     <string name="simple_checkbox">Jelölőmező</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>

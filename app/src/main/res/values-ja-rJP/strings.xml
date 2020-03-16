@@ -16,6 +16,8 @@
     <string name="simple_bold">太字</string>
     <string name="simple_link">リンク</string>
     <string name="simple_italic">斜体</string>
+    <string name="action_note_deleted">%1$sを削除しました</string>
+    <string name="action_note_restored">%1$s を復元しました</string>
     <string name="action_undo">元に戻す</string>
     <string name="action_drawer_open">ナビゲーションを開く</string>
     <string name="action_drawer_close">ナビゲーションを閉じる</string>
@@ -41,6 +43,7 @@
     <string name="settings_font_title">モノスペースフォント</string>
     <string name="settings_font_size">フォントサイズ</string>
     <string name="settings_wifi_only">Wi-Fi接続時のみ同期する</string>
+    <string name="settings_lock">パスワード保護</string>
     <string name="settings_background_sync">バックグラウンド同期</string>
 
     <!-- Certificates -->
@@ -49,7 +52,12 @@
 
     <!-- Error -->
     <string name="error_sync">同期に失敗しました: %1$s</string>
+    <string name="error_json">ノートアプリはサーバー上で有効になっていますか?</string>
     <string name="error_no_network">ネットワークに接続されていません</string>
+    <string name="error_files_app">ファイルアプリはインストールしましたか？</string>
+    <string name="error_unknown">不明なエラーが発生しました</string>
+    <string name="error_insufficient_storage">サーバストレージに空きがありません</string>
+
     <!-- About -->
     <string name="about_version_title">バージョン</string>
     <string name="about_version">現在 &lt;strong>%1$s&lt;/strong> を使用しています</string>
@@ -91,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">ノーマル</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fiおよびモバイル接続時に同期する</string>
+    <string name="pref_value_lock">パスワード保護</string>
 
     <string name="simple_error">エラー</string>
     <string name="simple_close">閉じる</string>
@@ -109,9 +118,15 @@
     <string name="no_notes_yet_description">+ ボタンを押して新しいノートを作成</string>
     <string name="simple_more">さらに表示</string>
     <string name="simple_move">移動</string>
+    <string name="error_files_app_version_too_old">ファイルアプリは最新版ですか?</string>
+    <string name="checkbox_could_not_be_toggled">チェックボックスを切り替えることができません</string>
+    <string name="bulk_notes_deleted">ノート%1$dを削除</string>
+    <string name="bulk_notes_restored">ノート%1$dを復元しました</string>
     <string name="category_readonly">読み込み専用</string>
+    <string name="no_category">カテゴリ無し</string>
     <string name="add_category">%1$s を追加</string>
     <string name="simple_checkbox">チェックボックス</string>
+    <string name="simple_beta">ベータ</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
@@ -138,6 +153,7 @@
     <string-array name="darkmode_entries">
         <item>明るい</item>
         <item>暗い</item>
+        <item>既定</item>
     </string-array>
 
     <!-- Plurals -->

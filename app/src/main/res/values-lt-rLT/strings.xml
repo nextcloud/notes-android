@@ -43,6 +43,7 @@
     <string name="settings_font_title">Lygiaplotis šriftas</string>
     <string name="settings_font_size">Šrifto dydis</string>
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
+    <string name="settings_lock">Apsauga slaptažodžiu</string>
     <string name="settings_background_sync">Foninis sinchronizavimas</string>
 
     <!-- Certificates -->
@@ -98,6 +99,7 @@
     <!-- These values should not be translateable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normalus</string>
     <string name="pref_value_wifi_and_mobile">Sinchronizuoti naudojant belaidį (Wi-Fi) ir mobiliuosius duomenis</string>
+    <string name="pref_value_lock">Apsauga slaptažodžiu</string>
 
     <string name="simple_error">Klaida</string>
     <string name="simple_close">Užverti</string>
@@ -125,6 +127,7 @@
     <string name="no_category">Be kategorijos</string>
     <string name="add_category">Pridėti %1$s</string>
     <string name="simple_checkbox">Žymimasis langelis</string>
+    <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
