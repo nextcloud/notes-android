@@ -316,7 +316,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * Returns a list of all Notes in the Database with were modified locally
+     * Returns a list of all Notes in the Database which were modified locally
      *
      * @return List&lt;Note&gt;
      */

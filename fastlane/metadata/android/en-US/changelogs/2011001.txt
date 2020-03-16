@@ -1,2 +1,1 @@
-- 🔒 Password protection (#354) - special thanks to @beatbrot
-- 🗨️ Remove toasts (#749)
+- 🐞 Fix exception on startup

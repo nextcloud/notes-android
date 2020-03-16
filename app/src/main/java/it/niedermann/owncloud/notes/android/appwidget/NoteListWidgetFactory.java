@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -22,6 +23,8 @@ import it.niedermann.owncloud.notes.util.Notes;
 import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.DARK_THEME_KEY;
 
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
+    private static final String TAG = NoteListWidgetFactory.class.getCanonicalName();
+
     private final Context context;
     private final int displayMode;
     private final boolean darkTheme;
@@ -82,14 +85,15 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     }
 
     @Override
-    public RemoteViews getViewAt(int i) {
+    public RemoteViews getViewAt(int position) {
         RemoteViews note_content;
 
-        if (dbNotes == null || dbNotes.get(i) == null) {
+        if (dbNotes == null || position > dbNotes.size() - 1 || dbNotes.get(position) == null) {
+            Log.e(TAG, "Could not find position \"" + position + "\" in dbNotes list.");
             return null;
         }
 
-        DBNote note = dbNotes.get(i);
+        DBNote note = dbNotes.get(position);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 
@@ -102,22 +106,16 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_dark);
             note_content.setOnClickFillInIntent(R.id.widget_note_list_entry_dark, fillInIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv_dark, note.getTitle());
-
-            if (note.isFavorite()) {
-                note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, R.drawable.ic_star_yellow_24dp);
-            } else {
-                note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, R.drawable.ic_star_grey_ccc_24dp);
-            }
+            note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, note.isFavorite()
+                    ? R.drawable.ic_star_yellow_24dp
+                    : R.drawable.ic_star_grey_ccc_24dp);
         } else {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry);
             note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
-
-            if (note.isFavorite()) {
-                note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_star_yellow_24dp);
-            } else {
-                note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_star_grey_ccc_24dp);
-            }
+            note_content.setImageViewResource(R.id.widget_entry_fav_icon, note.isFavorite()
+                    ? R.drawable.ic_star_yellow_24dp
+                    : R.drawable.ic_star_grey_ccc_24dp);
         }
 
         return note_content;
