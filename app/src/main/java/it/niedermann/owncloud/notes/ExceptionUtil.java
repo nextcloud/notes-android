@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes;
 
 import android.app.Activity;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import com.nextcloud.android.sso.helper.VersionCheckHelper;
@@ -37,15 +36,10 @@ public class ExceptionUtil {
     }
 
     private static String getAppVersions(Activity activity) {
-        String versions = "";
-        try {
-            PackageInfo pInfo = activity.getApplicationContext().getPackageManager().getPackageInfo(activity.getApplicationContext().getPackageName(), 0);
-            versions += "App Version: " + pInfo.versionName;
-            versions += "\nApp Version Code: " + pInfo.versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            versions += "\nApp Version: " + e.getMessage();
-            e.printStackTrace();
-        }
+        String versions = ""
+                + "App Version: " + BuildConfig.VERSION_NAME + "\n"
+                + "App Version Code: " + BuildConfig.VERSION_CODE + "\n"
+                + "App Flavor: " + BuildConfig.FLAVOR + "\n";
 
         try {
             versions += "\nFiles App Version Code: " + VersionCheckHelper.getNextcloudFilesVersionCode(activity);
