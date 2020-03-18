@@ -318,7 +318,7 @@ public class NoteServerSyncHelper {
      * Synchronization consists of two parts: pushLocalChanges and pullRemoteChanges.
      */
     private class SyncTask extends AsyncTask<Void, Void, SyncResultStatus> {
-        private final LocalAccount localAccount;
+        @NonNull private final LocalAccount localAccount;
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
         @NonNull
@@ -366,10 +366,8 @@ public class NoteServerSyncHelper {
          * Push local changes: for each locally created/edited/deleted Note, use NotesClient in order to push the changed to the server.
          */
         private LoginStatus pushLocalChanges() {
-            if (localAccount == null) {
-                return LoginStatus.NO_NETWORK;
-            }
             Log.d(TAG, "pushLocalChanges()");
+
             LoginStatus status = LoginStatus.OK;
             List<DBNote> notes = db.getLocalModifiedNotes(localAccount.getId());
             for (DBNote note : notes) {
@@ -442,9 +440,6 @@ public class NoteServerSyncHelper {
          * Pull remote Changes: update or create each remote note (if local pendant has no changes) and remove remotely deleted notes.
          */
         private LoginStatus pullRemoteChanges() {
-            if (localAccount == null) {
-                return LoginStatus.NO_NETWORK;
-            }
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
                 Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
