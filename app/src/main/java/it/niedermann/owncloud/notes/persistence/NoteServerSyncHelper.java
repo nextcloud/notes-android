@@ -226,8 +226,8 @@ public class NoteServerSyncHelper {
             if (syncActive.get(ssoAccount.name) == null) {
                 syncActive.put(ssoAccount.name, false);
             }
-            Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.valueOf(true).equals(syncActive.get(ssoAccount.name)) ? "sync active" : "sync NOT active") + ") ...");
-            if (isSyncPossible() && (!Boolean.valueOf(true).equals(syncActive.get(ssoAccount.name)) || onlyLocalChanges)) {
+            Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) ? "sync active" : "sync NOT active") + ") ...");
+            if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) || onlyLocalChanges)) {
                 Log.d(TAG, "... starting now");
                 final LocalAccount account = db.getLocalAccountByAccountName(ssoAccount.name);
                 if(account == null) {
@@ -342,7 +342,7 @@ public class NoteServerSyncHelper {
             if (!syncScheduled.containsKey(ssoAccount.name) || syncScheduled.get(ssoAccount.name) == null) {
                 syncScheduled.put(ssoAccount.name, false);
             }
-            if (!onlyLocalChanges && Boolean.valueOf(true).equals(syncScheduled.get(ssoAccount.name))) {
+            if (!onlyLocalChanges && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {
                 syncScheduled.put(ssoAccount.name, false);
             }
             syncActive.put(ssoAccount.name, true);
@@ -561,7 +561,7 @@ public class NoteServerSyncHelper {
             db.notifyNotesChanged();
             db.updateDynamicShortcuts(localAccount.getId());
             // start next sync if scheduled meanwhile
-            if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && Boolean.valueOf(true).equals(syncScheduled.get(ssoAccount.name))) {
+            if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {
                 scheduleSync(ssoAccount, false);
             }
         }
