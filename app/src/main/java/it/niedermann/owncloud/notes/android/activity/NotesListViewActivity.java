@@ -214,7 +214,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         localAccount = db.getLocalAccountByAccountName(accountName);
         try {
             ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-            new NotesListViewItemTouchHelper(ssoAccount, this, this, db, adapter, syncCallBack, this::refreshLists).attachToRecyclerView(listView);
+            new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this).attachToRecyclerView(listView);
             synchronize();
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
