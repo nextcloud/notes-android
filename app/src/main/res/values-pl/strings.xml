@@ -127,6 +127,7 @@
     <string name="no_category">Bez kategorii</string>
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Pole checkbox</string>
+    <string name="unlock_notes">Odblokuj notatki</string>
     <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->

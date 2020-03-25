@@ -127,6 +127,9 @@
     <string name="no_category">Žiadna kategória</string>
     <string name="add_category">Pridať %1$s</string>
     <string name="simple_checkbox">Zaškrtávacie políčko</string>
+    <string name="unlock_notes">Odomknúť poznámky</string>
+    <string name="simple_beta">Beta</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
