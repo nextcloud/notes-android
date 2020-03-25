@@ -127,6 +127,7 @@
     <string name="no_category">Χωρίς κατηγορία</string>
     <string name="add_category">Προσθήκη %1$s</string>
     <string name="simple_checkbox">Πλαίσιο ελέγχου</string>
+    <string name="unlock_notes">Ξεκλείδωμα σημειώσεων</string>
     <string name="simple_beta">Δοκιμαστικό</string>
 
     <!-- Array: note modes -->
