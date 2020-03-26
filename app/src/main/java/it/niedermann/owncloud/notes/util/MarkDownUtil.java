@@ -3,12 +3,15 @@ package it.niedermann.owncloud.notes.util;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Spanned;
+import android.text.TextUtils;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.yydcdut.markdown.MarkdownConfiguration;
 import com.yydcdut.markdown.MarkdownConfiguration.Builder;
+import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.span.MDImageSpan;
 import com.yydcdut.markdown.theme.ThemeDefault;
 import com.yydcdut.markdown.theme.ThemeSonsOfObsidian;
@@ -22,12 +25,19 @@ import it.niedermann.owncloud.notes.R;
 @SuppressWarnings("WeakerAccess")
 public class MarkDownUtil {
 
+    private static final String TAG = MarkDownUtil.class.getCanonicalName();
+
     public static final String CHECKBOX_UNCHECKED_MINUS = "- [ ]";
     public static final String CHECKBOX_UNCHECKED_MINUS_TRAILING_SPACE = CHECKBOX_UNCHECKED_MINUS + " ";
     public static final String CHECKBOX_UNCHECKED_STAR = "* [ ]";
     public static final String CHECKBOX_UNCHECKED_STAR_TRAILING_SPACE = CHECKBOX_UNCHECKED_STAR + " ";
     public static final String CHECKBOX_CHECKED_MINUS = "- [x]";
     public static final String CHECKBOX_CHECKED_STAR = "* [x]";
+
+    private static final String MD_IMAGE_WITH_EMPTY_DESCRIPTION = "![](";
+    private static final String MD_IMAGE_WITH_SPACE_DESCRIPTION = "![ ](";
+    private static final String[] MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_EMPTY_DESCRIPTION};
+    private static final String[] MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_SPACE_DESCRIPTION};
 
     /**
      * Ensures every instance of RxMD uses the same configuration
@@ -58,6 +68,32 @@ public class MarkDownUtil {
                 .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null))
                 .setRxMDImageLoader(new NotesImageLoader(context))
                 .setDefaultImageSize(400, 300);
+    }
+
+    /**
+     * This is a compatibility-method that provides workarounds for several bugs in RxMarkdown
+     *
+     * https://github.com/stefan-niedermann/nextcloud-notes/issues/772
+     *
+     * @param markdownProcessor RxMarkdown MarkdownProcessor instance
+     * @param text CharSequence that should be parsed
+     * @return the processed text but with several workarounds for Bugs in RxMarkdown
+     */
+    @NonNull
+    public static CharSequence parseCompat(@NonNull final MarkdownProcessor markdownProcessor, CharSequence text) {
+        if (TextUtils.isEmpty(text)) {
+            return "";
+        }
+
+        Log.v(TAG, "parseCompat - Original: \"" + text + "\"");
+
+        while (TextUtils.indexOf(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION) >= 0) {
+            text = TextUtils.replace(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY, MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY);
+        }
+
+        Log.v(TAG, "parseCompat - Replaced empty image descriptions: \"" + text + "\"");
+
+        return markdownProcessor.parse(text);
     }
 
     public static boolean containsImageSpan(@NonNull CharSequence text) {

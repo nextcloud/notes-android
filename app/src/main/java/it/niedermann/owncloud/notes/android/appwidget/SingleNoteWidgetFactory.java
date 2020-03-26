@@ -22,6 +22,7 @@ import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
 import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.DARK_THEME_KEY;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
@@ -107,12 +108,12 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         if (darkModeActive) {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv_dark, markdownProcessor.parse(note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv_dark, parseCompat(markdownProcessor, note.getContent()));
 
         } else {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv, markdownProcessor.parse(note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv, parseCompat(markdownProcessor, note.getContent()));
         }
 
         return note_content;

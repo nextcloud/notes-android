@@ -35,6 +35,8 @@ import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
+
 public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
 
     private MarkdownProcessor markdownProcessor;
@@ -114,10 +116,11 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
                         })
                         .build());
         try {
-            binding.singleNoteContent.setText(markdownProcessor.parse(note.getContent()));
+            binding.singleNoteContent.setText(parseCompat(markdownProcessor, note.getContent()));
             onResume();
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
+            binding.singleNoteContent.setText(note.getContent());
             Toast.makeText(binding.singleNoteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
@@ -145,8 +148,8 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
 
     @Override
     protected void colorWithText(String newText) {
-        if (binding != null && ViewCompat.isAttachedToWindow(binding.singleNoteContent)) {
-            binding.singleNoteContent.setText(markdownProcessor.parse(DisplayUtils.searchAndColor(getContent(), new SpannableString
+        if ((binding != null) && ViewCompat.isAttachedToWindow(binding.singleNoteContent)) {
+            binding.singleNoteContent.setText(parseCompat(markdownProcessor, DisplayUtils.searchAndColor(getContent(), new SpannableString
                             (getContent()), newText, getResources().getColor(R.color.primary))),
                     TextView.BufferType.SPANNABLE);
         }

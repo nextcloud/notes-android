@@ -37,15 +37,18 @@ import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 import it.niedermann.owncloud.notes.util.SSOUtil;
 
+import static it.niedermann.owncloud.notes.util.DisplayUtils.searchAndColor;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_CHECKED_MINUS;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_CHECKED_STAR;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_MINUS;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_STAR;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
+import static it.niedermann.owncloud.notes.util.NoteLinksUtils.extractNoteRemoteId;
+import static it.niedermann.owncloud.notes.util.NoteLinksUtils.replaceNoteLinksWithDummyUrls;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
@@ -138,7 +141,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                                         }
 
                                         changedText = TextUtils.join("\n", lines);
-                                        binding.singleNoteContent.setText(markdownProcessor.parse(changedText));
+                                        binding.singleNoteContent.setText(parseCompat(markdownProcessor, changedText));
                                         saveNote(null);
                                     } catch (IndexOutOfBoundsException e) {
                                         Toast.makeText(getActivity(), R.string.checkbox_could_not_be_toggled, Toast.LENGTH_SHORT).show();
@@ -149,10 +152,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         )
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
-                                long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-                                long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
-                                Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
-                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
+                                final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class)
+                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, db.getLocalIdByRemoteId(this.note.getAccountId(), extractNoteRemoteId(link)));
                                 startActivity(intent);
                             } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
@@ -161,11 +162,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         })
                         .build());
         try {
-            CharSequence parsedMarkdown = markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
-            binding.singleNoteContent.setText(parsedMarkdown);
+            binding.singleNoteContent.setText(parseCompat(markdownProcessor, replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-            binding.singleNoteContent.setText(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
+            binding.singleNoteContent.setText(replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
             Toast.makeText(binding.singleNoteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
@@ -185,7 +185,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     protected void colorWithText(String newText) {
         if (binding != null && ViewCompat.isAttachedToWindow(binding.singleNoteContent)) {
-            binding.singleNoteContent.setText(markdownProcessor.parse(DisplayUtils.searchAndColor(getContent(), new SpannableString
+            binding.singleNoteContent.setText(parseCompat(markdownProcessor, searchAndColor(getContent(), new SpannableString
                             (getContent()), newText, getResources().getColor(R.color.primary))),
                     TextView.BufferType.SPANNABLE);
         }
@@ -204,7 +204,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
                 db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
                     note = db.getNote(note.getAccountId(), note.getId());
-                    binding.singleNoteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
+                    binding.singleNoteContent.setText(parseCompat(markdownProcessor, replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
                     binding.swiperefreshlayout.setRefreshing(false);
                 });
                 db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
