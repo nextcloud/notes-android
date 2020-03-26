@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,10 +30,11 @@ import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 
+import static androidx.core.view.ViewCompat.isAttachedToWindow;
+import static it.niedermann.owncloud.notes.util.DisplayUtils.searchAndColor;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
 
 public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
@@ -147,11 +147,9 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    protected void colorWithText(String newText) {
-        if ((binding != null) && ViewCompat.isAttachedToWindow(binding.singleNoteContent)) {
-            binding.singleNoteContent.setText(parseCompat(markdownProcessor, DisplayUtils.searchAndColor(getContent(), new SpannableString
-                            (getContent()), newText, getResources().getColor(R.color.primary))),
-                    TextView.BufferType.SPANNABLE);
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current) {
+        if ((binding != null) && isAttachedToWindow(binding.singleNoteContent)) {
+            binding.singleNoteContent.setText(searchAndColor(new SpannableString(parseCompat(markdownProcessor, getContent())), newText, requireContext(), current), TextView.BufferType.SPANNABLE);
         }
     }
 

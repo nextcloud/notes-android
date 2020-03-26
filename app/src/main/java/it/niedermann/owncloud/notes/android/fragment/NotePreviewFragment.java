@@ -183,10 +183,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     @Override
-    protected void colorWithText(String newText) {
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current) {
         if (binding != null && ViewCompat.isAttachedToWindow(binding.singleNoteContent)) {
-            binding.singleNoteContent.setText(parseCompat(markdownProcessor, searchAndColor(getContent(), new SpannableString
-                            (getContent()), newText, getResources().getColor(R.color.primary))),
+            binding.singleNoteContent.setText(
+                    searchAndColor(new SpannableString(parseCompat(markdownProcessor, getContent())), newText, requireContext(), current),
                     TextView.BufferType.SPANNABLE);
         }
     }

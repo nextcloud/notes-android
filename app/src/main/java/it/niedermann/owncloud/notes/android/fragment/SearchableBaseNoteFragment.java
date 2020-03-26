@@ -68,12 +68,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
                 if (currentVisibility != oldVisibility) {
                     if (currentVisibility != View.VISIBLE) {
-                        colorWithText("");
+                        colorWithText("", null);
                         searchQuery = "";
                         hideSearchFabs();
                     } else {
                         jumpToOccurrence();
-                        colorWithText(searchQuery);
+                        colorWithText(searchQuery, null);
                         occurrenceCount = countOccurrences(getContent(), searchQuery);
                         showSearchFabs();
                     }
@@ -90,6 +90,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         if (next != null) {
             next.setOnClickListener(v -> {
                 currentOccurrence++;
+                colorWithText(searchView.getQuery().toString(), currentOccurrence);
                 jumpToOccurrence();
             });
         }
@@ -97,6 +98,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         if (prev != null) {
             prev.setOnClickListener(v -> {
                 currentOccurrence--;
+                colorWithText(searchView.getQuery().toString(), currentOccurrence);
                 jumpToOccurrence();
             });
         }
@@ -120,7 +122,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 }
                 currentOccurrence = 1;
                 jumpToOccurrence();
-                colorWithText(searchQuery);
+                colorWithText(searchQuery, currentOccurrence);
                 return true;
             }
         });
@@ -136,7 +138,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
     }
 
-    protected abstract void colorWithText(String newText);
+    protected abstract void colorWithText(@NonNull String newText, @Nullable Integer current);
 
     protected abstract ScrollView getScrollView();
 
@@ -194,7 +196,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
 
             if (numberLine >= 0) {
-                getScrollView().smoothScrollTo(0, layout.getLineTop(numberLine));
+                getScrollView().post(() -> getScrollView().smoothScrollTo(0, layout.getLineTop(numberLine)));
             }
         }
     }

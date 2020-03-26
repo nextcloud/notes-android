@@ -17,6 +17,9 @@
 
     <color name="icon_color_default">#757575</color>
 
+    <color name="bg_search_primary">@color/primary</color>
+    <color name="bg_search_secondary">#eee</color>
+
     <color name="widget_background">#dfffffff</color>
     <color name="widget_fg_default">#000000</color>
     <color name="widget_fg_contrast">#ffffff</color>
