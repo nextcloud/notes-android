@@ -127,6 +127,7 @@
     <string name="no_category">Без категории</string>
     <string name="add_category">Добавить %1$s </string>
     <string name="simple_checkbox">Флажок</string>
+    <string name="unlock_notes">Разблокировать заметки</string>
     <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
