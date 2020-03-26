@@ -26,7 +26,6 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.MetricAffectingSpan;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -84,7 +83,7 @@ public class DisplayUtils {
         @Override
         public void updateDrawState(TextPaint tp) {
             tp.bgColor = current ? bgColorPrimary : bgColorSecondary;
-            tp.setColor(current ? getForeground(Integer.toHexString(tp.bgColor)) : bgColorPrimary);
+            tp.setColor(current ? (getForeground(Integer.toHexString(tp.bgColor)) ? Color.WHITE : Color.BLACK) : bgColorPrimary);
             tp.setFakeBoldText(true);
         }
 
@@ -92,14 +91,13 @@ public class DisplayUtils {
         public void updateMeasureState(@NonNull TextPaint tp) {
             tp.setFakeBoldText(true);
         }
+    }
 
-        private static @ColorInt
-        int getForeground(String backgroundColorHex) {
-            return ((float) (
-                    0.2126 * Integer.valueOf(backgroundColorHex.substring(1, 3), 16)
-                            + 0.7152 * Integer.valueOf(backgroundColorHex.substring(3, 5), 16)
-                            + 0.0722 * Integer.valueOf(backgroundColorHex.substring(5, 7), 16)
-            ) < 140) ? Color.WHITE : Color.BLACK;
-        }
+    public static boolean getForeground(String backgroundColorHex) {
+        return ((float) (
+                0.2126 * Integer.valueOf(backgroundColorHex.substring(1, 3), 16)
+                        + 0.7152 * Integer.valueOf(backgroundColorHex.substring(3, 5), 16)
+                        + 0.0722 * Integer.valueOf(backgroundColorHex.substring(5, 7), 16)
+        ) < 140);
     }
 }
