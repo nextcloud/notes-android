@@ -1,0 +1,1 @@
+- 🐞 Fix crash when note contains multiple images without descriptions
