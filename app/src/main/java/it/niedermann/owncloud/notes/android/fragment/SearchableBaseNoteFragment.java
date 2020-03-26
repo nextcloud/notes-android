@@ -90,16 +90,16 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         if (next != null) {
             next.setOnClickListener(v -> {
                 currentOccurrence++;
-                colorWithText(searchView.getQuery().toString(), currentOccurrence);
                 jumpToOccurrence();
+                colorWithText(searchView.getQuery().toString(), currentOccurrence);
             });
         }
 
         if (prev != null) {
             prev.setOnClickListener(v -> {
                 currentOccurrence--;
-                colorWithText(searchView.getQuery().toString(), currentOccurrence);
                 jumpToOccurrence();
+                colorWithText(searchView.getQuery().toString(), currentOccurrence);
             });
         }
 
