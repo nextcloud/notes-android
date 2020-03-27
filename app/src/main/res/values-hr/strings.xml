@@ -143,6 +143,7 @@
     <string-array name="darkmode_entries">
         <item>Svijetlo</item>
         <item>Tamno</item>
+        <item>Podrazumevani sistem</item>
     </string-array>
 
     <!-- Plurals -->

@@ -113,11 +113,13 @@
     <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>קטן</item>
+        <item>בינוני</item>
         <item>גדול</item>
     </string-array>
 
     <!-- Array: background synchronization -->
     <string-array name="sync_entries">
+        <item>כבוי</item>
         <item>15 דקות</item>
         <item>שעה</item>
         <item>6 שעות</item>
@@ -126,6 +128,7 @@
     <string-array name="darkmode_entries">
         <item>בהירה</item>
         <item>כהה</item>
+        <item>ברירת מחדל של המערכת</item>
     </string-array>
 
     <!-- Plurals -->

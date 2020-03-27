@@ -130,7 +130,7 @@
     <string name="pref_value_theme_light" translatable="false">LIGHT</string>
     <string name="pref_value_theme_dark" translatable="false">DARK</string>
     <string name="pref_value_theme_system_default" translatable="false">SYSTEM_DEFAULT</string>
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sync on Wi-Fi and mobile data</string>
     <string name="pref_value_lock">Password protection</string>
