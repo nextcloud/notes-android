@@ -31,7 +31,7 @@
         android:ellipsize="middle"
         android:singleLine="true"
         android:textColor="?android:textColorPrimary"
-        tools:hint="Username"/>
+        tools:hint="@tools:sample/full_names"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/delete"

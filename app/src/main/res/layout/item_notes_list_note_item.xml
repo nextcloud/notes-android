@@ -84,7 +84,7 @@
                     android:layout_weight="1"
                     android:textSize="@dimen/primary_font_size"
                     android:textColor="?android:textColorPrimary"
-                    tools:text="The title of the note"/>
+                    tools:text="@tools:sample/lorem/random"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -104,7 +104,7 @@
                     android:paddingTop="1dp"
                     android:layout_weight="1"
                     android:textSize="@dimen/secondary_font_size"
-                    tools:text="This is the content of the first line."/>
+                    tools:text="@tools:sample/lorem/random"/>
 
                 <TextView
                     android:id="@+id/noteCategory"
@@ -123,7 +123,7 @@
                     android:singleLine="true"
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/secondary_font_size"
-                    tools:text="My fancy category"/>
+                    tools:text="@string/category_work"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>

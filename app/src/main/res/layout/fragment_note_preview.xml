@@ -28,7 +28,8 @@
                 android:padding="16dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/fg_default"
-                android:textIsSelectable="true" />
+                android:textIsSelectable="true"
+                tools:text="@tools:sample/lorem/random" />
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

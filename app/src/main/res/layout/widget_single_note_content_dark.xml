@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/single_note_content_tv_dark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:textColor="@color/fg_default_dark_theme" />
+    android:textColor="@color/fg_default_dark_theme"
+    tools:text="@tools:sample/lorem/random" />
