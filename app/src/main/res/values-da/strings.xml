@@ -139,7 +139,7 @@
     <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Lille</item>
-        <item>Mellem</item>
+        <item>Mellem</item>Predeterminat del sistema
         <item>Stor</item>
     </string-array>
 
@@ -154,6 +154,7 @@
     <string-array name="darkmode_entries">
         <item>Lys</item>
         <item>Mørk</item>
+        <item>System standard</item>
     </string-array>
 
     <!-- Plurals -->

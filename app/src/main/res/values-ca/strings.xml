@@ -149,6 +149,7 @@
     <string-array name="darkmode_entries">
         <item>Clar</item>
         <item>Fosc</item>
+        <item>Predeterminat del sistema</item>
     </string-array>
 
     <!-- Plurals -->
