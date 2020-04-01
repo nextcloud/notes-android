@@ -96,7 +96,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">新しいノートを作成</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">ノーマル</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fiおよびモバイル接続時に同期する</string>
     <string name="pref_value_lock">パスワード保護</string>

@@ -96,9 +96,9 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Skapa en ny anteckning</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobil data</string>
+    <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobildata</string>
     <string name="pref_value_lock">Lösenordsskydd</string>
 
     <string name="simple_error">Fel</string>
@@ -116,7 +116,7 @@
     <string name="account_already_imported">Kontot har redan importerats</string>
     <string name="no_notes_yet">Inga anteckningar än</string>
     <string name="no_notes_yet_description">Tryck på + knappen för att skapa en ny anteckning</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Det gick inte att ladda förhandsgranskning. Kontrollera om det finns ett tvåsiffrigt listobjekt utan innehåll.</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Det gick inte att läsa in förhandsgranskning. Vänligen kontrollera om det finns ett tvåsiffrigt listobjekt utan innehåll.</string>
     <string name="simple_more">Mer</string>
     <string name="simple_move">Flytta</string>
     <string name="error_files_app_version_too_old">Är din fil-app av senaste version?</string>

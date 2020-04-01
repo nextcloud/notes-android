@@ -96,7 +96,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Opret en ny note</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synk på Wi-Fi og mobil data</string>
     <string name="pref_value_lock">Password protection</string>
@@ -127,6 +127,7 @@
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Tilføj %1$s</string>
     <string name="simple_checkbox">Afkrydsningsfeldt</string>
+    <string name="unlock_notes">Lås noter op</string>
     <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
@@ -139,7 +140,7 @@
     <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Lille</item>
-        <item>Mellem</item>Predeterminat del sistema
+        <item>Mellem</item>
         <item>Stor</item>
     </string-array>
 
@@ -154,7 +155,7 @@
     <string-array name="darkmode_entries">
         <item>Lys</item>
         <item>Mørk</item>
-        <item>System standard</item>
+        <item>System Standard</item>
     </string-array>
 
     <!-- Plurals -->

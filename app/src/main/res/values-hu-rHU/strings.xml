@@ -96,7 +96,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Új jegyzet létrehozása</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normál</string>
     <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fin és mobil adatkapcsolaton</string>
     <string name="pref_value_lock">Jelszavas védelem</string>
@@ -152,7 +152,6 @@
     <string-array name="darkmode_entries">
         <item>Világos</item>
         <item>Sötét</item>
-        <item>Rendszer alapértelmezés</item>
     </string-array>
 
     <!-- Plurals -->

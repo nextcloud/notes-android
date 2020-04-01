@@ -96,7 +96,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Создать новую заметку</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Обычный</string>
     <string name="pref_value_wifi_and_mobile">Синхр. по Wi-Fi и мобильной связи</string>
     <string name="pref_value_lock">Защита паролем</string>
@@ -114,7 +114,7 @@
     <string name="category_movie">Фильм</string>
     <string name="category_work">Рабочий</string>
     <string name="account_already_imported">Учётная запись уже импортирована</string>
-    <string name="no_notes_yet">Заметок пока нет</string>
+    <string name="no_notes_yet">Нет ни одной заметки</string>
     <string name="no_notes_yet_description">Для создания заметки нажмите +</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Не удалось загрузить предварительный просмотр.  Убедитесь,  существует ли двузначный номерный элемент списка без содержимого.</string>
     <string name="simple_more">Больше</string>

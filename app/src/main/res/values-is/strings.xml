@@ -85,7 +85,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Búa til nýjan minnispunkt</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Venjulegt</string>
     <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
     <string name="pref_value_lock">Verndun með lykilorði</string>
@@ -135,7 +135,6 @@
     <string-array name="darkmode_entries">
         <item>Ljóst</item>
         <item>Dökkt</item>
-        <item>Sjálfgefið kerfi</item>
     </string-array>
 
     <!-- Plurals -->
