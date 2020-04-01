@@ -96,7 +96,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Not ekle</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fi ve mobil veri ile eşitlensin</string>
     <string name="pref_value_lock">Parola koruması</string>

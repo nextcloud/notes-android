@@ -96,7 +96,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">建立新筆記</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">一般</string>
     <string name="pref_value_wifi_and_mobile">在使用 Wi-Fi 及行動網路時同步</string>
     <string name="pref_value_lock">密碼保護</string>

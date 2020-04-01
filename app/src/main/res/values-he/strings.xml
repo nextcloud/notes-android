@@ -83,7 +83,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">יצירת פתק חדש</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">רגיל</string>
     <string name="pref_value_wifi_and_mobile">עדכון דרך רשת אלחוטית ונתונים סלולריים</string>
     <string name="pref_value_lock">Password protection</string>
@@ -113,13 +113,11 @@
     <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>קטן</item>
-        <item>בינוני</item>
         <item>גדול</item>
     </string-array>
 
     <!-- Array: background synchronization -->
     <string-array name="sync_entries">
-        <item>כבוי</item>
         <item>15 דקות</item>
         <item>שעה</item>
         <item>6 שעות</item>
@@ -128,7 +126,6 @@
     <string-array name="darkmode_entries">
         <item>בהירה</item>
         <item>כהה</item>
-        <item>ברירת מחדל של המערכת</item>
     </string-array>
 
     <!-- Plurals -->
