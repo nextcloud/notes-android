@@ -37,7 +37,7 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
         CharSequence text = editText.getText();
         int originalCursorPosition = editText.getSelectionStart();
-        if(originalCursorPosition >= 0 && originalCursorPosition <= text.length()) {
+        if (originalCursorPosition >= 0 && originalCursorPosition <= text.length()) {
             int startOfLine = getStartOfLine(text, originalCursorPosition);
             int endOfLine = originalCursorPosition;
             if (endOfLine != startOfLine) {
@@ -45,10 +45,14 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
                     endOfLine--;
                 }
             }
-            String line = text.subSequence(startOfLine, endOfLine).toString();
-            if (MarkDownUtil.lineStartsWithCheckbox(line)) {
-                menu.findItem(R.id.checkbox).setVisible(false);
-                Log.i(TAG, "Hide checkbox menu item because line starts already with checkbox");
+            try {
+                String line = text.subSequence(startOfLine, endOfLine).toString();
+                if (MarkDownUtil.lineStartsWithCheckbox(line)) {
+                    menu.findItem(R.id.checkbox).setVisible(false);
+                    Log.i(TAG, "Hide checkbox menu item because line starts already with checkbox");
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                Log.e(TAG, e.getMessage(), e);
             }
         } else {
             Log.e(TAG, "SelectionStart is " + originalCursorPosition + ". Expected to be between 0 and " + text.length());
