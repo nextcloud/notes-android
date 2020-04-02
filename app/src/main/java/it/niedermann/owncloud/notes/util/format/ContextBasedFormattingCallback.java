@@ -15,6 +15,7 @@ import it.niedermann.owncloud.notes.util.MarkDownUtil;
 
 import static it.niedermann.owncloud.notes.util.ClipboardUtil.getClipboardURLorNull;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_MINUS_TRAILING_SPACE;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.getEndOfLine;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.getStartOfLine;
 
 public class ContextBasedFormattingCallback implements ActionMode.Callback {
@@ -39,19 +40,14 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
         int originalCursorPosition = editText.getSelectionStart();
         if (originalCursorPosition >= 0 && originalCursorPosition <= text.length()) {
             int startOfLine = getStartOfLine(text, originalCursorPosition);
-            int endOfLine = originalCursorPosition;
-            if (endOfLine != startOfLine) {
-                while (endOfLine < text.length() && text.charAt(endOfLine + 1) != '\n') {
-                    endOfLine--;
-                }
-            }
             try {
+                int endOfLine = getEndOfLine(text, startOfLine);
                 String line = text.subSequence(startOfLine, endOfLine).toString();
                 if (MarkDownUtil.lineStartsWithCheckbox(line)) {
                     menu.findItem(R.id.checkbox).setVisible(false);
                     Log.i(TAG, "Hide checkbox menu item because line starts already with checkbox");
                 }
-            } catch (StringIndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 Log.e(TAG, e.getMessage(), e);
             }
         } else {
@@ -78,12 +74,6 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
         CharSequence text = editText.getText();
         int originalCursorPosition = editText.getSelectionStart();
         int startOfLine = getStartOfLine(text, originalCursorPosition);
-        int endOfLine = originalCursorPosition;
-        if (endOfLine != startOfLine) {
-            while (endOfLine < text.length() && text.charAt(endOfLine + 1) != '\n') {
-                endOfLine--;
-            }
-        }
         CharSequence part1 = text.subSequence(0, startOfLine);
         CharSequence part2 = text.subSequence(startOfLine, text.length());
         editText.setText(TextUtils.concat(part1, CHECKBOX_UNCHECKED_MINUS_TRAILING_SPACE, part2));

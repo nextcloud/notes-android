@@ -72,11 +72,11 @@ public class MarkDownUtil {
 
     /**
      * This is a compatibility-method that provides workarounds for several bugs in RxMarkdown
-     *
+     * <p>
      * https://github.com/stefan-niedermann/nextcloud-notes/issues/772
      *
      * @param markdownProcessor RxMarkdown MarkdownProcessor instance
-     * @param text CharSequence that should be parsed
+     * @param text              CharSequence that should be parsed
      * @return the processed text but with several workarounds for Bugs in RxMarkdown
      */
     @NonNull
@@ -116,6 +116,14 @@ public class MarkDownUtil {
             startOfLine--;
         }
         return startOfLine;
+    }
+
+    public static int getEndOfLine(@NonNull CharSequence s, int cursorPosition) {
+        int nextLinebreak = s.toString().indexOf('\n', cursorPosition);
+        if (nextLinebreak > -1) {
+            return nextLinebreak;
+        }
+        return cursorPosition;
     }
 }
 

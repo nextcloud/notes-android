@@ -43,6 +43,38 @@ public class MarkDownUtilTest extends TestCase {
         }
     }
 
+    public void testGetEndOfLine() {
+        //language=md
+        StringBuilder test = new StringBuilder(
+                "# Test-Note\n" + // line 0 - 11
+                        "\n" + // line 12 - 12
+                        "- [ ] this is a test note\n" + // line 13 - 38
+                        "- [x] test\n" + // line start 39 - 49
+                        "[test](https://example.com)\n" + // line 50 - 77
+                        "\n" + // line 77 - 78
+                        "\n" // line 78 - 79
+        );
+
+        for (int i = 0; i < test.length(); i++) {
+            int endOfLine = MarkDownUtil.getEndOfLine(test, i);
+            if (i <= 11) {
+                assertEquals(11, endOfLine);
+            } else if (i <= 12) {
+                assertEquals(12, endOfLine);
+            } else if (i <= 38) {
+                assertEquals(38, endOfLine);
+            } else if (i <= 49) {
+                assertEquals(49, endOfLine);
+            } else if (i <= 77) {
+                assertEquals(77, endOfLine);
+            } else if (i <= 78) {
+                assertEquals(78, endOfLine);
+            } else if (i <= 79) {
+                assertEquals(79, endOfLine);
+            }
+        }
+    }
+
     public void testLineStartsWithCheckbox() {
         Map<String, Boolean> lines = new HashMap<>();
         lines.put("- [ ] ", true);
