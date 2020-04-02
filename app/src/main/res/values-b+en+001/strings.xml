@@ -83,7 +83,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Create a new note</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_lock">Password protection</string>
 
@@ -112,13 +112,11 @@
     <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Small</item>
-        <item>Medium</item>
         <item>Large</item>
     </string-array>
 
     <!-- Array: background synchronization -->
     <string-array name="sync_entries">
-        <item>Off</item>
         <item>15 minutes</item>
         <item>1 hour</item>
         <item>6 hours</item>
@@ -127,7 +125,6 @@
     <string-array name="darkmode_entries">
         <item>Light</item>
         <item>Dark</item>
-        <item>System Default</item>
     </string-array>
 
     <!-- Plurals -->

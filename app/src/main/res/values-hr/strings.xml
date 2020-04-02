@@ -89,7 +89,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Stvori novu bilješku</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normalno</string>
     <string name="pref_value_wifi_and_mobile">Sinkronizacija putem bežičnih (Wi-Fi) i mobilnih podataka</string>
     <string name="pref_value_lock">Zaštita zaporkom</string>
@@ -143,7 +143,6 @@
     <string-array name="darkmode_entries">
         <item>Svijetlo</item>
         <item>Tamno</item>
-        <item>Podrazumevani sistem</item>
     </string-array>
 
     <!-- Plurals -->

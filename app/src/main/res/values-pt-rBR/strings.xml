@@ -3,7 +3,7 @@
 
     <string name="app_name">Notas</string>
     <string name="app_name_long">Notas Nextcloud</string>
-    <string name="label_all_notes">Todas notas</string>
+    <string name="label_all_notes">Todas as notas</string>
     <string name="label_favorites">Favoritos</string>
     <string name="action_create">Nova nota</string>
     <string name="action_settings">Configurações</string>
@@ -16,7 +16,7 @@
     <string name="simple_bold">Negrito</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Itálico</string>
-    <string name="action_note_deleted">%1$s Excluído</string>
+    <string name="action_note_deleted">%1$s excluído</string>
     <string name="action_note_restored">%1$s Restaurado</string>
     <string name="action_undo">Desfazer</string>
     <string name="action_drawer_open">abrir navegação</string>
@@ -24,11 +24,11 @@
     <string name="action_uncategorized">Sem categoria</string>
     <string name="menu_delete">Excluir</string>
     <string name="menu_change_category">Categoria</string>
-    <string name="menu_favorite">Favorito</string>
+    <string name="menu_favorite">Favorita</string>
     <string name="menu_preview">Prever</string>
     <string name="menu_share">Compartilhar</string>
 
-    <string name="change_category_title">Escolher uma categoria</string>
+    <string name="change_category_title">Escolha uma categoria</string>
 
     <string name="listview_updated_today">Hoje</string>
     <string name="listview_updated_yesterday">Ontem</string>
@@ -96,7 +96,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Criar uma nova anotação</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar por Wi-Fi e dados móveis</string>
     <string name="pref_value_lock">Proteção com senha</string>
@@ -160,7 +160,7 @@
 
     <!-- Plurals -->
     <plurals name="ab_selected">
-        <item quantity="one">%d selecionados</item>
-        <item quantity="other">%d selecionado</item>
+        <item quantity="one">%d selecionado</item>
+        <item quantity="other">%d selecionados</item>
     </plurals>
 </resources>

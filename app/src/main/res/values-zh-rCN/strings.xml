@@ -96,7 +96,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">创建新便笺</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">普通</string>
     <string name="pref_value_wifi_and_mobile">在有 Wi-Fi 和移动数据网络时同步</string>
     <string name="pref_value_lock">密码保护</string>
@@ -154,7 +154,6 @@
     <string-array name="darkmode_entries">
         <item>浅色</item>
         <item>深色</item>
-        <item>系统默认</item>
     </string-array>
 
     <!-- Plurals -->

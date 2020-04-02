@@ -87,7 +87,7 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Opprett et nytt notat</string>
 
-    <!-- These values should not be translateable. They should be migrated at some point.  -->
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synkroniser med WiFi og mobil data</string>
     <string name="pref_value_lock">Passordbeskyttelse</string>
@@ -125,7 +125,6 @@
     <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>ett kvarter</item>
-        <item>15 minuter</item>
         <item>1 time</item>
         <item>6 timer</item>
     </string-array>
@@ -133,7 +132,6 @@
     <string-array name="darkmode_entries">
         <item>Lys</item>
         <item>Mørk</item>
-        <item>System standard</item>
     </string-array>
 
     <!-- Plurals -->
