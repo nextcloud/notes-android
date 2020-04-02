@@ -70,6 +70,7 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
         CharSequence text = editText.getText();
         int originalCursorPosition = editText.getSelectionStart();
         int startOfLine = getStartOfLine(text, originalCursorPosition);
+        Log.i(TAG, "Inserting checkbox at position " + startOfLine);
         CharSequence part1 = text.subSequence(0, startOfLine);
         CharSequence part2 = text.subSequence(startOfLine, text.length());
         editText.setText(TextUtils.concat(part1, CHECKBOX_UNCHECKED_MINUS_TRAILING_SPACE, part2));
@@ -82,14 +83,17 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
         int end = start;
         boolean textToFormatIsLink = TextUtils.indexOf(editText.getText().subSequence(start, end), "http") == 0;
         if (textToFormatIsLink) {
+            Log.i(TAG, "Inserting link description for position " + start + " to " + end);
             ssb.insert(end, ")");
             ssb.insert(start, "[](");
         } else {
             String clipboardURL = getClipboardURLorNull(editText.getContext());
             if (clipboardURL != null) {
+                Log.i(TAG, "Inserting link from clipboard at position " + start + " to " + end + ": " + clipboardURL);
                 ssb.insert(end, "](" + clipboardURL + ")");
                 end += clipboardURL.length();
             } else {
+                Log.i(TAG, "Inserting empty link for position " + start + " to " + end);
                 ssb.insert(end, "]()");
             }
             ssb.insert(start, "[");
