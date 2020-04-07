@@ -51,7 +51,7 @@
     <!-- Network -->
 
     <!-- Error -->
-    <string name="error_sync">Sinkronizazioa huts egin du: %1$s</string>
+    <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
     <string name="error_json">Notes aplikazioa zerbitzarian aktibatuta dago?</string>
     <string name="error_no_network">Ez dago sare konexiorik</string>
     <string name="error_files_app">Files aplikazioa instalatu duzu?</string>
