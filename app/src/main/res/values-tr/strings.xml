@@ -127,6 +127,7 @@
     <string name="no_category">Kategori yok</string>
     <string name="add_category">%1$s ekle</string>
     <string name="simple_checkbox">İşaret kutusu</string>
+    <string name="unlock_notes">Kilidi açma notları</string>
     <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
