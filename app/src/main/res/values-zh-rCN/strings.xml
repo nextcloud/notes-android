@@ -127,6 +127,7 @@
     <string name="no_category">没有分类</string>
     <string name="add_category">添加 %1$s</string>
     <string name="simple_checkbox">复选框</string>
+    <string name="unlock_notes">解锁笔记</string>
     <string name="simple_beta">Beta</string>
 
     <!-- Array: note modes -->
