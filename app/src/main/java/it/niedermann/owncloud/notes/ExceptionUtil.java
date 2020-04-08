@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 import com.nextcloud.android.sso.helper.VersionCheckHelper;
 
@@ -52,10 +53,11 @@ public class ExceptionUtil {
 
     private static String getDeviceInfos() {
         return ""
-                + "\nOS Version: " + System.getProperty("os.version") + "(" + android.os.Build.VERSION.INCREMENTAL + ")"
-                + "\nOS API Level: " + android.os.Build.VERSION.SDK_INT
-                + "\nDevice: " + android.os.Build.DEVICE
-                + "\nModel (and Product): " + android.os.Build.MODEL + " (" + android.os.Build.PRODUCT + ")";
+                + "\nOS Version: " + System.getProperty("os.version") + "(" + Build.VERSION.INCREMENTAL + ")"
+                + "\nOS API Level: " + Build.VERSION.SDK_INT
+                + "\nDevice: " + Build.DEVICE
+                + "\nManufacturer: " + Build.MANUFACTURER
+                + "\nModel (and Product): " + Build.MODEL + " (" + Build.PRODUCT + ")";
     }
 
     private static String getStacktraceOf(Throwable e) {
