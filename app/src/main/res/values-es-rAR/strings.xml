@@ -120,6 +120,7 @@
 
     <!-- Array: background synchronization -->
     <string-array name="sync_entries">
+        <item>Apagado</item>
         <item>15 minutos</item>
         <item>1 hora</item>
         <item>6 horas</item>
@@ -128,6 +129,7 @@
     <string-array name="darkmode_entries">
         <item>Claro</item>
         <item>Oscuro</item>
+        <item>Sistema por defecto</item>
     </string-array>
 
     <!-- Plurals -->

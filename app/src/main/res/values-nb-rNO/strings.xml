@@ -125,6 +125,7 @@
     <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>ett kvarter</item>
+        <item>15 minuter</item>
         <item>1 time</item>
         <item>6 timer</item>
     </string-array>
@@ -132,6 +133,7 @@
     <string-array name="darkmode_entries">
         <item>Lys</item>
         <item>Mørk</item>
+        <item>System standard</item>
     </string-array>
 
     <!-- Plurals -->

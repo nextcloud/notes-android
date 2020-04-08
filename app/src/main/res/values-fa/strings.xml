@@ -152,6 +152,7 @@
     <string-array name="darkmode_entries">
         <item>روشن</item>
         <item>تیره</item>
+        <item>پیش فرض سیستم</item>
     </string-array>
 
     <!-- Plurals -->

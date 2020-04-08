@@ -135,6 +135,7 @@
     <string-array name="darkmode_entries">
         <item>Ljóst</item>
         <item>Dökkt</item>
+        <item>Sjálfgefið kerfi</item>
     </string-array>
 
     <!-- Plurals -->
