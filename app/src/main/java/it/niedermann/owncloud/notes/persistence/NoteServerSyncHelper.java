@@ -2,8 +2,6 @@ package it.niedermann.owncloud.notes.persistence;
 
 import android.accounts.NetworkErrorException;
 import android.content.BroadcastReceiver;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -15,7 +13,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -28,6 +25,7 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundExce
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotSupportedException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
@@ -55,7 +53,7 @@ import it.niedermann.owncloud.notes.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.util.SSOUtil;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 
-import static android.content.Context.CLIPBOARD_SERVICE;
+import static it.niedermann.owncloud.notes.util.ClipboardUtil.copyToClipboard;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
@@ -230,7 +228,7 @@ public class NoteServerSyncHelper {
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) || onlyLocalChanges)) {
                 Log.d(TAG, "... starting now");
                 final LocalAccount account = db.getLocalAccountByAccountName(ssoAccount.name);
-                if(account == null) {
+                if (account == null) {
                     Log.e(TAG, "LocalAccount for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
                     return;
                 }
@@ -318,7 +316,8 @@ public class NoteServerSyncHelper {
      * Synchronization consists of two parts: pushLocalChanges and pullRemoteChanges.
      */
     private class SyncTask extends AsyncTask<Void, Void, SyncResultStatus> {
-        @NonNull private final LocalAccount localAccount;
+        @NonNull
+        private final LocalAccount localAccount;
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
         @NonNull
@@ -428,6 +427,9 @@ public class NoteServerSyncHelper {
                         exceptions.add(e);
                         status = LoginStatus.JSON_FAILED;
                     }
+                } catch (TokenMismatchException e) {
+                    exceptions.add(e);
+                    status = LoginStatus.TOKEN_MISMATCH;
                 } catch (Exception e) {
                     exceptions.add(e);
                     status = LoginStatus.UNKNOWN_PROBLEM;
@@ -491,6 +493,9 @@ public class NoteServerSyncHelper {
                     exceptions.add(e);
                     return LoginStatus.JSON_FAILED;
                 }
+            } catch (TokenMismatchException e) {
+                exceptions.add(e);
+                return LoginStatus.TOKEN_MISMATCH;
             } catch (NextcloudFilesAppNotSupportedException e) {
                 exceptions.add(e);
                 return LoginStatus.FILES_APP_VERSION_TOO_OLD;
@@ -523,15 +528,12 @@ public class NoteServerSyncHelper {
                 if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
                     Snackbar.make(((ViewProvider) context).getView(), statusMessage, Snackbar.LENGTH_LONG)
                             .setAction(R.string.simple_more, v -> {
-                                String debugInfos = ExceptionUtil.getDebugInfos((AppCompatActivity) context, exceptions);
-                                AlertDialog dialog = new AlertDialog.Builder(context)
+                                final String debugInfos = ExceptionUtil.getDebugInfos((AppCompatActivity) context, exceptions);
+                                final AlertDialog dialog = new AlertDialog.Builder(context)
                                         .setTitle(statusMessage)
                                         .setMessage(debugInfos)
                                         .setPositiveButton(android.R.string.copy, (a, b) -> {
-                                            final ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
-                                            ClipData clipData = ClipData.newPlainText(context.getString(R.string.simple_exception), "```\n" + debugInfos + "\n```");
-                                            Objects.requireNonNull(clipboardManager).setPrimaryClip(clipData);
-                                            Toast.makeText(context, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
+                                            copyToClipboard(context, context.getString(R.string.simple_exception), "```\n" + debugInfos + "\n```");
                                             a.dismiss();
                                         })
                                         .setNegativeButton(R.string.simple_close, null)
