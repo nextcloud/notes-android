@@ -17,7 +17,6 @@ import it.niedermann.owncloud.notes.R;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
-@SuppressWarnings("WeakerAccess")
 public class ClipboardUtil {
 
     private static final String TAG = ClipboardUtil.class.getCanonicalName();

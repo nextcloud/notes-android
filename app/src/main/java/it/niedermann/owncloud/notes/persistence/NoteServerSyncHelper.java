@@ -6,16 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
@@ -41,8 +38,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import it.niedermann.owncloud.notes.ExceptionUtil;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.fragment.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -53,7 +50,6 @@ import it.niedermann.owncloud.notes.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.util.SSOUtil;
 import it.niedermann.owncloud.notes.util.ServerResponse;
 
-import static it.niedermann.owncloud.notes.util.ClipboardUtil.copyToClipboard;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
@@ -323,7 +319,7 @@ public class NoteServerSyncHelper {
         @NonNull
         private final Map<String, List<ISyncCallback>> callbacks = new HashMap<>();
         @NonNull
-        private final List<Throwable> exceptions = new ArrayList<>();
+        private final ArrayList<Throwable> exceptions = new ArrayList<>();
 
         SyncTask(@NonNull LocalAccount localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
             this.localAccount = localAccount;
@@ -527,25 +523,9 @@ public class NoteServerSyncHelper {
                 );
                 if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
                     Snackbar.make(((ViewProvider) context).getView(), statusMessage, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.simple_more, v -> {
-                                final String debugInfos = ExceptionUtil.getDebugInfos((AppCompatActivity) context, exceptions);
-                                final AlertDialog dialog = new AlertDialog.Builder(context)
-                                        .setTitle(statusMessage)
-                                        .setMessage(debugInfos)
-                                        .setPositiveButton(android.R.string.copy, (a, b) -> {
-                                            copyToClipboard(context, context.getString(R.string.simple_exception), "```\n" + debugInfos + "\n```");
-                                            a.dismiss();
-                                        })
-                                        .setNegativeButton(R.string.simple_close, null)
-                                        .create();
-                                dialog.show();
-                                ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(Typeface.MONOSPACE);
-                            })
+                            .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(statusMessage, exceptions)
+                                    .show(((AppCompatActivity) context).getSupportFragmentManager(), ExceptionDialogFragment.class.getCanonicalName()))
                             .show();
-                } else {
-                    for (Throwable e : exceptions) {
-                        Log.e(TAG, statusMessage, e);
-                    }
                 }
             }
             syncActive.put(ssoAccount.name, false);

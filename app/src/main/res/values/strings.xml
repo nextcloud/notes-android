@@ -165,6 +165,17 @@
     <string name="unlock_notes">Unlock notes</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Could not copy to clipboard</string>
+    <string name="error_dialog_title">Oh no - What now? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch">Please try to clear the storage of both apps: Nextcloud and Nextcloud Notes to solve this issue.</string>
+    <string name="error_dialog_tip_files_outdated">Your Nextcloud app seems to be outdated. Please visit the Play Store or F-Droid to get the latest version.</string>
+    <string name="error_dialog_tip_files_force_stop">Something seems to be wrong with your Nextcloud app. Please try to force stop both, the Nextcloud app and the Nextcloud Notes app.</string>
+    <string name="error_dialog_tip_files_delete_storage">If force stopping them does not help, you can try to clear the storage of both apps.</string>
+    <string name="error_dialog_timeout_instance">There wasn\'t a response from your server in the given time. Please make sure your instance is running well.</string>
+    <string name="error_dialog_timeout_toggle">Check your network connection. Sometime toggling the mobile data or Wi-Fi off and on again can help.</string>
+    <string name="error_dialog_check_server">The response of your server was not correct. Please check whether you can access your notes via web interface.</string>
+    <string name="error_dialog_check_server_logs">There is an issue with your Nextcloud setup. Please have a look into the server log files.</string>
+    <string name="error_dialog_check_maintenance">Please check whether your Nextcloud instance is in maintenance mode.</string>
+    <string name="error_dialog_insufficient_storage">Your Nextcloud instance has no free storage left. Please delete some files to sync your local changes into your cloud.</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
