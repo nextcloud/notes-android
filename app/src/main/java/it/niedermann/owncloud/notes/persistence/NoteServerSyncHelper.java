@@ -20,7 +20,6 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
-import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
@@ -465,9 +464,7 @@ public class NoteServerSyncHelper {
             } catch (NextcloudHttpRequestFailedException e) {
                 Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
                 if (e.getStatusCode() == HTTP_NOT_MODIFIED) {
-                    exceptions.add(new TokenMismatchException());
-                    return false;
-//                    return true;
+                    return true;
                 } else {
                     exceptions.add(e);
                     return false;
