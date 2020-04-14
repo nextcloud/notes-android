@@ -17,19 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotSupportedException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import org.json.JSONException;
-
-import java.net.ConnectException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,7 +39,6 @@ import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.util.SSOUtil;
 import it.niedermann.owncloud.notes.util.ServerResponse;
@@ -346,13 +339,11 @@ public class NoteServerSyncHelper {
         @Override
         protected SyncResultStatus doInBackground(Void... voids) {
             Log.i(TAG, "STARTING SYNCHRONIZATION");
-            //db.debugPrintFullDB();
-            SyncResultStatus status = new SyncResultStatus();
-            status.pushStatus = pushLocalChanges();
+            final SyncResultStatus status = new SyncResultStatus();
+            status.pushSuccessful = pushLocalChanges();
             if (!onlyLocalChanges) {
-                status.pullStatus = pullRemoteChanges();
+                status.pullSuccessful = pullRemoteChanges();
             }
-            //db.debugPrintFullDB();
             Log.i(TAG, "SYNCHRONIZATION FINISHED");
             return status;
         }
@@ -360,10 +351,10 @@ public class NoteServerSyncHelper {
         /**
          * Push local changes: for each locally created/edited/deleted Note, use NotesClient in order to push the changed to the server.
          */
-        private LoginStatus pushLocalChanges() {
+        private boolean pushLocalChanges() {
             Log.d(TAG, "pushLocalChanges()");
 
-            LoginStatus status = LoginStatus.OK;
+            boolean success = true;
             List<DBNote> notes = db.getLocalModifiedNotes(localAccount.getId());
             for (DBNote note : notes) {
                 Log.d(TAG, "   Process Local Note: " + note);
@@ -415,29 +406,22 @@ public class NoteServerSyncHelper {
                 } catch (NextcloudHttpRequestFailedException e) {
                     if (e.getStatusCode() == HTTP_NOT_MODIFIED) {
                         Log.d(TAG, "Server returned HTTP Status Code 304 - Not Modified");
-                    } else if (e.getStatusCode() == 507) {
-                        exceptions.add(e);
-                        Log.d(TAG, "Server returned HTTP Status Code 507 - Insufficient Storage");
-                        status = LoginStatus.INSUFFICIENT_STORAGE;
                     } else {
                         exceptions.add(e);
-                        status = LoginStatus.JSON_FAILED;
+                        success = false;
                     }
-                } catch (TokenMismatchException e) {
-                    exceptions.add(e);
-                    status = LoginStatus.TOKEN_MISMATCH;
                 } catch (Exception e) {
                     exceptions.add(e);
-                    status = LoginStatus.UNKNOWN_PROBLEM;
+                    success = false;
                 }
             }
-            return status;
+            return success;
         }
 
         /**
          * Pull remote Changes: update or create each remote note (if local pendant has no changes) and remove remotely deleted notes.
          */
-        private LoginStatus pullRemoteChanges() {
+        private boolean pullRemoteChanges() {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
                 Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
@@ -477,33 +461,20 @@ public class NoteServerSyncHelper {
                 localAccount.setModified(response.getLastModified());
                 db.updateETag(localAccount.getId(), localAccount.getEtag());
                 db.updateModified(localAccount.getId(), localAccount.getModified());
-                return LoginStatus.OK;
-            } catch (JSONException | NullPointerException e) {
-                exceptions.add(e);
-                return LoginStatus.JSON_FAILED;
+                return true;
             } catch (NextcloudHttpRequestFailedException e) {
                 Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
-                if (e.getStatusCode() == 304) {
-                    return LoginStatus.OK;
+                if (e.getStatusCode() == HTTP_NOT_MODIFIED) {
+                    exceptions.add(new TokenMismatchException());
+                    return false;
+//                    return true;
                 } else {
                     exceptions.add(e);
-                    return LoginStatus.JSON_FAILED;
+                    return false;
                 }
-            } catch (TokenMismatchException e) {
-                exceptions.add(e);
-                return LoginStatus.TOKEN_MISMATCH;
-            } catch (NextcloudFilesAppNotSupportedException e) {
-                exceptions.add(e);
-                return LoginStatus.FILES_APP_VERSION_TOO_OLD;
-            } catch (NextcloudApiNotRespondingException e) {
-                exceptions.add(e);
-                return LoginStatus.PROBLEM_WITH_FILES_APP;
-            } catch (SocketTimeoutException | ConnectException e) {
-                exceptions.add(e);
-                return LoginStatus.NO_NETWORK;
             } catch (Exception e) {
                 exceptions.add(e);
-                return LoginStatus.UNKNOWN_PROBLEM;
+                return false;
             }
         }
 
@@ -513,17 +484,10 @@ public class NoteServerSyncHelper {
             for (Throwable e : exceptions) {
                 Log.e(TAG, e.getMessage(), e);
             }
-            if (status.pullStatus != LoginStatus.OK || status.pushStatus != LoginStatus.OK) {
-                String statusMessage = context.getApplicationContext().getString(R.string.error_sync, context.getApplicationContext().getString(
-                        // Since we can only display one snackbar at a time, let's first fix the pullStatus errors.
-                        status.pushStatus == LoginStatus.OK
-                                ? status.pullStatus.str
-                                : status.pushStatus.str
-                        )
-                );
+            if (!status.pullSuccessful || !status.pushSuccessful) {
                 if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
-                    Snackbar.make(((ViewProvider) context).getView(), statusMessage, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(statusMessage, exceptions)
+                    Snackbar.make(((ViewProvider) context).getView(), R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                            .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
                                     .show(((AppCompatActivity) context).getSupportFragmentManager(), ExceptionDialogFragment.class.getCanonicalName()))
                             .show();
                 }
