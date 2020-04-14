@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/activity_margin">
+    android:padding="@dimen/spacer_2x">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,9 @@
         <TextView
             android:id="@+id/statusMessage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            tools:maxLength="50"
+            tools:text="@tools:sample/lorem/random" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tips"
@@ -34,21 +36,21 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/spacer_2x"
             android:text="@string/error_dialog_we_need_info" />
 
         <TextView
             android:id="@+id/stacktrace"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:layout_marginBottom="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:layout_marginBottom="@dimen/spacer_2x"
             android:layout_weight="1"
             android:background="@color/bg_highlighted"
             android:padding="8dp"
             android:scrollbars="horizontal|vertical"
             android:textIsSelectable="true"
             android:typeface="monospace"
-            tools:text="@string/android_get_accounts_permission_not_granted_exception_message" />
+            tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 </ScrollView>

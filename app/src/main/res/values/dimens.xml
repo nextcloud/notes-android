@@ -2,11 +2,12 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_margin">16dp</dimen>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="spacer_1hx">4dp</dimen>
+    <dimen name="spacer_1x">8dp</dimen>
+    <dimen name="spacer_2x">16dp</dimen>
 
     <!-- Buttons -->
-    <dimen name="button_padding">16dp</dimen>
+    <dimen name="button_padding">@dimen/spacer_2x</dimen>
 
     <dimen name="primary_font_size">16sp</dimen>
     <dimen name="secondary_font_size">14sp</dimen>
@@ -17,11 +18,11 @@
     <dimen name="note_font_size_large">22sp</dimen>
 
     <!-- Widgets -->
-    <dimen name="widget_margin">8dp</dimen>
+    <dimen name="widget_margin">@dimen/spacer_1x</dimen>
     <dimen name="widget_single_note_padding">10dp</dimen>
 
     <dimen name="widget_note_list_hdr_padding">2dp</dimen>
-    <dimen name="widget_note_list_padding">4dp</dimen>
+    <dimen name="widget_note_list_padding">@dimen/spacer_1hx</dimen>
     <dimen name="widget_note_list_header_height">36dp</dimen>
     <dimen name="widget_note_list_icon_width">30dp</dimen>
 
