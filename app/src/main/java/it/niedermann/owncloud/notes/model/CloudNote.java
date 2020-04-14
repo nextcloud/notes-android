@@ -25,8 +25,6 @@ public class CloudNote implements Serializable {
 
     public CloudNote(long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag) {
         this.remoteId = remoteId;
-        if (title != null)
-            setTitle(title);
         setTitle(title);
         setContent(content);
         setFavorite(favorite);

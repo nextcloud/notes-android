@@ -13,13 +13,13 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.nextcloud.android.sso.AccountImporter;
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.model.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.CapabilitiesClient.Capabilities;
 
 public class CapabilitiesWorker extends Worker {
 
@@ -45,8 +45,12 @@ public class CapabilitiesWorker extends Worker {
             try {
                 SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-            } catch (NextcloudFilesAppAccountNotFoundException e) {
+                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
+                // TODO Update capabilities for account in database
+                Log.i(TAG, capabilities.toString());
+            } catch (Exception e) {
                 e.printStackTrace();
+                return Result.failure();
             }
         }
         return Result.success();

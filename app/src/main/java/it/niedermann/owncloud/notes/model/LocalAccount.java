@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
+
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 
 public class LocalAccount {
@@ -10,6 +12,11 @@ public class LocalAccount {
     private String url;
     private String etag;
     private long modified;
+    private String apiVersion;
+    @ColorInt
+    private int color;
+    @ColorInt
+    private int textColor;
 
     public long getId() {
         return id;
@@ -59,6 +66,30 @@ public class LocalAccount {
         this.modified = modified;
     }
 
+    public String getApiVersion() {
+        return apiVersion;
+    }
+
+    public void setApiVersion(String apiVersion) {
+        this.apiVersion = apiVersion;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(@ColorInt int color) {
+        this.color = color;
+    }
+
+    public int getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(@ColorInt int textColor) {
+        this.textColor = textColor;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -68,7 +99,10 @@ public class LocalAccount {
                 ", accountName='" + accountName + '\'' +
                 ", url='" + url + '\'' +
                 ", etag='" + etag + '\'' +
-                ", modified='" + modified + '\'' +
+                ", modified=" + modified +
+                ", apiVersion='" + apiVersion + '\'' +
+                ", color=" + color +
+                ", textColor=" + textColor +
                 '}';
     }
 }

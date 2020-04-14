@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.text.TextUtils;
@@ -653,9 +654,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
      */
     public LocalAccount getAccount(long accountId) {
         validateAccountId(accountId);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, key_id + " = ?", new String[]{accountId + ""}, null, null, null, null);
-        LocalAccount account = new LocalAccount();
+        final SQLiteDatabase db = getReadableDatabase();
+        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color}, key_id + " = ?", new String[]{accountId + ""}, null, null, null, null);
+        final LocalAccount account = new LocalAccount();
         while (cursor.moveToNext()) {
             account.setId(cursor.getLong(0));
             account.setUrl(cursor.getString(1));
@@ -663,15 +664,18 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setUserName(cursor.getString(3));
             account.setETag(cursor.getString(4));
             account.setModified(cursor.getLong(5));
+            account.setApiVersion(cursor.getString(6));
+            account.setColor(Color.parseColor('#' + cursor.getString(7)));
+            account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
         }
         cursor.close();
         return account;
     }
 
     public List<LocalAccount> getAccounts() {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, null, null, null, null, null);
-        List<LocalAccount> accounts = new ArrayList<>();
+        final SQLiteDatabase db = getReadableDatabase();
+        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color}, null, null, null, null, null);
+        final List<LocalAccount> accounts = new ArrayList<>();
         while (cursor.moveToNext()) {
             LocalAccount account = new LocalAccount();
             account.setId(cursor.getLong(0));
@@ -680,6 +684,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setUserName(cursor.getString(3));
             account.setETag(cursor.getString(4));
             account.setModified(cursor.getLong(5));
+            account.setApiVersion(cursor.getString(6));
+            account.setColor(Color.parseColor('#' + cursor.getString(7)));
+            account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
             accounts.add(account);
         }
         cursor.close();
@@ -692,9 +699,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
             Log.e(TAG, "accountName is null");
             return null;
         }
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
-        LocalAccount account = new LocalAccount();
+        final SQLiteDatabase db = getReadableDatabase();
+        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
+        final LocalAccount account = new LocalAccount();
         while (cursor.moveToNext()) {
             account.setId(cursor.getLong(0));
             account.setUrl(cursor.getString(1));
@@ -702,6 +709,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setUserName(cursor.getString(3));
             account.setETag(cursor.getString(4));
             account.setModified(cursor.getLong(5));
+            account.setApiVersion(cursor.getString(6));
+            account.setColor(Color.parseColor('#' + cursor.getString(7)));
+            account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
         }
         cursor.close();
         return account;
