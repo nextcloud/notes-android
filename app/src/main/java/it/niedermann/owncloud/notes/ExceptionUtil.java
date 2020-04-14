@@ -1,8 +1,10 @@
 package it.niedermann.owncloud.notes;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
 
 import com.nextcloud.android.sso.helper.VersionCheckHelper;
 
@@ -17,33 +19,32 @@ public class ExceptionUtil {
 
     }
 
-    public static String getDebugInfos(Activity activity, Throwable throwable) {
+    public static String getDebugInfos(Context context, Throwable throwable) {
         List<Throwable> throwables = new ArrayList<>();
         throwables.add(throwable);
-        return getDebugInfos(activity, throwables);
+        return getDebugInfos(context, throwables);
     }
 
-    public static String getDebugInfos(Activity activity, List<Throwable> throwables) {
-        StringBuilder debugInfos = new StringBuilder(""
-                + getAppVersions(activity)
-                + "\n\n---\n"
-                + getDeviceInfos()
-                + "\n\n---"
-                + "\n\n");
+    public static String getDebugInfos(@NonNull Context context, List<Throwable> throwables) {
+        StringBuilder debugInfos = new StringBuilder()
+                .append(getAppVersions(context))
+                .append("\n\n---\n")
+                .append(getDeviceInfos())
+                .append("\n\n---");
         for (Throwable throwable : throwables) {
-            debugInfos.append(getStacktraceOf(throwable));
+            debugInfos.append("\n\n").append(getStacktraceOf(throwable));
         }
         return debugInfos.toString();
     }
 
-    private static String getAppVersions(Activity activity) {
+    private static String getAppVersions(Context context) {
         String versions = ""
                 + "App Version: " + BuildConfig.VERSION_NAME + "\n"
                 + "App Version Code: " + BuildConfig.VERSION_CODE + "\n"
                 + "App Flavor: " + BuildConfig.FLAVOR + "\n";
 
         try {
-            versions += "\nFiles App Version Code: " + VersionCheckHelper.getNextcloudFilesVersionCode(activity);
+            versions += "\nFiles App Version Code: " + VersionCheckHelper.getNextcloudFilesVersionCode(context);
         } catch (PackageManager.NameNotFoundException e) {
             versions += "\nFiles App Version Code: " + e.getMessage();
             e.printStackTrace();
