@@ -31,7 +31,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 11;
+    private static final int database_version = 12;
     @NonNull
     private final Context context;
 
@@ -55,6 +55,9 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_favorite = "FAVORITE";
     protected static final String key_category = "CATEGORY";
     protected static final String key_etag = "ETAG";
+    protected static final String key_color = "COLOR";
+    protected static final String key_text_color = "TEXT_COLOR";
+    protected static final String key_api_version = "API_VERSION";
 
     protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory, database_version);
@@ -102,7 +105,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_username + " TEXT, " +
                 key_account_name + " TEXT UNIQUE, " +
                 key_etag + " TEXT, " +
-                key_modified + " INTEGER)");
+                key_modified + " INTEGER, " +
+                key_api_version + " TEXT, " +
+                key_color + " VARCHAR(6) NOT NULL DEFAULT '000000', " +
+                key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9')");
         createAccountIndexes(db);
     }
 
@@ -261,6 +267,12 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 }
             }
             editor.apply();
+        }
+        if (oldVersion < 12) {
+            db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_api_version + " TEXT");
+            db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_color + " VARCHAR(6) NOT NULL DEFAULT '000000'");
+            db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9'");
+            CapabilitiesWorker.update(context);
         }
     }
 
