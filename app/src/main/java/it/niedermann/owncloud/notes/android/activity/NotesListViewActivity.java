@@ -56,7 +56,6 @@ import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
@@ -791,7 +790,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                 Log.d(TAG, "Network is connected, but sync is not possible");
             } else {
                 Log.d(TAG, "Sync is not possible, because network is not connected");
-                Snackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
             }
         }
     }

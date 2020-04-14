@@ -35,7 +35,6 @@ import com.yydcdut.markdown.syntax.text.TextFactory;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
-import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
@@ -213,7 +212,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             }
         } else {
             binding.swiperefreshlayout.setRefreshing(false);
-            Toast.makeText(requireContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(), getString(R.string.error_sync, getString(R.string.error_no_network)), Toast.LENGTH_LONG).show();
         }
     }
 }
