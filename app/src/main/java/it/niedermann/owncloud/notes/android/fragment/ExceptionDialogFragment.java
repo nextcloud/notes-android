@@ -38,18 +38,15 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
 
     private static final String KEY_THROWABLES = "throwables";
 
-    private DialogExceptionBinding binding;
-
-    private TipsAdapter adapter;
     @NonNull
     private ArrayList<Throwable> throwables = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        Bundle args = getArguments();
+        final Bundle args = getArguments();
         if (args != null) {
-            Object throwablesArgument = args.getSerializable(KEY_THROWABLES);
+            final Object throwablesArgument = args.getSerializable(KEY_THROWABLES);
             if (throwablesArgument != null) {
                 throwables.addAll((ArrayList<Throwable>) throwablesArgument);
             }
@@ -59,14 +56,14 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = View.inflate(getContext(), R.layout.dialog_exception, null);
-        binding = DialogExceptionBinding.bind(view);
+        final View view = View.inflate(getContext(), R.layout.dialog_exception, null);
+        final DialogExceptionBinding binding = DialogExceptionBinding.bind(view);
 
-        adapter = new TipsAdapter();
-        binding.tips.setAdapter(adapter);
+        final TipsAdapter adapter = new TipsAdapter();
 
         final String debugInfos = ExceptionUtil.getDebugInfos(requireContext(), throwables);
 
+        binding.tips.setAdapter(adapter);
         binding.statusMessage.setText(getString(R.string.error_sync, throwables.size() > 0 ? throwables.get(0).getLocalizedMessage() : getString(R.string.error_unknown)));
         binding.stacktrace.setText(debugInfos);
 
@@ -125,7 +122,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
         @NonNull
         @Override
         public TipsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tip, parent, false);
+            final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tip, parent, false);
             return new TipsViewHolder(v);
         }
 
