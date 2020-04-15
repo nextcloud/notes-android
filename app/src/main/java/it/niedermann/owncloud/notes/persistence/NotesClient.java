@@ -45,6 +45,7 @@ public abstract class NotesClient {
     protected static final String HEADER_KEY_LAST_MODIFIED = "Last-Modified";
     protected static final String HEADER_KEY_CONTENT_TYPE = "Content-Type";
     protected static final String HEADER_KEY_IF_NONE_MATCH = "If-None-Match";
+    protected static final String HEADER_KEY_X_NOTES_API_VERSIONS = "X-Notes-API-Versions";
 
     protected static final String HEADER_VALUE_APPLICATION_JSON = "application/json";
 
@@ -101,12 +102,14 @@ public abstract class NotesClient {
     public static class ResponseData {
         private final String content;
         private final String etag;
+        private final String supportedApiVersions;
         private final long lastModified;
 
-        ResponseData(String content, String etag, long lastModified) {
+        ResponseData(@NonNull String content, String etag, long lastModified, @Nullable String supportedApiVersions) {
             this.content = content;
             this.etag = etag;
             this.lastModified = lastModified;
+            this.supportedApiVersions = supportedApiVersions;
         }
 
         public String getContent() {
@@ -119,6 +122,10 @@ public abstract class NotesClient {
 
         public long getLastModified() {
             return lastModified;
+        }
+
+        public String getSupportedApiVersions() {
+            return this.supportedApiVersions;
         }
     }
 
@@ -178,8 +185,15 @@ public abstract class NotesClient {
             if (lastModifiedHeader != null)
                 lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1000;
             Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
+
+            String supportedApiVersions = null;
+            final AidlNetworkRequest.PlainHeader supportedApiVersionsHeader = response.getPlainHeader(HEADER_KEY_X_NOTES_API_VERSIONS);
+            if (supportedApiVersionsHeader != null) {
+                supportedApiVersions = Objects.requireNonNull(supportedApiVersionsHeader.getValue()).replace("\"", "");
+            }
+
             // return these header fields since they should only be saved after successful processing the result!
-            return new ResponseData(result.toString(), etag, lastModified);
+            return new ResponseData(result.toString(), etag, lastModified, supportedApiVersions);
         } catch (NullPointerException e) {
             final PackageInfo pInfo = appContext.getPackageManager().getPackageInfo("com.nextcloud.client", 0);
             if (pInfo.versionCode < MIN_NEXTCLOUD_FILES_APP_VERSION_CODE) {

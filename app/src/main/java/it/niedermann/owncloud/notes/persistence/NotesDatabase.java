@@ -754,7 +754,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
     }
 
-    public void updateApiVersion(long accountId, @Nullable String apiVersion) throws IllegalArgumentException {
+    /**
+     * @param apiVersion has to be a JSON array as a string <code>["0.2", "1.0", ...]</code>
+     * @return whether or not the given apiVersion have been written to the database
+     * @throws IllegalArgumentException if the apiVersion does not match the expected format
+     */
+    public boolean updateApiVersion(long accountId, @Nullable String apiVersion) throws IllegalArgumentException {
         validateAccountId(accountId);
         if (apiVersion != null) {
             try {
@@ -768,10 +773,11 @@ public class NotesDatabase extends AbstractNotesDatabase {
                     values.put(key_api_version, apiVersion);
                     final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
                     if (updatedRows == 1) {
-                        Log.v(TAG, "Updated apiVersion to \"" + apiVersion + "\" for accountId = " + accountId);
+                        Log.i(TAG, "Updated " + key_api_version + " to \"" + apiVersion + "\" for accountId = " + accountId);
                     } else {
                         Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
                     }
+                    return true;
                 } else {
                     Log.i(TAG, "Given API version is a valid JSON array but does not contain any valid API versions. Do not update database.");
                 }
@@ -781,8 +787,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 throw new IllegalArgumentException("API version must contain be a JSON array.");
             }
         } else {
-            Log.i(TAG, "Given API version is null. Do not update database");
+            Log.v(TAG, "Given API version is null. Do not update database");
         }
+        return false;
     }
 
     /**

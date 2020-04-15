@@ -435,8 +435,8 @@ public class NoteServerSyncHelper {
         private boolean pullRemoteChanges() {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
-                Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
-                ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getEtag());
+                final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
+                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getEtag());
                 List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
@@ -472,6 +472,17 @@ public class NoteServerSyncHelper {
                 localAccount.setModified(response.getLastModified());
                 db.updateETag(localAccount.getId(), localAccount.getEtag());
                 db.updateModified(localAccount.getId(), localAccount.getModified());
+                try {
+                    if (db.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
+                        localAccount.setPreferredApiVersion(response.getSupportedApiVersions());
+                        if (notesClients.containsKey(ssoAccount.name)) {
+                            NotesClient.newInstance(localAccount.getPreferredApiVersion(), context);
+                            notesClients.put(ssoAccount.name, notesClient);
+                        }
+                    }
+                } catch (Exception e) {
+                    exceptions.add(e);
+                }
                 return true;
             } catch (NextcloudHttpRequestFailedException e) {
                 Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
