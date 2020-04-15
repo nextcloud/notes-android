@@ -46,8 +46,6 @@
     <string name="settings_lock">Proteção com senha</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">O aplicativo Notes está ativado no servidor?</string>
     <string name="error_no_network">Sem conexão de rede</string>
     <string name="error_files_app">Você instalou o aplicativo Files?</string>
-    <string name="error_unknown">Ocorreu um erro desconhecido.</string>
     <string name="error_insufficient_storage">Seu espaço de armazenagem no servidor está cheio.</string>
+    <string name="error_unknown">Ocorreu um erro desconhecido.</string>
 
     <!-- About -->
     <string name="about_version_title">Versão</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Caixa de marcação</string>
     <string name="unlock_notes">Destravar anotações</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir em modo de edição</item>
