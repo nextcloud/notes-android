@@ -49,6 +49,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.android.fragment.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.Category;
@@ -215,19 +216,25 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         fabCreate.hide();
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
         localAccount = db.getLocalAccountByAccountName(accountName);
-        try {
-            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-            new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this).attachToRecyclerView(listView);
-            synchronize();
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
-            handleNotAuthorizedAccount();
+        if (localAccount != null) {
+            try {
+                ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this).attachToRecyclerView(listView);
+                synchronize();
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
+                handleNotAuthorizedAccount();
+            }
+            refreshLists();
+            fabCreate.show();
+            setupHeader();
+            setupNavigationList(ADAPTER_KEY_RECENT);
+            updateUsernameInDrawer();
+        } else {
+            if (!notAuthorizedAccountHandled) {
+                handleNotAuthorizedAccount();
+            }
         }
-        refreshLists();
-        fabCreate.show();
-        setupHeader();
-        setupNavigationList(ADAPTER_KEY_RECENT);
-        updateUsernameInDrawer();
     }
 
     private void handleNotAuthorizedAccount() {
@@ -691,21 +698,38 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
             recreate();
         } else {
             try {
-                AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-                    Log.i(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-                    try {
-                        db.addAccount(account.url, account.userId, account.name);
-                        CapabilitiesWorker.update(this);
-                    } catch (SQLiteConstraintException e) {
-                        if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
-                            Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
+                    CapabilitiesWorker.update(this);
+                    new Thread(() -> {
+                        Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
+                        try {
+                            Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
+                            final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
+                            db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
+                            Log.i(TAG, capabilities.toString());
+                            runOnUiThread(() -> {
+                                selectAccount(ssoAccount.name);
+                                this.accountChooserActive = false;
+                                binding.accountChooser.setVisibility(View.GONE);
+                                binding.accountNavigation.setVisibility(View.VISIBLE);
+                                binding.drawerLayout.closeDrawer(GravityCompat.START);
+                            });
+                        } catch (SQLiteConstraintException e) {
+                            if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
+                                runOnUiThread(() -> {
+                                    Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                                    selectAccount(ssoAccount.name);
+                                    this.accountChooserActive = false;
+                                    binding.accountChooser.setVisibility(View.GONE);
+                                    binding.accountNavigation.setVisibility(View.VISIBLE);
+                                    binding.drawerLayout.closeDrawer(GravityCompat.START);
+                                });
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
                         }
-                    }
-                    selectAccount(account.name);
-                    this.accountChooserActive = false;
-                    binding.accountChooser.setVisibility(View.GONE);
-                    binding.accountNavigation.setVisibility(View.VISIBLE);
-                    binding.drawerLayout.closeDrawer(GravityCompat.START);
+                    }).start();
                 });
             } catch (AccountImportCancelledException e) {
                 Log.i(TAG, "AccountImport has been cancelled.");

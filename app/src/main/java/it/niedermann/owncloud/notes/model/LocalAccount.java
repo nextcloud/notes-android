@@ -135,7 +135,7 @@ public class LocalAccount {
                 ", url='" + url + '\'' +
                 ", etag='" + etag + '\'' +
                 ", modified=" + modified +
-                ", apiVersion='" + preferredApiVersion + '\'' +
+                ", preferredApiVersion='" + preferredApiVersion + '\'' +
                 ", color=" + color +
                 ", textColor=" + textColor +
                 '}';

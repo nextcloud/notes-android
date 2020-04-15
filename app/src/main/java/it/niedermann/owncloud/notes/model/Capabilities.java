@@ -2,8 +2,13 @@ package it.niedermann.owncloud.notes.model;
 
 import android.util.Log;
 
+import com.bumptech.glide.load.HttpException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
 
 /**
  * This entity class is used to return relevant data of the HTTP reponse.
@@ -27,15 +32,16 @@ public class Capabilities {
     private String color = null;
     private String textColor = null;
 
-    public Capabilities(String response) {
+    public Capabilities(String response) throws NextcloudHttpRequestFailedException {
         final JSONObject ocs;
         try {
             ocs = new JSONObject(response).getJSONObject(JSON_OCS);
             if (ocs.has(JSON_OCS_META)) {
                 final JSONObject meta = ocs.getJSONObject(JSON_OCS_META);
                 if (meta.has(JSON_OCS_META_STATUSCODE)) {
-                    if (meta.getInt(JSON_OCS_META_STATUSCODE) == 503) {
+                    if (meta.getInt(JSON_OCS_META_STATUSCODE) == HTTP_UNAVAILABLE) {
                         Log.i(TAG, "Capabilities Endpoint: This instance is currently in maintenance mode.");
+                        throw new NextcloudHttpRequestFailedException(HTTP_UNAVAILABLE, new HttpException(HTTP_UNAVAILABLE));
                     }
                 }
             }

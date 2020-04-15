@@ -639,12 +639,13 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * @param url         URL to the root of the used Nextcloud instance without trailing slash
-     * @param username    Username of the account
-     * @param accountName Composed by the username and the host of the URL, separated by @-sign
+     * @param url          URL to the root of the used Nextcloud instance without trailing slash
+     * @param username     Username of the account
+     * @param accountName  Composed by the username and the host of the URL, separated by @-sign
+     * @param capabilities
      * @throws SQLiteConstraintException in case accountName already exists
      */
-    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName) throws SQLiteConstraintException {
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) throws SQLiteConstraintException {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_url, url);
@@ -699,7 +700,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     @Nullable
-    public LocalAccount getLocalAccountByAccountName(String accountName) {
+    public LocalAccount getLocalAccountByAccountName(String accountName) throws IllegalArgumentException {
         if (accountName == null) {
             Log.e(TAG, "accountName is null");
             return null;
@@ -707,7 +708,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
         final SQLiteDatabase db = getReadableDatabase();
         final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
         final LocalAccount account = new LocalAccount();
+        int numberEntries = 0;
         while (cursor.moveToNext()) {
+            numberEntries++;
             account.setId(cursor.getLong(0));
             account.setUrl(cursor.getString(1));
             account.setAccountName(cursor.getString(2));
@@ -719,7 +722,16 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
         }
         cursor.close();
-        return account;
+        switch (numberEntries) {
+            case 0:
+                Log.w(TAG, "Could not find any account for \"" + accountName + "\". Returning null.");
+                return null;
+            case 1:
+                return account;
+            default:
+                Log.e(TAG, "", new IllegalArgumentException("Expected to find 1 account for name \"" + accountName + "\", but found " + numberEntries + "."));
+                return null;
+        }
     }
 
     public void updateBrand(long accountId, @NonNull Capabilities capabilities) throws IllegalArgumentException {

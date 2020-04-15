@@ -114,6 +114,16 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
         return fragment;
     }
 
+    public static DialogFragment newInstance(Throwable exception) {
+        final Bundle args = new Bundle();
+        final ArrayList<Throwable> list = new ArrayList<>(1);
+        list.add(exception);
+        args.putSerializable(KEY_THROWABLES, list);
+        final DialogFragment fragment = new ExceptionDialogFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     private static class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
 
         @NonNull
