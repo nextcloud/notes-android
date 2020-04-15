@@ -46,8 +46,6 @@
     <string name="settings_lock">Lösenordsskydd</string>
     <string name="settings_background_sync">Bakgrundssynkronisering</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Är appen anteckningar aktiverad på servern?</string>
     <string name="error_no_network">Ingen nätverksanslutning</string>
     <string name="error_files_app">Har du installerat filer-appen?</string>
-    <string name="error_unknown">Ett okänt fel uppstod.</string>
     <string name="error_insufficient_storage">Din serverlagring är full.</string>
+    <string name="error_unknown">Ett okänt fel uppstod.</string>
 
     <!-- About -->
     <string name="about_version_title">Version</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Kryssruta</string>
     <string name="unlock_notes">Lås upp anteckningar</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>

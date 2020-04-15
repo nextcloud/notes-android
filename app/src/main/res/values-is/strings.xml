@@ -40,8 +40,6 @@
     <string name="settings_lock">Verndun með lykilorði</string>
     <string name="settings_background_sync">Samstilling í bakgrunni</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -106,10 +104,10 @@
     <string name="simple_more">Meira</string>
     <string name="simple_move">Færa</string>
     <string name="category_readonly">Skrifvarið</string>
+    <string name="no_category">Enginn flokkur</string>
     <string name="add_category">Bæta við %1$s</string>
     <string name="simple_checkbox">Hakreitur</string>
     <string name="simple_beta">BETA-prófunarútgáfa</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>

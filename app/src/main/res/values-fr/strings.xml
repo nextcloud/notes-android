@@ -46,8 +46,6 @@
     <string name="settings_lock">Protection par mot de passe</string>
     <string name="settings_background_sync">Synchronisation en tâche de fond</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">L\'application Notes est-elle activée sur le serveur ?</string>
     <string name="error_no_network">Aucune connexion réseau</string>
     <string name="error_files_app">Avez-vous installé l\'application Fichiers ?</string>
-    <string name="error_unknown">Une erreur inconnue est survenue</string>
     <string name="error_insufficient_storage">L\'espace de stockage de votre serveur est plein.</string>
+    <string name="error_unknown">Une erreur inconnue est survenue</string>
 
     <!-- About -->
     <string name="about_version_title">Version</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Case à cocher</string>
     <string name="unlock_notes">Déverrouiller les notes</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ouvrir en mode édition</item>

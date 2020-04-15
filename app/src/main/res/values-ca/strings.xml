@@ -46,8 +46,6 @@
     <string name="settings_lock">Protecció amb contrasenya</string>
     <string name="settings_background_sync">Sincronització en segon pla</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -123,7 +121,6 @@
     <string name="add_category">Afegeix %1$s</string>
     <string name="simple_checkbox">Casella de selecció</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Obre en mode d\'edició</item>

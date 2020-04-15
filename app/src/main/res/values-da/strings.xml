@@ -46,8 +46,6 @@
     <string name="settings_lock">Password protection</string>
     <string name="settings_background_sync">Synkronisering i baggrunden</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Er Noter appen aktiveret på serveren?</string>
     <string name="error_no_network">Ingen netværksforbindelse</string>
     <string name="error_files_app">Har du installeret fil appen?</string>
-    <string name="error_unknown">En ukendt fejl er opstået</string>
     <string name="error_insufficient_storage">Din server lagerplads er fuld.</string>
+    <string name="error_unknown">En ukendt fejl er opstået</string>
 
     <!-- About -->
     <string name="about_version_title">Version</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Afkrydsningsfeldt</string>
     <string name="unlock_notes">Lås noter op</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>

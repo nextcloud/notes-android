@@ -46,8 +46,6 @@
     <string name="settings_lock">密码保护</string>
     <string name="settings_background_sync">后台同步</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">是否已在服务器上启用了 笔记 应用？</string>
     <string name="error_no_network">没有网络连接</string>
     <string name="error_files_app">您是否已安装 文件 应用程序？</string>
-    <string name="error_unknown">出现未知错误。</string>
     <string name="error_insufficient_storage">您的服务器存储空间已满。</string>
+    <string name="error_unknown">出现未知错误。</string>
 
     <!-- About -->
     <string name="about_version_title">版本</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">复选框</string>
     <string name="unlock_notes">解锁笔记</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>

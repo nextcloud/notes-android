@@ -46,8 +46,6 @@
     <string name="settings_lock">محافظت از رمز عبور</string>
     <string name="settings_background_sync">همگام سازی پس زمینه</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">آیا برنامه Notes روی سرور فعال شده است؟</string>
     <string name="error_no_network">هیچ ارتباطی به شبکه موجود نیست</string>
     <string name="error_files_app">آیا برنامه فایل ها را نصب کرده اید؟</string>
-    <string name="error_unknown">یک خطای ناشناخته رخ داده است.</string>
     <string name="error_insufficient_storage">حافظه سرور شما پر است.</string>
+    <string name="error_unknown">یک خطای ناشناخته رخ داده است.</string>
 
     <!-- About -->
     <string name="about_version_title">نسخه</string>

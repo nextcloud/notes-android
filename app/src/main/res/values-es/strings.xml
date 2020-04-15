@@ -46,8 +46,6 @@
     <string name="settings_lock">Protección por contraseña</string>
     <string name="settings_background_sync">Sincronización en segundo plano</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">¿Está la app de Notas activada en el servidor?</string>
     <string name="error_no_network">Sin conexión de red</string>
     <string name="error_files_app">¿Ha instalado los archivos de la aplicación?</string>
-    <string name="error_unknown">Ha ocurrido un error desconocido.</string>
     <string name="error_insufficient_storage">lmacenamiento en el servidor está lleno.</string>
+    <string name="error_unknown">Ha ocurrido un error desconocido.</string>
 
     <!-- About -->
     <string name="about_version_title">Versión</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Casilla de verificación</string>
     <string name="unlock_notes">Desbloquear notas</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>

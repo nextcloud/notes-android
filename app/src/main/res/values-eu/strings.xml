@@ -46,8 +46,6 @@
     <string name="settings_lock">Pasahitz bidezko babesa</string>
     <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Notes aplikazioa zerbitzarian aktibatuta dago?</string>
     <string name="error_no_network">Ez dago sare konexiorik</string>
     <string name="error_files_app">Files aplikazioa instalatu duzu?</string>
-    <string name="error_unknown">Errore ezezagun bat gertatu da.</string>
     <string name="error_insufficient_storage">Zure zerbitzariaren biltegia beteta dago.</string>
+    <string name="error_unknown">Errore ezezagun bat gertatu da.</string>
 
     <!-- About -->
     <string name="about_version_title">Bertsioa</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Kontrol laukia</string>
     <string name="unlock_notes">Desblokeatzearen oharrak</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>

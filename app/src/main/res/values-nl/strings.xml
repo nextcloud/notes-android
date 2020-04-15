@@ -47,8 +47,6 @@
     <string name="settings_lock">Wachtwoordbeveiliging</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -56,8 +54,8 @@
     <string name="error_json">is de Notities app op de server geactiveerd?</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
     <string name="error_files_app">Heb je de Bestanden app geïnstalleerd?</string>
-    <string name="error_unknown">Er trad een onbekende fout op.</string>
     <string name="error_insufficient_storage">De serveropslag is vol.</string>
+    <string name="error_unknown">Er trad een onbekende fout op.</string>
 
     <!-- About -->
     <string name="about_version_title">Versie</string>
@@ -130,7 +128,6 @@
     <string name="simple_checkbox">Aanvinkvakje</string>
     <string name="unlock_notes">Ontgrendel notities</string>
     <string name="simple_beta">Bèta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wbewerkmodus</item>

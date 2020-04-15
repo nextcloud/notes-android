@@ -46,8 +46,6 @@
     <string name="settings_lock">Ochrona hasłem</string>
     <string name="settings_background_sync">Synchronizacja w tle</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Czy aplikacja Notes jest aktywowana na serwerze?</string>
     <string name="error_no_network">Brak połączenia sieciowego</string>
     <string name="error_files_app">Czy masz zainstalowaną aplikację plików?</string>
-    <string name="error_unknown">Wystąpił nieznany błąd.</string>
     <string name="error_insufficient_storage">Pamięć serwera jest pełna.</string>
+    <string name="error_unknown">Wystąpił nieznany błąd.</string>
 
     <!-- About -->
     <string name="about_version_title">Wersja</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Pole checkbox</string>
     <string name="unlock_notes">Odblokuj notatki</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otwórz w trybie edycji</item>
