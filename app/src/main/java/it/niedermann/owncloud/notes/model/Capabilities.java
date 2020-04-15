@@ -82,4 +82,13 @@ public class Capabilities {
     public String getTextColor() {
         return textColor;
     }
+
+    @Override
+    public String toString() {
+        return "Capabilities{" +
+                "apiVersion='" + apiVersion + '\'' +
+                ", color='" + color + '\'' +
+                ", textColor='" + textColor + '\'' +
+                '}';
+    }
 }
