@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Layout;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -22,46 +21,41 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.preference.PreferenceManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.yydcdut.markdown.MarkdownProcessor;
-import com.yydcdut.markdown.MarkdownTextView;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
-import java.util.Objects;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
-import it.niedermann.owncloud.notes.model.LoginStatus;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
-import it.niedermann.owncloud.notes.util.DisplayUtils;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NoteLinksUtils;
+import it.niedermann.owncloud.notes.util.SSOUtil;
 
-public class NotePreviewFragment extends SearchableBaseNoteFragment {
+import static it.niedermann.owncloud.notes.util.DisplayUtils.searchAndColor;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_CHECKED_MINUS;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_CHECKED_STAR;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_MINUS;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_STAR;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
+import static it.niedermann.owncloud.notes.util.NoteLinksUtils.extractNoteRemoteId;
+import static it.niedermann.owncloud.notes.util.NoteLinksUtils.replaceNoteLinksWithDummyUrls;
+
+public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
     private String changedText;
 
     private MarkdownProcessor markdownProcessor;
 
-    @BindView(R.id.swiperefreshlayout)
-    SwipeRefreshLayout swipeRefreshLayout;
-
-    @BindView(R.id.scrollView)
-    ScrollView scrollView;
-
-    @BindView(R.id.searchNext)
-    FloatingActionButton searchNext;
-
-    @BindView(R.id.searchPrev)
-    FloatingActionButton searchPrev;
-
-    @BindView(R.id.single_note_content)
-    MarkdownTextView noteContent;
+    private FragmentNotePreviewBinding binding;
 
     public static NotePreviewFragment newInstance(long accountId, long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
@@ -81,40 +75,40 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
 
     @Override
     public ScrollView getScrollView() {
-        return scrollView;
+        return binding.scrollView;
     }
 
     @Override
     protected FloatingActionButton getSearchNextButton() {
-        return searchNext;
+        return binding.searchNext;
     }
 
     @Override
     protected FloatingActionButton getSearchPrevButton() {
-        return searchPrev;
+        return binding.searchPrev;
     }
 
     @Override
     protected Layout getLayout() {
-        noteContent.onPreDraw();
-        return noteContent.getLayout();
+        binding.singleNoteContent.onPreDraw();
+        return binding.singleNoteContent.getLayout();
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup
             container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_note_preview, container, false);
+        binding = FragmentNotePreviewBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ButterKnife.bind(this, Objects.requireNonNull(getView()));
-        markdownProcessor = new MarkdownProcessor(Objects.requireNonNull(getActivity()));
+        markdownProcessor = new MarkdownProcessor(requireContext());
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
-                MarkDownUtil.getMarkDownConfiguration(noteContent.getContext())
+                MarkDownUtil.getMarkDownConfiguration(binding.singleNoteContent.getContext())
                         .setOnTodoClickCallback((view, line, lineNumber) -> {
                                     try {
                                         String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
@@ -137,16 +131,16 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
                                          * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
                                          * When (un)checking a checkbox, every markdown gets stripped in the given line argument
                                          */
-                                        if (lines[lineNumber].startsWith("- [ ]") || lines[lineNumber].startsWith("* [ ]")) {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [ ]", "- [x]");
-                                            lines[lineNumber] = lines[lineNumber].replace("* [ ]", "* [x]");
+                                        if (lines[lineNumber].startsWith(CHECKBOX_UNCHECKED_MINUS) || lines[lineNumber].startsWith(CHECKBOX_UNCHECKED_STAR)) {
+                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_UNCHECKED_MINUS, CHECKBOX_CHECKED_MINUS);
+                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_UNCHECKED_STAR, CHECKBOX_CHECKED_STAR);
                                         } else {
-                                            lines[lineNumber] = lines[lineNumber].replace("- [x]", "- [ ]");
-                                            lines[lineNumber] = lines[lineNumber].replace("* [x]", "* [ ]");
+                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_MINUS, CHECKBOX_UNCHECKED_MINUS);
+                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_STAR, CHECKBOX_UNCHECKED_STAR);
                                         }
 
                                         changedText = TextUtils.join("\n", lines);
-                                        noteContent.setText(markdownProcessor.parse(changedText));
+                                        binding.singleNoteContent.setText(parseCompat(markdownProcessor, changedText));
                                         saveNote(null);
                                     } catch (IndexOutOfBoundsException e) {
                                         Toast.makeText(getActivity(), R.string.checkbox_could_not_be_toggled, Toast.LENGTH_SHORT).show();
@@ -157,10 +151,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
                         )
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
-                                long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-                                long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
-                                Intent intent = new Intent(getActivity().getApplicationContext(), EditNoteActivity.class);
-                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
+                                final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class)
+                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, db.getLocalIdByRemoteId(this.note.getAccountId(), extractNoteRemoteId(link)));
                                 startActivity(intent);
                             } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
@@ -169,53 +161,31 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
                         })
                         .build());
         try {
-            noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
-            onResume();
+            binding.singleNoteContent.setText(parseCompat(markdownProcessor, replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-            noteContent.setText(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
-            Toast.makeText(noteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
+            binding.singleNoteContent.setText(replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
+            Toast.makeText(binding.singleNoteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
         changedText = note.getContent();
-        noteContent.setMovementMethod(LinkMovementMethod.getInstance());
+        binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        db = NoteSQLiteOpenHelper.getInstance(getActivity());
-        // Pull to Refresh
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                swipeRefreshLayout.setRefreshing(true);
-                db.getNoteServerSyncHelper().addCallbackPull(new ICallback() {
-                    @Override
-                    public void onFinish() {
-                        note = db.getNote(note.getAccountId(), note.getId());
-                        noteContent.setText(markdownProcessor.parse(NoteLinksUtils.replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
-                        swipeRefreshLayout.setRefreshing(false);
-                    }
+        db = NotesDatabase.getInstance(requireContext());
+        binding.swiperefreshlayout.setOnRefreshListener(this);
 
-                    @Override
-                    public void onScheduled() {
-                    }
-                });
-                db.getNoteServerSyncHelper().scheduleSync(false);
-            } else {
-                swipeRefreshLayout.setRefreshing(false);
-                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Toast.LENGTH_LONG).show();
-            }
-        });
-
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(Objects.requireNonNull(getActivity()).getApplicationContext());
-        noteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
+        binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
-            noteContent.setTypeface(Typeface.MONOSPACE);
+            binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
         }
     }
 
     @Override
-    protected void colorWithText(String newText) {
-        if (noteContent != null && ViewCompat.isAttachedToWindow(noteContent)) {
-            noteContent.setText(markdownProcessor.parse(DisplayUtils.searchAndColor(getContent(), new SpannableString
-                            (getContent()), newText, getResources().getColor(R.color.primary))),
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current) {
+        if (binding != null && ViewCompat.isAttachedToWindow(binding.singleNoteContent)) {
+            binding.singleNoteContent.setText(
+                    searchAndColor(new SpannableString(parseCompat(markdownProcessor, getContent())), newText, requireContext(), current),
                     TextView.BufferType.SPANNABLE);
         }
     }
@@ -223,5 +193,26 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment {
     @Override
     protected String getContent() {
         return changedText;
+    }
+
+    @Override
+    public void onRefresh() {
+        if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
+            binding.swiperefreshlayout.setRefreshing(true);
+            try {
+                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
+                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
+                    note = db.getNote(note.getAccountId(), note.getId());
+                    binding.singleNoteContent.setText(parseCompat(markdownProcessor, replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
+                    binding.swiperefreshlayout.setRefreshing(false);
+                });
+                db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            binding.swiperefreshlayout.setRefreshing(false);
+            Toast.makeText(requireContext(), getString(R.string.error_sync, getString(R.string.error_no_network)), Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -78,7 +78,6 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Krijo një shënim të ri</string>
 
-    <string name="pref_value_theme_light">E çelët</string>
     <string name="pref_value_font_normal">Normal</string>
     <string name="simple_error">Error</string>
     <string name="simple_close">Mbylleni</string>
@@ -93,7 +92,6 @@
     <string name="simple_more">More</string>
     <string name="simple_move">Zhvendos</string>
     <string name="category_readonly">Vetëm i lexueshëm</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Hapur në modalitetin e redaktimit</item>

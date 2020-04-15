@@ -1,0 +1,3 @@
+- 👆 Disable pull 2 refresh when an item in the list is swiped to left or right
+- 🔧 Use AndroidX for preferences
+- 🐞 Add flavor hint to exception messages

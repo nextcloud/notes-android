@@ -19,17 +19,20 @@
  */
 package it.niedermann.owncloud.notes.util;
 
-import android.graphics.Typeface;
+import android.content.Context;
+import android.graphics.Color;
 import android.text.Spannable;
+import android.text.TextPaint;
 import android.text.TextUtils;
-import android.text.style.CharacterStyle;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
+import android.text.style.MetricAffectingSpan;
 
-import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import it.niedermann.owncloud.notes.R;
 
 public class DisplayUtils {
 
@@ -37,11 +40,12 @@ public class DisplayUtils {
 
     }
 
-    public static Spannable searchAndColor(String text, Spannable spannable, String searchText, @ColorInt int color) {
+    public static Spannable searchAndColor(Spannable spannable, CharSequence searchText, Context context, @Nullable Integer current) {
+        CharSequence text = spannable.toString();
 
         Object[] spansToRemove = spannable.getSpans(0, text.length(), Object.class);
-        for(Object span: spansToRemove){
-            if(span instanceof CharacterStyle)
+        for (Object span : spansToRemove) {
+            if (span instanceof SearchSpan)
                 spannable.removeSpan(span);
         }
 
@@ -49,18 +53,51 @@ public class DisplayUtils {
             return spannable;
         }
 
-        Matcher m = Pattern.compile(searchText, Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
+        Matcher m = Pattern.compile(searchText.toString(), Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
                 .matcher(text);
 
-
+        int i = 1;
         while (m.find()) {
             int start = m.start();
             int end = m.end();
-            spannable.setSpan(new ForegroundColorSpan(color), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannable.setSpan(new StyleSpan(Typeface.BOLD), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new SearchSpan(context, (current != null && i == current)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            i++;
         }
 
         return spannable;
     }
 
+
+    static class SearchSpan extends MetricAffectingSpan {
+
+        private final boolean current;
+        private final int bgColorPrimary;
+        private final int bgColorSecondary;
+
+        SearchSpan(Context context, boolean current) {
+            this.current = current;
+            this.bgColorPrimary = context.getResources().getColor(R.color.bg_search_primary);
+            this.bgColorSecondary = context.getResources().getColor(R.color.bg_search_secondary);
+        }
+
+        @Override
+        public void updateDrawState(TextPaint tp) {
+            tp.bgColor = current ? bgColorPrimary : bgColorSecondary;
+            tp.setColor(current ? (getForeground(Integer.toHexString(tp.bgColor)) ? Color.WHITE : Color.BLACK) : bgColorPrimary);
+            tp.setFakeBoldText(true);
+        }
+
+        @Override
+        public void updateMeasureState(@NonNull TextPaint tp) {
+            tp.setFakeBoldText(true);
+        }
+    }
+
+    public static boolean getForeground(String backgroundColorHex) {
+        return ((float) (
+                0.2126 * Integer.valueOf(backgroundColorHex.substring(1, 3), 16)
+                        + 0.7152 * Integer.valueOf(backgroundColorHex.substring(3, 5), 16)
+                        + 0.0722 * Integer.valueOf(backgroundColorHex.substring(5, 7), 16)
+        ) < 140);
+    }
 }

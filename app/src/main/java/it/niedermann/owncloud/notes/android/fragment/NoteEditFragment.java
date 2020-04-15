@@ -3,10 +3,10 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.SpannableString;
@@ -24,24 +24,23 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.yydcdut.markdown.MarkdownEditText;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.edit.EditFactory;
 
-import java.util.Objects;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.util.DisplayUtils;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.NotesTextWatcher;
-import it.niedermann.owncloud.notes.util.ContextBasedFormattingCallback;
+import it.niedermann.owncloud.notes.util.format.ContextBasedFormattingCallback;
+import it.niedermann.owncloud.notes.util.format.ContextBasedRangeFormattingCallback;
+
+import static androidx.core.view.ViewCompat.isAttachedToWindow;
+import static it.niedermann.owncloud.notes.util.DisplayUtils.searchAndColor;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
 
@@ -50,20 +49,11 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     private static final long DELAY = 2000; // Wait for this time after typing before saving
     private static final long DELAY_AFTER_SYNC = 5000; // Wait for this time after saving before checking for next save
 
-    @BindView(R.id.searchNext)
-    FloatingActionButton searchNext;
-
-    @BindView(R.id.searchPrev)
-    FloatingActionButton searchPrev;
-
-    @BindView(R.id.scrollView)
-    ScrollView scrollView;
-
-    @BindView(R.id.editContent)
-    MarkdownEditText editContent;
+    private FragmentNoteEditBinding binding;
 
     private Handler handler;
-    private boolean saveActive, unsavedEdit;
+    private boolean saveActive;
+    private boolean unsavedEdit;
     private final Runnable runAutoSave = new Runnable() {
         @Override
         public void run() {
@@ -109,40 +99,40 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
     @Override
     public ScrollView getScrollView() {
-        return scrollView;
+        return binding.scrollView;
     }
 
     @Override
     protected Layout getLayout() {
-        editContent.onPreDraw();
-        return editContent.getLayout();
+        binding.editContent.onPreDraw();
+        return binding.editContent.getLayout();
     }
 
     @Override
     protected FloatingActionButton getSearchNextButton() {
-        return searchNext;
+        return binding.searchNext;
     }
 
     @Override
     protected FloatingActionButton getSearchPrevButton() {
-        return searchPrev;
+        return binding.searchPrev;
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_note_edit, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentNoteEditBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ButterKnife.bind(this, Objects.requireNonNull(getView()));
-
-        textWatcher = new NotesTextWatcher(editContent) {
+        textWatcher = new NotesTextWatcher(binding.editContent) {
             @Override
             public void afterTextChanged(final Editable s) {
+                super.afterTextChanged(s);
                 unsavedEdit = true;
                 if (!saveActive) {
                     handler.removeCallbacks(runAutoSave);
@@ -153,12 +143,12 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
         if (note != null) {
             if (note.getContent().isEmpty()) {
-                editContent.requestFocus();
+                binding.editContent.requestFocus();
 
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
                 InputMethodManager imm = (InputMethodManager)
-                        getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
 
             }
@@ -166,19 +156,22 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             // workaround for issue yydcdut/RxMarkdown#41
             note.setContent(note.getContent().replace("\r\n", "\n"));
 
-            editContent.setText(note.getContent());
-            editContent.setEnabled(true);
+            binding.editContent.setText(note.getContent());
+            binding.editContent.setEnabled(true);
 
-            MarkdownProcessor markdownProcessor = new MarkdownProcessor(getActivity());
-            markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(editContent.getContext()).build());
+            MarkdownProcessor markdownProcessor = new MarkdownProcessor(requireContext());
+            markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(binding.editContent.getContext()).build());
             markdownProcessor.factory(EditFactory.create());
-            markdownProcessor.live(editContent);
+            markdownProcessor.live(binding.editContent);
 
-            editContent.setCustomSelectionActionModeCallback(new ContextBasedFormattingCallback(this.editContent));
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
-            editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
+            binding.editContent.setCustomSelectionActionModeCallback(new ContextBasedRangeFormattingCallback(binding.editContent));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                binding.editContent.setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(binding.editContent));
+            }
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
+            binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
-                editContent.setTypeface(Typeface.MONOSPACE);
+                binding.editContent.setTypeface(Typeface.MONOSPACE);
             }
         }
     }
@@ -186,13 +179,13 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     @Override
     public void onResume() {
         super.onResume();
-        editContent.addTextChangedListener(textWatcher);
+        binding.editContent.addTextChangedListener(textWatcher);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        editContent.removeTextChangedListener(textWatcher);
+        binding.editContent.removeTextChangedListener(textWatcher);
         cancelTimers();
     }
 
@@ -207,11 +200,11 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
      */
     @Override
     protected String getContent() {
-        return editContent.getText().toString();
+        return binding.editContent.getText().toString();
     }
 
     @Override
-    protected void saveNote(@Nullable ICallback callback) {
+    protected void saveNote(@Nullable ISyncCallback callback) {
         super.saveNote(callback);
         unsavedEdit = false;
     }
@@ -222,7 +215,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     private void autoSave() {
         Log.d(LOG_TAG_AUTOSAVE, "STARTAUTOSAVE");
         saveActive = true;
-        saveNote(new ICallback() {
+        saveNote(new ISyncCallback() {
             @Override
             public void onFinish() {
                 onSaved();
@@ -246,11 +239,10 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    protected void colorWithText(String newText) {
-        if (editContent != null && ViewCompat.isAttachedToWindow(editContent)) {
-            editContent.setText(DisplayUtils.searchAndColor(getContent(), new SpannableString
-                            (getContent()), newText, getResources().getColor(R.color.primary)),
-                    TextView.BufferType.SPANNABLE);
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current) {
+        if (binding != null && isAttachedToWindow(binding.editContent)) {
+            binding.editContent.clearFocus();
+            binding.editContent.setText(searchAndColor(new SpannableString(getContent()), newText, requireContext(), current), TextView.BufferType.SPANNABLE);
         }
     }
 }

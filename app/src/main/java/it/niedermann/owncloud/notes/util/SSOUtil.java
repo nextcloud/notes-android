@@ -1,13 +1,17 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AndroidGetAccountsPermissionNotGranted;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotInstalledException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.ui.UiExceptionManager;
 
 public class SSOUtil {
@@ -34,6 +38,17 @@ public class SSOUtil {
             e1.printStackTrace();
         } catch (AndroidGetAccountsPermissionNotGranted e2) {
             AccountImporter.requestAndroidAccountPermissionsAndPickAccount(activity);
+        }
+    }
+
+    public static boolean isConfigured(Context context) {
+        try {
+            SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+            return true;
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            return false;
+        } catch (NoCurrentAccountSelectedException e) {
+            return false;
         }
     }
 }

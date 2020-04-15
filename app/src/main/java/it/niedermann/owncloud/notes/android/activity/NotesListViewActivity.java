@@ -15,21 +15,17 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -49,31 +45,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.model.LoginStatus;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
-import it.niedermann.owncloud.notes.util.ICallback;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
-public class NotesListViewActivity extends AppCompatActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
+public class NotesListViewActivity extends LockedActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
 
@@ -98,73 +91,48 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
      */
     private boolean notAuthorizedAccountHandled = false;
 
+    private SingleSignOnAccount ssoAccount;
     private LocalAccount localAccount;
 
-    @BindView(R.id.coordinatorLayout)
-    CoordinatorLayout coordinatorLayout;
-    @BindView(R.id.accountNavigation)
-    LinearLayout accountNavigation;
-    @BindView(R.id.accountChooser)
-    LinearLayout accountChooser;
-    @BindView(R.id.notesListActivityActionBar)
-    Toolbar toolbar;
-    @BindView(R.id.drawerLayout)
-    DrawerLayout drawerLayout;
-    @BindView(R.id.current_account_image)
-    AppCompatImageView currentAccountImage;
-    @BindView(R.id.header_view)
-    RelativeLayout headerView;
-    @BindView(R.id.account)
-    TextView account;
-    @BindView(R.id.swiperefreshlayout)
-    SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.fab_create)
-    FloatingActionButton fabCreate;
-    @BindView(R.id.navigationList)
-    RecyclerView listNavigationCategories;
-    @BindView(R.id.navigationMenu)
-    RecyclerView listNavigationMenu;
-    @BindView(R.id.recycler_view)
-    RecyclerView listView;
-    @BindView(R.id.empty_content_view)
-    RelativeLayout emptyContentView;
-    @BindView(R.id.progress_circular)
-    ProgressBar progressBar;
+    protected DrawerLayoutBinding binding;
+
+    private CoordinatorLayout coordinatorLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    protected FloatingActionButton fabCreate;
+    private RecyclerView listView;
 
     protected ItemAdapter adapter = null;
 
     private ActionBarDrawerToggle drawerToggle;
     private NavigationAdapter adapterCategories;
-    private NavigationItem itemRecent, itemFavorites, itemUncategorized;
+    private NavigationItem itemRecent;
+    private NavigationItem itemFavorites;
+    private NavigationItem itemUncategorized;
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
-    private NoteSQLiteOpenHelper db = null;
+    private NotesDatabase db = null;
     private SearchView searchView = null;
-    private ICallback syncCallBack = new ICallback() {
-        @Override
-        public void onFinish() {
-            adapter.clearSelection(listView);
-            if (mActionMode != null) {
-                mActionMode.finish();
-            }
-            refreshLists();
-            swipeRefreshLayout.setRefreshing(false);
+    private final ISyncCallback syncCallBack = () -> {
+        adapter.clearSelection(listView);
+        if (mActionMode != null) {
+            mActionMode.finish();
         }
-
-        @Override
-        public void onScheduled() {
-        }
+        refreshLists();
+        swipeRefreshLayout.setRefreshing(false);
     };
     private boolean accountChooserActive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
-        setContentView(R.layout.drawer_layout);
-        ButterKnife.bind(this);
+        binding = DrawerLayoutBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
+        this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
+        this.fabCreate = binding.activityNotesListView.fabCreate;
+        this.listView = binding.activityNotesListView.recyclerView;
 
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
         if (savedInstanceState == null) {
@@ -180,7 +148,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
 
-        db = NoteSQLiteOpenHelper.getInstance(this);
+        db = NotesDatabase.getInstance(this);
 
         setupHeader();
         setupActionBar();
@@ -192,11 +160,17 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     protected void onResume() {
         try {
-            String ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name;
-            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount)) {
-                selectAccount(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount.name)) {
+                selectAccount(ssoAccount.name);
             }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
+            if (localAccount == null) {
+                List<LocalAccount> localAccounts = db.getAccounts();
+                if (localAccounts.size() > 0) {
+                    localAccount = localAccounts.get(0);
+                }
+            }
             if (!notAuthorizedAccountHandled) {
                 handleNotAuthorizedAccount();
             }
@@ -206,7 +180,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         if (localAccount != null) {
             refreshLists();
             if(localAccount.getId() != 0) {
-                db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
+                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
                 if (db.getNoteServerSyncHelper().isSyncPossible()) {
                     synchronize();
                 }
@@ -242,13 +216,15 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
         localAccount = db.getLocalAccountByAccountName(accountName);
         try {
-            db.getNoteServerSyncHelper().updateAccount();
+            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+            new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this).attachToRecyclerView(listView);
             synchronize();
-            refreshLists();
-            fabCreate.show();
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
             handleNotAuthorizedAccount();
         }
+        refreshLists();
+        fabCreate.show();
         setupHeader();
         setupNavigationList(ADAPTER_KEY_RECENT);
         updateUsernameInDrawer();
@@ -262,9 +238,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void setupHeader() {
-        accountChooser.removeAllViews();
+        binding.accountChooser.removeAllViews();
         for (LocalAccount localAccount : db.getAccounts()) {
-            View v = getLayoutInflater().inflate(R.layout.item_account, null);
+            View v = View.inflate(this, R.layout.item_account, null);
             if(account.getId() == 0) {
                 ((TextView) v.findViewById(R.id.accountItemLabel)).setText(R.string.local_account);
                 v.findViewById(R.id.delete).setVisibility(View.GONE);
@@ -279,7 +255,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
             v.setOnClickListener(clickedView -> {
                 clickHeader();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
                 selectAccount(localAccount.getAccountName());
             });
             v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
@@ -296,24 +272,25 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 }
                 setupHeader();
                 clickHeader();
-                drawerLayout.closeDrawer(GravityCompat.START);
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
             });
-            accountChooser.addView(v);
+            binding.accountChooser.addView(v);
         }
-        View addButton = getLayoutInflater().inflate(R.layout.item_account, null);
+        View addButton = View.inflate(this, R.layout.item_account, null);
         ((TextView) addButton.findViewById(R.id.accountItemLabel)).setText(getString(R.string.add_account));
         ((AppCompatImageView) addButton.findViewById(R.id.accountItemAvatar)).setImageResource(R.drawable.ic_person_add_grey600_24dp);
         addButton.setOnClickListener((btn) -> askForNewAccount(this));
         addButton.findViewById(R.id.delete).setVisibility(View.GONE);
-        accountChooser.addView(addButton);
-        headerView.setOnClickListener(view -> clickHeader());
+        binding.accountChooser.addView(addButton);
+        binding.headerView.setOnClickListener(view -> clickHeader());
     }
 
     private void setupActionBar() {
+        Toolbar toolbar = binding.activityNotesListView.notesListActivityActionBar;
         setSupportActionBar(toolbar);
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
+        drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
         drawerToggle.setDrawerIndicatorEnabled(true);
-        drawerLayout.addDrawerListener(drawerToggle);
+        binding.drawerLayout.addDrawerListener(drawerToggle);
     }
 
     private void setupNotesList() {
@@ -329,13 +306,18 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
         });
 
-        // Pull to Refresh
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            if (db.getNoteServerSyncHelper().isSyncPossible()) {
-                synchronize();
-            } else {
+            if (ssoAccount == null) {
                 swipeRefreshLayout.setRefreshing(false);
-                Snackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(LoginStatus.NO_NETWORK.str)), Snackbar.LENGTH_LONG).show();
+                askForNewAccount(this);
+            } else {
+                Log.i(TAG, "Clearing Glide memory cache");
+                Glide.get(this).clearMemory();
+                new Thread(() -> {
+                    Log.i(TAG, "Clearing Glide disk cache");
+                    Glide.get(getApplicationContext()).clearDiskCache();
+                }).start();
+                synchronize();
             }
         });
 
@@ -385,7 +367,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
                 // update views
                 if (closeNavigation) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                    binding.drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 refreshLists(true);
             }
@@ -404,16 +386,16 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
         });
         adapterCategories.setSelectedItem(selectedItem);
-        listNavigationCategories.setAdapter(adapterCategories);
+        binding.navigationList.setAdapter(adapterCategories);
     }
 
     private void clickHeader() {
         if (this.accountChooserActive) {
-            accountChooser.setVisibility(View.GONE);
-            accountNavigation.setVisibility(View.VISIBLE);
+            binding.accountChooser.setVisibility(View.GONE);
+            binding.accountNavigation.setVisibility(View.VISIBLE);
         } else {
-            accountChooser.setVisibility(View.VISIBLE);
-            accountNavigation.setVisibility(View.GONE);
+            binding.accountChooser.setVisibility(View.VISIBLE);
+            binding.accountNavigation.setVisibility(View.GONE);
 
         }
         this.accountChooserActive = !this.accountChooserActive;
@@ -440,7 +422,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             }
 
             Map<String, Integer> favorites = db.getFavoritesCount(localAccount.getId());
+            //noinspection ConstantConditions
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
+            //noinspection ConstantConditions
             int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
             itemFavorites.count = numFavorites;
             itemRecent.count = numFavorites + numNonFavorites;
@@ -448,7 +432,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             ArrayList<NavigationItem> items = new ArrayList<>();
             items.add(itemRecent);
             items.add(itemFavorites);
-            NavigationItem lastPrimaryCategory = null, lastSecondaryCategory = null;
+            NavigationItem lastPrimaryCategory = null;
+            NavigationItem lastSecondaryCategory = null;
             for (NavigationItem item : categories) {
                 int slashIndex = item.label.indexOf('/');
                 String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
@@ -539,14 +524,13 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
 
         this.updateUsernameInDrawer();
         adapterMenu.setItems(itemsMenu);
-        listNavigationMenu.setAdapter(adapterMenu);
+        binding.navigationMenu.setAdapter(adapterMenu);
     }
 
     public void initList() {
         adapter = new ItemAdapter(this);
         listView.setAdapter(adapter);
         listView.setLayoutManager(new LinearLayoutManager(this));
-        new NotesListViewItemTouchHelper(this, this, db, adapter, syncCallBack, this::refreshLists).attachToRecyclerView(listView);
     }
 
     private void refreshLists() {
@@ -559,8 +543,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
             adapter.removeAll();
             return;
         }
+        View emptyContentView = binding.activityNotesListView.emptyContentView.getRoot();
         emptyContentView.setVisibility(View.GONE);
-        progressBar.setVisibility(View.VISIBLE);
+        binding.activityNotesListView.progressCircular.setVisibility(View.VISIBLE);
         fabCreate.show();
         String subtitle;
         if (navigationSelection.category != null) {
@@ -583,7 +568,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
             adapter.setShowCategory(showCategory);
             adapter.setItemList(notes);
-            progressBar.setVisibility(View.GONE);
+            binding.activityNotesListView.progressCircular.setVisibility(View.GONE);
             if (notes.size() > 0) {
                 emptyContentView.setVisibility(View.GONE);
             } else {
@@ -710,9 +695,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                     }
                     selectAccount(account.name);
                     this.accountChooserActive = false;
-                    accountChooser.setVisibility(View.GONE);
-                    accountNavigation.setVisibility(View.VISIBLE);
-                    drawerLayout.closeDrawer(GravityCompat.START);
+                    binding.accountChooser.setVisibility(View.GONE);
+                    binding.accountNavigation.setVisibility(View.VISIBLE);
+                    binding.drawerLayout.closeDrawer(GravityCompat.START);
                 });
             } catch (AccountImportCancelledException e) {
                 Log.i(TAG, "AccountImport has been cancelled.");
@@ -724,30 +709,31 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         try {
             String url = localAccount.getUrl();
             if (url != null) {
-                this.account.setText(localAccount.getAccountName());
+                binding.account.setText(localAccount.getAccountName());
                 Glide
                         .with(this)
                         .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
                         .error(R.mipmap.ic_launcher)
                         .apply(RequestOptions.circleCropTransform())
-                        .into(this.currentAccountImage);
+                        .into(binding.currentAccountImage);
             } else {
                 Log.w(TAG, "url is null");
             }
         } catch (NullPointerException e) { // No local account - show generic header
-            this.account.setText(R.string.app_name_long);
+            binding.account.setText(R.string.app_name_long);
             Glide
                     .with(this)
                     .load(R.mipmap.ic_launcher)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(this.currentAccountImage);
+                    .into(binding.currentAccountImage);
             Log.w(TAG, "Tried to update username in drawer, but localAccount was null");
         }
     }
 
     @Override
     public void onNoteClick(int position, View v) {
-        if (mActionMode != null) {
+        boolean hasCheckedItems = adapter.getSelected().size() > 0;
+        if (hasCheckedItems) {
             if (!adapter.select(position)) {
                 v.setSelected(false);
                 adapter.deselect(position);
@@ -755,23 +741,9 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
                 v.setSelected(true);
             }
             int size = adapter.getSelected().size();
-            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, size, size));
-            int checkedItemCount = adapter.getSelected().size();
-            boolean hasCheckedItems = checkedItemCount > 0;
-
-            if (hasCheckedItems && mActionMode == null) {
-                // TODO differ if one or more items are selected
-                // if (checkedItemCount == 1) {
-                // mActionMode = startActionMode(new
-                // SingleSelectedActionModeCallback());
-                // } else {
-                // there are some selected items, start the actionMode
-                mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                        this, this, db, mActionMode, adapter, listView, this::refreshLists, getSupportFragmentManager(), searchView
-                ));
-                // }
-            } else if (!hasCheckedItems && mActionMode != null) {
-                // there no selected items, finish the actionMode
+            if (size > 0) {
+                mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, size, size));
+            } else {
                 mActionMode.finish();
             }
         } else {
@@ -786,8 +758,8 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     @Override
     public void onNoteFavoriteClick(int position, View view) {
         DBNote note = (DBNote) adapter.getItem(position);
-        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(view.getContext());
-        db.toggleFavorite(note, syncCallBack);
+        NotesDatabase db = NotesDatabase.getInstance(view.getContext());
+        db.toggleFavorite(ssoAccount, note, syncCallBack);
         adapter.notifyItemChanged(position);
         refreshLists();
     }
@@ -816,12 +788,24 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
     }
 
     private void synchronize() {
-        if(localAccount != null && localAccount.getId() != 0) {
-            swipeRefreshLayout.setRefreshing(true);
+        NoteServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
+        if (syncHelper.isSyncPossible()) {
+            if(localAccount != null && localAccount.getId() != 0) {
+                swipeRefreshLayout.setRefreshing(true);
+            }
+            syncHelper.addCallbackPull(ssoAccount, syncCallBack);
+            syncHelper.scheduleSync(ssoAccount, false);
+        } else { // Sync is not possible
+            swipeRefreshLayout.setRefreshing(false);
+            if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
+                Log.d(TAG, "Network is connected, but sync is not possible");
+            } else {
+                Log.d(TAG, "Sync is not possible, because network is not connected");
+                Snackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+            }
         }
-        db.getNoteServerSyncHelper().addCallbackPull(syncCallBack);
-        db.getNoteServerSyncHelper().scheduleSync(false);
     }
+
 
     @Override
     public void onAccountChosen(LocalAccount account) {
@@ -830,7 +814,7 @@ public class NotesListViewActivity extends AppCompatActivity implements ItemAdap
         adapter.deselect(0);
         for (Integer i : selection) {
             DBNote note = (DBNote) adapter.getItem(i);
-            db.moveNoteToAnotherAccount(note.getAccountId(), db.getNote(note.getAccountId(), note.getId()), account.getId());
+            db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), db.getNote(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);

@@ -1,0 +1,1 @@
+- 🐞 Fix exception on startup

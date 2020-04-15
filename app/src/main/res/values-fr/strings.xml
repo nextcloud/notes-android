@@ -43,16 +43,17 @@
     <string name="settings_font_title">Texte monospace</string>
     <string name="settings_font_size">Taille des caractères</string>
     <string name="settings_wifi_only">Synchroniser uniquement en Wifi</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Protection par mot de passe</string>
+    <string name="settings_background_sync">Synchronisation en tâche de fond</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Échec de synchronisation : %1$s</string>
-    <string name="error_json">Est-ce que l\'application Notes est activée sur le serveur ?</string>
-    <string name="error_no_network">pas de connexion réseau</string>
-    <string name="error_files_app">Avez-vous installé l\'appli Fichiers ?</string>
+    <string name="error_json">L\'application Notes est-elle activée sur le serveur ?</string>
+    <string name="error_no_network">Aucune connexion réseau</string>
+    <string name="error_files_app">Avez-vous installé l\'application Fichiers ?</string>
+    <string name="error_insufficient_storage">L\'espace de stockage de votre serveur est plein.</string>
     <string name="error_unknown">Une erreur inconnue est survenue</string>
 
     <!-- About -->
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Créer une nouvelle note</string>
 
-    <string name="pref_value_theme_light">Clair</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synchroniser en Wifi et données mobiles</string>
+    <string name="pref_value_lock">Protection par mot de passe</string>
+
     <string name="simple_error">Erreur</string>
     <string name="simple_close">Fermer</string>
     <string name="simple_copy">Copier</string>
@@ -119,7 +122,11 @@
     <string name="bulk_notes_deleted">%1$d notes supprimées</string>
     <string name="bulk_notes_restored">%1$d notes restaurées</string>
     <string name="category_readonly">Lecture seule</string>
-
+    <string name="no_category">Sans catégorie</string>
+    <string name="add_category">Ajouter %1$s</string>
+    <string name="simple_checkbox">Case à cocher</string>
+    <string name="unlock_notes">Déverrouiller les notes</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ouvrir en mode édition</item>
@@ -132,6 +139,20 @@
         <item>Petit</item>
         <item>Moyen</item>
         <item>Grand</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Éteint</item>
+        <item>15 minutes</item>
+        <item>1 heure</item>
+        <item>6 heures</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Clair</item>
+        <item>Sombre</item>
+        <item>Défaut du système</item>
     </string-array>
 
     <!-- Plurals -->

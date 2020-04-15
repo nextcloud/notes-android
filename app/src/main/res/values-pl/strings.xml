@@ -43,17 +43,18 @@
     <string name="settings_font_title">Czcionka monospace</string>
     <string name="settings_font_size">Rozmiar czcionki</string>
     <string name="settings_wifi_only">Synchronizuj tylko przez Wi-Fi</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Ochrona hasłem</string>
+    <string name="settings_background_sync">Synchronizacja w tle</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
-    <string name="error_json">czy aplikacja Notes jest aktywowana na serwerze?</string>
-    <string name="error_no_network">brak połączenia sieciowego</string>
-    <string name="error_files_app">czy masz zainstalowaną aplikację plików?</string>
-    <string name="error_unknown">Wystąpił nieznany błąd</string>
+    <string name="error_json">Czy aplikacja Notes jest aktywowana na serwerze?</string>
+    <string name="error_no_network">Brak połączenia sieciowego</string>
+    <string name="error_files_app">Czy masz zainstalowaną aplikację plików?</string>
+    <string name="error_insufficient_storage">Pamięć serwera jest pełna.</string>
+    <string name="error_unknown">Wystąpił nieznany błąd.</string>
 
     <!-- About -->
     <string name="about_version_title">Wersja</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Utwórz nową notatkę</string>
 
-    <string name="pref_value_theme_light">Jasny</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Podstawowy</string>
     <string name="pref_value_wifi_and_mobile">Synchronizacja w sieci Wi-Fi i komórkowej transmisji danych</string>
+    <string name="pref_value_lock">Ochrona hasłem</string>
+
     <string name="simple_error">Błąd</string>
     <string name="simple_close">Zamknij </string>
     <string name="simple_copy">Kopiuj</string>
@@ -119,7 +122,11 @@
     <string name="bulk_notes_deleted">Usunięto notatki %1$d</string>
     <string name="bulk_notes_restored">Przywrócono notatki %1$d</string>
     <string name="category_readonly">Tylko do odczytu</string>
-
+    <string name="no_category">Bez kategorii</string>
+    <string name="add_category">Dodaj %1$s</string>
+    <string name="simple_checkbox">Pole checkbox</string>
+    <string name="unlock_notes">Odblokuj notatki</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otwórz w trybie edycji</item>
@@ -132,6 +139,20 @@
         <item>Mała</item>
         <item>Średnia</item>
         <item>Duża</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Wyłączone</item>
+        <item>15 minut</item>
+        <item>1 godzina</item>
+        <item>6 godzin</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Jasny</item>
+        <item>Ciemny</item>
+        <item>Domyślne ustawienia systemu</item>
     </string-array>
 
     <!-- Plurals -->

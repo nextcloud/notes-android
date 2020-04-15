@@ -41,17 +41,14 @@
     <string name="settings_font_title">Fuente monoespaciada</string>
     <string name="settings_font_size">Tamaño de fuente</string>
     <string name="settings_wifi_only">SIncronizar sólo por Wi-Fi</string>
-
+    <string name="settings_lock">Protección con contraseña</string>
     <!-- Certificates -->
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Falló la sincronización: %1$s</string>
-    <string name="error_json">¿Se encuentra activiada la aplicación de Notes en el servidor?</string>
-    <string name="error_no_network">no hay conexión a red</string>
-    <string name="error_unknown">Se presentó un error desconocido</string>
-
+    <string name="error_no_network">No hay conexión de red</string>
     <!-- About -->
     <string name="about_version_title">Versión</string>
     <string name="about_version">Actualmente usted está usando &lt;strong>%1$s&lt;/strong></string>
@@ -85,8 +82,10 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear una nota nueva</string>
 
-    <string name="pref_value_theme_light">Claro</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
+    <string name="pref_value_lock">Protección con contraseña</string>
+
     <string name="simple_error">Error</string>
     <string name="simple_close">Cerrar</string>
     <string name="simple_copy">Copiar</string>
@@ -104,7 +103,7 @@
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
     <string name="category_readonly">Solo lectura</string>
-
+    <string name="simple_checkbox">Casilla de verificación</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo editor</item>
@@ -117,6 +116,20 @@
         <item>Pequeño</item>
         <item>Medio</item>
         <item>Grande</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Apagado</item>
+        <item>15 minutos</item>
+        <item>1 hora</item>
+        <item>6 horas</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Claro</item>
+        <item>Oscuro</item>
+        <item>Sistema por defecto</item>
     </string-array>
 
     <!-- Plurals -->

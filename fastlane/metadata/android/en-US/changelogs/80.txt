@@ -1,0 +1,6 @@
+- 🐞 Fix NullPointerException in special sync cases
+- 🐞 API Level 15 cannot use ?android: attributes (#730)
+
+
+Requires at least Files app¹ version 3.9.0
+¹ https://github.com/nextcloud/android

@@ -3,48 +3,34 @@ package it.niedermann.owncloud.notes.android.activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.tabs.TabLayout;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentContributingTab;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentCreditsTab;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentLicenseTab;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
+import it.niedermann.owncloud.notes.databinding.ActivityAboutBinding;
 
-public class AboutActivity extends AppCompatActivity {
-
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.pager)
-    ViewPager mViewPager;
-    @BindView(R.id.tabs)
-    TabLayout mTabLayout;
+public class AboutActivity extends LockedActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
-        setContentView(R.layout.activity_about);
-        ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
-        mViewPager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
-        mTabLayout.setupWithViewPager(mViewPager);
+        ActivityAboutBinding binding = ActivityAboutBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        setSupportActionBar(binding.toolbar);
+        binding.pager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
+        binding.tabs.setupWithViewPager(binding.pager);
     }
 
     private class TabsPagerAdapter extends FragmentPagerAdapter {
 
         TabsPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
+            super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override

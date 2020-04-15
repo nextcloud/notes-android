@@ -5,10 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+
+import androidx.preference.PreferenceManager;
 
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
@@ -16,36 +17,40 @@ import com.yydcdut.markdown.syntax.text.TextFactory;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
+import it.niedermann.owncloud.notes.util.Notes;
+
+import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.DARK_THEME_KEY;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    private MarkdownProcessor markdownProcessor;
+    private final MarkdownProcessor markdownProcessor;
     private final Context context;
     private final int appWidgetId;
 
-    private NoteSQLiteOpenHelper db;
+    private NotesDatabase db;
     private DBNote note;
-    private SharedPreferences sp;
-    private static Boolean darkTheme;
+    private final SharedPreferences sp;
+    private boolean darkModeActive;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
     SingleNoteWidgetFactory(Context context, Intent intent) {
         this.context = context;
         appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                                         AppWidgetManager.INVALID_APPWIDGET_ID);
+                AppWidgetManager.INVALID_APPWIDGET_ID);
         sp = PreferenceManager.getDefaultSharedPreferences(this.context);
-        darkTheme = sp.getBoolean(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, false);
+        darkModeActive = Notes.isDarkThemeActive(context, NoteWidgetHelper.getDarkThemeSetting(sp, DARK_THEME_KEY, appWidgetId));
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
-        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkTheme).build());
+        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkModeActive).build());
     }
 
     @Override
     public void onCreate() {
-        db = NoteSQLiteOpenHelper.getInstance(context);
+        db = NotesDatabase.getInstance(context);
     }
 
 
@@ -67,7 +72,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDestroy() {
-
+        //NoOp
     }
 
     /**
@@ -100,16 +105,15 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
-        fillInIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        if (darkTheme) {
+        if (darkModeActive) {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv_dark, markdownProcessor.parse(note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv_dark, parseCompat(markdownProcessor, note.getContent()));
 
         } else {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv, markdownProcessor.parse(note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv, parseCompat(markdownProcessor, note.getContent()));
         }
 
         return note_content;

@@ -68,12 +68,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
                 if (currentVisibility != oldVisibility) {
                     if (currentVisibility != View.VISIBLE) {
-                        colorWithText("");
+                        colorWithText("", null);
                         searchQuery = "";
                         hideSearchFabs();
                     } else {
                         jumpToOccurrence();
-                        colorWithText(searchQuery);
+                        colorWithText(searchQuery, null);
                         occurrenceCount = countOccurrences(getContent(), searchQuery);
                         showSearchFabs();
                     }
@@ -91,6 +91,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             next.setOnClickListener(v -> {
                 currentOccurrence++;
                 jumpToOccurrence();
+                colorWithText(searchView.getQuery().toString(), currentOccurrence);
             });
         }
 
@@ -98,6 +99,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             prev.setOnClickListener(v -> {
                 currentOccurrence--;
                 jumpToOccurrence();
+                colorWithText(searchView.getQuery().toString(), currentOccurrence);
             });
         }
 
@@ -120,7 +122,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 }
                 currentOccurrence = 1;
                 jumpToOccurrence();
-                colorWithText(searchQuery);
+                colorWithText(searchQuery, currentOccurrence);
                 return true;
             }
         });
@@ -136,7 +138,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
     }
 
-    protected abstract void colorWithText(String newText);
+    protected abstract void colorWithText(@NonNull String newText, @Nullable Integer current);
 
     protected abstract ScrollView getScrollView();
 
@@ -172,38 +174,30 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         Layout layout = getLayout();
         if (layout == null) {
             Log.w(TAG, "getLayout() is null");
-            return;
-        }
-        if (getContent() == null || getContent().isEmpty()) {
-            Log.w(TAG, "getContent() returned " + getContent());
-            return;
-        }
-        if (searchQuery == null || searchQuery.isEmpty()) {
-            // No search term
-            return;
-        }
-        if (currentOccurrence < 1) {
+        } else if (getContent() == null || getContent().isEmpty()) {
+            Log.w(TAG, "getContent is null or empty");
+        } else if (currentOccurrence < 1) {
             // if currentOccurrence is lower than 1, jump to last occurrence
             currentOccurrence = occurrenceCount;
             jumpToOccurrence();
-            return;
-        }
-        String currentContent = getContent().toLowerCase();
-        int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, currentOccurrence);
-        if (indexOfNewText <= 0) {
-            // Search term is not n times in text
-            // Go back to first search result
-            if (currentOccurrence != 1) {
-                currentOccurrence = 1;
-                jumpToOccurrence();
+        } else if (searchQuery != null && !searchQuery.isEmpty()) {
+            String currentContent = getContent().toLowerCase();
+            int indexOfNewText = indexOfNth(currentContent, searchQuery.toLowerCase(), 0, currentOccurrence);
+            if (indexOfNewText <= 0) {
+                // Search term is not n times in text
+                // Go back to first search result
+                if (currentOccurrence != 1) {
+                    currentOccurrence = 1;
+                    jumpToOccurrence();
+                }
+                return;
             }
-            return;
-        }
-        String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
-        int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
+            String textUntilFirstOccurrence = currentContent.substring(0, indexOfNewText);
+            int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
 
-        if (numberLine >= 0) {
-            getScrollView().smoothScrollTo(0, layout.getLineTop(numberLine));
+            if (numberLine >= 0) {
+                getScrollView().post(() -> getScrollView().smoothScrollTo(0, layout.getLineTop(numberLine)));
+            }
         }
     }
 
@@ -215,20 +209,18 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         int idx = input.indexOf(value, startIndex);
         if (idx == -1)
             return -1;
-        return indexOfNth(input, value, idx + 1, --nth);
+        return indexOfNth(input, value, idx + 1, nth - 1);
     }
 
     private static int countOccurrences(String haystack, String needle) {
         if (haystack == null || haystack.isEmpty() || needle == null || needle.isEmpty()) {
             return 0;
         }
-        haystack = haystack.toLowerCase();
-        needle = needle.toLowerCase();
         int lastIndex = 0;
         int count = 0;
 
         while (lastIndex != -1) {
-            lastIndex = haystack.indexOf(needle, lastIndex);
+            lastIndex = haystack.toLowerCase().indexOf(needle.toLowerCase(), lastIndex);
             if (lastIndex != -1) {
                 count++;
                 lastIndex += needle.length();

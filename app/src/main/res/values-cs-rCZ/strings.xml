@@ -24,7 +24,7 @@
     <string name="action_uncategorized">Nezařazeno</string>
     <string name="menu_delete">Smazat</string>
     <string name="menu_change_category">Kategorie</string>
-    <string name="menu_favorite">Oblíbený</string>
+    <string name="menu_favorite">Oblíbená</string>
     <string name="menu_preview">Náhled</string>
     <string name="menu_share">Sdílet</string>
 
@@ -38,54 +38,55 @@
     <string name="listview_updated_last_month">Minulý měsíc</string>
 
     <!-- Settings -->
-    <string name="settings_note_mode">Režim zobrazení pro poznámky</string>
+    <string name="settings_note_mode">Režim zobrazení poznámek</string>
     <string name="settings_theme_title">Tmavý motiv vzhledu</string>
-    <string name="settings_font_title">Písmo se znaky všemi stejně širokými</string>
-    <string name="settings_font_size">Velikost písma</string>
+    <string name="settings_font_title">Písmo se všemi znaky stejně širokými</string>
+    <string name="settings_font_size">Velikost písmen</string>
     <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Ochrana heslem</string>
+    <string name="settings_background_sync">Synchronizace na pozadí</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
-    <string name="error_json">je na serveru aktivní aplikace Poznámky?</string>
-    <string name="error_no_network">žádné síťové spojení</string>
-    <string name="error_files_app">máte nainstalovanou aplikaci Soubory?</string>
-    <string name="error_unknown">Vyskytla se neznámá chyba</string>
+    <string name="error_json">Je na serveru aktivní aplikace Poznámky?</string>
+    <string name="error_no_network">Žádné síťové spojení</string>
+    <string name="error_files_app">Máte nainstalovanou aplikaci Soubory?</string>
+    <string name="error_insufficient_storage">Úložiště vašeho serveru je plné.</string>
+    <string name="error_unknown">Došlo k neznámé chybě.</string>
 
     <!-- About -->
     <string name="about_version_title">Verze</string>
-    <string name="about_version">Právě používáte &lt;strong>%1$s&lt;/strong></string>
-    <string name="about_maintainer_title">Tvůrci</string>
+    <string name="about_version">Nyní používáte &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Vývoj spravuje</string>
     <string name="about_developers_title">Vývojáři</string>
     <string name="about_translators_title">Překladatelé</string>
-    <string name="about_translators_transifex">Nextcloud komunita na &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud komunita na portálu &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testeři</string>
     <string name="about_source_title">Zdrojové kódy</string>
     <string name="about_source">Tento projekt je hostován na portálu GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problémy</string>
     <string name="about_issues">Chyby, návrhy na zlepšení a další funkce je možné posílat prostřednictvím systému správy hlášení na portálu GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_translate_title">Překládat</string>
-    <string name="about_translate">Připojte se k týmu na službě Transifex a pomozte nám přelkládat tuto aplikaci: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Překládání</string>
+    <string name="about_translate">Připojte se k týmu Nextcloud na portálu Transifex a pomozte nám překládat (i) tuto aplikaci: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licence aplikace</string>
-    <string name="about_app_license">Tato aplikace je licencována pod GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license">Tato aplikace je vydávána pod licencí GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobrazit licenci</string>
     <string name="about_icons_disclaimer_title">Ikony</string>
-    <string name="about_icons_disclaimer">&lt;p>Původní ikonu vyrobil %1$s&lt;/p>&lt;p>Všechny ostatní ikony používané touto aplikací byly &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> vytvořeny společností Google Inc. a jsou licencovány pod licencí Apache 2.0.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Původní ikonu vytvořil %1$s&lt;/p>&lt;p>Všechny ostatní ikony používané touto aplikací jsou &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a>, vytvořené společností Google Inc. a vydávané pod licencí Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Zásluhy</string>
-    <string name="about_contribution_tab_title">Příspěvek</string>
+    <string name="about_contribution_tab_title">Zapojení se</string>
     <string name="about_license_tab_title">Licence</string>
 
     <!-- Widgets -->
     <string name="widget_note_list_title">Seznam poznámek</string>
     <string name="widget_note_list_placeholder">Žádné poznámky</string>
-    <string name="widget_single_note_title">Jedna poznámka</string>
+    <string name="widget_single_note_title">Jediná poznámka</string>
     <string name="widget_single_note_placeholder_tv">Poznámka nenalezena</string>
     <string name="widget_create_note">Vytvořit poznámku</string>
-    <string name="widget_not_logged_in">Abyste mohli tento widget používat, přihlaste se  do aplikacie Poznámky</string>
-    <string name="widget_entry_fav_contentDescription">Ikonka hvězdičky označí položku jako oblíbenou</string>
+    <string name="widget_not_logged_in">Abyste mohli využívat tuto miniaplikaci plochy, přihlaste se  do aplikace Poznámky</string>
+    <string name="widget_entry_fav_contentDescription">Ikonka hvězdičky slouží pro označení položky jako oblíbené</string>
     <string name="widget_app_launcher_contentDescription">Spustí aplikaci</string>
 
     <string name="activity_select_single_note">Vybrat poznámku</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Vytvořit novou poznámku</string>
 
-    <string name="pref_value_theme_light">Světlý</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normální</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovat přes Wi-Fi a mobilní data</string>
+    <string name="pref_value_lock">Ochrana heslem</string>
+
     <string name="simple_error">Chyba</string>
     <string name="simple_close">Zavřít</string>
     <string name="simple_copy">Zkopírovat</string>
@@ -110,16 +113,20 @@
     <string name="category_work">Práce</string>
     <string name="account_already_imported">Účet už byl naimportován</string>
     <string name="no_notes_yet">Zatím žádné poznámky</string>
-    <string name="no_notes_yet_description">Pro vytvoření nové poznámky klepněte na + (plus)</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Náhled se nedaří načíst. Zkontrolujte zda je zde položka dvoučíslicového  seznamu bez obsahu.</string>
-    <string name="simple_more">Více</string>
+    <string name="no_notes_yet_description">Novou poznámku vytvoříte klepnutím na + (plus)</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Náhled se nedaří načíst. Zkontrolujte zda zde není položka dvouciferného seznamu bez obsahu.</string>
+    <string name="simple_more">Další</string>
     <string name="simple_move">Přesunout</string>
     <string name="error_files_app_version_too_old">Je vámi používaná verze aplikace Soubory aktuální?</string>
-    <string name="checkbox_could_not_be_toggled">Zaškrtávací kolonku se nepodařilo přepnout.</string>
+    <string name="checkbox_could_not_be_toggled">Stav zaškrtávací kolonky se nepodařilo přepnout.</string>
     <string name="bulk_notes_deleted">Smazáno %1$d poznámek</string>
     <string name="bulk_notes_restored">Obnoveno %1$d poznámek</string>
     <string name="category_readonly">Pouze pro čtení</string>
-
+    <string name="no_category">Žádná kategorie</string>
+    <string name="add_category">Přidat %1$s</string>
+    <string name="simple_checkbox">Zatržítko</string>
+    <string name="unlock_notes">Odemknout poznámky</string>
+    <string name="simple_beta">Vývojové</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otevřít v režimu úprav</item>
@@ -134,11 +141,25 @@
         <item>Velké</item>
     </string-array>
 
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Vypnuto</item>
+        <item>15 minut</item>
+        <item>1 hodina</item>
+        <item>6 hodin</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Světlý</item>
+        <item>Tmavý</item>
+        <item>Systémové výchozí</item>
+    </string-array>
+
     <!-- Plurals -->
     <plurals name="ab_selected">
-        <item quantity="one">vybrán %d</item>
+        <item quantity="one">vybrána %d</item>
         <item quantity="few">vybrány %d</item>
         <item quantity="many">vybráno %d</item>
-        <item quantity="other">vybráno %d</item>
+        <item quantity="other">vybrány %d</item>
     </plurals>
 </resources>

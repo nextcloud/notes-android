@@ -43,16 +43,17 @@
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
     <string name="settings_font_size">Veľkosť písma</string>
     <string name="settings_wifi_only">Synchronizovať len na Wi-Fi</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Ochrana heslom</string>
+    <string name="settings_background_sync">Synchronizácia na pozadí</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
-    <string name="error_json">máte povolenú aplikáciu Poznámky na serveri?</string>
-    <string name="error_no_network">nie je pripojenie k sieti</string>
-    <string name="error_files_app">máte nainštalovanú apku Súbory?</string>
+    <string name="error_json">Je na serveri aktivovaná aplikácia Notes?</string>
+    <string name="error_no_network">Bez sieťového pripojenia</string>
+    <string name="error_files_app">Nainštalovali ste aplikáciu súbory?</string>
+    <string name="error_insufficient_storage">Serverové úložisko je plné</string>
     <string name="error_unknown">Vyskytla sa neznáma chyba</string>
 
     <!-- About -->
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Vytvoriť novú poznámku</string>
 
-    <string name="pref_value_theme_light">Svetlý</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normálne</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovať na Wi-Fi a mobilných dátach</string>
+    <string name="pref_value_lock">Ochrana heslom</string>
+
     <string name="simple_error">Chyba</string>
     <string name="simple_close">Zatvoriť</string>
     <string name="simple_copy">Kopírovať</string>
@@ -119,7 +122,11 @@
     <string name="bulk_notes_deleted">Vymazaných %1$d poznámok</string>
     <string name="bulk_notes_restored">Obnovených %1$d poznámok</string>
     <string name="category_readonly">Iba na čítanie</string>
-
+    <string name="no_category">Žiadna kategória</string>
+    <string name="add_category">Pridať %1$s</string>
+    <string name="simple_checkbox">Zaškrtávacie políčko</string>
+    <string name="unlock_notes">Odomknúť poznámky</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
@@ -132,6 +139,20 @@
         <item>Malá</item>
         <item>Stredná</item>
         <item>Veľká</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Vypnúť</item>
+        <item>15 minút</item>
+        <item>1 hodina</item>
+        <item>6 hodín</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Svetlý</item>
+        <item>Tmavý</item>
+        <item>Predvolené systémom</item>
     </string-array>
 
     <!-- Plurals -->

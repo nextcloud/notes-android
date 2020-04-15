@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/spacer_2x">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/statusMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:maxLength="50"
+            tools:text="@tools:sample/lorem/random" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_tip" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/error_dialog_contact_us" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:text="@string/error_dialog_we_need_info" />
+
+        <TextView
+            android:id="@+id/stacktrace"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:layout_marginBottom="@dimen/spacer_2x"
+            android:layout_weight="1"
+            android:background="@color/bg_highlighted"
+            android:padding="8dp"
+            android:scrollbars="horizontal|vertical"
+            android:textIsSelectable="true"
+            android:typeface="monospace"
+            tools:text="@tools:sample/lorem/random" />
+    </LinearLayout>
+</ScrollView>

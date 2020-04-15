@@ -1,11 +1,13 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.SectionItem;
+import it.niedermann.owncloud.notes.util.DisplayUtils;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
@@ -32,6 +35,8 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     private final Category category;
     private final CharSequence searchQuery;
     private final long accountId;
+    private final int searchForeground;
+    private final int searchBackground;
 
     public LoadNotesListTask(long accountId, @NonNull Context context, @NonNull NotesLoadedListener callback, @NonNull Category category, @Nullable CharSequence searchQuery) {
         this.context = context;
@@ -39,12 +44,14 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         this.category = category;
         this.searchQuery = searchQuery;
         this.accountId = accountId;
+        this.searchBackground = context.getResources().getColor(R.color.bg_highlighted);
+        this.searchForeground = DisplayUtils.getForeground(Integer.toHexString(this.searchBackground)) ? Color.WHITE : context.getResources().getColor(R.color.primary);
     }
 
     @Override
     protected List<Item> doInBackground(Void... voids) {
         List<DBNote> noteList;
-        NoteSQLiteOpenHelper db = NoteSQLiteOpenHelper.getInstance(context);
+        NotesDatabase db = NotesDatabase.getInstance(context);
         noteList = db.searchNotes(accountId, searchQuery, category.category, category.favorite);
 
         if (category.category == null) {
@@ -59,8 +66,8 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             SpannableString spannableString = new SpannableString(dbNote.getTitle());
             Matcher matcher = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
             while (matcher.find()) {
-                spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.primary_dark)),
-                        matcher.start(), matcher.end(), 0);
+                spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
+                spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
             }
 
             dbNote.setTitle(Html.toHtml(spannableString));
@@ -68,8 +75,8 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             spannableString = new SpannableString(dbNote.getExcerpt());
             matcher = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
             while (matcher.find()) {
-                spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.primary_dark)),
-                        matcher.start(), matcher.end(), 0);
+                spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
+                spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
             }
 
             dbNote.setExcerpt(Html.toHtml(spannableString));
@@ -103,7 +110,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         for (int i = 0; i < noteList.size(); i++) {
             DBNote currentNote = noteList.get(i);
             String timeslot = timeslotter.getTimeslot(currentNote);
-            if(i > 0 && !timeslot.equals(lastTimeslot)) {
+            if (i > 0 && !timeslot.equals(lastTimeslot)) {
                 itemList.add(new SectionItem(timeslot));
             }
             itemList.add(colorTheNote(currentNote));
@@ -132,16 +139,16 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             int day = now.get(Calendar.DAY_OF_MONTH);
             int offsetWeekStart = (now.get(Calendar.DAY_OF_WEEK) - now.getFirstDayOfWeek() + 7) % 7;
             timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_today), month, day));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_yesterday), month,day - 1));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_week), month,day - offsetWeekStart));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_week), month,day - offsetWeekStart - 7));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_month), month,1));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_yesterday), month, day - 1));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_week), month, day - offsetWeekStart));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_week), month, day - offsetWeekStart - 7));
+            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_month), month, 1));
             timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_month), month - 1, 1));
             lastYear = Calendar.getInstance();
             lastYear.set(now.get(Calendar.YEAR) - 1, 0, 1, 0, 0, 0);
         }
 
-        String getTimeslot(DBNote note) {
+        private String getTimeslot(DBNote note) {
             if (note.isFavorite()) {
                 return "";
             }
@@ -160,8 +167,8 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         }
 
         private class Timeslot {
-            final String label;
-            final Calendar time;
+            private final String label;
+            private final Calendar time;
 
             Timeslot(String label, int month, int day) {
                 this.label = label;

@@ -1,0 +1,1 @@
+- 🐞 ArrayIndexOutOfBoundsException when clicking on Settings in some languages (#768)

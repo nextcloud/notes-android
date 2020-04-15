@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <SwitchPreference
+        android:defaultValue="@string/pref_value_lock"
+        android:icon="@drawable/ic_lock_grey600_24dp"
+        android:key="@string/pref_key_lock"
+        android:layout="@layout/item_pref"
+        android:summary="@string/simple_beta"
+        android:title="@string/settings_lock" />
+
     <ListPreference
         android:defaultValue="@string/pref_value_mode_edit"
         android:entries="@array/noteMode_entries"
@@ -11,8 +19,11 @@
         android:summary="%s"
         android:title="@string/settings_note_mode" />
 
-    <SwitchPreference
-        android:defaultValue="@string/pref_value_theme_light"
+    <ListPreference
+        android:defaultValue="@string/pref_value_theme_system_default"
+        android:entries="@array/darkmode_entries"
+        android:entryValues="@array/darkMode_values"
+        android:summary="%s"
         android:icon="@drawable/ic_brightness_2_grey_24dp"
         android:key="@string/pref_key_theme"
         android:layout="@layout/item_pref"
@@ -20,7 +31,7 @@
 
     <SwitchPreference
         android:defaultValue="@string/pref_value_font_normal"
-        android:icon="@drawable/ic_text_fields_black_24dp"
+        android:icon="@drawable/ic_text_format_grey600_24dp"
         android:key="@string/pref_key_font"
         android:layout="@layout/item_pref"
         android:title="@string/settings_font_title" />
@@ -37,9 +48,19 @@
 
     <SwitchPreference
         android:defaultValue="@string/pref_value_wifi_and_mobile"
-        android:icon="@drawable/ic_sync_black_24dp"
+        android:icon="@drawable/ic_network_wifi_grey600_24dp"
         android:key="@string/pref_key_wifi_only"
         android:layout="@layout/item_pref"
         android:title="@string/settings_wifi_only" />
+
+    <ListPreference
+        android:defaultValue="@string/pref_value_sync_off"
+        android:entries="@array/sync_entries"
+        android:entryValues="@array/sync_values"
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:key="@string/pref_key_background_sync"
+        android:layout="@layout/item_pref"
+        android:summary="%s"
+        android:title="@string/settings_background_sync" />
 
 </PreferenceScreen>

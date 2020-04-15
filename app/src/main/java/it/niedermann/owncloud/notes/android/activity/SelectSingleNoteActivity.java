@@ -5,23 +5,22 @@ import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import it.niedermann.owncloud.notes.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.Item;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.Notes;
 
 public class SelectSingleNoteActivity extends NotesListViewActivity {
 
-    @BindView(R.id.fab_create)
-    View fabCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +28,9 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
         setResult(Activity.RESULT_CANCELED);
 
-        ButterKnife.bind(this);
         fabCreate.setVisibility(View.GONE);
-
+        Toolbar toolbar = binding.activityNotesListView.notesListActivityActionBar;
+        SwipeRefreshLayout swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         toolbar.setTitle(R.string.activity_select_single_note);
         swipeRefreshLayout.setEnabled(false);
         swipeRefreshLayout.setRefreshing(false);
@@ -59,7 +58,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
 
         sp.putLong(SingleNoteWidget.WIDGET_KEY + appWidgetId, noteID);
         sp.putLong(SingleNoteWidget.ACCOUNT_ID_KEY + appWidgetId, note.getAccountId());
-        sp.putBoolean(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()));
+        sp.putString(SingleNoteWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()).name());
         sp.apply();
 
         Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,

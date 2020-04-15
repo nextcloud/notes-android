@@ -22,7 +22,8 @@
             android:gravity="top"
             android:inputType="textMultiLine|textCapSentences"
             android:padding="16dp"
-            android:textColor="@color/fg_default" />
+            android:textColor="@color/fg_default"
+            tools:text="@tools:sample/lorem/random" />
     </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

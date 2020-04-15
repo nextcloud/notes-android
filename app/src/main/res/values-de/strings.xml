@@ -43,17 +43,18 @@
     <string name="settings_font_title">Nichtproportionale Schriftart</string>
     <string name="settings_font_size">Schriftgröße</string>
     <string name="settings_wifi_only">Nur über WLAN synchronisieren</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Passwortschutz</string>
+    <string name="settings_background_sync">Hintergrundsynchronisierung</string>
 
     <!-- Network -->
 
     <!-- Error -->
-    <string name="error_sync">Synchronisation fehlgeschlagen: %1$s</string>
-    <string name="error_json">ist die Notes-App auf dem Server aktiviert?</string>
-    <string name="error_no_network">keine Netzwerk-Verbindung</string>
+    <string name="error_sync">Synchronisierung fehlgeschlagen: %1$s</string>
+    <string name="error_json">Ist die Notes-App auf dem Server aktiviert?</string>
+    <string name="error_no_network">Keine Netzwerkverbindung</string>
     <string name="error_files_app">Haben Sie die Dateien-App installiert?</string>
-    <string name="error_unknown">Unbekannter Fehler aufgetreten</string>
+    <string name="error_insufficient_storage">Ihr Serverspeicher ist voll.</string>
+    <string name="error_unknown">Unbekannter Fehler aufgetreten.</string>
 
     <!-- About -->
     <string name="about_version_title">Version</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Neue Notiz erstellen</string>
 
-    <string name="pref_value_theme_light">Hell</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Über WLAN und mobile Daten synchronisieren</string>
+    <string name="pref_value_lock">Passwortschutz</string>
+
     <string name="simple_error">Fehler</string>
     <string name="simple_close">Schließen</string>
     <string name="simple_copy">Kopieren</string>
@@ -119,7 +122,11 @@
     <string name="bulk_notes_deleted">%1$d Notizen gelöscht</string>
     <string name="bulk_notes_restored">%1$dNotizen wiederhergestellt</string>
     <string name="category_readonly">Schreibgeschützt</string>
-
+    <string name="no_category">Keine Kategorie</string>
+    <string name="add_category">%1$s hinzufügen</string>
+    <string name="simple_checkbox">Kontrollkästchen</string>
+    <string name="unlock_notes">Notiz entsperren</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Im Bearbeitungsmodus öffnen</item>
@@ -132,6 +139,20 @@
         <item>Klein</item>
         <item>Mittel</item>
         <item>Groß</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Aus</item>
+        <item>15 Minuten</item>
+        <item>1 Stunde</item>
+        <item>6 Stunden</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Hell</item>
+        <item>Dunkel</item>
+        <item>Systemstandard</item>
     </string-array>
 
     <!-- Plurals -->

@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Muistiinpanot</string>
+    <string name="app_name_long">Nextcloud Notes</string>
     <string name="label_all_notes">Kaikki muistiinpanot</string>
     <string name="label_favorites">Suosikit</string>
     <string name="action_create">Uusi muistiinpano</string>
@@ -15,6 +16,8 @@
     <string name="simple_bold">Lihavoitu</string>
     <string name="simple_link">Linkki</string>
     <string name="simple_italic">Kursivoitu</string>
+    <string name="action_note_deleted">Poistettiin %1$s</string>
+    <string name="action_note_restored">Palautettiin %1$s</string>
     <string name="action_undo">Kumoa</string>
     <string name="action_drawer_open">avaa navigaatio</string>
     <string name="action_drawer_close">sulje navigaatio</string>
@@ -40,15 +43,18 @@
     <string name="settings_font_title">Tasalevyinen fontti</string>
     <string name="settings_font_size">Fontin koko</string>
     <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Salasanasuojaus</string>
+    <string name="settings_background_sync">Taustasynkronointi</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
-    <string name="error_no_network">ei verkkoyhteyttä</string>
-    <string name="error_unknown">Tapahtui tuntematon virhe</string>
+    <string name="error_json">Onko Notes sovellus aktivoitu palvelimella?</string>
+    <string name="error_no_network">Ei verkkoyhteyttä</string>
+    <string name="error_files_app">Oletko asentanut tiedostot sovelluksen?</string>
+    <string name="error_insufficient_storage">Palvelimen tallennustila on täynnä.</string>
+    <string name="error_unknown">Tapahtui tuntematon virhe.</string>
 
     <!-- About -->
     <string name="about_version_title">Versio</string>
@@ -61,6 +67,7 @@
     <string name="about_source_title">Lähdekoodi</string>
     <string name="about_source">Tämä projekti toimii GitHubissa: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Ongelmat</string>
+    <string name="about_issues">Voit raportoida virheitä ja ehdottaa parannuksia ja uusia tomintoja GitHub:n ongelmien seuraaja toiminnolla: &lt; href=\"%1$s\">%1$s&lt;/a> </string>
     <string name="about_translate_title">Käännä</string>
     <string name="about_translate">Liity Nextcloud-yhteisöön Transifex-palvelussa ja auta meitä kääntämään tämä sovellus: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Sovelluslisenssi</string>
@@ -68,6 +75,7 @@
     <string name="about_app_license_button">Näytä lisenssi</string>
     <string name="about_icons_disclaimer_title">Kuvakkeet</string>
     <string name="about_credits_tab_title">Tekijät</string>
+    <string name="about_contribution_tab_title">Kontribuutio</string>
     <string name="about_license_tab_title">Lisenssi</string>
 
     <!-- Widgets -->
@@ -76,29 +84,39 @@
     <string name="widget_single_note_title">Yksittäinen muistiinpano</string>
     <string name="widget_single_note_placeholder_tv">Muistiinpanoa ei löytynyt</string>
     <string name="widget_create_note">Luo muistiinpano</string>
+    <string name="widget_not_logged_in">Kirjaudu Notes sovellukseen ennen kuin käytät widgettiä</string>
     <string name="activity_select_single_note">Valitse muistiinpano</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Luo uusi muistiinpano</string>
 
-    <string name="pref_value_theme_light">Vaalea</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normaali</string>
     <string name="pref_value_wifi_and_mobile">Synkronoi wifi- ja mobiilidatayhteydellä</string>
+    <string name="pref_value_lock">Salasanasuojaus</string>
+
     <string name="simple_error">Virhe</string>
     <string name="simple_close">Sulje</string>
     <string name="simple_copy">Kopioi</string>
     <string name="simple_exception">Poikkeus</string>
     <string name="copied_to_clipboard">Kopioitu leikepöydälle</string>
     <string name="pin_to_homescreen">Kiinnitä kotinäyttöön</string>
+    <string name="note_has_been_deleted">Tämä muistiinpano on poistettu</string>
     <string name="add_account">Lisää tili</string>
     <string name="category_music">Musiikki</string>
     <string name="category_movies">Elokuvat</string>
+    <string name="category_movie">Elokuva</string>
     <string name="category_work">Työ</string>
     <string name="no_notes_yet">Ei muistiinpanoja</string>
+    <string name="no_notes_yet_description">Paina + luodaksesi uuden muistiinpanon</string>
     <string name="simple_more">Lisää</string>
     <string name="simple_move">Siirrä</string>
+    <string name="bulk_notes_deleted">Poistettiin %1$d muistiinpanoa</string>
+    <string name="bulk_notes_restored">Palautettiin %1$d muistiinpanoa</string>
     <string name="category_readonly">Vain luku</string>
-
+    <string name="add_category">Lisää %1$s</string>
+    <string name="simple_checkbox">Valintaruutu</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>
@@ -111,6 +129,20 @@
         <item>Pieni</item>
         <item>Normaali</item>
         <item>Suuri</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Pois</item>
+        <item>15 minuuttia</item>
+        <item>1 tunti</item>
+        <item>6 tuntia</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Vaalea</item>
+        <item>Tumma</item>
+        <item>Järjestelmän oletus</item>
     </string-array>
 
     <!-- Plurals -->

@@ -43,17 +43,18 @@
     <string name="settings_font_title">Carattere a spaziatura fissa</string>
     <string name="settings_font_size">Dimensiine carattere</string>
     <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Protezione con password</string>
+    <string name="settings_background_sync">Sincronizzazione in background</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
-    <string name="error_json">L\'applicazione Notes è stata attivata sul server?</string>
-    <string name="error_no_network">nessuna connessione di rete</string>
-    <string name="error_files_app">hai installato l\'applicazione File?</string>
-    <string name="error_unknown">Si è verificato un errore sconosciuto</string>
+    <string name="error_json">L\'applicazione Note è attiva nel server?</string>
+    <string name="error_no_network">Nessuna connessione di rete</string>
+    <string name="error_files_app">Hai installato l\'applicazione File?</string>
+    <string name="error_insufficient_storage">L\'archiviazione sul server è piena.</string>
+    <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
 
     <!-- About -->
     <string name="about_version_title">Versione</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crea una nuova nota</string>
 
-    <string name="pref_value_theme_light">Chiaro</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normale</string>
     <string name="pref_value_wifi_and_mobile">Sincronizza su Wi-FI e dati mobili</string>
+    <string name="pref_value_lock">Protezione con password</string>
+
     <string name="simple_error">Errore</string>
     <string name="simple_close">Chiudi</string>
     <string name="simple_copy">Copia</string>
@@ -119,7 +122,11 @@
     <string name="bulk_notes_deleted">Eliminate %1$d note</string>
     <string name="bulk_notes_restored">Ripristinate %1$d note</string>
     <string name="category_readonly">Sola lettura</string>
-
+    <string name="no_category">Nessuna categoria</string>
+    <string name="add_category">Aggiungi %1$s</string>
+    <string name="simple_checkbox">Casella di selezione</string>
+    <string name="unlock_notes">Sblocca note</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Apri in modalità modifica</item>
@@ -132,6 +139,20 @@
         <item>Piccola</item>
         <item>Media</item>
         <item>Grande</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Spenta</item>
+        <item>15 minuti</item>
+        <item>1 ora</item>
+        <item>6 ore</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Chiaro</item>
+        <item>Scuro</item>
+        <item>Predefiniti di sistema</item>
     </string-array>
 
     <!-- Plurals -->

@@ -43,17 +43,18 @@
     <string name="settings_font_title">Letra monoespazada</string>
     <string name="settings_font_size">Tamaño da letra</string>
     <string name="settings_wifi_only">Sincronizar só con WiFi</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Protección por contrasinal</string>
+    <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
-    <string name="error_json">está activada a aplicación «Notes» no servidor?</string>
-    <string name="error_no_network">sen conexión de rede</string>
-    <string name="error_files_app">instalou a aplicación de ficheiros?</string>
-    <string name="error_unknown">Produciuse un erro descoñecido</string>
+    <string name="error_json">Está activada a aplicación «Notes» no servidor?</string>
+    <string name="error_no_network">Sen conexión de rede</string>
+    <string name="error_files_app">Instalou a aplicación de ficheiros?</string>
+    <string name="error_insufficient_storage">O seu almacenamento no servidor está cheo.</string>
+    <string name="error_unknown">Produciuse un erro descoñecido.</string>
 
     <!-- About -->
     <string name="about_version_title">Versión</string>
@@ -73,7 +74,7 @@
     <string name="about_app_license">Esta aplicación está licenciada baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
     <string name="about_app_license_button">Ver a licenza</string>
     <string name="about_icons_disclaimer_title">Iconas</string>
-    <string name="about_icons_disclaimer">&lt;p>Iconas orixinais feitas por %1$s&lt;/p>&lt;p>As outras iconas usadas por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitos por Google Inc. e licenciados baixo unha licenza Creative Commons.&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>Iconas orixinais feitas por %1$s&lt;/p>&lt;p>As outras iconas usadas por esta aplicación son &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> feitas por Google Inc. e licenciadas baixo unha licenza Apache 2.0.&lt;/p></string>
     <string name="about_credits_tab_title">Créditos</string>
     <string name="about_contribution_tab_title">Colaboración</string>
     <string name="about_license_tab_title">Licenza</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear unha nota nova</string>
 
-    <string name="pref_value_theme_light">Claro</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronización con WiFi e con datos móbiles</string>
+    <string name="pref_value_lock">Protección por contrasinal</string>
+
     <string name="simple_error">Erro</string>
     <string name="simple_close">Pechar</string>
     <string name="simple_copy">Copiar</string>
@@ -119,7 +122,11 @@
     <string name="bulk_notes_deleted">Foron eliminadas %1$d notas</string>
     <string name="bulk_notes_restored">Foron restauradas %1$d notas</string>
     <string name="category_readonly">Só lectura</string>
-
+    <string name="no_category">Sen categoría</string>
+    <string name="add_category">Engadir %1$s</string>
+    <string name="simple_checkbox">Caixa de verificación</string>
+    <string name="unlock_notes">Desbloquear notas</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>
@@ -132,6 +139,20 @@
         <item>Pequena</item>
         <item>Mediana</item>
         <item>Grande</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Apagado</item>
+        <item>15 minutos</item>
+        <item>1 hora</item>
+        <item>6 horas</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Claro</item>
+        <item>Escuro</item>
+        <item>Predeterminado do sistema</item>
     </string-array>
 
     <!-- Plurals -->

@@ -3,14 +3,12 @@ package it.niedermann.owncloud.notes.android.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -19,23 +17,21 @@ import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Objects;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteEditFragment;
 import it.niedermann.owncloud.notes.android.fragment.NotePreviewFragment;
 import it.niedermann.owncloud.notes.android.fragment.NoteReadonlyFragment;
+import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.util.ExceptionHandler;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
 
-public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragment.NoteFragmentListener, AccountChooserListener {
+public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountChooserListener {
 
     private static final String TAG = EditNoteActivity.class.getSimpleName();
 
@@ -47,19 +43,16 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     public static final String PARAM_CATEGORY = "category";
     public static final String PARAM_CONTENT = "content";
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    private ActivityEditBinding binding;
 
     private BaseNoteFragment fragment;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
-        setContentView(R.layout.activity_edit);
-
-        ButterKnife.bind(this);
+        binding = ActivityEditBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         if (savedInstanceState == null) {
             launchNoteFragment();
@@ -67,7 +60,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
             fragment = (BaseNoteFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container_view);
         }
 
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar);
     }
 
     @Override
@@ -164,7 +157,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         String category = null;
         boolean favorite = false;
         if (intent.hasExtra(PARAM_CATEGORY)) {
-            Category categoryPreselection = (Category) intent.getSerializableExtra(PARAM_CATEGORY);
+            Category categoryPreselection = (Category) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
             category = categoryPreselection.category;
             favorite = categoryPreselection.favorite != null ? categoryPreselection.favorite : false;
         }
@@ -172,7 +165,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
         String content = "";
         if (
                 intent.hasExtra(Intent.EXTRA_TEXT) &&
-                MIMETYPE_TEXT_PLAIN.equals(intent.getType()) &&
+                        MIMETYPE_TEXT_PLAIN.equals(intent.getType()) &&
                         (Intent.ACTION_SEND.equals(intent.getAction()) ||
                                 INTENT_GOOGLE_ASSISTANT.equals(intent.getAction()))
         ) {
@@ -209,6 +202,7 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         close();
     }
 
@@ -257,15 +251,15 @@ public class EditNoteActivity extends AppCompatActivity implements BaseNoteFragm
     @Override
     public void onNoteUpdated(DBNote note) {
         if (note != null) {
-            toolbar.setTitle(note.getTitle());
+            binding.toolbar.setTitle(note.getTitle());
             if (note.getCategory().isEmpty()) {
-                toolbar.setSubtitle(null);
+                binding.toolbar.setSubtitle(null);
             } else {
-                toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
+                binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
         } else {
             // Maybe account is not authenticated -> note == null
-            Log.e(TAG, "note is null, start NotesListViewActivity");
+            Log.e(TAG, "note is null, start " + NotesListViewActivity.class.getSimpleName());
             startActivity(new Intent(this, NotesListViewActivity.class));
             finish();
         }

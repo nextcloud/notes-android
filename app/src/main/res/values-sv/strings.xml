@@ -43,17 +43,18 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Teckenstorlek</string>
     <string name="settings_wifi_only">Synkronisera endast med Wi-Fi</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Lösenordsskydd</string>
+    <string name="settings_background_sync">Bakgrundssynkronisering</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
-    <string name="error_json">är anteckningar-appen aktiverad på servern?</string>
-    <string name="error_no_network">ingen nätverksanslutning</string>
-    <string name="error_files_app">har du installerat filappen?</string>
-    <string name="error_unknown">Ett okänt fel uppstod</string>
+    <string name="error_json">Är appen anteckningar aktiverad på servern?</string>
+    <string name="error_no_network">Ingen nätverksanslutning</string>
+    <string name="error_files_app">Har du installerat filer-appen?</string>
+    <string name="error_insufficient_storage">Din serverlagring är full.</string>
+    <string name="error_unknown">Ett okänt fel uppstod.</string>
 
     <!-- About -->
     <string name="about_version_title">Version</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Skapa en ny anteckning</string>
 
-    <string name="pref_value_theme_light">Ljus</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobil data</string>
+    <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobildata</string>
+    <string name="pref_value_lock">Lösenordsskydd</string>
+
     <string name="simple_error">Fel</string>
     <string name="simple_close">Stäng</string>
     <string name="simple_copy">Kopiera</string>
@@ -111,7 +114,7 @@
     <string name="account_already_imported">Kontot har redan importerats</string>
     <string name="no_notes_yet">Inga anteckningar än</string>
     <string name="no_notes_yet_description">Tryck på + knappen för att skapa en ny anteckning</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Det gick inte att ladda förhandsgranskning. Kontrollera om det finns ett tvåsiffrigt listobjekt utan innehåll.</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Det gick inte att läsa in förhandsgranskning. Vänligen kontrollera om det finns ett tvåsiffrigt listobjekt utan innehåll.</string>
     <string name="simple_more">Mer</string>
     <string name="simple_move">Flytta</string>
     <string name="error_files_app_version_too_old">Är din fil-app av senaste version?</string>
@@ -119,7 +122,11 @@
     <string name="bulk_notes_deleted">Raderade %1$d anteckningar</string>
     <string name="bulk_notes_restored">Återställde %1$d anteckningar</string>
     <string name="category_readonly">Läsbehörighet</string>
-
+    <string name="no_category">Ingen kategori</string>
+    <string name="add_category">Lägg till %1$s</string>
+    <string name="simple_checkbox">Kryssruta</string>
+    <string name="unlock_notes">Lås upp anteckningar</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>
@@ -132,6 +139,20 @@
         <item>Liten</item>
         <item>Medium</item>
         <item>Stor</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Av</item>
+        <item>15 minuter</item>
+        <item>1 timme</item>
+        <item>6 timmar</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Ljust</item>
+        <item>Mörkt</item>
+        <item>Systemstandard</item>
     </string-array>
 
     <!-- Plurals -->

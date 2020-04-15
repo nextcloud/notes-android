@@ -1,0 +1,9 @@
+2.11.6
+
+- 🐞 ArrayIndexOutOfBoundsException when clicking on Settings (#768)
+- 🌎 Language updates
+
+2.11.5
+
+- 🐞 Fix crash when note contains multiple images without descriptions
+- 🔍 Enhance highlighting of search results

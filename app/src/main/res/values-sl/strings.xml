@@ -43,17 +43,18 @@
     <string name="settings_font_title">Pisava enotne širine</string>
     <string name="settings_font_size">Velikost pisave</string>
     <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Zaščita z geslom</string>
+    <string name="settings_background_sync"> Usklajevanje v ozadju</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
-    <string name="error_json">Ali je program Beležka Notes nameščen na strežniku?</string>
-    <string name="error_no_network">ni omrežne povezave</string>
+    <string name="error_json">Ali je program Notes na strežniku omogočen?</string>
+    <string name="error_no_network">Ni omrežne povezave</string>
     <string name="error_files_app">Ali je program za upravljanje datotek »files« nameščen?</string>
-    <string name="error_unknown">Prišlo je do neznane napake!</string>
+    <string name="error_insufficient_storage">Shramba strežnika je polna.</string>
+    <string name="error_unknown">Prišlo je do neznane napake.</string>
 
     <!-- About -->
     <string name="about_version_title">Različica</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Ustvari novo zabeležko</string>
 
-    <string name="pref_value_theme_light">Svetla</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Običajno</string>
     <string name="pref_value_wifi_and_mobile">Usklajuj na Wi-Fi in mobilni povezavi</string>
+    <string name="pref_value_lock">Zaščita z geslom</string>
+
     <string name="simple_error">Napaka</string>
     <string name="simple_close">Zapri</string>
     <string name="simple_copy">Kopiraj</string>
@@ -116,10 +119,14 @@
     <string name="simple_move">Premakni</string>
     <string name="error_files_app_version_too_old">Ali je nameščena zadnja različica programa?</string>
     <string name="checkbox_could_not_be_toggled">Izbirnega polja ni mogoče preklopiti.</string>
-    <string name="bulk_notes_deleted">Izbrisane %1$d zabeležke</string>
-    <string name="bulk_notes_restored">Obnovljene %1$d zabeležke</string>
+    <string name="bulk_notes_deleted">Izbrisane zabeležke: %1$d</string>
+    <string name="bulk_notes_restored">Obnovljene zabeležke: %1$d</string>
     <string name="category_readonly">Le za branje</string>
-
+    <string name="no_category">Brez kategorije</string>
+    <string name="add_category">Dodaj %1$s</string>
+    <string name="simple_checkbox">Izbirno polje</string>
+    <string name="unlock_notes">Odkleni zabeležke</string>
+    <string name="simple_beta">Preizkusno</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>
@@ -132,6 +139,20 @@
         <item>Majhna</item>
         <item>Srednja</item>
         <item>Velika</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Onemogočeno</item>
+        <item>15 minut</item>
+        <item>1 ura</item>
+        <item>6 ur</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Svetla</item>
+        <item>Temna</item>
+        <item>Sistemsko privzeto</item>
     </string-array>
 
     <!-- Plurals -->

@@ -16,6 +16,8 @@
     <string name="simple_bold">Podebljano</string>
     <string name="simple_link">Poveznica</string>
     <string name="simple_italic">U kurzivu</string>
+    <string name="action_note_deleted">Izbrisano %1$s</string>
+    <string name="action_note_restored">Vraćeno %1$s</string>
     <string name="action_undo">Poništi</string>
     <string name="action_drawer_open">otvori navigaciju</string>
     <string name="action_drawer_close">zatvori navigaciju</string>
@@ -41,17 +43,18 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Veličina fonta</string>
     <string name="settings_wifi_only">Sinkroniziraj samo putem bežične (Wi-Fi) mreže</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Zaštita zaporkom</string>
+    <string name="settings_background_sync">Pozadinska sinkronizacija</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Sinkronizacija nije uspjela: %1$s</string>
-    <string name="error_json">je li aplikacija Bilješke aktivirana na poslužitelju?</string>
-    <string name="error_no_network">nema veze s mrežom</string>
-    <string name="error_files_app">je li instalirana aplikacija za upravljanje datotekama?</string>
-    <string name="error_unknown">Došlo je do nepoznate pogreške</string>
+    <string name="error_json">Je li aplikacija Notes aktivirana na poslužitelju?</string>
+    <string name="error_no_network">Nema veze s mrežom</string>
+    <string name="error_files_app">Je li instalirana aplikacija za upravljanje datotekama?</string>
+    <string name="error_insufficient_storage">Prostor za pohranu poslužitelja je pun.</string>
+    <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
 
     <!-- About -->
     <string name="about_version_title">Inačica</string>
@@ -91,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Stvori novu bilješku</string>
 
-    <string name="pref_value_theme_light">Svijetlo</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normalno</string>
     <string name="pref_value_wifi_and_mobile">Sinkronizacija putem bežičnih (Wi-Fi) i mobilnih podataka</string>
+    <string name="pref_value_lock">Zaštita zaporkom</string>
+
     <string name="simple_error">Pogreška</string>
     <string name="simple_close">Zatvorite</string>
     <string name="simple_copy">Kopirajte</string>
@@ -113,8 +118,15 @@
     <string name="simple_more">Više</string>
     <string name="simple_move">Premjesti</string>
     <string name="error_files_app_version_too_old">Koristite li se najnovijom inačicom aplikacije za upravljanje datotekama?</string>
+    <string name="checkbox_could_not_be_toggled">Nije moguće označiti potvrdni okvir.</string>
+    <string name="bulk_notes_deleted">Izbrisano %1$d bilješki</string>
+    <string name="bulk_notes_restored">Vraćeno %1$d bilješki</string>
     <string name="category_readonly">Samo za čitanje</string>
-
+    <string name="no_category">Nema kategorije</string>
+    <string name="add_category">Dodaj %1$s</string>
+    <string name="simple_checkbox">Potvrdni okvir</string>
+    <string name="unlock_notes">Otključaj bilješke</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>
@@ -127,6 +139,20 @@
         <item>Mali</item>
         <item>Srednji</item>
         <item>Veliki</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Isključeno</item>
+        <item>15 minuta</item>
+        <item>1 sat</item>
+        <item>6 sati</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Svijetlo</item>
+        <item>Tamno</item>
+        <item>Zadana postavka sustava</item>
     </string-array>
 
     <!-- Plurals -->

@@ -1,0 +1,3 @@
+- 🐞 App crash when selected (#776)
+- 🔧 Dependencies updates
+- 🌎 Language updates

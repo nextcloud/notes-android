@@ -43,17 +43,18 @@
     <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
     <string name="settings_font_size">Yazı boyutu</string>
     <string name="settings_wifi_only">Yalnız Wi-Fi ile eşitlensin</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Parola koruması</string>
+    <string name="settings_background_sync">Arka planda eşitleme</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Eşitlenemedi: %1$s</string>
     <string name="error_json">Notlar uygulaması sunucu üzerinde etkinleştirilmiş mi?</string>
-    <string name="error_no_network">ağ bağlantısı yok</string>
-    <string name="error_files_app">dosyalar uygulamasını kurdunuz mu?</string>
-    <string name="error_unknown">Bilinmeyen bir sorun çıktı</string>
+    <string name="error_no_network">Ağ bağlantısı yok</string>
+    <string name="error_files_app">Dosyalar uygulamasını kurdunuz mu?</string>
+    <string name="error_insufficient_storage">Sunucu depolama alanı doldu.</string>
+    <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
 
     <!-- About -->
     <string name="about_version_title">Sürüm</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Not ekle</string>
 
-    <string name="pref_value_theme_light">Açık</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fi ve mobil veri ile eşitlensin</string>
+    <string name="pref_value_lock">Parola koruması</string>
+
     <string name="simple_error">Hata</string>
     <string name="simple_close">Kapat</string>
     <string name="simple_copy">Kopyala</string>
@@ -119,7 +122,11 @@
     <string name="bulk_notes_deleted">%1$d not silindi</string>
     <string name="bulk_notes_restored">%1$dnot geri yüklendi</string>
     <string name="category_readonly">Salt okunur</string>
-
+    <string name="no_category">Kategori yok</string>
+    <string name="add_category">%1$s ekle</string>
+    <string name="simple_checkbox">İşaret kutusu</string>
+    <string name="unlock_notes">Kilidi açma notları</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>
@@ -132,6 +139,20 @@
         <item>Küçük</item>
         <item>Orta</item>
         <item>Büyük</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Kapalı</item>
+        <item>15 dakika</item>
+        <item>1 saat</item>
+        <item>6 saat</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Açık</item>
+        <item>Koyu</item>
+        <item>Sistem Varsayılanı</item>
     </string-array>
 
     <!-- Plurals -->

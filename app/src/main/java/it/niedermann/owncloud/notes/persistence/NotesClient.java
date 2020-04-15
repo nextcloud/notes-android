@@ -11,10 +11,7 @@ import com.nextcloud.android.sso.aidl.NextcloudRequest;
 import com.nextcloud.android.sso.api.AidlNetworkRequest;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.Response;
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotSupportedException;
-import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
-import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import org.json.JSONObject;
@@ -38,7 +35,7 @@ public class NotesClient {
     private static final String TAG = NotesClient.class.getSimpleName();
 
     private final Context appContext;
-    private NextcloudAPI mNextcloudAPI;
+    private static final Map<String, NextcloudAPI> mNextcloudAPIs = new HashMap<>();
 
     /**
      * This entity class is used to return relevant data of the HTTP reponse.
@@ -48,7 +45,7 @@ public class NotesClient {
         private final String etag;
         private final long lastModified;
 
-        public ResponseData(String content, String etag, long lastModified) {
+        ResponseData(String content, String etag, long lastModified) {
             this.content = content;
             this.etag = etag;
             this.lastModified = lastModified;
@@ -93,45 +90,21 @@ public class NotesClient {
 
     NotesClient(Context appContext) {
         this.appContext = appContext;
-        updateAccount();
     }
 
-    void updateAccount() {
-        if (mNextcloudAPI != null) {
-            mNextcloudAPI.stop();
-        }
-        try {
-            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(appContext);
-            Log.v(TAG, "NextcloudRequest account: " + ssoAccount.name);
-            mNextcloudAPI = new NextcloudAPI(appContext, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
-                @Override
-                public void onConnected() {
-                    Log.v(TAG, "SSO API connected");
-                }
-
-                @Override
-                public void onError(Exception ex) {
-                    ex.printStackTrace();
-                }
-            });
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    NotesResponse getNotes(long lastModified, String lastETag) throws Exception {
+    NotesResponse getNotes(SingleSignOnAccount ssoAccount, long lastModified, String lastETag) throws Exception {
         Map<String, String> parameter = new HashMap<>();
         parameter.put(GET_PARAM_KEY_PRUNE_BEFORE, Long.toString(lastModified));
-        return new NotesResponse(requestServer("notes", METHOD_GET, parameter, null, lastETag));
+        return new NotesResponse(requestServer(ssoAccount, "notes", METHOD_GET, parameter, null, lastETag));
     }
 
-    private NoteResponse putNote(CloudNote note, String path, String method) throws Exception {
+    private NoteResponse putNote(SingleSignOnAccount ssoAccount, CloudNote note, String path, String method) throws Exception {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
         paramObject.accumulate(JSON_FAVORITE, note.isFavorite());
         paramObject.accumulate(JSON_CATEGORY, note.getCategory());
-        return new NoteResponse(requestServer(path, method, null, paramObject, null));
+        return new NoteResponse(requestServer(ssoAccount, path, method, null, paramObject, null));
     }
 
     /**
@@ -139,22 +112,17 @@ public class NotesClient {
      *
      * @param note {@link CloudNote} - the new Note
      * @return Created Note including generated Title, ID and lastModified-Date
-     * @throws Exception
      */
-    NoteResponse createNote(CloudNote note) throws Exception {
-        return putNote(note, "notes", METHOD_POST);
+    NoteResponse createNote(SingleSignOnAccount ssoAccount, CloudNote note) throws Exception {
+        return putNote(ssoAccount, note, "notes", METHOD_POST);
     }
 
-    NoteResponse editNote(CloudNote note) throws Exception {
-        return putNote(note, "notes/" + note.getRemoteId(), METHOD_PUT);
+    NoteResponse editNote(SingleSignOnAccount ssoAccount, CloudNote note) throws Exception {
+        return putNote(ssoAccount, note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 
-    void deleteNote(long noteId) {
-        try {
-            this.requestServer("notes/" + noteId, METHOD_DELETE, null, null, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    void deleteNote(SingleSignOnAccount ssoAccount, long noteId) throws Exception {
+        this.requestServer(ssoAccount, "notes/" + noteId, METHOD_DELETE, null, null, null);
     }
 
     /**
@@ -167,7 +135,7 @@ public class NotesClient {
      * @param lastETag    optional ETag of last response
      * @return Body of answer
      */
-    private ResponseData requestServer(String target, String method, Map<String, String> parameter, JSONObject requestBody, String lastETag) throws Exception {
+    private ResponseData requestServer(SingleSignOnAccount ssoAccount, String target, String method, Map<String, String> parameter, JSONObject requestBody, String lastETag) throws Exception {
         NextcloudRequest.Builder requestBuilder = new NextcloudRequest.Builder()
                 .setMethod(method)
                 .setUrl(API_PATH + target);
@@ -189,9 +157,9 @@ public class NotesClient {
 
         StringBuilder result = new StringBuilder();
 
-        Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
         try {
-            Response response = mNextcloudAPI.performNetworkRequestV2(nextcloudRequest);
+            Log.v(TAG, ssoAccount.name + " => " + nextcloudRequest.getMethod() + " " + nextcloudRequest.getUrl() +  " ");
+            Response response = getNextcloudAPI(appContext, ssoAccount).performNetworkRequestV2(nextcloudRequest);
             Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
             String line;
@@ -221,6 +189,27 @@ public class NotesClient {
             } else {
                 throw e;
             }
+        }
+    }
+
+    private static NextcloudAPI getNextcloudAPI(Context appContext, SingleSignOnAccount ssoAccount) {
+        if (mNextcloudAPIs.containsKey(ssoAccount.name)) {
+            return mNextcloudAPIs.get(ssoAccount.name);
+        } else {
+            Log.v(TAG, "NextcloudRequest account: " + ssoAccount.name);
+            NextcloudAPI nextcloudAPI = new NextcloudAPI(appContext, ssoAccount, new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
+                @Override
+                public void onConnected() {
+                    Log.v(TAG, "SSO API connected for " + ssoAccount);
+                }
+
+                @Override
+                public void onError(Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+            mNextcloudAPIs.put(ssoAccount.name, nextcloudAPI);
+            return nextcloudAPI;
         }
     }
 }

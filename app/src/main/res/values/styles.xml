@@ -6,7 +6,9 @@
         <item name="colorPrimaryDark">@color/primary</item>
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="android:colorBackground">@color/bg_normal</item>
     </style>
+
     <style name="toolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorAccent">#fff</item>
     </style>

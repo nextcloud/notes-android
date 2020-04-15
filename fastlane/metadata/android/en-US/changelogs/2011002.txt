@@ -1,0 +1,1 @@
+- 🐞 Stability improvements and bugfixes for synchronization and list widget

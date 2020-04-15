@@ -43,17 +43,18 @@
     <string name="settings_font_title">等宽字体</string>
     <string name="settings_font_size">字体大小</string>
     <string name="settings_wifi_only">仅在Wi-Fi下同步</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">密码保护</string>
+    <string name="settings_background_sync">后台同步</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">同步失败：%1$s</string>
-    <string name="error_json">服务器上的笔记应用是否启用？</string>
+    <string name="error_json">是否已在服务器上启用了 笔记 应用？</string>
     <string name="error_no_network">没有网络连接</string>
     <string name="error_files_app">您是否已安装 文件 应用程序？</string>
-    <string name="error_unknown">发生了未知错误。</string>
+    <string name="error_insufficient_storage">您的服务器存储空间已满。</string>
+    <string name="error_unknown">出现未知错误。</string>
 
     <!-- About -->
     <string name="about_version_title">版本</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">创建新便笺</string>
 
-    <string name="pref_value_theme_light">浅色主题</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">普通</string>
     <string name="pref_value_wifi_and_mobile">在有 Wi-Fi 和移动数据网络时同步</string>
+    <string name="pref_value_lock">密码保护</string>
+
     <string name="simple_error">错误</string>
     <string name="simple_close">关闭</string>
     <string name="simple_copy">复制</string>
@@ -119,7 +122,11 @@
     <string name="bulk_notes_deleted">删除了 %1$d 条笔记</string>
     <string name="bulk_notes_restored">恢复了 %1$d 条笔记</string>
     <string name="category_readonly">只读</string>
-
+    <string name="no_category">没有分类</string>
+    <string name="add_category">添加 %1$s</string>
+    <string name="simple_checkbox">复选框</string>
+    <string name="unlock_notes">解锁笔记</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>
@@ -132,6 +139,20 @@
         <item>小</item>
         <item>中等</item>
         <item>大</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>关闭</item>
+        <item>15 分钟</item>
+        <item>1 小时</item>
+        <item>6 小时</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>浅色</item>
+        <item>深色</item>
+        <item>系统默认</item>
     </string-array>
 
     <!-- Plurals -->

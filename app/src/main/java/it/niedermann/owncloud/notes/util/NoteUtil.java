@@ -13,6 +13,7 @@ import it.niedermann.owncloud.notes.R;
  * Provides basic functionality for Note operations.
  * Created by stefan on 06.10.15.
  */
+@SuppressWarnings("WeakerAccess")
 public class NoteUtil {
 
     private static final Pattern pLists = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
@@ -36,13 +37,14 @@ public class NoteUtil {
     public static String removeMarkDown(@Nullable String s) {
         if (s == null)
             return "";
-        s = pLists.matcher(s).replaceAll("");
-        s = pHeadings.matcher(s).replaceAll("$1");
-        s = pHeadingLine.matcher(s).replaceAll("");
-        s = pEmphasis.matcher(s).replaceAll("$2");
-        s = pSpace1.matcher(s).replaceAll("");
-        s = pSpace2.matcher(s).replaceAll("");
-        return s;
+        String result = s;
+        result = pLists.matcher(result).replaceAll("");
+        result = pHeadings.matcher(result).replaceAll("$1");
+        result = pHeadingLine.matcher(result).replaceAll("");
+        result = pEmphasis.matcher(result).replaceAll("$2");
+        result = pSpace1.matcher(result).replaceAll("");
+        result = pSpace2.matcher(result).replaceAll("");
+        return result;
     }
 
     /**
@@ -58,7 +60,7 @@ public class NoteUtil {
      * @param line String - a single Line which ends with \n
      * @return boolean isEmpty
      */
-    private static boolean isEmptyLine(@Nullable String line) {
+    public static boolean isEmptyLine(@Nullable String line) {
         return removeMarkDown(line).trim().length() == 0;
     }
 
@@ -117,7 +119,7 @@ public class NoteUtil {
      * @return lineContent String
      */
     @NonNull
-    private static String getLineWithoutMarkDown(@NonNull String content, int lineNumber) {
+    public static String getLineWithoutMarkDown(@NonNull String content, int lineNumber) {
         String line = "";
         if (content.contains("\n")) {
             String[] lines = content.split("\n");

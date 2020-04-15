@@ -8,12 +8,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 
+import androidx.preference.PreferenceManager;
+
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.BaseNoteFragment;
+import it.niedermann.owncloud.notes.util.Notes;
 
 public class SingleNoteWidget extends AppWidgetProvider {
 
@@ -24,7 +27,6 @@ public class SingleNoteWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         Intent templateIntent = new Intent(context, EditNoteActivity.class);
-        templateIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
         for (int appWidgetId : appWidgetIds) {
             // onUpdate has been triggered before the user finished configuring the widget
@@ -32,11 +34,11 @@ public class SingleNoteWidget extends AppWidgetProvider {
                 return;
             }
 
-            boolean darkTheme = sp.getBoolean(DARK_THEME_KEY + appWidgetId, false);
+            DarkModeSetting darkTheme = NoteWidgetHelper.getDarkThemeSetting(sp, DARK_THEME_KEY, appWidgetId);
             templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, sp.getLong(ACCOUNT_ID_KEY + appWidgetId, -1));
 
             PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
-                                                                            PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent.FLAG_UPDATE_CURRENT);
 
             Intent serviceIntent = new Intent(context, SingleNoteWidgetService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -44,7 +46,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
             RemoteViews views;
 
-            if (darkTheme) {
+            if (Notes.isDarkThemeActive(context, darkTheme)) {
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_dark);
                 views.setPendingIntentTemplate(R.id.single_note_widget_lv_dark, templatePendingIntent);
                 views.setRemoteAdapter(R.id.single_note_widget_lv_dark, serviceIntent);
@@ -73,7 +75,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
 
         updateAppWidget(context, AppWidgetManager.getInstance(context),
-                        (awm.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class))));
+                (awm.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class))));
     }
 
     @Override

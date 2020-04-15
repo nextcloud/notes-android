@@ -16,6 +16,8 @@
     <string name="simple_bold">Подебљано</string>
     <string name="simple_link">Веза</string>
     <string name="simple_italic">Курзив</string>
+    <string name="action_note_deleted">Обрисано %1$s</string>
+    <string name="action_note_restored">Повраћено %1$s</string>
     <string name="action_undo">Опозови</string>
     <string name="action_drawer_open">отвори навигацију</string>
     <string name="action_drawer_close">затвори навигацију</string>
@@ -41,16 +43,18 @@
     <string name="settings_font_title">Фонт фиксне ширине</string>
     <string name="settings_font_size">Величина фонта</string>
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Заштита лозинком</string>
+    <string name="settings_background_sync">Позадинска синхронизација</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Синхронизација није успела%1$s</string>
     <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
-    <string name="error_no_network">нема мрежне везе</string>
-    <string name="error_unknown">Десила се непозната грешка</string>
+    <string name="error_no_network">Нема мрежне везе</string>
+    <string name="error_files_app">Да ли имате инсталирану апликацију за фајлове?</string>
+    <string name="error_insufficient_storage">Складиште на серверу је пуно.</string>
+    <string name="error_unknown">Десила се непозната грешка.</string>
 
     <!-- About -->
     <string name="about_version_title">Верзија</string>
@@ -90,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Направи нову белешку</string>
 
-    <string name="pref_value_theme_light">Светла</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Нормална</string>
     <string name="pref_value_wifi_and_mobile">Синхронизуј и на бежичној и на мобилној вези</string>
+    <string name="pref_value_lock">Заштита лозинком</string>
+
     <string name="simple_error">Грешка</string>
     <string name="simple_close">Затвори</string>
     <string name="simple_copy">Копирај</string>
@@ -108,10 +114,19 @@
     <string name="account_already_imported">Налог је већ увезен</string>
     <string name="no_notes_yet">Још нема белешки</string>
     <string name="no_notes_yet_description">Притисните + дугме да направите нову белешку</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Не могу да учитам преглед. Проверите да ли постоји двоцифрена ставка у листи без садржаја.</string>
     <string name="simple_more">Још</string>
     <string name="simple_move">Помери</string>
+    <string name="error_files_app_version_too_old">Да ли је Ваша апликација за фајлове на најновијој верзији?</string>
+    <string name="checkbox_could_not_be_toggled">Поље за потврду не може да се укључи/искључи.</string>
+    <string name="bulk_notes_deleted">Обрисано %1$d белешки</string>
+    <string name="bulk_notes_restored">Повраћено %1$d белешки</string>
     <string name="category_readonly">Само за читање</string>
-
+    <string name="no_category">Нема категорије</string>
+    <string name="add_category">Додај %1$s</string>
+    <string name="simple_checkbox">Штиклирање</string>
+    <string name="unlock_notes">Откључај белешке</string>
+    <string name="simple_beta">Бета</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>
@@ -124,6 +139,20 @@
         <item>Мали</item>
         <item>Средњи</item>
         <item>Велики</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Искључена</item>
+        <item>15 минута</item>
+        <item>1 сат</item>
+        <item>6 сати</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>светла</item>
+        <item>тамна</item>
+        <item>Системске подразумеване</item>
     </string-array>
 
     <!-- Plurals -->

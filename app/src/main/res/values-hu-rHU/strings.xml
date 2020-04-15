@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Jegyzetek</string>
+    <string name="app_name_long">Nextcloud jegyzetek</string>
     <string name="label_all_notes">Minden jegyzet</string>
     <string name="label_favorites">Kedvencek</string>
     <string name="action_create">Új jegyzet</string>
@@ -15,6 +16,8 @@
     <string name="simple_bold">Vastag</string>
     <string name="simple_link">Hivatkozás</string>
     <string name="simple_italic">Dőlt</string>
+    <string name="action_note_deleted">%1$s törölve</string>
+    <string name="action_note_restored">%1$s visszaállítva</string>
     <string name="action_undo">Visszavonás</string>
     <string name="action_drawer_open">navigáció megnyitása</string>
     <string name="action_drawer_close">navigáció bezárása</string>
@@ -37,18 +40,21 @@
     <!-- Settings -->
     <string name="settings_note_mode">Jegyzet módok megjelenítés</string>
     <string name="settings_theme_title">Sötét téma</string>
+    <string name="settings_font_title">Fix szélességű betűkészlet</string>
     <string name="settings_font_size">Betű méret</string>
     <string name="settings_wifi_only">Szinkronizáció csak Wifin keresztül</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Jelszavas védelem</string>
+    <string name="settings_background_sync">Háttér-szinkronizálás</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">sikertelen szinkronizálás: %1$s</string>
-    <string name="error_json">be van kapcsolva a Jegyzetek app a szerveren?</string>
+    <string name="error_json">Be van kapcsolva a Jegyzetek alkalmazás a kiszolgálón?</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
-    <string name="error_unknown">Ismeretlen hiba történt</string>
+    <string name="error_files_app">Telepítette a Fájlok alkalmazást?</string>
+    <string name="error_insufficient_storage">A kiszolgáló-tárhelye megtelt.</string>
+    <string name="error_unknown">Ismeretlen hiba történt.</string>
 
     <!-- About -->
     <string name="about_version_title">Verzió</string>
@@ -88,23 +94,37 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Új jegyzet létrehozása</string>
 
-    <string name="pref_value_theme_light">Világos</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normál</string>
     <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fin és mobil adatkapcsolaton</string>
+    <string name="pref_value_lock">Jelszavas védelem</string>
+
     <string name="simple_error">Hiba</string>
     <string name="simple_close">Bezár</string>
     <string name="simple_copy">Másolás</string>
     <string name="simple_exception">Kivétel</string>
     <string name="copied_to_clipboard">Vágólapra másolva</string>
+    <string name="pin_to_homescreen">Rögzítés a kezdőképernyőre</string>
+    <string name="note_has_been_deleted">A jegyzet már törölve lett</string>
     <string name="add_account">Fiók hozzáadása</string>
     <string name="category_music">Zene</string>
     <string name="category_movies">Filmek</string>
+    <string name="category_movie">Film</string>
     <string name="category_work">Munkahelyi</string>
+    <string name="account_already_imported">A fiók már importálásra került</string>
     <string name="no_notes_yet">Még nincsenek jegyzetek</string>
+    <string name="no_notes_yet_description">Új jegyzet hozzáadásához kattintson a + gombra</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Az előnézet nem tölthető be. Ellenőrizze, hogy nincs-e üres két számjegyű számozott listaelem.</string>
     <string name="simple_more">Több</string>
     <string name="simple_move">Áthelyezés</string>
+    <string name="error_files_app_version_too_old">A Fájlok alkalmazása verziója naprakész?</string>
+    <string name="checkbox_could_not_be_toggled">A jelölőmező nem állítható át.</string>
+    <string name="bulk_notes_deleted">%1$d jegyzet törölve</string>
+    <string name="bulk_notes_restored">%1$d jegyzet visszaállítva</string>
     <string name="category_readonly">Csak olvasható</string>
-
+    <string name="no_category">Nincs kategória</string>
+    <string name="add_category">%1$s hozzáadása</string>
+    <string name="simple_checkbox">Jelölőmező</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>
@@ -115,7 +135,22 @@
     <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Kicsi</item>
+        <item>Közepes</item>
         <item>Nagy</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Ki</item>
+        <item>15 perc</item>
+        <item>1 óra</item>
+        <item>6 óra</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Világos</item>
+        <item>Sötét</item>
+        <item>Rendszer alapértelmezés</item>
     </string-array>
 
     <!-- Plurals -->

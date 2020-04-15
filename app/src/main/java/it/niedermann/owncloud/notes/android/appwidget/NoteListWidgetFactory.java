@@ -6,25 +6,33 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+
+import androidx.preference.PreferenceManager;
 
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.persistence.NoteSQLiteOpenHelper;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.util.Notes;
+
+import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.DARK_THEME_KEY;
 
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
+    private static final String TAG = NoteListWidgetFactory.class.getCanonicalName();
+
     private final Context context;
     private final int displayMode;
     private final boolean darkTheme;
-    private String category;
-    private NoteSQLiteOpenHelper db;
+    private final String category;
+    private final long accountId;
+    private NotesDatabase db;
     private List<DBNote> dbNotes;
-    private long accountId;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
@@ -32,14 +40,15 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                 AppWidgetManager.INVALID_APPWIDGET_ID);
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.context);
         displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
-        darkTheme = sp.getBoolean(NoteListWidget.DARK_THEME_KEY + appWidgetId, false);
+        DarkModeSetting theme = NoteWidgetHelper.getDarkThemeSetting(sp, DARK_THEME_KEY, appWidgetId);
+        darkTheme = Notes.isDarkThemeActive(context, theme);
         category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
         accountId = sp.getLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, -1);
     }
 
     @Override
     public void onCreate() {
-        db = NoteSQLiteOpenHelper.getInstance(context);
+        db = NotesDatabase.getInstance(context);
     }
 
     @Override
@@ -59,7 +68,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onDestroy() {
-
+        //NoOp
     }
 
     /**
@@ -77,14 +86,15 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     }
 
     @Override
-    public RemoteViews getViewAt(int i) {
+    public RemoteViews getViewAt(int position) {
         RemoteViews note_content;
 
-        if (dbNotes == null || dbNotes.get(i) == null) {
+        if (dbNotes == null || position > dbNotes.size() - 1 || dbNotes.get(position) == null) {
+            Log.e(TAG, "Could not find position \"" + position + "\" in dbNotes list.");
             return null;
         }
 
-        DBNote note = dbNotes.get(i);
+        DBNote note = dbNotes.get(position);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 
@@ -97,22 +107,16 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_dark);
             note_content.setOnClickFillInIntent(R.id.widget_note_list_entry_dark, fillInIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv_dark, note.getTitle());
-
-            if (note.isFavorite()) {
-                note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, R.drawable.ic_star_yellow_24dp);
-            } else {
-                note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, R.drawable.ic_star_grey_ccc_24dp);
-            }
+            note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, note.isFavorite()
+                    ? R.drawable.ic_star_yellow_24dp
+                    : R.drawable.ic_star_grey_ccc_24dp);
         } else {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry);
             note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
-
-            if (note.isFavorite()) {
-                note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_star_yellow_24dp);
-            } else {
-                note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_star_grey_ccc_24dp);
-            }
+            note_content.setImageViewResource(R.id.widget_entry_fav_icon, note.isFavorite()
+                    ? R.drawable.ic_star_yellow_24dp
+                    : R.drawable.ic_star_grey_ccc_24dp);
         }
 
         return note_content;

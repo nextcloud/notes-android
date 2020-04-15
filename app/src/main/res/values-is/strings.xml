@@ -37,17 +37,14 @@
     <string name="settings_font_title">Jafnbreitt letur</string>
     <string name="settings_font_size">Leturstærð</string>
     <string name="settings_wifi_only">Aðeins samstilla á WiFi-neti</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Verndun með lykilorði</string>
+    <string name="settings_background_sync">Samstilling í bakgrunni</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Samstilling mistókst: %1$s</string>
-    <string name="error_json">er minnispunktaforritið virkt á þjóninum?</string>
-    <string name="error_no_network">engin nettenging</string>
-    <string name="error_unknown">Óþekkt villa kom upp</string>
-
+    <string name="error_no_network">Engin nettenging</string>
     <!-- About -->
     <string name="about_version_title">Útgáfa</string>
     <string name="about_version">Þú ert núna að nota &lt;strong>%1$s&lt;/strong></string>
@@ -86,15 +83,18 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Búa til nýjan minnispunkt</string>
 
-    <string name="pref_value_theme_light">Ljóst</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Venjulegt</string>
     <string name="pref_value_wifi_and_mobile">Samstilla á WiFi-neti og farsímatengingu</string>
+    <string name="pref_value_lock">Verndun með lykilorði</string>
+
     <string name="simple_error">Villa</string>
     <string name="simple_close">Loka</string>
     <string name="simple_copy">Afrita</string>
     <string name="simple_exception">Undantekning</string>
     <string name="copied_to_clipboard">Afritað á klippispjaldið</string>
     <string name="pin_to_homescreen">Festa á heimaskjá</string>
+    <string name="note_has_been_deleted">Minnispunktinum hefur verið eytt</string>
     <string name="add_account">Bæta við notandaaðgangi</string>
     <string name="category_music">Tónlist</string>
     <string name="category_movies">Kvikmyndir</string>
@@ -104,7 +104,10 @@
     <string name="simple_more">Meira</string>
     <string name="simple_move">Færa</string>
     <string name="category_readonly">Skrifvarið</string>
-
+    <string name="no_category">Enginn flokkur</string>
+    <string name="add_category">Bæta við %1$s</string>
+    <string name="simple_checkbox">Hakreitur</string>
+    <string name="simple_beta">BETA-prófunarútgáfa</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Opna í breytingaham</item>
@@ -117,6 +120,20 @@
         <item>Lítið</item>
         <item>miðlungs</item>
         <item>Stórt</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Slökkt</item>
+        <item>15 mínútur</item>
+        <item>1 klukkustund</item>
+        <item>6 klukkustundir</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Ljóst</item>
+        <item>Dökkt</item>
+        <item>Sjálfgefið kerfi</item>
     </string-array>
 
     <!-- Plurals -->

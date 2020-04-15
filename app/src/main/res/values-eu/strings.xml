@@ -43,17 +43,18 @@
     <string name="settings_font_title">Zabalera bakarreko letra mota</string>
     <string name="settings_font_size">Letra tamaina</string>
     <string name="settings_wifi_only">Sinkronizatu wifi bidez bakarrik</string>
-
-    <!-- Certificates -->
+    <string name="settings_lock">Pasahitz bidezko babesa</string>
+    <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
 
     <!-- Network -->
 
     <!-- Error -->
-    <string name="error_sync">Sinkronizazioa huts egin du: %1$s</string>
-    <string name="error_json">Oharrak aplikazioa zerbitzariak aktibatuta al dago?</string>
-    <string name="error_no_network">Ez dago sare-konexiorik</string>
-    <string name="error_files_app">fitxategien aplikazioa instalatu al duzu?</string>
-    <string name="error_unknown">Errore ezezagun bat gertatu da</string>
+    <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
+    <string name="error_json">Notes aplikazioa zerbitzarian aktibatuta dago?</string>
+    <string name="error_no_network">Ez dago sare konexiorik</string>
+    <string name="error_files_app">Files aplikazioa instalatu duzu?</string>
+    <string name="error_insufficient_storage">Zure zerbitzariaren biltegia beteta dago.</string>
+    <string name="error_unknown">Errore ezezagun bat gertatu da.</string>
 
     <!-- About -->
     <string name="about_version_title">Bertsioa</string>
@@ -93,9 +94,11 @@
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Sortu ohar berria</string>
 
-    <string name="pref_value_theme_light">Argia</string>
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normala</string>
     <string name="pref_value_wifi_and_mobile">Sinkronizatu wifi eta datu mugikorrekin</string>
+    <string name="pref_value_lock">Pasahitz bidezko babesa</string>
+
     <string name="simple_error">Errorea</string>
     <string name="simple_close">Itxi</string>
     <string name="simple_copy">Kopiatu</string>
@@ -115,8 +118,15 @@
     <string name="simple_more">Gehiago</string>
     <string name="simple_move">Mugitu</string>
     <string name="error_files_app_version_too_old">Zure files aplikazioaren bertsioa egunean dago?</string>
+    <string name="checkbox_could_not_be_toggled">Egiaztapen-laukiaren egoera ezin izan da aldatu.</string>
+    <string name="bulk_notes_deleted"> %1$d ohar ezabatu dira</string>
+    <string name="bulk_notes_restored">%1$d ohar leheneratu dira</string>
     <string name="category_readonly">Irakurtzeko soilik</string>
-
+    <string name="no_category">Kategoria gabe</string>
+    <string name="add_category">Gehitu %1$s</string>
+    <string name="simple_checkbox">Kontrol laukia</string>
+    <string name="unlock_notes">Desblokeatzearen oharrak</string>
+    <string name="simple_beta">Beta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>
@@ -129,6 +139,20 @@
         <item>Txikia</item>
         <item>Ertaina</item>
         <item>Handia</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Off</item>
+        <item>15 minutu</item>
+        <item>Ordu 1</item>
+        <item>6 ordu</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Argia</item>
+        <item>Iluna</item>
+        <item>Sistemaren defektuzko ezarpenak</item>
     </string-array>
 
     <!-- Plurals -->
