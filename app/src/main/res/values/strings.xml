@@ -173,7 +173,7 @@
     <string name="error_dialog_timeout_toggle">Check your network connection. Sometime toggling the mobile data or Wi-Fi off and on again can help.</string>
     <string name="error_dialog_check_server">The response of your server was not correct. Please check whether you can access your notes via web interface.</string>
     <string name="error_dialog_check_server_logs">There is an issue with your Nextcloud setup. Please have a look into the server log files.</string>
-    <string name="error_dialog_check_maintenance">Please check whether your Nextcloud instance is in maintenance mode.</string>
+    <string name="error_dialog_check_maintenance">Please check whether your Nextcloud instance is not currently in maintenance mode.</string>
     <string name="error_dialog_insufficient_storage">Your Nextcloud instance has no free storage left. Please delete some files to sync your local changes into your cloud.</string>
     <string name="error_dialog_contact_us">Please do not hestiate to contact us if the issues persist. You can find our contact information in the about section in the sidebar.</string>
     <string name="error_dialog_we_need_info">We need the following technical information to help you:</string>
