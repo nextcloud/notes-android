@@ -46,8 +46,6 @@
     <string name="settings_lock">Jelszavas védelem</string>
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Be van kapcsolva a Jegyzetek alkalmazás a kiszolgálón?</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
     <string name="error_files_app">Telepítette a Fájlok alkalmazást?</string>
-    <string name="error_unknown">Ismeretlen hiba történt.</string>
     <string name="error_insufficient_storage">A kiszolgáló-tárhelye megtelt.</string>
+    <string name="error_unknown">Ismeretlen hiba történt.</string>
 
     <!-- About -->
     <string name="about_version_title">Verzió</string>

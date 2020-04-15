@@ -46,8 +46,6 @@
     <string name="settings_lock">Защита паролем</string>
     <string name="settings_background_sync">Синхр. в фоновом режиме</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Включено ли приложение «Заметки» на сервере?</string>
     <string name="error_no_network">Нет подключения к сети</string>
     <string name="error_files_app">Установлено ли приложение Файлы?</string>
-    <string name="error_unknown">Произошла неизвестная ошибка.</string>
     <string name="error_insufficient_storage">Закончилось свободное место в  хранилище на сервере.</string>
+    <string name="error_unknown">Произошла неизвестная ошибка.</string>
 
     <!-- About -->
     <string name="about_version_title">Версия</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Флажок</string>
     <string name="unlock_notes">Разблокировать заметки</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>

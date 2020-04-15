@@ -46,8 +46,6 @@
     <string name="settings_lock">Ochrana heslem</string>
     <string name="settings_background_sync">Synchronizace na pozadí</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Je na serveru aktivní aplikace Poznámky?</string>
     <string name="error_no_network">Žádné síťové spojení</string>
     <string name="error_files_app">Máte nainstalovanou aplikaci Soubory?</string>
-    <string name="error_unknown">Došlo k neznámé chybě.</string>
     <string name="error_insufficient_storage">Úložiště vašeho serveru je plné.</string>
+    <string name="error_unknown">Došlo k neznámé chybě.</string>
 
     <!-- About -->
     <string name="about_version_title">Verze</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Zatržítko</string>
     <string name="unlock_notes">Odemknout poznámky</string>
     <string name="simple_beta">Vývojové</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otevřít v režimu úprav</item>

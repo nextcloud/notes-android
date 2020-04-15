@@ -46,8 +46,6 @@
     <string name="settings_lock">Zaštita zaporkom</string>
     <string name="settings_background_sync">Pozadinska sinkronizacija</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Je li aplikacija Notes aktivirana na poslužitelju?</string>
     <string name="error_no_network">Nema veze s mrežom</string>
     <string name="error_files_app">Je li instalirana aplikacija za upravljanje datotekama?</string>
-    <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
     <string name="error_insufficient_storage">Prostor za pohranu poslužitelja je pun.</string>
+    <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
 
     <!-- About -->
     <string name="about_version_title">Inačica</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Potvrdni okvir</string>
     <string name="unlock_notes">Otključaj bilješke</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>

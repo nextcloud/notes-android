@@ -46,8 +46,6 @@
     <string name="settings_lock">Ochrana heslom</string>
     <string name="settings_background_sync">Synchronizácia na pozadí</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Je na serveri aktivovaná aplikácia Notes?</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
     <string name="error_files_app">Nainštalovali ste aplikáciu súbory?</string>
-    <string name="error_unknown">Vyskytla sa neznáma chyba</string>
     <string name="error_insufficient_storage">Serverové úložisko je plné</string>
+    <string name="error_unknown">Vyskytla sa neznáma chyba</string>
 
     <!-- About -->
     <string name="about_version_title">Verzia</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Zaškrtávacie políčko</string>
     <string name="unlock_notes">Odomknúť poznámky</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>

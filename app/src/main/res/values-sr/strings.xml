@@ -46,8 +46,6 @@
     <string name="settings_lock">Заштита лозинком</string>
     <string name="settings_background_sync">Позадинска синхронизација</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
     <string name="error_no_network">Нема мрежне везе</string>
     <string name="error_files_app">Да ли имате инсталирану апликацију за фајлове?</string>
-    <string name="error_unknown">Десила се непозната грешка.</string>
     <string name="error_insufficient_storage">Складиште на серверу је пуно.</string>
+    <string name="error_unknown">Десила се непозната грешка.</string>
 
     <!-- About -->
     <string name="about_version_title">Верзија</string>
@@ -127,8 +125,8 @@
     <string name="no_category">Нема категорије</string>
     <string name="add_category">Додај %1$s</string>
     <string name="simple_checkbox">Штиклирање</string>
+    <string name="unlock_notes">Откључај белешке</string>
     <string name="simple_beta">Бета</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>

@@ -42,8 +42,6 @@
     <string name="settings_font_size">Veličina fonta</string>
     <string name="settings_wifi_only">Sinhronizuj samo preko bežične veze</string>
     <string name="settings_lock">Password protection</string>
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->

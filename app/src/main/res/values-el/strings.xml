@@ -46,8 +46,6 @@
     <string name="settings_lock">Προστασία συνθηματικού</string>
     <string name="settings_background_sync">Συγχρονισμός στο παρασκήνιο</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Είναι ενεργοποιημένη η εφαρμογή Σημειώσεων στον διακομιστή;</string>
     <string name="error_no_network">Δεν υπάρχει σύνδεση στο δίκτυο</string>
     <string name="error_files_app">Εγκαταστάθηκε η εφαρμογή αρχείων?</string>
-    <string name="error_unknown">Προέκυψε άγνωστο σφάλμα.</string>
     <string name="error_insufficient_storage">Ο αποθηκευτικός χώρος του διακομιστή γέμισε.</string>
+    <string name="error_unknown">Προέκυψε άγνωστο σφάλμα.</string>
 
     <!-- About -->
     <string name="about_version_title">Έκδοση</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Πλαίσιο ελέγχου</string>
     <string name="unlock_notes">Ξεκλείδωμα σημειώσεων</string>
     <string name="simple_beta">Δοκιμαστικό</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Άνοιγμα σε λειτουργία τροποποίησης</item>

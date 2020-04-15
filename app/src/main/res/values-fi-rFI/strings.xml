@@ -46,8 +46,6 @@
     <string name="settings_lock">Salasanasuojaus</string>
     <string name="settings_background_sync">Taustasynkronointi</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Onko Notes sovellus aktivoitu palvelimella?</string>
     <string name="error_no_network">Ei verkkoyhteyttä</string>
     <string name="error_files_app">Oletko asentanut tiedostot sovelluksen?</string>
-    <string name="error_unknown">Tapahtui tuntematon virhe.</string>
     <string name="error_insufficient_storage">Palvelimen tallennustila on täynnä.</string>
+    <string name="error_unknown">Tapahtui tuntematon virhe.</string>
 
     <!-- About -->
     <string name="about_version_title">Versio</string>
@@ -119,7 +117,6 @@
     <string name="add_category">Lisää %1$s</string>
     <string name="simple_checkbox">Valintaruutu</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>

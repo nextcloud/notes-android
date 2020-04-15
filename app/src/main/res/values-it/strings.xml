@@ -46,8 +46,6 @@
     <string name="settings_lock">Protezione con password</string>
     <string name="settings_background_sync">Sincronizzazione in background</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">L\'applicazione Note è attiva nel server?</string>
     <string name="error_no_network">Nessuna connessione di rete</string>
     <string name="error_files_app">Hai installato l\'applicazione File?</string>
-    <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
     <string name="error_insufficient_storage">L\'archiviazione sul server è piena.</string>
+    <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
 
     <!-- About -->
     <string name="about_version_title">Versione</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Casella di selezione</string>
     <string name="unlock_notes">Sblocca note</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Apri in modalità modifica</item>

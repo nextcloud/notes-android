@@ -46,8 +46,6 @@
     <string name="settings_lock">Parola koruması</string>
     <string name="settings_background_sync">Arka planda eşitleme</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Notlar uygulaması sunucu üzerinde etkinleştirilmiş mi?</string>
     <string name="error_no_network">Ağ bağlantısı yok</string>
     <string name="error_files_app">Dosyalar uygulamasını kurdunuz mu?</string>
-    <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
     <string name="error_insufficient_storage">Sunucu depolama alanı doldu.</string>
+    <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
 
     <!-- About -->
     <string name="about_version_title">Sürüm</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">İşaret kutusu</string>
     <string name="unlock_notes">Kilidi açma notları</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>

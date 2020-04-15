@@ -46,8 +46,6 @@
     <string name="settings_lock">Protección por contrasinal</string>
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
 
-    <!-- Certificates -->
-
     <!-- Network -->
 
     <!-- Error -->
@@ -55,8 +53,8 @@
     <string name="error_json">Está activada a aplicación «Notes» no servidor?</string>
     <string name="error_no_network">Sen conexión de rede</string>
     <string name="error_files_app">Instalou a aplicación de ficheiros?</string>
-    <string name="error_unknown">Produciuse un erro descoñecido.</string>
     <string name="error_insufficient_storage">O seu almacenamento no servidor está cheo.</string>
+    <string name="error_unknown">Produciuse un erro descoñecido.</string>
 
     <!-- About -->
     <string name="about_version_title">Versión</string>
@@ -129,7 +127,6 @@
     <string name="simple_checkbox">Caixa de verificación</string>
     <string name="unlock_notes">Desbloquear notas</string>
     <string name="simple_beta">Beta</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>
