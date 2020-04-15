@@ -241,7 +241,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         binding.accountChooser.removeAllViews();
         for (LocalAccount localAccount : db.getAccounts()) {
             View v = View.inflate(this, R.layout.item_account, null);
-            if(account.getId() == 0) {
+            if(localAccount.getId() == 0) {
                 ((TextView) v.findViewById(R.id.accountItemLabel)).setText(R.string.local_account);
                 v.findViewById(R.id.delete).setVisibility(View.GONE);
             } else {

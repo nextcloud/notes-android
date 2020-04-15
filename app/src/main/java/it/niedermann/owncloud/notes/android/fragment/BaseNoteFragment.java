@@ -80,11 +80,6 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                     /* Switch account if account id has been provided */
                     this.localAccount = db.getAccount(accountId);
                     SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccount.getAccountName());
-                    try {
-                        db.getNoteServerSyncHelper().updateAccount();
-                    } catch (NextcloudFilesAppAccountNotFoundException e) {
-                        e.printStackTrace();
-                    }
                 }isNew = false;
                 note = originalNote = db.getNote(localAccount.getId(), id);
             } else {

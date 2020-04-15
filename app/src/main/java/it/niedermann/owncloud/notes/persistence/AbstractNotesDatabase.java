@@ -31,7 +31,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 12;
+    private static final int database_version = 13;
     @NonNull
     private final Context context;
 
@@ -273,6 +273,11 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_color + " VARCHAR(6) NOT NULL DEFAULT '000000'");
             db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9'");
             CapabilitiesWorker.update(context);
+        }
+        if (oldVersion < 13) {
+            ContentValues migratedAccountValues = new ContentValues();
+            migratedAccountValues.put(key_id, 0);
+            db.insert(table_accounts, null, migratedAccountValues);
         }
     }
 
