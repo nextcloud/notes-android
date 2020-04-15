@@ -22,6 +22,9 @@ import androidx.annotation.WorkerThread;
 
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -35,6 +38,8 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
+import it.niedermann.owncloud.notes.model.ApiVersion;
+import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -655,7 +660,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     public LocalAccount getAccount(long accountId) {
         validateAccountId(accountId);
         final SQLiteDatabase db = getReadableDatabase();
-        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color}, key_id + " = ?", new String[]{accountId + ""}, null, null, null, null);
+        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color}, key_id + " = ?", new String[]{String.valueOf(accountId)}, null, null, null, null);
         final LocalAccount account = new LocalAccount();
         while (cursor.moveToNext()) {
             account.setId(cursor.getLong(0));
@@ -717,6 +722,57 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return account;
     }
 
+    public void updateBrand(long accountId, @NonNull Capabilities capabilities) throws IllegalArgumentException {
+        validateAccountId(accountId);
+        // Validate color format
+        Color.parseColor(capabilities.getColor());
+        Color.parseColor(capabilities.getTextColor());
+
+        final SQLiteDatabase db = this.getWritableDatabase();
+        final ContentValues values = new ContentValues();
+
+        values.put(key_color, capabilities.getColor().substring(1));
+        values.put(key_text_color, capabilities.getTextColor().substring(1));
+
+        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
+        if (updatedRows == 1) {
+            Log.v(TAG, "Updated " + key_color + " to " + capabilities.getColor() + " and " + key_text_color + " to " + capabilities.getTextColor() + " for " + key_account_id + " = " + accountId);
+        } else {
+            Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and " + key_color + " = " + capabilities.getColor() + " and " + key_text_color + " = " + capabilities.getTextColor());
+        }
+    }
+
+    public void updateApiVersion(long accountId, @Nullable String apiVersion) throws IllegalArgumentException {
+        validateAccountId(accountId);
+        if (apiVersion != null) {
+            try {
+                JSONArray apiVersions = new JSONArray(apiVersion);
+                for (int i = 0; i < apiVersions.length(); i++) {
+                    ApiVersion.of(apiVersions.getString(i));
+                }
+                if (apiVersions.length() == 0) {
+                    final SQLiteDatabase db = this.getWritableDatabase();
+                    final ContentValues values = new ContentValues();
+                    values.put(key_api_version, apiVersion);
+                    final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
+                    if (updatedRows == 1) {
+                        Log.v(TAG, "Updated apiVersion to \"" + apiVersion + "\" for accountId = " + accountId);
+                    } else {
+                        Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
+                    }
+                } else {
+                    Log.i(TAG, "Given API version is a valid JSON array but does not contain any valid API versions. Do not update database.");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("API version does contain a non-valid version.");
+            } catch (JSONException e) {
+                throw new IllegalArgumentException("API version must contain be a JSON array.");
+            }
+        } else {
+            Log.i(TAG, "Given API version is null. Do not update database");
+        }
+    }
+
     /**
      * @param accountId the id of the account that should be deleted
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
@@ -724,14 +780,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
     public void deleteAccount(long accountId) throws IllegalArgumentException {
         validateAccountId(accountId);
         SQLiteDatabase db = this.getWritableDatabase();
-        int deletedAccounts = db.delete(table_accounts, key_id + " = ?", new String[]{accountId + ""});
+        int deletedAccounts = db.delete(table_accounts, key_id + " = ?", new String[]{String.valueOf(accountId)});
         if (deletedAccounts < 1) {
             Log.e(TAG, "AccountId '" + accountId + "' did not delete any account");
             throw new IllegalArgumentException("The given accountId does not delete any row");
         } else if (deletedAccounts > 1) {
             Log.e(TAG, "AccountId '" + accountId + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
         }
-        final int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{accountId + ""});
+        final int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{String.valueOf(accountId)});
         Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + accountId);
     }
 
@@ -740,7 +796,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_etag, etag);
-        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{accountId + ""});
+        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
         if (updatedRows == 1) {
             Log.v(TAG, "Updated etag to " + etag + " for accountId = " + accountId);
         } else {
@@ -756,7 +812,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_modified, modified);
-        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{accountId + ""});
+        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
         if (updatedRows == 1) {
             Log.v(TAG, "Updated modified to " + modified + " for accountId = " + accountId);
         } else {

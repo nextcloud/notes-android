@@ -13,7 +13,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 
 public class Notes extends Application {
-    private static final String TAG = Notes.class.getCanonicalName();
+    private static final String TAG = Notes.class.getSimpleName();
 
     private static final long LOCK_TIME = 30 * 1000;
     private static boolean lockedPreference = false;

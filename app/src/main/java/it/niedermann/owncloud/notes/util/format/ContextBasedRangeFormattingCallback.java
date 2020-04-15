@@ -16,7 +16,7 @@ import static it.niedermann.owncloud.notes.util.ClipboardUtil.getClipboardURLorN
 
 public class ContextBasedRangeFormattingCallback implements ActionMode.Callback {
 
-    private static final String TAG = ContextBasedRangeFormattingCallback.class.getCanonicalName();
+    private static final String TAG = ContextBasedRangeFormattingCallback.class.getSimpleName();
 
     private final EditText editText;
 

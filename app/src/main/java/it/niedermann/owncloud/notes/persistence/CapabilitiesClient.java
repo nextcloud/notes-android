@@ -12,19 +12,18 @@ import com.nextcloud.android.sso.api.Response;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotSupportedException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.niedermann.owncloud.notes.model.Capabilities;
+
 @SuppressWarnings("WeakerAccess")
 @WorkerThread
 public class CapabilitiesClient {
 
-    private static final String TAG = CapabilitiesClient.class.getCanonicalName();
+    private static final String TAG = CapabilitiesClient.class.getSimpleName();
 
     private static final int MIN_NEXTCLOUD_FILES_APP_VERSION_CODE = 30090000;
 
@@ -69,26 +68,5 @@ public class CapabilitiesClient {
                 throw e;
             }
         }
-    }
-
-    /**
-     * This entity class is used to return relevant data of the HTTP reponse.
-     */
-    public static class Capabilities {
-
-        Capabilities(String responseString) throws JSONException {
-            JSONObject response = new JSONObject(responseString);
-            if (response.getJSONObject("ocs").getJSONObject("meta").getInt("statuscode") == 503) {
-                Log.i(TAG, "Capabilities Endpoint: This instance is currently in maintenance mode.");
-            }
-
-//            {
-//                "ocs": {
-//                "data": {
-//                    "capabilities": {
-//                        "notes": {
-//                            "api_version": [ "0.2", "1.0" ]
-        }
-
     }
 }

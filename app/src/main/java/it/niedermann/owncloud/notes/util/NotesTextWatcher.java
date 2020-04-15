@@ -15,7 +15,7 @@ import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_
  */
 public abstract class NotesTextWatcher implements TextWatcher {
 
-    private static final String TAG = NotesTextWatcher.class.getCanonicalName();
+    private static final String TAG = NotesTextWatcher.class.getSimpleName();
 
     private static final String codeBlock = "```";
 

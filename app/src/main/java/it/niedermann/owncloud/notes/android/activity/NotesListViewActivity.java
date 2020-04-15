@@ -50,6 +50,7 @@ import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
+import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
@@ -58,6 +59,8 @@ import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
+import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
+import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
@@ -127,6 +130,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        CapabilitiesWorker.update(this);
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
@@ -307,6 +311,18 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                 new Thread(() -> {
                     Log.i(TAG, "Clearing Glide disk cache");
                     Glide.get(getApplicationContext()).clearDiskCache();
+                }).start();
+                new Thread(() -> {
+                    Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
+                    final Capabilities capabilities;
+                    try {
+                        capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
+                        db.updateBrand(localAccount.getId(), capabilities);
+                        db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                        Log.i(TAG, capabilities.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }).start();
                 synchronize();
             }

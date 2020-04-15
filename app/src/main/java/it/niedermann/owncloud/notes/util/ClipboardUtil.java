@@ -19,7 +19,7 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class ClipboardUtil {
 
-    private static final String TAG = ClipboardUtil.class.getCanonicalName();
+    private static final String TAG = ClipboardUtil.class.getSimpleName();
 
     private ClipboardUtil() {
         // Util class

@@ -24,7 +24,7 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 
 public class SyncWorker extends Worker {
 
-    private static final String TAG = Objects.requireNonNull(SyncWorker.class.getCanonicalName());
+    private static final String TAG = Objects.requireNonNull(SyncWorker.class.getSimpleName());
     private static final String WORKER_TAG = "background_synchronization";
 
     private static final Constraints constraints = new Constraints.Builder()

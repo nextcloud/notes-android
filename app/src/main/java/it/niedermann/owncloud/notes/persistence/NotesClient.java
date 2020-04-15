@@ -34,7 +34,7 @@ import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
 public abstract class NotesClient {
 
     final static int MIN_NEXTCLOUD_FILES_APP_VERSION_CODE = 30090000;
-    private static final String TAG = NotesClient.class.getCanonicalName();
+    private static final String TAG = NotesClient.class.getSimpleName();
 
     protected final Context appContext;
 

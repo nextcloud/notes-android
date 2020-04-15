@@ -24,7 +24,7 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
-    private static final String TAG = NotesListViewItemTouchHelper.class.getCanonicalName();
+    private static final String TAG = NotesListViewItemTouchHelper.class.getSimpleName();
 
     public NotesListViewItemTouchHelper(
             @NonNull SingleSignOnAccount ssoAccount,

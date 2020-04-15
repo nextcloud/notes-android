@@ -219,11 +219,10 @@ public class NoteServerSyncHelper {
                     return;
                 }
                 final NotesClient notesClient;
-                if (notesClients.containsKey(ssoAccount.name)) {
-                    notesClient = notesClients.get(ssoAccount.name);
-                } else {
-                    notesClient = notesClients.put(ssoAccount.name, NotesClient.newInstance(localAccount, context));
+                if (!notesClients.containsKey(ssoAccount.name)) {
+                    notesClients.put(ssoAccount.name, NotesClient.newInstance(localAccount, context));
                 }
+                notesClient = notesClients.get(ssoAccount.name);
                 if (notesClient == null) {
                     Log.e(TAG, NotesClient.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
                     return;
@@ -497,7 +496,7 @@ public class NoteServerSyncHelper {
                 if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
                     Snackbar.make(((ViewProvider) context).getView(), R.string.error_synchronization, Snackbar.LENGTH_LONG)
                             .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
-                                    .show(((AppCompatActivity) context).getSupportFragmentManager(), ExceptionDialogFragment.class.getCanonicalName()))
+                                    .show(((AppCompatActivity) context).getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                             .show();
                 }
             }

@@ -18,12 +18,12 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.CapabilitiesClient.Capabilities;
 
 public class CapabilitiesWorker extends Worker {
 
-    private static final String TAG = Objects.requireNonNull(CapabilitiesWorker.class.getCanonicalName());
+    private static final String TAG = Objects.requireNonNull(CapabilitiesWorker.class.getSimpleName());
     private static final String WORKER_TAG = "capabilities";
 
     private static final Constraints constraints = new Constraints.Builder()
@@ -46,7 +46,8 @@ public class CapabilitiesWorker extends Worker {
                 SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
-                // TODO Update capabilities for account in database
+                db.updateBrand(account.getId(), capabilities);
+                db.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
             } catch (Exception e) {
                 e.printStackTrace();

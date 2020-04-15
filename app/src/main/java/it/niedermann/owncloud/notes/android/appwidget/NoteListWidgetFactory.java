@@ -24,7 +24,7 @@ import it.niedermann.owncloud.notes.util.Notes;
 import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.DARK_THEME_KEY;
 
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
-    private static final String TAG = NoteListWidgetFactory.class.getCanonicalName();
+    private static final String TAG = NoteListWidgetFactory.class.getSimpleName();
 
     private final Context context;
     private final int displayMode;
