@@ -40,10 +40,10 @@ public class CapabilitiesWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
+        final NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
         for (LocalAccount account : db.getAccounts()) {
             try {
-                SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
+                final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
                 db.updateBrand(account.getId(), capabilities);
@@ -59,7 +59,7 @@ public class CapabilitiesWorker extends Worker {
 
     public static void update(@NonNull Context context) {
         deregister(context);
-        Log.i(TAG, "Registering worker running each 24 hours.");
+        Log.i(TAG, "Registering capabilities worker running each 24 hours.");
         WorkManager.getInstance(context.getApplicationContext()).enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, work);
     }
 

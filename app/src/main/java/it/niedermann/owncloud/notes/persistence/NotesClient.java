@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import com.nextcloud.android.sso.aidl.NextcloudRequest;
@@ -24,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import it.niedermann.owncloud.notes.model.ApiVersion;
 import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
 
@@ -60,9 +61,24 @@ public abstract class NotesClient {
     public static final String JSON_ETAG = "etag";
     public static final String JSON_MODIFIED = "modified";
 
-    public static NotesClient newInstance(@NonNull LocalAccount localAccount,
+    public static final ApiVersion[] SUPPORTED_API_VERSIONS = new ApiVersion[]{
+            new ApiVersion(1, 0),
+            new ApiVersion(0, 2)
+    };
+
+    public static NotesClient newInstance(@Nullable ApiVersion preferredApiVersion,
                                           @NonNull Context appContext) {
-        // TODO check localAccount API_VERSION and create another instance if necessary
+        if (preferredApiVersion == null) {
+            Log.i(TAG, "apiVersion is null, using " + NotesClient_0_2.class.getSimpleName());
+            return new NotesClient_0_2(appContext);
+//        } else if (preferredApiVersion.compareTo(SUPPORTED_API_VERSIONS[0]) == 0) {
+//            Log.i(TAG, "Using " + NotesClient_1_0.class.getSimpleName());
+//            return new NotesClient_1_0(appContext);
+        } else if (preferredApiVersion.compareTo(SUPPORTED_API_VERSIONS[1]) == 0) {
+            Log.i(TAG, "Using " + NotesClient_0_2.class.getSimpleName());
+            return new NotesClient_0_2(appContext);
+        }
+        Log.w(TAG, "Unsupported API version " + preferredApiVersion + " - try using " + NotesClient_0_2.class.getSimpleName());
         return new NotesClient_0_2(appContext);
     }
 

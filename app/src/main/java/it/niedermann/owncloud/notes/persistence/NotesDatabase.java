@@ -669,7 +669,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setUserName(cursor.getString(3));
             account.setETag(cursor.getString(4));
             account.setModified(cursor.getLong(5));
-            account.setApiVersion(cursor.getString(6));
+            account.setPreferredApiVersion(cursor.getString(6));
             account.setColor(Color.parseColor('#' + cursor.getString(7)));
             account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
         }
@@ -689,7 +689,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setUserName(cursor.getString(3));
             account.setETag(cursor.getString(4));
             account.setModified(cursor.getLong(5));
-            account.setApiVersion(cursor.getString(6));
+            account.setPreferredApiVersion(cursor.getString(6));
             account.setColor(Color.parseColor('#' + cursor.getString(7)));
             account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
             accounts.add(account);
@@ -714,7 +714,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setUserName(cursor.getString(3));
             account.setETag(cursor.getString(4));
             account.setModified(cursor.getLong(5));
-            account.setApiVersion(cursor.getString(6));
+            account.setPreferredApiVersion(cursor.getString(6));
             account.setColor(Color.parseColor('#' + cursor.getString(7)));
             account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
         }

@@ -13,17 +13,15 @@ public class ApiVersion implements Comparable<ApiVersion> {
     private String originalVersion = "?";
     private int major = 0;
     private int minor = 0;
-    private int patch = 0;
 
-    public ApiVersion(String originalVersion, int major, int minor, int patch) {
-        this(major, minor, patch);
+    public ApiVersion(String originalVersion, int major, int minor) {
+        this(major, minor);
         this.originalVersion = originalVersion;
     }
 
-    public ApiVersion(int major, int minor, int patch) {
+    public ApiVersion(int major, int minor) {
         this.major = major;
         this.minor = minor;
-        this.patch = patch;
     }
 
     public int getMajor() {
@@ -32,10 +30,6 @@ public class ApiVersion implements Comparable<ApiVersion> {
 
     public int getMinor() {
         return minor;
-    }
-
-    public int getPatch() {
-        return patch;
     }
 
     public boolean isGreaterOrEqualTo(ApiVersion v) {
@@ -54,13 +48,10 @@ public class ApiVersion implements Comparable<ApiVersion> {
                 major = extractNumber(split[0]);
                 if (split.length > 1) {
                     minor = extractNumber(split[1]);
-                    if (split.length > 2) {
-                        micro = extractNumber(split[2]);
-                    }
                 }
             }
         }
-        return new ApiVersion(versionString, major, minor, micro);
+        return new ApiVersion(versionString, major, minor);
     }
 
     private static int extractNumber(String containsNumbers) {
@@ -87,10 +78,6 @@ public class ApiVersion implements Comparable<ApiVersion> {
             return -1;
         } else if (compare.getMinor() < getMinor()) {
             return 1;
-        } else if (compare.getPatch() > getPatch()) {
-            return -1;
-        } else if (compare.getPatch() < getPatch()) {
-            return 1;
         }
         return 0;
     }
@@ -102,7 +89,6 @@ public class ApiVersion implements Comparable<ApiVersion> {
                 "originalVersion='" + originalVersion + '\'' +
                 ", major=" + major +
                 ", minor=" + minor +
-                ", patch=" + patch +
                 '}';
     }
 }

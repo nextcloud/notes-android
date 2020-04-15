@@ -686,15 +686,16 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
             }
             listView.scrollToPosition(0);
         } else if (requestCode == server_settings) {
-            // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
+            // Recreate activity completely, because theme switching makes problems when only invalidating the views.
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
             recreate();
         } else {
             try {
                 AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-                    Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
+                    Log.i(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
                     try {
                         db.addAccount(account.url, account.userId, account.name);
+                        CapabilitiesWorker.update(this);
                     } catch (SQLiteConstraintException e) {
                         if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
                             Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();

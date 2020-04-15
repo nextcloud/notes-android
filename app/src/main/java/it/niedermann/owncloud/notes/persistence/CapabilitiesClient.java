@@ -19,7 +19,6 @@ import java.util.Map;
 
 import it.niedermann.owncloud.notes.model.Capabilities;
 
-@SuppressWarnings("WeakerAccess")
 @WorkerThread
 public class CapabilitiesClient {
 

@@ -218,9 +218,10 @@ public class NoteServerSyncHelper {
                     Log.e(TAG, LocalAccount.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
                     return;
                 }
+                // TODO should each LocalAccount have a NotesClient instance? This way we could save the Map<>
                 final NotesClient notesClient;
                 if (!notesClients.containsKey(ssoAccount.name)) {
-                    notesClients.put(ssoAccount.name, NotesClient.newInstance(localAccount, context));
+                    notesClients.put(ssoAccount.name, NotesClient.newInstance(localAccount.getPreferredApiVersion(), context));
                 }
                 notesClient = notesClients.get(ssoAccount.name);
                 if (notesClient == null) {

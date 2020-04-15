@@ -3,6 +3,17 @@ package it.niedermann.owncloud.notes.model;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.NoSuchElementException;
+
+import it.niedermann.owncloud.notes.persistence.NotesClient;
 
 public class LocalAccount {
 
@@ -12,7 +23,7 @@ public class LocalAccount {
     private String url;
     private String etag;
     private long modified;
-    private String apiVersion;
+    private ApiVersion preferredApiVersion;
     @ColorInt
     private int color;
     @ColorInt
@@ -66,12 +77,36 @@ public class LocalAccount {
         this.modified = modified;
     }
 
-    public String getApiVersion() {
-        return apiVersion;
+    public ApiVersion getPreferredApiVersion() {
+        return preferredApiVersion;
     }
 
-    public void setApiVersion(String apiVersion) {
-        this.apiVersion = apiVersion;
+    /**
+     * @param availableApiVersions <code>["0.2", "1.0", ...]</code>
+     */
+    public void setPreferredApiVersion(@Nullable String availableApiVersions) {
+        // TODO move this logic to NotesClient?
+        try {
+            if(availableApiVersions == null) {
+                this.preferredApiVersion = null;
+                return;
+            }
+            JSONArray versionsArray = new JSONArray(availableApiVersions);
+            Collection<ApiVersion> supportedApiVersions = new ArrayList<>(versionsArray.length());
+            for (int i = 0; i < versionsArray.length(); i++) {
+                ApiVersion parsedApiVersion = ApiVersion.of(versionsArray.getString(i));
+                for (ApiVersion temp : NotesClient.SUPPORTED_API_VERSIONS) {
+                    if (temp.compareTo(parsedApiVersion) == 0) {
+                        supportedApiVersions.add(parsedApiVersion);
+                        break;
+                    }
+                }
+            }
+            this.preferredApiVersion = Collections.max(supportedApiVersions);
+        } catch (JSONException | NoSuchElementException e) {
+            e.printStackTrace();
+            this.preferredApiVersion = null;
+        }
     }
 
     public int getColor() {
@@ -100,7 +135,7 @@ public class LocalAccount {
                 ", url='" + url + '\'' +
                 ", etag='" + etag + '\'' +
                 ", modified=" + modified +
-                ", apiVersion='" + apiVersion + '\'' +
+                ", apiVersion='" + preferredApiVersion + '\'' +
                 ", color=" + color +
                 ", textColor=" + textColor +
                 '}';
