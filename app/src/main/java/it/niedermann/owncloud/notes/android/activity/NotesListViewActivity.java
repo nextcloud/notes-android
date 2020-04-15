@@ -680,15 +680,15 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                 //not need because of db.synchronisation in createActivity
 
                 Bundle bundle = data.getExtras();
-                if (bundle != null) {
-                    DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
+                if (bundle != null && bundle.containsKey(CREATED_NOTE)) {
+                    DBNote createdNote = (DBNote) bundle.getSerializable(CREATED_NOTE);
                     if (createdNote != null) {
                         adapter.add(createdNote);
                     } else {
-                        Log.w(TAG, "createdNote is null");
+                        Log.w(TAG, "createdNote must not be null");
                     }
                 } else {
-                    Log.w(TAG, "bundle is null");
+                    Log.w(TAG, "Provide at least " + CREATED_NOTE);
                 }
             }
             listView.scrollToPosition(0);
@@ -727,7 +727,14 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
-                            runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                            runOnUiThread(() -> {
+                                this.accountChooserActive = true;
+                                binding.accountChooser.setVisibility(View.VISIBLE);
+                                binding.accountNavigation.setVisibility(View.GONE);
+                                binding.drawerLayout.openDrawer(GravityCompat.START);
+                                binding.activityNotesListView.progressCircular.setVisibility(View.GONE);
+                                ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                            });
                         }
                     }).start();
                 });
