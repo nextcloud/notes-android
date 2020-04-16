@@ -19,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
+import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
@@ -708,21 +710,29 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * @param accountId the id of the account that should be deleted
+     * @param localAccount the account that should be deleted
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
      */
-    public void deleteAccount(long accountId) throws IllegalArgumentException {
-        validateAccountId(accountId);
+    public void deleteAccount(@NonNull LocalAccount localAccount) throws IllegalArgumentException {
+        validateAccountId(localAccount.getId());
         SQLiteDatabase db = this.getWritableDatabase();
-        int deletedAccounts = db.delete(table_accounts, key_id + " = ?", new String[]{accountId + ""});
+        int deletedAccounts = db.delete(table_accounts, key_id + " = ?", new String[]{String.valueOf(localAccount.getId())});
         if (deletedAccounts < 1) {
-            Log.e(TAG, "AccountId '" + accountId + "' did not delete any account");
+            Log.e(TAG, "AccountId '" + localAccount.getId() + "' did not delete any account");
             throw new IllegalArgumentException("The given accountId does not delete any row");
         } else if (deletedAccounts > 1) {
-            Log.e(TAG, "AccountId '" + accountId + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
+            Log.e(TAG, "AccountId '" + localAccount.getId() + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
         }
-        final int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{accountId + ""});
-        Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + accountId);
+
+        try {
+            NotesClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(getContext(), localAccount.getAccountName()));
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            e.printStackTrace();
+            NotesClient.invalidateAPICache();
+        }
+
+        final int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{String.valueOf(localAccount.getId())});
+        Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + localAccount.getId());
     }
 
     void updateETag(long accountId, String etag) {

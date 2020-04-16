@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
 import com.google.gson.GsonBuilder;
@@ -158,7 +159,7 @@ public class NotesClient {
         StringBuilder result = new StringBuilder();
 
         try {
-            Log.v(TAG, ssoAccount.name + " => " + nextcloudRequest.getMethod() + " " + nextcloudRequest.getUrl() +  " ");
+            Log.v(TAG, ssoAccount.name + " => " + nextcloudRequest.getMethod() + " " + nextcloudRequest.getUrl() + " ");
             Response response = getNextcloudAPI(appContext, ssoAccount).performNetworkRequestV2(nextcloudRequest);
             Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
             BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
@@ -210,6 +211,38 @@ public class NotesClient {
             });
             mNextcloudAPIs.put(ssoAccount.name, nextcloudAPI);
             return nextcloudAPI;
+        }
+    }
+
+    /**
+     * Invalidates thes API cache for the given ssoAccount
+     *
+     * @param ssoAccount the ssoAccount for which the API cache should be cleared.
+     */
+    public static void invalidateAPICache(@NonNull SingleSignOnAccount ssoAccount) {
+        Log.v(TAG, "Invalidating API cache for " + ssoAccount.name);
+        if (mNextcloudAPIs.containsKey(ssoAccount.name)) {
+            final NextcloudAPI nextcloudAPI = mNextcloudAPIs.get(ssoAccount.name);
+            if (nextcloudAPI != null) {
+                nextcloudAPI.stop();
+            }
+            mNextcloudAPIs.remove(ssoAccount.name);
+        }
+    }
+
+    /**
+     * Invalidates the whole API cache for all accounts
+     */
+    public static void invalidateAPICache() {
+        for (String key : mNextcloudAPIs.keySet()) {
+            Log.v(TAG, "Invalidating API cache for " + key);
+            if (mNextcloudAPIs.containsKey(key)) {
+                final NextcloudAPI nextcloudAPI = mNextcloudAPIs.get(key);
+                if (nextcloudAPI != null) {
+                    nextcloudAPI.stop();
+                }
+                mNextcloudAPIs.remove(key);
+            }
         }
     }
 }
