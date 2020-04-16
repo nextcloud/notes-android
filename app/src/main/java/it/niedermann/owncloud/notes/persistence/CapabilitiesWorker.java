@@ -65,6 +65,6 @@ public class CapabilitiesWorker extends Worker {
 
     private static void deregister(@NonNull Context context) {
         Log.i(TAG, "Deregistering all workers with tag \"" + WORKER_TAG + "\"");
-        WorkManager.getInstance(context.getApplicationContext()).cancelAllWorkByTag(WORKER_TAG);
+        WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork(WORKER_TAG);
     }
 }

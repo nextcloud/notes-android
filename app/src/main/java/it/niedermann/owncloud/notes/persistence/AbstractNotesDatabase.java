@@ -274,6 +274,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9'");
             CapabilitiesWorker.update(context);
         }
+
+        // TODO next db upgrade
+//        WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("it.niedermann.owncloud.notes.persistence.SyncWorker");
+//        WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("SyncWorker");
     }
 
     @Override
