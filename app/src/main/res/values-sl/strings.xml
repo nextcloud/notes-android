@@ -127,6 +127,7 @@
     <string name="simple_checkbox">Izbirno polje</string>
     <string name="unlock_notes">Odkleni zabeležke</string>
     <string name="simple_beta">Preizkusno</string>
+    <string name="could_not_copy_to_clipboard">Predmeta ni mogoče kopirati v odložišče</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>

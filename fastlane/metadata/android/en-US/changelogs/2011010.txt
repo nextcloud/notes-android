@@ -1,0 +1,4 @@
+- 💡 Display some tips about how different errors can be handled instead of only displaying the stacktraces
+- 🔗 Increase minSdk version to 16 to match Nextcloud (which is a requirement)
+- 🐞 Fix TokenMismatchException when deleting and readding an account
+- 🌎 Language updates

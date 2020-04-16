@@ -50,9 +50,11 @@
 
     <!-- Error -->
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
+    <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_json">Je na serveri aktivovaná aplikácia Notes?</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
     <string name="error_files_app">Nainštalovali ste aplikáciu súbory?</string>
+    <string name="error_token_mismatch">Nedá sa spojiť s aplikáciou Súbory</string>
     <string name="error_insufficient_storage">Serverové úložisko je plné</string>
     <string name="error_unknown">Vyskytla sa neznáma chyba</string>
 
@@ -127,6 +129,19 @@
     <string name="simple_checkbox">Zaškrtávacie políčko</string>
     <string name="unlock_notes">Odomknúť poznámky</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Nepodarilo sa skopírovať do schránky</string>
+    <string name="error_dialog_title">Ale nie - Čo teraz? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch">Pre vyriešenie problému skúste vyčistiť úložiská aplikácii Nextcloud a Nexcloud Poznámky.</string>
+    <string name="error_dialog_tip_files_outdated">Váš Nextcloud vyzerá byť zastaralý. Navštívte Play Store alebo F-Droid pre získanie najnovšej verzie.</string>
+    <string name="error_dialog_tip_files_force_stop">Niečo s vašim Nextcloudom nie je v poriadku. Skúste vynútiť ukončenie aplikácií Nextcloud a Nextcloud Poznámky.</string>
+    <string name="error_dialog_tip_files_delete_storage">Ak ich ukončenie nepomôže, môžete skúsiť vyčistiť úložiská oboch aplikácií.</string>
+    <string name="error_dialog_timeout_instance">Server dlho neodpovedal. Uistite sa, vami využívaná inštancia funguje dobre.</string>
+    <string name="error_dialog_timeout_toggle">Skontrolujte pripojenie k sieti. Niekedy pomôže vypnutie a znovu zapnutie mobilných dát alebo Wi-Fi.</string>
+    <string name="error_dialog_check_server">Odpoveď servera nebola správna. Skontrolujte, či máte prístup k svojím poznámkam pomocou webového rozhrania.</string>
+    <string name="error_dialog_check_server_logs">V nastavení vášho Nextcloudu je problém. Skontrolujte súbor so záznamom udalostí na serveri.</string>
+    <string name="error_dialog_insufficient_storage">Vo vašej inštancii Nexcloudu nie je na úložisku voľné miesto. Aby bolo možné synchronizovať vaše miestne zmeny s vaším cloudom, je potrebné najprv zmazať niektoré súbory.</string>
+    <string name="error_dialog_we_need_info">Aby sme vám pomohli, potrebujeme následovné technické informácie:</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>

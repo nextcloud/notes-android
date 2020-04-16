@@ -127,6 +127,7 @@
     <string name="simple_checkbox">Casilla de verificación</string>
     <string name="unlock_notes">Desbloquear notas</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">No se puede copiar al portapapeles</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>

@@ -127,6 +127,7 @@
     <string name="simple_checkbox">复选框</string>
     <string name="unlock_notes">解锁笔记</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">无法复制到剪贴板</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>
