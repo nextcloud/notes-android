@@ -20,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
@@ -410,6 +411,9 @@ public class NoteServerSyncHelper {
                         success = false;
                     }
                 } catch (Exception e) {
+                    if (e instanceof TokenMismatchException) {
+                        NotesClient.invalidateAPICache(ssoAccount);
+                    }
                     exceptions.add(e);
                     success = false;
                 }
@@ -470,6 +474,9 @@ public class NoteServerSyncHelper {
                     return false;
                 }
             } catch (Exception e) {
+                if (e instanceof TokenMismatchException) {
+                    NotesClient.invalidateAPICache(ssoAccount);
+                }
                 exceptions.add(e);
                 return false;
             }
