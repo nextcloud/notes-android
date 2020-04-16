@@ -47,4 +47,36 @@ public class SSOClient {
             return nextcloudAPI;
         }
     }
+
+    /**
+     * Invalidates thes API cache for the given ssoAccount
+     *
+     * @param ssoAccount the ssoAccount for which the API cache should be cleared.
+     */
+    public static void invalidateAPICache(@NonNull SingleSignOnAccount ssoAccount) {
+        Log.v(TAG, "Invalidating API cache for " + ssoAccount.name);
+        if (mNextcloudAPIs.containsKey(ssoAccount.name)) {
+            final NextcloudAPI nextcloudAPI = mNextcloudAPIs.get(ssoAccount.name);
+            if (nextcloudAPI != null) {
+                nextcloudAPI.stop();
+            }
+            mNextcloudAPIs.remove(ssoAccount.name);
+        }
+    }
+
+    /**
+     * Invalidates the whole API cache for all accounts
+     */
+    public static void invalidateAPICache() {
+        for (String key : mNextcloudAPIs.keySet()) {
+            Log.v(TAG, "Invalidating API cache for " + key);
+            if (mNextcloudAPIs.containsKey(key)) {
+                final NextcloudAPI nextcloudAPI = mNextcloudAPIs.get(key);
+                if (nextcloudAPI != null) {
+                    nextcloudAPI.stop();
+                }
+                mNextcloudAPIs.remove(key);
+            }
+        }
+    }
 }

@@ -810,10 +810,10 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
 
         try {
-            NotesClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(getContext(), localAccount.getAccountName()));
+            SSOClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(getContext(), localAccount.getAccountName()));
         } catch (NextcloudFilesAppAccountNotFoundException e) {
             e.printStackTrace();
-            NotesClient.invalidateAPICache();
+            SSOClient.invalidateAPICache();
         }
 
         final int deletedNotes = db.delete(table_notes, key_account_id + " = ?", new String[]{String.valueOf(localAccount.getId())});
