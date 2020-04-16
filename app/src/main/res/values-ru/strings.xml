@@ -127,6 +127,7 @@
     <string name="simple_checkbox">Флажок</string>
     <string name="unlock_notes">Разблокировать заметки</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Не удалось скопировать в буфер обмена.</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>

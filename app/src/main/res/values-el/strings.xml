@@ -50,9 +50,11 @@
 
     <!-- Error -->
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
+    <string name="error_synchronization">Αποτυχία συγχρονισμού</string>
     <string name="error_json">Είναι ενεργοποιημένη η εφαρμογή Σημειώσεων στον διακομιστή;</string>
     <string name="error_no_network">Δεν υπάρχει σύνδεση στο δίκτυο</string>
     <string name="error_files_app">Εγκαταστάθηκε η εφαρμογή αρχείων?</string>
+    <string name="error_token_mismatch">Δεν μπορεί να γίνει σύνδεση με τα αρχεία της εφαρμογής</string>
     <string name="error_insufficient_storage">Ο αποθηκευτικός χώρος του διακομιστή γέμισε.</string>
     <string name="error_unknown">Προέκυψε άγνωστο σφάλμα.</string>
 
@@ -127,6 +129,19 @@
     <string name="simple_checkbox">Πλαίσιο ελέγχου</string>
     <string name="unlock_notes">Ξεκλείδωμα σημειώσεων</string>
     <string name="simple_beta">Δοκιμαστικό</string>
+    <string name="could_not_copy_to_clipboard">Δεν μπορεί να αντιγραφή στο πρόχειρο</string>
+    <string name="error_dialog_title">Ωχ όχι - Τώρα τί; 🙁</string>
+    <string name="error_dialog_tip_token_mismatch">Παρακαλούμε εκκαθαρίστε το χώρο αποθήκευσης εφαρμογών: του Nextcloud και του Nextcloud Σημειώσεις για επίλυση του σφάλματος.</string>
+    <string name="error_dialog_tip_files_outdated">Η εφαρμογή Nextcloud δεν είναι ενημερωμένη. Παρακαλούμε επισκεφθείτε το Play Store ή το F-Groid για λήψη της τελευταίας έκδοσης.</string>
+    <string name="error_dialog_tip_files_force_stop">Κάτι φαίνεται να πάει στραβά με την εφαρμογή Nextcloud. Προσπαθήστε να τερματίσετε την εφαρμογή Nextcloud και την εφαρμογή Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Εάν ο τερματισμός δεν βοηθήσει, μπορείτε να εκκαθαρίσετε τον αποθηκευτικό χώρο και των δύο εφαρμογών.</string>
+    <string name="error_dialog_timeout_instance">Δεν υπήρχε απάντηση από τον διακομιστή σας. Βεβαιωθείτε ότι η σύνδεσή σας λειτουργεί κανονικά.</string>
+    <string name="error_dialog_timeout_toggle">Ελέγξτε τη σύνδεση δικτύου σας. Κάποιες φορές η εναλλαγή δεδομένων κινητής τηλεφωνίας ή Wi-Fi μπορεί να βοηθήσει.</string>
+    <string name="error_dialog_check_server">Η απάντηση του διακομιστή σας δεν ήταν σωστή. Ελέγξτε αν μπορείτε να αποκτήσετε πρόσβαση στις σημειώσεις σας μέσω του περιηγητή σας.</string>
+    <string name="error_dialog_check_server_logs">Υπάρχει ένα πρόβλημα με τη ρύθμιση Nextcloud. Ελέγξτε τα αρχεία καταγραφής του διακομιστή.</string>
+    <string name="error_dialog_insufficient_storage">Δεν υπάρχει επαρκής χώρος αποθήκευσης στο Nextcloud. Διαγράψτε ορισμένα αρχεία για να συγχρονίσετε τις αλλαγές σας.</string>
+    <string name="error_dialog_we_need_info">Χρειαζόμαστε τις ακόλουθες τεχνικές πληροφορίες για να σας βοηθήσουμε:</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Άνοιγμα σε λειτουργία τροποποίησης</item>
