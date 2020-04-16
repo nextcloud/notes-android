@@ -424,7 +424,7 @@ public class NoteServerSyncHelper {
                     }
                 } catch (Exception e) {
                     if (e instanceof TokenMismatchException) {
-                        NotesClient.invalidateAPICache(ssoAccount);
+                        SSOClient.invalidateAPICache(ssoAccount);
                     }
                     exceptions.add(e);
                     success = false;
@@ -498,7 +498,7 @@ public class NoteServerSyncHelper {
                 }
             } catch (Exception e) {
                 if (e instanceof TokenMismatchException) {
-                    NotesClient.invalidateAPICache(ssoAccount);
+                    SSOClient.invalidateAPICache(ssoAccount);
                 }
                 exceptions.add(e);
                 return false;
