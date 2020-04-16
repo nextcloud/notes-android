@@ -69,7 +69,9 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
 
         for (Throwable t : throwables) {
             if (t instanceof TokenMismatchException) {
-                adapter.add(R.string.error_dialog_tip_token_mismatch);
+                adapter.add(R.string.error_dialog_tip_token_mismatch_retry);
+                adapter.add(R.string.error_dialog_tip_token_mismatch_clear_storage);
+                adapter.add(R.string.error_dialog_tip_clear_storage);
             } else if (t instanceof NextcloudFilesAppNotSupportedException) {
                 adapter.add(R.string.error_dialog_tip_files_outdated);
             } else if (t instanceof NextcloudApiNotRespondingException) {
