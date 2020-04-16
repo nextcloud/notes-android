@@ -127,6 +127,7 @@
     <string name="simple_checkbox">Kontrol laukia</string>
     <string name="unlock_notes">Desblokeatzearen oharrak</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Ezin izan da arbelera kopiatu</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>

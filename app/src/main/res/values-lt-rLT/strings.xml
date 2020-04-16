@@ -53,6 +53,7 @@
     <string name="error_json">Ar Užrašų programėlė yra aktyvuota serveryje?</string>
     <string name="error_no_network">Nėra tinklo ryšio</string>
     <string name="error_files_app">Ar esate įdiegę failų programėlę?</string>
+    <string name="error_token_mismatch">Nepavyksta prisijungti prie failų programėlės.</string>
     <string name="error_insufficient_storage">Jūsų serverio saugykla yra pilna.</string>
     <string name="error_unknown">Įvyko nežinoma klaida.</string>
 
@@ -126,6 +127,10 @@
     <string name="add_category">Pridėti %1$s</string>
     <string name="simple_checkbox">Žymimasis langelis</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Nepavyko nukopijuoti į iškarpinę</string>
+    <string name="error_dialog_title">O, ne - Kas dabar? 🙁</string>
+    <string name="error_dialog_we_need_info">Norint jums padėti, mums reikia techninės informacijos:</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>

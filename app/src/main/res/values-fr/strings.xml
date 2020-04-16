@@ -50,6 +50,7 @@
 
     <!-- Error -->
     <string name="error_sync">Échec de synchronisation : %1$s</string>
+    <string name="error_synchronization">Échec de synchronisation</string>
     <string name="error_json">L\'application Notes est-elle activée sur le serveur ?</string>
     <string name="error_no_network">Aucune connexion réseau</string>
     <string name="error_files_app">Avez-vous installé l\'application Fichiers ?</string>
@@ -127,6 +128,8 @@
     <string name="simple_checkbox">Case à cocher</string>
     <string name="unlock_notes">Déverrouiller les notes</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Impossible de copier dans le presse-papiers</string>
+    <string name="error_dialog_tip_files_outdated">Votre application Nextcloud semble ancienne. Veuillez visiter le Play Store ou F-Droid pour installer la dernière version.</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ouvrir en mode édition</item>
