@@ -261,7 +261,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                 selectAccount(localAccount.getAccountName());
             });
             v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
-                db.deleteAccount(localAccount.getId());
+                db.deleteAccount(localAccount);
                 if (localAccount.getId() == this.localAccount.getId()) {
                     List<LocalAccount> remainingAccounts = db.getAccounts();
                     if (remainingAccounts.size() > 0) {
