@@ -127,6 +127,7 @@
     <string name="simple_checkbox">Kryssruta</string>
     <string name="unlock_notes">Lås upp anteckningar</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Kunde inte kopiera till urklipp</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>

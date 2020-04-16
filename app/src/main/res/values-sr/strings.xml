@@ -127,6 +127,7 @@
     <string name="simple_checkbox">Штиклирање</string>
     <string name="unlock_notes">Откључај белешке</string>
     <string name="simple_beta">Бета</string>
+    <string name="could_not_copy_to_clipboard">Не могу да копирам у оставу</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>

@@ -128,6 +128,7 @@
     <string name="simple_checkbox">Aanvinkvakje</string>
     <string name="unlock_notes">Ontgrendel notities</string>
     <string name="simple_beta">Bèta</string>
+    <string name="could_not_copy_to_clipboard">Kon niet kopiëren naar het klembord</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wbewerkmodus</item>

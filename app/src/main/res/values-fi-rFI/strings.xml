@@ -117,6 +117,7 @@
     <string name="add_category">Lisää %1$s</string>
     <string name="simple_checkbox">Valintaruutu</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Ei voitu kopioida leikepöydälle</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>

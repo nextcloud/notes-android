@@ -50,9 +50,11 @@
 
     <!-- Error -->
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
+    <string name="error_synchronization">Synchronizacja nie powiodła się</string>
     <string name="error_json">Czy aplikacja Notes jest aktywowana na serwerze?</string>
     <string name="error_no_network">Brak połączenia sieciowego</string>
     <string name="error_files_app">Czy masz zainstalowaną aplikację plików?</string>
+    <string name="error_token_mismatch">Nie można połączyć się z aplikacją plików.</string>
     <string name="error_insufficient_storage">Pamięć serwera jest pełna.</string>
     <string name="error_unknown">Wystąpił nieznany błąd.</string>
 
@@ -127,6 +129,19 @@
     <string name="simple_checkbox">Pole checkbox</string>
     <string name="unlock_notes">Odblokuj notatki</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Nie można skopiować do schowka</string>
+    <string name="error_dialog_title">O nie - co teraz? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch">Spróbuj wyczyścić pamięć obu aplikacji: Nextcloud i Nextcloud Notes, aby rozwiązać ten problem.</string>
+    <string name="error_dialog_tip_files_outdated">Twoja aplikacja Nextcloud wydaje się, że jest nieaktualna. Odwiedź Sklep Play lub F-Droid, aby pobrać najnowszą wersję.</string>
+    <string name="error_dialog_tip_files_force_stop">Wydaje się, że coś jest nie tak z Twoją aplikacją Nextcloud. Spróbuj wymusić zatrzymanie aplikacji Nextcloud i Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Jeśli nie pomoże ich zatrzymanie, możesz spróbować wyczyścić pamięć obu aplikacji.</string>
+    <string name="error_dialog_timeout_instance">W określonym czasie nie było odpowiedzi z Twojego serwera. Upewnij się, że instancja działa poprawnie.</string>
+    <string name="error_dialog_timeout_toggle">Sprawdź połączenie sieciowe. Czasami może pomóc wyłączenie i ponowne włączenie połączenia danych mobilnych lub Wi-Fi.</string>
+    <string name="error_dialog_check_server">Odpowiedź Twojego serwera była nieprawidłowa. Sprawdź, czy możesz uzyskać dostęp do swoich notatek za pośrednictwem interfejsu internetowego.</string>
+    <string name="error_dialog_check_server_logs">Wystąpił problem z konfiguracją Nextcloud. Zajrzyj do plików dziennika serwera.</string>
+    <string name="error_dialog_insufficient_storage">W Twojej instancji Nextcloud nie ma już wolnego miejsca. Usuń niektóre pliki, aby zsynchronizować lokalne zmiany w chmurze.</string>
+    <string name="error_dialog_we_need_info">Potrzebujemy następujących informacji technicznych, aby Ci pomóc:</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otwórz w trybie edycji</item>
