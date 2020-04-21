@@ -17,6 +17,9 @@ import androidx.appcompat.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import it.niedermann.owncloud.notes.R;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
@@ -213,18 +216,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     }
 
     private static int countOccurrences(String haystack, String needle) {
-        if (haystack == null || haystack.isEmpty() || needle == null || needle.isEmpty()) {
-            return 0;
-        }
-        int lastIndex = 0;
-        int count = 0;
+        Matcher m = Pattern.compile(needle, Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
+                .matcher(haystack);
 
-        while (lastIndex != -1) {
-            lastIndex = haystack.toLowerCase().indexOf(needle.toLowerCase(), lastIndex);
-            if (lastIndex != -1) {
-                count++;
-                lastIndex += needle.length();
-            }
+        int count = 0;
+        while (m.find()) {
+            count++;
         }
         return count;
     }
