@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
@@ -107,6 +108,10 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            private final int delay = 20; // If the search string does not change after $delay ms, then the search task starts.
+            private DelayQueryRunnable delayQueryTask;
+            private Handler handler = new Handler();
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 currentOccurrence++;
@@ -116,6 +121,11 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                queryWithHandler(newText);
+                return true;
+            }
+
+            private void queryMatch(String newText) {
                 searchQuery = newText;
                 occurrenceCount = countOccurrences(getContent(), searchQuery);
                 if (occurrenceCount > 1) {
@@ -126,7 +136,36 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 currentOccurrence = 1;
                 jumpToOccurrence();
                 colorWithText(searchQuery, currentOccurrence);
-                return true;
+            }
+
+            private void queryWithHandler(String newText) {
+                if (delayQueryTask != null) {
+                    delayQueryTask.cancel();
+                    handler.removeCallbacksAndMessages(null);
+                }
+                delayQueryTask = new DelayQueryRunnable(newText);
+                handler.postDelayed(delayQueryTask, delay);
+            }
+
+            class DelayQueryRunnable implements Runnable {
+                String mText;
+                private boolean canceled = false;
+
+                public DelayQueryRunnable(String text) {
+                    this.mText = text;
+                }
+
+                @Override
+                public void run() {
+                    if (canceled) {
+                        return;
+                    }
+                    queryMatch(mText);
+                }
+
+                public void cancel() {
+                    canceled = true;
+                }
             }
         });
     }
