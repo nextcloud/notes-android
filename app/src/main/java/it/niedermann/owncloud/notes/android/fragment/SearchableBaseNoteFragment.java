@@ -216,6 +216,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     }
 
     private static int countOccurrences(String haystack, String needle) {
+        if (haystack == null || haystack.isEmpty() || needle == null || needle.isEmpty()) {
+            return 0;
+        }
         Matcher m = Pattern.compile(needle, Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
                 .matcher(haystack);
 
