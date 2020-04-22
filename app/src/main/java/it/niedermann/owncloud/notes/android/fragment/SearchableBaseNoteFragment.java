@@ -33,6 +33,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private int occurrenceCount = 0;
     private SearchView searchView;
     private String searchQuery = null;
+    private final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -108,7 +109,6 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            private final int delay = 20; // If the search string does not change after $delay ms, then the search task starts.
             private DelayQueryRunnable delayQueryTask;
             private Handler handler = new Handler();
 
@@ -144,7 +144,8 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                     handler.removeCallbacksAndMessages(null);
                 }
                 delayQueryTask = new DelayQueryRunnable(newText);
-                handler.postDelayed(delayQueryTask, delay);
+                // If there is only one char in the search pattern, we should start the search immediately.
+                handler.postDelayed(delayQueryTask, newText.length() > 1 ? delay : 0);
             }
 
             class DelayQueryRunnable implements Runnable {
