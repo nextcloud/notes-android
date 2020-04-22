@@ -32,16 +32,12 @@ public class ApiVersion implements Comparable<ApiVersion> {
         return minor;
     }
 
-    public boolean isGreaterOrEqualTo(ApiVersion v) {
-        return compareTo(v) >= 0;
-    }
-
     public String getOriginalVersion() {
         return originalVersion;
     }
 
     public static ApiVersion of(String versionString) {
-        int major = 0, minor = 0, micro = 0;
+        int major = 0, minor = 0;
         if (versionString != null) {
             String[] split = versionString.split("\\.");
             if (split.length > 0) {
@@ -64,19 +60,15 @@ public class ApiVersion implements Comparable<ApiVersion> {
 
     /**
      * @param compare another version object
-     * @return -1 if the compared version is <strong>higher</strong> than the current version
-     * 0 if the compared version is equal to the current version
-     * 1 if the compared version is <strong>lower</strong> than the current version
+     * @return -1 if the compared major version is <strong>higher</strong> than the current major version
+     * 0 if the compared major version is equal to the current major version
+     * 1 if the compared major version is <strong>lower</strong> than the current major version
      */
     @Override
     public int compareTo(ApiVersion compare) {
         if (compare.getMajor() > getMajor()) {
             return -1;
         } else if (compare.getMajor() < getMajor()) {
-            return 1;
-        } else if (compare.getMinor() > getMinor()) {
-            return -1;
-        } else if (compare.getMinor() < getMinor()) {
             return 1;
         }
         return 0;

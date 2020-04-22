@@ -8,9 +8,9 @@ import androidx.annotation.Nullable;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.persistence.NotesClient;
@@ -87,12 +87,12 @@ public class LocalAccount {
     public void setPreferredApiVersion(@Nullable String availableApiVersions) {
         // TODO move this logic to NotesClient?
         try {
-            if(availableApiVersions == null) {
+            if (availableApiVersions == null) {
                 this.preferredApiVersion = null;
                 return;
             }
             JSONArray versionsArray = new JSONArray(availableApiVersions);
-            Collection<ApiVersion> supportedApiVersions = new ArrayList<>(versionsArray.length());
+            Collection<ApiVersion> supportedApiVersions = new HashSet<>(versionsArray.length());
             for (int i = 0; i < versionsArray.length(); i++) {
                 ApiVersion parsedApiVersion = ApiVersion.of(versionsArray.getString(i));
                 for (ApiVersion temp : NotesClient.SUPPORTED_API_VERSIONS) {
