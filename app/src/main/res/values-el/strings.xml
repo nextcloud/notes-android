@@ -131,7 +131,9 @@
     <string name="simple_beta">Δοκιμαστικό</string>
     <string name="could_not_copy_to_clipboard">Δεν μπορεί να αντιγραφή στο πρόχειρο</string>
     <string name="error_dialog_title">Ωχ όχι - Τώρα τί; 🙁</string>
-    <string name="error_dialog_tip_token_mismatch">Παρακαλούμε εκκαθαρίστε το χώρο αποθήκευσης εφαρμογών: του Nextcloud και του Nextcloud Σημειώσεις για επίλυση του σφάλματος.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Δοκιμάστε τερματισμό της εφαρμογή και επανεκκίνηση. Ίσως υπάρχει λάθος σύνδεση.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Εάν το πρόβλημα παραμένει, προσπαθήστε να εκκαθαρίσετε τον χώρο αποθήκευσης και των δύο εφαρμογών: του Nextcloud και του Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Μπορείτε να εκκαθαρίσετε από τις ρυθμίσεις του Android → Εφαρμογές → Nextcloud / Nextcloud Σημειώσεις → Αποθηκευτικός χώρος → Εκκαθάριση χώρου αποθήκευσης.</string>
     <string name="error_dialog_tip_files_outdated">Η εφαρμογή Nextcloud δεν είναι ενημερωμένη. Παρακαλούμε επισκεφθείτε το Play Store ή το F-Groid για λήψη της τελευταίας έκδοσης.</string>
     <string name="error_dialog_tip_files_force_stop">Κάτι φαίνεται να πάει στραβά με την εφαρμογή Nextcloud. Προσπαθήστε να τερματίσετε την εφαρμογή Nextcloud και την εφαρμογή Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Εάν ο τερματισμός δεν βοηθήσει, μπορείτε να εκκαθαρίσετε τον αποθηκευτικό χώρο και των δύο εφαρμογών.</string>
@@ -139,7 +141,9 @@
     <string name="error_dialog_timeout_toggle">Ελέγξτε τη σύνδεση δικτύου σας. Κάποιες φορές η εναλλαγή δεδομένων κινητής τηλεφωνίας ή Wi-Fi μπορεί να βοηθήσει.</string>
     <string name="error_dialog_check_server">Η απάντηση του διακομιστή σας δεν ήταν σωστή. Ελέγξτε αν μπορείτε να αποκτήσετε πρόσβαση στις σημειώσεις σας μέσω του περιηγητή σας.</string>
     <string name="error_dialog_check_server_logs">Υπάρχει ένα πρόβλημα με τη ρύθμιση Nextcloud. Ελέγξτε τα αρχεία καταγραφής του διακομιστή.</string>
+    <string name="error_dialog_check_maintenance">Παρακαλούμε ελέγξτε το Nextcloud οτι δεν βρίσκεται σε λειτουργία συντήρησης.</string>
     <string name="error_dialog_insufficient_storage">Δεν υπάρχει επαρκής χώρος αποθήκευσης στο Nextcloud. Διαγράψτε ορισμένα αρχεία για να συγχρονίσετε τις αλλαγές σας.</string>
+    <string name="error_dialog_contact_us">Μην διστάσετε να επικοινωνήσετε μαζί μας εάν τα προβλήματα παραμένουν. Μπορείτε να βρείτε τα στοιχεία επικοινωνίας μας στην ενότητα σχετικά στην πλευρική στήλη.</string>
     <string name="error_dialog_we_need_info">Χρειαζόμαστε τις ακόλουθες τεχνικές πληροφορίες για να σας βοηθήσουμε:</string>
 
     <!-- Array: note modes -->

@@ -50,9 +50,11 @@
 
     <!-- Error -->
     <string name="error_sync">Fallo en la sincronización: %1$s</string>
+    <string name="error_synchronization">Fallo en la sincronización</string>
     <string name="error_json">¿Está la app de Notas activada en el servidor?</string>
     <string name="error_no_network">Sin conexión de red</string>
     <string name="error_files_app">¿Ha instalado los archivos de la aplicación?</string>
+    <string name="error_token_mismatch">No se puede conectar a la aplicación archivos.</string>
     <string name="error_insufficient_storage">lmacenamiento en el servidor está lleno.</string>
     <string name="error_unknown">Ha ocurrido un error desconocido.</string>
 
@@ -128,6 +130,22 @@
     <string name="unlock_notes">Desbloquear notas</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">No se puede copiar al portapapeles</string>
+    <string name="error_dialog_title">Oh no - ¿Ahora qué? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Por favor, intenta forzar el cierre de la aplicación y vuelve a abrirla. Es posible que haya habido un problema de conexión con la aplicación Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persiste, intente borrar el almacenamiento de ambas aplicaciones: Nextcloud y Nextcloud Notas para solucionar este problema.</string>
+    <string name="error_dialog_tip_clear_storage">Puede limpiar el almacenamiento abriendo los ajustes de android → Apps → Nextcloud / Nextcloud Notas → Almacenamiento → Limpiar almacenamiento.</string>
+    <string name="error_dialog_tip_files_outdated">Su aplicación Nextcloud parece que está desactualizada. Por favor visite la Play Store o F-Droid para conseguir la versión más reciente.</string>
+    <string name="error_dialog_tip_files_force_stop">Algo parece que va mal con su aplicación Nextcloud. Por favor intente forzar el paro de ambas aplicaciones, Nextcloud y Nextcloud notas.</string>
+    <string name="error_dialog_tip_files_delete_storage">Si pararlas no ayuda, puede intentar borrar el almacenamiento de ambas aplicaciones.</string>
+    <string name="error_dialog_timeout_instance">No hubo una respuesta de su servidor en un tiempo determinado. Por favor asegúrese de que su instancia está funcionando sin problemas.</string>
+    <string name="error_dialog_timeout_toggle">Compruebe su conexión de red. A veces alternando la activación de la conexión Wi-Fi o la conexión de datos a off y de nuevo a on puede ayudar.</string>
+    <string name="error_dialog_check_server">La repuesta de su servidor no fue correcta. Por favor compruebe que puede acceder a sus notas mediante la interfaz web.</string>
+    <string name="error_dialog_check_server_logs">Hay un problema con sus ajustes de Nextcloud. Por favor eche un vistazo a los archivos de registros del servidor.</string>
+    <string name="error_dialog_check_maintenance">Por favor compruebe que su intancia Nextcloud no este actualmente en modo de mantenimiento.</string>
+    <string name="error_dialog_insufficient_storage">Su instancia de Nextcloud no tiene espacio libre de almacenamiento. Por favor elimine algunos archivos para sincronizar sus cambios locales con su nube.</string>
+    <string name="error_dialog_contact_us">Por favor, no dude en contactar con nosotros si el problema persiste. Puede encontrar nuestra información de contacto en la sección acerca de en la barra lateral.</string>
+    <string name="error_dialog_we_need_info">Necesitamos la siguiente información técnica para ayudarle:</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>

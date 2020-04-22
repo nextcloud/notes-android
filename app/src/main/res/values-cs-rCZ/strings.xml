@@ -131,7 +131,9 @@
     <string name="simple_beta">Vývojové</string>
     <string name="could_not_copy_to_clipboard">Nedaří se zkopírovat do schránky</string>
     <string name="error_dialog_title">Ó ne– co teď? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch">Pro vyřešení problému, zkuste vyčistit úložiště obou aplikací: Nextcloud a Nextcloud Poznámky.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Prosím pokuste se vynutit ukončení aplikace a spusťte ji znovu. Možná se něco nepodařilo při spojení s aplikací Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Pokud problém přetrvává, zkuste problém vyřešit vyčištěním úložišť obou aplikací: Nextcloud a Nextcloud poznámky.</string>
+    <string name="error_dialog_tip_clear_storage">Úložiště je možné vymazat otevření nastavení systému android → Aplikace → Nextcloud / Nextcloud poznámky → Úložiště → Vyčistit úložiště.</string>
     <string name="error_dialog_tip_files_outdated">Zdá se, že aplikace Nextcloud, nainstalovaná na vašem zařízení, je staré verze. Přejděte prosím do Play Store nebo F-Droid a nainstalujte si nejnovější verzi.</string>
     <string name="error_dialog_tip_files_force_stop">Zdá se, že s vaší aplikací Nextcloud není něco v pořádku. Zkuste vynutit zastavení obojího – aplikace Nextcloud a Nextcloud Poznámky.</string>
     <string name="error_dialog_tip_files_delete_storage">Pokud vynucení jejich zastavení nepomůže, můžete zkusit vyčistit úložiště obou aplikací.</string>
@@ -139,7 +141,9 @@
     <string name="error_dialog_timeout_toggle">Zkontrolujte nastavení sítě. Někdy může pomoci vypnout a zase zapnout mobilní data nebo Wi-Fi.</string>
     <string name="error_dialog_check_server">Odpověď od serveru nebyla správná. Zkontrolujte, zda ke svým poznámkám můžete přistupovat přes webové rozhraní.</string>
     <string name="error_dialog_check_server_logs">Je problém s nastavením vámi využívané instance Nextcloud. Podívejte se do souborů se záznamem událostí na serveru.</string>
+    <string name="error_dialog_check_maintenance">Zkontrolujte, zda vámi využívaná instance Nextcloud právě není v tuto chvíli v režimu údržby.</string>
     <string name="error_dialog_insufficient_storage">Na vámi využívané instanci Nexcloud nezbývá žádné volné místo na úložišti. Aby bylo možné synchronizovat vaše místní změny do vámi využívaného cloudu, je třeba nejprve smazat nějaké soubory.</string>
+    <string name="error_dialog_contact_us">Pokud problémy přetrvávají, neváhejte se na nás obrátit. Kontaktní údaje naleznete v sekci „O aplikaci“ v postranním panelu.</string>
     <string name="error_dialog_we_need_info">Abychom vám mohli pomoci, potřebujeme následující technické údaje:</string>
 
     <!-- Array: note modes -->

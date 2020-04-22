@@ -50,9 +50,11 @@
 
     <!-- Error -->
     <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
+    <string name="error_synchronization">Sinkronizazioak huts egin du</string>
     <string name="error_json">Notes aplikazioa zerbitzarian aktibatuta dago?</string>
     <string name="error_no_network">Ez dago sare konexiorik</string>
     <string name="error_files_app">Files aplikazioa instalatu duzu?</string>
+    <string name="error_token_mismatch">Ezin da fitxategi aplikazioarekin konektatu.</string>
     <string name="error_insufficient_storage">Zure zerbitzariaren biltegia beteta dago.</string>
     <string name="error_unknown">Errore ezezagun bat gertatu da.</string>
 
@@ -128,6 +130,16 @@
     <string name="unlock_notes">Desblokeatzearen oharrak</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Ezin izan da arbelera kopiatu</string>
+    <string name="error_dialog_title">Oh ez - Orain zer? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Saia zaitez aplikazioa itxi eta berrabiarazten. Agian Nextcloud aplikazioarekin gaizki konektatzea gertatu da.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Arazoak jarraitzen badu, saiatu bi aplikazioen biltegiak garbitzen: Nextcloud eta Nextcloud Oharrak aplikazioen biltegiak.</string>
+    <string name="error_dialog_tip_clear_storage">Biltegiak garbitzeko androiden  ezarpenak → Aplikazioak → Nextcloud / Nextcloud Oharrak → Biltegia → Garbitu biltegia.</string>
+    <string name="error_dialog_tip_files_outdated">Daukazun Nextcloud aplikazioa zaharkituta dagoela dirudi. Zoaz Play Store edo F-Droidera azken bertsioa lortzeko.</string>
+    <string name="error_dialog_tip_files_force_stop">Daukazun Nextcloud aplikazioan zerbait gaizki dabilela dirudi.  Saia zaitez Nextcloud aplikazioa eta Nextcloud Oharrak, biak, geldiarazten. </string>
+    <string name="error_dialog_tip_files_delete_storage">Geldiarazteak ez badu arazoa konpontzen, bi biltegiak garbitzen saia zaitezke.</string>
+    <string name="error_dialog_timeout_instance">Ez da zerbitzariaren erantzunik jaso emandako denboran. Ziurta ezazu zure instantzia ondo dabilela.</string>
+    <string name="error_dialog_timeout_toggle">Egiaztatu sarera konexiorik duzun. Batzuetan, mugikorreko datuak edo Wi-Fia kendu eta berriro jartzeak laguntzen du.</string>
+    <string name="error_dialog_check_server">Zerbitzariaren erantzuna ez da zuzena izan. Egiazta ezazu ea zure oharrak atzitu ditzakezun web interfazearen bidez.</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>
