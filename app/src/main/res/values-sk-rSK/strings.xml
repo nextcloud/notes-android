@@ -131,7 +131,9 @@
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Nepodarilo sa skopírovať do schránky</string>
     <string name="error_dialog_title">Ale nie - Čo teraz? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch">Pre vyriešenie problému skúste vyčistiť úložiská aplikácii Nextcloud a Nexcloud Poznámky.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Skúste vyinútiť zatvorenie aplikácie a znova ju reštartovať. Možno došlo k chybnému pripojeniu k aplikácii Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Ak problém pretrváva, skúste vyčistiť úložisko oboch aplikácií: Nextcloud a Nextcloud Poznámky.</string>
+    <string name="error_dialog_tip_clear_storage">Úložisko môžete vyčistiť otvorením nastavení systému Android → Aplikácie → Nextcloud/Nextcloud Poznámky → Úložisko → Vyčistiť úložisko.</string>
     <string name="error_dialog_tip_files_outdated">Váš Nextcloud vyzerá byť zastaralý. Navštívte Play Store alebo F-Droid pre získanie najnovšej verzie.</string>
     <string name="error_dialog_tip_files_force_stop">Niečo s vašim Nextcloudom nie je v poriadku. Skúste vynútiť ukončenie aplikácií Nextcloud a Nextcloud Poznámky.</string>
     <string name="error_dialog_tip_files_delete_storage">Ak ich ukončenie nepomôže, môžete skúsiť vyčistiť úložiská oboch aplikácií.</string>
@@ -139,7 +141,9 @@
     <string name="error_dialog_timeout_toggle">Skontrolujte pripojenie k sieti. Niekedy pomôže vypnutie a znovu zapnutie mobilných dát alebo Wi-Fi.</string>
     <string name="error_dialog_check_server">Odpoveď servera nebola správna. Skontrolujte, či máte prístup k svojím poznámkam pomocou webového rozhrania.</string>
     <string name="error_dialog_check_server_logs">V nastavení vášho Nextcloudu je problém. Skontrolujte súbor so záznamom udalostí na serveri.</string>
+    <string name="error_dialog_check_maintenance">Prosím skontrolujte, či vaša inštancia Nextcloudu nie je práve v móde údržby.</string>
     <string name="error_dialog_insufficient_storage">Vo vašej inštancii Nexcloudu nie je na úložisku voľné miesto. Aby bolo možné synchronizovať vaše miestne zmeny s vaším cloudom, je potrebné najprv zmazať niektoré súbory.</string>
+    <string name="error_dialog_contact_us">Ak problémy pretrvávajú, neváhajte nás kontaktovať. Kontaktné informácie nájdete v časti \"O nás\" v bočnom paneli.</string>
     <string name="error_dialog_we_need_info">Aby sme vám pomohli, potrebujeme následovné technické informácie:</string>
 
     <!-- Array: note modes -->

@@ -131,7 +131,9 @@
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Non foi posíbel copiar ao portapapeis</string>
     <string name="error_dialog_title">Vaites, e agora que? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch">Tente limpar o almacenamento de ambas as aplis: Nextcloud e Nextcloud Notes para resolver este problema.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Probe a forzar o peche da apli e reiniciala de novo. Pode haber unha conexión incorrecta coa apli Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema continúa, tente limpar o almacenamento de ambas as aplis: Nextcloud e Nextcloud Notas para resolver este problema.</string>
+    <string name="error_dialog_tip_clear_storage">Pode limpar o almacenamento abrindo axustes de Android → Aplicacións → Nextcloud / Nextcloud Notas → Almacenamento → Limpar o almacenamento.</string>
     <string name="error_dialog_tip_files_outdated">A súa apli Nextcloud semella estar desactualizada. Visite Play Store ou F-Droid para obter a última versión.</string>
     <string name="error_dialog_tip_files_force_stop">Semella que algo está mal na súa apli Nextcloud. Tente forzar a parar ambas, a apli Nextcloud e a apli Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Se detelos pola forza non axuda, pode tentar limpar o almacenamento de ambas as aplicacións.</string>
@@ -139,7 +141,9 @@
     <string name="error_dialog_timeout_toggle">Comprobe a súa conexión de rede. Ás veces apagar e volver acender os datos móbiles ou a Wi-Fi pode axudar.</string>
     <string name="error_dialog_check_server">A resposta do servidor non foi correcta. Comprobe se pode acceder ás súas notas a través de interface web.</string>
     <string name="error_dialog_check_server_logs">Hai un problema coa configuración do Nextcloud. Bótelle un ollo aos ficheiros de rexistro do servidor.</string>
+    <string name="error_dialog_check_maintenance">Comprobe que a súa instancia Nextcloud non se atope en modo de mantemento.</string>
     <string name="error_dialog_insufficient_storage">A súa instancia Nextcloud non dispón de espazo de almacenamento libre. Elimine algúns ficheiros para sincronizar os seus cambios locais na súa nube.</string>
+    <string name="error_dialog_contact_us">Non dubide en poñerse en contacto con nós se os problemas persisten. Pode atopar a nosa información de contacto na sección sobre na barra lateral.</string>
     <string name="error_dialog_we_need_info">Necesitamos a seguinte información técnica para axudarlle:</string>
 
     <!-- Array: note modes -->
