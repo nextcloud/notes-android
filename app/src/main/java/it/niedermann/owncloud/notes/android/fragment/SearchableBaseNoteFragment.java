@@ -115,9 +115,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                colorWithText(query, currentOccurrence);
                 currentOccurrence++;
                 jumpToOccurrence();
+                colorWithText(query, currentOccurrence);
                 return true;
             }
 
