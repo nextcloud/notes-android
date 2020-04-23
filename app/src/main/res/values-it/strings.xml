@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Note</string>
-    <string name="app_name_long">Note di Nextcloud</string>
+    <string name="app_name_long">Nextcloud Notes</string>
     <string name="label_all_notes">Tutte le note</string>
     <string name="label_favorites">Preferite</string>
     <string name="action_create">Nuova nota</string>
@@ -87,7 +87,7 @@
     <string name="widget_single_note_title">Nota singola</string>
     <string name="widget_single_note_placeholder_tv">Nota non trovata</string>
     <string name="widget_create_note">Crea nota</string>
-    <string name="widget_not_logged_in">Accedi a Note prima di utilizzare questo widget</string>
+    <string name="widget_not_logged_in">Accedi a Notes prima di utilizzare questo widget</string>
     <string name="widget_entry_fav_contentDescription">L\'icona della stella è utilizzata per marcare un elemento come preferito</string>
     <string name="widget_app_launcher_contentDescription">Avvia l\'applicazione</string>
 
@@ -131,7 +131,9 @@
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Impossibile copiare negli appunti</string>
     <string name="error_dialog_title">Oh no - Cosa succede adesso? 🙁</string>
-    <string name="error_dialog_tip_token_mismatch">Prova a cancellare l\'archiviazione in entrambe le applicazioni: Nextcloud e Nextcloud Notes per risolvere il problema.</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Prova a forzare la chiusura dell\'applicazione e riavviarla nuovamente. Potrebbe essersi verificato un problema di connessione all\'applicazione Nextcloud. </string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Se il problema persiste, prova a cancellare l\'archiviazione di entrambe le applicazioni Nextcloud e Nextcloud Notes per risolver il problema.</string>
+    <string name="error_dialog_tip_clear_storage">Puoi a cancellare l\'archiviazione aprendo le impostazioni di Android → App → Nextcloud / Nextcloud Notes → Archiviazione → Cancella archiviazione</string>
     <string name="error_dialog_tip_files_outdated">La tua applicazioni di Nextcloud sembra essere datata. Visita il Play Store o F-Droid per ottenere l\'ultima versione.</string>
     <string name="error_dialog_tip_files_force_stop">Sembra che ci sia un problema con la tua applicazione di Nextcloud. Prova a fermare entrambe le applicazioni Nextcloud e Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Se fermarle non aiuta, puoi provare a cancellare l\'archiviazione di entrambe le applicazioni.</string>
@@ -139,7 +141,9 @@
     <string name="error_dialog_timeout_toggle">Controlla la tua connessione di rete. A volte disattivare e riattivare i dati mobili o Wi-Fi può aiutare.</string>
     <string name="error_dialog_check_server">La risposta del tuo server non era corretta. Controlla se puoi accedere alle tue note tramite l\'interfaccia web.</string>
     <string name="error_dialog_check_server_logs">Si è verificato un problema con la tua installazione di Nextcloud. Controlla nei file di registro del server.</string>
+    <string name="error_dialog_check_maintenance">Controlla che la tua istanza di Nextcloud non sia attualmente in manutenzione.</string>
     <string name="error_dialog_insufficient_storage">La tua istanza di Nextcloud non ha più spazio libero. Elimina alcuni file per sincronizzare le modifiche locali con il tuo cloud.</string>
+    <string name="error_dialog_contact_us">Non esitare a contattarci se il problema persiste. Puoi trovare le nostre informazioni di contatto nella sezione Informazioni della barra laterale.</string>
     <string name="error_dialog_we_need_info">Ci servono le seguenti informazioni tecniche per aiutarti:</string>
 
     <!-- Array: note modes -->

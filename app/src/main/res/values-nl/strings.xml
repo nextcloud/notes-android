@@ -51,9 +51,11 @@
 
     <!-- Error -->
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
+    <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_json">is de Notities app op de server geactiveerd?</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
     <string name="error_files_app">Heb je de Bestanden app geïnstalleerd?</string>
+    <string name="error_token_mismatch">Kan niet verbinden met de bestanden-app</string>
     <string name="error_insufficient_storage">De serveropslag is vol.</string>
     <string name="error_unknown">Er trad een onbekende fout op.</string>
 
@@ -129,6 +131,21 @@
     <string name="unlock_notes">Ontgrendel notities</string>
     <string name="simple_beta">Bèta</string>
     <string name="could_not_copy_to_clipboard">Kon niet kopiëren naar het klembord</string>
+    <string name="error_dialog_title">Oh nee - wat nu? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Als het probleem blijft aanhouden, probeer dan de gegevensopslag van beide apps te wissen: van Nextcloud én van Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Je kan de gegevensopslag wissen door in Android te gaan naar Instellingen → Apps → Nextcloud / Nextcloud Notes → Geheugen → Ruimte beheren → Gegevens verwijderen</string>
+    <string name="error_dialog_tip_files_outdated">Je Nextcloud app lijkt te zijn verouderd. Download alstublieft de nieuwste versie in de Google Play Store of in F-Droid.</string>
+    <string name="error_dialog_tip_files_force_stop">Er lijkt iets mis te zijn met je Nextcloud app. Probeer alstublieft de apps geforceerd af te sluiten, zowel de Nextcloud app als de Nextcloud Notes app.</string>
+    <string name="error_dialog_tip_files_delete_storage">Als geforceerd afsluiten niet helpt, probeer dan van beide apps de gegevensopslag te wissen.</string>
+    <string name="error_dialog_timeout_instance">Er was binnen de gestelde tijd geen reactie ontvangen van je server. Controleer alstublieft of je Nextcloud-instantie wel goed loopt.</string>
+    <string name="error_dialog_timeout_toggle">Controleer je netwerk verbinding. Het kan ook helpen de dataverbinding of WIFI uit en weer aan te zetten.</string>
+    <string name="error_dialog_check_server">Je server gaf een onjuiste reactie. Controleer alstublieft of de Notes app in de web-interface wel goed werkt.</string>
+    <string name="error_dialog_check_server_logs">Er is iets mis met je Nextcloud instellingen. Controleer alstublieft de server log bestanden.</string>
+    <string name="error_dialog_check_maintenance">Controleer alstublieft of je Nextcloud instantie momenteel niet in onderhouds-modus draait.</string>
+    <string name="error_dialog_insufficient_storage">Je Nextcloud instantie heeft geen vrije ruimte meer. Verwijder alstublieft enkele bestanden om je lokale gegevens te kunnen synchroniseren.</string>
+    <string name="error_dialog_contact_us">Schroom alstublieft niet om contact met ons op te nemen als het probleem blijft aanhouden. Onze contactgegevens zijn te vinden in de About sectie in de zijbalk.</string>
+    <string name="error_dialog_we_need_info">We hebben de volgende technische informatie nodig om je te kunnen helpen: </string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wbewerkmodus</item>

@@ -125,6 +125,7 @@
     <string name="no_category">Nincs kategória</string>
     <string name="add_category">%1$s hozzáadása</string>
     <string name="simple_checkbox">Jelölőmező</string>
+    <string name="simple_beta">Béta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>
