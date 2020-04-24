@@ -769,7 +769,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 for (int i = 0; i < apiVersions.length(); i++) {
                     ApiVersion.of(apiVersions.getString(i));
                 }
-                if (apiVersions.length() == 0) {
+                if (apiVersions.length() > 0) {
                     final SQLiteDatabase db = this.getWritableDatabase();
                     final ContentValues values = new ContentValues();
                     values.put(key_api_version, apiVersion);
