@@ -1,0 +1,2 @@
+- 🔍 Highlight doesn't change when submit is clicked in search (@mikechesterwang) (#804)
+- 🌎 Language updates
