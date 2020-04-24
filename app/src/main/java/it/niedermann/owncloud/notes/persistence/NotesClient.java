@@ -6,7 +6,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
 import com.nextcloud.android.sso.aidl.NextcloudRequest;
@@ -71,17 +70,17 @@ public abstract class NotesClient {
     public static NotesClient newInstance(@Nullable ApiVersion preferredApiVersion,
                                           @NonNull Context appContext) {
         if (preferredApiVersion == null) {
-            Log.i(TAG, "apiVersion is null, using " + NotesClient_0_2.class.getSimpleName());
-            return new NotesClient_0_2(appContext);
+            Log.i(TAG, "apiVersion is null, using " + NotesClientV02.class.getSimpleName());
+            return new NotesClientV02(appContext);
 //        } else if (preferredApiVersion.compareTo(SUPPORTED_API_VERSIONS[0]) == 0) {
 //            Log.i(TAG, "Using " + NotesClient_1_0.class.getSimpleName());
 //            return new NotesClient_1_0(appContext);
         } else if (preferredApiVersion.compareTo(SUPPORTED_API_VERSIONS[1]) == 0) {
-            Log.i(TAG, "Using " + NotesClient_0_2.class.getSimpleName());
-            return new NotesClient_0_2(appContext);
+            Log.i(TAG, "Using " + NotesClientV02.class.getSimpleName());
+            return new NotesClientV02(appContext);
         }
-        Log.w(TAG, "Unsupported API version " + preferredApiVersion + " - try using " + NotesClient_0_2.class.getSimpleName());
-        return new NotesClient_0_2(appContext);
+        Log.w(TAG, "Unsupported API version " + preferredApiVersion + " - try using " + NotesClientV02.class.getSimpleName());
+        return new NotesClientV02(appContext);
     }
 
     @SuppressWarnings("WeakerAccess")

@@ -17,11 +17,11 @@ import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
 
 @WorkerThread
-public class NotesClient_0_2 extends NotesClient {
+public class NotesClientV02 extends NotesClient {
 
     private static final String API_PATH = "/index.php/apps/notes/api/v0.2/";
 
-    NotesClient_0_2(@NonNull Context appContext) {
+    NotesClientV02(@NonNull Context appContext) {
         super(appContext);
     }
 
