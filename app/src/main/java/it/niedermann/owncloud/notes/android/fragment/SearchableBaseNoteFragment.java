@@ -102,6 +102,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
         if (prev != null) {
             prev.setOnClickListener(v -> {
+                occurrenceCount = countOccurrences(getContent(), searchView.getQuery().toString());
                 currentOccurrence--;
                 jumpToOccurrence();
                 colorWithText(searchView.getQuery().toString(), currentOccurrence);
@@ -116,6 +117,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             public boolean onQueryTextSubmit(String query) {
                 currentOccurrence++;
                 jumpToOccurrence();
+                colorWithText(query, currentOccurrence);
                 return true;
             }
 
