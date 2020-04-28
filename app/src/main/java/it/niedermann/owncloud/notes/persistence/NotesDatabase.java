@@ -67,6 +67,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     public static NotesDatabase getInstance(Context context) {
+        // TODO: Use another way to getInstance to avoid concurrency problem
         if (instance == null)
             return instance = new NotesDatabase(context);
         else
@@ -97,6 +98,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
      */
     long addNote(long accountId, CloudNote note) {
+        // TODO: The structure of note table changes. Check it and modify if necessary
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         if (note instanceof DBNote) {
@@ -225,7 +227,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         validateAccountId(accountId);
         Calendar modified = Calendar.getInstance();
         modified.setTimeInMillis(cursor.getLong(4) * 1000);
-
+        // TODO: cursor.get may throw an exception for the table changes.
         return new DBNote(
                 cursor.getLong(0),
                 cursor.getLong(1),
@@ -282,6 +284,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
+        // TODO: 这里没有细看....不知道要不要改
         validateAccountId(accountId);
         List<String> where = new ArrayList<>();
         List<String> args = new ArrayList<>();
@@ -451,6 +454,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @return changed note if differs from database, otherwise the old note.
      */
     public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
+        // TODO: This method may crash for the note table has changed.
         //debugPrintFullDB();
         DBNote newNote;
         if (newContent == null) {
@@ -493,6 +497,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
      */
     void updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
+        // TODO: This method may crash for the note table has changed.
         SQLiteDatabase db = this.getWritableDatabase();
 
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
@@ -769,4 +774,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
             throw new IllegalArgumentException("accountId must be greater than 0");
         }
     }
+
+    // TODO: Add a method to update the sorting method in category
+    // TODO: Not sure: Add more methods for category table.
+
 }
