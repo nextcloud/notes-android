@@ -92,7 +92,6 @@ public class NoteServerSyncHelper {
     // current state of the synchronization
     private final Map<String, Boolean> syncActive = new HashMap<>();
     private final Map<String, Boolean> syncScheduled = new HashMap<>();
-    private final Map<String, NotesClient> notesClients = new HashMap<>();
 
     // list of callbacks for both parts of synchronziation
     private final Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
@@ -219,16 +218,7 @@ public class NoteServerSyncHelper {
                     Log.e(TAG, LocalAccount.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
                     return;
                 }
-                // TODO should each LocalAccount have a NotesClient instance? This way we could save the Map<>
-                final NotesClient notesClient;
-                if (!notesClients.containsKey(ssoAccount.name)) {
-                    notesClients.put(ssoAccount.name, NotesClient.newInstance(localAccount.getPreferredApiVersion(), context));
-                }
-                notesClient = notesClients.get(ssoAccount.name);
-                if (notesClient == null) {
-                    Log.e(TAG, NotesClient.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
-                    return;
-                }
+                final NotesClient notesClient = NotesClient.newInstance(localAccount.getPreferredApiVersion(), context);
                 final SyncTask syncTask = new SyncTask(notesClient, localAccount, ssoAccount, onlyLocalChanges);
                 syncTask.addCallbacks(ssoAccount, callbacksPush.get(ssoAccount.name));
                 callbacksPush.put(ssoAccount.name, new ArrayList<>());
@@ -479,10 +469,6 @@ public class NoteServerSyncHelper {
                 try {
                     if (db.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
                         localAccount.setPreferredApiVersion(response.getSupportedApiVersions());
-                        if (notesClients.containsKey(ssoAccount.name)) {
-                            NotesClient.newInstance(localAccount.getPreferredApiVersion(), context);
-                            notesClients.put(ssoAccount.name, notesClient);
-                        }
                     }
                 } catch (Exception e) {
                     exceptions.add(e);
