@@ -12,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.material.textfield.TextInputLayout;
-
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.util.Notes;
@@ -107,26 +105,6 @@ public class BrandingUtil {
                         finalMainColor,
                         finalMainColor,
                         editText.getContext().getResources().getColor(R.color.fg_default)
-                }
-        ));
-    }
-
-    public static void applyBrandToTextInputLayout(@ColorInt int mainColor, @ColorInt int textColor, @NonNull TextInputLayout til) {
-        @ColorInt final int finalMainColor = getSecondaryForegroundColorDependingOnTheme(til.getContext(), mainColor);
-        til.setDefaultHintTextColor(new ColorStateList(
-                new int[][]{
-                        new int[]{android.R.attr.state_active},
-                        new int[]{android.R.attr.state_activated},
-                        new int[]{android.R.attr.state_focused},
-                        new int[]{android.R.attr.state_pressed},
-                        new int[]{}
-                },
-                new int[]{
-                        finalMainColor,
-                        finalMainColor,
-                        finalMainColor,
-                        finalMainColor,
-                        til.getContext().getResources().getColor(R.color.fg_default)
                 }
         ));
     }
