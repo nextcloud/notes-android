@@ -336,6 +336,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                     try {
                         capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
                         db.updateBrand(localAccount.getId(), capabilities);
+                        BrandingUtil.saveBrandColors(this, Color.parseColor(capabilities.getColor()), Color.parseColor(capabilities.getTextColor()));
                         db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
                         Log.i(TAG, capabilities.toString());
                     } catch (Exception e) {
