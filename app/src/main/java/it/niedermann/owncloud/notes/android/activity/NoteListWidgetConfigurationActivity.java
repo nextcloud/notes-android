@@ -81,7 +81,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
 
-        adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
+        adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
                 SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();

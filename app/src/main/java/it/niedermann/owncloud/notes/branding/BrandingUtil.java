@@ -75,8 +75,7 @@ public class BrandingUtil {
      * Since we may collide with dark theme in this area, we have to make sure that the color is visible depending on the background
      */
     @ColorInt
-    public static int
-    getSecondaryForegroundColorDependingOnTheme(@NonNull Context context, @ColorInt int mainColor) {
+    public static int getSecondaryForegroundColorDependingOnTheme(@NonNull Context context, @ColorInt int mainColor) {
         final boolean isDarkTheme = Notes.getAppTheme(context) == DarkModeSetting.DARK;
         if (isDarkTheme && !contrastRatioIsSufficient(mainColor, Color.BLACK)) {
             Log.v(TAG, "Contrast ratio between brand color " + String.format("#%06X", (0xFFFFFF & mainColor)) + " and dark theme is too low. Falling back to WHITE as brand color.");

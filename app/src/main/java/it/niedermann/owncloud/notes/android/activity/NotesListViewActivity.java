@@ -4,6 +4,9 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteConstraintException;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -68,6 +71,7 @@ import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
@@ -139,6 +143,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         activityBinding = ActivityNotesListViewBinding.bind(binding.activityNotesListView.getRoot());
 
         setContentView(binding.getRoot());
+
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
         this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         this.fabCreate = binding.activityNotesListView.fabCreate;
@@ -358,7 +363,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private void setupNavigationList(final String selectedItem) {
         itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, getString(R.string.label_all_notes), null, R.drawable.ic_access_time_grey600_24dp);
         itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, getString(R.string.label_favorites), null, R.drawable.ic_star_yellow_24dp);
-        adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
+        adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationItem item) {
                 selectItem(item, true);
@@ -433,7 +438,26 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         applyBrandToPrimaryToolbar(mainColor, textColor, activityBinding.notesListActivityActionBar);
         applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
         binding.headerViewBackground.setBackgroundColor(mainColor);
+        binding.appName.setTextColor(textColor);
+        binding.account.setTextColor(textColor);
+
+        final boolean isDarkTextColor = ColorUtil.isColorDark(textColor);
+        if (isDarkTextColor) {
+            binding.appName.setShadowLayer(2, 0.5f, 0, Color.WHITE);
+            binding.account.setShadowLayer(2, 0.5f, 0, Color.WHITE);
+        } else {
+            binding.appName.setShadowLayer(2, 0.5f, 0, Color.BLACK);
+            binding.account.setShadowLayer(2, 0.5f, 0, Color.BLACK);
+        }
+
+        final Drawable overflowDrawable = binding.accountArrow.getDrawable();
+        if (overflowDrawable != null) {
+            overflowDrawable.setColorFilter(textColor, PorterDuff.Mode.SRC_ATOP);
+            binding.accountArrow.setImageDrawable(overflowDrawable);
+        }
+
         adapter.applyBrand(mainColor, textColor);
+        adapterCategories.applyBrand(mainColor, textColor);
     }
 
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationItem>> {
@@ -526,12 +550,12 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         final NavigationItem itemSettings = new NavigationItem("settings", getString(R.string.action_settings), null, R.drawable.ic_settings_grey600_24dp);
         final NavigationItem itemAbout = new NavigationItem("about", getString(R.string.simple_about), null, R.drawable.ic_info_outline_grey600_24dp);
 
-        ArrayList<NavigationItem> itemsMenu = new ArrayList<>();
+        ArrayList<NavigationItem> itemsMenu = new ArrayList<>(3);
         itemsMenu.add(itemTrashbin);
         itemsMenu.add(itemSettings);
         itemsMenu.add(itemAbout);
 
-        NavigationAdapter adapterMenu = new NavigationAdapter(new NavigationAdapter.ClickListener() {
+        NavigationAdapter adapterMenu = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationItem item) {
                 if (itemSettings.equals(item)) {
@@ -661,7 +685,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                 return true;
             }
         });
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
