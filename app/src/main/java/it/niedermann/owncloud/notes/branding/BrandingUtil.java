@@ -2,12 +2,17 @@ package it.niedermann.owncloud.notes.branding;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.util.Log;
+import android.widget.EditText;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.preference.PreferenceManager;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
@@ -84,5 +89,45 @@ public class BrandingUtil {
         } else {
             return mainColor;
         }
+    }
+
+    public static void applyBrandToEditText(@ColorInt int mainColor, @ColorInt int textColor, @NonNull EditText editText) {
+        @ColorInt final int finalMainColor = getSecondaryForegroundColorDependingOnTheme(editText.getContext(), mainColor);
+        DrawableCompat.setTintList(editText.getBackground(), new ColorStateList(
+                new int[][]{
+                        new int[]{android.R.attr.state_active},
+                        new int[]{android.R.attr.state_activated},
+                        new int[]{android.R.attr.state_focused},
+                        new int[]{android.R.attr.state_pressed},
+                        new int[]{}
+                },
+                new int[]{
+                        finalMainColor,
+                        finalMainColor,
+                        finalMainColor,
+                        finalMainColor,
+                        editText.getContext().getResources().getColor(R.color.fg_default)
+                }
+        ));
+    }
+
+    public static void applyBrandToTextInputLayout(@ColorInt int mainColor, @ColorInt int textColor, @NonNull TextInputLayout til) {
+        @ColorInt final int finalMainColor = getSecondaryForegroundColorDependingOnTheme(til.getContext(), mainColor);
+        til.setDefaultHintTextColor(new ColorStateList(
+                new int[][]{
+                        new int[]{android.R.attr.state_active},
+                        new int[]{android.R.attr.state_activated},
+                        new int[]{android.R.attr.state_focused},
+                        new int[]{android.R.attr.state_pressed},
+                        new int[]{}
+                },
+                new int[]{
+                        finalMainColor,
+                        finalMainColor,
+                        finalMainColor,
+                        finalMainColor,
+                        til.getContext().getResources().getColor(R.color.fg_default)
+                }
+        ));
     }
 }

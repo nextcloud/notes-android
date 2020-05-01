@@ -18,9 +18,9 @@ import androidx.fragment.app.Fragment;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
@@ -43,7 +43,8 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        BrandedActivity.applyBrandToEditText(mainColor, textColor, binding.search);
+        BrandingUtil.applyBrandToEditText(mainColor, textColor, binding.search);
+        BrandingUtil.applyBrandToTextInputLayout(mainColor, textColor, binding.searchWrapper);
     }
 
     /**

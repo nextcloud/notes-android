@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -24,7 +23,6 @@ import it.niedermann.owncloud.notes.R;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
 import static android.os.Build.VERSION_CODES.M;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 
 public abstract class BrandedActivity extends AppCompatActivity implements Branded {
@@ -66,26 +64,6 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
     public static void applyBrandToFAB(@ColorInt int mainColor, @ColorInt int textColor, @NonNull FloatingActionButton fab) {
         fab.setSupportBackgroundTintList(ColorStateList.valueOf(mainColor));
         fab.setColorFilter(textColor);
-    }
-
-    public static void applyBrandToEditText(@ColorInt int mainColor, @ColorInt int textColor, @NonNull EditText editText) {
-        @ColorInt final int finalMainColor = getSecondaryForegroundColorDependingOnTheme(editText.getContext(), mainColor);
-        DrawableCompat.setTintList(editText.getBackground(), new ColorStateList(
-                new int[][]{
-                        new int[]{android.R.attr.state_active},
-                        new int[]{android.R.attr.state_activated},
-                        new int[]{android.R.attr.state_focused},
-                        new int[]{android.R.attr.state_pressed},
-                        new int[]{}
-                },
-                new int[]{
-                        finalMainColor,
-                        finalMainColor,
-                        finalMainColor,
-                        finalMainColor,
-                        editText.getContext().getResources().getColor(R.color.fg_default)
-                }
-        ));
     }
 
     @Override
