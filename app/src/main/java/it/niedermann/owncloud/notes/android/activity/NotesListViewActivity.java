@@ -329,9 +329,11 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                         Log.i(TAG, capabilities.toString());
                     } catch (Exception e) {
                         e.printStackTrace();
+                    } finally {
+                        // Even if the capabilities endpoint makes trouble, we can still try to synchronize the notes
+                        synchronize();
                     }
                 }).start();
-                synchronize();
             }
         });
 
