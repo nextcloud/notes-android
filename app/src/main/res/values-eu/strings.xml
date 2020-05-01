@@ -140,6 +140,10 @@
     <string name="error_dialog_timeout_instance">Ez da zerbitzariaren erantzunik jaso emandako denboran. Ziurta ezazu zure instantzia ondo dabilela.</string>
     <string name="error_dialog_timeout_toggle">Egiaztatu sarera konexiorik duzun. Batzuetan, mugikorreko datuak edo Wi-Fia kendu eta berriro jartzeak laguntzen du.</string>
     <string name="error_dialog_check_server">Zerbitzariaren erantzuna ez da zuzena izan. Egiazta ezazu ea zure oharrak atzitu ditzakezun web interfazearen bidez.</string>
+    <string name="error_dialog_check_server_logs">Arazo bat dago zure Nextcloud ezarpenekin. Eman begiratu bat zerbitzariko egunkari-fitxategiei.</string>
+    <string name="error_dialog_check_maintenance">Egiazta ezazu zure Nextcloud instantzia ez dagoela mantentze moduan une honetan.</string>
+    <string name="error_dialog_insufficient_storage">Zure Nextcloud instantziak ez du biltegiratze leku libre gehiagorik. Ezabatu fitxategi batzuk, aldaketa lokalak hodeiarekin sinkroniza daitezen.</string>
+    <string name="error_dialog_contact_us">Mesedez, arazoak jarraitzen baldin badu ez izan zalantzarik gurekin harremanetan jartzeko. Alboko barran aurki dezakezu gurekin kontaktatzeko informazioa.</string>
     <string name="error_dialog_we_need_info">Zuri laguntzeko hurrengo informazio teknikoa behar dugu:</string>
 
     <!-- Array: note modes -->
