@@ -50,9 +50,11 @@
 
     <!-- Error -->
     <string name="error_sync">Synkronisering fejlede: %1$s</string>
+    <string name="error_synchronization">Synkroniseringen mislykkedes</string>
     <string name="error_json">Er Noter appen aktiveret på serveren?</string>
     <string name="error_no_network">Ingen netværksforbindelse</string>
     <string name="error_files_app">Har du installeret fil appen?</string>
+    <string name="error_token_mismatch">Kan ikke tilslutte til app\'en files</string>
     <string name="error_insufficient_storage">Din server lagerplads er fuld.</string>
     <string name="error_unknown">En ukendt fejl er opstået</string>
 
@@ -127,6 +129,23 @@
     <string name="simple_checkbox">Afkrydsningsfeldt</string>
     <string name="unlock_notes">Lås noter op</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Kunne ikke kopiere til udklipsholderen</string>
+    <string name="error_dialog_title">Åh nej - hvad nu? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Forsøg venligst at tvinge app\'en til at lukke og start den påny igen. Der kan have været en ukorrekt forbindelse til Nextcloud-app\'en.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet ikke løses, så forsøg at rydde lageret for begge apps: Nextcloud og Nextcloud Notes, for at løse problemet.</string>
+    <string name="error_dialog_tip_clear_storage">Du kan rydde lageret ved at åbne åbne Android-indstillinger → Apps → Nextcloud / Nextcloud Notes → Lager → Ryd lagerplads.</string>
+    <string name="error_dialog_tip_files_outdated">Din Nextcloud-app ser ud til at være forældet. Gå venligst til Play Butik eller F-Droid for at få seneste version.</string>
+    <string name="error_dialog_tip_files_force_stop">Det lader til at være noget galt med din Nextcloud-app. Forsøg venligst at gennemtvinge stop af både Nextcloud-app\'en og Nextcloud Notes-app\'en. </string>
+    <string name="error_dialog_tip_files_delete_storage">Hvis det ikke hjælper at stoppe begge, så kan du forsøge at rydde lagerpladsen for begge apps.</string>
+    <string name="error_dialog_timeout_instance">Der var intet svar fra din server på nuværende tidspunkt. Sørg venligst for at sikre, at din instans kører rigtigt. </string>
+    <string name="error_dialog_timeout_toggle">Tjek din netværksforbindelse. Undertiden kan det hjælpe at slukke og tænde for mobildata eller wifi.</string>
+    <string name="error_dialog_check_server">Svaret fra din server var ikke korrekt. Tjek venligst om du kan tilgå dine noter via webgrænsefladen.</string>
+    <string name="error_dialog_check_server_logs">Der er et problem med din opsætning af Nextcloud. Kig venligst i serverens logfiler. </string>
+    <string name="error_dialog_check_maintenance">Sørg venligst for at din Nextcloud-instans ikke er i vedligeholdelsestilstand. </string>
+    <string name="error_dialog_insufficient_storage">Din Nextcloud-instans har ikke mere ledig lagerplads. Slet venligst nogle filer for at synkronisere dine lokale ændringer ind i skyen.</string>
+    <string name="error_dialog_contact_us">Du er altid velkommen til at kontakte os, hvis problemet varer ved. Du kan finde vores kontaktoplysninger i sektionen Om i sidebjælken.</string>
+    <string name="error_dialog_we_need_info">Vi har brug for følgende tekniske information for at hjælpe dig:</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>
