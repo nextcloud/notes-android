@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,6 +18,9 @@ import androidx.appcompat.widget.SearchView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import it.niedermann.owncloud.notes.R;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
@@ -29,6 +33,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private int occurrenceCount = 0;
     private SearchView searchView;
     private String searchQuery = null;
+    private final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -97,6 +102,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
         if (prev != null) {
             prev.setOnClickListener(v -> {
+                occurrenceCount = countOccurrences(getContent(), searchView.getQuery().toString());
                 currentOccurrence--;
                 jumpToOccurrence();
                 colorWithText(searchView.getQuery().toString(), currentOccurrence);
@@ -104,15 +110,24 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            private DelayQueryRunnable delayQueryTask;
+            private Handler handler = new Handler();
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 currentOccurrence++;
                 jumpToOccurrence();
+                colorWithText(query, currentOccurrence);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                queryWithHandler(newText);
+                return true;
+            }
+
+            private void queryMatch(String newText) {
                 searchQuery = newText;
                 occurrenceCount = countOccurrences(getContent(), searchQuery);
                 if (occurrenceCount > 1) {
@@ -123,7 +138,37 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 currentOccurrence = 1;
                 jumpToOccurrence();
                 colorWithText(searchQuery, currentOccurrence);
-                return true;
+            }
+
+            private void queryWithHandler(String newText) {
+                if (delayQueryTask != null) {
+                    delayQueryTask.cancel();
+                    handler.removeCallbacksAndMessages(null);
+                }
+                delayQueryTask = new DelayQueryRunnable(newText);
+                // If there is only one char in the search pattern, we should start the search immediately.
+                handler.postDelayed(delayQueryTask, newText.length() > 1 ? delay : 0);
+            }
+
+            class DelayQueryRunnable implements Runnable {
+                String mText;
+                private boolean canceled = false;
+
+                public DelayQueryRunnable(String text) {
+                    this.mText = text;
+                }
+
+                @Override
+                public void run() {
+                    if (canceled) {
+                        return;
+                    }
+                    queryMatch(mText);
+                }
+
+                public void cancel() {
+                    canceled = true;
+                }
             }
         });
     }
@@ -216,15 +261,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         if (haystack == null || haystack.isEmpty() || needle == null || needle.isEmpty()) {
             return 0;
         }
-        int lastIndex = 0;
-        int count = 0;
+        Matcher m = Pattern.compile(needle, Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
+                .matcher(haystack);
 
-        while (lastIndex != -1) {
-            lastIndex = haystack.toLowerCase().indexOf(needle.toLowerCase(), lastIndex);
-            if (lastIndex != -1) {
-                count++;
-                lastIndex += needle.length();
-            }
+        int count = 0;
+        while (m.find()) {
+            count++;
         }
         return count;
     }

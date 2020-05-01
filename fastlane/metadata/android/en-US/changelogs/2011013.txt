@@ -1,0 +1,8 @@
+v2.11.13
+
+- 🔍 Highlight doesn't change when submit is clicked in search (@mikechesterwang) (#804)
+- 🌎 Language updates
+
+v2.11.12
+
+- 🔍 Increased in-note search performance (@Isaac-Graham)
