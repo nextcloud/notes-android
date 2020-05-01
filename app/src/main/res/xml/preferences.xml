@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
+    <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
         android:defaultValue="@string/pref_value_lock"
         android:icon="@drawable/ic_lock_grey600_24dp"
         android:key="@string/pref_key_lock"
@@ -29,7 +29,7 @@
         android:layout="@layout/item_pref"
         android:title="@string/settings_theme_title" />
 
-    <SwitchPreference
+    <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
         android:defaultValue="@string/pref_value_font_normal"
         android:icon="@drawable/ic_text_format_grey600_24dp"
         android:key="@string/pref_key_font"
@@ -46,7 +46,7 @@
         android:summary="%s"
         android:title="@string/settings_font_size" />
 
-    <SwitchPreference
+    <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
         android:defaultValue="@string/pref_value_wifi_and_mobile"
         android:icon="@drawable/ic_network_wifi_grey600_24dp"
         android:key="@string/pref_key_wifi_only"

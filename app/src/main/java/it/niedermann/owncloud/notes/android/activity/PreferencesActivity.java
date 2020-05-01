@@ -14,11 +14,13 @@ import it.niedermann.owncloud.notes.databinding.ActivityPreferencesBinding;
 
 public class PreferencesActivity extends LockedActivity {
 
+    private ActivityPreferencesBinding binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityPreferencesBinding binding = ActivityPreferencesBinding.inflate(getLayoutInflater());
+        binding = ActivityPreferencesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
@@ -30,5 +32,6 @@ public class PreferencesActivity extends LockedActivity {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
+        applyBrandToPrimaryToolbar(mainColor, textColor, binding.toolbar);
     }
 }

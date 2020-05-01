@@ -1,23 +1,31 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SwitchPreference;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
+import it.niedermann.owncloud.notes.branding.Branded;
+import it.niedermann.owncloud.notes.branding.BrandedSwitchPreference;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.util.DeviceCredentialUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
-public class PreferencesFragment extends PreferenceFragmentCompat {
+public class PreferencesFragment extends PreferenceFragmentCompat implements Branded{
 
     private static final String TAG = PreferencesFragment.class.getSimpleName();
+
+    private BrandedSwitchPreference fontPref;
+    private BrandedSwitchPreference lockPref;
+    private BrandedSwitchPreference wifiOnlyPref;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,7 +36,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         addPreferencesFromResource(R.xml.preferences);
 
-        final SwitchPreference lockPref = findPreference(getString(R.string.pref_key_lock));
+        fontPref = findPreference(getString(R.string.pref_key_font));
+        lockPref = findPreference(getString(R.string.pref_key_lock));
         if (lockPref != null) {
             if (!DeviceCredentialUtil.areCredentialsAvailable(requireContext())) {
                 lockPref.setVisible(false);
@@ -51,7 +60,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
             return true;
         });
 
-        final SwitchPreference wifiOnlyPref = findPreference(getString(R.string.pref_key_wifi_only));
+        wifiOnlyPref = findPreference(getString(R.string.pref_key_wifi_only));
         assert wifiOnlyPref != null;
         wifiOnlyPref.setOnPreferenceChangeListener((preference, newValue) -> {
             Log.i(TAG, "syncOnWifiOnly: " + newValue);
@@ -65,5 +74,24 @@ public class PreferencesFragment extends PreferenceFragmentCompat {
             SyncWorker.update(requireContext(), newValue.toString());
             return true;
         });
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        @Nullable Context context = getContext();
+        if (context != null) {
+            @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
+            @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
+            applyBrand(mainColor, textColor);
+        }
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        fontPref.applyBrand(mainColor, textColor);
+        lockPref.applyBrand(mainColor, textColor);
+        wifiOnlyPref.applyBrand(mainColor, textColor);
     }
 }

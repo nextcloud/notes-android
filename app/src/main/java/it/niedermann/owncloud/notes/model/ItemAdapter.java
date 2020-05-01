@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -106,7 +105,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             nvHolder.noteTitle.setText(Html.fromHtml(note.getTitle()));
             nvHolder.noteCategory.setVisibility(showCategory && !note.getCategory().isEmpty() ? View.VISIBLE : View.GONE);
             nvHolder.noteCategory.setText(Html.fromHtml(note.getCategory()));
-            DrawableCompat.setTint(nvHolder.noteCategory.getBackground(), mainColor);
+            // TODO set category border color from mainColor
             nvHolder.noteExcerpt.setText(Html.fromHtml(note.getExcerpt()));
             nvHolder.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
             nvHolder.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp);
