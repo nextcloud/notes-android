@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import it.niedermann.owncloud.notes.R;
@@ -19,13 +20,14 @@ import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.util.DeviceCredentialUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
-public class PreferencesFragment extends PreferenceFragmentCompat implements Branded{
+public class PreferencesFragment extends PreferenceFragmentCompat implements Branded {
 
     private static final String TAG = PreferencesFragment.class.getSimpleName();
 
     private BrandedSwitchPreference fontPref;
     private BrandedSwitchPreference lockPref;
     private BrandedSwitchPreference wifiOnlyPref;
+    private BrandedSwitchPreference brandingPref;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +39,20 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         addPreferencesFromResource(R.xml.preferences);
 
         fontPref = findPreference(getString(R.string.pref_key_font));
+
+        brandingPref = findPreference(getString(R.string.pref_key_branding));
+        if (brandingPref != null) {
+            brandingPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+                final Boolean branding = (Boolean) newValue;
+                Log.v(TAG, "branding: " + branding);
+                requireActivity().setResult(Activity.RESULT_OK);
+                requireActivity().recreate();
+                return true;
+            });
+        } else {
+            Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_branding) + "\"");
+        }
+
         lockPref = findPreference(getString(R.string.pref_key_lock));
         if (lockPref != null) {
             if (!DeviceCredentialUtil.areCredentialsAvailable(requireContext())) {
@@ -93,5 +109,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         fontPref.applyBrand(mainColor, textColor);
         lockPref.applyBrand(mainColor, textColor);
         wifiOnlyPref.applyBrand(mainColor, textColor);
+        brandingPref.applyBrand(mainColor, textColor);
     }
 }

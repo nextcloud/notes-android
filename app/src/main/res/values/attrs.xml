@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="toolbarEditTextColor" format="reference" />
-    <attr name="toolbarEditTextHighlightColor" format="reference" />
+    <attr name="toolbarForegroundColor" format="reference" />
 </resources>

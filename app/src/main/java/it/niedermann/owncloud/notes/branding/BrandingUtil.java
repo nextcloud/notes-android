@@ -17,11 +17,11 @@ import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.util.Notes;
 
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 
 public class BrandingUtil {
 
     private static final String TAG = BrandingUtil.class.getSimpleName();
-    private static final String pref_key_branding = "branding";
     private static final String pref_key_branding_main = "branding_main";
     private static final String pref_key_branding_text = "branding_text";
 
@@ -32,7 +32,7 @@ public class BrandingUtil {
 
     public static boolean isBrandingEnabled(@NonNull Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getBoolean(pref_key_branding, true);
+        return prefs.getBoolean(context.getString(R.string.pref_key_branding), true);
     }
 
     @ColorInt
@@ -62,6 +62,9 @@ public class BrandingUtil {
             final BrandedActivity activity = (BrandedActivity) context;
             activity.applyBrand(mainColor, textColor);
             BrandedActivity.applyBrandToStatusbar(activity.getWindow(), mainColor, textColor);
+            // TODO if colors changed, recreate activity
+            activity.setTheme(isColorDark(textColor) ? R.style.AppThemeLightBrand : R.style.AppTheme);
+            activity.invalidateOptionsMenu();
         }
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         Log.v(TAG, "--- Write: shared_preference_theme_main" + " | " + mainColor);

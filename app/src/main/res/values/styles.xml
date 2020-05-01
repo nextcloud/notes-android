@@ -7,15 +7,16 @@
         <item name="colorAccent">@color/primary</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="android:colorBackground">@color/bg_normal</item>
+        <item name="toolbarForegroundColor">@android:color/white</item>
     </style>
 
     <!-- This is a light theme with a bright brand color like yellow -->
     <style name="AppThemeLightBrand" parent="AppTheme">
-        <item name="toolbarEditTextColor">@android:color/black</item>
+        <item name="toolbarForegroundColor">@android:color/black</item>
     </style>
 
     <style name="toolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="colorAccent">#fff</item>
+        <item name="colorAccent">?toolbarForegroundColor</item>
     </style>
 
     <style name="fab">
