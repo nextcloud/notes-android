@@ -17,7 +17,6 @@ import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.util.Notes;
 
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
-import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 
 public class BrandingUtil {
 
@@ -58,20 +57,20 @@ public class BrandingUtil {
     }
 
     public static void saveBrandColors(@NonNull Context context, @ColorInt int mainColor, @ColorInt int textColor) {
-        if (isBrandingEnabled(context) && context instanceof BrandedActivity) {
-            final BrandedActivity activity = (BrandedActivity) context;
-            activity.applyBrand(mainColor, textColor);
-            BrandedActivity.applyBrandToStatusbar(activity.getWindow(), mainColor, textColor);
-            // TODO if colors changed, recreate activity
-            activity.setTheme(isColorDark(textColor) ? R.style.AppThemeLightBrand : R.style.AppTheme);
-            activity.invalidateOptionsMenu();
-        }
+        final int previousMainColor = readBrandMainColor(context);
+        final int previousTextColor = readBrandTextColor(context);
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         Log.v(TAG, "--- Write: shared_preference_theme_main" + " | " + mainColor);
         Log.v(TAG, "--- Write: shared_preference_theme_text" + " | " + textColor);
         editor.putInt(pref_key_branding_main, mainColor);
         editor.putInt(pref_key_branding_text, textColor);
         editor.apply();
+        if (isBrandingEnabled(context) && context instanceof BrandedActivity) {
+            if (mainColor != previousMainColor || textColor != previousTextColor) {
+                final BrandedActivity activity = (BrandedActivity) context;
+                activity.recreate();
+            }
+        }
     }
 
     /**
@@ -106,7 +105,7 @@ public class BrandingUtil {
                         finalMainColor,
                         finalMainColor,
                         finalMainColor,
-                        editText.getContext().getResources().getColor(R.color.fg_default)
+                        editText.getContext().getResources().getColor(R.color.fg_default_low)
                 }
         ));
     }

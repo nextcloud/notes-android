@@ -57,6 +57,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         if (lockPref != null) {
             if (!DeviceCredentialUtil.areCredentialsAvailable(requireContext())) {
                 lockPref.setVisible(false);
+                findPreference(getString(R.string.pref_category_security)).setVisible(false);
             } else {
                 lockPref.setOnPreferenceChangeListener((preference, newValue) -> {
                     Notes.setLockedPreference((Boolean) newValue);
