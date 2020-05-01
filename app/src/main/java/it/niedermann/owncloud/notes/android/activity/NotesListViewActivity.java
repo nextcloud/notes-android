@@ -336,7 +336,9 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                     try {
                         capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
                         db.updateBrand(localAccount.getId(), capabilities);
-                        BrandingUtil.saveBrandColors(this, Color.parseColor(capabilities.getColor()), Color.parseColor(capabilities.getTextColor()));
+                        localAccount.setColor(Color.parseColor(capabilities.getColor()));
+                        localAccount.setTextColor(Color.parseColor(capabilities.getTextColor()));
+                        BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                         db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
                         Log.i(TAG, capabilities.toString());
                     } catch (Exception e) {
@@ -459,6 +461,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
         adapter.applyBrand(mainColor, textColor);
         adapterCategories.applyBrand(mainColor, textColor);
+        invalidateOptionsMenu();
     }
 
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationItem>> {
