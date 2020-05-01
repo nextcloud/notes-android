@@ -12,11 +12,11 @@ import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
 
 @WorkerThread
-public class NotesClient_1_0 extends NotesClient {
+public class NotesClientV1 extends NotesClient {
 
-    private static final String API_PATH = "/index.php/apps/notes/api/v1.0/";
+    private static final String API_PATH = "/index.php/apps/notes/api/v1/";
 
-    NotesClient_1_0(@NonNull Context appContext) {
+    NotesClientV1(@NonNull Context appContext) {
         super(appContext);
         throw new UnsupportedOperationException("Not implemented yet.");
     }

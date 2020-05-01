@@ -50,7 +50,7 @@ public class Capabilities {
                 if (data.has(JSON_OCS_DATA_CAPABILITIES)) {
                     final JSONObject capabilities = data.getJSONObject(JSON_OCS_DATA_CAPABILITIES);
                     if (capabilities.has(JSON_OCS_DATA_CAPABILITIES_NOTES)) {
-                        final JSONObject notes = data.getJSONObject(JSON_OCS_DATA_CAPABILITIES_NOTES);
+                        final JSONObject notes = capabilities.getJSONObject(JSON_OCS_DATA_CAPABILITIES_NOTES);
                         if (notes.has(JSON_OCS_DATA_CAPABILITIES_NOTES_API_VERSION)) {
                             this.apiVersion = notes.getString(JSON_OCS_DATA_CAPABILITIES_NOTES_API_VERSION);
                         }
