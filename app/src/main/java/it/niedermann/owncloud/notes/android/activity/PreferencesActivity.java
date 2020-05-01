@@ -27,4 +27,8 @@ public class PreferencesActivity extends LockedActivity {
                 .replace(R.id.fragment_container_view, new PreferencesFragment())
                 .commit();
     }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+    }
 }

@@ -9,6 +9,11 @@
         <item name="android:colorBackground">@color/bg_normal</item>
     </style>
 
+    <!-- This is a light theme with a bright brand color like yellow -->
+    <style name="AppThemeLightBrand" parent="AppTheme">
+        <item name="toolbarEditTextColor">@android:color/black</item>
+    </style>
+
     <style name="toolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorAccent">#fff</item>
     </style>

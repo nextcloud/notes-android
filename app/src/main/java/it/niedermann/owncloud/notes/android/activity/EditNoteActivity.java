@@ -269,4 +269,9 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     public void onAccountChosen(LocalAccount account) {
         fragment.moveNote(account);
     }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        applyBrandToPrimaryToolbar(mainColor, textColor, binding.toolbar);
+    }
 }

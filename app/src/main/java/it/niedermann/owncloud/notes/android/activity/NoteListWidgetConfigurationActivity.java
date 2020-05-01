@@ -129,6 +129,10 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+    }
+
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {

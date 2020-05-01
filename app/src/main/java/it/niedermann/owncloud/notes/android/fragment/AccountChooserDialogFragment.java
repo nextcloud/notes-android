@@ -10,7 +10,6 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +18,7 @@ import java.util.Objects;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
@@ -54,7 +54,7 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
         RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, requireActivity());
         binding.accountsList.setAdapter(adapter);
 
-        return new AlertDialog.Builder(requireActivity())
+        return new BrandedAlertDialogBuilder(requireActivity())
                 .setView(binding.getRoot())
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null)

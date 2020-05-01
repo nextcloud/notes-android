@@ -50,6 +50,8 @@ import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
 import it.niedermann.owncloud.notes.android.fragment.ExceptionDialogFragment;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.Category;
@@ -99,6 +101,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private LocalAccount localAccount;
 
     protected DrawerLayoutBinding binding;
+    protected ActivityNotesListViewBinding activityBinding;
 
     private CoordinatorLayout coordinatorLayout;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -133,6 +136,8 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
         CapabilitiesWorker.update(this);
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
+        activityBinding = ActivityNotesListViewBinding.bind(binding.activityNotesListView.getRoot());
+
         setContentView(binding.getRoot());
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
         this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
@@ -218,6 +223,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         localAccount = db.getLocalAccountByAccountName(accountName);
         if (localAccount != null) {
             try {
+                BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
                 new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this).attachToRecyclerView(listView);
                 synchronize();
@@ -420,6 +426,14 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     @Override
     public CoordinatorLayout getView() {
         return this.coordinatorLayout;
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        applyBrandToPrimaryToolbar(mainColor, textColor, activityBinding.notesListActivityActionBar);
+        applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
+        binding.headerViewBackground.setBackgroundColor(mainColor);
+        adapter.applyBrand(mainColor, textColor);
     }
 
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationItem>> {

@@ -8,13 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import it.niedermann.owncloud.notes.ExceptionHandler;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.util.Notes;
 
-public abstract class LockedActivity extends AppCompatActivity {
+public abstract class LockedActivity extends BrandedActivity {
 
     private static final String TAG = LockedActivity.class.getSimpleName();
 

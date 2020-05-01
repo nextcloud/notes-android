@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.model;
 
+import android.content.Context;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,33 +9,41 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.Branded;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
 
 import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 
-public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
 
     private static final String TAG = ItemAdapter.class.getSimpleName();
 
     private static final int section_type = 0;
     private static final int note_type = 1;
     private final NoteClickListener noteClickListener;
-    private List<Item> itemList;
+    private List<Item> itemList = new ArrayList<>();
     private boolean showCategory = true;
-    private final List<Integer> selected;
+    @NonNull
+    private Context context;
+    private final List<Integer> selected = new ArrayList<>();
+    @ColorInt
+    private int mainColor;
 
-    public ItemAdapter(@NonNull NoteClickListener noteClickListener) {
-        this.itemList = new ArrayList<>();
-        this.selected = new ArrayList<>();
-        this.noteClickListener = noteClickListener;
+    public <T extends Context & NoteClickListener> ItemAdapter(@NonNull T context) {
+        this.context = context;
+        this.noteClickListener = context;
+        this.mainColor = context.getResources().getColor(R.color.primary);
     }
 
     /**
@@ -97,6 +106,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             nvHolder.noteTitle.setText(Html.fromHtml(note.getTitle()));
             nvHolder.noteCategory.setVisibility(showCategory && !note.getCategory().isEmpty() ? View.VISIBLE : View.GONE);
             nvHolder.noteCategory.setText(Html.fromHtml(note.getCategory()));
+            DrawableCompat.setTint(nvHolder.noteCategory.getBackground(), mainColor);
             nvHolder.noteExcerpt.setText(Html.fromHtml(note.getExcerpt()));
             nvHolder.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
             nvHolder.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp);
@@ -157,6 +167,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public int getItemViewType(int position) {
         return getItem(position).isSection() ? section_type : note_type;
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        this.mainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
+        notifyDataSetChanged();
     }
 
     public interface NoteClickListener {
