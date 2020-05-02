@@ -8,15 +8,44 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="android:colorBackground">@color/bg_normal</item>
         <item name="toolbarForegroundColor">@android:color/white</item>
+        <item name="popupTheme">@style/darkBrandPopUpTheme</item>
+
+        <!-- changes search bar color but also category edit -->
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:editTextColor">@android:color/white</item>
     </style>
 
     <!-- This is a light theme with a bright brand color like yellow -->
     <style name="AppThemeLightBrand" parent="AppTheme">
         <item name="toolbarForegroundColor">@android:color/black</item>
+        <item name="popupTheme">@style/lightBrandPopUpTheme</item>
+
+        <!-- changes search bar color but also category edit -->
+        <item name="android:textColorHint">@android:color/black</item>
+        <item name="android:editTextColor">@android:color/black</item>
     </style>
 
-    <style name="toolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <!-- popup checkbox -->
+    <style name="darkBrandPopUpTheme" parent="ThemeOverlay.AppCompat.Dark">
         <item name="colorAccent">?toolbarForegroundColor</item>
+        <item name="android:textColorHint">?toolbarForegroundColor</item>
+        <item name="editTextColor">?toolbarForegroundColor</item>
+        <item name="colorControlNormal">?toolbarForegroundColor</item>
+        <item name="android:textColor">?toolbarForegroundColor</item>
+        <item name="android:textColorHighlight">?toolbarForegroundColor</item>
+        <item name="colorControlActivated">?toolbarForegroundColor</item>
+        <item name="colorControlHighlight">?toolbarForegroundColor</item>
+    </style>
+
+    <style name="lightBrandPopUpTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">?toolbarForegroundColor</item>
+        <item name="android:textColorHint">?toolbarForegroundColor</item>
+        <item name="editTextColor">?toolbarForegroundColor</item>
+        <item name="colorControlNormal">?toolbarForegroundColor</item>
+        <item name="android:textColor">?toolbarForegroundColor</item>
+        <item name="android:textColorHighlight">?toolbarForegroundColor</item>
+        <item name="colorControlActivated">?toolbarForegroundColor</item>
+        <item name="colorControlHighlight">?toolbarForegroundColor</item>
     </style>
 
     <style name="fab">

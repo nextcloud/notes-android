@@ -29,6 +29,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.CategoryDialogListener;
+import it.niedermann.owncloud.notes.branding.BrandedFragment;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -40,7 +41,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 
-public abstract class BaseNoteFragment extends Fragment implements CategoryDialogListener {
+public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener {
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
 

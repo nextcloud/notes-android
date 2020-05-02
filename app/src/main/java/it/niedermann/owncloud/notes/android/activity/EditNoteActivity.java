@@ -53,6 +53,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
         binding = ActivityEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
 
         if (savedInstanceState == null) {
             launchNoteFragment();

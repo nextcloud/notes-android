@@ -68,7 +68,7 @@ public class BrandingUtil {
         if (isBrandingEnabled(context) && context instanceof BrandedActivity) {
             if (mainColor != previousMainColor || textColor != previousTextColor) {
                 final BrandedActivity activity = (BrandedActivity) context;
-                activity.recreate();
+                activity.runOnUiThread(activity::recreate);
             }
         }
     }

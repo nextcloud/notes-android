@@ -22,6 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedActivity;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
@@ -269,5 +270,11 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             count++;
         }
         return count;
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchPrevButton());
+        BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchNextButton());
     }
 }
