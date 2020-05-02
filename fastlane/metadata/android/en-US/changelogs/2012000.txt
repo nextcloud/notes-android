@@ -1,0 +1,1 @@
+- ⚡️ Speed up synchronization by supporting ETags for capabilities endpoint

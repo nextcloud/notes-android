@@ -2,6 +2,9 @@ package it.niedermann.owncloud.notes.model;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.load.HttpException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 
@@ -31,8 +34,11 @@ public class Capabilities {
     private String apiVersion = null;
     private String color = null;
     private String textColor = null;
+    @Nullable
+    private String eTag;
 
-    public Capabilities(String response) throws NextcloudHttpRequestFailedException {
+    public Capabilities(String response, @Nullable String eTag) throws NextcloudHttpRequestFailedException {
+        this.eTag = eTag;
         final JSONObject ocs;
         try {
             ocs = new JSONObject(response).getJSONObject(JSON_OCS);
@@ -83,6 +89,12 @@ public class Capabilities {
         return textColor;
     }
 
+    @Nullable
+    public String getETag() {
+        return eTag;
+    }
+
+    @NonNull
     @Override
     public String toString() {
         return "Capabilities{" +

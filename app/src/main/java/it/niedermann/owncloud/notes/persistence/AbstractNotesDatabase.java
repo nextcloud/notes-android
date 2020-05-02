@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
+import androidx.work.WorkManager;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,7 +32,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 12;
+    private static final int database_version = 13;
     @NonNull
     private final Context context;
 
@@ -55,6 +56,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_favorite = "FAVORITE";
     protected static final String key_category = "CATEGORY";
     protected static final String key_etag = "ETAG";
+    protected static final String key_capabilities_etag = "CAPABILITIES_ETAG";
     protected static final String key_color = "COLOR";
     protected static final String key_text_color = "TEXT_COLOR";
     protected static final String key_api_version = "API_VERSION";
@@ -108,7 +110,8 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_modified + " INTEGER, " +
                 key_api_version + " TEXT, " +
                 key_color + " VARCHAR(6) NOT NULL DEFAULT '000000', " +
-                key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9')");
+                key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9', " +
+                key_capabilities_etag + " TEXT)");
         createAccountIndexes(db);
     }
 
@@ -274,10 +277,11 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9'");
             CapabilitiesWorker.update(context);
         }
-
-        // TODO next db upgrade
-//        WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("it.niedermann.owncloud.notes.persistence.SyncWorker");
-//        WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("SyncWorker");
+        if (oldVersion < 13) {
+            db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_capabilities_etag + " TEXT");
+            WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("it.niedermann.owncloud.notes.persistence.SyncWorker");
+            WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("SyncWorker");
+        }
     }
 
     @Override

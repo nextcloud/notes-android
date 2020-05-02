@@ -663,7 +663,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     public LocalAccount getAccount(long accountId) {
         validateAccountId(accountId);
         final SQLiteDatabase db = getReadableDatabase();
-        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color}, key_id + " = ?", new String[]{String.valueOf(accountId)}, null, null, null, null);
+        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color, key_capabilities_etag}, key_id + " = ?", new String[]{String.valueOf(accountId)}, null, null, null, null);
         final LocalAccount account = new LocalAccount();
         while (cursor.moveToNext()) {
             account.setId(cursor.getLong(0));
@@ -675,6 +675,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setPreferredApiVersion(cursor.getString(6));
             account.setColor(Color.parseColor('#' + cursor.getString(7)));
             account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
+            account.setCapabilitiesETag(cursor.getString(9));
         }
         cursor.close();
         return account;
@@ -682,7 +683,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     public List<LocalAccount> getAccounts() {
         final SQLiteDatabase db = getReadableDatabase();
-        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color}, null, null, null, null, null);
+        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color, key_capabilities_etag}, null, null, null, null, null);
         final List<LocalAccount> accounts = new ArrayList<>();
         while (cursor.moveToNext()) {
             LocalAccount account = new LocalAccount();
@@ -695,6 +696,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setPreferredApiVersion(cursor.getString(6));
             account.setColor(Color.parseColor('#' + cursor.getString(7)));
             account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
+            account.setCapabilitiesETag(cursor.getString(9));
             accounts.add(account);
         }
         cursor.close();
@@ -708,7 +710,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             return null;
         }
         final SQLiteDatabase db = getReadableDatabase();
-        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
+        final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color, key_capabilities_etag}, key_account_name + " = ?", new String[]{accountName}, null, null, null, null);
         final LocalAccount account = new LocalAccount();
         int numberEntries = 0;
         while (cursor.moveToNext()) {
@@ -722,6 +724,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             account.setPreferredApiVersion(cursor.getString(6));
             account.setColor(Color.parseColor('#' + cursor.getString(7)));
             account.setTextColor(Color.parseColor('#' + cursor.getString(8)));
+            account.setCapabilitiesETag(cursor.getString(9));
         }
         cursor.close();
         switch (numberEntries) {
@@ -830,6 +833,19 @@ public class NotesDatabase extends AbstractNotesDatabase {
             Log.v(TAG, "Updated etag to " + etag + " for accountId = " + accountId);
         } else {
             Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and etag = " + etag);
+        }
+    }
+
+    public void updateCapabilitiesETag(long accountId, String capabilitiesETag) {
+        validateAccountId(accountId);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_capabilities_etag, capabilitiesETag);
+        final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
+        if (updatedRows == 1) {
+            Log.v(TAG, "Updated etag to " + capabilitiesETag + " for accountId = " + accountId);
+        } else {
+            Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and capabilitiesETag = " + capabilitiesETag);
         }
     }
 
