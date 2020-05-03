@@ -23,7 +23,9 @@ import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -36,6 +38,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
+import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -67,7 +70,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     public static NotesDatabase getInstance(Context context) {
-        // TODO: Use another way to getInstance to avoid concurrency problem
         if (instance == null)
             return instance = new NotesDatabase(context);
         else
@@ -98,7 +100,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
      */
     long addNote(long accountId, CloudNote note) {
-        // TODO: The structure of note table changes. Check it and modify if necessary
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         if (note instanceof DBNote) {
@@ -121,7 +122,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_modified, note.getModified().getTimeInMillis() / 1000);
         values.put(key_content, note.getContent());
         values.put(key_favorite, note.isFavorite());
-        values.put(key_category, note.getCategory());
+        values.put(key_category, getCategoryIdByTitle(accountId, note.getCategory(), true));
+//        values.put(key_category, note.getCategory());
         values.put(key_etag, note.getEtag());
         return db.insert(table_notes, null, values);
     }
@@ -227,7 +229,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         validateAccountId(accountId);
         Calendar modified = Calendar.getInstance();
         modified.setTimeInMillis(cursor.getLong(4) * 1000);
-        // TODO: cursor.get may throw an exception for the table changes.
         return new DBNote(
                 cursor.getLong(0),
                 cursor.getLong(1),
@@ -235,7 +236,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 cursor.getString(3),
                 pruneContent ? "" : cursor.getString(9),
                 cursor.getInt(5) > 0,
-                cursor.getString(6),
+//                cursor.getString(6),
+                getTitleByCategoryId(accountId, cursor.getInt(6)),
                 cursor.getString(7),
                 DBStatus.parse(cursor.getString(2)),
                 accountId,
@@ -284,7 +286,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
-        // TODO: 这里没有细看....不知道要不要改
         validateAccountId(accountId);
         List<String> where = new ArrayList<>();
         List<String> args = new ArrayList<>();
@@ -306,10 +307,25 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
 
         if (category != null) {
-            where.add("(" + key_category + "=? OR " + key_category + " LIKE ? )");
-            args.add(category);
-            args.add(category + "/%");
+            List<Integer> ids = getCategoryIdsByTitle(accountId, category);
+            StringBuffer tmpSQL = new StringBuffer();
+            String tmp = String.format(" %s = ? ", key_category);
+            for (int i = 0; i < ids.size(); i++) {
+                tmpSQL.append(tmp);
+                if (i != ids.size() - 1) {
+                    tmpSQL.append(" or ");
+                }
+            }
+            where.add(String.format("( %s )", tmpSQL.toString()));
+            for (int i = 0; i < ids.size(); i++) {
+                args.add(String.valueOf(ids.get(i)));
+            }
         }
+//        if (category != null) {
+//            where.add("(" + key_category + "=? OR " + key_category + " LIKE ? )");
+//            args.add(category);
+//            args.add(category + "/%");
+//        }
 
         if (favorite != null) {
             where.add(key_favorite + "=?");
@@ -357,15 +373,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
         validateAccountId(accountId);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(
-                table_notes,
-                new String[]{key_category, "COUNT(*)"},
-                key_status + " != ? AND " + key_account_id + " = ?",
-                new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId},
-                key_category,
-                null,
-                key_category);
+        String category_title = String.format("%s.%s", table_category, key_title);
+        String note_title = String.format("%s.%s", table_notes, key_category);
+        String category_id = String.format("%s.%s", table_category, key_id);
+        // Weird problem: If I use ? instead of concat directly, there is no result in the join table
+        // TODO: Find a way to use ? instead of concat.
+        String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
+                " ON " + category_id + " = " + note_title + " GROUP BY " + category_id;
+        Cursor cursor = getReadableDatabase().rawQuery(rawQuery, null);
         List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
             Resources res = getContext().getResources();
@@ -389,15 +404,27 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
         validateAccountId(accountId);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(
-                table_notes,
-                new String[]{key_category, "COUNT(*)"},
-                key_status + " != ? AND " + key_account_id + " = ? AND " + key_category + " LIKE ? AND " + key_category + " != \"\"",
-                new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId), "%" + (search == null ? null : search.trim()) + "%"},
-                key_category,
-                null,
-                key_category);
+        String category_title = String.format("%s.%s", table_category, key_title);
+        String note_title = String.format("%s.%s", table_notes, key_category);
+        String category_id = String.format("%s.%s", table_category, key_id);
+        String category_accountId = String.format("%s.%s", table_category, key_account_id);
+        // Weird problem: If I use ? instead of concat directly, there is no result in the join table
+        // TODO: Find a way to use ? instead of concat.
+        String rawQuery;
+        if (search == null || search.trim().equals("")) {
+            rawQuery = String.format("SELECT %s, COUNT(*) FROM %s INNER JOIN %s ON %s = %s " +
+                            " WHERE %s != '%s' AND %s = %s AND %s != \"\" GROUP BY %s",
+                    category_title, table_category, table_notes, category_id, note_title,
+                    key_status, DBStatus.LOCAL_DELETED.getTitle(), category_accountId, String.valueOf(accountId),
+                    category_title, category_id);
+        } else {
+            rawQuery = String.format("SELECT %s, COUNT(*) FROM %s INNER JOIN %s ON %s = %s " +
+                            " WHERE %s != '%s' AND %s = %s AND %s LIKE %s AND %s != \"\" GROUP BY %s",
+                    category_title, table_category, table_notes, category_id, note_title,
+                    key_status, DBStatus.LOCAL_DELETED.getTitle(), category_accountId, String.valueOf(accountId),
+                    category_title, "'%" + search.trim() + "%'", category_title, category_id);
+        }
+        Cursor cursor = getReadableDatabase().rawQuery(rawQuery, null);
         List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
             Resources res = getContext().getResources();
@@ -412,6 +439,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             }
             categories.add(new NavigationAdapter.NavigationItem("category:" + cursor.getString(0), cursor.getString(0), cursor.getInt(1), icon));
         }
+
         cursor.close();
         return categories;
     }
@@ -436,12 +464,28 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, note.getStatus().getTitle());
-        values.put(key_category, note.getCategory());
+        if (getCategoryIdByTitle(note.getAccountId(), category, false) == -1) {
+            if (addCategory(note.getCategory(), note.getAccountId()) == -1) {
+                Log.e(TAG, String.format("Error occurs when creating category: %s", note.getCategory()));
+            }
+        }
+        int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory(), true);
+        values.put(key_category, id);
+//        values.put(key_category, note.getCategory());
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
         if (callback != null) {
             serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
         serverSyncHelper.scheduleSync(ssoAccount, true);
+    }
+
+    private long addCategory(@NonNull String title, long accountId) {
+        validateAccountId(accountId);
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(key_account_id, accountId);
+        values.put(key_title, title);
+        return db.insert(table_category, null, values);
     }
 
     /**
@@ -454,7 +498,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @return changed note if differs from database, otherwise the old note.
      */
     public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
-        // TODO: This method may crash for the note table has changed.
         //debugPrintFullDB();
         DBNote newNote;
         if (newContent == null) {
@@ -466,7 +509,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         ContentValues values = new ContentValues();
         values.put(key_status, newNote.getStatus().getTitle());
         values.put(key_title, newNote.getTitle());
-        values.put(key_category, newNote.getCategory());
+        values.put(key_category, getCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory(), true));
+//        values.put(key_category, newNote.getCategory());
         values.put(key_modified, newNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, newNote.getContent());
         values.put(key_excerpt, newNote.getExcerpt());
@@ -497,7 +541,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
      */
     void updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
-        // TODO: This method may crash for the note table has changed.
         SQLiteDatabase db = this.getWritableDatabase();
 
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
@@ -513,7 +556,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_modified, remoteNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, remoteNote.getContent());
         values.put(key_favorite, remoteNote.isFavorite());
-        values.put(key_category, remoteNote.getCategory());
+        values.put(key_category, getCategoryIdByTitle(id, remoteNote.getCategory(), true));
+//        values.put(key_category, remoteNote.getCategory());
         values.put(key_etag, remoteNote.getEtag());
         values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent()));
         String whereClause;
@@ -778,4 +822,103 @@ public class NotesDatabase extends AbstractNotesDatabase {
     // TODO: Add a method to update the sorting method in category
     // TODO: Not sure: Add more methods for category table.
 
+
+    /**
+     * get the category id.
+     *
+     * @param accountId:     Account ID
+     * @param categoryTitle: The category title
+     * @return the corresponding category id.
+     */
+    @NonNull
+    @WorkerThread
+    private Integer getCategoryIdByTitle(long accountId, @NonNull String categoryTitle, boolean create) {
+        if (create) {
+            if (getCategoryIdByTitle(accountId, categoryTitle, false) == -1) {
+                if (addCategory(categoryTitle, accountId) == -1) {
+                    Log.e(TAG, String.format("Error occurs when creating category: %s", categoryTitle));
+                }
+            }
+        }
+        validateAccountId(accountId);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                table_category,
+                new String[]{key_id},
+                key_title + " = ? ",
+                new String[]{categoryTitle},
+                key_id,
+                null,
+                key_id);
+        int id = -1;
+        if (cursor.moveToNext()) {
+            id = cursor.getInt(0);
+        }
+        cursor.close();
+        return id;
+    }
+
+    @NonNull
+    @WorkerThread
+    private String getTitleByCategoryId(long accountId, int id) {
+        if (accountId != -1)
+            validateAccountId(accountId);
+        Cursor cursor = getReadableDatabase().query(
+                table_category,
+                new String[]{key_title},
+                key_id + " = ? ",
+                new String[]{id + ""},
+                key_title,
+                null,
+                key_title);
+        String title = "";
+        if (cursor.moveToNext()) {
+            title = cursor.getString(0);
+        }
+        cursor.close();
+        return title;
+    }
+
+    private void traverse(@NonNull String table) {
+        Log.e("Traverse", "###################START TRAVERSE#####################");
+        String query = "SELECT * FROM " + table;
+        Cursor cursor = getReadableDatabase().rawQuery(query, null);
+        Log.e(table + " HEAD", Arrays.toString(cursor.getColumnNames()));
+        while (cursor.moveToNext()) {
+            Log.e(table, outputCursor(cursor));
+        }
+        cursor.close();
+        Log.e("Traverse", "###################END TRAVERSE#####################");
+    }
+
+    private String outputCursor(@NonNull Cursor cursor) {
+        StringBuffer str = new StringBuffer();
+        for (int i = 0; i < cursor.getColumnNames().length; i++) {
+            if (cursor.getString(i) == null || cursor.getString(i).equals("")) {
+                str.append("empty");
+            } else
+                str.append(cursor.getString(i));
+            str.append(" ");
+        }
+        return str.toString();
+    }
+
+    private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String title) {
+        validateAccountId(accountId);
+        Cursor cursor = getReadableDatabase().query(
+                table_category,
+                new String[]{key_id},
+                key_title + " = ? OR " + key_title + " LIKE ? ",
+                new String[]{title, title + "/%"},
+                key_id,
+                null,
+                key_id
+        );
+        List<Integer> ids = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            ids.add(cursor.getInt(0));
+        }
+        cursor.close();
+        return ids;
+    }
 }

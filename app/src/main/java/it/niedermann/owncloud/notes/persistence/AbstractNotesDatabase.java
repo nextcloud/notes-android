@@ -38,6 +38,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String database_name = "OWNCLOUD_NOTES";
     protected static final String table_notes = "NOTES";
     protected static final String table_accounts = "ACCOUNTS";
+    protected static final String table_category = "CATEGORIES";
 
     protected static final String key_id = "ID";
 
@@ -79,9 +80,9 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         createAccountTable(db);
         createNotesTable(db);
+        createCategoryTable(db);
     }
 
-    // TODO: Use a foreign key to represent category.
     private void createNotesTable(@NonNull SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + table_notes + " ( " +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -92,7 +93,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_modified + " INTEGER DEFAULT 0, " +
                 key_content + " TEXT, " +
                 key_favorite + " INTEGER DEFAULT 0, " +
-                key_category + " TEXT NOT NULL DEFAULT '', " +
+                key_category + " INTEGER, " +
                 key_etag + " TEXT," +
                 key_excerpt + " TEXT NOT NULL DEFAULT '', " +
                 "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
@@ -112,8 +113,13 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9')");
         createAccountIndexes(db);
     }
+
     private void createCategoryTable(@NonNull SQLiteDatabase db) {
-        // TODO: CreateCategoryTable
+        db.execSQL("CREATE TABLE " + table_category + "(" +
+                key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                key_account_id + " INTEGER, " +
+                key_title + " TEXT )");
+        createCategoryIndexes(db);
     }
 
     @SuppressWarnings("deprecation")
@@ -290,7 +296,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         DatabaseIndexUtil.dropIndexes(db);
         db.execSQL("DROP TABLE IF EXISTS " + table_notes);
         db.execSQL("DROP TABLE IF EXISTS " + table_accounts);
-        // TODO: Drop category
+        db.execSQL("DROP TABLE IF EXISTS " + table_category);
         onCreate(db);
     }
 
@@ -303,7 +309,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     }
 
     private static void createCategoryIndexes(@NonNull SQLiteDatabase db) {
-        // TODO: create index
+        DatabaseIndexUtil.createIndex(db, table_category, key_id, key_account_id, key_title);
     }
 
     protected abstract void notifyNotesChanged();
