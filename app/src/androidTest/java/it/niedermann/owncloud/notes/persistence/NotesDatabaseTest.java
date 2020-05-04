@@ -4,6 +4,7 @@ import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
+import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.*;
 
 import android.content.Context;
@@ -137,12 +138,15 @@ public class NotesDatabaseTest {
 
     @Test
     public void test_03_getCategories() {
-        // i don't know how to test
+        List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_Categories", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+        }
     }
 
     @Test
     public void test_04_searchCategories() {
-        // i don't know how to test
+
     }
 
     @Test
