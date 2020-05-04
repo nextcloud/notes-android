@@ -16,8 +16,10 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -30,6 +32,7 @@ import java.util.TimeZone;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotesDatabaseTest {
 
     private NotesDatabase db = null;
@@ -38,6 +41,9 @@ public class NotesDatabaseTest {
     private String accountUserName = "John Doe";
     private String accountName = accountUserName + "@" + accountURL;
     private LocalAccount account = null;
+
+    // use for single test
+    private DBNote thisNote = null;
 
     @Before
     public void setupDB() {
@@ -67,63 +73,103 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void testAddDeleteNote() {
+    public void test_01_addNote(){
+        db.deleteNote(6, DBStatus.VOID);
+
         long accountID = account.getId();
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
-                "A Great Day", /*getCurDate() + */" This is a really great day bro.",
+                "A Great Day", getCurDate() + " This is a really great day bro.",
                 true, "Diary", null);
 
         // Pre-check
         List<DBNote> notes = db.getNotes(accountID);
         int pre_size = notes.size();
-        Log.i("Test_testAddDeleteNote_All_Notes_Before_Addition", "Size: " + String.valueOf(pre_size));
+        Log.i("Test_01_addNote_All_Notes_Before_Addition", "Size: " + String.valueOf(pre_size));
 
         // Add a new note
         long noteID = db.addNote(accountID, cloudNote);
         // Check if this note is added successfully
         DBNote note = db.getNote(accountID, noteID);
-        Log.i("Test_testAddDeleteNote_Cur_Note", note.toString());
-        Log.i("Test_testAddDeleteNote_Cur_Note", "Title: " + note.getTitle());
-        Log.i("Test_testAddDeleteNote_Cur_Note", "Content: " + note.getContent());
-        Log.i("Test_testAddDeleteNote_Cur_Note", "Category: " + note.getCategory());
+        Log.i("Test_01_addNote_Cur_Note", note.toString());
+        Log.i("Test_01_addNote_Cur_Note", "Title: " + note.getTitle());
+        Log.i("Test_01_addNote_Cur_Note", "Content: " + note.getContent());
+        Log.i("Test_01_addNote_Cur_Note", "Category: " + note.getCategory());
+
         assertEquals("A Great Day", note.getTitle());
+        assertEquals(cloudNote.getContent(), note.getContent());
+        assertEquals("Diary", note.getCategory());
+        assertEquals(accountID, note.getAccountId());
 
         // Check if this note is in all notes
         notes = db.getNotes(accountID);
         int added_size = notes.size();
+
         assertEquals(1, added_size - pre_size);
-        Log.i("Test_testAddDeleteNote_All_Notes_Added", "Size: " + String.valueOf(added_size));
+
+        Log.i("Test_01_addNote_All_Notes_Added", "Size: " + String.valueOf(added_size));
         for (DBNote cnote : notes) {
-            Log.i("Test_testAddDeleteNote_All_Notes_Added", cnote.toString());
+            Log.i("Test_01_addNote_All_Notes_Added", cnote.toString());
         }
 
-        // Delete the note after testing
-        db.deleteNote(note.getId(), note.getStatus());
+        // pass to next method
+        thisNote = note;
+    }
+
+    @Test
+    public void test_02_searchNotes() {
+        long thisAccountID = account.getId();
+        List<DBNote> notes = db.searchNotes(thisAccountID, null, null, false);
+        Log.i("Test_02_searchNotes_Favorite_false", "Size: " + String.valueOf(notes.size()));
+        assertEquals(notes.size(), 0);
+
+        notes = db.searchNotes(thisAccountID, null, "Hello", true);
+        Log.i("Test_02_searchNotes_Category_Hello", "Size: " + String.valueOf(notes.size()));
+        assertEquals(notes.size(), 0);
+
+        notes = db.searchNotes(thisAccountID, null, "Diary", true);
+        Log.i("Test_02_searchNotes_Category_Diary_Favorite_True", "Size: " + String.valueOf(notes.size()));
+        assertEquals(notes.size(), 1);
+
+        notes = db.searchNotes(thisAccountID, null, null, null);
+        Log.i("Test_02_searchNotes_Three_NULL", "Size: " + String.valueOf(notes.size()));
+        assertEquals(notes.size(), 1);
+    }
+
+    @Test
+    public void test_03_getCategories() {
+        // i don't know how to test
+    }
+
+    @Test
+    public void test_04_searchCategories() {
+        // i don't know how to test
+    }
+
+    @Test
+    public void test_05_deleteNote() {
+        long thisAccountID = account.getId();
+        List<DBNote> notes = db.getNotes(thisAccountID);
+        int added_size = notes.size();
+
+        Log.i("Test_05_deleteNote_All_Before_Deletion", "Size: " + String.valueOf(added_size));
+        int counter = 0;
+        for (DBNote cnote : notes) {
+            Log.i("Test_05_deleteNote_All_Before_Deletion", cnote.toString());
+            // Delete the note after testing
+            db.deleteNote(cnote.getId(), cnote.getStatus());
+            counter ++;
+        }
 
         // Check if the note is deleted successfully
-        notes = db.getNotes(accountID);
+        notes = db.getNotes(thisAccountID);
         int deleted_size = notes.size();
-        assertEquals(1, added_size - deleted_size);
-        Log.i("Test_testAddDeleteNote_All_Notes_After_Deletion", "Size: " + String.valueOf(deleted_size));
+        assertEquals(counter, added_size - deleted_size);
+        Log.i("Test_05_deleteNote_All_Notes_After_Deletion", "Size: " + String.valueOf(deleted_size));
     }
 
     @Test
-    public void testAddMultipleNotes() {
+    public void testAddDeleteMultipleNotes() {
 
-    }
-
-    @Test
-    public void searchNotes() {
-
-    }
-
-    @Test
-    public void getCategories() {
-
-    }
-
-    @Test
-    public void searchCategories() {
     }
 
     @Test
@@ -138,6 +184,8 @@ public class NotesDatabaseTest {
 
     @Test
     public void updateNote() {
+        // can not check
+        // need remoteNote (note from server)
     }
 
     public static String getCurDate() {

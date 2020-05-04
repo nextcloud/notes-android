@@ -319,6 +319,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                     tmpSQL.append(" or ");
                 }
             }
+            // TODO: some bugs here
             where.add(String.format("( %s )", tmpSQL.toString()));
             for (int i = 0; i < ids.size(); i++) {
                 args.add(String.valueOf(ids.get(i)));
