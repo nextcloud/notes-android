@@ -311,6 +311,10 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
         if (category != null) {
             List<Integer> ids = getCategoryIdsByTitle(accountId, category);
+            if (ids.size() == 0) {
+                // If there is no such matched category, return a list without any element.
+                return new ArrayList<DBNote>();
+            }
             StringBuffer tmpSQL = new StringBuffer();
             String tmp = String.format(" %s = ? ", key_category);
             for (int i = 0; i < ids.size(); i++) {
@@ -319,7 +323,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
                     tmpSQL.append(" or ");
                 }
             }
-            // TODO: some bugs here
             where.add(String.format("( %s )", tmpSQL.toString()));
             for (int i = 0; i < ids.size(); i++) {
                 args.add(String.valueOf(ids.get(i)));
