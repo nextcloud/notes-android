@@ -43,9 +43,6 @@ public class NotesDatabaseTest {
     private String accountName = accountUserName + "@" + accountURL;
     private LocalAccount account = null;
 
-    // use for single test
-    private DBNote thisNote = null;
-
     @Before
     public void setupDB() {
         Context context = ApplicationProvider.getApplicationContext();
@@ -75,7 +72,6 @@ public class NotesDatabaseTest {
 
     @Test
     public void test_01_addNote(){
-        db.deleteNote(6, DBStatus.VOID);
 
         long accountID = account.getId();
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
@@ -112,8 +108,6 @@ public class NotesDatabaseTest {
             Log.i("Test_01_addNote_All_Notes_Added", cnote.toString());
         }
 
-        // pass to next method
-        thisNote = note;
     }
 
     @Test
@@ -205,7 +199,105 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void testAddDeleteMultipleNotes() {
+    public void test_06_multiAddNote(){
+        long thisAccountID = account.getId();
+        ArrayList<CloudNote> multiCloudNote = new ArrayList<>();
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "Mike is so cool.", "Mike is a cool guy you know",
+                true, "The BiBle", null));
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "Andy is so cool.", "Andy is a cool guy you know",
+                true, "The BiBle", null));
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "your backpack", "you backpack by Eason Chan",
+                true, "Music", null));
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "I Honestly Love You", "I Honestly Love You by Leslie",
+                true, "Music", null));
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "Monica", "Monica by Leslie",
+                true, "Music", null));
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "Worksheet", "1 2 3 4 5 6 7 8",
+                false, "Work", null));
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "PowerPoint.", "8 7 6 5 4 3 2 1",
+                false, "Work", null));
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "Farewell My Concubine", "a great movie",
+                true, "Movie", null));
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "Leon", "an amazing movie",
+                true, "Movie", null));
+        multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
+                "How are you.", "i am fine.",
+                false, "Diary", null));
+
+        // Pre-check
+        List<DBNote> notes = db.getNotes(thisAccountID);
+        int pre_size = notes.size();
+        Log.i("Test_06_multiAddNote_All_Notes_Before_Addition", "Size: " + String.valueOf(pre_size));
+
+        long[] multiNoteID = new long[10];
+        for(int i = 0; i<10;++i){
+            multiNoteID[i] = db.addNote(thisAccountID, multiCloudNote.get(i));
+        }
+
+        // check if the node added successfully
+        for(int i = 0; i<10; ++i){
+            DBNote nodeTemp = db.getNote(thisAccountID, multiNoteID[i]);
+            assertEquals(nodeTemp.getTitle(), multiCloudNote.get(i).getTitle());
+            assertEquals(nodeTemp.getCategory(), multiCloudNote.get(i).getCategory());
+            assertEquals(nodeTemp.getContent(), multiCloudNote.get(i).getContent());
+            assertEquals(nodeTemp.getAccountId(), thisAccountID);
+            Log.i("Test_06_multiAddNote_All_Notes_Addition_sucessful", nodeTemp.toString());
+        }
+
+        // check if these note is in all notes
+        notes = db.getNotes(thisAccountID);
+        int add_size = notes.size();
+        assertEquals(10, add_size-pre_size);
+
+        Log.i("Test_06_multiAddNote_All_Notes_After_Addition", "Size: " + String.valueOf(add_size));
+    }
+
+    @Test
+    public void test_07_multiSearchNotes(){
+
+    }
+
+    @Test
+    public void test_08_multiGetCategories(){
+
+    }
+
+    @Test
+    public void test_09_multiSearchCategories(){
+
+    }
+
+    @Test
+    public void test_10_multiDeleteNote(){
+        long thisAccountID = account.getId();
+        List<DBNote> notes = db.getNotes(thisAccountID);
+        int added_size = notes.size();
+
+        Log.i("Test_10_multiDeleteNote_All_Before_Deletion", "Size: " + String.valueOf(added_size));
+        for (DBNote e : notes) {
+            Log.i("Test_10_multiDeleteNote_All_Before_Deletion", e.toString());
+            db.deleteNote(e.getId(), e.getStatus());
+        }
+
+        // Check if the note is deleted successfully
+        notes = db.getNotes(thisAccountID);
+        int deleted_size = notes.size();
+        assertEquals(10, added_size - deleted_size);
+        Log.i("Test_10_multiDeleteNote_All_After_Deletion", "Size: " + String.valueOf(deleted_size));
+
+    }
+
+    @Test
+    public void test_11_Chinese(){
 
     }
 
