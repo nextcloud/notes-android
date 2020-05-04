@@ -2,10 +2,8 @@ package it.niedermann.owncloud.notes.persistence;
 
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.*;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,17 +11,13 @@ import android.util.Log;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -49,6 +43,7 @@ public class NotesDatabaseTest {
         db = NotesDatabase.getInstance(context);
         // Create a new account if not exist
         account = db.getLocalAccountByAccountName(accountName);
+        assert account != null;
         if (account.getId() == 0) {
             db.addAccount(accountURL, accountUserName, accountName);
             account = db.getLocalAccountByAccountName(accountName);
@@ -81,7 +76,7 @@ public class NotesDatabaseTest {
         // Pre-check
         List<DBNote> notes = db.getNotes(accountID);
         int pre_size = notes.size();
-        Log.i("Test_01_addNote_All_Notes_Before_Addition", "Size: " + String.valueOf(pre_size));
+        Log.i("Test_01_addNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
         // Add a new note
         long noteID = db.addNote(accountID, cloudNote);
@@ -103,7 +98,7 @@ public class NotesDatabaseTest {
 
         assertEquals(1, added_size - pre_size);
 
-        Log.i("Test_01_addNote_All_Notes_Added", "Size: " + String.valueOf(added_size));
+        Log.i("Test_01_addNote_All_Notes_Added", "Size: " + added_size);
         for (DBNote cnote : notes) {
             Log.i("Test_01_addNote_All_Notes_Added", cnote.toString());
         }
@@ -114,19 +109,19 @@ public class NotesDatabaseTest {
     public void test_02_searchNotes() {
         long thisAccountID = account.getId();
         List<DBNote> notes = db.searchNotes(thisAccountID, null, null, false);
-        Log.i("Test_02_searchNotes_Favorite_false", "Size: " + String.valueOf(notes.size()));
+        Log.i("Test_02_searchNotes_Favorite_false", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
         notes = db.searchNotes(thisAccountID, null, "Hello", true);
-        Log.i("Test_02_searchNotes_Category_Hello", "Size: " + String.valueOf(notes.size()));
+        Log.i("Test_02_searchNotes_Category_Hello", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
         notes = db.searchNotes(thisAccountID, null, "Diary", true);
-        Log.i("Test_02_searchNotes_Category_Diary_Favorite_True", "Size: " + String.valueOf(notes.size()));
+        Log.i("Test_02_searchNotes_Category_Diary_Favorite_True", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
 
         notes = db.searchNotes(thisAccountID, null, null, null);
-        Log.i("Test_02_searchNotes_Three_NULL", "Size: " + String.valueOf(notes.size()));
+        Log.i("Test_02_searchNotes_Three_NULL", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
     }
 
@@ -182,7 +177,7 @@ public class NotesDatabaseTest {
         List<DBNote> notes = db.getNotes(thisAccountID);
         int added_size = notes.size();
 
-        Log.i("Test_05_deleteNote_All_Before_Deletion", "Size: " + String.valueOf(added_size));
+        Log.i("Test_05_deleteNote_All_Before_Deletion", "Size: " + added_size);
         int counter = 0;
         for (DBNote cnote : notes) {
             Log.i("Test_05_deleteNote_All_Before_Deletion", cnote.toString());
@@ -195,7 +190,7 @@ public class NotesDatabaseTest {
         notes = db.getNotes(thisAccountID);
         int deleted_size = notes.size();
         assertEquals(counter, added_size - deleted_size);
-        Log.i("Test_05_deleteNote_All_Notes_After_Deletion", "Size: " + String.valueOf(deleted_size));
+        Log.i("Test_05_deleteNote_All_Notes_After_Deletion", "Size: " + deleted_size);
     }
 
     @Test
@@ -236,7 +231,7 @@ public class NotesDatabaseTest {
         // Pre-check
         List<DBNote> notes = db.getNotes(thisAccountID);
         int pre_size = notes.size();
-        Log.i("Test_06_multiAddNote_All_Notes_Before_Addition", "Size: " + String.valueOf(pre_size));
+        Log.i("Test_06_multiAddNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
         long[] multiNoteID = new long[10];
         for(int i = 0; i<10;++i){
@@ -258,22 +253,98 @@ public class NotesDatabaseTest {
         int add_size = notes.size();
         assertEquals(10, add_size-pre_size);
 
-        Log.i("Test_06_multiAddNote_All_Notes_After_Addition", "Size: " + String.valueOf(add_size));
+        Log.i("Test_06_multiAddNote_All_Notes_After_Addition", "Size: " + add_size);
     }
 
     @Test
     public void test_07_multiSearchNotes(){
+        long thisAccountID = account.getId();
+        List<DBNote> notes = db.searchNotes(thisAccountID, null, null, null);
+        Log.i("Test_07_multiSearchNotes_null_null_null", "Size: "+ notes.size());
+        assertEquals(notes.size(), 10);
 
+        notes = db.searchNotes(thisAccountID, null, null, true);
+        Log.i("Test_07_multiSearchNotes_null_null_true", "Size: "+ notes.size());
+        assertEquals(notes.size(), 7);
+
+        notes = db.searchNotes(thisAccountID, null, "Music", null);
+        Log.i("Test_07_multiSearchNotes_null_Music_null", "Size: "+ notes.size());
+        assertEquals(notes.size(), 3);
+
+        notes = db.searchNotes(thisAccountID, null, "Work", true);
+        Log.i("Test_07_multiSearchNotes_null_Work_true", "Size: "+ notes.size());
+        assertEquals(notes.size(), 0);
+
+        notes = db.searchNotes(thisAccountID, null, "Diary", null);
+        Log.i("Test_07_multiSearchNotes_null_Diary_null", "Size: "+ notes.size());
+        assertEquals(notes.size(), 1);
+
+        notes = db.searchNotes(thisAccountID, "Mike", null, null);
+        Log.i("Test_07_multiSearchNotes_Mike_null_null", "Size: "+ notes.size());
+        assertEquals(notes.size(), 1);
     }
 
     @Test
     public void test_08_multiGetCategories(){
-
+        List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+        int count = 0;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_08_multiGetCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            count++;
+        }
+        Log.i("count count count", "count " + count);
+        assertEquals(5, count);
+        Log.i("count count count", "count " + count);
     }
 
     @Test
     public void test_09_multiSearchCategories(){
+        List<NavigationAdapter.NavigationItem> categories = db.searchCategories(account.getId(), "M");
+        int count = 0;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_09_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            count++;
+        }
+        assertEquals(2, count);
 
+        categories = db.searchCategories(account.getId(), "Mike");
+        count = 0;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_09_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            count++;
+        }
+        assertEquals(0, count);
+
+        categories = db.searchCategories(account.getId(), "M");
+        boolean exitFlag = false;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_04_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            if(categoryItem.label.equals("Music")){
+                exitFlag = true;
+            }
+        }
+        assertTrue(exitFlag);
+
+
+        categories = db.searchCategories(account.getId(), "WOk");
+        exitFlag = false;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_04_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            if(categoryItem.label.equals("Diary")){
+                exitFlag = true;
+            }
+        }
+        assertFalse(exitFlag);
+
+        categories = db.searchCategories(account.getId(), "hello");
+        exitFlag = false;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_04_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            if(categoryItem.label.equals("Diary")){
+                exitFlag = true;
+            }
+        }
+        assertFalse(exitFlag);
     }
 
     @Test
@@ -282,7 +353,7 @@ public class NotesDatabaseTest {
         List<DBNote> notes = db.getNotes(thisAccountID);
         int added_size = notes.size();
 
-        Log.i("Test_10_multiDeleteNote_All_Before_Deletion", "Size: " + String.valueOf(added_size));
+        Log.i("Test_10_multiDeleteNote_All_Before_Deletion", "Size: " + added_size);
         for (DBNote e : notes) {
             Log.i("Test_10_multiDeleteNote_All_Before_Deletion", e.toString());
             db.deleteNote(e.getId(), e.getStatus());
@@ -292,7 +363,7 @@ public class NotesDatabaseTest {
         notes = db.getNotes(thisAccountID);
         int deleted_size = notes.size();
         assertEquals(10, added_size - deleted_size);
-        Log.i("Test_10_multiDeleteNote_All_After_Deletion", "Size: " + String.valueOf(deleted_size));
+        Log.i("Test_10_multiDeleteNote_All_After_Deletion", "Size: " + deleted_size);
 
     }
 

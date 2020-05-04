@@ -380,6 +380,10 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
+        // TODO there is a bug here
+        // just validate AccountID
+        // but not use in the database query
+        // so that it will query all the categories in the database
         validateAccountId(accountId);
         String category_title = String.format("%s.%s", table_category, key_title);
         String note_title = String.format("%s.%s", table_notes, key_category);
