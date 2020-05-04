@@ -139,14 +139,47 @@ public class NotesDatabaseTest {
     @Test
     public void test_03_getCategories() {
         List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+        boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
-            Log.i("Test_Categories", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            Log.i("Test_03_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            if(categoryItem.label.equals("Diary")){
+                exitFlag = true;
+            }
         }
+        assertTrue(exitFlag);
     }
 
     @Test
     public void test_04_searchCategories() {
+        List<NavigationAdapter.NavigationItem> categories = db.searchCategories(account.getId(), "Dia");
+        boolean exitFlag = false;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_04_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            if(categoryItem.label.equals("Diary")){
+                exitFlag = true;
+            }
+        }
+        assertTrue(exitFlag);
 
+        categories = db.searchCategories(account.getId(), null);
+        exitFlag = false;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_04_searchCategories_Item_Diary", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            if(categoryItem.label.equals("Diary")){
+                exitFlag = true;
+            }
+        }
+        assertTrue(exitFlag);
+
+        categories = db.searchCategories(account.getId(), "Mike Chester Wang");
+        exitFlag = false;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_04_searchCategories_Item_Mike_Chester_Wang", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            if(categoryItem.label.equals("Diary")){
+                exitFlag = true;
+            }
+        }
+        assertFalse(exitFlag);
     }
 
     @Test
