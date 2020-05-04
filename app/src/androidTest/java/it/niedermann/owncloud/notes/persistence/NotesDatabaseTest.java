@@ -26,6 +26,11 @@ import java.util.TimeZone;
 
 import static org.junit.Assert.*;
 
+/**
+ * WARNING: for all the test case written by order
+ * you must run all the test case in the same time
+ * or some problem will happens
+ */
 @RunWith(AndroidJUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotesDatabaseTest {
@@ -101,6 +106,7 @@ public class NotesDatabaseTest {
         Log.i("Test_01_addNote_All_Notes_Added", "Size: " + added_size);
         for (DBNote cnote : notes) {
             Log.i("Test_01_addNote_All_Notes_Added", cnote.toString());
+            Log.i("Test_01_addNote_All_Notes_Added", cnote.getTitle());
         }
 
     }
@@ -369,6 +375,78 @@ public class NotesDatabaseTest {
 
     @Test
     public void test_11_Chinese(){
+        long accountID = account.getId();
+        CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
+                "美好的一天", getCurDate() + " 兄弟，这真是美好的一天。",
+                true, "日记", null);
+
+        // Pre-check
+        List<DBNote> notes = db.getNotes(accountID);
+        int pre_size = notes.size();
+        Log.i("Test_11_Chinese_All_Notes_Before_Addition", "Size: " + pre_size);
+
+        // Add a new note
+        long noteID = db.addNote(accountID, cloudNote);
+        // Check if this note is added successfully
+        DBNote note = db.getNote(accountID, noteID);
+        Log.i("Test_11_Chinese_Cur_Note", note.toString());
+        Log.i("Test_11_Chinese_Cur_Note", "Title: " + note.getTitle());
+        Log.i("Test_11_Chinese_Cur_Note", "Content: " + note.getContent());
+        Log.i("Test_11_Chinese_Cur_Note", "Category: " + note.getCategory());
+
+        assertEquals("美好的一天", note.getTitle());
+        assertEquals(cloudNote.getContent(), note.getContent());
+        assertEquals("日记", note.getCategory());
+        assertEquals(accountID, note.getAccountId());
+
+        // Check if this note is in all notes
+        notes = db.getNotes(accountID);
+        int added_size = notes.size();
+
+        assertEquals(1, added_size - pre_size);
+
+        Log.i("Test_11_Chinese_All_Notes_Added", "Size: " + added_size);
+        for (DBNote cnote : notes) {
+            Log.i("Test_11_Chinese_All_Notes_Added", cnote.toString());
+        }
+
+        long thisAccountID = account.getId();
+        notes = db.searchNotes(thisAccountID, "美好", "日记", true);
+        Log.i("Test_11_Chinese", "Size: " + notes.size());
+        assertEquals(1, notes.size());
+
+        List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+        boolean exitFlag = false;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_11_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            if(categoryItem.label.equals("日记")){
+                exitFlag = true;
+            }
+        }
+        assertTrue(exitFlag);
+
+        categories = db.searchCategories(account.getId(), "记");
+        exitFlag = false;
+        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            Log.i("Test_11_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+            if(categoryItem.label.equals("日记")){
+                exitFlag = true;
+            }
+        }
+        assertTrue(exitFlag);
+
+        notes = db.getNotes(thisAccountID);
+        for (DBNote cnote : notes) {
+            Log.i("Test_11_Chinese_All_Before_Deletion", cnote.toString());
+            // Delete the note after testing
+            db.deleteNote(cnote.getId(), cnote.getStatus());
+        }
+
+        // Check if the note is deleted successfully
+        notes = db.getNotes(thisAccountID);
+        int deleted_size = notes.size();
+        assertEquals(1, added_size - deleted_size);
+        Log.i("Test_11_Chinese_All_Notes_After_Deletion", "Size: " + deleted_size);
 
     }
 
