@@ -31,7 +31,6 @@ import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class NotesDatabaseTest {
-    final static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     private NotesDatabase db = null;
 
@@ -133,9 +132,7 @@ public class NotesDatabaseTest {
     }
 
     public static String getCurDate() {
-        TimeZone time = TimeZone.getTimeZone("GMT+8");
-        TimeZone.setDefault(time);
-        Date curDate = new Date();
-        return DATE_FORMAT.format(curDate);
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
     }
 }
