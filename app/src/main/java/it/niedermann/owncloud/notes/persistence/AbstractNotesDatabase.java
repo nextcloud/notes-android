@@ -29,9 +29,14 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 @SuppressWarnings("WeakerAccess")
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
+    // TODO : delete after testing
+    // ------------------- just for testing -------------------
+    public static final boolean testFlag = true;
+    // ------------------ just for testing --------------------
+
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 12;
+    private static final int database_version = 13;
     @NonNull
     private final Context context;
 
@@ -97,6 +102,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_category + " INTEGER, " +
                 key_etag + " TEXT," +
                 key_excerpt + " TEXT NOT NULL DEFAULT '', " +
+                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_id + "), " +
                 "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
         createNotesIndexes(db);
     }
@@ -127,6 +133,13 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     @SuppressWarnings("deprecation")
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // TODO : delete after testing
+        // ----------------- just for testing --------------------------
+        if(testFlag){
+            recreateDatabase(db);
+            return;
+        }
+        // ---------------- just for testing - end ---------------------
         if (oldVersion < 3) {
             recreateDatabase(db);
             return;
@@ -287,6 +300,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             CapabilitiesWorker.update(context);
         }
         // TODO: Update database
+        if (oldVersion < 13) {
+
+        }
+
     }
 
     @Override
