@@ -84,6 +84,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     }
 
     private void createNotesTable(@NonNull SQLiteDatabase db) {
+        // TODO: category ID foreign key
         db.execSQL("CREATE TABLE " + table_notes + " ( " +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_remote_id + " INTEGER, " +
@@ -115,6 +116,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     }
 
     private void createCategoryTable(@NonNull SQLiteDatabase db) {
+        // TODO: category ID account id
         db.execSQL("CREATE TABLE " + table_category + "(" +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_account_id + " INTEGER, " +

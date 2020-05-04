@@ -99,6 +99,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
      */
+    // TODO: test
     long addNote(long accountId, CloudNote note) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -224,6 +225,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param pruneContent whether or not the content should be pruned for performance reasons
      * @return DBNote
      */
+    // TODO: try reflection testing
     @NonNull
     private DBNote getNoteFromCursor(long accountId, @NonNull Cursor cursor, boolean pruneContent) {
         validateAccountId(accountId);
@@ -283,6 +285,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @return List&lt;Note&gt;
      */
+    // TODO: Test
     @NonNull
     @WorkerThread
     public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
@@ -369,6 +372,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return favorites;
     }
 
+    // TODO: test
     @NonNull
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
@@ -400,6 +404,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     // TODO merge with getCategories(long accountId)
+    // TODO: test
     @NonNull
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
@@ -458,6 +463,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         serverSyncHelper.scheduleSync(ssoAccount, true);
     }
 
+    // TODO: test
     public void setCategory(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
         note.setCategory(category);
         note.setStatus(DBStatus.LOCAL_EDITED);
@@ -497,6 +503,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
+    // TODO: test
     public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
         //debugPrintFullDB();
         DBNote newNote;
@@ -540,6 +547,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param remoteNote                Note from the server.
      * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
      */
+    // TODO: test
     void updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -830,6 +838,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param categoryTitle: The category title
      * @return the corresponding category id.
      */
+    // TODO: Test
     @NonNull
     @WorkerThread
     private Integer getCategoryIdByTitle(long accountId, @NonNull String categoryTitle, boolean create) {
@@ -858,6 +867,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return id;
     }
 
+    // TODO: test
     @NonNull
     @WorkerThread
     private String getTitleByCategoryId(long accountId, int id) {
@@ -903,6 +913,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return str.toString();
     }
 
+    // TODO: test
     private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String title) {
         validateAccountId(accountId);
         Cursor cursor = getReadableDatabase().query(
