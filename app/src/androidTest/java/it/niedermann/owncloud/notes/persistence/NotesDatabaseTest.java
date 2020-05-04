@@ -70,7 +70,7 @@ public class NotesDatabaseTest {
     public void testAddDeleteNote() {
         long accountID = account.getId();
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
-                "A Great Day", getCurDate() + " This is a really great day bro.",
+                "A Great Day", /*getCurDate() + */" This is a really great day bro.",
                 true, "Diary", null);
 
         // Pre-check
@@ -86,6 +86,7 @@ public class NotesDatabaseTest {
         Log.i("Test_testAddDeleteNote_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_testAddDeleteNote_Cur_Note", "Content: " + note.getContent());
         Log.i("Test_testAddDeleteNote_Cur_Note", "Category: " + note.getCategory());
+        assertEquals("A Great Day", note.getTitle());
 
         // Check if this note is in all notes
         notes = db.getNotes(accountID);
@@ -107,12 +108,18 @@ public class NotesDatabaseTest {
     }
 
     @Test
+    public void testAddMultipleNotes() {
+
+    }
+
+    @Test
     public void searchNotes() {
 
     }
 
     @Test
     public void getCategories() {
+
     }
 
     @Test
@@ -121,10 +128,12 @@ public class NotesDatabaseTest {
 
     @Test
     public void setCategory() {
+        // Unable to test with SSO
     }
 
     @Test
     public void updateNoteAndSync() {
+        // Unable to test with SSO
     }
 
     @Test
