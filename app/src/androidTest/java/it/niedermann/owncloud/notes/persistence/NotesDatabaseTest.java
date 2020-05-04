@@ -4,6 +4,7 @@ import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 import android.content.Context;
 import android.util.Log;
@@ -17,7 +18,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 import java.util.TimeZone;
 
 import static org.junit.Assert.*;
+
 
 /**
  * WARNING: for all the test case written by order
@@ -451,20 +455,71 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void setCategory() {
-        // Unable to test with SSO
+    public void test_12_getNoteFromCursor(){
+        // pass
     }
 
     @Test
-    public void updateNoteAndSync() {
-        // Unable to test with SSO
+    public void test_13_getTitleByCategoryId(){
+
     }
 
     @Test
-    public void updateNote() {
-        // can not check
-        // need remoteNote (note from server)
+    public void test_14_getCategoryIdsByTitle(){
+
     }
+
+    @Test
+    public void test_15_getCategoryIdByTitle(){
+        try {
+            // TODO: forName error
+            Class c = Class.forName("NotesDatabase");
+            Log.i("gogogogo", c.getName());
+            Method method = Class.forName("NotesDatabase")
+                    .getDeclaredMethod("getCategoryIdByTitle",
+                            Long.class,
+                            String.class,
+                            Boolean.class);
+            method.setAccessible(true);
+
+            List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+            int count = 0;
+            for (NavigationAdapter.NavigationItem categoryItem : categories) {
+                Log.i("Test_15_getCategoryIdByTitle", String.format("%s | %s | %d | %d",
+                        categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+                count++;
+            }
+            Log.i("Test_15_getCategoryIdByTitle", "count " + count);
+
+            int catID = (int)method.invoke(db, account.getId(), "Mike Chester Wang's Diary", false);
+            assertEquals(catID, -1);
+
+            catID = (int)method.invoke(db, account.getId(), "Mike Chester Wang's Diary", true);
+            assertNotEquals(catID, -1);
+
+            catID = (int)method.invoke(db, account.getId(), "hello", true);
+            assertEquals(catID, -1);
+        }catch (Exception e){
+            fail(Arrays.toString(e.getStackTrace()));
+            Log.e("Test_15_getCategoryIdByTitle_Exception", Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+//    @Test
+//    public void setCategory() {
+//        // Unable to test with SSO
+//    }
+//
+//    @Test
+//    public void updateNoteAndSync() {
+//        // Unable to test with SSO
+//    }
+//
+//    @Test
+//    public void updateNote() {
+//        // can not check
+//        // need remoteNote (note from server)
+//    }
 
     public static String getCurDate() {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));

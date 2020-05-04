@@ -852,6 +852,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     private Integer getCategoryIdByTitle(long accountId, @NonNull String categoryTitle, boolean create) {
+        // TODO: there is a bug
+        // only validateAccountId BUT NOT use
         if (create) {
             if (getCategoryIdByTitle(accountId, categoryTitle, false) == -1) {
                 if (addCategory(categoryTitle, accountId) == -1) {
@@ -881,6 +883,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     private String getTitleByCategoryId(long accountId, int id) {
+        // TODO: there is a bug
+        // only validateAccountId BUT NOT use
         if (accountId != -1)
             validateAccountId(accountId);
         Cursor cursor = getReadableDatabase().query(
@@ -925,6 +929,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     // TODO: test
     private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String title) {
+        // TODO: there is a bug
+        // only validateAccountId BUT NOT use
         validateAccountId(accountId);
         Cursor cursor = getReadableDatabase().query(
                 table_category,
