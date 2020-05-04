@@ -391,7 +391,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         // Weird problem: If I use ? instead of concat directly, there is no result in the join table
         // TODO: Find a way to use ? instead of concat.
         String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
-                " ON " + category_id + " = " + note_title + " GROUP BY " + category_id;
+                " ON " + category_id + " = " + note_title + " GROUP BY " + category_id +
+                " WHERE " + table_category + "." + key_account_id + " = " + accountId;
         Cursor cursor = getReadableDatabase().rawQuery(rawQuery, null);
         List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
