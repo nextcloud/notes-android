@@ -16,6 +16,8 @@ import androidx.preference.PreferenceManager;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
@@ -135,10 +137,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // TODO : delete after testing
         // ----------------- just for testing --------------------------
-        if(testFlag){
-            recreateDatabase(db);
-            return;
-        }
+//        if (testFlag) {
+//            recreateDatabase(db);
+//            return;
+//        }
         // ---------------- just for testing - end ---------------------
         if (oldVersion < 3) {
             recreateDatabase(db);
@@ -299,9 +301,42 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9'");
             CapabilitiesWorker.update(context);
         }
-        // TODO: Update database
         if (oldVersion < 13) {
-
+            String tmpTableNotes = String.format("tmp_%s", table_notes);
+            db.execSQL("ALTER TABLE " + table_notes + " RENAME TO " + tmpTableNotes);
+            createNotesTable(db);
+            createCategoryTable(db);
+            Hashtable<String, Integer> categoryTitleIdMap = new Hashtable<>();
+            int id = 1;
+            Cursor tmpNotesCursor = db.rawQuery("SELECT * FROM " + tmpTableNotes, null);
+            while (tmpNotesCursor.moveToNext()) {
+                String categoryTitle = tmpNotesCursor.getString(8);
+                int accountId = tmpNotesCursor.getInt(2);
+                int categoryId = 0;
+                if (categoryTitleIdMap.containsKey(categoryTitle) && categoryTitleIdMap.get(categoryTitle) != null) {
+                    categoryId = categoryTitleIdMap.get(categoryTitle);
+                } else {
+                    categoryId = id++;
+                    db.execSQL("INSERT INTO " + table_category + " VALUES ( " + categoryId + " , " + accountId + " , '" + categoryTitle + "' ) ");
+                    categoryTitleIdMap.put(categoryTitle, categoryId);
+                }
+                String values = String.format("%d, %d, %d, '%s', '%s', %d, '%s', %d, %d, ",// %s, %s",
+                        tmpNotesCursor.getInt(0), tmpNotesCursor.getInt(1), tmpNotesCursor.getInt(2),
+                        tmpNotesCursor.getString(3), tmpNotesCursor.getString(4), tmpNotesCursor.getInt(5),
+                        tmpNotesCursor.getString(6), tmpNotesCursor.getInt(7), categoryId);
+                if (tmpNotesCursor.getString(9) == null) {
+                    values = values + "null, ";
+                }
+                if (tmpNotesCursor.getString(10).trim().equals("")) {
+                    values = values + "''";
+                }
+                Log.e("###", values);
+                db.execSQL("INSERT INTO " + table_notes + " VALUES ( " + values + " ) ");
+            }
+            tmpNotesCursor.close();
+            db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);
+            createCategoryIndexes(db);
+            createNotesIndexes(db);
         }
 
     }
