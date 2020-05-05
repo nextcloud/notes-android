@@ -11,7 +11,7 @@
         <intent
             android:action="android.intent.action.CREATE_DOCUMENT"
             android:targetClass="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
-            android:targetPackage="it.niedermann.owncloud.notes" />
+            android:targetPackage="it.niedermann.owncloud.notes.dev" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 </shortcuts>
