@@ -385,15 +385,19 @@ public class NotesDatabase extends AbstractNotesDatabase {
         String note_title = String.format("%s.%s", table_notes, key_category);
         String category_id = String.format("%s.%s", table_category, key_id);
         String category_accountId = String.format("%s.%s", table_category, key_account_id);
+        String note_status = String.format("%s.%s", table_notes, key_status);
         // Weird problem: If I use ? instead of concat directly, there is no result in the join table
         // TODO: Find a way to use ? instead of concat.
         // TODO: a bug here
         // when no notes and have cat, inner join will not return this cat
-        String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
-                " ON " + category_id + " = " + note_title + " WHERE " + category_accountId + " = " + accountId +
-                " GROUP BY " + category_id;
+        String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category +
+                " INNER JOIN " + table_notes + " ON " + category_id + " = " + note_title +
+                " WHERE " + category_accountId + " = ? AND " + note_status + " != ? GROUP BY " + category_id;
+//        String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
+//                " ON " + category_id + " = " + note_title + " WHERE " + category_accountId + " = " + accountId +
+//                " GROUP BY " + category_id;
 
-        Cursor cursor = getReadableDatabase().rawQuery(rawQuery, null);
+        Cursor cursor = getReadableDatabase().rawQuery(rawQuery, new String[]{String.valueOf(accountId), DBStatus.LOCAL_DELETED.getTitle()});
         List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
             Resources res = getContext().getResources();
@@ -422,23 +426,33 @@ public class NotesDatabase extends AbstractNotesDatabase {
         String note_title = String.format("%s.%s", table_notes, key_category);
         String category_id = String.format("%s.%s", table_category, key_id);
         String category_accountId = String.format("%s.%s", table_category, key_account_id);
-        // Weird problem: If I use ? instead of concat directly, there is no result in the join table
-        // TODO: Find a way to use ? instead of concat.
         String rawQuery;
+
+        Cursor cursor;
         if (search == null || search.trim().equals("")) {
-            rawQuery = String.format("SELECT %s, COUNT(*) FROM %s INNER JOIN %s ON %s = %s " +
-                            " WHERE %s != '%s' AND %s = %s AND %s != \"\" GROUP BY %s",
-                    category_title, table_category, table_notes, category_id, note_title,
-                    key_status, DBStatus.LOCAL_DELETED.getTitle(), category_accountId, String.valueOf(accountId),
-                    category_title, category_id);
+            rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
+                    " ON " + note_title + " = " + category_id + " WHERE " + key_status + " != ? AND " + category_accountId +
+                    " = ? AND " + category_title + " != \"\" GROUP BY " + category_id;
+
+            cursor = getReadableDatabase().rawQuery(rawQuery, new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId)});
+//            rawQuery = String.format("SELECT %s, COUNT(*) FROM %s INNER JOIN %s ON %s = %s " +
+//                            " WHERE %s != '%s' AND %s = %s AND %s != \"\" GROUP BY %s",
+//                    category_title, table_category, table_notes, category_id, note_title,
+//                    key_status, DBStatus.LOCAL_DELETED.getTitle(), category_accountId, String.valueOf(accountId),
+//                    category_title, category_id);
         } else {
-            rawQuery = String.format("SELECT %s, COUNT(*) FROM %s INNER JOIN %s ON %s = %s " +
-                            " WHERE %s != '%s' AND %s = %s AND %s LIKE %s AND %s != \"\" GROUP BY %s",
-                    category_title, table_category, table_notes, category_id, note_title,
-                    key_status, DBStatus.LOCAL_DELETED.getTitle(), category_accountId, String.valueOf(accountId),
-                    category_title, "'%" + search.trim() + "%'", category_title, category_id);
+            rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
+                    " ON " + note_title + " = " + category_id + " WHERE " + key_status + " != ?  AND " + category_accountId +
+                    " = ? AND " + category_title + " LIKE ? AND " + category_title + " != \"\" GROUP BY " + category_id;
+
+            cursor = getReadableDatabase().rawQuery(rawQuery,
+                    new String[]{DBStatus.LOCAL_DELETED.getTitle(), "'%" + search.trim() + "%'", String.valueOf(accountId)});
+//            rawQuery = String.format("SELECT %s, COUNT(*) FROM %s INNER JOIN %s ON %s = %s " +
+//                            " WHERE %s != '%s' AND %s = %s AND %s LIKE %s AND %s != \"\" GROUP BY %s",
+//                    category_title, table_category, table_notes, category_id, note_title,
+//                    key_status, DBStatus.LOCAL_DELETED.getTitle(), category_accountId, String.valueOf(accountId),
+//                    category_title, "'%" + search.trim() + "%'", category_title, category_id);
         }
-        Cursor cursor = getReadableDatabase().rawQuery(rawQuery, null);
         List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
             Resources res = getContext().getResources();
