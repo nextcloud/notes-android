@@ -22,6 +22,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -58,12 +59,6 @@ public class NotesDatabaseTest {
             account = db.getLocalAccountByAccountName(accountName);
         }
     }
-
-    // When we try to delete the account for testing, the process crashes. Still try to find out why
-//    @After
-//    public void deleteAccount() {
-//        db.deleteAccount(account);
-//    }
 
     @Test
     public void testSetUpEnv() {
@@ -455,51 +450,105 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void test_12_getNoteFromCursor(){
-        // pass
-    }
-
-    @Test
-    public void test_13_getTitleByCategoryId(){
-
-    }
-
-    @Test
-    public void test_14_getCategoryIdsByTitle(){
-
-    }
-
-    @Test
-    public void test_15_getCategoryIdByTitle(){
+    public void test_12_getCategoryIdByTitle() {
         try {
             Method method = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle",
-                            long.class,
-                            String.class,
-                            boolean.class);
+                    long.class,
+                    String.class,
+                    boolean.class);
             method.setAccessible(true);
 
             List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
             int count = 0;
             for (NavigationAdapter.NavigationItem categoryItem : categories) {
-                Log.i("Test_15_getCategoryIdByTitle", String.format("%s | %s | %d | %d",
+                Log.i("Test_12_getCategoryIdByTitle", String.format("%s | %s | %d | %d",
                         categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
                 count++;
             }
-            Log.i("Test_15_getCategoryIdByTitle", "count " + count);
+            Log.i("Test_12_getCategoryIdByTitle", "count " + count);
 
-            int catID = (int)method.invoke(db, account.getId(), "Mike Chester Wang's Diary", false);
+            int catID;
+
+            // Find an existing category to test false
+            if (count > 0) {
+                catID = (int)method.invoke(db, account.getId(), categories.get(0).label, false);
+                assertNotEquals(catID, -1);
+            }
+
+            // Create a category not existing
+            String cur_cat = "Mike Chester Wang's Diary" + getCurDate();
+            catID = (int)method.invoke(db, account.getId(), cur_cat, false);
             assertEquals(catID, -1);
 
-            catID = (int)method.invoke(db, account.getId(), "Mike Chester Wang's Diary", true);
+            catID = (int)method.invoke(db, account.getId(), cur_cat, true);
             assertNotEquals(catID, -1);
-
-//            catID = (int)method.invoke(db, account.getId(), "hello", true);
-//            assertEquals(catID, -1);
-        }catch (Exception e){
+        } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
-            Log.e("Test_15_getCategoryIdByTitle_Exception", Arrays.toString(e.getStackTrace()));
+            Log.e("Test_12_getCategoryIdByTitle", Arrays.toString(e.getStackTrace()));
         }
     }
+
+    @Test
+    public void test_13_getTitleByCategoryId(){
+        try {
+            Method method_title_by_id = NotesDatabase.class.getDeclaredMethod("getTitleByCategoryId", long.class, int.class);
+            method_title_by_id.setAccessible(true);
+
+            // Remember we have a category named "Diary"? We can use tested method in test_12 to get category id
+            Method method_id_by_title = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle", long.class, String.class, boolean.class);
+            method_id_by_title.setAccessible(true);
+            int catId = (int)method_id_by_title.invoke(db, account.getId(), "Diary", true);
+            String catTitle = (String)method_title_by_id.invoke(db, account.getId(), catId);
+
+            assertEquals("Diary", catTitle);
+
+        } catch (Exception e) {
+            fail(Arrays.toString(e.getStackTrace()));
+            Log.e("Test_13_getTitleByCategoryId", Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    @Test
+    public void test_14_getCategoryIdsByTitle(){
+        try {
+            Method method_ids_by_title = NotesDatabase.class.getDeclaredMethod("getCategoryIdsByTitle", long.class, String.class);
+            method_ids_by_title.setAccessible(true);
+
+            // We can traverse through the category list to find match of "Dia", and then
+            Method method_id_by_title = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle", long.class, String.class, boolean.class);
+            method_id_by_title.setAccessible(true);
+            List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+            String pattern = "Dia";
+            List<Integer> matchList = new ArrayList<>();
+            for (NavigationAdapter.NavigationItem categoryItem : categories) {
+                String catTitle = categoryItem.label;
+                Log.i("Test_14_getCategoryIdsByTitle", catTitle);
+                if (catTitle.contains(pattern)) {
+                    // She will be matched, store ID
+                    int catId = (int)method_id_by_title.invoke(db, account.getId(), catTitle, false);
+                    matchList.add(catId);
+                }
+            }
+
+            // Now use our testing method
+            List<Integer> testList = (List<Integer>) method_ids_by_title.invoke(db, account.getId(), pattern);
+
+            // Compare (Sort to make sure the generated strings are equal to each other)
+            Collections.sort(matchList);
+            Collections.sort(testList);
+            Log.i("Test_14_getCategoryIdsByTitle", matchList.toString());
+            Log.i("Test_14_getCategoryIdsByTitle", testList.toString());
+            assertEquals(matchList.toString(), testList.toString());
+        } catch (Exception e) {
+            fail(Arrays.toString(e.getStackTrace()));
+            Log.e("Test_14_getCategoryIdsByTitle", Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    //    @Test
+//    public void test_12_getNoteFromCursor(){
+//        // pass
+//    }
 
 //    @Test
 //    public void setCategory() {
