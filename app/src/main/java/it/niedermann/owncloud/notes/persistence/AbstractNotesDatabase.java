@@ -317,21 +317,43 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                     categoryId = categoryTitleIdMap.get(categoryTitle);
                 } else {
                     categoryId = id++;
-                    db.execSQL("INSERT INTO " + table_category + " VALUES ( " + categoryId + " , " + accountId + " , '" + categoryTitle + "' ) ");
+                    ContentValues values = new ContentValues();
+                    values.put(key_id, categoryId);
+                    values.put(key_account_id, accountId);
+                    values.put(key_title, categoryTitle);
+                    db.insert(table_category, null, values);
+//                    if (categoryTitle.trim().equals("")) {
+//                        db.execSQL("INSERT INTO " + table_category + " VALUES ( " + categoryId + " , " + accountId + ", EMPTY) ");
+//                    } else {
+//                        db.execSQL("INSERT INTO " + table_category + " VALUES ( " + categoryId + " , " + accountId + " , '" + categoryTitle + "' ) ");
+//                    }
                     categoryTitleIdMap.put(categoryTitle, categoryId);
                 }
-                String values = String.format("%d, %d, %d, '%s', '%s', %d, '%s', %d, %d, ",// %s, %s",
-                        tmpNotesCursor.getInt(0), tmpNotesCursor.getInt(1), tmpNotesCursor.getInt(2),
-                        tmpNotesCursor.getString(3), tmpNotesCursor.getString(4), tmpNotesCursor.getInt(5),
-                        tmpNotesCursor.getString(6), tmpNotesCursor.getInt(7), categoryId);
-                if (tmpNotesCursor.getString(9) == null) {
-                    values = values + "null, ";
-                }
-                if (tmpNotesCursor.getString(10).trim().equals("")) {
-                    values = values + "''";
-                }
-                Log.e("###", values);
-                db.execSQL("INSERT INTO " + table_notes + " VALUES ( " + values + " ) ");
+                ContentValues values = new ContentValues();
+                values.put(key_id, tmpNotesCursor.getInt(0));
+                values.put(key_remote_id, tmpNotesCursor.getInt(1));
+                values.put(key_account_id, tmpNotesCursor.getInt(2));
+                values.put(key_status, tmpNotesCursor.getString(3));
+                values.put(key_title, tmpNotesCursor.getString(4));
+                values.put(key_modified, tmpNotesCursor.getLong(5));
+                values.put(key_content, tmpNotesCursor.getString(6));
+                values.put(key_favorite, tmpNotesCursor.getInt(7));
+                values.put(key_category, categoryId);
+                values.put(key_etag, tmpNotesCursor.getString(9));
+                values.put(key_etag, tmpNotesCursor.getString(10));
+                db.insert(table_notes, null, values);
+//                String values = String.format("%d, %d, %d, '%s', '%s', %d, '%s', %d, %d, ",// %s, %s",
+//                        tmpNotesCursor.getInt(0), tmpNotesCursor.getInt(1), tmpNotesCursor.getInt(2),
+//                        tmpNotesCursor.getString(3), tmpNotesCursor.getString(4), tmpNotesCursor.getInt(5),
+//                        tmpNotesCursor.getString(6), tmpNotesCursor.getInt(7), categoryId);
+//                if (tmpNotesCursor.getString(9) == null) {
+//                    values = values + "null, ";
+//                }
+//                if (tmpNotesCursor.getString(10).trim().equals("")) {
+//                    values = values + "''";
+//                }
+//                Log.e("###", values + " " + categoryTitle);
+//                db.execSQL("INSERT INTO " + table_notes + " VALUES ( " + values + " ) ");
             }
             tmpNotesCursor.close();
             db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);
