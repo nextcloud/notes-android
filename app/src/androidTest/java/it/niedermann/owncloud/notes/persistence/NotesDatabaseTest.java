@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.persistence;
 
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
@@ -70,7 +71,7 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void test_01_addNote(){
+    public void test_01_addNote() {
 
         long accountID = account.getId();
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
@@ -136,7 +137,7 @@ public class NotesDatabaseTest {
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_03_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if(categoryItem.label.equals("Diary")){
+            if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
             }
         }
@@ -149,7 +150,7 @@ public class NotesDatabaseTest {
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_04_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if(categoryItem.label.equals("Diary")){
+            if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
             }
         }
@@ -159,7 +160,7 @@ public class NotesDatabaseTest {
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_04_searchCategories_Item_Diary", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if(categoryItem.label.equals("Diary")){
+            if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
             }
         }
@@ -169,7 +170,7 @@ public class NotesDatabaseTest {
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_04_searchCategories_Item_Mike_Chester_Wang", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if(categoryItem.label.equals("Diary")){
+            if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
             }
         }
@@ -188,7 +189,7 @@ public class NotesDatabaseTest {
             Log.i("Test_05_deleteNote_All_Before_Deletion", cnote.toString());
             // Delete the note after testing
             db.deleteNote(cnote.getId(), cnote.getStatus());
-            counter ++;
+            counter++;
         }
 
         // Check if the note is deleted successfully
@@ -199,7 +200,7 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void test_06_multiAddNote(){
+    public void test_06_multiAddNote() {
         long thisAccountID = account.getId();
         ArrayList<CloudNote> multiCloudNote = new ArrayList<>();
         multiCloudNote.add(new CloudNote(1, Calendar.getInstance(),
@@ -239,12 +240,12 @@ public class NotesDatabaseTest {
         Log.i("Test_06_multiAddNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
         long[] multiNoteID = new long[10];
-        for(int i = 0; i<10;++i){
+        for (int i = 0; i < 10; ++i) {
             multiNoteID[i] = db.addNote(thisAccountID, multiCloudNote.get(i));
         }
 
         // check if the node added successfully
-        for(int i = 0; i<10; ++i){
+        for (int i = 0; i < 10; ++i) {
             DBNote nodeTemp = db.getNote(thisAccountID, multiNoteID[i]);
             assertEquals(nodeTemp.getTitle(), multiCloudNote.get(i).getTitle());
             assertEquals(nodeTemp.getCategory(), multiCloudNote.get(i).getCategory());
@@ -256,41 +257,41 @@ public class NotesDatabaseTest {
         // check if these note is in all notes
         notes = db.getNotes(thisAccountID);
         int add_size = notes.size();
-        assertEquals(10, add_size-pre_size);
+        assertEquals(10, add_size - pre_size);
 
         Log.i("Test_06_multiAddNote_All_Notes_After_Addition", "Size: " + add_size);
     }
 
     @Test
-    public void test_07_multiSearchNotes(){
+    public void test_07_multiSearchNotes() {
         long thisAccountID = account.getId();
         List<DBNote> notes = db.searchNotes(thisAccountID, null, null, null);
-        Log.i("Test_07_multiSearchNotes_null_null_null", "Size: "+ notes.size());
+        Log.i("Test_07_multiSearchNotes_null_null_null", "Size: " + notes.size());
         assertEquals(notes.size(), 10);
 
         notes = db.searchNotes(thisAccountID, null, null, true);
-        Log.i("Test_07_multiSearchNotes_null_null_true", "Size: "+ notes.size());
+        Log.i("Test_07_multiSearchNotes_null_null_true", "Size: " + notes.size());
         assertEquals(notes.size(), 7);
 
         notes = db.searchNotes(thisAccountID, null, "Music", null);
-        Log.i("Test_07_multiSearchNotes_null_Music_null", "Size: "+ notes.size());
+        Log.i("Test_07_multiSearchNotes_null_Music_null", "Size: " + notes.size());
         assertEquals(notes.size(), 3);
 
         notes = db.searchNotes(thisAccountID, null, "Work", true);
-        Log.i("Test_07_multiSearchNotes_null_Work_true", "Size: "+ notes.size());
+        Log.i("Test_07_multiSearchNotes_null_Work_true", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
         notes = db.searchNotes(thisAccountID, null, "Diary", null);
-        Log.i("Test_07_multiSearchNotes_null_Diary_null", "Size: "+ notes.size());
+        Log.i("Test_07_multiSearchNotes_null_Diary_null", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
 
         notes = db.searchNotes(thisAccountID, "Mike", null, null);
-        Log.i("Test_07_multiSearchNotes_Mike_null_null", "Size: "+ notes.size());
+        Log.i("Test_07_multiSearchNotes_Mike_null_null", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
     }
 
     @Test
-    public void test_08_multiGetCategories(){
+    public void test_08_multiGetCategories() {
         List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
         int count = 0;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
@@ -303,7 +304,7 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void test_09_multiSearchCategories(){
+    public void test_09_multiSearchCategories() {
         List<NavigationAdapter.NavigationItem> categories = db.searchCategories(account.getId(), "M");
         int count = 0;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
@@ -324,7 +325,7 @@ public class NotesDatabaseTest {
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_04_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if(categoryItem.label.equals("Music")){
+            if (categoryItem.label.equals("Music")) {
                 exitFlag = true;
             }
         }
@@ -335,7 +336,7 @@ public class NotesDatabaseTest {
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_04_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if(categoryItem.label.equals("Diary")){
+            if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
             }
         }
@@ -345,7 +346,7 @@ public class NotesDatabaseTest {
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_04_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if(categoryItem.label.equals("Diary")){
+            if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
             }
         }
@@ -353,15 +354,29 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void test_10_multiDeleteNote(){
+    public void test_10_multiDeleteNote() {
+
+//        List<NavigationAdapter.NavigationItem> cat = db.getCategories(account.getId());
+//        for (NavigationAdapter.NavigationItem categoryItem : cat) {
+//            Log.i("12bTest_test_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//        }
+
         long thisAccountID = account.getId();
         List<DBNote> notes = db.getNotes(thisAccountID);
         int added_size = notes.size();
 
+//        int counter = 0;
         Log.i("Test_10_multiDeleteNote_All_Before_Deletion", "Size: " + added_size);
         for (DBNote e : notes) {
             Log.i("Test_10_multiDeleteNote_All_Before_Deletion", e.toString());
             db.deleteNote(e.getId(), e.getStatus());
+
+//            cat = db.getCategories(account.getId());
+//            Log.i("12aTest_test_getCategories_Item", "counter: " + ++counter);
+//            for (NavigationAdapter.NavigationItem categoryItem : cat) {
+//                Log.i("12aTest_test_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            }
+
         }
 
         // Check if the note is deleted successfully
@@ -373,7 +388,8 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void test_11_Chinese(){
+    public void test_11_Chinese() {
+
         long accountID = account.getId();
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
                 "美好的一天", getCurDate() + " 兄弟，这真是美好的一天。",
@@ -418,7 +434,7 @@ public class NotesDatabaseTest {
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_11_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if(categoryItem.label.equals("日记")){
+            if (categoryItem.label.equals("日记")) {
                 exitFlag = true;
             }
         }
@@ -428,7 +444,7 @@ public class NotesDatabaseTest {
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_11_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if(categoryItem.label.equals("日记")){
+            if (categoryItem.label.equals("日记")) {
                 exitFlag = true;
             }
         }
@@ -451,6 +467,7 @@ public class NotesDatabaseTest {
 
     @Test
     public void test_12_getCategoryIdByTitle() {
+
         try {
             Method method = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle",
                     long.class,
@@ -471,16 +488,16 @@ public class NotesDatabaseTest {
 
             // Find an existing category to test false
             if (count > 0) {
-                catID = (int)method.invoke(db, account.getId(), categories.get(0).label, false);
+                catID = (int) method.invoke(db, account.getId(), categories.get(0).label, false);
                 assertNotEquals(catID, -1);
             }
 
             // Create a category not existing
             String cur_cat = "Mike Chester Wang's Diary" + getCurDate();
-            catID = (int)method.invoke(db, account.getId(), cur_cat, false);
+            catID = (int) method.invoke(db, account.getId(), cur_cat, false);
             assertEquals(catID, -1);
 
-            catID = (int)method.invoke(db, account.getId(), cur_cat, true);
+            catID = (int) method.invoke(db, account.getId(), cur_cat, true);
             assertNotEquals(catID, -1);
         } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
@@ -489,7 +506,8 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void test_13_getTitleByCategoryId(){
+    public void test_13_getTitleByCategoryId() {
+
         try {
             Method method_title_by_id = NotesDatabase.class.getDeclaredMethod("getTitleByCategoryId", long.class, int.class);
             method_title_by_id.setAccessible(true);
@@ -497,20 +515,26 @@ public class NotesDatabaseTest {
             // Remember we have a category named "Diary"? We can use tested method in test_12 to get category id
             Method method_id_by_title = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle", long.class, String.class, boolean.class);
             method_id_by_title.setAccessible(true);
-            int catId = (int)method_id_by_title.invoke(db, account.getId(), "Diary", true);
-            String catTitle = (String)method_title_by_id.invoke(db, account.getId(), catId);
+            int catId = (int) method_id_by_title.invoke(db, account.getId(), "Diary", true);
+            String catTitle = (String) method_title_by_id.invoke(db, account.getId(), catId);
 
+            Log.i("test_13_getTitleByCategoryId", "ID: " + catId + " Tile: " + catTitle);
             assertEquals("Diary", catTitle);
 
         } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
             Log.e("Test_13_getTitleByCategoryId", Arrays.toString(e.getStackTrace()));
         }
+
     }
 
     @Test
-    public void test_14_getCategoryIdsByTitle(){
+    public void test_14_getCategoryIdsByTitle() {
         try {
+//            long noteID = db.addNote(account.getId(), new CloudNote(1, Calendar.getInstance(),
+//                    "woc", getCurDate() + " woc nmd testing",
+//                    true, "aha", null));
+
             Method method_ids_by_title = NotesDatabase.class.getDeclaredMethod("getCategoryIdsByTitle", long.class, String.class);
             method_ids_by_title.setAccessible(true);
 
@@ -518,6 +542,8 @@ public class NotesDatabaseTest {
             Method method_id_by_title = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle", long.class, String.class, boolean.class);
             method_id_by_title.setAccessible(true);
             List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+            Log.i("Test_14_getCategoryIdsByTitle", "size: " + categories.size());
+//            Log.i("Test_14_getCategoryIdsByTitle", "item: "+ categories.get(0).label);
             String pattern = "Dia";
             List<Integer> matchList = new ArrayList<>();
             for (NavigationAdapter.NavigationItem categoryItem : categories) {
@@ -525,7 +551,7 @@ public class NotesDatabaseTest {
                 Log.i("Test_14_getCategoryIdsByTitle", catTitle);
                 if (catTitle.contains(pattern)) {
                     // She will be matched, store ID
-                    int catId = (int)method_id_by_title.invoke(db, account.getId(), catTitle, false);
+                    int catId = (int) method_id_by_title.invoke(db, account.getId(), catTitle, false);
                     matchList.add(catId);
                 }
             }
@@ -539,6 +565,8 @@ public class NotesDatabaseTest {
             Log.i("Test_14_getCategoryIdsByTitle", matchList.toString());
             Log.i("Test_14_getCategoryIdsByTitle", testList.toString());
             assertEquals(matchList.toString(), testList.toString());
+
+//            db.deleteNote(noteID, DBStatus.VOID);
         } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
             Log.e("Test_14_getCategoryIdsByTitle", Arrays.toString(e.getStackTrace()));
