@@ -379,6 +379,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     // TODO: test
     @NonNull
     @WorkerThread
+    // the categories without note will not be returned
     public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
         validateAccountId(accountId);
         String category_title = String.format("%s.%s", table_category, key_title);
@@ -387,8 +388,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         String category_accountId = String.format("%s.%s", table_category, key_account_id);
         // Weird problem: If I use ? instead of concat directly, there is no result in the join table
         // TODO: Find a way to use ? instead of concat.
-        // TODO: a bug here
-        // when no notes and have cat, inner join will not return this cat
         String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
                 " ON " + category_id + " = " + note_title + " WHERE " + category_accountId + " = " + accountId +
                 " GROUP BY " + category_id;
@@ -923,6 +922,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     // TODO: test
+    // TODO: not fuzzy search by testing bug?
     private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String title) {
         validateAccountId(accountId);
         Cursor cursor = getReadableDatabase().query(
