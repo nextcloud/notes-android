@@ -91,7 +91,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     }
 
     private void createNotesTable(@NonNull SQLiteDatabase db) {
-        // TODO: category ID foreign key
         db.execSQL("CREATE TABLE " + table_notes + " ( " +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_remote_id + " INTEGER, " +
@@ -124,7 +123,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     }
 
     private void createCategoryTable(@NonNull SQLiteDatabase db) {
-        // TODO: category ID account id
         db.execSQL("CREATE TABLE " + table_category + "(" +
                 key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_account_id + " INTEGER, " +
@@ -302,10 +300,13 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             CapabilitiesWorker.update(context);
         }
         if (oldVersion < 13) {
+            // Rename a tmp_NOTES table.
             String tmpTableNotes = String.format("tmp_%s", table_notes);
             db.execSQL("ALTER TABLE " + table_notes + " RENAME TO " + tmpTableNotes);
             createNotesTable(db);
             createCategoryTable(db);
+            // A hashtable storing categoryTitle - categoryId Mapping
+            // This is used to prevent too many searches in database
             Hashtable<String, Integer> categoryTitleIdMap = new Hashtable<>();
             int id = 1;
             Cursor tmpNotesCursor = db.rawQuery("SELECT * FROM " + tmpTableNotes, null);
@@ -316,19 +317,16 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 if (categoryTitleIdMap.containsKey(categoryTitle) && categoryTitleIdMap.get(categoryTitle) != null) {
                     categoryId = categoryTitleIdMap.get(categoryTitle);
                 } else {
+                    // The category does not exists in the database, create it.
                     categoryId = id++;
                     ContentValues values = new ContentValues();
                     values.put(key_id, categoryId);
                     values.put(key_account_id, accountId);
                     values.put(key_title, categoryTitle);
                     db.insert(table_category, null, values);
-//                    if (categoryTitle.trim().equals("")) {
-//                        db.execSQL("INSERT INTO " + table_category + " VALUES ( " + categoryId + " , " + accountId + ", EMPTY) ");
-//                    } else {
-//                        db.execSQL("INSERT INTO " + table_category + " VALUES ( " + categoryId + " , " + accountId + " , '" + categoryTitle + "' ) ");
-//                    }
                     categoryTitleIdMap.put(categoryTitle, categoryId);
                 }
+                // Move the data in tmp_NOTES to NOTES
                 ContentValues values = new ContentValues();
                 values.put(key_id, tmpNotesCursor.getInt(0));
                 values.put(key_remote_id, tmpNotesCursor.getInt(1));
@@ -342,18 +340,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 values.put(key_etag, tmpNotesCursor.getString(9));
                 values.put(key_etag, tmpNotesCursor.getString(10));
                 db.insert(table_notes, null, values);
-//                String values = String.format("%d, %d, %d, '%s', '%s', %d, '%s', %d, %d, ",// %s, %s",
-//                        tmpNotesCursor.getInt(0), tmpNotesCursor.getInt(1), tmpNotesCursor.getInt(2),
-//                        tmpNotesCursor.getString(3), tmpNotesCursor.getString(4), tmpNotesCursor.getInt(5),
-//                        tmpNotesCursor.getString(6), tmpNotesCursor.getInt(7), categoryId);
-//                if (tmpNotesCursor.getString(9) == null) {
-//                    values = values + "null, ";
-//                }
-//                if (tmpNotesCursor.getString(10).trim().equals("")) {
-//                    values = values + "''";
-//                }
-//                Log.e("###", values + " " + categoryTitle);
-//                db.execSQL("INSERT INTO " + table_notes + " VALUES ( " + values + " ) ");
             }
             tmpNotesCursor.close();
             db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);

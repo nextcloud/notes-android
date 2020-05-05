@@ -377,9 +377,16 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     // TODO: test
+
+    /**
+     * This method return all of the categories with given accountId
+     * The join operation is used because it is needed that the number of notes in each category
+     *
+     * @param accountId The user account Id
+     * @return All of the categories with given accountId
+     */
     @NonNull
     @WorkerThread
-    // the categories without note will not be returned
     public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
         validateAccountId(accountId);
         String category_title = String.format("%s.%s", table_category, key_title);
@@ -409,6 +416,15 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return categories;
     }
 
+    /**
+     * This method return the category list containing all of the categories containing the
+     * search pattern and matched with the given accountId
+     * The join operation is used because it is needed that the number of notes in each category
+     *
+     * @param accountId The user account ID
+     * @param search    The search pattern
+     * @return The category list containing all of the categories matched
+     */
     // TODO merge with getCategories(long accountId)
     // TODO: test
     @NonNull
@@ -461,16 +477,26 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     // TODO: test
+
+    /**
+     * Set the category for a given note.
+     * This method will search in the database to find out the category id in the db.
+     * If there is no such category existing, this method will create it and search again.
+     *
+     * @param ssoAccount The single sign on account
+     * @param note       The note which will be updated
+     * @param category   The category title which should be used to find the category id.
+     * @param callback   When the synchronization is finished, this callback will be invoked (optional).
+     */
     public void setCategory(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
         note.setCategory(category);
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, note.getStatus().getTitle());
-        if (getCategoryIdByTitle(note.getAccountId(), category, false) == -1) {
-            if (addCategory(note.getCategory(), note.getAccountId()) == -1) {
-                Log.e(TAG, String.format("Error occurs when creating category: %s", note.getCategory()));
-            }
+        if (getCategoryIdByTitle(note.getAccountId(), category, false) == -1 &&
+                addCategory(note.getCategory(), note.getAccountId()) == -1) {
+            Log.e(TAG, String.format("Error occurs when creating category: %s", note.getCategory()));
         }
         int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory(), true);
         values.put(key_category, id);
@@ -828,22 +854,24 @@ public class NotesDatabase extends AbstractNotesDatabase {
     // TODO: Not sure: Add more methods for category table.
 
 
-    /**
-     * get the category id.
-     *
-     * @param accountId:     Account ID
-     * @param categoryTitle: The category title
-     * @return the corresponding category id.
-     */
     // TODO: Test
+    /**
+     * Get the category if with the given category title
+     *
+     * @param accountId     The user account Id
+     * @param categoryTitle The category title which will be search in the db
+     * @param create        True if there is no such category, the db will add one.
+     *                      False the db will not create one and return -1
+     * @return -1 if there is no such category else the corresponding id
+     */
     @NonNull
     @WorkerThread
     private Integer getCategoryIdByTitle(long accountId, @NonNull String categoryTitle, boolean create) {
         if (create) {
-            if (getCategoryIdByTitle(accountId, categoryTitle, false) == -1) {
-                if (addCategory(categoryTitle, accountId) == -1) {
-                    Log.e(TAG, String.format("Error occurs when creating category: %s", categoryTitle));
-                }
+            // If the category does not exist in the current db, create it.
+            if (getCategoryIdByTitle(accountId, categoryTitle, false) == -1 &&
+                    addCategory(categoryTitle, accountId) == -1) {
+                Log.e(TAG, String.format("Error occurs when creating category: %s", categoryTitle));
             }
         }
         validateAccountId(accountId);
@@ -865,16 +893,21 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     // TODO: test
+    /**
+     * Find the category title with the category id
+     * @param accountId The user account Id
+     * @param categoryId The category Id which will be searched.
+     * @return empty if there is no such result, else return the corresponding title.
+     */
     @NonNull
     @WorkerThread
-    private String getTitleByCategoryId(long accountId, int id) {
-        if (accountId != -1)
-            validateAccountId(accountId);
+    private String getTitleByCategoryId(long accountId, int categoryId) {
+        validateAccountId(accountId);
         Cursor cursor = getReadableDatabase().query(
                 table_category,
                 new String[]{key_title},
                 key_id + " = ? AND " + key_account_id + " = ? ",
-                new String[]{String.valueOf(id), String.valueOf(accountId)},
+                new String[]{String.valueOf(categoryId), String.valueOf(accountId)},
                 key_title,
                 null,
                 key_title);
@@ -912,13 +945,22 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     // TODO: test
     // TODO: not fuzzy search by testing bug?
-    private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String title) {
+    /**
+     * Find out all of the matched Category id with the given accountId and category title
+     * Note that this method supports the fuzzy search. But only prefix match is supported.
+     * "abcd" will be returned when categoryTitle is "ab" while it will not be returned when the categoryTitle is "bc"
+     *
+     * @param accountId The user account Id
+     * @param categoryTitle The category title which will be searched.
+     * @return All matched category ids.
+     */
+    private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String categoryTitle) {
         validateAccountId(accountId);
         Cursor cursor = getReadableDatabase().query(
                 table_category,
                 new String[]{key_id},
                 key_title + " = ? OR " + key_title + " LIKE ? AND " + key_account_id + " = ? ",
-                new String[]{title, title + "%", String.valueOf(accountId)},
+                new String[]{categoryTitle, categoryTitle + "%", String.valueOf(accountId)},
                 key_id,
                 null,
                 key_id
