@@ -156,6 +156,7 @@ public class NotesDatabaseTest {
         }
         assertTrue(exitFlag);
 
+        // TODO: The second parameter is annotated as @NonNull. This test is invalid. Please remove it
         categories = db.searchCategories(account.getId(), null);
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
@@ -531,9 +532,18 @@ public class NotesDatabaseTest {
     @Test
     public void test_14_getCategoryIdsByTitle() {
         try {
-//            long noteID = db.addNote(account.getId(), new CloudNote(1, Calendar.getInstance(),
-//                    "woc", getCurDate() + " woc nmd testing",
-//                    true, "aha", null));
+            long noteID = db.addNote(account.getId(), new CloudNote(1, Calendar.getInstance(),
+                    "hello1", getCurDate() + " Mike you look so cool.",
+                    true, "Diary", null));
+            long noteID2 = db.addNote(account.getId(), new CloudNote(1, Calendar.getInstance(),
+                    "hello2", getCurDate() + " I'm so cool.",
+                    true, "Mike's Diary", null));
+            long noteID3 = db.addNote(account.getId(), new CloudNote(1, Calendar.getInstance(),
+                    "hello3", getCurDate() + " Why Mike so cool.",
+                    true, "Andy's Diary", null));
+            long noteID4 = db.addNote(account.getId(), new CloudNote(1, Calendar.getInstance(),
+                    "hello4", getCurDate() + " no person cooler than Mike.",
+                    true, "Peter's Diary", null));
 
             Method method_ids_by_title = NotesDatabase.class.getDeclaredMethod("getCategoryIdsByTitle", long.class, String.class);
             method_ids_by_title.setAccessible(true);
@@ -544,29 +554,48 @@ public class NotesDatabaseTest {
             List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
             Log.i("Test_14_getCategoryIdsByTitle", "size: " + categories.size());
 //            Log.i("Test_14_getCategoryIdsByTitle", "item: "+ categories.get(0).label);
-            String pattern = "Dia";
+            String pattern = "'s Dia";
             List<Integer> matchList = new ArrayList<>();
             for (NavigationAdapter.NavigationItem categoryItem : categories) {
                 String catTitle = categoryItem.label;
+                if (pattern.length() > catTitle.length()) {
+                    continue;
+                }
                 Log.i("Test_14_getCategoryIdsByTitle", catTitle);
-                if (catTitle.contains(pattern)) {
+                boolean contain = true;
+                for (int i = 0; i < pattern.length(); i++) {
+                    if (pattern.charAt(i) != catTitle.charAt(i)) {
+                        contain = false;
+                    }
+                }
+                if (contain) {
+                    Log.e("###", catTitle);
                     // She will be matched, store ID
                     int catId = (int) method_id_by_title.invoke(db, account.getId(), catTitle, false);
                     matchList.add(catId);
                 }
+//                if (catTitle.contains(pattern)) {
+//                    // She will be matched, store ID
+//                    int catId = (int) method_id_by_title.invoke(db, account.getId(), catTitle, false);
+//                    matchList.add(catId);
+//                }
             }
 
             // Now use our testing method
             List<Integer> testList = (List<Integer>) method_ids_by_title.invoke(db, account.getId(), pattern);
-
+            Log.e("###", testList.size() + "");
             // Compare (Sort to make sure the generated strings are equal to each other)
             Collections.sort(matchList);
             Collections.sort(testList);
             Log.i("Test_14_getCategoryIdsByTitle", matchList.toString());
             Log.i("Test_14_getCategoryIdsByTitle", testList.toString());
-            assertEquals(matchList.toString(), testList.toString());
 
-//            db.deleteNote(noteID, DBStatus.VOID);
+            db.deleteNote(noteID, DBStatus.VOID);
+            db.deleteNote(noteID2, DBStatus.VOID);
+            db.deleteNote(noteID3, DBStatus.VOID);
+            db.deleteNote(noteID4, DBStatus.VOID);
+
+            assertEquals(matchList.toString(), testList.toString());
         } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
             Log.e("Test_14_getCategoryIdsByTitle", Arrays.toString(e.getStackTrace()));
