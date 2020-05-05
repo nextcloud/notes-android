@@ -380,18 +380,15 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
-        // TODO there is a bug here
-        // just validate AccountID
-        // but not use in the database query
-        // so that it will query all the categories in the database
         validateAccountId(accountId);
         String category_title = String.format("%s.%s", table_category, key_title);
         String note_title = String.format("%s.%s", table_notes, key_category);
         String category_id = String.format("%s.%s", table_category, key_id);
+        String category_accountId = String.format("%s.%s", table_category, key_account_id);
         // Weird problem: If I use ? instead of concat directly, there is no result in the join table
         // TODO: Find a way to use ? instead of concat.
         String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
-                " ON " + category_id + " = " + note_title + " WHERE " + table_category + "." + key_account_id + " = " + accountId +
+                " ON " + category_id + " = " + note_title + " WHERE " + category_accountId + " = " + accountId +
                 " GROUP BY " + category_id;
 
         Cursor cursor = getReadableDatabase().rawQuery(rawQuery, null);
@@ -852,8 +849,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     private Integer getCategoryIdByTitle(long accountId, @NonNull String categoryTitle, boolean create) {
-        // TODO: there is a bug
-        // only validateAccountId BUT NOT use
         if (create) {
             if (getCategoryIdByTitle(accountId, categoryTitle, false) == -1) {
                 if (addCategory(categoryTitle, accountId) == -1) {
@@ -866,8 +861,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         Cursor cursor = db.query(
                 table_category,
                 new String[]{key_id},
-                key_title + " = ? ",
-                new String[]{categoryTitle},
+                key_title + " = ? AND " + key_account_id + " = ? ",
+                new String[]{categoryTitle, String.valueOf(accountId)},
                 key_id,
                 null,
                 key_id);
@@ -883,15 +878,13 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     private String getTitleByCategoryId(long accountId, int id) {
-        // TODO: there is a bug
-        // only validateAccountId BUT NOT use
         if (accountId != -1)
             validateAccountId(accountId);
         Cursor cursor = getReadableDatabase().query(
                 table_category,
                 new String[]{key_title},
-                key_id + " = ? ",
-                new String[]{id + ""},
+                key_id + " = ? AND " + key_account_id + " = ? ",
+                new String[]{String.valueOf(id), String.valueOf(accountId)},
                 key_title,
                 null,
                 key_title);
@@ -929,14 +922,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     // TODO: test
     private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String title) {
-        // TODO: there is a bug
-        // only validateAccountId BUT NOT use
         validateAccountId(accountId);
         Cursor cursor = getReadableDatabase().query(
                 table_category,
                 new String[]{key_id},
-                key_title + " = ? OR " + key_title + " LIKE ? ",
-                new String[]{title, title + "/%"},
+                key_title + " = ? OR " + key_title + " LIKE ? AND " + key_account_id + " = ? ",
+                new String[]{title, title + "/%", String.valueOf(accountId)},
                 key_id,
                 null,
                 key_id
