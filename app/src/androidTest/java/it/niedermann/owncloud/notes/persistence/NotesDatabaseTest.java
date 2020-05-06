@@ -545,6 +545,10 @@ public class NotesDatabaseTest {
                     "hello4", getCurDate() + " no person cooler than Mike.",
                     true, "Peter's Diary", null));
 
+            long noteID5 = db.addNote(account.getId(), new CloudNote(1, Calendar.getInstance(),
+                    "hello5", getCurDate() + " helloworld",
+                    true, "Diary/'s Diary", null));
+
             Method method_ids_by_title = NotesDatabase.class.getDeclaredMethod("getCategoryIdsByTitle", long.class, String.class);
             method_ids_by_title.setAccessible(true);
 
@@ -554,7 +558,7 @@ public class NotesDatabaseTest {
             List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
             Log.i("Test_14_getCategoryIdsByTitle", "size: " + categories.size());
 //            Log.i("Test_14_getCategoryIdsByTitle", "item: "+ categories.get(0).label);
-            String pattern = "'s Dia";
+            String pattern = "Dia";
             List<Integer> matchList = new ArrayList<>();
             for (NavigationAdapter.NavigationItem categoryItem : categories) {
                 String catTitle = categoryItem.label;
@@ -569,16 +573,14 @@ public class NotesDatabaseTest {
                     }
                 }
                 if (contain) {
-                    Log.e("###", catTitle);
-                    // She will be matched, store ID
-                    int catId = (int) method_id_by_title.invoke(db, account.getId(), catTitle, false);
-                    matchList.add(catId);
+                    if (pattern.length() == catTitle.length() ||
+                            (catTitle.charAt(pattern.length()) == '/')) {
+                        Log.e("###", catTitle);
+                        // She will be matched, store ID
+                        int catId = (int) method_id_by_title.invoke(db, account.getId(), catTitle, false);
+                        matchList.add(catId);
+                    }
                 }
-//                if (catTitle.contains(pattern)) {
-//                    // She will be matched, store ID
-//                    int catId = (int) method_id_by_title.invoke(db, account.getId(), catTitle, false);
-//                    matchList.add(catId);
-//                }
             }
 
             // Now use our testing method
@@ -594,6 +596,7 @@ public class NotesDatabaseTest {
             db.deleteNote(noteID2, DBStatus.VOID);
             db.deleteNote(noteID3, DBStatus.VOID);
             db.deleteNote(noteID4, DBStatus.VOID);
+            db.deleteNote(noteID5, DBStatus.VOID);
 
             assertEquals(matchList.toString(), testList.toString());
         } catch (Exception e) {

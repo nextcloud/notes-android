@@ -30,12 +30,6 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 // Protected APIs
 @SuppressWarnings("WeakerAccess")
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
-
-    // TODO : delete after testing
-    // ------------------- just for testing -------------------
-    public static final boolean testFlag = true;
-    // ------------------ just for testing --------------------
-
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
     private static final int database_version = 13;
@@ -133,13 +127,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     @SuppressWarnings("deprecation")
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // TODO : delete after testing
-        // ----------------- just for testing --------------------------
-//        if (testFlag) {
-//            recreateDatabase(db);
-//            return;
-//        }
-        // ---------------- just for testing - end ---------------------
         if (oldVersion < 3) {
             recreateDatabase(db);
             return;

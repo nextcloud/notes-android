@@ -23,7 +23,6 @@ import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -38,7 +37,6 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
-import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -99,7 +97,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
      */
-    // TODO: test
     long addNote(long accountId, CloudNote note) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -225,7 +222,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param pruneContent whether or not the content should be pruned for performance reasons
      * @return DBNote
      */
-    // TODO: try reflection testing
     @NonNull
     private DBNote getNoteFromCursor(long accountId, @NonNull Cursor cursor, boolean pruneContent) {
         validateAccountId(accountId);
@@ -282,10 +278,13 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     /**
      * Returns a list of all Notes in the Database
+     * This method only supports to return the notes in the categories with the matched title or the notes in the categories whose ancestor category matches
+     * For example, three categories with the title "abc", "abc/aaa" and "abcd"
+     * If search with "abc", then only notes in "abc" and "abc/aaa" will be returned.
+     * If any other information about this is needed, please refer to {@link this.getCategoryIdsByTitle(long, String)} method
      *
      * @return List&lt;Note&gt;
      */
-    // TODO: Test
     @NonNull
     @WorkerThread
     public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
@@ -376,8 +375,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return favorites;
     }
 
-    // TODO: test
-
     /**
      * This method return all of the categories with given accountId
      * The join operation is used because it is needed that the number of notes in each category
@@ -426,7 +423,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @return The category list containing all of the categories matched
      */
     // TODO merge with getCategories(long accountId)
-    // TODO: test
     @NonNull
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
@@ -476,8 +472,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         serverSyncHelper.scheduleSync(ssoAccount, true);
     }
 
-    // TODO: test
-
     /**
      * Set the category for a given note.
      * This method will search in the database to find out the category id in the db.
@@ -526,7 +520,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
-    // TODO: test
     public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
         //debugPrintFullDB();
         DBNote newNote;
@@ -850,14 +843,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
     }
 
-    // TODO: Add a method to update the sorting method in category
-    // TODO: Not sure: Add more methods for category table.
-
-
-    // TODO: Test
-
     /**
      * Get the category if with the given category title
+     * The method does not support fuzzy search.
+     * Because the category title in database is unique, there will not at most one result.
+     * If there is no such category, database will create it if create flag is set.
+     * Otherwise this method will return -1 as default value.
      *
      * @param accountId     The user account Id
      * @param categoryTitle The category title which will be search in the db
@@ -893,7 +884,35 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return id;
     }
 
-    // TODO: test
+    /**
+     * Find out all of the matched Category id with the given accountId and category title
+     * This method only supports to return the categories with the matched title or the categories whose ancestor category matches
+     * For example, three categories with the title "abc", "abc/aaa" and "abcd"
+     * If search with "abc", then only "abc" and "abc/aaa" will be return.
+     * This is also why /% is needed hear
+     *
+     * @param accountId     The user account Id
+     * @param categoryTitle The category title which will be searched.
+     * @return All matched category ids.
+     */
+    private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String categoryTitle) {
+        validateAccountId(accountId);
+        Cursor cursor = getReadableDatabase().query(
+                table_category,
+                new String[]{key_id},
+                key_title + " = ? OR " + key_title + " LIKE ? AND " + key_account_id + " = ? ",
+                new String[]{categoryTitle, categoryTitle + "/%", String.valueOf(accountId)},
+                key_id,
+                null,
+                key_id
+        );
+        List<Integer> ids = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            ids.add(cursor.getInt(0));
+        }
+        cursor.close();
+        return ids;
+    }
 
     /**
      * Find the category title with the category id
@@ -920,60 +939,5 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
         cursor.close();
         return title;
-    }
-
-    private void traverse(@NonNull String table) {
-        Log.e("Traverse", "###################START TRAVERSE#####################");
-        String query = "SELECT * FROM " + table;
-        Cursor cursor = getReadableDatabase().rawQuery(query, null);
-        Log.e(table + " HEAD", Arrays.toString(cursor.getColumnNames()));
-        while (cursor.moveToNext()) {
-            Log.e(table, outputCursor(cursor));
-        }
-        cursor.close();
-        Log.e("Traverse", "###################END TRAVERSE#####################");
-    }
-
-    private String outputCursor(@NonNull Cursor cursor) {
-        StringBuffer str = new StringBuffer();
-        for (int i = 0; i < cursor.getColumnNames().length; i++) {
-            if (cursor.getString(i) == null || cursor.getString(i).equals("")) {
-                str.append("empty");
-            } else
-                str.append(cursor.getString(i));
-            str.append(" ");
-        }
-        return str.toString();
-    }
-
-    // TODO: test
-    // TODO: not fuzzy search by testing bug?
-
-    /**
-     * Find out all of the matched Category id with the given accountId and category title
-     * Note that this method supports the fuzzy search. But only prefix match is supported.
-     * "abcd" will be returned when categoryTitle is "ab" while it will not be returned when the categoryTitle is "bc"
-     *
-     * @param accountId     The user account Id
-     * @param categoryTitle The category title which will be searched.
-     * @return All matched category ids.
-     */
-    private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String categoryTitle) {
-        validateAccountId(accountId);
-        Cursor cursor = getReadableDatabase().query(
-                table_category,
-                new String[]{key_id},
-                key_title + " = ? OR " + key_title + " LIKE ? AND " + key_account_id + " = ? ",
-                new String[]{categoryTitle, categoryTitle + "/%", String.valueOf(accountId)},
-                key_id,
-                null,
-                key_id
-        );
-        List<Integer> ids = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            ids.add(cursor.getInt(0));
-        }
-        cursor.close();
-        return ids;
     }
 }
