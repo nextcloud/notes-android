@@ -396,7 +396,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         String note_status = String.format("%s.%s", table_notes, key_status);
         String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category +
                 " INNER JOIN " + table_notes + " ON " + category_id + " = " + note_title +
-                " WHERE " + category_accountId + " = ? AND " + note_status + " != ? GROUP BY " + category_id;
+                " WHERE " + category_accountId + " = ? AND " + note_status + " != ? GROUP BY " + category_title;
         Cursor cursor = getReadableDatabase().rawQuery(rawQuery, new String[]{String.valueOf(accountId), DBStatus.LOCAL_DELETED.getTitle()});
         List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
@@ -439,7 +439,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
         rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
                 " ON " + note_title + " = " + category_id + " WHERE " + key_status + " != ?  AND " + category_accountId +
-                " = ? AND " + category_title + " LIKE ? AND " + category_title + " != \"\" GROUP BY " + category_id;
+                " = ? AND " + category_title + " LIKE ? AND " + category_title + " != \"\" GROUP BY " + category_title;
 
         Cursor cursor = getReadableDatabase().rawQuery(rawQuery,
                 new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId), "%" + (search == null ? null : search.trim()) + "%"});
@@ -855,6 +855,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
 
     // TODO: Test
+
     /**
      * Get the category if with the given category title
      *
@@ -893,9 +894,11 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     // TODO: test
+
     /**
      * Find the category title with the category id
-     * @param accountId The user account Id
+     *
+     * @param accountId  The user account Id
      * @param categoryId The category Id which will be searched.
      * @return empty if there is no such result, else return the corresponding title.
      */
@@ -945,12 +948,13 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     // TODO: test
     // TODO: not fuzzy search by testing bug?
+
     /**
      * Find out all of the matched Category id with the given accountId and category title
      * Note that this method supports the fuzzy search. But only prefix match is supported.
      * "abcd" will be returned when categoryTitle is "ab" while it will not be returned when the categoryTitle is "bc"
      *
-     * @param accountId The user account Id
+     * @param accountId     The user account Id
      * @param categoryTitle The category title which will be searched.
      * @return All matched category ids.
      */
@@ -960,7 +964,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 table_category,
                 new String[]{key_id},
                 key_title + " = ? OR " + key_title + " LIKE ? AND " + key_account_id + " = ? ",
-                new String[]{categoryTitle, categoryTitle + "%", String.valueOf(accountId)},
+                new String[]{categoryTitle, categoryTitle + "/%", String.valueOf(accountId)},
                 key_id,
                 null,
                 key_id
