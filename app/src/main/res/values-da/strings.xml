@@ -145,7 +145,6 @@
     <string name="error_dialog_insufficient_storage">Din Nextcloud-instans har ikke mere ledig lagerplads. Slet venligst nogle filer for at synkronisere dine lokale ændringer ind i skyen.</string>
     <string name="error_dialog_contact_us">Du er altid velkommen til at kontakte os, hvis problemet varer ved. Du kan finde vores kontaktoplysninger i sektionen Om i sidebjælken.</string>
     <string name="error_dialog_we_need_info">Vi har brug for følgende tekniske information for at hjælpe dig:</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>

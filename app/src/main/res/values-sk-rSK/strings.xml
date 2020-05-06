@@ -145,7 +145,6 @@
     <string name="error_dialog_insufficient_storage">Vo vašej inštancii Nexcloudu nie je na úložisku voľné miesto. Aby bolo možné synchronizovať vaše miestne zmeny s vaším cloudom, je potrebné najprv zmazať niektoré súbory.</string>
     <string name="error_dialog_contact_us">Ak problémy pretrvávajú, neváhajte nás kontaktovať. Kontaktné informácie nájdete v časti \"O nás\" v bočnom paneli.</string>
     <string name="error_dialog_we_need_info">Aby sme vám pomohli, potrebujeme následovné technické informácie:</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
