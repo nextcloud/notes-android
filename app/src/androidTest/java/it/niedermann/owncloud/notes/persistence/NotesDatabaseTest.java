@@ -156,16 +156,16 @@ public class NotesDatabaseTest {
         }
         assertTrue(exitFlag);
 
-        // TODO: The second parameter is annotated as @NonNull. This test is invalid. Please remove it
-        categories = db.searchCategories(account.getId(), null);
-        exitFlag = false;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
-            Log.i("Test_04_searchCategories_Item_Diary", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if (categoryItem.label.equals("Diary")) {
-                exitFlag = true;
-            }
-        }
-        assertTrue(exitFlag);
+//        // The second parameter is annotated as @NonNull. This test is invalid. Please remove it
+//        categories = db.searchCategories(account.getId(), null);
+//        exitFlag = false;
+//        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+//            Log.i("Test_04_searchCategories_Item_Diary", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            if (categoryItem.label.equals("Diary")) {
+//                exitFlag = true;
+//            }
+//        }
+//        assertTrue(exitFlag);
 
         categories = db.searchCategories(account.getId(), "Mike Chester Wang");
         exitFlag = false;
