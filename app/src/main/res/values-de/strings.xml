@@ -145,7 +145,6 @@
     <string name="error_dialog_insufficient_storage">Ihre Nextcloud-Installation hat keinen freien Speicherplatz mehr. Bitte löschen Sie einige Dateien, um Ihre lokalen Änderungen mit Ihrer Cloud synchronisieren zu können.</string>
     <string name="error_dialog_contact_us">Bitte zögern Sie nicht, uns zu kontaktieren, wenn das Problem weiterhin besteht. Sie finden unsere Kontaktinformationen im Abschnitt \"Info\" in der Seitenleiste.</string>
     <string name="error_dialog_we_need_info">Wir benötigen die folgenden technischen Informationen, um Ihnen helfen zu können:</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Im Bearbeitungsmodus öffnen</item>
