@@ -120,7 +120,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_modified, note.getModified().getTimeInMillis() / 1000);
         values.put(key_content, note.getContent());
         values.put(key_favorite, note.isFavorite());
-        values.put(key_category, getCategoryIdByTitle(accountId, note.getCategory(), true));
+        values.put(key_category, getCategoryIdByTitle(accountId, note.getCategory()));
         values.put(key_etag, note.getEtag());
         return db.insert(table_notes, null, values);
     }
@@ -201,7 +201,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     private List<DBNote> getNotesCustom(long accountId, @NonNull String selection, @NonNull String[] selectionArgs, @Nullable String orderBy, @Nullable String limit, boolean pruneContent) {
-        SQLiteDatabase db = getReadableDatabase();
         if (selectionArgs.length > 2) {
             Log.v(TAG, selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
         }
@@ -389,10 +388,16 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
         validateAccountId(accountId);
-        String rawQuery = "SELECT " + key_category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
-                " ON " + key_category + " = " + key_category_id + " WHERE " + key_status + " != ?  AND " + key_category_account_id +
-                " = ? AND " + key_category_title + " LIKE ? " +
-                (search == null ? "" : " AND " + key_category_title + " != \"\"") +
+        String columns = key_category_title + ", COUNT(*)";
+        String selection = key_status + " != ?  AND " +
+                key_category_account_id + " = ? AND " +
+                key_category_title + " LIKE ? " +
+                (search == null ? "" : " AND " + key_category_title + " != \"\"");
+        String rawQuery = "SELECT " + columns +
+                " FROM " + table_category +
+                " INNER JOIN " + table_notes +
+                " ON " + key_category + " = " + key_category_id +
+                " WHERE " + selection +
                 " GROUP BY " + key_category_title;
 
         Cursor cursor = getReadableDatabase().rawQuery(rawQuery,
@@ -447,7 +452,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, note.getStatus().getTitle());
-        int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory(), true);
+        int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory());
         values.put(key_category, id);
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
         removeEmptyCategory(note.getAccountId());
@@ -487,7 +492,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         ContentValues values = new ContentValues();
         values.put(key_status, newNote.getStatus().getTitle());
         values.put(key_title, newNote.getTitle());
-        values.put(key_category, getCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory(), true));
+        values.put(key_category, getCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory()));
         values.put(key_modified, newNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, newNote.getContent());
         values.put(key_excerpt, newNote.getExcerpt());
@@ -534,7 +539,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_modified, remoteNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, remoteNote.getContent());
         values.put(key_favorite, remoteNote.isFavorite());
-        values.put(key_category, getCategoryIdByTitle(id, remoteNote.getCategory(), true));
+        values.put(key_category, getCategoryIdByTitle(id, remoteNote.getCategory()));
         values.put(key_etag, remoteNote.getEtag());
         values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent()));
         String whereClause;
@@ -807,13 +812,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param accountId     The user account Id
      * @param categoryTitle The category title which will be search in the db
-     * @param create        True if there is no such category, the db will add one.
-     *                      False the db will not create one and return -1
+     *
      * @return -1 if there is no such category else the corresponding id
      */
     @NonNull
     @WorkerThread
-    private Integer getCategoryIdByTitle(long accountId, @NonNull String categoryTitle, boolean create) {
+    private Integer getCategoryIdByTitle(long accountId, @NonNull String categoryTitle) {
         validateAccountId(accountId);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(
@@ -827,7 +831,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         int id = -1;
         if (cursor.moveToNext()) {
             id = cursor.getInt(0);
-        } else if (create) {
+        } else  {
             id = (int) addCategory(categoryTitle, accountId);
             if (id == -1) {
                 Log.e(TAG, String.format("Error occurs when creating category: %s", categoryTitle));
