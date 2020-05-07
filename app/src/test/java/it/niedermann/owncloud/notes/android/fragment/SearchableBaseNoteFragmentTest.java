@@ -42,7 +42,7 @@ public class SearchableBaseNoteFragmentTest {
 
         } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
-            Log.e("Test_12_getCategoryIdByTitle", Arrays.toString(e.getStackTrace()));
+            Log.e("Test Count Occurrences Fixed", Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -78,7 +78,29 @@ public class SearchableBaseNoteFragmentTest {
 
         } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
-            Log.e("Test_12_getCategoryIdByTitle", Arrays.toString(e.getStackTrace()));
+            Log.e("Test Count Occurrences Random", Arrays.toString(e.getStackTrace()));
+        }
+    }
+
+    @Test
+    public void testNullOrEmptyInput() {
+        try {
+            Method method = SearchableBaseNoteFragment.class.getDeclaredMethod("countOccurrences", String.class, String.class);
+            method.setAccessible(true);
+
+            int num;
+            num = (int) method.invoke(null, null, "Hi");
+            assertEquals(0, num);
+            num = (int) method.invoke(null, "Hi my name is Mike Chester Wang", null);
+            assertEquals(0, num);
+            num = (int) method.invoke(null, "", "Hi");
+            assertEquals(0, num);
+            num = (int) method.invoke(null, "Hi my name is Mike Chester Wang", "");
+            assertEquals(0, num);
+
+        } catch (Exception e) {
+            fail(Arrays.toString(e.getStackTrace()));
+            Log.e("Test Null Or Empty Input", Arrays.toString(e.getStackTrace()));
         }
     }
 }
