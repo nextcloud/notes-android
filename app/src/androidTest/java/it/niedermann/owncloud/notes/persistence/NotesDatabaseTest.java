@@ -507,49 +507,14 @@ public class NotesDatabaseTest {
     }
 
     @Test
-    public void test_13_getTitleByCategoryId() {
-
-        try {
-            Method method_title_by_id = NotesDatabase.class.getDeclaredMethod("getTitleByCategoryId", long.class, int.class);
-            method_title_by_id.setAccessible(true);
-
-            // Remember we have a category named "Diary"? We can use tested method in test_12 to get category id
-            Method method_id_by_title = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle", long.class, String.class, boolean.class);
-            method_id_by_title.setAccessible(true);
-            int catId = (int) method_id_by_title.invoke(db, account.getId(), "Diary", true);
-            String catTitle = (String) method_title_by_id.invoke(db, account.getId(), catId);
-
-            Log.i("test_13_getTitleByCategoryId", "ID: " + catId + " Tile: " + catTitle);
-            assertEquals("Diary", catTitle);
-
-        } catch (Exception e) {
-            fail(Arrays.toString(e.getStackTrace()));
-            Log.e("Test_13_getTitleByCategoryId", Arrays.toString(e.getStackTrace()));
-        }
-
+    public void test_13_getNotesCustom() {
+        // TODO: ~
     }
 
-
-    //    @Test
-//    public void test_12_getNoteFromCursor(){
-//        // pass
-//    }
-
-//    @Test
-//    public void setCategory() {
-//        // Unable to test with SSO
-//    }
-//
-//    @Test
-//    public void updateNoteAndSync() {
-//        // Unable to test with SSO
-//    }
-//
-//    @Test
-//    public void updateNote() {
-//        // can not check
-//        // need remoteNote (note from server)
-//    }
+    @Test
+    public void test_14_searchCategories() {
+        // TODO: ~
+    }
 
     public static String getCurDate() {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
