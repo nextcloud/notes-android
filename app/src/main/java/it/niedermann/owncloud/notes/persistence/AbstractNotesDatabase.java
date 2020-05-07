@@ -60,6 +60,8 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_color = "COLOR";
     protected static final String key_text_color = "TEXT_COLOR";
     protected static final String key_api_version = "API_VERSION";
+    protected static final String key_category_id = "CATEGORY_ID";
+    protected static final String key_category_title = "CATEGORY_TITLE";
 
     protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory, database_version);
@@ -118,9 +120,9 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
     private void createCategoryTable(@NonNull SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + table_category + "(" +
-                key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                key_category_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_account_id + " INTEGER, " +
-                key_title + " TEXT )");
+                key_category_title + " TEXT )");
         createCategoryIndexes(db);
     }
 
@@ -307,9 +309,9 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                     // The category does not exists in the database, create it.
                     categoryId = id++;
                     ContentValues values = new ContentValues();
-                    values.put(key_id, categoryId);
+                    values.put(key_category_id, categoryId);
                     values.put(key_account_id, accountId);
-                    values.put(key_title, categoryTitle);
+                    values.put(key_category_title, categoryTitle);
                     db.insert(table_category, null, values);
                     categoryTitleIdMap.put(categoryTitle, categoryId);
                 }
@@ -358,7 +360,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     }
 
     private static void createCategoryIndexes(@NonNull SQLiteDatabase db) {
-        DatabaseIndexUtil.createIndex(db, table_category, key_id, key_account_id, key_title);
+        DatabaseIndexUtil.createIndex(db, table_category, key_category_id, key_account_id, key_category_title);
     }
 
     protected abstract void notifyNotesChanged();

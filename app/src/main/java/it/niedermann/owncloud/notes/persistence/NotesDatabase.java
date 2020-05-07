@@ -307,7 +307,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
 
         if (category != null) {
-            where.add(key_category + " IN (SELECT " + key_id + " FROM " + table_category + " WHERE " + key_title + " =? OR " + key_title + " LIKE ?)");
+            where.add(key_category + " IN (SELECT " + key_category_id + " FROM " + table_category +
+                    " WHERE " + key_category_title + " =? OR " + key_category_title + " LIKE ?)");
             args.add(category);
             args.add(category + "/%");
         }
@@ -381,13 +382,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
         validateAccountId(accountId);
-        String category_title = String.format("%s.%s", table_category, key_title);
-        String note_title = String.format("%s.%s", table_notes, key_category);
-        String category_id = String.format("%s.%s", table_category, key_id);
         String category_accountId = String.format("%s.%s", table_category, key_account_id);
-        String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
-                " ON " + note_title + " = " + category_id + " WHERE " + key_status + " != ?  AND " + category_accountId +
-                " = ? AND " + category_title + " LIKE ? AND " + category_title + " != \"\" GROUP BY " + category_title;
+        String rawQuery = "SELECT " + key_category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
+                " ON " + key_category + " = " + key_category_id + " WHERE " + key_status + " != ?  AND " + category_accountId +
+                " = ? AND " + key_category_title + " LIKE ? " +
+                (search == null ? "" : " AND " + key_category_title + " != \"\"") +
+                " GROUP BY " + key_category_title;
 
         Cursor cursor = getReadableDatabase().rawQuery(rawQuery,
                 new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId),
@@ -456,7 +456,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_account_id, accountId);
-        values.put(key_title, title);
+        values.put(key_category_title, title);
         return db.insert(table_category, null, values);
     }
 
@@ -813,12 +813,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(
                 table_category,
-                new String[]{key_id},
-                key_title + " = ? AND " + key_account_id + " = ? ",
+                new String[]{key_category_id},
+                key_category_title + " = ? AND " + key_account_id + " = ? ",
                 new String[]{categoryTitle, String.valueOf(accountId)},
-                key_id,
+                key_category_id,
                 null,
-                key_id);
+                key_category_id);
         int id = -1;
         if (cursor.moveToNext()) {
             id = cursor.getInt(0);
@@ -845,12 +845,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
         validateAccountId(accountId);
         Cursor cursor = getReadableDatabase().query(
                 table_category,
-                new String[]{key_title},
-                key_id + " = ? AND " + key_account_id + " = ? ",
+                new String[]{key_category_title},
+                key_category_id + " = ? AND " + key_account_id + " = ? ",
                 new String[]{String.valueOf(categoryId), String.valueOf(accountId)},
-                key_title,
+                key_category_title,
                 null,
-                key_title);
+                key_category_title);
         String title = "";
         if (cursor.moveToNext()) {
             title = cursor.getString(0);
@@ -862,7 +862,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     private void removeEmptyCategory(long accountId) {
         validateAccountId(accountId);
         getReadableDatabase().delete(table_category,
-                key_id + " NOT IN (SELECT " + key_category + " FROM " + table_notes + ")",
+                key_category_id + " NOT IN (SELECT " + key_category + " FROM " + table_notes + ")",
                 null);
     }
 
