@@ -121,7 +121,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_content, note.getContent());
         values.put(key_favorite, note.isFavorite());
         values.put(key_category, getCategoryIdByTitle(accountId, note.getCategory(), true));
-//        values.put(key_category, note.getCategory());
         values.put(key_etag, note.getEtag());
         return db.insert(table_notes, null, values);
     }
@@ -234,7 +233,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 cursor.getString(3),
                 pruneContent ? "" : cursor.getString(9),
                 cursor.getInt(5) > 0,
-//                cursor.getString(6),
                 getTitleByCategoryId(accountId, cursor.getInt(6)),
                 cursor.getString(7),
                 DBStatus.parse(cursor.getString(2)),
@@ -309,29 +307,10 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
 
         if (category != null) {
-            List<Integer> ids = getCategoryIdsByTitle(accountId, category);
-            if (ids.size() == 0) {
-                // If there is no such matched category, return a list without any element.
-                return new ArrayList<DBNote>();
-            }
-            StringBuffer tmpSQL = new StringBuffer();
-            String tmp = String.format(" %s = ? ", key_category);
-            for (int i = 0; i < ids.size(); i++) {
-                tmpSQL.append(tmp);
-                if (i != ids.size() - 1) {
-                    tmpSQL.append(" or ");
-                }
-            }
-            where.add(String.format("( %s )", tmpSQL.toString()));
-            for (int i = 0; i < ids.size(); i++) {
-                args.add(String.valueOf(ids.get(i)));
-            }
+            where.add(key_category + " IN (SELECT " + key_id + " FROM " + table_category + " WHERE " + key_title + " =? OR " + key_title + " LIKE ?)");
+            args.add(category);
+            args.add(category + "/%");
         }
-//        if (category != null) {
-//            where.add("(" + key_category + "=? OR " + key_category + " LIKE ? )");
-//            args.add(category);
-//            args.add(category + "/%");
-//        }
 
         if (favorite != null) {
             where.add(key_favorite + "=?");
@@ -385,32 +364,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
-        validateAccountId(accountId);
-        String category_title = String.format("%s.%s", table_category, key_title);
-        String note_title = String.format("%s.%s", table_notes, key_category);
-        String category_id = String.format("%s.%s", table_category, key_id);
-        String category_accountId = String.format("%s.%s", table_category, key_account_id);
-        String note_status = String.format("%s.%s", table_notes, key_status);
-        String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category +
-                " INNER JOIN " + table_notes + " ON " + category_id + " = " + note_title +
-                " WHERE " + category_accountId + " = ? AND " + note_status + " != ? GROUP BY " + category_title;
-        Cursor cursor = getReadableDatabase().rawQuery(rawQuery, new String[]{String.valueOf(accountId), DBStatus.LOCAL_DELETED.getTitle()});
-        List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
-        while (cursor.moveToNext()) {
-            Resources res = getContext().getResources();
-            String category = cursor.getString(0).toLowerCase();
-            int icon = NavigationAdapter.ICON_FOLDER;
-            if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
-                icon = R.drawable.ic_library_music_grey600_24dp;
-            } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
-                icon = R.drawable.ic_local_movies_grey600_24dp;
-            } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
-                icon = R.drawable.ic_work_grey600_24dp;
-            }
-            categories.add(new NavigationAdapter.NavigationItem("category:" + cursor.getString(0), cursor.getString(0), cursor.getInt(1), icon));
-        }
-        cursor.close();
-        return categories;
+        return searchCategories(accountId, null);
     }
 
     /**
@@ -438,7 +392,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 " = ? AND " + category_title + " LIKE ? AND " + category_title + " != \"\" GROUP BY " + category_title;
 
         Cursor cursor = getReadableDatabase().rawQuery(rawQuery,
-                new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId), "%" + (search == null ? null : search.trim()) + "%"});
+                new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId),
+                        search == null ? "%" : "%" + search.trim() + "%"});
         List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
             Resources res = getContext().getResources();
@@ -488,13 +443,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(key_status, note.getStatus().getTitle());
-        if (getCategoryIdByTitle(note.getAccountId(), category, false) == -1 &&
-                addCategory(note.getCategory(), note.getAccountId()) == -1) {
-            Log.e(TAG, String.format("Error occurs when creating category: %s", note.getCategory()));
-        }
         int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory(), true);
         values.put(key_category, id);
-//        values.put(key_category, note.getCategory());
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
         if (callback != null) {
             serverSyncHelper.addCallbackPush(ssoAccount, callback);
@@ -533,7 +483,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_status, newNote.getStatus().getTitle());
         values.put(key_title, newNote.getTitle());
         values.put(key_category, getCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory(), true));
-//        values.put(key_category, newNote.getCategory());
         values.put(key_modified, newNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, newNote.getContent());
         values.put(key_excerpt, newNote.getExcerpt());
@@ -581,7 +530,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_content, remoteNote.getContent());
         values.put(key_favorite, remoteNote.isFavorite());
         values.put(key_category, getCategoryIdByTitle(id, remoteNote.getCategory(), true));
-//        values.put(key_category, remoteNote.getCategory());
         values.put(key_etag, remoteNote.getEtag());
         values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent()));
         String whereClause;
@@ -859,13 +807,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @NonNull
     @WorkerThread
     private Integer getCategoryIdByTitle(long accountId, @NonNull String categoryTitle, boolean create) {
-        if (create) {
-            // If the category does not exist in the current db, create it.
-            if (getCategoryIdByTitle(accountId, categoryTitle, false) == -1 &&
-                    addCategory(categoryTitle, accountId) == -1) {
-                Log.e(TAG, String.format("Error occurs when creating category: %s", categoryTitle));
-            }
-        }
         validateAccountId(accountId);
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(
@@ -879,39 +820,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
         int id = -1;
         if (cursor.moveToNext()) {
             id = cursor.getInt(0);
+        } else if (create) {
+            id = (int) addCategory(categoryTitle, accountId);
+            if (id == -1) {
+                Log.e(TAG, String.format("Error occurs when creating category: %s", categoryTitle));
+            }
         }
         cursor.close();
         return id;
-    }
-
-    /**
-     * Find out all of the matched Category id with the given accountId and category title
-     * This method only supports to return the categories with the matched title or the categories whose ancestor category matches
-     * For example, three categories with the title "abc", "abc/aaa" and "abcd"
-     * If search with "abc", then only "abc" and "abc/aaa" will be return.
-     * This is also why /% is needed hear
-     *
-     * @param accountId     The user account Id
-     * @param categoryTitle The category title which will be searched.
-     * @return All matched category ids.
-     */
-    private List<Integer> getCategoryIdsByTitle(long accountId, @NonNull String categoryTitle) {
-        validateAccountId(accountId);
-        Cursor cursor = getReadableDatabase().query(
-                table_category,
-                new String[]{key_id},
-                key_title + " = ? OR " + key_title + " LIKE ? AND " + key_account_id + " = ? ",
-                new String[]{categoryTitle, categoryTitle + "/%", String.valueOf(accountId)},
-                key_id,
-                null,
-                key_id
-        );
-        List<Integer> ids = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            ids.add(cursor.getInt(0));
-        }
-        cursor.close();
-        return ids;
     }
 
     /**
