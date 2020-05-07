@@ -385,9 +385,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         String note_title = String.format("%s.%s", table_notes, key_category);
         String category_id = String.format("%s.%s", table_category, key_id);
         String category_accountId = String.format("%s.%s", table_category, key_account_id);
-        String rawQuery;
-
-        rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
+        String rawQuery = "SELECT " + category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
                 " ON " + note_title + " = " + category_id + " WHERE " + key_status + " != ?  AND " + category_accountId +
                 " = ? AND " + category_title + " LIKE ? AND " + category_title + " != \"\" GROUP BY " + category_title;
 
@@ -446,6 +444,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory(), true);
         values.put(key_category, id);
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
+        removeEmptyCategory(note.getAccountId());
         if (callback != null) {
             serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
@@ -487,6 +486,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_content, newNote.getContent());
         values.put(key_excerpt, newNote.getExcerpt());
         int rows = db.update(table_notes, values, key_id + " = ? AND (" + key_content + " != ? OR " + key_category + " != ?)", new String[]{String.valueOf(newNote.getId()), newNote.getContent(), newNote.getCategory()});
+        removeEmptyCategory(accountId);
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if (rows > 0) {
             notifyNotesChanged();
@@ -548,6 +548,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             whereArgs = new String[]{String.valueOf(id), DBStatus.VOID.getTitle(), Long.toString(remoteNote.getModified().getTimeInMillis() / 1000), remoteNote.getTitle(), remoteNote.isFavorite() ? "1" : "0", remoteNote.getCategory(), remoteNote.getEtag(), remoteNote.getContent()};
         }
         int i = db.update(table_notes, values, whereClause, whereArgs);
+        removeEmptyCategory(id);
         Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "  => " + i + " rows updated");
     }
 
@@ -592,6 +593,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         db.delete(table_notes,
                 key_id + " = ? AND " + key_status + " = ?",
                 new String[]{String.valueOf(id), forceDBStatus.getTitle()});
+        removeEmptyCategory(id);
     }
 
     /**
@@ -856,4 +858,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
         cursor.close();
         return title;
     }
+
+    private void removeEmptyCategory(long accountId) {
+        validateAccountId(accountId);
+        getReadableDatabase().delete(table_category,
+                key_id + " NOT IN (SELECT " + key_category + " FROM " + table_notes + ")",
+                null);
+    }
+
 }
