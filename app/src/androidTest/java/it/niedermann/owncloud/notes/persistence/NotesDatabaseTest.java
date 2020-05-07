@@ -489,18 +489,13 @@ public class NotesDatabaseTest {
             // Find an existing category to test false
             if (count > 0) {
                 catID = (int) method.invoke(db, account.getId(), categories.get(0).label);
-                // TODO: Please update the expected value of this assertion.
-//                assertNotEquals(catID, -1);
+                assertNotEquals(-1, catID);
             }
 
             // Create a category not existing
             String cur_cat = "Mike Chester Wang's Diary" + getCurDate();
             catID = (int) method.invoke(db, account.getId(), cur_cat);
-            // TODO: Please update the expected value of this assertion.
-//            assertEquals(catID, -1);
-
-            catID = (int) method.invoke(db, account.getId(), cur_cat);
-            assertNotEquals(catID, -1);
+            assertNotEquals(-1, catID);
         } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
             Log.e("Test_12_getCategoryIdByTitle", Arrays.toString(e.getStackTrace()));
