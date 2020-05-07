@@ -62,6 +62,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_api_version = "API_VERSION";
     protected static final String key_category_id = "CATEGORY_ID";
     protected static final String key_category_title = "CATEGORY_TITLE";
+    protected static final String key_category_account_id = "CATEGORY_ACCOUNT_ID";
 
     protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory, database_version);
@@ -99,7 +100,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_category + " INTEGER, " +
                 key_etag + " TEXT," +
                 key_excerpt + " TEXT NOT NULL DEFAULT '', " +
-                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_id + "), " +
+                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +
                 "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
         createNotesIndexes(db);
     }
@@ -114,14 +115,15 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_modified + " INTEGER, " +
                 key_api_version + " TEXT, " +
                 key_color + " VARCHAR(6) NOT NULL DEFAULT '000000', " +
-                key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9')");
+                key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9', " +
+                "FOREIGN KEY(" + key_id + ") REFERENCES " + table_category + "(" + key_category_account_id + "));");
         createAccountIndexes(db);
     }
 
     private void createCategoryTable(@NonNull SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + table_category + "(" +
                 key_category_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                key_account_id + " INTEGER, " +
+                key_category_account_id + " INTEGER, " +
                 key_category_title + " TEXT )");
         createCategoryIndexes(db);
     }
@@ -310,7 +312,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                     categoryId = id++;
                     ContentValues values = new ContentValues();
                     values.put(key_category_id, categoryId);
-                    values.put(key_account_id, accountId);
+                    values.put(key_category_account_id, accountId);
                     values.put(key_category_title, categoryTitle);
                     db.insert(table_category, null, values);
                     categoryTitleIdMap.put(categoryTitle, categoryId);
@@ -360,7 +362,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     }
 
     private static void createCategoryIndexes(@NonNull SQLiteDatabase db) {
-        DatabaseIndexUtil.createIndex(db, table_category, key_category_id, key_account_id, key_category_title);
+        DatabaseIndexUtil.createIndex(db, table_category, key_category_id, key_category_account_id, key_category_title);
     }
 
     protected abstract void notifyNotesChanged();

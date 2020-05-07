@@ -206,6 +206,13 @@ public class NotesDatabase extends AbstractNotesDatabase {
             Log.v(TAG, selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
         }
         Cursor cursor = db.query(table_notes, pruneContent ? columnsWithoutContent : columns, selection, selectionArgs, null, null, orderBy, limit);
+//        String cols = String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s",
+//                key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category_title, key_etag, key_excerpt);
+//        if (!pruneContent) {
+//            cols = String.format("%s, %s", cols, key_content);
+//        }
+//        String rawQuery = "SELECT " + cols + " "
+
         List<DBNote> notes = new ArrayList<>();
         while (cursor.moveToNext()) {
             notes.add(getNoteFromCursor(accountId, cursor, pruneContent));
@@ -357,7 +364,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     /**
      * This method return all of the categories with given accountId
-     * The join operation is used because it is needed that the number of notes in each category
+     *
      *
      * @param accountId The user account Id
      * @return All of the categories with given accountId
@@ -382,9 +389,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
         validateAccountId(accountId);
-        String category_accountId = String.format("%s.%s", table_category, key_account_id);
         String rawQuery = "SELECT " + key_category_title + ", COUNT(*) FROM " + table_category + " INNER JOIN " + table_notes +
-                " ON " + key_category + " = " + key_category_id + " WHERE " + key_status + " != ?  AND " + category_accountId +
+                " ON " + key_category + " = " + key_category_id + " WHERE " + key_status + " != ?  AND " + key_category_account_id +
                 " = ? AND " + key_category_title + " LIKE ? " +
                 (search == null ? "" : " AND " + key_category_title + " != \"\"") +
                 " GROUP BY " + key_category_title;
@@ -455,7 +461,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         validateAccountId(accountId);
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(key_account_id, accountId);
+        values.put(key_category_account_id, accountId);
         values.put(key_category_title, title);
         return db.insert(table_category, null, values);
     }
@@ -814,7 +820,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         Cursor cursor = db.query(
                 table_category,
                 new String[]{key_category_id},
-                key_category_title + " = ? AND " + key_account_id + " = ? ",
+                key_category_title + " = ? AND " + key_category_account_id + " = ? ",
                 new String[]{categoryTitle, String.valueOf(accountId)},
                 key_category_id,
                 null,
@@ -846,7 +852,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         Cursor cursor = getReadableDatabase().query(
                 table_category,
                 new String[]{key_category_title},
-                key_category_id + " = ? AND " + key_account_id + " = ? ",
+                key_category_id + " = ? AND " + key_category_account_id + " = ? ",
                 new String[]{String.valueOf(categoryId), String.valueOf(accountId)},
                 key_category_title,
                 null,
