@@ -205,13 +205,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
         if (selectionArgs.length > 2) {
             Log.v(TAG, selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
         }
-        Cursor cursor = db.query(table_notes, pruneContent ? columnsWithoutContent : columns, selection, selectionArgs, null, null, orderBy, limit);
-//        String cols = String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s",
-//                key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category_title, key_etag, key_excerpt);
-//        if (!pruneContent) {
-//            cols = String.format("%s, %s", cols, key_content);
-//        }
-//        String rawQuery = "SELECT " + cols + " "
+        String cols = String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s",
+                key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category_title, key_etag, key_excerpt);
+        if (!pruneContent) {
+            cols = String.format("%s, %s", cols, key_content);
+        }
+        String rawQuery = "SELECT " + cols + " FROM " + table_notes + " INNER JOIN " + table_category + " ON " + key_category + " = " + key_category_id +
+                " WHERE " + selection + (orderBy == null ? "" : " ORDER BY " + orderBy) + (limit == null ? "" : " LIMIT " + limit);
+        Cursor cursor = getReadableDatabase().rawQuery(rawQuery, selectionArgs);
 
         List<DBNote> notes = new ArrayList<>();
         while (cursor.moveToNext()) {
@@ -240,7 +241,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 cursor.getString(3),
                 pruneContent ? "" : cursor.getString(9),
                 cursor.getInt(5) > 0,
-                getTitleByCategoryId(accountId, cursor.getInt(6)),
+                cursor.getString(6),
                 cursor.getString(7),
                 DBStatus.parse(cursor.getString(2)),
                 accountId,
@@ -286,7 +287,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * This method only supports to return the notes in the categories with the matched title or the notes in the categories whose ancestor category matches
      * For example, three categories with the title "abc", "abc/aaa" and "abcd"
      * If search with "abc", then only notes in "abc" and "abc/aaa" will be returned.
-     * If any other information about this is needed, please refer to {@link this.getCategoryIdsByTitle(long, String)} method
      *
      * @return List&lt;Note&gt;
      */
@@ -365,7 +365,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
     /**
      * This method return all of the categories with given accountId
      *
-     *
      * @param accountId The user account Id
      * @return All of the categories with given accountId
      */
@@ -379,6 +378,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * This method return the category list containing all of the categories containing the
      * search pattern and matched with the given accountId
      * The join operation is used because it is needed that the number of notes in each category
+     * If search pattern is null, this method will return all of the categories for corresponding accountId
      *
      * @param accountId The user account ID
      * @param search    The search pattern
@@ -518,7 +518,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param remoteNote                Note from the server.
      * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
      */
-    // TODO: test
     void updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -839,32 +838,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * Find the category title with the category id
+     * This function will be called when the category or note is updated.
+     * Because sometime we will remove some notes in categories.
+     * Such that there must be such a category without any note.
+     * For these useless category, it is better to remove.
+     * Move a note from a category to another may also lead to the same result.
      *
-     * @param accountId  The user account Id
-     * @param categoryId The category Id which will be searched.
-     * @return empty if there is no such result, else return the corresponding title.
+     * @param accountId The user accountId
      */
-    @NonNull
-    @WorkerThread
-    private String getTitleByCategoryId(long accountId, int categoryId) {
-        validateAccountId(accountId);
-        Cursor cursor = getReadableDatabase().query(
-                table_category,
-                new String[]{key_category_title},
-                key_category_id + " = ? AND " + key_category_account_id + " = ? ",
-                new String[]{String.valueOf(categoryId), String.valueOf(accountId)},
-                key_category_title,
-                null,
-                key_category_title);
-        String title = "";
-        if (cursor.moveToNext()) {
-            title = cursor.getString(0);
-        }
-        cursor.close();
-        return title;
-    }
-
     private void removeEmptyCategory(long accountId) {
         validateAccountId(accountId);
         getReadableDatabase().delete(table_category,
