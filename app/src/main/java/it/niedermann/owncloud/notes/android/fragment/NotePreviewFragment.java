@@ -203,6 +203,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
                 db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
                     note = db.getNote(note.getAccountId(), note.getId());
+                    changedText = note.getContent();
                     binding.singleNoteContent.setText(parseCompat(markdownProcessor, replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
                     binding.swiperefreshlayout.setRefreshing(false);
                 });
