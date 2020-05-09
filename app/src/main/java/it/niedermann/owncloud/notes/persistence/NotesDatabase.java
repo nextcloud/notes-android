@@ -54,8 +54,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     private static final String TAG = NotesDatabase.class.getSimpleName();
 
-    private static final String[] columnsWithoutContent = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt};
-    private static final String[] columns = {key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category, key_etag, key_excerpt, key_content};
     private static final String default_order = key_favorite + " DESC, " + key_modified + " DESC";
 
     private static NotesDatabase instance;
@@ -383,7 +381,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param search    The search pattern
      * @return The category list containing all of the categories matched
      */
-    // TODO merge with getCategories(long accountId)
     @NonNull
     @WorkerThread
     public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
