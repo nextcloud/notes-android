@@ -97,8 +97,8 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
      */
     private boolean notAuthorizedAccountHandled = false;
 
-    private SingleSignOnAccount ssoAccount;
-    private LocalAccount localAccount;
+    protected SingleSignOnAccount ssoAccount;
+    protected LocalAccount localAccount;
 
     protected DrawerLayoutBinding binding;
 
@@ -109,6 +109,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
     protected ItemAdapter adapter = null;
 
+    protected NotesDatabase db = null;
     private ActionBarDrawerToggle drawerToggle;
     private NavigationAdapter adapterCategories;
     private NavigationItem itemRecent;
@@ -117,7 +118,6 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
-    private NotesDatabase db = null;
     private SearchView searchView = null;
     private final ISyncCallback syncCallBack = () -> {
         adapter.clearSelection(listView);
