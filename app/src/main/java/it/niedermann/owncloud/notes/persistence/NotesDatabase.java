@@ -822,9 +822,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 new String[]{key_category_id},
                 key_category_title + " = ? AND " + key_category_account_id + " = ? ",
                 new String[]{categoryTitle, String.valueOf(accountId)},
-                key_category_id,
                 null,
-                key_category_id);
+                null,
+                null);
         int id = -1;
         if (cursor.moveToNext()) {
             id = cursor.getInt(0);
