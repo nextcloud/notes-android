@@ -459,7 +459,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         serverSyncHelper.scheduleSync(ssoAccount, true);
     }
 
-    private long addCategory(@NonNull String title, long accountId) {
+    private long addCategory(long accountId, @NonNull String title) {
         validateAccountId(accountId);
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -809,7 +809,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param accountId     The user account Id
      * @param categoryTitle The category title which will be search in the db
-     *
      * @return -1 if there is no such category else the corresponding id
      */
     @NonNull
@@ -828,8 +827,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         int id = -1;
         if (cursor.moveToNext()) {
             id = cursor.getInt(0);
-        } else  {
-            id = (int) addCategory(categoryTitle, accountId);
+        } else {
+            id = (int) addCategory(accountId, categoryTitle);
             if (id == -1) {
                 Log.e(TAG, String.format("Error occurs when creating category: %s", categoryTitle));
             }
