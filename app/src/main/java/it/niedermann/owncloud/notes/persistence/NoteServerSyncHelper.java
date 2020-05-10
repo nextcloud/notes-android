@@ -380,7 +380,7 @@ public class NoteServerSyncHelper {
                                 remoteNote = notesClient.createNote(ssoAccount, note).getNote();
                             }
                             // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            db.updateNote(note.getId(), remoteNote, note);
+                            db.updateNote(localAccount, note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() > 0) {
@@ -441,7 +441,7 @@ public class NoteServerSyncHelper {
                         Log.v(TAG, "   ... found -> Update");
                         Long remoteId = idMap.get(remoteNote.getRemoteId());
                         if (remoteId != null) {
-                            db.updateNote(remoteId, remoteNote, null);
+                            db.updateNote(localAccount, remoteId, remoteNote, null);
                         } else {
                             Log.e(TAG, "Tried to update note from server, but remoteId of note is null. " + remoteNote);
                         }

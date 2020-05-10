@@ -520,7 +520,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param remoteNote                Note from the server.
      * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
      */
-    void updateNote(long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
+    void updateNote(LocalAccount localAccount, long id, @NonNull CloudNote remoteNote, @Nullable DBNote forceUnchangedDBNoteState) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
@@ -544,10 +544,10 @@ public class NotesDatabase extends AbstractNotesDatabase {
         if (forceUnchangedDBNoteState != null) {
             // used by: NoteServerSyncHelper.SyncTask.pushLocalChanges()
             // update only, if not modified locally during the synchronization
-            // (i.e. all (!) user changeable columns (content, favorite) should still have the same value),
+            // (i.e. all (!) user changeable columns (content, favorite, category) must still have the same value),
             // uses reference value gathered at start of synchronization
             whereClause = key_id + " = ? AND " + key_content + " = ? AND " + key_favorite + " = ? AND " + key_category + " = ?";
-            whereArgs = new String[]{String.valueOf(id), forceUnchangedDBNoteState.getContent(), forceUnchangedDBNoteState.isFavorite() ? "1" : "0", forceUnchangedDBNoteState.getCategory()};
+            whereArgs = new String[]{String.valueOf(id), forceUnchangedDBNoteState.getContent(), forceUnchangedDBNoteState.isFavorite() ? "1" : "0", String.valueOf(getCategoryIdByTitle(localAccount.getId(), forceUnchangedDBNoteState.getCategory()))};
         } else {
             // used by: NoteServerSyncHelper.SyncTask.pullRemoteChanges()
             // update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
