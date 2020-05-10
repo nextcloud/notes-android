@@ -20,7 +20,6 @@ public class SearchableBaseNoteFragmentTest {
 
             for (int count = 0; count <= 15; ++count) {
                 StringBuilder sb = new StringBuilder("Mike Chester Wang");
-                Random rand = new Random();
                 for (int i = 0; i < count; ++i) {
                     sb.append(sb);
                 }
