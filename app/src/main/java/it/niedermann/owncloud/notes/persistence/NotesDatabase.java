@@ -683,6 +683,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_url, url);
         values.put(key_username, username);
         values.put(key_account_name, accountName);
+        values.put(key_color, capabilities.getColor().substring(1));
+        values.put(key_text_color, capabilities.getTextColor().substring(1));
+        values.put(key_capabilities_etag, capabilities.getETag());
         db.insertOrThrow(table_accounts, null, values);
     }
 
