@@ -50,6 +50,7 @@
 
     <!-- Error -->
     <string name="error_sync">sikertelen szinkronizálás: %1$s</string>
+    <string name="error_synchronization">Szinkronizálás sikertelen</string>
     <string name="error_json">Be van kapcsolva a Jegyzetek alkalmazás a kiszolgálón?</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
     <string name="error_files_app">Telepítette a Fájlok alkalmazást?</string>
@@ -126,6 +127,18 @@
     <string name="add_category">%1$s hozzáadása</string>
     <string name="simple_checkbox">Jelölőmező</string>
     <string name="simple_beta">Béta</string>
+    <string name="could_not_copy_to_clipboard">Nem sikerült a vágólapra másolni</string>
+    <string name="error_dialog_title">Jaj ne – Most mi legyen? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Próbálja kényszeríteni az alkalmazás bezárását, és indítsa újra. Lehet, hogy hibás volt a kapcsolat a többi Nextcloud alkalmazással.</string>
+    <string name="error_dialog_tip_files_outdated">A Nextcloud alkalmazása elavultnak tűnik. Keresse fel a Play Áruházat vagy az F-Droidot, hogy beszerezze a legfrissebb verziót.</string>
+    <string name="error_dialog_tip_files_delete_storage">Ha a kényszerített leállítás nem segít, akkor megpróbálhatja mindkét alkalmazás tárolóját kiüríteni.</string>
+    <string name="error_dialog_timeout_instance">A megadott időn belül nem érkezett válasz a kiszolgálótól. Győződjön meg róla, hogy a példánya helyesen fut.</string>
+    <string name="error_dialog_timeout_toggle">Ellenőrizze a hálózati kapcsolatát. Néha a mobil adathasználat vagy a Wi-Fi ki- és bekapcsolása is segíthet.</string>
+    <string name="error_dialog_check_server_logs">Hiba van a Nextcloudja beállításaiban. Nézzen bele a kiszolgáló naplófájljaiba.</string>
+    <string name="error_dialog_check_maintenance">Ellenőrizze, hogy a Nextcloud példánya nincs-e karbantartási módban.</string>
+    <string name="error_dialog_insufficient_storage">A Nextcloud példányán elfogyott a szabad hely. Töröljön pár fájlt, hogy szinkronizálhassa a helyi változtatásait a felhővel.</string>
+    <string name="error_dialog_contact_us">Nyugodtan lépjen velünk kapcsolatba, ha a probléma továbbra is fennáll. A kapcsolati információkat az oldalsáv névjegy részében találja.</string>
+    <string name="error_dialog_we_need_info">A következő műszaki információkra van szükségünk, hogy segíthessünk:</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>

@@ -16,8 +16,8 @@
     <string name="simple_bold">Жирный</string>
     <string name="simple_link">Ссылка</string>
     <string name="simple_italic">Курсив</string>
-    <string name="action_note_deleted">%1$s удалена</string>
-    <string name="action_note_restored">%1$s восстановлена</string>
+    <string name="action_note_deleted">Заметка %1$s удалена</string>
+    <string name="action_note_restored">Заметка %1$s восстановлена</string>
     <string name="action_undo">Отменить</string>
     <string name="action_drawer_open">открыть навигацию</string>
     <string name="action_drawer_close">закрыть навигацию</string>
@@ -137,14 +137,16 @@
     <string name="error_dialog_tip_files_outdated">Ваше приложение Nextcloud устарело. Установите новую версию с Play Store или F-Droid.</string>
     <string name="error_dialog_tip_files_force_stop">Похоже что с вашим приложением Nextcloud что-то не так. Попробуйте принудительно остановить оба приложения Nextcloud и Nextcloud Notes. </string>
     <string name="error_dialog_tip_files_delete_storage">Если принудительная остановка не поможет, попробуйте очистить хранилище обоих приложений.</string>
-    <string name="error_dialog_timeout_instance">Не получено сообщений от вашего сервера за указанное время. Пожалуйста убедитесь что все работает.</string>
+    <string name="error_dialog_timeout_instance">Ответ сервера не был получен в отведённое на это время. Проверьте работоспособность сервера.</string>
     <string name="error_dialog_timeout_toggle">Проверьте ваше сетевое соединение. В некоторых случаях может помочь отключение Wi-Fi и включение его вновь.</string>
     <string name="error_dialog_check_server">Ответ вашего сервера неверный. Проверьте работает ли вход через веб-интерфейс.</string>
-    <string name="error_dialog_check_server_logs">Есть замечания по вашей установке Nextcloud. Пожалуйста проверьте журналы сервера.</string>
-    <string name="error_dialog_check_maintenance">Пожалуйста убедитесь что ваш экземпляр Nextcloud не в режиме обслуживания.</string>
+    <string name="error_dialog_check_server_logs">В конфигурации сервера обнаружены ошибки, проверьте файлы журналов сервера.</string>
+    <string name="error_dialog_check_maintenance">Убедитесь что ваш экземпляр Nextcloud не находится в режиме обслуживания.</string>
     <string name="error_dialog_insufficient_storage">На вашем экземпляре Nextcloud нет свободного места. Удалите ненужные файлы для синхронизации изменений в облако.</string>
-    <string name="error_dialog_contact_us">Пожалуйста не стесняйтесь присылать нам ваши пожелания. Вы можете найти нашу контактную информацию в разделе \"О нас\" на боковой панели.</string>
+    <string name="error_dialog_contact_us">Не стесняйтесь сообщать разработчикам о повторяющихся ошибках. Контактная информация приведена в боковой панели в разделе «О программе».</string>
     <string name="error_dialog_we_need_info">Требуется следующая техническая информация от вас:</string>
+    <string name="error_dialog_redirect">На запрос сервер вернул код состояния HTTP 302, что означает, что  приложение Заметки либо не установлено, либо сервер настроен неверно. Такое поведение может являться следствием замены стандартного файла .htaccess администратором сервера или приложением Nextcloud, таким как OID Client.</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>
