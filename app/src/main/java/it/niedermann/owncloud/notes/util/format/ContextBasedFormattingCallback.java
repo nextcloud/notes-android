@@ -20,7 +20,7 @@ import static it.niedermann.owncloud.notes.util.MarkDownUtil.getStartOfLine;
 
 public class ContextBasedFormattingCallback implements ActionMode.Callback {
 
-    private static final String TAG = ContextBasedFormattingCallback.class.getCanonicalName();
+    private static final String TAG = ContextBasedFormattingCallback.class.getSimpleName();
 
     private final EditText editText;
 

@@ -13,17 +13,19 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.nextcloud.android.sso.AccountImporter;
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.net.HttpURLConnection;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 
 public class CapabilitiesWorker extends Worker {
 
-    private static final String TAG = Objects.requireNonNull(CapabilitiesWorker.class.getCanonicalName());
+    private static final String TAG = Objects.requireNonNull(CapabilitiesWorker.class.getSimpleName());
     private static final String WORKER_TAG = "capabilities";
 
     private static final Constraints constraints = new Constraints.Builder()
@@ -40,13 +42,25 @@ public class CapabilitiesWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
+        final NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
         for (LocalAccount account : db.getAccounts()) {
             try {
-                SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
+                final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-            } catch (NextcloudFilesAppAccountNotFoundException e) {
+                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag());
+                db.updateCapabilitiesETag(account.getId(), capabilities.getETag());
+                db.updateBrand(account.getId(), capabilities);
+                db.updateApiVersion(account.getId(), capabilities.getApiVersion());
+                Log.i(TAG, capabilities.toString());
+            } catch (Exception e) {
+                if (e instanceof NextcloudHttpRequestFailedException) {
+                    if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
+                        Log.i(TAG, "Capabilities not modified.");
+                        return Result.success();
+                    }
+                }
                 e.printStackTrace();
+                return Result.failure();
             }
         }
         return Result.success();
@@ -54,12 +68,12 @@ public class CapabilitiesWorker extends Worker {
 
     public static void update(@NonNull Context context) {
         deregister(context);
-        Log.i(TAG, "Registering worker running each 24 hours.");
+        Log.i(TAG, "Registering capabilities worker running each 24 hours.");
         WorkManager.getInstance(context.getApplicationContext()).enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, work);
     }
 
     private static void deregister(@NonNull Context context) {
         Log.i(TAG, "Deregistering all workers with tag \"" + WORKER_TAG + "\"");
-        WorkManager.getInstance(context.getApplicationContext()).cancelAllWorkByTag(WORKER_TAG);
+        WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork(WORKER_TAG);
     }
 }

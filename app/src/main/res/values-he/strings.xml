@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">פתקים</string>
+    <string name="app_name_long">פתקים של Nextcloud</string>
     <string name="label_all_notes">כל הפתקים</string>
     <string name="label_favorites">מועדפים</string>
     <string name="action_create">פתק חדש</string>
@@ -30,7 +31,10 @@
     <string name="listview_updated_today">היום</string>
     <string name="listview_updated_yesterday">אתמול</string>
     <string name="listview_updated_this_week">השבוע</string>
+    <string name="listview_updated_last_week">שבוע שעבר</string>
     <string name="listview_updated_this_month">החודש</string>
+    <string name="listview_updated_last_month">חודש שעבר</string>
+
     <!-- Settings -->
     <string name="settings_note_mode">מצב תצוגת פתקים</string>
     <string name="settings_theme_title">ערכת עיצוב כהה</string>
@@ -38,13 +42,20 @@
     <string name="settings_font_size">גודל גופן</string>
     <string name="settings_wifi_only">סנכרון רק דרך רשת אלחוטית</string>
     <string name="settings_lock">Password protection</string>
-    <!-- Certificates -->
+    <string name="settings_background_sync">סנכרון ברקע</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">הסנכרון נכשל: %1$s</string>
+    <string name="error_synchronization">הסנכרון נכשל</string>
+    <string name="error_json">האם יישומון הפתקים מופעל בשרת?</string>
     <string name="error_no_network">אין חיבור לאינטרנט</string>
+    <string name="error_files_app">האם התקנת את יישומון הקבצים?</string>
+    <string name="error_token_mismatch">לא ניתן להתחבר ליישומון הקבצים.</string>
+    <string name="error_insufficient_storage">נפח האחסון בשרת שלך נוצל במלואו</string>
+    <string name="error_unknown">אירעה שגיאה בלתי ידועה.</string>
+
     <!-- About -->
     <string name="about_version_title">גרסה</string>
     <string name="about_version">הניצולת עומדת על &lt;strong>%1$s&lt;/strong></string>
@@ -91,18 +102,34 @@
     <string name="simple_error">שגיאה</string>
     <string name="simple_close">סגור</string>
     <string name="simple_copy">העתק</string>
+    <string name="simple_exception">חריגה</string>
     <string name="copied_to_clipboard">הועתק ללוח הגזירים</string>
     <string name="pin_to_homescreen">הוסף למסך הבית</string>
     <string name="note_has_been_deleted">פתק זה נמחק</string>
     <string name="add_account">הוספת חשבון</string>
     <string name="category_music">מוזיקה</string>
     <string name="category_movies">סרטים</string>
+    <string name="category_movie">סרט</string>
     <string name="category_work">עבודה</string>
+    <string name="account_already_imported">החשבון הזה כבר עבר ייבוא</string>
     <string name="no_notes_yet">אין פתקים עדיין</string>
+    <string name="no_notes_yet_description">לחיצה + כפתור כדי ליצור פתק חדש</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">לא ניתן לטעון תצוגה מקדימה. נא לבדוק האם יש פריט ברשימה עם שתי ספרות שאין לו תוכן.</string>
     <string name="simple_more">עוד</string>
     <string name="simple_move">העברה</string>
+    <string name="error_files_app_version_too_old">האם גרסת יישומון הקבצים שלך מעודכנת?</string>
+    <string name="checkbox_could_not_be_toggled">לא ניתן להחליף את מצב תיבת הבחירה.</string>
+    <string name="bulk_notes_deleted">נמחקו %1$d פתקים</string>
+    <string name="bulk_notes_restored">שוחזרו %1$d פתקים</string>
     <string name="category_readonly">קריאה בלבד</string>
+    <string name="no_category">אין קטגוריה</string>
+    <string name="add_category">הוספת %1$s</string>
     <string name="simple_checkbox">תיבת סימון</string>
+    <string name="unlock_notes">שחרור פתקים</string>
+    <string name="simple_beta">בטא</string>
+    <string name="could_not_copy_to_clipboard">לא ניתן להעתיק ללוח הגזירים</string>
+    <string name="error_dialog_title">שוד ושבר - מה עכשיו? 🙁</string>
+    <string name="error_dialog_we_need_info">אנו זקוקים לפירוט הטכני הבא כדי לסייע לך:</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>

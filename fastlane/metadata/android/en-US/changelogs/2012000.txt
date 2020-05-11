@@ -1,0 +1,3 @@
+- ⚡️ Speed up synchronization by supporting ETags for capabilities endpoint
+- ➕ Allow to share into exiting note (#174)
+- 🐞 Fix upgrading from version <= 1.0.1 to a current version

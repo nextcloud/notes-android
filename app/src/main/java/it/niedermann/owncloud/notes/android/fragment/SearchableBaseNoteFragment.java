@@ -25,7 +25,7 @@ import it.niedermann.owncloud.notes.R;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
-    private static final String TAG = SearchableBaseNoteFragment.class.getCanonicalName();
+    private static final String TAG = SearchableBaseNoteFragment.class.getSimpleName();
     private static final String saved_instance_key_searchQuery = "searchQuery";
     private static final String saved_instance_key_currentOccurrence = "currentOccurrence";
 

@@ -16,7 +16,7 @@ import it.niedermann.owncloud.notes.util.Notes;
 
 public abstract class LockedActivity extends AppCompatActivity {
 
-    private static final String TAG = LockedActivity.class.getCanonicalName();
+    private static final String TAG = LockedActivity.class.getSimpleName();
 
     private static final int REQUEST_CODE_UNLOCK = 100;
 

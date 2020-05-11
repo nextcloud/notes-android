@@ -38,7 +38,7 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
         if (context instanceof AccountChooserListener) {
             this.accountChooserListener = (AccountChooserListener) context;
         } else {
-            throw new ClassCastException("Caller must implement " + AccountChooserListener.class.getCanonicalName());
+            throw new ClassCastException("Caller must implement " + AccountChooserListener.class.getSimpleName());
         }
     }
 

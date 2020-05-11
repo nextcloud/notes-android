@@ -145,6 +145,7 @@
     <string name="error_dialog_insufficient_storage">Nextcloud kopyanızda boş depolama alanı kalmamış. Lütfen yerel değişikliklerinizi bulut ile eşitlemek için bazı dosyaları silerek yer açın.</string>
     <string name="error_dialog_contact_us">Sorun sürerse lütfen bize sormaktan çekinmeyin. İletişim bilgilerimizi yan çubuktaki hakkında bölümünde bulabilirsiniz.</string>
     <string name="error_dialog_we_need_info">Size yardımcı olabilmemiz için şu teknik bilgilere gerek duyacağız:</string>
+    <string name="error_dialog_redirect">Sunucunuz, üzerine Notlar uygulamasının kurulmadığı ya da bir şeyin yanlış yapılandırıldığı anlamına gelen HTTP 302 durum kodu ile yanıt verdi. Bu durum, bir .htaccess dosyasındaki özel kısıtlamalardan ya da OID İstemcisi gibi Nextcloud uygulamalarından kaynaklanabilir.</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

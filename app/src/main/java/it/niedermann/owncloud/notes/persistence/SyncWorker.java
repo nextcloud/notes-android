@@ -24,7 +24,7 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 
 public class SyncWorker extends Worker {
 
-    private static final String TAG = Objects.requireNonNull(SyncWorker.class.getCanonicalName());
+    private static final String TAG = Objects.requireNonNull(SyncWorker.class.getSimpleName());
     private static final String WORKER_TAG = "background_synchronization";
 
     private static final Constraints constraints = new Constraints.Builder()
@@ -67,13 +67,13 @@ public class SyncWorker extends Worker {
             }
             PeriodicWorkRequest work = new PeriodicWorkRequest.Builder(SyncWorker.class, repeatInterval, unit)
                     .setConstraints(constraints).build();
-            WorkManager.getInstance(context.getApplicationContext()).enqueueUniquePeriodicWork(TAG, ExistingPeriodicWorkPolicy.REPLACE, work);
+            WorkManager.getInstance(context.getApplicationContext()).enqueueUniquePeriodicWork(WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, work);
             Log.i(TAG, "Registering worker running each " + repeatInterval + " " + unit);
         }
     }
 
     private static void deregister(@NonNull Context context) {
         Log.i(TAG, "Deregistering all workers with tag \"" + WORKER_TAG + "\"");
-        WorkManager.getInstance(context.getApplicationContext()).cancelAllWorkByTag(WORKER_TAG);
+        WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork(WORKER_TAG);
     }
 }

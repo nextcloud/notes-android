@@ -72,7 +72,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
         } else if (getActivity() instanceof CategoryDialogListener) {
             listener = (CategoryDialogListener) getActivity();
         } else {
-            throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getCanonicalName());
+            throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getSimpleName());
         }
         db = NotesDatabase.getInstance(getActivity());
     }

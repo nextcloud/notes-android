@@ -1,4 +1,4 @@
-# Nextcloud Notes
+# Nextcloud Notes for Android
 An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/).
 
 [![Android CI](https://github.com/stefan-niedermann/nextcloud-notes/workflows/Android%20CI/badge.svg)](https://github.com/stefan-niedermann/nextcloud-notes/actions)
@@ -59,7 +59,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :link: Requirements
   * [Nextcloud](https://nextcloud.com/) instance running
-  * [Nextcloud Files](https://github.com/nextcloud/android) app enabled (> 3.9.0)
+  * [Nextcloud Android](https://github.com/nextcloud/android) app installed (> 3.9.0)
   * [Nextcloud Notes](https://github.com/nextcloud/notes) app enabled
 
 ## :notebook: License

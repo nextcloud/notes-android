@@ -92,7 +92,6 @@ public class NoteServerSyncHelper {
     // current state of the synchronization
     private final Map<String, Boolean> syncActive = new HashMap<>();
     private final Map<String, Boolean> syncScheduled = new HashMap<>();
-    private final NotesClient notesClient;
 
     // list of callbacks for both parts of synchronziation
     private final Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
@@ -101,7 +100,6 @@ public class NoteServerSyncHelper {
     private NoteServerSyncHelper(NotesDatabase db) {
         this.db = db;
         this.context = db.getContext();
-        notesClient = new NotesClient(context.getApplicationContext());
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
 
         // Registers BroadcastReceiver to track network connection changes.
@@ -199,7 +197,6 @@ public class NoteServerSyncHelper {
         }
     }
 
-
     /**
      * Schedules a synchronization and start it directly, if the network is connected and no
      * synchronization is currently running.
@@ -208,7 +205,7 @@ public class NoteServerSyncHelper {
      */
     public void scheduleSync(SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
         if (ssoAccount == null) {
-            Log.i(TAG, "ssoAccount is null. Is this a local account?");
+            Log.i(TAG, SingleSignOnAccount.class.getSimpleName() + " is null. Is this a local account?");
         } else {
             if (syncActive.get(ssoAccount.name) == null) {
                 syncActive.put(ssoAccount.name, false);
@@ -216,12 +213,13 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) || onlyLocalChanges)) {
                 Log.d(TAG, "... starting now");
-                final LocalAccount account = db.getLocalAccountByAccountName(ssoAccount.name);
-                if (account == null) {
-                    Log.e(TAG, "LocalAccount for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
+                final LocalAccount localAccount = db.getLocalAccountByAccountName(ssoAccount.name);
+                if (localAccount == null) {
+                    Log.e(TAG, LocalAccount.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
                     return;
                 }
-                SyncTask syncTask = new SyncTask(account, ssoAccount, onlyLocalChanges);
+                final NotesClient notesClient = NotesClient.newInstance(localAccount.getPreferredApiVersion(), context);
+                final SyncTask syncTask = new SyncTask(notesClient, localAccount, ssoAccount, onlyLocalChanges);
                 syncTask.addCallbacks(ssoAccount, callbacksPush.get(ssoAccount.name));
                 callbacksPush.put(ssoAccount.name, new ArrayList<>());
                 if (!onlyLocalChanges) {
@@ -260,13 +258,13 @@ public class NoteServerSyncHelper {
 
     private void updateNetworkStatus() {
         try {
-            ConnectivityManager connMgr = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            final ConnectivityManager connMgr = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
             if (connMgr == null) {
                 throw new NetworkErrorException("ConnectivityManager is null");
             }
 
-            NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
+            final NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
 
             if (activeInfo == null) {
                 throw new NetworkErrorException("NetworkInfo is null");
@@ -275,7 +273,7 @@ public class NoteServerSyncHelper {
             if (activeInfo.isConnected()) {
                 networkConnected = true;
 
-                NetworkInfo networkInfo = connMgr.getNetworkInfo((ConnectivityManager.TYPE_WIFI));
+                final NetworkInfo networkInfo = connMgr.getNetworkInfo((ConnectivityManager.TYPE_WIFI));
 
                 if (networkInfo == null) {
                     throw new NetworkErrorException("connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI) is null");
@@ -306,7 +304,10 @@ public class NoteServerSyncHelper {
      */
     private class SyncTask extends AsyncTask<Void, Void, SyncResultStatus> {
         @NonNull
+        private final NotesClient notesClient;
+        @NonNull
         private final LocalAccount localAccount;
+        @NonNull
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
         @NonNull
@@ -314,7 +315,8 @@ public class NoteServerSyncHelper {
         @NonNull
         private final ArrayList<Throwable> exceptions = new ArrayList<>();
 
-        SyncTask(@NonNull LocalAccount localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
+        SyncTask(@NonNull NotesClient notesClient, @NonNull LocalAccount localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
+            this.notesClient = notesClient;
             this.localAccount = localAccount;
             this.ssoAccount = ssoAccount;
             this.onlyLocalChanges = onlyLocalChanges;
@@ -364,19 +366,19 @@ public class NoteServerSyncHelper {
                         case LOCAL_EDITED:
                             Log.v(TAG, "   ...create/edit");
                             if (note.getRemoteId() > 0) {
-                                Log.v(TAG, "   ...Note has remoteId -> try to edit");
+                                Log.v(TAG, "   ...Note has remoteId → try to edit");
                                 try {
                                     remoteNote = notesClient.editNote(ssoAccount, note).getNote();
                                 } catch (NextcloudHttpRequestFailedException e) {
                                     if (e.getStatusCode() == HTTP_NOT_FOUND) {
-                                        Log.v(TAG, "   ...Note does no longer exist on server -> recreate");
+                                        Log.v(TAG, "   ...Note does no longer exist on server → recreate");
                                         remoteNote = notesClient.createNote(ssoAccount, note).getNote();
                                     } else {
                                         throw e;
                                     }
                                 }
                             } else {
-                                Log.v(TAG, "   ...Note does not have a remoteId yet -> create");
+                                Log.v(TAG, "   ...Note does not have a remoteId yet → create");
                                 remoteNote = notesClient.createNote(ssoAccount, note).getNote();
                             }
                             // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
@@ -412,7 +414,7 @@ public class NoteServerSyncHelper {
                     }
                 } catch (Exception e) {
                     if (e instanceof TokenMismatchException) {
-                        NotesClient.invalidateAPICache(ssoAccount);
+                        SSOClient.invalidateAPICache(ssoAccount);
                     }
                     exceptions.add(e);
                     success = false;
@@ -427,8 +429,8 @@ public class NoteServerSyncHelper {
         private boolean pullRemoteChanges() {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
-                Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
-                ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getEtag());
+                final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
+                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getEtag());
                 List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
@@ -438,7 +440,7 @@ public class NoteServerSyncHelper {
                     if (remoteNote.getModified() == null) {
                         Log.v(TAG, "   ... unchanged");
                     } else if (idMap.containsKey(remoteNote.getRemoteId())) {
-                        Log.v(TAG, "   ... found -> Update");
+                        Log.v(TAG, "   ... found → Update");
                         Long remoteId = idMap.get(remoteNote.getRemoteId());
                         if (remoteId != null) {
                             db.updateNote(localAccount, remoteId, remoteNote, null);
@@ -464,6 +466,13 @@ public class NoteServerSyncHelper {
                 localAccount.setModified(response.getLastModified());
                 db.updateETag(localAccount.getId(), localAccount.getEtag());
                 db.updateModified(localAccount.getId(), localAccount.getModified());
+                try {
+                    if (db.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
+                        localAccount.setPreferredApiVersion(response.getSupportedApiVersions());
+                    }
+                } catch (Exception e) {
+                    exceptions.add(e);
+                }
                 return true;
             } catch (NextcloudHttpRequestFailedException e) {
                 Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
@@ -475,7 +484,7 @@ public class NoteServerSyncHelper {
                 }
             } catch (Exception e) {
                 if (e instanceof TokenMismatchException) {
-                    NotesClient.invalidateAPICache(ssoAccount);
+                    SSOClient.invalidateAPICache(ssoAccount);
                 }
                 exceptions.add(e);
                 return false;
@@ -492,7 +501,7 @@ public class NoteServerSyncHelper {
                 if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
                     Snackbar.make(((ViewProvider) context).getView(), R.string.error_synchronization, Snackbar.LENGTH_LONG)
                             .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
-                                    .show(((AppCompatActivity) context).getSupportFragmentManager(), ExceptionDialogFragment.class.getCanonicalName()))
+                                    .show(((AppCompatActivity) context).getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                             .show();
                 }
             }

@@ -192,7 +192,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 showCategorySelector();
                 return true;
             case R.id.menu_move:
-                AccountChooserDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getCanonicalName());
+                AccountChooserDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
                 return true;
             case R.id.menu_share:
                 Intent shareIntent = new Intent();

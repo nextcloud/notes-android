@@ -37,10 +37,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +51,9 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.android.fragment.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
+import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
@@ -58,6 +62,8 @@ import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
+import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
+import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
@@ -91,8 +97,8 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
      */
     private boolean notAuthorizedAccountHandled = false;
 
-    private SingleSignOnAccount ssoAccount;
-    private LocalAccount localAccount;
+    protected SingleSignOnAccount ssoAccount;
+    protected LocalAccount localAccount;
 
     protected DrawerLayoutBinding binding;
 
@@ -103,6 +109,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
     protected ItemAdapter adapter = null;
 
+    protected NotesDatabase db = null;
     private ActionBarDrawerToggle drawerToggle;
     private NavigationAdapter adapterCategories;
     private NavigationItem itemRecent;
@@ -111,7 +118,6 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
-    private NotesDatabase db = null;
     private SearchView searchView = null;
     private final ISyncCallback syncCallBack = () -> {
         adapter.clearSelection(listView);
@@ -127,6 +133,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        CapabilitiesWorker.update(this);
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
@@ -211,19 +218,25 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         fabCreate.hide();
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
         localAccount = db.getLocalAccountByAccountName(accountName);
-        try {
-            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-            new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this).attachToRecyclerView(listView);
-            synchronize();
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
-            handleNotAuthorizedAccount();
+        if (localAccount != null) {
+            try {
+                ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this).attachToRecyclerView(listView);
+                synchronize();
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
+                handleNotAuthorizedAccount();
+            }
+            refreshLists();
+            fabCreate.show();
+            setupHeader();
+            setupNavigationList(ADAPTER_KEY_RECENT);
+            updateUsernameInDrawer();
+        } else {
+            if (!notAuthorizedAccountHandled) {
+                handleNotAuthorizedAccount();
+            }
         }
-        refreshLists();
-        fabCreate.show();
-        setupHeader();
-        setupNavigationList(ADAPTER_KEY_RECENT);
-        updateUsernameInDrawer();
     }
 
     private void handleNotAuthorizedAccount() {
@@ -277,7 +290,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     }
 
     private void setupActionBar() {
-        Toolbar toolbar = binding.activityNotesListView.notesListActivityActionBar;
+        Toolbar toolbar = binding.activityNotesListView.toolbar;
         setSupportActionBar(toolbar);
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
         drawerToggle.setDrawerIndicatorEnabled(true);
@@ -308,7 +321,27 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                     Log.i(TAG, "Clearing Glide disk cache");
                     Glide.get(getApplicationContext()).clearDiskCache();
                 }).start();
-                synchronize();
+                new Thread(() -> {
+                    Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
+                    final Capabilities capabilities;
+                    try {
+                        capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, localAccount.getCapabilitiesETag());
+                        db.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
+                        db.updateBrand(localAccount.getId(), capabilities);
+                        db.updateBrand(localAccount.getId(), capabilities);
+                        db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                        Log.i(TAG, capabilities.toString());
+                    } catch (Exception e) {
+                        if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
+                            Log.i(TAG, "Capabilities not modified.");
+                        } else {
+                            e.printStackTrace();
+                        }
+                    } finally {
+                        // Even if the capabilities endpoint makes trouble, we can still try to synchronize the notes
+                        synchronize();
+                    }
+                }).start();
             }
         });
 
@@ -657,38 +690,63 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                 //not need because of db.synchronisation in createActivity
 
                 Bundle bundle = data.getExtras();
-                if (bundle != null) {
-                    DBNote createdNote = (DBNote) data.getExtras().getSerializable(CREATED_NOTE);
+                if (bundle != null && bundle.containsKey(CREATED_NOTE)) {
+                    DBNote createdNote = (DBNote) bundle.getSerializable(CREATED_NOTE);
                     if (createdNote != null) {
                         adapter.add(createdNote);
                     } else {
-                        Log.w(TAG, "createdNote is null");
+                        Log.w(TAG, "createdNote must not be null");
                     }
                 } else {
-                    Log.w(TAG, "bundle is null");
+                    Log.w(TAG, "Provide at least " + CREATED_NOTE);
                 }
             }
             listView.scrollToPosition(0);
         } else if (requestCode == server_settings) {
-            // Recreate activity completely, because theme switchting makes problems when only invalidating the views.
+            // Recreate activity completely, because theme switching makes problems when only invalidating the views.
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
             recreate();
         } else {
             try {
-                AccountImporter.onActivityResult(requestCode, resultCode, data, this, (SingleSignOnAccount account) -> {
-                    Log.v(TAG, "Added account: " + "name:" + account.name + ", " + account.url + ", userId" + account.userId);
-                    try {
-                        db.addAccount(account.url, account.userId, account.name);
-                    } catch (SQLiteConstraintException e) {
-                        if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
-                            Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
+                    CapabilitiesWorker.update(this);
+                    new Thread(() -> {
+                        Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
+                        try {
+                            Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
+                            final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
+                            db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
+                            Log.i(TAG, capabilities.toString());
+                            runOnUiThread(() -> {
+                                selectAccount(ssoAccount.name);
+                                this.accountChooserActive = false;
+                                binding.accountChooser.setVisibility(View.GONE);
+                                binding.accountNavigation.setVisibility(View.VISIBLE);
+                                binding.drawerLayout.closeDrawer(GravityCompat.START);
+                            });
+                        } catch (SQLiteConstraintException e) {
+                            if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
+                                runOnUiThread(() -> {
+                                    Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                                    selectAccount(ssoAccount.name);
+                                    this.accountChooserActive = false;
+                                    binding.accountChooser.setVisibility(View.GONE);
+                                    binding.accountNavigation.setVisibility(View.VISIBLE);
+                                    binding.drawerLayout.closeDrawer(GravityCompat.START);
+                                });
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            runOnUiThread(() -> {
+                                this.accountChooserActive = true;
+                                binding.accountChooser.setVisibility(View.VISIBLE);
+                                binding.accountNavigation.setVisibility(View.GONE);
+                                binding.drawerLayout.openDrawer(GravityCompat.START);
+                                binding.activityNotesListView.progressCircular.setVisibility(View.GONE);
+                                ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                            });
                         }
-                    }
-                    selectAccount(account.name);
-                    this.accountChooserActive = false;
-                    binding.accountChooser.setVisibility(View.GONE);
-                    binding.accountNavigation.setVisibility(View.VISIBLE);
-                    binding.drawerLayout.closeDrawer(GravityCompat.START);
+                    }).start();
                 });
             } catch (AccountImportCancelledException e) {
                 Log.i(TAG, "AccountImport has been cancelled.");

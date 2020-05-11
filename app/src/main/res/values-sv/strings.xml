@@ -50,9 +50,11 @@
 
     <!-- Error -->
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
+    <string name="error_synchronization">Synkroniseringen misslyckades</string>
     <string name="error_json">Är appen anteckningar aktiverad på servern?</string>
     <string name="error_no_network">Ingen nätverksanslutning</string>
     <string name="error_files_app">Har du installerat filer-appen?</string>
+    <string name="error_token_mismatch">Det gick inte att ansluta till fil-applikationen</string>
     <string name="error_insufficient_storage">Din serverlagring är full.</string>
     <string name="error_unknown">Ett okänt fel uppstod.</string>
 
@@ -128,6 +130,9 @@
     <string name="unlock_notes">Lås upp anteckningar</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Kunde inte kopiera till urklipp</string>
+    <string name="error_dialog_title">Å nej - Vad händer nu?🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Försök med att Tvinga appen att stänga och återstarta. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Om problemet kvarstår, prova med att rensa lagringen på både appen Nextcloud och Nextcloud Notes.</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>

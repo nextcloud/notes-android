@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.util;
 
+import androidx.annotation.Nullable;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,6 +62,11 @@ public class ServerResponse {
 
     public long getLastModified() {
         return response.getLastModified();
+    }
+
+    @Nullable
+    public String getSupportedApiVersions() {
+        return response.getSupportedApiVersions();
     }
 
     CloudNote getNoteFromJSON(JSONObject json) throws JSONException {

@@ -85,8 +85,13 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
             } else if (t instanceof NextcloudHttpRequestFailedException) {
                 int statusCode = ((NextcloudHttpRequestFailedException) t).getStatusCode();
                 switch (statusCode) {
+                    case 302:
+                        adapter.add(R.string.error_dialog_server_app_enabled);
+                        adapter.add(R.string.error_dialog_redirect);
+                        break;
                     case 500:
                         adapter.add(R.string.error_dialog_check_server_logs);
+                        break;
                     case 503:
                         adapter.add(R.string.error_dialog_check_maintenance);
                         break;
@@ -100,10 +105,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
         return new AlertDialog.Builder(requireActivity())
                 .setView(binding.getRoot())
                 .setTitle(R.string.error_dialog_title)
-                .setPositiveButton(android.R.string.copy, (a, b) -> {
-                    copyToClipboard(requireContext(), getString(R.string.simple_exception), "```\n" + debugInfos + "\n```");
-                    a.dismiss();
-                })
+                .setPositiveButton(android.R.string.copy, (a, b) -> copyToClipboard(requireContext(), getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"))
                 .setNegativeButton(R.string.simple_close, null)
                 .create();
     }
@@ -111,6 +113,16 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
     public static DialogFragment newInstance(ArrayList<Throwable> exceptions) {
         final Bundle args = new Bundle();
         args.putSerializable(KEY_THROWABLES, exceptions);
+        final DialogFragment fragment = new ExceptionDialogFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static DialogFragment newInstance(Throwable exception) {
+        final Bundle args = new Bundle();
+        final ArrayList<Throwable> list = new ArrayList<>(1);
+        list.add(exception);
+        args.putSerializable(KEY_THROWABLES, list);
         final DialogFragment fragment = new ExceptionDialogFragment();
         fragment.setArguments(args);
         return fragment;

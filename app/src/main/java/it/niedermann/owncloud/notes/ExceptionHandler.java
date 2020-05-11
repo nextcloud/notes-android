@@ -13,7 +13,7 @@ import it.niedermann.owncloud.notes.android.activity.ExceptionActivity;
 
 public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
 
-    private static final String TAG = ExceptionHandler.class.getCanonicalName();
+    private static final String TAG = ExceptionHandler.class.getSimpleName();
     private Context context;
     private Class<? extends Activity> errorActivity;
     public static final String KEY_THROWABLE = "T";

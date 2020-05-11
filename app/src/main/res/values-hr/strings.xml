@@ -50,9 +50,11 @@
 
     <!-- Error -->
     <string name="error_sync">Sinkronizacija nije uspjela: %1$s</string>
+    <string name="error_synchronization">Sinkronizacija nije uspjela</string>
     <string name="error_json">Je li aplikacija Notes aktivirana na poslužitelju?</string>
     <string name="error_no_network">Nema veze s mrežom</string>
     <string name="error_files_app">Je li instalirana aplikacija za upravljanje datotekama?</string>
+    <string name="error_token_mismatch">Neuspješno povezivanje s aplikacijom za upravljanje datotekama.</string>
     <string name="error_insufficient_storage">Prostor za pohranu poslužitelja je pun.</string>
     <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
 
@@ -127,6 +129,22 @@
     <string name="simple_checkbox">Potvrdni okvir</string>
     <string name="unlock_notes">Otključaj bilješke</string>
     <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Kopiranje u međuspremnik nije uspjelo</string>
+    <string name="error_dialog_title">Ups, što sada? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Pokušajte prisilno zatvoriti aplikaciju i ponovo je pokrenuti. Možda se radi o nepravilnoj vezi s aplikacijom Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Ako problem i dalje nije otklonjen, pokušajte izbrisati pohranjene podatke iz obje aplikacije: Nextcloud i Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Pohranjene podatke možete izbrisati tako da otvorite postavke operacijskog sustava Android i odaberete → Aplikacije → Nextcloud / Nextcloud Notes → Pohrana → Brisanje pohrane podataka.</string>
+    <string name="error_dialog_tip_files_outdated">Čini se da je vaša aplikacija Nextcloud zastarjela. Posjetite trgovinu Play Store ili F-Droid kako biste dohvatili najnoviju inačicu.</string>
+    <string name="error_dialog_tip_files_force_stop">Čini se da nešto nije u redu s vašom aplikacijom Nextcloud. Pokušajte prisilno zatvoriti aplikaciju Nextcloud i aplikaciju Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Ako prisilno zatvaranje nije otklonilo problem, pokušajte izbrisati pohranjene podatke iz obje aplikacije.</string>
+    <string name="error_dialog_timeout_instance">Nije stigao odgovor poslužitelja u zadanom vremenskom razdoblju. Provjerite radi li vaša instanca.</string>
+    <string name="error_dialog_timeout_toggle">Provjerite mrežnu vezu. Ponekad može pomoći isključivanje i ponovno uključivanje mobilnih podataka ili bežične (Wi-Fi) mreže.</string>
+    <string name="error_dialog_check_server">Odgovor poslužitelja nije točan. Provjerite možete li svojim bilješkama pristupiti putem web-sučelja.</string>
+    <string name="error_dialog_check_server_logs">Postoji određeni problem s vašim Nextcloudom. Provjerite datoteke zapisa poslužitelja.</string>
+    <string name="error_dialog_check_maintenance">Provjerite je li vaša instanca Nextclouda trenutno u načinu održavanja.</string>
+    <string name="error_dialog_insufficient_storage">Nema slobodnog prostora za pohranu u vašoj instanci Nextclouda. Izbrišite dio datoteka kako biste sinkronizirali lokalne promjene u oblak.</string>
+    <string name="error_dialog_contact_us">Obratite nam se bez odlaganja ako problemi i dalje postoje. Naše podatke za kontakt možete pronaći u odjeljku s informacijama na bočnoj traci.</string>
+    <string name="error_dialog_we_need_info">Potrebne su nam sljedeće tehničke informacije kako bismo vam pomogli:</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>

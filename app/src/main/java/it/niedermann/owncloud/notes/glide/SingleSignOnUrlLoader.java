@@ -23,7 +23,7 @@ import java.io.InputStream;
  */
 public class SingleSignOnUrlLoader implements ModelLoader<GlideUrl, InputStream> {
 
-    private static final String TAG = SingleSignOnUrlLoader.class.getCanonicalName();
+    private static final String TAG = SingleSignOnUrlLoader.class.getSimpleName();
     private final NextcloudAPI client;
 
     // Public API.

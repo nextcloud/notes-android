@@ -179,6 +179,11 @@
     <string name="error_dialog_insufficient_storage">Your Nextcloud instance has no free storage left. Please delete some files to sync your local changes into your cloud.</string>
     <string name="error_dialog_contact_us">Please do not hesitate to contact us if the issues persist. You can find our contact information in the about section in the sidebar.</string>
     <string name="error_dialog_we_need_info">We need the following technical information to help you:</string>
+    <string name="error_dialog_server_app_enabled">Please make sure you have installed and enabled the "Notes" app on your server.</string>
+    <string name="error_dialog_redirect">Your server did respond with a HTTP 302 status code, which implies, that you do not have installed the Notes app on your server or something is misconfigured. This can be caused by custom overrides in a .htaccess-file or by Nextcloud apps like OID Client.</string>
+    <string name="added_content">Added "%1$s"</string>
+    <string name="shared_text_empty">Shared text was empty</string>
+    <string name="append_to_note">Append to note</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
+import androidx.work.WorkManager;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -32,7 +33,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 13;
+    private static final int database_version = 14;
     @NonNull
     private final Context context;
 
@@ -57,6 +58,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_favorite = "FAVORITE";
     protected static final String key_category = "CATEGORY";
     protected static final String key_etag = "ETAG";
+    protected static final String key_capabilities_etag = "CAPABILITIES_ETAG";
     protected static final String key_color = "COLOR";
     protected static final String key_text_color = "TEXT_COLOR";
     protected static final String key_api_version = "API_VERSION";
@@ -116,7 +118,9 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_api_version + " TEXT, " +
                 key_color + " VARCHAR(6) NOT NULL DEFAULT '000000', " +
                 key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9', " +
-                "FOREIGN KEY(" + key_id + ") REFERENCES " + table_category + "(" + key_category_account_id + "));");
+                key_capabilities_etag + " TEXT, " +
+                " FOREIGN KEY(" + key_id + ") REFERENCES " + table_category + "(" + key_category_account_id + "));");
+
         createAccountIndexes(db);
     }
 
@@ -173,7 +177,17 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         }
         if (oldVersion < 9) {
             // Create accounts table
-            createAccountTable(db);
+            db.execSQL("CREATE TABLE " + table_accounts + " ( " +
+                    key_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    key_url + " TEXT, " +
+                    key_username + " TEXT, " +
+                    key_account_name + " TEXT UNIQUE, " +
+                    key_etag + " TEXT, " +
+                    key_modified + " INTEGER, " +
+                    key_color + " VARCHAR(6) NOT NULL DEFAULT '000000', " +
+                    key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9', " +
+                    key_capabilities_etag + " TEXT)");
+            createAccountIndexes(db);
 
             // Add accountId to notes table
             db.execSQL("ALTER TABLE " + table_notes + " ADD COLUMN " + key_account_id + " INTEGER NOT NULL DEFAULT 0");
@@ -291,6 +305,11 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             CapabilitiesWorker.update(context);
         }
         if (oldVersion < 13) {
+            db.execSQL("ALTER TABLE " + table_accounts + " ADD COLUMN " + key_capabilities_etag + " TEXT");
+            WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("it.niedermann.owncloud.notes.persistence.SyncWorker");
+            WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("SyncWorker");
+        }
+        if (oldVersion < 14) {
             // Rename a tmp_NOTES table.
             String tmpTableNotes = String.format("tmp_%s", table_notes);
             db.execSQL("ALTER TABLE " + table_notes + " RENAME TO " + tmpTableNotes);
@@ -337,7 +356,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             createCategoryIndexes(db);
             createNotesIndexes(db);
         }
-
     }
 
     @Override

@@ -22,7 +22,7 @@ import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final String TAG = ItemAdapter.class.getCanonicalName();
+    private static final String TAG = ItemAdapter.class.getSimpleName();
 
     private static final int section_type = 0;
     private static final int note_type = 1;

@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class DeviceCredentialUtil {
 
-    private static final String TAG = DeviceCredentialUtil.class.getCanonicalName();
+    private static final String TAG = DeviceCredentialUtil.class.getSimpleName();
 
     private DeviceCredentialUtil() {
         // utility class -> private constructor

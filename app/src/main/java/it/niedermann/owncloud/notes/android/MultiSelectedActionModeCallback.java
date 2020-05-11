@@ -107,7 +107,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                 }
                 return true;
             case R.id.menu_move:
-                AccountChooserDialogFragment.newInstance().show(fragmentManager, NotesListViewActivity.class.getCanonicalName());
+                AccountChooserDialogFragment.newInstance().show(fragmentManager, NotesListViewActivity.class.getSimpleName());
                 return true;
             default:
                 return false;

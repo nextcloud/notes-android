@@ -50,6 +50,7 @@
 
     <!-- Error -->
     <string name="error_sync">同步失败：%1$s</string>
+    <string name="error_synchronization">同步失败</string>
     <string name="error_json">是否已在服务器上启用了 笔记 应用？</string>
     <string name="error_no_network">没有网络连接</string>
     <string name="error_files_app">您是否已安装 文件 应用程序？</string>
@@ -128,6 +129,17 @@
     <string name="unlock_notes">解锁笔记</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">无法复制到剪贴板</string>
+    <string name="error_dialog_title">哦，不。所以会怎么样？🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">请尝试强行关闭应用并重新打开。可能是与 Nextcloud 应用的连接不正确。</string>
+    <string name="error_dialog_tip_files_outdated">您的 Nextcloud 应用似乎已经过时了。请访问 Play 商店或 F-Droid 以获取最新版本。</string>
+    <string name="error_dialog_tip_files_delete_storage">如果强行停止没有效果，您可以尝试清除两个应用的存储空间。</string>
+    <string name="error_dialog_timeout_instance">服务器没有在规定的时间内回答。请确保您的服务器实例在正常运行。</string>
+    <string name="error_dialog_timeout_toggle">检查您的网络连接。有时候关闭并重新开启移动数据或 Wi-Fi 有帮助。</string>
+    <string name="error_dialog_check_server_logs">您的 Nextcloud 配置有一些问题。请查看服务器日志。</string>
+    <string name="error_dialog_check_maintenance">请检查您的 Nextcloud 实例是否处于维护模式。</string>
+    <string name="error_dialog_insufficient_storage">您的 Nextcloud 实例已经没有可用的存储空间了。请删除一些文件来允许本地的变更同步到云。</string>
+    <string name="error_dialog_contact_us">如果问题持续存在，请不要犹豫来联系我们。您可以在侧边栏的 “关于” 部分找到我们的联系信息。</string>
+    <string name="error_dialog_we_need_info">我们需要以下技术信息来帮助您：</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>

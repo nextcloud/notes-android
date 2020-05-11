@@ -145,6 +145,7 @@
     <string name="error_dialog_insufficient_storage">Sua instância do Nextcloud não possui mais espaço livre. Exclua alguns arquivos para sincronizar suas alterações locais com a nuvem.</string>
     <string name="error_dialog_contact_us">Não hesite em nos contactar se os problemas persistirem. Você pode encontrar informações de contato na seção \"sobre\" na barra lateral.</string>
     <string name="error_dialog_we_need_info">Precisamos das seguintes informações técnicas para ajudá-lo:</string>
+    <string name="error_dialog_redirect">Seu servidor respondeu com um código de status HTTP 302, o que implica que você não instalou o aplicativo Notes no servidor ou que algo está configurado incorretamente. Isso pode ser causado por alterações no arquivo .htaccess ou por aplicativos como o Client OID.</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
