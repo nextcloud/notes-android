@@ -37,7 +37,7 @@ public class Capabilities {
     @Nullable
     private String eTag;
 
-    public Capabilities(String response, @Nullable String eTag) throws NextcloudHttpRequestFailedException {
+    public Capabilities(@NonNull String response, @Nullable String eTag) throws NextcloudHttpRequestFailedException {
         this.eTag = eTag;
         final JSONObject ocs;
         try {
