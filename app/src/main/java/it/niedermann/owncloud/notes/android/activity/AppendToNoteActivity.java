@@ -8,9 +8,9 @@ import android.widget.Toast;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
 
-public class SelectNoteActivity extends NotesListViewActivity {
+public class AppendToNoteActivity extends NotesListViewActivity {
 
-    private static final String TAG = SelectNoteActivity.class.getSimpleName();
+    private static final String TAG = AppendToNoteActivity.class.getSimpleName();
 
     String receivedText = "";
 
@@ -20,11 +20,13 @@ public class SelectNoteActivity extends NotesListViewActivity {
         super.onCreate(savedInstanceState);
         final Intent receivedIntent = getIntent();
         receivedText = receivedIntent.getStringExtra(Intent.EXTRA_TEXT);
+        binding.activityNotesListView.toolbar.setTitle(R.string.append_to_note);
+        binding.activityNotesListView.toolbar.setSubtitle(receivedText);
     }
 
     @Override
     public void onNoteClick(int position, View v) {
-        if(receivedText != null && receivedText.length() > 0) {
+        if (receivedText != null && receivedText.length() > 0) {
             final DBNote note = db.getNote(localAccount.getId(), ((DBNote) adapter.getItem(position)).getId());
             final String oldContent = note.getContent();
             String newContent;

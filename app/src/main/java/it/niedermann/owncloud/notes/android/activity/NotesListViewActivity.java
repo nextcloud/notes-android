@@ -290,7 +290,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     }
 
     private void setupActionBar() {
-        Toolbar toolbar = binding.activityNotesListView.notesListActivityActionBar;
+        Toolbar toolbar = binding.activityNotesListView.toolbar;
         setSupportActionBar(toolbar);
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
         drawerToggle.setDrawerIndicatorEnabled(true);

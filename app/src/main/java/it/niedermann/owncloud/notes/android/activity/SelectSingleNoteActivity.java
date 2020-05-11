@@ -29,7 +29,7 @@ public class SelectSingleNoteActivity extends NotesListViewActivity {
         setResult(Activity.RESULT_CANCELED);
 
         fabCreate.setVisibility(View.GONE);
-        Toolbar toolbar = binding.activityNotesListView.notesListActivityActionBar;
+        Toolbar toolbar = binding.activityNotesListView.toolbar;
         SwipeRefreshLayout swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         toolbar.setTitle(R.string.activity_select_single_note);
         swipeRefreshLayout.setEnabled(false);
