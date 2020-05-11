@@ -86,6 +86,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
                 int statusCode = ((NextcloudHttpRequestFailedException) t).getStatusCode();
                 switch (statusCode) {
                     case 302:
+                        adapter.add(R.string.error_dialog_server_app_enabled);
                         adapter.add(R.string.error_dialog_redirect);
                         break;
                     case 500:
