@@ -17,6 +17,8 @@ import androidx.work.WorkManager;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
@@ -29,16 +31,16 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 // Protected APIs
 @SuppressWarnings("WeakerAccess")
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
-
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 13;
+    private static final int database_version = 14;
     @NonNull
     private final Context context;
 
     protected static final String database_name = "OWNCLOUD_NOTES";
     protected static final String table_notes = "NOTES";
     protected static final String table_accounts = "ACCOUNTS";
+    protected static final String table_category = "CATEGORIES";
 
     protected static final String key_id = "ID";
 
@@ -60,6 +62,9 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_color = "COLOR";
     protected static final String key_text_color = "TEXT_COLOR";
     protected static final String key_api_version = "API_VERSION";
+    protected static final String key_category_id = "CATEGORY_ID";
+    protected static final String key_category_title = "CATEGORY_TITLE";
+    protected static final String key_category_account_id = "CATEGORY_ACCOUNT_ID";
 
     protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory, database_version);
@@ -81,6 +86,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         createAccountTable(db);
         createNotesTable(db);
+        createCategoryTable(db);
     }
 
     private void createNotesTable(@NonNull SQLiteDatabase db) {
@@ -93,9 +99,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_modified + " INTEGER DEFAULT 0, " +
                 key_content + " TEXT, " +
                 key_favorite + " INTEGER DEFAULT 0, " +
-                key_category + " TEXT NOT NULL DEFAULT '', " +
+                key_category + " INTEGER, " +
                 key_etag + " TEXT," +
                 key_excerpt + " TEXT NOT NULL DEFAULT '', " +
+                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +
                 "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
         createNotesIndexes(db);
     }
@@ -111,8 +118,18 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_api_version + " TEXT, " +
                 key_color + " VARCHAR(6) NOT NULL DEFAULT '000000', " +
                 key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9', " +
-                key_capabilities_etag + " TEXT)");
+                key_capabilities_etag + " TEXT, " +
+                " FOREIGN KEY(" + key_id + ") REFERENCES " + table_category + "(" + key_category_account_id + "));");
+
         createAccountIndexes(db);
+    }
+
+    private void createCategoryTable(@NonNull SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + table_category + "(" +
+                key_category_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                key_category_account_id + " INTEGER, " +
+                key_category_title + " TEXT )");
+        createCategoryIndexes(db);
     }
 
     @SuppressWarnings("deprecation")
@@ -292,6 +309,53 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("it.niedermann.owncloud.notes.persistence.SyncWorker");
             WorkManager.getInstance(context.getApplicationContext()).cancelUniqueWork("SyncWorker");
         }
+        if (oldVersion < 14) {
+            // Rename a tmp_NOTES table.
+            String tmpTableNotes = String.format("tmp_%s", table_notes);
+            db.execSQL("ALTER TABLE " + table_notes + " RENAME TO " + tmpTableNotes);
+            createNotesTable(db);
+            createCategoryTable(db);
+            // A hashtable storing categoryTitle - categoryId Mapping
+            // This is used to prevent too many searches in database
+            Hashtable<String, Integer> categoryTitleIdMap = new Hashtable<>();
+            int id = 1;
+            Cursor tmpNotesCursor = db.rawQuery("SELECT * FROM " + tmpTableNotes, null);
+            while (tmpNotesCursor.moveToNext()) {
+                String categoryTitle = tmpNotesCursor.getString(8);
+                int accountId = tmpNotesCursor.getInt(2);
+                int categoryId = 0;
+                if (categoryTitleIdMap.containsKey(categoryTitle) && categoryTitleIdMap.get(categoryTitle) != null) {
+                    categoryId = categoryTitleIdMap.get(categoryTitle);
+                } else {
+                    // The category does not exists in the database, create it.
+                    categoryId = id++;
+                    ContentValues values = new ContentValues();
+                    values.put(key_category_id, categoryId);
+                    values.put(key_category_account_id, accountId);
+                    values.put(key_category_title, categoryTitle);
+                    db.insert(table_category, null, values);
+                    categoryTitleIdMap.put(categoryTitle, categoryId);
+                }
+                // Move the data in tmp_NOTES to NOTES
+                ContentValues values = new ContentValues();
+                values.put(key_id, tmpNotesCursor.getInt(0));
+                values.put(key_remote_id, tmpNotesCursor.getInt(1));
+                values.put(key_account_id, tmpNotesCursor.getInt(2));
+                values.put(key_status, tmpNotesCursor.getString(3));
+                values.put(key_title, tmpNotesCursor.getString(4));
+                values.put(key_modified, tmpNotesCursor.getLong(5));
+                values.put(key_content, tmpNotesCursor.getString(6));
+                values.put(key_favorite, tmpNotesCursor.getInt(7));
+                values.put(key_category, categoryId);
+                values.put(key_etag, tmpNotesCursor.getString(9));
+                values.put(key_etag, tmpNotesCursor.getString(10));
+                db.insert(table_notes, null, values);
+            }
+            tmpNotesCursor.close();
+            db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);
+            createCategoryIndexes(db);
+            createNotesIndexes(db);
+        }
     }
 
     @Override
@@ -303,6 +367,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         DatabaseIndexUtil.dropIndexes(db);
         db.execSQL("DROP TABLE IF EXISTS " + table_notes);
         db.execSQL("DROP TABLE IF EXISTS " + table_accounts);
+        db.execSQL("DROP TABLE IF EXISTS " + table_category);
         onCreate(db);
     }
 
@@ -312,6 +377,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
     private static void createAccountIndexes(@NonNull SQLiteDatabase db) {
         DatabaseIndexUtil.createIndex(db, table_accounts, key_url, key_username, key_account_name, key_etag, key_modified);
+    }
+
+    private static void createCategoryIndexes(@NonNull SQLiteDatabase db) {
+        DatabaseIndexUtil.createIndex(db, table_category, key_category_id, key_category_account_id, key_category_title);
     }
 
     protected abstract void notifyNotesChanged();
