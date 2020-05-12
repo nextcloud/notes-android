@@ -17,7 +17,6 @@ import androidx.work.WorkManager;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -128,7 +127,8 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + table_category + "(" +
                 key_category_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_category_account_id + " INTEGER, " +
-                key_category_title + " TEXT )");
+                key_category_title + " TEXT, " +
+                " UNIQUE( " + key_account_id + " , " + key_category_title + "))");
         createCategoryIndexes(db);
     }
 
