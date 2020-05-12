@@ -128,7 +128,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_category_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_category_account_id + " INTEGER, " +
                 key_category_title + " TEXT, " +
-                " UNIQUE( " + key_account_id + " , " + key_category_title + "))");
+                " UNIQUE( " + key_category_account_id + " , " + key_category_title + "))");
         createCategoryIndexes(db);
     }
 
