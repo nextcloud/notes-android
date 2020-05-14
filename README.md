@@ -6,6 +6,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 [![GitHub issues](https://img.shields.io/github/issues/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/issues)
 [![GitHub stars](https://img.shields.io/github/stars/stefan-niedermann/nextcloud-notes.svg)](https://github.com/stefan-niedermann/nextcloud-notes/stargazers)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![SourceSpy Dashboard](https://sourcespy.com/shield.svg)](https://sourcespy.com/github/stefanniedermannnextcloudnotes/)
 
 ## :arrow_forward: Access
 
@@ -55,8 +56,9 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
   * Create a [Pull Request](https://opensource.guide/how-to-contribute/#opening-a-pull-request)
   * Help translating this app on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/) 🌎
   * Buy this app on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
+  * The [sourcespy dashboard](https://sourcespy.com/github/stefanniedermannnextcloudnotes/) provides a high level overview of the repository including [class diagram](https://sourcespy.com/github/stefanniedermannnextcloudnotes/xx-omodel-.html), [module dependencies](https://sourcespy.com/github/stefanniedermannnextcloudnotes/xx-omodulesc-.html), [external libraries](https://sourcespy.com/github/stefanniedermannnextcloudnotes/xx-ojavalibs-.html), and other components of the system.
   * Send me a bottle of your favorite beer :beers: :wink:
-
+  
 ## :link: Requirements
   * [Nextcloud](https://nextcloud.com/) instance running
   * [Nextcloud Android](https://github.com/nextcloud/android) app installed (> 3.9.0)
