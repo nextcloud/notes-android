@@ -166,10 +166,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                     key_username + " TEXT, " +
                     key_account_name + " TEXT UNIQUE, " +
                     key_etag + " TEXT, " +
-                    key_modified + " INTEGER, " +
-                    key_color + " VARCHAR(6) NOT NULL DEFAULT '000000', " +
-                    key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9', " +
-                    key_capabilities_etag + " TEXT)");
+                    key_modified + " INTEGER)");
             createAccountIndexes(db);
 
             // Add accountId to notes table
