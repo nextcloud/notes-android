@@ -146,7 +146,6 @@
     <string name="error_dialog_contact_us">問題が継続する場合はお問い合わせください。我々の連絡先はサイドバーのaboutセクションにかかれています。</string>
     <string name="error_dialog_we_need_info">サポートには下記技術情報が必要です：</string>
     <string name="error_dialog_redirect">サーバがHTTPステータスコード 302を返しました。これはNotesアプリがインストールされていないか、構成が誤っていることを意味します。.htaccessファイルのカスタムオーバーライドやOIDクライアントのようなNextcloudアプリが原因の可能性があります。</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>

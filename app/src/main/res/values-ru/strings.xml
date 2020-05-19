@@ -145,7 +145,11 @@
     <string name="error_dialog_insufficient_storage">На вашем экземпляре Nextcloud нет свободного места. Удалите ненужные файлы для синхронизации изменений в облако.</string>
     <string name="error_dialog_contact_us">Не стесняйтесь сообщать разработчикам о повторяющихся ошибках. Контактная информация приведена в боковой панели в разделе «О программе».</string>
     <string name="error_dialog_we_need_info">Требуется следующая техническая информация от вас:</string>
+    <string name="error_dialog_server_app_enabled">Проверьте, установлено ли на сервере приложение Заметки.</string>
     <string name="error_dialog_redirect">На запрос сервер вернул код состояния HTTP 302, что означает, что  приложение Заметки либо не установлено, либо сервер настроен неверно. Такое поведение может являться следствием замены стандартного файла .htaccess администратором сервера или приложением Nextcloud, таким как OID Client.</string>
+    <string name="added_content">Добавлена заметка «%1$s»</string>
+    <string name="shared_text_empty">Публикуемый текст пустой</string>
+    <string name="append_to_note">Добавить в заметку</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

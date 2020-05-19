@@ -146,7 +146,11 @@
     <string name="error_dialog_insufficient_storage">Je Nextcloud instantie heeft geen vrije ruimte meer. Verwijder alstublieft enkele bestanden om je lokale gegevens te kunnen synchroniseren.</string>
     <string name="error_dialog_contact_us">Schroom alstublieft niet om contact met ons op te nemen als het probleem blijft aanhouden. Onze contactgegevens zijn te vinden in de About sectie in de zijbalk.</string>
     <string name="error_dialog_we_need_info">We hebben de volgende technische informatie nodig om je te kunnen helpen: </string>
+    <string name="error_dialog_server_app_enabled">Zorg er alstublieft voor dat je de \"Notes\" app hebt geïnstalleerd en aangezet op jouw server.</string>
     <string name="error_dialog_redirect">Je server heeft gereageerd met een HTTP 302-statuscode, wat inhoudt dat je de Deck-app niet op je server hebt geïnstalleerd of dat er iets verkeerd is geconfigureerd. Dit kan worden veroorzaakt door maatwerk aanpassingen in een .htaccess-bestand of door Nextcloud-apps zoals de OID Client.</string>
+    <string name="added_content">\"%1$s\" toegevoegd</string>
+    <string name="shared_text_empty">Gedeelde tekst was leeg</string>
+    <string name="append_to_note">Achteraan toevoegen aan notitie</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

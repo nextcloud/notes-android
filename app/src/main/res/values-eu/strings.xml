@@ -145,7 +145,11 @@
     <string name="error_dialog_insufficient_storage">Zure Nextcloud instantziak ez du biltegiratze leku libre gehiagorik. Ezabatu fitxategi batzuk, aldaketa lokalak hodeiarekin sinkroniza daitezen.</string>
     <string name="error_dialog_contact_us">Mesedez, arazoak jarraitzen baldin badu ez izan zalantzarik gurekin harremanetan jartzeko. Alboko barran aurki dezakezu gurekin kontaktatzeko informazioa.</string>
     <string name="error_dialog_we_need_info">Zuri laguntzeko hurrengo informazio teknikoa behar dugu:</string>
+    <string name="error_dialog_server_app_enabled">Mesedez egiaztatu \"Notak\" aplikazioa instalatu eta gaitu duzula zure zerbitzarian.</string>
     <string name="error_dialog_redirect">Zure zerbitzariak HTTP 302 egoera kodearekin erantzun du, honek esan nahi du ez duzula Notak aplikazioa ez duzula zure zerbitzarian instalatu edo zerbait txarto konfiguratuta dagoela. Hau .htaccess fitxategi batean arau pertsonalizatuak daudelako edo OID Bezeroa izeneko aplikazioarengatik sortua izan daiteke. </string>
+    <string name="added_content">\"%1$s\" gehituta</string>
+    <string name="shared_text_empty">Partekatutako testua hutsik zegoen</string>
+    <string name="append_to_note">Gehitu notara</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
