@@ -16,6 +16,8 @@
     <string name="simple_bold">מודגש</string>
     <string name="simple_link">קישור</string>
     <string name="simple_italic">נטוי</string>
+    <string name="action_note_deleted">%1$s נמחק</string>
+    <string name="action_note_restored">%1$s שוחזר</string>
     <string name="action_undo">ביטול</string>
     <string name="action_drawer_open">פתיחת ניווט</string>
     <string name="action_drawer_close">סגירת ניווט</string>
@@ -130,6 +132,9 @@
     <string name="could_not_copy_to_clipboard">לא ניתן להעתיק ללוח הגזירים</string>
     <string name="error_dialog_title">שוד ושבר - מה עכשיו? 🙁</string>
     <string name="error_dialog_we_need_info">אנו זקוקים לפירוט הטכני הבא כדי לסייע לך:</string>
+    <string name="shared_text_empty">הטקסט ששותף היה ריק</string>
+    <string name="append_to_note">הוספה לסוף הפתק</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>
