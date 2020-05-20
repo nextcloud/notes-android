@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.ShareActionProvider;
 import androidx.core.view.MenuItemCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -29,6 +30,8 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.CategoryDialogListener;
+import it.niedermann.owncloud.notes.android.fragment.EditTitleDialogFragment.EditTitleListener;
+import it.niedermann.owncloud.notes.model.ApiVersion;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -40,7 +43,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
 
-public abstract class BaseNoteFragment extends Fragment implements CategoryDialogListener {
+public abstract class BaseNoteFragment extends Fragment implements CategoryDialogListener, EditTitleListener {
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
 
@@ -157,6 +160,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
 
+        menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) >= 0);
         menu.findItem(R.id.menu_delete).setVisible(!isNew);
     }
 
@@ -190,6 +194,9 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 return true;
             case R.id.menu_category:
                 showCategorySelector();
+                return true;
+            case R.id.menu_title:
+                showEditTitleDialog();
                 return true;
             case R.id.menu_move:
                 AccountChooserDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
@@ -311,9 +318,30 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         categoryFragment.show(manager, fragmentId);
     }
 
+    /**
+     * Opens a dialog in order to chose a category
+     */
+    private void showEditTitleDialog() {
+        final String fragmentId = "fragment_edit_title";
+        FragmentManager manager = requireActivity().getSupportFragmentManager();
+        Fragment frag = manager.findFragmentByTag(fragmentId);
+        if (frag != null) {
+            manager.beginTransaction().remove(frag).commit();
+        }
+        DialogFragment editTitleFragment = EditTitleDialogFragment.newInstance(note.getTitle());
+        editTitleFragment.setTargetFragment(this, 0);
+        editTitleFragment.show(manager, fragmentId);
+    }
+
     @Override
     public void onCategoryChosen(String category) {
         db.setCategory(ssoAccount, note, category, null);
+        listener.onNoteUpdated(note);
+    }
+
+    @Override
+    public void onTitleEdited(String newTitle) {
+//        db.setTitle(ssoAccount, note, newTitle);
         listener.onNoteUpdated(note);
     }
 

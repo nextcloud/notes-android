@@ -17,6 +17,12 @@
         android:checkable="true"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/menu_title"
+        android:icon="@drawable/ic_title_grey600_24dp"
+        android:orderInCategory="100"
+        android:title="@string/menu_edit_title"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/menu_category"
         android:icon="@drawable/ic_folder_white_24dp"
         android:orderInCategory="100"
