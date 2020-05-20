@@ -17,7 +17,10 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
+import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.util.Notes;
+
+import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.PARAM_CATEGORY;
 
 public class NoteListWidget extends AppWidgetProvider {
     private static final String TAG = NoteListWidget.class.getSimpleName();
@@ -66,11 +69,11 @@ public class NoteListWidget extends AppWidgetProvider {
 
             // Launch create note activity if user taps "+" icon on header
             PendingIntent newNoteI = PendingIntent.getActivity(context, 0,
-                    (new Intent(context, EditNoteActivity.class)),
+                    (new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY, new Category(category, displayMode == NLW_DISPLAY_STARRED))),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             PendingIntent templatePI = PendingIntent.getActivity(context, 0,
-                    (new Intent(context, EditNoteActivity.class)),
+                    (new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY, new Category(category, displayMode == NLW_DISPLAY_STARRED))),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             if (Notes.isDarkThemeActive(context, darkTheme)) {

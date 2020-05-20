@@ -1,0 +1,1 @@
+- Note list widget should create a note in it's respective category (#817)

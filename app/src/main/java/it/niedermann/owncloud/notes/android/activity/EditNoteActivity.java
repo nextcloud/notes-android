@@ -42,6 +42,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     public static final String PARAM_ACCOUNT_ID = "accountId";
     public static final String PARAM_CATEGORY = "category";
     public static final String PARAM_CONTENT = "content";
+    public static final String PARAM_FAVORITE = "favorite";
 
     private ActivityEditBinding binding;
 
