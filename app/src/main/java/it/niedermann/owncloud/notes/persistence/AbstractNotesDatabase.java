@@ -115,7 +115,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         DatabaseIndexUtil.createIndex(db, table_accounts, key_url, key_username, key_account_name, key_etag, key_modified);
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 4) {
@@ -124,8 +123,8 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         }
         if (oldVersion < 5) {
             db.execSQL("ALTER TABLE NOTES ADD COLUMN REMOTEID INTEGER");
-            db.execSQL("UPDATE NOTES SET REMOTEID=ID WHERE (REMOTEID IS NULL OR REMOTEID=0) AND STATUS!=?", new String[]{DBStatus.LOCAL_CREATED.getTitle()});
-            db.execSQL("UPDATE NOTES SET REMOTEID=0, STATUS=? WHERE STATUS=?", new String[]{DBStatus.LOCAL_EDITED.getTitle(), DBStatus.LOCAL_CREATED.getTitle()});
+            db.execSQL("UPDATE NOTES SET REMOTEID=ID WHERE (REMOTEID IS NULL OR REMOTEID=0) AND STATUS!=?", new String[]{"LOCAL_CREATED"});
+            db.execSQL("UPDATE NOTES SET REMOTEID=0, STATUS=? WHERE STATUS=?", new String[]{DBStatus.LOCAL_EDITED.getTitle(), "LOCAL_CREATED"});
         }
         if (oldVersion < 6) {
             db.execSQL("ALTER TABLE NOTES ADD COLUMN FAVORITE INTEGER DEFAULT 0");
@@ -195,7 +194,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
                     db.execSQL("CREATE TABLE NOTES ( " +
                             "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                            "REMOTE_ID INTEGER, " +
+                            "REMOTEID INTEGER, " +
                             "ACCOUNT_ID INTEGER, " +
                             "STATUS VARCHAR(50), " +
                             "TITLE TEXT, " +
@@ -205,10 +204,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                             "CATEGORY TEXT NOT NULL DEFAULT '', " +
                             "ETAG TEXT," +
                             "FOREIGN KEY(ACCOUNT_ID) REFERENCES ACCOUNTS(ID))");
-                    DatabaseIndexUtil.createIndex(db, "NOTES", "REMOTE_ID", "ACCOUNT_ID", "STATUS", "FAVORITE", "CATEGORY", "MODIFIED");
+                    DatabaseIndexUtil.createIndex(db, "NOTES", "REMOTEID", "ACCOUNT_ID", "STATUS", "FAVORITE", "CATEGORY", "MODIFIED");
 
-                    db.execSQL(String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ", "NOTES", "ID", "ACCOUNT_ID", "REMOTE_ID", "STATUS", "TITLE", "MODIFIED", "CONTENT", "FAVORITE", "CATEGORY", "ETAG")
-                            + String.format("SELECT %s,%s,%s,%s,%s,%s,%s,%s,%s,%s FROM %s", "ID", values.get("ACCOUNT_ID"), "REMOTE_ID", "STATUS", "TITLE", "MODIFIED", "CONTENT", "FAVORITE", "CATEGORY", "ETAG", table_temp));
+                    db.execSQL(String.format("INSERT INTO %s(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ", "NOTES", "ID", "ACCOUNT_ID", "REMOTEID", "STATUS", "TITLE", "MODIFIED", "CONTENT", "FAVORITE", "CATEGORY", "ETAG")
+                            + String.format("SELECT %s,%s,%s,%s,%s,%s,%s,%s,%s,%s FROM %s", "ID", values.get("ACCOUNT_ID"), "REMOTEID", "STATUS", "TITLE", "MODIFIED", "CONTENT", "FAVORITE", "CATEGORY", "ETAG", table_temp));
                     db.execSQL(String.format("DROP TABLE %s;", table_temp));
 
                     AppWidgetManager awm = AppWidgetManager.getInstance(context);
