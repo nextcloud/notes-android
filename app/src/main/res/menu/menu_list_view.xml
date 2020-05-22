@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.owncloudnotes.NotesListViewActivity">
     <item
+        android:id="@+id/sorting_method"
+        android:title="@string/action_sorting_method"
+        android:icon="@drawable/alphabetical_asc"
+        app:showAsAction="collapseActionView|always" />
+    <item
         android:id="@+id/search"
         android:title="@string/action_search"
         android:icon="@drawable/ic_search_white_24dp"

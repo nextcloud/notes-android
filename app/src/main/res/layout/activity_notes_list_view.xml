@@ -21,7 +21,7 @@
             app:elevation="4dp"
             app:titleMarginStart="0dp"
             tools:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-            tools:title="@string/app_name" />
+            tools:title="@string/app_name"/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefreshlayout"

@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteConstraintException;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -68,6 +69,7 @@ import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.util.CategorySortingMethod;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
@@ -108,6 +110,8 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private RecyclerView listView;
 
     protected ItemAdapter adapter = null;
+
+    private Menu currentMenu;
 
     protected NotesDatabase db = null;
     private ActionBarDrawerToggle drawerToggle;
@@ -368,7 +372,6 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
             private void selectItem(NavigationItem item, boolean closeNavigation) {
                 adapterCategories.setSelectedItem(item.id);
-
                 // update current selection
                 if (itemRecent.equals(item)) {
                     navigationSelection = new Category(null, null);
@@ -606,6 +609,46 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
+    /**
+     * Responses to two sorting method icons on the menu.
+     * @param item The touched item.
+     * @return boolean
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        final String unexpectedSortMethod = "Unexpected sort method";
+        CategorySortingMethod method;
+
+        if (item.getItemId() == R.id.sorting_method) {
+            Log.d("onOptionsItemSelected", navigationSelection.category + localAccount.getId());
+            method = db.getCategoryOrderByTitle(localAccount.getId(), navigationSelection.category);
+
+            if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
+                item.setIcon(R.drawable.modification_desc);
+                method = CategorySortingMethod.SORT_MODIFIED_DESC;
+            } else {
+                item.setIcon(R.drawable.alphabetical_asc);
+                method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
+            }
+            db.modifyCategoryOrderByTitle(localAccount.getId(), navigationSelection.category, method);
+            refreshLists();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /**
+     * Initiates sorting method icons.
+     * @param menu Menu.
+     * @return boolean
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        currentMenu = menu;
+
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     /**
      * Adds the Menu Items to the Action Bar.
@@ -873,5 +916,12 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         mActionMode.finish();
         searchView.setIconified(true);
         refreshLists();
+
+        CategorySortingMethod method = db.getCategoryOrderByTitle(localAccount.getId(), navigationSelection.category);
+        if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
+            currentMenu.findItem(R.id.sorting_method).setIcon(R.drawable.alphabetical_asc);
+        } else {
+            currentMenu.findItem(R.id.sorting_method).setIcon(R.drawable.modification_desc);
+        }
     }
 }
