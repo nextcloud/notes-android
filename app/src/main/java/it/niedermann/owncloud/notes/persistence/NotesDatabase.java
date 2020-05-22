@@ -287,6 +287,19 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
+     * This method is overloading searchNotes method.
+     * In order to keep the original code (called this method) still work.
+     *
+     * @return List&lt;Note&gt;
+     */
+    @NonNull
+    @WorkerThread
+    public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query,
+                                    @Nullable String category, @Nullable Boolean favorite) {
+        return searchNotes(accountId, query, category, favorite, null);
+    }
+
+    /**
      * Returns a list of all Notes in the Database
      * This method only supports to return the notes in the categories with the matched title or the notes in the categories whose ancestor category matches
      * For example, three categories with the title "abc", "abc/aaa" and "abcd"
@@ -296,7 +309,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
      */
     @NonNull
     @WorkerThread
-    public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
+    public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query,
+                                    @Nullable String category, @Nullable Boolean favorite,
+                                    @Nullable CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
         List<String> where = new ArrayList<>();
         List<String> args = new ArrayList<>();
@@ -330,6 +345,10 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
 
         String order = category == null ? default_order : key_category + ", " + key_title;
+        // TODO: modify here, need to test
+        if (sortingMethod != null) {
+            order = sortingMethod.getSorder();
+        }
         return getNotesCustom(accountId, TextUtils.join(" AND ", where), args.toArray(new String[]{}), order, true);
     }
 
@@ -963,7 +982,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * The sorting method of the category can be used to decide
      * to use which sorting method to show the notes for each categories.
      *
-     * @param accountId  The user accountID
+     * @param accountId     The user accountID
      * @param categoryTitle The category title
      * @return The sorting method in CategorySortingMethod enum format
      */
@@ -990,7 +1009,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * When the user changes the sorting method, this method should be called.
      *
      * @param accountId     The user accountID
-     * @param categoryTitle    The category title
+     * @param categoryTitle The category title
      * @param sortingMethod The sorting method in CategorySortingMethod enum format
      */
     public void modifyCategoryOrderByTitle(
