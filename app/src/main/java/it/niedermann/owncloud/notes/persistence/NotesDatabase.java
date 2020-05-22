@@ -959,16 +959,19 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * This function is used to get the sorting method of a category.
+     * This function is used to get the sorting method of a category by title.
      * The sorting method of the category can be used to decide
      * to use which sorting method to show the notes for each categories.
      *
      * @param accountId  The user accountID
-     * @param categoryId The category ID
+     * @param categoryTitle The category title
      * @return The sorting method in CategorySortingMethod enum format
      */
-    public CategorySortingMethod getCategoryOrderById(long accountId, long categoryId) {
+    public CategorySortingMethod getCategoryOrderByTitle(long accountId, String categoryTitle) {
         validateAccountId(accountId);
+
+        long categoryId = getCategoryIdByTitle(accountId, categoryTitle);
+
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(table_category, new String[]{key_category_sorting_method},
                 key_category_id + " = ?", new String[]{String.valueOf(categoryId)},
@@ -987,12 +990,15 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * When the user changes the sorting method, this method should be called.
      *
      * @param accountId     The user accountID
-     * @param categoryId    The category ID
+     * @param categoryTitle    The category title
      * @param sortingMethod The sorting method in CategorySortingMethod enum format
      */
-    public void modifyCategoryOrderById(
-            long accountId, long categoryId, CategorySortingMethod sortingMethod) {
+    public void modifyCategoryOrderByTitle(
+            long accountId, String categoryTitle, CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
+
+        long categoryId = getCategoryIdByTitle(accountId, categoryTitle);
+
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();

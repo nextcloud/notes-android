@@ -558,27 +558,20 @@ public class NotesDatabaseTest {
 //    }
 
     @Test
-    public void test_15_getAndModifyCategoryOrderById() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void test_15_getAndModifyCategoryOrderByTitle() {
         // add a note to database
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
         long noteID = db.addNote(account.getId(), cloudNote);
 
-        // reflection to get categoryID by title
-        Method method = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle",
-                long.class,
-                String.class);
-        method.setAccessible(true);
-        int categoryID = (int) method.invoke(db, account.getId(), "CodingDiary");
-
         // check the default value of ordering_method
-        CategorySortingMethod defaultMethod = db.getCategoryOrderById(account.getId(), categoryID);
+        CategorySortingMethod defaultMethod = db.getCategoryOrderByTitle(account.getId(), "CodingDiary");
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
-        db.modifyCategoryOrderById(account.getId(), categoryID, CategorySortingMethod.getCSM(1));
-        CategorySortingMethod methodAfterModify = db.getCategoryOrderById(account.getId(), categoryID);
+        db.modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = db.getCategoryOrderByTitle(account.getId(), "CodingDiary");
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
