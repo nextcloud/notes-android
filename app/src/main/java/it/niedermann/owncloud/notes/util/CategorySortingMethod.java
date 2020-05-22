@@ -1,17 +1,17 @@
 package it.niedermann.owncloud.notes.util;
 
 public enum CategorySortingMethod {
-    SORT_LEXICOGRAPHICAL_ASC(0),
-    SORT_MODIFIED_DESC(1);
+    SORT_MODIFIED_DESC("MODIFIED DESC"),
+    SORT_LEXICOGRAPHICAL_ASC("TITLE ASC");
 
-    private int smid;   // sorting method id
+    private String sorder;  // sorting method OrderBy for SQL
 
     /***
      * Constructor
-     * @param smid given sorting method id
+     * @param orderby given sorting method OrderBy
      */
-    CategorySortingMethod(int smid) {
-        this.smid = smid;
+    CategorySortingMethod(String orderby) {
+        this.sorder = orderby;
     }
 
     /***
@@ -19,6 +19,23 @@ public enum CategorySortingMethod {
      * @return the sorting method id for the enum item
      */
     public int getCSMID() {
-        return this.smid;
+        return this.ordinal();
+    }
+
+    /***
+     * Retrieve the sorting method order for SQL
+     * @return the sorting method order for the enum item
+     */
+    public String getSorder() {
+        return this.sorder;
+    }
+
+    /***
+     * Retrieve the corresponding enum value with given the index (ordinal)
+     * @param index the index / ordinal of the corresponding enum value stored in DB
+     * @return the corresponding enum item with the index (ordinal)
+     */
+    public static CategorySortingMethod getCSM(int index) {
+        return CategorySortingMethod.values()[index];
     }
 }

@@ -10,6 +10,8 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -542,6 +544,16 @@ public class NotesDatabaseTest {
             Log.e("Test_13_getCategoryIdByTitle", Arrays.toString(e.getStackTrace()));
         }
     }
+
+//    @Test
+//    public void test_14_upgrade() {
+//        SQLiteDatabase sqlite_db = db.getReadableDatabase();
+//        Cursor cursor = sqlite_db.rawQuery("SELECT * FROM " + AbstractNotesDatabase.table_category, null);
+//        cursor.moveToNext();
+//        int sorting_method = cursor.getInt(3);
+//        Log.i("TEST_14_UPGRADE", "sorting method index: " + sorting_method);
+//        assertEquals(0, sorting_method);
+//    }
 
     public static String getCurDate() {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));

@@ -32,7 +32,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 14;
+    private static final int database_version = 15;
     @NonNull
     private final Context context;
 
@@ -64,6 +64,8 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_category_id = "CATEGORY_ID";
     protected static final String key_category_title = "CATEGORY_TITLE";
     protected static final String key_category_account_id = "CATEGORY_ACCOUNT_ID";
+
+    protected static final String key_category_sorting_method = "CATEGORY_SORTING_METHOD";
 
     protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory, database_version);
@@ -128,6 +130,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_category_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_category_account_id + " INTEGER, " +
                 key_category_title + " TEXT, " +
+                key_category_sorting_method + " INTEGER DEFAULT 0, " +
                 " UNIQUE( " + key_category_account_id + " , " + key_category_title + "))");
         createCategoryIndexes(db);
     }
@@ -355,6 +358,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);
             createCategoryIndexes(db);
             createNotesIndexes(db);
+        }
+        if (oldVersion < 15) {
+            // add a new column to store the sorting method for a category note list
+            db.execSQL("ALTER TABLE " + table_category + " ADD COLUMN " + key_category_sorting_method + " INTEGER DEFAULT 0");
         }
     }
 
