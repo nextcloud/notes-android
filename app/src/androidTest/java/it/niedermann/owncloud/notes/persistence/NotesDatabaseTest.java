@@ -7,6 +7,7 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.util.CategorySortingMethod;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import android.content.Context;
@@ -25,6 +26,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -554,6 +556,34 @@ public class NotesDatabaseTest {
 //        Log.i("TEST_14_UPGRADE", "sorting method index: " + sorting_method);
 //        assertEquals(0, sorting_method);
 //    }
+
+    @Test
+    public void test_15_getAndModifyCategoryOrderById() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        // add a note to database
+        CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
+                "A Coding Day", "This is a day which is very suitable to code.",
+                true, "CodingDiary", null);
+        long noteID = db.addNote(account.getId(), cloudNote);
+
+        // reflection to get categoryID by title
+        Method method = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle",
+                long.class,
+                String.class);
+        method.setAccessible(true);
+        int categoryID = (int) method.invoke(db, account.getId(), "CodingDiary");
+
+        // check the default value of ordering_method
+        CategorySortingMethod defaultMethod = db.getCategoryOrderById(account.getId(), categoryID);
+        assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
+
+        // modify the value of ordering_method and check
+        db.modifyCategoryOrderById(account.getId(), categoryID, CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = db.getCategoryOrderById(account.getId(), categoryID);
+        assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
+
+        // delete the Node
+        db.deleteNote(noteID, DBStatus.VOID);
+    }
 
     public static String getCurDate() {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));

@@ -49,6 +49,7 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
+import it.niedermann.owncloud.notes.util.CategorySortingMethod;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
@@ -955,6 +956,49 @@ public class NotesDatabase extends AbstractNotesDatabase {
         getReadableDatabase().delete(table_category,
                 key_category_id + " NOT IN (SELECT " + key_category + " FROM " + table_notes + ")",
                 null);
+    }
+
+    /**
+     * This function is used to get the sorting method of a category.
+     * The sorting method of the category can be used to decide
+     * to use which sorting method to show the notes for each categories.
+     *
+     * @param accountId  The user accountID
+     * @param categoryId The category ID
+     * @return The sorting method in CategorySortingMethod enum format
+     */
+    public CategorySortingMethod getCategoryOrderById(long accountId, long categoryId) {
+        validateAccountId(accountId);
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(table_category, new String[]{key_category_sorting_method},
+                key_category_id + " = ?", new String[]{String.valueOf(categoryId)},
+                null, null, null);
+        int orderIndex = 0;
+        while (cursor.moveToNext()) {
+            orderIndex = cursor.getInt(0);
+        }
+
+        return CategorySortingMethod.getCSM(orderIndex);
+    }
+
+    /**
+     * This method is used to modify the sorting method for one category.
+     * The user can determine use which sorting method to show the notes for a category.
+     * When the user changes the sorting method, this method should be called.
+     *
+     * @param accountId     The user accountID
+     * @param categoryId    The category ID
+     * @param sortingMethod The sorting method in CategorySortingMethod enum format
+     */
+    public void modifyCategoryOrderById(
+            long accountId, long categoryId, CategorySortingMethod sortingMethod) {
+        validateAccountId(accountId);
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(key_category_sorting_method, sortingMethod.getCSMID());
+        db.update(table_category, values,
+                key_category_id + " = ?", new String[]{String.valueOf(categoryId)});
     }
 
 }
