@@ -260,9 +260,12 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                     int[] appWidgetIdsNLW = awm.getAppWidgetIds(new ComponentName(context, NoteListWidget.class));
                     int[] appWidgetIdsSNW = awm.getAppWidgetIds(new ComponentName(context, SingleNoteWidget.class));
 
+                    final String WIDGET_MODE_KEY = "NLW_mode";
+                    final String ACCOUNT_ID_KEY = "NLW_account";
+
                     for (int appWidgetId : appWidgetIdsNLW) {
-                        if (sharedPreferences.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1) >= 0) {
-                            editor.putLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, 1);
+                        if (sharedPreferences.getInt(WIDGET_MODE_KEY + appWidgetId, -1) >= 0) {
+                            editor.putLong(ACCOUNT_ID_KEY + appWidgetId, 1);
                         }
                     }
 
@@ -309,7 +312,8 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             Map<String, ?> prefs = sharedPreferences.getAll();
             for (Map.Entry<String, ?> pref : prefs.entrySet()) {
                 String key = pref.getKey();
-                if ("darkTheme".equals(key) || key.startsWith(NoteListWidget.DARK_THEME_KEY) || key.startsWith("SNW_darkTheme")) {
+                final String DARK_THEME_KEY = "NLW_darkTheme";
+                if ("darkTheme".equals(key) || key.startsWith(DARK_THEME_KEY) || key.startsWith("SNW_darkTheme")) {
                     Boolean darkTheme = (Boolean) pref.getValue();
                     editor.putString(pref.getKey(), darkTheme ? DarkModeSetting.DARK.name() : DarkModeSetting.LIGHT.name());
                 }

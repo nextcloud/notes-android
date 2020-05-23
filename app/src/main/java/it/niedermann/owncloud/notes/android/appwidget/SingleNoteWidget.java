@@ -6,12 +6,9 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
-
-import androidx.preference.PreferenceManager;
 
 import java.util.NoSuchElementException;
 
@@ -83,16 +80,11 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
-        SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(context).edit();
-
         final NotesDatabase db = NotesDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
             db.removeSingleNoteWidget(appWidgetId);
         }
-
-        editor.apply();
         super.onDeleted(context, appWidgetIds);
     }
 }
