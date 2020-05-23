@@ -545,7 +545,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_modified, remoteNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, remoteNote.getContent());
         values.put(key_favorite, remoteNote.isFavorite());
-        values.put(key_category, getCategoryIdByTitle(id, remoteNote.getCategory()));
+        values.put(key_category, getCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
         values.put(key_etag, remoteNote.getEtag());
         values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent()));
         String whereClause;
