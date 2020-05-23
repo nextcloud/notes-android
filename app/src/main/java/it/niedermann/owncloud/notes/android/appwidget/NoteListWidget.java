@@ -69,11 +69,11 @@ public class NoteListWidget extends AppWidgetProvider {
 
             // Launch create note activity if user taps "+" icon on header
             PendingIntent newNoteI = PendingIntent.getActivity(context, 0,
-                    (new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY, new Category(category, displayMode == NLW_DISPLAY_STARRED))),
+                    new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY, new Category(category, displayMode == NLW_DISPLAY_STARRED)),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             PendingIntent templatePI = PendingIntent.getActivity(context, 0,
-                    (new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY, new Category(category, displayMode == NLW_DISPLAY_STARRED))),
+                    new Intent(context, EditNoteActivity.class),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             if (Notes.isDarkThemeActive(context, darkTheme)) {
