@@ -131,7 +131,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_category_account_id + " INTEGER NOT NULL, " +
                 key_category_title + " TEXT NOT NULL, " +
                 "UNIQUE( " + key_category_account_id + " , " + key_category_title + "), " +
-                "FOREIGN KEY(" + key_category_account_id + ") REFERENCES " + table_category + "(" + key_id + "));");
+                "FOREIGN KEY(" + key_category_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "));");
         DatabaseIndexUtil.createIndex(db, table_category, key_category_id, key_category_account_id, key_category_title);
     }
 
