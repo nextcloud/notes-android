@@ -145,7 +145,11 @@
     <string name="error_dialog_insufficient_storage">Na vámi využívané instanci Nexcloud nezbývá žádné volné místo na úložišti. Aby bylo možné synchronizovat vaše místní změny do vámi využívaného cloudu, je třeba nejprve smazat nějaké soubory.</string>
     <string name="error_dialog_contact_us">Pokud problémy přetrvávají, neváhejte se na nás obrátit. Kontaktní údaje naleznete v sekci „O aplikaci“ v postranním panelu.</string>
     <string name="error_dialog_we_need_info">Abychom vám mohli pomoci, potřebujeme následující technické údaje:</string>
+    <string name="error_dialog_server_app_enabled">Ověřte, že na vámi využívaném serveru je nainstalovaná a zapnutá aplikace „Poznámky“.</string>
     <string name="error_dialog_redirect">Vámi využívaný server odpověděl HTTP stavovým kódem 302, což ukazuje na to, že na serveru buď není nainstalovaná aplikace Poznámky, nebo je něco nesprávně nastavené. Toto může být způsobeno uživatelsky určenými přepsáními v souboru .htaccess nebo Nextcloud aplikacemi jako je OID klient.</string>
+    <string name="added_content">Přidáno „%1$s“</string>
+    <string name="shared_text_empty">Sdílený text je prázdný</string>
+    <string name="append_to_note">Připojit k poznámce</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
