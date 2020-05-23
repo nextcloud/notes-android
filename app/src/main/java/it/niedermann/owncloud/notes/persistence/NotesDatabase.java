@@ -350,7 +350,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         String order = category == null ? default_order : key_category + ", " + key_title;
         // TODO: modify here, need to test
         if (sortingMethod != null) {
-            order = sortingMethod.getSorder();
+            order = key_favorite + " DESC," + sortingMethod.getSorder();
         }
         return getNotesCustom(accountId, TextUtils.join(" AND ", where), args.toArray(new String[]{}), order, true);
     }
