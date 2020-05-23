@@ -33,7 +33,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private int occurrenceCount = 0;
     private SearchView searchView;
     private String searchQuery = null;
-    private final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
+    private static final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -114,7 +114,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             private Handler handler = new Handler();
 
             @Override
-            public boolean onQueryTextSubmit(String query) {
+            public boolean onQueryTextSubmit(@NonNull String query) {
                 currentOccurrence++;
                 jumpToOccurrence();
                 colorWithText(query, currentOccurrence);
@@ -122,12 +122,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
+            public boolean onQueryTextChange(@NonNull String newText) {
                 queryWithHandler(newText);
                 return true;
             }
 
-            private void queryMatch(String newText) {
+            private void queryMatch(@NonNull String newText) {
                 searchQuery = newText;
                 occurrenceCount = countOccurrences(getContent(), searchQuery);
                 if (occurrenceCount > 1) {
@@ -140,7 +140,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 colorWithText(searchQuery, currentOccurrence);
             }
 
-            private void queryWithHandler(String newText) {
+            private void queryWithHandler(@NonNull String newText) {
                 if (delayQueryTask != null) {
                     delayQueryTask.cancel();
                     handler.removeCallbacksAndMessages(null);
@@ -151,11 +151,11 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             }
 
             class DelayQueryRunnable implements Runnable {
-                String mText;
+                private String text;
                 private boolean canceled = false;
 
                 public DelayQueryRunnable(String text) {
-                    this.mText = text;
+                    this.text = text;
                 }
 
                 @Override
@@ -163,7 +163,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                     if (canceled) {
                         return;
                     }
-                    queryMatch(mText);
+                    queryMatch(text);
                 }
 
                 public void cancel() {
@@ -261,6 +261,9 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         if (haystack == null || haystack.isEmpty() || needle == null || needle.isEmpty()) {
             return 0;
         }
+        // Use regrex which is faster before.
+        // Such that the main thread will not stop for a long tilme
+        // And so there will not an ANR problem
         Matcher m = Pattern.compile(needle, Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
                 .matcher(haystack);
 
