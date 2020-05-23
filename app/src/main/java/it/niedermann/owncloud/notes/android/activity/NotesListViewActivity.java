@@ -667,6 +667,11 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         currentMenu = menu;
+        if (localAccount != null) {
+            updateSortMethodIcon();
+        } else {
+            menu.findItem(R.id.sorting_method).setVisible(false);
+        }
         return super.onPrepareOptionsMenu(menu);
     }
 
