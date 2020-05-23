@@ -32,7 +32,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 15;
+    private static final int database_version = 16;
     @NonNull
     private final Context context;
 
@@ -41,6 +41,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String table_accounts = "ACCOUNTS";
     protected static final String table_category = "CATEGORIES";
     protected static final String table_widget_single_notes = "WIDGET_SINGLE_NOTES";
+    protected static final String table_widget_note_list = "WIDGET_NOTE_LISTS";
 
     protected static final String key_id = "ID";
 
@@ -66,6 +67,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_category_title = "CATEGORY_TITLE";
     protected static final String key_category_account_id = "CATEGORY_ACCOUNT_ID";
     protected static final String key_theme_mode = "THEME_MODE";
+    protected static final String key_mode = "MODE";
 
     protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory, database_version);
@@ -89,6 +91,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         createNotesTable(db);
         createCategoryTable(db);
         createWidgetSingleNoteTable(db);
+        createWidgetNoteListTable(db);
     }
 
     private void createNotesTable(@NonNull SQLiteDatabase db) {
@@ -134,7 +137,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         DatabaseIndexUtil.createIndex(db, table_category, key_category_id, key_category_account_id, key_category_title);
     }
 
-
     private void createWidgetSingleNoteTable(@NonNull SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + table_widget_single_notes + " ( " +
                 key_id + " INTEGER PRIMARY KEY, " +
@@ -145,6 +147,16 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 "FOREIGN KEY(" + key_note_id + ") REFERENCES " + table_notes + "(" + key_id + "))");
     }
 
+    private void createWidgetNoteListTable(@NonNull SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE " + table_widget_note_list + " ( " +
+                key_id + " INTEGER PRIMARY KEY, " +
+                key_account_id + " INTEGER, " +
+                key_category_id + " INTEGER, " +
+                key_mode + " INTEGER NOT NULL, " +
+                key_theme_mode + " INTEGER NOT NULL, " +
+                "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "), " +
+                "FOREIGN KEY(" + key_category_id + ") REFERENCES " + table_category + "(" + key_category_id + "))");
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -371,6 +383,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             notifyNotesChanged();
         }
         if (oldVersion < 15) {
+            // #814 normalize database (move category from string field to own table)
             // Rename a tmp_NOTES table.
             String tmpTableNotes = String.format("tmp_%s", "NOTES");
             db.execSQL("ALTER TABLE NOTES RENAME TO " + tmpTableNotes);
@@ -435,6 +448,85 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             }
             tmpNotesCursor.close();
             db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);
+        }
+        if (oldVersion < 16) {
+            // #832 Move note list widget preferences to database
+            db.execSQL("CREATE TABLE WIDGET_NOTE_LISTS ( " +
+                    "ID INTEGER PRIMARY KEY, " +
+                    "ACCOUNT_ID INTEGER, " +
+                    "CATEGORY_ID INTEGER, " +
+                    "MODE INTEGER NOT NULL, " +
+                    "THEME_MODE INTEGER NOT NULL, " +
+                    "FOREIGN KEY(ACCOUNT_ID) REFERENCES ACCOUNTS(ID), " +
+                    "FOREIGN KEY(CATEGORY_ID) REFERENCES CATEGORIES(CATEGORY_ID))");
+
+            final String SP_WIDGET_KEY = "NLW_mode";
+            final String SP_ACCOUNT_ID_KEY = "NLW_account";
+            final String SP_DARK_THEME_KEY = "NLW_darkTheme";
+            final String SP_CATEGORY_KEY = "NLW_cat";
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            Map<String, ?> prefs = sharedPreferences.getAll();
+            for (Map.Entry<String, ?> pref : prefs.entrySet()) {
+                final String key = pref.getKey();
+                Integer widgetId = null;
+                Integer mode = null;
+                Long accountId = null;
+                Integer themeMode = null;
+                Integer categoryId = null;
+                if (key != null && key.startsWith(SP_WIDGET_KEY)) {
+                    try {
+                        widgetId = Integer.parseInt(key.substring(SP_WIDGET_KEY.length()));
+                        mode = (Integer) pref.getValue();
+                        accountId = sharedPreferences.getLong(SP_ACCOUNT_ID_KEY + widgetId, -1);
+
+                        try {
+                            themeMode = DarkModeSetting.valueOf(sharedPreferences.getString(SP_DARK_THEME_KEY + widgetId, DarkModeSetting.SYSTEM_DEFAULT.name())).getModeId();
+                        } catch (ClassCastException e) {
+                            //DARK_THEME was a boolean in older versions of the app. We thereofre have to still support the old setting.
+                            themeMode = sharedPreferences.getBoolean(SP_DARK_THEME_KEY + widgetId, false) ? DarkModeSetting.DARK.getModeId() : DarkModeSetting.LIGHT.getModeId();
+                        }
+
+                        if (mode == 2) {
+                            final String categoryTitle = sharedPreferences.getString(SP_CATEGORY_KEY + widgetId, null);
+                            Cursor cursor = db.query(
+                                    table_category,
+                                    new String[]{key_category_id},
+                                    key_category_title + " = ? AND " + key_category_account_id + " = ? ",
+                                    new String[]{categoryTitle, String.valueOf(accountId)},
+                                    null,
+                                    null,
+                                    null);
+                            if (cursor.moveToNext()) {
+                                categoryId = cursor.getInt(0);
+                            } else {
+                                throw new IllegalStateException("No category id found for title \"" + categoryTitle + "\"");
+                            }
+                            cursor.close();
+                        }
+
+                        ContentValues migratedWidgetValues = new ContentValues();
+                        migratedWidgetValues.put("ID", widgetId);
+                        migratedWidgetValues.put("ACCOUNT_ID", accountId);
+                        migratedWidgetValues.put("CATEGORY_ID", categoryId);
+                        migratedWidgetValues.put("MODE", mode);
+                        migratedWidgetValues.put("THEME_MODE", themeMode);
+                        db.insert("WIDGET_NOTE_LISTS", null, migratedWidgetValues);
+                    } catch (Throwable t) {
+                        Log.e(TAG, "Could not migrate widget {widgetId: " + widgetId + ", accountId: " + accountId + ", mode: " + mode + ", categoryId: " + categoryId + ", themeMode: " + themeMode + "}");
+                        t.printStackTrace();
+                    } finally {
+                        // Clean up old shared preferences
+                        editor.remove(SP_WIDGET_KEY + widgetId);
+                        editor.remove(SP_CATEGORY_KEY + widgetId);
+                        editor.remove(SP_DARK_THEME_KEY + widgetId);
+                        editor.remove(SP_ACCOUNT_ID_KEY + widgetId);
+                    }
+                }
+            }
+            editor.apply();
+            notifyNotesChanged();
         }
     }
 
