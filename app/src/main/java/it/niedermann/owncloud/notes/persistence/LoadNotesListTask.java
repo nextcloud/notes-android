@@ -52,11 +52,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     protected List<Item> doInBackground(Void... voids) {
         List<DBNote> noteList;
         NotesDatabase db = NotesDatabase.getInstance(context);
-        if (category.category != null && !category.category.isEmpty()) {
-            noteList = db.searchNotes(accountId, searchQuery, category.category, category.favorite, db.getCategoryOrderByTitle(accountId, category.category));
-        } else  {
-            noteList = db.searchNotes(accountId, searchQuery, category.category, category.favorite);
-        }
+        noteList = db.searchNotes(accountId, searchQuery, category.category, category.favorite, db.getCategoryOrderByTitle(accountId, category));
 
         if (category.category == null) {
             return fillListByTime(noteList);

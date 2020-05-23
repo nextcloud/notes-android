@@ -618,16 +618,11 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
             return;
         }
         MenuItem sortMethod = currentMenu.findItem(R.id.sorting_method);
-        if (navigationSelection.category != null && !navigationSelection.category.isEmpty()) {
-            sortMethod.setVisible(true);
-            CategorySortingMethod method = db.getCategoryOrderByTitle(localAccount.getId(), navigationSelection.category);
-            if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-                sortMethod.setIcon(R.drawable.alphabetical_asc);
-            } else {
-                sortMethod.setIcon(R.drawable.modification_desc);
-            }
+        CategorySortingMethod method = db.getCategoryOrderByTitle(localAccount.getId(), navigationSelection);
+        if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
+            sortMethod.setIcon(R.drawable.alphabetical_asc);
         } else {
-            sortMethod.setVisible(false);
+            sortMethod.setIcon(R.drawable.modification_desc);
         }
     }
 
@@ -643,14 +638,14 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
         if (item.getItemId() == R.id.sorting_method) {
             Log.d("onOptionsItemSelected", navigationSelection.category + localAccount.getId());
-            method = db.getCategoryOrderByTitle(localAccount.getId(), navigationSelection.category);
+            method = db.getCategoryOrderByTitle(localAccount.getId(), navigationSelection);
 
             if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
                 method = CategorySortingMethod.SORT_MODIFIED_DESC;
             } else {
                 method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
             }
-            db.modifyCategoryOrderByTitle(localAccount.getId(), navigationSelection.category, method);
+            db.modifyCategoryOrderByTitle(localAccount.getId(), navigationSelection, method);
             refreshLists();
             updateSortMethodIcon();
             return true;
@@ -667,11 +662,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         currentMenu = menu;
-        if (localAccount != null) {
-            updateSortMethodIcon();
-        } else {
-            menu.findItem(R.id.sorting_method).setVisible(false);
-        }
+        updateSortMethodIcon();
         return super.onPrepareOptionsMenu(menu);
     }
 
