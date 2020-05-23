@@ -32,6 +32,10 @@ public class NoteListWidget extends AppWidgetProvider {
     public static final int NLW_DISPLAY_STARRED = 1;
     public static final int NLW_DISPLAY_CATEGORY = 2;
 
+    public static final int PENDING_INTENT_NEW_NOTE_RQ = 0;
+    public static final int PENDING_INTENT_EDIT_NOTE_RQ = 1;
+    public static final int PENDING_INTENT_OPEN_APP_RQ = 2;
+
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         RemoteViews views;
         DarkModeSetting darkTheme;
@@ -64,15 +68,17 @@ public class NoteListWidget extends AppWidgetProvider {
                     NotesListViewActivity.class.getName()));
 
             // Open the main app if the user taps the widget header
-            PendingIntent openAppI = PendingIntent.getActivity(context, 0, intent,
+            PendingIntent openAppI = PendingIntent.getActivity(context, PENDING_INTENT_OPEN_APP_RQ,
+                    intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
             // Launch create note activity if user taps "+" icon on header
-            PendingIntent newNoteI = PendingIntent.getActivity(context, 0,
+            PendingIntent newNoteI = PendingIntent.getActivity(context, PENDING_INTENT_NEW_NOTE_RQ,
                     new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY, new Category(category, displayMode == NLW_DISPLAY_STARRED)),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
-            PendingIntent templatePI = PendingIntent.getActivity(context, 0,
+
+            PendingIntent templatePI = PendingIntent.getActivity(context, PENDING_INTENT_EDIT_NOTE_RQ,
                     new Intent(context, EditNoteActivity.class),
                     PendingIntent.FLAG_UPDATE_CURRENT);
 
