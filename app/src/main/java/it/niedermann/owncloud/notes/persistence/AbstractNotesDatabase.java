@@ -373,10 +373,29 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         }
         if (oldVersion < 15) {
             // Rename a tmp_NOTES table.
-            String tmpTableNotes = String.format("tmp_%s", table_notes);
-            db.execSQL("ALTER TABLE " + table_notes + " RENAME TO " + tmpTableNotes);
-            createNotesTable(db);
-            createCategoryTable(db);
+            String tmpTableNotes = String.format("tmp_%s", "NOTES");
+            db.execSQL("ALTER TABLE NOTES RENAME TO " + tmpTableNotes);
+            db.execSQL("CREATE TABLE " + table_notes + " ( " +
+                    "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "REMOTEID INTEGER, " +
+                    "ACCOUNT_ID INTEGER, " +
+                    "STATUS VARCHAR(50), " +
+                    "TITLE TEXT, " +
+                    "MODIFIED INTEGER DEFAULT 0, " +
+                    "CONTENT TEXT, " +
+                    "FAVORITE INTEGER DEFAULT 0, " +
+                    "CATEGORY INTEGER, " +
+                    "ETAG TEXT," +
+                    "EXCERPT TEXT NOT NULL DEFAULT '', " +
+                    "FOREIGN KEY(CATEGORY) REFERENCES CATEGORIES(CATEGORY_ID), " +
+                    "FOREIGN KEY(ACCOUNT_ID) REFERENCES ACCOUNTS(ID))");
+            DatabaseIndexUtil.createIndex(db, "NOTES", "REMOTEID", "ACCOUNT_ID", "STATUS", "FAVORITE", "CATEGORY", "MODIFIED");
+            db.execSQL("CREATE TABLE CATEGORIES(" +
+                    "CATEGORY_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "CATEGORY_ACCOUNT_ID INTEGER, " +
+                    "CATEGORY_TITLE TEXT, " +
+                    " UNIQUE( CATEGORY_ACCOUNT_ID , CATEGORY_TITLE))");
+            DatabaseIndexUtil.createIndex(db, "CATEGORIES", "CATEGORY_ID", "CATEGORY_ACCOUNT_ID", "CATEGORY_TITLE");
             // A hashtable storing categoryTitle - categoryId Mapping
             // This is used to prevent too many searches in database
             Hashtable<String, Integer> categoryTitleIdMap = new Hashtable<>();
@@ -385,33 +404,33 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             while (tmpNotesCursor.moveToNext()) {
                 String categoryTitle = tmpNotesCursor.getString(8);
                 int accountId = tmpNotesCursor.getInt(2);
-                int categoryId = 0;
+                Integer categoryId;
                 if (categoryTitleIdMap.containsKey(categoryTitle) && categoryTitleIdMap.get(categoryTitle) != null) {
                     categoryId = categoryTitleIdMap.get(categoryTitle);
                 } else {
                     // The category does not exists in the database, create it.
                     categoryId = id++;
                     ContentValues values = new ContentValues();
-                    values.put(key_category_id, categoryId);
-                    values.put(key_category_account_id, accountId);
-                    values.put(key_category_title, categoryTitle);
-                    db.insert(table_category, null, values);
+                    values.put("CATEGORY_ID", categoryId);
+                    values.put("CATEGORY_ACCOUNT_ID", accountId);
+                    values.put("CATEGORY_TITLE", categoryTitle);
+                    db.insert("CATEGORIES", null, values);
                     categoryTitleIdMap.put(categoryTitle, categoryId);
                 }
                 // Move the data in tmp_NOTES to NOTES
                 ContentValues values = new ContentValues();
-                values.put(key_id, tmpNotesCursor.getInt(0));
-                values.put(key_remote_id, tmpNotesCursor.getInt(1));
-                values.put(key_account_id, tmpNotesCursor.getInt(2));
-                values.put(key_status, tmpNotesCursor.getString(3));
-                values.put(key_title, tmpNotesCursor.getString(4));
-                values.put(key_modified, tmpNotesCursor.getLong(5));
-                values.put(key_content, tmpNotesCursor.getString(6));
-                values.put(key_favorite, tmpNotesCursor.getInt(7));
-                values.put(key_category, categoryId);
-                values.put(key_etag, tmpNotesCursor.getString(9));
-                values.put(key_etag, tmpNotesCursor.getString(10));
-                db.insert(table_notes, null, values);
+                values.put("ID", tmpNotesCursor.getInt(0));
+                values.put("REMOTEID", tmpNotesCursor.getInt(1));
+                values.put("ACCOUNT_ID", tmpNotesCursor.getInt(2));
+                values.put("STATUS", tmpNotesCursor.getString(3));
+                values.put("TITLE", tmpNotesCursor.getString(4));
+                values.put("MODIFIED", tmpNotesCursor.getLong(5));
+                values.put("CONTENT", tmpNotesCursor.getString(6));
+                values.put("FAVORITE", tmpNotesCursor.getInt(7));
+                values.put("CATEGORY", categoryId);
+                values.put("ETAG", tmpNotesCursor.getString(9));
+                values.put("EXCERPT", tmpNotesCursor.getString(10));
+                db.insert("NOTES", null, values);
             }
             tmpNotesCursor.close();
             db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);
