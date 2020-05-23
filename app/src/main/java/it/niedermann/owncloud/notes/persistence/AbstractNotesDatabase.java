@@ -121,7 +121,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_color + " VARCHAR(6) NOT NULL DEFAULT '000000', " +
                 key_text_color + " VARCHAR(6) NOT NULL DEFAULT '0082C9', " +
                 key_capabilities_etag + " TEXT, " +
-                " FOREIGN KEY(" + key_id + ") REFERENCES " + table_category + "(" + key_category_account_id + "));");
+                "FOREIGN KEY(" + key_id + ") REFERENCES " + table_category + "(" + key_category_account_id + "));");
         DatabaseIndexUtil.createIndex(db, table_accounts, key_url, key_username, key_account_name, key_etag, key_modified);
     }
 
