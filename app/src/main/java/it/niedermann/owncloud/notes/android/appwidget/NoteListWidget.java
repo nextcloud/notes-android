@@ -59,7 +59,7 @@ public class NoteListWidget extends AppWidgetProvider {
             }
 
             // Launch application when user taps the header icon or app title
-            Intent intent = new Intent("android.intent.action.MAIN");
+            Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.setComponent(new ComponentName(context.getPackageName(),
                     NotesListViewActivity.class.getName()));
 
