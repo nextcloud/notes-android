@@ -128,9 +128,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     private void createCategoryTable(@NonNull SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + table_category + "(" +
                 key_category_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                key_category_account_id + " INTEGER, " +
-                key_category_title + " TEXT, " +
-                " UNIQUE( " + key_category_account_id + " , " + key_category_title + "))");
+                key_category_account_id + " INTEGER NOT NULL, " +
+                key_category_title + " TEXT NOT NULL, " +
+                " UNIQUE( " + key_category_account_id + " , " + key_category_title + "), " +
+                " FOREIGN KEY(" + key_id + ") REFERENCES " + table_category + "(" + key_category_account_id + "));");
         DatabaseIndexUtil.createIndex(db, table_category, key_category_id, key_category_account_id, key_category_title);
     }
 
@@ -146,7 +147,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     }
 
 
-    @SuppressWarnings("deprecation")
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         if (oldVersion < 4) {
@@ -220,7 +220,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                     values.put("ACCOUNT_ID", 1);
                     db.update("NOTES", values, "ACCOUNT_ID = ?", new String[]{"NULL"});
 
-// Add FOREIGN_KEY constraint
+                    // Add FOREIGN_KEY constraint
                     final String table_temp = "NOTES_TEMP";
                     db.execSQL(String.format("ALTER TABLE %s RENAME TO %s", "NOTES", table_temp));
 
@@ -375,7 +375,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             // Rename a tmp_NOTES table.
             String tmpTableNotes = String.format("tmp_%s", "NOTES");
             db.execSQL("ALTER TABLE NOTES RENAME TO " + tmpTableNotes);
-            db.execSQL("CREATE TABLE " + table_notes + " ( " +
+            db.execSQL("CREATE TABLE NOTES ( " +
                     "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "REMOTEID INTEGER, " +
                     "ACCOUNT_ID INTEGER, " +
@@ -392,9 +392,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             DatabaseIndexUtil.createIndex(db, "NOTES", "REMOTEID", "ACCOUNT_ID", "STATUS", "FAVORITE", "CATEGORY", "MODIFIED");
             db.execSQL("CREATE TABLE CATEGORIES(" +
                     "CATEGORY_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "CATEGORY_ACCOUNT_ID INTEGER, " +
-                    "CATEGORY_TITLE TEXT, " +
-                    " UNIQUE( CATEGORY_ACCOUNT_ID , CATEGORY_TITLE))");
+                    "CATEGORY_ACCOUNT_ID INTEGER NOT NULL, " +
+                    "CATEGORY_TITLE TEXT NOT NULL, " +
+                    "UNIQUE( CATEGORY_ACCOUNT_ID , CATEGORY_TITLE), " +
+                    "FOREIGN KEY(CATEGORY_ACCOUNT_ID) REFERENCES ACCOUNTS(ID))");
             DatabaseIndexUtil.createIndex(db, "CATEGORIES", "CATEGORY_ID", "CATEGORY_ACCOUNT_ID", "CATEGORY_TITLE");
             // A hashtable storing categoryTitle - categoryId Mapping
             // This is used to prevent too many searches in database
