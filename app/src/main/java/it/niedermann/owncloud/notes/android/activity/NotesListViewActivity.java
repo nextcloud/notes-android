@@ -397,7 +397,6 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                     binding.drawerLayout.closeDrawer(GravityCompat.START);
                 }
                 refreshLists(true);
-                updateSortMethodIcon();
             }
 
             @Override
@@ -608,13 +607,15 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         };
         new LoadNotesListTask(localAccount.getId(), getApplicationContext(), callback, navigationSelection, query).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        updateSortMethodIcon();
     }
 
     /**
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon() {
-        if (localAccount == null) {
+        if (localAccount == null || currentMenu == null) {
             return;
         }
         MenuItem sortMethod = currentMenu.findItem(R.id.sorting_method);
@@ -647,7 +648,6 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
             }
             db.modifyCategoryOrderByTitle(localAccount.getId(), navigationSelection, method);
             refreshLists();
-            updateSortMethodIcon();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
