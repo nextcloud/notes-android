@@ -1079,7 +1079,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param accountId     The user accountID
      * @param category      The category
-     * @return
+     * @return The sorting method in CategorySortingMethod enum format
      */
     public CategorySortingMethod getCategoryOrder(long accountId, Category category) {
         validateAccountId(accountId);
