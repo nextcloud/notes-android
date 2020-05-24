@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -47,6 +48,7 @@ public class NoteListWidget extends AppWidgetProvider {
 
                 Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
                 serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+                serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
                 // Launch application when user taps the header icon or app title
                 Intent intent = new Intent(Intent.ACTION_MAIN);
