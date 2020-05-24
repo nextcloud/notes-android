@@ -9,6 +9,7 @@ import android.content.pm.ShortcutManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -37,6 +38,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
@@ -53,6 +55,7 @@ import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.util.CategorySortingMethod;
+import it.niedermann.owncloud.notes.model.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
@@ -565,7 +568,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_modified, remoteNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, remoteNote.getContent());
         values.put(key_favorite, remoteNote.isFavorite());
-        values.put(key_category, getCategoryIdByTitle(id, remoteNote.getCategory()));
+        values.put(key_category, getCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
         values.put(key_etag, remoteNote.getEtag());
         values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent()));
         String whereClause;
@@ -919,6 +922,44 @@ public class NotesDatabase extends AbstractNotesDatabase {
         } else {
             Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and modified = " + modified);
         }
+    }
+
+    /**
+     * @param appWidgetId the id of the widget
+     * @return {@link SingleNoteWidgetData}
+     * @throws NoSuchElementException in case there is no {@link SingleNoteWidgetData} for the given appWidgetId
+     */
+    @NonNull
+    public SingleNoteWidgetData getSingleNoteWidgetData(int appWidgetId) throws NoSuchElementException {
+        SingleNoteWidgetData data = new SingleNoteWidgetData();
+        final SQLiteDatabase db = getReadableDatabase();
+        final Cursor cursor = db.query(table_widget_single_notes, new String[]{key_account_id, key_note_id, key_theme_mode}, key_id + " = ?", new String[]{String.valueOf(appWidgetId)}, null, null, null, null);
+        if (cursor.moveToNext()) {
+            data.setAppWidgetId(appWidgetId);
+            data.setAccountId(cursor.getLong(0));
+            data.setNoteId(cursor.getLong(1));
+            data.setThemeMode(cursor.getInt(2));
+        } else {
+            throw new NoSuchElementException();
+        }
+        cursor.close();
+        return data;
+    }
+
+    public void removeSingleNoteWidget(int appWidgetId) {
+        final SQLiteDatabase db = getWritableDatabase();
+        db.delete(table_widget_single_notes, key_id + " = ?", new String[]{String.valueOf(appWidgetId)});
+    }
+
+    public void createOrUpdateSingleNoteWidgetData(@NonNull SingleNoteWidgetData data) throws SQLException {
+        validateAccountId(data.getAccountId());
+        final SQLiteDatabase db = getWritableDatabase();
+        final ContentValues values = new ContentValues();
+        values.put(key_id, data.getAppWidgetId());
+        values.put(key_account_id, data.getAccountId());
+        values.put(key_note_id, data.getNoteId());
+        values.put(key_theme_mode, data.getThemeMode());
+        db.replaceOrThrow(table_widget_single_notes, null, values);
     }
 
     private static void validateAccountId(long accountId) {
