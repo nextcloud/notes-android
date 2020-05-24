@@ -981,15 +981,66 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * This function is used to get the sorting method of a category.
+     * This function is used to get the sorting method of a category by title.
+     * The sorting method of the category can be used to decide
+     * to use which sorting method to show the notes for each categories.
+     *
+     * @param accountId         The user accountID
+     * @param categoryTitle     The category title
+     * @return The sorting method in CategorySortingMethod enum format
+     */
+    public CategorySortingMethod getCategoryOrderByTitle(long accountId, String categoryTitle) {
+        validateAccountId(accountId);
+
+        long categoryId = getCategoryIdByTitle(accountId, categoryTitle);
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(table_category, new String[]{key_category_sorting_method},
+                key_category_id + " = ?", new String[]{String.valueOf(categoryId)},
+                null, null, null);
+        int orderIndex = 0;
+        while (cursor.moveToNext()) {
+            orderIndex = cursor.getInt(0);
+        }
+
+        return CategorySortingMethod.getCSM(orderIndex);
+    }
+
+    /**
+     * This method is used to modify the sorting method for one category by title.
+     * The user can determine use which sorting method to show the notes for a category.
+     * When the user changes the sorting method, this method should be called.
+     *
+     * @param accountId         The user accountID
+     * @param categoryTitle     The category title
+     * @param sortingMethod     The sorting method in CategorySortingMethod enum format
+     */
+    public void modifyCategoryOrderByTitle(
+            long accountId, String categoryTitle, CategorySortingMethod sortingMethod) {
+        validateAccountId(accountId);
+
+        long categoryId = getCategoryIdByTitle(accountId, categoryTitle);
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(key_category_sorting_method, sortingMethod.getCSMID());
+        db.update(table_category, values,
+                key_category_id + " = ?", new String[]{String.valueOf(categoryId)});
+    }
+
+    /**
+     * Gets the sorting method of a category, the category can be normal category or
+     * one of "All notes", "Favorite", and "Uncategorized".
+     * If category is one of these three, sorting method will be got from android.content.SharedPreference.
      * The sorting method of the category can be used to decide
      * to use which sorting method to show the notes for each categories.
      *
      * @param accountId     The user accountID
      * @param category      The category
-     * @return The sorting method in CategorySortingMethod enum format
+     * @return
      */
-    public CategorySortingMethod getCategoryOrderByTitle(long accountId, @NonNull Category category) {
+    public CategorySortingMethod getCategoryOrder(long accountId, Category category) {
         validateAccountId(accountId);
 
         final Context ctx = getContext().getApplicationContext();
@@ -1000,45 +1051,39 @@ public class NotesDatabase extends AbstractNotesDatabase {
             if (category.favorite != null && category.favorite) {
                 // Favorite
                 orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                        ' ' + ctx.getString(R.string.label_favorites),
+                                ' ' + ctx.getString(R.string.label_favorites),
                         0);
             } else {
                 // All notes
                 orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                        ' ' + ctx.getString(R.string.label_all_notes),
+                                ' ' + ctx.getString(R.string.label_all_notes),
                         0);
             }
         } else if (category.category.isEmpty()) {
             // Uncategorized
             orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                    ' ' + ctx.getString(R.string.action_uncategorized),
+                            ' ' + ctx.getString(R.string.action_uncategorized),
                     0);
         } else {
-            long categoryId = getCategoryIdByTitle(accountId, category.category);
-
-            SQLiteDatabase db = getReadableDatabase();
-            Cursor cursor = db.query(table_category, new String[]{key_category_sorting_method},
-                    key_category_id + " = ?", new String[]{String.valueOf(categoryId)},
-                    null, null, null);
-            while (cursor.moveToNext()) {
-                orderIndex = cursor.getInt(0);
-            }
+            return getCategoryOrderByTitle(accountId, category.category);
         }
 
         return CategorySortingMethod.getCSM(orderIndex);
     }
 
     /**
-     * This method is used to modify the sorting method for one category.
+     * Modifies the sorting method for one category, the category can be normal category or
+     * one of "All notes", "Favorite", and "Uncategorized".
+     * If category is one of these three, sorting method will be modified in android.content.SharedPreference.
      * The user can determine use which sorting method to show the notes for a category.
      * When the user changes the sorting method, this method should be called.
      *
-     * @param accountId     The user accountID
-     * @param category      The category
-     * @param sortingMethod The sorting method in CategorySortingMethod enum format
+     * @param accountId         The user accountID
+     * @param category          The category to be modified
+     * @param sortingMethod     The sorting method in CategorySortingMethod enum format
      */
-    public void modifyCategoryOrderByTitle(
-            long accountId, @NonNull Category category, CategorySortingMethod sortingMethod) {
+    public void modifyCategoryOrder(
+            long accountId, Category category, CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
 
         final Context ctx = getContext().getApplicationContext();
@@ -1048,28 +1093,22 @@ public class NotesDatabase extends AbstractNotesDatabase {
             if (category.favorite != null && category.favorite) {
                 // Favorite
                 sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                         ' ' + ctx.getString(R.string.label_favorites),
+                                ' ' + ctx.getString(R.string.label_favorites),
                         orderIndex);
             } else {
                 // All notes
                 sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                         ' ' + ctx.getString(R.string.label_all_notes),
+                                ' ' + ctx.getString(R.string.label_all_notes),
                         orderIndex);
             }
         } else if (category.category.isEmpty()) {
             // Uncategorized
             sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                    ' ' + ctx.getString(R.string.action_uncategorized),
+                            ' ' + ctx.getString(R.string.action_uncategorized),
                     orderIndex);
         } else {
-            long categoryId = getCategoryIdByTitle(accountId, category.category);
-
-            SQLiteDatabase db = getWritableDatabase();
-
-            ContentValues values = new ContentValues();
-            values.put(key_category_sorting_method, sortingMethod.getCSMID());
-            db.update(table_category, values,
-                    key_category_id + " = ?", new String[]{String.valueOf(categoryId)});
+            modifyCategoryOrderByTitle(accountId, category.category, sortingMethod);
+            return;
         }
         sp.apply();
     }

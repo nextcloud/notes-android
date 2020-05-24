@@ -619,7 +619,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
             return;
         }
         MenuItem sortMethod = currentMenu.findItem(R.id.sorting_method);
-        CategorySortingMethod method = db.getCategoryOrderByTitle(localAccount.getId(), navigationSelection);
+        CategorySortingMethod method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
         if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
             sortMethod.setIcon(R.drawable.alphabetical_asc);
         } else {
@@ -639,14 +639,14 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
         if (item.getItemId() == R.id.sorting_method) {
             Log.d("onOptionsItemSelected", navigationSelection.category + localAccount.getId());
-            method = db.getCategoryOrderByTitle(localAccount.getId(), navigationSelection);
+            method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
 
             if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
                 method = CategorySortingMethod.SORT_MODIFIED_DESC;
             } else {
                 method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
             }
-            db.modifyCategoryOrderByTitle(localAccount.getId(), navigationSelection, method);
+            db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
             refreshLists();
             return true;
         } else {
