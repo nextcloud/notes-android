@@ -31,7 +31,7 @@
             android:src="@drawable/ic_launcher_foreground" />
 
         <TextView
-            android:id="@+id/widget_note_list_title_tv"
+            android:id="@+id/widget_note_list_title_tv_dark"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_toStartOf="@id/widget_note_list_create_icon_dark"
