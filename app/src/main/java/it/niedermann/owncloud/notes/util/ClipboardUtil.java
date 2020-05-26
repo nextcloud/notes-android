@@ -43,6 +43,7 @@ public class ClipboardUtil {
         return true;
     }
 
+    @Nullable
     public static String getClipboardURLorNull(Context context) {
         final ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
         if (clipboardManager == null) {
@@ -59,7 +60,7 @@ public class ClipboardUtil {
         if (clipItem == null) {
             return null;
         }
-        CharSequence clipText = clipItem.getText();
+        final CharSequence clipText = clipItem.getText();
         if (TextUtils.isEmpty(clipText)) {
             return null;
         }
