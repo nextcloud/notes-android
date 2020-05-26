@@ -1,62 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/widget_background_dark_theme"
     android:orientation="vertical"
-    android:background="@color/widget_background_dark_theme">
+    tools:background="@null">
 
     <!-- Widget header -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_note_list_header_height"
-        android:background="@color/primary"
+        android:background="@drawable/ic_launcher_background"
         android:padding="@dimen/widget_note_list_hdr_padding">
 
         <ImageView
             android:id="@+id/widget_note_header_icon_dark"
             android:layout_width="@dimen/widget_note_list_icon_width"
             android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:paddingStart="4dp"
+            android:contentDescription="@string/widget_app_launcher_contentDescription"
+            android:paddingStart="@dimen/widget_note_list_outer_padding"
+            android:paddingLeft="@dimen/widget_note_list_outer_padding"
             android:paddingEnd="@dimen/widget_note_list_inner_padding"
-            android:paddingLeft="4dp"
             android:paddingRight="@dimen/widget_note_list_inner_padding"
-            android:contentDescription="@string/widget_app_launcher_contentDescription" />
+            android:scaleX="2"
+            android:scaleY="2"
+            android:src="@drawable/ic_launcher_foreground" />
 
         <TextView
-            android:id="@+id/widget_note_list_title_tv_dark"
-            android:layout_width="match_parent"
+            android:id="@+id/widget_note_list_title_tv"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textColor="@color/fg_default_dark_theme"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_toRightOf="@id/widget_note_header_icon_dark"
-            android:layout_toEndOf="@id/widget_note_header_icon_dark"
             android:layout_toStartOf="@id/widget_note_list_create_icon_dark"
             android:layout_toLeftOf="@id/widget_note_list_create_icon_dark"
+            android:layout_toEndOf="@id/widget_note_header_icon_dark"
+            android:layout_toRightOf="@id/widget_note_header_icon_dark"
             android:gravity="center_vertical"
             android:paddingStart="@dimen/widget_note_list_outer_padding"
-            android:paddingEnd="@dimen/widget_note_list_inner_padding"
             android:paddingLeft="@dimen/widget_note_list_outer_padding"
+            android:paddingEnd="@dimen/widget_note_list_inner_padding"
             android:paddingRight="@dimen/widget_note_list_inner_padding"
-            tools:text="@string/app_name"/>
+            android:textColor="@color/widget_fg_contrast"
+            android:textSize="18sp"
+            tools:text="@string/app_name" />
 
         <ImageView
             android:id="@+id/widget_note_list_create_icon_dark"
             android:layout_width="@dimen/widget_note_list_icon_width"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_add_white_24dp"
-            android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/widget_create_note"
             android:paddingStart="@dimen/widget_note_list_inner_padding"
-            android:paddingEnd="@dimen/widget_note_list_outer_padding"
             android:paddingLeft="@dimen/widget_note_list_inner_padding"
+            android:paddingEnd="@dimen/widget_note_list_outer_padding"
             android:paddingRight="@dimen/widget_note_list_outer_padding"
-            android:contentDescription="@string/widget_create_note" />
+            android:src="@drawable/ic_add_white_24dp" />
 
     </RelativeLayout>
     <!-- End header -->

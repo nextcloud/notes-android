@@ -44,7 +44,6 @@
             android:paddingRight="@dimen/widget_note_list_inner_padding"
             android:textColor="@color/widget_fg_contrast"
             android:textSize="18sp"
-            android:textStyle="bold"
             tools:text="@string/app_name" />
 
         <ImageView

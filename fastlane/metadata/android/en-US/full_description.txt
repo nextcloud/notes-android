@@ -12,6 +12,7 @@ Companion app to Nextcloud Notes.
   * MarkDown-Rendering ✨
   * Kontext-basierte Formatierung 🧰
   * Dark Mode 🌙
+  * Single note widget and note list widget 📊
   * Übersetzt in viele Sprachen 🌎
 
 
