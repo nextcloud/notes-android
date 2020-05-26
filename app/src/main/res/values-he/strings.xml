@@ -131,6 +131,7 @@
     <string name="simple_beta">בטא</string>
     <string name="could_not_copy_to_clipboard">לא ניתן להעתיק ללוח הגזירים</string>
     <string name="error_dialog_title">שוד ושבר - מה עכשיו? 🙁</string>
+    <string name="error_dialog_check_maintenance">נא לבדוק שעותק ה־Nextcloud שלך אינו במצב תחזוקה כרגע.</string>
     <string name="error_dialog_we_need_info">אנו זקוקים לפירוט הטכני הבא כדי לסייע לך:</string>
     <string name="shared_text_empty">הטקסט ששותף היה ריק</string>
     <string name="append_to_note">הוספה לסוף הפתק</string>

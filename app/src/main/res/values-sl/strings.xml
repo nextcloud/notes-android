@@ -54,6 +54,7 @@
     <string name="error_json">Ali je program Notes na strežniku omogočen?</string>
     <string name="error_no_network">Ni omrežne povezave</string>
     <string name="error_files_app">Ali je program za upravljanje datotek »files« nameščen?</string>
+    <string name="error_token_mismatch">Ni se mogoče povezati s programom Datoteke.</string>
     <string name="error_insufficient_storage">Shramba strežnika je polna.</string>
     <string name="error_unknown">Prišlo je do neznane napake.</string>
 
@@ -129,8 +130,23 @@
     <string name="unlock_notes">Odkleni zabeležke</string>
     <string name="simple_beta">Preizkusno</string>
     <string name="could_not_copy_to_clipboard">Predmeta ni mogoče kopirati v odložišče</string>
+    <string name="error_dialog_title">Ojoj, kaj pa zdaj? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Poskusite vsiliti končanje programa in ga ponovno zagnati. Morda je težava v neustrezni povezavi z okoljem Nextcloud</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Če se težava še naprej pojavlja, poskusite počistiti podatke programa Nextcloud in Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Podatke in shrambo je mogoče počistiti med nastavitvami → Programi → Nextcloud / Nextcloud Notes → Shramba → Počisti shrambo.</string>
     <string name="error_dialog_tip_files_outdated">Program Nextcloud je očitno starejše različice. Posodobite jo prek Trgovine Play ali s posodabljalnikom F-Droid.</string>
+    <string name="error_dialog_tip_files_force_stop">Kaže, da je nekaj narobe s programom Nextcloud. Poskusite vsiljeno zaustaviti programa Nextcloud in Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">Vsiljeno zaustavljanje ni imelo ustreznega učinka. Poskusite lahko še počistiti podatke shrambe obeh programov.</string>
+    <string name="error_dialog_timeout_instance">V podanem času program ni pridobil ustreznega odziva strežnika. Prepričajte se, da program deluje pravilno.</string>
+    <string name="error_dialog_timeout_toggle">Preverite omrežno povezavo. Včasih preklapljanje med mobilnimi in Wi-Fi podatki razreši težavo.</string>
+    <string name="error_dialog_check_server">Prejet je napačen odziv s strežnika. Preverite, ali imate dostop do zabeležk prek spletnega vmesnika.</string>
+    <string name="error_dialog_check_server_logs">Prišlo je do napake z namestitvijo Nextcloud. Preverite zapis dnevnika na strežniku.</string>
+    <string name="error_dialog_check_maintenance">Preverite, ali je morda namestitev Nextcloud trenutno v vzdrževalnem načinu.</string>
+    <string name="error_dialog_we_need_info">Z ustrezno pomoč potrebujemo nekaj tehničnih podrobnosti sistema:</string>
+    <string name="error_dialog_server_app_enabled">Prepričajte se, da ste namestili in omogočili tudi program »Notes« na strežniku.</string>
+    <string name="error_dialog_redirect">S strežnika je prejet odziv s kodo stanja HTTP 302, kar kaže na to, da program Notes ni nameščen, ali pa je napačno nastavljen. Napaka se pojavi tudi pri nekaterih določilih v datoteki .htaccess oziroma programih, kot je odjemalec OID.</string>
+    <string name="append_to_note">Pripni k zabeležki</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>
