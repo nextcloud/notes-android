@@ -410,6 +410,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         Cursor cursor = getReadableDatabase().rawQuery(rawQuery,
                 new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId),
                         search == null ? "%" : "%" + search.trim() + "%"});
+
         List<NavigationAdapter.CategoryNavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
             Resources res = getContext().getResources();
@@ -422,7 +423,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
                 icon = R.drawable.ic_work_grey600_24dp;
             }
-            categories.add(new NavigationAdapter.CategoryNavigationItem("category:" + cursor.getString(1), cursor.getString(1), cursor.getInt(1), icon, cursor.getLong(0)));
+            categories.add(new NavigationAdapter.CategoryNavigationItem("category:" + cursor.getString(1), cursor.getString(1), cursor.getInt(2), icon, cursor.getLong(0)));
         }
 
         cursor.close();
