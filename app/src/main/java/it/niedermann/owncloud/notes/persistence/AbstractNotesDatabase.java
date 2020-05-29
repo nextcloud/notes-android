@@ -32,7 +32,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 15;
+    private static final int database_version = 16;
     @NonNull
     private final Context context;
 
@@ -439,7 +439,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             tmpNotesCursor.close();
             db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);
         }
-        if (oldVersion < 15) {
+        if (oldVersion < 16) {
             // add a new column to store the sorting method for a category note list
             db.execSQL("ALTER TABLE " + table_category + " ADD COLUMN " + key_category_sorting_method + " INTEGER DEFAULT 0");
         }
