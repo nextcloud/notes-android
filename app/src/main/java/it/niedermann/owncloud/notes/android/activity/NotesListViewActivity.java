@@ -111,6 +111,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
     protected ItemAdapter adapter = null;
 
+    // CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
     private Menu currentMenu;
 
     protected NotesDatabase db = null;
@@ -608,6 +609,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
         new LoadNotesListTask(localAccount.getId(), getApplicationContext(), callback, navigationSelection, query).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
+        // CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
         updateSortMethodIcon();
     }
 
@@ -615,6 +617,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon() {
+        // CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
         if (localAccount == null || currentMenu == null) {
             return;
         }
@@ -634,6 +637,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
         final String unexpectedSortMethod = "Unexpected sort method";
         CategorySortingMethod method;
 
@@ -661,6 +665,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
      */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        // CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
         currentMenu = menu;
         updateSortMethodIcon();
         return super.onPrepareOptionsMenu(menu);
@@ -931,6 +936,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
         mActionMode.finish();
         searchView.setIconified(true);
+        // CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
         refreshLists();
     }
 }

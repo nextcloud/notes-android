@@ -9,6 +9,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_search">Search</string>
+    <!-- CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603 -->
     <string name="action_sorting_method">Sorting method</string>
     <string name="simple_cancel">Cancel</string>
     <string name="simple_edit">Edit</string>
