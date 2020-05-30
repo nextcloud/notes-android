@@ -1082,7 +1082,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @return The sorting method in CategorySortingMethod enum format
      */
     public CategorySortingMethod getCategoryOrder(long accountId, Category category) {
-        // CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
         validateAccountId(accountId);
 
         final Context ctx = getContext().getApplicationContext();
@@ -1126,7 +1125,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
      */
     public void modifyCategoryOrder(
             long accountId, Category category, CategorySortingMethod sortingMethod) {
-        // CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
         validateAccountId(accountId);
 
         final Context ctx = getContext().getApplicationContext();
