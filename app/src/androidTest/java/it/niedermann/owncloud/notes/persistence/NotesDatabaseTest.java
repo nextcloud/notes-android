@@ -582,6 +582,7 @@ public class NotesDatabaseTest {
         db.deleteNote(noteID, DBStatus.VOID);
     }
 
+    // CS304 (manually written) Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
     @Test
     public void test_16_getAndModifyCategoryOrder() {
         // Normal categories
