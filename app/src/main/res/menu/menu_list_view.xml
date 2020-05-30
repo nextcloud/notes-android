@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.owncloudnotes.NotesListViewActivity">
-    <!-- CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603 -->
     <item
         android:id="@+id/sorting_method"
         android:title="@string/action_sorting_method"

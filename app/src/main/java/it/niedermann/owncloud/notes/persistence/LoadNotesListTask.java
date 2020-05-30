@@ -52,7 +52,6 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     protected List<Item> doInBackground(Void... voids) {
         List<DBNote> noteList;
         NotesDatabase db = NotesDatabase.getInstance(context);
-        // CS304 Issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/603
         noteList = db.searchNotes(accountId, searchQuery, category.category, category.favorite, db.getCategoryOrder(accountId, category));
 
         if (category.category == null) {
