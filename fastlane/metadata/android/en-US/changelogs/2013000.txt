@@ -1,2 +1,0 @@
-- Note list widget should create a note in it's respective category (#817)
-- "Link" functionality in text menu causes error (#841)

@@ -1,0 +1,5 @@
+- 📝 New app icon
+- 🐞 Note list widget should create a note in it's respective category (#817)
+- 🐞 "Link" functionality in text menu causes error (#841)
+- 🔧 Refactored some internals as groundwork for future development (#814 @Isaac-Graham, #754)
+- 🔧 Updated Single-Sign-On library to 0.5.1 and Glide to 4.11.0
