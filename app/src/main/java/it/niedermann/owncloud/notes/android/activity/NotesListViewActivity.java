@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -462,11 +460,11 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             binding.account.setShadowLayer(2, 0.5f, 0, Color.BLACK);
         }
 
-        final Drawable overflowDrawable = binding.accountArrow.getDrawable();
-        if (overflowDrawable != null) {
-            overflowDrawable.setColorFilter(textColor, PorterDuff.Mode.SRC_ATOP);
-            binding.accountArrow.setImageDrawable(overflowDrawable);
-        }
+//        final Drawable overflowDrawable = binding.accountArrow.getDrawable();
+//        if (overflowDrawable != null) {
+//            overflowDrawable.setColorFilter(textColor, PorterDuff.Mode.SRC_ATOP);
+//            binding.accountArrow.setImageDrawable(overflowDrawable);
+//        }
 
         adapter.applyBrand(mainColor, textColor);
         adapterCategories.applyBrand(mainColor, textColor);
