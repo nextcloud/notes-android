@@ -31,8 +31,6 @@ public class AboutActivity extends LockedActivity {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-
-        applyBrandToPrimaryToolbar(mainColor, textColor, binding.toolbar);
     }
 
     private class TabsPagerAdapter extends FragmentPagerAdapter {

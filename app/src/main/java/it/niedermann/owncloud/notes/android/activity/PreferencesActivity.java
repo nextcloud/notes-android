@@ -32,6 +32,5 @@ public class PreferencesActivity extends LockedActivity {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(mainColor, textColor, binding.toolbar);
     }
 }
