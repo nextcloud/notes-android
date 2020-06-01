@@ -3,6 +3,8 @@
     <!-- Colors -->
 
     <color name="primary">#ffffff</color>
+    <color name="contrast">#121212</color>
+
     <color name="defaultBrand">#0082C9</color>
 
     <color name="bg_highlighted">#eee</color>
