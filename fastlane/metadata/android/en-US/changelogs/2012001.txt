@@ -1,0 +1,1 @@
+- 🐞 Fix upgrading from version <= 1.0.1 to a current version

@@ -67,11 +67,11 @@
     <string name="about_translators_transifex">Nextcloud komunita na &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testeri</string>
     <string name="about_source_title">Zdrojový kód</string>
-    <string name="about_source">Tento projekt je prevádzkovaný na GitHube: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">Tento projekt je prevádzkovaný na GitHube: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problémy</string>
-    <string name="about_issues">Návrhy na vylepšenia, požiadavky na nové funkcie a chyby možete nahlásiť na GitHub sledovači problémov: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Návrhy na vylepšenia, požiadavky na nové funkcie a chyby môžete nahlásiť na GitHub sledovači problémov: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Preložiť</string>
-    <string name="about_translate">Pripojte sa do tímu Nextcloud na stránke Transifex a pomožte nám s prekladom tejto aplikácie: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Pripojte sa do tímu Nextcloud na stránke Transifex a pomožte nám s prekladom tejto aplikácie: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licencia aplikácie</string>
     <string name="about_app_license">Táto aplikácie je licencovaná pod GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Zobraziť licenciu</string>
@@ -145,6 +145,11 @@
     <string name="error_dialog_insufficient_storage">Vo vašej inštancii Nexcloudu nie je na úložisku voľné miesto. Aby bolo možné synchronizovať vaše miestne zmeny s vaším cloudom, je potrebné najprv zmazať niektoré súbory.</string>
     <string name="error_dialog_contact_us">Ak problémy pretrvávajú, neváhajte nás kontaktovať. Kontaktné informácie nájdete v časti \"O nás\" v bočnom paneli.</string>
     <string name="error_dialog_we_need_info">Aby sme vám pomohli, potrebujeme následovné technické informácie:</string>
+    <string name="error_dialog_server_app_enabled">Uistite sa, že ste na serveri nainštalovali a povolili aplikáciu Poznámky.</string>
+    <string name="error_dialog_redirect">Váš server odpovedal stavovým kódom HTTP 302, čo znamená, že na svojom serveri nemáte nainštalovanú aplikáciu Notes alebo je niečo nesprávne nastavené. Môže to byť spôsobené vlastnými zmenami v súbore .htaccess alebo aplikáciami Nextcloud, ako je OID Client.</string>
+    <string name="added_content">Pridané \"%1$s\"</string>
+    <string name="shared_text_empty">Zdieľaný text bol prázdny</string>
+    <string name="append_to_note">Pripojiť k poznámke</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

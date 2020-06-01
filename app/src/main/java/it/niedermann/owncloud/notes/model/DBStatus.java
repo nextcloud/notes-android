@@ -12,12 +12,6 @@ public enum DBStatus {
     VOID(""),
 
     /**
-     * LOCAL_CREATED is not used anymore, since a newly created note has REMOTE_ID=0
-     */
-    @Deprecated
-    LOCAL_CREATED("LOCAL_CREATED"),
-
-    /**
      * LOCAL_EDITED means that a Note was created and/or changed since the last successful synchronization.
      * If it was newly created, then REMOTE_ID is 0
      */

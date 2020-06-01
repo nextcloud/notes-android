@@ -55,7 +55,7 @@
     <string name="error_no_network">Sin conexión de red</string>
     <string name="error_files_app">¿Ha instalado los archivos de la aplicación?</string>
     <string name="error_token_mismatch">No se puede conectar a la aplicación archivos.</string>
-    <string name="error_insufficient_storage">lmacenamiento en el servidor está lleno.</string>
+    <string name="error_insufficient_storage">Tu espacio en el servidor está lleno.</string>
     <string name="error_unknown">Ha ocurrido un error desconocido.</string>
 
     <!-- About -->
@@ -65,7 +65,7 @@
     <string name="about_developers_title">Desarrolladores</string>
     <string name="about_translators_title">Traductores</string>
     <string name="about_translators_transifex">Comunidad de Nextcloud en &lt;a href=\"%1$s\">Transifex&lt;/a></string>
-    <string name="about_testers_title">Probadores</string>
+    <string name="about_testers_title">Testers</string>
     <string name="about_source_title">Código fuente</string>
     <string name="about_source">Este proyecto está alojado en GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemas</string>
@@ -113,9 +113,9 @@
     <string name="category_movies">Películas</string>
     <string name="category_movie">Película</string>
     <string name="category_work">Trabajo</string>
-    <string name="account_already_imported">La cuenta ha ha sido importada</string>
+    <string name="account_already_imported">La cuenta ha sido importada</string>
     <string name="no_notes_yet">Aún no hay notas</string>
-    <string name="no_notes_yet_description">rear una nota nueva</string>
+    <string name="no_notes_yet_description">Pulsa el botón + para crear una nota nueva</string>
     <string name="could_not_load_preview_two_digit_numbered_list">No se ha podido cargar la vista previa. Por favor, comprueba si hay un ítem de lista numerada de dos dígitos sin contenido.</string>
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
@@ -145,6 +145,11 @@
     <string name="error_dialog_insufficient_storage">Su instancia de Nextcloud no tiene espacio libre de almacenamiento. Por favor elimine algunos archivos para sincronizar sus cambios locales con su nube.</string>
     <string name="error_dialog_contact_us">Por favor, no dude en contactar con nosotros si el problema persiste. Puede encontrar nuestra información de contacto en la sección acerca de en la barra lateral.</string>
     <string name="error_dialog_we_need_info">Necesitamos la siguiente información técnica para ayudarle:</string>
+    <string name="error_dialog_server_app_enabled">Por favor, asegúrate de que has instalado y activado la app «Notas» en tu servidor.</string>
+    <string name="error_dialog_redirect">Tu servidor respondió con el código de estado HTTP 302, lo que implica que no está instalada la aplicación Deck en su servidor o que algo está mal configurado. Esto puede estar causado por anulaciones personalizadas en un  archivo .htaccess o por aplicaciones de Nexcloud como OID Client. </string>
+    <string name="added_content">Se ha añadido «%1$s»</string>
+    <string name="shared_text_empty">El texto compartido estaba vacío</string>
+    <string name="append_to_note">Añadir a la nota</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

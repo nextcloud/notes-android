@@ -40,10 +40,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -101,8 +103,8 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
      */
     private boolean notAuthorizedAccountHandled = false;
 
-    private SingleSignOnAccount ssoAccount;
-    private LocalAccount localAccount;
+    protected SingleSignOnAccount ssoAccount;
+    protected LocalAccount localAccount;
 
     protected DrawerLayoutBinding binding;
     protected ActivityNotesListViewBinding activityBinding;
@@ -114,6 +116,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
     protected ItemAdapter adapter = null;
 
+    protected NotesDatabase db = null;
     private ActionBarDrawerToggle drawerToggle;
     private NavigationAdapter adapterCategories;
     private NavigationItem itemRecent;
@@ -122,7 +125,6 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
-    private NotesDatabase db = null;
     private SearchView searchView = null;
     private final ISyncCallback syncCallBack = () -> {
         adapter.clearSelection(listView);
@@ -299,7 +301,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     }
 
     private void setupActionBar() {
-        Toolbar toolbar = binding.activityNotesListView.notesListActivityActionBar;
+        Toolbar toolbar = binding.activityNotesListView.toolbar;
         setSupportActionBar(toolbar);
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
         drawerToggle.setDrawerIndicatorEnabled(true);
@@ -334,7 +336,9 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                     Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                     final Capabilities capabilities;
                     try {
-                        capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
+                        capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, localAccount.getCapabilitiesETag());
+                        db.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
+                        db.updateBrand(localAccount.getId(), capabilities);
                         db.updateBrand(localAccount.getId(), capabilities);
                         localAccount.setColor(Color.parseColor(capabilities.getColor()));
                         localAccount.setTextColor(Color.parseColor(capabilities.getTextColor()));
@@ -342,7 +346,11 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                         db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
                         Log.i(TAG, capabilities.toString());
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
+                            Log.i(TAG, "Capabilities not modified.");
+                        } else {
+                            e.printStackTrace();
+                        }
                     } finally {
                         // Even if the capabilities endpoint makes trouble, we can still try to synchronize the notes
                         synchronize();
@@ -748,7 +756,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
                         Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
                         try {
                             Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-                            final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
+                            final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
                             db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
                             Log.i(TAG, capabilities.toString());
                             runOnUiThread(() -> {

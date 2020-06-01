@@ -86,7 +86,7 @@
     <string name="about_app_license_title">App license</string>
     <string name="about_app_license">This application is licensed under the GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">View license</string>
-    <string name="about_app_icon_author" translatable="false">&lt;a href="http://jancborchardt.net/">Jan C. Borchardt&lt;/a> (&lt;a href="https://github.com/owncloud/notes/commits/master/img/notes.svg">GitHub&lt;/a>)</string>
+    <string name="about_app_icon_author" translatable="false">&lt;a href="http://jancborchardt.net/">Jan C. Borchardt&lt;/a> (&lt;a href="https://github.com/nextcloud/notes/blob/76d15214f80f2bf7ea08427bff73ad145128f090/img/notes.svg">GitHub&lt;/a>)</string>
     <string name="about_icons_disclaimer_title">Icons</string>
     <string name="about_icons_disclaimer">&lt;p>Original icon made by %1$s&lt;/p>&lt;p>All further icons used by this app are &lt;a href="https://materialdesignicons.com/">Material Design Icons&lt;/a> made by Google Inc. and licensed under the Apache 2.0 License.&lt;/p></string>
     <string name="about_credits_tab_title">Credits</string>
@@ -181,6 +181,11 @@
     <string name="error_dialog_insufficient_storage">Your Nextcloud instance has no free storage left. Please delete some files to sync your local changes into your cloud.</string>
     <string name="error_dialog_contact_us">Please do not hesitate to contact us if the issues persist. You can find our contact information in the about section in the sidebar.</string>
     <string name="error_dialog_we_need_info">We need the following technical information to help you:</string>
+    <string name="error_dialog_server_app_enabled">Please make sure you have installed and enabled the "Notes" app on your server.</string>
+    <string name="error_dialog_redirect">Your server did respond with a HTTP 302 status code, which implies, that you do not have installed the Notes app on your server or something is misconfigured. This can be caused by custom overrides in a .htaccess-file or by Nextcloud apps like OID Client.</string>
+    <string name="added_content">Added "%1$s"</string>
+    <string name="shared_text_empty">Shared text was empty</string>
+    <string name="append_to_note">Append to note</string>
     <string name="settings_branding">Branding</string>
     <string name="simple_security">Security</string>
     <string name="simple_appearance">Appearance</string>

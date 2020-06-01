@@ -130,7 +130,6 @@
     <string name="could_not_copy_to_clipboard">Nepavyko nukopijuoti į iškarpinę</string>
     <string name="error_dialog_title">O, ne - Kas dabar? 🙁</string>
     <string name="error_dialog_we_need_info">Norint jums padėti, mums reikia techninės informacijos:</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>

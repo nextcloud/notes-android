@@ -13,8 +13,10 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.net.HttpURLConnection;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -45,11 +47,18 @@ public class CapabilitiesWorker extends Worker {
             try {
                 final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount);
+                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag());
+                db.updateCapabilitiesETag(account.getId(), capabilities.getETag());
                 db.updateBrand(account.getId(), capabilities);
                 db.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
             } catch (Exception e) {
+                if (e instanceof NextcloudHttpRequestFailedException) {
+                    if (((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
+                        Log.i(TAG, "Capabilities not modified.");
+                        return Result.success();
+                    }
+                }
                 e.printStackTrace();
                 return Result.failure();
             }

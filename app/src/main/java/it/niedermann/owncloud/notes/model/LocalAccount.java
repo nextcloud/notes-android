@@ -22,6 +22,7 @@ public class LocalAccount {
     private String accountName;
     private String url;
     private String etag;
+    private String capabilitiesETag;
     private long modified;
     private ApiVersion preferredApiVersion;
     @ColorInt
@@ -81,6 +82,14 @@ public class LocalAccount {
         return preferredApiVersion;
     }
 
+    public String getCapabilitiesETag() {
+        return capabilitiesETag;
+    }
+
+    public void setCapabilitiesETag(String capabilitiesETag) {
+        this.capabilitiesETag = capabilitiesETag;
+    }
+
     /**
      * @param availableApiVersions <code>["0.2", "1.0", ...]</code>
      */
@@ -138,6 +147,7 @@ public class LocalAccount {
                 ", preferredApiVersion='" + preferredApiVersion + '\'' +
                 ", color=" + color +
                 ", textColor=" + textColor +
+                ", capabilitiesETag=" + capabilitiesETag +
                 '}';
     }
 }
