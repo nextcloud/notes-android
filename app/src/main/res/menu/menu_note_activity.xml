@@ -9,7 +9,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_edit"
-        android:icon="@drawable/ic_edit_white_24dp"
+        android:icon="@drawable/ic_edit_grey600_24dp"
         android:orderInCategory="60"
         android:title="@string/simple_edit"
         app:showAsAction="ifRoom" />

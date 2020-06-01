@@ -75,6 +75,7 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
+import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
 public class NotesListViewActivity extends LockedActivity implements NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
@@ -447,6 +448,9 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     public void applyBrand(int mainColor, int textColor) {
         applyBrandToPrimaryToolbar(mainColor, textColor, activityBinding.toolbar);
         applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
+
+        // TODO We assume, that the background of the spinner is always white
+        activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : Color.BLACK);
         binding.headerViewBackground.setBackgroundColor(mainColor);
         binding.appName.setTextColor(textColor);
         binding.account.setTextColor(textColor);

@@ -53,7 +53,7 @@ public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLo
         binding.noteCategory.setText(Html.fromHtml(note.getCategory()));
 
         DrawableCompat.setTint(binding.noteCategory.getBackground(), mainColor);
-        binding.noteCategory.setTextColor(Notes.isDarkThemeActive(binding.getRoot().getContext()) ? Color.WHITE : Color.BLACK);
+        binding.noteCategory.setTextColor(Notes.isDarkThemeActive(binding.getRoot().getContext()) ? textColor : Color.BLACK);
 
         binding.noteExcerpt.setText(Html.fromHtml(note.getExcerpt()));
         binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);

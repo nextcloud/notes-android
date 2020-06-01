@@ -13,7 +13,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.preference.PreferenceManager;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.util.Notes;
 
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
@@ -39,9 +38,9 @@ public class BrandingUtil {
         if (BrandingUtil.isBrandingEnabled(context)) {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
             Log.v(TAG, "--- Read: shared_preference_theme_main");
-            return sharedPreferences.getInt(pref_key_branding_main, context.getApplicationContext().getResources().getColor(R.color.primary));
+            return sharedPreferences.getInt(pref_key_branding_main, context.getApplicationContext().getResources().getColor(R.color.defaultBrand));
         } else {
-            return context.getResources().getColor(R.color.primary);
+            return context.getResources().getColor(R.color.defaultBrand);
         }
     }
 
@@ -78,11 +77,12 @@ public class BrandingUtil {
      */
     @ColorInt
     public static int getSecondaryForegroundColorDependingOnTheme(@NonNull Context context, @ColorInt int mainColor) {
-        final boolean isDarkTheme = Notes.getAppTheme(context) == DarkModeSetting.DARK;
-        if (isDarkTheme && !contrastRatioIsSufficient(mainColor, Color.BLACK)) {
+        final int primaryColor = context.getResources().getColor(R.color.primary);
+        final boolean isDarkTheme = Notes.isDarkThemeActive(context);
+        if (isDarkTheme && !contrastRatioIsSufficient(mainColor, primaryColor)) {
             Log.v(TAG, "Contrast ratio between brand color " + String.format("#%06X", (0xFFFFFF & mainColor)) + " and dark theme is too low. Falling back to WHITE as brand color.");
             return Color.WHITE;
-        } else if (!isDarkTheme && !contrastRatioIsSufficient(mainColor, Color.WHITE)) {
+        } else if (!isDarkTheme && !contrastRatioIsSufficient(mainColor, primaryColor)) {
             Log.v(TAG, "Contrast ratio between brand color " + String.format("#%06X", (0xFFFFFF & mainColor)) + " and light theme is too low. Falling back to BLACK as brand color.");
             return Color.BLACK;
         } else {

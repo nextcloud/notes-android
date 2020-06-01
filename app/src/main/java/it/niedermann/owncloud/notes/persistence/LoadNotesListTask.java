@@ -45,7 +45,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         this.searchQuery = searchQuery;
         this.accountId = accountId;
         this.searchBackground = context.getResources().getColor(R.color.bg_highlighted);
-        this.searchForeground = DisplayUtils.getForeground(Integer.toHexString(this.searchBackground)) ? Color.WHITE : context.getResources().getColor(R.color.primary);
+        this.searchForeground = DisplayUtils.getForeground(Integer.toHexString(this.searchBackground)) ? Color.WHITE : context.getResources().getColor(R.color.defaultBrand);
     }
 
     @Override

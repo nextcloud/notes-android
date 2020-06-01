@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <item name="windowActionModeOverlay">true</item>
+        <item name="colorPrimary">@color/primary</item>
         <item name="android:statusBarColor" tools:targetApi="lollipop">?attr/colorPrimary</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">@bool/isDayMode</item>
+        <item name="android:actionModeBackground">?attr/colorPrimary</item>
     </style>
 
     <style name="fab">
@@ -16,5 +18,7 @@
 
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splashscreen</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
 </resources>

@@ -38,7 +38,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     public <T extends Context & NoteClickListener> ItemAdapter(@NonNull T context) {
         this.context = context;
         this.noteClickListener = context;
-        this.mainColor = context.getResources().getColor(R.color.primary);
+        this.mainColor = context.getResources().getColor(R.color.defaultBrand);
         this.textColor = context.getResources().getColor(android.R.color.white);
     }
 

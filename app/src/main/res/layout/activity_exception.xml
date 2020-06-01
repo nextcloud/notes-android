@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -55,7 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:text="@string/simple_close" />
+            android:text="@string/simple_close"
+            android:textColor="@color/defaultBrand" />
 
         <Button
             android:id="@+id/copy"
@@ -65,7 +67,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
             android:layout_weight=".5"
-            android:background="@color/primary"
+            android:background="@color/defaultBrand"
             android:foreground="?attr/selectableItemBackground"
             android:text="@string/simple_copy"
             android:textColor="@color/fg_contrast"
