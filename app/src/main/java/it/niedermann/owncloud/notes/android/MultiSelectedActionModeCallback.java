@@ -23,6 +23,7 @@ import java.util.List;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserDialogFragment;
+import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
@@ -88,7 +89,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                     String deletedSnackbarTitle = deletedNotes.size() == 1
                             ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
                             : context.getString(R.string.bulk_notes_deleted, deletedNotes.size());
-                    Snackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
+                    BrandedSnackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                             .setAction(R.string.action_undo, (View v) -> {
                                 db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
                                 for (DBNote deletedNote : deletedNotes) {
@@ -98,7 +99,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                                 String restoreSnackbarTitle = deletedNotes.size() == 1
                                         ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
                                         : context.getString(R.string.bulk_notes_restored, deletedNotes.size());
-                                Snackbar.make(viewProvider.getView(), restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
+                                BrandedSnackbar.make(viewProvider.getView(), restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
                                         .show();
                             })
                             .show();

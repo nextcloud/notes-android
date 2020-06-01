@@ -53,6 +53,7 @@ import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
 import it.niedermann.owncloud.notes.android.fragment.ExceptionDialogFragment;
+import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
@@ -772,7 +773,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                         } catch (SQLiteConstraintException e) {
                             if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
                                 runOnUiThread(() -> {
-                                    Snackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
+                                    BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
                                     selectAccount(ssoAccount.name);
                                     this.accountChooserActive = false;
                                     binding.accountChooser.setVisibility(View.GONE);
@@ -893,7 +894,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                 Log.d(TAG, "Network is connected, but sync is not possible");
             } else {
                 Log.d(TAG, "Sync is not possible, because network is not connected");
-                Snackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
             }
         }
     }

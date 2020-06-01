@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
@@ -78,12 +79,12 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         if (viewProvider == null) {
                             Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
                         } else {
-                            Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
+                            BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
                                     .setAction(R.string.action_undo, (View v) -> {
                                         db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
                                         db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
                                         refreshLists.run();
-                                        Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
+                                        BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
                                     })
                                     .show();

@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.tabs.TabLayout;
 
 public abstract class BrandedActivity extends AppCompatActivity implements Branded {
 
@@ -27,12 +26,5 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
             @ColorInt final int textColor = BrandingUtil.readBrandTextColor(this);
             applyBrand(mainColor, textColor);
         }
-    }
-
-    protected void applyBrandToPrimaryTabLayout(@ColorInt int mainColor, @ColorInt int textColor, @NonNull TabLayout tabLayout) {
-        tabLayout.setBackgroundColor(mainColor);
-        tabLayout.setTabTextColors(textColor, textColor);
-        tabLayout.setTabIconTint(ColorStateList.valueOf(textColor));
-        tabLayout.setSelectedTabIndicatorColor(textColor);
     }
 }
