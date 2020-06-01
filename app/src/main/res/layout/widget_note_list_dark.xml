@@ -38,14 +38,16 @@
             android:layout_toLeftOf="@id/widget_note_list_create_icon_dark"
             android:layout_toEndOf="@id/widget_note_header_icon_dark"
             android:layout_toRightOf="@id/widget_note_header_icon_dark"
+            android:ellipsize="middle"
             android:gravity="center_vertical"
             android:paddingStart="@dimen/widget_note_list_outer_padding"
             android:paddingLeft="@dimen/widget_note_list_outer_padding"
             android:paddingEnd="@dimen/widget_note_list_inner_padding"
             android:paddingRight="@dimen/widget_note_list_inner_padding"
+            android:singleLine="true"
             android:textColor="@color/widget_fg_contrast"
             android:textSize="18sp"
-            tools:text="@string/app_name" />
+            tools:text="@tools:sample/lorem/random" />
 
         <ImageView
             android:id="@+id/widget_note_list_create_icon_dark"
