@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Layout;
@@ -41,6 +42,13 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private int mainColor;
     @ColorInt
     private int textColor;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        this.mainColor = getResources().getColor(R.color.defaultBrand);
+        this.textColor = Color.WHITE;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

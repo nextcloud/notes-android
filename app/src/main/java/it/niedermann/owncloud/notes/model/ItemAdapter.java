@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         this.context = context;
         this.noteClickListener = context;
         this.mainColor = context.getResources().getColor(R.color.defaultBrand);
-        this.textColor = context.getResources().getColor(android.R.color.white);
+        this.textColor = Color.WHITE;
     }
 
     /**

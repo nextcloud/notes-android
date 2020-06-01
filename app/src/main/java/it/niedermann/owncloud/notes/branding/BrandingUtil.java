@@ -49,7 +49,7 @@ public class BrandingUtil {
         if (isBrandingEnabled(context)) {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
             Log.v(TAG, "--- Read: shared_preference_theme_text");
-            return sharedPreferences.getInt(pref_key_branding_text, context.getApplicationContext().getResources().getColor(android.R.color.white));
+            return sharedPreferences.getInt(pref_key_branding_text, Color.WHITE);
         } else {
             return Color.WHITE;
         }
