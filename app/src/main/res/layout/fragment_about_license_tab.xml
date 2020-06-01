@@ -22,8 +22,9 @@
             android:padding="10dp"
             android:text="@string/about_app_license" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/about_app_license_button"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_app_license_button" />

@@ -8,7 +8,7 @@ public class SectionItem implements Item {
         this.title = title;
     }
 
-    public String geTitle() {
+    public String getTitle() {
         return title;
     }
 

@@ -3,7 +3,6 @@
     <!-- Colors -->
 
     <color name="primary">#0082C9</color>
-    <color name="primary_dark">#286090</color>
 
     <color name="bg_highlighted">#eee</color>
     <color name="bg_normal">#ffffff</color>

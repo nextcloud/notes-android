@@ -67,6 +67,7 @@ import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
+import it.niedermann.owncloud.notes.model.NoteClickListener;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
@@ -78,7 +79,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
-public class NotesListViewActivity extends LockedActivity implements ItemAdapter.NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
+public class NotesListViewActivity extends LockedActivity implements NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
 

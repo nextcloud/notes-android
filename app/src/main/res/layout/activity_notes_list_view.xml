@@ -62,6 +62,5 @@
         style="@style/fab"
         android:title="@string/action_create"
         app:backgroundTint="@color/primary"
-        app:rippleColor="@color/primary_dark"
         app:srcCompat="@drawable/ic_add_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
