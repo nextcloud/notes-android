@@ -634,8 +634,9 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             query = searchView.getQuery();
         }
 
-        NotesLoadedListener callback = (List<Item> notes, boolean showCategory) -> {
+        NotesLoadedListener callback = (List<Item> notes, boolean showCategory, CharSequence searchQuery) -> {
             adapter.setShowCategory(showCategory);
+            adapter.setHighlightSearchQuery(searchQuery);
             adapter.setItemList(notes);
             binding.activityNotesListView.progressCircular.setVisibility(View.GONE);
             if (notes.size() > 0) {

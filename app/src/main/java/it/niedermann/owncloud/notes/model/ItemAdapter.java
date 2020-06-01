@@ -27,6 +27,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private final NoteClickListener noteClickListener;
     private List<Item> itemList = new ArrayList<>();
     private boolean showCategory = true;
+    private CharSequence searchQuery;
     @NonNull
     private Context context;
     private final List<Integer> selected = new ArrayList<>();
@@ -91,7 +92,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         if (item.isSection()) {
             ((SectionViewHolder) holder).bind((SectionItem) item);
         } else {
-            ((NoteViewHolder) holder).bind((DBNote) item, noteClickListener, showCategory, mainColor, textColor);
+            ((NoteViewHolder) holder).bind((DBNote) item, noteClickListener, showCategory, mainColor, textColor, searchQuery);
         }
     }
 
@@ -155,5 +156,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         this.mainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
         this.textColor = ColorUtil.getForegroundColorForBackgroundColor(mainColor);
         notifyDataSetChanged();
+    }
+
+    public void setHighlightSearchQuery(CharSequence searchQuery) {
+        this.searchQuery = searchQuery;
     }
 }
