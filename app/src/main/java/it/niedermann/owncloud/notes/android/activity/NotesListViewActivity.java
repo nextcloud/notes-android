@@ -446,7 +446,7 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(mainColor, textColor, activityBinding.notesListActivityActionBar);
+        applyBrandToPrimaryToolbar(mainColor, textColor, activityBinding.toolbar);
         applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
         binding.headerViewBackground.setBackgroundColor(mainColor);
         binding.appName.setTextColor(textColor);
