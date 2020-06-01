@@ -35,6 +35,9 @@ import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 
+import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
+
 public class DisplayUtils {
 
     private DisplayUtils() {
@@ -88,8 +91,8 @@ public class DisplayUtils {
 
         @Override
         public void updateDrawState(TextPaint tp) {
-            tp.bgColor = current ? mainColor : resources.getColor(R.color.bg_highlighted);
-            tp.setColor(current ? textColor : ColorUtil.contrastRatioIsSufficient(mainColor, resources.getColor(R.color.bg_highlighted)) ? mainColor : Color.BLACK);
+            tp.bgColor = current ? isColorDark(mainColor) ? mainColor : textColor : resources.getColor(R.color.bg_highlighted);
+            tp.setColor(current ? isColorDark(mainColor) ? textColor : mainColor : contrastRatioIsSufficient(mainColor, resources.getColor(R.color.bg_highlighted)) ? mainColor : Color.BLACK);
             tp.setFakeBoldText(true);
         }
 
