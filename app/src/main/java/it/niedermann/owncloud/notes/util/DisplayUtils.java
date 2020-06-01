@@ -19,8 +19,7 @@
  */
 package it.niedermann.owncloud.notes.util;
 
-import android.content.res.Resources;
-import android.graphics.Color;
+import android.content.Context;
 import android.text.Spannable;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -34,8 +33,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 
-import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 
 public class DisplayUtils {
@@ -44,7 +43,7 @@ public class DisplayUtils {
 
     }
 
-    public static Spannable searchAndColor(Spannable spannable, CharSequence searchText, @NonNull Resources resources, @Nullable Integer current, @ColorInt int mainColor, @ColorInt int textColor) {
+    public static Spannable searchAndColor(Spannable spannable, CharSequence searchText, @NonNull Context context, @Nullable Integer current, @ColorInt int mainColor, @ColorInt int textColor) {
         CharSequence text = spannable.toString();
 
         Object[] spansToRemove = spannable.getSpans(0, text.length(), Object.class);
@@ -64,7 +63,7 @@ public class DisplayUtils {
         while (m.find()) {
             int start = m.start();
             int end = m.end();
-            spannable.setSpan(new SearchSpan(resources, mainColor, textColor, (current != null && i == current)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new SearchSpan(context, mainColor, textColor, (current != null && i == current)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             i++;
         }
 
@@ -76,14 +75,14 @@ public class DisplayUtils {
 
         private final boolean current;
         @NonNull
-        Resources resources;
+        Context context;
         @ColorInt
         private final int mainColor;
         @ColorInt
         private final int textColor;
 
-        SearchSpan(@NonNull Resources resources, @ColorInt int mainColor, @ColorInt int textColor, boolean current) {
-            this.resources = resources;
+        SearchSpan(@NonNull Context context, @ColorInt int mainColor, @ColorInt int textColor, boolean current) {
+            this.context = context;
             this.mainColor = mainColor;
             this.textColor = textColor;
             this.current = current;
@@ -91,8 +90,8 @@ public class DisplayUtils {
 
         @Override
         public void updateDrawState(TextPaint tp) {
-            tp.bgColor = current ? isColorDark(mainColor) ? mainColor : textColor : resources.getColor(R.color.bg_highlighted);
-            tp.setColor(current ? isColorDark(mainColor) ? textColor : mainColor : contrastRatioIsSufficient(mainColor, resources.getColor(R.color.bg_highlighted)) ? mainColor : Color.BLACK);
+            tp.bgColor = current ? isColorDark(mainColor) ? mainColor : textColor : context.getResources().getColor(R.color.bg_highlighted);
+            tp.setColor(current ? isColorDark(mainColor) ? textColor : mainColor : BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor));
             tp.setFakeBoldText(true);
         }
 

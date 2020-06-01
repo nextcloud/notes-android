@@ -17,8 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemBinding;
-import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
 import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
@@ -69,7 +69,7 @@ public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLo
         binding.noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getAdapterPosition(), view));
 
         @ColorInt final int searchBackground = binding.noteExcerpt.getContext().getResources().getColor(R.color.bg_highlighted);
-        @ColorInt final int searchForeground = ColorUtil.contrastRatioIsSufficient(mainColor, searchBackground) ? mainColor : Color.BLACK;
+        @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(binding.noteExcerpt.getContext(), mainColor);
         if (!TextUtils.isEmpty(searchQuery)) {
             final Pattern pattern = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE);
             SpannableString spannableString = new SpannableString(note.getTitle());
