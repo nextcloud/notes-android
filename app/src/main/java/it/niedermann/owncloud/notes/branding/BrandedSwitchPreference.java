@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.branding;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        if (BrandingUtil.isBrandingEnabled(getContext()) && holder.itemView instanceof ViewGroup) {
+        if (holder.itemView instanceof ViewGroup) {
             switchView = findSwitchWidget(holder.itemView);
             if (mainColor != null && textColor != null) {
                 applyBrand();
@@ -60,12 +61,15 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
 
     @Override
     public void applyBrand(@ColorInt int mainColor, @ColorInt int textColor) {
-        this.mainColor = mainColor;
-        this.textColor = textColor;
-        // onBindViewHolder is called after applyBrand, therefore we have to store the given values and apply them later.
         if (BrandingUtil.isBrandingEnabled(getContext())) {
-            applyBrand();
+            this.mainColor = mainColor;
+            this.textColor = textColor;
+        } else {
+            this.mainColor = getContext().getResources().getColor(R.color.defaultBrand);
+            this.textColor = Color.WHITE;
         }
+        // onBindViewHolder is called after applyBrand, therefore we have to store the given values and apply them later.
+        applyBrand();
     }
 
     private void applyBrand() {
