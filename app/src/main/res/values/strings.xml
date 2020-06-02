@@ -191,6 +191,7 @@
     <string name="simple_appearance">Appearance</string>
     <string name="simple_synchronization">Synchronization</string>
     <string name="simple_behavior">Behavior</string>
+    <string name="share_multiple">Share content of %1$d notes</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_share"
+        android:icon="@drawable/ic_share_white_24dp"
+        android:orderInCategory="90"
+        android:title="@string/menu_share"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/menu_delete"
         android:icon="@drawable/ic_delete_grey600_24dp"
         android:orderInCategory="100"
