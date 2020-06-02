@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.android;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
 
@@ -108,6 +110,23 @@ public class MultiSelectedActionModeCallback implements Callback {
                 return true;
             case R.id.menu_move:
                 AccountChooserDialogFragment.newInstance().show(fragmentManager, NotesListViewActivity.class.getSimpleName());
+                return true;
+            case R.id.menu_share:
+                final String subject = (adapter.getSelected().size() == 1)
+                        ? ((DBNote) adapter.getItem(adapter.getSelected().get(0))).getTitle()
+                        : context.getString(R.string.share_multiple, adapter.getSelected().size());
+                final StringBuilder noteContents = new StringBuilder();
+                for (Integer i : adapter.getSelected()) {
+                    final DBNote noteWithoutContent = (DBNote) adapter.getItem(i);
+                    final String tempFullNote = db.getNote(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
+                    if (!TextUtils.isEmpty(tempFullNote)) {
+                        if (noteContents.length() > 0) {
+                            noteContents.append("\n\n");
+                        }
+                        noteContents.append(tempFullNote);
+                    }
+                }
+                ShareUtil.openShareDialog(context, subject, noteContents.toString());
                 return true;
             default:
                 return false;
