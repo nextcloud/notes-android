@@ -5,11 +5,9 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.Collection;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.model.DBNote;
 
 /**
  * Provides basic functionality for Note operations.
@@ -141,9 +139,5 @@ public class NoteUtil {
     @NonNull
     public static String extendCategory(@NonNull String category) {
         return category.replace("/", " / ");
-    }
-
-    public static String concat(@NonNull Collection<DBNote> notes) {
-        return "";
     }
 }
