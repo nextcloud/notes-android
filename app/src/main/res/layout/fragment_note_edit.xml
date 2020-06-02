@@ -23,6 +23,7 @@
             android:inputType="textMultiLine|textCapSentences"
             android:padding="16dp"
             android:textColor="@color/fg_default"
+            android:theme="@style/EditText"
             tools:text="@tools:sample/lorem/random" />
     </ScrollView>
 
@@ -32,6 +33,7 @@
         android:layout_gravity="bottom|end"
         android:translationY="-56dp"
         android:visibility="gone"
+        app:backgroundTint="@color/defaultBrand"
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_keyboard_arrow_up_white_24dp"
         tools:visibility="visible" />
@@ -41,6 +43,7 @@
         style="@style/fab"
         android:layout_gravity="bottom|end"
         android:visibility="gone"
+        app:backgroundTint="@color/defaultBrand"
         app:fabSize="mini"
         app:srcCompat="@drawable/ic_keyboard_arrow_down_white_24dp"
         tools:visibility="visible" />

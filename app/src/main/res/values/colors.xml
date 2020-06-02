@@ -7,6 +7,7 @@
 
     <color name="defaultBrand">#0082C9</color>
 
+    <color name="cursor">#44111122</color>
     <color name="bg_highlighted">#eee</color>
     <color name="bg_normal">#ffffff</color>
     <color name="bg_attention">#d40000</color>

@@ -13,6 +13,10 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">@bool/isDayMode</item>
     </style>
 
+    <style name="EditText" parent="AppTheme">
+        <item name="android:textColorHighlight">@color/cursor</item>
+    </style>
+
     <style name="fab">
         <item name="android:layout_margin">16dp</item>
         <item name="android:layout_width">wrap_content</item>
