@@ -274,5 +274,6 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
+        applyBrandToPrimaryToolbar(binding.toolbar);
     }
 }

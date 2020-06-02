@@ -1,13 +1,17 @@
 package it.niedermann.owncloud.notes.android;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +35,9 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 public class MultiSelectedActionModeCallback implements Callback {
 
+    @ColorInt
+    private int colorAccent;
+
     private final Context context;
     private final ViewProvider viewProvider;
     private final NotesDatabase db;
@@ -50,12 +57,24 @@ public class MultiSelectedActionModeCallback implements Callback {
         this.refreshLists = refreshLists;
         this.fragmentManager = fragmentManager;
         this.searchView = searchView;
+
+        final TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
+        colorAccent = typedValue.data;
     }
 
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         // inflate contextual menu
         mode.getMenuInflater().inflate(R.menu.menu_list_context_multiple, menu);
+        for (int i = 0; i < menu.size(); i++) {
+            Drawable drawable = menu.getItem(i).getIcon();
+            if (drawable != null) {
+                drawable = DrawableCompat.wrap(drawable);
+                DrawableCompat.setTint(drawable, colorAccent);
+                menu.getItem(i).setIcon(drawable);
+            }
+        }
         return true;
     }
 

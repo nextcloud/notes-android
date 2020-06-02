@@ -447,6 +447,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
+        applyBrandToPrimaryToolbar(activityBinding.toolbar);
         applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
 
         // TODO We assume, that the background of the spinner is always white
@@ -463,12 +464,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             binding.appName.setShadowLayer(2, 0.5f, 0, Color.BLACK);
             binding.account.setShadowLayer(2, 0.5f, 0, Color.BLACK);
         }
-
-//        final Drawable overflowDrawable = binding.accountArrow.getDrawable();
-//        if (overflowDrawable != null) {
-//            overflowDrawable.setColorFilter(textColor, PorterDuff.Mode.SRC_ATOP);
-//            binding.accountArrow.setImageDrawable(overflowDrawable);
-//        }
 
         adapter.applyBrand(mainColor, textColor);
         adapterCategories.applyBrand(mainColor, textColor);
