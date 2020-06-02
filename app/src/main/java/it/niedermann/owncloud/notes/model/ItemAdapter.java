@@ -16,8 +16,6 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.Branded;
-import it.niedermann.owncloud.notes.branding.BrandingUtil;
-import it.niedermann.owncloud.notes.util.ColorUtil;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
 
@@ -154,8 +152,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        this.mainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
-        this.textColor = ColorUtil.getForegroundColorForBackgroundColor(mainColor);
+        this.mainColor = mainColor;
+        this.textColor = textColor;
         notifyDataSetChanged();
     }
 

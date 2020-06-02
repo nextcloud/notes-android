@@ -1,9 +1,9 @@
 package it.niedermann.owncloud.notes.model;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
@@ -11,6 +11,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,8 @@ import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemBinding;
 import it.niedermann.owncloud.notes.util.Notes;
 
 import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
+import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 
 public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
     private final ItemNotesListNoteItemBinding binding;
@@ -57,28 +60,56 @@ public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLo
     }
 
     public void bind(DBNote note, NoteClickListener noteClickListener, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        @NonNull final Context context = itemView.getContext();
+        final boolean isDarkThemeActive = Notes.isDarkThemeActive(context);
+
         binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
 
-        // FIXME coloring when searching
         binding.noteCategory.setVisibility(showCategory && !note.getCategory().isEmpty() ? View.VISIBLE : View.GONE);
-        binding.noteCategory.setText(Html.fromHtml(note.getCategory()));
+        binding.noteCategory.setText(note.getCategory());
+
+        @ColorInt int categoryForeground;
+        @ColorInt int categoryBackground;
+
+        if (isDarkThemeActive) {
+            if (isColorDark(mainColor)) {
+                if (contrastRatioIsSufficient(mainColor, Color.BLACK)) {
+                    categoryBackground = mainColor;
+                    categoryForeground = Color.WHITE;
+                } else {
+                    categoryBackground = Color.WHITE;
+                    categoryForeground = mainColor;
+                }
+            } else {
+                categoryBackground = mainColor;
+                categoryForeground = Color.BLACK;
+            }
+        } else {
+            categoryForeground = Color.BLACK;
+            if (isColorDark(mainColor) || contrastRatioIsSufficient(mainColor, Color.WHITE)) {
+                categoryBackground = mainColor;
+            } else {
+                categoryBackground = Color.BLACK;
+            }
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            DrawableCompat.setTint(binding.noteCategory.getBackground(), mainColor);
+            DrawableCompat.setTint(binding.noteCategory.getBackground(), categoryBackground);
         } else {
             final GradientDrawable drawable = (GradientDrawable) binding.noteCategory.getBackground();
-            drawable.setStroke(1, mainColor);
-            drawable.setColor(Notes.isDarkThemeActive(binding.noteCategory.getContext()) ? mainColor : Color.TRANSPARENT);
+            drawable.setStroke(1, categoryBackground);
+            drawable.setColor(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT);
         }
-        binding.noteCategory.setTextColor(Notes.isDarkThemeActive(binding.getRoot().getContext()) ? textColor : Color.BLACK);
+        binding.noteCategory.setTextColor(categoryForeground);
 
         binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
         binding.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp);
         binding.noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getAdapterPosition(), view));
 
-        @ColorInt final int searchBackground = binding.noteExcerpt.getContext().getResources().getColor(R.color.bg_highlighted);
-        @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(binding.noteExcerpt.getContext(), mainColor);
         if (!TextUtils.isEmpty(searchQuery)) {
+            @ColorInt final int searchBackground = context.getResources().getColor(R.color.bg_highlighted);
+            @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
+
             final Pattern pattern = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE);
             SpannableString spannableString = new SpannableString(note.getTitle());
             Matcher matcher = pattern.matcher(spannableString);
