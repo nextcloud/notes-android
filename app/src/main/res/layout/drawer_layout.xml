@@ -34,7 +34,6 @@
                     android:id="@+id/header_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -116,6 +115,7 @@
                     android:id="@+id/accountNavigation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="?attr/colorPrimary"
                     android:orientation="vertical">
 
                     <androidx.recyclerview.widget.RecyclerView
