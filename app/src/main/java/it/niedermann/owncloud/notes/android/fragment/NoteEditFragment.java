@@ -245,4 +245,10 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             binding.editContent.setText(searchAndColor(new SpannableString(getContent()), newText, requireContext(), current, mainColor, textColor), TextView.BufferType.SPANNABLE);
         }
     }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        super.applyBrand(mainColor, textColor);
+        binding.editContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+    }
 }

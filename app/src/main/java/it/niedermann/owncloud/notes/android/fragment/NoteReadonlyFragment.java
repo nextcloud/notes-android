@@ -157,4 +157,10 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
     protected String getContent() {
         return note.getContent();
     }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        super.applyBrand(mainColor, textColor);
+        binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+    }
 }

@@ -13,6 +13,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -289,6 +290,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         return count;
     }
 
+    @CallSuper
     @Override
     public void applyBrand(int mainColor, int textColor) {
         this.mainColor = mainColor;

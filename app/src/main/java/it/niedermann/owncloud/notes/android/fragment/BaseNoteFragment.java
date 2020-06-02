@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -34,11 +37,14 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 import it.niedermann.owncloud.notes.util.ShareUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
+import static it.niedermann.owncloud.notes.util.Notes.isDarkThemeActive;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener {
 
@@ -307,6 +313,39 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void moveNote(LocalAccount account) {
         db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
         listener.close();
+    }
+
+    @ColorInt
+    protected static int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
+        if (isDarkThemeActive(context)) { // Dark background
+            if (isColorDark(mainColor)) { // Dark brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+                    return mainColor;
+                } else {
+                    return ContextCompat.getColor(context, R.color.cursor);
+                }
+            } else { // Light brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
+                } else {
+                    return ContextCompat.getColor(context, R.color.cursor);
+                }
+            }
+        } else { // Light background
+            if (isColorDark(mainColor)) { // Dark brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
+                } else {
+                    return ContextCompat.getColor(context, R.color.cursor);
+                }
+            } else { // Light brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+                    return mainColor;
+                } else {
+                    return ContextCompat.getColor(context, R.color.cursor);
+                }
+            }
+        }
     }
 
     public interface NoteFragmentListener {

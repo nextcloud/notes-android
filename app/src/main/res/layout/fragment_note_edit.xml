@@ -23,7 +23,6 @@
             android:inputType="textMultiLine|textCapSentences"
             android:padding="16dp"
             android:textColor="@color/fg_default"
-            android:theme="@style/EditText"
             tools:text="@tools:sample/lorem/random" />
     </ScrollView>
 
