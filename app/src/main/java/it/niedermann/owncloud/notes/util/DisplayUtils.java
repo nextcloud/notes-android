@@ -20,6 +20,7 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Spannable;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -80,18 +81,45 @@ public class DisplayUtils {
         private final int mainColor;
         @ColorInt
         private final int textColor;
+        @ColorInt
+        private final int highlightColor;
 
         SearchSpan(@NonNull Context context, @ColorInt int mainColor, @ColorInt int textColor, boolean current) {
             this.context = context;
             this.mainColor = mainColor;
             this.textColor = textColor;
             this.current = current;
+            this.highlightColor = context.getResources().getColor(R.color.bg_highlighted);
         }
 
         @Override
         public void updateDrawState(TextPaint tp) {
-            tp.bgColor = current ? isColorDark(mainColor) ? mainColor : textColor : context.getResources().getColor(R.color.bg_highlighted);
-            tp.setColor(current ? isColorDark(mainColor) ? textColor : mainColor : BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor));
+            if (current) {
+                if (Notes.isDarkThemeActive(context)) {
+                    if (isColorDark(mainColor)) {
+                        tp.bgColor = Color.WHITE;
+                        tp.setColor(mainColor);
+                    } else {
+                        tp.bgColor = mainColor;
+                        tp.setColor(Color.BLACK);
+                    }
+                } else {
+                    if (isColorDark(mainColor)) {
+                        tp.bgColor = mainColor;
+                        tp.setColor(Color.WHITE);
+                    } else {
+                        if (ColorUtil.contrastRatioIsSufficient(mainColor, highlightColor)) {
+                            tp.bgColor = highlightColor;
+                        } else {
+                            tp.bgColor = Color.BLACK;
+                        }
+                        tp.setColor(mainColor);
+                    }
+                }
+            } else {
+                tp.bgColor = highlightColor;
+                tp.setColor(BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor));
+            }
             tp.setFakeBoldText(true);
         }
 
