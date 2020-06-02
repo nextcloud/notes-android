@@ -1,6 +1,8 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -61,7 +63,13 @@ public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLo
         binding.noteCategory.setVisibility(showCategory && !note.getCategory().isEmpty() ? View.VISIBLE : View.GONE);
         binding.noteCategory.setText(Html.fromHtml(note.getCategory()));
 
-        DrawableCompat.setTint(binding.noteCategory.getBackground(), mainColor);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            DrawableCompat.setTint(binding.noteCategory.getBackground(), mainColor);
+        } else {
+            final GradientDrawable drawable = (GradientDrawable) binding.noteCategory.getBackground();
+            drawable.setStroke(1, mainColor);
+            drawable.setColor(Notes.isDarkThemeActive(binding.noteCategory.getContext()) ? mainColor : Color.TRANSPARENT);
+        }
         binding.noteCategory.setTextColor(Notes.isDarkThemeActive(binding.getRoot().getContext()) ? textColor : Color.BLACK);
 
         binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
