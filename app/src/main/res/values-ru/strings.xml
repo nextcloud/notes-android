@@ -150,7 +150,6 @@
     <string name="added_content">Добавлена заметка «%1$s»</string>
     <string name="shared_text_empty">Публикуемый текст пустой</string>
     <string name="append_to_note">Добавить в заметку</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>

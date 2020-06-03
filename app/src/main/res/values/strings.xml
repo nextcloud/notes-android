@@ -184,6 +184,7 @@
     <string name="added_content">Added "%1$s"</string>
     <string name="shared_text_empty">Shared text was empty</string>
     <string name="append_to_note">Append to note</string>
+    <string name="share_multiple">Share content of %1$d notes</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
