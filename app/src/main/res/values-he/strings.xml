@@ -135,7 +135,6 @@
     <string name="error_dialog_we_need_info">אנו זקוקים לפירוט הטכני הבא כדי לסייע לך:</string>
     <string name="shared_text_empty">הטקסט ששותף היה ריק</string>
     <string name="append_to_note">הוספה לסוף הפתק</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>
