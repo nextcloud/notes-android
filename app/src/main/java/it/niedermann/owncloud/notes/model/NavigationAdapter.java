@@ -65,6 +65,16 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         }
     }
 
+    public static class CategoryNavigationItem extends NavigationItem {
+        @NonNull
+        public Long categoryId;
+
+        public CategoryNavigationItem(@NonNull String id, @NonNull String label, @Nullable Integer count, @DrawableRes int icon, @NonNull Long categoryId) {
+            super(id, label, count, icon);
+            this.categoryId = categoryId;
+        }
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @NonNull
         private final View view;

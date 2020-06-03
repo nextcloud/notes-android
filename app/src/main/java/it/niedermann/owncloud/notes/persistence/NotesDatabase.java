@@ -29,7 +29,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
@@ -51,10 +50,12 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
+import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
 import it.niedermann.owncloud.notes.model.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
@@ -376,7 +377,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      */
     @NonNull
     @WorkerThread
-    public List<NavigationAdapter.NavigationItem> getCategories(long accountId) {
+    public List<NavigationAdapter.CategoryNavigationItem> getCategories(long accountId) {
         return searchCategories(accountId, null);
     }
 
@@ -392,9 +393,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
      */
     @NonNull
     @WorkerThread
-    public List<NavigationAdapter.NavigationItem> searchCategories(long accountId, String search) {
+    public List<NavigationAdapter.CategoryNavigationItem> searchCategories(long accountId, String search) {
         validateAccountId(accountId);
-        String columns = key_category_title + ", COUNT(*)";
+        String columns = key_category_id + ", " + key_category_title + ", COUNT(*)";
         String selection = key_status + " != ?  AND " +
                 key_category_account_id + " = ? AND " +
                 key_category_title + " LIKE ? " +
@@ -409,10 +410,11 @@ public class NotesDatabase extends AbstractNotesDatabase {
         Cursor cursor = getReadableDatabase().rawQuery(rawQuery,
                 new String[]{DBStatus.LOCAL_DELETED.getTitle(), String.valueOf(accountId),
                         search == null ? "%" : "%" + search.trim() + "%"});
-        List<NavigationAdapter.NavigationItem> categories = new ArrayList<>(cursor.getCount());
+
+        List<NavigationAdapter.CategoryNavigationItem> categories = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
             Resources res = getContext().getResources();
-            String category = cursor.getString(0).toLowerCase();
+            String category = cursor.getString(1).toLowerCase();
             int icon = NavigationAdapter.ICON_FOLDER;
             if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
                 icon = R.drawable.ic_library_music_grey600_24dp;
@@ -421,11 +423,24 @@ public class NotesDatabase extends AbstractNotesDatabase {
             } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
                 icon = R.drawable.ic_work_grey600_24dp;
             }
-            categories.add(new NavigationAdapter.NavigationItem("category:" + cursor.getString(0), cursor.getString(0), cursor.getInt(1), icon));
+            categories.add(new NavigationAdapter.CategoryNavigationItem("category:" + cursor.getString(1), cursor.getString(1), cursor.getInt(2), icon, cursor.getLong(0)));
         }
 
         cursor.close();
         return categories;
+    }
+
+    public String getCategoryTitleById(long accountId, long categoryId) {
+        validateAccountId(accountId);
+        final String categoryTitle;
+        final Cursor cursor = getReadableDatabase().query(table_category, new String[]{key_category_title}, key_category_id + " = ?", new String[]{String.valueOf(categoryId)}, null, null, null);
+        if (cursor.moveToFirst()) {
+            categoryTitle = cursor.getString(0);
+        } else {
+            categoryTitle = null;
+        }
+        cursor.close();
+        return categoryTitle;
     }
 
     public void toggleFavorite(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @Nullable ISyncCallback callback) {
@@ -937,6 +952,44 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_note_id, data.getNoteId());
         values.put(key_theme_mode, data.getThemeMode());
         db.replaceOrThrow(table_widget_single_notes, null, values);
+    }
+
+    @NonNull
+    public NoteListsWidgetData getNoteListWidgetData(int appWidgetId) throws NoSuchElementException {
+        NoteListsWidgetData data = new NoteListsWidgetData();
+        final SQLiteDatabase db = getReadableDatabase();
+        final Cursor cursor = db.query(table_widget_note_list, new String[]{key_account_id, key_category_id, key_theme_mode, key_mode}, key_id + " = ?", new String[]{String.valueOf(appWidgetId)}, null, null, null, null);
+        if (cursor.moveToNext()) {
+            data.setAppWidgetId(appWidgetId);
+            data.setAccountId(cursor.getLong(0));
+            data.setCategoryId(cursor.getLong(1));
+            data.setThemeMode(cursor.getInt(2));
+            data.setMode(cursor.getInt(3));
+        } else {
+            throw new NoSuchElementException();
+        }
+        cursor.close();
+        return data;
+    }
+
+    public void removeNoteListWidget(int appWidgetId) {
+        final SQLiteDatabase db = getWritableDatabase();
+        db.delete(table_widget_note_list, key_id + " = ?", new String[]{String.valueOf(appWidgetId)});
+    }
+
+    public void createOrUpdateNoteListWidgetData(@NonNull NoteListsWidgetData data) throws SQLException {
+        validateAccountId(data.getAccountId());
+        final SQLiteDatabase db = getWritableDatabase();
+        final ContentValues values = new ContentValues();
+        if (data.getMode() != MODE_DISPLAY_CATEGORY && data.getCategoryId() != null) {
+            throw new UnsupportedOperationException("Cannot create a widget with a categoryId when mode is not " + MODE_DISPLAY_CATEGORY);
+        }
+        values.put(key_id, data.getAppWidgetId());
+        values.put(key_account_id, data.getAccountId());
+        values.put(key_category_id, data.getCategoryId());
+        values.put(key_theme_mode, data.getThemeMode());
+        values.put(key_mode, data.getMode());
+        db.replaceOrThrow(table_widget_note_list, null, values);
     }
 
     private static void validateAccountId(long accountId) {

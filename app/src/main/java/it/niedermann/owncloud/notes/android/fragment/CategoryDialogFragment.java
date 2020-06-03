@@ -167,17 +167,17 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     }
 
 
-    private class LoadCategoriesTask extends AsyncTask<String, Void, List<NavigationAdapter.NavigationItem>> {
+    private class LoadCategoriesTask extends AsyncTask<String, Void, List<NavigationAdapter.CategoryNavigationItem>> {
         String currentSearchString;
 
         @Override
-        protected List<NavigationAdapter.NavigationItem> doInBackground(String... searchText) {
+        protected List<NavigationAdapter.CategoryNavigationItem> doInBackground(String... searchText) {
             currentSearchString = searchText[0];
             return db.searchCategories(accountId, currentSearchString);
         }
 
         @Override
-        protected void onPostExecute(List<NavigationAdapter.NavigationItem> categories) {
+        protected void onPostExecute(List<NavigationAdapter.CategoryNavigationItem> categories) {
             adapter.setCategoryList(categories, currentSearchString);
         }
     }

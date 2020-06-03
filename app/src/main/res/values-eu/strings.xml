@@ -150,7 +150,6 @@
     <string name="added_content">\"%1$s\" gehituta</string>
     <string name="shared_text_empty">Partekatutako testua hutsik zegoen</string>
     <string name="append_to_note">Gehitu notara</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>

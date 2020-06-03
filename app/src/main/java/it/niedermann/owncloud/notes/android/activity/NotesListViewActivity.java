@@ -65,6 +65,7 @@ import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
+import it.niedermann.owncloud.notes.model.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.model.NoteClickListener;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
@@ -476,7 +477,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             if (localAccount == null) {
                 return new ArrayList<>();
             }
-            List<NavigationItem> categories = db.getCategories(localAccount.getId());
+            List<CategoryNavigationItem> categories = db.getCategories(localAccount.getId());
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
                 itemUncategorized.label = getString(R.string.action_uncategorized);

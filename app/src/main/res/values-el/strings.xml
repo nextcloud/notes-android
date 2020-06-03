@@ -150,7 +150,6 @@
     <string name="added_content">Προστέθηκε \"%1$s\"</string>
     <string name="shared_text_empty">Το κοινόχρηστο κείμενο είναι κενό</string>
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Άνοιγμα σε λειτουργία τροποποίησης</item>
