@@ -5,7 +5,9 @@
     <color name="primary">#121212</color>
     <color name="accent">#f5f5f5</color>
 
-    <color name="cursor">#55eeeeff</color>
+    <color name="cursorHandles">#eee5e5ee</color>
+    <color name="defaultTextHighlightBackground">#55eeeeff</color>
+
     <color name="bg_highlighted">#2a2a2a</color>
     <color name="bg_normal">#121212</color>
     <color name="bg_attention">#ff3333</color>

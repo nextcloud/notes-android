@@ -322,13 +322,13 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
                     return mainColor;
                 } else {
-                    return ContextCompat.getColor(context, R.color.cursor);
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
                 }
             } else { // Light brand color
                 if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
                     return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
                 } else {
-                    return ContextCompat.getColor(context, R.color.cursor);
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
                 }
             }
         } else { // Light background
@@ -336,13 +336,13 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
                     return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
                 } else {
-                    return ContextCompat.getColor(context, R.color.cursor);
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
                 }
             } else { // Light brand color
                 if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
                     return mainColor;
                 } else {
-                    return ContextCompat.getColor(context, R.color.cursor);
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
                 }
             }
         }
