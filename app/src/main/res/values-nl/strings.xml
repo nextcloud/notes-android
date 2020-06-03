@@ -151,7 +151,6 @@
     <string name="added_content">\"%1$s\" toegevoegd</string>
     <string name="shared_text_empty">Gedeelde tekst was leeg</string>
     <string name="append_to_note">Achteraan toevoegen aan notitie</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wbewerkmodus</item>

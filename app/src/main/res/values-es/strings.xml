@@ -150,7 +150,6 @@
     <string name="added_content">Se ha añadido «%1$s»</string>
     <string name="shared_text_empty">El texto compartido estaba vacío</string>
     <string name="append_to_note">Añadir a la nota</string>
-
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>
