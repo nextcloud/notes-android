@@ -150,6 +150,8 @@
     <string name="added_content">\"%1$s\" adicionado</string>
     <string name="shared_text_empty">O texto compartilhado estava vazio</string>
     <string name="append_to_note">Anexar à nota</string>
+    <string name="share_multiple">Compartilhar o conteúdo de %1$d notas</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir em modo de edição</item>
