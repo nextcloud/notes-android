@@ -2,7 +2,6 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.app.SearchManager;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Color;
 import android.net.Uri;
@@ -17,13 +16,12 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -118,7 +116,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     protected ItemAdapter adapter = null;
 
     protected NotesDatabase db = null;
-    private ActionBarDrawerToggle drawerToggle;
     private NavigationAdapter adapterCategories;
     private NavigationItem itemRecent;
     private NavigationItem itemFavorites;
@@ -202,18 +199,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     }
 
     @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        drawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        drawerToggle.syncState();
-    }
-
-    @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         if (localAccount != null) {
@@ -241,7 +226,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             fabCreate.show();
             activityBinding.launchAccountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
             setupNavigationList(ADAPTER_KEY_RECENT);
-            updateUsernameInDrawer();
+            updateCurrentAccountAvatar();
         } else {
             if (!notAuthorizedAccountHandled) {
                 handleNotAuthorizedAccount();
@@ -259,9 +244,16 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     private void setupActionBar() {
         Toolbar toolbar = binding.activityNotesListView.toolbar;
         setSupportActionBar(toolbar);
-        drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.action_drawer_open, R.string.action_drawer_close);
-        drawerToggle.setDrawerIndicatorEnabled(true);
-        binding.drawerLayout.addDrawerListener(drawerToggle);
+
+        activityBinding.homeToolbar.setOnClickListener((v) -> {
+            if (searchView == null || searchView.isIconified()) {
+                activityBinding.homeToolbar.setVisibility(View.GONE);
+                activityBinding.toolbar.setVisibility(View.VISIBLE);
+                searchView.setIconified(false);
+                ViewCompat.setElevation(activityBinding.appBar, getResources().getDimension(R.dimen.design_appbar_elevation));
+            }
+        });
+        activityBinding.menuButton.setOnClickListener((v) -> binding.drawerLayout.openDrawer(GravityCompat.START));
     }
 
     private void setupNotesList() {
@@ -405,6 +397,19 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         invalidateOptionsMenu();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        if (searchView != null && !searchView.isIconified()) {
+            activityBinding.homeToolbar.setVisibility(View.VISIBLE);
+            activityBinding.toolbar.setVisibility(View.GONE);
+            searchView.setIconified(true);
+            ViewCompat.setElevation(activityBinding.appBar, 0);
+            return true;
+        } else {
+            return super.onSupportNavigateUp();
+        }
+    }
+
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationItem>> {
         @Override
         protected List<NavigationItem> doInBackground(Void... voids) {
@@ -521,7 +526,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         });
 
 
-        this.updateUsernameInDrawer();
+        this.updateCurrentAccountAvatar();
         adapterMenu.setItems(itemsMenu);
         binding.navigationMenu.setAdapter(adapterMenu);
     }
@@ -724,7 +729,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         }
     }
 
-    private void updateUsernameInDrawer() {
+    private void updateCurrentAccountAvatar() {
         try {
             String url = localAccount.getUrl();
             if (url != null) {
@@ -800,6 +805,10 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         if (searchView == null || searchView.isIconified()) {
             super.onBackPressed();
         } else {
+            activityBinding.homeToolbar.setVisibility(View.VISIBLE);
+            activityBinding.toolbar.setVisibility(View.GONE);
+            searchView.setIconified(true);
+            ViewCompat.setElevation(activityBinding.appBar, 0);
             invalidateOptionsMenu();
         }
     }

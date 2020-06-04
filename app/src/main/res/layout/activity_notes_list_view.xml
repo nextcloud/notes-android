@@ -12,28 +12,83 @@
         android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="?attr/actionBarSize"
+            app:elevation="0dp">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="match_parent"
                 android:background="?attr/colorPrimary"
+                android:visibility="gone"
                 app:contentInsetStartWithNavigation="0dp"
+                app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
                 app:titleMarginStart="0dp"
-                tools:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
-                tools:title="@string/app_name">
+                tools:title="@string/app_name" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/launchAccountSwitcher"
-                    android:layout_width="@dimen/spacer_3x"
-                    android:layout_height="@dimen/spacer_3x"
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_marginEnd="@dimen/spacer_1x"
-                    android:layout_marginRight="@dimen/spacer_1x"
-                    app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
-            </androidx.appcompat.widget.Toolbar>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/home_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacer_1x"
+                android:layout_marginLeft="@dimen/spacer_1x"
+                android:layout_marginTop="@dimen/design_appbar_elevation"
+                android:layout_marginEnd="@dimen/spacer_1x"
+                android:layout_marginRight="@dimen/spacer_1x"
+                android:layout_marginBottom="@dimen/design_appbar_elevation"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="6dp"
+                app:strokeWidth="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/menu_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacer_1x"
+                        app:icon="@drawable/ic_baseline_menu_24"
+                        app:iconTint="?attr/colorAccent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/search_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacer_1x"
+                        android:layout_marginLeft="@dimen/spacer_1x"
+                        android:layout_marginEnd="@dimen/spacer_1x"
+                        android:layout_marginRight="@dimen/spacer_1x"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:lines="1"
+                        android:text="Search in blah"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/menu_button"
+                        app:layout_constraintRight_toLeftOf="@id/launchAccountSwitcher"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/launchAccountSwitcher"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_margin="@dimen/spacer_1x"
+                        app:iconSize="28dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
