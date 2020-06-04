@@ -7,7 +7,7 @@
 
     <color name="defaultBrand">#0082C9</color>
 
-    <color name="cursorHandles">#aa33334a</color>
+    <color name="cursorHandles">#555566</color>
     <color name="defaultTextHighlightBackground">#2233334a</color>
 
     <color name="bg_highlighted">#eee</color>
