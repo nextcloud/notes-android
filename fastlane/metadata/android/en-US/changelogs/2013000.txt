@@ -1,1 +1,2 @@
 - 📩 Bulk share content of multiple notes
+- 🔧 Move note list widget preferences to database (#832)

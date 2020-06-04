@@ -1,14 +1,5 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import it.niedermann.owncloud.notes.model.Capabilities;
-import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.util.NoteUtil;
-
 import android.content.Context;
 import android.util.Log;
 
@@ -25,15 +16,27 @@ import org.junit.runners.MethodSorters;
 
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.TimeZone;
 
-import static org.junit.Assert.*;
+import it.niedermann.owncloud.notes.model.Capabilities;
+import it.niedermann.owncloud.notes.model.CloudNote;
+import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.DBStatus;
+import it.niedermann.owncloud.notes.model.LocalAccount;
+import it.niedermann.owncloud.notes.model.NavigationAdapter;
+import it.niedermann.owncloud.notes.util.NoteUtil;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 
 /**
@@ -203,7 +206,7 @@ public class NotesDatabaseTest {
 
     @Test
     public void test_04_getCategories() {
-        List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+        List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_04_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -216,7 +219,7 @@ public class NotesDatabaseTest {
 
     @Test
     public void test_05_searchCategories() {
-        List<NavigationAdapter.NavigationItem> categories = db.searchCategories(account.getId(), "Dia");
+        List<NavigationAdapter.CategoryNavigationItem> categories = db.searchCategories(account.getId(), "Dia");
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_05_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -352,7 +355,7 @@ public class NotesDatabaseTest {
 
     @Test
     public void test_09_multiGetCategories() {
-        List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+        List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
         int count = 0;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_09_multiGetCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -365,7 +368,7 @@ public class NotesDatabaseTest {
 
     @Test
     public void test_10_multiSearchCategories() {
-        List<NavigationAdapter.NavigationItem> categories = db.searchCategories(account.getId(), "M");
+        List<NavigationAdapter.CategoryNavigationItem> categories = db.searchCategories(account.getId(), "M");
         int count = 0;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -474,7 +477,7 @@ public class NotesDatabaseTest {
         Log.i("Test_12_Chinese", "Size: " + notes.size());
         assertEquals(1, notes.size());
 
-        List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+        List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -516,7 +519,7 @@ public class NotesDatabaseTest {
                     String.class);
             method.setAccessible(true);
 
-            List<NavigationAdapter.NavigationItem> categories = db.getCategories(account.getId());
+            List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
             int count = 0;
             for (NavigationAdapter.NavigationItem categoryItem : categories) {
                 Log.i("Test_13_getCategoryIdByTitle", String.format("%s | %s | %d | %d",
