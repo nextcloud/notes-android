@@ -150,6 +150,8 @@
     <string name="added_content">„%1$s“ hinzugefügt</string>
     <string name="shared_text_empty">Der geteilte Text war ohne Inhalt</string>
     <string name="append_to_note">An Notiz anhängen</string>
+    <string name="share_multiple">Inhalt von %1$d Notizen teilen</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Im Bearbeitungsmodus öffnen</item>

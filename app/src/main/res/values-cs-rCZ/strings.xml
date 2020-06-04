@@ -150,6 +150,8 @@
     <string name="added_content">Přidáno „%1$s“</string>
     <string name="shared_text_empty">Sdílený text je prázdný</string>
     <string name="append_to_note">Připojit k poznámce</string>
+    <string name="share_multiple">Sdílet obsah %1$d poznámek</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otevřít v režimu úprav</item>
