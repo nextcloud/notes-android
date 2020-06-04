@@ -13,12 +13,16 @@ android {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 16
         targetSdkVersion 29
-        versionCode 2012001
-        versionName "2.12.1"
+        versionCode 2012002
+        versionName "2.12.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -52,15 +56,15 @@ android {
 
 dependencies {
     // Nextcloud SSO
-    implementation "com.github.nextcloud:Android-SingleSignOn:0.5.0"
+    implementation "com.github.nextcloud:Android-SingleSignOn:0.5.1"
 
     // Markdown
     implementation 'com.yydcdut:markdown-processor:0.1.3'
     implementation 'com.yydcdut:rxmarkdown-wrapper:0.1.3'
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.10.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     // Android X
     implementation "androidx.appcompat:appcompat:1.1.0"

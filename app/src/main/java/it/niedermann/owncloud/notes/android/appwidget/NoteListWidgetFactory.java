@@ -3,14 +3,11 @@ package it.niedermann.owncloud.notes.android.appwidget;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
-
-import androidx.preference.PreferenceManager;
 
 import java.util.List;
 
@@ -18,19 +15,20 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.Notes;
 
-import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.DARK_THEME_KEY;
+import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_ALL;
+import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
+import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_STARRED;
 
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     private static final String TAG = NoteListWidgetFactory.class.getSimpleName();
 
     private final Context context;
-    private final int displayMode;
+    private final NoteListsWidgetData data;
     private final boolean darkTheme;
-    private final String category;
-    private final long accountId;
     private NotesDatabase db;
     private List<DBNote> dbNotes;
 
@@ -38,28 +36,33 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         this.context = context;
         final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
-        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this.context);
-        displayMode = sp.getInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, -1);
-        DarkModeSetting theme = NoteWidgetHelper.getDarkThemeSetting(sp, DARK_THEME_KEY, appWidgetId);
-        darkTheme = Notes.isDarkThemeActive(context, theme);
-        category = sp.getString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, "");
-        accountId = sp.getLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, -1);
+
+        db = NotesDatabase.getInstance(context);
+        data = db.getNoteListWidgetData(appWidgetId);
+
+        darkTheme = Notes.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
     }
 
     @Override
     public void onCreate() {
-        db = NotesDatabase.getInstance(context);
     }
 
     @Override
     public void onDataSetChanged() {
         try {
-            if (displayMode == NoteListWidget.NLW_DISPLAY_ALL) {
-                dbNotes = db.getNotes(accountId);
-            } else if (displayMode == NoteListWidget.NLW_DISPLAY_STARRED) {
-                dbNotes = db.searchNotes(accountId, null, null, true);
-            } else if (displayMode == NoteListWidget.NLW_DISPLAY_CATEGORY) {
-                dbNotes = db.searchNotes(accountId, null, category, null);
+            Log.v(TAG, "--- data - " + data);
+            switch (data.getMode()) {
+                case MODE_DISPLAY_ALL:
+                    dbNotes = db.getNotes(data.getAccountId());
+                    break;
+                case MODE_DISPLAY_STARRED:
+                    dbNotes = db.searchNotes(data.getAccountId(), null, null, true);
+                    break;
+                case MODE_DISPLAY_CATEGORY:
+                    if (data.getCategoryId() != null) {
+                        dbNotes = db.searchNotes(data.getAccountId(), null, db.getCategoryTitleById(data.getAccountId(), data.getCategoryId()), null);
+                    }
+                    break;
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

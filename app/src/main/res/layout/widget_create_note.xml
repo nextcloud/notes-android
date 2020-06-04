@@ -1,17 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_create_note"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center_vertical"
+    android:layout_margin="@dimen/widget_margin"
     android:clickable="true"
-    android:orientation="vertical"
-    android:padding="@dimen/widget_margin"
-    android:focusable="true">
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:background="@drawable/ic_widget_create"
-        android:contentDescription="@string/widget_create_note" />
-</LinearLayout>
+    android:contentDescription="@string/widget_create_note"
+    android:focusable="true"
+    android:src="@drawable/ic_widget_create" />
