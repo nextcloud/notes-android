@@ -72,9 +72,9 @@ public abstract class NotesClient {
         if (preferredApiVersion == null) {
             Log.i(TAG, "apiVersion is null, using " + NotesClientV02.class.getSimpleName());
             return new NotesClientV02(appContext);
-//        } else if (preferredApiVersion.compareTo(SUPPORTED_API_VERSIONS[0]) == 0) {
-//            Log.i(TAG, "Using " + NotesClient_1_0.class.getSimpleName());
-//            return new NotesClient_1_0(appContext);
+        } else if (preferredApiVersion.compareTo(SUPPORTED_API_VERSIONS[0]) == 0) {
+            Log.i(TAG, "Using " + NotesClientV1.class.getSimpleName());
+            return new NotesClientV1(appContext);
         } else if (preferredApiVersion.compareTo(SUPPORTED_API_VERSIONS[1]) == 0) {
             Log.i(TAG, "Using " + NotesClientV02.class.getSimpleName());
             return new NotesClientV02(appContext);
