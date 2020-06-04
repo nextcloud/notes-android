@@ -5,7 +5,6 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:openDrawer="left">
 
     <include
@@ -23,7 +22,8 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -33,89 +33,36 @@
                 <RelativeLayout
                     android:id="@+id/header_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+                    android:layout_height="100dp"
+                    android:background="@color/defaultBrand">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/header_view_background"
-                        android:layout_width="match_parent"
-                        android:layout_height="164dp"
-                        android:background="@color/defaultBrand"
-                        android:contentDescription="@null"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/background" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/current_account_image"
-                        android:layout_width="@dimen/avatar_size"
-                        android:layout_height="@dimen/avatar_size"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/header_padding"
-                        android:layout_marginLeft="@dimen/header_padding"
-                        android:layout_marginTop="46dp"
-                        android:contentDescription="@string/app_name"
-                        app:srcCompat="@mipmap/ic_launcher" />
+                        android:id="@+id/logo"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:layout_centerVertical="true"
+                        android:layout_margin="@dimen/spacer_2x"
+                        android:gravity="center"
+                        app:srcCompat="@drawable/ic_launcher_foreground_full" />
 
                     <TextView
                         android:id="@+id/app_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/current_account_image"
-                        android:layout_marginStart="@dimen/header_padding"
-                        android:layout_marginLeft="@dimen/header_padding"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginEnd="@dimen/header_padding"
-                        android:layout_marginRight="@dimen/header_padding"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/logo"
+                        android:layout_toRightOf="@id/logo"
                         android:ellipsize="end"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="0.5"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
-                        android:text="@string/app_name_long"
+                        android:gravity="center_vertical"
+                        android:text="@string/app_name"
                         android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/account"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/app_name"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginStart="@dimen/header_padding"
-                        android:layout_marginLeft="@dimen/header_padding"
-                        android:layout_marginEnd="@dimen/widget_margin"
-                        android:layout_marginRight="@dimen/widget_margin"
-                        android:layout_toStartOf="@id/account_arrow"
-                        android:layout_toLeftOf="@id/account_arrow"
-                        android:ellipsize="end"
-                        android:maxLines="1"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="0.5"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp"
-                        tools:text="user@nextcloud.example.comuser@nextcloud.example.comuser@nextcloud.example.com" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/account_arrow"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/account"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginEnd="@dimen/header_padding"
-                        android:layout_marginRight="@dimen/header_padding"
-                        app:srcCompat="@drawable/ic_arrow_drop_down_white_24dp" />
+                        android:textSize="24sp" />
                 </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/accountNavigation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"
                     android:orientation="vertical">
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -125,6 +72,7 @@
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         app:layoutManager="LinearLayoutManager"
+                        tools:itemCount="6"
                         tools:listitem="@layout/item_navigation" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -134,17 +82,9 @@
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         app:layoutManager="LinearLayoutManager"
+                        tools:itemCount="3"
                         tools:listitem="@layout/item_navigation" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/accountChooser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:visibility="gone" />
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>

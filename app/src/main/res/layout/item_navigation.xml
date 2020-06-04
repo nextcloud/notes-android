@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="6dp"
-    android:paddingLeft="6dp"
-    android:paddingEnd="8dp"
-    android:paddingRight="8dp">
+    android:paddingStart="@dimen/spacer_1x"
+    android:paddingLeft="@dimen/spacer_1x"
+    android:paddingEnd="@dimen/spacer_1x"
+    android:paddingRight="@dimen/spacer_1x">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/navigationItemIcon"
@@ -14,7 +14,6 @@
         android:layout_height="44dp"
         android:contentDescription="@null"
         android:focusable="false"
-        android:padding="10dp"
         android:scaleType="center"
         app:srcCompat="@drawable/ic_folder_grey600_24dp" />
 
@@ -34,13 +33,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
         android:layout_toStartOf="@id/navigationItemCount"
         android:layout_toLeftOf="@id/navigationItemCount"
         android:ellipsize="end"
         android:lines="1"
         android:textColor="?android:textColorSecondary"
-        tools:text="Category 1" />
+        tools:text="@tools:sample/lorem/random" />
 
 </RelativeLayout>

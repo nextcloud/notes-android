@@ -14,15 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.view.ActionMode;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -77,7 +74,6 @@ import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedLis
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
@@ -139,7 +135,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         refreshLists();
         swipeRefreshLayout.setRefreshing(false);
     };
-    private boolean accountChooserActive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +167,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
         db = NotesDatabase.getInstance(this);
 
-        setupHeader();
         setupActionBar();
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
@@ -245,7 +239,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             }
             refreshLists();
             fabCreate.show();
-            setupHeader();
+            activityBinding.launchAccountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
             setupNavigationList(ADAPTER_KEY_RECENT);
             updateUsernameInDrawer();
         } else {
@@ -260,49 +254,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         swipeRefreshLayout.setRefreshing(false);
         askForNewAccount(this);
         notAuthorizedAccountHandled = true;
-    }
-
-    private void setupHeader() {
-        binding.accountChooser.removeAllViews();
-        for (LocalAccount localAccount : db.getAccounts()) {
-            View v = View.inflate(this, R.layout.item_account, null);
-            ((TextView) v.findViewById(R.id.accountItemLabel)).setText(localAccount.getAccountName());
-            Glide
-                    .with(this)
-                    .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
-                    .error(R.drawable.ic_account_circle_grey_24dp)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(((ImageView) v.findViewById(R.id.accountItemAvatar)));
-            v.setOnClickListener(clickedView -> {
-                clickHeader();
-                binding.drawerLayout.closeDrawer(GravityCompat.START);
-                selectAccount(localAccount.getAccountName());
-            });
-            v.findViewById(R.id.delete).setOnClickListener(clickedView -> {
-                db.deleteAccount(localAccount);
-                if (localAccount.getId() == this.localAccount.getId()) {
-                    List<LocalAccount> remainingAccounts = db.getAccounts();
-                    if (remainingAccounts.size() > 0) {
-                        this.localAccount = remainingAccounts.get(0);
-                        selectAccount(this.localAccount.getAccountName());
-                    } else {
-                        selectAccount(null);
-                        askForNewAccount(this);
-                    }
-                }
-                setupHeader();
-                clickHeader();
-                binding.drawerLayout.closeDrawer(GravityCompat.START);
-            });
-            binding.accountChooser.addView(v);
-        }
-        View addButton = View.inflate(this, R.layout.item_account, null);
-        ((TextView) addButton.findViewById(R.id.accountItemLabel)).setText(getString(R.string.add_account));
-        ((AppCompatImageView) addButton.findViewById(R.id.accountItemAvatar)).setImageResource(R.drawable.ic_person_add_grey600_24dp);
-        addButton.setOnClickListener((btn) -> askForNewAccount(this));
-        addButton.findViewById(R.id.delete).setVisibility(View.GONE);
-        binding.accountChooser.addView(addButton);
-        binding.headerView.setOnClickListener(view -> clickHeader());
     }
 
     private void setupActionBar() {
@@ -432,18 +383,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         binding.navigationList.setAdapter(adapterCategories);
     }
 
-    private void clickHeader() {
-        if (this.accountChooserActive) {
-            binding.accountChooser.setVisibility(View.GONE);
-            binding.accountNavigation.setVisibility(View.VISIBLE);
-        } else {
-            AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName());
-//            binding.accountChooser.setVisibility(View.VISIBLE);
-//            binding.accountNavigation.setVisibility(View.GONE);
-        }
-        this.accountChooserActive = false;
-    }
-
     @Override
     public CoordinatorLayout getView() {
         return this.coordinatorLayout;
@@ -454,20 +393,12 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         applyBrandToPrimaryToolbar(activityBinding.toolbar);
         applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
 
+        binding.headerView.setBackgroundColor(mainColor);
+        binding.appName.setTextColor(textColor);
+
         // TODO We assume, that the background of the spinner is always white
         activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : Color.BLACK);
-        binding.headerViewBackground.setBackgroundColor(mainColor);
         binding.appName.setTextColor(textColor);
-        binding.account.setTextColor(textColor);
-
-        final boolean isDarkTextColor = ColorUtil.isColorDark(textColor);
-        if (isDarkTextColor) {
-            binding.appName.setShadowLayer(2, 0.5f, 0, Color.WHITE);
-            binding.account.setShadowLayer(2, 0.5f, 0, Color.WHITE);
-        } else {
-            binding.appName.setShadowLayer(2, 0.5f, 0, Color.BLACK);
-            binding.account.setShadowLayer(2, 0.5f, 0, Color.BLACK);
-        }
 
         adapter.applyBrand(mainColor, textColor);
         adapterCategories.applyBrand(mainColor, textColor);
@@ -764,8 +695,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                             Log.i(TAG, capabilities.toString());
                             runOnUiThread(() -> {
                                 selectAccount(ssoAccount.name);
-                                this.accountChooserActive = false;
-                                binding.accountChooser.setVisibility(View.GONE);
                                 binding.accountNavigation.setVisibility(View.VISIBLE);
                                 binding.drawerLayout.closeDrawer(GravityCompat.START);
                             });
@@ -774,8 +703,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                                 runOnUiThread(() -> {
                                     BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
                                     selectAccount(ssoAccount.name);
-                                    this.accountChooserActive = false;
-                                    binding.accountChooser.setVisibility(View.GONE);
                                     binding.accountNavigation.setVisibility(View.VISIBLE);
                                     binding.drawerLayout.closeDrawer(GravityCompat.START);
                                 });
@@ -783,8 +710,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                         } catch (Exception e) {
                             e.printStackTrace();
                             runOnUiThread(() -> {
-                                this.accountChooserActive = true;
-                                binding.accountChooser.setVisibility(View.VISIBLE);
                                 binding.accountNavigation.setVisibility(View.GONE);
                                 binding.drawerLayout.openDrawer(GravityCompat.START);
                                 binding.activityNotesListView.progressCircular.setVisibility(View.GONE);
@@ -803,23 +728,21 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         try {
             String url = localAccount.getUrl();
             if (url != null) {
-                binding.account.setText(localAccount.getAccountName());
                 Glide
                         .with(this)
                         .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
-                        .error(R.mipmap.ic_launcher)
+                        .error(R.drawable.ic_account_circle_grey_24dp)
                         .apply(RequestOptions.circleCropTransform())
-                        .into(binding.currentAccountImage);
+                        .into(activityBinding.launchAccountSwitcher);
             } else {
                 Log.w(TAG, "url is null");
             }
         } catch (NullPointerException e) { // No local account - show generic header
-            binding.account.setText(R.string.app_name_long);
             Glide
                     .with(this)
-                    .load(R.mipmap.ic_launcher)
+                    .load(R.drawable.ic_account_circle_grey_24dp)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(binding.currentAccountImage);
+                    .into(activityBinding.launchAccountSwitcher);
             Log.w(TAG, "Tried to update username in drawer, but localAccount was null");
         }
     }
@@ -922,7 +845,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                 askForNewAccount(this);
             }
         }
-        setupHeader();
     }
 
     @Override

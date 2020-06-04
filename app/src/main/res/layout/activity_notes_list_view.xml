@@ -23,7 +23,17 @@
                 app:contentInsetStartWithNavigation="0dp"
                 app:titleMarginStart="0dp"
                 tools:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
-                tools:title="@string/app_name" />
+                tools:title="@string/app_name">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/launchAccountSwitcher"
+                    android:layout_width="@dimen/spacer_3x"
+                    android:layout_height="@dimen/spacer_3x"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="@dimen/spacer_1x"
+                    android:layout_marginRight="@dimen/spacer_1x"
+                    app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
+            </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
