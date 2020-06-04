@@ -62,6 +62,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private DBNote originalNote;
     protected NotesDatabase db;
     private NoteFragmentListener listener;
+    private boolean titleModified = false;
 
     protected boolean isNew = true;
 
@@ -242,7 +243,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     public void onCloseNote() {
-        if (originalNote == null && getContent().isEmpty()) {
+        if (!titleModified && originalNote == null && getContent().isEmpty()) {
             db.deleteNoteAndSync(ssoAccount, note.getId());
         }
     }
@@ -261,6 +262,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             } else {
                 note = db.updateNoteAndSync(ssoAccount, localAccount.getId(), note, newContent, callback);
                 listener.onNoteUpdated(note);
+                requireActivity().invalidateOptionsMenu();
             }
         } else {
             Log.e(TAG, "note is null");
@@ -327,7 +329,9 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
 
     @Override
     public void onTitleEdited(String newTitle) {
-//        db.setTitle(ssoAccount, note, newTitle);
+        titleModified = true;
+        note.setTitle(newTitle);
+        note = db.updateNoteAndSync(ssoAccount, localAccount.getId(), note, note.getContent(), newTitle, null);
         listener.onNoteUpdated(note);
     }
 

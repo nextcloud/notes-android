@@ -73,7 +73,7 @@ public class NoteUtil {
      * @return truncated string
      */
     @NonNull
-    private static String truncateString(@NonNull String str, int len) {
+    private static String truncateString(@NonNull String str, @SuppressWarnings("SameParameterValue") int len) {
         return str.substring(0, Math.min(len, str.length()));
     }
 
