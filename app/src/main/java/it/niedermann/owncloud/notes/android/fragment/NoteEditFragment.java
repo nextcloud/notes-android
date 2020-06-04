@@ -44,6 +44,8 @@ import static it.niedermann.owncloud.notes.util.DisplayUtils.searchAndColor;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
 
+    private static final String TAG = NoteEditFragment.class.getSimpleName();
+
     private static final String LOG_TAG_AUTOSAVE = "AutoSave";
 
     private static final long DELAY = 2000; // Wait for this time after typing before saving
@@ -147,10 +149,12 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
                 requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-                InputMethodManager imm = (InputMethodManager)
-                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
-
+                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
+                } else {
+                    Log.w(TAG, "InputMethodManager is null");
+                }
             }
 
             // workaround for issue yydcdut/RxMarkdown#41
