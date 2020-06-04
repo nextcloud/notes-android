@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.accountswitcher;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -63,8 +64,10 @@ public class AccountSwitcherDialog extends DialogFragment {
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.currentAccountItemAvatar);
         binding.accountLayout.setOnClickListener((v) -> dismiss());
-        final Drawable wrapped = DrawableCompat.wrap(binding.check.getDrawable()).mutate();
-        DrawableCompat.setTint(wrapped, currentLocalAccount.getColor());
+
+        LayerDrawable ld = (LayerDrawable) binding.check.getDrawable();
+        Drawable ldDrawable = ld.findDrawableByLayerId(R.id.area);
+        DrawableCompat.setTint(ldDrawable, currentLocalAccount.getColor());
 
         AccountSwitcherAdapter adapter = new AccountSwitcherAdapter((localAccount -> {
             accountSwitcherListener.onAccountChosen(localAccount);
@@ -72,6 +75,12 @@ public class AccountSwitcherDialog extends DialogFragment {
         }), (localAccount) -> accountSwitcherListener.onAccountDeleted(localAccount));
         binding.accountsList.setAdapter(adapter);
         List<LocalAccount> localAccounts = db.getAccounts();
+        for (LocalAccount localAccount : localAccounts) {
+            if (localAccount.getId() == currentLocalAccount.getId()) {
+                localAccounts.remove(localAccount);
+                break;
+            }
+        }
         adapter.setLocalAccounts(localAccounts);
 
         binding.addAccount.setOnClickListener((v) -> accountSwitcherListener.addAccount());

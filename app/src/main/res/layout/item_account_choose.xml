@@ -38,6 +38,7 @@
         android:id="@+id/delete"
         android:layout_width="36dp"
         android:layout_height="36dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@null"
         android:focusable="false"
         android:scaleType="center"
