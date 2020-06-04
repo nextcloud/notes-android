@@ -2,8 +2,8 @@ package it.niedermann.owncloud.notes.android;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.TypedValue;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +27,7 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
-import it.niedermann.owncloud.notes.android.fragment.AccountChooserDialogFragment;
+import it.niedermann.owncloud.notes.android.fragment.MoveAccountDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
@@ -129,7 +129,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                 }
                 return true;
             case R.id.menu_move:
-                AccountChooserDialogFragment.newInstance().show(fragmentManager, NotesListViewActivity.class.getSimpleName());
+                MoveAccountDialogFragment.newInstance().show(fragmentManager, NotesListViewActivity.class.getSimpleName());
                 return true;
             case R.id.menu_share:
                 final String subject = (adapter.getSelected().size() == 1)

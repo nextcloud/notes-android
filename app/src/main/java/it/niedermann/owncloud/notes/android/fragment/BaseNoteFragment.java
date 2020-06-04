@@ -198,7 +198,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 showCategorySelector();
                 return true;
             case R.id.menu_move:
-                AccountChooserDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
+                MoveAccountDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
                 return true;
             case R.id.menu_share:
                 ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());

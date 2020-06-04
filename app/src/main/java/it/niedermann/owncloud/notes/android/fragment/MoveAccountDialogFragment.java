@@ -17,28 +17,28 @@ import java.util.List;
 import java.util.Objects;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.MoveAccountListener;
 import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
-public class AccountChooserDialogFragment extends AppCompatDialogFragment implements AccountChooserListener {
-    private AccountChooserListener accountChooserListener;
+public class MoveAccountDialogFragment extends AppCompatDialogFragment implements MoveAccountListener {
+    private MoveAccountListener moveAccountListener;
 
     /**
      * Use newInstance()-Method
      */
-    public AccountChooserDialogFragment() {
+    public MoveAccountDialogFragment() {
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof AccountChooserListener) {
-            this.accountChooserListener = (AccountChooserListener) context;
+        if (context instanceof MoveAccountListener) {
+            this.moveAccountListener = (MoveAccountListener) context;
         } else {
-            throw new ClassCastException("Caller must implement " + AccountChooserListener.class.getSimpleName());
+            throw new ClassCastException("Caller must implement " + MoveAccountListener.class.getSimpleName());
         }
     }
 
@@ -68,13 +68,13 @@ public class AccountChooserDialogFragment extends AppCompatDialogFragment implem
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    public static AccountChooserDialogFragment newInstance() {
-        return new AccountChooserDialogFragment();
+    public static MoveAccountDialogFragment newInstance() {
+        return new MoveAccountDialogFragment();
     }
 
     @Override
-    public void onAccountChosen(LocalAccount account) {
-        accountChooserListener.onAccountChosen(account);
+    public void moveToAccount(LocalAccount account) {
+        moveAccountListener.moveToAccount(account);
         dismiss();
     }
 }

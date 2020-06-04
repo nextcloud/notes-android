@@ -49,9 +49,11 @@ import java.util.List;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
+import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherListener;
 import it.niedermann.owncloud.notes.android.MultiSelectedActionModeCallback;
 import it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper;
-import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.MoveAccountListener;
 import it.niedermann.owncloud.notes.android.fragment.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -73,6 +75,7 @@ import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
+import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
@@ -80,7 +83,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
-public class NotesListViewActivity extends LockedActivity implements NoteClickListener, NoteServerSyncHelper.ViewProvider, AccountChooserListener {
+public class NotesListViewActivity extends LockedActivity implements NoteClickListener, ViewProvider, MoveAccountListener, AccountSwitcherListener {
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
 
@@ -434,11 +437,11 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             binding.accountChooser.setVisibility(View.GONE);
             binding.accountNavigation.setVisibility(View.VISIBLE);
         } else {
-            binding.accountChooser.setVisibility(View.VISIBLE);
-            binding.accountNavigation.setVisibility(View.GONE);
-
+            AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName());
+//            binding.accountChooser.setVisibility(View.VISIBLE);
+//            binding.accountNavigation.setVisibility(View.GONE);
         }
-        this.accountChooserActive = !this.accountChooserActive;
+        this.accountChooserActive = false;
     }
 
     @Override
@@ -895,9 +898,35 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         }
     }
 
+    @Override
+    public void addAccount() {
+        askForNewAccount(this);
+    }
 
     @Override
-    public void onAccountChosen(LocalAccount account) {
+    public void onAccountChosen(LocalAccount localAccount) {
+        binding.drawerLayout.closeDrawer(GravityCompat.START);
+        selectAccount(localAccount.getAccountName());
+    }
+
+    @Override
+    public void onAccountDeleted(LocalAccount localAccount) {
+        db.deleteAccount(localAccount);
+        if (localAccount.getId() == this.localAccount.getId()) {
+            List<LocalAccount> remainingAccounts = db.getAccounts();
+            if (remainingAccounts.size() > 0) {
+                this.localAccount = remainingAccounts.get(0);
+                selectAccount(this.localAccount.getAccountName());
+            } else {
+                selectAccount(null);
+                askForNewAccount(this);
+            }
+        }
+        setupHeader();
+    }
+
+    @Override
+    public void moveToAccount(LocalAccount account) {
         List<Integer> selection = new ArrayList<>(adapter.getSelected());
 
         adapter.deselect(0);

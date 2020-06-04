@@ -29,9 +29,9 @@ import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
-import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserListener;
+import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.MoveAccountListener;
 
-public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountChooserListener {
+public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, MoveAccountListener {
 
     private static final String TAG = EditNoteActivity.class.getSimpleName();
 
@@ -268,7 +268,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     @Override
-    public void onAccountChosen(LocalAccount account) {
+    public void moveToAccount(LocalAccount account) {
         fragment.moveNote(account);
     }
 
