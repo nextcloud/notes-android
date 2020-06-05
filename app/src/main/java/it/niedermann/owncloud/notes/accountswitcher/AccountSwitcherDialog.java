@@ -83,7 +83,10 @@ public class AccountSwitcherDialog extends DialogFragment {
         }
         adapter.setLocalAccounts(localAccounts);
 
-        binding.addAccount.setOnClickListener((v) -> accountSwitcherListener.addAccount());
+        binding.addAccount.setOnClickListener((v) -> {
+            accountSwitcherListener.addAccount();
+            dismiss();
+        });
 
         return new AlertDialog.Builder(requireContext())
                 .setView(binding.getRoot())
