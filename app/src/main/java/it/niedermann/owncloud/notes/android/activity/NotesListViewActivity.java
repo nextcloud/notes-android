@@ -250,6 +250,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                 updateToolbars(false);
             }
         });
+
+        activityBinding.launchAccountSwitcher.setOnClickListener((v) -> askForNewAccount(this));
         activityBinding.menuButton.setOnClickListener((v) -> binding.drawerLayout.openDrawer(GravityCompat.START));
 
         final LinearLayout searchEditFrame = activityBinding.searchView.findViewById(R.id
