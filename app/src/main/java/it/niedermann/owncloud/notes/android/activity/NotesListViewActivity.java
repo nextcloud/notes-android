@@ -798,11 +798,11 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     private void updateToolbars(boolean disableSearch) {
         activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
         activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
-        activityBinding.searchView.setIconified(disableSearch);
         ViewCompat.setElevation(activityBinding.appBar, disableSearch ? 0 : getResources().getDimension(R.dimen.design_appbar_elevation));
         if (disableSearch) {
             activityBinding.searchView.setQuery(null, true);
         }
+        activityBinding.searchView.setIconified(disableSearch);
     }
 
     private void synchronize() {
