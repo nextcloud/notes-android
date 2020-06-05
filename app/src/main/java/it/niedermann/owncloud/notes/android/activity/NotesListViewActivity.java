@@ -1,11 +1,14 @@
 package it.niedermann.owncloud.notes.android.activity;
 
+import android.animation.AnimatorInflater;
+import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -795,10 +798,16 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         }
     }
 
+    @SuppressLint("PrivateResource")
     private void updateToolbars(boolean disableSearch) {
         activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
         activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
-        ViewCompat.setElevation(activityBinding.appBar, disableSearch ? 0 : getResources().getDimension(R.dimen.design_appbar_elevation));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(),
+                    disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
+        } else {
+            ViewCompat.setElevation(activityBinding.appBar, disableSearch ? 0 : getResources().getDimension(R.dimen.design_appbar_elevation));
+        }
         if (disableSearch) {
             activityBinding.searchView.setQuery(null, true);
         }
