@@ -10,6 +10,7 @@
         <item name="colorControlNormal">?attr/colorAccent</item>
         <item name="android:navigationBarColor" tools:targetApi="lollipop">?attr/colorPrimary</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">@bool/isDayMode</item>
+        <item name="windowActionModeOverlay">true</item>
     </style>
 
     <style name="textViewStyle">
