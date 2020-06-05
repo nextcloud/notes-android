@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,12 +19,9 @@ public class AccountSwitcherAdapter extends RecyclerView.Adapter<AccountSwitcher
     private final List<LocalAccount> localAccounts = new ArrayList<>();
     @NonNull
     private final Consumer<LocalAccount> onAccountClick;
-    @Nullable
-    private final Consumer<LocalAccount> onAccountDelete;
 
-    public AccountSwitcherAdapter(@NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete) {
+    public AccountSwitcherAdapter(@NonNull Consumer<LocalAccount> onAccountClick) {
         this.onAccountClick = onAccountClick;
-        this.onAccountDelete = onAccountDelete;
         setHasStableIds(true);
     }
 
@@ -42,18 +38,7 @@ public class AccountSwitcherAdapter extends RecyclerView.Adapter<AccountSwitcher
 
     @Override
     public void onBindViewHolder(@NonNull AccountSwitcherViewHolder holder, int position) {
-        holder.bind(localAccounts.get(position), onAccountClick, (localAccount -> {
-            if (onAccountDelete != null) {
-                for (int i = 0; i < localAccounts.size(); i++) {
-                    if (localAccounts.get(i).getId() == localAccount.getId()) {
-                        localAccounts.remove(i);
-                        notifyItemRemoved(i);
-                        break;
-                    }
-                }
-                onAccountDelete.accept(localAccount);
-            }
-        }));
+        holder.bind(localAccounts.get(position), onAccountClick);
     }
 
     @Override

@@ -99,6 +99,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     private final static int show_single_note_cmd = 1;
     private final static int server_settings = 2;
     private final static int about = 3;
+    public final static int manage_account = 4;
 
     /**
      * Used to detect the onResume() call after the import dialog has been displayed.
@@ -124,6 +125,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     private NavigationItem itemRecent;
     private NavigationItem itemFavorites;
     private NavigationItem itemUncategorized;
+    @NonNull
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
@@ -160,7 +162,10 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                 navigationSelection = new Category(null, true);
             }
         } else {
-            navigationSelection = (Category) savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
+            Object savedCategory = savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
+            if (savedCategory != null) {
+                navigationSelection = (Category) savedCategory;
+            }
             navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
@@ -227,14 +232,21 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             }
             refreshLists();
             fabCreate.show();
-            activityBinding.launchAccountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
+            activityBinding.launchAccountSwitcher.setOnClickListener((v) -> {
+                if (localAccount == null) {
+                    handleNotAuthorizedAccount();
+                } else {
+                    AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName());
+                }
+            });
             setupNavigationList(ADAPTER_KEY_RECENT);
-            updateCurrentAccountAvatar();
         } else {
             if (!notAuthorizedAccountHandled) {
                 handleNotAuthorizedAccount();
             }
+            binding.navigationList.setAdapter(null);
         }
+        updateCurrentAccountAvatar();
     }
 
     private void handleNotAuthorizedAccount() {
@@ -676,6 +688,10 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             // Recreate activity completely, because theme switching makes problems when only invalidating the views.
             // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
             recreate();
+        } else if (requestCode == manage_account) {
+            if (resultCode == RESULT_FIRST_USER) {
+                selectAccount(null);
+            }
         } else {
             try {
                 AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {

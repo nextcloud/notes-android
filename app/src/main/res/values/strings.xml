@@ -13,6 +13,7 @@
     <string name="simple_edit">Edit</string>
     <string name="action_edit_save">Save</string>
     <string name="simple_about">About</string>
+    <string name="simple_accounts">Accounts</string>
     <string name="simple_bold">Bold</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Italic</string>
@@ -195,6 +196,7 @@
     <string name="simple_synchronization">Synchronization</string>
     <string name="simple_behavior">Behavior</string>
     <string name="share_multiple">Share content of %1$d notes</string>
+    <string name="manage_accounts">Manage accounts</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

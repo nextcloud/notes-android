@@ -99,7 +99,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
             itemView.setOnClickListener(view -> clickListener.onItemClick(currentItem));
         }
 
-        private void assignItem(@NonNull NavigationItem item) {
+        private void bind(@NonNull NavigationItem item) {
             currentItem = item;
             boolean isSelected = item.id.equals(selectedItem);
             name.setText(NoteUtil.extendCategory(item.label));
@@ -147,7 +147,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.assignItem(items.get(position));
+        holder.bind(items.get(position));
     }
 
     @Override

@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.accountswitcher;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -19,8 +20,11 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
+import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+
+import static it.niedermann.owncloud.notes.android.activity.NotesListViewActivity.manage_account;
 
 public class AccountSwitcherDialog extends DialogFragment {
 
@@ -72,7 +76,7 @@ public class AccountSwitcherDialog extends DialogFragment {
         AccountSwitcherAdapter adapter = new AccountSwitcherAdapter((localAccount -> {
             accountSwitcherListener.onAccountChosen(localAccount);
             dismiss();
-        }), (localAccount) -> accountSwitcherListener.onAccountDeleted(localAccount));
+        }));
         binding.accountsList.setAdapter(adapter);
         List<LocalAccount> localAccounts = db.getAccounts();
         for (LocalAccount localAccount : localAccounts) {
@@ -85,6 +89,11 @@ public class AccountSwitcherDialog extends DialogFragment {
 
         binding.addAccount.setOnClickListener((v) -> {
             accountSwitcherListener.addAccount();
+            dismiss();
+        });
+
+        binding.manageAccounts.setOnClickListener((v) -> {
+            requireActivity().startActivityForResult(new Intent(requireContext(), ManageAccountsActivity.class), manage_account);
             dismiss();
         });
 
