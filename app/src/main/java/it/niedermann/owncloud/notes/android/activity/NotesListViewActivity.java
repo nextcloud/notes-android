@@ -554,16 +554,16 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         String subtitle;
         if (navigationSelection.category != null) {
             if (navigationSelection.category.isEmpty()) {
-                subtitle = getString(R.string.action_uncategorized);
+                subtitle = getString(R.string.search_in_category, getString(R.string.action_uncategorized));
             } else {
-                subtitle = NoteUtil.extendCategory(navigationSelection.category);
+                subtitle = getString(R.string.search_in_category, NoteUtil.extendCategory(navigationSelection.category));
             }
         } else if (navigationSelection.favorite != null && navigationSelection.favorite) {
-            subtitle = getString(R.string.label_favorites);
+            subtitle = getString(R.string.search_in_category, getString(R.string.label_favorites));
         } else {
-            subtitle = getString(R.string.app_name);
+            subtitle = getString(R.string.search_in_all);
         }
-        setTitle(subtitle);
+        activityBinding.searchText.setText(subtitle);
         CharSequence query = null;
         if (searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
             query = searchView.getQuery();

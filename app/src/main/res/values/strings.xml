@@ -28,6 +28,9 @@
     <string name="menu_preview">Preview</string>
     <string name="menu_share">Share</string>
 
+    <string name="search_in_category">Search in %1$s</string>
+    <string name="search_in_all">Search All Notes</string>
+
     <string name="change_category_title">Choose a category</string>
 
     <string name="listview_updated_today">Today</string>
