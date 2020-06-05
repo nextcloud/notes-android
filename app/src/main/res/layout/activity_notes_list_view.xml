@@ -47,9 +47,10 @@
                 app:cardElevation="6dp"
                 app:strokeWidth="0dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/menu_button"
@@ -62,27 +63,23 @@
                         android:paddingEnd="@dimen/spacer_1x"
                         android:paddingRight="@dimen/spacer_1x"
                         android:paddingBottom="@dimen/spacer_2x"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:tint="?attr/colorAccent"
                         app:srcCompat="@drawable/ic_baseline_menu_24" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/search_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/spacer_1x"
                         android:layout_marginLeft="@dimen/spacer_1x"
                         android:layout_marginEnd="@dimen/spacer_1x"
                         android:layout_marginRight="@dimen/spacer_1x"
+                        android:layout_weight="1"
                         android:ellipsize="end"
                         android:gravity="start"
                         android:lines="1"
                         android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@id/menu_button"
-                        app:layout_constraintRight_toLeftOf="@id/launchAccountSwitcher"
-                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="@string/search_in_all" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -90,12 +87,10 @@
                         android:layout_width="?attr/actionBarSize"
                         android:layout_height="?attr/actionBarSize"
                         android:layout_gravity="center_vertical|end"
+                        android:background="?attr/selectableItemBackgroundBorderless"
                         android:padding="12dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
         </com.google.android.material.appbar.AppBarLayout>
