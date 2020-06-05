@@ -26,7 +26,13 @@
                 app:contentInsetStartWithNavigation="0dp"
                 app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
                 app:titleMarginStart="0dp"
-                tools:title="@string/app_name" />
+                tools:title="@string/app_name">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </androidx.appcompat.widget.Toolbar>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/home_toolbar"

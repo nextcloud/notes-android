@@ -8,9 +8,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
@@ -74,6 +73,8 @@ import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvide
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
@@ -123,7 +124,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
     private ActionMode mActionMode;
-    private SearchView searchView = null;
     private final ISyncCallback syncCallBack = () -> {
         adapter.clearSelection(listView);
         if (mActionMode != null) {
@@ -164,7 +164,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
         db = NotesDatabase.getInstance(this);
 
-        setupActionBar();
+        setupToolbars();
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
         setupNotesList();
@@ -241,19 +241,58 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         notAuthorizedAccountHandled = true;
     }
 
-    private void setupActionBar() {
+    private void setupToolbars() {
         Toolbar toolbar = binding.activityNotesListView.toolbar;
         setSupportActionBar(toolbar);
 
         activityBinding.homeToolbar.setOnClickListener((v) -> {
-            if (searchView == null || searchView.isIconified()) {
-                activityBinding.homeToolbar.setVisibility(View.GONE);
-                activityBinding.toolbar.setVisibility(View.VISIBLE);
-                searchView.setIconified(false);
-                ViewCompat.setElevation(activityBinding.appBar, getResources().getDimension(R.dimen.design_appbar_elevation));
+            if (activityBinding.toolbar.getVisibility() == GONE) {
+                updateToolbars(false);
             }
         });
         activityBinding.menuButton.setOnClickListener((v) -> binding.drawerLayout.openDrawer(GravityCompat.START));
+
+        final LinearLayout searchEditFrame = activityBinding.searchView.findViewById(R.id
+                .search_edit_frame);
+
+        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            int oldVisibility = -1;
+
+            @Override
+            public void onGlobalLayout() {
+                int currentVisibility = searchEditFrame.getVisibility();
+
+                if (currentVisibility != oldVisibility) {
+                    if (currentVisibility == VISIBLE) {
+                        fabCreate.hide();
+                    } else {
+                        new Handler().postDelayed(() -> fabCreate.show(), 150);
+                    }
+
+                    oldVisibility = currentVisibility;
+                }
+            }
+
+        });
+        activityBinding.searchView.setOnCloseListener(() -> {
+            if (activityBinding.toolbar.getVisibility() == VISIBLE && TextUtils.isEmpty(activityBinding.searchView.getQuery())) {
+                updateToolbars(true);
+                return true;
+            }
+            return false;
+        });
+        activityBinding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                refreshLists();
+                return true;
+            }
+        });
     }
 
     private void setupNotesList() {
@@ -311,8 +350,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         fabCreate.setOnClickListener((View view) -> {
             Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
             createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, navigationSelection);
-            if (searchView != null && !searchView.isIconified() && searchView.getQuery().length() > 0) {
-                createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, searchView.getQuery().toString());
+            if (activityBinding.searchView.getQuery().length() > 0) {
+                createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, activityBinding.searchView.getQuery().toString());
                 invalidateOptionsMenu();
             }
             startActivityForResult(createIntent, create_note_cmd);
@@ -399,11 +438,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
     @Override
     public boolean onSupportNavigateUp() {
-        if (searchView != null && !searchView.isIconified()) {
-            activityBinding.homeToolbar.setVisibility(View.VISIBLE);
-            activityBinding.toolbar.setVisibility(View.GONE);
-            searchView.setIconified(true);
-            ViewCompat.setElevation(activityBinding.appBar, 0);
+        if (activityBinding.toolbar.getVisibility() == VISIBLE) {
+            updateToolbars(true);
             return true;
         } else {
             return super.onSupportNavigateUp();
@@ -548,8 +584,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             return;
         }
         View emptyContentView = binding.activityNotesListView.emptyContentView.getRoot();
-        emptyContentView.setVisibility(View.GONE);
-        binding.activityNotesListView.progressCircular.setVisibility(View.VISIBLE);
+        emptyContentView.setVisibility(GONE);
+        binding.activityNotesListView.progressCircular.setVisibility(VISIBLE);
         fabCreate.show();
         String subtitle;
         if (navigationSelection.category != null) {
@@ -565,19 +601,19 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         }
         activityBinding.searchText.setText(subtitle);
         CharSequence query = null;
-        if (searchView != null && !searchView.isIconified() && searchView.getQuery().length() != 0) {
-            query = searchView.getQuery();
+        if (activityBinding.searchView.getQuery().length() != 0) {
+            query = activityBinding.searchView.getQuery();
         }
 
         NotesLoadedListener callback = (List<Item> notes, boolean showCategory, CharSequence searchQuery) -> {
             adapter.setShowCategory(showCategory);
             adapter.setHighlightSearchQuery(searchQuery);
             adapter.setItemList(notes);
-            binding.activityNotesListView.progressCircular.setVisibility(View.GONE);
+            binding.activityNotesListView.progressCircular.setVisibility(GONE);
             if (notes.size() > 0) {
-                emptyContentView.setVisibility(View.GONE);
+                emptyContentView.setVisibility(GONE);
             } else {
-                emptyContentView.setVisibility(View.VISIBLE);
+                emptyContentView.setVisibility(VISIBLE);
             }
             if (scrollToTop) {
                 listView.scrollToPosition(0);
@@ -587,62 +623,10 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-
-    /**
-     * Adds the Menu Items to the Action Bar.
-     *
-     * @param menu Menu
-     * @return boolean
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_list_view, menu);
-        // Associate searchable configuration with the SearchView
-        final MenuItem item = menu.findItem(R.id.search);
-        searchView = (SearchView) item.getActionView();
-
-        final LinearLayout searchEditFrame = searchView.findViewById(R.id
-                .search_edit_frame);
-
-        searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            int oldVisibility = -1;
-
-            @Override
-            public void onGlobalLayout() {
-                int currentVisibility = searchEditFrame.getVisibility();
-
-                if (currentVisibility != oldVisibility) {
-                    if (currentVisibility == View.VISIBLE) {
-                        fabCreate.hide();
-                    } else {
-                        new Handler().postDelayed(() -> fabCreate.show(), 150);
-                    }
-
-                    oldVisibility = currentVisibility;
-                }
-            }
-
-        });
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                refreshLists();
-                return true;
-            }
-        });
-        return super.onCreateOptionsMenu(menu);
-    }
-
     @Override
     protected void onNewIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            searchView.setQuery(intent.getStringExtra(SearchManager.QUERY), true);
+            activityBinding.searchView.setQuery(intent.getStringExtra(SearchManager.QUERY), true);
         }
         super.onNewIntent(intent);
     }
@@ -700,7 +684,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                             Log.i(TAG, capabilities.toString());
                             runOnUiThread(() -> {
                                 selectAccount(ssoAccount.name);
-                                binding.accountNavigation.setVisibility(View.VISIBLE);
+                                binding.accountNavigation.setVisibility(VISIBLE);
                                 binding.drawerLayout.closeDrawer(GravityCompat.START);
                             });
                         } catch (SQLiteConstraintException e) {
@@ -708,16 +692,16 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                                 runOnUiThread(() -> {
                                     BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
                                     selectAccount(ssoAccount.name);
-                                    binding.accountNavigation.setVisibility(View.VISIBLE);
+                                    binding.accountNavigation.setVisibility(VISIBLE);
                                     binding.drawerLayout.closeDrawer(GravityCompat.START);
                                 });
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
                             runOnUiThread(() -> {
-                                binding.accountNavigation.setVisibility(View.GONE);
+                                binding.accountNavigation.setVisibility(GONE);
                                 binding.drawerLayout.openDrawer(GravityCompat.START);
-                                binding.activityNotesListView.progressCircular.setVisibility(View.GONE);
+                                binding.activityNotesListView.progressCircular.setVisibility(GONE);
                                 ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
                             });
                         }
@@ -792,7 +776,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         if (selected) {
             v.setSelected(true);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                    this, this, db, mActionMode, adapter, listView, this::refreshLists, getSupportFragmentManager(), searchView
+                    this, this, db, mActionMode, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
             ));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
@@ -802,14 +786,20 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
     @Override
     public void onBackPressed() {
-        if (searchView == null || searchView.isIconified()) {
-            super.onBackPressed();
+        if (activityBinding.toolbar.getVisibility() == VISIBLE) {
+            updateToolbars(true);
         } else {
-            activityBinding.homeToolbar.setVisibility(View.VISIBLE);
-            activityBinding.toolbar.setVisibility(View.GONE);
-            searchView.setIconified(true);
-            ViewCompat.setElevation(activityBinding.appBar, 0);
-            invalidateOptionsMenu();
+            super.onBackPressed();
+        }
+    }
+
+    private void updateToolbars(boolean disableSearch) {
+        activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
+        activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
+        activityBinding.searchView.setIconified(disableSearch);
+        ViewCompat.setElevation(activityBinding.appBar, disableSearch ? 0 : getResources().getDimension(R.dimen.design_appbar_elevation));
+        if (disableSearch) {
+            activityBinding.searchView.setQuery(null, true);
         }
     }
 
@@ -873,7 +863,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         }
 
         mActionMode.finish();
-        searchView.setIconified(true);
         refreshLists();
     }
 }
