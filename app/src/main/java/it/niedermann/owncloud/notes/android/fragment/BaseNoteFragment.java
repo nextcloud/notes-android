@@ -43,6 +43,7 @@ import it.niedermann.owncloud.notes.util.ShareUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 import static it.niedermann.owncloud.notes.util.Notes.isDarkThemeActive;
 
@@ -149,12 +150,14 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
 
         if (isRequestPinShortcutSupported(requireActivity()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -169,6 +172,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private void prepareFavoriteOption(MenuItem item) {
         item.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
         item.setChecked(note.isFavorite());
+        tintMenuIcon(item, colorAccent);
     }
 
     /**

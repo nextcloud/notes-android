@@ -10,11 +10,12 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import it.niedermann.owncloud.notes.R;
+
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 
 public abstract class BrandedActivity extends AppCompatActivity implements Branded {
 
@@ -44,12 +45,7 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         for (int i = 0; i < menu.size(); i++) {
-            Drawable drawable = menu.getItem(i).getIcon();
-            if (drawable != null) {
-                drawable = DrawableCompat.wrap(drawable);
-                DrawableCompat.setTint(drawable, colorAccent);
-                menu.getItem(i).setIcon(drawable);
-            }
+            tintMenuIcon(menu.getItem(i), colorAccent);
         }
         return super.onCreateOptionsMenu(menu);
     }
