@@ -21,7 +21,6 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/colorPrimary"
                 android:visibility="gone"
                 app:contentInsetStartWithNavigation="0dp"
                 app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
@@ -79,20 +78,19 @@
                         android:ellipsize="end"
                         android:gravity="start"
                         android:lines="1"
-                        android:text="Search in blah"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/menu_button"
                         app:layout_constraintRight_toLeftOf="@id/launchAccountSwitcher"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/search_in_all" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/launchAccountSwitcher"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="?attr/actionBarSize"
+                        android:layout_height="?attr/actionBarSize"
                         android:layout_gravity="center_vertical|end"
-                        android:layout_margin="@dimen/spacer_1x"
-                        app:iconSize="28dp"
+                        android:padding="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
