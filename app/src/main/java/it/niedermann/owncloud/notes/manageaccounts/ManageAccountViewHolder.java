@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.view.View;
 
@@ -15,16 +16,20 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
+
 public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
 
-    ItemAccountChooseBinding binding;
+    private ItemAccountChooseBinding binding;
 
     public ManageAccountViewHolder(@NonNull View itemView) {
         super(itemView);
         binding = ItemAccountChooseBinding.bind(itemView);
     }
 
-    public void bind(@NonNull LocalAccount localAccount, @NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete) {
+    public void bind(@NonNull LocalAccount localAccount, @NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete, boolean isCurrentAccount) {
         binding.accountItemLabel.setText(localAccount.getAccountName());
         Glide.with(itemView.getContext())
                 .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
@@ -33,10 +38,16 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
                 .into(binding.accountItemAvatar);
         itemView.setOnClickListener((v) -> onAccountClick.accept(localAccount));
         if (onAccountDelete == null) {
-            binding.delete.setVisibility(View.GONE);
+            binding.delete.setVisibility(GONE);
         } else {
-            binding.delete.setVisibility(View.VISIBLE);
+            binding.delete.setVisibility(VISIBLE);
             binding.delete.setOnClickListener((v) -> onAccountDelete.accept(localAccount));
+        }
+        if (isCurrentAccount) {
+            binding.currentAccountIndicator.setVisibility(VISIBLE);
+            applyBrandToLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, localAccount.getColor());
+        } else {
+            binding.currentAccountIndicator.setVisibility(GONE);
         }
     }
 }

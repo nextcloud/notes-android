@@ -16,6 +16,8 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 
 public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountViewHolder> {
 
+    @Nullable
+    private LocalAccount currentLocalAccount = null;
     @NonNull
     private final List<LocalAccount> localAccounts = new ArrayList<>();
     @NonNull
@@ -42,18 +44,22 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
 
     @Override
     public void onBindViewHolder(@NonNull ManageAccountViewHolder holder, int position) {
-        holder.bind(localAccounts.get(position), onAccountClick, (localAccount -> {
+        final LocalAccount localAccount = localAccounts.get(position);
+        holder.bind(localAccount, (localAccountClicked) -> {
+            setCurrentLocalAccount(localAccountClicked);
+            onAccountClick.accept(localAccountClicked);
+        }, (localAccountToDelete -> {
             if (onAccountDelete != null) {
                 for (int i = 0; i < localAccounts.size(); i++) {
-                    if (localAccounts.get(i).getId() == localAccount.getId()) {
+                    if (localAccounts.get(i).getId() == localAccountToDelete.getId()) {
                         localAccounts.remove(i);
                         notifyItemRemoved(i);
                         break;
                     }
                 }
-                onAccountDelete.accept(localAccount);
+                onAccountDelete.accept(localAccountToDelete);
             }
-        }));
+        }), currentLocalAccount != null && currentLocalAccount.getId() == localAccount.getId());
     }
 
     @Override
@@ -64,6 +70,11 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
     public void setLocalAccounts(@NonNull List<LocalAccount> localAccounts) {
         this.localAccounts.clear();
         this.localAccounts.addAll(localAccounts);
+        notifyDataSetChanged();
+    }
+
+    public void setCurrentLocalAccount(@Nullable LocalAccount currentLocalAccount) {
+        this.currentLocalAccount = currentLocalAccount;
         notifyDataSetChanged();
     }
 }

@@ -5,7 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
+import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.List;
 
@@ -46,12 +49,21 @@ public class ManageAccountsActivity extends LockedActivity {
             }
             if (localAccounts.size() > 0) {
                 SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
+                adapter.setCurrentLocalAccount(localAccounts.get(0));
             } else {
                 setResult(AppCompatActivity.RESULT_FIRST_USER);
                 finish();
             }
         });
         adapter.setLocalAccounts(localAccounts);
+        try {
+            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
+            if (ssoAccount != null) {
+                adapter.setCurrentLocalAccount(db.getLocalAccountByAccountName(ssoAccount.name));
+            }
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            e.printStackTrace();
+        }
         binding.accounts.setAdapter(adapter);
     }
 

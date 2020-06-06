@@ -3,14 +3,12 @@ package it.niedermann.owncloud.notes.accountswitcher;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
@@ -19,14 +17,16 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 import static it.niedermann.owncloud.notes.android.activity.NotesListViewActivity.manage_account;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
 
-public class AccountSwitcherDialog extends DialogFragment {
+public class AccountSwitcherDialog extends BrandedDialogFragment {
 
     private static final String KEY_CURRENT_ACCOUNT_ID = "current_account_id";
 
@@ -69,10 +69,6 @@ public class AccountSwitcherDialog extends DialogFragment {
                 .into(binding.currentAccountItemAvatar);
         binding.accountLayout.setOnClickListener((v) -> dismiss());
 
-        LayerDrawable ld = (LayerDrawable) binding.check.getDrawable();
-        Drawable ldDrawable = ld.findDrawableByLayerId(R.id.area);
-        DrawableCompat.setTint(ldDrawable, currentLocalAccount.getColor());
-
         AccountSwitcherAdapter adapter = new AccountSwitcherAdapter((localAccount -> {
             accountSwitcherListener.onAccountChosen(localAccount);
             dismiss();
@@ -110,5 +106,10 @@ public class AccountSwitcherDialog extends DialogFragment {
         dialog.setArguments(args);
 
         return dialog;
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        applyBrandToLayerDrawable((LayerDrawable) binding.check.getDrawable(), R.id.area, mainColor);
     }
 }
