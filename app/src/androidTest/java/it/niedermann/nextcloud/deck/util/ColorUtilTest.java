@@ -6,7 +6,9 @@ import androidx.annotation.ColorInt;
 import androidx.core.util.Pair;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
@@ -96,6 +98,29 @@ public class ColorUtilTest {
                     "Expect contrast between " + String.format("#%06X", (0xFFFFFF & colorPair.first)) + " and " + String.format("#%06X", (0xFFFFFF & colorPair.second)) + " to be insufficient",
                     ColorUtil.contrastRatioIsSufficient(colorPair.first, colorPair.second)
             );
+        }
+    }
+
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
+
+    @Test
+    public void testGetCleanHexaColorString() {
+        final List<Pair<String, String>> validColors = new ArrayList<>();
+        validColors.add(new Pair<>("#0082C9", "#0082C9"));
+        validColors.add(new Pair<>("0082C9", "#0082C9"));
+        validColors.add(new Pair<>("#CCC", "#CCCCCC"));
+        validColors.add(new Pair<>("ccc", "#cccccc"));
+        validColors.add(new Pair<>("af0", "#aaff00"));
+        validColors.add(new Pair<>("#af0", "#aaff00"));
+        for (Pair<String, String> color : validColors) {
+            assertEquals("Expect " + color.first + " to be cleaned up to " + color.second, color.second, ColorUtil.formatColorToParsableHexString(color.first));
+        }
+
+        final String[] invalidColors = new String[]{null, "", "cc", "c", "#a", "#55L", "55L"};
+        for (String color : invalidColors) {
+            exception.expect(IllegalArgumentException.class);
+            ColorUtil.formatColorToParsableHexString(color);
         }
     }
 }
