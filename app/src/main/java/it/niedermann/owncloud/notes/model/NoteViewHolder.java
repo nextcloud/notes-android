@@ -110,7 +110,10 @@ public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLo
             @ColorInt final int searchBackground = context.getResources().getColor(R.color.bg_highlighted);
             @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
 
-            final Pattern pattern = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE);
+            // The Pattern.quote method will add \Q to the very beginning of the string and \E to the end of the string
+            // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
+            // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
+            final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
             SpannableString spannableString = new SpannableString(note.getTitle());
             Matcher matcher = pattern.matcher(spannableString);
             while (matcher.find()) {
