@@ -1,3 +1,5 @@
+- ✨ Redesign of UI based on the future Nextcloud Android app
+- 🎨 Branding of the Nextcloud instance can be applied (#762)
 - 📩 Bulk share content of multiple notes
 - 🔧 Move note list widget preferences to database (#832)
 - 🐞 Searching for ? character crashes the app (#846)
