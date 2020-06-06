@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
@@ -73,7 +74,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         for (int i = 0; i < noteList.size(); i++) {
             DBNote currentNote = noteList.get(i);
             String timeslot = timeslotter.getTimeslot(currentNote);
-            if (i > 0 && !timeslot.equals(lastTimeslot)) {
+            if (i > 0 && !timeslot.equals(lastTimeslot) && !TextUtils.isEmpty(timeslot)) {
                 itemList.add(new SectionItem(timeslot));
             }
             itemList.add(currentNote);
@@ -101,7 +102,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             int month = now.get(Calendar.MONTH);
             int day = now.get(Calendar.DAY_OF_MONTH);
             int offsetWeekStart = (now.get(Calendar.DAY_OF_WEEK) - now.getFirstDayOfWeek() + 7) % 7;
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_today), month, day));
+            timeslots.add(new Timeslot(null, month, day));
             timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_yesterday), month, day - 1));
             timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_week), month, day - offsetWeekStart));
             timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_week), month, day - offsetWeekStart - 7));
@@ -130,10 +131,11 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         }
 
         private class Timeslot {
+            @Nullable
             private final String label;
             private final Calendar time;
 
-            Timeslot(String label, int month, int day) {
+            Timeslot(@Nullable String label, int month, int day) {
                 this.label = label;
                 this.time = Calendar.getInstance();
                 this.time.set(this.time.get(Calendar.YEAR), month, day, 0, 0, 0);
