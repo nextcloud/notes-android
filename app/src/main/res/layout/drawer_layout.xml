@@ -59,36 +59,26 @@
                         android:textSize="24sp" />
                 </RelativeLayout>
 
-                <LinearLayout
-                    android:id="@+id/accountNavigation"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/navigationList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:itemCount="6"
+                    tools:listitem="@layout/item_navigation" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/navigationList"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        app:layoutManager="LinearLayoutManager"
-                        tools:itemCount="6"
-                        tools:listitem="@layout/item_navigation" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/navigationMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        app:layoutManager="LinearLayoutManager"
-                        tools:itemCount="3"
-                        tools:listitem="@layout/item_navigation" />
-                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/navigationMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    app:layoutManager="LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_navigation" />
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
-
     </com.google.android.material.navigation.NavigationView>
-
 </androidx.drawerlayout.widget.DrawerLayout>

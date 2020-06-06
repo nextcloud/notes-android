@@ -4,7 +4,6 @@ import android.animation.AnimatorInflater;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.database.sqlite.SQLiteConstraintException;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -37,6 +36,7 @@ import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
@@ -665,71 +665,71 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Check which request we're responding to
-        if (requestCode == create_note_cmd) {
-            // Make sure the request was successful
-            if (resultCode == RESULT_OK) {
-                //not need because of db.synchronisation in createActivity
+        switch (requestCode) {
+            case create_note_cmd: {
+                // Make sure the request was successful
+                if (resultCode == RESULT_OK) {
+                    //not need because of db.synchronisation in createActivity
 
-                Bundle bundle = data.getExtras();
-                if (bundle != null && bundle.containsKey(CREATED_NOTE)) {
-                    DBNote createdNote = (DBNote) bundle.getSerializable(CREATED_NOTE);
-                    if (createdNote != null) {
-                        adapter.add(createdNote);
-                    } else {
-                        Log.w(TAG, "createdNote must not be null");
-                    }
-                } else {
-                    Log.w(TAG, "Provide at least " + CREATED_NOTE);
-                }
-            }
-            listView.scrollToPosition(0);
-        } else if (requestCode == server_settings) {
-            // Recreate activity completely, because theme switching makes problems when only invalidating the views.
-            // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
-            recreate();
-        } else if (requestCode == manage_account) {
-            if (resultCode == RESULT_FIRST_USER) {
-                selectAccount(null);
-            }
-        } else {
-            try {
-                AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
-                    CapabilitiesWorker.update(this);
-                    new Thread(() -> {
-                        Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
-                        try {
-                            Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-                            final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                            db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
-                            Log.i(TAG, capabilities.toString());
-                            runOnUiThread(() -> {
-                                selectAccount(ssoAccount.name);
-                                binding.accountNavigation.setVisibility(VISIBLE);
-                                binding.drawerLayout.closeDrawer(GravityCompat.START);
-                            });
-                        } catch (SQLiteConstraintException e) {
-                            if (db.getAccounts().size() > 1) { // TODO ideally only show snackbar when this is a not migrated account
-                                runOnUiThread(() -> {
-                                    BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show();
-                                    selectAccount(ssoAccount.name);
-                                    binding.accountNavigation.setVisibility(VISIBLE);
-                                    binding.drawerLayout.closeDrawer(GravityCompat.START);
-                                });
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            runOnUiThread(() -> {
-                                binding.accountNavigation.setVisibility(GONE);
-                                binding.drawerLayout.openDrawer(GravityCompat.START);
-                                binding.activityNotesListView.progressCircular.setVisibility(GONE);
-                                ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-                            });
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null && bundle.containsKey(CREATED_NOTE)) {
+                        DBNote createdNote = (DBNote) bundle.getSerializable(CREATED_NOTE);
+                        if (createdNote != null) {
+                            adapter.add(createdNote);
+                        } else {
+                            Log.w(TAG, "createdNote must not be null");
                         }
-                    }).start();
-                });
-            } catch (AccountImportCancelledException e) {
-                Log.i(TAG, "AccountImport has been cancelled.");
+                    } else {
+                        Log.w(TAG, "Provide at least " + CREATED_NOTE);
+                    }
+                }
+                listView.scrollToPosition(0);
+                break;
+            }
+            case server_settings: {
+                // Recreate activity completely, because theme switching makes problems when only invalidating the views.
+                // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
+                recreate();
+                break;
+            }
+            case manage_account: {
+                if (resultCode == RESULT_FIRST_USER) {
+                    selectAccount(null);
+                }
+                break;
+            }
+            default: {
+                try {
+                    AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
+                        CapabilitiesWorker.update(this);
+                        new Thread(() -> {
+                            Log.i(TAG, "Added account: " + "name:" + ssoAccount.name + ", " + ssoAccount.url + ", userId" + ssoAccount.userId);
+                            try {
+                                Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
+                                final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
+                                db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
+                                Log.i(TAG, capabilities.toString());
+                                runOnUiThread(() -> selectAccount(ssoAccount.name));
+                            } catch (Exception e) {
+                                if (e instanceof TokenMismatchException && db.getLocalAccountByAccountName(ssoAccount.name) != null) {
+                                    Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
+                                    runOnUiThread(() -> {
+                                        selectAccount(ssoAccount.name);
+                                        coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
+                                    });
+                                } else {
+                                    e.printStackTrace();
+                                    runOnUiThread(() -> {
+                                        binding.activityNotesListView.progressCircular.setVisibility(GONE);
+                                        ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                    });
+                                }
+                            }
+                        }).start();
+                    });
+                } catch (AccountImportCancelledException e) {
+                    Log.i(TAG, "AccountImport has been cancelled.");
+                }
             }
         }
     }
