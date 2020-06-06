@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,6 +64,9 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     private DBNote colorTheNote(DBNote dbNote) {
         if (!TextUtils.isEmpty(searchQuery)) {
             SpannableString spannableString = new SpannableString(dbNote.getTitle());
+            // The Pattern.quote method will add \Q to the very beginning of the string and \E to the end of the string
+            // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
+            // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
             Matcher matcher = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
             while (matcher.find()) {
                 spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
