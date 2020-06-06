@@ -134,6 +134,8 @@ public class NotesListViewActivity extends LockedActivity implements ItemAdapter
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // This is a sample PR
+
         CapabilitiesWorker.update(this);
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
