@@ -4,6 +4,7 @@ import android.animation.AnimatorInflater;
 import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -19,7 +20,6 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
@@ -257,9 +257,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     }
 
     private void setupToolbars() {
-        Toolbar toolbar = binding.activityNotesListView.toolbar;
-        setSupportActionBar(toolbar);
-
+        setSupportActionBar(binding.activityNotesListView.toolbar);
+        updateCurrentAccountAvatar();
         activityBinding.homeToolbar.setOnClickListener((v) -> {
             if (activityBinding.toolbar.getVisibility() == GONE) {
                 updateToolbars(false);
@@ -577,9 +576,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                 onItemClick(item);
             }
         });
-
-
-        this.updateCurrentAccountAvatar();
         adapterMenu.setItems(itemsMenu);
         binding.navigationMenu.setAdapter(adapterMenu);
     }
@@ -710,11 +706,16 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                                 db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
                                 Log.i(TAG, capabilities.toString());
                                 runOnUiThread(() -> selectAccount(ssoAccount.name));
+                            } catch (SQLiteException e) {
+                                // Happens when upgrading from version ≤ 1.0.1 and importing the account
+                                runOnUiThread(() -> selectAccount(ssoAccount.name));
                             } catch (Exception e) {
+                                // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && db.getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
                                     runOnUiThread(() -> {
                                         selectAccount(ssoAccount.name);
+                                        // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
                                         coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
                                     });
                                 } else {
