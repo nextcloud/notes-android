@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -64,7 +65,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     private DBNote colorTheNote(DBNote dbNote) {
         if (!TextUtils.isEmpty(searchQuery)) {
             SpannableString spannableString = new SpannableString(dbNote.getTitle());
-            Matcher matcher = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
+            Matcher matcher = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
             while (matcher.find()) {
                 spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
                 spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
@@ -73,7 +74,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             dbNote.setTitle(Html.toHtml(spannableString));
 
             spannableString = new SpannableString(dbNote.getExcerpt());
-            matcher = Pattern.compile("(" + searchQuery + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
+            matcher = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE).matcher(spannableString);
             while (matcher.find()) {
                 spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
                 spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
