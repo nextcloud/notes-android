@@ -28,6 +28,8 @@ public class ManageAccountsActivity extends LockedActivity {
         binding = ActivityManageAccountsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setSupportActionBar(binding.toolbar);
+
         db = NotesDatabase.getInstance(this);
 
         List<LocalAccount> localAccounts = db.getAccounts();
