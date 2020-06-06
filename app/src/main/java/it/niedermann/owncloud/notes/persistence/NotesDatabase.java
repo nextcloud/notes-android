@@ -20,6 +20,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.core.content.ContextCompat;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -52,6 +53,7 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
 import it.niedermann.owncloud.notes.model.SingleNoteWidgetData;
+import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
@@ -701,10 +703,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_url, url);
         values.put(key_username, username);
         values.put(key_account_name, accountName);
-        values.put(key_color, capabilities.getColor().substring(1));
-        values.put(key_text_color, capabilities.getTextColor().substring(1));
         values.put(key_capabilities_etag, capabilities.getETag());
-        db.insertOrThrow(table_accounts, null, values);
+        long accountId = db.insertOrThrow(table_accounts, null, values);
+        updateBrand(accountId, capabilities);
     }
 
     /**
@@ -792,15 +793,26 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     public void updateBrand(long accountId, @NonNull Capabilities capabilities) throws IllegalArgumentException {
         validateAccountId(accountId);
-        // Validate color format
-        Color.parseColor(capabilities.getColor());
-        Color.parseColor(capabilities.getTextColor());
+
+        String color;
+        try {
+            color = ColorUtil.formatColorToParsableHexString(capabilities.getColor()).substring(1);
+        } catch (Exception e) {
+            color = Integer.toHexString(ContextCompat.getColor(context, R.color.defaultBrand) & 0x00ffffff);
+        }
+
+        String textColor;
+        try {
+            textColor = ColorUtil.formatColorToParsableHexString(capabilities.getTextColor()).substring(1);
+        } catch (Exception e) {
+            textColor = Integer.toHexString(ContextCompat.getColor(context, android.R.color.white) & 0x00ffffff);
+        }
 
         final SQLiteDatabase db = this.getWritableDatabase();
         final ContentValues values = new ContentValues();
 
-        values.put(key_color, capabilities.getColor().substring(1));
-        values.put(key_text_color, capabilities.getTextColor().substring(1));
+        values.put(key_color, color);
+        values.put(key_text_color, textColor);
 
         final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
         if (updatedRows == 1) {
