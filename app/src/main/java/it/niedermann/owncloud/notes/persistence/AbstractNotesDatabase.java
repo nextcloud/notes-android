@@ -34,7 +34,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
     private static final int database_version = 16;
     @NonNull
-    private final Context context;
+    protected final Context context;
 
     protected static final String database_name = "OWNCLOUD_NOTES";
     protected static final String table_notes = "NOTES";
