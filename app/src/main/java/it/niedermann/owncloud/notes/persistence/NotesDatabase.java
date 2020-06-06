@@ -798,14 +798,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
         try {
             color = ColorUtil.formatColorToParsableHexString(capabilities.getColor()).substring(1);
         } catch (Exception e) {
-            color = Integer.toHexString(ContextCompat.getColor(context, R.color.defaultBrand) & 0x00ffffff);
+            color = String.format("%06X", (0xFFFFFF & ContextCompat.getColor(context, R.color.defaultBrand)));
         }
 
         String textColor;
         try {
             textColor = ColorUtil.formatColorToParsableHexString(capabilities.getTextColor()).substring(1);
         } catch (Exception e) {
-            textColor = Integer.toHexString(ContextCompat.getColor(context, android.R.color.white) & 0x00ffffff);
+            textColor = String.format("%06X", (0xFFFFFF & ContextCompat.getColor(context, android.R.color.white)));
         }
 
         final SQLiteDatabase db = this.getWritableDatabase();
