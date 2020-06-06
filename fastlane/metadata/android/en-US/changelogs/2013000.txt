@@ -1,2 +1,3 @@
 - 📩 Bulk share content of multiple notes
 - 🔧 Move note list widget preferences to database (#832)
+- 🐞 Searching for ? character crashes the app (#846)
