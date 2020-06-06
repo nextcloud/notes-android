@@ -1,3 +1,4 @@
 - 📩 Bulk share content of multiple notes
 - 🔧 Move note list widget preferences to database (#832)
 - 🐞 Searching for ? character crashes the app (#846)
+- 🐞 Fix NullPointerException when server does not respond theming information or other capabilities (#854)
