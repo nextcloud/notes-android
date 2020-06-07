@@ -495,8 +495,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return db.insert(table_category, null, values);
     }
 
-    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
-        return updateNoteAndSync(ssoAccount, accountId, oldNote, newContent, null, callback);
+    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
+        return updateNoteAndSync(ssoAccount, localAccount, oldNote, newContent, null, callback);
     }
 
     /**
@@ -509,22 +509,22 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
-    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
+    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         DBNote newNote;
         if (newContent == null) {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, oldNote.getExcerpt());
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt());
         } else {
             final String title;
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if (oldNote.getRemoteId() == 0) {
+                if (oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, getContext());
                 } else {
                     title = oldNote.getTitle();
                 }
             }
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(newContent, title));
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title));
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -535,7 +535,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_content, newNote.getContent());
         values.put(key_excerpt, newNote.getExcerpt());
         int rows = db.update(table_notes, values, key_id + " = ? AND (" + key_content + " != ? OR " + key_category + " != ?)", new String[]{String.valueOf(newNote.getId()), newNote.getContent(), newNote.getCategory()});
-        removeEmptyCategory(accountId);
+        removeEmptyCategory(localAccount.getId());
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if (rows > 0) {
             notifyNotesChanged();

@@ -18,8 +18,8 @@ import android.view.MenuItem;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -32,8 +32,8 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.android.fragment.EditTitleDialogFragment.EditTitleListener;
-import it.niedermann.owncloud.notes.model.ApiVersion;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
+import it.niedermann.owncloud.notes.model.ApiVersion;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -170,7 +170,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
 
-        menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) >= 0);
+        menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) >= 0);
         menu.findItem(R.id.menu_delete).setVisible(!isNew);
     }
 
@@ -190,7 +190,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 if (originalNote == null) {
                     db.deleteNoteAndSync(ssoAccount, note.getId());
                 } else {
-                    db.updateNoteAndSync(ssoAccount, localAccount.getId(), originalNote, null, null);
+                    db.updateNoteAndSync(ssoAccount, localAccount, originalNote, null, null);
                 }
                 listener.close();
                 return true;
@@ -271,7 +271,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             if (note.getContent().equals(newContent)) {
                 Log.v(TAG, "... not saving, since nothing has changed");
             } else {
-                note = db.updateNoteAndSync(ssoAccount, localAccount.getId(), note, newContent, callback);
+                note = db.updateNoteAndSync(ssoAccount, localAccount, note, newContent, callback);
                 listener.onNoteUpdated(note);
                 requireActivity().invalidateOptionsMenu();
             }
@@ -342,7 +342,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onTitleEdited(String newTitle) {
         titleModified = true;
         note.setTitle(newTitle);
-        note = db.updateNoteAndSync(ssoAccount, localAccount.getId(), note, note.getContent(), newTitle, null);
+        note = db.updateNoteAndSync(ssoAccount, localAccount, note, note.getContent(), newTitle, null);
         listener.onNoteUpdated(note);
     }
 
