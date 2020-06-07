@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Layout;
@@ -12,6 +13,8 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
@@ -22,6 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedActivity;
 
 public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
@@ -34,6 +38,18 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     private SearchView searchView;
     private String searchQuery = null;
     private static final int delay = 50; // If the search string does not change after $delay ms, then the search task starts.
+
+    @ColorInt
+    private int mainColor;
+    @ColorInt
+    private int textColor;
+
+    @Override
+    public void onStart() {
+        this.mainColor = getResources().getColor(R.color.defaultBrand);
+        this.textColor = Color.WHITE;
+        super.onStart();
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -73,12 +89,12 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
                 if (currentVisibility != oldVisibility) {
                     if (currentVisibility != View.VISIBLE) {
-                        colorWithText("", null);
+                        colorWithText("", null, mainColor, textColor);
                         searchQuery = "";
                         hideSearchFabs();
                     } else {
                         jumpToOccurrence();
-                        colorWithText(searchQuery, null);
+                        colorWithText(searchQuery, null, mainColor, textColor);
                         occurrenceCount = countOccurrences(getContent(), searchQuery);
                         showSearchFabs();
                     }
@@ -96,7 +112,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             next.setOnClickListener(v -> {
                 currentOccurrence++;
                 jumpToOccurrence();
-                colorWithText(searchView.getQuery().toString(), currentOccurrence);
+                colorWithText(searchView.getQuery().toString(), currentOccurrence, mainColor, textColor);
             });
         }
 
@@ -105,7 +121,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 occurrenceCount = countOccurrences(getContent(), searchView.getQuery().toString());
                 currentOccurrence--;
                 jumpToOccurrence();
-                colorWithText(searchView.getQuery().toString(), currentOccurrence);
+                colorWithText(searchView.getQuery().toString(), currentOccurrence, mainColor, textColor);
             });
         }
 
@@ -117,7 +133,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             public boolean onQueryTextSubmit(@NonNull String query) {
                 currentOccurrence++;
                 jumpToOccurrence();
-                colorWithText(query, currentOccurrence);
+                colorWithText(query, currentOccurrence, mainColor, textColor);
                 return true;
             }
 
@@ -137,7 +153,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
                 }
                 currentOccurrence = 1;
                 jumpToOccurrence();
-                colorWithText(searchQuery, currentOccurrence);
+                colorWithText(searchQuery, currentOccurrence, mainColor, textColor);
             }
 
             private void queryWithHandler(@NonNull String newText) {
@@ -183,7 +199,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
         }
     }
 
-    protected abstract void colorWithText(@NonNull String newText, @Nullable Integer current);
+    protected abstract void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor);
 
     protected abstract ScrollView getScrollView();
 
@@ -272,5 +288,14 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             count++;
         }
         return count;
+    }
+
+    @CallSuper
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        this.mainColor = mainColor;
+        this.textColor = textColor;
+        BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchPrevButton());
+        BrandedActivity.applyBrandToFAB(mainColor, textColor, getSearchNextButton());
     }
 }

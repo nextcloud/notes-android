@@ -82,7 +82,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
 
-        adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
+        adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
                 NoteListsWidgetData data = new NoteListsWidgetData();
@@ -134,6 +134,10 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     protected void onResume() {
         super.onResume();
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
     }
 
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {

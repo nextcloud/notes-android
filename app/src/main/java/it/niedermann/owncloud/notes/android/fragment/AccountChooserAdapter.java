@@ -26,14 +26,14 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @NonNull
     private final List<LocalAccount> localAccounts;
     @NonNull
-    private final AccountChooserListener accountChooserListener;
+    private final MoveAccountListener moveAccountListener;
     @NonNull
     private final Context context;
 
-    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull AccountChooserListener accountChooserListener, @NonNull Context context) {
+    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull MoveAccountListener moveAccountListener, @NonNull Context context) {
         super();
         this.localAccounts = localAccounts;
-        this.accountChooserListener = accountChooserListener;
+        this.moveAccountListener = moveAccountListener;
         this.context = context;
     }
 
@@ -48,7 +48,7 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         LocalAccount localAccount = localAccounts.get(position);
         AccountChooserViewHolder accountChooserViewHolder = (AccountChooserViewHolder) holder;
-        accountChooserViewHolder.getAccountLayout().setOnClickListener((v) -> accountChooserListener.onAccountChosen(localAccount));
+        accountChooserViewHolder.getAccountLayout().setOnClickListener((v) -> moveAccountListener.moveToAccount(localAccount));
 
         Glide
                 .with(context)
@@ -86,7 +86,7 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
     }
 
-    public interface AccountChooserListener {
-        void onAccountChosen(LocalAccount account);
+    public interface MoveAccountListener {
+        void moveToAccount(LocalAccount account);
     }
 }

@@ -2,11 +2,16 @@
 <resources>
     <!-- Colors -->
 
-    <color name="primary">#0082C9</color>
-    <color name="primary_dark">#286090</color>
+    <color name="primary">#ffffff</color>
+    <color name="accent">#121212</color>
+
+    <color name="defaultBrand">#0082C9</color>
+
+    <color name="cursorHandles">#555566</color>
+    <color name="defaultTextHighlightBackground">#2233334a</color>
 
     <color name="bg_highlighted">#eee</color>
-    <color name="bg_normal">#ffffff</color>
+    <color name="bg_normal">@color/primary</color>
     <color name="bg_attention">#d40000</color>
     <color name="bg_warning">#ffcc00</color>
     <color name="fg_default">#000000</color>
@@ -17,7 +22,7 @@
 
     <color name="icon_color_default">#757575</color>
 
-    <color name="bg_search_primary">@color/primary</color>
+    <color name="bg_search_primary">@color/defaultBrand</color>
     <color name="bg_search_secondary">#eee</color>
 
     <color name="widget_background">#dfffffff</color>
@@ -25,7 +30,7 @@
     <color name="widget_fg_contrast">#ffffff</color>
 
     <color name="category_background">@color/bg_normal</color>
-    <color name="category_border">@color/primary</color>
+    <color name="category_border">@color/defaultBrand</color>
 
     <!-- Dark Theme -->
     <!-- Defined here until appwidgets can use night/colors -->

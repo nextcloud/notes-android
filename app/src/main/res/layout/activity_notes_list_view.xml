@@ -11,23 +11,94 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/toolbarStyle"
-            app:contentInsetStartWithNavigation="0dp"
-            app:elevation="4dp"
-            app:titleMarginStart="0dp"
-            tools:navigationIcon="@drawable/ic_arrow_back_white_24dp"
-            tools:title="@string/app_name" />
+            app:elevation="0dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:contentInsetStartWithNavigation="0dp"
+                app:navigationIcon="@drawable/ic_arrow_back_grey600_24dp"
+                app:titleMarginStart="0dp"
+                tools:title="@string/app_name">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/home_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacer_1x"
+                android:layout_marginLeft="@dimen/spacer_1x"
+                android:layout_marginTop="@dimen/design_appbar_elevation"
+                android:layout_marginEnd="@dimen/spacer_1x"
+                android:layout_marginRight="@dimen/spacer_1x"
+                android:layout_marginBottom="@dimen/design_appbar_elevation"
+                app:cardCornerRadius="@dimen/spacer_1x"
+                app:cardElevation="6dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:id="@+id/menu_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:paddingStart="@dimen/spacer_1x"
+                        android:paddingLeft="@dimen/spacer_1x"
+                        android:paddingTop="@dimen/spacer_2x"
+                        android:paddingEnd="@dimen/spacer_1x"
+                        android:paddingRight="@dimen/spacer_1x"
+                        android:paddingBottom="@dimen/spacer_2x"
+                        android:tint="?attr/colorAccent"
+                        app:srcCompat="@drawable/ic_baseline_menu_24" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/search_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/spacer_1x"
+                        android:layout_marginLeft="@dimen/spacer_1x"
+                        android:layout_marginEnd="@dimen/spacer_1x"
+                        android:layout_marginRight="@dimen/spacer_1x"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:gravity="start"
+                        android:lines="1"
+                        android:textSize="16sp"
+                        tools:text="@string/search_in_all" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/launchAccountSwitcher"
+                        android:layout_width="?attr/actionBarSize"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_gravity="center_vertical|end"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        android:padding="12dp"
+                        app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swiperefreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg_normal"
             tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity">
 
             <FrameLayout
@@ -43,13 +114,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:indeterminateTint="@color/defaultBrand"
+                    tools:targetApi="lollipop"
                     tools:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/bg_highlighted"
                     android:scrollbars="vertical"
                     tools:listitem="@layout/item_notes_list_note_item" />
             </FrameLayout>
@@ -61,7 +133,6 @@
         android:id="@+id/fab_create"
         style="@style/fab"
         android:title="@string/action_create"
-        app:backgroundTint="@color/primary"
-        app:rippleColor="@color/primary_dark"
+        app:backgroundTint="@color/defaultBrand"
         app:srcCompat="@drawable/ic_add_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

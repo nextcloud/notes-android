@@ -1,12 +1,13 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="6dp"
-    android:paddingLeft="6dp"
-    android:paddingEnd="8dp"
-    android:paddingRight="8dp">
+    android:gravity="center_vertical"
+    android:paddingStart="@dimen/spacer_1x"
+    android:paddingLeft="@dimen/spacer_1x"
+    android:paddingEnd="@dimen/spacer_1x"
+    android:paddingRight="@dimen/spacer_1x">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/navigationItemIcon"
@@ -14,33 +15,26 @@
         android:layout_height="44dp"
         android:contentDescription="@null"
         android:focusable="false"
-        android:padding="10dp"
         android:scaleType="center"
         app:srcCompat="@drawable/ic_folder_grey600_24dp" />
+
+    <TextView
+        android:id="@+id/navigationItemLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacer_1x"
+        android:layout_marginLeft="@dimen/spacer_1x"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:lines="1"
+        android:textColor="?android:textColorSecondary"
+        tools:text="@tools:sample/lorem/random" />
 
     <TextView
         android:id="@+id/navigationItemCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:padding="8dp"
+        android:padding="@dimen/spacer_1x"
         android:textColor="?android:textColorPrimary"
         tools:text="37" />
-
-    <TextView
-        android:id="@+id/navigationItemLabel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="64dp"
-        android:layout_marginLeft="64dp"
-        android:layout_toStartOf="@id/navigationItemCount"
-        android:layout_toLeftOf="@id/navigationItemCount"
-        android:ellipsize="end"
-        android:lines="1"
-        android:textColor="?android:textColorSecondary"
-        tools:text="Category 1" />
-
-</RelativeLayout>
+</LinearLayout>

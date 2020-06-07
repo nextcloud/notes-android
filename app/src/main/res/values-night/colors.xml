@@ -2,10 +2,14 @@
 <resources>
     <!-- Colors -->
 
-    <color name="primary_dark">#286090</color>
+    <color name="primary">#121212</color>
+    <color name="accent">#f5f5f5</color>
+
+    <color name="cursorHandles">#eee5e5ee</color>
+    <color name="defaultTextHighlightBackground">#55eeeeff</color>
 
     <color name="bg_highlighted">#2a2a2a</color>
-    <color name="bg_normal">#121212</color>
+    <color name="bg_normal">@color/primary</color>
     <color name="bg_attention">#ff3333</color>
     <color name="fg_default">#eeeeee</color>
     <color name="fg_default_selection">#cccccc</color>
@@ -13,5 +17,5 @@
     <color name="fg_default_high">#757575</color>
     <color name="fg_contrast">#000000</color>
 
-    <color name="category_background">@color/primary</color>
+    <color name="category_background">@color/defaultBrand</color>
 </resources>

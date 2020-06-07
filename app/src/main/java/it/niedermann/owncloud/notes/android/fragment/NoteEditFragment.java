@@ -243,10 +243,16 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    protected void colorWithText(@NonNull String newText, @Nullable Integer current) {
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
         if (binding != null && isAttachedToWindow(binding.editContent)) {
             binding.editContent.clearFocus();
-            binding.editContent.setText(searchAndColor(new SpannableString(getContent()), newText, requireContext(), current), TextView.BufferType.SPANNABLE);
+            binding.editContent.setText(searchAndColor(new SpannableString(getContent()), newText, requireContext(), current, mainColor, textColor), TextView.BufferType.SPANNABLE);
         }
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        super.applyBrand(mainColor, textColor);
+        binding.editContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
     }
 }

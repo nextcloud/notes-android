@@ -16,9 +16,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
+import it.niedermann.owncloud.notes.model.NoteViewHolder;
+import it.niedermann.owncloud.notes.model.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
@@ -53,7 +56,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
              */
             @Override
             public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                if (viewHolder instanceof ItemAdapter.SectionViewHolder) return 0;
+                if (viewHolder instanceof SectionViewHolder) return 0;
                 return super.getSwipeDirs(recyclerView, viewHolder);
             }
 
@@ -76,12 +79,12 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         if (viewProvider == null) {
                             Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
                         } else {
-                            Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
+                            BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
                                     .setAction(R.string.action_undo, (View v) -> {
                                         db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
                                         db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
                                         refreshLists.run();
-                                        Snackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
+                                        BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
                                     })
                                     .show();
@@ -99,11 +102,11 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
             @Override
             public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-                ItemAdapter.NoteViewHolder noteViewHolder = (ItemAdapter.NoteViewHolder) viewHolder;
+                NoteViewHolder noteViewHolder = (NoteViewHolder) viewHolder;
                 // show swipe icon on the side
                 noteViewHolder.showSwipe(dX > 0);
                 // move only swipeable part of item (not leave-behind)
-                getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.noteSwipeable, dX, dY, actionState, isCurrentlyActive);
+                getDefaultUIUtil().onDraw(c, recyclerView, noteViewHolder.getNoteSwipeable(), dX, dY, actionState, isCurrentlyActive);
             }
 
             @Override
@@ -122,7 +125,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 if (swipeRefreshLayout != null) {
                     swipeRefreshLayout.setEnabled(swipeRefreshLayoutEnabled);
                 }
-                getDefaultUIUtil().clearView(((ItemAdapter.NoteViewHolder) viewHolder).noteSwipeable);
+                getDefaultUIUtil().clearView(((NoteViewHolder) viewHolder).getNoteSwipeable());
             }
 
             @Override

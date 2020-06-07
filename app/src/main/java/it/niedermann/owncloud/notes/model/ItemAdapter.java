@@ -1,13 +1,13 @@
 package it.niedermann.owncloud.notes.model;
 
-import android.text.Html;
+import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,26 +15,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemBinding;
-import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
+import it.niedermann.owncloud.notes.branding.Branded;
 
-import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
-
-public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
 
     private static final String TAG = ItemAdapter.class.getSimpleName();
 
     private static final int section_type = 0;
     private static final int note_type = 1;
     private final NoteClickListener noteClickListener;
-    private List<Item> itemList;
+    private List<Item> itemList = new ArrayList<>();
     private boolean showCategory = true;
-    private final List<Integer> selected;
+    private CharSequence searchQuery;
+    @NonNull
+    private Context context;
+    private final List<Integer> selected = new ArrayList<>();
+    @ColorInt
+    private int mainColor;
+    @ColorInt
+    private int textColor;
 
-    public ItemAdapter(@NonNull NoteClickListener noteClickListener) {
-        this.itemList = new ArrayList<>();
-        this.selected = new ArrayList<>();
-        this.noteClickListener = noteClickListener;
+    public <T extends Context & NoteClickListener> ItemAdapter(@NonNull T context) {
+        this.context = context;
+        this.noteClickListener = context;
+        this.mainColor = context.getResources().getColor(R.color.defaultBrand);
+        this.textColor = Color.WHITE;
     }
 
     /**
@@ -66,7 +71,6 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    // Create new views (invoked by the layout manager)
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -77,30 +81,17 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         } else {
             v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.item_notes_list_note_item, parent, false);
-            return new NoteViewHolder(v);
+            return new NoteViewHolder(v, noteClickListener);
         }
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
-        Item item = itemList.get(position);
+        final Item item = itemList.get(position);
         if (item.isSection()) {
-            SectionItem section = (SectionItem) item;
-            ((SectionViewHolder) holder).sectionTitle.setText(section.geTitle());
+            ((SectionViewHolder) holder).bind((SectionItem) item);
         } else {
-            final DBNote note = (DBNote) item;
-            final NoteViewHolder nvHolder = ((NoteViewHolder) holder);
-            nvHolder.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
-            nvHolder.noteTitle.setText(Html.fromHtml(note.getTitle()));
-            nvHolder.noteCategory.setVisibility(showCategory && !note.getCategory().isEmpty() ? View.VISIBLE : View.GONE);
-            nvHolder.noteCategory.setText(Html.fromHtml(note.getCategory()));
-            nvHolder.noteExcerpt.setText(Html.fromHtml(note.getExcerpt()));
-            nvHolder.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
-            nvHolder.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp);
-            nvHolder.noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(holder.getAdapterPosition(), view));
+            ((NoteViewHolder) holder).bind((DBNote) item, noteClickListener, showCategory, mainColor, textColor, searchQuery);
         }
     }
 
@@ -159,63 +150,14 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return getItem(position).isSection() ? section_type : note_type;
     }
 
-    public interface NoteClickListener {
-        void onNoteClick(int position, View v);
-
-        void onNoteFavoriteClick(int position, View v);
-
-        boolean onNoteLongClick(int position, View v);
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        this.mainColor = mainColor;
+        this.textColor = textColor;
+        notifyDataSetChanged();
     }
 
-    public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
-        public View noteSwipeable;
-        private final ItemNotesListNoteItemBinding b;
-        private final TextView noteTitle;
-        private final TextView noteCategory;
-        private final TextView noteExcerpt;
-        private final ImageView noteStatus;
-        private final ImageView noteFavorite;
-
-        private NoteViewHolder(View v) {
-            super(v);
-            b = ItemNotesListNoteItemBinding.bind(v);
-            this.noteSwipeable = b.noteSwipeable;
-            this.noteTitle = b.noteTitle;
-            this.noteCategory = b.noteCategory;
-            this.noteExcerpt = b.noteExcerpt;
-            this.noteStatus = b.noteStatus;
-            this.noteFavorite = b.noteFavorite;
-            v.setOnClickListener(this);
-            v.setOnLongClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            final int adapterPosition = getAdapterPosition();
-            if (adapterPosition != NO_POSITION) {
-                noteClickListener.onNoteClick(adapterPosition, v);
-            }
-        }
-
-        @Override
-        public boolean onLongClick(View v) {
-            return noteClickListener.onNoteLongClick(getAdapterPosition(), v);
-        }
-
-        public void showSwipe(boolean left) {
-            b.noteFavoriteLeft.setVisibility(left ? View.VISIBLE : View.INVISIBLE);
-            b.noteDeleteRight.setVisibility(left ? View.INVISIBLE : View.VISIBLE);
-            b.noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
-        }
-    }
-
-    public static class SectionViewHolder extends RecyclerView.ViewHolder {
-        private TextView sectionTitle;
-
-        private SectionViewHolder(View view) {
-            super(view);
-            ItemNotesListSectionItemBinding binding = ItemNotesListSectionItemBinding.bind(view);
-            this.sectionTitle = binding.sectionTitle;
-        }
+    public void setHighlightSearchQuery(CharSequence searchQuery) {
+        this.searchQuery = searchQuery;
     }
 }

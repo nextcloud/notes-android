@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -11,20 +12,29 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentContributingTab;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentCreditsTab;
 import it.niedermann.owncloud.notes.android.fragment.about.AboutFragmentLicenseTab;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityAboutBinding;
 
 public class AboutActivity extends LockedActivity {
+
+    private ActivityAboutBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActivityAboutBinding binding = ActivityAboutBinding.inflate(getLayoutInflater());
+        binding = ActivityAboutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
         binding.pager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
         binding.tabs.setupWithViewPager(binding.pager);
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        @ColorInt int finalMainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(this, mainColor);
+        binding.tabs.setSelectedTabIndicatorColor(finalMainColor);
     }
 
     private class TabsPagerAdapter extends FragmentPagerAdapter {

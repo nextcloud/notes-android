@@ -45,9 +45,7 @@ public class SSOUtil {
         try {
             SingleAccountHelper.getCurrentSingleSignOnAccount(context);
             return true;
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
-            return false;
-        } catch (NoCurrentAccountSelectedException e) {
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             return false;
         }
     }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
@@ -11,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:theme="@style/toolbarStyle"
         app:contentInsetStartWithNavigation="0dp"
         app:elevation="4dp"
         app:titleMarginStart="0dp"
@@ -30,12 +30,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/spacer_2x"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/spacer_2x"
+        android:layout_marginEnd="@dimen/spacer_2x"
+        android:layout_marginRight="@dimen/spacer_2x"
         android:layout_weight="1"
         android:background="@color/bg_highlighted"
-        android:padding="8dp"
+        android:padding="@dimen/spacer_1x"
         android:scrollbars="horizontal|vertical"
         android:textIsSelectable="true"
         android:typeface="monospace"
@@ -45,7 +45,7 @@
         style="?android:buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/spacer_2x"
         android:gravity="end"
         android:orientation="horizontal"
         android:weightSum="1.0">
@@ -56,7 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:text="@string/simple_close" />
+            android:text="@string/simple_close"
+            android:textColor="@color/defaultBrand" />
 
         <Button
             android:id="@+id/copy"
@@ -66,7 +67,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
             android:layout_weight=".5"
-            android:background="@color/primary"
+            android:background="@color/defaultBrand"
             android:foreground="?attr/selectableItemBackground"
             android:text="@string/simple_copy"
             android:textColor="@color/fg_contrast"

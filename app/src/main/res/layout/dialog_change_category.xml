@@ -5,21 +5,16 @@
     android:id="@+id/editCategoryLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="?attr/dialogPreferredPadding">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
+        android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
-
-        <EditText
-            android:id="@+id/search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/change_category_title"
-            android:importantForAutofill="no"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:hint="@string/change_category_title"
+        android:importantForAutofill="no"
+        android:inputType="text" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

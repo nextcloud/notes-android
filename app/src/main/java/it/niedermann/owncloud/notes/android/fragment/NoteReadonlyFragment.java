@@ -147,14 +147,20 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    protected void colorWithText(@NonNull String newText, @Nullable Integer current) {
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
         if ((binding != null) && isAttachedToWindow(binding.singleNoteContent)) {
-            binding.singleNoteContent.setText(searchAndColor(new SpannableString(parseCompat(markdownProcessor, getContent())), newText, requireContext(), current), TextView.BufferType.SPANNABLE);
+            binding.singleNoteContent.setText(searchAndColor(new SpannableString(parseCompat(markdownProcessor, getContent())), newText, requireContext(), current, mainColor, textColor), TextView.BufferType.SPANNABLE);
         }
     }
 
     @Override
     protected String getContent() {
         return note.getContent();
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        super.applyBrand(mainColor, textColor);
+        binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
     }
 }

@@ -182,10 +182,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     @Override
-    protected void colorWithText(@NonNull String newText, @Nullable Integer current) {
+    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
         if (binding != null && ViewCompat.isAttachedToWindow(binding.singleNoteContent)) {
             binding.singleNoteContent.setText(
-                    searchAndColor(new SpannableString(parseCompat(markdownProcessor, getContent())), newText, requireContext(), current),
+                    searchAndColor(new SpannableString(parseCompat(markdownProcessor, getContent())), newText, requireContext(), current, mainColor, textColor),
                     TextView.BufferType.SPANNABLE);
         }
     }
@@ -215,5 +215,11 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             binding.swiperefreshlayout.setRefreshing(false);
             Toast.makeText(requireContext(), getString(R.string.error_sync, getString(R.string.error_no_network)), Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        super.applyBrand(mainColor, textColor);
+        binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
     }
 }

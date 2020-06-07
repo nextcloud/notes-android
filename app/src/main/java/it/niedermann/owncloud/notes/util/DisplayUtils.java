@@ -26,6 +26,7 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.MetricAffectingSpan;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -33,6 +34,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
+
+import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 
 public class DisplayUtils {
 
@@ -40,7 +44,7 @@ public class DisplayUtils {
 
     }
 
-    public static Spannable searchAndColor(Spannable spannable, CharSequence searchText, Context context, @Nullable Integer current) {
+    public static Spannable searchAndColor(Spannable spannable, CharSequence searchText, @NonNull Context context, @Nullable Integer current, @ColorInt int mainColor, @ColorInt int textColor) {
         CharSequence text = spannable.toString();
 
         Object[] spansToRemove = spannable.getSpans(0, text.length(), Object.class);
@@ -60,7 +64,7 @@ public class DisplayUtils {
         while (m.find()) {
             int start = m.start();
             int end = m.end();
-            spannable.setSpan(new SearchSpan(context, (current != null && i == current)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannable.setSpan(new SearchSpan(context, mainColor, textColor, (current != null && i == current)), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             i++;
         }
 
@@ -71,19 +75,51 @@ public class DisplayUtils {
     static class SearchSpan extends MetricAffectingSpan {
 
         private final boolean current;
-        private final int bgColorPrimary;
-        private final int bgColorSecondary;
+        @NonNull
+        Context context;
+        @ColorInt
+        private final int mainColor;
+        @ColorInt
+        private final int textColor;
+        @ColorInt
+        private final int highlightColor;
 
-        SearchSpan(Context context, boolean current) {
+        SearchSpan(@NonNull Context context, @ColorInt int mainColor, @ColorInt int textColor, boolean current) {
+            this.context = context;
+            this.mainColor = mainColor;
+            this.textColor = textColor;
             this.current = current;
-            this.bgColorPrimary = context.getResources().getColor(R.color.bg_search_primary);
-            this.bgColorSecondary = context.getResources().getColor(R.color.bg_search_secondary);
+            this.highlightColor = context.getResources().getColor(R.color.bg_highlighted);
         }
 
         @Override
         public void updateDrawState(TextPaint tp) {
-            tp.bgColor = current ? bgColorPrimary : bgColorSecondary;
-            tp.setColor(current ? (getForeground(Integer.toHexString(tp.bgColor)) ? Color.WHITE : Color.BLACK) : bgColorPrimary);
+            if (current) {
+                if (Notes.isDarkThemeActive(context)) {
+                    if (isColorDark(mainColor)) {
+                        tp.bgColor = Color.WHITE;
+                        tp.setColor(mainColor);
+                    } else {
+                        tp.bgColor = mainColor;
+                        tp.setColor(Color.BLACK);
+                    }
+                } else {
+                    if (isColorDark(mainColor)) {
+                        tp.bgColor = mainColor;
+                        tp.setColor(Color.WHITE);
+                    } else {
+                        if (ColorUtil.contrastRatioIsSufficient(mainColor, highlightColor)) {
+                            tp.bgColor = highlightColor;
+                        } else {
+                            tp.bgColor = Color.BLACK;
+                        }
+                        tp.setColor(mainColor);
+                    }
+                }
+            } else {
+                tp.bgColor = highlightColor;
+                tp.setColor(BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor));
+            }
             tp.setFakeBoldText(true);
         }
 
@@ -91,13 +127,5 @@ public class DisplayUtils {
         public void updateMeasureState(@NonNull TextPaint tp) {
             tp.setFakeBoldText(true);
         }
-    }
-
-    public static boolean getForeground(String backgroundColorHex) {
-        return ((float) (
-                0.2126 * Integer.valueOf(backgroundColorHex.substring(1, 3), 16)
-                        + 0.7152 * Integer.valueOf(backgroundColorHex.substring(3, 5), 16)
-                        + 0.0722 * Integer.valueOf(backgroundColorHex.substring(5, 7), 16)
-        ) < 140);
     }
 }

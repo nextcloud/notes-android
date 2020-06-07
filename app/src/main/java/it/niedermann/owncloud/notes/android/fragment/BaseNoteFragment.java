@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,9 +15,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -30,19 +33,24 @@ import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.android.fragment.EditTitleDialogFragment.EditTitleListener;
 import it.niedermann.owncloud.notes.model.ApiVersion;
+import it.niedermann.owncloud.notes.branding.BrandedFragment;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 import it.niedermann.owncloud.notes.util.ShareUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
+import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
+import static it.niedermann.owncloud.notes.util.Notes.isDarkThemeActive;
 
-public abstract class BaseNoteFragment extends Fragment implements CategoryDialogListener, EditTitleListener {
+public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
 
@@ -146,12 +154,14 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
 
         if (isRequestPinShortcutSupported(requireActivity()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -167,6 +177,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private void prepareFavoriteOption(MenuItem item) {
         item.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
         item.setChecked(note.isFavorite());
+        tintMenuIcon(item, colorAccent);
     }
 
     /**
@@ -199,7 +210,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 showEditTitleDialog();
                 return true;
             case R.id.menu_move:
-                AccountChooserDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
+                MoveAccountDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
                 return true;
             case R.id.menu_share:
                 ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
@@ -338,6 +349,39 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public void moveNote(LocalAccount account) {
         db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
         listener.close();
+    }
+
+    @ColorInt
+    protected static int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
+        if (isDarkThemeActive(context)) { // Dark background
+            if (isColorDark(mainColor)) { // Dark brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+                    return mainColor;
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            } else { // Light brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            }
+        } else { // Light background
+            if (isColorDark(mainColor)) { // Dark brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            } else { // Light brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+                    return mainColor;
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            }
+        }
     }
 
     public interface NoteFragmentListener {

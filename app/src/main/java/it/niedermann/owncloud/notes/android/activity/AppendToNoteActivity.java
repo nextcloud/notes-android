@@ -2,8 +2,12 @@ package it.niedermann.owncloud.notes.android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -20,7 +24,12 @@ public class AppendToNoteActivity extends NotesListViewActivity {
         super.onCreate(savedInstanceState);
         final Intent receivedIntent = getIntent();
         receivedText = receivedIntent.getStringExtra(Intent.EXTRA_TEXT);
-        binding.activityNotesListView.toolbar.setTitle(R.string.append_to_note);
+        @Nullable final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setTitle(R.string.append_to_note);
+        } else {
+            Log.e(TAG, "SupportActioBar is null. Expected toolbar to be present to set a title.");
+        }
         binding.activityNotesListView.toolbar.setSubtitle(receivedText);
     }
 
