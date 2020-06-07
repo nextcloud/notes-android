@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,6 +32,7 @@ public class FormattingHelpActivity extends BrandedActivity {
 
     private static final String TAG = FormattingHelpActivity.class.getSimpleName();
     private ActivityFormattingHelpBinding binding;
+    private String content;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class FormattingHelpActivity extends BrandedActivity {
             ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
         }
 
-        String content = stringBuilder.toString();
+        content = stringBuilder.toString();
 
         final MarkdownProcessor markdownProcessor = new MarkdownProcessor(this);
         markdownProcessor.factory(TextFactory.create());
@@ -63,8 +65,13 @@ public class FormattingHelpActivity extends BrandedActivity {
                                  * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
                                  * Find number of lines starting with ``` before lineNumber
                                  */
+                                boolean inCodefence = false;
                                 for (int i = 0; i < lines.length; i++) {
                                     if (lines[i].startsWith("```")) {
+                                        inCodefence = !inCodefence;
+                                        lineNumber++;
+                                    }
+                                    if (inCodefence && TextUtils.isEmpty(lines[i])) {
                                         lineNumber++;
                                     }
                                     if (i == lineNumber) {
@@ -85,7 +92,8 @@ public class FormattingHelpActivity extends BrandedActivity {
                                     lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_STAR, CHECKBOX_UNCHECKED_STAR);
                                 }
 
-                                binding.content.setText(parseCompat(markdownProcessor, TextUtils.join("\n", lines)));
+                                content = TextUtils.join("\n", lines);
+                                binding.content.setText(parseCompat(markdownProcessor, content));
                             } catch (IndexOutOfBoundsException e) {
                                 Toast.makeText(this, R.string.checkbox_could_not_be_toggled, Toast.LENGTH_SHORT).show();
                                 e.printStackTrace();
@@ -95,6 +103,7 @@ public class FormattingHelpActivity extends BrandedActivity {
                 )
                 .setOnLinkClickCallback((view, link) -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(link))))
                 .build());
+        binding.content.setMovementMethod(LinkMovementMethod.getInstance());
         binding.content.setText(parseCompat(markdownProcessor, content));
     }
 
