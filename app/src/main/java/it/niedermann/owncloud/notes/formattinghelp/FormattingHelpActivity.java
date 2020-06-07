@@ -1,13 +1,17 @@
 package it.niedermann.owncloud.notes.formattinghelp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
+import android.util.TypedValue;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
@@ -27,6 +31,7 @@ import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_STAR;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.getMarkDownConfiguration;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
+import static it.niedermann.owncloud.notes.util.NoteUtil.getFontSizeFromPreferences;
 
 public class FormattingHelpActivity extends BrandedActivity {
 
@@ -105,6 +110,12 @@ public class FormattingHelpActivity extends BrandedActivity {
                 .build());
         binding.content.setMovementMethod(LinkMovementMethod.getInstance());
         binding.content.setText(parseCompat(markdownProcessor, content));
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        binding.content.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(this, sp));
+        if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
+            binding.content.setTypeface(Typeface.MONOSPACE);
+        }
     }
 
     @Override

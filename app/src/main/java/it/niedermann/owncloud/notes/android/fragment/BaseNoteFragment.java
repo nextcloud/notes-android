@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.Color;
@@ -268,22 +267,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             }
         } else {
             Log.e(TAG, "note is null");
-        }
-    }
-
-    @SuppressWarnings("WeakerAccess") //PMD...
-    protected float getFontSizeFromPreferences(SharedPreferences sp) {
-        final String prefValueSmall = getString(R.string.pref_value_font_size_small);
-        final String prefValueMedium = getString(R.string.pref_value_font_size_medium);
-        // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
-        String fontSize = sp.getString(getString(R.string.pref_key_font_size), prefValueMedium);
-
-        if (fontSize.equals(prefValueSmall)) {
-            return getResources().getDimension(R.dimen.note_font_size_small);
-        } else if (fontSize.equals(prefValueMedium)) {
-            return getResources().getDimension(R.dimen.note_font_size_medium);
-        } else {
-            return getResources().getDimension(R.dimen.note_font_size_large);
         }
     }
 

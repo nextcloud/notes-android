@@ -48,6 +48,7 @@ import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
 import static it.niedermann.owncloud.notes.util.NoteLinksUtils.extractNoteRemoteId;
 import static it.niedermann.owncloud.notes.util.NoteLinksUtils.replaceNoteLinksWithDummyUrls;
+import static it.niedermann.owncloud.notes.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
@@ -180,7 +181,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         binding.swiperefreshlayout.setOnRefreshListener(this);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
-        binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
+        binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
         }
