@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:background="?attr/colorPrimary">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -17,7 +18,6 @@
             android:id="@+id/editContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
             android:ems="10"
             android:gravity="top"
             android:inputType="textMultiLine|textCapSentences"

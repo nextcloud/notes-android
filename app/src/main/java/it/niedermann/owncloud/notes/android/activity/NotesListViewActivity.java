@@ -6,6 +6,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -21,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -78,6 +80,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 
@@ -442,10 +445,14 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
         binding.headerView.setBackgroundColor(mainColor);
         binding.appName.setTextColor(textColor);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
+        }
 
         // TODO We assume, that the background of the spinner is always white
         activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : Color.BLACK);
         binding.appName.setTextColor(textColor);
+        DrawableCompat.setTint(binding.logo.getDrawable(), textColor);
 
         adapter.applyBrand(mainColor, textColor);
         adapterCategories.applyBrand(mainColor, textColor);

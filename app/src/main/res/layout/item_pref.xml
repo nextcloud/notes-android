@@ -22,7 +22,6 @@
         android:orientation="vertical"
         tools:ignore="RtlSymmetry">
 
-
         <TextView
             android:id="@android:id/title"
             android:layout_width="wrap_content"
