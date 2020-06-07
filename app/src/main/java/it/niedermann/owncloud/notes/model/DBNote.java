@@ -15,13 +15,15 @@ public class DBNote extends CloudNote implements Item, Serializable {
     private final long accountId;
     private DBStatus status;
     private String excerpt;
+    private int scrollY;
 
-    public DBNote(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, String excerpt) {
+    public DBNote(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, String excerpt, int scrollY) {
         super(remoteId, modified, title, content, favorite, category, etag);
         this.id = id;
         this.excerpt = excerpt;
         this.status = status;
         this.accountId = accountId;
+        this.scrollY = scrollY;
     }
 
     public long getId() {
@@ -66,5 +68,13 @@ public class DBNote extends CloudNote implements Item, Serializable {
                 ", status=" + status +
                 ", excerpt='" + excerpt + '\'' +
                 '}';
+    }
+
+    public int getScrollY() {
+        return scrollY;
+    }
+
+    public void setScrollY(int scrollY) {
+        this.scrollY = scrollY;
     }
 }

@@ -32,7 +32,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
-    private static final int database_version = 16;
+    private static final int database_version = 17;
     @NonNull
     protected final Context context;
 
@@ -68,6 +68,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_category_account_id = "CATEGORY_ACCOUNT_ID";
     protected static final String key_theme_mode = "THEME_MODE";
     protected static final String key_mode = "MODE";
+    protected static final String key_scroll_y = "SCROLL_Y";
 
     protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory, database_version);
@@ -107,6 +108,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_category + " INTEGER, " +
                 key_etag + " TEXT," +
                 key_excerpt + " TEXT NOT NULL DEFAULT '', " +
+                key_scroll_y + " INTEGER DEFAULT 0, " +
                 "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +
                 "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
         DatabaseIndexUtil.createIndex(db, table_notes, key_remote_id, key_account_id, key_status, key_favorite, key_category, key_modified);
@@ -531,6 +533,9 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
             }
             editor.apply();
             notifyNotesChanged();
+        }
+        if(oldVersion < 17) {
+            db.execSQL("ALTER TABLE NOTES ADD COLUMN SCROLL_Y INTEGER DEFAULT 0");
         }
     }
 
