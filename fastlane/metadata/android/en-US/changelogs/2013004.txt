@@ -1,0 +1,1 @@
+- 🐞 Fix toggling checkboxes when note contains codefences with empty lines

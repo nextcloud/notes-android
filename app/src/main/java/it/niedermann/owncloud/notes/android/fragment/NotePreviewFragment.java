@@ -117,8 +117,13 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                                          * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
                                          * Find number of lines starting with ``` before lineNumber
                                          */
+                                        boolean inCodefence = false;
                                         for (int i = 0; i < lines.length; i++) {
                                             if (lines[i].startsWith("```")) {
+                                                inCodefence = !inCodefence;
+                                                lineNumber++;
+                                            }
+                                            if (inCodefence && TextUtils.isEmpty(lines[i])) {
                                                 lineNumber++;
                                             }
                                             if (i == lineNumber) {
