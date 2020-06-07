@@ -197,6 +197,7 @@
     <string name="simple_behavior">Behavior</string>
     <string name="share_multiple">Share content of %1$d notes</string>
     <string name="manage_accounts">Manage accounts</string>
+    <string name="action_formatting_help">Formatting</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">

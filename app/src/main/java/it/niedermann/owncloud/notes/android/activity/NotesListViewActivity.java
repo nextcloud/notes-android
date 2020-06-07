@@ -58,6 +58,7 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
+import it.niedermann.owncloud.notes.formattinghelp.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
@@ -83,6 +84,7 @@ import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
+import static java.util.Arrays.asList;
 
 public class NotesListViewActivity extends LockedActivity implements NoteClickListener, ViewProvider, MoveAccountListener, AccountSwitcherListener {
 
@@ -555,19 +557,18 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     }
 
     private void setupNavigationMenu() {
+        final NavigationItem itemFormattingHelp = new NavigationItem("formattingHelp", getString(R.string.action_formatting_help), null, R.drawable.ic_baseline_help_outline_24);
         final NavigationItem itemTrashbin = new NavigationItem("trashbin", getString(R.string.action_trashbin), null, R.drawable.ic_delete_grey600_24dp);
         final NavigationItem itemSettings = new NavigationItem("settings", getString(R.string.action_settings), null, R.drawable.ic_settings_grey600_24dp);
         final NavigationItem itemAbout = new NavigationItem("about", getString(R.string.simple_about), null, R.drawable.ic_info_outline_grey600_24dp);
 
-        ArrayList<NavigationItem> itemsMenu = new ArrayList<>(3);
-        itemsMenu.add(itemTrashbin);
-        itemsMenu.add(itemSettings);
-        itemsMenu.add(itemAbout);
-
         NavigationAdapter adapterMenu = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationItem item) {
-                if (itemSettings.equals(item)) {
+                if (itemFormattingHelp.equals(item)) {
+                    Intent formattingHelpIntent = new Intent(getApplicationContext(), FormattingHelpActivity.class);
+                    startActivity(formattingHelpIntent);
+                } else if (itemSettings.equals(item)) {
                     Intent settingsIntent = new Intent(getApplicationContext(), PreferencesActivity.class);
                     startActivityForResult(settingsIntent, server_settings);
                 } else if (itemAbout.equals(item)) {
@@ -583,7 +584,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                 onItemClick(item);
             }
         });
-        adapterMenu.setItems(itemsMenu);
+        adapterMenu.setItems(asList(itemFormattingHelp, itemTrashbin, itemSettings, itemAbout));
         binding.navigationMenu.setAdapter(adapterMenu);
     }
 
