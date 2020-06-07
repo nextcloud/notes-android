@@ -18,6 +18,7 @@
             android:id="@+id/editContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
             android:ems="10"
             android:gravity="top"
             android:inputType="textMultiLine|textCapSentences"
