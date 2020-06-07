@@ -1,9 +1,3 @@
-2.13.2
-
-- 🎨 Small design enhancements and theme fixes
-
-2.13.0
-
 - ✨ Redesign of UI based on the future Nextcloud Android app
 - 🎨 Branding of the Nextcloud instance can be applied (#762)
 - 📩 Bulk share content of multiple notes
