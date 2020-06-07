@@ -16,8 +16,8 @@
     android:paddingStart="56dp"
     android:paddingLeft="56dp"
     android:paddingTop="48dp"
-    android:paddingEnd="16dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="8dp"
+    android:paddingEnd="@dimen/spacer_2x"
+    android:paddingRight="@dimen/spacer_2x"
+    android:paddingBottom="@dimen/spacer_1x"
     android:textColor="@color/fg_default_selection"
     android:textSize="@dimen/secondary_font_size" />

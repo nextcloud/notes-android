@@ -43,7 +43,7 @@
                 android:layout_marginEnd="@dimen/spacer_1x"
                 android:layout_marginRight="@dimen/spacer_1x"
                 android:layout_marginBottom="@dimen/design_appbar_elevation"
-                app:cardCornerRadius="8dp"
+                app:cardCornerRadius="@dimen/spacer_1x"
                 app:cardElevation="6dp"
                 app:strokeWidth="0dp">
 

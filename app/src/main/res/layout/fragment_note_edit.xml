@@ -21,7 +21,7 @@
             android:ems="10"
             android:gravity="top"
             android:inputType="textMultiLine|textCapSentences"
-            android:padding="16dp"
+            android:padding="@dimen/spacer_2x"
             android:textColor="@color/fg_default"
             android:theme="@style/textViewStyle"
             tools:text="@tools:sample/lorem/random" />

@@ -24,7 +24,7 @@
                 android:id="@+id/single_note_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
+                android:padding="@dimen/spacer_2x"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/fg_default"
                 android:textIsSelectable="true"
