@@ -41,6 +41,7 @@ import it.niedermann.owncloud.notes.util.format.ContextBasedRangeFormattingCallb
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
 import static it.niedermann.owncloud.notes.util.DisplayUtils.searchAndColor;
+import static it.niedermann.owncloud.notes.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
 
@@ -169,7 +170,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 binding.editContent.setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(binding.editContent));
             }
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
-            binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
+            binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
                 binding.editContent.setTypeface(Typeface.MONOSPACE);
             }
