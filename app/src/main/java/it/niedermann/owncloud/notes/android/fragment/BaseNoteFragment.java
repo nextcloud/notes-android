@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ScrollView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -94,7 +96,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         if (content == null) {
                             throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                         } else {
-                            note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "");
+                            note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "", 0);
                         }
                     } else {
                         note = db.getNote(localAccount.getId(), db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote));
@@ -108,6 +110,31 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             setHasOptionsMenu(true);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Nullable
+    protected abstract ScrollView getScrollView();
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final ScrollView scrollView = getScrollView();
+        if (scrollView != null) {
+            scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+                if (scrollView.getScrollY() > 0) {
+                    note.setScrollY(scrollView.getScrollY());
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final ScrollView scrollView = getScrollView();
+        if (scrollView != null) {
+            scrollView.post(() -> scrollView.scrollTo(0, note.getScrollY()));
         }
     }
 

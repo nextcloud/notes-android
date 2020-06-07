@@ -94,7 +94,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param note Note
      */
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
-        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()));
+        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()), 0);
         long id = addNote(accountId, dbNote);
         notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
@@ -214,8 +214,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         if (selectionArgs.length > 2) {
             Log.v(TAG, selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
         }
-        String cols = String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s",
-                key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category_title, key_etag, key_excerpt);
+        String cols = String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
+                key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category_title, key_etag, key_excerpt, key_scroll_y);
         if (!pruneContent) {
             cols = String.format("%s, %s", cols, key_content);
         }
@@ -248,13 +248,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 cursor.getLong(1),
                 modified,
                 cursor.getString(3),
-                pruneContent ? "" : cursor.getString(9),
+                pruneContent ? "" : cursor.getString(10),
                 cursor.getInt(5) > 0,
                 cursor.getString(6),
                 cursor.getString(7),
                 DBStatus.parse(cursor.getString(2)),
                 accountId,
-                cursor.getString(8)
+                cursor.getString(8),
+                cursor.getInt(9)
         );
     }
 
@@ -507,9 +508,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
         //debugPrintFullDB();
         DBNote newNote;
         if (newContent == null) {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, oldNote.getExcerpt());
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(newContent));
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(newContent), oldNote.getScrollY());
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
