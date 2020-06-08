@@ -64,8 +64,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private SingleSignOnAccount ssoAccount;
 
     protected DBNote note;
+    // TODO do we really need this? The reference to note is currently the same
     @Nullable
     private DBNote originalNote;
+    private int originalScrollY;
     protected NotesDatabase db;
     private NoteFragmentListener listener;
 
@@ -134,7 +136,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         super.onActivityCreated(savedInstanceState);
         final ScrollView scrollView = getScrollView();
         if (scrollView != null) {
-            scrollView.post(() -> scrollView.scrollTo(0, note.getScrollY()));
+            this.originalScrollY = note.getScrollY();
+            scrollView.post(() -> scrollView.scrollTo(0, originalScrollY));
         }
     }
 
@@ -287,7 +290,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (note != null) {
             String newContent = getContent();
             if (note.getContent().equals(newContent)) {
-                Log.v(TAG, "... not saving, since nothing has changed");
+                if (note.getScrollY() != originalScrollY) {
+                    Log.v(TAG, "... only saving new scroll state, since content did not change");
+                    db.updateScrollY(note.getId(), note.getScrollY());
+                } else {
+                    Log.v(TAG, "... not saving, since nothing has changed");
+                }
             } else {
                 note = db.updateNoteAndSync(ssoAccount, localAccount.getId(), note, newContent, callback);
                 listener.onNoteUpdated(note);
