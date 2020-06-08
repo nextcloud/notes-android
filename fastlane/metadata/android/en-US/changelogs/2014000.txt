@@ -1,1 +1,2 @@
+- 📌 Remember last scrolling position per note (#227)
 - 🐞 Fix toggling checkboxes when note contains codefences with empty lines
