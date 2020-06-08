@@ -540,10 +540,11 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     public void updateScrollY(long noteId, int scrollY) {
+        Log.e(TAG, "Updated scrollY: " + scrollY);
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues(1);
         values.put(key_scroll_y, scrollY);
-        db.update(table_notes, values, key_id + " = ? ", new String[]{String.valueOf(scrollY)});
+        db.update(table_notes, values, key_id + " = ? ", new String[]{String.valueOf(noteId)});
     }
 
     /**
