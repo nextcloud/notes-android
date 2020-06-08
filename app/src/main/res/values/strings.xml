@@ -232,4 +232,61 @@
         <item quantity="one">%d selected</item>
         <item quantity="other">%d selected</item>
     </plurals>
+
+    <string name="formatting_help_title" translatable="false"># %1$s</string>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_escaped" translatable="false">\\`\\`\\`</string>
+    <string name="formatting_help_javascript_1" translatable="false">if (isAwesome){</string>
+    <string name="formatting_help_javascript_2" translatable="false">return true</string>
+    <string name="formatting_help_javascript_3" translatable="false">}</string>
+    <string name="formatting_help_codefence_javascript_escaped" translatable="false">\\`\\`\\`javascript</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+
+    <string name="formatting_help_cbf_title">Context based formatting</string>
+    <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
+    <string name="formatting_help_cbf_body_2">Just select a range of text or tap on your cursor at any position and you will get a popup menu which contains next to the default entries `Cut`, `Copy`, `Select all` entries like `Link` or `Checkbox`.</string>
+
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_text_body">It\'s very easy to make some words **bold** and other words *italic* with Markdown. You can ~~strike~~ some words through and even [link to Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Lists</string>
+    <string name="formatting_help_lists_body_1">Sometimes you want numbered lists:</string>
+    <string name="formatting_help_lists_body_2">1. One</string>
+    <string name="formatting_help_lists_body_3">2. Two</string>
+    <string name="formatting_help_lists_body_4">3. Three</string>
+    <string name="formatting_help_lists_body_5">Sometimes you want bullet points:</string>
+    <string name="formatting_help_lists_body_6">* Start a line with a star</string>
+    <string name="formatting_help_lists_body_7">* Profit!</string>
+    <string name="formatting_help_lists_body_8">Alternatively,</string>
+    <string name="formatting_help_lists_body_9">- Dashes work just as well</string>
+    <string name="formatting_help_lists_body_10">- And if you have sub points, put two spaces before the dash or star:</string>
+    <string name="formatting_help_lists_body_11">- Like this</string>
+    <string name="formatting_help_lists_body_12">- And this</string>
+
+    <string name="formatting_help_checkboxes_title">Checkboxes</string>
+    <string name="formatting_help_checkboxes_body_1">To create a checkbox, use a list followed by brackets</string>
+    <string name="formatting_help_checkboxes_body_2">- [ ] Item 1</string>
+    <string name="formatting_help_checkboxes_body_3">* [ ] Item 2</string>
+
+    <string name="formatting_help_structured_documents_title">Structured documents</string>
+    <string name="formatting_help_structured_documents_body_1">Sometimes it\'s useful to have different levels of headings to structure your documents. Start lines with a `#` to create headings. Multiple `##` in a row denote smaller heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_2">### This is a third-tier heading</string>
+    <string name="formatting_help_structured_documents_body_3">You can use one `#` all the way up to `######` six for different heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the > character before the line:</string>
+    <string name="formatting_help_structured_documents_body_5">> Coffee. The finest organic suspension ever devised… I beat the Borg with it.</string>
+    <string name="formatting_help_structured_documents_body_6">> - Captain Janeway</string>
+
+    <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_code_body_1">There are many different ways to style code with Markdown. If you have inline code blocks, wrap them in backticks:</string>
+    <string name="formatting_help_code_body_2">\\`var example = true\\`</string>
+    <string name="formatting_help_code_body_3">`var example = true`</string>
+    <string name="formatting_help_code_body_4">Markdown also supports something called code fencing, which allows for multiple lines without indentation:</string>
+    <string name="formatting_help_code_body_5">And if you\'d like to use syntax highlighting, include the language:</string>
+
+    <string name="formatting_help_unsupported_title">Unsupported</string>
+    <string name="formatting_help_unsupported_body_1">While we try to continuously improve the support for Markdown, there are a few features which are not yet supported by Notes:</string>
+    <string name="formatting_help_unsupported_body_2">- Tables</string>
+    <string name="formatting_help_unsupported_body_3">- Images</string>
+    <string name="formatting_help_unsupported_body_4">If you are interested in contributing support for one of those features, get in contact with us via GitHub or E-Mail.</string>
 </resources>

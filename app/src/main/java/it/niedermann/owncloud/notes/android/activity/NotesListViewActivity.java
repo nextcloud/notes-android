@@ -90,8 +90,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
 
-    private static final boolean FEATURE_TOGGLE_FORMATTING_HELP_ENABLED = false;
-
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
     public static final String ADAPTER_KEY_STARRED = "starred";
@@ -586,11 +584,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                 onItemClick(item);
             }
         });
-        if(FEATURE_TOGGLE_FORMATTING_HELP_ENABLED) {
-            adapterMenu.setItems(asList(itemFormattingHelp, itemTrashbin, itemSettings, itemAbout));
-        } else {
-            adapterMenu.setItems(asList(itemTrashbin, itemSettings, itemAbout));
-        }
+        adapterMenu.setItems(asList(itemFormattingHelp, itemTrashbin, itemSettings, itemAbout));
         binding.navigationMenu.setAdapter(adapterMenu);
     }
 

@@ -1,2 +1,3 @@
 - 📌 Remember last scrolling position per note (#227)
+- ❓ "Help: format" option in the menu (#216)
 - 🐞 Fix toggling checkboxes when note contains codefences with empty lines

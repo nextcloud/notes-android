@@ -10,18 +10,14 @@ import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.fragment.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.databinding.ActivityFormattingHelpBinding;
 
@@ -35,7 +31,6 @@ import static it.niedermann.owncloud.notes.util.NoteUtil.getFontSizeFromPreferen
 
 public class FormattingHelpActivity extends BrandedActivity {
 
-    private static final String TAG = FormattingHelpActivity.class.getSimpleName();
     private ActivityFormattingHelpBinding binding;
     private String content;
 
@@ -47,17 +42,8 @@ public class FormattingHelpActivity extends BrandedActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-        final StringBuilder stringBuilder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getResources().openRawResource(R.raw.formatting_help)))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line).append("\n");
-            }
-        } catch (IOException e) {
-            ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-        }
 
-        content = stringBuilder.toString();
+        content = buildFormattingHelp();
 
         final MarkdownProcessor markdownProcessor = new MarkdownProcessor(this);
         markdownProcessor.factory(TextFactory.create());
@@ -116,6 +102,137 @@ public class FormattingHelpActivity extends BrandedActivity {
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.content.setTypeface(Typeface.MONOSPACE);
         }
+    }
+
+    @NonNull
+    private String buildFormattingHelp() {
+        final String lineBreak = "\n";
+        final String indention = "  ";
+        final String divider = getString(R.string.formatting_help_divider);
+        final String codefence = getString(R.string.formatting_help_codefence);
+
+        final String lists = getString(R.string.formatting_help_lists_body_1) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_lists_body_2) + lineBreak +
+                getString(R.string.formatting_help_lists_body_3) + lineBreak +
+                getString(R.string.formatting_help_lists_body_4) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_lists_body_5) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_lists_body_6) + lineBreak +
+                getString(R.string.formatting_help_lists_body_7) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_lists_body_8) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_lists_body_9) + lineBreak +
+                getString(R.string.formatting_help_lists_body_10) + lineBreak +
+                indention + getString(R.string.formatting_help_lists_body_11) + lineBreak +
+                indention + getString(R.string.formatting_help_lists_body_12) + lineBreak;
+
+        final String checkboxes = getString(R.string.formatting_help_checkboxes_body_1) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_checkboxes_body_2) + lineBreak +
+                getString(R.string.formatting_help_checkboxes_body_3) + lineBreak;
+
+        final String structuredDocuments = getString(R.string.formatting_help_structured_documents_body_1) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_structured_documents_body_2) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_structured_documents_body_3) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_structured_documents_body_4) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_structured_documents_body_5) + lineBreak +
+                getString(R.string.formatting_help_structured_documents_body_6) + lineBreak;
+
+        final String javascript = getString(R.string.formatting_help_javascript_1) + lineBreak +
+                indention + indention + getString(R.string.formatting_help_javascript_2) + lineBreak +
+                getString(R.string.formatting_help_javascript_3) + lineBreak;
+
+        return getString(R.string.formatting_help_title, getString(R.string.formatting_help_cbf_title)) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_cbf_body_1) + lineBreak +
+                getString(R.string.formatting_help_cbf_body_2) + lineBreak +
+                lineBreak +
+                divider + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_title, getString(R.string.formatting_help_text_title)) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_text_body) + lineBreak +
+                lineBreak +
+                codefence + lineBreak +
+                getString(R.string.formatting_help_text_body) + lineBreak +
+                codefence + lineBreak +
+                lineBreak +
+                divider + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_title, getString(R.string.formatting_help_lists_title)) + lineBreak +
+                lineBreak +
+                lists +
+                lineBreak +
+                codefence + lineBreak +
+                lists +
+                codefence + lineBreak +
+                lineBreak +
+                divider + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_title, getString(R.string.formatting_help_checkboxes_title)) + lineBreak +
+                lineBreak +
+                checkboxes +
+                lineBreak +
+                codefence + lineBreak +
+                checkboxes +
+                codefence + lineBreak +
+                lineBreak +
+                divider + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_title, getString(R.string.formatting_help_structured_documents_title)) + lineBreak +
+                lineBreak +
+                structuredDocuments +
+                lineBreak +
+                codefence + lineBreak +
+                structuredDocuments +
+                codefence + lineBreak +
+                lineBreak +
+                divider + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_title, getString(R.string.formatting_help_code_title)) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_code_body_1) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_code_body_2) + lineBreak +
+                getString(R.string.formatting_help_code_body_3) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_code_body_4) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_codefence_escaped) + lineBreak +
+                javascript +
+                getString(R.string.formatting_help_codefence_escaped) + lineBreak +
+                lineBreak +
+                codefence + lineBreak +
+                javascript +
+                codefence + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_code_body_5) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_codefence_javascript_escaped) + lineBreak +
+                javascript +
+                getString(R.string.formatting_help_codefence_escaped) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_codefence_javascript) + lineBreak +
+                javascript +
+                codefence + lineBreak +
+                lineBreak +
+                divider + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_title, getString(R.string.formatting_help_unsupported_title)) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_unsupported_body_1) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_unsupported_body_2) + lineBreak +
+                getString(R.string.formatting_help_unsupported_body_3) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_unsupported_body_4) + lineBreak;
     }
 
     @Override
