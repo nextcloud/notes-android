@@ -13,6 +13,7 @@
     <string name="simple_edit">Modifica</string>
     <string name="action_edit_save">Salva</string>
     <string name="simple_about">Informazioni</string>
+    <string name="simple_accounts">Account</string>
     <string name="simple_bold">Grassetto</string>
     <string name="simple_link">Collegamento</string>
     <string name="simple_italic">Corsivo</string>
@@ -27,6 +28,9 @@
     <string name="menu_favorite">Preferito</string>
     <string name="menu_preview">Anteprima</string>
     <string name="menu_share">Condividi</string>
+
+    <string name="search_in_category">Cerca in %1$s</string>
+    <string name="search_in_all">Cerca tutte le note</string>
 
     <string name="change_category_title">Scegli una categoria</string>
 
@@ -150,8 +154,13 @@
     <string name="added_content">Aggiunto \"%1$s\"</string>
     <string name="shared_text_empty">Il testo condiviso era vuoto</string>
     <string name="append_to_note">Aggiungi a nota</string>
+    <string name="settings_branding">Marchio</string>
+    <string name="simple_security">Sicurezza</string>
+    <string name="simple_appearance">Aspetto</string>
+    <string name="simple_synchronization">Sincronizzazione</string>
+    <string name="simple_behavior">Comportamento</string>
     <string name="share_multiple">Condividi il contenuto di %1$d note</string>
-
+    <string name="manage_accounts">Gestisci account</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Apri in modalità modifica</item>

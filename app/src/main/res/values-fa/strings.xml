@@ -13,6 +13,7 @@
     <string name="simple_edit">ویرایش</string>
     <string name="action_edit_save">ذخیره</string>
     <string name="simple_about">درباره</string>
+    <string name="simple_accounts">حساب‌ها</string>
     <string name="simple_bold">درشت</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Italic</string>
@@ -126,6 +127,10 @@
     <string name="add_category">افزودن%1$s</string>
     <string name="simple_checkbox">جعبه علامت</string>
     <string name="could_not_copy_to_clipboard">به کلیپ بورد کپی نشد</string>
+    <string name="simple_security">امنیت</string>
+    <string name="simple_appearance">ظاهر</string>
+    <string name="simple_synchronization">هم‌گام‌سازی</string>
+    <string name="manage_accounts">مدیریت حساب‌ها</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>در حالت ویرایش باز کنید</item>

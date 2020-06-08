@@ -13,6 +13,7 @@
     <string name="simple_edit">编辑</string>
     <string name="action_edit_save">保存</string>
     <string name="simple_about">关于</string>
+    <string name="simple_accounts">账号</string>
     <string name="simple_bold">粗体</string>
     <string name="simple_link">链接</string>
     <string name="simple_italic">斜体</string>
@@ -140,6 +141,10 @@
     <string name="error_dialog_insufficient_storage">您的 Nextcloud 实例已经没有可用的存储空间了。请删除一些文件来允许本地的变更同步到云。</string>
     <string name="error_dialog_contact_us">如果问题持续存在，请不要犹豫来联系我们。您可以在侧边栏的 “关于” 部分找到我们的联系信息。</string>
     <string name="error_dialog_we_need_info">我们需要以下技术信息来帮助您：</string>
+    <string name="simple_security">安全</string>
+    <string name="simple_appearance">外观</string>
+    <string name="simple_synchronization">同步</string>
+    <string name="manage_accounts">管理账号</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以编辑模式打开</item>
