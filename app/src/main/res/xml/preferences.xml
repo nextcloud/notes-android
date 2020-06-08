@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
 
+    <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
         app:layout="@layout/item_preference_category"
         app:title="@string/simple_synchronization">
 
@@ -25,7 +25,6 @@
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
     <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
-
         app:layout="@layout/item_preference_category"
         app:title="@string/simple_appearance">
 
@@ -47,21 +46,8 @@
             android:title="@string/settings_branding" />
 
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
-    <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
-        android:key="@string/pref_category_security"
-        app:layout="@layout/item_preference_category"
-        app:title="@string/simple_security">
-        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
-            android:defaultValue="@string/pref_value_lock"
-            android:icon="@drawable/ic_lock_grey600_24dp"
-            android:key="@string/pref_key_lock"
-            android:layout="@layout/item_pref"
-            android:summary="@string/simple_beta"
-            android:title="@string/settings_lock" />
-    </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
     <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
-
         app:layout="@layout/item_preference_category"
         app:title="@string/simple_behavior">
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
@@ -90,4 +76,18 @@
             android:summary="%s"
             android:title="@string/settings_font_size" />
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
+
+    <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
+        android:key="@string/pref_category_security"
+        app:layout="@layout/item_preference_category"
+        app:title="@string/simple_security">
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="@string/pref_value_lock"
+            android:icon="@drawable/ic_lock_grey600_24dp"
+            android:key="@string/pref_key_lock"
+            android:layout="@layout/item_pref"
+            android:summary="@string/simple_beta"
+            android:title="@string/settings_lock" />
+    </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
+
 </PreferenceScreen>
