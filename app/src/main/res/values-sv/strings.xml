@@ -13,6 +13,7 @@
     <string name="simple_edit">Redigera</string>
     <string name="action_edit_save">Spara</string>
     <string name="simple_about">Om</string>
+    <string name="simple_accounts">Konton</string>
     <string name="simple_bold">Fet</string>
     <string name="simple_link">Länk</string>
     <string name="simple_italic">Kursiv</string>
@@ -133,6 +134,11 @@
     <string name="error_dialog_title">Å nej - Vad händer nu?🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Försök med att Tvinga appen att stänga och återstarta. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Om problemet kvarstår, prova med att rensa lagringen på både appen Nextcloud och Nextcloud Notes.</string>
+    <string name="settings_branding">Varumärke</string>
+    <string name="simple_security">Säkerhet</string>
+    <string name="simple_appearance">Utseende</string>
+    <string name="simple_synchronization">Synkronisering</string>
+    <string name="manage_accounts">Hantera konton</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>

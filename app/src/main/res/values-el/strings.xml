@@ -13,6 +13,7 @@
     <string name="simple_edit">Επεξεργασία</string>
     <string name="action_edit_save">Αποθήκευση</string>
     <string name="simple_about">Περί</string>
+    <string name="simple_accounts">Λογαριασμοί</string>
     <string name="simple_bold">Έντονα</string>
     <string name="simple_link">Σύνδεσμος</string>
     <string name="simple_italic">Πλάγια</string>
@@ -150,8 +151,12 @@
     <string name="added_content">Προστέθηκε \"%1$s\"</string>
     <string name="shared_text_empty">Το κοινόχρηστο κείμενο είναι κενό</string>
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
+    <string name="settings_branding">Επωνυμία</string>
+    <string name="simple_security">Ασφάλεια</string>
+    <string name="simple_appearance">Εμφάνιση</string>
+    <string name="simple_synchronization">Συγχρονισμός</string>
     <string name="share_multiple">Κοινόχρηστο περιεχόμενο από %1$d σημειώσεις</string>
-
+    <string name="manage_accounts">Διαχείριση λογαριασμών</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Άνοιγμα σε λειτουργία τροποποίησης</item>

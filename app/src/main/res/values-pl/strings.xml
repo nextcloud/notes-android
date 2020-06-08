@@ -13,6 +13,7 @@
     <string name="simple_edit">Edytuj</string>
     <string name="action_edit_save">Zapisz</string>
     <string name="simple_about">O aplikacji</string>
+    <string name="simple_accounts">Konta</string>
     <string name="simple_bold">Pogrubienie</string>
     <string name="simple_link">Odnośnik</string>
     <string name="simple_italic">Kursywa</string>
@@ -27,6 +28,9 @@
     <string name="menu_favorite">Ulubiona</string>
     <string name="menu_preview">Podgląd</string>
     <string name="menu_share">Udostępnij</string>
+
+    <string name="search_in_category">Szukaj w %1$s</string>
+    <string name="search_in_all">Szukaj we wszystkich notatkach</string>
 
     <string name="change_category_title">Wybierz kategorię</string>
 
@@ -150,8 +154,13 @@
     <string name="added_content">Dodano \"%1$s\"</string>
     <string name="shared_text_empty">Udostępniony tekst był pusty</string>
     <string name="append_to_note">Dołącz do notatki</string>
+    <string name="settings_branding">Motyw serwera</string>
+    <string name="simple_security">Bezpieczeństwo</string>
+    <string name="simple_appearance">Wygląd</string>
+    <string name="simple_synchronization">Synchronizacja</string>
+    <string name="simple_behavior">Zachowane</string>
     <string name="share_multiple">Udostępnij treść notatki %1$d</string>
-
+    <string name="manage_accounts">Zarządzaj kontami</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otwórz w trybie edycji</item>

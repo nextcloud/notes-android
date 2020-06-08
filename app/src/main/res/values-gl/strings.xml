@@ -13,6 +13,7 @@
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Gardar</string>
     <string name="simple_about">Sobre</string>
+    <string name="simple_accounts">Contas</string>
     <string name="simple_bold">Negra</string>
     <string name="simple_link">Ligazón</string>
     <string name="simple_italic">Itálica</string>
@@ -27,6 +28,9 @@
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Vista previa</string>
     <string name="menu_share">Compartir</string>
+
+    <string name="search_in_category">Buscar en %1$s</string>
+    <string name="search_in_all">Buscar todas as notas</string>
 
     <string name="change_category_title">Escolla unha categoría</string>
 
@@ -150,8 +154,13 @@
     <string name="added_content">Engadido «%1$s»</string>
     <string name="shared_text_empty">O texto compartido estaba baleiro</string>
     <string name="append_to_note">Anexo á nota</string>
+    <string name="settings_branding">Xestión da marca</string>
+    <string name="simple_security">Seguridade</string>
+    <string name="simple_appearance">Aparencia</string>
+    <string name="simple_synchronization">Sincronización</string>
+    <string name="simple_behavior">Comportamento</string>
     <string name="share_multiple">Compartir o contido de  %1$dnotas</string>
-
+    <string name="manage_accounts">Administrar contas</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>

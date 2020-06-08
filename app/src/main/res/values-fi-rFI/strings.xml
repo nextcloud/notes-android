@@ -13,6 +13,7 @@
     <string name="simple_edit">Muokkaa</string>
     <string name="action_edit_save">Tallenna</string>
     <string name="simple_about">Tietoja</string>
+    <string name="simple_accounts">Tilit</string>
     <string name="simple_bold">Lihavoitu</string>
     <string name="simple_link">Linkki</string>
     <string name="simple_italic">Kursivoitu</string>
@@ -118,6 +119,10 @@
     <string name="simple_checkbox">Valintaruutu</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Ei voitu kopioida leikepöydälle</string>
+    <string name="simple_security">Tietoturva</string>
+    <string name="simple_appearance">Ulkoasu</string>
+    <string name="simple_synchronization">Synkronointi</string>
+    <string name="manage_accounts">Tilien hallinta</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>

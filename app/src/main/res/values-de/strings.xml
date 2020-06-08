@@ -13,6 +13,7 @@
     <string name="simple_edit">Bearbeiten</string>
     <string name="action_edit_save">Speichern</string>
     <string name="simple_about">Über</string>
+    <string name="simple_accounts">Konten</string>
     <string name="simple_bold">Fett</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Kursiv</string>
@@ -27,6 +28,9 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
+
+    <string name="search_in_category">Suche in %1$s</string>
+    <string name="search_in_all">In allen Notizen suchen</string>
 
     <string name="change_category_title">Kategorie auswählen</string>
 
@@ -150,8 +154,13 @@
     <string name="added_content">„%1$s“ hinzugefügt</string>
     <string name="shared_text_empty">Der geteilte Text war ohne Inhalt</string>
     <string name="append_to_note">An Notiz anhängen</string>
+    <string name="settings_branding">Branding</string>
+    <string name="simple_security">Sicherheit</string>
+    <string name="simple_appearance">Aussehen</string>
+    <string name="simple_synchronization">Synchronisierung</string>
+    <string name="simple_behavior">Verhalten</string>
     <string name="share_multiple">Inhalt von %1$d Notizen teilen</string>
-
+    <string name="manage_accounts">Konten verwalten</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Im Bearbeitungsmodus öffnen</item>
