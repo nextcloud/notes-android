@@ -2,10 +2,13 @@ package it.niedermann.owncloud.notes.persistence.migration;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import androidx.annotation.NonNull;
+
 public class Migration_5_6 {
-    public Migration_5_6(SQLiteDatabase db, int oldVersion) {
-        if (oldVersion < 6) {
-            db.execSQL("ALTER TABLE NOTES ADD COLUMN FAVORITE INTEGER DEFAULT 0");
-        }
+    /**
+     * Adds a column to support marking notes as favorite
+     */
+    public Migration_5_6(@NonNull SQLiteDatabase db) {
+        db.execSQL("ALTER TABLE NOTES ADD COLUMN FAVORITE INTEGER DEFAULT 0");
     }
 }
