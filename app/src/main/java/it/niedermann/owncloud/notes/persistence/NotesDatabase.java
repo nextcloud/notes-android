@@ -96,7 +96,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
         DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()), 0);
         long id = addNote(accountId, dbNote);
-        notifyNotesChanged();
+        notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
         return id;
     }
@@ -140,7 +140,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         addNoteAndSync(ssoAccount, newAccountId, new CloudNote(0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), null));
         deleteNoteAndSync(ssoAccount, note.getId());
 
-        notifyNotesChanged();
+        notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
     }
 
@@ -525,7 +525,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         removeEmptyCategory(accountId);
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if (rows > 0) {
-            notifyNotesChanged();
+            notifyWidgets();
             if (callback != null) {
                 serverSyncHelper.addCallbackPush(ssoAccount, callback);
             }
@@ -609,7 +609,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 values,
                 key_id + " = ?",
                 new String[]{String.valueOf(id)});
-        notifyNotesChanged();
+        notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -646,7 +646,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     /**
      * Notify about changed notes.
      */
-    protected void notifyNotesChanged() {
+    protected void notifyWidgets() {
         updateSingleNoteWidgets(getContext());
         updateNoteListWidgets(getContext());
     }

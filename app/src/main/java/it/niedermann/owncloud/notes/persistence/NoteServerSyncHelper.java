@@ -513,7 +513,7 @@ public class NoteServerSyncHelper {
                     callback.onFinish();
                 }
             }
-            db.notifyNotesChanged();
+            db.notifyWidgets();
             db.updateDynamicShortcuts(localAccount.getId());
             // start next sync if scheduled meanwhile
             if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {
