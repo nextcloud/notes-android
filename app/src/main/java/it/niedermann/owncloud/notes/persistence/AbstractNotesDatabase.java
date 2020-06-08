@@ -13,17 +13,16 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_12_13;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_13_14;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_14_15;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_15_16;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_16_17;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_4_5;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_5_6;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_6_7;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_7_8;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_8_9;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
 import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
 
-// Protected APIs
-@SuppressWarnings("WeakerAccess")
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
-    private static final String TAG = AbstractNotesDatabase.class.getSimpleName();
 
     private static final int database_version = 17;
     @NonNull
@@ -37,7 +36,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String table_widget_note_list = "WIDGET_NOTE_LISTS";
 
     protected static final String key_id = "ID";
-
     protected static final String key_url = "URL";
     protected static final String key_account_name = "ACCOUNT_NAME";
     protected static final String key_username = "USERNAME";
@@ -163,32 +161,31 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 recreateDatabase(db);
                 return;
             case 4:
-                new Migration_4_5(db, oldVersion);
+                new Migration_4_5(db);
             case 5:
-                new Migration_5_6(db, oldVersion);
+                new Migration_5_6(db);
             case 6:
-                new Migration_6_7(db, oldVersion);
+                new Migration_6_7(db);
             case 7:
-                new Migration_7_8(db, oldVersion);
+                new Migration_7_8(db);
             case 8:
-                new Migration_8_9(db, oldVersion, context, this::recreateDatabase, this::notifyWidgets);
+                new Migration_8_9(db, context, this::recreateDatabase, this::notifyWidgets);
             case 9:
-                new Migration_9_10(db, oldVersion);
+                new Migration_9_10(db);
             case 10:
-                new Migration_10_11(oldVersion, context);
+                new Migration_10_11(context);
             case 11:
-                new Migration_11_12(db, oldVersion, context);
+                new Migration_11_12(db, context);
             case 12:
-                new Migration_12_13(db, oldVersion, context);
+                new Migration_12_13(db, context);
             case 13:
-                new Migration_13_14(db, oldVersion, context, this::notifyWidgets);
+                new Migration_13_14(db, context, this::notifyWidgets);
             case 14:
-                new Migration_14_15(db, oldVersion);
+                new Migration_14_15(db);
             case 15:
-                new Migration_15_16(db, oldVersion, context, this::notifyWidgets);
-        }
-        if(oldVersion < 17) {
-            db.execSQL("ALTER TABLE NOTES ADD COLUMN SCROLL_Y INTEGER DEFAULT 0");
+                new Migration_15_16(db, context, this::notifyWidgets);
+            case 16:
+                new Migration_16_17(db);
         }
     }
 
@@ -204,7 +201,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + table_category);
         onCreate(db);
     }
-
 
     protected abstract void notifyWidgets();
 }
