@@ -13,6 +13,7 @@
     <string name="simple_edit">Uredi</string>
     <string name="action_edit_save">Shrani</string>
     <string name="simple_about">O programu</string>
+    <string name="simple_accounts">Računi</string>
     <string name="simple_bold">Krepko</string>
     <string name="simple_link">Povezava</string>
     <string name="simple_italic">Ležeče</string>
@@ -150,6 +151,11 @@
     <string name="added_content">Dodano »%1$s«</string>
     <string name="shared_text_empty">Besedilo v souporabi je brez vsebine</string>
     <string name="append_to_note">Pripni k zabeležki</string>
+    <string name="settings_branding">Prilagajanje oblikovanja</string>
+    <string name="simple_security">Varnost</string>
+    <string name="simple_appearance">Videz</string>
+    <string name="simple_synchronization">Usklajevanje</string>
+    <string name="manage_accounts">Upravljanje z računi</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>

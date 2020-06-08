@@ -13,6 +13,7 @@
     <string name="simple_edit">Taisyti</string>
     <string name="action_edit_save">Įrašyti</string>
     <string name="simple_about">Apie</string>
+    <string name="simple_accounts">Paskyros</string>
     <string name="simple_bold">Pusjuodis</string>
     <string name="simple_link">Nuoroda</string>
     <string name="simple_italic">Kursyvas</string>
@@ -130,6 +131,10 @@
     <string name="could_not_copy_to_clipboard">Nepavyko nukopijuoti į iškarpinę</string>
     <string name="error_dialog_title">O, ne - Kas dabar? 🙁</string>
     <string name="error_dialog_we_need_info">Norint jums padėti, mums reikia techninės informacijos:</string>
+    <string name="simple_security">Saugumas</string>
+    <string name="simple_appearance">Išvaizda</string>
+    <string name="simple_synchronization">Sinchronizacija</string>
+    <string name="manage_accounts">Tvarkyti paskyras</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>
