@@ -13,6 +13,7 @@
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
     <string name="simple_about">Acerca de</string>
+    <string name="simple_accounts">Cuentas</string>
     <string name="simple_bold">Negrita</string>
     <string name="simple_link">Enlace</string>
     <string name="simple_italic">Cursiva</string>
@@ -150,8 +151,12 @@
     <string name="added_content">Se ha añadido «%1$s»</string>
     <string name="shared_text_empty">El texto compartido estaba vacío</string>
     <string name="append_to_note">Añadir a la nota</string>
+    <string name="settings_branding">Branding</string>
+    <string name="simple_security">Seguridad</string>
+    <string name="simple_appearance">Apariencia</string>
+    <string name="simple_synchronization">Sincronización</string>
     <string name="share_multiple">Compartido contenido de %1$d notas</string>
-
+    <string name="manage_accounts">Gestionar cuentas</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>

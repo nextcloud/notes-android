@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:background="?attr/colorPrimary">
 
+    <!-- Dummy item to prevent editContent from receiving focus -->
+    <LinearLayout
+        android:id="@+id/focus_workaround"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal" />
+
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"

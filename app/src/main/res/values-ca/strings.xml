@@ -13,6 +13,7 @@
     <string name="simple_edit">Edita</string>
     <string name="action_edit_save">Desa</string>
     <string name="simple_about">Quant a</string>
+    <string name="simple_accounts">Comptes</string>
     <string name="simple_bold">Negreta</string>
     <string name="simple_link">Enllaç</string>
     <string name="simple_italic">Cursiva</string>
@@ -121,6 +122,10 @@
     <string name="add_category">Afegeix %1$s</string>
     <string name="simple_checkbox">Casella de selecció</string>
     <string name="simple_beta">Beta</string>
+    <string name="simple_security">Seguretat</string>
+    <string name="simple_appearance">Aparença</string>
+    <string name="simple_synchronization">Sincronització</string>
+    <string name="manage_accounts">Gestiona els comptes</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Obre en mode d\'edició</item>

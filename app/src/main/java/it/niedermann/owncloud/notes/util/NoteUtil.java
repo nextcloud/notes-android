@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -152,5 +153,21 @@ public class NoteUtil {
     @NonNull
     public static String extendCategory(@NonNull String category) {
         return category.replace("/", " / ");
+    }
+
+    @SuppressWarnings("WeakerAccess") //PMD...
+    public static float getFontSizeFromPreferences(@NonNull Context context, @NonNull SharedPreferences sp) {
+        final String prefValueSmall = context.getString(R.string.pref_value_font_size_small);
+        final String prefValueMedium = context.getString(R.string.pref_value_font_size_medium);
+        // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
+        String fontSize = sp.getString(context.getString(R.string.pref_key_font_size), prefValueMedium);
+
+        if (fontSize.equals(prefValueSmall)) {
+            return context.getResources().getDimension(R.dimen.note_font_size_small);
+        } else if (fontSize.equals(prefValueMedium)) {
+            return context.getResources().getDimension(R.dimen.note_font_size_medium);
+        } else {
+            return context.getResources().getDimension(R.dimen.note_font_size_large);
+        }
     }
 }

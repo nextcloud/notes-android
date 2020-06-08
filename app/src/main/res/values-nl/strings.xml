@@ -13,6 +13,7 @@
     <string name="simple_edit">Bewerken</string>
     <string name="action_edit_save">Opslaan</string>
     <string name="simple_about">Over</string>
+    <string name="simple_accounts">Accounts</string>
     <string name="simple_bold">Vet</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Scheef</string>
@@ -151,8 +152,12 @@
     <string name="added_content">\"%1$s\" toegevoegd</string>
     <string name="shared_text_empty">Gedeelde tekst was leeg</string>
     <string name="append_to_note">Achteraan toevoegen aan notitie</string>
+    <string name="settings_branding">Brandmerken</string>
+    <string name="simple_security">Beveiliging</string>
+    <string name="simple_appearance">Uiterlijk</string>
+    <string name="simple_synchronization">Synchronisatie</string>
     <string name="share_multiple">Deel de inhoud van %1$d notities</string>
-
+    <string name="manage_accounts">Accounts beheren </string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wbewerkmodus</item>

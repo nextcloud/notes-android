@@ -13,6 +13,7 @@
     <string name="simple_edit">修改</string>
     <string name="action_edit_save">儲存</string>
     <string name="simple_about">關於</string>
+    <string name="simple_accounts">帳戶</string>
     <string name="simple_bold">粗體</string>
     <string name="simple_link">連結</string>
     <string name="simple_italic">斜體</string>
@@ -127,6 +128,9 @@
     <string name="simple_checkbox">核取方塊</string>
     <string name="unlock_notes">解鎖筆記</string>
     <string name="simple_beta">Beta 測試版</string>
+    <string name="simple_security">安全性</string>
+    <string name="simple_synchronization">同步</string>
+    <string name="manage_accounts">帳戶管理</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>以編輯模式開啟</item>

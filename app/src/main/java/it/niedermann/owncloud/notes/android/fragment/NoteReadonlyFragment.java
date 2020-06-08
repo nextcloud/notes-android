@@ -36,6 +36,7 @@ import it.niedermann.owncloud.notes.util.NoteLinksUtils;
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
 import static it.niedermann.owncloud.notes.util.DisplayUtils.searchAndColor;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
+import static it.niedermann.owncloud.notes.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
 
@@ -130,7 +131,7 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
         binding.swiperefreshlayout.setEnabled(false);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
-        binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
+        binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
         }

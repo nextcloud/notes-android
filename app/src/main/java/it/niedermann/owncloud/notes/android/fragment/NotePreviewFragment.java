@@ -48,6 +48,7 @@ import static it.niedermann.owncloud.notes.util.MarkDownUtil.CHECKBOX_UNCHECKED_
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
 import static it.niedermann.owncloud.notes.util.NoteLinksUtils.extractNoteRemoteId;
 import static it.niedermann.owncloud.notes.util.NoteLinksUtils.replaceNoteLinksWithDummyUrls;
+import static it.niedermann.owncloud.notes.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
@@ -117,8 +118,13 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                                          * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
                                          * Find number of lines starting with ``` before lineNumber
                                          */
+                                        boolean inCodefence = false;
                                         for (int i = 0; i < lines.length; i++) {
                                             if (lines[i].startsWith("```")) {
+                                                inCodefence = !inCodefence;
+                                                lineNumber++;
+                                            }
+                                            if (inCodefence && TextUtils.isEmpty(lines[i])) {
                                                 lineNumber++;
                                             }
                                             if (i == lineNumber) {
@@ -175,7 +181,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         binding.swiperefreshlayout.setOnRefreshListener(this);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
-        binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
+        binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
         }
