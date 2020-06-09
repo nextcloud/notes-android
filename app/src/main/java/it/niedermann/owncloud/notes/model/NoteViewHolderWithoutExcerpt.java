@@ -27,7 +27,7 @@ public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
         binding.noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
     }
 
-    public void bind(DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+    public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
         @NonNull final Context context = itemView.getContext();
         binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);

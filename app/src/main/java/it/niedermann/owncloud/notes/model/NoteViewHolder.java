@@ -52,7 +52,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
         return noteClickListener.onNoteLongClick(getAdapterPosition(), v);
     }
 
-    protected void bindCategory(Context context, TextView noteCategory, boolean showCategory, String category, int mainColor) {
+    protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int mainColor) {
         final boolean isDarkThemeActive = Notes.isDarkThemeActive(context);
         noteCategory.setVisibility(showCategory && !category.isEmpty() ? View.VISIBLE : View.GONE);
         noteCategory.setText(category);
@@ -92,12 +92,12 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
         noteCategory.setTextColor(categoryForeground);
     }
 
-    protected void bindFavorite(ImageView noteFavorite, boolean isFavorite) {
+    protected void bindFavorite(@NonNull ImageView noteFavorite, boolean isFavorite) {
         noteFavorite.setImageResource(isFavorite ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp);
         noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getAdapterPosition(), view));
     }
 
-    protected void bindTitleAndExcerpt(Context context, TextView noteTitle, @Nullable TextView noteExcerpt, CharSequence searchQuery, DBNote note, int mainColor) {
+    protected void bindTitleAndExcerpt(@NonNull Context context, @NonNull TextView noteTitle, @Nullable TextView noteExcerpt, @Nullable CharSequence searchQuery, @NonNull DBNote note, int mainColor) {
         if (!TextUtils.isEmpty(searchQuery)) {
             @ColorInt final int searchBackground = context.getResources().getColor(R.color.bg_highlighted);
             @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
