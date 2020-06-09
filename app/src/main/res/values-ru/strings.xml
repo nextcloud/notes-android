@@ -191,4 +191,5 @@
         <item quantity="many">%d выбрано</item>
         <item quantity="other">%d выбрано</item>
     </plurals>
-</resources>
+
+    </resources>

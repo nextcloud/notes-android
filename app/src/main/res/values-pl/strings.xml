@@ -161,6 +161,8 @@
     <string name="simple_behavior">Zachowane</string>
     <string name="share_multiple">Udostępnij treść notatki %1$d</string>
     <string name="manage_accounts">Zarządzaj kontami</string>
+    <string name="action_formatting_help">Formatowanie</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otwórz w trybie edycji</item>
@@ -196,4 +198,5 @@
         <item quantity="many">%d wybranych</item>
         <item quantity="other">%d wybranych</item>
     </plurals>
-</resources>
+
+    </resources>
