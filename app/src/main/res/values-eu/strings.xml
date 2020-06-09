@@ -189,4 +189,5 @@
         <item quantity="one">%d hautatuta</item>
         <item quantity="other">%d hautatuta</item>
     </plurals>
-</resources>
+
+    </resources>

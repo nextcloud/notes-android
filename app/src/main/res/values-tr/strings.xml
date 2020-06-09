@@ -190,4 +190,5 @@
         <item quantity="one">%d seçilmiş</item>
         <item quantity="other">%d seçilmiş</item>
     </plurals>
-</resources>
+
+    </resources>

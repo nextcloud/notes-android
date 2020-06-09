@@ -190,4 +190,5 @@
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d seleccionados</item>
     </plurals>
-</resources>
+
+    </resources>

@@ -161,6 +161,8 @@
     <string name="simple_behavior">Verhalten</string>
     <string name="share_multiple">Inhalt von %1$d Notizen teilen</string>
     <string name="manage_accounts">Konten verwalten</string>
+    <string name="action_formatting_help">Formatierung</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Im Bearbeitungsmodus öffnen</item>
@@ -194,4 +196,5 @@
         <item quantity="one">%d ausgewählt</item>
         <item quantity="other">%d ausgewählt</item>
     </plurals>
-</resources>
+
+    </resources>
