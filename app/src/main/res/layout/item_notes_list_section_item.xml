@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sectionTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,12 +13,12 @@
     android:background="@color/bg_normal"
     android:ellipsize="end"
     android:gravity="center_vertical"
-    android:hint="@string/listview_updated_yesterday"
     android:paddingStart="56dp"
     android:paddingLeft="56dp"
-    android:paddingTop="48dp"
+    android:paddingTop="@dimen/item_section_padding_top"
     android:paddingEnd="@dimen/spacer_2x"
     android:paddingRight="@dimen/spacer_2x"
     android:paddingBottom="@dimen/spacer_1x"
     android:textColor="@color/fg_default_selection"
-    android:textSize="@dimen/secondary_font_size" />
+    android:textSize="@dimen/secondary_font_size"
+    tools:text="@string/listview_updated_yesterday" />

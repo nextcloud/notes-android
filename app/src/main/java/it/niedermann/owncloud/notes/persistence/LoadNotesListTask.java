@@ -2,11 +2,11 @@ package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.text.TextUtils;
 import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.annotation.WorkerThread;
 
 import java.util.ArrayList;
@@ -74,8 +74,17 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         for (int i = 0; i < noteList.size(); i++) {
             DBNote currentNote = noteList.get(i);
             String timeslot = timeslotter.getTimeslot(currentNote);
-            if (i > 0 && !timeslot.equals(lastTimeslot) && !TextUtils.isEmpty(timeslot)) {
-                itemList.add(new SectionItem(timeslot));
+            /*
+             * Do not add a new section
+             * - if this is the very first section
+             * - if the previous items timeslot is still within the same section
+             */
+            if (i > 0 && !timeslot.equals(lastTimeslot)) { // Only append sections when slot is not the very first and slot changed
+                if (Timeslotter.TIMESLOT_TODAY.equals(timeslot)) {
+                    itemList.add(new SectionItem(null));
+                } else {
+                    itemList.add(new SectionItem(timeslot));
+                }
             }
             itemList.add(currentNote);
             lastTimeslot = timeslot;
@@ -94,27 +103,33 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     }
 
     private class Timeslotter {
-        private final List<Timeslot> timeslots = new ArrayList<>();
+        @NonNull
+        private final Timeslot[] timeslots;
         private final Calendar lastYear;
+        private static final String TIMESLOT_FAVORITES = "";
+        private static final String TIMESLOT_TODAY = "today";
 
         Timeslotter() {
             Calendar now = Calendar.getInstance();
             int month = now.get(Calendar.MONTH);
             int day = now.get(Calendar.DAY_OF_MONTH);
             int offsetWeekStart = (now.get(Calendar.DAY_OF_WEEK) - now.getFirstDayOfWeek() + 7) % 7;
-            timeslots.add(new Timeslot(null, month, day));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_yesterday), month, day - 1));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_week), month, day - offsetWeekStart));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_week), month, day - offsetWeekStart - 7));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_this_month), month, 1));
-            timeslots.add(new Timeslot(context.getResources().getString(R.string.listview_updated_last_month), month - 1, 1));
+            timeslots = new Timeslot[]{
+                    new Timeslot(context, null, month, day),
+                    new Timeslot(context, R.string.listview_updated_yesterday, month, day - 1),
+                    new Timeslot(context, R.string.listview_updated_this_week, month, day - offsetWeekStart),
+                    new Timeslot(context, R.string.listview_updated_last_week, month, day - offsetWeekStart - 7),
+                    new Timeslot(context, R.string.listview_updated_this_month, month, 1),
+                    new Timeslot(context, R.string.listview_updated_last_month, month - 1, 1)
+            };
             lastYear = Calendar.getInstance();
             lastYear.set(now.get(Calendar.YEAR) - 1, 0, 1, 0, 0, 0);
         }
 
+        @NonNull
         private String getTimeslot(DBNote note) {
             if (note.isFavorite()) {
-                return "";
+                return TIMESLOT_FAVORITES;
             }
             Calendar modified = note.getModified();
             for (Timeslot timeslot : timeslots) {
@@ -131,12 +146,12 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         }
 
         private class Timeslot {
-            @Nullable
+            @NonNull
             private final String label;
             private final Calendar time;
 
-            Timeslot(@Nullable String label, int month, int day) {
-                this.label = label;
+            Timeslot(@NonNull Context context, @Nullable @StringRes Integer label, int month, int day) {
+                this.label = label == null ? TIMESLOT_TODAY : context.getString(label);
                 this.time = Calendar.getInstance();
                 this.time.set(this.time.get(Calendar.YEAR), month, day, 0, 0, 0);
             }
