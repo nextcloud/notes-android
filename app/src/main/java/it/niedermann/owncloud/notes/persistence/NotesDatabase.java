@@ -57,6 +57,8 @@ import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.updateNoteListWidgets;
+import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.updateSingleNoteWidgets;
 import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
 
 /**
@@ -680,24 +682,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 }
             }
         }).start();
-    }
-
-    /**
-     * Update single note widget, if the note data was changed.
-     */
-    private static void updateSingleNoteWidgets(Context context) {
-        Intent intent = new Intent(context, SingleNoteWidget.class);
-        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        context.sendBroadcast(intent);
-    }
-
-    /**
-     * Update note list widgets, if the note data was changed.
-     */
-    private static void updateNoteListWidgets(Context context) {
-        Intent intent = new Intent(context, NoteListWidget.class);
-        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        context.sendBroadcast(intent);
     }
 
     public boolean hasAccounts() {

@@ -87,4 +87,11 @@ public class SingleNoteWidget extends AppWidgetProvider {
         }
         super.onDeleted(context, appWidgetIds);
     }
+
+    /**
+     * Update single note widget, if the note data was changed.
+     */
+    public static void updateSingleNoteWidgets(Context context) {
+        context.sendBroadcast(new Intent(context, SingleNoteWidget.class).setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE));
+    }
 }

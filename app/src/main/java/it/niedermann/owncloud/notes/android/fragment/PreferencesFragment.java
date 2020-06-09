@@ -20,6 +20,8 @@ import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.util.DeviceCredentialUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
+import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.updateNoteListWidgets;
+
 public class PreferencesFragment extends PreferenceFragmentCompat implements Branded {
 
     private static final String TAG = PreferencesFragment.class.getSimpleName();
@@ -43,6 +45,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         brandingPref = findPreference(getString(R.string.pref_key_branding));
         if (brandingPref != null) {
             brandingPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+                updateNoteListWidgets(requireContext());
                 final Boolean branding = (Boolean) newValue;
                 Log.v(TAG, "branding: " + branding);
                 requireActivity().setResult(Activity.RESULT_OK);
@@ -57,7 +60,12 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         if (lockPref != null) {
             if (!DeviceCredentialUtil.areCredentialsAvailable(requireContext())) {
                 lockPref.setVisible(false);
-                findPreference(getString(R.string.pref_category_security)).setVisible(false);
+                Preference securityCategory = findPreference(getString(R.string.pref_category_security));
+                if (securityCategory != null) {
+                    securityCategory.setVisible(false);
+                } else {
+                    Log.e(TAG, "Could not find preference " + getString(R.string.pref_category_security));
+                }
             } else {
                 lockPref.setOnPreferenceChangeListener((preference, newValue) -> {
                     Notes.setLockedPreference((Boolean) newValue);
