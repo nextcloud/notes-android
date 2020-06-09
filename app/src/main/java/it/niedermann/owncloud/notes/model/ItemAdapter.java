@@ -100,11 +100,11 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 break;
             }
             case TYPE_NOTE_WITH_EXCERPT: {
-                ((NoteViewHolderWithExcerpt) holder).bind((DBNote) itemList.get(position), noteClickListener, showCategory, mainColor, textColor, searchQuery);
+                ((NoteViewHolderWithExcerpt) holder).bind((DBNote) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
                 break;
             }
             case TYPE_NOTE_WITHOUT_EXCERPT: {
-                ((NoteViewHolderWithoutExcerpt) holder).bind((DBNote) itemList.get(position), noteClickListener, showCategory, mainColor, textColor, searchQuery);
+                ((NoteViewHolderWithoutExcerpt) holder).bind((DBNote) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
                 break;
             }
         }
