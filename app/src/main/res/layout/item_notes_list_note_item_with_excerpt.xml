@@ -27,16 +27,16 @@
         android:contentDescription="@string/menu_delete"
         app:srcCompat="@drawable/ic_delete_white_32dp" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:id="@+id/noteSwipeable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/list_item_background_selector">
+        android:background="@drawable/list_item_background_selector"
+        android:baselineAligned="false">
 
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/noteFavorite"
@@ -60,8 +60,8 @@
         </FrameLayout>
 
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
@@ -72,13 +72,13 @@
             android:paddingRight="@dimen/spacer_2x"
             android:paddingBottom="@dimen/spacer_2x">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/noteTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ellipsize="end"
@@ -86,19 +86,17 @@
                     android:textColor="?android:textColorPrimary"
                     android:textSize="@dimen/primary_font_size"
                     tools:text="@tools:sample/lorem/random" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/noteExcerpt"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1"
@@ -111,8 +109,6 @@
                     android:id="@+id/noteCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
                     android:layout_marginStart="@dimen/spacer_1x"
                     android:layout_marginLeft="@dimen/spacer_1x"
                     android:background="@drawable/border"
@@ -126,8 +122,8 @@
                     android:textSize="@dimen/secondary_font_size"
                     tools:maxLength="15"
                     tools:text="@tools:sample/lorem/random" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>

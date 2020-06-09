@@ -81,10 +81,10 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(LayoutInflater.from(parent.getContext())));
             }
             case TYPE_NOTE_WITH_EXCERPT: {
-                return new NoteViewHolderWithExcerpt(ItemNotesListNoteItemWithExcerptBinding.inflate(LayoutInflater.from(parent.getContext())), noteClickListener);
+                return new NoteViewHolderWithExcerpt(ItemNotesListNoteItemWithExcerptBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
             }
             case TYPE_NOTE_WITHOUT_EXCERPT: {
-                return new NoteViewHolderWithoutExcerpt(inflate(LayoutInflater.from(parent.getContext())), noteClickListener);
+                return new NoteViewHolderWithoutExcerpt(inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
             }
             default: {
                 throw new IllegalArgumentException("Not supported viewType: " + viewType);
