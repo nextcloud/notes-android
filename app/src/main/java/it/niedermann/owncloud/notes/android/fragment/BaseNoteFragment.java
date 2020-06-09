@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.Color;
@@ -14,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ScrollView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -63,8 +64,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private SingleSignOnAccount ssoAccount;
 
     protected DBNote note;
+    // TODO do we really need this? The reference to note is currently the same
     @Nullable
     private DBNote originalNote;
+    private int originalScrollY;
     protected NotesDatabase db;
     private NoteFragmentListener listener;
 
@@ -95,7 +98,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         if (content == null) {
                             throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                         } else {
-                            note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "");
+                            note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "", 0);
                         }
                     } else {
                         note = db.getNote(localAccount.getId(), db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote));
@@ -109,6 +112,32 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             setHasOptionsMenu(true);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Nullable
+    protected abstract ScrollView getScrollView();
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final ScrollView scrollView = getScrollView();
+        if (scrollView != null) {
+            scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+                if (scrollView.getScrollY() > 0) {
+                    note.setScrollY(scrollView.getScrollY());
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final ScrollView scrollView = getScrollView();
+        if (scrollView != null) {
+            this.originalScrollY = note.getScrollY();
+            scrollView.post(() -> scrollView.scrollTo(0, originalScrollY));
         }
     }
 
@@ -261,29 +290,18 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (note != null) {
             String newContent = getContent();
             if (note.getContent().equals(newContent)) {
-                Log.v(TAG, "... not saving, since nothing has changed");
+                if (note.getScrollY() != originalScrollY) {
+                    Log.v(TAG, "... only saving new scroll state, since content did not change");
+                    db.updateScrollY(note.getId(), note.getScrollY());
+                } else {
+                    Log.v(TAG, "... not saving, since nothing has changed");
+                }
             } else {
                 note = db.updateNoteAndSync(ssoAccount, localAccount.getId(), note, newContent, callback);
                 listener.onNoteUpdated(note);
             }
         } else {
             Log.e(TAG, "note is null");
-        }
-    }
-
-    @SuppressWarnings("WeakerAccess") //PMD...
-    protected float getFontSizeFromPreferences(SharedPreferences sp) {
-        final String prefValueSmall = getString(R.string.pref_value_font_size_small);
-        final String prefValueMedium = getString(R.string.pref_value_font_size_medium);
-        // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
-        String fontSize = sp.getString(getString(R.string.pref_key_font_size), prefValueMedium);
-
-        if (fontSize.equals(prefValueSmall)) {
-            return getResources().getDimension(R.dimen.note_font_size_small);
-        } else if (fontSize.equals(prefValueMedium)) {
-            return getResources().getDimension(R.dimen.note_font_size_medium);
-        } else {
-            return getResources().getDimension(R.dimen.note_font_size_large);
         }
     }
 

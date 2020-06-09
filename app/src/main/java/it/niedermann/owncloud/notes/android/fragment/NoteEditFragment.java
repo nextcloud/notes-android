@@ -41,8 +41,11 @@ import it.niedermann.owncloud.notes.util.format.ContextBasedRangeFormattingCallb
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
 import static it.niedermann.owncloud.notes.util.DisplayUtils.searchAndColor;
+import static it.niedermann.owncloud.notes.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
+
+    private static final String TAG = NoteEditFragment.class.getSimpleName();
 
     private static final String LOG_TAG_AUTOSAVE = "AutoSave";
 
@@ -147,10 +150,12 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
                 requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-                InputMethodManager imm = (InputMethodManager)
-                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
-
+                final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
+                } else {
+                    Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
+                }
             }
 
             // workaround for issue yydcdut/RxMarkdown#41
@@ -159,7 +164,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             binding.editContent.setText(note.getContent());
             binding.editContent.setEnabled(true);
 
-            MarkdownProcessor markdownProcessor = new MarkdownProcessor(requireContext());
+            final MarkdownProcessor markdownProcessor = new MarkdownProcessor(requireContext());
             markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(binding.editContent.getContext()).build());
             markdownProcessor.factory(EditFactory.create());
             markdownProcessor.live(binding.editContent);
@@ -168,8 +173,8 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 binding.editContent.setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(binding.editContent));
             }
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
-            binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(sp));
+            final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
+            binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
                 binding.editContent.setTypeface(Typeface.MONOSPACE);
             }

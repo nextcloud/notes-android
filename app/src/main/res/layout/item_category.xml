@@ -7,14 +7,14 @@
     android:background="?android:selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:padding="16dp">
+    android:padding="@dimen/spacer_2x">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="@dimen/spacer_2x"
+        android:layout_marginRight="@dimen/spacer_2x"
         android:contentDescription="@null"
         android:focusable="false"
         android:scaleType="center"
@@ -36,8 +36,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|end"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="@dimen/spacer_2x"
+        android:layout_marginLeft="@dimen/spacer_2x"
         android:textColor="@color/fg_default"
         tools:text="23" />
 </LinearLayout>

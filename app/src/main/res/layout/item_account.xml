@@ -6,8 +6,8 @@
     android:background="?attr/selectableItemBackground"
     android:paddingLeft="6dp"
     android:paddingStart="6dp"
-    android:paddingRight="8dp"
-    android:paddingEnd="8dp">
+    android:paddingRight="@dimen/spacer_1x"
+    android:paddingEnd="@dimen/spacer_1x">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/accountItemAvatar"

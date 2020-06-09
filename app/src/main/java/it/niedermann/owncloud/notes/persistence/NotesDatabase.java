@@ -20,6 +20,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.core.content.ContextCompat;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -52,6 +53,7 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
 import it.niedermann.owncloud.notes.model.SingleNoteWidgetData;
+import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
@@ -92,9 +94,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param note Note
      */
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
-        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()));
+        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()), 0);
         long id = addNote(accountId, dbNote);
-        notifyNotesChanged();
+        notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
         return id;
     }
@@ -107,7 +109,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      */
     long addNote(long accountId, CloudNote note) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(11);
         if (note instanceof DBNote) {
             DBNote dbNote = (DBNote) note;
             if (dbNote.getId() > 0) {
@@ -138,7 +140,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         addNoteAndSync(ssoAccount, newAccountId, new CloudNote(0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), null));
         deleteNoteAndSync(ssoAccount, note.getId());
 
-        notifyNotesChanged();
+        notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
     }
 
@@ -212,8 +214,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         if (selectionArgs.length > 2) {
             Log.v(TAG, selection + "   ----   " + selectionArgs[0] + " " + selectionArgs[1] + " " + selectionArgs[2]);
         }
-        String cols = String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s",
-                key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category_title, key_etag, key_excerpt);
+        String cols = String.format("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s",
+                key_id, key_remote_id, key_status, key_title, key_modified, key_favorite, key_category_title, key_etag, key_excerpt, key_scroll_y);
         if (!pruneContent) {
             cols = String.format("%s, %s", cols, key_content);
         }
@@ -246,13 +248,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 cursor.getLong(1),
                 modified,
                 cursor.getString(3),
-                pruneContent ? "" : cursor.getString(9),
+                pruneContent ? "" : cursor.getString(10),
                 cursor.getInt(5) > 0,
                 cursor.getString(6),
                 cursor.getString(7),
                 DBStatus.parse(cursor.getString(2)),
                 accountId,
-                cursor.getString(8)
+                cursor.getString(8),
+                cursor.getInt(9)
         );
     }
 
@@ -447,7 +450,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         note.setFavorite(!note.isFavorite());
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(2);
         values.put(key_status, note.getStatus().getTitle());
         values.put(key_favorite, note.isFavorite() ? "1" : "0");
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
@@ -471,7 +474,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         note.setCategory(category);
         note.setStatus(DBStatus.LOCAL_EDITED);
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(2);
         values.put(key_status, note.getStatus().getTitle());
         int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory());
         values.put(key_category, id);
@@ -486,7 +489,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     private long addCategory(long accountId, @NonNull String title) {
         validateAccountId(accountId);
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(2);
         values.put(key_category_account_id, accountId);
         values.put(key_category_title, title);
         return db.insert(table_category, null, values);
@@ -505,23 +508,24 @@ public class NotesDatabase extends AbstractNotesDatabase {
         //debugPrintFullDB();
         DBNote newNote;
         if (newContent == null) {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, oldNote.getExcerpt());
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(newContent));
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(newContent), oldNote.getScrollY());
         }
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(7);
         values.put(key_status, newNote.getStatus().getTitle());
         values.put(key_title, newNote.getTitle());
         values.put(key_category, getCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory()));
         values.put(key_modified, newNote.getModified().getTimeInMillis() / 1000);
         values.put(key_content, newNote.getContent());
         values.put(key_excerpt, newNote.getExcerpt());
+        values.put(key_scroll_y, newNote.getScrollY());
         int rows = db.update(table_notes, values, key_id + " = ? AND (" + key_content + " != ? OR " + key_category + " != ?)", new String[]{String.valueOf(newNote.getId()), newNote.getContent(), newNote.getCategory()});
         removeEmptyCategory(accountId);
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if (rows > 0) {
-            notifyNotesChanged();
+            notifyWidgets();
             if (callback != null) {
                 serverSyncHelper.addCallbackPush(ssoAccount, callback);
             }
@@ -533,6 +537,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
             }
             return oldNote;
         }
+    }
+
+    public void updateScrollY(long noteId, int scrollY) {
+        Log.e(TAG, "Updated scrollY: " + scrollY);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues(1);
+        values.put(key_scroll_y, scrollY);
+        db.update(table_notes, values, key_id + " = ? ", new String[]{String.valueOf(noteId)});
     }
 
     /**
@@ -548,7 +560,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         SQLiteDatabase db = this.getWritableDatabase();
 
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(8);
         values.put(key_remote_id, remoteNote.getRemoteId());
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(id)});
 
@@ -591,24 +603,28 @@ public class NotesDatabase extends AbstractNotesDatabase {
      */
     public void deleteNoteAndSync(SingleSignOnAccount ssoAccount, long id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(1);
         values.put(key_status, DBStatus.LOCAL_DELETED.getTitle());
         db.update(table_notes,
                 values,
                 key_id + " = ?",
                 new String[]{String.valueOf(id)});
-        notifyNotesChanged();
+        notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             ShortcutManager shortcutManager = getContext().getSystemService(ShortcutManager.class);
-            shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
-                String shortcutId = id + "";
-                if (shortcut.getId().equals(shortcutId)) {
-                    Log.v(TAG, "Removing shortcut for " + shortcutId);
-                    shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), getContext().getResources().getString(R.string.note_has_been_deleted));
-                }
-            });
+            if(shortcutManager != null) {
+                shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
+                    String shortcutId = id + "";
+                    if (shortcut.getId().equals(shortcutId)) {
+                        Log.v(TAG, "Removing shortcut for " + shortcutId);
+                        shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), getContext().getResources().getString(R.string.note_has_been_deleted));
+                    }
+                });
+            } else {
+                Log.e(TAG, ShortcutManager.class.getSimpleName() + "is null.");
+            }
         }
     }
 
@@ -630,7 +646,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     /**
      * Notify about changed notes.
      */
-    protected void notifyNotesChanged() {
+    protected void notifyWidgets() {
         updateSingleNoteWidgets(getContext());
         updateNoteListWidgets(getContext());
     }
@@ -697,14 +713,13 @@ public class NotesDatabase extends AbstractNotesDatabase {
      */
     public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) throws SQLiteConstraintException {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(4);
         values.put(key_url, url);
         values.put(key_username, username);
         values.put(key_account_name, accountName);
-        values.put(key_color, capabilities.getColor().substring(1));
-        values.put(key_text_color, capabilities.getTextColor().substring(1));
         values.put(key_capabilities_etag, capabilities.getETag());
-        db.insertOrThrow(table_accounts, null, values);
+        long accountId = db.insertOrThrow(table_accounts, null, values);
+        updateBrand(accountId, capabilities);
     }
 
     /**
@@ -792,15 +807,26 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     public void updateBrand(long accountId, @NonNull Capabilities capabilities) throws IllegalArgumentException {
         validateAccountId(accountId);
-        // Validate color format
-        Color.parseColor(capabilities.getColor());
-        Color.parseColor(capabilities.getTextColor());
+
+        String color;
+        try {
+            color = ColorUtil.formatColorToParsableHexString(capabilities.getColor()).substring(1);
+        } catch (Exception e) {
+            color = String.format("%06X", (0xFFFFFF & ContextCompat.getColor(context, R.color.defaultBrand)));
+        }
+
+        String textColor;
+        try {
+            textColor = ColorUtil.formatColorToParsableHexString(capabilities.getTextColor()).substring(1);
+        } catch (Exception e) {
+            textColor = String.format("%06X", (0xFFFFFF & ContextCompat.getColor(context, android.R.color.white)));
+        }
 
         final SQLiteDatabase db = this.getWritableDatabase();
-        final ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues(2);
 
-        values.put(key_color, capabilities.getColor().substring(1));
-        values.put(key_text_color, capabilities.getTextColor().substring(1));
+        values.put(key_color, color);
+        values.put(key_text_color, textColor);
 
         final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
         if (updatedRows == 1) {
@@ -825,7 +851,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 }
                 if (apiVersions.length() > 0) {
                     final SQLiteDatabase db = this.getWritableDatabase();
-                    final ContentValues values = new ContentValues();
+                    final ContentValues values = new ContentValues(1);
                     values.put(key_api_version, apiVersion);
                     final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
                     if (updatedRows == 1) {
@@ -877,7 +903,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     void updateETag(long accountId, String etag) {
         validateAccountId(accountId);
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(1);
         values.put(key_etag, etag);
         final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
         if (updatedRows == 1) {
@@ -890,7 +916,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     public void updateCapabilitiesETag(long accountId, String capabilitiesETag) {
         validateAccountId(accountId);
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(1);
         values.put(key_capabilities_etag, capabilitiesETag);
         final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
         if (updatedRows == 1) {
@@ -906,7 +932,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
             throw new IllegalArgumentException("modified must be greater or equal 0");
         }
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
+        ContentValues values = new ContentValues(1);
         values.put(key_modified, modified);
         final int updatedRows = db.update(table_accounts, values, key_id + " = ?", new String[]{String.valueOf(accountId)});
         if (updatedRows == 1) {
@@ -946,7 +972,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     public void createOrUpdateSingleNoteWidgetData(@NonNull SingleNoteWidgetData data) throws SQLException {
         validateAccountId(data.getAccountId());
         final SQLiteDatabase db = getWritableDatabase();
-        final ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues(4);
         values.put(key_id, data.getAppWidgetId());
         values.put(key_account_id, data.getAccountId());
         values.put(key_note_id, data.getNoteId());
@@ -980,7 +1006,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     public void createOrUpdateNoteListWidgetData(@NonNull NoteListsWidgetData data) throws SQLException {
         validateAccountId(data.getAccountId());
         final SQLiteDatabase db = getWritableDatabase();
-        final ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues(5);
         if (data.getMode() != MODE_DISPLAY_CATEGORY && data.getCategoryId() != null) {
             throw new UnsupportedOperationException("Cannot create a widget with a categoryId when mode is not " + MODE_DISPLAY_CATEGORY);
         }

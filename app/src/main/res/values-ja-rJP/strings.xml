@@ -13,6 +13,7 @@
     <string name="simple_edit">編集</string>
     <string name="action_edit_save">保存</string>
     <string name="simple_about">バージョン情報</string>
+    <string name="simple_accounts">アカウント</string>
     <string name="simple_bold">太字</string>
     <string name="simple_link">リンク</string>
     <string name="simple_italic">斜体</string>
@@ -146,6 +147,11 @@
     <string name="error_dialog_contact_us">問題が継続する場合はお問い合わせください。我々の連絡先はサイドバーのaboutセクションにかかれています。</string>
     <string name="error_dialog_we_need_info">サポートには下記技術情報が必要です：</string>
     <string name="error_dialog_redirect">サーバがHTTPステータスコード 302を返しました。これはNotesアプリがインストールされていないか、構成が誤っていることを意味します。.htaccessファイルのカスタムオーバーライドやOIDクライアントのようなNextcloudアプリが原因の可能性があります。</string>
+    <string name="settings_branding">ブランディング</string>
+    <string name="simple_security">セキュリティ</string>
+    <string name="simple_appearance">表示</string>
+    <string name="simple_synchronization">同期</string>
+    <string name="manage_accounts">アカウント管理</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>

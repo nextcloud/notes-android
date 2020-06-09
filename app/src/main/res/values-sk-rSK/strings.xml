@@ -13,6 +13,7 @@
     <string name="simple_edit">Upraviť</string>
     <string name="action_edit_save">Uložiť</string>
     <string name="simple_about">O aplikácii</string>
+    <string name="simple_accounts">Účty</string>
     <string name="simple_bold">Tučné</string>
     <string name="simple_link">Odkaz</string>
     <string name="simple_italic">Kurzíva</string>
@@ -27,6 +28,9 @@
     <string name="menu_favorite">Obľúbené</string>
     <string name="menu_preview">Náhľad</string>
     <string name="menu_share">Sprístupniť</string>
+
+    <string name="search_in_category">Hľadať v %1$s</string>
+    <string name="search_in_all">Hľadať všetky poznámky</string>
 
     <string name="change_category_title">Vybrať kategóriu</string>
 
@@ -150,8 +154,13 @@
     <string name="added_content">Pridané \"%1$s\"</string>
     <string name="shared_text_empty">Zdieľaný text bol prázdny</string>
     <string name="append_to_note">Pripojiť k poznámke</string>
+    <string name="settings_branding">Použitie vlastného loga</string>
+    <string name="simple_security">Zabezpečenie</string>
+    <string name="simple_appearance">Vzhľad</string>
+    <string name="simple_synchronization">Synchronizácia</string>
+    <string name="simple_behavior">Chod</string>
     <string name="share_multiple">Zdieľať obsah %1$d poznámok</string>
-
+    <string name="manage_accounts">Spravovať účty</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>

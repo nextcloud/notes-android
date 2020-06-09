@@ -35,7 +35,7 @@
             style="?android:attr/listSeparatorTextViewStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/spacer_2x"
             android:text="@string/about_icons_disclaimer_title" />
 
         <TextView

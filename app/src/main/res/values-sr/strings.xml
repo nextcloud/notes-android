@@ -13,6 +13,7 @@
     <string name="simple_edit">Измени</string>
     <string name="action_edit_save">Сачувај</string>
     <string name="simple_about">О програму</string>
+    <string name="simple_accounts">Налози</string>
     <string name="simple_bold">Подебљано</string>
     <string name="simple_link">Веза</string>
     <string name="simple_italic">Курзив</string>
@@ -138,6 +139,11 @@
     <string name="error_dialog_check_maintenance">Проверите да ли Вам инстанца можда тренутно ради у режиму одржавања.</string>
     <string name="error_dialog_insufficient_storage">На Некстклауд инстанци више нема простора. Обришите неке фајлове да синхронизујете локалне измене на облак.</string>
     <string name="error_dialog_we_need_info">Потребне су нам следеће техничке информација да бисмо Вам помогли:</string>
+    <string name="settings_branding">Брендирање</string>
+    <string name="simple_security">Безбедност</string>
+    <string name="simple_appearance">Изглед</string>
+    <string name="simple_synchronization">Синхронизација</string>
+    <string name="manage_accounts">Управљање налозима</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>

@@ -11,7 +11,7 @@
     <color name="defaultTextHighlightBackground">#2233334a</color>
 
     <color name="bg_highlighted">#eee</color>
-    <color name="bg_normal">#ffffff</color>
+    <color name="bg_normal">@color/primary</color>
     <color name="bg_attention">#d40000</color>
     <color name="bg_warning">#ffcc00</color>
     <color name="fg_default">#000000</color>

@@ -9,7 +9,7 @@
     <color name="defaultTextHighlightBackground">#55eeeeff</color>
 
     <color name="bg_highlighted">#2a2a2a</color>
-    <color name="bg_normal">#121212</color>
+    <color name="bg_normal">@color/primary</color>
     <color name="bg_attention">#ff3333</color>
     <color name="fg_default">#eeeeee</color>
     <color name="fg_default_selection">#cccccc</color>

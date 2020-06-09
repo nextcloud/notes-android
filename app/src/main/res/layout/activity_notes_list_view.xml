@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_notes_list_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/primary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +44,7 @@
                 android:layout_marginEnd="@dimen/spacer_1x"
                 android:layout_marginRight="@dimen/spacer_1x"
                 android:layout_marginBottom="@dimen/design_appbar_elevation"
-                app:cardCornerRadius="8dp"
+                app:cardCornerRadius="@dimen/spacer_1x"
                 app:cardElevation="6dp"
                 app:strokeWidth="0dp">
 
@@ -99,7 +100,6 @@
             android:id="@+id/swiperefreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg_normal"
             tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity">
 
             <FrameLayout
@@ -115,13 +115,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:indeterminateTint="@color/defaultBrand"
+                    tools:targetApi="lollipop"
                     tools:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/bg_highlighted"
                     android:scrollbars="vertical"
                     tools:listitem="@layout/item_notes_list_note_item" />
             </FrameLayout>

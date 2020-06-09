@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
@@ -200,8 +199,6 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
     }
 
     protected abstract void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor);
-
-    protected abstract ScrollView getScrollView();
 
     protected abstract Layout getLayout();
 
