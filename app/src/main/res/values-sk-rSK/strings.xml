@@ -161,6 +161,8 @@
     <string name="simple_behavior">Chod</string>
     <string name="share_multiple">Zdieľať obsah %1$d poznámok</string>
     <string name="manage_accounts">Spravovať účty</string>
+    <string name="action_formatting_help">Formátovanie</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
@@ -196,4 +198,5 @@
         <item quantity="many">%d vybraný</item>
         <item quantity="other">%d vybraný</item>
     </plurals>
-</resources>
+
+    </resources>

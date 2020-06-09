@@ -191,4 +191,5 @@
         <item quantity="one">%d geselecteerd</item>
         <item quantity="other">%d geselecteerd</item>
     </plurals>
-</resources>
+
+    </resources>

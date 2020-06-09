@@ -161,6 +161,8 @@
     <string name="simple_behavior">Comportamento</string>
     <string name="share_multiple">Condividi il contenuto di %1$d note</string>
     <string name="manage_accounts">Gestisci account</string>
+    <string name="action_formatting_help">Formattazione</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Apri in modalità modifica</item>
@@ -194,4 +196,5 @@
         <item quantity="one">%d selezionato</item>
         <item quantity="other">%d selezionati</item>
     </plurals>
-</resources>
+
+    </resources>
