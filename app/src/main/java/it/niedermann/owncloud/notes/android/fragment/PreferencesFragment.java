@@ -11,6 +11,7 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.branding.Branded;
@@ -60,11 +61,12 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
 
         gridViewPref = findPreference(getString(R.string.pref_key_gridview));
         if (gridViewPref != null) {
+            gridViewPref.setVisible(BuildConfig.DEBUG);
             gridViewPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
                 final Boolean gridView = (Boolean) newValue;
-                NotesDatabase.getInstance(requireContext()).regenerateExcerpts(!gridView);
                 Log.v(TAG, "gridView: " + gridView);
                 requireActivity().setResult(Activity.RESULT_OK);
+                new Thread(() -> NotesDatabase.getInstance(requireContext()).regenerateExcerpts(!gridView)).start();
                 return true;
             });
         } else {

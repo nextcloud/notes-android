@@ -102,7 +102,7 @@ public class NoteUtil {
             return "";
         }
         return stripMarkdown
-                ? truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 200).replace("\n", "   ")
+                ? truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 150).replace("\n", "   ")
                 : truncateString(content.replaceFirst("^.*\n", ""), 200);
     }
 

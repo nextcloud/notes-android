@@ -53,7 +53,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @Override
     public long getItemId(int position) {
         return getItemViewType(position) == TYPE_SECTION
-                ? ((SectionItem) getItem(position)).getTitle().hashCode()
+                ? ((SectionItem) getItem(position)).getTitle().hashCode() * -1
                 : ((DBNote) getItem(position)).getId();
     }
 
