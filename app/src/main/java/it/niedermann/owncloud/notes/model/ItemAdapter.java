@@ -47,6 +47,14 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         this.gridView = gridView;
         this.mainColor = context.getResources().getColor(R.color.defaultBrand);
         this.textColor = Color.WHITE;
+        setHasStableIds(true);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return getItemViewType(position) == TYPE_SECTION
+                ? ((SectionItem) getItem(position)).getTitle().hashCode()
+                : ((DBNote) getItem(position)).getId();
     }
 
     /**

@@ -138,7 +138,6 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
     }
 
     private void bindContent(@NonNull TextView textView, @NonNull CharSequence charSequence) {
-        textView.setText(charSequence);
         if (renderMarkdown) {
             new Thread(() -> {
                 try {
@@ -148,6 +147,8 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
                     // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
                 }
             }).start();
+        } else {
+            textView.setText(charSequence);
         }
     }
 
