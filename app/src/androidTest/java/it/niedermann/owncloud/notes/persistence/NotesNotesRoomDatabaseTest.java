@@ -46,7 +46,7 @@ import static org.junit.Assert.fail;
  */
 @RunWith(AndroidJUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class NotesDatabaseTest {
+public class NotesNotesRoomDatabaseTest {
 
     private NotesDatabase db = null;
 

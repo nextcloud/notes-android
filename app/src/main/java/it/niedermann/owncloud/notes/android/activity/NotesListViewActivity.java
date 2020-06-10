@@ -77,6 +77,9 @@ import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedLis
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static android.view.View.GONE;
@@ -176,7 +179,12 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         }
 
         db = NotesDatabase.getInstance(this);
-
+        NotesRoomDatabase db = NotesRoomDatabase.getInstance(this);
+        LocalAccountDao dao = db.getLocalAccountDao();
+        new Thread(() -> {
+            List<LocalAccountEntity> localAccountEntities = dao.getAccounts();
+            Log.v("TEST", localAccountEntities.size() + " acs");
+        }).start();
         setupToolbars();
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
