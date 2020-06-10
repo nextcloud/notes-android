@@ -83,6 +83,7 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
@@ -92,7 +93,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
 
-    public static final boolean FEATURE_TOGGLE_GRID_VIEW = true;
+    private boolean gridView = true;
 
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
@@ -181,6 +182,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
         db = NotesDatabase.getInstance(this);
 
+        gridView = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
+
         setupToolbars();
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
@@ -233,7 +236,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             try {
                 BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, FEATURE_TOGGLE_GRID_VIEW)
+                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
                         .attachToRecyclerView(listView);
                 synchronize();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -594,13 +597,13 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     }
 
     private void initList() {
-        adapter = new ItemAdapter(this, FEATURE_TOGGLE_GRID_VIEW);
+        adapter = new ItemAdapter(this, gridView);
         listView.setAdapter(adapter);
 
         final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         int spanCount = (int) ((displayMetrics.widthPixels / displayMetrics.density) / getResources().getInteger(R.integer.max_dp_grid_view));
         listView.setLayoutManager(
-                FEATURE_TOGGLE_GRID_VIEW
+                gridView
                         ? new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
                         : new LinearLayoutManager(this)
         );

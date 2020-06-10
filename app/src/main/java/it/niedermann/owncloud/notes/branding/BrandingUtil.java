@@ -31,7 +31,6 @@ public class BrandingUtil {
 
     }
 
-
     public static boolean isBrandingEnabled(@NonNull Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getBoolean(context.getString(R.string.pref_key_branding), true);

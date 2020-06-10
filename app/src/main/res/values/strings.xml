@@ -117,6 +117,7 @@
     <string name="pref_key_theme" translatable="false">darkTheme</string>
     <string name="pref_key_font" translatable="false">font</string>
     <string name="pref_key_branding" translatable="false">branding</string>
+    <string name="pref_key_gridview" translatable="false">gridview</string>
     <string name="pref_key_font_size" translatable="false">fontSize</string>
     <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>
     <string name="pref_key_lock" translatable="false">lock</string>
@@ -191,6 +192,7 @@
     <string name="shared_text_empty">Shared text was empty</string>
     <string name="append_to_note">Append to note</string>
     <string name="settings_branding">Branding</string>
+    <string name="settings_gridview">Grid view</string>
     <string name="simple_security">Security</string>
     <string name="simple_appearance">Appearance</string>
     <string name="simple_synchronization">Synchronization</string>
