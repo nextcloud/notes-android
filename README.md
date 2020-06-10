@@ -27,9 +27,9 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :eyes: Screenshots
 
-| Navi | List View | Edit Mode |
+| List View | Edit Mode | Preview |
 | :--: | :--: | :--: |
-| ![Screenshot of categories in sidebar](/fastlane/metadata/android/en-US/images/phoneScreenshots/5.png) | ![Screenshot of list view](/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png) | ![Screenshot of edit view](/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) |
+| ![Screenshot of list view](/fastlane/metadata/android/en-US/images/phoneScreenshots/2.png) | ![Screenshot of edit mode](/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png) | ![Screenshot of preview](/fastlane/metadata/android/en-US/images/phoneScreenshots/4.png) |
 
 ## :rocket: Features
   * Multiple accounts
