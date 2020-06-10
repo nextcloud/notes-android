@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -13,12 +14,11 @@ public class NoteViewGridHolder extends NoteViewHolder {
     private final ItemNotesListNoteItemGridBinding binding;
 
     public NoteViewGridHolder(@NonNull ItemNotesListNoteItemGridBinding binding, @NonNull NoteClickListener noteClickListener) {
-        super(binding.getRoot(), noteClickListener);
+        super(binding.getRoot(), noteClickListener, true);
         this.binding = binding;
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
     }
-
 
     public void showSwipe(boolean left) {
 
@@ -29,8 +29,8 @@ public class NoteViewGridHolder extends NoteViewHolder {
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
         binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
         bindFavorite(binding.noteFavorite, note.isFavorite());
-        bindTitle(context, binding.noteTitle, searchQuery, note, mainColor);
-        bindExcerpt(context, binding.noteContent, searchQuery, note, mainColor);
+        bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
+        bindSearchableContent(context, binding.noteContent, searchQuery, note.getExcerpt(), mainColor);
     }
 
     public View getNoteSwipeable() {

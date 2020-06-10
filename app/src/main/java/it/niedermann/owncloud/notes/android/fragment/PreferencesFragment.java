@@ -16,6 +16,7 @@ import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.branding.Branded;
 import it.niedermann.owncloud.notes.branding.BrandedSwitchPreference;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.util.DeviceCredentialUtil;
 import it.niedermann.owncloud.notes.util.Notes;
@@ -61,6 +62,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         if (gridViewPref != null) {
             gridViewPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
                 final Boolean gridView = (Boolean) newValue;
+                NotesDatabase.getInstance(requireContext()).regenerateExcerpts(!gridView);
                 Log.v(TAG, "gridView: " + gridView);
                 requireActivity().setResult(Activity.RESULT_OK);
                 return true;

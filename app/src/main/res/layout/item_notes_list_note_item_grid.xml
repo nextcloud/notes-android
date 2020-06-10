@@ -2,40 +2,57 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacer_1x"
-    android:background="@drawable/list_item_background_selector"
-    android:elevation="6dp"
-    android:orientation="vertical">
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/noteCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacer_2x"
+            android:layout_marginLeft="@dimen/spacer_2x"
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:background="@drawable/border"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/spacer_1x"
+            android:paddingTop="1dp"
+            android:paddingRight="@dimen/spacer_1x"
+            android:paddingBottom="1dp"
+            android:singleLine="true"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/secondary_font_size"
+            tools:maxLength="15"
+            tools:text="@tools:sample/lorem/random" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical|end"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/noteCategory"
-                android:layout_width="wrap_content"
+            <com.yydcdut.markdown.MarkdownTextView
+                android:id="@+id/noteTitle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacer_1x"
-                android:layout_marginLeft="@dimen/spacer_1x"
-                android:background="@drawable/border"
-                android:maxLines="1"
-                android:paddingLeft="@dimen/spacer_1x"
-                android:paddingTop="1dp"
-                android:paddingRight="@dimen/spacer_1x"
-                android:paddingBottom="1dp"
-                android:singleLine="true"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/secondary_font_size"
-                tools:maxLength="15"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/spacer_2x"
+                android:paddingLeft="@dimen/spacer_2x"
+                android:paddingTop="@dimen/spacer_2x"
+                android:paddingEnd="@dimen/spacer_2x"
+                android:paddingRight="@dimen/spacer_2x"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/fg_default"
+                android:textIsSelectable="true"
+                android:theme="@style/textViewStyle"
+                tools:maxLength="50"
                 tools:text="@tools:sample/lorem/random" />
 
 
@@ -64,18 +81,6 @@
                     app:srcCompat="@drawable/ic_sync_blue_18dp" />
             </FrameLayout>
         </LinearLayout>
-
-        <com.yydcdut.markdown.MarkdownTextView
-            android:id="@+id/noteTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/spacer_2x"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/fg_default"
-            android:textIsSelectable="true"
-            android:theme="@style/textViewStyle"
-            tools:maxLength="50"
-            tools:text="@tools:sample/lorem/random" />
 
         <com.yydcdut.markdown.MarkdownTextView
             android:id="@+id/noteContent"

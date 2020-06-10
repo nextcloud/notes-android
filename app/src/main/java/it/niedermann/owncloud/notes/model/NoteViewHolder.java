@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
@@ -18,23 +20,36 @@ import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.yydcdut.markdown.MarkdownProcessor;
+import com.yydcdut.markdown.syntax.text.TextFactory;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
 import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
+import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
 
 public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
     private final NoteClickListener noteClickListener;
+    private final boolean renderMarkdown;
+    private MarkdownProcessor markdownProcessor;
 
-    public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener) {
+    public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener, boolean renderMarkdown) {
         super(v);
         this.noteClickListener = noteClickListener;
+        this.renderMarkdown = renderMarkdown;
+        if (renderMarkdown) {
+            markdownProcessor = new MarkdownProcessor(itemView.getContext());
+            markdownProcessor.factory(TextFactory.create());
+            markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(itemView.getContext()).build());
+        }
         v.setOnClickListener(this);
         v.setOnLongClickListener(this);
     }
@@ -99,10 +114,9 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
         noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getAdapterPosition(), view));
     }
 
-    protected void bindTitle(@NonNull Context context, @NonNull TextView noteTitle, @Nullable CharSequence searchQuery, @NonNull DBNote note, int mainColor) {
-        if (TextUtils.isEmpty(searchQuery)) {
-            noteTitle.setText(note.getTitle());
-        } else {
+    protected void bindSearchableContent(@NonNull Context context, @NonNull TextView textView, @Nullable CharSequence searchQuery, @NonNull String content, int mainColor) {
+        CharSequence processedContent = content;
+        if (!TextUtils.isEmpty(searchQuery)) {
             @ColorInt final int searchBackground = context.getResources().getColor(R.color.bg_highlighted);
             @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
 
@@ -110,36 +124,30 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
             // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
             // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
             final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
-            SpannableString spannableString = new SpannableString(note.getTitle());
+            SpannableString spannableString = new SpannableString(content);
             Matcher matcher = pattern.matcher(spannableString);
 
             while (matcher.find()) {
                 spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
                 spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
             }
-            noteTitle.setText(spannableString);
+
+            processedContent = spannableString;
         }
+        bindContent(textView, processedContent);
     }
 
-    protected void bindExcerpt(@NonNull Context context, @NonNull TextView noteExcerpt, @Nullable CharSequence searchQuery, @NonNull DBNote note, int mainColor) {
-        if (TextUtils.isEmpty(searchQuery)) {
-            noteExcerpt.setText(note.getExcerpt());
-        } else {
-            @ColorInt final int searchBackground = context.getResources().getColor(R.color.bg_highlighted);
-            @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
-
-            // The Pattern.quote method will add \Q to the very beginning of the string and \E to the end of the string
-            // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
-            // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
-            final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
-            SpannableString spannableString = new SpannableString(note.getExcerpt());
-            Matcher matcher = pattern.matcher(spannableString);
-
-            while (matcher.find()) {
-                spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
-                spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
-            }
-            noteExcerpt.setText(spannableString);
+    private void bindContent(@NonNull TextView textView, @NonNull CharSequence charSequence) {
+        textView.setText(charSequence);
+        if (renderMarkdown) {
+            new Thread(() -> {
+                try {
+                    final CharSequence parsedCharSequence = parseCompat(markdownProcessor, charSequence);
+                    new Handler(Looper.getMainLooper()).post(() -> textView.setText(parsedCharSequence));
+                } catch (StringIndexOutOfBoundsException e) {
+                    // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
+                }
+            }).start();
         }
     }
 

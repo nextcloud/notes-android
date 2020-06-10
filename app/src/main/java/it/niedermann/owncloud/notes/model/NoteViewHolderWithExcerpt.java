@@ -14,7 +14,7 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
     private final ItemNotesListNoteItemWithExcerptBinding binding;
 
     public NoteViewHolderWithExcerpt(@NonNull ItemNotesListNoteItemWithExcerptBinding binding, @NonNull NoteClickListener noteClickListener) {
-        super(binding.getRoot(), noteClickListener);
+        super(binding.getRoot(), noteClickListener, false);
         this.binding = binding;
         itemView.setOnClickListener(this);
         itemView.setOnLongClickListener(this);
@@ -32,8 +32,9 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
         binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
         bindFavorite(binding.noteFavorite, note.isFavorite());
-        bindTitle(context, binding.noteTitle, searchQuery, note, mainColor);
-        bindExcerpt(context, binding.noteExcerpt, searchQuery, note, mainColor);
+
+        bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
+        bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt(), mainColor);
     }
 
     public View getNoteSwipeable() {

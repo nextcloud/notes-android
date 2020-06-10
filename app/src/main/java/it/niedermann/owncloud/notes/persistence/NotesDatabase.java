@@ -41,8 +41,6 @@ import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
-import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
-import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.ApiVersion;
 import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -135,6 +133,17 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_category, getCategoryIdByTitle(accountId, note.getCategory()));
         values.put(key_etag, note.getEtag());
         return db.insert(table_notes, null, values);
+    }
+
+    public void regenerateExcerpts(boolean stripMarkdown) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.query(table_notes, new String[]{key_id, key_content}, key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, null, null, null);
+        ContentValues values = new ContentValues(1);
+        while (cursor.moveToNext()) {
+            values.put(key_excerpt, NoteUtil.generateNoteExcerpt(cursor.getString(1), stripMarkdown));
+            db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(cursor.getInt(0))});
+        }
+        cursor.close();
     }
 
     public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, DBNote note, long newAccountId) {
@@ -616,7 +625,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             ShortcutManager shortcutManager = getContext().getSystemService(ShortcutManager.class);
-            if(shortcutManager != null) {
+            if (shortcutManager != null) {
                 shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
                     String shortcutId = id + "";
                     if (shortcut.getId().equals(shortcutId)) {

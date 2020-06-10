@@ -11,13 +11,13 @@ public class SectionViewHolder extends RecyclerView.ViewHolder {
     public SectionViewHolder(ItemNotesListSectionItemBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
-    }
-
-    public void bind(SectionItem item) {
-        binding.sectionTitle.setText(item.getTitle());
 
         if (itemView.getLayoutParams() != null && itemView.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams) {
             ((StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams()).setFullSpan(true);
         }
+    }
+
+    public void bind(SectionItem item) {
+        binding.sectionTitle.setText(item.getTitle());
     }
 }

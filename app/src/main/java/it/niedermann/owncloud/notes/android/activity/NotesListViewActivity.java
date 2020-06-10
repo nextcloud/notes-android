@@ -325,7 +325,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     }
 
     private void setupNotesList() {
-        initList();
+        initRecyclerView();
 
         ((RecyclerView) findViewById(R.id.recycler_view)).addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -596,7 +596,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         binding.navigationMenu.setAdapter(adapterMenu);
     }
 
-    private void initList() {
+    private void initRecyclerView() {
         adapter = new ItemAdapter(this, gridView);
         listView.setAdapter(adapter);
 
@@ -802,7 +802,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
             startActivityForResult(intent, show_single_note_cmd);
-
         }
     }
 
