@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacer_1x"
+    android:background="@drawable/list_item_background_selector"
+    android:elevation="6dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/noteCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacer_1x"
+                android:layout_marginLeft="@dimen/spacer_1x"
+                android:background="@drawable/border"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/spacer_1x"
+                android:paddingTop="1dp"
+                android:paddingRight="@dimen/spacer_1x"
+                android:paddingBottom="1dp"
+                android:singleLine="true"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="@dimen/secondary_font_size"
+                tools:maxLength="15"
+                tools:text="@tools:sample/lorem/random" />
+
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/noteFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/menu_favorite"
+                    android:padding="@dimen/spacer_2x"
+                    tools:src="@drawable/ic_star_yellow_24dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/noteStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginRight="4dp"
+                    android:baseline="14dp"
+                    app:srcCompat="@drawable/ic_sync_blue_18dp" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <com.yydcdut.markdown.MarkdownTextView
+            android:id="@+id/noteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacer_2x"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/fg_default"
+            android:textIsSelectable="true"
+            android:theme="@style/textViewStyle"
+            tools:maxLength="50"
+            tools:text="@tools:sample/lorem/random" />
+
+        <com.yydcdut.markdown.MarkdownTextView
+            android:id="@+id/noteContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacer_2x"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/fg_default"
+            android:textIsSelectable="true"
+            android:theme="@style/textViewStyle"
+            tools:maxLength="200"
+            tools:text="@tools:sample/lorem/random" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

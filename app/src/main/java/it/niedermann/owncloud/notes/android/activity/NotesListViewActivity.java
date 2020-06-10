@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -27,6 +28,7 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
@@ -89,6 +91,8 @@ import static java.util.Arrays.asList;
 public class NotesListViewActivity extends LockedActivity implements NoteClickListener, ViewProvider, MoveAccountListener, AccountSwitcherListener {
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
+
+    public static final boolean FEATURE_TOGGLE_GRID_VIEW = true;
 
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
@@ -229,7 +233,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             try {
                 BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this).attachToRecyclerView(listView);
+                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, FEATURE_TOGGLE_GRID_VIEW)
+                        .attachToRecyclerView(listView);
                 synchronize();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
@@ -588,10 +593,17 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         binding.navigationMenu.setAdapter(adapterMenu);
     }
 
-    public void initList() {
-        adapter = new ItemAdapter(this);
+    private void initList() {
+        adapter = new ItemAdapter(this, FEATURE_TOGGLE_GRID_VIEW);
         listView.setAdapter(adapter);
-        listView.setLayoutManager(new LinearLayoutManager(this));
+
+        final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int spanCount = (int) ((displayMetrics.widthPixels / displayMetrics.density) / getResources().getInteger(R.integer.max_dp_grid_view));
+        listView.setLayoutManager(
+                FEATURE_TOGGLE_GRID_VIEW
+                        ? new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
+                        : new LinearLayoutManager(this)
+        );
     }
 
     private void refreshLists() {

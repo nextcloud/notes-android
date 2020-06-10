@@ -52,6 +52,8 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
         return noteClickListener.onNoteLongClick(getAdapterPosition(), v);
     }
 
+    public abstract void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery);
+
     protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int mainColor) {
         final boolean isDarkThemeActive = Notes.isDarkThemeActive(context);
         noteCategory.setVisibility(showCategory && !category.isEmpty() ? View.VISIBLE : View.GONE);
@@ -97,8 +99,10 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
         noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getAdapterPosition(), view));
     }
 
-    protected void bindTitleAndExcerpt(@NonNull Context context, @NonNull TextView noteTitle, @Nullable TextView noteExcerpt, @Nullable CharSequence searchQuery, @NonNull DBNote note, int mainColor) {
-        if (!TextUtils.isEmpty(searchQuery)) {
+    protected void bindTitle(@NonNull Context context, @NonNull TextView noteTitle, @Nullable CharSequence searchQuery, @NonNull DBNote note, int mainColor) {
+        if (TextUtils.isEmpty(searchQuery)) {
+            noteTitle.setText(note.getTitle());
+        } else {
             @ColorInt final int searchBackground = context.getResources().getColor(R.color.bg_highlighted);
             @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
 
@@ -108,28 +112,34 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
             final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
             SpannableString spannableString = new SpannableString(note.getTitle());
             Matcher matcher = pattern.matcher(spannableString);
+
             while (matcher.find()) {
                 spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
                 spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
             }
-
             noteTitle.setText(spannableString);
+        }
+    }
 
-            spannableString = new SpannableString(note.getExcerpt());
-            matcher = pattern.matcher(spannableString);
+    protected void bindExcerpt(@NonNull Context context, @NonNull TextView noteExcerpt, @Nullable CharSequence searchQuery, @NonNull DBNote note, int mainColor) {
+        if (TextUtils.isEmpty(searchQuery)) {
+            noteExcerpt.setText(note.getExcerpt());
+        } else {
+            @ColorInt final int searchBackground = context.getResources().getColor(R.color.bg_highlighted);
+            @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
+
+            // The Pattern.quote method will add \Q to the very beginning of the string and \E to the end of the string
+            // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
+            // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
+            final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
+            SpannableString spannableString = new SpannableString(note.getExcerpt());
+            Matcher matcher = pattern.matcher(spannableString);
+
             while (matcher.find()) {
                 spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
                 spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
             }
-
-            if (noteExcerpt != null) {
-                noteExcerpt.setText(spannableString);
-            }
-        } else {
-            noteTitle.setText(note.getTitle());
-            if (noteExcerpt != null) {
-                noteExcerpt.setText(note.getExcerpt());
-            }
+            noteExcerpt.setText(spannableString);
         }
     }
 

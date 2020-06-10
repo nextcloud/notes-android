@@ -33,7 +33,7 @@ public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
         binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
         bindFavorite(binding.noteFavorite, note.isFavorite());
-        bindTitleAndExcerpt(context, binding.noteTitle, null, searchQuery, note, mainColor);
+        bindTitle(context, binding.noteTitle, searchQuery, note, mainColor);
     }
 
     public View getNoteSwipeable() {

@@ -8,14 +8,17 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.Branded;
+import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
 
@@ -25,10 +28,12 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     private static final String TAG = ItemAdapter.class.getSimpleName();
 
-    private static final int TYPE_SECTION = R.layout.item_notes_list_section_item;
-    private static final int TYPE_NOTE_WITH_EXCERPT = R.layout.item_notes_list_note_item_with_excerpt;
-    private static final int TYPE_NOTE_WITHOUT_EXCERPT = R.layout.item_notes_list_note_item_without_excerpt;
+    public static final int TYPE_SECTION = 0;
+    public static final int TYPE_NOTE_WITH_EXCERPT = 1;
+    public static final int TYPE_NOTE_WITHOUT_EXCERPT = 2;
+
     private final NoteClickListener noteClickListener;
+    private final boolean gridView;
     private List<Item> itemList = new ArrayList<>();
     private boolean showCategory = true;
     private CharSequence searchQuery;
@@ -38,8 +43,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @ColorInt
     private int textColor;
 
-    public <T extends Context & NoteClickListener> ItemAdapter(@NonNull T context) {
+    public <T extends Context & NoteClickListener> ItemAdapter(@NonNull T context, boolean gridView) {
         this.noteClickListener = context;
+        this.gridView = gridView;
         this.mainColor = context.getResources().getColor(R.color.defaultBrand);
         this.textColor = Color.WHITE;
     }
@@ -76,18 +82,33 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_SECTION: {
-                return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(LayoutInflater.from(parent.getContext())));
+        if (gridView) {
+            switch (viewType) {
+                case TYPE_SECTION: {
+                    return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(LayoutInflater.from(parent.getContext())));
+                }
+                case TYPE_NOTE_WITH_EXCERPT:
+                case TYPE_NOTE_WITHOUT_EXCERPT: {
+                    return new NoteViewGridHolder(ItemNotesListNoteItemGridBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
+                }
+                default: {
+                    throw new IllegalArgumentException("Not supported viewType: " + viewType);
+                }
             }
-            case TYPE_NOTE_WITH_EXCERPT: {
-                return new NoteViewHolderWithExcerpt(ItemNotesListNoteItemWithExcerptBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
-            }
-            case TYPE_NOTE_WITHOUT_EXCERPT: {
-                return new NoteViewHolderWithoutExcerpt(inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
-            }
-            default: {
-                throw new IllegalArgumentException("Not supported viewType: " + viewType);
+        } else {
+            switch (viewType) {
+                case TYPE_SECTION: {
+                    return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(LayoutInflater.from(parent.getContext())));
+                }
+                case TYPE_NOTE_WITH_EXCERPT: {
+                    return new NoteViewHolderWithExcerpt(ItemNotesListNoteItemWithExcerptBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
+                }
+                case TYPE_NOTE_WITHOUT_EXCERPT: {
+                    return new NoteViewHolderWithoutExcerpt(inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
+                }
+                default: {
+                    throw new IllegalArgumentException("Not supported viewType: " + viewType);
+                }
             }
         }
     }
@@ -99,12 +120,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 ((SectionViewHolder) holder).bind((SectionItem) itemList.get(position));
                 break;
             }
-            case TYPE_NOTE_WITH_EXCERPT: {
-                ((NoteViewHolderWithExcerpt) holder).bind((DBNote) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
-                break;
-            }
+            case TYPE_NOTE_WITH_EXCERPT:
             case TYPE_NOTE_WITHOUT_EXCERPT: {
-                ((NoteViewHolderWithoutExcerpt) holder).bind((DBNote) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
+                ((NoteViewHolder) holder).bind((DBNote) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
                 break;
             }
         }
@@ -160,6 +178,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         return itemList.size();
     }
 
+    @IntRange(from = 0, to = 2)
     @Override
     public int getItemViewType(int position) {
         Item item = getItem(position);

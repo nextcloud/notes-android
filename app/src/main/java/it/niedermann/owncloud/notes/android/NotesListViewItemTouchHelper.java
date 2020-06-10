@@ -37,8 +37,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             @NonNull ISyncCallback syncCallBack,
             @NonNull Runnable refreshLists,
             @Nullable SwipeRefreshLayout swipeRefreshLayout,
-            @Nullable ViewProvider viewProvider
-    ) {
+            @Nullable ViewProvider viewProvider,
+            boolean gridView) {
         super(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             private boolean swipeRefreshLayoutEnabled;
 
@@ -56,7 +56,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
              */
             @Override
             public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-                if (viewHolder instanceof SectionViewHolder) return 0;
+                if (gridView || viewHolder instanceof SectionViewHolder) return 0;
                 return super.getSwipeDirs(recyclerView, viewHolder);
             }
 
