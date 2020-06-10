@@ -39,11 +39,11 @@ public class Notes extends Application {
         AppCompatDelegate.setDefaultNightMode(setting.getModeId());
     }
 
-    public static boolean isGridViewEnabled(@NonNull Context context) {
+    public static boolean isGridViewEnabled() {
         return isGridViewEnabled;
     }
 
-    public static void updateGridViewEnabled(Boolean gridView) {
+    public static void updateGridViewEnabled(boolean gridView) {
         isGridViewEnabled = gridView;
     }
 

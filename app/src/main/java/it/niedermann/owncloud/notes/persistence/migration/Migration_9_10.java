@@ -18,7 +18,7 @@ public class Migration_9_10 {
         Cursor cursor = db.query("NOTES", new String[]{"ID", "CONTENT"}, null, null, null, null, null, null);
         while (cursor.moveToNext()) {
             ContentValues values = new ContentValues();
-            values.put("EXCERPT", NoteUtil.generateNoteExcerpt(cursor.getString(1), false));
+            values.put("EXCERPT", NoteUtil.generateNoteExcerpt(cursor.getString(1)));
             db.update("NOTES", values, "ID" + " = ? ", new String[]{cursor.getString(0)});
         }
         cursor.close();

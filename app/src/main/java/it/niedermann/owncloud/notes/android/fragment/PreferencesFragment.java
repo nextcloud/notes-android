@@ -66,7 +66,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
                 final Boolean gridView = (Boolean) newValue;
                 Log.v(TAG, "gridView: " + gridView);
                 requireActivity().setResult(Activity.RESULT_OK);
-                new Thread(() -> NotesDatabase.getInstance(requireContext()).regenerateExcerpts(gridView)).start();
                 Notes.updateGridViewEnabled(gridView);
                 return true;
             });

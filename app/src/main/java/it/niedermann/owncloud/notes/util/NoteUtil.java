@@ -81,18 +81,15 @@ public class NoteUtil {
     /**
      * Generates an excerpt of a content String (reads second line which is not empty)
      *
-     * @param content      {@link String}
-     * @param keepMarkdown whether or not the markdown should be stripped from the excerpt
+     * @param content String
      * @return excerpt String
      */
     @NonNull
-    public static String generateNoteExcerpt(@NonNull String content, boolean keepMarkdown) {
-        if (!content.contains("\n")) {
+    public static String generateNoteExcerpt(@NonNull String content) {
+        if (content.contains("\n"))
+            return truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 200).replace("\n", "   ");
+        else
             return "";
-        }
-        return keepMarkdown
-                ? truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 150)
-                : truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 150).replace("\n", "   ");
     }
 
     @NonNull

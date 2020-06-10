@@ -1,13 +1,17 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding;
+
+import static android.view.View.GONE;
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 public class NoteViewGridHolder extends NoteViewHolder {
     @NonNull
@@ -26,10 +30,11 @@ public class NoteViewGridHolder extends NoteViewHolder {
         super.bind(note, showCategory, mainColor, textColor, searchQuery);
         @NonNull final Context context = itemView.getContext();
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
-        binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
+        binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? INVISIBLE : VISIBLE);
         bindFavorite(binding.noteFavorite, note.isFavorite());
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
-        bindSearchableContent(context, binding.noteContent, searchQuery, note.getExcerpt(), mainColor);
+        bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt().replace("   ", "\n"), mainColor);
+        binding.noteExcerpt.setVisibility(TextUtils.isEmpty(note.getExcerpt()) ? GONE : VISIBLE);
     }
 
     public View getNoteSwipeable() {

@@ -69,12 +69,12 @@ import it.niedermann.owncloud.notes.model.GridItemDecoration;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
-import it.niedermann.owncloud.notes.model.SectionItemDecoration;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.model.NoteClickListener;
+import it.niedermann.owncloud.notes.model.SectionItemDecoration;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
@@ -88,6 +88,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.util.Notes.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.util.Notes.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 import static java.util.Arrays.asList;
@@ -185,8 +186,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
         db = NotesDatabase.getInstance(this);
 
-        gridView = isGridViewEnabled(this);
-        if (!gridView) {
+        gridView = isGridViewEnabled();
+        if (!gridView || isDarkThemeActive(this)) {
             activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
         }
 

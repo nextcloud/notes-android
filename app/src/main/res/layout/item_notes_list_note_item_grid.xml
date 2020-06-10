@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/spacer_2x">
+        android:paddingBottom="@dimen/spacer_1x">
 
 
         <LinearLayout
@@ -24,8 +24,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingTop="@dimen/spacer_1x">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/noteCategory"
@@ -33,6 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacer_1x"
                     android:layout_marginLeft="@dimen/spacer_1x"
+                    android:layout_marginTop="@dimen/spacer_1x"
                     android:background="@drawable/border"
                     android:maxLines="1"
                     android:paddingLeft="@dimen/spacer_1x"
@@ -54,6 +54,7 @@
                     android:layout_marginTop="@dimen/spacer_1x"
                     android:layout_marginEnd="0dp"
                     android:layout_marginRight="0dp"
+                    android:layout_marginBottom="@dimen/spacer_1x"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     android:textColor="@color/fg_default"
                     android:textIsSelectable="true"
@@ -90,14 +91,15 @@
             </FrameLayout>
         </LinearLayout>
 
-        <com.yydcdut.markdown.MarkdownTextView
-            android:id="@+id/noteContent"
+        <TextView
+            android:id="@+id/noteExcerpt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacer_2x"
             android:layout_marginLeft="@dimen/spacer_2x"
             android:layout_marginEnd="@dimen/spacer_2x"
             android:layout_marginRight="@dimen/spacer_2x"
+            android:layout_marginBottom="@dimen/spacer_1x"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/fg_default"
             android:textIsSelectable="true"

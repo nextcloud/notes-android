@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 
 import androidx.annotation.NonNull;
