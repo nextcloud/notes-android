@@ -109,7 +109,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.categories.add(0, clearItem);
         if (currentSearchString != null && currentSearchString.trim().length() > 0) {
             boolean currentSearchStringIsInCategories = false;
-            for (NavigationItem category : categories.subList(1, categories.size())) {
+            for (NavigationItem category : categories) {
                 if (currentSearchString.equals(category.label)) {
                     currentSearchStringIsInCategories = true;
                     break;
