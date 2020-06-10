@@ -8,11 +8,12 @@
     android:focusable="true">
 
     <LinearLayout
+        android:id="@+id/wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/grid_item_background_selector"
         android:orientation="vertical"
         android:paddingBottom="@dimen/spacer_1x">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +58,6 @@
                     android:layout_marginBottom="@dimen/spacer_1x"
                     android:textAppearance="?attr/textAppearanceHeadline5"
                     android:textColor="@color/fg_default"
-                    android:textIsSelectable="true"
                     android:theme="@style/textViewStyle"
                     tools:maxLength="50"
                     tools:text="@tools:sample/lorem/random" />
@@ -102,7 +102,6 @@
             android:layout_marginBottom="@dimen/spacer_1x"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/fg_default"
-            android:textIsSelectable="true"
             android:theme="@style/textViewStyle"
             tools:maxLength="200"
             tools:text="@tools:sample/lorem/random" />
