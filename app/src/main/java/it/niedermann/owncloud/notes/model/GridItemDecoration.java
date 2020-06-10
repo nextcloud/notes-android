@@ -4,21 +4,25 @@ import android.graphics.Rect;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Px;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-public class GridItemDecoration extends RecyclerView.ItemDecoration {
+public class GridItemDecoration extends SectionItemDecoration {
 
     @NonNull
     private final ItemAdapter adapter;
     private final int gutter;
 
-    public GridItemDecoration(@NonNull ItemAdapter adapter, int gutter) {
+    public GridItemDecoration(@NonNull ItemAdapter adapter, @Px int sectionLeft, @Px int sectionTop, @Px int sectionRight, @Px int sectionBottom, @Px int gutter) {
+        super(adapter, sectionLeft, sectionTop, sectionRight, sectionBottom);
         this.adapter = adapter;
         this.gutter = gutter;
     }
 
+    @Override
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+        super.getItemOffsets(outRect, view, parent, state);
         final int position = parent.getChildAdapterPosition(view);
         final StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
 

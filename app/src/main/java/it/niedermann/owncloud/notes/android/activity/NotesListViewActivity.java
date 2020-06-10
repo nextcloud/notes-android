@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
@@ -68,6 +69,7 @@ import it.niedermann.owncloud.notes.model.GridItemDecoration;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
+import it.niedermann.owncloud.notes.model.SectionItemDecoration;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.CategoryNavigationItem;
@@ -84,9 +86,9 @@ import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.util.Notes.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 import static java.util.Arrays.asList;
 
@@ -129,7 +131,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     protected FloatingActionButton fabCreate;
     private RecyclerView listView;
 
-    protected ItemAdapter adapter = null;
+    protected ItemAdapter adapter;
 
     protected NotesDatabase db = null;
     private NavigationAdapter adapterCategories;
@@ -183,7 +185,10 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
         db = NotesDatabase.getInstance(this);
 
-        gridView = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
+        gridView = isGridViewEnabled(this);
+        if (!gridView) {
+            activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
+        }
 
         setupToolbars();
         setupNavigationList(categoryAdapterSelectedItem);
@@ -606,9 +611,22 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             int spanCount = (int) ((displayMetrics.widthPixels / displayMetrics.density) / getResources().getInteger(R.integer.max_dp_grid_view));
             StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
             listView.setLayoutManager(gridLayoutManager);
-            listView.addItemDecoration(new GridItemDecoration(adapter, getResources().getDimensionPixelSize(R.dimen.spacer_2x)));
+            listView.addItemDecoration(new GridItemDecoration(adapter,
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_2x)
+            ));
         } else {
-            listView.setLayoutManager(new LinearLayoutManager(this));
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            listView.setLayoutManager(layoutManager);
+            listView.addItemDecoration(new SectionItemDecoration(adapter,
+                    getResources().getDimensionPixelSize(R.dimen.spacer_6x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
+                    0
+            ));
         }
     }
 

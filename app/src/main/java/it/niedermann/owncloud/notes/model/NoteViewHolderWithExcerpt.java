@@ -14,7 +14,7 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
     private final ItemNotesListNoteItemWithExcerptBinding binding;
 
     public NoteViewHolderWithExcerpt(@NonNull ItemNotesListNoteItemWithExcerptBinding binding, @NonNull NoteClickListener noteClickListener) {
-        super(binding.getRoot(), noteClickListener, false);
+        super(binding.getRoot(), noteClickListener);
         this.binding = binding;
     }
 

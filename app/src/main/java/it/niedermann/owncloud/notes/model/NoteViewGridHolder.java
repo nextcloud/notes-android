@@ -14,7 +14,7 @@ public class NoteViewGridHolder extends NoteViewHolder {
     private final ItemNotesListNoteItemGridBinding binding;
 
     public NoteViewGridHolder(@NonNull ItemNotesListNoteItemGridBinding binding, @NonNull NoteClickListener noteClickListener) {
-        super(binding.getRoot(), noteClickListener, true);
+        super(binding.getRoot(), noteClickListener);
         this.binding = binding;
     }
 

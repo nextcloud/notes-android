@@ -9,66 +9,72 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacer_2x">
 
-        <TextView
-            android:id="@+id/noteCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacer_2x"
-            android:layout_marginLeft="@dimen/spacer_2x"
-            android:layout_marginTop="@dimen/spacer_1x"
-            android:background="@drawable/border"
-            android:maxLines="1"
-            android:paddingLeft="@dimen/spacer_1x"
-            android:paddingTop="1dp"
-            android:paddingRight="@dimen/spacer_1x"
-            android:paddingBottom="1dp"
-            android:singleLine="true"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/secondary_font_size"
-            tools:maxLength="15"
-            tools:text="@tools:sample/lorem/random" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacer_1x"
-            android:gravity="center_vertical|end"
+            android:baselineAligned="false"
             android:orientation="horizontal">
 
-            <com.yydcdut.markdown.MarkdownTextView
-                android:id="@+id/noteTitle"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingStart="@dimen/spacer_2x"
-                android:paddingLeft="@dimen/spacer_2x"
-                android:paddingEnd="@dimen/spacer_2x"
-                android:paddingRight="@dimen/spacer_2x"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/fg_default"
-                android:textIsSelectable="true"
-                android:theme="@style/textViewStyle"
-                tools:maxLength="50"
-                tools:text="@tools:sample/lorem/random" />
+                android:orientation="vertical"
+                android:paddingTop="@dimen/spacer_1x">
+
+                <TextView
+                    android:id="@+id/noteCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacer_1x"
+                    android:layout_marginLeft="@dimen/spacer_1x"
+                    android:background="@drawable/border"
+                    android:maxLines="1"
+                    android:paddingLeft="@dimen/spacer_1x"
+                    android:paddingTop="1dp"
+                    android:paddingRight="@dimen/spacer_1x"
+                    android:paddingBottom="1dp"
+                    android:singleLine="true"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/secondary_font_size"
+                    tools:maxLength="15"
+                    tools:text="@tools:sample/lorem/random" />
+
+                <TextView
+                    android:id="@+id/noteTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacer_2x"
+                    android:layout_marginLeft="@dimen/spacer_2x"
+                    android:layout_marginTop="@dimen/spacer_1x"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginRight="0dp"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:textColor="@color/fg_default"
+                    android:textIsSelectable="true"
+                    android:theme="@style/textViewStyle"
+                    tools:maxLength="50"
+                    tools:text="@tools:sample/lorem/random" />
+            </LinearLayout>
 
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_gravity="top">
 
                 <ImageView
                     android:id="@+id/noteFavorite"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/menu_favorite"
-                    android:paddingStart="@dimen/spacer_2x"
-                    android:paddingLeft="@dimen/spacer_2x"
-                    android:paddingEnd="@dimen/spacer_2x"
-                    android:paddingRight="@dimen/spacer_2x"
+                    android:padding="@dimen/spacer_1x"
                     tools:src="@drawable/ic_star_yellow_24dp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -88,11 +94,10 @@
             android:id="@+id/noteContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="@dimen/spacer_2x"
-            android:paddingLeft="@dimen/spacer_2x"
-            android:paddingEnd="@dimen/spacer_2x"
-            android:paddingRight="@dimen/spacer_2x"
-            android:paddingBottom="@dimen/spacer_2x"
+            android:layout_marginStart="@dimen/spacer_2x"
+            android:layout_marginLeft="@dimen/spacer_2x"
+            android:layout_marginEnd="@dimen/spacer_2x"
+            android:layout_marginRight="@dimen/spacer_2x"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/fg_default"
             android:textIsSelectable="true"

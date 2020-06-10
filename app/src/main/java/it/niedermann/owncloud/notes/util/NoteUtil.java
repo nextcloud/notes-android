@@ -81,29 +81,18 @@ public class NoteUtil {
     /**
      * Generates an excerpt of a content String (reads second line which is not empty)
      *
-     * @param content {@link String}
+     * @param content      {@link String}
+     * @param keepMarkdown whether or not the markdown should be stripped from the excerpt
      * @return excerpt String
      */
     @NonNull
-    public static String generateNoteExcerpt(@NonNull String content) {
-        return generateNoteExcerpt(content, true); // TODO check gridview
-    }
-
-    /**
-     * Generates an excerpt of a content String (reads second line which is not empty)
-     *
-     * @param content       {@link String}
-     * @param stripMarkdown whether or not the markdown should be stripped from the excerpt
-     * @return excerpt String
-     */
-    @NonNull
-    public static String generateNoteExcerpt(@NonNull String content, boolean stripMarkdown) {
+    public static String generateNoteExcerpt(@NonNull String content, boolean keepMarkdown) {
         if (!content.contains("\n")) {
             return "";
         }
-        return stripMarkdown
-                ? truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 150).replace("\n", "   ")
-                : truncateString(content.replaceFirst("^.*\n", ""), 200);
+        return keepMarkdown
+                ? truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 150)
+                : truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 150).replace("\n", "   ");
     }
 
     @NonNull

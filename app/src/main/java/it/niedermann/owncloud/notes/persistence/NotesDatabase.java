@@ -58,6 +58,7 @@ import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACT
 import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.updateSingleNoteWidgets;
 import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
+import static it.niedermann.owncloud.notes.util.Notes.isGridViewEnabled;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
@@ -94,7 +95,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param note Note
      */
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
-        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()), 0);
+        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent(), isGridViewEnabled(context)), 0);
         long id = addNote(accountId, dbNote);
         notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
@@ -121,7 +122,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         } else {
             values.put(key_status, DBStatus.VOID.getTitle());
             values.put(key_account_id, accountId);
-            values.put(key_excerpt, NoteUtil.generateNoteExcerpt(note.getContent()));
+            values.put(key_excerpt, NoteUtil.generateNoteExcerpt(note.getContent(), isGridViewEnabled(context)));
         }
         if (note.getRemoteId() > 0) {
             values.put(key_remote_id, note.getRemoteId());
@@ -135,12 +136,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return db.insert(table_notes, null, values);
     }
 
-    public void regenerateExcerpts(boolean stripMarkdown) {
+    public void regenerateExcerpts(boolean keepMarkdown) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.query(table_notes, new String[]{key_id, key_content}, key_status + " != ?", new String[]{DBStatus.LOCAL_DELETED.getTitle()}, null, null, null);
         ContentValues values = new ContentValues(1);
         while (cursor.moveToNext()) {
-            values.put(key_excerpt, NoteUtil.generateNoteExcerpt(cursor.getString(1), stripMarkdown));
+            values.put(key_excerpt, NoteUtil.generateNoteExcerpt(cursor.getString(1), keepMarkdown));
             db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(cursor.getInt(0))});
         }
         cursor.close();
@@ -521,7 +522,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         if (newContent == null) {
             newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(newContent), oldNote.getScrollY());
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(newContent, isGridViewEnabled(context)), oldNote.getScrollY());
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues(7);
@@ -585,7 +586,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_favorite, remoteNote.isFavorite());
         values.put(key_category, getCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
         values.put(key_etag, remoteNote.getEtag());
-        values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent()));
+        values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent(), isGridViewEnabled(context)));
         String whereClause;
         String[] whereArgs;
         if (forceUnchangedDBNoteState != null) {

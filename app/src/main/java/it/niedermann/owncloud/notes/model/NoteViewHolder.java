@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
@@ -21,37 +19,23 @@ import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.yydcdut.markdown.MarkdownProcessor;
-import com.yydcdut.markdown.syntax.text.TextFactory;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
-import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
-import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
 
 public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     @NonNull
     private final NoteClickListener noteClickListener;
-    private final boolean renderMarkdown;
-    @Nullable
-    private MarkdownProcessor markdownProcessor;
 
-    public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener, boolean renderMarkdown) {
+    public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener) {
         super(v);
         this.noteClickListener = noteClickListener;
-        this.renderMarkdown = renderMarkdown;
-        if (renderMarkdown) {
-            markdownProcessor = new MarkdownProcessor(itemView.getContext());
-            markdownProcessor.factory(TextFactory.create());
-            markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(itemView.getContext()).build());
-        }
     }
 
     @CallSuper
@@ -125,22 +109,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
 
             processedContent = spannableString;
         }
-        bindContent(textView, processedContent);
-    }
-
-    private void bindContent(@NonNull TextView textView, @NonNull CharSequence charSequence) {
-        if (renderMarkdown && markdownProcessor != null) {
-            new Thread(() -> {
-                try {
-                    final CharSequence parsedCharSequence = parseCompat(markdownProcessor, charSequence);
-                    new Handler(Looper.getMainLooper()).post(() -> textView.setText(parsedCharSequence));
-                } catch (StringIndexOutOfBoundsException e) {
-                    // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-                }
-            }).start();
-        } else {
-            textView.setText(charSequence);
-        }
+        textView.setText(processedContent);
     }
 
     public abstract void showSwipe(boolean left);
