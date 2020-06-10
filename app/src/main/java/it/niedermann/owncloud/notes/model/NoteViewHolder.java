@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,14 +32,15 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
-import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 import static it.niedermann.owncloud.notes.util.MarkDownUtil.parseCompat;
 
-public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
+public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
+    @NonNull
     private final NoteClickListener noteClickListener;
     private final boolean renderMarkdown;
+    @Nullable
     private MarkdownProcessor markdownProcessor;
 
     public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener, boolean renderMarkdown) {
@@ -50,24 +52,13 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
             markdownProcessor.factory(TextFactory.create());
             markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(itemView.getContext()).build());
         }
-        v.setOnClickListener(this);
-        v.setOnLongClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        final int adapterPosition = getAdapterPosition();
-        if (adapterPosition != NO_POSITION) {
-            noteClickListener.onNoteClick(adapterPosition, v);
-        }
+    @CallSuper
+    public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getAdapterPosition(), view));
+        itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getAdapterPosition(), view));
     }
-
-    @Override
-    public boolean onLongClick(View v) {
-        return noteClickListener.onNoteLongClick(getAdapterPosition(), v);
-    }
-
-    public abstract void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery);
 
     protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int mainColor) {
         final boolean isDarkThemeActive = Notes.isDarkThemeActive(context);
@@ -138,7 +129,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder implements 
     }
 
     private void bindContent(@NonNull TextView textView, @NonNull CharSequence charSequence) {
-        if (renderMarkdown) {
+        if (renderMarkdown && markdownProcessor != null) {
             new Thread(() -> {
                 try {
                     final CharSequence parsedCharSequence = parseCompat(markdownProcessor, charSequence);

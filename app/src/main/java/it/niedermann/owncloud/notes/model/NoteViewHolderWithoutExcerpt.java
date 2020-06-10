@@ -16,8 +16,6 @@ public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
     public NoteViewHolderWithoutExcerpt(@NonNull ItemNotesListNoteItemWithoutExcerptBinding binding, @NonNull NoteClickListener noteClickListener) {
         super(binding.getRoot(), noteClickListener, false);
         this.binding = binding;
-        itemView.setOnClickListener(this);
-        itemView.setOnLongClickListener(this);
     }
 
 
@@ -28,6 +26,7 @@ public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
     }
 
     public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        super.bind(note, showCategory, mainColor, textColor, searchQuery);
         @NonNull final Context context = itemView.getContext();
         binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);

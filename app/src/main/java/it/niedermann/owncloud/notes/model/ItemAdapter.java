@@ -209,4 +209,16 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     public void setHighlightSearchQuery(CharSequence searchQuery) {
         this.searchQuery = searchQuery;
     }
+
+    /**
+     * @return the position of the first item which matches the given viewtype, -1 if not available
+     */
+    public int getFirstPositionOfViewType(@IntRange(from = 0, to = 2) int viewType) {
+        for (int i = 0; i < itemList.size(); i++) {
+            if (getItemViewType(i) == viewType) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

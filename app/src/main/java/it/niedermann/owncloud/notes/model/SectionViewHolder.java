@@ -15,8 +15,5 @@ public class SectionViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(SectionItem item) {
         binding.sectionTitle.setText(item.getTitle());
-        if (itemView.getLayoutParams() != null && itemView.getLayoutParams() instanceof StaggeredGridLayoutManager.LayoutParams) {
-            ((StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams()).setFullSpan(true);
-        }
     }
 }

@@ -64,6 +64,7 @@ import it.niedermann.owncloud.notes.formattinghelp.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.GridItemDecoration;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
@@ -600,13 +601,15 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         adapter = new ItemAdapter(this, gridView);
         listView.setAdapter(adapter);
 
-        final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        int spanCount = (int) ((displayMetrics.widthPixels / displayMetrics.density) / getResources().getInteger(R.integer.max_dp_grid_view));
-        listView.setLayoutManager(
-                gridView
-                        ? new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
-                        : new LinearLayoutManager(this)
-        );
+        if (gridView) {
+            final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            int spanCount = (int) ((displayMetrics.widthPixels / displayMetrics.density) / getResources().getInteger(R.integer.max_dp_grid_view));
+            StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
+            listView.setLayoutManager(gridLayoutManager);
+            listView.addItemDecoration(new GridItemDecoration(adapter, getResources().getDimensionPixelSize(R.dimen.spacer_2x)));
+        } else {
+            listView.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
     private void refreshLists() {

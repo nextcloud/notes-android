@@ -16,8 +16,6 @@ public class NoteViewGridHolder extends NoteViewHolder {
     public NoteViewGridHolder(@NonNull ItemNotesListNoteItemGridBinding binding, @NonNull NoteClickListener noteClickListener) {
         super(binding.getRoot(), noteClickListener, true);
         this.binding = binding;
-        itemView.setOnClickListener(this);
-        itemView.setOnLongClickListener(this);
     }
 
     public void showSwipe(boolean left) {
@@ -25,6 +23,7 @@ public class NoteViewGridHolder extends NoteViewHolder {
     }
 
     public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        super.bind(note, showCategory, mainColor, textColor, searchQuery);
         @NonNull final Context context = itemView.getContext();
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
         binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
