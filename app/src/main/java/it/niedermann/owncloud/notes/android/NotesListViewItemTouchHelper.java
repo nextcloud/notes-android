@@ -48,11 +48,11 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             }
 
             /**
-             * Disable swipe on sections
+             * Disable swipe on sections and if grid view is enabled
              *
              * @param recyclerView RecyclerView
              * @param viewHolder   RecyclerView.ViewHoler
-             * @return 0 if section, otherwise super()
+             * @return 0 if viewHolder is section or grid view is enabled, otherwise super()
              */
             @Override
             public int getSwipeDirs(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {

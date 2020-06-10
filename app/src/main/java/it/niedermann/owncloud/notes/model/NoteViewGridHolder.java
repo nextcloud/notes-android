@@ -23,7 +23,7 @@ public class NoteViewGridHolder extends NoteViewHolder {
     }
 
     public void showSwipe(boolean left) {
-
+        throw new UnsupportedOperationException(NoteViewGridHolder.class.getSimpleName() + " does not support swiping");
     }
 
     public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
@@ -38,6 +38,6 @@ public class NoteViewGridHolder extends NoteViewHolder {
     }
 
     public View getNoteSwipeable() {
-        return null;
+        throw new UnsupportedOperationException(NoteViewGridHolder.class.getSimpleName() + " does not support swiping");
     }
 }

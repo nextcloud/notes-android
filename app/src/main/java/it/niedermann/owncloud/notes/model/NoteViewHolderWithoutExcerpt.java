@@ -18,7 +18,6 @@ public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
         this.binding = binding;
     }
 
-
     public void showSwipe(boolean left) {
         binding.noteFavoriteLeft.setVisibility(left ? View.VISIBLE : View.INVISIBLE);
         binding.noteDeleteRight.setVisibility(left ? View.INVISIBLE : View.VISIBLE);
