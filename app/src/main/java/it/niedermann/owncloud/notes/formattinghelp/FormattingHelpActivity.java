@@ -136,7 +136,7 @@ public class FormattingHelpActivity extends BrandedActivity {
                 lineBreak +
                 getString(R.string.formatting_help_structured_documents_body_3, "`#`", "`######`") + lineBreak +
                 lineBreak +
-                getString(R.string.formatting_help_structured_documents_body_4) + lineBreak +
+                getString(R.string.formatting_help_structured_documents_body_4, getString(R.string.formatting_help_quote_keyword)) + lineBreak +
                 lineBreak +
                 getString(R.string.formatting_help_quote, getString(R.string.formatting_help_structured_documents_body_5)) + lineBreak +
                 getString(R.string.formatting_help_quote, getString(R.string.formatting_help_structured_documents_body_6)) + lineBreak;

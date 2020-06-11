@@ -253,6 +253,7 @@
     <string name="formatting_help_checkbox_checked" translatable="false">- [x] %1$s</string>
     <string name="formatting_help_checkbox_unchecked" translatable="false">- [ ] %1$s</string>
     <string name="formatting_help_quote" translatable="false">&gt; %1$s</string>
+    <string name="formatting_help_quote_keyword" translatable="false">&gt;</string>
     <string name="formatting_help_strike_through" translatable="false">~~</string>
     <string name="formatting_help_bold" translatable="false">**</string>
     <string name="formatting_help_italic" translatable="false">*</string>
@@ -284,7 +285,7 @@
     <string name="formatting_help_structured_documents_body_1">Sometimes it\'s useful to have different levels of headings to structure your documents. Start lines with a %1$s to create headings. Multiple %2$s in a row denote smaller heading sizes.</string>
     <string name="formatting_help_structured_documents_body_2">This is a third-tier heading</string>
     <string name="formatting_help_structured_documents_body_3">You can use one %1$s all the way up to %2$s six for different heading sizes.</string>
-    <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the > character before the line:</string>
+    <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the %1$s character before the line:</string>
     <string name="formatting_help_structured_documents_body_5">Coffee. The finest organic suspension ever devised… I beat the Borg with it.</string>
     <string name="formatting_help_structured_documents_body_6">- Captain Janeway</string>
 
