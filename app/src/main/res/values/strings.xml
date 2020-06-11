@@ -238,8 +238,8 @@
     <string name="formatting_help_title" translatable="false"># %1$s</string>
     <string name="formatting_help_title_level_3" translatable="false">### %1$s</string>
     <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_escaped" translatable="false">\\`\\`\\`</string>
     <string name="formatting_help_javascript_1" translatable="false">if (isAwesome){</string>
@@ -253,13 +253,16 @@
     <string name="formatting_help_checkbox_checked" translatable="false">- [x] %1$s</string>
     <string name="formatting_help_checkbox_unchecked" translatable="false">- [ ] %1$s</string>
     <string name="formatting_help_quote" translatable="false">&gt; %1$s</string>
+    <string name="formatting_help_strike_through" translatable="false">~~</string>
+    <string name="formatting_help_bold" translatable="false">**</string>
+    <string name="formatting_help_italic" translatable="false">*</string>
 
     <string name="formatting_help_cbf_title">Context based formatting</string>
     <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
-    <string name="formatting_help_cbf_body_2">Just select a range of text or tap on your cursor at any position and you will get a popup menu which contains next to the default entries `Cut`, `Copy`, `Select all` entries like `Link` or `Checkbox`.</string>
+    <string name="formatting_help_cbf_body_2">Just select a range of text or tap on your cursor at any position and you will get a popup menu which contains next to the default entries %1$s, %2$s, %3$s entries like %4$s or %5$s.</string>
 
     <string name="formatting_help_text_title">Text</string>
-    <string name="formatting_help_text_body">It\'s very easy to make some words **bold** and other words *italic* with Markdown. You can ~~strike~~ some words through and even [link to Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_body">It\'s very easy to make some words %1$sbold%1$s and other words %2$sitalic%2$s with Markdown. You can %3$sstrike%3$s some words through and even [link to Nextcloud](https://nextcloud.com).</string>
 
     <string name="formatting_help_lists_title">Lists</string>
     <string name="formatting_help_lists_body_1">Sometimes you want numbered lists:</string>
@@ -278,9 +281,9 @@
     <string name="formatting_help_checkboxes_body_3">Item 2</string>
 
     <string name="formatting_help_structured_documents_title">Structured documents</string>
-    <string name="formatting_help_structured_documents_body_1">Sometimes it\'s useful to have different levels of headings to structure your documents. Start lines with a `#` to create headings. Multiple `##` in a row denote smaller heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_1">Sometimes it\'s useful to have different levels of headings to structure your documents. Start lines with a %1$s to create headings. Multiple %2$s in a row denote smaller heading sizes.</string>
     <string name="formatting_help_structured_documents_body_2">This is a third-tier heading</string>
-    <string name="formatting_help_structured_documents_body_3">You can use one `#` all the way up to `######` six for different heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_3">You can use one %1$s all the way up to %2$s six for different heading sizes.</string>
     <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the > character before the line:</string>
     <string name="formatting_help_structured_documents_body_5">Coffee. The finest organic suspension ever devised… I beat the Borg with it.</string>
     <string name="formatting_help_structured_documents_body_6">- Captain Janeway</string>
