@@ -1,11 +1,14 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.Px;
 
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding;
 
@@ -17,9 +20,16 @@ public class NoteViewGridHolder extends NoteViewHolder {
     @NonNull
     private final ItemNotesListNoteItemGridBinding binding;
 
-    public NoteViewGridHolder(@NonNull ItemNotesListNoteItemGridBinding binding, @NonNull NoteClickListener noteClickListener) {
+    public NoteViewGridHolder(@NonNull ItemNotesListNoteItemGridBinding binding, @NonNull NoteClickListener noteClickListener, boolean monospace, @Px float fontSize) {
         super(binding.getRoot(), noteClickListener);
         this.binding = binding;
+
+        binding.noteTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize * 1.1f);
+        binding.noteExcerpt.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize * .8f);
+        if (monospace) {
+            binding.noteTitle.setTypeface(Typeface.MONOSPACE);
+            binding.noteExcerpt.setTypeface(Typeface.MONOSPACE);
+        }
     }
 
     public void showSwipe(boolean left) {

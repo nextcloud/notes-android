@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -18,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.chip.Chip;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -74,14 +77,19 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            DrawableCompat.setTint(noteCategory.getBackground(), categoryBackground);
-        } else {
-            final GradientDrawable drawable = (GradientDrawable) noteCategory.getBackground();
-            drawable.setStroke(1, categoryBackground);
-            drawable.setColor(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT);
-        }
         noteCategory.setTextColor(categoryForeground);
+        if (noteCategory instanceof Chip) {
+            ((Chip) noteCategory).setChipStrokeColor(ColorStateList.valueOf(categoryBackground));
+            ((Chip) noteCategory).setChipBackgroundColor(ColorStateList.valueOf(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT));
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                DrawableCompat.setTint(noteCategory.getBackground(), categoryBackground);
+            } else {
+                final GradientDrawable drawable = (GradientDrawable) noteCategory.getBackground();
+                drawable.setStroke(1, categoryBackground);
+                drawable.setColor(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT);
+            }
+        }
     }
 
     protected void bindFavorite(@NonNull ImageView noteFavorite, boolean isFavorite) {

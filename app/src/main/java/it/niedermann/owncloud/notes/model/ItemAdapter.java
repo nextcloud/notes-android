@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.view.ViewGroup;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
+import androidx.annotation.Px;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerpt
 import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
 
 import static it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithoutExcerptBinding.inflate;
+import static it.niedermann.owncloud.notes.util.NoteUtil.getFontSizeFromPreferences;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
 
@@ -37,6 +41,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private boolean showCategory = true;
     private CharSequence searchQuery;
     private final List<Integer> selected = new ArrayList<>();
+    @Px
+    private final float fontSize;
+    private final boolean monospace;
     @ColorInt
     private int mainColor;
     @ColorInt
@@ -47,6 +54,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         this.gridView = gridView;
         this.mainColor = context.getResources().getColor(R.color.defaultBrand);
         this.textColor = Color.WHITE;
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+        this.fontSize = getFontSizeFromPreferences(context, sp);
+        this.monospace = sp.getBoolean(context.getString(R.string.pref_key_font), false);
         // FIXME see getItemId()
         // setHasStableIds(true);
     }
@@ -101,7 +111,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 }
                 case TYPE_NOTE_WITH_EXCERPT:
                 case TYPE_NOTE_WITHOUT_EXCERPT: {
-                    return new NoteViewGridHolder(ItemNotesListNoteItemGridBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
+                    return new NoteViewGridHolder(ItemNotesListNoteItemGridBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener, monospace, fontSize);
                 }
                 default: {
                     throw new IllegalArgumentException("Not supported viewType: " + viewType);

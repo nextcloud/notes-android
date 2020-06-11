@@ -15,59 +15,69 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/spacer_1x">
 
+        <TextView
+            android:id="@+id/noteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacer_2x"
+            android:layout_marginLeft="@dimen/spacer_2x"
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:layout_marginEnd="@dimen/spacer_2x"
+            android:layout_marginRight="@dimen/spacer_2x"
+            android:layout_marginBottom="@dimen/spacer_1x"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@color/fg_default"
+            tools:maxLength="50"
+            tools:text="@tools:sample/lorem/random" />
+
+
+        <TextView
+            android:id="@+id/noteExcerpt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacer_2x"
+            android:layout_marginLeft="@dimen/spacer_2x"
+            android:layout_marginEnd="@dimen/spacer_2x"
+            android:layout_marginRight="@dimen/spacer_2x"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/fg_default"
+            tools:maxLength="200"
+            tools:text="@tools:sample/lorem/random" />
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:baselineAligned="false"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:layout_weight="1">
 
-                <TextView
+                <com.google.android.material.chip.Chip
                     android:id="@+id/noteCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacer_1x"
-                    android:layout_marginLeft="@dimen/spacer_1x"
-                    android:layout_marginTop="@dimen/spacer_1x"
-                    android:background="@drawable/border"
-                    android:maxLines="1"
-                    android:paddingLeft="@dimen/spacer_1x"
-                    android:paddingTop="1dp"
-                    android:paddingRight="@dimen/spacer_1x"
-                    android:paddingBottom="1dp"
-                    android:singleLine="true"
-                    android:textColor="?android:textColorPrimary"
-                    android:textSize="@dimen/secondary_font_size"
-                    tools:maxLength="15"
-                    tools:text="@tools:sample/lorem/random" />
-
-                <TextView
-                    android:id="@+id/noteTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacer_2x"
                     android:layout_marginLeft="@dimen/spacer_2x"
-                    android:layout_marginTop="@dimen/spacer_1x"
                     android:layout_marginEnd="0dp"
                     android:layout_marginRight="0dp"
-                    android:layout_marginBottom="@dimen/spacer_1x"
-                    android:textAppearance="?attr/textAppearanceHeadline5"
-                    android:textColor="@color/fg_default"
-                    android:theme="@style/textViewStyle"
+                    android:ellipsize="middle"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/secondary_font_size"
+                    app:chipBackgroundColor="@color/primary"
+                    app:chipStrokeColor="@color/defaultBrand"
+                    app:chipStrokeWidth="1dp"
                     tools:maxLength="50"
                     tools:text="@tools:sample/lorem/random" />
-            </LinearLayout>
-
+            </FrameLayout>
 
             <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top">
+                android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/noteFavorite"
@@ -75,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/menu_favorite"
-                    android:padding="@dimen/spacer_1x"
+                    android:padding="@dimen/spacer_2x"
                     tools:src="@drawable/ic_star_yellow_24dp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -90,20 +100,5 @@
                     app:srcCompat="@drawable/ic_sync_blue_18dp" />
             </FrameLayout>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/noteExcerpt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacer_2x"
-            android:layout_marginLeft="@dimen/spacer_2x"
-            android:layout_marginEnd="@dimen/spacer_2x"
-            android:layout_marginRight="@dimen/spacer_2x"
-            android:layout_marginBottom="@dimen/spacer_1x"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/fg_default"
-            android:theme="@style/textViewStyle"
-            tools:maxLength="200"
-            tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
