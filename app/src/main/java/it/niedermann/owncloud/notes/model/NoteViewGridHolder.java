@@ -37,7 +37,8 @@ public class NoteViewGridHolder extends NoteViewHolder {
         binding.noteExcerpt.setVisibility(TextUtils.isEmpty(note.getExcerpt()) ? GONE : VISIBLE);
     }
 
+    @Nullable
     public View getNoteSwipeable() {
-        throw new UnsupportedOperationException(NoteViewGridHolder.class.getSimpleName() + " does not support swiping");
+        return null;
     }
 }

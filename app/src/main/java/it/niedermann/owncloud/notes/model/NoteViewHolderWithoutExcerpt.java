@@ -34,6 +34,7 @@ public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
     }
 
+    @NonNull
     public View getNoteSwipeable() {
         return binding.noteSwipeable;
     }

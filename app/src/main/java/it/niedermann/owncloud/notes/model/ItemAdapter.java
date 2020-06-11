@@ -139,7 +139,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         return !selected.contains(position) && selected.add(position);
     }
 
-    public void clearSelection(RecyclerView recyclerView) {
+    public void clearSelection(@NonNull RecyclerView recyclerView) {
         for (Integer i : getSelected()) {
             RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
