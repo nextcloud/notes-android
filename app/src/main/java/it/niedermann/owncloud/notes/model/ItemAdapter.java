@@ -47,15 +47,20 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         this.gridView = gridView;
         this.mainColor = context.getResources().getColor(R.color.defaultBrand);
         this.textColor = Color.WHITE;
-        setHasStableIds(true);
+        // FIXME see getItemId()
+        // setHasStableIds(true);
     }
 
-    @Override
-    public long getItemId(int position) {
-        return getItemViewType(position) == TYPE_SECTION
-                ? ((SectionItem) getItem(position)).getTitle().hashCode() * -1
-                : ((DBNote) getItem(position)).getId();
-    }
+
+    /*
+     FIXME this causes {@link it.niedermann.owncloud.notes.android.NotesListViewItemTouchHelper} to not call clearView anymore → After marking a note as favorite, it stays yellow.
+     @Override
+     public long getItemId(int position) {
+         return getItemViewType(position) == TYPE_SECTION
+                 ? ((SectionItem) getItem(position)).getTitle().hashCode() * -1
+                 : ((DBNote) getItem(position)).getId();
+     }
+    */
 
     /**
      * Updates the item list and notifies respective view to update.
