@@ -12,10 +12,12 @@ public class GridItemDecoration extends SectionItemDecoration {
 
     @NonNull
     private final ItemAdapter adapter;
+    private final int spanCount;
     private final int gutter;
 
-    public GridItemDecoration(@NonNull ItemAdapter adapter, @Px int sectionLeft, @Px int sectionTop, @Px int sectionRight, @Px int sectionBottom, @Px int gutter) {
+    public GridItemDecoration(@NonNull ItemAdapter adapter, int spanCount, @Px int sectionLeft, @Px int sectionTop, @Px int sectionRight, @Px int sectionBottom, @Px int gutter) {
         super(adapter, sectionLeft, sectionTop, sectionRight, sectionBottom);
+        this.spanCount = spanCount;
         this.adapter = adapter;
         this.gutter = gutter;
     }
@@ -33,7 +35,7 @@ public class GridItemDecoration extends SectionItemDecoration {
 
             if (position >= 0) {
                 // First row gets some spacing at the top
-                if (position < adapter.getFirstPositionOfViewType(ItemAdapter.TYPE_SECTION)) {
+                if (position < spanCount && position < adapter.getFirstPositionOfViewType(ItemAdapter.TYPE_SECTION)) {
                     outRect.top = gutter;
                 }
 

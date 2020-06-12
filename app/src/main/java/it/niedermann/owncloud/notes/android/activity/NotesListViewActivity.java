@@ -612,12 +612,12 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             int spanCount = (int) ((displayMetrics.widthPixels / displayMetrics.density) / getResources().getInteger(R.integer.max_dp_grid_view));
             StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
             listView.setLayoutManager(gridLayoutManager);
-            listView.addItemDecoration(new GridItemDecoration(adapter,
+            listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
                     getResources().getDimensionPixelSize(R.dimen.spacer_3x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_5x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_3x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_1x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_2x)
+                    getResources().getDimensionPixelSize(R.dimen.spacer_1x)
             ));
         } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
