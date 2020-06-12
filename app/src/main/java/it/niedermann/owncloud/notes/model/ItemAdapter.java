@@ -21,10 +21,11 @@ import java.util.List;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.Branded;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding;
+import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridOnlyTitleBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
+import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithoutExcerptBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
 
-import static it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithoutExcerptBinding.inflate;
 import static it.niedermann.owncloud.notes.util.NoteUtil.getFontSizeFromPreferences;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
@@ -34,6 +35,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     public static final int TYPE_SECTION = 0;
     public static final int TYPE_NOTE_WITH_EXCERPT = 1;
     public static final int TYPE_NOTE_WITHOUT_EXCERPT = 2;
+    public static final int TYPE_NOTE_ONLY_TITLE = 3;
 
     private final NoteClickListener noteClickListener;
     private final boolean gridView;
@@ -109,6 +111,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 case TYPE_SECTION: {
                     return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(LayoutInflater.from(parent.getContext())));
                 }
+                case TYPE_NOTE_ONLY_TITLE: {
+                    return new NoteViewGridHolderOnlyTitle(ItemNotesListNoteItemGridOnlyTitleBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener, monospace, fontSize);
+                }
                 case TYPE_NOTE_WITH_EXCERPT:
                 case TYPE_NOTE_WITHOUT_EXCERPT: {
                     return new NoteViewGridHolder(ItemNotesListNoteItemGridBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener, monospace, fontSize);
@@ -125,8 +130,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 case TYPE_NOTE_WITH_EXCERPT: {
                     return new NoteViewHolderWithExcerpt(ItemNotesListNoteItemWithExcerptBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
                 }
+                case TYPE_NOTE_ONLY_TITLE:
                 case TYPE_NOTE_WITHOUT_EXCERPT: {
-                    return new NoteViewHolderWithoutExcerpt(inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
+                    return new NoteViewHolderWithoutExcerpt(ItemNotesListNoteItemWithoutExcerptBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
                 }
                 default: {
                     throw new IllegalArgumentException("Not supported viewType: " + viewType);
@@ -143,7 +149,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
                 break;
             }
             case TYPE_NOTE_WITH_EXCERPT:
-            case TYPE_NOTE_WITHOUT_EXCERPT: {
+            case TYPE_NOTE_WITHOUT_EXCERPT:
+            case TYPE_NOTE_ONLY_TITLE: {
                 ((NoteViewHolder) holder).bind((DBNote) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
                 break;
             }
@@ -200,18 +207,23 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         return itemList.size();
     }
 
-    @IntRange(from = 0, to = 2)
+    @IntRange(from = 0, to = 3)
     @Override
     public int getItemViewType(int position) {
         Item item = getItem(position);
         if (item == null) {
             throw new IllegalArgumentException("Item at position " + position + " must not be null");
         }
-        return getItem(position).isSection()
-                ? TYPE_SECTION
-                : TextUtils.isEmpty(((DBNote) getItem(position)).getExcerpt())
-                ? TYPE_NOTE_WITHOUT_EXCERPT
-                : TYPE_NOTE_WITH_EXCERPT;
+        if (getItem(position).isSection()) return TYPE_SECTION;
+        DBNote note = (DBNote) getItem(position);
+        if (TextUtils.isEmpty(note.getExcerpt())) {
+            if (TextUtils.isEmpty(note.getCategory())) {
+                return TYPE_NOTE_ONLY_TITLE;
+            } else {
+                return TYPE_NOTE_WITHOUT_EXCERPT;
+            }
+        }
+        return TYPE_NOTE_WITH_EXCERPT;
     }
 
     @Override
@@ -228,7 +240,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     /**
      * @return the position of the first item which matches the given viewtype, -1 if not available
      */
-    public int getFirstPositionOfViewType(@IntRange(from = 0, to = 2) int viewType) {
+    public int getFirstPositionOfViewType(@IntRange(from = 0, to = 3) int viewType) {
         for (int i = 0; i < itemList.size(); i++) {
             if (getItemViewType(i) == viewType) {
                 return i;
