@@ -26,9 +26,11 @@
             android:layout_marginRight="@dimen/spacer_2x"
             android:layout_marginBottom="@dimen/spacer_1x"
             android:layout_weight="1"
+            android:hyphenationFrequency="full"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="@color/fg_default"
             tools:maxLength="50"
+            tools:targetApi="m"
             tools:text="@tools:sample/lorem/random" />
 
         <FrameLayout
