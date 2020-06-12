@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -608,8 +607,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         listView.setAdapter(adapter);
 
         if (gridView) {
-            final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-            int spanCount = (int) ((displayMetrics.widthPixels / displayMetrics.density) / getResources().getInteger(R.integer.max_dp_grid_view));
+            int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
             StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
             listView.setLayoutManager(gridLayoutManager);
             listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
