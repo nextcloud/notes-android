@@ -130,13 +130,13 @@ public class FormattingHelpActivity extends BrandedActivity {
                 getString(R.string.formatting_help_checkbox_checked, getString(R.string.formatting_help_checkboxes_body_2)) + lineBreak +
                 getString(R.string.formatting_help_checkbox_unchecked, getString(R.string.formatting_help_checkboxes_body_3)) + lineBreak;
 
-        final String structuredDocuments = getString(R.string.formatting_help_structured_documents_body_1) + lineBreak +
+        final String structuredDocuments = getString(R.string.formatting_help_structured_documents_body_1, "`#`", "`##`") + lineBreak +
                 lineBreak +
                 getString(R.string.formatting_help_title_level_3, getString(R.string.formatting_help_structured_documents_body_2)) + lineBreak +
                 lineBreak +
-                getString(R.string.formatting_help_structured_documents_body_3) + lineBreak +
+                getString(R.string.formatting_help_structured_documents_body_3, "`#`", "`######`") + lineBreak +
                 lineBreak +
-                getString(R.string.formatting_help_structured_documents_body_4) + lineBreak +
+                getString(R.string.formatting_help_structured_documents_body_4, getString(R.string.formatting_help_quote_keyword)) + lineBreak +
                 lineBreak +
                 getString(R.string.formatting_help_quote, getString(R.string.formatting_help_structured_documents_body_5)) + lineBreak +
                 getString(R.string.formatting_help_quote, getString(R.string.formatting_help_structured_documents_body_6)) + lineBreak;
@@ -148,16 +148,30 @@ public class FormattingHelpActivity extends BrandedActivity {
         return getString(R.string.formatting_help_title, getString(R.string.formatting_help_cbf_title)) + lineBreak +
                 lineBreak +
                 getString(R.string.formatting_help_cbf_body_1) + lineBreak +
-                getString(R.string.formatting_help_cbf_body_2) + lineBreak +
+                getString(R.string.formatting_help_cbf_body_2,
+                        getString(R.string.formatting_help_codefence_inline, getString(android.R.string.cut)),
+                        getString(R.string.formatting_help_codefence_inline, getString(android.R.string.copy)),
+                        getString(R.string.formatting_help_codefence_inline, getString(android.R.string.selectAll)),
+                        getString(R.string.formatting_help_codefence_inline, getString(R.string.simple_link)),
+                        getString(R.string.formatting_help_codefence_inline, getString(R.string.simple_checkbox))
+                ) + lineBreak +
                 lineBreak +
                 divider + lineBreak +
                 lineBreak +
                 getString(R.string.formatting_help_title, getString(R.string.formatting_help_text_title)) + lineBreak +
                 lineBreak +
-                getString(R.string.formatting_help_text_body) + lineBreak +
+                getString(R.string.formatting_help_text_body,
+                        getString(R.string.formatting_help_bold),
+                        getString(R.string.formatting_help_italic),
+                        getString(R.string.formatting_help_strike_through)
+                ) + lineBreak +
                 lineBreak +
                 codefence + lineBreak +
-                getString(R.string.formatting_help_text_body) + lineBreak +
+                getString(R.string.formatting_help_text_body,
+                        getString(R.string.formatting_help_bold),
+                        getString(R.string.formatting_help_italic),
+                        getString(R.string.formatting_help_strike_through)
+                ) + lineBreak +
                 codefence + lineBreak +
                 lineBreak +
                 divider + lineBreak +
@@ -196,8 +210,8 @@ public class FormattingHelpActivity extends BrandedActivity {
                 lineBreak +
                 getString(R.string.formatting_help_code_body_1) + lineBreak +
                 lineBreak +
-                getString(R.string.formatting_help_codefence_inline_escaped) + getString(R.string.formatting_help_code_javascript_inline) + getString(R.string.formatting_help_codefence_inline_escaped) + lineBreak +
-                getString(R.string.formatting_help_codefence_inline) + getString(R.string.formatting_help_code_javascript_inline) + getString(R.string.formatting_help_codefence_inline) + lineBreak +
+                getString(R.string.formatting_help_codefence_inline_escaped, getString(R.string.formatting_help_code_javascript_inline)) + lineBreak +
+                getString(R.string.formatting_help_codefence_inline, getString(R.string.formatting_help_code_javascript_inline)) + lineBreak +
                 lineBreak +
                 getString(R.string.formatting_help_code_body_2) + lineBreak +
                 lineBreak +
