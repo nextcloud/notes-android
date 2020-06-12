@@ -286,8 +286,8 @@
     <string name="formatting_help_structured_documents_body_2">This is a third-tier heading</string>
     <string name="formatting_help_structured_documents_body_3">You can use one %1$s all the way up to %2$s six for different heading sizes.</string>
     <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the %1$s character before the line:</string>
-    <string name="formatting_help_structured_documents_body_5">Coffee. The finest organic suspension ever devised… I beat the Borg with it.</string>
-    <string name="formatting_help_structured_documents_body_6">- Captain Janeway</string>
+    <string name="formatting_help_structured_documents_body_5">Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
     <string name="formatting_help_code_title">Code</string>
     <string name="formatting_help_code_body_1">There are many different ways to style code with Markdown. If you have inline code blocks, wrap them in backticks:</string>
