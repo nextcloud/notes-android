@@ -161,6 +161,8 @@
     <string name="simple_behavior">Comportamento</string>
     <string name="share_multiple">Compartir o contido de  %1$dnotas</string>
     <string name="manage_accounts">Administrar contas</string>
+    <string name="action_formatting_help">Formatado</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>
@@ -194,4 +196,9 @@
         <item quantity="one">%d seleccionado</item>
         <item quantity="other">%d seleccionados</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Texto</string>
+    <string name="formatting_help_checkboxes_title">Caixas de verificación</string>
+    <string name="formatting_help_unsupported_title">Non admitido</string>
+    <string name="formatting_help_unsupported_body_3">Imaxes</string>
+    </resources>

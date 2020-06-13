@@ -161,6 +161,8 @@
     <string name="simple_behavior">Chod</string>
     <string name="share_multiple">Zdieľať obsah %1$d poznámok</string>
     <string name="manage_accounts">Spravovať účty</string>
+    <string name="action_formatting_help">Formátovanie</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
@@ -196,4 +198,39 @@
         <item quantity="many">%d vybraný</item>
         <item quantity="other">%d vybraný</item>
     </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Kontextové formátovanie</string>
+    <string name="formatting_help_cbf_body_1">Hlavným cieľom aplikácie Notes je poskytnúť nástroj bez rozptyľovania. Svoje texty však budete môcť formátovať pomocou aplikácie Markdown. Pre rôzne príklady uvedené nižšie môžete použiť klávesové skratky, pomocou ktorých môžete svoje poznámky formátovať bez toho, aby ste museli zadávať kódy uvedené nižšie.</string>
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_lists_title">Zoznamy</string>
+    <string name="formatting_help_lists_body_1">Niekedy chcete číslované zoznamy:</string>
+    <string name="formatting_help_lists_body_2">Jeden</string>
+    <string name="formatting_help_lists_body_3">Dva</string>
+    <string name="formatting_help_lists_body_4">Tri</string>
+    <string name="formatting_help_lists_body_5">Niekedy chcete odrážky:</string>
+    <string name="formatting_help_lists_body_6">Riadok začnite pomlčkou</string>
+    <string name="formatting_help_lists_body_7">A ak máte vnorený bod, vložte pred pomlčku alebo hviezdičku dve medzery:</string>
+    <string name="formatting_help_lists_body_8">Ako toto</string>
+    <string name="formatting_help_lists_body_9">A toto</string>
+
+    <string name="formatting_help_checkboxes_title">Zaškrtávacie políčka</string>
+    <string name="formatting_help_checkboxes_body_1">Ak chcete vytvoriť zaškrtávacie políčko, použite zoznam nasledovaný hranatými zátvorkami</string>
+    <string name="formatting_help_checkboxes_body_2">Položka 1</string>
+    <string name="formatting_help_checkboxes_body_3">Položka 2</string>
+
+    <string name="formatting_help_structured_documents_title">Štrukturované dokumenty</string>
+    <string name="formatting_help_structured_documents_body_2">Toto je nadpis tretej úrovne</string>
+    <string name="formatting_help_code_title">Kód</string>
+    <string name="formatting_help_code_body_1">Tam, kde je to možné, ako upraviť štýl vrátane Markdown. Ak chcete vložiť kód, zalomte ich do spätných lomiek:</string>
+    <string name="formatting_help_code_body_2">Markdown tiež podporuje niečo, čo sa nazýva oplotenie kódu, čo umožňuje použiť viac riadkov bez odsadenia:</string>
+    <string name="formatting_help_code_body_3">Ak chcete použiť zvýraznenie syntaxe, uveďte jazyk:</string>
+
+    <string name="formatting_help_unsupported_title">Nepodporované</string>
+    <string name="formatting_help_unsupported_body_1">Aj keď sa pokúšame neustále zlepšovať podporu Markdown, existuje niekoľko funkcií, ktoré zatiaľ Poznámky nepodporujú:</string>
+    <string name="formatting_help_unsupported_body_2">Tabuľky</string>
+    <string name="formatting_help_unsupported_body_3">Obrázky</string>
+    <string name="formatting_help_unsupported_body_4">Ak máte záujem prispieť k podpore niektorej z týchto funkcií, kontaktujte nás prostredníctvom služby GitHub alebo e-mailom.</string>
 </resources>

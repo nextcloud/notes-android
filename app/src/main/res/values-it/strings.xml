@@ -161,6 +161,8 @@
     <string name="simple_behavior">Comportamento</string>
     <string name="share_multiple">Condividi il contenuto di %1$d note</string>
     <string name="manage_accounts">Gestisci account</string>
+    <string name="action_formatting_help">Formattazione</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Apri in modalità modifica</item>
@@ -194,4 +196,48 @@
         <item quantity="one">%d selezionato</item>
         <item quantity="other">%d selezionati</item>
     </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formattazione basata sul contesto</string>
+    <string name="formatting_help_cbf_body_1">Un obiettivo fondamentale dell\'applicazione Note è di fornire uno strumento senza distrazioni. Potrai comunque formattare i tuoi testi con Markdown. Per i vari esempi sotto indicati, puoi usare le scorciatoie in modo da formattare le note senza digitare i codici sottostanti.</string>
+    <string name="formatting_help_cbf_body_2">Ti basta selezionare un intervallo di testo o toccare il cursore in qualsiasi posizione e apparirà un menu contenente accanto alle voci predefinite %1$s, %2$s, %3$s elementi come %4$s o %5$s.</string>
+
+    <string name="formatting_help_text_title">Testo</string>
+    <string name="formatting_help_text_body">È molto semplice rendere alcune parole in %1$sgrassetto%1$s e altre in %2$scorsivo%2$s con Markdown. Puoi %3$sbarrare%3$s alcune parole e anche [collegarle a Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Elenchi</string>
+    <string name="formatting_help_lists_body_1">A volte hai bisogno di elenchi numerati:</string>
+    <string name="formatting_help_lists_body_2">Uno</string>
+    <string name="formatting_help_lists_body_3">Due</string>
+    <string name="formatting_help_lists_body_4">Tre</string>
+    <string name="formatting_help_lists_body_5">A volte hai bisogno dei punti elenco:</string>
+    <string name="formatting_help_lists_body_6">Inizia un riga con un trattino</string>
+    <string name="formatting_help_lists_body_7">E se hai sotto-punti, metti due spazi prima del trattino o dell\'asterisco:</string>
+    <string name="formatting_help_lists_body_8">Come questo</string>
+    <string name="formatting_help_lists_body_9">E questo</string>
+
+    <string name="formatting_help_checkboxes_title">Caselle di selezione</string>
+    <string name="formatting_help_checkboxes_body_1">Per creare una casella di selezione, usa un elenco seguito da parentesi</string>
+    <string name="formatting_help_checkboxes_body_2">Elemento 1</string>
+    <string name="formatting_help_checkboxes_body_3">Elemento 2</string>
+
+    <string name="formatting_help_structured_documents_title">Documenti strutturati</string>
+    <string name="formatting_help_structured_documents_body_1">Talvolta è utile avere diversi livelli di intestazione per strutturare i tuoi documenti. Inizia le righe con un %1$s per creare intestazioni. Più %2$s in una riga indicano dimensioni minori di intestazione.</string>
+    <string name="formatting_help_structured_documents_body_2">Questa è un\'intestazione di terzo livello</string>
+    <string name="formatting_help_structured_documents_body_3">Puoi utilizzare da un %1$s fino a sei %2$s per diverse dimensioni di intestazione.</string>
+    <string name="formatting_help_structured_documents_body_4">Se vuoi citare qualcuno, utilizza il carattere %1$s prima della riga:</string>
+    <string name="formatting_help_code_title">Codice</string>
+    <string name="formatting_help_code_body_1">Esistono molti modi diversi per definire lo stile del codice con Markdown. Se hai blocchi di codice in linea, racchiudili tra apici inversi:</string>
+    <string name="formatting_help_code_body_2">Markdown supporta anche raggruppamenti di codice, che consente a righe multiple senza indentazione:</string>
+    <string name="formatting_help_code_body_3">E se desideri utilizzare l\'evidenziazione della sintassi, includi il linguaggio:</string>
+
+    <string name="formatting_help_unsupported_title">Non supportato</string>
+    <string name="formatting_help_unsupported_body_1">Mentre proviamo a migliorare continuamente il supporto per Markdown, ci sono alcune funzionalità che non sono ancora supportate da Note:</string>
+    <string name="formatting_help_unsupported_body_2">Tabelle</string>
+    <string name="formatting_help_unsupported_body_3">Immagini</string>
+    <string name="formatting_help_unsupported_body_4">Se sei interessato a fornire supporto per una di queste funzionalità, contattaci tramite GitHub o email.</string>
 </resources>

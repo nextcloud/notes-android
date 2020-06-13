@@ -191,4 +191,10 @@
         <item quantity="one">%d geselecteerd</item>
         <item quantity="other">%d geselecteerd</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_checkboxes_title">Aanvinkvakjes</string>
+    <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_unsupported_title">Niet ondersteund</string>
+    <string name="formatting_help_unsupported_body_3">Afbeeldingen</string>
+    </resources>

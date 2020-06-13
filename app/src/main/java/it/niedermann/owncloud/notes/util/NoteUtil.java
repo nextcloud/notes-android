@@ -25,6 +25,8 @@ public class NoteUtil {
     private static final Pattern pSpace1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
     private static final Pattern pSpace2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
 
+    public static final String EXCERPT_LINE_SEPARATOR = "   ";
+
     private NoteUtil() {
 
     }
@@ -99,7 +101,7 @@ public class NoteUtil {
             }
         }
         if (content.contains("\n")) {
-            return truncateString(content.trim(), 200).replace("\n", "   ");
+            return truncateString(content.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
         } else {
             return "";
         }

@@ -189,4 +189,9 @@
         <item quantity="one">%d hautatuta</item>
         <item quantity="other">%d hautatuta</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Testu</string>
+    <string name="formatting_help_checkboxes_title">Kontrol-laukiak</string>
+    <string name="formatting_help_unsupported_title">Ez da onartzen</string>
+    <string name="formatting_help_unsupported_body_3">Irudiak</string>
+    </resources>

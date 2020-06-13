@@ -11,10 +11,10 @@ android {
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 29
-        versionCode 2013003
-        versionName "2.13.3"
+        versionCode 2015000
+        versionName "2.15.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -68,7 +68,7 @@ dependencies {
 
     // Android X
     implementation "androidx.appcompat:appcompat:1.1.0"
-    implementation "androidx.fragment:fragment:1.2.4"
+    implementation "androidx.fragment:fragment:1.2.5"
     implementation "androidx.preference:preference:1.1.1"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'

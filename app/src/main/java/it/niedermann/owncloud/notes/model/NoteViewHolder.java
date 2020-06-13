@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -9,64 +10,47 @@ import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.chip.Chip;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
-import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemBinding;
 import it.niedermann.owncloud.notes.util.Notes;
 
-import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 
-public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnClickListener {
-    private final ItemNotesListNoteItemBinding binding;
+public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
+    @NonNull
     private final NoteClickListener noteClickListener;
 
-    public NoteViewHolder(View v, NoteClickListener noteClickListener) {
+    public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener) {
         super(v);
-        binding = ItemNotesListNoteItemBinding.bind(v);
         this.noteClickListener = noteClickListener;
-        v.setOnClickListener(this);
-        v.setOnLongClickListener(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        final int adapterPosition = getAdapterPosition();
-        if (adapterPosition != NO_POSITION) {
-            noteClickListener.onNoteClick(adapterPosition, v);
-        }
+    @CallSuper
+    public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getAdapterPosition(), view));
+        itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getAdapterPosition(), view));
     }
 
-    @Override
-    public boolean onLongClick(View v) {
-        return noteClickListener.onNoteLongClick(getAdapterPosition(), v);
-    }
-
-    public void showSwipe(boolean left) {
-        binding.noteFavoriteLeft.setVisibility(left ? View.VISIBLE : View.INVISIBLE);
-        binding.noteDeleteRight.setVisibility(left ? View.INVISIBLE : View.VISIBLE);
-        binding.noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
-    }
-
-    public void bind(DBNote note, NoteClickListener noteClickListener, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        @NonNull final Context context = itemView.getContext();
+    protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int mainColor) {
         final boolean isDarkThemeActive = Notes.isDarkThemeActive(context);
-
-        binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
-
-        binding.noteCategory.setVisibility(showCategory && !note.getCategory().isEmpty() ? View.VISIBLE : View.GONE);
-        binding.noteCategory.setText(note.getCategory());
+        noteCategory.setVisibility(showCategory && !category.isEmpty() ? View.VISIBLE : View.GONE);
+        noteCategory.setText(category);
 
         @ColorInt int categoryForeground;
         @ColorInt int categoryBackground;
@@ -93,19 +77,28 @@ public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLo
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            DrawableCompat.setTint(binding.noteCategory.getBackground(), categoryBackground);
+        noteCategory.setTextColor(categoryForeground);
+        if (noteCategory instanceof Chip) {
+            ((Chip) noteCategory).setChipStrokeColor(ColorStateList.valueOf(categoryBackground));
+            ((Chip) noteCategory).setChipBackgroundColor(ColorStateList.valueOf(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT));
         } else {
-            final GradientDrawable drawable = (GradientDrawable) binding.noteCategory.getBackground();
-            drawable.setStroke(1, categoryBackground);
-            drawable.setColor(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                DrawableCompat.setTint(noteCategory.getBackground(), categoryBackground);
+            } else {
+                final GradientDrawable drawable = (GradientDrawable) noteCategory.getBackground();
+                drawable.setStroke(1, categoryBackground);
+                drawable.setColor(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT);
+            }
         }
-        binding.noteCategory.setTextColor(categoryForeground);
+    }
 
-        binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? View.INVISIBLE : View.VISIBLE);
-        binding.noteFavorite.setImageResource(note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp);
-        binding.noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getAdapterPosition(), view));
+    protected void bindFavorite(@NonNull ImageView noteFavorite, boolean isFavorite) {
+        noteFavorite.setImageResource(isFavorite ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp);
+        noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getAdapterPosition(), view));
+    }
 
+    protected void bindSearchableContent(@NonNull Context context, @NonNull TextView textView, @Nullable CharSequence searchQuery, @NonNull String content, int mainColor) {
+        CharSequence processedContent = content;
         if (!TextUtils.isEmpty(searchQuery)) {
             @ColorInt final int searchBackground = context.getResources().getColor(R.color.bg_highlighted);
             @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
@@ -114,30 +107,21 @@ public class NoteViewHolder extends RecyclerView.ViewHolder implements View.OnLo
             // It implies that the string between \Q and \E is a literal string and thus the reserved keyword in such string will be ignored.
             // See https://stackoverflow.com/questions/15409296/what-is-the-use-of-pattern-quote-method
             final Pattern pattern = Pattern.compile("(" + Pattern.quote(searchQuery.toString()) + ")", Pattern.CASE_INSENSITIVE);
-            SpannableString spannableString = new SpannableString(note.getTitle());
+            SpannableString spannableString = new SpannableString(content);
             Matcher matcher = pattern.matcher(spannableString);
+
             while (matcher.find()) {
                 spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
                 spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
             }
 
-            binding.noteTitle.setText(spannableString);
-
-            spannableString = new SpannableString(note.getExcerpt());
-            matcher = pattern.matcher(spannableString);
-            while (matcher.find()) {
-                spannableString.setSpan(new ForegroundColorSpan(searchForeground), matcher.start(), matcher.end(), 0);
-                spannableString.setSpan(new BackgroundColorSpan(searchBackground), matcher.start(), matcher.end(), 0);
-            }
-
-            binding.noteExcerpt.setText(spannableString);
-        } else {
-            binding.noteTitle.setText(note.getTitle());
-            binding.noteExcerpt.setText(note.getExcerpt());
+            processedContent = spannableString;
         }
+        textView.setText(processedContent);
     }
 
-    public View getNoteSwipeable() {
-        return binding.noteSwipeable;
-    }
+    public abstract void showSwipe(boolean left);
+
+    @Nullable
+    public abstract View getNoteSwipeable();
 }

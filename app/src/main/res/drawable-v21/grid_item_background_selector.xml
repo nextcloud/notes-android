@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Selector is used for Background Colors in List Items -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android" android:color="@color/bg_highlighted">
+    <!-- :selected -->
+    <item>
+        <selector>
+            <item android:state_selected="true">
+                <color android:color="@color/bg_highlighted" />
+            </item>
+
+            <item android:state_activated="true">
+                <color android:color="@color/bg_highlighted" />
+            </item>
+
+            <item>
+                <color android:color="@android:color/transparent" />
+            </item>
+        </selector>
+    </item>
+</ripple>

@@ -191,4 +191,10 @@
         <item quantity="many">%d выбрано</item>
         <item quantity="other">%d выбрано</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Текст</string>
+    <string name="formatting_help_checkboxes_title">Несколько из списка</string>
+    <string name="formatting_help_code_title">Код</string>
+    <string name="formatting_help_unsupported_title">Не поддерживается</string>
+    <string name="formatting_help_unsupported_body_3">Изображения</string>
+    </resources>

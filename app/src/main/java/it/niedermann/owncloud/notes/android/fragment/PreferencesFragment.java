@@ -11,14 +11,18 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.branding.Branded;
 import it.niedermann.owncloud.notes.branding.BrandedSwitchPreference;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.util.DeviceCredentialUtil;
 import it.niedermann.owncloud.notes.util.Notes;
+
+import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.updateNoteListWidgets;
 
 public class PreferencesFragment extends PreferenceFragmentCompat implements Branded {
 
@@ -28,6 +32,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference lockPref;
     private BrandedSwitchPreference wifiOnlyPref;
     private BrandedSwitchPreference brandingPref;
+    private BrandedSwitchPreference gridViewPref;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +48,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         brandingPref = findPreference(getString(R.string.pref_key_branding));
         if (brandingPref != null) {
             brandingPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+                updateNoteListWidgets(requireContext());
                 final Boolean branding = (Boolean) newValue;
                 Log.v(TAG, "branding: " + branding);
                 requireActivity().setResult(Activity.RESULT_OK);
@@ -53,11 +59,29 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_branding) + "\"");
         }
 
+        gridViewPref = findPreference(getString(R.string.pref_key_gridview));
+        if (gridViewPref != null) {
+            gridViewPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+                final Boolean gridView = (Boolean) newValue;
+                Log.v(TAG, "gridView: " + gridView);
+                requireActivity().setResult(Activity.RESULT_OK);
+                Notes.updateGridViewEnabled(gridView);
+                return true;
+            });
+        } else {
+            Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_branding) + "\"");
+        }
+
         lockPref = findPreference(getString(R.string.pref_key_lock));
         if (lockPref != null) {
             if (!DeviceCredentialUtil.areCredentialsAvailable(requireContext())) {
                 lockPref.setVisible(false);
-                findPreference(getString(R.string.pref_category_security)).setVisible(false);
+                Preference securityCategory = findPreference(getString(R.string.pref_category_security));
+                if (securityCategory != null) {
+                    securityCategory.setVisible(false);
+                } else {
+                    Log.e(TAG, "Could not find preference " + getString(R.string.pref_category_security));
+                }
             } else {
                 lockPref.setOnPreferenceChangeListener((preference, newValue) -> {
                     Notes.setLockedPreference((Boolean) newValue);
@@ -111,5 +135,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         lockPref.applyBrand(mainColor, textColor);
         wifiOnlyPref.applyBrand(mainColor, textColor);
         brandingPref.applyBrand(mainColor, textColor);
+        gridViewPref.applyBrand(mainColor, textColor);
     }
 }

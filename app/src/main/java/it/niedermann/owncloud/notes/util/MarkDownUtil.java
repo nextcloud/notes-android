@@ -85,13 +85,9 @@ public class MarkDownUtil {
             return "";
         }
 
-        Log.v(TAG, "parseCompat - Original: \"" + text + "\"");
-
         while (TextUtils.indexOf(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION) >= 0) {
             text = TextUtils.replace(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY, MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY);
         }
-
-        Log.v(TAG, "parseCompat - Replaced empty image descriptions: \"" + text + "\"");
 
         return markdownProcessor.parse(text);
     }

@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -16,7 +17,9 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.activity.NotesListViewActivity;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.model.Category;
+import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.Notes;
@@ -42,6 +45,7 @@ public class NoteListWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             try {
                 final NoteListsWidgetData data = db.getNoteListWidgetData(appWidgetId);
+                final LocalAccount localAccount = db.getAccount(data.getAccountId());
 
                 String category = null;
                 if (data.getCategoryId() != null) {
@@ -61,7 +65,7 @@ public class NoteListWidget extends AppWidgetProvider {
 
                 // Open the main app if the user taps the widget header
                 PendingIntent openAppI = PendingIntent.getActivity(context, PENDING_INTENT_OPEN_APP_RQ,
-                    intent,
+                        intent,
                         PendingIntent.FLAG_UPDATE_CURRENT);
 
                 // Launch create note activity if user taps "+" icon on header
@@ -85,6 +89,17 @@ public class NoteListWidget extends AppWidgetProvider {
                     views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv_dark, serviceIntent);
                     views.setEmptyView(R.id.note_list_widget_lv_dark, R.id.widget_note_list_placeholder_tv_dark);
                     awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv_dark);
+                    if (BrandingUtil.isBrandingEnabled(context)) {
+                        views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", localAccount.getColor());
+                        views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", localAccount.getTextColor());
+                        views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", localAccount.getTextColor());
+                        views.setTextColor(R.id.widget_note_list_title_tv_dark, localAccount.getTextColor());
+                    } else {
+                        views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
+                        views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", Color.WHITE);
+                        views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", Color.WHITE);
+                        views.setTextColor(R.id.widget_note_list_title_tv_dark, Color.WHITE);
+                    }
                 } else {
                     views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
                     views.setTextViewText(R.id.widget_note_list_title_tv, getWidgetTitle(context, data.getMode(), category));
@@ -95,6 +110,17 @@ public class NoteListWidget extends AppWidgetProvider {
                     views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv, serviceIntent);
                     views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
                     awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
+                    if (BrandingUtil.isBrandingEnabled(context)) {
+                        views.setInt(R.id.widget_note_header, "setBackgroundColor", localAccount.getColor());
+                        views.setInt(R.id.widget_note_header_icon, "setColorFilter", localAccount.getTextColor());
+                        views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", localAccount.getTextColor());
+                        views.setTextColor(R.id.widget_note_list_title_tv, localAccount.getTextColor());
+                    } else {
+                        views.setInt(R.id.widget_note_header, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
+                        views.setInt(R.id.widget_note_header_icon, "setColorFilter", Color.WHITE);
+                        views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", Color.WHITE);
+                        views.setTextColor(R.id.widget_note_list_title_tv, Color.WHITE);
+                    }
                 }
 
                 awm.updateAppWidget(appWidgetId, views);
@@ -157,5 +183,12 @@ public class NoteListWidget extends AppWidgetProvider {
             default:
                 return null;
         }
+    }
+
+    /**
+     * Update note list widgets, if the note data was changed.
+     */
+    public static void updateNoteListWidgets(Context context) {
+        context.sendBroadcast(new Intent(context, NoteListWidget.class).setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE));
     }
 }

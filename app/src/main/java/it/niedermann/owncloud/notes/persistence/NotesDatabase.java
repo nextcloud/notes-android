@@ -41,8 +41,6 @@ import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
-import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
-import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.ApiVersion;
 import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.CloudNote;
@@ -57,6 +55,8 @@ import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.updateNoteListWidgets;
+import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.updateSingleNoteWidgets;
 import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
 import static it.niedermann.owncloud.notes.util.NoteUtil.generateNoteExcerpt;
 
@@ -629,7 +629,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             ShortcutManager shortcutManager = getContext().getSystemService(ShortcutManager.class);
-            if(shortcutManager != null) {
+            if (shortcutManager != null) {
                 shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
                     String shortcutId = id + "";
                     if (shortcut.getId().equals(shortcutId)) {
@@ -695,24 +695,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 }
             }
         }).start();
-    }
-
-    /**
-     * Update single note widget, if the note data was changed.
-     */
-    private static void updateSingleNoteWidgets(Context context) {
-        Intent intent = new Intent(context, SingleNoteWidget.class);
-        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        context.sendBroadcast(intent);
-    }
-
-    /**
-     * Update note list widgets, if the note data was changed.
-     */
-    private static void updateNoteListWidgets(Context context) {
-        Intent intent = new Intent(context, NoteListWidget.class);
-        intent.setAction("android.appwidget.action.APPWIDGET_UPDATE");
-        context.sendBroadcast(intent);
     }
 
     public boolean hasAccounts() {

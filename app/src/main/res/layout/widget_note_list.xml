@@ -8,9 +8,10 @@
 
     <!-- Widget header -->
     <RelativeLayout
+        android:id="@+id/widget_note_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_note_list_header_height"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@color/defaultBrand"
         android:padding="@dimen/widget_note_list_hdr_padding">
 
         <ImageView

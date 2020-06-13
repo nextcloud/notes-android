@@ -194,4 +194,19 @@
         <item quantity="one">%d sélectionné</item>
         <item quantity="other">%d sélectionné(s)</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_text_title">Texte</string>
+    <string name="formatting_help_lists_title">Listes</string>
+    <string name="formatting_help_lists_body_1">Parfois, vous voulez des listes numérotées :</string>
+    <string name="formatting_help_lists_body_2">Un</string>
+    <string name="formatting_help_lists_body_3">Deux</string>
+    <string name="formatting_help_lists_body_4">Trois</string>
+    <string name="formatting_help_lists_body_5">Parfois, vous voulez des puces :</string>
+    <string name="formatting_help_checkboxes_title">Case à cocher</string>
+    <string name="formatting_help_checkboxes_body_1">Pour créer une case à cocher, utilisez une liste suivie de crochets.</string>
+    <string name="formatting_help_structured_documents_title">Documents structurés</string>
+    <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_unsupported_title">Non pris en charge</string>
+    <string name="formatting_help_unsupported_body_3">Images</string>
+    </resources>
