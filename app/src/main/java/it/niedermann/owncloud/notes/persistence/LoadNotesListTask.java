@@ -98,7 +98,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         for (int i = 0; i < noteList.size(); i++) {
             DBNote currentNote = noteList.get(i);
             String initials = currentNote.getTitle().substring(0, 1).toUpperCase();
-            if (!initials.equals(lastInitials)) {
+            if (i > 0 && !initials.equals(lastInitials)) {
                 itemList.add(new SectionItem(initials));
             }
             itemList.add(currentNote);
