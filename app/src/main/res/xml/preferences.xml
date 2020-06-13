@@ -49,6 +49,7 @@
             android:icon="@drawable/ic_baseline_dashboard_24"
             android:key="@string/pref_key_gridview"
             android:layout="@layout/item_pref"
+            android:summary="@string/simple_beta"
             android:title="@string/settings_gridview" />
 
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
