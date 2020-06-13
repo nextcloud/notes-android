@@ -14,6 +14,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_13_14;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_14_15;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_15_16;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_16_17;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_17_18;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_4_5;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_5_6;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_6_7;
@@ -60,7 +61,6 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_theme_mode = "THEME_MODE";
     protected static final String key_mode = "MODE";
     protected static final String key_scroll_y = "SCROLL_Y";
-
     protected static final String key_category_sorting_method = "CATEGORY_SORTING_METHOD";
 
     protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
@@ -189,10 +189,8 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 new Migration_15_16(db, context, this::notifyWidgets);
             case 16:
                 new Migration_16_17(db);
-            case 17: {
-                // add a new column to store the sorting method for a category note list
-                db.execSQL("ALTER TABLE " + table_category + " ADD COLUMN " + key_category_sorting_method + " INTEGER DEFAULT 0");
-            }
+            case 17:
+                new Migration_17_18(db);
         }
     }
 

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -136,8 +135,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     private RecyclerView listView;
 
     protected ItemAdapter adapter;
-
-    private Menu currentMenu;
 
     protected NotesDatabase db = null;
     private NavigationAdapter adapterCategories;
@@ -396,6 +393,23 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                 invalidateOptionsMenu();
             }
             startActivityForResult(createIntent, create_note_cmd);
+        });
+
+        activityBinding.sortingMethod.setOnClickListener((v) -> {
+            final String unexpectedSortMethod = "Unexpected sort method";
+            CategorySortingMethod method;
+
+            Log.d("onOptionsItemSelected", navigationSelection.category + localAccount.getId());
+            method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
+
+            if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
+                method = CategorySortingMethod.SORT_MODIFIED_DESC;
+            } else {
+                method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
+            }
+            db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
+            refreshLists();
+            updateSortMethodIcon();
         });
     }
 
@@ -690,67 +704,15 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon() {
-        if (localAccount == null || currentMenu == null) {
+        if (localAccount == null) {
             return;
         }
-        MenuItem sortMethod = currentMenu.findItem(R.id.sorting_method);
         CategorySortingMethod method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
         if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-            sortMethod.setIcon(R.drawable.alphabetical_asc);
+            activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
         } else {
-            sortMethod.setIcon(R.drawable.modification_desc);
+            activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
         }
-    }
-
-    /**
-     * Responses to two sorting method icons on the menu.
-     * @param item The touched item.
-     * @return boolean
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        final String unexpectedSortMethod = "Unexpected sort method";
-        CategorySortingMethod method;
-
-        if (item.getItemId() == R.id.sorting_method) {
-            Log.d("onOptionsItemSelected", navigationSelection.category + localAccount.getId());
-            method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
-
-            if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-                method = CategorySortingMethod.SORT_MODIFIED_DESC;
-            } else {
-                method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
-            }
-            db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
-            refreshLists();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /**
-     * Gets menu object.
-     * @param menu Menu.
-     * @return boolean
-     */
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        currentMenu = menu;
-        updateSortMethodIcon();
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    /**
-     * Adds the Menu Items to the Action Bar.
-     *
-     * @param menu Menu
-     * @return boolean
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_list_view, menu);
-        return true;
     }
 
     @Override
