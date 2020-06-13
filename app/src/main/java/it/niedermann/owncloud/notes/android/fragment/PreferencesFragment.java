@@ -61,7 +61,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
 
         gridViewPref = findPreference(getString(R.string.pref_key_gridview));
         if (gridViewPref != null) {
-            gridViewPref.setVisible(BuildConfig.DEBUG);
             gridViewPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
                 final Boolean gridView = (Boolean) newValue;
                 Log.v(TAG, "gridView: " + gridView);
