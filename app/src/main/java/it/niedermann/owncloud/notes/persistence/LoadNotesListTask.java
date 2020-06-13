@@ -101,7 +101,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             if (!initials.equals(lastInitials)) {
                 itemList.add(new SectionItem(initials));
             }
-            itemList.add(colorTheNote(currentNote));
+            itemList.add(currentNote);
             lastInitials = initials;
         }
 
