@@ -83,6 +83,16 @@
                         tools:text="@string/search_in_all" />
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/sorting_method"
+                        android:layout_width="?attr/actionBarSize"
+                        android:layout_height="?attr/actionBarSize"
+                        android:contentDescription="@string/action_sorting_method"
+                        android:padding="@dimen/spacer_2x"
+                        android:layout_gravity="center_vertical|end"
+                        android:background="?attr/selectableItemBackgroundBorderless"
+                        app:srcCompat="@drawable/alphabetical_asc" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/launchAccountSwitcher"
                         android:layout_width="?attr/actionBarSize"
                         android:layout_height="?attr/actionBarSize"
@@ -101,44 +111,30 @@
             android:layout_height="match_parent"
             tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity">
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/sorting_method"
+                <include
+                    android:id="@+id/empty_content_view"
+                    layout="@layout/empty_content_view" />
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/action_sorting_method"
-                    android:padding="@dimen/spacer_1hx"
-                    app:srcCompat="@drawable/alphabetical_asc" />
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/defaultBrand"
+                    tools:targetApi="lollipop"
+                    tools:visibility="gone" />
 
-                <FrameLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <include
-                        android:id="@+id/empty_content_view"
-                        layout="@layout/empty_content_view" />
-
-                    <ProgressBar
-                        android:id="@+id/progress_circular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:indeterminateTint="@color/defaultBrand"
-                        tools:targetApi="lollipop"
-                        tools:visibility="gone" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="vertical"
-                        tools:listitem="@layout/item_notes_list_note_item_with_excerpt" />
-                </FrameLayout>
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    tools:listitem="@layout/item_notes_list_note_item_with_excerpt" />
+            </FrameLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
