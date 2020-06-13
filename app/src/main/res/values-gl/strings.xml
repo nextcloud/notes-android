@@ -197,4 +197,8 @@
         <item quantity="other">%d seleccionados</item>
     </plurals>
 
+    <string name="formatting_help_text_title">Texto</string>
+    <string name="formatting_help_checkboxes_title">Caixas de verificación</string>
+    <string name="formatting_help_unsupported_title">Non admitido</string>
+    <string name="formatting_help_unsupported_body_3">Imaxes</string>
     </resources>
