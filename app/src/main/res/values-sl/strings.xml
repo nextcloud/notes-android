@@ -192,4 +192,9 @@
         <item quantity="other">%d izbranih</item>
     </plurals>
 
+    <string name="formatting_help_text_title">Besedilo</string>
+    <string name="formatting_help_checkboxes_title">Izbirna polja</string>
+    <string name="formatting_help_code_title">Šifra</string>
+    <string name="formatting_help_unsupported_title">Nepodprto</string>
+    <string name="formatting_help_unsupported_body_3">Slike</string>
     </resources>

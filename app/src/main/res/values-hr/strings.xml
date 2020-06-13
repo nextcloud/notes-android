@@ -186,4 +186,9 @@
         <item quantity="few">Odabrano je %d</item>
         <item quantity="other">Odabrano je %d</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_checkboxes_title">Potvrdni okviri</string>
+    <string name="formatting_help_unsupported_title">Bez podrške</string>
+    <string name="formatting_help_unsupported_body_3">Slike</string>
+    </resources>
