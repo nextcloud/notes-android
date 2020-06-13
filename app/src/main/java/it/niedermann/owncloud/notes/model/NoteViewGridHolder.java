@@ -15,6 +15,7 @@ import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding
 import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static it.niedermann.owncloud.notes.util.NoteUtil.EXCERPT_LINE_SEPARATOR;
 
 public class NoteViewGridHolder extends NoteViewHolder {
     @NonNull
@@ -43,7 +44,7 @@ public class NoteViewGridHolder extends NoteViewHolder {
         binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? INVISIBLE : VISIBLE);
         bindFavorite(binding.noteFavorite, note.isFavorite());
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
-        bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt().replace("   ", "\n"), mainColor);
+        bindSearchableContent(context, binding.noteExcerpt, searchQuery, note.getExcerpt().replace(EXCERPT_LINE_SEPARATOR, "\n"), mainColor);
         binding.noteExcerpt.setVisibility(TextUtils.isEmpty(note.getExcerpt()) ? GONE : VISIBLE);
     }
 
