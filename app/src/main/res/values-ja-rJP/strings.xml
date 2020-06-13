@@ -184,4 +184,8 @@
     <plurals name="ab_selected">
         <item quantity="other">%d 選択済</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">テキスト</string>
+    <string name="formatting_help_unsupported_title">サポートされていません。</string>
+    <string name="formatting_help_unsupported_body_3">画像</string>
+    </resources>
