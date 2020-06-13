@@ -40,6 +40,6 @@
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
         android:paddingRight="@dimen/widget_note_list_outer_padding"
         android:textColor="@color/fg_default_dark_theme"
-        tools:text="@string/app_name_long" />
+        tools:text="@tools:sample/lorem/random" />
 
 </LinearLayout>

@@ -13,6 +13,7 @@
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Salvar</string>
     <string name="simple_about">Sobre</string>
+    <string name="simple_accounts">Contas</string>
     <string name="simple_bold">Negrito</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Itálico</string>
@@ -150,7 +151,12 @@
     <string name="added_content">\"%1$s\" adicionado</string>
     <string name="shared_text_empty">O texto compartilhado estava vazio</string>
     <string name="append_to_note">Anexar à nota</string>
-
+    <string name="settings_branding">Marcação</string>
+    <string name="simple_security">Segurança</string>
+    <string name="simple_appearance">Aparência</string>
+    <string name="simple_synchronization">Sincronização</string>
+    <string name="share_multiple">Compartilhar o conteúdo de %1$d notas</string>
+    <string name="manage_accounts">Gerenciar contas</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir em modo de edição</item>
@@ -184,4 +190,10 @@
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d selecionados</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Texto</string>
+    <string name="formatting_help_checkboxes_title">Caixas de seleção</string>
+    <string name="formatting_help_code_title">Código</string>
+    <string name="formatting_help_unsupported_title">Não suportado</string>
+    <string name="formatting_help_unsupported_body_3">Imagens</string>
+    </resources>

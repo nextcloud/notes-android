@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Selector is used for Background Colors in List Items -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- :selected -->
+    <item android:drawable="@color/bg_highlighted" android:state_selected="true" />
+    <item android:drawable="@android:color/transparent" />
+</selector>

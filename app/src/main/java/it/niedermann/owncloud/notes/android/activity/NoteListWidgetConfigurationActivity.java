@@ -3,14 +3,12 @@ package it.niedermann.owncloud.notes.android.activity;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +24,8 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
+import it.niedermann.owncloud.notes.model.NavigationAdapter.CategoryNavigationItem;
+import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.util.Notes;
 
@@ -57,6 +57,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
             // TODO Present user with app login screen
             Log.w(TAG, "onCreate: user not logged in");
             finish();
+            return;
         }
         final Bundle extras = getIntent().getExtras();
 
@@ -81,27 +82,33 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
 
-        adapterCategories = new NavigationAdapter(new NavigationAdapter.ClickListener() {
+        adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
-                SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+                NoteListsWidgetData data = new NoteListsWidgetData();
 
+                data.setAppWidgetId(appWidgetId);
                 if (itemRecent.equals(item)) {
-                    sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_ALL);
+                    data.setMode(NoteListsWidgetData.MODE_DISPLAY_ALL);
                 } else if (itemFavorites.equals(item)) {
-                    sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_STARRED);
+                    data.setMode(NoteListsWidgetData.MODE_DISPLAY_STARRED);
                 } else {
                     String category = "";
                     if (!item.label.equals(getString(R.string.action_uncategorized))) {
                         category = item.label;
                     }
-                    sp.putInt(NoteListWidget.WIDGET_MODE_KEY + appWidgetId, NoteListWidget.NLW_DISPLAY_CATEGORY);
-                    sp.putString(NoteListWidget.WIDGET_CATEGORY_KEY + appWidgetId, category);
+                    data.setMode(NoteListsWidgetData.MODE_DISPLAY_CATEGORY);
+                    if (item instanceof CategoryNavigationItem) {
+                        data.setCategoryId(((CategoryNavigationItem) item).categoryId);
+                    } else {
+                        throw new IllegalStateException("Tried to choose a category, but ");
+                    }
                 }
 
-                sp.putLong(NoteListWidget.ACCOUNT_ID_KEY + appWidgetId, localAccount.getId());
-                sp.putString(NoteListWidget.DARK_THEME_KEY + appWidgetId, Notes.getAppTheme(getApplicationContext()).name());
-                sp.apply();
+                data.setAccountId(localAccount.getId());
+                data.setThemeMode(Notes.getAppTheme(getApplicationContext()).getModeId());
+
+                db.createOrUpdateNoteListWidgetData(data);
 
                 Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
                         getApplicationContext(), NoteListWidget.class);
@@ -129,6 +136,10 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+    }
+
     private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
         @Override
         protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
@@ -136,7 +147,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 return new ArrayList<>();
             }
             NavigationAdapter.NavigationItem itemUncategorized;
-            List<NavigationAdapter.NavigationItem> categories = db.getCategories(localAccount.getId());
+            List<CategoryNavigationItem> categories = db.getCategories(localAccount.getId());
 
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);

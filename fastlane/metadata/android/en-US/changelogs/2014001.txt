@@ -1,0 +1,2 @@
+- ✨ Title and category should be centered if no excerpt is given (#374)
+- 🐞 Crash when entering not-existing category (#863)

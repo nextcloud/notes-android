@@ -34,6 +34,7 @@ import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.fragment.ExceptionDialogFragment;
+import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -499,7 +500,7 @@ public class NoteServerSyncHelper {
             }
             if (!status.pullSuccessful || !status.pushSuccessful) {
                 if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
-                    Snackbar.make(((ViewProvider) context).getView(), R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                    BrandedSnackbar.make(((ViewProvider) context).getView(), R.string.error_synchronization, Snackbar.LENGTH_LONG)
                             .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
                                     .show(((AppCompatActivity) context).getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                             .show();
@@ -512,7 +513,7 @@ public class NoteServerSyncHelper {
                     callback.onFinish();
                 }
             }
-            db.notifyNotesChanged();
+            db.notifyWidgets();
             db.updateDynamicShortcuts(localAccount.getId());
             // start next sync if scheduled meanwhile
             if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {

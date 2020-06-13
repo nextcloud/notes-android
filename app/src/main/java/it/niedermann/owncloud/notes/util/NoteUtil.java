@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,8 @@ public class NoteUtil {
     private static final Pattern pEmphasis = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
     private static final Pattern pSpace1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
     private static final Pattern pSpace2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
+
+    public static final String EXCERPT_LINE_SEPARATOR = "   ";
 
     private NoteUtil() {
 
@@ -86,7 +89,7 @@ public class NoteUtil {
     @NonNull
     public static String generateNoteExcerpt(@NonNull String content) {
         if (content.contains("\n"))
-            return truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 200).replace("\n", "   ");
+            return truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
         else
             return "";
     }
@@ -139,5 +142,21 @@ public class NoteUtil {
     @NonNull
     public static String extendCategory(@NonNull String category) {
         return category.replace("/", " / ");
+    }
+
+    @SuppressWarnings("WeakerAccess") //PMD...
+    public static float getFontSizeFromPreferences(@NonNull Context context, @NonNull SharedPreferences sp) {
+        final String prefValueSmall = context.getString(R.string.pref_value_font_size_small);
+        final String prefValueMedium = context.getString(R.string.pref_value_font_size_medium);
+        // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
+        String fontSize = sp.getString(context.getString(R.string.pref_key_font_size), prefValueMedium);
+
+        if (fontSize.equals(prefValueSmall)) {
+            return context.getResources().getDimension(R.dimen.note_font_size_small);
+        } else if (fontSize.equals(prefValueMedium)) {
+            return context.getResources().getDimension(R.dimen.note_font_size_medium);
+        } else {
+            return context.getResources().getDimension(R.dimen.note_font_size_large);
+        }
     }
 }

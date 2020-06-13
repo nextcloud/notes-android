@@ -13,6 +13,7 @@
     <string name="simple_edit">Редактировать</string>
     <string name="action_edit_save">Сохранить</string>
     <string name="simple_about">О программе</string>
+    <string name="simple_accounts">Аккаунты</string>
     <string name="simple_bold">Жирный</string>
     <string name="simple_link">Ссылка</string>
     <string name="simple_italic">Курсив</string>
@@ -150,7 +151,11 @@
     <string name="added_content">Добавлена заметка «%1$s»</string>
     <string name="shared_text_empty">Публикуемый текст пустой</string>
     <string name="append_to_note">Добавить в заметку</string>
-
+    <string name="settings_branding">Брендирование</string>
+    <string name="simple_security">Безопасность</string>
+    <string name="simple_appearance">Внешний вид</string>
+    <string name="simple_synchronization">Синхронизация</string>
+    <string name="manage_accounts">Управление аккаунтами</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>
@@ -186,4 +191,10 @@
         <item quantity="many">%d выбрано</item>
         <item quantity="other">%d выбрано</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Текст</string>
+    <string name="formatting_help_checkboxes_title">Несколько из списка</string>
+    <string name="formatting_help_code_title">Код</string>
+    <string name="formatting_help_unsupported_title">Не поддерживается</string>
+    <string name="formatting_help_unsupported_body_3">Изображения</string>
+    </resources>

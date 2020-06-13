@@ -47,7 +47,7 @@
             android:layout_marginBottom="@dimen/spacer_2x"
             android:layout_weight="1"
             android:background="@color/bg_highlighted"
-            android:padding="8dp"
+            android:padding="@dimen/spacer_1x"
             android:scrollbars="horizontal|vertical"
             android:textIsSelectable="true"
             android:typeface="monospace"

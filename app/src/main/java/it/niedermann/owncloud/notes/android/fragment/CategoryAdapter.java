@@ -17,6 +17,7 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemCategoryBinding;
+import it.niedermann.owncloud.notes.model.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -101,13 +102,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    void setCategoryList(List<NavigationItem> categories, String currentSearchString) {
-        this.categories = categories;
-        NavigationItem clearItem = new NavigationItem(clearItemId, context.getString(R.string.no_category), 0, R.drawable.ic_clear_grey_24dp);
+    void setCategoryList(List<CategoryNavigationItem> categories, String currentSearchString) {
+        this.categories.clear();
+        this.categories.addAll(categories);
+        final NavigationItem clearItem = new NavigationItem(clearItemId, context.getString(R.string.no_category), 0, R.drawable.ic_clear_grey_24dp);
         this.categories.add(0, clearItem);
         if (currentSearchString != null && currentSearchString.trim().length() > 0) {
             boolean currentSearchStringIsInCategories = false;
-            for (NavigationItem category : categories.subList(1, categories.size())) {
+            for (NavigationItem category : categories) {
                 if (currentSearchString.equals(category.label)) {
                     currentSearchStringIsInCategories = true;
                     break;

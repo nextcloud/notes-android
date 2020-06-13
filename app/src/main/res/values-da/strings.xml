@@ -13,6 +13,7 @@
     <string name="simple_edit">Rediger</string>
     <string name="action_edit_save">Gem</string>
     <string name="simple_about">Om</string>
+    <string name="simple_accounts">Konti</string>
     <string name="simple_bold">Fed</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Kursiv</string>
@@ -145,6 +146,11 @@
     <string name="error_dialog_insufficient_storage">Din Nextcloud-instans har ikke mere ledig lagerplads. Slet venligst nogle filer for at synkronisere dine lokale ændringer ind i skyen.</string>
     <string name="error_dialog_contact_us">Du er altid velkommen til at kontakte os, hvis problemet varer ved. Du kan finde vores kontaktoplysninger i sektionen Om i sidebjælken.</string>
     <string name="error_dialog_we_need_info">Vi har brug for følgende tekniske information for at hjælpe dig:</string>
+    <string name="settings_branding">Branding</string>
+    <string name="simple_security">Sikkerhed</string>
+    <string name="simple_appearance">Udseende</string>
+    <string name="simple_synchronization">Synchronization</string>
+    <string name="manage_accounts">Administrer konti</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åbn i redigeringstilstand</item>
@@ -178,4 +184,8 @@
         <item quantity="one">%d valgt</item>
         <item quantity="other">%d valgt</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_code_title">Kode</string>
+    <string name="formatting_help_unsupported_body_3">Billeder</string>
+    </resources>

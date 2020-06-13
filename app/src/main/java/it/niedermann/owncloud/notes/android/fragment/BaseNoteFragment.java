@@ -3,9 +3,9 @@ package it.niedermann.owncloud.notes.android.fragment;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,11 +13,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ScrollView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.ShareActionProvider;
-import androidx.core.view.MenuItemCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -29,18 +31,24 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
 import it.niedermann.owncloud.notes.android.fragment.CategoryDialogFragment.CategoryDialogListener;
+import it.niedermann.owncloud.notes.branding.BrandedFragment;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
+import it.niedermann.owncloud.notes.util.ShareUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
+import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
+import static it.niedermann.owncloud.notes.util.Notes.isDarkThemeActive;
 
-public abstract class BaseNoteFragment extends Fragment implements CategoryDialogListener {
+public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener {
 
     private static final String TAG = BaseNoteFragment.class.getSimpleName();
 
@@ -56,8 +64,10 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private SingleSignOnAccount ssoAccount;
 
     protected DBNote note;
+    // TODO do we really need this? The reference to note is currently the same
     @Nullable
     private DBNote originalNote;
+    private int originalScrollY;
     protected NotesDatabase db;
     private NoteFragmentListener listener;
 
@@ -88,7 +98,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                         if (content == null) {
                             throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                         } else {
-                            note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "");
+                            note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "", 0);
                         }
                     } else {
                         note = db.getNote(localAccount.getId(), db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote));
@@ -102,6 +112,32 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
             setHasOptionsMenu(true);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Nullable
+    protected abstract ScrollView getScrollView();
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final ScrollView scrollView = getScrollView();
+        if (scrollView != null) {
+            scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+                if (scrollView.getScrollY() > 0) {
+                    note.setScrollY(scrollView.getScrollY());
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        final ScrollView scrollView = getScrollView();
+        if (scrollView != null) {
+            this.originalScrollY = note.getScrollY();
+            scrollView.post(() -> scrollView.scrollTo(0, originalScrollY));
         }
     }
 
@@ -143,12 +179,14 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, MenuInflater inflater) {
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_note_fragment, menu);
 
         if (isRequestPinShortcutSupported(requireActivity()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
+
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -163,6 +201,7 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     private void prepareFavoriteOption(MenuItem item) {
         item.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
         item.setChecked(note.isFavorite());
+        tintMenuIcon(item, colorAccent);
     }
 
     /**
@@ -192,23 +231,10 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
                 showCategorySelector();
                 return true;
             case R.id.menu_move:
-                AccountChooserDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
+                MoveAccountDialogFragment.newInstance().show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
                 return true;
             case R.id.menu_share:
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, note.getTitle());
-                shareIntent.putExtra(Intent.EXTRA_TEXT, note.getContent());
-
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    startActivity(Intent.createChooser(shareIntent, note.getTitle()));
-                } else {
-                    ShareActionProvider actionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
-                    actionProvider.setShareIntent(shareIntent);
-                }
-
+                ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
                 return false;
             case MENU_ID_PIN:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -264,29 +290,18 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
         if (note != null) {
             String newContent = getContent();
             if (note.getContent().equals(newContent)) {
-                Log.v(TAG, "... not saving, since nothing has changed");
+                if (note.getScrollY() != originalScrollY) {
+                    Log.v(TAG, "... only saving new scroll state, since content did not change");
+                    db.updateScrollY(note.getId(), note.getScrollY());
+                } else {
+                    Log.v(TAG, "... not saving, since nothing has changed");
+                }
             } else {
                 note = db.updateNoteAndSync(ssoAccount, localAccount.getId(), note, newContent, callback);
                 listener.onNoteUpdated(note);
             }
         } else {
             Log.e(TAG, "note is null");
-        }
-    }
-
-    @SuppressWarnings("WeakerAccess") //PMD...
-    protected float getFontSizeFromPreferences(SharedPreferences sp) {
-        final String prefValueSmall = getString(R.string.pref_value_font_size_small);
-        final String prefValueMedium = getString(R.string.pref_value_font_size_medium);
-        // final String prefValueLarge = getString(R.string.pref_value_font_size_large);
-        String fontSize = sp.getString(getString(R.string.pref_key_font_size), prefValueMedium);
-
-        if (fontSize.equals(prefValueSmall)) {
-            return getResources().getDimension(R.dimen.note_font_size_small);
-        } else if (fontSize.equals(prefValueMedium)) {
-            return getResources().getDimension(R.dimen.note_font_size_medium);
-        } else {
-            return getResources().getDimension(R.dimen.note_font_size_large);
         }
     }
 
@@ -320,6 +335,39 @@ public abstract class BaseNoteFragment extends Fragment implements CategoryDialo
     public void moveNote(LocalAccount account) {
         db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
         listener.close();
+    }
+
+    @ColorInt
+    protected static int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
+        if (isDarkThemeActive(context)) { // Dark background
+            if (isColorDark(mainColor)) { // Dark brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+                    return mainColor;
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            } else { // Light brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            }
+        } else { // Light background
+            if (isColorDark(mainColor)) { // Dark brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+                    return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            } else { // Light brand color
+                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+                    return mainColor;
+                } else {
+                    return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
+                }
+            }
+        }
     }
 
     public interface NoteFragmentListener {

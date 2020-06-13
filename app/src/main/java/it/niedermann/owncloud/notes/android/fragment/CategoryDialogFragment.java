@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
@@ -14,12 +13,14 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
+import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
@@ -29,15 +30,21 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
  * It targetFragment is set it must implement the interface {@link CategoryDialogListener}.
  * The calling Activity must implement the interface {@link CategoryDialogListener}.
  */
-public class CategoryDialogFragment extends AppCompatDialogFragment {
+public class CategoryDialogFragment extends BrandedDialogFragment {
 
     private static final String TAG = CategoryDialogFragment.class.getSimpleName();
     private static final String STATE_CATEGORY = "category";
+    private DialogChangeCategoryBinding binding;
 
     private NotesDatabase db;
     private CategoryDialogListener listener;
 
     private EditText editCategory;
+
+    @Override
+    public void applyBrand(int mainColor, int textColor) {
+        BrandingUtil.applyBrandToEditText(mainColor, textColor, binding.search);
+    }
 
     /**
      * Interface that must be implemented by the calling Activity.
@@ -81,7 +88,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View dialogView = View.inflate(getContext(), R.layout.dialog_change_category, null);
-        DialogChangeCategoryBinding binding = DialogChangeCategoryBinding.bind(dialogView);
+        binding = DialogChangeCategoryBinding.bind(dialogView);
         this.editCategory = binding.search;
 
         if (savedInstanceState == null) {
@@ -131,7 +138,7 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
             }
         });
 
-        return new AlertDialog.Builder(getActivity())
+        return new BrandedAlertDialogBuilder(getActivity())
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
                 .setCancelable(true)
@@ -160,17 +167,17 @@ public class CategoryDialogFragment extends AppCompatDialogFragment {
     }
 
 
-    private class LoadCategoriesTask extends AsyncTask<String, Void, List<NavigationAdapter.NavigationItem>> {
+    private class LoadCategoriesTask extends AsyncTask<String, Void, List<NavigationAdapter.CategoryNavigationItem>> {
         String currentSearchString;
 
         @Override
-        protected List<NavigationAdapter.NavigationItem> doInBackground(String... searchText) {
+        protected List<NavigationAdapter.CategoryNavigationItem> doInBackground(String... searchText) {
             currentSearchString = searchText[0];
             return db.searchCategories(accountId, currentSearchString);
         }
 
         @Override
-        protected void onPostExecute(List<NavigationAdapter.NavigationItem> categories) {
+        protected void onPostExecute(List<NavigationAdapter.CategoryNavigationItem> categories) {
             adapter.setCategoryList(categories, currentSearchString);
         }
     }

@@ -13,6 +13,7 @@
     <string name="simple_edit">עריכה</string>
     <string name="action_edit_save">שמירה</string>
     <string name="simple_about">על אודות</string>
+    <string name="simple_accounts">חשבונות</string>
     <string name="simple_bold">מודגש</string>
     <string name="simple_link">קישור</string>
     <string name="simple_italic">נטוי</string>
@@ -135,7 +136,11 @@
     <string name="error_dialog_we_need_info">אנו זקוקים לפירוט הטכני הבא כדי לסייע לך:</string>
     <string name="shared_text_empty">הטקסט ששותף היה ריק</string>
     <string name="append_to_note">הוספה לסוף הפתק</string>
-
+    <string name="settings_branding">מיתוג</string>
+    <string name="simple_security">אבטחה</string>
+    <string name="simple_appearance">מראה</string>
+    <string name="simple_synchronization">סנכרון</string>
+    <string name="manage_accounts">ניהול חשבונות</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>

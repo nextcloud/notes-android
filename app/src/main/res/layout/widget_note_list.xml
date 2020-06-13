@@ -8,9 +8,10 @@
 
     <!-- Widget header -->
     <RelativeLayout
+        android:id="@+id/widget_note_header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_note_list_header_height"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@color/defaultBrand"
         android:padding="@dimen/widget_note_list_hdr_padding">
 
         <ImageView
@@ -37,14 +38,16 @@
             android:layout_toLeftOf="@id/widget_note_list_create_icon"
             android:layout_toEndOf="@id/widget_note_header_icon"
             android:layout_toRightOf="@id/widget_note_header_icon"
+            android:ellipsize="middle"
             android:gravity="center_vertical"
-            android:paddingStart="@dimen/widget_note_list_outer_padding"
-            android:paddingLeft="@dimen/widget_note_list_outer_padding"
-            android:paddingEnd="@dimen/widget_note_list_inner_padding"
-            android:paddingRight="@dimen/widget_note_list_inner_padding"
+            android:paddingStart="@dimen/widget_note_list_hdr_padding"
+            android:paddingLeft="@dimen/widget_note_list_hdr_padding"
+            android:paddingEnd="@dimen/widget_note_list_hdr_padding"
+            android:paddingRight="@dimen/widget_note_list_hdr_padding"
+            android:singleLine="true"
             android:textColor="@color/widget_fg_contrast"
             android:textSize="18sp"
-            tools:text="@string/app_name" />
+            tools:text="@tools:sample/lorem/random" />
 
         <ImageView
             android:id="@+id/widget_note_list_create_icon"

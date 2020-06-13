@@ -1,0 +1,4 @@
+- 📌 Remember last scrolling position per note (#227)
+- 🎨 Apply brand to widget color
+- ❓ "Help: format" option in the menu (#116)
+- 🐞 Fix toggling checkboxes when note contains codefences with empty lines

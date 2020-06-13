@@ -1,66 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <SwitchPreference
-        android:defaultValue="@string/pref_value_lock"
-        android:icon="@drawable/ic_lock_grey600_24dp"
-        android:key="@string/pref_key_lock"
-        android:layout="@layout/item_pref"
-        android:summary="@string/simple_beta"
-        android:title="@string/settings_lock" />
+    <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
+        app:layout="@layout/item_preference_category"
+        app:title="@string/simple_synchronization">
 
-    <ListPreference
-        android:defaultValue="@string/pref_value_mode_edit"
-        android:entries="@array/noteMode_entries"
-        android:entryValues="@array/noteMode_values"
-        android:icon="@drawable/ic_remove_red_eye_grey_24dp"
-        android:key="@string/pref_key_note_mode"
-        android:layout="@layout/item_pref"
-        android:summary="%s"
-        android:title="@string/settings_note_mode" />
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="@string/pref_value_wifi_and_mobile"
+            android:icon="@drawable/ic_network_wifi_grey600_24dp"
+            android:key="@string/pref_key_wifi_only"
+            android:layout="@layout/item_pref"
+            android:title="@string/settings_wifi_only" />
 
-    <ListPreference
-        android:defaultValue="@string/pref_value_theme_system_default"
-        android:entries="@array/darkmode_entries"
-        android:entryValues="@array/darkMode_values"
-        android:summary="%s"
-        android:icon="@drawable/ic_brightness_2_grey_24dp"
-        android:key="@string/pref_key_theme"
-        android:layout="@layout/item_pref"
-        android:title="@string/settings_theme_title" />
+        <ListPreference
+            android:defaultValue="@string/pref_value_sync_off"
+            android:entries="@array/sync_entries"
+            android:entryValues="@array/sync_values"
+            android:icon="@drawable/ic_sync_black_24dp"
+            android:key="@string/pref_key_background_sync"
+            android:layout="@layout/item_pref"
+            android:summary="%s"
+            android:title="@string/settings_background_sync" />
+    </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
-    <SwitchPreference
-        android:defaultValue="@string/pref_value_font_normal"
-        android:icon="@drawable/ic_text_format_grey600_24dp"
-        android:key="@string/pref_key_font"
-        android:layout="@layout/item_pref"
-        android:title="@string/settings_font_title" />
+    <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
+        app:layout="@layout/item_preference_category"
+        app:title="@string/simple_appearance">
 
-    <ListPreference
-        android:defaultValue="@string/pref_value_font_size_medium"
-        android:entries="@array/fontSize_entries"
-        android:entryValues="@array/fontSize_values"
-        android:icon="@drawable/ic_format_size_black_24dp"
-        android:key="@string/pref_key_font_size"
-        android:layout="@layout/item_pref"
-        android:summary="%s"
-        android:title="@string/settings_font_size" />
+        <ListPreference
+            android:defaultValue="@string/pref_value_theme_system_default"
+            android:entries="@array/darkmode_entries"
+            android:entryValues="@array/darkMode_values"
+            android:icon="@drawable/ic_brightness_2_grey_24dp"
+            android:key="@string/pref_key_theme"
+            android:layout="@layout/item_pref"
+            android:summary="%s"
+            android:title="@string/settings_theme_title" />
 
-    <SwitchPreference
-        android:defaultValue="@string/pref_value_wifi_and_mobile"
-        android:icon="@drawable/ic_network_wifi_grey600_24dp"
-        android:key="@string/pref_key_wifi_only"
-        android:layout="@layout/item_pref"
-        android:title="@string/settings_wifi_only" />
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="true"
+            android:icon="@drawable/ic_color_lens_grey600_24dp"
+            android:key="@string/pref_key_branding"
+            android:layout="@layout/item_pref"
+            android:title="@string/settings_branding" />
 
-    <ListPreference
-        android:defaultValue="@string/pref_value_sync_off"
-        android:entries="@array/sync_entries"
-        android:entryValues="@array/sync_values"
-        android:icon="@drawable/ic_sync_black_24dp"
-        android:key="@string/pref_key_background_sync"
-        android:layout="@layout/item_pref"
-        android:summary="%s"
-        android:title="@string/settings_background_sync" />
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:icon="@drawable/ic_baseline_dashboard_24"
+            android:key="@string/pref_key_gridview"
+            android:layout="@layout/item_pref"
+            android:summary="@string/simple_beta"
+            android:title="@string/settings_gridview" />
+
+    </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
+
+    <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
+        app:layout="@layout/item_preference_category"
+        app:title="@string/simple_behavior">
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="@string/pref_value_font_normal"
+            android:icon="@drawable/ic_text_format_grey600_24dp"
+            android:key="@string/pref_key_font"
+            android:layout="@layout/item_pref"
+            android:title="@string/settings_font_title" />
+        <ListPreference
+            android:defaultValue="@string/pref_value_mode_edit"
+            android:entries="@array/noteMode_entries"
+            android:entryValues="@array/noteMode_values"
+            android:icon="@drawable/ic_remove_red_eye_grey_24dp"
+            android:key="@string/pref_key_note_mode"
+            android:layout="@layout/item_pref"
+            android:summary="%s"
+            android:title="@string/settings_note_mode" />
+
+        <ListPreference
+            android:defaultValue="@string/pref_value_font_size_medium"
+            android:entries="@array/fontSize_entries"
+            android:entryValues="@array/fontSize_values"
+            android:icon="@drawable/ic_format_size_black_24dp"
+            android:key="@string/pref_key_font_size"
+            android:layout="@layout/item_pref"
+            android:summary="%s"
+            android:title="@string/settings_font_size" />
+    </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
+
+    <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
+        android:key="@string/pref_category_security"
+        app:layout="@layout/item_preference_category"
+        app:title="@string/simple_security">
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="@string/pref_value_lock"
+            android:icon="@drawable/ic_lock_grey600_24dp"
+            android:key="@string/pref_key_lock"
+            android:layout="@layout/item_pref"
+            android:summary="@string/simple_beta"
+            android:title="@string/settings_lock" />
+    </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
 </PreferenceScreen>

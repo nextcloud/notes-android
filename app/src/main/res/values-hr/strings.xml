@@ -13,6 +13,7 @@
     <string name="simple_edit">Uredi</string>
     <string name="action_edit_save">Spremi</string>
     <string name="simple_about">Informacije</string>
+    <string name="simple_accounts">Računi</string>
     <string name="simple_bold">Podebljano</string>
     <string name="simple_link">Poveznica</string>
     <string name="simple_italic">U kurzivu</string>
@@ -146,6 +147,11 @@
     <string name="error_dialog_contact_us">Obratite nam se bez odlaganja ako problemi i dalje postoje. Naše podatke za kontakt možete pronaći u odjeljku s informacijama na bočnoj traci.</string>
     <string name="error_dialog_we_need_info">Potrebne su nam sljedeće tehničke informacije kako bismo vam pomogli:</string>
     <string name="error_dialog_redirect">Vaš je poslužitelj vratio šifru statusa HTTP 302, što znači da aplikacija Notes nije instalirana na poslužitelju ili postoji pogreška u konfiguraciji. To mogu uzrokovati prilagođena prepisivanja u datoteci .htaccess ili određene aplikacije u Nextcloudu, kao što je OID Client.</string>
+    <string name="settings_branding">Brendiranje</string>
+    <string name="simple_security">Sigurnost</string>
+    <string name="simple_appearance">Izgled</string>
+    <string name="simple_synchronization">Sinkronizacija</string>
+    <string name="manage_accounts">Upravljaj računima</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>
@@ -180,4 +186,9 @@
         <item quantity="few">Odabrano je %d</item>
         <item quantity="other">Odabrano je %d</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_checkboxes_title">Potvrdni okviri</string>
+    <string name="formatting_help_unsupported_title">Bez podrške</string>
+    <string name="formatting_help_unsupported_body_3">Slike</string>
+    </resources>

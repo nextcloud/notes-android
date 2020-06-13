@@ -13,6 +13,7 @@
     <string name="simple_edit">Szerkesztés</string>
     <string name="action_edit_save">Mentés</string>
     <string name="simple_about">Névjegy</string>
+    <string name="simple_accounts">Fiókok</string>
     <string name="simple_bold">Vastag</string>
     <string name="simple_link">Hivatkozás</string>
     <string name="simple_italic">Dőlt</string>
@@ -139,6 +140,11 @@
     <string name="error_dialog_insufficient_storage">A Nextcloud példányán elfogyott a szabad hely. Töröljön pár fájlt, hogy szinkronizálhassa a helyi változtatásait a felhővel.</string>
     <string name="error_dialog_contact_us">Nyugodtan lépjen velünk kapcsolatba, ha a probléma továbbra is fennáll. A kapcsolati információkat az oldalsáv névjegy részében találja.</string>
     <string name="error_dialog_we_need_info">A következő műszaki információkra van szükségünk, hogy segíthessünk:</string>
+    <string name="settings_branding">Márkázas</string>
+    <string name="simple_security">Biztonság</string>
+    <string name="simple_appearance">Megjelenés</string>
+    <string name="simple_synchronization">Szinkronizálás</string>
+    <string name="manage_accounts">Fiókok kezelése</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>

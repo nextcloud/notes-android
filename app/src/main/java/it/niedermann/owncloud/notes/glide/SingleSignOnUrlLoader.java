@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.glide;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -10,11 +9,6 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.ModelLoader;
 import com.bumptech.glide.load.model.ModelLoaderFactory;
 import com.bumptech.glide.load.model.MultiModelLoaderFactory;
-import com.google.gson.GsonBuilder;
-import com.nextcloud.android.sso.api.NextcloudAPI;
-import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
-import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.io.InputStream;
 
@@ -24,12 +18,12 @@ import java.io.InputStream;
 public class SingleSignOnUrlLoader implements ModelLoader<GlideUrl, InputStream> {
 
     private static final String TAG = SingleSignOnUrlLoader.class.getSimpleName();
-    private final NextcloudAPI client;
+    private final Context context;
 
     // Public API.
     @SuppressWarnings("WeakerAccess")
-    public SingleSignOnUrlLoader(@NonNull NextcloudAPI client) {
-        this.client = client;
+    public SingleSignOnUrlLoader(@NonNull Context context) {
+        this.context = context;
     }
 
     @Override
@@ -40,7 +34,7 @@ public class SingleSignOnUrlLoader implements ModelLoader<GlideUrl, InputStream>
     @Override
     public LoadData<InputStream> buildLoadData(
             @NonNull GlideUrl model, int width, int height, @NonNull Options options) {
-        return new LoadData<>(model, new SingleSignOnStreamFetcher(client, model));
+        return new LoadData<>(model, new SingleSignOnStreamFetcher(context, model));
     }
 
     /**
@@ -55,28 +49,12 @@ public class SingleSignOnUrlLoader implements ModelLoader<GlideUrl, InputStream>
          * Constructor for a new Factory that runs requests using given client.
          */
         public Factory(@NonNull Context context) {
-            try {
-                loader = new SingleSignOnUrlLoader(new NextcloudAPI(context, SingleAccountHelper.getCurrentSingleSignOnAccount(context), new GsonBuilder().create(), new NextcloudAPI.ApiConnectedListener() {
-                    @Override
-                    public void onConnected() {
-                        Log.v(TAG, "SSO API successfully initialized");
-                    }
-
-                    @Override
-                    public void onError(Exception ex) {
-                        Log.e(TAG, ex.getMessage(), ex);
-                    }
-                }));
-            } catch (NextcloudFilesAppAccountNotFoundException e) {
-                e.printStackTrace();
-            } catch (NoCurrentAccountSelectedException e) {
-                e.printStackTrace();
-            }
+            loader = new SingleSignOnUrlLoader(context);
         }
 
         @NonNull
         @Override
-        public ModelLoader<GlideUrl, InputStream> build(MultiModelLoaderFactory multiFactory) {
+        public ModelLoader<GlideUrl, InputStream> build(@NonNull MultiModelLoaderFactory multiFactory) {
             return loader;
         }
 

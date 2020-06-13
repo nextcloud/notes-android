@@ -13,6 +13,7 @@
     <string name="simple_edit">Upravit</string>
     <string name="action_edit_save">Uložit</string>
     <string name="simple_about">O aplikaci</string>
+    <string name="simple_accounts">Účty</string>
     <string name="simple_bold">Tučné</string>
     <string name="simple_link">Odkaz</string>
     <string name="simple_italic">Skloněné</string>
@@ -27,6 +28,9 @@
     <string name="menu_favorite">Oblíbená</string>
     <string name="menu_preview">Náhled</string>
     <string name="menu_share">Sdílet</string>
+
+    <string name="search_in_category">Hledat v %1$s</string>
+    <string name="search_in_all">Prohledat všechny poznámky</string>
 
     <string name="change_category_title">Zvolte kategorii</string>
 
@@ -150,6 +154,14 @@
     <string name="added_content">Přidáno „%1$s“</string>
     <string name="shared_text_empty">Sdílený text je prázdný</string>
     <string name="append_to_note">Připojit k poznámce</string>
+    <string name="settings_branding">Opatření vlastním logem</string>
+    <string name="simple_security">Zabezpečení</string>
+    <string name="simple_appearance">Vzhled</string>
+    <string name="simple_synchronization">Synchronizace</string>
+    <string name="simple_behavior">Chování</string>
+    <string name="share_multiple">Sdílet obsah %1$d poznámek</string>
+    <string name="manage_accounts">Spravovat účty</string>
+    <string name="action_formatting_help">Formátování</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
@@ -186,4 +198,48 @@
         <item quantity="many">vybráno %d</item>
         <item quantity="other">vybrány %d</item>
     </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formátování založené na kontextu</string>
+    <string name="formatting_help_cbf_body_1">Hlavním cílem návrhu aplikace Poznámky je poskytovat nástroj, kterého používání nerozptyluje. Ačkoli můžete texty formátovat pomocí Markdown značek. Pro různé z níže uvedených příkladů můžete použít zkratky, takže své poznámky můžete formátovat bez zadávání níže uvedených kódů.</string>
+    <string name="formatting_help_cbf_body_2">Stačí jen vybrat část textu nebo klepnout na kurzor v libovolné pozici a obdržíte vyskakovací nabídky, která obsahuje kromě výchozích položek %1$s, %2$s, %3$s položky jako %4$s nebo %5$s.</string>
+
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_text_body">Pomocí značkovacího jazyka Markdown je velice jednoduché vypsat některé slova %1$stučně%1$s a jiná %2$sskloněná (kurzíva)%2$s. Je také možné některá slova %3$spřeškrtnout%3$s a dokonce [odkaz na Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Seznamy</string>
+    <string name="formatting_help_lists_body_1">Pokud budete chtít číslované seznamy:</string>
+    <string name="formatting_help_lists_body_2">Jedna</string>
+    <string name="formatting_help_lists_body_3">Dva</string>
+    <string name="formatting_help_lists_body_4">Tři</string>
+    <string name="formatting_help_lists_body_5">Pokud budete chtít odrážky:</string>
+    <string name="formatting_help_lists_body_6">Řádek začněte znakem mínus</string>
+    <string name="formatting_help_lists_body_7">A pokud máte dílčí body, pak před mínus či hvězdičku dejte dvě mezery:</string>
+    <string name="formatting_help_lists_body_8">Dát lajk</string>
+    <string name="formatting_help_lists_body_9">A toto</string>
+
+    <string name="formatting_help_checkboxes_title">Zatržítka</string>
+    <string name="formatting_help_checkboxes_body_1">Pro vytvoření zaškrtávací kolonky použijte seznam následovaný závorkami</string>
+    <string name="formatting_help_checkboxes_body_2">Položka 1</string>
+    <string name="formatting_help_checkboxes_body_3">Položka 2</string>
+
+    <string name="formatting_help_structured_documents_title">Strukturované dokumenty</string>
+    <string name="formatting_help_structured_documents_body_1">Někdy je užitečné mít různé úrovně nadpisů a strukturovat tak dokumenty. Začněte s řádky s %1$s pro vytvoření nadpisů. Vícero %2$s za sebou značí nižší úrovně nadpisů.</string>
+    <string name="formatting_help_structured_documents_body_2">Toto je nadpis třetí úrovně</string>
+    <string name="formatting_help_structured_documents_body_3">Je také možné použít jedno %1$s až po %2$s šest pro různé velikosti nadpisů.</string>
+    <string name="formatting_help_structured_documents_body_4">Pokud chcete někoho citovat, použijte před řádkem znak %1$s:</string>
+    <string name="formatting_help_code_title">Kód</string>
+    <string name="formatting_help_code_body_1">Ve značkovacím jazyce Markdown existuje mnoho různých způsobů jak opatřovat stylem zápis kódu. Pokud máte bloky kódu přímo v rámci řádku, obklopte je zpětnými jednoduchými uvozovkami (backticks):</string>
+    <string name="formatting_help_code_body_2">Značkovací jazyk Markdown také podporuje něco co se nazývá „oplocení“ kódu, což umožňuje vícero řádek bez odsazení:</string>
+    <string name="formatting_help_code_body_3">A pokud chcete použít zvýrazňování syntaxe, včetně jazyka:</string>
+
+    <string name="formatting_help_unsupported_title">Nepodporováno</string>
+    <string name="formatting_help_unsupported_body_1">Byť se neustále snažíme vylepšovat podporu pro Markdown, je zde několik funkcí, které Poznámky ještě nepodporují:</string>
+    <string name="formatting_help_unsupported_body_2">Tabulky</string>
+    <string name="formatting_help_unsupported_body_3">Obrázky</string>
+    <string name="formatting_help_unsupported_body_4">Pokud chcete se chtěli zapojit a přidat podporu pro tyto funkce, obraťte se na nás prostřednictvím portálu GitHub nebo e-mailu.</string>
 </resources>

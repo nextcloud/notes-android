@@ -13,6 +13,7 @@
     <string name="simple_edit">Bearbeiten</string>
     <string name="action_edit_save">Speichern</string>
     <string name="simple_about">Über</string>
+    <string name="simple_accounts">Konten</string>
     <string name="simple_bold">Fett</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Kursiv</string>
@@ -27,6 +28,9 @@
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Vorschau</string>
     <string name="menu_share">Teilen</string>
+
+    <string name="search_in_category">Suche in %1$s</string>
+    <string name="search_in_all">In allen Notizen suchen</string>
 
     <string name="change_category_title">Kategorie auswählen</string>
 
@@ -150,6 +154,14 @@
     <string name="added_content">„%1$s“ hinzugefügt</string>
     <string name="shared_text_empty">Der geteilte Text war ohne Inhalt</string>
     <string name="append_to_note">An Notiz anhängen</string>
+    <string name="settings_branding">Branding</string>
+    <string name="simple_security">Sicherheit</string>
+    <string name="simple_appearance">Aussehen</string>
+    <string name="simple_synchronization">Synchronisierung</string>
+    <string name="simple_behavior">Verhalten</string>
+    <string name="share_multiple">Inhalt von %1$d Notizen teilen</string>
+    <string name="manage_accounts">Konten verwalten</string>
+    <string name="action_formatting_help">Formatierung</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
@@ -184,4 +196,48 @@
         <item quantity="one">%d ausgewählt</item>
         <item quantity="other">%d ausgewählt</item>
     </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Kontextbasierte Formatierung</string>
+    <string name="formatting_help_cbf_body_1">Ein wichtiges Designziel der Notes-App ist die Bereitstellung eines ablenkungsfreien Tools. Sie können Ihre Texte jedoch mit Markdown formatieren. Für verschiedene der unten genannten Beispiele können Sie Verknüpfungen verwenden, um Ihre Notizen zu formatieren, ohne die folgenden Codes eingeben zu müssen.</string>
+    <string name="formatting_help_cbf_body_2">Wählen Sie einfach einen Textbereich aus oder tippen Sie an einer beliebigen Stelle auf den Cursor und Sie erhalten ein Popup-Menü, das neben den Standardeinträgen %1$s, %2$s, %3$s auch Einträge wie %4$s oder %5$s enthält.</string>
+
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_text_body">Es ist sehr einfach, einige Wörter %1$sfett%1$s und andere Wörter %2$skursiv%2$s mit Markdown zu versehen. Sie können einige Wörter %3$sdurchstreichen%3$s und sogar zu Nextcloud [verlinken](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Listen</string>
+    <string name="formatting_help_lists_body_1">Manchmal werden nummerierte Listen benötigt:</string>
+    <string name="formatting_help_lists_body_2">Eins</string>
+    <string name="formatting_help_lists_body_3">Zwei</string>
+    <string name="formatting_help_lists_body_4">Drei</string>
+    <string name="formatting_help_lists_body_5">Manchmal werden Aufzählungszeichen benötigt:</string>
+    <string name="formatting_help_lists_body_6">Beginnen Sie eine Zeile mit einem Stern</string>
+    <string name="formatting_help_lists_body_7">Und wenn Sie Unterpunkte haben, setzen Sie zwei Leerzeichen vor den Bindestrich oder Stern:</string>
+    <string name="formatting_help_lists_body_8">Wie dieses</string>
+    <string name="formatting_help_lists_body_9">Und dies</string>
+
+    <string name="formatting_help_checkboxes_title">Kontrollkästchen</string>
+    <string name="formatting_help_checkboxes_body_1">Verwenden Sie zum Erstellen eines Kontrollkästchens eine Liste gefolgt von Klammern</string>
+    <string name="formatting_help_checkboxes_body_2">Punkt 1</string>
+    <string name="formatting_help_checkboxes_body_3">Punkt 2</string>
+
+    <string name="formatting_help_structured_documents_title">Strukturierte Dokumente</string>
+    <string name="formatting_help_structured_documents_body_1">Manchmal ist es nützlich, verschiedene Ebenen von Überschriften zu haben, um Ihre Dokumente zu strukturieren. Beginnen Sie Zeilen mit %1$s, um Überschriften zu erstellen. Mehrere %2$s in einer Reihe kennzeichnen kleinere Überschriftengrößen.</string>
+    <string name="formatting_help_structured_documents_body_2">Dies ist eine Überschrift der dritten Stufe</string>
+    <string name="formatting_help_structured_documents_body_3">Sie können ein %1$s bis zu sechs %2$s für verschiedene Kopfgrößen verwenden.</string>
+    <string name="formatting_help_structured_documents_body_4">Wenn Sie jemanden zitieren möchten, verwenden Sie das %1$s-Zeichen vor der Zeile:</string>
+    <string name="formatting_help_code_title">Quelltext</string>
+    <string name="formatting_help_code_body_1">Es gibt viele verschiedene Möglichkeiten, Text mit Markdown zu formatieren. Wenn Sie Inline-Codeblöcke haben, betten Sie diese in Backticks ein:</string>
+    <string name="formatting_help_code_body_2">Markdown unterstützt auch das sogenannte Code-Fencing, das mehrere Zeilen ohne Einrückung zulässt:</string>
+    <string name="formatting_help_code_body_3">Wenn Sie die Syntaxhervorhebung verwenden möchten, geben Sie folgendes ein:</string>
+
+    <string name="formatting_help_unsupported_title">Nicht unterstützt</string>
+    <string name="formatting_help_unsupported_body_1">Obwohl wir versuchen, die Unterstützung für Markdown ständig zu verbessern, gibt es einige Funktionen, die von Notes noch nicht unterstützt werden:</string>
+    <string name="formatting_help_unsupported_body_2">Tabellen</string>
+    <string name="formatting_help_unsupported_body_3">Bilder</string>
+    <string name="formatting_help_unsupported_body_4">Wenn Sie uns bei der Entwicklung einer dieser Funktionen unterstützen möchten, setzen Sie sich bitte über GitHub oder E-Mail mit uns in Verbindung.</string>
 </resources>

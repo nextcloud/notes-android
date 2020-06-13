@@ -65,7 +65,7 @@ public class MarkDownUtil {
                         darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
                 .setTodoDoneColor(ResourcesCompat.getColor(context.getResources(),
                         darkTheme ? R.color.widget_fg_dark_theme : R.color.widget_fg_default, null))
-                .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.primary, null))
+                .setLinkFontColor(ResourcesCompat.getColor(context.getResources(), R.color.defaultBrand, null))
                 .setRxMDImageLoader(new NotesImageLoader(context))
                 .setDefaultImageSize(400, 300);
     }
@@ -85,13 +85,9 @@ public class MarkDownUtil {
             return "";
         }
 
-        Log.v(TAG, "parseCompat - Original: \"" + text + "\"");
-
         while (TextUtils.indexOf(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION) >= 0) {
             text = TextUtils.replace(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY, MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY);
         }
-
-        Log.v(TAG, "parseCompat - Replaced empty image descriptions: \"" + text + "\"");
 
         return markdownProcessor.parse(text);
     }

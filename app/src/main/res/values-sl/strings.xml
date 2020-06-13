@@ -13,6 +13,7 @@
     <string name="simple_edit">Uredi</string>
     <string name="action_edit_save">Shrani</string>
     <string name="simple_about">O programu</string>
+    <string name="simple_accounts">Računi</string>
     <string name="simple_bold">Krepko</string>
     <string name="simple_link">Povezava</string>
     <string name="simple_italic">Ležeče</string>
@@ -142,11 +143,19 @@
     <string name="error_dialog_check_server">Prejet je napačen odziv s strežnika. Preverite, ali imate dostop do zabeležk prek spletnega vmesnika.</string>
     <string name="error_dialog_check_server_logs">Prišlo je do napake z namestitvijo Nextcloud. Preverite zapis dnevnika na strežniku.</string>
     <string name="error_dialog_check_maintenance">Preverite, ali je morda namestitev Nextcloud trenutno v vzdrževalnem načinu.</string>
+    <string name="error_dialog_insufficient_storage">Ni več prostora v shrambi. Izbrisati je treba nekaj datotek za nadaljevanje usklajevanja krajevnih datotek z oblakom.</string>
+    <string name="error_dialog_contact_us">V kolikor se napaka še naprej pojavlja, ne odlašajte in stopite v stik z nami. Podatke o možnostih stika so v bočnem oknu med opisi programa.</string>
     <string name="error_dialog_we_need_info">Z ustrezno pomoč potrebujemo nekaj tehničnih podrobnosti sistema:</string>
     <string name="error_dialog_server_app_enabled">Prepričajte se, da ste namestili in omogočili tudi program »Notes« na strežniku.</string>
     <string name="error_dialog_redirect">S strežnika je prejet odziv s kodo stanja HTTP 302, kar kaže na to, da program Notes ni nameščen, ali pa je napačno nastavljen. Napaka se pojavi tudi pri nekaterih določilih v datoteki .htaccess oziroma programih, kot je odjemalec OID.</string>
+    <string name="added_content">Dodano »%1$s«</string>
+    <string name="shared_text_empty">Besedilo v souporabi je brez vsebine</string>
     <string name="append_to_note">Pripni k zabeležki</string>
-
+    <string name="settings_branding">Prilagajanje oblikovanja</string>
+    <string name="simple_security">Varnost</string>
+    <string name="simple_appearance">Videz</string>
+    <string name="simple_synchronization">Usklajevanje</string>
+    <string name="manage_accounts">Upravljanje z računi</string>
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>
@@ -182,4 +191,10 @@
         <item quantity="few">%d izbrane</item>
         <item quantity="other">%d izbranih</item>
     </plurals>
-</resources>
+
+    <string name="formatting_help_text_title">Besedilo</string>
+    <string name="formatting_help_checkboxes_title">Izbirna polja</string>
+    <string name="formatting_help_code_title">Šifra</string>
+    <string name="formatting_help_unsupported_title">Nepodprto</string>
+    <string name="formatting_help_unsupported_body_3">Slike</string>
+    </resources>
