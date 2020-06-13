@@ -83,6 +83,7 @@
                         tools:text="@string/search_in_all" />
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:tint="@color/accent"
                         android:id="@+id/sorting_method"
                         android:layout_width="?attr/actionBarSize"
                         android:layout_height="?attr/actionBarSize"
