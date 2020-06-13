@@ -394,10 +394,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         });
 
         activityBinding.sortingMethod.setOnClickListener((v) -> {
-            final String unexpectedSortMethod = "Unexpected sort method";
             CategorySortingMethod method;
 
-            Log.d("onOptionsItemSelected", navigationSelection.category + localAccount.getId());
             method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
 
             if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
@@ -706,11 +704,11 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             return;
         }
         CategorySortingMethod method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
-        if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-            activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
-        } else {
-            activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
-        }
+        activityBinding.sortingMethod.setImageResource(
+                method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC
+                        ? R.drawable.alphabetical_asc
+                        : R.drawable.modification_desc
+        );
     }
 
     @Override
