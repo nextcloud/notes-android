@@ -2,7 +2,7 @@ package it.niedermann.owncloud.notes.util;
 
 public enum CategorySortingMethod {
     SORT_MODIFIED_DESC("MODIFIED DESC"),
-    SORT_LEXICOGRAPHICAL_ASC("TITLE ASC");
+    SORT_LEXICOGRAPHICAL_ASC("TITLE COLLATE NOCASE ASC");
 
     private String sorder;  // sorting method OrderBy for SQL
 
