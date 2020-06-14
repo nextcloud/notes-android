@@ -302,4 +302,5 @@
     <string name="formatting_help_unsupported_body_2">Tables</string>
     <string name="formatting_help_unsupported_body_3">Images</string>
     <string name="formatting_help_unsupported_body_4">If you are interested in contributing support for one of those features, get in contact with us via GitHub or E-Mail.</string>
+    <string name="simple_other">Other</string>
 </resources>
