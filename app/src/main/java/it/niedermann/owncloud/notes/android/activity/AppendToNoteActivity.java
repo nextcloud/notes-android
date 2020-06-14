@@ -44,7 +44,7 @@ public class AppendToNoteActivity extends NotesListViewActivity {
             } else {
                 newContent = receivedText;
             }
-            db.updateNoteAndSync(ssoAccount, localAccount.getId(), note, newContent, () -> Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show());
+            db.updateNoteAndSync(ssoAccount, localAccount, note, newContent, () -> Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show());
         } else {
             Toast.makeText(this, R.string.shared_text_empty, Toast.LENGTH_SHORT).show();
         }

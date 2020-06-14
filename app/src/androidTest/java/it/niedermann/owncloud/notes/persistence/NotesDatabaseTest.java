@@ -150,7 +150,7 @@ public class NotesDatabaseTest {
             String newContent = getCurDate() + " This is a even greater day my friend.";
             DBNote dbNote = new DBNote(newNoteID, 1, Calendar.getInstance(), "A Greater Day",
                     newContent, true, "Best Friend's Record", null, DBStatus.VOID,
-                    accountID, NoteUtil.generateNoteExcerpt(newContent), 0);
+                    accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
 
             // Add a new note
             long noteID = db.addNote(accountID, dbNote);
@@ -165,7 +165,7 @@ public class NotesDatabaseTest {
             newContent = getCurDate() + " This is a even greater day my friend.";
             dbNote = new DBNote(0, 1, Calendar.getInstance(), "An Even Greater Day",
                     newContent, true, "Sincere Friend's Record", null, DBStatus.VOID,
-                    accountID, NoteUtil.generateNoteExcerpt(newContent), 0);
+                    accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
             // Add a new note
             noteID = db.addNote(accountID, dbNote);
             // Check if this note is added successfully

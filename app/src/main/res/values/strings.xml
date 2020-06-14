@@ -192,6 +192,8 @@
     <string name="added_content">Added "%1$s"</string>
     <string name="shared_text_empty">Shared text was empty</string>
     <string name="append_to_note">Append to note</string>
+    <string name="change_note_title">Change note title</string>
+    <string name="menu_edit_title">Edit title</string>
     <string name="settings_branding">Branding</string>
     <string name="settings_gridview">Grid view 🆕</string>
     <string name="simple_security">Security</string>
