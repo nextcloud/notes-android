@@ -14,15 +14,12 @@
     <string name="simple_edit">Edit</string>
     <string name="action_edit_save">Save</string>
     <string name="simple_about">About</string>
-    <string name="simple_accounts">Accounts</string>
     <string name="simple_bold">Bold</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Italic</string>
     <string name="action_note_deleted">Deleted %1$s</string>
     <string name="action_note_restored">Restored %1$s</string>
     <string name="action_undo">Undo</string>
-    <string name="action_drawer_open">open navigation</string>
-    <string name="action_drawer_close">close navigation</string>
     <string name="action_uncategorized">Uncategorized</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_change_category">Category</string>
@@ -58,9 +55,6 @@
     <string name="error_synchronization">Synchronization failed</string>
     <string name="error_json">Is the Notes app activated on the server?</string>
     <string name="error_no_network">No network connection</string>
-    <string name="error_files_app">Do you have installed the files app?</string>
-    <string name="error_token_mismatch">Cannot connect to the files app.</string>
-    <string name="error_insufficient_storage">Your server storage is full.</string>
     <string name="error_unknown">An unknown error has occurred.</string>
 
     <!-- Snackbar Actions -->
@@ -161,7 +155,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Could not load preview. Please check whether there is a two-digit numbered list item without content.</string>
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
-    <string name="error_files_app_version_too_old">Is your files app version up to date?</string>
     <string name="checkbox_could_not_be_toggled">Checkbox could not be toggled.</string>
     <string name="bulk_notes_deleted">Deleted %1$d notes</string>
     <string name="bulk_notes_restored">Restored %1$d notes</string>

@@ -15,7 +15,7 @@ public class TextUtils {
      *     calling object.toString(). If tokens is null, a NullPointerException will be thrown. If
      *     tokens is empty, an empty string will be returned.
      */
-    public static String join(CharSequence delimiter, Iterable tokens) {
+    public static String join(CharSequence delimiter, Iterable<?> tokens) {
         final Iterator<?> it = tokens.iterator();
         if (!it.hasNext()) {
             return "";

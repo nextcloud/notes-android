@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.model;
 
 import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 public class NoteListsWidgetData extends AbstractWidgetData {
@@ -30,6 +31,7 @@ public class NoteListsWidgetData extends AbstractWidgetData {
         this.categoryId = categoryId;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "NoteListsWidgetData{" +

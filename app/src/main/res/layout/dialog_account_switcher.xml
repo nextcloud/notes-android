@@ -29,9 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/spacer_2x"
-            android:layout_marginLeft="@dimen/spacer_2x"
             android:layout_marginEnd="@dimen/spacer_2x"
-            android:layout_marginRight="@dimen/spacer_2x"
             android:layout_weight="1"
             android:ellipsize="middle"
             android:singleLine="true"
@@ -72,10 +70,8 @@
         android:background="?attr/selectableItemBackground"
         android:orientation="horizontal"
         android:paddingStart="@dimen/spacer_3x"
-        android:paddingLeft="@dimen/spacer_3x"
         android:paddingTop="@dimen/spacer_1x"
         android:paddingEnd="@dimen/spacer_3x"
-        android:paddingRight="@dimen/spacer_3x"
         android:paddingBottom="@dimen/spacer_1x">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -91,7 +87,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/spacer_2x"
-            android:layout_marginLeft="@dimen/spacer_2x"
             android:ellipsize="middle"
             android:singleLine="true"
             android:text="@string/add_account"
@@ -108,10 +103,8 @@
         android:background="?attr/selectableItemBackground"
         android:orientation="horizontal"
         android:paddingStart="@dimen/spacer_3x"
-        android:paddingLeft="@dimen/spacer_3x"
         android:paddingTop="@dimen/spacer_1x"
         android:paddingEnd="@dimen/spacer_3x"
-        android:paddingRight="@dimen/spacer_3x"
         android:paddingBottom="@dimen/spacer_1x">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -127,7 +120,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/spacer_2x"
-            android:layout_marginLeft="@dimen/spacer_2x"
             android:ellipsize="middle"
             android:singleLine="true"
             android:text="@string/manage_accounts"

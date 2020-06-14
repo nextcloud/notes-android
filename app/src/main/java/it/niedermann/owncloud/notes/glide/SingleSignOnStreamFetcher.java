@@ -49,7 +49,7 @@ public class SingleSignOnStreamFetcher implements DataFetcher<InputStream> {
 
     @Override
     public void loadData(@NonNull Priority priority, @NonNull final DataCallback<? super InputStream> callback) {
-        NextcloudAPI client = null;
+        NextcloudAPI client;
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
             client = INITIALIZED_APIs.get(ssoAccount.name);
@@ -70,7 +70,7 @@ public class SingleSignOnStreamFetcher implements DataFetcher<InputStream> {
                 didInitialize = true;
             }
 
-            NextcloudRequest.Builder requestBuilder = null;
+            NextcloudRequest.Builder requestBuilder;
             try {
                 requestBuilder = new NextcloudRequest.Builder()
                         .setMethod(METHOD_GET)

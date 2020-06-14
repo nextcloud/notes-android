@@ -21,8 +21,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
-import androidx.preference.PreferenceManager;
 import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -52,9 +52,9 @@ import it.niedermann.owncloud.notes.model.DBStatus;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.util.CategorySortingMethod;
 import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
 import it.niedermann.owncloud.notes.model.SingleNoteWidgetData;
+import it.niedermann.owncloud.notes.util.CategorySortingMethod;
 import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -693,28 +693,30 @@ public class NotesDatabase extends AbstractNotesDatabase {
         new Thread(() -> {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
                 ShortcutManager shortcutManager = getContext().getApplicationContext().getSystemService(ShortcutManager.class);
-                if (!shortcutManager.isRateLimitingActive()) {
-                    List<ShortcutInfo> newShortcuts = new ArrayList<>();
+                if (shortcutManager != null) {
+                    if (!shortcutManager.isRateLimitingActive()) {
+                        List<ShortcutInfo> newShortcuts = new ArrayList<>();
 
-                    for (DBNote note : getRecentNotes(accountId)) {
-                        if (!TextUtils.isEmpty(note.getTitle())) {
-                            Intent intent = new Intent(getContext().getApplicationContext(), EditNoteActivity.class);
-                            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-                            intent.setAction(ACTION_SHORTCUT);
+                        for (DBNote note : getRecentNotes(accountId)) {
+                            if (!TextUtils.isEmpty(note.getTitle())) {
+                                Intent intent = new Intent(getContext().getApplicationContext(), EditNoteActivity.class);
+                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                                intent.setAction(ACTION_SHORTCUT);
 
-                            newShortcuts.add(new ShortcutInfo.Builder(getContext().getApplicationContext(), note.getId() + "")
-                                    .setShortLabel(note.getTitle() + "")
-                                    .setIcon(Icon.createWithResource(getContext().getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                    .setIntent(intent)
-                                    .build());
-                        } else {
-                            // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
-                            Log.e(TAG, "shortLabel cannot be empty " + note);
+                                newShortcuts.add(new ShortcutInfo.Builder(getContext().getApplicationContext(), note.getId() + "")
+                                        .setShortLabel(note.getTitle() + "")
+                                        .setIcon(Icon.createWithResource(getContext().getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                        .setIntent(intent)
+                                        .build());
+                            } else {
+                                // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
+                                Log.e(TAG, "shortLabel cannot be empty " + note);
+                            }
                         }
+                        Log.d(TAG, "Update dynamic shortcuts");
+                        shortcutManager.removeAllDynamicShortcuts();
+                        shortcutManager.addDynamicShortcuts(newShortcuts);
                     }
-                    Log.d(TAG, "Update dynamic shortcuts");
-                    shortcutManager.removeAllDynamicShortcuts();
-                    shortcutManager.addDynamicShortcuts(newShortcuts);
                 }
             }
         }).start();
@@ -728,7 +730,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param url          URL to the root of the used Nextcloud instance without trailing slash
      * @param username     Username of the account
      * @param accountName  Composed by the username and the host of the URL, separated by @-sign
-     * @param capabilities
+     * @param capabilities {@link Capabilities} object containing information about the brand colors, supported API versions, etc...
      * @throws SQLiteConstraintException in case accountName already exists
      */
     public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) throws SQLiteConstraintException {
@@ -1068,7 +1070,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 null,
                 null,
                 null);
-        int id = -1;
+        int id;
         if (cursor.moveToNext()) {
             id = cursor.getInt(0);
         } else {
@@ -1102,8 +1104,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * The sorting method of the category can be used to decide
      * to use which sorting method to show the notes for each categories.
      *
-     * @param accountId         The user accountID
-     * @param categoryTitle     The category title
+     * @param accountId     The user accountID
+     * @param categoryTitle The category title
      * @return The sorting method in CategorySortingMethod enum format
      */
     public CategorySortingMethod getCategoryOrderByTitle(long accountId, String categoryTitle) {
@@ -1112,12 +1114,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
         long categoryId = getCategoryIdByTitle(accountId, categoryTitle);
 
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_category, new String[]{key_category_sorting_method},
+        int orderIndex;
+        try (Cursor cursor = db.query(table_category, new String[]{key_category_sorting_method},
                 key_category_id + " = ?", new String[]{String.valueOf(categoryId)},
-                null, null, null);
-        int orderIndex = 0;
-        while (cursor.moveToNext()) {
-            orderIndex = cursor.getInt(0);
+                null, null, null)) {
+            orderIndex = 0;
+            while (cursor.moveToNext()) {
+                orderIndex = cursor.getInt(0);
+            }
         }
 
         return CategorySortingMethod.getCSM(orderIndex);
@@ -1128,9 +1132,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * The user can determine use which sorting method to show the notes for a category.
      * When the user changes the sorting method, this method should be called.
      *
-     * @param accountId         The user accountID
-     * @param categoryTitle     The category title
-     * @param sortingMethod     The sorting method in CategorySortingMethod enum format
+     * @param accountId     The user accountID
+     * @param categoryTitle The category title
+     * @param sortingMethod The sorting method in CategorySortingMethod enum format
      */
     public void modifyCategoryOrderByTitle(
             long accountId, String categoryTitle, CategorySortingMethod sortingMethod) {
@@ -1153,8 +1157,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * The sorting method of the category can be used to decide
      * to use which sorting method to show the notes for each categories.
      *
-     * @param accountId     The user accountID
-     * @param category      The category
+     * @param accountId The user accountID
+     * @param category  The category
      * @return The sorting method in CategorySortingMethod enum format
      */
     public CategorySortingMethod getCategoryOrder(long accountId, Category category) {
@@ -1162,7 +1166,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
         final Context ctx = getContext().getApplicationContext();
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
-        int orderIndex = 0;
+        int orderIndex;
 
         if (category.category == null) {
             if (category.favorite != null && category.favorite) {
@@ -1195,9 +1199,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * The user can determine use which sorting method to show the notes for a category.
      * When the user changes the sorting method, this method should be called.
      *
-     * @param accountId         The user accountID
-     * @param category          The category to be modified
-     * @param sortingMethod     The sorting method in CategorySortingMethod enum format
+     * @param accountId     The user accountID
+     * @param category      The category to be modified
+     * @param sortingMethod The sorting method in CategorySortingMethod enum format
      */
     public void modifyCategoryOrder(
             long accountId, Category category, CategorySortingMethod sortingMethod) {

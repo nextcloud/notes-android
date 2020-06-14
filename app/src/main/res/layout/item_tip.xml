@@ -9,7 +9,6 @@
     android:gravity="start|center"
     android:padding="@dimen/spacer_2x"
     android:textColor="?android:textColorPrimary"
-    app:drawableLeftCompat="@drawable/ic_lightbulb_outline_grey600_24dp"
     app:drawableStartCompat="@drawable/ic_lightbulb_outline_grey600_24dp"
     tools:maxLength="200"
     tools:text="@tools:sample/lorem/random" />

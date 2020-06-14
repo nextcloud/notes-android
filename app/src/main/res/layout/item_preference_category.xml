@@ -5,8 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingStart="56dp"
-    android:paddingLeft="56dp"
     android:paddingTop="@dimen/spacer_3x"
     android:paddingEnd="0dp"
-    android:paddingRight="0dp"
     tools:text="@tools:sample/lorem" />

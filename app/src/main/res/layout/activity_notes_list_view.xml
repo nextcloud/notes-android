@@ -38,10 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacer_1x"
-                android:layout_marginLeft="@dimen/spacer_1x"
                 android:layout_marginTop="@dimen/design_appbar_elevation"
                 android:layout_marginEnd="@dimen/spacer_1x"
-                android:layout_marginRight="@dimen/spacer_1x"
                 android:layout_marginBottom="@dimen/design_appbar_elevation"
                 app:cardCornerRadius="@dimen/spacer_1x"
                 app:cardElevation="6dp"
@@ -58,10 +56,8 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:paddingStart="@dimen/spacer_1x"
-                        android:paddingLeft="@dimen/spacer_1x"
                         android:paddingTop="@dimen/spacer_2x"
                         android:paddingEnd="@dimen/spacer_1x"
-                        android:paddingRight="@dimen/spacer_1x"
                         android:paddingBottom="@dimen/spacer_2x"
                         android:tint="?attr/colorAccent"
                         app:srcCompat="@drawable/ic_baseline_menu_24" />
@@ -72,9 +68,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/spacer_1x"
-                        android:layout_marginLeft="@dimen/spacer_1x"
                         android:layout_marginEnd="@dimen/spacer_1x"
-                        android:layout_marginRight="@dimen/spacer_1x"
                         android:layout_weight="1"
                         android:ellipsize="end"
                         android:gravity="start"
@@ -83,14 +77,14 @@
                         tools:text="@string/search_in_all" />
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:tint="?attr/colorAccent"
                         android:id="@+id/sorting_method"
                         android:layout_width="?attr/actionBarSize"
                         android:layout_height="?attr/actionBarSize"
-                        android:contentDescription="@string/action_sorting_method"
-                        android:padding="@dimen/spacer_2x"
                         android:layout_gravity="center_vertical|end"
                         android:background="?attr/selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/action_sorting_method"
+                        android:padding="@dimen/spacer_2x"
+                        android:tint="?attr/colorAccent"
                         app:srcCompat="@drawable/alphabetical_asc" />
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -100,7 +94,9 @@
                         android:layout_gravity="center_vertical|end"
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:padding="12dp"
-                        app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
+                        android:tooltipText="@string/manage_accounts"
+                        app:srcCompat="@drawable/ic_account_circle_grey_24dp"
+                        tools:targetApi="o" />
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>

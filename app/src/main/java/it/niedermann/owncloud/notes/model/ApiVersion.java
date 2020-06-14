@@ -11,8 +11,8 @@ public class ApiVersion implements Comparable<ApiVersion> {
     private static final Pattern NUMBER_EXTRACTION_PATTERN = Pattern.compile("[0-9]+");
 
     private String originalVersion = "?";
-    private int major = 0;
-    private int minor = 0;
+    private int major;
+    private int minor;
 
     public ApiVersion(String originalVersion, int major, int minor) {
         this(major, minor);

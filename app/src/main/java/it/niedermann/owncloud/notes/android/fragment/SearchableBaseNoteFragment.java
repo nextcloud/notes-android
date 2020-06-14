@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
@@ -254,7 +255,10 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
             int numberLine = layout.getLineForOffset(textUntilFirstOccurrence.length());
 
             if (numberLine >= 0) {
-                getScrollView().post(() -> getScrollView().smoothScrollTo(0, layout.getLineTop(numberLine)));
+                ScrollView scrollView = getScrollView();
+                if (scrollView != null) {
+                    scrollView.post(() -> scrollView.smoothScrollTo(0, layout.getLineTop(numberLine)));
+                }
             }
         }
     }

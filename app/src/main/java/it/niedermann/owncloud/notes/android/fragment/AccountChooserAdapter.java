@@ -21,7 +21,9 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 
-public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserViewHolder;
+
+public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserViewHolder> {
 
     @NonNull
     private final List<LocalAccount> localAccounts;
@@ -39,25 +41,24 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AccountChooserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_account_choose, parent, false);
         return new AccountChooserViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AccountChooserViewHolder holder, int position) {
         LocalAccount localAccount = localAccounts.get(position);
-        AccountChooserViewHolder accountChooserViewHolder = (AccountChooserViewHolder) holder;
-        accountChooserViewHolder.getAccountLayout().setOnClickListener((v) -> moveAccountListener.moveToAccount(localAccount));
+        holder.getAccountLayout().setOnClickListener((v) -> moveAccountListener.moveToAccount(localAccount));
 
         Glide
                 .with(context)
                 .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
-                .into(accountChooserViewHolder.getAvatar());
+                .into(holder.getAvatar());
 
-        accountChooserViewHolder.getUsername().setText(localAccount.getAccountName());
+        holder.getUsername().setText(localAccount.getAccountName());
     }
 
     @Override

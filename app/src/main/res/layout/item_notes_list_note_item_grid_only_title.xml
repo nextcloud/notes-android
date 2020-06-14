@@ -20,10 +20,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacer_2x"
-            android:layout_marginLeft="@dimen/spacer_2x"
             android:layout_marginTop="@dimen/spacer_2x"
             android:layout_marginEnd="@dimen/spacer_2x"
-            android:layout_marginRight="@dimen/spacer_2x"
             android:layout_marginBottom="@dimen/spacer_1x"
             android:layout_weight="1"
             android:hyphenationFrequency="full"
@@ -53,7 +51,6 @@
                 android:layout_gravity="center_vertical|end"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
                 android:baseline="14dp"
                 app:srcCompat="@drawable/ic_sync_blue_18dp" />
         </FrameLayout>

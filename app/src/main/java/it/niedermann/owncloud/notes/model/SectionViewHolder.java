@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.model;
 
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
 

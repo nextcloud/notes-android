@@ -5,9 +5,7 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:paddingStart="@dimen/spacer_1x"
-    android:paddingLeft="@dimen/spacer_1x"
-    android:paddingEnd="@dimen/spacer_1x"
-    android:paddingRight="@dimen/spacer_1x">
+    android:paddingEnd="@dimen/spacer_1x">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/navigationItemIcon"
@@ -23,7 +21,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacer_1x"
-        android:layout_marginLeft="@dimen/spacer_1x"
         android:layout_weight="1"
         android:ellipsize="end"
         android:lines="1"

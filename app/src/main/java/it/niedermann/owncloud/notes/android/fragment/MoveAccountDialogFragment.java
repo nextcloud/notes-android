@@ -23,6 +23,8 @@ import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
+import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserViewHolder;
+
 public class MoveAccountDialogFragment extends AppCompatDialogFragment implements MoveAccountListener {
     private MoveAccountListener moveAccountListener;
 
@@ -51,7 +53,7 @@ public class MoveAccountDialogFragment extends AppCompatDialogFragment implement
         NotesDatabase db = NotesDatabase.getInstance(getActivity());
         List<LocalAccount> accountsList = db.getAccounts();
 
-        RecyclerView.Adapter adapter = new AccountChooserAdapter(accountsList, this, requireActivity());
+        RecyclerView.Adapter<AccountChooserViewHolder> adapter = new AccountChooserAdapter(accountsList, this, requireActivity());
         binding.accountsList.setAdapter(adapter);
 
         return new BrandedAlertDialogBuilder(requireActivity())

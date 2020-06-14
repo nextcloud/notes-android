@@ -29,7 +29,6 @@
     <dimen name="widget_single_note_padding">10dp</dimen>
 
     <dimen name="widget_note_list_hdr_padding">2dp</dimen>
-    <dimen name="widget_note_list_padding">@dimen/spacer_1hx</dimen>
     <dimen name="widget_note_list_header_height">36dp</dimen>
     <dimen name="widget_note_list_icon_width">30dp</dimen>
 
@@ -38,6 +37,4 @@
 
     <dimen name="widget_note_list_fav_icon_width">26dp</dimen>
     <dimen name="widget_note_list_fav_icon_height">20dp</dimen>
-    <dimen name="header_padding">16dp</dimen>
-    <dimen name="avatar_size">64dp</dimen>
 </resources>
