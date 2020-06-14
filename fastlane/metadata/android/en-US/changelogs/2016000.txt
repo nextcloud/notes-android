@@ -1,0 +1,3 @@
+- 🔧 Support APIv1
+  - Title will only be auto generated when creating a new note
+  - Ability to change title manually
