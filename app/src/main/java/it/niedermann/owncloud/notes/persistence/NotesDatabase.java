@@ -62,6 +62,7 @@ import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACT
 import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.updateSingleNoteWidgets;
 import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
+import static it.niedermann.owncloud.notes.util.NoteUtil.generateNoteExcerpt;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
@@ -98,7 +99,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param note Note
      */
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
-        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()), 0);
+        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
         long id = addNote(accountId, dbNote);
         notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
@@ -125,7 +126,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         } else {
             values.put(key_status, DBStatus.VOID.getTitle());
             values.put(key_account_id, accountId);
-            values.put(key_excerpt, NoteUtil.generateNoteExcerpt(note.getContent()));
+            values.put(key_excerpt, generateNoteExcerpt(note.getContent(), note.getTitle()));
         }
         if (note.getRemoteId() > 0) {
             values.put(key_remote_id, note.getRemoteId());
@@ -518,22 +519,36 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return db.insert(table_category, null, values);
     }
 
+    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
+        return updateNoteAndSync(ssoAccount, localAccount, oldNote, newContent, null, callback);
+    }
+
     /**
      * Updates a single Note with a new content.
      * The title is derived from the new content automatically, and modified date as well as DBStatus are updated, too -- if the content differs to the state in the database.
      *
      * @param oldNote    Note to be changed
      * @param newContent New content. If this is <code>null</code>, then <code>oldNote</code> is saved again (useful for undoing changes).
+     * @param newTitle   New title. If this is <code>null</code>, then either the old title is reused (in case the note has been synced before) or a title is generated (in case it is a new note)
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
-    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
-        //debugPrintFullDB();
+    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         DBNote newNote;
         if (newContent == null) {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, oldNote.getExcerpt(), oldNote.getScrollY());
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(newContent), oldNote.getScrollY());
+            final String title;
+            if (newTitle != null) {
+                title = newTitle;
+            } else {
+                if (oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
+                    title = NoteUtil.generateNonEmptyNoteTitle(newContent, getContext());
+                } else {
+                    title = oldNote.getTitle();
+                }
+            }
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues(7);
@@ -545,7 +560,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_excerpt, newNote.getExcerpt());
         values.put(key_scroll_y, newNote.getScrollY());
         int rows = db.update(table_notes, values, key_id + " = ? AND (" + key_content + " != ? OR " + key_category + " != ?)", new String[]{String.valueOf(newNote.getId()), newNote.getContent(), newNote.getCategory()});
-        removeEmptyCategory(accountId);
+        removeEmptyCategory(localAccount.getId());
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if (rows > 0) {
             notifyWidgets();
@@ -597,7 +612,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_favorite, remoteNote.isFavorite());
         values.put(key_category, getCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
         values.put(key_etag, remoteNote.getEtag());
-        values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent()));
+        values.put(key_excerpt, generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
         String whereClause;
         String[] whereArgs;
         if (forceUnchangedDBNoteState != null) {
@@ -869,9 +884,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
                     Log.i(TAG, "Given API version is a valid JSON array but does not contain any valid API versions. Do not update database.");
                 }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("API version does contain a non-valid version.");
+                throw new IllegalArgumentException("API version does contain a non-valid version: " + apiVersion);
             } catch (JSONException e) {
-                throw new IllegalArgumentException("API version must contain be a JSON array.");
+                throw new IllegalArgumentException("API version must contain be a JSON array: " + apiVersion);
             }
         } else {
             Log.v(TAG, "Given API version is null. Do not update database");

@@ -24,6 +24,7 @@ public class LocalAccount {
     private String etag;
     private String capabilitiesETag;
     private long modified;
+    @Nullable
     private ApiVersion preferredApiVersion;
     @ColorInt
     private int color;
@@ -78,6 +79,7 @@ public class LocalAccount {
         this.modified = modified;
     }
 
+    @Nullable
     public ApiVersion getPreferredApiVersion() {
         return preferredApiVersion;
     }

@@ -192,6 +192,8 @@
     <string name="added_content">Added "%1$s"</string>
     <string name="shared_text_empty">Shared text was empty</string>
     <string name="append_to_note">Append to note</string>
+    <string name="change_note_title">Change note title</string>
+    <string name="menu_edit_title">Edit title</string>
     <string name="settings_branding">Branding</string>
     <string name="settings_gridview">Grid view 🆕</string>
     <string name="simple_security">Security</string>
@@ -245,8 +247,8 @@
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_escaped" translatable="false">\\`\\`\\`</string>
-    <string name="formatting_help_javascript_1" translatable="false">if (isAwesome){</string>
-    <string name="formatting_help_javascript_2" translatable="false">return true</string>
+    <string name="formatting_help_javascript_1" translatable="false">int getRandom() {</string>
+    <string name="formatting_help_javascript_2" translatable="false">return 4;</string>
     <string name="formatting_help_javascript_3" translatable="false">}</string>
     <string name="formatting_help_codefence_javascript_escaped" translatable="false">\\`\\`\\`javascript</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
@@ -302,4 +304,5 @@
     <string name="formatting_help_unsupported_body_2">Tables</string>
     <string name="formatting_help_unsupported_body_3">Images</string>
     <string name="formatting_help_unsupported_body_4">If you are interested in contributing support for one of those features, get in contact with us via GitHub or E-Mail.</string>
+    <string name="simple_other">Other</string>
 </resources>
