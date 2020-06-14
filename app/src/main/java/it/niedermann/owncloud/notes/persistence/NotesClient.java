@@ -189,7 +189,7 @@ public abstract class NotesClient {
             String supportedApiVersions = null;
             final AidlNetworkRequest.PlainHeader supportedApiVersionsHeader = response.getPlainHeader(HEADER_KEY_X_NOTES_API_VERSIONS);
             if (supportedApiVersionsHeader != null) {
-                supportedApiVersions = Objects.requireNonNull(supportedApiVersionsHeader.getValue()).replace("\"", "");
+                supportedApiVersions = "[" + Objects.requireNonNull(supportedApiVersionsHeader.getValue()) + "]";
             }
 
             // return these header fields since they should only be saved after successful processing the result!

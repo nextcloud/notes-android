@@ -861,9 +861,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
                     Log.i(TAG, "Given API version is a valid JSON array but does not contain any valid API versions. Do not update database.");
                 }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("API version does contain a non-valid version.");
+                throw new IllegalArgumentException("API version does contain a non-valid version: " + apiVersion);
             } catch (JSONException e) {
-                throw new IllegalArgumentException("API version must contain be a JSON array.");
+                throw new IllegalArgumentException("API version must contain be a JSON array: " + apiVersion);
             }
         } else {
             Log.v(TAG, "Given API version is null. Do not update database");
