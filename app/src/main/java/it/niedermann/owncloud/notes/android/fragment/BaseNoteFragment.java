@@ -199,7 +199,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
 
-        menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) >= 0);
+        menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
         menu.findItem(R.id.menu_delete).setVisible(!isNew);
     }
 
