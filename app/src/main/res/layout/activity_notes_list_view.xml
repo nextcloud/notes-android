@@ -85,6 +85,7 @@
                         android:contentDescription="@string/action_sorting_method"
                         android:padding="@dimen/spacer_2x"
                         android:tint="?attr/colorAccent"
+                        android:translationX="@dimen/spacer_1x"
                         app:srcCompat="@drawable/alphabetical_asc" />
 
                     <androidx.appcompat.widget.AppCompatImageView

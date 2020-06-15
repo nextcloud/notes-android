@@ -405,7 +405,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             }
             db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
             refreshLists();
-            updateSortMethodIcon();
+            updateSortMethodIcon(localAccount.getId());
         });
     }
 
@@ -693,22 +693,27 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         new LoadNotesListTask(localAccount.getId(), getApplicationContext(), callback, navigationSelection, query).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-        updateSortMethodIcon();
+        updateSortMethodIcon(localAccount.getId());
     }
 
     /**
      * Updates sorting method icon.
      */
-    private void updateSortMethodIcon() {
-        if (localAccount == null) {
-            return;
+    private void updateSortMethodIcon(long localAccountId) {
+        CategorySortingMethod method = db.getCategoryOrder(localAccountId, navigationSelection);
+        if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
+            activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
+            activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
+            }
+        } else {
+            activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
+            activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
+            }
         }
-        CategorySortingMethod method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
-        activityBinding.sortingMethod.setImageResource(
-                method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC
-                        ? R.drawable.alphabetical_asc
-                        : R.drawable.modification_desc
-        );
     }
 
     @Override
