@@ -9,19 +9,17 @@
     <string name="action_settings">Impostazioni</string>
     <string name="action_trashbin">Note eliminate</string>
     <string name="action_search">Cerca</string>
+    <string name="action_sorting_method">Metodo di ordinamento</string>
     <string name="simple_cancel">Annulla</string>
     <string name="simple_edit">Modifica</string>
     <string name="action_edit_save">Salva</string>
     <string name="simple_about">Informazioni</string>
-    <string name="simple_accounts">Account</string>
     <string name="simple_bold">Grassetto</string>
     <string name="simple_link">Collegamento</string>
     <string name="simple_italic">Corsivo</string>
     <string name="action_note_deleted">Eliminato %1$s</string>
     <string name="action_note_restored">Ripristinato %1$s</string>
     <string name="action_undo">Annulla</string>
-    <string name="action_drawer_open">apri navigazione</string>
-    <string name="action_drawer_close">chiudi navigazione</string>
     <string name="action_uncategorized">Senza categoria</string>
     <string name="menu_delete">Elimina</string>
     <string name="menu_change_category">Categoria</string>
@@ -57,9 +55,6 @@
     <string name="error_synchronization">Sincronizzazione non riuscita</string>
     <string name="error_json">L\'applicazione Note è attiva nel server?</string>
     <string name="error_no_network">Nessuna connessione di rete</string>
-    <string name="error_files_app">Hai installato l\'applicazione File?</string>
-    <string name="error_token_mismatch">Impossibile collegarsi all\'applicazione File.</string>
-    <string name="error_insufficient_storage">L\'archiviazione sul server è piena.</string>
     <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
 
     <!-- About -->
@@ -123,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Impossibile caricare l\'anteprima. Controlla se c\'è un elemento dell\'elenco numerato con due cifre senza contenuto.</string>
     <string name="simple_more">Altro</string>
     <string name="simple_move">Sposta</string>
-    <string name="error_files_app_version_too_old">La tua applicazione File è aggiornata?</string>
     <string name="checkbox_could_not_be_toggled">La casella di selezione non può essere commutata.</string>
     <string name="bulk_notes_deleted">Eliminate %1$d note</string>
     <string name="bulk_notes_restored">Ripristinate %1$d note</string>
@@ -154,7 +148,10 @@
     <string name="added_content">Aggiunto \"%1$s\"</string>
     <string name="shared_text_empty">Il testo condiviso era vuoto</string>
     <string name="append_to_note">Aggiungi a nota</string>
+    <string name="change_note_title">Cambia titolo della nota</string>
+    <string name="menu_edit_title">Modifica titolo</string>
     <string name="settings_branding">Marchio</string>
+    <string name="settings_gridview">Vista Griglia 🆕</string>
     <string name="simple_security">Sicurezza</string>
     <string name="simple_appearance">Aspetto</string>
     <string name="simple_synchronization">Sincronizzazione</string>
@@ -230,6 +227,9 @@
     <string name="formatting_help_structured_documents_body_2">Questa è un\'intestazione di terzo livello</string>
     <string name="formatting_help_structured_documents_body_3">Puoi utilizzare da un %1$s fino a sei %2$s per diverse dimensioni di intestazione.</string>
     <string name="formatting_help_structured_documents_body_4">Se vuoi citare qualcuno, utilizza il carattere %1$s prima della riga:</string>
+    <string name="formatting_help_structured_documents_body_5">L\'immaginazione è più importante della conoscenza. La conoscenza è limitata, l\'immaginazione abbraccia il mondo.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
     <string name="formatting_help_code_title">Codice</string>
     <string name="formatting_help_code_body_1">Esistono molti modi diversi per definire lo stile del codice con Markdown. Se hai blocchi di codice in linea, racchiudili tra apici inversi:</string>
     <string name="formatting_help_code_body_2">Markdown supporta anche raggruppamenti di codice, che consente a righe multiple senza indentazione:</string>
@@ -240,4 +240,5 @@
     <string name="formatting_help_unsupported_body_2">Tabelle</string>
     <string name="formatting_help_unsupported_body_3">Immagini</string>
     <string name="formatting_help_unsupported_body_4">Se sei interessato a fornire supporto per una di queste funzionalità, contattaci tramite GitHub o email.</string>
-</resources>
+    <string name="simple_other">Altro</string>
+    </resources>
