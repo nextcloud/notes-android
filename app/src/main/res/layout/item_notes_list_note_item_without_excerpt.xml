@@ -31,7 +31,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/list_item_background_selector"
         android:baselineAligned="false"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/spacer_1x"
+        android:paddingEnd="@null">
 
         <FrameLayout
             android:layout_width="wrap_content"
