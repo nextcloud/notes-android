@@ -53,7 +53,7 @@ public class MoveAccountDialogFragment extends AppCompatDialogFragment implement
         NotesDatabase db = NotesDatabase.getInstance(getActivity());
         List<LocalAccount> accountsList = db.getAccounts();
 
-        RecyclerView.Adapter<AccountChooserViewHolder> adapter = new AccountChooserAdapter(accountsList, this, requireActivity());
+        RecyclerView.Adapter<AccountChooserViewHolder> adapter = new AccountChooserAdapter(accountsList, this);
         binding.accountsList.setAdapter(adapter);
 
         return new BrandedAlertDialogBuilder(requireActivity())

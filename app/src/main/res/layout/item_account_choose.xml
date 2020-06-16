@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:orientation="horizontal"
+    android:gravity="center"
     android:padding="@dimen/spacer_3x">
 
     <FrameLayout
@@ -15,8 +16,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/accountItemAvatar"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
             android:contentDescription="@null"
             android:focusable="false"
             android:scaleType="center"
@@ -32,20 +33,32 @@
             tools:visibility="visible" />
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/accountItemLabel"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginStart="@dimen/spacer_2x"
         android:layout_marginEnd="@dimen/spacer_2x"
         android:layout_weight="1"
-        android:ellipsize="middle"
-        android:singleLine="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
-        android:textColor="?android:textColorPrimary"
-        tools:text="@tools:sample/full_names" />
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/accountName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:textAppearance="?attr/textAppearanceListItem"
+            tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/accountHost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="middle"
+            android:singleLine="true"
+            android:textAppearance="?attr/textAppearanceListItemSecondary"
+            tools:text="@tools:sample/full_names" />
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/delete"

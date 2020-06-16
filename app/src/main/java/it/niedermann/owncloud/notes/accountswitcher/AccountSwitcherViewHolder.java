@@ -24,7 +24,8 @@ public class AccountSwitcherViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(@NonNull LocalAccount localAccount, @NonNull Consumer<LocalAccount> onAccountClick) {
-        binding.accountItemLabel.setText(localAccount.getAccountName());
+        binding.accountName.setText(localAccount.getUserName());
+        binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())
                 .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
                 .error(R.drawable.ic_account_circle_grey_24dp)
