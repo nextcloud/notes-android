@@ -7,7 +7,7 @@
     android:background="?attr/selectableItemBackground"
     android:orientation="horizontal"
     android:gravity="center"
-    android:padding="@dimen/spacer_3x">
+    android:padding="@dimen/spacer_2x">
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacer_2x"
+        android:layout_marginStart="@dimen/spacer_1x"
         android:layout_marginEnd="@dimen/spacer_2x"
         android:layout_weight="1"
         android:orientation="vertical">

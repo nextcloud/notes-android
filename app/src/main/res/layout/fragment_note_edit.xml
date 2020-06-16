@@ -32,6 +32,8 @@
             android:gravity="top"
             android:inputType="textMultiLine|textCapSentences"
             android:padding="@dimen/spacer_2x"
+            android:paddingStart="@dimen/spacer_3x"
+            android:paddingEnd="@dimen/spacer_3x"
             android:textColor="@color/fg_default"
             android:theme="@style/textViewStyle"
             tools:text="@tools:sample/lorem/random" />
