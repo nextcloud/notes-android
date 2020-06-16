@@ -29,14 +29,11 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserVi
     private final List<LocalAccount> localAccounts;
     @NonNull
     private final MoveAccountListener moveAccountListener;
-    @NonNull
-    private final Context context;
 
-    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull MoveAccountListener moveAccountListener, @NonNull Context context) {
+    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull MoveAccountListener moveAccountListener) {
         super();
         this.localAccounts = localAccounts;
         this.moveAccountListener = moveAccountListener;
-        this.context = context;
     }
 
     @NonNull
@@ -48,17 +45,7 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserVi
 
     @Override
     public void onBindViewHolder(@NonNull AccountChooserViewHolder holder, int position) {
-        LocalAccount localAccount = localAccounts.get(position);
-        holder.getAccountLayout().setOnClickListener((v) -> moveAccountListener.moveToAccount(localAccount));
-
-        Glide
-                .with(context)
-                .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
-                .error(R.drawable.ic_account_circle_grey_24dp)
-                .apply(RequestOptions.circleCropTransform())
-                .into(holder.getAvatar());
-
-        holder.getUsername().setText(localAccount.getAccountName());
+        holder.bind(localAccounts.get(position), moveAccountListener);
     }
 
     @Override
@@ -74,16 +61,17 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserVi
             binding = ItemAccountChooseBinding.bind(view);
         }
 
-        private LinearLayout getAccountLayout() {
-            return binding.accountLayout;
-        }
+        public void bind(LocalAccount localAccount, MoveAccountListener moveAccountListener) {
+            Glide
+                    .with(binding.accountItemAvatar.getContext())
+                    .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
+                    .error(R.drawable.ic_account_circle_grey_24dp)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(binding.accountItemAvatar);
 
-        private ImageView getAvatar() {
-            return binding.accountItemAvatar;
-        }
-
-        private TextView getUsername() {
-            return binding.accountItemLabel;
+            binding.accountLayout.setOnClickListener((v) -> moveAccountListener.moveToAccount(localAccount));
+            binding.accountName.setText(localAccount.getUserName());
+            binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         }
     }
 
