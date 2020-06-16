@@ -37,12 +37,12 @@
                 android:id="@+id/home_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacer_1x"
-                android:layout_marginTop="@dimen/design_appbar_elevation"
-                android:layout_marginEnd="@dimen/spacer_1x"
-                android:layout_marginBottom="@dimen/design_appbar_elevation"
+                android:layout_marginStart="@dimen/spacer_2x"
+                android:layout_marginTop="@dimen/spacer_1hx"
+                android:layout_marginEnd="@dimen/spacer_2x"
+                android:layout_marginBottom="@dimen/spacer_1hx"
                 app:cardCornerRadius="@dimen/spacer_1x"
-                app:cardElevation="6dp"
+                app:cardElevation="2dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
@@ -55,7 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackgroundBorderless"
-                        android:paddingStart="@dimen/spacer_1x"
+                        android:paddingStart="@dimen/spacer_2x"
                         android:paddingTop="@dimen/spacer_2x"
                         android:paddingEnd="@dimen/spacer_1x"
                         android:paddingBottom="@dimen/spacer_2x"
