@@ -13,15 +13,12 @@
     <string name="simple_edit">Uredi</string>
     <string name="action_edit_save">Shrani</string>
     <string name="simple_about">O programu</string>
-    <string name="simple_accounts">Računi</string>
     <string name="simple_bold">Krepko</string>
     <string name="simple_link">Povezava</string>
     <string name="simple_italic">Ležeče</string>
     <string name="action_note_deleted">Izbrisano %1$s</string>
     <string name="action_note_restored">Obnovljeno %1$s</string>
     <string name="action_undo">Razveljavi</string>
-    <string name="action_drawer_open">odpri iskalnik</string>
-    <string name="action_drawer_close">zapri iskalnik</string>
     <string name="action_uncategorized">Neopredeljeno</string>
     <string name="menu_delete">Izbriši</string>
     <string name="menu_change_category">Kategorija</string>
@@ -54,9 +51,6 @@
     <string name="error_synchronization">Usklajevanje je spodletelo</string>
     <string name="error_json">Ali je program Notes na strežniku omogočen?</string>
     <string name="error_no_network">Ni omrežne povezave</string>
-    <string name="error_files_app">Ali je program za upravljanje datotek »files« nameščen?</string>
-    <string name="error_token_mismatch">Ni se mogoče povezati s programom Datoteke.</string>
-    <string name="error_insufficient_storage">Shramba strežnika je polna.</string>
     <string name="error_unknown">Prišlo je do neznane napake.</string>
 
     <!-- About -->
@@ -120,7 +114,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Predogleda ni mogoče naložiti. Preverite, ali je morda vpisan  dvoštevilčen predmet seznama brez vsebine.</string>
     <string name="simple_more">Več</string>
     <string name="simple_move">Premakni</string>
-    <string name="error_files_app_version_too_old">Ali je nameščena zadnja različica programa?</string>
     <string name="checkbox_could_not_be_toggled">Izbirnega polja ni mogoče preklopiti.</string>
     <string name="bulk_notes_deleted">Izbrisane zabeležke: %1$d</string>
     <string name="bulk_notes_restored">Obnovljene zabeležke: %1$d</string>
@@ -197,4 +190,5 @@
     <string name="formatting_help_code_title">Šifra</string>
     <string name="formatting_help_unsupported_title">Nepodprto</string>
     <string name="formatting_help_unsupported_body_3">Slike</string>
+    <string name="simple_other">Drugo</string>
     </resources>
