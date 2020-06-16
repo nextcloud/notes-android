@@ -41,8 +41,9 @@
                 android:layout_marginTop="@dimen/design_appbar_elevation"
                 android:layout_marginEnd="@dimen/spacer_1x"
                 android:layout_marginBottom="@dimen/design_appbar_elevation"
+                app:cardBackgroundColor="@color/appbar"
                 app:cardCornerRadius="@dimen/spacer_1x"
-                app:cardElevation="6dp"
+                app:cardElevation="2dp"
                 app:strokeWidth="0dp">
 
                 <LinearLayout
