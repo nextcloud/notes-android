@@ -18,4 +18,6 @@
     <color name="fg_contrast">#000000</color>
 
     <color name="category_background">@color/defaultBrand</color>
+
+    <color name="appbar">#1e1e1e</color>
 </resources>
