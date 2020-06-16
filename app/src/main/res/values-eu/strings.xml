@@ -13,15 +13,12 @@
     <string name="simple_edit">Editatu</string>
     <string name="action_edit_save">Gorde</string>
     <string name="simple_about">Honi buruz</string>
-    <string name="simple_accounts">Kontuak</string>
     <string name="simple_bold">Lodia</string>
     <string name="simple_link">Esteka</string>
     <string name="simple_italic">Etzana</string>
     <string name="action_note_deleted">%1$s ezabatuta</string>
     <string name="action_note_restored">%1$szaharberrituta</string>
     <string name="action_undo">Desegin</string>
-    <string name="action_drawer_open">ireki nabigazioa</string>
-    <string name="action_drawer_close">itxi nabigazioa</string>
     <string name="action_uncategorized">Kategoria gabe</string>
     <string name="menu_delete">Ezabatu</string>
     <string name="menu_change_category">Kategoria</string>
@@ -54,9 +51,6 @@
     <string name="error_synchronization">Sinkronizazioak huts egin du</string>
     <string name="error_json">Notes aplikazioa zerbitzarian aktibatuta dago?</string>
     <string name="error_no_network">Ez dago sare konexiorik</string>
-    <string name="error_files_app">Files aplikazioa instalatu duzu?</string>
-    <string name="error_token_mismatch">Ezin da fitxategi aplikazioarekin konektatu.</string>
-    <string name="error_insufficient_storage">Zure zerbitzariaren biltegia beteta dago.</string>
     <string name="error_unknown">Errore ezezagun bat gertatu da.</string>
 
     <!-- About -->
@@ -120,7 +114,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Ezin izan da aurrebista kargatu. Egiaztatu bi digitu dituen edukirik gabeko elementuren bat dagoen zerrendan</string>
     <string name="simple_more">Gehiago</string>
     <string name="simple_move">Mugitu</string>
-    <string name="error_files_app_version_too_old">Zure files aplikazioaren bertsioa egunean dago?</string>
     <string name="checkbox_could_not_be_toggled">Egiaztapen-laukiaren egoera ezin izan da aldatu.</string>
     <string name="bulk_notes_deleted"> %1$d ohar ezabatu dira</string>
     <string name="bulk_notes_restored">%1$d ohar leheneratu dira</string>
@@ -194,4 +187,5 @@
     <string name="formatting_help_checkboxes_title">Kontrol-laukiak</string>
     <string name="formatting_help_unsupported_title">Ez da onartzen</string>
     <string name="formatting_help_unsupported_body_3">Irudiak</string>
+    <string name="simple_other">Beste bat</string>
     </resources>

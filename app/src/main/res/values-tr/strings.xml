@@ -9,19 +9,17 @@
     <string name="action_settings">Ayarlar</string>
     <string name="action_trashbin">Silinmiş notlar</string>
     <string name="action_search">Arama</string>
+    <string name="action_sorting_method">Sıralama yöntemi</string>
     <string name="simple_cancel">İptal</string>
     <string name="simple_edit">Düzenle</string>
     <string name="action_edit_save">Kaydet</string>
     <string name="simple_about">Hakkında</string>
-    <string name="simple_accounts">Hesaplar</string>
     <string name="simple_bold">Koyu</string>
     <string name="simple_link">Bağlantı</string>
     <string name="simple_italic">Yatık</string>
     <string name="action_note_deleted">%1$s silindi</string>
     <string name="action_note_restored">%1$s geri yüklendi</string>
     <string name="action_undo">Geri al</string>
-    <string name="action_drawer_open">gezinmeyi aç</string>
-    <string name="action_drawer_close">gezinmeyi kapat</string>
     <string name="action_uncategorized">Kategorisiz</string>
     <string name="menu_delete">Sil</string>
     <string name="menu_change_category">Kategori</string>
@@ -57,9 +55,6 @@
     <string name="error_synchronization">Eşitlenemedi</string>
     <string name="error_json">Notlar uygulaması sunucu üzerinde etkinleştirilmiş mi?</string>
     <string name="error_no_network">Ağ bağlantısı yok</string>
-    <string name="error_files_app">Dosyalar uygulamasını kurdunuz mu?</string>
-    <string name="error_token_mismatch">Dosyalar uygulaması ile bağlantı kurulamadı.</string>
-    <string name="error_insufficient_storage">Sunucu depolama alanı doldu.</string>
     <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
 
     <!-- About -->
@@ -123,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Ön izleme yüklenemedi. Lütfen içeriği olmayan iki haneli rakamdan oluşan bir liste ögesi bulunduğundan emin olun.</string>
     <string name="simple_more">Daha Fazla</string>
     <string name="simple_move">Taşı</string>
-    <string name="error_files_app_version_too_old">Dosyalar uygulamanızın sürümü güncel mi?</string>
     <string name="checkbox_could_not_be_toggled">İşaret kutusunun işareti değiştirilemedi.</string>
     <string name="bulk_notes_deleted">%1$d not silindi</string>
     <string name="bulk_notes_restored">%1$dnot geri yüklendi</string>
@@ -154,7 +148,10 @@
     <string name="added_content">\"%1$s\" eklendi</string>
     <string name="shared_text_empty">Paylaşılan metin boş</string>
     <string name="append_to_note">Nota ekle</string>
+    <string name="change_note_title">Not başlığını değiştir</string>
+    <string name="menu_edit_title">Başlığı düzenle</string>
     <string name="settings_branding">Markalama</string>
+    <string name="settings_gridview">Tablo görünümü 🆕</string>
     <string name="simple_security">Güvenlik</string>
     <string name="simple_appearance">Görünüm</string>
     <string name="simple_synchronization">Eşitleme</string>
@@ -230,6 +227,9 @@
     <string name="formatting_help_structured_documents_body_2">Bu üçüncü düzey bir başlık</string>
     <string name="formatting_help_structured_documents_body_3">Farklı başlık boyutları için bir %1$s ile altı %2$s arasında seçim yapabilirsiniz.</string>
     <string name="formatting_help_structured_documents_body_4">Birinden alıntı yapmak isterseniz satırdan önce %1$s karakterini kullanın:</string>
+    <string name="formatting_help_structured_documents_body_5">Hayal gücü bilgiden daha önemlidir. Bilgi sınırlıyken, hayal gücü tüm dünyayı kapsar.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
     <string name="formatting_help_code_title">Kod</string>
     <string name="formatting_help_code_body_1">Markdown ile kod yazmanın birçok farklı yolu vardır. Satır arası kod bloklarınız varsa, bunları ters tırnaklar arasında yazın:</string>
     <string name="formatting_help_code_body_2">Markdown ayrıca kod çiti olarak adlandırılan ve girinti olmadan birden fazla satıra izin veren bir şeyi destekler:</string>
@@ -240,4 +240,5 @@
     <string name="formatting_help_unsupported_body_2">Tablolar</string>
     <string name="formatting_help_unsupported_body_3">Görseller</string>
     <string name="formatting_help_unsupported_body_4">Bu özelliklerden biri için destek olmak isterseniz, GitHub ya da e-posta üzerinden bizimle görüşün.</string>
-</resources>
+    <string name="simple_other">Diğer</string>
+    </resources>

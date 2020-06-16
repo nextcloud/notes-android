@@ -9,19 +9,17 @@
     <string name="action_settings">Axustes</string>
     <string name="action_trashbin">Notas eliminadas</string>
     <string name="action_search">Buscar</string>
+    <string name="action_sorting_method">Método de ordenación</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Gardar</string>
     <string name="simple_about">Sobre</string>
-    <string name="simple_accounts">Contas</string>
     <string name="simple_bold">Negra</string>
     <string name="simple_link">Ligazón</string>
     <string name="simple_italic">Itálica</string>
     <string name="action_note_deleted">Eliminouse %1$s</string>
     <string name="action_note_restored">Restaurouse %1$s</string>
     <string name="action_undo">Desfacer</string>
-    <string name="action_drawer_open">abrir a navegación</string>
-    <string name="action_drawer_close">pechar a navegación</string>
     <string name="action_uncategorized">Sen categorizar</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_change_category">Categoría</string>
@@ -57,9 +55,6 @@
     <string name="error_synchronization">Produciuse un fallo na sincronización</string>
     <string name="error_json">Está activada a apli «Notes» no servidor?</string>
     <string name="error_no_network">Sen conexión de rede</string>
-    <string name="error_files_app">Instalou a apli de ficheiros?</string>
-    <string name="error_token_mismatch">Non é posíbel conectar coa apli de ficheiros</string>
-    <string name="error_insufficient_storage">O seu almacenamento no servidor está cheo.</string>
     <string name="error_unknown">Produciuse un erro descoñecido.</string>
 
     <!-- About -->
@@ -123,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Non foi posíbel cargar a vista previa. Verifique se hai un elemento da lista numerada de dous díxitos sen contido.</string>
     <string name="simple_more">Máis</string>
     <string name="simple_move">Mover</string>
-    <string name="error_files_app_version_too_old">Está actualizada a súa apli de ficheiros?</string>
     <string name="checkbox_could_not_be_toggled">Non foi posíbel cambiar a caixa de selección.</string>
     <string name="bulk_notes_deleted">Foron eliminadas %1$d notas</string>
     <string name="bulk_notes_restored">Foron restauradas %1$d notas</string>
@@ -154,7 +148,10 @@
     <string name="added_content">Engadido «%1$s»</string>
     <string name="shared_text_empty">O texto compartido estaba baleiro</string>
     <string name="append_to_note">Anexo á nota</string>
+    <string name="change_note_title">Cambiar o título da nota</string>
+    <string name="menu_edit_title">Editar o título</string>
     <string name="settings_branding">Xestión da marca</string>
+    <string name="settings_gridview">Ver como grella 🆕</string>
     <string name="simple_security">Seguridade</string>
     <string name="simple_appearance">Aparencia</string>
     <string name="simple_synchronization">Sincronización</string>
@@ -197,8 +194,51 @@
         <item quantity="other">%d seleccionados</item>
     </plurals>
 
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">«%1$s»</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">«%1$s»</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formatado baseado no contexto</string>
+    <string name="formatting_help_cbf_body_1">Un dos principais obxectivos de deseño da aplicación Notes é fornecer unha ferramenta sen distracción. Aínda que poderá formatar os seus textos con Markdown. Para varios dos exemplos mencionados a continuación, pode utilizar atallos de teclado para poder formatar as súas notas sen escribir os códigos de embaixo.</string>
+    <string name="formatting_help_cbf_body_2">Só ten que seleccionar un intervalo de texto ou tocar no cursor en calquera posición e obterá un menú emerxente que contén xunto ás entradas predeterminadas %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
+
     <string name="formatting_help_text_title">Texto</string>
+    <string name="formatting_help_text_body">É moi sinxelo facer algunhas palabras en %1$snegriña%1$s e outras palabras en %2$scursiva%2$s con Markdown. Pode %3$sriscar%3$s algunhas palabras e incluso [ligar ao Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Listas</string>
+    <string name="formatting_help_lists_body_1">Ás veces quere listas numeradas:</string>
+    <string name="formatting_help_lists_body_2">Un</string>
+    <string name="formatting_help_lists_body_3">Dous</string>
+    <string name="formatting_help_lists_body_4">Tres</string>
+    <string name="formatting_help_lists_body_5">Ás veces quere viñetas:</string>
+    <string name="formatting_help_lists_body_6">Comece unha liña cun guión</string>
+    <string name="formatting_help_lists_body_7">E se ten subniveis, poña dous espazos antes do guión ou da estrela:</string>
+    <string name="formatting_help_lists_body_8">Como isto</string>
+    <string name="formatting_help_lists_body_9">E isto</string>
+
     <string name="formatting_help_checkboxes_title">Caixas de verificación</string>
+    <string name="formatting_help_checkboxes_body_1">Para crear unha caixa de verificación, use unha lista seguida de parénteses</string>
+    <string name="formatting_help_checkboxes_body_2">Elemento 1</string>
+    <string name="formatting_help_checkboxes_body_3">Elemento 2</string>
+
+    <string name="formatting_help_structured_documents_title">Documentos estruturados</string>
+    <string name="formatting_help_structured_documents_body_1">Ás veces é útil ter diferentes niveis de títulos para estruturar os seus documentos. Comece as liñas con %1$s para crear títulos. Múltiples %2$s nunha liña indican tamaños de cabeceira máis pequenos.</string>
+    <string name="formatting_help_structured_documents_body_2">Este é un título de terceiro nivel</string>
+    <string name="formatting_help_structured_documents_body_3">Pode empregar un %1$s ata  %2$s seis para diferentes tamaños de cabeceira.</string>
+    <string name="formatting_help_structured_documents_body_4">Se desexa citar a alguén, use o carácter %1$s antes da liña:</string>
+    <string name="formatting_help_structured_documents_body_5">A imaxinación é máis importante que o coñecemento. O coñecemento é limitado. A imaxinación rodea o mundo.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Código</string>
+    <string name="formatting_help_code_body_1">Hai moitos xeitos diferentes de estilo de código con Markdown. Se ten bloques de código en liña, envólvaos en remates «```» (símbolos acento grave):</string>
+    <string name="formatting_help_code_body_2">Markdown tamén admite algo chamado «código cercado», que permite múltiples liñas sen sangría:</string>
+    <string name="formatting_help_code_body_3">E se quere utilizar o destaque de sintaxe, inclúa a linguaxe:</string>
+
     <string name="formatting_help_unsupported_title">Non admitido</string>
+    <string name="formatting_help_unsupported_body_1">Aínda que tentamos mellorar continuamente a compatibilidade do Markdown, hai algunhas funcións que aínda non son compatíbeis con Notes:</string>
+    <string name="formatting_help_unsupported_body_2">Táboas</string>
     <string name="formatting_help_unsupported_body_3">Imaxes</string>
+    <string name="formatting_help_unsupported_body_4">Se estás interesado en colaborar nalgunha destas funcións, póñase en contacto connosco a través do GitHub ou correo-e</string>
+    <string name="simple_other">Outro</string>
     </resources>
