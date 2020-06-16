@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="BaseTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
         <item name="colorPrimary">@color/primary</item>
@@ -7,6 +7,8 @@
         <item name="android:actionModeBackground">?attr/colorPrimary</item>
         <item name="colorControlNormal">?attr/colorAccent</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeStyle">@style/actionModeStyle</item>
+        <item name="toolbarStyle">@style/toolbarStyle</item>
     </style>
 
     <style name="AppTheme" parent="BaseTheme" />
@@ -14,6 +16,17 @@
     <style name="textViewStyle">
         <item name="colorAccent">@color/cursorHandles</item>
         <item name="android:textColorHighlight">@color/defaultTextHighlightBackground</item>
+    </style>
+
+    <style name="toolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="android:paddingStart">@dimen/spacer_1x</item>
+        <item name="android:paddingEnd">@null</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="actionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
+        <item name="android:paddingStart">@dimen/spacer_1x</item>
+        <item name="android:paddingEnd">@null</item>
     </style>
 
     <style name="fab">

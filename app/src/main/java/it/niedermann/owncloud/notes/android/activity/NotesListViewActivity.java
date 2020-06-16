@@ -630,7 +630,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                     getResources().getDimensionPixelSize(R.dimen.spacer_5x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_3x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_1x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_1x)
+                    getResources().getDimensionPixelSize(R.dimen.spacer_2x)
             ));
         } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
