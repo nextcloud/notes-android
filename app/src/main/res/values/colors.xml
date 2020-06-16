@@ -29,6 +29,8 @@
     <color name="category_background">@color/bg_normal</color>
     <color name="category_border">@color/defaultBrand</color>
 
+    <color name="appbar">@android:color/white</color>
+
     <!-- Dark Theme -->
     <!-- Defined here until appwidgets can use night/colors -->
     <color name="fg_default_dark_theme">#eeeeee</color>
