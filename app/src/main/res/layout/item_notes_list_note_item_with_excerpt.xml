@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/list_item_background_selector"
         android:baselineAligned="false"
-        android:paddingStart="@dimen/spacer_1x"
+        android:paddingStart="@dimen/activity_padding"
         android:paddingEnd="@null">
 
         <FrameLayout
