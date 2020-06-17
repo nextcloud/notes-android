@@ -61,7 +61,7 @@
 
     <!-- URLs -->
     <string name="url_source" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes</string>
-    <string name="url_issues" translatable="false">https://github.com/stefan-niedermann/nextcloud-deck/issues/new/choose</string>
+    <string name="url_issues" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes/issues/new/choose</string>
     <string name="url_license" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes/blob/master/LICENSE</string>
     <string name="url_translations" translatable="false">https://www.transifex.com/nextcloud/nextcloud/</string>
 
