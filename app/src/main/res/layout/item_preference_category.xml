@@ -4,7 +4,9 @@
     android:id="@android:id/title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="56dp"
+    android:layout_marginStart="56dp"
+    android:layout_marginEnd="0dp"
+    android:paddingStart="@dimen/spacer_activity_sides"
     android:paddingTop="@dimen/spacer_3x"
     android:paddingEnd="0dp"
     tools:text="@tools:sample/lorem" />
