@@ -11,7 +11,7 @@
 
     <dimen name="avatar_size">36dp</dimen>
 
-    <dimen name="activity_padding">@dimen/spacer_1x</dimen>
+    <dimen name="spacer_activity_sides">0dp</dimen>
 
     <!-- Drawer header -->
     <dimen name="drawer_header_height">100dp</dimen>

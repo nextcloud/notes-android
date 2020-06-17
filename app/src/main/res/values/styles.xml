@@ -20,8 +20,8 @@
     </style>
 
     <style name="appBarLayoutStyle" parent="@style/Widget.Design.AppBarLayout">
-        <item name="android:paddingStart">@dimen/activity_padding</item>
-        <item name="android:paddingEnd">@dimen/activity_padding</item>
+        <item name="android:paddingStart">@dimen/spacer_activity_sides</item>
+        <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
     </style>
 
     <style name="toolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
@@ -29,8 +29,8 @@
     </style>
 
     <style name="actionModeStyle" parent="@style/Widget.AppCompat.ActionMode">
-        <item name="android:paddingStart">@dimen/activity_padding</item>
-        <item name="android:paddingEnd">@dimen/activity_padding</item>
+        <item name="android:paddingStart">@dimen/spacer_activity_sides</item>
+        <item name="android:paddingEnd">@dimen/spacer_activity_sides</item>
     </style>
 
     <style name="fab">

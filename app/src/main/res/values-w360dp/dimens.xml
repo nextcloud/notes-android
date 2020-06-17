@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spacer_activity_sides">@dimen/spacer_1x</dimen>
+</resources>
