@@ -243,4 +243,6 @@
     <string name="formatting_help_unsupported_body_3">Obrázky</string>
     <string name="formatting_help_unsupported_body_4">Pokud chcete se chtěli zapojit a přidat podporu pro tyto funkce, obraťte se na nás prostřednictvím portálu GitHub nebo e-mailu.</string>
     <string name="simple_other">Ostatní</string>
-    </resources>
+    <string name="sort_last_modified">Seřadit podle data změny</string>
+    <string name="sort_alphabetically">Seřadit abecedně</string>
+</resources>
