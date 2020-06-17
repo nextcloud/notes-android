@@ -241,4 +241,6 @@
     <string name="formatting_help_unsupported_body_3">Imaxes</string>
     <string name="formatting_help_unsupported_body_4">Se estás interesado en colaborar nalgunha destas funcións, póñase en contacto connosco a través do GitHub ou correo-e</string>
     <string name="simple_other">Outro</string>
-    </resources>
+    <string name="sort_last_modified">Ordenar por data de modificación</string>
+    <string name="sort_alphabetically">Ordenar alfabéticamente</string>
+</resources>

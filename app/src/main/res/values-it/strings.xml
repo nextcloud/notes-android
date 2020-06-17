@@ -241,4 +241,6 @@
     <string name="formatting_help_unsupported_body_3">Immagini</string>
     <string name="formatting_help_unsupported_body_4">Se sei interessato a fornire supporto per una di queste funzionalità, contattaci tramite GitHub o email.</string>
     <string name="simple_other">Altro</string>
-    </resources>
+    <string name="sort_last_modified">Ordina per data di modifica</string>
+    <string name="sort_alphabetically">Ordine alfabetico</string>
+</resources>

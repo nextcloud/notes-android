@@ -61,7 +61,7 @@
     <string name="about_version_title">Version</string>
     <string name="about_version">Vous utilisez actuellement la &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Responsable</string>
-    <string name="about_developers_title">Developpeurs</string>
+    <string name="about_developers_title">Développeurs</string>
     <string name="about_translators_title">Traducteurs</string>
     <string name="about_translators_transifex">Communauté Nextcloud sur &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">Testeurs</string>
@@ -71,7 +71,7 @@
     <string name="about_issues">Vous pouvez signaler les bugs ainsi que vos propositions ou demandes d\'amélioration dans le gestionnaire de bugs de GitHub : &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traduire</string>
     <string name="about_translate">Rejoignez l\'équipe Nextcloud sur Transifex et aidez-nous à traduire cette application : &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">Licence de l\'App</string>
+    <string name="about_app_license_title">Licence de l\'application</string>
     <string name="about_app_license">Cette application est licenciée selon les termes de la GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Voir la licence</string>
     <string name="about_icons_disclaimer_title">Icônes</string>
@@ -144,7 +144,7 @@
     <string name="error_dialog_contact_us">N\'hésitez pas à nous contacter si les problèmes persistent. Vous trouverez nos coordonnées dans la section : À propos, de la barre latérale.</string>
     <string name="error_dialog_we_need_info">Nous avons besoin des informations techniques suivantes pour pouvoir vous aider :</string>
     <string name="error_dialog_server_app_enabled">Veuillez vérifier que vous avez installé et activé l\'application \"Notes\" sur votre serveur.</string>
-    <string name="error_dialog_redirect">Votre serveur a répondu avec le code HTTP 302, ce qui implique que vous n\'avez pas installé l\'application Notes sur votre serveur or que quelque chose est mal configuré. Ça peut être dû par des modifications du fichier .htaccess or par une autre application Nextcloud comme OID Client.</string>
+    <string name="error_dialog_redirect">Votre serveur a répondu avec le code HTTP 302, ce qui implique que vous n\'avez pas installé l\'application Notes sur votre serveur ou que quelque chose est mal configuré. Cela peut être dû à des modifications du fichier .htaccess or à une autre application Nextcloud comme OID Client.</string>
     <string name="added_content">\"%1$s\" ajouté</string>
     <string name="shared_text_empty">Le texte partagé est vide</string>
     <string name="append_to_note">Ajouter à la note</string>
@@ -241,4 +241,6 @@
     <string name="formatting_help_unsupported_body_3">Images</string>
     <string name="formatting_help_unsupported_body_4">Si vous êtes intéressés pour contribuer à la prise en charge d\'une de ces fonctionnalités, entrez en contact avec nous via GitHub ou courriel.</string>
     <string name="simple_other">Divers</string>
-    </resources>
+    <string name="sort_last_modified">Tirer par date de dernière modification</string>
+    <string name="sort_alphabetically">Trier alphabétiquement</string>
+</resources>

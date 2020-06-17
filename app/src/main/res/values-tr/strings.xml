@@ -241,4 +241,6 @@
     <string name="formatting_help_unsupported_body_3">Görseller</string>
     <string name="formatting_help_unsupported_body_4">Bu özelliklerden biri için destek olmak isterseniz, GitHub ya da e-posta üzerinden bizimle görüşün.</string>
     <string name="simple_other">Diğer</string>
-    </resources>
+    <string name="sort_last_modified">Değiştirme tarihine göre sırala</string>
+    <string name="sort_alphabetically">Alfabeye göre sırala</string>
+</resources>

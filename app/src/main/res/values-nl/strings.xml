@@ -26,6 +26,9 @@
     <string name="menu_preview">Voorbeeldweergave</string>
     <string name="menu_share">Delen</string>
 
+    <string name="search_in_category">Zoeken in %1$s</string>
+    <string name="search_in_all">Zoek in alle notities</string>
+
     <string name="change_category_title">Kies een categorie
 </string>
 
@@ -149,8 +152,11 @@
     <string name="simple_security">Beveiliging</string>
     <string name="simple_appearance">Uiterlijk</string>
     <string name="simple_synchronization">Synchronisatie</string>
+    <string name="simple_behavior">Gedrag</string>
     <string name="share_multiple">Deel de inhoud van %1$d notities</string>
     <string name="manage_accounts">Accounts beheren </string>
+    <string name="action_formatting_help">Formatteren</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wbewerkmodus</item>

@@ -111,12 +111,13 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
             } else {
                 icon.setVisibility(View.GONE);
             }
-            view.setBackgroundColor(isSelected ? view.getResources().getColor(R.color.bg_highlighted) : Color.TRANSPARENT);
             int textColor = isSelected ? mainColor : view.getResources().getColor(R.color.fg_default);
 
             name.setTextColor(textColor);
             count.setTextColor(textColor);
             icon.setColorFilter(isSelected ? textColor : 0);
+
+            view.setSelected(isSelected);
         }
     }
 
