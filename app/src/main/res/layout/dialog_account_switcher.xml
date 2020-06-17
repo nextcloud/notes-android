@@ -6,61 +6,70 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/accountLayout"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="@dimen/spacer_3x">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/currentAccountItemAvatar"
-            android:layout_width="@dimen/avatar_size"
-            android:layout_height="@dimen/avatar_size"
-            android:contentDescription="@null"
-            android:focusable="false"
-            android:scaleType="center"
-            app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
-
+        android:paddingStart="@dimen/spacer_activity_sides"
+        android:paddingEnd="@dimen/spacer_activity_sides">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/accountLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacer_2x"
-            android:layout_marginEnd="@dimen/spacer_2x"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacer_2x"
+            android:paddingStart="@dimen/spacer_1x"
+            android:paddingEnd="@dimen/spacer_1x">
 
-            <TextView
-                android:id="@+id/accountName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:singleLine="true"
-                android:textAppearance="?attr/textAppearanceListItem"
-                tools:text="@tools:sample/full_names" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/currentAccountItemAvatar"
+                android:layout_width="@dimen/avatar_size"
+                android:layout_height="@dimen/avatar_size"
+                android:contentDescription="@null"
+                android:focusable="false"
+                android:scaleType="center"
+                app:srcCompat="@drawable/ic_account_circle_grey_24dp" />
 
-            <TextView
-                android:id="@+id/accountHost"
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:singleLine="true"
-                android:textAppearance="?attr/textAppearanceListItemSecondary"
-                tools:text="@tools:sample/full_names" />
+                android:layout_marginStart="@dimen/spacer_1x"
+                android:layout_marginEnd="@dimen/spacer_2x"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/accountName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:textAppearance="?attr/textAppearanceListItem"
+                    tools:text="@tools:sample/full_names" />
+
+                <TextView
+                    android:id="@+id/accountHost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="middle"
+                    android:singleLine="true"
+                    android:textAppearance="?attr/textAppearanceListItemSecondary"
+                    tools:text="@tools:sample/full_names" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/check"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:contentDescription="@null"
+                android:focusable="false"
+                android:scaleType="center"
+                app:srcCompat="@drawable/check" />
         </LinearLayout>
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/check"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:contentDescription="@null"
-            android:focusable="false"
-            android:scaleType="center"
-            app:srcCompat="@drawable/check" />
-    </LinearLayout>
+    </FrameLayout>
 
     <View
         android:layout_width="match_parent"
@@ -78,20 +87,19 @@
         tools:itemCount="3"
         tools:listitem="@layout/item_account_choose" />
 
+
     <LinearLayout
         android:id="@+id/add_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/spacer_3x"
-        android:paddingTop="@dimen/spacer_1x"
-        android:paddingEnd="@dimen/spacer_3x"
-        android:paddingBottom="@dimen/spacer_1x">
+        android:padding="@dimen/spacer_1x">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="36dp"
             android:layout_height="36dp"
+            android:layout_marginStart="@dimen/spacer_activity_sides"
             android:contentDescription="@null"
             android:focusable="false"
             android:scaleType="center"
@@ -117,14 +125,12 @@
         android:layout_marginBottom="@dimen/spacer_2x"
         android:background="?attr/selectableItemBackground"
         android:orientation="horizontal"
-        android:paddingStart="@dimen/spacer_3x"
-        android:paddingTop="@dimen/spacer_1x"
-        android:paddingEnd="@dimen/spacer_3x"
-        android:paddingBottom="@dimen/spacer_1x">
+        android:padding="@dimen/spacer_1x">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="36dp"
             android:layout_height="36dp"
+            android:layout_marginStart="@dimen/spacer_activity_sides"
             android:contentDescription="@null"
             android:focusable="false"
             android:scaleType="center"
@@ -140,7 +146,6 @@
             android:text="@string/manage_accounts"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
             android:textColor="?android:textColorPrimary" />
-
     </LinearLayout>
 </LinearLayout>
 
