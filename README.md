@@ -52,7 +52,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 ## :family: Join the team
   * Test the app with different devices
   * Report issues in the [issue tracker](https://github.com/stefan-niedermann/nextcloud-notes/issues)
-  * [Pick a good first issue](https://github.com/nextcloud/server/labels/good%20first%20issue) :notebook:
+  * [Pick a good first issue](https://github.com/stefan-niedermann/nextcloud-notes/labels/Good%20first%20issue) :notebook:
   * Create a [Pull Request](https://opensource.guide/how-to-contribute/#opening-a-pull-request)
   * Help translating this app on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/) 🌎
   * Buy this app on [Google Play Store](https://play.google.com/store/apps/details?id=it.niedermann.owncloud.notes)
