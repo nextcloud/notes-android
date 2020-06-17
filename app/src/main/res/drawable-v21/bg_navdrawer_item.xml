@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?colorControlHighlight">
+
+    <item
+        android:id="@android:id/mask"
+        android:left="@dimen/spacer_1x"
+        android:right="@dimen/spacer_1x"
+        android:top="@dimen/spacer_1hx"
+        android:bottom="@dimen/spacer_1hx">
+
+        <shape android:shape="rectangle">
+            <!-- value of color is irrelevant, but solid needs to be defined for mask to work -->
+            <solid android:color="@color/bg_highlighted" />
+            <corners android:radius="@dimen/spacer_1hx" />
+        </shape>
+    </item>
+
+    <item
+        android:left="@dimen/spacer_1x"
+        android:right="@dimen/spacer_1x"
+        android:top="@dimen/spacer_1hx"
+        android:bottom="@dimen/spacer_1hx">
+
+        <selector>
+            <item android:state_selected="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/spacer_1hx" />
+                    <solid android:color="@color/bg_highlighted" />
+                </shape>
+            </item>
+
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/spacer_1hx" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+
+</ripple>
