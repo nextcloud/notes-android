@@ -241,4 +241,6 @@
     <string name="formatting_help_unsupported_body_3">Εικόνες</string>
     <string name="formatting_help_unsupported_body_4">Εάν ενδιαφέρεστε να συνεισφέρετε σε μία από αυτές τις λειτουργίες, επικοινωνήστε μαζί μας μέσω GitHub ή E-Mail.</string>
     <string name="simple_other">Άλλο</string>
-    </resources>
+    <string name="sort_last_modified">Ταξινόμηση κατά ημερομηνία τροποποίησης</string>
+    <string name="sort_alphabetically">Ταξινόμηση αλφαβητικά</string>
+</resources>
