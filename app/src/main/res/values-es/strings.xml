@@ -239,5 +239,8 @@
     <string name="formatting_help_unsupported_body_1">Aunque tratamos de mejorar continuamente el soporte de Markdown, hay unas cuantas características que Notas todavía no soporta:</string>
     <string name="formatting_help_unsupported_body_2">Tablas</string>
     <string name="formatting_help_unsupported_body_3">Imágenes</string>
+    <string name="formatting_help_unsupported_body_4">Si está interesadx en contribuir en alguna de estas funciones, no dude en ponerse en contacto con nosotrxs a través de GitHub o por correo electrónico.</string>
     <string name="simple_other">Otro</string>
-    </resources>
+    <string name="sort_last_modified">Ordenar por fecha de modificación</string>
+    <string name="sort_alphabetically">Ordenar alfabéticamente</string>
+</resources>
