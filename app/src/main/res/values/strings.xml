@@ -9,19 +9,17 @@
     <string name="action_settings">Settings</string>
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_search">Search</string>
+    <string name="action_sorting_method">Sorting method</string>
     <string name="simple_cancel">Cancel</string>
     <string name="simple_edit">Edit</string>
     <string name="action_edit_save">Save</string>
     <string name="simple_about">About</string>
-    <string name="simple_accounts">Accounts</string>
     <string name="simple_bold">Bold</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Italic</string>
     <string name="action_note_deleted">Deleted %1$s</string>
     <string name="action_note_restored">Restored %1$s</string>
     <string name="action_undo">Undo</string>
-    <string name="action_drawer_open">open navigation</string>
-    <string name="action_drawer_close">close navigation</string>
     <string name="action_uncategorized">Uncategorized</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_change_category">Category</string>
@@ -57,16 +55,13 @@
     <string name="error_synchronization">Synchronization failed</string>
     <string name="error_json">Is the Notes app activated on the server?</string>
     <string name="error_no_network">No network connection</string>
-    <string name="error_files_app">Do you have installed the files app?</string>
-    <string name="error_token_mismatch">Cannot connect to the files app.</string>
-    <string name="error_insufficient_storage">Your server storage is full.</string>
     <string name="error_unknown">An unknown error has occurred.</string>
 
     <!-- Snackbar Actions -->
 
     <!-- URLs -->
     <string name="url_source" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes</string>
-    <string name="url_issues" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes/issues</string>
+    <string name="url_issues" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes/issues/new/choose</string>
     <string name="url_license" translatable="false">https://github.com/stefan-niedermann/nextcloud-notes/blob/master/LICENSE</string>
     <string name="url_translations" translatable="false">https://www.transifex.com/nextcloud/nextcloud/</string>
 
@@ -117,6 +112,7 @@
     <string name="pref_key_theme" translatable="false">darkTheme</string>
     <string name="pref_key_font" translatable="false">font</string>
     <string name="pref_key_branding" translatable="false">branding</string>
+    <string name="pref_key_gridview" translatable="false">gridview</string>
     <string name="pref_key_font_size" translatable="false">fontSize</string>
     <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>
     <string name="pref_key_lock" translatable="false">lock</string>
@@ -159,7 +155,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Could not load preview. Please check whether there is a two-digit numbered list item without content.</string>
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
-    <string name="error_files_app_version_too_old">Is your files app version up to date?</string>
     <string name="checkbox_could_not_be_toggled">Checkbox could not be toggled.</string>
     <string name="bulk_notes_deleted">Deleted %1$d notes</string>
     <string name="bulk_notes_restored">Restored %1$d notes</string>
@@ -190,7 +185,10 @@
     <string name="added_content">Added "%1$s"</string>
     <string name="shared_text_empty">Shared text was empty</string>
     <string name="append_to_note">Append to note</string>
+    <string name="change_note_title">Change note title</string>
+    <string name="menu_edit_title">Edit title</string>
     <string name="settings_branding">Branding</string>
+    <string name="settings_gridview">Grid view 🆕</string>
     <string name="simple_security">Security</string>
     <string name="simple_appearance">Appearance</string>
     <string name="simple_synchronization">Synchronization</string>
@@ -238,12 +236,12 @@
     <string name="formatting_help_title" translatable="false"># %1$s</string>
     <string name="formatting_help_title_level_3" translatable="false">### %1$s</string>
     <string name="formatting_help_divider" translateable="false">---</string>
-    <string name="formatting_help_codefence_inline" translateable="false">`</string>
-    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_escaped" translatable="false">\\`\\`\\`</string>
-    <string name="formatting_help_javascript_1" translatable="false">if (isAwesome){</string>
-    <string name="formatting_help_javascript_2" translatable="false">return true</string>
+    <string name="formatting_help_javascript_1" translatable="false">int getRandom() {</string>
+    <string name="formatting_help_javascript_2" translatable="false">return 4;</string>
     <string name="formatting_help_javascript_3" translatable="false">}</string>
     <string name="formatting_help_codefence_javascript_escaped" translatable="false">\\`\\`\\`javascript</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
@@ -253,13 +251,17 @@
     <string name="formatting_help_checkbox_checked" translatable="false">- [x] %1$s</string>
     <string name="formatting_help_checkbox_unchecked" translatable="false">- [ ] %1$s</string>
     <string name="formatting_help_quote" translatable="false">&gt; %1$s</string>
+    <string name="formatting_help_quote_keyword" translatable="false">&gt;</string>
+    <string name="formatting_help_strike_through" translatable="false">~~</string>
+    <string name="formatting_help_bold" translatable="false">**</string>
+    <string name="formatting_help_italic" translatable="false">*</string>
 
     <string name="formatting_help_cbf_title">Context based formatting</string>
     <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
-    <string name="formatting_help_cbf_body_2">Just select a range of text or tap on your cursor at any position and you will get a popup menu which contains next to the default entries `Cut`, `Copy`, `Select all` entries like `Link` or `Checkbox`.</string>
+    <string name="formatting_help_cbf_body_2">Just select a range of text or tap on your cursor at any position and you will get a popup menu which contains next to the default entries %1$s, %2$s, %3$s entries like %4$s or %5$s.</string>
 
     <string name="formatting_help_text_title">Text</string>
-    <string name="formatting_help_text_body">It\'s very easy to make some words **bold** and other words *italic* with Markdown. You can ~~strike~~ some words through and even [link to Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_body">It\'s very easy to make some words %1$sbold%1$s and other words %2$sitalic%2$s with Markdown. You can %3$sstrike%3$s some words through and even [link to Nextcloud](https://nextcloud.com).</string>
 
     <string name="formatting_help_lists_title">Lists</string>
     <string name="formatting_help_lists_body_1">Sometimes you want numbered lists:</string>
@@ -278,12 +280,12 @@
     <string name="formatting_help_checkboxes_body_3">Item 2</string>
 
     <string name="formatting_help_structured_documents_title">Structured documents</string>
-    <string name="formatting_help_structured_documents_body_1">Sometimes it\'s useful to have different levels of headings to structure your documents. Start lines with a `#` to create headings. Multiple `##` in a row denote smaller heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_1">Sometimes it\'s useful to have different levels of headings to structure your documents. Start lines with a %1$s to create headings. Multiple %2$s in a row denote smaller heading sizes.</string>
     <string name="formatting_help_structured_documents_body_2">This is a third-tier heading</string>
-    <string name="formatting_help_structured_documents_body_3">You can use one `#` all the way up to `######` six for different heading sizes.</string>
-    <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the > character before the line:</string>
-    <string name="formatting_help_structured_documents_body_5">Coffee. The finest organic suspension ever devised… I beat the Borg with it.</string>
-    <string name="formatting_help_structured_documents_body_6">- Captain Janeway</string>
+    <string name="formatting_help_structured_documents_body_3">You can use one %1$s all the way up to %2$s six for different heading sizes.</string>
+    <string name="formatting_help_structured_documents_body_4">If you\'d like to quote someone, use the %1$s character before the line:</string>
+    <string name="formatting_help_structured_documents_body_5">Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
     <string name="formatting_help_code_title">Code</string>
     <string name="formatting_help_code_body_1">There are many different ways to style code with Markdown. If you have inline code blocks, wrap them in backticks:</string>
@@ -295,4 +297,7 @@
     <string name="formatting_help_unsupported_body_2">Tables</string>
     <string name="formatting_help_unsupported_body_3">Images</string>
     <string name="formatting_help_unsupported_body_4">If you are interested in contributing support for one of those features, get in contact with us via GitHub or E-Mail.</string>
+    <string name="simple_other">Other</string>
+    <string name="sort_last_modified">Sort by modified date</string>
+    <string name="sort_alphabetically">Sort by alphabet</string>
 </resources>

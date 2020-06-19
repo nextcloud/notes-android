@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,8 @@ public class NoteUtil {
     private static final Pattern pEmphasis = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
     private static final Pattern pSpace1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
     private static final Pattern pSpace2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
+
+    public static final String EXCERPT_LINE_SEPARATOR = "   ";
 
     private NoteUtil() {
 
@@ -74,22 +77,34 @@ public class NoteUtil {
      * @return truncated string
      */
     @NonNull
-    private static String truncateString(@NonNull String str, int len) {
+    private static String truncateString(@NonNull String str, @SuppressWarnings("SameParameterValue") int len) {
         return str.substring(0, Math.min(len, str.length()));
     }
 
     /**
-     * Generates an excerpt of a content String (reads second line which is not empty)
+     * Generates an excerpt of a content that does <em>not</em> match the given title
      *
-     * @param content String
+     * @param content {@link String}
+     * @param title   {@link String} In case the content starts with the title, the excerpt should be generated starting from this point
      * @return excerpt String
      */
     @NonNull
-    public static String generateNoteExcerpt(@NonNull String content) {
-        if (content.contains("\n"))
-            return truncateString(removeMarkDown(content.replaceFirst("^.*\n", "")), 200).replace("\n", "   ");
-        else
+    public static String generateNoteExcerpt(@NonNull String content, @Nullable String title) {
+        content = removeMarkDown(content.trim());
+        if(TextUtils.isEmpty(content)) {
             return "";
+        }
+        if (!TextUtils.isEmpty(title)) {
+            final String trimmedTitle = removeMarkDown(title.trim());
+            if (content.startsWith(trimmedTitle)) {
+                content = content.substring(trimmedTitle.length());
+            }
+        }
+        if (content.contains("\n")) {
+            return truncateString(content.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
+        } else {
+            return "";
+        }
     }
 
     @NonNull

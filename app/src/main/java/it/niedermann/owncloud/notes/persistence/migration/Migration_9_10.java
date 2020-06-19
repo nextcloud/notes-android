@@ -15,10 +15,10 @@ public class Migration_9_10 {
      */
     public Migration_9_10(@NonNull SQLiteDatabase db) {
         db.execSQL("ALTER TABLE NOTES ADD COLUMN EXCERPT INTEGER NOT NULL DEFAULT ''");
-        Cursor cursor = db.query("NOTES", new String[]{"ID", "CONTENT"}, null, null, null, null, null, null);
+        Cursor cursor = db.query("NOTES", new String[]{"ID", "CONTENT", "TITLE"}, null, null, null, null, null, null);
         while (cursor.moveToNext()) {
             ContentValues values = new ContentValues();
-            values.put("EXCERPT", NoteUtil.generateNoteExcerpt(cursor.getString(1)));
+            values.put("EXCERPT", NoteUtil.generateNoteExcerpt(cursor.getString(1), cursor.getString(2)));
             db.update("NOTES", values, "ID" + " = ? ", new String[]{cursor.getString(0)});
         }
         cursor.close();

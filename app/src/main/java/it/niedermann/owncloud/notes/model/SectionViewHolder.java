@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.model;
 
-import android.view.View;
-
 import androidx.recyclerview.widget.RecyclerView;
 
 import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="true">
+
+    <LinearLayout
+        android:id="@+id/wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/grid_item_background_selector"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacer_1x">
+
+        <TextView
+            android:id="@+id/noteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacer_2x"
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:layout_marginEnd="@dimen/spacer_2x"
+            android:layout_marginBottom="@dimen/spacer_1x"
+            android:hyphenationFrequency="full"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@color/fg_default"
+            tools:maxLength="50"
+            tools:targetApi="m"
+            tools:text="@tools:sample/lorem/random" />
+
+
+        <TextView
+            android:id="@+id/noteExcerpt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacer_2x"
+            android:layout_marginEnd="@dimen/spacer_2x"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/fg_default"
+            tools:maxLength="200"
+            tools:text="@tools:sample/lorem/random" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/noteCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacer_2x"
+                    android:layout_marginEnd="0dp"
+                    android:ellipsize="middle"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/secondary_font_size"
+                    app:chipBackgroundColor="@color/primary"
+                    app:chipStrokeColor="@color/defaultBrand"
+                    app:chipStrokeWidth="1dp"
+                    tools:maxLength="50"
+                    tools:text="@tools:sample/lorem/random" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/noteFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/menu_favorite"
+                    android:padding="@dimen/spacer_2x"
+                    tools:src="@drawable/ic_star_yellow_24dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/noteStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="4dp"
+                    android:baseline="14dp"
+                    app:srcCompat="@drawable/ic_sync_blue_18dp" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

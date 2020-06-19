@@ -37,9 +37,7 @@ public class ManageAccountsActivity extends LockedActivity {
 
         List<LocalAccount> localAccounts = db.getAccounts();
 
-        adapter = new ManageAccountAdapter((localAccount) -> {
-            SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName());
-        }, (localAccount) -> {
+        adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
             db.deleteAccount(localAccount);
             for (LocalAccount temp : localAccounts) {
                 if (temp.getId() == localAccount.getId()) {

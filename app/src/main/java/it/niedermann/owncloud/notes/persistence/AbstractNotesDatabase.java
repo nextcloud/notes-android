@@ -14,6 +14,8 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_13_14;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_14_15;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_15_16;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_16_17;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_17_18;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_18_19;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_4_5;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_5_6;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_6_7;
@@ -24,7 +26,7 @@ import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
 
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
-    private static final int database_version = 17;
+    private static final int database_version = 19;
     @NonNull
     protected final Context context;
 
@@ -60,6 +62,7 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
     protected static final String key_theme_mode = "THEME_MODE";
     protected static final String key_mode = "MODE";
     protected static final String key_scroll_y = "SCROLL_Y";
+    protected static final String key_category_sorting_method = "CATEGORY_SORTING_METHOD";
 
     protected AbstractNotesDatabase(@NonNull Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory) {
         super(context, name, factory, database_version);
@@ -125,9 +128,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 key_category_id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 key_category_account_id + " INTEGER NOT NULL, " +
                 key_category_title + " TEXT NOT NULL, " +
+                key_category_sorting_method + " INTEGER DEFAULT 0, " +
                 " UNIQUE( " + key_category_account_id + " , " + key_category_title + "), " +
                 " FOREIGN KEY(" + key_category_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "));");
-        DatabaseIndexUtil.createIndex(db, table_category, key_category_id, key_category_account_id, key_category_title);
+        DatabaseIndexUtil.createIndex(db, table_category, key_category_id, key_category_account_id, key_category_title, key_category_sorting_method);
     }
 
     private void createWidgetSingleNoteTable(@NonNull SQLiteDatabase db) {
@@ -186,6 +190,10 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 new Migration_15_16(db, context, this::notifyWidgets);
             case 16:
                 new Migration_16_17(db);
+            case 17:
+                new Migration_17_18(db);
+            case 18:
+                new Migration_18_19(context);
         }
     }
 

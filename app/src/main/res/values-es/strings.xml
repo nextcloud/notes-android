@@ -9,25 +9,26 @@
     <string name="action_settings">Ajustes</string>
     <string name="action_trashbin">Notas eliminadas</string>
     <string name="action_search">Buscar</string>
+    <string name="action_sorting_method">Método de ordenación</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
     <string name="simple_about">Acerca de</string>
-    <string name="simple_accounts">Cuentas</string>
     <string name="simple_bold">Negrita</string>
     <string name="simple_link">Enlace</string>
     <string name="simple_italic">Cursiva</string>
     <string name="action_note_deleted">Borrado %1$s</string>
     <string name="action_note_restored">Restaurado %1$s</string>
     <string name="action_undo">Deshacer</string>
-    <string name="action_drawer_open">abrir navegación</string>
-    <string name="action_drawer_close">cerrar navegación</string>
     <string name="action_uncategorized">Sin categoría</string>
     <string name="menu_delete">Borrar</string>
     <string name="menu_change_category">Categoría</string>
     <string name="menu_favorite">Favorito</string>
     <string name="menu_preview">Previsualizar</string>
     <string name="menu_share">Compartir</string>
+
+    <string name="search_in_category">Buscar en %1$s</string>
+    <string name="search_in_all">Busar en todas las notas</string>
 
     <string name="change_category_title">Escoge una categoría</string>
 
@@ -54,9 +55,6 @@
     <string name="error_synchronization">Fallo en la sincronización</string>
     <string name="error_json">¿Está la app de Notas activada en el servidor?</string>
     <string name="error_no_network">Sin conexión de red</string>
-    <string name="error_files_app">¿Ha instalado los archivos de la aplicación?</string>
-    <string name="error_token_mismatch">No se puede conectar a la aplicación archivos.</string>
-    <string name="error_insufficient_storage">Tu espacio en el servidor está lleno.</string>
     <string name="error_unknown">Ha ocurrido un error desconocido.</string>
 
     <!-- About -->
@@ -120,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">No se ha podido cargar la vista previa. Por favor, comprueba si hay un ítem de lista numerada de dos dígitos sin contenido.</string>
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
-    <string name="error_files_app_version_too_old">¿Está actualizada la versión de su aplicación de archivos?</string>
     <string name="checkbox_could_not_be_toggled">No se ha podido cambiar el estado del checkbox</string>
     <string name="bulk_notes_deleted">Borradas %1$d notas</string>
     <string name="bulk_notes_restored">Restauradas %1$d notas</string>
@@ -151,12 +148,18 @@
     <string name="added_content">Se ha añadido «%1$s»</string>
     <string name="shared_text_empty">El texto compartido estaba vacío</string>
     <string name="append_to_note">Añadir a la nota</string>
+    <string name="change_note_title">Cambiar título de la nota</string>
+    <string name="menu_edit_title">Editar título</string>
     <string name="settings_branding">Branding</string>
+    <string name="settings_gridview">Vista en cuadrícula 🆕</string>
     <string name="simple_security">Seguridad</string>
     <string name="simple_appearance">Apariencia</string>
     <string name="simple_synchronization">Sincronización</string>
+    <string name="simple_behavior">Comportamiento</string>
     <string name="share_multiple">Compartido contenido de %1$d notas</string>
     <string name="manage_accounts">Gestionar cuentas</string>
+    <string name="action_formatting_help">Formato</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>
@@ -191,4 +194,50 @@
         <item quantity="other">%d seleccionados</item>
     </plurals>
 
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formato basado en el contexto</string>
+    <string name="formatting_help_cbf_body_1">Un objetivo principal de diseño de la app Notas es ofrecer una herramienta libre de distracciones. Aunque podrás formatear tus textos con Markdown. Para varios de los ejemplos mencionados debajo, puedes usar atajos para formatear las notas sin escribir los códigos.</string>
+    <string name="formatting_help_cbf_body_2">Simplemente, selecciona texto o pulsa en el cursor en cualquier posición y aparecerá un menú emergente que contiene junto a las entradas por defecto %1$s, %2$s,   %3$sotras como %4$s o %5$s,</string>
+
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_text_body">Es muy sencillo poner palabras en %1$snegrita%1$s y otras en %2$scursiva%2$s con Markdown. Puedes %3$stachar%3$s algunas palabras e incluso [enlace a Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Listas</string>
+    <string name="formatting_help_lists_body_1">A veces quieres listas numeradas:</string>
+    <string name="formatting_help_lists_body_2">Uno</string>
+    <string name="formatting_help_lists_body_3">Dos</string>
+    <string name="formatting_help_lists_body_4">Tres</string>
+    <string name="formatting_help_lists_body_5">A veces quieres viñetas:</string>
+    <string name="formatting_help_lists_body_6">Empieza una línea con un guion</string>
+    <string name="formatting_help_lists_body_7">Y si tienes subpuntos, pon dos espacios antes del guion o asterisco:</string>
+    <string name="formatting_help_lists_body_8">Como esto</string>
+    <string name="formatting_help_lists_body_9">Y esto</string>
+
+    <string name="formatting_help_checkboxes_title">Casillas de verificación</string>
+    <string name="formatting_help_checkboxes_body_1">Para crear una lista de comprobación, usa una lista seguida de corchetes</string>
+    <string name="formatting_help_checkboxes_body_2">Elemento 1</string>
+    <string name="formatting_help_checkboxes_body_3">Elemento 2</string>
+
+    <string name="formatting_help_structured_documents_title">Documentos estructurados</string>
+    <string name="formatting_help_structured_documents_body_1">A veces es útil tener diferentes niveles de encabezados para estructuras tus documentos. Comienza tus líneas con una %1$s para crear encabezados. Varios %2$s seguidos denotan tamaños menores de encabezado.</string>
+    <string name="formatting_help_structured_documents_body_2">Esto es un encabezado de tercer nivel</string>
+    <string name="formatting_help_structured_documents_body_3">Puedes usar desde un %1$s hasta seis %2$s  para diferentes tamaños de encabezados.</string>
+    <string name="formatting_help_structured_documents_body_4">Si quieres citar a alguien, usa el carácter %1$s antes de la línea:</string>
+    <string name="formatting_help_structured_documents_body_5">La imaginación es más importante que el conocimiento. El conocimiento es limitado. La imaginación rodea el mundo.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Código</string>
+    <string name="formatting_help_code_body_1">Hay muchas formas diferentes de dar estilo al código con Markdown. Si tienes bloques de código en un párrafo, rodéalos con acentos inversos:</string>
+    <string name="formatting_help_code_body_2">Markdown también soporta el llamado vallado de código, que permite líneas múltiples sin indentación:</string>
+    <string name="formatting_help_code_body_3">Y si quieres usar subrayado de sintaxis, incluye el lenguaje:</string>
+
+    <string name="formatting_help_unsupported_title">No soportado</string>
+    <string name="formatting_help_unsupported_body_1">Aunque tratamos de mejorar continuamente el soporte de Markdown, hay unas cuantas características que Notas todavía no soporta:</string>
+    <string name="formatting_help_unsupported_body_2">Tablas</string>
+    <string name="formatting_help_unsupported_body_3">Imágenes</string>
+    <string name="simple_other">Otro</string>
     </resources>

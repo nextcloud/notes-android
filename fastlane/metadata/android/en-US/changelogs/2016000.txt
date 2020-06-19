@@ -1,0 +1,22 @@
+2.16.0
+
+- 🔧 Support APIv1
+  - Title will only be auto generated when creating a new note
+  - Ability to change title manually
+- 🔤 Make categories sortable by alphabet or modified date (#603) (@WingsUpete @Hui-Ouyang16 @IF-ACT)
+
+2.15.0
+
+- 🆕 Grid view (beta)
+
+2.14.1
+
+- ✨ Title and category should be centered if no excerpt is given (#374)
+- 🐞 Crash when entering not-existing category (#863)
+
+2.14.0
+
+- 📌 Remember last scrolling position per note (#227)
+- 🎨 Apply brand to widget color
+- ❓ "Help: format" option in the menu (#116)
+- 🐞 Fix toggling checkboxes when note contains codefences with empty lines

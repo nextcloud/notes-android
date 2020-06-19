@@ -61,7 +61,8 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
         LocalAccount currentLocalAccount = db.getAccount(currentAccountId);
-        binding.accountItemLabel.setText(currentLocalAccount.getAccountName());
+        binding.accountName.setText(currentLocalAccount.getUserName());
+        binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
         Glide.with(requireContext())
                 .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUserName()) + "/64")
                 .error(R.drawable.ic_account_circle_grey_24dp)

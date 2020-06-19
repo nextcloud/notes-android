@@ -9,19 +9,17 @@
     <string name="action_settings">Einstellungen</string>
     <string name="action_trashbin">Gelöschte Notizen</string>
     <string name="action_search">Suche</string>
+    <string name="action_sorting_method">Sortierverfahren</string>
     <string name="simple_cancel">Abbrechen</string>
     <string name="simple_edit">Bearbeiten</string>
     <string name="action_edit_save">Speichern</string>
     <string name="simple_about">Über</string>
-    <string name="simple_accounts">Konten</string>
     <string name="simple_bold">Fett</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Kursiv</string>
     <string name="action_note_deleted">Gelöscht %1$s</string>
     <string name="action_note_restored">Wiederhergestellt %1$s</string>
     <string name="action_undo">Rückgängig</string>
-    <string name="action_drawer_open">Navigation öffnen</string>
-    <string name="action_drawer_close">Navigation schließen</string>
     <string name="action_uncategorized">Ohne Kategorie</string>
     <string name="menu_delete">Löschen</string>
     <string name="menu_change_category">Kategorie</string>
@@ -57,9 +55,6 @@
     <string name="error_synchronization">Synchronisierung fehlgeschlagen</string>
     <string name="error_json">Ist die Notes-App auf dem Server aktiviert?</string>
     <string name="error_no_network">Keine Netzwerkverbindung</string>
-    <string name="error_files_app">Haben Sie die Dateien-App installiert?</string>
-    <string name="error_token_mismatch">Kann nicht zur Dateien-App verbinden.</string>
-    <string name="error_insufficient_storage">Ihr Serverspeicher ist voll.</string>
     <string name="error_unknown">Unbekannter Fehler aufgetreten.</string>
 
     <!-- About -->
@@ -123,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Die Vorschau konnte nicht geladen werden. Bitte prüfen Sie, ob ein zweistellig numerierter Listeneintrag ohne Inhalt vorhanden ist.</string>
     <string name="simple_more">mehr</string>
     <string name="simple_move">Verschieben</string>
-    <string name="error_files_app_version_too_old">Ist Ihre Datei-App aktuell?</string>
     <string name="checkbox_could_not_be_toggled">Kontrollkästchen konnte nicht umgeschaltet werden.</string>
     <string name="bulk_notes_deleted">%1$d Notizen gelöscht</string>
     <string name="bulk_notes_restored">%1$dNotizen wiederhergestellt</string>
@@ -154,7 +148,10 @@
     <string name="added_content">„%1$s“ hinzugefügt</string>
     <string name="shared_text_empty">Der geteilte Text war ohne Inhalt</string>
     <string name="append_to_note">An Notiz anhängen</string>
+    <string name="change_note_title">Notiz-Titel ändern</string>
+    <string name="menu_edit_title">Titel ändern</string>
     <string name="settings_branding">Branding</string>
+    <string name="settings_gridview">Kachelansicht 🆕</string>
     <string name="simple_security">Sicherheit</string>
     <string name="simple_appearance">Aussehen</string>
     <string name="simple_synchronization">Synchronisierung</string>
@@ -197,4 +194,53 @@
         <item quantity="other">%d ausgewählt</item>
     </plurals>
 
-    </resources>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Kontextbasierte Formatierung</string>
+    <string name="formatting_help_cbf_body_1">Ein wichtiges Designziel der Notes-App ist die Bereitstellung eines ablenkungsfreien Werkzeugs. Sie können Ihre Texte mit Markdown formatieren. Für verschiedene der unten genannten Beispiele können Sie Verknüpfungen verwenden, um Ihre Notizen zu formatieren, ohne die folgenden Codes eingeben zu müssen.</string>
+    <string name="formatting_help_cbf_body_2">Wählen Sie einfach einen Textbereich aus oder tippen Sie an einer beliebigen Stelle auf den Cursor und Sie erhalten ein Popup-Menü, das neben den Standardeinträgen %1$s, %2$s, %3$s auch Einträge wie %4$s oder %5$s enthält.</string>
+
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_text_body">Es ist sehr einfach, einige Wörter %1$sfett%1$s und andere Wörter %2$skursiv%2$s mit Markdown zu versehen. Sie können einige Wörter %3$sdurchstreichen%3$s und sogar zu Nextcloud [verlinken](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Listen</string>
+    <string name="formatting_help_lists_body_1">Manchmal werden nummerierte Listen benötigt:</string>
+    <string name="formatting_help_lists_body_2">Eins</string>
+    <string name="formatting_help_lists_body_3">Zwei</string>
+    <string name="formatting_help_lists_body_4">Drei</string>
+    <string name="formatting_help_lists_body_5">Manchmal werden Aufzählungszeichen benötigt:</string>
+    <string name="formatting_help_lists_body_6">Beginnen Sie eine Zeile mit einem Stern</string>
+    <string name="formatting_help_lists_body_7">Und wenn Sie Unterpunkte haben, setzen Sie zwei Leerzeichen vor den Bindestrich oder Stern:</string>
+    <string name="formatting_help_lists_body_8">Wie dieses</string>
+    <string name="formatting_help_lists_body_9">Und dies</string>
+
+    <string name="formatting_help_checkboxes_title">Kontrollkästchen</string>
+    <string name="formatting_help_checkboxes_body_1">Verwenden Sie zum Erstellen eines Kontrollkästchens eine Liste gefolgt von eckigen Klammern</string>
+    <string name="formatting_help_checkboxes_body_2">Punkt 1</string>
+    <string name="formatting_help_checkboxes_body_3">Punkt 2</string>
+
+    <string name="formatting_help_structured_documents_title">Strukturierte Dokumente</string>
+    <string name="formatting_help_structured_documents_body_1">Manchmal ist es nützlich, verschiedene Ebenen von Überschriften zu haben, um Ihre Dokumente zu strukturieren. Beginnen Sie Zeilen mit %1$s, um Überschriften zu erstellen. Mehrere %2$s in einer Reihe kennzeichnen kleinere Überschriftengrößen.</string>
+    <string name="formatting_help_structured_documents_body_2">Dies ist eine Überschrift der dritten Stufe</string>
+    <string name="formatting_help_structured_documents_body_3">Sie können ein %1$s bis zu sechs %2$s für verschiedene Kopfgrößen verwenden.</string>
+    <string name="formatting_help_structured_documents_body_4">Wenn Sie jemanden zitieren möchten, verwenden Sie das %1$s-Zeichen vor der Zeile:</string>
+    <string name="formatting_help_structured_documents_body_5">Fantasie ist wichtiger als Wissen. Das Wissen ist begrenzt. Fantasie umgibt die Welt.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Quelltext</string>
+    <string name="formatting_help_code_body_1">Es gibt viele verschiedene Möglichkeiten, Text mit Markdown zu formatieren. Wenn Sie Inline-Codeblöcke haben, betten Sie diese in Backticks ein:</string>
+    <string name="formatting_help_code_body_2">Markdown unterstützt auch das sogenannte Code-Fencing, das mehrere Zeilen ohne Einrückung zulässt:</string>
+    <string name="formatting_help_code_body_3">Wenn Sie die Syntaxhervorhebung verwenden möchten, geben Sie folgendes ein:</string>
+
+    <string name="formatting_help_unsupported_title">Nicht unterstützt</string>
+    <string name="formatting_help_unsupported_body_1">Obwohl wir versuchen, die Unterstützung für Markdown ständig zu verbessern, gibt es einige Funktionen, die von Notes noch nicht unterstützt werden:</string>
+    <string name="formatting_help_unsupported_body_2">Tabellen</string>
+    <string name="formatting_help_unsupported_body_3">Bilder</string>
+    <string name="formatting_help_unsupported_body_4">Wenn Sie uns bei der Entwicklung einer dieser Funktionen unterstützen möchten, setzen Sie sich bitte über GitHub oder E-Mail mit uns in Verbindung.</string>
+    <string name="simple_other">Andere</string>
+    <string name="sort_last_modified">Nach Änderungsdatum sortieren</string>
+    <string name="sort_alphabetically">Alphabetisch sortieren</string>
+</resources>

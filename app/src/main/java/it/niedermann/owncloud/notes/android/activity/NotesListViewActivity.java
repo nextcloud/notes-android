@@ -22,11 +22,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
@@ -62,6 +64,7 @@ import it.niedermann.owncloud.notes.formattinghelp.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.model.Capabilities;
 import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.GridItemDecoration;
 import it.niedermann.owncloud.notes.model.ISyncCallback;
 import it.niedermann.owncloud.notes.model.Item;
 import it.niedermann.owncloud.notes.model.ItemAdapter;
@@ -70,6 +73,7 @@ import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.model.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.model.NoteClickListener;
+import it.niedermann.owncloud.notes.model.SectionItemDecoration;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
@@ -80,18 +84,23 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.util.CategorySortingMethod;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.util.Notes.isDarkThemeActive;
+import static it.niedermann.owncloud.notes.util.Notes.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.util.SSOUtil.askForNewAccount;
 import static java.util.Arrays.asList;
 
 public class NotesListViewActivity extends LockedActivity implements NoteClickListener, ViewProvider, MoveAccountListener, AccountSwitcherListener {
 
     private static final String TAG = NotesListViewActivity.class.getSimpleName();
+
+    private boolean gridView = true;
 
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
@@ -126,7 +135,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     protected FloatingActionButton fabCreate;
     private RecyclerView listView;
 
-    protected ItemAdapter adapter = null;
+    protected ItemAdapter adapter;
 
     protected NotesDatabase db = null;
     private NavigationAdapter adapterCategories;
@@ -179,6 +188,12 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         }
 
         db = NotesDatabase.getInstance(this);
+
+        gridView = isGridViewEnabled();
+        if (!gridView || isDarkThemeActive(this)) {
+            activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
+        }
+
         NotesRoomDatabase db = NotesRoomDatabase.getInstance(this);
         LocalAccountDao dao = db.getLocalAccountDao();
         new Thread(() -> {
@@ -237,7 +252,8 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             try {
                 BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this).attachToRecyclerView(listView);
+                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
+                        .attachToRecyclerView(listView);
                 synchronize();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
@@ -325,7 +341,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
     }
 
     private void setupNotesList() {
-        initList();
+        initRecyclerView();
 
         ((RecyclerView) findViewById(R.id.recycler_view)).addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -385,6 +401,21 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             }
             startActivityForResult(createIntent, create_note_cmd);
         });
+
+        activityBinding.sortingMethod.setOnClickListener((v) -> {
+            CategorySortingMethod method;
+
+            method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
+
+            if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
+                method = CategorySortingMethod.SORT_MODIFIED_DESC;
+            } else {
+                method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
+            }
+            db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
+            refreshLists();
+            updateSortMethodIcon(localAccount.getId());
+        });
     }
 
     private void setupNavigationList(final String selectedItem) {
@@ -398,7 +429,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
             private void selectItem(NavigationItem item, boolean closeNavigation) {
                 adapterCategories.setSelectedItem(item.id);
-
                 // update current selection
                 if (itemRecent.equals(item)) {
                     navigationSelection = new Category(null, null);
@@ -596,10 +626,31 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         binding.navigationMenu.setAdapter(adapterMenu);
     }
 
-    public void initList() {
-        adapter = new ItemAdapter(this);
+    private void initRecyclerView() {
+        adapter = new ItemAdapter(this, gridView);
         listView.setAdapter(adapter);
-        listView.setLayoutManager(new LinearLayoutManager(this));
+
+        if (gridView) {
+            int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
+            StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
+            listView.setLayoutManager(gridLayoutManager);
+            listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides)
+            ));
+        } else {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            listView.setLayoutManager(layoutManager);
+            listView.addItemDecoration(new SectionItemDecoration(adapter,
+                    getResources().getDimensionPixelSize(R.dimen.spacer_6x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
+                    0
+            ));
+        }
     }
 
     private void refreshLists() {
@@ -650,6 +701,28 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
         };
         new LoadNotesListTask(localAccount.getId(), getApplicationContext(), callback, navigationSelection, query).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        updateSortMethodIcon(localAccount.getId());
+    }
+
+    /**
+     * Updates sorting method icon.
+     */
+    private void updateSortMethodIcon(long localAccountId) {
+        CategorySortingMethod method = db.getCategoryOrder(localAccountId, navigationSelection);
+        if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
+            activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
+            activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
+            }
+        } else {
+            activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
+            activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
+            }
+        }
     }
 
     @Override
@@ -795,7 +868,6 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
             startActivityForResult(intent, show_single_note_cmd);
-
         }
     }
 

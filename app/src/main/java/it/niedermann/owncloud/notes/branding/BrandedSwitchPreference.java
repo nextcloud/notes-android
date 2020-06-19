@@ -73,7 +73,7 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
     }
 
     private void applyBrand() {
-        if (switchView != null && SDK_INT >= JELLY_BEAN) {
+        if (switchView != null) {
             final int finalMainColor = getSecondaryForegroundColorDependingOnTheme(getContext(), mainColor);
             // int trackColor = Color.argb(77, Color.red(finalMainColor), Color.green(finalMainColor), Color.blue(finalMainColor));
             DrawableCompat.setTintList(switchView.getThumbDrawable(), new ColorStateList(

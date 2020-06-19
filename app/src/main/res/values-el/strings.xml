@@ -9,19 +9,17 @@
     <string name="action_settings">Ρυθμίσεις</string>
     <string name="action_trashbin">Διεγραμμένες σημειώσεις</string>
     <string name="action_search">Ψάχνει</string>
+    <string name="action_sorting_method">Μέθοδος ταξινόμησης</string>
     <string name="simple_cancel">Άκυρο</string>
     <string name="simple_edit">Επεξεργασία</string>
     <string name="action_edit_save">Αποθήκευση</string>
     <string name="simple_about">Περί</string>
-    <string name="simple_accounts">Λογαριασμοί</string>
     <string name="simple_bold">Έντονα</string>
     <string name="simple_link">Σύνδεσμος</string>
     <string name="simple_italic">Πλάγια</string>
     <string name="action_note_deleted">Διεγραμμένα %1$s</string>
     <string name="action_note_restored">Επαναφέρθηκαν %1$s</string>
     <string name="action_undo">Αναίρεση</string>
-    <string name="action_drawer_open">Άνοιγμα πλοήγησης</string>
-    <string name="action_drawer_close">Κλείσιμο πλοήγησης</string>
     <string name="action_uncategorized">Μή-κατηγοριοποιημένα</string>
     <string name="menu_delete">Διαγραφή</string>
     <string name="menu_change_category">Κατηγορία</string>
@@ -57,9 +55,6 @@
     <string name="error_synchronization">Αποτυχία συγχρονισμού</string>
     <string name="error_json">Είναι ενεργοποιημένη η εφαρμογή Σημειώσεων στον διακομιστή;</string>
     <string name="error_no_network">Δεν υπάρχει σύνδεση στο δίκτυο</string>
-    <string name="error_files_app">Εγκαταστάθηκε η εφαρμογή αρχείων?</string>
-    <string name="error_token_mismatch">Δεν μπορεί να γίνει σύνδεση με τα αρχεία της εφαρμογής</string>
-    <string name="error_insufficient_storage">Ο αποθηκευτικός χώρος του διακομιστή γέμισε.</string>
     <string name="error_unknown">Προέκυψε άγνωστο σφάλμα.</string>
 
     <!-- About -->
@@ -123,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Δεν ήταν δυνατή η φόρτωση της προεπισκόπησης. Ελέγξτε αν υπάρχει στη λίστα κενό διψήφιο αριθμημένο στοιχείο.</string>
     <string name="simple_more">Περισσότερα</string>
     <string name="simple_move">Μετακίνηση</string>
-    <string name="error_files_app_version_too_old">Είναι ενημερωμένη η εφαρμογή αρχείων?</string>
     <string name="checkbox_could_not_be_toggled">Δεν ήταν δυνατή η εναλλαγή του πλαισίου ελέγχου.</string>
     <string name="bulk_notes_deleted">Διεγραμμένες %1$d σημειώσεις</string>
     <string name="bulk_notes_restored">Επαναφέρθηκαν %1$dσημειώσεις</string>
@@ -154,7 +148,10 @@
     <string name="added_content">Προστέθηκε \"%1$s\"</string>
     <string name="shared_text_empty">Το κοινόχρηστο κείμενο είναι κενό</string>
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
+    <string name="change_note_title">Αλλαγή τίτλου σημείωσης</string>
+    <string name="menu_edit_title">Επεξεργασία τίτλου</string>
     <string name="settings_branding">Επωνυμία</string>
+    <string name="settings_gridview">Προβολή πλέγματος 🆕</string>
     <string name="simple_security">Ασφάλεια</string>
     <string name="simple_appearance">Εμφάνιση</string>
     <string name="simple_synchronization">Συγχρονισμός</string>
@@ -197,4 +194,51 @@
         <item quantity="other">%d επιλέχτηκαν</item>
     </plurals>
 
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Μορφοποίηση βάσει κατάστασης</string>
+    <string name="formatting_help_cbf_body_1">Ένας κύριος σχεδιαστικός στόχος της εφαρμογής Σημειώσεις, είναι να παρέχει ένα ανεξάρτητο εργαλείο. Θα μπορείτε να μορφοποιήσετε τα κείμενά σας με το Markdown. Για διάφορα από τα παρακάτω παραδείγματα, μπορείτε να χρησιμοποιήσετε συντομεύσεις για να μορφοποιήσετε τις σημειώσεις σας χωρίς να πληκτρολογήσετε τους παρακάτω κωδικούς.</string>
+    <string name="formatting_help_cbf_body_2">Απλώς επιλέξτε ένα εύρος κειμένου ή πατήστε τον κέρσορα σε οποιαδήποτε θέση και θα λάβετε ένα αναδυόμενο μενού που περιέχει δίπλα στις προεπιλεγμένες καταχωρήσεις %1$s, %2$s, %3$s καταχωρίσεις όπως %4$s ή %5$s.</string>
+
+    <string name="formatting_help_text_title">Κείμενο</string>
+    <string name="formatting_help_text_body">Είναι πολύ εύκολο να γράψετε μερικές λέξεις με %1$sέντονη%1$s και άλλες με %2$sπλάγια%2$s μορφή με το Markdown. Μπορείτε %3$sχτυπήσετε%3$s μερικές λέξεις μέσω του [συνδέσμου για Nextcloud] (https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Λίστες</string>
+    <string name="formatting_help_lists_body_1">Μερικές φορές θέλετε αριθμημένες λίστες:</string>
+    <string name="formatting_help_lists_body_2">Ένα</string>
+    <string name="formatting_help_lists_body_3">Δύο</string>
+    <string name="formatting_help_lists_body_4">Τρία</string>
+    <string name="formatting_help_lists_body_5">Μερικές φορές θέλετε κουκκίδες:</string>
+    <string name="formatting_help_lists_body_6">Ξεκινήστε μια γραμμή με παύλα</string>
+    <string name="formatting_help_lists_body_7">Και αν έχετε δευτερεύοντα σημεία, βάλτε δύο κενά πριν από την παύλα ή το αστέρι:</string>
+    <string name="formatting_help_lists_body_8">Όπως αυτό</string>
+    <string name="formatting_help_lists_body_9">Και αυτό</string>
+
+    <string name="formatting_help_checkboxes_title">Πλαίσια ελέγχου</string>
+    <string name="formatting_help_checkboxes_body_1">Για να δημιουργήσετε ένα πλαίσιο ελέγχου, χρησιμοποιήστε μια λίστα ακολουθούμενη από αγκύλες</string>
+    <string name="formatting_help_checkboxes_body_2">Αντικείμενο 1</string>
+    <string name="formatting_help_checkboxes_body_3">Αντικείμενο 2</string>
+
+    <string name="formatting_help_structured_documents_title">Δομημένα έγγραφα</string>
+    <string name="formatting_help_structured_documents_body_1">Μερικές φορές είναι χρήσιμο να έχετε διαφορετικά επίπεδα επικεφαλίδων για τη δομή των εγγράφων σας. Ξεκινήστε τις γραμμές με ένα %1$s για να δημιουργήσετε επικεφαλίδες. Πολλαπλά %2$s στη σειρά δηλώνουν μικρότερα μεγέθη επικεφαλίδας.</string>
+    <string name="formatting_help_structured_documents_body_2">Αυτή είναι μια επικεφαλίδα τρίτου επιπέδου</string>
+    <string name="formatting_help_structured_documents_body_3">Μπορείτε να χρησιμοποιήσετε ένα %1$s μέχρι έξι %2$s διαφορετικά μεγέθη επικεφαλίδας.</string>
+    <string name="formatting_help_structured_documents_body_4">Αν θέλετε να αναφέρετε κάποιο όνομα, χρησιμοποιήστε τον χαρακτήρα %1$s πριν από τη γραμμή:</string>
+    <string name="formatting_help_structured_documents_body_5">Η φαντασία είναι πιο σημαντική από τη γνώση. Η γνώση είναι περιορισμένη. Η φαντασία περιβάλλει τον κόσμο.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Κώδικας</string>
+    <string name="formatting_help_code_body_1">Υπάρχουν πολλοί διαφορετικοί τρόποι δημιουργίας κώδικα με το Markdown. Εάν έχετε ενσωματωμένα μπλοκ κώδικα, περικλείεται με πλάγια κάθετο:</string>
+    <string name="formatting_help_code_body_2">Το Markdown υποστηρίζει επίσης κάτι που ονομάζεται code fencing, το οποίο επιτρέπει πολλαπλές γραμμές χωρίς εσοχή:</string>
+    <string name="formatting_help_code_body_3">Και αν θέλετε να χρησιμοποιήσετε την επισήμανση σύνταξης, συμπεριλάβετε τη γλώσσα:</string>
+
+    <string name="formatting_help_unsupported_title">Μη υποστηριζόμενο</string>
+    <string name="formatting_help_unsupported_body_1">Ενώ προσπαθούμε να βελτιώνουμε συνεχώς την υποστήριξη για το Markdown, υπάρχουν μερικές δυνατότητες που δεν υποστηρίζονται ακόμη από τις Σημειώσεις:</string>
+    <string name="formatting_help_unsupported_body_2">Πίνακες</string>
+    <string name="formatting_help_unsupported_body_3">Εικόνες</string>
+    <string name="formatting_help_unsupported_body_4">Εάν ενδιαφέρεστε να συνεισφέρετε σε μία από αυτές τις λειτουργίες, επικοινωνήστε μαζί μας μέσω GitHub ή E-Mail.</string>
+    <string name="simple_other">Άλλο</string>
     </resources>

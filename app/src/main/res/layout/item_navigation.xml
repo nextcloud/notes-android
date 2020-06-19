@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/bg_navdrawer_item"
     android:gravity="center_vertical"
+    android:paddingTop="@dimen/spacer_1hx"
+    android:paddingBottom="@dimen/spacer_1hx"
     android:paddingStart="@dimen/spacer_1x"
-    android:paddingLeft="@dimen/spacer_1x"
-    android:paddingEnd="@dimen/spacer_1x"
-    android:paddingRight="@dimen/spacer_1x">
+    android:paddingEnd="@dimen/spacer_2x">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/navigationItemIcon"
@@ -23,7 +24,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacer_1x"
-        android:layout_marginLeft="@dimen/spacer_1x"
         android:layout_weight="1"
         android:ellipsize="end"
         android:lines="1"

@@ -1,14 +1,12 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
-import android.util.Log;
-
 import org.junit.Test;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Random;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class SearchableBaseNoteFragmentTest {
 

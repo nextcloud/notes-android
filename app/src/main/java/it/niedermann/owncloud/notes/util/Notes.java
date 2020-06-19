@@ -12,6 +12,8 @@ import androidx.preference.PreferenceManager;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.DarkModeSetting;
 
+import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
+
 public class Notes extends Application {
     private static final String TAG = Notes.class.getSimpleName();
 
@@ -20,6 +22,7 @@ public class Notes extends Application {
     private static boolean isLocked = true;
     private static long lastInteraction = 0;
     private static String PREF_KEY_THEME;
+    private static boolean isGridViewEnabled = false;
 
     @Override
     public void onCreate() {
@@ -27,11 +30,20 @@ public class Notes extends Application {
         setAppTheme(getAppTheme(getApplicationContext()));
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         lockedPreference = prefs.getBoolean(getString(R.string.pref_key_lock), false);
+        isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
         super.onCreate();
     }
 
     public static void setAppTheme(DarkModeSetting setting) {
         AppCompatDelegate.setDefaultNightMode(setting.getModeId());
+    }
+
+    public static boolean isGridViewEnabled() {
+        return isGridViewEnabled;
+    }
+
+    public static void updateGridViewEnabled(boolean gridView) {
+        isGridViewEnabled = gridView;
     }
 
     public static DarkModeSetting getAppTheme(Context context) {

@@ -9,25 +9,26 @@
     <string name="action_settings">Ayarlar</string>
     <string name="action_trashbin">Silinmiş notlar</string>
     <string name="action_search">Arama</string>
+    <string name="action_sorting_method">Sıralama yöntemi</string>
     <string name="simple_cancel">İptal</string>
     <string name="simple_edit">Düzenle</string>
     <string name="action_edit_save">Kaydet</string>
     <string name="simple_about">Hakkında</string>
-    <string name="simple_accounts">Hesaplar</string>
     <string name="simple_bold">Koyu</string>
     <string name="simple_link">Bağlantı</string>
     <string name="simple_italic">Yatık</string>
     <string name="action_note_deleted">%1$s silindi</string>
     <string name="action_note_restored">%1$s geri yüklendi</string>
     <string name="action_undo">Geri al</string>
-    <string name="action_drawer_open">gezinmeyi aç</string>
-    <string name="action_drawer_close">gezinmeyi kapat</string>
     <string name="action_uncategorized">Kategorisiz</string>
     <string name="menu_delete">Sil</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Sık Kullanılanlara Ekle</string>
     <string name="menu_preview">Ön izleme</string>
     <string name="menu_share">Paylaş</string>
+
+    <string name="search_in_category">%1$s içinde arama</string>
+    <string name="search_in_all">Tüm notlarda arama</string>
 
     <string name="change_category_title">Bir kategori seçin</string>
 
@@ -54,9 +55,6 @@
     <string name="error_synchronization">Eşitlenemedi</string>
     <string name="error_json">Notlar uygulaması sunucu üzerinde etkinleştirilmiş mi?</string>
     <string name="error_no_network">Ağ bağlantısı yok</string>
-    <string name="error_files_app">Dosyalar uygulamasını kurdunuz mu?</string>
-    <string name="error_token_mismatch">Dosyalar uygulaması ile bağlantı kurulamadı.</string>
-    <string name="error_insufficient_storage">Sunucu depolama alanı doldu.</string>
     <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
 
     <!-- About -->
@@ -120,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Ön izleme yüklenemedi. Lütfen içeriği olmayan iki haneli rakamdan oluşan bir liste ögesi bulunduğundan emin olun.</string>
     <string name="simple_more">Daha Fazla</string>
     <string name="simple_move">Taşı</string>
-    <string name="error_files_app_version_too_old">Dosyalar uygulamanızın sürümü güncel mi?</string>
     <string name="checkbox_could_not_be_toggled">İşaret kutusunun işareti değiştirilemedi.</string>
     <string name="bulk_notes_deleted">%1$d not silindi</string>
     <string name="bulk_notes_restored">%1$dnot geri yüklendi</string>
@@ -151,12 +148,18 @@
     <string name="added_content">\"%1$s\" eklendi</string>
     <string name="shared_text_empty">Paylaşılan metin boş</string>
     <string name="append_to_note">Nota ekle</string>
+    <string name="change_note_title">Not başlığını değiştir</string>
+    <string name="menu_edit_title">Başlığı düzenle</string>
     <string name="settings_branding">Markalama</string>
+    <string name="settings_gridview">Tablo görünümü 🆕</string>
     <string name="simple_security">Güvenlik</string>
     <string name="simple_appearance">Görünüm</string>
     <string name="simple_synchronization">Eşitleme</string>
+    <string name="simple_behavior">Davranış</string>
     <string name="share_multiple">%1$d notun içeriğini paylaş</string>
     <string name="manage_accounts">Hesap yönetimi</string>
+    <string name="action_formatting_help">Biçimlendirme</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Düzenleme kipinde aç</item>
@@ -191,4 +194,53 @@
         <item quantity="other">%d seçilmiş</item>
     </plurals>
 
-    </resources>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Bağlama göre biçimlendirme</string>
+    <string name="formatting_help_cbf_body_1">Notlar uygulamasının önemli bir tasarım amacı, dikkat dağıtmayan bir araç sağlamaktır. Yine de metinlerinizi Markdown kullanarak biçimlendirebilirsiniz. Aşağıdaki örneklerden bazılarında kısayolları kullanarak notlarınızı aşağıdaki kodları yazmadan biçimlendirebilirsiniz.</string>
+    <string name="formatting_help_cbf_body_2">Yalnız bir metin bölümü seçerek ya da herhangi bir konumda imlece dokunarak varsayılan kayıtların yanında açılan menüden %1$s, %2$s, %3$s, %4$s gibi kayıtlar ya da %5$s seçenekleri kullanabilirsiniz.</string>
+
+    <string name="formatting_help_text_title">Metin</string>
+    <string name="formatting_help_text_body">Markdown ile bazı sözcükleri %1$skalın%1$s ya da %2$syatık%2$s yapmak çok kolaydır. Bazı sözcüklerin %3$süzerini çizebilir%3$s ve [Nextcloud bağlantısı](https://nextcloud.com) gibi bağlantı verebilirsiniz.</string>
+
+    <string name="formatting_help_lists_title">Listeler</string>
+    <string name="formatting_help_lists_body_1">Bazen listelerin numaralı olmasını istersiniz:</string>
+    <string name="formatting_help_lists_body_2">Bir</string>
+    <string name="formatting_help_lists_body_3">İki</string>
+    <string name="formatting_help_lists_body_4">Üç</string>
+    <string name="formatting_help_lists_body_5">Bazen listelerde madde imi kullanılmasını istersiniz:</string>
+    <string name="formatting_help_lists_body_6">Bir satıra tire ile başlayın</string>
+    <string name="formatting_help_lists_body_7">Alt imler için tire ya da yıldız önüne iki boşluk ekleyin:</string>
+    <string name="formatting_help_lists_body_8">Bunun gibi</string>
+    <string name="formatting_help_lists_body_9">Ve bunun gibi</string>
+
+    <string name="formatting_help_checkboxes_title">İşaret kutuları</string>
+    <string name="formatting_help_checkboxes_body_1">Bir işaret kutusu eklemek için köşeli parantezler ile biten bir liste kullanın</string>
+    <string name="formatting_help_checkboxes_body_2">1. öge</string>
+    <string name="formatting_help_checkboxes_body_3">2. öge</string>
+
+    <string name="formatting_help_structured_documents_title">Yapılandırılmış belgeler</string>
+    <string name="formatting_help_structured_documents_body_1">Bazen belgelerinizi yapılandırmak için farklı düzeylerde başlıklar kullanmak yararlı olabilir. Başlık oluşturmak için satırlara %1$s ile başlayın. Bir satırda %2$s gibi birden çok simge kullanılması başlık düzeyini ve boyutunu azaltır.</string>
+    <string name="formatting_help_structured_documents_body_2">Bu üçüncü düzey bir başlık</string>
+    <string name="formatting_help_structured_documents_body_3">Farklı başlık boyutları için bir %1$s ile altı %2$s arasında seçim yapabilirsiniz.</string>
+    <string name="formatting_help_structured_documents_body_4">Birinden alıntı yapmak isterseniz satırdan önce %1$s karakterini kullanın:</string>
+    <string name="formatting_help_structured_documents_body_5">Hayal gücü bilgiden daha önemlidir. Bilgi sınırlıyken, hayal gücü tüm dünyayı kapsar.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Kod</string>
+    <string name="formatting_help_code_body_1">Markdown ile kod yazmanın birçok farklı yolu vardır. Satır arası kod bloklarınız varsa, bunları ters tırnaklar arasında yazın:</string>
+    <string name="formatting_help_code_body_2">Markdown ayrıca kod çiti olarak adlandırılan ve girinti olmadan birden fazla satıra izin veren bir şeyi destekler:</string>
+    <string name="formatting_help_code_body_3">Ve söz dizimi vurgulamasını kullanmak istiyorsanız, dili ekleyin:</string>
+
+    <string name="formatting_help_unsupported_title">Desteklenmiyor</string>
+    <string name="formatting_help_unsupported_body_1">Markdown desteğini sürekli olarak geliştirmeye çalışıyoruz. Ancak henüz Notes uygulamasının desteklemediği birkaç özellik var:</string>
+    <string name="formatting_help_unsupported_body_2">Tablolar</string>
+    <string name="formatting_help_unsupported_body_3">Görseller</string>
+    <string name="formatting_help_unsupported_body_4">Bu özelliklerden biri için destek olmak isterseniz, GitHub ya da e-posta üzerinden bizimle görüşün.</string>
+    <string name="simple_other">Diğer</string>
+    <string name="sort_last_modified">Değiştirme tarihine göre sırala</string>
+    <string name="sort_alphabetically">Alfabeye göre sırala</string>
+</resources>

@@ -1,0 +1,11 @@
+2.16.1
+
+- 👥 Fix wrong avatars in multi user setup
+- 🧹 Design polishing (@thgoebel)
+
+2.16.0
+
+- 🔧 Support APIv1
+  - Title will only be auto generated when creating a new note
+  - Ability to change title manually
+- 🔤 Make categories sortable by alphabet or modified date (#603) (@WingsUpete @Hui-Ouyang16 @IF-ACT)

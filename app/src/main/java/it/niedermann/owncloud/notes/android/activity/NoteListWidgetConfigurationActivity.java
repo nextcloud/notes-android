@@ -93,10 +93,6 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 } else if (itemFavorites.equals(item)) {
                     data.setMode(NoteListsWidgetData.MODE_DISPLAY_STARRED);
                 } else {
-                    String category = "";
-                    if (!item.label.equals(getString(R.string.action_uncategorized))) {
-                        category = item.label;
-                    }
                     data.setMode(NoteListsWidgetData.MODE_DISPLAY_CATEGORY);
                     if (item instanceof CategoryNavigationItem) {
                         data.setCategoryId(((CategoryNavigationItem) item).categoryId);

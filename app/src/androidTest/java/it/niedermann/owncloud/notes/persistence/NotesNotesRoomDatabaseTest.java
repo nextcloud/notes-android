@@ -1,8 +1,20 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import it.niedermann.owncloud.notes.model.Capabilities;
+import it.niedermann.owncloud.notes.model.Category;
+import it.niedermann.owncloud.notes.model.CloudNote;
+import it.niedermann.owncloud.notes.model.DBNote;
+import it.niedermann.owncloud.notes.model.DBStatus;
+import it.niedermann.owncloud.notes.model.LocalAccount;
+import it.niedermann.owncloud.notes.model.NavigationAdapter;
+import it.niedermann.owncloud.notes.util.CategorySortingMethod;
+import it.niedermann.owncloud.notes.util.NoteUtil;
+
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.preference.PreferenceManager;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -22,14 +34,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
-
-import it.niedermann.owncloud.notes.model.Capabilities;
-import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.util.NoteUtil;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -146,7 +150,7 @@ public class NotesNotesRoomDatabaseTest {
             String newContent = getCurDate() + " This is a even greater day my friend.";
             DBNote dbNote = new DBNote(newNoteID, 1, Calendar.getInstance(), "A Greater Day",
                     newContent, true, "Best Friend's Record", null, DBStatus.VOID,
-                    accountID, NoteUtil.generateNoteExcerpt(newContent), 0);
+                    accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
 
             // Add a new note
             long noteID = db.addNote(accountID, dbNote);
@@ -161,7 +165,7 @@ public class NotesNotesRoomDatabaseTest {
             newContent = getCurDate() + " This is a even greater day my friend.";
             dbNote = new DBNote(0, 1, Calendar.getInstance(), "An Even Greater Day",
                     newContent, true, "Sincere Friend's Record", null, DBStatus.VOID,
-                    accountID, NoteUtil.generateNoteExcerpt(newContent), 0);
+                    accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
             // Add a new note
             noteID = db.addNote(accountID, dbNote);
             // Check if this note is added successfully
@@ -544,6 +548,98 @@ public class NotesNotesRoomDatabaseTest {
             fail(Arrays.toString(e.getStackTrace()));
             Log.e("Test_13_getCategoryIdByTitle", Arrays.toString(e.getStackTrace()));
         }
+    }
+
+//    @Test
+//    public void test_14_upgrade() {
+//        SQLiteDatabase sqlite_db = db.getReadableDatabase();
+//        Cursor cursor = sqlite_db.rawQuery("SELECT * FROM " + AbstractNotesDatabase.table_category, null);
+//        cursor.moveToNext();
+//        int sorting_method = cursor.getInt(3);
+//        Log.i("TEST_14_UPGRADE", "sorting method index: " + sorting_method);
+//        assertEquals(0, sorting_method);
+//    }
+
+    @Test
+    public void test_15_getAndModifyCategoryOrderByTitle() {
+        // add a note to database
+        CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
+                "A Coding Day", "This is a day which is very suitable to code.",
+                true, "CodingDiary", null);
+        long noteID = db.addNote(account.getId(), cloudNote);
+
+        // check the default value of ordering_method
+        CategorySortingMethod defaultMethod = db.getCategoryOrderByTitle(account.getId(), "CodingDiary");
+        assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
+
+        // modify the value of ordering_method and check
+        db.modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = db.getCategoryOrderByTitle(account.getId(), "CodingDiary");
+        assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
+
+        // delete the Node
+        db.deleteNote(noteID, DBStatus.VOID);
+    }
+
+    @Test
+    public void test_16_getAndModifyCategoryOrder() {
+        // Normal categories
+        // add a note to database
+        CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
+                "A Coding Day", "This is a day which is very suitable to code.",
+                true, "CodingDiary", null);
+        long noteID = db.addNote(account.getId(), cloudNote);
+
+        // check the default value of ordering_method
+        CategorySortingMethod defaultMethod = db.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
+        assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
+
+        // modify the value of ordering_method and check
+        db.modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = db.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
+        assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
+
+        // delete the Node
+        db.deleteNote(noteID, DBStatus.VOID);
+
+        // Special categories
+        Context ctx = db.getContext().getApplicationContext();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences.Editor spe = sp.edit();
+        spe.clear();
+        spe.apply();
+        // check default value
+        // all notes
+        defaultMethod = db.getCategoryOrder(account.getId(), new Category(null, false));
+        assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
+
+        // uncategorized
+        defaultMethod = db.getCategoryOrder(account.getId(), new Category("", false));
+        assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
+
+        // favorite
+        defaultMethod = db.getCategoryOrder(account.getId(), new Category(null, true));
+        assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
+
+        // modify the value of ordering_method and check
+        // all notes
+        db.modifyCategoryOrder(account.getId(), new Category(null, false), CategorySortingMethod.getCSM(1));
+        methodAfterModify = db.getCategoryOrder(account.getId(), new Category(null, false));
+        assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
+
+        // uncategorized
+        db.modifyCategoryOrder(account.getId(), new Category("", false), CategorySortingMethod.getCSM(1));
+        methodAfterModify = db.getCategoryOrder(account.getId(), new Category("", false));
+        assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
+
+        // favorite
+        db.modifyCategoryOrder(account.getId(), new Category(null, true), CategorySortingMethod.getCSM(1));
+        methodAfterModify = db.getCategoryOrder(account.getId(), new Category(null, true));
+        assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
+
+        // delete SharedPreferences
+        spe.clear();
+        spe.apply();
     }
 
     public static String getCurDate() {

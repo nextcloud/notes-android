@@ -13,51 +13,41 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
+import it.niedermann.owncloud.notes.glide.SingleSignOnOriginHeader;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 
-public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserViewHolder;
+
+public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserViewHolder> {
 
     @NonNull
     private final List<LocalAccount> localAccounts;
     @NonNull
     private final MoveAccountListener moveAccountListener;
-    @NonNull
-    private final Context context;
 
-    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull MoveAccountListener moveAccountListener, @NonNull Context context) {
+    AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull MoveAccountListener moveAccountListener) {
         super();
         this.localAccounts = localAccounts;
         this.moveAccountListener = moveAccountListener;
-        this.context = context;
     }
 
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AccountChooserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_account_choose, parent, false);
         return new AccountChooserViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        LocalAccount localAccount = localAccounts.get(position);
-        AccountChooserViewHolder accountChooserViewHolder = (AccountChooserViewHolder) holder;
-        accountChooserViewHolder.getAccountLayout().setOnClickListener((v) -> moveAccountListener.moveToAccount(localAccount));
-
-        Glide
-                .with(context)
-                .load(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
-                .error(R.drawable.ic_account_circle_grey_24dp)
-                .apply(RequestOptions.circleCropTransform())
-                .into(accountChooserViewHolder.getAvatar());
-
-        accountChooserViewHolder.getUsername().setText(localAccount.getAccountName());
+    public void onBindViewHolder(@NonNull AccountChooserViewHolder holder, int position) {
+        holder.bind(localAccounts.get(position), moveAccountListener);
     }
 
     @Override
@@ -73,16 +63,17 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             binding = ItemAccountChooseBinding.bind(view);
         }
 
-        private LinearLayout getAccountLayout() {
-            return binding.accountLayout;
-        }
+        public void bind(LocalAccount localAccount, MoveAccountListener moveAccountListener) {
+            Glide
+                    .with(binding.accountItemAvatar.getContext())
+                    .load(new GlideUrl(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64", new SingleSignOnOriginHeader(localAccount)))
+                    .error(R.drawable.ic_account_circle_grey_24dp)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(binding.accountItemAvatar);
 
-        private ImageView getAvatar() {
-            return binding.accountItemAvatar;
-        }
-
-        private TextView getUsername() {
-            return binding.accountItemLabel;
+            binding.accountLayout.setOnClickListener((v) -> moveAccountListener.moveToAccount(localAccount));
+            binding.accountName.setText(localAccount.getUserName());
+            binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         }
     }
 

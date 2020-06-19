@@ -13,15 +13,12 @@
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Salvar</string>
     <string name="simple_about">Sobre</string>
-    <string name="simple_accounts">Contas</string>
     <string name="simple_bold">Negrito</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Itálico</string>
     <string name="action_note_deleted">%1$s excluído</string>
     <string name="action_note_restored">%1$s Restaurado</string>
     <string name="action_undo">Desfazer</string>
-    <string name="action_drawer_open">abrir navegação</string>
-    <string name="action_drawer_close">fechar navegação</string>
     <string name="action_uncategorized">Sem categoria</string>
     <string name="menu_delete">Excluir</string>
     <string name="menu_change_category">Categoria</string>
@@ -54,9 +51,6 @@
     <string name="error_synchronization">A sincronização falhou</string>
     <string name="error_json">O aplicativo Notes está ativado no servidor?</string>
     <string name="error_no_network">Sem conexão de rede</string>
-    <string name="error_files_app">Você instalou o aplicativo Files?</string>
-    <string name="error_token_mismatch">Não é possível conectar-se ao aplicativo de arquivos.</string>
-    <string name="error_insufficient_storage">Seu espaço de armazenagem no servidor está cheio.</string>
     <string name="error_unknown">Ocorreu um erro desconhecido.</string>
 
     <!-- About -->
@@ -120,7 +114,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Não foi possível carregar a visualização. Verifique se há um item da lista numerada de dois dígitos sem conteúdo.</string>
     <string name="simple_more">Mais</string>
     <string name="simple_move">Mover</string>
-    <string name="error_files_app_version_too_old">A versão do aplicativo files está atualizada?</string>
     <string name="checkbox_could_not_be_toggled">Não foi possível alternar a caixa de seleção.</string>
     <string name="bulk_notes_deleted"> %1$d notas excluídas</string>
     <string name="bulk_notes_restored">%1$d notas restauradas</string>
@@ -191,4 +184,10 @@
         <item quantity="other">%d selecionados</item>
     </plurals>
 
+    <string name="formatting_help_text_title">Texto</string>
+    <string name="formatting_help_checkboxes_title">Caixas de seleção</string>
+    <string name="formatting_help_code_title">Código</string>
+    <string name="formatting_help_unsupported_title">Não suportado</string>
+    <string name="formatting_help_unsupported_body_3">Imagens</string>
+    <string name="simple_other">Outro</string>
     </resources>

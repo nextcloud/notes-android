@@ -7,10 +7,8 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingStart="@dimen/spacer_1hx"
-    android:paddingLeft="@dimen/spacer_1hx"
     android:paddingTop="@dimen/spacer_1x"
     android:paddingEnd="@dimen/spacer_1hx"
-    android:paddingRight="@dimen/spacer_1hx"
     android:paddingBottom="@dimen/spacer_1x">
 
     <ImageView
@@ -21,9 +19,7 @@
         android:contentDescription="@string/widget_entry_fav_contentDescription"
         android:foregroundGravity="center_vertical"
         android:paddingStart="@dimen/widget_note_list_inner_padding"
-        android:paddingLeft="@dimen/widget_note_list_inner_padding"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
-        android:paddingRight="@dimen/widget_note_list_outer_padding"
         app:srcCompat="@drawable/ic_star_yellow_24dp" />
 
     <TextView
@@ -35,9 +31,7 @@
         android:ellipsize="end"
         android:lines="1"
         android:paddingStart="@dimen/widget_note_list_inner_padding"
-        android:paddingLeft="@dimen/widget_note_list_inner_padding"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
-        android:paddingRight="@dimen/widget_note_list_outer_padding"
         android:textColor="@color/widget_fg_default"
         tools:text="@tools:sample/lorem/random" />
 

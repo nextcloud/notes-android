@@ -13,21 +13,21 @@
     <string name="simple_edit">Bewerken</string>
     <string name="action_edit_save">Opslaan</string>
     <string name="simple_about">Over</string>
-    <string name="simple_accounts">Accounts</string>
     <string name="simple_bold">Vet</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Scheef</string>
     <string name="action_note_deleted">Verwijderd %1$s</string>
     <string name="action_note_restored">Hersteld %1$s</string>
     <string name="action_undo">Ongedaan maken</string>
-    <string name="action_drawer_open">open navigatie</string>
-    <string name="action_drawer_close">sluit navigatie</string>
     <string name="action_uncategorized">Niet gecategoriseerd</string>
     <string name="menu_delete">Verwijderen</string>
     <string name="menu_change_category">Categorie</string>
     <string name="menu_favorite">Favoriet</string>
     <string name="menu_preview">Voorbeeldweergave</string>
     <string name="menu_share">Delen</string>
+
+    <string name="search_in_category">Zoeken in %1$s</string>
+    <string name="search_in_all">Zoek in alle notities</string>
 
     <string name="change_category_title">Kies een categorie
 </string>
@@ -55,9 +55,6 @@
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_json">is de Notities app op de server geactiveerd?</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
-    <string name="error_files_app">Heb je de Bestanden app geïnstalleerd?</string>
-    <string name="error_token_mismatch">Kan niet verbinden met de bestanden-app</string>
-    <string name="error_insufficient_storage">De serveropslag is vol.</string>
     <string name="error_unknown">Er trad een onbekende fout op.</string>
 
     <!-- About -->
@@ -121,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Kon geen voorbeeld laden. Controleer of er een lege genummerde lijst is met twee cijfers is.</string>
     <string name="simple_more">Meer</string>
     <string name="simple_move">Verplaatsen</string>
-    <string name="error_files_app_version_too_old">Is je Bestanden app versie up-to-date?</string>
     <string name="checkbox_could_not_be_toggled">Keuzevakje kon niet worden omgeschakeld.</string>
     <string name="bulk_notes_deleted">Verwijderde %1$d notities</string>
     <string name="bulk_notes_restored">Herstelde %1$d notities</string>
@@ -156,8 +152,11 @@
     <string name="simple_security">Beveiliging</string>
     <string name="simple_appearance">Uiterlijk</string>
     <string name="simple_synchronization">Synchronisatie</string>
+    <string name="simple_behavior">Gedrag</string>
     <string name="share_multiple">Deel de inhoud van %1$d notities</string>
     <string name="manage_accounts">Accounts beheren </string>
+    <string name="action_formatting_help">Formatteren</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wbewerkmodus</item>
@@ -192,4 +191,10 @@
         <item quantity="other">%d geselecteerd</item>
     </plurals>
 
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_checkboxes_title">Aanvinkvakjes</string>
+    <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_unsupported_title">Niet ondersteund</string>
+    <string name="formatting_help_unsupported_body_3">Afbeeldingen</string>
+    <string name="simple_other">Ander</string>
     </resources>

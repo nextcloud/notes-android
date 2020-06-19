@@ -9,19 +9,17 @@
     <string name="action_settings">Settings</string>
     <string name="action_trashbin">Zmazané poznámky</string>
     <string name="action_search">Hľadať</string>
+    <string name="action_sorting_method">Metóda triedenia</string>
     <string name="simple_cancel">Zrušiť</string>
     <string name="simple_edit">Upraviť</string>
     <string name="action_edit_save">Uložiť</string>
     <string name="simple_about">O aplikácii</string>
-    <string name="simple_accounts">Účty</string>
     <string name="simple_bold">Tučné</string>
     <string name="simple_link">Odkaz</string>
     <string name="simple_italic">Kurzíva</string>
     <string name="action_note_deleted">Vymazané %1$s</string>
     <string name="action_note_restored">Obnovené %1$s</string>
     <string name="action_undo">Vrátiť</string>
-    <string name="action_drawer_open">otvoriť navigáciu</string>
-    <string name="action_drawer_close">zavrieť navigáciu</string>
     <string name="action_uncategorized">Nezaradené</string>
     <string name="menu_delete">Zmazať</string>
     <string name="menu_change_category">Kategória</string>
@@ -57,9 +55,6 @@
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_json">Je na serveri aktivovaná aplikácia Notes?</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
-    <string name="error_files_app">Nainštalovali ste aplikáciu súbory?</string>
-    <string name="error_token_mismatch">Nedá sa spojiť s aplikáciou Súbory</string>
-    <string name="error_insufficient_storage">Serverové úložisko je plné</string>
     <string name="error_unknown">Vyskytla sa neznáma chyba</string>
 
     <!-- About -->
@@ -123,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Nie je možné načítať náhľad. Skontrolujte či je tu položka dvojčíslicového zoznamu bez obsahu.</string>
     <string name="simple_more">Viac</string>
     <string name="simple_move">Presunúť</string>
-    <string name="error_files_app_version_too_old">Je vami používaná apka Súbory aktuálna?</string>
     <string name="checkbox_could_not_be_toggled">Nepodarilo sa prepnúť zaškrtávaciu kolónku.</string>
     <string name="bulk_notes_deleted">Vymazaných %1$d poznámok</string>
     <string name="bulk_notes_restored">Obnovených %1$d poznámok</string>
@@ -154,7 +148,10 @@
     <string name="added_content">Pridané \"%1$s\"</string>
     <string name="shared_text_empty">Zdieľaný text bol prázdny</string>
     <string name="append_to_note">Pripojiť k poznámke</string>
+    <string name="change_note_title">Zmeniť názov poznámky</string>
+    <string name="menu_edit_title">Upraviť názov</string>
     <string name="settings_branding">Použitie vlastného loga</string>
+    <string name="settings_gridview">Mriežkové zobrazenie 🆕</string>
     <string name="simple_security">Zabezpečenie</string>
     <string name="simple_appearance">Vzhľad</string>
     <string name="simple_synchronization">Synchronizácia</string>
@@ -199,4 +196,53 @@
         <item quantity="other">%d vybraný</item>
     </plurals>
 
-    </resources>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Kontextové formátovanie</string>
+    <string name="formatting_help_cbf_body_1">Hlavným cieľom aplikácie Notes je poskytnúť nástroj bez rozptyľovania. Svoje texty však budete môcť formátovať pomocou aplikácie Markdown. Pre rôzne príklady uvedené nižšie môžete použiť klávesové skratky, pomocou ktorých môžete svoje poznámky formátovať bez toho, aby ste museli zadávať kódy uvedené nižšie.</string>
+    <string name="formatting_help_cbf_body_2">Stačí si vybrať rozsah textu alebo ťuknúť na kurzor na ktorejkoľvek pozícii a dostanete vyskakovacie menu, ktoré obsahuje tieto východzie položky %1$s, %2$s, %3$s položky ako %4$s alebo %5$s.</string>
+
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_text_body">Pomocou Markdown ľahké urobiť pár slov %1$stučným písmom%1$s a iných slov %2$skurzívou%2$s. Niektoré slová môžete %3$sprečiarknuť%3$s a dokonca [odkaz na Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Zoznamy</string>
+    <string name="formatting_help_lists_body_1">Niekedy chcete číslované zoznamy:</string>
+    <string name="formatting_help_lists_body_2">Jeden</string>
+    <string name="formatting_help_lists_body_3">Dva</string>
+    <string name="formatting_help_lists_body_4">Tri</string>
+    <string name="formatting_help_lists_body_5">Niekedy chcete odrážky:</string>
+    <string name="formatting_help_lists_body_6">Riadok začnite pomlčkou</string>
+    <string name="formatting_help_lists_body_7">A ak máte vnorený bod, vložte pred pomlčku alebo hviezdičku dve medzery:</string>
+    <string name="formatting_help_lists_body_8">Ako toto</string>
+    <string name="formatting_help_lists_body_9">A toto</string>
+
+    <string name="formatting_help_checkboxes_title">Zaškrtávacie políčka</string>
+    <string name="formatting_help_checkboxes_body_1">Ak chcete vytvoriť zaškrtávacie políčko, použite zoznam nasledovaný hranatými zátvorkami</string>
+    <string name="formatting_help_checkboxes_body_2">Položka 1</string>
+    <string name="formatting_help_checkboxes_body_3">Položka 2</string>
+
+    <string name="formatting_help_structured_documents_title">Štrukturované dokumenty</string>
+    <string name="formatting_help_structured_documents_body_1">Niekedy je užitočné mať na štruktúrovanie dokumentov rôzne úrovne nadpisov. Ak chcete vytvoriť nadpisy, začnite riadky znakom %1$s. Viacero %2$s v riadku označuje menšie veľkosti nadpisu.</string>
+    <string name="formatting_help_structured_documents_body_2">Toto je nadpis tretej úrovne</string>
+    <string name="formatting_help_structured_documents_body_3">Pre rôzne veľkosti nadpisov môžete použiť od jednej %1$s po šesť %2$s.</string>
+    <string name="formatting_help_structured_documents_body_4">Ak chcete niekoho citovať, pred riadok použite znak %1$s:</string>
+    <string name="formatting_help_structured_documents_body_5">Predstavivosť je dôležitejšia ako znalosť. Vedomosti sú obmedzené. Predstavivosť obklopuje svet.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Kód</string>
+    <string name="formatting_help_code_body_1">Tam, kde je to možné, ako upraviť štýl vrátane Markdown. Ak chcete vložiť kód, zalomte ich do spätných lomiek:</string>
+    <string name="formatting_help_code_body_2">Markdown tiež podporuje niečo, čo sa nazýva oplotenie kódu, čo umožňuje použiť viac riadkov bez odsadenia:</string>
+    <string name="formatting_help_code_body_3">Ak chcete použiť zvýraznenie syntaxe, uveďte jazyk:</string>
+
+    <string name="formatting_help_unsupported_title">Nepodporované</string>
+    <string name="formatting_help_unsupported_body_1">Aj keď sa pokúšame neustále zlepšovať podporu Markdown, existuje niekoľko funkcií, ktoré zatiaľ Poznámky nepodporujú:</string>
+    <string name="formatting_help_unsupported_body_2">Tabuľky</string>
+    <string name="formatting_help_unsupported_body_3">Obrázky</string>
+    <string name="formatting_help_unsupported_body_4">Ak máte záujem prispieť k podpore niektorej z týchto funkcií, kontaktujte nás prostredníctvom služby GitHub alebo e-mailom.</string>
+    <string name="simple_other">Iné</string>
+    <string name="sort_last_modified">Zoradiť podľa upraveného dátumu</string>
+    <string name="sort_alphabetically">Zoradiť podľa abecedy</string>
+</resources>

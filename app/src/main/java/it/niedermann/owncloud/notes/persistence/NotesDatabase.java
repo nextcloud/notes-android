@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.persistence;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Resources;
@@ -21,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -41,10 +43,9 @@ import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
-import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
-import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
 import it.niedermann.owncloud.notes.model.ApiVersion;
 import it.niedermann.owncloud.notes.model.Capabilities;
+import it.niedermann.owncloud.notes.model.Category;
 import it.niedermann.owncloud.notes.model.CloudNote;
 import it.niedermann.owncloud.notes.model.DBNote;
 import it.niedermann.owncloud.notes.model.DBStatus;
@@ -53,6 +54,7 @@ import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.model.NavigationAdapter;
 import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
 import it.niedermann.owncloud.notes.model.SingleNoteWidgetData;
+import it.niedermann.owncloud.notes.util.CategorySortingMethod;
 import it.niedermann.owncloud.notes.util.ColorUtil;
 import it.niedermann.owncloud.notes.util.NoteUtil;
 
@@ -60,6 +62,7 @@ import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACT
 import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.updateSingleNoteWidgets;
 import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
+import static it.niedermann.owncloud.notes.util.NoteUtil.generateNoteExcerpt;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
@@ -96,7 +99,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param note Note
      */
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
-        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(note.getContent()), 0);
+        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
         long id = addNote(accountId, dbNote);
         notifyWidgets();
         getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
@@ -123,7 +126,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         } else {
             values.put(key_status, DBStatus.VOID.getTitle());
             values.put(key_account_id, accountId);
-            values.put(key_excerpt, NoteUtil.generateNoteExcerpt(note.getContent()));
+            values.put(key_excerpt, generateNoteExcerpt(note.getContent(), note.getTitle()));
         }
         if (note.getRemoteId() > 0) {
             values.put(key_remote_id, note.getRemoteId());
@@ -295,6 +298,19 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
+     * This method is overloading searchNotes method.
+     * In order to keep the original code (called this method) still work.
+     *
+     * @return List&lt;Note&gt;
+     */
+    @NonNull
+    @WorkerThread
+    public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query,
+                                    @Nullable String category, @Nullable Boolean favorite) {
+        return searchNotes(accountId, query, category, favorite, null);
+    }
+
+    /**
      * Returns a list of all Notes in the Database
      * This method only supports to return the notes in the categories with the matched title or the notes in the categories whose ancestor category matches
      * For example, three categories with the title "abc", "abc/aaa" and "abcd"
@@ -304,7 +320,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
      */
     @NonNull
     @WorkerThread
-    public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query, @Nullable String category, @Nullable Boolean favorite) {
+    public List<DBNote> searchNotes(long accountId, @Nullable CharSequence query,
+                                    @Nullable String category, @Nullable Boolean favorite,
+                                    @Nullable CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
         List<String> where = new ArrayList<>();
         List<String> args = new ArrayList<>();
@@ -338,6 +356,10 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
 
         String order = category == null ? default_order : key_category + ", " + key_title;
+        // TODO: modify here, need to test
+        if (sortingMethod != null) {
+            order = key_favorite + " DESC," + sortingMethod.getSorder();
+        }
         return getNotesCustom(accountId, TextUtils.join(" AND ", where), args.toArray(new String[]{}), order, true);
     }
 
@@ -497,22 +519,36 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return db.insert(table_category, null, values);
     }
 
+    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
+        return updateNoteAndSync(ssoAccount, localAccount, oldNote, newContent, null, callback);
+    }
+
     /**
      * Updates a single Note with a new content.
      * The title is derived from the new content automatically, and modified date as well as DBStatus are updated, too -- if the content differs to the state in the database.
      *
      * @param oldNote    Note to be changed
      * @param newContent New content. If this is <code>null</code>, then <code>oldNote</code> is saved again (useful for undoing changes).
+     * @param newTitle   New title. If this is <code>null</code>, then either the old title is reused (in case the note has been synced before) or a title is generated (in case it is a new note)
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed note if differs from database, otherwise the old note.
      */
-    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable ISyncCallback callback) {
-        //debugPrintFullDB();
+    public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         DBNote newNote;
         if (newContent == null) {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, oldNote.getExcerpt(), oldNote.getScrollY());
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
-            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(newContent, getContext()), newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, accountId, NoteUtil.generateNoteExcerpt(newContent), oldNote.getScrollY());
+            final String title;
+            if (newTitle != null) {
+                title = newTitle;
+            } else {
+                if (oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
+                    title = NoteUtil.generateNonEmptyNoteTitle(newContent, getContext());
+                } else {
+                    title = oldNote.getTitle();
+                }
+            }
+            newNote = new DBNote(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.isFavorite(), oldNote.getCategory(), oldNote.getEtag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues(7);
@@ -524,7 +560,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_excerpt, newNote.getExcerpt());
         values.put(key_scroll_y, newNote.getScrollY());
         int rows = db.update(table_notes, values, key_id + " = ? AND (" + key_content + " != ? OR " + key_category + " != ?)", new String[]{String.valueOf(newNote.getId()), newNote.getContent(), newNote.getCategory()});
-        removeEmptyCategory(accountId);
+        removeEmptyCategory(localAccount.getId());
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if (rows > 0) {
             notifyWidgets();
@@ -576,7 +612,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_favorite, remoteNote.isFavorite());
         values.put(key_category, getCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
         values.put(key_etag, remoteNote.getEtag());
-        values.put(key_excerpt, NoteUtil.generateNoteExcerpt(remoteNote.getContent()));
+        values.put(key_excerpt, generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
         String whereClause;
         String[] whereArgs;
         if (forceUnchangedDBNoteState != null) {
@@ -616,7 +652,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             ShortcutManager shortcutManager = getContext().getSystemService(ShortcutManager.class);
-            if(shortcutManager != null) {
+            if (shortcutManager != null) {
                 shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
                     String shortcutId = id + "";
                     if (shortcut.getId().equals(shortcutId)) {
@@ -657,28 +693,30 @@ public class NotesDatabase extends AbstractNotesDatabase {
         new Thread(() -> {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
                 ShortcutManager shortcutManager = getContext().getApplicationContext().getSystemService(ShortcutManager.class);
-                if (!shortcutManager.isRateLimitingActive()) {
-                    List<ShortcutInfo> newShortcuts = new ArrayList<>();
+                if (shortcutManager != null) {
+                    if (!shortcutManager.isRateLimitingActive()) {
+                        List<ShortcutInfo> newShortcuts = new ArrayList<>();
 
-                    for (DBNote note : getRecentNotes(accountId)) {
-                        if (!TextUtils.isEmpty(note.getTitle())) {
-                            Intent intent = new Intent(getContext().getApplicationContext(), EditNoteActivity.class);
-                            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-                            intent.setAction(ACTION_SHORTCUT);
+                        for (DBNote note : getRecentNotes(accountId)) {
+                            if (!TextUtils.isEmpty(note.getTitle())) {
+                                Intent intent = new Intent(getContext().getApplicationContext(), EditNoteActivity.class);
+                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                                intent.setAction(ACTION_SHORTCUT);
 
-                            newShortcuts.add(new ShortcutInfo.Builder(getContext().getApplicationContext(), note.getId() + "")
-                                    .setShortLabel(note.getTitle() + "")
-                                    .setIcon(Icon.createWithResource(getContext().getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                    .setIntent(intent)
-                                    .build());
-                        } else {
-                            // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
-                            Log.e(TAG, "shortLabel cannot be empty " + note);
+                                newShortcuts.add(new ShortcutInfo.Builder(getContext().getApplicationContext(), note.getId() + "")
+                                        .setShortLabel(note.getTitle() + "")
+                                        .setIcon(Icon.createWithResource(getContext().getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                        .setIntent(intent)
+                                        .build());
+                            } else {
+                                // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
+                                Log.e(TAG, "shortLabel cannot be empty " + note);
+                            }
                         }
+                        Log.d(TAG, "Update dynamic shortcuts");
+                        shortcutManager.removeAllDynamicShortcuts();
+                        shortcutManager.addDynamicShortcuts(newShortcuts);
                     }
-                    Log.d(TAG, "Update dynamic shortcuts");
-                    shortcutManager.removeAllDynamicShortcuts();
-                    shortcutManager.addDynamicShortcuts(newShortcuts);
                 }
             }
         }).start();
@@ -692,7 +730,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param url          URL to the root of the used Nextcloud instance without trailing slash
      * @param username     Username of the account
      * @param accountName  Composed by the username and the host of the URL, separated by @-sign
-     * @param capabilities
+     * @param capabilities {@link Capabilities} object containing information about the brand colors, supported API versions, etc...
      * @throws SQLiteConstraintException in case accountName already exists
      */
     public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) throws SQLiteConstraintException {
@@ -848,9 +886,9 @@ public class NotesDatabase extends AbstractNotesDatabase {
                     Log.i(TAG, "Given API version is a valid JSON array but does not contain any valid API versions. Do not update database.");
                 }
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("API version does contain a non-valid version.");
+                throw new IllegalArgumentException("API version does contain a non-valid version: " + apiVersion);
             } catch (JSONException e) {
-                throw new IllegalArgumentException("API version must contain be a JSON array.");
+                throw new IllegalArgumentException("API version must contain be a JSON array: " + apiVersion);
             }
         } else {
             Log.v(TAG, "Given API version is null. Do not update database");
@@ -1032,7 +1070,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 null,
                 null,
                 null);
-        int id = -1;
+        int id;
         if (cursor.moveToNext()) {
             id = cursor.getInt(0);
         } else {
@@ -1059,6 +1097,141 @@ public class NotesDatabase extends AbstractNotesDatabase {
         getReadableDatabase().delete(table_category,
                 key_category_id + " NOT IN (SELECT " + key_category + " FROM " + table_notes + ")",
                 null);
+    }
+
+    /**
+     * This function is used to get the sorting method of a category by title.
+     * The sorting method of the category can be used to decide
+     * to use which sorting method to show the notes for each categories.
+     *
+     * @param accountId     The user accountID
+     * @param categoryTitle The category title
+     * @return The sorting method in CategorySortingMethod enum format
+     */
+    public CategorySortingMethod getCategoryOrderByTitle(long accountId, String categoryTitle) {
+        validateAccountId(accountId);
+
+        long categoryId = getCategoryIdByTitle(accountId, categoryTitle);
+
+        SQLiteDatabase db = getReadableDatabase();
+        int orderIndex;
+        try (Cursor cursor = db.query(table_category, new String[]{key_category_sorting_method},
+                key_category_id + " = ?", new String[]{String.valueOf(categoryId)},
+                null, null, null)) {
+            orderIndex = 0;
+            while (cursor.moveToNext()) {
+                orderIndex = cursor.getInt(0);
+            }
+        }
+
+        return CategorySortingMethod.getCSM(orderIndex);
+    }
+
+    /**
+     * This method is used to modify the sorting method for one category by title.
+     * The user can determine use which sorting method to show the notes for a category.
+     * When the user changes the sorting method, this method should be called.
+     *
+     * @param accountId     The user accountID
+     * @param categoryTitle The category title
+     * @param sortingMethod The sorting method in CategorySortingMethod enum format
+     */
+    public void modifyCategoryOrderByTitle(
+            long accountId, String categoryTitle, CategorySortingMethod sortingMethod) {
+        validateAccountId(accountId);
+
+        long categoryId = getCategoryIdByTitle(accountId, categoryTitle);
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(key_category_sorting_method, sortingMethod.getCSMID());
+        db.update(table_category, values,
+                key_category_id + " = ?", new String[]{String.valueOf(categoryId)});
+    }
+
+    /**
+     * Gets the sorting method of a category, the category can be normal category or
+     * one of "All notes", "Favorite", and "Uncategorized".
+     * If category is one of these three, sorting method will be got from android.content.SharedPreference.
+     * The sorting method of the category can be used to decide
+     * to use which sorting method to show the notes for each categories.
+     *
+     * @param accountId The user accountID
+     * @param category  The category
+     * @return The sorting method in CategorySortingMethod enum format
+     */
+    public CategorySortingMethod getCategoryOrder(long accountId, Category category) {
+        validateAccountId(accountId);
+
+        final Context ctx = getContext().getApplicationContext();
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
+        int orderIndex;
+
+        if (category.category == null) {
+            if (category.favorite != null && category.favorite) {
+                // Favorite
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_favorites),
+                        0);
+            } else {
+                // All notes
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_all_notes),
+                        0);
+            }
+        } else if (category.category.isEmpty()) {
+            // Uncategorized
+            orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
+                            ' ' + ctx.getString(R.string.action_uncategorized),
+                    0);
+        } else {
+            return getCategoryOrderByTitle(accountId, category.category);
+        }
+
+        return CategorySortingMethod.getCSM(orderIndex);
+    }
+
+    /**
+     * Modifies the sorting method for one category, the category can be normal category or
+     * one of "All notes", "Favorite", and "Uncategorized".
+     * If category is one of these three, sorting method will be modified in android.content.SharedPreference.
+     * The user can determine use which sorting method to show the notes for a category.
+     * When the user changes the sorting method, this method should be called.
+     *
+     * @param accountId     The user accountID
+     * @param category      The category to be modified
+     * @param sortingMethod The sorting method in CategorySortingMethod enum format
+     */
+    public void modifyCategoryOrder(
+            long accountId, Category category, CategorySortingMethod sortingMethod) {
+        validateAccountId(accountId);
+
+        final Context ctx = getContext().getApplicationContext();
+        final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
+        int orderIndex = sortingMethod.getCSMID();
+        if (category.category == null) {
+            if (category.favorite != null && category.favorite) {
+                // Favorite
+                sp.putInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_favorites),
+                        orderIndex);
+            } else {
+                // All notes
+                sp.putInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_all_notes),
+                        orderIndex);
+            }
+        } else if (category.category.isEmpty()) {
+            // Uncategorized
+            sp.putInt(ctx.getString(R.string.action_sorting_method) +
+                            ' ' + ctx.getString(R.string.action_uncategorized),
+                    orderIndex);
+        } else {
+            modifyCategoryOrderByTitle(accountId, category.category, sortingMethod);
+            return;
+        }
+        sp.apply();
     }
 
 }

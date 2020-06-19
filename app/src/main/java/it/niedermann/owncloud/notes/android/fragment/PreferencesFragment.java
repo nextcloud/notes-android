@@ -30,6 +30,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference lockPref;
     private BrandedSwitchPreference wifiOnlyPref;
     private BrandedSwitchPreference brandingPref;
+    private BrandedSwitchPreference gridViewPref;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +51,19 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
                 Log.v(TAG, "branding: " + branding);
                 requireActivity().setResult(Activity.RESULT_OK);
                 requireActivity().recreate();
+                return true;
+            });
+        } else {
+            Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_branding) + "\"");
+        }
+
+        gridViewPref = findPreference(getString(R.string.pref_key_gridview));
+        if (gridViewPref != null) {
+            gridViewPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
+                final Boolean gridView = (Boolean) newValue;
+                Log.v(TAG, "gridView: " + gridView);
+                requireActivity().setResult(Activity.RESULT_OK);
+                Notes.updateGridViewEnabled(gridView);
                 return true;
             });
         } else {
@@ -119,5 +133,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         lockPref.applyBrand(mainColor, textColor);
         wifiOnlyPref.applyBrand(mainColor, textColor);
         brandingPref.applyBrand(mainColor, textColor);
+        gridViewPref.applyBrand(mainColor, textColor);
     }
 }

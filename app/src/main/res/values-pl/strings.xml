@@ -9,19 +9,17 @@
     <string name="action_settings">Ustawienia</string>
     <string name="action_trashbin">Usunięte notatki</string>
     <string name="action_search">Szukaj</string>
+    <string name="action_sorting_method">Metoda sortowania</string>
     <string name="simple_cancel">Anuluj</string>
     <string name="simple_edit">Edytuj</string>
     <string name="action_edit_save">Zapisz</string>
     <string name="simple_about">O aplikacji</string>
-    <string name="simple_accounts">Konta</string>
     <string name="simple_bold">Pogrubienie</string>
     <string name="simple_link">Odnośnik</string>
     <string name="simple_italic">Kursywa</string>
     <string name="action_note_deleted">Usunięto %1$s</string>
     <string name="action_note_restored">Przywrócono %1$s</string>
     <string name="action_undo">Cofnij</string>
-    <string name="action_drawer_open">Otwórz okno nawigacji</string>
-    <string name="action_drawer_close">Zamknij okno nawigacji</string>
     <string name="action_uncategorized">Bez kategorii</string>
     <string name="menu_delete">Usuń</string>
     <string name="menu_change_category">Kategoria</string>
@@ -30,7 +28,7 @@
     <string name="menu_share">Udostępnij</string>
 
     <string name="search_in_category">Szukaj w %1$s</string>
-    <string name="search_in_all">Szukaj we wszystkich notatkach</string>
+    <string name="search_in_all">Szukaj w notatkach</string>
 
     <string name="change_category_title">Wybierz kategorię</string>
 
@@ -57,9 +55,6 @@
     <string name="error_synchronization">Synchronizacja nie powiodła się</string>
     <string name="error_json">Czy aplikacja Notes jest aktywowana na serwerze?</string>
     <string name="error_no_network">Brak połączenia sieciowego</string>
-    <string name="error_files_app">Czy masz zainstalowaną aplikację plików?</string>
-    <string name="error_token_mismatch">Nie można połączyć się z aplikacją plików.</string>
-    <string name="error_insufficient_storage">Pamięć serwera jest pełna.</string>
     <string name="error_unknown">Wystąpił nieznany błąd.</string>
 
     <!-- About -->
@@ -123,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Nie można załadować podglądu. Sprawdź, czy istnieje dwucyfrowa pozycja listy bez zawartości.</string>
     <string name="simple_more">Więcej</string>
     <string name="simple_move">Przenieś</string>
-    <string name="error_files_app_version_too_old">Czy Twoja wersja aplikacji do plików jest aktualna?</string>
     <string name="checkbox_could_not_be_toggled">Nie można zmienić pola wyboru.</string>
     <string name="bulk_notes_deleted">Usunięto notatki %1$d</string>
     <string name="bulk_notes_restored">Przywrócono notatki %1$d</string>
@@ -154,11 +148,14 @@
     <string name="added_content">Dodano \"%1$s\"</string>
     <string name="shared_text_empty">Udostępniony tekst był pusty</string>
     <string name="append_to_note">Dołącz do notatki</string>
+    <string name="change_note_title">Zmień tytuł notatki</string>
+    <string name="menu_edit_title">Edytuj tytuł</string>
     <string name="settings_branding">Motyw serwera</string>
+    <string name="settings_gridview">Widok siatki 🆕</string>
     <string name="simple_security">Bezpieczeństwo</string>
     <string name="simple_appearance">Wygląd</string>
     <string name="simple_synchronization">Synchronizacja</string>
-    <string name="simple_behavior">Zachowane</string>
+    <string name="simple_behavior">Zachowanie</string>
     <string name="share_multiple">Udostępnij treść notatki %1$d</string>
     <string name="manage_accounts">Zarządzaj kontami</string>
     <string name="action_formatting_help">Formatowanie</string>
@@ -199,4 +196,53 @@
         <item quantity="other">%d wybranych</item>
     </plurals>
 
-    </resources>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formatowanie kontekstowe</string>
+    <string name="formatting_help_cbf_body_1">Głównym celem projektowym aplikacji Notes jest zapewnienie narzędzia bez rozpraszania uwagi. Chociaż będziesz mógł sformatować swoje teksty za pomocą Markdown. W przypadku różnych wymienionych poniżej przykładów możesz użyć skrótów, dzięki czemu możesz sformatować swoje notatki bez wpisywania poniższych kodów.</string>
+    <string name="formatting_help_cbf_body_2">Wystarczy wybrać zakres tekstu lub nacisnąć kursor w dowolnej pozycji, a pojawi się menu podręczne, które zawiera domyślne wpisy %1$s, %2$s, %3$s oraz takie jak %4$s lub %5$s.</string>
+
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_text_body">Bardzo łatwo jest wykonać słowa %1$spogrubione%1$s i inne słowa z %2$skursywą%2$s za pomocą Markdown. Możesz również %3$sskreślić%3$s niektóre słowa, a nawet utworzyć [link do Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Listy</string>
+    <string name="formatting_help_lists_body_1">Czasami chcesz mieć listy ponumerowane:</string>
+    <string name="formatting_help_lists_body_2">1 Jeden</string>
+    <string name="formatting_help_lists_body_3">2. Dwa</string>
+    <string name="formatting_help_lists_body_4">3. Trzy</string>
+    <string name="formatting_help_lists_body_5">Czasami chcesz wypunktować:</string>
+    <string name="formatting_help_lists_body_6">Rozpocznij linię gwiazdką</string>
+    <string name="formatting_help_lists_body_7">A jeśli masz podpunkty, umieść dwie spacje przed kreską lub gwiazdką:</string>
+    <string name="formatting_help_lists_body_8">Lubię to</string>
+    <string name="formatting_help_lists_body_9">I to też</string>
+
+    <string name="formatting_help_checkboxes_title">Pola wyboru</string>
+    <string name="formatting_help_checkboxes_body_1">Aby utworzyć pole wyboru, użyj listy i nawiasów</string>
+    <string name="formatting_help_checkboxes_body_2">Pozycja 1</string>
+    <string name="formatting_help_checkboxes_body_3">Pozycja 2</string>
+
+    <string name="formatting_help_structured_documents_title">Dokumenty strukturalne</string>
+    <string name="formatting_help_structured_documents_body_1">Czasami przydatne jest posiadanie różnych poziomów nagłówków w celu uporządkowania dokumentów. Rozpocznij wiersze od znaku %1$s, aby utworzyć nagłówki. Wiele %2$s z rzędu oznacza mniejsze rozmiary nagłówków.</string>
+    <string name="formatting_help_structured_documents_body_2">To nagłówek trzeciego poziomu</string>
+    <string name="formatting_help_structured_documents_body_3">Możesz użyć jednego %1$s aż do sześciu %2$s dla różnych rozmiarów nagłówka.</string>
+    <string name="formatting_help_structured_documents_body_4">Jeśli chcesz kogoś zacytować, użyj znaku %1$s przed wierszem:</string>
+    <string name="formatting_help_structured_documents_body_5">Wyobraźnia jest ważniejsza niż wiedza. Wiedza jest ograniczona. Wyobraźnia otacza świat.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Kod</string>
+    <string name="formatting_help_code_body_1">Istnieje wiele różnych sposobów stylizowania kodu za pomocą Markdown. Jeśli masz wbudowane bloki kodu, zawiń je w backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown obsługuje również coś, co nazywa się szermierką kodu, co pozwala na wiele linii bez wcięć:</string>
+    <string name="formatting_help_code_body_3">A jeśli chcesz użyć podświetlania składni, uwzględnij język:</string>
+
+    <string name="formatting_help_unsupported_title">Niewspierane</string>
+    <string name="formatting_help_unsupported_body_1">Chociaż staramy się ciągle ulepszać obsługę Markdown, istnieje kilka funkcji, które nie są jeszcze obsługiwane przez Notes:</string>
+    <string name="formatting_help_unsupported_body_2">Tabele</string>
+    <string name="formatting_help_unsupported_body_3">Obrazy</string>
+    <string name="formatting_help_unsupported_body_4">Jeśli chcesz pomóc przy jednej z tych funkcji, skontaktuj się z nami za pośrednictwem GitHub lub e-mail.</string>
+    <string name="simple_other">Inne</string>
+    <string name="sort_last_modified">Sortuj według daty modyfikacji</string>
+    <string name="sort_alphabetically">Sortuj alfabetycznie</string>
+</resources>
