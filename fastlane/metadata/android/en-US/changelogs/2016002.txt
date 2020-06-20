@@ -2,6 +2,7 @@
 
 - ✨ Improve grid view design (#885)
 - ✏️ Make title directly editable by clicking on the toolbar (#882)
+- ⭐️ Move the favorite star icon to the left (#883)
 
 2.16.1
 
