@@ -64,7 +64,7 @@ public class NoteUtilTest extends TestCase {
 
     public void testGenerateNoteExcerpt() {
         // title is different from content → return max. 200 characters starting with the first line which is not empty
-        assertEquals("", NoteUtil.generateNoteExcerpt("Test", "Title"));
+        assertEquals("Test", NoteUtil.generateNoteExcerpt("Test", "Title"));
         assertEquals("Test   Foo", NoteUtil.generateNoteExcerpt("Test\nFoo", "Title"));
         assertEquals("Test   Foo   Bar", NoteUtil.generateNoteExcerpt("Test\nFoo\nBar", "Title"));
         assertEquals("", NoteUtil.generateNoteExcerpt("", "Title"));
