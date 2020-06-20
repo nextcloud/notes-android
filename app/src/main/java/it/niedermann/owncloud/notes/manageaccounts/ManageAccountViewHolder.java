@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import it.niedermann.android.glidesso.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 
 import static android.view.View.GONE;

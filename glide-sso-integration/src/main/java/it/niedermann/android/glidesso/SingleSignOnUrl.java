@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.glide;
+package it.niedermann.android.glidesso;
 
 import android.content.Context;
 
@@ -14,7 +14,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import java.net.URL;
 import java.util.Map;
 
-import static it.niedermann.owncloud.notes.glide.SingleSignOnStreamFetcher.X_HEADER_SSO_ACCOUNT_NAME;
+import static it.niedermann.android.glidesso.SingleSignOnStreamFetcher.X_HEADER_SSO_ACCOUNT_NAME;
 
 /**
  * Use this as kind of {@link GlideUrl} if you want to do a {@link Glide} request from a {@link SingleSignOnAccount} which is not set by {@link SingleAccountHelper#setCurrentAccount(Context, String)}.

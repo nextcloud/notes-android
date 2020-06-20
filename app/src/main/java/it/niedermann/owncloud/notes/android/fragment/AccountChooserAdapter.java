@@ -13,9 +13,9 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
+import it.niedermann.android.glidesso.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 
 import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserViewHolder;

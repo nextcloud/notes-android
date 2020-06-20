@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.glide;
+package it.niedermann.android.glidesso;
 
 import android.content.Context;
 import android.util.Log;
