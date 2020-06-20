@@ -67,6 +67,7 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserVi
             Glide
                     .with(binding.accountItemAvatar.getContext())
                     .load(new GlideUrl(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64", new SingleSignOnOriginHeader(localAccount)))
+                    .placeholder(R.drawable.ic_account_circle_grey_24dp)
                     .error(R.drawable.ic_account_circle_grey_24dp)
                     .apply(RequestOptions.circleCropTransform())
                     .into(binding.accountItemAvatar);

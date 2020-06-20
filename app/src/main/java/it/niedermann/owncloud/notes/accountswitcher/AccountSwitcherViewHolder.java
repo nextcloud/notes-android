@@ -30,6 +30,7 @@ public class AccountSwitcherViewHolder extends RecyclerView.ViewHolder {
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())
                 .load(new GlideUrl(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64", new SingleSignOnOriginHeader(localAccount)))
+                .placeholder(R.drawable.ic_account_circle_grey_24dp)
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.accountItemAvatar);

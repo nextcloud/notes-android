@@ -822,6 +822,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
                 Glide
                         .with(this)
                         .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
+                        .placeholder(R.drawable.ic_account_circle_grey_24dp)
                         .error(R.drawable.ic_account_circle_grey_24dp)
                         .apply(RequestOptions.circleCropTransform())
                         .into(activityBinding.launchAccountSwitcher);
