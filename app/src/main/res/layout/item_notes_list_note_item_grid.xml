@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusable="true"
+    app:cardBackgroundColor="@color/appbar"
     app:cardCornerRadius="@dimen/spacer_1x">
 
     <LinearLayout
