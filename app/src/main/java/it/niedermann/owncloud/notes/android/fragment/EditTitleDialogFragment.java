@@ -4,7 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +18,9 @@ import it.niedermann.owncloud.notes.databinding.DialogEditTitleBinding;
 
 public class EditTitleDialogFragment extends DialogFragment {
 
+    private static final String TAG = EditTitleDialogFragment.class.getSimpleName();
     static final String PARAM_OLD_TITLE = "old_title";
+    private DialogEditTitleBinding binding;
 
     private String oldTitle;
     private EditTitleListener listener;
@@ -42,12 +47,10 @@ public class EditTitleDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         View dialogView = View.inflate(getContext(), R.layout.dialog_edit_title, null);
-        DialogEditTitleBinding binding = DialogEditTitleBinding.bind(dialogView);
+        binding = DialogEditTitleBinding.bind(dialogView);
 
         if (savedInstanceState == null) {
-            if (requireArguments().containsKey(PARAM_OLD_TITLE)) {
-                binding.title.setText(requireArguments().getString(PARAM_OLD_TITLE));
-            }
+            binding.title.setText(oldTitle);
         }
 
         return new AlertDialog.Builder(getActivity())
@@ -57,6 +60,18 @@ public class EditTitleDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.action_edit_save, (dialog, which) -> listener.onTitleEdited(binding.title.getText().toString()))
                 .setNegativeButton(R.string.simple_cancel, null)
                 .create();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        binding.title.requestFocus();
+        Window window = requireDialog().getWindow();
+        if (window != null) {
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        } else {
+            Log.w(TAG, "can not enable soft keyboard because " + Window.class.getSimpleName() + " is null.");
+        }
     }
 
     public static DialogFragment newInstance(String title) {

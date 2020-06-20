@@ -338,7 +338,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     /**
      * Opens a dialog in order to chose a category
      */
-    private void showEditTitleDialog() {
+    public void showEditTitleDialog() {
         final String fragmentId = "fragment_edit_title";
         FragmentManager manager = requireActivity().getSupportFragmentManager();
         Fragment frag = manager.findFragmentByTag(fragmentId);
