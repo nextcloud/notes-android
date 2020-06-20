@@ -1,26 +1,21 @@
 package it.niedermann.owncloud.notes.android.fragment;
 
-import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.glide.SingleSignOnOriginHeader;
+import it.niedermann.owncloud.notes.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.model.LocalAccount;
 
 import static it.niedermann.owncloud.notes.android.fragment.AccountChooserAdapter.AccountChooserViewHolder;
@@ -66,7 +61,7 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserVi
         public void bind(LocalAccount localAccount, MoveAccountListener moveAccountListener) {
             Glide
                     .with(binding.accountItemAvatar.getContext())
-                    .load(new GlideUrl(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64", new SingleSignOnOriginHeader(localAccount)))
+                    .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64"))
                     .placeholder(R.drawable.ic_account_circle_grey_24dp)
                     .error(R.drawable.ic_account_circle_grey_24dp)
                     .apply(RequestOptions.circleCropTransform())

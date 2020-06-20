@@ -27,13 +27,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static it.niedermann.owncloud.notes.glide.SingleSignOnOriginHeader.X_HEADER_SSO_ACCOUNT_NAME;
-
 
 /**
  * Fetches an {@link InputStream} using the Nextcloud SSO library.
  */
 public class SingleSignOnStreamFetcher implements DataFetcher<InputStream> {
+
+    /**
+     * Use this header and set the {@link SingleSignOnAccount} name property as value
+     * Format of the value needs to be
+     */
+    public static final String X_HEADER_SSO_ACCOUNT_NAME = "X-SSO-Account-Name";
 
     private static final String TAG = SingleSignOnStreamFetcher.class.getSimpleName();
     private static final String METHOD_GET = "GET";
@@ -85,7 +89,7 @@ public class SingleSignOnStreamFetcher implements DataFetcher<InputStream> {
                         .setUrl(url.toURL().getPath());
                 Map<String, List<String>> header = new HashMap<>();
                 for (Map.Entry<String, String> headerEntry : url.getHeaders().entrySet()) {
-                    if(!X_HEADER_SSO_ACCOUNT_NAME.equals(headerEntry.getKey())) {
+                    if (!X_HEADER_SSO_ACCOUNT_NAME.equals(headerEntry.getKey())) {
                         header.put(headerEntry.getKey(), Collections.singletonList(headerEntry.getValue()));
                     }
                 }
