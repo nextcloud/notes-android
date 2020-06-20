@@ -5,8 +5,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_navdrawer_item"
     android:gravity="center_vertical"
-    android:paddingTop="@dimen/spacer_1hx"
-    android:paddingBottom="@dimen/spacer_1hx"
     android:paddingStart="@dimen/spacer_1x"
     android:paddingEnd="@dimen/spacer_2x">
 

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:left="@dimen/spacer_1x"
-    android:right="@dimen/spacer_1x"
-    android:top="@dimen/spacer_1hx"
-    android:bottom="@dimen/spacer_1hx">
+    android:right="@dimen/spacer_1x">
 
     <item android:state_selected="true">
         <shape android:shape="rectangle">
