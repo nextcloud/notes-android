@@ -100,11 +100,7 @@ public class NoteUtil {
                 content = content.substring(trimmedTitle.length());
             }
         }
-        if (content.contains("\n")) {
-            return truncateString(content.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
-        } else {
-            return "";
-        }
+        return truncateString(content.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
     }
 
     @NonNull
