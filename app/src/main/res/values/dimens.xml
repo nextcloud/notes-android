@@ -2,6 +2,7 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="spacer_1qx">2dp</dimen>
     <dimen name="spacer_1hx">4dp</dimen>
     <dimen name="spacer_1x">8dp</dimen>
     <dimen name="spacer_2x">16dp</dimen>
