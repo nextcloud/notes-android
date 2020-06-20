@@ -11,8 +11,8 @@ import com.bumptech.glide.module.AppGlideModule;
 
 @GlideModule
 public class CustomAppGlideModule extends AppGlideModule {
-  @Override
-  public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
-    super.registerComponents(context, glide, registry);
-  }
+    @Override
+    public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
+        super.registerComponents(context, glide, registry);
+    }
 }
