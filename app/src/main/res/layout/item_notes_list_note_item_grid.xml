@@ -94,6 +94,7 @@
                     app:chipBackgroundColor="@color/primary"
                     app:chipStrokeColor="@color/defaultBrand"
                     app:chipStrokeWidth="1dp"
+                    app:ensureMinTouchTargetSize="false"
                     tools:maxLength="50"
                     tools:text="@tools:sample/lorem/random" />
             </FrameLayout>

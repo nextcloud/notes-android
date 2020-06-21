@@ -1,6 +1,7 @@
 2.16.3
 
 - 🐞 One line notes have no content preview in notes overview (#891)
+- 🐞 Grid view: 2-letter category title not center aligned (#893)
 
 2.16.2
 
