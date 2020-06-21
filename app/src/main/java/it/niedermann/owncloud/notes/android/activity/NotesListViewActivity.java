@@ -471,7 +471,7 @@ public class NotesListViewActivity extends LockedActivity implements NoteClickLi
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(activityBinding.toolbar);
+        applyBrandToPrimaryToolbar(activityBinding.appBar, activityBinding.toolbar);
         applyBrandToFAB(mainColor, textColor, activityBinding.fabCreate);
 
         binding.headerView.setBackgroundColor(mainColor);

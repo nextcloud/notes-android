@@ -33,7 +33,7 @@ public class AboutActivity extends LockedActivity {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(binding.toolbar);
+        applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar);
         @ColorInt int finalMainColor = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(this, mainColor);
         binding.tabs.setSelectedTabIndicatorColor(finalMainColor);
     }

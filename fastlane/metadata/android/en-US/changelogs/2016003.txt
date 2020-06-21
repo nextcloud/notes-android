@@ -2,6 +2,7 @@
 
 - 🐞 One line notes have no content preview in notes overview (#891)
 - 🐞 Grid view: 2-letter category title not center aligned (#893)
+- 🐞 Start/end padding in lighter black that rest of appbar (#889)
 
 2.16.2
 
