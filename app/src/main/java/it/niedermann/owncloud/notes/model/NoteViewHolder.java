@@ -17,6 +17,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,8 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.util.Notes;
 
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.util.ColorUtil.isColorDark;
 
@@ -45,6 +48,11 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getAdapterPosition(), view));
         itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getAdapterPosition(), view));
+    }
+
+    protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int mainColor) {
+        noteStatus.setVisibility(DBStatus.VOID.equals(status) ? INVISIBLE : VISIBLE);
+        DrawableCompat.setTint(noteStatus.getDrawable(), BrandingUtil.getSecondaryForegroundColorDependingOnTheme(noteStatus.getContext(), mainColor));
     }
 
     protected void bindCategory(@NonNull Context context, @NonNull TextView noteCategory, boolean showCategory, @NonNull String category, int mainColor) {

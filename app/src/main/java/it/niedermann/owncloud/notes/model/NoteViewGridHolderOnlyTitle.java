@@ -35,7 +35,7 @@ public class NoteViewGridHolderOnlyTitle extends NoteViewHolder {
     public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
         super.bind(note, showCategory, mainColor, textColor, searchQuery);
         @NonNull final Context context = itemView.getContext();
-        binding.noteStatus.setVisibility(DBStatus.VOID.equals(note.getStatus()) ? INVISIBLE : VISIBLE);
+        bindStatus(binding.noteStatus, note.getStatus(), mainColor);
         bindFavorite(binding.noteFavorite, note.isFavorite());
         bindSearchableContent(context, binding.noteTitle, searchQuery, note.getTitle(), mainColor);
     }
