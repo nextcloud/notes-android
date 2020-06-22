@@ -144,6 +144,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     @NonNull
     private Category navigationSelection = new Category(null, null);
     private String navigationOpen = "";
+    boolean canMoveNoteToAnotherAccounts = false;
     private ActionMode mActionMode;
     private final ISyncCallback syncCallBack = () -> {
         adapter.clearSelection(listView);
@@ -197,6 +198,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         setupNavigationList(categoryAdapterSelectedItem);
         setupNavigationMenu();
         setupNotesList();
+
+        new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountsCount() > 1).start();
     }
 
     @Override
@@ -774,6 +777,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 if (resultCode == RESULT_FIRST_USER) {
                     selectAccount(null);
                 }
+                new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountsCount() > 1).start();
                 break;
             }
             default: {
@@ -786,6 +790,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
                                 db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
+                                new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountsCount() > 1).start();
                                 Log.i(TAG, capabilities.toString());
                                 runOnUiThread(() -> selectAccount(ssoAccount.name));
                             } catch (SQLiteException e) {
@@ -880,7 +885,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         if (selected) {
             v.setSelected(true);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                    this, this, db, localAccount.getId(), adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
+                    this, this, db, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
             ));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
