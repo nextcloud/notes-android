@@ -49,32 +49,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import it.niedermann.owncloud.notes.FormattingHelpActivity;
+import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.about.AboutActivity;
+import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherListener;
-import it.niedermann.owncloud.notes.LockedActivity;
-import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
-import it.niedermann.owncloud.notes.FormattingHelpActivity;
-import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
-import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.Category;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.model.Item;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
+import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.NavigationItem;
-import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
-import it.niedermann.owncloud.notes.main.items.section.SectionItemDecoration;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
+import it.niedermann.owncloud.notes.main.items.section.SectionItemDecoration;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
@@ -83,15 +76,22 @@ import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.model.Item;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
-import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
+import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 import static java.util.Arrays.asList;
 
@@ -641,7 +641,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             listView.setLayoutManager(layoutManager);
             listView.addItemDecoration(new SectionItemDecoration(adapter,
-                    getResources().getDimensionPixelSize(R.dimen.spacer_6x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x) + getResources().getDimensionPixelSize(R.dimen.spacer_3x) + getResources().getDimensionPixelSize(R.dimen.spacer_2x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_5x),
                     getResources().getDimensionPixelSize(R.dimen.spacer_1x),
                     0
