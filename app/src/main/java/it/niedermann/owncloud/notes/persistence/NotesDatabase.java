@@ -722,10 +722,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }).start();
     }
 
-    public boolean hasAccounts() {
-        return DatabaseUtils.queryNumEntries(getReadableDatabase(), table_accounts) > 0;
-    }
-
     public long getAccountsCount() {
         return DatabaseUtils.queryNumEntries(getReadableDatabase(), table_accounts);
     }

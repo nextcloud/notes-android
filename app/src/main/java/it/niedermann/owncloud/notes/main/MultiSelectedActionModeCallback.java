@@ -43,6 +43,7 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final ViewProvider viewProvider;
     private final NotesDatabase db;
     private final long currentLocalAccountId;
+    private final boolean canMoveNoteToAnotherAccounts;
     private final ItemAdapter adapter;
     private final RecyclerView recyclerView;
     private final Runnable refreshLists;
@@ -50,11 +51,12 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            Context context, ViewProvider viewProvider, NotesDatabase db, long currentLocalAccountId, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
+            Context context, ViewProvider viewProvider, NotesDatabase db, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.viewProvider = viewProvider;
         this.db = db;
         this.currentLocalAccountId = currentLocalAccountId;
+        this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
         this.adapter = adapter;
         this.recyclerView = recyclerView;
         this.refreshLists = refreshLists;
@@ -70,6 +72,7 @@ public class MultiSelectedActionModeCallback implements Callback {
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         // inflate contextual menu
         mode.getMenuInflater().inflate(R.menu.menu_list_context_multiple, menu);
+        menu.findItem(R.id.menu_move).setVisible(canMoveNoteToAnotherAccounts);
         for (int i = 0; i < menu.size(); i++) {
             Drawable drawable = menu.getItem(i).getIcon();
             if (drawable != null) {
