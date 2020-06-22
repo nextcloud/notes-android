@@ -9,6 +9,7 @@
     <string name="action_settings">Configurações</string>
     <string name="action_trashbin">Anotações excluídas</string>
     <string name="action_search">Pesquisar</string>
+    <string name="action_sorting_method">Método de ordenação</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Salvar</string>
@@ -25,6 +26,9 @@
     <string name="menu_favorite">Favorita</string>
     <string name="menu_preview">Prever</string>
     <string name="menu_share">Compartilhar</string>
+
+    <string name="search_in_category">Pesquisar em %1$s</string>
+    <string name="search_in_all">Pesquisar todas as notas</string>
 
     <string name="change_category_title">Escolha uma categoria</string>
 
@@ -144,12 +148,18 @@
     <string name="added_content">\"%1$s\" adicionado</string>
     <string name="shared_text_empty">O texto compartilhado estava vazio</string>
     <string name="append_to_note">Anexar à nota</string>
+    <string name="change_note_title">Alterar o título da nota</string>
+    <string name="menu_edit_title">Editar título</string>
     <string name="settings_branding">Marcação</string>
+    <string name="settings_gridview">Exibição em grade 🆕</string>
     <string name="simple_security">Segurança</string>
     <string name="simple_appearance">Aparência</string>
     <string name="simple_synchronization">Sincronização</string>
+    <string name="simple_behavior">Comportamento</string>
     <string name="share_multiple">Compartilhar o conteúdo de %1$d notas</string>
     <string name="manage_accounts">Gerenciar contas</string>
+    <string name="action_formatting_help">Formatação</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir em modo de edição</item>
@@ -184,8 +194,25 @@
         <item quantity="other">%d selecionados</item>
     </plurals>
 
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formatação baseada em contexto</string>
     <string name="formatting_help_text_title">Texto</string>
+    <string name="formatting_help_lists_title">Listas</string>
+    <string name="formatting_help_lists_body_1">Às vezes você deseja listas numeradas:</string>
+    <string name="formatting_help_lists_body_2">Um</string>
+    <string name="formatting_help_lists_body_3">Dois</string>
+    <string name="formatting_help_lists_body_4">Três</string>
     <string name="formatting_help_checkboxes_title">Caixas de seleção</string>
+    <string name="formatting_help_checkboxes_body_2">Item 1</string>
+    <string name="formatting_help_checkboxes_body_3">Item 2</string>
+
+    <string name="formatting_help_structured_documents_title">Documentos estruturados</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
     <string name="formatting_help_code_title">Código</string>
     <string name="formatting_help_unsupported_title">Não suportado</string>
     <string name="formatting_help_unsupported_body_3">Imagens</string>
