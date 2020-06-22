@@ -9,6 +9,7 @@
     <string name="action_settings">Ezarpenak</string>
     <string name="action_trashbin">Ezabatutako oharrak</string>
     <string name="action_search">Bilatu</string>
+    <string name="action_sorting_method">Ordenatze metodoa</string>
     <string name="simple_cancel">Utzi</string>
     <string name="simple_edit">Editatu</string>
     <string name="action_edit_save">Gorde</string>
@@ -25,6 +26,9 @@
     <string name="menu_favorite">Gogokoa</string>
     <string name="menu_preview">Aurreikusi</string>
     <string name="menu_share">Partekatu</string>
+
+    <string name="search_in_category">Bilatu %1$s(e)n</string>
+    <string name="search_in_all">Bilatu nota guztiak</string>
 
     <string name="change_category_title">Hautatu kategoria bat</string>
 
@@ -144,11 +148,18 @@
     <string name="added_content">\"%1$s\" gehituta</string>
     <string name="shared_text_empty">Partekatutako testua hutsik zegoen</string>
     <string name="append_to_note">Gehitu notara</string>
+    <string name="change_note_title">Aldatu notaren titulua</string>
+    <string name="menu_edit_title">Editatu izenburua</string>
     <string name="settings_branding">Marka</string>
+    <string name="settings_gridview">Sareta ikuspegia 🆕</string>
     <string name="simple_security">Segurtasuna</string>
     <string name="simple_appearance">Itxura</string>
     <string name="simple_synchronization">Sinkronizazioa</string>
+    <string name="simple_behavior">Portaera</string>
+    <string name="share_multiple">Partekatu %1$d noten edukia</string>
     <string name="manage_accounts">Kudeatu kontuak</string>
+    <string name="action_formatting_help">Formatua</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>
@@ -183,9 +194,27 @@
         <item quantity="other">%d hautatuta</item>
     </plurals>
 
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_text_title">Testu</string>
+    <string name="formatting_help_lists_title">Zerrendak</string>
+    <string name="formatting_help_lists_body_1">Batzuetan zerrenda zenbatuak nahi dituzu:</string>
+    <string name="formatting_help_lists_body_2">Bat</string>
+    <string name="formatting_help_lists_body_3">Bi</string>
+    <string name="formatting_help_lists_body_4">Hiru</string>
     <string name="formatting_help_checkboxes_title">Kontrol-laukiak</string>
+    <string name="formatting_help_checkboxes_body_2">1 elementua</string>
+    <string name="formatting_help_checkboxes_body_3">2 elementua</string>
+
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Kodea</string>
     <string name="formatting_help_unsupported_title">Ez da onartzen</string>
+    <string name="formatting_help_unsupported_body_2">Taulak</string>
     <string name="formatting_help_unsupported_body_3">Irudiak</string>
     <string name="simple_other">Beste bat</string>
-    </resources>
+    <string name="sort_alphabetically">Ordenatu alfabetikoki</string>
+</resources>
