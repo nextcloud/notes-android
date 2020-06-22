@@ -18,6 +18,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding true
+    }
+
     buildTypes {
         debug {
             testCoverageEnabled true
@@ -32,10 +36,6 @@ android {
     lintOptions {
         disable 'MissingTranslation'
         abortOnError false
-    }
-
-    viewBinding {
-        enabled = true
     }
 
     flavorDimensions "version"

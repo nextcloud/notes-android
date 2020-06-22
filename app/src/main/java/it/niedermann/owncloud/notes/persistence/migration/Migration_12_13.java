@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.annotation.NonNull;
 import androidx.work.WorkManager;
 
-import it.niedermann.owncloud.notes.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 public class Migration_12_13 {
     /**

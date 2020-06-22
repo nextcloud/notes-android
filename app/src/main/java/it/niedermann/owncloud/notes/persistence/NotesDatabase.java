@@ -42,27 +42,27 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
-import it.niedermann.owncloud.notes.model.ApiVersion;
-import it.niedermann.owncloud.notes.model.Capabilities;
-import it.niedermann.owncloud.notes.model.Category;
-import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.ISyncCallback;
-import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
-import it.niedermann.owncloud.notes.model.SingleNoteWidgetData;
-import it.niedermann.owncloud.notes.util.CategorySortingMethod;
-import it.niedermann.owncloud.notes.util.ColorUtil;
-import it.niedermann.owncloud.notes.util.NoteUtil;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
+import it.niedermann.owncloud.notes.shared.model.ApiVersion;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.Category;
+import it.niedermann.owncloud.notes.shared.model.CloudNote;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.main.NavigationAdapter;
+import it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData;
+import it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidgetData;
+import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
+import it.niedermann.owncloud.notes.shared.util.ColorUtil;
+import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
-import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
-import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.updateNoteListWidgets;
-import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.updateSingleNoteWidgets;
-import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
-import static it.niedermann.owncloud.notes.util.NoteUtil.generateNoteExcerpt;
+import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
+import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
+import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
+import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.

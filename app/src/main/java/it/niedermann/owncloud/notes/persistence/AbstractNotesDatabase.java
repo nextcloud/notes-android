@@ -22,7 +22,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_6_7;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_7_8;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_8_9;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
-import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
+import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
 
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 

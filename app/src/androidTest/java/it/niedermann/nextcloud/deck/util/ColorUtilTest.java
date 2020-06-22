@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.niedermann.owncloud.notes.util.ColorUtil;
+import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

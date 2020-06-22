@@ -12,9 +12,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
-import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
+import it.niedermann.owncloud.notes.shared.model.CloudNote;
+import it.niedermann.owncloud.notes.shared.model.ServerResponse.NoteResponse;
+import it.niedermann.owncloud.notes.shared.model.ServerResponse.NotesResponse;
 
 @WorkerThread
 public class NotesClientV02 extends NotesClient {

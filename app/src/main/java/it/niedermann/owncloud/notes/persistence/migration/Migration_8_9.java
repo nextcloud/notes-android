@@ -15,9 +15,9 @@ import androidx.preference.PreferenceManager;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import it.niedermann.owncloud.notes.android.appwidget.NoteListWidget;
-import it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget;
-import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
+import it.niedermann.owncloud.notes.widget.notelist.NoteListWidget;
+import it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget;
+import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
 
 public class Migration_8_9 {
 

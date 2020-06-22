@@ -108,7 +108,7 @@
             android:id="@+id/swiperefreshlayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity">
+            tools:context="it.niedermann.owncloud.notes.main.MainActivity">
 
             <FrameLayout
                 android:layout_width="match_parent"
