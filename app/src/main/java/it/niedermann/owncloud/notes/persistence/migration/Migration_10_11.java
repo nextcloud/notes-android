@@ -8,7 +8,7 @@ import androidx.preference.PreferenceManager;
 
 import java.util.Map;
 
-import it.niedermann.owncloud.notes.android.DarkModeSetting;
+import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
 public class Migration_10_11 {
     /**

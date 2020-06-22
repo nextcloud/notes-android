@@ -10,7 +10,7 @@
         android:id="@+id/swiperefreshlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="it.niedermann.owncloud.notes.android.activity.NotesListViewActivity"
+        tools:context="it.niedermann.owncloud.notes.main.MainActivity"
         tools:ignore="MergeRootFrame">
 
         <ScrollView
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context="it.niedermann.owncloud.notes.android.activity.EditNoteActivity">
+            tools:context="it.niedermann.owncloud.notes.edit.EditNoteActivity">
 
             <com.yydcdut.markdown.MarkdownTextView
                 android:id="@+id/single_note_content"

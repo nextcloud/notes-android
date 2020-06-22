@@ -10,7 +10,7 @@
         tools:targetApi="n_mr1">
         <intent
             android:action="android.intent.action.CREATE_DOCUMENT"
-            android:targetClass="it.niedermann.owncloud.notes.android.activity.EditNoteActivity"
+            android:targetClass="it.niedermann.owncloud.notes.edit.EditNoteActivity"
             android:targetPackage="it.niedermann.owncloud.notes" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>

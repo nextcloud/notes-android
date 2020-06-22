@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import it.niedermann.owncloud.notes.model.ApiVersion;
-import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.util.ServerResponse.NoteResponse;
-import it.niedermann.owncloud.notes.util.ServerResponse.NotesResponse;
+import it.niedermann.owncloud.notes.shared.model.ApiVersion;
+import it.niedermann.owncloud.notes.shared.model.CloudNote;
+import it.niedermann.owncloud.notes.shared.model.ServerResponse.NoteResponse;
+import it.niedermann.owncloud.notes.shared.model.ServerResponse.NotesResponse;
 
 @SuppressWarnings("WeakerAccess")
 @WorkerThread

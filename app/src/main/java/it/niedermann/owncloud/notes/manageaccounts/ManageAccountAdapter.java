@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountViewHolder> {
 

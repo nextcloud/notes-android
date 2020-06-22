@@ -7,7 +7,7 @@ import android.util.Log;
 
 import java.util.Hashtable;
 
-import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
+import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
 
 public class Migration_14_15 {
     /**

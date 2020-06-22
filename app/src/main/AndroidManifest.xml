@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".util.Notes"
+        android:name=".NotesApplication"
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +19,7 @@
         tools:targetApi="n">
 
         <activity
-            android:name=".android.activity.SplashscreenActivity"
+            android:name=".SplashscreenActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -32,7 +32,7 @@
         </activity>
 
         <activity
-            android:name=".android.activity.NotesListViewActivity"
+            android:name=".main.MainActivity"
             android:label="@string/app_name">
 
             <intent-filter>
@@ -48,7 +48,7 @@
         </activity>
 
         <activity
-            android:name=".android.activity.AppendToNoteActivity"
+            android:name=".AppendToNoteActivity"
             android:label="@string/append_to_note">
 
             <intent-filter>
@@ -59,32 +59,32 @@
         </activity>
 
         <activity
-            android:name=".android.activity.ExceptionActivity"
+            android:name=".exception.ExceptionActivity"
             android:label="@string/app_name" />
 
         <activity
-            android:name=".formattinghelp.FormattingHelpActivity"
+            android:name=".FormattingHelpActivity"
             android:label="@string/action_formatting_help"
-            android:parentActivityName=".android.activity.NotesListViewActivity"
+            android:parentActivityName=".main.MainActivity"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".manageaccounts.ManageAccountsActivity"
             android:label="@string/manage_accounts"
-            android:parentActivityName=".android.activity.NotesListViewActivity"
+            android:parentActivityName=".main.MainActivity"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".android.activity.PreferencesActivity"
+            android:name=".preferences.PreferencesActivity"
             android:label="@string/action_settings"
-            android:parentActivityName=".android.activity.NotesListViewActivity"
+            android:parentActivityName=".main.MainActivity"
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".android.activity.EditNoteActivity"
+            android:name=".edit.EditNoteActivity"
             android:label="@string/simple_edit"
             android:launchMode="singleTask"
-            android:parentActivityName=".android.activity.NotesListViewActivity"
+            android:parentActivityName=".main.MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter android:label="@string/action_create">
                 <action android:name="android.intent.action.SEND" />
@@ -108,17 +108,17 @@
         </activity>
 
         <activity
-            android:name=".android.activity.AboutActivity"
+            android:name=".about.AboutActivity"
             android:label="@string/simple_about"
-            android:parentActivityName=".android.activity.NotesListViewActivity" />
+            android:parentActivityName=".main.MainActivity" />
 
-        <activity android:name=".android.activity.SelectSingleNoteActivity">
+        <activity android:name=".widget.singlenote.SingleNoteWidgetConfigurationActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".android.activity.NoteListWidgetConfigurationActivity">
+        <activity android:name=".widget.notelist.NoteListWidgetConfigurationActivity">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
@@ -126,7 +126,7 @@
         </activity>
 
         <receiver
-            android:name=".android.appwidget.CreateNoteWidget"
+            android:name=".widget.createnote.CreateNoteWidget"
             android:label="@string/widget_create_note">
 
             <intent-filter>
@@ -139,7 +139,7 @@
         </receiver>
 
         <receiver
-            android:name=".android.appwidget.SingleNoteWidget"
+            android:name=".widget.singlenote.SingleNoteWidget"
             android:label="@string/widget_single_note_title">
 
             <intent-filter>
@@ -152,7 +152,7 @@
         </receiver>
 
         <receiver
-            android:name=".android.appwidget.NoteListWidget"
+            android:name=".widget.notelist.NoteListWidget"
             android:label="@string/widget_note_list_title">
 
             <intent-filter>
@@ -165,15 +165,15 @@
         </receiver>
 
         <service
-            android:name=".android.appwidget.SingleNoteWidgetService"
+            android:name=".widget.singlenote.SingleNoteWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <service
-            android:name=".android.appwidget.NoteListWidgetService"
+            android:name=".widget.notelist.NoteListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <service
-            android:name=".android.quicksettings.NewNoteTileService"
+            android:name=".quicksettings.NewNoteTileService"
             android:description="@string/action_create"
             android:icon="@drawable/ic_quicksettings_new"
             android:label="@string/action_create"

@@ -20,12 +20,15 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
-import it.niedermann.owncloud.notes.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
-import static it.niedermann.owncloud.notes.android.activity.NotesListViewActivity.manage_account;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
+import static it.niedermann.owncloud.notes.main.MainActivity.manage_account;
 
+/**
+ * Displays all available {@link LocalAccount} entries and provides basic operations for them, like adding or switching
+ */
 public class AccountSwitcherDialog extends BrandedDialogFragment {
 
     private static final String KEY_CURRENT_ACCOUNT_ID = "current_account_id";

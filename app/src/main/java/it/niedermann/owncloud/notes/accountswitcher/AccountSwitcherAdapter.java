@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 public class AccountSwitcherAdapter extends RecyclerView.Adapter<AccountSwitcherViewHolder> {
 

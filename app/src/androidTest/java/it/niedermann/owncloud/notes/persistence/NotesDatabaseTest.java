@@ -1,14 +1,14 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import it.niedermann.owncloud.notes.model.Capabilities;
-import it.niedermann.owncloud.notes.model.Category;
-import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.util.CategorySortingMethod;
-import it.niedermann.owncloud.notes.util.NoteUtil;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.Category;
+import it.niedermann.owncloud.notes.shared.model.CloudNote;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.main.NavigationAdapter;
+import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
+import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import android.content.Context;
 import android.content.SharedPreferences;

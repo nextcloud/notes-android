@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import it.niedermann.owncloud.notes.edit.SearchableBaseNoteFragment;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 

@@ -9,7 +9,7 @@ import androidx.annotation.StringRes;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
-import it.niedermann.owncloud.notes.util.ColorUtil;
+import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
 public class BrandedSnackbar {
 

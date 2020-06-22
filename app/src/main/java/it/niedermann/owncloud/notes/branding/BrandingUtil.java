@@ -17,9 +17,9 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.preference.PreferenceManager;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.util.Notes;
+import it.niedermann.owncloud.notes.NotesApplication;
 
-import static it.niedermann.owncloud.notes.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
 
 public class BrandingUtil {
 
@@ -81,7 +81,7 @@ public class BrandingUtil {
     @ColorInt
     public static int getSecondaryForegroundColorDependingOnTheme(@NonNull Context context, @ColorInt int mainColor) {
         final int primaryColor = context.getResources().getColor(R.color.primary);
-        final boolean isDarkTheme = Notes.isDarkThemeActive(context);
+        final boolean isDarkTheme = NotesApplication.isDarkThemeActive(context);
         if (isDarkTheme && !contrastRatioIsSufficient(mainColor, primaryColor)) {
             Log.v(TAG, "Contrast ratio between brand color " + String.format("#%06X", (0xFFFFFF & mainColor)) + " and dark theme is too low. Falling back to WHITE as brand color.");
             return Color.WHITE;
