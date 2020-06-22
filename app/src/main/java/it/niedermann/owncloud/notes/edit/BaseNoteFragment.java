@@ -30,28 +30,28 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
-import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
-import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
-import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
+import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
+import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
+import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
+import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
-import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
-import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
-import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
+import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
 
@@ -65,6 +65,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
+    private boolean canMoveNoteToAnotherAccounts = false;
     private LocalAccount localAccount;
     private SingleSignOnAccount ssoAccount;
 
@@ -80,8 +81,23 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     protected boolean isNew = true;
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            listener = (NoteFragmentListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.getClass() + " must implement " + NoteFragmentListener.class);
+        }
+        db = NotesDatabase.getInstance(context);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        new Thread(() -> {
+            canMoveNoteToAnotherAccounts = db.getAccountsCount() > 1;
+            requireActivity().invalidateOptionsMenu();
+        }).start();
         try {
             this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
             this.localAccount = db.getLocalAccountByAccountName(ssoAccount.name);
@@ -148,17 +164,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            listener = (NoteFragmentListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.getClass() + " must implement " + NoteFragmentListener.class);
-        }
-        db = NotesDatabase.getInstance(context);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         listener.onNoteUpdated(note);
@@ -191,6 +196,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (isRequestPinShortcutSupported(requireActivity()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
+        menu.findItem(R.id.menu_move).setVisible(canMoveNoteToAnotherAccounts);
 
         super.onCreateOptionsMenu(menu, inflater);
     }
