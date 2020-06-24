@@ -43,10 +43,10 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
   * Render MarkDown (using [RxMarkdown](https://github.com/yydcdut/RxMarkdown))
   * Translated in many languages on [Transifex](https://www.transifex.com/nextcloud/nextcloud/android-notes/)
   * Context based formatting ([#363](https://github.com/stefan-niedermann/nextcloud-notes/issues/363))
+  * Password protection ([#354](https://github.com/stefan-niedermann/nextcloud-notes/issues/354))
 
 ## :checkered_flag: Planned features
   * Local accounts ([#615](https://github.com/stefan-niedermann/nextcloud-notes/issues/615))
-  * Password protection ([#354](https://github.com/stefan-niedermann/nextcloud-notes/issues/354))
   * Trashbin ([#238](https://github.com/stefan-niedermann/nextcloud-notes/issues/238))
 
 ## :family: Join the team
@@ -60,7 +60,7 @@ An android client for [Nextcloud Notes App](https://github.com/nextcloud/notes/)
 
 ## :link: Requirements
   * [Nextcloud](https://nextcloud.com/) instance running
-  * [Nextcloud Android](https://github.com/nextcloud/android) app installed (> 3.9.0)
+  * [Nextcloud Android](https://github.com/nextcloud/android) app installed (≥ 3.9.0)
   * [Nextcloud Notes](https://github.com/nextcloud/notes) app enabled
 
 ## :notebook: License
