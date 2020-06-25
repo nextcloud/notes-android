@@ -72,7 +72,7 @@ dependencies {
     implementation "androidx.fragment:fragment:1.2.5"
     implementation "androidx.preference:preference:1.1.1"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
-    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.work:work-runtime:2.3.4'
     implementation "com.google.android.material:material:1.1.0"
 
