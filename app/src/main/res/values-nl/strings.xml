@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Weergavemode voor notities</string>
-    <string name="settings_theme_title">Donker thema</string>
+    <string name="settings_theme_title">Thema</string>
     <string name="settings_font_title">Monospace lettertype</string>
     <string name="settings_font_size">Fontgrootte</string>
     <string name="settings_wifi_only">Sync alleen met Wi-Fi</string>
@@ -191,11 +191,42 @@
         <item quantity="other">%d geselecteerd</item>
     </plurals>
 
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Context gebaseerde opmaak</string>
+    <string name="formatting_help_cbf_body_1">Een belangrijk ontwerpdoel van de Notes-app is om een afleidingsvrij hulpmiddel te bieden. Maar je kunt altijd je teksten opmaken met Markdown. Voor verschillende van de onderstaande voorbeelden kunt je snelcodes gebruiken, zodat je notities kunt opmaken zonder de onderstaande codes in te typen.</string>
+    <string name="formatting_help_cbf_body_2">Selecteer gewoon een tekstbereik of tik op een willekeurige positie op je cursor en je krijgt een pop-upmenu met naast de standaardvermeldingen %1$s, %2$s, %3$s ook meldingen zoals %4$s of %5$s.</string>
+
     <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_lists_body_1">Soms wil je een genummerde lijst:</string>
+    <string name="formatting_help_lists_body_2">Een</string>
+    <string name="formatting_help_lists_body_3">Twee</string>
+    <string name="formatting_help_lists_body_5">Soms wil je puntenlijsten:</string>
     <string name="formatting_help_lists_body_6">Begin de regel met een streepje</string>
+    <string name="formatting_help_lists_body_8">Vind dit leuk</string>
+    <string name="formatting_help_lists_body_9">En dit</string>
+
     <string name="formatting_help_checkboxes_title">Aanvinkvakjes</string>
+    <string name="formatting_help_checkboxes_body_2">Object 1</string>
+    <string name="formatting_help_checkboxes_body_3">Object 2</string>
+
+    <string name="formatting_help_structured_documents_title">Gestructureerde documenten</string>
+    <string name="formatting_help_structured_documents_body_1">Soms is het handig om verschillende niveaus van koppen te hebben om documenten te structureren. Begin regels met een %1$s om koppen te maken. Meerdere %2$s op regel geven kleinere kopformaten aan.</string>
+    <string name="formatting_help_structured_documents_body_2">Dit is een derde niveau kop</string>
+    <string name="formatting_help_structured_documents_body_5">Verbeelding is belangrijker dan kennis. Kennis is beperkt. Verbeelding omsluit de wereld.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
     <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_code_body_1">Er zijn veel verschillende manieren om code te markeren met Markdown. Als je inline codeblokken hebt, bed ze dan in m.b.v. backticks:</string>
+    <string name="formatting_help_code_body_3">En als je syntaxisaccentuering wilt gebruiken, neemt dan deze taal op:</string>
+
     <string name="formatting_help_unsupported_title">Niet ondersteund</string>
+    <string name="formatting_help_unsupported_body_1">Hoewel we de ondersteuning voor Markdown continu proberen te verbeteren, zijn er enkele functies die nog niet worden ondersteund door Notes:</string>
+    <string name="formatting_help_unsupported_body_2">Tabellen</string>
     <string name="formatting_help_unsupported_body_3">Afbeeldingen</string>
+    <string name="formatting_help_unsupported_body_4">Als je mee wilt helpen om een bijdrage te leveren voor een van die functies, neem dan contact met ons op via GitHub of E-mail.</string>
     <string name="simple_other">Ander</string>
     </resources>

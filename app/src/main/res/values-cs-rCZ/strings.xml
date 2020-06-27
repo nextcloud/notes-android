@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Režim zobrazení poznámek</string>
-    <string name="settings_theme_title">Tmavý motiv vzhledu</string>
+    <string name="settings_theme_title">Motiv vzhledu</string>
     <string name="settings_font_title">Písmo se všemi znaky stejně širokými</string>
     <string name="settings_font_size">Velikost písmen</string>
     <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>

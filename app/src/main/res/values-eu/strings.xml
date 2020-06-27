@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Erakutsi oharren modua</string>
-    <string name="settings_theme_title">Gai iluna</string>
+    <string name="settings_theme_title">Gaia</string>
     <string name="settings_font_title">Zabalera bakarreko letra mota</string>
     <string name="settings_font_size">Letra tamaina</string>
     <string name="settings_wifi_only">Sinkronizatu wifi bidez bakarrik</string>

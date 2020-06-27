@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Način odpiranja zabeležk</string>
-    <string name="settings_theme_title">Temna tema</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Pisava enotne širine</string>
     <string name="settings_font_size">Velikost pisave</string>
     <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
