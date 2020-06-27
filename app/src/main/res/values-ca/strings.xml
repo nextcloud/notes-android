@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Mode de visualització per les notes</string>
-    <string name="settings_theme_title">Tema fosc</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
     <string name="settings_wifi_only">Sincronitza només per Wi-Fi</string>

@@ -37,7 +37,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Режим показа заметок</string>
-    <string name="settings_theme_title">Тёмное оформление</string>
+    <string name="settings_theme_title">Оформление</string>
     <string name="settings_font_title">Моноширинный шрифт</string>
     <string name="settings_font_size">Размер шрифта</string>
     <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>

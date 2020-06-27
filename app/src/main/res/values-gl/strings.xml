@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Modo de vista das notas</string>
-    <string name="settings_theme_title">Tema escuro</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Letra monoespazada</string>
     <string name="settings_font_size">Tamaño da letra</string>
     <string name="settings_wifi_only">Sincronizar só con wifi</string>

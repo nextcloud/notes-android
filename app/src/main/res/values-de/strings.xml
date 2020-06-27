@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Anzeigemodus für Notizen</string>
-    <string name="settings_theme_title">Dunkles Design</string>
+    <string name="settings_theme_title">Design</string>
     <string name="settings_font_title">Nichtproportionale Schriftart</string>
     <string name="settings_font_size">Schriftgröße</string>
     <string name="settings_wifi_only">Nur über WLAN synchronisieren</string>

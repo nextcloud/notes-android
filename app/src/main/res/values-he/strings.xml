@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">מצב תצוגת פתקים</string>
-    <string name="settings_theme_title">ערכת עיצוב כהה</string>
+    <string name="settings_theme_title">ערכת עיצוב</string>
     <string name="settings_font_title">גופן ברוחב אחיד</string>
     <string name="settings_font_size">גודל גופן</string>
     <string name="settings_wifi_only">סנכרון רק דרך רשת אלחוטית</string>
