@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Modo de exibição de notas</string>
-    <string name="settings_theme_title">Tema escuro</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title"> Fonte monospaçada</string>
     <string name="settings_font_size">Tamanho da fonte</string>
     <string name="settings_wifi_only">Sincronizar somente por Wi-Fi</string>
@@ -200,21 +200,47 @@
     <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Formatação baseada em contexto</string>
+    <string name="formatting_help_cbf_body_1">Um dos principais objetivos de design do aplicativo Notes é fornecer uma ferramenta sem distrações. Então você pode formatar seus textos com o Markdown. Para vários dos exemplos mencionados abaixo, você pode usar atalhos para formatar suas anotações sem digitar os códigos abaixo.</string>
+    <string name="formatting_help_cbf_body_2">Basta selecionar um intervalo de texto ou tocar no cursor em qualquer posição e você obterá um menu pop-up que contém ao lado das entradas padrão %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
+
     <string name="formatting_help_text_title">Texto</string>
+    <string name="formatting_help_text_body">É muito fácil fazer algumas palavras %1$snegritas%1$s e outras %2$sitálicas%2$s com Markdown. Você pode %3$sriscar%3$salgumas palavras e até [linkar para o Nextcloud](https://nextcloud.com).</string>
+
     <string name="formatting_help_lists_title">Listas</string>
     <string name="formatting_help_lists_body_1">Às vezes você deseja listas numeradas:</string>
     <string name="formatting_help_lists_body_2">Um</string>
     <string name="formatting_help_lists_body_3">Dois</string>
     <string name="formatting_help_lists_body_4">Três</string>
+    <string name="formatting_help_lists_body_5">Algumas vezes você pode querer marcações:</string>
+    <string name="formatting_help_lists_body_6">Começar uma linha com um hífen</string>
+    <string name="formatting_help_lists_body_7">E se você tiver subpontos, coloque dois espaços antes do traço ou estrela:</string>
+    <string name="formatting_help_lists_body_8">Como isso</string>
+    <string name="formatting_help_lists_body_9">E isso</string>
+
     <string name="formatting_help_checkboxes_title">Caixas de seleção</string>
+    <string name="formatting_help_checkboxes_body_1">Para criar uma caixa de seleção, use uma lista seguida por colchetes</string>
     <string name="formatting_help_checkboxes_body_2">Item 1</string>
     <string name="formatting_help_checkboxes_body_3">Item 2</string>
 
     <string name="formatting_help_structured_documents_title">Documentos estruturados</string>
+    <string name="formatting_help_structured_documents_body_1">Às vezes, é útil ter diferentes níveis de títulos para estruturar seus documentos. Iniciar linhas com um %1$spara criar cabeçalhos. Vários %2$s em sequência indicam tamanhos de cabeçalho menores. </string>
+    <string name="formatting_help_structured_documents_body_2">Este é um cabeçalho de terceira camada</string>
+    <string name="formatting_help_structured_documents_body_3">Você pode usar um %1$sem todo o trecho até seis %2$spara diferentes tamanhos de cabeçalho .</string>
+    <string name="formatting_help_structured_documents_body_4">Se você quiser citar alguém, use o caractere %1$s antes da linha:</string>
+    <string name="formatting_help_structured_documents_body_5">Imaginação é mais importante que conhecimento. O conhecimento é limitado. A imaginação dá voltas no mundo.</string>
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
     <string name="formatting_help_code_title">Código</string>
+    <string name="formatting_help_code_body_1">Existem muitas maneiras diferentes de estilizar o código com o Markdown. Se você tiver blocos de códigos embutidos, envolva-os em barras de proteção:</string>
+    <string name="formatting_help_code_body_2">O Markdown também suporta algo chamado código de cercas, que permite várias linhas sem recuo:</string>
+    <string name="formatting_help_code_body_3">E se você quiser usar destaque de sintaxe, inclua a linguagem:</string>
+
     <string name="formatting_help_unsupported_title">Não suportado</string>
+    <string name="formatting_help_unsupported_body_1">Embora tentemos melhorar continuamente o suporte ao Markdown, há alguns recursos que ainda não são suportados pelo Notes:</string>
+    <string name="formatting_help_unsupported_body_2">Tabelas</string>
     <string name="formatting_help_unsupported_body_3">Imagens</string>
+    <string name="formatting_help_unsupported_body_4">Se você estiver interessado em contribuir com suporte para um desses recursos, entre em contato conosco via GitHub ou E-Mail.</string>
     <string name="simple_other">Outro</string>
-    </resources>
+    <string name="sort_last_modified">Ordenar por data de modificação</string>
+    <string name="sort_alphabetically">Ordenar alfabeticamente</string>
+</resources>

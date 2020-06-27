@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Κατάσταση οθόνης για σημειώσεις</string>
-    <string name="settings_theme_title">Σκούρο θέμα</string>
+    <string name="settings_theme_title">Θέμα</string>
     <string name="settings_font_title">Γραμματοσειρά monospace</string>
     <string name="settings_font_size">Μέγεθος γραμματοσειράς</string>
     <string name="settings_wifi_only">Συγχρονισμός μόνο σε Wi-Fi</string>

@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Tryb wyświetlania notatek</string>
-    <string name="settings_theme_title">Ciemny motyw</string>
+    <string name="settings_theme_title">Motyw</string>
     <string name="settings_font_title">Czcionka monospace</string>
     <string name="settings_font_size">Rozmiar czcionki</string>
     <string name="settings_wifi_only">Synchronizuj tylko przez Wi-Fi</string>
@@ -176,7 +176,7 @@
 
     <!-- Array: background synchronization -->
     <string-array name="sync_entries">
-        <item>Wyłączone</item>
+        <item>Wyłączona</item>
         <item>15 minut</item>
         <item>1 godzina</item>
         <item>6 godzin</item>

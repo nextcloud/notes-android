@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
-    <string name="settings_theme_title">Koyu tema</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
     <string name="settings_font_size">Yazı boyutu</string>
     <string name="settings_wifi_only">Yalnız Wi-Fi ile eşitlensin</string>
