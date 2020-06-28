@@ -1,4 +1,4 @@
-package it.niedermann.nextcloud.deck.util;
+package it.niedermann.owncloud.notes.persistence.util;
 
 import android.graphics.Color;
 
