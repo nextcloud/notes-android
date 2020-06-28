@@ -1,4 +1,4 @@
-package it.niedermann.nextcloud.deck;
+package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
 
