@@ -9,10 +9,12 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Collections;
 import java.util.Objects;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ActivityExceptionBinding;
+import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
 
 import static it.niedermann.owncloud.notes.exception.ExceptionHandler.KEY_THROWABLE;
 
@@ -32,12 +34,18 @@ public class ExceptionActivity extends AppCompatActivity {
         binding.copy.setOnClickListener((v) -> copyStacktraceToClipboard());
         binding.close.setOnClickListener((v) -> close());
 
+
+        final TipsAdapter adapter = new TipsAdapter(this::startActivity);
+        binding.tips.setAdapter(adapter);
+        binding.tips.setNestedScrollingEnabled(false);
+
         setSupportActionBar(binding.toolbar);
         Throwable throwable = (Throwable) Objects.requireNonNull(getIntent().getSerializableExtra(KEY_THROWABLE));
         throwable.printStackTrace();
         binding.toolbar.setTitle(getString(R.string.simple_error));
         binding.message.setText(throwable.getMessage());
         binding.stacktrace.setText(ExceptionUtil.getDebugInfos(this, throwable));
+        adapter.setThrowables(Collections.singletonList(throwable));
     }
 
 

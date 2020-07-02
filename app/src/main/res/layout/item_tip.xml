@@ -29,6 +29,6 @@
         android:layout_marginEnd="@dimen/spacer_1x"
         android:textColor="@color/defaultBrand"
         android:visibility="visible"
-        tools:text="@string/error_files_app"
+        tools:text="@string/error_action_open_deck_info"
         tools:visibility="visible" />
 </LinearLayout>
