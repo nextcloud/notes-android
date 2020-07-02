@@ -34,7 +34,6 @@ public class ExceptionActivity extends AppCompatActivity {
         binding.copy.setOnClickListener((v) -> copyStacktraceToClipboard());
         binding.close.setOnClickListener((v) -> close());
 
-
         final TipsAdapter adapter = new TipsAdapter(this::startActivity);
         binding.tips.setAdapter(adapter);
         binding.tips.setNestedScrollingEnabled(false);

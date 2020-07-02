@@ -70,7 +70,6 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
                         .setData(Uri.parse("package:" + BuildConfig.APPLICATION_ID))
                         .putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_deck_info);
                 add(R.string.error_dialog_tip_clear_storage, intent);
-                add(R.string.error_dialog_tip_clear_storage);
             } else if (t instanceof NextcloudFilesAppNotSupportedException) {
                 add(R.string.error_dialog_tip_files_outdated);
             } else if (t instanceof NextcloudApiNotRespondingException) {
