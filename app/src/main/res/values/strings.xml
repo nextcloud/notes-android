@@ -301,4 +301,7 @@
     <string name="simple_other">Other</string>
     <string name="sort_last_modified">Sort by modified date</string>
     <string name="sort_alphabetically">Sort by alphabet</string>
+    <string name="error_action_open_battery_settings">Battery settings</string>
+    <string name="error_action_open_deck_info">Open App info</string>
+    <string name="error_action_open_network">Network settings</string>
 </resources>

@@ -2,17 +2,18 @@ package it.niedermann.owncloud.notes.exception;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build.VERSION;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.provider.Settings;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotSupportedException;
@@ -24,18 +25,19 @@ import org.json.JSONException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.DialogExceptionBinding;
-import it.niedermann.owncloud.notes.databinding.ItemTipBinding;
+import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
 
+import static android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS;
 import static it.niedermann.owncloud.notes.shared.util.ClipboardUtil.copyToClipboard;
 
 public class ExceptionDialogFragment extends AppCompatDialogFragment {
 
     private static final String KEY_THROWABLES = "throwables";
+    public static final String INTENT_EXTRA_BUTTON_TEXT = "button_text";
 
     @NonNull
     private ArrayList<Throwable> throwables = new ArrayList<>();
@@ -58,7 +60,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
         final View view = View.inflate(getContext(), R.layout.dialog_exception, null);
         final DialogExceptionBinding binding = DialogExceptionBinding.bind(view);
 
-        final TipsAdapter adapter = new TipsAdapter();
+        final TipsAdapter adapter = new TipsAdapter((actionIntent) -> requireActivity().startActivity(actionIntent));
 
         final String debugInfos = ExceptionUtil.getDebugInfos(requireContext(), throwables);
 
@@ -70,16 +72,24 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
             if (t instanceof TokenMismatchException) {
                 adapter.add(R.string.error_dialog_tip_token_mismatch_retry);
                 adapter.add(R.string.error_dialog_tip_token_mismatch_clear_storage);
+                Intent intent = new Intent(ACTION_APPLICATION_DETAILS_SETTINGS)
+                        .setData(Uri.parse("package:" + BuildConfig.APPLICATION_ID))
+                        .putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_deck_info);
+                adapter.add(R.string.error_dialog_tip_clear_storage, intent);
                 adapter.add(R.string.error_dialog_tip_clear_storage);
             } else if (t instanceof NextcloudFilesAppNotSupportedException) {
                 adapter.add(R.string.error_dialog_tip_files_outdated);
             } else if (t instanceof NextcloudApiNotRespondingException) {
-                adapter.add(R.string.error_dialog_tip_disable_battery_optimizations);
+                if (VERSION.SDK_INT >= VERSION_CODES.M) {
+                    adapter.add(R.string.error_dialog_tip_disable_battery_optimizations, new Intent().setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_battery_settings));
+                } else {
+                    adapter.add(R.string.error_dialog_tip_disable_battery_optimizations);
+                }
                 adapter.add(R.string.error_dialog_tip_files_force_stop);
                 adapter.add(R.string.error_dialog_tip_files_delete_storage);
             } else if (t instanceof SocketTimeoutException || t instanceof ConnectException) {
                 adapter.add(R.string.error_dialog_timeout_instance);
-                adapter.add(R.string.error_dialog_timeout_toggle);
+                adapter.add(R.string.error_dialog_timeout_toggle, new Intent(Settings.ACTION_WIFI_SETTINGS).putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_network));
             } else if (t instanceof JSONException || t instanceof NullPointerException) {
                 adapter.add(R.string.error_dialog_check_server);
             } else if (t instanceof NextcloudHttpRequestFailedException) {
@@ -126,42 +136,5 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
         final DialogFragment fragment = new ExceptionDialogFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    private static class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
-
-        @NonNull
-        private List<Integer> tips = new LinkedList<>();
-
-        @NonNull
-        @Override
-        public TipsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            final View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tip, parent, false);
-            return new TipsViewHolder(v);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull TipsViewHolder holder, int position) {
-            holder.binding.tip.setText(tips.get(position));
-        }
-
-        @Override
-        public int getItemCount() {
-            return tips.size();
-        }
-
-        private void add(@StringRes int tip) {
-            tips.add(tip);
-            notifyItemInserted(tips.size());
-        }
-    }
-
-    private static class TipsViewHolder extends RecyclerView.ViewHolder {
-        private final ItemTipBinding binding;
-
-        private TipsViewHolder(@NonNull View itemView) {
-            super(itemView);
-            binding = ItemTipBinding.bind(itemView);
-        }
     }
 }
