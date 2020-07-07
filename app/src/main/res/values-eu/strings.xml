@@ -131,7 +131,7 @@
     <string name="error_dialog_title">Oh ez - Orain zer? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Saia zaitez aplikazioa itxi eta berrabiarazten. Agian Nextcloud aplikazioarekin gaizki konektatzea gertatu da.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Arazoak jarraitzen badu, saiatu bi aplikazioen biltegiak garbitzen: Nextcloud eta Nextcloud Oharrak aplikazioen biltegiak.</string>
-    <string name="error_dialog_tip_clear_storage">Biltegiak garbitzeko androiden  ezarpenak → Aplikazioak → Nextcloud / Nextcloud Oharrak → Biltegia → Garbitu biltegia.</string>
+    <string name="error_dialog_tip_clear_storage">Biltegia garbi dezakezu aplikazioaren informazioa ireki eta hautatuz: Biltegia → Garbitu biltegia.</string>
     <string name="error_dialog_tip_files_outdated">Daukazun Nextcloud aplikazioa zaharkituta dagoela dirudi. Zoaz Play Store edo F-Droidera azken bertsioa lortzeko.</string>
     <string name="error_dialog_tip_files_force_stop">Daukazun Nextcloud aplikazioan zerbait gaizki dabilela dirudi.  Saia zaitez Nextcloud aplikazioa eta Nextcloud Oharrak, biak, geldiarazten. </string>
     <string name="error_dialog_tip_files_delete_storage">Geldiarazteak ez badu arazoa konpontzen, bi biltegiak garbitzen saia zaitezke.</string>
@@ -145,6 +145,7 @@
     <string name="error_dialog_we_need_info">Zuri laguntzeko hurrengo informazio teknikoa behar dugu:</string>
     <string name="error_dialog_server_app_enabled">Mesedez egiaztatu \"Notak\" aplikazioa instalatu eta gaitu duzula zure zerbitzarian.</string>
     <string name="error_dialog_redirect">Zure zerbitzariak HTTP 302 egoera kodearekin erantzun du, honek esan nahi du ez duzula Notak aplikazioa ez duzula zure zerbitzarian instalatu edo zerbait txarto konfiguratuta dagoela. Hau .htaccess fitxategi batean arau pertsonalizatuak daudelako edo OID Bezeroa izeneko aplikazioarengatik sortua izan daiteke. </string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Desgaitu bateria optimizazio guztiak Nextcloudentzat eta Oharrak aplikazioarentzat.</string>
     <string name="added_content">\"%1$s\" gehituta</string>
     <string name="shared_text_empty">Partekatutako testua hutsik zegoen</string>
     <string name="append_to_note">Gehitu notara</string>
@@ -217,4 +218,7 @@
     <string name="formatting_help_unsupported_body_3">Irudiak</string>
     <string name="simple_other">Beste bat</string>
     <string name="sort_alphabetically">Ordenatu alfabetikoki</string>
+    <string name="error_action_open_battery_settings">Bateria ezarpenak</string>
+    <string name="error_action_open_deck_info">Ireki aplikazioaren informazioa</string>
+    <string name="error_action_open_network">Sareko ezarpenak</string>
 </resources>

@@ -131,7 +131,7 @@
     <string name="error_dialog_title">Ojoj, kaj pa zdaj? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Poskusite vsiliti končanje programa in ga ponovno zagnati. Morda je težava v neustrezni povezavi z okoljem Nextcloud</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Če se težava še naprej pojavlja, poskusite počistiti podatke programa Nextcloud in Nextcloud Notes.</string>
-    <string name="error_dialog_tip_clear_storage">Podatke in shrambo je mogoče počistiti med nastavitvami → Programi → Nextcloud / Nextcloud Notes → Shramba → Počisti shrambo.</string>
+    <string name="error_dialog_tip_clear_storage">Shrambo je mogoče počistiti med podrobnostmi programa Shramba → Počisti shrambo.</string>
     <string name="error_dialog_tip_files_outdated">Program Nextcloud je očitno starejše različice. Posodobite jo prek Trgovine Play ali s posodabljalnikom F-Droid.</string>
     <string name="error_dialog_tip_files_force_stop">Kaže, da je nekaj narobe s programom Nextcloud. Poskusite vsiljeno zaustaviti programa Nextcloud in Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Vsiljeno zaustavljanje ni imelo ustreznega učinka. Poskusite lahko še počistiti podatke shrambe obeh programov.</string>
@@ -223,10 +223,16 @@
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
     <string name="formatting_help_code_title">Šifra</string>
+    <string name="formatting_help_code_body_3">Če bi želeli uporabiti poudarjanje skladnje, vključite tudi jezik:</string>
+
     <string name="formatting_help_unsupported_title">Nepodprto</string>
+    <string name="formatting_help_unsupported_body_1">Čeprav se neprestano trudimo izboljšati podporo za oblikovanje Markdown, je še vedno nekaj zmožnosti, ki niso podprte:</string>
     <string name="formatting_help_unsupported_body_2">Razpredelnice</string>
     <string name="formatting_help_unsupported_body_3">Slike</string>
+    <string name="formatting_help_unsupported_body_4">Če želite sodelovati pri razvoju ali pa drugače pomagati in podpreti katerokoli od navedenih možnosti, stopite z nami v stik prek GitHub ali po elektronski pošti.</string>
     <string name="simple_other">Drugo</string>
     <string name="sort_last_modified">Razvrsti po datumu spremembe</string>
     <string name="sort_alphabetically">Razvrsti abecedno</string>
+    <string name="error_action_open_deck_info">Odpri podrobnosti programa</string>
+    <string name="error_action_open_network">Nastavitve omrežja</string>
 </resources>
