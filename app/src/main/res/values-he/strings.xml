@@ -214,4 +214,6 @@
     <string name="formatting_help_unsupported_body_2">טבלאות</string>
     <string name="formatting_help_unsupported_body_3">תמונות</string>
     <string name="simple_other">אחר</string>
-    </resources>
+    <string name="error_action_open_deck_info">פתיחת פרטי יישומון</string>
+    <string name="error_action_open_network">הגדרות רשת</string>
+</resources>

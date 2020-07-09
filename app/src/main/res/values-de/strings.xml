@@ -131,7 +131,7 @@
     <string name="error_dialog_title">Oh nein - Was jetzt? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Bitte versuchen Sie, das Schließen der App zu erzwingen und sie erneut zu starten. Möglicherweise bestand eine gestörte Verbindung zur Nextcloud-App.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Wenn das Problem weiterhin besteht, versuchen Sie, den Speicher von Nextcloud und Nextcloud Notes zu löschen, um das Problem zu beheben.</string>
-    <string name="error_dialog_tip_clear_storage">Sie können den Speicher löschen, indem Sie in den Android-Einstellungen → Apps → Nextcloud / Nextcloud Notes → Speicher → Speicher löschen wählen.</string>
+    <string name="error_dialog_tip_clear_storage">Sie können den Speicherinhalt löschen indem Sie die App öffnen und Speicher → Speicherinhalt löschen auswählen.</string>
     <string name="error_dialog_tip_files_outdated">Sie scheinen eine alte Version der Nextcloud-App installiert zu haben. Bitte besuchen Sie den Play Store oder F-Droid, um die neueste Version zu installieren.</string>
     <string name="error_dialog_tip_files_force_stop">Mit Ihrer Nextcloud-App scheint etwas nicht zu stimmen. Bitte versuchen Sie, sowohl die Nextcloud-App als auch die Nextcloud Notes-App anzuhalten.</string>
     <string name="error_dialog_tip_files_delete_storage">Wenn das erzwungene Stoppen nicht hilft, können Sie versuchen, den Speicher beider Apps zu löschen.</string>
@@ -145,6 +145,7 @@
     <string name="error_dialog_we_need_info">Wir benötigen die folgenden technischen Informationen, um Ihnen helfen zu können:</string>
     <string name="error_dialog_server_app_enabled">Bitte stellen Sie sicher, dass die „Notes“-App auf Ihrem Server installiert und aktiviert ist.</string>
     <string name="error_dialog_redirect">Ihr Server antwortet mit HTTP Status-Code 302. Dies bedeutet, dass entweder die Notes App nicht auf Ihrem Server installiert ist, oder eine Fehlkonfiguration vorliegt. Die Ursache kann im Überschreiben von Variablen in der .htaccess-Datei liegen, oder an Nextcloud Apps wie OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Bitte alle Batterieoptimierungen für Nextcloud und die Notes-App deaktivieren.</string>
     <string name="added_content">„%1$s“ hinzugefügt</string>
     <string name="shared_text_empty">Der geteilte Text war ohne Inhalt</string>
     <string name="append_to_note">An Notiz anhängen</string>
@@ -243,4 +244,7 @@
     <string name="simple_other">Andere</string>
     <string name="sort_last_modified">Nach Änderungsdatum sortieren</string>
     <string name="sort_alphabetically">Alphabetisch sortieren</string>
+    <string name="error_action_open_battery_settings">Batterie-Einstellungen</string>
+    <string name="error_action_open_deck_info">App-Informationen öffnen</string>
+    <string name="error_action_open_network">Netzwerkeinstellungen</string>
 </resources>

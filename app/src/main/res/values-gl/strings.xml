@@ -131,7 +131,7 @@
     <string name="error_dialog_title">Vaites, e agora que? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Probe a forzar o peche da apli e reiniciala de novo. Pode haber unha conexión incorrecta coa apli Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema continúa, tente limpar o almacenamento de ambas as aplis: Nextcloud e Nextcloud Notas para resolver este problema.</string>
-    <string name="error_dialog_tip_clear_storage">Pode limpar o almacenamento abrindo axustes de Android → Aplicacións → Nextcloud / Nextcloud Notas → Almacenamento → Limpar o almacenamento.</string>
+    <string name="error_dialog_tip_clear_storage">Pode limpar o almacenamento abrindo a información da apli e seleccionando Almacenamento → Limpar o almacenamento.</string>
     <string name="error_dialog_tip_files_outdated">A súa apli Nextcloud semella estar desactualizada. Visite Play Store ou F-Droid para obter a última versión.</string>
     <string name="error_dialog_tip_files_force_stop">Semella que algo está mal na súa apli Nextcloud. Tente forzar a parar ambas, a apli Nextcloud e a apli Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Se detelos pola forza non axuda, pode tentar limpar o almacenamento de ambas as aplicacións.</string>
@@ -145,6 +145,7 @@
     <string name="error_dialog_we_need_info">Necesitamos a seguinte información técnica para axudarlle:</string>
     <string name="error_dialog_server_app_enabled">Asegúrese de ter instalada e activada a aplicación «Notas» no seu servidor.</string>
     <string name="error_dialog_redirect">O seu servidor respondeu cun código de estado HTTP 302, o que implica que non ten instalada a aplicación Notas no servidor ou que algo está mal configurado. Isto pode ser causado por substitucións personalizadas nun ficheiro .htaccess ou por aplicacións Nextcloud como Client OID.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Desactive todas as optimizacións de batería para Nextcloud e a apli Notas.</string>
     <string name="added_content">Engadido «%1$s»</string>
     <string name="shared_text_empty">O texto compartido estaba baleiro</string>
     <string name="append_to_note">Anexo á nota</string>
@@ -243,4 +244,7 @@
     <string name="simple_other">Outro</string>
     <string name="sort_last_modified">Ordenar por data de modificación</string>
     <string name="sort_alphabetically">Ordenar alfabéticamente</string>
+    <string name="error_action_open_battery_settings">Axustes da batería</string>
+    <string name="error_action_open_deck_info">Abrir a info da apli</string>
+    <string name="error_action_open_network">Axustes da rede</string>
 </resources>
