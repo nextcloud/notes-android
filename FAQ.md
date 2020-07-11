@@ -26,7 +26,7 @@ If the issue persists, [open a bug report in our issue tracker](https://github.c
 
 ## Why has my bug report been closed?
 
-As stated in the bug templates, we reserve to close issues which do not fill the **complete** issue template. The information we ask for is urgently needed, even if it might not seem to be important or relevant to you.
+As stated in the bug templates, we reserve to close issues which do not fill the **complete issue template**. The information we ask for is urgently needed, even if it might not seem to be important or relevant to you.
 
 We have very limited resources and capacity and we really want to help you fixing different bugs, but we can impossibly know your environment, your different software versions, the store you used.
 Therefore it is extremely important for you to describe the **exact steps to reproduce**. This includes information about your environment.
@@ -42,7 +42,7 @@ Example for a good description:
 > 3. Click on the ⇦ in the top left
 > 4. See app crash
 
-We also preserve to close issues where the original reporter does not answer within a certain time frame. We usually answer issues within a hour and expect you to respond to our questions within a week.
+We also preserve to close issues where the **original reporter does not answer within a certain time frame**. We usually answer issues within a hour and expect you to respond to our questions within a week.
 
 This is necessary for two reasons:
 
