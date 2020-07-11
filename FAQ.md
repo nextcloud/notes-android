@@ -33,15 +33,14 @@ Therefore it is extremely important for you to describe the **exact steps to rep
 
 Example for a bad description:
 
-> 1. The app crashes when i save a card
+> 1. The app crashes when i save a note
 
 Example for a good description:
 
-> 1. Open any existing card\
-> 2. Add text to the description\
-> 3. Click on the ✕ in the top left\
-> 4. Answer "Save" when asking to discard or save the changes\
-> 5. See app crash
+> 1. Open any existing note\
+> 2. Change category to another existing category\
+> 3. Click on the ⇦ in the top left\
+> 4. See app crash
 
 We also preserve to close issues where the original reporter does not answer within a certain time frame. We usually answer issues within a hour and expect you to respond to our questions within a week.
 
