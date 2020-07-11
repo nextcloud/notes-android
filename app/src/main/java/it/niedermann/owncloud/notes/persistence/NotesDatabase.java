@@ -325,8 +325,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
                                     @Nullable String category, @Nullable Boolean favorite,
                                     @Nullable CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
-        List<String> where = new ArrayList<>();
-        List<String> args = new ArrayList<>();
+        List<String> where = new ArrayList<>(6);
+        List<String> args = new ArrayList<>(9);
 
         where.add(key_status + " != ?");
         args.add(DBStatus.LOCAL_DELETED.getTitle());
@@ -357,18 +357,13 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
 
         String order = category == null ? default_order : key_category + ", " + key_title;
-        // TODO: modify here, need to test
-//        if (sortingMethod != null) {
-//            order = key_favorite + " DESC," + sortingMethod.getSorder();
-//        }
         if (sortingMethod != null) {
-            if (category != null) {
+            if (category != null) { // Needed for subcategories, see https://github.com/stefan-niedermann/nextcloud-notes/issues/902
                 order = key_category + "," + key_favorite + " DESC," + sortingMethod.getSorder(); // Edited
             } else {
                 order = key_favorite + " DESC," + sortingMethod.getSorder();
             }
         }
-        Log.e(TAG, "ORDER:::: " + order);
         return getNotesCustom(accountId, TextUtils.join(" AND ", where), args.toArray(new String[]{}), order, true);
     }
 
