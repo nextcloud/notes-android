@@ -145,6 +145,7 @@
     <string name="error_dialog_we_need_info">Χρειαζόμαστε τις ακόλουθες τεχνικές πληροφορίες για να σας βοηθήσουμε:</string>
     <string name="error_dialog_server_app_enabled">Παρακαλούμε βεβαιωθείτε ότι εγκαταστήσατε και ενεργοποιήσατε την εφαρμογή \"Notes\" στον διακομιστή σας.</string>
     <string name="error_dialog_redirect">Ο διακομιστής απάντησε με κωδικό κατάστασης HTTP 302, που σημαίνει, πως δεν έχετε εγκατεστημένη την εφαρμογή Notes στον διακομιστή σας ή υπάρχει λάθος ρύθμιση. Αυτό μπορεί να προκλήθηκε από λάθος καταχώρηση στο αρχείο .htaccess-file ή σε εφαρμογές του Nextcloud όπως την OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Παρακαλούμε απενεργοποιήστε όλες τις βελτιστοποιήσεις μπαταρίας για το Nextcloud και την εφαρμογή Notes.</string>
     <string name="added_content">Προστέθηκε \"%1$s\"</string>
     <string name="shared_text_empty">Το κοινόχρηστο κείμενο είναι κενό</string>
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
@@ -243,6 +244,7 @@
     <string name="simple_other">Άλλο</string>
     <string name="sort_last_modified">Ταξινόμηση κατά ημερομηνία τροποποίησης</string>
     <string name="sort_alphabetically">Ταξινόμηση αλφαβητικά</string>
+    <string name="error_action_open_battery_settings">Ρυθμίσεις μπαταρίας</string>
     <string name="error_action_open_deck_info">Πληροφορίες εφαρμογής</string>
     <string name="error_action_open_network">Ρυθμίσεις δικτύου</string>
 </resources>
