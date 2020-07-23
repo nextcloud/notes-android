@@ -65,7 +65,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
-    private boolean canMoveNoteToAnotherAccounts = false;
     private LocalAccount localAccount;
     private SingleSignOnAccount ssoAccount;
 
@@ -94,10 +93,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        new Thread(() -> {
-            canMoveNoteToAnotherAccounts = db.getAccountsCount() > 1;
-            requireActivity().invalidateOptionsMenu();
-        }).start();
         try {
             this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
             this.localAccount = db.getLocalAccountByAccountName(ssoAccount.name);
@@ -196,7 +191,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (isRequestPinShortcutSupported(requireActivity()) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             menu.add(Menu.NONE, MENU_ID_PIN, 110, R.string.pin_to_homescreen);
         }
-        menu.findItem(R.id.menu_move).setVisible(canMoveNoteToAnotherAccounts);
 
         super.onCreateOptionsMenu(menu, inflater);
     }

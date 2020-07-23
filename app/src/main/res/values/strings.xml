@@ -304,4 +304,5 @@
     <string name="error_action_open_battery_settings">Battery settings</string>
     <string name="error_action_open_deck_info">Open App info</string>
     <string name="error_action_open_network">Network settings</string>
+    <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
 </resources>

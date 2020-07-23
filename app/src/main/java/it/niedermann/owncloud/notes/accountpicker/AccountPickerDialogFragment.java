@@ -10,6 +10,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,30 +59,32 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View view = View.inflate(getContext(), R.layout.dialog_choose_account, null);
-        DialogChooseAccountBinding binding = DialogChooseAccountBinding.bind(view);
+        final List<LocalAccount> accountsList = NotesDatabase.getInstance(getActivity()).getAccounts();
+        final AlertDialog.Builder dialogBuilder = new BrandedAlertDialogBuilder(requireActivity())
+                .setTitle(R.string.simple_move)
+                .setNegativeButton(android.R.string.cancel, null);
 
-        NotesDatabase db = NotesDatabase.getInstance(getActivity());
-        List<LocalAccount> accountsList = db.getAccounts();
+        if (accountsList.size() > 1) {
+            final DialogChooseAccountBinding binding = DialogChooseAccountBinding.inflate(LayoutInflater.from(requireContext()));
 
-        for (int i = 0; i < accountsList.size(); i++) {
-            if (accountsList.get(i).getId() == accountIdToExclude) {
-                accountsList.remove(i);
-                break;
+            for (int i = 0; i < accountsList.size(); i++) {
+                if (accountsList.get(i).getId() == accountIdToExclude) {
+                    accountsList.remove(i);
+                    break;
+                }
             }
+
+            RecyclerView.Adapter<AccountChooserViewHolder> adapter = new AccountChooserAdapter(accountsList, (account -> {
+                accountPickerListener.onAccountPicked(account);
+                dismiss();
+            }));
+            binding.accountsList.setAdapter(adapter);
+            dialogBuilder.setView(binding.getRoot());
+        } else {
+            dialogBuilder.setMessage(getString(R.string.no_other_accounts));
         }
 
-        RecyclerView.Adapter<AccountChooserViewHolder> adapter = new AccountChooserAdapter(accountsList, (account -> {
-            accountPickerListener.onAccountPicked(account);
-            dismiss();
-        }));
-        binding.accountsList.setAdapter(adapter);
-
-        return new BrandedAlertDialogBuilder(requireActivity())
-                .setView(binding.getRoot())
-                .setTitle(R.string.simple_move)
-                .setNegativeButton(android.R.string.cancel, null)
-                .create();
+        return dialogBuilder.create();
     }
 
     @Nullable

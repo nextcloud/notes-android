@@ -773,10 +773,11 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return account;
     }
 
+    @NonNull
     public List<LocalAccount> getAccounts() {
         final SQLiteDatabase db = getReadableDatabase();
         final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color, key_capabilities_etag}, null, null, null, null, null);
-        final List<LocalAccount> accounts = new ArrayList<>();
+        final List<LocalAccount> accounts = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
             LocalAccount account = new LocalAccount();
             account.setId(cursor.getLong(0));
