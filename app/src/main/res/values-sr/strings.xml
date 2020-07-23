@@ -9,25 +9,26 @@
     <string name="action_settings">Поставке</string>
     <string name="action_trashbin">Обрисане белешке</string>
     <string name="action_search">Тражи</string>
+    <string name="action_sorting_method">Метод сортирања</string>
     <string name="simple_cancel">Поништи</string>
     <string name="simple_edit">Измени</string>
     <string name="action_edit_save">Сачувај</string>
     <string name="simple_about">О програму</string>
-    <string name="simple_accounts">Налози</string>
     <string name="simple_bold">Подебљано</string>
     <string name="simple_link">Веза</string>
     <string name="simple_italic">Курзив</string>
     <string name="action_note_deleted">Обрисано %1$s</string>
     <string name="action_note_restored">Повраћено %1$s</string>
     <string name="action_undo">Опозови</string>
-    <string name="action_drawer_open">отвори навигацију</string>
-    <string name="action_drawer_close">затвори навигацију</string>
     <string name="action_uncategorized">Некатегоризовано</string>
     <string name="menu_delete">Обриши</string>
     <string name="menu_change_category">Категорија</string>
     <string name="menu_favorite">Омиљене</string>
     <string name="menu_preview">Преглед</string>
     <string name="menu_share">Подели</string>
+
+    <string name="search_in_category">Претражи у %1$s</string>
+    <string name="search_in_all">Претражи у свим белешкама</string>
 
     <string name="change_category_title">Одаберите категорију</string>
 
@@ -40,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Режим приказа белешки</string>
-    <string name="settings_theme_title">Тамна тема</string>
+    <string name="settings_theme_title">Тема</string>
     <string name="settings_font_title">Фонт фиксне ширине</string>
     <string name="settings_font_size">Величина фонта</string>
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
@@ -54,8 +55,6 @@
     <string name="error_synchronization">Синхронизација није успела</string>
     <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
     <string name="error_no_network">Нема мрежне везе</string>
-    <string name="error_files_app">Да ли имате инсталирану апликацију за фајлове?</string>
-    <string name="error_insufficient_storage">Складиште на серверу је пуно.</string>
     <string name="error_unknown">Десила се непозната грешка.</string>
 
     <!-- About -->
@@ -119,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Не могу да учитам преглед. Проверите да ли постоји двоцифрена ставка у листи без садржаја.</string>
     <string name="simple_more">Још</string>
     <string name="simple_move">Помери</string>
-    <string name="error_files_app_version_too_old">Да ли је Ваша апликација за фајлове на најновијој верзији?</string>
     <string name="checkbox_could_not_be_toggled">Поље за потврду не може да се укључи/искључи.</string>
     <string name="bulk_notes_deleted">Обрисано %1$d белешки</string>
     <string name="bulk_notes_restored">Повраћено %1$d белешки</string>
@@ -132,18 +130,37 @@
     <string name="could_not_copy_to_clipboard">Не могу да копирам у оставу</string>
     <string name="error_dialog_title">О, не - шта сад? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Покушајте да форсирано затворите апликацију и стартујете је поново. Можда је била неисправна конекција ка Некстклауд апликацији.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Ако проблем настави да се дешава, пробајте да очистите податке од обе апликације: и Некстклауд и Некстклауд Белешки да бисте решили проблем.</string>
+    <string name="error_dialog_tip_clear_storage">Складиште можете очистити ако отворите информације о апликацији и бирањем Меморија → Обриши податке.</string>
     <string name="error_dialog_tip_files_outdated">Изгледа да је верзија Некстклауд апликације стара. Посетите Play Store или Ф-дроид да скинете најновију верзију.</string>
+    <string name="error_dialog_tip_files_force_stop">Нешто није у реду да Вашом Некстклауд апликацијом. Пробајте да форсирано зауставите обе, и Некстклауд апликацију и апликацију Некстклауд Белешки.</string>
     <string name="error_dialog_tip_files_delete_storage">Ако ово заустављање не помогне, очистите податке за обе апликације.</string>
     <string name="error_dialog_timeout_instance">Није било одговора са сервера у задатом времену. Проверите да ли вам инстанца ради добро.</string>
+    <string name="error_dialog_timeout_toggle">Проверите конекцију. Некад укључивање и иксључивање мобилних података или Wi-Fi-а може да помогне.</string>
+    <string name="error_dialog_check_server">Одговор са Вашег сервера није исправан. Проверите да ли можете да приступите апликацији Белешки преко веба.</string>
     <string name="error_dialog_check_server_logs">Постоји проблема са поставкама Вашег Некстклауда. Погледаје дневник у фајловима са сервера.</string>
     <string name="error_dialog_check_maintenance">Проверите да ли Вам инстанца можда тренутно ради у режиму одржавања.</string>
     <string name="error_dialog_insufficient_storage">На Некстклауд инстанци више нема простора. Обришите неке фајлове да синхронизујете локалне измене на облак.</string>
+    <string name="error_dialog_contact_us">Не оклевајте да нас контактирате ако проблем не може да се отклони. Можете наћи детаље наших контаката у секцији о нама у бочној траци.</string>
     <string name="error_dialog_we_need_info">Потребне су нам следеће техничке информација да бисмо Вам помогли:</string>
+    <string name="error_dialog_server_app_enabled">Проверите да ли сте инсталирали и укључили апликацију „Белешке” на Вашем серверу.</string>
+    <string name="error_dialog_redirect">Сервер је одговорио са HTTP 302 кодом, што значи да немате инсталирану апликацију Белешке или да Вам сервер није правилно конфигурисан. Ово може да буде проузорковано произвољним додавањима у .htaccess фајлу или другим Некстклауд апликацијама као што је OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Искључите све оптимизације батерије за Некстаклауд и Белешке апликације.</string>
+    <string name="added_content">Додата „%1$s”</string>
+    <string name="shared_text_empty">Дељени текст је празан</string>
+    <string name="append_to_note">Додај на белешку</string>
+    <string name="change_note_title">Промени назив белешке</string>
+    <string name="menu_edit_title">Измени наслов</string>
     <string name="settings_branding">Брендирање</string>
+    <string name="settings_gridview">Приказ мреже 🆕</string>
     <string name="simple_security">Безбедност</string>
     <string name="simple_appearance">Изглед</string>
     <string name="simple_synchronization">Синхронизација</string>
+    <string name="simple_behavior">Понашање</string>
+    <string name="share_multiple">Подели садржај %1$d белешки</string>
     <string name="manage_accounts">Управљање налозима</string>
+    <string name="action_formatting_help">Форматирање</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Отвори у режиму уређивања</item>
@@ -178,4 +195,57 @@
         <item quantity="few">%d означене</item>
         <item quantity="other">%d означених</item>
     </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Форматирање у зависности од контекста</string>
+    <string name="formatting_help_cbf_body_1">Главни циљ дизајна апликације Белешки је био да пружи алат који не стаје на пут. А моћи ћете и да форматирате текст Markdown синтактом. За разне од долепоменутих примера можете да користите и пречице, па можете форматирати белешке без куцања кодова испод.</string>
+    <string name="formatting_help_cbf_body_2">Само одаберите опсег текста или тапните курсором на било које место и добићете искачући мени који садржи подразумеване уносе %1$s, %2$s, %3$s уносе као %4$s или%5$s.</string>
+
+    <string name="formatting_help_text_title">Текст</string>
+    <string name="formatting_help_text_body">Са Markdown синтаксом је лако направити да неке речи буду %1$sподебљане%1$s, а друге речи %2$sу курзиву%2$s. Можете неке речи %3$sпрецртати%3$s или чак и направити [везу ка Нексткладу](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Спискови</string>
+    <string name="formatting_help_lists_body_1">Некад желите нумерисане листе:</string>
+    <string name="formatting_help_lists_body_2">Један</string>
+    <string name="formatting_help_lists_body_3">Два</string>
+    <string name="formatting_help_lists_body_4">Три</string>
+    <string name="formatting_help_lists_body_5">Некад желите знаке набрајања:</string>
+    <string name="formatting_help_lists_body_6">Почните линију са цртицом</string>
+    <string name="formatting_help_lists_body_7">А уколико имате подставке, додајте два размака пре цртице или звездице:</string>
+    <string name="formatting_help_lists_body_8">Овако</string>
+    <string name="formatting_help_lists_body_9">И овако</string>
+
+    <string name="formatting_help_checkboxes_title">Кућице за штиклирање</string>
+    <string name="formatting_help_checkboxes_body_1">Да направите кућице за штиклирање, корисите списак са угластим заградама</string>
+    <string name="formatting_help_checkboxes_body_2">Ставка 1</string>
+    <string name="formatting_help_checkboxes_body_3">Ставка 2</string>
+
+    <string name="formatting_help_structured_documents_title">Документи са структуром</string>
+    <string name="formatting_help_structured_documents_body_1">Некад је корисно имати различите нивое заглавља да структуирате документ. Почните линије са %1$s да направите заглавље. Више %2$s у реду означава мање величине заглавља.</string>
+    <string name="formatting_help_structured_documents_body_2">Ово је заглавље трећег нивоа</string>
+    <string name="formatting_help_structured_documents_body_3">Можете користити једну %1$s, па све до %2$s шест различитих величина заглавља.</string>
+    <string name="formatting_help_structured_documents_body_4">Ако желите да цитирате некога, користите %1$s карактер пре линије:</string>
+    <string name="formatting_help_structured_documents_body_5">Машта је битнија од знања. Знање је ограничено. Машта обиграва око света.</string>
+    <string name="formatting_help_structured_documents_body_6">- Алберт Ајнштајн</string>
+
+    <string name="formatting_help_code_title">Кôд</string>
+    <string name="formatting_help_code_body_1">Има више начина да стилизујете кôд са Markdown синтактом. Ако имате уметните блокове кôда, омотајте их у обрнуте полунаводнике:</string>
+    <string name="formatting_help_code_body_2">Markdown синтакса такође подржава тзв. ограђени кôд, што дозвољава вишеструке линије без увлачења:</string>
+    <string name="formatting_help_code_body_3">А ако желите бојење синтакте, додајте и језик:</string>
+
+    <string name="formatting_help_unsupported_title">Неподржано</string>
+    <string name="formatting_help_unsupported_body_1">И док покушавамо да непрекидно побољшавамо подршку за Markdown синтаксу, има неких функционалности које још нису подржане у Белешкама:</string>
+    <string name="formatting_help_unsupported_body_2">Табеле</string>
+    <string name="formatting_help_unsupported_body_3">Слике</string>
+    <string name="formatting_help_unsupported_body_4">Ако сте заинтересовани да подржите једну од ових функционалности, контактирајте нас преко GitHub-а или е-мејла.</string>
+    <string name="simple_other">Остало</string>
+    <string name="sort_last_modified">Сортирај по времену измене</string>
+    <string name="sort_alphabetically">Сортирај абецедно</string>
+    <string name="error_action_open_battery_settings">Подешавања батерије</string>
+    <string name="error_action_open_deck_info">Отвори инфо о апликацији</string>
+    <string name="error_action_open_network">Поставке мреже</string>
 </resources>

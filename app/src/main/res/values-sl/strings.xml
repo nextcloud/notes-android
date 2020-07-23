@@ -145,6 +145,7 @@
     <string name="error_dialog_we_need_info">Z ustrezno pomoč potrebujemo nekaj tehničnih podrobnosti sistema:</string>
     <string name="error_dialog_server_app_enabled">Prepričajte se, da ste namestili in omogočili tudi program »Notes« na strežniku.</string>
     <string name="error_dialog_redirect">S strežnika je prejet odziv s kodo stanja HTTP 302, kar kaže na to, da program Notes ni nameščen, ali pa je napačno nastavljen. Napaka se pojavi tudi pri nekaterih določilih v datoteki .htaccess oziroma programih, kot je odjemalec OID.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Onemogočite vso optimizacijo porabe baterije za programa Nextcloud in Notes.</string>
     <string name="added_content">Dodano »%1$s«</string>
     <string name="shared_text_empty">Besedilo v souporabi je brez vsebine</string>
     <string name="append_to_note">Pripni k zabeležki</string>
@@ -156,6 +157,7 @@
     <string name="simple_appearance">Videz</string>
     <string name="simple_synchronization">Usklajevanje</string>
     <string name="simple_behavior">Obnašanje</string>
+    <string name="share_multiple">Souporaba vsebine %1$d zabeležk</string>
     <string name="manage_accounts">Upravljanje z računi</string>
     <string name="action_formatting_help">Oblikovanje</string>
 
@@ -201,7 +203,12 @@
     <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Vsebinsko oblikovanje</string>
+    <string name="formatting_help_cbf_body_1">Najpomembnejša funkcija programa Notes je enostavno in hitro beleženje besedila, ki ga je mogoče tudi oblikovati z oblikovnim jezikom Markdown. Za spodaj omenjeno oblikovanje, je mogoče uporabiti tipkovne bližnjice, kar še dodatno poenostavi vnos..</string>
+    <string name="formatting_help_cbf_body_2">Enostavno izberite besedilo, ali pa pritisnite na kazalko, in pojavil se bo meni, ki vključuje ob privzetih možnosti %1$s, %2$s, %3$s tudi take, kot sta %4$s in %5$s.</string>
+
     <string name="formatting_help_text_title">Besedilo</string>
+    <string name="formatting_help_text_body">Z oblikovnim jezikom Markdown je besede zelo enostavno zapisati %1$skrepko%1$s oziroma %2$sležeče%2$s. Besede je mogoče tudi %3$sprečrtati%3$s in celo vpisati povezavo do na primer [spletišča Nextcloud](https://nextcloud.com).</string>
+
     <string name="formatting_help_lists_title">Seznami</string>
     <string name="formatting_help_lists_body_1">Včasih pridejo prav oštevilčeni seznami:</string>
     <string name="formatting_help_lists_body_2">Ena</string>
@@ -219,10 +226,16 @@
     <string name="formatting_help_checkboxes_body_3">Predmet B</string>
 
     <string name="formatting_help_structured_documents_title">Strukturirani dokumenti</string>
+    <string name="formatting_help_structured_documents_body_1">Včasih je uporabno besedilo strukturirati na več ravni. Vrstice začnite z %1$s, da ustvarite prvi naslov, več zaporednih %2$s pa pomeni manjšo velikost naslova.</string>
+    <string name="formatting_help_structured_documents_body_2">To je naslov tretje ravni</string>
+    <string name="formatting_help_structured_documents_body_3">Uporabite lahko en %1$s pa vse do %2$s šest različnih velikosti naslova.</string>
+    <string name="formatting_help_structured_documents_body_4">Če želite kaj zapisati v navedku, uporabite znak %1$s pred vrstico:</string>
     <string name="formatting_help_structured_documents_body_5">Domišljija je pomembnejša od znanja. Znanje je omejeno, domišljija pa obkroži ves svet.</string>
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
 
     <string name="formatting_help_code_title">Šifra</string>
+    <string name="formatting_help_code_body_1">Na voljo je več različnih načinov oblikovanja z Markdown. Če želite določiti medvrstične bloke besedila, zapišite to med navedke:</string>
+    <string name="formatting_help_code_body_2">Oblikovni jezik Markdown podpira tudi tako imenovano obrobljanje kode, kar omogoča zapis več vrstic brez zamika:</string>
     <string name="formatting_help_code_body_3">Če bi želeli uporabiti poudarjanje skladnje, vključite tudi jezik:</string>
 
     <string name="formatting_help_unsupported_title">Nepodprto</string>
@@ -233,6 +246,7 @@
     <string name="simple_other">Drugo</string>
     <string name="sort_last_modified">Razvrsti po datumu spremembe</string>
     <string name="sort_alphabetically">Razvrsti abecedno</string>
+    <string name="error_action_open_battery_settings">Nastavitve baterije</string>
     <string name="error_action_open_deck_info">Odpri podrobnosti programa</string>
     <string name="error_action_open_network">Nastavitve omrežja</string>
 </resources>
