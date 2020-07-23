@@ -9,25 +9,26 @@
     <string name="action_settings">Postavke</string>
     <string name="action_trashbin">Izbrisane bilješke</string>
     <string name="action_search">Traži</string>
+    <string name="action_sorting_method">Način razvrstavanja</string>
     <string name="simple_cancel">Odustani</string>
     <string name="simple_edit">Uredi</string>
     <string name="action_edit_save">Spremi</string>
     <string name="simple_about">Informacije</string>
-    <string name="simple_accounts">Računi</string>
     <string name="simple_bold">Podebljano</string>
     <string name="simple_link">Poveznica</string>
     <string name="simple_italic">U kurzivu</string>
     <string name="action_note_deleted">Izbrisano %1$s</string>
     <string name="action_note_restored">Vraćeno %1$s</string>
     <string name="action_undo">Poništi</string>
-    <string name="action_drawer_open">otvori navigaciju</string>
-    <string name="action_drawer_close">zatvori navigaciju</string>
     <string name="action_uncategorized">Nekategorizirani</string>
     <string name="menu_delete">Izbriši</string>
     <string name="menu_change_category">Kategorija</string>
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Pretpregled</string>
     <string name="menu_share">Dijeli</string>
+
+    <string name="search_in_category">Traži u %1$s</string>
+    <string name="search_in_all">Pretraži sve bilješke</string>
 
     <string name="change_category_title">Odaberi kategoriju</string>
 
@@ -54,9 +55,6 @@
     <string name="error_synchronization">Sinkronizacija nije uspjela</string>
     <string name="error_json">Je li aplikacija Notes aktivirana na poslužitelju?</string>
     <string name="error_no_network">Nema veze s mrežom</string>
-    <string name="error_files_app">Je li instalirana aplikacija za upravljanje datotekama?</string>
-    <string name="error_token_mismatch">Neuspješno povezivanje s aplikacijom za upravljanje datotekama.</string>
-    <string name="error_insufficient_storage">Prostor za pohranu poslužitelja je pun.</string>
     <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
 
     <!-- About -->
@@ -120,7 +118,6 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Nije moguće učitati pretpregled. Provjerite postoji li dvoznamenkasta stavka bez sadržaja na numeriranom popisu.</string>
     <string name="simple_more">Više</string>
     <string name="simple_move">Premjesti</string>
-    <string name="error_files_app_version_too_old">Koristite li se najnovijom inačicom aplikacije za upravljanje datotekama?</string>
     <string name="checkbox_could_not_be_toggled">Nije moguće označiti potvrdni okvir.</string>
     <string name="bulk_notes_deleted">Izbrisano %1$d bilješki</string>
     <string name="bulk_notes_restored">Vraćeno %1$d bilješki</string>
@@ -146,12 +143,23 @@
     <string name="error_dialog_insufficient_storage">Nema slobodnog prostora za pohranu u vašoj instanci Nextclouda. Izbrišite dio datoteka kako biste sinkronizirali lokalne promjene u oblak.</string>
     <string name="error_dialog_contact_us">Obratite nam se bez odlaganja ako problemi i dalje postoje. Naše podatke za kontakt možete pronaći u odjeljku s informacijama na bočnoj traci.</string>
     <string name="error_dialog_we_need_info">Potrebne su nam sljedeće tehničke informacije kako bismo vam pomogli:</string>
+    <string name="error_dialog_server_app_enabled">Provjerite jeste li instalirali i omogućili aplikaciju „Notes” na svom poslužitelju.</string>
     <string name="error_dialog_redirect">Vaš je poslužitelj vratio šifru statusa HTTP 302, što znači da aplikacija Notes nije instalirana na poslužitelju ili postoji pogreška u konfiguraciji. To mogu uzrokovati prilagođena prepisivanja u datoteci .htaccess ili određene aplikacije u Nextcloudu, kao što je OID Client.</string>
+    <string name="added_content">Dodano „%1$s”</string>
+    <string name="shared_text_empty">Dijeljen tekst je prazan</string>
+    <string name="append_to_note">Dodaj bilješci</string>
+    <string name="change_note_title">Promijeni naslov bilješke</string>
+    <string name="menu_edit_title">Uredi naslov</string>
     <string name="settings_branding">Brendiranje</string>
+    <string name="settings_gridview">Prikaz rešetke 🆕</string>
     <string name="simple_security">Sigurnost</string>
     <string name="simple_appearance">Izgled</string>
     <string name="simple_synchronization">Sinkronizacija</string>
+    <string name="simple_behavior">Ponašanje</string>
+    <string name="share_multiple">Dijeli sadržaj %1$d bilješki</string>
     <string name="manage_accounts">Upravljaj računima</string>
+    <string name="action_formatting_help">Oblikovanje</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvori u načinu uređivanja</item>
@@ -187,8 +195,54 @@
         <item quantity="other">Odabrano je %d</item>
     </plurals>
 
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Oblikovanje ovisno o kontekstu</string>
+    <string name="formatting_help_cbf_body_1">Glavni cilj pri razvoju aplikacije Notes je stvoriti alat koji se može upotrebljavati bez ometanja. Svoje tekstove možete oblikovati posebnim oznakama Markdown. Za razne primjere navedene u nastavku možete se koristiti prečacima kako biste oblikovali svoje bilješke bez upisivanja šifri.</string>
+    <string name="formatting_help_cbf_body_2">Odaberite raspon teksta ili dodirnite pokazivačem bilo koji položaj i prikazat će se skočni izbornik koji sadrži unose kao što su %4$s ili %5$s pored zadanih unosa %1$s, %2$s, %3$s.</string>
+
     <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_text_body">Riječi možete vrlo jednostavno %1$spodebljati%1$s ili pisati u %2$skurzivu%2$s s pomoću oznaka Markdown. Također možete %3$sprekrižiti%3$s riječi i čak [staviti poveznicu na Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Popisi</string>
+    <string name="formatting_help_lists_body_1">Ponekad želite numerirane popise:</string>
+    <string name="formatting_help_lists_body_2">Jedan</string>
+    <string name="formatting_help_lists_body_3">Dva</string>
+    <string name="formatting_help_lists_body_4">Tri</string>
+    <string name="formatting_help_lists_body_5">Ponekad želite popise s oznakama:</string>
+    <string name="formatting_help_lists_body_6">Počni redak s crticom</string>
+    <string name="formatting_help_lists_body_7">Ako postoje podstavke, stavi dva razmaka ispred crtice ili zvjezdice:</string>
+    <string name="formatting_help_lists_body_8">Sviđa mi se</string>
+    <string name="formatting_help_lists_body_9">I ovo</string>
+
     <string name="formatting_help_checkboxes_title">Potvrdni okviri</string>
+    <string name="formatting_help_checkboxes_body_1">Za stvaranje potvrdnog okvira upotrijebite popis sa zagradama</string>
+    <string name="formatting_help_checkboxes_body_2">Stavka 1.</string>
+    <string name="formatting_help_checkboxes_body_3">Stavka 2.</string>
+
+    <string name="formatting_help_structured_documents_title">Strukturirani dokumenti</string>
+    <string name="formatting_help_structured_documents_body_1">Ponekad je korisno imati naslove različitih razina radi strukturiranja dokumenata. Započnite retke s %1$s kako biste stvorili naslove. Višestruki %2$s zaredom označavaju naslove manje veličine.</string>
+    <string name="formatting_help_structured_documents_body_2">Ovo je naslov treće razine</string>
+    <string name="formatting_help_structured_documents_body_3">Možete upotrijebiti jedan %1$s pa sve do %2$s šest za različite veličine zaglavlja.</string>
+    <string name="formatting_help_structured_documents_body_4">Ako želite nekoga citirati, prije retka stavite znak %1$s:</string>
+    <string name="formatting_help_structured_documents_body_5">Mašta je važnija od znanja. Znanje je ograničeno. Mašta okružuje svijet.</string>
+    <string name="formatting_help_structured_documents_body_6">– Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Kod</string>
+    <string name="formatting_help_code_body_1">Postoji mnogo različitih načina za stiliziranje koda s pomoću Markdowna. Ako imate ugrađene blokove koda, stavite ih između izostavnika:</string>
+    <string name="formatting_help_code_body_2">Markdown također podržava nešto što se naziva ograđivanje koda i omogućuje korištenje većeg broja redaka bez uvlačenja teksta:</string>
+    <string name="formatting_help_code_body_3">Ako želite naglasiti sintaksu, dodajte jezik:</string>
+
     <string name="formatting_help_unsupported_title">Bez podrške</string>
+    <string name="formatting_help_unsupported_body_1">Iako neprestano nadograđujemo podršku za Markdown, postoji nekoliko značajki koje još uvijek nisu podržane u aplikaciji Notes:</string>
+    <string name="formatting_help_unsupported_body_2">Tablice</string>
     <string name="formatting_help_unsupported_body_3">Slike</string>
-    </resources>
+    <string name="formatting_help_unsupported_body_4">Ako želite poboljšati neku od tih značajki, obratite nam se putem GitHuba ili e-pošte.</string>
+    <string name="simple_other">Ostalo</string>
+    <string name="sort_last_modified">Razvrstaj prema datumu izmjene</string>
+    <string name="sort_alphabetically">Razvrstaj po abecedi</string>
+    <string name="error_action_open_network">Postavke mreže</string>
+</resources>

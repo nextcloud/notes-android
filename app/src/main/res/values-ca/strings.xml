@@ -40,7 +40,7 @@
     <string name="listview_updated_last_month">El mes passat</string>
 
     <!-- Settings -->
-    <string name="settings_note_mode">Mode de visualització per les notes</string>
+    <string name="settings_note_mode">Mode de visualització per a les notes</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
