@@ -921,11 +921,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private void synchronize() {
         NoteServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
         if (syncHelper.isSyncPossible()) {
-            swipeRefreshLayout.setRefreshing(true);
+            runOnUiThread(() -> swipeRefreshLayout.setRefreshing(true));
             syncHelper.addCallbackPull(ssoAccount, syncCallBack);
             syncHelper.scheduleSync(ssoAccount, false);
         } else { // Sync is not possible
-            swipeRefreshLayout.setRefreshing(false);
+            runOnUiThread(() -> swipeRefreshLayout.setRefreshing(false));
             if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
                 Log.d(TAG, "Network is connected, but sync is not possible");
             } else {
