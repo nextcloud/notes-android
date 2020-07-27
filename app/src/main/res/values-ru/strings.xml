@@ -227,4 +227,4 @@
     <string name="error_action_open_battery_settings">Настройки баттареи</string>
     <string name="error_action_open_deck_info">Открыть информацию о приложении</string>
     <string name="error_action_open_network">Параметры сети</string>
-</resources>
+    </resources>
