@@ -28,6 +28,7 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
     private static final String TAG = NotesListViewItemTouchHelper.class.getSimpleName();
+    private static final int UNDO_DURATION = 12_000;
 
     public NotesListViewItemTouchHelper(
             @NonNull SingleSignOnAccount ssoAccount,
@@ -79,7 +80,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         if (viewProvider == null) {
                             Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
                         } else {
-                            BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), Snackbar.LENGTH_LONG)
+                            BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
                                         db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
                                         db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
