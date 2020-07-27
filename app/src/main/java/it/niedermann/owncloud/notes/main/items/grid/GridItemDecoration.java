@@ -29,14 +29,14 @@ public class GridItemDecoration extends SectionItemDecoration {
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
         final int position = parent.getChildAdapterPosition(view);
-        final StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
+        if (position >= 0) {
+            final StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
 
-        if (adapter.getItemViewType(position) == ItemAdapter.TYPE_SECTION) {
-            lp.setFullSpan(true);
-        } else {
-            final int spanIndex = lp.getSpanIndex();
+            if (adapter.getItemViewType(position) == ItemAdapter.TYPE_SECTION) {
+                lp.setFullSpan(true);
+            } else {
+                final int spanIndex = lp.getSpanIndex();
 
-            if (position >= 0) {
                 // First row gets some spacing at the top
                 if (position < spanCount && position < adapter.getFirstPositionOfViewType(ItemAdapter.TYPE_SECTION)) {
                     outRect.top = gutter;

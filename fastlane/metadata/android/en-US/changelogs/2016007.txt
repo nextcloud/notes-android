@@ -1,0 +1,3 @@
+- 🌎 Language updates
+- 🐞 Prevent CalledFromWrongThreadException
+- 🐞 Prevent ArrayIndexOutOfBoundsException (#912)

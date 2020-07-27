@@ -30,7 +30,7 @@ public class SectionItemDecoration extends RecyclerView.ItemDecoration {
     @CallSuper
     public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         final int position = parent.getChildAdapterPosition(view);
-        if (adapter.getItemViewType(position) == ItemAdapter.TYPE_SECTION) {
+        if (position >= 0 && adapter.getItemViewType(position) == ItemAdapter.TYPE_SECTION) {
             outRect.left = sectionLeft;
             outRect.top = sectionTop;
             outRect.right = sectionRight;
