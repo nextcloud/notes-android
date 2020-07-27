@@ -247,4 +247,5 @@
     <string name="error_action_open_battery_settings">Paràmetres de la bateria</string>
     <string name="error_action_open_deck_info">Obre la informació de l\'aplicació</string>
     <string name="error_action_open_network">Paràmetres de la xarxa</string>
+    <string name="no_other_accounts">Encara no heu configurat cap altre compte.</string>
 </resources>

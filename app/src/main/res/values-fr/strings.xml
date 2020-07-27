@@ -247,4 +247,4 @@
     <string name="error_action_open_battery_settings">Paramètres de batterie</string>
     <string name="error_action_open_deck_info">Ouvrir les informations de l\'application</string>
     <string name="error_action_open_network">Paramètres réseau</string>
-</resources>
+    </resources>
