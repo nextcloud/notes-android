@@ -156,7 +156,6 @@
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
     <string name="checkbox_could_not_be_toggled">Checkbox could not be toggled.</string>
-    <string name="bulk_notes_deleted">Deleted %1$d notes</string>
     <string name="bulk_notes_restored">Restored %1$d notes</string>
     <string name="category_readonly">Read only</string>
     <string name="no_category">No category</string>
@@ -230,6 +229,10 @@
     <plurals name="ab_selected">
         <item quantity="one">%d selected</item>
         <item quantity="other">%d selected</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Deleted %1$d note</item>
+        <item quantity="other">Deleted %1$d notes</item>
     </plurals>
 
     <!-- Formatting help -->

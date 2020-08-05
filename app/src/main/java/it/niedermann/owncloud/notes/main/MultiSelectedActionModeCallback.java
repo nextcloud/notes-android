@@ -113,7 +113,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                     refreshLists.run();
                     String deletedSnackbarTitle = deletedNotes.size() == 1
                             ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
-                            : context.getString(R.string.bulk_notes_deleted, deletedNotes.size());
+                            : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, deletedNotes.size(), deletedNotes.size());
                     BrandedSnackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                             .setAction(R.string.action_undo, (View v) -> {
                                 db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
