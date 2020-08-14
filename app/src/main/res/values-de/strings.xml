@@ -119,7 +119,6 @@
     <string name="simple_more">mehr</string>
     <string name="simple_move">Verschieben</string>
     <string name="checkbox_could_not_be_toggled">Kontrollkästchen konnte nicht umgeschaltet werden.</string>
-    <string name="bulk_notes_deleted">%1$d Notizen gelöscht</string>
     <string name="bulk_notes_restored">%1$dNotizen wiederhergestellt</string>
     <string name="category_readonly">Schreibgeschützt</string>
     <string name="no_category">Keine Kategorie</string>
@@ -193,6 +192,10 @@
     <plurals name="ab_selected">
         <item quantity="one">%d ausgewählt</item>
         <item quantity="other">%d ausgewählt</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$d Notiz gelöscht</item>
+        <item quantity="other">%1$d Notizen gelöscht</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>

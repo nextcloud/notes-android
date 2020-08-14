@@ -119,7 +119,6 @@
     <string name="simple_more">Daha Fazla</string>
     <string name="simple_move">Taşı</string>
     <string name="checkbox_could_not_be_toggled">İşaret kutusunun işareti değiştirilemedi.</string>
-    <string name="bulk_notes_deleted">%1$d not silindi</string>
     <string name="bulk_notes_restored">%1$dnot geri yüklendi</string>
     <string name="category_readonly">Salt okunur</string>
     <string name="no_category">Kategori yok</string>
@@ -193,6 +192,10 @@
     <plurals name="ab_selected">
         <item quantity="one">%d seçilmiş</item>
         <item quantity="other">%d seçilmiş</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$d not silindi</item>
+        <item quantity="other">%1$d not silindi</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>

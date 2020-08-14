@@ -119,7 +119,6 @@
     <string name="simple_more">Več</string>
     <string name="simple_move">Premakni</string>
     <string name="checkbox_could_not_be_toggled">Izbirnega polja ni mogoče preklopiti.</string>
-    <string name="bulk_notes_deleted">Izbrisane zabeležke: %1$d</string>
     <string name="bulk_notes_restored">Obnovljene zabeležke: %1$d</string>
     <string name="category_readonly">Le za branje</string>
     <string name="no_category">Brez kategorije</string>
@@ -196,6 +195,12 @@
         <item quantity="few">%d izbrane</item>
         <item quantity="other">%d izbranih</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Izbrisana je %1$d zabeležka</item>
+        <item quantity="two">Izbrisani sta %1$d zabeležki</item>
+        <item quantity="few">Izbrisane so %1$d zabeležke</item>
+        <item quantity="other">Izbrisanih je %1$d zabeležk</item>
+    </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">» %1$s «</string>
@@ -249,4 +254,5 @@
     <string name="error_action_open_battery_settings">Nastavitve baterije</string>
     <string name="error_action_open_deck_info">Odpri podrobnosti programa</string>
     <string name="error_action_open_network">Nastavitve omrežja</string>
-    </resources>
+    <string name="no_other_accounts">Ni nastavljenega nobenega drugega računa</string>
+</resources>

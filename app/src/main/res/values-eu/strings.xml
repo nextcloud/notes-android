@@ -119,7 +119,6 @@
     <string name="simple_more">Gehiago</string>
     <string name="simple_move">Mugitu</string>
     <string name="checkbox_could_not_be_toggled">Egiaztapen-laukiaren egoera ezin izan da aldatu.</string>
-    <string name="bulk_notes_deleted"> %1$d ohar ezabatu dira</string>
     <string name="bulk_notes_restored">%1$d ohar leheneratu dira</string>
     <string name="category_readonly">Irakurtzeko soilik</string>
     <string name="no_category">Kategoria gabe</string>
@@ -194,7 +193,6 @@
         <item quantity="one">%d hautatuta</item>
         <item quantity="other">%d hautatuta</item>
     </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
@@ -219,6 +217,7 @@
     <string name="formatting_help_lists_body_9">eta horrela</string>
 
     <string name="formatting_help_checkboxes_title">Kontrol-laukiak</string>
+    <string name="formatting_help_checkboxes_body_1">Egiaztapen-laukitxo bat sortzeko, erabili zerrenda bat eta paréntesis.</string>
     <string name="formatting_help_checkboxes_body_2">1 elementua</string>
     <string name="formatting_help_checkboxes_body_3">2 elementua</string>
 
@@ -244,4 +243,5 @@
     <string name="error_action_open_battery_settings">Bateria ezarpenak</string>
     <string name="error_action_open_deck_info">Ireki aplikazioaren informazioa</string>
     <string name="error_action_open_network">Sareko ezarpenak</string>
-    </resources>
+    <string name="no_other_accounts">Oraindik ez duzu konturik konfiguratu.</string>
+</resources>

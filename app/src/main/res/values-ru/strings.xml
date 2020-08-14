@@ -119,7 +119,6 @@
     <string name="simple_more">Больше</string>
     <string name="simple_move">Переместить</string>
     <string name="checkbox_could_not_be_toggled">Не удалось снять или установить отметку.</string>
-    <string name="bulk_notes_deleted">Удалены %1$d заметки</string>
     <string name="bulk_notes_restored">Восстановлены %1$d заметки</string>
     <string name="category_readonly">Только для чтения</string>
     <string name="no_category">Без категории</string>
@@ -196,7 +195,6 @@
         <item quantity="many">%d выбрано</item>
         <item quantity="other">%d выбрано</item>
     </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
@@ -206,25 +204,32 @@
     <string name="formatting_help_cbf_body_1">Главная цель дизайна приложения Notes  это обеспечить не отвлекающий инструмент. Вы сможете форматировать текст с Markdown.  Для различных из приведенных ниже примеров вы можете использовать ярлыки, чтобы вы могли форматировать свои заметки, не вводя приведенные ниже коды.</string>
     <string name="formatting_help_text_title">Текст</string>
     <string name="formatting_help_lists_title">Списки</string>
+    <string name="formatting_help_lists_body_1">Иногда вам требуются нумерованные списки:</string>
     <string name="formatting_help_lists_body_2">Один</string>
     <string name="formatting_help_lists_body_3">Два</string>
     <string name="formatting_help_lists_body_4">Три</string>
+    <string name="formatting_help_lists_body_5">Иногда вам требуются ненумерованные списки:</string>
     <string name="formatting_help_lists_body_6">Начать строку с тире</string>
     <string name="formatting_help_lists_body_8">Нравится это</string>
     <string name="formatting_help_lists_body_9">И это</string>
 
     <string name="formatting_help_checkboxes_title">Несколько из списка</string>
+    <string name="formatting_help_checkboxes_body_1">Чтобы создать чекбокс, используйте список, заключенный в скобки</string>
     <string name="formatting_help_checkboxes_body_2">Пункт 1</string>
     <string name="formatting_help_checkboxes_body_3">Пункт 2</string>
 
     <string name="formatting_help_structured_documents_title">Структурированные документы </string>
+    <string name="formatting_help_structured_documents_body_2">Это заголовок третьего уровня</string>
     <string name="formatting_help_structured_documents_body_6">- Альберт Эйнштейн</string>
 
     <string name="formatting_help_code_title">Код</string>
     <string name="formatting_help_unsupported_title">Не поддерживается</string>
     <string name="formatting_help_unsupported_body_3">Изображения</string>
     <string name="simple_other">Другой</string>
+    <string name="sort_last_modified">Сортировать по дате изменения</string>
+    <string name="sort_alphabetically">Сортировать по алфавиту</string>
     <string name="error_action_open_battery_settings">Настройки баттареи</string>
     <string name="error_action_open_deck_info">Открыть информацию о приложении</string>
     <string name="error_action_open_network">Параметры сети</string>
-    </resources>
+    <string name="no_other_accounts">Вы еще не настроили ни одного аккаунта</string>
+</resources>

@@ -70,7 +70,7 @@
     <string name="about_issues_title">Problemas</string>
     <string name="about_issues">Vostede pode informar de fallos, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de erros do GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traducir</string>
-    <string name="about_translate">Únase ao equipo Nextcloud en Transifex e axúdenos a traducir esta apli: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
+    <string name="about_translate">Únase ao equipo Nextcloud en Transifex e colabore connosco para traducir esta apli: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Licenza da apli</string>
     <string name="about_app_license">Esta apli está licenciada baixo a LICENZA XERAL PUBLICA GNU v3+.</string>
     <string name="about_app_license_button">Ver a licenza</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">Máis</string>
     <string name="simple_move">Mover</string>
     <string name="checkbox_could_not_be_toggled">Non foi posíbel cambiar a caixa de selección.</string>
-    <string name="bulk_notes_deleted">Foron eliminadas %1$d notas</string>
     <string name="bulk_notes_restored">Foron restauradas %1$d notas</string>
     <string name="category_readonly">Só lectura</string>
     <string name="no_category">Sen categoría</string>
@@ -158,7 +157,7 @@
     <string name="simple_synchronization">Sincronización</string>
     <string name="simple_behavior">Comportamento</string>
     <string name="share_multiple">Compartir o contido de  %1$dnotas</string>
-    <string name="manage_accounts">Administrar contas</string>
+    <string name="manage_accounts">Xestionar contas</string>
     <string name="action_formatting_help">Formatado</string>
 
     <!-- Array: note modes -->
@@ -193,6 +192,10 @@
     <plurals name="ab_selected">
         <item quantity="one">%d seleccionado</item>
         <item quantity="other">%d seleccionados</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Eliminouse %1$d nota</item>
+        <item quantity="other">Foron eliminadas %1$d notas</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>

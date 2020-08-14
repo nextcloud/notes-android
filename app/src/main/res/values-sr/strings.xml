@@ -119,7 +119,6 @@
     <string name="simple_more">Још</string>
     <string name="simple_move">Помери</string>
     <string name="checkbox_could_not_be_toggled">Поље за потврду не може да се укључи/искључи.</string>
-    <string name="bulk_notes_deleted">Обрисано %1$d белешки</string>
     <string name="bulk_notes_restored">Повраћено %1$d белешки</string>
     <string name="category_readonly">Само за читање</string>
     <string name="no_category">Нема категорије</string>
@@ -195,6 +194,11 @@
         <item quantity="few">%d означене</item>
         <item quantity="other">%d означених</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Обрисано %1$d белешка</item>
+        <item quantity="few">Обрисано %1$d белешке</item>
+        <item quantity="other">Обрисано %1$d белешки</item>
+    </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
@@ -248,4 +252,5 @@
     <string name="error_action_open_battery_settings">Подешавања батерије</string>
     <string name="error_action_open_deck_info">Отвори инфо о апликацији</string>
     <string name="error_action_open_network">Поставке мреже</string>
-    </resources>
+    <string name="no_other_accounts">Нисте подесили ниједан други налог.</string>
+</resources>

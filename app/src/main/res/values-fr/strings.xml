@@ -119,7 +119,6 @@
     <string name="simple_more">Plus</string>
     <string name="simple_move">Déplacer</string>
     <string name="checkbox_could_not_be_toggled">Impossible de modifier l\'état de la case à cocher.</string>
-    <string name="bulk_notes_deleted">%1$d notes supprimées</string>
     <string name="bulk_notes_restored">%1$d notes restaurées</string>
     <string name="category_readonly">Lecture seule</string>
     <string name="no_category">Sans catégorie</string>
@@ -194,6 +193,10 @@
         <item quantity="one">%d sélectionné</item>
         <item quantity="other">%d sélectionné(s)</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$d note supprimée</item>
+        <item quantity="other">%1$d notes supprimées</item>
+    </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
@@ -247,4 +250,5 @@
     <string name="error_action_open_battery_settings">Paramètres de batterie</string>
     <string name="error_action_open_deck_info">Ouvrir les informations de l\'application</string>
     <string name="error_action_open_network">Paramètres réseau</string>
-    </resources>
+    <string name="no_other_accounts">Vous n\'avez pas encore configuré d\'autres comptes.</string>
+</resources>
