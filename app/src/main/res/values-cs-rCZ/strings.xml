@@ -119,7 +119,6 @@
     <string name="simple_more">Další</string>
     <string name="simple_move">Přesunout</string>
     <string name="checkbox_could_not_be_toggled">Stav zaškrtávací kolonky se nepodařilo přepnout.</string>
-    <string name="bulk_notes_deleted">Smazáno %1$d poznámek</string>
     <string name="bulk_notes_restored">Obnoveno %1$d poznámek</string>
     <string name="category_readonly">Pouze pro čtení</string>
     <string name="no_category">Žádná kategorie</string>
@@ -195,6 +194,12 @@
         <item quantity="few">vybrány %d</item>
         <item quantity="many">vybráno %d</item>
         <item quantity="other">vybrány %d</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Smazána %1$d poznámka</item>
+        <item quantity="few">Smazány %1$d poznámky</item>
+        <item quantity="many">Smazáno %1$d poznámek</item>
+        <item quantity="other">Smazány %1$d poznámky</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>

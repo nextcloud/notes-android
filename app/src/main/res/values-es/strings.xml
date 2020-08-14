@@ -119,7 +119,6 @@
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
     <string name="checkbox_could_not_be_toggled">No se ha podido cambiar el estado del checkbox</string>
-    <string name="bulk_notes_deleted">Borradas %1$d notas</string>
     <string name="bulk_notes_restored">Restauradas %1$d notas</string>
     <string name="category_readonly">Solo lectura</string>
     <string name="no_category">Sin categoría</string>
@@ -194,6 +193,10 @@
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d seleccionados</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Eliminada %1$d nota</item>
+        <item quantity="other">Eliminadas %1$d notas</item>
+    </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
@@ -247,4 +250,5 @@
     <string name="error_action_open_battery_settings">Ajustes de batería</string>
     <string name="error_action_open_deck_info">Abrir info de la app</string>
     <string name="error_action_open_network">Configuración de red</string>
-    </resources>
+    <string name="no_other_accounts">Aún no ha configurado ninguna otra cuenta.</string>
+</resources>

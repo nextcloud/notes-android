@@ -119,7 +119,6 @@
     <string name="simple_more">עוד</string>
     <string name="simple_move">העברה</string>
     <string name="checkbox_could_not_be_toggled">לא ניתן להחליף את מצב תיבת הבחירה.</string>
-    <string name="bulk_notes_deleted">נמחקו %1$d פתקים</string>
     <string name="bulk_notes_restored">שוחזרו %1$d פתקים</string>
     <string name="category_readonly">קריאה בלבד</string>
     <string name="no_category">אין קטגוריה</string>
@@ -179,7 +178,6 @@
         <item quantity="many">נבחרו %d</item>
         <item quantity="other">נבחרו %d</item>
     </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

@@ -9,25 +9,26 @@
     <string name="action_settings">Beállítások</string>
     <string name="action_trashbin">Törölt jegyzetek</string>
     <string name="action_search">Keresés</string>
+    <string name="action_sorting_method">Rendezési mód</string>
     <string name="simple_cancel">Mégsem</string>
     <string name="simple_edit">Szerkesztés</string>
     <string name="action_edit_save">Mentés</string>
     <string name="simple_about">Névjegy</string>
-    <string name="simple_accounts">Fiókok</string>
     <string name="simple_bold">Vastag</string>
     <string name="simple_link">Hivatkozás</string>
     <string name="simple_italic">Dőlt</string>
     <string name="action_note_deleted">%1$s törölve</string>
     <string name="action_note_restored">%1$s visszaállítva</string>
     <string name="action_undo">Visszavonás</string>
-    <string name="action_drawer_open">navigáció megnyitása</string>
-    <string name="action_drawer_close">navigáció bezárása</string>
     <string name="action_uncategorized">Kategorizálatlan</string>
     <string name="menu_delete">Törlés</string>
     <string name="menu_change_category">Kategória</string>
     <string name="menu_favorite">Kedvenc</string>
     <string name="menu_preview">Előnézet</string>
     <string name="menu_share">Megosztás</string>
+
+    <string name="search_in_category">Keresés itt: %1$s</string>
+    <string name="search_in_all">Keresés minden jegyzetben</string>
 
     <string name="change_category_title">Válasszon kategóriát</string>
 
@@ -40,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Jegyzet módok megjelenítés</string>
-    <string name="settings_theme_title">Sötét téma</string>
+    <string name="settings_theme_title">Téma</string>
     <string name="settings_font_title">Fix szélességű betűkészlet</string>
     <string name="settings_font_size">Betű méret</string>
     <string name="settings_wifi_only">Szinkronizáció csak Wifin keresztül</string>
@@ -54,8 +55,6 @@
     <string name="error_synchronization">Szinkronizálás sikertelen</string>
     <string name="error_json">Be van kapcsolva a Jegyzetek alkalmazás a kiszolgálón?</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
-    <string name="error_files_app">Telepítette a Fájlok alkalmazást?</string>
-    <string name="error_insufficient_storage">A kiszolgáló-tárhelye megtelt.</string>
     <string name="error_unknown">Ismeretlen hiba történt.</string>
 
     <!-- About -->
@@ -119,32 +118,46 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Az előnézet nem tölthető be. Ellenőrizze, hogy nincs-e üres két számjegyű számozott listaelem.</string>
     <string name="simple_more">Több</string>
     <string name="simple_move">Áthelyezés</string>
-    <string name="error_files_app_version_too_old">A Fájlok alkalmazása verziója naprakész?</string>
     <string name="checkbox_could_not_be_toggled">A jelölőmező nem állítható át.</string>
-    <string name="bulk_notes_deleted">%1$d jegyzet törölve</string>
     <string name="bulk_notes_restored">%1$d jegyzet visszaállítva</string>
     <string name="category_readonly">Csak olvasható</string>
     <string name="no_category">Nincs kategória</string>
     <string name="add_category">%1$s hozzáadása</string>
     <string name="simple_checkbox">Jelölőmező</string>
+    <string name="unlock_notes">Jegyzetek feloldása</string>
     <string name="simple_beta">Béta</string>
     <string name="could_not_copy_to_clipboard">Nem sikerült a vágólapra másolni</string>
     <string name="error_dialog_title">Jaj ne – Most mi legyen? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Próbálja kényszeríteni az alkalmazás bezárását, és indítsa újra. Lehet, hogy hibás volt a kapcsolat a többi Nextcloud alkalmazással.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Ha a probléma továbbra is fennáll, próbálja kiüríteni mindkét alkalmazás tárolóját: a Nextcloudét és a Nextcloud Jegyzetekét.</string>
+    <string name="error_dialog_tip_clear_storage">A tárolót az alkalmazásinformáció megnyitásával, és a Tárhely → Tárhely ürítése választásával törölheti.</string>
     <string name="error_dialog_tip_files_outdated">A Nextcloud alkalmazása elavultnak tűnik. Keresse fel a Play Áruházat vagy az F-Droidot, hogy beszerezze a legfrissebb verziót.</string>
+    <string name="error_dialog_tip_files_force_stop">Valami hibásnak tűnik a Nextcloud alkalmazásában. Próbálja mindkettőt leállítani, a Nextcloud és a Nextcloud Jegyzetek alkalmazást is.</string>
     <string name="error_dialog_tip_files_delete_storage">Ha a kényszerített leállítás nem segít, akkor megpróbálhatja mindkét alkalmazás tárolóját kiüríteni.</string>
     <string name="error_dialog_timeout_instance">A megadott időn belül nem érkezett válasz a kiszolgálótól. Győződjön meg róla, hogy a példánya helyesen fut.</string>
     <string name="error_dialog_timeout_toggle">Ellenőrizze a hálózati kapcsolatát. Néha a mobil adathasználat vagy a Wi-Fi ki- és bekapcsolása is segíthet.</string>
+    <string name="error_dialog_check_server">A kiszolgáló válasza helytelen volt. Ellenőrizze, hogy eléri-e a Jegyzetek alkalmazást a webes felületen keresztül.</string>
     <string name="error_dialog_check_server_logs">Hiba van a Nextcloudja beállításaiban. Nézzen bele a kiszolgáló naplófájljaiba.</string>
     <string name="error_dialog_check_maintenance">Ellenőrizze, hogy a Nextcloud példánya nincs-e karbantartási módban.</string>
     <string name="error_dialog_insufficient_storage">A Nextcloud példányán elfogyott a szabad hely. Töröljön pár fájlt, hogy szinkronizálhassa a helyi változtatásait a felhővel.</string>
     <string name="error_dialog_contact_us">Nyugodtan lépjen velünk kapcsolatba, ha a probléma továbbra is fennáll. A kapcsolati információkat az oldalsáv névjegy részében találja.</string>
     <string name="error_dialog_we_need_info">A következő műszaki információkra van szükségünk, hogy segíthessünk:</string>
+    <string name="error_dialog_server_app_enabled">Bizonyosodjon meg róla, hogy telepítette és bekapcsolta a „Jegyzetek” alkalmazást a szerverén.</string>
+    <string name="error_dialog_redirect">A kiszolgálója 302-es HTTP állapotkóddal válaszolt, amely arra utal, hogy nincs telepítve a Jegyzetek alkalmazás a kiszolgálón, vagy valami hibásan van beállítva. Ezt egyéni felülírások is okozhatják, mint egy .htaccess-fájl vagy az OID klienshez hasonló Nextcloud alkalmazások.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Kapcsoljon ki minden energiatakarékossági beállítást a Nextcloud valamint a Jegyzetek alkalmazáshoz. </string>
+    <string name="added_content">\"%1$s\" hozzáadva</string>
+    <string name="shared_text_empty">A megosztott szöveg üres volt</string>
+    <string name="append_to_note">Jegyzethez hozzáfűz</string>
+    <string name="menu_edit_title">Cím szerkesztése</string>
     <string name="settings_branding">Márkázas</string>
+    <string name="settings_gridview">Rács nézet</string>
     <string name="simple_security">Biztonság</string>
     <string name="simple_appearance">Megjelenés</string>
     <string name="simple_synchronization">Szinkronizálás</string>
+    <string name="share_multiple">%1$d tartalmának megosztása</string>
     <string name="manage_accounts">Fiókok kezelése</string>
+    <string name="action_formatting_help">Formázás</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>
@@ -178,4 +191,29 @@
         <item quantity="one">%d kiválasztva</item>
         <item quantity="other">%d kiválasztva</item>
     </plurals>
-</resources>
+    <string name="formatting_help_cbf_title">Kontextusalapú formázás</string>
+    <string name="formatting_help_cbf_body_1">A Jegyzetek alkalmazás egyik célkitűzése, egyszerű legyen, és ne vonja el a figyelmet. Ennek ellenére Markdownnal formázhatja a szövegeket. Némely alábbi példánál parancsokat is használhat, anélkül, hogy beírná a kódokat.</string>
+    <string name="formatting_help_text_title">Szöveg</string>
+    <string name="formatting_help_text_body">Nagyon egyszerűen írhat Markdownnal %1$sfélkövéren,%1$s valamint %2$sdőlten.%2$s Át is %3$shúzhat%3$s szavakat, valamint [linkelhet a Nextcloudra](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Listák</string>
+    <string name="formatting_help_lists_body_1">Néha számozott listákat szeretne:</string>
+    <string name="formatting_help_lists_body_2">Egy</string>
+    <string name="formatting_help_lists_body_3">Két</string>
+    <string name="formatting_help_lists_body_4">Három</string>
+    <string name="formatting_help_lists_body_6">Kezdjen egy sort kötőjellel</string>
+    <string name="formatting_help_lists_body_7">És ha alpontokat szeretne, rakjon két szóközt a kötőjel vagy csillag elé:</string>
+    <string name="formatting_help_lists_body_8">Így</string>
+    <string name="formatting_help_lists_body_9">És így</string>
+
+    <string name="formatting_help_code_title">Kód</string>
+    <string name="formatting_help_unsupported_title">Nem támogatott</string>
+    <string name="formatting_help_unsupported_body_1">Bár folyamatosan próbáljuk fejleszteni a Markdown-támogatást, néhány funkciót még nem tartalmaz a Jegyzetek:</string>
+    <string name="formatting_help_unsupported_body_2">Táblázatok</string>
+    <string name="formatting_help_unsupported_body_3">Képek</string>
+    <string name="simple_other">Egyéb</string>
+    <string name="sort_last_modified">Rendezés módosítás dátuma szerint</string>
+    <string name="sort_alphabetically">Rendezés név szerint</string>
+    <string name="error_action_open_deck_info">Alkalmazásinformációk megnyitása</string>
+    <string name="error_action_open_network">Hálózati beállítások</string>
+    </resources>

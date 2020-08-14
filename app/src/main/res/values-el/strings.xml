@@ -119,7 +119,6 @@
     <string name="simple_more">Περισσότερα</string>
     <string name="simple_move">Μετακίνηση</string>
     <string name="checkbox_could_not_be_toggled">Δεν ήταν δυνατή η εναλλαγή του πλαισίου ελέγχου.</string>
-    <string name="bulk_notes_deleted">Διεγραμμένες %1$d σημειώσεις</string>
     <string name="bulk_notes_restored">Επαναφέρθηκαν %1$dσημειώσεις</string>
     <string name="category_readonly">Μόνο για ανάγνωση</string>
     <string name="no_category">Χωρίς κατηγορία</string>
@@ -194,6 +193,10 @@
         <item quantity="one">%d επιλέχτηκε</item>
         <item quantity="other">%d επιλέχτηκαν</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Διεγράφη %1$d σημείωση</item>
+        <item quantity="other">Διεγράφησαν %1$d σημειώσεις</item>
+    </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
@@ -247,4 +250,5 @@
     <string name="error_action_open_battery_settings">Ρυθμίσεις μπαταρίας</string>
     <string name="error_action_open_deck_info">Πληροφορίες εφαρμογής</string>
     <string name="error_action_open_network">Ρυθμίσεις δικτύου</string>
-    </resources>
+    <string name="no_other_accounts">Δεν έχετε ρυθμίσει ακόμη άλλους λογαριασμούς.</string>
+</resources>
