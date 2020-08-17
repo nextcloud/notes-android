@@ -258,7 +258,7 @@ public class NoteServerSyncHelper {
         }
     }
 
-    private void updateNetworkStatus() {
+    public void updateNetworkStatus() {
         try {
             final ConnectivityManager connMgr = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 

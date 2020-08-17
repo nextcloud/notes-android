@@ -920,6 +920,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     private void synchronize() {
         NoteServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
+        if (!syncHelper.isSyncPossible()) {
+            syncHelper.updateNetworkStatus();
+        }
         if (syncHelper.isSyncPossible()) {
             runOnUiThread(() -> swipeRefreshLayout.setRefreshing(true));
             syncHelper.addCallbackPull(ssoAccount, syncCallBack);
