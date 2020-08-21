@@ -66,7 +66,7 @@
     <string name="about_translators_transifex">A comunidade de Nextcloud en &lt;a href=\\"%1$s\\">Transifex&lt;/a></string>
     <string name="about_testers_title">Probadores</string>
     <string name="about_source_title">Código fonte</string>
-    <string name="about_source">Este proxecto está hospedado en GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
+    <string name="about_source">Este proxecto está aloxado en GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemas</string>
     <string name="about_issues">Vostede pode informar de fallos, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de erros do GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traducir</string>

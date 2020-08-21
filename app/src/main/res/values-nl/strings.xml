@@ -193,6 +193,11 @@
         <item quantity="one">%d geselecteerd</item>
         <item quantity="other">%d geselecteerd</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$d notitie verwijderd</item>
+        <item quantity="other">%1$d notities verwijderd</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
@@ -245,4 +250,5 @@
     <string name="error_action_open_battery_settings">Batterij instellingen</string>
     <string name="error_action_open_deck_info">Open App informatie</string>
     <string name="error_action_open_network">Netwerk instellingen</string>
-    </resources>
+    <string name="no_other_accounts">U heeft nog geen andere accounts geconfigureerd.</string>
+</resources>
