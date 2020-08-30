@@ -193,6 +193,11 @@
         <item quantity="one">%d hautatuta</item>
         <item quantity="other">%d hautatuta</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$dohar ezabatu dira</item>
+        <item quantity="other">%1$dohar ezabatu dira</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
