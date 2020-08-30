@@ -123,7 +123,7 @@
     <string name="category_readonly">Só lectura</string>
     <string name="no_category">Sen categoría</string>
     <string name="add_category">Engadir %1$s</string>
-    <string name="simple_checkbox">Caixa de verificación</string>
+    <string name="simple_checkbox">Caixa de selección</string>
     <string name="unlock_notes">Desbloquear notas</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Non foi posíbel copiar ao portapapeis</string>
@@ -221,8 +221,8 @@
     <string name="formatting_help_lists_body_8">Como isto</string>
     <string name="formatting_help_lists_body_9">E isto</string>
 
-    <string name="formatting_help_checkboxes_title">Caixas de verificación</string>
-    <string name="formatting_help_checkboxes_body_1">Para crear unha caixa de verificación, use unha lista seguida de parénteses</string>
+    <string name="formatting_help_checkboxes_title">Caixas de selección</string>
+    <string name="formatting_help_checkboxes_body_1">Para crear unha caixa de slección, use unha lista seguida de parénteses</string>
     <string name="formatting_help_checkboxes_body_2">Elemento 1</string>
     <string name="formatting_help_checkboxes_body_3">Elemento 2</string>
 

@@ -28,7 +28,7 @@
     <string name="menu_share">Comparteix</string>
 
     <string name="search_in_category">Cerca a %1$s</string>
-    <string name="search_in_all">Cerca a totes les notes</string>
+    <string name="search_in_all">Cerca en totes les notes</string>
 
     <string name="change_category_title">Trieu una categoria</string>
 
@@ -44,7 +44,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
-    <string name="settings_wifi_only">Sincronitza només per Wi-Fi</string>
+    <string name="settings_wifi_only">Sincronitza només per la connexió sense fil</string>
     <string name="settings_lock">Protecció amb contrasenya</string>
     <string name="settings_background_sync">Sincronització en segon pla</string>
 
@@ -54,7 +54,7 @@
     <string name="error_sync">S\'ha produït un error en la sincronització: %1$s</string>
     <string name="error_synchronization">S\'ha produït un error en la sincronització</string>
     <string name="error_json">Està activada l\'aplicació Notes al servidor?</string>
-    <string name="error_no_network">no hi ha connexió a la xarxa</string>
+    <string name="error_no_network">No hi ha connexió a la xarxa</string>
     <string name="error_unknown">S\'ha produït un error desconegut</string>
 
     <!-- About -->
@@ -87,7 +87,7 @@
     <string name="widget_single_note_placeholder_tv">No s\'ha trobat la nota</string>
     <string name="widget_create_note">Crea una nota</string>
     <string name="widget_not_logged_in">Inicieu la sessió a l\'aplicació Notes abans d\'utilitzar aquest giny</string>
-    <string name="widget_entry_fav_contentDescription">La icona de l\'estrella serveix per marcar un element com a preferit</string>
+    <string name="widget_entry_fav_contentDescription">La icona de l\'estrella serveix per a marcar un element com a preferit</string>
     <string name="widget_app_launcher_contentDescription">Inicia l\'aplicació</string>
 
     <string name="activity_select_single_note">Seleccioneu una nota</string>
@@ -97,7 +97,7 @@
 
     <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
-    <string name="pref_value_wifi_and_mobile">Sincronitza per Wi-Fi i dades mòbils</string>
+    <string name="pref_value_wifi_and_mobile">Sincronitza per la connexió sense fil i dades mòbils</string>
     <string name="pref_value_lock">Protecció amb contrasenya</string>
 
     <string name="simple_error">Error</string>
@@ -109,16 +109,16 @@
     <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
     <string name="add_account">Afegeix un compte</string>
     <string name="category_music">Música</string>
-    <string name="category_movies">Peŀlícules</string>
+    <string name="category_movies">Pel·lícules</string>
     <string name="category_movie">Pel·lícula</string>
     <string name="category_work">Feina</string>
     <string name="account_already_imported">Ja s\'ha importat el compte</string>
     <string name="no_notes_yet">Encara no hi ha notes</string>
-    <string name="no_notes_yet_description">Premeu el botó + per crear una nota nova</string>
+    <string name="no_notes_yet_description">Premeu el botó + per a crear una nota nova</string>
     <string name="could_not_load_preview_two_digit_numbered_list">No s\'ha pogut carregar la previsualització. Comproveu si hi ha un element de la llista numerada amb dos dígits sense contingut.</string>
     <string name="simple_more">Més</string>
     <string name="simple_move">Mou</string>
-    <string name="checkbox_could_not_be_toggled">No s\'ha pogut commutar la casella de selecció.</string>
+    <string name="checkbox_could_not_be_toggled">No s\'ha pogut canviar la casella de selecció.</string>
     <string name="bulk_notes_restored">S\'han restaurat %1$d notes</string>
     <string name="category_readonly">Només de lectura</string>
     <string name="no_category">Sense categoria</string>
@@ -127,31 +127,31 @@
     <string name="unlock_notes">Desbloqueja les notes</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">No s\'ha pogut copiar al porta-retalls</string>
-    <string name="error_dialog_title">Oh, no! I ara què? 🙁</string>
+    <string name="error_dialog_title">Oh, no! I ara què? </string>
     <string name="error_dialog_tip_token_mismatch_retry">Proveu de forçar el tancament de l\'aplicació i reinicieu-la. Pot ser que hi hagi hagut una connexió incorrecta a l\'aplicació Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persisteix, proveu d\'esborrar l\'emmagatzematge de totes dues aplicacions: Nextcloud i Notes del Nextcloud per tal de resoldre el problema.</string>
-    <string name="error_dialog_tip_clear_storage">Per esborrar l\'emmagatzematge, obriu la informació de l\'aplicació i seleccioneu Emmagatzematge → Esborra l\'emmagatzematge.</string>
+    <string name="error_dialog_tip_clear_storage">Per a esborrar l\'emmagatzematge, obriu la informació de l\'aplicació i seleccioneu Emmagatzematge → Esborra l\'emmagatzematge.</string>
     <string name="error_dialog_tip_files_outdated">Sembla que la vostra aplicació Nextcloud està obsoleta. Visiteu la Play Store o l\'F-Droid per obtenir la darrera versió.</string>
     <string name="error_dialog_tip_files_force_stop">Sembla que hi ha algun problema amb la vostra aplicació Nextcloud. Intenteu forçar l\'aturada tant de l\'aplicació Nextcloud com de l\'aplicació Notes del Nextcloud.</string>
     <string name="error_dialog_tip_files_delete_storage">Si forçar-ne l\'aturada no ajuda, podeu provar d\'esborrar l\'emmagatzematge de totes dues aplicacions.</string>
     <string name="error_dialog_timeout_instance">No hi ha hagut cap resposta del servidor en el temps donat. Assegureu-vos que la vostra instància funcioni correctament.</string>
-    <string name="error_dialog_timeout_toggle">Comproveu la connexió a la xarxa. De vegades, pot ajudar apagar i encendre les dades mòbils o la connexió Wi-Fi.</string>
+    <string name="error_dialog_timeout_toggle">Comproveu la connexió a la xarxa. De vegades, pot ajudar apagar i encendre les dades mòbils o la connexió sense fil.</string>
     <string name="error_dialog_check_server">La resposta del servidor no ha estat correcta. Comproveu que podeu accedir les vostres notes des de la interfície web.</string>
     <string name="error_dialog_check_server_logs">Hi ha un problema amb la vostra configuració del Nextcloud. Consulteu els fitxers de registre del servidor.</string>
     <string name="error_dialog_check_maintenance">Comproveu que la vostra instància del Nextcloud no estigui en mode de manteniment.</string>
-    <string name="error_dialog_insufficient_storage">No queda espai d\'emmagatzematge lliure a la vostra instància del Nextcloud. Suprimiu alguns fitxers per sincronitzar els canvis locals al núvol.</string>
+    <string name="error_dialog_insufficient_storage">No queda espai d\'emmagatzematge lliure a la vostra instància del Nextcloud. Suprimiu alguns fitxers per a sincronitzar els canvis locals en el núvol.</string>
     <string name="error_dialog_contact_us">No dubteu a contactar-nos si els problemes persisteixen. Podreu trobar la nostra informació de contacte a la secció «Quant a» a la barra lateral.</string>
-    <string name="error_dialog_we_need_info">Necessitem la informació tècnica següent per poder ajudar-vos:</string>
+    <string name="error_dialog_we_need_info">Necessitem la informació tècnica següent per a poder ajudar-vos:</string>
     <string name="error_dialog_server_app_enabled">Assegureu-vos que hàgiu instal·lat i activat l\'aplicació «Notes» al vostre servidor.</string>
-    <string name="error_dialog_redirect">El vostre servidor ha respost amb un codi d\'estat HTTP 302, que vol dir que no teniu instal·lada l\'aplicació Notes al vostre servidor o que alguna cosa està mal configurada. Això pot estar causat per una anul·lació personalitzada en un fitxer .htaccess o per aplicacions del Nextcloud com Client OID.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Desactiveu totes les optimitzacions de la bateria per a les aplicacions Nextcloud i Notes.</string>
+    <string name="error_dialog_redirect">El vostre servidor ha respost amb un codi d\'estat HTTP 302, que vol dir que no teniu instal·lada l\'aplicació Notes al vostre servidor o que hi ha alguna cosa mal configurada. Això pot tenir la causa en una anul·lació personalitzada en un fitxer .htaccess o en aplicacions del Nextcloud com Client OID.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Inhabiliteu totes les optimitzacions de la bateria per a les aplicacions Nextcloud i Notes.</string>
     <string name="added_content">S\'ha afegit «%1$s»</string>
-    <string name="shared_text_empty">El text compartit era buit</string>
+    <string name="shared_text_empty">El text compartit estava buit</string>
     <string name="append_to_note">Afegeix a la nota</string>
     <string name="change_note_title">Canvia el títol de la nota</string>
     <string name="menu_edit_title">Edita el títol</string>
     <string name="settings_branding">Marca</string>
-    <string name="settings_gridview">Visualització de graella 🆕</string>
+    <string name="settings_gridview">Visualització de graella </string>
     <string name="simple_security">Seguretat</string>
     <string name="simple_appearance">Aparença</string>
     <string name="simple_synchronization">Sincronització</string>
@@ -204,7 +204,7 @@
     <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Format basat en el context</string>
-    <string name="formatting_help_cbf_body_1">Un objectiu principal del disseny de l\'aplicació Notes és proporcionar una eina lliure de distraccions. Tanmateix, podreu formatar els vostres text amb Markdown. Per a molts dels exemples esmentats a continuació, podeu utilitzar dreceres per tal de formatar les vostres notes sense haver d\'escriure els codis següents.</string>
+    <string name="formatting_help_cbf_body_1">Un objectiu principal del disseny de l\'aplicació Notes és proporcionar una eina lliure de distraccions. Tanmateix, podreu formatar els vostres textos amb Markdown. Per a molts dels exemples esmentats a continuació, podeu utilitzar dreceres per a formatar les vostres notes sense haver d\'escriure els codis següents.</string>
     <string name="formatting_help_cbf_body_2">Només cal que seleccioneu un fragment de text o toqueu qualsevol posició amb el cursor i apareixerà un menú emergent que conté, juntament amb les entrades per defecte %1$s, %2$s i %3$s, entrades com %4$s o %5$s.</string>
 
     <string name="formatting_help_text_title">Text</string>
@@ -222,12 +222,12 @@
     <string name="formatting_help_lists_body_9">I això</string>
 
     <string name="formatting_help_checkboxes_title">Caselles de selecció</string>
-    <string name="formatting_help_checkboxes_body_1">Per crear una casella de selecció, utilitzeu una llista seguida de claudàtors.</string>
+    <string name="formatting_help_checkboxes_body_1">Per a crear una casella de selecció, utilitzeu una llista seguida de claudàtors.</string>
     <string name="formatting_help_checkboxes_body_2">Element 1</string>
     <string name="formatting_help_checkboxes_body_3">Element 2</string>
 
     <string name="formatting_help_structured_documents_title">Documents estructurats</string>
-    <string name="formatting_help_structured_documents_body_1">De vegades, és útil tenir diferents nivells de capçaleres per estructurar els vostres document. Comenceu les línies amb %1$s per crear capçaleres. Diversos %2$s seguits denoten mides de capçalera més petites.</string>
+    <string name="formatting_help_structured_documents_body_1">De vegades, és útil tenir diferents nivells de capçaleres per a estructurar els vostres documents. Comenceu les línies amb %1$s per a crear capçaleres. Diversos %2$s seguits denoten mides de capçalera més petites.</string>
     <string name="formatting_help_structured_documents_body_2">Això és una capçalera de tercer nivell</string>
     <string name="formatting_help_structured_documents_body_3">Podeu utilitzar d\'un %1$s a sis %2$s per obtenir diferents mides de capçalera.</string>
     <string name="formatting_help_structured_documents_body_4">Si voleu citar algú, utilitzeu el caràcter %1$s abans de la línia:</string>
@@ -237,13 +237,13 @@
     <string name="formatting_help_code_title">Codi</string>
     <string name="formatting_help_code_body_1">Hi ha diferents maneres de definir l\'estil de codi amb Markdown. Si teniu blocs de codi entre línies, poseu-los entre accents greus:</string>
     <string name="formatting_help_code_body_2">Markdown també admet l\'aïllament de codi, que permet inserir diverses línies sense sagnat:</string>
-    <string name="formatting_help_code_body_3">Si voleu utilitzar el ressaltat de sintaxi, incloeu-hi el llenguatge: </string>
+    <string name="formatting_help_code_body_3">Si voleu utilitzar el ressaltat de sintaxi, incloeu-hi el llenguatge:</string>
 
     <string name="formatting_help_unsupported_title">Característiques no admeses</string>
     <string name="formatting_help_unsupported_body_1">Tot i que provem de millorar contínuament la compatibilitat amb Markdown, hi ha algunes característiques que encara no s\'admeten a Notes:</string>
     <string name="formatting_help_unsupported_body_2">Taules</string>
     <string name="formatting_help_unsupported_body_3">Imatges</string>
-    <string name="formatting_help_unsupported_body_4">Si us interessa contribuir per admetre una d\'aquestes característiques, poseu-vos en contacte amb nosaltres mitjançant GitHub o per correu electrònic.</string>
+    <string name="formatting_help_unsupported_body_4">Si us interessa contribuir per a admetre una d\'aquestes característiques, poseu-vos en contacte amb nosaltres mitjançant GitHub o per correu electrònic.</string>
     <string name="simple_other">Altres</string>
     <string name="sort_last_modified">Ordena per la data de modificació</string>
     <string name="sort_alphabetically">Ordena alfabèticament</string>
