@@ -88,8 +88,8 @@ public class MarkDownUtil {
             text = TextUtils.replace(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY, MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY);
         }
 
-        // https://github.com/stefan-niedermann/nextcloud-notes/issues/949
-        text = text.toString().replaceAll("(?<![(])(www.[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])(?![^\\[]*])", "[$1]($1)");
+        // add Markdown-link for URLs without "http://" or "https://" but with "www."
+        text = text.toString().replaceAll("(?<!([(]|https?://))(www.[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])(?![^\\[]*])", "[$2](https://$2)");
 
         return markdownProcessor.parse(text);
     }
