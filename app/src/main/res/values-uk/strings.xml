@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Нотатки</string>
+    <string name="app_name_long">Нотатки Nextcloud</string>
+    <string name="label_all_notes">Усі нотатки</string>
+    <string name="label_favorites">Улюблене</string>
+    <string name="action_create">Новий запис</string>
+    <string name="action_settings">Налаштування</string>
+    <string name="action_trashbin">Вилучені нотатки</string>
+    <string name="action_search">Пошук</string>
+    <string name="action_sorting_method">Метод сортування</string>
+    <string name="simple_cancel">Скасувати</string>
+    <string name="simple_edit">Редагувати</string>
+    <string name="action_edit_save">Зберегти</string>
+    <string name="simple_about">Про програму</string>
+    <string name="simple_bold">Грубий</string>
+    <string name="simple_link">Посилання</string>
+    <string name="simple_italic">Курсив</string>
+    <string name="action_note_deleted">Вилучено %1$s</string>
+    <string name="action_note_restored">Відновлено %1$s</string>
+    <string name="action_undo">скасувати зміни</string>
+    <string name="action_uncategorized">Некатегоризоване</string>
+    <string name="menu_delete">Вилучити</string>
+    <string name="menu_change_category">Категорія</string>
+    <string name="menu_favorite">Улюблений</string>
+    <string name="menu_preview">Перегляд</string>
+    <string name="menu_share">Поділитися</string>
+
+    <string name="search_in_category">Шукати в %1$s</string>
+    <string name="search_in_all">Шукати всі нотатки</string>
+
+    <string name="change_category_title">Оберіть категорію</string>
+
+    <string name="listview_updated_today">Сьогодні</string>
+    <string name="listview_updated_yesterday">Вчора</string>
+    <string name="listview_updated_this_week">Цього тижня</string>
+    <string name="listview_updated_last_week">Минулого тижня</string>
+    <string name="listview_updated_this_month">Цього місяця</string>
+    <string name="listview_updated_last_month">Минулого місяця</string>
+
+    <!-- Settings -->
+    <string name="settings_note_mode">Режим відображення для нотаток</string>
+    <string name="settings_theme_title">Тема</string>
+    <string name="settings_font_title">Моноширинний шрифт</string>
+    <string name="settings_font_size">Розмір шрифту</string>
+    <string name="settings_wifi_only">Синхронізувати тільки по WI-Fi</string>
+    <string name="settings_lock">Захист паролем</string>
+    <string name="settings_background_sync">Фонова синхронізація</string>
+
+    <!-- Network -->
+
+    <!-- Error -->
+    <string name="error_sync">Синхронізація не вдалася: %1$s</string>
+    <string name="error_synchronization">Синхронізація не вдалася</string>
+    <string name="error_json">Чи активовано додаток Нотатки на сервері?</string>
+    <string name="error_no_network">Відсутнє підключення до мережі</string>
+    <string name="error_unknown">Сталася невідома помилка.</string>
+
+    <!-- About -->
+    <string name="about_version_title">Версія</string>
+    <string name="about_version">Ви зараз використовуєте &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Утримувач</string>
+    <string name="about_developers_title">Розробники</string>
+    <string name="about_translators_title">Перекладачі</string>
+    <string name="about_translators_transifex">Спільнота Nextcloud на &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">Тестувальники</string>
+    <string name="about_source_title">Вихідний код</string>
+    <string name="about_source">Цей проєкт розміщено на GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Помилики</string>
+    <string name="about_issues">Ви можете повідомляти про помилки, пропонувати удосконалення та надсилати запити на додаткові функції через систему відстеження вад GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Перекласти</string>
+    <string name="about_translate">Приєднуйтесь до команди Nextcloud на Transifex та допоможіть нам перекласти цей застосунок: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Ліцензія застосунку</string>
+    <string name="about_app_license">Ця програма ліцензована під GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Переглянути ліцензію</string>
+    <string name="about_icons_disclaimer_title">Значки</string>
+    <string name="about_icons_disclaimer">&lt;p>Оригінальний значок, зроблений %1$s&lt;/p>&lt;p>Усі додаткові значки, що використовуються у цьому додатку, є &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> зроблені Google Inc. і ліцензовані під ліцензією Apache 2.0.&lt;/p></string>
+    <string name="about_credits_tab_title">Подяки</string>
+    <string name="about_contribution_tab_title">Внесок</string>
+    <string name="about_license_tab_title">Ліцензія</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">Список нотаток</string>
+    <string name="widget_note_list_placeholder">Нотатки відсутні</string>
+    <string name="widget_single_note_title">Одна нотатка</string>
+    <string name="widget_single_note_placeholder_tv">Нотатку не знайдено</string>
+    <string name="widget_create_note">Створити нотатку</string>
+    <string name="widget_not_logged_in">Будь ласка, увійдіть до Нотаток перед використанням цього віджету</string>
+    <string name="widget_entry_fav_contentDescription">Значок зірки використовується для позначення елемента як улюбленого</string>
+    <string name="widget_app_launcher_contentDescription">Запускає застосунок</string>
+
+    <string name="activity_select_single_note">Оберіть нотатку</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">Створити нову нотатку</string>
+
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
+    <string name="pref_value_font_normal">Звичайно</string>
+    <string name="pref_value_wifi_and_mobile">Синхронізувати по Wi-Fi та мобільним даним</string>
+    <string name="pref_value_lock">Захист паролем</string>
+
+    <string name="simple_error">Помилка</string>
+    <string name="simple_close">Закрити</string>
+    <string name="simple_copy">Копіювати</string>
+    <string name="simple_exception">Виняток</string>
+    <string name="copied_to_clipboard">Скопійовано в буфер обміну</string>
+    <string name="pin_to_homescreen">Закріпити на головному екрані</string>
+    <string name="note_has_been_deleted">Цю нотатку було вилучено</string>
+    <string name="add_account">Додати обліковий запис</string>
+    <string name="category_music">Музика</string>
+    <string name="category_movies">Відео</string>
+    <string name="category_movie">Фільм</string>
+    <string name="category_work">Робочий</string>
+    <string name="account_already_imported">Обліковий запис вже імпортовано</string>
+    <string name="no_notes_yet">Нотатки поки відсутні</string>
+    <string name="no_notes_yet_description">Натисніть кнопку +, щоб створити нову нотатку</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Не вдалося завантажити перегляд. Перевірте, чи є двоцифровий елемент нумерованого списку без вмісту.</string>
+    <string name="simple_more">Додатково</string>
+    <string name="simple_move">Перемістити</string>
+    <string name="checkbox_could_not_be_toggled">Неможливо перемкнути прапорець</string>
+    <string name="category_readonly">Тільки читання</string>
+    <string name="no_category">Без категорії</string>
+    <string name="add_category">Додати %1$s</string>
+    <string name="simple_checkbox">Прапорець</string>
+    <string name="unlock_notes">Розблокувати нотатки</string>
+    <string name="simple_beta">Бета</string>
+    <string name="could_not_copy_to_clipboard">Неможливо скопіювати до буферу обміну</string>
+    <string name="error_dialog_title">От халепа!</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Спробуйте примусово закрити застосунок та наново запустити. Можливо, встановлено неправильне з\'єднання із застосунком Nextcloud.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Якщо проблема не зникає, для її вирішення спробуйте очистити пам’ять обох програм: Nextcloud та Нотатки Nextcloud.</string>
+    <string name="error_dialog_tip_clear_storage">Ви можете очистити сховище, відкривши інформацію про програму та вибравши Пам’ять → Очистити пам’ять.</string>
+    <string name="error_dialog_tip_files_outdated">Ваш додаток Nextcloud здається застарілим. Будь ласка, відвідайте Play Маркет або F-Droid, щоб отримати останню версію.</string>
+    <string name="error_dialog_tip_files_force_stop">Щось, здається, не так із вашим застосунком Nextcloud. Спробуйте примусово зупинити обидва застосунки: Nextcloud та Нотатки Nextcloud.</string>
+    <string name="error_dialog_tip_files_delete_storage">Якщо примусове їх завершення не допомагає, спробуйте очистити сховище обох застосунків.</string>
+    <string name="error_dialog_timeout_instance">За відведений час відповіді від вашого сервера не надійшло. Переконайтесь, що ваш сервер працює добре.</string>
+    <string name="error_dialog_timeout_toggle">Перевірте підключення до мережі. Іноді може допомогти вимкнення та ввімкнення мобільного передавання даних або Wi-Fi.</string>
+    <string name="error_dialog_check_server">Відповідь вашого сервера була неправильною. Перевірте, чи можете ви отримати доступ до своїх нотаток через веб-інтерфейс.</string>
+    <string name="error_dialog_check_server_logs">Виникла проблема з налаштуванням Nextcloud. Будь ласка, подивіться файли журналу сервера.</string>
+    <string name="error_dialog_check_maintenance">Будь ласка, перевірте, чи ваш сервер Nextcloud наразі не перебуває в режимі обслуговування.</string>
+    <string name="error_dialog_insufficient_storage">Ваш сервер Nextcloud не має вільного місця. Будь ласка видаліть деякі файлі, щоб синхронізувати ваші локальні зміни з вашим хмарним сховищем.</string>
+    <string name="error_dialog_contact_us">Будь ласка, не соромтеся звернутися до нас, якщо проблеми не зникнуть. Ви можете знайти нашу контактну інформацію в розділі \"Про програму\" на бічній панелі.</string>
+    <string name="error_dialog_we_need_info">Нам потрібна наступна технічна інформація, щоб допомогти вам:</string>
+    <string name="error_dialog_server_app_enabled">Переконайтесь, що ви встановили та увімкнули додаток \"Нотатки\" на своєму сервері.</string>
+    <string name="error_dialog_redirect">Ваш сервер відповів кодом стану HTTP 302, що означає, що ви не встановили програму Нотатки на своєму сервері або щось налаштовано неправильно. Це може бути спричинено нестандартними перевизначеннями у файлі .htaccess або програмами Nextcloud, як-от OID-клієнт.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Вимкніть усі оптимізації батареї для застосунків Nextcloud та Нотатки Nextcloud.</string>
+    <string name="added_content">Додано \"%1$s\"</string>
+    <string name="shared_text_empty">Поширений текст був порожнім</string>
+    <string name="append_to_note">Додати до нотатки</string>
+    <string name="change_note_title">Змінити заголовок нотатки</string>
+    <string name="menu_edit_title">Редагувати нотатку</string>
+    <string name="settings_branding">Оформлення</string>
+    <string name="settings_gridview">Упорядкування у формі сітки</string>
+    <string name="simple_security">Безпека</string>
+    <string name="simple_appearance">Вигляд</string>
+    <string name="simple_synchronization">Синхронізація</string>
+    <string name="simple_behavior">Поведінка</string>
+    <string name="manage_accounts">Облікові записи</string>
+    <string name="action_formatting_help">Форматування</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>Відкривати у режимі редагування</item>
+        <item>Відкривати у режимі перегляду</item>
+        <item>Запам\'ятовувати останній вибір</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>Малий</item>
+        <item>Середній</item>
+        <item>Великий</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>Вимкнути</item>
+        <item>15 хвилин</item>
+        <item>1 година</item>
+        <item>6 годин</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Світла</item>
+        <item>Темна</item>
+        <item>Згідно з системною</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="one">%d обрано</item>
+        <item quantity="few">%d обрано</item>
+        <item quantity="many">%d обрано</item>
+        <item quantity="other">%d обрано</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Вилучено %1$d нотатку</item>
+        <item quantity="few">Вилучено %1$d нотатки</item>
+        <item quantity="many">Вилучено %1$d нотаток</item>
+        <item quantity="other">Вилучено %1$d нотаток</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_body_1">Головною метою програми Нотатки є надання інструменту, що не відволікає увагу. Хоча ви зможете форматувати свої тексти за допомогою Markdown. Для різних із наведених нижче прикладів ви можете використовувати ярлики, щоб форматувати нотатки, не вводячи коди нижче.</string>
+    <string name="formatting_help_cbf_body_2">Просто виберіть діапазон тексту або натисніть на курсор у будь-якій позиції, і ви отримаєте спливаюче меню, де поряд із типовими елементами %1$s, %2$s, %3$s містяться елементи на зразок %4$s або %5$s.</string>
+
+    <string name="formatting_help_text_title">Текст</string>
+    <string name="formatting_help_text_body">За допомогою Markdown дуже легко зробити деякі слова %1$sжирними%1$s, а інші слова %2$sкурсивом%2$s. Ви можете %3$sперекреслити%3$s деякі слова та навіть [послатися до Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Списки</string>
+    <string name="formatting_help_lists_body_1">Іноді вам потрібні нумеровані списки:</string>
+    <string name="formatting_help_lists_body_2">Один</string>
+    <string name="formatting_help_lists_body_3">Два</string>
+    <string name="formatting_help_lists_body_4">Три</string>
+    <string name="formatting_help_lists_body_5">Іноді вам потрібні списки з позначками:</string>
+    <string name="formatting_help_lists_body_6">Почніть рядок з риски</string>
+    <string name="formatting_help_lists_body_7">А якщо у вас є підпункти, поставте два пробіли перед тире або зірочку:</string>
+    <string name="formatting_help_lists_body_8">Ось так</string>
+    <string name="formatting_help_lists_body_9">І так</string>
+
+    <string name="formatting_help_checkboxes_title">Прапорці</string>
+    <string name="formatting_help_checkboxes_body_1">Щоб створити прапорець, використовуйте список, за яким слідують дужки</string>
+    <string name="formatting_help_checkboxes_body_2">Пункт 1</string>
+    <string name="formatting_help_checkboxes_body_3">Пункт 2</string>
+
+    <string name="formatting_help_structured_documents_title">Структуровані документи</string>
+    <string name="formatting_help_structured_documents_body_1">Іноді корисно мати різні рівні заголовків для структурування документів. Почніть рядки з %1$s, щоб створити заголовки. Кілька %2$s поспіль позначають менші розміри заголовків.</string>
+    <string name="formatting_help_structured_documents_body_2">Це заголовок третього рівня</string>
+    <string name="formatting_help_structured_documents_body_3">Ви можете використовувати один %1$s аж до шести %2$s для різних розмірів заголовка.</string>
+    <string name="formatting_help_structured_documents_body_4">Якщо ви хочете процитувати когось, використовуйте символ %1$s перед рядком:</string>
+    <string name="formatting_help_structured_documents_body_5">Уява важливіша за знання. Знання обмежене. Уява охоплює весь світ.</string>
+    <string name="formatting_help_structured_documents_body_6">- Альберт Ейнштейн</string>
+
+    <string name="formatting_help_code_title">Код</string>
+    <string name="formatting_help_code_body_1">Існує багато різних способів стилізувати код за допомогою Markdown. Якщо у вас є вбудовані блоки коду, оберніть їх у зворотні позначки:</string>
+    <string name="formatting_help_code_body_2">Markdown також підтримує те, що називається огородженням коду, що дозволяє використовувати кілька рядків без відступу:</string>
+    <string name="formatting_help_code_body_3">А якщо ви хочете використовувати підсвічування синтаксису, додайте назву мови:</string>
+
+    <string name="formatting_help_unsupported_title">Не підтримується</string>
+    <string name="formatting_help_unsupported_body_1">Хоч ми намагаємось постійно вдосконалювати підтримку Markdown, є декілька функцій, які ще не підтримуються в Нотатках:</string>
+    <string name="formatting_help_unsupported_body_2">Таблиці</string>
+    <string name="formatting_help_unsupported_body_3">Зображення</string>
+    <string name="formatting_help_unsupported_body_4">Якщо ви хочете зробити внесок у підтримку однієї з цих функцій, зв’яжіться з нами через GitHub або електронною поштою.</string>
+    <string name="simple_other">Інший</string>
+    <string name="sort_last_modified">Сортувати за датою зміни</string>
+    <string name="sort_alphabetically">Сортувати за алфавітом</string>
+    <string name="error_action_open_battery_settings">Налаштування батареї</string>
+    <string name="error_action_open_deck_info">Відкрити інформацію про застосунок</string>
+    <string name="error_action_open_network">Налаштування мережі</string>
+    <string name="no_other_accounts">Ви ще не налаштували жодного іншого облікового запису.</string>
+</resources>
