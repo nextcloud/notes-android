@@ -9,6 +9,7 @@
     <string name="action_settings">Innstillinger</string>
     <string name="action_trashbin">Slettede notat</string>
     <string name="action_search">Søk</string>
+    <string name="action_sorting_method">Sorteringsmetode</string>
     <string name="simple_cancel">Avbryt</string>
     <string name="simple_edit">Rediger</string>
     <string name="action_edit_save">Lagre</string>
@@ -16,15 +17,18 @@
     <string name="simple_bold">Uthevet</string>
     <string name="simple_link">Lenke</string>
     <string name="simple_italic">Italic</string>
+    <string name="action_note_deleted">Slettet %1$s</string>
+    <string name="action_note_restored">Gjennopprettet %1$s</string>
     <string name="action_undo">Angre</string>
-    <string name="action_drawer_open">åpne navigasjon</string>
-    <string name="action_drawer_close">lukk navigasjon</string>
     <string name="action_uncategorized">Ukategorisert</string>
     <string name="menu_delete">Slett</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Favoritt</string>
     <string name="menu_preview">Forhåndsvis</string>
     <string name="menu_share">Del</string>
+
+    <string name="search_in_category">Søk i %1$s</string>
+    <string name="search_in_all">Søk i alle notater</string>
 
     <string name="change_category_title">Velg kategori</string>
 
@@ -37,18 +41,22 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Visningsmodus for notater</string>
-    <string name="settings_theme_title">Mørkt tema</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Skriftstørrelse</string>
     <string name="settings_wifi_only">Synkroniser kun med WiFi</string>
     <string name="settings_lock">Passordbeskyttelse</string>
-    <!-- Certificates -->
+    <string name="settings_background_sync">Synkronisering i bakgrunnen</string>
 
     <!-- Network -->
 
     <!-- Error -->
     <string name="error_sync">Synkronisering mislyktes: %1$s</string>
+    <string name="error_synchronization">Synkronisering mislyktes</string>
+    <string name="error_json">er Notat-appen påslått på serveren?</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
+    <string name="error_unknown">En ukjent feil oppstod.</string>
+
     <!-- About -->
     <string name="about_version_title">Versjon</string>
     <string name="about_version">Du bruker &lt;strong>%1$s&lt;/strong></string>
@@ -102,12 +110,56 @@
     <string name="add_account">Legg til en konto</string>
     <string name="category_music">Musikk</string>
     <string name="category_movies">Filmer</string>
+    <string name="category_movie">Film</string>
     <string name="category_work">Arbeid</string>
+    <string name="account_already_imported">Kontoen har allerede blitt importert</string>
     <string name="no_notes_yet">Ingen notater enda</string>
+    <string name="no_notes_yet_description">Trykk + knappen for å opprette et nytt notat</string>
+    <string name="could_not_load_preview_two_digit_numbered_list">Kunne ikke laste forhåndsvisning. Kontroller om det er et tosifret nummerert listeelement uten innhold.</string>
     <string name="simple_more">Mer</string>
     <string name="simple_move">Flytt</string>
+    <string name="checkbox_could_not_be_toggled">Kunne ikke endre avkrysningsruten.</string>
+    <string name="bulk_notes_restored">Gjenopprettet %1$d notater</string>
     <string name="category_readonly">Skrivebeskyttet</string>
+    <string name="no_category">Ingen kategori</string>
+    <string name="add_category">Legg til%1$s</string>
     <string name="simple_checkbox">Avkryssningsboks</string>
+    <string name="unlock_notes">Lås opp notater</string>
+    <string name="simple_beta">Beta</string>
+    <string name="could_not_copy_to_clipboard">Kunne ikke kopiere til utklippstavlen</string>
+    <string name="error_dialog_title">Å nei - Hva nå? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Prøv å tvinge avslutning av appen og start den på nytt. Det kan ha vært en feiltilkobling til Nextcloud-appen.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet vedvarer, prøv å tømme lageret for begge disse appene for å løse problemet: Nextcloud og Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Du kan tømme lageret ved å åpne App info og velge Lagring og buffer → Tøm lagring.</string>
+    <string name="error_dialog_tip_files_outdated">Det virker som Nextcloud appen er utdatert. Venligst besøk Play Sore eller F-Droid for å finne siste versjon.</string>
+    <string name="error_dialog_tip_files_force_stop">Det virker som noe er galt med Nextcloud appen. Vennligst prøv å tvinge avslutning av Nextcloud appen og Nextcloud Notes appen.</string>
+    <string name="error_dialog_tip_files_delete_storage">Hvis det ikke hjelper med tving avslutt, så kan du prøve å tømme lageret for begge appene.</string>
+    <string name="error_dialog_timeout_instance">Serveren svarer ikke innen en gitt tid. Vennligst påse at serveren er tilgjengelig.</string>
+    <string name="error_dialog_timeout_toggle">Sjekk nettverkstilkoblingen. Noen ganger hjelper det å skru av og på mobil data eller WI-FI tilkoblingen.</string>
+    <string name="error_dialog_check_server">Svaret fra serveren var feil. Vennligst påse at du har tilgang til notatene dine via nettgrensesnittet.</string>
+    <string name="error_dialog_check_server_logs">Det er et problem med Nextcloud oppsettet ditt. Vennligst ta en titt i loggfilene til serveren.</string>
+    <string name="error_dialog_check_maintenance">Vennligst sjekk at Nextcloud instansen ikke er i vedlikeholdsmodus for øyeblikket.</string>
+    <string name="error_dialog_insufficient_storage">Nextcloud instansen har ikke mer ledig lagringsplass. Vennligst slett noen filer for å synkronisere de lokale endringen til skyen din.</string>
+    <string name="error_dialog_contact_us">Ikke nøl med å kontakte oss hvis problemene vedvarer. Du finner kontaktinformasjonen vår i om delen i sidefeltet.</string>
+    <string name="error_dialog_we_need_info">Vi trenger følgende teknisk informasjon for å kunne hjelpe deg:</string>
+    <string name="error_dialog_server_app_enabled">Vennligst påse at du har installert og aktivert \"Notes\" appen på serveren.</string>
+    <string name="error_dialog_redirect">Serveren din svarte med en HTTP 302-statuskode, noe som antyder at du ikke har installert Notes-appen på serveren din, eller at noe er feilkonfigurert. Dette kan være forårsaket av tilpassede overstyringer i en .htaccess-fil eller av Nextcloud-apper som OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Deaktiver alle batterioptimaliseringer for Nextcloud og Notes-appen.</string>
+    <string name="added_content">Lagt til \"%1$s\"</string>
+    <string name="shared_text_empty">Delt tekst var tom</string>
+    <string name="append_to_note">Legg til i notat</string>
+    <string name="change_note_title">Endre tittel på notat</string>
+    <string name="menu_edit_title">Rediger tittel</string>
+    <string name="settings_branding">Branding</string>
+    <string name="settings_gridview">Rutenett-visning</string>
+    <string name="simple_security">Sikkerhet</string>
+    <string name="simple_appearance">Utseende</string>
+    <string name="simple_synchronization">Synkronisering</string>
+    <string name="simple_behavior">Atferd</string>
+    <string name="share_multiple">Del innholdet av %1$d notat</string>
+    <string name="manage_accounts">Håndter kontoer</string>
+    <string name="action_formatting_help">Formatering</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Åpne i redigeringsmodus</item>
@@ -141,4 +193,62 @@
         <item quantity="one">%d er valgt</item>
         <item quantity="other">%d valgt</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Slettet notat %1$d</item>
+        <item quantity="other">Slettet notatene %1$d</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Kontekstbasert formatering</string>
+    <string name="formatting_help_cbf_body_1">Et viktig designmål for Notes-appen er å tilby et distraksjonsfritt verktøy. Selv om du vil kunne formatere tekstene dine med Markdown. For de forskjellige eksemplene nedenfor, kan du bruke snarveier slik at du kan formatere notatene dine uten å skrive inn kodene nedenfor.</string>
+    <string name="formatting_help_cbf_body_2">Bare velg et tekstområde eller trykk på markøren når som helst, så får du en popup-meny som inneholder ved siden av standardoppføringene %1$s, %2$s, %3$s oppføringer som %4$s eller %5$s.</string>
+
+    <string name="formatting_help_text_title">Tekst</string>
+    <string name="formatting_help_text_body">Det er enkelt å lage noen ord %1$sFet%1$s og andre ord %2$sKursiv%2$s med Markdown. Du kan %3$sstreke%3$sgjennom noen or og til og med [lenke til Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Lister</string>
+    <string name="formatting_help_lists_body_1">Noen ganger wil du ha nummererte lister:</string>
+    <string name="formatting_help_lists_body_2">En</string>
+    <string name="formatting_help_lists_body_3">To</string>
+    <string name="formatting_help_lists_body_4">Tre</string>
+    <string name="formatting_help_lists_body_5">Noen ganger vil du ha nøkkelpunkter:</string>
+    <string name="formatting_help_lists_body_6">Start en linje med bindestrek</string>
+    <string name="formatting_help_lists_body_7">Og hvis du har underpunkter, sett to mellomrom før bindestrek eller stjerne</string>
+    <string name="formatting_help_lists_body_8">Som dette</string>
+    <string name="formatting_help_lists_body_9">Og dette</string>
+
+    <string name="formatting_help_checkboxes_title">Avkrysningsruter</string>
+    <string name="formatting_help_checkboxes_body_1">For å opprette en avkrysningsrute, bruk en liste etterfulgt av parentes</string>
+    <string name="formatting_help_checkboxes_body_2">Gjenstand 1</string>
+    <string name="formatting_help_checkboxes_body_3">Gjenstand 2</string>
+
+    <string name="formatting_help_structured_documents_title">Strukturerte dokumenter</string>
+    <string name="formatting_help_structured_documents_body_1">Noen ganger er det nyttig å ha forskjellige nivåer av overskrifter for å strukturere dokumentene. Start linjer med en %1$s for å lage overskrifter. Flere %2$s på rad betegner mindre overskriftsstørrelser.</string>
+    <string name="formatting_help_structured_documents_body_2">Dette er en tredje trinns overskrift</string>
+    <string name="formatting_help_structured_documents_body_3">Du kan bruke en %1$s hele veien til %2$s seks for forskjellige overskriftsstørrelser.</string>
+    <string name="formatting_help_structured_documents_body_4">Hvis du vil sitere noen, bruk tegnet %1$s før linjen:</string>
+    <string name="formatting_help_structured_documents_body_5">Fantasi er viktigere enn kunnskap. Kunnskap er begrenset. Fantasi omgir verden.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Kode</string>
+    <string name="formatting_help_code_body_1">Det er mange forskjellige måter å style kode med Markdown. Hvis du har innebygde kodeblokker, kan du pakke dem inn i backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown støtter også noe som kalles kodegjerding, som tillater flere linjer uten innrykk:</string>
+    <string name="formatting_help_code_body_3">Og hvis du vil bruke syntaksmarkering, inkluder språket:</string>
+
+    <string name="formatting_help_unsupported_title">Ustøttet</string>
+    <string name="formatting_help_unsupported_body_1">Mens vi prøver å kontinuerlig forbedre støtten for Markdown, er det noen få funksjoner som ennå ikke støttes av Notes:</string>
+    <string name="formatting_help_unsupported_body_2">Tabell</string>
+    <string name="formatting_help_unsupported_body_3">Bilder</string>
+    <string name="formatting_help_unsupported_body_4">Hvis du er interessert i å bidra med støtte for en av disse funksjonene, kan du kontakte oss via GitHub eller e-post.</string>
+    <string name="simple_other">Annet</string>
+    <string name="sort_last_modified">Sorter etter dato endret</string>
+    <string name="sort_alphabetically">Sorter alfabetisk</string>
+    <string name="error_action_open_battery_settings">Batteri innstillinger</string>
+    <string name="error_action_open_deck_info">Åpne App info</string>
+    <string name="error_action_open_network">Nettverksinnstillinger</string>
+    <string name="no_other_accounts">Du har ikke konfigurert noen konto enda.</string>
 </resources>
