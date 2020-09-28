@@ -10,7 +10,7 @@
     <string name="action_trashbin">Törölt jegyzetek</string>
     <string name="action_search">Keresés</string>
     <string name="action_sorting_method">Rendezési mód</string>
-    <string name="simple_cancel">Mégsem</string>
+    <string name="simple_cancel">Mégse</string>
     <string name="simple_edit">Szerkesztés</string>
     <string name="action_edit_save">Mentés</string>
     <string name="simple_about">Névjegy</string>
@@ -43,15 +43,15 @@
     <string name="settings_note_mode">Jegyzet módok megjelenítés</string>
     <string name="settings_theme_title">Téma</string>
     <string name="settings_font_title">Fix szélességű betűkészlet</string>
-    <string name="settings_font_size">Betű méret</string>
-    <string name="settings_wifi_only">Szinkronizáció csak Wifin keresztül</string>
+    <string name="settings_font_size">Betűméret</string>
+    <string name="settings_wifi_only">Szinkronizálás csak Wi-Fin</string>
     <string name="settings_lock">Jelszavas védelem</string>
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
 
     <!-- Network -->
 
     <!-- Error -->
-    <string name="error_sync">sikertelen szinkronizálás: %1$s</string>
+    <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
     <string name="error_synchronization">Szinkronizálás sikertelen</string>
     <string name="error_json">Be van kapcsolva a Jegyzetek alkalmazás a kiszolgálón?</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
@@ -59,38 +59,38 @@
 
     <!-- About -->
     <string name="about_version_title">Verzió</string>
-    <string name="about_version">Jelenleg ezt használod: &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_version">Jelenleg ezt használja: &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Karbantartó</string>
     <string name="about_developers_title">Fejlesztők</string>
     <string name="about_translators_title">Fordítók</string>
     <string name="about_translators_transifex">Nextcloud közösség a &lt;a href=\"%1$s\">Transifex&lt;/a>-en</string>
     <string name="about_testers_title">Tesztelők</string>
     <string name="about_source_title">Forráskód</string>
-    <string name="about_source">Ez a projek a GitHub-on: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_issues_title">Esetek</string>
-    <string name="about_issues">Jelenthetsz hibákat, javasolhatsz javításokat, kérhetsz bővítéseket a GitHub esetkezelőjében: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_source">A projekt a GitHubon található: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Hibajegyek</string>
+    <string name="about_issues">Hibákat jelenthet, fejlesztési javaslatokat adhat és funkciókat kérhet a GitHub hibakövetőjében: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Fordítás</string>
-    <string name="about_translate">Csatlakozz a Nextcloud csapathoz a Transifex-en és segíts lefordítani az alkalmazást: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">App licensz</string>
-    <string name="about_app_license">Ez az alkalmazás GNU GENERAL PUBLIC LICENSE v3+-al kerül kiadásra.</string>
-    <string name="about_app_license_button">Licensz megtekintése</string>
+    <string name="about_translate">Csatlakozzon a Nextcloud csapathoz a Transifexen, és segítsen az alkalmazás lefordításában: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Alkalmazás licence</string>
+    <string name="about_app_license">Ez az alkalmazás a GNU GENERAL PUBLIC LICENSE v3+ verziója alatt kerül közreadásra.</string>
+    <string name="about_app_license_button">Licenc megtekintése</string>
     <string name="about_icons_disclaimer_title">Ikonok</string>
-    <string name="about_icons_disclaimer">&lt;p>Eredeti ikont készítette %1$s&lt;/p>&lt;p>Minden egyéb az app által használt ikon &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> készítette a Google Inc. és Apache 2.0 Licence alá esik.&lt;/p></string>
-    <string name="about_credits_tab_title">Érdemek</string>
+    <string name="about_icons_disclaimer">&lt;p>Az eredeti ikont %1$s készítette.&lt;/p>&lt;p>Az alkalmazás által használt összes többi ikon a Google által készített &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> része, és azok Apache 2.0 License alatt érhetők el.&lt;/p></string>
+    <string name="about_credits_tab_title">Köszönet</string>
     <string name="about_contribution_tab_title">Közreműködés</string>
     <string name="about_license_tab_title">Licenc</string>
 
     <!-- Widgets -->
-    <string name="widget_note_list_title">Jegyzet lista</string>
+    <string name="widget_note_list_title">Jegyzetlista</string>
     <string name="widget_note_list_placeholder">Nincsenek jegyzetek</string>
     <string name="widget_single_note_title">Egyszeri jegyzet</string>
     <string name="widget_single_note_placeholder_tv">Jegyzet nem található</string>
     <string name="widget_create_note">Jegyzet létrehozása</string>
-    <string name="widget_not_logged_in">Kérlek jelentkezz be a Jegyzetekbe mielőtt ezt a widget-et használnád</string>
+    <string name="widget_not_logged_in">Jelentkezzen be a Jegyzetekbe mielőtt ezt a modult használná</string>
     <string name="widget_entry_fav_contentDescription">A csillag ikon az elem kedvencként megjelölésére szolgál</string>
     <string name="widget_app_launcher_contentDescription">Elindítja az alkalmazást</string>
 
-    <string name="activity_select_single_note">Jegyzet kiválasztása</string>
+    <string name="activity_select_single_note">Válasszon jegyzetet</string>
 
     <!-- Shortcuts -->
     <string name="shortcut_create_long">Új jegyzet létrehozása</string>
@@ -101,7 +101,7 @@
     <string name="pref_value_lock">Jelszavas védelem</string>
 
     <string name="simple_error">Hiba</string>
-    <string name="simple_close">Bezár</string>
+    <string name="simple_close">Bezárás</string>
     <string name="simple_copy">Másolás</string>
     <string name="simple_exception">Kivétel</string>
     <string name="copied_to_clipboard">Vágólapra másolva</string>
@@ -145,16 +145,18 @@
     <string name="error_dialog_server_app_enabled">Bizonyosodjon meg róla, hogy telepítette és bekapcsolta a „Jegyzetek” alkalmazást a szerverén.</string>
     <string name="error_dialog_redirect">A kiszolgálója 302-es HTTP állapotkóddal válaszolt, amely arra utal, hogy nincs telepítve a Jegyzetek alkalmazás a kiszolgálón, vagy valami hibásan van beállítva. Ezt egyéni felülírások is okozhatják, mint egy .htaccess-fájl vagy az OID klienshez hasonló Nextcloud alkalmazások.</string>
     <string name="error_dialog_tip_disable_battery_optimizations">Kapcsoljon ki minden energiatakarékossági beállítást a Nextcloud valamint a Jegyzetek alkalmazáshoz. </string>
-    <string name="added_content">\"%1$s\" hozzáadva</string>
+    <string name="added_content">„%1$s” hozzáadva</string>
     <string name="shared_text_empty">A megosztott szöveg üres volt</string>
-    <string name="append_to_note">Jegyzethez hozzáfűz</string>
+    <string name="append_to_note">Hozzáfűzés a jegyzethez</string>
+    <string name="change_note_title">Jegyzet címének módosítása</string>
     <string name="menu_edit_title">Cím szerkesztése</string>
     <string name="settings_branding">Márkázas</string>
-    <string name="settings_gridview">Rács nézet</string>
+    <string name="settings_gridview">Rács nézet 🆕</string>
     <string name="simple_security">Biztonság</string>
     <string name="simple_appearance">Megjelenés</string>
     <string name="simple_synchronization">Szinkronizálás</string>
-    <string name="share_multiple">%1$d tartalmának megosztása</string>
+    <string name="simple_behavior">Viselkedés</string>
+    <string name="share_multiple">%1$d jegyzet tartalmának megosztása</string>
     <string name="manage_accounts">Fiókok kezelése</string>
     <string name="action_formatting_help">Formázás</string>
 
@@ -162,7 +164,7 @@
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>
         <item>Megnyitás előnézetre</item>
-        <item>Jegyezd meg a döntésem</item>
+        <item>A legutóbbi döntés megjegyzése</item>
     </string-array>
 
     <!-- Array: font size -->
@@ -183,7 +185,7 @@
     <string-array name="darkmode_entries">
         <item>Világos</item>
         <item>Sötét</item>
-        <item>Rendszer alapértelmezés</item>
+        <item>Rendszer alapértelmezése</item>
     </string-array>
 
     <!-- Plurals -->
@@ -191,8 +193,18 @@
         <item quantity="one">%d kiválasztva</item>
         <item quantity="other">%d kiválasztva</item>
     </plurals>
-    <string name="formatting_help_cbf_title">Kontextusalapú formázás</string>
-    <string name="formatting_help_cbf_body_1">A Jegyzetek alkalmazás egyik célkitűzése, egyszerű legyen, és ne vonja el a figyelmet. Ennek ellenére Markdownnal formázhatja a szövegeket. Némely alábbi példánál parancsokat is használhat, anélkül, hogy beírná a kódokat.</string>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$d jegyzet törölve</item>
+        <item quantity="other">%1$d jegyzet törölve</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Környezetfüggő formázás</string>
+    <string name="formatting_help_cbf_body_1">A Jegyzetek alkalmazás egyik célkitűzése, hogy egyszerű legyen, és ne vonja el a figyelmet. Viszont Markdownnal formázhatja a szövegeket. A lent említett példák némelyikénél rövidítéseket is használhat, így anélkül formázhatja meg a jegyzeteket, hogy beírná a lenti kódokat.</string>
     <string name="formatting_help_text_title">Szöveg</string>
     <string name="formatting_help_text_body">Nagyon egyszerűen írhat Markdownnal %1$sfélkövéren,%1$s valamint %2$sdőlten.%2$s Át is %3$shúzhat%3$s szavakat, valamint [linkelhet a Nextcloudra](https://nextcloud.com).</string>
 
@@ -214,6 +226,7 @@
     <string name="simple_other">Egyéb</string>
     <string name="sort_last_modified">Rendezés módosítás dátuma szerint</string>
     <string name="sort_alphabetically">Rendezés név szerint</string>
+    <string name="error_action_open_battery_settings">Akkumulátorbeállítások</string>
     <string name="error_action_open_deck_info">Alkalmazásinformációk megnyitása</string>
     <string name="error_action_open_network">Hálózati beállítások</string>
     </resources>
