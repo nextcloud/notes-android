@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">الملاحظات</string>
+    <string name="app_name_long">ملاحظات نيكست كلاود</string>
+    <string name="label_all_notes">جميع الملاحظات
+</string>
+    <string name="label_favorites">المفضلات</string>
+    <string name="action_create">ملاحظة جديدة </string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="action_trashbin">مسح الملاحظات</string>
+    <string name="action_search">البحث</string>
+    <string name="action_sorting_method">طريقة الترتيب</string>
+    <string name="simple_cancel">إلغاء</string>
+    <string name="simple_edit">تعديل</string>
+    <string name="action_edit_save">حفظ</string>
+    <string name="simple_about">عن</string>
+    <string name="simple_bold">غامق</string>
+    <string name="simple_link">الرابط</string>
+    <string name="simple_italic">مائل</string>
+    <string name="action_note_deleted">حُذف \'%1$s\'</string>
+    <string name="action_note_restored">أُسترجع \'%1$s\'</string>
+    <string name="action_undo">تراجع</string>
+    <string name="action_uncategorized">غير مصنف</string>
+    <string name="menu_delete">حذف </string>
+    <string name="menu_change_category">الفئة</string>
+    <string name="menu_favorite">المفضلة </string>
+    <string name="menu_preview">معاينة</string>
+    <string name="menu_share">شارك</string>
+
+    <string name="search_in_category">البحث في %1$s</string>
+    <string name="search_in_all">البحث في جميع الملاحظات</string>
+
+    <string name="change_category_title">إختر التصنيف</string>
+
+    <string name="listview_updated_today">اليوم</string>
+    <string name="listview_updated_yesterday">البارحة</string>
+    <string name="listview_updated_this_week"> هذا الأسبوع</string>
+    <string name="listview_updated_last_week">الأسبوع الماضي</string>
+    <string name="listview_updated_this_month"> هذا الشهر</string>
+    <string name="listview_updated_last_month">الشهر الماضي</string>
+
+    <!-- Settings -->
+    <string name="settings_note_mode">وضع العرض للملاحظات</string>
+    <string name="settings_theme_title">المظهر</string>
+    <string name="settings_font_title">خط أحادي المسافة</string>
+    <string name="settings_font_size">حجم الخط</string>
+    <string name="settings_wifi_only">المزامنة فقط على الوايفاي</string>
+    <string name="settings_lock">الحماية بكلمة السر</string>
+    <string name="settings_background_sync">مزامنة في خلفية النظام</string>
+
+    <!-- Network -->
+
+    <!-- Error -->
+    <string name="error_sync">المزامنة فشلت \'%1$s\'</string>
+    <string name="error_synchronization">المزامنة فشلت</string>
+    <string name="error_json">هل تطبيق الملاحظات (Nextcloud Notes) مفعل على الخادم؟</string>
+    <string name="error_no_network">لا يتوفر اتصال</string>
+    <string name="error_unknown">حدث خطأ غير معروف.</string>
+
+    <!-- About -->
+    <string name="about_version_title">الإصدار</string>
+    <string name="about_version">تستخدم حالياً &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">مشرف</string>
+    <string name="about_developers_title"> المطورون</string>
+    <string name="about_translators_title"> المترجِمون</string>
+    <string name="about_translators_transifex">مجتمع Nextcloud على &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title"> المجَرِّبون</string>
+    <string name="about_source_title">الشفرة المصدرية</string>
+    <string name="about_source">هذا المشروع مستضاف على گت هاب: &lt;  a href=\"%1$s\">
+%1$s&lt;/a></string>
+    <string name="about_issues_title">المشاكل</string>
+    <string name="about_issues">يمكنك الإبلاغ عن الأخطاء, ترشيح مزايا أوطلب تحسين على GitHub issue tracker: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">تَرجِم</string>
+    <string name="about_translate">إنضم إلى فريق Nextcloud على Transifex وساعد في ترجمة هذا التطبيق: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title"> رخصة التطبيق</string>
+    <string name="about_app_license">التطبيق مسجل تحت شهادة جنو العامة الاصدار 3+</string>
+    <string name="about_app_license_button">عرض الرخصة</string>
+    <string name="about_icons_disclaimer_title"> الأيقونات</string>
+    <string name="about_icons_disclaimer">&lt; p> اصل الايقونة صنعت بواسطة %1$s&lt; /p> جميع الايقونات الاخرى استخدمت بواسطة هذا هذا التطبيق تكون &lt;</string>
+    <string name="about_credits_tab_title">الشكر ل</string>
+    <string name="about_contribution_tab_title">المساهمة</string>
+    <string name="about_license_tab_title"> الرخصة</string>
+
+    <!-- Widgets -->
+    <string name="widget_note_list_title">قائمة الملاحظات</string>
+    <string name="widget_note_list_placeholder">لا ملاحظات</string>
+    <string name="widget_single_note_title">ملاحظة مفردة
+</string>
+    <string name="widget_single_note_placeholder_tv">الملاحظة غير موجودة
+</string>
+    <string name="widget_create_note">انشاء ملاحظة</string>
+    <string name="widget_not_logged_in">الرجاء تسجيل الدخول قبل إستخدامك لهذه الأداة</string>
+    <string name="widget_entry_fav_contentDescription">تُستخدم أيقونة النجمة للإشارة إلى عنصر كعنصر مفضل</string>
+    <string name="widget_app_launcher_contentDescription">يطلق التطبيق</string>
+
+    <string name="activity_select_single_note">اختيار الملاحظة</string>
+
+    <!-- Shortcuts -->
+    <string name="shortcut_create_long">انشاء ملاحظة جديدة</string>
+
+    <!-- These values should not be translatable. They should be migrated at some point.  -->
+    <string name="pref_value_font_normal">عادي</string>
+    <string name="pref_value_wifi_and_mobile">مزامنة على الوايفاي و بيانات الهاتف</string>
+    <string name="pref_value_lock">الحماية بكلمة السر</string>
+
+    <string name="simple_error">خطأ</string>
+    <string name="simple_close">إغلاق</string>
+    <string name="simple_copy">أنسخ</string>
+    <string name="simple_exception">استثناء</string>
+    <string name="copied_to_clipboard">تم النسخ إلى الحافظة</string>
+    <string name="pin_to_homescreen">تثبيت الى الشاشة الرئيسية</string>
+    <string name="note_has_been_deleted">هذه الملاحظة مُسحت</string>
+    <string name="add_account">أضف حسابا</string>
+    <string name="category_music">الموسيقى</string>
+    <string name="category_movies">الأفلام</string>
+    <string name="category_movie">فلم</string>
+    <string name="category_work">العمل</string>
+    <string name="account_already_imported">تم بالفعل استيراد الحساب</string>
+    <string name="no_notes_yet">لا ملاحظات حاليا</string>
+    <string name="no_notes_yet_description">اضغط  علامة +  لانشاء ملاحظة جديدة </string>
+    <string name="could_not_load_preview_two_digit_numbered_list">تعذر تحميل المعاينة. الرجاء التحقق مما إذا كان هناك عنصر قائمة مكون من رقمين بدون محتوى.</string>
+    <string name="simple_more">المزيد</string>
+    <string name="simple_move">نقل</string>
+    <string name="checkbox_could_not_be_toggled">تعذر تبديل خانة الاختيار.</string>
+    <string name="bulk_notes_restored">استعد %1$d ملاحظات</string>
+    <string name="category_readonly">القراءة فقط</string>
+    <string name="no_category">لا تصنيف</string>
+    <string name="add_category">اضف %1$s</string>
+    <string name="simple_checkbox">مربع</string>
+    <string name="unlock_notes">فتح قفل الملاحظات</string>
+    <string name="simple_beta">تجريبي</string>
+    <string name="could_not_copy_to_clipboard">لم يستطع النسخ الى الحافظة</string>
+    <string name="error_dialog_title">آه لا، ماذا الان؟🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">الرجاء محاولة اجبار اغلاق التطبيق واعادة تشغيله، ربما هنالك خطأ في الاتصال مع تطبيق نيكست كلاود nextcloud</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">اذا تكررت المشكلة، حاول تنظيف مساحة التخزين في التطبيقين كلاهما: 
+نيكست كلاود nextcloud، نيكست كلاود ملاحظات nextcloud notes لحل هذه المشكلة.</string>
+    <string name="error_dialog_tip_clear_storage">يمكنك مسح التخزين عن طريق فتح معلومات التطبيق واختيار التخزين ← مسح التخزين.</string>
+    <string name="error_dialog_tip_files_outdated">تطبيقك نيكست كلاود (Nexcloud) يبدو انه مهمل (لم يحدث منذ زمن). رجاءا زُر بلي ستور او اف-درويد (f-droid) لتحصل على اخر اصدار.</string>
+    <string name="error_dialog_tip_files_force_stop">يبدو أن هناك خطأ ما في تطبيق Nextcloud الخاص بك. يرجى محاولة فرض إيقاف كلا من تطبيق Nextcloud وتطبيق Nextcloud Notes.</string>
+    <string name="error_dialog_tip_files_delete_storage">إذا لم يساعد إيقافهم بالقوة ، فيمكنك محاولة مسح تخزين كلا التطبيقين.</string>
+    <string name="error_dialog_timeout_instance">لم يكن هناك استجابة من الخادم الخاص بك في الوقت المحدد. يرجى التأكد من أن الخادم الخاص بك يعمل بشكل جيد.</string>
+    <string name="error_dialog_timeout_toggle">تحقق من اتصالك بالشبكة. أحياناُ، يمكن أن يساعد إيقاف بيانات الهاتف المحمول أو إيقاف تشغيل Wi-Fi وتشغيله مرة أخرى.</string>
+    <string name="error_dialog_check_server">لم تكن استجابة الخادم الخاص بك صحيحة. يرجى التحقق مما إذا كان يمكنك الوصول إلى ملاحظاتك عبر واجهة الويب.</string>
+    <string name="error_dialog_check_server_logs">هناك مشكلة في إعداد Nextcloud الخاص بك. يرجى إلقاء نظرة على ملفات سجل الخادم.</string>
+    <string name="error_dialog_check_maintenance">يرجى التحقق مما إذا كان خادم Nextcloud الخاص بك ليس في وضع الصيانة حاليًا.</string>
+    <string name="error_dialog_insufficient_storage">خادم Nextcloud الخاص بك ليس لديه مساحة تخزين فارغة متبقية. يرجى حذف بعض الملفات لمزامنة التغييرات المحلية الخاصة بك في السحابة الخاصة بك.</string>
+    <string name="error_dialog_contact_us">من فضلك لا تتردد في الاتصال بنا إذا استمرت المشاكل. يمكنك العثور على معلومات الاتصال الخاصة بنا في قسم \"حول\" في الشريط الجانبي.</string>
+    <string name="error_dialog_we_need_info">نحتاج إلى المعلومات الفنية التالية لمساعدتك:</string>
+    <string name="error_dialog_server_app_enabled">يرجى التأكد من تثبيت وتمكين تطبيق \"Notes\" على خادمك.</string>
+    <string name="error_dialog_redirect">استجاب خادمك برمز حالة HTTP 302 ، مما يعني أنك لم تقم بتثبيت تطبيق Notes على الخادم الخاص بك أو أنه تم تكوين شيء ما بشكل خاطئ. يمكن أن يحدث هذا بسبب التجاوزات المخصصة في ملف htaccess أو تطبيقات Nextcloud مثل عميل OID.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">يرجى تعطيل جميع تحسينات البطارية لـ Nextcloud وتطبيق Notes.</string>
+    <string name="added_content">\"%1$s\" أضيفت</string>
+    <string name="shared_text_empty">كان النص المشارك فارغًا</string>
+    <string name="append_to_note">إلحاق بالملاحظة</string>
+    <string name="change_note_title">تغيير عنوان الملاحظة</string>
+    <string name="menu_edit_title">تحرير العنوان</string>
+    <string name="settings_branding">وسم</string>
+    <string name="settings_gridview">عرض شبكي 🆕</string>
+    <string name="simple_security">الأمان</string>
+    <string name="simple_appearance">المظهر</string>
+    <string name="simple_synchronization">المزامنة</string>
+    <string name="simple_behavior">السلوك</string>
+    <string name="share_multiple">شارك محتوى الملاحظات %1$d</string>
+    <string name="manage_accounts">إدارة الحسابات</string>
+    <string name="action_formatting_help">التنسيق</string>
+
+    <!-- Array: note modes -->
+    <string-array name="noteMode_entries">
+        <item>فتح في وضع التحرير</item>
+        <item>فتح في وضع المعاينة</item>
+        <item>تذكر آخر ما أخترته</item>
+    </string-array>
+
+    <!-- Array: font size -->
+    <string-array name="fontSize_entries">
+        <item>صغير</item>
+        <item>متوسط</item>
+        <item>كبير</item>
+    </string-array>
+
+    <!-- Array: background synchronization -->
+    <string-array name="sync_entries">
+        <item>إيقاف</item>
+        <item>15 دقيقة</item>
+        <item>ساعة</item>
+        <item>6 ساعات</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>فاتح</item>
+        <item>ليلي</item>
+        <item>إفتراضي النظام</item>
+    </string-array>
+
+    <!-- Plurals -->
+    <plurals name="ab_selected">
+        <item quantity="zero">%d محدد</item>
+        <item quantity="one">%d محدد</item>
+        <item quantity="two">%d محددان</item>
+        <item quantity="few">%d محددين</item>
+        <item quantity="many">%d محددين</item>
+        <item quantity="other">%d محدد</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="zero">حذف %1$d ملاحظة</item>
+        <item quantity="one">حذفت %1$d ملاحظة</item>
+        <item quantity="two">حذفت %1$d ملاحظة</item>
+        <item quantity="few">حذف %1$d ملاحظات</item>
+        <item quantity="many">حذف %1$d ملاحظات</item>
+        <item quantity="other">حذف %1$d ملاحظات</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">التنسيق القائم على السياق (المحتوى)</string>
+    <string name="formatting_help_cbf_body_1">يتمثل أحد أهداف التصميم الرئيسية لتطبيق Notes في توفير أداة خالية من التشتيت. على الرغم من أنك ستتمكن من تنسيق النصوص الخاصة بك باستخدام Markdown. بالنسبة للعديد من الأمثلة المذكورة أدناه ، يمكنك استخدام الاختصارات حتى تتمكن من تنسيق ملاحظاتك دون كتابة الرموز أدناه.</string>
+    <string name="formatting_help_cbf_body_2">ما عليك سوى تحديد نطاق من النص أو النقر على المؤشر في أي موضع وستحصل على قائمة منبثقة تحتوي على بجوار الإدخالات الافتراضية %1$s, %2$s, %3$s إدخالات مثل %4$s أو %5$s.</string>
+
+    <string name="formatting_help_text_title">نص</string>
+    <string name="formatting_help_text_body">من السهل جدًا كتابة بعض الكلمات %1$sعريضة%1$s وبعض الكلمات %2$sمائلة%2$s بإستخدام Markdown. يمكنك %3$sشخط%3$s بعض الكلمات كما يمكنك أيضا [وصل بـ Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">قوائم</string>
+    <string name="formatting_help_lists_body_1">في بعض الأحيان تريد قوائم مرقمة:</string>
+    <string name="formatting_help_lists_body_2">واحد</string>
+    <string name="formatting_help_lists_body_3">إثنان</string>
+    <string name="formatting_help_lists_body_4">ثلاثة</string>
+    <string name="formatting_help_lists_body_5">في بعض الأحيان تريد نقاطًا نقطية:</string>
+    <string name="formatting_help_lists_body_6">ابدأ سطرًا بشرطة</string>
+    <string name="formatting_help_lists_body_7">وإذا كانت لديك نقاط فرعية ، فضع مسافتين قبل الشرطة أو النجمة:</string>
+    <string name="formatting_help_lists_body_8">هكذا</string>
+    <string name="formatting_help_lists_body_9">وهكذا</string>
+
+    <string name="formatting_help_checkboxes_title">مربعات الاختيار</string>
+    <string name="formatting_help_checkboxes_body_1">لإنشاء مربع اختيار ، استخدم قائمة متبوعة بأقواس</string>
+    <string name="formatting_help_checkboxes_body_2">عنصر 1</string>
+    <string name="formatting_help_checkboxes_body_3">عنصر 2</string>
+
+    <string name="formatting_help_structured_documents_title">وثائق منظمة</string>
+    <string name="formatting_help_structured_documents_body_1">من المفيد أحيانًا أن يكون لديك مستويات مختلفة من العناوين لبناء مستنداتك. تبدأ الأسطر ب %1$s لإنشاء العناوين. تعدد %2$s في صف يشير إلى أحجام عناوين أصغر.</string>
+    <string name="formatting_help_structured_documents_body_2">هذا عنوان من الدرجة الثالثة</string>
+    <string name="formatting_help_structured_documents_body_3">يمكنك إستخدام واحد %1$s على طول حتى %2$s ستة لأحجام العناوين المختلفة.</string>
+    <string name="formatting_help_structured_documents_body_4">إذا كنت ترغب في اقتباس أحد، فاستخدم الحرف %1$s قبل السطر:</string>
+    <string name="formatting_help_structured_documents_body_5">الخيال أكثر أهمية من المعرفة. المعرفة محدودة. يطوق الخيال العالم.</string>
+    <string name="formatting_help_structured_documents_body_6">- البرت اينشتاين</string>
+
+    <string name="formatting_help_code_title">الرمز</string>
+    <string name="formatting_help_code_body_1">هناك العديد من الطرق المختلفة لتصميم التعليمات البرمجية باستخدام Markdown. إذا كان لديك كتل تعليمات برمجية مضمنة ، فلفها في backticks ( ` ) :</string>
+    <string name="formatting_help_code_body_2">يدعم Markdown أيضًا شيئًا يسمى سياج الكود ، والذي يسمح بخطوط متعددة بدون مسافة بادئة:</string>
+    <string name="formatting_help_code_body_3">وإذا كنت ترغب في استخدام تمييز بناء الجملة، فقم بتضمين اللغة البرمجية:</string>
+
+    <string name="formatting_help_unsupported_title">غير مدعوم</string>
+    <string name="formatting_help_unsupported_body_1">بينما نحاول تحسين الدعم لـ Markdown باستمرار ، هناك بعض الميزات التي لا تدعمها Notes حتى الآن:</string>
+    <string name="formatting_help_unsupported_body_2">الجداول</string>
+    <string name="formatting_help_unsupported_body_3">صور</string>
+    <string name="formatting_help_unsupported_body_4">إذا كنت مهتمًا بالمساهمة في دعم إحدى هذه الميزات ، فاتصل بنا عبر GitHub أو البريد الإلكتروني.</string>
+    <string name="simple_other">آخر</string>
+    <string name="sort_last_modified">ترتيب حسب تاريخ التعديل</string>
+    <string name="sort_alphabetically">الترتيب حسب الأبجدية</string>
+    <string name="error_action_open_battery_settings">إعدادات البطارية</string>
+    <string name="error_action_open_deck_info">افتح معلومات التطبيق</string>
+    <string name="error_action_open_network">اعدادات الشبكة</string>
+    <string name="no_other_accounts">لا يوجد لديك أي حسابات مكونة أخرى حتى الآن.</string>
+</resources>
