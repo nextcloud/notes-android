@@ -144,6 +144,7 @@
     <string name="error_dialog_we_need_info">Potrebne su nam sljedeće tehničke informacije kako bismo vam pomogli:</string>
     <string name="error_dialog_server_app_enabled">Provjerite jeste li instalirali i omogućili aplikaciju „Notes” na svom poslužitelju.</string>
     <string name="error_dialog_redirect">Vaš je poslužitelj vratio šifru statusa HTTP 302, što znači da aplikacija Notes nije instalirana na poslužitelju ili postoji pogreška u konfiguraciji. To mogu uzrokovati prilagođena prepisivanja u datoteci .htaccess ili određene aplikacije u Nextcloudu, kao što je OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Onemogućite sve optimizacije baterije za aplikacije Nextcloud i Notes.</string>
     <string name="added_content">Dodano „%1$s”</string>
     <string name="shared_text_empty">Dijeljen tekst je prazan</string>
     <string name="append_to_note">Dodaj bilješci</string>
@@ -193,6 +194,12 @@
         <item quantity="few">Odabrano je %d</item>
         <item quantity="other">Odabrano je %d</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Izbrisana %1$d bilješka</item>
+        <item quantity="few">Izbrisano %1$d bilješki</item>
+        <item quantity="other">Izbrisano %1$d bilješki</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
@@ -242,5 +249,8 @@
     <string name="simple_other">Ostalo</string>
     <string name="sort_last_modified">Razvrstaj prema datumu izmjene</string>
     <string name="sort_alphabetically">Razvrstaj po abecedi</string>
+    <string name="error_action_open_battery_settings">Postavke baterije</string>
+    <string name="error_action_open_deck_info">Otvori informacije o aplikaciji</string>
     <string name="error_action_open_network">Postavke mreže</string>
-    </resources>
+    <string name="no_other_accounts">Nemate konfiguriranih računa.</string>
+</resources>
