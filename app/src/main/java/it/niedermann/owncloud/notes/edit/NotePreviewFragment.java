@@ -35,9 +35,13 @@ import com.yydcdut.markdown.syntax.text.TextFactory;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteLinksUtils;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
+import it.niedermann.owncloud.notes.shared.util.text.NoteLinksProcessor;
+import it.niedermann.owncloud.notes.shared.util.text.TextProcessorChain;
+import it.niedermann.owncloud.notes.shared.util.text.WwwLinksProcessor;
 
 import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.searchAndColor;
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.CHECKBOX_CHECKED_MINUS;
@@ -46,7 +50,6 @@ import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.CHECKBOX_UNC
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.CHECKBOX_UNCHECKED_STAR;
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.parseCompat;
 import static it.niedermann.owncloud.notes.shared.util.NoteLinksUtils.extractNoteRemoteId;
-import static it.niedermann.owncloud.notes.shared.util.NoteLinksUtils.replaceNoteLinksWithDummyUrls;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
@@ -165,11 +168,13 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                             }
                         })
                         .build());
+
+        TextProcessorChain chain = defaultTextProcessorChain(note);
         try {
-            binding.singleNoteContent.setText(parseCompat(markdownProcessor, replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
+            binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-            binding.singleNoteContent.setText(replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId())));
+            binding.singleNoteContent.setText(chain.apply(note.getContent()));
             Toast.makeText(binding.singleNoteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
@@ -205,11 +210,12 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
             try {
+                TextProcessorChain chain = defaultTextProcessorChain(note);
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
                 db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
                     note = db.getNote(note.getAccountId(), note.getId());
                     changedText = note.getContent();
-                    binding.singleNoteContent.setText(parseCompat(markdownProcessor, replaceNoteLinksWithDummyUrls(note.getContent(), db.getRemoteIds(note.getAccountId()))));
+                    binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);
                 });
                 db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
@@ -226,5 +232,12 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public void applyBrand(int mainColor, int textColor) {
         super.applyBrand(mainColor, textColor);
         binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+    }
+
+    private TextProcessorChain defaultTextProcessorChain(DBNote note) {
+        TextProcessorChain chain = new TextProcessorChain();
+        chain.add(new NoteLinksProcessor(db.getRemoteIds(note.getAccountId())));
+        chain.add(new WwwLinksProcessor());
+        return chain;
     }
 }
