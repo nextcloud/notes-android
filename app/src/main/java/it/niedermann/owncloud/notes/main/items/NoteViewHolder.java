@@ -45,6 +45,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener) {
         super(v);
         this.noteClickListener = noteClickListener;
+        this.setIsRecyclable(false);
     }
 
     @CallSuper
