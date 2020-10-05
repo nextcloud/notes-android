@@ -1,0 +1,2 @@
+- 🌎 Language updates
+- 🐞 Fix crash when rotating device

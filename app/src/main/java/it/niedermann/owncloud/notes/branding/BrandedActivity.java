@@ -10,7 +10,9 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import it.niedermann.owncloud.notes.R;
@@ -50,7 +52,10 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void applyBrandToPrimaryToolbar(@NonNull Toolbar toolbar) {
+    public void applyBrandToPrimaryToolbar(@NonNull AppBarLayout appBarLayout, @NonNull Toolbar toolbar) {
+        // FIXME Workaround for https://github.com/stefan-niedermann/nextcloud-notes/issues/889
+        appBarLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
+
         final Drawable overflowDrawable = toolbar.getOverflowIcon();
         if (overflowDrawable != null) {
             overflowDrawable.setColorFilter(colorAccent, PorterDuff.Mode.SRC_ATOP);
@@ -63,5 +68,4 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
             toolbar.setNavigationIcon(navigationDrawable);
         }
     }
-
 }

@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Modalità di visualizzazione delle note</string>
-    <string name="settings_theme_title">Tema scuro</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Carattere a spaziatura fissa</string>
     <string name="settings_font_size">Dimensione carattere</string>
     <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">Altro</string>
     <string name="simple_move">Sposta</string>
     <string name="checkbox_could_not_be_toggled">La casella di selezione non può essere commutata.</string>
-    <string name="bulk_notes_deleted">Eliminate %1$d note</string>
     <string name="bulk_notes_restored">Ripristinate %1$d note</string>
     <string name="category_readonly">Sola lettura</string>
     <string name="no_category">Nessuna categoria</string>
@@ -131,7 +130,7 @@
     <string name="error_dialog_title">Oh no - Cosa succede adesso? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prova a forzare la chiusura dell\'applicazione e riavviarla nuovamente. Potrebbe essersi verificato un problema di connessione all\'applicazione Nextcloud. </string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se il problema persiste, prova a cancellare l\'archiviazione di entrambe le applicazioni Nextcloud e Nextcloud Notes per risolver il problema.</string>
-    <string name="error_dialog_tip_clear_storage">Puoi a cancellare l\'archiviazione aprendo le impostazioni di Android → App → Nextcloud / Nextcloud Notes → Archiviazione → Cancella archiviazione</string>
+    <string name="error_dialog_tip_clear_storage">Puoi a cancellare l\'archiviazione aprendo le informazioni dell\'applicazione e selezionando Archiviazione → Cancella archiviazione.</string>
     <string name="error_dialog_tip_files_outdated">La tua applicazioni di Nextcloud sembra essere datata. Visita il Play Store o F-Droid per ottenere l\'ultima versione.</string>
     <string name="error_dialog_tip_files_force_stop">Sembra che ci sia un problema con la tua applicazione di Nextcloud. Prova a fermare entrambe le applicazioni Nextcloud e Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Se fermarle non aiuta, puoi provare a cancellare l\'archiviazione di entrambe le applicazioni.</string>
@@ -145,6 +144,7 @@
     <string name="error_dialog_we_need_info">Ci servono le seguenti informazioni tecniche per aiutarti:</string>
     <string name="error_dialog_server_app_enabled">Assicurati di aver installato e abilitato l\'applicazione \"Note\" sul tuo server.</string>
     <string name="error_dialog_redirect">Il tuo server ha risposto con un codice di stato HTTP 302, che implica che non hai installato l\'applicazione Note sul tuo server o qualcosa non è configurato correttamente. Questo può essere causato da configurazioni personalizzate nel file .htaccess o da applicazioni di Nextcloud come OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Disabilita tutte le ottimizzazioni della batteria per le applicazioni Nextcloud e Note.</string>
     <string name="added_content">Aggiunto \"%1$s\"</string>
     <string name="shared_text_empty">Il testo condiviso era vuoto</string>
     <string name="append_to_note">Aggiungi a nota</string>
@@ -192,6 +192,10 @@
     <plurals name="ab_selected">
         <item quantity="one">%d selezionato</item>
         <item quantity="other">%d selezionati</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Eliminata %1$d nota</item>
+        <item quantity="other">Eliminate %1$d note</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
@@ -243,4 +247,8 @@
     <string name="simple_other">Altro</string>
     <string name="sort_last_modified">Ordina per data di modifica</string>
     <string name="sort_alphabetically">Ordine alfabetico</string>
+    <string name="error_action_open_battery_settings">Impostazioni batteria</string>
+    <string name="error_action_open_deck_info">Apri informazioni applicazione</string>
+    <string name="error_action_open_network">Impostazioni di rete</string>
+    <string name="no_other_accounts">Non hai configurato ancora alcun account.</string>
 </resources>

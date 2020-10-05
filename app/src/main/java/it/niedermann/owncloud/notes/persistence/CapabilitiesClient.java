@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import it.niedermann.owncloud.notes.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 @WorkerThread
 public class CapabilitiesClient {

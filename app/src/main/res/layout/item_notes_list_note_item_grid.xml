@@ -5,7 +5,9 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:focusable="true">
+    android:focusable="true"
+    app:cardBackgroundColor="@color/appbar"
+    app:cardCornerRadius="@dimen/spacer_1x">
 
     <LinearLayout
         android:id="@+id/wrapper"
@@ -51,27 +53,6 @@
             android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/noteCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacer_2x"
-                    android:layout_marginEnd="0dp"
-                    android:ellipsize="middle"
-                    android:textColor="?android:textColorPrimary"
-                    android:textSize="@dimen/secondary_font_size"
-                    app:chipBackgroundColor="@color/primary"
-                    app:chipStrokeColor="@color/defaultBrand"
-                    app:chipStrokeWidth="1dp"
-                    tools:maxLength="50"
-                    tools:text="@tools:sample/lorem/random" />
-            </FrameLayout>
-
-            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -93,6 +74,35 @@
                     android:layout_marginEnd="4dp"
                     android:baseline="14dp"
                     app:srcCompat="@drawable/ic_sync_blue_18dp" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/noteCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="@dimen/spacer_2x"
+                    android:ellipsize="middle"
+                    android:padding="@dimen/spacer_1hx"
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/secondary_font_size"
+                    app:chipBackgroundColor="@color/primary"
+                    app:chipEndPadding="@dimen/spacer_1x"
+                    app:chipMinHeight="0dp"
+                    app:chipStartPadding="@dimen/spacer_1x"
+                    app:chipStrokeColor="@color/defaultBrand"
+                    app:chipStrokeWidth="1dp"
+                    app:ensureMinTouchTargetSize="false"
+                    app:textEndPadding="0dp"
+                    app:textStartPadding="0dp"
+                    tools:maxLength="50"
+                    tools:text="@tools:sample/lorem/random" />
             </FrameLayout>
         </LinearLayout>
     </LinearLayout>

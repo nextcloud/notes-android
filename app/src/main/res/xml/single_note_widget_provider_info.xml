@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/widget_single_note"
-    android:configure="it.niedermann.owncloud.notes.android.activity.SelectSingleNoteActivity"
+    android:configure="it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidgetConfigurationActivity"
     android:minHeight="110dp"
     android:minWidth="180dp"
     android:minResizeHeight="40dp"

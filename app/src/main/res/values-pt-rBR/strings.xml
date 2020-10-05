@@ -9,6 +9,7 @@
     <string name="action_settings">Configurações</string>
     <string name="action_trashbin">Anotações excluídas</string>
     <string name="action_search">Pesquisar</string>
+    <string name="action_sorting_method">Método de ordenação</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Salvar</string>
@@ -26,6 +27,9 @@
     <string name="menu_preview">Prever</string>
     <string name="menu_share">Compartilhar</string>
 
+    <string name="search_in_category">Pesquisar em %1$s</string>
+    <string name="search_in_all">Pesquisar todas as notas</string>
+
     <string name="change_category_title">Escolha uma categoria</string>
 
     <string name="listview_updated_today">Hoje</string>
@@ -37,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Modo de exibição de notas</string>
-    <string name="settings_theme_title">Tema escuro</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title"> Fonte monospaçada</string>
     <string name="settings_font_size">Tamanho da fonte</string>
     <string name="settings_wifi_only">Sincronizar somente por Wi-Fi</string>
@@ -115,7 +119,6 @@
     <string name="simple_more">Mais</string>
     <string name="simple_move">Mover</string>
     <string name="checkbox_could_not_be_toggled">Não foi possível alternar a caixa de seleção.</string>
-    <string name="bulk_notes_deleted"> %1$d notas excluídas</string>
     <string name="bulk_notes_restored">%1$d notas restauradas</string>
     <string name="category_readonly">Somente leitura</string>
     <string name="no_category">Sem categorias</string>
@@ -127,7 +130,7 @@
     <string name="error_dialog_title">Oh não - E agora? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Tente forçar o fechamento do aplicativo e reinicie-o novamente. Pode ter havido uma conexão incorreta com o aplicativo Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema persistir, tente limpar o armazenamento dos dois aplicativos: Nextcloud e Anotações Nextcloud para resolver esse problema.</string>
-    <string name="error_dialog_tip_clear_storage">Você pode limpar o armazenamento abrindo as configurações do Android → Aplicativos → Nextcloud / Anotações Nextcloud → Armazenamento → Limpar armazenamento.</string>
+    <string name="error_dialog_tip_clear_storage">Você pode limpar o armazenamento abrindo as informações do aplicativo e selecionando Armazenamento → Limpar Armazenamento</string>
     <string name="error_dialog_tip_files_outdated">Seu aplicativo Nextcloud parece estar desatualizado. Visite a Play Store ou o F-Droid para obter a versão mais recente.</string>
     <string name="error_dialog_tip_files_force_stop">Parece que algo está errado com seu aplicativo Nextcloud. Tente forçar a parada de ambos, o aplicativo Nextcloud e o aplicativo Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Se forçar a parada deles não ajuda, tente limpar o armazenamento dos dois aplicativos.</string>
@@ -141,15 +144,22 @@
     <string name="error_dialog_we_need_info">Precisamos das seguintes informações técnicas para ajudá-lo:</string>
     <string name="error_dialog_server_app_enabled">Verifique se você instalou e ativou o aplicativo \"Notes\" no seu servidor.</string>
     <string name="error_dialog_redirect">Seu servidor respondeu com um código de status HTTP 302, o que implica que você não instalou o aplicativo Notes no servidor ou que algo está configurado incorretamente. Isso pode ser causado por alterações no arquivo .htaccess ou por aplicativos como o Client OID.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Desative todas as otimizações de bateria do Nextcloud e do aplicativo Notes.</string>
     <string name="added_content">\"%1$s\" adicionado</string>
     <string name="shared_text_empty">O texto compartilhado estava vazio</string>
     <string name="append_to_note">Anexar à nota</string>
+    <string name="change_note_title">Alterar o título da nota</string>
+    <string name="menu_edit_title">Editar título</string>
     <string name="settings_branding">Marcação</string>
+    <string name="settings_gridview">Exibição em grade 🆕</string>
     <string name="simple_security">Segurança</string>
     <string name="simple_appearance">Aparência</string>
     <string name="simple_synchronization">Sincronização</string>
+    <string name="simple_behavior">Comportamento</string>
     <string name="share_multiple">Compartilhar o conteúdo de %1$d notas</string>
     <string name="manage_accounts">Gerenciar contas</string>
+    <string name="action_formatting_help">Formatação</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir em modo de edição</item>
@@ -183,11 +193,62 @@
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d selecionados</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$d anotação excluída</item>
+        <item quantity="other">%1$d anotações excluídas</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formatação baseada em contexto</string>
+    <string name="formatting_help_cbf_body_1">Um dos principais objetivos de design do aplicativo Notes é fornecer uma ferramenta sem distrações. Então você pode formatar seus textos com o Markdown. Para vários dos exemplos mencionados abaixo, você pode usar atalhos para formatar suas anotações sem digitar os códigos abaixo.</string>
+    <string name="formatting_help_cbf_body_2">Basta selecionar um intervalo de texto ou tocar no cursor em qualquer posição e você obterá um menu pop-up que contém ao lado das entradas padrão %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
 
     <string name="formatting_help_text_title">Texto</string>
+    <string name="formatting_help_text_body">É muito fácil fazer algumas palavras %1$snegritas%1$s e outras %2$sitálicas%2$s com Markdown. Você pode %3$sriscar%3$salgumas palavras e até [linkar para o Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Listas</string>
+    <string name="formatting_help_lists_body_1">Às vezes você deseja listas numeradas:</string>
+    <string name="formatting_help_lists_body_2">Um</string>
+    <string name="formatting_help_lists_body_3">Dois</string>
+    <string name="formatting_help_lists_body_4">Três</string>
+    <string name="formatting_help_lists_body_5">Algumas vezes você pode querer marcações:</string>
+    <string name="formatting_help_lists_body_6">Começar uma linha com um hífen</string>
+    <string name="formatting_help_lists_body_7">E se você tiver subpontos, coloque dois espaços antes do traço ou estrela:</string>
+    <string name="formatting_help_lists_body_8">Como isso</string>
+    <string name="formatting_help_lists_body_9">E isso</string>
+
     <string name="formatting_help_checkboxes_title">Caixas de seleção</string>
+    <string name="formatting_help_checkboxes_body_1">Para criar uma caixa de seleção, use uma lista seguida por colchetes</string>
+    <string name="formatting_help_checkboxes_body_2">Item 1</string>
+    <string name="formatting_help_checkboxes_body_3">Item 2</string>
+
+    <string name="formatting_help_structured_documents_title">Documentos estruturados</string>
+    <string name="formatting_help_structured_documents_body_1">Às vezes, é útil ter diferentes níveis de títulos para estruturar seus documentos. Iniciar linhas com um %1$spara criar cabeçalhos. Vários %2$s em sequência indicam tamanhos de cabeçalho menores. </string>
+    <string name="formatting_help_structured_documents_body_2">Este é um cabeçalho de terceira camada</string>
+    <string name="formatting_help_structured_documents_body_3">Você pode usar um %1$sem todo o trecho até seis %2$spara diferentes tamanhos de cabeçalho .</string>
+    <string name="formatting_help_structured_documents_body_4">Se você quiser citar alguém, use o caractere %1$s antes da linha:</string>
+    <string name="formatting_help_structured_documents_body_5">Imaginação é mais importante que conhecimento. O conhecimento é limitado. A imaginação dá voltas no mundo.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
     <string name="formatting_help_code_title">Código</string>
+    <string name="formatting_help_code_body_1">Existem muitas maneiras diferentes de estilizar o código com o Markdown. Se você tiver blocos de códigos embutidos, envolva-os em barras de proteção:</string>
+    <string name="formatting_help_code_body_2">O Markdown também suporta algo chamado código de cercas, que permite várias linhas sem recuo:</string>
+    <string name="formatting_help_code_body_3">E se você quiser usar destaque de sintaxe, inclua a linguagem:</string>
+
     <string name="formatting_help_unsupported_title">Não suportado</string>
+    <string name="formatting_help_unsupported_body_1">Embora tentemos melhorar continuamente o suporte ao Markdown, há alguns recursos que ainda não são suportados pelo Notes:</string>
+    <string name="formatting_help_unsupported_body_2">Tabelas</string>
     <string name="formatting_help_unsupported_body_3">Imagens</string>
+    <string name="formatting_help_unsupported_body_4">Se você estiver interessado em contribuir com suporte para um desses recursos, entre em contato conosco via GitHub ou E-Mail.</string>
     <string name="simple_other">Outro</string>
-    </resources>
+    <string name="sort_last_modified">Ordenar por data de modificação</string>
+    <string name="sort_alphabetically">Ordenar alfabeticamente</string>
+    <string name="error_action_open_battery_settings">Configurações da bateria</string>
+    <string name="error_action_open_deck_info">Abra as informações do Aplicativo</string>
+    <string name="error_action_open_network">Configurações da rede</string>
+    <string name="no_other_accounts">Você ainda não configurou nenhuma outra conta.</string>
+</resources>

@@ -9,25 +9,26 @@
     <string name="action_settings">Nustatymai</string>
     <string name="action_trashbin">Ištrinti užrašai</string>
     <string name="action_search">Ieškoti</string>
+    <string name="action_sorting_method">Išdėstymo būdas</string>
     <string name="simple_cancel">Atsisakyti</string>
     <string name="simple_edit">Taisyti</string>
     <string name="action_edit_save">Įrašyti</string>
     <string name="simple_about">Apie</string>
-    <string name="simple_accounts">Paskyros</string>
     <string name="simple_bold">Pusjuodis</string>
     <string name="simple_link">Nuoroda</string>
     <string name="simple_italic">Kursyvas</string>
     <string name="action_note_deleted">%1$s ištrinti</string>
     <string name="action_note_restored">%1$s atkurti</string>
     <string name="action_undo">Atšaukti</string>
-    <string name="action_drawer_open">atverti naršymą</string>
-    <string name="action_drawer_close">užverti naršymą</string>
     <string name="action_uncategorized">Nekategorizuotas</string>
     <string name="menu_delete">Ištrinti</string>
     <string name="menu_change_category">Kategorija</string>
     <string name="menu_favorite">Mėgstami</string>
     <string name="menu_preview">Peržiūra</string>
     <string name="menu_share">Bendrinti</string>
+
+    <string name="search_in_category">Ieškoti %1$s</string>
+    <string name="search_in_all">Ieškoti visuose užrašuose</string>
 
     <string name="change_category_title">Pasirinkite kategoriją</string>
 
@@ -40,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Užrašų rodinio veiksena</string>
-    <string name="settings_theme_title">Tamsus apipavidalinimas</string>
+    <string name="settings_theme_title">Apipavidalinimas</string>
     <string name="settings_font_title">Lygiaplotis šriftas</string>
     <string name="settings_font_size">Šrifto dydis</string>
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
@@ -51,11 +52,9 @@
 
     <!-- Error -->
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
+    <string name="error_synchronization">Sinchronizacija nepavyko</string>
     <string name="error_json">Ar Užrašų programėlė yra aktyvuota serveryje?</string>
     <string name="error_no_network">Nėra tinklo ryšio</string>
-    <string name="error_files_app">Ar esate įdiegę failų programėlę?</string>
-    <string name="error_token_mismatch">Nepavyksta prisijungti prie failų programėlės.</string>
-    <string name="error_insufficient_storage">Jūsų serverio saugykla yra pilna.</string>
     <string name="error_unknown">Įvyko nežinoma klaida.</string>
 
     <!-- About -->
@@ -119,22 +118,48 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Nepavyko įkelti peržiūros. Patikrinkite ar yra dviejų skaitmenų sąrašo su numeriais elementas be jokio turinio.</string>
     <string name="simple_more">Daugiau</string>
     <string name="simple_move">Perkelti</string>
-    <string name="error_files_app_version_too_old">Ar jūsų failų programėlė yra naujausios versijos?</string>
     <string name="checkbox_could_not_be_toggled">Nepavyko perjungti žymimojo langelio.</string>
-    <string name="bulk_notes_deleted">Ištrinti %1$d užrašai</string>
     <string name="bulk_notes_restored">Atkurti %1$d užrašai</string>
     <string name="category_readonly">Tik skaitymui</string>
     <string name="no_category">Be kategorijos</string>
     <string name="add_category">Pridėti %1$s</string>
     <string name="simple_checkbox">Žymimasis langelis</string>
+    <string name="unlock_notes">Atrakinti užrašus</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Nepavyko nukopijuoti į iškarpinę</string>
     <string name="error_dialog_title">O, ne - Kas dabar? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Pabandykite priverstinai uždaryti programą ir vėl paleiskite ją iš naujo. Galbūt buvo nepavyko užmegžti ryšį su „Nextcloud“ programa.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Jei problema išlieka, pabandykite išvalyti abiejų programų saugyklą: „Nextcloud“ ir „Nextcloud Notes“.</string>
+    <string name="error_dialog_tip_clear_storage">Saugyklą galite išvalyti atidarę programos nustatymus ir pasirinkdami Saugykla → Išvalyti saugyklą.</string>
+    <string name="error_dialog_tip_files_outdated">Panašu, kad jūsų „Nextcloud“ programos versija yra pasenusi. Norėdami gauti naujausią versiją, apsilankykite „Google Play“ parduotuvėje arba „F-Droid“.</string>
+    <string name="error_dialog_tip_files_force_stop">Atrodo, kad kažkas negerai su jūsų „Nextcloud“ programa. Pabandykite priverstinai sustabdyti programas: „Nextcloud“ ir „Nextcloud Notes“.</string>
+    <string name="error_dialog_tip_files_delete_storage">Jei priverstinis programos sustabdymas nepadėjo, galite pabandyti išvalyti abiejų programų saugyklas.</string>
+    <string name="error_dialog_timeout_instance">Jūsų serveris yra nepasiekiamas. Įsitikinkite, kad Jūsų programa veikia tinkamai.</string>
+    <string name="error_dialog_timeout_toggle">Pasitikrinkite interneto tinklo ryšį. Gali būti naudinga perjungti mobiliųjų duomenų arba „Wi-Fi“ ryšį.</string>
+    <string name="error_dialog_check_server">Atsakymas iš Jūsų serverio nebuvo teisingas. Patikrinkite, ar galite pasiekti savo užrašus naudodami žiniatinklio sąsają.</string>
+    <string name="error_dialog_check_server_logs">Kyla problemų dėl „Nextcloud“ programos nustatymų. Peržiūrėkite serverio sisteminio žurnalo įrašus.</string>
+    <string name="error_dialog_check_maintenance">Patikrinkite, ar jūsų „Nextcloud“ programa šiuo metu aptarnavimo režime.</string>
+    <string name="error_dialog_insufficient_storage">„Nextcloud“ programa nebeturi laisvos vietos saugykloje. Prašome, ištrinkite nereikalingus failus, kad lokalūs pakeitimai būtų sinchronizuoti su debesimi.</string>
+    <string name="error_dialog_contact_us">Jei problemos išlieka, susisiekite su mumis. Mūsų kontaktinę informaciją galite rasti šoninės juostos skyriuje Apie.</string>
     <string name="error_dialog_we_need_info">Norint jums padėti, mums reikia techninės informacijos:</string>
+    <string name="error_dialog_server_app_enabled">Įsitikinkite, kad įdiegėte ir įjungėte programą „Užrašai“ savo serveryje.</string>
+    <string name="error_dialog_redirect">Jūsų serverio atsakymas turi HTTP 302 klaidos kodą, tai reiškia, kad jūs neįdiegėte „Notes“ programos savo serveryje arba ji įdiegta netinkamai. Taip galėjo dėl nustatymų pakeitimų .htaccess faile arba „Nextcloud“ programos, tokios kaip OID klientas.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Išjunkite visus „Nextcloud“ ir „Notes“ programos akumuliatoriams optimizavimus.</string>
+    <string name="added_content">Pridėta \"%1$s\"</string>
+    <string name="shared_text_empty">Pasidalintas tekstas buvo tuščias</string>
+    <string name="append_to_note">Pridėti prie užrašų</string>
+    <string name="change_note_title">Pakeisti užrašo pavadinimą</string>
+    <string name="menu_edit_title">Redaguoti pavadinimą</string>
+    <string name="settings_branding">Prekės ženklas</string>
+    <string name="settings_gridview">Tinklelinis atvaizdavimas</string>
     <string name="simple_security">Saugumas</string>
     <string name="simple_appearance">Išvaizda</string>
     <string name="simple_synchronization">Sinchronizacija</string>
+    <string name="simple_behavior">Funkcionavimas</string>
+    <string name="share_multiple">Dalykitės %1$d užrašų turiniu</string>
     <string name="manage_accounts">Tvarkyti paskyras</string>
+    <string name="action_formatting_help">Formatavimas</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>
@@ -170,4 +195,57 @@
         <item quantity="many">%d pasirinkta</item>
         <item quantity="other">%d pasirinkta</item>
     </plurals>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">\'%1$s\'</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\\'%1$s\\\'</string>
+    <string name="formatting_help_codefence" translateable="false">\'\'\'</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```java skriptas</string>
+    <string name="formatting_help_cbf_title">Kontekstu pagrįstas formatavimas</string>
+    <string name="formatting_help_cbf_body_1">Pagrindinis „Notes“ programos dizaino tikslas yra pateikti dėmesio neblaškantį įrankį. Nors jūs galėsite formatuoti savo tekstus naudodami „Markdown“. Įvairiems žemiau pateiktiems pavyzdžiams Jūs galite naudoti nuorodas, tai leidžia formatuoti savo užrašus neįvedant žemiau esančių kodų.</string>
+    <string name="formatting_help_cbf_body_2">Tiesiog pasirinkite teksto diapazoną arba bakstelėkite žymeklį bet kurioje vietoje ir atsiras meniu, kuriame yra numatytieji įrašai %1$s, %2$s, %3$s, %4$s arba %5$s.</string>
+
+    <string name="formatting_help_text_title">Tekstas</string>
+    <string name="formatting_help_text_body">Jei reikia, lengvai galima %1$sparyškišnti%1$s ar %2$spakreipti%2$s ar %3$sperbraukti %3$satitinkamus  žodžius panaudojant Markdown.  </string>
+
+    <string name="formatting_help_lists_title">Sąrašai</string>
+    <string name="formatting_help_lists_body_1">Kai reikalingi sunumeruoti sąrašai:</string>
+    <string name="formatting_help_lists_body_2">Vienas</string>
+    <string name="formatting_help_lists_body_3">Du</string>
+    <string name="formatting_help_lists_body_4">Trys</string>
+    <string name="formatting_help_lists_body_5">Kai reikalinga pažymėtų taškų:</string>
+    <string name="formatting_help_lists_body_6">Pradėti liniją brūkšneliu</string>
+    <string name="formatting_help_lists_body_7">Ir jei turite papildomų taškų, prieš brūkšnį ar žvaigždutę padėkite du tarpus:</string>
+    <string name="formatting_help_lists_body_8">Taip</string>
+    <string name="formatting_help_lists_body_9">Ir taip</string>
+
+    <string name="formatting_help_checkboxes_title">Žymimieji langeliai</string>
+    <string name="formatting_help_checkboxes_body_1">Norėdami sukurti žymimajį langelį, naudokite sąrašą, po kurio pateikiamos skliaustuose</string>
+    <string name="formatting_help_checkboxes_body_2">Elementas 1</string>
+    <string name="formatting_help_checkboxes_body_3">Elementas 2</string>
+
+    <string name="formatting_help_structured_documents_title">Struktūrizuoti dokumentai</string>
+    <string name="formatting_help_structured_documents_body_1">Dokumentams susisteminti kartais naudinga turėti skirtingus antraščių lygius. Pradėkite eilutes su %1$s, kad sukurtumėte antraštes. Keli %2$s eilutėje žymi mažesnius antraščių dydžius.</string>
+    <string name="formatting_help_structured_documents_body_2">Tai yra trečios pakopos antraštė</string>
+    <string name="formatting_help_structured_documents_body_3">Skirtingų dydžių antraštėms galite naudoti nuo vieno %1$s iki iki šešių %2$s.</string>
+    <string name="formatting_help_structured_documents_body_4">Jei norite ką nors pacituoti, naudokite %1$s simbolį prieš eilutę:</string>
+    <string name="formatting_help_structured_documents_body_5">Vaizduotė yra svarbiau nei žinios. Žinios yra ribotos. Vaizduotė supa visą pasaulį.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albertas Einšteinas</string>
+
+    <string name="formatting_help_code_title">Kodas</string>
+    <string name="formatting_help_code_body_1">Yra daugybė skirtingų būdų, kaip keisti kodo stilių panaudojant „Markdown“. </string>
+    <string name="formatting_help_code_body_2">„Markdown“ taip pat palaiko vadinamąjį kodo aptvėrimą, kuris leidžia sudaryti kelias eilutes be įtraukų:</string>
+    <string name="formatting_help_code_body_3">Jei norite naudoti sintaksės paryškinimą, įtraukite kalbą:</string>
+
+    <string name="formatting_help_unsupported_title">Nepalaikoma</string>
+    <string name="formatting_help_unsupported_body_1">Nors mes nuolat stengiamės tobulinti „Markdown“ vystymą, yra keletas funkcijų, kurių dar nepalaiko „Notes“ programa:</string>
+    <string name="formatting_help_unsupported_body_2">Lentelės</string>
+    <string name="formatting_help_unsupported_body_3">Paveikslai</string>
+    <string name="formatting_help_unsupported_body_4">Jei norite prisidėti prie vienos iš šių funkcijų palaikymo, susisiekite su mumis naudodami „GitHub“ arba el. Paštą.</string>
+    <string name="simple_other">Kita</string>
+    <string name="sort_last_modified">Išrikiuokite pagal redagavimo datą</string>
+    <string name="sort_alphabetically">Išrikiuokite pagal abecėlę</string>
+    <string name="error_action_open_battery_settings">Akumuliatoriaus nustatymai</string>
+    <string name="error_action_open_deck_info">Atidaryti programos informaciją</string>
+    <string name="error_action_open_network">Tinklo nustatymai</string>
+    <string name="no_other_accounts">Dar nesukonfigūravote kitų paskyrų.</string>
 </resources>

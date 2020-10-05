@@ -9,19 +9,17 @@
     <string name="action_settings">Asetukset</string>
     <string name="action_trashbin">Poistetut muistiinpanot</string>
     <string name="action_search">Etsi</string>
+    <string name="action_sorting_method">Järjestystapa</string>
     <string name="simple_cancel">Peruuta</string>
     <string name="simple_edit">Muokkaa</string>
     <string name="action_edit_save">Tallenna</string>
     <string name="simple_about">Tietoja</string>
-    <string name="simple_accounts">Tilit</string>
     <string name="simple_bold">Lihavoitu</string>
     <string name="simple_link">Linkki</string>
     <string name="simple_italic">Kursivoitu</string>
     <string name="action_note_deleted">Poistettiin %1$s</string>
     <string name="action_note_restored">Palautettiin %1$s</string>
     <string name="action_undo">Kumoa</string>
-    <string name="action_drawer_open">avaa navigaatio</string>
-    <string name="action_drawer_close">sulje navigaatio</string>
     <string name="action_uncategorized">Luokittelemattomat</string>
     <string name="menu_delete">Poista</string>
     <string name="menu_change_category">Luokka</string>
@@ -40,7 +38,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Muistiinpanojen esitystapa</string>
-    <string name="settings_theme_title">Tumma teema</string>
+    <string name="settings_theme_title">Teema</string>
     <string name="settings_font_title">Tasalevyinen fontti</string>
     <string name="settings_font_size">Fontin koko</string>
     <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
@@ -51,10 +49,9 @@
 
     <!-- Error -->
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
+    <string name="error_synchronization">Synkronointi epäonnistui</string>
     <string name="error_json">Onko Notes sovellus aktivoitu palvelimella?</string>
     <string name="error_no_network">Ei verkkoyhteyttä</string>
-    <string name="error_files_app">Oletko asentanut tiedostot sovelluksen?</string>
-    <string name="error_insufficient_storage">Palvelimen tallennustila on täynnä.</string>
     <string name="error_unknown">Tapahtui tuntematon virhe.</string>
 
     <!-- About -->
@@ -108,21 +105,37 @@
     <string name="category_movies">Elokuvat</string>
     <string name="category_movie">Elokuva</string>
     <string name="category_work">Työ</string>
+    <string name="account_already_imported">Tili on jo tuotu</string>
     <string name="no_notes_yet">Ei muistiinpanoja</string>
     <string name="no_notes_yet_description">Paina + luodaksesi uuden muistiinpanon</string>
     <string name="simple_more">Lisää</string>
     <string name="simple_move">Siirrä</string>
-    <string name="bulk_notes_deleted">Poistettiin %1$d muistiinpanoa</string>
     <string name="bulk_notes_restored">Palautettiin %1$d muistiinpanoa</string>
     <string name="category_readonly">Vain luku</string>
     <string name="add_category">Lisää %1$s</string>
     <string name="simple_checkbox">Valintaruutu</string>
     <string name="simple_beta">Beta</string>
     <string name="could_not_copy_to_clipboard">Ei voitu kopioida leikepöydälle</string>
+    <string name="error_dialog_title">Voi ei - Mitä nyt? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Yritä pakottaa sovelluksen sulkeminen ja käynnistä se uudelleen. Nextcloud-sovellukseen on saattanut olla virheellinen yhteys.</string>
+    <string name="error_dialog_tip_clear_storage">Voit tyhjentää tallennustilan avaamalla sovelluksen tiedot ja valitsemalla Tallennustila → Tyhjennä tallennustila.</string>
+    <string name="error_dialog_tip_files_outdated">Nextcloud-sovelluksesi on vanhentunut. Lataa uusin version Play Storesta tai F-Droidista.</string>
+    <string name="error_dialog_tip_files_delete_storage">Jos pakotettu lopettaminen ei auta, voit yrittää tyhjentää sovelluksien tallennustilan.</string>
+    <string name="error_dialog_timeout_instance">Palvelimen aikakatkaisu. Varmista, että se on toiminnassa.</string>
+    <string name="error_dialog_check_server_logs">Nextcloud-asennuksessasi on ongelma. Katso lisätietoja palvelimen lokitiedostoista.</string>
+    <string name="error_dialog_check_maintenance">Varmista, ettei Nextcloud-palvelin ole ylläpitotilassa.</string>
+    <string name="error_dialog_insufficient_storage">Nextcloud-palvelimellasi ei ole vapaata tallennustilaa. Poista tiedostoja, jotta paikallisten muutosten synkronointi pilveen onnistuu.</string>
+    <string name="error_dialog_we_need_info">Tarvitsemme seuraavat tekniset tiedot auttaaksemme sinua:</string>
+    <string name="added_content">Lisätty \"%1$s\"</string>
+    <string name="settings_branding">Brändäys</string>
+    <string name="settings_gridview">Ruudukkonäkymä 🆕</string>
     <string name="simple_security">Tietoturva</string>
     <string name="simple_appearance">Ulkoasu</string>
     <string name="simple_synchronization">Synkronointi</string>
+    <string name="simple_behavior">Toiminta</string>
     <string name="manage_accounts">Tilien hallinta</string>
+    <string name="action_formatting_help">Muotoilu</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Avaa muokkaustilassa</item>
@@ -156,4 +169,31 @@
         <item quantity="one">%d valittu</item>
         <item quantity="other">%d valittu</item>
     </plurals>
-</resources>
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_text_title">Teksti</string>
+    <string name="formatting_help_lists_title">Luettelot</string>
+    <string name="formatting_help_lists_body_1">Joskus saatat haluta numeroituja luetteloita:</string>
+    <string name="formatting_help_lists_body_2">Yksi</string>
+    <string name="formatting_help_lists_body_3">Kaksi</string>
+    <string name="formatting_help_lists_body_4">Kolme</string>
+    <string name="formatting_help_lists_body_5">Toisinaan saatat haluta luettelomerkit:</string>
+    <string name="formatting_help_checkboxes_title">Valintaruudut</string>
+    <string name="formatting_help_checkboxes_body_2">Tietue 1</string>
+    <string name="formatting_help_checkboxes_body_3">Tietue 2</string>
+
+    <string name="formatting_help_structured_documents_title">Rakenteelliset asiakirjat</string>
+    <string name="formatting_help_code_title">Koodi</string>
+    <string name="formatting_help_unsupported_title">Ei tuettu</string>
+    <string name="formatting_help_unsupported_body_2">Taulukot</string>
+    <string name="formatting_help_unsupported_body_3">Kuvat</string>
+    <string name="simple_other">Muu</string>
+    <string name="sort_last_modified">Järjestä muokkauspäiväyksen mukaan</string>
+    <string name="sort_alphabetically">Järjestä aakkosjärjestyksen mukaan</string>
+    <string name="error_action_open_battery_settings">Akkuasetukset</string>
+    <string name="error_action_open_deck_info">Avaa sovelluksen tiedot</string>
+    <string name="error_action_open_network">Verkkoasetukset</string>
+    </resources>

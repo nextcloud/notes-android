@@ -9,7 +9,7 @@
     <string name="action_settings">Ajustes</string>
     <string name="action_trashbin">Notas eliminadas</string>
     <string name="action_search">Buscar</string>
-    <string name="action_sorting_method">Método de ordenación</string>
+    <string name="action_sorting_method">Método de orden</string>
     <string name="simple_cancel">Cancelar</string>
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
@@ -28,7 +28,7 @@
     <string name="menu_share">Compartir</string>
 
     <string name="search_in_category">Buscar en %1$s</string>
-    <string name="search_in_all">Busar en todas las notas</string>
+    <string name="search_in_all">Buscar en todas las notas</string>
 
     <string name="change_category_title">Escoge una categoría</string>
 
@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Modo de visualización para notas</string>
-    <string name="settings_theme_title">Tema oscuro</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Tipo de letra monoespaciado</string>
     <string name="settings_font_size">Tamaño de fuente</string>
     <string name="settings_wifi_only">Sincronizar solo sobre Wi-Fi</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
     <string name="checkbox_could_not_be_toggled">No se ha podido cambiar el estado del checkbox</string>
-    <string name="bulk_notes_deleted">Borradas %1$d notas</string>
     <string name="bulk_notes_restored">Restauradas %1$d notas</string>
     <string name="category_readonly">Solo lectura</string>
     <string name="no_category">Sin categoría</string>
@@ -131,7 +130,7 @@
     <string name="error_dialog_title">Oh no - ¿Ahora qué? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Por favor, intenta forzar el cierre de la aplicación y vuelve a abrirla. Es posible que haya habido un problema de conexión con la aplicación Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persiste, intente borrar el almacenamiento de ambas aplicaciones: Nextcloud y Nextcloud Notas para solucionar este problema.</string>
-    <string name="error_dialog_tip_clear_storage">Puede limpiar el almacenamiento abriendo los ajustes de android → Apps → Nextcloud / Nextcloud Notas → Almacenamiento → Limpiar almacenamiento.</string>
+    <string name="error_dialog_tip_clear_storage">Puedes limpiar el almacenamiento abriendo la información de la app y seleccionando Almacenamiento → Eliminar datos.</string>
     <string name="error_dialog_tip_files_outdated">Su aplicación Nextcloud parece que está desactualizada. Por favor visite la Play Store o F-Droid para conseguir la versión más reciente.</string>
     <string name="error_dialog_tip_files_force_stop">Algo parece que va mal con su aplicación Nextcloud. Por favor intente forzar el paro de ambas aplicaciones, Nextcloud y Nextcloud notas.</string>
     <string name="error_dialog_tip_files_delete_storage">Si pararlas no ayuda, puede intentar borrar el almacenamiento de ambas aplicaciones.</string>
@@ -144,13 +143,14 @@
     <string name="error_dialog_contact_us">Por favor, no dude en contactar con nosotros si el problema persiste. Puede encontrar nuestra información de contacto en la sección acerca de en la barra lateral.</string>
     <string name="error_dialog_we_need_info">Necesitamos la siguiente información técnica para ayudarle:</string>
     <string name="error_dialog_server_app_enabled">Por favor, asegúrate de que has instalado y activado la app «Notas» en tu servidor.</string>
-    <string name="error_dialog_redirect">Tu servidor respondió con el código de estado HTTP 302, lo que implica que no está instalada la aplicación Deck en su servidor o que algo está mal configurado. Esto puede estar causado por anulaciones personalizadas en un  archivo .htaccess o por aplicaciones de Nexcloud como OID Client. </string>
+    <string name="error_dialog_redirect">Tu servidor respondió con el código de estado HTTP 302, lo que implica que no está instalada la aplicación Notas en su servidor o que algo está mal configurado. Esto puede estar causado por anulaciones personalizadas en un archivo .htaccess o por aplicaciones de Nextcloud como OID Client. </string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Por favor, desactiva todas las optimizaciones de la batería para Nextcloud y la app de Notas.</string>
     <string name="added_content">Se ha añadido «%1$s»</string>
     <string name="shared_text_empty">El texto compartido estaba vacío</string>
     <string name="append_to_note">Añadir a la nota</string>
     <string name="change_note_title">Cambiar título de la nota</string>
     <string name="menu_edit_title">Editar título</string>
-    <string name="settings_branding">Branding</string>
+    <string name="settings_branding">Marca</string>
     <string name="settings_gridview">Vista en cuadrícula 🆕</string>
     <string name="simple_security">Seguridad</string>
     <string name="simple_appearance">Apariencia</string>
@@ -193,6 +193,10 @@
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d seleccionados</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Eliminada %1$d nota</item>
+        <item quantity="other">Eliminadas %1$d notas</item>
+    </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
@@ -201,7 +205,7 @@
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Formato basado en el contexto</string>
     <string name="formatting_help_cbf_body_1">Un objetivo principal de diseño de la app Notas es ofrecer una herramienta libre de distracciones. Aunque podrás formatear tus textos con Markdown. Para varios de los ejemplos mencionados debajo, puedes usar atajos para formatear las notas sin escribir los códigos.</string>
-    <string name="formatting_help_cbf_body_2">Simplemente, selecciona texto o pulsa en el cursor en cualquier posición y aparecerá un menú emergente que contiene junto a las entradas por defecto %1$s, %2$s,   %3$sotras como %4$s o %5$s,</string>
+    <string name="formatting_help_cbf_body_2">Simplemente, selecciona texto o pulsa en el cursor en cualquier posición y aparecerá un menú emergente que contiene junto a las entradas por defecto %1$s, %2$s,   %3$s otras como %4$s o %5$s,</string>
 
     <string name="formatting_help_text_title">Text</string>
     <string name="formatting_help_text_body">Es muy sencillo poner palabras en %1$snegrita%1$s y otras en %2$scursiva%2$s con Markdown. Puedes %3$stachar%3$s algunas palabras e incluso [enlace a Nextcloud](https://nextcloud.com).</string>
@@ -225,7 +229,7 @@
     <string name="formatting_help_structured_documents_title">Documentos estructurados</string>
     <string name="formatting_help_structured_documents_body_1">A veces es útil tener diferentes niveles de encabezados para estructuras tus documentos. Comienza tus líneas con una %1$s para crear encabezados. Varios %2$s seguidos denotan tamaños menores de encabezado.</string>
     <string name="formatting_help_structured_documents_body_2">Esto es un encabezado de tercer nivel</string>
-    <string name="formatting_help_structured_documents_body_3">Puedes usar desde un %1$s hasta seis %2$s  para diferentes tamaños de encabezados.</string>
+    <string name="formatting_help_structured_documents_body_3">Puedes usar desde uno %1$s hasta seis %2$s  para diferentes tamaños de encabezados.</string>
     <string name="formatting_help_structured_documents_body_4">Si quieres citar a alguien, usa el carácter %1$s antes de la línea:</string>
     <string name="formatting_help_structured_documents_body_5">La imaginación es más importante que el conocimiento. El conocimiento es limitado. La imaginación rodea el mundo.</string>
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
@@ -239,5 +243,12 @@
     <string name="formatting_help_unsupported_body_1">Aunque tratamos de mejorar continuamente el soporte de Markdown, hay unas cuantas características que Notas todavía no soporta:</string>
     <string name="formatting_help_unsupported_body_2">Tablas</string>
     <string name="formatting_help_unsupported_body_3">Imágenes</string>
+    <string name="formatting_help_unsupported_body_4">Si está interesadx en contribuir en alguna de estas funciones, no dude en ponerse en contacto con nosotrxs a través de GitHub o por correo electrónico.</string>
     <string name="simple_other">Otro</string>
-    </resources>
+    <string name="sort_last_modified">Ordenar por fecha de modificación</string>
+    <string name="sort_alphabetically">Ordenar alfabéticamente</string>
+    <string name="error_action_open_battery_settings">Ajustes de batería</string>
+    <string name="error_action_open_deck_info">Abrir info de la app</string>
+    <string name="error_action_open_network">Configuración de red</string>
+    <string name="no_other_accounts">Aún no ha configurado ninguna otra cuenta.</string>
+</resources>

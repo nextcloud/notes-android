@@ -9,25 +9,26 @@
     <string name="action_settings">設定</string>
     <string name="action_trashbin">ゴミ箱</string>
     <string name="action_search">検索</string>
+    <string name="action_sorting_method">並べ替え方法</string>
     <string name="simple_cancel">キャンセル</string>
     <string name="simple_edit">編集</string>
     <string name="action_edit_save">保存</string>
     <string name="simple_about">バージョン情報</string>
-    <string name="simple_accounts">アカウント</string>
     <string name="simple_bold">太字</string>
     <string name="simple_link">リンク</string>
     <string name="simple_italic">斜体</string>
     <string name="action_note_deleted">%1$sを削除しました</string>
     <string name="action_note_restored">%1$s を復元しました</string>
     <string name="action_undo">元に戻す</string>
-    <string name="action_drawer_open">ナビゲーションを開く</string>
-    <string name="action_drawer_close">ナビゲーションを閉じる</string>
     <string name="action_uncategorized">未分類</string>
     <string name="menu_delete">削除</string>
     <string name="menu_change_category">カテゴリ</string>
     <string name="menu_favorite">お気に入り</string>
     <string name="menu_preview">プレビュー</string>
     <string name="menu_share">共有</string>
+
+    <string name="search_in_category">%1$sを検索</string>
+    <string name="search_in_all">全てのノートを検索</string>
 
     <string name="change_category_title">カテゴリを選択</string>
 
@@ -40,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">ノートの表示モード</string>
-    <string name="settings_theme_title">ダークテーマ</string>
+    <string name="settings_theme_title">テーマ</string>
     <string name="settings_font_title">モノスペースフォント</string>
     <string name="settings_font_size">フォントサイズ</string>
     <string name="settings_wifi_only">Wi-Fi接続時のみ同期する</string>
@@ -54,9 +55,6 @@
     <string name="error_synchronization">同期に失敗</string>
     <string name="error_json">ノートアプリはサーバー上で有効になっていますか?</string>
     <string name="error_no_network">ネットワークに接続されていません</string>
-    <string name="error_files_app">ファイルアプリはインストールしましたか？</string>
-    <string name="error_token_mismatch">ファイルアプリに接続できません。</string>
-    <string name="error_insufficient_storage">サーバストレージに空きがありません</string>
     <string name="error_unknown">不明なエラーが発生しました</string>
 
     <!-- About -->
@@ -120,9 +118,7 @@
     <string name="could_not_load_preview_two_digit_numbered_list">プレビューをロードできませんでした。中身のない二桁番号のリストアイテムがないかチェックしてください。</string>
     <string name="simple_more">さらに表示</string>
     <string name="simple_move">移動</string>
-    <string name="error_files_app_version_too_old">ファイルアプリは最新版ですか?</string>
     <string name="checkbox_could_not_be_toggled">チェックボックスを切り替えることができません</string>
-    <string name="bulk_notes_deleted">ノート%1$dを削除</string>
     <string name="bulk_notes_restored">ノート%1$dを復元しました</string>
     <string name="category_readonly">読み込み専用</string>
     <string name="no_category">カテゴリ無し</string>
@@ -134,7 +130,7 @@
     <string name="error_dialog_title">おやまあ、どうしたことでしょう？🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">アプリの強制終了と再起動を試みてください。Nextcloudアプリへの接続が正しくない接続があったかも知れません。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">この問題が続くようでしたら、下記両方のアプリでストレージをクリアして問題が解決できるか試してください：Nextcloud と Nextcloud Notes</string>
-    <string name="error_dialog_tip_clear_storage">以下の方法でストレージをクリアできます：アンドロイドの設定を開く → アプリ → Nextcloud / Nextcloud Notes → ストレージ → ストレージをクリア.</string>
+    <string name="error_dialog_tip_clear_storage">以下の方法でストレージをクリアできます：アプリ情報→ストレージ→ストレージをクリア.</string>
     <string name="error_dialog_tip_files_outdated">Nextcloudアプリが古いようです。プレイストアかF-Droidから最新版を入手してください。</string>
     <string name="error_dialog_tip_files_force_stop">Nextcloudアプリで何か不具合が発生しました。NextcloudアプリとNextcloud Notesアプリの両方を強制終了してください。</string>
     <string name="error_dialog_tip_files_delete_storage">強制終了で改善されない場合は、両方のアプリのストレージをクリアしてみてください。</string>
@@ -146,12 +142,24 @@
     <string name="error_dialog_insufficient_storage">あなたのNextcloudサーバのストレージに空き容量がありません。ローカルの変更をクラウドに同期するにはいくつかファイルを削除してください。</string>
     <string name="error_dialog_contact_us">問題が継続する場合はお問い合わせください。我々の連絡先はサイドバーのaboutセクションにかかれています。</string>
     <string name="error_dialog_we_need_info">サポートには下記技術情報が必要です：</string>
+    <string name="error_dialog_server_app_enabled">ご利用のサーバーに ”Notes” プラグインアプリがインストールされ、有効になっていることを確認してください。</string>
     <string name="error_dialog_redirect">サーバがHTTPステータスコード 302を返しました。これはNotesアプリがインストールされていないか、構成が誤っていることを意味します。.htaccessファイルのカスタムオーバーライドやOIDクライアントのようなNextcloudアプリが原因の可能性があります。</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">NextcloudとNotesアプリに対してバッテリー最適化をすべて無効にしてください。</string>
+    <string name="added_content">\"%1$s\"に追加</string>
+    <string name="shared_text_empty">共有テキストは空です</string>
+    <string name="append_to_note">ノートに追記</string>
+    <string name="change_note_title">ノートタイトルを変更</string>
+    <string name="menu_edit_title">タイトルを編集</string>
     <string name="settings_branding">ブランディング</string>
+    <string name="settings_gridview">グリッド表示 🆕</string>
     <string name="simple_security">セキュリティ</string>
     <string name="simple_appearance">表示</string>
     <string name="simple_synchronization">同期</string>
+    <string name="simple_behavior">表示形式</string>
+    <string name="share_multiple"> %1$dノートの内容を共有</string>
     <string name="manage_accounts">アカウント管理</string>
+    <string name="action_formatting_help">フォーマット</string>
+
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>
@@ -184,8 +192,61 @@
     <plurals name="ab_selected">
         <item quantity="other">%d 選択済</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="other">ノート%1$dを削除しました</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">コンテキストに基づいた書式設定 </string>
+    <string name="formatting_help_cbf_body_1">Notesアプリの重要な設計目標は、注意力を阻害しないツールを提供することです。その為にMarkdownを使ってテキストを修飾できるようにしました。以下は、コードを入力することなくショートカットを使ってメモを書式設定する例です。</string>
+    <string name="formatting_help_cbf_body_2">テキストの範囲を選択するか、カーソルを任意の位置でタップすると、デフォルトのエントリ%1$s、%2$s、%3$sや%4$s、%5$sなどのエントリの横にあるポップアップメニューが表示されます。</string>
 
     <string name="formatting_help_text_title">テキスト</string>
+    <string name="formatting_help_text_body">マークダウンで単語を %1$s太字%1$s にしたり、%2$s斜体%2$s するのは簡単です。 その他、単語を%3$s打ち消し %3$s たり、[Nextcloudへリンク](https://nextcloud.com)することもできます。</string>
+
+    <string name="formatting_help_lists_title">リスト</string>
+    <string name="formatting_help_lists_body_1">番号付きのリストにしたい場合には:</string>
+    <string name="formatting_help_lists_body_2">一つ目</string>
+    <string name="formatting_help_lists_body_3">2つめ</string>
+    <string name="formatting_help_lists_body_4">3つめ</string>
+    <string name="formatting_help_lists_body_5">箇条書きにしたい場合には:</string>
+    <string name="formatting_help_lists_body_6">ダッシュで行を開始する</string>
+    <string name="formatting_help_lists_body_7">また、小項目がある場合は、ダッシュや星の前にスペースを2つ入れます:</string>
+    <string name="formatting_help_lists_body_8">このように</string>
+    <string name="formatting_help_lists_body_9">そしてこれ</string>
+
+    <string name="formatting_help_checkboxes_title">チェックボックス</string>
+    <string name="formatting_help_checkboxes_body_1">チェックボックスを作成するには、リストの後に角括弧を使用します</string>
+    <string name="formatting_help_checkboxes_body_2">アイテム1</string>
+    <string name="formatting_help_checkboxes_body_3">アイテム2</string>
+
+    <string name="formatting_help_structured_documents_title">構造化ドキュメント</string>
+    <string name="formatting_help_structured_documents_body_1">文書を構造化するために、さまざまなレベルの見出しがあると便利なことがあります。見出しを作るには、行頭から%1$sで書き始めて見出しを作成します。複数の%2$sを使うと見出しのサイズが小さくなります。</string>
+    <string name="formatting_help_structured_documents_body_2">これは見出し3です</string>
+    <string name="formatting_help_structured_documents_body_3">1つ目の %1$sから%2$sまで、6つのさまざまな見出しの大きさを使うことができます。</string>
+    <string name="formatting_help_structured_documents_body_4">なにかを引用したい場合は、行頭に%1$s文字を使用します:</string>
+    <string name="formatting_help_structured_documents_body_5">知識より想像力が重要です。知識は限られていますが、想像力は世界を駆け巡ります。</string>
+    <string name="formatting_help_structured_documents_body_6">- アルバート・アインシュタイン</string>
+
+    <string name="formatting_help_code_title">コード</string>
+    <string name="formatting_help_code_body_1">Markdownのコード書式にはさまざまな方法があります。インラインのコードブロックにする場合は、バッククオートでくくります:</string>
+    <string name="formatting_help_code_body_2">Markdownは、コードフェンシングと呼ばれるものもサポートしています。これにより、インデントなしで複数行に適用できます:</string>
+    <string name="formatting_help_code_body_3">言語毎の構文の強調表示を使用する場合は、言語指定します:</string>
+
     <string name="formatting_help_unsupported_title">サポートされていません。</string>
+    <string name="formatting_help_unsupported_body_1">継続的にMarkdownのサポートを改善しようとしていますが、Notesではまだサポートされていない機能がいくつかあります。</string>
+    <string name="formatting_help_unsupported_body_2">表</string>
     <string name="formatting_help_unsupported_body_3">画像</string>
-    </resources>
+    <string name="formatting_help_unsupported_body_4">これらの機能の1つでもサポートの貢献に関心がある場合は、GitHubまたは電子メールで私たちに連絡してください。</string>
+    <string name="simple_other">その他</string>
+    <string name="sort_last_modified">更新日付でソート</string>
+    <string name="sort_alphabetically">アルファベット順にソート</string>
+    <string name="error_action_open_battery_settings">バッテリー設定</string>
+    <string name="error_action_open_deck_info">アプリ情報を開く</string>
+    <string name="error_action_open_network">ネットワーク設定</string>
+    <string name="no_other_accounts">他のアカウントはまだ設定されていません。</string>
+</resources>

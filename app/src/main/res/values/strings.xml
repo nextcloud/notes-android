@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Display mode for notes</string>
-    <string name="settings_theme_title">Dark theme</string>
+    <string name="settings_theme_title">Theme</string>
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Font size</string>
     <string name="settings_wifi_only">Sync only on Wi-Fi</string>
@@ -156,8 +156,6 @@
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
     <string name="checkbox_could_not_be_toggled">Checkbox could not be toggled.</string>
-    <string name="bulk_notes_deleted">Deleted %1$d notes</string>
-    <string name="bulk_notes_restored">Restored %1$d notes</string>
     <string name="category_readonly">Read only</string>
     <string name="no_category">No category</string>
     <string name="add_category">Add %1$s</string>
@@ -168,7 +166,7 @@
     <string name="error_dialog_title">Oh no - What now? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Please try to force close the app and restart it again. There might have been an incorrect connection to the Nextcloud app.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">If the issue persists, try to clear the storage of both apps: Nextcloud and Nextcloud Notes to solve this issue.</string>
-    <string name="error_dialog_tip_clear_storage">You can clear the storage by opening android settings → Apps → Nextcloud / Nextcloud Notes → Storage → Clear storage.</string>
+    <string name="error_dialog_tip_clear_storage">You can clear the storage by opening the app info and selecting Storage → Clear storage.</string>
     <string name="error_dialog_tip_files_outdated">Your Nextcloud app seems to be outdated. Please visit the Play Store or F-Droid to get the latest version.</string>
     <string name="error_dialog_tip_files_force_stop">Something seems to be wrong with your Nextcloud app. Please try to force stop both, the Nextcloud app and the Nextcloud Notes app.</string>
     <string name="error_dialog_tip_files_delete_storage">If force stopping them does not help, you can try to clear the storage of both apps.</string>
@@ -182,6 +180,7 @@
     <string name="error_dialog_we_need_info">We need the following technical information to help you:</string>
     <string name="error_dialog_server_app_enabled">Please make sure you have installed and enabled the "Notes" app on your server.</string>
     <string name="error_dialog_redirect">Your server did respond with a HTTP 302 status code, which implies, that you do not have installed the Notes app on your server or something is misconfigured. This can be caused by custom overrides in a .htaccess-file or by Nextcloud apps like OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Please disable all battery optimizations for Nextcloud and the Notes app.</string>
     <string name="added_content">Added "%1$s"</string>
     <string name="shared_text_empty">Shared text was empty</string>
     <string name="append_to_note">Append to note</string>
@@ -193,7 +192,6 @@
     <string name="simple_appearance">Appearance</string>
     <string name="simple_synchronization">Synchronization</string>
     <string name="simple_behavior">Behavior</string>
-    <string name="share_multiple">Share content of %1$d notes</string>
     <string name="manage_accounts">Manage accounts</string>
     <string name="action_formatting_help">Formatting</string>
 
@@ -229,6 +227,18 @@
     <plurals name="ab_selected">
         <item quantity="one">%d selected</item>
         <item quantity="other">%d selected</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Deleted one note</item>
+        <item quantity="other">Deleted %1$d notes</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Restored one note</item>
+        <item quantity="other">Restored %1$d notes</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Share content of %1$d note</item>
+        <item quantity="other">Share content of %1$d notes</item>
     </plurals>
 
     <!-- Formatting help -->
@@ -300,4 +310,8 @@
     <string name="simple_other">Other</string>
     <string name="sort_last_modified">Sort by modified date</string>
     <string name="sort_alphabetically">Sort by alphabet</string>
+    <string name="error_action_open_battery_settings">Battery settings</string>
+    <string name="error_action_open_deck_info">Open App info</string>
+    <string name="error_action_open_network">Network settings</string>
+    <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
 </resources>

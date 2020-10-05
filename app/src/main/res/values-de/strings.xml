@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Anzeigemodus für Notizen</string>
-    <string name="settings_theme_title">Dunkles Design</string>
+    <string name="settings_theme_title">Design</string>
     <string name="settings_font_title">Nichtproportionale Schriftart</string>
     <string name="settings_font_size">Schriftgröße</string>
     <string name="settings_wifi_only">Nur über WLAN synchronisieren</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">mehr</string>
     <string name="simple_move">Verschieben</string>
     <string name="checkbox_could_not_be_toggled">Kontrollkästchen konnte nicht umgeschaltet werden.</string>
-    <string name="bulk_notes_deleted">%1$d Notizen gelöscht</string>
     <string name="bulk_notes_restored">%1$dNotizen wiederhergestellt</string>
     <string name="category_readonly">Schreibgeschützt</string>
     <string name="no_category">Keine Kategorie</string>
@@ -130,11 +129,11 @@
     <string name="could_not_copy_to_clipboard">Konnte nicht in die Zwischenablage kopieren</string>
     <string name="error_dialog_title">Oh nein - Was jetzt? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Bitte versuchen Sie, das Schließen der App zu erzwingen und sie erneut zu starten. Möglicherweise bestand eine gestörte Verbindung zur Nextcloud-App.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Wenn das Problem weiterhin besteht, versuchen Sie, den Speicher von Nextcloud und Nextcloud Notes zu löschen, um das Problem zu beheben.</string>
-    <string name="error_dialog_tip_clear_storage">Sie können den Speicher löschen, indem Sie in den Android-Einstellungen → Apps → Nextcloud / Nextcloud Notes → Speicher → Speicher löschen wählen.</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Wenn das Problem weiterhin besteht, versuchen Sie, den Speicher von Nextcloud und Nextcloud Notes zu leeren, um das Problem zu beheben.</string>
+    <string name="error_dialog_tip_clear_storage">Sie können den Speicherinhalt leeren indem Sie die App öffnen und Speicher → Speicherinhalt löschen auswählen.</string>
     <string name="error_dialog_tip_files_outdated">Sie scheinen eine alte Version der Nextcloud-App installiert zu haben. Bitte besuchen Sie den Play Store oder F-Droid, um die neueste Version zu installieren.</string>
     <string name="error_dialog_tip_files_force_stop">Mit Ihrer Nextcloud-App scheint etwas nicht zu stimmen. Bitte versuchen Sie, sowohl die Nextcloud-App als auch die Nextcloud Notes-App anzuhalten.</string>
-    <string name="error_dialog_tip_files_delete_storage">Wenn das erzwungene Stoppen nicht hilft, können Sie versuchen, den Speicher beider Apps zu löschen.</string>
+    <string name="error_dialog_tip_files_delete_storage">Wenn das erzwungene Stoppen nicht hilft, können Sie versuchen, den Speicher beider Apps zu leeren.</string>
     <string name="error_dialog_timeout_instance">Der Server reagierte nicht in der üblichen Zeit. Bitte stellen Sie sicher, dass Ihre Instanz einwandfrei läuft.</string>
     <string name="error_dialog_timeout_toggle">Überprüfen Sie Ihre Netzwerkverbindung. Manchmal kann es hilfreich sein, die mobilen Daten oder das WLAN aus- und wieder einzuschalten.</string>
     <string name="error_dialog_check_server">Die Antwort Ihres Servers war falsch. Bitte überprüfen Sie, ob Sie über die Weboberfläche auf Ihre Notizen zugreifen können.</string>
@@ -145,6 +144,7 @@
     <string name="error_dialog_we_need_info">Wir benötigen die folgenden technischen Informationen, um Ihnen helfen zu können:</string>
     <string name="error_dialog_server_app_enabled">Bitte stellen Sie sicher, dass die „Notes“-App auf Ihrem Server installiert und aktiviert ist.</string>
     <string name="error_dialog_redirect">Ihr Server antwortet mit HTTP Status-Code 302. Dies bedeutet, dass entweder die Notes App nicht auf Ihrem Server installiert ist, oder eine Fehlkonfiguration vorliegt. Die Ursache kann im Überschreiben von Variablen in der .htaccess-Datei liegen, oder an Nextcloud Apps wie OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Bitte alle Batterieoptimierungen für Nextcloud und die Notes-App deaktivieren.</string>
     <string name="added_content">„%1$s“ hinzugefügt</string>
     <string name="shared_text_empty">Der geteilte Text war ohne Inhalt</string>
     <string name="append_to_note">An Notiz anhängen</string>
@@ -192,6 +192,10 @@
     <plurals name="ab_selected">
         <item quantity="one">%d ausgewählt</item>
         <item quantity="other">%d ausgewählt</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$d Notiz gelöscht</item>
+        <item quantity="other">%1$d Notizen gelöscht</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
@@ -243,4 +247,8 @@
     <string name="simple_other">Andere</string>
     <string name="sort_last_modified">Nach Änderungsdatum sortieren</string>
     <string name="sort_alphabetically">Alphabetisch sortieren</string>
+    <string name="error_action_open_battery_settings">Batterie-Einstellungen</string>
+    <string name="error_action_open_deck_info">App-Informationen öffnen</string>
+    <string name="error_action_open_network">Netzwerkeinstellungen</string>
+    <string name="no_other_accounts">Sie haben bislang keine weiteren Konten eingerichtet.</string>
 </resources>

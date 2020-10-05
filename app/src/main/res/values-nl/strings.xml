@@ -9,6 +9,7 @@
     <string name="action_settings">Instellingen</string>
     <string name="action_trashbin">Verwijder notities</string>
     <string name="action_search">Zoeken</string>
+    <string name="action_sorting_method">Sorteer methode</string>
     <string name="simple_cancel">Annuleren</string>
     <string name="simple_edit">Bewerken</string>
     <string name="action_edit_save">Opslaan</string>
@@ -29,8 +30,7 @@
     <string name="search_in_category">Zoeken in %1$s</string>
     <string name="search_in_all">Zoek in alle notities</string>
 
-    <string name="change_category_title">Kies een categorie
-</string>
+    <string name="change_category_title">Een categorie kiezen</string>
 
     <string name="listview_updated_today">Vandaag</string>
     <string name="listview_updated_yesterday">Gisteren</string>
@@ -41,10 +41,10 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Weergavemode voor notities</string>
-    <string name="settings_theme_title">Donker thema</string>
+    <string name="settings_theme_title">Thema</string>
     <string name="settings_font_title">Monospace lettertype</string>
     <string name="settings_font_size">Fontgrootte</string>
-    <string name="settings_wifi_only">Sync alleen met Wi-Fi</string>
+    <string name="settings_wifi_only">Alleen met Wi-Fi synchroniseren</string>
     <string name="settings_lock">Wachtwoordbeveiliging</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
 
@@ -53,9 +53,9 @@
     <!-- Error -->
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
-    <string name="error_json">is de Notities app op de server geactiveerd?</string>
+    <string name="error_json">Is de Notities app geactiveerd op de server?</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
-    <string name="error_unknown">Er trad een onbekende fout op.</string>
+    <string name="error_unknown">Een onbekende fout trad op.</string>
 
     <!-- About -->
     <string name="about_version_title">Versie</string>
@@ -90,22 +90,22 @@
     <string name="widget_entry_fav_contentDescription">\'Ster\'pictogram gebruikt om object als favoriet te markeren</string>
     <string name="widget_app_launcher_contentDescription">Start app</string>
 
-    <string name="activity_select_single_note">Selecteer notitie</string>
+    <string name="activity_select_single_note">Notitie selecteren</string>
 
     <!-- Shortcuts -->
-    <string name="shortcut_create_long">Maak een nieuwe notitie</string>
+    <string name="shortcut_create_long">Een nieuwe notitie maken</string>
 
     <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normaal</string>
-    <string name="pref_value_wifi_and_mobile">Sync met Wi-Fi en mobiele data</string>
+    <string name="pref_value_wifi_and_mobile">Met Wi-Fi en mobiele data synchroniseren</string>
     <string name="pref_value_lock">Wachtwoordbeveiliging</string>
 
     <string name="simple_error">Fout</string>
-    <string name="simple_close">Sluiten</string>
-    <string name="simple_copy">Kopiëren</string>
+    <string name="simple_close">Sluit</string>
+    <string name="simple_copy">Kopieër</string>
     <string name="simple_exception">Uitzondering</string>
     <string name="copied_to_clipboard">Gekopieerd naar het klembord</string>
-    <string name="pin_to_homescreen">Vastmaken op startscherm</string>
+    <string name="pin_to_homescreen">Vastzetten op startscherm</string>
     <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
     <string name="add_account">Account toevoegen</string>
     <string name="category_music">Muziek</string>
@@ -118,20 +118,19 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Kon geen voorbeeld laden. Controleer of er een lege genummerde lijst is met twee cijfers is.</string>
     <string name="simple_more">Meer</string>
     <string name="simple_move">Verplaatsen</string>
-    <string name="checkbox_could_not_be_toggled">Keuzevakje kon niet worden omgeschakeld.</string>
-    <string name="bulk_notes_deleted">Verwijderde %1$d notities</string>
+    <string name="checkbox_could_not_be_toggled">Selectievakjes kon niet worden omgeschakeld.</string>
     <string name="bulk_notes_restored">Herstelde %1$d notities</string>
     <string name="category_readonly">Alleen lezen</string>
     <string name="no_category">Geen categorie</string>
     <string name="add_category">Toevoegen %1$s</string>
-    <string name="simple_checkbox">Aanvinkvakje</string>
+    <string name="simple_checkbox">Selectievakje</string>
     <string name="unlock_notes">Ontgrendel notities</string>
     <string name="simple_beta">Bèta</string>
     <string name="could_not_copy_to_clipboard">Kon niet kopiëren naar het klembord</string>
     <string name="error_dialog_title">Oh nee - wat nu? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Probeer de app te sluiten en opnieuw te starten. Er was misschien een onjuiste verbinding met de Nextcloud-app.</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">Als het probleem blijft aanhouden, probeer dan de gegevensopslag van beide apps te wissen: van Nextcloud én van Nextcloud Notes.</string>
-    <string name="error_dialog_tip_clear_storage">Je kan de gegevensopslag wissen door in Android te gaan naar Instellingen → Apps → Nextcloud / Nextcloud Notes → Geheugen → Ruimte beheren → Gegevens verwijderen</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Als het probleem blijft aanhouden, probeer dan de gegevensopslag bij Nextcloud en de Nextcloud Notes apps te wissen.</string>
+    <string name="error_dialog_tip_clear_storage">Je kan de opslag leegmaken door in Android de app info te openen en kies dan Opslag →  Gegevens verwijderen.</string>
     <string name="error_dialog_tip_files_outdated">Je Nextcloud app lijkt te zijn verouderd. Download alstublieft de nieuwste versie in de Google Play Store of in F-Droid.</string>
     <string name="error_dialog_tip_files_force_stop">Er lijkt iets mis te zijn met je Nextcloud app. Probeer alstublieft de apps geforceerd af te sluiten, zowel de Nextcloud app als de Nextcloud Notes app.</string>
     <string name="error_dialog_tip_files_delete_storage">Als geforceerd afsluiten niet helpt, probeer dan van beide apps de gegevensopslag te wissen.</string>
@@ -140,22 +139,26 @@
     <string name="error_dialog_check_server">Je server gaf een onjuiste reactie. Controleer alstublieft of de Notes app in de web-interface wel goed werkt.</string>
     <string name="error_dialog_check_server_logs">Er is iets mis met je Nextcloud instellingen. Controleer alstublieft de server log bestanden.</string>
     <string name="error_dialog_check_maintenance">Controleer alstublieft of je Nextcloud instantie momenteel niet in onderhouds-modus draait.</string>
-    <string name="error_dialog_insufficient_storage">Je Nextcloud instantie heeft geen vrije ruimte meer. Verwijder alstublieft enkele bestanden om je lokale gegevens te kunnen synchroniseren.</string>
+    <string name="error_dialog_insufficient_storage">Je Nextcloud instantie heeft geen vrije ruimte meer. Verwijder enkele bestanden om je lokale gegevens te kunnen synchroniseren.</string>
     <string name="error_dialog_contact_us">Schroom alstublieft niet om contact met ons op te nemen als het probleem blijft aanhouden. Onze contactgegevens zijn te vinden in de About sectie in de zijbalk.</string>
     <string name="error_dialog_we_need_info">We hebben de volgende technische informatie nodig om je te kunnen helpen: </string>
     <string name="error_dialog_server_app_enabled">Zorg er alstublieft voor dat je de \"Notes\" app hebt geïnstalleerd en aangezet op jouw server.</string>
-    <string name="error_dialog_redirect">Je server heeft gereageerd met een HTTP 302-statuscode, wat inhoudt dat je de Deck-app niet op je server hebt geïnstalleerd of dat er iets verkeerd is geconfigureerd. Dit kan worden veroorzaakt door maatwerk aanpassingen in een .htaccess-bestand of door Nextcloud-apps zoals de OID Client.</string>
+    <string name="error_dialog_redirect">Je server heeft gereageerd met een HTTP 302-statuscode, wat inhoudt dat je de Notes-app niet op je server hebt geïnstalleerd of dat er iets verkeerd is geconfigureerd. Dit kan worden veroorzaakt door maatwerk aanpassingen in een .htaccess-bestand of door Nextcloud-apps zoals de OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Schakel de batterijoptimalisatie uit voor Nextcloud en de Notes app.</string>
     <string name="added_content">\"%1$s\" toegevoegd</string>
     <string name="shared_text_empty">Gedeelde tekst was leeg</string>
-    <string name="append_to_note">Achteraan toevoegen aan notitie</string>
+    <string name="append_to_note">Achteraan aan notitie toevoegen</string>
+    <string name="change_note_title">Notitie titel wijzigen</string>
+    <string name="menu_edit_title">Titel bewerken</string>
     <string name="settings_branding">Brandmerken</string>
+    <string name="settings_gridview">Rastweergave 🆕</string>
     <string name="simple_security">Beveiliging</string>
     <string name="simple_appearance">Uiterlijk</string>
     <string name="simple_synchronization">Synchronisatie</string>
     <string name="simple_behavior">Gedrag</string>
-    <string name="share_multiple">Deel de inhoud van %1$d notities</string>
+    <string name="share_multiple">Inhoud van %1$d notities delen</string>
     <string name="manage_accounts">Accounts beheren </string>
-    <string name="action_formatting_help">Formatteren</string>
+    <string name="action_formatting_help">Opmaak</string>
 
     <!-- Array: note modes -->
     <string-array name="noteMode_entries">
@@ -190,11 +193,62 @@
         <item quantity="one">%d geselecteerd</item>
         <item quantity="other">%d geselecteerd</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$d notitie verwijderd</item>
+        <item quantity="other">%1$d notities verwijderd</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Opmaat context gebaseerd</string>
+    <string name="formatting_help_cbf_body_1">Het ontwerpdoel van de Notes-app is om een afleidingsvrij hulpmiddel te bieden. Maar je kunt altijd je teksten opmaken met Markdown. Voor verschillende van de onderstaande voorbeelden kunt je snelcodes gebruiken, zodat je notities kunt opmaken zonder de onderstaande codes in te typen.</string>
+    <string name="formatting_help_cbf_body_2">Selecteer gewoon een tekstbereik of tik op een willekeurige positie op je cursor en je krijgt een pop-upmenu met naast de standaardvermeldingen %1$s, %2$s, %3$s ook meldingen zoals %4$s of %5$s.</string>
 
     <string name="formatting_help_text_title">Tekst</string>
-    <string name="formatting_help_checkboxes_title">Aanvinkvakjes</string>
+    <string name="formatting_help_text_body">Het is met Markdown makkelijk om sommige woorden %1$svergedrukt%1$s en andere woorden %2$scursief%2$s te maken. Je kunt enkele woorden %3$sdoorhalen%3$s en zelfs een [link to Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Lijsten</string>
+    <string name="formatting_help_lists_body_1">Soms wil je een genummerde lijst:</string>
+    <string name="formatting_help_lists_body_2">Een</string>
+    <string name="formatting_help_lists_body_3">Twee</string>
+    <string name="formatting_help_lists_body_4">drie</string>
+    <string name="formatting_help_lists_body_5">Soms wil je puntenlijsten:</string>
+    <string name="formatting_help_lists_body_6">Begin de regel met een streepje</string>
+    <string name="formatting_help_lists_body_7">En als je subpunten hebt, plaats dan twee spaties voor het streepje of de ster:</string>
+    <string name="formatting_help_lists_body_8">Vind dit leuk</string>
+    <string name="formatting_help_lists_body_9">En dit</string>
+
+    <string name="formatting_help_checkboxes_title">Selectievakjes</string>
+    <string name="formatting_help_checkboxes_body_1">Gebruik een lijst gevolgd door haakjes om een selectievakje te maken</string>
+    <string name="formatting_help_checkboxes_body_2">Object 1</string>
+    <string name="formatting_help_checkboxes_body_3">Object 2</string>
+
+    <string name="formatting_help_structured_documents_title">Gestructureerde documenten</string>
+    <string name="formatting_help_structured_documents_body_1">Soms is het handig om verschillende niveaus van koppen te hebben om documenten te structureren. Begin regels met een %1$s om koppen te maken. Meerdere %2$s op regel geven kleinere kopformaten aan.</string>
+    <string name="formatting_help_structured_documents_body_2">Dit is een derde niveau kop</string>
+    <string name="formatting_help_structured_documents_body_3">Je kunt een %1$s overal gebruiken tot %2$s zes voor verschillende kpformaten.</string>
+    <string name="formatting_help_structured_documents_body_4">Als je iemand wil citeren, gebruik het %1$s teken voor de regel:</string>
+    <string name="formatting_help_structured_documents_body_5">Verbeelding is belangrijker dan kennis. Kennis is beperkt. Verbeelding omsluit de wereld.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
     <string name="formatting_help_code_title">Code</string>
+    <string name="formatting_help_code_body_1">Er zijn veel verschillende manieren om code te markeren met Markdown. Als je inline codeblokken hebt, bed ze dan in m.b.v. backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown ondersteunt ook iets dat \"code fencing\" wordt genoemd, wat meerdere regels mogelijk maakt zonder inspringen:</string>
+    <string name="formatting_help_code_body_3">En als je syntaxisaccentuering wilt gebruiken, neemt dan deze taal op:</string>
+
     <string name="formatting_help_unsupported_title">Niet ondersteund</string>
+    <string name="formatting_help_unsupported_body_1">Markdown wordt ondersteunt en continu verbetert. Er zijn enkele functies die Notes nog niet ondersteund:</string>
+    <string name="formatting_help_unsupported_body_2">Tabellen</string>
     <string name="formatting_help_unsupported_body_3">Afbeeldingen</string>
+    <string name="formatting_help_unsupported_body_4">Als je een bijdrage wil leveren aan een van de functies, neem dan contact met ons op via GitHub of per E-mail.</string>
     <string name="simple_other">Ander</string>
-    </resources>
+    <string name="sort_last_modified">Op wijzigingsdatum sorteren</string>
+    <string name="sort_alphabetically">Op alfabet sorteren</string>
+    <string name="error_action_open_battery_settings">Batterij instellingen</string>
+    <string name="error_action_open_deck_info">Open App informatie</string>
+    <string name="error_action_open_network">Netwerk instellingen</string>
+    <string name="no_other_accounts">U heeft nog geen andere accounts geconfigureerd.</string>
+</resources>

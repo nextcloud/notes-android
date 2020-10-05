@@ -1,0 +1,2 @@
+- 🌎 Language updates
+- 🐞 Prevent CalledFromWrongThreadException

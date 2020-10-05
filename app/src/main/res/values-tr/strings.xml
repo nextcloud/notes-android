@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Notların görüntülenme kipi</string>
-    <string name="settings_theme_title">Koyu tema</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
     <string name="settings_font_size">Yazı boyutu</string>
     <string name="settings_wifi_only">Yalnız Wi-Fi ile eşitlensin</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">Daha Fazla</string>
     <string name="simple_move">Taşı</string>
     <string name="checkbox_could_not_be_toggled">İşaret kutusunun işareti değiştirilemedi.</string>
-    <string name="bulk_notes_deleted">%1$d not silindi</string>
     <string name="bulk_notes_restored">%1$dnot geri yüklendi</string>
     <string name="category_readonly">Salt okunur</string>
     <string name="no_category">Kategori yok</string>
@@ -131,7 +130,7 @@
     <string name="error_dialog_title">Hayıır. Şimdi ne olacak? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Lütfen uygulamayı kapanmaya zorlayıp yeniden başlatın. Yanlış bir Nextcloud uygulaması bağlantısı olmalı.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Sorun sürerse, çözmek için hem Nextcloud uygulamasının hem de Nextcloud Notlar uygulamasının depolamalarını temizlemeyi deneyin.</string>
-    <string name="error_dialog_tip_clear_storage">Depolamayı temizlemek için → Uygulamalar → Nextcloud / Nextcloud Notes → Depolama (Hafıza) → Depolamayı temizle (Veriyi sil).</string>
+    <string name="error_dialog_tip_clear_storage">Depolamayı temizlemek için uygulama bilgilerini açın ve Depolama (Hafıza) → Depolamayı temizle (Veriyi sil) seçin.</string>
     <string name="error_dialog_tip_files_outdated">Nextcloud uygulamanız eski görünüyor. Lütfen son sürümü almak için Play Store ya da F-Droid mağazalarına gidin.</string>
     <string name="error_dialog_tip_files_force_stop">Nextcloud uygulamanızda bir sorun var gibi görünüyor. Lütfen hem Nextcloud uygulamasını hem de Nextcloud Notlar uygulamasını zorla kapatmayı deneyin.</string>
     <string name="error_dialog_tip_files_delete_storage">Zorla durdurmak sorunu çözmediyse iki uygulamanın da depolamalarını temizlemeyi deneyebilirsiniz.</string>
@@ -145,6 +144,7 @@
     <string name="error_dialog_we_need_info">Size yardımcı olabilmemiz için şu teknik bilgilere gerek duyacağız:</string>
     <string name="error_dialog_server_app_enabled">Lütfen sunucunuzda \"Notlar\" uygulamasının kurulu ve etkinleştirilmiş olduğundan emin olun.</string>
     <string name="error_dialog_redirect">Sunucunuz, üzerine Notlar uygulamasının kurulmadığı ya da bir şeyin yanlış yapılandırıldığı anlamına gelen HTTP 302 durum kodu ile yanıt verdi. Bu durum, bir .htaccess dosyasındaki özel kısıtlamalardan ya da OID İstemcisi gibi Nextcloud uygulamalarından kaynaklanabilir.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Lütfen Nextcloud ve Notlar uygulaması için tüm pil iyileştirmelerini devre dışı bırakın.</string>
     <string name="added_content">\"%1$s\" eklendi</string>
     <string name="shared_text_empty">Paylaşılan metin boş</string>
     <string name="append_to_note">Nota ekle</string>
@@ -192,6 +192,10 @@
     <plurals name="ab_selected">
         <item quantity="one">%d seçilmiş</item>
         <item quantity="other">%d seçilmiş</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">%1$d not silindi</item>
+        <item quantity="other">%1$d not silindi</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
@@ -241,6 +245,10 @@
     <string name="formatting_help_unsupported_body_3">Görseller</string>
     <string name="formatting_help_unsupported_body_4">Bu özelliklerden biri için destek olmak isterseniz, GitHub ya da e-posta üzerinden bizimle görüşün.</string>
     <string name="simple_other">Diğer</string>
-    <string name="sort_last_modified">Değiştirme tarihine göre sırala</string>
+    <string name="sort_last_modified">Değişiklik tarihine göre sırala</string>
     <string name="sort_alphabetically">Alfabeye göre sırala</string>
+    <string name="error_action_open_battery_settings">Pil ayarları</string>
+    <string name="error_action_open_deck_info">Uygulama bilgilerini aç</string>
+    <string name="error_action_open_network">Ağ ayarları</string>
+    <string name="no_other_accounts">Henüz başka bir hesap yapılandırmamışsınız.</string>
 </resources>

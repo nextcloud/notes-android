@@ -10,13 +10,12 @@ import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.request.RequestOptions;
 
+import it.niedermann.android.glidesso.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.glide.SingleSignOnOriginHeader;
-import it.niedermann.owncloud.notes.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -35,7 +34,7 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         binding.accountName.setText(localAccount.getUserName());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())
-                .load(new GlideUrl(localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64", new SingleSignOnOriginHeader(localAccount)))
+                .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64"))
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.accountItemAvatar);

@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Κατάσταση οθόνης για σημειώσεις</string>
-    <string name="settings_theme_title">Σκούρο θέμα</string>
+    <string name="settings_theme_title">Θέμα</string>
     <string name="settings_font_title">Γραμματοσειρά monospace</string>
     <string name="settings_font_size">Μέγεθος γραμματοσειράς</string>
     <string name="settings_wifi_only">Συγχρονισμός μόνο σε Wi-Fi</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">Περισσότερα</string>
     <string name="simple_move">Μετακίνηση</string>
     <string name="checkbox_could_not_be_toggled">Δεν ήταν δυνατή η εναλλαγή του πλαισίου ελέγχου.</string>
-    <string name="bulk_notes_deleted">Διεγραμμένες %1$d σημειώσεις</string>
     <string name="bulk_notes_restored">Επαναφέρθηκαν %1$dσημειώσεις</string>
     <string name="category_readonly">Μόνο για ανάγνωση</string>
     <string name="no_category">Χωρίς κατηγορία</string>
@@ -131,7 +130,7 @@
     <string name="error_dialog_title">Ωχ όχι - Τώρα τί; 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Δοκιμάστε τερματισμό της εφαρμογή και επανεκκίνηση. Ίσως υπάρχει λάθος σύνδεση.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Εάν το πρόβλημα παραμένει, προσπαθήστε να εκκαθαρίσετε τον χώρο αποθήκευσης και των δύο εφαρμογών: του Nextcloud και του Nextcloud Notes.</string>
-    <string name="error_dialog_tip_clear_storage">Μπορείτε να εκκαθαρίσετε από τις ρυθμίσεις του Android → Εφαρμογές → Nextcloud / Nextcloud Σημειώσεις → Αποθηκευτικός χώρος → Εκκαθάριση χώρου αποθήκευσης.</string>
+    <string name="error_dialog_tip_clear_storage">Μπορείτε να εκκαθαρίσετε τον χώρο αποθήκευσης από τις πληροφορίες εφαρμογής και επιλέγοντας Αποθηκευτικός χώρος → Εκκαθάριση χώρου αποθήκευσης.</string>
     <string name="error_dialog_tip_files_outdated">Η εφαρμογή Nextcloud δεν είναι ενημερωμένη. Παρακαλούμε επισκεφθείτε το Play Store ή το F-Groid για λήψη της τελευταίας έκδοσης.</string>
     <string name="error_dialog_tip_files_force_stop">Κάτι φαίνεται να πάει στραβά με την εφαρμογή Nextcloud. Προσπαθήστε να τερματίσετε την εφαρμογή Nextcloud και την εφαρμογή Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Εάν ο τερματισμός δεν βοηθήσει, μπορείτε να εκκαθαρίσετε τον αποθηκευτικό χώρο και των δύο εφαρμογών.</string>
@@ -145,6 +144,7 @@
     <string name="error_dialog_we_need_info">Χρειαζόμαστε τις ακόλουθες τεχνικές πληροφορίες για να σας βοηθήσουμε:</string>
     <string name="error_dialog_server_app_enabled">Παρακαλούμε βεβαιωθείτε ότι εγκαταστήσατε και ενεργοποιήσατε την εφαρμογή \"Notes\" στον διακομιστή σας.</string>
     <string name="error_dialog_redirect">Ο διακομιστής απάντησε με κωδικό κατάστασης HTTP 302, που σημαίνει, πως δεν έχετε εγκατεστημένη την εφαρμογή Notes στον διακομιστή σας ή υπάρχει λάθος ρύθμιση. Αυτό μπορεί να προκλήθηκε από λάθος καταχώρηση στο αρχείο .htaccess-file ή σε εφαρμογές του Nextcloud όπως την OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Παρακαλούμε απενεργοποιήστε όλες τις βελτιστοποιήσεις μπαταρίας για το Nextcloud και την εφαρμογή Notes.</string>
     <string name="added_content">Προστέθηκε \"%1$s\"</string>
     <string name="shared_text_empty">Το κοινόχρηστο κείμενο είναι κενό</string>
     <string name="append_to_note">Προσάρτηση στη σημείωση</string>
@@ -192,6 +192,10 @@
     <plurals name="ab_selected">
         <item quantity="one">%d επιλέχτηκε</item>
         <item quantity="other">%d επιλέχτηκαν</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Διεγράφη %1$d σημείωση</item>
+        <item quantity="other">Διεγράφησαν %1$d σημειώσεις</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
@@ -241,4 +245,10 @@
     <string name="formatting_help_unsupported_body_3">Εικόνες</string>
     <string name="formatting_help_unsupported_body_4">Εάν ενδιαφέρεστε να συνεισφέρετε σε μία από αυτές τις λειτουργίες, επικοινωνήστε μαζί μας μέσω GitHub ή E-Mail.</string>
     <string name="simple_other">Άλλο</string>
-    </resources>
+    <string name="sort_last_modified">Ταξινόμηση κατά ημερομηνία τροποποίησης</string>
+    <string name="sort_alphabetically">Ταξινόμηση αλφαβητικά</string>
+    <string name="error_action_open_battery_settings">Ρυθμίσεις μπαταρίας</string>
+    <string name="error_action_open_deck_info">Πληροφορίες εφαρμογής</string>
+    <string name="error_action_open_network">Ρυθμίσεις δικτύου</string>
+    <string name="no_other_accounts">Δεν έχετε ρυθμίσει ακόμη άλλους λογαριασμούς.</string>
+</resources>

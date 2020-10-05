@@ -12,9 +12,9 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.List;
 
-import it.niedermann.owncloud.notes.android.activity.LockedActivity;
+import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
-import it.niedermann.owncloud.notes.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 public class ManageAccountsActivity extends LockedActivity {
@@ -22,7 +22,6 @@ public class ManageAccountsActivity extends LockedActivity {
     private ActivityManageAccountsBinding binding;
     private ManageAccountAdapter adapter;
     private NotesDatabase db = null;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,6 +66,6 @@ public class ManageAccountsActivity extends LockedActivity {
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-        applyBrandToPrimaryToolbar(binding.toolbar);
+        applyBrandToPrimaryToolbar(binding.appBar, binding.toolbar);
     }
 }

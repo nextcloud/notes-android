@@ -42,27 +42,28 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.activity.EditNoteActivity;
-import it.niedermann.owncloud.notes.model.ApiVersion;
-import it.niedermann.owncloud.notes.model.Capabilities;
-import it.niedermann.owncloud.notes.model.Category;
-import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.ISyncCallback;
-import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.model.NavigationAdapter;
-import it.niedermann.owncloud.notes.model.NoteListsWidgetData;
-import it.niedermann.owncloud.notes.model.SingleNoteWidgetData;
-import it.niedermann.owncloud.notes.util.CategorySortingMethod;
-import it.niedermann.owncloud.notes.util.ColorUtil;
-import it.niedermann.owncloud.notes.util.NoteUtil;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
+import it.niedermann.owncloud.notes.main.NavigationAdapter;
+import it.niedermann.owncloud.notes.shared.model.ApiVersion;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.Category;
+import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
+import it.niedermann.owncloud.notes.shared.model.CloudNote;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.util.ColorUtil;
+import it.niedermann.owncloud.notes.shared.util.NoteUtil;
+import it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData;
+import it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget;
+import it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidgetData;
 
-import static it.niedermann.owncloud.notes.android.activity.EditNoteActivity.ACTION_SHORTCUT;
-import static it.niedermann.owncloud.notes.android.appwidget.NoteListWidget.updateNoteListWidgets;
-import static it.niedermann.owncloud.notes.android.appwidget.SingleNoteWidget.updateSingleNoteWidgets;
-import static it.niedermann.owncloud.notes.model.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
-import static it.niedermann.owncloud.notes.util.NoteUtil.generateNoteExcerpt;
+import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
+import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
+import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
+import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
 
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
@@ -153,7 +154,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * Get a single Note by ID
      *
      * @param id int - ID of the requested Note
-     * @return requested Note
+     * @return requested {@link DBNote}
      */
     public DBNote getNote(long accountId, long id) {
         List<DBNote> notes = getNotesCustom(accountId, key_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, false);
@@ -164,7 +165,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * Gets all the remoteIds of all not deleted notes of an account
      *
      * @param accountId get the remoteIds from all notes of this account
-     * @return set of remoteIds from all notes
+     * @return {@link Set<String>} remoteIds from all notes
      */
     public Set<String> getRemoteIds(long accountId) {
         Cursor cursor = getReadableDatabase()
@@ -189,7 +190,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * Get a single Note by remote Id (aka. nextcloud file id)
      *
      * @param remoteId int - remote ID of the requested Note
-     * @return requested Note
+     * @return {@link DBNote#getId()}
      */
     public long getLocalIdByRemoteId(long accountId, long remoteId) {
         List<DBNote> notes = getNotesCustom(accountId, key_remote_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(remoteId), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, true);
@@ -205,7 +206,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param selection     A filter declaring which rows to return, formatted as an SQL WHERE clause (excluding the WHERE itself).
      * @param selectionArgs You may include ?s in selection, which will be replaced by the values from selectionArgs, in order that they appear in the selection. The values will be bound as Strings.
      * @param orderBy       How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER BY itself). Passing null will use the default sort order, which may be unordered.
-     * @return List of Notes
+     * @return {@link List<DBNote>}
      */
     @NonNull
     @WorkerThread
@@ -241,7 +242,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param cursor       database cursor
      * @param pruneContent whether or not the content should be pruned for performance reasons
-     * @return DBNote
+     * @return {@link DBNote}
      */
     @NonNull
     private DBNote getNoteFromCursor(long accountId, @NonNull Cursor cursor, boolean pruneContent) {
@@ -301,7 +302,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * This method is overloading searchNotes method.
      * In order to keep the original code (called this method) still work.
      *
-     * @return List&lt;Note&gt;
+     * @return {@link List<DBNote>}
      */
     @NonNull
     @WorkerThread
@@ -316,7 +317,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * For example, three categories with the title "abc", "abc/aaa" and "abcd"
      * If search with "abc", then only notes in "abc" and "abc/aaa" will be returned.
      *
-     * @return List&lt;Note&gt;
+     * @return {@link List<DBNote>}
      */
     @NonNull
     @WorkerThread
@@ -324,8 +325,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
                                     @Nullable String category, @Nullable Boolean favorite,
                                     @Nullable CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
-        List<String> where = new ArrayList<>();
-        List<String> args = new ArrayList<>();
+        List<String> where = new ArrayList<>(6);
+        List<String> args = new ArrayList<>(9);
 
         where.add(key_status + " != ?");
         args.add(DBStatus.LOCAL_DELETED.getTitle());
@@ -356,9 +357,12 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
 
         String order = category == null ? default_order : key_category + ", " + key_title;
-        // TODO: modify here, need to test
         if (sortingMethod != null) {
-            order = key_favorite + " DESC," + sortingMethod.getSorder();
+            if (category != null) { // Needed for subcategories, see https://github.com/stefan-niedermann/nextcloud-notes/issues/902
+                order = key_category + "," + key_favorite + " DESC," + sortingMethod.getSorder(); // Edited
+            } else {
+                order = key_favorite + " DESC," + sortingMethod.getSorder();
+            }
         }
         return getNotesCustom(accountId, TextUtils.join(" AND ", where), args.toArray(new String[]{}), order, true);
     }
@@ -366,7 +370,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     /**
      * Returns a list of all Notes in the Database which were modified locally
      *
-     * @return List&lt;Note&gt;
+     * @return {@link List<DBNote>}
      */
     @NonNull
     @WorkerThread
@@ -531,7 +535,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * @param newContent New content. If this is <code>null</code>, then <code>oldNote</code> is saved again (useful for undoing changes).
      * @param newTitle   New title. If this is <code>null</code>, then either the old title is reused (in case the note has been synced before) or a title is generated (in case it is a new note)
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
-     * @return changed note if differs from database, otherwise the old note.
+     * @return changed {@link DBNote} if differs from database, otherwise the old {@link DBNote}.
      */
     public DBNote updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull DBNote oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         DBNote newNote;
@@ -722,8 +726,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }).start();
     }
 
-    public boolean hasAccounts() {
-        return DatabaseUtils.queryNumEntries(getReadableDatabase(), table_accounts) > 0;
+    public long getAccountsCount() {
+        return DatabaseUtils.queryNumEntries(getReadableDatabase(), table_accounts);
     }
 
     /**
@@ -746,7 +750,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     /**
      * @param accountId account which should be read
-     * @return a LocalAccount object for the given accountId
+     * @return a {@link LocalAccount} object for the given accountId
      */
     public LocalAccount getAccount(long accountId) {
         validateAccountId(accountId);
@@ -769,10 +773,11 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return account;
     }
 
+    @NonNull
     public List<LocalAccount> getAccounts() {
         final SQLiteDatabase db = getReadableDatabase();
         final Cursor cursor = db.query(table_accounts, new String[]{key_id, key_url, key_account_name, key_username, key_etag, key_modified, key_api_version, key_color, key_text_color, key_capabilities_etag}, null, null, null, null, null);
-        final List<LocalAccount> accounts = new ArrayList<>();
+        final List<LocalAccount> accounts = new ArrayList<>(cursor.getCount());
         while (cursor.moveToNext()) {
             LocalAccount account = new LocalAccount();
             account.setId(cursor.getLong(0));
@@ -860,7 +865,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     /**
      * @param apiVersion has to be a JSON array as a string <code>["0.2", "1.0", ...]</code>
-     * @return whether or not the given apiVersion have been written to the database
+     * @return whether or not the given {@link ApiVersion} has been written to the database
      * @throws IllegalArgumentException if the apiVersion does not match the expected format
      */
     public boolean updateApiVersion(long accountId, @Nullable String apiVersion) throws IllegalArgumentException {
@@ -897,7 +902,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * @param localAccount the account that should be deleted
+     * @param localAccount the {@link LocalAccount} that should be deleted
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
      */
     public void deleteAccount(@NonNull LocalAccount localAccount) throws IllegalArgumentException {
@@ -965,7 +970,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * @param appWidgetId the id of the widget
+     * @param appWidgetId the id of the {@link SingleNoteWidget}
      * @return {@link SingleNoteWidgetData}
      * @throws NoSuchElementException in case there is no {@link SingleNoteWidgetData} for the given appWidgetId
      */
@@ -1053,7 +1058,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      * If there is no such category, database will create it if create flag is set.
      * Otherwise this method will return -1 as default value.
      *
-     * @param accountId     The user account Id
+     * @param accountId     The user {@link LocalAccount} Id
      * @param categoryTitle The category title which will be search in the db
      * @return -1 if there is no such category else the corresponding id
      */
@@ -1106,7 +1111,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param accountId     The user accountID
      * @param categoryTitle The category title
-     * @return The sorting method in CategorySortingMethod enum format
+     * @return The sorting method in {@link CategorySortingMethod} enum format
      */
     public CategorySortingMethod getCategoryOrderByTitle(long accountId, String categoryTitle) {
         validateAccountId(accountId);
@@ -1134,7 +1139,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param accountId     The user accountID
      * @param categoryTitle The category title
-     * @param sortingMethod The sorting method in CategorySortingMethod enum format
+     * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
      */
     public void modifyCategoryOrderByTitle(
             long accountId, String categoryTitle, CategorySortingMethod sortingMethod) {
@@ -1201,7 +1206,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param accountId     The user accountID
      * @param category      The category to be modified
-     * @param sortingMethod The sorting method in CategorySortingMethod enum format
+     * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
      */
     public void modifyCategoryOrder(
             long accountId, Category category, CategorySortingMethod sortingMethod) {

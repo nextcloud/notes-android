@@ -1,0 +1,1 @@
+- 🐞 Fix grouping of notes by subcategory (#902)

@@ -13,12 +13,12 @@ import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.model.Category;
-import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.model.Item;
-import it.niedermann.owncloud.notes.model.SectionItem;
-import it.niedermann.owncloud.notes.util.CategorySortingMethod;
-import it.niedermann.owncloud.notes.util.NoteUtil;
+import it.niedermann.owncloud.notes.shared.model.Category;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.model.Item;
+import it.niedermann.owncloud.notes.main.items.section.SectionItem;
+import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
+import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 

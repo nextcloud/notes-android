@@ -17,7 +17,7 @@
     <color name="fg_default_high">#757575</color>
     <color name="fg_contrast">#000000</color>
 
-    <color name="appbar">#1e1e1e</color>
+    <color name="appbar">#212121</color>
 
     <color name="category_background">@color/defaultBrand</color>
 </resources>

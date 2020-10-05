@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Režim zobrazovania poznámok</string>
-    <string name="settings_theme_title">Tmavý motív vzhľadu</string>
+    <string name="settings_theme_title">Motív vzhľadu</string>
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
     <string name="settings_font_size">Veľkosť písma</string>
     <string name="settings_wifi_only">Synchronizovať len na Wi-Fi</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">Viac</string>
     <string name="simple_move">Presunúť</string>
     <string name="checkbox_could_not_be_toggled">Nepodarilo sa prepnúť zaškrtávaciu kolónku.</string>
-    <string name="bulk_notes_deleted">Vymazaných %1$d poznámok</string>
     <string name="bulk_notes_restored">Obnovených %1$d poznámok</string>
     <string name="category_readonly">Iba na čítanie</string>
     <string name="no_category">Žiadna kategória</string>
@@ -131,7 +130,7 @@
     <string name="error_dialog_title">Ale nie - Čo teraz? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Skúste vyinútiť zatvorenie aplikácie a znova ju reštartovať. Možno došlo k chybnému pripojeniu k aplikácii Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ak problém pretrváva, skúste vyčistiť úložisko oboch aplikácií: Nextcloud a Nextcloud Poznámky.</string>
-    <string name="error_dialog_tip_clear_storage">Úložisko môžete vyčistiť otvorením nastavení systému Android → Aplikácie → Nextcloud/Nextcloud Poznámky → Úložisko → Vyčistiť úložisko.</string>
+    <string name="error_dialog_tip_clear_storage">Úložisko môžete vyčistiť otvorením informácii o aplikácii a výberom Úložisko → Vyčistiť úložisko.</string>
     <string name="error_dialog_tip_files_outdated">Váš Nextcloud vyzerá byť zastaralý. Navštívte Play Store alebo F-Droid pre získanie najnovšej verzie.</string>
     <string name="error_dialog_tip_files_force_stop">Niečo s vašim Nextcloudom nie je v poriadku. Skúste vynútiť ukončenie aplikácií Nextcloud a Nextcloud Poznámky.</string>
     <string name="error_dialog_tip_files_delete_storage">Ak ich ukončenie nepomôže, môžete skúsiť vyčistiť úložiská oboch aplikácií.</string>
@@ -145,6 +144,7 @@
     <string name="error_dialog_we_need_info">Aby sme vám pomohli, potrebujeme následovné technické informácie:</string>
     <string name="error_dialog_server_app_enabled">Uistite sa, že ste na serveri nainštalovali a povolili aplikáciu Poznámky.</string>
     <string name="error_dialog_redirect">Váš server odpovedal stavovým kódom HTTP 302, čo znamená, že na svojom serveri nemáte nainštalovanú aplikáciu Notes alebo je niečo nesprávne nastavené. Môže to byť spôsobené vlastnými zmenami v súbore .htaccess alebo aplikáciami Nextcloud, ako je OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Vypnite všetky optimalizácie batérie pre aplikácie Nextcloud a Poznámky.</string>
     <string name="added_content">Pridané \"%1$s\"</string>
     <string name="shared_text_empty">Zdieľaný text bol prázdny</string>
     <string name="append_to_note">Pripojiť k poznámke</string>
@@ -194,6 +194,12 @@
         <item quantity="few">%d vybraných</item>
         <item quantity="many">%d vybraný</item>
         <item quantity="other">%d vybraný</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Odstránená %1$d poznámka</item>
+        <item quantity="few">Odstránené %1$d poznámky</item>
+        <item quantity="many">Odstránené %1$d poznámky</item>
+        <item quantity="other">Odstránených %1$d poznámok</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
@@ -245,4 +251,8 @@
     <string name="simple_other">Iné</string>
     <string name="sort_last_modified">Zoradiť podľa upraveného dátumu</string>
     <string name="sort_alphabetically">Zoradiť podľa abecedy</string>
+    <string name="error_action_open_battery_settings">Nastavenia batérie.</string>
+    <string name="error_action_open_deck_info">Otvoriť informácie o aplikácii</string>
+    <string name="error_action_open_network">Nastavenia siete</string>
+    <string name="no_other_accounts">Zatiaľ nemáte nastavené žiadne ďalšie účty.</string>
 </resources>

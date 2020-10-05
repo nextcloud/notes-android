@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -33,16 +34,16 @@ import java.util.Objects;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.android.fragment.ExceptionDialogFragment;
+import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
-import it.niedermann.owncloud.notes.model.CloudNote;
-import it.niedermann.owncloud.notes.model.DBNote;
-import it.niedermann.owncloud.notes.model.DBStatus;
-import it.niedermann.owncloud.notes.model.ISyncCallback;
-import it.niedermann.owncloud.notes.model.LocalAccount;
-import it.niedermann.owncloud.notes.model.SyncResultStatus;
-import it.niedermann.owncloud.notes.util.SSOUtil;
-import it.niedermann.owncloud.notes.util.ServerResponse;
+import it.niedermann.owncloud.notes.shared.model.CloudNote;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
+import it.niedermann.owncloud.notes.shared.util.SSOUtil;
+import it.niedermann.owncloud.notes.shared.model.ServerResponse;
 
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
@@ -257,7 +258,7 @@ public class NoteServerSyncHelper {
         }
     }
 
-    private void updateNetworkStatus() {
+    public void updateNetworkStatus() {
         try {
             final ConnectivityManager connMgr = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 

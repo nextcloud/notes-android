@@ -4,7 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
 
-import it.niedermann.owncloud.notes.util.DatabaseIndexUtil;
+import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
 
 public class Migration_7_8 {
     public Migration_7_8(@NonNull SQLiteDatabase db) {

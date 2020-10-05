@@ -2,12 +2,12 @@
 <resources>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="spacer_1qx">2dp</dimen>
     <dimen name="spacer_1hx">4dp</dimen>
     <dimen name="spacer_1x">8dp</dimen>
     <dimen name="spacer_2x">16dp</dimen>
     <dimen name="spacer_3x">24dp</dimen>
     <dimen name="spacer_5x">40dp</dimen>
-    <dimen name="spacer_6x">48dp</dimen>
 
     <dimen name="avatar_size">36dp</dimen>
 

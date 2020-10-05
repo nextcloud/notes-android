@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -26,15 +27,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="it.niedermann.owncloud.notes.android.activity.EditNoteActivity">
+        tools:context="it.niedermann.owncloud.notes.edit.EditNoteActivity">
 
         <com.yydcdut.markdown.MarkdownTextView
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spacer_2x"
             android:layout_marginStart="@dimen/spacer_activity_sides"
             android:layout_marginEnd="@dimen/spacer_activity_sides"
+            android:padding="@dimen/spacer_2x"
             android:paddingStart="@dimen/spacer_2x"
             android:paddingEnd="@dimen/spacer_2x"
             android:textAppearance="?android:attr/textAppearanceMedium"

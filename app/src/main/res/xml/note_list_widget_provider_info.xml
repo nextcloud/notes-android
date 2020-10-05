@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:initialLayout="@layout/widget_note_list"
-    android:configure="it.niedermann.owncloud.notes.android.activity.NoteListWidgetConfigurationActivity"
+    android:configure="it.niedermann.owncloud.notes.widget.notelist.NoteListWidgetConfigurationActivity"
     android:minHeight="110dp"
     android:minWidth="180dp"
     android:minResizeHeight="40dp"

@@ -1,0 +1,4 @@
+- Selecting a note in the main note list highlights two notes (#920) (@muety)
+- Support www links without protocol in preview mode (#949) (@muety)
+- Allow to modify category in multi-select view (#946)
+- Add plural form to string (#931)

@@ -5,9 +5,7 @@
     <item
         android:id="@android:id/mask"
         android:left="@dimen/spacer_1x"
-        android:right="@dimen/spacer_1x"
-        android:top="@dimen/spacer_1hx"
-        android:bottom="@dimen/spacer_1hx">
+        android:right="@dimen/spacer_1x">
 
         <shape android:shape="rectangle">
             <!-- value of color is irrelevant, but solid needs to be defined for mask to work -->
@@ -18,9 +16,7 @@
 
     <item
         android:left="@dimen/spacer_1x"
-        android:right="@dimen/spacer_1x"
-        android:top="@dimen/spacer_1hx"
-        android:bottom="@dimen/spacer_1hx">
+        android:right="@dimen/spacer_1x">
 
         <selector>
             <item android:state_selected="true">

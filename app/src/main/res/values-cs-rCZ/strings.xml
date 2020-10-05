@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Režim zobrazení poznámek</string>
-    <string name="settings_theme_title">Tmavý motiv vzhledu</string>
+    <string name="settings_theme_title">Motiv vzhledu</string>
     <string name="settings_font_title">Písmo se všemi znaky stejně širokými</string>
     <string name="settings_font_size">Velikost písmen</string>
     <string name="settings_wifi_only">Synchronizovat pouze přes Wi-Fi</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">Další</string>
     <string name="simple_move">Přesunout</string>
     <string name="checkbox_could_not_be_toggled">Stav zaškrtávací kolonky se nepodařilo přepnout.</string>
-    <string name="bulk_notes_deleted">Smazáno %1$d poznámek</string>
     <string name="bulk_notes_restored">Obnoveno %1$d poznámek</string>
     <string name="category_readonly">Pouze pro čtení</string>
     <string name="no_category">Žádná kategorie</string>
@@ -131,7 +130,7 @@
     <string name="error_dialog_title">Ó ne– co teď? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prosím pokuste se vynutit ukončení aplikace a spusťte ji znovu. Možná se něco nepodařilo při spojení s aplikací Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Pokud problém přetrvává, zkuste problém vyřešit vyčištěním úložišť obou aplikací: Nextcloud a Nextcloud poznámky.</string>
-    <string name="error_dialog_tip_clear_storage">Úložiště je možné vymazat otevření nastavení systému android → Aplikace → Nextcloud / Nextcloud poznámky → Úložiště → Vyčistit úložiště.</string>
+    <string name="error_dialog_tip_clear_storage">Úložiště můžete vyčistit otevřením informací o aplikací a vybráním Úložiště → Vyčistit úložiště.</string>
     <string name="error_dialog_tip_files_outdated">Zdá se, že aplikace Nextcloud, nainstalovaná na vašem zařízení, je staré verze. Přejděte prosím do Play Store nebo F-Droid a nainstalujte si nejnovější verzi.</string>
     <string name="error_dialog_tip_files_force_stop">Zdá se, že s vaší aplikací Nextcloud není něco v pořádku. Zkuste vynutit zastavení obojího – aplikace Nextcloud a Nextcloud Poznámky.</string>
     <string name="error_dialog_tip_files_delete_storage">Pokud vynucení jejich zastavení nepomůže, můžete zkusit vyčistit úložiště obou aplikací.</string>
@@ -145,6 +144,7 @@
     <string name="error_dialog_we_need_info">Abychom vám mohli pomoci, potřebujeme následující technické údaje:</string>
     <string name="error_dialog_server_app_enabled">Ověřte, že na vámi využívaném serveru je nainstalovaná a zapnutá aplikace „Poznámky“.</string>
     <string name="error_dialog_redirect">Vámi využívaný server odpověděl HTTP stavovým kódem 302, což ukazuje na to, že na serveru buď není nainstalovaná aplikace Poznámky, nebo je něco nesprávně nastavené. Toto může být způsobeno uživatelsky určenými přepsáními v souboru .htaccess nebo Nextcloud aplikacemi jako je OID klient.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">V nastavení systému prosím pro aplikace Nextcloud a Notes vypněte veškeré optimalizace spotřeby energie z akumulátoru.</string>
     <string name="added_content">Přidáno „%1$s“</string>
     <string name="shared_text_empty">Sdílený text je prázdný</string>
     <string name="append_to_note">Připojit k poznámce</string>
@@ -194,6 +194,12 @@
         <item quantity="few">vybrány %d</item>
         <item quantity="many">vybráno %d</item>
         <item quantity="other">vybrány %d</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Smazána %1$d poznámka</item>
+        <item quantity="few">Smazány %1$d poznámky</item>
+        <item quantity="many">Smazáno %1$d poznámek</item>
+        <item quantity="other">Smazány %1$d poznámky</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
@@ -245,4 +251,8 @@
     <string name="simple_other">Ostatní</string>
     <string name="sort_last_modified">Seřadit podle data změny</string>
     <string name="sort_alphabetically">Seřadit abecedně</string>
+    <string name="error_action_open_battery_settings">Nastavení správy napájení</string>
+    <string name="error_action_open_deck_info">Otevřít informace o aplikaci</string>
+    <string name="error_action_open_network">Nastavení sítě</string>
+    <string name="no_other_accounts">Zatím jste nenastavili žádné další účty.</string>
 </resources>

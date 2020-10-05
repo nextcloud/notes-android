@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">Tryb wyświetlania notatek</string>
-    <string name="settings_theme_title">Ciemny motyw</string>
+    <string name="settings_theme_title">Motyw</string>
     <string name="settings_font_title">Czcionka monospace</string>
     <string name="settings_font_size">Rozmiar czcionki</string>
     <string name="settings_wifi_only">Synchronizuj tylko przez Wi-Fi</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">Więcej</string>
     <string name="simple_move">Przenieś</string>
     <string name="checkbox_could_not_be_toggled">Nie można zmienić pola wyboru.</string>
-    <string name="bulk_notes_deleted">Usunięto notatki %1$d</string>
     <string name="bulk_notes_restored">Przywrócono notatki %1$d</string>
     <string name="category_readonly">Tylko do odczytu</string>
     <string name="no_category">Bez kategorii</string>
@@ -131,7 +130,7 @@
     <string name="error_dialog_title">O nie - co teraz? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Spróbuj wymusić zamknięcie aplikacji i uruchomić ją ponownie. Być może połączenie z aplikacją Nextcloud było nieprawidłowe.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jeśli problem będzie się powtarzać, spróbuj wyczyścić pamięć obu aplikacji: Nextcloud i Nextcloud Notes, aby rozwiązać ten problem.</string>
-    <string name="error_dialog_tip_clear_storage">Możesz wyczyścić pamięć, otwierając ustawienia Androida → Aplikacje → Nextcloud/Nextcloud Notes → Pamięć → Wyczyść pamięć podręczną.</string>
+    <string name="error_dialog_tip_clear_storage">Możesz wyczyścić pamięć, otwierając informacje o aplikacji i wybierając Pamięć → Wyczyść pamięć podręczną.</string>
     <string name="error_dialog_tip_files_outdated">Twoja aplikacja Nextcloud wydaje się, że jest nieaktualna. Odwiedź Sklep Play lub F-Droid, aby pobrać najnowszą wersję.</string>
     <string name="error_dialog_tip_files_force_stop">Wydaje się, że coś jest nie tak z Twoją aplikacją Nextcloud. Spróbuj wymusić zatrzymanie aplikacji Nextcloud i Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Jeśli nie pomoże ich zatrzymanie, możesz spróbować wyczyścić pamięć obu aplikacji.</string>
@@ -145,6 +144,7 @@
     <string name="error_dialog_we_need_info">Potrzebujemy następujących informacji technicznych, aby Ci pomóc:</string>
     <string name="error_dialog_server_app_enabled">Upewnij się, że zainstalowałeś i włączyłeś aplikację \"Notes\" na swoim serwerze.</string>
     <string name="error_dialog_redirect">Twój serwer odpowiedział kodem stanu HTTP 302, co oznacza, że nie masz zainstalowanej aplikacji Notes na serwerze lub coś jest źle skonfigurowane. Może to być spowodowane niestandardowymi przekierowaniami pliku .htaccess lub aplikacjami Nextcloud, takimi jak OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Wyłącz wszystkie optymalizacje baterii dla aplikacji Nextcloud i aplikacji Notes.</string>
     <string name="added_content">Dodano \"%1$s\"</string>
     <string name="shared_text_empty">Udostępniony tekst był pusty</string>
     <string name="append_to_note">Dołącz do notatki</string>
@@ -176,7 +176,7 @@
 
     <!-- Array: background synchronization -->
     <string-array name="sync_entries">
-        <item>Wyłączone</item>
+        <item>Wyłączona</item>
         <item>15 minut</item>
         <item>1 godzina</item>
         <item>6 godzin</item>
@@ -195,6 +195,12 @@
         <item quantity="many">%d wybranych</item>
         <item quantity="other">%d wybranych</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Usunięto %1$d notatkę</item>
+        <item quantity="few">Usunięto %1$d notatki</item>
+        <item quantity="many">Usunięto %1$d notatek</item>
+        <item quantity="other">Usunięto %1$d notatek</item>
+    </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
@@ -210,9 +216,9 @@
 
     <string name="formatting_help_lists_title">Listy</string>
     <string name="formatting_help_lists_body_1">Czasami chcesz mieć listy ponumerowane:</string>
-    <string name="formatting_help_lists_body_2">1 Jeden</string>
-    <string name="formatting_help_lists_body_3">2. Dwa</string>
-    <string name="formatting_help_lists_body_4">3. Trzy</string>
+    <string name="formatting_help_lists_body_2">Jeden</string>
+    <string name="formatting_help_lists_body_3">Dwa</string>
+    <string name="formatting_help_lists_body_4">Trzy</string>
     <string name="formatting_help_lists_body_5">Czasami chcesz wypunktować:</string>
     <string name="formatting_help_lists_body_6">Rozpocznij linię gwiazdką</string>
     <string name="formatting_help_lists_body_7">A jeśli masz podpunkty, umieść dwie spacje przed kreską lub gwiazdką:</string>
@@ -225,7 +231,7 @@
     <string name="formatting_help_checkboxes_body_3">Pozycja 2</string>
 
     <string name="formatting_help_structured_documents_title">Dokumenty strukturalne</string>
-    <string name="formatting_help_structured_documents_body_1">Czasami przydatne jest posiadanie różnych poziomów nagłówków w celu uporządkowania dokumentów. Rozpocznij wiersze od znaku %1$s, aby utworzyć nagłówki. Wiele %2$s z rzędu oznacza mniejsze rozmiary nagłówków.</string>
+    <string name="formatting_help_structured_documents_body_1">Czasami przydatne jest posiadanie różnych poziomów nagłówków w celu uporządkowania dokumentów. Rozpocznij wiersze od znaku %1$s, aby utworzyć nagłówki. Wiele %2$s w rzędzie oznacza mniejsze rozmiary nagłówków.</string>
     <string name="formatting_help_structured_documents_body_2">To nagłówek trzeciego poziomu</string>
     <string name="formatting_help_structured_documents_body_3">Możesz użyć jednego %1$s aż do sześciu %2$s dla różnych rozmiarów nagłówka.</string>
     <string name="formatting_help_structured_documents_body_4">Jeśli chcesz kogoś zacytować, użyj znaku %1$s przed wierszem:</string>
@@ -245,4 +251,8 @@
     <string name="simple_other">Inne</string>
     <string name="sort_last_modified">Sortuj według daty modyfikacji</string>
     <string name="sort_alphabetically">Sortuj alfabetycznie</string>
+    <string name="error_action_open_battery_settings">Ustawienia baterii</string>
+    <string name="error_action_open_deck_info">Otwórz informacje o aplikacji</string>
+    <string name="error_action_open_network">Ustawienia sieci</string>
+    <string name="no_other_accounts">Nie masz jeszcze skonfigurowanych żadnych innych kont.</string>
 </resources>

@@ -1,0 +1,23 @@
+2.16.3
+
+- 🐞 One line notes have no content preview in notes overview (#891) (@Bleuzen)
+- 🐞 Grid view: 2-letter category title not center aligned (#893)
+- 🐞 Start/end padding in lighter black that rest of appbar (#889)
+
+2.16.2
+
+- ✨ Improve grid view design (#885)
+- ✏️ Make title directly editable by clicking on the toolbar (#882)
+- ⭐️ Move the favorite star icon to the left (#883)
+
+2.16.1
+
+- 👥 Fix wrong avatars in multi user setup
+- 🧹 Design polishing (@thgoebel)
+
+2.16.0
+
+- 🔧 Support APIv1
+  - Title will only be auto generated when creating a new note
+  - Ability to change title manually
+- 🔤 Make categories sortable by alphabet or modified date (#603) (@WingsUpete @Hui-Ouyang16 @IF-ACT)

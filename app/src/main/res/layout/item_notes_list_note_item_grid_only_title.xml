@@ -5,7 +5,9 @@
     android:id="@+id/card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:focusable="true">
+    android:focusable="true"
+    app:cardBackgroundColor="@color/appbar"
+    app:cardCornerRadius="@dimen/spacer_1x">
 
     <LinearLayout
         android:id="@+id/wrapper"
@@ -15,25 +17,10 @@
         android:orientation="horizontal"
         android:paddingBottom="@dimen/spacer_1x">
 
-        <TextView
-            android:id="@+id/noteTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacer_2x"
-            android:layout_marginTop="@dimen/spacer_2x"
-            android:layout_marginEnd="@dimen/spacer_2x"
-            android:layout_marginBottom="@dimen/spacer_1x"
-            android:layout_weight="1"
-            android:hyphenationFrequency="full"
-            android:textAppearance="?attr/textAppearanceHeadline5"
-            android:textColor="@color/fg_default"
-            tools:maxLength="50"
-            tools:targetApi="m"
-            tools:text="@tools:sample/lorem/random" />
-
         <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacer_1qx">
 
             <ImageView
                 android:id="@+id/noteFavorite"
@@ -54,5 +41,21 @@
                 android:baseline="14dp"
                 app:srcCompat="@drawable/ic_sync_blue_18dp" />
         </FrameLayout>
+
+        <TextView
+            android:id="@+id/noteTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="@dimen/spacer_2x"
+            android:layout_marginEnd="@dimen/spacer_2x"
+            android:layout_marginBottom="@dimen/spacer_1x"
+            android:layout_weight="1"
+            android:hyphenationFrequency="full"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="@color/fg_default"
+            tools:maxLength="50"
+            tools:targetApi="m"
+            tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

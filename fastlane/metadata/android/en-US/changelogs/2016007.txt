@@ -1,0 +1,2 @@
+- 🐞 Prevent ArrayIndexOutOfBoundsException (#912)
+- ⏰ Increase undo timeframe to 12 seconds like web ui (#884)

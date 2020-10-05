@@ -41,7 +41,7 @@
 
     <!-- Settings -->
     <string name="settings_note_mode">מצב תצוגת פתקים</string>
-    <string name="settings_theme_title">ערכת עיצוב כהה</string>
+    <string name="settings_theme_title">ערכת עיצוב</string>
     <string name="settings_font_title">גופן ברוחב אחיד</string>
     <string name="settings_font_size">גודל גופן</string>
     <string name="settings_wifi_only">סנכרון רק דרך רשת אלחוטית</string>
@@ -119,7 +119,6 @@
     <string name="simple_more">עוד</string>
     <string name="simple_move">העברה</string>
     <string name="checkbox_could_not_be_toggled">לא ניתן להחליף את מצב תיבת הבחירה.</string>
-    <string name="bulk_notes_deleted">נמחקו %1$d פתקים</string>
     <string name="bulk_notes_restored">שוחזרו %1$d פתקים</string>
     <string name="category_readonly">קריאה בלבד</string>
     <string name="no_category">אין קטגוריה</string>
@@ -129,6 +128,10 @@
     <string name="simple_beta">בטא</string>
     <string name="could_not_copy_to_clipboard">לא ניתן להעתיק ללוח הגזירים</string>
     <string name="error_dialog_title">שוד ושבר - מה עכשיו? 🙁</string>
+    <string name="error_dialog_tip_files_outdated">נראה כי יישומון ה־Nextcloud שלך אינו עדכני. נא לבקר בחנות Play או ב־F-Droid כדי לעדכן לגרסה האחרונה.</string>
+    <string name="error_dialog_tip_files_force_stop">כנראה שמשהו השתבש ביישומון ה־Nextcloud שלך. נא לנסות לכפות עצירה על שניהם, יישומון ה־Nextcloud ויישומון הפתקים של Nextcloud.</string>
+    <string name="error_dialog_tip_files_delete_storage">אם כפיית עצירה לא עוזרת, ניתן לנסות לרוקן את האחסון של שני היישומונים.</string>
+    <string name="error_dialog_timeout_instance">לא חזרה תגובה מהשרת שלך בזמן קצוב. נא לוודא שהעותק פועל כראוי.</string>
     <string name="error_dialog_check_maintenance">נא לבדוק שעותק ה־Nextcloud שלך אינו במצב תחזוקה כרגע.</string>
     <string name="error_dialog_we_need_info">אנו זקוקים לפירוט הטכני הבא כדי לסייע לך:</string>
     <string name="shared_text_empty">הטקסט ששותף היה ריק</string>
@@ -179,7 +182,6 @@
         <item quantity="many">נבחרו %d</item>
         <item quantity="other">נבחרו %d</item>
     </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
@@ -214,4 +216,6 @@
     <string name="formatting_help_unsupported_body_2">טבלאות</string>
     <string name="formatting_help_unsupported_body_3">תמונות</string>
     <string name="simple_other">אחר</string>
+    <string name="error_action_open_deck_info">פתיחת פרטי יישומון</string>
+    <string name="error_action_open_network">הגדרות רשת</string>
     </resources>
