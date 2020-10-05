@@ -36,6 +36,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
@@ -362,8 +363,9 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pushLocalChanges()");
 
             boolean success = true;
-            List<DBNote> notes = sqliteOpenHelperDatabase.getLocalModifiedNotes(localAccount.getId());
-            for (DBNote note : notes) {
+            List<NoteEntity> notes = roomDatabase.getNoteDao().getLocalModifiedNotes(localAccount.getId());
+            for (NoteEntity noteEntity : notes) {
+                DBNote note = NoteEntity.entityToDBNote(noteEntity);
                 Log.d(TAG, "   Process Local Note: " + note);
                 try {
                     CloudNote remoteNote;
@@ -518,7 +520,7 @@ public class NoteServerSyncHelper {
                 }
             }
             sqliteOpenHelperDatabase.notifyWidgets();
-            sqliteOpenHelperDatabase.updateDynamicShortcuts(localAccount.getId());
+            roomDatabase.updateDynamicShortcuts(localAccount.getId());
             // start next sync if scheduled meanwhile
             if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {
                 scheduleSync(ssoAccount, false);

@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.WorkerThread;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -30,6 +32,9 @@ public interface NoteDao {
     @Query("UPDATE NoteEntity SET status = :status WHERE id = :id")
     void updateStatus(long id, DBStatus status);
 
+    @Query("UPDATE NoteEntity SET category_id = :categoryId WHERE id = :id")
+    void updateCategory(long id, long categoryId);
+
     /**
      * Gets all the remoteIds of all not deleted notes of an account
      *
@@ -51,4 +56,15 @@ public interface NoteDao {
 
     @Query("SELECT favorite, COUNT(*) FROM NoteEntity WHERE status != \"LOCAL_DELETED\" AND accountId = :accountId GROUP BY favorite ORDER BY favorite")
     Map<String, Integer> getFavoritesCount(long accountId);
+
+    /**
+     * Returns a list of all Notes in the Database which were modified locally
+     *
+     * @return {@link List<DBNote>}
+     */
+    @Query("SELECT * FROM NoteEntity WHERE status != \"VOID\" AND accountId = :accountId")
+    List<NoteEntity> getLocalModifiedNotes(long accountId);
+
+    @Query("SELECT * FROM NoteEntity WHERE status != \"LOCAL_DELETED\" AND accountId = :accountId ORDER BY modified DESC LIMIT 4")
+    List<NoteEntity> getRecentNotes(long accountId);
 }

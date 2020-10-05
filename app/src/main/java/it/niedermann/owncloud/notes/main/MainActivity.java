@@ -1001,7 +1001,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
             DBNote note = (DBNote) adapter.getItem(i);
             note.setCategory(category);
-            sqliteOpenHelperDatabase.setCategory(ssoAccount, note, category, this::refreshLists);
+            roomDatabase.setCategory(ssoAccount, note, category, this::refreshLists);
         }
 
         mActionMode.finish();

@@ -357,7 +357,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Override
     public void onCategoryChosen(String category) {
-        sqliteOpenHelperDatabase.setCategory(ssoAccount, note, category, null);
+        roomDatabase.setCategory(ssoAccount, note, category, null);
         listener.onNoteUpdated(note);
     }
 

@@ -1,5 +1,8 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
 import androidx.annotation.NonNull;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -27,4 +30,5 @@ public interface CategoryDao {
 
     @Query("SELECT id FROM CategoryEntity WHERE accountId = :accountId AND title = :title")
     Long getCategoryIdByTitle(long accountId, @NonNull String title);
+
 }

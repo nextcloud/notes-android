@@ -1,11 +1,18 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Icon;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -16,9 +23,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.dao.CategoryDao;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
@@ -30,8 +40,10 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
+import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
@@ -250,5 +262,61 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
     protected void notifyWidgets() {
         updateSingleNoteWidgets(context);
         updateNoteListWidgets(context);
+    }
+
+
+    void updateDynamicShortcuts(long accountId) {
+        new Thread(() -> {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+                ShortcutManager shortcutManager = context.getApplicationContext().getSystemService(ShortcutManager.class);
+                if (shortcutManager != null) {
+                    if (!shortcutManager.isRateLimitingActive()) {
+                        List<ShortcutInfo> newShortcuts = new ArrayList<>();
+
+                        for (NoteEntity note : getNoteDao().getRecentNotes(accountId)) {
+                            if (!TextUtils.isEmpty(note.getTitle())) {
+                                Intent intent = new Intent(context.getApplicationContext(), EditNoteActivity.class);
+                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                                intent.setAction(ACTION_SHORTCUT);
+
+                                newShortcuts.add(new ShortcutInfo.Builder(context.getApplicationContext(), note.getId() + "")
+                                        .setShortLabel(note.getTitle() + "")
+                                        .setIcon(Icon.createWithResource(context.getApplicationContext(), note.getFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                        .setIntent(intent)
+                                        .build());
+                            } else {
+                                // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
+                                Log.e(TAG, "shortLabel cannot be empty " + note);
+                            }
+                        }
+                        Log.d(TAG, "Update dynamic shortcuts");
+                        shortcutManager.removeAllDynamicShortcuts();
+                        shortcutManager.addDynamicShortcuts(newShortcuts);
+                    }
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * Set the category for a given note.
+     * This method will search in the database to find out the category id in the db.
+     * If there is no such category existing, this method will create it and search again.
+     *
+     * @param ssoAccount The single sign on account
+     * @param note       The note which will be updated
+     * @param category   The category title which should be used to find the category id.
+     * @param callback   When the synchronization is finished, this callback will be invoked (optional).
+     */
+    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
+        note.setCategory(category);
+        getNoteDao().updateStatus(note.getId(), DBStatus.LOCAL_DELETED);
+        long categoryId = getOrCreateCategoryIdByTitle(note.getAccountId(), note.getCategory());
+        getNoteDao().updateCategory(note.getId(), categoryId);
+        getCategoryDao().removeEmptyCategory(note.getAccountId());
+        if (callback != null) {
+            syncHelper.addCallbackPush(ssoAccount, callback);
+        }
+        syncHelper.scheduleSync(ssoAccount, true);
     }
 }

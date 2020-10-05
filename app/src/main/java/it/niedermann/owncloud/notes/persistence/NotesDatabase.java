@@ -263,19 +263,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * Returns a list of all Notes in the Database which were modified locally
-     *
-     * @return {@link List<DBNote>}
-     */
-    @NonNull
-    @WorkerThread
-    List<DBNote> getLocalModifiedNotes(long accountId) {
-        validateAccountId(accountId);
-        return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.VOID.getTitle(), "" + accountId}, null, false);
-    }
-
-
-    /**
      * This method return all of the categories with given accountId
      *
      * @param accountId The user account Id
@@ -357,32 +344,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         values.put(key_status, note.getStatus().getTitle());
         values.put(key_favorite, note.isFavorite() ? "1" : "0");
         db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
-        if (callback != null) {
-            serverSyncHelper.addCallbackPush(ssoAccount, callback);
-        }
-        serverSyncHelper.scheduleSync(ssoAccount, true);
-    }
-
-    /**
-     * Set the category for a given note.
-     * This method will search in the database to find out the category id in the db.
-     * If there is no such category existing, this method will create it and search again.
-     *
-     * @param ssoAccount The single sign on account
-     * @param note       The note which will be updated
-     * @param category   The category title which should be used to find the category id.
-     * @param callback   When the synchronization is finished, this callback will be invoked (optional).
-     */
-    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
-        note.setCategory(category);
-        note.setStatus(DBStatus.LOCAL_EDITED);
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues(2);
-        values.put(key_status, note.getStatus().getTitle());
-        int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory());
-        values.put(key_category, id);
-        db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
-        removeEmptyCategory(note.getAccountId());
         if (callback != null) {
             serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
@@ -511,40 +472,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         updateSingleNoteWidgets(getContext());
         updateNoteListWidgets(getContext());
     }
-
-    void updateDynamicShortcuts(long accountId) {
-        new Thread(() -> {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-                ShortcutManager shortcutManager = getContext().getApplicationContext().getSystemService(ShortcutManager.class);
-                if (shortcutManager != null) {
-                    if (!shortcutManager.isRateLimitingActive()) {
-                        List<ShortcutInfo> newShortcuts = new ArrayList<>();
-
-                        for (DBNote note : getRecentNotes(accountId)) {
-                            if (!TextUtils.isEmpty(note.getTitle())) {
-                                Intent intent = new Intent(getContext().getApplicationContext(), EditNoteActivity.class);
-                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-                                intent.setAction(ACTION_SHORTCUT);
-
-                                newShortcuts.add(new ShortcutInfo.Builder(getContext().getApplicationContext(), note.getId() + "")
-                                        .setShortLabel(note.getTitle() + "")
-                                        .setIcon(Icon.createWithResource(getContext().getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                        .setIntent(intent)
-                                        .build());
-                            } else {
-                                // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
-                                Log.e(TAG, "shortLabel cannot be empty " + note);
-                            }
-                        }
-                        Log.d(TAG, "Update dynamic shortcuts");
-                        shortcutManager.removeAllDynamicShortcuts();
-                        shortcutManager.addDynamicShortcuts(newShortcuts);
-                    }
-                }
-            }
-        }).start();
-    }
-
 
     /**
      * @param apiVersion has to be a JSON array as a string <code>["0.2", "1.0", ...]</code>
