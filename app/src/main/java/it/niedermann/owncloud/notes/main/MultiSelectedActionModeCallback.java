@@ -33,6 +33,7 @@ import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
@@ -108,7 +109,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
                         DBNote note = (DBNote) adapter.getItem(i);
-                        deletedNotes.add(sqliteOpenHelperDatabase.getNote(note.getAccountId(), note.getId()));
+                        deletedNotes.add(NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(note.getAccountId(), note.getId())));
                         roomDatabase.deleteNoteAndSync(ssoAccount, note.getId());
                     }
                     mode.finish(); // Action picked, so close the CAB
@@ -148,7 +149,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                 final StringBuilder noteContents = new StringBuilder();
                 for (Integer i : adapter.getSelected()) {
                     final DBNote noteWithoutContent = (DBNote) adapter.getItem(i);
-                    final String tempFullNote = sqliteOpenHelperDatabase.getNote(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
+                    final String tempFullNote = roomDatabase.getNoteDao().getNote(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
                     if (!TextUtils.isEmpty(tempFullNote)) {
                         if (noteContents.length() > 0) {
                             noteContents.append("\n\n");

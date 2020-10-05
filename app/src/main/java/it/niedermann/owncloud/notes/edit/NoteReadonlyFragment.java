@@ -105,7 +105,7 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-                                long noteLocalId = sqliteOpenHelperDatabase.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
+                                long noteLocalId = roomDatabase.getNoteDao().getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
                                 Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
                                 startActivity(intent);

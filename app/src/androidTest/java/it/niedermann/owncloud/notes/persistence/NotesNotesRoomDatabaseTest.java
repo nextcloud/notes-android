@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
@@ -103,7 +104,7 @@ public class NotesNotesRoomDatabaseTest {
         // Add a new note
         long noteID = roomDatabase.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        DBNote note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
+        DBNote note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(accountID, noteID));
         Log.i("Test_01_addNote_Cur_Note", note.toString());
         Log.i("Test_01_addNote_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_01_addNote_Cur_Note", "Content: " + note.getContent());
@@ -129,7 +130,7 @@ public class NotesNotesRoomDatabaseTest {
                 "A Bad Day", getCurDate() + " You're faking a smile with just a coffee to go (Daniel Powter).",
                 true, "A Nice Song", null);
         noteID = roomDatabase.addNote(accountID, cloudNote_re0);
-        note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
+        note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(accountID, noteID));
         // Check
         assertEquals("A Bad Day", note.getTitle());
         assertEquals(cloudNote_re0.getContent(), note.getContent());
@@ -159,7 +160,7 @@ public class NotesNotesRoomDatabaseTest {
             // Add a new note
             long noteID = roomDatabase.addNote(accountID, dbNote);
             // Check if this note is added successfully
-            DBNote note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
+            DBNote note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(accountID, noteID));
             assertEquals(dbNote.getTitle(), note.getTitle());
             assertEquals(dbNote.getContent(), note.getContent());
             assertEquals(dbNote.getCategory(), note.getCategory());
@@ -173,7 +174,7 @@ public class NotesNotesRoomDatabaseTest {
             // Add a new note
             noteID = roomDatabase.addNote(accountID, dbNote);
             // Check if this note is added successfully
-            note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
+            note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(accountID, noteID));
             assertEquals(dbNote.getTitle(), note.getTitle());
             assertEquals(dbNote.getContent(), note.getContent());
             assertEquals(dbNote.getCategory(), note.getCategory());
@@ -317,7 +318,7 @@ public class NotesNotesRoomDatabaseTest {
 
         // check if the node added successfully
         for (int i = 0; i < 10; ++i) {
-            DBNote nodeTemp = sqliteOpenHelperDatabase.getNote(thisAccountID, multiNoteID[i]);
+            DBNote nodeTemp = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(thisAccountID, multiNoteID[i]));
             assertEquals(nodeTemp.getTitle(), multiCloudNote.get(i).getTitle());
             assertEquals(nodeTemp.getCategory(), multiCloudNote.get(i).getCategory());
             assertEquals(nodeTemp.getContent(), multiCloudNote.get(i).getContent());
@@ -458,7 +459,7 @@ public class NotesNotesRoomDatabaseTest {
         // Add a new note
         long noteID = roomDatabase.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        DBNote note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
+        DBNote note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(accountID, noteID));
         Log.i("Test_12_Chinese_Cur_Note", note.toString());
         Log.i("Test_12_Chinese_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_12_Chinese_Cur_Note", "Content: " + note.getContent());

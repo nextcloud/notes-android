@@ -156,7 +156,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
             }
 
-            Map<String, Integer> favorites = sqliteOpenHelperDatabase.getFavoritesCount(localAccount.getId());
+            Map<String, Integer> favorites = roomDatabase.getNoteDao().getFavoritesCount(localAccount.getId());
             //noinspection ConstantConditions
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             //noinspection ConstantConditions

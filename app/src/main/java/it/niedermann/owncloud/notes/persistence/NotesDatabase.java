@@ -68,6 +68,7 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
 /**
  * Helps to add, get, update and delete Notes with the option to trigger a Resync with the Server.
  */
+@Deprecated
 public class NotesDatabase extends AbstractNotesDatabase {
 
     private static final String TAG = NotesDatabase.class.getSimpleName();
@@ -92,56 +93,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     public NoteServerSyncHelper getNoteServerSyncHelper() {
         return serverSyncHelper;
-    }
-
-    /**
-     * Get a single Note by ID
-     *
-     * @param id int - ID of the requested Note
-     * @return requested {@link DBNote}
-     */
-    public DBNote getNote(long accountId, long id) {
-        List<DBNote> notes = getNotesCustom(accountId, key_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(id), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, false);
-        return notes.isEmpty() ? null : notes.get(0);
-    }
-
-    /**
-     * Gets all the remoteIds of all not deleted notes of an account
-     *
-     * @param accountId get the remoteIds from all notes of this account
-     * @return {@link Set<String>} remoteIds from all notes
-     */
-    public Set<String> getRemoteIds(long accountId) {
-        Cursor cursor = getReadableDatabase()
-                .query(
-                        table_notes,
-                        new String[]{key_remote_id},
-                        key_status + " != ? AND " + key_account_id + " = ?",
-                        new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId},
-                        null,
-                        null,
-                        null
-                );
-        Set<String> remoteIds = new HashSet<>();
-        while (cursor.moveToNext()) {
-            remoteIds.add(cursor.getString(0));
-        }
-        cursor.close();
-        return remoteIds;
-    }
-
-    /**
-     * Get a single Note by remote Id (aka. nextcloud file id)
-     *
-     * @param remoteId int - remote ID of the requested Note
-     * @return {@link DBNote#getId()}
-     */
-    public long getLocalIdByRemoteId(long accountId, long remoteId) {
-        List<DBNote> notes = getNotesCustom(accountId, key_remote_id + " = ? AND " + key_status + " != ? AND " + key_account_id + " = ? ", new String[]{String.valueOf(remoteId), DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, true);
-        if (notes.isEmpty() || notes.get(0) == null) {
-            throw new IllegalArgumentException("There is no note with remoteId \"" + remoteId + "\"");
-        }
-        return notes.get(0).getId();
     }
 
     /**
@@ -323,26 +274,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.VOID.getTitle(), "" + accountId}, null, false);
     }
 
-    @NonNull
-    @WorkerThread
-    public Map<String, Integer> getFavoritesCount(long accountId) {
-        validateAccountId(accountId);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(
-                table_notes,
-                new String[]{key_favorite, "COUNT(*)"},
-                key_status + " != ? AND " + key_account_id + " = ?",
-                new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId},
-                key_favorite,
-                null,
-                key_favorite);
-        Map<String, Integer> favorites = new HashMap<>(cursor.getCount());
-        while (cursor.moveToNext()) {
-            favorites.put(cursor.getString(0), cursor.getInt(1));
-        }
-        cursor.close();
-        return favorites;
-    }
 
     /**
      * This method return all of the categories with given accountId

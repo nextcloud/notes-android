@@ -1,10 +1,12 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Icon;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -17,9 +19,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.dao.CategoryDao;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
@@ -32,6 +37,7 @@ import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
+import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
@@ -147,8 +153,8 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
             return categoryId;
         } else {
             CategoryEntity entity = new CategoryEntity();
-            entity.accountId = accountId;
-            entity.title = categoryTitle;
+            entity.setAccountId(accountId);
+            entity.setTitle(categoryTitle);
             return getCategoryDao().addCategory(entity);
         }
     }
@@ -161,8 +167,6 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
         notifyWidgets();
         syncHelper.scheduleSync(ssoAccount, true);
     }
-
-
 
     /**
      * Marks a Note in the Database as Deleted. In the next Synchronization it will be deleted
@@ -215,25 +219,26 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
         if (note instanceof DBNote) {
             DBNote dbNote = (DBNote) note;
             if (dbNote.getId() > 0) {
-                entity.id = dbNote.getId();
+                entity.setId(dbNote.getId());
             }
-            entity.status = dbNote.getStatus().getTitle();
-            entity.accountId = dbNote.getAccountId();
-            entity.excerpt = dbNote.getExcerpt();
+            entity.setStatus(dbNote.getStatus());
+            entity.setAccountId(dbNote.getAccountId());
+            entity.setExcerpt(dbNote.getExcerpt());
         } else {
-            entity.status = DBStatus.VOID.getTitle();
-            entity.accountId = accountId;
-            entity.excerpt = generateNoteExcerpt(note.getContent(), note.getTitle());
+            entity.setStatus(DBStatus.VOID);
+            entity.setAccountId(accountId);
+            entity.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
         }
         if (note.getRemoteId() > 0) {
-            entity.remoteId = note.getRemoteId();
+            entity.setRemoteId(note.getRemoteId());
         }
-        entity.title = note.getTitle();
-        entity.modified = note.getModified().getTimeInMillis() / 1000;
-        entity.content = note.getContent();
-        entity.favorite = note.isFavorite();
-        entity.categoryId = getOrCreateCategoryIdByTitle(accountId, note.getCategory());
-        entity.eTag = note.getEtag();
+        entity.setTitle(note.getTitle());
+        entity.setModified(note.getModified().getTimeInMillis() / 1000);
+        entity.setContent(note.getContent());
+        entity.setFavorite(note.isFavorite());
+        // FIXME
+//        entity.setCategory(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
+        entity.seteTag(note.getEtag());
         return getNoteDao().addNote(entity);
     }
 

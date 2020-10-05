@@ -79,6 +79,7 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.Category;
@@ -531,7 +532,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 itemUncategorized = null;
             }
 
-            Map<String, Integer> favorites = sqliteOpenHelperDatabase.getFavoritesCount(localAccount.getId());
+            Map<String, Integer> favorites = roomDatabase.getNoteDao().getFavoritesCount(localAccount.getId());
             //noinspection ConstantConditions
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             //noinspection ConstantConditions
@@ -982,7 +983,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         adapter.deselect(0);
         for (Integer i : selection) {
             DBNote note = (DBNote) adapter.getItem(i);
-            roomDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), sqliteOpenHelperDatabase.getNote(note.getAccountId(), note.getId()), account.getId());
+            roomDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(note.getAccountId(), note.getId())), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);

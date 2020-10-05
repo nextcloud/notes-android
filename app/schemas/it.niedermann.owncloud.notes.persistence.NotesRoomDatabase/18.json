@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 18,
-    "identityHash": "8dedb4a395823bb29867fba3d2d62fe2",
+    "identityHash": "2b759c5539fc95fe87684d51707cd440",
     "entities": [
       {
         "tableName": "LocalAccountEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `url` TEXT, `username` TEXT, `accountName` TEXT, `eTag` TEXT, `modified` INTEGER NOT NULL, `apiVersion` TEXT, `color` TEXT, `textColor` TEXT, `capabilitiesETag` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `url` TEXT, `username` TEXT, `accountName` TEXT, `eTag` TEXT, `modified` INTEGER NOT NULL, `apiVersion` TEXT, `capabilitiesETag` TEXT, `color` TEXT, `textColor` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -51,6 +51,12 @@
             "notNull": false
           },
           {
+            "fieldPath": "capabilitiesETag",
+            "columnName": "capabilitiesETag",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "color",
             "columnName": "color",
             "affinity": "TEXT",
@@ -59,12 +65,6 @@
           {
             "fieldPath": "textColor",
             "columnName": "textColor",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "capabilitiesETag",
-            "columnName": "capabilitiesETag",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -80,7 +80,7 @@
       },
       {
         "tableName": "NoteEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `remoteId` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `status` TEXT, `title` TEXT, `modified` INTEGER NOT NULL, `content` TEXT, `eTag` TEXT, `excerpt` TEXT, `scrollY` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `remoteId` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `status` TEXT, `title` TEXT, `modified` INTEGER NOT NULL, `content` TEXT, `favorite` INTEGER, `eTag` TEXT, `excerpt` TEXT, `scrollY` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -125,6 +125,12 @@
             "notNull": false
           },
           {
+            "fieldPath": "favorite",
+            "columnName": "favorite",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
             "fieldPath": "eTag",
             "columnName": "eTag",
             "affinity": "TEXT",
@@ -156,7 +162,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8dedb4a395823bb29867fba3d2d62fe2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2b759c5539fc95fe87684d51707cd440')"
     ]
   }
 }

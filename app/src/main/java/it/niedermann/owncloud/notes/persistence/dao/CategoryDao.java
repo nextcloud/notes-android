@@ -9,7 +9,11 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
+import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
 @Dao
 public interface CategoryDao {
@@ -23,7 +27,7 @@ public interface CategoryDao {
      *
      * @param accountId The user accountId
      */
-    @Query("DELETE FROM categoryentity WHERE id NOT IN (SELECT noteentity.categoryId FROM noteentity)")
+    @Query("DELETE FROM categoryentity WHERE id NOT IN (SELECT noteentity.category FROM noteentity)")
     void removeEmptyCategory(long accountId);
 
     @Insert
@@ -31,5 +35,4 @@ public interface CategoryDao {
 
     @Query("SELECT id FROM categoryentity WHERE accountId = :accountId AND title = :title")
     Long getCategoryIdByTitle(long accountId, @NonNull String title);
-
 }

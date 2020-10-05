@@ -39,6 +39,7 @@ import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitle
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
@@ -112,7 +113,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccountEntity.getAccountName());
                     }
                     isNew = false;
-                    note = originalNote = sqliteOpenHelperDatabase.getNote(localAccountEntity.getId(), id);
+                    note = originalNote = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(localAccountEntity.getId(), id));
                 } else {
                     CloudNote cloudNote = (CloudNote) requireArguments().getSerializable(PARAM_NEWNOTE);
                     String content = requireArguments().getString(PARAM_CONTENT);
@@ -123,7 +124,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                             note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "", 0);
                         }
                     } else {
-                        note = sqliteOpenHelperDatabase.getNote(localAccountEntity.getId(), roomDatabase.addNoteAndSync(ssoAccount, localAccountEntity.getId(), cloudNote));
+                        note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(localAccountEntity.getId(), roomDatabase.addNoteAndSync(ssoAccount, localAccountEntity.getId(), cloudNote)));
                         originalNote = null;
                     }
                 }

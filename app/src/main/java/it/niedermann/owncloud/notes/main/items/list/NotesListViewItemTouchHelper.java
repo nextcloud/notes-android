@@ -18,6 +18,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
@@ -74,7 +75,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
                         final DBNote dbNoteWithoutContent = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        final DBNote dbNote = sqliteOpenHelperDatabase.getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
+                        final DBNote dbNote = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId()));
                         roomDatabase.deleteNoteAndSync(ssoAccount, dbNote.getId());
                         adapter.remove(dbNote);
                         refreshLists.run();

@@ -14,6 +14,8 @@ import com.yydcdut.markdown.syntax.text.TextFactory;
 import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
@@ -29,7 +31,8 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private final Context context;
     private final int appWidgetId;
 
-    private NotesDatabase db;
+    private NotesDatabase sqliteOpenHelperDatabase;
+    private NotesRoomDatabase roomDatabase;
     private DBNote note;
     private boolean darkModeActive = false;
 
@@ -39,11 +42,12 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         this.context = context;
         appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
-        db = NotesDatabase.getInstance(context);
+        sqliteOpenHelperDatabase = NotesDatabase.getInstance(context);
+        roomDatabase = NotesRoomDatabase.getInstance(context);
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
         try {
-            SingleNoteWidgetData data = db.getSingleNoteWidgetData(appWidgetId);
+            SingleNoteWidgetData data = sqliteOpenHelperDatabase.getSingleNoteWidgetData(appWidgetId);
             darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
         } catch (NoSuchElementException e) {
             Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
@@ -60,10 +64,10 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onDataSetChanged() {
         try {
-            final SingleNoteWidgetData data = db.getSingleNoteWidgetData(appWidgetId);
+            final SingleNoteWidgetData data = sqliteOpenHelperDatabase.getSingleNoteWidgetData(appWidgetId);
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
-            note = db.getNote(data.getAccountId(), noteId);
+            note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(data.getAccountId(), noteId));
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");
