@@ -564,11 +564,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return data;
     }
 
-    public void removeSingleNoteWidget(int appWidgetId) {
-        final SQLiteDatabase db = getWritableDatabase();
-        db.delete(table_widget_single_notes, key_id + " = ?", new String[]{String.valueOf(appWidgetId)});
-    }
-
     public void createOrUpdateSingleNoteWidgetData(@NonNull SingleNoteWidgetData data) throws SQLException {
         validateAccountId(data.getAccountId());
         final SQLiteDatabase db = getWritableDatabase();
@@ -596,11 +591,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
         cursor.close();
         return data;
-    }
-
-    public void removeNoteListWidget(int appWidgetId) {
-        final SQLiteDatabase db = getWritableDatabase();
-        db.delete(table_widget_note_list, key_id + " = ?", new String[]{String.valueOf(appWidgetId)});
     }
 
     public void createOrUpdateNoteListWidgetData(@NonNull NoteListsWidgetData data) throws SQLException {

@@ -162,10 +162,10 @@ public class NoteListWidget extends AppWidgetProvider {
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
-        final NotesDatabase db = NotesDatabase.getInstance(context);
+        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            db.removeNoteListWidget(appWidgetId);
+            db.getWidgetNotesListDao().removeNoteListWidget(appWidgetId);
         }
     }
 

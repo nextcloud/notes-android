@@ -1,12 +1,9 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.text.TextUtils;
@@ -35,10 +32,14 @@ import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.dao.CategoryDao;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
+import it.niedermann.owncloud.notes.persistence.dao.WidgetNotesListDao;
+import it.niedermann.owncloud.notes.persistence.dao.WidgetSingleNoteDao;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.WidgetNotesListEntity;
+import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
@@ -55,7 +56,9 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
         entities = {
                 LocalAccountEntity.class,
                 NoteEntity.class,
-                CategoryEntity.class
+                CategoryEntity.class,
+                WidgetSingleNoteEntity.class,
+                WidgetNotesListEntity.class
         }, version = 18
 )
 @TypeConverters({Converters.class})
@@ -102,10 +105,10 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
     };
 
     public abstract LocalAccountDao getLocalAccountDao();
-
     public abstract CategoryDao getCategoryDao();
-
     public abstract NoteDao getNoteDao();
+    public abstract WidgetSingleNoteDao getWidgetSingleNoteDao();
+    public abstract WidgetNotesListDao getWidgetNotesListDao();
 
     @SuppressWarnings("UnusedReturnValue")
     public long addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
@@ -328,7 +331,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
     public Map<Long, Long> getIdMap(long accountId) {
         validateAccountId(accountId);
         Map<Long, Long> result = new HashMap<>();
-        for(NoteEntity note : getNoteDao().getRemoteIdAndId(accountId)) {
+        for (NoteEntity note : getNoteDao().getRemoteIdAndId(accountId)) {
             result.put(note.getRemoteId(), note.getId());
         }
         return result;

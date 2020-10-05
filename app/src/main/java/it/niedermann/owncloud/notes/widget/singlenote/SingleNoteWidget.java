@@ -13,6 +13,7 @@ import android.widget.RemoteViews;
 import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.edit.BaseNoteFragment;
@@ -79,10 +80,10 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
-        final NotesDatabase db = NotesDatabase.getInstance(context);
+        final NotesRoomDatabase roomDatabase = NotesRoomDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            db.removeSingleNoteWidget(appWidgetId);
+            roomDatabase.getWidgetSingleNoteDao().removeSingleNoteWidget(appWidgetId);
         }
         super.onDeleted(context, appWidgetIds);
     }
