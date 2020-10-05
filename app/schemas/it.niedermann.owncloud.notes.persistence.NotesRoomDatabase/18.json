@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 18,
-    "identityHash": "6d6111b4da8084c8f73df0eb63e39070",
+    "identityHash": "cf4429b4afde78dd86d282a0d0dfea47",
     "entities": [
       {
         "tableName": "LocalAccountEntity",
@@ -80,7 +80,7 @@
       },
       {
         "tableName": "NoteEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `remoteId` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `status` TEXT, `title` TEXT, `modified` INTEGER NOT NULL, `content` TEXT, `favorite` INTEGER, `eTag` TEXT, `excerpt` TEXT, `scrollY` INTEGER NOT NULL, `category` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `remoteId` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `status` TEXT, `title` TEXT, `modified` INTEGER NOT NULL, `content` TEXT, `favorite` INTEGER, `eTag` TEXT, `excerpt` TEXT, `scrollY` INTEGER NOT NULL, `category_id` INTEGER, `category_accountId` INTEGER, `category_title` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -149,8 +149,20 @@
             "notNull": true
           },
           {
-            "fieldPath": "category",
-            "columnName": "category",
+            "fieldPath": "category.id",
+            "columnName": "category_id",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "category.accountId",
+            "columnName": "category_accountId",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "category.title",
+            "columnName": "category_title",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -200,7 +212,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6d6111b4da8084c8f73df0eb63e39070')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'cf4429b4afde78dd86d282a0d0dfea47')"
     ]
   }
 }

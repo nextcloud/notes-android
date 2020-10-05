@@ -25,6 +25,7 @@ public class NoteEntity {
     private String eTag;
     private String excerpt;
     private int scrollY;
+    @Embedded(prefix = "category_")
     private CategoryEntity category;
 
     public long getId() {

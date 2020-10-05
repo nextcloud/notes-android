@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -35,8 +36,8 @@ public interface NoteDao {
      * @param accountId get the remoteIds from all notes of this account
      * @return {@link Set<String>} remoteIds from all notes
      */
-    @Query("SELECT remoteId FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\"")
-    Set<String> getRemoteIds(long accountId);
+    @Query("SELECT DISTINCT remoteId FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\"")
+    List<Long> getRemoteIds(long accountId);
 
 
     /**
@@ -45,9 +46,9 @@ public interface NoteDao {
      * @param remoteId int - remote ID of the requested Note
      * @return {@link DBNote#getId()}
      */
-    @Query("SELECT id FROM noteentity WHERE accountId = :accountId AND remoteId = :remoteId AND status != \"LOCAL_DELETED\"")
+    @Query("SELECT id FROM NoteEntity WHERE accountId = :accountId AND remoteId = :remoteId AND status != \"LOCAL_DELETED\"")
     Long getLocalIdByRemoteId(long accountId, long remoteId);
 
-    @Query("SELECT favorite, COUNT(*) FROM noteentity WHERE status != \"LOCAL_DELETED\" AND accountId = :accountId GROUP BY favorite ORDER BY favorite")
+    @Query("SELECT favorite, COUNT(*) FROM NoteEntity WHERE status != \"LOCAL_DELETED\" AND accountId = :accountId GROUP BY favorite ORDER BY favorite")
     Map<String, Integer> getFavoritesCount(long accountId);
 }

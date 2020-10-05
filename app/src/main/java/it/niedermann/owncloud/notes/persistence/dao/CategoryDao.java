@@ -19,7 +19,7 @@ public interface CategoryDao {
      *
      * @param accountId The user accountId
      */
-    @Query("DELETE FROM CategoryEntity WHERE accountId = :accountId AND id NOT IN (SELECT category FROM NoteEntity)")
+    @Query("DELETE FROM CategoryEntity WHERE accountId = :accountId AND id NOT IN (SELECT category_id FROM NoteEntity)")
     void removeEmptyCategory(long accountId);
 
     @Insert
