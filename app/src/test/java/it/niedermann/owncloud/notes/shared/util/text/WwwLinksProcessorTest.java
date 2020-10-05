@@ -37,13 +37,12 @@ public class WwwLinksProcessorTest extends TestCase {
         Assert.assertEquals(markdown, sut.process(markdown));
     }
 
-    @SuppressWarnings("MarkdownUnresolvedFileReference")
     public void testDoNotReplaceNormalLinks() {
         TextProcessor sut = new WwwLinksProcessor();
 
         //language=md
         String markdown = "[normal link](https://example.com) and another [www link](www.example.com) and one more [normal link](https://www.example.com)";
         String result = sut.process(markdown);
-        Assert.assertEquals("[normal link](https://example.com) and another [www link](http://www.example.com) and one more [normal link](https://www.example.com)", result);
+        Assert.assertEquals("[normal link](https://example.com) and another [www link](https://www.example.com) and one more [normal link](https://www.example.com)", result);
     }
 }

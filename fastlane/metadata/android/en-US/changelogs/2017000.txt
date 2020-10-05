@@ -1,0 +1,2 @@
+- Selecting a note in the main note list highlights two notes (#920) (@muety)
+- Support www links without protocol in preview mode (#949) (@muety)

@@ -18,7 +18,7 @@ public class TextProcessorChainTest extends TestCase {
         Assert.assertEquals("SelfIdentifyingProcessor 1\nSelfIdentifyingProcessor 2", chain.apply(""));
     }
 
-    class SelfIdentifyingProcessor extends TextProcessor {
+    static class SelfIdentifyingProcessor extends TextProcessor {
         private int id;
 
         public SelfIdentifyingProcessor(int id) {
