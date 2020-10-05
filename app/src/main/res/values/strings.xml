@@ -156,7 +156,6 @@
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
     <string name="checkbox_could_not_be_toggled">Checkbox could not be toggled.</string>
-    <string name="bulk_notes_restored">Restored %1$d notes</string>
     <string name="category_readonly">Read only</string>
     <string name="no_category">No category</string>
     <string name="add_category">Add %1$s</string>
@@ -193,7 +192,6 @@
     <string name="simple_appearance">Appearance</string>
     <string name="simple_synchronization">Synchronization</string>
     <string name="simple_behavior">Behavior</string>
-    <string name="share_multiple">Share content of %1$d notes</string>
     <string name="manage_accounts">Manage accounts</string>
     <string name="action_formatting_help">Formatting</string>
 
@@ -231,8 +229,16 @@
         <item quantity="other">%d selected</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
-        <item quantity="one">Deleted %1$d note</item>
+        <item quantity="one">Deleted one note</item>
         <item quantity="other">Deleted %1$d notes</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Restored one note</item>
+        <item quantity="other">Restored %1$d notes</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Share content of %1$d note</item>
+        <item quantity="other">Share content of %1$d notes</item>
     </plurals>
 
     <!-- Formatting help -->

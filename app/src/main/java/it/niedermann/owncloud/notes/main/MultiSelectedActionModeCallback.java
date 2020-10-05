@@ -12,6 +12,7 @@ import androidx.annotation.ColorInt;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -124,7 +125,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                                 refreshLists.run();
                                 String restoreSnackbarTitle = deletedNotes.size() == 1
                                         ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
-                                        : context.getString(R.string.bulk_notes_restored, deletedNotes.size());
+                                        : context.getResources().getQuantityString(R.plurals.bulk_notes_restored, deletedNotes.size(), deletedNotes.size());
                                 BrandedSnackbar.make(viewProvider.getView(), restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
                                         .show();
                             })
@@ -141,7 +142,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             case R.id.menu_share:
                 final String subject = (adapter.getSelected().size() == 1)
                         ? ((DBNote) adapter.getItem(adapter.getSelected().get(0))).getTitle()
-                        : context.getString(R.string.share_multiple, adapter.getSelected().size());
+                        : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
                 final StringBuilder noteContents = new StringBuilder();
                 for (Integer i : adapter.getSelected()) {
                     final DBNote noteWithoutContent = (DBNote) adapter.getItem(i);
