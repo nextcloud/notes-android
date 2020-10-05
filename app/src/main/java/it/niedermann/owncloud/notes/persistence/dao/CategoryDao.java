@@ -1,19 +1,11 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
-import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
 @Dao
 public interface CategoryDao {
@@ -27,12 +19,12 @@ public interface CategoryDao {
      *
      * @param accountId The user accountId
      */
-    @Query("DELETE FROM categoryentity WHERE id NOT IN (SELECT noteentity.category FROM noteentity)")
+    @Query("DELETE FROM CategoryEntity WHERE accountId = :accountId AND id NOT IN (SELECT category FROM NoteEntity)")
     void removeEmptyCategory(long accountId);
 
     @Insert
     Long addCategory(@NonNull CategoryEntity entity);
 
-    @Query("SELECT id FROM categoryentity WHERE accountId = :accountId AND title = :title")
+    @Query("SELECT id FROM CategoryEntity WHERE accountId = :accountId AND title = :title")
     Long getCategoryIdByTitle(long accountId, @NonNull String title);
 }

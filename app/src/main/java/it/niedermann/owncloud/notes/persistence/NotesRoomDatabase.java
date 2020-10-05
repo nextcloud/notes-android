@@ -1,12 +1,8 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.graphics.drawable.Icon;
 import android.os.Build;
-import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -14,21 +10,20 @@ import androidx.annotation.WorkerThread;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.dao.CategoryDao;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Converters;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -37,7 +32,6 @@ import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
-import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
@@ -45,9 +39,11 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
 @Database(
         entities = {
                 LocalAccountEntity.class,
-                NoteEntity.class
+                NoteEntity.class,
+                CategoryEntity.class
         }, version = 18
 )
+@TypeConverters({Converters.class})
 public abstract class NotesRoomDatabase extends RoomDatabase {
 
     private static final String TAG = NotesRoomDatabase.class.getSimpleName();
@@ -238,7 +234,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
         entity.setFavorite(note.isFavorite());
         // FIXME
 //        entity.setCategory(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
-        entity.seteTag(note.getEtag());
+        entity.setETag(note.getEtag());
         return getNoteDao().addNote(entity);
     }
 

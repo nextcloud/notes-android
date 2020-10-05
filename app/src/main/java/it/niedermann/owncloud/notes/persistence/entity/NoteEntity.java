@@ -1,15 +1,17 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.Relation;
+import androidx.room.TypeConverters;
 
 import java.util.Calendar;
 
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
-@Entity
+@Entity()
 public class NoteEntity {
     @PrimaryKey
     private long id;
@@ -23,7 +25,6 @@ public class NoteEntity {
     private String eTag;
     private String excerpt;
     private int scrollY;
-    @Relation(parentColumn = "id", entityColumn = "id")
     private CategoryEntity category;
 
     public long getId() {
@@ -90,11 +91,11 @@ public class NoteEntity {
         this.favorite = favorite;
     }
 
-    public String geteTag() {
+    public String getETag() {
         return eTag;
     }
 
-    public void seteTag(String eTag) {
+    public void setETag(String eTag) {
         this.eTag = eTag;
     }
 
@@ -137,7 +138,7 @@ public class NoteEntity {
                 entity.getContent(),
                 entity.getFavorite(),
                 entity.getCategory().getTitle(),
-                entity.geteTag(),
+                entity.getETag(),
                 entity.getStatus(),
                 entity.getAccountId(),
                 entity.getExcerpt(),

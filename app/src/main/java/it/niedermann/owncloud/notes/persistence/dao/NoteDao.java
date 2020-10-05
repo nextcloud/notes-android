@@ -1,17 +1,9 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.WorkerThread;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,19 +14,19 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 @Dao
 public interface NoteDao {
 
-    @Query("DELETE FROM noteentity WHERE id = :id and status= :forceDBStatus")
-    void deleteByCardId(long id, DBStatus forceDBStatus);
-
-    @Query("UPDATE noteentity SET scrollY = :scrollY WHERE id = :id")
-    void updateScrollY(long id, int scrollY);
-
-    @Query("SELECT * FROM noteentity WHERE id = :id AND accountId = :accountId AND status != :")
-    NoteEntity getNote(long accountId, long id);
-
     @Insert
     long addNote(NoteEntity noteEntity);
 
-    @Query("UPDATE noteentity SET status = :status WHERE id = :id")
+    @Query("DELETE FROM NoteEntity WHERE id = :id and status = :forceDBStatus")
+    void deleteByCardId(long id, DBStatus forceDBStatus);
+
+    @Query("UPDATE NoteEntity SET scrollY = :scrollY WHERE id = :id")
+    void updateScrollY(long id, int scrollY);
+
+    @Query("SELECT * FROM NoteEntity WHERE id = :id AND accountId = :accountId AND status != :accountId")
+    NoteEntity getNote(long accountId, long id);
+
+    @Query("UPDATE NoteEntity SET status = :status WHERE id = :id")
     void updateStatus(long id, DBStatus status);
 
     /**
@@ -43,7 +35,7 @@ public interface NoteDao {
      * @param accountId get the remoteIds from all notes of this account
      * @return {@link Set<String>} remoteIds from all notes
      */
-    @Query("SELECT remoteId FROM noteentity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\"")
+    @Query("SELECT remoteId FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\"")
     Set<String> getRemoteIds(long accountId);
 
 
