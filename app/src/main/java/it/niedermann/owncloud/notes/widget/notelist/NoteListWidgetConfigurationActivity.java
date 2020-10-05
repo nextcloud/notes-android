@@ -24,6 +24,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.WidgetNotesListEntity;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
@@ -90,9 +91,9 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
-                NoteListsWidgetData data = new NoteListsWidgetData();
+                WidgetNotesListEntity data = new WidgetNotesListEntity();
 
-                data.setAppWidgetId(appWidgetId);
+                data.setId(appWidgetId);
                 if (itemRecent.equals(item)) {
                     data.setMode(NoteListsWidgetData.MODE_DISPLAY_ALL);
                 } else if (itemFavorites.equals(item)) {
@@ -109,7 +110,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 data.setAccountId(localAccount.getId());
                 data.setThemeMode(NotesApplication.getAppTheme(getApplicationContext()).getModeId());
 
-                sqliteOpenHelperDatabase.createOrUpdateNoteListWidgetData(data);
+                roomDatabase.getWidgetNotesListDao().createOrUpdateNoteListWidgetData(data);
 
                 Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
                         getApplicationContext(), NoteListWidget.class);

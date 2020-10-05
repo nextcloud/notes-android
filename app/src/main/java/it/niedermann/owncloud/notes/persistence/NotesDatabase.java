@@ -593,21 +593,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return data;
     }
 
-    public void createOrUpdateNoteListWidgetData(@NonNull NoteListsWidgetData data) throws SQLException {
-        validateAccountId(data.getAccountId());
-        final SQLiteDatabase db = getWritableDatabase();
-        final ContentValues values = new ContentValues(5);
-        if (data.getMode() != MODE_DISPLAY_CATEGORY && data.getCategoryId() != null) {
-            throw new UnsupportedOperationException("Cannot create a widget with a categoryId when mode is not " + MODE_DISPLAY_CATEGORY);
-        }
-        values.put(key_id, data.getAppWidgetId());
-        values.put(key_account_id, data.getAccountId());
-        values.put(key_category_id, data.getCategoryId());
-        values.put(key_theme_mode, data.getThemeMode());
-        values.put(key_mode, data.getMode());
-        db.replaceOrThrow(table_widget_note_list, null, values);
-    }
-
     private static void validateAccountId(long accountId) {
         if (accountId < 1) {
             throw new IllegalArgumentException("accountId must be greater than 0");
