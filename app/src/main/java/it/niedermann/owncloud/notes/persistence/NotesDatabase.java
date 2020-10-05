@@ -2,27 +2,15 @@ package it.niedermann.owncloud.notes.persistence;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ShortcutInfo;
-import android.content.pm.ShortcutManager;
 import android.content.res.Resources;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
-import android.graphics.drawable.Icon;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
-import androidx.core.content.ContextCompat;
-import androidx.preference.PreferenceManager;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -33,36 +21,21 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
-import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
-import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
-import it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData;
-import it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget;
-import it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidgetData;
 
-import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
-import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
 
 /**
@@ -302,33 +275,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return categories;
     }
 
-    public String getCategoryTitleById(long accountId, long categoryId) {
-        validateAccountId(accountId);
-        final String categoryTitle;
-        final Cursor cursor = getReadableDatabase().query(table_category, new String[]{key_category_title}, key_category_id + " = ?", new String[]{String.valueOf(categoryId)}, null, null, null);
-        if (cursor.moveToFirst()) {
-            categoryTitle = cursor.getString(0);
-        } else {
-            categoryTitle = null;
-        }
-        cursor.close();
-        return categoryTitle;
-    }
-
-    public void toggleFavorite(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @Nullable ISyncCallback callback) {
-        note.setFavorite(!note.isFavorite());
-        note.setStatus(DBStatus.LOCAL_EDITED);
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues(2);
-        values.put(key_status, note.getStatus().getTitle());
-        values.put(key_favorite, note.isFavorite() ? "1" : "0");
-        db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
-        if (callback != null) {
-            serverSyncHelper.addCallbackPush(ssoAccount, callback);
-        }
-        serverSyncHelper.scheduleSync(ssoAccount, true);
-    }
-
     private long addCategory(long accountId, @NonNull String title) {
         validateAccountId(accountId);
         SQLiteDatabase db = getWritableDatabase();
@@ -490,32 +436,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return false;
     }
 
-
-    /**
-     * Set the category for a given note.
-     * This method will search in the database to find out the category id in the db.
-     * If there is no such category existing, this method will create it and search again.
-     *
-     * @param ssoAccount The single sign on account
-     * @param note       The note which will be updated
-     * @param category   The category title which should be used to find the category id.
-     * @param callback   When the synchronization is finished, this callback will be invoked (optional).
-     */
-    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
-        note.setCategory(category);
-        note.setStatus(DBStatus.LOCAL_EDITED);
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues(2);
-        values.put(key_status, note.getStatus().getTitle());
-        int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory());
-        values.put(key_category, id);
-        db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
-        removeEmptyCategory(note.getAccountId());
-        if (callback != null) {
-            serverSyncHelper.addCallbackPush(ssoAccount, callback);
-        }
-        serverSyncHelper.scheduleSync(ssoAccount, true);
-    }
     /**
      * @param localAccount the {@link LocalAccount} that should be deleted
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
@@ -542,57 +462,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + localAccount.getId());
     }
 
-    /**
-     * @param appWidgetId the id of the {@link SingleNoteWidget}
-     * @return {@link SingleNoteWidgetData}
-     * @throws NoSuchElementException in case there is no {@link SingleNoteWidgetData} for the given appWidgetId
-     */
-    @NonNull
-    public SingleNoteWidgetData getSingleNoteWidgetData(int appWidgetId) throws NoSuchElementException {
-        SingleNoteWidgetData data = new SingleNoteWidgetData();
-        final SQLiteDatabase db = getReadableDatabase();
-        final Cursor cursor = db.query(table_widget_single_notes, new String[]{key_account_id, key_note_id, key_theme_mode}, key_id + " = ?", new String[]{String.valueOf(appWidgetId)}, null, null, null, null);
-        if (cursor.moveToNext()) {
-            data.setAppWidgetId(appWidgetId);
-            data.setAccountId(cursor.getLong(0));
-            data.setNoteId(cursor.getLong(1));
-            data.setThemeMode(cursor.getInt(2));
-        } else {
-            throw new NoSuchElementException();
-        }
-        cursor.close();
-        return data;
-    }
-
-    public void createOrUpdateSingleNoteWidgetData(@NonNull SingleNoteWidgetData data) throws SQLException {
-        validateAccountId(data.getAccountId());
-        final SQLiteDatabase db = getWritableDatabase();
-        final ContentValues values = new ContentValues(4);
-        values.put(key_id, data.getAppWidgetId());
-        values.put(key_account_id, data.getAccountId());
-        values.put(key_note_id, data.getNoteId());
-        values.put(key_theme_mode, data.getThemeMode());
-        db.replaceOrThrow(table_widget_single_notes, null, values);
-    }
-
-    @NonNull
-    public NoteListsWidgetData getNoteListWidgetData(int appWidgetId) throws NoSuchElementException {
-        NoteListsWidgetData data = new NoteListsWidgetData();
-        final SQLiteDatabase db = getReadableDatabase();
-        final Cursor cursor = db.query(table_widget_note_list, new String[]{key_account_id, key_category_id, key_theme_mode, key_mode}, key_id + " = ?", new String[]{String.valueOf(appWidgetId)}, null, null, null, null);
-        if (cursor.moveToNext()) {
-            data.setAppWidgetId(appWidgetId);
-            data.setAccountId(cursor.getLong(0));
-            data.setCategoryId(cursor.getLong(1));
-            data.setThemeMode(cursor.getInt(2));
-            data.setMode(cursor.getInt(3));
-        } else {
-            throw new NoSuchElementException();
-        }
-        cursor.close();
-        return data;
-    }
-
     private static void validateAccountId(long accountId) {
         if (accountId < 1) {
             throw new IllegalArgumentException("accountId must be greater than 0");
@@ -608,10 +477,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param accountId     The user {@link LocalAccount} Id
      * @param categoryTitle The category title which will be search in the db
-     *
-     * @deprecated replaced by #{{@link NotesRoomDatabase#getOrCreateCategoryIdByTitle(long, String)}}
-     *
      * @return -1 if there is no such category else the corresponding id
+     * @deprecated replaced by #{{@link NotesRoomDatabase#getOrCreateCategoryIdByTitle(long, String)}}
      */
     @NonNull
     @WorkerThread
@@ -655,140 +522,4 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 key_category_id + " NOT IN (SELECT " + key_category + " FROM " + table_notes + ")",
                 null);
     }
-
-    /**
-     * This function is used to get the sorting method of a category by title.
-     * The sorting method of the category can be used to decide
-     * to use which sorting method to show the notes for each categories.
-     *
-     * @param accountId     The user accountID
-     * @param categoryTitle The category title
-     * @return The sorting method in {@link CategorySortingMethod} enum format
-     */
-    public CategorySortingMethod getCategoryOrderByTitle(long accountId, String categoryTitle) {
-        validateAccountId(accountId);
-
-        long categoryId = getCategoryIdByTitle(accountId, categoryTitle);
-
-        SQLiteDatabase db = getReadableDatabase();
-        int orderIndex;
-        try (Cursor cursor = db.query(table_category, new String[]{key_category_sorting_method},
-                key_category_id + " = ?", new String[]{String.valueOf(categoryId)},
-                null, null, null)) {
-            orderIndex = 0;
-            while (cursor.moveToNext()) {
-                orderIndex = cursor.getInt(0);
-            }
-        }
-
-        return CategorySortingMethod.getCSM(orderIndex);
-    }
-
-    /**
-     * This method is used to modify the sorting method for one category by title.
-     * The user can determine use which sorting method to show the notes for a category.
-     * When the user changes the sorting method, this method should be called.
-     *
-     * @param accountId     The user accountID
-     * @param categoryTitle The category title
-     * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
-     */
-    public void modifyCategoryOrderByTitle(
-            long accountId, String categoryTitle, CategorySortingMethod sortingMethod) {
-        validateAccountId(accountId);
-
-        long categoryId = getCategoryIdByTitle(accountId, categoryTitle);
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(key_category_sorting_method, sortingMethod.getCSMID());
-        db.update(table_category, values,
-                key_category_id + " = ?", new String[]{String.valueOf(categoryId)});
-    }
-
-    /**
-     * Gets the sorting method of a category, the category can be normal category or
-     * one of "All notes", "Favorite", and "Uncategorized".
-     * If category is one of these three, sorting method will be got from android.content.SharedPreference.
-     * The sorting method of the category can be used to decide
-     * to use which sorting method to show the notes for each categories.
-     *
-     * @param accountId The user accountID
-     * @param category  The category
-     * @return The sorting method in CategorySortingMethod enum format
-     */
-    public CategorySortingMethod getCategoryOrder(long accountId, Category category) {
-        validateAccountId(accountId);
-
-        final Context ctx = getContext().getApplicationContext();
-        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
-        int orderIndex;
-
-        if (category.category == null) {
-            if (category.favorite != null && category.favorite) {
-                // Favorite
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_favorites),
-                        0);
-            } else {
-                // All notes
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_all_notes),
-                        0);
-            }
-        } else if (category.category.isEmpty()) {
-            // Uncategorized
-            orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                            ' ' + ctx.getString(R.string.action_uncategorized),
-                    0);
-        } else {
-            return getCategoryOrderByTitle(accountId, category.category);
-        }
-
-        return CategorySortingMethod.getCSM(orderIndex);
-    }
-
-    /**
-     * Modifies the sorting method for one category, the category can be normal category or
-     * one of "All notes", "Favorite", and "Uncategorized".
-     * If category is one of these three, sorting method will be modified in android.content.SharedPreference.
-     * The user can determine use which sorting method to show the notes for a category.
-     * When the user changes the sorting method, this method should be called.
-     *
-     * @param accountId     The user accountID
-     * @param category      The category to be modified
-     * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
-     */
-    public void modifyCategoryOrder(
-            long accountId, Category category, CategorySortingMethod sortingMethod) {
-        validateAccountId(accountId);
-
-        final Context ctx = getContext().getApplicationContext();
-        final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
-        int orderIndex = sortingMethod.getCSMID();
-        if (category.category == null) {
-            if (category.favorite != null && category.favorite) {
-                // Favorite
-                sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_favorites),
-                        orderIndex);
-            } else {
-                // All notes
-                sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_all_notes),
-                        orderIndex);
-            }
-        } else if (category.category.isEmpty()) {
-            // Uncategorized
-            sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                            ' ' + ctx.getString(R.string.action_uncategorized),
-                    orderIndex);
-        } else {
-            modifyCategoryOrderByTitle(accountId, category.category, sortingMethod);
-            return;
-        }
-        sp.apply();
-    }
-
 }

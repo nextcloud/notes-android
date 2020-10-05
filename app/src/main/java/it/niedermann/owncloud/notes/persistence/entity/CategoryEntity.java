@@ -3,12 +3,15 @@ package it.niedermann.owncloud.notes.persistence.entity;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
+
 @Entity
 public class CategoryEntity {
     @PrimaryKey
     private long id;
     private long accountId;
     private String title;
+    private CategorySortingMethod categorySortingMethod;
 
     public long getId() {
         return id;
@@ -32,6 +35,14 @@ public class CategoryEntity {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public CategorySortingMethod getCategorySortingMethod() {
+        return categorySortingMethod;
+    }
+
+    public void setCategorySortingMethod(CategorySortingMethod categorySortingMethod) {
+        this.categorySortingMethod = categorySortingMethod;
     }
 }
 //                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +

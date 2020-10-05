@@ -236,7 +236,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 listener.close();
                 return true;
             case R.id.menu_favorite:
-                sqliteOpenHelperDatabase.toggleFavorite(ssoAccount, note, null);
+                roomDatabase.toggleFavoriteAndSync(ssoAccount, note.getId(), null);
                 listener.onNoteUpdated(note);
                 prepareFavoriteOption(item);
                 return true;

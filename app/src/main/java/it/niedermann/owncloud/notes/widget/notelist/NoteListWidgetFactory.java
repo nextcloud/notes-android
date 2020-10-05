@@ -12,6 +12,7 @@ import android.widget.RemoteViewsService;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
@@ -28,7 +29,8 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final Context context;
     private final NoteListsWidgetData data;
     private final boolean darkTheme;
-    private NotesDatabase db;
+    private NotesDatabase sqliteOpenHelperDatabase;
+    private NotesRoomDatabase roomDatabase;
     private List<DBNote> dbNotes;
 
     NoteListWidgetFactory(Context context, Intent intent) {
@@ -36,8 +38,9 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
 
-        db = NotesDatabase.getInstance(context);
-        data = db.getNoteListWidgetData(appWidgetId);
+        sqliteOpenHelperDatabase = NotesDatabase.getInstance(context);
+        roomDatabase = NotesRoomDatabase.getInstance(context);
+        data = roomDatabase.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
 
         darkTheme = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
     }
@@ -52,14 +55,14 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
                 case MODE_DISPLAY_ALL:
-                    dbNotes = db.getNotes(data.getAccountId());
+                    dbNotes = sqliteOpenHelperDatabase.getNotes(data.getAccountId());
                     break;
                 case MODE_DISPLAY_STARRED:
-                    dbNotes = db.searchNotes(data.getAccountId(), null, null, true);
+                    dbNotes = sqliteOpenHelperDatabase.searchNotes(data.getAccountId(), null, null, true);
                     break;
                 case MODE_DISPLAY_CATEGORY:
                     if (data.getCategoryId() != null) {
-                        dbNotes = db.searchNotes(data.getAccountId(), null, db.getCategoryTitleById(data.getAccountId(), data.getCategoryId()), null);
+                        dbNotes = sqliteOpenHelperDatabase.searchNotes(data.getAccountId(), null, roomDatabase.getCategoryDao().getCategoryTitleById(data.getCategoryId()), null);
                     }
                     break;
             }

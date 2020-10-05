@@ -574,12 +574,12 @@ public class NotesNotesRoomDatabaseTest {
         long noteID = roomDatabase.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
-        CategorySortingMethod defaultMethod = sqliteOpenHelperDatabase.getCategoryOrderByTitle(account.getId(), "CodingDiary");
+        CategorySortingMethod defaultMethod = roomDatabase.getCategoryDao().getCategoryOrderByTitle(account.getId(), "CodingDiary");
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
-        sqliteOpenHelperDatabase.modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
-        CategorySortingMethod methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrderByTitle(account.getId(), "CodingDiary");
+        roomDatabase.getCategoryDao().modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = roomDatabase.getCategoryDao().getCategoryOrderByTitle(account.getId(), "CodingDiary");
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
@@ -596,12 +596,12 @@ public class NotesNotesRoomDatabaseTest {
         long noteID = roomDatabase.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
-        CategorySortingMethod defaultMethod = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
+        CategorySortingMethod defaultMethod = roomDatabase.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
-        sqliteOpenHelperDatabase.modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
-        CategorySortingMethod methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
+        roomDatabase.getCategoryDao().modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = roomDatabase.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
@@ -615,31 +615,31 @@ public class NotesNotesRoomDatabaseTest {
         spe.apply();
         // check default value
         // all notes
-        defaultMethod = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category(null, false));
+        defaultMethod = roomDatabase.getCategoryOrder(account.getId(), new Category(null, false));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // uncategorized
-        defaultMethod = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category("", false));
+        defaultMethod = roomDatabase.getCategoryOrder(account.getId(), new Category("", false));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // favorite
-        defaultMethod = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category(null, true));
+        defaultMethod = roomDatabase.getCategoryOrder(account.getId(), new Category(null, true));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
         // all notes
-        sqliteOpenHelperDatabase.modifyCategoryOrder(account.getId(), new Category(null, false), CategorySortingMethod.getCSM(1));
-        methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category(null, false));
+        roomDatabase.modifyCategoryOrder(account.getId(), new Category(null, false), CategorySortingMethod.getCSM(1));
+        methodAfterModify = roomDatabase.getCategoryOrder(account.getId(), new Category(null, false));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // uncategorized
-        sqliteOpenHelperDatabase.modifyCategoryOrder(account.getId(), new Category("", false), CategorySortingMethod.getCSM(1));
-        methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category("", false));
+        roomDatabase.modifyCategoryOrder(account.getId(), new Category("", false), CategorySortingMethod.getCSM(1));
+        methodAfterModify = roomDatabase.getCategoryOrder(account.getId(), new Category("", false));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // favorite
-        sqliteOpenHelperDatabase.modifyCategoryOrder(account.getId(), new Category(null, true), CategorySortingMethod.getCSM(1));
-        methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category(null, true));
+        roomDatabase.modifyCategoryOrder(account.getId(), new Category(null, true), CategorySortingMethod.getCSM(1));
+        methodAfterModify = roomDatabase.getCategoryOrder(account.getId(), new Category(null, true));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete SharedPreferences

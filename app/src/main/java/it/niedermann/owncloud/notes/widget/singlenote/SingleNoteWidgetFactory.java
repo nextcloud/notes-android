@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
@@ -47,7 +48,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
         try {
-            SingleNoteWidgetData data = sqliteOpenHelperDatabase.getSingleNoteWidgetData(appWidgetId);
+            WidgetSingleNoteEntity data = roomDatabase.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
             darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
         } catch (NoSuchElementException e) {
             Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
@@ -64,7 +65,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onDataSetChanged() {
         try {
-            final SingleNoteWidgetData data = sqliteOpenHelperDatabase.getSingleNoteWidgetData(appWidgetId);
+            final WidgetSingleNoteEntity data = roomDatabase.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
             note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(data.getAccountId(), noteId));

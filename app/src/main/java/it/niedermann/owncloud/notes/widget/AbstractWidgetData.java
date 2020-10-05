@@ -1,27 +1,32 @@
 package it.niedermann.owncloud.notes.widget;
 
+import androidx.annotation.IntRange;
+import androidx.room.PrimaryKey;
+
 public abstract class AbstractWidgetData {
 
-    private int appWidgetId;
+    @PrimaryKey
+    private int id;
     private long accountId;
+    @IntRange(from = 0, to = 2)
     private int themeMode;
 
     protected AbstractWidgetData() {
 
     }
 
-    protected AbstractWidgetData(int appWidgetId, long accountId, int themeMode) {
-        this.appWidgetId = appWidgetId;
+    protected AbstractWidgetData(int id, long accountId, @IntRange(from = 0, to = 2) int themeMode) {
+        this.id = id;
         this.accountId = accountId;
         this.themeMode = themeMode;
     }
 
-    public int getAppWidgetId() {
-        return appWidgetId;
+    public int getId() {
+        return id;
     }
 
-    public void setAppWidgetId(int appWidgetId) {
-        this.appWidgetId = appWidgetId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public long getAccountId() {
@@ -32,11 +37,12 @@ public abstract class AbstractWidgetData {
         this.accountId = accountId;
     }
 
+    @IntRange(from = 0, to = 2)
     public int getThemeMode() {
         return themeMode;
     }
 
-    public void setThemeMode(int themeMode) {
+    public void setThemeMode(@IntRange(from = 0, to = 2) int themeMode) {
         this.themeMode = themeMode;
     }
 }

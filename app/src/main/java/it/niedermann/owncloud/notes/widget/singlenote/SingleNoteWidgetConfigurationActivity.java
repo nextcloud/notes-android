@@ -15,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.main.MainActivity;
+import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.NotesApplication;
 
@@ -52,8 +53,8 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
         try {
-            sqliteOpenHelperDatabase.createOrUpdateSingleNoteWidgetData(
-                    new SingleNoteWidgetData(
+            roomDatabase.getWidgetSingleNoteDao().createOrUpdateSingleNoteWidgetData(
+                    new WidgetSingleNoteEntity(
                             appWidgetId,
                             note.getAccountId(),
                             note.getId(),

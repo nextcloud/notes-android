@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.room.TypeConverter;
 
+import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
 public class Converters {
@@ -14,6 +15,16 @@ public class Converters {
     @TypeConverter
     public static String dbStatusToString(DBStatus status) {
         return status == null ? null : status.getTitle();
+    }
+
+    @TypeConverter
+    public static CategorySortingMethod categorySortingMethodFromString(Integer value) {
+        return value == null ? null : CategorySortingMethod.getCSM(value);
+    }
+
+    @TypeConverter
+    public static Integer dbStatusToString(CategorySortingMethod categorySortingMethod) {
+        return categorySortingMethod == null ? null : categorySortingMethod.getCSMID();
     }
 
 }

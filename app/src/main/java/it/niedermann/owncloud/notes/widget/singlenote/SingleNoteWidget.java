@@ -14,6 +14,7 @@ import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.edit.BaseNoteFragment;
@@ -26,11 +27,11 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         final Intent templateIntent = new Intent(context, EditNoteActivity.class);
-        final NotesDatabase db = NotesDatabase.getInstance(context);
+        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
             try {
-                final SingleNoteWidgetData data = db.getSingleNoteWidgetData(appWidgetId);
+                final WidgetSingleNoteEntity data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
 
                 templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, data.getAccountId());
 

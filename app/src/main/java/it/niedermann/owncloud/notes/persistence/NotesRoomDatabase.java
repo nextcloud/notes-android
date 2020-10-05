@@ -1,9 +1,12 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.text.TextUtils;
@@ -12,6 +15,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.preference.PreferenceManager;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -41,6 +45,8 @@ import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetNotesListEntity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.Category;
+import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
@@ -335,5 +341,97 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
             result.put(note.getRemoteId(), note.getId());
         }
         return result;
+    }
+
+    /**
+     * Modifies the sorting method for one category, the category can be normal category or
+     * one of "All notes", "Favorite", and "Uncategorized".
+     * If category is one of these three, sorting method will be modified in android.content.SharedPreference.
+     * The user can determine use which sorting method to show the notes for a category.
+     * When the user changes the sorting method, this method should be called.
+     *
+     * @param accountId     The user accountID
+     * @param category      The category to be modified
+     * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
+     */
+    public void modifyCategoryOrder(
+            long accountId, Category category, CategorySortingMethod sortingMethod) {
+        validateAccountId(accountId);
+
+        final Context ctx = context.getApplicationContext();
+        final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
+        int orderIndex = sortingMethod.getCSMID();
+        if (category.category == null) {
+            if (category.favorite != null && category.favorite) {
+                // Favorite
+                sp.putInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_favorites),
+                        orderIndex);
+            } else {
+                // All notes
+                sp.putInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_all_notes),
+                        orderIndex);
+            }
+        } else if (category.category.isEmpty()) {
+            // Uncategorized
+            sp.putInt(ctx.getString(R.string.action_sorting_method) +
+                            ' ' + ctx.getString(R.string.action_uncategorized),
+                    orderIndex);
+        } else {
+            getCategoryDao().modifyCategoryOrderByTitle(accountId, category.category, sortingMethod);
+            return;
+        }
+        sp.apply();
+    }
+
+    /**
+     * Gets the sorting method of a category, the category can be normal category or
+     * one of "All notes", "Favorite", and "Uncategorized".
+     * If category is one of these three, sorting method will be got from android.content.SharedPreference.
+     * The sorting method of the category can be used to decide
+     * to use which sorting method to show the notes for each categories.
+     *
+     * @param accountId The user accountID
+     * @param category  The category
+     * @return The sorting method in CategorySortingMethod enum format
+     */
+    public CategorySortingMethod getCategoryOrder(long accountId, Category category) {
+        validateAccountId(accountId);
+
+        final Context ctx = context.getApplicationContext();
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
+        int orderIndex;
+
+        if (category.category == null) {
+            if (category.favorite != null && category.favorite) {
+                // Favorite
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_favorites),
+                        0);
+            } else {
+                // All notes
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_all_notes),
+                        0);
+            }
+        } else if (category.category.isEmpty()) {
+            // Uncategorized
+            orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
+                            ' ' + ctx.getString(R.string.action_uncategorized),
+                    0);
+        } else {
+            return getCategoryDao().getCategoryOrderByTitle(accountId, category.category);
+        }
+
+        return CategorySortingMethod.getCSM(orderIndex);
+    }
+
+    public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId, @Nullable ISyncCallback callback) {
+        getNoteDao().toggleFavorite(noteId);
+        if (callback != null) {
+            syncHelper.addCallbackPush(ssoAccount, callback);
+        }
+        syncHelper.scheduleSync(ssoAccount, true);
     }
 }

@@ -96,7 +96,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         break;
                     case ItemTouchHelper.RIGHT:
                         final DBNote adapterNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        sqliteOpenHelperDatabase.toggleFavorite(ssoAccount, adapterNote, syncCallBack);
+                        roomDatabase.toggleFavoriteAndSync(ssoAccount, adapterNote.getId(), syncCallBack);
                         refreshLists.run();
                         break;
                     default:

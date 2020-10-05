@@ -69,4 +69,7 @@ public interface NoteDao {
 
     @Query("SELECT * FROM NoteEntity WHERE status != \"LOCAL_DELETED\" AND accountId = :accountId ORDER BY modified DESC LIMIT 4")
     List<NoteEntity> getRecentNotes(long accountId);
+
+    @Query("UPDATE NoteEntity SET status = \"LOCAL_EDITED\", favorite = ((favorite | 1) - (favorite & 1)) WHERE id = :id")
+    void toggleFavorite(long id);
 }

@@ -413,14 +413,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         activityBinding.sortingMethod.setOnClickListener((v) -> {
             CategorySortingMethod method;
 
-            method = sqliteOpenHelperDatabase.getCategoryOrder(localAccount.getId(), navigationSelection);
+            method = roomDatabase.getCategoryOrder(localAccount.getId(), navigationSelection);
 
             if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
                 method = CategorySortingMethod.SORT_MODIFIED_DESC;
             } else {
                 method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
             }
-            sqliteOpenHelperDatabase.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
+            roomDatabase.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
             refreshLists();
             updateSortMethodIcon(localAccount.getId());
         });
@@ -717,7 +717,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon(long localAccountId) {
-        CategorySortingMethod method = sqliteOpenHelperDatabase.getCategoryOrder(localAccountId, navigationSelection);
+        CategorySortingMethod method = roomDatabase.getCategoryOrder(localAccountId, navigationSelection);
         if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
             activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
             activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
@@ -885,8 +885,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     @Override
     public void onNoteFavoriteClick(int position, View view) {
         DBNote note = (DBNote) adapter.getItem(position);
-        NotesDatabase db = NotesDatabase.getInstance(view.getContext());
-        db.toggleFavorite(ssoAccount, note, syncCallBack);
+        NotesRoomDatabase db = NotesRoomDatabase.getInstance(view.getContext());
+        db.toggleFavoriteAndSync(ssoAccount, note.getId(), syncCallBack);
         adapter.notifyItemChanged(position);
         refreshLists();
     }

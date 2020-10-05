@@ -7,8 +7,11 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import it.niedermann.owncloud.notes.widget.AbstractWidgetData;
+
 @Entity()
-public class WidgetNotesListEntity {
+public class WidgetNotesListEntity extends AbstractWidgetData {
+
     @Ignore
     public static final int MODE_DISPLAY_ALL = 0;
     @Ignore
@@ -16,35 +19,11 @@ public class WidgetNotesListEntity {
     @Ignore
     public static final int MODE_DISPLAY_CATEGORY = 2;
 
-    @PrimaryKey
-    private long id;
-
-    private long accountId;
-
-    @IntRange(from = 0, to = 2)
-    private int themeMode;
-
     @IntRange(from = 0, to = 2)
     private int mode;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     @Nullable
     private Long categoryId;
-
-    public int getMode() {
-        return mode;
-    }
-
-    public void setMode(@IntRange(from = 0, to = 2) int mode) {
-        this.mode = mode;
-    }
 
     @Nullable
     public Long getCategoryId() {
@@ -55,28 +34,19 @@ public class WidgetNotesListEntity {
         this.categoryId = categoryId;
     }
 
-    @NonNull
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
     @Override
     public String toString() {
-        return "NoteListsWidgetData{" +
+        return "WidgetNotesListEntity{" +
                 "mode=" + mode +
                 ", categoryId=" + categoryId +
                 '}';
-    }
-
-    public long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(long accountId) {
-        this.accountId = accountId;
-    }
-
-    public int getThemeMode() {
-        return themeMode;
-    }
-
-    public void setThemeMode(int themeMode) {
-        this.themeMode = themeMode;
     }
 }

@@ -45,12 +45,12 @@ public class NoteListWidget extends AppWidgetProvider {
 
         for (int appWidgetId : appWidgetIds) {
             try {
-                final NoteListsWidgetData data = sqliteOpenHelperDatabase.getNoteListWidgetData(appWidgetId);
+                final NoteListsWidgetData data = roomDatabase.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
                 final LocalAccountEntity localAccountEntity = roomDatabase.getLocalAccountDao().getAccount(data.getAccountId());
 
                 String category = null;
                 if (data.getCategoryId() != null) {
-                    category = sqliteOpenHelperDatabase.getCategoryTitleById(data.getAccountId(), data.getCategoryId());
+                    category = roomDatabase.getCategoryDao().getCategoryTitleById(data.getCategoryId());
                 }
 
                 darkTheme = DarkModeSetting.fromModeID(data.getThemeMode());

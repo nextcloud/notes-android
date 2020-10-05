@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 18,
-    "identityHash": "a4ed702c70d8211c3310d6ea3600c097",
+    "identityHash": "4b66ff34ab595ccc99419eba8b2de6c7",
     "entities": [
       {
         "tableName": "LocalAccountEntity",
@@ -80,7 +80,7 @@
       },
       {
         "tableName": "NoteEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `remoteId` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `status` TEXT, `title` TEXT, `modified` INTEGER NOT NULL, `content` TEXT, `favorite` INTEGER, `eTag` TEXT, `excerpt` TEXT, `scrollY` INTEGER NOT NULL, `category_id` INTEGER, `category_accountId` INTEGER, `category_title` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `remoteId` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `status` TEXT, `title` TEXT, `modified` INTEGER NOT NULL, `content` TEXT, `favorite` INTEGER, `eTag` TEXT, `excerpt` TEXT, `scrollY` INTEGER NOT NULL, `category_id` INTEGER, `category_accountId` INTEGER, `category_title` TEXT, `category_categorySortingMethod` INTEGER, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -165,6 +165,12 @@
             "columnName": "category_title",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "category.categorySortingMethod",
+            "columnName": "category_categorySortingMethod",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -178,7 +184,7 @@
       },
       {
         "tableName": "CategoryEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `title` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `title` TEXT, `categorySortingMethod` INTEGER, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -197,6 +203,12 @@
             "columnName": "title",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "categorySortingMethod",
+            "columnName": "categorySortingMethod",
+            "affinity": "INTEGER",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -210,28 +222,14 @@
       },
       {
         "tableName": "WidgetSingleNoteEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`noteId` INTEGER NOT NULL, `id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `themeMode` INTEGER NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
+            "fieldPath": "noteId",
+            "columnName": "noteId",
             "affinity": "INTEGER",
             "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id"
-          ],
-          "autoGenerate": false
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "WidgetNotesListEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `themeMode` INTEGER NOT NULL, `mode` INTEGER NOT NULL, `categoryId` INTEGER, PRIMARY KEY(`id`))",
-        "fields": [
+          },
           {
             "fieldPath": "id",
             "columnName": "id",
@@ -249,7 +247,21 @@
             "columnName": "themeMode",
             "affinity": "INTEGER",
             "notNull": true
-          },
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "WidgetNotesListEntity",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`mode` INTEGER NOT NULL, `categoryId` INTEGER, `id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `themeMode` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
           {
             "fieldPath": "mode",
             "columnName": "mode",
@@ -261,6 +273,24 @@
             "columnName": "categoryId",
             "affinity": "INTEGER",
             "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "accountId",
+            "columnName": "accountId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "themeMode",
+            "columnName": "themeMode",
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -276,7 +306,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a4ed702c70d8211c3310d6ea3600c097')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4b66ff34ab595ccc99419eba8b2de6c7')"
     ]
   }
 }
