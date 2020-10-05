@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Icon;
 import android.os.Build;
@@ -25,7 +26,9 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
@@ -318,5 +321,16 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
             syncHelper.addCallbackPush(ssoAccount, callback);
         }
         syncHelper.scheduleSync(ssoAccount, true);
+    }
+
+    @NonNull
+    @WorkerThread
+    public Map<Long, Long> getIdMap(long accountId) {
+        validateAccountId(accountId);
+        Map<Long, Long> result = new HashMap<>();
+        for(NoteEntity note : getNoteDao().getRemoteIdAndId(accountId)) {
+            result.put(note.getRemoteId(), note.getId());
+        }
+        return result;
     }
 }

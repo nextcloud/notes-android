@@ -436,7 +436,7 @@ public class NoteServerSyncHelper {
         private boolean pullRemoteChanges() {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
-                final Map<Long, Long> idMap = sqliteOpenHelperDatabase.getIdMap(localAccount.getId());
+                final Map<Long, Long> idMap = roomDatabase.getIdMap(localAccount.getId());
                 final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getEtag());
                 List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();

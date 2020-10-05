@@ -44,6 +44,8 @@ public interface NoteDao {
     @Query("SELECT DISTINCT remoteId FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\"")
     List<Long> getRemoteIds(long accountId);
 
+    @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\"")
+    List<NoteEntity> getRemoteIdAndId(long accountId);
 
     /**
      * Get a single Note by remote Id (aka. nextcloud file id)

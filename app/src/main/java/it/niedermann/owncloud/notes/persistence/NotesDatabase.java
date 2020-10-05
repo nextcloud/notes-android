@@ -160,20 +160,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         );
     }
 
-    @NonNull
-    @WorkerThread
-    public Map<Long, Long> getIdMap(long accountId) {
-        validateAccountId(accountId);
-        Map<Long, Long> result = new HashMap<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(table_notes, new String[]{key_remote_id, key_id}, key_status + " != ? AND " + key_account_id + " = ? ", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, null, null, null);
-        while (cursor.moveToNext()) {
-            result.put(cursor.getLong(0), cursor.getLong(1));
-        }
-        cursor.close();
-        return result;
-    }
-
     /**
      * Returns a list of all Notes in the Database
      *
@@ -184,13 +170,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
     public List<DBNote> getNotes(long accountId) {
         validateAccountId(accountId);
         return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, default_order, false);
-    }
-
-    @NonNull
-    @WorkerThread
-    public List<DBNote> getRecentNotes(long accountId) {
-        validateAccountId(accountId);
-        return getNotesCustom(accountId, key_status + " != ? AND " + key_account_id + " = ?", new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountId}, key_modified + " DESC", "4", true);
     }
 
     /**
@@ -511,6 +490,32 @@ public class NotesDatabase extends AbstractNotesDatabase {
         return false;
     }
 
+
+    /**
+     * Set the category for a given note.
+     * This method will search in the database to find out the category id in the db.
+     * If there is no such category existing, this method will create it and search again.
+     *
+     * @param ssoAccount The single sign on account
+     * @param note       The note which will be updated
+     * @param category   The category title which should be used to find the category id.
+     * @param callback   When the synchronization is finished, this callback will be invoked (optional).
+     */
+    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
+        note.setCategory(category);
+        note.setStatus(DBStatus.LOCAL_EDITED);
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues(2);
+        values.put(key_status, note.getStatus().getTitle());
+        int id = getCategoryIdByTitle(note.getAccountId(), note.getCategory());
+        values.put(key_category, id);
+        db.update(table_notes, values, key_id + " = ?", new String[]{String.valueOf(note.getId())});
+        removeEmptyCategory(note.getAccountId());
+        if (callback != null) {
+            serverSyncHelper.addCallbackPush(ssoAccount, callback);
+        }
+        serverSyncHelper.scheduleSync(ssoAccount, true);
+    }
     /**
      * @param localAccount the {@link LocalAccount} that should be deleted
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
