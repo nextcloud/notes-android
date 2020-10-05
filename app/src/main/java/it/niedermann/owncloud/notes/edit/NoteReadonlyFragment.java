@@ -105,7 +105,7 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-                                long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
+                                long noteLocalId = sqliteOpenHelperDatabase.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
                                 Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
                                 startActivity(intent);
@@ -126,7 +126,7 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
         }
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        db = NotesDatabase.getInstance(getActivity());
+        sqliteOpenHelperDatabase = NotesDatabase.getInstance(getActivity());
         binding.swiperefreshlayout.setEnabled(false);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());

@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.nextcloud.android.sso.exceptions.NextcloudApiNotRespondingException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -34,17 +33,19 @@ import java.util.Objects;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
+import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.model.ServerResponse;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
-import it.niedermann.owncloud.notes.shared.model.ServerResponse;
 
+import static it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity.entityToLocalAccount;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
@@ -57,7 +58,8 @@ public class NoteServerSyncHelper {
 
     private static NoteServerSyncHelper instance;
 
-    private final NotesDatabase db;
+    private final NotesDatabase sqliteOpenHelperDatabase;
+    private final NotesRoomDatabase roomDatabase;
     private final Context context;
 
     // Track network connection changes using a BroadcastReceiver
@@ -99,9 +101,10 @@ public class NoteServerSyncHelper {
     private final Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
     private final Map<String, List<ISyncCallback>> callbacksPull = new HashMap<>();
 
-    private NoteServerSyncHelper(NotesDatabase db) {
-        this.db = db;
-        this.context = db.getContext();
+    private NoteServerSyncHelper(NotesDatabase sqliteOpenHelperDatabase, NotesRoomDatabase roomDatabase) {
+        this.sqliteOpenHelperDatabase = sqliteOpenHelperDatabase;
+        this.roomDatabase = roomDatabase;
+        this.context = sqliteOpenHelperDatabase.getContext();
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
 
         // Registers BroadcastReceiver to track network connection changes.
@@ -119,12 +122,12 @@ public class NoteServerSyncHelper {
      * This has to be a singleton in order to realize correct registering and unregistering of
      * the BroadcastReceiver, which listens on changes of network connectivity.
      *
-     * @param dbHelper NoteSQLiteOpenHelper
+     * @param sqliteOpenHelperDatabase NoteSQLiteOpenHelper
      * @return NoteServerSyncHelper
      */
-    public static synchronized NoteServerSyncHelper getInstance(NotesDatabase dbHelper) {
+    public static synchronized NoteServerSyncHelper getInstance(NotesDatabase sqliteOpenHelperDatabase, NotesRoomDatabase roomDatabase) {
         if (instance == null) {
-            instance = new NoteServerSyncHelper(dbHelper);
+            instance = new NoteServerSyncHelper(sqliteOpenHelperDatabase, roomDatabase);
         }
         return instance;
     }
@@ -215,13 +218,13 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) || onlyLocalChanges)) {
                 Log.d(TAG, "... starting now");
-                final LocalAccount localAccount = db.getLocalAccountByAccountName(ssoAccount.name);
+                final LocalAccountEntity localAccount = roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
                 if (localAccount == null) {
-                    Log.e(TAG, LocalAccount.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
+                    Log.e(TAG, LocalAccountEntity.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
                     return;
                 }
                 final NotesClient notesClient = NotesClient.newInstance(localAccount.getPreferredApiVersion(), context);
-                final SyncTask syncTask = new SyncTask(notesClient, localAccount, ssoAccount, onlyLocalChanges);
+                final SyncTask syncTask = new SyncTask(notesClient, entityToLocalAccount(localAccount), ssoAccount, onlyLocalChanges);
                 syncTask.addCallbacks(ssoAccount, callbacksPush.get(ssoAccount.name));
                 callbacksPush.put(ssoAccount.name, new ArrayList<>());
                 if (!onlyLocalChanges) {
@@ -359,7 +362,7 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pushLocalChanges()");
 
             boolean success = true;
-            List<DBNote> notes = db.getLocalModifiedNotes(localAccount.getId());
+            List<DBNote> notes = sqliteOpenHelperDatabase.getLocalModifiedNotes(localAccount.getId());
             for (DBNote note : notes) {
                 Log.d(TAG, "   Process Local Note: " + note);
                 try {
@@ -384,7 +387,7 @@ public class NoteServerSyncHelper {
                                 remoteNote = notesClient.createNote(ssoAccount, note).getNote();
                             }
                             // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            db.updateNote(localAccount, note.getId(), remoteNote, note);
+                            sqliteOpenHelperDatabase.updateNote(localAccount, note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() > 0) {
@@ -402,7 +405,7 @@ public class NoteServerSyncHelper {
                                 Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
                             }
                             // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            db.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
+                            sqliteOpenHelperDatabase.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
                             break;
                         default:
                             throw new IllegalStateException("Unknown State of Note: " + note);
@@ -431,7 +434,7 @@ public class NoteServerSyncHelper {
         private boolean pullRemoteChanges() {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
-                final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
+                final Map<Long, Long> idMap = sqliteOpenHelperDatabase.getIdMap(localAccount.getId());
                 final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getEtag());
                 List<CloudNote> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
@@ -445,13 +448,13 @@ public class NoteServerSyncHelper {
                         Log.v(TAG, "   ... found → Update");
                         Long remoteId = idMap.get(remoteNote.getRemoteId());
                         if (remoteId != null) {
-                            db.updateNote(localAccount, remoteId, remoteNote, null);
+                            sqliteOpenHelperDatabase.updateNote(localAccount, remoteId, remoteNote, null);
                         } else {
                             Log.e(TAG, "Tried to update note from server, but remoteId of note is null. " + remoteNote);
                         }
                     } else {
                         Log.v(TAG, "   ... create");
-                        db.addNote(localAccount.getId(), remoteNote);
+                        sqliteOpenHelperDatabase.addNote(localAccount.getId(), remoteNote);
                     }
                 }
                 Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
@@ -459,17 +462,17 @@ public class NoteServerSyncHelper {
                 for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
                     if (!remoteIDs.contains(entry.getKey())) {
                         Log.v(TAG, "   ... remove " + entry.getValue());
-                        db.deleteNote(entry.getValue(), DBStatus.VOID);
+                        sqliteOpenHelperDatabase.deleteNote(entry.getValue(), DBStatus.VOID);
                     }
                 }
 
                 // update ETag and Last-Modified in order to reduce size of next response
                 localAccount.setETag(response.getETag());
                 localAccount.setModified(response.getLastModified());
-                db.updateETag(localAccount.getId(), localAccount.getEtag());
-                db.updateModified(localAccount.getId(), localAccount.getModified());
+                roomDatabase.getLocalAccountDao().updateETag(localAccount.getId(), localAccount.getEtag());
+                roomDatabase.getLocalAccountDao().updateModified(localAccount.getId(), localAccount.getModified());
                 try {
-                    if (db.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
+                    if (sqliteOpenHelperDatabase.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
                         localAccount.setPreferredApiVersion(response.getSupportedApiVersions());
                     }
                 } catch (Exception e) {
@@ -514,8 +517,8 @@ public class NoteServerSyncHelper {
                     callback.onFinish();
                 }
             }
-            db.notifyWidgets();
-            db.updateDynamicShortcuts(localAccount.getId());
+            sqliteOpenHelperDatabase.notifyWidgets();
+            sqliteOpenHelperDatabase.updateDynamicShortcuts(localAccount.getId());
             // start next sync if scheduled meanwhile
             if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {
                 scheduleSync(ssoAccount, false);

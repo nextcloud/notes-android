@@ -52,7 +52,7 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
         try {
-            db.createOrUpdateSingleNoteWidgetData(
+            sqliteOpenHelperDatabase.createOrUpdateSingleNoteWidgetData(
                     new SingleNoteWidgetData(
                             appWidgetId,
                             note.getAccountId(),

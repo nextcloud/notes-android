@@ -160,7 +160,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class)
-                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, db.getLocalIdByRemoteId(this.note.getAccountId(), extractNoteRemoteId(link)));
+                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, sqliteOpenHelperDatabase.getLocalIdByRemoteId(this.note.getAccountId(), extractNoteRemoteId(link)));
                                 startActivity(intent);
                             } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
@@ -181,7 +181,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         changedText = note.getContent();
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        db = NotesDatabase.getInstance(requireContext());
+        sqliteOpenHelperDatabase = NotesDatabase.getInstance(requireContext());
         binding.swiperefreshlayout.setOnRefreshListener(this);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
@@ -207,18 +207,18 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     @Override
     public void onRefresh() {
-        if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
+        if (sqliteOpenHelperDatabase.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
             try {
                 TextProcessorChain chain = defaultTextProcessorChain(note);
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
-                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
-                    note = db.getNote(note.getAccountId(), note.getId());
+                sqliteOpenHelperDatabase.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
+                    note = sqliteOpenHelperDatabase.getNote(note.getAccountId(), note.getId());
                     changedText = note.getContent();
                     binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);
                 });
-                db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
+                sqliteOpenHelperDatabase.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 e.printStackTrace();
             }
@@ -236,7 +236,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     private TextProcessorChain defaultTextProcessorChain(DBNote note) {
         TextProcessorChain chain = new TextProcessorChain();
-        chain.add(new NoteLinksProcessor(db.getRemoteIds(note.getAccountId())));
+        chain.add(new NoteLinksProcessor(sqliteOpenHelperDatabase.getRemoteIds(note.getAccountId())));
         chain.add(new WwwLinksProcessor());
         return chain;
     }

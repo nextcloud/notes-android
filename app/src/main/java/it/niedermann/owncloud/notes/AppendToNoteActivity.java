@@ -36,7 +36,7 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     public void onNoteClick(int position, View v) {
         if (receivedText != null && receivedText.length() > 0) {
-            final DBNote note = db.getNote(localAccount.getId(), ((DBNote) adapter.getItem(position)).getId());
+            final DBNote note = sqliteOpenHelperDatabase.getNote(localAccount.getId(), ((DBNote) adapter.getItem(position)).getId());
             final String oldContent = note.getContent();
             String newContent;
             if (oldContent != null && oldContent.length() > 0) {
@@ -44,7 +44,7 @@ public class AppendToNoteActivity extends MainActivity {
             } else {
                 newContent = receivedText;
             }
-            db.updateNoteAndSync(ssoAccount, localAccount, note, newContent, () -> Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show());
+            sqliteOpenHelperDatabase.updateNoteAndSync(ssoAccount, localAccount, note, newContent, () -> Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show());
         } else {
             Toast.makeText(this, R.string.shared_text_empty, Toast.LENGTH_SHORT).show();
         }

@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.persistence.NotesClient;
 
+@Deprecated
 public class LocalAccount {
 
     private long id;

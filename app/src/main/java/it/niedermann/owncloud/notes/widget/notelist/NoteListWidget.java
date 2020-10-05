@@ -14,12 +14,13 @@ import android.widget.RemoteViews;
 import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.shared.model.Category;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.NotesApplication;
 
@@ -36,19 +37,20 @@ public class NoteListWidget extends AppWidgetProvider {
     public static final int PENDING_INTENT_OPEN_APP_RQ = 2;
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
-        final NotesDatabase db = NotesDatabase.getInstance(context);
+        final NotesDatabase sqliteOpenHelperDatabase = NotesDatabase.getInstance(context);
+        final NotesRoomDatabase roomDatabase = NotesRoomDatabase.getInstance(context);
 
         RemoteViews views;
         DarkModeSetting darkTheme;
 
         for (int appWidgetId : appWidgetIds) {
             try {
-                final NoteListsWidgetData data = db.getNoteListWidgetData(appWidgetId);
-                final LocalAccount localAccount = db.getAccount(data.getAccountId());
+                final NoteListsWidgetData data = sqliteOpenHelperDatabase.getNoteListWidgetData(appWidgetId);
+                final LocalAccountEntity localAccountEntity = roomDatabase.getLocalAccountDao().getAccount(data.getAccountId());
 
                 String category = null;
                 if (data.getCategoryId() != null) {
-                    category = db.getCategoryTitleById(data.getAccountId(), data.getCategoryId());
+                    category = sqliteOpenHelperDatabase.getCategoryTitleById(data.getAccountId(), data.getCategoryId());
                 }
 
                 darkTheme = DarkModeSetting.fromModeID(data.getThemeMode());
@@ -89,10 +91,10 @@ public class NoteListWidget extends AppWidgetProvider {
                     views.setEmptyView(R.id.note_list_widget_lv_dark, R.id.widget_note_list_placeholder_tv_dark);
                     awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv_dark);
                     if (BrandingUtil.isBrandingEnabled(context)) {
-                        views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", localAccount.getColor());
-                        views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", localAccount.getTextColor());
-                        views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", localAccount.getTextColor());
-                        views.setTextColor(R.id.widget_note_list_title_tv_dark, localAccount.getTextColor());
+                        views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", Color.parseColor(localAccountEntity.getColor()));
+                        views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", Color.parseColor(localAccountEntity.getTextColor()));
+                        views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", Color.parseColor(localAccountEntity.getTextColor()));
+                        views.setTextColor(R.id.widget_note_list_title_tv_dark, Color.parseColor(localAccountEntity.getTextColor()));
                     } else {
                         views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
                         views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", Color.WHITE);
@@ -110,10 +112,10 @@ public class NoteListWidget extends AppWidgetProvider {
                     views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
                     awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
                     if (BrandingUtil.isBrandingEnabled(context)) {
-                        views.setInt(R.id.widget_note_header, "setBackgroundColor", localAccount.getColor());
-                        views.setInt(R.id.widget_note_header_icon, "setColorFilter", localAccount.getTextColor());
-                        views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", localAccount.getTextColor());
-                        views.setTextColor(R.id.widget_note_list_title_tv, localAccount.getTextColor());
+                        views.setInt(R.id.widget_note_header, "setBackgroundColor", Color.parseColor(localAccountEntity.getColor()));
+                        views.setInt(R.id.widget_note_header_icon, "setColorFilter", Color.parseColor(localAccountEntity.getTextColor()));
+                        views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", Color.parseColor(localAccountEntity.getTextColor()));
+                        views.setTextColor(R.id.widget_note_list_title_tv, Color.parseColor(localAccountEntity.getTextColor()));
                     } else {
                         views.setInt(R.id.widget_note_header, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
                         views.setInt(R.id.widget_note_header_icon, "setColorFilter", Color.WHITE);

@@ -20,6 +20,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 public class SyncWorker extends Worker {
@@ -38,13 +39,14 @@ public class SyncWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
-        for (LocalAccount account : db.getAccounts()) {
+        NotesDatabase sqliteOpenHelperDatabase = NotesDatabase.getInstance(getApplicationContext());
+        NotesRoomDatabase roomDatabase = NotesRoomDatabase.getInstance(getApplicationContext());
+        for (LocalAccountEntity account : roomDatabase.getLocalAccountDao().getAccounts()) {
             try {
                 SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.v(TAG, "Starting background synchronization for " + ssoAccount.name);
-                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> Log.v(TAG, "Finished background synchronization for " + ssoAccount.name));
-                db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
+                sqliteOpenHelperDatabase.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> Log.v(TAG, "Finished background synchronization for " + ssoAccount.name));
+                sqliteOpenHelperDatabase.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
             } catch (NextcloudFilesAppAccountNotFoundException e) {
                 e.printStackTrace();
             }

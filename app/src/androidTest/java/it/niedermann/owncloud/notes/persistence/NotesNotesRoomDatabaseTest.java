@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
@@ -35,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import static it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity.entityToLocalAccount;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
@@ -52,7 +54,8 @@ import static org.junit.Assert.fail;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotesNotesRoomDatabaseTest {
 
-    private NotesDatabase db = null;
+    private NotesDatabase sqliteOpenHelperDatabase = null;
+    private NotesRoomDatabase roomDatabase = null;
 
     private String accountURL = "HelloHowAreYou";
     private String accountUserName = "John Doe";
@@ -62,23 +65,24 @@ public class NotesNotesRoomDatabaseTest {
     @Before
     public void setupDB() throws NextcloudHttpRequestFailedException {
         Context context = ApplicationProvider.getApplicationContext();
-        db = NotesDatabase.getInstance(context);
+        sqliteOpenHelperDatabase = NotesDatabase.getInstance(context);
+        roomDatabase = NotesRoomDatabase.getInstance(context);
         // Create a new account if not exist
-        account = db.getLocalAccountByAccountName(accountName);
+        account = entityToLocalAccount(roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(accountName));
         if (account == null) {
             final String response = "{\"ocs\":{\"meta\":{\"status\":\"ok\",\"statuscode\":200,\"message\":\"OK\"},\"data\":{\"version\":{\"major\":18,\"minor\":0,\"micro\":4,\"string\":\"18.0.4\",\"edition\":\"\",\"extendedSupport\":false},\"capabilities\":{\"core\":{\"pollinterval\":60,\"webdav-root\":\"remote.php\\/webdav\"},\"bruteforce\":{\"delay\":0},\"files\":{\"bigfilechunking\":true,\"blacklisted_files\":[\".htaccess\"],\"directEditing\":{\"url\":\"https:\\/\\/efss.qloud.my\\/ocs\\/v2.php\\/apps\\/files\\/api\\/v1\\/directEditing\",\"etag\":\"ed2b141af2a39b0e42666952ba60988d\"},\"versioning\":true,\"undelete\":true},\"activity\":{\"apiv2\":[\"filters\",\"filters-api\",\"previews\",\"rich-strings\"]},\"ocm\":{\"enabled\":true,\"apiVersion\":\"1.0-proposal1\",\"endPoint\":\"https:\\/\\/efss.qloud.my\\/index.php\\/ocm\",\"resourceTypes\":[{\"name\":\"file\",\"shareTypes\":[\"user\",\"group\"],\"protocols\":{\"webdav\":\"\\/public.php\\/webdav\\/\"}}]},\"deck\":{\"version\":\"0.8.2\"},\"richdocuments\":{\"mimetypes\":[\"application\\/vnd.oasis.opendocument.text\",\"application\\/vnd.oasis.opendocument.spreadsheet\",\"application\\/vnd.oasis.opendocument.graphics\",\"application\\/vnd.oasis.opendocument.presentation\",\"application\\/vnd.lotus-wordpro\",\"application\\/vnd.visio\",\"application\\/vnd.wordperfect\",\"application\\/msonenote\",\"application\\/msword\",\"application\\/rtf\",\"text\\/rtf\",\"application\\/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"application\\/vnd.openxmlformats-officedocument.wordprocessingml.template\",\"application\\/vnd.ms-word.document.macroEnabled.12\",\"application\\/vnd.ms-word.template.macroEnabled.12\",\"application\\/vnd.ms-excel\",\"application\\/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\"application\\/vnd.openxmlformats-officedocument.spreadsheetml.template\",\"application\\/vnd.ms-excel.sheet.macroEnabled.12\",\"application\\/vnd.ms-excel.template.macroEnabled.12\",\"application\\/vnd.ms-excel.addin.macroEnabled.12\",\"application\\/vnd.ms-excel.sheet.binary.macroEnabled.12\",\"application\\/vnd.ms-powerpoint\",\"application\\/vnd.openxmlformats-officedocument.presentationml.presentation\",\"application\\/vnd.openxmlformats-officedocument.presentationml.template\",\"application\\/vnd.openxmlformats-officedocument.presentationml.slideshow\",\"application\\/vnd.ms-powerpoint.addin.macroEnabled.12\",\"application\\/vnd.ms-powerpoint.presentation.macroEnabled.12\",\"application\\/vnd.ms-powerpoint.template.macroEnabled.12\",\"application\\/vnd.ms-powerpoint.slideshow.macroEnabled.12\",\"text\\/csv\"],\"mimetypesNoDefaultOpen\":[\"image\\/svg+xml\",\"application\\/pdf\",\"text\\/plain\",\"text\\/spreadsheet\"],\"collabora\":[],\"direct_editing\":false,\"templates\":false,\"productName\":\"\\u5728\\u7ebf\\u534f\\u4f5c\"},\"dav\":{\"chunking\":\"1.0\"},\"files_sharing\":{\"api_enabled\":true,\"public\":{\"enabled\":true,\"password\":{\"enforced\":true,\"askForOptionalPassword\":false},\"expire_date\":{\"enabled\":true,\"days\":\"7\",\"enforced\":false},\"multiple_links\":true,\"expire_date_internal\":{\"enabled\":false},\"send_mail\":false,\"upload\":true,\"upload_files_drop\":true},\"resharing\":true,\"user\":{\"send_mail\":false,\"expire_date\":{\"enabled\":true}},\"group_sharing\":true,\"group\":{\"enabled\":true,\"expire_date\":{\"enabled\":true}},\"default_permissions\":31,\"federation\":{\"outgoing\":false,\"incoming\":false,\"expire_date\":{\"enabled\":true}},\"sharee\":{\"query_lookup_default\":false},\"sharebymail\":{\"enabled\":true,\"upload_files_drop\":{\"enabled\":true},\"password\":{\"enabled\":true},\"expire_date\":{\"enabled\":true}}},\"external\":{\"v1\":[\"sites\",\"device\",\"groups\",\"redirect\"]},\"notifications\":{\"ocs-endpoints\":[\"list\",\"get\",\"delete\",\"delete-all\",\"icons\",\"rich-strings\",\"action-web\"],\"push\":[\"devices\",\"object-data\",\"delete\"],\"admin-notifications\":[\"ocs\",\"cli\"]},\"password_policy\":{\"minLength\":8,\"enforceNonCommonPassword\":true,\"enforceNumericCharacters\":false,\"enforceSpecialCharacters\":false,\"enforceUpperLowerCase\":false,\"api\":{\"generate\":\"https:\\/\\/efss.qloud.my\\/ocs\\/v2.php\\/apps\\/password_policy\\/api\\/v1\\/generate\",\"validate\":\"https:\\/\\/efss.qloud.my\\/ocs\\/v2.php\\/apps\\/password_policy\\/api\\/v1\\/validate\"}},\"theming\":{\"name\":\"QloudData\",\"url\":\"https:\\/\\/www.qloud.my\\/qloud-data\\/\",\"slogan\":\"Powered by NextCloud\",\"color\":\"#1E4164\",\"color-text\":\"#ffffff\",\"color-element\":\"#1E4164\",\"logo\":\"https:\\/\\/efss.qloud.my\\/index.php\\/apps\\/theming\\/image\\/logo?useSvg=1&v=47\",\"background\":\"https:\\/\\/efss.qloud.my\\/core\\/img\\/background.png?v=47\",\"background-plain\":false,\"background-default\":true,\"logoheader\":\"https:\\/\\/efss.qloud.my\\/index.php\\/apps\\/theming\\/image\\/logo?useSvg=1&v=47\",\"favicon\":\"https:\\/\\/efss.qloud.my\\/index.php\\/apps\\/theming\\/image\\/logo?useSvg=1&v=47\"},\"registration\":{\"enabled\":true,\"apiRoot\":\"\\/ocs\\/v2.php\\/apps\\/registration\\/api\\/v1\\/\",\"apiLevel\":\"v1\"}}}}}";
             Capabilities capabilities = new Capabilities(response, null);
             assertNotNull(capabilities);
-            db.addAccount(accountURL, accountUserName, accountName, capabilities);
-            account = db.getLocalAccountByAccountName(accountName);
+            roomDatabase.addAccount(accountURL, accountUserName, accountName, capabilities);
+            account = entityToLocalAccount(roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(accountName));
         }
     }
 
     @Test
     public void testSetUpEnv() {
-        Log.i("Test_DB_Instance", db.toString());
-        List<LocalAccount> accounts = db.getAccounts();
-        for (LocalAccount account : accounts) {
+        Log.i("Test_DB_Instance", sqliteOpenHelperDatabase.toString());
+        List<LocalAccountEntity> accounts = roomDatabase.getLocalAccountDao().getAccounts();
+        for (LocalAccountEntity account : accounts) {
             Log.i("Test_Get_Accounts", account.toString());
         }
     }
@@ -92,14 +96,14 @@ public class NotesNotesRoomDatabaseTest {
                 true, "Diary", null);
 
         // Pre-check
-        List<DBNote> notes = db.getNotes(accountID);
+        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(accountID);
         int pre_size = notes.size();
         Log.i("Test_01_addNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
         // Add a new note
-        long noteID = db.addNote(accountID, cloudNote);
+        long noteID = sqliteOpenHelperDatabase.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        DBNote note = db.getNote(accountID, noteID);
+        DBNote note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
         Log.i("Test_01_addNote_Cur_Note", note.toString());
         Log.i("Test_01_addNote_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_01_addNote_Cur_Note", "Content: " + note.getContent());
@@ -111,7 +115,7 @@ public class NotesNotesRoomDatabaseTest {
         assertEquals(accountID, note.getAccountId());
 
         // Check if this note is in all notes
-        notes = db.getNotes(accountID);
+        notes = sqliteOpenHelperDatabase.getNotes(accountID);
         int added_size = notes.size();
         assertEquals(1, added_size - pre_size);
 
@@ -124,8 +128,8 @@ public class NotesNotesRoomDatabaseTest {
         CloudNote cloudNote_re0 = new CloudNote(0, Calendar.getInstance(),
                 "A Bad Day", getCurDate() + " You're faking a smile with just a coffee to go (Daniel Powter).",
                 true, "A Nice Song", null);
-        noteID = db.addNote(accountID, cloudNote_re0);
-        note = db.getNote(accountID, noteID);
+        noteID = sqliteOpenHelperDatabase.addNote(accountID, cloudNote_re0);
+        note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
         // Check
         assertEquals("A Bad Day", note.getTitle());
         assertEquals(cloudNote_re0.getContent(), note.getContent());
@@ -142,7 +146,7 @@ public class NotesNotesRoomDatabaseTest {
             // getNotesCustom also tested here
             Method getNC = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, boolean.class);
             getNC.setAccessible(true);
-            List<DBNote> notes = (List<DBNote>) getNC.invoke(db, accountID, NotesDatabase.key_status + " != ? AND " + NotesDatabase.key_account_id + " = ?",
+            List<DBNote> notes = (List<DBNote>) getNC.invoke(sqliteOpenHelperDatabase, accountID, NotesDatabase.key_status + " != ? AND " + NotesDatabase.key_account_id + " = ?",
                     new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountID}, NotesDatabase.key_id + " ASC", false);
             long newNoteID = notes.get(notes.size() - 1).getId() + 1;   // avoid UNIQUE Note_ID constraint
 
@@ -153,9 +157,9 @@ public class NotesNotesRoomDatabaseTest {
                     accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
 
             // Add a new note
-            long noteID = db.addNote(accountID, dbNote);
+            long noteID = sqliteOpenHelperDatabase.addNote(accountID, dbNote);
             // Check if this note is added successfully
-            DBNote note = db.getNote(accountID, noteID);
+            DBNote note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
             assertEquals(dbNote.getTitle(), note.getTitle());
             assertEquals(dbNote.getContent(), note.getContent());
             assertEquals(dbNote.getCategory(), note.getCategory());
@@ -167,9 +171,9 @@ public class NotesNotesRoomDatabaseTest {
                     newContent, true, "Sincere Friend's Record", null, DBStatus.VOID,
                     accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
             // Add a new note
-            noteID = db.addNote(accountID, dbNote);
+            noteID = sqliteOpenHelperDatabase.addNote(accountID, dbNote);
             // Check if this note is added successfully
-            note = db.getNote(accountID, noteID);
+            note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
             assertEquals(dbNote.getTitle(), note.getTitle());
             assertEquals(dbNote.getContent(), note.getContent());
             assertEquals(dbNote.getCategory(), note.getCategory());
@@ -179,7 +183,7 @@ public class NotesNotesRoomDatabaseTest {
             Method getNCWOW = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, String.class, boolean.class);
             getNCWOW.setAccessible(true);
             int aSize = 1;
-            notes = (List<DBNote>) getNCWOW.invoke(db, accountID, NotesDatabase.key_status + " != ? AND " + NotesDatabase.key_account_id + " = ?",
+            notes = (List<DBNote>) getNCWOW.invoke(sqliteOpenHelperDatabase, accountID, NotesDatabase.key_status + " != ? AND " + NotesDatabase.key_account_id + " = ?",
                     new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountID}, null, String.valueOf(aSize), false);
             assertEquals(aSize, notes.size());
         } catch (Exception e) {
@@ -191,26 +195,26 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_03_searchNotes() {
         long thisAccountID = account.getId();
-        List<DBNote> notes = db.searchNotes(thisAccountID, null, null, false);  // All three added notes are marked as favorite
+        List<DBNote> notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, null, false);  // All three added notes are marked as favorite
         Log.i("Test_03_searchNotes_Favorite_false", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
-        notes = db.searchNotes(thisAccountID, null, "Hello", true); // There is no category named "Hello"
+        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Hello", true); // There is no category named "Hello"
         Log.i("Test_03_searchNotes_Category_Hello", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
-        notes = db.searchNotes(thisAccountID, null, "Diary", true); // There is one category named "Diary"
+        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Diary", true); // There is one category named "Diary"
         Log.i("Test_03_searchNotes_Category_Diary_Favorite_True", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
 
-        notes = db.searchNotes(thisAccountID, null, null, null);    // Fetch all notes
+        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, null, null);    // Fetch all notes
         Log.i("Test_03_searchNotes_Three_NULL", "Size: " + notes.size());
         assertEquals(notes.size(), 4);  // We've added three test notes by now
     }
 
     @Test
     public void test_04_getCategories() {
-        List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
+        List<NavigationAdapter.CategoryNavigationItem> categories = sqliteOpenHelperDatabase.getCategories(account.getId());
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_04_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -223,7 +227,7 @@ public class NotesNotesRoomDatabaseTest {
 
     @Test
     public void test_05_searchCategories() {
-        List<NavigationAdapter.CategoryNavigationItem> categories = db.searchCategories(account.getId(), "Dia");
+        List<NavigationAdapter.CategoryNavigationItem> categories = sqliteOpenHelperDatabase.searchCategories(account.getId(), "Dia");
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_05_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -233,7 +237,7 @@ public class NotesNotesRoomDatabaseTest {
         }
         assertTrue(exitFlag);
 
-        categories = db.searchCategories(account.getId(), "Mike Chester Wang");
+        categories = sqliteOpenHelperDatabase.searchCategories(account.getId(), "Mike Chester Wang");
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_05_searchCategories_Item_Mike_Chester_Wang", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -247,7 +251,7 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_06_deleteNote() {
         long thisAccountID = account.getId();
-        List<DBNote> notes = db.getNotes(thisAccountID);
+        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
         int added_size = notes.size();
 
         Log.i("Test_06_deleteNote_All_Before_Deletion", "Size: " + added_size);
@@ -255,12 +259,12 @@ public class NotesNotesRoomDatabaseTest {
         for (DBNote cnote : notes) {
             Log.i("Test_06_deleteNote_All_Before_Deletion", cnote.toString());
             // Delete the note after testing
-            db.deleteNote(cnote.getId(), cnote.getStatus());
+            sqliteOpenHelperDatabase.deleteNote(cnote.getId(), cnote.getStatus());
             counter++;
         }
 
         // Check if the note is deleted successfully
-        notes = db.getNotes(thisAccountID);
+        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
         int deleted_size = notes.size();
         assertEquals(counter, added_size - deleted_size);
         Log.i("Test_06_deleteNote_All_Notes_After_Deletion", "Size: " + deleted_size);
@@ -302,18 +306,18 @@ public class NotesNotesRoomDatabaseTest {
                 false, "Diary", null));
 
         // Pre-check
-        List<DBNote> notes = db.getNotes(thisAccountID);
+        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
         int pre_size = notes.size();
         Log.i("Test_07_multiAddNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
         long[] multiNoteID = new long[10];
         for (int i = 0; i < 10; ++i) {
-            multiNoteID[i] = db.addNote(thisAccountID, multiCloudNote.get(i));
+            multiNoteID[i] = sqliteOpenHelperDatabase.addNote(thisAccountID, multiCloudNote.get(i));
         }
 
         // check if the node added successfully
         for (int i = 0; i < 10; ++i) {
-            DBNote nodeTemp = db.getNote(thisAccountID, multiNoteID[i]);
+            DBNote nodeTemp = sqliteOpenHelperDatabase.getNote(thisAccountID, multiNoteID[i]);
             assertEquals(nodeTemp.getTitle(), multiCloudNote.get(i).getTitle());
             assertEquals(nodeTemp.getCategory(), multiCloudNote.get(i).getCategory());
             assertEquals(nodeTemp.getContent(), multiCloudNote.get(i).getContent());
@@ -322,7 +326,7 @@ public class NotesNotesRoomDatabaseTest {
         }
 
         // check if these note is in all notes
-        notes = db.getNotes(thisAccountID);
+        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
         int add_size = notes.size();
         assertEquals(10, add_size - pre_size);
 
@@ -332,34 +336,34 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_08_multiSearchNotes() {
         long thisAccountID = account.getId();
-        List<DBNote> notes = db.searchNotes(thisAccountID, null, null, null);
+        List<DBNote> notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, null, null);
         Log.i("Test_08_multiSearchNotes_null_null_null", "Size: " + notes.size());
         assertEquals(notes.size(), 10);
 
-        notes = db.searchNotes(thisAccountID, null, null, true);
+        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, null, true);
         Log.i("Test_08_multiSearchNotes_null_null_true", "Size: " + notes.size());
         assertEquals(notes.size(), 7);
 
-        notes = db.searchNotes(thisAccountID, null, "Music", null);
+        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Music", null);
         Log.i("Test_08_multiSearchNotes_null_Music_null", "Size: " + notes.size());
         assertEquals(notes.size(), 2);
 
-        notes = db.searchNotes(thisAccountID, null, "Work", true);
+        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Work", true);
         Log.i("Test_08_multiSearchNotes_null_Work_true", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
-        notes = db.searchNotes(thisAccountID, null, "Diary", null);
+        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Diary", null);
         Log.i("Test_08_multiSearchNotes_null_Diary_null", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
 
-        notes = db.searchNotes(thisAccountID, "Mike", null, null);
+        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, "Mike", null, null);
         Log.i("Test_08_multiSearchNotes_Mike_null_null", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
     }
 
     @Test
     public void test_09_multiGetCategories() {
-        List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
+        List<NavigationAdapter.CategoryNavigationItem> categories = sqliteOpenHelperDatabase.getCategories(account.getId());
         int count = 0;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_09_multiGetCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -372,7 +376,7 @@ public class NotesNotesRoomDatabaseTest {
 
     @Test
     public void test_10_multiSearchCategories() {
-        List<NavigationAdapter.CategoryNavigationItem> categories = db.searchCategories(account.getId(), "M");
+        List<NavigationAdapter.CategoryNavigationItem> categories = sqliteOpenHelperDatabase.searchCategories(account.getId(), "M");
         int count = 0;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -380,7 +384,7 @@ public class NotesNotesRoomDatabaseTest {
         }
         assertEquals(3, count);
 
-        categories = db.searchCategories(account.getId(), "Mike");
+        categories = sqliteOpenHelperDatabase.searchCategories(account.getId(), "Mike");
         count = 0;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -388,7 +392,7 @@ public class NotesNotesRoomDatabaseTest {
         }
         assertEquals(0, count);
 
-        categories = db.searchCategories(account.getId(), "M");
+        categories = sqliteOpenHelperDatabase.searchCategories(account.getId(), "M");
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -399,7 +403,7 @@ public class NotesNotesRoomDatabaseTest {
         assertTrue(exitFlag);
 
 
-        categories = db.searchCategories(account.getId(), "WOk");
+        categories = sqliteOpenHelperDatabase.searchCategories(account.getId(), "WOk");
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -409,7 +413,7 @@ public class NotesNotesRoomDatabaseTest {
         }
         assertFalse(exitFlag);
 
-        categories = db.searchCategories(account.getId(), "hello");
+        categories = sqliteOpenHelperDatabase.searchCategories(account.getId(), "hello");
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -423,17 +427,17 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_11_multiDeleteNote() {
         long thisAccountID = account.getId();
-        List<DBNote> notes = db.getNotes(thisAccountID);
+        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
         int added_size = notes.size();
 
         Log.i("Test_11_multiDeleteNote_All_Before_Deletion", "Size: " + added_size);
         for (DBNote e : notes) {
             Log.i("Test_11_multiDeleteNote_All_Before_Deletion", e.toString());
-            db.deleteNote(e.getId(), e.getStatus());
+            sqliteOpenHelperDatabase.deleteNote(e.getId(), e.getStatus());
         }
 
         // Check if the note is deleted successfully
-        notes = db.getNotes(thisAccountID);
+        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
         int deleted_size = notes.size();
         assertEquals(10, added_size - deleted_size);
         Log.i("Test_11_multiDeleteNote_All_After_Deletion", "Size: " + deleted_size);
@@ -447,14 +451,14 @@ public class NotesNotesRoomDatabaseTest {
                 true, "日记", null);
 
         // Pre-check
-        List<DBNote> notes = db.getNotes(accountID);
+        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(accountID);
         int pre_size = notes.size();
         Log.i("Test_12_Chinese_All_Notes_Before_Addition", "Size: " + pre_size);
 
         // Add a new note
-        long noteID = db.addNote(accountID, cloudNote);
+        long noteID = sqliteOpenHelperDatabase.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        DBNote note = db.getNote(accountID, noteID);
+        DBNote note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
         Log.i("Test_12_Chinese_Cur_Note", note.toString());
         Log.i("Test_12_Chinese_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_12_Chinese_Cur_Note", "Content: " + note.getContent());
@@ -466,7 +470,7 @@ public class NotesNotesRoomDatabaseTest {
         assertEquals(accountID, note.getAccountId());
 
         // Check if this note is in all notes
-        notes = db.getNotes(accountID);
+        notes = sqliteOpenHelperDatabase.getNotes(accountID);
         int added_size = notes.size();
 
         assertEquals(1, added_size - pre_size);
@@ -477,11 +481,11 @@ public class NotesNotesRoomDatabaseTest {
         }
 
         long thisAccountID = account.getId();
-        notes = db.searchNotes(thisAccountID, "美好", "日记", true);
+        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, "美好", "日记", true);
         Log.i("Test_12_Chinese", "Size: " + notes.size());
         assertEquals(1, notes.size());
 
-        List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
+        List<NavigationAdapter.CategoryNavigationItem> categories = sqliteOpenHelperDatabase.getCategories(account.getId());
         boolean exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -491,7 +495,7 @@ public class NotesNotesRoomDatabaseTest {
         }
         assertTrue(exitFlag);
 
-        categories = db.searchCategories(account.getId(), "记");
+        categories = sqliteOpenHelperDatabase.searchCategories(account.getId(), "记");
         exitFlag = false;
         for (NavigationAdapter.NavigationItem categoryItem : categories) {
             Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -501,15 +505,15 @@ public class NotesNotesRoomDatabaseTest {
         }
         assertTrue(exitFlag);
 
-        notes = db.getNotes(thisAccountID);
+        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
         for (DBNote cnote : notes) {
             Log.i("Test_12_Chinese_All_Before_Deletion", cnote.toString());
             // Delete the note after testing
-            db.deleteNote(cnote.getId(), cnote.getStatus());
+            sqliteOpenHelperDatabase.deleteNote(cnote.getId(), cnote.getStatus());
         }
 
         // Check if the note is deleted successfully
-        notes = db.getNotes(thisAccountID);
+        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
         int deleted_size = notes.size();
         assertEquals(1, added_size - deleted_size);
         Log.i("Test_12_Chinese_All_Notes_After_Deletion", "Size: " + deleted_size);
@@ -523,7 +527,7 @@ public class NotesNotesRoomDatabaseTest {
                     String.class);
             method.setAccessible(true);
 
-            List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
+            List<NavigationAdapter.CategoryNavigationItem> categories = sqliteOpenHelperDatabase.getCategories(account.getId());
             int count = 0;
             for (NavigationAdapter.NavigationItem categoryItem : categories) {
                 Log.i("Test_13_getCategoryIdByTitle", String.format("%s | %s | %d | %d",
@@ -536,13 +540,13 @@ public class NotesNotesRoomDatabaseTest {
 
             // Find an existing category to test false
             if (count > 0) {
-                catID = (int) method.invoke(db, account.getId(), categories.get(0).label);
+                catID = (int) method.invoke(sqliteOpenHelperDatabase, account.getId(), categories.get(0).label);
                 assertNotEquals(-1, catID);
             }
 
             // Create a category not existing
             String cur_cat = "Mike Chester Wang's Diary" + getCurDate();
-            catID = (int) method.invoke(db, account.getId(), cur_cat);
+            catID = (int) method.invoke(sqliteOpenHelperDatabase, account.getId(), cur_cat);
             assertNotEquals(-1, catID);
         } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
@@ -566,19 +570,19 @@ public class NotesNotesRoomDatabaseTest {
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
-        long noteID = db.addNote(account.getId(), cloudNote);
+        long noteID = sqliteOpenHelperDatabase.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
-        CategorySortingMethod defaultMethod = db.getCategoryOrderByTitle(account.getId(), "CodingDiary");
+        CategorySortingMethod defaultMethod = sqliteOpenHelperDatabase.getCategoryOrderByTitle(account.getId(), "CodingDiary");
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
-        db.modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
-        CategorySortingMethod methodAfterModify = db.getCategoryOrderByTitle(account.getId(), "CodingDiary");
+        sqliteOpenHelperDatabase.modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrderByTitle(account.getId(), "CodingDiary");
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
-        db.deleteNote(noteID, DBStatus.VOID);
+        sqliteOpenHelperDatabase.deleteNote(noteID, DBStatus.VOID);
     }
 
     @Test
@@ -588,53 +592,53 @@ public class NotesNotesRoomDatabaseTest {
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
-        long noteID = db.addNote(account.getId(), cloudNote);
+        long noteID = sqliteOpenHelperDatabase.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
-        CategorySortingMethod defaultMethod = db.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
+        CategorySortingMethod defaultMethod = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
-        db.modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
-        CategorySortingMethod methodAfterModify = db.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
+        sqliteOpenHelperDatabase.modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
-        db.deleteNote(noteID, DBStatus.VOID);
+        sqliteOpenHelperDatabase.deleteNote(noteID, DBStatus.VOID);
 
         // Special categories
-        Context ctx = db.getContext().getApplicationContext();
+        Context ctx = sqliteOpenHelperDatabase.getContext().getApplicationContext();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
         SharedPreferences.Editor spe = sp.edit();
         spe.clear();
         spe.apply();
         // check default value
         // all notes
-        defaultMethod = db.getCategoryOrder(account.getId(), new Category(null, false));
+        defaultMethod = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category(null, false));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // uncategorized
-        defaultMethod = db.getCategoryOrder(account.getId(), new Category("", false));
+        defaultMethod = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category("", false));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // favorite
-        defaultMethod = db.getCategoryOrder(account.getId(), new Category(null, true));
+        defaultMethod = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category(null, true));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
         // all notes
-        db.modifyCategoryOrder(account.getId(), new Category(null, false), CategorySortingMethod.getCSM(1));
-        methodAfterModify = db.getCategoryOrder(account.getId(), new Category(null, false));
+        sqliteOpenHelperDatabase.modifyCategoryOrder(account.getId(), new Category(null, false), CategorySortingMethod.getCSM(1));
+        methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category(null, false));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // uncategorized
-        db.modifyCategoryOrder(account.getId(), new Category("", false), CategorySortingMethod.getCSM(1));
-        methodAfterModify = db.getCategoryOrder(account.getId(), new Category("", false));
+        sqliteOpenHelperDatabase.modifyCategoryOrder(account.getId(), new Category("", false), CategorySortingMethod.getCSM(1));
+        methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category("", false));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // favorite
-        db.modifyCategoryOrder(account.getId(), new Category(null, true), CategorySortingMethod.getCSM(1));
-        methodAfterModify = db.getCategoryOrder(account.getId(), new Category(null, true));
+        sqliteOpenHelperDatabase.modifyCategoryOrder(account.getId(), new Category(null, true), CategorySortingMethod.getCSM(1));
+        methodAfterModify = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category(null, true));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete SharedPreferences

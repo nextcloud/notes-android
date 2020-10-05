@@ -21,6 +21,8 @@ import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
@@ -33,7 +35,8 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
 
     private static final String KEY_CURRENT_ACCOUNT_ID = "current_account_id";
 
-    private NotesDatabase db;
+    private NotesDatabase sqliteOpenHelperDatabase;
+    private NotesRoomDatabase roomDatabase;
     private DialogAccountSwitcherBinding binding;
     private AccountSwitcherListener accountSwitcherListener;
     private long currentAccountId;
@@ -55,7 +58,8 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             this.currentAccountId = args.getLong(KEY_CURRENT_ACCOUNT_ID);
         }
 
-        db = NotesDatabase.getInstance(getActivity());
+        sqliteOpenHelperDatabase = NotesDatabase.getInstance(getActivity());
+        roomDatabase = NotesRoomDatabase.getInstance(getActivity());
     }
 
     @NonNull
@@ -63,11 +67,11 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
-        LocalAccount currentLocalAccount = db.getAccount(currentAccountId);
-        binding.accountName.setText(currentLocalAccount.getUserName());
+        LocalAccountEntity currentLocalAccount = roomDatabase.getLocalAccountDao().getAccount(currentAccountId);
+        binding.accountName.setText(currentLocalAccount.getUsername());
         binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
         Glide.with(requireContext())
-                .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUserName()) + "/64")
+                .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUsername()) + "/64")
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.currentAccountItemAvatar);
@@ -78,8 +82,8 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             dismiss();
         }));
         binding.accountsList.setAdapter(adapter);
-        List<LocalAccount> localAccounts = db.getAccounts();
-        for (LocalAccount localAccount : localAccounts) {
+        List<LocalAccountEntity> localAccounts = roomDatabase.getLocalAccountDao().getAccounts();
+        for (LocalAccountEntity localAccount : localAccounts) {
             if (localAccount.getId() == currentLocalAccount.getId()) {
                 localAccounts.remove(localAccount);
                 break;

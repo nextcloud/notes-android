@@ -14,6 +14,8 @@ import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
 @Database(
         entities = {
@@ -25,12 +27,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
 
     private static final String TAG = NotesRoomDatabase.class.getSimpleName();
     private static final String NOTES_DB_NAME = "OWNCLOUD_NOTES";
-    //    private final NoteServerSyncHelper serverSyncHelper;
     private static NotesRoomDatabase instance;
-
-//    private NotesRoomDatabase(Context context) {
-////        serverSyncHelper = NoteServerSyncHelper.getInstance(this);
-//    }
 
     public static NotesRoomDatabase getInstance(Context context) {
         if (instance == null) {
@@ -53,20 +50,54 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
                         Log.v(TAG, NotesRoomDatabase.class.getSimpleName() + " created.");
                     }
                 })
+                .allowMainThreadQueries() // FIXME remove
                 .build();
     }
 
     private static final Migration OLD_STUFF = new Migration(17, 18) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
-//            database.execSQL("ALTER TABLE `Account` ADD `color` TEXT NOT NULL DEFAULT '#0082c9'");
-//            database.execSQL("ALTER TABLE `Account` ADD `textColor` TEXT NOT NULL DEFAULT '#ffffff'");
-//            database.execSQL("ALTER TABLE `Account` ADD `serverDeckVersion` TEXT NOT NULL DEFAULT '0.6.4'");
-//            database.execSQL("ALTER TABLE `Account` ADD `maintenanceEnabled` INTEGER NOT NULL DEFAULT 0");
+
         }
     };
 
     public abstract NoteDao getNoteDao();
 
     public abstract LocalAccountDao getLocalAccountDao();
+
+    @SuppressWarnings("UnusedReturnValue")
+    public long addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
+        final LocalAccountEntity entity = new LocalAccountEntity();
+        entity.setUrl(url);
+        entity.setUsername(username);
+        entity.setAccountName(accountName);
+        entity.setCapabilities(capabilities);
+        return getLocalAccountDao().insert(entity);
+    }
+
+    public void updateBrand(long accountId, @NonNull Capabilities capabilities) throws IllegalArgumentException {
+        validateAccountId(accountId);
+
+        String color;
+        try {
+            color = ColorUtil.formatColorToParsableHexString(capabilities.getColor()).substring(1);
+        } catch (Exception e) {
+            color = "0082C9";
+        }
+
+        String textColor;
+        try {
+            textColor = ColorUtil.formatColorToParsableHexString(capabilities.getTextColor()).substring(1);
+        } catch (Exception e) {
+            textColor = "FFFFFF";
+        }
+
+        getLocalAccountDao().updateBrand(accountId, color, textColor);
+    }
+
+    private static void validateAccountId(long accountId) {
+        if (accountId < 1) {
+            throw new IllegalArgumentException("accountId must be greater than 0");
+        }
+    }
 }

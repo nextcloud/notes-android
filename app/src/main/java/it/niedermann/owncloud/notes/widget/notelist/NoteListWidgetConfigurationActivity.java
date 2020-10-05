@@ -23,11 +23,14 @@ import java.util.Map;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.main.MainActivity;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.NotesApplication;
+
+import static it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity.entityToLocalAccount;
 
 public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private static final String TAG = Activity.class.getSimpleName();
@@ -40,7 +43,8 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent;
     private NavigationAdapter.NavigationItem itemFavorites;
-    private NotesDatabase db = null;
+    private NotesDatabase sqliteOpenHelperDatabase = null;
+    private NotesRoomDatabase roomDatabase = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,9 +52,10 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_note_list_configuration);
 
-        db = NotesDatabase.getInstance(this);
+        sqliteOpenHelperDatabase = NotesDatabase.getInstance(this);
+        roomDatabase = NotesRoomDatabase.getInstance(this);
         try {
-            this.localAccount = db.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
+            this.localAccount = entityToLocalAccount(roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name));
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
             Toast.makeText(this, R.string.widget_not_logged_in, Toast.LENGTH_LONG).show();
@@ -104,7 +109,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 data.setAccountId(localAccount.getId());
                 data.setThemeMode(NotesApplication.getAppTheme(getApplicationContext()).getModeId());
 
-                db.createOrUpdateNoteListWidgetData(data);
+                sqliteOpenHelperDatabase.createOrUpdateNoteListWidgetData(data);
 
                 Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
                         getApplicationContext(), NoteListWidget.class);
@@ -143,7 +148,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 return new ArrayList<>();
             }
             NavigationAdapter.NavigationItem itemUncategorized;
-            List<CategoryNavigationItem> categories = db.getCategories(localAccount.getId());
+            List<CategoryNavigationItem> categories = sqliteOpenHelperDatabase.getCategories(localAccount.getId());
 
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
@@ -151,7 +156,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
             }
 
-            Map<String, Integer> favorites = db.getFavoritesCount(localAccount.getId());
+            Map<String, Integer> favorites = sqliteOpenHelperDatabase.getFavoritesCount(localAccount.getId());
             //noinspection ConstantConditions
             int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
             //noinspection ConstantConditions

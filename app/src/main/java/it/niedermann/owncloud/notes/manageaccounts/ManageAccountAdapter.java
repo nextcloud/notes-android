@@ -12,14 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+
+import static it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity.entityToLocalAccount;
 
 public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountViewHolder> {
 
     @Nullable
     private LocalAccount currentLocalAccount = null;
     @NonNull
-    private final List<LocalAccount> localAccounts = new ArrayList<>();
+    private final List<LocalAccountEntity> localAccounts = new ArrayList<>();
     @NonNull
     private final Consumer<LocalAccount> onAccountClick;
     @Nullable
@@ -44,8 +47,8 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
 
     @Override
     public void onBindViewHolder(@NonNull ManageAccountViewHolder holder, int position) {
-        final LocalAccount localAccount = localAccounts.get(position);
-        holder.bind(localAccount, (localAccountClicked) -> {
+        final LocalAccountEntity localAccount = localAccounts.get(position);
+        holder.bind(entityToLocalAccount(localAccount), (localAccountClicked) -> {
             setCurrentLocalAccount(localAccountClicked);
             onAccountClick.accept(localAccountClicked);
         }, (localAccountToDelete -> {
@@ -67,7 +70,7 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
         return localAccounts.size();
     }
 
-    public void setLocalAccounts(@NonNull List<LocalAccount> localAccounts) {
+    public void setLocalAccounts(@NonNull List<LocalAccountEntity> localAccounts) {
         this.localAccounts.clear();
         this.localAccounts.addAll(localAccounts);
         notifyDataSetChanged();

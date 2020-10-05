@@ -37,6 +37,8 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.Categor
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
@@ -51,6 +53,7 @@ import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcu
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
+import static it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity.entityToLocalAccount;
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
@@ -65,7 +68,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
-    private LocalAccount localAccount;
+    private LocalAccountEntity localAccountEntity;
     private SingleSignOnAccount ssoAccount;
 
     protected DBNote note;
@@ -73,7 +76,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Nullable
     private DBNote originalNote;
     private int originalScrollY;
-    protected NotesDatabase db;
+    protected NotesDatabase sqliteOpenHelperDatabase;
+    protected NotesRoomDatabase roomDatabase;
     private NoteFragmentListener listener;
     private boolean titleModified = false;
 
@@ -87,7 +91,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         } catch (ClassCastException e) {
             throw new ClassCastException(context.getClass() + " must implement " + NoteFragmentListener.class);
         }
-        db = NotesDatabase.getInstance(context);
+        sqliteOpenHelperDatabase = NotesDatabase.getInstance(context);
+        roomDatabase = NotesRoomDatabase.getInstance(context);
     }
 
     @Override
@@ -95,7 +100,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         super.onCreate(savedInstanceState);
         try {
             this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
-            this.localAccount = db.getLocalAccountByAccountName(ssoAccount.name);
+            this.localAccountEntity = roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
 
             if (savedInstanceState == null) {
                 long id = requireArguments().getLong(PARAM_NOTE_ID);
@@ -103,11 +108,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
                     if (accountId > 0) {
                         /* Switch account if account id has been provided */
-                        this.localAccount = db.getAccount(accountId);
-                        SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccount.getAccountName());
+                        this.localAccountEntity = roomDatabase.getLocalAccountDao().getAccount(accountId);
+                        SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccountEntity.getAccountName());
                     }
                     isNew = false;
-                    note = originalNote = db.getNote(localAccount.getId(), id);
+                    note = originalNote = sqliteOpenHelperDatabase.getNote(localAccountEntity.getId(), id);
                 } else {
                     CloudNote cloudNote = (CloudNote) requireArguments().getSerializable(PARAM_NEWNOTE);
                     String content = requireArguments().getString(PARAM_CONTENT);
@@ -118,7 +123,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                             note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "", 0);
                         }
                     } else {
-                        note = db.getNote(localAccount.getId(), db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote));
+                        note = sqliteOpenHelperDatabase.getNote(localAccountEntity.getId(), sqliteOpenHelperDatabase.addNoteAndSync(ssoAccount, localAccountEntity.getId(), cloudNote));
                         originalNote = null;
                     }
                 }
@@ -201,7 +206,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
 
-        menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
+        menu.findItem(R.id.menu_title).setVisible(localAccountEntity.getPreferredApiVersion() != null && localAccountEntity.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
         menu.findItem(R.id.menu_delete).setVisible(!isNew);
     }
 
@@ -219,18 +224,18 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         switch (item.getItemId()) {
             case R.id.menu_cancel:
                 if (originalNote == null) {
-                    db.deleteNoteAndSync(ssoAccount, note.getId());
+                    sqliteOpenHelperDatabase.deleteNoteAndSync(ssoAccount, note.getId());
                 } else {
-                    db.updateNoteAndSync(ssoAccount, localAccount, originalNote, null, null);
+                    sqliteOpenHelperDatabase.updateNoteAndSync(ssoAccount, entityToLocalAccount(localAccountEntity), originalNote, null, null);
                 }
                 listener.close();
                 return true;
             case R.id.menu_delete:
-                db.deleteNoteAndSync(ssoAccount, note.getId());
+                sqliteOpenHelperDatabase.deleteNoteAndSync(ssoAccount, note.getId());
                 listener.close();
                 return true;
             case R.id.menu_favorite:
-                db.toggleFavorite(ssoAccount, note, null);
+                sqliteOpenHelperDatabase.toggleFavorite(ssoAccount, note, null);
                 listener.onNoteUpdated(note);
                 prepareFavoriteOption(item);
                 return true;
@@ -286,7 +291,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     public void onCloseNote() {
         if (!titleModified && originalNote == null && getContent().isEmpty()) {
-            db.deleteNoteAndSync(ssoAccount, note.getId());
+            sqliteOpenHelperDatabase.deleteNoteAndSync(ssoAccount, note.getId());
         }
     }
 
@@ -302,12 +307,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             if (note.getContent().equals(newContent)) {
                 if (note.getScrollY() != originalScrollY) {
                     Log.v(TAG, "... only saving new scroll state, since content did not change");
-                    db.updateScrollY(note.getId(), note.getScrollY());
+                    sqliteOpenHelperDatabase.updateScrollY(note.getId(), note.getScrollY());
                 } else {
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
             } else {
-                note = db.updateNoteAndSync(ssoAccount, localAccount, note, newContent, callback);
+                note = sqliteOpenHelperDatabase.updateNoteAndSync(ssoAccount, entityToLocalAccount(localAccountEntity), note, newContent, callback);
                 listener.onNoteUpdated(note);
                 requireActivity().invalidateOptionsMenu();
             }
@@ -351,7 +356,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Override
     public void onCategoryChosen(String category) {
-        db.setCategory(ssoAccount, note, category, null);
+        sqliteOpenHelperDatabase.setCategory(ssoAccount, note, category, null);
         listener.onNoteUpdated(note);
     }
 
@@ -359,12 +364,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onTitleEdited(String newTitle) {
         titleModified = true;
         note.setTitle(newTitle);
-        note = db.updateNoteAndSync(ssoAccount, localAccount, note, note.getContent(), newTitle, null);
+        note = sqliteOpenHelperDatabase.updateNoteAndSync(ssoAccount, entityToLocalAccount(localAccountEntity), note, note.getContent(), newTitle, null);
         listener.onNoteUpdated(note);
     }
 
     public void moveNote(LocalAccount account) {
-        db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
+        sqliteOpenHelperDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
         listener.close();
     }
 
