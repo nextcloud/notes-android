@@ -6,26 +6,9 @@ import androidx.room.PrimaryKey;
 @Entity
 public class CategoryEntity {
     @PrimaryKey
-    public int id;
-
-    public int remoteId;
-
-    public int accountId;
-
-    public String status;
-
+    public long id;
+    public long accountId;
     public String title;
-
-    public int modified;
-
-    public String content;
-
-    public String eTag;
-
-    public String excerpt;
-
-    public int scrollY;
-
 }
 //                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +
 //                "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");

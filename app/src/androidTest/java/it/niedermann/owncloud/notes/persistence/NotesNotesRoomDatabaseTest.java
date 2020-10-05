@@ -101,7 +101,7 @@ public class NotesNotesRoomDatabaseTest {
         Log.i("Test_01_addNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
         // Add a new note
-        long noteID = sqliteOpenHelperDatabase.addNote(accountID, cloudNote);
+        long noteID = roomDatabase.addNote(accountID, cloudNote);
         // Check if this note is added successfully
         DBNote note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
         Log.i("Test_01_addNote_Cur_Note", note.toString());
@@ -128,7 +128,7 @@ public class NotesNotesRoomDatabaseTest {
         CloudNote cloudNote_re0 = new CloudNote(0, Calendar.getInstance(),
                 "A Bad Day", getCurDate() + " You're faking a smile with just a coffee to go (Daniel Powter).",
                 true, "A Nice Song", null);
-        noteID = sqliteOpenHelperDatabase.addNote(accountID, cloudNote_re0);
+        noteID = roomDatabase.addNote(accountID, cloudNote_re0);
         note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
         // Check
         assertEquals("A Bad Day", note.getTitle());
@@ -157,7 +157,7 @@ public class NotesNotesRoomDatabaseTest {
                     accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
 
             // Add a new note
-            long noteID = sqliteOpenHelperDatabase.addNote(accountID, dbNote);
+            long noteID = roomDatabase.addNote(accountID, dbNote);
             // Check if this note is added successfully
             DBNote note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
             assertEquals(dbNote.getTitle(), note.getTitle());
@@ -171,7 +171,7 @@ public class NotesNotesRoomDatabaseTest {
                     newContent, true, "Sincere Friend's Record", null, DBStatus.VOID,
                     accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
             // Add a new note
-            noteID = sqliteOpenHelperDatabase.addNote(accountID, dbNote);
+            noteID = roomDatabase.addNote(accountID, dbNote);
             // Check if this note is added successfully
             note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
             assertEquals(dbNote.getTitle(), note.getTitle());
@@ -259,7 +259,7 @@ public class NotesNotesRoomDatabaseTest {
         for (DBNote cnote : notes) {
             Log.i("Test_06_deleteNote_All_Before_Deletion", cnote.toString());
             // Delete the note after testing
-            sqliteOpenHelperDatabase.deleteNote(cnote.getId(), cnote.getStatus());
+            roomDatabase.deleteNote(cnote.getId(), cnote.getStatus());
             counter++;
         }
 
@@ -312,7 +312,7 @@ public class NotesNotesRoomDatabaseTest {
 
         long[] multiNoteID = new long[10];
         for (int i = 0; i < 10; ++i) {
-            multiNoteID[i] = sqliteOpenHelperDatabase.addNote(thisAccountID, multiCloudNote.get(i));
+            multiNoteID[i] = roomDatabase.addNote(thisAccountID, multiCloudNote.get(i));
         }
 
         // check if the node added successfully
@@ -433,7 +433,7 @@ public class NotesNotesRoomDatabaseTest {
         Log.i("Test_11_multiDeleteNote_All_Before_Deletion", "Size: " + added_size);
         for (DBNote e : notes) {
             Log.i("Test_11_multiDeleteNote_All_Before_Deletion", e.toString());
-            sqliteOpenHelperDatabase.deleteNote(e.getId(), e.getStatus());
+            roomDatabase.deleteNote(e.getId(), e.getStatus());
         }
 
         // Check if the note is deleted successfully
@@ -456,7 +456,7 @@ public class NotesNotesRoomDatabaseTest {
         Log.i("Test_12_Chinese_All_Notes_Before_Addition", "Size: " + pre_size);
 
         // Add a new note
-        long noteID = sqliteOpenHelperDatabase.addNote(accountID, cloudNote);
+        long noteID = roomDatabase.addNote(accountID, cloudNote);
         // Check if this note is added successfully
         DBNote note = sqliteOpenHelperDatabase.getNote(accountID, noteID);
         Log.i("Test_12_Chinese_Cur_Note", note.toString());
@@ -509,7 +509,7 @@ public class NotesNotesRoomDatabaseTest {
         for (DBNote cnote : notes) {
             Log.i("Test_12_Chinese_All_Before_Deletion", cnote.toString());
             // Delete the note after testing
-            sqliteOpenHelperDatabase.deleteNote(cnote.getId(), cnote.getStatus());
+            roomDatabase.deleteNote(cnote.getId(), cnote.getStatus());
         }
 
         // Check if the note is deleted successfully
@@ -570,7 +570,7 @@ public class NotesNotesRoomDatabaseTest {
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
-        long noteID = sqliteOpenHelperDatabase.addNote(account.getId(), cloudNote);
+        long noteID = roomDatabase.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
         CategorySortingMethod defaultMethod = sqliteOpenHelperDatabase.getCategoryOrderByTitle(account.getId(), "CodingDiary");
@@ -582,7 +582,7 @@ public class NotesNotesRoomDatabaseTest {
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
-        sqliteOpenHelperDatabase.deleteNote(noteID, DBStatus.VOID);
+        roomDatabase.deleteNote(noteID, DBStatus.VOID);
     }
 
     @Test
@@ -592,7 +592,7 @@ public class NotesNotesRoomDatabaseTest {
         CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
-        long noteID = sqliteOpenHelperDatabase.addNote(account.getId(), cloudNote);
+        long noteID = roomDatabase.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
         CategorySortingMethod defaultMethod = sqliteOpenHelperDatabase.getCategoryOrder(account.getId(), new Category("CodingDiary", false));
@@ -604,7 +604,7 @@ public class NotesNotesRoomDatabaseTest {
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
-        sqliteOpenHelperDatabase.deleteNote(noteID, DBStatus.VOID);
+        roomDatabase.deleteNote(noteID, DBStatus.VOID);
 
         // Special categories
         Context ctx = sqliteOpenHelperDatabase.getContext().getApplicationContext();

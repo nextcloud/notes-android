@@ -260,7 +260,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             try {
                 BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, sqliteOpenHelperDatabase, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
+                new NotesListViewItemTouchHelper(ssoAccount, this, sqliteOpenHelperDatabase, roomDatabase, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
                         .attachToRecyclerView(listView);
                 synchronize();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -896,7 +896,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         if (selected) {
             v.setSelected(true);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                    this, this, sqliteOpenHelperDatabase, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
+                    this, this, sqliteOpenHelperDatabase, roomDatabase, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
             ));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
@@ -982,7 +982,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         adapter.deselect(0);
         for (Integer i : selection) {
             DBNote note = (DBNote) adapter.getItem(i);
-            sqliteOpenHelperDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), sqliteOpenHelperDatabase.getNote(note.getAccountId(), note.getId()), account.getId());
+            roomDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), sqliteOpenHelperDatabase.getNote(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);

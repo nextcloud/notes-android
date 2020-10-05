@@ -123,7 +123,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                             note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "", 0);
                         }
                     } else {
-                        note = sqliteOpenHelperDatabase.getNote(localAccountEntity.getId(), sqliteOpenHelperDatabase.addNoteAndSync(ssoAccount, localAccountEntity.getId(), cloudNote));
+                        note = sqliteOpenHelperDatabase.getNote(localAccountEntity.getId(), roomDatabase.addNoteAndSync(ssoAccount, localAccountEntity.getId(), cloudNote));
                         originalNote = null;
                     }
                 }
@@ -224,14 +224,14 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         switch (item.getItemId()) {
             case R.id.menu_cancel:
                 if (originalNote == null) {
-                    sqliteOpenHelperDatabase.deleteNoteAndSync(ssoAccount, note.getId());
+                    roomDatabase.deleteNoteAndSync(ssoAccount, note.getId());
                 } else {
                     sqliteOpenHelperDatabase.updateNoteAndSync(ssoAccount, entityToLocalAccount(localAccountEntity), originalNote, null, null);
                 }
                 listener.close();
                 return true;
             case R.id.menu_delete:
-                sqliteOpenHelperDatabase.deleteNoteAndSync(ssoAccount, note.getId());
+                roomDatabase.deleteNoteAndSync(ssoAccount, note.getId());
                 listener.close();
                 return true;
             case R.id.menu_favorite:
@@ -291,7 +291,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     public void onCloseNote() {
         if (!titleModified && originalNote == null && getContent().isEmpty()) {
-            sqliteOpenHelperDatabase.deleteNoteAndSync(ssoAccount, note.getId());
+            roomDatabase.deleteNoteAndSync(ssoAccount, note.getId());
         }
     }
 
@@ -307,7 +307,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             if (note.getContent().equals(newContent)) {
                 if (note.getScrollY() != originalScrollY) {
                     Log.v(TAG, "... only saving new scroll state, since content did not change");
-                    sqliteOpenHelperDatabase.updateScrollY(note.getId(), note.getScrollY());
+                    roomDatabase.getNoteDao().updateScrollY(note.getId(), note.getScrollY());
                 } else {
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
@@ -369,7 +369,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     public void moveNote(LocalAccount account) {
-        sqliteOpenHelperDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
+        roomDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
         listener.close();
     }
 

@@ -95,62 +95,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
     }
 
     /**
-     * Creates a new Note in the Database and adds a Synchronization Flag.
-     *
-     * @param note Note
-     */
-    public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
-        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
-        long id = addNote(accountId, dbNote);
-        notifyWidgets();
-        getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
-        return id;
-    }
-
-    /**
-     * Inserts a note directly into the Database.
-     * No Synchronisation will be triggered! Use addNoteAndSync()!
-     *
-     * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
-     */
-    long addNote(long accountId, CloudNote note) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues(11);
-        if (note instanceof DBNote) {
-            DBNote dbNote = (DBNote) note;
-            if (dbNote.getId() > 0) {
-                values.put(key_id, dbNote.getId());
-            }
-            values.put(key_status, dbNote.getStatus().getTitle());
-            values.put(key_account_id, dbNote.getAccountId());
-            values.put(key_excerpt, dbNote.getExcerpt());
-        } else {
-            values.put(key_status, DBStatus.VOID.getTitle());
-            values.put(key_account_id, accountId);
-            values.put(key_excerpt, generateNoteExcerpt(note.getContent(), note.getTitle()));
-        }
-        if (note.getRemoteId() > 0) {
-            values.put(key_remote_id, note.getRemoteId());
-        }
-        values.put(key_title, note.getTitle());
-        values.put(key_modified, note.getModified().getTimeInMillis() / 1000);
-        values.put(key_content, note.getContent());
-        values.put(key_favorite, note.isFavorite());
-        values.put(key_category, getCategoryIdByTitle(accountId, note.getCategory()));
-        values.put(key_etag, note.getEtag());
-        return db.insert(table_notes, null, values);
-    }
-
-    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, DBNote note, long newAccountId) {
-        // Add new note
-        addNoteAndSync(ssoAccount, newAccountId, new CloudNote(0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), null));
-        deleteNoteAndSync(ssoAccount, note.getId());
-
-        notifyWidgets();
-        getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
-    }
-
-    /**
      * Get a single Note by ID
      *
      * @param id int - ID of the requested Note
@@ -581,14 +525,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         }
     }
 
-    public void updateScrollY(long noteId, int scrollY) {
-        Log.e(TAG, "Updated scrollY: " + scrollY);
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues(1);
-        values.put(key_scroll_y, scrollY);
-        db.update(table_notes, values, key_id + " = ? ", new String[]{String.valueOf(noteId)});
-    }
-
     /**
      * Updates a single Note with data from the server, (if it was not modified locally).
      * Thereby, an optimistic concurrency control is realized in order to prevent conflicts arising due to parallel changes from the UI and synchronization.
@@ -635,54 +571,6 @@ public class NotesDatabase extends AbstractNotesDatabase {
         int i = db.update(table_notes, values, whereClause, whereArgs);
         removeEmptyCategory(id);
         Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "  => " + i + " rows updated");
-    }
-
-    /**
-     * Marks a Note in the Database as Deleted. In the next Synchronization it will be deleted
-     * from the Server.
-     *
-     * @param id long - ID of the Note that should be deleted
-     */
-    public void deleteNoteAndSync(SingleSignOnAccount ssoAccount, long id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues(1);
-        values.put(key_status, DBStatus.LOCAL_DELETED.getTitle());
-        db.update(table_notes,
-                values,
-                key_id + " = ?",
-                new String[]{String.valueOf(id)});
-        notifyWidgets();
-        getNoteServerSyncHelper().scheduleSync(ssoAccount, true);
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            ShortcutManager shortcutManager = getContext().getSystemService(ShortcutManager.class);
-            if (shortcutManager != null) {
-                shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
-                    String shortcutId = id + "";
-                    if (shortcut.getId().equals(shortcutId)) {
-                        Log.v(TAG, "Removing shortcut for " + shortcutId);
-                        shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), getContext().getResources().getString(R.string.note_has_been_deleted));
-                    }
-                });
-            } else {
-                Log.e(TAG, ShortcutManager.class.getSimpleName() + "is null.");
-            }
-        }
-    }
-
-    /**
-     * Delete a single Note from the Database, if it has a specific DBStatus.
-     * Thereby, an optimistic concurrency control is realized in order to prevent conflicts arising due to parallel changes from the UI and synchronization.
-     *
-     * @param id            long - ID of the Note that should be deleted.
-     * @param forceDBStatus DBStatus, e.g., if Note was marked as LOCAL_DELETED (for NoteSQLiteOpenHelper.SyncTask.pushLocalChanges()) or is unchanged VOID (for NoteSQLiteOpenHelper.SyncTask.pullRemoteChanges())
-     */
-    void deleteNote(long id, @NonNull DBStatus forceDBStatus) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(table_notes,
-                key_id + " = ? AND " + key_status + " = ?",
-                new String[]{String.valueOf(id), forceDBStatus.getTitle()});
-        removeEmptyCategory(id);
     }
 
     /**
@@ -882,10 +770,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
      *
      * @param accountId     The user {@link LocalAccount} Id
      * @param categoryTitle The category title which will be search in the db
+     *
+     * @deprecated replaced by #{{@link NotesRoomDatabase#getOrCreateCategoryIdByTitle(long, String)}}
+     *
      * @return -1 if there is no such category else the corresponding id
      */
     @NonNull
     @WorkerThread
+    @Deprecated
     private Integer getCategoryIdByTitle(long accountId, @NonNull String categoryTitle) {
         validateAccountId(accountId);
         SQLiteDatabase db = getReadableDatabase();

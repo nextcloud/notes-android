@@ -12,7 +12,6 @@ import androidx.annotation.ColorInt;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +32,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
@@ -43,7 +43,8 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     private final Context context;
     private final ViewProvider viewProvider;
-    private final NotesDatabase db;
+    private final NotesDatabase sqliteOpenHelperDatabase;
+    private final NotesRoomDatabase roomDatabase;
     private final long currentLocalAccountId;
     private final boolean canMoveNoteToAnotherAccounts;
     private final ItemAdapter adapter;
@@ -53,10 +54,11 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            Context context, ViewProvider viewProvider, NotesDatabase db, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
+            Context context, ViewProvider viewProvider, NotesDatabase sqliteOpenHelperDatabase, NotesRoomDatabase roomDatabase, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.viewProvider = viewProvider;
-        this.db = db;
+        this.sqliteOpenHelperDatabase = sqliteOpenHelperDatabase;
+        this.roomDatabase = roomDatabase;
         this.currentLocalAccountId = currentLocalAccountId;
         this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
         this.adapter = adapter;
@@ -106,8 +108,8 @@ public class MultiSelectedActionModeCallback implements Callback {
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
                         DBNote note = (DBNote) adapter.getItem(i);
-                        deletedNotes.add(db.getNote(note.getAccountId(), note.getId()));
-                        db.deleteNoteAndSync(ssoAccount, note.getId());
+                        deletedNotes.add(sqliteOpenHelperDatabase.getNote(note.getAccountId(), note.getId()));
+                        roomDatabase.deleteNoteAndSync(ssoAccount, note.getId());
                     }
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
@@ -118,9 +120,9 @@ public class MultiSelectedActionModeCallback implements Callback {
                             : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, deletedNotes.size(), deletedNotes.size());
                     BrandedSnackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                             .setAction(R.string.action_undo, (View v) -> {
-                                db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
+                                sqliteOpenHelperDatabase.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
                                 for (DBNote deletedNote : deletedNotes) {
-                                    db.addNoteAndSync(ssoAccount, deletedNote.getAccountId(), deletedNote);
+                                    roomDatabase.addNoteAndSync(ssoAccount, deletedNote.getAccountId(), deletedNote);
                                 }
                                 refreshLists.run();
                                 String restoreSnackbarTitle = deletedNotes.size() == 1
@@ -146,7 +148,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                 final StringBuilder noteContents = new StringBuilder();
                 for (Integer i : adapter.getSelected()) {
                     final DBNote noteWithoutContent = (DBNote) adapter.getItem(i);
-                    final String tempFullNote = db.getNote(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
+                    final String tempFullNote = sqliteOpenHelperDatabase.getNote(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
                     if (!TextUtils.isEmpty(tempFullNote)) {
                         if (noteContents.length() > 0) {
                             noteContents.append("\n\n");

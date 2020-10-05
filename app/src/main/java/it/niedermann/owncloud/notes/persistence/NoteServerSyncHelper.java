@@ -405,7 +405,7 @@ public class NoteServerSyncHelper {
                                 Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
                             }
                             // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            sqliteOpenHelperDatabase.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
+                            roomDatabase.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
                             break;
                         default:
                             throw new IllegalStateException("Unknown State of Note: " + note);
@@ -454,7 +454,7 @@ public class NoteServerSyncHelper {
                         }
                     } else {
                         Log.v(TAG, "   ... create");
-                        sqliteOpenHelperDatabase.addNote(localAccount.getId(), remoteNote);
+                        roomDatabase.addNote(localAccount.getId(), remoteNote);
                     }
                 }
                 Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
@@ -462,7 +462,7 @@ public class NoteServerSyncHelper {
                 for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
                     if (!remoteIDs.contains(entry.getKey())) {
                         Log.v(TAG, "   ... remove " + entry.getValue());
-                        sqliteOpenHelperDatabase.deleteNote(entry.getValue(), DBStatus.VOID);
+                        roomDatabase.deleteNote(entry.getValue(), DBStatus.VOID);
                     }
                 }
 

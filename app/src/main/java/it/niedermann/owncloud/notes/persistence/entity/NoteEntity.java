@@ -8,25 +8,29 @@ import androidx.room.PrimaryKey;
 @Entity
 public class NoteEntity {
     @PrimaryKey
-    public int id;
+    public long id;
 
-    public int remoteId;
+    public long remoteId;
 
-    public int accountId;
+    public long accountId;
 
     public String status;
 
     public String title;
 
-    public int modified;
+    public long modified;
 
     public String content;
+
+    public Boolean favorite;
 
     public String eTag;
 
     public String excerpt;
 
     public int scrollY;
+
+    public long categoryId;
 
 }
 //                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +
