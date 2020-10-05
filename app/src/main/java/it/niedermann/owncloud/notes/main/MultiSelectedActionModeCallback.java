@@ -28,6 +28,7 @@ import java.util.List;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
+import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
@@ -133,7 +134,9 @@ public class MultiSelectedActionModeCallback implements Callback {
                 }
                 return true;
             case R.id.menu_move:
-                AccountPickerDialogFragment.newInstance(currentLocalAccountId).show(fragmentManager, MainActivity.class.getSimpleName());
+                AccountPickerDialogFragment
+                        .newInstance(currentLocalAccountId)
+                        .show(fragmentManager, MainActivity.class.getSimpleName());
                 return true;
             case R.id.menu_share:
                 final String subject = (adapter.getSelected().size() == 1)
@@ -152,6 +155,10 @@ public class MultiSelectedActionModeCallback implements Callback {
                 }
                 ShareUtil.openShareDialog(context, subject, noteContents.toString());
                 return true;
+            case R.id.menu_category:
+                CategoryDialogFragment
+                        .newInstance(((DBNote) adapter.getItem(adapter.getSelected().get(0))).getAccountId(), "")
+                        .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
             default:
                 return false;
         }

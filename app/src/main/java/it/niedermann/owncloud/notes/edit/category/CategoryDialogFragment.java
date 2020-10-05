@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.edit.category;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,7 +12,9 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.List;
 
@@ -166,6 +167,14 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         }
     }
 
+    public static DialogFragment newInstance(long accountId, String category) {
+        final DialogFragment categoryFragment = new CategoryDialogFragment();
+        final Bundle arguments = new Bundle();
+        arguments.putString(CategoryDialogFragment.PARAM_CATEGORY, category);
+        arguments.putLong(CategoryDialogFragment.PARAM_ACCOUNT_ID, accountId);
+        categoryFragment.setArguments(arguments);
+        return categoryFragment;
+    }
 
     private class LoadCategoriesTask extends AsyncTask<String, Void, List<NavigationAdapter.CategoryNavigationItem>> {
         String currentSearchString;

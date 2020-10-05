@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.shared.util.text;
 
-import androidx.annotation.NonNull;
-
 import java.util.regex.Pattern;
 
 public class WwwLinksProcessor extends TextProcessor {

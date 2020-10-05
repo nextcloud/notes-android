@@ -61,6 +61,7 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
+import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.NavigationItem;
@@ -95,7 +96,7 @@ import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIs
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 import static java.util.Arrays.asList;
 
-public class MainActivity extends LockedActivity implements NoteClickListener, ViewProvider, AccountPickerListener, AccountSwitcherListener {
+public class MainActivity extends LockedActivity implements NoteClickListener, ViewProvider, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -978,6 +979,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             } else {
                 Log.w(TAG, "Could not found viewholder to remove selection");
             }
+        }
+
+        mActionMode.finish();
+        refreshLists();
+    }
+
+    @Override
+    public void onCategoryChosen(String category) {
+        for (Integer i : new ArrayList<>(adapter.getSelected())) {
+            DBNote note = (DBNote) adapter.getItem(i);
+            note.setCategory(category);
+            db.setCategory(ssoAccount, note, category, this::refreshLists);
         }
 
         mActionMode.finish();
