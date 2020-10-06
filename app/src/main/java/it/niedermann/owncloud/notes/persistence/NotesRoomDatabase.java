@@ -44,16 +44,15 @@ import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetNotesListDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetSingleNoteDao;
-import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetNotesListEntity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
@@ -67,9 +66,9 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
 
 @Database(
         entities = {
-                LocalAccountEntity.class,
+                LocalAccount.class,
                 NoteEntity.class,
-                CategoryEntity.class,
+                Category.class,
                 WidgetSingleNoteEntity.class,
                 WidgetNotesListEntity.class
         }, version = 18
@@ -129,7 +128,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
 
     @SuppressWarnings("UnusedReturnValue")
     public long addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        final LocalAccountEntity entity = new LocalAccountEntity();
+        final LocalAccount entity = new LocalAccount();
         entity.setUrl(url);
         entity.setUsername(username);
         entity.setAccountName(accountName);
@@ -171,7 +170,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      * If there is no such category, database will create it if create flag is set.
      * Otherwise this method will return -1 as default value.
      *
-     * @param accountId     The user {@link LocalAccountEntity} Id
+     * @param accountId     The user {@link LocalAccount} Id
      * @param categoryTitle The category title which will be search in the db
      * @return -1 if there is no such category else the corresponding id
      */
@@ -183,7 +182,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
         if (categoryId > 0) {
             return categoryId;
         } else {
-            CategoryEntity entity = new CategoryEntity();
+            Category entity = new Category();
             entity.setAccountId(accountId);
             entity.setTitle(categoryTitle);
             return getCategoryDao().addCategory(entity);
@@ -365,7 +364,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
      */
     public void modifyCategoryOrder(
-            long accountId, Category category, CategorySortingMethod sortingMethod) {
+            long accountId, it.niedermann.owncloud.notes.shared.model.Category category, CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
 
         final Context ctx = context.getApplicationContext();
@@ -406,7 +405,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      * @param category  The category
      * @return The sorting method in CategorySortingMethod enum format
      */
-    public CategorySortingMethod getCategoryOrder(long accountId, Category category) {
+    public CategorySortingMethod getCategoryOrder(long accountId, it.niedermann.owncloud.notes.shared.model.Category category) {
         validateAccountId(accountId);
 
         final Context ctx = context.getApplicationContext();
@@ -480,7 +479,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed {@link NoteEntity} if differs from database, otherwise the old {@link NoteEntity}.
      */
-    public NoteEntity updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccountEntity localAccount, @NonNull NoteEntity oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
+    public NoteEntity updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull NoteEntity oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         NoteEntity newNote;
         if (newContent == null) {
             newNote = new NoteEntity(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getCategory().getTitle(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
@@ -551,10 +550,10 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
     }
 
     /**
-     * @param localAccount the {@link LocalAccountEntity} that should be deleted
+     * @param localAccount the {@link LocalAccount} that should be deleted
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
      */
-    public void deleteAccount(@NonNull LocalAccountEntity localAccount) throws IllegalArgumentException {
+    public void deleteAccount(@NonNull LocalAccount localAccount) throws IllegalArgumentException {
         validateAccountId(localAccount.getId());
         int deletedAccounts = getLocalAccountDao().deleteAccount(localAccount);
         if (deletedAccounts < 1) {

@@ -6,7 +6,7 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
@@ -14,10 +14,10 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 public interface CategoryDao {
 
     @Insert
-    Long addCategory(CategoryEntity entity);
+    Long addCategory(Category entity);
 
-    @Query("SELECT * FROM CategoryEntity WHERE id = :id")
-    CategoryEntity getCategory(long id);
+    @Query("SELECT * FROM Category WHERE id = :id")
+    Category getCategory(long id);
 
     /**
      * This function will be called when the category or note is updated.
@@ -28,10 +28,10 @@ public interface CategoryDao {
      *
      * @param accountId The user accountId
      */
-    @Query("DELETE FROM CategoryEntity WHERE accountId = :accountId AND id NOT IN (SELECT category_id FROM NoteEntity)")
+    @Query("DELETE FROM Category WHERE accountId = :accountId AND id NOT IN (SELECT category_id FROM NoteEntity)")
     void removeEmptyCategory(long accountId);
 
-    @Query("SELECT id FROM CategoryEntity WHERE accountId = :accountId AND title = :title")
+    @Query("SELECT id FROM Category WHERE accountId = :accountId AND title = :title")
     Long getCategoryIdByTitle(long accountId, String title);
 
 
@@ -44,7 +44,7 @@ public interface CategoryDao {
      * @param categoryTitle The category title
      * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
      */
-    @Query("UPDATE CategoryEntity SET categorySortingMethod = :sortingMethod WHERE id = (SELECT id FROM CategoryEntity WHERE accountId = :accountId AND title = :categoryTitle)")
+    @Query("UPDATE Category SET categorySortingMethod = :sortingMethod WHERE id = (SELECT id FROM Category WHERE accountId = :accountId AND title = :categoryTitle)")
     void modifyCategoryOrderByTitle(long accountId, String categoryTitle, CategorySortingMethod sortingMethod);
 
     /**
@@ -56,13 +56,13 @@ public interface CategoryDao {
      * @param categoryTitle The category title
      * @return The sorting method in {@link CategorySortingMethod} enum format
      */
-    @Query("SELECT categorySortingMethod FROM CategoryEntity WHERE accountId = :accountId AND title = :categoryTitle")
+    @Query("SELECT categorySortingMethod FROM Category WHERE accountId = :accountId AND title = :categoryTitle")
     CategorySortingMethod getCategoryOrderByTitle(long accountId, String categoryTitle);
 
-    @Query("SELECT title FROM CategoryEntity WHERE id = :categoryId")
+    @Query("SELECT title FROM Category WHERE id = :categoryId")
     String getCategoryTitleById(long categoryId);
 
-    @Query("SELECT CategoryEntity.id, CategoryEntity.title, COUNT(*) as 'totalNotes' FROM CategoryEntity INNER JOIN NoteEntity ON CategoryEntity.id = NoteEntity.category_id" +
-            " WHERE NoteEntity.status != 'LOCAL_DELETED' AND NoteEntity.accountId = :accountId AND CategoryEntity.title LIKE '%' + :categoryTitle + '%' GROUP BY CategoryEntity.title")
+    @Query("SELECT Category.id, Category.title, COUNT(*) as 'totalNotes' FROM Category INNER JOIN NoteEntity ON Category.id = NoteEntity.category_id" +
+            " WHERE NoteEntity.status != 'LOCAL_DELETED' AND NoteEntity.accountId = :accountId AND Category.title LIKE '%' + :categoryTitle + '%' GROUP BY Category.title")
     List<CategoryWithNotesCount> searchCategories(Long accountId, String categoryTitle);
 }

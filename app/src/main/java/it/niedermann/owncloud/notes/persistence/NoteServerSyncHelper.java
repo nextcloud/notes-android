@@ -36,7 +36,7 @@ import java.util.Set;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
@@ -214,9 +214,9 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) || onlyLocalChanges)) {
                 Log.d(TAG, "... starting now");
-                final LocalAccountEntity localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+                final LocalAccount localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
                 if (localAccount == null) {
-                    Log.e(TAG, LocalAccountEntity.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
+                    Log.e(TAG, LocalAccount.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
                     return;
                 }
                 final NotesClient notesClient = NotesClient.newInstance(localAccount.getPreferredApiVersion(), context);
@@ -307,7 +307,7 @@ public class NoteServerSyncHelper {
         @NonNull
         private final NotesClient notesClient;
         @NonNull
-        private final LocalAccountEntity localAccount;
+        private final LocalAccount localAccount;
         @NonNull
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
@@ -316,7 +316,7 @@ public class NoteServerSyncHelper {
         @NonNull
         private final ArrayList<Throwable> exceptions = new ArrayList<>();
 
-        SyncTask(@NonNull NotesClient notesClient, @NonNull LocalAccountEntity localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
+        SyncTask(@NonNull NotesClient notesClient, @NonNull LocalAccount localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
             this.notesClient = notesClient;
             this.localAccount = localAccount;
             this.ssoAccount = ssoAccount;

@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.Category;
@@ -56,7 +56,7 @@ public class NotesNotesRoomDatabaseTest {
     private String accountURL = "HelloHowAreYou";
     private String accountUserName = "John Doe";
     private String accountName = accountUserName + "@" + accountURL;
-    private LocalAccountEntity account = null;
+    private LocalAccount account = null;
 
     @Before
     public void setupDB() throws NextcloudHttpRequestFailedException {
@@ -76,8 +76,8 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void testSetUpEnv() {
         Log.i("Test_DB_Instance", db.toString());
-        List<LocalAccountEntity> accounts = db.getLocalAccountDao().getAccounts();
-        for (LocalAccountEntity account : accounts) {
+        List<LocalAccount> accounts = db.getLocalAccountDao().getAccounts();
+        for (LocalAccount account : accounts) {
             Log.i("Test_Get_Accounts", account.toString());
         }
     }

@@ -37,7 +37,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.Categor
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
@@ -64,7 +64,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
-    private LocalAccountEntity localAccountEntity;
+    private LocalAccount localAccount;
     private SingleSignOnAccount ssoAccount;
 
     protected NoteEntity note;
@@ -94,7 +94,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         super.onCreate(savedInstanceState);
         try {
             this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
-            this.localAccountEntity = db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+            this.localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
 
             if (savedInstanceState == null) {
                 long id = requireArguments().getLong(PARAM_NOTE_ID);
@@ -102,11 +102,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
                     if (accountId > 0) {
                         /* Switch account if account id has been provided */
-                        this.localAccountEntity = db.getLocalAccountDao().getAccount(accountId);
-                        SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccountEntity.getAccountName());
+                        this.localAccount = db.getLocalAccountDao().getAccount(accountId);
+                        SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccount.getAccountName());
                     }
                     isNew = false;
-                    note = originalNote = db.getNoteDao().getNote(localAccountEntity.getId(), id);
+                    note = originalNote = db.getNoteDao().getNote(localAccount.getId(), id);
                 } else {
                     NoteEntity cloudNote = (NoteEntity) requireArguments().getSerializable(PARAM_NEWNOTE);
                     String content = requireArguments().getString(PARAM_CONTENT);
@@ -117,7 +117,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                             note = new NoteEntity(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "", 0);
                         }
                     } else {
-                        note = db.getNoteDao().getNote(localAccountEntity.getId(), db.addNoteAndSync(ssoAccount, localAccountEntity.getId(), cloudNote));
+                        note = db.getNoteDao().getNote(localAccount.getId(), db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote));
                         originalNote = null;
                     }
                 }
@@ -200,7 +200,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
         prepareFavoriteOption(itemFavorite);
 
-        menu.findItem(R.id.menu_title).setVisible(localAccountEntity.getPreferredApiVersion() != null && localAccountEntity.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
+        menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
         menu.findItem(R.id.menu_delete).setVisible(!isNew);
     }
 
@@ -220,7 +220,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 if (originalNote == null) {
                     db.deleteNoteAndSync(ssoAccount, note.getId());
                 } else {
-                    db.updateNoteAndSync(ssoAccount, localAccountEntity, originalNote, null, null, null);
+                    db.updateNoteAndSync(ssoAccount, localAccount, originalNote, null, null, null);
                 }
                 listener.close();
                 return true;
@@ -306,7 +306,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
             } else {
-                note = db.updateNoteAndSync(ssoAccount, localAccountEntity, note, newContent, null, callback);
+                note = db.updateNoteAndSync(ssoAccount, localAccount, note, newContent, null, callback);
                 listener.onNoteUpdated(note);
                 requireActivity().invalidateOptionsMenu();
             }
@@ -358,11 +358,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onTitleEdited(String newTitle) {
         titleModified = true;
         note.setTitle(newTitle);
-        note = db.updateNoteAndSync(ssoAccount, localAccountEntity, note, note.getContent(), newTitle, null);
+        note = db.updateNoteAndSync(ssoAccount, localAccount, note, note.getContent(), newTitle, null);
         listener.onNoteUpdated(note);
     }
 
-    public void moveNote(LocalAccountEntity account) {
+    public void moveNote(LocalAccount account) {
         db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
         listener.close();
     }

@@ -21,7 +21,7 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
 @Entity()
-public class LocalAccountEntity {
+public class LocalAccount {
     @PrimaryKey
     public Long id;
     private String url;

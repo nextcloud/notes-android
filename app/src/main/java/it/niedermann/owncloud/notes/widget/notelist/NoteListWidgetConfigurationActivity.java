@@ -26,7 +26,7 @@ import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetNotesListEntity;
 
 
@@ -35,7 +35,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
 
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
-    private LocalAccountEntity localAccount = null;
+    private LocalAccount localAccount = null;
 
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent;

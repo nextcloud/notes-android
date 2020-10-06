@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
 import it.niedermann.android.glidesso.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 
 public class AccountChooserViewHolder extends RecyclerView.ViewHolder {
     private final ItemAccountChooseBinding binding;
@@ -21,7 +21,7 @@ public class AccountChooserViewHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
     }
 
-    public void bind(LocalAccountEntity localAccount, Consumer<LocalAccountEntity> targetAccountConsumer) {
+    public void bind(LocalAccount localAccount, Consumer<LocalAccount> targetAccountConsumer) {
         Glide
                 .with(binding.accountItemAvatar.getContext())
                 .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUsername()) + "/64"))

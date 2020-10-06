@@ -20,7 +20,7 @@ import java.net.HttpURLConnection;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 public class CapabilitiesWorker extends Worker {
@@ -43,7 +43,7 @@ public class CapabilitiesWorker extends Worker {
     @Override
     public Result doWork() {
         final NotesRoomDatabase db = NotesRoomDatabase.getInstance(getApplicationContext());
-        for (LocalAccountEntity account : db.getLocalAccountDao().getAccounts()) {
+        for (LocalAccount account : db.getLocalAccountDao().getAccounts()) {
             try {
                 final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);

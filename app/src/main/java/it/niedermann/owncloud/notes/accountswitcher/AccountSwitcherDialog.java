@@ -21,13 +21,13 @@ import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
 import static it.niedermann.owncloud.notes.main.MainActivity.manage_account;
 
 /**
- * Displays all available {@link LocalAccountEntity} entries and provides basic operations for them, like adding or switching
+ * Displays all available {@link LocalAccount} entries and provides basic operations for them, like adding or switching
  */
 public class AccountSwitcherDialog extends BrandedDialogFragment {
 
@@ -63,7 +63,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
-        LocalAccountEntity currentLocalAccount = db.getLocalAccountDao().getAccount(currentAccountId);
+        LocalAccount currentLocalAccount = db.getLocalAccountDao().getAccount(currentAccountId);
         binding.accountName.setText(currentLocalAccount.getUsername());
         binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
         Glide.with(requireContext())
@@ -78,8 +78,8 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             dismiss();
         }));
         binding.accountsList.setAdapter(adapter);
-        List<LocalAccountEntity> localAccounts = db.getLocalAccountDao().getAccounts();
-        for (LocalAccountEntity localAccount : localAccounts) {
+        List<LocalAccount> localAccounts = db.getLocalAccountDao().getAccounts();
+        for (LocalAccount localAccount : localAccounts) {
             if (localAccount.getId() == currentLocalAccount.getId()) {
                 localAccounts.remove(localAccount);
                 break;

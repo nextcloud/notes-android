@@ -26,7 +26,7 @@ public class NoteEntity implements Serializable, Item {
     private String excerpt;
     private Integer scrollY;
     @Embedded(prefix = "category_")
-    private CategoryEntity category;
+    private Category category;
 
     public NoteEntity() {
         super();
@@ -39,7 +39,7 @@ public class NoteEntity implements Serializable, Item {
         this.content = content;
         this.favorite = favorite;
         this.eTag = eTag;
-        this.category = new CategoryEntity();
+        this.category = new Category();
         this.category.setTitle(category);
     }
 
@@ -140,11 +140,11 @@ public class NoteEntity implements Serializable, Item {
         this.scrollY = scrollY;
     }
 
-    public CategoryEntity getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEntity category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

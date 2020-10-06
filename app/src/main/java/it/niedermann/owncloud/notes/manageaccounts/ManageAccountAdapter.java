@@ -12,20 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 
 public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountViewHolder> {
 
     @Nullable
-    private LocalAccountEntity currentLocalAccount = null;
+    private LocalAccount currentLocalAccount = null;
     @NonNull
-    private final List<LocalAccountEntity> localAccounts = new ArrayList<>();
+    private final List<LocalAccount> localAccounts = new ArrayList<>();
     @NonNull
-    private final Consumer<LocalAccountEntity> onAccountClick;
+    private final Consumer<LocalAccount> onAccountClick;
     @Nullable
-    private final Consumer<LocalAccountEntity> onAccountDelete;
+    private final Consumer<LocalAccount> onAccountDelete;
 
-    public ManageAccountAdapter(@NonNull Consumer<LocalAccountEntity> onAccountClick, @Nullable Consumer<LocalAccountEntity> onAccountDelete) {
+    public ManageAccountAdapter(@NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete) {
         this.onAccountClick = onAccountClick;
         this.onAccountDelete = onAccountDelete;
         setHasStableIds(true);
@@ -44,7 +44,7 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
 
     @Override
     public void onBindViewHolder(@NonNull ManageAccountViewHolder holder, int position) {
-        final LocalAccountEntity localAccount = localAccounts.get(position);
+        final LocalAccount localAccount = localAccounts.get(position);
         holder.bind(localAccount, (localAccountClicked) -> {
             setCurrentLocalAccount(localAccountClicked);
             onAccountClick.accept(localAccountClicked);
@@ -67,13 +67,13 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
         return localAccounts.size();
     }
 
-    public void setLocalAccounts(@NonNull List<LocalAccountEntity> localAccounts) {
+    public void setLocalAccounts(@NonNull List<LocalAccount> localAccounts) {
         this.localAccounts.clear();
         this.localAccounts.addAll(localAccounts);
         notifyDataSetChanged();
     }
 
-    public void setCurrentLocalAccount(@Nullable LocalAccountEntity currentLocalAccount) {
+    public void setCurrentLocalAccount(@Nullable LocalAccount currentLocalAccount) {
         this.currentLocalAccount = currentLocalAccount;
         notifyDataSetChanged();
     }

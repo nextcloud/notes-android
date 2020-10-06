@@ -15,7 +15,7 @@ import java.util.List;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 
 public class ManageAccountsActivity extends LockedActivity {
 
@@ -34,11 +34,11 @@ public class ManageAccountsActivity extends LockedActivity {
 
         db = NotesRoomDatabase.getInstance(this);
 
-        List<LocalAccountEntity> localAccounts = db.getLocalAccountDao().getAccounts();
+        List<LocalAccount> localAccounts = db.getLocalAccountDao().getAccounts();
 
         adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
             db.deleteAccount(localAccount);
-            for (LocalAccountEntity temp : localAccounts) {
+            for (LocalAccount temp : localAccounts) {
                 if (temp.getId() == localAccount.getId()) {
                     localAccounts.remove(temp);
                     break;

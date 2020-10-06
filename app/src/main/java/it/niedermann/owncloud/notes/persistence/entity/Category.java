@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
 @Entity
-public class CategoryEntity {
+public class Category {
     @PrimaryKey
     private long id;
     private long accountId;

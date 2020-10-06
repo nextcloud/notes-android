@@ -76,12 +76,11 @@ import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
-import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Category;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.Item;
@@ -126,7 +125,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private boolean notAuthorizedAccountHandled = false;
 
     protected SingleSignOnAccount ssoAccount;
-    protected LocalAccountEntity localAccount;
+    protected LocalAccount localAccount;
 
     protected DrawerLayoutBinding binding;
     protected ActivityNotesListViewBinding activityBinding;
@@ -144,7 +143,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private NavigationItem itemFavorites;
     private NavigationItem itemUncategorized;
     @NonNull
-    private Category navigationSelection = new Category(null, null);
+    private it.niedermann.owncloud.notes.shared.model.Category navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(null, null);
     private String navigationOpen = "";
     boolean canMoveNoteToAnotherAccounts = false;
     private ActionMode mActionMode;
@@ -178,12 +177,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
             } else if (ACTION_FAVORITES.equals(getIntent().getAction())) {
                 categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
-                navigationSelection = new Category(null, true);
+                navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(null, true);
             }
         } else {
             Object savedCategory = savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
             if (savedCategory != null) {
-                navigationSelection = (Category) savedCategory;
+                navigationSelection = (it.niedermann.owncloud.notes.shared.model.Category) savedCategory;
             }
             navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
@@ -198,7 +197,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
         LocalAccountDao dao = db.getLocalAccountDao();
         new Thread(() -> {
-            List<LocalAccountEntity> localAccountEntities = dao.getAccounts();
+            List<LocalAccount> localAccountEntities = dao.getAccounts();
             Log.v("TEST", localAccountEntities.size() + " acs");
         }).start();
         setupToolbars();
@@ -218,7 +217,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
             if (localAccount == null) {
-                List<LocalAccountEntity> localAccounts = db.getLocalAccountDao().getAccounts();
+                List<LocalAccount> localAccounts = db.getLocalAccountDao().getAccounts();
                 if (localAccounts.size() > 0) {
                     localAccount = localAccounts.get(0);
                 }
@@ -433,13 +432,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 adapterCategories.setSelectedItem(item.id);
                 // update current selection
                 if (itemRecent.equals(item)) {
-                    navigationSelection = new Category(null, null);
+                    navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(null, null);
                 } else if (itemFavorites.equals(item)) {
-                    navigationSelection = new Category(null, true);
+                    navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(null, true);
                 } else if (itemUncategorized != null && itemUncategorized.equals(item)) {
-                    navigationSelection = new Category("", null);
+                    navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category("", null);
                 } else {
-                    navigationSelection = new Category(item.label, null);
+                    navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(item.label, null);
                 }
 
                 // auto-close sub-folder in Navigation if selection is outside of that folder
@@ -947,16 +946,16 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     }
 
     @Override
-    public void onAccountChosen(LocalAccountEntity localAccount) {
+    public void onAccountChosen(LocalAccount localAccount) {
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         selectAccount(localAccount.getAccountName());
     }
 
     @Override
-    public void onAccountDeleted(LocalAccountEntity localAccount) {
+    public void onAccountDeleted(LocalAccount localAccount) {
         db.deleteAccount(localAccount);
         if (localAccount.getId() == this.localAccount.getId()) {
-            List<LocalAccountEntity> remainingAccounts = db.getLocalAccountDao().getAccounts();
+            List<LocalAccount> remainingAccounts = db.getLocalAccountDao().getAccounts();
             if (remainingAccounts.size() > 0) {
                 this.localAccount = remainingAccounts.get(0);
                 selectAccount(this.localAccount.getAccountName());
@@ -968,7 +967,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     }
 
     @Override
-    public void onAccountPicked(@NonNull LocalAccountEntity account) {
+    public void onAccountPicked(@NonNull LocalAccount account) {
         List<Integer> selection = new ArrayList<>(adapter.getSelected());
 
         adapter.deselect(0);
@@ -991,7 +990,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     public void onCategoryChosen(String category) {
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
             NoteEntity note = (NoteEntity) adapter.getItem(i);
-            CategoryEntity c = new CategoryEntity();
+            Category c = new Category();
             c.setTitle(category);
             note.setCategory(c);
             db.setCategory(ssoAccount, note, category, this::refreshLists);
