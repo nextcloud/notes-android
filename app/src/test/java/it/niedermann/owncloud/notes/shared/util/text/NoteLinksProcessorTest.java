@@ -45,7 +45,7 @@ public class NoteLinksProcessorTest extends TestCase {
 
     @SuppressWarnings("MarkdownUnresolvedFileReference")
     public void testDoNotReplaceNormalLinks() {
-        TextProcessor sut = new NoteLinksProcessor(Collections.singleton("123456"));
+        TextProcessor sut = new NoteLinksProcessor(Collections.singleton(123456L));
 
         //language=md
         String markdown = "[normal link](https://example.com) and another [note link](123456)";
@@ -54,9 +54,9 @@ public class NoteLinksProcessorTest extends TestCase {
     }
 
     public void testReplaceOnlyNotesInDB() {
-        Set<String> remoteIdsOfExistingNotes = new HashSet<>();
-        remoteIdsOfExistingNotes.add("123456");
-        remoteIdsOfExistingNotes.add("321456");
+        Set<Long> remoteIdsOfExistingNotes = new HashSet<>();
+        remoteIdsOfExistingNotes.add(123456L);
+        remoteIdsOfExistingNotes.add(321456L);
 
         TextProcessor sut = new NoteLinksProcessor(remoteIdsOfExistingNotes);
 

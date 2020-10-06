@@ -532,11 +532,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 itemUncategorized = null;
             }
 
-            Map<String, Integer> favorites = roomDatabase.getNoteDao().getFavoritesCount(localAccount.getId());
-            //noinspection ConstantConditions
-            int numFavorites = favorites.containsKey("1") ? favorites.get("1") : 0;
-            //noinspection ConstantConditions
-            int numNonFavorites = favorites.containsKey("0") ? favorites.get("0") : 0;
+            int numFavorites = roomDatabase.getNoteDao().getFavoritesCount(localAccount.getId());
+            int numNonFavorites = roomDatabase.getNoteDao().getNonFavoritesCount(localAccount.getId());
             itemFavorites.count = numFavorites;
             itemRecent.count = numFavorites + numNonFavorites;
 

@@ -64,8 +64,11 @@ public interface NoteDao {
     @Query("SELECT id FROM NoteEntity WHERE accountId = :accountId AND remoteId = :remoteId AND status != \"LOCAL_DELETED\"")
     Long getLocalIdByRemoteId(long accountId, long remoteId);
 
-    @Query("SELECT favorite, COUNT(*) FROM NoteEntity WHERE status != \"LOCAL_DELETED\" AND accountId = :accountId GROUP BY favorite ORDER BY favorite")
-    Map<String, Integer> getFavoritesCount(long accountId);
+    @Query("SELECT COUNT(*) FROM NoteEntity WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND favorite = 1")
+    Integer getFavoritesCount(long accountId);
+
+    @Query("SELECT COUNT(*) FROM NoteEntity WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND favorite = 0")
+    Integer getNonFavoritesCount(long accountId);
 
     /**
      * Returns a list of all Notes in the Database which were modified locally

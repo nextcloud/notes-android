@@ -32,6 +32,8 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
+import java.util.HashSet;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
@@ -237,7 +239,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     private TextProcessorChain defaultTextProcessorChain(DBNote note) {
         TextProcessorChain chain = new TextProcessorChain();
-        chain.add(new NoteLinksProcessor(roomDatabase.getNoteDao().getRemoteIds(note.getAccountId())));
+        chain.add(new NoteLinksProcessor(new HashSet<>(roomDatabase.getNoteDao().getRemoteIds(note.getAccountId()))));
         chain.add(new WwwLinksProcessor());
         return chain;
     }
