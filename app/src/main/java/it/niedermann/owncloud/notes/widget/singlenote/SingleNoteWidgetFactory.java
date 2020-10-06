@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
@@ -30,7 +30,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private final Context context;
     private final int appWidgetId;
 
-    private NotesRoomDatabase db;
+    private NotesDatabase db;
     private NoteEntity note;
     private boolean darkModeActive = false;
 
@@ -40,7 +40,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         this.context = context;
         appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
-        db = NotesRoomDatabase.getInstance(context);
+        db = NotesDatabase.getInstance(context);
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
         try {

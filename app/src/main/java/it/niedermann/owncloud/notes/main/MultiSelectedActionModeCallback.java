@@ -31,7 +31,7 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
@@ -42,7 +42,7 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     private final Context context;
     private final ViewProvider viewProvider;
-    private final NotesRoomDatabase db;
+    private final NotesDatabase db;
     private final long currentLocalAccountId;
     private final boolean canMoveNoteToAnotherAccounts;
     private final ItemAdapter adapter;
@@ -52,7 +52,7 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            Context context, ViewProvider viewProvider, NotesRoomDatabase db, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
+            Context context, ViewProvider viewProvider, NotesDatabase db, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.viewProvider = viewProvider;
         this.db = db;

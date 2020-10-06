@@ -21,7 +21,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserAdapter;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserViewHolder;
@@ -59,7 +59,7 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final List<LocalAccount> accountsList = NotesRoomDatabase.getInstance(getActivity()).getLocalAccountDao().getAccounts();
+        final List<LocalAccount> accountsList = NotesDatabase.getInstance(getActivity()).getLocalAccountDao().getAccounts();
         final AlertDialog.Builder dialogBuilder = new BrandedAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null);
