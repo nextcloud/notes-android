@@ -64,10 +64,10 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
         LocalAccount currentLocalAccount = db.getLocalAccountDao().getAccount(currentAccountId);
-        binding.accountName.setText(currentLocalAccount.getUsername());
+        binding.accountName.setText(currentLocalAccount.getUserName());
         binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
         Glide.with(requireContext())
-                .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUsername()) + "/64")
+                .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUserName()) + "/64")
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.currentAccountItemAvatar);

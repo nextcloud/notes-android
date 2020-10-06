@@ -130,7 +130,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     public long addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
         final LocalAccount entity = new LocalAccount();
         entity.setUrl(url);
-        entity.setUsername(username);
+        entity.setUserName(username);
         entity.setAccountName(accountName);
         entity.setCapabilities(capabilities);
         return getLocalAccountDao().insert(entity);

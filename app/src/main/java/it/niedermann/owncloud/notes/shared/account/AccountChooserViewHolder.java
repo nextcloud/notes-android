@@ -24,14 +24,14 @@ public class AccountChooserViewHolder extends RecyclerView.ViewHolder {
     public void bind(LocalAccount localAccount, Consumer<LocalAccount> targetAccountConsumer) {
         Glide
                 .with(binding.accountItemAvatar.getContext())
-                .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUsername()) + "/64"))
+                .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64"))
                 .placeholder(R.drawable.ic_account_circle_grey_24dp)
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.accountItemAvatar);
 
         binding.accountLayout.setOnClickListener((v) -> targetAccountConsumer.accept(localAccount));
-        binding.accountName.setText(localAccount.getUsername());
+        binding.accountName.setText(localAccount.getUserName());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
     }
 }

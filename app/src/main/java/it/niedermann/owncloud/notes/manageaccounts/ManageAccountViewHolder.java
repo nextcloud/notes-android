@@ -32,10 +32,10 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(@NonNull LocalAccount localAccount, @NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete, boolean isCurrentAccount) {
-        binding.accountName.setText(localAccount.getUsername());
+        binding.accountName.setText(localAccount.getUserName());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())
-                .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUsername()) + "/64"))
+                .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64"))
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.accountItemAvatar);
