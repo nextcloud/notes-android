@@ -21,7 +21,7 @@ import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 
@@ -33,7 +33,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
     public NotesListViewItemTouchHelper(
             @NonNull SingleSignOnAccount ssoAccount,
             @NonNull Context context,
-            @NonNull NotesRoomDatabase db,
+            @NonNull NotesDatabase db,
             @NonNull ItemAdapter adapter,
             @NonNull ISyncCallback syncCallBack,
             @NonNull Runnable refreshLists,

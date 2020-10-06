@@ -14,14 +14,14 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 
 public class ManageAccountsActivity extends LockedActivity {
 
     private ActivityManageAccountsBinding binding;
     private ManageAccountAdapter adapter;
-    private NotesRoomDatabase db = null;
+    private NotesDatabase db = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class ManageAccountsActivity extends LockedActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        db = NotesRoomDatabase.getInstance(this);
+        db = NotesDatabase.getInstance(this);
 
         List<LocalAccount> localAccounts = db.getLocalAccountDao().getAccounts();
 

@@ -42,7 +42,7 @@ public class CapabilitiesWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(getApplicationContext());
+        final NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
         for (LocalAccount account : db.getLocalAccountDao().getAccounts()) {
             try {
                 final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());

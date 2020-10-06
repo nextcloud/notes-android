@@ -38,7 +38,7 @@ public class SyncWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        NotesRoomDatabase db = NotesRoomDatabase.getInstance(getApplicationContext());
+        NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
         for (LocalAccount account : db.getLocalAccountDao().getAccounts()) {
             try {
                 SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());

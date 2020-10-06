@@ -49,9 +49,9 @@ import static org.junit.Assert.fail;
  */
 @RunWith(AndroidJUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class NotesNotesRoomDatabaseTest {
+public class NotesNotesDatabaseTest {
 
-    private NotesRoomDatabase db = null;
+    private NotesDatabase db = null;
 
     private String accountURL = "HelloHowAreYou";
     private String accountUserName = "John Doe";
@@ -61,7 +61,7 @@ public class NotesNotesRoomDatabaseTest {
     @Before
     public void setupDB() throws NextcloudHttpRequestFailedException {
         Context context = ApplicationProvider.getApplicationContext();
-        db = NotesRoomDatabase.getInstance(context);
+        db = NotesDatabase.getInstance(context);
         // Create a new account if not exist
         account = db.getLocalAccountDao().getLocalAccountByAccountName(accountName);
         if (account == null) {
@@ -139,7 +139,7 @@ public class NotesNotesRoomDatabaseTest {
 
             // get a new note id to avoid UNIQUE Note_ID constraint
             // getNotesCustom also tested here
-            Method getNC = NotesRoomDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, boolean.class);
+            Method getNC = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, boolean.class);
             getNC.setAccessible(true);
             List<NoteEntity> notes = (List<NoteEntity>) getNC.invoke(db, accountID, "status != ? AND accountId = ?",
                     new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountID}, "id ASC", false);
@@ -175,7 +175,7 @@ public class NotesNotesRoomDatabaseTest {
             assertEquals(dbNote.getAccountId(), note.getAccountId());
 
             // Test the rest case of getNotesCustom - ORDER BY ~ null, LIMIT ~ not null
-            Method getNCWOW = NotesRoomDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, String.class, boolean.class);
+            Method getNCWOW = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, String.class, boolean.class);
             getNCWOW.setAccessible(true);
             int aSize = 1;
             notes = (List<NoteEntity>) getNCWOW.invoke(db, accountID, " status != ? AND accountId = ?",
@@ -517,7 +517,7 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_13_getCategoryIdByTitle() {
         try {
-            Method method = NotesRoomDatabase.class.getDeclaredMethod("getCategoryIdByTitle",
+            Method method = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle",
                     long.class,
                     String.class);
             method.setAccessible(true);

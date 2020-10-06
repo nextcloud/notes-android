@@ -16,7 +16,7 @@ import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.BaseNoteFragment;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
@@ -26,7 +26,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         final Intent templateIntent = new Intent(context, EditNoteActivity.class);
-        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(context);
+        final NotesDatabase db = NotesDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
             try {
@@ -80,7 +80,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
-        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(context);
+        final NotesDatabase db = NotesDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
             db.getWidgetSingleNoteDao().removeSingleNoteWidget(appWidgetId);

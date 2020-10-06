@@ -20,7 +20,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
@@ -33,7 +33,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
 
     private static final String KEY_CURRENT_ACCOUNT_ID = "current_account_id";
 
-    private NotesRoomDatabase db;
+    private NotesDatabase db;
     private DialogAccountSwitcherBinding binding;
     private AccountSwitcherListener accountSwitcherListener;
     private long currentAccountId;
@@ -55,7 +55,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             this.currentAccountId = args.getLong(KEY_CURRENT_ACCOUNT_ID);
         }
 
-        db = NotesRoomDatabase.getInstance(requireActivity());
+        db = NotesDatabase.getInstance(requireActivity());
     }
 
     @NonNull

@@ -18,7 +18,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.shared.model.Category;
@@ -36,7 +36,7 @@ public class NoteListWidget extends AppWidgetProvider {
     public static final int PENDING_INTENT_OPEN_APP_RQ = 2;
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
-        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(context);
+        final NotesDatabase db = NotesDatabase.getInstance(context);
 
         RemoteViews views;
         DarkModeSetting darkTheme;
@@ -160,7 +160,7 @@ public class NoteListWidget extends AppWidgetProvider {
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
-        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(context);
+        final NotesDatabase db = NotesDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
             db.getWidgetNotesListDao().removeNoteListWidget(appWidgetId);

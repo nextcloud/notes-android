@@ -39,7 +39,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     @Override
     protected List<Item> doInBackground(Void... voids) {
         List<NoteEntity> noteList;
-        NotesRoomDatabase db = NotesRoomDatabase.getInstance(context);
+        NotesDatabase db = NotesDatabase.getInstance(context);
         CategorySortingMethod sortingMethod = db.getCategoryOrder(accountId, category);
         noteList = db.getNoteDao().searchNotesSubcategory(accountId, searchQuery.toString(), category.category, category.favorite, sortingMethod);
 

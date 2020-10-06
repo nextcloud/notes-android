@@ -36,7 +36,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.CategoryDialogListener;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
@@ -72,7 +72,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Nullable
     private NoteEntity originalNote;
     private int originalScrollY;
-    protected NotesRoomDatabase db;
+    protected NotesDatabase db;
     private NoteFragmentListener listener;
     private boolean titleModified = false;
 
@@ -86,7 +86,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         } catch (ClassCastException e) {
             throw new ClassCastException(context.getClass() + " must implement " + NoteFragmentListener.class);
         }
-        db = NotesRoomDatabase.getInstance(context);
+        db = NotesDatabase.getInstance(context);
     }
 
     @Override

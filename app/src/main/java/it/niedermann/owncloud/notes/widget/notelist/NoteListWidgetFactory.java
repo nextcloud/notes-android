@@ -14,7 +14,7 @@ import java.util.List;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
@@ -28,7 +28,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final Context context;
     private final NoteListsWidgetData data;
     private final boolean darkTheme;
-    private NotesRoomDatabase db;
+    private NotesDatabase db;
     private List<NoteEntity> noteEntities;
 
     NoteListWidgetFactory(Context context, Intent intent) {
@@ -36,7 +36,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
 
-        db = NotesRoomDatabase.getInstance(context);
+        db = NotesDatabase.getInstance(context);
         data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
 
         darkTheme = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));

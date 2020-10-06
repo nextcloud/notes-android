@@ -74,27 +74,27 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
         }, version = 18
 )
 @TypeConverters({Converters.class})
-public abstract class NotesRoomDatabase extends RoomDatabase {
+public abstract class NotesDatabase extends RoomDatabase {
 
-    private static final String TAG = NotesRoomDatabase.class.getSimpleName();
+    private static final String TAG = NotesDatabase.class.getSimpleName();
     private static final String NOTES_DB_NAME = "OWNCLOUD_NOTES";
-    private static NotesRoomDatabase instance;
+    private static NotesDatabase instance;
     private static Context context;
     private static NoteServerSyncHelper syncHelper;
 
-    public static NotesRoomDatabase getInstance(@NonNull Context context) {
+    public static NotesDatabase getInstance(@NonNull Context context) {
         if (instance == null) {
             instance = create(context.getApplicationContext());
-            NotesRoomDatabase.context = context.getApplicationContext();
-            NotesRoomDatabase.syncHelper = NoteServerSyncHelper.getInstance(instance);
+            NotesDatabase.context = context.getApplicationContext();
+            NotesDatabase.syncHelper = NoteServerSyncHelper.getInstance(instance);
         }
         return instance;
     }
 
-    private static NotesRoomDatabase create(final Context context) {
+    private static NotesDatabase create(final Context context) {
         return Room.databaseBuilder(
                 context,
-                NotesRoomDatabase.class,
+                NotesDatabase.class,
                 NOTES_DB_NAME)
                 .addMigrations(OLD_STUFF)
                 .fallbackToDestructiveMigration()
@@ -102,7 +102,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        Log.v(TAG, NotesRoomDatabase.class.getSimpleName() + " created.");
+                        Log.v(TAG, NotesDatabase.class.getSimpleName() + " created.");
                     }
                 })
                 .allowMainThreadQueries() // FIXME remove
@@ -607,10 +607,10 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
     }
 
     public NoteServerSyncHelper getNoteServerSyncHelper() {
-        return NotesRoomDatabase.syncHelper;
+        return NotesDatabase.syncHelper;
     }
 
     public Context getContext() {
-        return NotesRoomDatabase.context;
+        return NotesDatabase.context;
     }
 }

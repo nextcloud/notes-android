@@ -23,7 +23,7 @@ import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
@@ -36,7 +36,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     private static final String STATE_CATEGORY = "category";
     private DialogChangeCategoryBinding binding;
 
-    private NotesRoomDatabase db;
+    private NotesDatabase db;
     private CategoryDialogListener listener;
 
     private EditText editCategory;
@@ -81,7 +81,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         } else {
             throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getSimpleName());
         }
-        db = NotesRoomDatabase.getInstance(requireActivity());
+        db = NotesDatabase.getInstance(requireActivity());
     }
 
     @NonNull

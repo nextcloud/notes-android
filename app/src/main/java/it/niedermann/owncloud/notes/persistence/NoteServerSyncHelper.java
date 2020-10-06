@@ -56,7 +56,7 @@ public class NoteServerSyncHelper {
 
     private static NoteServerSyncHelper instance;
 
-    private final NotesRoomDatabase db;
+    private final NotesDatabase db;
     private final Context context;
 
     // Track network connection changes using a BroadcastReceiver
@@ -98,7 +98,7 @@ public class NoteServerSyncHelper {
     private final Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
     private final Map<String, List<ISyncCallback>> callbacksPull = new HashMap<>();
 
-    private NoteServerSyncHelper(NotesRoomDatabase db) {
+    private NoteServerSyncHelper(NotesDatabase db) {
         this.db = db;
         this.context = db.getContext();
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
@@ -118,10 +118,10 @@ public class NoteServerSyncHelper {
      * This has to be a singleton in order to realize correct registering and unregistering of
      * the BroadcastReceiver, which listens on changes of network connectivity.
      *
-     * @param db {@link NotesRoomDatabase}
+     * @param db {@link NotesDatabase}
      * @return NoteServerSyncHelper
      */
-    public static synchronized NoteServerSyncHelper getInstance(NotesRoomDatabase db) {
+    public static synchronized NoteServerSyncHelper getInstance(NotesDatabase db) {
         if (instance == null) {
             instance = new NoteServerSyncHelper(db);
         }

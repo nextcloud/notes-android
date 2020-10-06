@@ -25,7 +25,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetNotesListEntity;
 
@@ -40,7 +40,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent;
     private NavigationAdapter.NavigationItem itemFavorites;
-    private NotesRoomDatabase db = null;
+    private NotesDatabase db = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_note_list_configuration);
 
-        db = NotesRoomDatabase.getInstance(this);
+        db = NotesDatabase.getInstance(this);
         try {
             this.localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {

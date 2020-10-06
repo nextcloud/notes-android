@@ -74,7 +74,7 @@ import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
@@ -137,7 +137,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     protected ItemAdapter adapter;
 
-    protected NotesRoomDatabase db = null;
+    protected NotesDatabase db = null;
     private NavigationAdapter adapterCategories;
     private NavigationItem itemRecent;
     private NavigationItem itemFavorites;
@@ -188,7 +188,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
 
-        db = NotesRoomDatabase.getInstance(this);
+        db = NotesDatabase.getInstance(this);
 
         gridView = isGridViewEnabled();
         if (!gridView || isDarkThemeActive(this)) {
@@ -875,7 +875,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     @Override
     public void onNoteFavoriteClick(int position, View view) {
         NoteEntity note = (NoteEntity) adapter.getItem(position);
-        NotesRoomDatabase db = NotesRoomDatabase.getInstance(view.getContext());
+        NotesDatabase db = NotesDatabase.getInstance(view.getContext());
         db.toggleFavoriteAndSync(ssoAccount, note.getId(), syncCallBack);
         adapter.notifyItemChanged(position);
         refreshLists();
