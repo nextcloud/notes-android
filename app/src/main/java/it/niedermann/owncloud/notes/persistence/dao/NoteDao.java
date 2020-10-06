@@ -106,19 +106,15 @@ public interface NoteDao {
      * used by: {@link NoteServerSyncHelper.SyncTask#pushLocalChanges()} update only, if not modified locally during the synchronization
      * (i.e. all (!) user changeable columns (content, favorite, category) must still have the same value), uses reference value gathered at start of synchronization
      */
-    @Query(
-            "UPDATE NoteEntity SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
-                    "WHERE id = :id AND content = :content AND favorite = :favorite AND category_title = :categoryTitle"
-    )
+    @Query("UPDATE NoteEntity SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
+                    "WHERE id = :id AND content = :content AND favorite = :favorite AND category_title = :categoryTitle")
     void updateIfModifiedLocallyDuringSync(long id, long modified, String title, Boolean favorite, String categoryTitle, String eTag, String content);
 
 
     /**
      * used by: {@link NoteServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
      */
-    @Query(
-            "UPDATE NoteEntity SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
-                    "WHERE id = :id AND status = '' AND (modified != :modified OR favorite != :favorite OR category_title != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)"
-    )
+    @Query("UPDATE NoteEntity SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
+                    "WHERE id = :id AND status = '' AND (modified != :modified OR favorite != :favorite OR category_title != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)")
     void updateIfNotModifiedLocallyAndRemoteColumnHasChanged(long id, long modified, String title, Boolean favorite, String categoryTitle, String eTag, String content);
 }

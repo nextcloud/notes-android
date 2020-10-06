@@ -18,7 +18,7 @@ public class NoteEntity implements Serializable, Item {
     private Long id;
     private Long remoteId;
     private Long accountId;
-    private DBStatus status;
+    private DBStatus status = DBStatus.VOID;
     private String title;
     private Calendar modified;
     private String content;

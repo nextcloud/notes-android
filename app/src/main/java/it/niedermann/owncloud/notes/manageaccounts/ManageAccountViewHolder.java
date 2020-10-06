@@ -48,7 +48,7 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         }
         if (isCurrentAccount) {
             binding.currentAccountIndicator.setVisibility(VISIBLE);
-            applyBrandToLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, Color.parseColor(localAccount.getColor()));
+            applyBrandToLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, Color.parseColor('#' + localAccount.getColor()));
         } else {
             binding.currentAccountIndicator.setVisibility(GONE);
         }
