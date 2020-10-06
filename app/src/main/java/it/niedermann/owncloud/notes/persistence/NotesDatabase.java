@@ -221,9 +221,9 @@ public abstract class NotesDatabase extends RoomDatabase {
      */
     @NonNull
     @WorkerThread
-    public List<NavigationAdapter.CategoryNavigationItem> searchCategories(long accountId, String search) {
+    public List<NavigationAdapter.CategoryNavigationItem> searchCategories(long accountId, @Nullable String search) {
         validateAccountId(accountId);
-        List<CategoryWithNotesCount> counters = getCategoryDao().searchCategories(accountId, search.trim());
+        List<CategoryWithNotesCount> counters = getCategoryDao().searchCategories(accountId, search == null ? null : search.trim());
         List<NavigationAdapter.CategoryNavigationItem> categories = new ArrayList<>(counters.size());
         for (CategoryWithNotesCount counter : counters) {
             Resources res = context.getResources();

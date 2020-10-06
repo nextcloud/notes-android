@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
+import androidx.annotation.NonNull;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -152,6 +153,23 @@ public class NoteEntity implements Serializable, Item {
     @Override
     public boolean isSection() {
         return false;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "NoteEntity{" +
+                "id=" + id +
+                ", remoteId=" + remoteId +
+                ", accountId=" + accountId +
+                ", status=" + status +
+                ", title='" + title + '\'' +
+                ", modified=" + modified +
+                ", favorite=" + favorite +
+                ", eTag='" + eTag + '\'' +
+                ", scrollY=" + scrollY +
+                ", category=" + category +
+                '}';
     }
 }
 //                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +

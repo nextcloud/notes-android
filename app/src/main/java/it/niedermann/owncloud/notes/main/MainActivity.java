@@ -253,7 +253,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(accountName);
         if (localAccount != null) {
             try {
-                BrandingUtil.saveBrandColors(this, Color.parseColor(localAccount.getColor()), Color.parseColor(localAccount.getTextColor()));
+                BrandingUtil.saveBrandColors(this, Color.parseColor('#' + localAccount.getColor()), Color.parseColor('#' + localAccount.getTextColor()));
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
                 new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
                         .attachToRecyclerView(listView);
@@ -376,7 +376,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                         db.updateBrand(localAccount.getId(), capabilities);
                         localAccount.setColor(capabilities.getColor());
                         localAccount.setTextColor(capabilities.getTextColor());
-                        BrandingUtil.saveBrandColors(this, Color.parseColor(localAccount.getColor()), Color.parseColor(localAccount.getTextColor()));
+                        BrandingUtil.saveBrandColors(this, Color.parseColor('#' + localAccount.getColor()), Color.parseColor('#' + localAccount.getTextColor()));
                         db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
                         Log.i(TAG, capabilities.toString());
                     } catch (Exception e) {

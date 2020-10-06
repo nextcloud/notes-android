@@ -81,7 +81,7 @@ public interface NoteDao {
      *
      * @return {@link List<NoteEntity>}
      */
-    @Query("SELECT * FROM NoteEntity WHERE status != 'VOID' AND accountId = :accountId")
+    @Query("SELECT * FROM NoteEntity WHERE status != '' AND accountId = :accountId")
     List<NoteEntity> getLocalModifiedNotes(long accountId);
 
     @Query("SELECT * FROM NoteEntity WHERE status != 'LOCAL_DELETED' AND accountId = :accountId ORDER BY modified DESC LIMIT 4")
@@ -118,7 +118,7 @@ public interface NoteDao {
      */
     @Query(
             "UPDATE NoteEntity SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
-                    "WHERE id = :id AND status = 'VOID' AND (modified != :modified OR favorite != :favorite OR category_title != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)"
+                    "WHERE id = :id AND status = '' AND (modified != :modified OR favorite != :favorite OR category_title != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)"
     )
     void updateIfNotModifiedLocallyAndRemoteColumnHasChanged(long id, long modified, String title, Boolean favorite, String categoryTitle, String eTag, String content);
 }

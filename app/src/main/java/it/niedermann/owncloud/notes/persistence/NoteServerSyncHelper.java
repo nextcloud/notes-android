@@ -404,7 +404,7 @@ public class NoteServerSyncHelper {
                             db.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
                             break;
                         default:
-                            throw new IllegalStateException("Unknown State of Note: " + note);
+                            throw new IllegalStateException("Unknown State of Note " + note + ": " + note.getStatus());
                     }
                 } catch (NextcloudHttpRequestFailedException e) {
                     if (e.getStatusCode() == HTTP_NOT_MODIFIED) {

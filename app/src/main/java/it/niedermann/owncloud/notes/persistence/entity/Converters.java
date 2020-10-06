@@ -31,17 +31,18 @@ public class Converters {
 
     @TypeConverter
     public static Calendar calendarFromLong(Long value) {
-        if (value == null) {
-            return null;
-        }
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(value * 1000);
+        if (value == null) {
+            calendar.setTimeInMillis(1000);
+        } else {
+            calendar.setTimeInMillis(value * 1000);
+        }
         return calendar;
     }
 
     @TypeConverter
     public static Long calendarToLong(Calendar calendar) {
-        return calendar == null ? null : calendar.getTimeInMillis() / 1000;
+        return calendar == null ? 0 : calendar.getTimeInMillis() / 1000;
     }
 
 }
