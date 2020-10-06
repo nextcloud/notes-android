@@ -20,7 +20,6 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
@@ -35,8 +34,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
 
     private static final String KEY_CURRENT_ACCOUNT_ID = "current_account_id";
 
-    private NotesDatabase sqliteOpenHelperDatabase;
-    private NotesRoomDatabase roomDatabase;
+    private NotesRoomDatabase db;
     private DialogAccountSwitcherBinding binding;
     private AccountSwitcherListener accountSwitcherListener;
     private long currentAccountId;
@@ -58,8 +56,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             this.currentAccountId = args.getLong(KEY_CURRENT_ACCOUNT_ID);
         }
 
-        sqliteOpenHelperDatabase = NotesDatabase.getInstance(getActivity());
-        roomDatabase = NotesRoomDatabase.getInstance(getActivity());
+        db = NotesRoomDatabase.getInstance(requireActivity());
     }
 
     @NonNull
@@ -67,7 +64,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
-        LocalAccountEntity currentLocalAccount = roomDatabase.getLocalAccountDao().getAccount(currentAccountId);
+        LocalAccountEntity currentLocalAccount = db.getLocalAccountDao().getAccount(currentAccountId);
         binding.accountName.setText(currentLocalAccount.getUsername());
         binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
         Glide.with(requireContext())
@@ -82,7 +79,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             dismiss();
         }));
         binding.accountsList.setAdapter(adapter);
-        List<LocalAccountEntity> localAccounts = roomDatabase.getLocalAccountDao().getAccounts();
+        List<LocalAccountEntity> localAccounts = db.getLocalAccountDao().getAccounts();
         for (LocalAccountEntity localAccount : localAccounts) {
             if (localAccount.getId() == currentLocalAccount.getId()) {
                 localAccounts.remove(localAccount);

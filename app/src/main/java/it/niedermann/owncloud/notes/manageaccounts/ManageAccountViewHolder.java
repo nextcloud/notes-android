@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
+import android.graphics.Color;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.view.View;
@@ -15,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import it.niedermann.android.glidesso.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -30,11 +31,11 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         binding = ItemAccountChooseBinding.bind(itemView);
     }
 
-    public void bind(@NonNull LocalAccount localAccount, @NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete, boolean isCurrentAccount) {
-        binding.accountName.setText(localAccount.getUserName());
+    public void bind(@NonNull LocalAccountEntity localAccount, @NonNull Consumer<LocalAccountEntity> onAccountClick, @Nullable Consumer<LocalAccountEntity> onAccountDelete, boolean isCurrentAccount) {
+        binding.accountName.setText(localAccount.getUsername());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())
-                .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64"))
+                .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUsername()) + "/64"))
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.accountItemAvatar);
@@ -47,7 +48,7 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         }
         if (isCurrentAccount) {
             binding.currentAccountIndicator.setVisibility(VISIBLE);
-            applyBrandToLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, localAccount.getColor());
+            applyBrandToLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, Color.parseColor(localAccount.getColor()));
         } else {
             binding.currentAccountIndicator.setVisibility(GONE);
         }

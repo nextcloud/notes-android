@@ -16,16 +16,11 @@ import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-
-import static it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity.entityToLocalAccount;
 
 public class ManageAccountsActivity extends LockedActivity {
 
     private ActivityManageAccountsBinding binding;
     private ManageAccountAdapter adapter;
-    private NotesDatabase sqliteOpenHelperDatabase = null;
     private NotesRoomDatabase roomDatabase = null;
 
     @Override
@@ -37,13 +32,12 @@ public class ManageAccountsActivity extends LockedActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        sqliteOpenHelperDatabase = NotesDatabase.getInstance(this);
         roomDatabase = NotesRoomDatabase.getInstance(this);
 
         List<LocalAccountEntity> localAccounts = roomDatabase.getLocalAccountDao().getAccounts();
 
         adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
-            sqliteOpenHelperDatabase.deleteAccount(localAccount);
+            roomDatabase.deleteAccount(localAccount);
             for (LocalAccountEntity temp : localAccounts) {
                 if (temp.getId() == localAccount.getId()) {
                     localAccounts.remove(temp);
@@ -52,7 +46,7 @@ public class ManageAccountsActivity extends LockedActivity {
             }
             if (localAccounts.size() > 0) {
                 SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
-                adapter.setCurrentLocalAccount(entityToLocalAccount(localAccounts.get(0)));
+                adapter.setCurrentLocalAccount(localAccounts.get(0));
             } else {
                 setResult(AppCompatActivity.RESULT_FIRST_USER);
                 finish();
@@ -62,7 +56,7 @@ public class ManageAccountsActivity extends LockedActivity {
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
             if (ssoAccount != null) {
-                adapter.setCurrentLocalAccount(entityToLocalAccount(roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
+                adapter.setCurrentLocalAccount(roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name));
             }
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();

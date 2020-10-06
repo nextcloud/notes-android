@@ -16,8 +16,6 @@ import androidx.preference.SwitchPreference;
 
 import it.niedermann.owncloud.notes.R;
 
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.JELLY_BEAN;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 
 public class BrandedSwitchPreference extends SwitchPreference implements Branded {

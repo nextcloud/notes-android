@@ -1,11 +1,11 @@
 package it.niedermann.owncloud.notes.accountswitcher;
 
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 
 public interface AccountSwitcherListener {
     void addAccount();
 
-    void onAccountChosen(LocalAccount localAccount);
+    void onAccountChosen(LocalAccountEntity localAccount);
 
-    void onAccountDeleted(LocalAccount localAccount);
+    void onAccountDeleted(LocalAccountEntity localAccount);
 }

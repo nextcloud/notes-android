@@ -14,7 +14,6 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
@@ -37,7 +36,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     private static final String STATE_CATEGORY = "category";
     private DialogChangeCategoryBinding binding;
 
-    private NotesDatabase db;
+    private NotesRoomDatabase db;
     private CategoryDialogListener listener;
 
     private EditText editCategory;
@@ -82,7 +81,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         } else {
             throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getSimpleName());
         }
-        db = NotesDatabase.getInstance(getActivity());
+        db = NotesRoomDatabase.getInstance(requireActivity());
     }
 
     @NonNull

@@ -9,8 +9,8 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
-import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.branding.BrandedActivity;
+import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 
 public abstract class LockedActivity extends BrandedActivity {
 

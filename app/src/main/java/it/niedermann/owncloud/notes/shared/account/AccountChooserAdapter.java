@@ -11,18 +11,15 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
-
-import static it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity.entityToLocalAccount;
 
 public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserViewHolder> {
 
     @NonNull
     private final List<LocalAccountEntity> localAccounts;
     @NonNull
-    private final Consumer<LocalAccount> targetAccountConsumer;
+    private final Consumer<LocalAccountEntity> targetAccountConsumer;
 
-    public AccountChooserAdapter(@NonNull List<LocalAccountEntity> localAccounts, @NonNull Consumer<LocalAccount> targetAccountConsumer) {
+    public AccountChooserAdapter(@NonNull List<LocalAccountEntity> localAccounts, @NonNull Consumer<LocalAccountEntity> targetAccountConsumer) {
         super();
         this.localAccounts = localAccounts;
         this.targetAccountConsumer = targetAccountConsumer;
@@ -36,7 +33,7 @@ public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserVi
 
     @Override
     public void onBindViewHolder(@NonNull AccountChooserViewHolder holder, int position) {
-        holder.bind(entityToLocalAccount(localAccounts.get(position)), targetAccountConsumer);
+        holder.bind(localAccounts.get(position), targetAccountConsumer);
     }
 
     @Override

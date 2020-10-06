@@ -22,7 +22,6 @@ import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 public class CapabilitiesWorker extends Worker {
 
@@ -52,7 +51,7 @@ public class CapabilitiesWorker extends Worker {
                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag());
                 roomDatabase.getLocalAccountDao().updateCapabilitiesETag(account.getId(), capabilities.getETag());
                 roomDatabase.updateBrand(account.getId(), capabilities);
-                sqliteOpenHelperDatabase.updateApiVersion(account.getId(), capabilities.getApiVersion());
+                roomDatabase.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
             } catch (Exception e) {
                 if (e instanceof NextcloudHttpRequestFailedException) {

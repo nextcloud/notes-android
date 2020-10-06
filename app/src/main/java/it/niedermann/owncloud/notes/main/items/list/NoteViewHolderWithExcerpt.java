@@ -8,10 +8,10 @@ import androidx.annotation.Nullable;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
+import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
-import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 
 public class NoteViewHolderWithExcerpt extends NoteViewHolder {
     @NonNull

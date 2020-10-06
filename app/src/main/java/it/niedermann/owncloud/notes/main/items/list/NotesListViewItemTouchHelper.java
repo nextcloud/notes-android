@@ -17,15 +17,14 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
-import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
@@ -35,7 +34,6 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
     public NotesListViewItemTouchHelper(
             @NonNull SingleSignOnAccount ssoAccount,
             @NonNull Context context,
-            @NonNull NotesDatabase sqliteOpenHelperDatabase,
             @NonNull NotesRoomDatabase roomDatabase,
             @NonNull ItemAdapter adapter,
             @NonNull ISyncCallback syncCallBack,
@@ -85,7 +83,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         } else {
                             BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
-                                        sqliteOpenHelperDatabase.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
+                                        roomDatabase.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
                                         roomDatabase.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
                                         refreshLists.run();
                                         BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)

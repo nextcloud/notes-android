@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
 import it.niedermann.android.glidesso.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 
 public class AccountChooserViewHolder extends RecyclerView.ViewHolder {
     private final ItemAccountChooseBinding binding;
@@ -21,17 +21,17 @@ public class AccountChooserViewHolder extends RecyclerView.ViewHolder {
         this.binding = binding;
     }
 
-    public void bind(LocalAccount localAccount, Consumer<LocalAccount> targetAccountConsumer) {
+    public void bind(LocalAccountEntity localAccount, Consumer<LocalAccountEntity> targetAccountConsumer) {
         Glide
                 .with(binding.accountItemAvatar.getContext())
-                .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64"))
+                .load(new SingleSignOnUrl(localAccount.getAccountName(), localAccount.getUrl() + "/index.php/avatar/" + Uri.encode(localAccount.getUsername()) + "/64"))
                 .placeholder(R.drawable.ic_account_circle_grey_24dp)
                 .error(R.drawable.ic_account_circle_grey_24dp)
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.accountItemAvatar);
 
         binding.accountLayout.setOnClickListener((v) -> targetAccountConsumer.accept(localAccount));
-        binding.accountName.setText(localAccount.getUserName());
+        binding.accountName.setText(localAccount.getUsername());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
     }
 }

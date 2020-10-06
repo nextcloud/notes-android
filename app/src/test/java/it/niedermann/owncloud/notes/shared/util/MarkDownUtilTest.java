@@ -105,6 +105,6 @@ public class MarkDownUtilTest extends TestCase {
         lines.put("-[]", false);
         lines.put("*[]", false);
 
-        lines.forEach((key,value) -> assertEquals(value, (Boolean) MarkDownUtil.lineStartsWithCheckbox(key)));
+        lines.forEach((key, value) -> assertEquals(value, (Boolean) MarkDownUtil.lineStartsWithCheckbox(key)));
     }
 }

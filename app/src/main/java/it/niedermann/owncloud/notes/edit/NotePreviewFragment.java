@@ -36,9 +36,7 @@ import java.util.HashSet;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteLinksUtils;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
@@ -163,7 +161,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class)
-                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, roomDatabase.getNoteDao().getLocalIdByRemoteId(this.note.getAccountId(), extractNoteRemoteId(link)));
+                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, db.getNoteDao().getLocalIdByRemoteId(this.note.getAccountId(), extractNoteRemoteId(link)));
                                 startActivity(intent);
                             } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
@@ -216,7 +214,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                 TextProcessorChain chain = defaultTextProcessorChain(note);
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
                 sqliteOpenHelperDatabase.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
-                    note = roomDatabase.getNoteDao().getNote(note.getAccountId(), note.getId());
+                    note = db.getNoteDao().getNote(note.getAccountId(), note.getId());
                     changedText = note.getContent();
                     binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);
@@ -239,7 +237,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     private TextProcessorChain defaultTextProcessorChain(NoteEntity note) {
         TextProcessorChain chain = new TextProcessorChain();
-        chain.add(new NoteLinksProcessor(new HashSet<>(roomDatabase.getNoteDao().getRemoteIds(note.getAccountId()))));
+        chain.add(new NoteLinksProcessor(new HashSet<>(db.getNoteDao().getRemoteIds(note.getAccountId()))));
         chain.add(new WwwLinksProcessor());
         return chain;
     }

@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 public class SyncWorker extends Worker {
 

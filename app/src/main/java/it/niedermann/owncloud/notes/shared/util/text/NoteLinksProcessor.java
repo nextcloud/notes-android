@@ -3,12 +3,12 @@ package it.niedermann.owncloud.notes.shared.util.text;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.VisibleForTesting;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import androidx.annotation.VisibleForTesting;
 
 public class NoteLinksProcessor extends TextProcessor {
 
@@ -28,9 +28,9 @@ public class NoteLinksProcessor extends TextProcessor {
     /**
      * Replaces all links to other notes of the form `[<link-text>](<note-file-id>)`
      * in the markdown string with links to a dummy url.
-     *
+     * <p>
      * Why is this needed?
-     *  See discussion in issue #623
+     * See discussion in issue #623
      *
      * @return Markdown with all note-links replaced with dummy-url-links
      */

@@ -12,12 +12,12 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.NotesApplication;
 
 public class SingleNoteWidgetConfigurationActivity extends MainActivity {
 

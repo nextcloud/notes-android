@@ -11,9 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding;
+import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
-import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;

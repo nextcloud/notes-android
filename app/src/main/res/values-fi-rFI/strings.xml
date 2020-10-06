@@ -196,4 +196,4 @@
     <string name="error_action_open_battery_settings">Akkuasetukset</string>
     <string name="error_action_open_deck_info">Avaa sovelluksen tiedot</string>
     <string name="error_action_open_network">Verkkoasetukset</string>
-    </resources>
+</resources>

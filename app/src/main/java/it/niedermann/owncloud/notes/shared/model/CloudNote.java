@@ -13,6 +13,7 @@ import it.niedermann.owncloud.notes.shared.util.NoteUtil;
  * CloudNote represents a remote note from an OwnCloud server.
  * It can be directly generated from the JSON answer from the server.
  */
+@Deprecated
 public class CloudNote implements Serializable {
     private long remoteId;
     private String title = "";

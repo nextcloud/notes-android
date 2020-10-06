@@ -4,7 +4,10 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
+import java.util.List;
+
 import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
+import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
 @Dao
@@ -58,4 +61,8 @@ public interface CategoryDao {
 
     @Query("SELECT title FROM CategoryEntity WHERE id = :categoryId")
     String getCategoryTitleById(long categoryId);
+
+    @Query("SELECT id, title, COUNT(*) FROM CategoryEntity INNER JOIN NoteEntity ON CategoryEntity.id = NoteEntity.category_id" +
+            " WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND title LIKE '%' + :categoryTitle + '%' GROUP BY title")
+    List<CategoryWithNotesCount> searchCategories(Long accountId, String categoryTitle);
 }

@@ -14,8 +14,8 @@ public class DatabaseIndexUtil {
 
     }
 
-    public static void createIndex(@NonNull SQLiteDatabase db, @NonNull String table, @NonNull String ...columns) {
-        for (String column: columns) {
+    public static void createIndex(@NonNull SQLiteDatabase db, @NonNull String table, @NonNull String... columns) {
+        for (String column : columns) {
             createIndex(db, table, column);
         }
     }

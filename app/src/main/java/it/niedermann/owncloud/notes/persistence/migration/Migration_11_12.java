@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
 
-import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
+import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 
 public class Migration_11_12 {
     /**

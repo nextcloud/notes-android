@@ -26,12 +26,12 @@ import com.google.android.material.chip.Chip;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
-import it.niedermann.owncloud.notes.NotesApplication;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;

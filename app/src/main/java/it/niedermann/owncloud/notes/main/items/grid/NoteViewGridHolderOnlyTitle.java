@@ -10,9 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridOnlyTitleBinding;
+import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
-import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 
 public class NoteViewGridHolderOnlyTitle extends NoteViewHolder {
     @NonNull

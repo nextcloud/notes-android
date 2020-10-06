@@ -4,8 +4,6 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.room.Relation;
-import androidx.room.TypeConverters;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -153,7 +151,7 @@ public class NoteEntity implements Serializable, Item {
 
     @Deprecated
     public static DBNote entityToDBNote(NoteEntity entity) {
-        if(entity == null) {
+        if (entity == null) {
             return null;
         }
         return new DBNote(

@@ -25,12 +25,12 @@ import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 @Entity()
 public class LocalAccountEntity {
     @PrimaryKey
-    public int id;
+    public Long id;
     private String url;
     private String username;
     private String accountName;
     private String eTag;
-    private long modified;
+    private Long modified;
     private String apiVersion;
     private String capabilitiesETag;
     private String color;
@@ -40,11 +40,11 @@ public class LocalAccountEntity {
     @Ignore
     private ApiVersion preferredApiVersion;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -167,24 +167,6 @@ public class LocalAccountEntity {
             e.printStackTrace();
             this.preferredApiVersion = null;
         }
-    }
-
-    @Nullable
-    @Deprecated
-    public static LocalAccount entityToLocalAccount(@Nullable LocalAccountEntity entity) {
-        if(entity == null) {
-            return null;
-        }
-        LocalAccount localAccount = new LocalAccount();
-        localAccount.setAccountName(entity.getAccountName());
-        localAccount.setCapabilitiesETag(entity.getCapabilitiesETag());
-        localAccount.setColor(Color.parseColor('#' + entity.getColor()));
-        localAccount.setTextColor(Color.parseColor('#' + entity.getTextColor()));
-        localAccount.setETag(entity.getETag());
-        localAccount.setId(entity.getId());
-        localAccount.setModified(entity.getModified());
-        localAccount.setUrl(entity.getUrl());
-        return localAccount;
     }
 }
 

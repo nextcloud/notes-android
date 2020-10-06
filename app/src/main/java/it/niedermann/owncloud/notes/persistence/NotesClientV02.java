@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NotesResponse;
 

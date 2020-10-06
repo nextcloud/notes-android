@@ -91,7 +91,7 @@ public class NoteUtil {
     @NonNull
     public static String generateNoteExcerpt(@NonNull String content, @Nullable String title) {
         content = removeMarkDown(content.trim());
-        if(TextUtils.isEmpty(content)) {
+        if (TextUtils.isEmpty(content)) {
             return "";
         }
         if (!TextUtils.isEmpty(title)) {

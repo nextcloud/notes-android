@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -13,6 +14,9 @@ public interface LocalAccountDao {
 
     @Insert
     long insert(LocalAccountEntity localAccountEntity);
+
+    @Delete
+    int deleteAccount(LocalAccountEntity localAccountEntity);
 
     @Query("SELECT * FROM localaccountentity WHERE id = :accountId")
     LocalAccountEntity getAccount(long accountId);
@@ -37,4 +41,7 @@ public interface LocalAccountDao {
 
     @Query("UPDATE localaccountentity SET modified = :modified WHERE id = :id")
     void updateModified(long id, long modified);
+
+    @Query("UPDATE localaccountentity SET apiVersion = :apiVersion WHERE id = :id")
+    int updateApiVersion(Long id, String apiVersion);
 }

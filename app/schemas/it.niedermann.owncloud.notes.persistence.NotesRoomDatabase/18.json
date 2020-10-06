@@ -2,17 +2,17 @@
   "formatVersion": 1,
   "database": {
     "version": 18,
-    "identityHash": "d1ab335b1df8345cb5ff2fc5d547c19e",
+    "identityHash": "be37f956859f69d28d30bdcdf9454250",
     "entities": [
       {
         "tableName": "LocalAccountEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `url` TEXT, `username` TEXT, `accountName` TEXT, `eTag` TEXT, `modified` INTEGER NOT NULL, `apiVersion` TEXT, `capabilitiesETag` TEXT, `color` TEXT, `textColor` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `url` TEXT, `username` TEXT, `accountName` TEXT, `eTag` TEXT, `modified` INTEGER, `apiVersion` TEXT, `capabilitiesETag` TEXT, `color` TEXT, `textColor` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "url",
@@ -42,7 +42,7 @@
             "fieldPath": "modified",
             "columnName": "modified",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "apiVersion",
@@ -306,7 +306,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd1ab335b1df8345cb5ff2fc5d547c19e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'be37f956859f69d28d30bdcdf9454250')"
     ]
   }
 }

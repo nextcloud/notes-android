@@ -9,6 +9,7 @@ import java.util.Calendar;
  * DBNote represents a single note from the local SQLite database with all attributes.
  * It extends CloudNote with attributes required for local data management.
  */
+@Deprecated
 public class DBNote extends CloudNote implements Item, Serializable {
 
     private final long id;

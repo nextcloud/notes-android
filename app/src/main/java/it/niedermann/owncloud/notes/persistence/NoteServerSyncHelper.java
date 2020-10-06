@@ -37,16 +37,12 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
-import static it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity.entityToLocalAccount;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
@@ -59,8 +55,7 @@ public class NoteServerSyncHelper {
 
     private static NoteServerSyncHelper instance;
 
-    private final NotesDatabase sqliteOpenHelperDatabase;
-    private final NotesRoomDatabase roomDatabase;
+    private final NotesRoomDatabase db;
     private final Context context;
 
     // Track network connection changes using a BroadcastReceiver
@@ -102,10 +97,9 @@ public class NoteServerSyncHelper {
     private final Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
     private final Map<String, List<ISyncCallback>> callbacksPull = new HashMap<>();
 
-    private NoteServerSyncHelper(NotesDatabase sqliteOpenHelperDatabase, NotesRoomDatabase roomDatabase) {
-        this.sqliteOpenHelperDatabase = sqliteOpenHelperDatabase;
-        this.roomDatabase = roomDatabase;
-        this.context = sqliteOpenHelperDatabase.getContext();
+    private NoteServerSyncHelper(NotesRoomDatabase db) {
+        this.db = db;
+        this.context = db.getContext();
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
 
         // Registers BroadcastReceiver to track network connection changes.
@@ -123,12 +117,12 @@ public class NoteServerSyncHelper {
      * This has to be a singleton in order to realize correct registering and unregistering of
      * the BroadcastReceiver, which listens on changes of network connectivity.
      *
-     * @param sqliteOpenHelperDatabase NoteSQLiteOpenHelper
+     * @param roomDatabase {@link NotesRoomDatabase}
      * @return NoteServerSyncHelper
      */
-    public static synchronized NoteServerSyncHelper getInstance(NotesDatabase sqliteOpenHelperDatabase, NotesRoomDatabase roomDatabase) {
+    public static synchronized NoteServerSyncHelper getInstance(NotesRoomDatabase roomDatabase) {
         if (instance == null) {
-            instance = new NoteServerSyncHelper(sqliteOpenHelperDatabase, roomDatabase);
+            instance = new NoteServerSyncHelper(roomDatabase);
         }
         return instance;
     }
@@ -219,7 +213,7 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) || onlyLocalChanges)) {
                 Log.d(TAG, "... starting now");
-                final LocalAccountEntity localAccount = roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+                final LocalAccountEntity localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
                 if (localAccount == null) {
                     Log.e(TAG, LocalAccountEntity.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
                     return;
@@ -363,7 +357,7 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pushLocalChanges()");
 
             boolean success = true;
-            List<NoteEntity> notes = roomDatabase.getNoteDao().getLocalModifiedNotes(localAccount.getId());
+            List<NoteEntity> notes = db.getNoteDao().getLocalModifiedNotes(localAccount.getId());
             for (NoteEntity note : notes) {
                 Log.d(TAG, "   Process Local Note: " + note);
                 try {
@@ -388,7 +382,7 @@ public class NoteServerSyncHelper {
                                 remoteNote = notesClient.createNote(ssoAccount, note).getNote();
                             }
                             // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            roomDatabase.updateNote(localAccount.getId(), note.getId(), remoteNote, note);
+                            db.updateNote(localAccount.getId(), note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() > 0) {
@@ -406,7 +400,7 @@ public class NoteServerSyncHelper {
                                 Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
                             }
                             // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            roomDatabase.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
+                            db.deleteNote(note.getId(), DBStatus.LOCAL_DELETED);
                             break;
                         default:
                             throw new IllegalStateException("Unknown State of Note: " + note);
@@ -435,7 +429,7 @@ public class NoteServerSyncHelper {
         private boolean pullRemoteChanges() {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
-                final Map<Long, Long> idMap = roomDatabase.getIdMap(localAccount.getId());
+                final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
                 final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getETag());
                 List<NoteEntity> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
@@ -449,13 +443,13 @@ public class NoteServerSyncHelper {
                         Log.v(TAG, "   ... found → Update");
                         Long remoteId = idMap.get(remoteNote.getRemoteId());
                         if (remoteId != null) {
-                            roomDatabase.updateNote(localAccount.getId(), remoteId, remoteNote, null);
+                            db.updateNote(localAccount.getId(), remoteId, remoteNote, null);
                         } else {
                             Log.e(TAG, "Tried to update note from server, but remoteId of note is null. " + remoteNote);
                         }
                     } else {
                         Log.v(TAG, "   ... create");
-                        roomDatabase.addNote(localAccount.getId(), remoteNote);
+                        db.addNote(localAccount.getId(), remoteNote);
                     }
                 }
                 Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
@@ -463,17 +457,17 @@ public class NoteServerSyncHelper {
                 for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
                     if (!remoteIDs.contains(entry.getKey())) {
                         Log.v(TAG, "   ... remove " + entry.getValue());
-                        roomDatabase.deleteNote(entry.getValue(), DBStatus.VOID);
+                        db.deleteNote(entry.getValue(), DBStatus.VOID);
                     }
                 }
 
                 // update ETag and Last-Modified in order to reduce size of next response
                 localAccount.setETag(response.getETag());
                 localAccount.setModified(response.getLastModified());
-                roomDatabase.getLocalAccountDao().updateETag(localAccount.getId(), localAccount.getETag());
-                roomDatabase.getLocalAccountDao().updateModified(localAccount.getId(), localAccount.getModified());
+                db.getLocalAccountDao().updateETag(localAccount.getId(), localAccount.getETag());
+                db.getLocalAccountDao().updateModified(localAccount.getId(), localAccount.getModified());
                 try {
-                    if (sqliteOpenHelperDatabase.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
+                    if (db.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
                         localAccount.setPreferredApiVersion(response.getSupportedApiVersions());
                     }
                 } catch (Exception e) {
@@ -518,8 +512,8 @@ public class NoteServerSyncHelper {
                     callback.onFinish();
                 }
             }
-            sqliteOpenHelperDatabase.notifyWidgets();
-            roomDatabase.updateDynamicShortcuts(localAccount.getId());
+            db.notifyWidgets();
+            db.updateDynamicShortcuts(localAccount.getId());
             // start next sync if scheduled meanwhile
             if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {
                 scheduleSync(ssoAccount, false);

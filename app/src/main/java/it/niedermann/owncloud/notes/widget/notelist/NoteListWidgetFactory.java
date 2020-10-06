@@ -11,14 +11,12 @@ import android.widget.RemoteViewsService;
 
 import java.util.List;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
-import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.NotesApplication;
 
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_ALL;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
@@ -30,8 +28,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final Context context;
     private final NoteListsWidgetData data;
     private final boolean darkTheme;
-    private NotesDatabase sqliteOpenHelperDatabase;
-    private NotesRoomDatabase roomDatabase;
+    private NotesRoomDatabase db;
     private List<NoteEntity> noteEntities;
 
     NoteListWidgetFactory(Context context, Intent intent) {
@@ -39,9 +36,8 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
 
-        sqliteOpenHelperDatabase = NotesDatabase.getInstance(context);
-        roomDatabase = NotesRoomDatabase.getInstance(context);
-        data = roomDatabase.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
+        db = NotesRoomDatabase.getInstance(context);
+        data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
 
         darkTheme = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
     }
@@ -56,14 +52,14 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
                 case MODE_DISPLAY_ALL:
-                    noteEntities = roomDatabase.getNoteDao().getNotes(data.getAccountId());
+                    noteEntities = db.getNoteDao().getNotes(data.getAccountId());
                     break;
                 case MODE_DISPLAY_STARRED:
-                    noteEntities = roomDatabase.getNoteDao().searchNotes(data.getAccountId(), null, null, true, null);
+                    noteEntities = db.getNoteDao().searchNotes(data.getAccountId(), null, null, true, null);
                     break;
                 case MODE_DISPLAY_CATEGORY:
                     if (data.getCategoryId() != null) {
-                        noteEntities = roomDatabase.getNoteDao().searchNotes(data.getAccountId(), null, roomDatabase.getCategoryDao().getCategoryTitleById(data.getCategoryId()), null, null);
+                        noteEntities = db.getNoteDao().searchNotes(data.getAccountId(), null, db.getCategoryDao().getCategoryTitleById(data.getCategoryId()), null, null);
                     }
                     break;
             }

@@ -24,6 +24,9 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_8_9;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
 import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
 
+import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
+import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
+
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
     private static final int database_version = 19;
@@ -210,5 +213,12 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    protected abstract void notifyWidgets();
+
+    /**
+     * Notify about changed notes.
+     */
+    protected void notifyWidgets() {
+        updateSingleNoteWidgets(getContext());
+        updateNoteListWidgets(getContext());
+    }
 }

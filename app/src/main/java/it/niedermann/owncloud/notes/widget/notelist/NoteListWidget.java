@@ -13,16 +13,15 @@ import android.widget.RemoteViews;
 
 import java.util.NoSuchElementException;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
+import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
-import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.shared.model.Category;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.NotesApplication;
 
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.PARAM_CATEGORY;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_ALL;

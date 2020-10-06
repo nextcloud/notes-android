@@ -24,12 +24,15 @@ public interface NoteDao {
     @Update(onConflict = OnConflictStrategy.REPLACE)
     int updateNote(NoteEntity newNote);
 
+    @Query("DELETE FROM noteentity WHERE accountId = :accountId")
+    int deleteByAccountId(Long accountId);
+
     /**
      * Returns a list of all Notes in the Database
      *
      * @return List&lt;Note&gt;
      */
-    @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\" ORDER BY favorite DESC, modified DESC")
+    @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != 'LOCAL_DELETED' ORDER BY favorite DESC, modified DESC")
     List<NoteEntity> getNotes(long accountId);
 
     @Query("DELETE FROM NoteEntity WHERE id = :id and status = :forceDBStatus")
@@ -53,10 +56,10 @@ public interface NoteDao {
      * @param accountId get the remoteIds from all notes of this account
      * @return {@link Set<String>} remoteIds from all notes
      */
-    @Query("SELECT DISTINCT remoteId FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\"")
+    @Query("SELECT DISTINCT remoteId FROM NoteEntity WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
     List<Long> getRemoteIds(long accountId);
 
-    @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\"")
+    @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
     List<NoteEntity> getRemoteIdAndId(long accountId);
 
     /**
@@ -65,7 +68,7 @@ public interface NoteDao {
      * @param remoteId int - remote ID of the requested Note
      * @return {@link DBNote#getId()}
      */
-    @Query("SELECT id FROM NoteEntity WHERE accountId = :accountId AND remoteId = :remoteId AND status != \"LOCAL_DELETED\"")
+    @Query("SELECT id FROM NoteEntity WHERE accountId = :accountId AND remoteId = :remoteId AND status != 'LOCAL_DELETED'")
     Long getLocalIdByRemoteId(long accountId, long remoteId);
 
     @Query("SELECT COUNT(*) FROM NoteEntity WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND favorite = 1")
@@ -79,22 +82,22 @@ public interface NoteDao {
      *
      * @return {@link List<NoteEntity>}
      */
-    @Query("SELECT * FROM NoteEntity WHERE status != \"VOID\" AND accountId = :accountId")
+    @Query("SELECT * FROM NoteEntity WHERE status != 'VOID' AND accountId = :accountId")
     List<NoteEntity> getLocalModifiedNotes(long accountId);
 
-    @Query("SELECT * FROM NoteEntity WHERE status != \"LOCAL_DELETED\" AND accountId = :accountId ORDER BY modified DESC LIMIT 4")
+    @Query("SELECT * FROM NoteEntity WHERE status != 'LOCAL_DELETED' AND accountId = :accountId ORDER BY modified DESC LIMIT 4")
     List<NoteEntity> getRecentNotes(long accountId);
 
-    @Query("UPDATE NoteEntity SET status = \"LOCAL_EDITED\", favorite = ((favorite | 1) - (favorite & 1)) WHERE id = :id")
+    @Query("UPDATE NoteEntity SET status = 'LOCAL_EDITED', favorite = ((favorite | 1) - (favorite & 1)) WHERE id = :id")
     void toggleFavorite(long id);
 
-    @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\" AND (title LIKE \"%\" + :query + \"%\" OR content LIKE \"%\" + :query + \"%\" OR category_title LIKE \"%\" + :query + \"%\") AND (category_title = :category OR title LIKE :category + \"/%\") AND favorite = :favorite ORDER BY favorite DESC, :sortingMethod")
+    @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE '%' + :query + '%' OR content LIKE '%' + :query + '%' OR category_title LIKE '%' + :query + '%') AND (category_title = :category OR title LIKE :category + '/%') AND favorite = :favorite ORDER BY favorite DESC, :sortingMethod")
     List<NoteEntity> searchNotes(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
 
     /**
      * Needed for subcategories, see https://github.com/stefan-niedermann/nextcloud-notes/issues/902
      */
-    @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\" AND (title LIKE \"%\" + :query + \"%\" OR content LIKE \"%\" + :query + \"%\" OR category_title LIKE \"%\" + :query + \"%\") AND (category_title = :category OR title LIKE :category + \"/%\") AND favorite = :favorite ORDER BY category_title, favorite DESC, :sortingMethod")
+    @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE '%' + :query + '%' OR content LIKE '%' + :query + '%' OR category_title LIKE '%' + :query + '%') AND (category_title = :category OR title LIKE :category + '/%') AND favorite = :favorite ORDER BY category_title, favorite DESC, :sortingMethod")
     List<NoteEntity> searchNotesSubcategory(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
 
     @Query("UPDATE NoteEntity SET remoteId = :remoteId WHERE id = :id")
@@ -116,7 +119,7 @@ public interface NoteDao {
      */
     @Query(
             "UPDATE NoteEntity SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
-                    "WHERE id = :id AND status = \"VOID\" AND (modified != :modified OR favorite != :favorite OR category_title != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)"
+                    "WHERE id = :id AND status = 'VOID' AND (modified != :modified OR favorite != :favorite OR category_title != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)"
     )
     void updateIfNotModifiedLocallyAndRemoteColumnHasChanged(long id, long modified, String title, Boolean favorite, String categoryTitle, String eTag, String content);
 }

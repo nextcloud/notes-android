@@ -47,7 +47,6 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import it.niedermann.owncloud.notes.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
@@ -75,7 +74,6 @@ import it.niedermann.owncloud.notes.persistence.LoadNotesListTask;
 import it.niedermann.owncloud.notes.persistence.LoadNotesListTask.NotesLoadedListener;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
@@ -88,7 +86,6 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.Item;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
@@ -97,7 +94,6 @@ import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
-import static it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity.entityToLocalAccount;
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 import static java.util.Arrays.asList;
@@ -143,7 +139,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     protected ItemAdapter adapter;
 
-    protected NotesDatabase sqliteOpenHelperDatabase = null;
     protected NotesRoomDatabase roomDatabase = null;
     private NavigationAdapter adapterCategories;
     private NavigationItem itemRecent;
@@ -195,7 +190,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
 
-        sqliteOpenHelperDatabase = NotesDatabase.getInstance(this);
         roomDatabase = NotesRoomDatabase.getInstance(this);
 
         gridView = isGridViewEnabled();
@@ -239,7 +233,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         refreshLists();
         if (localAccount != null) {
             synchronize();
-            sqliteOpenHelperDatabase.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
+            roomDatabase.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
         }
         super.onResume();
     }
@@ -262,7 +256,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             try {
                 BrandingUtil.saveBrandColors(this, Color.parseColor(localAccount.getColor()), Color.parseColor(localAccount.getTextColor()));
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, sqliteOpenHelperDatabase, roomDatabase, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
+                new NotesListViewItemTouchHelper(ssoAccount, this, roomDatabase, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
                         .attachToRecyclerView(listView);
                 synchronize();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -384,7 +378,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                         localAccount.setColor(capabilities.getColor());
                         localAccount.setTextColor(capabilities.getTextColor());
                         BrandingUtil.saveBrandColors(this, Color.parseColor(localAccount.getColor()), Color.parseColor(localAccount.getTextColor()));
-                        sqliteOpenHelperDatabase.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                        roomDatabase.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
                         Log.i(TAG, capabilities.toString());
                     } catch (Exception e) {
                         if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
@@ -524,7 +518,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             if (localAccount == null) {
                 return new ArrayList<>();
             }
-            List<CategoryNavigationItem> categories = sqliteOpenHelperDatabase.getCategories(localAccount.getId());
+            List<CategoryNavigationItem> categories = roomDatabase.getCategories(localAccount.getId());
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
                 itemUncategorized.label = getString(R.string.action_uncategorized);
@@ -895,7 +889,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         if (selected) {
             v.setSelected(true);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                    this, this, sqliteOpenHelperDatabase, roomDatabase, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
+                    this, this, roomDatabase, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
             ));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
@@ -929,7 +923,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     }
 
     private void synchronize() {
-        NoteServerSyncHelper syncHelper = sqliteOpenHelperDatabase.getNoteServerSyncHelper();
+        NoteServerSyncHelper syncHelper = roomDatabase.getNoteServerSyncHelper();
         if (!syncHelper.isSyncPossible()) {
             syncHelper.updateNetworkStatus();
         }
@@ -954,14 +948,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     }
 
     @Override
-    public void onAccountChosen(LocalAccount localAccount) {
+    public void onAccountChosen(LocalAccountEntity localAccount) {
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         selectAccount(localAccount.getAccountName());
     }
 
     @Override
-    public void onAccountDeleted(LocalAccount localAccount) {
-        sqliteOpenHelperDatabase.deleteAccount(localAccount);
+    public void onAccountDeleted(LocalAccountEntity localAccount) {
+        roomDatabase.deleteAccount(localAccount);
         if (localAccount.getId() == this.localAccount.getId()) {
             List<LocalAccountEntity> remainingAccounts = roomDatabase.getLocalAccountDao().getAccounts();
             if (remainingAccounts.size() > 0) {
@@ -975,12 +969,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     }
 
     @Override
-    public void onAccountPicked(@NonNull LocalAccount account) {
+    public void onAccountPicked(@NonNull LocalAccountEntity account) {
         List<Integer> selection = new ArrayList<>(adapter.getSelected());
 
         adapter.deselect(0);
         for (Integer i : selection) {
-            DBNote note = (DBNote) adapter.getItem(i);
+            NoteEntity note = (NoteEntity) adapter.getItem(i);
             roomDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), roomDatabase.getNoteDao().getNote(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {

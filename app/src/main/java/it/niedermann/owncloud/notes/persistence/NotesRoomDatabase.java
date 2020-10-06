@@ -1,12 +1,12 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.text.TextUtils;
@@ -23,7 +23,12 @@ import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.nextcloud.android.sso.AccountImporter;
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,12 +39,14 @@ import java.util.Map;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
+import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.dao.CategoryDao;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetNotesListDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetSingleNoteDao;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
+import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
@@ -53,7 +60,6 @@ import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
@@ -82,9 +88,9 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
 
     public static NotesRoomDatabase getInstance(@NonNull Context context) {
         if (instance == null) {
-            instance = create(context);
-            NotesRoomDatabase.context = context;
-            syncHelper = NoteServerSyncHelper.getInstance(NotesDatabase.getInstance(context), instance);
+            instance = create(context.getApplicationContext());
+            NotesRoomDatabase.context = context.getApplicationContext();
+            NotesRoomDatabase.syncHelper = NoteServerSyncHelper.getInstance(instance);
         }
         return instance;
     }
@@ -510,5 +516,105 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
             }
             return oldNote;
         }
+    }
+
+    /**
+     * @param apiVersion has to be a JSON array as a string <code>["0.2", "1.0", ...]</code>
+     * @return whether or not the given {@link ApiVersion} has been written to the database
+     * @throws IllegalArgumentException if the apiVersion does not match the expected format
+     */
+    public boolean updateApiVersion(long accountId, @Nullable String apiVersion) throws IllegalArgumentException {
+        validateAccountId(accountId);
+        if (apiVersion != null) {
+            try {
+                JSONArray apiVersions = new JSONArray(apiVersion);
+                for (int i = 0; i < apiVersions.length(); i++) {
+                    ApiVersion.of(apiVersions.getString(i));
+                }
+                if (apiVersions.length() > 0) {
+                    final int updatedRows = getLocalAccountDao().updateApiVersion(accountId, apiVersion);
+                    if (updatedRows == 1) {
+                        Log.i(TAG, "Updated apiVersion to \"" + apiVersion + "\" for accountId = " + accountId);
+                    } else {
+                        Log.e(TAG, "Updated " + updatedRows + " but expected only 1 for accountId = " + accountId + " and apiVersion = \"" + apiVersion + "\"");
+                    }
+                    return true;
+                } else {
+                    Log.i(TAG, "Given API version is a valid JSON array but does not contain any valid API versions. Do not update database.");
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("API version does contain a non-valid version: " + apiVersion);
+            } catch (JSONException e) {
+                throw new IllegalArgumentException("API version must contain be a JSON array: " + apiVersion);
+            }
+        } else {
+            Log.v(TAG, "Given API version is null. Do not update database");
+        }
+        return false;
+    }
+
+    /**
+     * @param localAccount the {@link LocalAccountEntity} that should be deleted
+     * @throws IllegalArgumentException if no account has been deleted by the given accountId
+     */
+    public void deleteAccount(@NonNull LocalAccountEntity localAccount) throws IllegalArgumentException {
+        validateAccountId(localAccount.getId());
+        int deletedAccounts = getLocalAccountDao().deleteAccount(localAccount);
+        if (deletedAccounts < 1) {
+            Log.e(TAG, "AccountId '" + localAccount.getId() + "' did not delete any account");
+            throw new IllegalArgumentException("The given accountId does not delete any row");
+        } else if (deletedAccounts > 1) {
+            Log.e(TAG, "AccountId '" + localAccount.getId() + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
+        }
+
+        try {
+            SSOClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, localAccount.getAccountName()));
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            e.printStackTrace();
+            SSOClient.invalidateAPICache();
+        }
+
+        final int deletedNotes = getNoteDao().deleteByAccountId(localAccount.getId());
+        Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + localAccount.getId());
+    }
+
+    public List<NavigationAdapter.CategoryNavigationItem> searchCategories(long accountId, String search) {
+        validateAccountId(accountId);
+        List<CategoryWithNotesCount> counters = getCategoryDao().searchCategories(accountId, search.trim());
+        List<NavigationAdapter.CategoryNavigationItem> categories = new ArrayList<>(counters.size());
+        for(CategoryWithNotesCount counter: counters) {
+            Resources res = context.getResources();
+            String category = counter.getCategory().getTitle().toLowerCase();
+            int icon = NavigationAdapter.ICON_FOLDER;
+            if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
+                icon = R.drawable.ic_library_music_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
+                icon = R.drawable.ic_local_movies_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
+                icon = R.drawable.ic_work_grey600_24dp;
+            }
+            categories.add(new NavigationAdapter.CategoryNavigationItem("category:" + counter.getCategory().getTitle(), counter.getCategory().getTitle(), counter.getTotalNotes(), icon, counter.getCategory().getId()));
+        }
+        return categories;
+    }
+
+    /**
+     * This method return all of the categories with given accountId
+     *
+     * @param accountId The user account Id
+     * @return All of the categories with given accountId
+     */
+    @NonNull
+    @WorkerThread
+    public List<NavigationAdapter.CategoryNavigationItem> getCategories(long accountId) {
+        return searchCategories(accountId, null);
+    }
+
+    public NoteServerSyncHelper getNoteServerSyncHelper() {
+        return NotesRoomDatabase.syncHelper;
+    }
+
+    public Context getContext() {
+        return NotesRoomDatabase.context;
     }
 }

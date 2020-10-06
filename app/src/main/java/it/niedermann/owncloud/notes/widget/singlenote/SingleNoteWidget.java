@@ -12,14 +12,13 @@ import android.widget.RemoteViews;
 
 import java.util.NoSuchElementException;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.edit.BaseNoteFragment;
+import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
-import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.edit.BaseNoteFragment;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.NotesApplication;
 
 public class SingleNoteWidget extends AppWidgetProvider {
 

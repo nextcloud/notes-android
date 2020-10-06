@@ -16,8 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.preference.PreferenceManager;
 
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.NotesApplication;
+import it.niedermann.owncloud.notes.R;
 
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
 

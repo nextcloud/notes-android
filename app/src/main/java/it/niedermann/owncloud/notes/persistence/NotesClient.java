@@ -27,7 +27,6 @@ import java.util.Objects;
 
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NotesResponse;
 

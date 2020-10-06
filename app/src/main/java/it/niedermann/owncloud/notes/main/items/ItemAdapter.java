@@ -25,16 +25,16 @@ import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridOnlyTit
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithoutExcerptBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.shared.model.Item;
-import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.main.items.grid.NoteViewGridHolder;
 import it.niedermann.owncloud.notes.main.items.grid.NoteViewGridHolderOnlyTitle;
 import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithExcerpt;
 import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithoutExcerpt;
 import it.niedermann.owncloud.notes.main.items.section.SectionItem;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.model.Item;
+import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 

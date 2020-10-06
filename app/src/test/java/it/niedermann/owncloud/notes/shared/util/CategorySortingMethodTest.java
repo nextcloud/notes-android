@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class CategorySortingMethodTest {
 

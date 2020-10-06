@@ -31,7 +31,7 @@ public class Converters {
 
     @TypeConverter
     public static Calendar longToCalendar(Long value) {
-        if(value == null) {
+        if (value == null) {
             return null;
         }
         Calendar calendar = Calendar.getInstance();

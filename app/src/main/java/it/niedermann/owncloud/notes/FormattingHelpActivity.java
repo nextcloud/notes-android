@@ -17,7 +17,6 @@ import androidx.preference.PreferenceManager;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
-import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedActivity;
 import it.niedermann.owncloud.notes.databinding.ActivityFormattingHelpBinding;
 
