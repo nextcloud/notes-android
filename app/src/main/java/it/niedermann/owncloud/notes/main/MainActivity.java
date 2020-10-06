@@ -83,7 +83,6 @@ import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
@@ -867,7 +866,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 mActionMode.finish();
             }
         } else {
-            DBNote note = (DBNote) adapter.getItem(position);
+            NoteEntity note = (NoteEntity) adapter.getItem(position);
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
             startActivityForResult(intent, show_single_note_cmd);
@@ -876,7 +875,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        DBNote note = (DBNote) adapter.getItem(position);
+        NoteEntity note = (NoteEntity) adapter.getItem(position);
         NotesRoomDatabase db = NotesRoomDatabase.getInstance(view.getContext());
         db.toggleFavoriteAndSync(ssoAccount, note.getId(), syncCallBack);
         adapter.notifyItemChanged(position);

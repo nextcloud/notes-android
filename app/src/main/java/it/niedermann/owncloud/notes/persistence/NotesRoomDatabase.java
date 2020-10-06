@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.content.res.Resources;
-import android.database.Cursor;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.text.TextUtils;
@@ -56,8 +55,6 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
@@ -195,7 +192,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
 
     public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, NoteEntity note, long newAccountId) {
         // Add new note
-        addNoteAndSync(ssoAccount, newAccountId, new CloudNote(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), null));
+        addNoteAndSync(ssoAccount, newAccountId, new NoteEntity(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), null));
         deleteNoteAndSync(ssoAccount, note.getId());
 
         notifyWidgets();
@@ -234,8 +231,8 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      *
      * @param note Note
      */
-    public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
-        NoteEntity entity = new NoteEntity(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+    public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteEntity note) {
+        NoteEntity entity = new NoteEntity(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
         long id = addNote(accountId, entity);
         notifyWidgets();
         syncHelper.scheduleSync(ssoAccount, true);
@@ -246,7 +243,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      * Inserts a note directly into the Database.
      * No Synchronisation will be triggered! Use addNoteAndSync()!
      *
-     * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
+     * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type {@link NoteEntity} (with {@link DBStatus#LOCAL_EDITED})!
      */
     long addNote(long accountId, NoteEntity note) {
         NoteEntity entity = new NoteEntity();
@@ -481,7 +478,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      * @param newContent New content. If this is <code>null</code>, then <code>oldNote</code> is saved again (useful for undoing changes).
      * @param newTitle   New title. If this is <code>null</code>, then either the old title is reused (in case the note has been synced before) or a title is generated (in case it is a new note)
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
-     * @return changed {@link DBNote} if differs from database, otherwise the old {@link DBNote}.
+     * @return changed {@link NoteEntity} if differs from database, otherwise the old {@link NoteEntity}.
      */
     public NoteEntity updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccountEntity localAccount, @NonNull NoteEntity oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         NoteEntity newNote;

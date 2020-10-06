@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
@@ -49,7 +49,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     @CallSuper
-    public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+    public void bind(@NonNull NoteEntity note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getAdapterPosition(), view));
         itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getAdapterPosition(), view));
     }

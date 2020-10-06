@@ -40,7 +40,6 @@ import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
@@ -109,7 +108,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     isNew = false;
                     note = originalNote = db.getNoteDao().getNote(localAccountEntity.getId(), id);
                 } else {
-                    CloudNote cloudNote = (CloudNote) requireArguments().getSerializable(PARAM_NEWNOTE);
+                    NoteEntity cloudNote = (NoteEntity) requireArguments().getSerializable(PARAM_NEWNOTE);
                     String content = requireArguments().getString(PARAM_CONTENT);
                     if (cloudNote == null) {
                         if (content == null) {

@@ -23,7 +23,6 @@ import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
@@ -72,8 +71,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
-                        final DBNote dbNoteWithoutContent = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
-                        final DBNote dbNote = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId()));
+                        final NoteEntity dbNoteWithoutContent = (NoteEntity) adapter.getItem(viewHolder.getAdapterPosition());
+                        final NoteEntity dbNote = roomDatabase.getNoteDao().getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
                         roomDatabase.deleteNoteAndSync(ssoAccount, dbNote.getId());
                         adapter.remove(dbNote);
                         refreshLists.run();
@@ -93,7 +92,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         }
                         break;
                     case ItemTouchHelper.RIGHT:
-                        final DBNote adapterNote = (DBNote) adapter.getItem(viewHolder.getAdapterPosition());
+                        final NoteEntity adapterNote = (NoteEntity) adapter.getItem(viewHolder.getAdapterPosition());
                         roomDatabase.toggleFavoriteAndSync(ssoAccount, adapterNote.getId(), syncCallBack);
                         refreshLists.run();
                         break;

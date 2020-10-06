@@ -12,7 +12,6 @@ import java.util.Set;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
 @Dao
@@ -66,7 +65,7 @@ public interface NoteDao {
      * Get a single Note by remote Id (aka. nextcloud file id)
      *
      * @param remoteId int - remote ID of the requested Note
-     * @return {@link DBNote#getId()}
+     * @return {@link NoteEntity#getId()}
      */
     @Query("SELECT id FROM NoteEntity WHERE accountId = :accountId AND remoteId = :remoteId AND status != 'LOCAL_DELETED'")
     Long getLocalIdByRemoteId(long accountId, long remoteId);

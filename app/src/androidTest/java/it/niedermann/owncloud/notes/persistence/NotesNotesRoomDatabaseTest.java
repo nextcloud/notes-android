@@ -31,8 +31,6 @@ import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
@@ -124,7 +122,7 @@ public class NotesNotesRoomDatabaseTest {
             Log.i("Test_01_addNote_All_Notes_Added", cnote.getTitle());
         }
 
-        CloudNote cloudNote_re0 = new CloudNote(0, Calendar.getInstance(),
+        NoteEntity cloudNote_re0 = new NoteEntity(0, Calendar.getInstance(),
                 "A Bad Day", getCurDate() + " You're faking a smile with just a coffee to go (Daniel Powter).",
                 true, "A Nice Song", null);
         noteID = roomDatabase.addNote(accountID, cloudNote_re0);
@@ -145,7 +143,7 @@ public class NotesNotesRoomDatabaseTest {
             // getNotesCustom also tested here
             Method getNC = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, boolean.class);
             getNC.setAccessible(true);
-            List<DBNote> notes = (List<DBNote>) getNC.invoke(sqliteOpenHelperDatabase, accountID, NotesDatabase.key_status + " != ? AND " + NotesDatabase.key_account_id + " = ?",
+            List<NoteEntity> notes = (List<NoteEntity>) getNC.invoke(sqliteOpenHelperDatabase, accountID, NotesDatabase.key_status + " != ? AND " + NotesDatabase.key_account_id + " = ?",
                     new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountID}, NotesDatabase.key_id + " ASC", false);
             long newNoteID = notes.get(notes.size() - 1).getId() + 1;   // avoid UNIQUE Note_ID constraint
 
@@ -182,7 +180,7 @@ public class NotesNotesRoomDatabaseTest {
             Method getNCWOW = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, String.class, boolean.class);
             getNCWOW.setAccessible(true);
             int aSize = 1;
-            notes = (List<DBNote>) getNCWOW.invoke(sqliteOpenHelperDatabase, accountID, NotesDatabase.key_status + " != ? AND " + NotesDatabase.key_account_id + " = ?",
+            notes = (List<NoteEntity>) getNCWOW.invoke(sqliteOpenHelperDatabase, accountID, NotesDatabase.key_status + " != ? AND " + NotesDatabase.key_account_id + " = ?",
                     new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountID}, null, String.valueOf(aSize), false);
             assertEquals(aSize, notes.size());
         } catch (Exception e) {
@@ -316,7 +314,7 @@ public class NotesNotesRoomDatabaseTest {
 
         // check if the node added successfully
         for (int i = 0; i < 10; ++i) {
-            DBNote nodeTemp = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(thisAccountID, multiNoteID[i]));
+            NoteEntity nodeTemp = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(thisAccountID, multiNoteID[i]));
             assertEquals(nodeTemp.getTitle(), multiCloudNote.get(i).getTitle());
             assertEquals(nodeTemp.getCategory(), multiCloudNote.get(i).getCategory());
             assertEquals(nodeTemp.getContent(), multiCloudNote.get(i).getContent());
@@ -457,7 +455,7 @@ public class NotesNotesRoomDatabaseTest {
         // Add a new note
         long noteID = roomDatabase.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        DBNote note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(accountID, noteID));
+        NoteEntity note = roomDatabase.getNoteDao().getNote(accountID, noteID);
         Log.i("Test_12_Chinese_Cur_Note", note.toString());
         Log.i("Test_12_Chinese_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_12_Chinese_Cur_Note", "Content: " + note.getContent());
@@ -566,7 +564,7 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_15_getAndModifyCategoryOrderByTitle() {
         // add a note to database
-        CloudNote cloudNote = new CloudNote(1, Calendar.getInstance(),
+        NoteEntity cloudNote = new NoteEntity(1, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
         long noteID = roomDatabase.addNote(account.getId(), cloudNote);

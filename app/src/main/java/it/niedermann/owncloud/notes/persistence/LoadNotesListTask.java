@@ -17,7 +17,6 @@ import it.niedermann.owncloud.notes.main.items.section.SectionItem;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
@@ -61,13 +60,13 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         List<Item> itemList = new ArrayList<>();
         String currentCategory = category.category;
         for (NoteEntity entity : noteList) {
-            DBNote note = NoteEntity.entityToDBNote(entity);
+            NoteEntity note = entity;
             if (currentCategory != null && !currentCategory.equals(note.getCategory())) {
-                itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory())));
+                itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory().getTitle())));
             }
 
             itemList.add(note);
-            currentCategory = note.getCategory();
+            currentCategory = note.getCategory().getTitle();
         }
         return itemList;
     }
@@ -79,7 +78,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         Timeslotter timeslotter = new Timeslotter();
         String lastTimeslot = null;
         for (int i = 0; i < noteList.size(); i++) {
-            DBNote currentNote = NoteEntity.entityToDBNote(noteList.get(i));
+            NoteEntity currentNote = noteList.get(i);
             String timeslot = timeslotter.getTimeslot(currentNote);
             if (i > 0 && !timeslot.equals(lastTimeslot)) {
                 itemList.add(new SectionItem(timeslot));
@@ -105,7 +104,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             if (i > 0 && !initials.equals(lastInitials)) {
                 itemList.add(new SectionItem(initials));
             }
-            itemList.add(NoteEntity.entityToDBNote(currentNote));
+            itemList.add(currentNote);
             lastInitials = initials;
         }
 
@@ -140,8 +139,8 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             lastYear.set(now.get(Calendar.YEAR) - 1, 0, 1, 0, 0, 0);
         }
 
-        private String getTimeslot(DBNote note) {
-            if (note.isFavorite()) {
+        private String getTimeslot(NoteEntity note) {
+            if (note.getFavorite()) {
                 return "";
             }
             Calendar modified = note.getModified();

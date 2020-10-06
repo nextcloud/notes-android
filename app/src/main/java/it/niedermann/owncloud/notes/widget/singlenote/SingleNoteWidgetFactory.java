@@ -20,7 +20,6 @@ import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.parseCompat;

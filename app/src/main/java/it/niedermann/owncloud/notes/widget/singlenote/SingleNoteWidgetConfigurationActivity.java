@@ -16,8 +16,8 @@ import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.main.MainActivity;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 
 public class SingleNoteWidgetConfigurationActivity extends MainActivity {
 
@@ -42,7 +42,7 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
 
     @Override
     public void onNoteClick(int position, View v) {
-        final DBNote note = (DBNote) adapter.getItem(position);
+        final NoteEntity note = (NoteEntity) adapter.getItem(position);
         final Bundle extras = getIntent().getExtras();
 
         if (extras == null) {

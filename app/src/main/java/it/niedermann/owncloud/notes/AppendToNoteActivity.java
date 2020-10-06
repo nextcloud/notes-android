@@ -11,7 +11,6 @@ import androidx.appcompat.app.ActionBar;
 
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 
 public class AppendToNoteActivity extends MainActivity {
 
@@ -37,7 +36,7 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     public void onNoteClick(int position, View v) {
         if (receivedText != null && receivedText.length() > 0) {
-            final NoteEntity note = roomDatabase.getNoteDao().getNote(localAccount.getId(), ((DBNote) adapter.getItem(position)).getId());
+            final NoteEntity note = roomDatabase.getNoteDao().getNote(localAccount.getId(), ((NoteEntity) adapter.getItem(position)).getId());
             final String oldContent = note.getContent();
             String newContent;
             if (oldContent != null && oldContent.length() > 0) {

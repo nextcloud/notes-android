@@ -8,7 +8,6 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 import java.util.Calendar;
 
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.Item;
 
@@ -147,27 +146,6 @@ public class NoteEntity implements Serializable, Item {
 
     public void setCategory(CategoryEntity category) {
         this.category = category;
-    }
-
-    @Deprecated
-    public static DBNote entityToDBNote(NoteEntity entity) {
-        if (entity == null) {
-            return null;
-        }
-        return new DBNote(
-                entity.getId(),
-                entity.getRemoteId(),
-                entity.getModified(),
-                entity.getTitle(),
-                entity.getContent(),
-                entity.getFavorite(),
-                entity.getCategory().getTitle(),
-                entity.getETag(),
-                entity.getStatus(),
-                entity.getAccountId(),
-                entity.getExcerpt(),
-                entity.getScrollY()
-        );
     }
 
     @Ignore

@@ -36,7 +36,6 @@ public class NoteListWidget extends AppWidgetProvider {
     public static final int PENDING_INTENT_OPEN_APP_RQ = 2;
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
-        final NotesDatabase sqliteOpenHelperDatabase = NotesDatabase.getInstance(context);
         final NotesRoomDatabase roomDatabase = NotesRoomDatabase.getInstance(context);
 
         RemoteViews views;

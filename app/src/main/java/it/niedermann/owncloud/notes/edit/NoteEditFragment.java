@@ -34,7 +34,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.edit.format.ContextBasedFormattingCallback;
 import it.niedermann.owncloud.notes.edit.format.ContextBasedRangeFormattingCallback;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 
@@ -78,7 +78,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         return f;
     }
 
-    public static NoteEditFragment newInstanceWithNewNote(CloudNote newNote) {
+    public static NoteEditFragment newInstanceWithNewNote(NoteEntity newNote) {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
         b.putSerializable(PARAM_NEWNOTE, newNote);

@@ -32,7 +32,6 @@ import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithoutExcerpt
 import it.niedermann.owncloud.notes.main.items.section.SectionItem;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
@@ -80,7 +79,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      public long getItemId(int position) {
          return getItemViewType(position) == TYPE_SECTION
                  ? ((SectionItem) getItem(position)).getTitle().hashCode() * -1
-                 : ((DBNote) getItem(position)).getId();
+                 : ((NoteEntity) getItem(position)).getId();
      }
     */
 
@@ -161,7 +160,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             case TYPE_NOTE_WITH_EXCERPT:
             case TYPE_NOTE_WITHOUT_EXCERPT:
             case TYPE_NOTE_ONLY_TITLE: {
-                ((NoteViewHolder) holder).bind((DBNote) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
+                ((NoteViewHolder) holder).bind((NoteEntity) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
                 break;
             }
         }
@@ -225,9 +224,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             throw new IllegalArgumentException("Item at position " + position + " must not be null");
         }
         if (getItem(position).isSection()) return TYPE_SECTION;
-        DBNote note = (DBNote) getItem(position);
+        NoteEntity note = (NoteEntity) getItem(position);
         if (TextUtils.isEmpty(note.getExcerpt())) {
-            if (TextUtils.isEmpty(note.getCategory())) {
+            if (TextUtils.isEmpty(note.getCategory().getTitle())) {
                 return TYPE_NOTE_ONLY_TITLE;
             } else {
                 return TYPE_NOTE_WITHOUT_EXCERPT;

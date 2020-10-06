@@ -26,7 +26,6 @@ import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Category;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountPickerListener {
@@ -180,7 +179,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (content == null) {
             content = "";
         }
-        CloudNote newNote = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, category, null);
+        NoteEntity newNote = new NoteEntity(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, category, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
