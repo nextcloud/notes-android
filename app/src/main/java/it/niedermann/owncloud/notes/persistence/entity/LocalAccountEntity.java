@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
-import android.graphics.Color;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
@@ -19,7 +17,6 @@ import java.util.NoSuchElementException;
 import it.niedermann.owncloud.notes.persistence.NotesClient;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
 @Entity()

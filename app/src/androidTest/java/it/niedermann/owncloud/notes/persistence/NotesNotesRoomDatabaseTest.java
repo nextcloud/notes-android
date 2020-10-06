@@ -34,7 +34,6 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static org.junit.Assert.assertEquals;

@@ -32,7 +32,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private final int appWidgetId;
 
     private NotesRoomDatabase db;
-    private DBNote note;
+    private NoteEntity note;
     private boolean darkModeActive = false;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
@@ -65,7 +65,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
             final WidgetSingleNoteEntity data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
-            note = NoteEntity.entityToDBNote(db.getNoteDao().getNote(data.getAccountId(), noteId));
+            note = db.getNoteDao().getNote(data.getAccountId(), noteId);
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");

@@ -25,11 +25,10 @@ import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserAdapter;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserViewHolder;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 /**
- * A {@link DialogFragment} which provides an {@link LocalAccount} chooser that hides the given {@link LocalAccount}.
- * This can be useful when one wants to pick e. g. a target for move a note from one {@link LocalAccount} to another..
+ * A {@link DialogFragment} which provides an {@link LocalAccountEntity} chooser that hides the given {@link LocalAccountEntity}.
+ * This can be useful when one wants to pick e. g. a target for move a note from one {@link LocalAccountEntity} to another..
  */
 public class AccountPickerDialogFragment extends BrandedDialogFragment {
 
