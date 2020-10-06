@@ -80,10 +80,10 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
-        final NotesRoomDatabase roomDatabase = NotesRoomDatabase.getInstance(context);
+        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            roomDatabase.getWidgetSingleNoteDao().removeSingleNoteWidget(appWidgetId);
+            db.getWidgetSingleNoteDao().removeSingleNoteWidget(appWidgetId);
         }
         super.onDeleted(context, appWidgetIds);
     }

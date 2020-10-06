@@ -138,7 +138,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     protected ItemAdapter adapter;
 
-    protected NotesRoomDatabase roomDatabase = null;
+    protected NotesRoomDatabase db = null;
     private NavigationAdapter adapterCategories;
     private NavigationItem itemRecent;
     private NavigationItem itemFavorites;
@@ -189,14 +189,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
         }
 
-        roomDatabase = NotesRoomDatabase.getInstance(this);
+        db = NotesRoomDatabase.getInstance(this);
 
         gridView = isGridViewEnabled();
         if (!gridView || isDarkThemeActive(this)) {
             activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
         }
 
-        LocalAccountDao dao = roomDatabase.getLocalAccountDao();
+        LocalAccountDao dao = db.getLocalAccountDao();
         new Thread(() -> {
             List<LocalAccountEntity> localAccountEntities = dao.getAccounts();
             Log.v("TEST", localAccountEntities.size() + " acs");
@@ -206,7 +206,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         setupNavigationMenu();
         setupNotesList();
 
-        new Thread(() -> canMoveNoteToAnotherAccounts = roomDatabase.getLocalAccountDao().getAccountsCount() > 1).start();
+        new Thread(() -> canMoveNoteToAnotherAccounts = db.getLocalAccountDao().getAccountsCount() > 1).start();
     }
 
     @Override
@@ -218,7 +218,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
             if (localAccount == null) {
-                List<LocalAccountEntity> localAccounts = roomDatabase.getLocalAccountDao().getAccounts();
+                List<LocalAccountEntity> localAccounts = db.getLocalAccountDao().getAccounts();
                 if (localAccounts.size() > 0) {
                     localAccount = localAccounts.get(0);
                 }
@@ -232,7 +232,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         refreshLists();
         if (localAccount != null) {
             synchronize();
-            roomDatabase.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
+            db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
         }
         super.onResume();
     }
@@ -250,12 +250,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private void selectAccount(String accountName) {
         fabCreate.hide();
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
-        localAccount = roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(accountName);
+        localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(accountName);
         if (localAccount != null) {
             try {
                 BrandingUtil.saveBrandColors(this, Color.parseColor(localAccount.getColor()), Color.parseColor(localAccount.getTextColor()));
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, roomDatabase, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
+                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
                         .attachToRecyclerView(listView);
                 synchronize();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -372,12 +372,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                     final Capabilities capabilities;
                     try {
                         capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, localAccount.getCapabilitiesETag());
-                        roomDatabase.getLocalAccountDao().updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
-                        roomDatabase.updateBrand(localAccount.getId(), capabilities);
+                        db.getLocalAccountDao().updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
+                        db.updateBrand(localAccount.getId(), capabilities);
                         localAccount.setColor(capabilities.getColor());
                         localAccount.setTextColor(capabilities.getTextColor());
                         BrandingUtil.saveBrandColors(this, Color.parseColor(localAccount.getColor()), Color.parseColor(localAccount.getTextColor()));
-                        roomDatabase.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                        db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
                         Log.i(TAG, capabilities.toString());
                     } catch (Exception e) {
                         if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
@@ -407,14 +407,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         activityBinding.sortingMethod.setOnClickListener((v) -> {
             CategorySortingMethod method;
 
-            method = roomDatabase.getCategoryOrder(localAccount.getId(), navigationSelection);
+            method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
 
             if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
                 method = CategorySortingMethod.SORT_MODIFIED_DESC;
             } else {
                 method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
             }
-            roomDatabase.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
+            db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
             refreshLists();
             updateSortMethodIcon(localAccount.getId());
         });
@@ -517,7 +517,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             if (localAccount == null) {
                 return new ArrayList<>();
             }
-            List<CategoryNavigationItem> categories = roomDatabase.getCategories(localAccount.getId());
+            List<CategoryNavigationItem> categories = db.getCategories(localAccount.getId());
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
                 itemUncategorized.label = getString(R.string.action_uncategorized);
@@ -526,8 +526,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 itemUncategorized = null;
             }
 
-            int numFavorites = roomDatabase.getNoteDao().getFavoritesCount(localAccount.getId());
-            int numNonFavorites = roomDatabase.getNoteDao().getNonFavoritesCount(localAccount.getId());
+            int numFavorites = db.getNoteDao().getFavoritesCount(localAccount.getId());
+            int numNonFavorites = db.getNoteDao().getNonFavoritesCount(localAccount.getId());
             itemFavorites.count = numFavorites;
             itemRecent.count = numFavorites + numNonFavorites;
 
@@ -708,7 +708,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon(long localAccountId) {
-        CategorySortingMethod method = roomDatabase.getCategoryOrder(localAccountId, navigationSelection);
+        CategorySortingMethod method = db.getCategoryOrder(localAccountId, navigationSelection);
         if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
             activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
             activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
@@ -780,7 +780,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 if (resultCode == RESULT_FIRST_USER) {
                     selectAccount(null);
                 }
-                new Thread(() -> canMoveNoteToAnotherAccounts = roomDatabase.getLocalAccountDao().getAccountsCount() > 1).start();
+                new Thread(() -> canMoveNoteToAnotherAccounts = db.getLocalAccountDao().getAccountsCount() > 1).start();
                 break;
             }
             default: {
@@ -792,8 +792,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                                roomDatabase.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
-                                new Thread(() -> canMoveNoteToAnotherAccounts = roomDatabase.getLocalAccountDao().getAccountsCount() > 1).start();
+                                db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
+                                new Thread(() -> canMoveNoteToAnotherAccounts = db.getLocalAccountDao().getAccountsCount() > 1).start();
                                 Log.i(TAG, capabilities.toString());
                                 runOnUiThread(() -> selectAccount(ssoAccount.name));
                             } catch (SQLiteException e) {
@@ -801,7 +801,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                                 runOnUiThread(() -> selectAccount(ssoAccount.name));
                             } catch (Exception e) {
                                 // Happens when importing an already existing account the second time
-                                if (e instanceof TokenMismatchException && roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name) != null) {
+                                if (e instanceof TokenMismatchException && db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
                                     runOnUiThread(() -> {
                                         selectAccount(ssoAccount.name);
@@ -888,7 +888,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         if (selected) {
             v.setSelected(true);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                    this, this, roomDatabase, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
+                    this, this, db, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
             ));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
@@ -922,7 +922,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     }
 
     private void synchronize() {
-        NoteServerSyncHelper syncHelper = roomDatabase.getNoteServerSyncHelper();
+        NoteServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
         if (!syncHelper.isSyncPossible()) {
             syncHelper.updateNetworkStatus();
         }
@@ -954,9 +954,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     @Override
     public void onAccountDeleted(LocalAccountEntity localAccount) {
-        roomDatabase.deleteAccount(localAccount);
+        db.deleteAccount(localAccount);
         if (localAccount.getId() == this.localAccount.getId()) {
-            List<LocalAccountEntity> remainingAccounts = roomDatabase.getLocalAccountDao().getAccounts();
+            List<LocalAccountEntity> remainingAccounts = db.getLocalAccountDao().getAccounts();
             if (remainingAccounts.size() > 0) {
                 this.localAccount = remainingAccounts.get(0);
                 selectAccount(this.localAccount.getAccountName());
@@ -974,7 +974,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         adapter.deselect(0);
         for (Integer i : selection) {
             NoteEntity note = (NoteEntity) adapter.getItem(i);
-            roomDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), roomDatabase.getNoteDao().getNote(note.getAccountId(), note.getId()), account.getId());
+            db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), db.getNoteDao().getNote(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);
@@ -994,7 +994,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             CategoryEntity c = new CategoryEntity();
             c.setTitle(category);
             note.setCategory(c);
-            roomDatabase.setCategory(ssoAccount, note, category, this::refreshLists);
+            db.setCategory(ssoAccount, note, category, this::refreshLists);
         }
 
         mActionMode.finish();

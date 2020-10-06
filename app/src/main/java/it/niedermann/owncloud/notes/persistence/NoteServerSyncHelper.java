@@ -118,12 +118,12 @@ public class NoteServerSyncHelper {
      * This has to be a singleton in order to realize correct registering and unregistering of
      * the BroadcastReceiver, which listens on changes of network connectivity.
      *
-     * @param roomDatabase {@link NotesRoomDatabase}
+     * @param db {@link NotesRoomDatabase}
      * @return NoteServerSyncHelper
      */
-    public static synchronized NoteServerSyncHelper getInstance(NotesRoomDatabase roomDatabase) {
+    public static synchronized NoteServerSyncHelper getInstance(NotesRoomDatabase db) {
         if (instance == null) {
-            instance = new NoteServerSyncHelper(roomDatabase);
+            instance = new NoteServerSyncHelper(db);
         }
         return instance;
     }

@@ -40,7 +40,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent;
     private NavigationAdapter.NavigationItem itemFavorites;
-    private NotesRoomDatabase roomDatabase = null;
+    private NotesRoomDatabase db = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,9 +48,9 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_note_list_configuration);
 
-        roomDatabase = NotesRoomDatabase.getInstance(this);
+        db = NotesRoomDatabase.getInstance(this);
         try {
-            this.localAccount = roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
+            this.localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
             Toast.makeText(this, R.string.widget_not_logged_in, Toast.LENGTH_LONG).show();
@@ -104,7 +104,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 data.setAccountId(localAccount.getId());
                 data.setThemeMode(NotesApplication.getAppTheme(getApplicationContext()).getModeId());
 
-                roomDatabase.getWidgetNotesListDao().createOrUpdateNoteListWidgetData(data);
+                db.getWidgetNotesListDao().createOrUpdateNoteListWidgetData(data);
 
                 Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
                         getApplicationContext(), NoteListWidget.class);
@@ -143,7 +143,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 return new ArrayList<>();
             }
             NavigationAdapter.NavigationItem itemUncategorized;
-            List<CategoryNavigationItem> categories = roomDatabase.getCategories(localAccount.getId());
+            List<CategoryNavigationItem> categories = db.getCategories(localAccount.getId());
 
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
@@ -151,8 +151,8 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
             }
 
-            int numFavorites = roomDatabase.getNoteDao().getFavoritesCount(localAccount.getId());
-            int numNonFavorites = roomDatabase.getNoteDao().getNonFavoritesCount(localAccount.getId());
+            int numFavorites = db.getNoteDao().getFavoritesCount(localAccount.getId());
+            int numNonFavorites = db.getNoteDao().getNonFavoritesCount(localAccount.getId());
             itemFavorites.count = numFavorites;
             itemRecent.count = numFavorites + numNonFavorites;
 

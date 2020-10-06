@@ -21,7 +21,7 @@ public class ManageAccountsActivity extends LockedActivity {
 
     private ActivityManageAccountsBinding binding;
     private ManageAccountAdapter adapter;
-    private NotesRoomDatabase roomDatabase = null;
+    private NotesRoomDatabase db = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,12 +32,12 @@ public class ManageAccountsActivity extends LockedActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        roomDatabase = NotesRoomDatabase.getInstance(this);
+        db = NotesRoomDatabase.getInstance(this);
 
-        List<LocalAccountEntity> localAccounts = roomDatabase.getLocalAccountDao().getAccounts();
+        List<LocalAccountEntity> localAccounts = db.getLocalAccountDao().getAccounts();
 
         adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
-            roomDatabase.deleteAccount(localAccount);
+            db.deleteAccount(localAccount);
             for (LocalAccountEntity temp : localAccounts) {
                 if (temp.getId() == localAccount.getId()) {
                     localAccounts.remove(temp);
@@ -56,7 +56,7 @@ public class ManageAccountsActivity extends LockedActivity {
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
             if (ssoAccount != null) {
-                adapter.setCurrentLocalAccount(roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name));
+                adapter.setCurrentLocalAccount(db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name));
             }
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();

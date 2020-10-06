@@ -36,19 +36,19 @@ public class NoteListWidget extends AppWidgetProvider {
     public static final int PENDING_INTENT_OPEN_APP_RQ = 2;
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
-        final NotesRoomDatabase roomDatabase = NotesRoomDatabase.getInstance(context);
+        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(context);
 
         RemoteViews views;
         DarkModeSetting darkTheme;
 
         for (int appWidgetId : appWidgetIds) {
             try {
-                final NoteListsWidgetData data = roomDatabase.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
-                final LocalAccountEntity localAccountEntity = roomDatabase.getLocalAccountDao().getAccount(data.getAccountId());
+                final NoteListsWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
+                final LocalAccountEntity localAccountEntity = db.getLocalAccountDao().getAccount(data.getAccountId());
 
                 String category = null;
                 if (data.getCategoryId() != null) {
-                    category = roomDatabase.getCategoryDao().getCategoryTitleById(data.getCategoryId());
+                    category = db.getCategoryDao().getCategoryTitleById(data.getCategoryId());
                 }
 
                 darkTheme = DarkModeSetting.fromModeID(data.getThemeMode());

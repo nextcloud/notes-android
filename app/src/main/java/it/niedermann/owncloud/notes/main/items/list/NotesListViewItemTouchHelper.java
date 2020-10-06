@@ -33,7 +33,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
     public NotesListViewItemTouchHelper(
             @NonNull SingleSignOnAccount ssoAccount,
             @NonNull Context context,
-            @NonNull NotesRoomDatabase roomDatabase,
+            @NonNull NotesRoomDatabase db,
             @NonNull ItemAdapter adapter,
             @NonNull ISyncCallback syncCallBack,
             @NonNull Runnable refreshLists,
@@ -72,8 +72,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
                         final NoteEntity dbNoteWithoutContent = (NoteEntity) adapter.getItem(viewHolder.getAdapterPosition());
-                        final NoteEntity dbNote = roomDatabase.getNoteDao().getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
-                        roomDatabase.deleteNoteAndSync(ssoAccount, dbNote.getId());
+                        final NoteEntity dbNote = db.getNoteDao().getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
+                        db.deleteNoteAndSync(ssoAccount, dbNote.getId());
                         adapter.remove(dbNote);
                         refreshLists.run();
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
@@ -82,8 +82,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         } else {
                             BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
-                                        roomDatabase.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
-                                        roomDatabase.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
+                                        db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
+                                        db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
                                         refreshLists.run();
                                         BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
@@ -93,7 +93,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         break;
                     case ItemTouchHelper.RIGHT:
                         final NoteEntity adapterNote = (NoteEntity) adapter.getItem(viewHolder.getAdapterPosition());
-                        roomDatabase.toggleFavoriteAndSync(ssoAccount, adapterNote.getId(), syncCallBack);
+                        db.toggleFavoriteAndSync(ssoAccount, adapterNote.getId(), syncCallBack);
                         refreshLists.run();
                         break;
                     default:

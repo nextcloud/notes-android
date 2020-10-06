@@ -36,7 +36,7 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     public void onNoteClick(int position, View v) {
         if (receivedText != null && receivedText.length() > 0) {
-            final NoteEntity note = roomDatabase.getNoteDao().getNote(localAccount.getId(), ((NoteEntity) adapter.getItem(position)).getId());
+            final NoteEntity note = db.getNoteDao().getNote(localAccount.getId(), ((NoteEntity) adapter.getItem(position)).getId());
             final String oldContent = note.getContent();
             String newContent;
             if (oldContent != null && oldContent.length() > 0) {
@@ -44,7 +44,7 @@ public class AppendToNoteActivity extends MainActivity {
             } else {
                 newContent = receivedText;
             }
-            roomDatabase.updateNoteAndSync(ssoAccount, localAccount, note, newContent, null, () -> Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show());
+            db.updateNoteAndSync(ssoAccount, localAccount, note, newContent, null, () -> Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show());
         } else {
             Toast.makeText(this, R.string.shared_text_empty, Toast.LENGTH_SHORT).show();
         }

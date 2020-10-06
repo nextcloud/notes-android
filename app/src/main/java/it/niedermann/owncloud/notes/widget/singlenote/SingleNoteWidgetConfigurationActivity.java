@@ -53,7 +53,7 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
         try {
-            roomDatabase.getWidgetSingleNoteDao().createOrUpdateSingleNoteWidgetData(
+            db.getWidgetSingleNoteDao().createOrUpdateSingleNoteWidgetData(
                     new WidgetSingleNoteEntity(
                             appWidgetId,
                             note.getAccountId(),
