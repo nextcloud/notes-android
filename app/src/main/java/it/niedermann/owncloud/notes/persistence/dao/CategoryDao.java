@@ -62,7 +62,7 @@ public interface CategoryDao {
     @Query("SELECT title FROM CategoryEntity WHERE id = :categoryId")
     String getCategoryTitleById(long categoryId);
 
-    @Query("SELECT id, title, COUNT(*) FROM CategoryEntity INNER JOIN NoteEntity ON CategoryEntity.id = NoteEntity.category_id" +
-            " WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND title LIKE '%' + :categoryTitle + '%' GROUP BY title")
+    @Query("SELECT CategoryEntity.id, CategoryEntity.title, COUNT(*) as 'totalNotes' FROM CategoryEntity INNER JOIN NoteEntity ON CategoryEntity.id = NoteEntity.category_id" +
+            " WHERE NoteEntity.status != 'LOCAL_DELETED' AND NoteEntity.accountId = :accountId AND CategoryEntity.title LIKE '%' + :categoryTitle + '%' GROUP BY CategoryEntity.title")
     List<CategoryWithNotesCount> searchCategories(Long accountId, String categoryTitle);
 }

@@ -182,7 +182,6 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         changedText = note.getContent();
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        sqliteOpenHelperDatabase = NotesDatabase.getInstance(requireContext());
         binding.swiperefreshlayout.setOnRefreshListener(this);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
@@ -208,18 +207,18 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     @Override
     public void onRefresh() {
-        if (sqliteOpenHelperDatabase.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
+        if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
             try {
                 TextProcessorChain chain = defaultTextProcessorChain(note);
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
-                sqliteOpenHelperDatabase.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
+                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
                     note = db.getNoteDao().getNote(note.getAccountId(), note.getId());
                     changedText = note.getContent();
                     binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);
                 });
-                sqliteOpenHelperDatabase.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
+                db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 e.printStackTrace();
             }

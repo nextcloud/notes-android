@@ -25,6 +25,7 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -430,7 +431,7 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
                 final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
-                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getETag());
+                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified().getTimeInMillis(), localAccount.getETag());
                 List<NoteEntity> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
@@ -463,9 +464,11 @@ public class NoteServerSyncHelper {
 
                 // update ETag and Last-Modified in order to reduce size of next response
                 localAccount.setETag(response.getETag());
-                localAccount.setModified(response.getLastModified());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(response.getLastModified());
+                localAccount.setModified(calendar);
                 db.getLocalAccountDao().updateETag(localAccount.getId(), localAccount.getETag());
-                db.getLocalAccountDao().updateModified(localAccount.getId(), localAccount.getModified());
+                db.getLocalAccountDao().updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
                 try {
                     if (db.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
                         localAccount.setPreferredApiVersion(response.getSupportedApiVersions());

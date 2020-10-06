@@ -42,16 +42,15 @@ public class CapabilitiesWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        final NotesDatabase sqliteOpenHelperDatabase = NotesDatabase.getInstance(getApplicationContext());
-        final NotesRoomDatabase roomDatabase = NotesRoomDatabase.getInstance(getApplicationContext());
-        for (LocalAccountEntity account : roomDatabase.getLocalAccountDao().getAccounts()) {
+        final NotesRoomDatabase db = NotesRoomDatabase.getInstance(getApplicationContext());
+        for (LocalAccountEntity account : db.getLocalAccountDao().getAccounts()) {
             try {
                 final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag());
-                roomDatabase.getLocalAccountDao().updateCapabilitiesETag(account.getId(), capabilities.getETag());
-                roomDatabase.updateBrand(account.getId(), capabilities);
-                roomDatabase.updateApiVersion(account.getId(), capabilities.getApiVersion());
+                db.getLocalAccountDao().updateCapabilitiesETag(account.getId(), capabilities.getETag());
+                db.updateBrand(account.getId(), capabilities);
+                db.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
             } catch (Exception e) {
                 if (e instanceof NextcloudHttpRequestFailedException) {

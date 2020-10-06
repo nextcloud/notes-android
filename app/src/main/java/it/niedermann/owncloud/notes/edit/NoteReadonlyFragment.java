@@ -125,7 +125,6 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
         }
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        sqliteOpenHelperDatabase = NotesDatabase.getInstance(getActivity());
         binding.swiperefreshlayout.setEnabled(false);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());

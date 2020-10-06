@@ -4,17 +4,9 @@ import androidx.room.Embedded;
 
 public class CategoryWithNotesCount {
 
-    @Embedded
-    private CategoryEntity category;
+    private Long id;
+    private String title;
     private Integer totalNotes;
-
-    public CategoryEntity getCategory() {
-        return category;
-    }
-
-    public void setCategory(CategoryEntity category) {
-        this.category = category;
-    }
 
     public Integer getTotalNotes() {
         return totalNotes;
@@ -22,5 +14,21 @@ public class CategoryWithNotesCount {
 
     public void setTotalNotes(Integer totalNotes) {
         this.totalNotes = totalNotes;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

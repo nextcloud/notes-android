@@ -38,14 +38,13 @@ public class SyncWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        NotesDatabase sqliteOpenHelperDatabase = NotesDatabase.getInstance(getApplicationContext());
-        NotesRoomDatabase roomDatabase = NotesRoomDatabase.getInstance(getApplicationContext());
-        for (LocalAccountEntity account : roomDatabase.getLocalAccountDao().getAccounts()) {
+        NotesRoomDatabase db = NotesRoomDatabase.getInstance(getApplicationContext());
+        for (LocalAccountEntity account : db.getLocalAccountDao().getAccounts()) {
             try {
                 SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.v(TAG, "Starting background synchronization for " + ssoAccount.name);
-                sqliteOpenHelperDatabase.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> Log.v(TAG, "Finished background synchronization for " + ssoAccount.name));
-                sqliteOpenHelperDatabase.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
+                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> Log.v(TAG, "Finished background synchronization for " + ssoAccount.name));
+                db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
             } catch (NextcloudFilesAppAccountNotFoundException e) {
                 e.printStackTrace();
             }

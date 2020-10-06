@@ -30,7 +30,7 @@ public class Converters {
     }
 
     @TypeConverter
-    public static Calendar longToCalendar(Long value) {
+    public static Calendar calendarFromLong(Long value) {
         if (value == null) {
             return null;
         }

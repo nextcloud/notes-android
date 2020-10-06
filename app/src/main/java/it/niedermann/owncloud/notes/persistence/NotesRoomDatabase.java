@@ -581,7 +581,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
         List<NavigationAdapter.CategoryNavigationItem> categories = new ArrayList<>(counters.size());
         for(CategoryWithNotesCount counter: counters) {
             Resources res = context.getResources();
-            String category = counter.getCategory().getTitle().toLowerCase();
+            String category = counter.getTitle().toLowerCase();
             int icon = NavigationAdapter.ICON_FOLDER;
             if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
                 icon = R.drawable.ic_library_music_grey600_24dp;
@@ -590,7 +590,7 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
             } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
                 icon = R.drawable.ic_work_grey600_24dp;
             }
-            categories.add(new NavigationAdapter.CategoryNavigationItem("category:" + counter.getCategory().getTitle(), counter.getCategory().getTitle(), counter.getTotalNotes(), icon, counter.getCategory().getId()));
+            categories.add(new NavigationAdapter.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId()));
         }
         return categories;
     }

@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -27,7 +28,7 @@ public class LocalAccountEntity {
     private String username;
     private String accountName;
     private String eTag;
-    private Long modified;
+    private Calendar modified;
     private String apiVersion;
     private String capabilitiesETag;
     private String color;
@@ -77,11 +78,11 @@ public class LocalAccountEntity {
         this.eTag = eTag;
     }
 
-    public long getModified() {
+    public Calendar getModified() {
         return modified;
     }
 
-    public void setModified(long modified) {
+    public void setModified(Calendar modified) {
         this.modified = modified;
     }
 
