@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.persistence.NotesClient;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 
 /**
  * Provides entity classes for handling server responses with a single note ({@link NoteResponse}) or a list of notes ({@link NotesResponse}).
@@ -23,7 +24,7 @@ public class ServerResponse {
             super(response);
         }
 
-        public CloudNote getNote() throws JSONException {
+        public NoteEntity getNote() throws JSONException {
             return getNoteFromJSON(new JSONObject(getContent()));
         }
     }
@@ -33,8 +34,8 @@ public class ServerResponse {
             super(response);
         }
 
-        public List<CloudNote> getNotes() throws JSONException {
-            List<CloudNote> notesList = new ArrayList<>();
+        public List<NoteEntity> getNotes() throws JSONException {
+            List<NoteEntity> notesList = new ArrayList<>();
             JSONArray notes = new JSONArray(getContent());
             for (int i = 0; i < notes.length(); i++) {
                 JSONObject json = notes.getJSONObject(i);
@@ -68,7 +69,7 @@ public class ServerResponse {
         return response.getSupportedApiVersions();
     }
 
-    CloudNote getNoteFromJSON(JSONObject json) throws JSONException {
+    NoteEntity getNoteFromJSON(JSONObject json) throws JSONException {
         long id = 0;
         String title = "";
         String content = "";
@@ -98,6 +99,6 @@ public class ServerResponse {
         if (!json.isNull(NotesClient.JSON_ETAG)) {
             etag = json.getString(NotesClient.JSON_ETAG);
         }
-        return new CloudNote(id, modified, title, content, favorite, category, etag);
+        return new NoteEntity(id, modified, title, content, favorite, category, etag);
     }
 }

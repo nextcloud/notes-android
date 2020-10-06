@@ -30,7 +30,7 @@ public class LocalAccountEntity {
     private String username;
     private String accountName;
     private String eTag;
-    private int modified;
+    private long modified;
     private String apiVersion;
     private String capabilitiesETag;
     private String color;
@@ -80,11 +80,11 @@ public class LocalAccountEntity {
         this.eTag = eTag;
     }
 
-    public int getModified() {
+    public long getModified() {
         return modified;
     }
 
-    public void setModified(int modified) {
+    public void setModified(long modified) {
         this.modified = modified;
     }
 

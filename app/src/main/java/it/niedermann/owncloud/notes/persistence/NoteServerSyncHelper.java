@@ -225,7 +225,7 @@ public class NoteServerSyncHelper {
                     return;
                 }
                 final NotesClient notesClient = NotesClient.newInstance(localAccount.getPreferredApiVersion(), context);
-                final SyncTask syncTask = new SyncTask(notesClient, entityToLocalAccount(localAccount), ssoAccount, onlyLocalChanges);
+                final SyncTask syncTask = new SyncTask(notesClient, localAccount, ssoAccount, onlyLocalChanges);
                 syncTask.addCallbacks(ssoAccount, callbacksPush.get(ssoAccount.name));
                 callbacksPush.put(ssoAccount.name, new ArrayList<>());
                 if (!onlyLocalChanges) {
@@ -312,7 +312,7 @@ public class NoteServerSyncHelper {
         @NonNull
         private final NotesClient notesClient;
         @NonNull
-        private final LocalAccount localAccount;
+        private final LocalAccountEntity localAccount;
         @NonNull
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
@@ -321,7 +321,7 @@ public class NoteServerSyncHelper {
         @NonNull
         private final ArrayList<Throwable> exceptions = new ArrayList<>();
 
-        SyncTask(@NonNull NotesClient notesClient, @NonNull LocalAccount localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
+        SyncTask(@NonNull NotesClient notesClient, @NonNull LocalAccountEntity localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
             this.notesClient = notesClient;
             this.localAccount = localAccount;
             this.ssoAccount = ssoAccount;
@@ -364,11 +364,10 @@ public class NoteServerSyncHelper {
 
             boolean success = true;
             List<NoteEntity> notes = roomDatabase.getNoteDao().getLocalModifiedNotes(localAccount.getId());
-            for (NoteEntity noteEntity : notes) {
-                DBNote note = NoteEntity.entityToDBNote(noteEntity);
+            for (NoteEntity note : notes) {
                 Log.d(TAG, "   Process Local Note: " + note);
                 try {
-                    CloudNote remoteNote;
+                    NoteEntity remoteNote;
                     switch (note.getStatus()) {
                         case LOCAL_EDITED:
                             Log.v(TAG, "   ...create/edit");
@@ -389,7 +388,7 @@ public class NoteServerSyncHelper {
                                 remoteNote = notesClient.createNote(ssoAccount, note).getNote();
                             }
                             // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            sqliteOpenHelperDatabase.updateNote(localAccount, note.getId(), remoteNote, note);
+                            roomDatabase.updateNote(localAccount.getId(), note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() > 0) {
@@ -437,11 +436,11 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
                 final Map<Long, Long> idMap = roomDatabase.getIdMap(localAccount.getId());
-                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getEtag());
-                List<CloudNote> remoteNotes = response.getNotes();
+                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getETag());
+                List<NoteEntity> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
-                for (CloudNote remoteNote : remoteNotes) {
+                for (NoteEntity remoteNote : remoteNotes) {
                     Log.v(TAG, "   Process Remote Note: " + remoteNote);
                     remoteIDs.add(remoteNote.getRemoteId());
                     if (remoteNote.getModified() == null) {
@@ -450,7 +449,7 @@ public class NoteServerSyncHelper {
                         Log.v(TAG, "   ... found → Update");
                         Long remoteId = idMap.get(remoteNote.getRemoteId());
                         if (remoteId != null) {
-                            sqliteOpenHelperDatabase.updateNote(localAccount, remoteId, remoteNote, null);
+                            roomDatabase.updateNote(localAccount.getId(), remoteId, remoteNote, null);
                         } else {
                             Log.e(TAG, "Tried to update note from server, but remoteId of note is null. " + remoteNote);
                         }
@@ -471,7 +470,7 @@ public class NoteServerSyncHelper {
                 // update ETag and Last-Modified in order to reduce size of next response
                 localAccount.setETag(response.getETag());
                 localAccount.setModified(response.getLastModified());
-                roomDatabase.getLocalAccountDao().updateETag(localAccount.getId(), localAccount.getEtag());
+                roomDatabase.getLocalAccountDao().updateETag(localAccount.getId(), localAccount.getETag());
                 roomDatabase.getLocalAccountDao().updateModified(localAccount.getId(), localAccount.getModified());
                 try {
                     if (sqliteOpenHelperDatabase.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {

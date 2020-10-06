@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.Item;
@@ -38,11 +39,10 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 
     @Override
     protected List<Item> doInBackground(Void... voids) {
-        List<DBNote> noteList;
-        NotesDatabase sqliteOpenHelperDatabase = NotesDatabase.getInstance(context);
+        List<NoteEntity> noteList;
         NotesRoomDatabase roomDatabase = NotesRoomDatabase.getInstance(context);
         CategorySortingMethod sortingMethod = roomDatabase.getCategoryOrder(accountId, category);
-        noteList = sqliteOpenHelperDatabase.searchNotes(accountId, searchQuery, category.category, category.favorite, sortingMethod);
+        noteList = roomDatabase.searchNotes(accountId, searchQuery, category.category, category.favorite, sortingMethod);
 
         if (category.category == null) {
             if (sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC) {
@@ -57,10 +57,11 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 
     @NonNull
     @WorkerThread
-    private List<Item> fillListByCategory(@NonNull List<DBNote> noteList) {
+    private List<Item> fillListByCategory(@NonNull List<NoteEntity> noteList) {
         List<Item> itemList = new ArrayList<>();
         String currentCategory = category.category;
-        for (DBNote note : noteList) {
+        for (NoteEntity entity : noteList) {
+            DBNote note = NoteEntity.entityToDBNote(entity);
             if (currentCategory != null && !currentCategory.equals(note.getCategory())) {
                 itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory())));
             }
@@ -73,12 +74,12 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 
     @NonNull
     @WorkerThread
-    private List<Item> fillListByTime(@NonNull List<DBNote> noteList) {
+    private List<Item> fillListByTime(@NonNull List<NoteEntity> noteList) {
         List<Item> itemList = new ArrayList<>();
         Timeslotter timeslotter = new Timeslotter();
         String lastTimeslot = null;
         for (int i = 0; i < noteList.size(); i++) {
-            DBNote currentNote = noteList.get(i);
+            DBNote currentNote = NoteEntity.entityToDBNote(noteList.get(i));
             String timeslot = timeslotter.getTimeslot(currentNote);
             if (i > 0 && !timeslot.equals(lastTimeslot)) {
                 itemList.add(new SectionItem(timeslot));
@@ -92,11 +93,11 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 
     @NonNull
     @WorkerThread
-    private List<Item> fillListByInitials(@NonNull List<DBNote> noteList) {
+    private List<Item> fillListByInitials(@NonNull List<NoteEntity> noteList) {
         List<Item> itemList = new ArrayList<>();
         String lastInitials = null;
         for (int i = 0; i < noteList.size(); i++) {
-            DBNote currentNote = noteList.get(i);
+            NoteEntity currentNote = noteList.get(i);
             String initials = currentNote.getTitle().substring(0, 1).toUpperCase();
             if (!initials.matches("[A-Z\\u00C0-\\u00DF]")) {
                 initials = initials.matches("[\\u0250-\\uFFFF]") ? context.getString(R.string.simple_other) : "#";
@@ -104,7 +105,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             if (i > 0 && !initials.equals(lastInitials)) {
                 itemList.add(new SectionItem(initials));
             }
-            itemList.add(currentNote);
+            itemList.add(NoteEntity.entityToDBNote(currentNote));
             lastInitials = initials;
         }
 

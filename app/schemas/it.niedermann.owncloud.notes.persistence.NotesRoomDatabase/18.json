@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 18,
-    "identityHash": "4b66ff34ab595ccc99419eba8b2de6c7",
+    "identityHash": "d1ab335b1df8345cb5ff2fc5d547c19e",
     "entities": [
       {
         "tableName": "LocalAccountEntity",
@@ -80,25 +80,25 @@
       },
       {
         "tableName": "NoteEntity",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `remoteId` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `status` TEXT, `title` TEXT, `modified` INTEGER NOT NULL, `content` TEXT, `favorite` INTEGER, `eTag` TEXT, `excerpt` TEXT, `scrollY` INTEGER NOT NULL, `category_id` INTEGER, `category_accountId` INTEGER, `category_title` TEXT, `category_categorySortingMethod` INTEGER, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER, `remoteId` INTEGER, `accountId` INTEGER, `status` TEXT, `title` TEXT, `modified` INTEGER, `content` TEXT, `favorite` INTEGER, `eTag` TEXT, `excerpt` TEXT, `scrollY` INTEGER NOT NULL, `category_id` INTEGER, `category_accountId` INTEGER, `category_title` TEXT, `category_categorySortingMethod` INTEGER, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "remoteId",
             "columnName": "remoteId",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "accountId",
             "columnName": "accountId",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "status",
@@ -116,7 +116,7 @@
             "fieldPath": "modified",
             "columnName": "modified",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "content",
@@ -306,7 +306,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4b66ff34ab595ccc99419eba8b2de6c7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd1ab335b1df8345cb5ff2fc5d547c19e')"
     ]
   }
 }

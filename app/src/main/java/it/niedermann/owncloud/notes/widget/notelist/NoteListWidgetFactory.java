@@ -13,6 +13,7 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
@@ -31,7 +32,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final boolean darkTheme;
     private NotesDatabase sqliteOpenHelperDatabase;
     private NotesRoomDatabase roomDatabase;
-    private List<DBNote> dbNotes;
+    private List<NoteEntity> noteEntities;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
@@ -55,14 +56,14 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
                 case MODE_DISPLAY_ALL:
-                    dbNotes = sqliteOpenHelperDatabase.getNotes(data.getAccountId());
+                    noteEntities = roomDatabase.getNoteDao().getNotes(data.getAccountId());
                     break;
                 case MODE_DISPLAY_STARRED:
-                    dbNotes = sqliteOpenHelperDatabase.searchNotes(data.getAccountId(), null, null, true);
+                    noteEntities = roomDatabase.searchNotes(data.getAccountId(), null, null, true, null);
                     break;
                 case MODE_DISPLAY_CATEGORY:
                     if (data.getCategoryId() != null) {
-                        dbNotes = sqliteOpenHelperDatabase.searchNotes(data.getAccountId(), null, roomDatabase.getCategoryDao().getCategoryTitleById(data.getCategoryId()), null);
+                        noteEntities = roomDatabase.searchNotes(data.getAccountId(), null, roomDatabase.getCategoryDao().getCategoryTitleById(data.getCategoryId()), null, null);
                     }
                     break;
             }
@@ -83,23 +84,23 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
      */
     @Override
     public int getCount() {
-        if (dbNotes == null) {
+        if (noteEntities == null) {
             return 0;
         }
 
-        return dbNotes.size();
+        return noteEntities.size();
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
         RemoteViews note_content;
 
-        if (dbNotes == null || position > dbNotes.size() - 1 || dbNotes.get(position) == null) {
+        if (noteEntities == null || position > noteEntities.size() - 1 || noteEntities.get(position) == null) {
             Log.e(TAG, "Could not find position \"" + position + "\" in dbNotes list.");
             return null;
         }
 
-        DBNote note = dbNotes.get(position);
+        NoteEntity note = noteEntities.get(position);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 
@@ -112,14 +113,14 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_dark);
             note_content.setOnClickFillInIntent(R.id.widget_note_list_entry_dark, fillInIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv_dark, note.getTitle());
-            note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, note.isFavorite()
+            note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, note.getFavorite()
                     ? R.drawable.ic_star_yellow_24dp
                     : R.drawable.ic_star_grey_ccc_24dp);
         } else {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry);
             note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
-            note_content.setImageViewResource(R.id.widget_entry_fav_icon, note.isFavorite()
+            note_content.setImageViewResource(R.id.widget_entry_fav_icon, note.getFavorite()
                     ? R.drawable.ic_star_yellow_24dp
                     : R.drawable.ic_star_grey_ccc_24dp);
         }

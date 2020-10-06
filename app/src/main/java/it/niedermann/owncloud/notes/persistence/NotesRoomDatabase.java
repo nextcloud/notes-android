@@ -1,12 +1,10 @@
 package it.niedermann.owncloud.notes.persistence;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.text.TextUtils;
@@ -111,9 +109,13 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
     };
 
     public abstract LocalAccountDao getLocalAccountDao();
+
     public abstract CategoryDao getCategoryDao();
+
     public abstract NoteDao getNoteDao();
+
     public abstract WidgetSingleNoteDao getWidgetSingleNoteDao();
+
     public abstract WidgetNotesListDao getWidgetNotesListDao();
 
     @SuppressWarnings("UnusedReturnValue")
@@ -221,8 +223,8 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      * @param note Note
      */
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, CloudNote note) {
-        DBNote dbNote = new DBNote(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
-        long id = addNote(accountId, dbNote);
+        NoteEntity entity = new NoteEntity(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), note.getEtag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+        long id = addNote(accountId, entity);
         notifyWidgets();
         syncHelper.scheduleSync(ssoAccount, true);
         return id;
@@ -234,16 +236,15 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      *
      * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type DBNote (with DBStatus.LOCAL_EDITED)!
      */
-    long addNote(long accountId, CloudNote note) {
+    long addNote(long accountId, NoteEntity note) {
         NoteEntity entity = new NoteEntity();
-        if (note instanceof DBNote) {
-            DBNote dbNote = (DBNote) note;
-            if (dbNote.getId() > 0) {
-                entity.setId(dbNote.getId());
+        if (entity.getId() != null) {
+            if (entity.getId() > 0) {
+                entity.setId(entity.getId());
             }
-            entity.setStatus(dbNote.getStatus());
-            entity.setAccountId(dbNote.getAccountId());
-            entity.setExcerpt(dbNote.getExcerpt());
+            entity.setStatus(entity.getStatus());
+            entity.setAccountId(entity.getAccountId());
+            entity.setExcerpt(entity.getExcerpt());
         } else {
             entity.setStatus(DBStatus.VOID);
             entity.setAccountId(accountId);
@@ -253,12 +254,12 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
             entity.setRemoteId(note.getRemoteId());
         }
         entity.setTitle(note.getTitle());
-        entity.setModified(note.getModified().getTimeInMillis() / 1000);
+        entity.setModified(note.getModified());
         entity.setContent(note.getContent());
-        entity.setFavorite(note.isFavorite());
+        entity.setFavorite(note.getFavorite());
         // FIXME
 //        entity.setCategory(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
-        entity.setETag(note.getEtag());
+        entity.setETag(note.getETag());
         return getNoteDao().addNote(entity);
     }
 
@@ -433,5 +434,38 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
             syncHelper.addCallbackPush(ssoAccount, callback);
         }
         syncHelper.scheduleSync(ssoAccount, true);
+    }
+
+    public List<NoteEntity> searchNotes(long accountId, CharSequence query, String category, Boolean favorite, CategorySortingMethod sortingMethod) {
+        if (category != null) { // Needed for subcategories, see https://github.com/stefan-niedermann/nextcloud-notes/issues/902
+            return getNoteDao().searchNotesSubcategory(accountId, query, category, favorite, sortingMethod);
+        } else {
+            return getNoteDao().searchNotes(accountId, query, category, favorite, sortingMethod);
+        }
+    }
+
+    /**
+     * Updates a single Note with data from the server, (if it was not modified locally).
+     * Thereby, an optimistic concurrency control is realized in order to prevent conflicts arising due to parallel changes from the UI and synchronization.
+     * This is used by the synchronization task, hence no Synchronization will be triggered. Use updateNoteAndSync() instead!
+     *
+     * @param id                        local ID of Note
+     * @param remoteNote                Note from the server.
+     * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
+     */
+    void updateNote(long accountId, long id, @NonNull NoteEntity remoteNote, @Nullable NoteEntity forceUnchangedDBNoteState) {
+        validateAccountId(accountId);
+        // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
+        getNoteDao().updateRemoteId(id, remoteNote.getRemoteId());
+
+        // The other columns have to be updated in dependency of forceUnchangedDBNoteState,
+        // since the Synchronization-Task must not overwrite locales changes!
+        if (forceUnchangedDBNoteState != null) {
+            getNoteDao().updateIfModifiedLocallyDuringSync(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory().getTitle(), remoteNote.getETag(), remoteNote.getContent());
+        } else {
+            getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory().getTitle(), remoteNote.getETag(), remoteNote.getContent());
+        }
+        getCategoryDao().removeEmptyCategory(accountId);
+        Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "");
     }
 }

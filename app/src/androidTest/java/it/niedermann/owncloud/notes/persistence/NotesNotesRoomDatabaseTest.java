@@ -97,7 +97,7 @@ public class NotesNotesRoomDatabaseTest {
                 true, "Diary", null);
 
         // Pre-check
-        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(accountID);
+        List<NoteEntity> notes = roomDatabase.getNoteDao().getNotes(accountID);
         int pre_size = notes.size();
         Log.i("Test_01_addNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
@@ -116,12 +116,12 @@ public class NotesNotesRoomDatabaseTest {
         assertEquals(accountID, note.getAccountId());
 
         // Check if this note is in all notes
-        notes = sqliteOpenHelperDatabase.getNotes(accountID);
+        notes = roomDatabase.getNoteDao().getNotes(accountID);
         int added_size = notes.size();
         assertEquals(1, added_size - pre_size);
 
         Log.i("Test_01_addNote_All_Notes_Added", "Size: " + added_size);
-        for (DBNote cnote : notes) {
+        for (NoteEntity cnote : notes) {
             Log.i("Test_01_addNote_All_Notes_Added", cnote.toString());
             Log.i("Test_01_addNote_All_Notes_Added", cnote.getTitle());
         }
@@ -196,19 +196,19 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_03_searchNotes() {
         long thisAccountID = account.getId();
-        List<DBNote> notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, null, false);  // All three added notes are marked as favorite
+        List<NoteEntity> notes = roomDatabase.searchNotes(thisAccountID, null, null, false, null);  // All three added notes are marked as favorite
         Log.i("Test_03_searchNotes_Favorite_false", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
-        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Hello", true); // There is no category named "Hello"
+        notes = roomDatabase.searchNotes(thisAccountID, null, "Hello", true, null); // There is no category named "Hello"
         Log.i("Test_03_searchNotes_Category_Hello", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
-        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Diary", true); // There is one category named "Diary"
+        notes = roomDatabase.searchNotes(thisAccountID, null, "Diary", true, null); // There is one category named "Diary"
         Log.i("Test_03_searchNotes_Category_Diary_Favorite_True", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
 
-        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, null, null);    // Fetch all notes
+        notes = roomDatabase.searchNotes(thisAccountID, null, null, null, null);    // Fetch all notes
         Log.i("Test_03_searchNotes_Three_NULL", "Size: " + notes.size());
         assertEquals(notes.size(), 4);  // We've added three test notes by now
     }
@@ -252,12 +252,12 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_06_deleteNote() {
         long thisAccountID = account.getId();
-        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
+        List<NoteEntity> notes = roomDatabase.getNoteDao().getNotes(thisAccountID);
         int added_size = notes.size();
 
         Log.i("Test_06_deleteNote_All_Before_Deletion", "Size: " + added_size);
         int counter = 0;
-        for (DBNote cnote : notes) {
+        for (NoteEntity cnote : notes) {
             Log.i("Test_06_deleteNote_All_Before_Deletion", cnote.toString());
             // Delete the note after testing
             roomDatabase.deleteNote(cnote.getId(), cnote.getStatus());
@@ -265,7 +265,7 @@ public class NotesNotesRoomDatabaseTest {
         }
 
         // Check if the note is deleted successfully
-        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
+        notes = roomDatabase.getNoteDao().getNotes(thisAccountID);
         int deleted_size = notes.size();
         assertEquals(counter, added_size - deleted_size);
         Log.i("Test_06_deleteNote_All_Notes_After_Deletion", "Size: " + deleted_size);
@@ -307,7 +307,7 @@ public class NotesNotesRoomDatabaseTest {
                 false, "Diary", null));
 
         // Pre-check
-        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
+        List<NoteEntity> notes = roomDatabase.getNoteDao().getNotes(thisAccountID);
         int pre_size = notes.size();
         Log.i("Test_07_multiAddNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
@@ -327,7 +327,7 @@ public class NotesNotesRoomDatabaseTest {
         }
 
         // check if these note is in all notes
-        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
+        notes = roomDatabase.getNoteDao().getNotes(thisAccountID);
         int add_size = notes.size();
         assertEquals(10, add_size - pre_size);
 
@@ -337,27 +337,27 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_08_multiSearchNotes() {
         long thisAccountID = account.getId();
-        List<DBNote> notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, null, null);
+        List<NoteEntity> notes = roomDatabase.searchNotes(thisAccountID, null, null, null, null);
         Log.i("Test_08_multiSearchNotes_null_null_null", "Size: " + notes.size());
         assertEquals(notes.size(), 10);
 
-        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, null, true);
+        notes = roomDatabase.searchNotes(thisAccountID, null, null, true, null);
         Log.i("Test_08_multiSearchNotes_null_null_true", "Size: " + notes.size());
         assertEquals(notes.size(), 7);
 
-        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Music", null);
+        notes = roomDatabase.searchNotes(thisAccountID, null, "Music", null, null);
         Log.i("Test_08_multiSearchNotes_null_Music_null", "Size: " + notes.size());
         assertEquals(notes.size(), 2);
 
-        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Work", true);
+        notes = roomDatabase.searchNotes(thisAccountID, null, "Work", true, null);
         Log.i("Test_08_multiSearchNotes_null_Work_true", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
-        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, null, "Diary", null);
+        notes = roomDatabase.searchNotes(thisAccountID, null, "Diary", null, null);
         Log.i("Test_08_multiSearchNotes_null_Diary_null", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
 
-        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, "Mike", null, null);
+        notes = roomDatabase.searchNotes(thisAccountID, "Mike", null, null, null);
         Log.i("Test_08_multiSearchNotes_Mike_null_null", "Size: " + notes.size());
         assertEquals(notes.size(), 1);
     }
@@ -428,17 +428,17 @@ public class NotesNotesRoomDatabaseTest {
     @Test
     public void test_11_multiDeleteNote() {
         long thisAccountID = account.getId();
-        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
+        List<NoteEntity> notes = roomDatabase.getNoteDao().getNotes(thisAccountID);
         int added_size = notes.size();
 
         Log.i("Test_11_multiDeleteNote_All_Before_Deletion", "Size: " + added_size);
-        for (DBNote e : notes) {
+        for (NoteEntity e : notes) {
             Log.i("Test_11_multiDeleteNote_All_Before_Deletion", e.toString());
             roomDatabase.deleteNote(e.getId(), e.getStatus());
         }
 
         // Check if the note is deleted successfully
-        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
+        notes = roomDatabase.getNoteDao().getNotes(thisAccountID);
         int deleted_size = notes.size();
         assertEquals(10, added_size - deleted_size);
         Log.i("Test_11_multiDeleteNote_All_After_Deletion", "Size: " + deleted_size);
@@ -452,7 +452,7 @@ public class NotesNotesRoomDatabaseTest {
                 true, "日记", null);
 
         // Pre-check
-        List<DBNote> notes = sqliteOpenHelperDatabase.getNotes(accountID);
+        List<NoteEntity> notes = roomDatabase.getNoteDao().getNotes(accountID);
         int pre_size = notes.size();
         Log.i("Test_12_Chinese_All_Notes_Before_Addition", "Size: " + pre_size);
 
@@ -471,18 +471,18 @@ public class NotesNotesRoomDatabaseTest {
         assertEquals(accountID, note.getAccountId());
 
         // Check if this note is in all notes
-        notes = sqliteOpenHelperDatabase.getNotes(accountID);
+        notes = roomDatabase.getNoteDao().getNotes(accountID);
         int added_size = notes.size();
 
         assertEquals(1, added_size - pre_size);
 
         Log.i("Test_12_Chinese_All_Notes_Added", "Size: " + added_size);
-        for (DBNote cnote : notes) {
+        for (NoteEntity cnote : notes) {
             Log.i("Test_12_Chinese_All_Notes_Added", cnote.toString());
         }
 
         long thisAccountID = account.getId();
-        notes = sqliteOpenHelperDatabase.searchNotes(thisAccountID, "美好", "日记", true);
+        notes = roomDatabase.searchNotes(thisAccountID, "美好", "日记", true, null);
         Log.i("Test_12_Chinese", "Size: " + notes.size());
         assertEquals(1, notes.size());
 
@@ -506,15 +506,15 @@ public class NotesNotesRoomDatabaseTest {
         }
         assertTrue(exitFlag);
 
-        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
-        for (DBNote cnote : notes) {
+        notes = roomDatabase.getNoteDao().getNotes(thisAccountID);
+        for (NoteEntity cnote : notes) {
             Log.i("Test_12_Chinese_All_Before_Deletion", cnote.toString());
             // Delete the note after testing
             roomDatabase.deleteNote(cnote.getId(), cnote.getStatus());
         }
 
         // Check if the note is deleted successfully
-        notes = sqliteOpenHelperDatabase.getNotes(thisAccountID);
+        notes = roomDatabase.getNoteDao().getNotes(thisAccountID);
         int deleted_size = notes.size();
         assertEquals(1, added_size - deleted_size);
         Log.i("Test_12_Chinese_All_Notes_After_Deletion", "Size: " + deleted_size);

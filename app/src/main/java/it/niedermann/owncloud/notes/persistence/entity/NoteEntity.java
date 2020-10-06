@@ -14,12 +14,12 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 @Entity()
 public class NoteEntity {
     @PrimaryKey
-    private long id;
-    private long remoteId;
-    private long accountId;
+    private Long id;
+    private Long remoteId;
+    private Long accountId;
     private DBStatus status;
     private String title;
-    private long modified;
+    private Calendar modified;
     private String content;
     private Boolean favorite;
     private String eTag;
@@ -28,27 +28,51 @@ public class NoteEntity {
     @Embedded(prefix = "category_")
     private CategoryEntity category;
 
-    public long getId() {
+    public NoteEntity() {
+        super();
+    }
+
+    public NoteEntity(long remoteId, Calendar modified, String title, String content, Boolean favorite, String category, String eTag) {
+        this.remoteId = remoteId;
+        this.title = title;
+        this.modified = modified;
+        this.content = content;
+        this.favorite = favorite;
+        this.eTag = eTag;
+        this.category = new CategoryEntity();
+        this.category.setTitle(category);
+    }
+
+    public NoteEntity(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, String excerpt, int scrollY) {
+        this(remoteId, modified, title, content, favorite, category, etag);
+        this.id = id;
+        this.status = status;
+        this.accountId = accountId;
+        this.excerpt = excerpt;
+        this.scrollY = scrollY;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getRemoteId() {
+    public Long getRemoteId() {
         return remoteId;
     }
 
-    public void setRemoteId(long remoteId) {
+    public void setRemoteId(Long remoteId) {
         this.remoteId = remoteId;
     }
 
-    public long getAccountId() {
+    public Long getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(long accountId) {
+    public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
@@ -68,11 +92,11 @@ public class NoteEntity {
         this.title = title;
     }
 
-    public long getModified() {
+    public Calendar getModified() {
         return modified;
     }
 
-    public void setModified(long modified) {
+    public void setModified(Calendar modified) {
         this.modified = modified;
     }
 
@@ -129,12 +153,10 @@ public class NoteEntity {
         if(entity == null) {
             return null;
         }
-        Calendar modified = Calendar.getInstance();
-        modified.setTimeInMillis(entity.getModified() * 1000);
-        DBNote note = new DBNote(
+        return new DBNote(
                 entity.getId(),
                 entity.getRemoteId(),
-                modified,
+                entity.getModified(),
                 entity.getTitle(),
                 entity.getContent(),
                 entity.getFavorite(),
@@ -145,7 +167,6 @@ public class NoteEntity {
                 entity.getExcerpt(),
                 entity.getScrollY()
         );
-        return note;
     }
 }
 //                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +
