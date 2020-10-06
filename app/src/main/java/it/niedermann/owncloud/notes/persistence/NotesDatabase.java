@@ -56,6 +56,7 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.model.OldCategory;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
@@ -80,16 +81,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     private static final String NOTES_DB_NAME = "OWNCLOUD_NOTES";
     private static NotesDatabase instance;
     private static Context context;
-    private static NoteServerSyncHelper syncHelper;
-
-    public static NotesDatabase getInstance(@NonNull Context context) {
-        if (instance == null) {
-            instance = create(context.getApplicationContext());
-            NotesDatabase.context = context.getApplicationContext();
-            NotesDatabase.syncHelper = NoteServerSyncHelper.getInstance(instance);
-        }
-        return instance;
-    }
+    private static NoteServerSyncHelper serverSyncHelper;
 
     private static NotesDatabase create(final Context context) {
         return Room.databaseBuilder(
@@ -126,103 +118,17 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     public abstract WidgetNotesListDao getWidgetNotesListDao();
 
-    @SuppressWarnings("UnusedReturnValue")
-    public long addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        final LocalAccount entity = new LocalAccount();
-        entity.setUrl(url);
-        entity.setUserName(username);
-        entity.setAccountName(accountName);
-        entity.setCapabilities(capabilities);
-        return getLocalAccountDao().insert(entity);
-    }
-
-    public void updateBrand(long accountId, @NonNull Capabilities capabilities) throws IllegalArgumentException {
-        validateAccountId(accountId);
-
-        String color;
-        try {
-            color = ColorUtil.formatColorToParsableHexString(capabilities.getColor()).substring(1);
-        } catch (Exception e) {
-            color = "0082C9";
+    public static NotesDatabase getInstance(@NonNull Context context) {
+        if (instance == null) {
+            instance = create(context.getApplicationContext());
+            NotesDatabase.context = context.getApplicationContext();
+            NotesDatabase.serverSyncHelper = NoteServerSyncHelper.getInstance(instance);
         }
-
-        String textColor;
-        try {
-            textColor = ColorUtil.formatColorToParsableHexString(capabilities.getTextColor()).substring(1);
-        } catch (Exception e) {
-            textColor = "FFFFFF";
-        }
-
-        getLocalAccountDao().updateBrand(accountId, color, textColor);
+        return instance;
     }
 
-
-    void deleteNote(long id, @NonNull DBStatus forceDBStatus) {
-        getNoteDao().deleteByCardId(id, forceDBStatus);
-        getCategoryDao().removeEmptyCategory(id);
-    }
-
-
-    /**
-     * Get the category if with the given category title
-     * The method does not support fuzzy search.
-     * Because the category title in database is unique, there will not at most one result.
-     * If there is no such category, database will create it if create flag is set.
-     * Otherwise this method will return -1 as default value.
-     *
-     * @param accountId     The user {@link LocalAccount} Id
-     * @param categoryTitle The category title which will be search in the db
-     * @return -1 if there is no such category else the corresponding id
-     */
-    @NonNull
-    @WorkerThread
-    private Long getOrCreateCategoryIdByTitle(long accountId, @NonNull String categoryTitle) {
-        validateAccountId(accountId);
-        Long categoryId = getCategoryDao().getCategoryIdByTitle(accountId, categoryTitle);
-        if (categoryId > 0) {
-            return categoryId;
-        } else {
-            Category entity = new Category();
-            entity.setAccountId(accountId);
-            entity.setTitle(categoryTitle);
-            return getCategoryDao().addCategory(entity);
-        }
-    }
-
-    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, NoteEntity note, long newAccountId) {
-        // Add new note
-        addNoteAndSync(ssoAccount, newAccountId, new NoteEntity(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), null));
-        deleteNoteAndSync(ssoAccount, note.getId());
-
-        notifyWidgets();
-        syncHelper.scheduleSync(ssoAccount, true);
-    }
-
-    /**
-     * Marks a Note in the Database as Deleted. In the next Synchronization it will be deleted
-     * from the Server.
-     *
-     * @param id long - ID of the Note that should be deleted
-     */
-    public void deleteNoteAndSync(SingleSignOnAccount ssoAccount, long id) {
-        getNoteDao().updateStatus(id, DBStatus.LOCAL_DELETED);
-        notifyWidgets();
-        syncHelper.scheduleSync(ssoAccount, true);
-
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
-            if (shortcutManager != null) {
-                shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
-                    String shortcutId = id + "";
-                    if (shortcut.getId().equals(shortcutId)) {
-                        Log.v(TAG, "Removing shortcut for " + shortcutId);
-                        shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), context.getResources().getString(R.string.note_has_been_deleted));
-                    }
-                });
-            } else {
-                Log.e(TAG, ShortcutManager.class.getSimpleName() + "is null.");
-            }
-        }
+    public NoteServerSyncHelper getNoteServerSyncHelper() {
+        return NotesDatabase.serverSyncHelper;
     }
 
     /**
@@ -234,7 +140,7 @@ public abstract class NotesDatabase extends RoomDatabase {
         NoteEntity entity = new NoteEntity(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
         long id = addNote(accountId, entity);
         notifyWidgets();
-        syncHelper.scheduleSync(ssoAccount, true);
+        serverSyncHelper.scheduleSync(ssoAccount, true);
         return id;
     }
 
@@ -271,52 +177,76 @@ public abstract class NotesDatabase extends RoomDatabase {
         return getNoteDao().addNote(entity);
     }
 
-    private static void validateAccountId(long accountId) {
-        if (accountId < 1) {
-            throw new IllegalArgumentException("accountId must be greater than 0");
+    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, NoteEntity note, long newAccountId) {
+        // Add new note
+        addNoteAndSync(ssoAccount, newAccountId, new NoteEntity(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), null));
+        deleteNoteAndSync(ssoAccount, note.getId());
+
+        notifyWidgets();
+        serverSyncHelper.scheduleSync(ssoAccount, true);
+    }
+
+    @NonNull
+    @WorkerThread
+    public Map<Long, Long> getIdMap(long accountId) {
+        validateAccountId(accountId);
+        Map<Long, Long> result = new HashMap<>();
+        for (NoteEntity note : getNoteDao().getRemoteIdAndId(accountId)) {
+            result.put(note.getRemoteId(), note.getId());
         }
+        return result;
     }
 
     /**
-     * Notify about changed notes.
+     * This method return all of the categories with given accountId
+     *
+     * @param accountId The user account Id
+     * @return All of the categories with given accountId
      */
-    protected void notifyWidgets() {
-        updateSingleNoteWidgets(context);
-        updateNoteListWidgets(context);
+    @NonNull
+    @WorkerThread
+    public List<NavigationAdapter.CategoryNavigationItem> getCategories(long accountId) {
+        return searchCategories(accountId, null);
     }
 
-
-    void updateDynamicShortcuts(long accountId) {
-        new Thread(() -> {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-                ShortcutManager shortcutManager = context.getApplicationContext().getSystemService(ShortcutManager.class);
-                if (shortcutManager != null) {
-                    if (!shortcutManager.isRateLimitingActive()) {
-                        List<ShortcutInfo> newShortcuts = new ArrayList<>();
-
-                        for (NoteEntity note : getNoteDao().getRecentNotes(accountId)) {
-                            if (!TextUtils.isEmpty(note.getTitle())) {
-                                Intent intent = new Intent(context.getApplicationContext(), EditNoteActivity.class);
-                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-                                intent.setAction(ACTION_SHORTCUT);
-
-                                newShortcuts.add(new ShortcutInfo.Builder(context.getApplicationContext(), note.getId() + "")
-                                        .setShortLabel(note.getTitle() + "")
-                                        .setIcon(Icon.createWithResource(context.getApplicationContext(), note.getFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                        .setIntent(intent)
-                                        .build());
-                            } else {
-                                // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
-                                Log.e(TAG, "shortLabel cannot be empty " + note);
-                            }
-                        }
-                        Log.d(TAG, "Update dynamic shortcuts");
-                        shortcutManager.removeAllDynamicShortcuts();
-                        shortcutManager.addDynamicShortcuts(newShortcuts);
-                    }
-                }
+    /**
+     * This method return the category list containing all of the categories containing the
+     * search pattern and matched with the given accountId
+     * The join operation is used because it is needed that the number of notes in each category
+     * If search pattern is null, this method will return all of the categories for corresponding accountId
+     *
+     * @param accountId The user account ID
+     * @param search    The search pattern
+     * @return The category list containing all of the categories matched
+     */
+    @NonNull
+    @WorkerThread
+    public List<NavigationAdapter.CategoryNavigationItem> searchCategories(long accountId, String search) {
+        validateAccountId(accountId);
+        List<CategoryWithNotesCount> counters = getCategoryDao().searchCategories(accountId, search.trim());
+        List<NavigationAdapter.CategoryNavigationItem> categories = new ArrayList<>(counters.size());
+        for (CategoryWithNotesCount counter : counters) {
+            Resources res = context.getResources();
+            String category = counter.getTitle().toLowerCase();
+            int icon = NavigationAdapter.ICON_FOLDER;
+            if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
+                icon = R.drawable.ic_library_music_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
+                icon = R.drawable.ic_local_movies_grey600_24dp;
+            } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
+                icon = R.drawable.ic_work_grey600_24dp;
             }
-        }).start();
+            categories.add(new NavigationAdapter.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId()));
+        }
+        return categories;
+    }
+
+    public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId, @Nullable ISyncCallback callback) {
+        getNoteDao().toggleFavorite(noteId);
+        if (callback != null) {
+            serverSyncHelper.addCallbackPush(ssoAccount, callback);
+        }
+        serverSyncHelper.scheduleSync(ssoAccount, true);
     }
 
     /**
@@ -336,137 +266,9 @@ public abstract class NotesDatabase extends RoomDatabase {
         getNoteDao().updateCategory(note.getId(), categoryId);
         getCategoryDao().removeEmptyCategory(note.getAccountId());
         if (callback != null) {
-            syncHelper.addCallbackPush(ssoAccount, callback);
+            serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
-        syncHelper.scheduleSync(ssoAccount, true);
-    }
-
-    @NonNull
-    @WorkerThread
-    public Map<Long, Long> getIdMap(long accountId) {
-        validateAccountId(accountId);
-        Map<Long, Long> result = new HashMap<>();
-        for (NoteEntity note : getNoteDao().getRemoteIdAndId(accountId)) {
-            result.put(note.getRemoteId(), note.getId());
-        }
-        return result;
-    }
-
-    /**
-     * Modifies the sorting method for one category, the category can be normal category or
-     * one of "All notes", "Favorite", and "Uncategorized".
-     * If category is one of these three, sorting method will be modified in android.content.SharedPreference.
-     * The user can determine use which sorting method to show the notes for a category.
-     * When the user changes the sorting method, this method should be called.
-     *
-     * @param accountId     The user accountID
-     * @param category      The category to be modified
-     * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
-     */
-    public void modifyCategoryOrder(
-            long accountId, it.niedermann.owncloud.notes.shared.model.Category category, CategorySortingMethod sortingMethod) {
-        validateAccountId(accountId);
-
-        final Context ctx = context.getApplicationContext();
-        final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
-        int orderIndex = sortingMethod.getCSMID();
-        if (category.category == null) {
-            if (category.favorite != null && category.favorite) {
-                // Favorite
-                sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_favorites),
-                        orderIndex);
-            } else {
-                // All notes
-                sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_all_notes),
-                        orderIndex);
-            }
-        } else if (category.category.isEmpty()) {
-            // Uncategorized
-            sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                            ' ' + ctx.getString(R.string.action_uncategorized),
-                    orderIndex);
-        } else {
-            getCategoryDao().modifyCategoryOrderByTitle(accountId, category.category, sortingMethod);
-            return;
-        }
-        sp.apply();
-    }
-
-    /**
-     * Gets the sorting method of a category, the category can be normal category or
-     * one of "All notes", "Favorite", and "Uncategorized".
-     * If category is one of these three, sorting method will be got from android.content.SharedPreference.
-     * The sorting method of the category can be used to decide
-     * to use which sorting method to show the notes for each categories.
-     *
-     * @param accountId The user accountID
-     * @param category  The category
-     * @return The sorting method in CategorySortingMethod enum format
-     */
-    public CategorySortingMethod getCategoryOrder(long accountId, it.niedermann.owncloud.notes.shared.model.Category category) {
-        validateAccountId(accountId);
-
-        final Context ctx = context.getApplicationContext();
-        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
-        int orderIndex;
-
-        if (category.category == null) {
-            if (category.favorite != null && category.favorite) {
-                // Favorite
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_favorites),
-                        0);
-            } else {
-                // All notes
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_all_notes),
-                        0);
-            }
-        } else if (category.category.isEmpty()) {
-            // Uncategorized
-            orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                            ' ' + ctx.getString(R.string.action_uncategorized),
-                    0);
-        } else {
-            return getCategoryDao().getCategoryOrderByTitle(accountId, category.category);
-        }
-
-        return CategorySortingMethod.getCSM(orderIndex);
-    }
-
-    public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId, @Nullable ISyncCallback callback) {
-        getNoteDao().toggleFavorite(noteId);
-        if (callback != null) {
-            syncHelper.addCallbackPush(ssoAccount, callback);
-        }
-        syncHelper.scheduleSync(ssoAccount, true);
-    }
-
-    /**
-     * Updates a single Note with data from the server, (if it was not modified locally).
-     * Thereby, an optimistic concurrency control is realized in order to prevent conflicts arising due to parallel changes from the UI and synchronization.
-     * This is used by the synchronization task, hence no Synchronization will be triggered. Use updateNoteAndSync() instead!
-     *
-     * @param id                        local ID of Note
-     * @param remoteNote                Note from the server.
-     * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
-     */
-    void updateNote(long accountId, long id, @NonNull NoteEntity remoteNote, @Nullable NoteEntity forceUnchangedDBNoteState) {
-        validateAccountId(accountId);
-        // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
-        getNoteDao().updateRemoteId(id, remoteNote.getRemoteId());
-
-        // The other columns have to be updated in dependency of forceUnchangedDBNoteState,
-        // since the Synchronization-Task must not overwrite locales changes!
-        if (forceUnchangedDBNoteState != null) {
-            getNoteDao().updateIfModifiedLocallyDuringSync(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory().getTitle(), remoteNote.getETag(), remoteNote.getContent());
-        } else {
-            getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory().getTitle(), remoteNote.getETag(), remoteNote.getContent());
-        }
-        getCategoryDao().removeEmptyCategory(accountId);
-        Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "");
+        serverSyncHelper.scheduleSync(ssoAccount, true);
     }
 
     /**
@@ -502,9 +304,9 @@ public abstract class NotesDatabase extends RoomDatabase {
         if (rows > 0) {
             notifyWidgets();
             if (callback != null) {
-                syncHelper.addCallbackPush(ssoAccount, callback);
+                serverSyncHelper.addCallbackPush(ssoAccount, callback);
             }
-            syncHelper.scheduleSync(ssoAccount, true);
+            serverSyncHelper.scheduleSync(ssoAccount, true);
             return newNote;
         } else {
             if (callback != null) {
@@ -512,6 +314,109 @@ public abstract class NotesDatabase extends RoomDatabase {
             }
             return oldNote;
         }
+    }
+
+    /**
+     * Marks a Note in the Database as Deleted. In the next Synchronization it will be deleted
+     * from the Server.
+     *
+     * @param id long - ID of the Note that should be deleted
+     */
+    public void deleteNoteAndSync(SingleSignOnAccount ssoAccount, long id) {
+        getNoteDao().updateStatus(id, DBStatus.LOCAL_DELETED);
+        notifyWidgets();
+        serverSyncHelper.scheduleSync(ssoAccount, true);
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
+            if (shortcutManager != null) {
+                shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
+                    String shortcutId = id + "";
+                    if (shortcut.getId().equals(shortcutId)) {
+                        Log.v(TAG, "Removing shortcut for " + shortcutId);
+                        shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), context.getResources().getString(R.string.note_has_been_deleted));
+                    }
+                });
+            } else {
+                Log.e(TAG, ShortcutManager.class.getSimpleName() + "is null.");
+            }
+        }
+    }
+
+    void deleteNote(long id, @NonNull DBStatus forceDBStatus) {
+        getNoteDao().deleteByCardId(id, forceDBStatus);
+        getCategoryDao().removeEmptyCategory(id);
+    }
+
+    /**
+     * Notify about changed notes.
+     */
+    protected void notifyWidgets() {
+        updateSingleNoteWidgets(context);
+        updateNoteListWidgets(context);
+    }
+
+    void updateDynamicShortcuts(long accountId) {
+        new Thread(() -> {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+                ShortcutManager shortcutManager = context.getApplicationContext().getSystemService(ShortcutManager.class);
+                if (shortcutManager != null) {
+                    if (!shortcutManager.isRateLimitingActive()) {
+                        List<ShortcutInfo> newShortcuts = new ArrayList<>();
+
+                        for (NoteEntity note : getNoteDao().getRecentNotes(accountId)) {
+                            if (!TextUtils.isEmpty(note.getTitle())) {
+                                Intent intent = new Intent(context.getApplicationContext(), EditNoteActivity.class);
+                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+                                intent.setAction(ACTION_SHORTCUT);
+
+                                newShortcuts.add(new ShortcutInfo.Builder(context.getApplicationContext(), note.getId() + "")
+                                        .setShortLabel(note.getTitle() + "")
+                                        .setIcon(Icon.createWithResource(context.getApplicationContext(), note.getFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                        .setIntent(intent)
+                                        .build());
+                            } else {
+                                // Prevent crash https://github.com/stefan-niedermann/nextcloud-notes/issues/613
+                                Log.e(TAG, "shortLabel cannot be empty " + note);
+                            }
+                        }
+                        Log.d(TAG, "Update dynamic shortcuts");
+                        shortcutManager.removeAllDynamicShortcuts();
+                        shortcutManager.addDynamicShortcuts(newShortcuts);
+                    }
+                }
+            }
+        }).start();
+    }
+
+    @SuppressWarnings("UnusedReturnValue")
+    public long addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
+        final LocalAccount entity = new LocalAccount();
+        entity.setUrl(url);
+        entity.setUserName(username);
+        entity.setAccountName(accountName);
+        entity.setCapabilities(capabilities);
+        return getLocalAccountDao().insert(entity);
+    }
+
+    public void updateBrand(long accountId, @NonNull Capabilities capabilities) throws IllegalArgumentException {
+        validateAccountId(accountId);
+
+        String color;
+        try {
+            color = ColorUtil.formatColorToParsableHexString(capabilities.getColor()).substring(1);
+        } catch (Exception e) {
+            color = "0082C9";
+        }
+
+        String textColor;
+        try {
+            textColor = ColorUtil.formatColorToParsableHexString(capabilities.getTextColor()).substring(1);
+        } catch (Exception e) {
+            textColor = "FFFFFF";
+        }
+
+        getLocalAccountDao().updateBrand(accountId, color, textColor);
     }
 
     /**
@@ -574,40 +479,145 @@ public abstract class NotesDatabase extends RoomDatabase {
         Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + localAccount.getId());
     }
 
-    public List<NavigationAdapter.CategoryNavigationItem> searchCategories(long accountId, String search) {
-        validateAccountId(accountId);
-        List<CategoryWithNotesCount> counters = getCategoryDao().searchCategories(accountId, search.trim());
-        List<NavigationAdapter.CategoryNavigationItem> categories = new ArrayList<>(counters.size());
-        for(CategoryWithNotesCount counter: counters) {
-            Resources res = context.getResources();
-            String category = counter.getTitle().toLowerCase();
-            int icon = NavigationAdapter.ICON_FOLDER;
-            if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
-                icon = R.drawable.ic_library_music_grey600_24dp;
-            } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
-                icon = R.drawable.ic_local_movies_grey600_24dp;
-            } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
-                icon = R.drawable.ic_work_grey600_24dp;
-            }
-            categories.add(new NavigationAdapter.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId()));
-        }
-        return categories;
-    }
-
     /**
-     * This method return all of the categories with given accountId
+     * Get the category if with the given category title
+     * The method does not support fuzzy search.
+     * Because the category title in database is unique, there will not at most one result.
+     * If there is no such category, database will create it if create flag is set.
+     * Otherwise this method will return -1 as default value.
      *
-     * @param accountId The user account Id
-     * @return All of the categories with given accountId
+     * @param accountId     The user {@link LocalAccount} Id
+     * @param categoryTitle The category title which will be search in the db
+     * @return -1 if there is no such category else the corresponding id
      */
     @NonNull
     @WorkerThread
-    public List<NavigationAdapter.CategoryNavigationItem> getCategories(long accountId) {
-        return searchCategories(accountId, null);
+    private Long getOrCreateCategoryIdByTitle(long accountId, @NonNull String categoryTitle) {
+        validateAccountId(accountId);
+        Long categoryId = getCategoryDao().getCategoryIdByTitle(accountId, categoryTitle);
+        if (categoryId > 0) {
+            return categoryId;
+        } else {
+            Category entity = new Category();
+            entity.setAccountId(accountId);
+            entity.setTitle(categoryTitle);
+            return getCategoryDao().addCategory(entity);
+        }
     }
 
-    public NoteServerSyncHelper getNoteServerSyncHelper() {
-        return NotesDatabase.syncHelper;
+    private static void validateAccountId(long accountId) {
+        if (accountId < 1) {
+            throw new IllegalArgumentException("accountId must be greater than 0");
+        }
+    }
+
+
+    /**
+     * Modifies the sorting method for one category, the category can be normal category or
+     * one of "All notes", "Favorite", and "Uncategorized".
+     * If category is one of these three, sorting method will be modified in android.content.SharedPreference.
+     * The user can determine use which sorting method to show the notes for a category.
+     * When the user changes the sorting method, this method should be called.
+     *
+     * @param accountId     The user accountID
+     * @param category      The category to be modified
+     * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
+     */
+    public void modifyCategoryOrder(long accountId, OldCategory category, CategorySortingMethod sortingMethod) {
+        validateAccountId(accountId);
+
+        final Context ctx = context.getApplicationContext();
+        final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
+        int orderIndex = sortingMethod.getCSMID();
+        if (category.category == null) {
+            if (category.favorite != null && category.favorite) {
+                // Favorite
+                sp.putInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_favorites),
+                        orderIndex);
+            } else {
+                // All notes
+                sp.putInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_all_notes),
+                        orderIndex);
+            }
+        } else if (category.category.isEmpty()) {
+            // Uncategorized
+            sp.putInt(ctx.getString(R.string.action_sorting_method) +
+                            ' ' + ctx.getString(R.string.action_uncategorized),
+                    orderIndex);
+        } else {
+            getCategoryDao().modifyCategoryOrderByTitle(accountId, category.category, sortingMethod);
+            return;
+        }
+        sp.apply();
+    }
+
+    /**
+     * Gets the sorting method of a category, the category can be normal category or
+     * one of "All notes", "Favorite", and "Uncategorized".
+     * If category is one of these three, sorting method will be got from android.content.SharedPreference.
+     * The sorting method of the category can be used to decide
+     * to use which sorting method to show the notes for each categories.
+     *
+     * @param accountId The user accountID
+     * @param category  The category
+     * @return The sorting method in CategorySortingMethod enum format
+     */
+    public CategorySortingMethod getCategoryOrder(long accountId, OldCategory category) {
+        validateAccountId(accountId);
+
+        final Context ctx = context.getApplicationContext();
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
+        int orderIndex;
+
+        if (category.category == null) {
+            if (category.favorite != null && category.favorite) {
+                // Favorite
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_favorites),
+                        0);
+            } else {
+                // All notes
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
+                                ' ' + ctx.getString(R.string.label_all_notes),
+                        0);
+            }
+        } else if (category.category.isEmpty()) {
+            // Uncategorized
+            orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
+                            ' ' + ctx.getString(R.string.action_uncategorized),
+                    0);
+        } else {
+            return getCategoryDao().getCategoryOrderByTitle(accountId, category.category);
+        }
+
+        return CategorySortingMethod.getCSM(orderIndex);
+    }
+
+    /**
+     * Updates a single Note with data from the server, (if it was not modified locally).
+     * Thereby, an optimistic concurrency control is realized in order to prevent conflicts arising due to parallel changes from the UI and synchronization.
+     * This is used by the synchronization task, hence no Synchronization will be triggered. Use updateNoteAndSync() instead!
+     *
+     * @param id                        local ID of Note
+     * @param remoteNote                Note from the server.
+     * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
+     */
+    void updateNote(long accountId, long id, @NonNull NoteEntity remoteNote, @Nullable NoteEntity forceUnchangedDBNoteState) {
+        validateAccountId(accountId);
+        // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
+        getNoteDao().updateRemoteId(id, remoteNote.getRemoteId());
+
+        // The other columns have to be updated in dependency of forceUnchangedDBNoteState,
+        // since the Synchronization-Task must not overwrite locales changes!
+        if (forceUnchangedDBNoteState != null) {
+            getNoteDao().updateIfModifiedLocallyDuringSync(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory().getTitle(), remoteNote.getETag(), remoteNote.getContent());
+        } else {
+            getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory().getTitle(), remoteNote.getETag(), remoteNote.getContent());
+        }
+        getCategoryDao().removeEmptyCategory(accountId);
+        Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "");
     }
 
     public Context getContext() {

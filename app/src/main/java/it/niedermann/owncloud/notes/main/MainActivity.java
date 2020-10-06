@@ -85,6 +85,7 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
+import it.niedermann.owncloud.notes.shared.model.OldCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static android.view.View.GONE;
@@ -143,7 +144,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private NavigationItem itemFavorites;
     private NavigationItem itemUncategorized;
     @NonNull
-    private it.niedermann.owncloud.notes.shared.model.Category navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(null, null);
+    private OldCategory navigationSelection = new OldCategory(null, null);
     private String navigationOpen = "";
     boolean canMoveNoteToAnotherAccounts = false;
     private ActionMode mActionMode;
@@ -177,12 +178,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
             } else if (ACTION_FAVORITES.equals(getIntent().getAction())) {
                 categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
-                navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(null, true);
+                navigationSelection = new OldCategory(null, true);
             }
         } else {
             Object savedCategory = savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
             if (savedCategory != null) {
-                navigationSelection = (it.niedermann.owncloud.notes.shared.model.Category) savedCategory;
+                navigationSelection = (OldCategory) savedCategory;
             }
             navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
             categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
@@ -432,13 +433,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 adapterCategories.setSelectedItem(item.id);
                 // update current selection
                 if (itemRecent.equals(item)) {
-                    navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(null, null);
+                    navigationSelection = new OldCategory(null, null);
                 } else if (itemFavorites.equals(item)) {
-                    navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(null, true);
+                    navigationSelection = new OldCategory(null, true);
                 } else if (itemUncategorized != null && itemUncategorized.equals(item)) {
-                    navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category("", null);
+                    navigationSelection = new OldCategory("", null);
                 } else {
-                    navigationSelection = new it.niedermann.owncloud.notes.shared.model.Category(item.label, null);
+                    navigationSelection = new OldCategory(item.label, null);
                 }
 
                 // auto-close sub-folder in Navigation if selection is outside of that folder

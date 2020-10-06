@@ -4,14 +4,14 @@ import androidx.annotation.Nullable;
 
 import java.io.Serializable;
 
-public class Category implements Serializable {
+public class OldCategory implements Serializable {
 
     @Nullable
     public final String category;
     @Nullable
     public final Boolean favorite;
 
-    public Category(@Nullable String category, @Nullable Boolean favorite) {
+    public OldCategory(@Nullable String category, @Nullable Boolean favorite) {
         this.category = category;
         this.favorite = favorite;
     }

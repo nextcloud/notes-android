@@ -25,7 +25,7 @@ import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.Category;
+import it.niedermann.owncloud.notes.shared.model.OldCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountPickerListener {
@@ -159,7 +159,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         String category = null;
         boolean favorite = false;
         if (intent.hasExtra(PARAM_CATEGORY)) {
-            Category categoryPreselection = (Category) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
+            OldCategory categoryPreselection = (OldCategory) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
             category = categoryPreselection.category;
             favorite = categoryPreselection.favorite != null ? categoryPreselection.favorite : false;
         }

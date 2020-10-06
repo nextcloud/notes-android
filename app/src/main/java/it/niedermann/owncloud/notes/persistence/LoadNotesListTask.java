@@ -15,7 +15,7 @@ import java.util.List;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.items.section.SectionItem;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.shared.model.Category;
+import it.niedermann.owncloud.notes.shared.model.OldCategory;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
@@ -24,11 +24,11 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
 
     private final Context context;
     private final NotesLoadedListener callback;
-    private final Category category;
+    private final OldCategory category;
     private final CharSequence searchQuery;
     private final long accountId;
 
-    public LoadNotesListTask(long accountId, @NonNull Context context, @NonNull NotesLoadedListener callback, @NonNull Category category, @Nullable CharSequence searchQuery) {
+    public LoadNotesListTask(long accountId, @NonNull Context context, @NonNull NotesLoadedListener callback, @NonNull OldCategory category, @Nullable CharSequence searchQuery) {
         this.context = context;
         this.callback = callback;
         this.category = category;
