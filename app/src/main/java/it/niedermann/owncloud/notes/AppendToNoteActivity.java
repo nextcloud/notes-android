@@ -45,7 +45,7 @@ public class AppendToNoteActivity extends MainActivity {
             } else {
                 newContent = receivedText;
             }
-            sqliteOpenHelperDatabase.updateNoteAndSync(ssoAccount, localAccount, NoteEntity.entityToDBNote(note), newContent, () -> Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show());
+            roomDatabase.updateNoteAndSync(ssoAccount, localAccount, note, newContent, null, () -> Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show());
         } else {
             Toast.makeText(this, R.string.shared_text_empty, Toast.LENGTH_SHORT).show();
         }

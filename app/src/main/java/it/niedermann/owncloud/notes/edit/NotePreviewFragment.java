@@ -216,7 +216,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                 TextProcessorChain chain = defaultTextProcessorChain(note);
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
                 sqliteOpenHelperDatabase.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
-                    note = NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(note.getAccountId(), note.getId()));
+                    note = roomDatabase.getNoteDao().getNote(note.getAccountId(), note.getId());
                     changedText = note.getContent();
                     binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);
@@ -237,7 +237,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
     }
 
-    private TextProcessorChain defaultTextProcessorChain(DBNote note) {
+    private TextProcessorChain defaultTextProcessorChain(NoteEntity note) {
         TextProcessorChain chain = new TextProcessorChain();
         chain.add(new NoteLinksProcessor(new HashSet<>(roomDatabase.getNoteDao().getRemoteIds(note.getAccountId()))));
         chain.add(new WwwLinksProcessor());

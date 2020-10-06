@@ -1,28 +1,20 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
-
 import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.shared.model.DBStatus;
-import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 
 @Dao
 public interface CategoryDao {
 
     @Insert
     Long addCategory(CategoryEntity entity);
+
+    @Query("SELECT * FROM CategoryEntity WHERE id = :id")
+    CategoryEntity getCategory(long id);
 
     /**
      * This function will be called when the category or note is updated.

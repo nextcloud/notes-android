@@ -25,6 +25,7 @@ import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridOnlyTit
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithoutExcerptBinding;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListSectionItemBinding;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
@@ -98,7 +99,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      *
      * @param note Note that should be added.
      */
-    public void add(@NonNull DBNote note) {
+    public void add(@NonNull NoteEntity note) {
         itemList.add(0, note);
         notifyItemInserted(0);
         notifyItemChanged(0);

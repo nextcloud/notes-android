@@ -23,6 +23,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.main.MainActivity;
+import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
@@ -252,13 +253,13 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     @Override
-    public void onNoteUpdated(DBNote note) {
+    public void onNoteUpdated(NoteEntity note) {
         if (note != null) {
             binding.toolbar.setTitle(note.getTitle());
-            if (note.getCategory().isEmpty()) {
+            if (note.getCategory().getTitle().isEmpty()) {
                 binding.toolbar.setSubtitle(null);
             } else {
-                binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
+                binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory().getTitle()));
             }
         } else {
             // Maybe account is not authenticated -> note == null

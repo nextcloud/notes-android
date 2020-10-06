@@ -2,10 +2,11 @@ package it.niedermann.owncloud.notes.persistence.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
@@ -19,6 +20,9 @@ public interface NoteDao {
 
     @Insert
     long addNote(NoteEntity noteEntity);
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    int updateNote(NoteEntity newNote);
 
     /**
      * Returns a list of all Notes in the Database

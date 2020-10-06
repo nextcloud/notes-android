@@ -2,17 +2,20 @@ package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.Relation;
 import androidx.room.TypeConverters;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.Item;
 
 @Entity()
-public class NoteEntity {
+public class NoteEntity implements Serializable, Item {
     @PrimaryKey
     private Long id;
     private Long remoteId;
@@ -167,6 +170,12 @@ public class NoteEntity {
                 entity.getExcerpt(),
                 entity.getScrollY()
         );
+    }
+
+    @Ignore
+    @Override
+    public boolean isSection() {
+        return false;
     }
 }
 //                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +

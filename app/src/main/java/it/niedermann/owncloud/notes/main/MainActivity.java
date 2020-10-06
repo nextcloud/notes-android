@@ -78,6 +78,7 @@ import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvide
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.NotesRoomDatabase;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
+import it.niedermann.owncloud.notes.persistence.entity.CategoryEntity;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
@@ -130,7 +131,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private boolean notAuthorizedAccountHandled = false;
 
     protected SingleSignOnAccount ssoAccount;
-    protected LocalAccount localAccount;
+    protected LocalAccountEntity localAccount;
 
     protected DrawerLayoutBinding binding;
     protected ActivityNotesListViewBinding activityBinding;
@@ -226,7 +227,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             if (localAccount == null) {
                 List<LocalAccountEntity> localAccounts = roomDatabase.getLocalAccountDao().getAccounts();
                 if (localAccounts.size() > 0) {
-                    localAccount = entityToLocalAccount(localAccounts.get(0));
+                    localAccount = localAccounts.get(0);
                 }
             }
             if (!notAuthorizedAccountHandled) {
@@ -256,10 +257,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private void selectAccount(String accountName) {
         fabCreate.hide();
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
-        localAccount = entityToLocalAccount(roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(accountName));
+        localAccount = roomDatabase.getLocalAccountDao().getLocalAccountByAccountName(accountName);
         if (localAccount != null) {
             try {
-                BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
+                BrandingUtil.saveBrandColors(this, Color.parseColor(localAccount.getColor()), Color.parseColor(localAccount.getTextColor()));
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
                 new NotesListViewItemTouchHelper(ssoAccount, this, sqliteOpenHelperDatabase, roomDatabase, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
                         .attachToRecyclerView(listView);
@@ -380,9 +381,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                         capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, localAccount.getCapabilitiesETag());
                         roomDatabase.getLocalAccountDao().updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
                         roomDatabase.updateBrand(localAccount.getId(), capabilities);
-                        localAccount.setColor(Color.parseColor(capabilities.getColor()));
-                        localAccount.setTextColor(Color.parseColor(capabilities.getTextColor()));
-                        BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
+                        localAccount.setColor(capabilities.getColor());
+                        localAccount.setTextColor(capabilities.getTextColor());
+                        BrandingUtil.saveBrandColors(this, Color.parseColor(localAccount.getColor()), Color.parseColor(localAccount.getTextColor()));
                         sqliteOpenHelperDatabase.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
                         Log.i(TAG, capabilities.toString());
                     } catch (Exception e) {
@@ -763,7 +764,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
                     Bundle bundle = data.getExtras();
                     if (bundle != null && bundle.containsKey(CREATED_NOTE)) {
-                        DBNote createdNote = (DBNote) bundle.getSerializable(CREATED_NOTE);
+                        NoteEntity createdNote = (NoteEntity) bundle.getSerializable(CREATED_NOTE);
                         if (createdNote != null) {
                             adapter.add(createdNote);
                         } else {
@@ -837,7 +838,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             if (url != null) {
                 Glide
                         .with(this)
-                        .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
+                        .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUsername()) + "/64")
                         .placeholder(R.drawable.ic_account_circle_grey_24dp)
                         .error(R.drawable.ic_account_circle_grey_24dp)
                         .apply(RequestOptions.circleCropTransform())
@@ -964,7 +965,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         if (localAccount.getId() == this.localAccount.getId()) {
             List<LocalAccountEntity> remainingAccounts = roomDatabase.getLocalAccountDao().getAccounts();
             if (remainingAccounts.size() > 0) {
-                this.localAccount = entityToLocalAccount(remainingAccounts.get(0));
+                this.localAccount = remainingAccounts.get(0);
                 selectAccount(this.localAccount.getAccountName());
             } else {
                 selectAccount(null);
@@ -980,7 +981,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         adapter.deselect(0);
         for (Integer i : selection) {
             DBNote note = (DBNote) adapter.getItem(i);
-            roomDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), NoteEntity.entityToDBNote(roomDatabase.getNoteDao().getNote(note.getAccountId(), note.getId())), account.getId());
+            roomDatabase.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), roomDatabase.getNoteDao().getNote(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);
@@ -996,8 +997,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     @Override
     public void onCategoryChosen(String category) {
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
-            DBNote note = (DBNote) adapter.getItem(i);
-            note.setCategory(category);
+            NoteEntity note = (NoteEntity) adapter.getItem(i);
+            CategoryEntity c = new CategoryEntity();
+            c.setTitle(category);
+            note.setCategory(c);
             roomDatabase.setCategory(ssoAccount, note, category, this::refreshLists);
         }
 

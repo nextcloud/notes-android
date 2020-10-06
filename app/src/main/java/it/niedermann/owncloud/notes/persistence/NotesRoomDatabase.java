@@ -1,10 +1,12 @@
 package it.niedermann.owncloud.notes.persistence;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.text.TextUtils;
@@ -24,6 +26,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +45,7 @@ import it.niedermann.owncloud.notes.persistence.entity.LocalAccountEntity;
 import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetNotesListEntity;
 import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
+import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -49,7 +53,9 @@ import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
+import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
@@ -181,9 +187,9 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
         }
     }
 
-    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, DBNote note, long newAccountId) {
+    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, NoteEntity note, long newAccountId) {
         // Add new note
-        addNoteAndSync(ssoAccount, newAccountId, new CloudNote(0, note.getModified(), note.getTitle(), note.getContent(), note.isFavorite(), note.getCategory(), null));
+        addNoteAndSync(ssoAccount, newAccountId, new CloudNote(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), null));
         deleteNoteAndSync(ssoAccount, note.getId());
 
         notifyWidgets();
@@ -321,10 +327,10 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
      * @param category   The category title which should be used to find the category id.
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      */
-    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull DBNote note, @NonNull String category, @Nullable ISyncCallback callback) {
-        note.setCategory(category);
+    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull NoteEntity note, @NonNull String category, @Nullable ISyncCallback callback) {
+        note.setCategory(getCategoryDao().getCategory(getCategoryDao().getCategoryIdByTitle(getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name).getId(), category)));
         getNoteDao().updateStatus(note.getId(), DBStatus.LOCAL_DELETED);
-        long categoryId = getOrCreateCategoryIdByTitle(note.getAccountId(), note.getCategory());
+        long categoryId = getOrCreateCategoryIdByTitle(note.getAccountId(), note.getCategory().getTitle());
         getNoteDao().updateCategory(note.getId(), categoryId);
         getCategoryDao().removeEmptyCategory(note.getAccountId());
         if (callback != null) {
@@ -459,5 +465,50 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
         }
         getCategoryDao().removeEmptyCategory(accountId);
         Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "");
+    }
+
+    /**
+     * Updates a single Note with a new content.
+     * The title is derived from the new content automatically, and modified date as well as DBStatus are updated, too -- if the content differs to the state in the database.
+     *
+     * @param oldNote    Note to be changed
+     * @param newContent New content. If this is <code>null</code>, then <code>oldNote</code> is saved again (useful for undoing changes).
+     * @param newTitle   New title. If this is <code>null</code>, then either the old title is reused (in case the note has been synced before) or a title is generated (in case it is a new note)
+     * @param callback   When the synchronization is finished, this callback will be invoked (optional).
+     * @return changed {@link DBNote} if differs from database, otherwise the old {@link DBNote}.
+     */
+    public NoteEntity updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccountEntity localAccount, @NonNull NoteEntity oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
+        NoteEntity newNote;
+        if (newContent == null) {
+            newNote = new NoteEntity(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getCategory().getTitle(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
+        } else {
+            final String title;
+            if (newTitle != null) {
+                title = newTitle;
+            } else {
+                if (oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
+                    title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
+                } else {
+                    title = oldNote.getTitle();
+                }
+            }
+            newNote = new NoteEntity(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getCategory().getTitle(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
+        }
+        int rows = getNoteDao().updateNote(newNote);
+        getCategoryDao().removeEmptyCategory(localAccount.getId());
+        // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
+        if (rows > 0) {
+            notifyWidgets();
+            if (callback != null) {
+                syncHelper.addCallbackPush(ssoAccount, callback);
+            }
+            syncHelper.scheduleSync(ssoAccount, true);
+            return newNote;
+        } else {
+            if (callback != null) {
+                callback.onFinish();
+            }
+            return oldNote;
+        }
     }
 }
