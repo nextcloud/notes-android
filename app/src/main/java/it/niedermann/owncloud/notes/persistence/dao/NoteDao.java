@@ -84,6 +84,9 @@ public interface NoteDao {
     @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\" AND (title LIKE \"%\" + :query + \"%\" OR content LIKE \"%\" + :query + \"%\" OR category_title LIKE \"%\" + :query + \"%\") AND (category_title = :category OR title LIKE :category + \"/%\") AND favorite = :favorite ORDER BY favorite DESC, :sortingMethod")
     List<NoteEntity> searchNotes(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
 
+    /**
+     * Needed for subcategories, see https://github.com/stefan-niedermann/nextcloud-notes/issues/902
+     */
     @Query("SELECT * FROM NoteEntity WHERE accountId = :accountId AND status != \"LOCAL_DELETED\" AND (title LIKE \"%\" + :query + \"%\" OR content LIKE \"%\" + :query + \"%\" OR category_title LIKE \"%\" + :query + \"%\") AND (category_title = :category OR title LIKE :category + \"/%\") AND favorite = :favorite ORDER BY category_title, favorite DESC, :sortingMethod")
     List<NoteEntity> searchNotesSubcategory(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
 

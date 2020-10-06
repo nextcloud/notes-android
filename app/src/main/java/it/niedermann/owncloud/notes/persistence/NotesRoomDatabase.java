@@ -436,14 +436,6 @@ public abstract class NotesRoomDatabase extends RoomDatabase {
         syncHelper.scheduleSync(ssoAccount, true);
     }
 
-    public List<NoteEntity> searchNotes(long accountId, CharSequence query, String category, Boolean favorite, CategorySortingMethod sortingMethod) {
-        if (category != null) { // Needed for subcategories, see https://github.com/stefan-niedermann/nextcloud-notes/issues/902
-            return getNoteDao().searchNotesSubcategory(accountId, query, category, favorite, sortingMethod);
-        } else {
-            return getNoteDao().searchNotes(accountId, query, category, favorite, sortingMethod);
-        }
-    }
-
     /**
      * Updates a single Note with data from the server, (if it was not modified locally).
      * Thereby, an optimistic concurrency control is realized in order to prevent conflicts arising due to parallel changes from the UI and synchronization.

@@ -59,11 +59,11 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                     noteEntities = roomDatabase.getNoteDao().getNotes(data.getAccountId());
                     break;
                 case MODE_DISPLAY_STARRED:
-                    noteEntities = roomDatabase.searchNotes(data.getAccountId(), null, null, true, null);
+                    noteEntities = roomDatabase.getNoteDao().searchNotes(data.getAccountId(), null, null, true, null);
                     break;
                 case MODE_DISPLAY_CATEGORY:
                     if (data.getCategoryId() != null) {
-                        noteEntities = roomDatabase.searchNotes(data.getAccountId(), null, roomDatabase.getCategoryDao().getCategoryTitleById(data.getCategoryId()), null, null);
+                        noteEntities = roomDatabase.getNoteDao().searchNotes(data.getAccountId(), null, roomDatabase.getCategoryDao().getCategoryTitleById(data.getCategoryId()), null, null);
                     }
                     break;
             }
