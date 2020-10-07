@@ -189,12 +189,6 @@ public class Note implements Serializable, Item {
         this.category = category;
     }
 
-    @Ignore
-    @Override
-    public boolean isSection() {
-        return false;
-    }
-
     @NonNull
     @Override
     public String toString() {

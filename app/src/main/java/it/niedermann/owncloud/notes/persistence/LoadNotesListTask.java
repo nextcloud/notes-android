@@ -41,7 +41,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         List<Note> noteList;
         NotesDatabase db = NotesDatabase.getInstance(context);
         CategorySortingMethod sortingMethod = db.getCategoryOrder(accountId, category);
-        noteList = db.getNoteDao().searchNotesSubcategory(accountId, searchQuery == null ? "" : searchQuery.toString(), category.category, category.favorite, sortingMethod);
+        noteList = db.getNoteDao().searchNotesSubcategory(accountId, searchQuery == null ? "%" : "%" + searchQuery + "%", category.category, Boolean.TRUE.equals(category.favorite), sortingMethod);
 
         if (category.category == null) {
             if (sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC) {
@@ -59,8 +59,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     private List<Item> fillListByCategory(@NonNull List<Note> noteList) {
         List<Item> itemList = new ArrayList<>();
         String currentCategory = category.category;
-        for (Note entity : noteList) {
-            Note note = entity;
+        for (Note note : noteList) {
             if (currentCategory != null && !currentCategory.equals(note.getCategory())) {
                 itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory())));
             }

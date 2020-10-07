@@ -2,10 +2,12 @@ package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.room.Embedded;
 
-public class NoteWithCategory {
+import it.niedermann.owncloud.notes.shared.model.Item;
+
+public class NoteWithCategory implements Item {
     @Embedded
     private Note note;
-    @Embedded
+    @Embedded(prefix = "category_")
     private Category category;
 
     public Note getNote() {

@@ -11,6 +11,7 @@ import java.util.Set;
 
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
@@ -79,7 +80,7 @@ public interface NoteDao {
     /**
      * Returns a list of all Notes in the Database which were modified locally
      *
-     * @return {@link List< Note >}
+     * @return {@link List<Note>}
      */
     @Query("SELECT * FROM NOTE WHERE status != '' AND accountId = :accountId")
     List<Note> getLocalModifiedNotes(long accountId);
@@ -96,7 +97,9 @@ public interface NoteDao {
     /**
      * Needed for subcategories, see https://github.com/stefan-niedermann/nextcloud-notes/issues/902
      */
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE '%' + :query + '%' OR content LIKE '%' + :query + '%' OR categoryId LIKE '%' + :query + '%') AND (categoryId = :category OR title LIKE :category + '/%') AND favorite = :favorite ORDER BY categoryId, favorite DESC, :sortingMethod")
+    @Query("SELECT *, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+            "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND (CATEGORY.title = :category OR CATEGORY.title LIKE :category + '/%' " +
+            ") AND favorite = :favorite ORDER BY categoryId, favorite DESC, :sortingMethod")
     List<Note> searchNotesSubcategory(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
 
     @Query("UPDATE NOTE SET remoteId = :remoteId WHERE id = :id")
@@ -107,7 +110,7 @@ public interface NoteDao {
      * (i.e. all (!) user changeable columns (content, favorite, category) must still have the same value), uses reference value gathered at start of synchronization
      */
     @Query("UPDATE NOTE SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
-                    "WHERE id = :id AND content = :content AND favorite = :favorite AND categoryId = :categoryTitle")
+            "WHERE id = :id AND content = :content AND favorite = :favorite AND categoryId = :categoryTitle")
     void updateIfModifiedLocallyDuringSync(long id, long modified, String title, Boolean favorite, String categoryTitle, String eTag, String content);
 
 
@@ -115,6 +118,6 @@ public interface NoteDao {
      * used by: {@link NoteServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
      */
     @Query("UPDATE NOTE SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
-                    "WHERE id = :id AND status = '' AND (modified != :modified OR favorite != :favorite OR categoryId != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)")
+            "WHERE id = :id AND status = '' AND (modified != :modified OR favorite != :favorite OR categoryId != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)")
     void updateIfNotModifiedLocallyAndRemoteColumnHasChanged(long id, long modified, String title, Boolean favorite, String categoryTitle, String eTag, String content);
 }
