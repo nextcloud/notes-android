@@ -19,7 +19,6 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
-import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.nextcloud.android.sso.AccountImporter;
@@ -61,11 +60,6 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_16_17;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_17_18;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_18_19;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_19_20;
-import it.niedermann.owncloud.notes.persistence.migration.Migration_4_5;
-import it.niedermann.owncloud.notes.persistence.migration.Migration_5_6;
-import it.niedermann.owncloud.notes.persistence.migration.Migration_6_7;
-import it.niedermann.owncloud.notes.persistence.migration.Migration_7_8;
-import it.niedermann.owncloud.notes.persistence.migration.Migration_8_9;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -105,12 +99,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                 NotesDatabase.class,
                 NOTES_DB_NAME)
                 .addMigrations(
-                        new Migration_4_5(),
-                        new Migration_5_6(),
-                        new Migration_6_7(),
-                        new Migration_7_8(),
-                        new Migration_8_9(context, (supportSQLiteDatabase) -> { /* TODO */ }, () -> instance.notifyWidgets()),
-                        new Migration_9_10(),
+                        new Migration_9_10(), // v2.0.0
                         new Migration_10_11(context),
                         new Migration_11_12(context),
                         new Migration_12_13(context),
@@ -122,6 +111,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                         new Migration_18_19(context),
                         new Migration_19_20()
                 )
+                .fallbackToDestructiveMigrationOnDowngrade()
 //                .fallbackToDestructiveMigration()
                 .addCallback(new RoomDatabase.Callback() {
                     @Override

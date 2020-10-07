@@ -26,8 +26,7 @@ import it.niedermann.owncloud.notes.shared.model.Item;
                 @ForeignKey(
                         entity = Category.class,
                         parentColumns = "CATEGORY_ID",
-                        childColumns = "CATEGORY",
-                        onDelete = ForeignKey.SET_DEFAULT
+                        childColumns = "CATEGORY"
                 )
         },
         indices = {
@@ -51,20 +50,21 @@ public class Note implements Serializable, Item {
     private DBStatus status = DBStatus.VOID;
     @ColumnInfo(name = "TITLE")
     private String title;
-    @ColumnInfo(name = "MODIFIED")
+    @ColumnInfo(name = "MODIFIED", defaultValue = "0")
     private Calendar modified;
     @ColumnInfo(name = "CONTENT")
     private String content;
-    @ColumnInfo(name = "FAVORITE")
+    @ColumnInfo(name = "FAVORITE", defaultValue = "0")
     private Boolean favorite;
     @ColumnInfo(name = "CATEGORY")
     private Long categoryId;
     @ColumnInfo(name = "ETAG")
     private String eTag;
-    @ColumnInfo(name = "EXCERPT")
-    private String excerpt;
-    @ColumnInfo(name = "SCROLL_Y")
-    private Integer scrollY;
+    @NonNull
+    @ColumnInfo(name = "EXCERPT", defaultValue = "")
+    private String excerpt = "";
+    @ColumnInfo(name = "SCROLL_Y", defaultValue = "0")
+    private Integer scrollY = 0;
     @Ignore
     private String category;
 

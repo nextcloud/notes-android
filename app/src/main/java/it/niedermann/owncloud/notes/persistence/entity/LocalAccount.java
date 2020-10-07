@@ -48,10 +48,12 @@ public class LocalAccount {
     private Calendar modified;
     @ColumnInfo(name = "API_VERSION")
     private String apiVersion;
+    @NonNull
     @ColumnInfo(name = "COLOR", defaultValue = "000000")
-    private String color;
+    private String color = "000000";
+    @NonNull
     @ColumnInfo(name = "TEXT_COLOR", defaultValue = "0082C9")
-    private String textColor;
+    private String textColor = "0082C9";
     @ColumnInfo(name = "CAPABILITIES_ETAG")
     private String capabilitiesETag;
 
@@ -131,11 +133,12 @@ public class LocalAccount {
         setTextColor(capabilities.getTextColor());
     }
 
+     @NonNull
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(@NonNull String color) {
         try {
             this.color = ColorUtil.formatColorToParsableHexString(color).substring(1);
         } catch (Exception e) {
@@ -143,11 +146,12 @@ public class LocalAccount {
         }
     }
 
+    @NonNull
     public String getTextColor() {
         return textColor;
     }
 
-    public void setTextColor(String textColor) {
+    public void setTextColor(@NonNull String textColor) {
         try {
             this.textColor = ColorUtil.formatColorToParsableHexString(textColor).substring(1);
         } catch (Exception e) {
