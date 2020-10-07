@@ -1,7 +1,9 @@
 package it.niedermann.owncloud.notes.shared.model;
 
+import android.graphics.Color;
 import android.util.Log;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -10,6 +12,8 @@ import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
 import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
 
@@ -32,8 +36,11 @@ public class Capabilities {
     private static final String JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR_TEXT = "color-text";
 
     private String apiVersion = null;
-    private String color = null;
-    private String textColor = null;
+
+    @ColorInt
+    private Integer color = -16743735;
+    @ColorInt
+    private Integer textColor = -16777216;
     @Nullable
     private String eTag;
 
@@ -64,10 +71,18 @@ public class Capabilities {
                     if (capabilities.has(JSON_OCS_DATA_CAPABILITIES_THEMING)) {
                         final JSONObject theming = capabilities.getJSONObject(JSON_OCS_DATA_CAPABILITIES_THEMING);
                         if (theming.has(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR)) {
-                            this.color = theming.getString(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR);
+                            try {
+                                this.color = Color.parseColor(ColorUtil.formatColorToParsableHexString(theming.getString(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR)));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                         if (theming.has(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR_TEXT)) {
-                            this.textColor = theming.getString(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR_TEXT);
+                            try {
+                                this.textColor = Color.parseColor(ColorUtil.formatColorToParsableHexString(theming.getString(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR_TEXT)));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -81,17 +96,17 @@ public class Capabilities {
         return apiVersion;
     }
 
-    public String getColor() {
-        return color;
-    }
-
-    public String getTextColor() {
-        return textColor;
-    }
-
     @Nullable
     public String getETag() {
         return eTag;
+    }
+
+    public Integer getColor() {
+        return color;
+    }
+
+    public Integer getTextColor() {
+        return textColor;
     }
 
     @NonNull

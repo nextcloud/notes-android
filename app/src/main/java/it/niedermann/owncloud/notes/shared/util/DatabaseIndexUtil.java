@@ -27,8 +27,8 @@ public class DatabaseIndexUtil {
         db.execSQL("CREATE INDEX " + indexName + " ON " + table + "(" + column + ")");
     }
 
-    public static void dropIndexes(@NonNull SupportSQLiteDatabase db, String table) {
-        try (Cursor c = db.query("SELECT name, sql FROM sqlite_master WHERE type = 'index' AND name LIKE ?", new String[] {table + "_%"})) {
+    public static void dropIndexes(@NonNull SupportSQLiteDatabase db) {
+        try (Cursor c = db.query("SELECT name, sql FROM sqlite_master WHERE type = 'index'")) {
             while (c.moveToNext()) {
                 // Skip automatic indexes which we can't drop manually
                 if (c.getString(1) != null) {

@@ -37,7 +37,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.Categor
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
@@ -64,7 +64,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
-    private LocalAccount localAccount;
+    private Account localAccount;
     private SingleSignOnAccount ssoAccount;
 
     protected Note note;
@@ -94,7 +94,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         super.onCreate(savedInstanceState);
         try {
             this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
-            this.localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+            this.localAccount = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
 
             if (savedInstanceState == null) {
                 long id = requireArguments().getLong(PARAM_NOTE_ID);
@@ -102,7 +102,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
                     if (accountId > 0) {
                         /* Switch account if account id has been provided */
-                        this.localAccount = db.getLocalAccountDao().getAccount(accountId);
+                        this.localAccount = db.getAccountDao().getAccount(accountId);
                         SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccount.getAccountName());
                     }
                     isNew = false;
@@ -362,7 +362,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         listener.onNoteUpdated(note);
     }
 
-    public void moveNote(LocalAccount account) {
+    public void moveNote(Account account) {
         db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
         listener.close();
     }

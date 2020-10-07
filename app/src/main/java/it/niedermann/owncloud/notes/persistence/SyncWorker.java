@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 public class SyncWorker extends Worker {
 
@@ -39,7 +39,7 @@ public class SyncWorker extends Worker {
     @Override
     public Result doWork() {
         NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
-        for (LocalAccount account : db.getLocalAccountDao().getAccounts()) {
+        for (Account account : db.getAccountDao().getAccounts()) {
             try {
                 SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.v(TAG, "Starting background synchronization for " + ssoAccount.name);

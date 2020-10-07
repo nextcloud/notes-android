@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
@@ -23,38 +24,29 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
 @Entity(
-        tableName = "ACCOUNTS",
         indices = {
-                @Index(name = "ACCOUNTS_MODIFIED_idx", value = "MODIFIED"),
-                @Index(name = "ACCOUNTS_URL_idx", value = "URL"),
-                @Index(name = "ACCOUNTS_USERNAME_idx", value = "USERNAME"),
-                @Index(name = "ACCOUNTS_ACCOUNT_NAME_idx", value = "ACCOUNT_NAME"),
-                @Index(name = "ACCOUNTS_ETAG_idx", value = "ETAG")
+                @Index(name = "IDX_ACCOUNT_MODIFIED", value = "modified"),
+                @Index(name = "IDX_ACCOUNT_URL", value = "url"),
+                @Index(name = "IDX_ACCOUNT_USERNAME", value = "userName"),
+                @Index(name = "IDX_ACCOUNT_ACCOUNTNAME", value = "accountName"),
+                @Index(name = "IDX_ACCOUNT_ETAG", value = "eTag")
         }
 )
-public class LocalAccount {
+public class Account {
     @PrimaryKey
-    @ColumnInfo(name = "ID")
     private Long id;
-    @ColumnInfo(name = "URL")
     private String url;
-    @ColumnInfo(name = "USERNAME")
     private String userName;
-    @ColumnInfo(name = "ACCOUNT_NAME")
     private String accountName;
-    @ColumnInfo(name = "ETAG")
     private String eTag;
-    @ColumnInfo(name = "MODIFIED")
     private Calendar modified;
-    @ColumnInfo(name = "API_VERSION")
     private String apiVersion;
-    @NonNull
-    @ColumnInfo(name = "COLOR", defaultValue = "000000")
-    private String color = "000000";
-    @NonNull
-    @ColumnInfo(name = "TEXT_COLOR", defaultValue = "0082C9")
-    private String textColor = "0082C9";
-    @ColumnInfo(name = "CAPABILITIES_ETAG")
+    @ColorInt
+    @ColumnInfo(defaultValue = "-16743735")
+    private Integer color;
+    @ColorInt
+    @ColumnInfo(defaultValue = "-16777216")
+    private Integer textColor;
     private String capabilitiesETag;
 
     @Nullable
@@ -133,32 +125,6 @@ public class LocalAccount {
         setTextColor(capabilities.getTextColor());
     }
 
-     @NonNull
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(@NonNull String color) {
-        try {
-            this.color = ColorUtil.formatColorToParsableHexString(color).substring(1);
-        } catch (Exception e) {
-            this.color = "0082C9";
-        }
-    }
-
-    @NonNull
-    public String getTextColor() {
-        return textColor;
-    }
-
-    public void setTextColor(@NonNull String textColor) {
-        try {
-            this.textColor = ColorUtil.formatColorToParsableHexString(textColor).substring(1);
-        } catch (Exception e) {
-            this.textColor = "FFFFFF";
-        }
-    }
-
     @Nullable
     public ApiVersion getPreferredApiVersion() {
         return preferredApiVersion;
@@ -190,5 +156,21 @@ public class LocalAccount {
             e.printStackTrace();
             this.preferredApiVersion = null;
         }
+    }
+
+    public Integer getColor() {
+        return color;
+    }
+
+    public void setColor(Integer color) {
+        this.color = color;
+    }
+
+    public Integer getTextColor() {
+        return textColor;
+    }
+
+    public void setTextColor(Integer textColor) {
+        this.textColor = textColor;
     }
 }

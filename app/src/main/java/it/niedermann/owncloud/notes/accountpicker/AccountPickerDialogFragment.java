@@ -22,13 +22,13 @@ import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserAdapter;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserViewHolder;
 
 /**
- * A {@link DialogFragment} which provides an {@link LocalAccount} chooser that hides the given {@link LocalAccount}.
- * This can be useful when one wants to pick e. g. a target for move a note from one {@link LocalAccount} to another..
+ * A {@link DialogFragment} which provides an {@link Account} chooser that hides the given {@link Account}.
+ * This can be useful when one wants to pick e. g. a target for move a note from one {@link Account} to another..
  */
 public class AccountPickerDialogFragment extends BrandedDialogFragment {
 
@@ -59,7 +59,7 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final List<LocalAccount> accountsList = NotesDatabase.getInstance(getActivity()).getLocalAccountDao().getAccounts();
+        final List<Account> accountsList = NotesDatabase.getInstance(getActivity()).getAccountDao().getAccounts();
         final AlertDialog.Builder dialogBuilder = new BrandedAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null);

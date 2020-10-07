@@ -19,7 +19,7 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.shared.model.OldCategory;
@@ -45,7 +45,7 @@ public class NoteListWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             try {
                 final NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
-                final LocalAccount localAccount = db.getLocalAccountDao().getAccount(data.getAccountId());
+                final Account localAccount = db.getAccountDao().getAccount(data.getAccountId());
 
                 String category = null;
                 if (data.getCategoryId() != null) {
@@ -90,10 +90,10 @@ public class NoteListWidget extends AppWidgetProvider {
                     views.setEmptyView(R.id.note_list_widget_lv_dark, R.id.widget_note_list_placeholder_tv_dark);
                     awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv_dark);
                     if (BrandingUtil.isBrandingEnabled(context)) {
-                        views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", Color.parseColor('#' + localAccount.getColor()));
-                        views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", Color.parseColor('#' + localAccount.getTextColor()));
-                        views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", Color.parseColor('#' + localAccount.getTextColor()));
-                        views.setTextColor(R.id.widget_note_list_title_tv_dark, Color.parseColor('#' + localAccount.getTextColor()));
+                        views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", localAccount.getColor());
+                        views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", localAccount.getTextColor());
+                        views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", localAccount.getTextColor());
+                        views.setTextColor(R.id.widget_note_list_title_tv_dark, localAccount.getTextColor());
                     } else {
                         views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
                         views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", Color.WHITE);
@@ -111,10 +111,10 @@ public class NoteListWidget extends AppWidgetProvider {
                     views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
                     awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
                     if (BrandingUtil.isBrandingEnabled(context)) {
-                        views.setInt(R.id.widget_note_header, "setBackgroundColor", Color.parseColor('#' + localAccount.getColor()));
-                        views.setInt(R.id.widget_note_header_icon, "setColorFilter", Color.parseColor('#' + localAccount.getTextColor()));
-                        views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", Color.parseColor('#' + localAccount.getTextColor()));
-                        views.setTextColor(R.id.widget_note_list_title_tv, Color.parseColor('#' + localAccount.getTextColor()));
+                        views.setInt(R.id.widget_note_header, "setBackgroundColor", localAccount.getColor());
+                        views.setInt(R.id.widget_note_header_icon, "setColorFilter", localAccount.getTextColor());
+                        views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", localAccount.getTextColor());
+                        views.setTextColor(R.id.widget_note_list_title_tv, localAccount.getTextColor());
                     } else {
                         views.setInt(R.id.widget_note_header, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
                         views.setInt(R.id.widget_note_header_icon, "setColorFilter", Color.WHITE);

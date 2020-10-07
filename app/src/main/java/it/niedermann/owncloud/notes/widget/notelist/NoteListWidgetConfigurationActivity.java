@@ -26,7 +26,7 @@ import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
@@ -39,7 +39,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
 
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
-    private LocalAccount localAccount = null;
+    private Account localAccount = null;
 
     private NavigationAdapter adapterCategories;
     private NavigationAdapter.NavigationItem itemRecent;
@@ -54,7 +54,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
 
         db = NotesDatabase.getInstance(this);
         try {
-            this.localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
+            this.localAccount = db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();
             Toast.makeText(this, R.string.widget_not_logged_in, Toast.LENGTH_LONG).show();

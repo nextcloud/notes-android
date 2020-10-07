@@ -15,55 +15,46 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.Item;
 
 @Entity(
-        tableName = "NOTES",
         foreignKeys = {
                 @ForeignKey(
-                        entity = LocalAccount.class,
-                        parentColumns = "ID",
-                        childColumns = "ACCOUNT_ID",
+                        entity = Account.class,
+                        parentColumns = "id",
+                        childColumns = "accountId",
                         onDelete = ForeignKey.CASCADE
                 ),
                 @ForeignKey(
                         entity = Category.class,
-                        parentColumns = "CATEGORY_ID",
-                        childColumns = "CATEGORY"
+                        parentColumns = "id",
+                        childColumns = "categoryId"
                 )
         },
         indices = {
-                @Index(name = "NOTES_ACCOUNT_ID_idx", value = "ACCOUNT_ID"),
-                @Index(name = "NOTES_CATEGORY_idx", value = "CATEGORY"),
-                @Index(name = "NOTES_FAVORITE_idx", value = "FAVORITE"),
-                @Index(name = "NOTES_MODIFIED_idx", value = "MODIFIED"),
-                @Index(name = "NOTES_REMOTEID_idx", value = "REMOTEID"),
-                @Index(name = "NOTES_STATUS_idx", value = "STATUS")
+                @Index(name = "IDX_NOTE_ACCOUNTID", value = "accountId"),
+                @Index(name = "IDX_NOTE_CATEGORY", value = "categoryId"),
+                @Index(name = "IDX_NOTE_FAVORITE", value = "favorite"),
+                @Index(name = "IDX_NOTE_MODIFIED", value = "modified"),
+                @Index(name = "IDX_NOTE_REMOTEID", value = "remoteId"),
+                @Index(name = "IDX_NOTE_STATUS", value = "status")
         }
 )
 public class Note implements Serializable, Item {
     @PrimaryKey
-    @ColumnInfo(name = "ID")
     private Long id;
-    @ColumnInfo(name = "REMOTEID")
     private Long remoteId;
-    @ColumnInfo(name = "ACCOUNT_ID")
     private Long accountId;
-    @ColumnInfo(name = "STATUS")
     private DBStatus status = DBStatus.VOID;
-    @ColumnInfo(name = "TITLE")
     private String title;
-    @ColumnInfo(name = "MODIFIED", defaultValue = "0")
+    @ColumnInfo(defaultValue = "0")
     private Calendar modified;
-    @ColumnInfo(name = "CONTENT")
     private String content;
-    @ColumnInfo(name = "FAVORITE", defaultValue = "0")
+    @ColumnInfo(defaultValue = "0")
     private Boolean favorite;
-    @ColumnInfo(name = "CATEGORY")
     private Long categoryId;
-    @ColumnInfo(name = "ETAG")
     private String eTag;
     @NonNull
-    @ColumnInfo(name = "EXCERPT", defaultValue = "")
+    @ColumnInfo(defaultValue = "")
     private String excerpt = "";
-    @ColumnInfo(name = "SCROLL_Y", defaultValue = "0")
+    @ColumnInfo(defaultValue = "0")
     private Integer scrollY = 0;
     @Ignore
     private String category;
@@ -84,7 +75,7 @@ public class Note implements Serializable, Item {
     }
 
     @Ignore
-    public Note(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, String excerpt, Integer scrollY) {
+    public Note(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, @NonNull String excerpt, Integer scrollY) {
         this(remoteId, modified, title, content, favorite, category, etag);
         this.id = id;
         this.status = status;
@@ -173,11 +164,12 @@ public class Note implements Serializable, Item {
         this.eTag = eTag;
     }
 
+    @NonNull
     public String getExcerpt() {
         return excerpt;
     }
 
-    public void setExcerpt(String excerpt) {
+    public void setExcerpt(@NonNull String excerpt) {
         this.excerpt = excerpt;
     }
 

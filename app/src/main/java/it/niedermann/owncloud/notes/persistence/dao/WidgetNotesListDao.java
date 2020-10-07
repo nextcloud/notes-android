@@ -12,9 +12,9 @@ public interface WidgetNotesListDao {
     @Insert
     void createOrUpdateNoteListWidgetData(NotesListWidgetData data);
 
-    @Query("DELETE FROM WIDGET_NOTE_LISTS WHERE ID = :appWidgetId")
+    @Query("DELETE FROM NOTESLISTWIDGETDATA WHERE id = :appWidgetId")
     void removeNoteListWidget(int appWidgetId);
 
-    @Query("SELECT * FROM WIDGET_NOTE_LISTS WHERE ID = :appWidgetId")
+    @Query("SELECT * FROM NOTESLISTWIDGETDATA WHERE id = :appWidgetId")
     NotesListWidgetData getNoteListWidgetData(int appWidgetId);
 }

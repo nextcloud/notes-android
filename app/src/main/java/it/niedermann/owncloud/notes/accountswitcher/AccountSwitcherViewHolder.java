@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import it.niedermann.android.glidesso.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 public class AccountSwitcherViewHolder extends RecyclerView.ViewHolder {
 
@@ -24,7 +24,7 @@ public class AccountSwitcherViewHolder extends RecyclerView.ViewHolder {
         binding = ItemAccountChooseBinding.bind(itemView);
     }
 
-    public void bind(@NonNull LocalAccount localAccount, @NonNull Consumer<LocalAccount> onAccountClick) {
+    public void bind(@NonNull Account localAccount, @NonNull Consumer<Account> onAccountClick) {
         binding.accountName.setText(localAccount.getUserName());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())

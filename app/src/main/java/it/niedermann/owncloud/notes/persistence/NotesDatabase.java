@@ -38,15 +38,15 @@ import java.util.Map;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
+import it.niedermann.owncloud.notes.persistence.dao.AccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.CategoryDao;
-import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetNotesListDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetSingleNoteDao;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
@@ -67,7 +67,6 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.OldCategory;
-import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
@@ -77,7 +76,7 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
 
 @Database(
         entities = {
-                LocalAccount.class,
+                Account.class,
                 Note.class,
                 Category.class,
                 SingleNoteWidgetData.class,
@@ -124,7 +123,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                 .build();
     }
 
-    public abstract LocalAccountDao getLocalAccountDao();
+    public abstract AccountDao getAccountDao();
 
     public abstract CategoryDao getCategoryDao();
 
@@ -297,7 +296,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed {@link Note} if differs from database, otherwise the old {@link Note}.
      */
-    public Note updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
+    public Note updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull Account localAccount, @NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         Note newNote;
         if (newContent == null) {
             newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getCategory(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
@@ -407,32 +406,12 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     @SuppressWarnings("UnusedReturnValue")
     public long addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        final LocalAccount entity = new LocalAccount();
+        final Account entity = new Account();
         entity.setUrl(url);
         entity.setUserName(username);
         entity.setAccountName(accountName);
         entity.setCapabilities(capabilities);
-        return getLocalAccountDao().insert(entity);
-    }
-
-    public void updateBrand(long accountId, @NonNull Capabilities capabilities) throws IllegalArgumentException {
-        validateAccountId(accountId);
-
-        String color;
-        try {
-            color = ColorUtil.formatColorToParsableHexString(capabilities.getColor()).substring(1);
-        } catch (Exception e) {
-            color = "0082C9";
-        }
-
-        String textColor;
-        try {
-            textColor = ColorUtil.formatColorToParsableHexString(capabilities.getTextColor()).substring(1);
-        } catch (Exception e) {
-            textColor = "FFFFFF";
-        }
-
-        getLocalAccountDao().updateBrand(accountId, color, textColor);
+        return getAccountDao().insert(entity);
     }
 
     /**
@@ -449,7 +428,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                     ApiVersion.of(apiVersions.getString(i));
                 }
                 if (apiVersions.length() > 0) {
-                    final int updatedRows = getLocalAccountDao().updateApiVersion(accountId, apiVersion);
+                    final int updatedRows = getAccountDao().updateApiVersion(accountId, apiVersion);
                     if (updatedRows == 1) {
                         Log.i(TAG, "Updated apiVersion to \"" + apiVersion + "\" for accountId = " + accountId);
                     } else {
@@ -471,12 +450,12 @@ public abstract class NotesDatabase extends RoomDatabase {
     }
 
     /**
-     * @param localAccount the {@link LocalAccount} that should be deleted
+     * @param localAccount the {@link Account} that should be deleted
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
      */
-    public void deleteAccount(@NonNull LocalAccount localAccount) throws IllegalArgumentException {
+    public void deleteAccount(@NonNull Account localAccount) throws IllegalArgumentException {
         validateAccountId(localAccount.getId());
-        int deletedAccounts = getLocalAccountDao().deleteAccount(localAccount);
+        int deletedAccounts = getAccountDao().deleteAccount(localAccount);
         if (deletedAccounts < 1) {
             Log.e(TAG, "AccountId '" + localAccount.getId() + "' did not delete any account");
             throw new IllegalArgumentException("The given accountId does not delete any row");
@@ -502,7 +481,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * If there is no such category, database will create it if create flag is set.
      * Otherwise this method will return -1 as default value.
      *
-     * @param accountId     The user {@link LocalAccount} Id
+     * @param accountId     The user {@link Account} Id
      * @param categoryTitle The category title which will be search in the db
      * @return -1 if there is no such category else the corresponding id
      */

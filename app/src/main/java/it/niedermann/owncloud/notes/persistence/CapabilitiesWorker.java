@@ -20,7 +20,7 @@ import java.net.HttpURLConnection;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 public class CapabilitiesWorker extends Worker {
@@ -43,13 +43,13 @@ public class CapabilitiesWorker extends Worker {
     @Override
     public Result doWork() {
         final NotesDatabase db = NotesDatabase.getInstance(getApplicationContext());
-        for (LocalAccount account : db.getLocalAccountDao().getAccounts()) {
+        for (Account account : db.getAccountDao().getAccounts()) {
             try {
                 final SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplicationContext(), account.getAccountName());
                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, account.getCapabilitiesETag());
-                db.getLocalAccountDao().updateCapabilitiesETag(account.getId(), capabilities.getETag());
-                db.updateBrand(account.getId(), capabilities);
+                db.getAccountDao().updateCapabilitiesETag(account.getId(), capabilities.getETag());
+                db.getAccountDao().updateBrand(account.getId(), capabilities.getColor(), capabilities.getTextColor());
                 db.updateApiVersion(account.getId(), capabilities.getApiVersion());
                 Log.i(TAG, capabilities.toString());
             } catch (Exception e) {

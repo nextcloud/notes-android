@@ -10,16 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 public class AccountChooserAdapter extends RecyclerView.Adapter<AccountChooserViewHolder> {
 
     @NonNull
-    private final List<LocalAccount> localAccounts;
+    private final List<Account> localAccounts;
     @NonNull
-    private final Consumer<LocalAccount> targetAccountConsumer;
+    private final Consumer<Account> targetAccountConsumer;
 
-    public AccountChooserAdapter(@NonNull List<LocalAccount> localAccounts, @NonNull Consumer<LocalAccount> targetAccountConsumer) {
+    public AccountChooserAdapter(@NonNull List<Account> localAccounts, @NonNull Consumer<Account> targetAccountConsumer) {
         super();
         this.localAccounts = localAccounts;
         this.targetAccountConsumer = targetAccountConsumer;

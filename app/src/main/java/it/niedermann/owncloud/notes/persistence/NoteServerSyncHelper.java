@@ -36,7 +36,7 @@ import java.util.Set;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
@@ -214,9 +214,9 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) || onlyLocalChanges)) {
                 Log.d(TAG, "... starting now");
-                final LocalAccount localAccount = db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+                final Account localAccount = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
                 if (localAccount == null) {
-                    Log.e(TAG, LocalAccount.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
+                    Log.e(TAG, Account.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
                     return;
                 }
                 final NotesClient notesClient = NotesClient.newInstance(localAccount.getPreferredApiVersion(), context);
@@ -307,7 +307,7 @@ public class NoteServerSyncHelper {
         @NonNull
         private final NotesClient notesClient;
         @NonNull
-        private final LocalAccount localAccount;
+        private final Account localAccount;
         @NonNull
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
@@ -316,7 +316,7 @@ public class NoteServerSyncHelper {
         @NonNull
         private final ArrayList<Throwable> exceptions = new ArrayList<>();
 
-        SyncTask(@NonNull NotesClient notesClient, @NonNull LocalAccount localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
+        SyncTask(@NonNull NotesClient notesClient, @NonNull Account localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
             this.notesClient = notesClient;
             this.localAccount = localAccount;
             this.ssoAccount = ssoAccount;
@@ -467,8 +467,8 @@ public class NoteServerSyncHelper {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(response.getLastModified());
                 localAccount.setModified(calendar);
-                db.getLocalAccountDao().updateETag(localAccount.getId(), localAccount.getETag());
-                db.getLocalAccountDao().updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
+                db.getAccountDao().updateETag(localAccount.getId(), localAccount.getETag());
+                db.getAccountDao().updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
                 try {
                     if (db.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
                         localAccount.setPreferredApiVersion(response.getSupportedApiVersions());

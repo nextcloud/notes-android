@@ -21,13 +21,13 @@ import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
 import static it.niedermann.owncloud.notes.main.MainActivity.manage_account;
 
 /**
- * Displays all available {@link LocalAccount} entries and provides basic operations for them, like adding or switching
+ * Displays all available {@link Account} entries and provides basic operations for them, like adding or switching
  */
 public class AccountSwitcherDialog extends BrandedDialogFragment {
 
@@ -63,7 +63,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
-        LocalAccount currentLocalAccount = db.getLocalAccountDao().getAccount(currentAccountId);
+        Account currentLocalAccount = db.getAccountDao().getAccount(currentAccountId);
         binding.accountName.setText(currentLocalAccount.getUserName());
         binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
         Glide.with(requireContext())
@@ -78,8 +78,8 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             dismiss();
         }));
         binding.accountsList.setAdapter(adapter);
-        List<LocalAccount> localAccounts = db.getLocalAccountDao().getAccounts();
-        for (LocalAccount localAccount : localAccounts) {
+        List<Account> localAccounts = db.getAccountDao().getAccounts();
+        for (Account localAccount : localAccounts) {
             if (localAccount.getId() == currentLocalAccount.getId()) {
                 localAccounts.remove(localAccount);
                 break;

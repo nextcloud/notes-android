@@ -4,28 +4,31 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 
 import it.niedermann.owncloud.notes.widget.AbstractWidgetData;
 
 @Entity(
-        tableName = "WIDGET_SINGLE_NOTES",
         foreignKeys = {
                 @ForeignKey(
-                        entity = LocalAccount.class,
-                        parentColumns = "ID",
-                        childColumns = "ACCOUNT_ID",
+                        entity = Account.class,
+                        parentColumns = "id",
+                        childColumns = "accountId",
                         onDelete = ForeignKey.CASCADE
                 ),
                 @ForeignKey(
                         entity = Note.class,
-                        parentColumns = "ID",
-                        childColumns = "NOTE_ID",
+                        parentColumns = "id",
+                        childColumns = "noteId",
                         onDelete = ForeignKey.CASCADE
                 )
+        },
+        indices = {
+                @Index(name = "IDX_SINGLENOTEWIDGETDATA_ACCOUNTID", value = "accountId"),
+                @Index(name = "IDX_SINGLENOTEWIDGETDATA_NOTEID", value = "noteId"),
         }
 )
 public class SingleNoteWidgetData extends AbstractWidgetData {
-    @ColumnInfo(name = "NOTE_ID")
     private long noteId;
 
     public SingleNoteWidgetData() {

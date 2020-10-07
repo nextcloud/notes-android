@@ -15,7 +15,7 @@ import java.util.List;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 public class ManageAccountsActivity extends LockedActivity {
 
@@ -34,11 +34,11 @@ public class ManageAccountsActivity extends LockedActivity {
 
         db = NotesDatabase.getInstance(this);
 
-        List<LocalAccount> localAccounts = db.getLocalAccountDao().getAccounts();
+        List<Account> localAccounts = db.getAccountDao().getAccounts();
 
         adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
             db.deleteAccount(localAccount);
-            for (LocalAccount temp : localAccounts) {
+            for (Account temp : localAccounts) {
                 if (temp.getId() == localAccount.getId()) {
                     localAccounts.remove(temp);
                     break;
@@ -56,7 +56,7 @@ public class ManageAccountsActivity extends LockedActivity {
         try {
             SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
             if (ssoAccount != null) {
-                adapter.setCurrentLocalAccount(db.getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name));
+                adapter.setCurrentLocalAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name));
             }
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             e.printStackTrace();

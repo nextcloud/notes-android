@@ -16,7 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import it.niedermann.android.glidesso.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -31,7 +31,7 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         binding = ItemAccountChooseBinding.bind(itemView);
     }
 
-    public void bind(@NonNull LocalAccount localAccount, @NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete, boolean isCurrentAccount) {
+    public void bind(@NonNull Account localAccount, @NonNull Consumer<Account> onAccountClick, @Nullable Consumer<Account> onAccountDelete, boolean isCurrentAccount) {
         binding.accountName.setText(localAccount.getUserName());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())
@@ -48,7 +48,7 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         }
         if (isCurrentAccount) {
             binding.currentAccountIndicator.setVisibility(VISIBLE);
-            applyBrandToLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, Color.parseColor('#' + localAccount.getColor()));
+            applyBrandToLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, localAccount.getColor());
         } else {
             binding.currentAccountIndicator.setVisibility(GONE);
         }

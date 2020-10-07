@@ -1,29 +1,34 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 
 import it.niedermann.owncloud.notes.widget.AbstractWidgetData;
 
 @Entity(
-        tableName = "WIDGET_NOTE_LISTS",
         foreignKeys = {
                 @ForeignKey(
-                        entity = LocalAccount.class,
-                        parentColumns = "ID",
-                        childColumns = "ACCOUNT_ID",
+                        entity = Account.class,
+                        parentColumns = "id",
+                        childColumns = "accountId",
                         onDelete = ForeignKey.CASCADE
                 ),
                 @ForeignKey(
                         entity = Category.class,
-                        parentColumns = "CATEGORY_ID",
-                        childColumns = "ID",
+                        parentColumns = "id",
+                        childColumns = "categoryId",
                         onDelete = ForeignKey.CASCADE
                 )
+        },
+        indices = {
+                @Index(name = "IDX_NOTESLISTWIDGETDATA_ACCOUNTID", value = "accountId"),
+                @Index(name = "IDX_NOTESLISTWIDGETDATA_CATEGORYID", value = "categoryId"),
         }
 )
 public class NotesListWidgetData extends AbstractWidgetData {
@@ -36,10 +41,7 @@ public class NotesListWidgetData extends AbstractWidgetData {
     public static final int MODE_DISPLAY_CATEGORY = 2;
 
     @IntRange(from = 0, to = 2)
-    @ColumnInfo(name = "MODE")
     private int mode;
-
-    @ColumnInfo(name = "CATEGORY_ID")
     private Long categoryId;
 
     @Nullable
@@ -59,6 +61,7 @@ public class NotesListWidgetData extends AbstractWidgetData {
         return mode;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "NotesListWidgetData{" +
