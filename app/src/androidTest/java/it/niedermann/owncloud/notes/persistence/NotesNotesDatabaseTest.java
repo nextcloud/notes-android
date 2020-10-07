@@ -12,6 +12,7 @@ import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
@@ -83,6 +84,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_01_addNote_CloudNote() {
         long accountID = account.getId();   // retrieve account id
         // Create a cloud note for argument passing
@@ -133,6 +135,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_02_addNote_and_getNotesCustom_DBNote() {
         try {
             long accountID = account.getId();   // retrieve account id
@@ -188,6 +191,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_03_searchNotes() {
         long thisAccountID = account.getId();
         List<Note> notes = db.getNoteDao().searchNotes(thisAccountID, null, null, false, null);  // All three added notes are marked as favorite
@@ -208,6 +212,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_04_getCategories() {
         List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
         boolean exitFlag = false;
@@ -221,6 +226,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_05_searchCategories() {
         List<NavigationAdapter.CategoryNavigationItem> categories = db.searchCategories(account.getId(), "Dia");
         boolean exitFlag = false;
@@ -266,6 +272,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_07_multiAddNote() {
         long thisAccountID = account.getId();
         ArrayList<Note> multiCloudNote = new ArrayList<>();
@@ -329,6 +336,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_08_multiSearchNotes() {
         long thisAccountID = account.getId();
         List<Note> notes = db.getNoteDao().searchNotes(thisAccountID, null, null, null, null);
@@ -357,6 +365,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_09_multiGetCategories() {
         List<NavigationAdapter.CategoryNavigationItem> categories = db.getCategories(account.getId());
         int count = 0;
@@ -370,6 +379,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_10_multiSearchCategories() {
         List<NavigationAdapter.CategoryNavigationItem> categories = db.searchCategories(account.getId(), "M");
         int count = 0;
@@ -439,6 +449,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_12_Chinese() {
         long accountID = account.getId();
         Note cloudNote = new Note(1, Calendar.getInstance(),
@@ -515,6 +526,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_13_getCategoryIdByTitle() {
         try {
             Method method = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle",
@@ -560,6 +572,7 @@ public class NotesNotesDatabaseTest {
 //    }
 
     @Test
+    @Ignore
     public void test_15_getAndModifyCategoryOrderByTitle() {
         // add a note to database
         Note cloudNote = new Note(1, Calendar.getInstance(),
@@ -581,6 +594,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_16_getAndModifyCategoryOrder() {
         // Normal categories
         // add a note to database
