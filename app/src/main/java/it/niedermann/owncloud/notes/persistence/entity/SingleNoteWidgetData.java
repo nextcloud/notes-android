@@ -6,15 +6,15 @@ import androidx.room.Ignore;
 import it.niedermann.owncloud.notes.widget.AbstractWidgetData;
 
 @Entity()
-public class WidgetSingleNoteEntity extends AbstractWidgetData {
+public class SingleNoteWidgetData extends AbstractWidgetData {
     private long noteId;
 
-    public WidgetSingleNoteEntity() {
+    public SingleNoteWidgetData() {
 
     }
 
     @Ignore
-    public WidgetSingleNoteEntity(int id, long accountId, long noteId, int modeId) {
+    public SingleNoteWidgetData(int id, long accountId, long noteId, int modeId) {
         super(id, accountId, modeId);
         setNoteId(noteId);
     }

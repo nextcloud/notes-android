@@ -27,7 +27,7 @@ import java.util.TimeZone;
 
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.OldCategory;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -86,19 +86,19 @@ public class NotesNotesDatabaseTest {
     public void test_01_addNote_CloudNote() {
         long accountID = account.getId();   // retrieve account id
         // Create a cloud note for argument passing
-        NoteEntity cloudNote = new NoteEntity(1, Calendar.getInstance(),
+        Note cloudNote = new Note(1, Calendar.getInstance(),
                 "A Great Day", getCurDate() + " This is a really great day bro.",
                 true, "Diary", null);
 
         // Pre-check
-        List<NoteEntity> notes = db.getNoteDao().getNotes(accountID);
+        List<Note> notes = db.getNoteDao().getNotes(accountID);
         int pre_size = notes.size();
         Log.i("Test_01_addNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
         // Add a new note
         long noteID = db.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        NoteEntity note = db.getNoteDao().getNote(accountID, noteID);
+        Note note = db.getNoteDao().getNote(accountID, noteID);
         Log.i("Test_01_addNote_Cur_Note", note.toString());
         Log.i("Test_01_addNote_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_01_addNote_Cur_Note", "Content: " + note.getContent());
@@ -115,12 +115,12 @@ public class NotesNotesDatabaseTest {
         assertEquals(1, added_size - pre_size);
 
         Log.i("Test_01_addNote_All_Notes_Added", "Size: " + added_size);
-        for (NoteEntity cnote : notes) {
+        for (Note cnote : notes) {
             Log.i("Test_01_addNote_All_Notes_Added", cnote.toString());
             Log.i("Test_01_addNote_All_Notes_Added", cnote.getTitle());
         }
 
-        NoteEntity cloudNote_re0 = new NoteEntity(0, Calendar.getInstance(),
+        Note cloudNote_re0 = new Note(0, Calendar.getInstance(),
                 "A Bad Day", getCurDate() + " You're faking a smile with just a coffee to go (Daniel Powter).",
                 true, "A Nice Song", null);
         noteID = db.addNote(accountID, cloudNote_re0);
@@ -141,20 +141,20 @@ public class NotesNotesDatabaseTest {
             // getNotesCustom also tested here
             Method getNC = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, boolean.class);
             getNC.setAccessible(true);
-            List<NoteEntity> notes = (List<NoteEntity>) getNC.invoke(db, accountID, "status != ? AND accountId = ?",
+            List<Note> notes = (List<Note>) getNC.invoke(db, accountID, "status != ? AND accountId = ?",
                     new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountID}, "id ASC", false);
             long newNoteID = notes.get(notes.size() - 1).getId() + 1;   // avoid UNIQUE Note_ID constraint
 
             // Create a DBNote for argument passing
             String newContent = getCurDate() + " This is a even greater day my friend.";
-            NoteEntity dbNote = new NoteEntity(newNoteID, 1, Calendar.getInstance(), "A Greater Day",
+            Note dbNote = new Note(newNoteID, 1, Calendar.getInstance(), "A Greater Day",
                     newContent, true, "Best Friend's Record", null, DBStatus.VOID,
                     accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
 
             // Add a new note
             long noteID = db.addNote(accountID, dbNote);
             // Check if this note is added successfully
-            NoteEntity note = db.getNoteDao().getNote(accountID, noteID);
+            Note note = db.getNoteDao().getNote(accountID, noteID);
             assertEquals(dbNote.getTitle(), note.getTitle());
             assertEquals(dbNote.getContent(), note.getContent());
             assertEquals(dbNote.getCategory(), note.getCategory());
@@ -162,7 +162,7 @@ public class NotesNotesDatabaseTest {
 
             // Another DBNote for argument passing
             newContent = getCurDate() + " This is a even greater day my friend.";
-            dbNote = new NoteEntity(0, 1, Calendar.getInstance(), "An Even Greater Day",
+            dbNote = new Note(0, 1, Calendar.getInstance(), "An Even Greater Day",
                     newContent, true, "Sincere Friend's Record", null, DBStatus.VOID,
                     accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
             // Add a new note
@@ -178,7 +178,7 @@ public class NotesNotesDatabaseTest {
             Method getNCWOW = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, String.class, boolean.class);
             getNCWOW.setAccessible(true);
             int aSize = 1;
-            notes = (List<NoteEntity>) getNCWOW.invoke(db, accountID, " status != ? AND accountId = ?",
+            notes = (List<Note>) getNCWOW.invoke(db, accountID, " status != ? AND accountId = ?",
                     new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountID}, null, String.valueOf(aSize), false);
             assertEquals(aSize, notes.size());
         } catch (Exception e) {
@@ -190,7 +190,7 @@ public class NotesNotesDatabaseTest {
     @Test
     public void test_03_searchNotes() {
         long thisAccountID = account.getId();
-        List<NoteEntity> notes = db.getNoteDao().searchNotes(thisAccountID, null, null, false, null);  // All three added notes are marked as favorite
+        List<Note> notes = db.getNoteDao().searchNotes(thisAccountID, null, null, false, null);  // All three added notes are marked as favorite
         Log.i("Test_03_searchNotes_Favorite_false", "Size: " + notes.size());
         assertEquals(notes.size(), 0);
 
@@ -246,12 +246,12 @@ public class NotesNotesDatabaseTest {
     @Test
     public void test_06_deleteNote() {
         long thisAccountID = account.getId();
-        List<NoteEntity> notes = db.getNoteDao().getNotes(thisAccountID);
+        List<Note> notes = db.getNoteDao().getNotes(thisAccountID);
         int added_size = notes.size();
 
         Log.i("Test_06_deleteNote_All_Before_Deletion", "Size: " + added_size);
         int counter = 0;
-        for (NoteEntity cnote : notes) {
+        for (Note cnote : notes) {
             Log.i("Test_06_deleteNote_All_Before_Deletion", cnote.toString());
             // Delete the note after testing
             db.deleteNote(cnote.getId(), cnote.getStatus());
@@ -268,40 +268,40 @@ public class NotesNotesDatabaseTest {
     @Test
     public void test_07_multiAddNote() {
         long thisAccountID = account.getId();
-        ArrayList<NoteEntity> multiCloudNote = new ArrayList<>();
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        ArrayList<Note> multiCloudNote = new ArrayList<>();
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "Mike is so cool.", "Mike is a cool guy you know",
                 true, "The BiBle", null));
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "Andy is so cool.", "Andy is a cool guy you know",
                 true, "The BiBle", null));
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "I Honestly Love You", "I Honestly Love You by Leslie",
                 true, "Music", null));
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "Monica", "Monica by Leslie",
                 true, "Music", null));
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "Worksheet", "1 2 3 4 5 6 7 8",
                 false, "Work", null));
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "PowerPoint.", "8 7 6 5 4 3 2 1",
                 false, "Work", null));
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "Farewell My Concubine", "a great movie",
                 true, "Movie", null));
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "Leon", "an amazing movie",
                 true, "Movie", null));
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "The Dark Knight", "another amazing movie",
                 true, "Movies", null));
-        multiCloudNote.add(new NoteEntity(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1, Calendar.getInstance(),
                 "How are you.", "i am fine.",
                 false, "Diary", null));
 
         // Pre-check
-        List<NoteEntity> notes = db.getNoteDao().getNotes(thisAccountID);
+        List<Note> notes = db.getNoteDao().getNotes(thisAccountID);
         int pre_size = notes.size();
         Log.i("Test_07_multiAddNote_All_Notes_Before_Addition", "Size: " + pre_size);
 
@@ -312,7 +312,7 @@ public class NotesNotesDatabaseTest {
 
         // check if the node added successfully
         for (int i = 0; i < 10; ++i) {
-            NoteEntity nodeTemp = db.getNoteDao().getNote(thisAccountID, multiNoteID[i]);
+            Note nodeTemp = db.getNoteDao().getNote(thisAccountID, multiNoteID[i]);
             assertEquals(nodeTemp.getTitle(), multiCloudNote.get(i).getTitle());
             assertEquals(nodeTemp.getCategory(), multiCloudNote.get(i).getCategory());
             assertEquals(nodeTemp.getContent(), multiCloudNote.get(i).getContent());
@@ -331,7 +331,7 @@ public class NotesNotesDatabaseTest {
     @Test
     public void test_08_multiSearchNotes() {
         long thisAccountID = account.getId();
-        List<NoteEntity> notes = db.getNoteDao().searchNotes(thisAccountID, null, null, null, null);
+        List<Note> notes = db.getNoteDao().searchNotes(thisAccountID, null, null, null, null);
         Log.i("Test_08_multiSearchNotes_null_null_null", "Size: " + notes.size());
         assertEquals(notes.size(), 10);
 
@@ -422,11 +422,11 @@ public class NotesNotesDatabaseTest {
     @Test
     public void test_11_multiDeleteNote() {
         long thisAccountID = account.getId();
-        List<NoteEntity> notes = db.getNoteDao().getNotes(thisAccountID);
+        List<Note> notes = db.getNoteDao().getNotes(thisAccountID);
         int added_size = notes.size();
 
         Log.i("Test_11_multiDeleteNote_All_Before_Deletion", "Size: " + added_size);
-        for (NoteEntity e : notes) {
+        for (Note e : notes) {
             Log.i("Test_11_multiDeleteNote_All_Before_Deletion", e.toString());
             db.deleteNote(e.getId(), e.getStatus());
         }
@@ -441,19 +441,19 @@ public class NotesNotesDatabaseTest {
     @Test
     public void test_12_Chinese() {
         long accountID = account.getId();
-        NoteEntity cloudNote = new NoteEntity(1, Calendar.getInstance(),
+        Note cloudNote = new Note(1, Calendar.getInstance(),
                 "美好的一天", getCurDate() + " 兄弟，这真是美好的一天。",
                 true, "日记", null);
 
         // Pre-check
-        List<NoteEntity> notes = db.getNoteDao().getNotes(accountID);
+        List<Note> notes = db.getNoteDao().getNotes(accountID);
         int pre_size = notes.size();
         Log.i("Test_12_Chinese_All_Notes_Before_Addition", "Size: " + pre_size);
 
         // Add a new note
         long noteID = db.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        NoteEntity note = db.getNoteDao().getNote(accountID, noteID);
+        Note note = db.getNoteDao().getNote(accountID, noteID);
         Log.i("Test_12_Chinese_Cur_Note", note.toString());
         Log.i("Test_12_Chinese_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_12_Chinese_Cur_Note", "Content: " + note.getContent());
@@ -471,7 +471,7 @@ public class NotesNotesDatabaseTest {
         assertEquals(1, added_size - pre_size);
 
         Log.i("Test_12_Chinese_All_Notes_Added", "Size: " + added_size);
-        for (NoteEntity cnote : notes) {
+        for (Note cnote : notes) {
             Log.i("Test_12_Chinese_All_Notes_Added", cnote.toString());
         }
 
@@ -501,7 +501,7 @@ public class NotesNotesDatabaseTest {
         assertTrue(exitFlag);
 
         notes = db.getNoteDao().getNotes(thisAccountID);
-        for (NoteEntity cnote : notes) {
+        for (Note cnote : notes) {
             Log.i("Test_12_Chinese_All_Before_Deletion", cnote.toString());
             // Delete the note after testing
             db.deleteNote(cnote.getId(), cnote.getStatus());
@@ -562,7 +562,7 @@ public class NotesNotesDatabaseTest {
     @Test
     public void test_15_getAndModifyCategoryOrderByTitle() {
         // add a note to database
-        NoteEntity cloudNote = new NoteEntity(1, Calendar.getInstance(),
+        Note cloudNote = new Note(1, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
         long noteID = db.addNote(account.getId(), cloudNote);
@@ -584,7 +584,7 @@ public class NotesNotesDatabaseTest {
     public void test_16_getAndModifyCategoryOrder() {
         // Normal categories
         // add a note to database
-        NoteEntity cloudNote = new NoteEntity(1, Calendar.getInstance(),
+        Note cloudNote = new Note(1, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
         long noteID = db.addNote(account.getId(), cloudNote);

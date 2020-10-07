@@ -32,7 +32,7 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
@@ -101,10 +101,10 @@ public class MultiSelectedActionModeCallback implements Callback {
             case R.id.menu_delete:
                 try {
                     SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
-                    List<NoteEntity> deletedNotes = new ArrayList<>();
+                    List<Note> deletedNotes = new ArrayList<>();
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
-                        NoteEntity note = (NoteEntity) adapter.getItem(i);
+                        Note note = (Note) adapter.getItem(i);
                         deletedNotes.add(db.getNoteDao().getNote(note.getAccountId(), note.getId()));
                         db.deleteNoteAndSync(ssoAccount, note.getId());
                     }
@@ -118,7 +118,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                     BrandedSnackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                             .setAction(R.string.action_undo, (View v) -> {
                                 db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
-                                for (NoteEntity deletedNote : deletedNotes) {
+                                for (Note deletedNote : deletedNotes) {
                                     db.addNoteAndSync(ssoAccount, deletedNote.getAccountId(), deletedNote);
                                 }
                                 refreshLists.run();
@@ -140,11 +140,11 @@ public class MultiSelectedActionModeCallback implements Callback {
                 return true;
             case R.id.menu_share:
                 final String subject = (adapter.getSelected().size() == 1)
-                        ? ((NoteEntity) adapter.getItem(adapter.getSelected().get(0))).getTitle()
+                        ? ((Note) adapter.getItem(adapter.getSelected().get(0))).getTitle()
                         : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
                 final StringBuilder noteContents = new StringBuilder();
                 for (Integer i : adapter.getSelected()) {
-                    final NoteEntity noteWithoutContent = (NoteEntity) adapter.getItem(i);
+                    final Note noteWithoutContent = (Note) adapter.getItem(i);
                     final String tempFullNote = db.getNoteDao().getNote(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
                     if (!TextUtils.isEmpty(tempFullNote)) {
                         if (noteContents.length() > 0) {
@@ -157,7 +157,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                 return true;
             case R.id.menu_category:
                 CategoryDialogFragment
-                        .newInstance(((NoteEntity) adapter.getItem(adapter.getSelected().get(0))).getAccountId(), "")
+                        .newInstance(((Note) adapter.getItem(adapter.getSelected().get(0))).getAccountId(), "")
                         .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
             default:
                 return false;

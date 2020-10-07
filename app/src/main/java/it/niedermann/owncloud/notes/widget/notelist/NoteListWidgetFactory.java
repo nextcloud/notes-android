@@ -15,7 +15,7 @@ import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_ALL;
@@ -29,7 +29,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final NoteListsWidgetData data;
     private final boolean darkTheme;
     private NotesDatabase db;
-    private List<NoteEntity> noteEntities;
+    private List<Note> noteEntities;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
@@ -96,7 +96,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             return null;
         }
 
-        NoteEntity note = noteEntities.get(position);
+        Note note = noteEntities.get(position);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 

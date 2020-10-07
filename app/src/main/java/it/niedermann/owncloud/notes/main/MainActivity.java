@@ -78,7 +78,7 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.dao.LocalAccountDao;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -757,7 +757,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
                     Bundle bundle = data.getExtras();
                     if (bundle != null && bundle.containsKey(CREATED_NOTE)) {
-                        NoteEntity createdNote = (NoteEntity) bundle.getSerializable(CREATED_NOTE);
+                        Note createdNote = (Note) bundle.getSerializable(CREATED_NOTE);
                         if (createdNote != null) {
                             adapter.add(createdNote);
                         } else {
@@ -866,7 +866,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 mActionMode.finish();
             }
         } else {
-            NoteEntity note = (NoteEntity) adapter.getItem(position);
+            Note note = (Note) adapter.getItem(position);
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
             startActivityForResult(intent, show_single_note_cmd);
@@ -875,7 +875,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        NoteEntity note = (NoteEntity) adapter.getItem(position);
+        Note note = (Note) adapter.getItem(position);
         NotesDatabase db = NotesDatabase.getInstance(view.getContext());
         db.toggleFavoriteAndSync(ssoAccount, note.getId(), syncCallBack);
         adapter.notifyItemChanged(position);
@@ -973,7 +973,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
         adapter.deselect(0);
         for (Integer i : selection) {
-            NoteEntity note = (NoteEntity) adapter.getItem(i);
+            Note note = (Note) adapter.getItem(i);
             db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), db.getNoteDao().getNote(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
@@ -990,7 +990,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     @Override
     public void onCategoryChosen(String category) {
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
-            NoteEntity note = (NoteEntity) adapter.getItem(i);
+            Note note = (Note) adapter.getItem(i);
             Category c = new Category();
             c.setTitle(category);
             note.setCategory(c);

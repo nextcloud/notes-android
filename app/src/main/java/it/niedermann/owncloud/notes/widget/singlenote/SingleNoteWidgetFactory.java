@@ -17,8 +17,8 @@ import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 
@@ -31,7 +31,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private final int appWidgetId;
 
     private NotesDatabase db;
-    private NoteEntity note;
+    private Note note;
     private boolean darkModeActive = false;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
@@ -44,7 +44,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
         try {
-            WidgetSingleNoteEntity data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+            SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
             darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
         } catch (NoSuchElementException e) {
             Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
@@ -61,7 +61,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onDataSetChanged() {
         try {
-            final WidgetSingleNoteEntity data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+            final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
             note = db.getNoteDao().getNote(data.getAccountId(), noteId);

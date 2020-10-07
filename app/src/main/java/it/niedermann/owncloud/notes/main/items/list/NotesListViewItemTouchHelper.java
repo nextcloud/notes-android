@@ -22,7 +22,7 @@ import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
@@ -71,8 +71,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
-                        final NoteEntity dbNoteWithoutContent = (NoteEntity) adapter.getItem(viewHolder.getAdapterPosition());
-                        final NoteEntity dbNote = db.getNoteDao().getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
+                        final Note dbNoteWithoutContent = (Note) adapter.getItem(viewHolder.getAdapterPosition());
+                        final Note dbNote = db.getNoteDao().getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
                         db.deleteNoteAndSync(ssoAccount, dbNote.getId());
                         adapter.remove(dbNote);
                         refreshLists.run();
@@ -92,7 +92,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         }
                         break;
                     case ItemTouchHelper.RIGHT:
-                        final NoteEntity adapterNote = (NoteEntity) adapter.getItem(viewHolder.getAdapterPosition());
+                        final Note adapterNote = (Note) adapter.getItem(viewHolder.getAdapterPosition());
                         db.toggleFavoriteAndSync(ssoAccount, adapterNote.getId(), syncCallBack);
                         refreshLists.run();
                         break;

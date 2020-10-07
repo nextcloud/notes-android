@@ -33,7 +33,7 @@ public class Converters {
     public static Calendar calendarFromLong(Long value) {
         Calendar calendar = Calendar.getInstance();
         if (value == null) {
-            calendar.setTimeInMillis(1000);
+            calendar.setTimeInMillis(0);
         } else {
             calendar.setTimeInMillis(value * 1000);
         }

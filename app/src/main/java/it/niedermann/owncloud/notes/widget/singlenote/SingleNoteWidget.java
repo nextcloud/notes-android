@@ -17,7 +17,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.BaseNoteFragment;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
 public class SingleNoteWidget extends AppWidgetProvider {
@@ -30,7 +30,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
         for (int appWidgetId : appWidgetIds) {
             try {
-                final WidgetSingleNoteEntity data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+                final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
 
                 templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, data.getAccountId());
 

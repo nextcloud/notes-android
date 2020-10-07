@@ -48,9 +48,9 @@ import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
-import it.niedermann.owncloud.notes.persistence.entity.WidgetNotesListEntity;
-import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
+import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -68,10 +68,10 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
 @Database(
         entities = {
                 LocalAccount.class,
-                NoteEntity.class,
+                Note.class,
                 Category.class,
-                WidgetSingleNoteEntity.class,
-                WidgetNotesListEntity.class
+                SingleNoteWidgetData.class,
+                NotesListWidgetData.class
         }, version = 18
 )
 @TypeConverters({Converters.class})
@@ -136,8 +136,8 @@ public abstract class NotesDatabase extends RoomDatabase {
      *
      * @param note Note
      */
-    public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteEntity note) {
-        NoteEntity entity = new NoteEntity(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+    public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, Note note) {
+        Note entity = new Note(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
         long id = addNote(accountId, entity);
         notifyWidgets();
         serverSyncHelper.scheduleSync(ssoAccount, true);
@@ -148,10 +148,10 @@ public abstract class NotesDatabase extends RoomDatabase {
      * Inserts a note directly into the Database.
      * No Synchronisation will be triggered! Use addNoteAndSync()!
      *
-     * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type {@link NoteEntity} (with {@link DBStatus#LOCAL_EDITED})!
+     * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type {@link Note} (with {@link DBStatus#LOCAL_EDITED})!
      */
-    long addNote(long accountId, NoteEntity note) {
-        NoteEntity entity = new NoteEntity();
+    long addNote(long accountId, Note note) {
+        Note entity = new Note();
         if (entity.getId() != null) {
             if (entity.getId() > 0) {
                 entity.setId(entity.getId());
@@ -177,9 +177,9 @@ public abstract class NotesDatabase extends RoomDatabase {
         return getNoteDao().addNote(entity);
     }
 
-    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, NoteEntity note, long newAccountId) {
+    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, Note note, long newAccountId) {
         // Add new note
-        addNoteAndSync(ssoAccount, newAccountId, new NoteEntity(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), null));
+        addNoteAndSync(ssoAccount, newAccountId, new Note(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), null));
         deleteNoteAndSync(ssoAccount, note.getId());
 
         notifyWidgets();
@@ -191,7 +191,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     public Map<Long, Long> getIdMap(long accountId) {
         validateAccountId(accountId);
         Map<Long, Long> result = new HashMap<>();
-        for (NoteEntity note : getNoteDao().getRemoteIdAndId(accountId)) {
+        for (Note note : getNoteDao().getRemoteIdAndId(accountId)) {
             result.put(note.getRemoteId(), note.getId());
         }
         return result;
@@ -259,7 +259,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param category   The category title which should be used to find the category id.
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      */
-    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull NoteEntity note, @NonNull String category, @Nullable ISyncCallback callback) {
+    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull Note note, @NonNull String category, @Nullable ISyncCallback callback) {
         note.setCategory(getCategoryDao().getCategory(getCategoryDao().getCategoryIdByTitle(getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name).getId(), category)));
         getNoteDao().updateStatus(note.getId(), DBStatus.LOCAL_DELETED);
         long categoryId = getOrCreateCategoryIdByTitle(note.getAccountId(), note.getCategory().getTitle());
@@ -279,12 +279,12 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param newContent New content. If this is <code>null</code>, then <code>oldNote</code> is saved again (useful for undoing changes).
      * @param newTitle   New title. If this is <code>null</code>, then either the old title is reused (in case the note has been synced before) or a title is generated (in case it is a new note)
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
-     * @return changed {@link NoteEntity} if differs from database, otherwise the old {@link NoteEntity}.
+     * @return changed {@link Note} if differs from database, otherwise the old {@link Note}.
      */
-    public NoteEntity updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull NoteEntity oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
-        NoteEntity newNote;
+    public Note updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
+        Note newNote;
         if (newContent == null) {
-            newNote = new NoteEntity(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getCategory().getTitle(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getCategory().getTitle(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
             final String title;
             if (newTitle != null) {
@@ -296,7 +296,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                     title = oldNote.getTitle();
                 }
             }
-            newNote = new NoteEntity(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getCategory().getTitle(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getCategory().getTitle(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
         }
         int rows = getNoteDao().updateNote(newNote);
         getCategoryDao().removeEmptyCategory(localAccount.getId());
@@ -364,7 +364,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                     if (!shortcutManager.isRateLimitingActive()) {
                         List<ShortcutInfo> newShortcuts = new ArrayList<>();
 
-                        for (NoteEntity note : getNoteDao().getRecentNotes(accountId)) {
+                        for (Note note : getNoteDao().getRecentNotes(accountId)) {
                             if (!TextUtils.isEmpty(note.getTitle())) {
                                 Intent intent = new Intent(context.getApplicationContext(), EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
@@ -604,7 +604,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param remoteNote                Note from the server.
      * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
      */
-    void updateNote(long accountId, long id, @NonNull NoteEntity remoteNote, @Nullable NoteEntity forceUnchangedDBNoteState) {
+    void updateNote(long accountId, long id, @NonNull Note remoteNote, @Nullable Note forceUnchangedDBNoteState) {
         validateAccountId(accountId);
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
         getNoteDao().updateRemoteId(id, remoteNote.getRemoteId());

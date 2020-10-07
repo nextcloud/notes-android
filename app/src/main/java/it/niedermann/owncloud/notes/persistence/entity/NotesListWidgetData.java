@@ -8,7 +8,7 @@ import androidx.room.Ignore;
 import it.niedermann.owncloud.notes.widget.AbstractWidgetData;
 
 @Entity()
-public class WidgetNotesListEntity extends AbstractWidgetData {
+public class NotesListWidgetData extends AbstractWidgetData {
 
     @Ignore
     public static final int MODE_DISPLAY_ALL = 0;

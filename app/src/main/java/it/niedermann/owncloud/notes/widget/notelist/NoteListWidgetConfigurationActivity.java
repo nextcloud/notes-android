@@ -27,7 +27,7 @@ import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
-import it.niedermann.owncloud.notes.persistence.entity.WidgetNotesListEntity;
+import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 
 
 public class NoteListWidgetConfigurationActivity extends LockedActivity {
@@ -85,7 +85,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationAdapter.NavigationItem item) {
-                WidgetNotesListEntity data = new WidgetNotesListEntity();
+                NotesListWidgetData data = new NotesListWidgetData();
 
                 data.setId(appWidgetId);
                 if (itemRecent.equals(item)) {

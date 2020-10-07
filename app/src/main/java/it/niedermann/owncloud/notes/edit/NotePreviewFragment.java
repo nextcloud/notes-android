@@ -36,7 +36,7 @@ import java.util.HashSet;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
-import it.niedermann.owncloud.notes.persistence.entity.NoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteLinksUtils;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
@@ -234,7 +234,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
     }
 
-    private TextProcessorChain defaultTextProcessorChain(NoteEntity note) {
+    private TextProcessorChain defaultTextProcessorChain(Note note) {
         TextProcessorChain chain = new TextProcessorChain();
         chain.add(new NoteLinksProcessor(new HashSet<>(db.getNoteDao().getRemoteIds(note.getAccountId()))));
         chain.add(new WwwLinksProcessor());

@@ -13,7 +13,7 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.Item;
 
 @Entity()
-public class NoteEntity implements Serializable, Item {
+public class Note implements Serializable, Item {
     @PrimaryKey
     private Long id;
     private Long remoteId;
@@ -29,11 +29,11 @@ public class NoteEntity implements Serializable, Item {
     @Embedded(prefix = "category_")
     private Category category;
 
-    public NoteEntity() {
+    public Note() {
         super();
     }
 
-    public NoteEntity(long remoteId, Calendar modified, String title, String content, Boolean favorite, String category, String eTag) {
+    public Note(long remoteId, Calendar modified, String title, String content, Boolean favorite, String category, String eTag) {
         this.remoteId = remoteId;
         this.title = title;
         this.modified = modified;
@@ -44,7 +44,7 @@ public class NoteEntity implements Serializable, Item {
         this.category.setTitle(category);
     }
 
-    public NoteEntity(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, String excerpt, Integer scrollY) {
+    public Note(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, String excerpt, Integer scrollY) {
         this(remoteId, modified, title, content, favorite, category, etag);
         this.id = id;
         this.status = status;

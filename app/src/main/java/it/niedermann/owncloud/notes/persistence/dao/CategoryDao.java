@@ -28,7 +28,7 @@ public interface CategoryDao {
      *
      * @param accountId The user accountId
      */
-    @Query("DELETE FROM Category WHERE accountId = :accountId AND id NOT IN (SELECT category_id FROM NoteEntity)")
+    @Query("DELETE FROM Category WHERE accountId = :accountId AND id NOT IN (SELECT category_id FROM Note)")
     void removeEmptyCategory(long accountId);
 
     @Query("SELECT id FROM Category WHERE accountId = :accountId AND title = :title")
@@ -62,7 +62,7 @@ public interface CategoryDao {
     @Query("SELECT title FROM Category WHERE id = :categoryId")
     String getCategoryTitleById(long categoryId);
 
-    @Query("SELECT Category.id, Category.title, COUNT(*) as 'totalNotes' FROM Category INNER JOIN NoteEntity ON Category.id = NoteEntity.category_id" +
-            " WHERE NoteEntity.status != 'LOCAL_DELETED' AND NoteEntity.accountId = :accountId AND Category.title LIKE '%' + :categoryTitle + '%' GROUP BY Category.title")
+    @Query("SELECT Category.id, Category.title, COUNT(*) as 'totalNotes' FROM Category INNER JOIN Note ON Category.id = Note.category_id" +
+            " WHERE Note.status != 'LOCAL_DELETED' AND Note.accountId = :accountId AND Category.title LIKE '%' + :categoryTitle + '%' GROUP BY Category.title")
     List<CategoryWithNotesCount> searchCategories(Long accountId, String categoryTitle);
 }

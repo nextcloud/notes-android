@@ -5,17 +5,17 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import it.niedermann.owncloud.notes.persistence.entity.WidgetSingleNoteEntity;
+import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 
 @Dao
 public interface WidgetSingleNoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void createOrUpdateSingleNoteWidgetData(WidgetSingleNoteEntity data);
+    void createOrUpdateSingleNoteWidgetData(SingleNoteWidgetData data);
 
-    @Query("DELETE FROM WidgetSingleNoteEntity WHERE id = :id")
+    @Query("DELETE FROM SingleNoteWidgetData WHERE id = :id")
     void removeSingleNoteWidget(int id);
 
-    @Query("SELECT * FROM WidgetSingleNoteEntity WHERE id = :id")
-    WidgetSingleNoteEntity getSingleNoteWidgetData(int id);
+    @Query("SELECT * FROM SingleNoteWidgetData WHERE id = :id")
+    SingleNoteWidgetData getSingleNoteWidgetData(int id);
 }
