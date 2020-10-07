@@ -238,22 +238,28 @@ public abstract class NotesDatabase extends RoomDatabase {
     @WorkerThread
     public List<NavigationAdapter.CategoryNavigationItem> searchCategories(long accountId, @Nullable String search) {
         validateAccountId(accountId);
-        List<CategoryWithNotesCount> counters = getCategoryDao().searchCategories(accountId, search == null ? null : search.trim());
+        List<CategoryWithNotesCount> counters = search == null
+                ? getCategoryDao().getCategories(accountId)
+                : getCategoryDao().searchCategories(accountId, search.trim());
         List<NavigationAdapter.CategoryNavigationItem> categories = new ArrayList<>(counters.size());
         for (CategoryWithNotesCount counter : counters) {
-            Resources res = context.getResources();
-            String category = counter.getTitle().toLowerCase();
-            int icon = NavigationAdapter.ICON_FOLDER;
-            if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
-                icon = R.drawable.ic_library_music_grey600_24dp;
-            } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
-                icon = R.drawable.ic_local_movies_grey600_24dp;
-            } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
-                icon = R.drawable.ic_work_grey600_24dp;
-            }
-            categories.add(new NavigationAdapter.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId()));
+            categories.add(convertToCategoryNavigationItem(counter));
         }
         return categories;
+    }
+
+    private static NavigationAdapter.CategoryNavigationItem convertToCategoryNavigationItem(CategoryWithNotesCount counter) {
+        Resources res = context.getResources();
+        String category = counter.getTitle().toLowerCase();
+        int icon = NavigationAdapter.ICON_FOLDER;
+        if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
+            icon = R.drawable.ic_library_music_grey600_24dp;
+        } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
+            icon = R.drawable.ic_local_movies_grey600_24dp;
+        } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
+            icon = R.drawable.ic_work_grey600_24dp;
+        }
+        return new NavigationAdapter.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId());
     }
 
     public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId, @Nullable ISyncCallback callback) {
