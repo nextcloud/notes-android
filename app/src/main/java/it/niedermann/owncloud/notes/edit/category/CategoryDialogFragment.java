@@ -24,6 +24,9 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
+
+import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
@@ -175,18 +178,18 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         return categoryFragment;
     }
 
-    private class LoadCategoriesTask extends AsyncTask<String, Void, List<NavigationAdapter.CategoryNavigationItem>> {
+    private class LoadCategoriesTask extends AsyncTask<String, Void, List<CategoryWithNotesCount>> {
         String currentSearchString;
 
         @Override
-        protected List<NavigationAdapter.CategoryNavigationItem> doInBackground(String... searchText) {
+        protected List<CategoryWithNotesCount> doInBackground(String... searchText) {
             currentSearchString = searchText[0];
-            return db.searchCategories(accountId, currentSearchString);
+            return db.getCategoryDao().searchCategories(accountId, currentSearchString);
         }
 
         @Override
-        protected void onPostExecute(List<NavigationAdapter.CategoryNavigationItem> categories) {
-            adapter.setCategoryList(categories, currentSearchString);
+        protected void onPostExecute(List<CategoryWithNotesCount> categories) {
+            adapter.setCategoryList(convertToCategoryNavigationItem(requireContext(), categories), currentSearchString);
         }
     }
 }

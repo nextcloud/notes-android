@@ -93,6 +93,7 @@ import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 import static java.util.Arrays.asList;
 
@@ -516,7 +517,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             if (localAccount == null) {
                 return new ArrayList<>();
             }
-            List<CategoryNavigationItem> categories = db.getCategories(localAccount.getId());
+            List<CategoryNavigationItem> categories = convertToCategoryNavigationItem(MainActivity.this, db.getCategoryDao().getCategories(localAccount.getId()));
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
                 itemUncategorized.label = getString(R.string.action_uncategorized);

@@ -20,6 +20,7 @@
 package it.niedermann.owncloud.notes.shared.util;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.TextPaint;
@@ -30,12 +31,17 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.main.NavigationAdapter;
+import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
 
@@ -128,5 +134,27 @@ public class DisplayUtils {
         public void updateMeasureState(@NonNull TextPaint tp) {
             tp.setFakeBoldText(true);
         }
+    }
+
+    public static List<NavigationAdapter.CategoryNavigationItem> convertToCategoryNavigationItem(@NonNull Context context, @NonNull Collection<CategoryWithNotesCount> counter) {
+        List<NavigationAdapter.CategoryNavigationItem> result = new ArrayList<>(counter.size());
+        for(CategoryWithNotesCount count: counter) {
+            result.add(convertToCategoryNavigationItem(context, count));
+        }
+        return result;
+    }
+
+    public static NavigationAdapter.CategoryNavigationItem convertToCategoryNavigationItem(@NonNull Context context, @NonNull CategoryWithNotesCount counter) {
+        Resources res = context.getResources();
+        String category = counter.getTitle().toLowerCase();
+        int icon = NavigationAdapter.ICON_FOLDER;
+        if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
+            icon = R.drawable.ic_library_music_grey600_24dp;
+        } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
+            icon = R.drawable.ic_local_movies_grey600_24dp;
+        } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
+            icon = R.drawable.ic_work_grey600_24dp;
+        }
+        return new NavigationAdapter.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId());
     }
 }

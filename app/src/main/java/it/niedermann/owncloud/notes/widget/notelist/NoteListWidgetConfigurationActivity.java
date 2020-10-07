@@ -32,6 +32,7 @@ import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_STARRED;
+import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
 
 
 public class NoteListWidgetConfigurationActivity extends LockedActivity {
@@ -147,7 +148,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 return new ArrayList<>();
             }
             NavigationAdapter.NavigationItem itemUncategorized;
-            List<CategoryNavigationItem> categories = db.getCategories(localAccount.getId());
+            List<CategoryNavigationItem> categories = convertToCategoryNavigationItem(NoteListWidgetConfigurationActivity.this, db.getCategoryDao().getCategories(localAccount.getId()));
 
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);

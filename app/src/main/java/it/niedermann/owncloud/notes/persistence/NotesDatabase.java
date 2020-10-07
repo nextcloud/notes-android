@@ -212,56 +212,6 @@ public abstract class NotesDatabase extends RoomDatabase {
         return result;
     }
 
-    /**
-     * This method return all of the categories with given accountId
-     *
-     * @param accountId The user account Id
-     * @return All of the categories with given accountId
-     */
-    @NonNull
-    @WorkerThread
-    public List<NavigationAdapter.CategoryNavigationItem> getCategories(long accountId) {
-        return searchCategories(accountId, null);
-    }
-
-    /**
-     * This method return the category list containing all of the categories containing the
-     * search pattern and matched with the given accountId
-     * The join operation is used because it is needed that the number of notes in each category
-     * If search pattern is null, this method will return all of the categories for corresponding accountId
-     *
-     * @param accountId The user account ID
-     * @param search    The search pattern
-     * @return The category list containing all of the categories matched
-     */
-    @NonNull
-    @WorkerThread
-    public List<NavigationAdapter.CategoryNavigationItem> searchCategories(long accountId, @Nullable String search) {
-        validateAccountId(accountId);
-        List<CategoryWithNotesCount> counters = search == null
-                ? getCategoryDao().getCategories(accountId)
-                : getCategoryDao().searchCategories(accountId, search.trim());
-        List<NavigationAdapter.CategoryNavigationItem> categories = new ArrayList<>(counters.size());
-        for (CategoryWithNotesCount counter : counters) {
-            categories.add(convertToCategoryNavigationItem(counter));
-        }
-        return categories;
-    }
-
-    private static NavigationAdapter.CategoryNavigationItem convertToCategoryNavigationItem(CategoryWithNotesCount counter) {
-        Resources res = context.getResources();
-        String category = counter.getTitle().toLowerCase();
-        int icon = NavigationAdapter.ICON_FOLDER;
-        if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
-            icon = R.drawable.ic_library_music_grey600_24dp;
-        } else if (category.equals(res.getString(R.string.category_movies).toLowerCase()) || category.equals(res.getString(R.string.category_movie).toLowerCase())) {
-            icon = R.drawable.ic_local_movies_grey600_24dp;
-        } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
-            icon = R.drawable.ic_work_grey600_24dp;
-        }
-        return new NavigationAdapter.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId());
-    }
-
     public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId, @Nullable ISyncCallback callback) {
         getNoteDao().toggleFavorite(noteId);
         if (callback != null) {
