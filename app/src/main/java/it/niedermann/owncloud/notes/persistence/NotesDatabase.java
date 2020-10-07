@@ -51,6 +51,22 @@ import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_10_11;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_11_12;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_12_13;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_13_14;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_14_15;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_15_16;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_16_17;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_17_18;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_18_19;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_19_20;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_4_5;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_5_6;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_6_7;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_7_8;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_8_9;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -72,7 +88,7 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
                 Category.class,
                 SingleNoteWidgetData.class,
                 NotesListWidgetData.class
-        }, version = 18
+        }, version = 20
 )
 @TypeConverters({Converters.class})
 public abstract class NotesDatabase extends RoomDatabase {
@@ -88,8 +104,25 @@ public abstract class NotesDatabase extends RoomDatabase {
                 context,
                 NotesDatabase.class,
                 NOTES_DB_NAME)
-                .addMigrations(OLD_STUFF)
-                .fallbackToDestructiveMigration()
+                .addMigrations(
+                        new Migration_4_5(),
+                        new Migration_5_6(),
+                        new Migration_6_7(),
+                        new Migration_7_8(),
+                        new Migration_8_9(context, (supportSQLiteDatabase) -> { /* TODO */ }, () -> instance.notifyWidgets()),
+                        new Migration_9_10(),
+                        new Migration_10_11(context),
+                        new Migration_11_12(context),
+                        new Migration_12_13(context),
+                        new Migration_13_14(context, () -> instance.notifyWidgets()),
+                        new Migration_14_15(),
+                        new Migration_15_16(context, () -> instance.notifyWidgets()),
+                        new Migration_16_17(),
+                        new Migration_17_18(),
+                        new Migration_18_19(context),
+                        new Migration_19_20()
+                )
+//                .fallbackToDestructiveMigration()
                 .addCallback(new RoomDatabase.Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -100,13 +133,6 @@ public abstract class NotesDatabase extends RoomDatabase {
                 .allowMainThreadQueries() // FIXME remove
                 .build();
     }
-
-    private static final Migration OLD_STUFF = new Migration(17, 18) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-
-        }
-    };
 
     public abstract LocalAccountDao getLocalAccountDao();
 

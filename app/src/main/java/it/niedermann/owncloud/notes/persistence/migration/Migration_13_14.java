@@ -3,25 +3,38 @@ package it.niedermann.owncloud.notes.persistence.migration;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
+import androidx.room.OnConflictStrategy;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
-public class Migration_13_14 {
+public class Migration_13_14 extends Migration {
 
     private static final String TAG = Migration_13_14.class.getSimpleName();
+    @NonNull
+    private final Context context;
+    @NonNull
+    private final Runnable notifyWidgets;
+
+    public Migration_13_14(@NonNull Context context, @NonNull Runnable notifyWidgets) {
+        super(13, 14);
+        this.context = context;
+        this.notifyWidgets = notifyWidgets;
+    }
 
     /**
      * Move single note widget preferences to database
      * https://github.com/stefan-niedermann/nextcloud-notes/issues/754
      */
-    public Migration_13_14(@NonNull SQLiteDatabase db, @NonNull Context context, @NonNull Runnable notifyWidgets) {
+    @Override
+    public void migrate(@NonNull SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE WIDGET_SINGLE_NOTES ( " +
                 "ID INTEGER PRIMARY KEY, " +
                 "ACCOUNT_ID INTEGER, " +
@@ -60,7 +73,7 @@ public class Migration_13_14 {
                     migratedWidgetValues.put("ACCOUNT_ID", accountId);
                     migratedWidgetValues.put("NOTE_ID", noteId);
                     migratedWidgetValues.put("THEME_MODE", themeMode);
-                    db.insert("WIDGET_SINGLE_NOTES", null, migratedWidgetValues);
+                    db.insert("WIDGET_SINGLE_NOTES", OnConflictStrategy.REPLACE, migratedWidgetValues);
                 } catch (Throwable t) {
                     Log.e(TAG, "Could not migrate widget {widgetId: " + widgetId + ", accountId: " + accountId + ", noteId: " + noteId + ", themeMode: " + themeMode + "}");
                     t.printStackTrace();

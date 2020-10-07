@@ -4,25 +4,38 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
+import androidx.room.OnConflictStrategy;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
-public class Migration_15_16 {
+public class Migration_15_16 extends Migration {
 
     private static final String TAG = Migration_15_16.class.getSimpleName();
+    @NonNull
+    private final Context context;
+    @NonNull
+    private final Runnable notifyWidgets;
+
+    public Migration_15_16(@NonNull Context context, @NonNull Runnable notifyWidgets) {
+        super(15, 16);
+        this.context = context;
+        this.notifyWidgets = notifyWidgets;
+    }
 
     /**
      * Moves note list widget preferences from {@link SharedPreferences} to database
      * https://github.com/stefan-niedermann/nextcloud-notes/issues/832
      */
-    public Migration_15_16(SQLiteDatabase db, @NonNull Context context, @NonNull Runnable notifyWidgets) {
+    @Override
+    public void migrate(@NonNull SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE WIDGET_NOTE_LISTS ( " +
                 "ID INTEGER PRIMARY KEY, " +
                 "ACCOUNT_ID INTEGER, " +
@@ -62,14 +75,7 @@ public class Migration_15_16 {
 
                     if (mode == 2) {
                         final String categoryTitle = sharedPreferences.getString(SP_CATEGORY_KEY + widgetId, null);
-                        Cursor cursor = db.query(
-                                "CATEGORIES",
-                                new String[]{"CATEGORY_ID"},
-                                "CATEGORY_TITLE = ? AND CATEGORY_ACCOUNT_ID = ? ",
-                                new String[]{categoryTitle, String.valueOf(accountId)},
-                                null,
-                                null,
-                                null);
+                        Cursor cursor = db.query("SELECT CATEGORY_ID FROM CATEGORIES WHERE CATEGORY_TITLE = ? AND CATEGORY_ACCOUNT_ID = ?", new String[]{categoryTitle, String.valueOf(accountId)});
                         if (cursor.moveToNext()) {
                             categoryId = cursor.getInt(0);
                         } else {
@@ -84,7 +90,7 @@ public class Migration_15_16 {
                     migratedWidgetValues.put("CATEGORY_ID", categoryId);
                     migratedWidgetValues.put("MODE", mode);
                     migratedWidgetValues.put("THEME_MODE", themeMode);
-                    db.insert("WIDGET_NOTE_LISTS", null, migratedWidgetValues);
+                    db.insert("WIDGET_NOTE_LISTS", OnConflictStrategy.REPLACE, migratedWidgetValues);
                 } catch (Throwable t) {
                     Log.e(TAG, "Could not migrate widget {widgetId: " + widgetId + ", accountId: " + accountId + ", mode: " + mode + ", categoryId: " + categoryId + ", themeMode: " + themeMode + "}");
                     t.printStackTrace();

@@ -4,15 +4,26 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 
-public class Migration_11_12 {
+public class Migration_11_12 extends Migration {
+    @NonNull
+    private final Context context;
+
+    public Migration_11_12(@NonNull Context context) {
+        super(11, 12);
+        this.context = context;
+    }
+
     /**
      * Adds columns to store the {@link ApiVersion} and the theme colors
      */
-    public Migration_11_12(@NonNull SQLiteDatabase db, @NonNull Context context) {
+    @Override
+    public void migrate(@NonNull SupportSQLiteDatabase db) {
         db.execSQL("ALTER TABLE ACCOUNTS ADD COLUMN API_VERSION TEXT");
         db.execSQL("ALTER TABLE ACCOUNTS ADD COLUMN COLOR VARCHAR(6) NOT NULL DEFAULT '000000'");
         db.execSQL("ALTER TABLE ACCOUNTS ADD COLUMN TEXT_COLOR VARCHAR(6) NOT NULL DEFAULT '0082C9'");

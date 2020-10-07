@@ -25,11 +25,11 @@ import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 @Entity(
         tableName = "ACCOUNTS",
         indices = {
-                @Index(name = "ACCOUNTS_ACCOUNT_NAME_idx", value = "ACCOUNT_NAME"),
-                @Index(name = "ACCOUNTS_ETAG_idx", value = "ETAG"),
                 @Index(name = "ACCOUNTS_MODIFIED_idx", value = "MODIFIED"),
                 @Index(name = "ACCOUNTS_URL_idx", value = "URL"),
-                @Index(name = "ACCOUNTS_USERNAME_idx", value = "USERNAME")
+                @Index(name = "ACCOUNTS_USERNAME_idx", value = "USERNAME"),
+                @Index(name = "ACCOUNTS_ACCOUNT_NAME_idx", value = "ACCOUNT_NAME"),
+                @Index(name = "ACCOUNTS_ETAG_idx", value = "ETAG")
         }
 )
 public class LocalAccount {
@@ -48,9 +48,9 @@ public class LocalAccount {
     private Calendar modified;
     @ColumnInfo(name = "API_VERSION")
     private String apiVersion;
-    @ColumnInfo(name = "COLOR")
+    @ColumnInfo(name = "COLOR", defaultValue = "000000")
     private String color;
-    @ColumnInfo(name = "TEXT_COLOR")
+    @ColumnInfo(name = "TEXT_COLOR", defaultValue = "0082C9")
     private String textColor;
     @ColumnInfo(name = "CAPABILITIES_ETAG")
     private String capabilitiesETag;

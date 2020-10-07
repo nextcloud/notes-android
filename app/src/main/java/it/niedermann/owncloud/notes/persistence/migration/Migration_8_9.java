@@ -11,6 +11,9 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 import androidx.preference.PreferenceManager;
+import androidx.room.OnConflictStrategy;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,14 +22,26 @@ import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
 import it.niedermann.owncloud.notes.widget.notelist.NoteListWidget;
 import it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget;
 
-public class Migration_8_9 {
+public class Migration_8_9 extends Migration {
 
     private static final String TAG = Migration_8_9.class.getSimpleName();
+    private final Context context;
+    private final Consumer<SupportSQLiteDatabase> recreateDatabase;
+    private final Runnable notifyWidgets;
 
     /**
      * Adds an account table for multi account usage in combination with SingleSignOn
      */
-    public Migration_8_9(@NonNull SQLiteDatabase db, @NonNull Context context, @NonNull Consumer<SQLiteDatabase> recreateDatabase, @NonNull Runnable notifyWidgets) {
+    public Migration_8_9(@NonNull Context context, @NonNull Consumer<SupportSQLiteDatabase> recreateDatabase, @NonNull Runnable notifyWidgets) {
+        super(8, 9);
+        this.context = context;
+        this.recreateDatabase = recreateDatabase;
+        this.notifyWidgets = notifyWidgets;
+    }
+
+
+    @Override
+    public void migrate(@NonNull SupportSQLiteDatabase db) {
         // Create accounts table
         db.execSQL("CREATE TABLE ACCOUNTS ( " +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -54,12 +69,12 @@ public class Migration_8_9 {
                 migratedAccountValues.put("URL", url);
                 migratedAccountValues.put("USERNAME", username);
                 migratedAccountValues.put("ACCOUNT_NAME", accountName);
-                db.insert("ACCOUNTS", null, migratedAccountValues);
+                db.insert("ACCOUNTS", OnConflictStrategy.REPLACE, migratedAccountValues);
 
                 // After successful insertion of migrated account, set accountId to 1 in each note
                 ContentValues values = new ContentValues();
                 values.put("ACCOUNT_ID", 1);
-                db.update("NOTES", values, "ACCOUNT_ID = ?", new String[]{"NULL"});
+                db.update("NOTES", OnConflictStrategy.REPLACE, values, "ACCOUNT_ID = ?", new String[]{"NULL"});
 
                 // Add FOREIGN_KEY constraint
                 final String table_temp = "NOTES_TEMP";

@@ -3,11 +3,19 @@ package it.niedermann.owncloud.notes.persistence.migration;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
 
-public class Migration_7_8 {
-    public Migration_7_8(@NonNull SQLiteDatabase db) {
+public class Migration_7_8 extends Migration {
+
+    public Migration_7_8() {
+        super(7, 8);
+    }
+
+    @Override
+    public void migrate(@NonNull SupportSQLiteDatabase db) {
         final String table_temp = "NOTES_TEMP";
         db.execSQL("CREATE TABLE " + table_temp + " ( " +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
