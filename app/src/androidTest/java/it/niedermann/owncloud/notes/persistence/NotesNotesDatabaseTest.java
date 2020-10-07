@@ -430,6 +430,7 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
+    @Ignore
     public void test_11_multiDeleteNote() {
         long thisAccountID = account.getId();
         List<Note> notes = db.getNoteDao().getNotes(thisAccountID);

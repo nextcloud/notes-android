@@ -327,7 +327,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (frag != null) {
             manager.beginTransaction().remove(frag).commit();
         }
-        final DialogFragment categoryFragment = CategoryDialogFragment.newInstance(note.getAccountId(), note.getCategory().getTitle());
+        final DialogFragment categoryFragment = CategoryDialogFragment.newInstance(note.getAccountId(), note.getCategory());
         categoryFragment.setTargetFragment(this, 0);
         categoryFragment.show(manager, fragmentId);
     }

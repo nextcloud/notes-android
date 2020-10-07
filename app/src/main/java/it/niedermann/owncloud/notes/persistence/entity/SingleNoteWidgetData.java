@@ -1,12 +1,31 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 
 import it.niedermann.owncloud.notes.widget.AbstractWidgetData;
 
-@Entity()
+@Entity(
+        tableName = "WIDGET_SINGLE_NOTES",
+        foreignKeys = {
+                @ForeignKey(
+                        entity = LocalAccount.class,
+                        parentColumns = "ID",
+                        childColumns = "ACCOUNT_ID",
+                        onDelete = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+                        entity = Note.class,
+                        parentColumns = "ID",
+                        childColumns = "NOTE_ID",
+                        onDelete = ForeignKey.CASCADE
+                )
+        }
+)
 public class SingleNoteWidgetData extends AbstractWidgetData {
+    @ColumnInfo(name = "NOTE_ID")
     private long noteId;
 
     public SingleNoteWidgetData() {

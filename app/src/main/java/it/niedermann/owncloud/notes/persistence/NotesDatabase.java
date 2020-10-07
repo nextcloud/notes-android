@@ -137,7 +137,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param note Note
      */
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, Note note) {
-        Note entity = new Note(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+        Note entity = new Note(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
         long id = addNote(accountId, entity);
         notifyWidgets();
         serverSyncHelper.scheduleSync(ssoAccount, true);
@@ -179,7 +179,7 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, Note note, long newAccountId) {
         // Add new note
-        addNoteAndSync(ssoAccount, newAccountId, new Note(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory().getTitle(), null));
+        addNoteAndSync(ssoAccount, newAccountId, new Note(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory(), null));
         deleteNoteAndSync(ssoAccount, note.getId());
 
         notifyWidgets();
@@ -260,9 +260,9 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      */
     public void setCategory(SingleSignOnAccount ssoAccount, @NonNull Note note, @NonNull String category, @Nullable ISyncCallback callback) {
-        note.setCategory(getCategoryDao().getCategory(getCategoryDao().getCategoryIdByTitle(getLocalAccountDao().getLocalAccountByAccountName(ssoAccount.name).getId(), category)));
+        note.setCategory(category);
         getNoteDao().updateStatus(note.getId(), DBStatus.LOCAL_DELETED);
-        long categoryId = getOrCreateCategoryIdByTitle(note.getAccountId(), note.getCategory().getTitle());
+        long categoryId = getOrCreateCategoryIdByTitle(note.getAccountId(), note.getCategory());
         getNoteDao().updateCategory(note.getId(), categoryId);
         getCategoryDao().removeEmptyCategory(note.getAccountId());
         if (callback != null) {
@@ -284,7 +284,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     public Note updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull LocalAccount localAccount, @NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         Note newNote;
         if (newContent == null) {
-            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getCategory().getTitle(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getCategory(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
             final String title;
             if (newTitle != null) {
@@ -296,7 +296,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                     title = oldNote.getTitle();
                 }
             }
-            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getCategory().getTitle(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
+            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getCategory(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
         }
         int rows = getNoteDao().updateNote(newNote);
         getCategoryDao().removeEmptyCategory(localAccount.getId());
@@ -612,9 +612,9 @@ public abstract class NotesDatabase extends RoomDatabase {
         // The other columns have to be updated in dependency of forceUnchangedDBNoteState,
         // since the Synchronization-Task must not overwrite locales changes!
         if (forceUnchangedDBNoteState != null) {
-            getNoteDao().updateIfModifiedLocallyDuringSync(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory().getTitle(), remoteNote.getETag(), remoteNote.getContent());
+            getNoteDao().updateIfModifiedLocallyDuringSync(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent());
         } else {
-            getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory().getTitle(), remoteNote.getETag(), remoteNote.getContent());
+            getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(id, remoteNote.getModified().getTimeInMillis() / 1000, remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent());
         }
         getCategoryDao().removeEmptyCategory(accountId);
         Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "");

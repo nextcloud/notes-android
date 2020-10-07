@@ -1,14 +1,18 @@
 package it.niedermann.owncloud.notes.widget;
 
 import androidx.annotation.IntRange;
+import androidx.room.ColumnInfo;
 import androidx.room.PrimaryKey;
 
 public abstract class AbstractWidgetData {
 
     @PrimaryKey
+    @ColumnInfo(name = "ID")
     private int id;
+    @ColumnInfo(name = "ACCOUNT_ID")
     private long accountId;
     @IntRange(from = 0, to = 2)
+    @ColumnInfo(name = "THEME_MODE")
     private int themeMode;
 
     protected AbstractWidgetData() {

@@ -991,9 +991,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     public void onCategoryChosen(String category) {
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
             Note note = (Note) adapter.getItem(i);
-            Category c = new Category();
-            c.setTitle(category);
-            note.setCategory(c);
+            note.setCategory(category);
             db.setCategory(ssoAccount, note, category, this::refreshLists);
         }
 

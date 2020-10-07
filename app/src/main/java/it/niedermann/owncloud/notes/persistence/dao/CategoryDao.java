@@ -16,7 +16,7 @@ public interface CategoryDao {
     @Insert
     Long addCategory(Category entity);
 
-    @Query("SELECT * FROM Category WHERE id = :id")
+    @Query("SELECT * FROM CATEGORIES WHERE CATEGORY_ID = :id")
     Category getCategory(long id);
 
     /**
@@ -28,10 +28,10 @@ public interface CategoryDao {
      *
      * @param accountId The user accountId
      */
-    @Query("DELETE FROM Category WHERE accountId = :accountId AND id NOT IN (SELECT categoryId FROM Note)")
+    @Query("DELETE FROM CATEGORIES WHERE CATEGORY_ACCOUNT_ID = :accountId AND CATEGORY_ID NOT IN (SELECT CATEGORY_ID FROM NOTES)")
     void removeEmptyCategory(long accountId);
 
-    @Query("SELECT id FROM Category WHERE accountId = :accountId AND title = :title")
+    @Query("SELECT CATEGORY_ID FROM CATEGORIES WHERE CATEGORY_ACCOUNT_ID = :accountId AND CATEGORY_TITLE = :title")
     Long getCategoryIdByTitle(long accountId, String title);
 
 
@@ -44,7 +44,7 @@ public interface CategoryDao {
      * @param categoryTitle The category title
      * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
      */
-    @Query("UPDATE Category SET categorySortingMethod = :sortingMethod WHERE id = (SELECT id FROM Category WHERE accountId = :accountId AND title = :categoryTitle)")
+    @Query("UPDATE CATEGORIES SET CATEGORY_SORTING_METHOD = :sortingMethod WHERE CATEGORY_ID = (SELECT CATEGORY_ID FROM CATEGORIES WHERE CATEGORY_ACCOUNT_ID = :accountId AND CATEGORY_TITLE = :categoryTitle)")
     void modifyCategoryOrderByTitle(long accountId, String categoryTitle, CategorySortingMethod sortingMethod);
 
     /**
@@ -56,13 +56,13 @@ public interface CategoryDao {
      * @param categoryTitle The category title
      * @return The sorting method in {@link CategorySortingMethod} enum format
      */
-    @Query("SELECT categorySortingMethod FROM Category WHERE accountId = :accountId AND title = :categoryTitle")
+    @Query("SELECT CATEGORY_SORTING_METHOD FROM CATEGORIES WHERE CATEGORY_ACCOUNT_ID = :accountId AND CATEGORY_TITLE = :categoryTitle")
     CategorySortingMethod getCategoryOrderByTitle(long accountId, String categoryTitle);
 
-    @Query("SELECT title FROM Category WHERE id = :categoryId")
+    @Query("SELECT CATEGORY_TITLE FROM CATEGORIES WHERE CATEGORY_ID = :categoryId")
     String getCategoryTitleById(long categoryId);
 
-    @Query("SELECT Category.id, Category.title, COUNT(*) as 'totalNotes' FROM Category INNER JOIN Note ON Category.id = Note.category_id" +
-            " WHERE Note.status != 'LOCAL_DELETED' AND Note.accountId = :accountId AND Category.title LIKE '%' + :categoryTitle + '%' GROUP BY Category.title")
+    @Query("SELECT CATEGORY_ID, CATEGORY_TITLE, COUNT(*) as 'totalNotes' FROM CATEGORIES INNER JOIN NOTES ON CATEGORY_ID = CATEGORY" +
+            " WHERE STATUS != 'LOCAL_DELETED' AND NOTES.ACCOUNT_ID = :accountId AND CATEGORY_TITLE LIKE '%' + :categoryTitle + '%' GROUP BY CATEGORY_TITLE")
     List<CategoryWithNotesCount> searchCategories(Long accountId, String categoryTitle);
 }

@@ -62,11 +62,11 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         for (Note entity : noteList) {
             Note note = entity;
             if (currentCategory != null && !currentCategory.equals(note.getCategory())) {
-                itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory().getTitle())));
+                itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory())));
             }
 
             itemList.add(note);
-            currentCategory = note.getCategory().getTitle();
+            currentCategory = note.getCategory();
         }
         return itemList;
     }

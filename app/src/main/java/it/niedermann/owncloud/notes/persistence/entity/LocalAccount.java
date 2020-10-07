@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.Index;
@@ -22,26 +23,37 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
 @Entity(
+        tableName = "ACCOUNTS",
         indices = {
-                @Index(value = "url"),
-                @Index(value = "userName"),
-                @Index(value = "accountName"),
-                @Index(value = "eTag"),
-                @Index(value = "modified")
+                @Index(name = "ACCOUNTS_ACCOUNT_NAME_idx", value = "ACCOUNT_NAME"),
+                @Index(name = "ACCOUNTS_ETAG_idx", value = "ETAG"),
+                @Index(name = "ACCOUNTS_MODIFIED_idx", value = "MODIFIED"),
+                @Index(name = "ACCOUNTS_URL_idx", value = "URL"),
+                @Index(name = "ACCOUNTS_USERNAME_idx", value = "USERNAME")
         }
 )
 public class LocalAccount {
     @PrimaryKey
-    public Long id;
+    @ColumnInfo(name = "ID")
+    private Long id;
+    @ColumnInfo(name = "URL")
     private String url;
+    @ColumnInfo(name = "USERNAME")
     private String userName;
+    @ColumnInfo(name = "ACCOUNT_NAME")
     private String accountName;
+    @ColumnInfo(name = "ETAG")
     private String eTag;
+    @ColumnInfo(name = "MODIFIED")
     private Calendar modified;
+    @ColumnInfo(name = "API_VERSION")
     private String apiVersion;
-    private String capabilitiesETag;
+    @ColumnInfo(name = "COLOR")
     private String color;
+    @ColumnInfo(name = "TEXT_COLOR")
     private String textColor;
+    @ColumnInfo(name = "CAPABILITIES_ETAG")
+    private String capabilitiesETag;
 
     @Nullable
     @Ignore

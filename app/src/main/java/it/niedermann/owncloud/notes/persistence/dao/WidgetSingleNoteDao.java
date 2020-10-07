@@ -13,9 +13,9 @@ public interface WidgetSingleNoteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void createOrUpdateSingleNoteWidgetData(SingleNoteWidgetData data);
 
-    @Query("DELETE FROM SingleNoteWidgetData WHERE id = :id")
+    @Query("DELETE FROM WIDGET_SINGLE_NOTES WHERE ID = :id")
     void removeSingleNoteWidget(int id);
 
-    @Query("SELECT * FROM SingleNoteWidgetData WHERE id = :id")
+    @Query("SELECT * FROM WIDGET_SINGLE_NOTES WHERE ID = :id")
     SingleNoteWidgetData getSingleNoteWidgetData(int id);
 }

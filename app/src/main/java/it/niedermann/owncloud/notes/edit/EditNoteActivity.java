@@ -254,10 +254,10 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     public void onNoteUpdated(Note note) {
         if (note != null) {
             binding.toolbar.setTitle(note.getTitle());
-            if (note.getCategory().getTitle().isEmpty()) {
+            if (note.getCategory().isEmpty()) {
                 binding.toolbar.setSubtitle(null);
             } else {
-                binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory().getTitle()));
+                binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
         } else {
             // Maybe account is not authenticated -> note == null

@@ -29,6 +29,10 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 
+import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
+import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
+import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_STARRED;
+
 
 public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private static final String TAG = Activity.class.getSimpleName();
@@ -89,11 +93,11 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
 
                 data.setId(appWidgetId);
                 if (itemRecent.equals(item)) {
-                    data.setMode(NoteListsWidgetData.MODE_DISPLAY_ALL);
+                    data.setMode(MODE_DISPLAY_ALL);
                 } else if (itemFavorites.equals(item)) {
-                    data.setMode(NoteListsWidgetData.MODE_DISPLAY_STARRED);
+                    data.setMode(MODE_DISPLAY_STARRED);
                 } else {
-                    data.setMode(NoteListsWidgetData.MODE_DISPLAY_CATEGORY);
+                    data.setMode(MODE_DISPLAY_CATEGORY);
                     if (item instanceof CategoryNavigationItem) {
                         data.setCategoryId(((CategoryNavigationItem) item).categoryId);
                     } else {
