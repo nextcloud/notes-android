@@ -1,11 +1,27 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
-@Entity
+@Entity(
+        foreignKeys = {
+                @ForeignKey(
+                        entity = LocalAccount.class,
+                        parentColumns = "accountId",
+                        childColumns = "id",
+                        onDelete = ForeignKey.CASCADE
+                )
+        },
+        indices = {
+                @Index(value = "accountId"),
+                @Index(value = "title"),
+                @Index(value = "categorySortingMethod")
+        }
+)
 public class Category {
     @PrimaryKey
     private long id;
@@ -45,6 +61,3 @@ public class Category {
         this.categorySortingMethod = categorySortingMethod;
     }
 }
-//                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +
-//                "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
-//                DatabaseIndexUtil.createIndex(db, table_notes, key_remote_id, key_account_id, key_status, key_favorite, key_category, key_modified);

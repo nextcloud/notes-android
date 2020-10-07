@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import org.json.JSONArray;
@@ -20,7 +21,15 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 
-@Entity()
+@Entity(
+        indices = {
+                @Index(value = "url"),
+                @Index(value = "userName"),
+                @Index(value = "accountName"),
+                @Index(value = "eTag"),
+                @Index(value = "modified")
+        }
+)
 public class LocalAccount {
     @PrimaryKey
     public Long id;
@@ -167,5 +176,3 @@ public class LocalAccount {
         }
     }
 }
-
-//                DatabaseIndexUtil.createIndex(db, table_accounts, key_url, key_username, key_account_name, key_etag, key_modified);

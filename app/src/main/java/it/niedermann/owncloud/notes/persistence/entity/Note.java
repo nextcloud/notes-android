@@ -1,9 +1,10 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.annotation.NonNull;
-import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -12,12 +13,36 @@ import java.util.Calendar;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.Item;
 
-@Entity()
+@Entity(
+        foreignKeys = {
+                @ForeignKey(
+                        entity = LocalAccount.class,
+                        parentColumns = "accountId",
+                        childColumns = "id",
+                        onDelete = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+                        entity = Category.class,
+                        parentColumns = "categoryId",
+                        childColumns = "id",
+                        onDelete = ForeignKey.SET_DEFAULT
+                )
+        },
+        indices = {
+                @Index(value = "remoteId"),
+                @Index(value = "accountId"),
+                @Index(value = "categoryId"),
+                @Index(value = "status"),
+                @Index(value = "favorite"),
+                @Index(value = "modified")
+        }
+)
 public class Note implements Serializable, Item {
     @PrimaryKey
     private Long id;
     private Long remoteId;
     private Long accountId;
+    private Long categoryId;
     private DBStatus status = DBStatus.VOID;
     private String title;
     private Calendar modified;
@@ -26,26 +51,24 @@ public class Note implements Serializable, Item {
     private String eTag;
     private String excerpt;
     private Integer scrollY;
-    @Embedded(prefix = "category_")
-    private Category category;
 
     public Note() {
         super();
     }
 
-    public Note(long remoteId, Calendar modified, String title, String content, Boolean favorite, String category, String eTag) {
+    @Ignore
+    public Note(long remoteId, Calendar modified, String title, String content, Boolean favorite, String eTag) {
         this.remoteId = remoteId;
         this.title = title;
         this.modified = modified;
         this.content = content;
         this.favorite = favorite;
         this.eTag = eTag;
-        this.category = new Category();
-        this.category.setTitle(category);
     }
 
-    public Note(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, String excerpt, Integer scrollY) {
-        this(remoteId, modified, title, content, favorite, category, etag);
+    @Ignore
+    public Note(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String etag, DBStatus status, long accountId, String excerpt, Integer scrollY) {
+        this(remoteId, modified, title, content, favorite, etag);
         this.id = id;
         this.status = status;
         this.accountId = accountId;
@@ -75,6 +98,14 @@ public class Note implements Serializable, Item {
 
     public void setAccountId(Long accountId) {
         this.accountId = accountId;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public DBStatus getStatus() {
@@ -141,14 +172,6 @@ public class Note implements Serializable, Item {
         this.scrollY = scrollY;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     @Ignore
     @Override
     public boolean isSection() {
@@ -162,16 +185,13 @@ public class Note implements Serializable, Item {
                 "id=" + id +
                 ", remoteId=" + remoteId +
                 ", accountId=" + accountId +
+                ", categoryId=" + categoryId +
                 ", status=" + status +
                 ", title='" + title + '\'' +
                 ", modified=" + modified +
                 ", favorite=" + favorite +
                 ", eTag='" + eTag + '\'' +
                 ", scrollY=" + scrollY +
-                ", category=" + category +
                 '}';
     }
 }
-//                "FOREIGN KEY(" + key_category + ") REFERENCES " + table_category + "(" + key_category_id + "), " +
-//                "FOREIGN KEY(" + key_account_id + ") REFERENCES " + table_accounts + "(" + key_id + "))");
-//                DatabaseIndexUtil.createIndex(db, table_notes, key_remote_id, key_account_id, key_status, key_favorite, key_category, key_modified);
