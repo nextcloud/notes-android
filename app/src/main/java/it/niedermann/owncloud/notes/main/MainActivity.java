@@ -49,6 +49,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.FormattingHelpActivity;
@@ -163,11 +164,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         swipeRefreshLayout.setRefreshing(false);
     };
 
-    private LiveData<List<Item>> noteWithCategoryLiveData;
-    private Observer<List<Item>> noteWithCategoryObserver = notes -> {
+    private LiveData<List<NoteWithCategory>> noteWithCategoryLiveData;
+    private Observer<List<NoteWithCategory>> noteWithCategoryObserver = notes -> {
         adapter.setShowCategory(mainViewModel.getSelectedCategory().getValue() == null);
         adapter.setHighlightSearchQuery(mainViewModel.getSearchTerm().getValue());
-        adapter.setItemList(notes);
+        List<Item> items = new ArrayList<>();
+        items.addAll(notes);
+        // yes, NoteWithCatecory are Items, check. BUT: setItemList expects an List<Item(!)>, the Elements in notes ARE Items, but the List-type isn't correct, since you pass the List, not the items!
+        adapter.setItemList(items);
         binding.activityNotesListView.progressCircular.setVisibility(GONE);
         binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
 //        if (scrollToTop) {
