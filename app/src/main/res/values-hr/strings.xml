@@ -119,7 +119,6 @@
     <string name="simple_more">Više</string>
     <string name="simple_move">Premjesti</string>
     <string name="checkbox_could_not_be_toggled">Nije moguće označiti potvrdni okvir.</string>
-    <string name="bulk_notes_restored">Vraćeno %1$d bilješki</string>
     <string name="category_readonly">Samo za čitanje</string>
     <string name="no_category">Nema kategorije</string>
     <string name="add_category">Dodaj %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Izgled</string>
     <string name="simple_synchronization">Sinkronizacija</string>
     <string name="simple_behavior">Ponašanje</string>
-    <string name="share_multiple">Dijeli sadržaj %1$d bilješki</string>
     <string name="manage_accounts">Upravljaj računima</string>
     <string name="action_formatting_help">Oblikovanje</string>
 
@@ -194,12 +192,6 @@
         <item quantity="few">Odabrano je %d</item>
         <item quantity="other">Odabrano je %d</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="one">Izbrisana %1$d bilješka</item>
-        <item quantity="few">Izbrisano %1$d bilješki</item>
-        <item quantity="other">Izbrisano %1$d bilješki</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

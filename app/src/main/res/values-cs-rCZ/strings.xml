@@ -119,7 +119,6 @@
     <string name="simple_more">Další</string>
     <string name="simple_move">Přesunout</string>
     <string name="checkbox_could_not_be_toggled">Stav zaškrtávací kolonky se nepodařilo přepnout.</string>
-    <string name="bulk_notes_restored">Obnoveno %1$d poznámek</string>
     <string name="category_readonly">Pouze pro čtení</string>
     <string name="no_category">Žádná kategorie</string>
     <string name="add_category">Přidat %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Vzhled</string>
     <string name="simple_synchronization">Synchronizace</string>
     <string name="simple_behavior">Chování</string>
-    <string name="share_multiple">Sdílet obsah %1$d poznámek</string>
     <string name="manage_accounts">Spravovat účty</string>
     <string name="action_formatting_help">Formátování</string>
 
@@ -196,10 +194,22 @@
         <item quantity="other">vybrány %d</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
-        <item quantity="one">Smazána %1$d poznámka</item>
+        <item quantity="one">Smazána jedna poznámka</item>
         <item quantity="few">Smazány %1$d poznámky</item>
         <item quantity="many">Smazáno %1$d poznámek</item>
         <item quantity="other">Smazány %1$d poznámky</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Obnovena jedna poznámka</item>
+        <item quantity="few">Obnoveny %1$d poznámky</item>
+        <item quantity="many">Obnoveno %1$d poznámek</item>
+        <item quantity="other">Obnoveny %1$d poznámky</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Sdílet obsah %1$d poznámky</item>
+        <item quantity="few">Sdílet obsah %1$d poznámek</item>
+        <item quantity="many">Sdílet obsah %1$d poznámek</item>
+        <item quantity="other">Sdílet obsah %1$d poznámek</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>

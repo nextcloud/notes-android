@@ -119,7 +119,6 @@
     <string name="simple_more">Meer</string>
     <string name="simple_move">Verplaatsen</string>
     <string name="checkbox_could_not_be_toggled">Selectievakjes kon niet worden omgeschakeld.</string>
-    <string name="bulk_notes_restored">Herstelde %1$d notities</string>
     <string name="category_readonly">Alleen lezen</string>
     <string name="no_category">Geen categorie</string>
     <string name="add_category">Toevoegen %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Uiterlijk</string>
     <string name="simple_synchronization">Synchronisatie</string>
     <string name="simple_behavior">Gedrag</string>
-    <string name="share_multiple">Inhoud van %1$d notities delen</string>
     <string name="manage_accounts">Accounts beheren </string>
     <string name="action_formatting_help">Opmaak</string>
 
@@ -193,11 +191,6 @@
         <item quantity="one">%d geselecteerd</item>
         <item quantity="other">%d geselecteerd</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="one">%1$d notitie verwijderd</item>
-        <item quantity="other">%1$d notities verwijderd</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

@@ -119,7 +119,6 @@
     <string name="simple_more">Mer</string>
     <string name="simple_move">Flytt</string>
     <string name="checkbox_could_not_be_toggled">Kunne ikke endre avkrysningsruten.</string>
-    <string name="bulk_notes_restored">Gjenopprettet %1$d notater</string>
     <string name="category_readonly">Skrivebeskyttet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Legg til%1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Utseende</string>
     <string name="simple_synchronization">Synkronisering</string>
     <string name="simple_behavior">Atferd</string>
-    <string name="share_multiple">Del innholdet av %1$d notat</string>
     <string name="manage_accounts">Håndter kontoer</string>
     <string name="action_formatting_help">Formatering</string>
 
@@ -193,11 +191,6 @@
         <item quantity="one">%d er valgt</item>
         <item quantity="other">%d valgt</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="one">Slettet notat %1$d</item>
-        <item quantity="other">Slettet notatene %1$d</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

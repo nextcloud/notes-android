@@ -67,7 +67,7 @@
     <string name="about_testers_title">Probadores</string>
     <string name="about_source_title">Código fonte</string>
     <string name="about_source">Este proxecto está aloxado en GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
-    <string name="about_issues_title">Problemas</string>
+    <string name="about_issues_title">Incidencias</string>
     <string name="about_issues">Vostede pode informar de fallos, propoñer melloras e solicitar funcionalidades na ferramenta de seguimento de erros do GitHub: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
     <string name="about_translate_title">Traducir</string>
     <string name="about_translate">Únase ao equipo Nextcloud en Transifex e colabore connosco para traducir esta apli: &lt;a href=\\"%1$s\\">%1$s&lt;/a></string>
@@ -119,7 +119,6 @@
     <string name="simple_more">Máis</string>
     <string name="simple_move">Mover</string>
     <string name="checkbox_could_not_be_toggled">Non foi posíbel cambiar a caixa de selección.</string>
-    <string name="bulk_notes_restored">Foron restauradas %1$d notas</string>
     <string name="category_readonly">Só lectura</string>
     <string name="no_category">Sen categoría</string>
     <string name="add_category">Engadir %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Aparencia</string>
     <string name="simple_synchronization">Sincronización</string>
     <string name="simple_behavior">Comportamento</string>
-    <string name="share_multiple">Compartir o contido de  %1$dnotas</string>
     <string name="manage_accounts">Xestionar contas</string>
     <string name="action_formatting_help">Formatado</string>
 
@@ -194,8 +192,16 @@
         <item quantity="other">%d seleccionados</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
-        <item quantity="one">Eliminouse %1$d nota</item>
+        <item quantity="one">Foi eliminada unha nota</item>
         <item quantity="other">Foron eliminadas %1$d notas</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Foi restaurada unha nota</item>
+        <item quantity="other">Foron restauradas %1$d notas</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Compartir o contido de %1$d nota</item>
+        <item quantity="other">Compartir o contido de  %1$dnotas</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>

@@ -119,7 +119,6 @@
     <string name="simple_more">Több</string>
     <string name="simple_move">Áthelyezés</string>
     <string name="checkbox_could_not_be_toggled">A jelölőmező nem állítható át.</string>
-    <string name="bulk_notes_restored">%1$d jegyzet visszaállítva</string>
     <string name="category_readonly">Csak olvasható</string>
     <string name="no_category">Nincs kategória</string>
     <string name="add_category">%1$s hozzáadása</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Megjelenés</string>
     <string name="simple_synchronization">Szinkronizálás</string>
     <string name="simple_behavior">Viselkedés</string>
-    <string name="share_multiple">%1$d jegyzet tartalmának megosztása</string>
     <string name="manage_accounts">Fiókok kezelése</string>
     <string name="action_formatting_help">Formázás</string>
 
@@ -193,11 +191,6 @@
         <item quantity="one">%d kiválasztva</item>
         <item quantity="other">%d kiválasztva</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="one">%1$d jegyzet törölve</item>
-        <item quantity="other">%1$d jegyzet törölve</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

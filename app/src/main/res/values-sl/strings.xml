@@ -119,7 +119,6 @@
     <string name="simple_more">Več</string>
     <string name="simple_move">Premakni</string>
     <string name="checkbox_could_not_be_toggled">Izbirnega polja ni mogoče preklopiti.</string>
-    <string name="bulk_notes_restored">Obnovljene zabeležke: %1$d</string>
     <string name="category_readonly">Le za branje</string>
     <string name="no_category">Brez kategorije</string>
     <string name="add_category">Dodaj %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Videz</string>
     <string name="simple_synchronization">Usklajevanje</string>
     <string name="simple_behavior">Obnašanje</string>
-    <string name="share_multiple">Souporaba vsebine %1$d zabeležk</string>
     <string name="manage_accounts">Upravljanje z računi</string>
     <string name="action_formatting_help">Oblikovanje</string>
 
@@ -195,13 +193,6 @@
         <item quantity="few">%d izbrane</item>
         <item quantity="other">%d izbranih</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="one">Izbrisana je %1$d zabeležka</item>
-        <item quantity="two">Izbrisani sta %1$d zabeležki</item>
-        <item quantity="few">Izbrisane so %1$d zabeležke</item>
-        <item quantity="other">Izbrisanih je %1$d zabeležk</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">» %1$s «</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

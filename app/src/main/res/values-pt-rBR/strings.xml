@@ -119,7 +119,6 @@
     <string name="simple_more">Mais</string>
     <string name="simple_move">Mover</string>
     <string name="checkbox_could_not_be_toggled">Não foi possível alternar a caixa de seleção.</string>
-    <string name="bulk_notes_restored">%1$d notas restauradas</string>
     <string name="category_readonly">Somente leitura</string>
     <string name="no_category">Sem categorias</string>
     <string name="add_category">Adicionar %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Aparência</string>
     <string name="simple_synchronization">Sincronização</string>
     <string name="simple_behavior">Comportamento</string>
-    <string name="share_multiple">Compartilhar o conteúdo de %1$d notas</string>
     <string name="manage_accounts">Gerenciar contas</string>
     <string name="action_formatting_help">Formatação</string>
 
@@ -193,11 +191,6 @@
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d selecionados</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="one">%1$d anotação excluída</item>
-        <item quantity="other">%1$d anotações excluídas</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

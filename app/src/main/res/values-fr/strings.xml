@@ -119,7 +119,6 @@
     <string name="simple_more">Plus</string>
     <string name="simple_move">Déplacer</string>
     <string name="checkbox_could_not_be_toggled">Impossible de modifier l\'état de la case à cocher.</string>
-    <string name="bulk_notes_restored">%1$d notes restaurées</string>
     <string name="category_readonly">Lecture seule</string>
     <string name="no_category">Sans catégorie</string>
     <string name="add_category">Ajouter %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Apparence</string>
     <string name="simple_synchronization">Synchronisation</string>
     <string name="simple_behavior">Comportement</string>
-    <string name="share_multiple">Partager le contenu de %1$d notes</string>
     <string name="manage_accounts">Gérer les comptes</string>
     <string name="action_formatting_help">Formatage</string>
 
@@ -194,8 +192,16 @@
         <item quantity="other">%d sélectionné(s)</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
-        <item quantity="one">%1$d note supprimée</item>
+        <item quantity="one">Une note supprimée</item>
         <item quantity="other">%1$d notes supprimées</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Une note restaurée</item>
+        <item quantity="other">%1$d notes restaurées</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Partager le contenu de %1$d note</item>
+        <item quantity="other">Partager le contenu de %1$d notes</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>
