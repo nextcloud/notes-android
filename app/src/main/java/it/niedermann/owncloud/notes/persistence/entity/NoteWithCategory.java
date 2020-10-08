@@ -7,8 +7,7 @@ import it.niedermann.owncloud.notes.shared.model.Item;
 public class NoteWithCategory implements Item {
     @Embedded
     private Note note;
-    @Embedded(prefix = "category_")
-    private Category category;
+    private String category;
 
     public Note getNote() {
         return note;
@@ -18,11 +17,11 @@ public class NoteWithCategory implements Item {
         this.note = note;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 }

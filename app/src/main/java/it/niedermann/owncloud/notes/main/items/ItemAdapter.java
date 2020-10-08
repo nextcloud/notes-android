@@ -32,6 +32,7 @@ import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithoutExcerpt
 import it.niedermann.owncloud.notes.main.items.section.SectionItem;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
@@ -160,7 +161,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             case TYPE_NOTE_WITH_EXCERPT:
             case TYPE_NOTE_WITHOUT_EXCERPT:
             case TYPE_NOTE_ONLY_TITLE: {
-                ((NoteViewHolder) holder).bind((Note) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
+                ((NoteViewHolder) holder).bind((NoteWithCategory) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
                 break;
             }
         }
@@ -224,9 +225,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             throw new IllegalArgumentException("Item at position " + position + " must not be null");
         }
         if (getItem(position).isSection()) return TYPE_SECTION;
-        Note note = (Note) getItem(position);
-        if (TextUtils.isEmpty(note.getExcerpt())) {
-            if (TextUtils.isEmpty(note.getCategory())) {
+        NoteWithCategory note = (NoteWithCategory) getItem(position);
+        if (TextUtils.isEmpty(note.getNote().getExcerpt())) {
+            if (TextUtils.isEmpty(note.getNote().getCategory())) {
                 return TYPE_NOTE_ONLY_TITLE;
             } else {
                 return TYPE_NOTE_WITHOUT_EXCERPT;

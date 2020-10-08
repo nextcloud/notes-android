@@ -100,7 +100,7 @@ public interface NoteDao {
     @Query("SELECT *, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND (CATEGORY.title = :category OR CATEGORY.title LIKE :category + '/%' " +
             ") AND favorite = :favorite ORDER BY categoryId, favorite DESC, :sortingMethod")
-    List<Note> searchNotesSubcategory(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
+    List<NoteWithCategory> searchNotesSubcategory(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
 
     @Query("UPDATE NOTE SET remoteId = :remoteId WHERE id = :id")
     void updateRemoteId(long id, long remoteId);

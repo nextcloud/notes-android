@@ -10,6 +10,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithExcerptBinding;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
@@ -28,8 +29,9 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
         binding.noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
     }
 
-    public void bind(@NonNull Note note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        super.bind(note, showCategory, mainColor, textColor, searchQuery);
+    public void bind(@NonNull NoteWithCategory noteWithCategory, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        super.bind(noteWithCategory, showCategory, mainColor, textColor, searchQuery);
+        Note note = noteWithCategory.getNote();
         @NonNull final Context context = itemView.getContext();
         binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
         bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
