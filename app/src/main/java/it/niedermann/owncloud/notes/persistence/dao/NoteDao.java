@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -31,15 +32,19 @@ public interface NoteDao {
     @Query("SELECT *, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND (CATEGORY.title = :category OR CATEGORY.title LIKE :category + '/%' " +
             ") ORDER BY categoryId, favorite DESC, :sortingMethod")
-    List<NoteWithCategory> searchNotesByCategory(long accountId, String query, String category, CategorySortingMethod sortingMethod);
+    LiveData<List<NoteWithCategory>> searchNotesByCategory(long accountId, String query, String category, String sortingMethod);
 
     @Query("SELECT *, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND favorite = 1 ORDER BY categoryId DESC, :sortingMethod")
-    List<NoteWithCategory> searchNotesByCategoryFavorites(long accountId, String query, CategorySortingMethod sortingMethod);
+    LiveData<List<NoteWithCategory>> searchNotesFavorites(long accountId, String query, String sortingMethod);
 
     @Query("SELECT *, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
-            "NOTE.title LIKE :query OR content LIKE :query) OR CATEGORY.title = '' ORDER BY categoryId DESC, :sortingMethod")
-    List<NoteWithCategory> searchNotesByUncategorized(long accountId, String query, CategorySortingMethod sortingMethod);
+            "NOTE.title LIKE :query OR content LIKE :query) AND CATEGORY.title = '' ORDER BY categoryId DESC, :sortingMethod")
+    LiveData<List<NoteWithCategory>> searchNotesUncategorized(long accountId, String query, String sortingMethod);
+
+    @Query("SELECT *, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+            "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) ORDER BY categoryId DESC, :sortingMethod")
+    LiveData<List<NoteWithCategory>> searchNotesAll(long accountId, String query, String sortingMethod);
 
 
     /**
