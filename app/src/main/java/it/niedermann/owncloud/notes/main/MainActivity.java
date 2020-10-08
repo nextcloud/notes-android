@@ -196,12 +196,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         this.fabCreate = binding.activityNotesListView.fabCreate;
         this.listView = binding.activityNotesListView.recyclerView;
 
-        mainViewModel.filterChanged().observe(this, (v) -> {
-            noteWithCategoryLiveData.removeObserver(noteWithCategoryObserver);
-            noteWithCategoryLiveData = mainViewModel.getNotesListLiveData();
-            noteWithCategoryLiveData.observe(this, noteWithCategoryObserver);
-        });
-
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
         if (savedInstanceState == null) {
             if (ACTION_RECENT.equals(getIntent().getAction())) {

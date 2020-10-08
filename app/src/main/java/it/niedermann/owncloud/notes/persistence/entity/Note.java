@@ -57,14 +57,14 @@ public class Note implements Serializable {
     @ColumnInfo(defaultValue = "0")
     private Integer scrollY = 0;
     @Ignore
-    private String category;
+    private String category = "";
 
     public Note() {
         super();
     }
 
     @Ignore
-    public Note(long remoteId, Calendar modified, String title, String content, Boolean favorite, String category, String eTag) {
+    public Note(Long remoteId, Calendar modified, String title, String content, Boolean favorite, String category, String eTag) {
         this.remoteId = remoteId;
         this.title = title;
         this.modified = modified;
@@ -75,7 +75,7 @@ public class Note implements Serializable {
     }
 
     @Ignore
-    public Note(long id, long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, @NonNull String excerpt, Integer scrollY) {
+    public Note(long id, Long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, @NonNull String excerpt, Integer scrollY) {
         this(remoteId, modified, title, content, favorite, category, etag);
         this.id = id;
         this.status = status;
