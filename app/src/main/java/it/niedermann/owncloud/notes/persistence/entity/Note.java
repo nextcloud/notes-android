@@ -37,7 +37,7 @@ import it.niedermann.owncloud.notes.shared.model.Item;
                 @Index(name = "IDX_NOTE_STATUS", value = "status")
         }
 )
-public class Note implements Serializable, Item {
+public class Note implements Serializable {
     @PrimaryKey
     private Long id;
     private Long remoteId;

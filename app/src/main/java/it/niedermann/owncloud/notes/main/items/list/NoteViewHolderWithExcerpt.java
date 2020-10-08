@@ -34,7 +34,7 @@ public class NoteViewHolderWithExcerpt extends NoteViewHolder {
         Note note = noteWithCategory.getNote();
         @NonNull final Context context = itemView.getContext();
         binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);
-        bindCategory(context, binding.noteCategory, showCategory, note.getCategory(), mainColor);
+        bindCategory(context, binding.noteCategory, showCategory, noteWithCategory.getCategory(), mainColor);
         bindStatus(binding.noteStatus, note.getStatus(), mainColor);
         bindFavorite(binding.noteFavorite, note.getFavorite());
 

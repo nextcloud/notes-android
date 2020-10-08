@@ -26,6 +26,9 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -78,6 +81,7 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.dao.AccountDao;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -101,6 +105,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    protected MainViewModel mainViewModel;
+
     private boolean gridView = true;
 
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
@@ -112,6 +118,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private static final String SAVED_STATE_NAVIGATION_SELECTION = "navigationSelection";
     private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
     private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
+
+    private LiveData<NoteWithCategory> noteWithCategoryLiveData;
+    private Observer<NoteWithCategory> noteWithCategoryObserver = noteWithCategory -> {
+
+    };
 
     private final static int create_note_cmd = 0;
     private final static int show_single_note_cmd = 1;
@@ -160,6 +171,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         CapabilitiesWorker.update(this);
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
@@ -867,9 +880,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 mActionMode.finish();
             }
         } else {
-            Note note = (Note) adapter.getItem(position);
+            NoteWithCategory note = (NoteWithCategory) adapter.getItem(position);
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
-            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
+            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getNote().getId());
             startActivityForResult(intent, show_single_note_cmd);
         }
     }

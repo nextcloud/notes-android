@@ -74,7 +74,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         final Note dbNoteWithoutContent = (Note) adapter.getItem(viewHolder.getAdapterPosition());
                         final Note dbNote = db.getNoteDao().getNote(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
                         db.deleteNoteAndSync(ssoAccount, dbNote.getId());
-                        adapter.remove(dbNote);
+//                        FIXME
+//                        adapter.remove(dbNote);
                         refreshLists.run();
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         if (viewProvider == null) {

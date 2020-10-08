@@ -91,7 +91,7 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
             if (i > 0 && !timeslot.equals(lastTimeslot)) {
                 itemList.add(new SectionItem(timeslot));
             }
-            itemList.add(currentNote.getNote());
+            itemList.add(currentNote);
             lastTimeslot = timeslot;
         }
 

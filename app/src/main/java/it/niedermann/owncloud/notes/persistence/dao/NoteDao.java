@@ -37,8 +37,8 @@ public interface NoteDao {
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND favorite = 1 ORDER BY categoryId DESC, :sortingMethod")
     List<NoteWithCategory> searchNotesByCategoryFavorites(long accountId, String query, CategorySortingMethod sortingMethod);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
-            "title LIKE :query OR content LIKE :query) AND categoryId = NULL ORDER BY favorite, :sortingMethod")
+    @Query("SELECT *, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+            "NOTE.title LIKE :query OR content LIKE :query) OR CATEGORY.title = '' ORDER BY categoryId DESC, :sortingMethod")
     List<NoteWithCategory> searchNotesByUncategorized(long accountId, String query, CategorySortingMethod sortingMethod);
 
 
