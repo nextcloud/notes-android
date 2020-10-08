@@ -152,7 +152,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param note Note
      */
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, Note note) {
-        Note entity = new Note(0, 0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+        Note entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
         long id = addNote(accountId, entity);
         notifyWidgets();
         serverSyncHelper.scheduleSync(ssoAccount, true);
@@ -179,7 +179,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             entity.setAccountId(accountId);
             entity.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
         }
-        if (note.getRemoteId() > 0) {
+        if (note.getRemoteId() != null && note.getRemoteId() > 0) {
             entity.setRemoteId(note.getRemoteId());
         }
         entity.setTitle(note.getTitle());
@@ -194,7 +194,7 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, Note note, long newAccountId) {
         // Add new note
-        addNoteAndSync(ssoAccount, newAccountId, new Note(0, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory(), null));
+        addNoteAndSync(ssoAccount, newAccountId, new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory(), null));
         deleteNoteAndSync(ssoAccount, note.getId());
 
         notifyWidgets();
@@ -261,7 +261,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if (oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
+                if (oldNote.getRemoteId() == null || oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
                 } else {
                     title = oldNote.getTitle();
