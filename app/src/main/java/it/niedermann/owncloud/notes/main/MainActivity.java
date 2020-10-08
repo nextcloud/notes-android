@@ -759,7 +759,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                     if (bundle != null && bundle.containsKey(CREATED_NOTE)) {
                         Note createdNote = (Note) bundle.getSerializable(CREATED_NOTE);
                         if (createdNote != null) {
-                            adapter.add(createdNote);
+                            // FIXME
+//                            adapter.add(createdNote);
                         } else {
                             Log.w(TAG, "createdNote must not be null");
                         }

@@ -99,7 +99,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      *
      * @param note Note that should be added.
      */
-    public void add(@NonNull Note note) {
+    public void add(@NonNull NoteWithCategory note) {
         itemList.add(0, note);
         notifyItemInserted(0);
         notifyItemChanged(0);

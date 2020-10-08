@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 
 import androidx.annotation.NonNull;
@@ -26,14 +27,14 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
     private final Context context;
     private final NotesLoadedListener callback;
     private final OldCategory category;
-    private final CharSequence searchQuery;
+    private final String searchQuery;
     private final long accountId;
 
     public LoadNotesListTask(long accountId, @NonNull Context context, @NonNull NotesLoadedListener callback, @NonNull OldCategory category, @Nullable CharSequence searchQuery) {
         this.context = context;
         this.callback = callback;
         this.category = category;
-        this.searchQuery = searchQuery;
+        this.searchQuery = searchQuery == null ? "%" : "%" + searchQuery + "%";
         this.accountId = accountId;
     }
 
@@ -42,7 +43,14 @@ public class LoadNotesListTask extends AsyncTask<Void, Void, List<Item>> {
         List<NoteWithCategory> noteList;
         NotesDatabase db = NotesDatabase.getInstance(context);
         CategorySortingMethod sortingMethod = db.getCategoryOrder(accountId, category);
-        noteList = db.getNoteDao().searchNotesSubcategory(accountId, searchQuery == null ? "%" : "%" + searchQuery + "%", category.category, Boolean.TRUE.equals(category.favorite), sortingMethod);
+
+        if(Boolean.TRUE.equals(category.favorite)) {
+            noteList = db.getNoteDao().searchNotesByCategoryFavorites(accountId, searchQuery, sortingMethod);
+        } else if(TextUtils.isEmpty(category.category)) {
+            noteList = db.getNoteDao().searchNotesByUncategorized(accountId, searchQuery, sortingMethod);
+        } else {
+            noteList = db.getNoteDao().searchNotesByCategory(accountId, searchQuery, category.category, sortingMethod);
+        }
 
         if (category.category == null) {
             if (sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC) {

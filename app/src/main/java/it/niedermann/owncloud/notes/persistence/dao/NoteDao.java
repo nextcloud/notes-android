@@ -27,6 +27,21 @@ public interface NoteDao {
     @Query("DELETE FROM NOTE WHERE accountId = :accountId")
     int deleteByAccountId(Long accountId);
 
+
+    @Query("SELECT *, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+            "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND (CATEGORY.title = :category OR CATEGORY.title LIKE :category + '/%' " +
+            ") ORDER BY categoryId, favorite DESC, :sortingMethod")
+    List<NoteWithCategory> searchNotesByCategory(long accountId, String query, String category, CategorySortingMethod sortingMethod);
+
+    @Query("SELECT *, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+            "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND favorite = 1 ORDER BY categoryId DESC, :sortingMethod")
+    List<NoteWithCategory> searchNotesByCategoryFavorites(long accountId, String query, CategorySortingMethod sortingMethod);
+
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+            "title LIKE :query OR content LIKE :query) AND categoryId = NULL ORDER BY favorite, :sortingMethod")
+    List<NoteWithCategory> searchNotesByUncategorized(long accountId, String query, CategorySortingMethod sortingMethod);
+
+
     /**
      * Returns a list of all Notes in the Database
      *
@@ -91,16 +106,8 @@ public interface NoteDao {
     @Query("UPDATE NOTE SET status = 'LOCAL_EDITED', favorite = ((favorite | 1) - (favorite & 1)) WHERE id = :id")
     void toggleFavorite(long id);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE '%' + :query + '%' OR content LIKE '%' + :query + '%' OR categoryId LIKE '%' + :query + '%') AND (categoryId = :category OR title LIKE :category + '/%') AND favorite = :favorite ORDER BY favorite DESC, :sortingMethod")
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query OR categoryId LIKE :query) AND (categoryId = :category OR title LIKE :category + '/%') AND favorite = :favorite ORDER BY favorite DESC, :sortingMethod")
     List<Note> searchNotes(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
-
-    /**
-     * Needed for subcategories, see https://github.com/stefan-niedermann/nextcloud-notes/issues/902
-     */
-    @Query("SELECT *, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
-            "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND (CATEGORY.title = :category OR CATEGORY.title LIKE :category + '/%' " +
-            ") AND favorite = :favorite ORDER BY categoryId, favorite DESC, :sortingMethod")
-    List<NoteWithCategory> searchNotesSubcategory(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
 
     @Query("UPDATE NOTE SET remoteId = :remoteId WHERE id = :id")
     void updateRemoteId(long id, long remoteId);
