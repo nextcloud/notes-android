@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
-        minSdkVersion 17
+        minSdkVersion 18
         targetSdkVersion 29
         versionCode 2017000
         versionName "2.17.0"
