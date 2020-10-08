@@ -167,13 +167,13 @@ public abstract class NotesDatabase extends RoomDatabase {
      */
     long addNote(long accountId, Note note) {
         Note entity = new Note();
-        if (entity.getId() != null) {
-            if (entity.getId() > 0) {
-                entity.setId(entity.getId());
+        if (note.getId() != null) {
+            if (note.getId() > 0) {
+                entity.setId(note.getId());
             }
-            entity.setStatus(entity.getStatus());
-            entity.setAccountId(entity.getAccountId());
-            entity.setExcerpt(entity.getExcerpt());
+            entity.setStatus(note.getStatus());
+            entity.setAccountId(note.getAccountId());
+            entity.setExcerpt(note.getExcerpt());
         } else {
             entity.setStatus(DBStatus.VOID);
             entity.setAccountId(accountId);
@@ -186,8 +186,7 @@ public abstract class NotesDatabase extends RoomDatabase {
         entity.setModified(note.getModified());
         entity.setContent(note.getContent());
         entity.setFavorite(note.getFavorite());
-        // FIXME
-//        entity.setCategory(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
+        entity.setCategoryId(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
         entity.setETag(note.getETag());
         return getNoteDao().addNote(entity);
     }
