@@ -57,7 +57,7 @@ public class Note implements Serializable {
     @ColumnInfo(defaultValue = "0")
     private Integer scrollY = 0;
     @Ignore
-    private String category;
+    private String category = "";
 
     public Note() {
         super();
