@@ -119,10 +119,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
     private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
 
-    private LiveData<NoteWithCategory> noteWithCategoryLiveData;
-    private Observer<NoteWithCategory> noteWithCategoryObserver = noteWithCategory -> {
-
-    };
+    protected ItemAdapter adapter;
 
     private final static int create_note_cmd = 0;
     private final static int show_single_note_cmd = 1;
@@ -147,8 +144,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     protected FloatingActionButton fabCreate;
     private RecyclerView listView;
 
-    protected ItemAdapter adapter;
-
     protected NotesDatabase db = null;
     private NavigationAdapter adapterCategories;
     private NavigationItem itemRecent;
@@ -168,6 +163,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         swipeRefreshLayout.setRefreshing(false);
     };
 
+    private LiveData<List<NoteWithCategory>> noteWithCategoryLiveData;
+    private Observer<List<NoteWithCategory>> noteWithCategoryObserver = notes -> {
+        adapter.setShowCategory(mainViewModel.getSelectedCategory().getValue() == null);
+        adapter.setHighlightSearchQuery(mainViewModel.getSearchTerm().getValue());
+        adapter.setItemList(notes);
+        binding.activityNotesListView.progressCircular.setVisibility(GONE);
+        binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
+//        if (scrollToTop) {
+//            listView.scrollToPosition(0);
+//        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -184,6 +191,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         this.fabCreate = binding.activityNotesListView.fabCreate;
         this.listView = binding.activityNotesListView.recyclerView;
+
+        mainViewModel.filterChanged().observe(this, (v) -> {
+            noteWithCategoryLiveData.removeObserver(noteWithCategoryObserver);
+            noteWithCategoryLiveData = mainViewModel.getNotesListLiveData();
+            noteWithCategoryLiveData.observe(this, noteWithCategoryObserver);
+        });
 
         String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
         if (savedInstanceState == null) {
