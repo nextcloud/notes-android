@@ -119,7 +119,6 @@
     <string name="simple_more">Altro</string>
     <string name="simple_move">Sposta</string>
     <string name="checkbox_could_not_be_toggled">La casella di selezione non può essere commutata.</string>
-    <string name="bulk_notes_restored">Ripristinate %1$d note</string>
     <string name="category_readonly">Sola lettura</string>
     <string name="no_category">Nessuna categoria</string>
     <string name="add_category">Aggiungi %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Aspetto</string>
     <string name="simple_synchronization">Sincronizzazione</string>
     <string name="simple_behavior">Comportamento</string>
-    <string name="share_multiple">Condividi il contenuto di %1$d note</string>
     <string name="manage_accounts">Gestisci account</string>
     <string name="action_formatting_help">Formattazione</string>
 
@@ -194,8 +192,16 @@
         <item quantity="other">%d selezionati</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
-        <item quantity="one">Eliminata %1$d nota</item>
+        <item quantity="one">Eliminata una nota</item>
         <item quantity="other">Eliminate %1$d note</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Ripristinate una nota</item>
+        <item quantity="other">Ripristinate %1$d note</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Condividi il contenuto di %1$d nota</item>
+        <item quantity="other">Condividi il contenuto di %1$d note</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>

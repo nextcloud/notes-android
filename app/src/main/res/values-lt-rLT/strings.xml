@@ -119,7 +119,6 @@
     <string name="simple_more">Daugiau</string>
     <string name="simple_move">Perkelti</string>
     <string name="checkbox_could_not_be_toggled">Nepavyko perjungti žymimojo langelio.</string>
-    <string name="bulk_notes_restored">Atkurti %1$d užrašai</string>
     <string name="category_readonly">Tik skaitymui</string>
     <string name="no_category">Be kategorijos</string>
     <string name="add_category">Pridėti %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Išvaizda</string>
     <string name="simple_synchronization">Sinchronizacija</string>
     <string name="simple_behavior">Funkcionavimas</string>
-    <string name="share_multiple">Dalykitės %1$d užrašų turiniu</string>
     <string name="manage_accounts">Tvarkyti paskyras</string>
     <string name="action_formatting_help">Formatavimas</string>
 

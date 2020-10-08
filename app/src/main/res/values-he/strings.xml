@@ -119,7 +119,6 @@
     <string name="simple_more">עוד</string>
     <string name="simple_move">העברה</string>
     <string name="checkbox_could_not_be_toggled">לא ניתן להחליף את מצב תיבת הבחירה.</string>
-    <string name="bulk_notes_restored">שוחזרו %1$d פתקים</string>
     <string name="category_readonly">קריאה בלבד</string>
     <string name="no_category">אין קטגוריה</string>
     <string name="add_category">הוספת %1$s</string>
@@ -143,7 +142,6 @@
     <string name="simple_appearance">מראה</string>
     <string name="simple_synchronization">סנכרון</string>
     <string name="simple_behavior">התנהגות</string>
-    <string name="share_multiple">שיתוף תוכנם של %1$d פתקים</string>
     <string name="manage_accounts">ניהול חשבונות</string>
     <string name="action_formatting_help">עיצוב</string>
 

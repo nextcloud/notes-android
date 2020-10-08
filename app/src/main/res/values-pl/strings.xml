@@ -119,7 +119,6 @@
     <string name="simple_more">Więcej</string>
     <string name="simple_move">Przenieś</string>
     <string name="checkbox_could_not_be_toggled">Nie można zmienić pola wyboru.</string>
-    <string name="bulk_notes_restored">Przywrócono notatki %1$d</string>
     <string name="category_readonly">Tylko do odczytu</string>
     <string name="no_category">Bez kategorii</string>
     <string name="add_category">Dodaj %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Wygląd</string>
     <string name="simple_synchronization">Synchronizacja</string>
     <string name="simple_behavior">Zachowanie</string>
-    <string name="share_multiple">Udostępnij treść notatki %1$d</string>
     <string name="manage_accounts">Zarządzaj kontami</string>
     <string name="action_formatting_help">Formatowanie</string>
 
@@ -196,10 +194,22 @@
         <item quantity="other">%d wybranych</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
-        <item quantity="one">Usunięto %1$d notatkę</item>
+        <item quantity="one">Usunięto jedną notatkę</item>
         <item quantity="few">Usunięto %1$d notatki</item>
         <item quantity="many">Usunięto %1$d notatek</item>
         <item quantity="other">Usunięto %1$d notatek</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Przywrócono jedną notatkę</item>
+        <item quantity="few">Przywrócono %1$d notatki</item>
+        <item quantity="many">Przywrócono %1$d notatek</item>
+        <item quantity="other">Przywrócono %1$d notatek</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Udostępnij zawartość %1$d notatki</item>
+        <item quantity="few">Udostępnij zawartość %1$d notatek</item>
+        <item quantity="many">Udostępnij zawartość %1$d notatek</item>
+        <item quantity="other">Udostępnij zawartość %1$d notatek</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>

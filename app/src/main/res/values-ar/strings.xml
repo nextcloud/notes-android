@@ -123,7 +123,6 @@
     <string name="simple_more">المزيد</string>
     <string name="simple_move">نقل</string>
     <string name="checkbox_could_not_be_toggled">تعذر تبديل خانة الاختيار.</string>
-    <string name="bulk_notes_restored">استعد %1$d ملاحظات</string>
     <string name="category_readonly">القراءة فقط</string>
     <string name="no_category">لا تصنيف</string>
     <string name="add_category">اضف %1$s</string>
@@ -161,7 +160,6 @@
     <string name="simple_appearance">المظهر</string>
     <string name="simple_synchronization">المزامنة</string>
     <string name="simple_behavior">السلوك</string>
-    <string name="share_multiple">شارك محتوى الملاحظات %1$d</string>
     <string name="manage_accounts">إدارة الحسابات</string>
     <string name="action_formatting_help">التنسيق</string>
 
@@ -202,15 +200,6 @@
         <item quantity="many">%d محددين</item>
         <item quantity="other">%d محدد</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="zero">حذف %1$d ملاحظة</item>
-        <item quantity="one">حذفت %1$d ملاحظة</item>
-        <item quantity="two">حذفت %1$d ملاحظة</item>
-        <item quantity="few">حذف %1$d ملاحظات</item>
-        <item quantity="many">حذف %1$d ملاحظات</item>
-        <item quantity="other">حذف %1$d ملاحظات</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

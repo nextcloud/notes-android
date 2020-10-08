@@ -119,7 +119,6 @@
     <string name="simple_more">Још</string>
     <string name="simple_move">Помери</string>
     <string name="checkbox_could_not_be_toggled">Поље за потврду не може да се укључи/искључи.</string>
-    <string name="bulk_notes_restored">Повраћено %1$d белешки</string>
     <string name="category_readonly">Само за читање</string>
     <string name="no_category">Нема категорије</string>
     <string name="add_category">Додај %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Изглед</string>
     <string name="simple_synchronization">Синхронизација</string>
     <string name="simple_behavior">Понашање</string>
-    <string name="share_multiple">Подели садржај %1$d белешки</string>
     <string name="manage_accounts">Управљање налозима</string>
     <string name="action_formatting_help">Форматирање</string>
 
@@ -194,12 +192,6 @@
         <item quantity="few">%d означене</item>
         <item quantity="other">%d означених</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="one">Обрисано %1$d белешка</item>
-        <item quantity="few">Обрисано %1$d белешке</item>
-        <item quantity="other">Обрисано %1$d белешки</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
