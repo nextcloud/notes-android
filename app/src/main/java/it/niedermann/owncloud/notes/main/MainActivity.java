@@ -163,8 +163,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         swipeRefreshLayout.setRefreshing(false);
     };
 
-    private LiveData<List<NoteWithCategory>> noteWithCategoryLiveData;
-    private Observer<List<NoteWithCategory>> noteWithCategoryObserver = notes -> {
+    private LiveData<List<Item>> noteWithCategoryLiveData;
+    private Observer<List<Item>> noteWithCategoryObserver = notes -> {
         adapter.setShowCategory(mainViewModel.getSelectedCategory().getValue() == null);
         adapter.setHighlightSearchQuery(mainViewModel.getSearchTerm().getValue());
         adapter.setItemList(notes);

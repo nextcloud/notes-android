@@ -13,6 +13,7 @@ import java.util.List;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.OldCategory;
 
 import static androidx.lifecycle.Transformations.distinctUntilChanged;
@@ -29,7 +30,7 @@ public class MainViewModel extends AndroidViewModel {
     @NonNull
     private MutableLiveData<OldCategory> selectedCategory = new MutableLiveData<>();
 
-    private MediatorLiveData<List<NoteWithCategory>> notesListLiveData = new MediatorLiveData<>();
+    private MediatorLiveData<List<Item>> notesListLiveData = new MediatorLiveData<>();
 
     public MainViewModel(@NonNull Application application) {
         super(application);
@@ -64,7 +65,7 @@ public class MainViewModel extends AndroidViewModel {
         return mediatorLiveData;
     }
 
-    public LiveData<List<NoteWithCategory>> getNotesListLiveData() {
+    public LiveData<List<Item>> getNotesListLiveData() {
         return notesListLiveData;
     }
 }
