@@ -1,0 +1,1 @@
+- Upgrade minSdkVersion to 18 (= Android 4.3) following the files app
