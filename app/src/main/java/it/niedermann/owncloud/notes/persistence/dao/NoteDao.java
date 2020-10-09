@@ -29,20 +29,20 @@ public interface NoteDao {
     int deleteByAccountId(Long accountId);
 
 
-    @Query("SELECT NOTE.id, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND (CATEGORY.title = :category OR CATEGORY.title LIKE :category + '/%' " +
             ") ORDER BY categoryId, favorite DESC, :sortingMethod")
     LiveData<List<NoteWithCategory>> searchByCategory(long accountId, String query, String category, String sortingMethod);
 
-    @Query("SELECT NOTE.id, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND favorite = 1 ORDER BY categoryId DESC, :sortingMethod")
     LiveData<List<NoteWithCategory>> searchFavorites(long accountId, String query, String sortingMethod);
 
-    @Query("SELECT NOTE.id, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
             "NOTE.title LIKE :query OR content LIKE :query) AND CATEGORY.title = '' ORDER BY categoryId DESC, :sortingMethod")
     LiveData<List<NoteWithCategory>> searchUncategorized(long accountId, String query, String sortingMethod);
 
-    @Query("SELECT NOTE.id, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
+    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) ORDER BY favorite DESC, categoryId DESC, :sortingMethod")
     LiveData<List<NoteWithCategory>> searchRecent(long accountId, String query, String sortingMethod);
 
