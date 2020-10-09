@@ -11,8 +11,6 @@ import android.widget.RemoteViewsService;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
-import java.util.NoSuchElementException;
-
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
@@ -43,14 +41,13 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         db = NotesDatabase.getInstance(context);
         markdownProcessor = new MarkdownProcessor(this.context);
         markdownProcessor.factory(TextFactory.create());
-        try {
-            SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+        final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+        if (data != null) {
             darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
-        } catch (NoSuchElementException e) {
+        } else {
             Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
-        } finally {
-            markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkModeActive).build());
         }
+        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkModeActive).build());
     }
 
     @Override
@@ -60,8 +57,8 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDataSetChanged() {
-        try {
-            final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+        final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+        if (data != null) {
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
             note = db.getNoteDao().getNote(data.getAccountId(), noteId);
@@ -69,7 +66,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
             if (note == null) {
                 Log.e(TAG, "Error: note not found");
             }
-        } catch (NoSuchElementException e) {
+        } else {
             Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
         }
     }

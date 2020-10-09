@@ -11,8 +11,6 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import java.util.NoSuchElementException;
-
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -44,8 +42,8 @@ public class NoteListWidget extends AppWidgetProvider {
         DarkModeSetting darkTheme;
 
         for (int appWidgetId : appWidgetIds) {
-            try {
-                final NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
+            final NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
+            if (data != null) {
                 final Account localAccount = db.getAccountDao().getAccount(data.getAccountId());
 
                 String category = null;
@@ -128,7 +126,7 @@ public class NoteListWidget extends AppWidgetProvider {
                 }
 
                 awm.updateAppWidget(appWidgetId, views);
-            } catch (NoSuchElementException e) {
+            } else {
                 Log.i(TAG, "onUpdate has been triggered before the user finished configuring the widget");
             }
         }

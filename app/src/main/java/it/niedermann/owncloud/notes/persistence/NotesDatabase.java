@@ -67,6 +67,8 @@ import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.O;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
@@ -295,7 +297,7 @@ public abstract class NotesDatabase extends RoomDatabase {
         notifyWidgets();
         serverSyncHelper.scheduleSync(ssoAccount, true);
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (SDK_INT >= O) {
             ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
             if (shortcutManager != null) {
                 shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
@@ -326,7 +328,7 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     void updateDynamicShortcuts(long accountId) {
         new Thread(() -> {
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+            if (SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
                 ShortcutManager shortcutManager = context.getApplicationContext().getSystemService(ShortcutManager.class);
                 if (shortcutManager != null) {
                     if (!shortcutManager.isRateLimitingActive()) {
