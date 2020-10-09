@@ -24,9 +24,13 @@ import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.shared.model.OldCategory;
+import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
+import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
+
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 
 public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountPickerListener {
 
@@ -156,12 +160,13 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     private void launchNewNote() {
         Intent intent = getIntent();
 
-        String category = null;
+        String categoryTitle = null;
         boolean favorite = false;
         if (intent.hasExtra(PARAM_CATEGORY)) {
-            OldCategory categoryPreselection = (OldCategory) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
-            category = categoryPreselection.category;
-            favorite = categoryPreselection.favorite != null ? categoryPreselection.favorite : false;
+            NavigationCategory categoryPreselection = (NavigationCategory) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
+            Category category = categoryPreselection.getCategory();
+            categoryTitle = category == null ? "" : category.getTitle();
+            favorite = categoryPreselection.getType() == FAVORITES;
         }
 
         String content = "";
@@ -179,7 +184,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (content == null) {
             content = "";
         }
-        Note newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, category, null);
+        Note newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, categoryTitle, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }

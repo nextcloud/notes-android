@@ -6,7 +6,7 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
 import static org.junit.Assert.assertEquals;
 
-public class OldCategorySortingMethodTest {
+public class NavigationCategorySortingMethodTest {
 
     @Test
     public void getCSMID() {
