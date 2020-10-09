@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -99,7 +98,6 @@ import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
-import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 import static java.util.Arrays.asList;
 
@@ -495,8 +493,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             private void selectItem(NavigationItem item, boolean closeNavigation) {
                 adapterCategories.setSelectedItem(item.id);
                 // update current selection
-                if(item.type != null) {
-                    switch(item.type) {
+                if (item.type != null) {
+                    switch (item.type) {
                         case RECENT: {
                             mainViewModel.postSelectedCategory(new NavigationCategory(RECENT));
                             break;
@@ -510,11 +508,17 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                             break;
                         }
                         default: {
-                            mainViewModel.postSelectedCategory(new NavigationCategory(db.getCategoryDao().getCategoryByTitle(localAccount.getId(), item.label)));
+                            if (item.getClass() == CategoryNavigationItem.class) {
+                                mainViewModel.postSelectedCategory(new NavigationCategory(db.getCategoryDao().getCategory(((CategoryNavigationItem) item).categoryId)));
+                            } else {
+                                Log.e(TAG, "Unknown item navigation type. Fallback to show " + RECENT);
+                                mainViewModel.postSelectedCategory(new NavigationCategory(RECENT));
+                            }
                         }
                     }
                 } else {
-                    mainViewModel.postSelectedCategory(new NavigationCategory(db.getCategoryDao().getCategoryByTitle(localAccount.getId(), item.label)));
+                    Log.e(TAG, "Unknown item navigation type. Fallback to show " + RECENT);
+                    mainViewModel.postSelectedCategory(new NavigationCategory(RECENT));
                 }
 
                 // auto-close sub-folder in Navigation if selection is outside of that folder

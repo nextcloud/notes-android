@@ -19,7 +19,6 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 
@@ -105,21 +104,21 @@ public class MainViewModel extends AndroidViewModel {
             searchQuery = searchQuery == null ? "%" : "%" + searchQuery.trim() + "%";
             switch (selectedCategory.getType()) {
                 case FAVORITES: {
-                    fromDatabase = db.getNoteDao().searchNotesFavorites(accountId, searchQuery, sortingMethod.getSorder());
+                    fromDatabase = db.getNoteDao().searchFavorites(accountId, searchQuery, sortingMethod.getSorder());
                     break;
                 }
                 case UNCATEGORIZED: {
-                    fromDatabase = db.getNoteDao().searchNotesUncategorized(accountId, searchQuery, sortingMethod.getSorder());
+                    fromDatabase = db.getNoteDao().searchUncategorized(accountId, searchQuery, sortingMethod.getSorder());
                     break;
                 }
                 case RECENT: {
-                    fromDatabase = db.getNoteDao().searchNotesAll(accountId, searchQuery, sortingMethod.getSorder());
+                    fromDatabase = db.getNoteDao().searchRecent(accountId, searchQuery, sortingMethod.getSorder());
                     break;
                 }
                 case DEFAULT_CATEGORY:
                 default: {
                     Category category = selectedCategory.getCategory();
-                    fromDatabase = db.getNoteDao().searchNotesByCategory(accountId, searchQuery, category == null ? "" : category.getTitle(), sortingMethod.getSorder());
+                    fromDatabase = db.getNoteDao().searchByCategory(accountId, searchQuery, category == null ? "" : category.getTitle(), sortingMethod.getSorder());
                     break;
                 }
             }
@@ -159,10 +158,8 @@ public class MainViewModel extends AndroidViewModel {
             return distinctUntilChanged(
                     map(db.getCategoryDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase -> {
                         List<NavigationAdapter.CategoryNavigationItem> categories = convertToCategoryNavigationItem(getApplication(), db.getCategoryDao().getCategories(currentAccount.getId()));
-                        int numFavorites = db.getNoteDao().getFavoritesCount(currentAccount.getId());
-                        int numNonFavorites = db.getNoteDao().getNonFavoritesCount(currentAccount.getId());
-                        NavigationItem itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, getApplication().getString(R.string.label_all_notes), numFavorites + numNonFavorites, R.drawable.ic_access_time_grey600_24dp, RECENT);
-                        NavigationItem itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, getApplication().getString(R.string.label_favorites), numFavorites, R.drawable.ic_star_yellow_24dp, FAVORITES);
+                        NavigationItem itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, getApplication().getString(R.string.label_all_notes), db.getNoteDao().count(currentAccount.getId()), R.drawable.ic_access_time_grey600_24dp, RECENT);
+                        NavigationItem itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, getApplication().getString(R.string.label_favorites), db.getNoteDao().getFavoritesCount(currentAccount.getId()), R.drawable.ic_star_yellow_24dp, FAVORITES);
 
                         ArrayList<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);
                         items.add(itemRecent);

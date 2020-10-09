@@ -23,6 +23,7 @@ import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
@@ -93,8 +94,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         }
                         break;
                     case ItemTouchHelper.RIGHT:
-                        final Note adapterNote = (Note) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.toggleFavoriteAndSync(ssoAccount, adapterNote.getId(), syncCallBack);
+                        final NoteWithCategory adapterNote = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
+                        db.toggleFavoriteAndSync(ssoAccount, adapterNote.getNote().getId(), syncCallBack);
                         refreshLists.run();
                         break;
                     default:

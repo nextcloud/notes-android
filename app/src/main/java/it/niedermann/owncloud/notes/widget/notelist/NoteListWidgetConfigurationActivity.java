@@ -156,10 +156,8 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
             }
 
-            int numFavorites = db.getNoteDao().getFavoritesCount(localAccount.getId());
-            int numNonFavorites = db.getNoteDao().getNonFavoritesCount(localAccount.getId());
-            itemFavorites.count = numFavorites;
-            itemRecent.count = numFavorites + numNonFavorites;
+            itemFavorites.count = db.getNoteDao().getFavoritesCount(localAccount.getId());
+            itemRecent.count = db.getNoteDao().count(localAccount.getId());
 
             ArrayList<NavigationAdapter.NavigationItem> items = new ArrayList<>();
             items.add(itemRecent);
