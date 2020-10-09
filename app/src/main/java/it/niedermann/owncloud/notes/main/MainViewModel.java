@@ -19,6 +19,8 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.OldCategory;
 
+import static androidx.lifecycle.Transformations.distinctUntilChanged;
+import static androidx.lifecycle.Transformations.map;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByCategory;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByInitials;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByTime;
@@ -91,17 +93,19 @@ public class MainViewModel extends AndroidViewModel {
                 fromDatabase = db.getNoteDao().searchNotesByCategory(accountId, searchQuery, selectedCategory.category, sortingMethod.getSorder());
             }
 
-            return Transformations.map(fromDatabase, (Function<List<NoteWithCategory>, List<Item>>) noteList -> {
-                if (selectedCategory.category == null) {
-                    if (sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC) {
-                        return fillListByTime(getApplication(), noteList);
-                    } else {
-                        return fillListByInitials(getApplication(), noteList);
-                    }
-                } else {
-                    return fillListByCategory(noteList, selectedCategory.category);
-                }
-            });
+            return distinctUntilChanged(
+                    map(fromDatabase, noteList -> {
+                        if (selectedCategory.category == null) {
+                            if (sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC) {
+                                return fillListByTime(getApplication(), noteList);
+                            } else {
+                                return fillListByInitials(getApplication(), noteList);
+                            }
+                        } else {
+                            return fillListByCategory(noteList, selectedCategory.category);
+                        }
+                    })
+            );
         } else {
             return new MutableLiveData<>();
         }
