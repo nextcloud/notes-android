@@ -24,7 +24,7 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
         }
 )
 public class Category {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private long id;
     private long accountId;
     private String title;

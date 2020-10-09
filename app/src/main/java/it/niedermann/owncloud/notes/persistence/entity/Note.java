@@ -38,7 +38,7 @@ import it.niedermann.owncloud.notes.shared.model.Item;
         }
 )
 public class Note implements Serializable {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Long id;
     private Long remoteId;
     private Long accountId;

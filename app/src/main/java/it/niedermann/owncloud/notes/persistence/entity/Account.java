@@ -33,7 +33,7 @@ import it.niedermann.owncloud.notes.shared.util.ColorUtil;
         }
 )
 public class Account {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Long id;
     private String url;
     private String userName;
