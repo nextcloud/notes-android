@@ -119,7 +119,6 @@
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
     <string name="checkbox_could_not_be_toggled">No se ha podido cambiar el estado del checkbox</string>
-    <string name="bulk_notes_restored">Restauradas %1$d notas</string>
     <string name="category_readonly">Solo lectura</string>
     <string name="no_category">Sin categoría</string>
     <string name="add_category">Añadir %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Apariencia</string>
     <string name="simple_synchronization">Sincronización</string>
     <string name="simple_behavior">Comportamiento</string>
-    <string name="share_multiple">Compartido contenido de %1$d notas</string>
     <string name="manage_accounts">Gestionar cuentas</string>
     <string name="action_formatting_help">Formato</string>
 
@@ -194,8 +192,16 @@
         <item quantity="other">%d seleccionados</item>
     </plurals>
     <plurals name="bulk_notes_deleted">
-        <item quantity="one">Eliminada %1$d nota</item>
-        <item quantity="other">Eliminadas %1$d notas</item>
+        <item quantity="one">Borrada una nota</item>
+        <item quantity="other">Borradas %1$d notas</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Restaurada una nota</item>
+        <item quantity="other">Restauradas %1$d notas</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Compartido contenido de %1$d nota</item>
+        <item quantity="other">Compartido contenido de %1$d notas</item>
     </plurals>
 
     <string name="formatting_help_divider" translateable="false">---</string>

@@ -119,7 +119,6 @@
     <string name="simple_more">Περισσότερα</string>
     <string name="simple_move">Μετακίνηση</string>
     <string name="checkbox_could_not_be_toggled">Δεν ήταν δυνατή η εναλλαγή του πλαισίου ελέγχου.</string>
-    <string name="bulk_notes_restored">Επαναφέρθηκαν %1$dσημειώσεις</string>
     <string name="category_readonly">Μόνο για ανάγνωση</string>
     <string name="no_category">Χωρίς κατηγορία</string>
     <string name="add_category">Προσθήκη %1$s</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">Εμφάνιση</string>
     <string name="simple_synchronization">Συγχρονισμός</string>
     <string name="simple_behavior">Συμπεριφορά</string>
-    <string name="share_multiple">Κοινόχρηστο περιεχόμενο από %1$d σημειώσεις</string>
     <string name="manage_accounts">Διαχείριση λογαριασμών</string>
     <string name="action_formatting_help">Διαμόρφωση σε εξέλιξη</string>
 
@@ -193,11 +191,6 @@
         <item quantity="one">%d επιλέχτηκε</item>
         <item quantity="other">%d επιλέχτηκαν</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="one">Διεγράφη %1$d σημείωση</item>
-        <item quantity="other">Διεγράφησαν %1$d σημειώσεις</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

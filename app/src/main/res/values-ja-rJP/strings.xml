@@ -119,7 +119,6 @@
     <string name="simple_more">さらに表示</string>
     <string name="simple_move">移動</string>
     <string name="checkbox_could_not_be_toggled">チェックボックスを切り替えることができません</string>
-    <string name="bulk_notes_restored">ノート%1$dを復元しました</string>
     <string name="category_readonly">読み込み専用</string>
     <string name="no_category">カテゴリ無し</string>
     <string name="add_category">%1$s を追加</string>
@@ -156,7 +155,6 @@
     <string name="simple_appearance">表示</string>
     <string name="simple_synchronization">同期</string>
     <string name="simple_behavior">表示形式</string>
-    <string name="share_multiple"> %1$dノートの内容を共有</string>
     <string name="manage_accounts">アカウント管理</string>
     <string name="action_formatting_help">フォーマット</string>
 
@@ -192,10 +190,6 @@
     <plurals name="ab_selected">
         <item quantity="other">%d 選択済</item>
     </plurals>
-    <plurals name="bulk_notes_deleted">
-        <item quantity="other">ノート%1$dを削除しました</item>
-    </plurals>
-
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
