@@ -268,6 +268,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             }
             newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getCategory(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
         }
+        newNote.setCategoryId(getOrCreateCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory()));
         int rows = getNoteDao().updateNote(newNote);
         getCategoryDao().removeEmptyCategory(localAccount.getId());
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
