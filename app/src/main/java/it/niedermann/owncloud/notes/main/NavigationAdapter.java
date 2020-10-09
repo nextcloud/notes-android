@@ -26,6 +26,7 @@ import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
+import static java.util.Objects.requireNonNull;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.ViewHolder> {
 
@@ -121,7 +122,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
             count.setVisibility(item.count == null ? View.GONE : View.VISIBLE);
             count.setText(String.valueOf(item.count));
             if (item.icon > 0) {
-                icon.setImageDrawable(DrawableCompat.wrap(ContextCompat.getDrawable(icon.getContext(), item.icon)));
+                icon.setImageDrawable(DrawableCompat.wrap(requireNonNull(ContextCompat.getDrawable(icon.getContext(), item.icon))));
                 icon.setVisibility(View.VISIBLE);
             } else {
                 icon.setVisibility(View.GONE);
@@ -172,7 +173,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
     }
 
     public void setItems(@NonNull List<NavigationItem> items) {
-        for(NavigationItem item : items) {
+        for (NavigationItem item : items) {
             if (TextUtils.isEmpty(item.label)) {
                 item.label = context.getString(R.string.action_uncategorized);
                 item.icon = NavigationAdapter.ICON_NOFOLDER;
