@@ -797,9 +797,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        Note note = (Note) adapter.getItem(position);
+        NoteWithCategory note = (NoteWithCategory) adapter.getItem(position);
         NotesDatabase db = NotesDatabase.getInstance(view.getContext());
-        db.toggleFavoriteAndSync(ssoAccount, note.getId(), syncCallBack);
+        db.toggleFavoriteAndSync(ssoAccount, note.getNote().getId(), syncCallBack);
         adapter.notifyItemChanged(position);
     }
 
