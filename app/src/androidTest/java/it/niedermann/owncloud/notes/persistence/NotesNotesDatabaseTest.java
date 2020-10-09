@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
+import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -218,9 +218,9 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_04_getCategories() {
-        List<NavigationAdapter.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
         boolean exitFlag = false;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_04_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
@@ -232,9 +232,9 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_05_searchCategories() {
-        List<NavigationAdapter.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "Dia"));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "Dia"));
         boolean exitFlag = false;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_05_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
@@ -244,7 +244,7 @@ public class NotesNotesDatabaseTest {
 
         categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "Mike Chester Wang"));
         exitFlag = false;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_05_searchCategories_Item_Mike_Chester_Wang", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
@@ -371,9 +371,9 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_09_multiGetCategories() {
-        List<NavigationAdapter.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
         int count = 0;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_09_multiGetCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             count++;
         }
@@ -385,9 +385,9 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_10_multiSearchCategories() {
-        List<NavigationAdapter.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "M"));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "M"));
         int count = 0;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             count++;
         }
@@ -395,7 +395,7 @@ public class NotesNotesDatabaseTest {
 
         categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "Mike"));
         count = 0;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             count++;
         }
@@ -403,7 +403,7 @@ public class NotesNotesDatabaseTest {
 
         categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "M"));
         boolean exitFlag = false;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             if (categoryItem.label.equals("Music")) {
                 exitFlag = true;
@@ -414,7 +414,7 @@ public class NotesNotesDatabaseTest {
 
         categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "WOk"));
         exitFlag = false;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
@@ -424,7 +424,7 @@ public class NotesNotesDatabaseTest {
 
         categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "hello"));
         exitFlag = false;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             if (categoryItem.label.equals("Diary")) {
                 exitFlag = true;
@@ -496,9 +496,9 @@ public class NotesNotesDatabaseTest {
         Log.i("Test_12_Chinese", "Size: " + notes.size());
         assertEquals(1, notes.size());
 
-        List<NavigationAdapter.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
         boolean exitFlag = false;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             if (categoryItem.label.equals("日记")) {
                 exitFlag = true;
@@ -508,7 +508,7 @@ public class NotesNotesDatabaseTest {
 
         categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "记"));
         exitFlag = false;
-        for (NavigationAdapter.NavigationItem categoryItem : categories) {
+        for (NavigationItem categoryItem : categories) {
             Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
             if (categoryItem.label.equals("日记")) {
                 exitFlag = true;
@@ -539,9 +539,9 @@ public class NotesNotesDatabaseTest {
                     String.class);
             method.setAccessible(true);
 
-            List<NavigationAdapter.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
+            List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
             int count = 0;
-            for (NavigationAdapter.NavigationItem categoryItem : categories) {
+            for (NavigationItem categoryItem : categories) {
                 Log.i("Test_13_getCategoryIdByTitle", String.format("%s | %s | %d | %d",
                         categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
                 count++;
