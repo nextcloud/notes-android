@@ -18,6 +18,7 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -50,10 +51,8 @@ import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.niedermann.owncloud.notes.FormattingHelpActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.about.AboutActivity;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherListener;
@@ -70,6 +69,7 @@ import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.main.items.section.SectionItemDecoration;
+import it.niedermann.owncloud.notes.main.menu.MenuAdapter;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
@@ -77,9 +77,7 @@ import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvide
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
-import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
@@ -95,13 +93,13 @@ import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
+import static it.niedermann.owncloud.notes.main.menu.MenuAdapter.SERVER_SETTINGS;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
-import static java.util.Arrays.asList;
 
 public class MainActivity extends LockedActivity implements NoteClickListener, ViewProvider, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
 
@@ -119,8 +117,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     private final static int create_note_cmd = 0;
     private final static int show_single_note_cmd = 1;
-    private final static int server_settings = 2;
-    private final static int about = 3;
     public final static int manage_account = 4;
 
     /**
@@ -196,7 +192,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
         setupToolbars();
         setupNavigationList();
-        setupNavigationMenu();
         setupNotesList();
 
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
@@ -291,6 +286,15 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 }
             });
             setupNavigationList();
+
+            binding.navigationMenu.setAdapter(new MenuAdapter(getApplicationContext(), localAccount, (menuItem) -> {
+                @Nullable Integer resultCode = menuItem.getResultCode();
+                if (resultCode == null) {
+                    startActivity(menuItem.getIntent());
+                } else {
+                    startActivityForResult(menuItem.getIntent(), menuItem.getResultCode());
+                }
+            }));
         });
 
         new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
@@ -566,38 +570,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         }
     }
 
-    private void setupNavigationMenu() {
-        final NavigationItem itemFormattingHelp = new NavigationItem("formattingHelp", getString(R.string.action_formatting_help), null, R.drawable.ic_baseline_help_outline_24);
-        final NavigationItem itemTrashbin = new NavigationItem("trashbin", getString(R.string.action_trashbin), null, R.drawable.ic_delete_grey600_24dp);
-        final NavigationItem itemSettings = new NavigationItem("settings", getString(R.string.action_settings), null, R.drawable.ic_settings_grey600_24dp);
-        final NavigationItem itemAbout = new NavigationItem("about", getString(R.string.simple_about), null, R.drawable.ic_info_outline_grey600_24dp);
-
-        NavigationAdapter adapterMenu = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
-            @Override
-            public void onItemClick(NavigationItem item) {
-                if (itemFormattingHelp.equals(item)) {
-                    Intent formattingHelpIntent = new Intent(getApplicationContext(), FormattingHelpActivity.class);
-                    startActivity(formattingHelpIntent);
-                } else if (itemSettings.equals(item)) {
-                    Intent settingsIntent = new Intent(getApplicationContext(), PreferencesActivity.class);
-                    startActivityForResult(settingsIntent, server_settings);
-                } else if (itemAbout.equals(item)) {
-                    Intent aboutIntent = new Intent(getApplicationContext(), AboutActivity.class);
-                    startActivityForResult(aboutIntent, about);
-                } else if (itemTrashbin.equals(item) && localAccount != null) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(localAccount.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")));
-                }
-            }
-
-            @Override
-            public void onIconClick(NavigationItem item) {
-                onItemClick(item);
-            }
-        });
-        adapterMenu.setItems(asList(itemFormattingHelp, itemTrashbin, itemSettings, itemAbout));
-        binding.navigationMenu.setAdapter(adapterMenu);
-    }
-
     private void initRecyclerView() {
         adapter = new ItemAdapter(this, gridView);
         listView.setAdapter(adapter);
@@ -674,7 +646,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 listView.scrollToPosition(0);
                 break;
             }
-            case server_settings: {
+            case SERVER_SETTINGS: {
                 // Recreate activity completely, because theme switching makes problems when only invalidating the views.
                 // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
                 recreate();
@@ -869,7 +841,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     public void onCategoryChosen(String category) {
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
             NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
-            db.setCategory(ssoAccount, localAccount.getId(), note.getNote().getId(), category, () -> {});
+            db.setCategory(ssoAccount, localAccount.getId(), note.getNote().getId(), category, () -> {
+            });
         }
 
         mActionMode.finish();

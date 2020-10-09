@@ -189,8 +189,4 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         selectedItem = id;
         notifyDataSetChanged();
     }
-
-    public String getSelectedItem() {
-        return selectedItem;
-    }
 }
