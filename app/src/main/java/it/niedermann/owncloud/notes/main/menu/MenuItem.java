@@ -37,6 +37,10 @@ public class MenuItem {
         return intent;
     }
 
+    public void setIntent(@NonNull Intent intent) {
+        this.intent = intent;
+    }
+
     public int getLabelResource() {
         return labelResource;
     }

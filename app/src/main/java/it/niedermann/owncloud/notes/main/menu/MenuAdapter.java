@@ -33,7 +33,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         this.context = context;
         this.menuItems = new MenuItem[]{
                 new MenuItem(new Intent(context, FormattingHelpActivity.class), R.string.action_formatting_help, R.drawable.ic_baseline_help_outline_24),
-                new MenuItem(new Intent(Intent.ACTION_VIEW, Uri.parse(account.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin")), R.string.action_trashbin, R.drawable.ic_delete_grey600_24dp),
+                new MenuItem(generateTrashbinIntent(account), R.string.action_trashbin, R.drawable.ic_delete_grey600_24dp),
                 new MenuItem(new Intent(context, PreferencesActivity.class), SERVER_SETTINGS, R.string.action_settings, R.drawable.ic_settings_grey600_24dp),
                 new MenuItem(new Intent(context, AboutActivity.class), R.string.simple_about, R.drawable.ic_info_outline_grey600_24dp)
         };
@@ -57,8 +57,17 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
         holder.bind(menuItems[position], onClick, ContextCompat.getColor(context, R.color.fg_default));
     }
 
+    public void updateAccount(@NonNull Account account) {
+        menuItems[1].setIntent(new Intent(generateTrashbinIntent(account)));
+    }
+
     @Override
     public int getItemCount() {
         return menuItems.length;
+    }
+
+    @NonNull
+    private Intent generateTrashbinIntent(@NonNull Account account) {
+        return new Intent(Intent.ACTION_VIEW, Uri.parse(account.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin"));
     }
 }

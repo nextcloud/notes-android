@@ -139,6 +139,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     protected NotesDatabase db = null;
 
     private NavigationAdapter adapterCategories;
+    private MenuAdapter menuAdapter;
     @NonNull
     private NavigationCategory navigationSelection = new NavigationCategory(RECENT);
     private String navigationOpen = "";
@@ -238,6 +239,16 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             updateSortMethodIcon(method);
         });
 
+        menuAdapter = new MenuAdapter(getApplicationContext(), localAccount, (menuItem) -> {
+            @Nullable Integer resultCode = menuItem.getResultCode();
+            if (resultCode == null) {
+                startActivity(menuItem.getIntent());
+            } else {
+                startActivityForResult(menuItem.getIntent(), menuItem.getResultCode());
+            }
+        });
+        binding.navigationMenu.setAdapter(menuAdapter);
+
         mainViewModel.filterChanged().observe(this, (v) -> {
             if (noteWithCategoryLiveData != null) {
                 noteWithCategoryLiveData.removeObserver(noteWithCategoryObserver);
@@ -286,15 +297,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 }
             });
             setupNavigationList();
-
-            binding.navigationMenu.setAdapter(new MenuAdapter(getApplicationContext(), localAccount, (menuItem) -> {
-                @Nullable Integer resultCode = menuItem.getResultCode();
-                if (resultCode == null) {
-                    startActivity(menuItem.getIntent());
-                } else {
-                    startActivityForResult(menuItem.getIntent(), menuItem.getResultCode());
-                }
-            }));
+            menuAdapter.updateAccount(a);
         });
 
         new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
