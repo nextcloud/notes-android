@@ -48,8 +48,6 @@ public class MainViewModel extends AndroidViewModel {
     private MutableLiveData<Void> sortOrderOfSpecialNavigationCategoryChanged = new MutableLiveData<>();
     @NonNull
     private MutableLiveData<NavigationCategory> selectedCategory = new MutableLiveData<>(new NavigationCategory(RECENT));
-    @NonNull
-    private MutableLiveData<List<NavigationItem>> navigationCategories = new MutableLiveData<>();
 
     public MainViewModel(@NonNull Application application) {
         super(application);

@@ -82,6 +82,7 @@ import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
+import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
@@ -157,7 +158,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     private LiveData<List<Item>> noteWithCategoryLiveData;
     private Observer<List<Item>> noteWithCategoryObserver = notes -> {
-        adapter.setShowCategory(mainViewModel.getSelectedCategory().getValue() == null);
         adapter.setHighlightSearchQuery(mainViewModel.getSearchTerm().getValue());
         adapter.setItemList(notes);
         binding.activityNotesListView.progressCircular.setVisibility(GONE);
@@ -187,7 +187,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         this.fabCreate = binding.activityNotesListView.fabCreate;
         this.listView = binding.activityNotesListView.recyclerView;
 
+        db = NotesDatabase.getInstance(this);
+
+        gridView = isGridViewEnabled();
+        if (!gridView || isDarkThemeActive(this)) {
+            activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
+        }
+
+        setupToolbars();
+        setupNavigationList();
+        setupNavigationMenu();
+        setupNotesList();
+
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
+            adapter.setShowCategory(selectedCategory.getType() == RECENT || selectedCategory.getType() == FAVORITES);
             View emptyContentView = binding.activityNotesListView.emptyContentView.getRoot();
             emptyContentView.setVisibility(GONE);
             binding.activityNotesListView.progressCircular.setVisibility(VISIBLE);
@@ -230,18 +243,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             navigationItemLiveData = mainViewModel.getNavigationCategories(navigationOpen);
             navigationItemLiveData.observe(this, navigationItemObserver);
         });
-
-        db = NotesDatabase.getInstance(this);
-
-        gridView = isGridViewEnabled();
-        if (!gridView || isDarkThemeActive(this)) {
-            activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
-        }
-
-        setupToolbars();
-        setupNavigationList();
-        setupNavigationMenu();
-        setupNotesList();
 
         new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
     }
