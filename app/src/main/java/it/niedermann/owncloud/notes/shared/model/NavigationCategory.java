@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
+
 public class NavigationCategory implements Serializable {
 
     @NonNull
@@ -15,15 +17,15 @@ public class NavigationCategory implements Serializable {
     private final Category category;
 
     public NavigationCategory(@NonNull ENavigationCategoryType type) {
-        if (type == ENavigationCategoryType.DEFAULT_CATEGORY) {
-            throw new IllegalArgumentException("If you want to provide a " + ENavigationCategoryType.DEFAULT_CATEGORY + ", call the constructor with a " + Category.class.getSimpleName());
+        if (type == DEFAULT_CATEGORY) {
+            throw new IllegalArgumentException("If you want to provide a " + DEFAULT_CATEGORY + ", call the constructor with a " + Category.class.getSimpleName());
         }
         this.type = type;
         this.category = null;
     }
 
     public NavigationCategory(@NonNull Category category) {
-        this.type = ENavigationCategoryType.DEFAULT_CATEGORY;
+        this.type = DEFAULT_CATEGORY;
         this.category = category;
     }
 

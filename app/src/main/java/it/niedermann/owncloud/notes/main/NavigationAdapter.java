@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.main;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +22,10 @@ import java.util.List;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ItemNavigationBinding;
+import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
+
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 
 public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.ViewHolder> {
 
@@ -55,10 +60,21 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         public int icon;
         @Nullable
         public Integer count;
+        @Nullable
+        public ENavigationCategoryType type;
 
         public NavigationItem(@NonNull String id, @NonNull String label, @Nullable Integer count, @DrawableRes int icon) {
             this.id = id;
             this.label = label;
+            this.type = TextUtils.isEmpty(label) ? UNCATEGORIZED : null;
+            this.count = count;
+            this.icon = icon;
+        }
+
+        public NavigationItem(@NonNull String id, @NonNull String label, @Nullable Integer count, @DrawableRes int icon, @NonNull ENavigationCategoryType type) {
+            this.id = id;
+            this.label = label;
+            this.type = type;
             this.count = count;
             this.icon = icon;
         }
@@ -69,7 +85,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
         public Long categoryId;
 
         public CategoryNavigationItem(@NonNull String id, @NonNull String label, @Nullable Integer count, @DrawableRes int icon, @NonNull Long categoryId) {
-            super(id, label, count, icon);
+            super(id, label, count, icon, ENavigationCategoryType.DEFAULT_CATEGORY);
             this.categoryId = categoryId;
         }
     }
@@ -105,7 +121,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
             count.setVisibility(item.count == null ? View.GONE : View.VISIBLE);
             count.setText(String.valueOf(item.count));
             if (item.icon > 0) {
-                icon.setImageDrawable(DrawableCompat.wrap(icon.getResources().getDrawable(item.icon)));
+                icon.setImageDrawable(DrawableCompat.wrap(ContextCompat.getDrawable(icon.getContext(), item.icon)));
                 icon.setVisibility(View.VISIBLE);
             } else {
                 icon.setVisibility(View.GONE);
@@ -156,6 +172,14 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Vi
     }
 
     public void setItems(@NonNull List<NavigationItem> items) {
+        for(NavigationItem item : items) {
+            if (TextUtils.isEmpty(item.label)) {
+                item.label = context.getString(R.string.action_uncategorized);
+                item.icon = NavigationAdapter.ICON_NOFOLDER;
+                item.type = UNCATEGORIZED;
+                break;
+            }
+        }
         this.items = items;
         notifyDataSetChanged();
     }

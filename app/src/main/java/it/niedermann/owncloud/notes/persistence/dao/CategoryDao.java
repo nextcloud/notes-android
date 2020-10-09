@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -73,6 +74,15 @@ public interface CategoryDao {
      */
     @Query("SELECT CATEGORY.id, CATEGORY.title, COUNT(*) as 'totalNotes' FROM CATEGORY INNER JOIN NOTE ON categoryId = CATEGORY.id WHERE STATUS != 'LOCAL_DELETED' AND CATEGORY.accountId = :accountId GROUP BY CATEGORY.title")
     List<CategoryWithNotesCount> getCategories(Long accountId);
+
+    /**
+     * This method return all of the categories with given accountId
+     *
+     * @param accountId The user account Id
+     * @return All of the categories with given accountId
+     */
+    @Query("SELECT CATEGORY.id, CATEGORY.title, COUNT(*) as 'totalNotes' FROM CATEGORY INNER JOIN NOTE ON categoryId = CATEGORY.id WHERE STATUS != 'LOCAL_DELETED' AND CATEGORY.accountId = :accountId GROUP BY CATEGORY.title")
+    LiveData<List<CategoryWithNotesCount>> getCategoriesLiveData(Long accountId);
 
     @Query("SELECT CATEGORY.id, CATEGORY.title, COUNT(*) as 'totalNotes' FROM CATEGORY INNER JOIN NOTE ON categoryId = CATEGORY.id WHERE STATUS != 'LOCAL_DELETED' AND CATEGORY.accountId = :accountId AND CATEGORY.title LIKE '%' + TRIM(:searchTerm) + '%' GROUP BY CATEGORY.title")
     List<CategoryWithNotesCount> searchCategories(Long accountId, String searchTerm);
