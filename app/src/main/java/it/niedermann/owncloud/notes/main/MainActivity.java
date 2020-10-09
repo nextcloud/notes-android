@@ -63,13 +63,14 @@ import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
-import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
-import it.niedermann.owncloud.notes.main.NavigationAdapter.NavigationItem;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.main.items.section.SectionItemDecoration;
 import it.niedermann.owncloud.notes.main.menu.MenuAdapter;
+import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
+import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
+import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
@@ -239,16 +240,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             updateSortMethodIcon(method);
         });
 
-        menuAdapter = new MenuAdapter(getApplicationContext(), localAccount, (menuItem) -> {
-            @Nullable Integer resultCode = menuItem.getResultCode();
-            if (resultCode == null) {
-                startActivity(menuItem.getIntent());
-            } else {
-                startActivityForResult(menuItem.getIntent(), menuItem.getResultCode());
-            }
-        });
-        binding.navigationMenu.setAdapter(menuAdapter);
-
         mainViewModel.filterChanged().observe(this, (v) -> {
             if (noteWithCategoryLiveData != null) {
                 noteWithCategoryLiveData.removeObserver(noteWithCategoryObserver);
@@ -297,7 +288,21 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 }
             });
             setupNavigationList();
-            menuAdapter.updateAccount(a);
+
+            if (menuAdapter == null) {
+                menuAdapter = new MenuAdapter(getApplicationContext(), localAccount, (menuItem) -> {
+                    @Nullable Integer resultCode = menuItem.getResultCode();
+                    if (resultCode == null) {
+                        startActivity(menuItem.getIntent());
+                    } else {
+                        startActivityForResult(menuItem.getIntent(), menuItem.getResultCode());
+                    }
+                });
+
+                binding.navigationMenu.setAdapter(menuAdapter);
+            } else {
+                menuAdapter.updateAccount(a);
+            }
         });
 
         new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
@@ -465,7 +470,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     }
 
     private void setupNavigationList() {
-        adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
+        adapterCategories = new NavigationAdapter(this, new NavigationClickListener() {
             @Override
             public void onItemClick(NavigationItem item) {
                 selectItem(item, true);
@@ -489,8 +494,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                             break;
                         }
                         default: {
-                            if (item.getClass() == CategoryNavigationItem.class) {
-                                mainViewModel.postSelectedCategory(new NavigationCategory(db.getCategoryDao().getCategory(((CategoryNavigationItem) item).categoryId)));
+                            if (item.getClass() == NavigationItem.CategoryNavigationItem.class) {
+                                mainViewModel.postSelectedCategory(new NavigationCategory(db.getCategoryDao().getCategory(((NavigationItem.CategoryNavigationItem) item).categoryId)));
                             } else {
                                 Log.e(TAG, "Unknown item navigation type. Fallback to show " + RECENT);
                                 mainViewModel.postSelectedCategory(new NavigationCategory(RECENT));

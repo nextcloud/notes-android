@@ -40,7 +40,8 @@ import java.util.regex.Pattern;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
-import it.niedermann.owncloud.notes.main.NavigationAdapter;
+import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
+import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
@@ -136,15 +137,15 @@ public class DisplayUtils {
         }
     }
 
-    public static List<NavigationAdapter.CategoryNavigationItem> convertToCategoryNavigationItem(@NonNull Context context, @NonNull Collection<CategoryWithNotesCount> counter) {
-        List<NavigationAdapter.CategoryNavigationItem> result = new ArrayList<>(counter.size());
+    public static List<NavigationItem.CategoryNavigationItem> convertToCategoryNavigationItem(@NonNull Context context, @NonNull Collection<CategoryWithNotesCount> counter) {
+        List<NavigationItem.CategoryNavigationItem> result = new ArrayList<>(counter.size());
         for(CategoryWithNotesCount count: counter) {
             result.add(convertToCategoryNavigationItem(context, count));
         }
         return result;
     }
 
-    public static NavigationAdapter.CategoryNavigationItem convertToCategoryNavigationItem(@NonNull Context context, @NonNull CategoryWithNotesCount counter) {
+    public static NavigationItem.CategoryNavigationItem convertToCategoryNavigationItem(@NonNull Context context, @NonNull CategoryWithNotesCount counter) {
         Resources res = context.getResources();
         String category = counter.getTitle().toLowerCase();
         int icon = NavigationAdapter.ICON_FOLDER;
@@ -155,6 +156,6 @@ public class DisplayUtils {
         } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
             icon = R.drawable.ic_work_grey600_24dp;
         }
-        return new NavigationAdapter.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId());
+        return new NavigationItem.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId());
     }
 }

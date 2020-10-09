@@ -23,8 +23,9 @@ import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.main.NavigationAdapter;
-import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
+import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
+import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
+import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
@@ -43,8 +44,8 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private Account localAccount = null;
 
     private NavigationAdapter adapterCategories;
-    private NavigationAdapter.NavigationItem itemRecent;
-    private NavigationAdapter.NavigationItem itemFavorites;
+    private NavigationItem itemRecent;
+    private NavigationItem itemFavorites;
     private NotesDatabase db = null;
 
     @Override
@@ -76,20 +77,20 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
             finish();
         }
 
-        itemRecent = new NavigationAdapter.NavigationItem(MainActivity.ADAPTER_KEY_RECENT,
+        itemRecent = new NavigationItem(MainActivity.ADAPTER_KEY_RECENT,
                 getString(R.string.label_all_notes),
                 null,
                 R.drawable.ic_access_time_grey600_24dp);
-        itemFavorites = new NavigationAdapter.NavigationItem(MainActivity.ADAPTER_KEY_STARRED,
+        itemFavorites = new NavigationItem(MainActivity.ADAPTER_KEY_STARRED,
                 getString(R.string.label_favorites),
                 null,
                 R.drawable.ic_star_yellow_24dp);
         RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
 
-        adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
+        adapterCategories = new NavigationAdapter(this, new NavigationClickListener() {
             @Override
-            public void onItemClick(NavigationAdapter.NavigationItem item) {
+            public void onItemClick(NavigationItem item) {
                 NotesListWidgetData data = new NotesListWidgetData();
 
                 data.setId(appWidgetId);
@@ -99,8 +100,8 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                     data.setMode(MODE_DISPLAY_STARRED);
                 } else {
                     data.setMode(MODE_DISPLAY_CATEGORY);
-                    if (item instanceof CategoryNavigationItem) {
-                        data.setCategoryId(((CategoryNavigationItem) item).categoryId);
+                    if (item instanceof NavigationItem.CategoryNavigationItem) {
+                        data.setCategoryId(((NavigationItem.CategoryNavigationItem) item).categoryId);
                     } else {
                         throw new IllegalStateException("Tried to choose a category, but ");
                     }
@@ -119,7 +120,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 finish();
             }
 
-            public void onIconClick(NavigationAdapter.NavigationItem item) {
+            public void onIconClick(NavigationItem item) {
                 onItemClick(item);
             }
         });
@@ -141,14 +142,14 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     public void applyBrand(int mainColor, int textColor) {
     }
 
-    private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationAdapter.NavigationItem>> {
+    private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationItem>> {
         @Override
-        protected List<NavigationAdapter.NavigationItem> doInBackground(Void... voids) {
+        protected List<NavigationItem> doInBackground(Void... voids) {
             if (localAccount == null) {
                 return new ArrayList<>();
             }
-            NavigationAdapter.NavigationItem itemUncategorized;
-            List<CategoryNavigationItem> categories = convertToCategoryNavigationItem(NoteListWidgetConfigurationActivity.this, db.getCategoryDao().getCategories(localAccount.getId()));
+            NavigationItem itemUncategorized;
+            List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(NoteListWidgetConfigurationActivity.this, db.getCategoryDao().getCategories(localAccount.getId()));
 
             if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
                 itemUncategorized = categories.get(0);
@@ -159,11 +160,11 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
             itemFavorites.count = db.getNoteDao().getFavoritesCount(localAccount.getId());
             itemRecent.count = db.getNoteDao().count(localAccount.getId());
 
-            ArrayList<NavigationAdapter.NavigationItem> items = new ArrayList<>();
+            ArrayList<NavigationItem> items = new ArrayList<>();
             items.add(itemRecent);
             items.add(itemFavorites);
 
-            for (NavigationAdapter.NavigationItem item : categories) {
+            for (NavigationItem item : categories) {
                 int slashIndex = item.label.indexOf('/');
 
                 item.label = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
@@ -174,7 +175,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         }
 
         @Override
-        protected void onPostExecute(List<NavigationAdapter.NavigationItem> items) {
+        protected void onPostExecute(List<NavigationItem> items) {
             adapterCategories.setItems(items);
         }
     }
