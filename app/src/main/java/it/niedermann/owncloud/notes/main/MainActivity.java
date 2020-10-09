@@ -251,50 +251,27 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             noteWithCategoryLiveData.observe(this, noteWithCategoryObserver);
         });
         mainViewModel.getCurrentAccount().observe(this, (a) -> {
+            fabCreate.hide();
+            localAccount = db.getAccountDao().getLocalAccountByAccountName(a.getAccountName());
+            SingleAccountHelper.setCurrentAccount(getApplicationContext(), a.getAccountName());
             if (navigationItemLiveData != null) {
                 navigationItemLiveData.removeObserver(navigationItemObserver);
             }
             navigationItemLiveData = mainViewModel.getNavigationCategories(navigationOpen);
             navigationItemLiveData.observe(this, navigationItemObserver);
-        });
-
-        new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
-    }
-
-    @Override
-    protected void onResume() {
-        try {
-            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount.name)) {
-                selectAccount(ssoAccount.name);
+            String url = a.getUrl();
+            if (url != null) {
+                Glide
+                        .with(this)
+                        .load(url + "/index.php/avatar/" + Uri.encode(a.getUserName()) + "/64")
+                        .placeholder(R.drawable.ic_account_circle_grey_24dp)
+                        .error(R.drawable.ic_account_circle_grey_24dp)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(activityBinding.launchAccountSwitcher);
+            } else {
+                Log.w(TAG, "url is null");
             }
-        } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
-            if (localAccount == null) {
-                List<Account> localAccounts = db.getAccountDao().getAccounts();
-                if (localAccounts.size() > 0) {
-                    localAccount = localAccounts.get(0);
-                    mainViewModel.postCurrentAccount(localAccount);
-                }
-            }
-            if (!notAuthorizedAccountHandled) {
-                handleNotAuthorizedAccount();
-            }
-        }
 
-        // refresh and sync every time the activity gets
-        if (localAccount != null) {
-            synchronize();
-            db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
-        }
-        super.onResume();
-    }
-
-    private void selectAccount(String accountName) {
-        fabCreate.hide();
-        SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
-        localAccount = db.getAccountDao().getLocalAccountByAccountName(accountName);
-        mainViewModel.postCurrentAccount(localAccount);
-        if (localAccount != null) {
             try {
                 BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
@@ -314,13 +291,36 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 }
             });
             setupNavigationList();
-        } else {
+        });
+
+        new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
+    }
+
+    @Override
+    protected void onResume() {
+        try {
+            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
+            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount.name)) {
+                mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name));
+            }
+        } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
+            if (localAccount == null) {
+                List<Account> localAccounts = db.getAccountDao().getAccounts();
+                if (localAccounts.size() > 0) {
+                    mainViewModel.postCurrentAccount(localAccount);
+                }
+            }
             if (!notAuthorizedAccountHandled) {
                 handleNotAuthorizedAccount();
             }
-            binding.navigationList.setAdapter(null);
         }
-        updateCurrentAccountAvatar();
+
+        // refresh and sync every time the activity gets
+        if (localAccount != null) {
+            synchronize();
+            db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
+        }
+        super.onResume();
     }
 
     private void handleNotAuthorizedAccount() {
@@ -332,7 +332,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     private void setupToolbars() {
         setSupportActionBar(binding.activityNotesListView.toolbar);
-        updateCurrentAccountAvatar();
         activityBinding.homeToolbar.setOnClickListener((v) -> {
             if (activityBinding.toolbar.getVisibility() == GONE) {
                 updateToolbars(false);
@@ -672,23 +671,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
         switch (requestCode) {
             case create_note_cmd: {
-                // Make sure the request was successful
-                if (resultCode == RESULT_OK) {
-                    //not need because of db.synchronisation in createActivity
-
-                    Bundle bundle = data.getExtras();
-                    if (bundle != null && bundle.containsKey(CREATED_NOTE)) {
-                        Note createdNote = (Note) bundle.getSerializable(CREATED_NOTE);
-                        if (createdNote != null) {
-                            // FIXME
-//                            adapter.add(createdNote);
-                        } else {
-                            Log.w(TAG, "createdNote must not be null");
-                        }
-                    } else {
-                        Log.w(TAG, "Provide at least " + CREATED_NOTE);
-                    }
-                }
                 listView.scrollToPosition(0);
                 break;
             }
@@ -700,7 +682,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             }
             case manage_account: {
                 if (resultCode == RESULT_FIRST_USER) {
-                    selectAccount(null);
+                    recreate(); // TODO
+                    askForNewAccount(this);
                 }
                 new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
                 break;
@@ -717,16 +700,16 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                                 db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
                                 new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
                                 Log.i(TAG, capabilities.toString());
-                                runOnUiThread(() -> selectAccount(ssoAccount.name));
+                                runOnUiThread(() -> mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
                             } catch (SQLiteException e) {
                                 // Happens when upgrading from version ≤ 1.0.1 and importing the account
-                                runOnUiThread(() -> selectAccount(ssoAccount.name));
+                                runOnUiThread(() -> mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
                             } catch (Exception e) {
                                 // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
                                     runOnUiThread(() -> {
-                                        selectAccount(ssoAccount.name);
+                                        runOnUiThread(() -> mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
                                         // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
                                         coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
                                     });
@@ -744,30 +727,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                     Log.i(TAG, "AccountImport has been cancelled.");
                 }
             }
-        }
-    }
-
-    private void updateCurrentAccountAvatar() {
-        try {
-            String url = localAccount.getUrl();
-            if (url != null) {
-                Glide
-                        .with(this)
-                        .load(url + "/index.php/avatar/" + Uri.encode(localAccount.getUserName()) + "/64")
-                        .placeholder(R.drawable.ic_account_circle_grey_24dp)
-                        .error(R.drawable.ic_account_circle_grey_24dp)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(activityBinding.launchAccountSwitcher);
-            } else {
-                Log.w(TAG, "url is null");
-            }
-        } catch (NullPointerException e) { // No local account - show generic header
-            Glide
-                    .with(this)
-                    .load(R.drawable.ic_account_circle_grey_24dp)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(activityBinding.launchAccountSwitcher);
-            Log.w(TAG, "Tried to update username in drawer, but localAccount was null");
         }
     }
 
@@ -870,7 +829,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     @Override
     public void onAccountChosen(Account localAccount) {
         binding.drawerLayout.closeDrawer(GravityCompat.START);
-        selectAccount(localAccount.getAccountName());
+        mainViewModel.postCurrentAccount(localAccount);
     }
 
     @Override
@@ -879,11 +838,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         if (localAccount.getId() == this.localAccount.getId()) {
             List<Account> remainingAccounts = db.getAccountDao().getAccounts();
             if (remainingAccounts.size() > 0) {
-                this.localAccount = remainingAccounts.get(0);
-                mainViewModel.postCurrentAccount(localAccount);
-                selectAccount(this.localAccount.getAccountName());
+                mainViewModel.postCurrentAccount(remainingAccounts.get(0));
             } else {
-                selectAccount(null);
+                recreate(); // TODO
                 askForNewAccount(this);
             }
         }
@@ -895,8 +852,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
         adapter.deselect(0);
         for (Integer i : selection) {
-            Note note = (Note) adapter.getItem(i);
-            db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), db.getNoteDao().getNote(note.getAccountId(), note.getId()), account.getId());
+            NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
+            db.moveNoteToAnotherAccount(ssoAccount, note.getNote().getAccountId(), db.getNoteDao().getNote(note.getNote().getAccountId(), note.getNote().getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);

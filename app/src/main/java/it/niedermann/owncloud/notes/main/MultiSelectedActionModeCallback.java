@@ -33,6 +33,7 @@ import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
@@ -102,9 +103,9 @@ public class MultiSelectedActionModeCallback implements Callback {
                     List<Note> deletedNotes = new ArrayList<>();
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
-                        Note note = (Note) adapter.getItem(i);
-                        deletedNotes.add(db.getNoteDao().getNote(note.getAccountId(), note.getId()));
-                        db.deleteNoteAndSync(ssoAccount, note.getId());
+                        NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
+                        deletedNotes.add(db.getNoteDao().getNote(note.getNote().getAccountId(), note.getNote().getId()));
+                        db.deleteNoteAndSync(ssoAccount, note.getNote().getId());
                     }
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
@@ -137,12 +138,12 @@ public class MultiSelectedActionModeCallback implements Callback {
                 return true;
             case R.id.menu_share:
                 final String subject = (adapter.getSelected().size() == 1)
-                        ? ((Note) adapter.getItem(adapter.getSelected().get(0))).getTitle()
+                        ? ((NoteWithCategory) adapter.getItem(adapter.getSelected().get(0))).getNote().getTitle()
                         : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
                 final StringBuilder noteContents = new StringBuilder();
                 for (Integer i : adapter.getSelected()) {
-                    final Note noteWithoutContent = (Note) adapter.getItem(i);
-                    final String tempFullNote = db.getNoteDao().getNote(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
+                    final NoteWithCategory noteWithoutContent = (NoteWithCategory) adapter.getItem(i);
+                    final String tempFullNote = db.getNoteDao().getNote(noteWithoutContent.getNote().getAccountId(), noteWithoutContent.getNote().getId()).getContent();
                     if (!TextUtils.isEmpty(tempFullNote)) {
                         if (noteContents.length() > 0) {
                             noteContents.append("\n\n");

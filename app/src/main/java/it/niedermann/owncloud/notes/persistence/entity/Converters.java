@@ -21,7 +21,7 @@ public class Converters {
 
     @TypeConverter
     public static CategorySortingMethod categorySortingMethodFromString(Integer value) {
-        return value == null ? null : CategorySortingMethod.getCSM(value);
+        return value == null ? CategorySortingMethod.SORT_MODIFIED_DESC : CategorySortingMethod.getCSM(value);
     }
 
     @TypeConverter

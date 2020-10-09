@@ -517,6 +517,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param selectedCategory The category
      * @return The sorting method in CategorySortingMethod enum format
      */
+    @NonNull
     public CategorySortingMethod getCategoryOrder(@NonNull NavigationCategory selectedCategory) {
         final Context ctx = context.getApplicationContext();
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);

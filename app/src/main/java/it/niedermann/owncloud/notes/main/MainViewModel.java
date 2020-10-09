@@ -58,6 +58,11 @@ public class MainViewModel extends AndroidViewModel {
         this.currentAccount.postValue(account);
     }
 
+    @NonNull
+    public LiveData<Account> getCurrentAccount() {
+        return currentAccount;
+    }
+
     public void postSearchTerm(String searchTerm) {
         this.searchTerm.postValue(searchTerm);
     }
@@ -68,11 +73,6 @@ public class MainViewModel extends AndroidViewModel {
 
     public void postSortOrderOfSpecialNavigationCategoryChanged() {
         this.sortOrderOfSpecialNavigationCategoryChanged.postValue(null);
-    }
-
-    @NonNull
-    public LiveData<Account> getCurrentAccount() {
-        return currentAccount;
     }
 
     @NonNull
