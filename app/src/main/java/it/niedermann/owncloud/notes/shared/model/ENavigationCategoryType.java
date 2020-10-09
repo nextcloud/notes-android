@@ -1,7 +1,8 @@
 package it.niedermann.owncloud.notes.shared.model;
 
-public enum ENavigationCategoryType {
+import java.io.Serializable;
 
+public enum ENavigationCategoryType implements Serializable {
     RECENT,
     FAVORITES,
     UNCATEGORIZED,

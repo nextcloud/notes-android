@@ -471,6 +471,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
             }
             db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
+            mainViewModel.postFilterChanged();
             refreshLists();
             updateSortMethodIcon(localAccount.getId());
         });

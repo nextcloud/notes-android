@@ -38,6 +38,8 @@ public class MainViewModel extends AndroidViewModel {
     @NonNull
     private MutableLiveData<String> searchTerm = new MutableLiveData<>();
     @NonNull
+    private MutableLiveData<Void> filterChanged = new MutableLiveData<>();
+    @NonNull
     private MutableLiveData<NavigationCategory> selectedCategory = new MutableLiveData<>(new NavigationCategory(RECENT));
 
     public MainViewModel(@NonNull Application application) {
@@ -57,6 +59,10 @@ public class MainViewModel extends AndroidViewModel {
         this.selectedCategory.postValue(selectedCategory);
     }
 
+    public void postFilterChanged() {
+        this.filterChanged.postValue(null);
+    }
+
     public LiveData<Account> getCurrentAccount() {
         return currentAccount;
     }
@@ -74,6 +80,7 @@ public class MainViewModel extends AndroidViewModel {
         mediatorLiveData.addSource(currentAccount, (o) -> mediatorLiveData.postValue(null));
         mediatorLiveData.addSource(searchTerm, (o) -> mediatorLiveData.postValue(null));
         mediatorLiveData.addSource(selectedCategory, (o) -> mediatorLiveData.postValue(null));
+        mediatorLiveData.addSource(filterChanged, (o) -> mediatorLiveData.postValue(null));
         return mediatorLiveData;
     }
 
