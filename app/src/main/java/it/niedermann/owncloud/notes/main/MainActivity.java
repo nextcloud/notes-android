@@ -82,13 +82,14 @@ import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.preferences.PreferencesActivity;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.O;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
@@ -152,7 +153,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         if (mActionMode != null) {
             mActionMode.finish();
         }
-        refreshLists();
         swipeRefreshLayout.setRefreshing(false);
     };
 
@@ -206,29 +206,43 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             binding.activityNotesListView.progressCircular.setVisibility(VISIBLE);
             this.navigationSelection = selectedCategory;
             fabCreate.show();
+
+            CategorySortingMethod method;
             String subtitle;
             switch (navigationSelection.getType()) {
                 case FAVORITES: {
                     subtitle = getString(R.string.search_in_category, getString(R.string.label_favorites));
+                    method = db.getCategoryOrder(navigationSelection);
                     break;
                 }
                 case UNCATEGORIZED: {
                     subtitle = getString(R.string.search_in_category, getString(R.string.action_uncategorized));
+                    method = db.getCategoryOrder(navigationSelection);
                     break;
                 }
                 case RECENT: {
                     subtitle = getString(R.string.search_in_all);
+                    method = db.getCategoryOrder(navigationSelection);
                     break;
                 }
                 case DEFAULT_CATEGORY:
                 default: {
                     Category category = selectedCategory.getCategory();
-                    subtitle = getString(R.string.search_in_category, NoteUtil.extendCategory(category == null ? "" : category.getTitle()));
+                    if (category == null) {
+                        Log.e(TAG, "navigation selection is a " + DEFAULT_CATEGORY + ", but the contained category is null.");
+                        subtitle = "";
+                        method = CategorySortingMethod.SORT_MODIFIED_DESC;
+                    } else {
+                        subtitle = getString(R.string.search_in_category, NoteUtil.extendCategory(category.getTitle()));
+                        method = category.getSortingMethod();
+                    }
                     break;
                 }
             }
             activityBinding.searchText.setText(subtitle);
+            updateSortMethodIcon(method);
         });
+
         mainViewModel.filterChanged().observe(this, (v) -> {
             if (noteWithCategoryLiveData != null) {
                 noteWithCategoryLiveData.removeObserver(noteWithCategoryObserver);
@@ -268,7 +282,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         }
 
         // refresh and sync every time the activity gets
-        refreshLists();
         if (localAccount != null) {
             synchronize();
             db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
@@ -285,14 +298,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             try {
                 BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, this::refreshLists, swipeRefreshLayout, this, gridView)
+                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, swipeRefreshLayout, this, gridView)
                         .attachToRecyclerView(listView);
                 synchronize();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
                 handleNotAuthorizedAccount();
             }
-            refreshLists();
             fabCreate.show();
             activityBinding.launchAccountSwitcher.setOnClickListener((v) -> {
                 if (localAccount == null) {
@@ -435,10 +447,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         });
 
         activityBinding.sortingMethod.setOnClickListener((v) -> {
-            CategorySortingMethod method;
-
-            method = db.getCategoryOrder(localAccount.getId(), navigationSelection);
-
+            CategorySortingMethod method = db.getCategoryOrder(navigationSelection);
             if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
                 method = CategorySortingMethod.SORT_MODIFIED_DESC;
             } else {
@@ -446,8 +455,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             }
             db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
             mainViewModel.postSortOrderOfSpecialNavigationCategoryChanged();
-            refreshLists();
-            updateSortMethodIcon(localAccount.getId());
         });
     }
 
@@ -506,7 +513,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 if (closeNavigation) {
                     binding.drawerLayout.closeDrawer(GravityCompat.START);
                 }
-                refreshLists(true);
             }
 
             @Override
@@ -516,7 +522,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                     selectItem(item, false);
                 } else if (item.icon == NavigationAdapter.ICON_MULTIPLE || item.icon == NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(navigationOpen)) {
                     navigationOpen = null;
-                    refreshLists();
                 } else {
                     onItemClick(item);
                 }
@@ -538,7 +543,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
         binding.headerView.setBackgroundColor(mainColor);
         binding.appName.setTextColor(textColor);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
         }
 
@@ -621,34 +626,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         }
     }
 
-    private void refreshLists() {
-        refreshLists(false);
-    }
-
-    private void refreshLists(final boolean scrollToTop) {
-        if (localAccount == null) {
-            fabCreate.hide();
-            adapter.removeAll();
-            return;
-        }
-        updateSortMethodIcon(localAccount.getId());
-    }
-
     /**
      * Updates sorting method icon.
      */
-    private void updateSortMethodIcon(long localAccountId) {
-        CategorySortingMethod method = db.getCategoryOrder(localAccountId, navigationSelection);
+    private void updateSortMethodIcon(CategorySortingMethod method) {
         if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
             activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
             activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (SDK_INT >= O) {
                 activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_last_modified));
             }
         } else {
             activityBinding.sortingMethod.setImageResource(R.drawable.modification_desc);
             activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_alphabetically));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (SDK_INT >= O) {
                 activityBinding.sortingMethod.setTooltipText(getString(R.string.sort_alphabetically));
             }
         }
@@ -810,7 +801,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         NotesDatabase db = NotesDatabase.getInstance(view.getContext());
         db.toggleFavoriteAndSync(ssoAccount, note.getId(), syncCallBack);
         adapter.notifyItemChanged(position);
-        refreshLists();
     }
 
     @Override
@@ -819,7 +809,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         if (selected) {
             v.setSelected(true);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                    this, this, db, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, this::refreshLists, getSupportFragmentManager(), activityBinding.searchView
+                    this, this, db, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView
             ));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
@@ -840,7 +830,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private void updateToolbars(boolean disableSearch) {
         activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
         activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(),
                     disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
         } else {
@@ -916,18 +906,15 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         }
 
         mActionMode.finish();
-        refreshLists();
     }
 
     @Override
     public void onCategoryChosen(String category) {
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
-            Note note = (Note) adapter.getItem(i);
-            note.setCategory(category);
-            db.setCategory(ssoAccount, note, category, this::refreshLists);
+            NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
+            db.setCategory(ssoAccount, localAccount.getId(), note.getNote().getId(), category, () -> {});
         }
 
         mActionMode.finish();
-        refreshLists();
     }
 }

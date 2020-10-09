@@ -350,7 +350,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Override
     public void onCategoryChosen(String category) {
-        db.setCategory(ssoAccount, note, category, null);
+        db.setCategory(ssoAccount, localAccount.getId(), note.getId(), category, null);
         listener.onNoteUpdated(note);
     }
 

@@ -56,12 +56,11 @@ public interface CategoryDao {
      * The sorting method of the category can be used to decide
      * to use which sorting method to show the notes for each categories.
      *
-     * @param accountId  The user accountID
      * @param categoryId The category title
      * @return The sorting method in {@link CategorySortingMethod} enum format
      */
-    @Query("SELECT sortingMethod FROM CATEGORY WHERE accountId = :accountId AND id = :categoryId")
-    CategorySortingMethod getCategoryOrder(long accountId, long categoryId);
+    @Query("SELECT sortingMethod FROM CATEGORY WHERE id = :categoryId")
+    CategorySortingMethod getCategoryOrder(long categoryId);
 
     @Query("SELECT title FROM CATEGORY WHERE id = :id")
     String getCategoryTitleById(long id);

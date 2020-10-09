@@ -47,12 +47,11 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final boolean canMoveNoteToAnotherAccounts;
     private final ItemAdapter adapter;
     private final RecyclerView recyclerView;
-    private final Runnable refreshLists;
     private final FragmentManager fragmentManager;
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            Context context, ViewProvider viewProvider, NotesDatabase db, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, Runnable refreshLists, FragmentManager fragmentManager, SearchView searchView) {
+            Context context, ViewProvider viewProvider, NotesDatabase db, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.viewProvider = viewProvider;
         this.db = db;
@@ -60,7 +59,6 @@ public class MultiSelectedActionModeCallback implements Callback {
         this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
         this.adapter = adapter;
         this.recyclerView = recyclerView;
-        this.refreshLists = refreshLists;
         this.fragmentManager = fragmentManager;
         this.searchView = searchView;
 
@@ -111,17 +109,16 @@ public class MultiSelectedActionModeCallback implements Callback {
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
                     searchView.setIconified(true);
-                    refreshLists.run();
                     String deletedSnackbarTitle = deletedNotes.size() == 1
                             ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
                             : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, deletedNotes.size(), deletedNotes.size());
                     BrandedSnackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                             .setAction(R.string.action_undo, (View v) -> {
-                                db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, refreshLists::run);
+                                db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, () -> {
+                                });
                                 for (Note deletedNote : deletedNotes) {
                                     db.addNoteAndSync(ssoAccount, deletedNote.getAccountId(), deletedNote);
                                 }
-                                refreshLists.run();
                                 String restoreSnackbarTitle = deletedNotes.size() == 1
                                         ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
                                         : context.getResources().getQuantityString(R.plurals.bulk_notes_restored, deletedNotes.size(), deletedNotes.size());
@@ -156,8 +153,9 @@ public class MultiSelectedActionModeCallback implements Callback {
                 ShareUtil.openShareDialog(context, subject, noteContents.toString());
                 return true;
             case R.id.menu_category:
+                // TODO detect whether all selected notes do have the same category - in this case preselect it
                 CategoryDialogFragment
-                        .newInstance(((Note) adapter.getItem(adapter.getSelected().get(0))).getAccountId(), "")
+                        .newInstance(currentLocalAccountId, "")
                         .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
             default:
                 return false;

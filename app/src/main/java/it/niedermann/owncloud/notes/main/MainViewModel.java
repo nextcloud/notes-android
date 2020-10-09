@@ -70,18 +70,22 @@ public class MainViewModel extends AndroidViewModel {
         this.sortOrderOfSpecialNavigationCategoryChanged.postValue(null);
     }
 
+    @NonNull
     public LiveData<Account> getCurrentAccount() {
         return currentAccount;
     }
 
+    @NonNull
     public LiveData<String> getSearchTerm() {
         return searchTerm;
     }
 
+    @NonNull
     public LiveData<NavigationCategory> getSelectedCategory() {
         return selectedCategory;
     }
 
+    @NonNull
     public LiveData<Void> filterChanged() {
         MediatorLiveData<Void> mediatorLiveData = new MediatorLiveData<>();
         mediatorLiveData.addSource(currentAccount, (o) -> mediatorLiveData.postValue(null));
@@ -91,13 +95,14 @@ public class MainViewModel extends AndroidViewModel {
         return mediatorLiveData;
     }
 
+    @NonNull
     public LiveData<List<Item>> getNotesListLiveData() {
         Account currentAccount = getCurrentAccount().getValue();
         NavigationCategory selectedCategory = getSelectedCategory().getValue();
         LiveData<List<NoteWithCategory>> fromDatabase;
         if (currentAccount != null && selectedCategory != null) {
             Long accountId = currentAccount.getId();
-            CategorySortingMethod sortingMethod = db.getCategoryOrder(accountId, selectedCategory);
+            CategorySortingMethod sortingMethod = db.getCategoryOrder(selectedCategory);
             String searchQuery = getSearchTerm().getValue();
             searchQuery = searchQuery == null ? "%" : "%" + searchQuery.trim() + "%";
             switch (selectedCategory.getType()) {

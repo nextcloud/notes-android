@@ -223,16 +223,16 @@ public abstract class NotesDatabase extends RoomDatabase {
      * If there is no such category existing, this method will create it and search again.
      *
      * @param ssoAccount The single sign on account
-     * @param note       The note which will be updated
+     * @param accountId  The account where the note is
+     * @param noteId     The note which will be updated
      * @param category   The category title which should be used to find the category id.
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      */
-    public void setCategory(SingleSignOnAccount ssoAccount, @NonNull Note note, @NonNull String category, @Nullable ISyncCallback callback) {
-        note.setCategory(category);
-        getNoteDao().updateStatus(note.getId(), DBStatus.LOCAL_DELETED);
-        long categoryId = getOrCreateCategoryIdByTitle(note.getAccountId(), note.getCategory());
-        getNoteDao().updateCategory(note.getId(), categoryId);
-        getCategoryDao().removeEmptyCategory(note.getAccountId());
+    public void setCategory(SingleSignOnAccount ssoAccount, long accountId, long noteId, @NonNull String category, @Nullable ISyncCallback callback) {
+        getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
+        long categoryId = getOrCreateCategoryIdByTitle(accountId, category);
+        getNoteDao().updateCategory(noteId, categoryId);
+        getCategoryDao().removeEmptyCategory(accountId);
         if (callback != null) {
             serverSyncHelper.addCallbackPush(ssoAccount, callback);
         }
@@ -443,7 +443,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     private Long getOrCreateCategoryIdByTitle(long accountId, @NonNull String categoryTitle) {
         validateAccountId(accountId);
         Long categoryId = getCategoryDao().getCategoryIdByTitle(accountId, categoryTitle);
-        if (categoryId > 0) {
+        if (categoryId != null && categoryId > 0) {
             return categoryId;
         } else {
             Category entity = new Category();
@@ -512,18 +512,16 @@ public abstract class NotesDatabase extends RoomDatabase {
      * The sorting method of the category can be used to decide
      * to use which sorting method to show the notes for each categories.
      *
-     * @param accountId        The user accountID
      * @param selectedCategory The category
      * @return The sorting method in CategorySortingMethod enum format
      */
-    public CategorySortingMethod getCategoryOrder(long accountId, NavigationCategory selectedCategory) {
-        validateAccountId(accountId);
-
+    public CategorySortingMethod getCategoryOrder(@NonNull NavigationCategory selectedCategory) {
         final Context ctx = context.getApplicationContext();
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
         int orderIndex;
 
         switch (selectedCategory.getType()) {
+            // TODO make this account specific
             case FAVORITES: {
                 orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites), 0);
                 break;
@@ -540,7 +538,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             default: {
                 Category category = selectedCategory.getCategory();
                 if(category != null) {
-                    return getCategoryDao().getCategoryOrder(accountId, category.getId());
+                    return getCategoryDao().getCategoryOrder(category.getId());
                 } else {
                     Log.e(TAG, "Cannot read " + CategorySortingMethod.class.getSimpleName() + " for " + ENavigationCategoryType.DEFAULT_CATEGORY + ".");
                     return CategorySortingMethod.SORT_MODIFIED_DESC;
