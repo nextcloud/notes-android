@@ -30,11 +30,14 @@ import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -89,7 +92,7 @@ public class NotesNotesDatabaseTest {
     public void test_01_addNote_CloudNote() {
         long accountID = account.getId();   // retrieve account id
         // Create a cloud note for argument passing
-        Note cloudNote = new Note(1, Calendar.getInstance(),
+        Note cloudNote = new Note(1L, Calendar.getInstance(),
                 "A Great Day", getCurDate() + " This is a really great day bro.",
                 true, "Diary", null);
 
@@ -123,7 +126,7 @@ public class NotesNotesDatabaseTest {
             Log.i("Test_01_addNote_All_Notes_Added", cnote.getTitle());
         }
 
-        Note cloudNote_re0 = new Note(0, Calendar.getInstance(),
+        Note cloudNote_re0 = new Note(0L, Calendar.getInstance(),
                 "A Bad Day", getCurDate() + " You're faking a smile with just a coffee to go (Daniel Powter).",
                 true, "A Nice Song", null);
         noteID = db.addNote(accountID, cloudNote_re0);
@@ -151,7 +154,7 @@ public class NotesNotesDatabaseTest {
 
             // Create a DBNote for argument passing
             String newContent = getCurDate() + " This is a even greater day my friend.";
-            Note dbNote = new Note(newNoteID, 1, Calendar.getInstance(), "A Greater Day",
+            Note dbNote = new Note(newNoteID, 1L, Calendar.getInstance(), "A Greater Day",
                     newContent, true, "Best Friend's Record", null, DBStatus.VOID,
                     accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
 
@@ -166,7 +169,7 @@ public class NotesNotesDatabaseTest {
 
             // Another DBNote for argument passing
             newContent = getCurDate() + " This is a even greater day my friend.";
-            dbNote = new Note(0, 1, Calendar.getInstance(), "An Even Greater Day",
+            dbNote = new Note(0, 1L, Calendar.getInstance(), "An Even Greater Day",
                     newContent, true, "Sincere Friend's Record", null, DBStatus.VOID,
                     accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
             // Add a new note
@@ -277,34 +280,34 @@ public class NotesNotesDatabaseTest {
     public void test_07_multiAddNote() {
         long thisAccountID = account.getId();
         ArrayList<Note> multiCloudNote = new ArrayList<>();
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "Mike is so cool.", "Mike is a cool guy you know",
                 true, "The BiBle", null));
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "Andy is so cool.", "Andy is a cool guy you know",
                 true, "The BiBle", null));
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "I Honestly Love You", "I Honestly Love You by Leslie",
                 true, "Music", null));
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "Monica", "Monica by Leslie",
                 true, "Music", null));
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "Worksheet", "1 2 3 4 5 6 7 8",
                 false, "Work", null));
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "PowerPoint.", "8 7 6 5 4 3 2 1",
                 false, "Work", null));
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "Farewell My Concubine", "a great movie",
                 true, "Movie", null));
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "Leon", "an amazing movie",
                 true, "Movie", null));
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "The Dark Knight", "another amazing movie",
                 true, "Movies", null));
-        multiCloudNote.add(new Note(1, Calendar.getInstance(),
+        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
                 "How are you.", "i am fine.",
                 false, "Diary", null));
 
@@ -454,7 +457,7 @@ public class NotesNotesDatabaseTest {
     @Ignore
     public void test_12_Chinese() {
         long accountID = account.getId();
-        Note cloudNote = new Note(1, Calendar.getInstance(),
+        Note cloudNote = new Note(1L, Calendar.getInstance(),
                 "美好的一天", getCurDate() + " 兄弟，这真是美好的一天。",
                 true, "日记", null);
 
@@ -577,18 +580,18 @@ public class NotesNotesDatabaseTest {
     @Ignore
     public void test_15_getAndModifyCategoryOrderByTitle() {
         // add a note to database
-        Note cloudNote = new Note(1, Calendar.getInstance(),
+        Note cloudNote = new Note(1L, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
         long noteID = db.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
-        CategorySortingMethod defaultMethod = db.getCategoryDao().getCategoryOrder(account.getId(), "CodingDiary");
+        CategorySortingMethod defaultMethod = db.getCategoryDao().getCategoryOrder(1L);
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
-        db.getCategoryDao().modifyCategoryOrder(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
-        CategorySortingMethod methodAfterModify = db.getCategoryDao().getCategoryOrder(account.getId(), "CodingDiary");
+        db.getCategoryDao().modifyCategoryOrder(account.getId(), 1L, CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = db.getCategoryDao().getCategoryOrder(1L);
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
@@ -600,18 +603,18 @@ public class NotesNotesDatabaseTest {
     public void test_16_getAndModifyCategoryOrder() {
         // Normal categories
         // add a note to database
-        Note cloudNote = new Note(1, Calendar.getInstance(),
+        Note cloudNote = new Note(1L, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
                 true, "CodingDiary", null);
         long noteID = db.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
-        CategorySortingMethod defaultMethod = db.getCategoryOrder(account.getId(), new NavigationCategory(type, "CodingDiary", false));
+        CategorySortingMethod defaultMethod = db.getCategoryOrder(new NavigationCategory(db.getCategoryDao().getCategoryByTitle(1L, "CodingDiary")));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
-        db.getCategoryDao().modifyCategoryOrder(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
-        CategorySortingMethod methodAfterModify = db.getCategoryOrder(account.getId(), new NavigationCategory(type, "CodingDiary", false));
+        db.getCategoryDao().modifyCategoryOrder(account.getId(), 1L, CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = db.getCategoryOrder(new NavigationCategory(db.getCategoryDao().getCategoryByTitle(1L, "CodingDiary")));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
@@ -625,31 +628,31 @@ public class NotesNotesDatabaseTest {
         spe.apply();
         // check default value
         // all notes
-        defaultMethod = db.getCategoryOrder(account.getId(), new NavigationCategory(type, null, false));
+        defaultMethod = db.getCategoryOrder(new NavigationCategory(RECENT));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // uncategorized
-        defaultMethod = db.getCategoryOrder(account.getId(), new NavigationCategory(type, "", false));
+        defaultMethod = db.getCategoryOrder(new NavigationCategory(UNCATEGORIZED));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // favorite
-        defaultMethod = db.getCategoryOrder(account.getId(), new NavigationCategory(type, null, true));
+        defaultMethod = db.getCategoryOrder(new NavigationCategory(FAVORITES));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
         // all notes
-        db.modifyCategoryOrder(account.getId(), new NavigationCategory(type, null, false), CategorySortingMethod.getCSM(1));
-        methodAfterModify = db.getCategoryOrder(account.getId(), new NavigationCategory(type, null, false));
+        db.modifyCategoryOrder(account.getId(), new NavigationCategory(RECENT), CategorySortingMethod.getCSM(1));
+        methodAfterModify = db.getCategoryOrder(new NavigationCategory(RECENT));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // uncategorized
-        db.modifyCategoryOrder(account.getId(), new NavigationCategory(type, "", false), CategorySortingMethod.getCSM(1));
-        methodAfterModify = db.getCategoryOrder(account.getId(), new NavigationCategory(type, "", false));
+        db.modifyCategoryOrder(account.getId(), new NavigationCategory(UNCATEGORIZED), CategorySortingMethod.getCSM(1));
+        methodAfterModify = db.getCategoryOrder(new NavigationCategory(UNCATEGORIZED));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // favorite
-        db.modifyCategoryOrder(account.getId(), new NavigationCategory(type, null, true), CategorySortingMethod.getCSM(1));
-        methodAfterModify = db.getCategoryOrder(account.getId(), new NavigationCategory(type, null, true));
+        db.modifyCategoryOrder(account.getId(), new NavigationCategory(FAVORITES), CategorySortingMethod.getCSM(1));
+        methodAfterModify = db.getCategoryOrder(new NavigationCategory(FAVORITES));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete SharedPreferences

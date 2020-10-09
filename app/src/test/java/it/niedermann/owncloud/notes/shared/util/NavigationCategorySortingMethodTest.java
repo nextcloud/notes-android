@@ -19,9 +19,9 @@ public class NavigationCategorySortingMethodTest {
     @Test
     public void getSOrder() {
         CategorySortingMethod csm0 = CategorySortingMethod.SORT_MODIFIED_DESC;
-        assertEquals("MODIFIED DESC", csm0.getSorder());
+        assertEquals("modified DESC", csm0.getSorder());
         CategorySortingMethod csm1 = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
-        assertEquals("TITLE COLLATE NOCASE ASC", csm1.getSorder());
+        assertEquals("title COLLATE NOCASE ASC", csm1.getSorder());
     }
 
     @Test
