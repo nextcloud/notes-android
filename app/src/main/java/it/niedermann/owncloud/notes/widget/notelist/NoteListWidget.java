@@ -22,7 +22,8 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
-import it.niedermann.owncloud.notes.shared.model.OldCategory;
+import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
+import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.PARAM_CATEGORY;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
@@ -70,7 +71,10 @@ public class NoteListWidget extends AppWidgetProvider {
 
                 // Launch create note activity if user taps "+" icon on header
                 PendingIntent newNoteI = PendingIntent.getActivity(context, (PENDING_INTENT_NEW_NOTE_RQ + appWidgetId),
-                        new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY, new OldCategory(category, data.getMode() == MODE_DISPLAY_STARRED)),
+                        new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY,
+                                data.getMode() == MODE_DISPLAY_STARRED
+                                        ? new NavigationCategory(ENavigationCategoryType.FAVORITES)
+                                        : new NavigationCategory(db.getCategoryDao().getCategoryByTitle(localAccount.getId(), category))),
                         PendingIntent.FLAG_UPDATE_CURRENT);
 
                 PendingIntent templatePI = PendingIntent.getActivity(context, PENDING_INTENT_EDIT_NOTE_RQ,

@@ -30,7 +30,7 @@ import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import it.niedermann.owncloud.notes.shared.model.OldCategory;
+import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
@@ -583,12 +583,12 @@ public class NotesNotesDatabaseTest {
         long noteID = db.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
-        CategorySortingMethod defaultMethod = db.getCategoryDao().getCategoryOrderByTitle(account.getId(), "CodingDiary");
+        CategorySortingMethod defaultMethod = db.getCategoryDao().getCategoryOrder(account.getId(), "CodingDiary");
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
-        db.getCategoryDao().modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
-        CategorySortingMethod methodAfterModify = db.getCategoryDao().getCategoryOrderByTitle(account.getId(), "CodingDiary");
+        db.getCategoryDao().modifyCategoryOrder(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = db.getCategoryDao().getCategoryOrder(account.getId(), "CodingDiary");
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
@@ -606,12 +606,12 @@ public class NotesNotesDatabaseTest {
         long noteID = db.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
-        CategorySortingMethod defaultMethod = db.getCategoryOrder(account.getId(), new OldCategory("CodingDiary", false));
+        CategorySortingMethod defaultMethod = db.getCategoryOrder(account.getId(), new NavigationCategory(type, "CodingDiary", false));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
-        db.getCategoryDao().modifyCategoryOrderByTitle(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
-        CategorySortingMethod methodAfterModify = db.getCategoryOrder(account.getId(), new OldCategory("CodingDiary", false));
+        db.getCategoryDao().modifyCategoryOrder(account.getId(), "CodingDiary", CategorySortingMethod.getCSM(1));
+        CategorySortingMethod methodAfterModify = db.getCategoryOrder(account.getId(), new NavigationCategory(type, "CodingDiary", false));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete the Node
@@ -625,31 +625,31 @@ public class NotesNotesDatabaseTest {
         spe.apply();
         // check default value
         // all notes
-        defaultMethod = db.getCategoryOrder(account.getId(), new OldCategory(null, false));
+        defaultMethod = db.getCategoryOrder(account.getId(), new NavigationCategory(type, null, false));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // uncategorized
-        defaultMethod = db.getCategoryOrder(account.getId(), new OldCategory("", false));
+        defaultMethod = db.getCategoryOrder(account.getId(), new NavigationCategory(type, "", false));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // favorite
-        defaultMethod = db.getCategoryOrder(account.getId(), new OldCategory(null, true));
+        defaultMethod = db.getCategoryOrder(account.getId(), new NavigationCategory(type, null, true));
         assertEquals(defaultMethod, CategorySortingMethod.getCSM(0));
 
         // modify the value of ordering_method and check
         // all notes
-        db.modifyCategoryOrder(account.getId(), new OldCategory(null, false), CategorySortingMethod.getCSM(1));
-        methodAfterModify = db.getCategoryOrder(account.getId(), new OldCategory(null, false));
+        db.modifyCategoryOrder(account.getId(), new NavigationCategory(type, null, false), CategorySortingMethod.getCSM(1));
+        methodAfterModify = db.getCategoryOrder(account.getId(), new NavigationCategory(type, null, false));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // uncategorized
-        db.modifyCategoryOrder(account.getId(), new OldCategory("", false), CategorySortingMethod.getCSM(1));
-        methodAfterModify = db.getCategoryOrder(account.getId(), new OldCategory("", false));
+        db.modifyCategoryOrder(account.getId(), new NavigationCategory(type, "", false), CategorySortingMethod.getCSM(1));
+        methodAfterModify = db.getCategoryOrder(account.getId(), new NavigationCategory(type, "", false));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // favorite
-        db.modifyCategoryOrder(account.getId(), new OldCategory(null, true), CategorySortingMethod.getCSM(1));
-        methodAfterModify = db.getCategoryOrder(account.getId(), new OldCategory(null, true));
+        db.modifyCategoryOrder(account.getId(), new NavigationCategory(type, null, true), CategorySortingMethod.getCSM(1));
+        methodAfterModify = db.getCategoryOrder(account.getId(), new NavigationCategory(type, null, true));
         assertEquals(methodAfterModify, CategorySortingMethod.getCSM(1));
 
         // delete SharedPreferences

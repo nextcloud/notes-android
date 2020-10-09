@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
-import android.content.res.Resources;
 import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.text.TextUtils;
@@ -37,14 +36,12 @@ import java.util.Map;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.main.NavigationAdapter;
 import it.niedermann.owncloud.notes.persistence.dao.AccountDao;
 import it.niedermann.owncloud.notes.persistence.dao.CategoryDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetNotesListDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetSingleNoteDao;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
-import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -65,8 +62,9 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.model.OldCategory;
+import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
@@ -167,13 +165,13 @@ public abstract class NotesDatabase extends RoomDatabase {
      */
     long addNote(long accountId, Note note) {
         Note entity = new Note();
-        if (entity.getId() != null) {
-            if (entity.getId() > 0) {
-                entity.setId(entity.getId());
+        if (note.getId() != null) {
+            if (note.getId() > 0) {
+                entity.setId(note.getId());
             }
-            entity.setStatus(entity.getStatus());
-            entity.setAccountId(entity.getAccountId());
-            entity.setExcerpt(entity.getExcerpt());
+            entity.setStatus(note.getStatus());
+            entity.setAccountId(note.getAccountId());
+            entity.setExcerpt(note.getExcerpt());
         } else {
             entity.setStatus(DBStatus.VOID);
             entity.setAccountId(accountId);
@@ -186,8 +184,7 @@ public abstract class NotesDatabase extends RoomDatabase {
         entity.setModified(note.getModified());
         entity.setContent(note.getContent());
         entity.setFavorite(note.getFavorite());
-        // FIXME
-//        entity.setCategory(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
+        entity.setCategoryId(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
         entity.setETag(note.getETag());
         return getNoteDao().addNote(entity);
     }
@@ -470,36 +467,40 @@ public abstract class NotesDatabase extends RoomDatabase {
      * The user can determine use which sorting method to show the notes for a category.
      * When the user changes the sorting method, this method should be called.
      *
-     * @param accountId     The user accountID
-     * @param category      The category to be modified
-     * @param sortingMethod The sorting method in {@link CategorySortingMethod} enum format
+     * @param accountId        The user accountID
+     * @param selectedCategory The category to be modified
+     * @param sortingMethod    The sorting method in {@link CategorySortingMethod} enum format
      */
-    public void modifyCategoryOrder(long accountId, OldCategory category, CategorySortingMethod sortingMethod) {
+    public void modifyCategoryOrder(long accountId, NavigationCategory selectedCategory, CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
 
         final Context ctx = context.getApplicationContext();
         final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
         int orderIndex = sortingMethod.getCSMID();
-        if (category.category == null) {
-            if (category.favorite != null && category.favorite) {
-                // Favorite
-                sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_favorites),
-                        orderIndex);
-            } else {
-                // All notes
-                sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_all_notes),
-                        orderIndex);
+
+        switch (selectedCategory.getType()) {
+            case FAVORITES: {
+                sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites), orderIndex);
+                break;
             }
-        } else if (category.category.isEmpty()) {
-            // Uncategorized
-            sp.putInt(ctx.getString(R.string.action_sorting_method) +
-                            ' ' + ctx.getString(R.string.action_uncategorized),
-                    orderIndex);
-        } else {
-            getCategoryDao().modifyCategoryOrderByTitle(accountId, category.category, sortingMethod);
-            return;
+            case UNCATEGORIZED: {
+                sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized), orderIndex);
+                break;
+            }
+            case RECENT: {
+                sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes), orderIndex);
+                break;
+            }
+            case DEFAULT_CATEGORY:
+            default: {
+                Category category = selectedCategory.getCategory();
+                if(category != null) {
+                    getCategoryDao().modifyCategoryOrder(accountId, category.getId(), sortingMethod);
+                } else {
+                    Log.e(TAG, "Tried to modify category order for " + ENavigationCategoryType.DEFAULT_CATEGORY + "but category is null.");
+                }
+                break;
+            }
         }
         sp.apply();
     }
@@ -511,36 +512,40 @@ public abstract class NotesDatabase extends RoomDatabase {
      * The sorting method of the category can be used to decide
      * to use which sorting method to show the notes for each categories.
      *
-     * @param accountId The user accountID
-     * @param category  The category
+     * @param accountId        The user accountID
+     * @param selectedCategory The category
      * @return The sorting method in CategorySortingMethod enum format
      */
-    public CategorySortingMethod getCategoryOrder(long accountId, OldCategory category) {
+    public CategorySortingMethod getCategoryOrder(long accountId, NavigationCategory selectedCategory) {
         validateAccountId(accountId);
 
         final Context ctx = context.getApplicationContext();
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
         int orderIndex;
 
-        if (category.category == null) {
-            if (category.favorite != null && category.favorite) {
-                // Favorite
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_favorites),
-                        0);
-            } else {
-                // All notes
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                                ' ' + ctx.getString(R.string.label_all_notes),
-                        0);
+        switch (selectedCategory.getType()) {
+            case FAVORITES: {
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites), 0);
+                break;
             }
-        } else if (category.category.isEmpty()) {
-            // Uncategorized
-            orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) +
-                            ' ' + ctx.getString(R.string.action_uncategorized),
-                    0);
-        } else {
-            return getCategoryDao().getCategoryOrderByTitle(accountId, category.category);
+            case UNCATEGORIZED: {
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized),0);
+                break;
+            }
+            case RECENT: {
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes), 0);
+                break;
+            }
+            case DEFAULT_CATEGORY:
+            default: {
+                Category category = selectedCategory.getCategory();
+                if(category != null) {
+                    return getCategoryDao().getCategoryOrder(accountId, category.getId());
+                } else {
+                    Log.e(TAG, "Cannot read " + CategorySortingMethod.class.getSimpleName() + " for " + ENavigationCategoryType.DEFAULT_CATEGORY + ".");
+                    return CategorySortingMethod.SORT_MODIFIED_DESC;
+                }
+            }
         }
 
         return CategorySortingMethod.getCSM(orderIndex);

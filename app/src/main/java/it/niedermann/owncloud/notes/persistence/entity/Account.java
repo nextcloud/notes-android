@@ -173,4 +173,46 @@ public class Account {
     public void setTextColor(Integer textColor) {
         this.textColor = textColor;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Account)) return false;
+
+        Account account = (Account) o;
+
+        if (id != null ? !id.equals(account.id) : account.id != null) return false;
+        if (url != null ? !url.equals(account.url) : account.url != null) return false;
+        if (userName != null ? !userName.equals(account.userName) : account.userName != null)
+            return false;
+        if (accountName != null ? !accountName.equals(account.accountName) : account.accountName != null)
+            return false;
+        if (eTag != null ? !eTag.equals(account.eTag) : account.eTag != null) return false;
+        if (modified != null ? !modified.equals(account.modified) : account.modified != null)
+            return false;
+        if (apiVersion != null ? !apiVersion.equals(account.apiVersion) : account.apiVersion != null)
+            return false;
+        if (color != null ? !color.equals(account.color) : account.color != null) return false;
+        if (textColor != null ? !textColor.equals(account.textColor) : account.textColor != null)
+            return false;
+        if (capabilitiesETag != null ? !capabilitiesETag.equals(account.capabilitiesETag) : account.capabilitiesETag != null)
+            return false;
+        return preferredApiVersion != null ? preferredApiVersion.equals(account.preferredApiVersion) : account.preferredApiVersion == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (userName != null ? userName.hashCode() : 0);
+        result = 31 * result + (accountName != null ? accountName.hashCode() : 0);
+        result = 31 * result + (eTag != null ? eTag.hashCode() : 0);
+        result = 31 * result + (modified != null ? modified.hashCode() : 0);
+        result = 31 * result + (apiVersion != null ? apiVersion.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (textColor != null ? textColor.hashCode() : 0);
+        result = 31 * result + (capabilitiesETag != null ? capabilitiesETag.hashCode() : 0);
+        result = 31 * result + (preferredApiVersion != null ? preferredApiVersion.hashCode() : 0);
+        return result;
+    }
 }

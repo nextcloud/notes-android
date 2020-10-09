@@ -366,7 +366,7 @@ public class NoteServerSyncHelper {
                     switch (note.getStatus()) {
                         case LOCAL_EDITED:
                             Log.v(TAG, "   ...create/edit");
-                            if (note.getRemoteId() > 0) {
+                            if (note.getRemoteId() != null && note.getRemoteId() > 0) {
                                 Log.v(TAG, "   ...Note has remoteId → try to edit");
                                 try {
                                     remoteNote = notesClient.editNote(ssoAccount, note).getNote();
