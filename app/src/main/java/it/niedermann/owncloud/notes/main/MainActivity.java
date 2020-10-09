@@ -112,12 +112,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
     public static final String ADAPTER_KEY_STARRED = "starred";
-    public static final String ACTION_FAVORITES = "it.niedermann.owncloud.notes.favorites";
-    public static final String ACTION_RECENT = "it.niedermann.owncloud.notes.recent";
-
-    private static final String SAVED_STATE_NAVIGATION_SELECTION = "navigationSelection";
-    private static final String SAVED_STATE_NAVIGATION_ADAPTER_SLECTION = "navigationAdapterSelection";
-    private static final String SAVED_STATE_NAVIGATION_OPEN = "navigationOpen";
 
     protected ItemAdapter adapter;
 
@@ -237,23 +231,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             navigationItemLiveData.observe(this, navigationItemObserver);
         });
 
-        String categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-        if (savedInstanceState == null) {
-            if (ACTION_RECENT.equals(getIntent().getAction())) {
-                categoryAdapterSelectedItem = ADAPTER_KEY_RECENT;
-            } else if (ACTION_FAVORITES.equals(getIntent().getAction())) {
-                categoryAdapterSelectedItem = ADAPTER_KEY_STARRED;
-                mainViewModel.postSelectedCategory(new NavigationCategory(FAVORITES));
-            }
-        } else {
-            Object savedCategory = savedInstanceState.getSerializable(SAVED_STATE_NAVIGATION_SELECTION);
-            if (savedCategory != null) {
-                mainViewModel.postSelectedCategory((NavigationCategory) savedCategory);
-            }
-            navigationOpen = savedInstanceState.getString(SAVED_STATE_NAVIGATION_OPEN);
-            categoryAdapterSelectedItem = savedInstanceState.getString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION);
-        }
-
         db = NotesDatabase.getInstance(this);
 
         gridView = isGridViewEnabled();
@@ -262,7 +239,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         }
 
         setupToolbars();
-        setupNavigationList(categoryAdapterSelectedItem);
+        setupNavigationList();
         setupNavigationMenu();
         setupNotesList();
 
@@ -298,16 +275,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         super.onResume();
     }
 
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (localAccount != null) {
-            outState.putSerializable(SAVED_STATE_NAVIGATION_SELECTION, navigationSelection);
-            outState.putString(SAVED_STATE_NAVIGATION_ADAPTER_SLECTION, adapterCategories.getSelectedItem());
-            outState.putString(SAVED_STATE_NAVIGATION_OPEN, navigationOpen);
-        }
-    }
-
     private void selectAccount(String accountName) {
         fabCreate.hide();
         SingleAccountHelper.setCurrentAccount(getApplicationContext(), accountName);
@@ -333,7 +300,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                     AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName());
                 }
             });
-            setupNavigationList(ADAPTER_KEY_RECENT);
+            setupNavigationList();
         } else {
             if (!notAuthorizedAccountHandled) {
                 handleNotAuthorizedAccount();
@@ -483,7 +450,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         });
     }
 
-    private void setupNavigationList(final String selectedItem) {
+    private void setupNavigationList() {
         adapterCategories = new NavigationAdapter(this, new NavigationAdapter.ClickListener() {
             @Override
             public void onItemClick(NavigationItem item) {
@@ -554,7 +521,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                 }
             }
         });
-        adapterCategories.setSelectedItem(selectedItem);
+        adapterCategories.setSelectedItem(ADAPTER_KEY_RECENT);
         binding.navigationList.setAdapter(adapterCategories);
     }
 
