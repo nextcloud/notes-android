@@ -30,9 +30,7 @@ import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
@@ -42,7 +40,7 @@ public class MultiSelectedActionModeCallback implements Callback {
     private int colorAccent;
 
     private final Context context;
-    private final ViewProvider viewProvider;
+    private final View view;
     private final NotesDatabase db;
     private final long currentLocalAccountId;
     private final boolean canMoveNoteToAnotherAccounts;
@@ -52,9 +50,9 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            Context context, ViewProvider viewProvider, NotesDatabase db, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
+            Context context, View view, NotesDatabase db, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
-        this.viewProvider = viewProvider;
+        this.view = view;
         this.db = db;
         this.currentLocalAccountId = currentLocalAccountId;
         this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
@@ -113,7 +111,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                     String deletedSnackbarTitle = deletedNotes.size() == 1
                             ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
                             : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, deletedNotes.size(), deletedNotes.size());
-                    BrandedSnackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
+                    BrandedSnackbar.make(view, deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                             .setAction(R.string.action_undo, (View v) -> {
                                 db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, () -> {
                                 });
@@ -123,7 +121,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                                 String restoreSnackbarTitle = deletedNotes.size() == 1
                                         ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
                                         : context.getResources().getQuantityString(R.plurals.bulk_notes_restored, deletedNotes.size(), deletedNotes.size());
-                                BrandedSnackbar.make(viewProvider.getView(), restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
+                                BrandedSnackbar.make(view, restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
                                         .show();
                             })
                             .show();

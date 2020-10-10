@@ -21,7 +21,6 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 
@@ -36,7 +35,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             @NonNull NotesDatabase db,
             @NonNull ItemAdapter adapter,
             @Nullable SwipeRefreshLayout swipeRefreshLayout,
-            @Nullable ViewProvider viewProvider,
+            @Nullable View view,
             boolean gridView) {
         super(new SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             private boolean swipeRefreshLayoutEnabled;
@@ -76,15 +75,15 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 //                        FIXME
 //                        adapter.remove(dbNote);
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
-                        if (viewProvider == null) {
+                        if (view == null) {
                             Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
                         } else {
-                            BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
+                            BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
                                         db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, () -> {
                                         });
                                         db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
-                                        BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
+                                        BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
                                     })
                                     .show();

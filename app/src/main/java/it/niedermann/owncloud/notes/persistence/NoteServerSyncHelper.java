@@ -10,13 +10,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.preference.PreferenceManager;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -34,8 +33,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
-import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
@@ -44,6 +41,7 @@ import it.niedermann.owncloud.notes.shared.model.ServerResponse;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
+import static androidx.lifecycle.Transformations.distinctUntilChanged;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
@@ -64,6 +62,8 @@ public class NoteServerSyncHelper {
     private boolean networkConnected = false;
     private String syncOnlyOnWifiKey;
     private boolean syncOnlyOnWifi;
+    private final MutableLiveData<Boolean> syncStatus = new MutableLiveData<>(false);
+    private final MutableLiveData<ArrayList<Throwable>> syncErrors = new MutableLiveData<>();
 
     /**
      * @see <a href="https://stackoverflow.com/a/3104265">Do not make this a local variable.</a>
@@ -330,6 +330,7 @@ public class NoteServerSyncHelper {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            syncStatus.postValue(true);
             if (!syncScheduled.containsKey(ssoAccount.name) || syncScheduled.get(ssoAccount.name) == null) {
                 syncScheduled.put(ssoAccount.name, false);
             }
@@ -501,12 +502,7 @@ public class NoteServerSyncHelper {
                 Log.e(TAG, e.getMessage(), e);
             }
             if (!status.pullSuccessful || !status.pushSuccessful) {
-                if (context instanceof ViewProvider && context instanceof AppCompatActivity) {
-                    BrandedSnackbar.make(((ViewProvider) context).getView(), R.string.error_synchronization, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
-                                    .show(((AppCompatActivity) context).getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
-                            .show();
-                }
+                syncErrors.postValue(exceptions);
             }
             syncActive.put(ssoAccount.name, false);
             // notify callbacks
@@ -521,10 +517,15 @@ public class NoteServerSyncHelper {
             if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {
                 scheduleSync(ssoAccount, false);
             }
+            syncStatus.postValue(false);
         }
     }
 
-    public interface ViewProvider {
-        View getView();
+    public LiveData<Boolean> getSyncStatus() {
+        return distinctUntilChanged(this.syncStatus);
+    }
+
+    public LiveData<ArrayList<Throwable>> getSyncErrors() {
+        return this.syncErrors;
     }
 }

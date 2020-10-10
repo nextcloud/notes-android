@@ -74,14 +74,12 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
@@ -102,7 +100,7 @@ import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 
-public class MainActivity extends LockedActivity implements NoteClickListener, ViewProvider, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
+public class MainActivity extends LockedActivity implements NoteClickListener, AccountPickerListener, AccountSwitcherListener, CategoryDialogFragment.CategoryDialogListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -147,16 +145,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private String navigationOpen = "";
     boolean canMoveNoteToAnotherAccounts = false;
     private ActionMode mActionMode;
-    private final ISyncCallback syncCallBack = () -> {
+
+    private LiveData<List<Item>> noteWithCategoryLiveData;
+    private Observer<List<Item>> noteWithCategoryObserver = notes -> {
         adapter.clearSelection(listView);
         if (mActionMode != null) {
             mActionMode.finish();
         }
-        swipeRefreshLayout.setRefreshing(false);
-    };
-
-    private LiveData<List<Item>> noteWithCategoryLiveData;
-    private Observer<List<Item>> noteWithCategoryObserver = notes -> {
         adapter.setHighlightSearchQuery(mainViewModel.getSearchTerm().getValue());
         adapter.setItemList(notes);
         binding.activityNotesListView.progressCircular.setVisibility(GONE);
@@ -196,6 +191,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         setupToolbars();
         setupNavigationList();
         setupNotesList();
+
+        mainViewModel.getSyncStatus().observe(this, (syncStatus) -> swipeRefreshLayout.setRefreshing(syncStatus));
+        mainViewModel.getSyncErrors().observe(this, (exceptions) -> BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
+                .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
+                        .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
+                .show());
 
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
             adapter.setShowCategory(selectedCategory.getType() == RECENT || selectedCategory.getType() == FAVORITES);
@@ -273,7 +274,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             try {
                 BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, swipeRefreshLayout, this, gridView)
+                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, swipeRefreshLayout, coordinatorLayout, gridView)
                         .attachToRecyclerView(listView);
                 synchronize();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -336,14 +337,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         // refresh and sync every time the activity gets
         if (localAccount != null) {
             synchronize();
-            db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, syncCallBack);
         }
         super.onResume();
     }
 
     private void handleNotAuthorizedAccount() {
         fabCreate.hide();
-        swipeRefreshLayout.setRefreshing(false);
         askForNewAccount(this);
         notAuthorizedAccountHandled = true;
     }
@@ -417,7 +416,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
             if (ssoAccount == null) {
-                swipeRefreshLayout.setRefreshing(false);
                 askForNewAccount(this);
             } else {
                 Log.i(TAG, "Clearing Glide memory cache");
@@ -546,11 +544,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         });
         adapterCategories.setSelectedItem(ADAPTER_KEY_RECENT);
         binding.navigationList.setAdapter(adapterCategories);
-    }
-
-    @Override
-    public CoordinatorLayout getView() {
-        return this.coordinatorLayout;
     }
 
     @Override
@@ -756,7 +749,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         if (selected) {
             v.setSelected(true);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                    this, this, db, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView
+                    this, coordinatorLayout, db, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView
             ));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
@@ -795,11 +788,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             syncHelper.updateNetworkStatus();
         }
         if (syncHelper.isSyncPossible()) {
-            runOnUiThread(() -> swipeRefreshLayout.setRefreshing(true));
-            syncHelper.addCallbackPull(ssoAccount, syncCallBack);
             syncHelper.scheduleSync(ssoAccount, false);
         } else { // Sync is not possible
-            runOnUiThread(() -> swipeRefreshLayout.setRefreshing(false));
             if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
                 Log.d(TAG, "Network is connected, but sync is not possible");
             } else {

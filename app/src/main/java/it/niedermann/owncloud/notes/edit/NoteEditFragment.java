@@ -34,7 +34,6 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.edit.format.ContextBasedFormattingCallback;
 import it.niedermann.owncloud.notes.edit.format.ContextBasedRangeFormattingCallback;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;

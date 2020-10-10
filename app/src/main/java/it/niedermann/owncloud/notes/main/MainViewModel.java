@@ -225,4 +225,11 @@ public class MainViewModel extends AndroidViewModel {
         }
     }
 
+    public LiveData<Boolean> getSyncStatus() {
+        return db.getNoteServerSyncHelper().getSyncStatus();
+    }
+
+    public LiveData<ArrayList<Throwable>> getSyncErrors() {
+        return db.getNoteServerSyncHelper().getSyncErrors();
+    }
 }
