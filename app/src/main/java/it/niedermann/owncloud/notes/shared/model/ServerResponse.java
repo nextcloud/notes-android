@@ -100,9 +100,6 @@ public class ServerResponse {
         if (!json.isNull(NotesClient.JSON_ETAG)) {
             etag = json.getString(NotesClient.JSON_ETAG);
         }
-        NoteWithCategory note = new NoteWithCategory();
-        note.setNote(new Note(id, modified, title, content, favorite, etag));
-        note.setCategory(category);
-        return note;
+        return new NoteWithCategory(new Note(id, modified, title, content, favorite, etag), category);
     }
 }

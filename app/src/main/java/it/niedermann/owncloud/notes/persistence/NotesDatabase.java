@@ -196,9 +196,7 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, NoteWithCategory note, long newAccountId) {
         // Add new note
-        NoteWithCategory noteWithCategory = new NoteWithCategory();
-        noteWithCategory.setNote(new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), null));
-        noteWithCategory.setCategory(note.getCategory());
+        NoteWithCategory noteWithCategory = new NoteWithCategory(new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), null), note.getCategory());
         addNoteAndSync(ssoAccount, newAccountId, noteWithCategory);
         deleteNoteAndSync(ssoAccount, note.getId());
 

@@ -115,8 +115,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         if (content == null) {
                             throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                         } else {
-                            note = new NoteWithCategory();
-                            note.setNote(new Note(-1, -1L, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), DBStatus.VOID, -1, "", 0));
+                            note = new NoteWithCategory(new Note(-1, -1L, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), DBStatus.VOID, -1, "", 0));
                         }
                     } else {
                         note = db.getNoteDao().getNoteWithCategory(localAccount.getId(), db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote));

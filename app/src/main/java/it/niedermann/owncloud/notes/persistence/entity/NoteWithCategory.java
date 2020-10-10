@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.Embedded;
 import androidx.room.Ignore;
 
@@ -15,8 +16,17 @@ public class NoteWithCategory implements Serializable, Item {
     private Note note;
     private String category;
 
+    public NoteWithCategory() {
+        // Default constructor
+    }
+
     @Ignore
-    public NoteWithCategory(@NonNull Note note, @NonNull String category) {
+    public NoteWithCategory(@NonNull Note note) {
+        this(note, null);
+    }
+
+    @Ignore
+    public NoteWithCategory(@NonNull Note note, @Nullable String category) {
         this.note = note;
         this.category = category;
     }

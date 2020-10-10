@@ -186,9 +186,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (content == null) {
             content = "";
         }
-        NoteWithCategory newNote = new NoteWithCategory();
-        newNote.setNote(new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, null));
-        newNote.setCategory(categoryTitle);
+        NoteWithCategory newNote = new NoteWithCategory(new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, null), categoryTitle);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
