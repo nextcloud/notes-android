@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -37,20 +38,23 @@ public class ManageAccountsActivity extends LockedActivity {
         List<Account> localAccounts = db.getAccountDao().getAccounts();
 
         adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
-            db.deleteAccount(localAccount);
-            for (Account temp : localAccounts) {
-                if (temp.getId() == localAccount.getId()) {
-                    localAccounts.remove(temp);
-                    break;
+            LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
+            deleteLiveData.observe(this, (v) -> {
+                for (Account temp : localAccounts) {
+                    if (temp.getId() == localAccount.getId()) {
+                        localAccounts.remove(temp);
+                        break;
+                    }
                 }
-            }
-            if (localAccounts.size() > 0) {
-                SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
-                adapter.setCurrentLocalAccount(localAccounts.get(0));
-            } else {
-                setResult(AppCompatActivity.RESULT_FIRST_USER);
-                finish();
-            }
+                if (localAccounts.size() > 0) {
+                    SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
+                    adapter.setCurrentLocalAccount(localAccounts.get(0));
+                } else {
+                    setResult(AppCompatActivity.RESULT_FIRST_USER);
+                    finish();
+                }
+                deleteLiveData.removeObservers(this);
+            });
         });
         adapter.setLocalAccounts(localAccounts);
         try {

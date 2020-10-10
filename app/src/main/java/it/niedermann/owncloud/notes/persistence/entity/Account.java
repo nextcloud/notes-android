@@ -49,6 +49,17 @@ public class Account {
     private Integer textColor;
     private String capabilitiesETag;
 
+    public Account() {
+        // Default constructor
+    }
+
+    public Account(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
+        setUrl(url);
+        setUserName(username);
+        setAccountName(accountName);
+        setCapabilities(capabilities);
+    }
+
     @Nullable
     @Ignore
     private ApiVersion preferredApiVersion;

@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LiveData;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -118,8 +119,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                             note = new NoteWithCategory(new Note(-1, -1L, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), DBStatus.VOID, -1, "", 0));
                         }
                     } else {
-                        note = db.getNoteDao().getNoteWithCategory(localAccount.getId(), db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote));
-                        originalNote = null;
+                        final LiveData<NoteWithCategory> createLiveData = db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote);
+                        createLiveData.observe(requireActivity(), (createdNote) -> {
+                            note = createdNote;
+                            originalNote = null;
+                            createLiveData.removeObservers(requireActivity());
+                        });
                     }
                 }
             } else {
@@ -152,7 +157,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final ScrollView scrollView = getScrollView();
-        if (scrollView != null) {
+        if (!isNew && scrollView != null) {
             this.originalScrollY = note.getScrollY();
             scrollView.post(() -> scrollView.scrollTo(0, originalScrollY));
         }
@@ -230,7 +235,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                 listener.close();
                 return true;
             case R.id.menu_favorite:
-                db.toggleFavoriteAndSync(ssoAccount, note.getId(), null);
+                db.toggleFavoriteAndSync(ssoAccount, note.getId());
                 listener.onNoteUpdated(note);
                 prepareFavoriteOption(item);
                 return true;
@@ -351,7 +356,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Override
     public void onCategoryChosen(String category) {
-        db.setCategory(ssoAccount, note.getAccountId(), note.getId(), category, null);
+        db.setCategory(ssoAccount, note.getAccountId(), note.getId(), category);
         note.setCategory(category);
         listener.onNoteUpdated(note);
     }

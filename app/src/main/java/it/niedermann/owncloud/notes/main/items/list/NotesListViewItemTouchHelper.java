@@ -23,9 +23,7 @@ import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper.ViewProvider;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
-import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
@@ -37,7 +35,6 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             @NonNull Context context,
             @NonNull NotesDatabase db,
             @NonNull ItemAdapter adapter,
-            @NonNull ISyncCallback syncCallBack,
             @Nullable SwipeRefreshLayout swipeRefreshLayout,
             @Nullable ViewProvider viewProvider,
             boolean gridView) {
@@ -84,7 +81,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         } else {
                             BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
-                                        db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, () -> {});
+                                        db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, () -> {
+                                        });
                                         db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
                                         BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
@@ -94,7 +92,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         break;
                     case ItemTouchHelper.RIGHT:
                         final NoteWithCategory adapterNote = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.toggleFavoriteAndSync(ssoAccount, adapterNote.getId(), syncCallBack);
+                        db.toggleFavoriteAndSync(ssoAccount, adapterNote.getId());
                         break;
                     default:
                         //NoOp

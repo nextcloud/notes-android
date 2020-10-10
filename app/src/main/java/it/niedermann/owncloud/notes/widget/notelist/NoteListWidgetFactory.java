@@ -40,8 +40,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
-        final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                AppWidgetManager.INVALID_APPWIDGET_ID);
+        final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
         db = NotesDatabase.getInstance(context);
         data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
@@ -78,18 +77,14 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onDataSetChanged() {
+        // NoOp
     }
 
     @Override
     public void onDestroy() {
-        //NoOp
+        // NoOp
     }
 
-    /**
-     * getCount()
-     *
-     * @return Total number of entries
-     */
     @Override
     public int getCount() {
         if (noteEntities == null) {

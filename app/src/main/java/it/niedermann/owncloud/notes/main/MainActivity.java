@@ -273,7 +273,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             try {
                 BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, syncCallBack, swipeRefreshLayout, this, gridView)
+                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, swipeRefreshLayout, this, gridView)
                         .attachToRecyclerView(listView);
                 synchronize();
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -314,7 +314,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         try {
             ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
             if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount.name)) {
-                mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name));
+                Account account = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+                if (account == null) {
+                    askForNewAccount(this);
+                } else {
+                    mainViewModel.postCurrentAccount(account);
+                }
             }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
             if (localAccount == null) {
@@ -678,10 +683,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                                db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
-                                new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
-                                Log.i(TAG, capabilities.toString());
-                                runOnUiThread(() -> mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
+                                LiveData<Account> createLiveData = db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
+                                runOnUiThread(() -> createLiveData.observe(this, (account) -> {
+                                    new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
+                                    Log.i(TAG, capabilities.toString());
+                                    runOnUiThread(() -> mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
+                                }));
                             } catch (SQLiteException e) {
                                 // Happens when upgrading from version ≤ 1.0.1 and importing the account
                                 runOnUiThread(() -> mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
@@ -739,7 +746,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     public void onNoteFavoriteClick(int position, View view) {
         NoteWithCategory note = (NoteWithCategory) adapter.getItem(position);
         NotesDatabase db = NotesDatabase.getInstance(view.getContext());
-        db.toggleFavoriteAndSync(ssoAccount, note.getId(), syncCallBack);
+        db.toggleFavoriteAndSync(ssoAccount, note.getId());
         adapter.notifyItemChanged(position);
     }
 
@@ -815,16 +822,19 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
     @Override
     public void onAccountDeleted(Account localAccount) {
-        db.deleteAccount(localAccount);
-        if (localAccount.getId() == this.localAccount.getId()) {
-            List<Account> remainingAccounts = db.getAccountDao().getAccounts();
-            if (remainingAccounts.size() > 0) {
-                mainViewModel.postCurrentAccount(remainingAccounts.get(0));
-            } else {
-                recreate(); // TODO
-                askForNewAccount(this);
+        LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
+        deleteLiveData.observe(this, (v) -> {
+            if (localAccount.getId() == this.localAccount.getId()) {
+                List<Account> remainingAccounts = db.getAccountDao().getAccounts();
+                if (remainingAccounts.size() > 0) {
+                    mainViewModel.postCurrentAccount(remainingAccounts.get(0));
+                } else {
+                    recreate(); // TODO
+                    askForNewAccount(this);
+                }
             }
-        }
+            deleteLiveData.removeObservers(this);
+        });
     }
 
     @Override
@@ -850,8 +860,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     public void onCategoryChosen(String category) {
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
             NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
-            db.setCategory(ssoAccount, localAccount.getId(), note.getId(), category, () -> {
-            });
+            db.setCategory(ssoAccount, localAccount.getId(), note.getId(), category);
         }
 
         mActionMode.finish();

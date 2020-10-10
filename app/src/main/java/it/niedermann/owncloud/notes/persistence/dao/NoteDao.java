@@ -45,8 +45,8 @@ public interface NoteDao {
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) ORDER BY favorite DESC, categoryId DESC, :sortingMethod")
     LiveData<List<NoteWithCategory>> searchRecent(long accountId, String query, String sortingMethod);
 
-    @Query("DELETE FROM NOTE WHERE id = :id and status = :forceDBStatus")
-    void deleteByCardId(long id, DBStatus forceDBStatus);
+    @Query("DELETE FROM NOTE WHERE id = :id AND status = :forceDBStatus")
+    void deleteByNoteId(long id, DBStatus forceDBStatus);
 
     @Query("UPDATE NOTE SET scrollY = :scrollY WHERE id = :id")
     void updateScrollY(long id, int scrollY);

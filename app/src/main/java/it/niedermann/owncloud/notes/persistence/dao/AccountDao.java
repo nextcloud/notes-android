@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -20,6 +21,9 @@ public interface AccountDao {
 
     @Query("SELECT * FROM Account WHERE ID = :accountId")
     Account getAccount(long accountId);
+
+    @Query("SELECT * FROM Account WHERE ID = :accountId")
+    LiveData<Account> getAccountLiveData(long accountId);
 
     @Query("SELECT * FROM Account WHERE ACCOUNTNAME = :accountName")
     Account getLocalAccountByAccountName(String accountName);

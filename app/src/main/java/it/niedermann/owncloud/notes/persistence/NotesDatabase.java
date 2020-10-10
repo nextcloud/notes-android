@@ -6,13 +6,15 @@ import android.content.SharedPreferences;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Icon;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.preference.PreferenceManager;
 import androidx.room.Database;
 import androidx.room.Room;
@@ -41,9 +43,9 @@ import it.niedermann.owncloud.notes.persistence.dao.CategoryDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetNotesListDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetSingleNoteDao;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
-import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
@@ -70,6 +72,7 @@ import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.O;
+import static androidx.lifecycle.Transformations.map;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
@@ -152,14 +155,17 @@ public abstract class NotesDatabase extends RoomDatabase {
      *
      * @param note Note
      */
-    public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteWithCategory note) {
+    @NonNull
+    @AnyThread
+    public LiveData<NoteWithCategory> addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteWithCategory note) {
         NoteWithCategory entity = new NoteWithCategory();
         entity.setNote(new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0));
         entity.setCategory(note.getCategory());
-        long id = addNote(accountId, entity);
-        notifyWidgets();
-        serverSyncHelper.scheduleSync(ssoAccount, true);
-        return id;
+        return map(addNote(accountId, entity), newNoteWithCategory -> {
+            notifyWidgets();
+            serverSyncHelper.scheduleSync(ssoAccount, true);
+            return newNoteWithCategory;
+        });
     }
 
     /**
@@ -168,40 +174,47 @@ public abstract class NotesDatabase extends RoomDatabase {
      *
      * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type {@link Note} (with {@link DBStatus#LOCAL_EDITED})!
      */
-    long addNote(long accountId, NoteWithCategory note) {
-        Note entity = new Note();
-        if (note.getId() != null) {
-            if (note.getId() > 0) {
-                entity.setId(note.getId());
+    @NonNull
+    @AnyThread
+    LiveData<NoteWithCategory> addNote(long accountId, NoteWithCategory note) {
+        final MutableLiveData<NoteWithCategory> ret = new MutableLiveData<>();
+        new Thread(() -> {
+            Note entity = new Note();
+            if (note.getId() != null) {
+                if (note.getId() > 0) {
+                    entity.setId(note.getId());
+                }
+                entity.setStatus(note.getStatus());
+                entity.setAccountId(note.getAccountId());
+                entity.setExcerpt(note.getExcerpt());
+            } else {
+                entity.setStatus(DBStatus.VOID);
+                entity.setAccountId(accountId);
+                entity.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
             }
-            entity.setStatus(note.getStatus());
-            entity.setAccountId(note.getAccountId());
-            entity.setExcerpt(note.getExcerpt());
-        } else {
-            entity.setStatus(DBStatus.VOID);
-            entity.setAccountId(accountId);
-            entity.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
-        }
-        if (note.getRemoteId() != null && note.getRemoteId() > 0) {
-            entity.setRemoteId(note.getRemoteId());
-        }
-        entity.setTitle(note.getTitle());
-        entity.setModified(note.getModified());
-        entity.setContent(note.getContent());
-        entity.setFavorite(note.getFavorite());
-        entity.setCategoryId(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
-        entity.setETag(note.getETag());
-        return getNoteDao().addNote(entity);
+            if (note.getRemoteId() != null && note.getRemoteId() > 0) {
+                entity.setRemoteId(note.getRemoteId());
+            }
+            entity.setTitle(note.getTitle());
+            entity.setModified(note.getModified());
+            entity.setContent(note.getContent());
+            entity.setFavorite(note.getFavorite());
+            entity.setCategoryId(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
+            entity.setETag(note.getETag());
+            ret.postValue(getNoteDao().getNoteWithCategory(accountId, getNoteDao().addNote(entity)));
+        }).start();
+        return ret;
     }
 
+    @AnyThread
     public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, NoteWithCategory note, long newAccountId) {
-        // Add new note
-        NoteWithCategory noteWithCategory = new NoteWithCategory(new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), null), note.getCategory());
-        addNoteAndSync(ssoAccount, newAccountId, noteWithCategory);
-        deleteNoteAndSync(ssoAccount, note.getId());
-
-        notifyWidgets();
-        serverSyncHelper.scheduleSync(ssoAccount, true);
+        new Thread(() -> {
+            NoteWithCategory noteWithCategory = new NoteWithCategory(new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), null), note.getCategory());
+            addNoteAndSync(ssoAccount, newAccountId, noteWithCategory);
+            deleteNoteAndSync(ssoAccount, note.getId());
+            notifyWidgets();
+            serverSyncHelper.scheduleSync(ssoAccount, true);
+        }).start();
     }
 
     @NonNull
@@ -215,12 +228,12 @@ public abstract class NotesDatabase extends RoomDatabase {
         return result;
     }
 
-    public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId, @Nullable ISyncCallback callback) {
-        getNoteDao().toggleFavorite(noteId);
-        if (callback != null) {
-            serverSyncHelper.addCallbackPush(ssoAccount, callback);
-        }
-        serverSyncHelper.scheduleSync(ssoAccount, true);
+    @AnyThread
+    public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId) {
+        new Thread(() -> {
+            getNoteDao().toggleFavorite(noteId);
+            serverSyncHelper.scheduleSync(ssoAccount, true);
+        }).start();
     }
 
     /**
@@ -232,17 +245,15 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param accountId  The account where the note is
      * @param noteId     The note which will be updated
      * @param category   The category title which should be used to find the category id.
-     * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      */
-    public void setCategory(SingleSignOnAccount ssoAccount, long accountId, long noteId, @NonNull String category, @Nullable ISyncCallback callback) {
-        getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
-        long categoryId = getOrCreateCategoryIdByTitle(accountId, category);
-        getNoteDao().updateCategory(noteId, categoryId);
-        getCategoryDao().removeEmptyCategory(accountId);
-        if (callback != null) {
-            serverSyncHelper.addCallbackPush(ssoAccount, callback);
-        }
-        serverSyncHelper.scheduleSync(ssoAccount, true);
+    @AnyThread
+    public void setCategory(SingleSignOnAccount ssoAccount, long accountId, long noteId, @NonNull String category) {
+        new Thread(() -> {
+            getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
+            getNoteDao().updateCategory(noteId, getOrCreateCategoryIdByTitle(accountId, category));
+            getCategoryDao().removeEmptyCategory(accountId);
+            serverSyncHelper.scheduleSync(ssoAccount, true);
+        }).start();
     }
 
     /**
@@ -299,40 +310,50 @@ public abstract class NotesDatabase extends RoomDatabase {
      *
      * @param id long - ID of the Note that should be deleted
      */
+    @AnyThread
     public void deleteNoteAndSync(SingleSignOnAccount ssoAccount, long id) {
-        getNoteDao().updateStatus(id, DBStatus.LOCAL_DELETED);
-        notifyWidgets();
-        serverSyncHelper.scheduleSync(ssoAccount, true);
+        new Thread(() -> {
+            getNoteDao().updateStatus(id, DBStatus.LOCAL_DELETED);
+            notifyWidgets();
+            serverSyncHelper.scheduleSync(ssoAccount, true);
 
-        if (SDK_INT >= O) {
-            ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
-            if (shortcutManager != null) {
-                shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
-                    String shortcutId = id + "";
-                    if (shortcut.getId().equals(shortcutId)) {
-                        Log.v(TAG, "Removing shortcut for " + shortcutId);
-                        shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), context.getResources().getString(R.string.note_has_been_deleted));
-                    }
-                });
-            } else {
-                Log.e(TAG, ShortcutManager.class.getSimpleName() + "is null.");
+            if (SDK_INT >= O) {
+                ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
+                if (shortcutManager != null) {
+                    shortcutManager.getPinnedShortcuts().forEach((shortcut) -> {
+                        String shortcutId = id + "";
+                        if (shortcut.getId().equals(shortcutId)) {
+                            Log.v(TAG, "Removing shortcut for " + shortcutId);
+                            shortcutManager.disableShortcuts(Collections.singletonList(shortcutId), context.getResources().getString(R.string.note_has_been_deleted));
+                        }
+                    });
+                } else {
+                    Log.e(TAG, ShortcutManager.class.getSimpleName() + "is null.");
+                }
             }
-        }
+        }).start();
     }
 
-    void deleteNote(long id, @NonNull DBStatus forceDBStatus) {
-        getNoteDao().deleteByCardId(id, forceDBStatus);
-        getCategoryDao().removeEmptyCategory(id);
+    @AnyThread
+    public void deleteNote(long id, @NonNull DBStatus forceDBStatus) {
+        new Thread(() -> {
+            getNoteDao().deleteByNoteId(id, forceDBStatus);
+            getCategoryDao().removeEmptyCategory(id);
+        }).start();
     }
 
     /**
      * Notify about changed notes.
      */
+    @AnyThread
     protected void notifyWidgets() {
-        updateSingleNoteWidgets(context);
-        updateNoteListWidgets(context);
+        new Thread(() -> {
+            updateSingleNoteWidgets(context);
+            updateNoteListWidgets(context);
+        }).start();
     }
 
+    @AnyThread
     void updateDynamicShortcuts(long accountId) {
         new Thread(() -> {
             if (SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
@@ -366,14 +387,9 @@ public abstract class NotesDatabase extends RoomDatabase {
         }).start();
     }
 
-    @SuppressWarnings("UnusedReturnValue")
-    public long addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        final Account entity = new Account();
-        entity.setUrl(url);
-        entity.setUserName(username);
-        entity.setAccountName(accountName);
-        entity.setCapabilities(capabilities);
-        return getAccountDao().insert(entity);
+    @AnyThread
+    public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
+        return getAccountDao().getAccountLiveData(getAccountDao().insert(new Account(url, username, accountName, capabilities)));
     }
 
     /**
@@ -415,25 +431,31 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param localAccount the {@link Account} that should be deleted
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
      */
-    public void deleteAccount(@NonNull Account localAccount) throws IllegalArgumentException {
+    @AnyThread
+    public LiveData<Void> deleteAccount(@NonNull Account localAccount) throws IllegalArgumentException {
         validateAccountId(localAccount.getId());
-        int deletedAccounts = getAccountDao().deleteAccount(localAccount);
-        if (deletedAccounts < 1) {
-            Log.e(TAG, "AccountId '" + localAccount.getId() + "' did not delete any account");
-            throw new IllegalArgumentException("The given accountId does not delete any row");
-        } else if (deletedAccounts > 1) {
-            Log.e(TAG, "AccountId '" + localAccount.getId() + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
-        }
+        MutableLiveData<Void> ret = new MutableLiveData<>();
+        new Thread(() -> {
+            int deletedAccounts = getAccountDao().deleteAccount(localAccount);
+            if (deletedAccounts < 1) {
+                Log.e(TAG, "AccountId '" + localAccount.getId() + "' did not delete any account");
+                throw new IllegalArgumentException("The given accountId does not delete any row");
+            } else if (deletedAccounts > 1) {
+                Log.e(TAG, "AccountId '" + localAccount.getId() + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
+            }
 
-        try {
-            SSOClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, localAccount.getAccountName()));
-        } catch (NextcloudFilesAppAccountNotFoundException e) {
-            e.printStackTrace();
-            SSOClient.invalidateAPICache();
-        }
+            try {
+                SSOClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, localAccount.getAccountName()));
+            } catch (NextcloudFilesAppAccountNotFoundException e) {
+                e.printStackTrace();
+                SSOClient.invalidateAPICache();
+            }
 
-        final int deletedNotes = getNoteDao().deleteByAccountId(localAccount.getId());
-        Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + localAccount.getId());
+            final int deletedNotes = getNoteDao().deleteByAccountId(localAccount.getId());
+            Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + localAccount.getId());
+            ret.postValue(null);
+        }).start();
+        return ret;
     }
 
     /**
@@ -479,38 +501,41 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param selectedCategory The category to be modified
      * @param sortingMethod    The sorting method in {@link CategorySortingMethod} enum format
      */
+    @AnyThread
     public void modifyCategoryOrder(long accountId, NavigationCategory selectedCategory, CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
 
-        final Context ctx = context.getApplicationContext();
-        final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
-        int orderIndex = sortingMethod.getCSMID();
+        new Thread(() -> {
+            final Context ctx = context.getApplicationContext();
+            final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
+            int orderIndex = sortingMethod.getCSMID();
 
-        switch (selectedCategory.getType()) {
-            case FAVORITES: {
-                sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites), orderIndex);
-                break;
-            }
-            case UNCATEGORIZED: {
-                sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized), orderIndex);
-                break;
-            }
-            case RECENT: {
-                sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes), orderIndex);
-                break;
-            }
-            case DEFAULT_CATEGORY:
-            default: {
-                Category category = selectedCategory.getCategory();
-                if(category != null) {
-                    getCategoryDao().modifyCategoryOrder(accountId, category.getId(), sortingMethod);
-                } else {
-                    Log.e(TAG, "Tried to modify category order for " + ENavigationCategoryType.DEFAULT_CATEGORY + "but category is null.");
+            switch (selectedCategory.getType()) {
+                case FAVORITES: {
+                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites), orderIndex);
+                    break;
                 }
-                break;
+                case UNCATEGORIZED: {
+                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized), orderIndex);
+                    break;
+                }
+                case RECENT: {
+                    sp.putInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes), orderIndex);
+                    break;
+                }
+                case DEFAULT_CATEGORY:
+                default: {
+                    Category category = selectedCategory.getCategory();
+                    if (category != null) {
+                        getCategoryDao().modifyCategoryOrder(accountId, category.getId(), sortingMethod);
+                    } else {
+                        Log.e(TAG, "Tried to modify category order for " + ENavigationCategoryType.DEFAULT_CATEGORY + "but category is null.");
+                    }
+                    break;
+                }
             }
-        }
-        sp.apply();
+            sp.apply();
+        }).start();
     }
 
     /**
@@ -536,7 +561,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                 break;
             }
             case UNCATEGORIZED: {
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized),0);
+                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized), 0);
                 break;
             }
             case RECENT: {
@@ -546,7 +571,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             case DEFAULT_CATEGORY:
             default: {
                 Category category = selectedCategory.getCategory();
-                if(category != null) {
+                if (category != null) {
                     return getCategoryDao().getCategoryOrder(category.getId());
                 } else {
                     Log.e(TAG, "Cannot read " + CategorySortingMethod.class.getSimpleName() + " for " + ENavigationCategoryType.DEFAULT_CATEGORY + ".");
