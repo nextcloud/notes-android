@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -57,6 +58,8 @@ import static org.junit.Assert.fail;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NotesNotesDatabaseTest {
 
+    @NonNull
+    private Context context;
     private NotesDatabase db = null;
 
     private String accountURL = "HelloHowAreYou";
@@ -66,7 +69,7 @@ public class NotesNotesDatabaseTest {
 
     @Before
     public void setupDB() throws NextcloudHttpRequestFailedException {
-        Context context = ApplicationProvider.getApplicationContext();
+        context = ApplicationProvider.getApplicationContext();
         db = NotesDatabase.getInstance(context);
         // Create a new account if not exist
         account = db.getAccountDao().getLocalAccountByAccountName(accountName);
@@ -89,7 +92,6 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
-    @Ignore
     public void test_01_addNote_CloudNote() {
         long accountID = account.getId();   // retrieve account id
         // Create a cloud note for argument passing
@@ -217,9 +219,8 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
-    @Ignore
     public void test_04_getCategories() {
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
         boolean exitFlag = false;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_04_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -233,7 +234,7 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_05_searchCategories() {
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "Dia"));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "Dia"));
         boolean exitFlag = false;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_05_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -243,7 +244,7 @@ public class NotesNotesDatabaseTest {
         }
         assertTrue(exitFlag);
 
-        categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "Mike Chester Wang"));
+        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "Mike Chester Wang"));
         exitFlag = false;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_05_searchCategories_Item_Mike_Chester_Wang", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -277,7 +278,6 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
-    @Ignore
     public void test_07_multiAddNote() {
         long thisAccountID = account.getId();
         ArrayList<NoteWithCategory> multiCloudNote = new ArrayList<>();
@@ -370,9 +370,8 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
-    @Ignore
     public void test_09_multiGetCategories() {
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
         int count = 0;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_09_multiGetCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -386,7 +385,7 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_10_multiSearchCategories() {
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "M"));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "M"));
         int count = 0;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -394,7 +393,7 @@ public class NotesNotesDatabaseTest {
         }
         assertEquals(3, count);
 
-        categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "Mike"));
+        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "Mike"));
         count = 0;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -402,7 +401,7 @@ public class NotesNotesDatabaseTest {
         }
         assertEquals(0, count);
 
-        categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "M"));
+        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "M"));
         boolean exitFlag = false;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -413,7 +412,7 @@ public class NotesNotesDatabaseTest {
         assertTrue(exitFlag);
 
 
-        categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "WOk"));
+        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "WOk"));
         exitFlag = false;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -423,7 +422,7 @@ public class NotesNotesDatabaseTest {
         }
         assertFalse(exitFlag);
 
-        categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "hello"));
+        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "hello"));
         exitFlag = false;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -435,7 +434,6 @@ public class NotesNotesDatabaseTest {
     }
 
     @Test
-    @Ignore
     public void test_11_multiDeleteNote() {
         long thisAccountID = account.getId();
         List<Note> notes = db.getNoteDao().getNotes(thisAccountID);
@@ -497,7 +495,7 @@ public class NotesNotesDatabaseTest {
         Log.i("Test_12_Chinese", "Size: " + notes.size());
         assertEquals(1, notes.size());
 
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
+        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
         boolean exitFlag = false;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -507,7 +505,7 @@ public class NotesNotesDatabaseTest {
         }
         assertTrue(exitFlag);
 
-        categories = convertToCategoryNavigationItem(null, db.getCategoryDao().searchCategories(account.getId(), "记"));
+        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "记"));
         exitFlag = false;
         for (NavigationItem categoryItem : categories) {
             Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
@@ -535,12 +533,7 @@ public class NotesNotesDatabaseTest {
     @Ignore
     public void test_13_getCategoryIdByTitle() {
         try {
-            Method method = NotesDatabase.class.getDeclaredMethod("getCategoryIdByTitle",
-                    long.class,
-                    String.class);
-            method.setAccessible(true);
-
-            List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(null, db.getCategoryDao().getCategories(account.getId()));
+            List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
             int count = 0;
             for (NavigationItem categoryItem : categories) {
                 Log.i("Test_13_getCategoryIdByTitle", String.format("%s | %s | %d | %d",
@@ -549,17 +542,17 @@ public class NotesNotesDatabaseTest {
             }
             Log.i("Test_13_getCategoryIdByTitle", "count " + count);
 
-            int catID;
+            long catID;
 
             // Find an existing category to test false
             if (count > 0) {
-                catID = (int) method.invoke(db, account.getId(), categories.get(0).label);
+                catID = db.getCategoryDao().getCategoryIdByTitle(account.getId(), categories.get(0).label);
                 assertNotEquals(-1, catID);
             }
 
             // Create a category not existing
             String cur_cat = "Mike Chester Wang's Diary" + getCurDate();
-            catID = (int) method.invoke(db, account.getId(), cur_cat);
+            catID = db.getCategoryDao().getCategoryIdByTitle(account.getId(), cur_cat);
             assertNotEquals(-1, catID);
         } catch (Exception e) {
             fail(Arrays.toString(e.getStackTrace()));
