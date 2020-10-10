@@ -233,15 +233,15 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         method = CategorySortingMethod.SORT_MODIFIED_DESC;
                     } else {
                         subtitle = getString(R.string.search_in_category, NoteUtil.extendCategory(category.getTitle()));
-                        method = category.getSortingMethod();
+                        method = db.getCategoryDao().getCategoryOrder(category.getId());
                     }
                     break;
                 }
             }
-            activityBinding.searchText.setText(subtitle);
             updateSortMethodIcon(method);
+            activityBinding.searchText.setText(subtitle);
         });
-
+        mainViewModel.getSortOrderChange().observe(this, (pair) -> updateSortMethodIcon(pair.second));
         mainViewModel.filterChanged().observe(this, (v) -> {
             if (noteWithCategoryLiveData != null) {
                 noteWithCategoryLiveData.removeObserver(noteWithCategoryObserver);
@@ -469,7 +469,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
             }
             db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
-            mainViewModel.postSortOrderOfSpecialNavigationCategoryChanged();
+            mainViewModel.postSortOrderChange(navigationSelection, method);
         });
     }
 
@@ -608,6 +608,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon(CategorySortingMethod method) {
+        Log.e(TAG, "Update Sort Method Icon");
         if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
             activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
             activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));

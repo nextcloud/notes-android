@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
@@ -46,7 +47,7 @@ public class MainViewModel extends AndroidViewModel {
     @NonNull
     private MutableLiveData<String> searchTerm = new MutableLiveData<>();
     @NonNull
-    private MutableLiveData<Void> sortOrderOfSpecialNavigationCategoryChanged = new MutableLiveData<>();
+    private MutableLiveData<Pair<NavigationCategory, CategorySortingMethod>> sortOrderChange = new MutableLiveData<>();
     @NonNull
     private MutableLiveData<NavigationCategory> selectedCategory = new MutableLiveData<>(new NavigationCategory(RECENT));
 
@@ -69,11 +70,18 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void postSelectedCategory(@NonNull NavigationCategory selectedCategory) {
-        this.selectedCategory.postValue(selectedCategory);
+        this.selectedCategory.setValue(selectedCategory);
     }
 
-    public void postSortOrderOfSpecialNavigationCategoryChanged() {
-        this.sortOrderOfSpecialNavigationCategoryChanged.postValue(null);
+    /**
+     * Needed for special categories like favorites, recent and uncategorized
+     */
+    public void postSortOrderChange(NavigationCategory navigationSelection, CategorySortingMethod method) {
+        this.sortOrderChange.setValue(new Pair<>(navigationSelection, method));
+    }
+
+    public LiveData<Pair<NavigationCategory, CategorySortingMethod>> getSortOrderChange() {
+        return this.sortOrderChange;
     }
 
     @NonNull
@@ -92,7 +100,7 @@ public class MainViewModel extends AndroidViewModel {
         mediatorLiveData.addSource(currentAccount, (o) -> mediatorLiveData.postValue(null));
         mediatorLiveData.addSource(searchTerm, (o) -> mediatorLiveData.postValue(null));
         mediatorLiveData.addSource(selectedCategory, (o) -> mediatorLiveData.postValue(null));
-        mediatorLiveData.addSource(sortOrderOfSpecialNavigationCategoryChanged, (o) -> mediatorLiveData.postValue(null));
+        mediatorLiveData.addSource(sortOrderChange, (o) -> mediatorLiveData.postValue(null));
         return mediatorLiveData;
     }
 
