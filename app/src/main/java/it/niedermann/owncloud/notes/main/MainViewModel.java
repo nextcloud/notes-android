@@ -157,8 +157,7 @@ public class MainViewModel extends AndroidViewModel {
     @NonNull
     public LiveData<List<NavigationItem>> getNavigationCategories(String navigationOpen) {
         Account currentAccount = getCurrentAccount().getValue();
-        NavigationCategory selectedCategory = getSelectedCategory().getValue();
-        if (currentAccount != null && selectedCategory != null) {
+        if (currentAccount != null) {
             return distinctUntilChanged(
                     map(db.getCategoryDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase -> {
                         List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(getApplication(), db.getCategoryDao().getCategories(currentAccount.getId()));

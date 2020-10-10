@@ -113,6 +113,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
     public static final String ADAPTER_KEY_RECENT = "recent";
     public static final String ADAPTER_KEY_STARRED = "starred";
+    public static final String ADAPTER_KEY_UNCATEGORIZED = "uncategorized";
 
     protected ItemAdapter adapter;
 

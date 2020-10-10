@@ -5,6 +5,8 @@ import androidx.room.ForeignKey;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
 @Entity(
@@ -23,7 +25,7 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
                 @Index(name = "IDX_CATEGORIES_TITLE", value = "title")
         }
 )
-public class Category {
+public class Category implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private long accountId;

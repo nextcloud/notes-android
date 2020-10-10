@@ -9,6 +9,9 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+
 import java.util.List;
 
 import it.niedermann.owncloud.notes.NotesApplication;
@@ -16,8 +19,10 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
+import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
@@ -31,7 +36,9 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final NotesListWidgetData data;
     private final boolean darkTheme;
     private NotesDatabase db;
-    private List<Note> noteEntities;
+    private LiveData<List<NoteWithCategory>> noteEntitiesLiveData;
+    private Observer<List<NoteWithCategory>> noteEntitiesObserver = (notes) -> this.noteEntities = notes;
+    private List<NoteWithCategory> noteEntities;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
@@ -46,28 +53,35 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onCreate() {
-    }
-
-    @Override
-    public void onDataSetChanged() {
+        if (noteEntitiesLiveData != null) {
+            noteEntitiesLiveData.removeObserver(noteEntitiesObserver);
+        }
         try {
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
                 case MODE_DISPLAY_ALL:
-                    noteEntities = db.getNoteDao().getNotes(data.getAccountId());
+                    noteEntitiesLiveData = db.getNoteDao().searchRecent(data.getAccountId(), "%", CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
                     break;
                 case MODE_DISPLAY_STARRED:
-                    noteEntities = db.getNoteDao().searchNotes(data.getAccountId(), null, null, true, null);
+                    noteEntitiesLiveData = db.getNoteDao().searchFavorites(data.getAccountId(), "%", CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
                     break;
                 case MODE_DISPLAY_CATEGORY:
                     if (data.getCategoryId() != null) {
-                        noteEntities = db.getNoteDao().searchNotes(data.getAccountId(), null, db.getCategoryDao().getCategoryTitleById(data.getCategoryId()), null, null);
+                        // FIXME
+                        noteEntitiesLiveData = db.getNoteDao().searchByCategory(data.getAccountId(), "%", db.getCategoryDao().getCategoryTitleById(data.getCategoryId()), CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
+                    } else {
+                        noteEntitiesLiveData = db.getNoteDao().searchUncategorized(data.getAccountId(), "%", CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
                     }
                     break;
             }
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
+        noteEntitiesLiveData.observeForever(noteEntitiesObserver);
+    }
+
+    @Override
+    public void onDataSetChanged() {
     }
 
     @Override
@@ -98,7 +112,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             return null;
         }
 
-        Note note = noteEntities.get(position);
+        Note note = noteEntities.get(position).getNote();
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 

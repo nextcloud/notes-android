@@ -17,6 +17,7 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.main.MainActivity;
 
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 
@@ -75,6 +76,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationViewHolder
     public void setItems(@NonNull List<NavigationItem> items) {
         for (NavigationItem item : items) {
             if (TextUtils.isEmpty(item.label)) {
+                item.id = MainActivity.ADAPTER_KEY_UNCATEGORIZED;
                 item.label = context.getString(R.string.action_uncategorized);
                 item.icon = NavigationAdapter.ICON_NOFOLDER;
                 item.type = UNCATEGORIZED;

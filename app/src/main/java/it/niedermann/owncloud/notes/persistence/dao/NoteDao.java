@@ -28,7 +28,6 @@ public interface NoteDao {
     @Query("DELETE FROM NOTE WHERE accountId = :accountId")
     int deleteByAccountId(Long accountId);
 
-
     @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) AND (CATEGORY.title = :category OR CATEGORY.title LIKE :category + '/%' " +
             ") ORDER BY categoryId, favorite DESC, :sortingMethod")
@@ -45,15 +44,6 @@ public interface NoteDao {
     @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND ( " +
             "NOTE.title LIKE :query OR content LIKE :query OR CATEGORY.title LIKE :query) ORDER BY favorite DESC, categoryId DESC, :sortingMethod")
     LiveData<List<NoteWithCategory>> searchRecent(long accountId, String query, String sortingMethod);
-
-
-    /**
-     * Returns a list of all Notes in the Database
-     *
-     * @return List&lt;Note&gt;
-     */
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' ORDER BY favorite DESC, modified DESC")
-    List<Note> getNotes(long accountId);
 
     @Query("DELETE FROM NOTE WHERE id = :id and status = :forceDBStatus")
     void deleteByCardId(long id, DBStatus forceDBStatus);
@@ -111,9 +101,6 @@ public interface NoteDao {
     @Query("UPDATE NOTE SET status = 'LOCAL_EDITED', favorite = ((favorite | 1) - (favorite & 1)) WHERE id = :id")
     void toggleFavorite(long id);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query OR categoryId LIKE :query) AND (categoryId = :category OR title LIKE :category + '/%') AND favorite = :favorite ORDER BY favorite DESC, :sortingMethod")
-    List<Note> searchNotes(long accountId, String query, String category, Boolean favorite, CategorySortingMethod sortingMethod);
-
     @Query("UPDATE NOTE SET remoteId = :remoteId WHERE id = :id")
     void updateRemoteId(long id, long remoteId);
 
@@ -124,7 +111,6 @@ public interface NoteDao {
     @Query("UPDATE NOTE SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
             "WHERE id = :id AND content = :content AND favorite = :favorite AND categoryId = :categoryTitle")
     void updateIfModifiedLocallyDuringSync(long id, long modified, String title, Boolean favorite, String categoryTitle, String eTag, String content);
-
 
     /**
      * used by: {@link NoteServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)

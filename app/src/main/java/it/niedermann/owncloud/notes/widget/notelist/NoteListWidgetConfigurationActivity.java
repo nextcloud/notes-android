@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.widget.notelist;
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,9 +29,13 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 
+import static androidx.lifecycle.Transformations.distinctUntilChanged;
+import static androidx.lifecycle.Transformations.map;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_STARRED;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
 import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
 
 
@@ -44,8 +47,6 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private Account localAccount = null;
 
     private NavigationAdapter adapterCategories;
-    private NavigationItem itemRecent;
-    private NavigationItem itemFavorites;
     private NotesDatabase db = null;
 
     @Override
@@ -77,14 +78,6 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
             finish();
         }
 
-        itemRecent = new NavigationItem(MainActivity.ADAPTER_KEY_RECENT,
-                getString(R.string.label_all_notes),
-                null,
-                R.drawable.ic_access_time_grey600_24dp);
-        itemFavorites = new NavigationItem(MainActivity.ADAPTER_KEY_STARRED,
-                getString(R.string.label_favorites),
-                null,
-                R.drawable.ic_star_yellow_24dp);
         RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
 
@@ -94,17 +87,30 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 NotesListWidgetData data = new NotesListWidgetData();
 
                 data.setId(appWidgetId);
-                if (itemRecent.equals(item)) {
-                    data.setMode(MODE_DISPLAY_ALL);
-                } else if (itemFavorites.equals(item)) {
-                    data.setMode(MODE_DISPLAY_STARRED);
-                } else {
-                    data.setMode(MODE_DISPLAY_CATEGORY);
-                    if (item instanceof NavigationItem.CategoryNavigationItem) {
-                        data.setCategoryId(((NavigationItem.CategoryNavigationItem) item).categoryId);
-                    } else {
-                        throw new IllegalStateException("Tried to choose a category, but ");
+                if (item.type != null) {
+                    switch (item.type) {
+                        case RECENT: {
+                            data.setMode(MODE_DISPLAY_ALL);
+                            break;
+                        }
+                        case FAVORITES: {
+                            data.setMode(MODE_DISPLAY_STARRED);
+                            break;
+                        }
+                        case UNCATEGORIZED:
+                        default: {
+                            if (item.getClass() == NavigationItem.CategoryNavigationItem.class) {
+                                data.setMode(MODE_DISPLAY_CATEGORY);
+                                data.setCategoryId(((NavigationItem.CategoryNavigationItem) item).categoryId);
+                            } else {
+                                data.setMode(MODE_DISPLAY_ALL);
+                                Log.e(TAG, "Unknown item navigation type. Fallback to show " + RECENT);
+                            }
+                        }
                     }
+                } else {
+                    data.setMode(MODE_DISPLAY_ALL);
+                    Log.e(TAG, "Unknown item navigation type. Fallback to show " + RECENT);
                 }
 
                 data.setAccountId(localAccount.getId());
@@ -130,53 +136,30 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterCategories);
-    }
+        distinctUntilChanged(
+                map(db.getCategoryDao().getCategoriesLiveData(localAccount.getId()), fromDatabase -> {
+                    List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(NoteListWidgetConfigurationActivity.this, fromDatabase);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new LoadCategoryListTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    ArrayList<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);
+                    items.add(new NavigationItem(MainActivity.ADAPTER_KEY_RECENT, getString(R.string.label_all_notes), db.getNoteDao().count(localAccount.getId()), R.drawable.ic_access_time_grey600_24dp, RECENT));
+                    items.add(new NavigationItem(MainActivity.ADAPTER_KEY_STARRED, getString(R.string.label_favorites), db.getNoteDao().getFavoritesCount(localAccount.getId()), R.drawable.ic_star_yellow_24dp, FAVORITES));
+
+                    if (categories.size() > 2 && categories.get(2).label.isEmpty()) {
+                        items.add(new NavigationItem(MainActivity.ADAPTER_KEY_UNCATEGORIZED, getString(R.string.action_uncategorized), null, NavigationAdapter.ICON_NOFOLDER));
+                    }
+
+                    for (NavigationItem item : categories) {
+                        int slashIndex = item.label.indexOf('/');
+
+                        item.label = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
+                        item.id = "category:" + item.label;
+                        items.add(item);
+                    }
+                    return items;
+                })).observe(this, (navigationItems) -> adapterCategories.setItems(navigationItems));
     }
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
-    }
-
-    private class LoadCategoryListTask extends AsyncTask<Void, Void, List<NavigationItem>> {
-        @Override
-        protected List<NavigationItem> doInBackground(Void... voids) {
-            if (localAccount == null) {
-                return new ArrayList<>();
-            }
-            NavigationItem itemUncategorized;
-            List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(NoteListWidgetConfigurationActivity.this, db.getCategoryDao().getCategories(localAccount.getId()));
-
-            if (!categories.isEmpty() && categories.get(0).label.isEmpty()) {
-                itemUncategorized = categories.get(0);
-                itemUncategorized.label = getString(R.string.action_uncategorized);
-                itemUncategorized.icon = NavigationAdapter.ICON_NOFOLDER;
-            }
-
-            itemFavorites.count = db.getNoteDao().getFavoritesCount(localAccount.getId());
-            itemRecent.count = db.getNoteDao().count(localAccount.getId());
-
-            ArrayList<NavigationItem> items = new ArrayList<>();
-            items.add(itemRecent);
-            items.add(itemFavorites);
-
-            for (NavigationItem item : categories) {
-                int slashIndex = item.label.indexOf('/');
-
-                item.label = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
-                item.id = "category:" + item.label;
-                items.add(item);
-            }
-            return items;
-        }
-
-        @Override
-        protected void onPostExecute(List<NavigationItem> items) {
-            adapterCategories.setItems(items);
-        }
     }
 }

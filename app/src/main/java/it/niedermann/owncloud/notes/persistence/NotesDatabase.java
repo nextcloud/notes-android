@@ -468,7 +468,6 @@ public abstract class NotesDatabase extends RoomDatabase {
         }
     }
 
-
     /**
      * Modifies the sorting method for one category, the category can be normal category or
      * one of "All notes", "Favorite", and "Uncategorized".
