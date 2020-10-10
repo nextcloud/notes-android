@@ -43,7 +43,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
 
     @Override
     public long getItemId(int position) {
-        return menuItems[position].getLabelResource();
+        return position;
     }
 
     @NonNull
