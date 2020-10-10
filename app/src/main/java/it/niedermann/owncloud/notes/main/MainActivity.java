@@ -833,7 +833,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         adapter.deselect(0);
         for (Integer i : selection) {
             NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
-            db.moveNoteToAnotherAccount(ssoAccount, note.getNote().getAccountId(), db.getNoteDao().getNote(note.getNote().getAccountId(), note.getNote().getId()), account.getId());
+            db.moveNoteToAnotherAccount(ssoAccount, note.getNote().getAccountId(), db.getNoteDao().getNoteWithCategory(note.getNote().getAccountId(), note.getNote().getId()).getNote(), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);

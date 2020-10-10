@@ -104,7 +104,7 @@ public class NotesNotesDatabaseTest {
         // Add a new note
         long noteID = db.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        Note note = db.getNoteDao().getNote(accountID, noteID);
+        Note note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
         Log.i("Test_01_addNote_Cur_Note", note.toString());
         Log.i("Test_01_addNote_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_01_addNote_Cur_Note", "Content: " + note.getContent());
@@ -130,7 +130,7 @@ public class NotesNotesDatabaseTest {
                 "A Bad Day", getCurDate() + " You're faking a smile with just a coffee to go (Daniel Powter).",
                 true, "A Nice Song", null);
         noteID = db.addNote(accountID, cloudNote_re0);
-        note = db.getNoteDao().getNote(accountID, noteID);
+        note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
         // Check
         assertEquals("A Bad Day", note.getTitle());
         assertEquals(cloudNote_re0.getContent(), note.getContent());
@@ -161,7 +161,7 @@ public class NotesNotesDatabaseTest {
             // Add a new note
             long noteID = db.addNote(accountID, dbNote);
             // Check if this note is added successfully
-            Note note = db.getNoteDao().getNote(accountID, noteID);
+            Note note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
             assertEquals(dbNote.getTitle(), note.getTitle());
             assertEquals(dbNote.getContent(), note.getContent());
             assertEquals(dbNote.getCategory(), note.getCategory());
@@ -175,7 +175,7 @@ public class NotesNotesDatabaseTest {
             // Add a new note
             noteID = db.addNote(accountID, dbNote);
             // Check if this note is added successfully
-            note = db.getNoteDao().getNote(accountID, noteID);
+            note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
             assertEquals(dbNote.getTitle(), note.getTitle());
             assertEquals(dbNote.getContent(), note.getContent());
             assertEquals(dbNote.getCategory(), note.getCategory());
@@ -323,7 +323,7 @@ public class NotesNotesDatabaseTest {
 
         // check if the node added successfully
         for (int i = 0; i < 10; ++i) {
-            Note nodeTemp = db.getNoteDao().getNote(thisAccountID, multiNoteID[i]);
+            Note nodeTemp = db.getNoteDao().getNoteWithCategory(thisAccountID, multiNoteID[i]);
             assertEquals(nodeTemp.getTitle(), multiCloudNote.get(i).getTitle());
             assertEquals(nodeTemp.getCategory(), multiCloudNote.get(i).getCategory());
             assertEquals(nodeTemp.getContent(), multiCloudNote.get(i).getContent());
@@ -469,7 +469,7 @@ public class NotesNotesDatabaseTest {
         // Add a new note
         long noteID = db.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        Note note = db.getNoteDao().getNote(accountID, noteID);
+        Note note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
         Log.i("Test_12_Chinese_Cur_Note", note.toString());
         Log.i("Test_12_Chinese_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_12_Chinese_Cur_Note", "Content: " + note.getContent());

@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.edit;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
@@ -256,10 +258,10 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     @Override
-    public void onNoteUpdated(Note note) {
+    public void onNoteUpdated(NoteWithCategory note) {
         if (note != null) {
-            binding.toolbar.setTitle(note.getTitle());
-            if (note.getCategory().isEmpty()) {
+            binding.toolbar.setTitle(note.getNote().getTitle());
+            if (TextUtils.isEmpty(note.getCategory())) {
                 binding.toolbar.setSubtitle(null);
             } else {
                 binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));

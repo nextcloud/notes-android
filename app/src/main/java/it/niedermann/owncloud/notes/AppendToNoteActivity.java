@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 
 import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 
 public class AppendToNoteActivity extends MainActivity {
@@ -37,8 +36,8 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     public void onNoteClick(int position, View v) {
         if (receivedText != null && receivedText.length() > 0) {
-            final Note note = db.getNoteDao().getNote(localAccount.getId(), ((NoteWithCategory) adapter.getItem(position)).getNote().getId());
-            final String oldContent = note.getContent();
+            final NoteWithCategory note = db.getNoteDao().getNoteWithCategory(localAccount.getId(), ((NoteWithCategory) adapter.getItem(position)).getNote().getId());
+            final String oldContent = note.getNote().getContent();
             String newContent;
             if (oldContent != null && oldContent.length() > 0) {
                 newContent = oldContent + "\n\n" + receivedText;

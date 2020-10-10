@@ -144,7 +144,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         };
 
         if (note != null) {
-            if (note.getContent().isEmpty()) {
+            if (note.getNote().getContent().isEmpty()) {
                 binding.editContent.requestFocus();
 
                 requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -158,9 +158,9 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             }
 
             // workaround for issue yydcdut/RxMarkdown#41
-            note.setContent(note.getContent().replace("\r\n", "\n"));
+            note.getNote().setContent(note.getNote().getContent().replace("\r\n", "\n"));
 
-            binding.editContent.setText(note.getContent());
+            binding.editContent.setText(note.getNote().getContent());
             binding.editContent.setEnabled(true);
 
             final MarkdownProcessor markdownProcessor = new MarkdownProcessor(requireContext());

@@ -104,7 +104,7 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-                                long noteLocalId = db.getNoteDao().getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
+                                long noteLocalId = db.getNoteDao().getLocalIdByRemoteId(this.note.getNote().getAccountId(), noteRemoteId);
                                 Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
                                 startActivity(intent);
@@ -115,11 +115,11 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
                         })
                         .build());
         try {
-            binding.singleNoteContent.setText(parseCompat(markdownProcessor, note.getContent()));
+            binding.singleNoteContent.setText(parseCompat(markdownProcessor, note.getNote().getContent()));
             onResume();
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-            binding.singleNoteContent.setText(note.getContent());
+            binding.singleNoteContent.setText(note.getNote().getContent());
             Toast.makeText(binding.singleNoteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
@@ -153,7 +153,7 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
 
     @Override
     protected String getContent() {
-        return note.getContent();
+        return note.getNote().getContent();
     }
 
     @Override

@@ -16,6 +16,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
@@ -29,7 +30,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private final int appWidgetId;
 
     private NotesDatabase db;
-    private Note note;
+    private NoteWithCategory note;
     private boolean darkModeActive = false;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
@@ -61,7 +62,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         if (data != null) {
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
-            note = db.getNoteDao().getNote(data.getAccountId(), noteId);
+            note = db.getNoteDao().getNoteWithCategory(data.getAccountId(), noteId);
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");
@@ -103,18 +104,18 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 
-        extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-        extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
+        extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getNote().getId());
+        extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getNote().getAccountId());
         fillInIntent.putExtras(extras);
         if (darkModeActive) {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv_dark, parseCompat(markdownProcessor, note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv_dark, parseCompat(markdownProcessor, note.getNote().getContent()));
 
         } else {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv, parseCompat(markdownProcessor, note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv, parseCompat(markdownProcessor, note.getNote().getContent()));
         }
 
         return note_content;

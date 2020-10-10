@@ -115,7 +115,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                 MarkDownUtil.getMarkDownConfiguration(binding.singleNoteContent.getContext())
                         .setOnTodoClickCallback((view, line, lineNumber) -> {
                                     try {
-                                        String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
+                                        String[] lines = TextUtils.split(note.getNote().getContent(), "\\r?\\n");
                                         /*
                                          * Workaround for RxMarkdown-bug:
                                          * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
@@ -161,7 +161,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class)
-                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, db.getNoteDao().getLocalIdByRemoteId(this.note.getAccountId(), extractNoteRemoteId(link)));
+                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, db.getNoteDao().getLocalIdByRemoteId(this.note.getNote().getAccountId(), extractNoteRemoteId(link)));
                                 startActivity(intent);
                             } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
@@ -170,16 +170,16 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         })
                         .build());
 
-        TextProcessorChain chain = defaultTextProcessorChain(note);
+        TextProcessorChain chain = defaultTextProcessorChain(note.getNote());
         try {
-            binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
+            binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getNote().getContent())));
         } catch (StringIndexOutOfBoundsException e) {
             // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-            binding.singleNoteContent.setText(chain.apply(note.getContent()));
+            binding.singleNoteContent.setText(chain.apply(note.getNote().getContent()));
             Toast.makeText(binding.singleNoteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-        changedText = note.getContent();
+        changedText = note.getNote().getContent();
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
         binding.swiperefreshlayout.setOnRefreshListener(this);
@@ -210,12 +210,12 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
             try {
-                TextProcessorChain chain = defaultTextProcessorChain(note);
+                TextProcessorChain chain = defaultTextProcessorChain(note.getNote());
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
                 db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
-                    note = db.getNoteDao().getNote(note.getAccountId(), note.getId());
-                    changedText = note.getContent();
-                    binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
+                    note = db.getNoteDao().getNoteWithCategory(note.getNote().getAccountId(), note.getNote().getId());
+                    changedText = note.getNote().getContent();
+                    binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getNote().getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);
                 });
                 db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
