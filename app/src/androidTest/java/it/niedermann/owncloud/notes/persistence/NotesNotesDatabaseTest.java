@@ -29,6 +29,7 @@ import java.util.TimeZone;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
@@ -92,9 +93,9 @@ public class NotesNotesDatabaseTest {
     public void test_01_addNote_CloudNote() {
         long accountID = account.getId();   // retrieve account id
         // Create a cloud note for argument passing
-        Note cloudNote = new Note(1L, Calendar.getInstance(),
+        NoteWithCategory cloudNote = new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "A Great Day", getCurDate() + " This is a really great day bro.",
-                true, "Diary", null);
+                true, null), "Diary");
 
         // Pre-check
         List<Note> notes = db.getNoteDao().getNotes(accountID);
@@ -104,7 +105,7 @@ public class NotesNotesDatabaseTest {
         // Add a new note
         long noteID = db.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        Note note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
+        NoteWithCategory note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
         Log.i("Test_01_addNote_Cur_Note", note.toString());
         Log.i("Test_01_addNote_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_01_addNote_Cur_Note", "Content: " + note.getContent());
@@ -126,9 +127,9 @@ public class NotesNotesDatabaseTest {
             Log.i("Test_01_addNote_All_Notes_Added", cnote.getTitle());
         }
 
-        Note cloudNote_re0 = new Note(0L, Calendar.getInstance(),
+        NoteWithCategory cloudNote_re0 = new NoteWithCategory(new Note(0L, Calendar.getInstance(),
                 "A Bad Day", getCurDate() + " You're faking a smile with just a coffee to go (Daniel Powter).",
-                true, "A Nice Song", null);
+                true, null), "A Nice Song");
         noteID = db.addNote(accountID, cloudNote_re0);
         note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
         // Check
@@ -148,20 +149,20 @@ public class NotesNotesDatabaseTest {
             // getNotesCustom also tested here
             Method getNC = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, boolean.class);
             getNC.setAccessible(true);
-            List<Note> notes = (List<Note>) getNC.invoke(db, accountID, "status != ? AND accountId = ?",
+            List<NoteWithCategory> notes = (List<NoteWithCategory>) getNC.invoke(db, accountID, "status != ? AND accountId = ?",
                     new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountID}, "id ASC", false);
             long newNoteID = notes.get(notes.size() - 1).getId() + 1;   // avoid UNIQUE Note_ID constraint
 
             // Create a DBNote for argument passing
             String newContent = getCurDate() + " This is a even greater day my friend.";
-            Note dbNote = new Note(newNoteID, 1L, Calendar.getInstance(), "A Greater Day",
-                    newContent, true, "Best Friend's Record", null, DBStatus.VOID,
-                    accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
+            NoteWithCategory dbNote = new NoteWithCategory(new Note(newNoteID, 1L, Calendar.getInstance(), "A Greater Day",
+                    newContent, true, null, DBStatus.VOID,
+                    accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0), "Best Friend's Record");
 
             // Add a new note
             long noteID = db.addNote(accountID, dbNote);
             // Check if this note is added successfully
-            Note note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
+            NoteWithCategory note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
             assertEquals(dbNote.getTitle(), note.getTitle());
             assertEquals(dbNote.getContent(), note.getContent());
             assertEquals(dbNote.getCategory(), note.getCategory());
@@ -169,9 +170,9 @@ public class NotesNotesDatabaseTest {
 
             // Another DBNote for argument passing
             newContent = getCurDate() + " This is a even greater day my friend.";
-            dbNote = new Note(0, 1L, Calendar.getInstance(), "An Even Greater Day",
-                    newContent, true, "Sincere Friend's Record", null, DBStatus.VOID,
-                    accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0);
+            dbNote = new NoteWithCategory(new Note(0, 1L, Calendar.getInstance(), "An Even Greater Day",
+                    newContent, true, null, DBStatus.VOID,
+                    accountID, NoteUtil.generateNoteExcerpt(newContent, "Test-Title"), 0), "Sincere Friend's Record");
             // Add a new note
             noteID = db.addNote(accountID, dbNote);
             // Check if this note is added successfully
@@ -185,7 +186,7 @@ public class NotesNotesDatabaseTest {
             Method getNCWOW = NotesDatabase.class.getDeclaredMethod("getNotesCustom", long.class, String.class, String[].class, String.class, String.class, boolean.class);
             getNCWOW.setAccessible(true);
             int aSize = 1;
-            notes = (List<Note>) getNCWOW.invoke(db, accountID, " status != ? AND accountId = ?",
+            notes = (List<NoteWithCategory>) getNCWOW.invoke(db, accountID, " status != ? AND accountId = ?",
                     new String[]{DBStatus.LOCAL_DELETED.getTitle(), "" + accountID}, null, String.valueOf(aSize), false);
             assertEquals(aSize, notes.size());
         } catch (Exception e) {
@@ -279,37 +280,37 @@ public class NotesNotesDatabaseTest {
     @Ignore
     public void test_07_multiAddNote() {
         long thisAccountID = account.getId();
-        ArrayList<Note> multiCloudNote = new ArrayList<>();
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+        ArrayList<NoteWithCategory> multiCloudNote = new ArrayList<>();
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "Mike is so cool.", "Mike is a cool guy you know",
-                true, "The BiBle", null));
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+                true, null), "The BiBle"));
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "Andy is so cool.", "Andy is a cool guy you know",
-                true, "The BiBle", null));
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+                true, null), "The BiBle"));
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "I Honestly Love You", "I Honestly Love You by Leslie",
-                true, "Music", null));
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+                true, null), "Music"));
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "Monica", "Monica by Leslie",
-                true, "Music", null));
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+                true, null), "Music"));
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "Worksheet", "1 2 3 4 5 6 7 8",
-                false, "Work", null));
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+                false, null), "Work"));
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "PowerPoint.", "8 7 6 5 4 3 2 1",
-                false, "Work", null));
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+                false, null), "Work"));
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "Farewell My Concubine", "a great movie",
-                true, "Movie", null));
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+                true, null), "Movie"));
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "Leon", "an amazing movie",
-                true, "Movie", null));
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+                true, null), "Movie"));
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "The Dark Knight", "another amazing movie",
-                true, "Movies", null));
-        multiCloudNote.add(new Note(1L, Calendar.getInstance(),
+                true, null), "Movies"));
+        multiCloudNote.add(new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "How are you.", "i am fine.",
-                false, "Diary", null));
+                false, null), "Diary"));
 
         // Pre-check
         List<Note> notes = db.getNoteDao().getNotes(thisAccountID);
@@ -323,7 +324,7 @@ public class NotesNotesDatabaseTest {
 
         // check if the node added successfully
         for (int i = 0; i < 10; ++i) {
-            Note nodeTemp = db.getNoteDao().getNoteWithCategory(thisAccountID, multiNoteID[i]);
+            NoteWithCategory nodeTemp = db.getNoteDao().getNoteWithCategory(thisAccountID, multiNoteID[i]);
             assertEquals(nodeTemp.getTitle(), multiCloudNote.get(i).getTitle());
             assertEquals(nodeTemp.getCategory(), multiCloudNote.get(i).getCategory());
             assertEquals(nodeTemp.getContent(), multiCloudNote.get(i).getContent());
@@ -457,9 +458,9 @@ public class NotesNotesDatabaseTest {
     @Ignore
     public void test_12_Chinese() {
         long accountID = account.getId();
-        Note cloudNote = new Note(1L, Calendar.getInstance(),
+        NoteWithCategory cloudNote = new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "美好的一天", getCurDate() + " 兄弟，这真是美好的一天。",
-                true, "日记", null);
+                true, null), "日记");
 
         // Pre-check
         List<Note> notes = db.getNoteDao().getNotes(accountID);
@@ -469,7 +470,7 @@ public class NotesNotesDatabaseTest {
         // Add a new note
         long noteID = db.addNote(accountID, cloudNote);
         // Check if this note is added successfully
-        Note note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
+        NoteWithCategory note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
         Log.i("Test_12_Chinese_Cur_Note", note.toString());
         Log.i("Test_12_Chinese_Cur_Note", "Title: " + note.getTitle());
         Log.i("Test_12_Chinese_Cur_Note", "Content: " + note.getContent());
@@ -580,9 +581,9 @@ public class NotesNotesDatabaseTest {
     @Ignore
     public void test_15_getAndModifyCategoryOrderByTitle() {
         // add a note to database
-        Note cloudNote = new Note(1L, Calendar.getInstance(),
+        NoteWithCategory cloudNote = new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
-                true, "CodingDiary", null);
+                true, null), "CodingDiary");
         long noteID = db.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method
@@ -603,9 +604,9 @@ public class NotesNotesDatabaseTest {
     public void test_16_getAndModifyCategoryOrder() {
         // Normal categories
         // add a note to database
-        Note cloudNote = new Note(1L, Calendar.getInstance(),
+        NoteWithCategory cloudNote = new NoteWithCategory(new Note(1L, Calendar.getInstance(),
                 "A Coding Day", "This is a day which is very suitable to code.",
-                true, "CodingDiary", null);
+                true, null), "CodingDiary");
         long noteID = db.addNote(account.getId(), cloudNote);
 
         // check the default value of ordering_method

@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -105,6 +106,7 @@ public class Note implements Serializable {
         this.accountId = accountId;
     }
 
+    @RestrictTo(RestrictTo.Scope.TESTS)
     public Long getCategoryId() {
         return categoryId;
     }

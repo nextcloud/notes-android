@@ -2,6 +2,7 @@ package it.niedermann.owncloud.notes.persistence.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Embedded;
+import androidx.room.Ignore;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -13,6 +14,12 @@ public class NoteWithCategory implements Serializable, Item {
     @Embedded
     private Note note;
     private String category;
+
+    @Ignore
+    public NoteWithCategory(@NonNull Note note, @NonNull String category) {
+        this.note = note;
+        this.category = category;
+    }
 
     public Note getNote() {
         return note;
@@ -32,10 +39,6 @@ public class NoteWithCategory implements Serializable, Item {
 
     public Long getAccountId() {
         return note.getAccountId();
-    }
-
-    public Long getCategoryId() {
-        return note.getCategoryId();
     }
 
     public DBStatus getStatus() {
