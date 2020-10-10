@@ -2,9 +2,9 @@ package it.niedermann.owncloud.notes.edit.category;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +14,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import java.util.List;
 
@@ -41,7 +43,15 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     private NotesDatabase db;
     private CategoryDialogListener listener;
 
+    private CategoryAdapter adapter;
+
     private EditText editCategory;
+
+    private LiveData<List<CategoryWithNotesCount>> categoryLiveData;
+    private Observer<List<CategoryWithNotesCount>> categoryObserver = (categories -> {
+        CharSequence searchTerm = editCategory.getText();
+        adapter.setCategoryList(convertToCategoryNavigationItem(requireContext(), categories), searchTerm == null ? null : searchTerm.toString());
+    });
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
@@ -64,8 +74,6 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
     public static final String PARAM_CATEGORY = "category";
 
     private long accountId;
-
-    private CategoryAdapter adapter;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -122,7 +130,10 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         });
 
         binding.recyclerView.setAdapter(adapter);
-        new LoadCategoriesTask().execute("");
+
+        categoryLiveData = db.getCategoryDao().searchCategories(accountId, "%");
+        categoryLiveData.observe(requireActivity(), categoryObserver);
+
         editCategory.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -136,7 +147,12 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                new LoadCategoriesTask().execute(editCategory.getText().toString());
+                final CharSequence searchTerm = editCategory.getText();
+                if (categoryLiveData != null) {
+                    categoryLiveData.removeObservers(requireActivity());
+                }
+                categoryLiveData = db.getCategoryDao().searchCategories(accountId, TextUtils.isEmpty(searchTerm) ? "%" : "%" + searchTerm + "%");
+                categoryLiveData.observe(requireActivity(), categoryObserver);
             }
         });
 
@@ -168,6 +184,14 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (categoryLiveData != null) {
+            categoryLiveData.removeObservers(requireActivity());
+        }
+    }
+
     public static DialogFragment newInstance(long accountId, String category) {
         final DialogFragment categoryFragment = new CategoryDialogFragment();
         final Bundle arguments = new Bundle();
@@ -175,20 +199,5 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         arguments.putLong(CategoryDialogFragment.PARAM_ACCOUNT_ID, accountId);
         categoryFragment.setArguments(arguments);
         return categoryFragment;
-    }
-
-    private class LoadCategoriesTask extends AsyncTask<String, Void, List<CategoryWithNotesCount>> {
-        String currentSearchString;
-
-        @Override
-        protected List<CategoryWithNotesCount> doInBackground(String... searchText) {
-            currentSearchString = searchText[0];
-            return db.getCategoryDao().searchCategories(accountId, currentSearchString);
-        }
-
-        @Override
-        protected void onPostExecute(List<CategoryWithNotesCount> categories) {
-            adapter.setCategoryList(convertToCategoryNavigationItem(requireContext(), categories), currentSearchString);
-        }
     }
 }

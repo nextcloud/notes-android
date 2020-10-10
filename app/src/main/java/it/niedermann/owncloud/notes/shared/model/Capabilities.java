@@ -109,13 +109,13 @@ public class Capabilities {
         return textColor;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "Capabilities{" +
                 "apiVersion='" + apiVersion + '\'' +
-                ", color='" + color + '\'' +
-                ", textColor='" + textColor + '\'' +
+                ", color=" + color +
+                ", textColor=" + textColor +
+                ", eTag='" + eTag + '\'' +
                 '}';
     }
 }

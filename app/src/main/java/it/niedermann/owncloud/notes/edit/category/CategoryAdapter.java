@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -101,7 +102,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    void setCategoryList(List<NavigationItem.CategoryNavigationItem> categories, String currentSearchString) {
+    void setCategoryList(List<NavigationItem.CategoryNavigationItem> categories, @Nullable String currentSearchString) {
         this.categories.clear();
         this.categories.addAll(categories);
         final NavigationItem clearItem = new NavigationItem(clearItemId, context.getString(R.string.no_category), 0, R.drawable.ic_clear_grey_24dp);

@@ -234,25 +234,26 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_05_searchCategories() {
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "Dia"));
-        boolean exitFlag = false;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_05_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if (categoryItem.label.equals("Diary")) {
-                exitFlag = true;
-            }
-        }
-        assertTrue(exitFlag);
-
-        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "Mike Chester Wang"));
-        exitFlag = false;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_05_searchCategories_Item_Mike_Chester_Wang", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if (categoryItem.label.equals("Diary")) {
-                exitFlag = true;
-            }
-        }
-        assertFalse(exitFlag);
+        // TODO LiveData
+//        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "Dia"));
+//        boolean exitFlag = false;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_05_searchCategories_Dia", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            if (categoryItem.label.equals("Diary")) {
+//                exitFlag = true;
+//            }
+//        }
+//        assertTrue(exitFlag);
+//
+//        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "Mike Chester Wang"));
+//        exitFlag = false;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_05_searchCategories_Item_Mike_Chester_Wang", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            if (categoryItem.label.equals("Diary")) {
+//                exitFlag = true;
+//            }
+//        }
+//        assertFalse(exitFlag);
     }
 
     @Test
@@ -385,52 +386,53 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_10_multiSearchCategories() {
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "M"));
-        int count = 0;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            count++;
-        }
-        assertEquals(3, count);
-
-        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "Mike"));
-        count = 0;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            count++;
-        }
-        assertEquals(0, count);
-
-        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "M"));
-        boolean exitFlag = false;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if (categoryItem.label.equals("Music")) {
-                exitFlag = true;
-            }
-        }
-        assertTrue(exitFlag);
-
-
-        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "WOk"));
-        exitFlag = false;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if (categoryItem.label.equals("Diary")) {
-                exitFlag = true;
-            }
-        }
-        assertFalse(exitFlag);
-
-        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "hello"));
-        exitFlag = false;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if (categoryItem.label.equals("Diary")) {
-                exitFlag = true;
-            }
-        }
-        assertFalse(exitFlag);
+        // TODO LiveData
+//        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "M"));
+//        int count = 0;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            count++;
+//        }
+//        assertEquals(3, count);
+//
+//        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "Mike"));
+//        count = 0;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            count++;
+//        }
+//        assertEquals(0, count);
+//
+//        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "M"));
+//        boolean exitFlag = false;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            if (categoryItem.label.equals("Music")) {
+//                exitFlag = true;
+//            }
+//        }
+//        assertTrue(exitFlag);
+//
+//
+//        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "WOk"));
+//        exitFlag = false;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            if (categoryItem.label.equals("Diary")) {
+//                exitFlag = true;
+//            }
+//        }
+//        assertFalse(exitFlag);
+//
+//        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "hello"));
+//        exitFlag = false;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_10_multiSearchCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            if (categoryItem.label.equals("Diary")) {
+//                exitFlag = true;
+//            }
+//        }
+//        assertFalse(exitFlag);
     }
 
     @Test
@@ -455,78 +457,79 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_12_Chinese() {
-        long accountID = account.getId();
-        NoteWithCategory cloudNote = new NoteWithCategory(new Note(1L, Calendar.getInstance(),
-                "美好的一天", getCurDate() + " 兄弟，这真是美好的一天。",
-                true, null), "日记");
-
-        // Pre-check
-        List<Note> notes = db.getNoteDao().getNotes(accountID);
-        int pre_size = notes.size();
-        Log.i("Test_12_Chinese_All_Notes_Before_Addition", "Size: " + pre_size);
-
-        // Add a new note
-        long noteID = db.addNote(accountID, cloudNote);
-        // Check if this note is added successfully
-        NoteWithCategory note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
-        Log.i("Test_12_Chinese_Cur_Note", note.toString());
-        Log.i("Test_12_Chinese_Cur_Note", "Title: " + note.getTitle());
-        Log.i("Test_12_Chinese_Cur_Note", "Content: " + note.getContent());
-        Log.i("Test_12_Chinese_Cur_Note", "Category: " + note.getCategory());
-
-        assertEquals("美好的一天", note.getTitle());
-        assertEquals(cloudNote.getContent(), note.getContent());
-        assertEquals("日记", note.getCategory());
-        assertEquals(accountID, note.getAccountId().longValue());
-
-        // Check if this note is in all notes
-        notes = db.getNoteDao().getNotes(accountID);
-        int added_size = notes.size();
-
-        assertEquals(1, added_size - pre_size);
-
-        Log.i("Test_12_Chinese_All_Notes_Added", "Size: " + added_size);
-        for (Note cnote : notes) {
-            Log.i("Test_12_Chinese_All_Notes_Added", cnote.toString());
-        }
-
-        long thisAccountID = account.getId();
-        notes = db.getNoteDao().searchNotes(thisAccountID, "美好", "日记", true, null);
-        Log.i("Test_12_Chinese", "Size: " + notes.size());
-        assertEquals(1, notes.size());
-
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
-        boolean exitFlag = false;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if (categoryItem.label.equals("日记")) {
-                exitFlag = true;
-            }
-        }
-        assertTrue(exitFlag);
-
-        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "记"));
-        exitFlag = false;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if (categoryItem.label.equals("日记")) {
-                exitFlag = true;
-            }
-        }
-        assertTrue(exitFlag);
-
-        notes = db.getNoteDao().getNotes(thisAccountID);
-        for (Note cnote : notes) {
-            Log.i("Test_12_Chinese_All_Before_Deletion", cnote.toString());
-            // Delete the note after testing
-            db.deleteNote(cnote.getId(), cnote.getStatus());
-        }
-
-        // Check if the note is deleted successfully
-        notes = db.getNoteDao().getNotes(thisAccountID);
-        int deleted_size = notes.size();
-        assertEquals(1, added_size - deleted_size);
-        Log.i("Test_12_Chinese_All_Notes_After_Deletion", "Size: " + deleted_size);
+        // TODO LiveData
+//        long accountID = account.getId();
+//        NoteWithCategory cloudNote = new NoteWithCategory(new Note(1L, Calendar.getInstance(),
+//                "美好的一天", getCurDate() + " 兄弟，这真是美好的一天。",
+//                true, null), "日记");
+//
+//        // Pre-check
+//        List<Note> notes = db.getNoteDao().getNotes(accountID);
+//        int pre_size = notes.size();
+//        Log.i("Test_12_Chinese_All_Notes_Before_Addition", "Size: " + pre_size);
+//
+//        // Add a new note
+//        long noteID = db.addNote(accountID, cloudNote);
+//        // Check if this note is added successfully
+//        NoteWithCategory note = db.getNoteDao().getNoteWithCategory(accountID, noteID);
+//        Log.i("Test_12_Chinese_Cur_Note", note.toString());
+//        Log.i("Test_12_Chinese_Cur_Note", "Title: " + note.getTitle());
+//        Log.i("Test_12_Chinese_Cur_Note", "Content: " + note.getContent());
+//        Log.i("Test_12_Chinese_Cur_Note", "Category: " + note.getCategory());
+//
+//        assertEquals("美好的一天", note.getTitle());
+//        assertEquals(cloudNote.getContent(), note.getContent());
+//        assertEquals("日记", note.getCategory());
+//        assertEquals(accountID, note.getAccountId().longValue());
+//
+//        // Check if this note is in all notes
+//        notes = db.getNoteDao().getNotes(accountID);
+//        int added_size = notes.size();
+//
+//        assertEquals(1, added_size - pre_size);
+//
+//        Log.i("Test_12_Chinese_All_Notes_Added", "Size: " + added_size);
+//        for (Note cnote : notes) {
+//            Log.i("Test_12_Chinese_All_Notes_Added", cnote.toString());
+//        }
+//
+//        long thisAccountID = account.getId();
+//        notes = db.getNoteDao().searchNotes(thisAccountID, "美好", "日记", true, null);
+//        Log.i("Test_12_Chinese", "Size: " + notes.size());
+//        assertEquals(1, notes.size());
+//
+//        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
+//        boolean exitFlag = false;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            if (categoryItem.label.equals("日记")) {
+//                exitFlag = true;
+//            }
+//        }
+//        assertTrue(exitFlag);
+//
+//        categories = convertToCategoryNavigationItem(context, db.getCategoryDao().searchCategories(account.getId(), "记"));
+//        exitFlag = false;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_12_Chinese_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            if (categoryItem.label.equals("日记")) {
+//                exitFlag = true;
+//            }
+//        }
+//        assertTrue(exitFlag);
+//
+//        notes = db.getNoteDao().getNotes(thisAccountID);
+//        for (Note cnote : notes) {
+//            Log.i("Test_12_Chinese_All_Before_Deletion", cnote.toString());
+//            // Delete the note after testing
+//            db.deleteNote(cnote.getId(), cnote.getStatus());
+//        }
+//
+//        // Check if the note is deleted successfully
+//        notes = db.getNoteDao().getNotes(thisAccountID);
+//        int deleted_size = notes.size();
+//        assertEquals(1, added_size - deleted_size);
+//        Log.i("Test_12_Chinese_All_Notes_After_Deletion", "Size: " + deleted_size);
     }
 
     @Test
