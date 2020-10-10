@@ -36,8 +36,6 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final NotesListWidgetData data;
     private final boolean darkTheme;
     private NotesDatabase db;
-    private LiveData<List<NoteWithCategory>> noteEntitiesLiveData;
-    private Observer<List<NoteWithCategory>> noteEntitiesObserver = (notes) -> this.noteEntities = notes;
     private List<NoteWithCategory> noteEntities;
 
     NoteListWidgetFactory(Context context, Intent intent) {
@@ -53,9 +51,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onCreate() {
-        if (noteEntitiesLiveData != null) {
-            noteEntitiesLiveData.removeObserver(noteEntitiesObserver);
-        }
+        final LiveData<List<NoteWithCategory>> noteEntitiesLiveData;
         try {
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
@@ -66,18 +62,18 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                     noteEntitiesLiveData = db.getNoteDao().searchFavorites(data.getAccountId(), "%", CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
                     break;
                 case MODE_DISPLAY_CATEGORY:
+                default:
                     if (data.getCategoryId() != null) {
-                        // FIXME
                         noteEntitiesLiveData = db.getNoteDao().searchByCategory(data.getAccountId(), "%", db.getCategoryDao().getCategoryTitleById(data.getCategoryId()), CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
                     } else {
                         noteEntitiesLiveData = db.getNoteDao().searchUncategorized(data.getAccountId(), "%", CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
                     }
                     break;
             }
+            noteEntitiesLiveData.observeForever((notes) -> noteEntities = notes);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-        noteEntitiesLiveData.observeForever(noteEntitiesObserver);
     }
 
     @Override
