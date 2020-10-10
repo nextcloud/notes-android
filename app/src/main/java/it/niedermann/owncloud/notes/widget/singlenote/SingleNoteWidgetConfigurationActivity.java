@@ -57,8 +57,8 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
             db.getWidgetSingleNoteDao().createOrUpdateSingleNoteWidgetData(
                     new SingleNoteWidgetData(
                             appWidgetId,
-                            note.getNote().getAccountId(),
-                            note.getNote().getId(),
+                            note.getAccountId(),
+                            note.getId(),
                             NotesApplication.getAppTheme(this).getModeId()
                     )
             );

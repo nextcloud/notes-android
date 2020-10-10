@@ -729,7 +729,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         } else {
             NoteWithCategory note = (NoteWithCategory) adapter.getItem(position);
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
-            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getNote().getId());
+            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
             startActivityForResult(intent, show_single_note_cmd);
         }
     }
@@ -738,7 +738,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     public void onNoteFavoriteClick(int position, View view) {
         NoteWithCategory note = (NoteWithCategory) adapter.getItem(position);
         NotesDatabase db = NotesDatabase.getInstance(view.getContext());
-        db.toggleFavoriteAndSync(ssoAccount, note.getNote().getId(), syncCallBack);
+        db.toggleFavoriteAndSync(ssoAccount, note.getId(), syncCallBack);
         adapter.notifyItemChanged(position);
     }
 
@@ -833,7 +833,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         adapter.deselect(0);
         for (Integer i : selection) {
             NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
-            db.moveNoteToAnotherAccount(ssoAccount, note.getNote().getAccountId(), db.getNoteDao().getNoteWithCategory(note.getNote().getAccountId(), note.getNote().getId()).getNote(), account.getId());
+            db.moveNoteToAnotherAccount(ssoAccount, db.getNoteDao().getNoteWithCategory(note.getAccountId(), note.getId()), account.getId());
             RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);
@@ -849,7 +849,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     public void onCategoryChosen(String category) {
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
             NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
-            db.setCategory(ssoAccount, localAccount.getId(), note.getNote().getId(), category, () -> {
+            db.setCategory(ssoAccount, localAccount.getId(), note.getId(), category, () -> {
             });
         }
 

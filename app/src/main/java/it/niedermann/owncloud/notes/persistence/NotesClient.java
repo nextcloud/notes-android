@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NotesResponse;
@@ -90,9 +91,9 @@ public abstract class NotesClient {
 
     abstract NotesResponse getNotes(SingleSignOnAccount ssoAccount, long lastModified, String lastETag) throws Exception;
 
-    abstract NoteResponse createNote(SingleSignOnAccount ssoAccount, Note note) throws Exception;
+    abstract NoteResponse createNote(SingleSignOnAccount ssoAccount, NoteWithCategory note) throws Exception;
 
-    abstract NoteResponse editNote(SingleSignOnAccount ssoAccount, Note note) throws Exception;
+    abstract NoteResponse editNote(SingleSignOnAccount ssoAccount, NoteWithCategory note) throws Exception;
 
     abstract void deleteNote(SingleSignOnAccount ssoAccount, long noteId) throws Exception;
 

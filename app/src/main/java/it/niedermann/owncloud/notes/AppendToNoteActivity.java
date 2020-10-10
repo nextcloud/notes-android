@@ -36,8 +36,8 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     public void onNoteClick(int position, View v) {
         if (receivedText != null && receivedText.length() > 0) {
-            final NoteWithCategory note = db.getNoteDao().getNoteWithCategory(localAccount.getId(), ((NoteWithCategory) adapter.getItem(position)).getNote().getId());
-            final String oldContent = note.getNote().getContent();
+            final NoteWithCategory note = db.getNoteDao().getNoteWithCategory(localAccount.getId(), ((NoteWithCategory) adapter.getItem(position)).getId());
+            final String oldContent = note.getContent();
             String newContent;
             if (oldContent != null && oldContent.length() > 0) {
                 newContent = oldContent + "\n\n" + receivedText;

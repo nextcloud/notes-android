@@ -38,12 +38,14 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
+import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
@@ -358,11 +360,11 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pushLocalChanges()");
 
             boolean success = true;
-            List<Note> notes = db.getNoteDao().getLocalModifiedNotes(localAccount.getId());
-            for (Note note : notes) {
+            List<NoteWithCategory> notes = db.getNoteDao().getLocalModifiedNotes(localAccount.getId());
+            for (NoteWithCategory note : notes) {
                 Log.d(TAG, "   Process Local Note: " + note);
                 try {
-                    Note remoteNote;
+                    NoteWithCategory remoteNote;
                     switch (note.getStatus()) {
                         case LOCAL_EDITED:
                             Log.v(TAG, "   ...create/edit");
@@ -432,10 +434,10 @@ public class NoteServerSyncHelper {
             try {
                 final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
                 final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified().getTimeInMillis(), localAccount.getETag());
-                List<Note> remoteNotes = response.getNotes();
+                List<NoteWithCategory> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
-                for (Note remoteNote : remoteNotes) {
+                for (NoteWithCategory remoteNote : remoteNotes) {
                     Log.v(TAG, "   Process Remote Note: " + remoteNote);
                     remoteIDs.add(remoteNote.getRemoteId());
                     if (remoteNote.getModified() == null) {

@@ -153,7 +153,9 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param note Note
      */
     public long addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteWithCategory note) {
-        Note entity = new Note(0, null, note.getNote().getModified(), note.getNote().getTitle(), note.getNote().getContent(), note.getNote().getFavorite(), note.getCategory(), note.getNote().getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getNote().getContent(), note.getNote().getTitle()), 0);
+        NoteWithCategory entity = new NoteWithCategory();
+        entity.setNote(new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0));
+        entity.setCategory(note.getCategory());
         long id = addNote(accountId, entity);
         notifyWidgets();
         serverSyncHelper.scheduleSync(ssoAccount, true);
@@ -166,7 +168,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      *
      * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type {@link Note} (with {@link DBStatus#LOCAL_EDITED})!
      */
-    long addNote(long accountId, Note note) {
+    long addNote(long accountId, NoteWithCategory note) {
         Note entity = new Note();
         if (note.getId() != null) {
             if (note.getId() > 0) {
@@ -192,10 +194,11 @@ public abstract class NotesDatabase extends RoomDatabase {
         return getNoteDao().addNote(entity);
     }
 
-    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, long oldAccountId, Note note, long newAccountId) {
+    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, NoteWithCategory note, long newAccountId) {
         // Add new note
         NoteWithCategory noteWithCategory = new NoteWithCategory();
-        noteWithCategory.setNote(new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getCategory(), null));
+        noteWithCategory.setNote(new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), null));
+        noteWithCategory.setCategory(note.getCategory());
         addNoteAndSync(ssoAccount, newAccountId, noteWithCategory);
         deleteNoteAndSync(ssoAccount, note.getId());
 
@@ -257,21 +260,23 @@ public abstract class NotesDatabase extends RoomDatabase {
     public NoteWithCategory updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull Account localAccount, @NonNull NoteWithCategory oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         NoteWithCategory newNote = new NoteWithCategory();
         if (newContent == null) {
-            newNote.setNote(new Note(oldNote.getNote().getId(), oldNote.getNote().getRemoteId(), oldNote.getNote().getModified(), oldNote.getNote().getTitle(), oldNote.getNote().getContent(), oldNote.getNote().getFavorite(), oldNote.getCategory(), oldNote.getNote().getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getNote().getExcerpt(), oldNote.getNote().getScrollY()));
+            newNote.setNote(new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY()));
+            newNote.setCategory(oldNote.getCategory());
         } else {
             final String title;
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if (oldNote.getNote().getRemoteId() == null || oldNote.getNote().getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
+                if (oldNote.getRemoteId() == null || oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
                 } else {
-                    title = oldNote.getNote().getTitle();
+                    title = oldNote.getTitle();
                 }
             }
-            newNote.setNote(new Note(oldNote.getNote().getId(), oldNote.getNote().getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getNote().getFavorite(), oldNote.getCategory(), oldNote.getNote().getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getNote().getScrollY()));
+            newNote.setNote(new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY()));
+            newNote.setCategory(oldNote.getCategory());
         }
-        newNote.getNote().setCategoryId(getOrCreateCategoryIdByTitle(newNote.getNote().getAccountId(), newNote.getCategory()));
+        newNote.getNote().setCategoryId(getOrCreateCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory()));
         int rows = getNoteDao().updateNote(newNote.getNote());
         getCategoryDao().removeEmptyCategory(localAccount.getId());
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
@@ -565,7 +570,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param remoteNote                Note from the server.
      * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
      */
-    void updateNote(long accountId, long id, @NonNull Note remoteNote, @Nullable Note forceUnchangedDBNoteState) {
+    void updateNote(long accountId, long id, @NonNull NoteWithCategory remoteNote, @Nullable NoteWithCategory forceUnchangedDBNoteState) {
         validateAccountId(accountId);
         // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
         getNoteDao().updateRemoteId(id, remoteNote.getRemoteId());

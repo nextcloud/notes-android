@@ -104,24 +104,24 @@ public class MultiSelectedActionModeCallback implements Callback {
                     List<Integer> selection = adapter.getSelected();
                     for (Integer i : selection) {
                         NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
-                        deletedNotes.add(db.getNoteDao().getNoteWithCategory(note.getNote().getAccountId(), note.getNote().getId()));
-                        db.deleteNoteAndSync(ssoAccount, note.getNote().getId());
+                        deletedNotes.add(db.getNoteDao().getNoteWithCategory(note.getAccountId(), note.getId()));
+                        db.deleteNoteAndSync(ssoAccount, note.getId());
                     }
                     mode.finish(); // Action picked, so close the CAB
                     //after delete selection has to be cleared
                     searchView.setIconified(true);
                     String deletedSnackbarTitle = deletedNotes.size() == 1
-                            ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getNote().getTitle())
+                            ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
                             : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, deletedNotes.size(), deletedNotes.size());
                     BrandedSnackbar.make(viewProvider.getView(), deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                             .setAction(R.string.action_undo, (View v) -> {
                                 db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, () -> {
                                 });
                                 for (NoteWithCategory deletedNote : deletedNotes) {
-                                    db.addNoteAndSync(ssoAccount, deletedNote.getNote().getAccountId(), deletedNote);
+                                    db.addNoteAndSync(ssoAccount, deletedNote.getAccountId(), deletedNote);
                                 }
                                 String restoreSnackbarTitle = deletedNotes.size() == 1
-                                        ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getNote().getTitle())
+                                        ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
                                         : context.getResources().getQuantityString(R.plurals.bulk_notes_restored, deletedNotes.size(), deletedNotes.size());
                                 BrandedSnackbar.make(viewProvider.getView(), restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
                                         .show();
@@ -138,12 +138,12 @@ public class MultiSelectedActionModeCallback implements Callback {
                 return true;
             case R.id.menu_share:
                 final String subject = (adapter.getSelected().size() == 1)
-                        ? ((NoteWithCategory) adapter.getItem(adapter.getSelected().get(0))).getNote().getTitle()
+                        ? ((NoteWithCategory) adapter.getItem(adapter.getSelected().get(0))).getTitle()
                         : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
                 final StringBuilder noteContents = new StringBuilder();
                 for (Integer i : adapter.getSelected()) {
                     final NoteWithCategory noteWithoutContent = (NoteWithCategory) adapter.getItem(i);
-                    final String tempFullNote = db.getNoteDao().getNoteWithCategory(noteWithoutContent.getNote().getAccountId(), noteWithoutContent.getNote().getId()).getNote().getContent();
+                    final String tempFullNote = db.getNoteDao().getNoteWithCategory(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
                     if (!TextUtils.isEmpty(tempFullNote)) {
                         if (noteContents.length() > 0) {
                             noteContents.append("\n\n");

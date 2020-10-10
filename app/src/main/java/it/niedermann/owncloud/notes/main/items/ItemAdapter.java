@@ -226,8 +226,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         }
         if (getItem(position).isSection()) return TYPE_SECTION;
         NoteWithCategory note = (NoteWithCategory) getItem(position);
-        if (TextUtils.isEmpty(note.getNote().getExcerpt())) {
-            if (TextUtils.isEmpty(note.getNote().getCategory())) {
+        if (TextUtils.isEmpty(note.getExcerpt())) {
+            if (TextUtils.isEmpty(note.getCategory())) {
                 return TYPE_NOTE_ONLY_TITLE;
             } else {
                 return TYPE_NOTE_WITHOUT_EXCERPT;

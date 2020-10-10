@@ -58,7 +58,7 @@ public class SlotterUtil {
         String lastInitials = null;
         for (int i = 0; i < noteList.size(); i++) {
             NoteWithCategory currentNote = noteList.get(i);
-            String initials = currentNote.getNote().getTitle().substring(0, 1).toUpperCase();
+            String initials = currentNote.getTitle().substring(0, 1).toUpperCase();
             if (!initials.matches("[A-Z\\u00C0-\\u00DF]")) {
                 initials = initials.matches("[\\u0250-\\uFFFF]") ? context.getString(R.string.simple_other) : "#";
             }

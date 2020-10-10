@@ -102,8 +102,8 @@ public interface NoteDao {
      *
      * @return {@link List<Note>}
      */
-    @Query("SELECT * FROM NOTE WHERE status != '' AND accountId = :accountId")
-    List<Note> getLocalModifiedNotes(long accountId);
+    @Query("SELECT NOTE.*, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE status != '' AND NOTE.accountId = :accountId")
+    List<NoteWithCategory> getLocalModifiedNotes(long accountId);
 
     @Query("SELECT * FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId ORDER BY modified DESC LIMIT 4")
     List<Note> getRecentNotes(long accountId);

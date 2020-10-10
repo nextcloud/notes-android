@@ -56,27 +56,24 @@ public class Note implements Serializable {
     private String excerpt = "";
     @ColumnInfo(defaultValue = "0")
     private Integer scrollY = 0;
-    @Ignore
-    private String category = "";
 
     public Note() {
         super();
     }
 
     @Ignore
-    public Note(Long remoteId, Calendar modified, String title, String content, Boolean favorite, String category, String eTag) {
+    public Note(Long remoteId, Calendar modified, String title, String content, Boolean favorite, String eTag) {
         this.remoteId = remoteId;
         this.title = title;
         this.modified = modified;
         this.content = content;
         this.favorite = favorite;
         this.eTag = eTag;
-        this.category = category;
     }
 
     @Ignore
-    public Note(long id, Long remoteId, Calendar modified, String title, String content, boolean favorite, String category, String etag, DBStatus status, long accountId, @NonNull String excerpt, Integer scrollY) {
-        this(remoteId, modified, title, content, favorite, category, etag);
+    public Note(long id, Long remoteId, Calendar modified, String title, String content, boolean favorite, String etag, DBStatus status, long accountId, @NonNull String excerpt, Integer scrollY) {
+        this(remoteId, modified, title, content, favorite, etag);
         this.id = id;
         this.status = status;
         this.accountId = accountId;
@@ -179,14 +176,6 @@ public class Note implements Serializable {
 
     public void setScrollY(Integer scrollY) {
         this.scrollY = scrollY;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     @NonNull

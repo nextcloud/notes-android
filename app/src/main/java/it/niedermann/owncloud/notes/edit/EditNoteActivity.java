@@ -186,7 +186,9 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (content == null) {
             content = "";
         }
-        Note newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, categoryTitle, null);
+        NoteWithCategory newNote = new NoteWithCategory();
+        newNote.setNote(new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, null));
+        newNote.setCategory(categoryTitle);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
@@ -260,7 +262,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     @Override
     public void onNoteUpdated(NoteWithCategory note) {
         if (note != null) {
-            binding.toolbar.setTitle(note.getNote().getTitle());
+            binding.toolbar.setTitle(note.getTitle());
             if (TextUtils.isEmpty(note.getCategory())) {
                 binding.toolbar.setSubtitle(null);
             } else {

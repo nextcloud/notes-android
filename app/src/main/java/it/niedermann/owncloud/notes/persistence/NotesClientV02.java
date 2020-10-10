@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NotesResponse;
 
@@ -31,7 +32,7 @@ public class NotesClientV02 extends NotesClient {
         return new NotesResponse(requestServer(ssoAccount, "notes", METHOD_GET, parameter, null, lastETag));
     }
 
-    private NoteResponse putNote(SingleSignOnAccount ssoAccount, Note note, String path, String method) throws Exception {
+    private NoteResponse putNote(SingleSignOnAccount ssoAccount, NoteWithCategory note, String path, String method) throws Exception {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_CONTENT, note.getContent());
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
@@ -41,12 +42,12 @@ public class NotesClientV02 extends NotesClient {
     }
 
     @Override
-    NoteResponse createNote(SingleSignOnAccount ssoAccount, Note note) throws Exception {
+    NoteResponse createNote(SingleSignOnAccount ssoAccount, NoteWithCategory note) throws Exception {
         return putNote(ssoAccount, note, "notes", METHOD_POST);
     }
 
     @Override
-    NoteResponse editNote(SingleSignOnAccount ssoAccount, Note note) throws Exception {
+    NoteResponse editNote(SingleSignOnAccount ssoAccount, NoteWithCategory note) throws Exception {
         return putNote(ssoAccount, note, "notes/" + note.getRemoteId(), METHOD_PUT);
     }
 

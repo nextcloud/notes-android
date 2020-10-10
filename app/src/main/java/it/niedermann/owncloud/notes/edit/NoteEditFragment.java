@@ -35,6 +35,7 @@ import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.edit.format.ContextBasedFormattingCallback;
 import it.niedermann.owncloud.notes.edit.format.ContextBasedRangeFormattingCallback;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 
@@ -78,7 +79,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         return f;
     }
 
-    public static NoteEditFragment newInstanceWithNewNote(Note newNote) {
+    public static NoteEditFragment newInstanceWithNewNote(NoteWithCategory newNote) {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
         b.putSerializable(PARAM_NEWNOTE, newNote);
@@ -144,7 +145,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         };
 
         if (note != null) {
-            if (note.getNote().getContent().isEmpty()) {
+            if (note.getContent().isEmpty()) {
                 binding.editContent.requestFocus();
 
                 requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
@@ -158,9 +159,9 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
             }
 
             // workaround for issue yydcdut/RxMarkdown#41
-            note.getNote().setContent(note.getNote().getContent().replace("\r\n", "\n"));
+            note.getNote().setContent(note.getContent().replace("\r\n", "\n"));
 
-            binding.editContent.setText(note.getNote().getContent());
+            binding.editContent.setText(note.getContent());
             binding.editContent.setEnabled(true);
 
             final MarkdownProcessor markdownProcessor = new MarkdownProcessor(requireContext());

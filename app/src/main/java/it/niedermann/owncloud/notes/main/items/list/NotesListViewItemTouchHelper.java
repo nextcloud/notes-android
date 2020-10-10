@@ -74,19 +74,19 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
                         final NoteWithCategory dbNoteWithoutContent = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
-                        final NoteWithCategory dbNote = db.getNoteDao().getNoteWithCategory(dbNoteWithoutContent.getNote().getAccountId(), dbNoteWithoutContent.getNote().getId());
-                        db.deleteNoteAndSync(ssoAccount, dbNote.getNote().getId());
+                        final NoteWithCategory dbNote = db.getNoteDao().getNoteWithCategory(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
+                        db.deleteNoteAndSync(ssoAccount, dbNote.getId());
 //                        FIXME
 //                        adapter.remove(dbNote);
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         if (viewProvider == null) {
-                            Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getNote().getTitle()), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
                         } else {
-                            BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getNote().getTitle()), UNDO_DURATION)
+                            BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
                                         db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, () -> {});
-                                        db.addNoteAndSync(ssoAccount, dbNote.getNote().getAccountId(), dbNote);
-                                        BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getNote().getTitle()), Snackbar.LENGTH_SHORT)
+                                        db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
+                                        BrandedSnackbar.make(viewProvider.getView(), context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
                                     })
                                     .show();
@@ -94,7 +94,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         break;
                     case ItemTouchHelper.RIGHT:
                         final NoteWithCategory adapterNote = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.toggleFavoriteAndSync(ssoAccount, adapterNote.getNote().getId(), syncCallBack);
+                        db.toggleFavoriteAndSync(ssoAccount, adapterNote.getId(), syncCallBack);
                         break;
                     default:
                         //NoOp
