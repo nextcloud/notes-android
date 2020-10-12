@@ -13,7 +13,7 @@ import android.widget.EditText;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 
-import static it.niedermann.owncloud.notes.shared.util.ClipboardUtil.getClipboardURLorNull;
+import static it.niedermann.android.util.ClipboardUtil.getClipboardURLorNull;
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.CHECKBOX_UNCHECKED_MINUS_TRAILING_SPACE;
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.getEndOfLine;
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.getStartOfLine;

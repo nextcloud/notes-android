@@ -16,7 +16,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.DialogExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
 
-import static it.niedermann.owncloud.notes.shared.util.ClipboardUtil.copyToClipboard;
+import static it.niedermann.android.util.ClipboardUtil.copyToClipboard;
 
 public class ExceptionDialogFragment extends AppCompatDialogFragment {
 
