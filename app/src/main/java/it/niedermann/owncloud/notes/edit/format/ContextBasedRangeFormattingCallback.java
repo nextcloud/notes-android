@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 import it.niedermann.owncloud.notes.R;
 
-import static it.niedermann.owncloud.notes.shared.util.ClipboardUtil.getClipboardURLorNull;
+import static it.niedermann.android.util.ClipboardUtil.getClipboardURLorNull;
 
 public class ContextBasedRangeFormattingCallback implements ActionMode.Callback {
 
