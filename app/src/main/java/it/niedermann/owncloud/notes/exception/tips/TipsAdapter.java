@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,9 +37,9 @@ import static it.niedermann.owncloud.notes.exception.ExceptionDialogFragment.INT
 public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
 
     @NonNull
-    private Consumer<Intent> actionButtonClickedListener;
+    private final Consumer<Intent> actionButtonClickedListener;
     @NonNull
-    private List<TipsModel> tips = new LinkedList<>();
+    private final List<TipsModel> tips = new LinkedList<>();
 
     public TipsAdapter(@NonNull Consumer<Intent> actionButtonClickedListener) {
         this.actionButtonClickedListener = actionButtonClickedListener;

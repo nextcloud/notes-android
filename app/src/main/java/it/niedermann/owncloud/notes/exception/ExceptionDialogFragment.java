@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 
+import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.DialogExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
@@ -24,7 +25,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
     public static final String INTENT_EXTRA_BUTTON_TEXT = "button_text";
 
     @NonNull
-    private ArrayList<Throwable> throwables = new ArrayList<>();
+    private final ArrayList<Throwable> throwables = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {

@@ -1,61 +1,62 @@
 package it.niedermann.owncloud.notes.exception;
 
-import android.annotation.SuppressLint;
-import android.content.ClipData;
-import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Collections;
-import java.util.Objects;
 
+import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ActivityExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
 
-import static it.niedermann.owncloud.notes.exception.ExceptionHandler.KEY_THROWABLE;
+import static it.niedermann.android.util.ClipboardUtil.copyToClipboard;
 
 
 public class ExceptionActivity extends AppCompatActivity {
 
-    private ActivityExceptionBinding binding;
+    private static final String KEY_THROWABLE = "throwable";
 
-    @SuppressLint("SetTextI18n") // only used for logging
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityExceptionBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        final ActivityExceptionBinding binding = ActivityExceptionBinding.inflate(getLayoutInflater());
 
-        binding.copy.setOnClickListener((v) -> copyStacktraceToClipboard());
-        binding.close.setOnClickListener((v) -> close());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
+
+        Throwable throwable = ((Throwable) getIntent().getSerializableExtra(KEY_THROWABLE));
+
+        if (throwable == null) {
+            throwable = new Exception("Could not get exception");
+        }
 
         final TipsAdapter adapter = new TipsAdapter(this::startActivity);
+        final String debugInfos = ExceptionUtil.getDebugInfos(this, throwable);
+
         binding.tips.setAdapter(adapter);
         binding.tips.setNestedScrollingEnabled(false);
-
-        setSupportActionBar(binding.toolbar);
-        Throwable throwable = (Throwable) Objects.requireNonNull(getIntent().getSerializableExtra(KEY_THROWABLE));
-        throwable.printStackTrace();
         binding.toolbar.setTitle(getString(R.string.simple_error));
         binding.message.setText(throwable.getMessage());
-        binding.stacktrace.setText(ExceptionUtil.getDebugInfos(this, throwable));
+        binding.stacktrace.setText(debugInfos);
+        binding.copy.setOnClickListener((v) -> copyToClipboard(this, getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"));
+        binding.close.setOnClickListener((v) -> finish());
+
         adapter.setThrowables(Collections.singletonList(throwable));
     }
 
-
-    private void copyStacktraceToClipboard() {
-        final ClipboardManager clipboardManager = (ClipboardManager) Objects.requireNonNull(getSystemService(CLIPBOARD_SERVICE));
-        ClipData clipData = ClipData.newPlainText(getString(R.string.simple_exception), "```\n" + binding.stacktrace.getText() + "\n```");
-        clipboardManager.setPrimaryClip(clipData);
-        Toast.makeText(this, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show();
-    }
-
-    private void close() {
-        finish();
+    @NonNull
+    public static Intent createIntent(@NonNull Context context, Throwable throwable) {
+        final Bundle args = new Bundle();
+        args.putSerializable(KEY_THROWABLE, throwable);
+        return new Intent(context, ExceptionActivity.class)
+                .putExtras(args)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
     }
 }

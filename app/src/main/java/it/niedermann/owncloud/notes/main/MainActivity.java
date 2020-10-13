@@ -165,7 +165,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
         activityBinding = ActivityNotesListViewBinding.bind(binding.activityNotesListView.getRoot());
 
         setContentView(binding.getRoot());
-
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
         this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         this.fabCreate = binding.activityNotesListView.fabCreate;
