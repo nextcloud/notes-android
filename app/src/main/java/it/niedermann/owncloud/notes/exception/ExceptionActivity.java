@@ -39,7 +39,7 @@ public class ExceptionActivity extends AppCompatActivity {
         }
 
         final TipsAdapter adapter = new TipsAdapter(this::startActivity);
-        final String debugInfos = ExceptionUtil.getDebugInfos(this, throwable, BuildConfig.FLAVOR);
+        final String debugInfos = ExceptionUtil.INSTANCE.getDebugInfos(this, throwable, BuildConfig.FLAVOR);
 
         binding.tips.setAdapter(adapter);
         binding.tips.setNestedScrollingEnabled(false);
