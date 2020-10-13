@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Collections;
 
 import it.niedermann.nextcloud.exception.ExceptionUtil;
+import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ActivityExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
@@ -38,7 +39,7 @@ public class ExceptionActivity extends AppCompatActivity {
         }
 
         final TipsAdapter adapter = new TipsAdapter(this::startActivity);
-        final String debugInfos = ExceptionUtil.getDebugInfos(this, throwable);
+        final String debugInfos = ExceptionUtil.getDebugInfos(this, throwable, BuildConfig.FLAVOR);
 
         binding.tips.setAdapter(adapter);
         binding.tips.setNestedScrollingEnabled(false);
