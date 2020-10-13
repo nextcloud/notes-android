@@ -97,7 +97,11 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                             data.setMode(MODE_DISPLAY_STARRED);
                             break;
                         }
-                        case UNCATEGORIZED:
+                        case UNCATEGORIZED: {
+                            data.setMode(MODE_DISPLAY_CATEGORY);
+                            data.setCategoryId(null);
+                        }
+                        case DEFAULT_CATEGORY:
                         default: {
                             if (item.getClass() == NavigationItem.CategoryNavigationItem.class) {
                                 data.setMode(MODE_DISPLAY_CATEGORY);
@@ -145,7 +149,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                     items.add(new NavigationItem(MainActivity.ADAPTER_KEY_STARRED, getString(R.string.label_favorites), db.getNoteDao().getFavoritesCount(localAccount.getId()), R.drawable.ic_star_yellow_24dp, FAVORITES));
 
                     if (categories.size() > 2 && categories.get(2).label.isEmpty()) {
-                        items.add(new NavigationItem(MainActivity.ADAPTER_KEY_UNCATEGORIZED, getString(R.string.action_uncategorized), null, NavigationAdapter.ICON_NOFOLDER));
+                        items.add(new NavigationItem(MainActivity.ADAPTER_KEY_UNCATEGORIZED, "", null, NavigationAdapter.ICON_NOFOLDER));
                     }
 
                     for (NavigationItem item : categories) {
