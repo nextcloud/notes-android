@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.AnyThread;
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
@@ -157,7 +158,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param note Note
      */
     @NonNull
-    @AnyThread
+    @MainThread
     public LiveData<NoteWithCategory> addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteWithCategory note) {
         NoteWithCategory entity = new NoteWithCategory();
         entity.setNote(new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0));
@@ -552,7 +553,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @return The sorting method in CategorySortingMethod enum format
      */
     @NonNull
-    @AnyThread
+    @MainThread
     public LiveData<CategorySortingMethod> getCategoryOrder(@NonNull NavigationCategory selectedCategory) {
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         String prefKey;
@@ -573,7 +574,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             }
             case DEFAULT_CATEGORY:
             default: {
-                Category category = selectedCategory.getCategory();
+                final Category category = selectedCategory.getCategory();
                 if (category != null) {
                     return getCategoryDao().getCategoryOrder(category.getId());
                 } else {

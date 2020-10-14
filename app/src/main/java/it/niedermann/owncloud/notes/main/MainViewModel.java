@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.annotation.AnyThread;
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
@@ -120,6 +122,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     @NonNull
+    @MainThread
     public LiveData<Pair<NavigationCategory, CategorySortingMethod>> getCategorySortingMethodOfSelectedCategory() {
         return switchMap(getSelectedCategory(), selectedCategory -> map(db.getCategoryOrder(selectedCategory), sortingMethod -> new Pair<>(selectedCategory, sortingMethod)));
     }
@@ -134,11 +137,12 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     @NonNull
+    @MainThread
     public LiveData<List<Item>> getNotesListLiveData() {
         final MutableLiveData<List<Item>> insufficientInformation = new MutableLiveData<>();
-        return switchMap(currentAccount, currentAccount -> {
+        return switchMap(getCurrentAccount(), currentAccount -> {
             Log.v(TAG, "[getNotesListLiveData] - currentAccount: " + currentAccount);
-            if (getCurrentAccount() == null) {
+            if (currentAccount == null) {
                 return insufficientInformation;
             } else {
                 return switchMap(getSelectedCategory(), selectedCategory -> {
@@ -182,8 +186,8 @@ public class MainViewModel extends AndroidViewModel {
                                         }
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + category.getTitle());
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchCategoryByModified(accountId, searchQueryOrWildcard, category == null ? "" : category.getTitle())
-                                                : db.getNoteDao().searchCategoryLexicographically(accountId, searchQueryOrWildcard, category == null ? "" : category.getTitle());
+                                                ? db.getNoteDao().searchCategoryByModified(accountId, searchQueryOrWildcard, category.getTitle())
+                                                : db.getNoteDao().searchCategoryLexicographically(accountId, searchQueryOrWildcard, category.getTitle());
                                         break;
                                     }
                                 }
@@ -198,7 +202,7 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    private List<Item> fromNotesWithCategory(List<NoteWithCategory> noteList, @NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
+    private List<Item> fromNotesWithCategory(List<NoteWithCategory> noteList, @NonNull NavigationCategory selectedCategory, @Nullable CategorySortingMethod sortingMethod) {
         if (selectedCategory.getType() == DEFAULT_CATEGORY) {
             final Category category = selectedCategory.getCategory();
             if (category != null) {
@@ -215,6 +219,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     @NonNull
+    @MainThread
     public LiveData<List<NavigationItem>> getNavigationCategories() {
         final MutableLiveData<List<NavigationItem>> insufficientInformation = new MutableLiveData<>();
         return switchMap(getCurrentAccount(), currentAccount -> {
@@ -248,7 +253,7 @@ public class MainViewModel extends AndroidViewModel {
             String currentSecondaryCategory = null;
             boolean isCategoryOpen = currentPrimaryCategory.equals(expandedCategory);
 
-            if (isCategoryOpen && !currentPrimaryCategory.equals(item.label) && expandedCategory != null) {
+            if (isCategoryOpen && !currentPrimaryCategory.equals(item.label)) {
                 String currentCategorySuffix = item.label.substring(expandedCategory.length() + 1);
                 int subSlashIndex = currentCategorySuffix.indexOf('/');
                 currentSecondaryCategory = subSlashIndex < 0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
