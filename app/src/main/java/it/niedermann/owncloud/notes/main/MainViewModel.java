@@ -4,9 +4,9 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Pair;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
@@ -31,8 +31,11 @@ import static it.niedermann.owncloud.notes.main.MainActivity.ADAPTER_KEY_STARRED
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByCategory;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByInitials;
 import static it.niedermann.owncloud.notes.main.slots.SlotterUtil.fillListByTime;
+import static it.niedermann.owncloud.notes.shared.model.CategorySortingMethod.SORT_MODIFIED_DESC;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.RECENT;
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.UNCATEGORIZED;
 import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
 
 public class MainViewModel extends AndroidViewModel {
@@ -44,8 +47,10 @@ public class MainViewModel extends AndroidViewModel {
 
     @NonNull
     private final MutableLiveData<Account> currentAccount = new MutableLiveData<>();
+
     @NonNull
-    private final MutableLiveData<String> searchTerm = new MutableLiveData<>();
+    private final MutableLiveData<String> searchTerm = new MutableLiveData<>(null);
+
     @NonNull
     private final MutableLiveData<NavigationCategory> selectedCategory = new MutableLiveData<>(new NavigationCategory(RECENT));
 
@@ -54,17 +59,27 @@ public class MainViewModel extends AndroidViewModel {
         this.db = NotesDatabase.getInstance(application.getApplicationContext());
     }
 
+    @NonNull
+    public LiveData<Account> getCurrentAccount() {
+        return distinctUntilChanged(currentAccount);
+    }
+
     public void postCurrentAccount(@NonNull Account account) {
         this.currentAccount.postValue(account);
     }
 
     @NonNull
-    public LiveData<Account> getCurrentAccount() {
-        return currentAccount;
+    public LiveData<String> getSearchTerm() {
+        return distinctUntilChanged(searchTerm);
     }
 
     public void postSearchTerm(String searchTerm) {
         this.searchTerm.postValue(searchTerm);
+    }
+
+    @NonNull
+    public LiveData<NavigationCategory> getSelectedCategory() {
+        return distinctUntilChanged(selectedCategory);
     }
 
     public void postSelectedCategory(@NonNull NavigationCategory selectedCategory) {
@@ -72,115 +87,90 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     @NonNull
-    public LiveData<String> getSearchTerm() {
-        return searchTerm;
-    }
-
-    @NonNull
-    public LiveData<NavigationCategory> getSelectedCategory() {
-        return selectedCategory;
-    }
-
-    @NonNull
-    private LiveData<Void> filterChanged() {
-        MediatorLiveData<Void> mediatorLiveData = new MediatorLiveData<>();
-        mediatorLiveData.addSource(currentAccount, (o) -> {
-            Log.i("[LIVEDATA] - ", "[filterChanged] - currentAccount: " + o);
-            mediatorLiveData.postValue(null);
-        });
-        mediatorLiveData.addSource(searchTerm, (o) -> {
-            Log.i("[LIVEDATA] - ", "[filterChanged] - searchTerm: " + o);
-            mediatorLiveData.postValue(null);
-        });
-        mediatorLiveData.addSource(selectedCategory, (o) -> {
-            Log.i("[LIVEDATA] - ", "[filterChanged] - selectedCategory: " + o);
-            mediatorLiveData.postValue(null);
-        });
-        mediatorLiveData.addSource(getCategorySortingMethodOfSelectedCategory(), (o) -> {
-            Log.i("[LIVEDATA] - ", "[filterChanged] - categorySortingMethod: " + o);
-            mediatorLiveData.postValue(null);
-        });
-        return mediatorLiveData;
-    }
-
-    public LiveData<CategorySortingMethod> getCategorySortingMethodOfSelectedCategory() {
-        return switchMap(getSelectedCategory(), db::getCategoryOrder);
+    public LiveData<Pair<NavigationCategory, CategorySortingMethod>> getCategorySortingMethodOfSelectedCategory() {
+        return switchMap(getSelectedCategory(), selectedCategory -> map(db.getCategoryOrder(selectedCategory), sortingMethod -> new Pair<>(selectedCategory, sortingMethod)));
     }
 
     @NonNull
     public LiveData<List<Item>> getNotesListLiveData() {
         final MutableLiveData<List<Item>> insufficientInformation = new MutableLiveData<>();
         return switchMap(currentAccount, currentAccount -> {
-            Log.w("[LIVEDATA] - ", "[getNotesListLiveData] - currentAccount: " + currentAccount);
-            if (currentAccount == null) {
+            Log.v(TAG, "[getNotesListLiveData] - currentAccount: " + currentAccount);
+            if (getCurrentAccount() == null) {
                 return insufficientInformation;
             } else {
-                return switchMap(selectedCategory, selectedCategory -> {
-                    Log.w("[LIVEDATA] - ", "[getNotesListLiveData] - selectedCategory: " + selectedCategory);
+                return switchMap(getSelectedCategory(), selectedCategory -> {
                     if (selectedCategory == null) {
                         return insufficientInformation;
                     } else {
-                        return switchMap(searchTerm, searchTerm -> switchMap(getCategorySortingMethodOfSelectedCategory(), sortingMethod -> {
-                            final Long accountId = currentAccount.getId();
-                            final String searchQueryOrWildcard = searchTerm == null ? "%" : "%" + searchTerm.trim() + "%";
-                            Log.w("[LIVEDATA] - ", "[getNotesListLiveData] - sortMethod: " + sortingMethod);
-                            final LiveData<List<NoteWithCategory>> fromDatabase;
-                            switch (selectedCategory.getType()) {
-                                case RECENT: {
-                                    fromDatabase = sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC
-                                            ? db.getNoteDao().searchRecentByModified(accountId, searchQueryOrWildcard)
-                                            : db.getNoteDao().searchRecentLexicographically(accountId, searchQueryOrWildcard);
-                                    break;
+                        return switchMap(getSearchTerm(), searchTerm -> {
+                            Log.v(TAG, "[getNotesListLiveData] - searchTerm: " + searchTerm);
+                            return switchMap(getCategorySortingMethodOfSelectedCategory(), sortingMethod -> {
+                                final Long accountId = currentAccount.getId();
+                                final String searchQueryOrWildcard = searchTerm == null ? "%" : "%" + searchTerm.trim() + "%";
+                                Log.v(TAG, "[getNotesListLiveData] - sortMethod: " + sortingMethod.second);
+                                final LiveData<List<NoteWithCategory>> fromDatabase;
+                                switch (selectedCategory.getType()) {
+                                    case RECENT: {
+                                        Log.v(TAG, "[getNotesListLiveData] - category: " + RECENT);
+                                        fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
+                                                ? db.getNoteDao().searchRecentByModified(accountId, searchQueryOrWildcard)
+                                                : db.getNoteDao().searchRecentLexicographically(accountId, searchQueryOrWildcard);
+                                        break;
+                                    }
+                                    case FAVORITES: {
+                                        Log.v(TAG, "[getNotesListLiveData] - category: " + FAVORITES);
+                                        fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
+                                                ? db.getNoteDao().searchFavoritesByModified(accountId, searchQueryOrWildcard)
+                                                : db.getNoteDao().searchFavoritesLexicographically(accountId, searchQueryOrWildcard);
+                                        break;
+                                    }
+                                    case UNCATEGORIZED: {
+                                        Log.v(TAG, "[getNotesListLiveData] - category: " + UNCATEGORIZED);
+                                        fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
+                                                ? db.getNoteDao().searchUncategorizedByModified(accountId, searchQueryOrWildcard)
+                                                : db.getNoteDao().searchUncategorizedLexicographically(accountId, searchQueryOrWildcard);
+                                        break;
+                                    }
+                                    case DEFAULT_CATEGORY:
+                                    default: {
+                                        final Category category = selectedCategory.getCategory();
+                                        Log.v(TAG, "[getNotesListLiveData] - category: " + category.getTitle());
+                                        fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
+                                                ? db.getNoteDao().searchCategoryByModified(accountId, searchQueryOrWildcard, category == null ? "" : category.getTitle())
+                                                : db.getNoteDao().searchCategoryLexicographically(accountId, searchQueryOrWildcard, category == null ? "" : category.getTitle());
+                                        break;
+                                    }
                                 }
-                                case FAVORITES: {
-                                    fromDatabase = sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC
-                                            ? db.getNoteDao().searchFavoritesByModified(accountId, searchQueryOrWildcard)
-                                            : db.getNoteDao().searchFavoritesLexicographically(accountId, searchQueryOrWildcard);
-                                    break;
-                                }
-                                case UNCATEGORIZED: {
-                                    fromDatabase = sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC
-                                            ? db.getNoteDao().searchUncategorizedByModified(accountId, searchQueryOrWildcard)
-                                            : db.getNoteDao().searchUncategorizedLexicographically(accountId, searchQueryOrWildcard);
-                                    break;
-                                }
-                                case DEFAULT_CATEGORY:
-                                default: {
-                                    final Category category = selectedCategory.getCategory();
-                                    fromDatabase = sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC
-                                            ? db.getNoteDao().searchCategoryByModified(accountId, searchQueryOrWildcard, category == null ? "" : category.getTitle())
-                                            : db.getNoteDao().searchCategoryLexicographically(accountId, searchQueryOrWildcard, category == null ? "" : category.getTitle());
-                                    break;
-                                }
-                            }
 
-                            return distinctUntilChanged(
-                                    map(fromDatabase, noteList -> {
-                                        //noinspection SwitchStatementWithTooFewBranches
-                                        switch (selectedCategory.getType()) {
-                                            case DEFAULT_CATEGORY: {
-                                                Category category = selectedCategory.getCategory();
-                                                if (category != null) {
-                                                    return fillListByCategory(noteList, category.getTitle());
-                                                } else {
-                                                    Log.e(TAG, "Tried to fill list by category, but category is null.");
-                                                }
-                                            }
-                                            default: {
-                                                if (sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC) {
-                                                    return fillListByTime(getApplication(), noteList);
-                                                } else {
-                                                    return fillListByInitials(getApplication(), noteList);
-                                                }
-                                            }
-                                        }
-                                    })
-                            );
-                        }));
+                                Log.v(TAG, "[getNotesListLiveData] - -------------------------------------");
+                                return fromNotesWithCategory(fromDatabase, selectedCategory, sortingMethod.second);
+                            });
+                        });
                     }
                 });
             }
         });
+    }
+
+    private LiveData<List<Item>> fromNotesWithCategory(LiveData<List<NoteWithCategory>> fromDatabase, @NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
+        return distinctUntilChanged(
+                map(fromDatabase, noteList -> {
+                    if (selectedCategory.getType() == DEFAULT_CATEGORY) {
+                        final Category category = selectedCategory.getCategory();
+                        if (category != null) {
+                            return fillListByCategory(noteList, category.getTitle());
+                        } else {
+                            Log.e(TAG, "[fromNotesWithCategory] - Tried to fill list by category, but category is null.");
+                        }
+                    }
+                    if (sortingMethod == SORT_MODIFIED_DESC) {
+                        return fillListByTime(getApplication(), noteList);
+                    } else {
+                        return fillListByInitials(getApplication(), noteList);
+                    }
+                })
+        );
     }
 
     @NonNull

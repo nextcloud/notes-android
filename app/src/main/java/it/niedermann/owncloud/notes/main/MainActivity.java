@@ -1,7 +1,6 @@
 package it.niedermann.owncloud.notes.main;
 
 import android.animation.AnimatorInflater;
-import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.database.sqlite.SQLiteException;
@@ -104,6 +103,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     protected MainViewModel mainViewModel;
 
+    protected NotesDatabase db = null;
+
     private boolean gridView = true;
 
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
@@ -133,8 +134,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private SwipeRefreshLayout swipeRefreshLayout;
     protected FloatingActionButton fabCreate;
     private RecyclerView listView;
-
-    protected NotesDatabase db = null;
 
     private NavigationAdapter adapterCategories;
     private MenuAdapter menuAdapter;
@@ -224,27 +223,25 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             });
         });
         mainViewModel.getNotesListLiveData().observe(this, notes -> {
-            Log.e("[LIVEDATA] - ", "[MainActivity]" + notes);
             adapter.clearSelection(listView);
             if (mActionMode != null) {
                 mActionMode.finish();
             }
-            adapter.setHighlightSearchQuery(mainViewModel.getSearchTerm().getValue());
             adapter.setItemList(notes);
             binding.activityNotesListView.progressCircular.setVisibility(GONE);
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
         });
+        mainViewModel.getSearchTerm().observe(this, adapter::setHighlightSearchQuery);
         mainViewModel.getCategorySortingMethodOfSelectedCategory().observe(this, method -> {
-            updateSortMethodIcon(method);
+            updateSortMethodIcon(method.second);
             activityBinding.sortingMethod.setOnClickListener((v) -> {
-                CategorySortingMethod newMethod = method;
+                CategorySortingMethod newMethod = method.second;
                 if (newMethod == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
                     newMethod = CategorySortingMethod.SORT_MODIFIED_DESC;
                 } else {
                     newMethod = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
                 }
-                updateSortMethodIcon(newMethod);
-                db.modifyCategoryOrder(localAccount.getId(), mainViewModel.getSelectedCategory().getValue(), newMethod);
+                db.modifyCategoryOrder(localAccount.getId(), method.first, newMethod);
             });
         });
         mainViewModel.getNavigationCategories(navigationOpen).observe(this, navigationItems -> this.adapterCategories.setItems(navigationItems));
@@ -733,7 +730,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         }
     }
 
-    @SuppressLint("PrivateResource")
     private void updateToolbars(boolean disableSearch) {
         activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
         activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);

@@ -503,7 +503,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param sortingMethod    The sorting method in {@link CategorySortingMethod} enum format
      */
     @AnyThread
-    public void modifyCategoryOrder(long accountId, NavigationCategory selectedCategory, CategorySortingMethod sortingMethod) {
+    public void modifyCategoryOrder(long accountId, @NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
         validateAccountId(accountId);
 
         new Thread(() -> {
@@ -526,7 +526,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                 }
                 case DEFAULT_CATEGORY:
                 default: {
-                    Category category = selectedCategory.getCategory();
+                    final Category category = selectedCategory.getCategory();
                     if (category != null) {
                         getCategoryDao().modifyCategoryOrder(accountId, category.getId(), sortingMethod);
                     } else {
@@ -557,16 +557,16 @@ public abstract class NotesDatabase extends RoomDatabase {
 
         switch (selectedCategory.getType()) {
             // TODO make this account specific
+            case RECENT: {
+                prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes);
+                break;
+            }
             case FAVORITES: {
                 prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites);
                 break;
             }
             case UNCATEGORIZED: {
                 prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized);
-                break;
-            }
-            case RECENT: {
-                prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes);
                 break;
             }
             case DEFAULT_CATEGORY:

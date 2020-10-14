@@ -245,6 +245,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     public void setHighlightSearchQuery(CharSequence searchQuery) {
         this.searchQuery = searchQuery;
+        notifyDataSetChanged();
     }
 
     /**

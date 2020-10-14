@@ -85,7 +85,7 @@ public abstract class NotesClient {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public NotesClient(@NonNull Context appContext) {
+    protected NotesClient(@NonNull Context appContext) {
         this.appContext = appContext;
     }
 
