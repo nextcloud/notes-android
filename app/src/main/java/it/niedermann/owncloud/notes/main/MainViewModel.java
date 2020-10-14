@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Pair;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -54,6 +55,9 @@ public class MainViewModel extends AndroidViewModel {
     @NonNull
     private final MutableLiveData<NavigationCategory> selectedCategory = new MutableLiveData<>(new NavigationCategory(RECENT));
 
+    @NonNull
+    private final MutableLiveData<String> expandedCategory = new MutableLiveData<>(null);
+
     public MainViewModel(@NonNull Application application) {
         super(application);
         this.db = NotesDatabase.getInstance(application.getApplicationContext());
@@ -83,12 +87,48 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void postSelectedCategory(@NonNull NavigationCategory selectedCategory) {
-        this.selectedCategory.setValue(selectedCategory);
+        this.selectedCategory.postValue(selectedCategory);
+
+        // Close sub categories
+        switch (selectedCategory.getType()) {
+            case RECENT:
+            case FAVORITES:
+            case UNCATEGORIZED: {
+                postExpandedCategory(null);
+                break;
+            }
+            case DEFAULT_CATEGORY:
+            default: {
+                Category category = selectedCategory.getCategory();
+                if (category == null) {
+                    postExpandedCategory(null);
+                    Log.e(TAG, "navigation selection is a " + DEFAULT_CATEGORY + ", but the contained category is null.");
+                } else {
+                    String title = category.getTitle();
+                    int slashIndex = title == null ? -1 : title.indexOf('/');
+                    String rootCategory = slashIndex < 0 ? title : title.substring(0, slashIndex);
+                    String expandedCategory = getExpandedCategory().getValue();
+                    if (expandedCategory != null && !expandedCategory.equals(rootCategory)) {
+                        postExpandedCategory(null);
+                    }
+                }
+                break;
+            }
+        }
     }
 
     @NonNull
     public LiveData<Pair<NavigationCategory, CategorySortingMethod>> getCategorySortingMethodOfSelectedCategory() {
         return switchMap(getSelectedCategory(), selectedCategory -> map(db.getCategoryOrder(selectedCategory), sortingMethod -> new Pair<>(selectedCategory, sortingMethod)));
+    }
+
+    public void postExpandedCategory(@Nullable String expandedCategory) {
+        this.expandedCategory.postValue(expandedCategory);
+    }
+
+    @NonNull
+    public LiveData<String> getExpandedCategory() {
+        return distinctUntilChanged(expandedCategory);
     }
 
     @NonNull
@@ -174,71 +214,81 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     @NonNull
-    public LiveData<List<NavigationItem>> getNavigationCategories(String navigationOpen) {
-        return switchMap(getCurrentAccount(), currentAccount -> currentAccount == null
-                ? new MutableLiveData<>()
-                : distinctUntilChanged(
-                map(db.getCategoryDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase -> {
-                    List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(getApplication(), db.getCategoryDao().getCategories(currentAccount.getId()));
-                    NavigationItem itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, getApplication().getString(R.string.label_all_notes), db.getNoteDao().count(currentAccount.getId()), R.drawable.ic_access_time_grey600_24dp, RECENT);
-                    NavigationItem itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, getApplication().getString(R.string.label_favorites), db.getNoteDao().getFavoritesCount(currentAccount.getId()), R.drawable.ic_star_yellow_24dp, FAVORITES);
+    public LiveData<List<NavigationItem>> getNavigationCategories() {
+        final MutableLiveData<List<NavigationItem>> insufficientInformation = new MutableLiveData<>();
+        return switchMap(getCurrentAccount(), currentAccount -> {
+            if (currentAccount == null) {
+                return insufficientInformation;
+            } else {
+                Log.v(TAG, "[getNavigationCategories] - currentAccount: " + currentAccount.getAccountName());
+                return switchMap(getExpandedCategory(), expandedCategory -> {
+                    Log.v(TAG, "[getNavigationCategories] - expandedCategory: " + expandedCategory);
+                    return distinctUntilChanged(
+                            map(db.getCategoryDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase -> {
+                                List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(getApplication(), db.getCategoryDao().getCategories(currentAccount.getId()));
+                                NavigationItem itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, getApplication().getString(R.string.label_all_notes), db.getNoteDao().count(currentAccount.getId()), R.drawable.ic_access_time_grey600_24dp, RECENT);
+                                NavigationItem itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, getApplication().getString(R.string.label_favorites), db.getNoteDao().getFavoritesCount(currentAccount.getId()), R.drawable.ic_star_yellow_24dp, FAVORITES);
 
-                    ArrayList<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);
-                    items.add(itemRecent);
-                    items.add(itemFavorites);
-                    NavigationItem lastPrimaryCategory = null;
-                    NavigationItem lastSecondaryCategory = null;
-                    for (NavigationItem item : categories) {
-                        int slashIndex = item.label.indexOf('/');
-                        String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
-                        String currentSecondaryCategory = null;
-                        boolean isCategoryOpen = currentPrimaryCategory.equals(navigationOpen);
+                                ArrayList<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);
+                                items.add(itemRecent);
+                                items.add(itemFavorites);
+                                NavigationItem lastPrimaryCategory = null;
+                                NavigationItem lastSecondaryCategory = null;
+                                for (NavigationItem item : categories) {
+                                    int slashIndex = item.label.indexOf('/');
+                                    String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
+                                    String currentSecondaryCategory = null;
+                                    boolean isCategoryOpen = currentPrimaryCategory.equals(expandedCategory);
 
-                        if (isCategoryOpen && !currentPrimaryCategory.equals(item.label)) {
-                            String currentCategorySuffix = item.label.substring(navigationOpen.length() + 1);
-                            int subSlashIndex = currentCategorySuffix.indexOf('/');
-                            currentSecondaryCategory = subSlashIndex < 0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
-                        }
+                                    if (isCategoryOpen && !currentPrimaryCategory.equals(item.label) && expandedCategory != null) {
+                                        String currentCategorySuffix = item.label.substring(expandedCategory.length() + 1);
+                                        int subSlashIndex = currentCategorySuffix.indexOf('/');
+                                        currentSecondaryCategory = subSlashIndex < 0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
+                                    }
 
-                        boolean belongsToLastPrimaryCategory = lastPrimaryCategory != null && currentPrimaryCategory.equals(lastPrimaryCategory.label);
-                        boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentPrimaryCategory + "/" + currentSecondaryCategory);
+                                    boolean belongsToLastPrimaryCategory = lastPrimaryCategory != null && currentPrimaryCategory.equals(lastPrimaryCategory.label);
+                                    boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentPrimaryCategory + "/" + currentSecondaryCategory);
 
-                        if (isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory != null) {
-                            lastPrimaryCategory = new NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
-                            items.add(lastPrimaryCategory);
-                            belongsToLastPrimaryCategory = true;
-                        }
+                                    if (isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory != null) {
+                                        lastPrimaryCategory = new NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
+                                        items.add(lastPrimaryCategory);
+                                        belongsToLastPrimaryCategory = true;
+                                    }
 
-                        if (belongsToLastPrimaryCategory && belongsToLastSecondaryCategory) {
-                            lastSecondaryCategory.count += item.count;
-                            lastSecondaryCategory.icon = NavigationAdapter.ICON_SUB_MULTIPLE;
-                        } else if (belongsToLastPrimaryCategory) {
-                            if (isCategoryOpen) {
-                                item.label = currentPrimaryCategory + "/" + currentSecondaryCategory;
-                                item.id = "category:" + item.label;
-                                item.icon = NavigationAdapter.ICON_SUB_FOLDER;
-                                items.add(item);
-                                lastSecondaryCategory = item;
-                            } else {
-                                lastPrimaryCategory.count += item.count;
-                                lastPrimaryCategory.icon = NavigationAdapter.ICON_MULTIPLE;
-                                lastSecondaryCategory = null;
-                            }
-                        } else {
-                            if (isCategoryOpen) {
-                                item.icon = NavigationAdapter.ICON_MULTIPLE_OPEN;
-                            } else {
-                                item.label = currentPrimaryCategory;
-                                item.id = "category:" + item.label;
-                            }
-                            items.add(item);
-                            lastPrimaryCategory = item;
-                            lastSecondaryCategory = null;
-                        }
-                    }
-                    return items;
-                })
-        ));
+                                    if (belongsToLastPrimaryCategory && belongsToLastSecondaryCategory) {
+                                        lastSecondaryCategory.count += item.count;
+                                        lastSecondaryCategory.icon = NavigationAdapter.ICON_SUB_MULTIPLE;
+                                    } else if (belongsToLastPrimaryCategory) {
+                                        if (isCategoryOpen) {
+                                            item.label = currentPrimaryCategory + "/" + currentSecondaryCategory;
+                                            item.id = "category:" + item.label;
+                                            item.icon = NavigationAdapter.ICON_SUB_FOLDER;
+                                            items.add(item);
+                                            lastSecondaryCategory = item;
+                                        } else {
+                                            lastPrimaryCategory.count += item.count;
+                                            lastPrimaryCategory.icon = NavigationAdapter.ICON_MULTIPLE;
+                                            lastSecondaryCategory = null;
+                                        }
+                                    } else {
+                                        if (isCategoryOpen) {
+                                            item.icon = NavigationAdapter.ICON_MULTIPLE_OPEN;
+                                        } else {
+                                            item.label = currentPrimaryCategory;
+                                            item.id = "category:" + item.label;
+                                        }
+                                        items.add(item);
+                                        lastPrimaryCategory = item;
+                                        lastSecondaryCategory = null;
+                                    }
+                                }
+                                Log.v(TAG, "[getNavigationCategories] - -------------------------------------");
+                                return items;
+                            })
+                    );
+                });
+            }
+        });
     }
 
     public LiveData<Boolean> getSyncStatus() {

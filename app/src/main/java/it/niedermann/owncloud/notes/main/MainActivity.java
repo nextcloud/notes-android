@@ -137,9 +137,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     private NavigationAdapter adapterCategories;
     private MenuAdapter menuAdapter;
-    @NonNull
-    private NavigationCategory navigationSelection = new NavigationCategory(RECENT);
-    private String navigationOpen = "";
     boolean canMoveNoteToAnotherAccounts = false;
     private ActionMode mActionMode;
 
@@ -180,7 +177,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             View emptyContentView = binding.activityNotesListView.emptyContentView.getRoot();
             emptyContentView.setVisibility(GONE);
             binding.activityNotesListView.progressCircular.setVisibility(VISIBLE);
-            this.navigationSelection = selectedCategory;
             fabCreate.show();
 
             String subtitle;
@@ -244,7 +240,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 db.modifyCategoryOrder(localAccount.getId(), method.first, newMethod);
             });
         });
-        mainViewModel.getNavigationCategories(navigationOpen).observe(this, navigationItems -> this.adapterCategories.setItems(navigationItems));
+        mainViewModel.getNavigationCategories().observe(this, navigationItems -> this.adapterCategories.setItems(navigationItems));
         mainViewModel.getCurrentAccount().observe(this, (a) -> {
             fabCreate.hide();
             localAccount = a;
@@ -388,7 +384,30 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     private void setupNotesList() {
-        initRecyclerView();
+        adapter = new ItemAdapter(this, gridView);
+        listView.setAdapter(adapter);
+
+        if (gridView) {
+            int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
+            StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
+            listView.setLayoutManager(gridLayoutManager);
+            listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x)
+            ));
+        } else {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            listView.setLayoutManager(layoutManager);
+            listView.addItemDecoration(new SectionItemDecoration(adapter,
+                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x) + getResources().getDimensionPixelSize(R.dimen.spacer_3x) + getResources().getDimensionPixelSize(R.dimen.spacer_2x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
+                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
+                    0
+            ));
+        }
 
         ((RecyclerView) findViewById(R.id.recycler_view)).addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -475,20 +494,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     mainViewModel.postSelectedCategory(new NavigationCategory(RECENT));
                 }
 
-                // auto-close sub-folder in Navigation if selection is outside of that folder
-                if (navigationOpen != null && navigationSelection.getType() == DEFAULT_CATEGORY) {
-                    Category category = navigationSelection.getCategory();
-                    if (category != null) {
-                        String title = category.getTitle();
-                        int slashIndex = title == null ? -1 : title.indexOf('/');
-                        String rootCategory = slashIndex < 0 ? title : title.substring(0, slashIndex);
-                        if (!navigationOpen.equals(rootCategory)) {
-                            navigationOpen = null;
-                        }
-                    }
-                }
-
-                // update views
                 if (closeNavigation) {
                     binding.drawerLayout.closeDrawer(GravityCompat.START);
                 }
@@ -496,11 +501,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
             @Override
             public void onIconClick(NavigationItem item) {
-                if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(navigationOpen)) {
-                    navigationOpen = item.label;
+                if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(mainViewModel.getExpandedCategory().getValue())) {
+                    mainViewModel.postExpandedCategory(item.label);
                     selectItem(item, false);
-                } else if (item.icon == NavigationAdapter.ICON_MULTIPLE || item.icon == NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(navigationOpen)) {
-                    navigationOpen = null;
+                } else if (item.icon == NavigationAdapter.ICON_MULTIPLE || item.icon == NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(mainViewModel.getExpandedCategory().getValue())) {
+                    mainViewModel.postExpandedCategory(null);
                 } else {
                     onItemClick(item);
                 }
@@ -538,33 +543,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             return true;
         } else {
             return super.onSupportNavigateUp();
-        }
-    }
-
-    private void initRecyclerView() {
-        adapter = new ItemAdapter(this, gridView);
-        listView.setAdapter(adapter);
-
-        if (gridView) {
-            int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
-            StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
-            listView.setLayoutManager(gridLayoutManager);
-            listView.addItemDecoration(new GridItemDecoration(adapter, spanCount,
-                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_3x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x)
-            ));
-        } else {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            listView.setLayoutManager(layoutManager);
-            listView.addItemDecoration(new SectionItemDecoration(adapter,
-                    getResources().getDimensionPixelSize(R.dimen.spacer_activity_sides) + getResources().getDimensionPixelSize(R.dimen.spacer_1x) + getResources().getDimensionPixelSize(R.dimen.spacer_3x) + getResources().getDimensionPixelSize(R.dimen.spacer_2x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_5x),
-                    getResources().getDimensionPixelSize(R.dimen.spacer_1x),
-                    0
-            ));
         }
     }
 
