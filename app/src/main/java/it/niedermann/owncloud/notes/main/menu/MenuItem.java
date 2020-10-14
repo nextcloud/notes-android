@@ -12,9 +12,9 @@ public class MenuItem {
     @NonNull
     private Intent intent;
     @StringRes
-    private int labelResource;
+    private final int labelResource;
     @DrawableRes
-    private int drawableResource;
+    private final int drawableResource;
 
     @Nullable
     private Integer resultCode;

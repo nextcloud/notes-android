@@ -267,7 +267,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName());
                 }
             });
-            setupNavigationList();
 
             if (menuAdapter == null) {
                 menuAdapter = new MenuAdapter(getApplicationContext(), localAccount, (menuItem) -> {
@@ -336,8 +335,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         activityBinding.launchAccountSwitcher.setOnClickListener((v) -> askForNewAccount(this));
         activityBinding.menuButton.setOnClickListener((v) -> binding.drawerLayout.openDrawer(GravityCompat.START));
 
-        final LinearLayout searchEditFrame = activityBinding.searchView.findViewById(R.id
-                .search_edit_frame);
+        final LinearLayout searchEditFrame = activityBinding.searchView.findViewById(R.id.search_edit_frame);
 
         searchEditFrame.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             int oldVisibility = -1;
@@ -631,7 +629,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 if (e instanceof TokenMismatchException && db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
                                     runOnUiThread(() -> {
-                                        runOnUiThread(() -> mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
+                                        mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name));
                                         // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
                                         coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
                                     });
