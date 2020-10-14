@@ -38,4 +38,12 @@ public class NavigationCategory implements Serializable {
     public Category getCategory() {
         return category;
     }
+
+    @Override
+    public String toString() {
+        return "NavigationCategory{" +
+                "type=" + type +
+                ", category=" + category +
+                '}';
+    }
 }

@@ -60,7 +60,7 @@ public interface CategoryDao {
      * @return The sorting method in {@link CategorySortingMethod} enum format
      */
     @Query("SELECT sortingMethod FROM CATEGORY WHERE id = :categoryId")
-    CategorySortingMethod getCategoryOrder(long categoryId);
+    LiveData<CategorySortingMethod> getCategoryOrder(long categoryId);
 
     @Query("SELECT title FROM CATEGORY WHERE id = :id")
     String getCategoryTitleById(long id);

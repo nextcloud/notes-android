@@ -4,6 +4,9 @@ import android.content.SharedPreferences;
 
 import androidx.lifecycle.LiveData;
 
+/**
+ * https://stackoverflow.com/a/57074217
+ */
 public abstract class SharedPreferenceLiveData<T> extends LiveData<T> {
 
     SharedPreferences sharedPrefs;

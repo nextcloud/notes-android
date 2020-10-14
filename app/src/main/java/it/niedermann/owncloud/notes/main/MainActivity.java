@@ -176,7 +176,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
                         .show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()))
                 .show());
-
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
             adapter.setShowCategory(selectedCategory.getType() == RECENT || selectedCategory.getType() == FAVORITES);
             View emptyContentView = binding.activityNotesListView.emptyContentView.getRoot();
@@ -185,22 +184,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             this.navigationSelection = selectedCategory;
             fabCreate.show();
 
-            CategorySortingMethod method;
             String subtitle;
-            switch (navigationSelection.getType()) {
+            switch (selectedCategory.getType()) {
                 case RECENT: {
                     subtitle = getString(R.string.search_in_all);
-                    method = db.getCategoryOrder(navigationSelection);
                     break;
                 }
                 case FAVORITES: {
                     subtitle = getString(R.string.search_in_category, getString(R.string.label_favorites));
-                    method = db.getCategoryOrder(navigationSelection);
                     break;
                 }
                 case UNCATEGORIZED: {
                     subtitle = getString(R.string.search_in_category, getString(R.string.action_uncategorized));
-                    method = db.getCategoryOrder(navigationSelection);
                     break;
                 }
                 case DEFAULT_CATEGORY:
@@ -209,19 +204,27 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     if (category == null) {
                         Log.e(TAG, "navigation selection is a " + DEFAULT_CATEGORY + ", but the contained category is null.");
                         subtitle = "";
-                        method = CategorySortingMethod.SORT_MODIFIED_DESC;
                     } else {
                         subtitle = getString(R.string.search_in_category, NoteUtil.extendCategory(category.getTitle()));
-                        method = db.getCategoryDao().getCategoryOrder(category.getId());
                     }
                     break;
                 }
             }
-            updateSortMethodIcon(method);
             activityBinding.searchText.setText(subtitle);
+
+            // Floating Action Button
+            fabCreate.setOnClickListener((View view) -> {
+                Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, selectedCategory);
+                if (activityBinding.searchView.getQuery().length() > 0) {
+                    createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, activityBinding.searchView.getQuery().toString());
+                    invalidateOptionsMenu();
+                }
+                startActivityForResult(createIntent, create_note_cmd);
+            });
         });
-        mainViewModel.getSortOrderChange().observe(this, (pair) -> updateSortMethodIcon(pair.second));
         mainViewModel.getNotesListLiveData().observe(this, notes -> {
+            Log.e("[LIVEDATA] - ", "[MainActivity]" + notes);
             adapter.clearSelection(listView);
             if (mActionMode != null) {
                 mActionMode.finish();
@@ -230,6 +233,19 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             adapter.setItemList(notes);
             binding.activityNotesListView.progressCircular.setVisibility(GONE);
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
+        });
+        mainViewModel.getCategorySortingMethodOfSelectedCategory().observe(this, method -> {
+            updateSortMethodIcon(method);
+            activityBinding.sortingMethod.setOnClickListener((v) -> {
+                CategorySortingMethod newMethod = method;
+                if (newMethod == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
+                    newMethod = CategorySortingMethod.SORT_MODIFIED_DESC;
+                } else {
+                    newMethod = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
+                }
+                updateSortMethodIcon(newMethod);
+                db.modifyCategoryOrder(localAccount.getId(), mainViewModel.getSelectedCategory().getValue(), newMethod);
+            });
         });
         mainViewModel.getNavigationCategories(navigationOpen).observe(this, navigationItems -> this.adapterCategories.setItems(navigationItems));
         mainViewModel.getCurrentAccount().observe(this, (a) -> {
@@ -422,28 +438,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 }).start();
             }
         });
-
-        // Floating Action Button
-        fabCreate.setOnClickListener((View view) -> {
-            Intent createIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
-            createIntent.putExtra(EditNoteActivity.PARAM_CATEGORY, navigationSelection);
-            if (activityBinding.searchView.getQuery().length() > 0) {
-                createIntent.putExtra(EditNoteActivity.PARAM_CONTENT, activityBinding.searchView.getQuery().toString());
-                invalidateOptionsMenu();
-            }
-            startActivityForResult(createIntent, create_note_cmd);
-        });
-
-        activityBinding.sortingMethod.setOnClickListener((v) -> {
-            CategorySortingMethod method = db.getCategoryOrder(navigationSelection);
-            if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
-                method = CategorySortingMethod.SORT_MODIFIED_DESC;
-            } else {
-                method = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
-            }
-            db.modifyCategoryOrder(localAccount.getId(), navigationSelection, method);
-            mainViewModel.postSortOrderChange(navigationSelection, method);
-        });
     }
 
     private void setupNavigationList() {
@@ -581,7 +575,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
      * Updates sorting method icon.
      */
     private void updateSortMethodIcon(CategorySortingMethod method) {
-        Log.e(TAG, "Update Sort Method Icon");
         if (method == CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC) {
             activityBinding.sortingMethod.setImageResource(R.drawable.alphabetical_asc);
             activityBinding.sortingMethod.setContentDescription(getString(R.string.sort_last_modified));

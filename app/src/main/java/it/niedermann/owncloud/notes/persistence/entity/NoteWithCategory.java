@@ -91,4 +91,13 @@ public class NoteWithCategory implements Serializable, Item {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "NoteWithCategory{" +
+                "note=" + note.getTitle() +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }

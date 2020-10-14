@@ -61,6 +61,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_17_18;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_18_19;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_19_20;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
+import it.niedermann.owncloud.notes.persistence.sharedprefs.SharedPreferenceIntLiveData;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -549,23 +550,23 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @return The sorting method in CategorySortingMethod enum format
      */
     @NonNull
-    public CategorySortingMethod getCategoryOrder(@NonNull NavigationCategory selectedCategory) {
+    public LiveData<CategorySortingMethod> getCategoryOrder(@NonNull NavigationCategory selectedCategory) {
         final Context ctx = context.getApplicationContext();
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
-        int orderIndex;
+        String prefKey;
 
         switch (selectedCategory.getType()) {
             // TODO make this account specific
             case FAVORITES: {
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites), 0);
+                prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites);
                 break;
             }
             case UNCATEGORIZED: {
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized), 0);
+                prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized);
                 break;
             }
             case RECENT: {
-                orderIndex = sp.getInt(ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes), 0);
+                prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes);
                 break;
             }
             case DEFAULT_CATEGORY:
@@ -575,12 +576,12 @@ public abstract class NotesDatabase extends RoomDatabase {
                     return getCategoryDao().getCategoryOrder(category.getId());
                 } else {
                     Log.e(TAG, "Cannot read " + CategorySortingMethod.class.getSimpleName() + " for " + ENavigationCategoryType.DEFAULT_CATEGORY + ".");
-                    return CategorySortingMethod.SORT_MODIFIED_DESC;
+                    return new MutableLiveData<>(CategorySortingMethod.SORT_MODIFIED_DESC);
                 }
             }
         }
 
-        return CategorySortingMethod.getCSM(orderIndex);
+        return map(new SharedPreferenceIntLiveData(sp, prefKey, CategorySortingMethod.SORT_MODIFIED_DESC.getCSMID()), CategorySortingMethod::getCSM);
     }
 
     /**

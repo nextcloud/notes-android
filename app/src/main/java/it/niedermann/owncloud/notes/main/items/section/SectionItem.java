@@ -1,5 +1,7 @@
 package it.niedermann.owncloud.notes.main.items.section;
 
+import androidx.annotation.NonNull;
+
 import it.niedermann.owncloud.notes.shared.model.Item;
 
 public class SectionItem implements Item {
@@ -21,5 +23,13 @@ public class SectionItem implements Item {
     @Override
     public boolean isSection() {
         return true;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "SectionItem{" +
+                "title='" + title + '\'' +
+                '}';
     }
 }
