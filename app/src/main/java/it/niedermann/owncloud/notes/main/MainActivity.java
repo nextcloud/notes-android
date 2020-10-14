@@ -501,14 +501,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
             @Override
             public void onIconClick(NavigationItem item) {
-                if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(mainViewModel.getExpandedCategory().getValue())) {
-                    mainViewModel.postExpandedCategory(item.label);
-                    selectItem(item, false);
-                } else if (item.icon == NavigationAdapter.ICON_MULTIPLE || item.icon == NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(mainViewModel.getExpandedCategory().getValue())) {
-                    mainViewModel.postExpandedCategory(null);
-                } else {
-                    onItemClick(item);
-                }
+                final LiveData<String> expandedCategoryLiveData = mainViewModel.getExpandedCategory();
+                expandedCategoryLiveData.observe(MainActivity.this, expandedCategory -> {
+                    if (item.icon == NavigationAdapter.ICON_MULTIPLE && !item.label.equals(expandedCategory)) {
+                        mainViewModel.postExpandedCategory(item.label);
+                        selectItem(item, false);
+                    } else if (item.icon == NavigationAdapter.ICON_MULTIPLE || item.icon == NavigationAdapter.ICON_MULTIPLE_OPEN && item.label.equals(expandedCategory)) {
+                        mainViewModel.postExpandedCategory(null);
+                    } else {
+                        onItemClick(item);
+                    }
+                    expandedCategoryLiveData.removeObservers(MainActivity.this);
+                });
             }
         });
         adapterCategories.setSelectedItem(ADAPTER_KEY_RECENT);

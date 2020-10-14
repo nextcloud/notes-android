@@ -237,8 +237,10 @@ public class MainViewModel extends AndroidViewModel {
                                 for (NavigationItem item : categories) {
                                     int slashIndex = item.label.indexOf('/');
                                     String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
+                                    Log.v(TAG, "[getNavigationCategories] - currentPrimaryCategory: " + currentPrimaryCategory);
                                     String currentSecondaryCategory = null;
                                     boolean isCategoryOpen = currentPrimaryCategory.equals(expandedCategory);
+                                    Log.v(TAG, "[getNavigationCategories] - currentPrimaryCategory is open: " + isCategoryOpen);
 
                                     if (isCategoryOpen && !currentPrimaryCategory.equals(item.label) && expandedCategory != null) {
                                         String currentCategorySuffix = item.label.substring(expandedCategory.length() + 1);
