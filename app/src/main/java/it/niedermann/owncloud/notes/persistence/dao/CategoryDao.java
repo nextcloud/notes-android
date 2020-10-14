@@ -20,18 +20,6 @@ public interface CategoryDao {
     @Query("SELECT * FROM CATEGORY WHERE id = :id")
     Category getCategory(long id);
 
-    /**
-     * This function will be called when the category or note is updated.
-     * Because sometime we will remove some notes in categories.
-     * Such that there must be such a category without any note.
-     * For these useless category, it is better to remove.
-     * Move a note from a category to another may also lead to the same result.
-     *
-     * @param accountId The user accountId
-     */
-    @Query("DELETE FROM CATEGORY WHERE accountId = :accountId AND id NOT IN (SELECT categoryId FROM NOTE)")
-    void removeEmptyCategory(long accountId);
-
     @Query("SELECT id FROM CATEGORY WHERE accountId = :accountId AND title = :title")
     Long getCategoryIdByTitle(long accountId, String title);
 

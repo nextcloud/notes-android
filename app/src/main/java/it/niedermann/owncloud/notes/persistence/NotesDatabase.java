@@ -122,6 +122,8 @@ public abstract class NotesDatabase extends RoomDatabase {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
+                        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_DEL AFTER DELETE ON Note BEGIN DELETE FROM Category WHERE Category.id NOT IN (SELECT Note.categoryId FROM Note); END;");
+                        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_UPD AFTER UPDATE ON Note BEGIN DELETE FROM Category WHERE Category.id NOT IN (SELECT Note.categoryId FROM Note); END;");
                         Log.v(TAG, NotesDatabase.class.getSimpleName() + " created.");
                     }
                 })
@@ -253,7 +255,6 @@ public abstract class NotesDatabase extends RoomDatabase {
         new Thread(() -> {
             getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
             getNoteDao().updateCategory(noteId, getOrCreateCategoryIdByTitle(accountId, category));
-            getCategoryDao().removeEmptyCategory(accountId);
             serverSyncHelper.scheduleSync(ssoAccount, true);
         }).start();
     }
@@ -289,7 +290,6 @@ public abstract class NotesDatabase extends RoomDatabase {
         }
         newNote.getNote().setCategoryId(getOrCreateCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory()));
         int rows = getNoteDao().updateNote(newNote.getNote());
-        getCategoryDao().removeEmptyCategory(localAccount.getId());
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if (rows > 0) {
             notifyWidgets();
@@ -333,14 +333,6 @@ public abstract class NotesDatabase extends RoomDatabase {
                     Log.e(TAG, ShortcutManager.class.getSimpleName() + "is null.");
                 }
             }
-        }).start();
-    }
-
-    @AnyThread
-    public void deleteNote(long id, @NonNull DBStatus forceDBStatus) {
-        new Thread(() -> {
-            getNoteDao().deleteByNoteId(id, forceDBStatus);
-            getCategoryDao().removeEmptyCategory(id);
         }).start();
     }
 
@@ -608,7 +600,6 @@ public abstract class NotesDatabase extends RoomDatabase {
         } else {
             getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(id, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent());
         }
-        getCategoryDao().removeEmptyCategory(accountId);
         Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "");
     }
 
