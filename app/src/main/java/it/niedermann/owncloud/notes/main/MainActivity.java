@@ -27,7 +27,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -80,7 +79,6 @@ import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
-import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
@@ -146,24 +144,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     boolean canMoveNoteToAnotherAccounts = false;
     private ActionMode mActionMode;
 
-    private LiveData<List<Item>> noteWithCategoryLiveData;
-    private Observer<List<Item>> noteWithCategoryObserver = notes -> {
-        adapter.clearSelection(listView);
-        if (mActionMode != null) {
-            mActionMode.finish();
-        }
-        adapter.setHighlightSearchQuery(mainViewModel.getSearchTerm().getValue());
-        adapter.setItemList(notes);
-        binding.activityNotesListView.progressCircular.setVisibility(GONE);
-        binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
-//        if (scrollToTop) {
-//            listView.scrollToPosition(0);
-//        }
-    };
-
-    private LiveData<List<NavigationItem>> navigationItemLiveData;
-    private Observer<List<NavigationItem>> navigationItemObserver = navigationItems -> this.adapterCategories.setItems(navigationItems);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,6 +188,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             CategorySortingMethod method;
             String subtitle;
             switch (navigationSelection.getType()) {
+                case RECENT: {
+                    subtitle = getString(R.string.search_in_all);
+                    method = db.getCategoryOrder(navigationSelection);
+                    break;
+                }
                 case FAVORITES: {
                     subtitle = getString(R.string.search_in_category, getString(R.string.label_favorites));
                     method = db.getCategoryOrder(navigationSelection);
@@ -215,11 +200,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 }
                 case UNCATEGORIZED: {
                     subtitle = getString(R.string.search_in_category, getString(R.string.action_uncategorized));
-                    method = db.getCategoryOrder(navigationSelection);
-                    break;
-                }
-                case RECENT: {
-                    subtitle = getString(R.string.search_in_all);
                     method = db.getCategoryOrder(navigationSelection);
                     break;
                 }
@@ -241,34 +221,28 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             activityBinding.searchText.setText(subtitle);
         });
         mainViewModel.getSortOrderChange().observe(this, (pair) -> updateSortMethodIcon(pair.second));
-        mainViewModel.filterChanged().observe(this, (v) -> {
-            if (noteWithCategoryLiveData != null) {
-                noteWithCategoryLiveData.removeObserver(noteWithCategoryObserver);
+        mainViewModel.getNotesListLiveData().observe(this, notes -> {
+            adapter.clearSelection(listView);
+            if (mActionMode != null) {
+                mActionMode.finish();
             }
-            noteWithCategoryLiveData = mainViewModel.getNotesListLiveData();
-            noteWithCategoryLiveData.observe(this, noteWithCategoryObserver);
+            adapter.setHighlightSearchQuery(mainViewModel.getSearchTerm().getValue());
+            adapter.setItemList(notes);
+            binding.activityNotesListView.progressCircular.setVisibility(GONE);
+            binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
         });
+        mainViewModel.getNavigationCategories(navigationOpen).observe(this, navigationItems -> this.adapterCategories.setItems(navigationItems));
         mainViewModel.getCurrentAccount().observe(this, (a) -> {
             fabCreate.hide();
-            localAccount = db.getAccountDao().getLocalAccountByAccountName(a.getAccountName());
+            localAccount = a;
             SingleAccountHelper.setCurrentAccount(getApplicationContext(), a.getAccountName());
-            if (navigationItemLiveData != null) {
-                navigationItemLiveData.removeObserver(navigationItemObserver);
-            }
-            navigationItemLiveData = mainViewModel.getNavigationCategories(navigationOpen);
-            navigationItemLiveData.observe(this, navigationItemObserver);
-            String url = a.getUrl();
-            if (url != null) {
-                Glide
-                        .with(this)
-                        .load(url + "/index.php/avatar/" + Uri.encode(a.getUserName()) + "/64")
-                        .placeholder(R.drawable.ic_account_circle_grey_24dp)
-                        .error(R.drawable.ic_account_circle_grey_24dp)
-                        .apply(RequestOptions.circleCropTransform())
-                        .into(activityBinding.launchAccountSwitcher);
-            } else {
-                Log.w(TAG, "url is null");
-            }
+            Glide
+                    .with(this)
+                    .load(a.getUrl() + "/index.php/avatar/" + Uri.encode(a.getUserName()) + "/64")
+                    .placeholder(R.drawable.ic_account_circle_grey_24dp)
+                    .error(R.drawable.ic_account_circle_grey_24dp)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(activityBinding.launchAccountSwitcher);
 
             try {
                 BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
