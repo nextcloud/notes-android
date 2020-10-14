@@ -22,7 +22,8 @@ import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
                 @Index(name = "IDX_CATEGORIES_ACCOUNTID", value = "accountId"),
                 @Index(name = "IDX_CATEGORIES_ID", value = "id"),
                 @Index(name = "IDX_CATEGORIES_SORTING_METHOD", value = "sortingMethod"),
-                @Index(name = "IDX_CATEGORIES_TITLE", value = "title")
+                @Index(name = "IDX_CATEGORIES_TITLE", value = "title"),
+                @Index(name = "IDX_UNIQUE_ACCOUNT_TITLE", value = {"accountId", "title"}, unique = true)
         }
 )
 public class Category implements Serializable {
