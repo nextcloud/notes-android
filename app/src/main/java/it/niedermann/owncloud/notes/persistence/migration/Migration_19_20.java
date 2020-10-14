@@ -63,6 +63,8 @@ public class Migration_19_20 extends Migration {
         db.execSQL("CREATE INDEX `IDX_SINGLENOTEWIDGETDATA_ACCOUNTID` ON `SingleNoteWidgetData` (`accountId`)");
         db.execSQL("CREATE INDEX `IDX_SINGLENOTEWIDGETDATA_NOTEID` ON `SingleNoteWidgetData` (`noteId`)");
 
+        db.execSQL("CREATE UNIQUE INDEX `IDX_UNIQUE_ACCOUNT_TITLE` ON `Category` (`accountId`, `title`)");
+
         db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_DEL AFTER DELETE ON Note BEGIN DELETE FROM Category WHERE Category.id NOT IN (SELECT Note.categoryId FROM Note); END;");
         db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_UPD AFTER UPDATE ON Note BEGIN DELETE FROM Category WHERE Category.id NOT IN (SELECT Note.categoryId FROM Note); END;");
 

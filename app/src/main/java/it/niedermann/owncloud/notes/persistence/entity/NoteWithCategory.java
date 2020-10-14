@@ -96,7 +96,7 @@ public class NoteWithCategory implements Serializable, Item {
     @Override
     public String toString() {
         return "NoteWithCategory{" +
-                "note=" + note.getTitle() +
+                "note=" + note +
                 ", category='" + category + '\'' +
                 '}';
     }
