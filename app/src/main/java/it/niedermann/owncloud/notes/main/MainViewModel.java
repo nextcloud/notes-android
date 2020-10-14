@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.main;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
+import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.Item;
@@ -175,6 +177,9 @@ public class MainViewModel extends AndroidViewModel {
                                     case DEFAULT_CATEGORY:
                                     default: {
                                         final Category category = selectedCategory.getCategory();
+                                        if (category == null) {
+                                            throw new IllegalStateException(NavigationCategory.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but category is null.");
+                                        }
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + category.getTitle());
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
                                                 ? db.getNoteDao().searchCategoryByModified(accountId, searchQueryOrWildcard, category == null ? "" : category.getTitle())
@@ -184,7 +189,7 @@ public class MainViewModel extends AndroidViewModel {
                                 }
 
                                 Log.v(TAG, "[getNotesListLiveData] - -------------------------------------");
-                                return fromNotesWithCategory(fromDatabase, selectedCategory, sortingMethod.second);
+                                return distinctUntilChanged(map(fromDatabase, noteList -> fromNotesWithCategory(noteList, selectedCategory, sortingMethod.second)));
                             });
                         });
                     }
@@ -193,24 +198,20 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    private LiveData<List<Item>> fromNotesWithCategory(LiveData<List<NoteWithCategory>> fromDatabase, @NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
-        return distinctUntilChanged(
-                map(fromDatabase, noteList -> {
-                    if (selectedCategory.getType() == DEFAULT_CATEGORY) {
-                        final Category category = selectedCategory.getCategory();
-                        if (category != null) {
-                            return fillListByCategory(noteList, category.getTitle());
-                        } else {
-                            Log.e(TAG, "[fromNotesWithCategory] - Tried to fill list by category, but category is null.");
-                        }
-                    }
-                    if (sortingMethod == SORT_MODIFIED_DESC) {
-                        return fillListByTime(getApplication(), noteList);
-                    } else {
-                        return fillListByInitials(getApplication(), noteList);
-                    }
-                })
-        );
+    private List<Item> fromNotesWithCategory(List<NoteWithCategory> noteList, @NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
+        if (selectedCategory.getType() == DEFAULT_CATEGORY) {
+            final Category category = selectedCategory.getCategory();
+            if (category != null) {
+                return fillListByCategory(noteList, category.getTitle());
+            } else {
+                throw new IllegalStateException(NavigationCategory.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but category is null.");
+            }
+        }
+        if (sortingMethod == SORT_MODIFIED_DESC) {
+            return fillListByTime(getApplication(), noteList);
+        } else {
+            return fillListByInitials(getApplication(), noteList);
+        }
     }
 
     @NonNull
@@ -223,74 +224,73 @@ public class MainViewModel extends AndroidViewModel {
                 Log.v(TAG, "[getNavigationCategories] - currentAccount: " + currentAccount.getAccountName());
                 return switchMap(getExpandedCategory(), expandedCategory -> {
                     Log.v(TAG, "[getNavigationCategories] - expandedCategory: " + expandedCategory);
-                    return distinctUntilChanged(
-                            map(db.getCategoryDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase -> {
-                                List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(getApplication(), db.getCategoryDao().getCategories(currentAccount.getId()));
-                                NavigationItem itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, getApplication().getString(R.string.label_all_notes), db.getNoteDao().count(currentAccount.getId()), R.drawable.ic_access_time_grey600_24dp, RECENT);
-                                NavigationItem itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, getApplication().getString(R.string.label_favorites), db.getNoteDao().getFavoritesCount(currentAccount.getId()), R.drawable.ic_star_yellow_24dp, FAVORITES);
-
-                                ArrayList<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);
-                                items.add(itemRecent);
-                                items.add(itemFavorites);
-                                NavigationItem lastPrimaryCategory = null;
-                                NavigationItem lastSecondaryCategory = null;
-                                for (NavigationItem item : categories) {
-                                    int slashIndex = item.label.indexOf('/');
-                                    String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
-                                    Log.v(TAG, "[getNavigationCategories] - currentPrimaryCategory: " + currentPrimaryCategory);
-                                    String currentSecondaryCategory = null;
-                                    boolean isCategoryOpen = currentPrimaryCategory.equals(expandedCategory);
-                                    Log.v(TAG, "[getNavigationCategories] - currentPrimaryCategory is open: " + isCategoryOpen);
-
-                                    if (isCategoryOpen && !currentPrimaryCategory.equals(item.label) && expandedCategory != null) {
-                                        String currentCategorySuffix = item.label.substring(expandedCategory.length() + 1);
-                                        int subSlashIndex = currentCategorySuffix.indexOf('/');
-                                        currentSecondaryCategory = subSlashIndex < 0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
-                                    }
-
-                                    boolean belongsToLastPrimaryCategory = lastPrimaryCategory != null && currentPrimaryCategory.equals(lastPrimaryCategory.label);
-                                    boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentPrimaryCategory + "/" + currentSecondaryCategory);
-
-                                    if (isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory != null) {
-                                        lastPrimaryCategory = new NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
-                                        items.add(lastPrimaryCategory);
-                                        belongsToLastPrimaryCategory = true;
-                                    }
-
-                                    if (belongsToLastPrimaryCategory && belongsToLastSecondaryCategory) {
-                                        lastSecondaryCategory.count += item.count;
-                                        lastSecondaryCategory.icon = NavigationAdapter.ICON_SUB_MULTIPLE;
-                                    } else if (belongsToLastPrimaryCategory) {
-                                        if (isCategoryOpen) {
-                                            item.label = currentPrimaryCategory + "/" + currentSecondaryCategory;
-                                            item.id = "category:" + item.label;
-                                            item.icon = NavigationAdapter.ICON_SUB_FOLDER;
-                                            items.add(item);
-                                            lastSecondaryCategory = item;
-                                        } else {
-                                            lastPrimaryCategory.count += item.count;
-                                            lastPrimaryCategory.icon = NavigationAdapter.ICON_MULTIPLE;
-                                            lastSecondaryCategory = null;
-                                        }
-                                    } else {
-                                        if (isCategoryOpen) {
-                                            item.icon = NavigationAdapter.ICON_MULTIPLE_OPEN;
-                                        } else {
-                                            item.label = currentPrimaryCategory;
-                                            item.id = "category:" + item.label;
-                                        }
-                                        items.add(item);
-                                        lastPrimaryCategory = item;
-                                        lastSecondaryCategory = null;
-                                    }
-                                }
-                                Log.v(TAG, "[getNavigationCategories] - -------------------------------------");
-                                return items;
-                            })
-                    );
+                    return distinctUntilChanged(map(db.getCategoryDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase ->
+                            fromCategoriesWithNotesCount(getApplication(), expandedCategory, fromDatabase, db.getNoteDao().count(currentAccount.getId()), db.getNoteDao().getFavoritesCount(currentAccount.getId()))
+                    ));
                 });
             }
         });
+    }
+
+    private static List<NavigationItem> fromCategoriesWithNotesCount(@NonNull Context context, @Nullable String expandedCategory, @NonNull List<CategoryWithNotesCount> fromDatabase, int count, int favoritesCount) {
+        final List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, fromDatabase);
+        final NavigationItem itemRecent = new NavigationItem(ADAPTER_KEY_RECENT, context.getString(R.string.label_all_notes), count, R.drawable.ic_access_time_grey600_24dp, RECENT);
+        final NavigationItem itemFavorites = new NavigationItem(ADAPTER_KEY_STARRED, context.getString(R.string.label_favorites), favoritesCount, R.drawable.ic_star_yellow_24dp, FAVORITES);
+
+        final ArrayList<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);
+        items.add(itemRecent);
+        items.add(itemFavorites);
+        NavigationItem lastPrimaryCategory = null;
+        NavigationItem lastSecondaryCategory = null;
+        for (NavigationItem item : categories) {
+            int slashIndex = item.label.indexOf('/');
+            String currentPrimaryCategory = slashIndex < 0 ? item.label : item.label.substring(0, slashIndex);
+            String currentSecondaryCategory = null;
+            boolean isCategoryOpen = currentPrimaryCategory.equals(expandedCategory);
+
+            if (isCategoryOpen && !currentPrimaryCategory.equals(item.label) && expandedCategory != null) {
+                String currentCategorySuffix = item.label.substring(expandedCategory.length() + 1);
+                int subSlashIndex = currentCategorySuffix.indexOf('/');
+                currentSecondaryCategory = subSlashIndex < 0 ? currentCategorySuffix : currentCategorySuffix.substring(0, subSlashIndex);
+            }
+
+            boolean belongsToLastPrimaryCategory = lastPrimaryCategory != null && currentPrimaryCategory.equals(lastPrimaryCategory.label);
+            boolean belongsToLastSecondaryCategory = belongsToLastPrimaryCategory && lastSecondaryCategory != null && lastSecondaryCategory.label.equals(currentPrimaryCategory + "/" + currentSecondaryCategory);
+
+            if (isCategoryOpen && !belongsToLastPrimaryCategory && currentSecondaryCategory != null) {
+                lastPrimaryCategory = new NavigationItem("category:" + currentPrimaryCategory, currentPrimaryCategory, 0, NavigationAdapter.ICON_MULTIPLE_OPEN);
+                items.add(lastPrimaryCategory);
+                belongsToLastPrimaryCategory = true;
+            }
+
+            if (belongsToLastPrimaryCategory && belongsToLastSecondaryCategory) {
+                lastSecondaryCategory.count += item.count;
+                lastSecondaryCategory.icon = NavigationAdapter.ICON_SUB_MULTIPLE;
+            } else if (belongsToLastPrimaryCategory) {
+                if (isCategoryOpen) {
+                    item.label = currentPrimaryCategory + "/" + currentSecondaryCategory;
+                    item.id = "category:" + item.label;
+                    item.icon = NavigationAdapter.ICON_SUB_FOLDER;
+                    items.add(item);
+                    lastSecondaryCategory = item;
+                } else {
+                    lastPrimaryCategory.count += item.count;
+                    lastPrimaryCategory.icon = NavigationAdapter.ICON_MULTIPLE;
+                    lastSecondaryCategory = null;
+                }
+            } else {
+                if (isCategoryOpen) {
+                    item.icon = NavigationAdapter.ICON_MULTIPLE_OPEN;
+                } else {
+                    item.label = currentPrimaryCategory;
+                    item.id = "category:" + item.label;
+                }
+                items.add(item);
+                lastPrimaryCategory = item;
+                lastSecondaryCategory = null;
+            }
+        }
+        return items;
     }
 
     public LiveData<Boolean> getSyncStatus() {

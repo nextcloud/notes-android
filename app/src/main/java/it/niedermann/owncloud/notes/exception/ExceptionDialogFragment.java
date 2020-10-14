@@ -12,13 +12,12 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 
+import it.niedermann.android.util.ClipboardUtil;
 import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.DialogExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
-
-import static it.niedermann.android.util.ClipboardUtil.copyToClipboard;
 
 public class ExceptionDialogFragment extends AppCompatDialogFragment {
 
@@ -48,7 +47,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
 
         final TipsAdapter adapter = new TipsAdapter((actionIntent) -> requireActivity().startActivity(actionIntent));
 
-        final String debugInfos = ExceptionUtil.getDebugInfos(requireContext(), throwables, BuildConfig.FLAVOR);
+        final String debugInfos = ExceptionUtil.INSTANCE.getDebugInfos(requireContext(), throwables, BuildConfig.FLAVOR);
 
         binding.tips.setAdapter(adapter);
         binding.statusMessage.setText(getString(R.string.error_sync, throwables.size() > 0 ? throwables.get(0).getLocalizedMessage() : getString(R.string.error_unknown)));
@@ -59,7 +58,7 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
         return new AlertDialog.Builder(requireActivity())
                 .setView(binding.getRoot())
                 .setTitle(R.string.error_dialog_title)
-                .setPositiveButton(android.R.string.copy, (a, b) -> copyToClipboard(requireContext(), getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"))
+                .setPositiveButton(android.R.string.copy, (a, b) -> ClipboardUtil.INSTANCE.copyToClipboard(requireContext(), getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"))
                 .setNegativeButton(R.string.simple_close, null)
                 .create();
     }

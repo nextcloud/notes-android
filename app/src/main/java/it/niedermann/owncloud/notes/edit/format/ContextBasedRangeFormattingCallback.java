@@ -10,9 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import it.niedermann.android.util.ClipboardUtil;
 import it.niedermann.owncloud.notes.R;
-
-import static it.niedermann.android.util.ClipboardUtil.getClipboardURLorNull;
 
 public class ContextBasedRangeFormattingCallback implements ActionMode.Callback {
 
@@ -88,7 +87,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
                     ssb.insert(end, ")");
                     ssb.insert(start, "[](");
                 } else {
-                    String clipboardURL = getClipboardURLorNull(editText.getContext());
+                    String clipboardURL = ClipboardUtil.INSTANCE.getClipboardURLorNull(editText.getContext());
                     if (clipboardURL != null) {
                         ssb.insert(end, "](" + clipboardURL + ")");
                         end += clipboardURL.length();

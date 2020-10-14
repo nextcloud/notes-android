@@ -484,8 +484,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             if (item.getClass() == NavigationItem.CategoryNavigationItem.class) {
                                 mainViewModel.postSelectedCategory(new NavigationCategory(db.getCategoryDao().getCategory(((NavigationItem.CategoryNavigationItem) item).categoryId)));
                             } else {
-                                Log.e(TAG, "Unknown item navigation type. Fallback to show " + RECENT);
-                                mainViewModel.postSelectedCategory(new NavigationCategory(RECENT));
+                                throw new IllegalStateException(NavigationItem.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but item is not of type " + NavigationItem.CategoryNavigationItem.class.getSimpleName() + ".");
                             }
                         }
                     }

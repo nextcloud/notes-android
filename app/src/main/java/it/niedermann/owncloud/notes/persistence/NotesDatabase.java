@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.dao.AccountDao;
@@ -61,7 +62,6 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_17_18;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_18_19;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_19_20;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
-import it.niedermann.owncloud.notes.persistence.sharedprefs.SharedPreferenceIntLiveData;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -530,7 +530,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                     if (category != null) {
                         getCategoryDao().modifyCategoryOrder(accountId, category.getId(), sortingMethod);
                     } else {
-                        Log.e(TAG, "Tried to modify category order for " + ENavigationCategoryType.DEFAULT_CATEGORY + "but category is null.");
+                        throw new IllegalStateException("Tried to modify category order for " + ENavigationCategoryType.DEFAULT_CATEGORY + "but category is null.");
                     }
                     break;
                 }
@@ -540,33 +540,35 @@ public abstract class NotesDatabase extends RoomDatabase {
     }
 
     /**
-     * Gets the sorting method of a category, the category can be normal category or
-     * one of "All notes", "Favorite", and "Uncategorized".
-     * If category is one of these three, sorting method will be got from android.content.SharedPreference.
-     * The sorting method of the category can be used to decide
-     * to use which sorting method to show the notes for each categories.
+     * Gets the sorting method of a {@link NavigationCategory}, the category can be normal
+     * {@link Category} or one of {@link ENavigationCategoryType}.
+     * If the category no normal {@link Category}, sorting method will be got from
+     * {@link SharedPreferences}.
+     * <p>
+     * The sorting method of the category can be used to decide to use which sorting method to show
+     * the notes for each categories.
      *
      * @param selectedCategory The category
      * @return The sorting method in CategorySortingMethod enum format
      */
     @NonNull
+    @AnyThread
     public LiveData<CategorySortingMethod> getCategoryOrder(@NonNull NavigationCategory selectedCategory) {
-        final Context ctx = context.getApplicationContext();
-        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(ctx);
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         String prefKey;
 
         switch (selectedCategory.getType()) {
             // TODO make this account specific
             case RECENT: {
-                prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_all_notes);
+                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_all_notes);
                 break;
             }
             case FAVORITES: {
-                prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.label_favorites);
+                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.label_favorites);
                 break;
             }
             case UNCATEGORIZED: {
-                prefKey = ctx.getString(R.string.action_sorting_method) + ' ' + ctx.getString(R.string.action_uncategorized);
+                prefKey = context.getString(R.string.action_sorting_method) + ' ' + context.getString(R.string.action_uncategorized);
                 break;
             }
             case DEFAULT_CATEGORY:
