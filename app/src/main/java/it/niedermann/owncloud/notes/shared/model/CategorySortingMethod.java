@@ -1,8 +1,8 @@
 package it.niedermann.owncloud.notes.shared.model;
 
 public enum CategorySortingMethod {
-    SORT_MODIFIED_DESC("modified DESC"),
-    SORT_LEXICOGRAPHICAL_ASC("title COLLATE NOCASE ASC");
+    SORT_MODIFIED_DESC("MODIFIED DESC"),
+    SORT_LEXICOGRAPHICAL_ASC("TITLE COLLATE NOCASE ASC");
 
     private String sorder;  // sorting method OrderBy for SQL
 

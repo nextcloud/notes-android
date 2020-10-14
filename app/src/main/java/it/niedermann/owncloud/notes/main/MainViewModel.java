@@ -115,22 +115,30 @@ public class MainViewModel extends AndroidViewModel {
             String searchQuery = getSearchTerm().getValue();
             searchQuery = searchQuery == null ? "%" : "%" + searchQuery.trim() + "%";
             switch (selectedCategory.getType()) {
+                case RECENT: {
+                    fromDatabase = sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC
+                            ? db.getNoteDao().searchRecentByModified(accountId, searchQuery)
+                            : db.getNoteDao().searchRecentLexicographically(accountId, searchQuery);
+                    break;
+                }
                 case FAVORITES: {
-                    fromDatabase = db.getNoteDao().searchFavorites(accountId, searchQuery, sortingMethod.getSorder());
+                    fromDatabase = sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC
+                            ? db.getNoteDao().searchFavoritesByModified(accountId, searchQuery)
+                            : db.getNoteDao().searchFavoritesLexicographically(accountId, searchQuery);
                     break;
                 }
                 case UNCATEGORIZED: {
-                    fromDatabase = db.getNoteDao().searchUncategorized(accountId, searchQuery, sortingMethod.getSorder());
-                    break;
-                }
-                case RECENT: {
-                    fromDatabase = db.getNoteDao().searchRecent(accountId, searchQuery, sortingMethod.getSorder());
+                    fromDatabase = sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC
+                            ? db.getNoteDao().searchUncategorizedByModified(accountId, searchQuery)
+                            : db.getNoteDao().searchUncategorizedLexicographically(accountId, searchQuery);
                     break;
                 }
                 case DEFAULT_CATEGORY:
                 default: {
-                    Category category = selectedCategory.getCategory();
-                    fromDatabase = db.getNoteDao().searchByCategory(accountId, searchQuery, category == null ? "" : category.getTitle(), sortingMethod.getSorder());
+                    final Category category = selectedCategory.getCategory();
+                    fromDatabase = sortingMethod == CategorySortingMethod.SORT_MODIFIED_DESC
+                            ? db.getNoteDao().searchCategoryByModified(accountId, searchQuery, category == null ? "" : category.getTitle())
+                            : db.getNoteDao().searchCategoryLexicographically(accountId, searchQuery, category == null ? "" : category.getTitle());
                     break;
                 }
             }

@@ -10,7 +10,6 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
 import java.util.List;
 
@@ -55,17 +54,17 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
                 case MODE_DISPLAY_ALL:
-                    noteEntitiesLiveData = db.getNoteDao().searchRecent(data.getAccountId(), "%", CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
+                    noteEntitiesLiveData = db.getNoteDao().searchRecentByModified(data.getAccountId(), "%");
                     break;
                 case MODE_DISPLAY_STARRED:
-                    noteEntitiesLiveData = db.getNoteDao().searchFavorites(data.getAccountId(), "%", CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
+                    noteEntitiesLiveData = db.getNoteDao().searchFavoritesByModified(data.getAccountId(), "%");
                     break;
                 case MODE_DISPLAY_CATEGORY:
                 default:
                     if (data.getCategoryId() != null) {
-                        noteEntitiesLiveData = db.getNoteDao().searchByCategory(data.getAccountId(), "%", db.getCategoryDao().getCategoryTitleById(data.getCategoryId()), CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
+                        noteEntitiesLiveData = db.getNoteDao().searchCategoryByModified(data.getAccountId(), "%", db.getCategoryDao().getCategoryTitleById(data.getCategoryId()));
                     } else {
-                        noteEntitiesLiveData = db.getNoteDao().searchUncategorized(data.getAccountId(), "%", CategorySortingMethod.SORT_MODIFIED_DESC.getSorder());
+                        noteEntitiesLiveData = db.getNoteDao().searchUncategorizedByModified(data.getAccountId(), "%");
                     }
                     break;
             }
