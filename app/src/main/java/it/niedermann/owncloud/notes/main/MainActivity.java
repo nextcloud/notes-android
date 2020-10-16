@@ -26,7 +26,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -750,7 +749,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onAccountDeleted(Account localAccount) {
-        LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
+        final LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
         deleteLiveData.observe(this, (v) -> {
             if (localAccount.getId() == this.localAccount.getId()) {
                 List<Account> remainingAccounts = db.getAccountDao().getAccounts();
@@ -776,10 +775,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void onCategoryChosen(String category) {
         for (Integer i : new ArrayList<>(adapter.getSelected())) {
-            NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
-            db.setCategory(ssoAccount, localAccount.getId(), note.getId(), category);
+            db.setCategory(ssoAccount, localAccount.getId(), ((NoteWithCategory) adapter.getItem(i)).getId(), category);
         }
-
-        mActionMode.finish();
     }
 }
