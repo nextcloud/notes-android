@@ -6,6 +6,4 @@ public interface AccountSwitcherListener {
     void addAccount();
 
     void onAccountChosen(Account localAccount);
-
-    void onAccountDeleted(Account localAccount);
 }

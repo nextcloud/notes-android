@@ -112,7 +112,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private NavigationAdapter adapterCategories;
     private MenuAdapter menuAdapter;
 
-    protected SingleSignOnAccount ssoAccount;
     protected Account localAccount;
 
     protected DrawerLayoutBinding binding;
@@ -650,23 +649,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public void onAccountChosen(Account localAccount) {
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         mainViewModel.postCurrentAccount(localAccount);
-    }
-
-    @Override
-    public void onAccountDeleted(Account localAccount) {
-        final LiveData<Void> deleteLiveData = mainViewModel.deleteAccount(localAccount);
-        deleteLiveData.observe(this, (v) -> {
-            if (localAccount.getId() == this.localAccount.getId()) {
-                List<Account> remainingAccounts = mainViewModel.getAccounts();
-                if (remainingAccounts.size() > 0) {
-                    mainViewModel.postCurrentAccount(remainingAccounts.get(0));
-                } else {
-                    recreate(); // TODO
-                    askForNewAccount(this);
-                }
-            }
-            deleteLiveData.removeObservers(this);
-        });
     }
 
     @Override
