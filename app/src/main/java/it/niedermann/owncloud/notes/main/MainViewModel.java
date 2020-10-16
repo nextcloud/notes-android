@@ -321,13 +321,13 @@ public class MainViewModel extends AndroidViewModel {
     /**
      * @return <code>true</code>, if a synchronization could successfully be triggered.
      */
-    public boolean synchronize(SingleSignOnAccount ssoAccount) {
+    public boolean synchronize(Account account) {
         NoteServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
         if (!syncHelper.isSyncPossible()) {
             syncHelper.updateNetworkStatus();
         }
         if (syncHelper.isSyncPossible()) {
-            syncHelper.scheduleSync(ssoAccount, false);
+            syncHelper.scheduleSync(account, false);
             return true;
         } else { // Sync is not possible
             if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
@@ -353,25 +353,25 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> performFullSynchronizationForCurrentAccount() {
         final MutableLiveData<Boolean> insufficientInformation = new MutableLiveData<>();
-        return switchMap(getCurrentAccount(), currentAccount -> {
-            Log.v(TAG, "[performFullSynchronizationForCurrentAccount] - currentAccount: " + currentAccount);
-            if (currentAccount == null) {
+        return switchMap(getCurrentAccount(), localAccount -> {
+            Log.v(TAG, "[performFullSynchronizationForCurrentAccount] - currentAccount: " + localAccount);
+            if (localAccount == null) {
                 return insufficientInformation;
             } else {
-                Log.i(TAG, "[performFullSynchronizationForCurrentAccount] Refreshing capabilities for " + currentAccount.getAccountName());
+                Log.i(TAG, "[performFullSynchronizationForCurrentAccount] Refreshing capabilities for " + localAccount.getAccountName());
                 MutableLiveData<Boolean> syncSuccess = new MutableLiveData<>();
                 new Thread(() -> {
                     try {
-                        SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplication(), currentAccount.getAccountName());
+                        SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName());
                         final Capabilities capabilities;
                         try {
-                            capabilities = CapabilitiesClient.getCapabilities(getApplication(), ssoAccount, currentAccount.getCapabilitiesETag());
-                            db.getAccountDao().updateCapabilitiesETag(currentAccount.getId(), capabilities.getETag());
-                            db.getAccountDao().updateBrand(currentAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
-                            currentAccount.setColor(capabilities.getColor());
-                            currentAccount.setTextColor(capabilities.getTextColor());
-                            BrandingUtil.saveBrandColors(getApplication(), currentAccount.getColor(), currentAccount.getTextColor());
-                            db.updateApiVersion(currentAccount.getId(), capabilities.getApiVersion());
+                            capabilities = CapabilitiesClient.getCapabilities(getApplication(), ssoAccount, localAccount.getCapabilitiesETag());
+                            db.getAccountDao().updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
+                            db.getAccountDao().updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
+                            localAccount.setColor(capabilities.getColor());
+                            localAccount.setTextColor(capabilities.getTextColor());
+                            BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
+                            db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
                             Log.i(TAG, capabilities.toString());
                         } catch (Exception e) {
                             if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
@@ -381,7 +381,7 @@ public class MainViewModel extends AndroidViewModel {
                             }
                         }
                         // Even if the capabilities endpoint makes trouble, we can still try to synchronize the notes
-                        syncSuccess.postValue(synchronize(ssoAccount));
+                        syncSuccess.postValue(synchronize(localAccount));
                     } catch (NextcloudFilesAppAccountNotFoundException e) {
                         e.printStackTrace();
                         // TODO should we just remove this account from the database?
@@ -403,12 +403,12 @@ public class MainViewModel extends AndroidViewModel {
         return db.getAccountDao().getAccounts();
     }
 
-    public void setCategory(SingleSignOnAccount ssoAccount, long accountId, Long noteId, @NonNull String category) {
-        db.setCategory(ssoAccount, accountId, noteId, category);
+    public void setCategory(Account account, Long noteId, @NonNull String category) {
+        db.setCategory(account, noteId, category);
     }
 
-    public LiveData<NoteWithCategory> moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, NoteWithCategory note, long newAccountId) {
-        return db.moveNoteToAnotherAccount(ssoAccount, note, newAccountId);
+    public LiveData<NoteWithCategory> moveNoteToAnotherAccount(Account account, NoteWithCategory note) {
+        return db.moveNoteToAnotherAccount(account, note);
     }
 
     @WorkerThread
@@ -420,12 +420,12 @@ public class MainViewModel extends AndroidViewModel {
         return db.deleteAccount(account);
     }
 
-    public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId) {
-        db.toggleFavoriteAndSync(ssoAccount, noteId);
+    public void toggleFavoriteAndSync(Account account, long noteId) {
+        db.toggleFavoriteAndSync(account, noteId);
     }
 
-    public void deleteNoteAndSync(SingleSignOnAccount ssoAccount, long id) {
-        db.deleteNoteAndSync(ssoAccount, id);
+    public void deleteNoteAndSync(Account account, long id) {
+        db.deleteNoteAndSync(account, id);
     }
 
     public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
@@ -437,13 +437,13 @@ public class MainViewModel extends AndroidViewModel {
         return db.getNoteDao().getNoteWithCategory(accountId, id);
     }
 
-    public LiveData<NoteWithCategory> addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteWithCategory note) {
-        return db.addNoteAndSync(ssoAccount, accountId, note);
+    public LiveData<NoteWithCategory> addNoteAndSync(Account account, long accountId, NoteWithCategory note) {
+        return db.addNoteAndSync(account, note);
     }
 
     @WorkerThread
-    public void updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull Account localAccount, @NonNull NoteWithCategory oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
-        db.updateNoteAndSync(ssoAccount, localAccount, oldNote, newContent, newTitle, callback);
+    public void updateNoteAndSync(@NonNull Account localAccount, @NonNull NoteWithCategory oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
+        db.updateNoteAndSync(localAccount, oldNote, newContent, newTitle, callback);
     }
 
     public void createOrUpdateSingleNoteWidgetData(SingleNoteWidgetData data) {

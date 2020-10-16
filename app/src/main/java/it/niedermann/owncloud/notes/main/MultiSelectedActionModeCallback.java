@@ -34,6 +34,7 @@ import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
@@ -49,7 +50,7 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final MainViewModel mainViewModel;
     @NonNull
     private final LifecycleOwner lifecycleOwner;
-    private final long currentLocalAccountId;
+    private final Account account;
     private final boolean canMoveNoteToAnotherAccounts;
     private final ItemAdapter adapter;
     private final RecyclerView recyclerView;
@@ -57,12 +58,12 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
+            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, @NonNull Account account, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.view = view;
         this.mainViewModel = mainViewModel;
         this.lifecycleOwner = lifecycleOwner;
-        this.currentLocalAccountId = currentLocalAccountId;
+        this.account = account;
         this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
         this.adapter = adapter;
         this.recyclerView = recyclerView;
@@ -104,14 +105,12 @@ public class MultiSelectedActionModeCallback implements Callback {
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.menu_delete) {
-            try {
-                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
                 List<NoteWithCategory> deletedNotes = new ArrayList<>();
                 List<Integer> selection = adapter.getSelected();
                 for (Integer i : selection) {
                     NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
                     deletedNotes.add(mainViewModel.getNoteWithCategory(note.getAccountId(), note.getId()));
-                    mainViewModel.deleteNoteAndSync(ssoAccount, note.getId());
+                    mainViewModel.deleteNoteAndSync(account, note.getId());
                 }
                 mode.finish(); // Action picked, so close the CAB
                 //after delete selection has to be cleared
@@ -122,7 +121,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                 BrandedSnackbar.make(view, deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                         .setAction(R.string.action_undo, (View v) -> {
                             for (NoteWithCategory deletedNote : deletedNotes) {
-                                final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(ssoAccount, deletedNote.getAccountId(), deletedNote);
+                                final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(account, deletedNote.getAccountId(), deletedNote);
                                 undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
                             }
                             String restoreSnackbarTitle = deletedNotes.size() == 1
@@ -132,13 +131,10 @@ public class MultiSelectedActionModeCallback implements Callback {
                                     .show();
                         })
                         .show();
-            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                e.printStackTrace();
-            }
             return true;
         } else if (itemId == R.id.menu_move) {
             AccountPickerDialogFragment
-                    .newInstance(currentLocalAccountId)
+                    .newInstance(account.getId())
                     .show(fragmentManager, MainActivity.class.getSimpleName());
             return true;
         } else if (itemId == R.id.menu_share) {
@@ -160,7 +156,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
             CategoryDialogFragment
-                    .newInstance(currentLocalAccountId, "")
+                    .newInstance(account.getId(), "")
                     .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
 
             return false;

@@ -161,13 +161,13 @@ public abstract class NotesDatabase extends RoomDatabase {
      */
     @NonNull
     @MainThread
-    public LiveData<NoteWithCategory> addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteWithCategory note) {
-        NoteWithCategory entity = new NoteWithCategory(new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0), note.getCategory());
+    public LiveData<NoteWithCategory> addNoteAndSync(Account account, NoteWithCategory note) {
+        NoteWithCategory entity = new NoteWithCategory(new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0), note.getCategory());
         final MutableLiveData<NoteWithCategory> ret = new MutableLiveData<>();
-        new Thread(() -> ret.postValue(addNote(accountId, entity))).start();
+        new Thread(() -> ret.postValue(addNote(account.getId(), entity))).start();
         return map(ret, newNoteWithCategory -> {
             notifyWidgets();
-            serverSyncHelper.scheduleSync(ssoAccount, true);
+            serverSyncHelper.scheduleSync(account, true);
             return newNoteWithCategory;
         });
     }
@@ -207,10 +207,10 @@ public abstract class NotesDatabase extends RoomDatabase {
     }
 
     @AnyThread
-    public LiveData<NoteWithCategory> moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, NoteWithCategory note, long newAccountId) {
+    public LiveData<NoteWithCategory> moveNoteToAnotherAccount(Account account, NoteWithCategory note) {
         NoteWithCategory noteWithCategory = new NoteWithCategory(new Note(null, note.getModified(), note.getTitle(), getNoteDao().getContent(note.getId()), note.getFavorite(), null), note.getCategory());
-        deleteNoteAndSync(ssoAccount, note.getId());
-        return addNoteAndSync(ssoAccount, newAccountId, noteWithCategory);
+        deleteNoteAndSync(account, note.getId());
+        return addNoteAndSync(account, noteWithCategory);
     }
 
     @NonNull
@@ -225,10 +225,10 @@ public abstract class NotesDatabase extends RoomDatabase {
     }
 
     @AnyThread
-    public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId) {
+    public void toggleFavoriteAndSync(Account account, long noteId) {
         new Thread(() -> {
             getNoteDao().toggleFavorite(noteId);
-            serverSyncHelper.scheduleSync(ssoAccount, true);
+            serverSyncHelper.scheduleSync(account, true);
         }).start();
     }
 
@@ -237,17 +237,17 @@ public abstract class NotesDatabase extends RoomDatabase {
      * This method will search in the database to find out the category id in the db.
      * If there is no such category existing, this method will create it and search again.
      *
-     * @param ssoAccount The single sign on account
+     * @param account    The single sign on account
      * @param accountId  The account where the note is
      * @param noteId     The note which will be updated
      * @param category   The category title which should be used to find the category id.
      */
     @AnyThread
-    public void setCategory(SingleSignOnAccount ssoAccount, long accountId, long noteId, @NonNull String category) {
+    public void setCategory(@NonNull Account account, long noteId, @NonNull String category) {
         new Thread(() -> {
             getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
-            getNoteDao().updateCategory(noteId, getOrCreateCategoryIdByTitle(accountId, category));
-            serverSyncHelper.scheduleSync(ssoAccount, true);
+            getNoteDao().updateCategory(noteId, getOrCreateCategoryIdByTitle(account.getId(), category));
+            serverSyncHelper.scheduleSync(account, true);
         }).start();
     }
 
@@ -262,7 +262,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @return changed {@link Note} if differs from database, otherwise the old {@link Note}.
      */
     @WorkerThread
-    public NoteWithCategory updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull Account localAccount, @NonNull NoteWithCategory oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
+    public NoteWithCategory updateNoteAndSync(Account localAccount, @NonNull NoteWithCategory oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         final NoteWithCategory newNote;
         if (newContent == null) {
             newNote = new NoteWithCategory(new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY()), oldNote.getCategory());
@@ -285,9 +285,9 @@ public abstract class NotesDatabase extends RoomDatabase {
         if (rows > 0) {
             notifyWidgets();
             if (callback != null) {
-                serverSyncHelper.addCallbackPush(ssoAccount, callback);
+                serverSyncHelper.addCallbackPush(localAccount, callback);
             }
-            serverSyncHelper.scheduleSync(ssoAccount, true);
+            serverSyncHelper.scheduleSync(localAccount, true);
             return newNote;
         } else {
             if (callback != null) {
@@ -304,11 +304,11 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param id long - ID of the Note that should be deleted
      */
     @AnyThread
-    public void deleteNoteAndSync(SingleSignOnAccount ssoAccount, long id) {
+    public void deleteNoteAndSync(Account account, long id) {
         new Thread(() -> {
             getNoteDao().updateStatus(id, DBStatus.LOCAL_DELETED);
             notifyWidgets();
-            serverSyncHelper.scheduleSync(ssoAccount, true);
+            serverSyncHelper.scheduleSync(account, true);
 
             if (SDK_INT >= O) {
                 ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);

@@ -16,6 +16,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.preference.PreferenceManager;
 
+import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -69,7 +70,7 @@ public class NoteServerSyncHelper {
      * @see <a href="https://stackoverflow.com/a/3104265">Do not make this a local variable.</a>
      */
     @SuppressWarnings("FieldCanBeLocal")
-    private SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = (SharedPreferences prefs, String key) -> {
+    private final SharedPreferences.OnSharedPreferenceChangeListener onSharedPreferenceChangeListener = (SharedPreferences prefs, String key) -> {
         if (syncOnlyOnWifiKey.equals(key)) {
             syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
             updateNetworkStatus();
@@ -81,22 +82,24 @@ public class NoteServerSyncHelper {
         public void onReceive(Context context, Intent intent) {
             updateNetworkStatus();
             if (isSyncPossible() && SSOUtil.isConfigured(context)) {
-                try {
-                    scheduleSync(SingleAccountHelper.getCurrentSingleSignOnAccount(context), false);
-                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                    Log.v(TAG, "Can not select current SingleSignOn account after network changed, do not sync.");
-                }
+                new Thread(() -> {
+                    try {
+                        scheduleSync(db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name), false);
+                    } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                        Log.v(TAG, "Can not select current SingleSignOn account after network changed, do not sync.");
+                    }
+                }).start();
             }
         }
     };
 
     // current state of the synchronization
-    private final Map<String, Boolean> syncActive = new HashMap<>();
-    private final Map<String, Boolean> syncScheduled = new HashMap<>();
+    private final Map<Long, Boolean> syncActive = new HashMap<>();
+    private final Map<Long, Boolean> syncScheduled = new HashMap<>();
 
     // list of callbacks for both parts of synchronziation
-    private final Map<String, List<ISyncCallback>> callbacksPush = new HashMap<>();
-    private final Map<String, List<ISyncCallback>> callbacksPull = new HashMap<>();
+    private final Map<Long, List<ISyncCallback>> callbacksPush = new HashMap<>();
+    private final Map<Long, List<ISyncCallback>> callbacksPull = new HashMap<>();
 
     private NoteServerSyncHelper(NotesDatabase db) {
         this.db = db;
@@ -164,16 +167,16 @@ public class NoteServerSyncHelper {
      *
      * @param callback Implementation of ISyncCallback, contains one method that shall be executed.
      */
-    public void addCallbackPush(SingleSignOnAccount ssoAccount, ISyncCallback callback) {
-        if (ssoAccount == null) {
+    public void addCallbackPush(Account account, ISyncCallback callback) {
+        if (account == null) {
             Log.i(TAG, "ssoAccount is null. Is this a local account?");
             callback.onScheduled();
             callback.onFinish();
         } else {
-            if (!callbacksPush.containsKey(ssoAccount.name)) {
-                callbacksPush.put(ssoAccount.name, new ArrayList<>());
+            if (!callbacksPush.containsKey(account.getId())) {
+                callbacksPush.put(account.getId(), new ArrayList<>());
             }
-            Objects.requireNonNull(callbacksPush.get(ssoAccount.name)).add(callback);
+            Objects.requireNonNull(callbacksPush.get(account.getId())).add(callback);
         }
     }
 
@@ -185,16 +188,16 @@ public class NoteServerSyncHelper {
      *
      * @param callback Implementation of ISyncCallback, contains one method that shall be executed.
      */
-    public void addCallbackPull(SingleSignOnAccount ssoAccount, ISyncCallback callback) {
-        if (ssoAccount == null) {
+    public void addCallbackPull(Account account, ISyncCallback callback) {
+        if (account == null) {
             Log.i(TAG, "ssoAccount is null. Is this a local account?");
             callback.onScheduled();
             callback.onFinish();
         } else {
-            if (!callbacksPull.containsKey(ssoAccount.name)) {
-                callbacksPull.put(ssoAccount.name, new ArrayList<>());
+            if (!callbacksPull.containsKey(account.getId())) {
+                callbacksPull.put(account.getId(), new ArrayList<>());
             }
-            Objects.requireNonNull(callbacksPull.get(ssoAccount.name)).add(callback);
+            Objects.requireNonNull(callbacksPull.get(account.getId())).add(callback);
         }
     }
 
@@ -204,53 +207,54 @@ public class NoteServerSyncHelper {
      *
      * @param onlyLocalChanges Whether to only push local changes to the server or to also load the whole list of notes from the server.
      */
-    public void scheduleSync(SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
-        if (ssoAccount == null) {
+    public void scheduleSync(Account account, boolean onlyLocalChanges) {
+        if (account == null) {
             Log.i(TAG, SingleSignOnAccount.class.getSimpleName() + " is null. Is this a local account?");
         } else {
-            if (syncActive.get(ssoAccount.name) == null) {
-                syncActive.put(ssoAccount.name, false);
+            if (syncActive.get(account.getId()) == null) {
+                syncActive.put(account.getId(), false);
             }
-            Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) ? "sync active" : "sync NOT active") + ") ...");
-            if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(ssoAccount.name)) || onlyLocalChanges)) {
-                Log.d(TAG, "... starting now");
-                final Account localAccount = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
-                if (localAccount == null) {
-                    Log.e(TAG, Account.class.getSimpleName() + " for ssoAccount \"" + ssoAccount.name + "\" is null. Cannot synchronize.", new IllegalStateException());
-                    return;
+            Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(account.getId())) ? "sync active" : "sync NOT active") + ") ...");
+            if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
+                try {
+                    SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
+                    Log.d(TAG, "... starting now");
+                    final NotesClient notesClient = NotesClient.newInstance(account.getPreferredApiVersion(), context);
+                    final SyncTask syncTask = new SyncTask(notesClient, account, ssoAccount, onlyLocalChanges);
+                    syncTask.addCallbacks(account, callbacksPush.get(account.getId()));
+                    callbacksPush.put(account.getId(), new ArrayList<>());
+                    if (!onlyLocalChanges) {
+                        syncTask.addCallbacks(account, callbacksPull.get(account.getId()));
+                        callbacksPull.put(account.getId(), new ArrayList<>());
+                    }
+                    syncTask.execute();
+                } catch (NextcloudFilesAppAccountNotFoundException e) {
+                    Log.e(TAG, "... Could not find " + SingleSignOnAccount.class.getSimpleName() + " for account name " + account.getAccountName());
+                    e.printStackTrace();
                 }
-                final NotesClient notesClient = NotesClient.newInstance(localAccount.getPreferredApiVersion(), context);
-                final SyncTask syncTask = new SyncTask(notesClient, localAccount, ssoAccount, onlyLocalChanges);
-                syncTask.addCallbacks(ssoAccount, callbacksPush.get(ssoAccount.name));
-                callbacksPush.put(ssoAccount.name, new ArrayList<>());
-                if (!onlyLocalChanges) {
-                    syncTask.addCallbacks(ssoAccount, callbacksPull.get(ssoAccount.name));
-                    callbacksPull.put(ssoAccount.name, new ArrayList<>());
-                }
-                syncTask.execute();
             } else if (!onlyLocalChanges) {
                 Log.d(TAG, "... scheduled");
-                syncScheduled.put(ssoAccount.name, true);
-                if (callbacksPush.containsKey(ssoAccount.name) && callbacksPush.get(ssoAccount.name) != null) {
-                    final List<ISyncCallback> callbacks = callbacksPush.get(ssoAccount.name);
+                syncScheduled.put(account.getId(), true);
+                if (callbacksPush.containsKey(account.getId()) && callbacksPush.get(account.getId()) != null) {
+                    final List<ISyncCallback> callbacks = callbacksPush.get(account.getId());
                     if (callbacks != null) {
                         for (ISyncCallback callback : callbacks) {
                             callback.onScheduled();
                         }
                     } else {
-                        Log.w(TAG, "List of push-callbacks was set for account \"" + ssoAccount.name + "\" but it was null");
+                        Log.w(TAG, "List of push-callbacks was set for account \"" + account.getAccountName() + "\" but it was null");
                     }
                 }
             } else {
                 Log.d(TAG, "... do nothing");
-                if (callbacksPush.containsKey(ssoAccount.name) && callbacksPush.get(ssoAccount.name) != null) {
-                    final List<ISyncCallback> callbacks = callbacksPush.get(ssoAccount.name);
+                if (callbacksPush.containsKey(account.getId()) && callbacksPush.get(account.getId()) != null) {
+                    final List<ISyncCallback> callbacks = callbacksPush.get(account.getId());
                     if (callbacks != null) {
                         for (ISyncCallback callback : callbacks) {
                             callback.onScheduled();
                         }
                     } else {
-                        Log.w(TAG, "List of push-callbacks was set for account \"" + ssoAccount.name + "\" but it was null");
+                        Log.w(TAG, "List of push-callbacks was set for account \"" + account.getAccountName() + "\" but it was null");
                     }
                 }
             }
@@ -312,7 +316,7 @@ public class NoteServerSyncHelper {
         private final SingleSignOnAccount ssoAccount;
         private final boolean onlyLocalChanges;
         @NonNull
-        private final Map<String, List<ISyncCallback>> callbacks = new HashMap<>();
+        private final Map<Long, List<ISyncCallback>> callbacks = new HashMap<>();
         @NonNull
         private final ArrayList<Throwable> exceptions = new ArrayList<>();
 
@@ -323,21 +327,21 @@ public class NoteServerSyncHelper {
             this.onlyLocalChanges = onlyLocalChanges;
         }
 
-        private void addCallbacks(SingleSignOnAccount ssoAccount, List<ISyncCallback> callbacks) {
-            this.callbacks.put(ssoAccount.name, callbacks);
+        private void addCallbacks(Account account, List<ISyncCallback> callbacks) {
+            this.callbacks.put(account.getId(), callbacks);
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             syncStatus.postValue(true);
-            if (!syncScheduled.containsKey(ssoAccount.name) || syncScheduled.get(ssoAccount.name) == null) {
-                syncScheduled.put(ssoAccount.name, false);
+            if (!syncScheduled.containsKey(localAccount.getId()) || syncScheduled.get(localAccount.getId()) == null) {
+                syncScheduled.put(localAccount.getId(), false);
             }
-            if (!onlyLocalChanges && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {
-                syncScheduled.put(ssoAccount.name, false);
+            if (!onlyLocalChanges && Boolean.TRUE.equals(syncScheduled.get(localAccount.getId()))) {
+                syncScheduled.put(localAccount.getId(), false);
             }
-            syncActive.put(ssoAccount.name, true);
+            syncActive.put(localAccount.getId(), true);
         }
 
         @Override
@@ -504,18 +508,18 @@ public class NoteServerSyncHelper {
             if (!status.pullSuccessful || !status.pushSuccessful) {
                 syncErrors.postValue(exceptions);
             }
-            syncActive.put(ssoAccount.name, false);
+            syncActive.put(localAccount.getId(), false);
             // notify callbacks
-            if (callbacks.containsKey(ssoAccount.name) && callbacks.get(ssoAccount.name) != null) {
-                for (ISyncCallback callback : Objects.requireNonNull(callbacks.get(ssoAccount.name))) {
+            if (callbacks.containsKey(localAccount.getId()) && callbacks.get(localAccount.getId()) != null) {
+                for (ISyncCallback callback : Objects.requireNonNull(callbacks.get(localAccount.getId()))) {
                     callback.onFinish();
                 }
             }
             db.notifyWidgets();
             db.updateDynamicShortcuts(localAccount.getId());
             // start next sync if scheduled meanwhile
-            if (syncScheduled.containsKey(ssoAccount.name) && syncScheduled.get(ssoAccount.name) != null && Boolean.TRUE.equals(syncScheduled.get(ssoAccount.name))) {
-                scheduleSync(ssoAccount, false);
+            if (syncScheduled.containsKey(localAccount.getId()) && syncScheduled.get(localAccount.getId()) != null && Boolean.TRUE.equals(syncScheduled.get(localAccount.getId()))) {
+                scheduleSync(localAccount, false);
             }
             syncStatus.postValue(false);
         }

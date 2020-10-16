@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
@@ -24,7 +23,7 @@ import it.niedermann.owncloud.notes.main.MainViewModel;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
@@ -33,7 +32,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
     private static final int UNDO_DURATION = 12_000;
 
     public NotesListViewItemTouchHelper(
-            @NonNull SingleSignOnAccount ssoAccount,
+            @NonNull Account account,
             @NonNull Context context,
             @NonNull MainViewModel mainViewModel,
             @NonNull LifecycleOwner lifecycleOwner,
@@ -75,14 +74,14 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                     case ItemTouchHelper.LEFT:
                         final NoteWithCategory dbNoteWithoutContent = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
                         final NoteWithCategory dbNote = mainViewModel.getNoteWithCategory(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
-                        mainViewModel.deleteNoteAndSync(ssoAccount, dbNote.getId());
+                        mainViewModel.deleteNoteAndSync(account, dbNote.getId());
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         if (view == null) {
                             Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
                         } else {
                             BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
-                                        final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
+                                        final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(account, dbNote.getAccountId(), dbNote);
                                         undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
                                         BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
@@ -92,7 +91,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         break;
                     case ItemTouchHelper.RIGHT:
                         final NoteWithCategory adapterNote = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
-                        mainViewModel.toggleFavoriteAndSync(ssoAccount, adapterNote.getId());
+                        mainViewModel.toggleFavoriteAndSync(account, adapterNote.getId());
                         break;
                     default:
                         //NoOp

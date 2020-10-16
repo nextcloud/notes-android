@@ -119,7 +119,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                             note = new NoteWithCategory(new Note(-1, -1L, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), DBStatus.VOID, -1, "", 0));
                         }
                     } else {
-                        final LiveData<NoteWithCategory> createLiveData = db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote);
+                        final LiveData<NoteWithCategory> createLiveData = db.addNoteAndSync(localAccount, cloudNote);
                         createLiveData.observe(requireActivity(), (createdNote) -> {
                             note = createdNote;
                             originalNote = null;
@@ -224,18 +224,18 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         switch (item.getItemId()) {
             case R.id.menu_cancel:
                 if (originalNote == null) {
-                    db.deleteNoteAndSync(ssoAccount, note.getId());
+                    db.deleteNoteAndSync(localAccount, note.getId());
                 } else {
-                    db.updateNoteAndSync(ssoAccount, localAccount, originalNote, null, null, null);
+                    db.updateNoteAndSync(localAccount, originalNote, null, null, null);
                 }
                 listener.close();
                 return true;
             case R.id.menu_delete:
-                db.deleteNoteAndSync(ssoAccount, note.getId());
+                db.deleteNoteAndSync(localAccount, note.getId());
                 listener.close();
                 return true;
             case R.id.menu_favorite:
-                db.toggleFavoriteAndSync(ssoAccount, note.getId());
+                db.toggleFavoriteAndSync(localAccount, note.getId());
                 listener.onNoteUpdated(note);
                 prepareFavoriteOption(item);
                 return true;
@@ -291,7 +291,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     public void onCloseNote() {
         if (!titleModified && originalNote == null && getContent().isEmpty()) {
-            db.deleteNoteAndSync(ssoAccount, note.getId());
+            db.deleteNoteAndSync(localAccount, note.getId());
         }
     }
 
@@ -312,7 +312,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
             } else {
-                note = db.updateNoteAndSync(ssoAccount, localAccount, note, newContent, null, callback);
+                note = db.updateNoteAndSync(localAccount, note, newContent, null, callback);
                 listener.onNoteUpdated(note);
                 requireActivity().invalidateOptionsMenu();
             }
@@ -356,7 +356,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Override
     public void onCategoryChosen(String category) {
-        db.setCategory(ssoAccount, note.getAccountId(), note.getId(), category);
+        db.setCategory(localAccount, note.getId(), category);
         note.setCategory(category);
         listener.onNoteUpdated(note);
     }
@@ -365,12 +365,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onTitleEdited(String newTitle) {
         titleModified = true;
         note.getNote().setTitle(newTitle);
-        note = db.updateNoteAndSync(ssoAccount, localAccount, note, note.getContent(), newTitle, null);
+        note = db.updateNoteAndSync(localAccount, note, note.getContent(), newTitle, null);
         listener.onNoteUpdated(note);
     }
 
     public void moveNote(Account account) {
-        db.moveNoteToAnotherAccount(ssoAccount, note, account.getId());
+        db.moveNoteToAnotherAccount(account, note);
         listener.close();
     }
 

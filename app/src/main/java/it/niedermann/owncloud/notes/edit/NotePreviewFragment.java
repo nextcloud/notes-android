@@ -36,6 +36,7 @@ import java.util.HashSet;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteLinksUtils;
@@ -211,14 +212,14 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             binding.swiperefreshlayout.setRefreshing(true);
             try {
                 TextProcessorChain chain = defaultTextProcessorChain(note.getNote());
-                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
-                db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
+                Account account = db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
+                db.getNoteServerSyncHelper().addCallbackPull(account, () -> {
                     note = db.getNoteDao().getNoteWithCategory(note.getAccountId(), note.getId());
                     changedText = note.getContent();
                     binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);
                 });
-                db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
+                db.getNoteServerSyncHelper().scheduleSync(account, false);
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 e.printStackTrace();
             }

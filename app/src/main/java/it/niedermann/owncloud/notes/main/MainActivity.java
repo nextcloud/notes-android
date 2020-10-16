@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.main;
 import android.animation.AnimatorInflater;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
@@ -246,15 +245,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     .apply(RequestOptions.circleCropTransform())
                     .into(activityBinding.launchAccountSwitcher);
 
-            try {
-                ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, mainViewModel, this, adapter, swipeRefreshLayout, coordinatorLayout, gridView)
-                        .attachToRecyclerView(listView);
-                if (!mainViewModel.synchronize(ssoAccount)) {
-                    BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
-                }
-            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
+            new NotesListViewItemTouchHelper(a, this, mainViewModel, this, adapter, swipeRefreshLayout, coordinatorLayout, gridView)
+                    .attachToRecyclerView(listView);
+            if (!mainViewModel.synchronize(a)) {
+                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
             }
             fabCreate.show();
             activityBinding.launchAccountSwitcher.setOnClickListener((v) -> {
@@ -281,7 +275,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     protected void onResume() {
         // refresh and sync every time the activity gets
-        if (!mainViewModel.synchronize(ssoAccount)) {
+        if (!mainViewModel.synchronize(localAccount)) {
             BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
         }
         super.onResume();
@@ -607,7 +601,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        mainViewModel.toggleFavoriteAndSync(ssoAccount, ((NoteWithCategory) adapter.getItem(position)).getId());
+        mainViewModel.toggleFavoriteAndSync(localAccount, ((NoteWithCategory) adapter.getItem(position)).getId());
         adapter.notifyItemChanged(position);
     }
 
@@ -616,7 +610,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         boolean selected = adapter.select(position);
         if (selected) {
             v.setSelected(true);
-            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(this, coordinatorLayout, mainViewModel, this, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView));
+            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(this, coordinatorLayout, mainViewModel, this, localAccount, canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
         }
@@ -678,7 +672,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void onAccountPicked(@NonNull Account account) {
         for (Integer i : adapter.getSelected()) {
-            final LiveData<NoteWithCategory> moveLiveData = mainViewModel.moveNoteToAnotherAccount(ssoAccount, (NoteWithCategory) adapter.getItem(i), account.getId());
+            final LiveData<NoteWithCategory> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, (NoteWithCategory) adapter.getItem(i));
             moveLiveData.observe(this, (v) -> moveLiveData.removeObservers(this));
         }
     }
@@ -686,7 +680,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void onCategoryChosen(String category) {
         for (Integer i : adapter.getSelected()) {
-            mainViewModel.setCategory(ssoAccount, localAccount.getId(), ((NoteWithCategory) adapter.getItem(i)).getId(), category);
+            mainViewModel.setCategory(localAccount, ((NoteWithCategory) adapter.getItem(i)).getId(), category);
         }
     }
 }
