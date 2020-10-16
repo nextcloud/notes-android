@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.manageaccounts;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -50,7 +49,7 @@ public class ManageAccountsActivity extends LockedActivity {
                     SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
                     adapter.setCurrentLocalAccount(localAccounts.get(0));
                 } else {
-                    setResult(AppCompatActivity.RESULT_FIRST_USER);
+                    SingleAccountHelper.setCurrentAccount(getApplicationContext(), null);
                     finish();
                 }
                 deleteLiveData.removeObservers(this);

@@ -24,7 +24,6 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
-import static it.niedermann.owncloud.notes.main.MainActivity.manage_account;
 
 /**
  * Displays all available {@link Account} entries and provides basic operations for them, like adding or switching
@@ -93,7 +92,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
         });
 
         binding.manageAccounts.setOnClickListener((v) -> {
-            requireActivity().startActivityForResult(new Intent(requireContext(), ManageAccountsActivity.class), manage_account);
+            requireActivity().startActivity(new Intent(requireContext(), ManageAccountsActivity.class));
             dismiss();
         });
 

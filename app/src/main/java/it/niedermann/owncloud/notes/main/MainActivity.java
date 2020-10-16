@@ -47,6 +47,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.List;
 
+import it.niedermann.owncloud.notes.ImportAccountActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
@@ -107,13 +108,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     private final static int create_note_cmd = 0;
     private final static int show_single_note_cmd = 1;
-    public final static int manage_account = 4;
 
     protected ItemAdapter adapter;
     private NavigationAdapter adapterCategories;
     private MenuAdapter menuAdapter;
-
-    private boolean notAuthorizedAccountHandled = false;
 
     protected SingleSignOnAccount ssoAccount;
     protected Account localAccount;
@@ -133,12 +131,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         super.onCreate(savedInstanceState);
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
         CapabilitiesWorker.update(this);
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
         activityBinding = ActivityNotesListViewBinding.bind(binding.activityNotesListView.getRoot());
 
         setContentView(binding.getRoot());
+
         this.coordinatorLayout = binding.activityNotesListView.activityNotesListView;
         this.swipeRefreshLayout = binding.activityNotesListView.swiperefreshlayout;
         this.fabCreate = binding.activityNotesListView.fabCreate;
@@ -153,6 +151,18 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         setupToolbars();
         setupNavigationList();
         setupNotesList();
+
+        mainViewModel.getAccountsCount().observe(this, (count) -> {
+            if (count == 0) {
+                startActivityForResult(new Intent(this, ImportAccountActivity.class), ImportAccountActivity.REQUEST_CODE_IMPORT_ACCOUNT);
+            } else {
+                try {
+                    mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name));
+                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                    ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                }
+            }
+        });
 
         mainViewModel.hasMultipleAccountsConfigured().observe(this, (hasMultipleAccountsConfigured) -> canMoveNoteToAnotherAccounts = hasMultipleAccountsConfigured);
         mainViewModel.getSyncStatus().observe(this, (syncStatus) -> swipeRefreshLayout.setRefreshing(syncStatus));
@@ -245,15 +255,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 }
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
-                handleNotAuthorizedAccount();
             }
             fabCreate.show();
             activityBinding.launchAccountSwitcher.setOnClickListener((v) -> {
-                if (localAccount == null) {
-                    handleNotAuthorizedAccount();
-                } else {
-                    AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName());
-                }
+                AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName());
             });
 
             if (menuAdapter == null) {
@@ -275,41 +280,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     protected void onResume() {
-        try {
-            ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-            if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount.name)) {
-                Account account = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
-                if (account == null) {
-                    askForNewAccount(this);
-                } else {
-                    mainViewModel.postCurrentAccount(account);
-                }
-            }
-        } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
-            if (localAccount == null) {
-                List<Account> localAccounts = mainViewModel.getAccounts();
-                if (localAccounts.size() > 0) {
-                    mainViewModel.postCurrentAccount(localAccount);
-                }
-            }
-            if (!notAuthorizedAccountHandled) {
-                handleNotAuthorizedAccount();
-            }
-        }
-
         // refresh and sync every time the activity gets
-        if (localAccount != null) {
-            if (!mainViewModel.synchronize(ssoAccount)) {
-                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
-            }
+        if (!mainViewModel.synchronize(ssoAccount)) {
+            BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
         }
         super.onResume();
-    }
-
-    private void handleNotAuthorizedAccount() {
-        fabCreate.hide();
-        askForNewAccount(this);
-        notAuthorizedAccountHandled = true;
     }
 
     private void setupToolbars() {
@@ -320,7 +295,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             }
         });
 
-        activityBinding.launchAccountSwitcher.setOnClickListener((v) -> askForNewAccount(this));
         activityBinding.menuButton.setOnClickListener((v) -> binding.drawerLayout.openDrawer(GravityCompat.START));
 
         final LinearLayout searchEditFrame = activityBinding.searchView.findViewById(R.id.search_edit_frame);
@@ -408,7 +382,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 Log.i(TAG, "Clearing Glide disk cache");
                 Glide.get(getApplicationContext()).clearDiskCache();
             }).start();
-            Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
             final LiveData<Boolean> syncLiveData = mainViewModel.performFullSynchronizationForCurrentAccount();
             final Observer<Boolean> syncObserver = syncSuccess -> {
                 if (!syncSuccess) {
@@ -568,13 +541,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 recreate();
                 break;
             }
-            case manage_account: {
-                if (resultCode == RESULT_FIRST_USER) {
-                    recreate(); // TODO
-                    askForNewAccount(this);
-                }
-                break;
-            }
             default: {
                 try {
                     AccountImporter.onActivityResult(requestCode, resultCode, data, this, (ssoAccount) -> {
@@ -589,9 +555,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                     Log.i(TAG, capabilities.toString());
                                     runOnUiThread(() -> mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name)));
                                 }));
-                            } catch (SQLiteException e) {
-                                // Happens when upgrading from version ≤ 1.0.1 and importing the account
-                                runOnUiThread(() -> mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name)));
                             } catch (Exception e) {
                                 // Happens when importing an already existing account the second time
                                 if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {

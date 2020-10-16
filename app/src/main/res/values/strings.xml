@@ -6,6 +6,7 @@
     <string name="label_all_notes">All notes</string>
     <string name="label_favorites">Favorites</string>
     <string name="action_create">New note</string>
+    <string name="welcome_text">Welcome to %1$s</string>
     <string name="action_settings">Settings</string>
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_search">Search</string>
@@ -314,4 +315,5 @@
     <string name="error_action_open_deck_info">Open App info</string>
     <string name="error_action_open_network">Network settings</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
+    <string name="choose_account">Choose account</string>
 </resources>

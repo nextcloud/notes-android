@@ -358,6 +358,7 @@ public class MainViewModel extends AndroidViewModel {
             if (currentAccount == null) {
                 return insufficientInformation;
             } else {
+                Log.i(TAG, "[performFullSynchronizationForCurrentAccount] Refreshing capabilities for " + currentAccount.getAccountName());
                 MutableLiveData<Boolean> syncSuccess = new MutableLiveData<>();
                 new Thread(() -> {
                     try {
@@ -447,5 +448,9 @@ public class MainViewModel extends AndroidViewModel {
 
     public void createOrUpdateSingleNoteWidgetData(SingleNoteWidgetData data) {
         db.getWidgetSingleNoteDao().createOrUpdateSingleNoteWidgetData(data);
+    }
+
+    public LiveData<Integer> getAccountsCount() {
+        return db.getAccountDao().getAccountsCountLiveData();
     }
 }
