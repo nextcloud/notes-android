@@ -165,7 +165,9 @@ public abstract class NotesDatabase extends RoomDatabase {
         NoteWithCategory entity = new NoteWithCategory();
         entity.setNote(new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0));
         entity.setCategory(note.getCategory());
-        return map(addNote(accountId, entity), newNoteWithCategory -> {
+        final MutableLiveData<NoteWithCategory> ret = new MutableLiveData<>();
+        new Thread(() -> ret.postValue(addNote(accountId, entity))).start();
+        return map(ret, newNoteWithCategory -> {
             notifyWidgets();
             serverSyncHelper.scheduleSync(ssoAccount, true);
             return newNoteWithCategory;
@@ -179,35 +181,31 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type {@link Note} (with {@link DBStatus#LOCAL_EDITED})!
      */
     @NonNull
-    @AnyThread
-    LiveData<NoteWithCategory> addNote(long accountId, NoteWithCategory note) {
-        final MutableLiveData<NoteWithCategory> ret = new MutableLiveData<>();
-        new Thread(() -> {
-            Note entity = new Note();
-            if (note.getId() != null) {
-                if (note.getId() > 0) {
-                    entity.setId(note.getId());
-                }
-                entity.setStatus(note.getStatus());
-                entity.setAccountId(note.getAccountId());
-                entity.setExcerpt(note.getExcerpt());
-            } else {
-                entity.setStatus(DBStatus.VOID);
-                entity.setAccountId(accountId);
-                entity.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
+    @WorkerThread
+    NoteWithCategory addNote(long accountId, NoteWithCategory note) {
+        Note entity = new Note();
+        if (note.getId() != null) {
+            if (note.getId() > 0) {
+                entity.setId(note.getId());
             }
-            if (note.getRemoteId() != null && note.getRemoteId() > 0) {
-                entity.setRemoteId(note.getRemoteId());
-            }
-            entity.setTitle(note.getTitle());
-            entity.setModified(note.getModified());
-            entity.setContent(note.getContent());
-            entity.setFavorite(note.getFavorite());
-            entity.setCategoryId(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
-            entity.setETag(note.getETag());
-            ret.postValue(getNoteDao().getNoteWithCategory(accountId, getNoteDao().addNote(entity)));
-        }).start();
-        return ret;
+            entity.setStatus(note.getStatus());
+            entity.setAccountId(note.getAccountId());
+            entity.setExcerpt(note.getExcerpt());
+        } else {
+            entity.setStatus(DBStatus.VOID);
+            entity.setAccountId(accountId);
+            entity.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
+        }
+        if (note.getRemoteId() != null && note.getRemoteId() > 0) {
+            entity.setRemoteId(note.getRemoteId());
+        }
+        entity.setTitle(note.getTitle());
+        entity.setModified(note.getModified());
+        entity.setContent(note.getContent());
+        entity.setFavorite(note.getFavorite());
+        entity.setCategoryId(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
+        entity.setETag(note.getETag());
+        return getNoteDao().getNoteWithCategory(accountId, getNoteDao().addNote(entity));
     }
 
     @AnyThread
