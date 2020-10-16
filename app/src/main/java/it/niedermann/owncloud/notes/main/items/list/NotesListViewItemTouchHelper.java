@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -18,6 +20,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
+import it.niedermann.owncloud.notes.main.MainViewModel;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
@@ -32,7 +35,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
     public NotesListViewItemTouchHelper(
             @NonNull SingleSignOnAccount ssoAccount,
             @NonNull Context context,
-            @NonNull NotesDatabase db,
+            @NonNull MainViewModel mainViewModel,
+            @NonNull LifecycleOwner lifecycleOwner,
             @NonNull ItemAdapter adapter,
             @Nullable SwipeRefreshLayout swipeRefreshLayout,
             @Nullable View view,
@@ -70,19 +74,16 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
                         final NoteWithCategory dbNoteWithoutContent = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
-                        final NoteWithCategory dbNote = db.getNoteDao().getNoteWithCategory(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
-                        db.deleteNoteAndSync(ssoAccount, dbNote.getId());
-//                        FIXME
-//                        adapter.remove(dbNote);
+                        final NoteWithCategory dbNote = mainViewModel.getNoteWithCategory(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
+                        mainViewModel.deleteNoteAndSync(ssoAccount, dbNote.getId());
                         Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                         if (view == null) {
                             Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
                         } else {
                             BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
-                                        db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, () -> {
-                                        });
-                                        db.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
+                                        final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(ssoAccount, dbNote.getAccountId(), dbNote);
+                                        undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
                                         BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
                                     })
@@ -91,7 +92,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         break;
                     case ItemTouchHelper.RIGHT:
                         final NoteWithCategory adapterNote = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
-                        db.toggleFavoriteAndSync(ssoAccount, adapterNote.getId());
+                        mainViewModel.toggleFavoriteAndSync(ssoAccount, adapterNote.getId());
                         break;
                     default:
                         //NoOp

@@ -31,7 +31,6 @@ import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithExcerpt;
 import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithoutExcerpt;
 import it.niedermann.owncloud.notes.main.items.section.SectionItem;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
@@ -94,39 +93,21 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         notifyDataSetChanged();
     }
 
-    /**
-     * Adds the given note to the top of the list.
-     *
-     * @param note Note that should be added.
-     */
-    public void add(@NonNull NoteWithCategory note) {
-        itemList.add(0, note);
-        notifyItemInserted(0);
-        notifyItemChanged(0);
-    }
-
-    /**
-     * Removes all items from the adapter.
-     */
-    public void removeAll() {
-        itemList.clear();
-        notifyDataSetChanged();
-    }
-
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         if (gridView) {
             switch (viewType) {
                 case TYPE_SECTION: {
-                    return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(LayoutInflater.from(parent.getContext())));
+                    return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(inflater));
                 }
                 case TYPE_NOTE_ONLY_TITLE: {
-                    return new NoteViewGridHolderOnlyTitle(ItemNotesListNoteItemGridOnlyTitleBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener, monospace, fontSize);
+                    return new NoteViewGridHolderOnlyTitle(ItemNotesListNoteItemGridOnlyTitleBinding.inflate(inflater, parent, false), noteClickListener, monospace, fontSize);
                 }
                 case TYPE_NOTE_WITH_EXCERPT:
                 case TYPE_NOTE_WITHOUT_EXCERPT: {
-                    return new NoteViewGridHolder(ItemNotesListNoteItemGridBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener, monospace, fontSize);
+                    return new NoteViewGridHolder(ItemNotesListNoteItemGridBinding.inflate(inflater, parent, false), noteClickListener, monospace, fontSize);
                 }
                 default: {
                     throw new IllegalArgumentException("Not supported viewType: " + viewType);
@@ -135,14 +116,14 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         } else {
             switch (viewType) {
                 case TYPE_SECTION: {
-                    return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(LayoutInflater.from(parent.getContext())));
+                    return new SectionViewHolder(ItemNotesListSectionItemBinding.inflate(inflater));
                 }
                 case TYPE_NOTE_WITH_EXCERPT: {
-                    return new NoteViewHolderWithExcerpt(ItemNotesListNoteItemWithExcerptBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
+                    return new NoteViewHolderWithExcerpt(ItemNotesListNoteItemWithExcerptBinding.inflate(inflater, parent, false), noteClickListener);
                 }
                 case TYPE_NOTE_ONLY_TITLE:
                 case TYPE_NOTE_WITHOUT_EXCERPT: {
-                    return new NoteViewHolderWithoutExcerpt(ItemNotesListNoteItemWithoutExcerptBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), noteClickListener);
+                    return new NoteViewHolderWithoutExcerpt(ItemNotesListNoteItemWithoutExcerptBinding.inflate(inflater, parent, false), noteClickListener);
                 }
                 default: {
                     throw new IllegalArgumentException("Not supported viewType: " + viewType);
@@ -177,7 +158,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             if (viewHolder != null) {
                 viewHolder.itemView.setSelected(false);
             } else {
-                Log.w(TAG, "Could not found viewholder to remove selection");
+                Log.w(TAG, "Could not found " + RecyclerView.ViewHolder.class.getSimpleName() + " to remove selection");
             }
         }
         selected.clear();

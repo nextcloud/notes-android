@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.dao;
 
+import androidx.annotation.ColorInt;
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -34,8 +35,11 @@ public interface AccountDao {
     @Query("SELECT COUNT(*) FROM Account")
     Integer getAccountsCount();
 
-    @Query("UPDATE Account SET COLOR = :color AND TEXTCOLOR = :textColor WHERE id = :id")
-    void updateBrand(long id, Integer color, Integer textColor);
+    @Query("SELECT COUNT(*) FROM Account")
+    LiveData<Integer> getAccountsCountLiveData();
+
+    @Query("UPDATE Account SET COLOR = :color, TEXTCOLOR = :textColor WHERE id = :id")
+    void updateBrand(long id, @ColorInt Integer color, @ColorInt Integer textColor);
 
     @Query("UPDATE Account SET ETAG = :eTag WHERE ID = :id")
     void updateETag(long id, String eTag);

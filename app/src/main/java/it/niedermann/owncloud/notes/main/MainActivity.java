@@ -26,6 +26,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,14 +40,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.AccountImportCancelledException;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.LockedActivity;
@@ -55,7 +53,6 @@ import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherDialog;
 import it.niedermann.owncloud.notes.accountswitcher.AccountSwitcherListener;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
-import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
@@ -71,8 +68,6 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
@@ -103,8 +98,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     protected MainViewModel mainViewModel;
 
-    protected NotesDatabase db = null;
-
     private boolean gridView = true;
 
     public static final String CREATED_NOTE = "it.niedermann.owncloud.notes.created_notes";
@@ -112,16 +105,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public static final String ADAPTER_KEY_STARRED = "starred";
     public static final String ADAPTER_KEY_UNCATEGORIZED = "uncategorized";
 
-    protected ItemAdapter adapter;
-
     private final static int create_note_cmd = 0;
     private final static int show_single_note_cmd = 1;
     public final static int manage_account = 4;
 
-    /**
-     * Used to detect the onResume() call after the import dialog has been displayed.
-     * https://github.com/stefan-niedermann/nextcloud-notes/pull/599/commits/f40eab402d122f113020200751894fa39c8b9fcc#r334239634
-     */
+    protected ItemAdapter adapter;
+    private NavigationAdapter adapterCategories;
+    private MenuAdapter menuAdapter;
+
     private boolean notAuthorizedAccountHandled = false;
 
     protected SingleSignOnAccount ssoAccount;
@@ -129,16 +120,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     protected DrawerLayoutBinding binding;
     protected ActivityNotesListViewBinding activityBinding;
-
+    protected FloatingActionButton fabCreate;
     private CoordinatorLayout coordinatorLayout;
     private SwipeRefreshLayout swipeRefreshLayout;
-    protected FloatingActionButton fabCreate;
     private RecyclerView listView;
-
-    private NavigationAdapter adapterCategories;
-    private MenuAdapter menuAdapter;
-    boolean canMoveNoteToAnotherAccounts = false;
     private ActionMode mActionMode;
+
+    boolean canMoveNoteToAnotherAccounts = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,9 +144,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         this.fabCreate = binding.activityNotesListView.fabCreate;
         this.listView = binding.activityNotesListView.recyclerView;
 
-        db = NotesDatabase.getInstance(this);
-
         gridView = isGridViewEnabled();
+
         if (!gridView || isDarkThemeActive(this)) {
             activityBinding.activityNotesListView.setBackgroundColor(ContextCompat.getColor(this, R.color.primary));
         }
@@ -167,6 +154,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         setupNavigationList();
         setupNotesList();
 
+        mainViewModel.hasMultipleAccountsConfigured().observe(this, (hasMultipleAccountsConfigured) -> canMoveNoteToAnotherAccounts = hasMultipleAccountsConfigured);
         mainViewModel.getSyncStatus().observe(this, (syncStatus) -> swipeRefreshLayout.setRefreshing(syncStatus));
         mainViewModel.getSyncErrors().observe(this, (exceptions) -> BrandedSnackbar.make(coordinatorLayout, R.string.error_synchronization, Snackbar.LENGTH_LONG)
                 .setAction(R.string.simple_more, v -> ExceptionDialogFragment.newInstance(exceptions)
@@ -232,7 +220,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     } else {
                         newMethod = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
                     }
-                    db.modifyCategoryOrder(localAccount.getId(), methodOfCategory.first, newMethod);
+                    mainViewModel.modifyCategoryOrder(localAccount.getId(), methodOfCategory.first, newMethod);
                 }
             });
         });
@@ -240,7 +228,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getCurrentAccount().observe(this, (a) -> {
             fabCreate.hide();
             localAccount = a;
-            SingleAccountHelper.setCurrentAccount(getApplicationContext(), a.getAccountName());
             Glide
                     .with(this)
                     .load(a.getUrl() + "/index.php/avatar/" + Uri.encode(a.getUserName()) + "/64")
@@ -250,11 +237,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     .into(activityBinding.launchAccountSwitcher);
 
             try {
-                BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
                 ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
-                new NotesListViewItemTouchHelper(ssoAccount, this, db, adapter, swipeRefreshLayout, coordinatorLayout, gridView)
+                new NotesListViewItemTouchHelper(ssoAccount, this, mainViewModel, this, adapter, swipeRefreshLayout, coordinatorLayout, gridView)
                         .attachToRecyclerView(listView);
-                synchronize();
+                if (!mainViewModel.synchronize(ssoAccount)) {
+                    BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                }
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 Log.i(TAG, "Tried to select account, but got an " + e.getClass().getSimpleName() + ". Asking for importing an account...");
                 handleNotAuthorizedAccount();
@@ -283,8 +271,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 menuAdapter.updateAccount(a);
             }
         });
-
-        new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
     }
 
     @Override
@@ -292,7 +278,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         try {
             ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext());
             if (localAccount == null || !localAccount.getAccountName().equals(ssoAccount.name)) {
-                Account account = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+                Account account = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
                 if (account == null) {
                     askForNewAccount(this);
                 } else {
@@ -301,7 +287,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             }
         } catch (NoCurrentAccountSelectedException | NextcloudFilesAppAccountNotFoundException e) {
             if (localAccount == null) {
-                List<Account> localAccounts = db.getAccountDao().getAccounts();
+                List<Account> localAccounts = mainViewModel.getAccounts();
                 if (localAccounts.size() > 0) {
                     mainViewModel.postCurrentAccount(localAccount);
                 }
@@ -313,7 +299,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         // refresh and sync every time the activity gets
         if (localAccount != null) {
-            synchronize();
+            if (!mainViewModel.synchronize(ssoAccount)) {
+                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+            }
         }
         super.onResume();
     }
@@ -414,39 +402,21 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         });
 
         swipeRefreshLayout.setOnRefreshListener(() -> {
-            if (ssoAccount == null) {
-                askForNewAccount(this);
-            } else {
-                Log.i(TAG, "Clearing Glide memory cache");
-                Glide.get(this).clearMemory();
-                new Thread(() -> {
-                    Log.i(TAG, "Clearing Glide disk cache");
-                    Glide.get(getApplicationContext()).clearDiskCache();
-                }).start();
-                new Thread(() -> {
-                    Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
-                    final Capabilities capabilities;
-                    try {
-                        capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, localAccount.getCapabilitiesETag());
-                        db.getAccountDao().updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
-                        db.getAccountDao().updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
-                        localAccount.setColor(capabilities.getColor());
-                        localAccount.setTextColor(capabilities.getTextColor());
-                        BrandingUtil.saveBrandColors(this, localAccount.getColor(), localAccount.getTextColor());
-                        db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
-                        Log.i(TAG, capabilities.toString());
-                    } catch (Exception e) {
-                        if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
-                            Log.i(TAG, "Capabilities not modified.");
-                        } else {
-                            e.printStackTrace();
-                        }
-                    } finally {
-                        // Even if the capabilities endpoint makes trouble, we can still try to synchronize the notes
-                        synchronize();
-                    }
-                }).start();
-            }
+            Log.i(TAG, "Clearing Glide memory cache");
+            Glide.get(this).clearMemory();
+            new Thread(() -> {
+                Log.i(TAG, "Clearing Glide disk cache");
+                Glide.get(getApplicationContext()).clearDiskCache();
+            }).start();
+            Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
+            final LiveData<Boolean> syncLiveData = mainViewModel.performFullSynchronizationForCurrentAccount();
+            final Observer<Boolean> syncObserver = syncSuccess -> {
+                if (!syncSuccess) {
+                    BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                }
+                syncLiveData.removeObservers(this);
+            };
+            syncLiveData.observe(this, syncObserver);
         });
     }
 
@@ -476,7 +446,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         }
                         default: {
                             if (item.getClass() == NavigationItem.CategoryNavigationItem.class) {
-                                mainViewModel.postSelectedCategory(new NavigationCategory(db.getCategoryDao().getCategory(((NavigationItem.CategoryNavigationItem) item).categoryId)));
+                                mainViewModel.postSelectedCategory(new NavigationCategory(mainViewModel.getCategory(((NavigationItem.CategoryNavigationItem) item).categoryId)));
                             } else {
                                 throw new IllegalStateException(NavigationItem.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but item is not of type " + NavigationItem.CategoryNavigationItem.class.getSimpleName() + ".");
                             }
@@ -603,7 +573,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     recreate(); // TODO
                     askForNewAccount(this);
                 }
-                new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
                 break;
             }
             default: {
@@ -615,21 +584,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                                LiveData<Account> createLiveData = db.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
+                                LiveData<Account> createLiveData = mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
                                 runOnUiThread(() -> createLiveData.observe(this, (account) -> {
-                                    new Thread(() -> canMoveNoteToAnotherAccounts = db.getAccountDao().getAccountsCount() > 1).start();
                                     Log.i(TAG, capabilities.toString());
-                                    runOnUiThread(() -> mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
+                                    runOnUiThread(() -> mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name)));
                                 }));
                             } catch (SQLiteException e) {
                                 // Happens when upgrading from version ≤ 1.0.1 and importing the account
-                                runOnUiThread(() -> mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name)));
+                                runOnUiThread(() -> mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name)));
                             } catch (Exception e) {
                                 // Happens when importing an already existing account the second time
-                                if (e instanceof TokenMismatchException && db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name) != null) {
+                                if (e instanceof TokenMismatchException && mainViewModel.getLocalAccountByAccountName(ssoAccount.name) != null) {
                                     Log.w(TAG, "Received " + TokenMismatchException.class.getSimpleName() + " and the given ssoAccount.name (" + ssoAccount.name + ") does already exist in the database. Assume that this account has already been imported.");
                                     runOnUiThread(() -> {
-                                        mainViewModel.postCurrentAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name));
+                                        mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name));
                                         // TODO there is already a sync in progress and results in displaying a TokenMissMatchException snackbar which conflicts with this one
                                         coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
                                     });
@@ -676,8 +644,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        NoteWithCategory note = (NoteWithCategory) adapter.getItem(position);
-        db.toggleFavoriteAndSync(ssoAccount, note.getId());
+        mainViewModel.toggleFavoriteAndSync(ssoAccount, ((NoteWithCategory) adapter.getItem(position)).getId());
         adapter.notifyItemChanged(position);
     }
 
@@ -686,9 +653,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         boolean selected = adapter.select(position);
         if (selected) {
             v.setSelected(true);
-            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(
-                    this, coordinatorLayout, db, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView
-            ));
+            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(this, coordinatorLayout, mainViewModel, this, localAccount.getId(), canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView));
             int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
         }
@@ -719,23 +684,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         activityBinding.searchView.setIconified(disableSearch);
     }
 
-    private void synchronize() {
-        NoteServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
-        if (!syncHelper.isSyncPossible()) {
-            syncHelper.updateNetworkStatus();
-        }
-        if (syncHelper.isSyncPossible()) {
-            syncHelper.scheduleSync(ssoAccount, false);
-        } else { // Sync is not possible
-            if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
-                Log.d(TAG, "Network is connected, but sync is not possible");
-            } else {
-                Log.d(TAG, "Sync is not possible, because network is not connected");
-                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
-            }
-        }
-    }
-
     @Override
     public void addAccount() {
         askForNewAccount(this);
@@ -749,10 +697,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onAccountDeleted(Account localAccount) {
-        final LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
+        final LiveData<Void> deleteLiveData = mainViewModel.deleteAccount(localAccount);
         deleteLiveData.observe(this, (v) -> {
             if (localAccount.getId() == this.localAccount.getId()) {
-                List<Account> remainingAccounts = db.getAccountDao().getAccounts();
+                List<Account> remainingAccounts = mainViewModel.getAccounts();
                 if (remainingAccounts.size() > 0) {
                     mainViewModel.postCurrentAccount(remainingAccounts.get(0));
                 } else {
@@ -767,15 +715,15 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void onAccountPicked(@NonNull Account account) {
         for (Integer i : adapter.getSelected()) {
-            final LiveData<NoteWithCategory> moveLiveData = db.moveNoteToAnotherAccount(ssoAccount, (NoteWithCategory) adapter.getItem(i), account.getId());
+            final LiveData<NoteWithCategory> moveLiveData = mainViewModel.moveNoteToAnotherAccount(ssoAccount, (NoteWithCategory) adapter.getItem(i), account.getId());
             moveLiveData.observe(this, (v) -> moveLiveData.removeObservers(this));
         }
     }
 
     @Override
     public void onCategoryChosen(String category) {
-        for (Integer i : new ArrayList<>(adapter.getSelected())) {
-            db.setCategory(ssoAccount, localAccount.getId(), ((NoteWithCategory) adapter.getItem(i)).getId(), category);
+        for (Integer i : adapter.getSelected()) {
+            mainViewModel.setCategory(ssoAccount, localAccount.getId(), ((NoteWithCategory) adapter.getItem(i)).getId(), category);
         }
     }
 }

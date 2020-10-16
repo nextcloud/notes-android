@@ -9,11 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -37,11 +40,15 @@ import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 public class MultiSelectedActionModeCallback implements Callback {
 
     @ColorInt
-    private int colorAccent;
-
+    private final int colorAccent;
+    @NonNull
     private final Context context;
+    @NonNull
     private final View view;
-    private final NotesDatabase db;
+    @NonNull
+    private final MainViewModel mainViewModel;
+    @NonNull
+    private final LifecycleOwner lifecycleOwner;
     private final long currentLocalAccountId;
     private final boolean canMoveNoteToAnotherAccounts;
     private final ItemAdapter adapter;
@@ -50,10 +57,11 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            Context context, View view, NotesDatabase db, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
+            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, long currentLocalAccountId, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.view = view;
-        this.db = db;
+        this.mainViewModel = mainViewModel;
+        this.lifecycleOwner = lifecycleOwner;
         this.currentLocalAccountId = currentLocalAccountId;
         this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
         this.adapter = adapter;
@@ -94,71 +102,70 @@ public class MultiSelectedActionModeCallback implements Callback {
      */
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_delete:
-                try {
-                    SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
-                    List<NoteWithCategory> deletedNotes = new ArrayList<>();
-                    List<Integer> selection = adapter.getSelected();
-                    for (Integer i : selection) {
-                        NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
-                        deletedNotes.add(db.getNoteDao().getNoteWithCategory(note.getAccountId(), note.getId()));
-                        db.deleteNoteAndSync(ssoAccount, note.getId());
-                    }
-                    mode.finish(); // Action picked, so close the CAB
-                    //after delete selection has to be cleared
-                    searchView.setIconified(true);
-                    String deletedSnackbarTitle = deletedNotes.size() == 1
-                            ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
-                            : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, deletedNotes.size(), deletedNotes.size());
-                    BrandedSnackbar.make(view, deletedSnackbarTitle, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.action_undo, (View v) -> {
-                                db.getNoteServerSyncHelper().addCallbackPush(ssoAccount, () -> {
-                                });
-                                for (NoteWithCategory deletedNote : deletedNotes) {
-                                    db.addNoteAndSync(ssoAccount, deletedNote.getAccountId(), deletedNote);
-                                }
-                                String restoreSnackbarTitle = deletedNotes.size() == 1
-                                        ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
-                                        : context.getResources().getQuantityString(R.plurals.bulk_notes_restored, deletedNotes.size(), deletedNotes.size());
-                                BrandedSnackbar.make(view, restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
-                                        .show();
-                            })
-                            .show();
-                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                    e.printStackTrace();
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_delete) {
+            try {
+                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(context);
+                List<NoteWithCategory> deletedNotes = new ArrayList<>();
+                List<Integer> selection = adapter.getSelected();
+                for (Integer i : selection) {
+                    NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
+                    deletedNotes.add(mainViewModel.getNoteWithCategory(note.getAccountId(), note.getId()));
+                    mainViewModel.deleteNoteAndSync(ssoAccount, note.getId());
                 }
-                return true;
-            case R.id.menu_move:
-                AccountPickerDialogFragment
-                        .newInstance(currentLocalAccountId)
-                        .show(fragmentManager, MainActivity.class.getSimpleName());
-                return true;
-            case R.id.menu_share:
-                final String subject = (adapter.getSelected().size() == 1)
-                        ? ((NoteWithCategory) adapter.getItem(adapter.getSelected().get(0))).getTitle()
-                        : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
-                final StringBuilder noteContents = new StringBuilder();
-                for (Integer i : adapter.getSelected()) {
-                    final NoteWithCategory noteWithoutContent = (NoteWithCategory) adapter.getItem(i);
-                    final String tempFullNote = db.getNoteDao().getNoteWithCategory(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
-                    if (!TextUtils.isEmpty(tempFullNote)) {
-                        if (noteContents.length() > 0) {
-                            noteContents.append("\n\n");
-                        }
-                        noteContents.append(tempFullNote);
+                mode.finish(); // Action picked, so close the CAB
+                //after delete selection has to be cleared
+                searchView.setIconified(true);
+                String deletedSnackbarTitle = deletedNotes.size() == 1
+                        ? context.getString(R.string.action_note_deleted, deletedNotes.get(0).getTitle())
+                        : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, deletedNotes.size(), deletedNotes.size());
+                BrandedSnackbar.make(view, deletedSnackbarTitle, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.action_undo, (View v) -> {
+                            for (NoteWithCategory deletedNote : deletedNotes) {
+                                final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(ssoAccount, deletedNote.getAccountId(), deletedNote);
+                                undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
+                            }
+                            String restoreSnackbarTitle = deletedNotes.size() == 1
+                                    ? context.getString(R.string.action_note_restored, deletedNotes.get(0).getTitle())
+                                    : context.getResources().getQuantityString(R.plurals.bulk_notes_restored, deletedNotes.size(), deletedNotes.size());
+                            BrandedSnackbar.make(view, restoreSnackbarTitle, Snackbar.LENGTH_SHORT)
+                                    .show();
+                        })
+                        .show();
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                e.printStackTrace();
+            }
+            return true;
+        } else if (itemId == R.id.menu_move) {
+            AccountPickerDialogFragment
+                    .newInstance(currentLocalAccountId)
+                    .show(fragmentManager, MainActivity.class.getSimpleName());
+            return true;
+        } else if (itemId == R.id.menu_share) {
+            final String subject = (adapter.getSelected().size() == 1)
+                    ? ((NoteWithCategory) adapter.getItem(adapter.getSelected().get(0))).getTitle()
+                    : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
+            final StringBuilder noteContents = new StringBuilder();
+            for (Integer i : adapter.getSelected()) {
+                final NoteWithCategory noteWithoutContent = (NoteWithCategory) adapter.getItem(i);
+                final String tempFullNote = mainViewModel.getNoteWithCategory(noteWithoutContent.getAccountId(), noteWithoutContent.getId()).getContent();
+                if (!TextUtils.isEmpty(tempFullNote)) {
+                    if (noteContents.length() > 0) {
+                        noteContents.append("\n\n");
                     }
+                    noteContents.append(tempFullNote);
                 }
-                ShareUtil.openShareDialog(context, subject, noteContents.toString());
-                return true;
-            case R.id.menu_category:
-                // TODO detect whether all selected notes do have the same category - in this case preselect it
-                CategoryDialogFragment
-                        .newInstance(currentLocalAccountId, "")
-                        .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
-            default:
-                return false;
+            }
+            ShareUtil.openShareDialog(context, subject, noteContents.toString());
+            return true;
+        } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
+            CategoryDialogFragment
+                    .newInstance(currentLocalAccountId, "")
+                    .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
+
+            return false;
         }
+        return false;
     }
 
     @Override
