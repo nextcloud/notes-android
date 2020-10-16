@@ -261,11 +261,11 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @param callback   When the synchronization is finished, this callback will be invoked (optional).
      * @return changed {@link Note} if differs from database, otherwise the old {@link Note}.
      */
+    @WorkerThread
     public NoteWithCategory updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull Account localAccount, @NonNull NoteWithCategory oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
-        NoteWithCategory newNote = new NoteWithCategory();
+        final NoteWithCategory newNote;
         if (newContent == null) {
-            newNote.setNote(new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY()));
-            newNote.setCategory(oldNote.getCategory());
+            newNote = new NoteWithCategory(new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY()), oldNote.getCategory());
         } else {
             final String title;
             if (newTitle != null) {
@@ -277,8 +277,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                     title = oldNote.getTitle();
                 }
             }
-            newNote.setNote(new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY()));
-            newNote.setCategory(oldNote.getCategory());
+            newNote = new NoteWithCategory(new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY()), oldNote.getCategory());
         }
         newNote.getNote().setCategoryId(getOrCreateCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory()));
         int rows = getNoteDao().updateNote(newNote.getNote());

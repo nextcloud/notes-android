@@ -22,7 +22,6 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
@@ -403,12 +402,10 @@ public class MainViewModel extends AndroidViewModel {
         return db.getAccountDao().getAccounts();
     }
 
-    @AnyThread
     public void setCategory(SingleSignOnAccount ssoAccount, long accountId, Long noteId, @NonNull String category) {
         db.setCategory(ssoAccount, accountId, noteId, category);
     }
 
-    @AnyThread
     public LiveData<NoteWithCategory> moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, NoteWithCategory note, long newAccountId) {
         return db.moveNoteToAnotherAccount(ssoAccount, note, newAccountId);
     }
@@ -418,22 +415,18 @@ public class MainViewModel extends AndroidViewModel {
         return db.getCategoryDao().getCategory(id);
     }
 
-    @AnyThread
     public LiveData<Void> deleteAccount(@NonNull Account account) {
         return db.deleteAccount(account);
     }
 
-    @AnyThread
     public void toggleFavoriteAndSync(SingleSignOnAccount ssoAccount, long noteId) {
         db.toggleFavoriteAndSync(ssoAccount, noteId);
     }
 
-    @AnyThread
     public void deleteNoteAndSync(SingleSignOnAccount ssoAccount, long id) {
         db.deleteNoteAndSync(ssoAccount, id);
     }
 
-    @AnyThread
     public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
         return db.addAccount(url, username, accountName, capabilities);
     }
@@ -443,11 +436,11 @@ public class MainViewModel extends AndroidViewModel {
         return db.getNoteDao().getNoteWithCategory(accountId, id);
     }
 
-    @AnyThread
     public LiveData<NoteWithCategory> addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteWithCategory note) {
         return db.addNoteAndSync(ssoAccount, accountId, note);
     }
 
+    @WorkerThread
     public void updateNoteAndSync(SingleSignOnAccount ssoAccount, @NonNull Account localAccount, @NonNull NoteWithCategory oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
         db.updateNoteAndSync(ssoAccount, localAccount, oldNote, newContent, newTitle, callback);
     }
