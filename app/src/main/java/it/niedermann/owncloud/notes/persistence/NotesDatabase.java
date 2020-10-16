@@ -162,9 +162,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     @NonNull
     @MainThread
     public LiveData<NoteWithCategory> addNoteAndSync(SingleSignOnAccount ssoAccount, long accountId, NoteWithCategory note) {
-        NoteWithCategory entity = new NoteWithCategory();
-        entity.setNote(new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0));
-        entity.setCategory(note.getCategory());
+        NoteWithCategory entity = new NoteWithCategory(new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, accountId, generateNoteExcerpt(note.getContent(), note.getTitle()), 0), note.getCategory());
         final MutableLiveData<NoteWithCategory> ret = new MutableLiveData<>();
         new Thread(() -> ret.postValue(addNote(accountId, entity))).start();
         return map(ret, newNoteWithCategory -> {
@@ -209,14 +207,10 @@ public abstract class NotesDatabase extends RoomDatabase {
     }
 
     @AnyThread
-    public void moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, NoteWithCategory note, long newAccountId) {
-        new Thread(() -> {
-            NoteWithCategory noteWithCategory = new NoteWithCategory(new Note(null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), null), note.getCategory());
-            addNoteAndSync(ssoAccount, newAccountId, noteWithCategory);
-            deleteNoteAndSync(ssoAccount, note.getId());
-            notifyWidgets();
-            serverSyncHelper.scheduleSync(ssoAccount, true);
-        }).start();
+    public LiveData<NoteWithCategory> moveNoteToAnotherAccount(SingleSignOnAccount ssoAccount, NoteWithCategory note, long newAccountId) {
+        NoteWithCategory noteWithCategory = new NoteWithCategory(new Note(null, note.getModified(), note.getTitle(), getNoteDao().getContent(note.getId()), note.getFavorite(), null), note.getCategory());
+        deleteNoteAndSync(ssoAccount, note.getId());
+        return addNoteAndSync(ssoAccount, newAccountId, noteWithCategory);
     }
 
     @NonNull

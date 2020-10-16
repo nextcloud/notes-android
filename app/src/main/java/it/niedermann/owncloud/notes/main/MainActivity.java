@@ -26,6 +26,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -677,7 +678,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void onNoteFavoriteClick(int position, View view) {
         NoteWithCategory note = (NoteWithCategory) adapter.getItem(position);
-        NotesDatabase db = NotesDatabase.getInstance(view.getContext());
         db.toggleFavoriteAndSync(ssoAccount, note.getId());
         adapter.notifyItemChanged(position);
     }
@@ -767,21 +767,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onAccountPicked(@NonNull Account account) {
-        List<Integer> selection = new ArrayList<>(adapter.getSelected());
-
-        adapter.deselect(0);
-        for (Integer i : selection) {
-            NoteWithCategory note = (NoteWithCategory) adapter.getItem(i);
-            db.moveNoteToAnotherAccount(ssoAccount, db.getNoteDao().getNoteWithCategory(note.getAccountId(), note.getId()), account.getId());
-            RecyclerView.ViewHolder viewHolder = listView.findViewHolderForAdapterPosition(i);
-            if (viewHolder != null) {
-                viewHolder.itemView.setSelected(false);
-            } else {
-                Log.w(TAG, "Could not found viewholder to remove selection");
-            }
+        for (Integer i : adapter.getSelected()) {
+            final LiveData<NoteWithCategory> moveLiveData = db.moveNoteToAnotherAccount(ssoAccount, (NoteWithCategory) adapter.getItem(i), account.getId());
+            moveLiveData.observe(this, (v) -> moveLiveData.removeObservers(this));
         }
-
-        mActionMode.finish();
     }
 
     @Override
