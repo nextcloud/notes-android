@@ -610,7 +610,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         if (selected) {
             v.setSelected(true);
             mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(this, coordinatorLayout, mainViewModel, this, localAccount, canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView));
-            int checkedItemCount = adapter.getSelected().size();
+            final int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
         }
         return selected;
