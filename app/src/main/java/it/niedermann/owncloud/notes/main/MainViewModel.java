@@ -450,10 +450,6 @@ public class MainViewModel extends AndroidViewModel {
         return db.getCategoryDao().getCategory(id);
     }
 
-    public LiveData<Void> deleteAccount(@NonNull Account account) {
-        return db.deleteAccount(account);
-    }
-
     public LiveData<Void> toggleFavoriteAndSync(long noteId) {
         return switchMap(getCurrentAccount(), currentAccount -> {
             if (currentAccount == null) {
@@ -478,7 +474,7 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<Void> deleteNotesAndSync(Collection<Long> ids) {
+    public LiveData<Void> deleteNotesAndSync(@NonNull Collection<Long> ids) {
         return switchMap(getCurrentAccount(), currentAccount -> {
             if (currentAccount == null) {
                 return new MutableLiveData<>(null);
@@ -500,7 +496,7 @@ public class MainViewModel extends AndroidViewModel {
         return map(getFullNotesWithCategory(Collections.singleton(id)), input -> input.get(0));
     }
 
-    public LiveData<List<NoteWithCategory>> getFullNotesWithCategory(Collection<Long> ids) {
+    public LiveData<List<NoteWithCategory>> getFullNotesWithCategory(@NonNull Collection<Long> ids) {
         return switchMap(getCurrentAccount(), currentAccount -> {
             if (currentAccount == null) {
                 return new MutableLiveData<>();

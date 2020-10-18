@@ -31,11 +31,11 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
@@ -138,11 +138,9 @@ public class DisplayUtils {
     }
 
     public static List<NavigationItem.CategoryNavigationItem> convertToCategoryNavigationItem(@NonNull Context context, @NonNull Collection<CategoryWithNotesCount> counter) {
-        List<NavigationItem.CategoryNavigationItem> result = new ArrayList<>(counter.size());
-        for(CategoryWithNotesCount count: counter) {
-            result.add(convertToCategoryNavigationItem(context, count));
-        }
-        return result;
+        return counter.stream()
+                .map(ctr -> convertToCategoryNavigationItem(context, ctr))
+                .collect(Collectors.toList());
     }
 
     public static NavigationItem.CategoryNavigationItem convertToCategoryNavigationItem(@NonNull Context context, @NonNull CategoryWithNotesCount counter) {
