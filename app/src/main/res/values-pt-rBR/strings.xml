@@ -44,7 +44,7 @@
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title"> Fonte monospaçada</string>
     <string name="settings_font_size">Tamanho da fonte</string>
-    <string name="settings_wifi_only">Sincronizar somente por Wi-Fi</string>
+    <string name="settings_wifi_only">Sincronizar apenas por Wi-Fi</string>
     <string name="settings_lock">Proteção com senha</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
 
@@ -191,6 +191,19 @@
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d selecionados</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Uma nota excluída</item>
+        <item quantity="other">%1$d notas excluídas</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Uma nota restaurada</item>
+        <item quantity="other">%1$d notas restauradas</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Compartilhar conteúdo de %1$d nota</item>
+        <item quantity="other">Compartilhar conteúdo de %1$d notas</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
@@ -201,7 +214,7 @@
     <string name="formatting_help_cbf_body_2">Basta selecionar um intervalo de texto ou tocar no cursor em qualquer posição e você obterá um menu pop-up que contém ao lado das entradas padrão %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
 
     <string name="formatting_help_text_title">Texto</string>
-    <string name="formatting_help_text_body">É muito fácil fazer algumas palavras %1$snegritas%1$s e outras %2$sitálicas%2$s com Markdown. Você pode %3$sriscar%3$salgumas palavras e até [linkar para o Nextcloud](https://nextcloud.com).</string>
+    <string name="formatting_help_text_body">É muito fácil fazer algumas palavras %1$snegritas%1$s e outras %2$sitálicas%2$s com Markdown. Você pode %3$sriscar%3$s algumas palavras e até [linkar para o Nextcloud](https://nextcloud.com).</string>
 
     <string name="formatting_help_lists_title">Listas</string>
     <string name="formatting_help_lists_body_1">Às vezes você deseja listas numeradas:</string>
@@ -220,9 +233,9 @@
     <string name="formatting_help_checkboxes_body_3">Item 2</string>
 
     <string name="formatting_help_structured_documents_title">Documentos estruturados</string>
-    <string name="formatting_help_structured_documents_body_1">Às vezes, é útil ter diferentes níveis de títulos para estruturar seus documentos. Iniciar linhas com um %1$spara criar cabeçalhos. Vários %2$s em sequência indicam tamanhos de cabeçalho menores. </string>
+    <string name="formatting_help_structured_documents_body_1">Às vezes, é útil ter diferentes níveis de títulos para estruturar seus documentos. Iniciar linhas com um %1$s para criar cabeçalhos. Vários %2$s em sequência indicam tamanhos de cabeçalho menores. </string>
     <string name="formatting_help_structured_documents_body_2">Este é um cabeçalho de terceira camada</string>
-    <string name="formatting_help_structured_documents_body_3">Você pode usar um %1$sem todo o trecho até seis %2$spara diferentes tamanhos de cabeçalho .</string>
+    <string name="formatting_help_structured_documents_body_3">Você pode usar um %1$s em todo o trecho até seis %2$s para diferentes tamanhos de cabeçalho.</string>
     <string name="formatting_help_structured_documents_body_4">Se você quiser citar alguém, use o caractere %1$s antes da linha:</string>
     <string name="formatting_help_structured_documents_body_5">Imaginação é mais importante que conhecimento. O conhecimento é limitado. A imaginação dá voltas no mundo.</string>
     <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>

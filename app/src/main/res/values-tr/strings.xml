@@ -191,6 +191,19 @@
         <item quantity="one">%d seçilmiş</item>
         <item quantity="other">%d seçilmiş</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Bir not silindi</item>
+        <item quantity="other">%1$d not silindi</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Bir not geri yüklendi</item>
+        <item quantity="other">%1$dnot geri yüklendi</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">%1$d notun içeriğini paylaş</item>
+        <item quantity="other">%1$d notun içeriğini paylaş</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
