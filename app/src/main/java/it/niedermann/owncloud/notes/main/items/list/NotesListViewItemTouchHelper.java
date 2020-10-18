@@ -73,25 +73,30 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
                         final NoteWithCategory dbNoteWithoutContent = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
-                        final NoteWithCategory dbNote = mainViewModel.getNoteWithCategory(dbNoteWithoutContent.getAccountId(), dbNoteWithoutContent.getId());
-                        mainViewModel.deleteNoteAndSync(account, dbNote.getId());
-                        Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
-                        if (view == null) {
-                            Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
-                        } else {
-                            BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
-                                    .setAction(R.string.action_undo, (View v) -> {
-                                        final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(account, dbNote.getAccountId(), dbNote);
-                                        undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
-                                        BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
-                                                .show();
-                                    })
-                                    .show();
-                        }
+                        final LiveData<NoteWithCategory> dbNoteLiveData = mainViewModel.getFullNoteWithCategory(dbNoteWithoutContent.getId());
+                        dbNoteLiveData.observe(lifecycleOwner, (dbNote) -> {
+                            dbNoteLiveData.removeObservers(lifecycleOwner);
+                            final LiveData<Void> deleteLiveData = mainViewModel.deleteNoteAndSync(dbNote.getId());
+                            deleteLiveData.observe(lifecycleOwner, (next) -> deleteLiveData.removeObservers(lifecycleOwner));
+                            Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
+                            if (view == null) {
+                                Toast.makeText(context, context.getString(R.string.action_note_deleted, dbNote.getTitle()), Toast.LENGTH_LONG).show();
+                            } else {
+                                BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
+                                        .setAction(R.string.action_undo, (View v) -> {
+                                            final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(dbNote);
+                                            undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
+                                            BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
+                                                    .show();
+                                        })
+                                        .show();
+                            }
+                        });
                         break;
                     case ItemTouchHelper.RIGHT:
                         final NoteWithCategory adapterNote = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
-                        mainViewModel.toggleFavoriteAndSync(account, adapterNote.getId());
+                        LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote.getId());
+                        toggleLiveData.observe(lifecycleOwner, (next) -> toggleLiveData.removeObservers(lifecycleOwner));
                         break;
                     default:
                         //NoOp

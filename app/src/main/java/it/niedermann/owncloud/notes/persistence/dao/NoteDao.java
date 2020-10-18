@@ -74,7 +74,10 @@ public interface NoteDao {
     void updateScrollY(long id, int scrollY);
 
     @Query("SELECT NOTE.*, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.id = :id AND NOTE.accountId = :accountId AND status != :accountId")
-    NoteWithCategory getNoteWithCategory(long accountId, long id);
+    NoteWithCategory getFullNoteWithCategory(long accountId, long id);
+
+    @Query("SELECT NOTE.*, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.id = :id AND NOTE.accountId = :accountId AND status != :accountId")
+    LiveData<NoteWithCategory> getNoteWithCategoryLiveData(long accountId, long id);
 
     @Query("UPDATE NOTE SET status = :status WHERE id = :id")
     void updateStatus(long id, DBStatus status);

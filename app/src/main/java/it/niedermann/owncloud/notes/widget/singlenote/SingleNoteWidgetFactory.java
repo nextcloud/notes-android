@@ -15,7 +15,6 @@ import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
@@ -62,7 +61,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         if (data != null) {
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
-            note = db.getNoteDao().getNoteWithCategory(data.getAccountId(), noteId);
+            note = db.getNoteDao().getFullNoteWithCategory(data.getAccountId(), noteId);
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");

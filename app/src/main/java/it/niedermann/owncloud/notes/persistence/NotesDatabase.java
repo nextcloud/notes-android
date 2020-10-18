@@ -25,7 +25,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -203,7 +202,7 @@ public abstract class NotesDatabase extends RoomDatabase {
         entity.setFavorite(note.getFavorite());
         entity.setCategoryId(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
         entity.setETag(note.getETag());
-        return getNoteDao().getNoteWithCategory(accountId, getNoteDao().addNote(entity));
+        return getNoteDao().getFullNoteWithCategory(accountId, getNoteDao().addNote(entity));
     }
 
     @AnyThread
@@ -238,7 +237,6 @@ public abstract class NotesDatabase extends RoomDatabase {
      * If there is no such category existing, this method will create it and search again.
      *
      * @param account    The single sign on account
-     * @param accountId  The account where the note is
      * @param noteId     The note which will be updated
      * @param category   The category title which should be used to find the category id.
      */

@@ -42,9 +42,8 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundExce
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.util.List;
+import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.ImportAccountActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
@@ -111,8 +110,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     protected ItemAdapter adapter;
     private NavigationAdapter adapterCategories;
     private MenuAdapter menuAdapter;
-
-    protected Account localAccount;
 
     protected DrawerLayoutBinding binding;
     protected ActivityNotesListViewBinding activityBinding;
@@ -228,34 +225,36 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     } else {
                         newMethod = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
                     }
-                    mainViewModel.modifyCategoryOrder(localAccount.getId(), methodOfCategory.first, newMethod);
+                    final LiveData<Void> modifyLiveData = mainViewModel.modifyCategoryOrder(methodOfCategory.first, newMethod);
+                    modifyLiveData.observe(this, (next) -> modifyLiveData.removeObservers(this));
                 }
             });
         });
         mainViewModel.getNavigationCategories().observe(this, navigationItems -> this.adapterCategories.setItems(navigationItems));
-        mainViewModel.getCurrentAccount().observe(this, (a) -> {
+        mainViewModel.getCurrentAccount().observe(this, (nextAccount) -> {
             fabCreate.hide();
-            localAccount = a;
             Glide
                     .with(this)
-                    .load(a.getUrl() + "/index.php/avatar/" + Uri.encode(a.getUserName()) + "/64")
+                    .load(nextAccount.getUrl() + "/index.php/avatar/" + Uri.encode(nextAccount.getUserName()) + "/64")
                     .placeholder(R.drawable.ic_account_circle_grey_24dp)
                     .error(R.drawable.ic_account_circle_grey_24dp)
                     .apply(RequestOptions.circleCropTransform())
                     .into(activityBinding.launchAccountSwitcher);
 
-            new NotesListViewItemTouchHelper(a, this, mainViewModel, this, adapter, swipeRefreshLayout, coordinatorLayout, gridView)
+            new NotesListViewItemTouchHelper(nextAccount, this, mainViewModel, this, adapter, swipeRefreshLayout, coordinatorLayout, gridView)
                     .attachToRecyclerView(listView);
-            if (!mainViewModel.synchronize(a)) {
-                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
-            }
-            fabCreate.show();
-            activityBinding.launchAccountSwitcher.setOnClickListener((v) -> {
-                AccountSwitcherDialog.newInstance(localAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName());
+            final LiveData<Boolean> syncLiveData = mainViewModel.synchronize();
+            syncLiveData.observe(this, (syncSuccess) -> {
+                syncLiveData.removeObservers(this);
+                if (!syncSuccess) {
+                    BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                }
             });
+            fabCreate.show();
+            activityBinding.launchAccountSwitcher.setOnClickListener((v) -> AccountSwitcherDialog.newInstance(nextAccount.getId()).show(getSupportFragmentManager(), AccountSwitcherDialog.class.getSimpleName()));
 
             if (menuAdapter == null) {
-                menuAdapter = new MenuAdapter(getApplicationContext(), localAccount, (menuItem) -> {
+                menuAdapter = new MenuAdapter(getApplicationContext(), nextAccount, (menuItem) -> {
                     @Nullable Integer resultCode = menuItem.getResultCode();
                     if (resultCode == null) {
                         startActivity(menuItem.getIntent());
@@ -266,17 +265,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
                 binding.navigationMenu.setAdapter(menuAdapter);
             } else {
-                menuAdapter.updateAccount(a);
+                menuAdapter.updateAccount(nextAccount);
             }
         });
     }
 
     @Override
     protected void onResume() {
-        // refresh and sync every time the activity gets
-        if (!mainViewModel.synchronize(localAccount)) {
-            BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
-        }
+        final LiveData<Boolean> syncLiveData = mainViewModel.synchronize();
+        syncLiveData.observe(this, (syncSuccess) -> {
+            syncLiveData.removeObservers(this);
+            if (!syncSuccess) {
+                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+            }
+        });
         super.onResume();
     }
 
@@ -600,8 +602,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        mainViewModel.toggleFavoriteAndSync(localAccount, ((NoteWithCategory) adapter.getItem(position)).getId());
-        adapter.notifyItemChanged(position);
+        LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(((NoteWithCategory) adapter.getItem(position)).getId());
+        toggleLiveData.observe(this, (next) -> toggleLiveData.removeObservers(this));
     }
 
     @Override
@@ -609,7 +611,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         boolean selected = adapter.select(position);
         if (selected) {
             v.setSelected(true);
-            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(this, coordinatorLayout, mainViewModel, this, localAccount, canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView));
+            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(this, coordinatorLayout, mainViewModel, this, canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView));
             final int checkedItemCount = adapter.getSelected().size();
             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
         }
@@ -646,7 +648,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     @Override
-    public void onAccountChosen(Account localAccount) {
+    public void onAccountChosen(@NonNull Account localAccount) {
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         mainViewModel.postCurrentAccount(localAccount);
     }
@@ -661,8 +663,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onCategoryChosen(String category) {
-        for (Integer i : adapter.getSelected()) {
-            mainViewModel.setCategory(localAccount, ((NoteWithCategory) adapter.getItem(i)).getId(), category);
-        }
+        final LiveData<Void> categoryLiveData = mainViewModel.setCategory(
+                adapter.getSelected()
+                        .stream()
+                        .map(item -> ((NoteWithCategory) adapter.getItem(item)).getId())
+                        .collect(Collectors.toList())
+                , category);
+        categoryLiveData.observe(this, (next) -> categoryLiveData.removeObservers(this));
     }
 }

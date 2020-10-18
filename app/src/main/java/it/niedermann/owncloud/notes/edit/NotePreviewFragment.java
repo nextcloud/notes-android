@@ -28,7 +28,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
-import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 
@@ -214,7 +213,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                 TextProcessorChain chain = defaultTextProcessorChain(note.getNote());
                 Account account = db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
                 db.getNoteServerSyncHelper().addCallbackPull(account, () -> {
-                    note = db.getNoteDao().getNoteWithCategory(note.getAccountId(), note.getId());
+                    note = db.getNoteDao().getFullNoteWithCategory(note.getAccountId(), note.getId());
                     changedText = note.getContent();
                     binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);
