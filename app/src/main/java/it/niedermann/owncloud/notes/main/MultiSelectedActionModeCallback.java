@@ -49,19 +49,17 @@ public class MultiSelectedActionModeCallback implements Callback {
     private final LifecycleOwner lifecycleOwner;
     private final boolean canMoveNoteToAnotherAccounts;
     private final SelectionTracker<Long> tracker;
-    private final RecyclerView recyclerView;
     private final FragmentManager fragmentManager;
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, boolean canMoveNoteToAnotherAccounts, SelectionTracker<Long> tracker, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
+            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, boolean canMoveNoteToAnotherAccounts, SelectionTracker<Long> tracker, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.view = view;
         this.mainViewModel = mainViewModel;
         this.lifecycleOwner = lifecycleOwner;
         this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
         this.tracker = tracker;
-        this.recyclerView = recyclerView;
         this.fragmentManager = fragmentManager;
         this.searchView = searchView;
 
@@ -170,7 +168,11 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-//        adapter.clearSelection(recyclerView);
-//        adapter.notifyDataSetChanged();
+        if(mode != null) {
+            mode.finish();
+        }
+        for(Long id : tracker.getSelection()) {
+            tracker.deselect(id);
+        }
     }
 }

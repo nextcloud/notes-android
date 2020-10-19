@@ -139,9 +139,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         boolean isSelected = false;
-        if(tracker != null) {
+        if (tracker != null) {
             Long itemId = getItemId(position);
-            if(tracker.isSelected(itemId)) {
+            if (tracker.isSelected(itemId)) {
                 tracker.select(itemId);
                 isSelected = true;
             } else {
@@ -171,9 +171,6 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             }
         }
     }
-
-    // --------------------------------------------------------------------------------------------
-
 
     public void setTracker(SelectionTracker<Long> tracker) {
         this.tracker = tracker;
@@ -216,10 +213,15 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         @Nullable
         @Override
         public ItemDetails<Long> getItemDetails(@NonNull MotionEvent e) {
-            View view = rv.findChildViewUnder(e.getX(), e.getY());
-            if(view != null) {
-                return ((NoteViewHolder) rv.getChildViewHolder(view))
-                        .getItemDetails();
+            final View view = rv.findChildViewUnder(e.getX(), e.getY());
+            if (view != null) {
+                final RecyclerView.ViewHolder viewHolder = rv.getChildViewHolder(view);
+                if (viewHolder instanceof NoteViewHolder) {
+                    return ((NoteViewHolder) rv.getChildViewHolder(view))
+                            .getItemDetails();
+                } else {
+                    return null;
+                }
             }
             return null;
         }

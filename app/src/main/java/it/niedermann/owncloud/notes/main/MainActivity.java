@@ -47,9 +47,6 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import it.niedermann.owncloud.notes.ImportAccountActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
@@ -213,10 +210,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             });
         });
         mainViewModel.getNotesListLiveData().observe(this, notes -> {
-//            adapter.clearSelection(listView);
-//            if (mActionMode != null) {
-//                mActionMode.finish();
-//            }
             adapter.setItemList(notes);
             binding.activityNotesListView.progressCircular.setVisibility(GONE);
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
@@ -403,11 +396,25 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         ).withSelectionPredicate(SelectionPredicates.createSelectAnything()).build();
         adapter.setTracker(tracker);
         tracker.addObserver(new SelectionObserver<Long>() {
-            @Override
-            public void onSelectionChanged() {
-                super.onSelectionChanged();
-            }
-        });
+                                @Override
+                                public void onSelectionChanged() {
+                                    super.onSelectionChanged();
+
+                                    int selected = tracker.getSelection().size();
+                                    if (selected > 0 && mActionMode == null) {
+                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager(), activityBinding.searchView));
+                                    }
+                                    if (mActionMode != null) {
+                                        if (selected > 0) {
+                                            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, selected, selected));
+                                        } else {
+                                            mActionMode.finish();
+                                            mActionMode = null;
+                                        }
+                                    }
+                                }
+                            }
+        );
 
     }
 
@@ -618,12 +625,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public boolean onNoteLongClick(int position, View v) {
-//        int selected = tracker.getSelection().size();
-//        if (selected > 0) {
-//            v.setSelected(true);
-//            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(this, coordinatorLayout, mainViewModel, this, canMoveNoteToAnotherAccounts, tracker, listView, getSupportFragmentManager(), activityBinding.searchView));
-//            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, selected, selected));
-//        }
         return true;
     }
 
@@ -664,7 +665,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onAccountPicked(@NonNull Account account) {
-        for(Long noteId : tracker.getSelection()) {
+        for (Long noteId : tracker.getSelection()) {
             new Thread(() -> {
                 final LiveData<NoteWithCategory> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, noteId);
                 moveLiveData.observe(this, (v) -> moveLiveData.removeObservers(this));
