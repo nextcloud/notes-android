@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.SelectionTracker;
@@ -60,6 +61,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private int mainColor;
     @ColorInt
     private int textColor;
+    @Nullable
+    private Integer swipedPosition;
 
     public <T extends Context & NoteClickListener> ItemAdapter(@NonNull T context, boolean gridView) {
         this.noteClickListener = context;
@@ -89,6 +92,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     public void setItemList(@NonNull List<Item> itemList) {
         this.itemList.clear();
         this.itemList.addAll(itemList);
+        this.swipedPosition = null;
         notifyDataSetChanged();
     }
 
@@ -220,5 +224,14 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             }
         }
         return -1;
+    }
+
+    @Nullable
+    public Integer getSwipedPosition() {
+        return swipedPosition;
+    }
+
+    public void setSwipedPosition(@Nullable Integer swipedPosition) {
+        this.swipedPosition = swipedPosition;
     }
 }

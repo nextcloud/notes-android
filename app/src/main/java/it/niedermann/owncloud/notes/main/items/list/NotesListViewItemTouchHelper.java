@@ -113,6 +113,9 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                     Log.i(TAG, "Start swiping, disable swipeRefreshLayout");
                     swipeRefreshLayoutEnabled = swipeRefreshLayout.isEnabled();
                     swipeRefreshLayout.setEnabled(false);
+                    if (viewHolder != null) {
+                        adapter.setSwipedPosition(viewHolder.getAdapterPosition());
+                    }
                 }
                 super.onSelectedChanged(viewHolder, actionState);
             }
@@ -122,6 +125,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 Log.i(TAG, "End swiping, resetting swipeRefreshLayout state");
                 swipeRefreshLayout.setEnabled(swipeRefreshLayoutEnabled);
                 getDefaultUIUtil().clearView(((NoteViewHolder) viewHolder).getNoteSwipeable());
+                adapter.setSwipedPosition(null);
             }
 
             @Override
