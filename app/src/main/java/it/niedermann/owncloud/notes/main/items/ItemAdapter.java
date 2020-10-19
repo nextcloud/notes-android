@@ -5,18 +5,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 import androidx.preference.PreferenceManager;
-import androidx.recyclerview.selection.ItemDetailsLookup;
-import androidx.recyclerview.selection.ItemKeyProvider;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,7 +35,6 @@ import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
-import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
@@ -157,17 +151,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             case TYPE_NOTE_WITH_EXCERPT:
             case TYPE_NOTE_WITHOUT_EXCERPT:
             case TYPE_NOTE_ONLY_TITLE: {
-                ((NoteViewHolder) holder).bind(new ItemDetailsLookup.ItemDetails<Long>() {
-                    @Override
-                    public int getPosition() {
-                        return position;
-                    }
-
-                    @Override
-                    public Long getSelectionKey() {
-                        return getItemId(position);
-                    }
-                }, isSelected, (NoteWithCategory) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
+                ((NoteViewHolder) holder).bind(isSelected, (NoteWithCategory) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
                 break;
             }
         }
@@ -175,57 +159,6 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     public void setTracker(SelectionTracker<Long> tracker) {
         this.tracker = tracker;
-    }
-
-    public static class ItemIdKeyProvider extends ItemKeyProvider<Long> {
-        private final RecyclerView recyclerView;
-
-        public ItemIdKeyProvider(RecyclerView recyclerView) {
-            super(SCOPE_MAPPED);
-            this.recyclerView = recyclerView;
-        }
-
-        @Nullable
-        @Override
-        public Long getKey(int position) {
-            final RecyclerView.Adapter<?> adapter = recyclerView.getAdapter();
-            if (adapter == null) {
-                throw new IllegalStateException("RecyclerView adapter is not set!");
-            }
-            return adapter.getItemId(position);
-        }
-
-        @Override
-        public int getPosition(@NonNull Long key) {
-            final RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForItemId(key);
-            return viewHolder == null ? NO_POSITION : viewHolder.getLayoutPosition();
-        }
-    }
-
-    public static class ItemLookup extends ItemDetailsLookup<Long> {
-
-        @NonNull
-        private final RecyclerView rv;
-
-        public ItemLookup(@NonNull RecyclerView recyclerView) {
-            this.rv = recyclerView;
-        }
-
-        @Nullable
-        @Override
-        public ItemDetails<Long> getItemDetails(@NonNull MotionEvent e) {
-            final View view = rv.findChildViewUnder(e.getX(), e.getY());
-            if (view != null) {
-                final RecyclerView.ViewHolder viewHolder = rv.getChildViewHolder(view);
-                if (viewHolder instanceof NoteViewHolder) {
-                    return ((NoteViewHolder) rv.getChildViewHolder(view))
-                            .getItemDetails();
-                } else {
-                    return null;
-                }
-            }
-            return null;
-        }
     }
 
     public Item getItem(int notePosition) {
@@ -278,7 +211,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     }
 
     /**
-     * @return the position of the first item which matches the given viewtype, -1 if not available
+     * @return the position of the first {@link Item} which matches the given viewtype, -1 if not available
      */
     public int getFirstPositionOfViewType(@IntRange(from = 0, to = 3) int viewType) {
         for (int i = 0; i < itemList.size(); i++) {

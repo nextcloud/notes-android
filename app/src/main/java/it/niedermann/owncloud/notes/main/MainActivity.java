@@ -29,7 +29,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.selection.SelectionTracker.SelectionObserver;
-import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -64,6 +63,7 @@ import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
 import it.niedermann.owncloud.notes.main.items.section.SectionItemDecoration;
+import it.niedermann.owncloud.notes.main.items.selection.ItemSelectionTracker;
 import it.niedermann.owncloud.notes.main.menu.MenuAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
@@ -115,6 +115,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private MenuAdapter menuAdapter;
 
     private SelectionTracker<Long> tracker;
+    private NotesListViewItemTouchHelper itemTouchHelper;
 
     protected DrawerLayoutBinding binding;
     protected ActivityNotesListViewBinding activityBinding;
@@ -172,8 +173,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 .show());
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(GONE);
-            binding.activityNotesListView.progressCircular.setVisibility(VISIBLE);
-            adapter.setItemList(Collections.emptyList());
             adapter.setShowCategory(selectedCategory.getType() == RECENT || selectedCategory.getType() == FAVORITES);
             fabCreate.show();
 
@@ -212,6 +211,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             });
         });
         mainViewModel.getNotesListLiveData().observe(this, notes -> {
+            // https://stackoverflow.com/a/37342327
+            itemTouchHelper.attachToRecyclerView(null);
+            itemTouchHelper.attachToRecyclerView(listView);
             adapter.setItemList(notes);
             binding.activityNotesListView.progressCircular.setVisibility(GONE);
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
@@ -243,8 +245,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     .apply(RequestOptions.circleCropTransform())
                     .into(activityBinding.launchAccountSwitcher);
 
-            new NotesListViewItemTouchHelper(nextAccount, this, mainViewModel, this, adapter, swipeRefreshLayout, coordinatorLayout, gridView)
-                    .attachToRecyclerView(listView);
             final LiveData<Boolean> syncLiveData = mainViewModel.synchronize();
             syncLiveData.observe(this, (syncSuccess) -> {
                 syncLiveData.removeObservers(this);
@@ -341,6 +341,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         listView.setAdapter(adapter);
         listView.setItemAnimator(null);
 
+        itemTouchHelper = new NotesListViewItemTouchHelper(this, mainViewModel, this, adapter, swipeRefreshLayout, coordinatorLayout, gridView);
         if (gridView) {
             int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
             StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
@@ -390,35 +391,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             syncLiveData.observe(this, syncObserver);
         });
 
-        tracker = new SelectionTracker.Builder<>(
-                "selection-1",
-                listView,
-                new ItemAdapter.ItemIdKeyProvider(listView),
-                new ItemAdapter.ItemLookup(listView),
-                StorageStrategy.createLongStorage()
-        ).withSelectionPredicate(
-                new SelectionTracker.SelectionPredicate<Long>() {
-                    @Override
-                    public boolean canSetStateForKey(@NonNull Long key, boolean nextState) {
-                        return true;
-                    }
-
-                    @Override
-                    public boolean canSetStateAtPosition(int position, boolean nextState) {
-                        return !adapter.getItem(position).isSection();
-                    }
-
-                    @Override
-                    public boolean canSelectMultiple() {
-                        return true;
-                    }
-                }).build();
+        tracker = ItemSelectionTracker.build(listView, adapter);
         adapter.setTracker(tracker);
         tracker.addObserver(new SelectionObserver<Long>() {
                                 @Override
                                 public void onSelectionChanged() {
                                     super.onSelectionChanged();
-
                                     if (tracker.hasSelection() && mActionMode == null) {
                                         mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager()));
                                     }

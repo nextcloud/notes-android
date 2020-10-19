@@ -37,13 +37,13 @@ import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static androidx.recyclerview.widget.ItemTouchHelper.Callback.getDefaultUIUtil;
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
 
 public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     @NonNull
     private final NoteClickListener noteClickListener;
-    private ItemDetailsLookup.ItemDetails<Long> itemDetails;
 
     public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener) {
         super(v);
@@ -52,8 +52,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     @CallSuper
-    public void bind(@NonNull ItemDetailsLookup.ItemDetails<Long> itemDetails, boolean isSelected, @NonNull NoteWithCategory note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        this.itemDetails = itemDetails;
+    public void bind(boolean isSelected, @NonNull NoteWithCategory note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
         itemView.setSelected(isSelected);
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getAdapterPosition(), view));
         itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getAdapterPosition(), view));
@@ -143,6 +142,16 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     public abstract View getNoteSwipeable();
 
     public ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
-        return itemDetails;
+        return new ItemDetailsLookup.ItemDetails<Long>() {
+            @Override
+            public int getPosition() {
+                return getAdapterPosition();
+            }
+
+            @Override
+            public Long getSelectionKey() {
+                return getItemId();
+            }
+        };
     }
 }
