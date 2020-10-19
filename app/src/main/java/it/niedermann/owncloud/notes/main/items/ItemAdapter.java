@@ -4,15 +4,20 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 import androidx.preference.PreferenceManager;
+import androidx.recyclerview.selection.ItemDetailsLookup;
+import androidx.recyclerview.selection.ItemKeyProvider;
+import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -35,6 +40,7 @@ import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
+import static androidx.recyclerview.widget.RecyclerView.NO_POSITION;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Branded {
@@ -51,7 +57,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     private List<Item> itemList = new ArrayList<>();
     private boolean showCategory = true;
     private CharSequence searchQuery;
-    private final List<Integer> selected = new ArrayList<>();
+    private SelectionTracker<Long> tracker = null;
+    //    private final List<Integer> selected = new ArrayList<>();
     @Px
     private final float fontSize;
     private final boolean monospace;
@@ -68,20 +75,17 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         this.fontSize = getFontSizeFromPreferences(context, sp);
         this.monospace = sp.getBoolean(context.getString(R.string.pref_key_font), false);
-        // FIXME see getItemId()
-        // setHasStableIds(true);
+        setHasStableIds(true);
     }
 
 
-    /*
-     FIXME this causes {@link it.niedermann.owncloud.notes.noteslist.items.list.NotesListViewItemTouchHelper} to not call clearView anymore → After marking a note as favorite, it stays yellow.
-     @Override
-     public long getItemId(int position) {
-         return getItemViewType(position) == TYPE_SECTION
-                 ? ((SectionItem) getItem(position)).getTitle().hashCode() * -1
-                 : ((NoteEntity) getItem(position)).getId();
-     }
-    */
+    // FIXME this causes {@link it.niedermann.owncloud.notes.noteslist.items.list.NotesListViewItemTouchHelper} to not call clearView anymore → After marking a note as favorite, it stays yellow.
+    @Override
+    public long getItemId(int position) {
+        return getItemViewType(position) == TYPE_SECTION
+                ? ((SectionItem) getItem(position)).getTitle().hashCode() * -1
+                : ((NoteWithCategory) getItem(position)).getId();
+    }
 
     /**
      * Updates the item list and notifies respective view to update.
@@ -134,6 +138,16 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
+        boolean isSelected = false;
+        if(tracker != null) {
+            Long itemId = getItemId(position);
+            if(tracker.isSelected(itemId)) {
+                tracker.select(itemId);
+                isSelected = true;
+            } else {
+                tracker.deselect(itemId);
+            }
+        }
         switch (getItemViewType(position)) {
             case TYPE_SECTION: {
                 ((SectionViewHolder) holder).bind((SectionItem) itemList.get(position));
@@ -142,42 +156,73 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             case TYPE_NOTE_WITH_EXCERPT:
             case TYPE_NOTE_WITHOUT_EXCERPT:
             case TYPE_NOTE_ONLY_TITLE: {
-                ((NoteViewHolder) holder).bind((NoteWithCategory) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
+                ((NoteViewHolder) holder).bind(new ItemDetailsLookup.ItemDetails<Long>() {
+                    @Override
+                    public int getPosition() {
+                        return position;
+                    }
+
+                    @Override
+                    public Long getSelectionKey() {
+                        return getItemId(position);
+                    }
+                }, isSelected, (NoteWithCategory) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
                 break;
             }
         }
     }
 
-    public boolean select(Integer position) {
-        return !selected.contains(position) && selected.add(position);
+    // --------------------------------------------------------------------------------------------
+
+
+    public void setTracker(SelectionTracker<Long> tracker) {
+        this.tracker = tracker;
     }
 
-    public void clearSelection(@NonNull RecyclerView recyclerView) {
-        for (Integer i : getSelected()) {
-            RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForAdapterPosition(i);
-            if (viewHolder != null) {
-                viewHolder.itemView.setSelected(false);
-            } else {
-                Log.w(TAG, "Could not found " + RecyclerView.ViewHolder.class.getSimpleName() + " to remove selection");
-            }
+    public static class ItemIdKeyProvider extends ItemKeyProvider<Long> {
+        private final RecyclerView recyclerView;
+
+        public ItemIdKeyProvider(RecyclerView recyclerView) {
+            super(SCOPE_MAPPED);
+            this.recyclerView = recyclerView;
         }
-        selected.clear();
-    }
 
-    @NonNull
-    public List<Integer> getSelected() {
-        return selected;
-    }
-
-    public void deselect(Integer position) {
-        for (int i = 0; i < selected.size(); i++) {
-            if (selected.get(i).equals(position)) {
-                //position was selected and removed
-                selected.remove(i);
-                return;
+        @Nullable
+        @Override
+        public Long getKey(int position) {
+            final RecyclerView.Adapter<?> adapter = recyclerView.getAdapter();
+            if (adapter == null) {
+                throw new IllegalStateException("RecyclerView adapter is not set!");
             }
+            return adapter.getItemId(position);
         }
-        // position was not selected
+
+        @Override
+        public int getPosition(@NonNull Long key) {
+            final RecyclerView.ViewHolder viewHolder = recyclerView.findViewHolderForItemId(key);
+            return viewHolder == null ? NO_POSITION : viewHolder.getLayoutPosition();
+        }
+    }
+
+    public static class ItemLookup extends ItemDetailsLookup<Long> {
+
+        @NonNull
+        private final RecyclerView rv;
+
+        public ItemLookup(@NonNull RecyclerView recyclerView) {
+            this.rv = recyclerView;
+        }
+
+        @Nullable
+        @Override
+        public ItemDetails<Long> getItemDetails(@NonNull MotionEvent e) {
+            View view = rv.findChildViewUnder(e.getX(), e.getY());
+            if(view != null) {
+                return ((NoteViewHolder) rv.getChildViewHolder(view))
+                        .getItemDetails();
+            }
+            return null;
+        }
     }
 
     public Item getItem(int notePosition) {

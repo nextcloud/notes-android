@@ -202,7 +202,7 @@ public abstract class NotesDatabase extends RoomDatabase {
         entity.setFavorite(note.getFavorite());
         entity.setCategoryId(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
         entity.setETag(note.getETag());
-        return getNoteDao().getFullNoteWithCategory(accountId, getNoteDao().addNote(entity));
+        return getNoteDao().getFullNoteWithCategory(getNoteDao().addNote(entity));
     }
 
     @AnyThread

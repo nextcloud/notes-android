@@ -27,6 +27,10 @@ import androidx.core.view.ViewCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.selection.SelectionPredicates;
+import androidx.recyclerview.selection.SelectionTracker;
+import androidx.recyclerview.selection.SelectionTracker.SelectionObserver;
+import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -44,6 +48,7 @@ import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import it.niedermann.owncloud.notes.ImportAccountActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
@@ -110,6 +115,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     protected ItemAdapter adapter;
     private NavigationAdapter adapterCategories;
     private MenuAdapter menuAdapter;
+
+    private SelectionTracker<Long> tracker;
 
     protected DrawerLayoutBinding binding;
     protected ActivityNotesListViewBinding activityBinding;
@@ -206,10 +213,10 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             });
         });
         mainViewModel.getNotesListLiveData().observe(this, notes -> {
-            adapter.clearSelection(listView);
-            if (mActionMode != null) {
-                mActionMode.finish();
-            }
+//            adapter.clearSelection(listView);
+//            if (mActionMode != null) {
+//                mActionMode.finish();
+//            }
             adapter.setItemList(notes);
             binding.activityNotesListView.progressCircular.setVisibility(GONE);
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
@@ -386,6 +393,22 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             };
             syncLiveData.observe(this, syncObserver);
         });
+
+        tracker = new SelectionTracker.Builder<>(
+                "selection-1",
+                listView,
+                new ItemAdapter.ItemIdKeyProvider(listView),
+                new ItemAdapter.ItemLookup(listView),
+                StorageStrategy.createLongStorage()
+        ).withSelectionPredicate(SelectionPredicates.createSelectAnything()).build();
+        adapter.setTracker(tracker);
+        tracker.addObserver(new SelectionObserver<Long>() {
+            @Override
+            public void onSelectionChanged() {
+                super.onSelectionChanged();
+            }
+        });
+
     }
 
     private void setupNavigationList() {
@@ -578,21 +601,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onNoteClick(int position, View v) {
-        boolean hasCheckedItems = adapter.getSelected().size() > 0;
-        if (hasCheckedItems) {
-            if (!adapter.select(position)) {
-                v.setSelected(false);
-                adapter.deselect(position);
-            } else {
-                v.setSelected(true);
-            }
-            int size = adapter.getSelected().size();
-            if (size > 0) {
-                mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, size, size));
-            } else {
-                mActionMode.finish();
-            }
-        } else {
+        boolean hasCheckedItems = tracker.getSelection().size() > 0;
+        if (!hasCheckedItems) {
             NoteWithCategory note = (NoteWithCategory) adapter.getItem(position);
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
@@ -608,14 +618,13 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public boolean onNoteLongClick(int position, View v) {
-        boolean selected = adapter.select(position);
-        if (selected) {
-            v.setSelected(true);
-            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(this, coordinatorLayout, mainViewModel, this, canMoveNoteToAnotherAccounts, adapter, listView, getSupportFragmentManager(), activityBinding.searchView));
-            final int checkedItemCount = adapter.getSelected().size();
-            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, checkedItemCount, checkedItemCount));
-        }
-        return selected;
+//        int selected = tracker.getSelection().size();
+//        if (selected > 0) {
+//            v.setSelected(true);
+//            mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(this, coordinatorLayout, mainViewModel, this, canMoveNoteToAnotherAccounts, tracker, listView, getSupportFragmentManager(), activityBinding.searchView));
+//            mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, selected, selected));
+//        }
+        return true;
     }
 
     @Override
@@ -655,20 +664,17 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onAccountPicked(@NonNull Account account) {
-        for (Integer i : adapter.getSelected()) {
-            final LiveData<NoteWithCategory> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, (NoteWithCategory) adapter.getItem(i));
-            moveLiveData.observe(this, (v) -> moveLiveData.removeObservers(this));
+        for(Long noteId : tracker.getSelection()) {
+            new Thread(() -> {
+                final LiveData<NoteWithCategory> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, noteId);
+                moveLiveData.observe(this, (v) -> moveLiveData.removeObservers(this));
+            }).start();
         }
     }
 
     @Override
     public void onCategoryChosen(String category) {
-        final LiveData<Void> categoryLiveData = mainViewModel.setCategory(
-                adapter.getSelected()
-                        .stream()
-                        .map(item -> ((NoteWithCategory) adapter.getItem(item)).getId())
-                        .collect(Collectors.toList())
-                , category);
+        final LiveData<Void> categoryLiveData = mainViewModel.setCategory(tracker.getSelection(), category);
         categoryLiveData.observe(this, (next) -> categoryLiveData.removeObservers(this));
     }
 }

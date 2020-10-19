@@ -427,7 +427,7 @@ public class MainViewModel extends AndroidViewModel {
         return db.getAccountDao().getAccounts();
     }
 
-    public LiveData<Void> setCategory(Collection<Long> noteIds, @NonNull String category) {
+    public LiveData<Void> setCategory(Iterable<Long> noteIds, @NonNull String category) {
         return switchMap(getCurrentAccount(), currentAccount -> {
             if (currentAccount == null) {
                 return new MutableLiveData<>(null);
@@ -441,8 +441,8 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<NoteWithCategory> moveNoteToAnotherAccount(Account account, NoteWithCategory note) {
-        return db.moveNoteToAnotherAccount(account, note);
+    public LiveData<NoteWithCategory> moveNoteToAnotherAccount(Account account, Long noteId) {
+        return db.moveNoteToAnotherAccount(account, db.getNoteDao().getFullNoteWithCategory(noteId));
     }
 
     @WorkerThread
@@ -506,7 +506,7 @@ public class MainViewModel extends AndroidViewModel {
                 new Thread(() -> notes.postValue(
                         ids
                                 .stream()
-                                .map(id -> db.getNoteDao().getFullNoteWithCategory(currentAccount.getId(), id))
+                                .map(id -> db.getNoteDao().getFullNoteWithCategory(id))
                                 .collect(Collectors.toList())
                 )).start();
                 return notes;
@@ -551,7 +551,7 @@ public class MainViewModel extends AndroidViewModel {
                 new Thread(() -> {
                     final StringBuilder noteContents = new StringBuilder();
                     for (Long noteId : noteIds) {
-                        final NoteWithCategory fullNote = db.getNoteDao().getFullNoteWithCategory(currentAccount.getId(), noteId);
+                        final NoteWithCategory fullNote = db.getNoteDao().getFullNoteWithCategory(noteId);
                         final String tempFullNote = fullNote.getContent();
                         if (!TextUtils.isEmpty(tempFullNote)) {
                             if (noteContents.length() > 0) {

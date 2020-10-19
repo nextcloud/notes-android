@@ -108,7 +108,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccount.getAccountName());
                     }
                     isNew = false;
-                    note = originalNote = db.getNoteDao().getFullNoteWithCategory(localAccount.getId(), id);
+                    note = originalNote = db.getNoteDao().getFullNoteWithCategory(id);
                 } else {
                     NoteWithCategory cloudNote = (NoteWithCategory) requireArguments().getSerializable(PARAM_NEWNOTE);
                     String content = requireArguments().getString(PARAM_CONTENT);

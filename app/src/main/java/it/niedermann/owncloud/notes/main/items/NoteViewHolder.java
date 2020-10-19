@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.chip.Chip;
@@ -42,6 +43,7 @@ import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
 public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     @NonNull
     private final NoteClickListener noteClickListener;
+    private ItemDetailsLookup.ItemDetails<Long> itemDetails;
 
     public NoteViewHolder(@NonNull View v, @NonNull NoteClickListener noteClickListener) {
         super(v);
@@ -50,7 +52,9 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     @CallSuper
-    public void bind(@NonNull NoteWithCategory note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+    public void bind(@NonNull ItemDetailsLookup.ItemDetails<Long> itemDetails, boolean isSelected, @NonNull NoteWithCategory note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        this.itemDetails = itemDetails;
+        itemView.setSelected(isSelected);
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getAdapterPosition(), view));
         itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getAdapterPosition(), view));
     }
@@ -137,4 +141,8 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
 
     @Nullable
     public abstract View getNoteSwipeable();
+
+    public ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
+        return itemDetails;
+    }
 }

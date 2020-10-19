@@ -213,7 +213,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                 TextProcessorChain chain = defaultTextProcessorChain(note.getNote());
                 Account account = db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
                 db.getNoteServerSyncHelper().addCallbackPull(account, () -> {
-                    note = db.getNoteDao().getFullNoteWithCategory(note.getAccountId(), note.getId());
+                    note = db.getNoteDao().getFullNoteWithCategory(note.getId());
                     changedText = note.getContent();
                     binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);

@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
+import androidx.recyclerview.selection.ItemDetailsLookup;
 
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridBinding;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
@@ -40,8 +41,8 @@ public class NoteViewGridHolder extends NoteViewHolder {
         throw new UnsupportedOperationException(NoteViewGridHolder.class.getSimpleName() + " does not support swiping");
     }
 
-    public void bind(@NonNull NoteWithCategory noteWithCategory, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        super.bind(noteWithCategory, showCategory, mainColor, textColor, searchQuery);
+    public void bind(@NonNull ItemDetailsLookup.ItemDetails<Long> itemDetails, boolean isSelected, @NonNull NoteWithCategory noteWithCategory, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        super.bind(itemDetails, isSelected, noteWithCategory, showCategory, mainColor, textColor, searchQuery);
         Note note = noteWithCategory.getNote();
         @NonNull final Context context = itemView.getContext();
         bindCategory(context, binding.noteCategory, showCategory, noteWithCategory.getCategory(), mainColor);

@@ -61,7 +61,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         if (data != null) {
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
-            note = db.getNoteDao().getFullNoteWithCategory(data.getAccountId(), noteId);
+            note = db.getNoteDao().getFullNoteWithCategory(noteId);
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");

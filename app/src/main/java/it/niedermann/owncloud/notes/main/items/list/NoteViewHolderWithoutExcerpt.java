@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.selection.ItemDetailsLookup;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemWithoutExcerptBinding;
@@ -29,8 +30,8 @@ public class NoteViewHolderWithoutExcerpt extends NoteViewHolder {
         binding.noteSwipeFrame.setBackgroundResource(left ? R.color.bg_warning : R.color.bg_attention);
     }
 
-    public void bind(@NonNull NoteWithCategory noteWithCategory, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        super.bind(noteWithCategory, showCategory, mainColor, textColor, searchQuery);
+    public void bind(@NonNull ItemDetailsLookup.ItemDetails<Long> itemDetails, boolean isSelected, @NonNull NoteWithCategory noteWithCategory, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        super.bind(itemDetails, isSelected, noteWithCategory, showCategory, mainColor, textColor, searchQuery);
         Note note = noteWithCategory.getNote();
         @NonNull final Context context = itemView.getContext();
         binding.noteSwipeable.setAlpha(DBStatus.LOCAL_DELETED.equals(note.getStatus()) ? 0.5f : 1.0f);

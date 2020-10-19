@@ -16,6 +16,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -23,6 +24,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
@@ -46,19 +48,19 @@ public class MultiSelectedActionModeCallback implements Callback {
     @NonNull
     private final LifecycleOwner lifecycleOwner;
     private final boolean canMoveNoteToAnotherAccounts;
-    private final ItemAdapter adapter;
+    private final SelectionTracker<Long> tracker;
     private final RecyclerView recyclerView;
     private final FragmentManager fragmentManager;
     private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, boolean canMoveNoteToAnotherAccounts, ItemAdapter adapter, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
+            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, boolean canMoveNoteToAnotherAccounts, SelectionTracker<Long> tracker, RecyclerView recyclerView, FragmentManager fragmentManager, SearchView searchView) {
         this.context = context;
         this.view = view;
         this.mainViewModel = mainViewModel;
         this.lifecycleOwner = lifecycleOwner;
         this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
-        this.adapter = adapter;
+        this.tracker = tracker;
         this.recyclerView = recyclerView;
         this.fragmentManager = fragmentManager;
         this.searchView = searchView;
@@ -98,7 +100,10 @@ public class MultiSelectedActionModeCallback implements Callback {
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.menu_delete) {
-            final List<Long> selection = adapter.getSelected().stream().map(itemPosition -> ((NoteWithCategory) adapter.getItem(itemPosition)).getId()).collect(Collectors.toList());
+            final List<Long> selection = new ArrayList<>(tracker.getSelection().size());
+            for(Long sel : tracker.getSelection()) {
+                selection.add(sel);
+            }
             final LiveData<List<NoteWithCategory>> fullNotes$ = mainViewModel.getFullNotesWithCategory(selection);
             fullNotes$.observe(lifecycleOwner, (fullNotes) -> {
                 fullNotes$.removeObservers(lifecycleOwner);
@@ -133,15 +138,17 @@ public class MultiSelectedActionModeCallback implements Callback {
             });
             return true;
         } else if (itemId == R.id.menu_share) {
-            final String subject = (adapter.getSelected().size() == 1)
-                    ? ((NoteWithCategory) adapter.getItem(adapter.getSelected().get(0))).getTitle()
-                    : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
+            final List<Long> selection = new ArrayList<>(tracker.getSelection().size());
+            for(Long sel : tracker.getSelection()) {
+                selection.add(sel);
+            }
+            // FIXME
+            final String subject = context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size());
+//            final String subject = (selection.size() == 1)
+//                    ? ((NoteWithCategory) adapter.getItem(adapter.getSelected().get(0))).getTitle()
+//                    : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
 
-            final LiveData<String> contentCollector = mainViewModel.collectNoteContents(
-                    adapter.getSelected()
-                            .stream()
-                            .map(itemPosition -> ((NoteWithCategory) adapter.getItem(itemPosition)).getId())
-                            .collect(Collectors.toList()));
+            final LiveData<String> contentCollector = mainViewModel.collectNoteContents(selection);
             contentCollector.observe(lifecycleOwner, (next) -> {
                 contentCollector.removeObservers(lifecycleOwner);
                 ShareUtil.openShareDialog(context, subject, next);
@@ -163,7 +170,7 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        adapter.clearSelection(recyclerView);
-        adapter.notifyDataSetChanged();
+//        adapter.clearSelection(recyclerView);
+//        adapter.notifyDataSetChanged();
     }
 }

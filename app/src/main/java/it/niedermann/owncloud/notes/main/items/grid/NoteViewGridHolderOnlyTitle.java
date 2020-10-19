@@ -8,10 +8,10 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
+import androidx.recyclerview.selection.ItemDetailsLookup;
 
 import it.niedermann.owncloud.notes.databinding.ItemNotesListNoteItemGridOnlyTitleBinding;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
@@ -33,8 +33,8 @@ public class NoteViewGridHolderOnlyTitle extends NoteViewHolder {
         throw new UnsupportedOperationException(NoteViewGridHolderOnlyTitle.class.getSimpleName() + " does not support swiping");
     }
 
-    public void bind(@NonNull NoteWithCategory note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        super.bind(note, showCategory, mainColor, textColor, searchQuery);
+    public void bind(@NonNull ItemDetailsLookup.ItemDetails<Long> itemDetails, boolean isSelected, @NonNull NoteWithCategory note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+        super.bind(itemDetails, isSelected, note, showCategory, mainColor, textColor, searchQuery);
         @NonNull final Context context = itemView.getContext();
         bindStatus(binding.noteStatus, note.getStatus(), mainColor);
         bindFavorite(binding.noteFavorite, note.getFavorite());
