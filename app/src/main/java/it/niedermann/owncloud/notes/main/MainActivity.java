@@ -621,11 +621,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     }
 
     @Override
-    public boolean onNoteLongClick(int position, View v) {
-        return true;
-    }
-
-    @Override
     public void onBackPressed() {
         if (activityBinding.toolbar.getVisibility() == VISIBLE) {
             updateToolbars(true);

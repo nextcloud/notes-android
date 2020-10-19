@@ -53,6 +53,7 @@ import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
+import static java.lang.Boolean.TRUE;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
 
@@ -211,7 +212,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     }
 
     private void prepareFavoriteOption(MenuItem item) {
-        item.setIcon(note.getFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
+        item.setIcon(TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
         item.setChecked(note.getFavorite());
         tintMenuIcon(item, colorAccent);
     }
@@ -263,7 +264,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
                             ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
                                     .setShortLabel(note.getTitle())
-                                    .setIcon(Icon.createWithResource(requireActivity().getApplicationContext(), note.getFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                    .setIcon(Icon.createWithResource(requireActivity().getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
                                     .setIntent(intent)
                                     .build();
 

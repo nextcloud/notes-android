@@ -58,9 +58,4 @@ public class AppendToNoteActivity extends MainActivity {
         }
         finish();
     }
-
-    @Override
-    public boolean onNoteLongClick(int position, View v) {
-        return false;
-    }
 }

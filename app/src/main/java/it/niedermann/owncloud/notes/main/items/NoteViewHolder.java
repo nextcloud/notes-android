@@ -55,7 +55,6 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     public void bind(boolean isSelected, @NonNull NoteWithCategory note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
         itemView.setSelected(isSelected);
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getAdapterPosition(), view));
-        itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getAdapterPosition(), view));
     }
 
     protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int mainColor) {
