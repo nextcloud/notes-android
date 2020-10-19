@@ -46,5 +46,47 @@ public class NavigationItem {
             super(id, label, count, icon, ENavigationCategoryType.DEFAULT_CATEGORY);
             this.categoryId = categoryId;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof CategoryNavigationItem)) return false;
+            if (!super.equals(o)) return false;
+
+            CategoryNavigationItem that = (CategoryNavigationItem) o;
+
+            return categoryId.equals(that.categoryId);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = super.hashCode();
+            result = 31 * result + categoryId.hashCode();
+            return result;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NavigationItem)) return false;
+
+        NavigationItem that = (NavigationItem) o;
+
+        if (icon != that.icon) return false;
+        if (!id.equals(that.id)) return false;
+        if (!label.equals(that.label)) return false;
+        if (count != null ? !count.equals(that.count) : that.count != null) return false;
+        return type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + label.hashCode();
+        result = 31 * result + icon;
+        result = 31 * result + (count != null ? count.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
     }
 }

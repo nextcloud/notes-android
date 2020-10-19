@@ -46,6 +46,8 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
+import java.util.Collections;
+
 import it.niedermann.owncloud.notes.ImportAccountActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
@@ -171,6 +173,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         mainViewModel.getSelectedCategory().observe(this, (selectedCategory) -> {
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(GONE);
             binding.activityNotesListView.progressCircular.setVisibility(VISIBLE);
+            adapter.setItemList(Collections.emptyList());
             adapter.setShowCategory(selectedCategory.getType() == RECENT || selectedCategory.getType() == FAVORITES);
             fabCreate.show();
 
@@ -336,6 +339,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private void setupNotesList() {
         adapter = new ItemAdapter(this, gridView);
         listView.setAdapter(adapter);
+        listView.setItemAnimator(null);
 
         if (gridView) {
             int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
@@ -359,7 +363,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             ));
         }
 
-        activityBinding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0)

@@ -92,6 +92,24 @@ public class NoteWithCategory implements Serializable, Item {
         this.category = category;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NoteWithCategory)) return false;
+
+        NoteWithCategory that = (NoteWithCategory) o;
+
+        if (note != null ? !note.equals(that.note) : that.note != null) return false;
+        return category != null ? category.equals(that.category) : that.category == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = note != null ? note.hashCode() : 0;
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        return result;
+    }
+
     @NonNull
     @Override
     public String toString() {

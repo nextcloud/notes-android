@@ -25,6 +25,21 @@ public class SectionItem implements Item {
         return true;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SectionItem)) return false;
+
+        SectionItem that = (SectionItem) o;
+
+        return title != null ? title.equals(that.title) : that.title == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return title != null ? title.hashCode() : 0;
+    }
+
     @NonNull
     @Override
     public String toString() {

@@ -180,6 +180,49 @@ public class Note implements Serializable {
         this.scrollY = scrollY;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Note)) return false;
+
+        Note note = (Note) o;
+
+        if (id != null ? !id.equals(note.id) : note.id != null) return false;
+        if (remoteId != null ? !remoteId.equals(note.remoteId) : note.remoteId != null)
+            return false;
+        if (accountId != null ? !accountId.equals(note.accountId) : note.accountId != null)
+            return false;
+        if (status != note.status) return false;
+        if (title != null ? !title.equals(note.title) : note.title != null) return false;
+        if (modified != null ? !modified.equals(note.modified) : note.modified != null)
+            return false;
+        if (content != null ? !content.equals(note.content) : note.content != null) return false;
+        if (favorite != null ? !favorite.equals(note.favorite) : note.favorite != null)
+            return false;
+        if (categoryId != null ? !categoryId.equals(note.categoryId) : note.categoryId != null)
+            return false;
+        if (eTag != null ? !eTag.equals(note.eTag) : note.eTag != null) return false;
+        if (!excerpt.equals(note.excerpt)) return false;
+        return scrollY != null ? scrollY.equals(note.scrollY) : note.scrollY == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (remoteId != null ? remoteId.hashCode() : 0);
+        result = 31 * result + (accountId != null ? accountId.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (modified != null ? modified.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (favorite != null ? favorite.hashCode() : 0);
+        result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
+        result = 31 * result + (eTag != null ? eTag.hashCode() : 0);
+        result = 31 * result + excerpt.hashCode();
+        result = 31 * result + (scrollY != null ? scrollY.hashCode() : 0);
+        return result;
+    }
+
     @NonNull
     @Override
     public String toString() {

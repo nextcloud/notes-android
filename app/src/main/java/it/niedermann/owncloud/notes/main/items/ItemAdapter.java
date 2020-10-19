@@ -54,11 +54,11 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
 
     private final NoteClickListener noteClickListener;
     private final boolean gridView;
-    private List<Item> itemList = new ArrayList<>();
+    @NonNull
+    private final List<Item> itemList = new ArrayList<>();
     private boolean showCategory = true;
     private CharSequence searchQuery;
     private SelectionTracker<Long> tracker = null;
-    //    private final List<Integer> selected = new ArrayList<>();
     @Px
     private final float fontSize;
     private final boolean monospace;
@@ -93,7 +93,8 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
      * @param itemList List of items to be set
      */
     public void setItemList(@NonNull List<Item> itemList) {
-        this.itemList = itemList;
+        this.itemList.clear();
+        this.itemList.addAll(itemList);
         notifyDataSetChanged();
     }
 

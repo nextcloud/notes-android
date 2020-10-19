@@ -160,7 +160,7 @@ public class MainViewModel extends AndroidViewModel {
     @MainThread
     public LiveData<List<Item>> getNotesListLiveData() {
         final MutableLiveData<List<Item>> insufficientInformation = new MutableLiveData<>();
-        return switchMap(getCurrentAccount(), currentAccount -> {
+        return distinctUntilChanged(switchMap(getCurrentAccount(), currentAccount -> {
             Log.v(TAG, "[getNotesListLiveData] - currentAccount: " + currentAccount);
             if (currentAccount == null) {
                 return insufficientInformation;
@@ -219,7 +219,7 @@ public class MainViewModel extends AndroidViewModel {
                     }
                 });
             }
-        });
+        }));
     }
 
     private List<Item> fromNotesWithCategory(List<NoteWithCategory> noteList, @NonNull NavigationCategory selectedCategory, @Nullable CategorySortingMethod sortingMethod) {
