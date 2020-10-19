@@ -48,12 +48,13 @@ public class MultiSelectedActionModeCallback implements Callback {
     @NonNull
     private final LifecycleOwner lifecycleOwner;
     private final boolean canMoveNoteToAnotherAccounts;
+    @NonNull
     private final SelectionTracker<Long> tracker;
+    @NonNull
     private final FragmentManager fragmentManager;
-    private final SearchView searchView;
 
     public MultiSelectedActionModeCallback(
-            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, boolean canMoveNoteToAnotherAccounts, SelectionTracker<Long> tracker, FragmentManager fragmentManager, SearchView searchView) {
+            @NonNull Context context, @NonNull View view, @NonNull MainViewModel mainViewModel, @NonNull LifecycleOwner lifecycleOwner, boolean canMoveNoteToAnotherAccounts, @NonNull SelectionTracker<Long> tracker, @NonNull FragmentManager fragmentManager) {
         this.context = context;
         this.view = view;
         this.mainViewModel = mainViewModel;
@@ -61,7 +62,6 @@ public class MultiSelectedActionModeCallback implements Callback {
         this.canMoveNoteToAnotherAccounts = canMoveNoteToAnotherAccounts;
         this.tracker = tracker;
         this.fragmentManager = fragmentManager;
-        this.searchView = searchView;
 
         final TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
@@ -105,8 +105,8 @@ public class MultiSelectedActionModeCallback implements Callback {
             final LiveData<List<NoteWithCategory>> fullNotes$ = mainViewModel.getFullNotesWithCategory(selection);
             fullNotes$.observe(lifecycleOwner, (fullNotes) -> {
                 fullNotes$.removeObservers(lifecycleOwner);
-                searchView.setIconified(true);
-                final LiveData<Void> deleteLiveData = mainViewModel.deleteNotesAndSync(fullNotes.stream().map(NoteWithCategory::getId).collect(Collectors.toList()));
+                tracker.clearSelection();
+                final LiveData<Void> deleteLiveData = mainViewModel.deleteNotesAndSync(selection);
                 deleteLiveData.observe(lifecycleOwner, (next) -> deleteLiveData.removeObservers(lifecycleOwner));
                 String deletedSnackbarTitle = fullNotes.size() == 1
                         ? context.getString(R.string.action_note_deleted, fullNotes.get(0).getTitle())
@@ -140,7 +140,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             for(Long sel : tracker.getSelection()) {
                 selection.add(sel);
             }
-            // FIXME
+            // FIXME use title if only one
             final String subject = context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size());
 //            final String subject = (selection.size() == 1)
 //                    ? ((NoteWithCategory) adapter.getItem(adapter.getSelected().get(0))).getTitle()
@@ -150,6 +150,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             contentCollector.observe(lifecycleOwner, (next) -> {
                 contentCollector.removeObservers(lifecycleOwner);
                 ShareUtil.openShareDialog(context, subject, next);
+                tracker.clearSelection();
             });
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
@@ -160,8 +161,7 @@ public class MultiSelectedActionModeCallback implements Callback {
                         .newInstance(account.getId(), "")
                         .show(fragmentManager, CategoryDialogFragment.class.getSimpleName());
             });
-
-            return false;
+            return true;
         }
         return false;
     }
@@ -171,8 +171,6 @@ public class MultiSelectedActionModeCallback implements Callback {
         if(mode != null) {
             mode.finish();
         }
-        for(Long id : tracker.getSelection()) {
-            tracker.deselect(id);
-        }
+        tracker.clearSelection();
     }
 }

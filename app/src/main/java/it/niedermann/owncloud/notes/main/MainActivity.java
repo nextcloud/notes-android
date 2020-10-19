@@ -27,7 +27,6 @@ import androidx.core.view.ViewCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.selection.SelectionPredicates;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.selection.SelectionTracker.SelectionObserver;
 import androidx.recyclerview.selection.StorageStrategy;
@@ -360,7 +359,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             ));
         }
 
-        ((RecyclerView) findViewById(R.id.recycler_view)).addOnScrollListener(new RecyclerView.OnScrollListener() {
+        activityBinding.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 if (dy > 0)
@@ -393,19 +392,35 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 new ItemAdapter.ItemIdKeyProvider(listView),
                 new ItemAdapter.ItemLookup(listView),
                 StorageStrategy.createLongStorage()
-        ).withSelectionPredicate(SelectionPredicates.createSelectAnything()).build();
+        ).withSelectionPredicate(
+                new SelectionTracker.SelectionPredicate<Long>() {
+                    @Override
+                    public boolean canSetStateForKey(@NonNull Long key, boolean nextState) {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean canSetStateAtPosition(int position, boolean nextState) {
+                        return !adapter.getItem(position).isSection();
+                    }
+
+                    @Override
+                    public boolean canSelectMultiple() {
+                        return true;
+                    }
+                }).build();
         adapter.setTracker(tracker);
         tracker.addObserver(new SelectionObserver<Long>() {
                                 @Override
                                 public void onSelectionChanged() {
                                     super.onSelectionChanged();
 
-                                    int selected = tracker.getSelection().size();
-                                    if (selected > 0 && mActionMode == null) {
-                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager(), activityBinding.searchView));
+                                    if (tracker.hasSelection() && mActionMode == null) {
+                                        mActionMode = startSupportActionMode(new MultiSelectedActionModeCallback(MainActivity.this, coordinatorLayout, mainViewModel, MainActivity.this, canMoveNoteToAnotherAccounts, tracker, getSupportFragmentManager()));
                                     }
                                     if (mActionMode != null) {
-                                        if (selected > 0) {
+                                        if (tracker.hasSelection()) {
+                                            int selected = tracker.getSelection().size();
                                             mActionMode.setTitle(getResources().getQuantityString(R.plurals.ab_selected, selected, selected));
                                         } else {
                                             mActionMode.finish();
@@ -666,10 +681,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void onAccountPicked(@NonNull Account account) {
         for (Long noteId : tracker.getSelection()) {
-            new Thread(() -> {
-                final LiveData<NoteWithCategory> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, noteId);
-                moveLiveData.observe(this, (v) -> moveLiveData.removeObservers(this));
-            }).start();
+            final LiveData<NoteWithCategory> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, noteId);
+            moveLiveData.observe(this, (v) -> {
+                tracker.deselect(noteId);
+                moveLiveData.removeObservers(this);
+            });
         }
     }
 
@@ -677,5 +693,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public void onCategoryChosen(String category) {
         final LiveData<Void> categoryLiveData = mainViewModel.setCategory(tracker.getSelection(), category);
         categoryLiveData.observe(this, (next) -> categoryLiveData.removeObservers(this));
+        tracker.clearSelection();
     }
 }

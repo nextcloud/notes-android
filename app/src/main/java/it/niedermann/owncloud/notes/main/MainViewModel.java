@@ -92,6 +92,8 @@ public class MainViewModel extends AndroidViewModel {
         BrandingUtil.saveBrandColors(getApplication(), account.getColor(), account.getTextColor());
         SingleAccountHelper.setCurrentAccount(getApplication(), account.getAccountName());
         this.currentAccount.postValue(account);
+        this.searchTerm.postValue("");
+        this.selectedCategory.postValue(new NavigationCategory(RECENT));
     }
 
     @NonNull
