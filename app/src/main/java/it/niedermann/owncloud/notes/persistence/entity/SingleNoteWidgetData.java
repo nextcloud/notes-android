@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
@@ -32,7 +31,7 @@ public class SingleNoteWidgetData extends AbstractWidgetData {
     private long noteId;
 
     public SingleNoteWidgetData() {
-
+        // Default constructor
     }
 
     @Ignore
@@ -47,5 +46,20 @@ public class SingleNoteWidgetData extends AbstractWidgetData {
 
     public void setNoteId(long noteId) {
         this.noteId = noteId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SingleNoteWidgetData)) return false;
+
+        SingleNoteWidgetData that = (SingleNoteWidgetData) o;
+
+        return noteId == that.noteId;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (noteId ^ (noteId >>> 32));
     }
 }

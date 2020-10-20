@@ -14,7 +14,8 @@ import it.niedermann.owncloud.notes.shared.model.Item;
 public class NoteWithCategory implements Serializable, Item {
     @Embedded
     private Note note;
-    private String category;
+    @NonNull
+    private String category = "";
 
     public NoteWithCategory() {
         // Default constructor
@@ -22,55 +23,62 @@ public class NoteWithCategory implements Serializable, Item {
 
     @Ignore
     public NoteWithCategory(@NonNull Note note) {
-        this(note, null);
+        this.note = note;
     }
 
     @Ignore
-    public NoteWithCategory(@NonNull Note note, @Nullable String category) {
+    public NoteWithCategory(@NonNull Note note, @NonNull String category) {
         this.note = note;
         this.category = category;
     }
 
+    @NonNull
     public Note getNote() {
         return note;
     }
 
-    public void setNote(Note note) {
+    public void setNote(@NonNull Note note) {
         this.note = note;
     }
 
-    public Long getId() {
+    public long getId() {
         return note.getId();
     }
 
+    @Nullable
     public Long getRemoteId() {
         return note.getRemoteId();
     }
 
-    public Long getAccountId() {
+    public long getAccountId() {
         return note.getAccountId();
     }
 
+    @NonNull
     public DBStatus getStatus() {
         return note.getStatus();
     }
 
+    @NonNull
     public String getTitle() {
         return note.getTitle();
     }
 
+    @Nullable
     public Calendar getModified() {
         return note.getModified();
     }
 
+    @NonNull
     public String getContent() {
         return note.getContent();
     }
 
-    public Boolean getFavorite() {
+    public boolean getFavorite() {
         return note.getFavorite();
     }
 
+    @Nullable
     public String getETag() {
         return note.getETag();
     }
@@ -80,15 +88,16 @@ public class NoteWithCategory implements Serializable, Item {
         return note.getExcerpt();
     }
 
-    public Integer getScrollY() {
+    public int getScrollY() {
         return note.getScrollY();
     }
 
+    @NonNull
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(@NonNull String category) {
         this.category = category;
     }
 
@@ -100,13 +109,13 @@ public class NoteWithCategory implements Serializable, Item {
         NoteWithCategory that = (NoteWithCategory) o;
 
         if (note != null ? !note.equals(that.note) : that.note != null) return false;
-        return category != null ? category.equals(that.category) : that.category == null;
+        return category.equals(that.category);
     }
 
     @Override
     public int hashCode() {
         int result = note != null ? note.hashCode() : 0;
-        result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + category.hashCode();
         return result;
     }
 

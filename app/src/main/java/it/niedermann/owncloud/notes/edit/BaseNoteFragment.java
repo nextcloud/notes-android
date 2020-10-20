@@ -30,6 +30,8 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.util.Calendar;
+
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
@@ -68,7 +70,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
     private Account localAccount;
-    private SingleSignOnAccount ssoAccount;
 
     protected NoteWithCategory note;
     // TODO do we really need this? The reference to note is currently the same
@@ -96,7 +97,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
-            this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
+            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
             this.localAccount = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
 
             if (savedInstanceState == null) {
@@ -117,7 +118,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         if (content == null) {
                             throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                         } else {
-                            note = new NoteWithCategory(new Note(-1, -1L, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), DBStatus.VOID, -1, "", 0));
+                            note = new NoteWithCategory(new Note(-1, -1L, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), DBStatus.VOID, -1, "", 0));
                         }
                     } else {
                         final LiveData<NoteWithCategory> createLiveData = db.addNoteAndSync(localAccount, cloudNote);

@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.persistence.entity;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
@@ -42,6 +41,7 @@ public class NotesListWidgetData extends AbstractWidgetData {
 
     @IntRange(from = 0, to = 2)
     private int mode;
+    @Nullable
     private Long categoryId;
 
     @Nullable
@@ -53,12 +53,31 @@ public class NotesListWidgetData extends AbstractWidgetData {
         this.categoryId = categoryId;
     }
 
-    public void setMode(int mode) {
+    public void setMode(@IntRange(from = 0, to = 2) int mode) {
         this.mode = mode;
     }
 
+    @IntRange(from = 0, to = 2)
     public int getMode() {
         return mode;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NotesListWidgetData)) return false;
+
+        NotesListWidgetData that = (NotesListWidgetData) o;
+
+        if (mode != that.mode) return false;
+        return categoryId != null ? categoryId.equals(that.categoryId) : that.categoryId == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mode;
+        result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
+        return result;
     }
 
     @NonNull

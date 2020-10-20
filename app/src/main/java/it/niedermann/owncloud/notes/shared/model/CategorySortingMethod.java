@@ -4,7 +4,7 @@ public enum CategorySortingMethod {
     SORT_MODIFIED_DESC("MODIFIED DESC"),
     SORT_LEXICOGRAPHICAL_ASC("TITLE COLLATE NOCASE ASC");
 
-    private String sorder;  // sorting method OrderBy for SQL
+    private final String sorder;  // sorting method OrderBy for SQL
 
     /***
      * Constructor

@@ -80,6 +80,7 @@ import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
 import static android.os.Build.VERSION_CODES.O;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -484,7 +485,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         binding.headerView.setBackgroundColor(mainColor);
         binding.appName.setTextColor(textColor);
-        if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (SDK_INT >= LOLLIPOP) {
             activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
         }
 
@@ -632,7 +633,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private void updateToolbars(boolean disableSearch) {
         activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
         activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
-        if (SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (SDK_INT >= LOLLIPOP) {
             activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(),
                     disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
         } else {
@@ -641,7 +642,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         if (disableSearch) {
             activityBinding.searchView.setQuery(null, true);
         }
-        activityBinding.searchView.setIconified(disableSearch);
     }
 
     @Override

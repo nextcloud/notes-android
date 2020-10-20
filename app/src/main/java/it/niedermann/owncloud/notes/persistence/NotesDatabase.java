@@ -175,16 +175,14 @@ public abstract class NotesDatabase extends RoomDatabase {
      * Inserts a note directly into the Database.
      * No Synchronisation will be triggered! Use addNoteAndSync()!
      *
-     * @param note Note to be added. Remotely created Notes must be of type CloudNote and locally created Notes must be of Type {@link Note} (with {@link DBStatus#LOCAL_EDITED})!
+     * @param note Note to be added. Locally created Notes must be of Type {@link Note} (with {@link DBStatus#LOCAL_EDITED})!
      */
     @NonNull
     @WorkerThread
     NoteWithCategory addNote(long accountId, NoteWithCategory note) {
         Note entity = new Note();
-        if (note.getId() != null) {
-            if (note.getId() > 0) {
-                entity.setId(note.getId());
-            }
+        if (note.getId() > 0) {
+            entity.setId(note.getId());
             entity.setStatus(note.getStatus());
             entity.setAccountId(note.getAccountId());
             entity.setExcerpt(note.getExcerpt());
@@ -236,9 +234,9 @@ public abstract class NotesDatabase extends RoomDatabase {
      * This method will search in the database to find out the category id in the db.
      * If there is no such category existing, this method will create it and search again.
      *
-     * @param account    The single sign on account
-     * @param noteId     The note which will be updated
-     * @param category   The category title which should be used to find the category id.
+     * @param account  The single sign on account
+     * @param noteId   The note which will be updated
+     * @param category The category title which should be used to find the category id.
      */
     @AnyThread
     public void setCategory(@NonNull Account account, long noteId, @NonNull String category) {

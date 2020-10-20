@@ -76,7 +76,7 @@ public class ServerResponse {
         String content = "";
         Calendar modified = null;
         boolean favorite = false;
-        String category = null;
+        String category = "";
         String etag = null;
         if (!json.isNull(NotesClient.JSON_ID)) {
             id = json.getLong(NotesClient.JSON_ID);
@@ -88,7 +88,7 @@ public class ServerResponse {
             content = json.getString(NotesClient.JSON_CONTENT);
         }
         if (!json.isNull(NotesClient.JSON_MODIFIED)) {
-            modified = GregorianCalendar.getInstance();
+            modified = Calendar.getInstance();
             modified.setTimeInMillis(json.getLong(NotesClient.JSON_MODIFIED) * 1000);
         }
         if (!json.isNull(NotesClient.JSON_FAVORITE)) {
