@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -45,7 +44,8 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
-import java.util.Collections;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import it.niedermann.owncloud.notes.ImportAccountActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
@@ -218,6 +218,22 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             adapter.setItemList(notes);
             binding.activityNotesListView.progressCircular.setVisibility(GONE);
             binding.activityNotesListView.emptyContentView.getRoot().setVisibility(notes.size() > 0 ? GONE : VISIBLE);
+            // Remove deleted notes from the selection
+            if (tracker.hasSelection()) {
+                final Collection<Long> deletedNotes = new LinkedList<>();
+                for (Long id : tracker.getSelection()) {
+                    if (notes
+                            .stream()
+                            .filter(item -> !item.isSection())
+                            .map(item -> (NoteWithCategory) item)
+                            .noneMatch(item -> item.getId() == id)) {
+                        deletedNotes.add(id);
+                    }
+                }
+                for (Long id : deletedNotes) {
+                    tracker.deselect(id);
+                }
+            }
         });
         mainViewModel.getSearchTerm().observe(this, adapter::setHighlightSearchQuery);
         mainViewModel.getCategorySortingMethodOfSelectedCategory().observe(this, methodOfCategory -> {
