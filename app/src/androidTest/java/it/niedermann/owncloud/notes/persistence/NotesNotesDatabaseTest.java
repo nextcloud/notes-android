@@ -225,15 +225,15 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_04_getCategories() {
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
-        boolean exitFlag = false;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_04_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            if (categoryItem.label.equals("Diary")) {
-                exitFlag = true;
-            }
-        }
-        assertTrue(exitFlag);
+//        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
+//        boolean exitFlag = false;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_04_getCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            if (categoryItem.label.equals("Diary")) {
+//                exitFlag = true;
+//            }
+//        }
+//        assertTrue(exitFlag);
     }
 
     @Test
@@ -383,15 +383,15 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_09_multiGetCategories() {
-        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
-        int count = 0;
-        for (NavigationItem categoryItem : categories) {
-            Log.i("Test_09_multiGetCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-            count++;
-        }
-        Log.i("count count count", "count " + count);
-        assertEquals(6, count);
-        Log.i("count count count", "count " + count);
+//        List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
+//        int count = 0;
+//        for (NavigationItem categoryItem : categories) {
+//            Log.i("Test_09_multiGetCategories_Item", String.format("%s | %s | %d | %d", categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//            count++;
+//        }
+//        Log.i("count count count", "count " + count);
+//        assertEquals(6, count);
+//        Log.i("count count count", "count " + count);
     }
 
     @Test
@@ -547,32 +547,32 @@ public class NotesNotesDatabaseTest {
     @Test
     @Ignore
     public void test_13_getCategoryIdByTitle() {
-        try {
-            List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
-            int count = 0;
-            for (NavigationItem categoryItem : categories) {
-                Log.i("Test_13_getCategoryIdByTitle", String.format("%s | %s | %d | %d",
-                        categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
-                count++;
-            }
-            Log.i("Test_13_getCategoryIdByTitle", "count " + count);
-
-            long catID;
-
-            // Find an existing category to test false
-            if (count > 0) {
-                catID = db.getCategoryDao().getCategoryIdByTitle(account.getId(), categories.get(0).label);
-                assertNotEquals(-1, catID);
-            }
-
-            // Create a category not existing
-            String cur_cat = "Mike Chester Wang's Diary" + getCurDate();
-            catID = db.getCategoryDao().getCategoryIdByTitle(account.getId(), cur_cat);
-            assertNotEquals(-1, catID);
-        } catch (Exception e) {
-            fail(Arrays.toString(e.getStackTrace()));
-            Log.e("Test_13_getCategoryIdByTitle", Arrays.toString(e.getStackTrace()));
-        }
+//        try {
+//            List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(context, db.getCategoryDao().getCategories(account.getId()));
+//            int count = 0;
+//            for (NavigationItem categoryItem : categories) {
+//                Log.i("Test_13_getCategoryIdByTitle", String.format("%s | %s | %d | %d",
+//                        categoryItem.id, categoryItem.label, categoryItem.count, categoryItem.icon));
+//                count++;
+//            }
+//            Log.i("Test_13_getCategoryIdByTitle", "count " + count);
+//
+//            long catID;
+//
+//            // Find an existing category to test false
+//            if (count > 0) {
+//                catID = db.getCategoryDao().getCategoryIdByTitle(account.getId(), categories.get(0).label);
+//                assertNotEquals(-1, catID);
+//            }
+//
+//            // Create a category not existing
+//            String cur_cat = "Mike Chester Wang's Diary" + getCurDate();
+//            catID = db.getCategoryDao().getCategoryIdByTitle(account.getId(), cur_cat);
+//            assertNotEquals(-1, catID);
+//        } catch (Exception e) {
+//            fail(Arrays.toString(e.getStackTrace()));
+//            Log.e("Test_13_getCategoryIdByTitle", Arrays.toString(e.getStackTrace()));
+//        }
     }
 
 //    @Test
