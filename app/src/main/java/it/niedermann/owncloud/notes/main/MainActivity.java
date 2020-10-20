@@ -340,8 +340,6 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         adapter = new ItemAdapter(this, gridView);
         listView.setAdapter(adapter);
         listView.setItemAnimator(null);
-
-        itemTouchHelper = new NotesListViewItemTouchHelper(this, mainViewModel, this, adapter, swipeRefreshLayout, coordinatorLayout, gridView);
         if (gridView) {
             int spanCount = getResources().getInteger(R.integer.grid_view_span_count);
             StaggeredGridLayoutManager gridLayoutManager = new StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL);
@@ -413,6 +411,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             }
         );
 
+        itemTouchHelper = new NotesListViewItemTouchHelper(this, mainViewModel, this, tracker, adapter, swipeRefreshLayout, coordinatorLayout, gridView);
+        itemTouchHelper.attachToRecyclerView(listView);
     }
 
     private void setupNavigationList() {

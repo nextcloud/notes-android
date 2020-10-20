@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -33,6 +34,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
             @NonNull Context context,
             @NonNull MainViewModel mainViewModel,
             @NonNull LifecycleOwner lifecycleOwner,
+            @NonNull SelectionTracker<Long> tracker,
             @NonNull ItemAdapter adapter,
             @NonNull SwipeRefreshLayout swipeRefreshLayout,
             @NonNull View view,
@@ -74,6 +76,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         final LiveData<NoteWithCategory> dbNoteLiveData = mainViewModel.getFullNoteWithCategory(dbNoteWithoutContent.getId());
                         dbNoteLiveData.observe(lifecycleOwner, (dbNote) -> {
                             dbNoteLiveData.removeObservers(lifecycleOwner);
+                            tracker.deselect(dbNote.getId());
                             final LiveData<Void> deleteLiveData = mainViewModel.deleteNoteAndSync(dbNote.getId());
                             deleteLiveData.observe(lifecycleOwner, (next) -> deleteLiveData.removeObservers(lifecycleOwner));
                             Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
