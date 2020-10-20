@@ -391,7 +391,9 @@ public class NoteServerSyncHelper {
                             db.updateNote(localAccount.getId(), note.getId(), remoteNote, note);
                             break;
                         case LOCAL_DELETED:
-                            if (note.getRemoteId() > 0) {
+                            if (note.getRemoteId() == null) {
+                                Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
+                            } else {
                                 Log.v(TAG, "   ...delete (from server and local)");
                                 try {
                                     notesClient.deleteNote(ssoAccount, note.getRemoteId());
@@ -402,8 +404,6 @@ public class NoteServerSyncHelper {
                                         throw e;
                                     }
                                 }
-                            } else {
-                                Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
                             }
                             // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             db.getNoteDao().deleteByNoteId(note.getId(), DBStatus.LOCAL_DELETED);
