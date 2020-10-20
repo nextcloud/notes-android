@@ -35,14 +35,14 @@ public class Converters {
         if (value == null) {
             calendar.setTimeInMillis(0);
         } else {
-            calendar.setTimeInMillis(value);
+            calendar.setTimeInMillis(value * 1000);
         }
         return calendar;
     }
 
     @TypeConverter
     public static Long calendarToLong(Calendar calendar) {
-        return calendar == null ? 0 : calendar.getTimeInMillis();
+        return calendar == null ? 0 : calendar.getTimeInMillis() / 1000;
     }
 
 }
