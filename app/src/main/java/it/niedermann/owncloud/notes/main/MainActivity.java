@@ -47,7 +47,7 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import it.niedermann.owncloud.notes.ImportAccountActivity;
+import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;

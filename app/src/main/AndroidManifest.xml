@@ -48,7 +48,7 @@
         </activity>
 
         <activity
-            android:name=".ImportAccountActivity"
+            android:name=".importaccount.ImportAccountActivity"
             android:label="@string/add_account" />
 
         <activity

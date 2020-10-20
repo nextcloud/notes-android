@@ -1,7 +1,6 @@
-package it.niedermann.owncloud.notes;
+package it.niedermann.owncloud.notes.importaccount;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,11 +21,11 @@ import com.nextcloud.android.sso.exceptions.NextcloudFilesAppNotInstalledExcepti
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.ui.UiExceptionManager;
 
+import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityImportAccountBinding;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
-import it.niedermann.owncloud.notes.main.ImportViewModel;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -36,7 +35,7 @@ public class ImportAccountActivity extends AppCompatActivity {
     private static final String TAG = ImportAccountActivity.class.getSimpleName();
     public static final int REQUEST_CODE_IMPORT_ACCOUNT = 1;
 
-    private ImportViewModel importViewModel;
+    private ImportAccountViewModel importAccountViewModel;
     private ActivityImportAccountBinding binding;
 
     @Override
@@ -46,7 +45,7 @@ public class ImportAccountActivity extends AppCompatActivity {
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
 
         binding = ActivityImportAccountBinding.inflate(getLayoutInflater());
-        importViewModel = new ViewModelProvider(this).get(ImportViewModel.class);
+        importAccountViewModel = new ViewModelProvider(this).get(ImportAccountViewModel.class);
 
         setContentView(binding.getRoot());
 
@@ -93,7 +92,7 @@ public class ImportAccountActivity extends AppCompatActivity {
                     try {
                         Log.i(TAG, "Loading capabilities for " + ssoAccount.name);
                         final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                        LiveData<Account> createLiveData = importViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
+                        LiveData<Account> createLiveData = importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
                         runOnUiThread(() -> createLiveData.observe(this, (account) -> {
                             if (account != null) {
                                 Log.i(TAG, capabilities.toString());
