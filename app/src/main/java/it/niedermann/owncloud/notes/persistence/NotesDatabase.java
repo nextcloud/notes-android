@@ -191,9 +191,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             entity.setAccountId(accountId);
             entity.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
         }
-        if (note.getRemoteId() != null && note.getRemoteId() > 0) {
-            entity.setRemoteId(note.getRemoteId());
-        }
+        entity.setRemoteId(note.getRemoteId());
         entity.setTitle(note.getTitle());
         entity.setModified(note.getModified());
         entity.setContent(note.getContent());
@@ -267,7 +265,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if (oldNote.getRemoteId() == null || oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
+                if (oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
                 } else {
                     title = oldNote.getTitle();
