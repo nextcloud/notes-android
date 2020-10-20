@@ -14,6 +14,7 @@ import androidx.room.PrimaryKey;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,7 +34,7 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
                 @Index(name = "IDX_ACCOUNT_ETAG", value = "eTag")
         }
 )
-public class Account {
+public class Account implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private long id;
     @NonNull

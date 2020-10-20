@@ -4,16 +4,17 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.arch.core.util.Function;
-import androidx.core.util.Pair;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.SavedStateHandle;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -63,24 +64,43 @@ public class MainViewModel extends AndroidViewModel {
 
     private static final String TAG = MainViewModel.class.getSimpleName();
 
+    private final SavedStateHandle state;
+
+    private static final String KEY_CURRENT_ACCOUNT = "currentAccount";
+    private static final String KEY_SEARCH_TERM = "searchTerm";
+    private static final String KEY_SELECTED_CATEGORY = "selectedCategory";
+    private static final String KEY_EXPANDED_CATEGORY = "expandedCategory";
+
     @NonNull
     private final NotesDatabase db;
 
     @NonNull
     private final MutableLiveData<Account> currentAccount = new MutableLiveData<>();
-
     @NonNull
     private final MutableLiveData<String> searchTerm = new MutableLiveData<>(null);
-
     @NonNull
     private final MutableLiveData<NavigationCategory> selectedCategory = new MutableLiveData<>(new NavigationCategory(RECENT));
-
     @NonNull
     private final MutableLiveData<String> expandedCategory = new MutableLiveData<>(null);
 
-    public MainViewModel(@NonNull Application application) {
+    public MainViewModel(@NonNull Application application, @NonNull SavedStateHandle savedStateHandle) {
         super(application);
-        this.db = NotesDatabase.getInstance(application.getApplicationContext());
+        this.db = NotesDatabase.getInstance(application);
+        this.state = savedStateHandle;
+    }
+
+    public void restoreInstanceState() {
+        Log.v(TAG, "[restoreInstanceState]");
+        final Account account = state.get(KEY_CURRENT_ACCOUNT);
+        if (account != null) {
+            postCurrentAccount(account);
+        }
+        postSearchTerm(state.get(KEY_SEARCH_TERM));
+        final NavigationCategory selectedCategory = state.get(KEY_SELECTED_CATEGORY);
+        if (selectedCategory != null) {
+            postSelectedCategory(selectedCategory);
+        }
+        postExpandedCategory(state.get(KEY_EXPANDED_CATEGORY));
     }
 
     @NonNull
@@ -89,11 +109,12 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void postCurrentAccount(@NonNull Account account) {
+        state.set(KEY_CURRENT_ACCOUNT, account);
         BrandingUtil.saveBrandColors(getApplication(), account.getColor(), account.getTextColor());
         SingleAccountHelper.setCurrentAccount(getApplication(), account.getAccountName());
-        this.currentAccount.postValue(account);
-        this.searchTerm.postValue("");
-        this.selectedCategory.postValue(new NavigationCategory(RECENT));
+        this.currentAccount.setValue(account);
+        this.searchTerm.setValue("");
+        this.selectedCategory.setValue(new NavigationCategory(RECENT));
     }
 
     @NonNull
@@ -102,6 +123,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void postSearchTerm(String searchTerm) {
+        state.set(KEY_SEARCH_TERM, searchTerm);
         this.searchTerm.postValue(searchTerm);
     }
 
@@ -111,6 +133,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void postSelectedCategory(@NonNull NavigationCategory selectedCategory) {
+        state.set(KEY_SELECTED_CATEGORY, selectedCategory);
         this.selectedCategory.postValue(selectedCategory);
 
         // Close sub categories
@@ -129,7 +152,7 @@ public class MainViewModel extends AndroidViewModel {
                     Log.e(TAG, "navigation selection is a " + DEFAULT_CATEGORY + ", but the contained category is null.");
                 } else {
                     String title = category.getTitle();
-                    int slashIndex = title == null ? -1 : title.indexOf('/');
+                    int slashIndex = title.indexOf('/');
                     String rootCategory = slashIndex < 0 ? title : title.substring(0, slashIndex);
                     String expandedCategory = getExpandedCategory().getValue();
                     if (expandedCategory != null && !expandedCategory.equals(rootCategory)) {
@@ -143,11 +166,12 @@ public class MainViewModel extends AndroidViewModel {
 
     @NonNull
     @MainThread
-    public LiveData<Pair<NavigationCategory, CategorySortingMethod>> getCategorySortingMethodOfSelectedCategory() {
+    public LiveData<android.util.Pair<NavigationCategory, CategorySortingMethod>> getCategorySortingMethodOfSelectedCategory() {
         return switchMap(getSelectedCategory(), selectedCategory -> map(db.getCategoryOrder(selectedCategory), sortingMethod -> new Pair<>(selectedCategory, sortingMethod)));
     }
 
     public void postExpandedCategory(@Nullable String expandedCategory) {
+        state.set(KEY_EXPANDED_CATEGORY, expandedCategory);
         this.expandedCategory.postValue(expandedCategory);
     }
 
@@ -172,7 +196,7 @@ public class MainViewModel extends AndroidViewModel {
                         return switchMap(getSearchTerm(), searchTerm -> {
                             Log.v(TAG, "[getNotesListLiveData] - searchTerm: " + searchTerm);
                             return switchMap(getCategorySortingMethodOfSelectedCategory(), sortingMethod -> {
-                                final Long accountId = currentAccount.getId();
+                                final long accountId = currentAccount.getId();
                                 final String searchQueryOrWildcard = searchTerm == null ? "%" : "%" + searchTerm.trim() + "%";
                                 Log.v(TAG, "[getNotesListLiveData] - sortMethod: " + sortingMethod.second);
                                 final LiveData<List<NoteWithCategory>> fromDatabase;

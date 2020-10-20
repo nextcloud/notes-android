@@ -47,7 +47,6 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
@@ -59,6 +58,7 @@ import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
+import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
 import it.niedermann.owncloud.notes.main.items.list.NotesListViewItemTouchHelper;
@@ -299,6 +299,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             }
         });
         super.onResume();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mainViewModel.restoreInstanceState();
     }
 
     private void setupToolbars() {

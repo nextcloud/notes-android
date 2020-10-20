@@ -40,6 +40,25 @@ public class NavigationCategory implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NavigationCategory)) return false;
+
+        NavigationCategory that = (NavigationCategory) o;
+
+        if (type != that.type) return false;
+        return category != null ? category.equals(that.category) : that.category == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type.hashCode();
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        return result;
+    }
+
+    @NonNull
+    @Override
     public String toString() {
         return "NavigationCategory{" +
                 "type=" + type +
