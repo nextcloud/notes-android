@@ -223,72 +223,59 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_cancel:
-                if (originalNote == null) {
-                    db.deleteNoteAndSync(localAccount, note.getId());
-                } else {
-                    db.updateNoteAndSync(localAccount, originalNote, null, null, null);
-                }
-                listener.close();
-                return true;
-            case R.id.menu_delete:
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_cancel) {
+            if (originalNote == null) {
                 db.deleteNoteAndSync(localAccount, note.getId());
-                listener.close();
-                return true;
-            case R.id.menu_favorite:
-                db.toggleFavoriteAndSync(localAccount, note.getId());
-                listener.onNoteUpdated(note);
-                prepareFavoriteOption(item);
-                return true;
-            case R.id.menu_category:
-                showCategorySelector();
-                return true;
-            case R.id.menu_title:
-                showEditTitleDialog();
-                return true;
-            case R.id.menu_move:
-                AccountPickerDialogFragment.newInstance(note.getAccountId()).show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
-                return true;
-            case R.id.menu_share:
-                ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
-                return false;
-            case MENU_ID_PIN:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
+            } else {
+                db.updateNoteAndSync(localAccount, originalNote, null, null, null);
+            }
+            listener.close();
+            return true;
+        } else if (itemId == R.id.menu_delete) {
+            db.deleteNoteAndSync(localAccount, note.getId());
+            listener.close();
+            return true;
+        } else if (itemId == R.id.menu_favorite) {
+            db.toggleFavoriteAndSync(localAccount, note.getId());
+            listener.onNoteUpdated(note);
+            prepareFavoriteOption(item);
+            return true;
+        } else if (itemId == R.id.menu_category) {
+            showCategorySelector();
+            return true;
+        } else if (itemId == R.id.menu_title) {
+            showEditTitleDialog();
+            return true;
+        } else if (itemId == R.id.menu_move) {
+            AccountPickerDialogFragment.newInstance(note.getAccountId()).show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
+            return true;
+        } else if (itemId == R.id.menu_share) {
+            ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
+            return false;
+        } else if (itemId == MENU_ID_PIN) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                final ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
+                if (shortcutManager != null) {
+                    if (shortcutManager.isRequestPinShortcutSupported()) {
+                        final ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
+                                .setShortLabel(note.getTitle())
+                                .setIcon(Icon.createWithResource(requireActivity().getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                .setIntent(new Intent(getActivity(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()).setAction(ACTION_SHORTCUT))
+                                .build();
 
-                    if (shortcutManager != null) {
-                        if (shortcutManager.isRequestPinShortcutSupported()) {
-                            Intent intent = new Intent(getActivity(), EditNoteActivity.class);
-                            intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-                            intent.setAction(ACTION_SHORTCUT);
-
-                            ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
-                                    .setShortLabel(note.getTitle())
-                                    .setIcon(Icon.createWithResource(requireActivity().getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                    .setIntent(intent)
-                                    .build();
-
-                            Intent pinnedShortcutCallbackIntent =
-                                    shortcutManager.createShortcutResultIntent(pinShortcutInfo);
-
-                            PendingIntent successCallback = PendingIntent.getBroadcast(getActivity(), /* request code */ 0,
-                                    pinnedShortcutCallbackIntent, /* flags */ 0);
-
-                            shortcutManager.requestPinShortcut(pinShortcutInfo,
-                                    successCallback.getIntentSender());
-                        } else {
-                            Log.i(TAG, "RequestPinShortcut is not supported");
-                        }
+                        shortcutManager.requestPinShortcut(pinShortcutInfo, PendingIntent.getBroadcast(getActivity(), 0, shortcutManager.createShortcutResultIntent(pinShortcutInfo), 0).getIntentSender());
                     } else {
-                        Log.e(TAG, "ShortcutManager is null");
+                        Log.i(TAG, "RequestPinShortcut is not supported");
                     }
+                } else {
+                    Log.e(TAG, ShortcutManager.class.getSimpleName() + " is null");
                 }
+            }
 
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onCloseNote() {
