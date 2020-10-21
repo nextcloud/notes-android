@@ -131,7 +131,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             accountLiveData.observe(lifecycleOwner, account -> {
                 accountLiveData.removeObservers(lifecycleOwner);
                 AccountPickerDialogFragment
-                        .newInstance(account.getId())
+                        .newInstance(new ArrayList<>(mainViewModel.getAccounts()), account.getId())
                         .show(fragmentManager, AccountPickerDialogFragment.class.getSimpleName());
             });
             return true;

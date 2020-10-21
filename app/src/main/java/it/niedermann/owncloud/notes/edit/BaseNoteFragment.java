@@ -30,6 +30,7 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import it.niedermann.owncloud.notes.R;
@@ -248,7 +249,9 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             showEditTitleDialog();
             return true;
         } else if (itemId == R.id.menu_move) {
-            AccountPickerDialogFragment.newInstance(note.getAccountId()).show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
+            AccountPickerDialogFragment
+                    .newInstance(new ArrayList<>(db.getAccountDao().getAccounts()), note.getAccountId())
+                    .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
             return true;
         } else if (itemId == R.id.menu_share) {
             ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());

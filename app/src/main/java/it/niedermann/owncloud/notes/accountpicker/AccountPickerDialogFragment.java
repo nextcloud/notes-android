@@ -14,14 +14,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserAdapter;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserViewHolder;
@@ -32,9 +34,12 @@ import it.niedermann.owncloud.notes.shared.account.AccountChooserViewHolder;
  */
 public class AccountPickerDialogFragment extends BrandedDialogFragment {
 
+    private static final String PARAM_TARGET_ACCOUNTS = "targetAccounts";
+    private static final String PARAM_ACCOUNT_ID_TO_EXCLUDE = "accountIdToExclude";
+
     private AccountPickerListener accountPickerListener;
-    private static final String PARAM_ACCOUNT_ID_TO_EXCLUDE = "account_id_to_exclude";
-    private long accountIdToExclude;
+
+    private List<Account> targetAccounts;
 
     /**
      * Use newInstance()-Method
@@ -50,31 +55,36 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
         } else {
             throw new ClassCastException("Caller must implement " + AccountPickerListener.class.getSimpleName());
         }
-        accountIdToExclude = requireArguments().getLong(PARAM_ACCOUNT_ID_TO_EXCLUDE, -1L);
+        final Bundle args = requireArguments();
+        final Collection<?> accounts;
+        if (!args.containsKey(PARAM_TARGET_ACCOUNTS)) {
+            throw new IllegalArgumentException(PARAM_TARGET_ACCOUNTS + " is required.");
+        }
+        accounts = (Collection<?>) args.getSerializable(PARAM_TARGET_ACCOUNTS);
+        if (accounts == null) {
+            throw new IllegalArgumentException(PARAM_TARGET_ACCOUNTS + " is required.");
+        }
+        long accountIdToExclude = requireArguments().getLong(PARAM_ACCOUNT_ID_TO_EXCLUDE, -1L);
         if (accountIdToExclude < 0) {
             throw new IllegalArgumentException(PARAM_ACCOUNT_ID_TO_EXCLUDE + " must be greater 0");
         }
+        targetAccounts = accounts
+                .stream()
+                .map(a -> (Account) a)
+                .filter(a -> a.getId() != accountIdToExclude)
+                .collect(Collectors.toList());
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final List<Account> accountsList = NotesDatabase.getInstance(getActivity()).getAccountDao().getAccounts();
         final AlertDialog.Builder dialogBuilder = new BrandedAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.simple_move)
                 .setNegativeButton(android.R.string.cancel, null);
 
-        if (accountsList.size() > 1) {
+        if (targetAccounts.size() > 0) {
             final DialogChooseAccountBinding binding = DialogChooseAccountBinding.inflate(LayoutInflater.from(requireContext()));
-
-            for (int i = 0; i < accountsList.size(); i++) {
-                if (accountsList.get(i).getId() == accountIdToExclude) {
-                    accountsList.remove(i);
-                    break;
-                }
-            }
-
-            RecyclerView.Adapter<AccountChooserViewHolder> adapter = new AccountChooserAdapter(accountsList, (account -> {
+            RecyclerView.Adapter<AccountChooserViewHolder> adapter = new AccountChooserAdapter(targetAccounts, (account -> {
                 accountPickerListener.onAccountPicked(account);
                 dismiss();
             }));
@@ -94,9 +104,10 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    public static DialogFragment newInstance(long accountIdToExclude) {
+    public static DialogFragment newInstance(ArrayList<Account> targetAccounts, long accountIdToExclude) {
         final DialogFragment fragment = new AccountPickerDialogFragment();
         final Bundle args = new Bundle();
+        args.putSerializable(PARAM_TARGET_ACCOUNTS, targetAccounts);
         args.putLong(PARAM_ACCOUNT_ID_TO_EXCLUDE, accountIdToExclude);
         fragment.setArguments(args);
         return fragment;
