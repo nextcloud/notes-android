@@ -57,6 +57,7 @@ import it.niedermann.owncloud.notes.databinding.ActivityNotesListViewBinding;
 import it.niedermann.owncloud.notes.databinding.DrawerLayoutBinding;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
+import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
@@ -100,6 +101,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private static final String TAG = MainActivity.class.getSimpleName();
 
     protected MainViewModel mainViewModel;
+    private CategoryViewModel categoryViewModel;
 
     private boolean gridView = true;
 
@@ -133,6 +135,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         super.onCreate(savedInstanceState);
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         CapabilitiesWorker.update(this);
         binding = DrawerLayoutBinding.inflate(getLayoutInflater());
         activityBinding = ActivityNotesListViewBinding.bind(binding.activityNotesListView.getRoot());

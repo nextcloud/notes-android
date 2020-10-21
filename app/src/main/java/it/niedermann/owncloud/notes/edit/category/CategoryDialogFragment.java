@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -12,10 +11,11 @@ import android.view.WindowManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.List;
 
@@ -24,10 +24,7 @@ import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.DialogChangeCategoryBinding;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
-
-import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
+import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 
 /**
  * This {@link DialogFragment} allows for the selection of a category.
@@ -38,20 +35,17 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
 
     private static final String TAG = CategoryDialogFragment.class.getSimpleName();
     private static final String STATE_CATEGORY = "category";
+
+    private CategoryViewModel viewModel;
     private DialogChangeCategoryBinding binding;
 
-    private NotesDatabase db;
     private CategoryDialogListener listener;
 
     private CategoryAdapter adapter;
 
     private EditText editCategory;
 
-    private LiveData<List<CategoryWithNotesCount>> categoryLiveData;
-    private Observer<List<CategoryWithNotesCount>> categoryObserver = (categories -> {
-        CharSequence searchTerm = editCategory.getText();
-        adapter.setCategoryList(convertToCategoryNavigationItem(requireContext(), categories), searchTerm == null ? null : searchTerm.toString());
-    });
+    private LiveData<List<NavigationItem.CategoryNavigationItem>> categoryLiveData;
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
@@ -91,7 +85,12 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         } else {
             throw new IllegalArgumentException("Calling activity or target fragment must implement " + CategoryDialogListener.class.getSimpleName());
         }
-        db = NotesDatabase.getInstance(requireActivity());
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.viewModel = new ViewModelProvider(requireActivity()).get(CategoryViewModel.class);
     }
 
     @NonNull
@@ -131,8 +130,8 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
 
         binding.recyclerView.setAdapter(adapter);
 
-        categoryLiveData = db.getCategoryDao().searchCategories(accountId, "%");
-        categoryLiveData.observe(requireActivity(), categoryObserver);
+        categoryLiveData = viewModel.getCategories(accountId);
+        categoryLiveData.observe(requireActivity(), categories -> adapter.setCategoryList(categories, binding.search.getText().toString()));
 
         editCategory.addTextChangedListener(new TextWatcher() {
             @Override
@@ -147,12 +146,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                final CharSequence searchTerm = editCategory.getText();
-                if (categoryLiveData != null) {
-                    categoryLiveData.removeObservers(requireActivity());
-                }
-                categoryLiveData = db.getCategoryDao().searchCategories(accountId, TextUtils.isEmpty(searchTerm) ? "%" : "%" + searchTerm + "%");
-                categoryLiveData.observe(requireActivity(), categoryObserver);
+                viewModel.postSearchTerm(editCategory.getText().toString());
             }
         });
 

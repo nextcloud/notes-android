@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
 import java.io.BufferedReader;
@@ -23,6 +24,7 @@ import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
+import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -45,6 +47,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     public static final String PARAM_CONTENT = "content";
     public static final String PARAM_FAVORITE = "favorite";
 
+    private CategoryViewModel categoryViewModel;
     private ActivityEditBinding binding;
 
     private BaseNoteFragment fragment;
@@ -53,6 +56,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         binding = ActivityEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
@@ -221,19 +225,18 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                close();
-                return true;
-            case R.id.menu_preview:
-                launchExistingNote(getAccountId(), getNoteId(), false);
-                return true;
-            case R.id.menu_edit:
-                launchExistingNote(getAccountId(), getNoteId(), true);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            close();
+            return true;
+        } else if (itemId == R.id.menu_preview) {
+            launchExistingNote(getAccountId(), getNoteId(), false);
+            return true;
+        } else if (itemId == R.id.menu_edit) {
+            launchExistingNote(getAccountId(), getNoteId(), true);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
 
