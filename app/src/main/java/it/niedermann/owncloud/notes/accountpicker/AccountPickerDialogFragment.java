@@ -25,17 +25,18 @@ import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogChooseAccountBinding;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserAdapter;
 import it.niedermann.owncloud.notes.shared.account.AccountChooserViewHolder;
 
 /**
- * A {@link DialogFragment} which provides an {@link Account} chooser that hides the given {@link Account}.
- * This can be useful when one wants to pick e. g. a target for move a note from one {@link Account} to another..
+ * A {@link DialogFragment} which provides an {@link Account} chooser that hides the current {@link Account}.
+ * This can be useful when one wants to pick e. g. a target for move a {@link Note} from one {@link Account} to another..
  */
 public class AccountPickerDialogFragment extends BrandedDialogFragment {
 
     private static final String PARAM_TARGET_ACCOUNTS = "targetAccounts";
-    private static final String PARAM_ACCOUNT_ID_TO_EXCLUDE = "accountIdToExclude";
+    private static final String PARAM_CURRENT_ACCOUNT_ID = "currentAccountId";
 
     private AccountPickerListener accountPickerListener;
 
@@ -64,14 +65,11 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
         if (accounts == null) {
             throw new IllegalArgumentException(PARAM_TARGET_ACCOUNTS + " is required.");
         }
-        long accountIdToExclude = requireArguments().getLong(PARAM_ACCOUNT_ID_TO_EXCLUDE, -1L);
-        if (accountIdToExclude < 0) {
-            throw new IllegalArgumentException(PARAM_ACCOUNT_ID_TO_EXCLUDE + " must be greater 0");
-        }
+        long currentAccountId = requireArguments().getLong(PARAM_CURRENT_ACCOUNT_ID, -1L);
         targetAccounts = accounts
                 .stream()
                 .map(a -> (Account) a)
-                .filter(a -> a.getId() != accountIdToExclude)
+                .filter(a -> a.getId() != currentAccountId)
                 .collect(Collectors.toList());
     }
 
@@ -104,11 +102,11 @@ public class AccountPickerDialogFragment extends BrandedDialogFragment {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    public static DialogFragment newInstance(ArrayList<Account> targetAccounts, long accountIdToExclude) {
+    public static DialogFragment newInstance(@NonNull ArrayList<Account> targetAccounts, long currentAccountId) {
         final DialogFragment fragment = new AccountPickerDialogFragment();
         final Bundle args = new Bundle();
         args.putSerializable(PARAM_TARGET_ACCOUNTS, targetAccounts);
-        args.putLong(PARAM_ACCOUNT_ID_TO_EXCLUDE, accountIdToExclude);
+        args.putLong(PARAM_CURRENT_ACCOUNT_ID, currentAccountId);
         fragment.setArguments(args);
         return fragment;
     }
