@@ -193,6 +193,25 @@
         <item quantity="few">%d izbrane</item>
         <item quantity="other">%d izbranih</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Izbrisana je ena zabeležka</item>
+        <item quantity="two">Izbrisani sta %1$d zabeležki</item>
+        <item quantity="few">Izbrisane so %1$d zabeležke</item>
+        <item quantity="other">Izbrisanih je %1$d zabeležk</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Obnovljena je ena zabeležka</item>
+        <item quantity="two">Obnovljeni sta %1$d zabeležki</item>
+        <item quantity="few">Obnovljene so %1$d zabeležke</item>
+        <item quantity="other">Obnovljenih je %1$d zabeležk</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Souporaba vsebine %1$d zabeležke</item>
+        <item quantity="two">Souporaba vsebine %1$d zabeležk</item>
+        <item quantity="few">Souporaba vsebine %1$d zabeležk</item>
+        <item quantity="other">Souporaba vsebine %1$d zabeležk</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">» %1$s «</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
