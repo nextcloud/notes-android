@@ -43,6 +43,7 @@ import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
 import static androidx.lifecycle.Transformations.distinctUntilChanged;
+import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
 
@@ -386,9 +387,11 @@ public class NoteServerSyncHelper {
                             } else {
                                 Log.v(TAG, "   ...Note does not have a remoteId yet → create");
                                 remoteNote = notesClient.createNote(ssoAccount, note).getNote();
+                                db.getNoteDao().updateRemoteId(note.getId(), remoteNote.getRemoteId());
                             }
                             // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            db.updateNote(localAccount.getId(), note.getId(), remoteNote, note);
+                            db.getNoteDao().updateIfModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
+                            db.getNoteDao().updateCategory(note.getId(), db.getOrCreateCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() == null) {
@@ -447,11 +450,13 @@ public class NoteServerSyncHelper {
                         Log.v(TAG, "   ... unchanged");
                     } else if (idMap.containsKey(remoteNote.getRemoteId())) {
                         Log.v(TAG, "   ... found → Update");
-                        Long remoteId = idMap.get(remoteNote.getRemoteId());
-                        if (remoteId != null) {
-                            db.updateNote(localAccount.getId(), remoteId, remoteNote, null);
+                        Long localId = idMap.get(remoteNote.getRemoteId());
+                        if (localId != null) {
+                            db.getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(
+                                    localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
+                            db.getNoteDao().updateCategory(localId, db.getOrCreateCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
                         } else {
-                            Log.e(TAG, "Tried to update note from server, but remoteId of note is null. " + remoteNote);
+                            Log.e(TAG, "Tried to update note from server, but local id of note is null. " + remoteNote);
                         }
                     } else {
                         Log.v(TAG, "   ... create");

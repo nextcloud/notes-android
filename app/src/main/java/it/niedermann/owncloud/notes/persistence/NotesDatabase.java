@@ -450,7 +450,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      */
     @NonNull
     @WorkerThread
-    private Long getOrCreateCategoryIdByTitle(long accountId, @NonNull String categoryTitle) {
+    protected Long getOrCreateCategoryIdByTitle(long accountId, @NonNull String categoryTitle) {
         validateAccountId(accountId);
         Long categoryId = getCategoryDao().getCategoryIdByTitle(accountId, categoryTitle);
         if (categoryId != null && categoryId > 0) {
@@ -562,30 +562,6 @@ public abstract class NotesDatabase extends RoomDatabase {
         }
 
         return map(new SharedPreferenceIntLiveData(sp, prefKey, CategorySortingMethod.SORT_MODIFIED_DESC.getCSMID()), CategorySortingMethod::getCSM);
-    }
-
-    /**
-     * Updates a single Note with data from the server, (if it was not modified locally).
-     * Thereby, an optimistic concurrency control is realized in order to prevent conflicts arising due to parallel changes from the UI and synchronization.
-     * This is used by the synchronization task, hence no Synchronization will be triggered. Use updateNoteAndSync() instead!
-     *
-     * @param id                        local ID of Note
-     * @param remoteNote                Note from the server.
-     * @param forceUnchangedDBNoteState is not null, then the local note is updated only if it was not modified meanwhile
-     */
-    void updateNote(long accountId, long id, @NonNull NoteWithCategory remoteNote, @Nullable NoteWithCategory forceUnchangedDBNoteState) {
-        validateAccountId(accountId);
-        // First, update the remote ID, since this field cannot be changed in parallel, but have to be updated always.
-        getNoteDao().updateRemoteId(id, remoteNote.getRemoteId());
-
-        // The other columns have to be updated in dependency of forceUnchangedDBNoteState,
-        // since the Synchronization-Task must not overwrite locales changes!
-        if (forceUnchangedDBNoteState != null) {
-            getNoteDao().updateIfModifiedLocallyDuringSync(id, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent());
-        } else {
-            getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(id, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent());
-        }
-        Log.d(TAG, "updateNote: " + remoteNote + " || forceUnchangedDBNoteState: " + forceUnchangedDBNoteState + "");
     }
 
     public Context getContext() {

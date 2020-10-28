@@ -127,22 +127,22 @@ public interface NoteDao {
     void toggleFavorite(long id);
 
     @Query("UPDATE NOTE SET remoteId = :remoteId WHERE id = :id")
-    void updateRemoteId(long id, long remoteId);
+    void updateRemoteId(long id, Long remoteId);
 
     /**
      * used by: {@link NoteServerSyncHelper.SyncTask#pushLocalChanges()} update only, if not modified locally during the synchronization
      * (i.e. all (!) user changeable columns (content, favorite, category) must still have the same value), uses reference value gathered at start of synchronization
      */
-    @Query("UPDATE NOTE SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
+    @Query("UPDATE NOTE SET title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
             "WHERE id = :id AND content = :content AND favorite = :favorite AND categoryId = :categoryTitle")
-    void updateIfModifiedLocallyDuringSync(long id, long modified, String title, Boolean favorite, String categoryTitle, String eTag, String content);
+    void updateIfModifiedLocallyDuringSync(long id, Long modified, String title, boolean favorite, String categoryTitle, String eTag, String content, String excerpt);
 
     /**
      * used by: {@link NoteServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
      */
-    @Query("UPDATE NOTE SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content " +
+    @Query("UPDATE NOTE SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
             "WHERE id = :id AND status = '' AND (modified != :modified OR favorite != :favorite OR categoryId != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)")
-    void updateIfNotModifiedLocallyAndRemoteColumnHasChanged(long id, long modified, String title, Boolean favorite, String categoryTitle, String eTag, String content);
+    void updateIfNotModifiedLocallyAndRemoteColumnHasChanged(long id, Long modified, String title, boolean favorite, String categoryTitle, String eTag, String content, String excerpt);
 
     @Query("SELECT content FROM NOTE WHERE id = :id")
     String getContent(Long id);
