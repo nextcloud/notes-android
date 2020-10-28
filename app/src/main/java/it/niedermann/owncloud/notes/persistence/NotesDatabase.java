@@ -41,6 +41,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.main.NavigationAdapter;
@@ -53,7 +54,6 @@ import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
-import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData;
 import it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget;
@@ -837,14 +837,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
         String color;
         try {
-            color = ColorUtil.formatColorToParsableHexString(capabilities.getColor()).substring(1);
+            color = ColorUtil.INSTANCE.formatColorToParsableHexString(capabilities.getColor()).substring(1);
         } catch (Exception e) {
             color = String.format("%06X", (0xFFFFFF & ContextCompat.getColor(context, R.color.defaultBrand)));
         }
 
         String textColor;
         try {
-            textColor = ColorUtil.formatColorToParsableHexString(capabilities.getTextColor()).substring(1);
+            textColor = ColorUtil.INSTANCE.formatColorToParsableHexString(capabilities.getTextColor()).substring(1);
         } catch (Exception e) {
             textColor = String.format("%06X", (0xFFFFFF & ContextCompat.getColor(context, android.R.color.white)));
         }

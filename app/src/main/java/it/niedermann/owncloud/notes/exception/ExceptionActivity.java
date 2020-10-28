@@ -10,13 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Collections;
 
+import it.niedermann.android.util.ClipboardUtil;
 import it.niedermann.nextcloud.exception.ExceptionUtil;
 import it.niedermann.owncloud.notes.BuildConfig;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ActivityExceptionBinding;
 import it.niedermann.owncloud.notes.exception.tips.TipsAdapter;
-
-import static it.niedermann.android.util.ClipboardUtil.copyToClipboard;
 
 
 public class ExceptionActivity extends AppCompatActivity {
@@ -46,7 +45,7 @@ public class ExceptionActivity extends AppCompatActivity {
         binding.toolbar.setTitle(getString(R.string.simple_error));
         binding.message.setText(throwable.getMessage());
         binding.stacktrace.setText(debugInfos);
-        binding.copy.setOnClickListener((v) -> copyToClipboard(this, getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"));
+        binding.copy.setOnClickListener((v) -> ClipboardUtil.INSTANCE.copyToClipboard(this, getString(R.string.simple_exception), "```\n" + debugInfos + "\n```"));
         binding.close.setOnClickListener((v) -> finish());
 
         adapter.setThrowables(Collections.singletonList(throwable));

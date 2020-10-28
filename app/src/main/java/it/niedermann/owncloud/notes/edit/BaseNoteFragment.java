@@ -29,6 +29,7 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedFragment;
@@ -43,15 +44,14 @@ import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
-import it.niedermann.owncloud.notes.shared.util.ColorUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
+import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcutSupported;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
-import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
 
@@ -371,28 +371,28 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @ColorInt
     protected static int getTextHighlightBackgroundColor(@NonNull Context context, @ColorInt int mainColor, @ColorInt int colorPrimary, @ColorInt int colorAccent) {
         if (isDarkThemeActive(context)) { // Dark background
-            if (isColorDark(mainColor)) { // Dark brand color
-                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
+                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
                     return mainColor;
                 } else {
                     return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
                 }
             } else { // Light brand color
-                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
                     return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
                 } else {
                     return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
                 }
             }
         } else { // Light background
-            if (isColorDark(mainColor)) { // Dark brand color
-                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
+            if (ColorUtil.INSTANCE.isColorDark(mainColor)) { // Dark brand color
+                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorAccent)) { // But also dark text
                     return Color.argb(77, Color.red(mainColor), Color.green(mainColor), Color.blue(mainColor));
                 } else {
                     return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);
                 }
             } else { // Light brand color
-                if (ColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
+                if (NotesColorUtil.contrastRatioIsSufficient(mainColor, colorPrimary)) { // But also dark text
                     return mainColor;
                 } else {
                     return ContextCompat.getColor(context, R.color.defaultTextHighlightBackground);

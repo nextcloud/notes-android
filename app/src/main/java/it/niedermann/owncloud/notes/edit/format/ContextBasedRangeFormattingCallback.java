@@ -10,9 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import it.niedermann.android.util.ClipboardUtil;
 import it.niedermann.owncloud.notes.R;
-
-import static it.niedermann.android.util.ClipboardUtil.getClipboardURLorNull;
 
 public class ContextBasedRangeFormattingCallback implements ActionMode.Callback {
 
@@ -61,66 +60,64 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
         final String markdown;
 
 
-        switch (item.getItemId()) {
-            case R.id.bold:
-                markdown = "**";
-                if (hasAlreadyMarkdown(start, end, markdown)) {
-                    this.removeMarkdown(ssb, start, end, markdown);
+        int itemId = item.getItemId();
+        if (itemId == R.id.bold) {
+            markdown = "**";
+            if (hasAlreadyMarkdown(start, end, markdown)) {
+                this.removeMarkdown(ssb, start, end, markdown);
+            } else {
+                this.addMarkdown(ssb, start, end, markdown, Typeface.BOLD);
+            }
+            editText.setText(ssb);
+            editText.setSelection(end + markdown.length() * 2);
+            return true;
+        } else if (itemId == R.id.italic) {
+            markdown = "*";
+            if (hasAlreadyMarkdown(start, end, markdown)) {
+                this.removeMarkdown(ssb, start, end, markdown);
+            } else {
+                this.addMarkdown(ssb, start, end, markdown, Typeface.ITALIC);
+            }
+            editText.setText(ssb);
+            editText.setSelection(end + markdown.length() * 2);
+            return true;
+        } else if (itemId == R.id.link) {
+            boolean textToFormatIsLink = TextUtils.indexOf(editText.getText().subSequence(start, end), "http") == 0;
+            if (textToFormatIsLink) {
+                ssb.insert(end, ")");
+                ssb.insert(start, "[](");
+            } else {
+                String clipboardURL = ClipboardUtil.INSTANCE.getClipboardURLorNull(editText.getContext());
+                if (clipboardURL != null) {
+                    ssb.insert(end, "](" + clipboardURL + ")");
+                    end += clipboardURL.length();
                 } else {
-                    this.addMarkdown(ssb, start, end, markdown, Typeface.BOLD);
+                    ssb.insert(end, "]()");
                 }
-                editText.setText(ssb);
-                editText.setSelection(end + markdown.length() * 2);
+                ssb.insert(start, "[");
+            }
+            end++;
+            ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
+            editText.setText(ssb);
+            if (textToFormatIsLink) {
+                editText.setSelection(start + 1);
+            } else {
+                editText.setSelection(end + 2); // after <end>](
+            }
+            return true;
+        } else if (itemId == android.R.id.cut) {// https://github.com/stefan-niedermann/nextcloud-notes/issues/604
+            // https://github.com/stefan-niedermann/nextcloud-notes/issues/477
+            try {
+                editText.onTextContextMenuItem(item.getItemId());
                 return true;
-            case R.id.italic:
-                markdown = "*";
-                if (hasAlreadyMarkdown(start, end, markdown)) {
-                    this.removeMarkdown(ssb, start, end, markdown);
-                } else {
-                    this.addMarkdown(ssb, start, end, markdown, Typeface.ITALIC);
-                }
-                editText.setText(ssb);
-                editText.setSelection(end + markdown.length() * 2);
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+                editText.setSelection(0, 0);
+                editText.clearFocus();
                 return true;
-            case R.id.link:
-                boolean textToFormatIsLink = TextUtils.indexOf(editText.getText().subSequence(start, end), "http") == 0;
-                if (textToFormatIsLink) {
-                    ssb.insert(end, ")");
-                    ssb.insert(start, "[](");
-                } else {
-                    String clipboardURL = getClipboardURLorNull(editText.getContext());
-                    if (clipboardURL != null) {
-                        ssb.insert(end, "](" + clipboardURL + ")");
-                        end += clipboardURL.length();
-                    } else {
-                        ssb.insert(end, "]()");
-                    }
-                    ssb.insert(start, "[");
-                }
-                end++;
-                ssb.setSpan(new StyleSpan(Typeface.NORMAL), start, end, 1);
-                editText.setText(ssb);
-                if (textToFormatIsLink) {
-                    editText.setSelection(start + 1);
-                } else {
-                    editText.setSelection(end + 2); // after <end>](
-                }
-                return true;
-            case android.R.id.cut:
-                // https://github.com/stefan-niedermann/nextcloud-notes/issues/604
-                // https://github.com/stefan-niedermann/nextcloud-notes/issues/477
-                try {
-                    editText.onTextContextMenuItem(item.getItemId());
-                    return true;
-                } catch (IndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                    editText.setSelection(0, 0);
-                    editText.clearFocus();
-                    return true;
-                }
-            default:
-                return false;
+            }
         }
+        return false;
     }
 
     @Override

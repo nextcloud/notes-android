@@ -8,7 +8,7 @@ import androidx.annotation.StringRes;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import it.niedermann.owncloud.notes.shared.util.ColorUtil;
+import it.niedermann.android.util.ColorUtil;
 
 public class BrandedSnackbar {
 
@@ -17,7 +17,7 @@ public class BrandedSnackbar {
         final Snackbar snackbar = Snackbar.make(view, text, duration);
         if (BrandingUtil.isBrandingEnabled(view.getContext())) {
             int color = BrandingUtil.readBrandMainColor(view.getContext());
-            snackbar.setActionTextColor(ColorUtil.isColorDark(color) ? Color.WHITE : color);
+            snackbar.setActionTextColor(ColorUtil.INSTANCE.isColorDark(color) ? Color.WHITE : color);
         }
         return snackbar;
     }

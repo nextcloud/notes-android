@@ -92,7 +92,7 @@ import static android.view.View.VISIBLE;
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.NotesApplication.isGridViewEnabled;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.getSecondaryForegroundColorDependingOnTheme;
-import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
 import static it.niedermann.owncloud.notes.shared.util.SSOUtil.askForNewAccount;
 import static java.util.Arrays.asList;
 

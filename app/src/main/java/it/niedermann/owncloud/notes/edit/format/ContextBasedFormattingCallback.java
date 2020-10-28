@@ -10,10 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import it.niedermann.android.util.ClipboardUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 
-import static it.niedermann.android.util.ClipboardUtil.getClipboardURLorNull;
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.CHECKBOX_UNCHECKED_MINUS_TRAILING_SPACE;
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.getEndOfLine;
 import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.getStartOfLine;
@@ -87,7 +87,7 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
             ssb.insert(end, ")");
             ssb.insert(start, "[](");
         } else {
-            String clipboardURL = getClipboardURLorNull(editText.getContext());
+            String clipboardURL = ClipboardUtil.INSTANCE.getClipboardURLorNull(editText.getContext());
             if (clipboardURL != null) {
                 Log.i(TAG, "Inserting link from clipboard at position " + start + " to " + end + ": " + clipboardURL);
                 ssb.insert(end, "](" + clipboardURL + ")");

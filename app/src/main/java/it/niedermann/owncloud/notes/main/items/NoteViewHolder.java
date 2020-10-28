@@ -26,17 +26,17 @@ import com.google.android.material.chip.Chip;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import it.niedermann.android.util.ColorUtil;
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
-import it.niedermann.owncloud.notes.NotesApplication;
 
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
-import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
-import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
+import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
 
 public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     @NonNull
@@ -68,7 +68,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         @ColorInt int categoryBackground;
 
         if (isDarkThemeActive) {
-            if (isColorDark(mainColor)) {
+            if (ColorUtil.INSTANCE.isColorDark(mainColor)) {
                 if (contrastRatioIsSufficient(mainColor, Color.BLACK)) {
                     categoryBackground = mainColor;
                     categoryForeground = Color.WHITE;
@@ -82,7 +82,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
             }
         } else {
             categoryForeground = Color.BLACK;
-            if (isColorDark(mainColor) || contrastRatioIsSufficient(mainColor, Color.WHITE)) {
+            if (ColorUtil.INSTANCE.isColorDark(mainColor) || contrastRatioIsSufficient(mainColor, Color.WHITE)) {
                 categoryBackground = mainColor;
             } else {
                 categoryBackground = Color.BLACK;

@@ -33,11 +33,10 @@ import androidx.annotation.Nullable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
-
-import static it.niedermann.owncloud.notes.shared.util.ColorUtil.isColorDark;
 
 public class DisplayUtils {
 
@@ -97,7 +96,7 @@ public class DisplayUtils {
         public void updateDrawState(TextPaint tp) {
             if (current) {
                 if (NotesApplication.isDarkThemeActive(context)) {
-                    if (isColorDark(mainColor)) {
+                    if (ColorUtil.INSTANCE.isColorDark(mainColor)) {
                         tp.bgColor = Color.WHITE;
                         tp.setColor(mainColor);
                     } else {
@@ -105,11 +104,11 @@ public class DisplayUtils {
                         tp.setColor(Color.BLACK);
                     }
                 } else {
-                    if (isColorDark(mainColor)) {
+                    if (ColorUtil.INSTANCE.isColorDark(mainColor)) {
                         tp.bgColor = mainColor;
                         tp.setColor(Color.WHITE);
                     } else {
-                        if (ColorUtil.contrastRatioIsSufficient(mainColor, highlightColor)) {
+                        if (NotesColorUtil.contrastRatioIsSufficient(mainColor, highlightColor)) {
                             tp.bgColor = highlightColor;
                         } else {
                             tp.bgColor = Color.BLACK;
