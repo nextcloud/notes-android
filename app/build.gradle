@@ -66,7 +66,7 @@ dependencies {
     implementation "com.github.nextcloud:Android-SingleSignOn:0.5.3"
     implementation 'com.github.stefan-niedermann.nextcloud-commons:sso-glide:1.2.0'
     implementation 'com.github.stefan-niedermann.nextcloud-commons:exception:1.2.0'
-    implementation 'com.github.stefan-niedermann:android-commons:0.0.9'
+    implementation 'com.github.stefan-niedermann:android-commons:0.1.0'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'

@@ -24,7 +24,7 @@ import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 
-import static it.niedermann.owncloud.notes.shared.util.ColorUtil.contrastRatioIsSufficient;
+import static it.niedermann.owncloud.notes.shared.util.NotesColorUtil.contrastRatioIsSufficient;
 
 public class BrandingUtil {
 

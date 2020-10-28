@@ -11,7 +11,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import it.niedermann.owncloud.notes.shared.util.ColorUtil;
+import it.niedermann.android.util.ColorUtil;
 
 public class Migration_19_20 extends Migration {
 
@@ -79,13 +79,13 @@ public class Migration_19_20 extends Migration {
             values.put("MODIFIED", tmpAccountCursor.getLong(5));
             values.put("APIVERSION", tmpAccountCursor.getString(6));
             try {
-                values.put("COLOR", Color.parseColor(ColorUtil.formatColorToParsableHexString(tmpAccountCursor.getString(7))));
+                values.put("COLOR", Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(tmpAccountCursor.getString(7))));
             } catch (Exception e) {
                 e.printStackTrace();
                 values.put("COLOR", -16743735);
             }
             try {
-                values.put("TEXTCOLOR", Color.parseColor(ColorUtil.formatColorToParsableHexString(tmpAccountCursor.getString(8))));
+                values.put("TEXTCOLOR", Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(tmpAccountCursor.getString(8))));
             } catch (Exception e) {
                 e.printStackTrace();
                 values.put("TEXTCOLOR", -16777216);

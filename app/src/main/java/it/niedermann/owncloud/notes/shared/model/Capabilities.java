@@ -13,7 +13,7 @@ import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import it.niedermann.owncloud.notes.shared.util.ColorUtil;
+import it.niedermann.android.util.ColorUtil;
 
 import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
 
@@ -72,14 +72,14 @@ public class Capabilities {
                         final JSONObject theming = capabilities.getJSONObject(JSON_OCS_DATA_CAPABILITIES_THEMING);
                         if (theming.has(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR)) {
                             try {
-                                this.color = Color.parseColor(ColorUtil.formatColorToParsableHexString(theming.getString(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR)));
+                                this.color = Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(theming.getString(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR)));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
                         if (theming.has(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR_TEXT)) {
                             try {
-                                this.textColor = Color.parseColor(ColorUtil.formatColorToParsableHexString(theming.getString(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR_TEXT)));
+                                this.textColor = Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(theming.getString(JSON_OCS_DATA_CAPABILITIES_THEMING_COLOR_TEXT)));
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
