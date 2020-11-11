@@ -147,7 +147,31 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                                             lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_STAR, CHECKBOX_UNCHECKED_STAR);
                                         }
 
-                                        changedText = TextUtils.join("\n", lines);
+                                        boolean sort = false;
+                                        String unchecked="", checked="";
+                                        for (String i: getResources().getStringArray(R.array.categories_to_sort) ) {
+                                            if (note.getCategory().equals(i)) {
+                                                sort = true;
+                                                // Arrays.sort(lines);
+                                                for (String l: lines){
+                                                    if(l.startsWith("- [ ]")){
+                                                        String _l = l.replaceAll("~~", "");
+                                                        unchecked += _l +"\n";
+                                                    }else if(l.startsWith("- [x]")){
+                                                        String _l = l.replace("- [x] ", "- [x] ~~")+"~~";
+                                                        checked += _l +"\n";
+                                                    }
+                                                }
+
+                                                break;
+                                            }
+                                        }
+                                        if (sort){
+                                            changedText = unchecked+"\n---\n"+checked;
+                                        }else{
+                                            changedText = TextUtils.join("\n", lines);
+                                        }
+
                                         binding.singleNoteContent.setText(parseCompat(markdownProcessor, changedText));
                                         saveNote(null);
                                     } catch (IndexOutOfBoundsException e) {

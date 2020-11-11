@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Notes</string>
-    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="app_name">ANotes</string>
+    <string name="app_name_long">Nextcloud ANotes</string>
     <string name="label_all_notes">All notes</string>
     <string name="label_favorites">Favorites</string>
     <string name="action_create">New note</string>
@@ -314,4 +314,8 @@
     <string name="error_action_open_deck_info">Open App info</string>
     <string name="error_action_open_network">Network settings</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
+
+    <array name="categories_to_sort">
+        <item>list</item>
+    </array>
 </resources>
