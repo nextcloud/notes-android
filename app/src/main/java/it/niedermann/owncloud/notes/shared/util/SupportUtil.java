@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import static android.os.Build.VERSION_CODES.N;
+
 /**
  * Some helper functionality in alike the Android support library.
  * Currently, it offers methods for working with HTML string resources.
@@ -39,7 +41,7 @@ public class SupportUtil {
      * @see Html#fromHtml(String, int)
      */
     private static Spanned fromHtml(String source) {
-        if (Build.VERSION.SDK_INT >= 24) {
+        if (Build.VERSION.SDK_INT >= N) {
             return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
         } else {
             //noinspection deprecation
