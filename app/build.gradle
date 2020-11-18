@@ -63,10 +63,10 @@ android {
 
 dependencies {
     // Nextcloud SSO
-    implementation "com.github.nextcloud:Android-SingleSignOn:0.5.3"
+    implementation "com.github.nextcloud:Android-SingleSignOn:0.5.4"
     implementation 'com.github.stefan-niedermann.nextcloud-commons:sso-glide:1.2.0'
     implementation 'com.github.stefan-niedermann.nextcloud-commons:exception:1.2.0'
-    implementation 'com.github.stefan-niedermann:android-commons:0.1.0'
+    implementation 'com.github.stefan-niedermann:android-commons:0.1.1'
 
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.11.0'
@@ -91,7 +91,7 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:2.2.5"
 
     implementation 'androidx.multidex:multidex:2.0.1'
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
 
     // Testing
     testImplementation 'junit:junit:4.13.1'
