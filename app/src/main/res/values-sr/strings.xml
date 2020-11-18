@@ -192,6 +192,22 @@
         <item quantity="few">%d означене</item>
         <item quantity="other">%d означених</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Обрисана једна белешка</item>
+        <item quantity="few">Обрисано %1$d белешке</item>
+        <item quantity="other">Обрисано %1$d белешки</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Повраћена једна белешка</item>
+        <item quantity="few">Повраћене %1$d белешке</item>
+        <item quantity="other">Повраћено %1$d белешки</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Подели садржај %1$d белешке</item>
+        <item quantity="few">Подели садржај %1$d белешке</item>
+        <item quantity="other">Подели садржај %1$d белешки</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

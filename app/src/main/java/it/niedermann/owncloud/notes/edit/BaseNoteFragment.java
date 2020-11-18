@@ -30,6 +30,7 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import it.niedermann.android.util.ColorUtil;
 import java.util.ArrayList;
 import java.util.Calendar;
 

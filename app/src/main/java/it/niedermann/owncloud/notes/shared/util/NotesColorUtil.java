@@ -13,9 +13,8 @@ public final class NotesColorUtil {
 
     private static final Map<ColorPair, Boolean> CONTRAST_RATIO_SUFFICIENT_CACHE = new HashMap<>();
 
-    // ---------------------------------------------------
-    // Based on https://github.com/LeaVerou/contrast-ratio
-    // ---------------------------------------------------
+    private NotesColorUtil() {
+    }
 
     public static boolean contrastRatioIsSufficient(@ColorInt int colorOne, @ColorInt int colorTwo) {
         ColorPair key = new ColorPair(colorOne, colorTwo);
@@ -42,7 +41,6 @@ public final class NotesColorUtil {
             return second == colorPair.second;
         }
 
-        @SuppressWarnings("ConstantConditions")
         @Override
         public int hashCode() {
             int result = first;
