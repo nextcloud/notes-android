@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">今月</string>
     <string name="listview_updated_last_month">先月</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">ノートの表示モード</string>
     <string name="settings_theme_title">テーマ</string>
     <string name="settings_font_title">モノスペースフォント</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">パスワード保護</string>
     <string name="settings_background_sync">バックグラウンド同期</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">同期に失敗しました: %1$s</string>
     <string name="error_synchronization">同期に失敗</string>
     <string name="error_json">ノートアプリはサーバー上で有効になっていますか?</string>
     <string name="error_no_network">ネットワークに接続されていません</string>
     <string name="error_unknown">不明なエラーが発生しました</string>
 
-    <!-- About -->
     <string name="about_version_title">バージョン</string>
     <string name="about_version">現在 &lt;strong>%1$s&lt;/strong> を使用しています</string>
     <string name="about_maintainer_title">管理者</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">貢献</string>
     <string name="about_license_tab_title">ライセンス</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">ノート一覧</string>
     <string name="widget_note_list_placeholder">ノートがありません</string>
     <string name="widget_single_note_title">一つのノート</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">ノートを選択</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">新しいノートを作成</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">ノーマル</string>
     <string name="pref_value_wifi_and_mobile">Wi-Fiおよびモバイル接続時に同期する</string>
     <string name="pref_value_lock">パスワード保護</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">アカウント管理</string>
     <string name="action_formatting_help">フォーマット</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>編集モードで開く</item>
         <item>プレビューモードで開く</item>
         <item>最後に使用したモードで開く</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>小</item>
         <item>中</item>
         <item>大</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>オフ</item>
         <item>15 分</item>
@@ -186,7 +175,6 @@
         <item>既定</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="other">%d 選択済</item>
     </plurals>

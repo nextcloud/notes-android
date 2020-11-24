@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Этот месяц</string>
     <string name="listview_updated_last_month">За последний месяц</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Режим показа заметок</string>
     <string name="settings_theme_title">Оформление</string>
     <string name="settings_font_title">Моноширинный шрифт</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Защита паролем</string>
     <string name="settings_background_sync">Синхр. в фоновом режиме</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Синхронизация не удалась: %1$s</string>
     <string name="error_synchronization">Сбой синхронизации</string>
     <string name="error_json">Включено ли приложение «Заметки» на сервере?</string>
     <string name="error_no_network">Нет подключения к сети</string>
     <string name="error_unknown">Произошла неизвестная ошибка.</string>
 
-    <!-- About -->
     <string name="about_version_title">Версия</string>
     <string name="about_version">Вы используете &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Сопровождающий</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Участие</string>
     <string name="about_license_tab_title">Лицензия</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Список заметок</string>
     <string name="widget_note_list_placeholder">Заметок нет</string>
     <string name="widget_single_note_title">Одна заметка</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Выберите заметку</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Создать новую заметку</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Обычный</string>
     <string name="pref_value_wifi_and_mobile">Синхр. по Wi-Fi и мобильной связи</string>
     <string name="pref_value_lock">Защита паролем</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Управление аккаунтами</string>
     <string name="action_formatting_help">Форматирование</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Открывать в режиме редактирования</item>
         <item>Открывать в режиме просмотра</item>
         <item>Запоминать выбранный режим</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Маленький</item>
         <item>Средний</item>
         <item>Большой</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Отключены</item>
         <item>15 минут</item>
@@ -186,12 +175,17 @@
         <item>Как в системе</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d выбран</item>
         <item quantity="few">%d выбрано</item>
         <item quantity="many">%d выбрано</item>
         <item quantity="other">%d выбрано</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Удалить заметку</item>
+        <item quantity="few">Удалены %1$d заметки</item>
+        <item quantity="many">Удалены %1$d заметки</item>
+        <item quantity="other">Удалены %1$d заметки</item>
     </plurals>
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>

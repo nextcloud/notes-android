@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Questo mese</string>
     <string name="listview_updated_last_month">Ultimo mese</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Modalità di visualizzazione delle note</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Carattere a spaziatura fissa</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Protezione con password</string>
     <string name="settings_background_sync">Sincronizzazione in background</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
     <string name="error_synchronization">Sincronizzazione non riuscita</string>
     <string name="error_json">L\'applicazione Note è attiva nel server?</string>
     <string name="error_no_network">Nessuna connessione di rete</string>
     <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
 
-    <!-- About -->
     <string name="about_version_title">Versione</string>
     <string name="about_version">Stai utilizzando attualmente &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Responsabile</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Contributi</string>
     <string name="about_license_tab_title">Licenza</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Elenco di note</string>
     <string name="widget_note_list_placeholder">Nessuna nota</string>
     <string name="widget_single_note_title">Nota singola</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Seleziona nota</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Crea una nuova nota</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normale</string>
     <string name="pref_value_wifi_and_mobile">Sincronizza su Wi-FI e dati mobili</string>
     <string name="pref_value_lock">Protezione con password</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Gestisci account</string>
     <string name="action_formatting_help">Formattazione</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Apri in modalità modifica</item>
         <item>Apri in modalità anteprima</item>
         <item>Ricorda la mia ultima selezione</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Piccola</item>
         <item>Media</item>
         <item>Grande</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Spenta</item>
         <item>15 minuti</item>
@@ -186,7 +175,6 @@
         <item>Predefiniti di sistema</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d selezionato</item>
         <item quantity="other">%d selezionati</item>

@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Este mês</string>
     <string name="listview_updated_last_month">Último mês</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Modo de exibição de notas</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title"> Fonte monospaçada</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Proteção com senha</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">A sincronização falhou: %1$s</string>
     <string name="error_synchronization">A sincronização falhou</string>
     <string name="error_json">O aplicativo Notes está ativado no servidor?</string>
     <string name="error_no_network">Sem conexão de rede</string>
     <string name="error_unknown">Ocorreu um erro desconhecido.</string>
 
-    <!-- About -->
     <string name="about_version_title">Versão</string>
     <string name="about_version">Você está usando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mantenedor</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Contribuição</string>
     <string name="about_license_tab_title">Licença</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Lista de notas</string>
     <string name="widget_note_list_placeholder">Sem anotações</string>
     <string name="widget_single_note_title">Anotação simples</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Selecionar anotação</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Criar uma nova anotação</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar por Wi-Fi e dados móveis</string>
     <string name="pref_value_lock">Proteção com senha</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Gerenciar contas</string>
     <string name="action_formatting_help">Formatação</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir em modo de edição</item>
         <item>Abrir em modo de visualização</item>
         <item>Lembrar minha última escolha</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Pequena</item>
         <item>Média</item>
         <item>Grande</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Desligar</item>
         <item>15 minutos</item>
@@ -186,7 +175,6 @@
         <item>Padrão do Sistema</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d selecionados</item>

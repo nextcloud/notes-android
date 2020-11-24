@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Este mes</string>
     <string name="listview_updated_last_month">O mes pasado</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Modo de vista das notas</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Letra monoespazada</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Protección por contrasinal</string>
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_synchronization">Produciuse un fallo na sincronización</string>
     <string name="error_json">Está activada a apli «Notes» no servidor?</string>
     <string name="error_no_network">Sen conexión de rede</string>
     <string name="error_unknown">Produciuse un erro descoñecido.</string>
 
-    <!-- About -->
     <string name="about_version_title">Versión</string>
     <string name="about_version">Agora está a usando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mantedor</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Colaboración</string>
     <string name="about_license_tab_title">Licenza</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Lista de notas</string>
     <string name="widget_note_list_placeholder">Non hai notas</string>
     <string name="widget_single_note_title">Nota única</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Seleccionar unha nota</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear unha nota nova</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronización con wifi e con datos móbiles</string>
     <string name="pref_value_lock">Protección por contrasinal</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Xestionar contas</string>
     <string name="action_formatting_help">Formatado</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo de edición</item>
         <item>Abrir en modo de vista previa</item>
         <item>Lembrar a miña última selección</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Pequena</item>
         <item>Mediana</item>
         <item>Grande</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Apagado</item>
         <item>15 minutos</item>
@@ -186,7 +175,6 @@
         <item>Predeterminado do sistema</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d seleccionado</item>
         <item quantity="other">%d seleccionados</item>
@@ -210,7 +198,7 @@
     <string name="formatting_help_codefence" translateable="false">```</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Formatado baseado no contexto</string>
-    <string name="formatting_help_cbf_body_1">Un dos principais obxectivos de deseño da aplicación Notes é fornecer unha ferramenta sen distracción. Aínda que poderá formatar os seus textos con Markdown. Para varios dos exemplos mencionados a continuación, pode utilizar atallos de teclado para poder formatar as súas notas sen escribir os códigos de embaixo.</string>
+    <string name="formatting_help_cbf_body_1">Un dos principais obxectivos de deseño da aplicación Notes é fornecer unha ferramenta sen distracción. Aínda que poderá formatar os seus textos con Markdown. Para varios dos exemplos mencionados deseguido, pode utilizar atallos de teclado para poder formatar as súas notas sen escribir os códigos de embaixo.</string>
     <string name="formatting_help_cbf_body_2">Só ten que seleccionar un intervalo de texto ou tocar no cursor en calquera posición e obterá un menú emerxente que contén xunto ás entradas predeterminadas %1$s, %2$s, %3$s entradas como %4$s ou %5$s.</string>
 
     <string name="formatting_help_text_title">Texto</string>

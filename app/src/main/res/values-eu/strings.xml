@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Hilabete honetan</string>
     <string name="listview_updated_last_month">Joan den hilabetean</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Erakutsi oharren modua</string>
     <string name="settings_theme_title">Gaia</string>
     <string name="settings_font_title">Zabalera bakarreko letra mota</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Pasahitz bidezko babesa</string>
     <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
     <string name="error_synchronization">Sinkronizazioak huts egin du</string>
     <string name="error_json">Notes aplikazioa zerbitzarian aktibatuta dago?</string>
     <string name="error_no_network">Ez dago sare konexiorik</string>
     <string name="error_unknown">Errore ezezagun bat gertatu da.</string>
 
-    <!-- About -->
     <string name="about_version_title">Bertsioa</string>
     <string name="about_version"> &lt;strong>%1$s&lt;/strong> erabiltzen ari zara</string>
     <string name="about_maintainer_title">Mantentzailea</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Kontribuzio</string>
     <string name="about_license_tab_title">Lizentzia</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Oharren zerrenda</string>
     <string name="widget_note_list_placeholder">Oharrik ez</string>
     <string name="widget_single_note_title">Ohar bakarra</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Hautatu oharra</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Sortu ohar berria</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normala</string>
     <string name="pref_value_wifi_and_mobile">Sinkronizatu wifi eta datu mugikorrekin</string>
     <string name="pref_value_lock">Pasahitz bidezko babesa</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Kudeatu kontuak</string>
     <string name="action_formatting_help">Formatua</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Ireki edizio moduan</item>
         <item>Ireki aurrebista moduan</item>
         <item>Gogoratu nire azken hautaketa</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Txikia</item>
         <item>Ertaina</item>
         <item>Handia</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Off</item>
         <item>15 minutu</item>
@@ -186,7 +175,6 @@
         <item>Sistemaren defektuzko ezarpenak</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d hautatuta</item>
         <item quantity="other">%d hautatuta</item>
