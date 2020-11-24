@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Este mes</string>
     <string name="listview_updated_last_month">El mes pasado</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Modo de visualización para notas</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Tipo de letra monoespaciado</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Protección por contraseña</string>
     <string name="settings_background_sync">Sincronización en segundo plano</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Fallo en la sincronización: %1$s</string>
     <string name="error_synchronization">Fallo en la sincronización</string>
     <string name="error_json">¿Está la app de Notas activada en el servidor?</string>
     <string name="error_no_network">Sin conexión de red</string>
     <string name="error_unknown">Ha ocurrido un error desconocido.</string>
 
-    <!-- About -->
     <string name="about_version_title">Versión</string>
     <string name="about_version">Esta actualmente usando &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Mantenedor</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Contribuir</string>
     <string name="about_license_tab_title">Licencia</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Lista de notas</string>
     <string name="widget_note_list_placeholder">No hay notas</string>
     <string name="widget_single_note_title">Nota única</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Selecciona nota</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Crear una nota nueva</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Sincronizar sobre Wi-Fi y datos móviles</string>
     <string name="pref_value_lock">Protección por contraseña</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Gestionar cuentas</string>
     <string name="action_formatting_help">Formato</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Abrir en modo edición</item>
         <item>Abrir en modo visualización</item>
         <item>Recordar mi última selección</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Pequeña</item>
         <item>Media</item>
         <item>Grande</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Off</item>
         <item>15 minutos</item>
@@ -186,7 +175,6 @@
         <item>Predeterminado del sistema</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d selecionado</item>
         <item quantity="other">%d seleccionados</item>

@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Zadnji mesec</string>
     <string name="listview_updated_last_month">Zadnji mesec</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Način odpiranja zabeležk</string>
     <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Pisava enotne širine</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Zaščita z geslom</string>
     <string name="settings_background_sync"> Usklajevanje v ozadju</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
     <string name="error_synchronization">Usklajevanje je spodletelo</string>
     <string name="error_json">Ali je program Notes na strežniku omogočen?</string>
     <string name="error_no_network">Ni omrežne povezave</string>
     <string name="error_unknown">Prišlo je do neznane napake.</string>
 
-    <!-- About -->
     <string name="about_version_title">Različica</string>
     <string name="about_version">Trenutno je v uporabi &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Vzdrževalec</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Skupnost</string>
     <string name="about_license_tab_title">Dovoljenje</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Seznam zabeležk</string>
     <string name="widget_note_list_placeholder">Ni zabeležk</string>
     <string name="widget_single_note_title">Samostojna zabeležka</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Izbor zabeležke</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Ustvari novo zabeležko</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Običajno</string>
     <string name="pref_value_wifi_and_mobile">Usklajuj na Wi-Fi in mobilni povezavi</string>
     <string name="pref_value_lock">Zaščita z geslom</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Upravljanje z računi</string>
     <string name="action_formatting_help">Oblikovanje</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Zabeležka se odpre v urejevalnem načinu</item>
         <item>Zabeležka se odpre v predogledu</item>
         <item>Zapomni si zadnjo izbiro</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Majhna</item>
         <item>Srednja</item>
         <item>Velika</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Onemogočeno</item>
         <item>15 minut</item>
@@ -186,7 +175,6 @@
         <item>Sistemsko privzeto</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d izbrana</item>
         <item quantity="two">%d izbrani</item>
@@ -257,7 +245,7 @@
     <string name="formatting_help_unsupported_body_1">Čeprav se neprestano trudimo izboljšati podporo za oblikovanje Markdown, je še vedno nekaj zmožnosti, ki niso podprte:</string>
     <string name="formatting_help_unsupported_body_2">Razpredelnice</string>
     <string name="formatting_help_unsupported_body_3">Slike</string>
-    <string name="formatting_help_unsupported_body_4">Če želite sodelovati pri razvoju ali pa drugače pomagati in podpreti katerokoli od navedenih možnosti, stopite z nami v stik prek GitHub ali po elektronski pošti.</string>
+    <string name="formatting_help_unsupported_body_4">Če želite sodelovati pri razvoju, ali pa drugače pomagati in podpreti katerokoli od navedenih možnosti, stopite z nami v stik prek GitHub oziroma po elektronski pošti.</string>
     <string name="simple_other">Drugo</string>
     <string name="sort_last_modified">Razvrsti po datumu spremembe</string>
     <string name="sort_alphabetically">Razvrsti abecedno</string>

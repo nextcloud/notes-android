@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">החודש</string>
     <string name="listview_updated_last_month">חודש שעבר</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">מצב תצוגת פתקים</string>
     <string name="settings_theme_title">ערכת עיצוב</string>
     <string name="settings_font_title">גופן ברוחב אחיד</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Password protection</string>
     <string name="settings_background_sync">סנכרון ברקע</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">הסנכרון נכשל: %1$s</string>
     <string name="error_synchronization">הסנכרון נכשל</string>
     <string name="error_json">האם יישומון הפתקים מופעל בשרת?</string>
     <string name="error_no_network">אין חיבור לאינטרנט</string>
     <string name="error_unknown">אירעה שגיאה בלתי ידועה.</string>
 
-    <!-- About -->
     <string name="about_version_title">גרסה</string>
     <string name="about_version">הניצולת עומדת על &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">מתחזק</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">תרומה</string>
     <string name="about_license_tab_title">רישיון</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">רשימת פתקים</string>
     <string name="widget_note_list_placeholder">אין פתקים</string>
     <string name="widget_single_note_title">פתק בודד</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">נא לבחור פתק</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">יצירת פתק חדש</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">רגיל</string>
     <string name="pref_value_wifi_and_mobile">עדכון דרך רשת אלחוטית ונתונים סלולריים</string>
     <string name="pref_value_lock">Password protection</string>
@@ -145,21 +137,18 @@
     <string name="manage_accounts">ניהול חשבונות</string>
     <string name="action_formatting_help">עיצוב</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>פתיחה במצב עריכה</item>
         <item>פתיחה במצב תצוגה מקדימה</item>
         <item>שמירת הבחירה האחרונה שלי</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>קטן</item>
         <item>בינוני</item>
         <item>גדול</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>כבוי</item>
         <item>15 דקות</item>
@@ -173,7 +162,6 @@
         <item>ברירת מחדל של המערכת</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">נבחר %d</item>
         <item quantity="two">נבחרו %d</item>

@@ -40,7 +40,6 @@
     <string name="listview_updated_this_month"> هذا الشهر</string>
     <string name="listview_updated_last_month">الشهر الماضي</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">وضع العرض للملاحظات</string>
     <string name="settings_theme_title">المظهر</string>
     <string name="settings_font_title">خط أحادي المسافة</string>
@@ -49,16 +48,12 @@
     <string name="settings_lock">الحماية بكلمة السر</string>
     <string name="settings_background_sync">مزامنة في خلفية النظام</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">المزامنة فشلت \'%1$s\'</string>
     <string name="error_synchronization">المزامنة فشلت</string>
     <string name="error_json">هل تطبيق الملاحظات (Nextcloud Notes) مفعل على الخادم؟</string>
     <string name="error_no_network">لا يتوفر اتصال</string>
     <string name="error_unknown">حدث خطأ غير معروف.</string>
 
-    <!-- About -->
     <string name="about_version_title">الإصدار</string>
     <string name="about_version">تستخدم حالياً &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">مشرف</string>
@@ -82,7 +77,6 @@
     <string name="about_contribution_tab_title">المساهمة</string>
     <string name="about_license_tab_title"> الرخصة</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">قائمة الملاحظات</string>
     <string name="widget_note_list_placeholder">لا ملاحظات</string>
     <string name="widget_single_note_title">ملاحظة مفردة
@@ -96,10 +90,8 @@
 
     <string name="activity_select_single_note">اختيار الملاحظة</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">انشاء ملاحظة جديدة</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">عادي</string>
     <string name="pref_value_wifi_and_mobile">مزامنة على الوايفاي و بيانات الهاتف</string>
     <string name="pref_value_lock">الحماية بكلمة السر</string>
@@ -163,21 +155,18 @@
     <string name="manage_accounts">إدارة الحسابات</string>
     <string name="action_formatting_help">التنسيق</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>فتح في وضع التحرير</item>
         <item>فتح في وضع المعاينة</item>
         <item>تذكر آخر ما أخترته</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>صغير</item>
         <item>متوسط</item>
         <item>كبير</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>إيقاف</item>
         <item>15 دقيقة</item>
@@ -191,7 +180,6 @@
         <item>إفتراضي النظام</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="zero">%d محدد</item>
         <item quantity="one">%d محدد</item>

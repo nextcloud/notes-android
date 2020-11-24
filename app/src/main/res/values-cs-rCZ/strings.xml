@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Tento měsíc</string>
     <string name="listview_updated_last_month">Minulý měsíc</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Režim zobrazení poznámek</string>
     <string name="settings_theme_title">Motiv vzhledu</string>
     <string name="settings_font_title">Písmo se všemi znaky stejně širokými</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Ochrana heslem</string>
     <string name="settings_background_sync">Synchronizace na pozadí</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
     <string name="error_synchronization">Synchronizace se nezdařila</string>
     <string name="error_json">Je na serveru aktivní aplikace Poznámky?</string>
     <string name="error_no_network">Žádné síťové spojení</string>
     <string name="error_unknown">Došlo k neznámé chybě.</string>
 
-    <!-- About -->
     <string name="about_version_title">Verze</string>
     <string name="about_version">Nyní používáte &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Vývoj spravuje</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Zapojení se</string>
     <string name="about_license_tab_title">Licence</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Seznam poznámek</string>
     <string name="widget_note_list_placeholder">Žádné poznámky</string>
     <string name="widget_single_note_title">Jediná poznámka</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Vybrat poznámku</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Vytvořit novou poznámku</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normální</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovat přes Wi-Fi a mobilní data</string>
     <string name="pref_value_lock">Ochrana heslem</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Spravovat účty</string>
     <string name="action_formatting_help">Formátování</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otevřít v režimu úprav</item>
         <item>Otevřít v náhledovém režimu</item>
         <item>Zapamatovat si můj poslední výběr</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Malé</item>
         <item>Střední</item>
         <item>Velké</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Vypnuto</item>
         <item>15 minut</item>
@@ -186,7 +175,6 @@
         <item>Systémové výchozí</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">vybrána %d</item>
         <item quantity="few">vybrány %d</item>
