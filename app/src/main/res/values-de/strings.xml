@@ -17,8 +17,8 @@
     <string name="simple_bold">Fett</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Kursiv</string>
-    <string name="action_note_deleted">Gelöscht %1$s</string>
-    <string name="action_note_restored">Wiederhergestellt %1$s</string>
+    <string name="action_note_deleted">%1$s gelöscht</string>
+    <string name="action_note_restored">%1$s wiederhergestellt</string>
     <string name="action_undo">Rückgängig</string>
     <string name="action_uncategorized">Ohne Kategorie</string>
     <string name="menu_delete">Löschen</string>
@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Diesen Monat</string>
     <string name="listview_updated_last_month">Letzten Monat</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Anzeigemodus für Notizen</string>
     <string name="settings_theme_title">Design</string>
     <string name="settings_font_title">Nichtproportionale Schriftart</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Passwortschutz</string>
     <string name="settings_background_sync">Hintergrundsynchronisierung</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Synchronisierung fehlgeschlagen: %1$s</string>
     <string name="error_synchronization">Synchronisierung fehlgeschlagen</string>
     <string name="error_json">Ist die Notes-App auf dem Server aktiviert?</string>
     <string name="error_no_network">Keine Netzwerkverbindung</string>
     <string name="error_unknown">Unbekannter Fehler aufgetreten.</string>
 
-    <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">Sie benutzen gerade &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Maintainer</string>
@@ -67,20 +62,19 @@
     <string name="about_testers_title">Tester</string>
     <string name="about_source_title">Quellcode</string>
     <string name="about_source">Dieses Projekt wird auf GitHub verwaltet: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_issues_title">Tickets</string>
-    <string name="about_issues">Sie können Fehler, Verbesserungsvorschläge oder Wünsche für neue Funktionen im GitHub-Ticket-System erfassen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Issues</string>
+    <string name="about_issues">Sie können Fehler, Verbesserungsvorschläge oder Wünsche für neue Funktionen als Issue auf GitHub erfassen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Übersetzen</string>
     <string name="about_translate">Treten Sie dem Nextcloud-Team auf Transifex bei und helfen Sie uns, diese App zu übersetzen: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_app_license_title">App Lizenz</string>
+    <string name="about_app_license_title">App-Lizenz</string>
     <string name="about_app_license">Diese Applikation ist lizenziert unter der GNU GENERAL PUBLIC LICENSE v3+.</string>
     <string name="about_app_license_button">Lizenz ansehen</string>
-    <string name="about_icons_disclaimer_title">Icons</string>
+    <string name="about_icons_disclaimer_title">Symbole</string>
     <string name="about_icons_disclaimer">&lt;p>Das ursprüngliche Icon wurde erstellt von %1$s&lt;/p>&lt;p>Alle weiteren von dieser App benutzten Icons sind &lt;a href=\"https://materialdesignicons.com/\">Material Design Icons&lt;/a> erstellt von  Google Inc. und lizenziert unter einer Apache 2.0 Lizenz.&lt;/p></string>
-    <string name="about_credits_tab_title">Credits</string>
+    <string name="about_credits_tab_title">Danksagungen</string>
     <string name="about_contribution_tab_title">Mitmachen</string>
     <string name="about_license_tab_title">Lizenz</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Liste der Notizen</string>
     <string name="widget_note_list_placeholder">Keine Notizen</string>
     <string name="widget_single_note_title">Eine Notiz</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Notiz auswählen</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Neue Notiz erstellen</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Über WLAN und mobile Daten synchronisieren</string>
     <string name="pref_value_lock">Passwortschutz</string>
@@ -116,7 +108,7 @@
     <string name="no_notes_yet">Noch keine Notizen vorhanden</string>
     <string name="no_notes_yet_description">Drücke den \"+\"-Knopf um eine neue Notiz zu erstellen</string>
     <string name="could_not_load_preview_two_digit_numbered_list">Die Vorschau konnte nicht geladen werden. Bitte prüfen Sie, ob ein zweistellig numerierter Listeneintrag ohne Inhalt vorhanden ist.</string>
-    <string name="simple_more">mehr</string>
+    <string name="simple_more">Mehr</string>
     <string name="simple_move">Verschieben</string>
     <string name="checkbox_could_not_be_toggled">Kontrollkästchen konnte nicht umgeschaltet werden.</string>
     <string name="category_readonly">Schreibgeschützt</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Konten verwalten</string>
     <string name="action_formatting_help">Formatierung</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Im Bearbeitungsmodus öffnen</item>
         <item>Im Vorschaumodus öffnen</item>
         <item>Letzte Auswahl merken</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Klein</item>
         <item>Mittel</item>
         <item>Groß</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Aus</item>
         <item>15 Minuten</item>
@@ -186,7 +175,6 @@
         <item>Systemstandard</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d ausgewählt</item>
         <item quantity="other">%d ausgewählt</item>

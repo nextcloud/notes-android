@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Ebben a hónapban</string>
     <string name="listview_updated_last_month">Előző hónap</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Jegyzet módok megjelenítés</string>
     <string name="settings_theme_title">Téma</string>
     <string name="settings_font_title">Fix szélességű betűkészlet</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Jelszavas védelem</string>
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
     <string name="error_synchronization">Szinkronizálás sikertelen</string>
     <string name="error_json">Be van kapcsolva a Jegyzetek alkalmazás a kiszolgálón?</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
     <string name="error_unknown">Ismeretlen hiba történt.</string>
 
-    <!-- About -->
     <string name="about_version_title">Verzió</string>
     <string name="about_version">Jelenleg ezt használja: &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Karbantartó</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Közreműködés</string>
     <string name="about_license_tab_title">Licenc</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Jegyzetlista</string>
     <string name="widget_note_list_placeholder">Nincsenek jegyzetek</string>
     <string name="widget_single_note_title">Egyszeri jegyzet</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Válasszon jegyzetet</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Új jegyzet létrehozása</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normál</string>
     <string name="pref_value_wifi_and_mobile">Szinkronizálás Wi-Fin és mobil adatkapcsolaton</string>
     <string name="pref_value_lock">Jelszavas védelem</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Fiókok kezelése</string>
     <string name="action_formatting_help">Formázás</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Megnyitás szerkesztésre</item>
         <item>Megnyitás előnézetre</item>
         <item>A legutóbbi döntés megjegyzése</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Kicsi</item>
         <item>Közepes</item>
         <item>Nagy</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Ki</item>
         <item>15 perc</item>
@@ -186,7 +175,6 @@
         <item>Rendszer alapértelmezése</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d kiválasztva</item>
         <item quantity="other">%d kiválasztva</item>

@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Deze maand</string>
     <string name="listview_updated_last_month">Vorige maand</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Weergavemode voor notities</string>
     <string name="settings_theme_title">Thema</string>
     <string name="settings_font_title">Monospace lettertype</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Wachtwoordbeveiliging</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_json">Is de Notities app geactiveerd op de server?</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
     <string name="error_unknown">Een onbekende fout trad op.</string>
 
-    <!-- About -->
     <string name="about_version_title">Versie</string>
     <string name="about_version">Je gebruikt nu &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Projectleider</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Bijdrage</string>
     <string name="about_license_tab_title">Licentie</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Notitielijst</string>
     <string name="widget_note_list_placeholder">Geen notities</string>
     <string name="widget_single_note_title">Enkele notitie</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Notitie selecteren</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Een nieuwe notitie maken</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normaal</string>
     <string name="pref_value_wifi_and_mobile">Met Wi-Fi en mobiele data synchroniseren</string>
     <string name="pref_value_lock">Wachtwoordbeveiliging</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Accounts beheren </string>
     <string name="action_formatting_help">Opmaak</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Open in wbewerkmodus</item>
         <item>Open in voorbeeldweergave modus</item>
         <item>Onthoud je laatste selectie</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Klein</item>
         <item>Gemiddeld</item>
         <item>Groot</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Uit</item>
         <item>15 minuten</item>
@@ -186,7 +175,6 @@
         <item>Systeemstandaard</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d geselecteerd</item>
         <item quantity="other">%d geselecteerd</item>
