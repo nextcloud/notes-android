@@ -7,7 +7,7 @@ Sorry. There are so many different environments, that it is impossible for us to
 First of all make sure you have updated to and tried with the latest available versions of both, this app and the [Notes server app](https://apps.nextcloud.com/apps/notes).
 
 In case you receive a `NextcloudApiNotRespondingException`, try to disable the battery optimization for both apps.
-In all other cases please try  to clear the storage of **both** apps, Nextcloud Android **and** Nextcloud Notes Android.
+In all other cases please try to clear the storage of **both** apps, Nextcloud Android **and** Nextcloud Notes Android.
 
 You can achieve this by navigating to
 
@@ -19,8 +19,7 @@ Android settings
        ↳ Clear storage
 ```
 
-Often there is an issue with the state of the server app. Try to create a new test account at your Nextcloud instance and connect to it.
-If there are no errors, share the boards of your actual account one by one with your test account to find the defect one.
+Then set up your account in the Nextcloud Android app again and import the configured account in the Nextcloud Notes Android app.
 
 If the issue persists, [open a bug report in our issue tracker](https://github.com/stefan-niedermann/nextcloud-notes/issues/new?assignees=&labels=bug&template=bug_report.md&title=).
 
