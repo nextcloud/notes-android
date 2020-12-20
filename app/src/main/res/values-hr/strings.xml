@@ -180,6 +180,22 @@
         <item quantity="few">Odabrano je %d</item>
         <item quantity="other">Odabrano je %d</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Izbrisana jedna bilješka</item>
+        <item quantity="few">Izbrisano %1$d bilješki</item>
+        <item quantity="other">Izbrisano %1$d bilješki</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Vraćena jedna bilješka</item>
+        <item quantity="few">Vraćeno %1$d bilješki</item>
+        <item quantity="other">Vraćeno %1$d bilješki</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Dijeli sadržaj %1$d bilješki</item>
+        <item quantity="few">Dijeli sadržaj %1$d bilješki</item>
+        <item quantity="other">Dijeli sadržaj %1$d bilješki</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

@@ -58,19 +58,18 @@
     <string name="about_maintainer_title">Prižiūrėtojas</string>
     <string name="about_developers_title">Plėtotojai</string>
     <string name="about_translators_title">Vertėjai</string>
-    <string name="about_translators_transifex">Nextcloud bendruomenė, esanti &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud bendruomenė, esanti &lt;a href=\"%1$s\">„Transifex“&lt;/a></string>
     <string name="about_testers_title">Testuotojai</string>
     <string name="about_source_title">Pradinis kodas</string>
     <string name="about_source">Šis projektas talpinamas GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemos</string>
     <string name="about_issues">Galite pranešti apie klaidas, pasiūlymus ar užklausti ypatybių mūsų GitHub puslapyje: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Versti</string>
-    <string name="about_translate">Prisijunkite prie Nextcloud komandos, esančios Transifex ir padėkite mums išversti šią programėlę: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Prisijunkite prie Nextcloud komandos, esančios „Transifex“ ir padėkite mums išversti šią programėlę: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Programėlės licencija</string>
     <string name="about_app_license">Ši programėlė yra licencijuota pagal GNU BENDRĄJĄ VIEŠĄJĄ LICENCIJĄ v3+.</string>
     <string name="about_app_license_button">Rodyti licenciją</string>
     <string name="about_icons_disclaimer_title">Piktogramos</string>
-    <string name="about_icons_disclaimer">&lt;programėlė&lt;p>Originali piktograma padaryta %1$s&lt;/p>&lt;p>Visos šios programėlės naudojamos piktogramos yra &lt;a href=\"https://materialdesignicons.com/\"></string>
     <string name="about_credits_tab_title">Padėkos</string>
     <string name="about_contribution_tab_title">Prisidėjo</string>
     <string name="about_license_tab_title">Licencija</string>
