@@ -50,8 +50,8 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
 
     @CallSuper
     public void bind(@NonNull DBNote note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
-        itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getAdapterPosition(), view));
-        itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getAdapterPosition(), view));
+        itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getLayoutPosition(), view));
+        itemView.setOnLongClickListener((view) -> noteClickListener.onNoteLongClick(getLayoutPosition(), view));
     }
 
     protected void bindStatus(AppCompatImageView noteStatus, DBStatus status, int mainColor) {
@@ -106,7 +106,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
 
     protected void bindFavorite(@NonNull ImageView noteFavorite, boolean isFavorite) {
         noteFavorite.setImageResource(isFavorite ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp);
-        noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getAdapterPosition(), view));
+        noteFavorite.setOnClickListener(view -> noteClickListener.onNoteFavoriteClick(getLayoutPosition(), view));
     }
 
     protected void bindSearchableContent(@NonNull Context context, @NonNull TextView textView, @Nullable CharSequence searchQuery, @NonNull String content, int mainColor) {

@@ -187,6 +187,11 @@
         <item quantity="one">S\'ha restaurat una nota</item>
         <item quantity="other">S\'han restaurat %1$d notes</item>
     </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Comparteix el contingut d\'%1$d nota</item>
+        <item quantity="other">Comparteix el contingut de %1$d notes</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

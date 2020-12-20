@@ -178,6 +178,16 @@
     <plurals name="ab_selected">
         <item quantity="other">%d 選択済</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="other">ノート%1$dを削除しました</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="other">ノート%1$dを復元しました</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="other"> %1$dノートの内容を共有</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
