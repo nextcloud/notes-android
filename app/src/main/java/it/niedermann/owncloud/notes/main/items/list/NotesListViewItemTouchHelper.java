@@ -72,7 +72,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
                         viewHolder.setIsRecyclable(false);
-                        final NoteWithCategory dbNoteWithoutContent = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
+                        final NoteWithCategory dbNoteWithoutContent = (NoteWithCategory) adapter.getItem(viewHolder.getLayoutPosition());
                         final LiveData<NoteWithCategory> dbNoteLiveData = mainViewModel.getFullNoteWithCategory(dbNoteWithoutContent.getId());
                         dbNoteLiveData.observe(lifecycleOwner, (dbNote) -> {
                             dbNoteLiveData.removeObservers(lifecycleOwner);
@@ -92,7 +92,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         break;
                     case ItemTouchHelper.RIGHT:
                         viewHolder.setIsRecyclable(false);
-                        final NoteWithCategory adapterNote = (NoteWithCategory) adapter.getItem(viewHolder.getAdapterPosition());
+                        final NoteWithCategory adapterNote = (NoteWithCategory) adapter.getItem(viewHolder.getLayoutPosition());
                         final LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote.getId());
                         toggleLiveData.observe(lifecycleOwner, (next) -> toggleLiveData.removeObservers(lifecycleOwner));
                         break;
@@ -117,7 +117,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                     swipeRefreshLayoutEnabled = swipeRefreshLayout.isEnabled();
                     swipeRefreshLayout.setEnabled(false);
                     if (viewHolder != null) {
-                        adapter.setSwipedPosition(viewHolder.getAdapterPosition());
+                        adapter.setSwipedPosition(viewHolder.getLayoutPosition());
                     }
                 }
                 super.onSelectedChanged(viewHolder, actionState);

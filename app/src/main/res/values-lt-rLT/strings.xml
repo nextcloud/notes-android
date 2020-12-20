@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Šį mėnesį</string>
     <string name="listview_updated_last_month">Praeitą mėnesį</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Užrašų rodinio veiksena</string>
     <string name="settings_theme_title">Apipavidalinimas</string>
     <string name="settings_font_title">Lygiaplotis šriftas</string>
@@ -48,39 +47,33 @@
     <string name="settings_lock">Apsauga slaptažodžiu</string>
     <string name="settings_background_sync">Foninis sinchronizavimas</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
     <string name="error_synchronization">Sinchronizacija nepavyko</string>
     <string name="error_json">Ar Užrašų programėlė yra aktyvuota serveryje?</string>
     <string name="error_no_network">Nėra tinklo ryšio</string>
     <string name="error_unknown">Įvyko nežinoma klaida.</string>
 
-    <!-- About -->
     <string name="about_version_title">Versija</string>
     <string name="about_version">Jūs dabar naudojate &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Prižiūrėtojas</string>
     <string name="about_developers_title">Plėtotojai</string>
     <string name="about_translators_title">Vertėjai</string>
-    <string name="about_translators_transifex">Nextcloud bendruomenė, esanti &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_translators_transifex">Nextcloud bendruomenė, esanti &lt;a href=\"%1$s\">„Transifex“&lt;/a></string>
     <string name="about_testers_title">Testuotojai</string>
     <string name="about_source_title">Pradinis kodas</string>
     <string name="about_source">Šis projektas talpinamas GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problemos</string>
     <string name="about_issues">Galite pranešti apie klaidas, pasiūlymus ar užklausti ypatybių mūsų GitHub puslapyje: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Versti</string>
-    <string name="about_translate">Prisijunkite prie Nextcloud komandos, esančios Transifex ir padėkite mums išversti šią programėlę: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate">Prisijunkite prie Nextcloud komandos, esančios „Transifex“ ir padėkite mums išversti šią programėlę: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Programėlės licencija</string>
     <string name="about_app_license">Ši programėlė yra licencijuota pagal GNU BENDRĄJĄ VIEŠĄJĄ LICENCIJĄ v3+.</string>
     <string name="about_app_license_button">Rodyti licenciją</string>
     <string name="about_icons_disclaimer_title">Piktogramos</string>
-    <string name="about_icons_disclaimer">&lt;programėlė&lt;p>Originali piktograma padaryta %1$s&lt;/p>&lt;p>Visos šios programėlės naudojamos piktogramos yra &lt;a href=\"https://materialdesignicons.com/\"></string>
     <string name="about_credits_tab_title">Padėkos</string>
     <string name="about_contribution_tab_title">Prisidėjo</string>
     <string name="about_license_tab_title">Licencija</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Užrašų sąrašas</string>
     <string name="widget_note_list_placeholder">Užrašų nėra</string>
     <string name="widget_single_note_title">Vieni užrašai</string>
@@ -92,10 +85,8 @@
 
     <string name="activity_select_single_note">Pasirinkti užrašus</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Sukurti naujus užrašus</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normalus</string>
     <string name="pref_value_wifi_and_mobile">Sinchronizuoti naudojant belaidį (Wi-Fi) ir mobiliuosius duomenis</string>
     <string name="pref_value_lock">Apsauga slaptažodžiu</string>
@@ -158,21 +149,18 @@
     <string name="manage_accounts">Tvarkyti paskyras</string>
     <string name="action_formatting_help">Formatavimas</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Atverti redagavimo veiksenoje</item>
         <item>Atverti peržiūros veiksenoje</item>
         <item>Prisiminti paskutinį pasirinkimą</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Mažas</item>
         <item>Vidutinis</item>
         <item>Didelis</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Išjungta</item>
         <item>15 minučių</item>
@@ -186,7 +174,6 @@
         <item>Sistemos numatytasis</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d pasirinkta</item>
         <item quantity="few">%d pasirinkta</item>

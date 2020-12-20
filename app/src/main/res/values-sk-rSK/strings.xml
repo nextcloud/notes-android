@@ -39,7 +39,6 @@
     <string name="listview_updated_this_month">Tento mesiac</string>
     <string name="listview_updated_last_month">Minulý mesiac</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Režim zobrazovania poznámok</string>
     <string name="settings_theme_title">Motív vzhľadu</string>
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
@@ -48,16 +47,12 @@
     <string name="settings_lock">Ochrana heslom</string>
     <string name="settings_background_sync">Synchronizácia na pozadí</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_json">Je na serveri aktivovaná aplikácia Notes?</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
     <string name="error_unknown">Vyskytla sa neznáma chyba</string>
 
-    <!-- About -->
     <string name="about_version_title">Verzia</string>
     <string name="about_version">Momentálne používate &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Udržovateľ</string>
@@ -80,7 +75,6 @@
     <string name="about_contribution_tab_title">Príspevok</string>
     <string name="about_license_tab_title">Licencia</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Zoznam poznámok</string>
     <string name="widget_note_list_placeholder">Nie sú žiadne poznámky</string>
     <string name="widget_single_note_title">Jedna poznámka</string>
@@ -92,10 +86,8 @@
 
     <string name="activity_select_single_note">Vybrať poznámku</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Vytvoriť novú poznámku</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normálne</string>
     <string name="pref_value_wifi_and_mobile">Synchronizovať na Wi-Fi a mobilných dátach</string>
     <string name="pref_value_lock">Ochrana heslom</string>
@@ -158,21 +150,18 @@
     <string name="manage_accounts">Spravovať účty</string>
     <string name="action_formatting_help">Formátovanie</string>
 
-    <!-- Array: note modes -->
     <string-array name="noteMode_entries">
         <item>Otvoriť v režime úprav</item>
         <item>Otvoriť v režime ukážky</item>
         <item>Zapamätať si môj posledný výber</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Malá</item>
         <item>Stredná</item>
         <item>Veľká</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Vypnúť</item>
         <item>15 minút</item>
@@ -186,13 +175,31 @@
         <item>Predvolené systémom</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d vybraný</item>
         <item quantity="few">%d vybraných</item>
         <item quantity="many">%d vybraný</item>
         <item quantity="other">%d vybraný</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Odstránená jedna poznámka</item>
+        <item quantity="few">Odstránené %1$d poznámky</item>
+        <item quantity="many">Odstránené %1$d poznámky</item>
+        <item quantity="other">Odstránených %1$d poznámok</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Obnovená jedna poznámka</item>
+        <item quantity="few">Obnovené %1$d poznámky</item>
+        <item quantity="many">Obnovené %1$d poznámky</item>
+        <item quantity="other">Obnovených %1$d poznámok</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Zdieľať obsah %1$d poznámky</item>
+        <item quantity="few">Zdieľať obsah %1$d poznámok</item>
+        <item quantity="many">Zdieľať obsah %1$d poznámok</item>
+        <item quantity="other">Zdieľať obsah %1$d poznámok</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>

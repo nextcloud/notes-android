@@ -9,25 +9,26 @@
     <string name="action_settings">Inställningar</string>
     <string name="action_trashbin">Borttagna anteckningar</string>
     <string name="action_search">Sök</string>
+    <string name="action_sorting_method">Sorteringsmetod</string>
     <string name="simple_cancel">Avbryt</string>
     <string name="simple_edit">Redigera</string>
     <string name="action_edit_save">Spara</string>
     <string name="simple_about">Om</string>
-    <string name="simple_accounts">Konton</string>
     <string name="simple_bold">Fet</string>
     <string name="simple_link">Länk</string>
     <string name="simple_italic">Kursiv</string>
-    <string name="action_note_deleted">Raderade %1$s</string>
+    <string name="action_note_deleted">Tog bort %1$s</string>
     <string name="action_note_restored">Återställde %1$s</string>
     <string name="action_undo">Gör om</string>
-    <string name="action_drawer_open">Öppen navigering</string>
-    <string name="action_drawer_close">stäng navigering</string>
     <string name="action_uncategorized">Okategoriserade</string>
-    <string name="menu_delete">Radera</string>
+    <string name="menu_delete">Ta bort</string>
     <string name="menu_change_category">Kategori</string>
     <string name="menu_favorite">Favorit</string>
     <string name="menu_preview">Förhandsvisning</string>
     <string name="menu_share">Dela</string>
+
+    <string name="search_in_category">Sök i %1$s</string>
+    <string name="search_in_all">Sök alla anteckningar</string>
 
     <string name="change_category_title">Välj en kategori</string>
 
@@ -38,28 +39,20 @@
     <string name="listview_updated_this_month">Denna månad</string>
     <string name="listview_updated_last_month">Förra månaden</string>
 
-    <!-- Settings -->
     <string name="settings_note_mode">Visningsläge för anteckningar</string>
-    <string name="settings_theme_title">Mörkt tema</string>
+    <string name="settings_theme_title">Tema</string>
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Teckenstorlek</string>
     <string name="settings_wifi_only">Synkronisera endast med Wi-Fi</string>
     <string name="settings_lock">Lösenordsskydd</string>
     <string name="settings_background_sync">Bakgrundssynkronisering</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
     <string name="error_synchronization">Synkroniseringen misslyckades</string>
     <string name="error_json">Är appen anteckningar aktiverad på servern?</string>
     <string name="error_no_network">Ingen nätverksanslutning</string>
-    <string name="error_files_app">Har du installerat filer-appen?</string>
-    <string name="error_token_mismatch">Det gick inte att ansluta till fil-applikationen</string>
-    <string name="error_insufficient_storage">Din serverlagring är full.</string>
     <string name="error_unknown">Ett okänt fel uppstod.</string>
 
-    <!-- About -->
     <string name="about_version_title">Version</string>
     <string name="about_version">Du använder just nu &lt;strong>%1$s&lt;/strong></string>
     <string name="about_maintainer_title">Underhållare</string>
@@ -82,7 +75,6 @@
     <string name="about_contribution_tab_title">Medverkan</string>
     <string name="about_license_tab_title">Licens</string>
 
-    <!-- Widgets -->
     <string name="widget_note_list_title">Anteckningslista</string>
     <string name="widget_note_list_placeholder">Inga anteckningar</string>
     <string name="widget_single_note_title">Enstaka anteckning</string>
@@ -94,10 +86,8 @@
 
     <string name="activity_select_single_note">Välj anteckning</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">Skapa en ny anteckning</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">Normal</string>
     <string name="pref_value_wifi_and_mobile">Synkronisera med Wi-Fi och mobildata</string>
     <string name="pref_value_lock">Lösenordsskydd</string>
@@ -120,10 +110,7 @@
     <string name="could_not_load_preview_two_digit_numbered_list">Det gick inte att läsa in förhandsgranskning. Vänligen kontrollera om det finns ett tvåsiffrigt listobjekt utan innehåll.</string>
     <string name="simple_more">Mer</string>
     <string name="simple_move">Flytta</string>
-    <string name="error_files_app_version_too_old">Är din fil-app av senaste version?</string>
     <string name="checkbox_could_not_be_toggled">Kunde inte ändra kryssrutan.</string>
-    <string name="bulk_notes_deleted">Raderade %1$d anteckningar</string>
-    <string name="bulk_notes_restored">Återställde %1$d anteckningar</string>
     <string name="category_readonly">Läsbehörighet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Lägg till %1$s</string>
@@ -134,26 +121,47 @@
     <string name="error_dialog_title">Å nej - Vad händer nu?🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Försök med att Tvinga appen att stänga och återstarta. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Om problemet kvarstår, prova med att rensa lagringen på både appen Nextcloud och Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Du kan rensa diskutrymmet genom att öppna appens info, välj Lagring -> Rensa data</string>
+    <string name="error_dialog_tip_files_outdated">Din Nextcloud-app verkar utdaterad. Besök Play Butiken eller F-Droid för att hämta senaste versionen</string>
+    <string name="error_dialog_tip_files_force_stop">Något verkar vara fel med din Nextcloud-app. Försök att tvångsavsluta både Nextcloud- och Nextcloud Notes-apparna.</string>
+    <string name="error_dialog_tip_files_delete_storage">Om tvångsavslutning ej hjälper kan du försöka rensa datan på båda appar.</string>
+    <string name="error_dialog_timeout_instance">Din server svarade inte inom den angivna tiden. Kontrollera att den fungerar normalt.</string>
+    <string name="error_dialog_timeout_toggle">Kontrollera din nätverkanslutning. Ibland kan det hjälpa att slå av och slå på mobildata Wi-Fi.</string>
+    <string name="error_dialog_check_server">Inkorrekt svar från din server. Kontrollera att du har tillgång till dina anteckningar genom din webbläsare.</string>
+    <string name="error_dialog_check_server_logs">Det finns problem med din Nextcloud-installation. Ta gärna en titt i serverns loggfiler. </string>
+    <string name="error_dialog_check_maintenance">Kontrollera att underhållsläge inte är aktivt på Nextcloud-installation.</string>
+    <string name="error_dialog_insufficient_storage">Din Nextcloud-installation har slut på diskutrymme. Ta bort några filer för att kunna synkronisera ändringar till ditt moln.</string>
+    <string name="error_dialog_contact_us">Tveka inte att kontakta oss om problemet fortsätter. Du kan hitta vår kontaktinformation i \"Om\"-delen i sidomenyn.</string>
+    <string name="error_dialog_we_need_info">Vi behöver följande teknisk information för att kunna hjälpa dig:</string>
+    <string name="error_dialog_server_app_enabled">Se till att du har installerat och aktiverat Notes-appen på din server.</string>
+    <string name="error_dialog_redirect">Din server svarade med ett HTTP 302 statusmeddelande, vilket innebär att du inte har installerat Notes-appen på din server eller att något är felkonfigurerat. Detta kan orsakas av manuella ändringar i en .htaccess-fil eller av Nextcloud-appar som \"OID Client\".</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Stäng av alla batterioptimeringar för Nextcloud och Notes-appen.</string>
+    <string name="added_content">La till \"%1$s\"</string>
+    <string name="shared_text_empty">Den delade texten var tom</string>
+    <string name="append_to_note">Lägg till i anteckning</string>
+    <string name="change_note_title">Ändra anteckningstitel</string>
+    <string name="menu_edit_title">Redigera titel</string>
     <string name="settings_branding">Varumärke</string>
+    <string name="settings_gridview">Rutnätsvy 🆕</string>
     <string name="simple_security">Säkerhet</string>
     <string name="simple_appearance">Utseende</string>
     <string name="simple_synchronization">Synkronisering</string>
+    <string name="simple_behavior">Beteende</string>
     <string name="manage_accounts">Hantera konton</string>
-    <!-- Array: note modes -->
+    <string name="action_formatting_help">Formatering</string>
+
     <string-array name="noteMode_entries">
         <item>Öppna i redigera-läge</item>
         <item>Öppna i förhandsvisningsläge</item>
         <item>Kom ihåg mitt sista val</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>Liten</item>
         <item>Medium</item>
         <item>Stor</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>Av</item>
         <item>15 minuter</item>
@@ -167,9 +175,70 @@
         <item>Systemstandard</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d vald</item>
         <item quantity="other">%d valda</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Tog bort en anteckning</item>
+        <item quantity="other">Tog bort %1$d anteckningar</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Återställde en anteckning</item>
+        <item quantity="other">Återställde %1$d anteckningar</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Dela innehållet i %1$d anteckning</item>
+        <item quantity="other">Dela innehållet i %1$d anteckningar</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Innehållsbaserad formatering</string>
+    <string name="formatting_help_cbf_body_1">Ett stort deignmål med Notes-appen är att tillahandahålla ett distraktionsfritt verktyg. Fast du kan formatera dina texter med Markdown. För de olika nedan nämnda exemplena kan du använda genvägar så att du kan formatera dina anteckningar utan att skriva in koderna nedan.</string>
+    <string name="formatting_help_text_title">Text</string>
+    <string name="formatting_help_lists_title">Listor</string>
+    <string name="formatting_help_lists_body_1">Ibland vill du ha en numrerad lista:</string>
+    <string name="formatting_help_lists_body_2">En</string>
+    <string name="formatting_help_lists_body_3">Två</string>
+    <string name="formatting_help_lists_body_4">Tre</string>
+    <string name="formatting_help_lists_body_5">Ibland vill du punktlistor:</string>
+    <string name="formatting_help_lists_body_6">Börja en rad med ett tankesträck</string>
+    <string name="formatting_help_lists_body_7">Sätt två mellanslag framför tankesträcket eller stjärnan om du vill ha underpunkter:</string>
+    <string name="formatting_help_lists_body_8">Så här</string>
+    <string name="formatting_help_lists_body_9">Och så här</string>
+
+    <string name="formatting_help_checkboxes_title">Bockrutefråga</string>
+    <string name="formatting_help_checkboxes_body_1">Använd en lista följt av hakparenteset för att skapa en kryssruta</string>
+    <string name="formatting_help_checkboxes_body_2">Punkt 1</string>
+    <string name="formatting_help_checkboxes_body_3">Punkt 2</string>
+
+    <string name="formatting_help_structured_documents_title">Strukturerat dokument</string>
+    <string name="formatting_help_structured_documents_body_1">Ibland är det användbart att ha olika nivåer på rubriker för att strukturera dina dokument. Inled raden med %1$s för att skapa rukbriker. Flera %2$s i rad innebär mindre rubrikstorlekar.</string>
+    <string name="formatting_help_structured_documents_body_2">Detta är en rubrik på tredje nivån</string>
+    <string name="formatting_help_structured_documents_body_3">Den kan använda en %1$s ända upp till %2$s sex för olika rubrikstorlekar</string>
+    <string name="formatting_help_structured_documents_body_4">Om du vill citera någon kan du använda %1$s-tecknet framför raden: </string>
+    <string name="formatting_help_structured_documents_body_5">Fantasi är viktigare än kunskap. Kunskap är begränsad. Fantasi omsluter världen.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Kod</string>
+    <string name="formatting_help_code_body_1">Det finns många olika sätt att utforma kod med Markdown. Om du har infällda kodblock, omge dem med backticks:</string>
+    <string name="formatting_help_code_body_2">Markdown stödjer också något som kallas för kodavgränsning, vilket tillåter flera rader utan indentering:</string>
+    <string name="formatting_help_code_body_3">Och om du vill använda syntaxmarkering kan du inkludera språket:</string>
+
+    <string name="formatting_help_unsupported_title">Stöds inte</string>
+    <string name="formatting_help_unsupported_body_1">Medan vi kontinuerligt försöker förbättra Markdown-stödet finns det en del funktioner som fortfarande inte stöds i Notes:</string>
+    <string name="formatting_help_unsupported_body_2">Tabeller</string>
+    <string name="formatting_help_unsupported_body_3">Bilder</string>
+    <string name="formatting_help_unsupported_body_4">Om du är intresserad av att bidra med support för någon av dessa funktioner kan du kontakta oss genom GitHub eller epost.</string>
+    <string name="simple_other">Övrigt</string>
+    <string name="sort_last_modified">Sortera efter ändrat datum</string>
+    <string name="sort_alphabetically">Sortera alfabetiskt</string>
+    <string name="error_action_open_battery_settings">Batteriinställningar</string>
+    <string name="error_action_open_deck_info">Öppna appinformation</string>
+    <string name="error_action_open_network">Nätverksinställningar</string>
+    <string name="no_other_accounts">Du har inte konfigurerat några andra konton än.</string>
 </resources>
