@@ -3,13 +3,11 @@ package it.niedermann.owncloud.notes.edit;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.Layout;
-import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
@@ -20,26 +18,19 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.yydcdut.markdown.MarkdownProcessor;
-import com.yydcdut.markdown.syntax.edit.EditFactory;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
-import it.niedermann.owncloud.notes.edit.format.ContextBasedFormattingCallback;
-import it.niedermann.owncloud.notes.edit.format.ContextBasedRangeFormattingCallback;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
-import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.searchAndColor;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NoteEditFragment extends SearchableBaseNoteFragment {
@@ -157,21 +148,12 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 }
             }
 
-            // workaround for issue yydcdut/RxMarkdown#41
-            note.setContent(note.getContent().replace("\r\n", "\n"));
+//             workaround for issue yydcdut/RxMarkdown#41
+//            note.setContent(note.getContent().replace("\r\n", "\n"));
 
-            binding.editContent.setText(note.getContent());
+            binding.editContent.setMarkdownString(note.getContent());
             binding.editContent.setEnabled(true);
 
-            final MarkdownProcessor markdownProcessor = new MarkdownProcessor(requireContext());
-            markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(binding.editContent.getContext()).build());
-            markdownProcessor.factory(EditFactory.create());
-            markdownProcessor.live(binding.editContent);
-
-            binding.editContent.setCustomSelectionActionModeCallback(new ContextBasedRangeFormattingCallback(binding.editContent));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                binding.editContent.setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(binding.editContent));
-            }
             final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
             binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
             if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
@@ -246,13 +228,13 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
         if (binding != null && isAttachedToWindow(binding.editContent)) {
             binding.editContent.clearFocus();
-            binding.editContent.setText(searchAndColor(new SpannableString(getContent()), newText, requireContext(), current, mainColor, textColor), TextView.BufferType.SPANNABLE);
+            binding.editContent.setSearchText(newText, current);
         }
     }
 
     @Override
     public void applyBrand(int mainColor, int textColor) {
         super.applyBrand(mainColor, textColor);
-        binding.editContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+        binding.editContent.setSearchColor(mainColor);
     }
 }

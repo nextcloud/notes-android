@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="simple_checkbox">Checkbox</string>
+    <string name="simple_bold">Bold</string>
+    <string name="simple_link">Link</string>
+    <string name="simple_italic">Italic</string>
+</resources>
