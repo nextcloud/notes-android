@@ -122,10 +122,19 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        textWatcher = new NotesTextWatcher(binding.editContent) {
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Nothing to do here...
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Nothing to do here...
+            }
+
             @Override
             public void afterTextChanged(final Editable s) {
-                super.afterTextChanged(s);
                 unsavedEdit = true;
                 if (!saveActive) {
                     handler.removeCallbacks(runAutoSave);
