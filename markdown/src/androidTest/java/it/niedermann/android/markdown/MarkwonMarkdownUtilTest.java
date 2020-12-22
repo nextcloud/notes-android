@@ -225,12 +225,32 @@ public class MarkwonMarkdownUtilTest extends TestCase {
 
         // TODO Toggle bold to italic
 //        builder = new SpannableStringBuilder("Lorem **ipsum** dolor sit amet.");
-//        assertEquals(29, MarkwonMarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
-//        assertEquals("Lorem *ipsum* dolor sit amet.", builder.toString());
+//        assertEquals(33, MarkwonMarkdownUtil.togglePunctuation(builder, 0, 31, "*"));
+//        assertEquals("Lorem ***ipsum*** dolor sit amet.", builder.toString());
 
         // TODO Toggle multiple bold parts to italic
 //        builder = new SpannableStringBuilder("Lorem **ipsum** dolor **sit** amet.");
-//        assertEquals(31, MarkwonMarkdownUtil.togglePunctuation(builder, 0, 35, "*"));
+//        assertEquals(38, MarkwonMarkdownUtil.togglePunctuation(builder, 0, 34, "*"));
+//        assertEquals("Lorem ***ipsum*** dolor ***sit*** amet.", builder.toString());
+
+        // TODO Toggle italic and bold to bold
+//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
+//        assertEquals(13, MarkwonMarkdownUtil.togglePunctuation(builder, 0, 14, "*"));
+//        assertEquals("Lorem **ipsum** dolor sit amet.", builder.toString());
+
+        // TODO Toggle italic and bold to italic
+//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor sit amet.");
+//        assertEquals(12, MarkwonMarkdownUtil.togglePunctuation(builder, 9, 14, "**"));
+//        assertEquals("Lorem *ipsum* dolor sit amet.", builder.toString());
+
+        // TODO Toggle multiple italic and bold to bold
+//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
+//        assertEquals(34, MarkwonMarkdownUtil.togglePunctuation(builder, 0, 38, "*"));
+//        assertEquals("Lorem **ipsum** dolor **sit** amet.", builder.toString());
+
+        // TODO Toggle multiple italic and bold to italic
+//        builder = new SpannableStringBuilder("Lorem ***ipsum*** dolor ***sit*** amet.");
+//        assertEquals(30, MarkwonMarkdownUtil.togglePunctuation(builder, 0, 38, "**"));
 //        assertEquals("Lorem *ipsum* dolor *sit* amet.", builder.toString());
     }
 
