@@ -1,7 +1,6 @@
 package it.niedermann.android.markdown;
 
 import android.text.Editable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -57,15 +56,13 @@ public class MarkwonMarkdownUtilTest extends TestCase {
     @Test
     public void testGetEndOfLine() {
         //language=md
-        StringBuilder test = new StringBuilder(
-                "# Test-Note\n" + // line 0 - 11
-                        "\n" + // line 12 - 12
-                        "- [ ] this is a test note\n" + // line 13 - 38
-                        "- [x] test\n" + // line start 39 - 49
-                        "[test](https://example.com)\n" + // line 50 - 77
-                        "\n" + // line 77 - 78
-                        "\n" // line 78 - 79
-        );
+        final CharSequence test = "# Test-Note\n" + // line 0 - 11
+                "\n" + // line 12 - 12
+                "- [ ] this is a test note\n" + // line 13 - 38
+                "- [x] test\n" + // line start 39 - 49
+                "[test](https://example.com)\n" + // line 50 - 77
+                "\n" + // line 77 - 78
+                "\n"; // line 78 - 79
 
         for (int i = 0; i < test.length(); i++) {
             int endOfLine = MarkwonMarkdownUtil.getEndOfLine(test, i);
