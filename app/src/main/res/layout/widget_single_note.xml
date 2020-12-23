@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/widget_background">
@@ -8,16 +9,17 @@
         android:id="@+id/single_note_widget_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/widget_single_note_padding" />
+        android:padding="@dimen/widget_single_note_padding"
+        tools:listitem="@layout/widget_single_note_content" />
 
     <TextView
         android:id="@+id/widget_single_note_placeholder_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:padding="@dimen/widget_single_note_padding"
         android:text="@string/widget_single_note_placeholder_tv"
-        android:textColor="@color/fg_default_high_dark_theme"
         android:textAlignment="center"
-        android:padding="@dimen/widget_single_note_padding" />
+        android:textColor="@color/fg_default_high_dark_theme" />
 
 </RelativeLayout>
