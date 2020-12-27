@@ -20,6 +20,7 @@ import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonPlugin;
 import it.niedermann.android.markdown.MarkdownEditor;
 import it.niedermann.android.markdown.markwon.plugins.SearchHighlightPlugin;
+import it.niedermann.android.markdown.markwon.plugins.ToggleableTaskListPlugin;
 
 import static androidx.lifecycle.Transformations.distinctUntilChanged;
 import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.initMarkwonViewer;
@@ -43,7 +44,11 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     public MarkwonMarkdownViewer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.markwon = MarkwonMarkdownUtil.initMarkwonViewer(context).build();
+        this.markwon = MarkwonMarkdownUtil.initMarkwonViewer(context)
+                .usePlugin(new ToggleableTaskListPlugin(toggledCheckboxPosition -> {
+                    Log.v(TAG, "new text: " + toggledCheckboxPosition);
+                }))
+                .build();
         this.renderService = Executors.newSingleThreadExecutor();
     }
 
