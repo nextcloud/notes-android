@@ -546,7 +546,8 @@ public class NotesDatabase extends AbstractNotesDatabase {
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if (oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
+                if ((oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0)  &&
+                    (oldNote.getTitle().equals(NoteUtil.generateNonEmptyNoteTitle("", getContext())))) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, getContext());
                 } else {
                     title = oldNote.getTitle();
