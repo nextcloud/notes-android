@@ -1,17 +1,14 @@
-package it.niedermann.owncloud.notes.android.fragment;
+package it.niedermann.owncloud.notes.edit;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import it.niedermann.owncloud.notes.edit.SearchableBaseNoteFragment;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
 public class SearchableBaseNoteFragmentTest {
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void testCountOccurrencesFixed() {
         try {
@@ -31,16 +28,17 @@ public class SearchableBaseNoteFragmentTest {
                 System.out.println("Total Time: " + (endTime - startTime) + " ms");
                 System.out.println("Total Times: " + num);
                 System.out.println("String Size: " + (sb.length() / 1024.0) + " K");
-                assertEquals((int) Math.pow(2, count), num);
+                Assert.assertEquals((int) Math.pow(2, count), num);
                 System.out.println();
             }
 
         } catch (Exception e) {
-            fail(Arrays.toString(e.getStackTrace()));
+            Assert.fail(Arrays.toString(e.getStackTrace()));
             System.out.println("Test Count Occurrences Fixed" + Arrays.toString(e.getStackTrace()));
         }
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     public void testNullOrEmptyInput() {
         try {
@@ -49,16 +47,16 @@ public class SearchableBaseNoteFragmentTest {
 
             int num;
             num = (int) method.invoke(null, null, "Hi");
-            assertEquals(0, num);
+            Assert.assertEquals(0, num);
             num = (int) method.invoke(null, "Hi my name is Mike Chester Wang", null);
-            assertEquals(0, num);
+            Assert.assertEquals(0, num);
             num = (int) method.invoke(null, "", "Hi");
-            assertEquals(0, num);
+            Assert.assertEquals(0, num);
             num = (int) method.invoke(null, "Hi my name is Mike Chester Wang", "");
-            assertEquals(0, num);
+            Assert.assertEquals(0, num);
 
         } catch (Exception e) {
-            fail(Arrays.toString(e.getStackTrace()));
+            Assert.fail(Arrays.toString(e.getStackTrace()));
             System.out.println("Test Null Or Empty Input" + Arrays.toString(e.getStackTrace()));
         }
     }

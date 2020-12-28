@@ -1,5 +1,21 @@
 # Frequently asked questions
 
+## Why aren't there any buttons to apply formatting
+
+We use context based formatting to avoid distractions while writing. This is not "Word on Android".
+
+You have some shortcuts available in a context, e.g.
+- when you select some text, you can make it bold, italic, insert a link, etc.:
+
+  ![Selection formatting](https://user-images.githubusercontent.com/4741199/102229887-89cc3e80-3eec-11eb-8398-10073bbb7359.png)
+- when you hit the selector thumb without selected text, you will have actions in the context of the current line, like making it a checkbox:
+
+  ![Line formatting](https://user-images.githubusercontent.com/4741199/102230123-c5ff9f00-3eec-11eb-990e-c4c25e016b5d.png)
+
+This approach allows us to only show the actions that make sense for the current context.
+
+We plan to extend this system further in the future and might add toggles for headlines etc.
+
 ## I have experienced an error
 
 Sorry. There are so many different environments, that it is impossible for us to test each and every constellation.

@@ -8,9 +8,9 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import com.yydcdut.markdown.MarkdownProcessor;
-import com.yydcdut.markdown.syntax.text.TextFactory;
+import java.util.NoSuchElementException;
 
+import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
@@ -20,11 +20,9 @@ import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 
-import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.parseCompat;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
-    private final MarkdownProcessor markdownProcessor;
     private final Context context;
     private final int appWidgetId;
 
@@ -36,18 +34,15 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     SingleNoteWidgetFactory(Context context, Intent intent) {
         this.context = context;
-        appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+        this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
-        db = NotesDatabase.getInstance(context);
-        markdownProcessor = new MarkdownProcessor(this.context);
-        markdownProcessor.factory(TextFactory.create());
+        this.db = NotesDatabase.getInstance(context);
         final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
         if (data != null) {
             darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
         } else {
             Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
         }
-        markdownProcessor.config(MarkDownUtil.getMarkDownConfiguration(this.context, darkModeActive).build());
     }
 
     @Override
@@ -109,12 +104,12 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         if (darkModeActive) {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv_dark, parseCompat(markdownProcessor, note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv_dark, MarkdownUtil.renderForWidget(context, note.getContent()));
 
         } else {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv, parseCompat(markdownProcessor, note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForWidget(context, note.getContent()));
         }
 
         return note_content;
