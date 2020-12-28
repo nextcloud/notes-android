@@ -389,8 +389,9 @@ public class NoteServerSyncHelper {
                                 remoteNote = notesClient.createNote(ssoAccount, note).getNote();
                                 db.getNoteDao().updateRemoteId(note.getId(), remoteNote.getRemoteId());
                             }
-                            // Please note, that db.updateNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            db.getNoteDao().updateIfModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
+                            // Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+                            // TODO: check if the Rooms implementation does this correctly!
+                            db.getNoteDao().updateIfNotModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()), note.getContent(), note.getFavorite(), note.getNote().getCategoryId());
                             db.getNoteDao().updateCategory(note.getId(), db.getOrCreateCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
                             break;
                         case LOCAL_DELETED:
