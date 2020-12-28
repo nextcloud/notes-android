@@ -61,10 +61,6 @@ public class Account implements Serializable {
     @Nullable
     private String capabilitiesETag;
 
-    @Nullable
-    @Ignore
-    private ApiVersion preferredApiVersion;
-
     public Account() {
         // Default constructor
     }
@@ -78,20 +74,12 @@ public class Account implements Serializable {
 
     @Nullable
     public ApiVersion getPreferredApiVersion() {
-        return preferredApiVersion;
-    }
-
-    /**
-     * @param availableApiVersions <code>["0.2", "1.0", ...]</code>
-     */
-    public void setPreferredApiVersion(@Nullable String availableApiVersions) {
         // TODO move this logic to NotesClient?
         try {
-            if (availableApiVersions == null) {
-                this.preferredApiVersion = null;
-                return;
+            if (apiVersion == null) {
+                return null;
             }
-            final JSONArray versionsArray = new JSONArray(availableApiVersions);
+            final JSONArray versionsArray = new JSONArray(apiVersion);
             final Collection<ApiVersion> supportedApiVersions = new HashSet<>(versionsArray.length());
             for (int i = 0; i < versionsArray.length(); i++) {
                 final ApiVersion parsedApiVersion = ApiVersion.of(versionsArray.getString(i));
@@ -102,10 +90,10 @@ public class Account implements Serializable {
                     }
                 }
             }
-            this.preferredApiVersion = Collections.max(supportedApiVersions);
+            return Collections.max(supportedApiVersions);
         } catch (JSONException | NoSuchElementException e) {
             e.printStackTrace();
-            this.preferredApiVersion = null;
+            return null;
         }
     }
 
@@ -223,7 +211,7 @@ public class Account implements Serializable {
             return false;
         if (capabilitiesETag != null ? !capabilitiesETag.equals(account.capabilitiesETag) : account.capabilitiesETag != null)
             return false;
-        return preferredApiVersion != null ? preferredApiVersion.equals(account.preferredApiVersion) : account.preferredApiVersion == null;
+        return true;
     }
 
     @Override
@@ -238,7 +226,6 @@ public class Account implements Serializable {
         result = 31 * result + color;
         result = 31 * result + textColor;
         result = 31 * result + (capabilitiesETag != null ? capabilitiesETag.hashCode() : 0);
-        result = 31 * result + (preferredApiVersion != null ? preferredApiVersion.hashCode() : 0);
         return result;
     }
 
@@ -255,7 +242,6 @@ public class Account implements Serializable {
                 ", color=" + color +
                 ", textColor=" + textColor +
                 ", capabilitiesETag='" + capabilitiesETag + '\'' +
-                ", preferredApiVersion=" + preferredApiVersion +
                 '}';
     }
 }

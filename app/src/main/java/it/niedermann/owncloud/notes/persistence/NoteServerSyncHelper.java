@@ -481,7 +481,7 @@ public class NoteServerSyncHelper {
                 db.getAccountDao().updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
                 try {
                     if (db.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
-                        localAccount.setPreferredApiVersion(response.getSupportedApiVersions());
+                        localAccount.setApiVersion(response.getSupportedApiVersions());
                     }
                 } catch (Exception e) {
                     exceptions.add(e);
