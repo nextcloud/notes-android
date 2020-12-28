@@ -439,7 +439,7 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
                 final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
-                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified().getTimeInMillis(), localAccount.getETag());
+                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified().getTimeInMillis()/1000, localAccount.getETag());
                 List<NoteWithCategory> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note

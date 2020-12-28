@@ -89,6 +89,14 @@ public abstract class NotesClient {
         this.appContext = appContext;
     }
 
+    /**
+     * Gets the list of notes from the server.
+     * @param ssoAccount Account to be used
+     * @param lastModified Last modified time of a former response (Unix timestamp in seconds!). All notes older than this time will be skipped.
+     * @param lastETag ETag of a former response. If nothing changed, the response will be 304 NOT MODIFIED.
+     * @return list of notes
+     * @throws Exception
+     */
     abstract NotesResponse getNotes(SingleSignOnAccount ssoAccount, long lastModified, String lastETag) throws Exception;
 
     abstract NoteResponse createNote(SingleSignOnAccount ssoAccount, NoteWithCategory note) throws Exception;
@@ -165,8 +173,8 @@ public abstract class NotesClient {
 
         try {
             Log.v(TAG, ssoAccount.name + " → " + nextcloudRequest.getMethod() + " " + nextcloudRequest.getUrl() + " ");
+            Log.d(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
             final Response response = SSOClient.requestFilesApp(appContext, ssoAccount, nextcloudRequest);
-            Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
 
             final BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
             String line;
