@@ -35,7 +35,7 @@ import java.util.Set;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse;
@@ -43,6 +43,8 @@ import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
 import static androidx.lifecycle.Transformations.distinctUntilChanged;
+import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
+import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
@@ -364,11 +366,11 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pushLocalChanges()");
 
             boolean success = true;
-            List<NoteWithCategory> notes = db.getNoteDao().getLocalModifiedNotes(localAccount.getId());
-            for (NoteWithCategory note : notes) {
+            List<Note> notes = db.getNoteDao().getLocalModifiedNotes(localAccount.getId());
+            for (Note note : notes) {
                 Log.d(TAG, "   Process Local Note: " + note);
                 try {
-                    NoteWithCategory remoteNote;
+                    Note remoteNote;
                     switch (note.getStatus()) {
                         case LOCAL_EDITED:
                             Log.v(TAG, "   ...create/edit");
@@ -391,8 +393,7 @@ public class NoteServerSyncHelper {
                             }
                             // Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
                             // TODO: check if the Rooms implementation does this correctly!
-                            db.getNoteDao().updateIfNotModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()), note.getContent(), note.getFavorite(), note.getNote().getCategoryId());
-                            db.getNoteDao().updateCategory(note.getId(), db.getOrCreateCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
+                            db.getNoteDao().updateIfNotModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()), note.getContent(), note.getCategory(), note.getFavorite());
                             break;
                         case LOCAL_DELETED:
                             if (note.getRemoteId() == null) {
@@ -410,7 +411,7 @@ public class NoteServerSyncHelper {
                                 }
                             }
                             // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                            db.getNoteDao().deleteByNoteId(note.getId(), DBStatus.LOCAL_DELETED);
+                            db.getNoteDao().deleteByNoteId(note.getId(), LOCAL_DELETED);
                             break;
                         default:
                             throw new IllegalStateException("Unknown State of Note " + note + ": " + note.getStatus());
@@ -441,10 +442,10 @@ public class NoteServerSyncHelper {
             try {
                 final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
                 final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified().getTimeInMillis()/1000, localAccount.getETag());
-                List<NoteWithCategory> remoteNotes = response.getNotes();
+                List<Note> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note
-                for (NoteWithCategory remoteNote : remoteNotes) {
+                for (Note remoteNote : remoteNotes) {
                     Log.v(TAG, "   Process Remote Note: " + remoteNote);
                     remoteIDs.add(remoteNote.getRemoteId());
                     if (remoteNote.getModified() == null) {
@@ -455,7 +456,6 @@ public class NoteServerSyncHelper {
                         if (localId != null) {
                             db.getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(
                                     localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
-                            db.getNoteDao().updateCategory(localId, db.getOrCreateCategoryIdByTitle(localAccount.getId(), remoteNote.getCategory()));
                         } else {
                             Log.e(TAG, "Tried to update note from server, but local id of note is null. " + remoteNote);
                         }

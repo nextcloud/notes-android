@@ -44,7 +44,6 @@ import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitle
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
@@ -72,10 +71,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     private Account localAccount;
 
-    protected NoteWithCategory note;
+    protected Note note;
     // TODO do we really need this? The reference to note is currently the same
     @Nullable
-    private NoteWithCategory originalNote;
+    private Note originalNote;
     private int originalScrollY;
     protected NotesDatabase db;
     private NoteFragmentListener listener;
@@ -111,18 +110,18 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccount.getAccountName());
                     }
                     isNew = false;
-                    note = originalNote = db.getNoteDao().getFullNoteWithCategory(id);
+                    note = originalNote = db.getNoteDao().getNoteById(id);
                 } else {
-                    NoteWithCategory cloudNote = (NoteWithCategory) requireArguments().getSerializable(PARAM_NEWNOTE);
+                    Note cloudNote = (Note) requireArguments().getSerializable(PARAM_NEWNOTE);
                     String content = requireArguments().getString(PARAM_CONTENT);
                     if (cloudNote == null) {
                         if (content == null) {
                             throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                         } else {
-                            note = new NoteWithCategory(new Note(-1, -1L, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), DBStatus.VOID, -1, "", 0));
+                            note = new Note(-1, -1L, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, getString(R.string.category_readonly), false, null, DBStatus.VOID, -1, "", 0);
                         }
                     } else {
-                        final LiveData<NoteWithCategory> createLiveData = db.addNoteAndSync(localAccount, cloudNote);
+                        final LiveData<Note> createLiveData = db.addNoteAndSync(localAccount, cloudNote);
                         createLiveData.observe(requireActivity(), (createdNote) -> {
                             note = createdNote;
                             originalNote = null;
@@ -131,8 +130,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     }
                 }
             } else {
-                note = (NoteWithCategory) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
-                originalNote = (NoteWithCategory) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
+                note = (Note) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
+                originalNote = (Note) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
             }
             setHasOptionsMenu(true);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -150,7 +149,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         if (scrollView != null) {
             scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
                 if (scrollView.getScrollY() > 0) {
-                    note.getNote().setScrollY(scrollView.getScrollY());
+                    note.setScrollY(scrollView.getScrollY());
                 }
             });
         }
@@ -356,7 +355,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Override
     public void onTitleEdited(String newTitle) {
         titleModified = true;
-        note.getNote().setTitle(newTitle);
+        note.setTitle(newTitle);
         note = db.updateNoteAndSync(localAccount, note, note.getContent(), newTitle, null);
         listener.onNoteUpdated(note);
     }
@@ -402,6 +401,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public interface NoteFragmentListener {
         void close();
 
-        void onNoteUpdated(NoteWithCategory note);
+        void onNoteUpdated(Note note);
     }
 }

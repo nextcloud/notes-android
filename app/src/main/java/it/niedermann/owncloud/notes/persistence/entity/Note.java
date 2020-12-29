@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.Item;
 
 @Entity(
         foreignKeys = {
@@ -21,23 +22,18 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
                         parentColumns = "id",
                         childColumns = "accountId",
                         onDelete = ForeignKey.CASCADE
-                ),
-                @ForeignKey(
-                        entity = Category.class,
-                        parentColumns = "id",
-                        childColumns = "categoryId"
                 )
         },
         indices = {
                 @Index(name = "IDX_NOTE_ACCOUNTID", value = "accountId"),
-                @Index(name = "IDX_NOTE_CATEGORY", value = "categoryId"),
+                @Index(name = "IDX_NOTE_CATEGORY", value = "category"),
                 @Index(name = "IDX_NOTE_FAVORITE", value = "favorite"),
                 @Index(name = "IDX_NOTE_MODIFIED", value = "modified"),
                 @Index(name = "IDX_NOTE_REMOTEID", value = "remoteId"),
                 @Index(name = "IDX_NOTE_STATUS", value = "status")
         }
 )
-public class Note implements Serializable {
+public class Note implements Serializable, Item {
     @PrimaryKey(autoGenerate = true)
     private long id;
     @Nullable
@@ -48,6 +44,9 @@ public class Note implements Serializable {
     @NonNull
     @ColumnInfo(defaultValue = "")
     private String title = "";
+    @NonNull
+    @ColumnInfo(defaultValue = "")
+    private String category = "";
     @Nullable
     private Calendar modified;
     @NonNull
@@ -55,8 +54,6 @@ public class Note implements Serializable {
     private String content = "";
     @ColumnInfo(defaultValue = "0")
     private boolean favorite = false;
-    @Nullable
-    private Long categoryId;
     @Nullable
     private String eTag;
     @NonNull
@@ -70,18 +67,19 @@ public class Note implements Serializable {
     }
 
     @Ignore
-    public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, boolean favorite, @Nullable String eTag) {
+    public Note(@Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String eTag) {
         this.remoteId = remoteId;
         this.title = title;
         this.modified = modified;
         this.content = content;
         this.favorite = favorite;
+        this.category = category;
         this.eTag = eTag;
     }
 
     @Ignore
-    public Note(long id, @Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, boolean favorite, @Nullable String etag, @NonNull DBStatus status, long accountId, @NonNull String excerpt, int scrollY) {
-        this(remoteId, modified, title, content, favorite, etag);
+    public Note(long id, @Nullable Long remoteId, @Nullable Calendar modified, @NonNull String title, @NonNull String content, @NonNull String category, boolean favorite, @Nullable String etag, @NonNull DBStatus status, long accountId, @NonNull String excerpt, int scrollY) {
+        this(remoteId, modified, title, content, category, favorite, etag);
         this.id = id;
         this.status = status;
         this.accountId = accountId;
@@ -95,6 +93,15 @@ public class Note implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    @NonNull
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(@NonNull String category) {
+        this.category = category;
     }
 
     @Nullable
@@ -159,15 +166,6 @@ public class Note implements Serializable {
     }
 
     @Nullable
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(@Nullable Long categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    @Nullable
     public String getETag() {
         return eTag;
     }
@@ -208,11 +206,10 @@ public class Note implements Serializable {
             return false;
         if (status != note.status) return false;
         if (!title.equals(note.title)) return false;
+        if (!category.equals(note.category)) return false;
         if (modified != null ? !modified.equals(note.modified) : note.modified != null)
             return false;
         if (!content.equals(note.content)) return false;
-        if (categoryId != null ? !categoryId.equals(note.categoryId) : note.categoryId != null)
-            return false;
         if (eTag != null ? !eTag.equals(note.eTag) : note.eTag != null) return false;
         return excerpt.equals(note.excerpt);
     }
@@ -224,29 +221,30 @@ public class Note implements Serializable {
         result = 31 * result + (int) (accountId ^ (accountId >>> 32));
         result = 31 * result + status.hashCode();
         result = 31 * result + title.hashCode();
+        result = 31 * result + category.hashCode();
         result = 31 * result + (modified != null ? modified.hashCode() : 0);
         result = 31 * result + content.hashCode();
         result = 31 * result + (favorite ? 1 : 0);
-        result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
         result = 31 * result + (eTag != null ? eTag.hashCode() : 0);
         result = 31 * result + excerpt.hashCode();
         result = 31 * result + scrollY;
         return result;
     }
 
-    @NonNull
     @Override
     public String toString() {
-        return "NoteEntity{" +
+        return "Note{" +
                 "id=" + id +
                 ", remoteId=" + remoteId +
                 ", accountId=" + accountId +
-                ", categoryId=" + categoryId +
                 ", status=" + status +
                 ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
                 ", modified=" + modified +
+                ", content='" + content + '\'' +
                 ", favorite=" + favorite +
                 ", eTag='" + eTag + '\'' +
+                ", excerpt='" + excerpt + '\'' +
                 ", scrollY=" + scrollY +
                 '}';
     }

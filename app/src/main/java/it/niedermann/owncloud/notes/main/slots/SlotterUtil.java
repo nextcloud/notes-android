@@ -10,7 +10,7 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.items.section.SectionItem;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
@@ -21,9 +21,9 @@ public class SlotterUtil {
     }
 
     @NonNull
-    public static List<Item> fillListByCategory(@NonNull List<NoteWithCategory> noteList, @Nullable String currentCategory) {
+    public static List<Item> fillListByCategory(@NonNull List<Note> noteList, @Nullable String currentCategory) {
         List<Item> itemList = new ArrayList<>();
-        for (NoteWithCategory note : noteList) {
+        for (Note note : noteList) {
             if (currentCategory != null && !currentCategory.equals(note.getCategory())) {
                 itemList.add(new SectionItem(NoteUtil.extendCategory(note.getCategory())));
             }
@@ -35,13 +35,13 @@ public class SlotterUtil {
     }
 
     @NonNull
-    public static List<Item> fillListByTime(@NonNull Context context, @NonNull List<NoteWithCategory> noteList) {
+    public static List<Item> fillListByTime(@NonNull Context context, @NonNull List<Note> noteList) {
         List<Item> itemList = new ArrayList<>();
         Timeslotter timeslotter = new Timeslotter(context);
         String lastTimeslot = null;
         for (int i = 0; i < noteList.size(); i++) {
-            NoteWithCategory currentNote = noteList.get(i);
-            String timeslot = timeslotter.getTimeslot(currentNote.getNote());
+            Note currentNote = noteList.get(i);
+            String timeslot = timeslotter.getTimeslot(currentNote);
             if (i > 0 && !timeslot.equals(lastTimeslot)) {
                 itemList.add(new SectionItem(timeslot));
             }
@@ -53,11 +53,11 @@ public class SlotterUtil {
     }
 
     @NonNull
-    public static List<Item> fillListByInitials(@NonNull Context context, @NonNull List<NoteWithCategory> noteList) {
+    public static List<Item> fillListByInitials(@NonNull Context context, @NonNull List<Note> noteList) {
         List<Item> itemList = new ArrayList<>();
         String lastInitials = null;
         for (int i = 0; i < noteList.size(); i++) {
-            NoteWithCategory currentNote = noteList.get(i);
+            Note currentNote = noteList.get(i);
             String initials = currentNote.getTitle().substring(0, 1).toUpperCase();
             if (!initials.matches("[A-Z\\u00C0-\\u00DF]")) {
                 initials = initials.matches("[\\u0250-\\uFFFF]") ? context.getString(R.string.simple_other) : "#";

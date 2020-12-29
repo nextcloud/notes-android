@@ -31,7 +31,7 @@ import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
@@ -50,7 +50,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     }
 
     @CallSuper
-    public void bind(boolean isSelected, @NonNull NoteWithCategory note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
+    public void bind(boolean isSelected, @NonNull Note note, boolean showCategory, int mainColor, int textColor, @Nullable CharSequence searchQuery) {
         itemView.setSelected(isSelected);
         itemView.setOnClickListener((view) -> noteClickListener.onNoteClick(getLayoutPosition(), view));
     }

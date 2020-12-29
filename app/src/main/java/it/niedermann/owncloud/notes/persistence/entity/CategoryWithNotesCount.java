@@ -2,8 +2,8 @@ package it.niedermann.owncloud.notes.persistence.entity;
 
 public class CategoryWithNotesCount {
 
-    private Long id;
-    private String title;
+    private long accountId;
+    private String category;
     private Integer totalNotes;
 
     public Integer getTotalNotes() {
@@ -14,20 +14,20 @@ public class CategoryWithNotesCount {
         this.totalNotes = totalNotes;
     }
 
-    public String getTitle() {
-        return title;
+    public long getAccountId() {
+        return accountId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 
-    public Long getId() {
-        return id;
+    public String getCategory() {
+        return category;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     @Override
@@ -37,15 +37,16 @@ public class CategoryWithNotesCount {
 
         CategoryWithNotesCount that = (CategoryWithNotesCount) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (accountId != that.accountId) return false;
+        if (category != null ? !category.equals(that.category) : that.category != null)
+            return false;
         return totalNotes != null ? totalNotes.equals(that.totalNotes) : that.totalNotes == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
+        int result = (int) (accountId ^ (accountId >>> 32));
+        result = 31 * result + (category != null ? category.hashCode() : 0);
         result = 31 * result + (totalNotes != null ? totalNotes.hashCode() : 0);
         return result;
     }

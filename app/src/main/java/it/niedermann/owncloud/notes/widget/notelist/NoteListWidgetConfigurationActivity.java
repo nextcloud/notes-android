@@ -99,13 +99,13 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                         }
                         case UNCATEGORIZED: {
                             data.setMode(MODE_DISPLAY_CATEGORY);
-                            data.setCategoryId(null);
+                            data.setCategory(null);
                         }
                         case DEFAULT_CATEGORY:
                         default: {
                             if (item.getClass() == NavigationItem.CategoryNavigationItem.class) {
                                 data.setMode(MODE_DISPLAY_CATEGORY);
-                                data.setCategoryId(((NavigationItem.CategoryNavigationItem) item).categoryId);
+                                data.setCategory(((NavigationItem.CategoryNavigationItem) item).category);
                             } else {
                                 data.setMode(MODE_DISPLAY_ALL);
                                 Log.e(TAG, "Unknown item navigation type. Fallback to show " + RECENT);
@@ -141,7 +141,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapterCategories);
         distinctUntilChanged(
-                map(db.getCategoryDao().getCategoriesLiveData(localAccount.getId()), fromDatabase -> {
+                map(db.getNoteDao().getCategoriesLiveData(localAccount.getId()), fromDatabase -> {
                     List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(NoteListWidgetConfigurationActivity.this, fromDatabase);
 
                     ArrayList<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);

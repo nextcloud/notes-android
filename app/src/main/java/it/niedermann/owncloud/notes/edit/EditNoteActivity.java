@@ -26,9 +26,7 @@ import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
@@ -164,12 +162,14 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     private void launchNewNote() {
         Intent intent = getIntent();
 
-        String categoryTitle = null;
+        String categoryTitle = "";
         boolean favorite = false;
         if (intent.hasExtra(PARAM_CATEGORY)) {
-            NavigationCategory categoryPreselection = (NavigationCategory) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
-            Category category = categoryPreselection.getCategory();
-            categoryTitle = category == null ? "" : category.getTitle();
+            final NavigationCategory categoryPreselection = (NavigationCategory) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
+            final String category = categoryPreselection.getCategory();
+            if(category != null) {
+                categoryTitle = category;
+            }
             favorite = categoryPreselection.getType() == FAVORITES;
         }
 
@@ -188,7 +188,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (content == null) {
             content = "";
         }
-        NoteWithCategory newNote = new NoteWithCategory(new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, null), categoryTitle);
+        Note newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, categoryTitle, favorite, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
@@ -259,7 +259,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     @Override
-    public void onNoteUpdated(NoteWithCategory note) {
+    public void onNoteUpdated(Note note) {
         if (note != null) {
             binding.toolbar.setTitle(note.getTitle());
             if (TextUtils.isEmpty(note.getCategory())) {

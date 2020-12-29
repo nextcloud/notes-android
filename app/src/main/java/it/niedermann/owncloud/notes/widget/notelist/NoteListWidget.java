@@ -46,10 +46,7 @@ public class NoteListWidget extends AppWidgetProvider {
             if (data != null) {
                 final Account localAccount = db.getAccountDao().getAccount(data.getAccountId());
 
-                String category = null;
-                if (data.getCategoryId() != null) {
-                    category = db.getCategoryDao().getCategoryTitleById(data.getCategoryId());
-                }
+                String category = data.getCategory();
 
                 darkTheme = DarkModeSetting.fromModeID(data.getThemeMode());
 
@@ -72,7 +69,7 @@ public class NoteListWidget extends AppWidgetProvider {
                         new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY,
                                 data.getMode() == MODE_DISPLAY_STARRED
                                         ? new NavigationCategory(ENavigationCategoryType.FAVORITES)
-                                        : new NavigationCategory(db.getCategoryDao().getCategoryByTitle(localAccount.getId(), category))),
+                                        : new NavigationCategory(localAccount.getId(), category)),
                         PendingIntent.FLAG_UPDATE_CURRENT);
 
                 PendingIntent templatePI = PendingIntent.getActivity(context, PENDING_INTENT_EDIT_NOTE_RQ,

@@ -5,8 +5,6 @@ import androidx.annotation.Nullable;
 
 import java.io.Serializable;
 
-import it.niedermann.owncloud.notes.persistence.entity.Category;
-
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.DEFAULT_CATEGORY;
 
 public class NavigationCategory implements Serializable {
@@ -14,19 +12,22 @@ public class NavigationCategory implements Serializable {
     @NonNull
     private final ENavigationCategoryType type;
     @Nullable
-    private final Category category;
+    private final String category;
+    private final long accountId;
 
     public NavigationCategory(@NonNull ENavigationCategoryType type) {
         if (type == DEFAULT_CATEGORY) {
-            throw new IllegalArgumentException("If you want to provide a " + DEFAULT_CATEGORY + ", call the constructor with a " + Category.class.getSimpleName());
+            throw new IllegalArgumentException("If you want to provide a " + DEFAULT_CATEGORY + ", call the constructor with an accountId and category as arguments");
         }
         this.type = type;
         this.category = null;
+        this.accountId = Long.MIN_VALUE;
     }
 
-    public NavigationCategory(@NonNull Category category) {
+    public NavigationCategory(long accountId, @Nullable String category) {
         this.type = DEFAULT_CATEGORY;
         this.category = category;
+        this.accountId = accountId;
     }
 
     @NonNull
@@ -34,8 +35,12 @@ public class NavigationCategory implements Serializable {
         return type;
     }
 
+    public long getAccountId() {
+        return accountId;
+    }
+
     @Nullable
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
@@ -46,6 +51,7 @@ public class NavigationCategory implements Serializable {
 
         NavigationCategory that = (NavigationCategory) o;
 
+        if (accountId != that.accountId) return false;
         if (type != that.type) return false;
         return category != null ? category.equals(that.category) : that.category == null;
     }
@@ -54,6 +60,7 @@ public class NavigationCategory implements Serializable {
     public int hashCode() {
         int result = type.hashCode();
         result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + (int) (accountId ^ (accountId >>> 32));
         return result;
     }
 
@@ -62,7 +69,8 @@ public class NavigationCategory implements Serializable {
     public String toString() {
         return "NavigationCategory{" +
                 "type=" + type +
-                ", category=" + category +
+                ", category='" + category + '\'' +
+                ", accountId=" + accountId +
                 '}';
     }
 }

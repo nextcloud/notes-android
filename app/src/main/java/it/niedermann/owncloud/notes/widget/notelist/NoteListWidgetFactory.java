@@ -18,10 +18,8 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
-import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
@@ -35,7 +33,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final NotesListWidgetData data;
     private final boolean darkTheme;
     private NotesDatabase db;
-    private List<NoteWithCategory> noteEntities;
+    private List<Note> noteEntities;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
@@ -49,7 +47,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onCreate() {
-        final LiveData<List<NoteWithCategory>> noteEntitiesLiveData;
+        final LiveData<List<Note>> noteEntitiesLiveData;
         try {
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
@@ -61,8 +59,8 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                     break;
                 case MODE_DISPLAY_CATEGORY:
                 default:
-                    if (data.getCategoryId() != null) {
-                        noteEntitiesLiveData = db.getNoteDao().searchCategoryByModified(data.getAccountId(), "%", db.getCategoryDao().getCategoryTitleById(data.getCategoryId()));
+                    if (data.getCategory() != null) {
+                        noteEntitiesLiveData = db.getNoteDao().searchCategoryByModified(data.getAccountId(), "%", data.getCategory());
                     } else {
                         noteEntitiesLiveData = db.getNoteDao().searchUncategorizedByModified(data.getAccountId(), "%");
                     }
@@ -102,7 +100,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             return null;
         }
 
-        Note note = noteEntities.get(position).getNote();
+        Note note = noteEntities.get(position);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 

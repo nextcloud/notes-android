@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
+import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
 @Dao
@@ -27,45 +27,29 @@ public interface NoteDao {
     @Query("DELETE FROM NOTE WHERE accountId = :accountId")
     int deleteByAccountId(Long accountId);
 
-    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id " +
-            "WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND (NOTE.title LIKE :query OR content LIKE :query) " +
-            "ORDER BY favorite DESC, NOTE.modified DESC")
-    LiveData<List<NoteWithCategory>> searchRecentByModified(long accountId, String query);
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) ORDER BY favorite DESC, modified DESC")
+    LiveData<List<Note>> searchRecentByModified(long accountId, String query);
 
-    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id " +
-            "WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND (NOTE.title LIKE :query OR content LIKE :query) " +
-            "ORDER BY favorite DESC, NOTE.title COLLATE NOCASE ASC")
-    LiveData<List<NoteWithCategory>> searchRecentLexicographically(long accountId, String query);
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) ORDER BY favorite DESC, title COLLATE NOCASE ASC")
+    LiveData<List<Note>> searchRecentLexicographically(long accountId, String query);
 
-    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id " +
-            "WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND (NOTE.title LIKE :query OR content LIKE :query) AND favorite = 1 " +
-            "ORDER BY NOTE.modified DESC")
-    LiveData<List<NoteWithCategory>> searchFavoritesByModified(long accountId, String query);
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND favorite = 1 ORDER BY modified DESC")
+    LiveData<List<Note>> searchFavoritesByModified(long accountId, String query);
 
-    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id " +
-            "WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND (NOTE.title LIKE :query OR content LIKE :query) AND favorite = 1 " +
-            "ORDER BY NOTE.title COLLATE NOCASE ASC")
-    LiveData<List<NoteWithCategory>> searchFavoritesLexicographically(long accountId, String query);
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND favorite = 1 ORDER BY title COLLATE NOCASE ASC")
+    LiveData<List<Note>> searchFavoritesLexicographically(long accountId, String query);
 
-    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id " +
-            "WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND (NOTE.title LIKE :query OR content LIKE :query) AND CATEGORY.title = '' " +
-            "ORDER BY favorite DESC, NOTE.modified DESC")
-    LiveData<List<NoteWithCategory>> searchUncategorizedByModified(long accountId, String query);
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND category = '' ORDER BY favorite DESC, modified DESC")
+    LiveData<List<Note>> searchUncategorizedByModified(long accountId, String query);
 
-    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, NOTE.title, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id " +
-            "WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND (NOTE.title LIKE :query OR content LIKE :query) AND CATEGORY.title = '' " +
-            "ORDER BY favorite DESC, NOTE.title COLLATE NOCASE ASC")
-    LiveData<List<NoteWithCategory>> searchUncategorizedLexicographically(long accountId, String query);
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND category = '' ORDER BY favorite DESC, title COLLATE NOCASE ASC")
+    LiveData<List<Note>> searchUncategorizedLexicographically(long accountId, String query);
 
-    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id " +
-            "WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND (NOTE.title LIKE :query OR content LIKE :query) AND (CATEGORY.title = :category OR CATEGORY.title LIKE :category || '/%') " +
-            "ORDER BY CATEGORY.title, NOTE.favorite DESC, NOTE.modified DESC")
-    LiveData<List<NoteWithCategory>> searchCategoryByModified(long accountId, String query, String category);
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND (category = :category OR category LIKE :category || '/%') ORDER BY category, favorite DESC, modified DESC")
+    LiveData<List<Note>> searchCategoryByModified(long accountId, String query, String category);
 
-    @Query("SELECT NOTE.id, NOTE.accountId, NOTE.title, NOTE.excerpt, NOTE.favorite, NOTE.modified, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id " +
-            "WHERE NOTE.accountId = :accountId AND status != 'LOCAL_DELETED' AND (NOTE.title LIKE :query OR content LIKE :query) AND (CATEGORY.title = :category OR CATEGORY.title LIKE :category || '/%') " +
-            "ORDER BY CATEGORY.title, NOTE.favorite DESC, NOTE.title COLLATE NOCASE ASC")
-    LiveData<List<NoteWithCategory>> searchCategoryLexicographically(long accountId, String query, String category);
+    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND (category = :category OR category LIKE :category || '/%') ORDER BY category, favorite DESC, title COLLATE NOCASE ASC")
+    LiveData<List<Note>> searchCategoryLexicographically(long accountId, String query, String category);
 
     @Query("DELETE FROM NOTE WHERE id = :id AND status = :forceDBStatus")
     void deleteByNoteId(long id, DBStatus forceDBStatus);
@@ -73,17 +57,14 @@ public interface NoteDao {
     @Query("UPDATE NOTE SET scrollY = :scrollY WHERE id = :id")
     void updateScrollY(long id, int scrollY);
 
-    @Query("SELECT NOTE.*, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.id = :id")
-    NoteWithCategory getFullNoteWithCategory(long id);
-
-    @Query("SELECT NOTE.*, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE NOTE.id = :id AND NOTE.accountId = :accountId AND status != :accountId")
-    LiveData<NoteWithCategory> getNoteWithCategoryLiveData(long accountId, long id);
+    @Query("SELECT * FROM NOTE WHERE id = :id")
+    Note getNoteById(long id);
 
     @Query("UPDATE NOTE SET status = :status WHERE id = :id")
     void updateStatus(long id, DBStatus status);
 
-    @Query("UPDATE NOTE SET categoryId = :categoryId WHERE id = :id")
-    void updateCategory(long id, long categoryId);
+    @Query("UPDATE NOTE SET category = :category WHERE id = :id")
+    void updateCategory(long id, String category);
 
     /**
      * Gets all the remoteIds of all not deleted notes of an account
@@ -117,8 +98,8 @@ public interface NoteDao {
      *
      * @return {@link List<Note>}
      */
-    @Query("SELECT NOTE.*, CATEGORY.title as 'category' FROM NOTE INNER JOIN CATEGORY ON categoryId = CATEGORY.id WHERE status != '' AND NOTE.accountId = :accountId")
-    List<NoteWithCategory> getLocalModifiedNotes(long accountId);
+    @Query("SELECT * FROM NOTE WHERE status != '' AND accountId = :accountId")
+    List<Note> getLocalModifiedNotes(long accountId);
 
     @Query("SELECT * FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId ORDER BY modified DESC LIMIT 4")
     List<Note> getRecentNotes(long accountId);
@@ -133,17 +114,31 @@ public interface NoteDao {
      * used by: {@link NoteServerSyncHelper.SyncTask#pushLocalChanges()} update only, if not modified locally during the synchronization
      * (i.e. all (!) user changeable columns (content, favorite, category) must still have the same value), uses reference value gathered at start of synchronization
      */
+    @SuppressWarnings("JavadocReference")
     @Query("UPDATE NOTE SET title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
-            "WHERE id = :id AND content = :oldContent AND favorite = :oldFavorite AND categoryId = :oldCategoryId")
-    void updateIfNotModifiedLocallyDuringSync(long id, Long modified, String title, boolean favorite, String eTag, String content, String excerpt, String oldContent, boolean oldFavorite, long oldCategoryId);
+            "WHERE id = :id AND content = :oldContent AND favorite = :oldFavorite AND category = :oldCategory")
+    int updateIfNotModifiedLocallyDuringSync(long id, Long modified, String title, boolean favorite, String eTag, String content, String excerpt, String oldContent, String oldCategory, boolean oldFavorite);
 
     /**
      * used by: {@link NoteServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
      */
+    @SuppressWarnings("JavadocReference")
     @Query("UPDATE NOTE SET id = :id, title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
-            "WHERE id = :id AND status = '' AND (modified != :modified OR favorite != :favorite OR categoryId != :categoryTitle OR (eTag == NULL OR eTag != :eTag) OR content != :content)")
-    void updateIfNotModifiedLocallyAndRemoteColumnHasChanged(long id, Long modified, String title, boolean favorite, String categoryTitle, String eTag, String content, String excerpt);
+            "WHERE id = :id AND status = '' AND (modified != :modified OR favorite != :favorite OR category != :category OR (eTag == NULL OR eTag != :eTag) OR content != :content)")
+    void updateIfNotModifiedLocallyAndRemoteColumnHasChanged(long id, Long modified, String title, boolean favorite, String category, String eTag, String content, String excerpt);
 
     @Query("SELECT content FROM NOTE WHERE id = :id")
     String getContent(Long id);
+
+    /**
+     * This method return all of the categories with given accountId
+     *
+     * @param accountId The user account Id
+     * @return All of the categories with given accountId
+     */
+    @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId GROUP BY category")
+    LiveData<List<CategoryWithNotesCount>> getCategoriesLiveData(Long accountId);
+
+    @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE category != '' AND STATUS != 'LOCAL_DELETED' AND accountId = :accountId AND category LIKE :searchTerm GROUP BY category")
+    LiveData<List<CategoryWithNotesCount>> searchCategories(Long accountId, String searchTerm);
 }

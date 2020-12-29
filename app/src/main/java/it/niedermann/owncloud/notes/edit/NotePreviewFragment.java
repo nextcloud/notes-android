@@ -170,7 +170,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         })
                         .build());
 
-        TextProcessorChain chain = defaultTextProcessorChain(note.getNote());
+        TextProcessorChain chain = defaultTextProcessorChain(note);
         try {
             binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
         } catch (StringIndexOutOfBoundsException e) {
@@ -210,10 +210,10 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
             try {
-                TextProcessorChain chain = defaultTextProcessorChain(note.getNote());
+                TextProcessorChain chain = defaultTextProcessorChain(note);
                 Account account = db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
                 db.getNoteServerSyncHelper().addCallbackPull(account, () -> {
-                    note = db.getNoteDao().getFullNoteWithCategory(note.getId());
+                    note = db.getNoteDao().getNoteById(note.getId());
                     changedText = note.getContent();
                     binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
                     binding.swiperefreshlayout.setRefreshing(false);

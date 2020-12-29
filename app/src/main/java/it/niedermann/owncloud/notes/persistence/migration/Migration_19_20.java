@@ -38,24 +38,24 @@ public class Migration_19_20 extends Migration {
         db.execSQL("DROP INDEX NOTES_MODIFIED_idx");
 
         db.execSQL("CREATE TABLE `Account` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `url` TEXT NOT NULL DEFAULT '', `userName` TEXT NOT NULL DEFAULT '', `accountName` TEXT NOT NULL DEFAULT '', `eTag` TEXT, `modified` INTEGER, `apiVersion` TEXT, `color` INTEGER NOT NULL DEFAULT -16743735, `textColor` INTEGER NOT NULL DEFAULT -16777216, `capabilitiesETag` TEXT)");
-        db.execSQL("CREATE TABLE `Category` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `accountId` INTEGER NOT NULL, `title` TEXT NOT NULL DEFAULT '', `sortingMethod` INTEGER, FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
-        db.execSQL("CREATE TABLE `Note` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `remoteId` INTEGER, `accountId` INTEGER NOT NULL, `status` TEXT NOT NULL, `title` TEXT NOT NULL DEFAULT '', `modified` INTEGER, `content` TEXT NOT NULL DEFAULT '', `favorite` INTEGER NOT NULL DEFAULT 0, `categoryId` INTEGER, `eTag` TEXT, `excerpt` TEXT NOT NULL DEFAULT '', `scrollY` INTEGER NOT NULL DEFAULT 0, FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`categoryId`) REFERENCES `Category`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )");
-        db.execSQL("CREATE TABLE `NotesListWidgetData` (`mode` INTEGER NOT NULL, `categoryId` INTEGER, `id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `themeMode` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`categoryId`) REFERENCES `Category`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE TABLE `CategoryOptions` (`accountId` INTEGER NOT NULL, `category` TEXT NOT NULL, `sortingMethod` INTEGER, PRIMARY KEY(`accountId`, `category`), FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE TABLE `Note` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `remoteId` INTEGER, `accountId` INTEGER NOT NULL, `status` TEXT NOT NULL, `title` TEXT NOT NULL DEFAULT '', `category` TEXT NOT NULL DEFAULT '', `modified` INTEGER, `content` TEXT NOT NULL DEFAULT '', `favorite` INTEGER NOT NULL DEFAULT 0, `eTag` TEXT, `excerpt` TEXT NOT NULL DEFAULT '', `scrollY` INTEGER NOT NULL DEFAULT 0, FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE TABLE `NotesListWidgetData` (`mode` INTEGER NOT NULL, `category` TEXT, `id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `themeMode` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`accountId`, `category`) REFERENCES `CategoryOptions`(`accountId`, `category`) ON UPDATE NO ACTION ON DELETE CASCADE )");
         db.execSQL("CREATE TABLE `SingleNoteWidgetData` (`noteId` INTEGER NOT NULL, `id` INTEGER NOT NULL, `accountId` INTEGER NOT NULL, `themeMode` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`accountId`) REFERENCES `Account`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE , FOREIGN KEY(`noteId`) REFERENCES `Note`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
 
         db.execSQL("CREATE INDEX `IDX_ACCOUNT_ACCOUNTNAME` ON `Account` (`accountName`)");
+        db.execSQL("CREATE INDEX `IDX_ACCOUNT_ETAG` ON `Account` (`eTag`)");
+        db.execSQL("CREATE INDEX `IDX_ACCOUNT_MODIFIED` ON `Account` (`modified`)");
         db.execSQL("CREATE INDEX `IDX_ACCOUNT_URL` ON `Account` (`url`)");
         db.execSQL("CREATE INDEX `IDX_ACCOUNT_USERNAME` ON `Account` (`userName`)");
-        db.execSQL("CREATE INDEX `IDX_ACCOUNT_MODIFIED` ON `Account` (`modified`)");
-        db.execSQL("CREATE INDEX `IDX_ACCOUNT_ETAG` ON `Account` (`eTag`)");
-        db.execSQL("CREATE INDEX `IDX_CATEGORIES_ACCOUNTID` ON `Category` (`accountId`)");
-        db.execSQL("CREATE INDEX `IDX_CATEGORIES_ID` ON `Category` (`id`)");
-        db.execSQL("CREATE INDEX `IDX_CATEGORIES_SORTING_METHOD` ON `Category` (`sortingMethod`)");
-        db.execSQL("CREATE INDEX `IDX_CATEGORIES_TITLE` ON `Category` (`title`)");
+        db.execSQL("CREATE INDEX `IDX_CATEGORIYOPTIONS_ACCOUNTID` ON `Category` (`accountId`)");
+        db.execSQL("CREATE INDEX `IDX_CATEGORIYOPTIONS_CATEGORY` ON `Category` (`category`)");
+        db.execSQL("CREATE INDEX `IDX_CATEGORIYOPTIONS_SORTING_METHOD` ON `Category` (`sortingMethod`)");
         db.execSQL("CREATE INDEX `IDX_NOTESLISTWIDGETDATA_ACCOUNTID` ON `NotesListWidgetData` (`accountId`)");
-        db.execSQL("CREATE INDEX `IDX_NOTESLISTWIDGETDATA_CATEGORYID` ON `NotesListWidgetData` (`categoryId`)");
+        db.execSQL("CREATE INDEX `IDX_NOTESLISTWIDGETDATA_CATEGORY` ON `NotesListWidgetData` (`category`)");
+        db.execSQL("CREATE INDEX `IDX_NOTESLISTWIDGETDATA_ACCOUNT_CATEGORY` ON `NotesListWidgetData` (`accountId`, `category`)");
         db.execSQL("CREATE INDEX `IDX_NOTE_ACCOUNTID` ON `Note` (`accountId`)");
-        db.execSQL("CREATE INDEX `IDX_NOTE_CATEGORY` ON `Note` (`categoryId`)");
+        db.execSQL("CREATE INDEX `IDX_NOTE_CATEGORY` ON `Note` (`category`)");
         db.execSQL("CREATE INDEX `IDX_NOTE_FAVORITE` ON `Note` (`favorite`)");
         db.execSQL("CREATE INDEX `IDX_NOTE_MODIFIED` ON `Note` (`modified`)");
         db.execSQL("CREATE INDEX `IDX_NOTE_REMOTEID` ON `Note` (`remoteId`)");
@@ -63,10 +63,10 @@ public class Migration_19_20 extends Migration {
         db.execSQL("CREATE INDEX `IDX_SINGLENOTEWIDGETDATA_ACCOUNTID` ON `SingleNoteWidgetData` (`accountId`)");
         db.execSQL("CREATE INDEX `IDX_SINGLENOTEWIDGETDATA_NOTEID` ON `SingleNoteWidgetData` (`noteId`)");
 
-        db.execSQL("CREATE UNIQUE INDEX `IDX_UNIQUE_ACCOUNT_TITLE` ON `Category` (`accountId`, `title`)");
+        db.execSQL("CREATE UNIQUE INDEX `IDX_UNIQUE_CATEGORYOPTIONS_ACCOUNT_CATEGORY` ON `Category` (`accountId`, `sortingMethod`)");
 
-        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_DEL AFTER DELETE ON Note BEGIN DELETE FROM Category WHERE Category.id NOT IN (SELECT Note.categoryId FROM Note); END;");
-        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_UPD AFTER UPDATE ON Note BEGIN DELETE FROM Category WHERE Category.id NOT IN (SELECT Note.categoryId FROM Note); END;");
+        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_DEL AFTER DELETE ON Note BEGIN DELETE FROM CategoryOptions WHERE CategoryOptions.category NOT IN (SELECT Note.category FROM Note WHERE Note.accountId = CategoryOptions.accountId); END;");
+        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_UPD AFTER UPDATE ON Note BEGIN DELETE FROM CategoryOptions WHERE CategoryOptions.category NOT IN (SELECT Note.category FROM Note WHERE Note.accountId = CategoryOptions.accountId); END;");
 
         Cursor tmpAccountCursor = db.query("SELECT * FROM ACCOUNTS", null);
         while (tmpAccountCursor.moveToNext()) {
@@ -99,16 +99,15 @@ public class Migration_19_20 extends Migration {
         Cursor tmpCategoriesCursor = db.query("SELECT * FROM CATEGORIES", null);
         while (tmpCategoriesCursor.moveToNext()) {
             ContentValues values = new ContentValues();
-            values.put("ID", tmpCategoriesCursor.getInt(0));
             values.put("ACCOUNTID", tmpCategoriesCursor.getInt(1));
-            values.put("TITLE", tmpCategoriesCursor.getString(2));
+            values.put("CATEGORY", tmpCategoriesCursor.getString(2));
             values.put("SORTINGMETHOD", tmpCategoriesCursor.getInt(3));
             db.insert("CATEGORY", OnConflictStrategy.REPLACE, values);
         }
         tmpCategoriesCursor.close();
         db.execSQL("DROP TABLE IF EXISTS CATEGORIES");
 
-        Cursor tmpNotesCursor = db.query("SELECT * FROM NOTES", null);
+        Cursor tmpNotesCursor = db.query("SELECT NOTES.*, CATEGORIES.title as `CAT_TITLE` FROM NOTES INNER JOIN CATEGORIES ON NOTES.categoryId = CATEGORIES.id", null);
         while (tmpNotesCursor.moveToNext()) {
             ContentValues values = new ContentValues();
             values.put("ID", tmpNotesCursor.getInt(0));
@@ -119,7 +118,7 @@ public class Migration_19_20 extends Migration {
             values.put("MODIFIED", tmpNotesCursor.getLong(5));
             values.put("CONTENT", tmpNotesCursor.getString(6));
             values.put("FAVORITE", tmpNotesCursor.getInt(7));
-            values.put("CATEGORYID", tmpNotesCursor.getInt(8));
+            values.put("CATEGORY", tmpNotesCursor.getInt(11));
             values.put("ETAG", tmpNotesCursor.getString(9));
             values.put("EXCERPT", tmpNotesCursor.getString(10));
             db.insert("NOTE", OnConflictStrategy.REPLACE, values);
@@ -141,7 +140,7 @@ public class Migration_19_20 extends Migration {
         db.execSQL("DROP TABLE IF EXISTS WIDGET_NOTE_LISTS");
 
         Cursor tmpWidgetSinlgeNotesCursor = db.query("SELECT * FROM WIDGET_SINGLE_NOTES", null);
-        while (tmpWidgetNotesListCursor.moveToNext()) {
+        while (tmpWidgetSinlgeNotesCursor.moveToNext()) {
             ContentValues values = new ContentValues();
             values.put("ID", tmpWidgetNotesListCursor.getInt(0));
             values.put("ACCOUNTID", tmpWidgetNotesListCursor.getInt(1));

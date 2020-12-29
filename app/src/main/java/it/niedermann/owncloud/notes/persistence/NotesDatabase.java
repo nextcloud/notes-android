@@ -40,15 +40,14 @@ import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.dao.AccountDao;
-import it.niedermann.owncloud.notes.persistence.dao.CategoryDao;
+import it.niedermann.owncloud.notes.persistence.dao.CategoryOptionsDao;
 import it.niedermann.owncloud.notes.persistence.dao.NoteDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetNotesListDao;
 import it.niedermann.owncloud.notes.persistence.dao.WidgetSingleNoteDao;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.Category;
+import it.niedermann.owncloud.notes.persistence.entity.CategoryOptions;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_10_11;
@@ -83,7 +82,7 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
         entities = {
                 Account.class,
                 Note.class,
-                Category.class,
+                CategoryOptions.class,
                 SingleNoteWidgetData.class,
                 NotesListWidgetData.class
         }, version = 20
@@ -121,8 +120,9 @@ public abstract class NotesDatabase extends RoomDatabase {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
-                        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_DEL AFTER DELETE ON Note BEGIN DELETE FROM Category WHERE Category.id NOT IN (SELECT Note.categoryId FROM Note); END;");
-                        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_UPD AFTER UPDATE ON Note BEGIN DELETE FROM Category WHERE Category.id NOT IN (SELECT Note.categoryId FROM Note); END;");
+                        final String cleanUpStatement = "DELETE FROM CategoryOptions WHERE CategoryOptions.category NOT IN (SELECT Note.category FROM Note WHERE Note.accountId = CategoryOptions.accountId);";
+                        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_DEL AFTER DELETE ON Note BEGIN " + cleanUpStatement + " END;");
+                        db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_UPD AFTER UPDATE ON Note BEGIN " + cleanUpStatement + " END;");
                         Log.v(TAG, NotesDatabase.class.getSimpleName() + " created.");
                     }
                 })
@@ -132,7 +132,7 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     public abstract AccountDao getAccountDao();
 
-    public abstract CategoryDao getCategoryDao();
+    public abstract CategoryOptionsDao getCategoryOptionsDao();
 
     public abstract NoteDao getNoteDao();
 
@@ -160,14 +160,14 @@ public abstract class NotesDatabase extends RoomDatabase {
      */
     @NonNull
     @MainThread
-    public LiveData<NoteWithCategory> addNoteAndSync(Account account, NoteWithCategory note) {
-        NoteWithCategory entity = new NoteWithCategory(new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0), note.getCategory());
-        final MutableLiveData<NoteWithCategory> ret = new MutableLiveData<>();
+    public LiveData<Note> addNoteAndSync(Account account, Note note) {
+        Note entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+        final MutableLiveData<Note> ret = new MutableLiveData<>();
         new Thread(() -> ret.postValue(addNote(account.getId(), entity))).start();
-        return map(ret, newNoteWithCategory -> {
+        return map(ret, newNote -> {
             notifyWidgets();
             serverSyncHelper.scheduleSync(account, true);
-            return newNoteWithCategory;
+            return newNote;
         });
     }
 
@@ -179,7 +179,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      */
     @NonNull
     @WorkerThread
-    NoteWithCategory addNote(long accountId, NoteWithCategory note) {
+    Note addNote(long accountId, Note note) {
         Note entity = new Note();
         if (note.getId() > 0) {
             entity.setId(note.getId());
@@ -196,16 +196,16 @@ public abstract class NotesDatabase extends RoomDatabase {
         entity.setModified(note.getModified());
         entity.setContent(note.getContent());
         entity.setFavorite(note.getFavorite());
-        entity.setCategoryId(getOrCreateCategoryIdByTitle(accountId, note.getCategory()));
+        entity.setCategory(note.getCategory());
         entity.setETag(note.getETag());
-        return getNoteDao().getFullNoteWithCategory(getNoteDao().addNote(entity));
+        return getNoteDao().getNoteById(getNoteDao().addNote(entity));
     }
 
     @AnyThread
-    public LiveData<NoteWithCategory> moveNoteToAnotherAccount(Account account, NoteWithCategory note) {
-        NoteWithCategory noteWithCategory = new NoteWithCategory(new Note(null, note.getModified(), note.getTitle(), getNoteDao().getContent(note.getId()), note.getFavorite(), null), note.getCategory());
+    public LiveData<Note> moveNoteToAnotherAccount(Account account, Note note) {
+        Note Note = new Note(null, note.getModified(), note.getTitle(), getNoteDao().getContent(note.getId()), note.getCategory(), note.getFavorite(), null);
         deleteNoteAndSync(account, note.getId());
-        return addNoteAndSync(account, noteWithCategory);
+        return addNoteAndSync(account, Note);
     }
 
     @NonNull
@@ -240,7 +240,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     public void setCategory(@NonNull Account account, long noteId, @NonNull String category) {
         new Thread(() -> {
             getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
-            getNoteDao().updateCategory(noteId, getOrCreateCategoryIdByTitle(account.getId(), category));
+            getNoteDao().updateCategory(noteId, category);
             serverSyncHelper.scheduleSync(account, true);
         }).start();
     }
@@ -256,10 +256,10 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @return changed {@link Note} if differs from database, otherwise the old {@link Note}.
      */
     @WorkerThread
-    public NoteWithCategory updateNoteAndSync(Account localAccount, @NonNull NoteWithCategory oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
-        final NoteWithCategory newNote;
+    public Note updateNoteAndSync(Account localAccount, @NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle, @Nullable ISyncCallback callback) {
+        final Note newNote;
         if (newContent == null) {
-            newNote = new NoteWithCategory(new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY()), oldNote.getCategory());
+            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), oldNote.getModified(), oldNote.getTitle(), oldNote.getContent(), oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), oldNote.getExcerpt(), oldNote.getScrollY());
         } else {
             final String title;
             if (newTitle != null) {
@@ -271,10 +271,9 @@ public abstract class NotesDatabase extends RoomDatabase {
                     title = oldNote.getTitle();
                 }
             }
-            newNote = new NoteWithCategory(new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY()), oldNote.getCategory());
+            newNote = new Note(oldNote.getId(), oldNote.getRemoteId(), Calendar.getInstance(), title, newContent, oldNote.getCategory(), oldNote.getFavorite(), oldNote.getETag(), DBStatus.LOCAL_EDITED, localAccount.getId(), generateNoteExcerpt(newContent, title), oldNote.getScrollY());
         }
-        newNote.getNote().setCategoryId(getOrCreateCategoryIdByTitle(newNote.getAccountId(), newNote.getCategory()));
-        int rows = getNoteDao().updateNote(newNote.getNote());
+        int rows = getNoteDao().updateNote(newNote);
         // if data was changed, set new status and schedule sync (with callback); otherwise invoke callback directly.
         if (rows > 0) {
             notifyWidgets();
@@ -437,32 +436,6 @@ public abstract class NotesDatabase extends RoomDatabase {
         return ret;
     }
 
-    /**
-     * Get the category if with the given category title
-     * The method does not support fuzzy search.
-     * Because the category title in database is unique, there will not at most one result.
-     * If there is no such category, database will create it if create flag is set.
-     * Otherwise this method will return -1 as default value.
-     *
-     * @param accountId     The user {@link Account} Id
-     * @param categoryTitle The category title which will be search in the db
-     * @return -1 if there is no such category else the corresponding id
-     */
-    @NonNull
-    @WorkerThread
-    protected Long getOrCreateCategoryIdByTitle(long accountId, @NonNull String categoryTitle) {
-        validateAccountId(accountId);
-        Long categoryId = getCategoryDao().getCategoryIdByTitle(accountId, categoryTitle);
-        if (categoryId != null && categoryId > 0) {
-            return categoryId;
-        } else {
-            Category entity = new Category();
-            entity.setAccountId(accountId);
-            entity.setTitle(categoryTitle);
-            return getCategoryDao().addCategory(entity);
-        }
-    }
-
     private static void validateAccountId(long accountId) {
         if (accountId < 1) {
             throw new IllegalArgumentException("accountId must be greater than 0");
@@ -504,9 +477,16 @@ public abstract class NotesDatabase extends RoomDatabase {
                 }
                 case DEFAULT_CATEGORY:
                 default: {
-                    final Category category = selectedCategory.getCategory();
+                    final String category = selectedCategory.getCategory();
                     if (category != null) {
-                        getCategoryDao().modifyCategoryOrder(accountId, category.getId(), sortingMethod);
+                        if(getCategoryOptionsDao().modifyCategoryOrder(accountId, category, sortingMethod) == 0) {
+                            // Nothing updated means we didn't have this yet
+                            final CategoryOptions categoryOptions = new CategoryOptions();
+                            categoryOptions.setAccountId(accountId);
+                            categoryOptions.setCategory(category);
+                            categoryOptions.setSortingMethod(sortingMethod);
+                            getCategoryOptionsDao().addCategoryOptions(categoryOptions);
+                        }
                     } else {
                         throw new IllegalStateException("Tried to modify category order for " + ENavigationCategoryType.DEFAULT_CATEGORY + "but category is null.");
                     }
@@ -519,8 +499,8 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     /**
      * Gets the sorting method of a {@link NavigationCategory}, the category can be normal
-     * {@link Category} or one of {@link ENavigationCategoryType}.
-     * If the category no normal {@link Category}, sorting method will be got from
+     * {@link CategoryOptions} or one of {@link ENavigationCategoryType}.
+     * If the category no normal {@link CategoryOptions}, sorting method will be got from
      * {@link SharedPreferences}.
      * <p>
      * The sorting method of the category can be used to decide to use which sorting method to show
@@ -551,9 +531,9 @@ public abstract class NotesDatabase extends RoomDatabase {
             }
             case DEFAULT_CATEGORY:
             default: {
-                final Category category = selectedCategory.getCategory();
+                final String category = selectedCategory.getCategory();
                 if (category != null) {
-                    return getCategoryDao().getCategoryOrder(category.getId());
+                    return getCategoryOptionsDao().getCategoryOrder(selectedCategory.getAccountId(), category);
                 } else {
                     Log.e(TAG, "Cannot read " + CategorySortingMethod.class.getSimpleName() + " for " + ENavigationCategoryType.DEFAULT_CATEGORY + ".");
                     return new MutableLiveData<>(CategorySortingMethod.SORT_MODIFIED_DESC);

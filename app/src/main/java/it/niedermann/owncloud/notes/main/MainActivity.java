@@ -72,8 +72,7 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesWorker;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.Category;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
@@ -195,11 +194,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                 }
                 case DEFAULT_CATEGORY:
                 default: {
-                    final Category category = selectedCategory.getCategory();
+                    final String category = selectedCategory.getCategory();
                     if (category == null) {
                         throw new IllegalStateException(NavigationCategory.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but category is null.");
                     }
-                    activityBinding.searchText.setText(getString(R.string.search_in_category, NoteUtil.extendCategory(category.getTitle())));
+                    activityBinding.searchText.setText(getString(R.string.search_in_category, NoteUtil.extendCategory(category)));
                     break;
                 }
             }
@@ -228,7 +227,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     if (notes
                             .stream()
                             .filter(item -> !item.isSection())
-                            .map(item -> (NoteWithCategory) item)
+                            .map(item -> (Note) item)
                             .noneMatch(item -> item.getId() == id)) {
                         deletedNotes.add(id);
                     }
@@ -467,7 +466,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                         }
                         default: {
                             if (item.getClass() == NavigationItem.CategoryNavigationItem.class) {
-                                mainViewModel.postSelectedCategory(new NavigationCategory(mainViewModel.getCategory(((NavigationItem.CategoryNavigationItem) item).categoryId)));
+                                mainViewModel.postSelectedCategory(new NavigationCategory(((NavigationItem.CategoryNavigationItem) item).accountId, ((NavigationItem.CategoryNavigationItem) item).category));
                             } else {
                                 throw new IllegalStateException(NavigationItem.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but item is not of type " + NavigationItem.CategoryNavigationItem.class.getSimpleName() + ".");
                             }
@@ -633,7 +632,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     public void onNoteClick(int position, View v) {
         boolean hasCheckedItems = tracker.getSelection().size() > 0;
         if (!hasCheckedItems) {
-            NoteWithCategory note = (NoteWithCategory) adapter.getItem(position);
+            Note note = (Note) adapter.getItem(position);
             Intent intent = new Intent(getApplicationContext(), EditNoteActivity.class);
             intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
             startActivityForResult(intent, show_single_note_cmd);
@@ -642,7 +641,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     public void onNoteFavoriteClick(int position, View view) {
-        LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(((NoteWithCategory) adapter.getItem(position)).getId());
+        LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(((Note) adapter.getItem(position)).getId());
         toggleLiveData.observe(this, (next) -> toggleLiveData.removeObservers(this));
     }
 
@@ -683,7 +682,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     @Override
     public void onAccountPicked(@NonNull Account account) {
         for (Long noteId : tracker.getSelection()) {
-            final LiveData<NoteWithCategory> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, noteId);
+            final LiveData<Note> moveLiveData = mainViewModel.moveNoteToAnotherAccount(account, noteId);
             moveLiveData.observe(this, (v) -> {
                 tracker.deselect(noteId);
                 moveLiveData.removeObservers(this);

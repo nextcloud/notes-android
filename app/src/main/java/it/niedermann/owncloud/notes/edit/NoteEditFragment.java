@@ -27,7 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNoteEditBinding;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
@@ -69,7 +69,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         return f;
     }
 
-    public static NoteEditFragment newInstanceWithNewNote(NoteWithCategory newNote) {
+    public static NoteEditFragment newInstanceWithNewNote(Note newNote) {
         NoteEditFragment f = new NoteEditFragment();
         Bundle b = new Bundle();
         b.putSerializable(PARAM_NEWNOTE, newNote);

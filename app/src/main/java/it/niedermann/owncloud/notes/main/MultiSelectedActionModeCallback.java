@@ -11,28 +11,23 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
-import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.recyclerview.selection.SelectionTracker;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
 import it.niedermann.owncloud.notes.branding.BrandedSnackbar;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
-import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class MultiSelectedActionModeCallback implements Callback {
@@ -102,7 +97,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             for(Long sel : tracker.getSelection()) {
                 selection.add(sel);
             }
-            final LiveData<List<NoteWithCategory>> fullNotes$ = mainViewModel.getFullNotesWithCategory(selection);
+            final LiveData<List<Note>> fullNotes$ = mainViewModel.getFullNotesWithCategory(selection);
             fullNotes$.observe(lifecycleOwner, (fullNotes) -> {
                 fullNotes$.removeObservers(lifecycleOwner);
                 tracker.clearSelection();
@@ -113,8 +108,8 @@ public class MultiSelectedActionModeCallback implements Callback {
                         : context.getResources().getQuantityString(R.plurals.bulk_notes_deleted, fullNotes.size(), fullNotes.size());
                 BrandedSnackbar.make(view, deletedSnackbarTitle, Snackbar.LENGTH_LONG)
                         .setAction(R.string.action_undo, (View v) -> {
-                            for (NoteWithCategory deletedNote : fullNotes) {
-                                final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(deletedNote);
+                            for (Note deletedNote : fullNotes) {
+                                final LiveData<Note> undoLiveData = mainViewModel.addNoteAndSync(deletedNote);
                                 undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
                             }
                             String restoreSnackbarTitle = fullNotes.size() == 1
@@ -143,7 +138,7 @@ public class MultiSelectedActionModeCallback implements Callback {
             // FIXME use title if only one
             final String subject = context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size());
 //            final String subject = (selection.size() == 1)
-//                    ? ((NoteWithCategory) adapter.getItem(adapter.getSelected().get(0))).getTitle()
+//                    ? ((Note) adapter.getItem(adapter.getSelected().get(0))).getTitle()
 //                    : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
 
             final LiveData<String> contentCollector = mainViewModel.collectNoteContents(selection);

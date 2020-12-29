@@ -11,7 +11,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.lifecycle.LiveData;
 
 import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 
 public class AppendToNoteActivity extends MainActivity {
 
@@ -37,7 +37,7 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     public void onNoteClick(int position, View v) {
         if (receivedText != null && receivedText.length() > 0) {
-            final LiveData<NoteWithCategory> fullNote$ = mainViewModel.getFullNoteWithCategory(((NoteWithCategory) adapter.getItem(position)).getId());
+            final LiveData<Note> fullNote$ = mainViewModel.getFullNote(((Note) adapter.getItem(position)).getId());
             fullNote$.observe(this, (fullNote) -> {
                 fullNote$.removeObservers(this);
                 final String oldContent = fullNote.getContent();

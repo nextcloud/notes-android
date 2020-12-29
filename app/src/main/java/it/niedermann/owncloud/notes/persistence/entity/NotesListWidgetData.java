@@ -19,15 +19,16 @@ import it.niedermann.owncloud.notes.widget.AbstractWidgetData;
                         onDelete = ForeignKey.CASCADE
                 ),
                 @ForeignKey(
-                        entity = Category.class,
-                        parentColumns = "id",
-                        childColumns = "categoryId",
+                        entity = CategoryOptions.class,
+                        parentColumns = {"accountId", "category"},
+                        childColumns = {"accountId", "category"},
                         onDelete = ForeignKey.CASCADE
                 )
         },
         indices = {
                 @Index(name = "IDX_NOTESLISTWIDGETDATA_ACCOUNTID", value = "accountId"),
-                @Index(name = "IDX_NOTESLISTWIDGETDATA_CATEGORYID", value = "categoryId"),
+                @Index(name = "IDX_NOTESLISTWIDGETDATA_CATEGORY", value = "category"),
+                @Index(name = "IDX_NOTESLISTWIDGETDATA_ACCOUNT_CATEGORY", value = {"accountId", "category"})
         }
 )
 public class NotesListWidgetData extends AbstractWidgetData {
@@ -41,16 +42,17 @@ public class NotesListWidgetData extends AbstractWidgetData {
 
     @IntRange(from = 0, to = 2)
     private int mode;
-    @Nullable
-    private Long categoryId;
 
     @Nullable
-    public Long getCategoryId() {
-        return categoryId;
+    private String category;
+
+    @Nullable
+    public String getCategory() {
+        return category;
     }
 
-    public void setCategoryId(@Nullable Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(@Nullable String category) {
+        this.category = category;
     }
 
     public void setMode(@IntRange(from = 0, to = 2) int mode) {
@@ -66,17 +68,19 @@ public class NotesListWidgetData extends AbstractWidgetData {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof NotesListWidgetData)) return false;
+        if (!super.equals(o)) return false;
 
         NotesListWidgetData that = (NotesListWidgetData) o;
 
         if (mode != that.mode) return false;
-        return categoryId != null ? categoryId.equals(that.categoryId) : that.categoryId == null;
+        return category != null ? category.equals(that.category) : that.category == null;
     }
 
     @Override
     public int hashCode() {
-        int result = mode;
-        result = 31 * result + (categoryId != null ? categoryId.hashCode() : 0);
+        int result = super.hashCode();
+        result = 31 * result + mode;
+        result = 31 * result + (category != null ? category.hashCode() : 0);
         return result;
     }
 
@@ -85,7 +89,7 @@ public class NotesListWidgetData extends AbstractWidgetData {
     public String toString() {
         return "NotesListWidgetData{" +
                 "mode=" + mode +
-                ", categoryId=" + categoryId +
+                ", category='" + category + '\'' +
                 '}';
     }
 }

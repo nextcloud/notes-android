@@ -13,7 +13,9 @@ import androidx.annotation.WorkerThread;
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
 
 import com.nextcloud.android.sso.AccountImporter;
@@ -36,9 +38,8 @@ import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.Category;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
@@ -99,6 +100,7 @@ public class MainViewModel extends AndroidViewModel {
         final NavigationCategory selectedCategory = state.get(KEY_SELECTED_CATEGORY);
         if (selectedCategory != null) {
             postSelectedCategory(selectedCategory);
+            Log.v(TAG, "[restoreInstanceState] - selectedCategory: " + selectedCategory);
         }
         postExpandedCategory(state.get(KEY_EXPANDED_CATEGORY));
     }
@@ -112,9 +114,15 @@ public class MainViewModel extends AndroidViewModel {
         state.set(KEY_CURRENT_ACCOUNT, account);
         BrandingUtil.saveBrandColors(getApplication(), account.getColor(), account.getTextColor());
         SingleAccountHelper.setCurrentAccount(getApplication(), account.getAccountName());
-        this.currentAccount.setValue(account);
-        this.searchTerm.setValue("");
-        this.selectedCategory.setValue(new NavigationCategory(RECENT));
+
+        final Account currentAccount = this.currentAccount.getValue();
+        // If only ETag or colors change, we must not reset the navigation
+        // TODO in the long term we should store the last NavigationCategory for each Account
+        if (currentAccount == null || currentAccount.getId() != account.getId()) {
+            this.currentAccount.setValue(account);
+            this.searchTerm.setValue("");
+            this.selectedCategory.setValue(new NavigationCategory(RECENT));
+        }
     }
 
     @NonNull
@@ -134,6 +142,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public void postSelectedCategory(@NonNull NavigationCategory selectedCategory) {
         state.set(KEY_SELECTED_CATEGORY, selectedCategory);
+        Log.v(TAG, "[postSelectedCategory] - selectedCategory: " + selectedCategory);
         this.selectedCategory.postValue(selectedCategory);
 
         // Close sub categories
@@ -146,14 +155,13 @@ public class MainViewModel extends AndroidViewModel {
             }
             case DEFAULT_CATEGORY:
             default: {
-                Category category = selectedCategory.getCategory();
+                String category = selectedCategory.getCategory();
                 if (category == null) {
                     postExpandedCategory(null);
                     Log.e(TAG, "navigation selection is a " + DEFAULT_CATEGORY + ", but the contained category is null.");
                 } else {
-                    String title = category.getTitle();
-                    int slashIndex = title.indexOf('/');
-                    String rootCategory = slashIndex < 0 ? title : title.substring(0, slashIndex);
+                    int slashIndex = category.indexOf('/');
+                    String rootCategory = slashIndex < 0 ? category : category.substring(0, slashIndex);
                     String expandedCategory = getExpandedCategory().getValue();
                     if (expandedCategory != null && !expandedCategory.equals(rootCategory)) {
                         postExpandedCategory(null);
@@ -166,8 +174,20 @@ public class MainViewModel extends AndroidViewModel {
 
     @NonNull
     @MainThread
-    public LiveData<android.util.Pair<NavigationCategory, CategorySortingMethod>> getCategorySortingMethodOfSelectedCategory() {
+    public LiveData<Pair<NavigationCategory, CategorySortingMethod>> getCategorySortingMethodOfSelectedCategory() {
         return switchMap(getSelectedCategory(), selectedCategory -> map(db.getCategoryOrder(selectedCategory), sortingMethod -> new Pair<>(selectedCategory, sortingMethod)));
+    }
+
+    public LiveData<Void> modifyCategoryOrder(@NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
+        return switchMap(getCurrentAccount(), currentAccount -> {
+            if (currentAccount == null) {
+                return new MutableLiveData<>(null);
+            } else {
+                Log.v(TAG, "[modifyCategoryOrder] - currentAccount: " + currentAccount.getAccountName());
+                db.modifyCategoryOrder(currentAccount.getId(), selectedCategory, sortingMethod);
+                return new MutableLiveData<>(null);
+            }
+        });
     }
 
     public void postExpandedCategory(@Nullable String expandedCategory) {
@@ -193,13 +213,14 @@ public class MainViewModel extends AndroidViewModel {
                     if (selectedCategory == null) {
                         return insufficientInformation;
                     } else {
+                        Log.v(TAG, "[getNotesListLiveData] - selectedCategory: " + selectedCategory);
                         return switchMap(getSearchTerm(), searchTerm -> {
                             Log.v(TAG, "[getNotesListLiveData] - searchTerm: " + searchTerm);
                             return switchMap(getCategorySortingMethodOfSelectedCategory(), sortingMethod -> {
                                 final long accountId = currentAccount.getId();
                                 final String searchQueryOrWildcard = searchTerm == null ? "%" : "%" + searchTerm.trim() + "%";
                                 Log.v(TAG, "[getNotesListLiveData] - sortMethod: " + sortingMethod.second);
-                                final LiveData<List<NoteWithCategory>> fromDatabase;
+                                final LiveData<List<Note>> fromDatabase;
                                 switch (selectedCategory.getType()) {
                                     case RECENT: {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + RECENT);
@@ -224,20 +245,20 @@ public class MainViewModel extends AndroidViewModel {
                                     }
                                     case DEFAULT_CATEGORY:
                                     default: {
-                                        final Category category = selectedCategory.getCategory();
+                                        final String category = selectedCategory.getCategory();
                                         if (category == null) {
                                             throw new IllegalStateException(NavigationCategory.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but category is null.");
                                         }
-                                        Log.v(TAG, "[getNotesListLiveData] - category: " + category.getTitle());
+                                        Log.v(TAG, "[getNotesListLiveData] - category: " + category);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchCategoryByModified(accountId, searchQueryOrWildcard, category.getTitle())
-                                                : db.getNoteDao().searchCategoryLexicographically(accountId, searchQueryOrWildcard, category.getTitle());
+                                                ? db.getNoteDao().searchCategoryByModified(accountId, searchQueryOrWildcard, category)
+                                                : db.getNoteDao().searchCategoryLexicographically(accountId, searchQueryOrWildcard, category);
                                         break;
                                     }
                                 }
 
                                 Log.v(TAG, "[getNotesListLiveData] - -------------------------------------");
-                                return distinctUntilChanged(map(fromDatabase, noteList -> fromNotesWithCategory(noteList, selectedCategory, sortingMethod.second)));
+                                return distinctUntilChanged(map(fromDatabase, noteList -> fromNotes(noteList, selectedCategory, sortingMethod.second)));
                             });
                         });
                     }
@@ -246,11 +267,11 @@ public class MainViewModel extends AndroidViewModel {
         }));
     }
 
-    private List<Item> fromNotesWithCategory(List<NoteWithCategory> noteList, @NonNull NavigationCategory selectedCategory, @Nullable CategorySortingMethod sortingMethod) {
+    private List<Item> fromNotes(List<Note> noteList, @NonNull NavigationCategory selectedCategory, @Nullable CategorySortingMethod sortingMethod) {
         if (selectedCategory.getType() == DEFAULT_CATEGORY) {
-            final Category category = selectedCategory.getCategory();
+            final String category = selectedCategory.getCategory();
             if (category != null) {
-                return fillListByCategory(noteList, category.getTitle());
+                return fillListByCategory(noteList, category);
             } else {
                 throw new IllegalStateException(NavigationCategory.class.getSimpleName() + " type is " + DEFAULT_CATEGORY + ", but category is null.");
             }
@@ -273,7 +294,7 @@ public class MainViewModel extends AndroidViewModel {
                 Log.v(TAG, "[getNavigationCategories] - currentAccount: " + currentAccount.getAccountName());
                 return switchMap(getExpandedCategory(), expandedCategory -> {
                     Log.v(TAG, "[getNavigationCategories] - expandedCategory: " + expandedCategory);
-                    return distinctUntilChanged(map(db.getCategoryDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase ->
+                    return distinctUntilChanged(map(db.getNoteDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase ->
                             fromCategoriesWithNotesCount(getApplication(), expandedCategory, fromDatabase, db.getNoteDao().count(currentAccount.getId()), db.getNoteDao().getFavoritesCount(currentAccount.getId()))
                     ));
                 });
@@ -342,18 +363,6 @@ public class MainViewModel extends AndroidViewModel {
         return items;
     }
 
-    public LiveData<Void> modifyCategoryOrder(@NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
-        return switchMap(getCurrentAccount(), currentAccount -> {
-            if (currentAccount == null) {
-                return new MutableLiveData<>(null);
-            } else {
-                Log.v(TAG, "[modifyCategoryOrder] - currentAccount: " + currentAccount.getAccountName());
-                db.modifyCategoryOrder(currentAccount.getId(), selectedCategory, sortingMethod);
-                return new MutableLiveData<>(null);
-            }
-        });
-    }
-
     /**
      * @return <code>true</code>, if a synchronization could successfully be triggered, <code>false</code> if not.
      */
@@ -402,7 +411,7 @@ public class MainViewModel extends AndroidViewModel {
                 return insufficientInformation;
             } else {
                 Log.i(TAG, "[performFullSynchronizationForCurrentAccount] Refreshing capabilities for " + localAccount.getAccountName());
-                MutableLiveData<Boolean> syncCapabilitiesLiveData = new MutableLiveData<>();
+                final MutableLiveData<Boolean> syncCapabilitiesLiveData = new MutableLiveData<>();
                 new Thread(() -> {
                     final Capabilities capabilities;
                     try {
@@ -430,7 +439,7 @@ public class MainViewModel extends AndroidViewModel {
                     }
 
                 }).start();
-                return switchMap(syncCapabilitiesLiveData, (Function<Boolean, LiveData<Boolean>>) capabilitiesSyncedSuccessfully -> {
+                return switchMap(syncCapabilitiesLiveData, capabilitiesSyncedSuccessfully -> {
                     if (Boolean.TRUE.equals(capabilitiesSyncedSuccessfully)) {
                         Log.v(TAG, "[performFullSynchronizationForCurrentAccount] Capabilities refreshed successfully - synchronize notes for " + localAccount.getAccountName());
                         return synchronize();
@@ -467,13 +476,8 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<NoteWithCategory> moveNoteToAnotherAccount(Account account, Long noteId) {
-        return db.moveNoteToAnotherAccount(account, db.getNoteDao().getFullNoteWithCategory(noteId));
-    }
-
-    @WorkerThread
-    public Category getCategory(long id) {
-        return db.getCategoryDao().getCategory(id);
+    public LiveData<Note> moveNoteToAnotherAccount(Account account, Long noteId) {
+        return db.moveNoteToAnotherAccount(account, db.getNoteDao().getNoteById(noteId));
     }
 
     public LiveData<Void> toggleFavoriteAndSync(long noteId) {
@@ -518,21 +522,21 @@ public class MainViewModel extends AndroidViewModel {
         return db.addAccount(url, username, accountName, capabilities);
     }
 
-    public LiveData<NoteWithCategory> getFullNoteWithCategory(long id) {
+    public LiveData<Note> getFullNote(long id) {
         return map(getFullNotesWithCategory(Collections.singleton(id)), input -> input.get(0));
     }
 
-    public LiveData<List<NoteWithCategory>> getFullNotesWithCategory(@NonNull Collection<Long> ids) {
+    public LiveData<List<Note>> getFullNotesWithCategory(@NonNull Collection<Long> ids) {
         return switchMap(getCurrentAccount(), currentAccount -> {
             if (currentAccount == null) {
                 return new MutableLiveData<>();
             } else {
-                Log.v(TAG, "[getNoteWithCategory] - currentAccount: " + currentAccount.getAccountName());
-                final MutableLiveData<List<NoteWithCategory>> notes = new MutableLiveData<>();
+                Log.v(TAG, "[getNote] - currentAccount: " + currentAccount.getAccountName());
+                final MutableLiveData<List<Note>> notes = new MutableLiveData<>();
                 new Thread(() -> notes.postValue(
                         ids
                                 .stream()
-                                .map(id -> db.getNoteDao().getFullNoteWithCategory(id))
+                                .map(id -> db.getNoteDao().getNoteById(id))
                                 .collect(Collectors.toList())
                 )).start();
                 return notes;
@@ -540,7 +544,7 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<NoteWithCategory> addNoteAndSync(NoteWithCategory note) {
+    public LiveData<Note> addNoteAndSync(Note note) {
         return switchMap(getCurrentAccount(), currentAccount -> {
             if (currentAccount == null) {
                 return new MutableLiveData<>();
@@ -551,7 +555,7 @@ public class MainViewModel extends AndroidViewModel {
         });
     }
 
-    public LiveData<Void> updateNoteAndSync(@NonNull NoteWithCategory oldNote, @Nullable String newContent, @Nullable String newTitle) {
+    public LiveData<Void> updateNoteAndSync(@NonNull Note oldNote, @Nullable String newContent, @Nullable String newTitle) {
         return switchMap(getCurrentAccount(), currentAccount -> {
             if (currentAccount != null) {
                 Log.v(TAG, "[updateNoteAndSync] - currentAccount: " + currentAccount.getAccountName());
@@ -577,7 +581,7 @@ public class MainViewModel extends AndroidViewModel {
                 new Thread(() -> {
                     final StringBuilder noteContents = new StringBuilder();
                     for (Long noteId : noteIds) {
-                        final NoteWithCategory fullNote = db.getNoteDao().getFullNoteWithCategory(noteId);
+                        final Note fullNote = db.getNoteDao().getNoteById(noteId);
                         final String tempFullNote = fullNote.getContent();
                         if (!TextUtils.isEmpty(tempFullNote)) {
                             if (noteContents.length() > 0) {

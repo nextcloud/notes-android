@@ -32,7 +32,7 @@ import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithExcerpt;
 import it.niedermann.owncloud.notes.main.items.list.NoteViewHolderWithoutExcerpt;
 import it.niedermann.owncloud.notes.main.items.section.SectionItem;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 
@@ -81,7 +81,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     public long getItemId(int position) {
         return getItemViewType(position) == TYPE_SECTION
                 ? ((SectionItem) getItem(position)).getTitle().hashCode() * -1
-                : ((NoteWithCategory) getItem(position)).getId();
+                : ((Note) getItem(position)).getId();
     }
 
     /**
@@ -155,7 +155,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             case TYPE_NOTE_WITH_EXCERPT:
             case TYPE_NOTE_WITHOUT_EXCERPT:
             case TYPE_NOTE_ONLY_TITLE: {
-                ((NoteViewHolder) holder).bind(isSelected, (NoteWithCategory) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
+                ((NoteViewHolder) holder).bind(isSelected, (Note) itemList.get(position), showCategory, mainColor, textColor, searchQuery);
                 break;
             }
         }
@@ -191,7 +191,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
             throw new IllegalArgumentException("Item at position " + position + " must not be null");
         }
         if (getItem(position).isSection()) return TYPE_SECTION;
-        NoteWithCategory note = (NoteWithCategory) getItem(position);
+        Note note = (Note) getItem(position);
         if (TextUtils.isEmpty(note.getExcerpt())) {
             if (TextUtils.isEmpty(note.getCategory())) {
                 return TYPE_NOTE_ONLY_TITLE;

@@ -39,12 +39,14 @@ public class NavigationItem {
     }
 
     public static class CategoryNavigationItem extends NavigationItem {
+        public long accountId;
         @NonNull
-        public Long categoryId;
+        public String category;
 
-        public CategoryNavigationItem(@NonNull String id, @NonNull String label, @Nullable Integer count, @DrawableRes int icon, @NonNull Long categoryId) {
+        public CategoryNavigationItem(@NonNull String id, @NonNull String label, @Nullable Integer count, @DrawableRes int icon, long accountId, @NonNull String category) {
             super(id, label, count, icon, ENavigationCategoryType.DEFAULT_CATEGORY);
-            this.categoryId = categoryId;
+            this.accountId = accountId;
+            this.category = category;
         }
 
         @Override
@@ -55,13 +57,15 @@ public class NavigationItem {
 
             CategoryNavigationItem that = (CategoryNavigationItem) o;
 
-            return categoryId.equals(that.categoryId);
+            if (accountId != that.accountId) return false;
+            return category.equals(that.category);
         }
 
         @Override
         public int hashCode() {
             int result = super.hashCode();
-            result = 31 * result + categoryId.hashCode();
+            result = 31 * result + (int) (accountId ^ (accountId >>> 32));
+            result = 31 * result + category.hashCode();
             return result;
         }
     }

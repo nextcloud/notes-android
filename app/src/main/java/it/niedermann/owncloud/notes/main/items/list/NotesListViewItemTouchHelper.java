@@ -23,7 +23,7 @@ import it.niedermann.owncloud.notes.main.MainViewModel;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.NoteViewHolder;
 import it.niedermann.owncloud.notes.main.items.section.SectionViewHolder;
-import it.niedermann.owncloud.notes.persistence.entity.NoteWithCategory;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 
 public class NotesListViewItemTouchHelper extends ItemTouchHelper {
 
@@ -72,8 +72,8 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
                         viewHolder.setIsRecyclable(false);
-                        final NoteWithCategory dbNoteWithoutContent = (NoteWithCategory) adapter.getItem(viewHolder.getLayoutPosition());
-                        final LiveData<NoteWithCategory> dbNoteLiveData = mainViewModel.getFullNoteWithCategory(dbNoteWithoutContent.getId());
+                        final Note dbNoteWithoutContent = (Note) adapter.getItem(viewHolder.getLayoutPosition());
+                        final LiveData<Note> dbNoteLiveData = mainViewModel.getFullNote(dbNoteWithoutContent.getId());
                         dbNoteLiveData.observe(lifecycleOwner, (dbNote) -> {
                             dbNoteLiveData.removeObservers(lifecycleOwner);
                             tracker.deselect(dbNote.getId());
@@ -82,7 +82,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                             Log.v(TAG, "Item deleted through swipe ----------------------------------------------");
                             BrandedSnackbar.make(view, context.getString(R.string.action_note_deleted, dbNote.getTitle()), UNDO_DURATION)
                                     .setAction(R.string.action_undo, (View v) -> {
-                                        final LiveData<NoteWithCategory> undoLiveData = mainViewModel.addNoteAndSync(dbNote);
+                                        final LiveData<Note> undoLiveData = mainViewModel.addNoteAndSync(dbNote);
                                         undoLiveData.observe(lifecycleOwner, (o) -> undoLiveData.removeObservers(lifecycleOwner));
                                         BrandedSnackbar.make(view, context.getString(R.string.action_note_restored, dbNote.getTitle()), Snackbar.LENGTH_SHORT)
                                                 .show();
@@ -92,7 +92,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                         break;
                     case ItemTouchHelper.RIGHT:
                         viewHolder.setIsRecyclable(false);
-                        final NoteWithCategory adapterNote = (NoteWithCategory) adapter.getItem(viewHolder.getLayoutPosition());
+                        final Note adapterNote = (Note) adapter.getItem(viewHolder.getLayoutPosition());
                         final LiveData<Void> toggleLiveData = mainViewModel.toggleFavoriteAndSync(adapterNote.getId());
                         toggleLiveData.observe(lifecycleOwner, (next) -> toggleLiveData.removeObservers(lifecycleOwner));
                         break;

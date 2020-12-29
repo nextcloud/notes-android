@@ -144,7 +144,7 @@ public class DisplayUtils {
 
     public static NavigationItem.CategoryNavigationItem convertToCategoryNavigationItem(@NonNull Context context, @NonNull CategoryWithNotesCount counter) {
         Resources res = context.getResources();
-        String category = counter.getTitle().toLowerCase();
+        String category = counter.getCategory().toLowerCase();
         int icon = NavigationAdapter.ICON_FOLDER;
         if (category.equals(res.getString(R.string.category_music).toLowerCase())) {
             icon = R.drawable.ic_library_music_grey600_24dp;
@@ -153,6 +153,6 @@ public class DisplayUtils {
         } else if (category.equals(res.getString(R.string.category_work).toLowerCase())) {
             icon = R.drawable.ic_work_grey600_24dp;
         }
-        return new NavigationItem.CategoryNavigationItem("category:" + counter.getTitle(), counter.getTitle(), counter.getTotalNotes(), icon, counter.getId());
+        return new NavigationItem.CategoryNavigationItem("category:" + counter.getCategory(), counter.getCategory(), counter.getTotalNotes(), icon, counter.getAccountId(), counter.getCategory());
     }
 }
