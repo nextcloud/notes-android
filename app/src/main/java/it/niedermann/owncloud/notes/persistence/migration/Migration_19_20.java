@@ -26,13 +26,16 @@ public final class Migration_19_20 extends Migration {
     @Override
     public void migrate(@NonNull SupportSQLiteDatabase db) {
         dropOldIndices(db);
+
         createNewTables(db);
         createNewIndices(db);
+
         migrateAccounts(db);
         migrateCategories(db);
         migrateNotes(db);
         migrateNotesListWidgets(db);
         migrateSingleNotesWidgets(db);
+
         dropOldTables(db);
     }
 

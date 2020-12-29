@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.TypeConverter;
 
@@ -26,13 +27,15 @@ public class Converters {
     }
 
     @TypeConverter
-    public static CategorySortingMethod categorySortingMethodFromString(Integer value) {
-        return value == null ? CategorySortingMethod.SORT_MODIFIED_DESC : CategorySortingMethod.getCSM(value);
+    @NonNull
+    public static CategorySortingMethod categorySortingMethodFromString(@Nullable Integer value) {
+        return value == null ? CategorySortingMethod.SORT_MODIFIED_DESC : CategorySortingMethod.findById(value);
     }
 
     @TypeConverter
-    public static Integer dbStatusToString(CategorySortingMethod categorySortingMethod) {
-        return categorySortingMethod == null ? null : categorySortingMethod.getCSMID();
+    @Nullable
+    public static Integer dbStatusToString(@Nullable CategorySortingMethod categorySortingMethod) {
+        return categorySortingMethod == null ? null : categorySortingMethod.getId();
     }
 
     @TypeConverter

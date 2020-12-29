@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Map;
 
 import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
-import it.niedermann.android.sharedpreferences.SharedPreferenceStringLiveData;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.dao.AccountDao;
@@ -461,7 +460,7 @@ public abstract class NotesDatabase extends RoomDatabase {
         new Thread(() -> {
             final Context ctx = context.getApplicationContext();
             final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
-            int orderIndex = sortingMethod.getCSMID();
+            int orderIndex = sortingMethod.getId();
 
             switch (selectedCategory.getType()) {
                 case FAVORITES: {
@@ -542,7 +541,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             }
         }
 
-        return map(new SharedPreferenceIntLiveData(sp, prefKey, CategorySortingMethod.SORT_MODIFIED_DESC.getCSMID()), CategorySortingMethod::getCSM);
+        return map(new SharedPreferenceIntLiveData(sp, prefKey, CategorySortingMethod.SORT_MODIFIED_DESC.getId()), CategorySortingMethod::findById);
     }
 
     public Context getContext() {

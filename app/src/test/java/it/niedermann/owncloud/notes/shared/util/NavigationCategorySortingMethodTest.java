@@ -9,15 +9,15 @@ import static org.junit.Assert.assertEquals;
 public class NavigationCategorySortingMethodTest {
 
     @Test
-    public void getCSMID() {
+    public void getId() {
         CategorySortingMethod csm0 = CategorySortingMethod.SORT_MODIFIED_DESC;
-        assertEquals(0, csm0.getCSMID());
+        assertEquals(0, csm0.getId());
         CategorySortingMethod csm1 = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
-        assertEquals(1, csm1.getCSMID());
+        assertEquals(1, csm1.getId());
     }
 
     @Test
-    public void getSOrder() {
+    public void getTitle() {
         CategorySortingMethod csm0 = CategorySortingMethod.SORT_MODIFIED_DESC;
         assertEquals("MODIFIED DESC", csm0.getTitle());
         CategorySortingMethod csm1 = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
@@ -25,10 +25,10 @@ public class NavigationCategorySortingMethodTest {
     }
 
     @Test
-    public void getCSM() {
+    public void findById() {
         CategorySortingMethod csm0 = CategorySortingMethod.SORT_MODIFIED_DESC;
-        assertEquals(csm0, CategorySortingMethod.getCSM(0));
+        assertEquals(csm0, CategorySortingMethod.findById(0));
         CategorySortingMethod csm1 = CategorySortingMethod.SORT_LEXICOGRAPHICAL_ASC;
-        assertEquals(csm1, CategorySortingMethod.getCSM(1));
+        assertEquals(csm1, CategorySortingMethod.findById(1));
     }
 }
