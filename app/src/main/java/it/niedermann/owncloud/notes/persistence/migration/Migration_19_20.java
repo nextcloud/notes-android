@@ -48,9 +48,9 @@ public class Migration_19_20 extends Migration {
         db.execSQL("CREATE INDEX `IDX_ACCOUNT_MODIFIED` ON `Account` (`modified`)");
         db.execSQL("CREATE INDEX `IDX_ACCOUNT_URL` ON `Account` (`url`)");
         db.execSQL("CREATE INDEX `IDX_ACCOUNT_USERNAME` ON `Account` (`userName`)");
-        db.execSQL("CREATE INDEX `IDX_CATEGORIYOPTIONS_ACCOUNTID` ON `Category` (`accountId`)");
-        db.execSQL("CREATE INDEX `IDX_CATEGORIYOPTIONS_CATEGORY` ON `Category` (`category`)");
-        db.execSQL("CREATE INDEX `IDX_CATEGORIYOPTIONS_SORTING_METHOD` ON `Category` (`sortingMethod`)");
+        db.execSQL("CREATE INDEX `IDX_CATEGORIYOPTIONS_ACCOUNTID` ON `CategoryOptions` (`accountId`)");
+        db.execSQL("CREATE INDEX `IDX_CATEGORIYOPTIONS_CATEGORY` ON `CategoryOptions` (`category`)");
+        db.execSQL("CREATE INDEX `IDX_CATEGORIYOPTIONS_SORTING_METHOD` ON `CategoryOptions` (`sortingMethod`)");
         db.execSQL("CREATE INDEX `IDX_NOTESLISTWIDGETDATA_ACCOUNTID` ON `NotesListWidgetData` (`accountId`)");
         db.execSQL("CREATE INDEX `IDX_NOTESLISTWIDGETDATA_CATEGORY` ON `NotesListWidgetData` (`category`)");
         db.execSQL("CREATE INDEX `IDX_NOTESLISTWIDGETDATA_ACCOUNT_CATEGORY` ON `NotesListWidgetData` (`accountId`, `category`)");
@@ -63,92 +63,129 @@ public class Migration_19_20 extends Migration {
         db.execSQL("CREATE INDEX `IDX_SINGLENOTEWIDGETDATA_ACCOUNTID` ON `SingleNoteWidgetData` (`accountId`)");
         db.execSQL("CREATE INDEX `IDX_SINGLENOTEWIDGETDATA_NOTEID` ON `SingleNoteWidgetData` (`noteId`)");
 
-        db.execSQL("CREATE UNIQUE INDEX `IDX_UNIQUE_CATEGORYOPTIONS_ACCOUNT_CATEGORY` ON `Category` (`accountId`, `sortingMethod`)");
+        db.execSQL("CREATE UNIQUE INDEX `IDX_UNIQUE_CATEGORYOPTIONS_ACCOUNT_CATEGORY` ON `CategoryOptions` (`accountId`, `category`)");
 
         db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_DEL AFTER DELETE ON Note BEGIN DELETE FROM CategoryOptions WHERE CategoryOptions.category NOT IN (SELECT Note.category FROM Note WHERE Note.accountId = CategoryOptions.accountId); END;");
         db.execSQL("CREATE TRIGGER TRG_CLEANUP_CATEGORIES_UPD AFTER UPDATE ON Note BEGIN DELETE FROM CategoryOptions WHERE CategoryOptions.category NOT IN (SELECT Note.category FROM Note WHERE Note.accountId = CategoryOptions.accountId); END;");
 
-        Cursor tmpAccountCursor = db.query("SELECT * FROM ACCOUNTS", null);
+        final Cursor tmpAccountCursor = db.query("SELECT * FROM ACCOUNTS", null);
+        final ContentValues account_values = new ContentValues(10);
+        final int account_colPos_ID = tmpAccountCursor.getColumnIndex("ID");
+        final int account_colPos_URL = tmpAccountCursor.getColumnIndex("URL");
+        final int account_colPos_USERNAME = tmpAccountCursor.getColumnIndex("USERNAME");
+        final int account_colPos_ACCOUNT_NAME = tmpAccountCursor.getColumnIndex("ACCOUNT_NAME");
+        final int account_colPos_ETAG = tmpAccountCursor.getColumnIndex("ETAG");
+        final int account_colPos_MODIFIED = tmpAccountCursor.getColumnIndex("MODIFIED");
+        final int account_colPos_API_VERSION = tmpAccountCursor.getColumnIndex("API_VERSION");
+        final int account_colPos_COLOR = tmpAccountCursor.getColumnIndex("COLOR");
+        final int account_colPos_TEXT_COLOR = tmpAccountCursor.getColumnIndex("TEXT_COLOR");
+        final int account_colPos_CAPABILITIES_ETAG = tmpAccountCursor.getColumnIndex("CAPABILITIES_ETAG");
         while (tmpAccountCursor.moveToNext()) {
-            ContentValues values = new ContentValues();
-            values.put("ID", tmpAccountCursor.getInt(0));
-            values.put("URL", tmpAccountCursor.getString(1));
-            values.put("USERNAME", tmpAccountCursor.getString(2));
-            values.put("ACCOUNTNAME", tmpAccountCursor.getString(3));
-            values.put("ETAG", tmpAccountCursor.getString(4));
-            values.put("MODIFIED", tmpAccountCursor.getLong(5));
-            values.put("APIVERSION", tmpAccountCursor.getString(6));
+            account_values.put("ID", tmpAccountCursor.getInt(account_colPos_ID));
+            account_values.put("URL", tmpAccountCursor.getString(account_colPos_URL));
+            account_values.put("USERNAME", tmpAccountCursor.getString(account_colPos_USERNAME));
+            account_values.put("ACCOUNTNAME", tmpAccountCursor.getString(account_colPos_ACCOUNT_NAME));
+            account_values.put("ETAG", tmpAccountCursor.getString(account_colPos_ETAG));
+            account_values.put("MODIFIED", tmpAccountCursor.getLong(account_colPos_MODIFIED));
+            account_values.put("APIVERSION", tmpAccountCursor.getString(account_colPos_API_VERSION));
             try {
-                values.put("COLOR", Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(tmpAccountCursor.getString(7))));
+                account_values.put("COLOR", Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(tmpAccountCursor.getString(account_colPos_COLOR))));
             } catch (Exception e) {
                 e.printStackTrace();
-                values.put("COLOR", -16743735);
+                account_values.put("COLOR", -16743735);
             }
             try {
-                values.put("TEXTCOLOR", Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(tmpAccountCursor.getString(8))));
+                account_values.put("TEXTCOLOR", Color.parseColor(ColorUtil.INSTANCE.formatColorToParsableHexString(tmpAccountCursor.getString(account_colPos_TEXT_COLOR))));
             } catch (Exception e) {
                 e.printStackTrace();
-                values.put("TEXTCOLOR", -16777216);
+                account_values.put("TEXTCOLOR", -16777216);
             }
-            values.put("CAPABILITIESETAG", tmpAccountCursor.getString(9));
-            db.insert("ACCOUNT", OnConflictStrategy.REPLACE, values);
+            account_values.put("CAPABILITIESETAG", tmpAccountCursor.getString(account_colPos_CAPABILITIES_ETAG));
+            db.insert("ACCOUNT", OnConflictStrategy.REPLACE, account_values);
         }
         tmpAccountCursor.close();
-        db.execSQL("DROP TABLE IF EXISTS ACCOUNTS");
 
-        Cursor tmpCategoriesCursor = db.query("SELECT * FROM CATEGORIES", null);
+        final Cursor tmpCategoriesCursor = db.query("SELECT * FROM CATEGORIES", null);
+        final ContentValues categories_values = new ContentValues(3);
+        final int categories_colPos_ACCOUNT_ID = tmpCategoriesCursor.getColumnIndex("CATEGORY_ACCOUNT_ID");
+        final int categories_colPos_TITLE = tmpCategoriesCursor.getColumnIndex("CATEGORY_TITLE");
+        final int categories_colPos_SORTING_METHOD = tmpCategoriesCursor.getColumnIndex("CATEGORY_SORTING_METHOD");
         while (tmpCategoriesCursor.moveToNext()) {
-            ContentValues values = new ContentValues();
-            values.put("ACCOUNTID", tmpCategoriesCursor.getInt(1));
-            values.put("CATEGORY", tmpCategoriesCursor.getString(2));
-            values.put("SORTINGMETHOD", tmpCategoriesCursor.getInt(3));
-            db.insert("CATEGORY", OnConflictStrategy.REPLACE, values);
+            categories_values.put("ACCOUNTID", tmpCategoriesCursor.getInt(categories_colPos_ACCOUNT_ID));
+            categories_values.put("CATEGORY", tmpCategoriesCursor.getString(categories_colPos_TITLE));
+            categories_values.put("SORTINGMETHOD", tmpCategoriesCursor.getInt(categories_colPos_SORTING_METHOD));
+            db.insert("CATEGORYOPTIONS", OnConflictStrategy.REPLACE, categories_values);
         }
         tmpCategoriesCursor.close();
-        db.execSQL("DROP TABLE IF EXISTS CATEGORIES");
 
-        Cursor tmpNotesCursor = db.query("SELECT NOTES.*, CATEGORIES.title as `CAT_TITLE` FROM NOTES INNER JOIN CATEGORIES ON NOTES.categoryId = CATEGORIES.id", null);
+        final Cursor tmpNotesCursor = db.query("SELECT NOTES.*, CATEGORIES.category_title as `CAT_TITLE` FROM NOTES INNER JOIN CATEGORIES ON NOTES.category = CATEGORIES.category_id", null);
+        final ContentValues note_values = new ContentValues(12);
+        final int notes_colPos_ID = tmpNotesCursor.getColumnIndex("ID");
+        final int notes_colPos_REMOTEID = tmpNotesCursor.getColumnIndex("REMOTEID");
+        final int notes_colPos_ACCOUNT_ID = tmpNotesCursor.getColumnIndex("ACCOUNT_ID");
+        final int notes_colPos_STATUS = tmpNotesCursor.getColumnIndex("STATUS");
+        final int notes_colPos_TITLE = tmpNotesCursor.getColumnIndex("TITLE");
+        final int notes_colPos_MODIFIED = tmpNotesCursor.getColumnIndex("MODIFIED");
+        final int notes_colPos_CONTENT = tmpNotesCursor.getColumnIndex("CONTENT");
+        final int notes_colPos_FAVORITE = tmpNotesCursor.getColumnIndex("FAVORITE");
+        final int notes_colPos_CAT_TITLE = tmpNotesCursor.getColumnIndex("CAT_TITLE");
+        final int notes_colPos_ETAG = tmpNotesCursor.getColumnIndex("ETAG");
+        final int notes_colPos_EXCERPT = tmpNotesCursor.getColumnIndex("EXCERPT");
+        final int notes_colPos_SCROLL_Y = tmpNotesCursor.getColumnIndex("SCROLL_Y");
         while (tmpNotesCursor.moveToNext()) {
-            ContentValues values = new ContentValues();
-            values.put("ID", tmpNotesCursor.getInt(0));
-            values.put("REMOTEID", tmpNotesCursor.getInt(1));
-            values.put("ACCOUNTID", tmpNotesCursor.getInt(2));
-            values.put("STATUS", tmpNotesCursor.getString(3));
-            values.put("TITLE", tmpNotesCursor.getString(4));
-            values.put("MODIFIED", tmpNotesCursor.getLong(5));
-            values.put("CONTENT", tmpNotesCursor.getString(6));
-            values.put("FAVORITE", tmpNotesCursor.getInt(7));
-            values.put("CATEGORY", tmpNotesCursor.getInt(11));
-            values.put("ETAG", tmpNotesCursor.getString(9));
-            values.put("EXCERPT", tmpNotesCursor.getString(10));
-            db.insert("NOTE", OnConflictStrategy.REPLACE, values);
+            note_values.put("ID", tmpNotesCursor.getInt(notes_colPos_ID));
+            note_values.put("REMOTEID", tmpNotesCursor.getInt(notes_colPos_REMOTEID));
+            note_values.put("ACCOUNTID", tmpNotesCursor.getInt(notes_colPos_ACCOUNT_ID));
+            note_values.put("STATUS", tmpNotesCursor.getString(notes_colPos_STATUS));
+            note_values.put("TITLE", tmpNotesCursor.getString(notes_colPos_TITLE));
+            note_values.put("MODIFIED", tmpNotesCursor.getLong(notes_colPos_MODIFIED));
+            note_values.put("CONTENT", tmpNotesCursor.getString(notes_colPos_CONTENT));
+            note_values.put("FAVORITE", tmpNotesCursor.getInt(notes_colPos_FAVORITE));
+            note_values.put("CATEGORY", tmpNotesCursor.getString(notes_colPos_CAT_TITLE));
+            note_values.put("ETAG", tmpNotesCursor.getString(notes_colPos_ETAG));
+            note_values.put("EXCERPT", tmpNotesCursor.getString(notes_colPos_EXCERPT));
+            note_values.put("SCROLLY", tmpNotesCursor.getString(notes_colPos_SCROLL_Y));
+            db.insert("NOTE", OnConflictStrategy.REPLACE, note_values);
         }
         tmpNotesCursor.close();
-        db.execSQL("DROP TABLE IF EXISTS NOTES");
 
-        Cursor tmpWidgetNotesListCursor = db.query("SELECT * FROM WIDGET_NOTE_LISTS", null);
+        final Cursor tmpWidgetNotesListCursor = db.query("SELECT WIDGET_NOTE_LISTS.*, CATEGORIES.category_title as `CATEGORY` FROM WIDGET_NOTE_LISTS INNER JOIN CATEGORIES ON WIDGET_NOTE_LISTS.CATEGORY_ID = CATEGORIES.category_id", null);
+        final ContentValues nlw_values = new ContentValues(5);
+        final int nlw_colPos_ID = tmpWidgetNotesListCursor.getColumnIndex("ID");
+        final int nlw_colPos_ACCOUNT_ID = tmpWidgetNotesListCursor.getColumnIndex("ACCOUNT_ID");
+        final int nlw_colPos_CATEGORY = tmpWidgetNotesListCursor.getColumnIndex("CATEGORY");
+        final int nlw_colPos_MODE = tmpWidgetNotesListCursor.getColumnIndex("MODE");
+        final int nlw_colPos_THEME_MODE = tmpWidgetNotesListCursor.getColumnIndex("THEME_MODE");
         while (tmpWidgetNotesListCursor.moveToNext()) {
-            ContentValues values = new ContentValues();
-            values.put("ID", tmpWidgetNotesListCursor.getInt(0));
-            values.put("ACCOUNTID", tmpWidgetNotesListCursor.getInt(1));
-            values.put("CATEGORYID", tmpWidgetNotesListCursor.getInt(2));
-            values.put("MODE", tmpWidgetNotesListCursor.getInt(3));
-            values.put("THEMEMODE", tmpWidgetNotesListCursor.getInt(4));
-            db.insert("NOTESLISTWIDGETDATA", OnConflictStrategy.REPLACE, values);
+            nlw_values.put("ID", tmpWidgetNotesListCursor.getInt(nlw_colPos_ID));
+            nlw_values.put("ACCOUNTID", tmpWidgetNotesListCursor.getInt(nlw_colPos_ACCOUNT_ID));
+            nlw_values.put("CATEGORY", tmpWidgetNotesListCursor.getString(nlw_colPos_CATEGORY));
+            // TODO does work for categories, but not yet for FAVORITES
+            nlw_values.put("MODE", tmpWidgetNotesListCursor.getInt(nlw_colPos_MODE));
+            nlw_values.put("THEMEMODE", tmpWidgetNotesListCursor.getInt(nlw_colPos_THEME_MODE));
+            db.insert("NOTESLISTWIDGETDATA", OnConflictStrategy.REPLACE, nlw_values);
         }
         tmpWidgetNotesListCursor.close();
-        db.execSQL("DROP TABLE IF EXISTS WIDGET_NOTE_LISTS");
 
-        Cursor tmpWidgetSinlgeNotesCursor = db.query("SELECT * FROM WIDGET_SINGLE_NOTES", null);
-        while (tmpWidgetSinlgeNotesCursor.moveToNext()) {
-            ContentValues values = new ContentValues();
-            values.put("ID", tmpWidgetNotesListCursor.getInt(0));
-            values.put("ACCOUNTID", tmpWidgetNotesListCursor.getInt(1));
-            values.put("NOTEID", tmpWidgetNotesListCursor.getInt(2));
-            values.put("THEMEMODE", tmpWidgetNotesListCursor.getInt(3));
-            db.insert("SINGLENOTEWIDGETDATA", OnConflictStrategy.REPLACE, values);
+        Cursor tmpWidgetSingleNotesCursor = db.query("SELECT * FROM WIDGET_SINGLE_NOTES", null);
+        final ContentValues snw_values = new ContentValues(4);
+        final int snw_colPos_ID = tmpWidgetSingleNotesCursor.getColumnIndex("ID");
+        final int snw_colPos_ACCOUNT_ID = tmpWidgetSingleNotesCursor.getColumnIndex("ACCOUNT_ID");
+        final int snw_colPos_NOTE_ID = tmpWidgetSingleNotesCursor.getColumnIndex("NOTE_ID");
+        final int snw_colPos_THEME_MODE = tmpWidgetSingleNotesCursor.getColumnIndex("THEME_MODE");
+        while (tmpWidgetSingleNotesCursor.moveToNext()) {
+            snw_values.put("ID", tmpWidgetSingleNotesCursor.getInt(snw_colPos_ID));
+            snw_values.put("ACCOUNTID", tmpWidgetSingleNotesCursor.getInt(snw_colPos_ACCOUNT_ID));
+            snw_values.put("NOTEID", tmpWidgetSingleNotesCursor.getInt(snw_colPos_NOTE_ID));
+            snw_values.put("THEMEMODE", tmpWidgetSingleNotesCursor.getInt(snw_colPos_THEME_MODE));
+            db.insert("SINGLENOTEWIDGETDATA", OnConflictStrategy.REPLACE, snw_values);
         }
-        tmpWidgetNotesListCursor.close();
+        tmpWidgetSingleNotesCursor.close();
+
         db.execSQL("DROP TABLE IF EXISTS WIDGET_SINGLE_NOTES");
+        db.execSQL("DROP TABLE IF EXISTS WIDGET_NOTE_LISTS");
+        db.execSQL("DROP TABLE IF EXISTS CATEGORIES");
+        db.execSQL("DROP TABLE IF EXISTS NOTES");
+        db.execSQL("DROP TABLE IF EXISTS ACCOUNTS");
     }
 }
