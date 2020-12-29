@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.persistence.entity;
 
+import androidx.annotation.Nullable;
 import androidx.room.TypeConverter;
 
 import java.util.Calendar;
@@ -10,12 +11,17 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 public class Converters {
 
     @TypeConverter
-    public static DBStatus fromString(String value) {
-        return value == null ? null : DBStatus.parse(value);
+    public static DBStatus fromString(@Nullable String value) {
+        for (DBStatus status : DBStatus.values()) {
+            if (status.getTitle().equals(value)) {
+                return status;
+            }
+        }
+        return DBStatus.VOID;
     }
 
     @TypeConverter
-    public static String dbStatusToString(DBStatus status) {
+    public static String dbStatusToString(@Nullable DBStatus status) {
         return status == null ? null : status.getTitle();
     }
 

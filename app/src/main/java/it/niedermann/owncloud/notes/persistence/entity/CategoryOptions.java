@@ -45,16 +45,6 @@ public class CategoryOptions implements Serializable {
     @Nullable
     private CategorySortingMethod sortingMethod;
 
-    public CategoryOptions() {
-        // Default constructor
-    }
-
-    @Ignore
-    public CategoryOptions(long accountId, String category) {
-        setAccountId(accountId);
-        setCategory(category);
-    }
-
     public long getAccountId() {
         return accountId;
     }

@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 
 import it.niedermann.android.sharedpreferences.SharedPreferenceIntLiveData;
+import it.niedermann.android.sharedpreferences.SharedPreferenceStringLiveData;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.dao.AccountDao;
