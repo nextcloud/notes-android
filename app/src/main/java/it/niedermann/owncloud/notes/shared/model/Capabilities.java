@@ -18,7 +18,7 @@ import it.niedermann.android.util.ColorUtil;
 import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
 
 /**
- * This entity class is used to return relevant data of the HTTP reponse.
+ * This entity class is used to return relevant data of the HTTP response.
  */
 public class Capabilities {
 
@@ -42,7 +42,7 @@ public class Capabilities {
     @ColorInt
     private Integer textColor = -16777216;
     @Nullable
-    private String eTag;
+    private final String eTag;
 
     public Capabilities(@NonNull String response, @Nullable String eTag) throws NextcloudHttpRequestFailedException {
         this.eTag = eTag;
@@ -109,6 +109,7 @@ public class Capabilities {
         return textColor;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Capabilities{" +
