@@ -115,9 +115,9 @@ public interface NoteDao {
      * (i.e. all (!) user changeable columns (content, favorite, category) must still have the same value), uses reference value gathered at start of synchronization
      */
     @SuppressWarnings("JavadocReference")
-    @Query("UPDATE NOTE SET title = :title, modified = :modified, title = :title, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
-            "WHERE id = :id AND content = :oldContent AND favorite = :oldFavorite AND category = :oldCategory")
-    int updateIfNotModifiedLocallyDuringSync(long id, Long modified, String title, boolean favorite, String eTag, String content, String excerpt, String oldContent, String oldCategory, boolean oldFavorite);
+    @Query("UPDATE NOTE SET title = :targetTitle, modified = :targetModified, title = :targetTitle, favorite = :targetFavorite, etag = :targetETag, content = :targetContent, status = '', excerpt = :targetExcerpt " +
+            "WHERE id = :noteId AND content = :contentBeforeSyncStart AND favorite = :favoriteBeforeSyncStart AND category = :categoryBeforeSyncStart")
+    int updateIfNotModifiedLocallyDuringSync(long noteId, Long targetModified, String targetTitle, boolean targetFavorite, String targetETag, String targetContent, String targetExcerpt, String contentBeforeSyncStart, String categoryBeforeSyncStart, boolean favoriteBeforeSyncStart);
 
     /**
      * used by: {@link NoteServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
