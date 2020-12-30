@@ -454,7 +454,7 @@ public class NoteServerSyncHelper {
                         Log.v(TAG, "   ... found → Update");
                         Long localId = idMap.get(remoteNote.getRemoteId());
                         if (localId != null) {
-                            db.getNoteDao().updateIfNotModifiedLocallyAndRemoteColumnHasChanged(
+                            db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                                     localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
                         } else {
                             Log.e(TAG, "Tried to update note from server, but local id of note is null. " + remoteNote);
