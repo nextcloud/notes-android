@@ -188,7 +188,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             entity.setAccountId(note.getAccountId());
             entity.setExcerpt(note.getExcerpt());
         } else {
-            entity.setStatus(DBStatus.VOID);
+            entity.setStatus(DBStatus.LOCAL_EDITED);
             entity.setAccountId(accountId);
             entity.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
         }

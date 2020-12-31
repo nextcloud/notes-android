@@ -56,10 +56,9 @@ import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromP
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
 
     private String changedText;
-
     private MarkdownProcessor markdownProcessor;
-
     private FragmentNotePreviewBinding binding;
+    private boolean noteLoaded = false;
 
     public static NotePreviewFragment newInstance(long accountId, long noteId) {
         NotePreviewFragment f = new NotePreviewFragment();
@@ -107,8 +106,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    protected void onNoteLoaded(Note note) {
+        noteLoaded = true;
         markdownProcessor = new MarkdownProcessor(requireContext());
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
@@ -161,7 +160,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class)
-                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, db.getNoteDao().getLocalIdByRemoteId(this.note.getAccountId(), extractNoteRemoteId(link)));
+                                        .putExtra(EditNoteActivity.PARAM_NOTE_ID, db.getNoteDao().getLocalIdByRemoteId(note.getAccountId(), extractNoteRemoteId(link)));
                                 startActivity(intent);
                             } else {
                                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
@@ -191,6 +190,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         }
     }
 
+
     @Override
     protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
         if (binding != null && ViewCompat.isAttachedToWindow(binding.singleNoteContent)) {
@@ -207,7 +207,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     @Override
     public void onRefresh() {
-        if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
+        if (noteLoaded && db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
             try {
                 TextProcessorChain chain = defaultTextProcessorChain(note);

@@ -142,7 +142,16 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 }
             }
         };
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.editContent.addTextChangedListener(textWatcher);
+    }
+
+    @Override
+    protected void onNoteLoaded(Note note) {
         if (note != null) {
             if (note.getContent().isEmpty()) {
                 binding.editContent.requestFocus();
@@ -169,12 +178,6 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 binding.editContent.setTypeface(Typeface.MONOSPACE);
             }
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        binding.editContent.addTextChangedListener(textWatcher);
     }
 
     @Override

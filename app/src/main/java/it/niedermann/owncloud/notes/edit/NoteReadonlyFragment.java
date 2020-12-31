@@ -27,6 +27,7 @@ import com.yydcdut.markdown.syntax.text.TextFactory;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteLinksUtils;
@@ -95,8 +96,7 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    protected void onNoteLoaded(Note note) {
         markdownProcessor = new MarkdownProcessor(requireActivity());
         markdownProcessor.factory(TextFactory.create());
         markdownProcessor.config(
@@ -104,7 +104,7 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
                         .setOnLinkClickCallback((view, link) -> {
                             if (NoteLinksUtils.isNoteLink(link)) {
                                 long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-                                long noteLocalId = db.getNoteDao().getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
+                                long noteLocalId = db.getNoteDao().getLocalIdByRemoteId(note.getAccountId(), noteRemoteId);
                                 Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
                                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
                                 startActivity(intent);

@@ -69,7 +69,7 @@ public class ServerResponse {
     }
 
     Note getNoteFromJSON(JSONObject json) throws JSONException {
-        long id = 0;
+        long remoteId = 0;
         String title = "";
         String content = "";
         Calendar modified = null;
@@ -77,7 +77,7 @@ public class ServerResponse {
         String category = "";
         String etag = null;
         if (!json.isNull(NotesClient.JSON_ID)) {
-            id = json.getLong(NotesClient.JSON_ID);
+            remoteId = json.getLong(NotesClient.JSON_ID);
         }
         if (!json.isNull(NotesClient.JSON_TITLE)) {
             title = json.getString(NotesClient.JSON_TITLE);
@@ -98,6 +98,6 @@ public class ServerResponse {
         if (!json.isNull(NotesClient.JSON_ETAG)) {
             etag = json.getString(NotesClient.JSON_ETAG);
         }
-        return new Note(id, modified, title, content, category, favorite, etag);
+        return new Note(remoteId, modified, title, content, category, favorite, etag);
     }
 }

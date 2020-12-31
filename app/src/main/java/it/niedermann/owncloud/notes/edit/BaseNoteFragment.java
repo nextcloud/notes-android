@@ -111,6 +111,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     }
                     isNew = false;
                     note = originalNote = db.getNoteDao().getNoteById(id);
+                    onNoteLoaded(note);
                 } else {
                     Note cloudNote = (Note) requireArguments().getSerializable(PARAM_NEWNOTE);
                     String content = requireArguments().getString(PARAM_CONTENT);
@@ -119,12 +120,14 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                             throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
                         } else {
                             note = new Note(-1, -1L, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, getString(R.string.category_readonly), false, null, DBStatus.VOID, -1, "", 0);
+                            onNoteLoaded(note);
                         }
                     } else {
                         final LiveData<Note> createLiveData = db.addNoteAndSync(localAccount, cloudNote);
                         createLiveData.observe(requireActivity(), (createdNote) -> {
                             note = createdNote;
                             originalNote = null;
+                            onNoteLoaded(note);
                             createLiveData.removeObservers(requireActivity());
                         });
                     }
@@ -132,6 +135,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             } else {
                 note = (Note) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
                 originalNote = (Note) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
+                onNoteLoaded(note);
             }
             setHasOptionsMenu(true);
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
@@ -279,6 +283,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         }
         return super.onOptionsItemSelected(item);
     }
+
+    protected abstract void onNoteLoaded(Note note);
 
     public void onCloseNote() {
         if (!titleModified && originalNote == null && getContent().isEmpty()) {
