@@ -429,6 +429,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                 SSOClient.invalidateAPICache();
             }
 
+            // TODO this should already be handled by foreign key cascade, no?
             final int deletedNotes = getNoteDao().deleteByAccountId(localAccount.getId());
             Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + localAccount.getId());
             ret.postValue(null);
