@@ -160,11 +160,14 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             if (count == 0) {
                 startActivityForResult(new Intent(this, ImportAccountActivity.class), ImportAccountActivity.REQUEST_CODE_IMPORT_ACCOUNT);
             } else {
-                try {
-                    mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name));
-                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                    ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-                }
+                new Thread(() -> {
+                    try {
+                        final Account account = mainViewModel.getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(getApplicationContext()).name);
+                        runOnUiThread(() -> mainViewModel.postCurrentAccount(account));
+                    } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                    }
+                }).start();
             }
         });
 
@@ -599,8 +602,11 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
                                 LiveData<Account> createLiveData = mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
                                 runOnUiThread(() -> createLiveData.observe(this, (account) -> {
-                                    Log.i(TAG, capabilities.toString());
-                                    runOnUiThread(() -> mainViewModel.postCurrentAccount(mainViewModel.getLocalAccountByAccountName(ssoAccount.name)));
+                                    new Thread(() -> {
+                                        Log.i(TAG, capabilities.toString());
+                                        final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
+                                        runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
+                                    }).start();
                                 }));
                             } catch (Exception e) {
                                 // Happens when importing an already existing account the second time

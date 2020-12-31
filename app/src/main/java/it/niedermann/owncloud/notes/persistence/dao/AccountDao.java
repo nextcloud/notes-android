@@ -32,6 +32,9 @@ public interface AccountDao {
     @Query("SELECT * FROM Account")
     List<Account> getAccounts();
 
+    @Query("SELECT * FROM Account")
+    LiveData<List<Account>> getAccountsLiveData();
+
     @Query("SELECT COUNT(*) FROM Account")
     Integer getAccountsCount();
 

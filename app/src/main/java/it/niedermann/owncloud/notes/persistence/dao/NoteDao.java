@@ -93,8 +93,14 @@ public interface NoteDao {
     @Query("SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND favorite = 1")
     Integer getFavoritesCount(long accountId);
 
+    @Query("SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND favorite = 1")
+    LiveData<Integer> getFavoritesCountLiveData(long accountId);
+
     @Query("SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId")
     Integer count(long accountId);
+
+    @Query("SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId")
+    LiveData<Integer> countLiveData(long accountId);
 
     /**
      * Returns a list of all {@link Note}s in the Database which were modified locally

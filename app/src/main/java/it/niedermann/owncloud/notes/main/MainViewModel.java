@@ -10,12 +10,9 @@ import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
-import androidx.arch.core.util.Function;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateHandle;
 
 import com.nextcloud.android.sso.AccountImporter;
@@ -294,9 +291,15 @@ public class MainViewModel extends AndroidViewModel {
                 Log.v(TAG, "[getNavigationCategories] - currentAccount: " + currentAccount.getAccountName());
                 return switchMap(getExpandedCategory(), expandedCategory -> {
                     Log.v(TAG, "[getNavigationCategories] - expandedCategory: " + expandedCategory);
-                    return distinctUntilChanged(map(db.getNoteDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase ->
-                            fromCategoriesWithNotesCount(getApplication(), expandedCategory, fromDatabase, db.getNoteDao().count(currentAccount.getId()), db.getNoteDao().getFavoritesCount(currentAccount.getId()))
-                    ));
+                    return switchMap(db.getNoteDao().countLiveData(currentAccount.getId()), (count) -> {
+                        Log.v(TAG, "[getNavigationCategories] - count: " + count);
+                        return switchMap(db.getNoteDao().getFavoritesCountLiveData(currentAccount.getId()), (favoritesCount) -> {
+                            Log.v(TAG, "[getNavigationCategories] - favoritesCount: " + favoritesCount);
+                            return distinctUntilChanged(map(db.getNoteDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase ->
+                                    fromCategoriesWithNotesCount(getApplication(), expandedCategory, fromDatabase, count, favoritesCount)
+                            ));
+                        });
+                    });
                 });
             }
         });

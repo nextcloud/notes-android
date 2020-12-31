@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
+import androidx.lifecycle.LiveData;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -62,29 +63,36 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
-        Account currentLocalAccount = db.getAccountDao().getAccount(currentAccountId);
-        binding.accountName.setText(currentLocalAccount.getUserName());
-        binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
-        Glide.with(requireContext())
-                .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUserName()) + "/64")
-                .error(R.drawable.ic_account_circle_grey_24dp)
-                .apply(RequestOptions.circleCropTransform())
-                .into(binding.currentAccountItemAvatar);
-        binding.accountLayout.setOnClickListener((v) -> dismiss());
+        LiveData<Account> account$ = db.getAccountDao().getAccountLiveData(currentAccountId);
+        account$.observe(requireActivity(), (currentLocalAccount) -> {
+            account$.removeObservers(requireActivity());
 
-        AccountSwitcherAdapter adapter = new AccountSwitcherAdapter((localAccount -> {
-            accountSwitcherListener.onAccountChosen(localAccount);
-            dismiss();
-        }));
-        binding.accountsList.setAdapter(adapter);
-        List<Account> localAccounts = db.getAccountDao().getAccounts();
-        for (Account localAccount : localAccounts) {
-            if (localAccount.getId() == currentLocalAccount.getId()) {
-                localAccounts.remove(localAccount);
-                break;
-            }
-        }
-        adapter.setLocalAccounts(localAccounts);
+            binding.accountName.setText(currentLocalAccount.getUserName());
+            binding.accountHost.setText(Uri.parse(currentLocalAccount.getUrl()).getHost());
+            Glide.with(requireContext())
+                    .load(currentLocalAccount.getUrl() + "/index.php/avatar/" + Uri.encode(currentLocalAccount.getUserName()) + "/64")
+                    .error(R.drawable.ic_account_circle_grey_24dp)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(binding.currentAccountItemAvatar);
+            binding.accountLayout.setOnClickListener((v) -> dismiss());
+
+            AccountSwitcherAdapter adapter = new AccountSwitcherAdapter((localAccount -> {
+                accountSwitcherListener.onAccountChosen(localAccount);
+                dismiss();
+            }));
+            binding.accountsList.setAdapter(adapter);
+            LiveData<List<Account>> localAccounts$ = db.getAccountDao().getAccountsLiveData();
+            localAccounts$.observe(requireActivity(), (localAccounts) -> {
+                localAccounts$.removeObservers(requireActivity());
+                for (Account localAccount : localAccounts) {
+                    if (localAccount.getId() == currentLocalAccount.getId()) {
+                        localAccounts.remove(localAccount);
+                        break;
+                    }
+                }
+                adapter.setLocalAccounts(localAccounts);
+            });
+        });
 
         binding.addAccount.setOnClickListener((v) -> {
             accountSwitcherListener.addAccount();

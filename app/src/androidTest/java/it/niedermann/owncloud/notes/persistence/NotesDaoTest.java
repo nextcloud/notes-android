@@ -146,19 +146,25 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void getFavoritesCount() throws NextcloudHttpRequestFailedException {
+    public void getFavoritesCount() throws NextcloudHttpRequestFailedException, InterruptedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
         assertEquals(Integer.valueOf(1), db.getNoteDao().getFavoritesCount(account.getId()));
         assertEquals(Integer.valueOf(1), db.getNoteDao().getFavoritesCount(secondAccount.getId()));
+
+        assertEquals(Integer.valueOf(1), getOrAwaitValue(db.getNoteDao().getFavoritesCountLiveData(account.getId())));
+        assertEquals(Integer.valueOf(1), getOrAwaitValue(db.getNoteDao().getFavoritesCountLiveData(secondAccount.getId())));
     }
 
     @Test
-    public void count() throws NextcloudHttpRequestFailedException {
+    public void count() throws NextcloudHttpRequestFailedException, InterruptedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
         assertEquals(Integer.valueOf(7), db.getNoteDao().count(account.getId()));
         assertEquals(Integer.valueOf(5), db.getNoteDao().count(secondAccount.getId()));
+
+        assertEquals(Integer.valueOf(7), getOrAwaitValue(db.getNoteDao().countLiveData(account.getId())));
+        assertEquals(Integer.valueOf(5), getOrAwaitValue(db.getNoteDao().countLiveData(secondAccount.getId())));
     }
 
     @Test
