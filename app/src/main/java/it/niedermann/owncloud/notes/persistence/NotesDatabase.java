@@ -48,6 +48,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryOptions;
 import it.niedermann.owncloud.notes.persistence.entity.Converters;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.NoteIdPair;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_10_11;
@@ -213,8 +214,8 @@ public abstract class NotesDatabase extends RoomDatabase {
     public Map<Long, Long> getIdMap(long accountId) {
         validateAccountId(accountId);
         Map<Long, Long> result = new HashMap<>();
-        for (Note note : getNoteDao().getRemoteIdAndId(accountId)) {
-            result.put(note.getRemoteId(), note.getId());
+        for (NoteIdPair pair : getNoteDao().getRemoteIdAndId(accountId)) {
+            result.put(pair.getRemoteId(), pair.getId());
         }
         return result;
     }
