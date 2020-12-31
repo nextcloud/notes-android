@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.Set;
 
 import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
+@SuppressWarnings("JavadocReference")
 @Dao
 public interface NoteDao {
 
@@ -67,10 +69,10 @@ public interface NoteDao {
     void updateCategory(long id, String category);
 
     /**
-     * Gets all the remoteIds of all not deleted notes of an account
+     * Gets all the {@link Note#remoteId}s of all not deleted {@link Note}s of an {@link Account}
      *
-     * @param accountId get the remoteIds from all notes of this account
-     * @return {@link Set<String>} remoteIds from all notes
+     * @param accountId get the {@link Note#remoteId} from all {@link Note}s of this {@link Account}
+     * @return {@link Set<String>} {@link Note#remoteId}s from all {@link Note}s
      */
     @Query("SELECT DISTINCT remoteId FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
     List<Long> getRemoteIds(long accountId);
@@ -79,9 +81,9 @@ public interface NoteDao {
     List<Note> getRemoteIdAndId(long accountId);
 
     /**
-     * Get a single Note by remote Id (aka. nextcloud file id)
+     * Get a single {@link Note} by {@link Note#remoteId} (aka. Nextcloud file id)
      *
-     * @param remoteId int - remote ID of the requested Note
+     * @param remoteId int - {@link Note#remoteId} of the requested {@link Note}
      * @return {@link Note#getId()}
      */
     @Query("SELECT id FROM NOTE WHERE accountId = :accountId AND remoteId = :remoteId AND status != 'LOCAL_DELETED'")
@@ -94,7 +96,7 @@ public interface NoteDao {
     Integer count(long accountId);
 
     /**
-     * Returns a list of all Notes in the Database which were modified locally
+     * Returns a list of all {@link Note}s in the Database which were modified locally
      *
      * @return {@link List<Note>}
      */
@@ -114,7 +116,6 @@ public interface NoteDao {
      * used by: {@link NoteServerSyncHelper.SyncTask#pushLocalChanges()} update only, if not modified locally during the synchronization
      * (i.e. all (!) user changeable columns (content, favorite, category) must still have the same value), uses reference value gathered at start of synchronization
      */
-    @SuppressWarnings("JavadocReference")
     @Query("UPDATE NOTE SET title = :targetTitle, modified = :targetModified, favorite = :targetFavorite, etag = :targetETag, content = :targetContent, status = '', excerpt = :targetExcerpt " +
             "WHERE id = :noteId AND content = :contentBeforeSyncStart AND favorite = :favoriteBeforeSyncStart AND category = :categoryBeforeSyncStart")
     int updateIfNotModifiedLocallyDuringSync(long noteId, Long targetModified, String targetTitle, boolean targetFavorite, String targetETag, String targetContent, String targetExcerpt, String contentBeforeSyncStart, String categoryBeforeSyncStart, boolean favoriteBeforeSyncStart);
@@ -122,7 +123,6 @@ public interface NoteDao {
     /**
      * used by: {@link NoteServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
      */
-    @SuppressWarnings("JavadocReference")
     @Query("UPDATE NOTE SET title = :title, modified = :modified, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
             "WHERE id = :id AND status = '' AND (title != :title OR modified != (:modified / 1000) OR favorite != :favorite OR category != :category OR (eTag IS NULL OR eTag != :eTag) OR content != :content)")
     int updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(long id, Long modified, String title, boolean favorite, String category, String eTag, String content, String excerpt);
@@ -131,7 +131,7 @@ public interface NoteDao {
     String getContent(Long id);
 
     /**
-     * This method return all of the categories with given accountIdSELECT * FROM NOTE WHERE id = 1 and status = '' and (content != 'My-Content' or category != '')
+     * This method return all of the categories with given {@param accountId}
      *
      * @param accountId The user account Id
      * @return All of the categories with given accountId
@@ -139,6 +139,6 @@ public interface NoteDao {
     @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId GROUP BY category")
     LiveData<List<CategoryWithNotesCount>> getCategoriesLiveData(Long accountId);
 
-    @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE category != '' AND STATUS != 'LOCAL_DELETED' AND accountId = :accountId AND category LIKE :searchTerm GROUP BY category")
+    @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId AND category != '' AND category LIKE :searchTerm GROUP BY category")
     LiveData<List<CategoryWithNotesCount>> searchCategories(Long accountId, String searchTerm);
 }
