@@ -25,6 +25,9 @@ import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
 import static it.niedermann.owncloud.notes.persistence.NotesDatabaseTestUtil.getOrAwaitValue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 @SuppressWarnings("ConstantConditions")
 @RunWith(AndroidJUnit4.class)
@@ -178,6 +181,34 @@ public class NotesDaoTest {
         final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.LOCAL_DELETED, account.getId(), "", 0)));
         assertEquals(0, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent() + " ", localNote.getExcerpt()));
+    }
+
+    @Test
+    public void toggleFavorite() {
+        final Note note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.LOCAL_DELETED, account.getId(), "", 0);
+        db.getNoteDao().addNote(note);
+        db.getNoteDao().toggleFavorite(note.getId());
+        assertTrue(db.getNoteDao().getNoteById(note.getId()).getFavorite());
+        db.getNoteDao().toggleFavorite(note.getId());
+        assertFalse(db.getNoteDao().getNoteById(note.getId()).getFavorite());
+        db.getNoteDao().toggleFavorite(note.getId());
+        assertTrue(db.getNoteDao().getNoteById(note.getId()).getFavorite());
+    }
+
+    @Test
+    public void updateRemoteId() {
+        final Note note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.LOCAL_DELETED, account.getId(), "", 0);
+        db.getNoteDao().addNote(note);
+        db.getNoteDao().updateRemoteId(1, 5L);
+        assertEquals(Long.valueOf(5), db.getNoteDao().getNoteById(1).getRemoteId());
+    }
+
+    @Test
+    public void getContent() {
+        final Note note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.LOCAL_DELETED, account.getId(), "", 0);
+        db.getNoteDao().addNote(note);
+        assertEquals("My-Content", db.getNoteDao().getContent(note.getId()));
+        assertNull(db.getNoteDao().getContent(note.getId() + 1));
     }
 
     @Test
