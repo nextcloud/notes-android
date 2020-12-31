@@ -124,14 +124,14 @@ public interface NoteDao {
      */
     @SuppressWarnings("JavadocReference")
     @Query("UPDATE NOTE SET title = :title, modified = :modified, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
-            "WHERE id = :id AND status = '' AND (modified != :modified OR favorite != :favorite OR category != :category OR (eTag == NULL OR eTag != :eTag) OR content != :content)")
+            "WHERE id = :id AND status = '' AND (title != :title OR modified != (:modified / 1000) OR favorite != :favorite OR category != :category OR (eTag IS NULL OR eTag != :eTag) OR content != :content)")
     int updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(long id, Long modified, String title, boolean favorite, String category, String eTag, String content, String excerpt);
 
     @Query("SELECT content FROM NOTE WHERE id = :id")
     String getContent(Long id);
 
     /**
-     * This method return all of the categories with given accountId
+     * This method return all of the categories with given accountIdSELECT * FROM NOTE WHERE id = 1 and status = '' and (content != 'My-Content' or category != '')
      *
      * @param accountId The user account Id
      * @return All of the categories with given accountId

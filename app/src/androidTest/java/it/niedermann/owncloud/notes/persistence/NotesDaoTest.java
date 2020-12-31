@@ -86,104 +86,93 @@ public class NotesDaoTest {
     }
 
     @Test
-    @Ignore("BUG: .getTimeInMillis() always *must* be different from Calendar.getInstance()")
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Nothing() {
-        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
-
-        db.getNoteDao().addNote(localNote);
-
-        assert localNote.getModified() != null;
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0)));
         assertEquals(0, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
-    public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Nothing_ETagIsNull() {
-        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, DBStatus.VOID, account.getId(), "", 0);
-
-        db.getNoteDao().addNote(localNote);
-
-        assert localNote.getModified() != null;
+    public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Nothing_ETagWasAndIsNull() {
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, DBStatus.VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
-                localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
+                localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), null, localNote.getContent(), localNote.getExcerpt()));
+    }
+
+    @Test
+    public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Nothing_ETagWasNullButChanged() {
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, null, DBStatus.VOID, account.getId(), "", 0)));
+        assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
+                localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), "1", localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Modified() {
-        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
-
-        db.getNoteDao().addNote(localNote);
-
-        assert localNote.getModified() != null;
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
-                localNote.getId(), localNote.getModified().getTimeInMillis() + 1, localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
+                localNote.getId(), localNote.getModified().getTimeInMillis() + 1000, localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Title() {
-        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
-
-        db.getNoteDao().addNote(localNote);
-
-        assert localNote.getModified() != null;
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle() + " ", localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Favorite() {
-        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
-
-        db.getNoteDao().addNote(localNote);
-
-        assert localNote.getModified() != null;
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), !localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Category() {
-        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
-
-        db.getNoteDao().addNote(localNote);
-
-        assert localNote.getModified() != null;
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory() + " ", localNote.getETag(), localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_ETag() {
-        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
-
-        db.getNoteDao().addNote(localNote);
-
-        assert localNote.getModified() != null;
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag() + " ", localNote.getContent(), localNote.getExcerpt()));
     }
 
     @Test
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Content() {
-        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
-
-        db.getNoteDao().addNote(localNote);
-
-        assert localNote.getModified() != null;
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0)));
         assertEquals(1, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent() + " ", localNote.getExcerpt()));
     }
 
     @Test
-    @Ignore("BUG: .getTimeInMillis() always *must* be different from Calendar.getInstance()")
     public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_Excerpt() {
-        final Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
-
-        db.getNoteDao().addNote(localNote);
-
-        assert localNote.getModified() != null;
+        final Note localNote = db.getNoteDao().getNoteById(db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0)));
         // Excerpt is a local property, not a remote property
         assertEquals(0, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                 localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent(), localNote.getExcerpt() + " "));
+    }
+
+    @Test
+    public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_ContentChangedButWasLocalEdited() {
+        Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
+        localNote.setStatus(DBStatus.LOCAL_EDITED);
+        db.getNoteDao().addNote(localNote);
+        localNote = db.getNoteDao().getNoteById(1);
+        assertEquals(0, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
+                localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent() + " ", localNote.getExcerpt()));
+    }
+
+    @Test
+    public void updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged_ContentChangedButWasLocalDeleted() {
+        Note localNote = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", DBStatus.VOID, account.getId(), "", 0);
+        localNote.setStatus(DBStatus.LOCAL_DELETED);
+        db.getNoteDao().addNote(localNote);
+        localNote = db.getNoteDao().getNoteById(1);
+        assertEquals(0, db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
+                localNote.getId(), localNote.getModified().getTimeInMillis(), localNote.getTitle(), localNote.getFavorite(), localNote.getCategory(), localNote.getETag(), localNote.getContent() + " ", localNote.getExcerpt()));
     }
 }
