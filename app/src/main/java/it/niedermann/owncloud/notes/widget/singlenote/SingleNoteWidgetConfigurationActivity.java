@@ -52,24 +52,25 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
 
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
-        try {
-            mainViewModel.createOrUpdateSingleNoteWidgetData(
-                    new SingleNoteWidgetData(
-                            appWidgetId,
-                            note.getAccountId(),
-                            note.getId(),
-                            NotesApplication.getAppTheme(this).getModeId()
-                    )
-            );
-            final Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
-                    getApplicationContext(), SingleNoteWidget.class)
-                    .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-            setResult(RESULT_OK, updateIntent);
-            getApplicationContext().sendBroadcast(updateIntent);
-        } catch (SQLException e) {
-            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        finish();
+        new Thread(() -> {
+            try {
+                mainViewModel.createOrUpdateSingleNoteWidgetData(
+                        new SingleNoteWidgetData(
+                                appWidgetId,
+                                note.getAccountId(),
+                                note.getId(),
+                                NotesApplication.getAppTheme(this).getModeId()
+                        )
+                );
+                final Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
+                        getApplicationContext(), SingleNoteWidget.class)
+                        .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+                setResult(RESULT_OK, updateIntent);
+                getApplicationContext().sendBroadcast(updateIntent);
+                finish();
+            } catch (SQLException e) {
+                Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
