@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -29,26 +31,30 @@ import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetDat
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     private static final String TAG = NoteListWidgetFactory.class.getSimpleName();
 
+    private final NotesDatabase db;
+    private final int appWidgetId;
     private final Context context;
-    private final NotesListWidgetData data;
-    private final boolean darkTheme;
-    private NotesDatabase db;
+    private boolean darkTheme;
     private List<Note> noteEntities;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
-        final int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
-        db = NotesDatabase.getInstance(context);
-        data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
-
-        darkTheme = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
+        this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
+        this.db = NotesDatabase.getInstance(context);
     }
 
     @Override
     public void onCreate() {
+        // NoOp
+    }
+
+    @Override
+    public void onDataSetChanged() {
         final LiveData<List<Note>> noteEntitiesLiveData;
         try {
+            NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
+            darkTheme = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
                 case MODE_DISPLAY_ALL:
@@ -66,15 +72,11 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                     }
                     break;
             }
-            noteEntitiesLiveData.observeForever((notes) -> noteEntities = notes);
+
+            new Handler(Looper.getMainLooper()).post(() -> noteEntitiesLiveData.observeForever((notes) -> noteEntities = notes));
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onDataSetChanged() {
-        // NoOp
     }
 
     @Override

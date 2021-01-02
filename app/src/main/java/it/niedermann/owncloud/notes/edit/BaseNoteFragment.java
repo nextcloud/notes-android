@@ -93,56 +93,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         db = NotesDatabase.getInstance(context);
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        try {
-            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
-            this.localAccount = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
-
-            if (savedInstanceState == null) {
-                long id = requireArguments().getLong(PARAM_NOTE_ID);
-                if (id > 0) {
-                    long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
-                    if (accountId > 0) {
-                        /* Switch account if account id has been provided */
-                        this.localAccount = db.getAccountDao().getAccount(accountId);
-                        SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccount.getAccountName());
-                    }
-                    isNew = false;
-                    note = originalNote = db.getNoteDao().getNoteById(id);
-                    onNoteLoaded(note);
-                } else {
-                    Note cloudNote = (Note) requireArguments().getSerializable(PARAM_NEWNOTE);
-                    String content = requireArguments().getString(PARAM_CONTENT);
-                    if (cloudNote == null) {
-                        if (content == null) {
-                            throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
-                        } else {
-                            note = new Note(-1, -1L, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, getString(R.string.category_readonly), false, null, DBStatus.VOID, -1, "", 0);
-                            onNoteLoaded(note);
-                        }
-                    } else {
-                        final LiveData<Note> createLiveData = db.addNoteAndSync(localAccount, cloudNote);
-                        createLiveData.observe(requireActivity(), (createdNote) -> {
-                            note = createdNote;
-                            originalNote = null;
-                            onNoteLoaded(note);
-                            createLiveData.removeObservers(requireActivity());
-                        });
-                    }
-                }
-            } else {
-                note = (Note) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
-                originalNote = (Note) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
-                onNoteLoaded(note);
-            }
-            setHasOptionsMenu(true);
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Nullable
     protected abstract ScrollView getScrollView();
 
@@ -167,6 +117,59 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             this.originalScrollY = note.getScrollY();
             scrollView.post(() -> scrollView.scrollTo(0, originalScrollY));
         }
+        new Thread(() -> {
+            try {
+                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext().getApplicationContext());
+                this.localAccount = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+
+                if (savedInstanceState == null) {
+                    long id = requireArguments().getLong(PARAM_NOTE_ID);
+                    if (id > 0) {
+                        long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
+                        if (accountId > 0) {
+                            /* Switch account if account id has been provided */
+                            this.localAccount = db.getAccountDao().getAccount(accountId);
+                            SingleAccountHelper.setCurrentAccount(requireContext().getApplicationContext(), localAccount.getAccountName());
+                        }
+                        isNew = false;
+                        note = originalNote = db.getNoteDao().getNoteById(id);
+                        requireActivity().runOnUiThread(() -> onNoteLoaded(note));
+                        requireActivity().invalidateOptionsMenu();
+                    } else {
+                        Note cloudNote = (Note) requireArguments().getSerializable(PARAM_NEWNOTE);
+                        String content = requireArguments().getString(PARAM_CONTENT);
+                        if (cloudNote == null) {
+                            if (content == null) {
+                                throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
+                            } else {
+                                note = new Note(-1, null, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, getString(R.string.category_readonly), false, null, DBStatus.VOID, -1, "", 0);
+                                requireActivity().runOnUiThread(() -> onNoteLoaded(note));
+                                requireActivity().invalidateOptionsMenu();
+                            }
+                        } else {
+                            requireActivity().runOnUiThread(() -> {
+                                final LiveData<Note> createLiveData$ = db.addNoteAndSync(localAccount, cloudNote);
+                                createLiveData$.observe(requireActivity(), (createdNote) -> {
+                                    note = createdNote;
+                                    originalNote = null;
+                                    requireActivity().runOnUiThread(() -> onNoteLoaded(note));
+                                    requireActivity().invalidateOptionsMenu();
+                                    createLiveData$.removeObservers(requireActivity());
+                                });
+                            });
+                        }
+                    }
+                } else {
+                    note = (Note) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
+                    originalNote = (Note) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
+                    requireActivity().runOnUiThread(() -> onNoteLoaded(note));
+                    requireActivity().invalidateOptionsMenu();
+                }
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -209,11 +212,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
-        prepareFavoriteOption(itemFavorite);
+        if (note != null) {
+            prepareFavoriteOption(menu.findItem(R.id.menu_favorite));
 
-        menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
-        menu.findItem(R.id.menu_delete).setVisible(!isNew);
+            menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
+            menu.findItem(R.id.menu_delete).setVisible(!isNew);
+        }
     }
 
     private void prepareFavoriteOption(MenuItem item) {
@@ -229,11 +233,13 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.menu_cancel) {
-            if (originalNote == null) {
-                db.deleteNoteAndSync(localAccount, note.getId());
-            } else {
-                db.updateNoteAndSync(localAccount, originalNote, null, null, null);
-            }
+            new Thread(() -> {
+                if (originalNote == null) {
+                    db.deleteNoteAndSync(localAccount, note.getId());
+                } else {
+                    db.updateNoteAndSync(localAccount, originalNote, null, null, null);
+                }
+            }).start();
             listener.close();
             return true;
         } else if (itemId == R.id.menu_delete) {
@@ -252,9 +258,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             showEditTitleDialog();
             return true;
         } else if (itemId == R.id.menu_move) {
-            AccountPickerDialogFragment
-                    .newInstance(new ArrayList<>(db.getAccountDao().getAccounts()), note.getAccountId())
-                    .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
+            new Thread(() -> {
+                AccountPickerDialogFragment
+                        .newInstance(new ArrayList<>(), note.getAccountId())
+                        .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
+            }).start();
             return true;
         } else if (itemId == R.id.menu_share) {
             ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
@@ -300,7 +308,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     protected void saveNote(@Nullable ISyncCallback callback) {
         Log.d(TAG, "saveData()");
         if (note != null) {
-            String newContent = getContent();
+            final String newContent = getContent();
             if (note.getContent().equals(newContent)) {
                 if (note.getScrollY() != originalScrollY) {
                     Log.v(TAG, "... only saving new scroll state, since content did not change");
@@ -309,9 +317,11 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
             } else {
-                note = db.updateNoteAndSync(localAccount, note, newContent, null, callback);
-                listener.onNoteUpdated(note);
-                requireActivity().invalidateOptionsMenu();
+                new Thread(() -> {
+                    note = db.updateNoteAndSync(localAccount, note, newContent, null, callback);
+                    requireActivity().runOnUiThread(() -> listener.onNoteUpdated(note));
+                    requireActivity().invalidateOptionsMenu();
+                }).start();
             }
         } else {
             Log.e(TAG, "note is null");
@@ -362,8 +372,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onTitleEdited(String newTitle) {
         titleModified = true;
         note.setTitle(newTitle);
-        note = db.updateNoteAndSync(localAccount, note, note.getContent(), newTitle, null);
-        listener.onNoteUpdated(note);
+        new Thread(() -> {
+            note = db.updateNoteAndSync(localAccount, note, note.getContent(), newTitle, null);
+            requireActivity().runOnUiThread(() -> listener.onNoteUpdated(note));
+        }).start();
     }
 
     public void moveNote(Account account) {

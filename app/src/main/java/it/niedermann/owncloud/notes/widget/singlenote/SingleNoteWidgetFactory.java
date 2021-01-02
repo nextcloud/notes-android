@@ -31,15 +31,14 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     SingleNoteWidgetFactory(Context context, Intent intent) {
         this.context = context;
-        this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                AppWidgetManager.INVALID_APPWIDGET_ID);
+        this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         this.db = NotesDatabase.getInstance(context);
-        final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
-        if (data != null) {
-            darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
-        } else {
-            Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
-        }
+//        final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+//        if (data != null) {
+//            darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
+//        } else {
+//            Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
+//        }
     }
 
     @Override
@@ -51,6 +50,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     public void onDataSetChanged() {
         final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
         if (data != null) {
+            darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
             note = db.getNoteDao().getNoteById(noteId);

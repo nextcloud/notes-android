@@ -17,6 +17,8 @@ import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 
+import static androidx.lifecycle.Transformations.distinctUntilChanged;
+
 public class ManageAccountsActivity extends LockedActivity {
 
     private ActivityManageAccountsBinding binding;
@@ -34,37 +36,40 @@ public class ManageAccountsActivity extends LockedActivity {
 
         db = NotesDatabase.getInstance(this);
 
-        List<Account> localAccounts = db.getAccountDao().getAccounts();
-
-        adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
-            LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
-            deleteLiveData.observe(this, (v) -> {
-                for (Account temp : localAccounts) {
-                    if (temp.getId() == localAccount.getId()) {
-                        localAccounts.remove(temp);
-                        break;
+        distinctUntilChanged(db.getAccountDao().getAccountsLiveData()).observe(this, (localAccounts) -> {
+            adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
+                LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
+                deleteLiveData.observe(this, (v) -> {
+                    for (Account temp : localAccounts) {
+                        if (temp.getId() == localAccount.getId()) {
+                            localAccounts.remove(temp);
+                            break;
+                        }
                     }
-                }
-                if (localAccounts.size() > 0) {
-                    SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
-                    adapter.setCurrentLocalAccount(localAccounts.get(0));
-                } else {
-                    SingleAccountHelper.setCurrentAccount(getApplicationContext(), null);
-                    finish();
-                }
-                deleteLiveData.removeObservers(this);
+                    if (localAccounts.size() > 0) {
+                        SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
+                        adapter.setCurrentLocalAccount(localAccounts.get(0));
+                    } else {
+                        SingleAccountHelper.setCurrentAccount(getApplicationContext(), null);
+                        finish();
+                    }
+                    deleteLiveData.removeObservers(this);
+                });
             });
-        });
-        adapter.setLocalAccounts(localAccounts);
-        try {
-            SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
-            if (ssoAccount != null) {
-                adapter.setCurrentLocalAccount(db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name));
+            adapter.setLocalAccounts(localAccounts);
+            try {
+                final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
+                if (ssoAccount != null) {
+                    new Thread(() -> {
+                        final Account account = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+                        runOnUiThread(() -> adapter.setCurrentLocalAccount(account));
+                    }).start();
+                }
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                e.printStackTrace();
             }
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
-        binding.accounts.setAdapter(adapter);
+            binding.accounts.setAdapter(adapter);
+        });
     }
 
     @Override

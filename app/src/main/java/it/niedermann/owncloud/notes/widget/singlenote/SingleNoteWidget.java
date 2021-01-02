@@ -27,36 +27,38 @@ public class SingleNoteWidget extends AppWidgetProvider {
         final NotesDatabase db = NotesDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
-            if (data != null) {
-                templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, data.getAccountId());
+            new Thread(() -> {
+                final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+                if (data != null) {
+                    templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, data.getAccountId());
 
-                final PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                    final PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
+                            PendingIntent.FLAG_UPDATE_CURRENT);
 
-                Intent serviceIntent = new Intent(context, SingleNoteWidgetService.class);
-                serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-                serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
+                    Intent serviceIntent = new Intent(context, SingleNoteWidgetService.class);
+                    serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+                    serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
-                RemoteViews views;
+                    RemoteViews views;
 
-                if (NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()))) {
-                    views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_dark);
-                    views.setPendingIntentTemplate(R.id.single_note_widget_lv_dark, templatePendingIntent);
-                    views.setRemoteAdapter(R.id.single_note_widget_lv_dark, serviceIntent);
-                    views.setEmptyView(R.id.single_note_widget_lv_dark, R.id.widget_single_note_placeholder_tv_dark);
-                    awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv_dark);
+                    if (NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()))) {
+                        views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_dark);
+                        views.setPendingIntentTemplate(R.id.single_note_widget_lv_dark, templatePendingIntent);
+                        views.setRemoteAdapter(R.id.single_note_widget_lv_dark, serviceIntent);
+                        views.setEmptyView(R.id.single_note_widget_lv_dark, R.id.widget_single_note_placeholder_tv_dark);
+                        awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv_dark);
+                    } else {
+                        views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
+                        views.setPendingIntentTemplate(R.id.single_note_widget_lv, templatePendingIntent);
+                        views.setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent);
+                        views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
+                        awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv);
+                    }
+                    awm.updateAppWidget(appWidgetId, views);
                 } else {
-                    views = new RemoteViews(context.getPackageName(), R.layout.widget_single_note);
-                    views.setPendingIntentTemplate(R.id.single_note_widget_lv, templatePendingIntent);
-                    views.setRemoteAdapter(R.id.single_note_widget_lv, serviceIntent);
-                    views.setEmptyView(R.id.single_note_widget_lv, R.id.widget_single_note_placeholder_tv);
-                    awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv);
+                    Log.i(TAG, "onUpdate has been triggered before the user finished configuring the widget");
                 }
-                awm.updateAppWidget(appWidgetId, views);
-            } else {
-                Log.i(TAG, "onUpdate has been triggered before the user finished configuring the widget");
-            }
+            }).start();
         }
     }
 
@@ -80,7 +82,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
         final NotesDatabase db = NotesDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            db.getWidgetSingleNoteDao().removeSingleNoteWidget(appWidgetId);
+            new Thread(() -> db.getWidgetSingleNoteDao().removeSingleNoteWidget(appWidgetId)).start();
         }
         super.onDeleted(context, appWidgetIds);
     }

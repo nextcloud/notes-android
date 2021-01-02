@@ -1,4 +1,4 @@
-package it.niedermann.owncloud.notes.persistence;
+ package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
 import android.content.Intent;
@@ -74,6 +74,7 @@ import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.O;
 import static androidx.lifecycle.Transformations.map;
+import static androidx.lifecycle.Transformations.switchMap;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
@@ -116,7 +117,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                         new Migration_19_20()
                 )
                 .fallbackToDestructiveMigrationOnDowngrade()
-//                .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration()
                 .addCallback(new RoomDatabase.Callback() {
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
@@ -127,7 +128,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                         Log.v(TAG, NotesDatabase.class.getSimpleName() + " created.");
                     }
                 })
-                .allowMainThreadQueries() // FIXME remove
+//                .allowMainThreadQueries() // FIXME remove
                 .build();
     }
 
@@ -202,11 +203,13 @@ public abstract class NotesDatabase extends RoomDatabase {
         return getNoteDao().getNoteById(getNoteDao().addNote(entity));
     }
 
-    @AnyThread
+    @WorkerThread
     public LiveData<Note> moveNoteToAnotherAccount(Account account, Note note) {
-        Note Note = new Note(null, note.getModified(), note.getTitle(), getNoteDao().getContent(note.getId()), note.getCategory(), note.getFavorite(), null);
-        deleteNoteAndSync(account, note.getId());
-        return addNoteAndSync(account, Note);
+        return switchMap(getNoteDao().getContentLiveData(note.getId()), (content) -> {
+            final Note fullNote = new Note(null, note.getModified(), note.getTitle(), content, note.getCategory(), note.getFavorite(), null);
+            deleteNoteAndSync(account, note.getId());
+            return addNoteAndSync(account, fullNote);
+        });
     }
 
     @NonNull
@@ -481,7 +484,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                 default: {
                     final String category = selectedCategory.getCategory();
                     if (category != null) {
-                        if(getCategoryOptionsDao().modifyCategoryOrder(accountId, category, sortingMethod) == 0) {
+                        if (getCategoryOptionsDao().modifyCategoryOrder(accountId, category, sortingMethod) == 0) {
                             // Nothing updated means we didn't have this yet
                             final CategoryOptions categoryOptions = new CategoryOptions();
                             categoryOptions.setAccountId(accountId);

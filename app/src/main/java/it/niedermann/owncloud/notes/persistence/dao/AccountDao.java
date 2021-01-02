@@ -29,6 +29,9 @@ public interface AccountDao {
     @Query("SELECT * FROM Account WHERE ACCOUNTNAME = :accountName")
     Account getLocalAccountByAccountName(String accountName);
 
+    @Query("SELECT * FROM Account WHERE ACCOUNTNAME = :accountName")
+    LiveData<Account> getLocalAccountByAccountNameLiveData(String accountName);
+
     @Query("SELECT * FROM Account")
     List<Account> getAccounts();
 

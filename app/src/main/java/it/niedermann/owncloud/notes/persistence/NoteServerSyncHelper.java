@@ -44,7 +44,6 @@ import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
 import static androidx.lifecycle.Transformations.distinctUntilChanged;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
-import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_NOT_MODIFIED;
@@ -441,7 +440,9 @@ public class NoteServerSyncHelper {
             Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
             try {
                 final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
-                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified().getTimeInMillis()/1000, localAccount.getETag());
+                final Calendar modified = localAccount.getModified();
+                final long modifiedForServer = modified == null ? 0 : modified.getTimeInMillis() / 1000;
+                final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, modifiedForServer, localAccount.getETag());
                 List<Note> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();
                 // pull remote changes: update or create each remote note

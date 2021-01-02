@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 import androidx.core.view.ViewCompat;
 import androidx.preference.PreferenceManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener;
@@ -169,25 +170,26 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
                         })
                         .build());
 
-        TextProcessorChain chain = defaultTextProcessorChain(note);
-        try {
-            binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
-        } catch (StringIndexOutOfBoundsException e) {
-            // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-            binding.singleNoteContent.setText(chain.apply(note.getContent()));
-            Toast.makeText(binding.singleNoteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-        changedText = note.getContent();
-        binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
+        defaultTextProcessorChain(note, (chain) -> {
+            try {
+                binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
+            } catch (StringIndexOutOfBoundsException e) {
+                // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
+                binding.singleNoteContent.setText(chain.apply(note.getContent()));
+                Toast.makeText(binding.singleNoteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+            changedText = note.getContent();
+            binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
-        binding.swiperefreshlayout.setOnRefreshListener(this);
+            binding.swiperefreshlayout.setOnRefreshListener(this);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
-        binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
-        if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
-            binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
-        }
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
+            binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
+            if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
+                binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
+            }
+        });
     }
 
 
@@ -209,19 +211,20 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public void onRefresh() {
         if (noteLoaded && db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
-            try {
-                TextProcessorChain chain = defaultTextProcessorChain(note);
-                Account account = db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
-                db.getNoteServerSyncHelper().addCallbackPull(account, () -> {
-                    note = db.getNoteDao().getNoteById(note.getId());
-                    changedText = note.getContent();
-                    binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
-                    binding.swiperefreshlayout.setRefreshing(false);
-                });
-                db.getNoteServerSyncHelper().scheduleSync(account, false);
-            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                e.printStackTrace();
-            }
+            defaultTextProcessorChain(note, (chain) -> {
+                try {
+                    Account account = db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
+                    db.getNoteServerSyncHelper().addCallbackPull(account, () -> {
+                        note = db.getNoteDao().getNoteById(note.getId());
+                        changedText = note.getContent();
+                        binding.singleNoteContent.setText(parseCompat(markdownProcessor, chain.apply(note.getContent())));
+                        binding.swiperefreshlayout.setRefreshing(false);
+                    });
+                    db.getNoteServerSyncHelper().scheduleSync(account, false);
+                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                    e.printStackTrace();
+                }
+            });
         } else {
             binding.swiperefreshlayout.setRefreshing(false);
             Toast.makeText(requireContext(), getString(R.string.error_sync, getString(R.string.error_no_network)), Toast.LENGTH_LONG).show();
@@ -234,10 +237,12 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
     }
 
-    private TextProcessorChain defaultTextProcessorChain(Note note) {
-        TextProcessorChain chain = new TextProcessorChain();
-        chain.add(new NoteLinksProcessor(new HashSet<>(db.getNoteDao().getRemoteIds(note.getAccountId()))));
-        chain.add(new WwwLinksProcessor());
-        return chain;
+    private void defaultTextProcessorChain(@NonNull Note note, @NonNull Consumer<TextProcessorChain> onChainReady) {
+        new Thread(() -> {
+            final TextProcessorChain chain = new TextProcessorChain();
+            chain.add(new NoteLinksProcessor(new HashSet<>(db.getNoteDao().getRemoteIds(note.getAccountId()))));
+            chain.add(new WwwLinksProcessor());
+            requireActivity().runOnUiThread(() -> onChainReady.accept(chain));
+        }).start();
     }
 }

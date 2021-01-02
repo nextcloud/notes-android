@@ -480,7 +480,10 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Note> moveNoteToAnotherAccount(Account account, Long noteId) {
-        return db.moveNoteToAnotherAccount(account, db.getNoteDao().getNoteById(noteId));
+        return switchMap(db.getNoteDao().getNoteByIdLiveData(noteId), (note) -> {
+            Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + note);
+            return db.moveNoteToAnotherAccount(account, note);
+        });
     }
 
     public LiveData<Void> toggleFavoriteAndSync(long noteId) {

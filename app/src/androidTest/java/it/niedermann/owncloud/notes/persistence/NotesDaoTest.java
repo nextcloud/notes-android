@@ -24,7 +24,6 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NoteIdPair;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
-import kotlin.DeprecationLevel;
 
 import static it.niedermann.owncloud.notes.persistence.NotesDatabaseTestUtil.getOrAwaitValue;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
@@ -33,7 +32,6 @@ import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -61,14 +59,16 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void deleteNotebyId() {
+    public void deleteNotebyId() throws InterruptedException {
         db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_DELETED, account.getId(), "", 0));
         db.getNoteDao().deleteByNoteId(1, LOCAL_DELETED);
         assertNull(db.getNoteDao().getNoteById(1));
+        assertNull(getOrAwaitValue(db.getNoteDao().getNoteByIdLiveData(1)));
 
         db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_DELETED, account.getId(), "", 0));
         db.getNoteDao().deleteByNoteId(1, VOID);
         assertEquals(1, db.getNoteDao().getNoteById(1).getId());
+        assertEquals(1, getOrAwaitValue(db.getNoteDao().getNoteByIdLiveData(1)).getId());
     }
 
     @Test
@@ -335,11 +335,13 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void getContent() {
+    public void getContent() throws InterruptedException {
         final Note note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0);
         db.getNoteDao().addNote(note);
         assertEquals("My-Content", db.getNoteDao().getContent(note.getId()));
+        assertEquals("My-Content", getOrAwaitValue(db.getNoteDao().getContentLiveData(note.getId())));
         assertNull(db.getNoteDao().getContent(note.getId() + 1));
+        assertNull(getOrAwaitValue(db.getNoteDao().getContentLiveData(note.getId() + 1)));
     }
 
     @Test

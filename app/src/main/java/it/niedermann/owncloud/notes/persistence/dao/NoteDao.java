@@ -63,6 +63,9 @@ public interface NoteDao {
     @Query("SELECT * FROM NOTE WHERE id = :id")
     Note getNoteById(long id);
 
+    @Query("SELECT * FROM NOTE WHERE id = :id")
+    LiveData<Note> getNoteByIdLiveData(long id);
+
     @Query("UPDATE NOTE SET status = :status WHERE id = :id")
     void updateStatus(long id, DBStatus status);
 
@@ -131,11 +134,14 @@ public interface NoteDao {
      * used by: {@link NoteServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
      */
     @Query("UPDATE NOTE SET title = :title, modified = :modified, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
-            "WHERE id = :id AND status = '' AND (title != :title OR modified != (:modified / 1000) OR favorite != :favorite OR category != :category OR (eTag IS NULL OR eTag != :eTag) OR content != :content)")
+            "WHERE id = :id AND status = '' AND (title != :title OR modified != :modified OR favorite != :favorite OR category != :category OR (eTag IS NULL OR eTag != :eTag) OR content != :content)")
     int updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(long id, Long modified, String title, boolean favorite, String category, String eTag, String content, String excerpt);
 
     @Query("SELECT content FROM NOTE WHERE id = :id")
     String getContent(Long id);
+
+    @Query("SELECT content FROM NOTE WHERE id = :id")
+    LiveData<String> getContentLiveData(Long id);
 
     /**
      * This method return all of the categories with given {@param accountId}

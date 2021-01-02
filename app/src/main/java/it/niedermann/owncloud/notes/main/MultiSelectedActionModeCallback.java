@@ -122,12 +122,14 @@ public class MultiSelectedActionModeCallback implements Callback {
             });
             return true;
         } else if (itemId == R.id.menu_move) {
-            final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();
-            accountLiveData.observe(lifecycleOwner, account -> {
-                accountLiveData.removeObservers(lifecycleOwner);
-                AccountPickerDialogFragment
-                        .newInstance(new ArrayList<>(mainViewModel.getAccounts()), account.getId())
-                        .show(fragmentManager, AccountPickerDialogFragment.class.getSimpleName());
+            final LiveData<Account> currentAccount$ = mainViewModel.getCurrentAccount();
+            currentAccount$.observe(lifecycleOwner, account -> {
+                currentAccount$.removeObservers(lifecycleOwner);
+                new Thread(() -> {
+                    AccountPickerDialogFragment
+                            .newInstance(new ArrayList<>(mainViewModel.getAccounts()), account.getId())
+                            .show(fragmentManager, AccountPickerDialogFragment.class.getSimpleName());
+                }).start();
             });
             return true;
         } else if (itemId == R.id.menu_share) {
