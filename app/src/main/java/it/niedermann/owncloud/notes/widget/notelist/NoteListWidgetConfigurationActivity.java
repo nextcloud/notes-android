@@ -49,7 +49,6 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setResult(RESULT_CANCELED);
-        setContentView(R.layout.activity_note_list_configuration);
 
         db = NotesDatabase.getInstance(this);
         final Bundle extras = getIntent().getExtras();
@@ -66,7 +65,8 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
 
         viewModel = new ViewModelProvider(this).get(NoteListViewModel.class);
         binding = ActivityNoteListConfigurationBinding.inflate(getLayoutInflater());
-        binding.recyclerView.setAdapter(adapterCategories);
+        setContentView(binding.getRoot());
+
         adapterCategories = new NavigationAdapter(this, new NavigationClickListener() {
             @Override
             public void onItemClick(NavigationItem item) {
@@ -121,6 +121,8 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 onItemClick(item);
             }
         });
+
+        binding.recyclerView.setAdapter(adapterCategories);
 
         new Thread(() -> {
             try {
