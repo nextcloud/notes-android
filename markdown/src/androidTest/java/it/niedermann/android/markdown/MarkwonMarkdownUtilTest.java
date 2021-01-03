@@ -87,6 +87,30 @@ public class MarkwonMarkdownUtilTest extends TestCase {
     @Test
     public void testLineStartsWithCheckbox() {
         final Map<String, Boolean> lines = new HashMap<>();
+        lines.put("  - [ ] a", true);
+        lines.put("  - [x] a", true);
+        lines.put("  * [ ] a", true);
+        lines.put("  * [x] a", true);
+        lines.put("  + [ ] a", true);
+        lines.put("  + [x] a", true);
+        lines.put("- [ ] a", true);
+        lines.put("- [x] a", true);
+        lines.put("* [ ] a", true);
+        lines.put("* [x] a", true);
+        lines.put("+ [ ] a", true);
+        lines.put("+ [x] a", true);
+        lines.put("  - [ ] ", true);
+        lines.put("  - [x] ", true);
+        lines.put("  * [ ] ", true);
+        lines.put("  * [x] ", true);
+        lines.put("  + [ ] ", true);
+        lines.put("  + [x] ", true);
+        lines.put("  - [ ]", true);
+        lines.put("  - [x]", true);
+        lines.put("  * [ ]", true);
+        lines.put("  * [x]", true);
+        lines.put("  + [ ]", true);
+        lines.put("  + [x]", true);
         lines.put("- [ ] ", true);
         lines.put("- [x] ", true);
         lines.put("* [ ] ", true);

@@ -84,67 +84,13 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup
             container, @Nullable Bundle savedInstanceState) {
         binding = FragmentNotePreviewBinding.inflate(inflater, container, false);
-        binding.singleNoteContent.getMarkdownString().observe(requireActivity(), (newContent) -> {
-            changedText = newContent.toString();
-            binding.singleNoteContent.setMarkdownString(newContent);
-            saveNote(null);
-        });
         return binding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-//                MarkDownUtil.getMarkDownConfiguration(binding.singleNoteContent.getContext())
-//                        .setOnTodoClickCallback((view, line, lineNumber) -> {
-//                                    try {
-//                                        String[] lines = TextUtils.split(note.getContent(), "\\r?\\n");
-//                                        /*
-//                                         * Workaround for RxMarkdown-bug:
-//                                         * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
-//                                         * Find number of lines starting with ``` before lineNumber
-//                                         */
-//                                        boolean inCodefence = false;
-//                                        for (int i = 0; i < lines.length; i++) {
-//                                            if (lines[i].startsWith("```")) {
-//                                                inCodefence = !inCodefence;
-//                                                lineNumber++;
-//                                            }
-//                                            if (inCodefence && TextUtils.isEmpty(lines[i])) {
-//                                                lineNumber++;
-//                                            }
-//                                            if (i == lineNumber) {
-//                                                break;
-//                                            }
-//                                        }
-//
-//                                        /*
-//                                         * Workaround for multiple RxMarkdown-bugs:
-//                                         * When (un)checking a checkbox which is in the last line, every time it gets toggled, the last character of the line gets lost.
-//                                         * When (un)checking a checkbox, every markdown gets stripped in the given line argument
-//                                         */
-//                                        if (lines[lineNumber].startsWith(CHECKBOX_UNCHECKED_MINUS) || lines[lineNumber].startsWith(CHECKBOX_UNCHECKED_STAR)) {
-//                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_UNCHECKED_MINUS, CHECKBOX_CHECKED_MINUS);
-//                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_UNCHECKED_STAR, CHECKBOX_CHECKED_STAR);
-//                                        } else {
-//                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_MINUS, CHECKBOX_UNCHECKED_MINUS);
-//                                            lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_STAR, CHECKBOX_UNCHECKED_STAR);
-//                                        }
-//
-//                                        changedText = TextUtils.join("\n", lines);
-//                                        binding.singleNoteContent.setText(parseCompat(markdownProcessor, changedText));
-//                                        saveNote(null);
-//                                    } catch (IndexOutOfBoundsException e) {
-//                                        Toast.makeText(getActivity(), R.string.checkbox_could_not_be_toggled, Toast.LENGTH_SHORT).show();
-//                                        e.printStackTrace();
-//                                    }
-//                                    return line;
-//                                }
-//                        )
-//                        .build());
-
-        TextProcessorChain chain = defaultTextProcessorChain(note);
+        final TextProcessorChain chain = defaultTextProcessorChain(note);
         binding.singleNoteContent.setMarkdownString(chain.apply(note.getContent()));
         changedText = note.getContent();
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
@@ -152,11 +98,16 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         db = NotesDatabase.getInstance(requireContext());
         binding.swiperefreshlayout.setOnRefreshListener(this);
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
         binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
         if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
             binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
         }
+
+        binding.singleNoteContent.getMarkdownString().observe(requireActivity(), (newContent) -> {
+            changedText = newContent.toString();
+            saveNote(null);
+        });
     }
 
     @Override

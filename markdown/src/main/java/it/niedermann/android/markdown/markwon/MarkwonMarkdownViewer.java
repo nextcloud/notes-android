@@ -46,28 +46,12 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
         super(context, attrs, defStyleAttr);
         this.markwon = MarkwonMarkdownUtil.initMarkwonViewer(context)
                 .usePlugin(new ToggleableTaskListPlugin((toggledCheckboxPosition, newCheckedState) -> {
-                    // TODO move logic to MarkwonMarkdownUtil
-                    Log.v(TAG, "new text: " + toggledCheckboxPosition);
-                    final CharSequence unrenderedText = unrenderedText$.getValue();
-                    if (unrenderedText == null) {
+                    final CharSequence oldUnrenderedText = unrenderedText$.getValue();
+                    if (oldUnrenderedText == null) {
                         throw new IllegalStateException("Checkbox #" + toggledCheckboxPosition + ", but unrenderedText$ value is null.");
                     }
-                    final String[] lines = unrenderedText.toString().split("\n");
-                    int checkboxIndex = 0;
-                    for (int i = 0; i < lines.length; i++) {
-                        if (MarkwonMarkdownUtil.lineStartsWithCheckbox(lines[i].trim())) {
-                            if (checkboxIndex == toggledCheckboxPosition) {
-                                final int indexOfStartingBracket = lines[i].indexOf("[");
-                                final String toggledLine = lines[i].substring(0, indexOfStartingBracket + 1) +
-                                        (newCheckedState ? 'x' : ' ') +
-                                        lines[i].substring(indexOfStartingBracket + 2);
-                                lines[i] = toggledLine;
-                                break;
-                            }
-                            checkboxIndex++;
-                        }
-                    }
-                    this.unrenderedText$.setValue(TextUtils.join("\n", lines));
+                    final CharSequence newUnrenderedText = MarkwonMarkdownUtil.setCheckboxStatus(oldUnrenderedText.toString(), toggledCheckboxPosition, newCheckedState);
+                    this.setMarkdownString(newUnrenderedText);
                 }))
                 .build();
         this.renderService = Executors.newSingleThreadExecutor();

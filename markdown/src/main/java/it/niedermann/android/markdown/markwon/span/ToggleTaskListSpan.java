@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 
 import java.util.Arrays;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import io.noties.markwon.ext.tasklist.TaskListSpan;
 
@@ -33,7 +32,7 @@ public class ToggleTaskListSpan extends ClickableSpan {
     public void onClick(@NonNull View widget) {
         span.setDone(!span.isDone());
         widget.invalidate();
-        Log.i(TAG, "task-list click, isDone: " + span.isDone() + ", content: '" + content + "'");
+        Log.v(TAG, "task-list click, isDone: " + span.isDone() + ", content: '" + content + "'");
 
         // it must be a TextView
         final TextView textView = (TextView) widget;
