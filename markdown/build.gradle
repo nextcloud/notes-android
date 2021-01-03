@@ -36,7 +36,7 @@ ext {
 }
 
 dependencies {
-    implementation 'com.github.nextcloud:Android-SingleSignOn:0.5.4'
+    implementation 'com.github.nextcloud:Android-SingleSignOn:0.5.6'
     implementation 'com.github.stefan-niedermann:android-commons:0.2.0'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
