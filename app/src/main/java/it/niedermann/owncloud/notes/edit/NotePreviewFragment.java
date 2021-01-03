@@ -84,6 +84,11 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup
             container, @Nullable Bundle savedInstanceState) {
         binding = FragmentNotePreviewBinding.inflate(inflater, container, false);
+        binding.singleNoteContent.getMarkdownString().observe(requireActivity(), (newContent) -> {
+            changedText = newContent.toString();
+            binding.singleNoteContent.setMarkdownString(newContent);
+            saveNote(null);
+        });
         return binding.getRoot();
     }
 
