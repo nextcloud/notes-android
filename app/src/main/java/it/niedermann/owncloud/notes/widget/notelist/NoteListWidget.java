@@ -44,7 +44,7 @@ public class NoteListWidget extends AppWidgetProvider {
                 DarkModeSetting darkTheme;
                 final NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
                 if (data != null) {
-                    final Account localAccount = db.getAccountDao().getAccount(data.getAccountId());
+                    final Account localAccount = db.getAccountDao().getAccountById(data.getAccountId());
 
                     String category = data.getCategory();
 

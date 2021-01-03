@@ -10,8 +10,6 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
-import java.util.List;
-
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
@@ -36,7 +34,7 @@ public class ManageAccountsActivity extends LockedActivity {
 
         db = NotesDatabase.getInstance(this);
 
-        distinctUntilChanged(db.getAccountDao().getAccountsLiveData()).observe(this, (localAccounts) -> {
+        distinctUntilChanged(db.getAccountDao().getAccounts$()).observe(this, (localAccounts) -> {
             adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
                 LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
                 deleteLiveData.observe(this, (v) -> {
@@ -61,7 +59,7 @@ public class ManageAccountsActivity extends LockedActivity {
                 final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
                 if (ssoAccount != null) {
                     new Thread(() -> {
-                        final Account account = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+                        final Account account = db.getAccountDao().getAccountByName(ssoAccount.name);
                         runOnUiThread(() -> adapter.setCurrentLocalAccount(account));
                     }).start();
                 }

@@ -20,29 +20,34 @@ public interface AccountDao {
     @Delete
     int deleteAccount(Account localAccount);
 
-    @Query("SELECT * FROM Account WHERE ID = :accountId")
-    Account getAccount(long accountId);
+    String getAccountById = "SELECT * FROM Account WHERE ID = :accountId";
+    String getAccountByName = "SELECT * FROM Account WHERE ACCOUNTNAME = :accountName";
+    String getAccounts = "SELECT * FROM Account";
+    String countAccounts = "SELECT COUNT(*) FROM Account";
 
-    @Query("SELECT * FROM Account WHERE ID = :accountId")
-    LiveData<Account> getAccountLiveData(long accountId);
+    @Query(getAccountById)
+    LiveData<Account> getAccountById$(long accountId);
 
-    @Query("SELECT * FROM Account WHERE ACCOUNTNAME = :accountName")
-    Account getLocalAccountByAccountName(String accountName);
+    @Query(getAccountById)
+    Account getAccountById(long accountId);
 
-    @Query("SELECT * FROM Account WHERE ACCOUNTNAME = :accountName")
-    LiveData<Account> getLocalAccountByAccountNameLiveData(String accountName);
+    @Query(getAccountByName)
+    LiveData<Account> getAccountByName$(String accountName);
 
-    @Query("SELECT * FROM Account")
+    @Query(getAccountByName)
+    Account getAccountByName(String accountName);
+
+    @Query(getAccounts)
+    LiveData<List<Account>> getAccounts$();
+
+    @Query(getAccounts)
     List<Account> getAccounts();
 
-    @Query("SELECT * FROM Account")
-    LiveData<List<Account>> getAccountsLiveData();
+    @Query(countAccounts)
+    LiveData<Integer> countAccounts$();
 
-    @Query("SELECT COUNT(*) FROM Account")
-    Integer getAccountsCount();
-
-    @Query("SELECT COUNT(*) FROM Account")
-    LiveData<Integer> getAccountsCountLiveData();
+    @Query(countAccounts)
+    Integer countAccounts();
 
     @Query("UPDATE Account SET COLOR = :color, TEXTCOLOR = :textColor WHERE id = :id")
     void updateBrand(long id, @ColorInt Integer color, @ColorInt Integer textColor);

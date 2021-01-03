@@ -36,7 +36,7 @@ public class CategoryViewModel extends AndroidViewModel {
     @NonNull
     public LiveData<List<NavigationItem.CategoryNavigationItem>> getCategories(long accountId) {
         return switchMap(this.searchTerm, searchTerm ->
-                map(db.getNoteDao().searchCategories(accountId, TextUtils.isEmpty(searchTerm) ? "%" : "%" + searchTerm + "%"),
+                map(db.getNoteDao().searchCategories$(accountId, TextUtils.isEmpty(searchTerm) ? "%" : "%" + searchTerm + "%"),
                         categories -> convertToCategoryNavigationItem(getApplication(), categories)));
     }
 }

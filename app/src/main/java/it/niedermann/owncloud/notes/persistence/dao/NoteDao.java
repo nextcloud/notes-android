@@ -30,41 +30,96 @@ public interface NoteDao {
     @Query("DELETE FROM NOTE WHERE accountId = :accountId")
     int deleteByAccountId(Long accountId);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) ORDER BY favorite DESC, modified DESC")
-    LiveData<List<Note>> searchRecentByModified(long accountId, String query);
+    String getNoteById = "SELECT * FROM NOTE WHERE id = :id";
+    String getContent = "SELECT content FROM NOTE WHERE id = :id";
+    String count = "SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId";
+    String countFavorites = "SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND favorite = 1";
+    String searchRecentByModified = "SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) ORDER BY favorite DESC, modified DESC";
+    String searchRecentLexicographically = "SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) ORDER BY favorite DESC, title COLLATE NOCASE ASC";
+    String searchFavoritesByModified = "SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND favorite = 1 ORDER BY modified DESC";
+    String searchFavoritesLexicographically = "SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND favorite = 1 ORDER BY title COLLATE NOCASE ASC";
+    String searchUncategorizedByModified = "SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND category = '' ORDER BY favorite DESC, modified DESC";
+    String searchUncategorizedLexicographically = "SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND category = '' ORDER BY favorite DESC, title COLLATE NOCASE ASC";
+    String searchCategoryByModified = "SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND (category = :category OR category LIKE :category || '/%') ORDER BY category, favorite DESC, modified DESC";
+    String searchCategoryLexicographically = "SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND (category = :category OR category LIKE :category || '/%') ORDER BY category, favorite DESC, title COLLATE NOCASE ASC";
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) ORDER BY favorite DESC, title COLLATE NOCASE ASC")
-    LiveData<List<Note>> searchRecentLexicographically(long accountId, String query);
+    @Query(getNoteById)
+    LiveData<Note> getNoteById$(long id);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND favorite = 1 ORDER BY modified DESC")
-    LiveData<List<Note>> searchFavoritesByModified(long accountId, String query);
+    @Query(getNoteById)
+    Note getNoteById(long id);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND favorite = 1 ORDER BY title COLLATE NOCASE ASC")
-    LiveData<List<Note>> searchFavoritesLexicographically(long accountId, String query);
+    @Query(count)
+    LiveData<Integer> count$(long accountId);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND category = '' ORDER BY favorite DESC, modified DESC")
-    LiveData<List<Note>> searchUncategorizedByModified(long accountId, String query);
+    @Query(count)
+    Integer count(long accountId);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND category = '' ORDER BY favorite DESC, title COLLATE NOCASE ASC")
-    LiveData<List<Note>> searchUncategorizedLexicographically(long accountId, String query);
+    @Query(countFavorites)
+    LiveData<Integer> countFavorites$(long accountId);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND (category = :category OR category LIKE :category || '/%') ORDER BY category, favorite DESC, modified DESC")
-    LiveData<List<Note>> searchCategoryByModified(long accountId, String query, String category);
+    @Query(countFavorites)
+    Integer countFavorites(long accountId);
 
-    @Query("SELECT * FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND (title LIKE :query OR content LIKE :query) AND (category = :category OR category LIKE :category || '/%') ORDER BY category, favorite DESC, title COLLATE NOCASE ASC")
-    LiveData<List<Note>> searchCategoryLexicographically(long accountId, String query, String category);
+    @Query(getContent)
+    LiveData<String> getContent$(Long id);
+
+    @Query(getContent)
+    String getContent(Long id);
+
+    @Query(searchRecentByModified)
+    LiveData<List<Note>> searchRecentByModified$(long accountId, String query);
+    
+    @Query(searchRecentByModified)
+    List<Note> searchRecentByModified(long accountId, String query);
+
+    @Query(searchRecentLexicographically)
+    LiveData<List<Note>> searchRecentLexicographically$(long accountId, String query);
+
+    @Query(searchRecentLexicographically)
+    List<Note> searchRecentLexicographically(long accountId, String query);
+
+    @Query(searchFavoritesByModified)
+    LiveData<List<Note>> searchFavoritesByModified$(long accountId, String query);
+
+    @Query(searchFavoritesByModified)
+    List<Note> searchFavoritesByModified(long accountId, String query);
+
+    @Query(searchFavoritesLexicographically)
+    LiveData<List<Note>> searchFavoritesLexicographically$(long accountId, String query);
+
+    @Query(searchFavoritesLexicographically)
+    List<Note> searchFavoritesLexicographically(long accountId, String query);
+
+    @Query(searchUncategorizedByModified)
+    LiveData<List<Note>> searchUncategorizedByModified$(long accountId, String query);
+
+    @Query(searchUncategorizedByModified)
+    List<Note> searchUncategorizedByModified(long accountId, String query);
+
+    @Query(searchUncategorizedLexicographically)
+    LiveData<List<Note>> searchUncategorizedLexicographically$(long accountId, String query);
+
+    @Query(searchUncategorizedLexicographically)
+    List<Note> searchUncategorizedLexicographically(long accountId, String query);
+
+    @Query(searchCategoryByModified)
+    LiveData<List<Note>> searchCategoryByModified$(long accountId, String query, String category);
+
+    @Query(searchCategoryByModified)
+    List<Note> searchCategoryByModified(long accountId, String query, String category);
+
+    @Query(searchCategoryLexicographically)
+    LiveData<List<Note>> searchCategoryLexicographically$(long accountId, String query, String category);
+
+    @Query(searchCategoryLexicographically)
+    List<Note> searchCategoryLexicographically(long accountId, String query, String category);
 
     @Query("DELETE FROM NOTE WHERE id = :id AND status = :forceDBStatus")
     void deleteByNoteId(long id, DBStatus forceDBStatus);
 
     @Query("UPDATE NOTE SET scrollY = :scrollY WHERE id = :id")
     void updateScrollY(long id, int scrollY);
-
-    @Query("SELECT * FROM NOTE WHERE id = :id")
-    Note getNoteById(long id);
-
-    @Query("SELECT * FROM NOTE WHERE id = :id")
-    LiveData<Note> getNoteByIdLiveData(long id);
 
     @Query("UPDATE NOTE SET status = :status WHERE id = :id")
     void updateStatus(long id, DBStatus status);
@@ -92,18 +147,6 @@ public interface NoteDao {
      */
     @Query("SELECT id FROM NOTE WHERE accountId = :accountId AND remoteId = :remoteId AND status != 'LOCAL_DELETED'")
     Long getLocalIdByRemoteId(long accountId, long remoteId);
-
-    @Query("SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND favorite = 1")
-    Integer getFavoritesCount(long accountId);
-
-    @Query("SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId AND favorite = 1")
-    LiveData<Integer> getFavoritesCountLiveData(long accountId);
-
-    @Query("SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId")
-    Integer count(long accountId);
-
-    @Query("SELECT COUNT(*) FROM NOTE WHERE status != 'LOCAL_DELETED' AND accountId = :accountId")
-    LiveData<Integer> countLiveData(long accountId);
 
     /**
      * Returns a list of all {@link Note}s in the Database which were modified locally
@@ -137,12 +180,6 @@ public interface NoteDao {
             "WHERE id = :id AND status = '' AND (title != :title OR modified != :modified OR favorite != :favorite OR category != :category OR (eTag IS NULL OR eTag != :eTag) OR content != :content)")
     int updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(long id, Long modified, String title, boolean favorite, String category, String eTag, String content, String excerpt);
 
-    @Query("SELECT content FROM NOTE WHERE id = :id")
-    String getContent(Long id);
-
-    @Query("SELECT content FROM NOTE WHERE id = :id")
-    LiveData<String> getContentLiveData(Long id);
-
     /**
      * This method return all of the categories with given {@param accountId}
      *
@@ -150,8 +187,8 @@ public interface NoteDao {
      * @return All of the categories with given accountId
      */
     @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId GROUP BY category")
-    LiveData<List<CategoryWithNotesCount>> getCategoriesLiveData(Long accountId);
+    LiveData<List<CategoryWithNotesCount>> getCategories$(Long accountId);
 
     @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId AND category != '' AND category LIKE :searchTerm GROUP BY category")
-    LiveData<List<CategoryWithNotesCount>> searchCategories(Long accountId, String searchTerm);
+    LiveData<List<CategoryWithNotesCount>> searchCategories$(Long accountId, String searchTerm);
 }

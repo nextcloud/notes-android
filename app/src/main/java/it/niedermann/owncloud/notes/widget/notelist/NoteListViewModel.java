@@ -37,11 +37,11 @@ public class NoteListViewModel extends AndroidViewModel {
 
     public LiveData<List<NavigationItem>> getAdapterCategories(Long accountId) {
         return distinctUntilChanged(
-                switchMap(distinctUntilChanged(db.getNoteDao().countLiveData(accountId)), (count) -> {
+                switchMap(distinctUntilChanged(db.getNoteDao().count$(accountId)), (count) -> {
                     Log.v(TAG, "[getAdapterCategories] countLiveData: " + count);
-                    return switchMap(distinctUntilChanged(db.getNoteDao().getFavoritesCountLiveData(accountId)), (favoritesCount) -> {
+                    return switchMap(distinctUntilChanged(db.getNoteDao().countFavorites$(accountId)), (favoritesCount) -> {
                         Log.v(TAG, "[getAdapterCategories] getFavoritesCountLiveData: " + favoritesCount);
-                        return map(distinctUntilChanged(db.getNoteDao().getCategoriesLiveData(accountId)), fromDatabase -> {
+                        return map(distinctUntilChanged(db.getNoteDao().getCategories$(accountId)), fromDatabase -> {
                             final List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(getApplication(), fromDatabase);
 
                             final List<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);

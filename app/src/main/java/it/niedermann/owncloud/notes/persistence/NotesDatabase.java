@@ -203,9 +203,9 @@ public abstract class NotesDatabase extends RoomDatabase {
         return getNoteDao().getNoteById(getNoteDao().addNote(entity));
     }
 
-    @WorkerThread
+    @AnyThread
     public LiveData<Note> moveNoteToAnotherAccount(Account account, Note note) {
-        return switchMap(getNoteDao().getContentLiveData(note.getId()), (content) -> {
+        return switchMap(getNoteDao().getContent$(note.getId()), (content) -> {
             final Note fullNote = new Note(null, note.getModified(), note.getTitle(), content, note.getCategory(), note.getFavorite(), null);
             deleteNoteAndSync(account, note.getId());
             return addNoteAndSync(account, fullNote);
@@ -371,7 +371,7 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     @AnyThread
     public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        return getAccountDao().getAccountLiveData(getAccountDao().insert(new Account(url, username, accountName, capabilities)));
+        return getAccountDao().getAccountById$(getAccountDao().insert(new Account(url, username, accountName, capabilities)));
     }
 
     /**

@@ -63,7 +63,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
-        final LiveData<Account> account$ = db.getAccountDao().getAccountLiveData(currentAccountId);
+        final LiveData<Account> account$ = db.getAccountDao().getAccountById$(currentAccountId);
         account$.observe(requireActivity(), (currentLocalAccount) -> {
             account$.removeObservers(requireActivity());
 
@@ -81,7 +81,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
                 dismiss();
             }));
             binding.accountsList.setAdapter(adapter);
-            final LiveData<List<Account>> localAccounts$ = db.getAccountDao().getAccountsLiveData();
+            final LiveData<List<Account>> localAccounts$ = db.getAccountDao().getAccounts$();
             localAccounts$.observe(requireActivity(), (localAccounts) -> {
                 localAccounts$.removeObservers(requireActivity());
                 for (Account localAccount : localAccounts) {

@@ -213,7 +213,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             binding.swiperefreshlayout.setRefreshing(true);
             defaultTextProcessorChain(note, (chain) -> {
                 try {
-                    Account account = db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
+                    Account account = db.getAccountDao().getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
                     db.getNoteServerSyncHelper().addCallbackPull(account, () -> {
                         note = db.getNoteDao().getNoteById(note.getId());
                         changedText = note.getContent();

@@ -9,8 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -126,7 +124,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
 
         new Thread(() -> {
             try {
-                this.localAccount = db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
+                this.localAccount = db.getAccountDao().getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 e.printStackTrace();
                 Toast.makeText(this, R.string.widget_not_logged_in, Toast.LENGTH_LONG).show();

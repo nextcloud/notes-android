@@ -222,22 +222,22 @@ public class MainViewModel extends AndroidViewModel {
                                     case RECENT: {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + RECENT);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchRecentByModified(accountId, searchQueryOrWildcard)
-                                                : db.getNoteDao().searchRecentLexicographically(accountId, searchQueryOrWildcard);
+                                                ? db.getNoteDao().searchRecentByModified$(accountId, searchQueryOrWildcard)
+                                                : db.getNoteDao().searchRecentLexicographically$(accountId, searchQueryOrWildcard);
                                         break;
                                     }
                                     case FAVORITES: {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + FAVORITES);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchFavoritesByModified(accountId, searchQueryOrWildcard)
-                                                : db.getNoteDao().searchFavoritesLexicographically(accountId, searchQueryOrWildcard);
+                                                ? db.getNoteDao().searchFavoritesByModified$(accountId, searchQueryOrWildcard)
+                                                : db.getNoteDao().searchFavoritesLexicographically$(accountId, searchQueryOrWildcard);
                                         break;
                                     }
                                     case UNCATEGORIZED: {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + UNCATEGORIZED);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchUncategorizedByModified(accountId, searchQueryOrWildcard)
-                                                : db.getNoteDao().searchUncategorizedLexicographically(accountId, searchQueryOrWildcard);
+                                                ? db.getNoteDao().searchUncategorizedByModified$(accountId, searchQueryOrWildcard)
+                                                : db.getNoteDao().searchUncategorizedLexicographically$(accountId, searchQueryOrWildcard);
                                         break;
                                     }
                                     case DEFAULT_CATEGORY:
@@ -248,8 +248,8 @@ public class MainViewModel extends AndroidViewModel {
                                         }
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + category);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchCategoryByModified(accountId, searchQueryOrWildcard, category)
-                                                : db.getNoteDao().searchCategoryLexicographically(accountId, searchQueryOrWildcard, category);
+                                                ? db.getNoteDao().searchCategoryByModified$(accountId, searchQueryOrWildcard, category)
+                                                : db.getNoteDao().searchCategoryLexicographically$(accountId, searchQueryOrWildcard, category);
                                         break;
                                     }
                                 }
@@ -291,11 +291,11 @@ public class MainViewModel extends AndroidViewModel {
                 Log.v(TAG, "[getNavigationCategories] - currentAccount: " + currentAccount.getAccountName());
                 return switchMap(getExpandedCategory(), expandedCategory -> {
                     Log.v(TAG, "[getNavigationCategories] - expandedCategory: " + expandedCategory);
-                    return switchMap(db.getNoteDao().countLiveData(currentAccount.getId()), (count) -> {
+                    return switchMap(db.getNoteDao().count$(currentAccount.getId()), (count) -> {
                         Log.v(TAG, "[getNavigationCategories] - count: " + count);
-                        return switchMap(db.getNoteDao().getFavoritesCountLiveData(currentAccount.getId()), (favoritesCount) -> {
+                        return switchMap(db.getNoteDao().countFavorites$(currentAccount.getId()), (favoritesCount) -> {
                             Log.v(TAG, "[getNavigationCategories] - favoritesCount: " + favoritesCount);
-                            return distinctUntilChanged(map(db.getNoteDao().getCategoriesLiveData(currentAccount.getId()), fromDatabase ->
+                            return distinctUntilChanged(map(db.getNoteDao().getCategories$(currentAccount.getId()), fromDatabase ->
                                     fromCategoriesWithNotesCount(getApplication(), expandedCategory, fromDatabase, count, favoritesCount)
                             ));
                         });
@@ -403,7 +403,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Boolean> hasMultipleAccountsConfigured() {
-        return map(db.getAccountDao().getAccountsCountLiveData(), (counter) -> counter != null && counter > 1);
+        return map(db.getAccountDao().countAccounts$(), (counter) -> counter != null && counter > 1);
     }
 
     public LiveData<Boolean> performFullSynchronizationForCurrentAccount() {
@@ -457,7 +457,7 @@ public class MainViewModel extends AndroidViewModel {
 
     @WorkerThread
     public Account getLocalAccountByAccountName(String accountName) {
-        return db.getAccountDao().getLocalAccountByAccountName(accountName);
+        return db.getAccountDao().getAccountByName(accountName);
     }
 
     @WorkerThread
@@ -480,7 +480,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Note> moveNoteToAnotherAccount(Account account, Long noteId) {
-        return switchMap(db.getNoteDao().getNoteByIdLiveData(noteId), (note) -> {
+        return switchMap(db.getNoteDao().getNoteById$(noteId), (note) -> {
             Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + note);
             return db.moveNoteToAnotherAccount(account, note);
         });
@@ -576,7 +576,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Integer> getAccountsCount() {
-        return db.getAccountDao().getAccountsCountLiveData();
+        return db.getAccountDao().countAccounts$();
     }
 
     public LiveData<String> collectNoteContents(List<Long> noteIds) {

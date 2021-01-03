@@ -120,7 +120,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         new Thread(() -> {
             try {
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext().getApplicationContext());
-                this.localAccount = db.getAccountDao().getLocalAccountByAccountName(ssoAccount.name);
+                this.localAccount = db.getAccountDao().getAccountByName(ssoAccount.name);
 
                 if (savedInstanceState == null) {
                     long id = requireArguments().getLong(PARAM_NOTE_ID);
@@ -128,7 +128,7 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                         long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
                         if (accountId > 0) {
                             /* Switch account if account id has been provided */
-                            this.localAccount = db.getAccountDao().getAccount(accountId);
+                            this.localAccount = db.getAccountDao().getAccountById(accountId);
                             SingleAccountHelper.setCurrentAccount(requireContext().getApplicationContext(), localAccount.getAccountName());
                         }
                         isNew = false;

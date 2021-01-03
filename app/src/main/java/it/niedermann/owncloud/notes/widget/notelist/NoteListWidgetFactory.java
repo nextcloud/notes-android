@@ -5,14 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import androidx.lifecycle.LiveData;
+import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.NotesApplication;
@@ -35,7 +34,8 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final int appWidgetId;
     private final Context context;
     private boolean darkTheme;
-    private List<Note> noteEntities;
+    @NonNull
+    private final List<Note> noteEntities = new ArrayList<>();
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
@@ -51,29 +51,27 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onDataSetChanged() {
-        final LiveData<List<Note>> noteEntitiesLiveData;
+        noteEntities.clear();
         try {
-            NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
+            final NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
             darkTheme = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
                 case MODE_DISPLAY_ALL:
-                    noteEntitiesLiveData = db.getNoteDao().searchRecentByModified(data.getAccountId(), "%");
+                    noteEntities.addAll(db.getNoteDao().searchRecentByModified(data.getAccountId(), "%"));
                     break;
                 case MODE_DISPLAY_STARRED:
-                    noteEntitiesLiveData = db.getNoteDao().searchFavoritesByModified(data.getAccountId(), "%");
+                    noteEntities.addAll(db.getNoteDao().searchFavoritesByModified(data.getAccountId(), "%"));
                     break;
                 case MODE_DISPLAY_CATEGORY:
                 default:
                     if (data.getCategory() != null) {
-                        noteEntitiesLiveData = db.getNoteDao().searchCategoryByModified(data.getAccountId(), "%", data.getCategory());
+                        noteEntities.addAll(db.getNoteDao().searchCategoryByModified(data.getAccountId(), "%", data.getCategory()));
                     } else {
-                        noteEntitiesLiveData = db.getNoteDao().searchUncategorizedByModified(data.getAccountId(), "%");
+                        noteEntities.addAll(db.getNoteDao().searchUncategorizedByModified(data.getAccountId(), "%"));
                     }
                     break;
             }
-
-            new Handler(Looper.getMainLooper()).post(() -> noteEntitiesLiveData.observeForever((notes) -> noteEntities = notes));
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
@@ -86,10 +84,6 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public int getCount() {
-        if (noteEntities == null) {
-            return 0;
-        }
-
         return noteEntities.size();
     }
 
@@ -97,12 +91,12 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     public RemoteViews getViewAt(int position) {
         RemoteViews note_content;
 
-        if (noteEntities == null || position > noteEntities.size() - 1 || noteEntities.get(position) == null) {
+        if (position > noteEntities.size() - 1 || noteEntities.get(position) == null) {
             Log.e(TAG, "Could not find position \"" + position + "\" in dbNotes list.");
             return null;
         }
 
-        Note note = noteEntities.get(position);
+        final Note note = noteEntities.get(position);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 

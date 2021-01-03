@@ -86,7 +86,7 @@ public class NoteServerSyncHelper {
             if (isSyncPossible() && SSOUtil.isConfigured(context)) {
                 new Thread(() -> {
                     try {
-                        scheduleSync(db.getAccountDao().getLocalAccountByAccountName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name), false);
+                        scheduleSync(db.getAccountDao().getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name), false);
                     } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                         Log.v(TAG, "Can not select current SingleSignOn account after network changed, do not sync.");
                     }
