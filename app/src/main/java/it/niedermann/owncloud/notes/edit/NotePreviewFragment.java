@@ -31,7 +31,6 @@ import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 import it.niedermann.owncloud.notes.shared.util.text.NoteLinksProcessor;
 import it.niedermann.owncloud.notes.shared.util.text.TextProcessorChain;
-import it.niedermann.owncloud.notes.shared.util.text.WwwLinksProcessor;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
@@ -155,7 +154,6 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     private TextProcessorChain defaultTextProcessorChain(DBNote note) {
         TextProcessorChain chain = new TextProcessorChain();
         chain.add(new NoteLinksProcessor(db.getRemoteIds(note.getAccountId())));
-        chain.add(new WwwLinksProcessor());
         return chain;
     }
 }

@@ -17,7 +17,7 @@ public class NoteLinksProcessor extends TextProcessor {
     private static final String linksThatLookLikeNoteLinksRegEx = "\\[[^]]*]\\((\\d+)\\)";
     private static final String replaceNoteRemoteIdsRegEx = "\\[([^\\]]*)\\]\\((%s)\\)";
 
-    private Set<String> existingNoteRemoteIds;
+    private final Set<String> existingNoteRemoteIds;
 
     public NoteLinksProcessor(Set<String> existingNoteRemoteIds) {
         this.existingNoteRemoteIds = existingNoteRemoteIds;
