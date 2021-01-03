@@ -65,7 +65,6 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
             setText(text);
         } else {
             if (!text.equals(previousText)) {
-                setText(text);
                 this.renderService.execute(() -> post(() -> this.markwon.setMarkdown(this, text.toString())));
             }
         }
