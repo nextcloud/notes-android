@@ -30,7 +30,7 @@
     <string name="search_in_category">Rechercher dans %1$s</string>
     <string name="search_in_all">Rechercher dans toutes les notes</string>
 
-    <string name="change_category_title">Choisir une catégorie</string>
+    <string name="change_category_title">Sélectionnez une catégorie</string>
 
     <string name="listview_updated_today">Aujourd\'hui</string>
     <string name="listview_updated_yesterday">Hier</string>
