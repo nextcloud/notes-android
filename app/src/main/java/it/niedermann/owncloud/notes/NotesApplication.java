@@ -73,7 +73,7 @@ public class NotesApplication extends Application {
     }
 
     public static boolean isDarkThemeActive(Context context) {
-        int uiMode = context.getResources().getConfiguration().uiMode;
+        final int uiMode = context.getResources().getConfiguration().uiMode;
         return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 

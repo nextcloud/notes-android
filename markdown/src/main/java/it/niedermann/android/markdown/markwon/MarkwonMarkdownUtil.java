@@ -71,7 +71,7 @@ public class MarkwonMarkdownUtil {
         return initMarkwonEditor(context)
                 .usePlugin(TablePlugin.create(context))
                 .usePlugin(TaskListPlugin.create(context))
-                .usePlugin(LinkifyPlugin.create())
+                .usePlugin(LinkifyPlugin.create(true))
                 .usePlugin(ImagesPlugin.create())
                 .usePlugin(SyntaxHighlightPlugin.create(prism4j, prism4jTheme));
     }
@@ -82,7 +82,7 @@ public class MarkwonMarkdownUtil {
     }
 
     private static boolean isDarkThemeActive(@NonNull Context context) {
-        int uiMode = context.getResources().getConfiguration().uiMode;
+        final int uiMode = context.getResources().getConfiguration().uiMode;
         return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
