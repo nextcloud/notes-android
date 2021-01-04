@@ -39,16 +39,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     private String changedText;
 
-    private FragmentNotePreviewBinding binding;
-
-    public static NotePreviewFragment newInstance(long accountId, long noteId) {
-        NotePreviewFragment f = new NotePreviewFragment();
-        Bundle b = new Bundle();
-        b.putLong(PARAM_NOTE_ID, noteId);
-        b.putLong(PARAM_ACCOUNT_ID, accountId);
-        f.setArguments(b);
-        return f;
-    }
+    protected FragmentNotePreviewBinding binding;
 
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
@@ -89,10 +80,22 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+//        .setOnLinkClickCallback((view, link) -> {
+//            if (NoteLinksUtils.isNoteLink(link)) {
+//                long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
+//                long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
+//                Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
+//                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
+//                startActivity(intent);
+//            } else {
+//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+//                startActivity(browserIntent);
+//            }
+//        })
         final TextProcessorChain chain = defaultTextProcessorChain(note);
         binding.singleNoteContent.setMarkdownString(chain.apply(note.getContent()));
-        changedText = note.getContent();
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
+        changedText = note.getContent();
 
         db = NotesDatabase.getInstance(requireContext());
         binding.swiperefreshlayout.setOnRefreshListener(this);
@@ -155,5 +158,14 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         TextProcessorChain chain = new TextProcessorChain();
         chain.add(new NoteLinksProcessor(db.getRemoteIds(note.getAccountId())));
         return chain;
+    }
+
+    public static BaseNoteFragment newInstance(long accountId, long noteId) {
+        final BaseNoteFragment fragment = new NotePreviewFragment();
+        final Bundle args = new Bundle();
+        args.putLong(PARAM_NOTE_ID, noteId);
+        args.putLong(PARAM_ACCOUNT_ID, accountId);
+        fragment.setArguments(args);
+        return fragment;
     }
 }
