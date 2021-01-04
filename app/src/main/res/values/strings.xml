@@ -231,11 +231,10 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_escaped" translatable="false">\\`\\`\\`</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_javascript_1" translatable="false">int getRandom() {</string>
     <string name="formatting_help_javascript_2" translatable="false">return 4;</string>
     <string name="formatting_help_javascript_3" translatable="false">}</string>
-    <string name="formatting_help_codefence_javascript_escaped" translatable="false">\\`\\`\\`javascript</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_code_javascript_inline" translatable="false">var example = true</string>
     <string name="formatting_help_ol" translatable="false">%1$d. %2$s</string>
