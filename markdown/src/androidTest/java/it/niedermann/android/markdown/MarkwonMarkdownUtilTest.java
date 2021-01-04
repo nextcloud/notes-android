@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil;
+import it.niedermann.android.markdown.markwon.model.EListType;
 
 @RunWith(AndroidJUnit4.class)
 public class MarkwonMarkdownUtilTest extends TestCase {
@@ -478,6 +479,51 @@ public class MarkwonMarkdownUtilTest extends TestCase {
         assertEquals(-1, MarkwonMarkdownUtil.getOrderedListNumber("11. "));
         assertEquals(-1, MarkwonMarkdownUtil.getOrderedListNumber("-1. Test"));
         assertEquals(-1, MarkwonMarkdownUtil.getOrderedListNumber(" 1. Test"));
+    }
+
+    @Test
+    public void testSetCheckboxStatus() {
+        for (EListType listType : EListType.values()) {
+            final String origin_1 = listType.checkboxUnchecked + " Item";
+            final String expected_1 = listType.checkboxChecked + " Item";
+            assertEquals(expected_1, MarkwonMarkdownUtil.setCheckboxStatus(origin_1, 0, true));
+
+            final String origin_2 = listType.checkboxChecked + " Item";
+            final String expected_2 = listType.checkboxChecked + " Item";
+            assertEquals(expected_2, MarkwonMarkdownUtil.setCheckboxStatus(origin_2, 0, true));
+
+            final String origin_3 = listType.checkboxChecked + " Item";
+            final String expected_3 = listType.checkboxChecked + " Item";
+            assertEquals(expected_3, MarkwonMarkdownUtil.setCheckboxStatus(origin_3, -1, true));
+
+            final String origin_4 = listType.checkboxChecked + " Item";
+            final String expected_4 = listType.checkboxChecked + " Item";
+            assertEquals(expected_4, MarkwonMarkdownUtil.setCheckboxStatus(origin_4, 3, true));
+
+            final String origin_5 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    listType.checkboxChecked + " Item";
+            final String expected_5 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    listType.checkboxUnchecked + " Item";
+            assertEquals(expected_5, MarkwonMarkdownUtil.setCheckboxStatus(origin_5, 1, false));
+
+            final String origin_6 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item";
+            final String expected_6 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    listType.checkboxChecked + " Item";
+            assertEquals(expected_6, MarkwonMarkdownUtil.setCheckboxStatus(origin_6, 1, true));
+
+            // TODO check code block fences with more then 3 backticks
+        }
     }
 
 //    @Test

@@ -120,17 +120,23 @@ public class MarkwonMarkdownUtil {
     public static CharSequence setCheckboxStatus(@NonNull String markdownString, int targetCheckboxIndex, boolean newCheckedState) {
         final String[] lines = markdownString.split("\n");
         int checkboxIndex = 0;
+        boolean isInFencedCodeBlock = false;
         for (int i = 0; i < lines.length; i++) {
-            if (lineStartsWithCheckbox(lines[i]) && lines[i].trim().length() > EListType.DASH.checkboxChecked.length()) {
-                if (checkboxIndex == targetCheckboxIndex) {
-                    final int indexOfStartingBracket = lines[i].indexOf("[");
-                    final String toggledLine = lines[i].substring(0, indexOfStartingBracket + 1) +
-                            (newCheckedState ? 'x' : ' ') +
-                            lines[i].substring(indexOfStartingBracket + 2);
-                    lines[i] = toggledLine;
-                    break;
+            if (lines[i].startsWith("```")) {
+                isInFencedCodeBlock = !isInFencedCodeBlock;
+            }
+            if (!isInFencedCodeBlock) {
+                if (lineStartsWithCheckbox(lines[i]) && lines[i].trim().length() > EListType.DASH.checkboxChecked.length()) {
+                    if (checkboxIndex == targetCheckboxIndex) {
+                        final int indexOfStartingBracket = lines[i].indexOf("[");
+                        final String toggledLine = lines[i].substring(0, indexOfStartingBracket + 1) +
+                                (newCheckedState ? 'x' : ' ') +
+                                lines[i].substring(indexOfStartingBracket + 2);
+                        lines[i] = toggledLine;
+                        break;
+                    }
+                    checkboxIndex++;
                 }
-                checkboxIndex++;
             }
         }
         return TextUtils.join("\n", lines);
