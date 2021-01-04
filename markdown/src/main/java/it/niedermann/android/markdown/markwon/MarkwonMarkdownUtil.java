@@ -1,6 +1,7 @@
 package it.niedermann.android.markdown.markwon;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextUtils;
@@ -23,6 +24,7 @@ import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
 import io.noties.markwon.linkify.LinkifyPlugin;
 import io.noties.markwon.simple.ext.SimpleExtPlugin;
 import io.noties.markwon.syntax.Prism4jTheme;
+import io.noties.markwon.syntax.Prism4jThemeDarkula;
 import io.noties.markwon.syntax.Prism4jThemeDefault;
 import io.noties.markwon.syntax.SyntaxHighlightPlugin;
 import io.noties.prism4j.Prism4j;
@@ -63,7 +65,9 @@ public class MarkwonMarkdownUtil {
 
     public static Markwon.Builder initMarkwonViewer(@NonNull Context context) {
         final Prism4j prism4j = new Prism4j(new MarkwonGrammarLocator());
-        final Prism4jTheme prism4jTheme = Prism4jThemeDefault.create();
+        final Prism4jTheme prism4jTheme = isDarkThemeActive(context)
+                ? Prism4jThemeDarkula.create()
+                : Prism4jThemeDefault.create();
         return initMarkwonEditor(context)
                 .usePlugin(TablePlugin.create(context))
                 .usePlugin(TaskListPlugin.create(context))
@@ -75,6 +79,11 @@ public class MarkwonMarkdownUtil {
     public static Markwon.Builder initMarkwonViewer(@NonNull Context context, @NonNull Map<String, String> mentions) {
         return initMarkwonViewer(context)
                 .usePlugin(NextcloudMentionsPlugin.create(context, mentions));
+    }
+
+    private static boolean isDarkThemeActive(@NonNull Context context) {
+        int uiMode = context.getResources().getConfiguration().uiMode;
+        return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
     public static int getStartOfLine(@NonNull CharSequence s, int cursorPosition) {
