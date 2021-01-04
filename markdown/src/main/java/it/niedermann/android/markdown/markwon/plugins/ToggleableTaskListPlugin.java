@@ -12,6 +12,7 @@ import org.commonmark.node.Paragraph;
 import org.commonmark.node.SoftLineBreak;
 import org.commonmark.node.Text;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 
 import io.noties.markwon.AbstractMarkwonPlugin;
@@ -32,10 +33,16 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
     private static final String TAG = ToggleableTaskListPlugin.class.getSimpleName();
 
     @NonNull
+    private final AtomicBoolean enabled = new AtomicBoolean(true);
+    @NonNull
     private final BiConsumer<Integer, Boolean> toggleListener;
 
     public ToggleableTaskListPlugin(@NonNull BiConsumer<Integer, Boolean> toggleListener) {
         this.toggleListener = toggleListener;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled.set(enabled);
     }
 
     @Override
@@ -71,7 +78,7 @@ public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
                 if (content > 0 && taskListSpan != null) {
                     // maybe additionally identify this task list (for persistence)
                     visitor.builder().setSpan(
-                            new ToggleTaskListSpan(toggleListener, taskListSpan, visitor.builder().subSequence(length, length + content).toString()),
+                            new ToggleTaskListSpan(enabled, toggleListener, taskListSpan, visitor.builder().subSequence(length, length + content).toString()),
                             length,
                             length + content
                     );

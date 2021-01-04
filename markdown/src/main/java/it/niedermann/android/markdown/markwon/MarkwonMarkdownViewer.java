@@ -58,6 +58,11 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
     }
 
     @Override
+    public void setEnabled(boolean enabled) {
+        this.markwon.getPlugin(ToggleableTaskListPlugin.class).setEnabled(enabled);
+    }
+
+    @Override
     public void setMarkdownString(CharSequence text) {
         final CharSequence previousText = this.unrenderedText$.getValue();
         this.unrenderedText$.setValue(text);

@@ -33,7 +33,6 @@
                 android:textColor="@color/fg_default"
                 android:textIsSelectable="true"
                 android:theme="@style/textViewStyle"
-                android:enabled="false"
                 tools:text="@tools:sample/lorem/random" />
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
