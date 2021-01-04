@@ -4,5 +4,4 @@
     <string name="simple_bold">Bold</string>
     <string name="simple_link">Link</string>
     <string name="simple_italic">Italic</string>
-    <string name="could_not_toggle_checkbox">Could not toggle checkbox.</string>
 </resources>
