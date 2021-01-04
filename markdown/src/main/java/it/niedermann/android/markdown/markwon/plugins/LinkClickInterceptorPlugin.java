@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.function.Function;
 
 import io.noties.markwon.AbstractMarkwonPlugin;
@@ -20,7 +20,7 @@ import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.getCont
 public class LinkClickInterceptorPlugin extends AbstractMarkwonPlugin {
 
     @NonNull
-    private final List<Function<String, Boolean>> onLinkClickCallbacks = new ArrayList<>();
+    private final Collection<Function<String, Boolean>> onLinkClickCallbacks = new LinkedList<>();
 
     public static MarkwonPlugin create() {
         return new LinkClickInterceptorPlugin();
@@ -45,9 +45,5 @@ public class LinkClickInterceptorPlugin extends AbstractMarkwonPlugin {
 
     public void registerOnLinkClickCallback(@NonNull Function<String, Boolean> callback) {
         this.onLinkClickCallbacks.add(callback);
-    }
-
-    public void removeOnLinkClickCallback(@NonNull Function<String, Boolean> callback) {
-        this.onLinkClickCallbacks.remove(callback);
     }
 }

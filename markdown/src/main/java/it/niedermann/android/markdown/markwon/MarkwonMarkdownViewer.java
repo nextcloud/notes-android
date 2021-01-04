@@ -59,12 +59,9 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
         this.renderService = Executors.newSingleThreadExecutor();
     }
 
+    @Override
     public void registerOnLinkClickCallback(@NonNull Function<String, Boolean> callback) {
         this.markwon.getPlugin(LinkClickInterceptorPlugin.class).registerOnLinkClickCallback(callback);
-    }
-
-    public void removeOnLinkClickCallback(@NonNull Function<String, Boolean> callback) {
-        this.markwon.getPlugin(LinkClickInterceptorPlugin.class).removeOnLinkClickCallback(callback);
     }
 
     @Override

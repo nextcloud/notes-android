@@ -5,17 +5,16 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.function.Function;
 
 public class InterceptedURLSpan extends URLSpan {
     @NonNull
-    private final List<Function<String, Boolean>> onLinkClickCallbacks = new ArrayList<>();
+    private final Collection<Function<String, Boolean>> onLinkClickCallbacks;
 
-    public InterceptedURLSpan(@NonNull List<Function<String, Boolean>> onLinkClickCallbacks, String url) {
+    public InterceptedURLSpan(@NonNull Collection<Function<String, Boolean>> onLinkClickCallbacks, String url) {
         super(url);
-        this.onLinkClickCallbacks.addAll(onLinkClickCallbacks);
+        this.onLinkClickCallbacks = onLinkClickCallbacks;
     }
 
     @Override
