@@ -19,7 +19,6 @@ import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
 import io.noties.markwon.ext.tables.TablePlugin;
 import io.noties.markwon.ext.tasklist.TaskListPlugin;
 import io.noties.markwon.image.ImagesPlugin;
-import io.noties.markwon.image.glide.GlideImagesPlugin;
 import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
 import io.noties.markwon.linkify.LinkifyPlugin;
 import io.noties.markwon.simple.ext.SimpleExtPlugin;
@@ -69,7 +68,7 @@ public class MarkwonMarkdownUtil {
                 .usePlugin(TablePlugin.create(context))
                 .usePlugin(TaskListPlugin.create(context))
                 .usePlugin(LinkifyPlugin.create())
-                .usePlugin(GlideImagesPlugin.create(context))
+                .usePlugin(ImagesPlugin.create())
                 .usePlugin(SyntaxHighlightPlugin.create(prism4j, prism4jTheme));
     }
 
