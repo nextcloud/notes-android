@@ -228,6 +228,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void applyBrand(int mainColor, int textColor) {
         super.applyBrand(mainColor, textColor);
         binding.editContent.setSearchColor(mainColor);
+        binding.editContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
     }
 
     public static BaseNoteFragment newInstance(long accountId, long noteId) {
