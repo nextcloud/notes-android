@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.text.Editable;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -30,6 +33,7 @@ import io.noties.markwon.syntax.SyntaxHighlightPlugin;
 import io.noties.prism4j.Prism4j;
 import io.noties.prism4j.annotations.PrismBundle;
 import it.niedermann.android.markdown.markwon.model.EListType;
+import it.niedermann.android.markdown.markwon.plugins.LinkClickInterceptorPlugin;
 import it.niedermann.android.markdown.markwon.plugins.NextcloudMentionsPlugin;
 import it.niedermann.android.markdown.markwon.plugins.SearchHighlightPlugin;
 import it.niedermann.android.markdown.markwon.plugins.ThemePlugin;
@@ -45,6 +49,7 @@ import it.niedermann.android.markdown.markwon.span.SearchSpan;
 )
 public class MarkwonMarkdownUtil {
 
+    private static final String TAG = MarkwonMarkdownUtil.class.getSimpleName();
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
@@ -72,6 +77,7 @@ public class MarkwonMarkdownUtil {
                 .usePlugin(TablePlugin.create(context))
                 .usePlugin(TaskListPlugin.create(context))
                 .usePlugin(LinkifyPlugin.create(true))
+                .usePlugin(LinkClickInterceptorPlugin.create())
                 .usePlugin(ImagesPlugin.create())
                 .usePlugin(SyntaxHighlightPlugin.create(prism4j, prism4jTheme));
     }
@@ -303,6 +309,22 @@ public class MarkwonMarkdownUtil {
     public static <T> void removeSpans(@NonNull Spannable spannable, @SuppressWarnings("SameParameterValue") Class<T> spanType) {
         for (T span : spannable.getSpans(0, spannable.length(), spanType)) {
             spannable.removeSpan(span);
+        }
+    }
+
+    /**
+     * @return When the content of the {@param textView} is already of type {@link Spannable}, it will cast and return it directly.
+     * Otherwise it will create a new {@link SpannableString} from the content, set this as new content of the {@param textView} and return it.
+     */
+    public static Spannable getContentAsSpannable(@NonNull TextView textView) {
+        final CharSequence content = textView.getText();
+        if (content.getClass() == SpannableString.class || content instanceof Spannable) {
+            return (Spannable) content;
+        } else {
+            Log.w(TAG, "Expected " + TextView.class.getSimpleName() + " content to be of type " + Spannable.class.getSimpleName() + ", but was of type " + content.getClass() + ". Search highlighting will be not performant.");
+            final Spannable spannableContent = new SpannableString(content);
+            textView.setText(spannableContent, TextView.BufferType.SPANNABLE);
+            return spannableContent;
         }
     }
 }

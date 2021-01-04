@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.edit;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.util.NoteLinksUtils;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 import it.niedermann.owncloud.notes.shared.util.text.NoteLinksProcessor;
 import it.niedermann.owncloud.notes.shared.util.text.TextProcessorChain;
@@ -80,18 +82,17 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        .setOnLinkClickCallback((view, link) -> {
-//            if (NoteLinksUtils.isNoteLink(link)) {
-//                long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-//                long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
-//                Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
-//                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
-//                startActivity(intent);
-//            } else {
-//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-//                startActivity(browserIntent);
-//            }
-//        })
+        binding.singleNoteContent.registerOnLinkClickCallback((link) -> {
+            if (NoteLinksUtils.isNoteLink(link)) {
+                final long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
+                final long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
+                final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
+                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
+                startActivity(intent);
+                return true;
+            }
+            return false;
+        });
         final TextProcessorChain chain = defaultTextProcessorChain(note);
         binding.singleNoteContent.setMarkdownString(chain.apply(note.getContent()));
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());

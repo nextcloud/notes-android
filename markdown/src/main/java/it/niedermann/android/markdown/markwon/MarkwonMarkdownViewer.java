@@ -15,10 +15,12 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Function;
 
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonPlugin;
 import it.niedermann.android.markdown.MarkdownEditor;
+import it.niedermann.android.markdown.markwon.plugins.LinkClickInterceptorPlugin;
 import it.niedermann.android.markdown.markwon.plugins.SearchHighlightPlugin;
 import it.niedermann.android.markdown.markwon.plugins.ToggleableTaskListPlugin;
 
@@ -55,6 +57,14 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
                 }))
                 .build();
         this.renderService = Executors.newSingleThreadExecutor();
+    }
+
+    public void registerOnLinkClickCallback(@NonNull Function<String, Boolean> callback) {
+        this.markwon.getPlugin(LinkClickInterceptorPlugin.class).registerOnLinkClickCallback(callback);
+    }
+
+    public void removeOnLinkClickCallback(@NonNull Function<String, Boolean> callback) {
+        this.markwon.getPlugin(LinkClickInterceptorPlugin.class).removeOnLinkClickCallback(callback);
     }
 
     @Override

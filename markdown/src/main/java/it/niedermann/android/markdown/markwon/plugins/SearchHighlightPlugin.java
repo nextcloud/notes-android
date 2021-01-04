@@ -2,9 +2,7 @@ package it.niedermann.android.markdown.markwon.plugins;
 
 import android.content.Context;
 import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.TextUtils;
-import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
@@ -18,9 +16,9 @@ import it.niedermann.android.markdown.R;
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil;
 import it.niedermann.android.markdown.markwon.span.SearchSpan;
 
-public class SearchHighlightPlugin extends AbstractMarkwonPlugin {
+import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.getContentAsSpannable;
 
-    private static final String TAG = SearchHighlightPlugin.class.getSimpleName();
+public class SearchHighlightPlugin extends AbstractMarkwonPlugin {
 
     @Nullable
     private CharSequence searchText = null;
@@ -57,22 +55,6 @@ public class SearchHighlightPlugin extends AbstractMarkwonPlugin {
         if (this.searchText != null) {
             final Spannable spannable = getContentAsSpannable(textView);
             MarkwonMarkdownUtil.searchAndColor(spannable, searchText, textView.getContext(), current, color);
-        }
-    }
-
-    /**
-     * @return When the content of the {@param textView} is already of type {@link Spannable}, it will cast and return it directly.
-     * Otherwise it will create a new {@link SpannableString} from the content, set this as new content of the {@param textView} and return it.
-     */
-    private static Spannable getContentAsSpannable(@NonNull TextView textView) {
-        final CharSequence content = textView.getText();
-        if (content.getClass() == SpannableString.class || content instanceof Spannable) {
-            return (Spannable) content;
-        } else {
-            Log.w(TAG, "Expected " + TextView.class.getSimpleName() + " content to be of type " + Spannable.class.getSimpleName() + ", but was of type " + content.getClass() + ". Search highlighting will be not performant.");
-            final Spannable spannableContent = new SpannableString(content);
-            textView.setText(spannableContent, TextView.BufferType.SPANNABLE);
-            return spannableContent;
         }
     }
 }
