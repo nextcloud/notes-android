@@ -508,6 +508,7 @@ public class MarkwonMarkdownUtilTest extends TestCase {
                     listType.checkboxUnchecked + " Item";
             assertEquals(expected_5, MarkwonMarkdownUtil.setCheckboxStatus(origin_5, 1, false));
 
+            // Checkboxes in fenced code block aren't rendered by Markwon and therefore don't count to the checkbox index
             final String origin_6 = "" +
                     listType.checkboxChecked + " Item\n" +
                     "```\n" +
@@ -522,6 +523,7 @@ public class MarkwonMarkdownUtilTest extends TestCase {
                     listType.checkboxChecked + " Item";
             assertEquals(expected_6, MarkwonMarkdownUtil.setCheckboxStatus(origin_6, 1, true));
 
+            // Checkbox in partial nested fenced code block does not count as rendered checkbox
             final String origin_7 = "" +
                     listType.checkboxChecked + " Item\n" +
                     "````\n" +
@@ -537,6 +539,46 @@ public class MarkwonMarkdownUtilTest extends TestCase {
                     "````\n" +
                     listType.checkboxChecked + " Item";
             assertEquals(expected_7, MarkwonMarkdownUtil.setCheckboxStatus(origin_7, 1, true));
+
+            // Checkbox in complete nested fenced code block does not count as rendered checkbox
+            final String origin_8 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    "````\n" +
+                    listType.checkboxUnchecked + " Item";
+            final String expected_8 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    "````\n" +
+                    listType.checkboxChecked + " Item";
+            assertEquals(expected_8, MarkwonMarkdownUtil.setCheckboxStatus(origin_8, 1, true));
+
+            // If checkbox has no content, it doesn't get rendered by Markwon and therefore can not be checked
+            final String origin_9 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    "````\n" +
+                    listType.checkboxUnchecked + " \n" +
+                    listType.checkboxUnchecked + " Item";
+            final String expected_9 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    "````\n" +
+                    listType.checkboxUnchecked + " \n" +
+                    listType.checkboxChecked + " Item";
+            assertEquals(expected_9, MarkwonMarkdownUtil.setCheckboxStatus(origin_9, 1, true));
         }
     }
 
