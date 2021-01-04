@@ -152,7 +152,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     public void applyBrand(int mainColor, int textColor) {
         super.applyBrand(mainColor, textColor);
-        binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+        binding.singleNoteContent.setSearchColor(mainColor);
     }
 
     private TextProcessorChain defaultTextProcessorChain(DBNote note) {
