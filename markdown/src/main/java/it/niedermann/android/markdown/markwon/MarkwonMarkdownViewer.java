@@ -46,7 +46,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     public MarkwonMarkdownViewer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.markwon = MarkwonMarkdownUtil.initMarkwonViewer(context)
+        this.markwon = initMarkwonViewer(context)
                 .usePlugin(new ToggleableTaskListPlugin((toggledCheckboxPosition, newCheckedState) -> {
                     final CharSequence oldUnrenderedText = unrenderedText$.getValue();
                     if (oldUnrenderedText == null) {

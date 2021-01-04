@@ -44,6 +44,7 @@ import it.niedermann.android.markdown.markwon.span.SearchSpan;
 public class MarkwonMarkdownUtil {
 
     private static final String TAG = MarkwonMarkdownUtil.class.getSimpleName();
+    private static final Pattern PATTERN_CODE_FENCE = Pattern.compile("^(`{3,})");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
@@ -121,9 +122,23 @@ public class MarkwonMarkdownUtil {
         final String[] lines = markdownString.split("\n");
         int checkboxIndex = 0;
         boolean isInFencedCodeBlock = false;
+        int fencedCodeBlockSigns = 0;
         for (int i = 0; i < lines.length; i++) {
-            if (lines[i].startsWith("```")) {
-                isInFencedCodeBlock = !isInFencedCodeBlock;
+            final Matcher matcher = PATTERN_CODE_FENCE.matcher(lines[i]);
+            if (matcher.find()) {
+                final String fence = matcher.group(1);
+                if (fence != null) {
+                    int currentFencedCodeBlockSigns = fence.length();
+                    if (isInFencedCodeBlock) {
+                        if (currentFencedCodeBlockSigns == fencedCodeBlockSigns) {
+                            isInFencedCodeBlock = false;
+                            fencedCodeBlockSigns = 0;
+                        }
+                    } else {
+                        isInFencedCodeBlock = true;
+                        fencedCodeBlockSigns = currentFencedCodeBlockSigns;
+                    }
+                }
             }
             if (!isInFencedCodeBlock) {
                 if (lineStartsWithCheckbox(lines[i]) && lines[i].trim().length() > EListType.DASH.checkboxChecked.length()) {

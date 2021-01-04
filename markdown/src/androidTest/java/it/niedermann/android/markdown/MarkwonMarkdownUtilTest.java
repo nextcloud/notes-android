@@ -522,7 +522,21 @@ public class MarkwonMarkdownUtilTest extends TestCase {
                     listType.checkboxChecked + " Item";
             assertEquals(expected_6, MarkwonMarkdownUtil.setCheckboxStatus(origin_6, 1, true));
 
-            // TODO check code block fences with more then 3 backticks
+            final String origin_7 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "````\n" +
+                    listType.checkboxUnchecked + " Item";
+            final String expected_7 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "````\n" +
+                    listType.checkboxChecked + " Item";
+            assertEquals(expected_7, MarkwonMarkdownUtil.setCheckboxStatus(origin_7, 1, true));
         }
     }
 
