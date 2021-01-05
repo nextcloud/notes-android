@@ -19,6 +19,8 @@ public class FormattingHelpActivity extends BrandedActivity {
 
     private ActivityFormattingHelpBinding binding;
 
+    private static final String lineBreak = "\n";
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,7 @@ public class FormattingHelpActivity extends BrandedActivity {
 
         setSupportActionBar(binding.toolbar);
 
+        binding.contentContextBasedFormatting.setMarkdownString(buildContextBasedFormattingHelp());
         binding.content.setMovementMethod(LinkMovementMethod.getInstance());
         binding.content.setMarkdownString(buildFormattingHelp());
 
@@ -39,8 +42,21 @@ public class FormattingHelpActivity extends BrandedActivity {
     }
 
     @NonNull
+    private String buildContextBasedFormattingHelp() {
+        return getString(R.string.formatting_help_title, getString(R.string.formatting_help_cbf_title)) + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_cbf_body_1) + lineBreak +
+                getString(R.string.formatting_help_cbf_body_2,
+                        getString(R.string.formatting_help_codefence_inline, getString(android.R.string.cut)),
+                        getString(R.string.formatting_help_codefence_inline, getString(android.R.string.copy)),
+                        getString(R.string.formatting_help_codefence_inline, getString(android.R.string.selectAll)),
+                        getString(R.string.formatting_help_codefence_inline, getString(R.string.simple_link)),
+                        getString(R.string.formatting_help_codefence_inline, getString(R.string.simple_checkbox))
+                );
+    }
+
+    @NonNull
     private String buildFormattingHelp() {
-        final String lineBreak = "\n";
         final String indention = "  ";
         final String divider = getString(R.string.formatting_help_divider);
         final String codefence = getString(R.string.formatting_help_codefence);
@@ -80,18 +96,28 @@ public class FormattingHelpActivity extends BrandedActivity {
                 indention + indention + getString(R.string.formatting_help_javascript_2) + lineBreak +
                 getString(R.string.formatting_help_javascript_3) + lineBreak;
 
-        return getString(R.string.formatting_help_title, getString(R.string.formatting_help_cbf_title)) + lineBreak +
-                lineBreak +
-                getString(R.string.formatting_help_cbf_body_1) + lineBreak +
-                getString(R.string.formatting_help_cbf_body_2,
-                        getString(R.string.formatting_help_codefence_inline, getString(android.R.string.cut)),
-                        getString(R.string.formatting_help_codefence_inline, getString(android.R.string.copy)),
-                        getString(R.string.formatting_help_codefence_inline, getString(android.R.string.selectAll)),
-                        getString(R.string.formatting_help_codefence_inline, getString(R.string.simple_link)),
-                        getString(R.string.formatting_help_codefence_inline, getString(R.string.simple_checkbox))
-                ) + lineBreak +
-                lineBreak +
-                divider + lineBreak +
+        final int column_count = 3;
+        final int row_count = 3;
+        final StringBuilder table = new StringBuilder();
+        table.append("|");
+        for (int i = 1; i <= column_count; i++) {
+            table.append(" ").append(getString(R.string.formatting_help_tables_column, i)).append(" |");
+        }
+        table.append("\n");
+        table.append("|");
+        for (int i = 0; i < column_count; i++) {
+            table.append(" --- |");
+        }
+        table.append("\n");
+        for (int i = 1; i <= row_count; i++) {
+            table.append("|");
+            for (int j = 1; j <= column_count; j++) {
+                table.append(" ").append(getString(R.string.formatting_help_tables_value, i * j)).append(" |");
+            }
+            table.append("\n");
+        }
+
+        return divider + lineBreak +
                 lineBreak +
                 getString(R.string.formatting_help_title, getString(R.string.formatting_help_text_title)) + lineBreak +
                 lineBreak +
@@ -174,14 +200,21 @@ public class FormattingHelpActivity extends BrandedActivity {
                 lineBreak +
                 divider + lineBreak +
                 lineBreak +
-                getString(R.string.formatting_help_title, getString(R.string.formatting_help_unsupported_title)) + lineBreak +
+                getString(R.string.formatting_help_title, getString(R.string.formatting_help_tables_title)) + lineBreak +
                 lineBreak +
-                getString(R.string.formatting_help_unsupported_body_1) + lineBreak +
+                codefence + lineBreak +
+                table +
+                codefence + lineBreak +
                 lineBreak +
-                getString(R.string.formatting_help_ul, getString(R.string.formatting_help_unsupported_body_2)) + lineBreak +
-                getString(R.string.formatting_help_ul, getString(R.string.formatting_help_unsupported_body_3)) + lineBreak +
+                table +
                 lineBreak +
-                getString(R.string.formatting_help_unsupported_body_4) + lineBreak;
+                divider + lineBreak +
+                lineBreak +
+                getString(R.string.formatting_help_title, getString(R.string.formatting_help_images_title)) + lineBreak +
+                lineBreak +
+                codefence + lineBreak +
+                getString(R.string.formatting_help_image, getString(R.string.formatting_help_images_alt)) + lineBreak +
+                codefence + lineBreak;
     }
 
     @Override

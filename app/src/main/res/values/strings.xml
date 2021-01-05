@@ -246,6 +246,7 @@
     <string name="formatting_help_strike_through" translatable="false">~~</string>
     <string name="formatting_help_bold" translatable="false">**</string>
     <string name="formatting_help_italic" translatable="false">*</string>
+    <string name="formatting_help_image" translatable="false">![%1$s](https://example.com/image.jpg)</string>
 
     <string name="formatting_help_cbf_title">Context based formatting</string>
     <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
@@ -283,11 +284,13 @@
     <string name="formatting_help_code_body_2">Markdown also supports something called code fencing, which allows for multiple lines without indentation:</string>
     <string name="formatting_help_code_body_3">And if you\'d like to use syntax highlighting, include the language:</string>
 
-    <string name="formatting_help_unsupported_title">Unsupported</string>
-    <string name="formatting_help_unsupported_body_1">While we try to continuously improve the support for Markdown, there are a few features which are not yet supported by Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Tables</string>
-    <string name="formatting_help_unsupported_body_3">Images</string>
-    <string name="formatting_help_unsupported_body_4">If you are interested in contributing support for one of those features, get in contact with us via GitHub or E-Mail.</string>
+    <string name="formatting_help_tables_title">Tables</string>
+    <string name="formatting_help_tables_column">Column %1d</string>
+    <string name="formatting_help_tables_value">Value %1d</string>
+
+    <string name="formatting_help_images_title">Images</string>
+    <string name="formatting_help_images_alt">Fancy image</string>
+
     <string name="simple_other">Other</string>
     <string name="sort_last_modified">Sort by modified date</string>
     <string name="sort_alphabetically">Sort by alphabet</string>
@@ -295,4 +298,5 @@
     <string name="error_action_open_deck_info">Open App info</string>
     <string name="error_action_open_network">Network settings</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
+    <string name="context_based_formatting">Context based formatting popover</string>
 </resources>
