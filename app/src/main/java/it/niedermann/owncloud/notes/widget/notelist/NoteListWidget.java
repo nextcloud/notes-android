@@ -85,7 +85,7 @@ public class NoteListWidget extends AppWidgetProvider {
                     views.setOnClickPendingIntent(R.id.widget_note_list_title_tv_dark, openAppI);
                     views.setOnClickPendingIntent(R.id.widget_note_list_create_icon_dark, newNoteI);
                     views.setPendingIntentTemplate(R.id.note_list_widget_lv_dark, templatePI);
-                    views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv_dark, serviceIntent);
+                    views.setRemoteAdapter(R.id.note_list_widget_lv_dark, serviceIntent);
                     views.setEmptyView(R.id.note_list_widget_lv_dark, R.id.widget_note_list_placeholder_tv_dark);
                     awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv_dark);
                     if (BrandingUtil.isBrandingEnabled(context)) {
@@ -106,7 +106,7 @@ public class NoteListWidget extends AppWidgetProvider {
                     views.setOnClickPendingIntent(R.id.widget_note_list_title_tv, openAppI);
                     views.setOnClickPendingIntent(R.id.widget_note_list_create_icon, newNoteI);
                     views.setPendingIntentTemplate(R.id.note_list_widget_lv, templatePI);
-                    views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv, serviceIntent);
+                    views.setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent);
                     views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
                     awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
                     if (BrandingUtil.isBrandingEnabled(context)) {
