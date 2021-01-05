@@ -285,7 +285,9 @@
     <string name="formatting_help_code_body_3">And if you\'d like to use syntax highlighting, include the language:</string>
 
     <string name="formatting_help_tables_title">Tables</string>
+    <!-- Column header of a sample table -->
     <string name="formatting_help_tables_column">Column %1d</string>
+    <!-- Table cell value of a sample table -->
     <string name="formatting_help_tables_value">Value %1d</string>
 
     <string name="formatting_help_images_title">Images</string>
