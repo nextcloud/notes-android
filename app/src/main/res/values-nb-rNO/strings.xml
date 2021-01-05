@@ -14,9 +14,7 @@
     <string name="simple_edit">Rediger</string>
     <string name="action_edit_save">Lagre</string>
     <string name="simple_about">Om</string>
-    <string name="simple_bold">Uthevet</string>
     <string name="simple_link">Lenke</string>
-    <string name="simple_italic">Italic</string>
     <string name="action_note_deleted">Slettet %1$s</string>
     <string name="action_note_restored">Gjennopprettet %1$s</string>
     <string name="action_undo">Angre</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Synkronisering mislyktes: %1$s</string>
     <string name="error_synchronization">Synkronisering mislyktes</string>
-    <string name="error_json">er Notat-appen påslått på serveren?</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
     <string name="error_unknown">En ukjent feil oppstod.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Lukk</string>
     <string name="simple_copy">Kopier</string>
     <string name="simple_exception">Avbrudd</string>
-    <string name="copied_to_clipboard">Kopiert til utklippstavlen</string>
     <string name="pin_to_homescreen">Fest til hjemmeskjermen</string>
     <string name="note_has_been_deleted">Dette notatet har blitt slettet</string>
     <string name="add_account">Legg til en konto</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Kontoen har allerede blitt importert</string>
     <string name="no_notes_yet">Ingen notater enda</string>
     <string name="no_notes_yet_description">Trykk + knappen for å opprette et nytt notat</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Kunne ikke laste forhåndsvisning. Kontroller om det er et tosifret nummerert listeelement uten innhold.</string>
     <string name="simple_more">Mer</string>
     <string name="simple_move">Flytt</string>
-    <string name="checkbox_could_not_be_toggled">Kunne ikke endre avkrysningsruten.</string>
     <string name="category_readonly">Skrivebeskyttet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Legg til%1$s</string>
     <string name="simple_checkbox">Avkryssningsboks</string>
     <string name="unlock_notes">Lås opp notater</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Kunne ikke kopiere til utklippstavlen</string>
     <string name="error_dialog_title">Å nei - Hva nå? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prøv å tvinge avslutning av appen og start den på nytt. Det kan ha vært en feiltilkobling til Nextcloud-appen.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet vedvarer, prøv å tømme lageret for begge disse appene for å løse problemet: Nextcloud og Nextcloud Notes.</string>
@@ -220,11 +213,6 @@
     <string name="formatting_help_code_body_2">Markdown støtter også noe som kalles kodegjerding, som tillater flere linjer uten innrykk:</string>
     <string name="formatting_help_code_body_3">Og hvis du vil bruke syntaksmarkering, inkluder språket:</string>
 
-    <string name="formatting_help_unsupported_title">Ustøttet</string>
-    <string name="formatting_help_unsupported_body_1">Mens vi prøver å kontinuerlig forbedre støtten for Markdown, er det noen få funksjoner som ennå ikke støttes av Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Tabell</string>
-    <string name="formatting_help_unsupported_body_3">Bilder</string>
-    <string name="formatting_help_unsupported_body_4">Hvis du er interessert i å bidra med støtte for en av disse funksjonene, kan du kontakte oss via GitHub eller e-post.</string>
     <string name="simple_other">Annet</string>
     <string name="sort_last_modified">Sorter etter dato endret</string>
     <string name="sort_alphabetically">Sorter alfabetisk</string>

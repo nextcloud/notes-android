@@ -14,9 +14,7 @@
     <string name="simple_edit">Edita</string>
     <string name="action_edit_save">Desa</string>
     <string name="simple_about">Quant a</string>
-    <string name="simple_bold">Negreta</string>
     <string name="simple_link">Enllaç</string>
-    <string name="simple_italic">Cursiva</string>
     <string name="action_note_deleted">S\'ha suprimit %1$s</string>
     <string name="action_note_restored">S\'ha restaurat %1$s</string>
     <string name="action_undo">Desfés</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">S\'ha produït un error en la sincronització: %1$s</string>
     <string name="error_synchronization">S\'ha produït un error en la sincronització</string>
-    <string name="error_json">Està activada l\'aplicació Notes al servidor?</string>
     <string name="error_no_network">No hi ha connexió a la xarxa</string>
     <string name="error_unknown">S\'ha produït un error desconegut</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Tanca</string>
     <string name="simple_copy">Copia</string>
     <string name="simple_exception">Excepció</string>
-    <string name="copied_to_clipboard">S\'ha copiat al porta-retalls</string>
     <string name="pin_to_homescreen">Fixa-ho a la pantalla d\'inici</string>
     <string name="note_has_been_deleted">S\'ha suprimit aquesta nota</string>
     <string name="add_account">Afegeix un compte</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Ja s\'ha importat el compte</string>
     <string name="no_notes_yet">Encara no hi ha notes</string>
     <string name="no_notes_yet_description">Premeu el botó + per a crear una nota nova</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">No s\'ha pogut carregar la previsualització. Comproveu si hi ha un element de la llista numerada amb dos dígits sense contingut.</string>
     <string name="simple_more">Més</string>
     <string name="simple_move">Mou</string>
-    <string name="checkbox_could_not_be_toggled">No s\'ha pogut canviar la casella de selecció.</string>
     <string name="category_readonly">Només de lectura</string>
     <string name="no_category">Sense categoria</string>
     <string name="add_category">Afegeix %1$s</string>
     <string name="simple_checkbox">Casella de selecció</string>
     <string name="unlock_notes">Desbloqueja les notes</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">No s\'ha pogut copiar al porta-retalls</string>
     <string name="error_dialog_title">Oh, no! I ara què? </string>
     <string name="error_dialog_tip_token_mismatch_retry">Proveu de forçar el tancament de l\'aplicació i reinicieu-la. Pot ser que hi hagi hagut una connexió incorrecta a l\'aplicació Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persisteix, proveu d\'esborrar l\'emmagatzematge de totes dues aplicacions: Nextcloud i Notes del Nextcloud per tal de resoldre el problema.</string>
@@ -233,11 +226,6 @@
     <string name="formatting_help_code_body_2">Markdown també admet l\'aïllament de codi, que permet inserir diverses línies sense sagnat:</string>
     <string name="formatting_help_code_body_3">Si voleu utilitzar el ressaltat de sintaxi, incloeu-hi el llenguatge:</string>
 
-    <string name="formatting_help_unsupported_title">Característiques no admeses</string>
-    <string name="formatting_help_unsupported_body_1">Tot i que provem de millorar contínuament la compatibilitat amb Markdown, hi ha algunes característiques que encara no s\'admeten a Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Taules</string>
-    <string name="formatting_help_unsupported_body_3">Imatges</string>
-    <string name="formatting_help_unsupported_body_4">Si us interessa contribuir per a admetre una d\'aquestes característiques, poseu-vos en contacte amb nosaltres mitjançant GitHub o per correu electrònic.</string>
     <string name="simple_other">Altres</string>
     <string name="sort_last_modified">Ordena per la data de modificació</string>
     <string name="sort_alphabetically">Ordena alfabèticament</string>

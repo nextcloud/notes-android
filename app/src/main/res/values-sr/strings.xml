@@ -14,9 +14,7 @@
     <string name="simple_edit">Измени</string>
     <string name="action_edit_save">Сачувај</string>
     <string name="simple_about">О програму</string>
-    <string name="simple_bold">Подебљано</string>
     <string name="simple_link">Веза</string>
-    <string name="simple_italic">Курзив</string>
     <string name="action_note_deleted">Обрисано %1$s</string>
     <string name="action_note_restored">Повраћено %1$s</string>
     <string name="action_undo">Опозови</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Синхронизација није успела%1$s</string>
     <string name="error_synchronization">Синхронизација није успела</string>
-    <string name="error_json">Да ли је апликација Белешки активирана на серверу?</string>
     <string name="error_no_network">Нема мрежне везе</string>
     <string name="error_unknown">Десила се непозната грешка.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Затвори</string>
     <string name="simple_copy">Копирај</string>
     <string name="simple_exception">Изузетак</string>
-    <string name="copied_to_clipboard">Копирано у оставу</string>
     <string name="pin_to_homescreen">Закачи на почетни екран</string>
     <string name="note_has_been_deleted">Ова белешка је обрисана</string>
     <string name="add_account">Додај налог</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Налог је већ увезен</string>
     <string name="no_notes_yet">Још нема белешки</string>
     <string name="no_notes_yet_description">Притисните + дугме да направите нову белешку</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Не могу да учитам преглед. Проверите да ли постоји двоцифрена ставка у листи без садржаја.</string>
     <string name="simple_more">Још</string>
     <string name="simple_move">Помери</string>
-    <string name="checkbox_could_not_be_toggled">Поље за потврду не може да се укључи/искључи.</string>
     <string name="category_readonly">Само за читање</string>
     <string name="no_category">Нема категорије</string>
     <string name="add_category">Додај %1$s</string>
     <string name="simple_checkbox">Штиклирање</string>
     <string name="unlock_notes">Откључај белешке</string>
     <string name="simple_beta">Бета</string>
-    <string name="could_not_copy_to_clipboard">Не могу да копирам у оставу</string>
     <string name="error_dialog_title">О, не - шта сад? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Покушајте да форсирано затворите апликацију и стартујете је поново. Можда је била неисправна конекција ка Некстклауд апликацији.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ако проблем настави да се дешава, пробајте да очистите податке од обе апликације: и Некстклауд и Некстклауд Белешки да бисте решили проблем.</string>
@@ -237,11 +230,6 @@
     <string name="formatting_help_code_body_2">Markdown синтакса такође подржава тзв. ограђени кôд, што дозвољава вишеструке линије без увлачења:</string>
     <string name="formatting_help_code_body_3">А ако желите бојење синтакте, додајте и језик:</string>
 
-    <string name="formatting_help_unsupported_title">Неподржано</string>
-    <string name="formatting_help_unsupported_body_1">И док покушавамо да непрекидно побољшавамо подршку за Markdown синтаксу, има неких функционалности које још нису подржане у Белешкама:</string>
-    <string name="formatting_help_unsupported_body_2">Табеле</string>
-    <string name="formatting_help_unsupported_body_3">Слике</string>
-    <string name="formatting_help_unsupported_body_4">Ако сте заинтересовани да подржите једну од ових функционалности, контактирајте нас преко GitHub-а или е-мејла.</string>
     <string name="simple_other">Остало</string>
     <string name="sort_last_modified">Сортирај по времену измене</string>
     <string name="sort_alphabetically">Сортирај абецедно</string>

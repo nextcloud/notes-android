@@ -14,9 +14,7 @@
     <string name="simple_edit">Επεξεργασία</string>
     <string name="action_edit_save">Αποθήκευση</string>
     <string name="simple_about">Περί</string>
-    <string name="simple_bold">Έντονα</string>
     <string name="simple_link">Σύνδεσμος</string>
-    <string name="simple_italic">Πλάγια</string>
     <string name="action_note_deleted">Διεγραμμένα %1$s</string>
     <string name="action_note_restored">Επαναφέρθηκαν %1$s</string>
     <string name="action_undo">Αναίρεση</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_synchronization">Αποτυχία συγχρονισμού</string>
-    <string name="error_json">Είναι ενεργοποιημένη η εφαρμογή Σημειώσεων στον διακομιστή;</string>
     <string name="error_no_network">Δεν υπάρχει σύνδεση στο δίκτυο</string>
     <string name="error_unknown">Προέκυψε άγνωστο σφάλμα.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Κλείσιμο</string>
     <string name="simple_copy">Αντιγραφή</string>
     <string name="simple_exception">Εξαίρεση</string>
-    <string name="copied_to_clipboard">Αντιγράφηκε στο πρόχειρο</string>
     <string name="pin_to_homescreen">Καρφίτσωμα στην αρχική αθόνη</string>
     <string name="note_has_been_deleted">Αυτή η σημείωση έχει διαγραφεί</string>
     <string name="add_account">Προσθήκη λογαριασμού</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Ο λογαριασμός έχει εισαχθεί ήδη</string>
     <string name="no_notes_yet">Δεν υπάρχουν ακόμα σημειώσεις</string>
     <string name="no_notes_yet_description">Πιέστε το κουμπί + για νέα σημείωση</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Δεν ήταν δυνατή η φόρτωση της προεπισκόπησης. Ελέγξτε αν υπάρχει στη λίστα κενό διψήφιο αριθμημένο στοιχείο.</string>
     <string name="simple_more">Περισσότερα</string>
     <string name="simple_move">Μετακίνηση</string>
-    <string name="checkbox_could_not_be_toggled">Δεν ήταν δυνατή η εναλλαγή του πλαισίου ελέγχου.</string>
     <string name="category_readonly">Μόνο για ανάγνωση</string>
     <string name="no_category">Χωρίς κατηγορία</string>
     <string name="add_category">Προσθήκη %1$s</string>
     <string name="simple_checkbox">Πλαίσιο ελέγχου</string>
     <string name="unlock_notes">Ξεκλείδωμα σημειώσεων</string>
     <string name="simple_beta">Δοκιμαστικό</string>
-    <string name="could_not_copy_to_clipboard">Δεν μπορεί να αντιγραφή στο πρόχειρο</string>
     <string name="error_dialog_title">Ωχ όχι - Τώρα τί; 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Δοκιμάστε τερματισμό της εφαρμογή και επανεκκίνηση. Ίσως υπάρχει λάθος σύνδεση.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Εάν το πρόβλημα παραμένει, προσπαθήστε να εκκαθαρίσετε τον χώρο αποθήκευσης και των δύο εφαρμογών: του Nextcloud και του Nextcloud Notes.</string>
@@ -220,11 +213,6 @@
     <string name="formatting_help_code_body_2">Το Markdown υποστηρίζει επίσης κάτι που ονομάζεται code fencing, το οποίο επιτρέπει πολλαπλές γραμμές χωρίς εσοχή:</string>
     <string name="formatting_help_code_body_3">Και αν θέλετε να χρησιμοποιήσετε την επισήμανση σύνταξης, συμπεριλάβετε τη γλώσσα:</string>
 
-    <string name="formatting_help_unsupported_title">Μη υποστηριζόμενο</string>
-    <string name="formatting_help_unsupported_body_1">Ενώ προσπαθούμε να βελτιώνουμε συνεχώς την υποστήριξη για το Markdown, υπάρχουν μερικές δυνατότητες που δεν υποστηρίζονται ακόμη από τις Σημειώσεις:</string>
-    <string name="formatting_help_unsupported_body_2">Πίνακες</string>
-    <string name="formatting_help_unsupported_body_3">Εικόνες</string>
-    <string name="formatting_help_unsupported_body_4">Εάν ενδιαφέρεστε να συνεισφέρετε σε μία από αυτές τις λειτουργίες, επικοινωνήστε μαζί μας μέσω GitHub ή E-Mail.</string>
     <string name="simple_other">Άλλο</string>
     <string name="sort_last_modified">Ταξινόμηση κατά ημερομηνία τροποποίησης</string>
     <string name="sort_alphabetically">Ταξινόμηση αλφαβητικά</string>

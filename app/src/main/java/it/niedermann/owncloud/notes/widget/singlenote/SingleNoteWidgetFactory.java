@@ -101,12 +101,12 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         if (darkModeActive) {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv_dark, MarkdownUtil.renderForWidget(context, note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv_dark, MarkdownUtil.renderForRemoteView(context, note.getContent()));
 
         } else {
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
             note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForWidget(context, note.getContent()));
+            note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, note.getContent()));
         }
 
         return note_content;

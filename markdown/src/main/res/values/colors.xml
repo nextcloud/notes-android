@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg_highlighted">#eee</color>
     <color name="search_color">#0082C9</color>
+    <color name="bg_highlighted">#eee</color>
+    <color name="bg_code">#0e000000</color>
 </resources>

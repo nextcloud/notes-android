@@ -12,6 +12,7 @@ import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
+import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,7 +68,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     public <T extends Context & NoteClickListener> ItemAdapter(@NonNull T context, boolean gridView) {
         this.noteClickListener = context;
         this.gridView = gridView;
-        this.mainColor = context.getResources().getColor(R.color.defaultBrand);
+        this.mainColor = ContextCompat.getColor(context, R.color.defaultBrand);
         this.textColor = Color.WHITE;
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
         this.fontSize = getFontSizeFromPreferences(context, sp);

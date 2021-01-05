@@ -7,6 +7,7 @@ import android.util.Log;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -49,7 +50,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
                 final Boolean branding = (Boolean) newValue;
                 Log.v(TAG, "branding: " + branding);
                 requireActivity().setResult(Activity.RESULT_OK);
-                requireActivity().recreate();
+                ActivityCompat.recreate(requireActivity());
                 return true;
             });
         } else {
@@ -94,7 +95,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         themePref.setOnPreferenceChangeListener((preference, newValue) -> {
             NotesApplication.setAppTheme(DarkModeSetting.valueOf((String) newValue));
             requireActivity().setResult(Activity.RESULT_OK);
-            requireActivity().recreate();
+            ActivityCompat.recreate(requireActivity());
             return true;
         });
 

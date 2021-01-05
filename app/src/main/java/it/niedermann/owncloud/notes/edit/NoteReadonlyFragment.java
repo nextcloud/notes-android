@@ -1,55 +1,18 @@
 package it.niedermann.owncloud.notes.edit;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.Layout;
-import android.text.SpannableString;
-import android.text.method.LinkMovementMethod;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.preference.PreferenceManager;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.yydcdut.markdown.MarkdownProcessor;
-import com.yydcdut.markdown.syntax.text.TextFactory;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
-import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.util.MarkDownUtil;
-import it.niedermann.owncloud.notes.shared.util.NoteLinksUtils;
 
-import static androidx.core.view.ViewCompat.isAttachedToWindow;
-import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.searchAndColor;
-import static it.niedermann.owncloud.notes.shared.util.MarkDownUtil.parseCompat;
-import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
-
-public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
-
-    private MarkdownProcessor markdownProcessor;
-
-    private FragmentNotePreviewBinding binding;
-
-    public static NoteReadonlyFragment newInstance(String content) {
-        NoteReadonlyFragment f = new NoteReadonlyFragment();
-        Bundle b = new Bundle();
-        b.putString(PARAM_CONTENT, content);
-        f.setArguments(b);
-        return f;
-    }
+public class NoteReadonlyFragment extends NotePreviewFragment {
 
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
@@ -62,76 +25,28 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
         menu.findItem(R.id.menu_share).setVisible(false);
         menu.findItem(R.id.menu_move).setVisible(false);
         menu.findItem(R.id.menu_category).setVisible(false);
+        menu.findItem(R.id.menu_title).setVisible(false);
         if (menu.findItem(MENU_ID_PIN) != null)
             menu.findItem(MENU_ID_PIN).setVisible(false);
     }
 
-    @Override
-    public ScrollView getScrollView() {
-        return binding.scrollView;
-    }
-
-    @Override
-    protected FloatingActionButton getSearchNextButton() {
-        return binding.searchNext;
-    }
-
-    @Override
-    protected FloatingActionButton getSearchPrevButton() {
-        return binding.searchPrev;
-    }
-
-    @Override
-    protected Layout getLayout() {
-        binding.singleNoteContent.onPreDraw();
-        return binding.singleNoteContent.getLayout();
-    }
-
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup
-            container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentNotePreviewBinding.inflate(inflater, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        binding.singleNoteContent.setEnabled(false);
+        binding.swiperefreshlayout.setEnabled(false);
         return binding.getRoot();
     }
 
     @Override
-    protected void onNoteLoaded(Note note) {
-        markdownProcessor = new MarkdownProcessor(requireActivity());
-        markdownProcessor.factory(TextFactory.create());
-        markdownProcessor.config(
-                MarkDownUtil.getMarkDownConfiguration(binding.singleNoteContent.getContext())
-                        .setOnLinkClickCallback((view, link) -> {
-                            if (NoteLinksUtils.isNoteLink(link)) {
-                                long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-                                long noteLocalId = db.getNoteDao().getLocalIdByRemoteId(note.getAccountId(), noteRemoteId);
-                                Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
-                                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
-                                startActivity(intent);
-                            } else {
-                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-                                startActivity(browserIntent);
-                            }
-                        })
-                        .build());
-        try {
-            binding.singleNoteContent.setText(parseCompat(markdownProcessor, note.getContent()));
-            onResume();
-        } catch (StringIndexOutOfBoundsException e) {
-            // Workaround for RxMarkdown: https://github.com/stefan-niedermann/nextcloud-notes/issues/668
-            binding.singleNoteContent.setText(note.getContent());
-            Toast.makeText(binding.singleNoteContent.getContext(), R.string.could_not_load_preview_two_digit_numbered_list, Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-        binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
+    protected void registerInternalNoteLinkHandler() {
+        // Do nothing
+    }
 
-        binding.swiperefreshlayout.setEnabled(false);
-
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
-        binding.singleNoteContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
-        if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
-            binding.singleNoteContent.setTypeface(Typeface.MONOSPACE);
-        }
+    @Override
+    public void showEditTitleDialog() {
+        // Do nothing
     }
 
     @Override
@@ -144,21 +59,11 @@ public class NoteReadonlyFragment extends SearchableBaseNoteFragment {
         // Do nothing
     }
 
-    @Override
-    protected void colorWithText(@NonNull String newText, @Nullable Integer current, int mainColor, int textColor) {
-        if ((binding != null) && isAttachedToWindow(binding.singleNoteContent)) {
-            binding.singleNoteContent.setText(searchAndColor(new SpannableString(parseCompat(markdownProcessor, getContent())), newText, requireContext(), current, mainColor, textColor), TextView.BufferType.SPANNABLE);
-        }
-    }
-
-    @Override
-    protected String getContent() {
-        return note.getContent();
-    }
-
-    @Override
-    public void applyBrand(int mainColor, int textColor) {
-        super.applyBrand(mainColor, textColor);
-        binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+    public static BaseNoteFragment newInstance(String content) {
+        final BaseNoteFragment fragment = new NoteReadonlyFragment();
+        final Bundle args = new Bundle();
+        args.putString(PARAM_CONTENT, content);
+        fragment.setArguments(args);
+        return fragment;
     }
 }

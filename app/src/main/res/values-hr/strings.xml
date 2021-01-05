@@ -14,9 +14,7 @@
     <string name="simple_edit">Uredi</string>
     <string name="action_edit_save">Spremi</string>
     <string name="simple_about">Informacije</string>
-    <string name="simple_bold">Podebljano</string>
     <string name="simple_link">Poveznica</string>
-    <string name="simple_italic">U kurzivu</string>
     <string name="action_note_deleted">Izbrisano %1$s</string>
     <string name="action_note_restored">Vraćeno %1$s</string>
     <string name="action_undo">Poništi</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Sinkronizacija nije uspjela: %1$s</string>
     <string name="error_synchronization">Sinkronizacija nije uspjela</string>
-    <string name="error_json">Je li aplikacija Notes aktivirana na poslužitelju?</string>
     <string name="error_no_network">Nema veze s mrežom</string>
     <string name="error_unknown">Došlo je do nepoznate pogreške.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Zatvorite</string>
     <string name="simple_copy">Kopirajte</string>
     <string name="simple_exception">Izuzetak</string>
-    <string name="copied_to_clipboard">Kopirano u međuspremnik</string>
     <string name="pin_to_homescreen">Prikvačite na početni zaslon</string>
     <string name="note_has_been_deleted">Bilješka je izbrisana</string>
     <string name="add_account">Dodaj račun</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Račun je već uvezen</string>
     <string name="no_notes_yet">Još nema bilješki</string>
     <string name="no_notes_yet_description">Stvori novu bilješku s pomoću gumba +</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Nije moguće učitati pretpregled. Provjerite postoji li dvoznamenkasta stavka bez sadržaja na numeriranom popisu.</string>
     <string name="simple_more">Više</string>
     <string name="simple_move">Premjesti</string>
-    <string name="checkbox_could_not_be_toggled">Nije moguće označiti potvrdni okvir.</string>
     <string name="category_readonly">Samo za čitanje</string>
     <string name="no_category">Nema kategorije</string>
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Potvrdni okvir</string>
     <string name="unlock_notes">Otključaj bilješke</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Kopiranje u međuspremnik nije uspjelo</string>
     <string name="error_dialog_title">Ups, što sada? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Pokušajte prisilno zatvoriti aplikaciju i ponovo je pokrenuti. Možda se radi o nepravilnoj vezi s aplikacijom Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ako problem i dalje nije otklonjen, pokušajte izbrisati pohranjene podatke iz obje aplikacije: Nextcloud i Nextcloud Notes.</string>
@@ -237,11 +230,6 @@
     <string name="formatting_help_code_body_2">Markdown također podržava nešto što se naziva ograđivanje koda i omogućuje korištenje većeg broja redaka bez uvlačenja teksta:</string>
     <string name="formatting_help_code_body_3">Ako želite naglasiti sintaksu, dodajte jezik:</string>
 
-    <string name="formatting_help_unsupported_title">Bez podrške</string>
-    <string name="formatting_help_unsupported_body_1">Iako neprestano nadograđujemo podršku za Markdown, postoji nekoliko značajki koje još uvijek nisu podržane u aplikaciji Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Tablice</string>
-    <string name="formatting_help_unsupported_body_3">Slike</string>
-    <string name="formatting_help_unsupported_body_4">Ako želite poboljšati neku od tih značajki, obratite nam se putem GitHuba ili e-pošte.</string>
     <string name="simple_other">Ostalo</string>
     <string name="sort_last_modified">Razvrstaj prema datumu izmjene</string>
     <string name="sort_alphabetically">Razvrstaj po abecedi</string>

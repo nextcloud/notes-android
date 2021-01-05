@@ -14,9 +14,7 @@
     <string name="simple_edit">Edytuj</string>
     <string name="action_edit_save">Zapisz</string>
     <string name="simple_about">O aplikacji</string>
-    <string name="simple_bold">Pogrubienie</string>
     <string name="simple_link">Odnośnik</string>
-    <string name="simple_italic">Kursywa</string>
     <string name="action_note_deleted">Usunięto %1$s</string>
     <string name="action_note_restored">Przywrócono %1$s</string>
     <string name="action_undo">Cofnij</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_synchronization">Synchronizacja nie powiodła się</string>
-    <string name="error_json">Czy aplikacja Notes jest aktywowana na serwerze?</string>
     <string name="error_no_network">Brak połączenia sieciowego</string>
     <string name="error_unknown">Wystąpił nieznany błąd.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Zamknij </string>
     <string name="simple_copy">Kopiuj</string>
     <string name="simple_exception">Wyjątek</string>
-    <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <string name="pin_to_homescreen">Przypnij do ekranu głównego</string>
     <string name="note_has_been_deleted">Ta notatka została usunięta</string>
     <string name="add_account">Dodaj konto</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Konto zostało już zaimportowane</string>
     <string name="no_notes_yet">Brak notatek</string>
     <string name="no_notes_yet_description">Naciśnij przycisk +, aby utworzyć nową notatkę</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Nie można załadować podglądu. Sprawdź, czy istnieje dwucyfrowa pozycja listy bez zawartości.</string>
     <string name="simple_more">Więcej</string>
     <string name="simple_move">Przenieś</string>
-    <string name="checkbox_could_not_be_toggled">Nie można zmienić pola wyboru.</string>
     <string name="category_readonly">Tylko do odczytu</string>
     <string name="no_category">Bez kategorii</string>
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Pole checkbox</string>
     <string name="unlock_notes">Odblokuj notatki</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Nie można skopiować do schowka</string>
     <string name="error_dialog_title">O nie - co teraz? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Spróbuj wymusić zamknięcie aplikacji i uruchomić ją ponownie. Być może połączenie z aplikacją Nextcloud było nieprawidłowe.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jeśli problem będzie się powtarzać, spróbuj wyczyścić pamięć obu aplikacji: Nextcloud i Nextcloud Notes, aby rozwiązać ten problem.</string>
@@ -241,11 +234,6 @@
     <string name="formatting_help_code_body_2">Markdown obsługuje również coś, co nazywa się szermierką kodu, która pozwala na wiele linii bez wcięć:</string>
     <string name="formatting_help_code_body_3">A jeśli chcesz użyć podświetlania składni, uwzględnij język:</string>
 
-    <string name="formatting_help_unsupported_title">Niewspierane</string>
-    <string name="formatting_help_unsupported_body_1">Chociaż staramy się ciągle ulepszać obsługę Markdown, istnieje kilka funkcji, które nie są jeszcze obsługiwane przez Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Tabele</string>
-    <string name="formatting_help_unsupported_body_3">Obrazy</string>
-    <string name="formatting_help_unsupported_body_4">Jeśli chcesz pomóc przy jednej z tych funkcji, skontaktuj się z nami za pośrednictwem GitHub lub e-mail.</string>
     <string name="simple_other">Inne</string>
     <string name="sort_last_modified">Sortuj według daty modyfikacji</string>
     <string name="sort_alphabetically">Sortuj alfabetycznie</string>

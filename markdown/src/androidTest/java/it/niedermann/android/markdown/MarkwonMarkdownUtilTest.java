@@ -1,8 +1,14 @@
 package it.niedermann.android.markdown;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.text.Editable;
+import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import junit.framework.TestCase;
@@ -16,6 +22,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil;
+import it.niedermann.android.markdown.markwon.model.EListType;
+import it.niedermann.android.markdown.markwon.span.SearchSpan;
 
 @RunWith(AndroidJUnit4.class)
 public class MarkwonMarkdownUtilTest extends TestCase {
@@ -87,6 +95,30 @@ public class MarkwonMarkdownUtilTest extends TestCase {
     @Test
     public void testLineStartsWithCheckbox() {
         final Map<String, Boolean> lines = new HashMap<>();
+        lines.put("  - [ ] a", true);
+        lines.put("  - [x] a", true);
+        lines.put("  * [ ] a", true);
+        lines.put("  * [x] a", true);
+        lines.put("  + [ ] a", true);
+        lines.put("  + [x] a", true);
+        lines.put("- [ ] a", true);
+        lines.put("- [x] a", true);
+        lines.put("* [ ] a", true);
+        lines.put("* [x] a", true);
+        lines.put("+ [ ] a", true);
+        lines.put("+ [x] a", true);
+        lines.put("  - [ ] ", true);
+        lines.put("  - [x] ", true);
+        lines.put("  * [ ] ", true);
+        lines.put("  * [x] ", true);
+        lines.put("  + [ ] ", true);
+        lines.put("  + [x] ", true);
+        lines.put("  - [ ]", true);
+        lines.put("  - [x]", true);
+        lines.put("  * [ ]", true);
+        lines.put("  * [x]", true);
+        lines.put("  + [ ]", true);
+        lines.put("  + [x]", true);
         lines.put("- [ ] ", true);
         lines.put("- [x] ", true);
         lines.put("* [ ] ", true);
@@ -456,24 +488,143 @@ public class MarkwonMarkdownUtilTest extends TestCase {
         assertEquals(-1, MarkwonMarkdownUtil.getOrderedListNumber(" 1. Test"));
     }
 
-//    @Test
-//    public void testRemoveSpans() {
-//        try {
-//            final Method m = MarkwonMarkdownUtil.class.getDeclaredMethod("removeSpans", Editable.class, Class.class);
-//            m.setAccessible(true);
-//
-//            Editable editable;
-//
-//            editable = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
-//            editable.setSpan(SearchSpan.class, 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//            editable.setSpan(ForegroundColorSpan.class, 6, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//            editable.setSpan(SearchSpan.class, 12, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//            m.invoke(null, editable, SearchSpan.class);
-//            assertEquals(0, editable.getSpans(0, editable.length(), SearchSpan.class).length);
-//            assertEquals(1, editable.getSpans(0, editable.length(), ForegroundColorSpan.class).length);
-//
-//        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    @Test
+    public void testSetCheckboxStatus() {
+        for (EListType listType : EListType.values()) {
+            final String origin_1 = listType.checkboxUnchecked + " Item";
+            final String expected_1 = listType.checkboxChecked + " Item";
+            assertEquals(expected_1, MarkwonMarkdownUtil.setCheckboxStatus(origin_1, 0, true));
+
+            final String origin_2 = listType.checkboxChecked + " Item";
+            final String expected_2 = listType.checkboxChecked + " Item";
+            assertEquals(expected_2, MarkwonMarkdownUtil.setCheckboxStatus(origin_2, 0, true));
+
+            final String origin_3 = listType.checkboxChecked + " Item";
+            final String expected_3 = listType.checkboxChecked + " Item";
+            assertEquals(expected_3, MarkwonMarkdownUtil.setCheckboxStatus(origin_3, -1, true));
+
+            final String origin_4 = listType.checkboxChecked + " Item";
+            final String expected_4 = listType.checkboxChecked + " Item";
+            assertEquals(expected_4, MarkwonMarkdownUtil.setCheckboxStatus(origin_4, 3, true));
+
+            final String origin_5 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    listType.checkboxChecked + " Item";
+            final String expected_5 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    listType.checkboxUnchecked + " Item";
+            assertEquals(expected_5, MarkwonMarkdownUtil.setCheckboxStatus(origin_5, 1, false));
+
+            // Checkboxes in fenced code block aren't rendered by Markwon and therefore don't count to the checkbox index
+            final String origin_6 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item";
+            final String expected_6 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    listType.checkboxChecked + " Item";
+            assertEquals(expected_6, MarkwonMarkdownUtil.setCheckboxStatus(origin_6, 1, true));
+
+            // Checkbox in partial nested fenced code block does not count as rendered checkbox
+            final String origin_7 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "````\n" +
+                    listType.checkboxUnchecked + " Item";
+            final String expected_7 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "````\n" +
+                    listType.checkboxChecked + " Item";
+            assertEquals(expected_7, MarkwonMarkdownUtil.setCheckboxStatus(origin_7, 1, true));
+
+            // Checkbox in complete nested fenced code block does not count as rendered checkbox
+            final String origin_8 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    "````\n" +
+                    listType.checkboxUnchecked + " Item";
+            final String expected_8 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    "````\n" +
+                    listType.checkboxChecked + " Item";
+            assertEquals(expected_8, MarkwonMarkdownUtil.setCheckboxStatus(origin_8, 1, true));
+
+            // If checkbox has no content, it doesn't get rendered by Markwon and therefore can not be checked
+            final String origin_9 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    "````\n" +
+                    listType.checkboxUnchecked + " \n" +
+                    listType.checkboxUnchecked + " Item";
+            final String expected_9 = "" +
+                    listType.checkboxChecked + " Item\n" +
+                    "````\n" +
+                    "```\n" +
+                    listType.checkboxUnchecked + " Item\n" +
+                    "```\n" +
+                    "````\n" +
+                    listType.checkboxUnchecked + " \n" +
+                    listType.checkboxChecked + " Item";
+            assertEquals(expected_9, MarkwonMarkdownUtil.setCheckboxStatus(origin_9, 1, true));
+        }
+    }
+
+    @Test
+    public void testRemoveSpans() {
+        try {
+            final Method removeSpans = MarkwonMarkdownUtil.class.getDeclaredMethod("removeSpans", Spannable.class, Class.class);
+            removeSpans.setAccessible(true);
+
+            final Context context = ApplicationProvider.getApplicationContext();
+
+            final Editable editable_1 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
+            editable_1.setSpan(new SearchSpan(context, Color.RED, false), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            editable_1.setSpan(new ForegroundColorSpan(Color.BLUE), 6, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            editable_1.setSpan(new SearchSpan(context, Color.GREEN, true), 12, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            removeSpans.invoke(null, editable_1, SearchSpan.class);
+            assertEquals(0, editable_1.getSpans(0, editable_1.length(), SearchSpan.class).length);
+            assertEquals(1, editable_1.getSpans(0, editable_1.length(), ForegroundColorSpan.class).length);
+
+            final Editable editable_2 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
+            editable_2.setSpan(new SearchSpan(context, Color.RED, false), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            editable_2.setSpan(new ForegroundColorSpan(Color.BLUE), 2, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            editable_2.setSpan(new SearchSpan(context, Color.GREEN, true), 3, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            removeSpans.invoke(null, editable_2, SearchSpan.class);
+            assertEquals(0, editable_2.getSpans(0, editable_2.length(), SearchSpan.class).length);
+            assertEquals(1, editable_2.getSpans(0, editable_2.length(), ForegroundColorSpan.class).length);
+            assertEquals(2, editable_2.getSpanStart(editable_2.getSpans(0, editable_2.length(), ForegroundColorSpan.class)[0]));
+            assertEquals(7, editable_2.getSpanEnd(editable_2.getSpans(0, editable_2.length(), ForegroundColorSpan.class)[0]));
+
+            final Editable editable_3 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
+            editable_3.setSpan(new ForegroundColorSpan(Color.BLUE), 2, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            removeSpans.invoke(null, editable_3, SearchSpan.class);
+            assertEquals(0, editable_3.getSpans(0, editable_3.length(), SearchSpan.class).length);
+            assertEquals(1, editable_3.getSpans(0, editable_3.length(), ForegroundColorSpan.class).length);
+            assertEquals(2, editable_3.getSpanStart(editable_3.getSpans(0, editable_3.length(), ForegroundColorSpan.class)[0]));
+            assertEquals(7, editable_3.getSpanEnd(editable_3.getSpans(0, editable_3.length(), ForegroundColorSpan.class)[0]));
+
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
 }

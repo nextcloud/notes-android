@@ -14,9 +14,7 @@
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Salvar</string>
     <string name="simple_about">Sobre</string>
-    <string name="simple_bold">Negrito</string>
     <string name="simple_link">Link</string>
-    <string name="simple_italic">Itálico</string>
     <string name="action_note_deleted">%1$s excluído</string>
     <string name="action_note_restored">%1$s Restaurado</string>
     <string name="action_undo">Desfazer</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">A sincronização falhou: %1$s</string>
     <string name="error_synchronization">A sincronização falhou</string>
-    <string name="error_json">O aplicativo Notes está ativado no servidor?</string>
     <string name="error_no_network">Sem conexão de rede</string>
     <string name="error_unknown">Ocorreu um erro desconhecido.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Fechar</string>
     <string name="simple_copy">Copiar</string>
     <string name="simple_exception">Exceção</string>
-    <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="pin_to_homescreen">Fixar na tela inicial</string>
     <string name="note_has_been_deleted">A anotação foi excluída</string>
     <string name="add_account">Adicionar conta</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Conta já foi importada</string>
     <string name="no_notes_yet">Nenhuma anotação ainda</string>
     <string name="no_notes_yet_description">Pressione o botão + para criar uma nova nota</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Não foi possível carregar a visualização. Verifique se há um item da lista numerada de dois dígitos sem conteúdo.</string>
     <string name="simple_more">Mais</string>
     <string name="simple_move">Mover</string>
-    <string name="checkbox_could_not_be_toggled">Não foi possível alternar a caixa de seleção.</string>
     <string name="category_readonly">Somente leitura</string>
     <string name="no_category">Sem categorias</string>
     <string name="add_category">Adicionar %1$s</string>
     <string name="simple_checkbox">Caixa de marcação</string>
     <string name="unlock_notes">Destravar anotações</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Não foi possível copiar para a área de transferência</string>
     <string name="error_dialog_title">Oh não - E agora? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Tente forçar o fechamento do aplicativo e reinicie-o novamente. Pode ter havido uma conexão incorreta com o aplicativo Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema persistir, tente limpar o armazenamento dos dois aplicativos: Nextcloud e Anotações Nextcloud para resolver esse problema.</string>
@@ -233,11 +226,6 @@
     <string name="formatting_help_code_body_2">O Markdown também suporta algo chamado código de cercas, que permite várias linhas sem recuo:</string>
     <string name="formatting_help_code_body_3">E se você quiser usar destaque de sintaxe, inclua a linguagem:</string>
 
-    <string name="formatting_help_unsupported_title">Não suportado</string>
-    <string name="formatting_help_unsupported_body_1">Embora tentemos melhorar continuamente o suporte ao Markdown, há alguns recursos que ainda não são suportados pelo Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Tabelas</string>
-    <string name="formatting_help_unsupported_body_3">Imagens</string>
-    <string name="formatting_help_unsupported_body_4">Se você estiver interessado em contribuir com suporte para um desses recursos, entre em contato conosco via GitHub ou E-Mail.</string>
     <string name="simple_other">Outro</string>
     <string name="sort_last_modified">Ordenar por data de modificação</string>
     <string name="sort_alphabetically">Ordenar alfabeticamente</string>

@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import androidx.core.content.ContextCompat;
+
 import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
@@ -85,7 +87,7 @@ public class NoteListWidget extends AppWidgetProvider {
                         views.setOnClickPendingIntent(R.id.widget_note_list_title_tv_dark, openAppI);
                         views.setOnClickPendingIntent(R.id.widget_note_list_create_icon_dark, newNoteI);
                         views.setPendingIntentTemplate(R.id.note_list_widget_lv_dark, templatePI);
-                        views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv_dark, serviceIntent);
+                        views.setRemoteAdapter(R.id.note_list_widget_lv_dark, serviceIntent);
                         views.setEmptyView(R.id.note_list_widget_lv_dark, R.id.widget_note_list_placeholder_tv_dark);
                         awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv_dark);
                         if (BrandingUtil.isBrandingEnabled(context)) {
@@ -94,7 +96,7 @@ public class NoteListWidget extends AppWidgetProvider {
                             views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", localAccount.getTextColor());
                             views.setTextColor(R.id.widget_note_list_title_tv_dark, localAccount.getTextColor());
                         } else {
-                            views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
+                            views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", ContextCompat.getColor(context, R.color.defaultBrand));
                             views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", Color.WHITE);
                             views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", Color.WHITE);
                             views.setTextColor(R.id.widget_note_list_title_tv_dark, Color.WHITE);
@@ -106,7 +108,7 @@ public class NoteListWidget extends AppWidgetProvider {
                         views.setOnClickPendingIntent(R.id.widget_note_list_title_tv, openAppI);
                         views.setOnClickPendingIntent(R.id.widget_note_list_create_icon, newNoteI);
                         views.setPendingIntentTemplate(R.id.note_list_widget_lv, templatePI);
-                        views.setRemoteAdapter(appWidgetId, R.id.note_list_widget_lv, serviceIntent);
+                        views.setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent);
                         views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
                         awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
                         if (BrandingUtil.isBrandingEnabled(context)) {
@@ -115,7 +117,7 @@ public class NoteListWidget extends AppWidgetProvider {
                             views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", localAccount.getTextColor());
                             views.setTextColor(R.id.widget_note_list_title_tv, localAccount.getTextColor());
                         } else {
-                            views.setInt(R.id.widget_note_header, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
+                            views.setInt(R.id.widget_note_header, "setBackgroundColor", ContextCompat.getColor(context, R.color.defaultBrand));
                             views.setInt(R.id.widget_note_header_icon, "setColorFilter", Color.WHITE);
                             views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", Color.WHITE);
                             views.setTextColor(R.id.widget_note_list_title_tv, Color.WHITE);

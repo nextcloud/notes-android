@@ -14,9 +14,7 @@
     <string name="simple_edit">Modifier</string>
     <string name="action_edit_save">Enregistrer</string>
     <string name="simple_about">À propos</string>
-    <string name="simple_bold">Gras</string>
     <string name="simple_link">Lien</string>
-    <string name="simple_italic">Italique</string>
     <string name="action_note_deleted">%1$s supprimé</string>
     <string name="action_note_restored">%1$s restauré</string>
     <string name="action_undo">Annuler</string>
@@ -30,7 +28,7 @@
     <string name="search_in_category">Rechercher dans %1$s</string>
     <string name="search_in_all">Rechercher dans toutes les notes</string>
 
-    <string name="change_category_title">Choisir une catégorie</string>
+    <string name="change_category_title">Sélectionnez une catégorie</string>
 
     <string name="listview_updated_today">Aujourd\'hui</string>
     <string name="listview_updated_yesterday">Hier</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Échec de synchronisation : %1$s</string>
     <string name="error_synchronization">Échec de synchronisation</string>
-    <string name="error_json">L\'application Notes est-elle activée sur le serveur ?</string>
     <string name="error_no_network">Aucune connexion réseau</string>
     <string name="error_unknown">Une erreur inconnue est survenue</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Fermer</string>
     <string name="simple_copy">Copier</string>
     <string name="simple_exception">Exception</string>
-    <string name="copied_to_clipboard">Copié dans le presse-papier</string>
     <string name="pin_to_homescreen">Épingler sur la page d’accueil</string>
     <string name="note_has_been_deleted">Cette note a été supprimée</string>
     <string name="add_account">Ajouter un compte</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Ce compte a déjà été importé</string>
     <string name="no_notes_yet">Aucune note pour l\'instant</string>
     <string name="no_notes_yet_description">Créez une nouvelle note avec le bouton +</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Impossible de charger l\'aperçu. Merci de vérifier qu\'il existe un élément de liste numéroté à deux chiffres sans contenu. </string>
     <string name="simple_more">Plus</string>
     <string name="simple_move">Déplacer</string>
-    <string name="checkbox_could_not_be_toggled">Impossible de modifier l\'état de la case à cocher.</string>
     <string name="category_readonly">Lecture seule</string>
     <string name="no_category">Sans catégorie</string>
     <string name="add_category">Ajouter %1$s</string>
     <string name="simple_checkbox">Case à cocher</string>
     <string name="unlock_notes">Déverrouiller les notes</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Impossible de copier dans le presse-papiers</string>
     <string name="error_dialog_title">Oh non ! - Et maintenant ? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Essayez de forcer la fermeture de l\'application puis redémarrer la. Il y avait peut-être une mauvaise connexion à Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si le problème persiste, essayez d\'effacer les données des deux applications : Nextcloud et Nextcloud Notes pour résoudre ce problème.</string>
@@ -233,11 +226,6 @@
     <string name="formatting_help_code_body_2">Markdown supporte aussi quelque chose appelé \"code fencing\", qui permet plusieurs lignes sans indentation.</string>
     <string name="formatting_help_code_body_3">Et si vous voulez utiliser la coloration syntaxique, incluez le langage.</string>
 
-    <string name="formatting_help_unsupported_title">Non pris en charge</string>
-    <string name="formatting_help_unsupported_body_1">Pendant que nous cherchons continuellement d\'améliorer la prise en charge du Markdown, il y a quelques fonctionnalités qui ne sont pas encore supportées par Notes :</string>
-    <string name="formatting_help_unsupported_body_2">Tableaux</string>
-    <string name="formatting_help_unsupported_body_3">Images</string>
-    <string name="formatting_help_unsupported_body_4">Si vous êtes intéressés pour contribuer à la prise en charge d\'une de ces fonctionnalités, entrez en contact avec nous via GitHub ou courriel.</string>
     <string name="simple_other">Divers</string>
     <string name="sort_last_modified">Tirer par date de dernière modification</string>
     <string name="sort_alphabetically">Trier alphabétiquement</string>

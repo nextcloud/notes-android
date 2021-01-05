@@ -1,9 +1,13 @@
 package it.niedermann.android.markdown.markwon;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.text.Editable;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
@@ -19,31 +23,28 @@ import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
 import io.noties.markwon.ext.tables.TablePlugin;
 import io.noties.markwon.ext.tasklist.TaskListPlugin;
 import io.noties.markwon.image.ImagesPlugin;
-import io.noties.markwon.image.glide.GlideImagesPlugin;
 import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
 import io.noties.markwon.linkify.LinkifyPlugin;
 import io.noties.markwon.simple.ext.SimpleExtPlugin;
 import io.noties.markwon.syntax.Prism4jTheme;
+import io.noties.markwon.syntax.Prism4jThemeDarkula;
 import io.noties.markwon.syntax.Prism4jThemeDefault;
 import io.noties.markwon.syntax.SyntaxHighlightPlugin;
 import io.noties.prism4j.Prism4j;
 import io.noties.prism4j.annotations.PrismBundle;
 import it.niedermann.android.markdown.markwon.model.EListType;
+import it.niedermann.android.markdown.markwon.plugins.LinkClickInterceptorPlugin;
 import it.niedermann.android.markdown.markwon.plugins.NextcloudMentionsPlugin;
 import it.niedermann.android.markdown.markwon.plugins.SearchHighlightPlugin;
 import it.niedermann.android.markdown.markwon.plugins.ThemePlugin;
 import it.niedermann.android.markdown.markwon.span.SearchSpan;
 
 @RestrictTo(value = RestrictTo.Scope.LIBRARY)
-@PrismBundle(
-        include = {
-                "c", "clike", "clojure", "cpp", "csharp", "css", "dart", "git", "go", "groovy", "java", "javascript", "json",
-                "kotlin", "latex", "makefile", "markdown", "markup", "python", "scala", "sql", "swift", "yaml"
-        },
-        grammarLocatorClassName = ".MarkwonGrammarLocator"
-)
+@PrismBundle(includeAll = true, grammarLocatorClassName = ".MarkwonGrammarLocator")
 public class MarkwonMarkdownUtil {
 
+    private static final String TAG = MarkwonMarkdownUtil.class.getSimpleName();
+    private static final Pattern PATTERN_CODE_FENCE = Pattern.compile("^(`{3,})");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
@@ -64,18 +65,26 @@ public class MarkwonMarkdownUtil {
 
     public static Markwon.Builder initMarkwonViewer(@NonNull Context context) {
         final Prism4j prism4j = new Prism4j(new MarkwonGrammarLocator());
-        final Prism4jTheme prism4jTheme = Prism4jThemeDefault.create();
+        final Prism4jTheme prism4jTheme = isDarkThemeActive(context)
+                ? Prism4jThemeDarkula.create()
+                : Prism4jThemeDefault.create();
         return initMarkwonEditor(context)
                 .usePlugin(TablePlugin.create(context))
                 .usePlugin(TaskListPlugin.create(context))
-                .usePlugin(LinkifyPlugin.create())
-                .usePlugin(GlideImagesPlugin.create(context))
+                .usePlugin(LinkifyPlugin.create(true))
+                .usePlugin(LinkClickInterceptorPlugin.create())
+                .usePlugin(ImagesPlugin.create())
                 .usePlugin(SyntaxHighlightPlugin.create(prism4j, prism4jTheme));
     }
 
     public static Markwon.Builder initMarkwonViewer(@NonNull Context context, @NonNull Map<String, String> mentions) {
         return initMarkwonViewer(context)
                 .usePlugin(NextcloudMentionsPlugin.create(context, mentions));
+    }
+
+    private static boolean isDarkThemeActive(@NonNull Context context) {
+        final int uiMode = context.getResources().getConfiguration().uiMode;
+        return (uiMode & Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES;
     }
 
     public static int getStartOfLine(@NonNull CharSequence s, int cursorPosition) {
@@ -109,6 +118,45 @@ public class MarkwonMarkdownUtil {
         return null;
     }
 
+    public static CharSequence setCheckboxStatus(@NonNull String markdownString, int targetCheckboxIndex, boolean newCheckedState) {
+        final String[] lines = markdownString.split("\n");
+        int checkboxIndex = 0;
+        boolean isInFencedCodeBlock = false;
+        int fencedCodeBlockSigns = 0;
+        for (int i = 0; i < lines.length; i++) {
+            final Matcher matcher = PATTERN_CODE_FENCE.matcher(lines[i]);
+            if (matcher.find()) {
+                final String fence = matcher.group(1);
+                if (fence != null) {
+                    int currentFencedCodeBlockSigns = fence.length();
+                    if (isInFencedCodeBlock) {
+                        if (currentFencedCodeBlockSigns == fencedCodeBlockSigns) {
+                            isInFencedCodeBlock = false;
+                            fencedCodeBlockSigns = 0;
+                        }
+                    } else {
+                        isInFencedCodeBlock = true;
+                        fencedCodeBlockSigns = currentFencedCodeBlockSigns;
+                    }
+                }
+            }
+            if (!isInFencedCodeBlock) {
+                if (lineStartsWithCheckbox(lines[i]) && lines[i].trim().length() > EListType.DASH.checkboxChecked.length()) {
+                    if (checkboxIndex == targetCheckboxIndex) {
+                        final int indexOfStartingBracket = lines[i].indexOf("[");
+                        final String toggledLine = lines[i].substring(0, indexOfStartingBracket + 1) +
+                                (newCheckedState ? 'x' : ' ') +
+                                lines[i].substring(indexOfStartingBracket + 2);
+                        lines[i] = toggledLine;
+                        break;
+                    }
+                    checkboxIndex++;
+                }
+            }
+        }
+        return TextUtils.join("\n", lines);
+    }
+
     public static boolean lineStartsWithCheckbox(@NonNull String line) {
         for (EListType listType : EListType.values()) {
             if (lineStartsWithCheckbox(line, listType)) {
@@ -119,7 +167,8 @@ public class MarkwonMarkdownUtil {
     }
 
     public static boolean lineStartsWithCheckbox(@NonNull String line, @NonNull EListType listType) {
-        return line.startsWith(listType.checkboxUnchecked) || line.startsWith(listType.checkboxChecked);
+        final String trimmedLine = line.trim();
+        return (trimmedLine.startsWith(listType.checkboxUnchecked) || trimmedLine.startsWith(listType.checkboxChecked));
     }
 
     /**
@@ -275,6 +324,22 @@ public class MarkwonMarkdownUtil {
     public static <T> void removeSpans(@NonNull Spannable spannable, @SuppressWarnings("SameParameterValue") Class<T> spanType) {
         for (T span : spannable.getSpans(0, spannable.length(), spanType)) {
             spannable.removeSpan(span);
+        }
+    }
+
+    /**
+     * @return When the content of the {@param textView} is already of type {@link Spannable}, it will cast and return it directly.
+     * Otherwise it will create a new {@link SpannableString} from the content, set this as new content of the {@param textView} and return it.
+     */
+    public static Spannable getContentAsSpannable(@NonNull TextView textView) {
+        final CharSequence content = textView.getText();
+        if (content.getClass() == SpannableString.class || content instanceof Spannable) {
+            return (Spannable) content;
+        } else {
+            Log.w(TAG, "Expected " + TextView.class.getSimpleName() + " content to be of type " + Spannable.class.getSimpleName() + ", but was of type " + content.getClass() + ". Search highlighting will be not performant.");
+            final Spannable spannableContent = new SpannableString(content);
+            textView.setText(spannableContent, TextView.BufferType.SPANNABLE);
+            return spannableContent;
         }
     }
 }

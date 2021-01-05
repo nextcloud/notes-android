@@ -14,9 +14,7 @@
     <string name="simple_edit">修改</string>
     <string name="action_edit_save">儲存</string>
     <string name="simple_about">關於</string>
-    <string name="simple_bold">粗體</string>
     <string name="simple_link">連結</string>
-    <string name="simple_italic">斜體</string>
     <string name="action_note_deleted">已刪除 %1$s</string>
     <string name="action_note_restored">已還原 %1$s</string>
     <string name="action_undo">上一步</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">同步失敗：%1$s</string>
     <string name="error_synchronization">同步失敗</string>
-    <string name="error_json">請看看 Notes App 是不是已經在伺服器上啟用了？</string>
     <string name="error_no_network">沒有網路連線</string>
     <string name="error_unknown">發生未知錯誤。</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">關閉</string>
     <string name="simple_copy">複製</string>
     <string name="simple_exception">例外</string>
-    <string name="copied_to_clipboard">已複製至剪貼簿</string>
     <string name="pin_to_homescreen">釘選至主畫面</string>
     <string name="note_has_been_deleted">此則筆記已被刪除</string>
     <string name="add_account">新增帳戶</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">已成功匯入帳戶</string>
     <string name="no_notes_yet">尚沒有筆記</string>
     <string name="no_notes_yet_description">請按 + 按鈕建立新筆記</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">無法載入預覽。請檢查是否有 2 位數，沒有內容的數字清單。</string>
     <string name="simple_more">更多</string>
     <string name="simple_move">移動</string>
-    <string name="checkbox_could_not_be_toggled">無法切換核取方塊。</string>
     <string name="category_readonly">唯讀</string>
     <string name="no_category">沒有分類</string>
     <string name="add_category">新增%1$s</string>
     <string name="simple_checkbox">核取方塊</string>
     <string name="unlock_notes">解鎖筆記</string>
     <string name="simple_beta">Beta 測試版</string>
-    <string name="could_not_copy_to_clipboard">無法複製到剪貼簿</string>
     <string name="error_dialog_we_need_info">我們需要以下的技術資訊來幫助您：</string>
     <string name="added_content">已加入「%1$s」</string>
     <string name="shared_text_empty">分享的文字是空的</string>
@@ -186,8 +179,6 @@
     <string name="formatting_help_checkboxes_body_2">項目 1</string>
     <string name="formatting_help_checkboxes_body_3">項目 2</string>
 
-    <string name="formatting_help_unsupported_title">未支援</string>
-    <string name="formatting_help_unsupported_body_3">圖片</string>
     <string name="simple_other">其他</string>
     <string name="sort_last_modified">依修改日期排序</string>
     <string name="sort_alphabetically">依字母排序</string>

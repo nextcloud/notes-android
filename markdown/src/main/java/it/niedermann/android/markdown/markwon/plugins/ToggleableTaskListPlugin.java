@@ -1,109 +1,145 @@
 package it.niedermann.android.markdown.markwon.plugins;
 
-import android.text.Spanned;
-import android.text.TextPaint;
-import android.text.TextUtils;
-import android.text.style.ClickableSpan;
 import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import io.noties.markwon.AbstractMarkwonPlugin;
-import io.noties.markwon.MarkwonSpansFactory;
-import io.noties.markwon.SpanFactory;
-import io.noties.markwon.ext.tasklist.TaskListItem;
-import io.noties.markwon.ext.tasklist.TaskListSpan;
+import org.commonmark.node.AbstractVisitor;
+import org.commonmark.node.Block;
+import org.commonmark.node.HardLineBreak;
+import org.commonmark.node.Node;
+import org.commonmark.node.Paragraph;
+import org.commonmark.node.SoftLineBreak;
+import org.commonmark.node.Text;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BiConsumer;
+
+import io.noties.markwon.AbstractMarkwonPlugin;
+import io.noties.markwon.MarkwonVisitor;
+import io.noties.markwon.SpanFactory;
+import io.noties.markwon.SpannableBuilder;
+import io.noties.markwon.ext.tasklist.TaskListItem;
+import io.noties.markwon.ext.tasklist.TaskListProps;
+import io.noties.markwon.ext.tasklist.TaskListSpan;
+import it.niedermann.android.markdown.markwon.span.ToggleTaskListSpan;
+
+/**
+ * @see <a href="https://github.com/noties/Markwon/issues/196#issuecomment-751680138">Support from upstream</a>
+ * @see <a href="https://github.com/noties/Markwon/blob/910bf311dac1bade400616a00ab0c9b7b7ade8cb/app-sample/src/main/java/io/noties/markwon/app/samples/tasklist/TaskListMutateNestedSample.kt">Original kotlin implementation</a>
+ */
 public class ToggleableTaskListPlugin extends AbstractMarkwonPlugin {
 
-    private final String originalNoteContent;
-    private final ToggleListener toggleListener;
-    public static final String CHECKBOX_UNCHECKED_PLUS = "+ [ ]";
-    public static final String CHECKBOX_UNCHECKED_MINUS = "- [ ]";
-    public static final String CHECKBOX_UNCHECKED_STAR = "* [ ]";
-    public static final String CHECKBOX_CHECKED_PLUS = "+ [x]";
-    public static final String CHECKBOX_CHECKED_MINUS = "- [x]";
-    public static final String CHECKBOX_CHECKED_STAR = "* [x]";
+    private static final String TAG = ToggleableTaskListPlugin.class.getSimpleName();
 
-    public ToggleableTaskListPlugin(String originalNoteContent, ToggleListener toggleListener) {
-        this.originalNoteContent = originalNoteContent;
+    @NonNull
+    private final AtomicBoolean enabled = new AtomicBoolean(true);
+    @NonNull
+    private final BiConsumer<Integer, Boolean> toggleListener;
+
+    public ToggleableTaskListPlugin(@NonNull BiConsumer<Integer, Boolean> toggleListener) {
         this.toggleListener = toggleListener;
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled.set(enabled);
+    }
+
     @Override
-    public void configureSpansFactory(@NonNull MarkwonSpansFactory.Builder builder) {
-        SpanFactory origin = builder.getFactory(TaskListItem.class);
+    public void configureVisitor(@NonNull MarkwonVisitor.Builder builder) {
+        builder.on(TaskListItem.class, (visitor, node) -> {
+            final int length = visitor.length();
+            visitor.visitChildren(node);
+            TaskListProps.DONE.set(visitor.renderProps(), node.isDone());
+            final SpanFactory spanFactory = visitor.configuration()
+                    .spansFactory()
+                    .get(TaskListItem.class);
+            final Object spans = spanFactory == null ? null :
+                    spanFactory.getSpans(visitor.configuration(), visitor.renderProps());
 
-        builder.setFactory(TaskListItem.class, (configuration, props) -> {
-            TaskListSpan span = (TaskListSpan) origin.getSpans(configuration, props);
-            ClickableSpan c = new ClickableSpan() {
-                @Override
-                public void onClick(@NonNull View widget) {
-                    Log.v("checkbox", "abcdef");
-                    span.setDone(!span.isDone());
-                    widget.invalidate();
-
-                    // it must be a TextView
-                    final TextView textView = (TextView) widget;
-                    // it must be spanned
-                    final Spanned spanned = (Spanned) textView.getText();
-
-                    // actual text of the span (this can be used along with the  `span`)
-                    final CharSequence task = spanned.subSequence(
-                            spanned.getSpanStart(this),
-                            spanned.getSpanEnd(this)
-                    );
-
-                    int lineNumber = 0;
-
-                    CharSequence textBeforeTask = spanned.subSequence(0, spanned.getSpanStart(this));
-                    for (int i = 0; i < textBeforeTask.length(); i++) {
-                        if (textBeforeTask.charAt(i) == '\n')
-                            lineNumber++;
-                    }
-
-                    // Work on the original content now, because the previous stuff is rendered and inline markdown might be removed at this point
-
-                    String[] lines = TextUtils.split(originalNoteContent, "\\r?\\n");
-                    /*
-                     * When (un)checking a checkbox in a note which contains code-blocks, the "`"-characters get stripped out in the TextView and therefore the given lineNumber is wrong
-                     * Find number of lines starting with ``` before lineNumber
-                     */
-                    // TODO Maybe one can simpliy write i < lineNumber?
-                    for (int i = 0; i < lines.length; i++) {
-                        if (lines[i].startsWith("```")) {
-                            lineNumber++;
-                        }
-                        if (i == lineNumber) {
-                            break;
-                        }
-                    }
-
-                    if (lines[lineNumber].startsWith(CHECKBOX_UNCHECKED_MINUS) || lines[lineNumber].startsWith(CHECKBOX_UNCHECKED_STAR) || lines[lineNumber].startsWith(CHECKBOX_UNCHECKED_PLUS)) {
-                        lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_UNCHECKED_MINUS, CHECKBOX_CHECKED_MINUS);
-                        lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_UNCHECKED_STAR, CHECKBOX_CHECKED_STAR);
-                        lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_UNCHECKED_PLUS, CHECKBOX_CHECKED_PLUS);
+            if (spans != null) {
+                final TaskListSpan taskListSpan;
+                if (spans instanceof TaskListSpan[]) {
+                    if (((TaskListSpan[]) spans).length > 0) {
+                        taskListSpan = ((TaskListSpan[]) spans)[0];
                     } else {
-                        lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_MINUS, CHECKBOX_UNCHECKED_MINUS);
-                        lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_STAR, CHECKBOX_UNCHECKED_STAR);
-                        lines[lineNumber] = lines[lineNumber].replace(CHECKBOX_CHECKED_PLUS, CHECKBOX_UNCHECKED_PLUS);
+                        taskListSpan = null;
                     }
-
-                    toggleListener.onToggled(TextUtils.join("\n", lines));
+                } else if (spans instanceof TaskListSpan) {
+                    taskListSpan = (TaskListSpan) spans;
+                } else {
+                    taskListSpan = null;
                 }
 
-                @Override
-                public void updateDrawState(@NonNull TextPaint ds) {
-                    //NoOp
+                Log.i(TAG, visitor.builder().subSequence(length, visitor.builder().length()).toString());
+                int content = TaskListContextVisitor.contentLength(node);
+                Log.i(TAG, "content: " + content + ", '" + visitor.builder().subSequence(length, length + content) + "'");
+
+                if (content > 0 && taskListSpan != null) {
+                    // maybe additionally identify this task list (for persistence)
+                    visitor.builder().setSpan(
+                            new ToggleTaskListSpan(enabled, toggleListener, taskListSpan, visitor.builder().subSequence(length, length + content).toString()),
+                            length,
+                            length + content
+                    );
                 }
-            };
-            return new Object[]{span, c};
+            }
+
+            SpannableBuilder.setSpans(
+                    visitor.builder(),
+                    spans,
+                    length,
+                    visitor.length()
+            );
+
+            if (visitor.hasNext(node)) {
+                visitor.ensureNewLine();
+            }
         });
     }
 
-    public interface ToggleListener {
-        public void onToggled(String newCompmleteText);
+    static class TaskListContextVisitor extends AbstractVisitor {
+        private int contentLength = 0;
+
+        static int contentLength(Node node) {
+            final TaskListContextVisitor visitor = new TaskListContextVisitor();
+            visitor.visitChildren(node);
+            return visitor.contentLength;
+        }
+
+        @Override
+        public void visit(Text text) {
+            super.visit(text);
+            contentLength += text.getLiteral().length();
+        }
+
+        // NB! if count both soft and hard breaks as having length of 1
+        @Override
+        public void visit(SoftLineBreak softLineBreak) {
+            super.visit(softLineBreak);
+            contentLength += 1;
+        }
+
+        // NB! if count both soft and hard breaks as having length of 1
+        @Override
+        public void visit(HardLineBreak hardLineBreak) {
+            super.visit(hardLineBreak);
+            contentLength += 1;
+        }
+
+        @Override
+        protected void visitChildren(Node parent) {
+            Node node = parent.getFirstChild();
+            while (node != null) {
+                // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
+                // node after visiting it. So get the next node before visiting.
+                Node next = node.getNext();
+                if (node instanceof Block && !(node instanceof Paragraph)) {
+                    break;
+                }
+                node.accept(this);
+                node = next;
+            }
+        }
     }
 }

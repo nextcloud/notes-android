@@ -60,23 +60,6 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     };
     private TextWatcher textWatcher;
 
-    public static NoteEditFragment newInstance(long accountId, long noteId) {
-        NoteEditFragment f = new NoteEditFragment();
-        Bundle b = new Bundle();
-        b.putLong(PARAM_NOTE_ID, noteId);
-        b.putLong(PARAM_ACCOUNT_ID, accountId);
-        f.setArguments(b);
-        return f;
-    }
-
-    public static NoteEditFragment newInstanceWithNewNote(Note newNote) {
-        NoteEditFragment f = new NoteEditFragment();
-        Bundle b = new Bundle();
-        b.putSerializable(PARAM_NEWNOTE, newNote);
-        f.setArguments(b);
-        return f;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -166,9 +149,6 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 }
             }
 
-//             workaround for issue yydcdut/RxMarkdown#41
-//            note.getNote().setContent(note.getContent().replace("\r\n", "\n"));
-
             binding.editContent.setMarkdownString(note.getContent());
             binding.editContent.setEnabled(true);
 
@@ -248,5 +228,23 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     public void applyBrand(int mainColor, int textColor) {
         super.applyBrand(mainColor, textColor);
         binding.editContent.setSearchColor(mainColor);
+        binding.editContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
+    }
+
+    public static BaseNoteFragment newInstance(long accountId, long noteId) {
+        final BaseNoteFragment fragment = new NoteEditFragment();
+        final Bundle args = new Bundle();
+        args.putLong(PARAM_NOTE_ID, noteId);
+        args.putLong(PARAM_ACCOUNT_ID, accountId);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static BaseNoteFragment newInstanceWithNewNote(CloudNote newNote) {
+        final BaseNoteFragment fragment = new NoteEditFragment();
+        final Bundle args = new Bundle();
+        args.putSerializable(PARAM_NEWNOTE, newNote);
+        fragment.setArguments(args);
+        return fragment;
     }
 }

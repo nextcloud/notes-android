@@ -18,6 +18,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.selection.ItemDetailsLookup;
 import androidx.recyclerview.widget.RecyclerView;
@@ -113,7 +114,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
     protected void bindSearchableContent(@NonNull Context context, @NonNull TextView textView, @Nullable CharSequence searchQuery, @NonNull String content, int mainColor) {
         CharSequence processedContent = content;
         if (!TextUtils.isEmpty(searchQuery)) {
-            @ColorInt final int searchBackground = context.getResources().getColor(R.color.bg_highlighted);
+            @ColorInt final int searchBackground = ContextCompat.getColor(context, R.color.bg_highlighted);
             @ColorInt final int searchForeground = BrandingUtil.getSecondaryForegroundColorDependingOnTheme(context, mainColor);
 
             // The Pattern.quote method will add \Q to the very beginning of the string and \E to the end of the string

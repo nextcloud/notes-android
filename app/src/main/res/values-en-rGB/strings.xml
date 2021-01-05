@@ -12,8 +12,6 @@
     <string name="action_note_deleted">Note deleted</string>
     <string name="action_note_restored">Note restored</string>
     <string name="action_undo">Undo</string>
-    <string name="action_drawer_open">open navigation</string>
-    <string name="action_drawer_close">close navigation</string>
     <string name="action_uncategorized">Uncategorised</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_change_category">Category</string>
@@ -37,7 +35,6 @@
 
     <!-- Error -->
     <string name="error_sync">Synchronisation failed: %1$s</string>
-    <string name="error_json">is the Notes app activated on the server?</string>
     <string name="error_no_network">no network connection</string>
 
     <!-- Snackbar Actions -->

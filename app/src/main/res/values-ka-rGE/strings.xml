@@ -9,8 +9,6 @@
     <string name="action_note_deleted">ჩანაწერი გაუქმდა</string>
     <string name="action_note_restored">ჩანაწერი აღდგა</string>
     <string name="action_undo">დაბრუნება</string>
-    <string name="action_drawer_open">ნავიგაციის გახსნა</string>
-    <string name="action_drawer_close">ნავიგაციის დახურვა</string>
     <string name="action_uncategorized">არაკატეგორიზირებული</string>
     <string name="menu_delete">გაუქმება</string>
     <string name="menu_change_category">კატეგორია</string>
@@ -29,7 +27,6 @@
 
     <!-- Error -->
     <string name="error_sync">სინქრონიზაცია დასრულდა წარუმატებლად: %1$s</string>
-    <string name="error_json">გააქტიურებულია თუ არა ჩანაწერების აპლიკაცია სერვერზე?</string>
     <string name="error_no_network">ქსელთან კავშირი არაა</string>
 
     <!-- Snackbar Actions -->

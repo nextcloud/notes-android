@@ -15,11 +15,14 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Function;
 
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonPlugin;
 import it.niedermann.android.markdown.MarkdownEditor;
+import it.niedermann.android.markdown.markwon.plugins.LinkClickInterceptorPlugin;
 import it.niedermann.android.markdown.markwon.plugins.SearchHighlightPlugin;
+import it.niedermann.android.markdown.markwon.plugins.ToggleableTaskListPlugin;
 
 import static androidx.lifecycle.Transformations.distinctUntilChanged;
 import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.initMarkwonViewer;
@@ -43,8 +46,27 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     public MarkwonMarkdownViewer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.markwon = MarkwonMarkdownUtil.initMarkwonViewer(context).build();
+        this.markwon = initMarkwonViewer(context)
+                .usePlugin(new ToggleableTaskListPlugin((toggledCheckboxPosition, newCheckedState) -> {
+                    final CharSequence oldUnrenderedText = unrenderedText$.getValue();
+                    if (oldUnrenderedText == null) {
+                        throw new IllegalStateException("Checkbox #" + toggledCheckboxPosition + ", but unrenderedText$ value is null.");
+                    }
+                    final CharSequence newUnrenderedText = MarkwonMarkdownUtil.setCheckboxStatus(oldUnrenderedText.toString(), toggledCheckboxPosition, newCheckedState);
+                    this.setMarkdownString(newUnrenderedText);
+                }))
+                .build();
         this.renderService = Executors.newSingleThreadExecutor();
+    }
+
+    @Override
+    public void registerOnLinkClickCallback(@NonNull Function<String, Boolean> callback) {
+        this.markwon.getPlugin(LinkClickInterceptorPlugin.class).registerOnLinkClickCallback(callback);
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.markwon.getPlugin(ToggleableTaskListPlugin.class).setEnabled(enabled);
     }
 
     @Override
@@ -55,7 +77,6 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
             setText(text);
         } else {
             if (!text.equals(previousText)) {
-                setText(text);
                 this.renderService.execute(() -> post(() -> this.markwon.setMarkdown(this, text.toString())));
             }
         }

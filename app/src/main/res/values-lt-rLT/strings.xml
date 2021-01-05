@@ -14,9 +14,7 @@
     <string name="simple_edit">Taisyti</string>
     <string name="action_edit_save">Įrašyti</string>
     <string name="simple_about">Apie</string>
-    <string name="simple_bold">Pusjuodis</string>
     <string name="simple_link">Nuoroda</string>
-    <string name="simple_italic">Kursyvas</string>
     <string name="action_note_deleted">%1$s ištrinti</string>
     <string name="action_note_restored">%1$s atkurti</string>
     <string name="action_undo">Atšaukti</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
     <string name="error_synchronization">Sinchronizacija nepavyko</string>
-    <string name="error_json">Ar Užrašų programėlė yra aktyvuota serveryje?</string>
     <string name="error_no_network">Nėra tinklo ryšio</string>
     <string name="error_unknown">Įvyko nežinoma klaida.</string>
 
@@ -95,7 +92,6 @@
     <string name="simple_close">Užverti</string>
     <string name="simple_copy">Kopijuoti</string>
     <string name="simple_exception">Išimtis</string>
-    <string name="copied_to_clipboard">Nukopijuota į iškarpinę</string>
     <string name="pin_to_homescreen">Prisegti prie pradžios ekrano</string>
     <string name="note_has_been_deleted">Šie užrašai ištrinti</string>
     <string name="add_account">Pridėti paskyrą</string>
@@ -106,17 +102,14 @@
     <string name="account_already_imported">Paskyra jau buvo importuota</string>
     <string name="no_notes_yet">Nėra užrašų</string>
     <string name="no_notes_yet_description">Norėdami sukurti užrašus, paspauskite mygtuką +</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Nepavyko įkelti peržiūros. Patikrinkite ar yra dviejų skaitmenų sąrašo su numeriais elementas be jokio turinio.</string>
     <string name="simple_more">Daugiau</string>
     <string name="simple_move">Perkelti</string>
-    <string name="checkbox_could_not_be_toggled">Nepavyko perjungti žymimojo langelio.</string>
     <string name="category_readonly">Tik skaitymui</string>
     <string name="no_category">Be kategorijos</string>
     <string name="add_category">Pridėti %1$s</string>
     <string name="simple_checkbox">Žymimasis langelis</string>
     <string name="unlock_notes">Atrakinti užrašus</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Nepavyko nukopijuoti į iškarpinę</string>
     <string name="error_dialog_title">O, ne - Kas dabar? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Pabandykite priverstinai uždaryti programą ir vėl paleiskite ją iš naujo. Galbūt buvo nepavyko užmegžti ryšį su „Nextcloud“ programa.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jei problema išlieka, pabandykite išvalyti abiejų programų saugyklą: „Nextcloud“ ir „Nextcloud Notes“.</string>
@@ -221,11 +214,6 @@
     <string name="formatting_help_code_body_2">„Markdown“ taip pat palaiko vadinamąjį kodo aptvėrimą, kuris leidžia sudaryti kelias eilutes be įtraukų:</string>
     <string name="formatting_help_code_body_3">Jei norite naudoti sintaksės paryškinimą, įtraukite kalbą:</string>
 
-    <string name="formatting_help_unsupported_title">Nepalaikoma</string>
-    <string name="formatting_help_unsupported_body_1">Nors mes nuolat stengiamės tobulinti „Markdown“ vystymą, yra keletas funkcijų, kurių dar nepalaiko „Notes“ programa:</string>
-    <string name="formatting_help_unsupported_body_2">Lentelės</string>
-    <string name="formatting_help_unsupported_body_3">Paveikslai</string>
-    <string name="formatting_help_unsupported_body_4">Jei norite prisidėti prie vienos iš šių funkcijų palaikymo, susisiekite su mumis naudodami „GitHub“ arba el. Paštą.</string>
     <string name="simple_other">Kita</string>
     <string name="sort_last_modified">Išrikiuokite pagal redagavimo datą</string>
     <string name="sort_alphabetically">Išrikiuokite pagal abecėlę</string>

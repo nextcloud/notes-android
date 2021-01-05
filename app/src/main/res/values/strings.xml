@@ -15,9 +15,7 @@
     <string name="simple_edit">Edit</string>
     <string name="action_edit_save">Save</string>
     <string name="simple_about">About</string>
-    <string name="simple_bold">Bold</string>
     <string name="simple_link">Link</string>
-    <string name="simple_italic">Italic</string>
     <string name="action_note_deleted">Deleted %1$s</string>
     <string name="action_note_restored">Restored %1$s</string>
     <string name="action_undo">Undo</string>
@@ -50,7 +48,6 @@
 
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_synchronization">Synchronization failed</string>
-    <string name="error_json">Is the Notes app activated on the server?</string>
     <string name="error_no_network">No network connection</string>
     <string name="error_unknown">An unknown error has occurred.</string>
 
@@ -130,7 +127,6 @@
     <string name="simple_close">Close</string>
     <string name="simple_copy">Copy</string>
     <string name="simple_exception">Exception</string>
-    <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="pin_to_homescreen">Pin to homescreen</string>
     <string name="note_has_been_deleted">This note has been deleted</string>
     <string name="add_account">Add account</string>
@@ -141,17 +137,14 @@
     <string name="account_already_imported">Account has already been imported</string>
     <string name="no_notes_yet">No notes yet</string>
     <string name="no_notes_yet_description">Press + button to create a new note</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Could not load preview. Please check whether there is a two-digit numbered list item without content.</string>
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
-    <string name="checkbox_could_not_be_toggled">Checkbox could not be toggled.</string>
     <string name="category_readonly">Read only</string>
     <string name="no_category">No category</string>
     <string name="add_category">Add %1$s</string>
     <string name="simple_checkbox">Checkbox</string>
     <string name="unlock_notes">Unlock notes</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Could not copy to clipboard</string>
     <string name="error_dialog_title">Oh no - What now? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Please try to force close the app and restart it again. There might have been an incorrect connection to the Nextcloud app.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">If the issue persists, try to clear the storage of both apps: Nextcloud and Nextcloud Notes to solve this issue.</string>
@@ -232,11 +225,10 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
-    <string name="formatting_help_codefence_escaped" translatable="false">\\`\\`\\`</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_javascript_1" translatable="false">int getRandom() {</string>
     <string name="formatting_help_javascript_2" translatable="false">return 4;</string>
     <string name="formatting_help_javascript_3" translatable="false">}</string>
-    <string name="formatting_help_codefence_javascript_escaped" translatable="false">\\`\\`\\`javascript</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_code_javascript_inline" translatable="false">var example = true</string>
     <string name="formatting_help_ol" translatable="false">%1$d. %2$s</string>
@@ -248,6 +240,7 @@
     <string name="formatting_help_strike_through" translatable="false">~~</string>
     <string name="formatting_help_bold" translatable="false">**</string>
     <string name="formatting_help_italic" translatable="false">*</string>
+    <string name="formatting_help_image" translatable="false">![%1$s](https://example.com/image.jpg)</string>
 
     <string name="formatting_help_cbf_title">Context based formatting</string>
     <string name="formatting_help_cbf_body_1">A major design goal of the Notes app is to provide a distraction free tool. Though you will be able to format your texts with Markdown. For various of the below mentioned examples, you can use shortcuts so you can format your notes without typing in the codes below.</string>
@@ -285,11 +278,15 @@
     <string name="formatting_help_code_body_2">Markdown also supports something called code fencing, which allows for multiple lines without indentation:</string>
     <string name="formatting_help_code_body_3">And if you\'d like to use syntax highlighting, include the language:</string>
 
-    <string name="formatting_help_unsupported_title">Unsupported</string>
-    <string name="formatting_help_unsupported_body_1">While we try to continuously improve the support for Markdown, there are a few features which are not yet supported by Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Tables</string>
-    <string name="formatting_help_unsupported_body_3">Images</string>
-    <string name="formatting_help_unsupported_body_4">If you are interested in contributing support for one of those features, get in contact with us via GitHub or E-Mail.</string>
+    <string name="formatting_help_tables_title">Tables</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Column %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Value %1d</string>
+
+    <string name="formatting_help_images_title">Images</string>
+    <string name="formatting_help_images_alt">Fancy image</string>
+
     <string name="simple_other">Other</string>
     <string name="sort_last_modified">Sort by modified date</string>
     <string name="sort_alphabetically">Sort by alphabet</string>
@@ -298,4 +295,5 @@
     <string name="error_action_open_network">Network settings</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
     <string name="choose_account">Choose account</string>
+    <string name="context_based_formatting">Context based formatting popover</string>
 </resources>

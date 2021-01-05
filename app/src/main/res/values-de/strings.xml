@@ -14,9 +14,7 @@
     <string name="simple_edit">Bearbeiten</string>
     <string name="action_edit_save">Speichern</string>
     <string name="simple_about">Über</string>
-    <string name="simple_bold">Fett</string>
     <string name="simple_link">Link</string>
-    <string name="simple_italic">Kursiv</string>
     <string name="action_note_deleted">%1$s gelöscht</string>
     <string name="action_note_restored">%1$s wiederhergestellt</string>
     <string name="action_undo">Rückgängig</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Synchronisierung fehlgeschlagen: %1$s</string>
     <string name="error_synchronization">Synchronisierung fehlgeschlagen</string>
-    <string name="error_json">Ist die Notes-App auf dem Server aktiviert?</string>
     <string name="error_no_network">Keine Netzwerkverbindung</string>
     <string name="error_unknown">Unbekannter Fehler aufgetreten.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Schließen</string>
     <string name="simple_copy">Kopieren</string>
     <string name="simple_exception">Ausnahme</string>
-    <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="pin_to_homescreen">An Startbildschirm anheften</string>
     <string name="note_has_been_deleted">Diese Notiz wurde gelöscht</string>
     <string name="add_account">Konto hinzufügen</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Konto wurde bereits importiert</string>
     <string name="no_notes_yet">Noch keine Notizen vorhanden</string>
     <string name="no_notes_yet_description">Drücke den \"+\"-Knopf um eine neue Notiz zu erstellen</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Die Vorschau konnte nicht geladen werden. Bitte prüfen Sie, ob ein zweistellig numerierter Listeneintrag ohne Inhalt vorhanden ist.</string>
     <string name="simple_more">Mehr</string>
     <string name="simple_move">Verschieben</string>
-    <string name="checkbox_could_not_be_toggled">Kontrollkästchen konnte nicht umgeschaltet werden.</string>
     <string name="category_readonly">Schreibgeschützt</string>
     <string name="no_category">Keine Kategorie</string>
     <string name="add_category">%1$s hinzufügen</string>
     <string name="simple_checkbox">Kontrollkästchen</string>
     <string name="unlock_notes">Notiz entsperren</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Konnte nicht in die Zwischenablage kopieren</string>
     <string name="error_dialog_title">Oh nein - Was jetzt? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Bitte versuchen Sie, das Schließen der App zu erzwingen und sie erneut zu starten. Möglicherweise bestand eine gestörte Verbindung zur Nextcloud-App.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Wenn das Problem weiterhin besteht, versuchen Sie, den Speicher von Nextcloud und Nextcloud Notes zu leeren, um das Problem zu beheben.</string>
@@ -233,11 +226,6 @@
     <string name="formatting_help_code_body_2">Markdown unterstützt auch das sogenannte Code-Fencing, das mehrere Zeilen ohne Einrückung zulässt:</string>
     <string name="formatting_help_code_body_3">Wenn Sie die Syntaxhervorhebung verwenden möchten, geben Sie folgendes ein:</string>
 
-    <string name="formatting_help_unsupported_title">Nicht unterstützt</string>
-    <string name="formatting_help_unsupported_body_1">Obwohl wir versuchen, die Unterstützung für Markdown ständig zu verbessern, gibt es einige Funktionen, die von Notes noch nicht unterstützt werden:</string>
-    <string name="formatting_help_unsupported_body_2">Tabellen</string>
-    <string name="formatting_help_unsupported_body_3">Bilder</string>
-    <string name="formatting_help_unsupported_body_4">Wenn Sie uns bei der Entwicklung einer dieser Funktionen unterstützen möchten, setzen Sie sich bitte über GitHub oder E-Mail mit uns in Verbindung.</string>
     <string name="simple_other">Andere</string>
     <string name="sort_last_modified">Nach Änderungsdatum sortieren</string>
     <string name="sort_alphabetically">Alphabetisch sortieren</string>

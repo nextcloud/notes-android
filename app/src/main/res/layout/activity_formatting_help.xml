@@ -29,19 +29,52 @@
         android:orientation="vertical"
         tools:context="it.niedermann.owncloud.notes.edit.EditNoteActivity">
 
-        <com.yydcdut.markdown.MarkdownTextView
-            android:id="@+id/content"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacer_activity_sides"
             android:layout_marginEnd="@dimen/spacer_activity_sides"
-            android:padding="@dimen/spacer_2x"
-            android:paddingStart="@dimen/spacer_2x"
-            android:paddingEnd="@dimen/spacer_2x"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/fg_default"
-            android:textIsSelectable="true"
-            android:theme="@style/textViewStyle"
-            tools:text="@tools:sample/lorem/random" />
+            android:orientation="vertical"
+            android:padding="@dimen/spacer_2x">
+
+            <it.niedermann.android.markdown.markwon.MarkwonMarkdownViewer
+                android:id="@+id/content_context_based_formatting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/fg_default"
+                android:textIsSelectable="true"
+                android:theme="@style/textViewStyle"
+                tools:maxLength="200"
+                tools:text="@tools:sample/lorem/random" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacer_2x"
+                android:layout_marginBottom="@dimen/spacer_1x"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/context_based_formatting"
+                android:src="@drawable/context_based_formatting" />
+
+            <it.niedermann.android.markdown.markwon.MarkwonMarkdownViewer
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/fg_default"
+                android:textIsSelectable="true"
+                android:theme="@style/textViewStyle"
+                tools:maxLength="300"
+                tools:text="@tools:sample/lorem/random" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacer_2x"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:src="@mipmap/ic_launcher" />
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
