@@ -13,12 +13,8 @@
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
     <string name="simple_about">Acerca de</string>
-    <string name="simple_bold">Negrita</string>
     <string name="simple_link">Link</string>
-    <string name="simple_italic">Itálico</string>
     <string name="action_undo">Deshacer</string>
-    <string name="action_drawer_open">abir navegación</string>
-    <string name="action_drawer_close">cerrar navegación</string>
     <string name="action_uncategorized">Sin categoría</string>
     <string name="menu_delete">Borrar</string>
     <string name="menu_change_category">Categoría</string>
@@ -90,7 +86,6 @@
     <string name="simple_close">Cerrar</string>
     <string name="simple_copy">Copiar</string>
     <string name="simple_exception">Excepción</string>
-    <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <string name="add_account">Agregar cuenta</string>
     <string name="category_music">Música</string>
     <string name="category_movies">Películas</string>
@@ -99,7 +94,6 @@
     <string name="account_already_imported">La cuenta ya ha sido importada</string>
     <string name="no_notes_yet">Aún no hay notas</string>
     <string name="no_notes_yet_description">Presione el botón + para crear una nueva nota</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">No se pudo cargar la vista previa. Compruebe si hay un elemento de lista numerada de dos dígitos sin contenido.</string>
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
     <string name="category_readonly">Solo lectura</string>

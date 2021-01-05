@@ -12,12 +12,8 @@
     <string name="simple_edit">Golygu</string>
     <string name="action_edit_save">Cadw</string>
     <string name="simple_about">Ynghylch</string>
-    <string name="simple_bold">Trwm</string>
     <string name="simple_link">Dolen</string>
-    <string name="simple_italic">Italig</string>
     <string name="action_undo">Dadwneud</string>
-    <string name="action_drawer_open">agor llywio</string>
-    <string name="action_drawer_close">cau llywio</string>
     <string name="action_uncategorized">Dim categori</string>
     <string name="menu_delete">Dileu</string>
     <string name="menu_change_category">Categori</string>
@@ -43,7 +39,6 @@
 
     <!-- Error -->
     <string name="error_sync">Methodd y cydweddiad: %1$s</string>
-    <string name="error_json">A yw\'r ap Nodiadau yn weithredol ar y gweinydd?</string>
     <string name="error_no_network">dim cysylltiad rthwydwaith</string>
     <!-- About -->
     <string name="about_version_title">Fersiwn</string>

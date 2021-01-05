@@ -16,8 +16,6 @@
     <string name="action_note_deleted">Nota borrada</string>
     <string name="action_note_restored">Nota restaurada</string>
     <string name="action_undo">Deshacer</string>
-    <string name="action_drawer_open">abrir navegación</string>
-    <string name="action_drawer_close">cerrar navegación</string>
     <string name="action_uncategorized">Sin categoría</string>
     <string name="menu_delete">Borrar</string>
     <string name="menu_change_category">Categoría</string>
@@ -37,7 +35,6 @@
 
     <!-- Error -->
     <string name="error_sync">Falló la sincronización: %1$s</string>
-    <string name="error_json">¿Se encuentra activiada la aplicación de Notes en el servidor?</string>
     <string name="error_no_network">no hay conexión a red</string>
     <!-- About -->
     <string name="about_version_title">Versión</string>
@@ -81,7 +78,6 @@
     <string name="simple_error">Error</string>
     <string name="simple_close">Cerrar</string>
     <string name="simple_copy">Copiar</string>
-    <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <string name="add_account">Agregar cuenta</string>
     <string name="category_work">Trabajo</string>
     <string name="no_notes_yet">Aún no hay notas</string>

@@ -15,9 +15,7 @@
     <string name="simple_edit">تعديل</string>
     <string name="action_edit_save">حفظ</string>
     <string name="simple_about">عن</string>
-    <string name="simple_bold">غامق</string>
     <string name="simple_link">الرابط</string>
-    <string name="simple_italic">مائل</string>
     <string name="action_note_deleted">حُذف \'%1$s\'</string>
     <string name="action_note_restored">أُسترجع \'%1$s\'</string>
     <string name="action_undo">تراجع</string>
@@ -50,7 +48,6 @@
 
     <string name="error_sync">المزامنة فشلت \'%1$s\'</string>
     <string name="error_synchronization">المزامنة فشلت</string>
-    <string name="error_json">هل تطبيق الملاحظات (Nextcloud Notes) مفعل على الخادم؟</string>
     <string name="error_no_network">لا يتوفر اتصال</string>
     <string name="error_unknown">حدث خطأ غير معروف.</string>
 
@@ -100,7 +97,6 @@
     <string name="simple_close">إغلاق</string>
     <string name="simple_copy">أنسخ</string>
     <string name="simple_exception">استثناء</string>
-    <string name="copied_to_clipboard">تم النسخ إلى الحافظة</string>
     <string name="pin_to_homescreen">تثبيت الى الشاشة الرئيسية</string>
     <string name="note_has_been_deleted">هذه الملاحظة مُسحت</string>
     <string name="add_account">أضف حسابا</string>
@@ -111,17 +107,14 @@
     <string name="account_already_imported">تم بالفعل استيراد الحساب</string>
     <string name="no_notes_yet">لا ملاحظات حاليا</string>
     <string name="no_notes_yet_description">اضغط  علامة +  لانشاء ملاحظة جديدة </string>
-    <string name="could_not_load_preview_two_digit_numbered_list">تعذر تحميل المعاينة. الرجاء التحقق مما إذا كان هناك عنصر قائمة مكون من رقمين بدون محتوى.</string>
     <string name="simple_more">المزيد</string>
     <string name="simple_move">نقل</string>
-    <string name="checkbox_could_not_be_toggled">تعذر تبديل خانة الاختيار.</string>
     <string name="category_readonly">القراءة فقط</string>
     <string name="no_category">لا تصنيف</string>
     <string name="add_category">اضف %1$s</string>
     <string name="simple_checkbox">مربع</string>
     <string name="unlock_notes">فتح قفل الملاحظات</string>
     <string name="simple_beta">تجريبي</string>
-    <string name="could_not_copy_to_clipboard">لم يستطع النسخ الى الحافظة</string>
     <string name="error_dialog_title">آه لا، ماذا الان؟🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">الرجاء محاولة اجبار اغلاق التطبيق واعادة تشغيله، ربما هنالك خطأ في الاتصال مع تطبيق نيكست كلاود nextcloud</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">اذا تكررت المشكلة، حاول تنظيف مساحة التخزين في التطبيقين كلاهما: 
@@ -229,11 +222,6 @@
     <string name="formatting_help_code_body_2">يدعم Markdown أيضًا شيئًا يسمى سياج الكود ، والذي يسمح بخطوط متعددة بدون مسافة بادئة:</string>
     <string name="formatting_help_code_body_3">وإذا كنت ترغب في استخدام تمييز بناء الجملة، فقم بتضمين اللغة البرمجية:</string>
 
-    <string name="formatting_help_unsupported_title">غير مدعوم</string>
-    <string name="formatting_help_unsupported_body_1">بينما نحاول تحسين الدعم لـ Markdown باستمرار ، هناك بعض الميزات التي لا تدعمها Notes حتى الآن:</string>
-    <string name="formatting_help_unsupported_body_2">الجداول</string>
-    <string name="formatting_help_unsupported_body_3">صور</string>
-    <string name="formatting_help_unsupported_body_4">إذا كنت مهتمًا بالمساهمة في دعم إحدى هذه الميزات ، فاتصل بنا عبر GitHub أو البريد الإلكتروني.</string>
     <string name="simple_other">آخر</string>
     <string name="sort_last_modified">ترتيب حسب تاريخ التعديل</string>
     <string name="sort_alphabetically">الترتيب حسب الأبجدية</string>

@@ -14,9 +14,7 @@
     <string name="simple_edit">편집</string>
     <string name="action_edit_save">저장</string>
     <string name="simple_about">정보</string>
-    <string name="simple_bold">굵게</string>
     <string name="simple_link">링크</string>
-    <string name="simple_italic">Italic체</string>
     <string name="action_note_deleted">%1$s 삭제됨</string>
     <string name="action_note_restored">%1$s 복원됨</string>
     <string name="action_undo">실행 취소</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">동기화 실패: %1$s</string>
     <string name="error_synchronization">동기화에 실패했습니다.</string>
-    <string name="error_json">Notes 앱이 서버에서 활성화되었습니까?</string>
     <string name="error_no_network">네트워크에 연결할 수 없음</string>
     <string name="error_unknown">알 수 없는 에러가 발생했습니다.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">닫기</string>
     <string name="simple_copy">복사</string>
     <string name="simple_exception">예외</string>
-    <string name="copied_to_clipboard">클립보드로 복사됨</string>
     <string name="pin_to_homescreen">홈 화면에 고정</string>
     <string name="note_has_been_deleted">노트가 삭제됐습니다.</string>
     <string name="add_account">계정 추가</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">계정을 이미 가져왔습니다.</string>
     <string name="no_notes_yet">아직 메모 없음</string>
     <string name="no_notes_yet_description">+ 버튼을 눌러 새 노트를 만들기</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">미리 보기를 로드할 수 없습니다. 내용이 없는 두 자리 번호 목록 항목이 있는지 확인해주십시오.</string>
     <string name="simple_more">더 보기</string>
     <string name="simple_move">이동</string>
-    <string name="checkbox_could_not_be_toggled">체크박스를 전환할 수 없습니다.</string>
     <string name="category_readonly">Read only</string>
     <string name="no_category">카테고리 없음</string>
     <string name="add_category">%1$s(으)로 추가</string>
     <string name="simple_checkbox">체크 상자</string>
     <string name="unlock_notes">노트 잠금해제</string>
     <string name="simple_beta">베타</string>
-    <string name="could_not_copy_to_clipboard">클립보드에 복사할 수 없습니다.</string>
     <string name="error_dialog_title">세상에 - 무슨일이야?</string>
     <string name="error_dialog_tip_token_mismatch_retry">앱을 종료하고 다시 시작해주십시오.  아마 Nextcloud에 잘못된 연결이 있었을 것입니다.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">문제가 지속되면 Nextcloud와 Nextcloud Notes 두 앱의 스토리지를 모두 지워 이 문제를 해결해보십시오.</string>
@@ -229,11 +222,6 @@
     <string name="formatting_help_code_body_2">Markdown은 코드 펜싱이라는 것을 지원하여 들여쓰기 없이 여러 줄을 허용합니다.</string>
     <string name="formatting_help_code_body_3">구문 강조 표시를 사용하려면 다음 언어를 포함합니다.</string>
 
-    <string name="formatting_help_unsupported_title">지원되지 않습니다.</string>
-    <string name="formatting_help_unsupported_body_1">Markdown에 대한 지원을 지속적으로 개선하려고 노력하고 있지만 Notes에서 아직 지원하지 않는 몇 가지 기능이 있습니다.</string>
-    <string name="formatting_help_unsupported_body_2">목록</string>
-    <string name="formatting_help_unsupported_body_3">파일</string>
-    <string name="formatting_help_unsupported_body_4">이러한 기능 중 하나에 대한 지원을 제공하는 데 관심이 있으시면 GitHub 또는 E-Mail을 통해 당사에 문의하십시오.</string>
     <string name="simple_other">기타</string>
     <string name="sort_last_modified">수정된 날짜로 정렬</string>
     <string name="sort_alphabetically">알파벳순으로 정렬</string>

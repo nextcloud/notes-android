@@ -14,9 +14,7 @@
     <string name="simple_edit">Düzenle</string>
     <string name="action_edit_save">Kaydet</string>
     <string name="simple_about">Hakkında</string>
-    <string name="simple_bold">Koyu</string>
     <string name="simple_link">Bağlantı</string>
-    <string name="simple_italic">Yatık</string>
     <string name="action_note_deleted">%1$s silindi</string>
     <string name="action_note_restored">%1$s geri yüklendi</string>
     <string name="action_undo">Geri al</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Eşitlenemedi: %1$s</string>
     <string name="error_synchronization">Eşitlenemedi</string>
-    <string name="error_json">Notlar uygulaması sunucu üzerinde etkinleştirilmiş mi?</string>
     <string name="error_no_network">Ağ bağlantısı yok</string>
     <string name="error_unknown">Bilinmeyen bir sorun çıktı.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Kapat</string>
     <string name="simple_copy">Kopyala</string>
     <string name="simple_exception">İstisna</string>
-    <string name="copied_to_clipboard">Panoya kopyalandı</string>
     <string name="pin_to_homescreen">Ana sayfaya sabitle</string>
     <string name="note_has_been_deleted">Bu not silinmiş</string>
     <string name="add_account">Hesap ekle</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Hesap zaten içe aktarılmış</string>
     <string name="no_notes_yet">Henüz bir not yok</string>
     <string name="no_notes_yet_description">Yeni bir not eklemek için + tuşuna basın</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Ön izleme yüklenemedi. Lütfen içeriği olmayan iki haneli rakamdan oluşan bir liste ögesi bulunduğundan emin olun.</string>
     <string name="simple_more">Daha Fazla</string>
     <string name="simple_move">Taşı</string>
-    <string name="checkbox_could_not_be_toggled">İşaret kutusunun işareti değiştirilemedi.</string>
     <string name="category_readonly">Salt okunur</string>
     <string name="no_category">Kategori yok</string>
     <string name="add_category">%1$s ekle</string>
     <string name="simple_checkbox">İşaret kutusu</string>
     <string name="unlock_notes">Kilidi açma notları</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Panoya kopyalanamadı</string>
     <string name="error_dialog_title">Hayıır. Şimdi ne olacak? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Lütfen uygulamayı kapanmaya zorlayıp yeniden başlatın. Yanlış bir Nextcloud uygulaması bağlantısı olmalı.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Sorun sürerse, çözmek için hem Nextcloud uygulamasının hem de Nextcloud Notlar uygulamasının depolamalarını temizlemeyi deneyin.</string>
@@ -233,11 +226,6 @@
     <string name="formatting_help_code_body_2">Markdown ayrıca kod çiti olarak adlandırılan ve girinti olmadan birden fazla satıra izin veren bir şeyi destekler:</string>
     <string name="formatting_help_code_body_3">Ve söz dizimi vurgulamasını kullanmak istiyorsanız, dili ekleyin:</string>
 
-    <string name="formatting_help_unsupported_title">Desteklenmiyor</string>
-    <string name="formatting_help_unsupported_body_1">Markdown desteğini sürekli olarak geliştirmeye çalışıyoruz. Ancak henüz Notes uygulamasının desteklemediği birkaç özellik var:</string>
-    <string name="formatting_help_unsupported_body_2">Tablolar</string>
-    <string name="formatting_help_unsupported_body_3">Görseller</string>
-    <string name="formatting_help_unsupported_body_4">Bu özelliklerden biri için destek olmak isterseniz, GitHub ya da e-posta üzerinden bizimle görüşün.</string>
     <string name="simple_other">Diğer</string>
     <string name="sort_last_modified">Değişiklik tarihine göre sırala</string>
     <string name="sort_alphabetically">Alfabeye göre sırala</string>

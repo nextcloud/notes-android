@@ -14,9 +14,7 @@
     <string name="simple_edit">Редагувати</string>
     <string name="action_edit_save">Зберегти</string>
     <string name="simple_about">Про програму</string>
-    <string name="simple_bold">Грубий</string>
     <string name="simple_link">Посилання</string>
-    <string name="simple_italic">Курсив</string>
     <string name="action_note_deleted">Вилучено %1$s</string>
     <string name="action_note_restored">Відновлено %1$s</string>
     <string name="action_undo">скасувати зміни</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Синхронізація не вдалася: %1$s</string>
     <string name="error_synchronization">Синхронізація не вдалася</string>
-    <string name="error_json">Чи активовано додаток Нотатки на сервері?</string>
     <string name="error_no_network">Відсутнє підключення до мережі</string>
     <string name="error_unknown">Сталася невідома помилка.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Закрити</string>
     <string name="simple_copy">Копіювати</string>
     <string name="simple_exception">Виняток</string>
-    <string name="copied_to_clipboard">Скопійовано в буфер обміну</string>
     <string name="pin_to_homescreen">Закріпити на головному екрані</string>
     <string name="note_has_been_deleted">Цю нотатку було вилучено</string>
     <string name="add_account">Додати обліковий запис</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Обліковий запис вже імпортовано</string>
     <string name="no_notes_yet">Нотатки поки відсутні</string>
     <string name="no_notes_yet_description">Натисніть кнопку +, щоб створити нову нотатку</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Не вдалося завантажити перегляд. Перевірте, чи є двоцифровий елемент нумерованого списку без вмісту.</string>
     <string name="simple_more">Додатково</string>
     <string name="simple_move">Перемістити</string>
-    <string name="checkbox_could_not_be_toggled">Неможливо перемкнути прапорець</string>
     <string name="category_readonly">Тільки читання</string>
     <string name="no_category">Без категорії</string>
     <string name="add_category">Додати %1$s</string>
     <string name="simple_checkbox">Прапорець</string>
     <string name="unlock_notes">Розблокувати нотатки</string>
     <string name="simple_beta">Бета</string>
-    <string name="could_not_copy_to_clipboard">Неможливо скопіювати до буферу обміну</string>
     <string name="error_dialog_title">От халепа!</string>
     <string name="error_dialog_tip_token_mismatch_retry">Спробуйте примусово закрити застосунок та наново запустити. Можливо, встановлено неправильне з\'єднання із застосунком Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Якщо проблема не зникає, для її вирішення спробуйте очистити пам’ять обох програм: Nextcloud та Нотатки Nextcloud.</string>
@@ -221,11 +214,6 @@
     <string name="formatting_help_code_body_2">Markdown також підтримує те, що називається огородженням коду, що дозволяє використовувати кілька рядків без відступу:</string>
     <string name="formatting_help_code_body_3">А якщо ви хочете використовувати підсвічування синтаксису, додайте назву мови:</string>
 
-    <string name="formatting_help_unsupported_title">Не підтримується</string>
-    <string name="formatting_help_unsupported_body_1">Хоч ми намагаємось постійно вдосконалювати підтримку Markdown, є декілька функцій, які ще не підтримуються в Нотатках:</string>
-    <string name="formatting_help_unsupported_body_2">Таблиці</string>
-    <string name="formatting_help_unsupported_body_3">Зображення</string>
-    <string name="formatting_help_unsupported_body_4">Якщо ви хочете зробити внесок у підтримку однієї з цих функцій, зв’яжіться з нами через GitHub або електронною поштою.</string>
     <string name="simple_other">Інший</string>
     <string name="sort_last_modified">Сортувати за датою зміни</string>
     <string name="sort_alphabetically">Сортувати за алфавітом</string>

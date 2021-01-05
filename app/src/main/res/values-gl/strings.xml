@@ -14,9 +14,7 @@
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Gardar</string>
     <string name="simple_about">Sobre</string>
-    <string name="simple_bold">Negra</string>
     <string name="simple_link">Ligazón</string>
-    <string name="simple_italic">Itálica</string>
     <string name="action_note_deleted">Eliminouse %1$s</string>
     <string name="action_note_restored">Restaurouse %1$s</string>
     <string name="action_undo">Desfacer</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_synchronization">Produciuse un fallo na sincronización</string>
-    <string name="error_json">Está activada a apli «Notes» no servidor?</string>
     <string name="error_no_network">Sen conexión de rede</string>
     <string name="error_unknown">Produciuse un erro descoñecido.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Pechar</string>
     <string name="simple_copy">Copiar</string>
     <string name="simple_exception">Excepción</string>
-    <string name="copied_to_clipboard">Copiado no portapapeis.</string>
     <string name="pin_to_homescreen">Ancorar na pantalla de inicio</string>
     <string name="note_has_been_deleted">Esta nota foi eliminada</string>
     <string name="add_account">Engadir unha conta</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">A conta xa foi importada</string>
     <string name="no_notes_yet">Aínda non hai notas</string>
     <string name="no_notes_yet_description">Prema o botón + para crear unha nota nova</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Non foi posíbel cargar a vista previa. Verifique se hai un elemento da lista numerada de dous díxitos sen contido.</string>
     <string name="simple_more">Máis</string>
     <string name="simple_move">Mover</string>
-    <string name="checkbox_could_not_be_toggled">Non foi posíbel cambiar a caixa de selección.</string>
     <string name="category_readonly">Só lectura</string>
     <string name="no_category">Sen categoría</string>
     <string name="add_category">Engadir %1$s</string>
     <string name="simple_checkbox">Caixa de selección</string>
     <string name="unlock_notes">Desbloquear notas</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Non foi posíbel copiar ao portapapeis</string>
     <string name="error_dialog_title">Vaites, e agora que? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Probe a forzar o peche da apli e reiniciala de novo. Pode haber unha conexión incorrecta coa apli Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema continúa, tente limpar o almacenamento de ambas as aplis: Nextcloud e Nextcloud Notas para resolver este problema.</string>
@@ -233,11 +226,6 @@
     <string name="formatting_help_code_body_2">Markdown tamén admite algo chamado «código cercado», que permite múltiples liñas sen sangría:</string>
     <string name="formatting_help_code_body_3">E se quere utilizar o destaque de sintaxe, inclúa a linguaxe:</string>
 
-    <string name="formatting_help_unsupported_title">Non admitido</string>
-    <string name="formatting_help_unsupported_body_1">Aínda que tentamos mellorar continuamente a compatibilidade do Markdown, hai algunhas funcións que aínda non son compatíbeis con Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Táboas</string>
-    <string name="formatting_help_unsupported_body_3">Imaxes</string>
-    <string name="formatting_help_unsupported_body_4">Se estás interesado en colaborar nalgunha destas funcións, póñase en contacto connosco a través do GitHub ou correo-e</string>
     <string name="simple_other">Outro</string>
     <string name="sort_last_modified">Ordenar por data de modificación</string>
     <string name="sort_alphabetically">Ordenar alfabéticamente</string>

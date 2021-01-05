@@ -14,9 +14,7 @@
     <string name="simple_edit">Править</string>
     <string name="action_edit_save">Сохранить</string>
     <string name="simple_about">О программе</string>
-    <string name="simple_bold">Жирный</string>
     <string name="simple_link">Ссылка</string>
-    <string name="simple_italic">Курсив</string>
     <string name="action_note_deleted">Заметка %1$s удалена</string>
     <string name="action_note_restored">Заметка %1$s восстановлена</string>
     <string name="action_undo">Отменить</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Сбой синхронизации: %1$s</string>
     <string name="error_synchronization">Сбой синхронизации</string>
-    <string name="error_json">Включено ли приложение «Заметки» на сервере?</string>
     <string name="error_no_network">Нет подключения к сети</string>
     <string name="error_unknown">Произошла неизвестная ошибка.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Закрыть</string>
     <string name="simple_copy">Копировать</string>
     <string name="simple_exception">Исключение</string>
-    <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
     <string name="pin_to_homescreen">Введите PIN-код для домашнего экрана</string>
     <string name="note_has_been_deleted">Запись была удалена</string>
     <string name="add_account">Добавить аккаунт</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Учётная запись уже импортирована</string>
     <string name="no_notes_yet">Нет ни одной заметки</string>
     <string name="no_notes_yet_description">Для создания заметки нажмите +</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Не удалось загрузить предварительный просмотр.  Убедитесь,  существует ли двузначный номерный элемент списка без содержимого.</string>
     <string name="simple_more">Больше</string>
     <string name="simple_move">Переместить</string>
-    <string name="checkbox_could_not_be_toggled">Не удалось снять или установить отметку.</string>
     <string name="category_readonly">Только для чтения</string>
     <string name="no_category">Без категории</string>
     <string name="add_category">Добавить %1$s </string>
     <string name="simple_checkbox">Флажок</string>
     <string name="unlock_notes">Разблокировать заметки</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Не удалось скопировать в буфер обмена.</string>
     <string name="error_dialog_title">О нет, что теперь? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Попробуйте принудительно закрыть приложение и запустить его снова. Это может быть связано с некорректным подключением к приложению Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Если проблема повторилась, попробуйте для ее решения очистить хранилище обоих приложений: Nextcloud и Nextcloud Notes</string>
@@ -241,11 +234,6 @@
     <string name="formatting_help_code_body_2">В Markdown также поддерживается так называемый обособленный блок кода, который содержит несколько строк без абзацного отступа:</string>
     <string name="formatting_help_code_body_3">А если Вы хотите включить подсветку синтаксиса, укажите язык:</string>
 
-    <string name="formatting_help_unsupported_title">Не поддерживается</string>
-    <string name="formatting_help_unsupported_body_1">Хотя мы стараемся постоянно улучшать поддержку Markdown, есть несколько функций, которые ещё не реализованы в Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Таблицы</string>
-    <string name="formatting_help_unsupported_body_3">Изображения</string>
-    <string name="formatting_help_unsupported_body_4">Если вы заинтересованы в поддержке одной из этих функций, свяжитесь с нами через GitHub или по электронной почте.</string>
     <string name="simple_other">Другой</string>
     <string name="sort_last_modified">Сортировать по дате изменения</string>
     <string name="sort_alphabetically">Сортировать по алфавиту</string>

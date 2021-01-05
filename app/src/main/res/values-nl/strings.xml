@@ -14,9 +14,7 @@
     <string name="simple_edit">Bewerken</string>
     <string name="action_edit_save">Opslaan</string>
     <string name="simple_about">Over</string>
-    <string name="simple_bold">Vet</string>
     <string name="simple_link">Link</string>
-    <string name="simple_italic">Scheef</string>
     <string name="action_note_deleted">Verwijderd %1$s</string>
     <string name="action_note_restored">Hersteld %1$s</string>
     <string name="action_undo">Ongedaan maken</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
-    <string name="error_json">Is de Notities app geactiveerd op de server?</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
     <string name="error_unknown">Een onbekende fout trad op.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Sluit</string>
     <string name="simple_copy">Kopieër</string>
     <string name="simple_exception">Uitzondering</string>
-    <string name="copied_to_clipboard">Gekopieerd naar het klembord</string>
     <string name="pin_to_homescreen">Vastzetten op startscherm</string>
     <string name="note_has_been_deleted">Deze notitie is verwijderd</string>
     <string name="add_account">Account toevoegen</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Account is al geïmporteerd</string>
     <string name="no_notes_yet">Nog geen notities</string>
     <string name="no_notes_yet_description">Druk op de + knop om een nieuwe notitie te maken</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Kon geen voorbeeld laden. Controleer of er een lege genummerde lijst is met twee cijfers is.</string>
     <string name="simple_more">Meer</string>
     <string name="simple_move">Verplaatsen</string>
-    <string name="checkbox_could_not_be_toggled">Selectievakjes kon niet worden omgeschakeld.</string>
     <string name="category_readonly">Alleen lezen</string>
     <string name="no_category">Geen categorie</string>
     <string name="add_category">Toevoegen %1$s</string>
     <string name="simple_checkbox">Selectievakje</string>
     <string name="unlock_notes">Ontgrendel notities</string>
     <string name="simple_beta">Bèta</string>
-    <string name="could_not_copy_to_clipboard">Kon niet kopiëren naar het klembord</string>
     <string name="error_dialog_title">Oh nee - wat nu? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Probeer de app te sluiten en opnieuw te starten. Er was misschien een onjuiste verbinding met de Nextcloud-app.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Als het probleem blijft aanhouden, probeer dan de gegevensopslag bij Nextcloud en de Nextcloud Notes apps te wissen.</string>
@@ -233,11 +226,6 @@
     <string name="formatting_help_code_body_2">Markdown ondersteunt ook iets dat \"code fencing\" wordt genoemd, wat meerdere regels mogelijk maakt zonder inspringen:</string>
     <string name="formatting_help_code_body_3">En als je syntaxisaccentuering wilt gebruiken, neemt dan deze taal op:</string>
 
-    <string name="formatting_help_unsupported_title">Niet ondersteund</string>
-    <string name="formatting_help_unsupported_body_1">Markdown wordt ondersteunt en continu verbetert. Er zijn enkele functies die Notes nog niet ondersteund:</string>
-    <string name="formatting_help_unsupported_body_2">Tabellen</string>
-    <string name="formatting_help_unsupported_body_3">Afbeeldingen</string>
-    <string name="formatting_help_unsupported_body_4">Als je een bijdrage wil leveren aan een van de functies, neem dan contact met ons op via GitHub of per E-mail.</string>
     <string name="simple_other">Ander</string>
     <string name="sort_last_modified">Op wijzigingsdatum sorteren</string>
     <string name="sort_alphabetically">Op alfabet sorteren</string>

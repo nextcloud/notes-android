@@ -14,9 +14,7 @@
     <string name="simple_edit">Editar</string>
     <string name="action_edit_save">Guardar</string>
     <string name="simple_about">Acerca de</string>
-    <string name="simple_bold">Negrita</string>
     <string name="simple_link">Enlace</string>
-    <string name="simple_italic">Cursiva</string>
     <string name="action_note_deleted">Borrado %1$s</string>
     <string name="action_note_restored">Restaurado %1$s</string>
     <string name="action_undo">Deshacer</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Fallo en la sincronización: %1$s</string>
     <string name="error_synchronization">Fallo en la sincronización</string>
-    <string name="error_json">¿Está la app de Notas activada en el servidor?</string>
     <string name="error_no_network">Sin conexión de red</string>
     <string name="error_unknown">Ha ocurrido un error desconocido.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Cerrar</string>
     <string name="simple_copy">Copiar</string>
     <string name="simple_exception">Excepción</string>
-    <string name="copied_to_clipboard">Copiado al portapapeles</string>
     <string name="pin_to_homescreen">Acoplar a la pantalla de inicio</string>
     <string name="note_has_been_deleted">Esta nota ha sido borrada</string>
     <string name="add_account">Agregar cuenta</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">La cuenta ha sido importada</string>
     <string name="no_notes_yet">Aún no hay notas</string>
     <string name="no_notes_yet_description">Pulsa el botón + para crear una nota nueva</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">No se ha podido cargar la vista previa. Por favor, comprueba si hay un ítem de lista numerada de dos dígitos sin contenido.</string>
     <string name="simple_more">Más</string>
     <string name="simple_move">Mover</string>
-    <string name="checkbox_could_not_be_toggled">No se ha podido cambiar el estado del checkbox</string>
     <string name="category_readonly">Solo lectura</string>
     <string name="no_category">Sin categoría</string>
     <string name="add_category">Añadir %1$s</string>
     <string name="simple_checkbox">Casilla de verificación</string>
     <string name="unlock_notes">Desbloquear notas</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">No se puede copiar al portapapeles</string>
     <string name="error_dialog_title">Oh no - ¿Ahora qué? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Por favor, intenta forzar el cierre de la aplicación y vuelve a abrirla. Es posible que haya habido un problema de conexión con la aplicación Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persiste, intente borrar el almacenamiento de ambas aplicaciones: Nextcloud y Nextcloud Notas para solucionar este problema.</string>
@@ -233,11 +226,6 @@
     <string name="formatting_help_code_body_2">Markdown también soporta el llamado vallado de código, que permite líneas múltiples sin indentación:</string>
     <string name="formatting_help_code_body_3">Y si quieres usar subrayado de sintaxis, incluye el lenguaje:</string>
 
-    <string name="formatting_help_unsupported_title">No soportado</string>
-    <string name="formatting_help_unsupported_body_1">Aunque tratamos de mejorar continuamente el soporte de Markdown, hay unas cuantas características que Notas todavía no soporta:</string>
-    <string name="formatting_help_unsupported_body_2">Tablas</string>
-    <string name="formatting_help_unsupported_body_3">Imágenes</string>
-    <string name="formatting_help_unsupported_body_4">Si está interesadx en contribuir en alguna de estas funciones, no dude en ponerse en contacto con nosotrxs a través de GitHub o por correo electrónico.</string>
     <string name="simple_other">Otro</string>
     <string name="sort_last_modified">Ordenar por fecha de modificación</string>
     <string name="sort_alphabetically">Ordenar alfabéticamente</string>

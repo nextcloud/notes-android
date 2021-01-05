@@ -13,15 +13,10 @@
     <string name="simple_edit">ویرایش</string>
     <string name="action_edit_save">ذخیره</string>
     <string name="simple_about">درباره</string>
-    <string name="simple_accounts">حساب‌ها</string>
-    <string name="simple_bold">درشت</string>
     <string name="simple_link">Link</string>
-    <string name="simple_italic">Italic</string>
     <string name="action_note_deleted">حذف شد %1$s</string>
     <string name="action_note_restored">بازیابی شد %1$s</string>
     <string name="action_undo">برگرداندن</string>
-    <string name="action_drawer_open">باز کردن ناوبری</string>
-    <string name="action_drawer_close">بستن ناوبری</string>
     <string name="action_uncategorized">دستهبندی نشده</string>
     <string name="menu_delete">حذف</string>
     <string name="menu_change_category">دسته‌بندی</string>
@@ -51,10 +46,7 @@
 
     <!-- Error -->
     <string name="error_sync">همگام سازی انجام نشد:%1$s</string>
-    <string name="error_json">آیا برنامه Notes روی سرور فعال شده است؟</string>
     <string name="error_no_network">هیچ ارتباطی به شبکه موجود نیست</string>
-    <string name="error_files_app">آیا برنامه فایل ها را نصب کرده اید؟</string>
-    <string name="error_insufficient_storage">حافظه سرور شما پر است.</string>
     <string name="error_unknown">یک خطای ناشناخته رخ داده است.</string>
 
     <!-- About -->
@@ -104,7 +96,6 @@
     <string name="simple_close">بستن</string>
     <string name="simple_copy">کپی کردن</string>
     <string name="simple_exception">استثنا</string>
-    <string name="copied_to_clipboard">در حافظه رونویسی شد</string>
     <string name="pin_to_homescreen">پین به صفحه اصلی</string>
     <string name="note_has_been_deleted">این یادداشت حذف شده است</string>
     <string name="add_account">ایحاد حساب کاربری</string>
@@ -115,18 +106,12 @@
     <string name="account_already_imported">حساب قبلاً وارد شده است</string>
     <string name="no_notes_yet">هنوز هیچ یادداشتی وجود ندارد</string>
     <string name="no_notes_yet_description">دکمه + را فشار دهید تا یک یادداشت جدید ایجاد کنید</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">پیش نمایش بارگیری نشد. لطفاً بررسی کنید که آیا یک مورد لیست شماره ای دو رقمی بدون محتوا وجود دارد یا خیر.</string>
     <string name="simple_more">بیش‌تر</string>
     <string name="simple_move">انتقال</string>
-    <string name="error_files_app_version_too_old">نسخه برنامه فایلهای شما به روز است؟</string>
-    <string name="checkbox_could_not_be_toggled"> انتخاب کادرامکان پذیر نیست.</string>
-    <string name="bulk_notes_deleted">حذف شده%1$d یادداشت های</string>
-    <string name="bulk_notes_restored">بازگردانی شده%1$d یادداشت های</string>
     <string name="category_readonly">فقط خواندنی</string>
     <string name="no_category">بدون دسته بندی</string>
     <string name="add_category">افزودن%1$s</string>
     <string name="simple_checkbox">جعبه علامت</string>
-    <string name="could_not_copy_to_clipboard">به کلیپ بورد کپی نشد</string>
     <string name="simple_security">امنیت</string>
     <string name="simple_appearance">ظاهر</string>
     <string name="simple_synchronization">هم‌گام‌سازی</string>

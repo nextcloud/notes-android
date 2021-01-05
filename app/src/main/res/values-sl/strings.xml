@@ -14,9 +14,7 @@
     <string name="simple_edit">Uredi</string>
     <string name="action_edit_save">Shrani</string>
     <string name="simple_about">O programu</string>
-    <string name="simple_bold">Krepko</string>
     <string name="simple_link">Povezava</string>
-    <string name="simple_italic">Ležeče</string>
     <string name="action_note_deleted">Izbrisano %1$s</string>
     <string name="action_note_restored">Obnovljeno %1$s</string>
     <string name="action_undo">Razveljavi</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
     <string name="error_synchronization">Usklajevanje je spodletelo</string>
-    <string name="error_json">Ali je program Notes na strežniku omogočen?</string>
     <string name="error_no_network">Ni omrežne povezave</string>
     <string name="error_unknown">Prišlo je do neznane napake.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Zapri</string>
     <string name="simple_copy">Kopiraj</string>
     <string name="simple_exception">Izjema</string>
-    <string name="copied_to_clipboard">Kopirano v odložišče</string>
     <string name="pin_to_homescreen">Pripni na osnovni zaslon</string>
     <string name="note_has_been_deleted">Ta zabeležka je bila izbrisana</string>
     <string name="add_account">Dodaj račun</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Račun je že bil uvožen</string>
     <string name="no_notes_yet">Ni še dodane nobene zabeležke</string>
     <string name="no_notes_yet_description">Pritisnite gumb + za novo zabeležko</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Predogleda ni mogoče naložiti. Preverite, ali je morda vpisan  dvoštevilčen predmet seznama brez vsebine.</string>
     <string name="simple_more">Več</string>
     <string name="simple_move">Premakni</string>
-    <string name="checkbox_could_not_be_toggled">Izbirnega polja ni mogoče preklopiti.</string>
     <string name="category_readonly">Le za branje</string>
     <string name="no_category">Brez kategorije</string>
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Izbirno polje</string>
     <string name="unlock_notes">Odkleni zabeležke</string>
     <string name="simple_beta">Preizkusno</string>
-    <string name="could_not_copy_to_clipboard">Predmeta ni mogoče kopirati v odložišče</string>
     <string name="error_dialog_title">Ojoj, kaj pa zdaj? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Poskusite vsiliti končanje programa in ga ponovno zagnati. Morda je težava v neustrezni povezavi z okoljem Nextcloud</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Če se težava še naprej pojavlja, poskusite počistiti podatke programa Nextcloud in Nextcloud Notes.</string>
@@ -241,11 +234,6 @@
     <string name="formatting_help_code_body_2">Oblikovni jezik Markdown podpira tudi tako imenovano obrobljanje kode, kar omogoča zapis več vrstic brez zamika:</string>
     <string name="formatting_help_code_body_3">Če bi želeli uporabiti poudarjanje skladnje, vključite tudi jezik:</string>
 
-    <string name="formatting_help_unsupported_title">Nepodprto</string>
-    <string name="formatting_help_unsupported_body_1">Čeprav se neprestano trudimo izboljšati podporo za oblikovanje Markdown, je še vedno nekaj zmožnosti, ki niso podprte:</string>
-    <string name="formatting_help_unsupported_body_2">Razpredelnice</string>
-    <string name="formatting_help_unsupported_body_3">Slike</string>
-    <string name="formatting_help_unsupported_body_4">Če želite sodelovati pri razvoju, ali pa drugače pomagati in podpreti katerokoli od navedenih možnosti, stopite z nami v stik prek GitHub oziroma po elektronski pošti.</string>
     <string name="simple_other">Drugo</string>
     <string name="sort_last_modified">Razvrsti po datumu spremembe</string>
     <string name="sort_alphabetically">Razvrsti abecedno</string>

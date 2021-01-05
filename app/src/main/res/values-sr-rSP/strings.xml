@@ -13,12 +13,8 @@
     <string name="simple_edit">Izmeni</string>
     <string name="action_edit_save">Sačuvaj</string>
     <string name="simple_about">O programu</string>
-    <string name="simple_bold">Podebljano</string>
     <string name="simple_link">Veza</string>
-    <string name="simple_italic">Kurziv</string>
     <string name="action_undo">Opozovi</string>
-    <string name="action_drawer_open">otvori navigaciju</string>
-    <string name="action_drawer_close">zatvori navigaciju</string>
     <string name="action_uncategorized">Nekategorizovano</string>
     <string name="menu_delete">Obriši</string>
     <string name="menu_change_category">Kategorija</string>
@@ -94,7 +90,6 @@
     <string name="simple_close">Zatvori</string>
     <string name="simple_copy">Kopiraj</string>
     <string name="simple_exception">Izuzetak</string>
-    <string name="copied_to_clipboard">Kopirano u ostavu</string>
     <string name="pin_to_homescreen">Zakači na početni ekran</string>
     <string name="note_has_been_deleted">Ova beleška je obrisana</string>
     <string name="add_account">Dodaj nalog</string>

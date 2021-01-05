@@ -14,9 +14,7 @@
     <string name="simple_edit">Edit</string>
     <string name="action_edit_save">Save</string>
     <string name="simple_about">About</string>
-    <string name="simple_bold">Bold</string>
     <string name="simple_link">Link</string>
-    <string name="simple_italic">Italic</string>
     <string name="action_note_deleted">Deleted %1$s</string>
     <string name="action_note_restored">Restored %1$s</string>
     <string name="action_undo">Undo</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_synchronization">Synchronization failed</string>
-    <string name="error_json">Is the Notes app activated on the server?</string>
     <string name="error_no_network">No network connection</string>
     <string name="error_unknown">An unknown error has occurred.</string>
 
@@ -129,7 +126,6 @@
     <string name="simple_close">Close</string>
     <string name="simple_copy">Copy</string>
     <string name="simple_exception">Exception</string>
-    <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="pin_to_homescreen">Pin to homescreen</string>
     <string name="note_has_been_deleted">This note has been deleted</string>
     <string name="add_account">Add account</string>
@@ -140,17 +136,14 @@
     <string name="account_already_imported">Account has already been imported</string>
     <string name="no_notes_yet">No notes yet</string>
     <string name="no_notes_yet_description">Press + button to create a new note</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Could not load preview. Please check whether there is a two-digit numbered list item without content.</string>
     <string name="simple_more">More</string>
     <string name="simple_move">Move</string>
-    <string name="checkbox_could_not_be_toggled">Checkbox could not be toggled.</string>
     <string name="category_readonly">Read only</string>
     <string name="no_category">No category</string>
     <string name="add_category">Add %1$s</string>
     <string name="simple_checkbox">Checkbox</string>
     <string name="unlock_notes">Unlock notes</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Could not copy to clipboard</string>
     <string name="error_dialog_title">Oh no - What now? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Please try to force close the app and restart it again. There might have been an incorrect connection to the Nextcloud app.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">If the issue persists, try to clear the storage of both apps: Nextcloud and Nextcloud Notes to solve this issue.</string>

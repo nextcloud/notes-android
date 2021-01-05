@@ -14,9 +14,7 @@
     <string name="simple_edit">Szerkesztés</string>
     <string name="action_edit_save">Mentés</string>
     <string name="simple_about">Névjegy</string>
-    <string name="simple_bold">Vastag</string>
     <string name="simple_link">Hivatkozás</string>
-    <string name="simple_italic">Dőlt</string>
     <string name="action_note_deleted">%1$s törölve</string>
     <string name="action_note_restored">%1$s visszaállítva</string>
     <string name="action_undo">Visszavonás</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
     <string name="error_synchronization">Szinkronizálás sikertelen</string>
-    <string name="error_json">Be van kapcsolva a Jegyzetek alkalmazás a kiszolgálón?</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
     <string name="error_unknown">Ismeretlen hiba történt.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Bezárás</string>
     <string name="simple_copy">Másolás</string>
     <string name="simple_exception">Kivétel</string>
-    <string name="copied_to_clipboard">Vágólapra másolva</string>
     <string name="pin_to_homescreen">Rögzítés a kezdőképernyőre</string>
     <string name="note_has_been_deleted">A jegyzet már törölve lett</string>
     <string name="add_account">Fiók hozzáadása</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">A fiók már importálásra került</string>
     <string name="no_notes_yet">Még nincsenek jegyzetek</string>
     <string name="no_notes_yet_description">Új jegyzet hozzáadásához kattintson a + gombra</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Az előnézet nem tölthető be. Ellenőrizze, hogy nincs-e üres két számjegyű számozott listaelem.</string>
     <string name="simple_more">Több</string>
     <string name="simple_move">Áthelyezés</string>
-    <string name="checkbox_could_not_be_toggled">A jelölőmező nem állítható át.</string>
     <string name="category_readonly">Csak olvasható</string>
     <string name="no_category">Nincs kategória</string>
     <string name="add_category">%1$s hozzáadása</string>
     <string name="simple_checkbox">Jelölőmező</string>
     <string name="unlock_notes">Jegyzetek feloldása</string>
     <string name="simple_beta">Béta</string>
-    <string name="could_not_copy_to_clipboard">Nem sikerült a vágólapra másolni</string>
     <string name="error_dialog_title">Jaj ne – Most mi legyen? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Próbálja kényszeríteni az alkalmazás bezárását, és indítsa újra. Lehet, hogy hibás volt a kapcsolat a többi Nextcloud alkalmazással.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ha a probléma továbbra is fennáll, próbálja kiüríteni mindkét alkalmazás tárolóját: a Nextcloudét és a Nextcloud Jegyzetekét.</string>
@@ -200,10 +193,6 @@
     <string name="formatting_help_lists_body_9">És így</string>
 
     <string name="formatting_help_code_title">Kód</string>
-    <string name="formatting_help_unsupported_title">Nem támogatott</string>
-    <string name="formatting_help_unsupported_body_1">Bár folyamatosan próbáljuk fejleszteni a Markdown-támogatást, néhány funkciót még nem tartalmaz a Jegyzetek:</string>
-    <string name="formatting_help_unsupported_body_2">Táblázatok</string>
-    <string name="formatting_help_unsupported_body_3">Képek</string>
     <string name="simple_other">Egyéb</string>
     <string name="sort_last_modified">Rendezés módosítás dátuma szerint</string>
     <string name="sort_alphabetically">Rendezés név szerint</string>

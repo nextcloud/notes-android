@@ -14,9 +14,7 @@
     <string name="simple_edit">Redigera</string>
     <string name="action_edit_save">Spara</string>
     <string name="simple_about">Om</string>
-    <string name="simple_bold">Fet</string>
     <string name="simple_link">Länk</string>
-    <string name="simple_italic">Kursiv</string>
     <string name="action_note_deleted">Tog bort %1$s</string>
     <string name="action_note_restored">Återställde %1$s</string>
     <string name="action_undo">Gör om</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Synkronisering misslyckades: %1$s</string>
     <string name="error_synchronization">Synkroniseringen misslyckades</string>
-    <string name="error_json">Är appen anteckningar aktiverad på servern?</string>
     <string name="error_no_network">Ingen nätverksanslutning</string>
     <string name="error_unknown">Ett okänt fel uppstod.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Stäng</string>
     <string name="simple_copy">Kopiera</string>
     <string name="simple_exception">Undantag</string>
-    <string name="copied_to_clipboard">Kopierat till urklipp</string>
     <string name="pin_to_homescreen">Fäst på hemskärmen</string>
     <string name="note_has_been_deleted">Denna anteckning har raderats</string>
     <string name="add_account">Lägg till konto</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Kontot har redan importerats</string>
     <string name="no_notes_yet">Inga anteckningar än</string>
     <string name="no_notes_yet_description">Tryck på + knappen för att skapa en ny anteckning</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Det gick inte att läsa in förhandsgranskning. Vänligen kontrollera om det finns ett tvåsiffrigt listobjekt utan innehåll.</string>
     <string name="simple_more">Mer</string>
     <string name="simple_move">Flytta</string>
-    <string name="checkbox_could_not_be_toggled">Kunde inte ändra kryssrutan.</string>
     <string name="category_readonly">Läsbehörighet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Lägg till %1$s</string>
     <string name="simple_checkbox">Kryssruta</string>
     <string name="unlock_notes">Lås upp anteckningar</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Kunde inte kopiera till urklipp</string>
     <string name="error_dialog_title">Å nej - Vad händer nu?🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Försök med att Tvinga appen att stänga och återstarta. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Om problemet kvarstår, prova med att rensa lagringen på både appen Nextcloud och Nextcloud Notes.</string>
@@ -229,11 +222,6 @@
     <string name="formatting_help_code_body_2">Markdown stödjer också något som kallas för kodavgränsning, vilket tillåter flera rader utan indentering:</string>
     <string name="formatting_help_code_body_3">Och om du vill använda syntaxmarkering kan du inkludera språket:</string>
 
-    <string name="formatting_help_unsupported_title">Stöds inte</string>
-    <string name="formatting_help_unsupported_body_1">Medan vi kontinuerligt försöker förbättra Markdown-stödet finns det en del funktioner som fortfarande inte stöds i Notes:</string>
-    <string name="formatting_help_unsupported_body_2">Tabeller</string>
-    <string name="formatting_help_unsupported_body_3">Bilder</string>
-    <string name="formatting_help_unsupported_body_4">Om du är intresserad av att bidra med support för någon av dessa funktioner kan du kontakta oss genom GitHub eller epost.</string>
     <string name="simple_other">Övrigt</string>
     <string name="sort_last_modified">Sortera efter ändrat datum</string>
     <string name="sort_alphabetically">Sortera alfabetiskt</string>

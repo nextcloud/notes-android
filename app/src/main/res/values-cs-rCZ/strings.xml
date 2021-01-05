@@ -14,9 +14,7 @@
     <string name="simple_edit">Upravit</string>
     <string name="action_edit_save">Uložit</string>
     <string name="simple_about">O aplikaci</string>
-    <string name="simple_bold">Tučné</string>
     <string name="simple_link">Odkaz</string>
-    <string name="simple_italic">Skloněné</string>
     <string name="action_note_deleted">Smazáno %1$s</string>
     <string name="action_note_restored">Obnoveno %1$s</string>
     <string name="action_undo">Zpět</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
     <string name="error_synchronization">Synchronizace se nezdařila</string>
-    <string name="error_json">Je na serveru aktivní aplikace Poznámky?</string>
     <string name="error_no_network">Žádné síťové spojení</string>
     <string name="error_unknown">Došlo k neznámé chybě.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Zavřít</string>
     <string name="simple_copy">Zkopírovat</string>
     <string name="simple_exception">Výjimka</string>
-    <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <string name="pin_to_homescreen">Připnout na domovskou obrazovku</string>
     <string name="note_has_been_deleted">Tato poznámka byla smazána</string>
     <string name="add_account">Přidat účet</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Účet už byl naimportován</string>
     <string name="no_notes_yet">Zatím žádné poznámky</string>
     <string name="no_notes_yet_description">Novou poznámku vytvoříte klepnutím na + (plus)</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Náhled se nedaří načíst. Zkontrolujte zda zde není položka dvouciferného seznamu bez obsahu.</string>
     <string name="simple_more">Další</string>
     <string name="simple_move">Přesunout</string>
-    <string name="checkbox_could_not_be_toggled">Stav zaškrtávací kolonky se nepodařilo přepnout.</string>
     <string name="category_readonly">Pouze pro čtení</string>
     <string name="no_category">Žádná kategorie</string>
     <string name="add_category">Přidat %1$s</string>
     <string name="simple_checkbox">Zatržítko</string>
     <string name="unlock_notes">Odemknout poznámky</string>
     <string name="simple_beta">Vývojové</string>
-    <string name="could_not_copy_to_clipboard">Nedaří se zkopírovat do schránky</string>
     <string name="error_dialog_title">Ó ne– co teď? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prosím pokuste se vynutit ukončení aplikace a spusťte ji znovu. Možná se něco nepodařilo při spojení s aplikací Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Pokud problém přetrvává, zkuste problém vyřešit vyčištěním úložišť obou aplikací: Nextcloud a Nextcloud poznámky.</string>
@@ -241,11 +234,6 @@
     <string name="formatting_help_code_body_2">Značkovací jazyk Markdown také podporuje něco co se nazývá „oplocení“ kódu, což umožňuje vícero řádek bez odsazení:</string>
     <string name="formatting_help_code_body_3">A pokud chcete použít zvýrazňování syntaxe, včetně jazyka:</string>
 
-    <string name="formatting_help_unsupported_title">Nepodporováno</string>
-    <string name="formatting_help_unsupported_body_1">Byť se neustále snažíme vylepšovat podporu pro Markdown, je zde několik funkcí, které Poznámky ještě nepodporují:</string>
-    <string name="formatting_help_unsupported_body_2">Tabulky</string>
-    <string name="formatting_help_unsupported_body_3">Obrázky</string>
-    <string name="formatting_help_unsupported_body_4">Pokud chcete se chtěli zapojit a přidat podporu pro tyto funkce, obraťte se na nás prostřednictvím portálu GitHub nebo e-mailu.</string>
     <string name="simple_other">Ostatní</string>
     <string name="sort_last_modified">Seřadit podle data změny</string>
     <string name="sort_alphabetically">Seřadit abecedně</string>

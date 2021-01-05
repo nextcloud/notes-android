@@ -14,9 +14,7 @@
     <string name="simple_edit">Muokkaa</string>
     <string name="action_edit_save">Tallenna</string>
     <string name="simple_about">Tietoja</string>
-    <string name="simple_bold">Lihavoitu</string>
     <string name="simple_link">Linkki</string>
-    <string name="simple_italic">Kursivoitu</string>
     <string name="action_note_deleted">Poistettiin %1$s</string>
     <string name="action_note_restored">Palautettiin %1$s</string>
     <string name="action_undo">Kumoa</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
     <string name="error_synchronization">Synkronointi epäonnistui</string>
-    <string name="error_json">Onko Notes sovellus aktivoitu palvelimella?</string>
     <string name="error_no_network">Ei verkkoyhteyttä</string>
     <string name="error_unknown">Tapahtui tuntematon virhe.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Sulje</string>
     <string name="simple_copy">Kopioi</string>
     <string name="simple_exception">Poikkeus</string>
-    <string name="copied_to_clipboard">Kopioitu leikepöydälle</string>
     <string name="pin_to_homescreen">Kiinnitä kotinäyttöön</string>
     <string name="note_has_been_deleted">Tämä muistiinpano on poistettu</string>
     <string name="add_account">Lisää tili</string>
@@ -107,16 +103,13 @@
     <string name="account_already_imported">Tili on jo tuotu</string>
     <string name="no_notes_yet">Ei muistiinpanoja</string>
     <string name="no_notes_yet_description">Paina + luodaksesi uuden muistiinpanon</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Esikatselua ei voitu ladata. Tarkista, onko muistiinpanossa numeroitu lista, jossa kaksinumeroinen kohta on tyhjä.</string>
     <string name="simple_more">Lisää</string>
     <string name="simple_move">Siirrä</string>
-    <string name="checkbox_could_not_be_toggled">Valintaruutua ei voitu klikata.</string>
     <string name="category_readonly">Vain luku</string>
     <string name="add_category">Lisää %1$s</string>
     <string name="simple_checkbox">Valintaruutu</string>
     <string name="unlock_notes">Avaa muistiinpanojen lukitus</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Ei voitu kopioida leikepöydälle</string>
     <string name="error_dialog_title">Voi ei - Mitä nyt? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Yritä pakottaa sovelluksen sulkeminen ja käynnistä se uudelleen. Nextcloud-sovellukseen on saattanut olla virheellinen yhteys.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jos ongelma jatkuu, yritä tyhjentää sekä Nextcloud- että Nextcloud Notes-sovellusten tallennustilat ratkaistaksesi ongelman.</string>
@@ -232,11 +225,6 @@
     <string name="formatting_help_code_body_2">Markdown tukee myös koodin aitaamista, jolla useamman rivin koodi näytetään sisentämättömänä:</string>
     <string name="formatting_help_code_body_3">Ja jos haluat käyttää syntaksin korostusta, sisällytä ohjelmointikieli:</string>
 
-    <string name="formatting_help_unsupported_title">Ei tuettu</string>
-    <string name="formatting_help_unsupported_body_1">Vaikka jatkuvasti kehitämme Markdown-tukea, se ei tue vielä aivan kaikkea, kuten esimerkiksi:</string>
-    <string name="formatting_help_unsupported_body_2">Taulukot</string>
-    <string name="formatting_help_unsupported_body_3">Kuvat</string>
-    <string name="formatting_help_unsupported_body_4">Jos olet kiinnostunut ottamaan osaa kehittämiseen, ole meihin yhteydessä GitHubin tai sähköpostin kautta.</string>
     <string name="simple_other">Muu</string>
     <string name="sort_last_modified">Järjestä muokkauspäiväyksen mukaan</string>
     <string name="sort_alphabetically">Järjestä aakkosjärjestyksen mukaan</string>

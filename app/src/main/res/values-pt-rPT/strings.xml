@@ -25,7 +25,6 @@
 
     <!-- Error -->
     <string name="error_sync">A sincronização falhou: %1$s</string>
-    <string name="error_json">a aplicação Notas está ativada no servidor?</string>
     <string name="error_no_network">sem ligação à rede</string>
 
     <!-- Snackbar Actions -->

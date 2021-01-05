@@ -12,12 +12,8 @@
     <string name="simple_edit">Edit</string>
     <string name="action_edit_save">Save</string>
     <string name="simple_about">About</string>
-    <string name="simple_bold">Bold</string>
     <string name="simple_link">Link</string>
-    <string name="simple_italic">Italic</string>
     <string name="action_undo">Undo</string>
-    <string name="action_drawer_open">open navigation</string>
-    <string name="action_drawer_close">close navigation</string>
     <string name="action_uncategorized">Uncategorised</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_change_category">Category</string>
@@ -90,7 +86,6 @@
     <string name="simple_error">Error</string>
     <string name="simple_close">Close</string>
     <string name="simple_copy">Copy</string>
-    <string name="copied_to_clipboard">Copied to clipboard</string>
     <string name="add_account">Add account</string>
     <string name="category_music">Music</string>
     <string name="category_movies">Movies</string>

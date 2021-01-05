@@ -14,9 +14,7 @@
     <string name="simple_edit">Modifica</string>
     <string name="action_edit_save">Salva</string>
     <string name="simple_about">Informazioni</string>
-    <string name="simple_bold">Grassetto</string>
     <string name="simple_link">Collegamento</string>
-    <string name="simple_italic">Corsivo</string>
     <string name="action_note_deleted">Eliminato %1$s</string>
     <string name="action_note_restored">Ripristinato %1$s</string>
     <string name="action_undo">Annulla</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
     <string name="error_synchronization">Sincronizzazione non riuscita</string>
-    <string name="error_json">L\'applicazione Note è attiva nel server?</string>
     <string name="error_no_network">Nessuna connessione di rete</string>
     <string name="error_unknown">Si è verificato un errore sconosciuto.</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Chiudi</string>
     <string name="simple_copy">Copia</string>
     <string name="simple_exception">Eccezione</string>
-    <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="pin_to_homescreen">Appunta alla schermata iniziale</string>
     <string name="note_has_been_deleted">Questa nota è stata eliminata</string>
     <string name="add_account">Aggiungi account</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">L\'account è già stato importato</string>
     <string name="no_notes_yet">Ancora nessuna nota</string>
     <string name="no_notes_yet_description">Premi il pulsante + per creare una nuova nota</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Impossibile caricare l\'anteprima. Controlla se c\'è un elemento dell\'elenco numerato con due cifre senza contenuto.</string>
     <string name="simple_more">Altro</string>
     <string name="simple_move">Sposta</string>
-    <string name="checkbox_could_not_be_toggled">La casella di selezione non può essere commutata.</string>
     <string name="category_readonly">Sola lettura</string>
     <string name="no_category">Nessuna categoria</string>
     <string name="add_category">Aggiungi %1$s</string>
     <string name="simple_checkbox">Casella di selezione</string>
     <string name="unlock_notes">Sblocca note</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Impossibile copiare negli appunti</string>
     <string name="error_dialog_title">Oh no - Cosa succede adesso? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prova a forzare la chiusura dell\'applicazione e riavviarla nuovamente. Potrebbe essersi verificato un problema di connessione all\'applicazione Nextcloud. </string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se il problema persiste, prova a cancellare l\'archiviazione di entrambe le applicazioni Nextcloud e Nextcloud Notes per risolver il problema.</string>
@@ -233,11 +226,6 @@
     <string name="formatting_help_code_body_2">Markdown supporta anche raggruppamenti di codice, che consente a righe multiple senza indentazione:</string>
     <string name="formatting_help_code_body_3">E se desideri utilizzare l\'evidenziazione della sintassi, includi il linguaggio:</string>
 
-    <string name="formatting_help_unsupported_title">Non supportato</string>
-    <string name="formatting_help_unsupported_body_1">Mentre proviamo a migliorare continuamente il supporto per Markdown, ci sono alcune funzionalità che non sono ancora supportate da Note:</string>
-    <string name="formatting_help_unsupported_body_2">Tabelle</string>
-    <string name="formatting_help_unsupported_body_3">Immagini</string>
-    <string name="formatting_help_unsupported_body_4">Se sei interessato a fornire supporto per una di queste funzionalità, contattaci tramite GitHub o email.</string>
     <string name="simple_other">Altro</string>
     <string name="sort_last_modified">Ordina per data di modifica</string>
     <string name="sort_alphabetically">Ordine alfabetico</string>

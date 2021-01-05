@@ -14,9 +14,7 @@
     <string name="simple_edit">编辑</string>
     <string name="action_edit_save">保存</string>
     <string name="simple_about">关于</string>
-    <string name="simple_bold">粗体</string>
     <string name="simple_link">链接</string>
-    <string name="simple_italic">斜体</string>
     <string name="action_note_deleted">已删除 %1$s</string>
     <string name="action_note_restored">已恢复 %1$s</string>
     <string name="action_undo">撤销</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">同步失败：%1$s</string>
     <string name="error_synchronization">同步失败</string>
-    <string name="error_json">是否已在服务器上启用了 笔记 应用？</string>
     <string name="error_no_network">没有网络连接</string>
     <string name="error_unknown">出现未知错误。</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">关闭</string>
     <string name="simple_copy">复制</string>
     <string name="simple_exception">异常</string>
-    <string name="copied_to_clipboard">复制到剪贴板</string>
     <string name="pin_to_homescreen">固定到主屏幕</string>
     <string name="note_has_been_deleted">此笔记已被删除</string>
     <string name="add_account">添加帐号</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">账号已被导入</string>
     <string name="no_notes_yet">还没有便签</string>
     <string name="no_notes_yet_description">按 + 按钮创建新笔记</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">无法加载预览。 请检查是否有两位数字编号的列表项没有内容。</string>
     <string name="simple_more">更多</string>
     <string name="simple_move">移动</string>
-    <string name="checkbox_could_not_be_toggled">无法切换复选框。</string>
     <string name="category_readonly">只读</string>
     <string name="no_category">没有分类</string>
     <string name="add_category">添加 %1$s</string>
     <string name="simple_checkbox">复选框</string>
     <string name="unlock_notes">解锁笔记</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">无法复制到剪贴板</string>
     <string name="error_dialog_title">哦，不。所以会怎么样？🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">请尝试强行关闭应用并重新打开。可能是与 Nextcloud 应用的连接不正确。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">如果问题持续存在，尝试通过清除 Nextcloud 和 Nextcloud 笔记两个应用的缓存来解决问题。</string>
@@ -229,11 +222,6 @@
     <string name="formatting_help_code_body_2">Markdown支持代码块，可以允许您写数行无格式文本</string>
     <string name="formatting_help_code_body_3">如果您想使用代码着色，请在这里设定使用的语言：</string>
 
-    <string name="formatting_help_unsupported_title">不支持</string>
-    <string name="formatting_help_unsupported_body_1">尽管我们尝试不断改善对Markdown的支持，但是Notes尚不支持如下功能：</string>
-    <string name="formatting_help_unsupported_body_2">表格</string>
-    <string name="formatting_help_unsupported_body_3">图片</string>
-    <string name="formatting_help_unsupported_body_4">如果您有兴趣贡献如上的一或数个功能的支持，请通过GitHub或电子邮件联系我们。</string>
     <string name="simple_other">其他</string>
     <string name="sort_last_modified">按修改日期排序</string>
     <string name="sort_alphabetically">按照字母表顺序排序</string>

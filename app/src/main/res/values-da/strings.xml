@@ -14,9 +14,7 @@
     <string name="simple_edit">Rediger</string>
     <string name="action_edit_save">Gem</string>
     <string name="simple_about">Om</string>
-    <string name="simple_bold">Fed</string>
     <string name="simple_link">Link</string>
-    <string name="simple_italic">Kursiv</string>
     <string name="action_note_deleted">%1$s blev slettet</string>
     <string name="action_note_restored">%1$s blev gendannet</string>
     <string name="action_undo">Fortryd</string>
@@ -49,7 +47,6 @@
 
     <string name="error_sync">Synkronisering fejlede: %1$s</string>
     <string name="error_synchronization">Synkroniseringen mislykkedes</string>
-    <string name="error_json">Er Noter appen aktiveret på serveren?</string>
     <string name="error_no_network">Ingen netværksforbindelse</string>
     <string name="error_unknown">En ukendt fejl er opstået</string>
 
@@ -96,7 +93,6 @@
     <string name="simple_close">Luk</string>
     <string name="simple_copy">Kopier</string>
     <string name="simple_exception">Undtagelse</string>
-    <string name="copied_to_clipboard">Kopieret til udklipsholder</string>
     <string name="pin_to_homescreen">Fastgør til hjemmeskærm</string>
     <string name="note_has_been_deleted">Denne note er blevet slettet</string>
     <string name="add_account">Tilføj konto</string>
@@ -107,17 +103,14 @@
     <string name="account_already_imported">Kontoen er allerede importeret</string>
     <string name="no_notes_yet">Ingen noter endnu</string>
     <string name="no_notes_yet_description">Tryk på + for at oprette en ny note</string>
-    <string name="could_not_load_preview_two_digit_numbered_list">Forhåndsvisningen kunne ikke indlæses. Kontroller om der er et listeemne nummereret med to cifre og uden indhold.</string>
     <string name="simple_more">Mere</string>
     <string name="simple_move">Flyt</string>
-    <string name="checkbox_could_not_be_toggled">Afrkydsningsfeltet kunne ikke skiftes.</string>
     <string name="category_readonly">Skrivebeskyttet</string>
     <string name="no_category">Ingen kategori</string>
     <string name="add_category">Tilføj %1$s</string>
     <string name="simple_checkbox">Afkrydsningsfeldt</string>
     <string name="unlock_notes">Lås noter op</string>
     <string name="simple_beta">Beta</string>
-    <string name="could_not_copy_to_clipboard">Kunne ikke kopiere til udklipsholderen</string>
     <string name="error_dialog_title">Åh nej - hvad nu? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Forsøg venligst at tvinge app\'en til at lukke og start den påny igen. Der kan have været en ukorrekt forbindelse til Nextcloud-app\'en.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet ikke løses, så forsøg at rydde lageret for begge apps: Nextcloud og Nextcloud Notes, for at løse problemet.</string>
@@ -199,8 +192,6 @@
     <string name="formatting_help_lists_body_3">To</string>
     <string name="formatting_help_lists_body_4">Tre</string>
     <string name="formatting_help_code_title">Kode</string>
-    <string name="formatting_help_unsupported_title">Ikke understøttet</string>
-    <string name="formatting_help_unsupported_body_3">Billeder</string>
     <string name="simple_other">Andet</string>
     <string name="sort_last_modified">Sortér efter dato ændret</string>
     <string name="sort_alphabetically">Sortér alfabetisk</string>
