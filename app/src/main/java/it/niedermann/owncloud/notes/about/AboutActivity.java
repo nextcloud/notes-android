@@ -5,17 +5,23 @@ import android.os.Bundle;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import it.niedermann.owncloud.notes.R;
+import com.google.android.material.tabs.TabLayoutMediator;
+
 import it.niedermann.owncloud.notes.LockedActivity;
+import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.databinding.ActivityAboutBinding;
 
 public class AboutActivity extends LockedActivity {
 
     private ActivityAboutBinding binding;
+    private final static int POS_CREDITS = 0;
+    private final static int POS_CONTRIB = 1;
+    private final static int POS_LICENSE = 2;
+    private final static int TOTAL_COUNT = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +31,22 @@ public class AboutActivity extends LockedActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
-        binding.pager.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
-        binding.tabs.setupWithViewPager(binding.pager);
+        binding.pager.setAdapter(new TabsStateAdapter(this));
+        // generate title based on given position
+        new TabLayoutMediator(binding.tabs, binding.pager, (tab, position) -> {
+            switch (position) {
+                default: // Fall-through to credits tab
+                case POS_CREDITS:
+                    tab.setText(R.string.about_credits_tab_title);
+                    break;
+                case POS_CONTRIB:
+                    tab.setText(R.string.about_contribution_tab_title);
+                    break;
+                case POS_LICENSE:
+                    tab.setText(R.string.about_license_tab_title);
+                    break;
+            }
+        }).attach();
     }
 
     @Override
@@ -36,15 +56,15 @@ public class AboutActivity extends LockedActivity {
         binding.tabs.setSelectedTabIndicatorColor(finalMainColor);
     }
 
-    private class TabsPagerAdapter extends FragmentPagerAdapter {
+    private static class TabsStateAdapter extends FragmentStateAdapter {
 
-        TabsPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        TabsStateAdapter(FragmentActivity fa) {
+            super(fa);
         }
 
         @Override
-        public int getCount() {
-            return 3;
+        public int getItemCount() {
+            return TOTAL_COUNT;
         }
 
         /**
@@ -52,36 +72,17 @@ public class AboutActivity extends LockedActivity {
          */
         @NonNull
         @Override
-        public Fragment getItem(int position) {
+        public Fragment createFragment(int position) {
             switch (position) {
-                case 1:
+                default: // Fall-through to credits tab
+                case POS_CREDITS:
+                    return new AboutFragmentCreditsTab();
+
+                case POS_CONTRIB:
                     return new AboutFragmentContributingTab();
 
-                case 2:
+                case POS_LICENSE:
                     return new AboutFragmentLicenseTab();
-
-                default:
-                    return new AboutFragmentCreditsTab();
-            }
-        }
-
-        /**
-         * generate title based on given position
-         */
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return getString(R.string.about_credits_tab_title);
-
-                case 1:
-                    return getString(R.string.about_contribution_tab_title);
-
-                case 2:
-                    return getString(R.string.about_license_tab_title);
-
-                default:
-                    return null;
             }
         }
     }
