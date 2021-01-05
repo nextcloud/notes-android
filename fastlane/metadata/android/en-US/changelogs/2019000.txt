@@ -1,0 +1,7 @@
+- 🆕 Replace RxMarkdown editor with Markwon editor (#549)
+- 📈 Render markdown tables (#190)
+- 🖼️ Show images in view mode and searchable (#807)
+- ✅ Multi level checkboxes
+- 🐞 StringIndexOutOfBoundsException (#908)
+- ✏️ Readonly mode must not allow editing of title (#983)
+- 🔍 Matched content does not been rendered while search (#999)
