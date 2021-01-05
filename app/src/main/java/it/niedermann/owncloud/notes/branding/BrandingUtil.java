@@ -13,6 +13,8 @@ import android.widget.EditText;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.preference.PreferenceManager;
 
@@ -43,7 +45,7 @@ public class BrandingUtil {
             Log.v(TAG, "--- Read: shared_preference_theme_main");
             return sharedPreferences.getInt(pref_key_branding_main, context.getApplicationContext().getResources().getColor(R.color.defaultBrand));
         } else {
-            return context.getResources().getColor(R.color.defaultBrand);
+            return ContextCompat.getColor(context, R.color.defaultBrand);
         }
     }
 
@@ -70,7 +72,7 @@ public class BrandingUtil {
         if (isBrandingEnabled(context) && context instanceof BrandedActivity) {
             if (mainColor != previousMainColor || textColor != previousTextColor) {
                 final BrandedActivity activity = (BrandedActivity) context;
-                activity.runOnUiThread(activity::recreate);
+                activity.runOnUiThread(() -> ActivityCompat.recreate(activity));
             }
         }
     }
@@ -80,7 +82,7 @@ public class BrandingUtil {
      */
     @ColorInt
     public static int getSecondaryForegroundColorDependingOnTheme(@NonNull Context context, @ColorInt int mainColor) {
-        final int primaryColor = context.getResources().getColor(R.color.primary);
+        final int primaryColor = ContextCompat.getColor(context, R.color.primary);
         final boolean isDarkTheme = NotesApplication.isDarkThemeActive(context);
         if (isDarkTheme && !contrastRatioIsSufficient(mainColor, primaryColor)) {
             Log.v(TAG, "Contrast ratio between brand color " + String.format("#%06X", (0xFFFFFF & mainColor)) + " and dark theme is too low. Falling back to WHITE as brand color.");

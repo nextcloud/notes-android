@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
@@ -770,7 +771,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
             case server_settings: {
                 // Recreate activity completely, because theme switching makes problems when only invalidating the views.
                 // @see https://github.com/stefan-niedermann/nextcloud-notes/issues/529
-                recreate();
+                ActivityCompat.recreate(this);
                 break;
             }
             case manage_account: {
