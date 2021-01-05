@@ -22,17 +22,21 @@ public class InterceptedURLSpan extends URLSpan {
 
     @Override
     public void onClick(View widget) {
-        new Thread(() -> {
-            for (Function<String, Boolean> callback : onLinkClickCallbacks) {
-                try {
-                    if (callback.apply(getURL())) {
-                        return;
+        if (onLinkClickCallbacks.size() > 0) {
+            new Thread(() -> {
+                for (Function<String, Boolean> callback : onLinkClickCallbacks) {
+                    try {
+                        if (callback.apply(getURL())) {
+                            return;
+                        }
+                    } catch (Throwable t) {
+                        Log.w(TAG, t.getMessage(), t);
                     }
-                } catch (Throwable t) {
-                    Log.w(TAG, t.getMessage(), t);
                 }
-            }
+                super.onClick(widget);
+            }).start();
+        } else {
             super.onClick(widget);
-        }).start();
+        }
     }
 }

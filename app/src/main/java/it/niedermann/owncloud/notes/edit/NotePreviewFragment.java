@@ -81,20 +81,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        binding.singleNoteContent.registerOnLinkClickCallback((link) -> {
-            try {
-                final long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
-                final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
-                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
-                startActivity(intent);
-                return true;
-            } catch (NumberFormatException e) {
-                Log.v(TAG, "Clicked link \"" + link + "\" is not a " + Long.class.getSimpleName() + ". Do not try to treat it as another note.");
-            } catch (IllegalArgumentException e) {
-                Log.i(TAG, "It looks like \"" + link + "\" might be a remote id of a note, but a note with this remote id could not be found.", e);
-            }
-            return false;
-        });
+
+        registerInternalNoteLinkHandler();
         binding.singleNoteContent.setMarkdownString(note.getContent());
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
         changedText = note.getContent();
@@ -111,6 +99,23 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         binding.singleNoteContent.getMarkdownString().observe(requireActivity(), (newContent) -> {
             changedText = newContent.toString();
             saveNote(null);
+        });
+    }
+
+    protected void registerInternalNoteLinkHandler() {
+        binding.singleNoteContent.registerOnLinkClickCallback((link) -> {
+            try {
+                final long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
+                final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
+                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
+                startActivity(intent);
+                return true;
+            } catch (NumberFormatException e) {
+                Log.v(TAG, "Clicked link \"" + link + "\" is not a " + Long.class.getSimpleName() + ". Do not try to treat it as another note.");
+            } catch (IllegalArgumentException e) {
+                Log.i(TAG, "It looks like \"" + link + "\" might be a remote id of a note, but a note with this remote id could not be found.", e);
+            }
+            return false;
         });
     }
 

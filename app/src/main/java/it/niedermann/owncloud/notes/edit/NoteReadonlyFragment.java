@@ -40,6 +40,11 @@ public class NoteReadonlyFragment extends NotePreviewFragment {
     }
 
     @Override
+    protected void registerInternalNoteLinkHandler() {
+        // Do nothing
+    }
+
+    @Override
     public void showEditTitleDialog() {
         // Do nothing
     }
