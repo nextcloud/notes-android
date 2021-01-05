@@ -52,6 +52,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacer_2x"
+                android:layout_marginBottom="@dimen/spacer_1x"
+                android:adjustViewBounds="true"
                 android:contentDescription="@string/context_based_formatting"
                 android:src="@drawable/context_based_formatting" />
 
@@ -70,6 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacer_2x"
+                android:adjustViewBounds="true"
                 android:contentDescription="@null"
                 android:src="@mipmap/ic_launcher" />
         </LinearLayout>
