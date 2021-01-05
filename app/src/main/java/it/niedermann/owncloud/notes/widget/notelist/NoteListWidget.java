@@ -11,6 +11,8 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.R;
@@ -94,7 +96,7 @@ public class NoteListWidget extends AppWidgetProvider {
                         views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", localAccount.getTextColor());
                         views.setTextColor(R.id.widget_note_list_title_tv_dark, localAccount.getTextColor());
                     } else {
-                        views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
+                        views.setInt(R.id.widget_note_header_dark, "setBackgroundColor", ContextCompat.getColor(context, R.color.defaultBrand));
                         views.setInt(R.id.widget_note_header_icon_dark, "setColorFilter", Color.WHITE);
                         views.setInt(R.id.widget_note_list_create_icon_dark, "setColorFilter", Color.WHITE);
                         views.setTextColor(R.id.widget_note_list_title_tv_dark, Color.WHITE);
@@ -115,7 +117,7 @@ public class NoteListWidget extends AppWidgetProvider {
                         views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", localAccount.getTextColor());
                         views.setTextColor(R.id.widget_note_list_title_tv, localAccount.getTextColor());
                     } else {
-                        views.setInt(R.id.widget_note_header, "setBackgroundColor", context.getResources().getColor(R.color.defaultBrand));
+                        views.setInt(R.id.widget_note_header, "setBackgroundColor", ContextCompat.getColor(context, R.color.defaultBrand));
                         views.setInt(R.id.widget_note_header_icon, "setColorFilter", Color.WHITE);
                         views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", Color.WHITE);
                         views.setTextColor(R.id.widget_note_list_title_tv, Color.WHITE);

@@ -1,14 +1,10 @@
 package it.niedermann.owncloud.notes.shared.util;
 
-import android.os.Build;
-import android.text.Html;
-import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-
-import static android.os.Build.VERSION_CODES.N;
+import androidx.core.text.HtmlCompat;
 
 /**
  * Some helper functionality in alike the Android support library.
@@ -28,24 +24,8 @@ public class SupportUtil {
      * @param formatArgs Arguments for the string resource.
      */
     public static void setHtml(@NonNull TextView view, int stringId, Object... formatArgs) {
-        view.setText(SupportUtil.fromHtml(view.getResources().getString(stringId, formatArgs)));
+        view.setText(HtmlCompat.fromHtml(
+                view.getResources().getString(stringId, formatArgs), HtmlCompat.FROM_HTML_MODE_LEGACY));
         view.setMovementMethod(LinkMovementMethod.getInstance());
-    }
-
-    /**
-     * Creates a {@link Spanned} from a HTML string on all SDK versions.
-     *
-     * @param source Source string with HTML markup
-     * @return Spannable for using in a {@link TextView}
-     * @see Html#fromHtml(String)
-     * @see Html#fromHtml(String, int)
-     */
-    private static Spanned fromHtml(String source) {
-        if (Build.VERSION.SDK_INT >= N) {
-            return Html.fromHtml(source, Html.FROM_HTML_MODE_LEGACY);
-        } else {
-            //noinspection deprecation
-            return Html.fromHtml(source);
-        }
     }
 }

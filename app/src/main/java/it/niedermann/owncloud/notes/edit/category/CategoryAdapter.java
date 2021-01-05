@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,17 +51,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         switch (category.id) {
             case addItemId:
-                Drawable wrapDrawable = DrawableCompat.wrap(context.getResources().getDrawable(category.icon));
-                DrawableCompat.setTint(wrapDrawable, context.getResources().getColor(R.color.icon_color_default));
+                Drawable wrapDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, category.icon));
+                DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(context, R.color.icon_color_default));
                 categoryViewHolder.getIcon().setImageDrawable(wrapDrawable);
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryAdded());
                 break;
             case clearItemId:
-                categoryViewHolder.getIcon().setImageDrawable(context.getResources().getDrawable(category.icon));
+                categoryViewHolder.getIcon().setImageDrawable(ContextCompat.getDrawable(context, category.icon));
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryCleared());
                 break;
             default:
-                categoryViewHolder.getIcon().setImageDrawable(context.getResources().getDrawable(category.icon));
+                categoryViewHolder.getIcon().setImageDrawable(ContextCompat.getDrawable(context, category.icon));
                 categoryViewHolder.getCategoryWrapper().setOnClickListener((v) -> listener.onCategoryChosen(category.label));
                 break;
         }

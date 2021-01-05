@@ -29,6 +29,7 @@ import android.text.style.MetricAffectingSpan;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,7 +90,7 @@ public class DisplayUtils {
             this.mainColor = mainColor;
             this.textColor = textColor;
             this.current = current;
-            this.highlightColor = context.getResources().getColor(R.color.bg_highlighted);
+            this.highlightColor = ContextCompat.getColor(context, R.color.bg_highlighted);
         }
 
         @Override
