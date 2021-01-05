@@ -106,14 +106,13 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         binding.singleNoteContent.registerOnLinkClickCallback((link) -> {
             try {
                 final long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
-                final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
-                intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
-                startActivity(intent);
+                Log.i(TAG, "Found note for remoteId \"" + link + "\" in account \"" + this.note.getAccountId() + "\" with localId + \"" + noteLocalId + "\". Attempt to open " + EditNoteActivity.class.getSimpleName() + " for this note.");
+                startActivity(new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId));
                 return true;
             } catch (NumberFormatException e) {
-                Log.v(TAG, "Clicked link \"" + link + "\" is not a " + Long.class.getSimpleName() + ". Do not try to treat it as another note.");
+                // Clicked link is not a long and therefore can't be a remote id.
             } catch (IllegalArgumentException e) {
-                Log.i(TAG, "It looks like \"" + link + "\" might be a remote id of a note, but a note with this remote id could not be found.", e);
+                Log.i(TAG, "It looks like \"" + link + "\" might be a remote id of a note, but a note with this remote id could not be found in account \"" + note.getAccountId() + "\" .", e);
             }
             return false;
         });
