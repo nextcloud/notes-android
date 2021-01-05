@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,16 +29,14 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.shared.util.NoteLinksUtils;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
-import it.niedermann.owncloud.notes.shared.util.text.NoteLinksProcessor;
-import it.niedermann.owncloud.notes.shared.util.text.TextProcessorChain;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.getFontSizeFromPreferences;
 
 public class NotePreviewFragment extends SearchableBaseNoteFragment implements OnRefreshListener {
+
+    private static final String TAG = NotePreviewFragment.class.getSimpleName();
 
     private String changedText;
 
@@ -83,18 +82,20 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         binding.singleNoteContent.registerOnLinkClickCallback((link) -> {
-            if (NoteLinksUtils.isNoteLink(link)) {
-                final long noteRemoteId = NoteLinksUtils.extractNoteRemoteId(link);
-                final long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), noteRemoteId);
+            try {
+                final long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
                 final Intent intent = new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class);
                 intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId);
                 startActivity(intent);
                 return true;
+            } catch (NumberFormatException e) {
+                Log.v(TAG, "Clicked link \"" + link + "\" is not a " + Long.class.getSimpleName() + ". Do not try to treat it as another note.");
+            } catch (IllegalArgumentException e) {
+                Log.i(TAG, "It looks like \"" + link + "\" might be a remote id of a note, but a note with this remote id could not be found.", e);
             }
             return false;
         });
-        final TextProcessorChain chain = defaultTextProcessorChain(note);
-        binding.singleNoteContent.setMarkdownString(chain.apply(note.getContent()));
+        binding.singleNoteContent.setMarkdownString(note.getContent());
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
         changedText = note.getContent();
 
@@ -131,12 +132,11 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         if (db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
             try {
-                TextProcessorChain chain = defaultTextProcessorChain(note);
                 SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext());
                 db.getNoteServerSyncHelper().addCallbackPull(ssoAccount, () -> {
                     note = db.getNote(note.getAccountId(), note.getId());
                     changedText = note.getContent();
-                    binding.singleNoteContent.setMarkdownString(chain.apply(note.getContent()));
+                    binding.singleNoteContent.setMarkdownString(note.getContent());
                     binding.swiperefreshlayout.setRefreshing(false);
                 });
                 db.getNoteServerSyncHelper().scheduleSync(ssoAccount, false);
@@ -154,12 +154,6 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         super.applyBrand(mainColor, textColor);
         binding.singleNoteContent.setSearchColor(mainColor);
         binding.singleNoteContent.setHighlightColor(getTextHighlightBackgroundColor(requireContext(), mainColor, colorPrimary, colorAccent));
-    }
-
-    private TextProcessorChain defaultTextProcessorChain(DBNote note) {
-        TextProcessorChain chain = new TextProcessorChain();
-        chain.add(new NoteLinksProcessor(db.getRemoteIds(note.getAccountId())));
-        return chain;
     }
 
     public static BaseNoteFragment newInstance(long accountId, long noteId) {

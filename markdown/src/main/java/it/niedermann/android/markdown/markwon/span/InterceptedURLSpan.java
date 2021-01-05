@@ -1,6 +1,7 @@
 package it.niedermann.android.markdown.markwon.span;
 
 import android.text.style.URLSpan;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,8 @@ import java.util.Collection;
 import java.util.function.Function;
 
 public class InterceptedURLSpan extends URLSpan {
+
+    private static final String TAG = InterceptedURLSpan.class.getSimpleName();
     @NonNull
     private final Collection<Function<String, Boolean>> onLinkClickCallbacks;
 
@@ -19,11 +22,17 @@ public class InterceptedURLSpan extends URLSpan {
 
     @Override
     public void onClick(View widget) {
-        for (Function<String, Boolean> callback : onLinkClickCallbacks) {
-            if (callback.apply(getURL())) {
-                return;
+        new Thread(() -> {
+            for (Function<String, Boolean> callback : onLinkClickCallbacks) {
+                try {
+                    if (callback.apply(getURL())) {
+                        return;
+                    }
+                } catch (Throwable t) {
+                    Log.w(TAG, t.getMessage(), t);
+                }
             }
-        }
-        super.onClick(widget);
+            super.onClick(widget);
+        }).start();
     }
 }
