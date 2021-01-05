@@ -240,7 +240,7 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
         return fragment;
     }
 
-    public static BaseNoteFragment newInstanceWithNewNote(CloudNote newNote) {
+    public static BaseNoteFragment newInstanceWithNewNote(Note newNote) {
         final BaseNoteFragment fragment = new NoteEditFragment();
         final Bundle args = new Bundle();
         args.putSerializable(PARAM_NEWNOTE, newNote);

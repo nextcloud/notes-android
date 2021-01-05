@@ -27,6 +27,8 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.FragmentNotePreviewBinding;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.SSOUtil;
 
 import static androidx.core.view.ViewCompat.isAttachedToWindow;
@@ -107,7 +109,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     protected void registerInternalNoteLinkHandler() {
         binding.singleNoteContent.registerOnLinkClickCallback((link) -> {
             try {
-                final long noteLocalId = db.getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
+                final long noteLocalId = db.getNoteDao().getLocalIdByRemoteId(this.note.getAccountId(), Long.parseLong(link));
                 Log.i(TAG, "Found note for remoteId \"" + link + "\" in account \"" + this.note.getAccountId() + "\" with localId + \"" + noteLocalId + "\". Attempt to open " + EditNoteActivity.class.getSimpleName() + " for this note.");
                 startActivity(new Intent(requireActivity().getApplicationContext(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, noteLocalId));
                 return true;
