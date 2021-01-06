@@ -6,12 +6,12 @@ import android.text.TextWatcher;
 import androidx.annotation.NonNull;
 
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
-import it.niedermann.android.markdown.markwon.model.EListType;
+import it.niedermann.android.markdown.model.EListType;
 
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.getListItemIfIsEmpty;
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.getOrderedListNumber;
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.getStartOfLine;
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.lineStartsWithCheckbox;
+import static it.niedermann.android.markdown.MarkdownUtil.getListItemIfIsEmpty;
+import static it.niedermann.android.markdown.MarkdownUtil.getOrderedListNumber;
+import static it.niedermann.android.markdown.MarkdownUtil.getStartOfLine;
+import static it.niedermann.android.markdown.MarkdownUtil.lineStartsWithCheckbox;
 
 /**
  * Automatically continues lists and checkbox lists when pressing enter

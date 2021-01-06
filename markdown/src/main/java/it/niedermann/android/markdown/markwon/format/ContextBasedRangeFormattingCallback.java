@@ -12,7 +12,7 @@ import android.view.MenuItem;
 
 import it.niedermann.android.markdown.R;
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
-import it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil;
+import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.android.util.ClipboardUtil;
 
 public class ContextBasedRangeFormattingCallback implements ActionMode.Callback {
@@ -55,7 +55,7 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
             final int selectionStart = editText.getSelectionStart();
             final int selectionEnd = editText.getSelectionEnd();
             if (selectionStart >= 0 && selectionStart <= text.length()) {
-                if (MarkwonMarkdownUtil.selectionIsInLink(text, selectionStart, selectionEnd)) {
+                if (MarkdownUtil.selectionIsInLink(text, selectionStart, selectionEnd)) {
                     menu.findItem(R.id.link).setVisible(false);
                     Log.i(TAG, "Hide link menu item because the selection is already within a link.");
                 }
@@ -75,17 +75,17 @@ public class ContextBasedRangeFormattingCallback implements ActionMode.Callback 
             final int end = editText.getSelectionEnd();
 
             if (itemId == R.id.bold) {
-                final int newSelection = MarkwonMarkdownUtil.togglePunctuation(editable, start, end, "**");
+                final int newSelection = MarkdownUtil.togglePunctuation(editable, start, end, "**");
                 editText.setMarkdownStringModel(editable);
                 editText.setSelection(newSelection);
                 return true;
             } else if (itemId == R.id.italic) {
-                final int newSelection = MarkwonMarkdownUtil.togglePunctuation(editable, start, end, "*");
+                final int newSelection = MarkdownUtil.togglePunctuation(editable, start, end, "*");
                 editText.setMarkdownStringModel(editable);
                 editText.setSelection(newSelection);
                 return true;
             } else if (itemId == R.id.link) {
-                final int newSelection = MarkwonMarkdownUtil.insertLink(editable, start, end, ClipboardUtil.INSTANCE.getClipboardURLorNull(editText.getContext()));
+                final int newSelection = MarkdownUtil.insertLink(editable, start, end, ClipboardUtil.INSTANCE.getClipboardURLorNull(editText.getContext()));
                 editText.setMarkdownStringModel(editable);
                 editText.setSelection(newSelection);
                 return true;
