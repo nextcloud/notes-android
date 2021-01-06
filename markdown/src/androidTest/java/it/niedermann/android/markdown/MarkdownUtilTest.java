@@ -597,17 +597,17 @@ public class MarkdownUtilTest extends TestCase {
             final Context context = ApplicationProvider.getApplicationContext();
 
             final Editable editable_1 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
-            editable_1.setSpan(new SearchSpan(context, Color.RED, false), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            editable_1.setSpan(new SearchSpan(Color.RED, Color.GRAY, false, false), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             editable_1.setSpan(new ForegroundColorSpan(Color.BLUE), 6, 11, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            editable_1.setSpan(new SearchSpan(context, Color.GREEN, true), 12, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            editable_1.setSpan(new SearchSpan(Color.BLUE, Color.GREEN, true, false), 12, 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             removeSpans.invoke(null, editable_1, SearchSpan.class);
             assertEquals(0, editable_1.getSpans(0, editable_1.length(), SearchSpan.class).length);
             assertEquals(1, editable_1.getSpans(0, editable_1.length(), ForegroundColorSpan.class).length);
 
             final Editable editable_2 = new SpannableStringBuilder("Lorem Ipsum dolor sit amet");
-            editable_2.setSpan(new SearchSpan(context, Color.RED, false), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            editable_2.setSpan(new SearchSpan(Color.GRAY, Color.RED, false, true), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             editable_2.setSpan(new ForegroundColorSpan(Color.BLUE), 2, 7, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            editable_2.setSpan(new SearchSpan(context, Color.GREEN, true), 3, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            editable_2.setSpan(new SearchSpan(Color.BLUE, Color.GREEN, true, false), 3, 9, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             removeSpans.invoke(null, editable_2, SearchSpan.class);
             assertEquals(0, editable_2.getSpans(0, editable_2.length(), SearchSpan.class).length);
             assertEquals(1, editable_2.getSpans(0, editable_2.length(), ForegroundColorSpan.class).length);
