@@ -1,4 +1,4 @@
-package it.niedermann.android.markdown.markwon.model;
+package it.niedermann.android.markdown.model;
 
 public enum EListType {
     STAR('*'),

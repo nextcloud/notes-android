@@ -8,13 +8,13 @@ import android.view.MenuItem;
 
 import it.niedermann.android.markdown.R;
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
-import it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil;
-import it.niedermann.android.markdown.markwon.model.EListType;
+import it.niedermann.android.markdown.MarkdownUtil;
+import it.niedermann.android.markdown.model.EListType;
 import it.niedermann.android.util.ClipboardUtil;
 
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.getEndOfLine;
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.getStartOfLine;
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.lineStartsWithCheckbox;
+import static it.niedermann.android.markdown.MarkdownUtil.getEndOfLine;
+import static it.niedermann.android.markdown.MarkdownUtil.getStartOfLine;
+import static it.niedermann.android.markdown.MarkdownUtil.lineStartsWithCheckbox;
 
 public class ContextBasedFormattingCallback implements ActionMode.Callback {
 
@@ -65,7 +65,7 @@ public class ContextBasedFormattingCallback implements ActionMode.Callback {
                 editText.setSelection(cursorPosition + EListType.DASH.checkboxUncheckedWithTrailingSpace.length());
                 return true;
             } else if (itemId == R.id.link) {
-                final int newSelection = MarkwonMarkdownUtil.insertLink(editable, cursorPosition, cursorPosition, ClipboardUtil.INSTANCE.getClipboardURLorNull(editText.getContext()));
+                final int newSelection = MarkdownUtil.insertLink(editable, cursorPosition, cursorPosition, ClipboardUtil.INSTANCE.getClipboardURLorNull(editText.getContext()));
                 editText.setMarkdownStringModel(editable);
                 editText.setSelection(newSelection);
                 return true;

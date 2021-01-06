@@ -18,6 +18,10 @@ import io.noties.markwon.Markwon;
 import io.noties.markwon.editor.MarkwonEditor;
 import io.noties.markwon.editor.handler.EmphasisEditHandler;
 import io.noties.markwon.editor.handler.StrongEmphasisEditHandler;
+import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
+import io.noties.markwon.image.ImagesPlugin;
+import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
+import io.noties.markwon.simple.ext.SimpleExtPlugin;
 import it.niedermann.android.markdown.MarkdownEditor;
 import it.niedermann.android.markdown.markwon.format.ContextBasedFormattingCallback;
 import it.niedermann.android.markdown.markwon.format.ContextBasedRangeFormattingCallback;
@@ -26,6 +30,8 @@ import it.niedermann.android.markdown.markwon.handler.CodeBlockEditHandler;
 import it.niedermann.android.markdown.markwon.handler.CodeEditHandler;
 import it.niedermann.android.markdown.markwon.handler.HeadingEditHandler;
 import it.niedermann.android.markdown.markwon.handler.StrikethroughEditHandler;
+import it.niedermann.android.markdown.markwon.plugins.SearchHighlightPlugin;
+import it.niedermann.android.markdown.markwon.plugins.ThemePlugin;
 import it.niedermann.android.markdown.markwon.textwatcher.CombinedTextWatcher;
 import it.niedermann.android.markdown.markwon.textwatcher.SearchHighlightTextWatcher;
 
@@ -46,22 +52,37 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
 
     public MarkwonMarkdownEditor(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        final Markwon markwon = MarkwonMarkdownUtil.initMarkwonEditor(context).build();
-        final MarkwonEditor editor = MarkwonEditor.builder(markwon)
-                .useEditHandler(new EmphasisEditHandler())
-                .useEditHandler(new StrongEmphasisEditHandler())
-                .useEditHandler(new StrikethroughEditHandler())
-                .useEditHandler(new CodeEditHandler())
-                .useEditHandler(new CodeBlockEditHandler())
-                .useEditHandler(new BlockQuoteEditHandler())
-                .useEditHandler(new HeadingEditHandler())
-                .build();
+
+        final Markwon markwon = createMarkwonBuilder(context).build();
+        final MarkwonEditor editor = createMarkwonEditorBuilder(markwon).build();
+
         combinedWatcher = new CombinedTextWatcher(editor, this);
         addTextChangedListener(combinedWatcher);
         setCustomSelectionActionModeCallback(new ContextBasedRangeFormattingCallback(this));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(this));
         }
+    }
+
+    private static Markwon.Builder createMarkwonBuilder(@NonNull Context context) {
+        return Markwon.builder(context)
+                .usePlugin(ThemePlugin.create(context))
+                .usePlugin(StrikethroughPlugin.create())
+                .usePlugin(SimpleExtPlugin.create())
+                .usePlugin(ImagesPlugin.create())
+                .usePlugin(MarkwonInlineParserPlugin.create())
+                .usePlugin(SearchHighlightPlugin.create(context));
+    }
+
+    private static MarkwonEditor.Builder createMarkwonEditorBuilder(@NonNull Markwon markwon) {
+        return MarkwonEditor.builder(markwon)
+                .useEditHandler(new EmphasisEditHandler())
+                .useEditHandler(new StrongEmphasisEditHandler())
+                .useEditHandler(new StrikethroughEditHandler())
+                .useEditHandler(new CodeEditHandler())
+                .useEditHandler(new CodeBlockEditHandler())
+                .useEditHandler(new BlockQuoteEditHandler())
+                .useEditHandler(new HeadingEditHandler());
     }
 
     @Override
