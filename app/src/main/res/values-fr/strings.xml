@@ -233,4 +233,4 @@
     <string name="error_action_open_deck_info">Ouvrir les informations de l\'application</string>
     <string name="error_action_open_network">Paramètres réseau</string>
     <string name="no_other_accounts">Vous n\'avez pas encore configuré d\'autres comptes.</string>
-</resources>
+    </resources>

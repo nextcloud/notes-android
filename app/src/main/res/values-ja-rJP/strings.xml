@@ -229,4 +229,4 @@
     <string name="error_action_open_deck_info">アプリ情報を開く</string>
     <string name="error_action_open_network">ネットワーク設定</string>
     <string name="no_other_accounts">他のアカウントはまだ設定されていません。</string>
-</resources>
+    </resources>

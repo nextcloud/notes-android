@@ -229,4 +229,4 @@
     <string name="error_action_open_deck_info">打开应用信息</string>
     <string name="error_action_open_network">网络设置</string>
     <string name="no_other_accounts">您尚未配置任何其他帐户。</string>
-</resources>
+    </resources>

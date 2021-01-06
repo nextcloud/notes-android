@@ -229,4 +229,4 @@
     <string name="error_action_open_deck_info">앱 정보 열기</string>
     <string name="error_action_open_network">네트워크 환경설정</string>
     <string name="no_other_accounts">아직 다른 계정을 구성하지 않았습니다.</string>
-</resources>
+    </resources>

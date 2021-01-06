@@ -241,4 +241,4 @@
     <string name="error_action_open_deck_info">Открыть информацию о приложении</string>
     <string name="error_action_open_network">Параметры сети</string>
     <string name="no_other_accounts">Вы еще не настроили ни одного аккаунта</string>
-</resources>
+    </resources>
