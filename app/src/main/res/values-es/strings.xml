@@ -189,6 +189,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Formato basado en el contexto</string>
     <string name="formatting_help_cbf_body_1">Un objetivo principal de diseño de la app Notas es ofrecer una herramienta libre de distracciones. Aunque podrás formatear tus textos con Markdown. Para varios de los ejemplos mencionados debajo, puedes usar atajos para formatear las notas sin escribir los códigos.</string>
@@ -226,6 +227,13 @@
     <string name="formatting_help_code_body_2">Markdown también soporta el llamado vallado de código, que permite líneas múltiples sin indentación:</string>
     <string name="formatting_help_code_body_3">Y si quieres usar subrayado de sintaxis, incluye el lenguaje:</string>
 
+    <string name="formatting_help_tables_title">Tablas</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Columna %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Valor %1d</string>
+
+    <string name="formatting_help_images_title">Imágenes</string>
     <string name="simple_other">Otro</string>
     <string name="sort_last_modified">Ordenar por fecha de modificación</string>
     <string name="sort_alphabetically">Ordenar alfabéticamente</string>

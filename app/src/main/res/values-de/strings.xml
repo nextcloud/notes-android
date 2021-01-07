@@ -189,6 +189,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Kontextbasierte Formatierung</string>
     <string name="formatting_help_cbf_body_1">Ein wichtiges Designziel der Notes-App ist die Bereitstellung eines ablenkungsfreien Werkzeugs. Sie können Ihre Texte mit Markdown formatieren. Für verschiedene der unten genannten Beispiele können Sie Verknüpfungen verwenden, um Ihre Notizen zu formatieren, ohne die folgenden Codes eingeben zu müssen.</string>
@@ -226,6 +227,15 @@
     <string name="formatting_help_code_body_2">Markdown unterstützt auch das sogenannte Code-Fencing, das mehrere Zeilen ohne Einrückung zulässt:</string>
     <string name="formatting_help_code_body_3">Wenn Sie die Syntaxhervorhebung verwenden möchten, geben Sie folgendes ein:</string>
 
+    <string name="formatting_help_tables_title">Tabellen</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Spalte %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Wert %1d</string>
+
+    <string name="formatting_help_images_title">Bilder</string>
+    <string name="formatting_help_images_alt">Ausgefallenes Bild</string>
+
     <string name="simple_other">Andere</string>
     <string name="sort_last_modified">Nach Änderungsdatum sortieren</string>
     <string name="sort_alphabetically">Alphabetisch sortieren</string>
@@ -233,4 +243,5 @@
     <string name="error_action_open_deck_info">App-Informationen öffnen</string>
     <string name="error_action_open_network">Netzwerkeinstellungen</string>
     <string name="no_other_accounts">Sie haben bislang keine weiteren Konten eingerichtet.</string>
-    </resources>
+    <string name="context_based_formatting">Popup für die kontextbasierte Formatierung</string>
+</resources>
