@@ -111,6 +111,7 @@
     <string name="simple_checkbox">核取方塊</string>
     <string name="unlock_notes">解鎖筆記</string>
     <string name="simple_beta">Beta 測試版</string>
+    <string name="error_dialog_title">喔不 - 現在怎麼辦？🙁</string>
     <string name="error_dialog_we_need_info">我們需要以下的技術資訊來幫助您：</string>
     <string name="added_content">已加入「%1$s」</string>
     <string name="shared_text_empty">分享的文字是空的</string>

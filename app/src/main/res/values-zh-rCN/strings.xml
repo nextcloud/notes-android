@@ -185,6 +185,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">‘%1$s’</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">```` </string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">基于格式的文本</string>
     <string name="formatting_help_cbf_body_1">Notes应用程序的主要设计目标是提供无干扰的工具。 因此您将能够使用Markdown设置文本格式。 对于下面提到的各种示例，您可以使用快捷方式，以便无需输入以下代码即可格式化笔记。</string>
@@ -222,6 +223,15 @@
     <string name="formatting_help_code_body_2">Markdown支持代码块，可以允许您写数行无格式文本</string>
     <string name="formatting_help_code_body_3">如果您想使用代码着色，请在这里设定使用的语言：</string>
 
+    <string name="formatting_help_tables_title">表格</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">列 %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">值 %1d</string>
+
+    <string name="formatting_help_images_title">图片</string>
+    <string name="formatting_help_images_alt">精致图片</string>
+
     <string name="simple_other">其他</string>
     <string name="sort_last_modified">按修改日期排序</string>
     <string name="sort_alphabetically">按照字母表顺序排序</string>
@@ -229,4 +239,5 @@
     <string name="error_action_open_deck_info">打开应用信息</string>
     <string name="error_action_open_network">网络设置</string>
     <string name="no_other_accounts">您尚未配置任何其他帐户。</string>
-    </resources>
+    <string name="context_based_formatting">基于上下文的格式弹出窗口 </string>
+</resources>
