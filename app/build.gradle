@@ -13,8 +13,8 @@ android {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 2019000
-        versionName "2.19.0"
+        versionCode 3000000
+        versionName "3.0.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

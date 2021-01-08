@@ -140,9 +140,6 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
                 }
             }
 
-//             workaround for issue yydcdut/RxMarkdown#41
-//            note.setContent(note.getContent().replace("\r\n", "\n"));
-
             binding.editContent.setMarkdownString(note.getContent());
             binding.editContent.setEnabled(true);
 
