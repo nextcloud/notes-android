@@ -197,6 +197,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">» %1$s «</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Vsebinsko oblikovanje</string>
     <string name="formatting_help_cbf_body_1">Najpomembnejša funkcija programa Notes je enostavno in hitro beleženje besedila, ki ga je mogoče tudi oblikovati z oblikovnim jezikom Markdown. Za spodaj omenjeno oblikovanje, je mogoče uporabiti tipkovne bližnjice, kar še dodatno poenostavi vnos..</string>
@@ -234,6 +235,15 @@
     <string name="formatting_help_code_body_2">Oblikovni jezik Markdown podpira tudi tako imenovano obrobljanje kode, kar omogoča zapis več vrstic brez zamika:</string>
     <string name="formatting_help_code_body_3">Če bi želeli uporabiti poudarjanje skladnje, vključite tudi jezik:</string>
 
+    <string name="formatting_help_tables_title">Razpredelnice</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Stolpec %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Vrednost %1d</string>
+
+    <string name="formatting_help_images_title">Slike</string>
+    <string name="formatting_help_images_alt">Posebna slika</string>
+
     <string name="simple_other">Drugo</string>
     <string name="sort_last_modified">Razvrsti po datumu spremembe</string>
     <string name="sort_alphabetically">Razvrsti abecedno</string>
@@ -241,4 +251,5 @@
     <string name="error_action_open_deck_info">Odpri podrobnosti programa</string>
     <string name="error_action_open_network">Nastavitve omrežja</string>
     <string name="no_other_accounts">Ni nastavljenega nobenega drugega računa</string>
-    </resources>
+    <string name="context_based_formatting">Pojavno okno vsebinskega oblikovanja</string>
+</resources>
