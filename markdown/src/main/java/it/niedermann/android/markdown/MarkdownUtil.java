@@ -62,7 +62,7 @@ public class MarkdownUtil {
      * Therefore we currently use {@link HtmlCompat} to filter supported spans from the output of {@link HtmlRenderer} as an intermediate step.
      */
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
-        String html = renderer.render(parser.parse(content.toString()));
+        String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(content)));
         // Emojis are only available on Marshmallow
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             html = html.replace("[ ]", "☐");
