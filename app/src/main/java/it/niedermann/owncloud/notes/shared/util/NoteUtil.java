@@ -97,7 +97,7 @@ public class NoteUtil {
     }
 
     /**
-     * Reads the requested line and strips all MarkDown. If line is empty, it will go ahead to find the next not-empty line.
+     * Reads the requested line and strips all Markdown. If line is empty, it will go ahead to find the next not-empty line.
      *
      * @param content    String
      * @param lineNumber int

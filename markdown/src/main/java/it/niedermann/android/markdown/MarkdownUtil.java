@@ -350,10 +350,10 @@ public class MarkdownUtil {
     }
 
     /**
-     * Strips all MarkDown from the given String
+     * Strips all Markdown from the given String
      *
-     * @param s String - MarkDown
-     * @return Plain Text-String
+     * @param s Markdown string
+     * @return Plain text string
      */
     @NonNull
     public static String removeMarkdown(@Nullable String s) {

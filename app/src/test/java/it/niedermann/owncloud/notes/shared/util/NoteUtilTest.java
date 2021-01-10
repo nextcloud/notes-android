@@ -17,7 +17,7 @@ public class NoteUtilTest extends TestCase {
         assertFalse(NoteUtil.isEmptyLine("a \n "));
     }
 
-    public void testGetLineWithoutMarkDown() {
+    public void testGetLineWithoutMarkdown() {
         assertEquals("Test", NoteUtil.getLineWithoutMarkdown("Test", 0));
         assertEquals("Test", NoteUtil.getLineWithoutMarkdown("\nTest", 0));
         assertEquals("Foo", NoteUtil.getLineWithoutMarkdown("Foo\nBar", 0));

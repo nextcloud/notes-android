@@ -628,7 +628,7 @@ public class MarkdownUtilTest extends TestCase {
     }
 
     @Test
-    public void testRemoveMarkDown() {
+    public void testRemoveMarkdown() {
         assertEquals("Test", MarkdownUtil.removeMarkdown("Test"));
         assertEquals("Foo\nBar", MarkdownUtil.removeMarkdown("Foo\nBar"));
         assertEquals("Foo\nBar", MarkdownUtil.removeMarkdown("Foo\n  Bar"));
