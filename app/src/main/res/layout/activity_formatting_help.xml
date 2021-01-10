@@ -37,7 +37,7 @@
             android:orientation="vertical"
             android:padding="@dimen/spacer_2x">
 
-            <it.niedermann.android.markdown.markwon.MarkwonMarkdownViewer
+            <it.niedermann.android.markdown.MarkdownViewerImpl
                 android:id="@+id/content_context_based_formatting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:contentDescription="@string/context_based_formatting"
                 android:src="@drawable/context_based_formatting" />
 
-            <it.niedermann.android.markdown.markwon.MarkwonMarkdownViewer
+            <it.niedermann.android.markdown.MarkdownViewerImpl
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

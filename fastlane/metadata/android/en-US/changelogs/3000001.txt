@@ -1,6 +1,7 @@
 3.0.1
 
 - 🐞 Fix overriding of manually set title when editing/exiting a new note (#935) (❤️ @johahauf)
+- 🐞 Switch to View mode crashes (#1038)
 - 🌍 Updated translations
 
 3.0.0
