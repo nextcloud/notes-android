@@ -76,11 +76,14 @@ public class NotesDatabase extends AbstractNotesDatabase {
 
     private static NotesDatabase instance;
 
+    private final String defaultNonEmptyTitle;
+
     private final NoteServerSyncHelper serverSyncHelper;
 
     private NotesDatabase(@NonNull Context context) {
         super(context, database_name, null);
         serverSyncHelper = NoteServerSyncHelper.getInstance(this);
+        defaultNonEmptyTitle = NoteUtil.generateNonEmptyNoteTitle("", context);
     }
 
     public static NotesDatabase getInstance(Context context) {
@@ -547,7 +550,7 @@ public class NotesDatabase extends AbstractNotesDatabase {
                 title = newTitle;
             } else {
                 if ((oldNote.getRemoteId() == 0 || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0)  &&
-                    (oldNote.getTitle().equals(NoteUtil.generateNonEmptyNoteTitle("", getContext())))) {
+                    (defaultNonEmptyTitle.equals(oldNote.getTitle()))) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, getContext());
                 } else {
                     title = oldNote.getTitle();
