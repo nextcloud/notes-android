@@ -24,7 +24,6 @@ android {
 
 ext {
     markwonVersion = "4.6.2"
-    rxMarkdownVersion = "0.1.3"
 }
 
 dependencies {
@@ -53,9 +52,6 @@ dependencies {
     }
     annotationProcessor "io.noties:prism4j-bundler:2.0.0"
     implementation 'org.jetbrains:annotations:20.1.0'
-
-    implementation "com.yydcdut:markdown-processor:$rxMarkdownVersion"
-    implementation "com.yydcdut:rxmarkdown-wrapper:$rxMarkdownVersion"
 
     implementation 'androidx.multidex:multidex:2.0.1'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
