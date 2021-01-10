@@ -189,6 +189,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Opmaat context gebaseerd</string>
     <string name="formatting_help_cbf_body_1">Het ontwerpdoel van de Notes-app is om een afleidingsvrij hulpmiddel te bieden. Maar je kunt altijd je teksten opmaken met Markdown. Voor verschillende van de onderstaande voorbeelden kunt je snelcodes gebruiken, zodat je notities kunt opmaken zonder de onderstaande codes in te typen.</string>
@@ -226,6 +227,15 @@
     <string name="formatting_help_code_body_2">Markdown ondersteunt ook iets dat \"code fencing\" wordt genoemd, wat meerdere regels mogelijk maakt zonder inspringen:</string>
     <string name="formatting_help_code_body_3">En als je syntaxisaccentuering wilt gebruiken, neemt dan deze taal op:</string>
 
+    <string name="formatting_help_tables_title">Tabellen</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Kolom %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Waarde %1d</string>
+
+    <string name="formatting_help_images_title">Afbeeldingen</string>
+    <string name="formatting_help_images_alt">Leuke afbeelding</string>
+
     <string name="simple_other">Ander</string>
     <string name="sort_last_modified">Op wijzigingsdatum sorteren</string>
     <string name="sort_alphabetically">Op alfabet sorteren</string>
@@ -233,4 +243,5 @@
     <string name="error_action_open_deck_info">Open App informatie</string>
     <string name="error_action_open_network">Netwerk instellingen</string>
     <string name="no_other_accounts">U heeft nog geen andere accounts geconfigureerd.</string>
-    </resources>
+    <string name="context_based_formatting">Context gebaseerde formatterings-popover</string>
+</resources>
