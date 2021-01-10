@@ -23,8 +23,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.noties.markwon.Markwon;
-import it.niedermann.android.markdown.model.SearchSpan;
 import it.niedermann.android.markdown.model.EListType;
+import it.niedermann.android.markdown.model.SearchSpan;
 
 public class MarkdownUtil {
 
@@ -297,7 +297,7 @@ public class MarkdownUtil {
         return false;
     }
 
-    public static void searchAndColor(@NonNull Spannable editable, @Nullable CharSequence searchText,@Nullable Integer current, @ColorInt int mainColor, @ColorInt int highlightColor, boolean darkTheme) {
+    public static void searchAndColor(@NonNull Spannable editable, @Nullable CharSequence searchText, @Nullable Integer current, @ColorInt int mainColor, @ColorInt int highlightColor, boolean darkTheme) {
         if (searchText != null) {
             final Matcher m = Pattern
                     .compile(searchText.toString(), Pattern.CASE_INSENSITIVE | Pattern.LITERAL)
@@ -336,5 +336,9 @@ public class MarkdownUtil {
             textView.setText(spannableContent, TextView.BufferType.SPANNABLE);
             return spannableContent;
         }
+    }
+
+    public static String getMarkdownLink(@NonNull String text, @NonNull String url) {
+        return "[" + text + "](" + url + ")";
     }
 }

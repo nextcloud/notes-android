@@ -1,7 +1,7 @@
 package it.niedermann.owncloud.notes;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -9,8 +9,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.main.MainActivity;
+import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class AppendToNoteActivity extends MainActivity {
 
@@ -22,8 +23,7 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Intent receivedIntent = getIntent();
-        receivedText = receivedIntent.getStringExtra(Intent.EXTRA_TEXT);
+        receivedText = ShareUtil.extractSharedText(getIntent());
         @Nullable final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             getSupportActionBar().setTitle(R.string.append_to_note);
@@ -35,7 +35,7 @@ public class AppendToNoteActivity extends MainActivity {
 
     @Override
     public void onNoteClick(int position, View v) {
-        if (receivedText != null && receivedText.length() > 0) {
+        if (!TextUtils.isEmpty(receivedText)) {
             final DBNote note = db.getNote(localAccount.getId(), ((DBNote) adapter.getItem(position)).getId());
             final String oldContent = note.getContent();
             String newContent;

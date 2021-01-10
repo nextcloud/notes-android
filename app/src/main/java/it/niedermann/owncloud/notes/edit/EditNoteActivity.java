@@ -15,19 +15,23 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Calendar;
 import java.util.Objects;
 
+import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
+import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
+import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountPickerListener {
 
@@ -170,7 +174,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                         (Intent.ACTION_SEND.equals(intent.getAction()) ||
                                 INTENT_GOOGLE_ASSISTANT.equals(intent.getAction()))
         ) {
-            content = intent.getStringExtra(Intent.EXTRA_TEXT);
+            content = ShareUtil.extractSharedText(intent);
         } else if (intent.hasExtra(PARAM_CONTENT)) {
             content = intent.getStringExtra(PARAM_CONTENT);
         }
