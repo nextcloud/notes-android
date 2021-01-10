@@ -35,6 +35,13 @@ public class MarkdownUtil {
     private static final String[] MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_EMPTY_DESCRIPTION};
     private static final String[] MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_SPACE_DESCRIPTION};
 
+    private static final Pattern PATTERN_LISTS = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
+    private static final Pattern PATTERN_HEADINGS = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
+    private static final Pattern PATTERN_HEADING_LINE = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
+    private static final Pattern PATTERN_EMPHASIS = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
+    private static final Pattern PATTERN_SPACE_1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
+    private static final Pattern PATTERN_SPACE_2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
+
     private static final Pattern PATTERN_CODE_FENCE = Pattern.compile("^(`{3,})");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM = Pattern.compile("^(\\d+).\\s.+$");
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
@@ -340,5 +347,25 @@ public class MarkdownUtil {
 
     public static String getMarkdownLink(@NonNull String text, @NonNull String url) {
         return "[" + text + "](" + url + ")";
+    }
+
+    /**
+     * Strips all MarkDown from the given String
+     *
+     * @param s String - MarkDown
+     * @return Plain Text-String
+     */
+    @NonNull
+    public static String removeMarkdown(@Nullable String s) {
+        if (s == null)
+            return "";
+        String result = s;
+        result = PATTERN_LISTS.matcher(result).replaceAll("");
+        result = PATTERN_HEADINGS.matcher(result).replaceAll("$1");
+        result = PATTERN_HEADING_LINE.matcher(result).replaceAll("");
+        result = PATTERN_EMPHASIS.matcher(result).replaceAll("$2");
+        result = PATTERN_SPACE_1.matcher(result).replaceAll("");
+        result = PATTERN_SPACE_2.matcher(result).replaceAll("");
+        return result;
     }
 }

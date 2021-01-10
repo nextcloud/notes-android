@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 /**
@@ -46,7 +47,7 @@ public class CloudNote implements Serializable {
     }
 
     public void setTitle(String title) {
-        this.title = NoteUtil.removeMarkDown(title);
+        this.title = MarkdownUtil.removeMarkdown(title);
     }
 
     public Calendar getModified() {
