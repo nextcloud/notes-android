@@ -1,5 +1,6 @@
 3.1.0
 - 🌐 Save page title when sharing from browser (#1032)
+- ↩️ Soft break adds new line
 
 3.0.1
 

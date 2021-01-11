@@ -1,7 +1,6 @@
 package it.niedermann.android.markdown.markwon;
 
 import android.content.Context;
-import android.content.res.Configuration;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -20,6 +19,7 @@ import java.util.function.Function;
 
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.SoftBreakAddsNewLinePlugin;
 import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
 import io.noties.markwon.ext.tables.TablePlugin;
 import io.noties.markwon.ext.tasklist.TaskListPlugin;
@@ -85,6 +85,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
                 .usePlugin(LinkifyPlugin.create(true))
                 .usePlugin(LinkClickInterceptorPlugin.create())
                 .usePlugin(ImagesPlugin.create())
+                .usePlugin(SoftBreakAddsNewLinePlugin.create())
                 .usePlugin(SyntaxHighlightPlugin.create(prism4j, prism4jTheme))
                 .usePlugin(new ToggleableTaskListPlugin((toggledCheckboxPosition, newCheckedState) -> {
                     final CharSequence oldUnrenderedText = unrenderedText$.getValue();
