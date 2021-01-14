@@ -28,24 +28,31 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
     public AutoContinuationTextWatcher(@NonNull TextWatcher originalWatcher, @NonNull MarkwonMarkdownEditor editText) {
         super(originalWatcher);
         this.editText = editText;
+        MarkwonMarkdownEditor.log("Initialize " + AutoContinuationTextWatcher.class.getSimpleName());
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+        MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [onTextChanged] with " + s + "|" + start + "|" + before + "|" + count);
         if (count == 1 && s.charAt(start) == '\n') {
+            MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [onTextChanged] count == 1 && s.charAt(start == \\n");
             handleNewlineInserted(s, start, count);
         }
+        MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [onTextChanged] passing to originalWatcher");
         originalWatcher.onTextChanged(s, start, before, count);
     }
 
     @Override
     public void afterTextChanged(Editable s) {
+        MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [afterTextChanged]");
         if (customText != null) {
             final CharSequence customText = this.customText;
             this.customText = null;
             if (isInsert) {
+                MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [afterTextChanged] - isInsert");
                 insertCustomText(s, customText);
             } else {
+                MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [afterTextChanged] - NOT isInsert");
                 deleteCustomText(s, customText);
             }
         } else {
@@ -55,20 +62,24 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
     }
 
     private void deleteCustomText(Editable s, CharSequence customText) {
+        MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [deleteCustomText] with customText = " + customText);
         s.replace(sequenceStart, sequenceStart + customText.length() + 1, "\n");
         editText.setSelection(sequenceStart + 1);
     }
 
     private void insertCustomText(Editable s, CharSequence customText) {
+        MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [insertCustomText] with customText = " + customText);
         s.insert(sequenceStart, customText);
     }
 
     private void handleNewlineInserted(CharSequence originalSequence, int start, int count) {
+        MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [handleNewlineInserted] with " + start + "|" + count);
         final CharSequence s = originalSequence.subSequence(0, originalSequence.length());
         final int startOfLine = getStartOfLine(s, start);
         final String line = s.subSequence(startOfLine, start).toString();
 
         final String emptyListString = getListItemIfIsEmpty(line);
+        MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [handleNewlineInserted] emptyListString = " + emptyListString);
         if (emptyListString != null) {
             customText = emptyListString;
             isInsert = false;

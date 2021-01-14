@@ -14,6 +14,14 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.ArrayList;
+import java.util.List;
+
 import io.noties.markwon.Markwon;
 import io.noties.markwon.editor.MarkwonEditor;
 import io.noties.markwon.editor.handler.EmphasisEditHandler;
@@ -39,6 +47,8 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
 
     private static final String TAG = MarkwonMarkdownEditor.class.getSimpleName();
 
+    private static final List<String> LOGS = new ArrayList<>();
+
     private final MutableLiveData<CharSequence> unrenderedText$ = new MutableLiveData<>();
     private final CombinedTextWatcher combinedWatcher;
 
@@ -56,12 +66,14 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
         final Markwon markwon = createMarkwonBuilder(context).build();
         final MarkwonEditor editor = createMarkwonEditorBuilder(markwon).build();
 
+        MarkwonMarkdownEditor.log(MarkwonMarkdownEditor.class.getSimpleName() + " [constructor] attempt to add " + CombinedTextWatcher.class.getSimpleName());
         combinedWatcher = new CombinedTextWatcher(editor, this);
         addTextChangedListener(combinedWatcher);
         setCustomSelectionActionModeCallback(new ContextBasedRangeFormattingCallback(this));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             setCustomInsertionActionModeCallback(new ContextBasedFormattingCallback(this));
         }
+        MarkwonMarkdownEditor.log(MarkwonMarkdownEditor.class.getSimpleName() + " [constructor] added " + CombinedTextWatcher.class.getSimpleName());
     }
 
     private static Markwon.Builder createMarkwonBuilder(@NonNull Context context) {
@@ -83,6 +95,15 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
                 .useEditHandler(new CodeBlockEditHandler())
                 .useEditHandler(new BlockQuoteEditHandler())
                 .useEditHandler(new HeadingEditHandler());
+    }
+
+    public static void log(String s) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM).withZone(ZoneId.systemDefault());
+        LOGS.add(dtf.format(LocalDateTime.now().atZone(ZoneId.systemDefault())) + " → " + s);
+    }
+
+    public static List<String> getLogs() {
+        return LOGS;
     }
 
     @Override
