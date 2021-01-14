@@ -19,6 +19,7 @@ public class CombinedTextWatcher extends HashMap<Class<?>, TextWatcher> implemen
 
     @SuppressWarnings("ConstantConditions")
     public CombinedTextWatcher(@NonNull MarkwonEditor editor, @NonNull MarkwonMarkdownEditor editText) {
+        MarkwonMarkdownEditor.log(CombinedTextWatcher.class.getSimpleName() + " [constructor]");
         put(MarkwonEditorTextWatcher.class, MarkwonEditorTextWatcher.withPreRender(editor, Executors.newSingleThreadExecutor(), editText));
         put(AutoContinuationTextWatcher.class, new AutoContinuationTextWatcher(get(MarkwonEditorTextWatcher.class), editText));
         put(SearchHighlightTextWatcher.class, new SearchHighlightTextWatcher(get(AutoContinuationTextWatcher.class), editText));
