@@ -33,22 +33,18 @@ jobs:
           api-level: 29
           script: ./gradlew connectAndroidTest --stacktrace
 
-  CodeQL Scan:
-    name: Analyze
+  codeql:
+    name: CodeQL security scan
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'java', 'javascript' ]
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v2
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
-          languages: ${{ matrix.language }}
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v1
+          languages: java
+      - name: Build debug APK
+        run: bash ./gradlew assembleDev --stacktrace
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
 
