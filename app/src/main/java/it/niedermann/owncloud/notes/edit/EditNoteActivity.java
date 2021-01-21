@@ -3,7 +3,6 @@ package it.niedermann.owncloud.notes.edit;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,8 +18,6 @@ import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Objects;
 
-import it.niedermann.android.markdown.markwon.MarkwonMarkdownEditor;
-import it.niedermann.android.util.ClipboardUtil;
 import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
@@ -65,14 +62,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         }
 
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setOnClickListener((v) -> {
-            ClipboardUtil.INSTANCE.copyToClipboard(this,
-                    "```\n" +
-                    "Markdown Editor logs:\n\n" +
-                    TextUtils.join("\n", MarkwonMarkdownEditor.getLogs()) + "\n" +
-                    "```"
-            );
-        });
+        binding.toolbar.setOnClickListener((v) -> fragment.showEditTitleDialog());
     }
 
     @Override
