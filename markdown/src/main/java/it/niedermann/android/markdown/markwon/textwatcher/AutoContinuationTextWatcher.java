@@ -38,7 +38,7 @@ public class AutoContinuationTextWatcher extends InterceptorTextWatcher {
         MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [onTextChanged] with " + s + "|" + start + "|" + before + "|" + count);
         if (count > 0) {
             CharSequence inserted = getInsertedString(s, start, before, count);
-            if (inserted.length() == 1 && inserted.charAt(0)=='\n'){
+            if (inserted.length() > 0 && inserted.charAt(inserted.length()-1)=='\n'){
                 MarkwonMarkdownEditor.log(AutoContinuationTextWatcher.class.getSimpleName() + " [onTextChanged] count == 1 && s.charAt(start == \\n");
                 handleNewlineInserted(s, start, count);
             }
