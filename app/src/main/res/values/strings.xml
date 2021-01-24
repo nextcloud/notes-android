@@ -292,6 +292,7 @@
     <string name="error_action_open_battery_settings">Battery settings</string>
     <string name="error_action_open_deck_info">Open App info</string>
     <string name="error_action_open_network">Network settings</string>
+    <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
     <string name="context_based_formatting">Context based formatting popover</string>
 </resources>

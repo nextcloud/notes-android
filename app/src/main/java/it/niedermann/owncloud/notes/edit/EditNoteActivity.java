@@ -6,10 +6,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
+
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -50,6 +55,16 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        try {
+            if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) == null) {
+                throw new NoCurrentAccountSelectedException();
+            }
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            Toast.makeText(this, R.string.no_account_configured_yet, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
         binding = ActivityEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
