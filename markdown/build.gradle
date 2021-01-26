@@ -23,7 +23,7 @@ android {
 }
 
 ext {
-    markwonVersion = "4.6.1"
+    markwonVersion = "4.6.2-SNAPSHOT"
     rxMarkdownVersion = "0.1.3"
 }
 
