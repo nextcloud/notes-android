@@ -4,7 +4,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-
     }
     dependencies {
         apply plugin: 'maven'
@@ -20,5 +19,6 @@ allprojects {
         google()
         jcenter()
         maven { url "https://jitpack.io" }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
 }
