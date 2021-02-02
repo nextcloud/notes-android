@@ -7,17 +7,17 @@ import android.content.res.Configuration;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.multidex.MultiDexApplication;
 import androidx.preference.PreferenceManager;
 
 import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 
-import static androidx.multidex.MultiDex.install;
 import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 
-public class NotesApplication extends Application {
+public class NotesApplication extends MultiDexApplication {
     private static final String TAG = NotesApplication.class.getSimpleName();
 
-    private static final long LOCK_TIME = 30 * 1000;
+    private static final long LOCK_TIME = 30_000;
     private static boolean lockedPreference = false;
     private static boolean isLocked = true;
     private static long lastInteraction = 0;
@@ -32,12 +32,6 @@ public class NotesApplication extends Application {
         lockedPreference = prefs.getBoolean(getString(R.string.pref_key_lock), false);
         isGridViewEnabled = getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_gridview), false);
         super.onCreate();
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        install(this);
     }
 
     public static void setAppTheme(DarkModeSetting setting) {

@@ -7,14 +7,15 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
     }
 
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 3001001
-        versionName "3.1.1"
+        versionCode 3001002
+        versionName "3.1.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -75,10 +76,11 @@ dependencies {
     implementation "androidx.preference:preference:1.1.1"
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
-    implementation 'androidx.work:work-runtime:2.4.0'
+    implementation 'androidx.work:work-runtime:2.5.0'
     implementation "com.google.android.material:material:1.2.1"
 
     implementation 'androidx.multidex:multidex:2.0.1'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
 
     // Testing
     testImplementation 'junit:junit:4.13.1'
