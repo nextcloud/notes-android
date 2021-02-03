@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -34,9 +35,15 @@ public interface MarkdownEditor {
     }
 
     /**
-     * @return the source {@link String} of the currently rendered markdown
+     * @return the source {@link CharSequence} of the currently rendered markdown
      */
     LiveData<CharSequence> getMarkdownString();
+
+    /**
+     * Similar to {@link #getMarkdownString()} but without {@link LiveData}.
+     * @param onChange a {@link Consumer} which will receive the changed markdown string.
+     */
+    void registerMarkdownStringChangedListener(@NonNull Consumer<CharSequence> onChange);
 
     void setEnabled(boolean enabled);
 
