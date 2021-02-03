@@ -12,8 +12,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -55,7 +53,8 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
     private static final Prism4j prism4j = new Prism4j(new MarkwonGrammarLocator());
 
     private Markwon markwon;
-    private final Collection<Consumer<CharSequence>> markdownStringListeners = new LinkedList<>();
+    @Nullable
+    private Consumer<CharSequence> listener = null;
     private final MutableLiveData<CharSequence> unrenderedText$ = new MutableLiveData<>();
 
     private final ExecutorService renderService;
@@ -130,7 +129,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
     public void setMarkdownString(CharSequence text) {
         final CharSequence previousText = this.unrenderedText$.getValue();
         this.unrenderedText$.setValue(text);
-        for (Consumer<CharSequence> listener : markdownStringListeners) {
+        if (listener != null) {
             listener.accept(text);
         }
         if (TextUtils.isEmpty(text)) {
@@ -174,7 +173,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
     }
 
     @Override
-    public void registerMarkdownStringChangedListener(@NonNull Consumer<CharSequence> onChange) {
-        this.markdownStringListeners.add(onChange);
+    public void setMarkdownStringChangedListener(@Nullable Consumer<CharSequence> listener) {
+        this.listener = listener;
     }
 }
