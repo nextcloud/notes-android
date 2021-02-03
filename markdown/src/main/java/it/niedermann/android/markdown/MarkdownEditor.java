@@ -40,10 +40,11 @@ public interface MarkdownEditor {
     LiveData<CharSequence> getMarkdownString();
 
     /**
-     * Similar to {@link #getMarkdownString()} but without {@link LiveData}.
-     * @param onChange a {@link Consumer} which will receive the changed markdown string.
+     * Similar to {@link #getMarkdownString()} but without {@link LiveData}. Will remove previously set {@link Consumer}s.
+     *
+     * @param listener a {@link Consumer} which will receive the changed markdown string.
      */
-    void registerMarkdownStringChangedListener(@NonNull Consumer<CharSequence> onChange);
+    void setMarkdownStringChangedListener(@Nullable Consumer<CharSequence> listener);
 
     void setEnabled(boolean enabled);
 
