@@ -78,7 +78,6 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
                 .usePlugin(ThemePlugin.create(context))
                 .usePlugin(StrikethroughPlugin.create())
                 .usePlugin(SimpleExtPlugin.create())
-                .usePlugin(ImagesPlugin.create())
                 .usePlugin(MarkwonInlineParserPlugin.create())
                 .usePlugin(SearchHighlightPlugin.create(context))
                 .usePlugin(TablePlugin.create(context))
