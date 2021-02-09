@@ -242,6 +242,7 @@
     <string name="error_action_open_battery_settings">Paràmetres de la bateria</string>
     <string name="error_action_open_deck_info">Obre la informació de l\'aplicació</string>
     <string name="error_action_open_network">Paràmetres de la xarxa</string>
+    <string name="no_account_configured_yet">Encara no s\'ha configurat cap compte</string>
     <string name="no_other_accounts">Encara no heu configurat cap altre compte.</string>
     <string name="context_based_formatting">Element emergent de format basat en el context</string>
 </resources>

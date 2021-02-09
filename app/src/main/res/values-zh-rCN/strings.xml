@@ -238,6 +238,7 @@
     <string name="error_action_open_battery_settings">电池设置</string>
     <string name="error_action_open_deck_info">打开应用信息</string>
     <string name="error_action_open_network">网络设置</string>
+    <string name="no_account_configured_yet">尚未配置账户</string>
     <string name="no_other_accounts">您尚未配置任何其他帐户。</string>
     <string name="context_based_formatting">基于上下文的格式弹出窗口 </string>
 </resources>

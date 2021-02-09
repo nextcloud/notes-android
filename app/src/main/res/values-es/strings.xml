@@ -234,11 +234,15 @@
     <string name="formatting_help_tables_value">Valor %1d</string>
 
     <string name="formatting_help_images_title">Imágenes</string>
+    <string name="formatting_help_images_alt">Imagen elegante</string>
+
     <string name="simple_other">Otro</string>
     <string name="sort_last_modified">Ordenar por fecha de modificación</string>
     <string name="sort_alphabetically">Ordenar alfabéticamente</string>
     <string name="error_action_open_battery_settings">Ajustes de batería</string>
     <string name="error_action_open_deck_info">Abrir info de la app</string>
     <string name="error_action_open_network">Configuración de red</string>
+    <string name="no_account_configured_yet">Todavía no hay una cuenta configurada</string>
     <string name="no_other_accounts">Aún no ha configurado ninguna otra cuenta.</string>
-    </resources>
+    <string name="context_based_formatting">Ventana emergente para formato basado en el contexto</string>
+</resources>
