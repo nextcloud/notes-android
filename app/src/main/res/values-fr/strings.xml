@@ -189,6 +189,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Mise en forme contextuelle</string>
     <string name="formatting_help_cbf_body_1">Un but majeur de l\'app Notes est de fournir une application de note sans distraction, bien que vous pussiez formater vos textes avec Markdown. Pour les divers exemples mentionnés ci-dessous, vous pouvez utiliser des raccourcis afin de pouvoir formater vos notes sans taper les codes ci-dessous. </string>
@@ -226,11 +227,22 @@
     <string name="formatting_help_code_body_2">Markdown supporte aussi quelque chose appelé \"code fencing\", qui permet plusieurs lignes sans indentation.</string>
     <string name="formatting_help_code_body_3">Et si vous voulez utiliser la coloration syntaxique, incluez le langage.</string>
 
+    <string name="formatting_help_tables_title">Tableaux</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Colonne %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Valeur %1d</string>
+
+    <string name="formatting_help_images_title">Images</string>
+    <string name="formatting_help_images_alt">Image retouchée</string>
+
     <string name="simple_other">Divers</string>
     <string name="sort_last_modified">Tirer par date de dernière modification</string>
     <string name="sort_alphabetically">Trier alphabétiquement</string>
     <string name="error_action_open_battery_settings">Paramètres de batterie</string>
     <string name="error_action_open_deck_info">Ouvrir les informations de l\'application</string>
     <string name="error_action_open_network">Paramètres réseau</string>
+    <string name="no_account_configured_yet">Aucun compte n\'est encore configuré</string>
     <string name="no_other_accounts">Vous n\'avez pas encore configuré d\'autres comptes.</string>
-    </resources>
+    <string name="context_based_formatting">Suggestions de mise en forme contextuelle</string>
+</resources>

@@ -242,6 +242,7 @@
     <string name="error_action_open_battery_settings">Batterij instellingen</string>
     <string name="error_action_open_deck_info">Open App informatie</string>
     <string name="error_action_open_network">Netwerk instellingen</string>
+    <string name="no_account_configured_yet">Nog geen account geconfigureerd</string>
     <string name="no_other_accounts">U heeft nog geen andere accounts geconfigureerd.</string>
     <string name="context_based_formatting">Context gebaseerde formatterings-popover</string>
 </resources>

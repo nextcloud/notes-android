@@ -242,5 +242,7 @@
     <string name="error_action_open_battery_settings">Impostazioni batteria</string>
     <string name="error_action_open_deck_info">Apri informazioni applicazione</string>
     <string name="error_action_open_network">Impostazioni di rete</string>
+    <string name="no_account_configured_yet">Ancora nessun account configurato</string>
     <string name="no_other_accounts">Non hai configurato ancora alcun account.</string>
-    </resources>
+    <string name="context_based_formatting">Finestra di formattazione basata sul contesto</string>
+</resources>

@@ -242,6 +242,7 @@
     <string name="error_action_open_battery_settings">Axustes da batería</string>
     <string name="error_action_open_deck_info">Abrir a info da apli</string>
     <string name="error_action_open_network">Axustes da rede</string>
+    <string name="no_account_configured_yet">Aínda non hai ningunha conta configurada</string>
     <string name="no_other_accounts">Aínda non ten configurada ningunha outra conta.</string>
     <string name="context_based_formatting">Xanela emerxente de formato baseado no contexto</string>
 </resources>
