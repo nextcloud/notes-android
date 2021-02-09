@@ -23,6 +23,7 @@ import io.noties.markwon.SoftBreakAddsNewLinePlugin;
 import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
 import io.noties.markwon.ext.tables.TablePlugin;
 import io.noties.markwon.ext.tasklist.TaskListPlugin;
+import io.noties.markwon.image.DefaultDownScalingMediaDecoder;
 import io.noties.markwon.image.ImagesPlugin;
 import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
 import io.noties.markwon.linkify.LinkifyPlugin;
@@ -77,14 +78,13 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
                 .usePlugin(ThemePlugin.create(context))
                 .usePlugin(StrikethroughPlugin.create())
                 .usePlugin(SimpleExtPlugin.create())
-                .usePlugin(ImagesPlugin.create())
                 .usePlugin(MarkwonInlineParserPlugin.create())
                 .usePlugin(SearchHighlightPlugin.create(context))
                 .usePlugin(TablePlugin.create(context))
                 .usePlugin(TaskListPlugin.create(context))
                 .usePlugin(LinkifyPlugin.create(true))
                 .usePlugin(LinkClickInterceptorPlugin.create())
-                .usePlugin(ImagesPlugin.create())
+                .usePlugin(ImagesPlugin.create(plugin -> plugin.defaultMediaDecoder(DefaultDownScalingMediaDecoder.create(context.getResources().getDisplayMetrics().widthPixels, 0))))
                 .usePlugin(SoftBreakAddsNewLinePlugin.create())
                 .usePlugin(SyntaxHighlightPlugin.create(prism4j, prism4jTheme))
                 .usePlugin(new ToggleableTaskListPlugin((toggledCheckboxPosition, newCheckedState) -> {
