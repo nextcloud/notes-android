@@ -197,6 +197,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Formatowanie kontekstowe</string>
     <string name="formatting_help_cbf_body_1">Głównym celem projektowym aplikacji Notes jest zapewnienie narzędzia bez rozpraszania uwagi. Chociaż będziesz mógł sformatować swoje teksty za pomocą Markdown. W przypadku różnych wymienionych poniżej przykładów możesz użyć skrótów, dzięki czemu możesz sformatować swoje notatki bez wpisywania poniższych kodów.</string>
@@ -234,11 +235,22 @@
     <string name="formatting_help_code_body_2">Markdown obsługuje również coś, co nazywa się szermierką kodu, która pozwala na wiele linii bez wcięć:</string>
     <string name="formatting_help_code_body_3">A jeśli chcesz użyć podświetlania składni, uwzględnij język:</string>
 
+    <string name="formatting_help_tables_title">Tabele</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Kolumna %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Wartość %1d</string>
+
+    <string name="formatting_help_images_title">Obrazy</string>
+    <string name="formatting_help_images_alt">Fantazyjny obraz</string>
+
     <string name="simple_other">Inne</string>
     <string name="sort_last_modified">Sortuj według daty modyfikacji</string>
     <string name="sort_alphabetically">Sortuj alfabetycznie</string>
     <string name="error_action_open_battery_settings">Ustawienia baterii</string>
     <string name="error_action_open_deck_info">Otwórz informacje o aplikacji</string>
     <string name="error_action_open_network">Ustawienia sieci</string>
+    <string name="no_account_configured_yet">Nie skonfigurowano jeszcze konta</string>
     <string name="no_other_accounts">Nie masz jeszcze skonfigurowanych żadnych innych kont.</string>
+    <string name="context_based_formatting">Okno podręczne formatowania opartego na kontekście</string>
 </resources>

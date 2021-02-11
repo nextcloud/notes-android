@@ -1,0 +1,24 @@
+3.0.1
+
+- 🐞 Fix overriding of manually set title when editing/exiting a new note (#935) (❤️ @johahauf)
+- 🐞 Switch to View mode crashes (#1038)
+- 🌍 Updated translations
+
+3.0.0
+
+- ❓ Update formatting section (#1020)
+- 🌍 Updated translations
+
+2.19.0
+
+- 🆕 Replace RxMarkdown viewer with Markwon viewer (#549)
+- 📈 Render markdown tables (#190)
+- 🖼️ Show images in view mode (#807)
+- ✅ Multi level checkboxes
+- ✏️ Readonly mode must not allow editing of title (#983)
+- 🔍 Matched content does not been rendered while search (#999)
+- 🐞 Fix StringIndexOutOfBoundsException (#908)
+
+2.18.0
+
+- Replace RxMarkdown editor with Markwon editor (Does not yet affect the viewer) (#549)

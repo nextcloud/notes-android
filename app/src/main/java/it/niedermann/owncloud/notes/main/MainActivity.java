@@ -23,12 +23,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.selection.SelectionTracker;
-import androidx.recyclerview.selection.SelectionTracker.SelectionObserver;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -81,7 +79,6 @@ import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.LOLLIPOP;
 import static android.os.Build.VERSION_CODES.O;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -420,7 +417,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         tracker = ItemSelectionTracker.build(listView, adapter);
         adapter.setTracker(tracker);
-        tracker.addObserver(new SelectionObserver<Long>() {
+        tracker.addObserver(new SelectionTracker.SelectionObserver<Long>() {
                                 @Override
                                 public void onSelectionChanged() {
                                     super.onSelectionChanged();
@@ -513,9 +510,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
         binding.headerView.setBackgroundColor(mainColor);
         binding.appName.setTextColor(textColor);
-        if (SDK_INT >= LOLLIPOP) {
-            activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
-        }
+        activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
 
         // TODO We assume, that the background of the spinner is always white
         activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : Color.BLACK);
@@ -664,12 +659,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
     private void updateToolbars(boolean disableSearch) {
         activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
         activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
-        if (SDK_INT >= LOLLIPOP) {
-            activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(),
-                    disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
-        } else {
-            ViewCompat.setElevation(activityBinding.appBar, disableSearch ? 0 : getResources().getDimension(R.dimen.design_appbar_elevation));
-        }
+        activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(),
+                disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
         if (disableSearch) {
             activityBinding.searchView.setQuery(null, true);
         }

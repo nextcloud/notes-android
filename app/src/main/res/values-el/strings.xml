@@ -172,10 +172,24 @@
         <item quantity="one">%d επιλέχτηκε</item>
         <item quantity="other">%d επιλέχτηκαν</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Διαγράφηκε μία σημείωση</item>
+        <item quantity="other">Διαγράφηκαν %1$d σημειώσεις</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Επαναφέρθηκε μία σημείωση</item>
+        <item quantity="other">Επαναφέρθηκαν %1$dσημειώσεις</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Διαμοιρασμός περιεχομένου %1$d σημείωσης</item>
+        <item quantity="other">Διαμοιρασμός περιεχομένου %1$d σημειώσεων</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Μορφοποίηση βάσει κατάστασης</string>
     <string name="formatting_help_cbf_body_1">Ένας κύριος σχεδιαστικός στόχος της εφαρμογής Σημειώσεις, είναι να παρέχει ένα ανεξάρτητο εργαλείο. Θα μπορείτε να μορφοποιήσετε τα κείμενά σας με το Markdown. Για διάφορα από τα παρακάτω παραδείγματα, μπορείτε να χρησιμοποιήσετε συντομεύσεις για να μορφοποιήσετε τις σημειώσεις σας χωρίς να πληκτρολογήσετε τους παρακάτω κωδικούς.</string>
@@ -213,11 +227,22 @@
     <string name="formatting_help_code_body_2">Το Markdown υποστηρίζει επίσης κάτι που ονομάζεται code fencing, το οποίο επιτρέπει πολλαπλές γραμμές χωρίς εσοχή:</string>
     <string name="formatting_help_code_body_3">Και αν θέλετε να χρησιμοποιήσετε την επισήμανση σύνταξης, συμπεριλάβετε τη γλώσσα:</string>
 
+    <string name="formatting_help_tables_title">Πίνακες</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Στήλη %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Αξία %1d</string>
+
+    <string name="formatting_help_images_title">Εικόνες</string>
+    <string name="formatting_help_images_alt">Φανταστική εικόνα</string>
+
     <string name="simple_other">Άλλο</string>
     <string name="sort_last_modified">Ταξινόμηση κατά ημερομηνία τροποποίησης</string>
     <string name="sort_alphabetically">Ταξινόμηση αλφαβητικά</string>
     <string name="error_action_open_battery_settings">Ρυθμίσεις μπαταρίας</string>
     <string name="error_action_open_deck_info">Πληροφορίες εφαρμογής</string>
     <string name="error_action_open_network">Ρυθμίσεις δικτύου</string>
+    <string name="no_account_configured_yet">Δεν έχει ρυθμιστεί ακόμη κάποιος λογαριασμός</string>
     <string name="no_other_accounts">Δεν έχετε ρυθμίσει ακόμη άλλους λογαριασμούς.</string>
+    <string name="context_based_formatting">Μορφοποίηση βάσει περιεχομένου popover</string>
 </resources>

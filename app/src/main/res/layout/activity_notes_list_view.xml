@@ -124,7 +124,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:indeterminateTint="@color/defaultBrand"
-                    tools:targetApi="lollipop"
                     tools:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView

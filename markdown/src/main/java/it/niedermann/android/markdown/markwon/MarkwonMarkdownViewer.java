@@ -19,17 +19,37 @@ import java.util.function.Function;
 
 import io.noties.markwon.Markwon;
 import io.noties.markwon.MarkwonPlugin;
+import io.noties.markwon.SoftBreakAddsNewLinePlugin;
+import io.noties.markwon.ext.strikethrough.StrikethroughPlugin;
+import io.noties.markwon.ext.tables.TablePlugin;
+import io.noties.markwon.ext.tasklist.TaskListPlugin;
+import io.noties.markwon.image.DefaultDownScalingMediaDecoder;
+import io.noties.markwon.image.ImagesPlugin;
+import io.noties.markwon.inlineparser.MarkwonInlineParserPlugin;
+import io.noties.markwon.linkify.LinkifyPlugin;
+import io.noties.markwon.simple.ext.SimpleExtPlugin;
+import io.noties.markwon.syntax.Prism4jTheme;
+import io.noties.markwon.syntax.Prism4jThemeDarkula;
+import io.noties.markwon.syntax.Prism4jThemeDefault;
+import io.noties.markwon.syntax.SyntaxHighlightPlugin;
+import io.noties.prism4j.Prism4j;
+import io.noties.prism4j.annotations.PrismBundle;
 import it.niedermann.android.markdown.MarkdownEditor;
+import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.android.markdown.markwon.plugins.LinkClickInterceptorPlugin;
+import it.niedermann.android.markdown.markwon.plugins.NextcloudMentionsPlugin;
 import it.niedermann.android.markdown.markwon.plugins.SearchHighlightPlugin;
+import it.niedermann.android.markdown.markwon.plugins.ThemePlugin;
 import it.niedermann.android.markdown.markwon.plugins.ToggleableTaskListPlugin;
 
 import static androidx.lifecycle.Transformations.distinctUntilChanged;
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.initMarkwonViewer;
 
+@PrismBundle(includeAll = true, grammarLocatorClassName = ".MarkwonGrammarLocator")
 public class MarkwonMarkdownViewer extends AppCompatTextView implements MarkdownEditor {
 
     private static final String TAG = MarkwonMarkdownViewer.class.getSimpleName();
+
+    private static final Prism4j prism4j = new Prism4j(new MarkwonGrammarLocator());
 
     private Markwon markwon;
     private final MutableLiveData<CharSequence> unrenderedText$ = new MutableLiveData<>();
@@ -46,27 +66,60 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     public MarkwonMarkdownViewer(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.markwon = initMarkwonViewer(context)
+        this.markwon = createMarkwonBuilder(context).build();
+        this.renderService = Executors.newSingleThreadExecutor();
+    }
+
+    private Markwon.Builder createMarkwonBuilder(@NonNull Context context) {
+        final Prism4jTheme prism4jTheme = MarkwonMarkdownUtil.isDarkThemeActive(context)
+                ? Prism4jThemeDarkula.create()
+                : Prism4jThemeDefault.create();
+        return Markwon.builder(context)
+                .usePlugin(ThemePlugin.create(context))
+                .usePlugin(StrikethroughPlugin.create())
+                .usePlugin(SimpleExtPlugin.create())
+                .usePlugin(MarkwonInlineParserPlugin.create())
+                .usePlugin(SearchHighlightPlugin.create(context))
+                .usePlugin(TablePlugin.create(context))
+                .usePlugin(TaskListPlugin.create(context))
+                .usePlugin(LinkifyPlugin.create(true))
+                .usePlugin(LinkClickInterceptorPlugin.create())
+                .usePlugin(ImagesPlugin.create(plugin -> plugin.defaultMediaDecoder(DefaultDownScalingMediaDecoder.create(context.getResources().getDisplayMetrics().widthPixels, 0))))
+                .usePlugin(SoftBreakAddsNewLinePlugin.create())
+                .usePlugin(SyntaxHighlightPlugin.create(prism4j, prism4jTheme))
                 .usePlugin(new ToggleableTaskListPlugin((toggledCheckboxPosition, newCheckedState) -> {
                     final CharSequence oldUnrenderedText = unrenderedText$.getValue();
                     if (oldUnrenderedText == null) {
                         throw new IllegalStateException("Checkbox #" + toggledCheckboxPosition + ", but unrenderedText$ value is null.");
                     }
-                    final CharSequence newUnrenderedText = MarkwonMarkdownUtil.setCheckboxStatus(oldUnrenderedText.toString(), toggledCheckboxPosition, newCheckedState);
+                    final CharSequence newUnrenderedText = MarkdownUtil.setCheckboxStatus(oldUnrenderedText.toString(), toggledCheckboxPosition, newCheckedState);
                     this.setMarkdownString(newUnrenderedText);
-                }))
-                .build();
-        this.renderService = Executors.newSingleThreadExecutor();
+                }));
+    }
+
+    public Markwon.Builder createMarkwonBuilder(@NonNull Context context, @NonNull Map<String, String> mentions) {
+        return createMarkwonBuilder(context)
+                .usePlugin(NextcloudMentionsPlugin.create(context, mentions));
     }
 
     @Override
     public void registerOnLinkClickCallback(@NonNull Function<String, Boolean> callback) {
-        this.markwon.getPlugin(LinkClickInterceptorPlugin.class).registerOnLinkClickCallback(callback);
+        final LinkClickInterceptorPlugin plugin = this.markwon.getPlugin(LinkClickInterceptorPlugin.class);
+        if (plugin == null) {
+            Log.w(TAG, "Tried to register callback, but " + LinkClickInterceptorPlugin.class.getSimpleName() + " is not a registered " + MarkwonPlugin.class.getSimpleName() + ".");
+        } else {
+            plugin.registerOnLinkClickCallback(callback);
+        }
     }
 
     @Override
     public void setEnabled(boolean enabled) {
-        this.markwon.getPlugin(ToggleableTaskListPlugin.class).setEnabled(enabled);
+        final ToggleableTaskListPlugin plugin = this.markwon.getPlugin(ToggleableTaskListPlugin.class);
+        if (plugin == null) {
+            Log.w(TAG, "Tried to set enabled state for " + ToggleableTaskListPlugin.class.getSimpleName() + ", but " + ToggleableTaskListPlugin.class.getSimpleName() + " is not a registered " + MarkwonPlugin.class.getSimpleName() + ".");
+        } else {
+            plugin.setEnabled(enabled);
+        }
     }
 
     @Override
@@ -104,7 +157,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     @Override
     public void setMarkdownString(CharSequence text, @NonNull Map<String, String> mentions) {
-        this.markwon = initMarkwonViewer(getContext(), mentions).build();
+        this.markwon = createMarkwonBuilder(getContext(), mentions).build();
         setMarkdownString(text);
     }
 

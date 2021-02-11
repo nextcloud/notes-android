@@ -1,0 +1,1 @@
+- 🖼 Downscale and display huge images in preview mode instead of crash (#1034)

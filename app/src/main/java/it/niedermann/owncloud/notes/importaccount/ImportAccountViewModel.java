@@ -10,8 +10,6 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
-import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCategoryNavigationItem;
-
 public class ImportAccountViewModel extends AndroidViewModel {
 
     private static final String TAG = ImportAccountViewModel.class.getSimpleName();

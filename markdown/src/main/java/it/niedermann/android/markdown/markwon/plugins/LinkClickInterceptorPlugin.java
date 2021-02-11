@@ -15,7 +15,7 @@ import io.noties.markwon.MarkwonPlugin;
 import it.niedermann.android.markdown.markwon.span.InterceptedURLSpan;
 
 import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.getContentAsSpannable;
+import static it.niedermann.android.markdown.MarkdownUtil.getContentAsSpannable;
 
 public class LinkClickInterceptorPlugin extends AbstractMarkwonPlugin {
 

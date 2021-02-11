@@ -189,6 +189,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Formattazione basata sul contesto</string>
     <string name="formatting_help_cbf_body_1">Un obiettivo fondamentale dell\'applicazione Note è di fornire uno strumento senza distrazioni. Potrai comunque formattare i tuoi testi con Markdown. Per i vari esempi sotto indicati, puoi usare le scorciatoie in modo da formattare le note senza digitare i codici sottostanti.</string>
@@ -226,11 +227,22 @@
     <string name="formatting_help_code_body_2">Markdown supporta anche raggruppamenti di codice, che consente a righe multiple senza indentazione:</string>
     <string name="formatting_help_code_body_3">E se desideri utilizzare l\'evidenziazione della sintassi, includi il linguaggio:</string>
 
+    <string name="formatting_help_tables_title">Tabelle</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Colonna %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Valore %1d</string>
+
+    <string name="formatting_help_images_title">Immagini</string>
+    <string name="formatting_help_images_alt">Immagine di fantasia</string>
+
     <string name="simple_other">Altro</string>
     <string name="sort_last_modified">Ordina per data di modifica</string>
     <string name="sort_alphabetically">Ordine alfabetico</string>
     <string name="error_action_open_battery_settings">Impostazioni batteria</string>
     <string name="error_action_open_deck_info">Apri informazioni applicazione</string>
     <string name="error_action_open_network">Impostazioni di rete</string>
+    <string name="no_account_configured_yet">Ancora nessun account configurato</string>
     <string name="no_other_accounts">Non hai configurato ancora alcun account.</string>
+    <string name="context_based_formatting">Finestra di formattazione basata sul contesto</string>
 </resources>

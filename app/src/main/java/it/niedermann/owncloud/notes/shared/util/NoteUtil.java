@@ -7,9 +7,9 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.regex.Pattern;
-
 import it.niedermann.owncloud.notes.R;
+
+import static it.niedermann.android.markdown.MarkdownUtil.removeMarkdown;
 
 /**
  * Provides basic functionality for Note operations.
@@ -18,37 +18,10 @@ import it.niedermann.owncloud.notes.R;
 @SuppressWarnings("WeakerAccess")
 public class NoteUtil {
 
-    private static final Pattern pLists = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
-    private static final Pattern pHeadings = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
-    private static final Pattern pHeadingLine = Pattern.compile("^(?:=*|-*)$", Pattern.MULTILINE);
-    private static final Pattern pEmphasis = Pattern.compile("(\\*+|_+)(.*?)\\1", Pattern.MULTILINE);
-    private static final Pattern pSpace1 = Pattern.compile("^\\s+", Pattern.MULTILINE);
-    private static final Pattern pSpace2 = Pattern.compile("\\s+$", Pattern.MULTILINE);
-
     public static final String EXCERPT_LINE_SEPARATOR = "   ";
 
     private NoteUtil() {
 
-    }
-
-    /**
-     * Strips all MarkDown from the given String
-     *
-     * @param s String - MarkDown
-     * @return Plain Text-String
-     */
-    @NonNull
-    public static String removeMarkDown(@Nullable String s) {
-        if (s == null)
-            return "";
-        String result = s;
-        result = pLists.matcher(result).replaceAll("");
-        result = pHeadings.matcher(result).replaceAll("$1");
-        result = pHeadingLine.matcher(result).replaceAll("");
-        result = pEmphasis.matcher(result).replaceAll("$2");
-        result = pSpace1.matcher(result).replaceAll("");
-        result = pSpace2.matcher(result).replaceAll("");
-        return result;
     }
 
     /**
@@ -65,7 +38,7 @@ public class NoteUtil {
      * @return boolean isEmpty
      */
     public static boolean isEmptyLine(@Nullable String line) {
-        return removeMarkDown(line).trim().length() == 0;
+        return removeMarkdown(line).trim().length() == 0;
     }
 
     /**
@@ -90,12 +63,12 @@ public class NoteUtil {
      */
     @NonNull
     public static String generateNoteExcerpt(@NonNull String content, @Nullable String title) {
-        content = removeMarkDown(content.trim());
+        content = removeMarkdown(content.trim());
         if (TextUtils.isEmpty(content)) {
             return "";
         }
         if (!TextUtils.isEmpty(title)) {
-            final String trimmedTitle = removeMarkDown(title.trim());
+            final String trimmedTitle = removeMarkdown(title.trim());
             if (content.startsWith(trimmedTitle)) {
                 content = content.substring(trimmedTitle.length());
             }
@@ -120,18 +93,18 @@ public class NoteUtil {
      */
     @NonNull
     public static String generateNoteTitle(@NonNull String content) {
-        return getLineWithoutMarkDown(content, 0);
+        return getLineWithoutMarkdown(content, 0);
     }
 
     /**
-     * Reads the requested line and strips all MarkDown. If line is empty, it will go ahead to find the next not-empty line.
+     * Reads the requested line and strips all Markdown. If line is empty, it will go ahead to find the next not-empty line.
      *
      * @param content    String
      * @param lineNumber int
      * @return lineContent String
      */
     @NonNull
-    public static String getLineWithoutMarkDown(@NonNull String content, int lineNumber) {
+    public static String getLineWithoutMarkdown(@NonNull String content, int lineNumber) {
         String line = "";
         if (content.contains("\n")) {
             String[] lines = content.split("\n");
@@ -140,7 +113,7 @@ public class NoteUtil {
                 currentLine++;
             }
             if (currentLine < lines.length) {
-                line = NoteUtil.removeMarkDown(lines[currentLine]);
+                line = removeMarkdown(lines[currentLine]);
             }
         } else {
             line = content;

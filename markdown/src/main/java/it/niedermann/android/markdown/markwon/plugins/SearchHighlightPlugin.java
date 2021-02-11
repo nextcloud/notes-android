@@ -12,21 +12,28 @@ import androidx.core.content.ContextCompat;
 
 import io.noties.markwon.AbstractMarkwonPlugin;
 import io.noties.markwon.MarkwonPlugin;
+import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.android.markdown.R;
 import it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil;
-import it.niedermann.android.markdown.markwon.span.SearchSpan;
+import it.niedermann.android.markdown.model.SearchSpan;
 
-import static it.niedermann.android.markdown.markwon.MarkwonMarkdownUtil.getContentAsSpannable;
+import static it.niedermann.android.markdown.MarkdownUtil.getContentAsSpannable;
 
 public class SearchHighlightPlugin extends AbstractMarkwonPlugin {
 
     @Nullable
     private CharSequence searchText = null;
     private Integer current;
+    @ColorInt
     private int color;
+    @ColorInt
+    private final int highlightColor;
+    private final boolean darkTheme;
 
     public SearchHighlightPlugin(@NonNull Context context) {
-        color = ContextCompat.getColor(context, R.color.search_color);
+        this.color = ContextCompat.getColor(context, R.color.search_color);
+        this.highlightColor = ContextCompat.getColor(context, R.color.bg_highlighted);
+        this.darkTheme = MarkwonMarkdownUtil.isDarkThemeActive(context);
     }
 
     public static MarkwonPlugin create(@NonNull Context context) {
@@ -35,7 +42,7 @@ public class SearchHighlightPlugin extends AbstractMarkwonPlugin {
 
     public void setSearchText(@Nullable CharSequence searchText, @Nullable Integer current, @NonNull TextView textView) {
         this.current = current;
-        MarkwonMarkdownUtil.removeSpans(getContentAsSpannable(textView), SearchSpan.class);
+        MarkdownUtil.removeSpans(getContentAsSpannable(textView), SearchSpan.class);
         if (TextUtils.isEmpty(searchText)) {
             this.searchText = null;
         } else {
@@ -54,7 +61,7 @@ public class SearchHighlightPlugin extends AbstractMarkwonPlugin {
         super.afterSetText(textView);
         if (this.searchText != null) {
             final Spannable spannable = getContentAsSpannable(textView);
-            MarkwonMarkdownUtil.searchAndColor(spannable, searchText, textView.getContext(), current, color);
+            MarkdownUtil.searchAndColor(spannable, searchText, current, color, highlightColor, darkTheme);
         }
     }
 }

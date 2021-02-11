@@ -16,7 +16,7 @@ import static androidx.preference.PreferenceManager.getDefaultSharedPreferences;
 public class NotesApplication extends MultiDexApplication {
     private static final String TAG = NotesApplication.class.getSimpleName();
 
-    private static final long LOCK_TIME = 30 * 1000;
+    private static final long LOCK_TIME = 30_000;
     private static boolean lockedPreference = false;
     private static boolean isLocked = true;
     private static long lastInteraction = 0;

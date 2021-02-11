@@ -1,0 +1,1 @@
+- 🐞 Fix crash for Android < 7 when open a note in preview mode (#1056)

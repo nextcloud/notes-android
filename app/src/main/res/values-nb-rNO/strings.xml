@@ -213,6 +213,13 @@
     <string name="formatting_help_code_body_2">Markdown støtter også noe som kalles kodegjerding, som tillater flere linjer uten innrykk:</string>
     <string name="formatting_help_code_body_3">Og hvis du vil bruke syntaksmarkering, inkluder språket:</string>
 
+    <string name="formatting_help_tables_title">Tabeller</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Kolonne%1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Verdi %1d</string>
+
+    <string name="formatting_help_images_title">Bilder</string>
     <string name="simple_other">Annet</string>
     <string name="sort_last_modified">Sorter etter dato endret</string>
     <string name="sort_alphabetically">Sorter alfabetisk</string>
@@ -220,4 +227,4 @@
     <string name="error_action_open_deck_info">Åpne App info</string>
     <string name="error_action_open_network">Nettverksinnstillinger</string>
     <string name="no_other_accounts">Du har ikke konfigurert noen konto enda.</string>
-</resources>
+    </resources>

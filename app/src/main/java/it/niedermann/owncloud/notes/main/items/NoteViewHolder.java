@@ -96,13 +96,7 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
             ((Chip) noteCategory).setChipStrokeColor(ColorStateList.valueOf(categoryBackground));
             ((Chip) noteCategory).setChipBackgroundColor(ColorStateList.valueOf(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT));
         } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                DrawableCompat.setTint(noteCategory.getBackground(), categoryBackground);
-            } else {
-                final GradientDrawable drawable = (GradientDrawable) noteCategory.getBackground();
-                drawable.setStroke(1, categoryBackground);
-                drawable.setColor(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT);
-            }
+            DrawableCompat.setTint(noteCategory.getBackground(), categoryBackground);
         }
     }
 

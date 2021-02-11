@@ -7,36 +7,6 @@ import junit.framework.TestCase;
  * Created by stefan on 06.10.15.
  */
 public class NoteUtilTest extends TestCase {
-    public void testRemoveMarkDown() {
-        assertEquals("Test", NoteUtil.removeMarkDown("Test"));
-        assertEquals("Foo\nBar", NoteUtil.removeMarkDown("Foo\nBar"));
-        assertEquals("Foo\nBar", NoteUtil.removeMarkDown("Foo\n  Bar"));
-        assertEquals("Foo\nBar", NoteUtil.removeMarkDown("Foo   \nBar"));
-        assertEquals("Foo-Bar", NoteUtil.removeMarkDown("Foo-Bar"));
-        assertEquals("Foo*Bar", NoteUtil.removeMarkDown("Foo*Bar"));
-        assertEquals("Foo/Bar", NoteUtil.removeMarkDown("Foo/Bar"));
-        assertEquals("FooTestBar", NoteUtil.removeMarkDown("Foo*Test*Bar"));
-        assertEquals("FooTestBar", NoteUtil.removeMarkDown("Foo**Test**Bar"));
-        assertEquals("FooTestBar", NoteUtil.removeMarkDown("Foo***Test***Bar"));
-        assertEquals("FooTest*Bar", NoteUtil.removeMarkDown("Foo*Test**Bar"));
-        assertEquals("Foo*TestBar", NoteUtil.removeMarkDown("Foo***Test**Bar"));
-        assertEquals("FooTestBar", NoteUtil.removeMarkDown("Foo_Test_Bar"));
-        assertEquals("FooTestBar", NoteUtil.removeMarkDown("Foo__Test__Bar"));
-        assertEquals("FooTestBar", NoteUtil.removeMarkDown("Foo___Test___Bar"));
-        assertEquals("Foo\nHeader\nBar", NoteUtil.removeMarkDown("Foo\n# Header\nBar"));
-        assertEquals("Foo\nHeader\nBar", NoteUtil.removeMarkDown("Foo\n### Header\nBar"));
-        assertEquals("Foo\nHeader\nBar", NoteUtil.removeMarkDown("Foo\n# Header #\nBar"));
-        assertEquals("Foo\nHeader\nBar", NoteUtil.removeMarkDown("Foo\n## Header ####\nBar"));
-        assertEquals("Foo\nNo Header #\nBar", NoteUtil.removeMarkDown("Foo\nNo Header #\nBar"));
-        assertEquals("Foo\nHeader\nBar", NoteUtil.removeMarkDown("Foo\nHeader\n=\nBar"));
-        assertEquals("Foo\nHeader\nBar", NoteUtil.removeMarkDown("Foo\nHeader\n-----\nBar"));
-        assertEquals("Foo\nHeader\n--=--\nBar", NoteUtil.removeMarkDown("Foo\nHeader\n--=--\nBar"));
-        assertEquals("Foo\nAufzählung\nBar", NoteUtil.removeMarkDown("Foo\n* Aufzählung\nBar"));
-        assertEquals("Foo\nAufzählung\nBar", NoteUtil.removeMarkDown("Foo\n+ Aufzählung\nBar"));
-        assertEquals("Foo\nAufzählung\nBar", NoteUtil.removeMarkDown("Foo\n- Aufzählung\nBar"));
-        assertEquals("Foo\nAufzählung\nBar", NoteUtil.removeMarkDown("Foo\n    - Aufzählung\nBar"));
-        assertEquals("Foo\nAufzählung *\nBar", NoteUtil.removeMarkDown("Foo\n* Aufzählung *\nBar"));
-    }
 
     public void testIsEmptyLine() {
         assertTrue(NoteUtil.isEmptyLine(" "));
@@ -47,11 +17,11 @@ public class NoteUtilTest extends TestCase {
         assertFalse(NoteUtil.isEmptyLine("a \n "));
     }
 
-    public void testGetLineWithoutMarkDown() {
-        assertEquals("Test", NoteUtil.getLineWithoutMarkDown("Test", 0));
-        assertEquals("Test", NoteUtil.getLineWithoutMarkDown("\nTest", 0));
-        assertEquals("Foo", NoteUtil.getLineWithoutMarkDown("Foo\nBar", 0));
-        assertEquals("Bar", NoteUtil.getLineWithoutMarkDown("Foo\nBar", 1));
+    public void testGetLineWithoutMarkdown() {
+        assertEquals("Test", NoteUtil.getLineWithoutMarkdown("Test", 0));
+        assertEquals("Test", NoteUtil.getLineWithoutMarkdown("\nTest", 0));
+        assertEquals("Foo", NoteUtil.getLineWithoutMarkdown("Foo\nBar", 0));
+        assertEquals("Bar", NoteUtil.getLineWithoutMarkdown("Foo\nBar", 1));
     }
 
     public void testGenerateNoteTitle() {

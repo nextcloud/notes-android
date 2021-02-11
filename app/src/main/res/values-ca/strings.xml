@@ -189,6 +189,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Format basat en el context</string>
     <string name="formatting_help_cbf_body_1">Un objectiu principal del disseny de l\'aplicació Notes és proporcionar una eina lliure de distraccions. Tanmateix, podreu formatar els vostres textos amb Markdown. Per a molts dels exemples esmentats a continuació, podeu utilitzar dreceres per a formatar les vostres notes sense haver d\'escriure els codis següents.</string>
@@ -226,11 +227,22 @@
     <string name="formatting_help_code_body_2">Markdown també admet l\'aïllament de codi, que permet inserir diverses línies sense sagnat:</string>
     <string name="formatting_help_code_body_3">Si voleu utilitzar el ressaltat de sintaxi, incloeu-hi el llenguatge:</string>
 
+    <string name="formatting_help_tables_title">Taules</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Columna %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Valor %1d</string>
+
+    <string name="formatting_help_images_title">Imatges</string>
+    <string name="formatting_help_images_alt">Imatge bonica</string>
+
     <string name="simple_other">Altres</string>
     <string name="sort_last_modified">Ordena per la data de modificació</string>
     <string name="sort_alphabetically">Ordena alfabèticament</string>
     <string name="error_action_open_battery_settings">Paràmetres de la bateria</string>
     <string name="error_action_open_deck_info">Obre la informació de l\'aplicació</string>
     <string name="error_action_open_network">Paràmetres de la xarxa</string>
+    <string name="no_account_configured_yet">Encara no s\'ha configurat cap compte</string>
     <string name="no_other_accounts">Encara no heu configurat cap altre compte.</string>
+    <string name="context_based_formatting">Element emergent de format basat en el context</string>
 </resources>

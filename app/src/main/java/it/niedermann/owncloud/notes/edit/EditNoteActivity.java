@@ -7,11 +7,16 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
+
+import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
+import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
+import com.nextcloud.android.sso.helper.SingleAccountHelper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,12 +29,14 @@ import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
+import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
 import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
+import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 
@@ -54,6 +61,16 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try {
+            if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) == null) {
+                throw new NoCurrentAccountSelectedException();
+            }
+        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+            Toast.makeText(this, R.string.no_account_configured_yet, Toast.LENGTH_LONG).show();
+            finish();
+            return;
+        }
 
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         binding = ActivityEditBinding.inflate(getLayoutInflater());
@@ -179,7 +196,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
                         (Intent.ACTION_SEND.equals(intent.getAction()) ||
                                 INTENT_GOOGLE_ASSISTANT.equals(intent.getAction()))
         ) {
-            content = intent.getStringExtra(Intent.EXTRA_TEXT);
+            content = ShareUtil.extractSharedText(intent);
         } else if (intent.hasExtra(PARAM_CONTENT)) {
             content = intent.getStringExtra(PARAM_CONTENT);
         }

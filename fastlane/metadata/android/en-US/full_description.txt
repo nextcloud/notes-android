@@ -9,7 +9,7 @@ Companion app to Nextcloud Notes.
   * Notizen als Favoriten markieren⭐
   * Massenhaftes Löschen 🗑️
   * Notizen durchsuchen 🔍
-  * MarkDown-Rendering ✨
+  * Markdown-Rendering ✨
   * Kontext-basierte Formatierung 🧰
   * Dark Mode 🌙
   * Single note widget and note list widget 📊

@@ -189,6 +189,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Bağlama göre biçimlendirme</string>
     <string name="formatting_help_cbf_body_1">Notlar uygulamasının önemli bir tasarım amacı, dikkat dağıtmayan bir araç sağlamaktır. Yine de metinlerinizi Markdown kullanarak biçimlendirebilirsiniz. Aşağıdaki örneklerden bazılarında kısayolları kullanarak notlarınızı aşağıdaki kodları yazmadan biçimlendirebilirsiniz.</string>
@@ -226,11 +227,22 @@
     <string name="formatting_help_code_body_2">Markdown ayrıca kod çiti olarak adlandırılan ve girinti olmadan birden fazla satıra izin veren bir şeyi destekler:</string>
     <string name="formatting_help_code_body_3">Ve söz dizimi vurgulamasını kullanmak istiyorsanız, dili ekleyin:</string>
 
+    <string name="formatting_help_tables_title">Tablolar</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Sütun: %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Değer: %1d</string>
+
+    <string name="formatting_help_images_title">Görseller</string>
+    <string name="formatting_help_images_alt">Süslü görsel</string>
+
     <string name="simple_other">Diğer</string>
     <string name="sort_last_modified">Değişiklik tarihine göre sırala</string>
     <string name="sort_alphabetically">Alfabeye göre sırala</string>
     <string name="error_action_open_battery_settings">Pil ayarları</string>
     <string name="error_action_open_deck_info">Uygulama bilgilerini aç</string>
     <string name="error_action_open_network">Ağ ayarları</string>
+    <string name="no_account_configured_yet">Henüz bir hesap yapılandırılmamış</string>
     <string name="no_other_accounts">Henüz başka bir hesap yapılandırmamışsınız.</string>
+    <string name="context_based_formatting">Bağlam tabanlı biçimlendirme açılan penceresi</string>
 </resources>

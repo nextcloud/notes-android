@@ -1,0 +1,2 @@
+- 🐞 Fix list auto continuation for some scenarios (#1040, #1050)
+- 🐞 Catch creation shortcuts when no account is configured yet (#1047)

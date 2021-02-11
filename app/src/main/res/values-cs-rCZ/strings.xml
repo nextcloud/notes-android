@@ -197,6 +197,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Formátování založené na kontextu</string>
     <string name="formatting_help_cbf_body_1">Hlavním cílem návrhu aplikace Poznámky je poskytovat nástroj, kterého používání nerozptyluje. Ačkoli můžete texty formátovat pomocí Markdown značek. Pro různé z níže uvedených příkladů můžete použít zkratky, takže své poznámky můžete formátovat bez zadávání níže uvedených kódů.</string>
@@ -234,11 +235,22 @@
     <string name="formatting_help_code_body_2">Značkovací jazyk Markdown také podporuje něco co se nazývá „oplocení“ kódu, což umožňuje vícero řádek bez odsazení:</string>
     <string name="formatting_help_code_body_3">A pokud chcete použít zvýrazňování syntaxe, včetně jazyka:</string>
 
+    <string name="formatting_help_tables_title">Tabulky</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Sloupec %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Hodnota %1d</string>
+
+    <string name="formatting_help_images_title">Obrázky</string>
+    <string name="formatting_help_images_alt">Ozdobný obrázek</string>
+
     <string name="simple_other">Ostatní</string>
     <string name="sort_last_modified">Seřadit podle data změny</string>
     <string name="sort_alphabetically">Seřadit abecedně</string>
     <string name="error_action_open_battery_settings">Nastavení správy napájení</string>
     <string name="error_action_open_deck_info">Otevřít informace o aplikaci</string>
     <string name="error_action_open_network">Nastavení sítě</string>
+    <string name="no_account_configured_yet">Zatím není nastavený žádný účet</string>
     <string name="no_other_accounts">Zatím jste nenastavili žádné další účty.</string>
+    <string name="context_based_formatting">Kontextové vyskakovací okno formátování</string>
 </resources>

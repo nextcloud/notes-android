@@ -1,7 +1,7 @@
 package it.niedermann.owncloud.notes;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData;
 
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class AppendToNoteActivity extends MainActivity {
 
@@ -23,8 +24,7 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Intent receivedIntent = getIntent();
-        receivedText = receivedIntent.getStringExtra(Intent.EXTRA_TEXT);
+        receivedText = ShareUtil.extractSharedText(getIntent());
         @Nullable final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             getSupportActionBar().setTitle(R.string.append_to_note);
@@ -36,7 +36,7 @@ public class AppendToNoteActivity extends MainActivity {
 
     @Override
     public void onNoteClick(int position, View v) {
-        if (receivedText != null && receivedText.length() > 0) {
+        if (!TextUtils.isEmpty(receivedText)) {
             final LiveData<Note> fullNote$ = mainViewModel.getFullNote(((Note) adapter.getItem(position)).getId());
             fullNote$.observe(this, (fullNote) -> {
                 fullNote$.removeObservers(this);

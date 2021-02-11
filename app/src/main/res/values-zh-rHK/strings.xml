@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">筆記</string>
-    <string name="app_name_long">Nextcloud Notes</string>
+    <string name="app_name_long">Nextcloud 筆記</string>
     <string name="label_all_notes">所有筆記</string>
     <string name="label_favorites">我的最愛</string>
     <string name="action_create">新筆記</string>
@@ -32,14 +32,14 @@
 
     <string name="listview_updated_today">今日</string>
     <string name="listview_updated_yesterday">昨日</string>
-    <string name="listview_updated_this_week">這星期</string>
+    <string name="listview_updated_this_week">本星期</string>
     <string name="listview_updated_last_week">上星期</string>
     <string name="listview_updated_this_month">這個月</string>
     <string name="listview_updated_last_month">上個月</string>
 
     <string name="settings_note_mode">筆記顯示模式</string>
     <string name="settings_theme_title">佈景主題</string>
-    <string name="settings_font_title">等寬</string>
+    <string name="settings_font_title">等寬字體</string>
     <string name="settings_font_size">字體大小</string>
     <string name="settings_wifi_only">只在有 Wi-Fi 時同步</string>
     <string name="settings_lock">密碼保護</string>
@@ -52,15 +52,15 @@
 
     <string name="about_version_title">版本</string>
     <string name="about_version">您目前正在使用 &lt;strong>%1$s&lt;/strong></string>
-    <string name="about_maintainer_title">維護者</string>
-    <string name="about_developers_title">開發者</string>
-    <string name="about_translators_title">翻譯者</string>
+    <string name="about_maintainer_title">保養員</string>
+    <string name="about_developers_title">開發員</string>
+    <string name="about_translators_title">翻譯員</string>
     <string name="about_translators_transifex">&lt;a href=\"%1$s\">Transifex&lt;/a> 上的 Nextcloud 社群</string>
-    <string name="about_testers_title">測試人員</string>
+    <string name="about_testers_title">測試員</string>
     <string name="about_source_title">原始碼</string>
     <string name="about_source">此專案寄存在 GitHub 上：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">問題</string>
-    <string name="about_issues">您可以在 GitHub 問題回報系統回報臭蟲、改善建議及功能需求：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">您可以在 GitHub 問題回報系統回報錯誤、改善建議及功能需求：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">翻譯</string>
     <string name="about_translate">歡迎加入 Transifex 的 Nextcloud 團隊並協助翻譯此 App：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">程式授權條款</string>
@@ -108,7 +108,7 @@
     <string name="category_readonly">唯讀</string>
     <string name="no_category">沒有分類</string>
     <string name="add_category">新增%1$s</string>
-    <string name="simple_checkbox">核取方塊</string>
+    <string name="simple_checkbox">複選框</string>
     <string name="unlock_notes">解鎖筆記</string>
     <string name="simple_beta">Beta 測試版</string>
     <string name="error_dialog_title">喔不 - 現在怎麼辦？🙁</string>
@@ -168,18 +168,31 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_text_title">文字編輯器</string>
     <string name="formatting_help_lists_title">清單</string>
+    <string name="formatting_help_lists_body_1">有時您想要編號列表：</string>
     <string name="formatting_help_lists_body_2">一</string>
     <string name="formatting_help_lists_body_3">二</string>
     <string name="formatting_help_lists_body_4">三</string>
+    <string name="formatting_help_lists_body_6">以短劃線 (dash) 開頭</string>
     <string name="formatting_help_lists_body_8">類似這個</string>
     <string name="formatting_help_lists_body_9">還有這個</string>
 
+    <string name="formatting_help_checkboxes_title">勾選框</string>
     <string name="formatting_help_checkboxes_body_2">項目 1</string>
     <string name="formatting_help_checkboxes_body_3">項目 2</string>
 
+    <string name="formatting_help_structured_documents_body_6">- 愛因斯坦</string>
+
+    <string name="formatting_help_tables_title">表</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">欄  %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">值 %1d</string>
+
+    <string name="formatting_help_images_title">圖像</string>
     <string name="simple_other">其他</string>
     <string name="sort_last_modified">依修改日期排序</string>
     <string name="sort_alphabetically">依字母排序</string>

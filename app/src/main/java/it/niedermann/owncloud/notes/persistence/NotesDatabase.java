@@ -97,8 +97,10 @@ public abstract class NotesDatabase extends RoomDatabase {
     private static NotesDatabase instance;
     private static Context context;
     private static NoteServerSyncHelper serverSyncHelper;
+    private static String defaultNonEmptyTitle;
 
     private static NotesDatabase create(final Context context) {
+        defaultNonEmptyTitle = NoteUtil.generateNonEmptyNoteTitle("", context);
         return Room.databaseBuilder(
                 context,
                 NotesDatabase.class,
@@ -269,7 +271,8 @@ public abstract class NotesDatabase extends RoomDatabase {
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if (oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) {
+                if ((oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0)  &&
+                    (defaultNonEmptyTitle.equals(oldNote.getTitle()))) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
                 } else {
                     title = oldNote.getTitle();
