@@ -113,7 +113,6 @@
     <string name="error_dialog_title">Voi ei - Mitä nyt? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Yritä pakottaa sovelluksen sulkeminen ja käynnistä se uudelleen. Nextcloud-sovellukseen on saattanut olla virheellinen yhteys.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jos ongelma jatkuu, yritä tyhjentää sekä Nextcloud- että Nextcloud Notes-sovellusten tallennustilat ratkaistaksesi ongelman.</string>
-    <string name="error_dialog_tip_clear_storage">Voit tyhjentää tallennustilan avaamalla sovelluksen tiedot ja valitsemalla Tallennustila → Tyhjennä tallennustila.</string>
     <string name="error_dialog_tip_files_outdated">Nextcloud-sovelluksesi on vanhentunut. Lataa uusin version Play Storesta tai F-Droidista.</string>
     <string name="error_dialog_tip_files_force_stop">Nextcloud-sovelluksessasi vaikuttaa olevan jokin ongelma. Yritä pakottaa sekä Nextcloud- että Nextcloud Notes-sovelluksen lopetus.</string>
     <string name="error_dialog_tip_files_delete_storage">Jos pakotettu lopettaminen ei auta, voit yrittää tyhjentää sovelluksien tallennustilan.</string>

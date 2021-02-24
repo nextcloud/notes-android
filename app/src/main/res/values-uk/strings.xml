@@ -114,7 +114,6 @@
     <string name="error_dialog_title">От халепа!</string>
     <string name="error_dialog_tip_token_mismatch_retry">Спробуйте примусово закрити застосунок та наново запустити. Можливо, встановлено неправильне з\'єднання із застосунком Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Якщо проблема не зникає, для її вирішення спробуйте очистити пам’ять обох програм: Nextcloud та Нотатки Nextcloud.</string>
-    <string name="error_dialog_tip_clear_storage">Ви можете очистити сховище, відкривши інформацію про програму та вибравши Пам’ять → Очистити пам’ять.</string>
     <string name="error_dialog_tip_files_outdated">Ваш додаток Nextcloud здається застарілим. Будь ласка, відвідайте Play Маркет або F-Droid, щоб отримати останню версію.</string>
     <string name="error_dialog_tip_files_force_stop">Щось, здається, не так із вашим застосунком Nextcloud. Спробуйте примусово зупинити обидва застосунки: Nextcloud та Нотатки Nextcloud.</string>
     <string name="error_dialog_tip_files_delete_storage">Якщо примусове їх завершення не допомагає, спробуйте очистити сховище обох застосунків.</string>

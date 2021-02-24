@@ -114,7 +114,6 @@
     <string name="error_dialog_title">Oh ez - Orain zer? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Saia zaitez aplikazioa itxi eta berrabiarazten. Agian Nextcloud aplikazioarekin gaizki konektatzea gertatu da.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Arazoak jarraitzen badu, saiatu bi aplikazioen biltegiak garbitzen: Nextcloud eta Nextcloud Oharrak aplikazioen biltegiak.</string>
-    <string name="error_dialog_tip_clear_storage">Biltegia garbi dezakezu aplikazioaren informazioa ireki eta hautatuz: Biltegia → Garbitu biltegia.</string>
     <string name="error_dialog_tip_files_outdated">Daukazun Nextcloud aplikazioa zaharkituta dagoela dirudi. Zoaz Play Store edo F-Droidera azken bertsioa lortzeko.</string>
     <string name="error_dialog_tip_files_force_stop">Daukazun Nextcloud aplikazioan zerbait gaizki dabilela dirudi.  Saia zaitez Nextcloud aplikazioa eta Nextcloud Oharrak, biak, geldiarazten. </string>
     <string name="error_dialog_tip_files_delete_storage">Geldiarazteak ez badu arazoa konpontzen, bi biltegiak garbitzen saia zaitezke.</string>

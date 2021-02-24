@@ -114,7 +114,6 @@
     <string name="error_dialog_title">Oh no - Cosa succede adesso? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prova a forzare la chiusura dell\'applicazione e riavviarla nuovamente. Potrebbe essersi verificato un problema di connessione all\'applicazione Nextcloud. </string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se il problema persiste, prova a cancellare l\'archiviazione di entrambe le applicazioni Nextcloud e Nextcloud Notes per risolver il problema.</string>
-    <string name="error_dialog_tip_clear_storage">Puoi a cancellare l\'archiviazione aprendo le informazioni dell\'applicazione e selezionando Archiviazione → Cancella archiviazione.</string>
     <string name="error_dialog_tip_files_outdated">La tua applicazioni di Nextcloud sembra essere datata. Visita il Play Store o F-Droid per ottenere l\'ultima versione.</string>
     <string name="error_dialog_tip_files_force_stop">Sembra che ci sia un problema con la tua applicazione di Nextcloud. Prova a fermare entrambe le applicazioni Nextcloud e Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Se fermarle non aiuta, puoi provare a cancellare l\'archiviazione di entrambe le applicazioni.</string>
