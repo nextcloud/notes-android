@@ -60,7 +60,7 @@
     <string name="about_source_title">Källkod</string>
     <string name="about_source">Detta projekt finns på GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">Problem</string>
-    <string name="about_issues">Du kan rapportera buggar, förbättringsförslag och funktionsönskningar på GitHubs problemhanterare: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">Du kan rapportera fel, förbättringsförslag och funktionsönskningar på GitHub-problemhanteraren: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">Översätt</string>
     <string name="about_translate">Gå med i Nextcloud-gruppen på Transifex och hjälp oss översätta denna app: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">Applicens</string>
@@ -114,7 +114,6 @@
     <string name="error_dialog_title">Å nej - Vad händer nu?🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Försök med att Tvinga appen att stänga och återstarta. En felaktig anslutning till Nextcloud-appen kan ha förekommit.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Om problemet kvarstår, prova med att rensa lagringen på både appen Nextcloud och Nextcloud Notes.</string>
-    <string name="error_dialog_tip_clear_storage">Du kan rensa diskutrymmet genom att öppna appens info, välj Lagring -> Rensa data</string>
     <string name="error_dialog_tip_files_outdated">Din Nextcloud-app verkar utdaterad. Besök Play Butiken eller F-Droid för att hämta senaste versionen</string>
     <string name="error_dialog_tip_files_force_stop">Något verkar vara fel med din Nextcloud-app. Försök att tvångsavsluta både Nextcloud- och Nextcloud Notes-apparna.</string>
     <string name="error_dialog_tip_files_delete_storage">Om tvångsavslutning ej hjälper kan du försöka rensa datan på båda appar.</string>

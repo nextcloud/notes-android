@@ -119,7 +119,6 @@
     <string name="error_dialog_tip_token_mismatch_retry">الرجاء محاولة اجبار اغلاق التطبيق واعادة تشغيله، ربما هنالك خطأ في الاتصال مع تطبيق نيكست كلاود nextcloud</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">اذا تكررت المشكلة، حاول تنظيف مساحة التخزين في التطبيقين كلاهما: 
 نيكست كلاود nextcloud، نيكست كلاود ملاحظات nextcloud notes لحل هذه المشكلة.</string>
-    <string name="error_dialog_tip_clear_storage">يمكنك مسح التخزين عن طريق فتح معلومات التطبيق واختيار التخزين ← مسح التخزين.</string>
     <string name="error_dialog_tip_files_outdated">تطبيقك نيكست كلاود (Nexcloud) يبدو انه مهمل (لم يحدث منذ زمن). رجاءا زُر بلي ستور او اف-درويد (f-droid) لتحصل على اخر اصدار.</string>
     <string name="error_dialog_tip_files_force_stop">يبدو أن هناك خطأ ما في تطبيق Nextcloud الخاص بك. يرجى محاولة فرض إيقاف كلا من تطبيق Nextcloud وتطبيق Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">إذا لم يساعد إيقافهم بالقوة ، فيمكنك محاولة مسح تخزين كلا التطبيقين.</string>
