@@ -32,7 +32,7 @@
         android:lines="1"
         android:paddingStart="@dimen/widget_note_list_inner_padding"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
-        android:textColor="@color/widget_fg_default"
+        android:textColor="@color/widget_foreground"
         tools:text="@tools:sample/lorem/random" />
 
 </LinearLayout>

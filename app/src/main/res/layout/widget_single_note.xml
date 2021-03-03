@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/widget_background">
+    android:background="@drawable/widget_background">
 
     <ListView
         android:id="@+id/single_note_widget_lv"
@@ -20,6 +20,6 @@
         android:padding="@dimen/widget_single_note_padding"
         android:text="@string/widget_single_note_placeholder_tv"
         android:textAlignment="center"
-        android:textColor="@color/fg_default_high_dark_theme" />
+        android:textColor="@color/widget_foreground" />
 
 </RelativeLayout>

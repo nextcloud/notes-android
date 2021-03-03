@@ -27,7 +27,6 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     private final Context context;
     private final NoteListsWidgetData data;
-    private final boolean darkTheme;
     private NotesDatabase db;
     private List<DBNote> dbNotes;
 
@@ -38,8 +37,6 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
         db = NotesDatabase.getInstance(context);
         data = db.getNoteListWidgetData(appWidgetId);
-
-        darkTheme = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
     }
 
     @Override
@@ -99,27 +96,18 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         DBNote note = dbNotes.get(position);
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
-
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
+
         fillInIntent.putExtras(extras);
         fillInIntent.setData(Uri.parse(fillInIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
-        if (darkTheme) {
-            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_dark);
-            note_content.setOnClickFillInIntent(R.id.widget_note_list_entry_dark, fillInIntent);
-            note_content.setTextViewText(R.id.widget_entry_content_tv_dark, note.getTitle());
-            note_content.setImageViewResource(R.id.widget_entry_fav_icon_dark, note.isFavorite()
-                    ? R.drawable.ic_star_yellow_24dp
-                    : R.drawable.ic_star_grey_ccc_24dp);
-        } else {
-            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry);
-            note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
-            note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
-            note_content.setImageViewResource(R.id.widget_entry_fav_icon, note.isFavorite()
-                    ? R.drawable.ic_star_yellow_24dp
-                    : R.drawable.ic_star_grey_ccc_24dp);
-        }
+        note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry);
+        note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
+        note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
+        note_content.setImageViewResource(R.id.widget_entry_fav_icon, note.isFavorite()
+                ? R.drawable.ic_star_yellow_24dp
+                : R.drawable.ic_star_grey_ccc_24dp);
 
         return note_content;
 
