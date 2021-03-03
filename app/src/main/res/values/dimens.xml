@@ -29,6 +29,9 @@
     <dimen name="note_font_size_large">22sp</dimen>
 
     <!-- Widgets -->
+    <dimen name="widget_outer_radius">@dimen/spacer_1x</dimen>
+    <dimen name="widget_inner_radius">@dimen/spacer_1hx</dimen>
+
     <dimen name="widget_margin">@dimen/spacer_1x</dimen>
     <dimen name="widget_single_note_padding">10dp</dimen>
 

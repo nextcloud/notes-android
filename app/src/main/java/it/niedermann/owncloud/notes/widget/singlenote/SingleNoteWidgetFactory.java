@@ -98,16 +98,10 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
-        if (darkModeActive) {
-            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
-            note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv_dark, MarkdownUtil.renderForRemoteView(context, note.getContent()));
 
-        } else {
-            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
-            note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, note.getContent()));
-        }
+        note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
+        note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
+        note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, note.getContent()));
 
         return note_content;
     }
