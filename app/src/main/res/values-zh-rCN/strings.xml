@@ -114,6 +114,7 @@
     <string name="error_dialog_title">哦，不。所以会怎么样？🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">请尝试强行关闭应用并重新打开。可能是与 Nextcloud 应用的连接不正确。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">如果问题持续存在，尝试通过清除 Nextcloud 和 Nextcloud 笔记两个应用的缓存来解决问题。</string>
+    <string name="error_dialog_tip_clear_storage">你可以通过打开应用信息，选择“存储>清除存储”来清除存储。⚠️ 警告：这将删除尚未同步的笔记！</string>
     <string name="error_dialog_tip_files_outdated">您的 Nextcloud 应用似乎已经过时了。请访问 Play 商店或 F-Droid 以获取最新版本。</string>
     <string name="error_dialog_tip_files_force_stop">您的 Nextcloud 应用似乎出现了问题。请尝试强行停止 Nextcloud 和 Nextcloud 笔记两个应用。</string>
     <string name="error_dialog_tip_files_delete_storage">如果强行停止没有效果，您可以尝试清除两个应用的存储空间。</string>
