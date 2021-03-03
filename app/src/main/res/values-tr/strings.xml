@@ -114,7 +114,6 @@
     <string name="error_dialog_title">Hayıır. Şimdi ne olacak? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Lütfen uygulamayı kapanmaya zorlayıp yeniden başlatın. Yanlış bir Nextcloud uygulaması bağlantısı olmalı.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Sorun sürerse, çözmek için hem Nextcloud uygulamasının hem de Nextcloud Notlar uygulamasının depolamalarını temizlemeyi deneyin.</string>
-    <string name="error_dialog_tip_clear_storage">Depolamayı temizlemek için uygulama bilgilerini açın ve Depolama (Hafıza) → Depolamayı temizle (Veriyi sil) seçin.</string>
     <string name="error_dialog_tip_files_outdated">Nextcloud uygulamanız eski görünüyor. Lütfen son sürümü almak için Play Store ya da F-Droid mağazalarına gidin.</string>
     <string name="error_dialog_tip_files_force_stop">Nextcloud uygulamanızda bir sorun var gibi görünüyor. Lütfen hem Nextcloud uygulamasını hem de Nextcloud Notlar uygulamasını zorla kapatmayı deneyin.</string>
     <string name="error_dialog_tip_files_delete_storage">Zorla durdurmak sorunu çözmediyse iki uygulamanın da depolamalarını temizlemeyi deneyebilirsiniz.</string>
@@ -189,6 +188,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Bağlama göre biçimlendirme</string>
     <string name="formatting_help_cbf_body_1">Notlar uygulamasının önemli bir tasarım amacı, dikkat dağıtmayan bir araç sağlamaktır. Yine de metinlerinizi Markdown kullanarak biçimlendirebilirsiniz. Aşağıdaki örneklerden bazılarında kısayolları kullanarak notlarınızı aşağıdaki kodları yazmadan biçimlendirebilirsiniz.</string>
@@ -226,11 +226,22 @@
     <string name="formatting_help_code_body_2">Markdown ayrıca kod çiti olarak adlandırılan ve girinti olmadan birden fazla satıra izin veren bir şeyi destekler:</string>
     <string name="formatting_help_code_body_3">Ve söz dizimi vurgulamasını kullanmak istiyorsanız, dili ekleyin:</string>
 
+    <string name="formatting_help_tables_title">Tablolar</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Sütun: %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Değer: %1d</string>
+
+    <string name="formatting_help_images_title">Görseller</string>
+    <string name="formatting_help_images_alt">Süslü görsel</string>
+
     <string name="simple_other">Diğer</string>
     <string name="sort_last_modified">Değişiklik tarihine göre sırala</string>
     <string name="sort_alphabetically">Alfabeye göre sırala</string>
     <string name="error_action_open_battery_settings">Pil ayarları</string>
     <string name="error_action_open_deck_info">Uygulama bilgilerini aç</string>
     <string name="error_action_open_network">Ağ ayarları</string>
+    <string name="no_account_configured_yet">Henüz bir hesap yapılandırılmamış</string>
     <string name="no_other_accounts">Henüz başka bir hesap yapılandırmamışsınız.</string>
-    </resources>
+    <string name="context_based_formatting">Bağlam tabanlı biçimlendirme açılan penceresi</string>
+</resources>

@@ -114,7 +114,7 @@
     <string name="error_dialog_title">O nie - co teraz? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Spróbuj wymusić zamknięcie aplikacji i uruchomić ją ponownie. Być może połączenie z aplikacją Nextcloud było nieprawidłowe.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jeśli problem będzie się powtarzać, spróbuj wyczyścić pamięć obu aplikacji: Nextcloud i Nextcloud Notes, aby rozwiązać ten problem.</string>
-    <string name="error_dialog_tip_clear_storage">Możesz wyczyścić pamięć, otwierając informacje o aplikacji i wybierając Pamięć → Wyczyść pamięć podręczną.</string>
+    <string name="error_dialog_tip_clear_storage">Możesz wyczyścić pamięć, otwierając informacje o aplikacji i wybierając Pamięć → Wyczyść pamięć podręczną. ⚠️ Ostrzeżenie: spowoduje to usunięcie jeszcze niezsynchronizowanych notatek!</string>
     <string name="error_dialog_tip_files_outdated">Twoja aplikacja Nextcloud wydaje się, że jest nieaktualna. Odwiedź Sklep Play lub F-Droid, aby pobrać najnowszą wersję.</string>
     <string name="error_dialog_tip_files_force_stop">Wydaje się, że coś jest nie tak z Twoją aplikacją Nextcloud. Spróbuj wymusić zatrzymanie aplikacji Nextcloud i Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Jeśli nie pomoże ich zatrzymanie, możesz spróbować wyczyścić pamięć obu aplikacji.</string>
@@ -250,6 +250,7 @@
     <string name="error_action_open_battery_settings">Ustawienia baterii</string>
     <string name="error_action_open_deck_info">Otwórz informacje o aplikacji</string>
     <string name="error_action_open_network">Ustawienia sieci</string>
+    <string name="no_account_configured_yet">Nie skonfigurowano jeszcze konta</string>
     <string name="no_other_accounts">Nie masz jeszcze skonfigurowanych żadnych innych kont.</string>
     <string name="context_based_formatting">Okno podręczne formatowania opartego na kontekście</string>
 </resources>

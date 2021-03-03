@@ -93,7 +93,7 @@ public abstract class LockedActivity extends BrandedActivity {
     }
 
     private void askToUnlock() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && NotesApplication.isLocked()) {
+        if (NotesApplication.isLocked()) {
             KeyguardManager keyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
             if (keyguardManager != null) {
                 Intent i = keyguardManager.createConfirmDeviceCredentialIntent(getString(R.string.unlock_notes), null);

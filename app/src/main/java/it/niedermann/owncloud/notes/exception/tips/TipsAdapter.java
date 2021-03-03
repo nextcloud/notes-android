@@ -81,6 +81,10 @@ public class TipsAdapter extends RecyclerView.Adapter<TipsViewHolder> {
                 }
                 add(R.string.error_dialog_tip_files_force_stop);
                 add(R.string.error_dialog_tip_files_delete_storage);
+                Intent intent = new Intent(ACTION_APPLICATION_DETAILS_SETTINGS)
+                        .setData(Uri.parse("package:" + BuildConfig.APPLICATION_ID))
+                        .putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_deck_info);
+                add(R.string.error_dialog_tip_clear_storage, intent);
             } else if (t instanceof SocketTimeoutException || t instanceof ConnectException) {
                 add(R.string.error_dialog_timeout_instance);
                 add(R.string.error_dialog_timeout_toggle, new Intent(Settings.ACTION_WIFI_SETTINGS).putExtra(INTENT_EXTRA_BUTTON_TEXT, R.string.error_action_open_network));

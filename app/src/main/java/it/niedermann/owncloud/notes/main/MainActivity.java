@@ -482,9 +482,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
 
         binding.headerView.setBackgroundColor(mainColor);
         binding.appName.setTextColor(textColor);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
-        }
+        activityBinding.progressCircular.getIndeterminateDrawable().setColorFilter(getSecondaryForegroundColorDependingOnTheme(this, mainColor), PorterDuff.Mode.SRC_IN);
 
         // TODO We assume, that the background of the spinner is always white
         activityBinding.swiperefreshlayout.setColorSchemeColors(contrastRatioIsSufficient(Color.WHITE, mainColor) ? mainColor : Color.BLACK);
@@ -907,12 +905,8 @@ public class MainActivity extends LockedActivity implements NoteClickListener, V
     private void updateToolbars(boolean disableSearch) {
         activityBinding.homeToolbar.setVisibility(disableSearch ? VISIBLE : GONE);
         activityBinding.toolbar.setVisibility(disableSearch ? GONE : VISIBLE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(),
-                    disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
-        } else {
-            ViewCompat.setElevation(activityBinding.appBar, disableSearch ? 0 : getResources().getDimension(R.dimen.design_appbar_elevation));
-        }
+        activityBinding.appBar.setStateListAnimator(AnimatorInflater.loadStateListAnimator(activityBinding.appBar.getContext(),
+                disableSearch ? R.animator.appbar_elevation_off : R.animator.appbar_elevation_on));
         if (disableSearch) {
             activityBinding.searchView.setQuery(null, true);
         }

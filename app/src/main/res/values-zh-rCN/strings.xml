@@ -114,7 +114,7 @@
     <string name="error_dialog_title">哦，不。所以会怎么样？🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">请尝试强行关闭应用并重新打开。可能是与 Nextcloud 应用的连接不正确。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">如果问题持续存在，尝试通过清除 Nextcloud 和 Nextcloud 笔记两个应用的缓存来解决问题。</string>
-    <string name="error_dialog_tip_clear_storage">你可以通过这个方法来清除应用的存储空间：打开应用信息  → 存储空间 → 清除数据。</string>
+    <string name="error_dialog_tip_clear_storage">你可以通过打开应用信息，选择“存储>清除存储”来清除存储。⚠️ 警告：这将删除尚未同步的笔记！</string>
     <string name="error_dialog_tip_files_outdated">您的 Nextcloud 应用似乎已经过时了。请访问 Play 商店或 F-Droid 以获取最新版本。</string>
     <string name="error_dialog_tip_files_force_stop">您的 Nextcloud 应用似乎出现了问题。请尝试强行停止 Nextcloud 和 Nextcloud 笔记两个应用。</string>
     <string name="error_dialog_tip_files_delete_storage">如果强行停止没有效果，您可以尝试清除两个应用的存储空间。</string>
@@ -238,6 +238,7 @@
     <string name="error_action_open_battery_settings">电池设置</string>
     <string name="error_action_open_deck_info">打开应用信息</string>
     <string name="error_action_open_network">网络设置</string>
+    <string name="no_account_configured_yet">尚未配置账户</string>
     <string name="no_other_accounts">您尚未配置任何其他帐户。</string>
     <string name="context_based_formatting">基于上下文的格式弹出窗口 </string>
 </resources>

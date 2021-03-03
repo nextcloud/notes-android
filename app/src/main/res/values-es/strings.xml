@@ -114,7 +114,7 @@
     <string name="error_dialog_title">Oh no - ¿Ahora qué? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Por favor, intenta forzar el cierre de la aplicación y vuelve a abrirla. Es posible que haya habido un problema de conexión con la aplicación Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persiste, intente borrar el almacenamiento de ambas aplicaciones: Nextcloud y Nextcloud Notas para solucionar este problema.</string>
-    <string name="error_dialog_tip_clear_storage">Puedes limpiar el almacenamiento abriendo la información de la app y seleccionando Almacenamiento → Eliminar datos.</string>
+    <string name="error_dialog_tip_clear_storage">Puede borrar el almacenamiento abriendo la información de la app y seleccionando Almacenamiento → Borrar almacenamiento. ⚠️ Advertencia: ¡Esto borrará las notas aún no sincronizadas!</string>
     <string name="error_dialog_tip_files_outdated">Su aplicación Nextcloud parece que está desactualizada. Por favor visite la Play Store o F-Droid para conseguir la versión más reciente.</string>
     <string name="error_dialog_tip_files_force_stop">Algo parece que va mal con su aplicación Nextcloud. Por favor intente forzar el paro de ambas aplicaciones, Nextcloud y Nextcloud notas.</string>
     <string name="error_dialog_tip_files_delete_storage">Si pararlas no ayuda, puede intentar borrar el almacenamiento de ambas aplicaciones.</string>
@@ -234,11 +234,15 @@
     <string name="formatting_help_tables_value">Valor %1d</string>
 
     <string name="formatting_help_images_title">Imágenes</string>
+    <string name="formatting_help_images_alt">Imagen elegante</string>
+
     <string name="simple_other">Otro</string>
     <string name="sort_last_modified">Ordenar por fecha de modificación</string>
     <string name="sort_alphabetically">Ordenar alfabéticamente</string>
     <string name="error_action_open_battery_settings">Ajustes de batería</string>
     <string name="error_action_open_deck_info">Abrir info de la app</string>
     <string name="error_action_open_network">Configuración de red</string>
+    <string name="no_account_configured_yet">Todavía no hay una cuenta configurada</string>
     <string name="no_other_accounts">Aún no ha configurado ninguna otra cuenta.</string>
-    </resources>
+    <string name="context_based_formatting">Ventana emergente para formato basado en el contexto</string>
+</resources>

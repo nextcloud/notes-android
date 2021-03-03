@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">یادداشت ها</string>
+    <string name="app_name">یادداشت‌ها</string>
     <string name="app_name_long">یادداشت های نکست کلود</string>
-    <string name="label_all_notes">همه یادداشت ها</string>
-    <string name="label_favorites">Favorites</string>
+    <string name="label_all_notes">همه یادداشت‌ها</string>
+    <string name="label_favorites">مورد علاقه‌ها</string>
     <string name="action_create">یادداشت جدید</string>
     <string name="action_settings">تنظیمات</string>
-    <string name="action_trashbin">یادداشتهای حذف شده</string>
+    <string name="action_trashbin">یادداشت‌های حذف شده</string>
     <string name="action_search">جستجو</string>
+    <string name="action_sorting_method">روش مرتب‌سازی</string>
     <string name="simple_cancel">لغو</string>
     <string name="simple_edit">ویرایش</string>
     <string name="action_edit_save">ذخیره</string>
     <string name="simple_about">درباره</string>
-    <string name="simple_link">Link</string>
+    <string name="simple_link">پیوند</string>
     <string name="action_note_deleted">حذف شد %1$s</string>
     <string name="action_note_restored">بازیابی شد %1$s</string>
     <string name="action_undo">برگرداندن</string>
-    <string name="action_uncategorized">دستهبندی نشده</string>
+    <string name="action_uncategorized">دسته‌بندی نشده</string>
     <string name="menu_delete">حذف</string>
     <string name="menu_change_category">دسته‌بندی</string>
-    <string name="menu_favorite">برگزیده</string>
-    <string name="menu_preview">پیش نمایش</string>
+    <string name="menu_favorite">مورد‌ ‌علاقه‌</string>
+    <string name="menu_preview">پیش‌نمایش</string>
     <string name="menu_share">هم‌رسانی</string>
 
-    <string name="change_category_title">انتخاب یک دسته بندی</string>
+    <string name="search_in_category">جستجو در %1$s</string>
+    <string name="search_in_all">جستجو در همه یادداشت‌ها</string>
 
-    <string name="listview_updated_today">Today</string>
+    <string name="change_category_title">انتخاب یک دسته‌بندی</string>
+
+    <string name="listview_updated_today">امروز</string>
     <string name="listview_updated_yesterday">دیروز</string>
     <string name="listview_updated_this_week">این هفته</string>
     <string name="listview_updated_last_week">هفته گذشته</string>
     <string name="listview_updated_this_month">این ماه</string>
     <string name="listview_updated_last_month">ماه گذشته</string>
 
-    <!-- Settings -->
-    <string name="settings_note_mode">حالت نمایش یادداشت ها</string>
-    <string name="settings_theme_title">تم تاریک</string>
-    <string name="settings_font_title">فونت Monospace</string>
+    <string name="settings_note_mode">حالت نمایش یادداشت‌ها</string>
+    <string name="settings_theme_title">"تم "</string>
+    <string name="settings_font_title">قلم Monospace</string>
     <string name="settings_font_size">اندازهٔ قلم</string>
-    <string name="settings_wifi_only">همگام سازی فقط در Wi-Fi</string>
+    <string name="settings_wifi_only">همگام‌سازی فقط در Wi-Fi</string>
     <string name="settings_lock">محافظت از رمز عبور</string>
-    <string name="settings_background_sync">همگام سازی پس زمینه</string>
+    <string name="settings_background_sync">همگام‌سازی پس زمینه</string>
 
-    <!-- Network -->
-
-    <!-- Error -->
-    <string name="error_sync">همگام سازی انجام نشد:%1$s</string>
+    <string name="error_sync">همگام‌سازی انجام نشد:%1$s</string>
+    <string name="error_synchronization">همگام‌سازی انجام نشد</string>
     <string name="error_no_network">هیچ ارتباطی به شبکه موجود نیست</string>
     <string name="error_unknown">یک خطای ناشناخته رخ داده است.</string>
 
-    <!-- About -->
     <string name="about_version_title">نسخه</string>
     <string name="about_version">شما در حال استفاده هستیدstrong>%1$s&lt;/strong></string>
-    <string name="about_maintainer_title">نگهدار</string>
-    <string name="about_developers_title">Developers</string>
+    <string name="about_maintainer_title">نگاه‌دارنده</string>
+    <string name="about_developers_title">توسعه دهندگان</string>
     <string name="about_translators_title">مترجم</string>
     <string name="about_translators_transifex">انجمن نکست کلود در &lt;a href=\"%1$s\">Transifex&lt;/a></string>
     <string name="about_testers_title">آزمایش کنندگان</string>
@@ -61,46 +61,43 @@
     <string name="about_source">این پروژه در GitHub میزبانی شده است: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">مسائل</string>
     <string name="about_issues">شما می توانید اشکالات ، پیشنهادات پیشرفت و درخواست ویژگی را در ردیاب شماره GitHub گزارش دهید: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
-    <string name="about_translate_title">Translate</string>
+    <string name="about_translate_title">ترجمه</string>
     <string name="about_translate">در Transferx به تیم Nextcloud بپیوندید و در ترجمه این برنامه به ما کمک کنید: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">مجوز برنامه</string>
     <string name="about_app_license">این برنامه تحت مجوز GNU GENERAL PUBLIC LICENSE v3 + مجاز است.</string>
     <string name="about_app_license_button">مشاهده مجوز</string>
-    <string name="about_icons_disclaimer_title">آیکون ها</string>
+    <string name="about_icons_disclaimer_title">آیکون‌ها</string>
     <string name="about_icons_disclaimer">&lt;p>نماد اصلی ساخته شده توسط %1$s&lt;/p>&lt;p>تمام نمادهای دیگر مورد استفاده این برنامه هستند &lt;a href=\"https://materialdesignicons.com/\">شمایل طراحی مواد&lt;/a> ساخته شده توسط Google Inc. و تحت مجوز Apache 2.0 مجوز گرفته شده است.&lt;/p></string>
     <string name="about_credits_tab_title">اعتبارات</string>
     <string name="about_contribution_tab_title">مشارکت</string>
-    <string name="about_license_tab_title">License</string>
+    <string name="about_license_tab_title">مجوز</string>
 
-    <!-- Widgets -->
-    <string name="widget_note_list_title">لیست یادداشت</string>
+    <string name="widget_note_list_title">لیست یادداشت‌ها</string>
     <string name="widget_note_list_placeholder">بدون یادداشت</string>
     <string name="widget_single_note_title">یادداشت واحد</string>
     <string name="widget_single_note_placeholder_tv">یادداشت یافت نشد</string>
     <string name="widget_create_note">ساختن یادداشت</string>
-    <string name="widget_not_logged_in">لطفاً قبل از استفاده از این ویجت به یادداشت ها وارد شوید</string>
-    <string name="widget_entry_fav_contentDescription">از نماد ستاره برای مشخص کردن یک مورد به عنوان مورد علاقه استفاده می شود</string>
-    <string name="widget_app_launcher_contentDescription">برنامه راه اندازی می شود</string>
+    <string name="widget_not_logged_in">لطفاً قبل از استفاده از این ویجت، به یادداشت‌ها وارد شوید</string>
+    <string name="widget_entry_fav_contentDescription">از آیکون ستاره برای مشخص کردن یک مورد به عنوان مورد علاقه استفاده می‌شود</string>
+    <string name="widget_app_launcher_contentDescription">برنامه راه اندازی می‌شود</string>
 
     <string name="activity_select_single_note">انتخاب یادداشت</string>
 
-    <!-- Shortcuts -->
     <string name="shortcut_create_long">ساختن یادداشت جدید</string>
 
-    <!-- These values should not be translatable. They should be migrated at some point.  -->
     <string name="pref_value_font_normal">معمولی</string>
-    <string name="pref_value_wifi_and_mobile">همگام سازی داده های Wi-Fi و تلفن همراه</string>
+    <string name="pref_value_wifi_and_mobile">همگام‌سازی در حالت اتصال به Wi-Fi و اینترنت همراه</string>
     <string name="pref_value_lock">محافظت از رمز عبور</string>
 
     <string name="simple_error">خطا</string>
     <string name="simple_close">بستن</string>
-    <string name="simple_copy">کپی کردن</string>
+    <string name="simple_copy">رونوشت</string>
     <string name="simple_exception">استثنا</string>
-    <string name="pin_to_homescreen">پین به صفحه اصلی</string>
+    <string name="pin_to_homescreen">اتصال به صفحه اصلی</string>
     <string name="note_has_been_deleted">این یادداشت حذف شده است</string>
-    <string name="add_account">ایحاد حساب کاربری</string>
+    <string name="add_account">افزودن حساب کاربری</string>
     <string name="category_music">موسیقی</string>
-    <string name="category_movies">فیلم ها</string>
+    <string name="category_movies">فیلم‌ها</string>
     <string name="category_movie">فیلم</string>
     <string name="category_work">کار</string>
     <string name="account_already_imported">حساب قبلاً وارد شده است</string>
@@ -109,28 +106,54 @@
     <string name="simple_more">بیش‌تر</string>
     <string name="simple_move">انتقال</string>
     <string name="category_readonly">فقط خواندنی</string>
-    <string name="no_category">بدون دسته بندی</string>
+    <string name="no_category">بدون دسته‌بندی</string>
     <string name="add_category">افزودن%1$s</string>
     <string name="simple_checkbox">جعبه علامت</string>
+    <string name="unlock_notes">یادداشت‌های باز</string>
+    <string name="simple_beta">بتا</string>
+    <string name="error_dialog_title">وای نه - حالا چی کار کنیم؟</string>
+    <string name="error_dialog_tip_token_mismatch_retry">"لطفا از طریق توقف اجباری برنامه را بسته و دوباره اجرا کنید. ممکن است یک اتصال نادرست با ابر سانا ایجاد شده باشد.  "</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">اگر این مشکل استمرار داشت، سعی کنید با پاک کردن فضای ذخیره‌سازی هردو برنامک : ابر سانا و یادداشت سانا، این مورد را برطرف کنید.</string>
+    <string name="error_dialog_tip_files_outdated">ظاهرا برنامک یادداشت منسوخ شده است. لطفا آخرین نسخه را از سانا مارکت دانلود کنید. </string>
+    <string name="error_dialog_tip_files_force_stop">به نظر می‌رسد که مشکلی در برنامک نکست‌کلود ایجاد شده است. لطفا سعی کنید با توقف اجباری هر دو برنامک ابر سانا و یادداشت سانا را ببندید.  </string>
+    <string name="error_dialog_tip_files_delete_storage">"اگر توقف اجباری برنامه‌ها کمکی نکرد، می‌توانید پاک‌کردن فضای ذخیره‌سازی هردو برنامه را پاک کنید. "</string>
+    <string name="error_dialog_timeout_instance">پاسخ از سمت سرور شما با نام داده شده دریافت نشد. لطفا بررسی کنید که نمونه شما به درستی کار می‌کند.</string>
+    <string name="error_dialog_timeout_toggle">"اتصال اینترنت خود را بررسی کنید. خاموش کردن اینترنت همراه و وای‌فای و روشن کردن مجدد آنها در برخی ار مواقع می‌تواند کارساز باشد. "</string>
+    <string name="error_dialog_check_server">پاسخ درستی از سرور شما دریافت نشد. لطفا دسترسی به یادداشت‌های خود را از طریق وب بررسی کنید.</string>
+    <string name="error_dialog_check_server_logs">" مشکلی در نصب ابر سانا وجود دارد. لطفا لاگ‌های سرور را بررسی کنید."</string>
+    <string name="error_dialog_check_maintenance">لطفا بررسی کنید که نسخه ابر سانای شما در حال حاضر در حالت تعمیر و نگهداری نباشد.</string>
+    <string name="error_dialog_insufficient_storage">فضای برنامک نکست‌کلود شما پر شده است.لطفا یعضی از فایل‌های خود در را فضای ابری برای همگام‌سازی تغییرات محلی پاک کنید.  </string>
+    <string name="error_dialog_contact_us">لطفا بدون هیچ تردیدی در صورت استمرار مشکل با ما تماس بگیرید.</string>
+    <string name="error_dialog_we_need_info">ما برای کمک به شما احتیاج به دنبال کردن اطلاعات فنی داریم:</string>
+    <string name="error_dialog_server_app_enabled">لطفا از نصب و فعال بودن برنامک یادداشت بر روی سرور، اطمینان حاصل کنید.</string>
+    <string name="error_dialog_redirect">پاسخ سرور شما کد حالت HTTP 302 است. که دلالت بر عدم نصب برنامک یادداشت بر روی سرور و یا پیکربندی نامناسب دارد. این مشکل می‌تواند به دلیل تغییرات نامناسب ایجاد شده در فایل .htaccess و یا به دلیل برنامه‌های مرتبط با Nextcloud مثل OID Client رخ دهد.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">لطفا تمامی فرایند‌های بهینه‌سازی مصرف باتری برای ابر سانا و برنامک یادداشت را غیر فعال کنید.</string>
+    <string name="added_content">اضافه ‌شده %1$s</string>
+    <string name="shared_text_empty">متن به اشتراک گذاشته‌شده خالی است</string>
+    <string name="append_to_note">به یادداشت اضافه کنید</string>
+    <string name="change_note_title">عوض‌کردن عنوان یادداشت</string>
+    <string name="menu_edit_title">ویرایش عنوان</string>
+    <string name="settings_branding">شخصی‌سازی</string>
+    <string name="settings_gridview">حالت شبکه‌ای جدید</string>
     <string name="simple_security">امنیت</string>
     <string name="simple_appearance">ظاهر</string>
-    <string name="simple_synchronization">هم‌گام‌سازی</string>
+    <string name="simple_synchronization">همگام‌سازی</string>
+    <string name="simple_behavior">رفتار</string>
     <string name="manage_accounts">مدیریت حساب‌ها</string>
-    <!-- Array: note modes -->
+    <string name="action_formatting_help">قالب‌بندی</string>
+
     <string-array name="noteMode_entries">
         <item>در حالت ویرایش باز کنید</item>
         <item>در حالت پیش نمایش باز کنید</item>
         <item>آخرین انتخاب من را به خاطر بسپار</item>
     </string-array>
 
-    <!-- Array: font size -->
     <string-array name="fontSize_entries">
         <item>کوچک</item>
         <item>متوسط</item>
         <item>بزرگ</item>
     </string-array>
 
-    <!-- Array: background synchronization -->
     <string-array name="sync_entries">
         <item>خاموش</item>
         <item>۱۵ دقیقه</item>
@@ -144,9 +167,56 @@
         <item>پیش فرض سیستم</item>
     </string-array>
 
-    <!-- Plurals -->
     <plurals name="ab_selected">
         <item quantity="one">%d انتخاب شد</item>
         <item quantity="other">%d انتخاب شد</item>
     </plurals>
+    <string name="formatting_help_cbf_title">قالب‌بندی مبتنی بر متن</string>
+    <string name="formatting_help_cbf_body_1">هدف اصلی از طراحی برنامک یادداشت، ارائه دادن یک ابزار رایگان یادداشت کارها است. همچنین شما قادر خواهید بود متن‌ها را با Markdown قالب‌بندی کنید. برای انواع مختلفی از مثالهای ذکر شده در زیر ، می توانید از میانبرها استفاده کنید تا بتوانید یادداشت های خود را بدون تایپ کد، قالب بندی کنید.</string>
+    <string name="formatting_help_cbf_body_2">فقط کافی است یک دامنه متن را انتخاب کنید یا روی مکان نما در هر موقعیتی ضربه بزنید و یک منوی بازشونده دریافت می کنید که در کنار ورودی‌های پیش‌فرض %1$s و %2$s و %3$s شامل ورودی‌‌هایی مانند %4$s و %5$s می‌باشد.</string>
+
+    <string name="formatting_help_text_title">متن</string>
+    <string name="formatting_help_text_body">به راحتی می‌توان با Markdown کلمات را به حالت %1$sbold%1$s و  کلمات دیگر را به حالت %2$sitalic%2$s درآورد. همچنین می‌توانید کلمات را به حالت %3$sstrike%3$s وحتی به صورت  [link to Nextcloud](https://nextcloud.com) درآورید:</string>
+
+    <string name="formatting_help_lists_title">فهرست</string>
+    <string name="formatting_help_lists_body_1">زمانی که قصد استفاده از فهرست با شماره دارید:</string>
+    <string name="formatting_help_lists_body_2">" یک"</string>
+    <string name="formatting_help_lists_body_3">" دو"</string>
+    <string name="formatting_help_lists_body_4">" سه"</string>
+    <string name="formatting_help_lists_body_5">زمانی که شما قصد گذاشتن بولت پوینت دارید:</string>
+    <string name="formatting_help_lists_body_6">شروع خط با خط‌ تیره</string>
+    <string name="formatting_help_lists_body_7">اگر قصد گذاشتن ساب‌پونت دارید، قبل از خط تیره یا ستاره، به اندازه ۲ کاراکتر فضای خالی قرار دهید:</string>
+    <string name="formatting_help_lists_body_8">مانند این</string>
+    <string name="formatting_help_lists_body_9">و این</string>
+
+    <string name="formatting_help_checkboxes_title">جعبه علامت</string>
+    <string name="formatting_help_checkboxes_body_1">برای ساختن جعبه ‌علامت در ابتدای اجزای فهرست، براکت قرار دهید:</string>
+    <string name="formatting_help_checkboxes_body_2">ایتم 1</string>
+    <string name="formatting_help_checkboxes_body_3">ایتم 2</string>
+
+    <string name="formatting_help_structured_documents_title">ساختار مستند‌ها</string>
+    <string name="formatting_help_structured_documents_body_1">" گاهی اوقات برای بهسازی ساختار مستند‌های خود، بهتر است که سرفصل‌های موجود در مستند را در سطوح متفاوتی داشته باشیم. برای ایجاد سرفصل‌ها در متون، باید ابتدای خط‌ها را با یک %1$s آغاز کنیم. استفاده از چند %2$s در یک ردیف، نمایان‌گر سطوح پایین‌تر سرفصل‌ها با اندازه کوچکتر است."</string>
+    <string name="formatting_help_structured_documents_body_2">برای نمونه این متن یک سرفصل لایه سوم است</string>
+    <string name="formatting_help_structured_documents_body_3">می‌توان از یک علامت %1$s تا شش علامت %2$s برای نمایش اندازه‌های مختلف سرفصل‌ها استفاده کرد.</string>
+    <string name="formatting_help_structured_documents_body_4">اگر شما تمایل دارید نقل قول از شخصی بگذارید، قبل از شروع خط، از کاراکتر > استفاده کنید:</string>
+    <string name="formatting_help_structured_documents_body_5">تصور، از دانش مهم‌تر است. دانش، محدود است. تخیل، دنیا را احاطه می‌کند.</string>
+    <string name="formatting_help_structured_documents_body_6">- آلبرت انیشتین</string>
+
+    <string name="formatting_help_code_title">کد</string>
+    <string name="formatting_help_code_body_1">راه‌های مختلفی برای قرار‌دادن کد در Markdown وجود دارد. اگر شما قصد قرار دادن بلوک‌های کد در داخل متون را دارید، آنها را بین دو ` قرار دهید.</string>
+    <string name="formatting_help_code_body_2">همچنین Markdown قادر به پشتیبانی از code fencing می‌باشد،  چیزی که به شما اجازه قرار‌دادن چندین خط، بدون تورفتگی را می‌دهد:</string>
+    <string name="formatting_help_code_body_3">اگر شما نیاز به مشخص کردن syntax در یک زبان دارید:</string>
+
+    <string name="formatting_help_tables_title">جدول‌ها</string>
+    <string name="formatting_help_images_title">تصاویر</string>
+    <string name="formatting_help_images_alt">تصویر فانتزی</string>
+
+    <string name="simple_other">دیگر</string>
+    <string name="sort_last_modified">مرتب‌سازی طبق تاریخ</string>
+    <string name="sort_alphabetically">مرتب‌سازی طبق الفبا</string>
+    <string name="error_action_open_battery_settings">تنظیمات باتری</string>
+    <string name="error_action_open_deck_info">باز کردن اطلاعات برنامه</string>
+    <string name="error_action_open_network">تنظیمات شبکه</string>
+    <string name="no_other_accounts">شما تاکنون هیچ حساب کاربری دیگری را ایجاد نکرده‌اید.</string>
+    <string name="context_based_formatting">بازپخش قالب بندی مبتنی بر متن</string>
 </resources>

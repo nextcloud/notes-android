@@ -114,7 +114,6 @@
     <string name="error_dialog_title">おやまあ、どうしたことでしょう？🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">アプリの強制終了と再起動を試みてください。Nextcloudアプリへの接続が正しくない接続があったかも知れません。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">この問題が続くようでしたら、下記両方のアプリでストレージをクリアして問題が解決できるか試してください：Nextcloud と Nextcloud Notes</string>
-    <string name="error_dialog_tip_clear_storage">以下の方法でストレージをクリアできます：アプリ情報→ストレージ→ストレージをクリア.</string>
     <string name="error_dialog_tip_files_outdated">Nextcloudアプリが古いようです。プレイストアかF-Droidから最新版を入手してください。</string>
     <string name="error_dialog_tip_files_force_stop">Nextcloudアプリで何か不具合が発生しました。NextcloudアプリとNextcloud Notesアプリの両方を強制終了してください。</string>
     <string name="error_dialog_tip_files_delete_storage">強制終了で改善されない場合は、両方のアプリのストレージをクリアしてみてください。</string>

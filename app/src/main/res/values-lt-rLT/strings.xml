@@ -113,7 +113,6 @@
     <string name="error_dialog_title">O, ne - Kas dabar? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Pabandykite priverstinai uždaryti programą ir vėl paleiskite ją iš naujo. Galbūt buvo nepavyko užmegžti ryšį su „Nextcloud“ programa.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jei problema išlieka, pabandykite išvalyti abiejų programų saugyklą: „Nextcloud“ ir „Nextcloud Notes“.</string>
-    <string name="error_dialog_tip_clear_storage">Saugyklą galite išvalyti atidarę programos nustatymus ir pasirinkdami Saugykla → Išvalyti saugyklą.</string>
     <string name="error_dialog_tip_files_outdated">Panašu, kad jūsų „Nextcloud“ programos versija yra pasenusi. Norėdami gauti naujausią versiją, apsilankykite „Google Play“ parduotuvėje arba „F-Droid“.</string>
     <string name="error_dialog_tip_files_force_stop">Atrodo, kad kažkas negerai su jūsų „Nextcloud“ programa. Pabandykite priverstinai sustabdyti programas: „Nextcloud“ ir „Nextcloud Notes“.</string>
     <string name="error_dialog_tip_files_delete_storage">Jei priverstinis programos sustabdymas nepadėjo, galite pabandyti išvalyti abiejų programų saugyklas.</string>

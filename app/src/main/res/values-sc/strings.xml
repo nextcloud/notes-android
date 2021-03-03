@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Notas</string>
+    <string name="app_name_long">Notas de Nextcloud</string>
+    <string name="label_all_notes">Totu is notas</string>
+    <string name="label_favorites">Preferidos</string>
+    <string name="action_create">Notas noas</string>
+    <string name="action_settings">Cunfiguratziones</string>
+    <string name="action_trashbin">Notas cantzelladas</string>
+    <string name="action_search">Chirca</string>
+    <string name="action_sorting_method">Mètodu de ordinamentu</string>
+    <string name="simple_cancel">Cantzella</string>
+    <string name="simple_edit">Modìfica</string>
+    <string name="action_edit_save">Sarva</string>
+    <string name="simple_about">In contu de</string>
+    <string name="simple_link">Ligòngiu</string>
+    <string name="action_note_deleted">Cantzelladu %1$s</string>
+    <string name="action_note_restored">Recuperadu %1$s</string>
+    <string name="action_undo">Annulla</string>
+    <string name="action_uncategorized">Sena categoria</string>
+    <string name="menu_delete">Cantzella</string>
+    <string name="menu_change_category">Categoria</string>
+    <string name="menu_favorite">Preferidu</string>
+    <string name="menu_preview">Anteprima</string>
+    <string name="menu_share">Cumpartzi</string>
+
+    <string name="search_in_category">Chirca in %1$s</string>
+    <string name="search_in_all">Chirca totu is notas</string>
+
+    <string name="change_category_title">Sèbera una categoria</string>
+
+    <string name="listview_updated_today">Oe</string>
+    <string name="listview_updated_yesterday">Eris</string>
+    <string name="listview_updated_this_week">Custa chida</string>
+    <string name="listview_updated_last_week">Sa chida passada</string>
+    <string name="listview_updated_this_month">Custu mese</string>
+    <string name="listview_updated_last_month">Su mese passadu</string>
+
+    <string name="settings_note_mode">Modalidades de visualizatzione de is notas</string>
+    <string name="settings_theme_title">Tema</string>
+    <string name="settings_font_title">Caràtere a ispatziadura fissa</string>
+    <string name="settings_font_size">Dimensione caràtere</string>
+    <string name="settings_wifi_only">Sincroniza isceti cun su Wi-Fi</string>
+    <string name="settings_lock">Bardiadura cun crae</string>
+    <string name="settings_background_sync">Sincronizatzione isfundu</string>
+
+    <string name="error_sync">Sincronizatzione faddida: %1$s</string>
+    <string name="error_synchronization">Sincronizatzione faddida</string>
+    <string name="error_no_network">Peruna connessione de rete</string>
+    <string name="error_unknown">Ddoe at àpidu un\'errore disconnotu.</string>
+
+    <string name="about_version_title">Versione</string>
+    <string name="about_version">Como ses impreende &lt;strong>%1$s&lt;/strong></string>
+    <string name="about_maintainer_title">Responsàbile</string>
+    <string name="about_developers_title">Isvilupadores</string>
+    <string name="about_translators_title">Tradutores</string>
+    <string name="about_translators_transifex">Sa comunidade Nextcloud in &lt;a href=\"%1$s\">Transifex&lt;/a></string>
+    <string name="about_testers_title">Collaudadores</string>
+    <string name="about_source_title">Còdighe fonte</string>
+    <string name="about_source">Custu progetu nch\'est allogadu in GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues_title">Problemas</string>
+    <string name="about_issues">Podes sinnalare unu problema, fàghere propostas de megioramentu e rechestas de funtzionalidades a su rilevadore de problemas de GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_translate_title">Borta</string>
+    <string name="about_translate">Intra a s\'iscuadra de Nextcloud in Transifex e agiuda·nos a bortare custa aplicatzione: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_app_license_title">Lissèntzia</string>
+    <string name="about_app_license">Custa aplicatzione est suta lissèntzia GNU GENERAL PUBLIC LICENSE v3+.</string>
+    <string name="about_app_license_button">Càstia lissèntzia</string>
+    <string name="about_icons_disclaimer_title">Iconas</string>
+    <string name="about_icons_disclaimer">&lt;p>Icona originale realizada cun %1$s&lt;/p>&lt;p>Totu is iconas in prus impreadas dae custa aplicatzione sunt &lt;a href=\"https://materialdesignicons.com/\">Iconas Material Design &lt;/a> creadas dae Google Inc. e suta lissèntzia Apache 2.0 License.&lt;/p></string>
+    <string name="about_credits_tab_title">Crèditos</string>
+    <string name="about_contribution_tab_title">Contributos</string>
+    <string name="about_license_tab_title">Lissèntzia</string>
+
+    <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_note_list_placeholder">Peruna nota</string>
+    <string name="widget_single_note_title">Nota sìngula</string>
+    <string name="widget_single_note_placeholder_tv">Nota no agatada</string>
+    <string name="widget_create_note">Crea Nota</string>
+    <string name="widget_not_logged_in">Incarca su butone + pro creare una nota noa</string>
+    <string name="widget_entry_fav_contentDescription">S\'icona de s\'isteddu s\'impreat pro marcare un\'elementu comente preferidu</string>
+    <string name="widget_app_launcher_contentDescription">Avia aplicatzione</string>
+
+    <string name="activity_select_single_note">Seletziona nota</string>
+
+    <string name="shortcut_create_long">Crea una nota noa</string>
+
+    <string name="pref_value_font_normal">Normale</string>
+    <string name="pref_value_wifi_and_mobile">Sincroniza cun Wi-Fi e datos mòbiles</string>
+    <string name="pref_value_lock">Bardiadura cun crae</string>
+
+    <string name="simple_error">Errore</string>
+    <string name="simple_close">Serra</string>
+    <string name="simple_copy">Còpia</string>
+    <string name="simple_exception">Etzetzione</string>
+    <string name="pin_to_homescreen">Apìtziga a s\'ischermada initziale</string>
+    <string name="note_has_been_deleted">Custa nota est istada cantzellada</string>
+    <string name="add_account">Agiunghe contu</string>
+    <string name="category_music">Mùsica</string>
+    <string name="category_movies">Film</string>
+    <string name="category_movie">Film</string>
+    <string name="category_work">Traballu</string>
+    <string name="account_already_imported">Su contu nch\'est giai importadu</string>
+    <string name="no_notes_yet">Peruna nota ancora</string>
+    <string name="no_notes_yet_description">Incarca su butone + pro creare una nota noa</string>
+    <string name="simple_more">Àteru</string>
+    <string name="simple_move">Tràmuda</string>
+    <string name="category_readonly">Letura ebbia</string>
+    <string name="no_category">Peruna categoria</string>
+    <string name="add_category">Agiunghe %1$s</string>
+    <string name="simple_checkbox">Casella de seletzione</string>
+    <string name="unlock_notes">Isbloca notas</string>
+    <string name="simple_beta">Beta</string>
+    <string name="error_dialog_title">Oh no - Immoe ite ddoe at? 🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">Proa a serrare a fortza s\'aplicatzione e torrala a aviare. Fortzis ddoe at àpidu unu problema de connessione a s\'aplicatzione de Nextcloud. </string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">Si sighit su problema, proa a cantzellare s\'archiviatzione de ambas is aplicatziones Nextcloud e Nextcloud Notes pro isorvere su problema.</string>
+    <string name="error_dialog_tip_files_outdated">S\'aplicatzione tua de Nextcloud paret foras d\'usu. Pro praghere, bìsita su Play Store o F-Droid pro otènnere s\'ùrtima versione.</string>
+    <string name="error_dialog_tip_files_force_stop">Paret chi b\'at àpidu problemas cun s\'aplicatzione de Nextcloud. Pro praghere proa a ddas firmare ambas, s\'aplicatzione Nextcloud e s\'aplicatzione Nexcloud Notes. </string>
+    <string name="error_dialog_tip_files_delete_storage">Si a ddas firmare a fortza no agiudat, podes proare a limpiare s\'archiviatzione de ambas is aplicatziones.</string>
+    <string name="error_dialog_timeout_instance">Non ddoe at àpidu peruna risposta dae su serbidore in su tempus istabilidu. Segura·ti chi sa rechesta tua siat esecutada in manera curreta.</string>
+    <string name="error_dialog_timeout_toggle">Controlla sa connesione tua a sa rete. A bortas podet agiudare a disativare is datos mòbiles o su Wi-Fi e a ddos torrare a ativare.</string>
+    <string name="error_dialog_check_server">Sa risposta de su serbidore tuo non fiat curreta. Controlla su podet atzèdere a is notas tuas tràmite interfache web.</string>
+    <string name="error_dialog_check_server_logs">Ddoe at unu problema cun s\'installatzione tua de Nextcloud. Pro praghere càstia in is archìvios de registru de su serbidore.</string>
+    <string name="error_dialog_check_maintenance">Controlla chi s\'istantza tua de Nextcloud non siat in fase de mantenimentu.</string>
+    <string name="error_dialog_insufficient_storage">In su Nextcloud tuo non ddoe at prus logu lìberu. Pro praghere cantzella unos cantos archìvios pro sincronizare is modìficas locales tuas con sa nue virtuale.</string>
+    <string name="error_dialog_contact_us">Pro praghere no istentes a nos cuntatare si su problema sighit. Podes agatare is informatziones de cuntatu nostras in sa setzione Informatziones in sa barra laterale.</string>
+    <string name="error_dialog_we_need_info">Nos bisòngiant is sighentes informatziones tècnicas pro t\'agiuare:</string>
+    <string name="error_dialog_server_app_enabled">Segurati de àere installadu e abilitadu s\'aplicatzione \"Notes\" in su serbidore tuo.</string>
+    <string name="error_dialog_redirect">Su serbidore tuo at rispostu cun unu còdighe de istadu HTTP 302, chi ìmplicat chi no as installadu s\'aplicatzione Note in su serbidore tuo o calicuna cosa no est cunfigurada in manera curreta. Custu podet èssere dèpidu a cunfiguratziones personalizadas in su documentu .htaccess o a aplicatziones de Nextcloud comente OID Client.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Disabilita totu is otimizatziones de sa bateria pro is aplicatziones Nextcloud e Note.</string>
+    <string name="added_content">Agiuntu \"%1$s\"</string>
+    <string name="shared_text_empty">Su testu cumpartzidu fiat bòidu</string>
+    <string name="append_to_note">Agiunghe a sa nota</string>
+    <string name="change_note_title">Càmbia su tìtulu de sa nota</string>
+    <string name="menu_edit_title">Modìfica tìtulu</string>
+    <string name="settings_branding">Marca</string>
+    <string name="settings_gridview">Vista grìllia</string>
+    <string name="simple_security">Seguresa</string>
+    <string name="simple_appearance">Aparèntzia</string>
+    <string name="simple_synchronization">Sincronizatzione</string>
+    <string name="simple_behavior">Cumportamentu</string>
+    <string name="manage_accounts">Gesti contos</string>
+    <string name="action_formatting_help">Formatatzione</string>
+
+    <string-array name="noteMode_entries">
+        <item>Aberi in modalidade modìfica</item>
+        <item>Aberi in modalidade anteprima</item>
+        <item>Regorda s\'ùrtimu sèberu</item>
+    </string-array>
+
+    <string-array name="fontSize_entries">
+        <item>Piticu</item>
+        <item>Mesanu</item>
+        <item>Mannu</item>
+    </string-array>
+
+    <string-array name="sync_entries">
+        <item>Istudadu</item>
+        <item>15 minùtos</item>
+        <item>1 ora</item>
+        <item>6 oras</item>
+    </string-array>
+
+    <string-array name="darkmode_entries">
+        <item>Craru</item>
+        <item>Iscuru</item>
+        <item>Predefinidos de Sistema</item>
+    </string-array>
+
+    <plurals name="ab_selected">
+        <item quantity="one">%d seletzionadu</item>
+        <item quantity="other">%d seletzionados</item>
+    </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Deleted one note</item>
+        <item quantity="other">Notas %1$d cantzelladas</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Restored one note</item>
+        <item quantity="other">Notas %1$d ripristinadas</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Cumpartzi su cuntenutu de sa%1$d nota</item>
+        <item quantity="other">Cumpartzi su cuntenutu de%1$d notas</item>
+    </plurals>
+
+    <string name="formatting_help_divider" translateable="false">---</string>
+    <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
+    <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
+    <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
+    <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
+    <string name="formatting_help_cbf_title">Formatatzione basada subra de su cuntenutu</string>
+    <string name="formatting_help_cbf_body_1">Un\'obietivu de importu mannu de s\'aplicatzione Note est su de frunire unu trastu sena distratziones. In cada manera, as a pòdere formatare is testos tuos cun Markdown. Pro is esempros inditados inoghe in bassu, podes impreare is curtziadòrgios pro formatare is notas sena digitare is còdighes in bassu.</string>
+    <string name="formatting_help_cbf_body_2">Ti bastat de seletzionare un\'intervallu de testu o tocare su cursore in cale si siat positzione e at a apàrrere unu menu cun accanta is boghes predefinidas %1$s, %2$s, %3$s elementos comente%4$s o %5$s.</string>
+
+    <string name="formatting_help_text_title">Testu</string>
+    <string name="formatting_help_text_body">Est fàtzile meda a pònnere faeddos in %1$sgrassetu%1$s e àteros faeddos in %2$scursivu%2$s cun Markdown. Como podes %3$sbarrare%3$s calicunos faeddos e puru [link to Nextcloud](https://nextcloud.com).</string>
+
+    <string name="formatting_help_lists_title">Listas</string>
+    <string name="formatting_help_lists_body_1">A bortas ti serbint listas numeradas:</string>
+    <string name="formatting_help_lists_body_2">Unu</string>
+    <string name="formatting_help_lists_body_3">Duos</string>
+    <string name="formatting_help_lists_body_4">Tres</string>
+    <string name="formatting_help_lists_body_5">A bortas ti serbint puntos de elencu:</string>
+    <string name="formatting_help_lists_body_6">Cumintza una lìnia cun unu tretigheddu</string>
+    <string name="formatting_help_lists_body_7">E si tenes suta-puntos, pone duos ispàtzios in antis de su tretigheddu o de s\'asteriscu:</string>
+    <string name="formatting_help_lists_body_8">Comente a custu</string>
+    <string name="formatting_help_lists_body_9">E custu</string>
+
+    <string name="formatting_help_checkboxes_title">Casellas de seletzione</string>
+    <string name="formatting_help_checkboxes_body_1">Pro creare una casella de seletzione, imprea una lista cun in fatu is parèntesis</string>
+    <string name="formatting_help_checkboxes_body_2">Elementu 1</string>
+    <string name="formatting_help_checkboxes_body_3">Elementos 2</string>
+
+    <string name="formatting_help_structured_documents_title">Documentos istruturados</string>
+    <string name="formatting_help_structured_documents_body_1">A bortas cumbenit a tènnere livellos de intestatzione diferentes pro istruturare is documentos tuos. Cumintza is lìnias cun unu %1$s pro creare intestatziones. Prus %2$s in una lìnia inditant un\'intestatzione prus pitica.</string>
+    <string name="formatting_help_structured_documents_body_2">Custa est un\'intestatzione a tres livellos</string>
+    <string name="formatting_help_structured_documents_body_3">Podes impreare dae unu  %1$s finas a %2$s ses livellos diferentes de intestatzione.</string>
+    <string name="formatting_help_structured_documents_body_4">Si cheres mentovare a calicunu, imprea su caràtere %1$s in antis de sa lìnia:</string>
+    <string name="formatting_help_structured_documents_body_5">Sa fantasia contat prus de sa connoschèntzia. Sa connoschèntzia est limitada, sa fantasia agollit totu su mundu.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
+    <string name="formatting_help_code_title">Còdighe</string>
+    <string name="formatting_help_code_body_1">Ddoe at medas maneras pro modellare s\'istile de su còdighe cun Markdown. Si tenes cantos de còdighe in lìnia, serra·ddos intre cabos invertidos:</string>
+    <string name="formatting_help_code_body_2">Markdown disponet puru de trumas de còdighe, a prus lìnias e sena indentatzione:</string>
+    <string name="formatting_help_code_body_3">E si detzides de impreare su marcadore de sa sintassi, inclue su limbàgiu:</string>
+
+    <string name="formatting_help_tables_title">Tabellas</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Colunna %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Balore %1d</string>
+
+    <string name="formatting_help_images_title">Immàgines</string>
+    <string name="formatting_help_images_alt">Immàgine de fantasia</string>
+
+    <string name="simple_other">Àteru</string>
+    <string name="sort_last_modified">Pone in òrdine de data de modìfica</string>
+    <string name="sort_alphabetically">Pone in òrdine alfabèticu</string>
+    <string name="error_action_open_battery_settings">Impostatziones bateria</string>
+    <string name="error_action_open_deck_info">Aberi informatziones aplicatzione</string>
+    <string name="error_action_open_network">Impostatziones de rete</string>
+    <string name="no_account_configured_yet">Perunu contu configuradu ancora</string>
+    <string name="no_other_accounts">No as configuradu perunu contu ancora.</string>
+    <string name="context_based_formatting">Bentana de formatatzione basada subra de su cuntestu</string>
+</resources>

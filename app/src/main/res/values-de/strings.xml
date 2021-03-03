@@ -114,7 +114,7 @@
     <string name="error_dialog_title">Oh nein - Was jetzt? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Bitte versuchen Sie, das Schließen der App zu erzwingen und sie erneut zu starten. Möglicherweise bestand eine gestörte Verbindung zur Nextcloud-App.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Wenn das Problem weiterhin besteht, versuchen Sie, den Speicher von Nextcloud und Nextcloud Notes zu leeren, um das Problem zu beheben.</string>
-    <string name="error_dialog_tip_clear_storage">Sie können den Speicherinhalt leeren indem Sie die App öffnen und Speicher → Speicherinhalt löschen auswählen.</string>
+    <string name="error_dialog_tip_clear_storage">Sie können den Speicherinhalt leeren indem Sie die App öffnen und Speicher → Speicherinhalt löschen auswählen. ⚠️ Warnung: Noch nicht synchronisierte Notizen werden gelöscht!</string>
     <string name="error_dialog_tip_files_outdated">Sie scheinen eine alte Version der Nextcloud-App installiert zu haben. Bitte besuchen Sie den Play Store oder F-Droid, um die neueste Version zu installieren.</string>
     <string name="error_dialog_tip_files_force_stop">Mit Ihrer Nextcloud-App scheint etwas nicht zu stimmen. Bitte versuchen Sie, sowohl die Nextcloud-App als auch die Nextcloud Notes-App anzuhalten.</string>
     <string name="error_dialog_tip_files_delete_storage">Wenn das erzwungene Stoppen nicht hilft, können Sie versuchen, den Speicher beider Apps zu leeren.</string>
@@ -242,6 +242,7 @@
     <string name="error_action_open_battery_settings">Batterie-Einstellungen</string>
     <string name="error_action_open_deck_info">App-Informationen öffnen</string>
     <string name="error_action_open_network">Netzwerkeinstellungen</string>
+    <string name="no_account_configured_yet">Bislang kein Konto eingerichtet</string>
     <string name="no_other_accounts">Sie haben bislang keine weiteren Konten eingerichtet.</string>
     <string name="context_based_formatting">Popup für die kontextbasierte Formatierung</string>
 </resources>

@@ -114,7 +114,7 @@
     <string name="error_dialog_title">Vaites, e agora que? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Probe a forzar o peche da apli e reiniciala de novo. Pode haber unha conexión incorrecta coa apli Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se o problema continúa, tente limpar o almacenamento de ambas as aplis: Nextcloud e Nextcloud Notas para resolver este problema.</string>
-    <string name="error_dialog_tip_clear_storage">Pode limpar o almacenamento abrindo a información da apli e seleccionando Almacenamento → Limpar o almacenamento.</string>
+    <string name="error_dialog_tip_clear_storage">Pode limpar o almacenamento abrindo a información da apli e seleccionando Almacenamento → Limpar o almacenamento.⚠️ Advertencia: Isto eliminará as notas que aínda non estean sincronizadas.</string>
     <string name="error_dialog_tip_files_outdated">A súa apli Nextcloud semella estar desactualizada. Visite Play Store ou F-Droid para obter a última versión.</string>
     <string name="error_dialog_tip_files_force_stop">Semella que algo está mal na súa apli Nextcloud. Tente forzar a parar ambas, a apli Nextcloud e a apli Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Se detelos pola forza non axuda, pode tentar limpar o almacenamento de ambas as aplicacións.</string>
@@ -242,6 +242,7 @@
     <string name="error_action_open_battery_settings">Axustes da batería</string>
     <string name="error_action_open_deck_info">Abrir a info da apli</string>
     <string name="error_action_open_network">Axustes da rede</string>
+    <string name="no_account_configured_yet">Aínda non hai ningunha conta configurada</string>
     <string name="no_other_accounts">Aínda non ten configurada ningunha outra conta.</string>
     <string name="context_based_formatting">Xanela emerxente de formato baseado no contexto</string>
 </resources>

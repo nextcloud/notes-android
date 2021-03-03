@@ -114,7 +114,6 @@
     <string name="error_dialog_title">Ωχ όχι - Τώρα τί; 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Δοκιμάστε τερματισμό της εφαρμογή και επανεκκίνηση. Ίσως υπάρχει λάθος σύνδεση.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Εάν το πρόβλημα παραμένει, προσπαθήστε να εκκαθαρίσετε τον χώρο αποθήκευσης και των δύο εφαρμογών: του Nextcloud και του Nextcloud Notes.</string>
-    <string name="error_dialog_tip_clear_storage">Μπορείτε να εκκαθαρίσετε τον χώρο αποθήκευσης από τις πληροφορίες εφαρμογής και επιλέγοντας Αποθηκευτικός χώρος → Εκκαθάριση χώρου αποθήκευσης.</string>
     <string name="error_dialog_tip_files_outdated">Η εφαρμογή Nextcloud δεν είναι ενημερωμένη. Παρακαλούμε επισκεφθείτε το Play Store ή το F-Groid για λήψη της τελευταίας έκδοσης.</string>
     <string name="error_dialog_tip_files_force_stop">Κάτι φαίνεται να πάει στραβά με την εφαρμογή Nextcloud. Προσπαθήστε να τερματίσετε την εφαρμογή Nextcloud και την εφαρμογή Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Εάν ο τερματισμός δεν βοηθήσει, μπορείτε να εκκαθαρίσετε τον αποθηκευτικό χώρο και των δύο εφαρμογών.</string>
@@ -172,6 +171,19 @@
         <item quantity="one">%d επιλέχτηκε</item>
         <item quantity="other">%d επιλέχτηκαν</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Διαγράφηκε μία σημείωση</item>
+        <item quantity="other">Διαγράφηκαν %1$d σημειώσεις</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Επαναφέρθηκε μία σημείωση</item>
+        <item quantity="other">Επαναφέρθηκαν %1$dσημειώσεις</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">Διαμοιρασμός περιεχομένου %1$d σημείωσης</item>
+        <item quantity="other">Διαμοιρασμός περιεχομένου %1$d σημειώσεων</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
@@ -229,6 +241,7 @@
     <string name="error_action_open_battery_settings">Ρυθμίσεις μπαταρίας</string>
     <string name="error_action_open_deck_info">Πληροφορίες εφαρμογής</string>
     <string name="error_action_open_network">Ρυθμίσεις δικτύου</string>
+    <string name="no_account_configured_yet">Δεν έχει ρυθμιστεί ακόμη κάποιος λογαριασμός</string>
     <string name="no_other_accounts">Δεν έχετε ρυθμίσει ακόμη άλλους λογαριασμούς.</string>
     <string name="context_based_formatting">Μορφοποίηση βάσει περιεχομένου popover</string>
 </resources>
