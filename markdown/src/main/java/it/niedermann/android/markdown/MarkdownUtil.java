@@ -84,12 +84,11 @@ public class MarkdownUtil {
     private static CharSequence replaceCheckboxesWithEmojis(CharSequence parsed) {
         if (checkboxCheckedEmoji != null) {
             // TODO replace
-            TextUtils.replace(parsed,  new String[] {"- [x]"}, new String[] {
-                    checkboxCheckedEmoji
-            });
+            parsed = TextUtils.replace(parsed,  new String[] {"- [x]"}, new String[] {checkboxCheckedEmoji});
         }
         if (checkboxUncheckedEmoji != null) {
             // TODO replace
+            parsed = TextUtils.replace(parsed,  new String[] {"- [ ]"}, new String[] {checkboxUncheckedEmoji});
         }
         return parsed;
     }
