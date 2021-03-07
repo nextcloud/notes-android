@@ -107,7 +107,7 @@ public class MarkdownUtil {
     /**
      * Performs the given {@param map} function for each line which contains a checkbox
      */
-    private static CharSequence runForEachCheckbox(String markdownString, Function<String, String> map) {
+    private static CharSequence runForEachCheckbox(@NonNull String markdownString, @NonNull Function<String, String> map) {
         final String[] lines = markdownString.split("\n");
         boolean isInFencedCodeBlock = false;
         int fencedCodeBlockSigns = 0;
