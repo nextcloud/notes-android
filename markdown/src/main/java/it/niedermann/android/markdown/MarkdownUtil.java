@@ -91,8 +91,17 @@ public class MarkdownUtil {
 
     @Nullable
     private static String getCheckboxEmoji(boolean checked) {
-        final String[] checkedEmojis = new String[]{"✅", "☑️", "✔️"};
-        final String[] uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
+        final String[] checkedEmojis;
+        final String[] uncheckedEmojis;
+        // Seriously what the fuck, Samsung?
+        // https://emojipedia.org/ballot-box-with-x/
+        if(Build.MANUFACTURER.toLowerCase().contains("samsung")) {
+            checkedEmojis = new String[]{"✅", "☑️", "✔️"};
+            uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
+        } else {
+            checkedEmojis = new String[]{"☒", "✅", "☑️", "✔️"};
+            uncheckedEmojis = new String[]{"☐", "❌", "\uD83D\uDD32️", "☐️"};
+        }
         final Paint paint = new Paint();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             for (String emoji : checked ? checkedEmojis : uncheckedEmojis) {
