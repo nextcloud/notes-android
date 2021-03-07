@@ -20,9 +20,9 @@ Please use **[GitHub reactions](https://blog.github.com/2016-03-10-add-reactions
 
 **To Reproduce**
 Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
+1. Go to '…'
+2. Click on '…'
+3. Scroll down to '…'
 4. See error
 
 

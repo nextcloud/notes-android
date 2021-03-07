@@ -6,29 +6,15 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import androidx.core.content.ContextCompat;
-
 import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.branding.BrandingUtil;
-import it.niedermann.owncloud.notes.shared.model.Category;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.NotesApplication;
-
-import static it.niedermann.owncloud.notes.edit.EditNoteActivity.PARAM_CATEGORY;
-import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_ALL;
-import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_CATEGORY;
-import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_STARRED;
 
 public class NoteListWidget extends AppWidgetProvider {
     private static final String TAG = NoteListWidget.class.getSimpleName();
@@ -41,38 +27,14 @@ public class NoteListWidget extends AppWidgetProvider {
         final NotesDatabase db = NotesDatabase.getInstance(context);
 
         RemoteViews views;
-        DarkModeSetting darkTheme;
 
         for (int appWidgetId : appWidgetIds) {
             try {
                 final NoteListsWidgetData data = db.getNoteListWidgetData(appWidgetId);
-                final LocalAccount localAccount = db.getAccount(data.getAccountId());
-
-                String category = null;
-                if (data.getCategoryId() != null) {
-                    category = db.getCategoryTitleById(data.getAccountId(), data.getCategoryId());
-                }
-
-                darkTheme = DarkModeSetting.fromModeID(data.getThemeMode());
 
                 Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
                 serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
-
-                // Launch application when user taps the header icon or app title
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.setComponent(new ComponentName(context.getPackageName(),
-                        MainActivity.class.getName()));
-
-                // Open the main app if the user taps the widget header
-                PendingIntent openAppI = PendingIntent.getActivity(context, PENDING_INTENT_OPEN_APP_RQ,
-                        intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
-
-                // Launch create note activity if user taps "+" icon on header
-                PendingIntent newNoteI = PendingIntent.getActivity(context, (PENDING_INTENT_NEW_NOTE_RQ + appWidgetId),
-                        new Intent(context, EditNoteActivity.class).putExtra(PARAM_CATEGORY, new Category(category, data.getMode() == MODE_DISPLAY_STARRED)),
-                        PendingIntent.FLAG_UPDATE_CURRENT);
 
                 PendingIntent templatePI = PendingIntent.getActivity(context, PENDING_INTENT_EDIT_NOTE_RQ,
                         new Intent(context, EditNoteActivity.class),
@@ -81,26 +43,11 @@ public class NoteListWidget extends AppWidgetProvider {
                 Log.v(TAG, "-- data - " + data);
 
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
-                views.setTextViewText(R.id.widget_note_list_title_tv, getWidgetTitle(context, data.getMode(), category));
-                views.setOnClickPendingIntent(R.id.widget_note_header_icon, openAppI);
-                views.setOnClickPendingIntent(R.id.widget_note_list_title_tv, openAppI);
-                views.setOnClickPendingIntent(R.id.widget_note_list_create_icon, newNoteI);
                 views.setPendingIntentTemplate(R.id.note_list_widget_lv, templatePI);
                 views.setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent);
                 views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
-                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
-                if (BrandingUtil.isBrandingEnabled(context)) {
-                    views.setInt(R.id.widget_note_header, "setBackgroundColor", localAccount.getColor());
-                    views.setInt(R.id.widget_note_header_icon, "setColorFilter", localAccount.getTextColor());
-                    views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", localAccount.getTextColor());
-                    views.setTextColor(R.id.widget_note_list_title_tv, localAccount.getTextColor());
-                } else {
-                    views.setInt(R.id.widget_note_header, "setBackgroundColor", ContextCompat.getColor(context, R.color.defaultBrand));
-                    views.setInt(R.id.widget_note_header_icon, "setColorFilter", Color.WHITE);
-                    views.setInt(R.id.widget_note_list_create_icon, "setColorFilter", Color.WHITE);
-                    views.setTextColor(R.id.widget_note_list_title_tv, Color.WHITE);
-                }
 
+                awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);
                 awm.updateAppWidget(appWidgetId, views);
             } catch (NoSuchElementException e) {
                 Log.i(TAG, "onUpdate has been triggered before the user finished configuring the widget");
@@ -143,23 +90,6 @@ public class NoteListWidget extends AppWidgetProvider {
 
         for (int appWidgetId : appWidgetIds) {
             db.removeNoteListWidget(appWidgetId);
-        }
-    }
-
-    private static String getWidgetTitle(Context context, int displayMode, String category) {
-        switch (displayMode) {
-            case MODE_DISPLAY_ALL:
-                return context.getString(R.string.app_name);
-            case MODE_DISPLAY_STARRED:
-                return context.getString(R.string.label_favorites);
-            case MODE_DISPLAY_CATEGORY:
-                if ("".equals(category)) {
-                    return context.getString(R.string.action_uncategorized);
-                } else {
-                    return category;
-                }
-            default:
-                return null;
         }
     }
 
