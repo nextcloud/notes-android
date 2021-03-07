@@ -15,16 +15,12 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.text.HtmlCompat;
-import androidx.core.text.TextUtilsCompat;
 
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,9 +50,9 @@ public class MarkdownUtil {
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
 
     @Nullable
-    private static final String checkboxCheckedEmoji = getCheckboxCheckedEmoji();
+    private static final String checkboxCheckedEmoji = getCheckboxEmoji(true);
     @Nullable
-    private static final String checkboxUncheckedEmoji = getCheckboxUncheckedEmoji();
+    private static final String checkboxUncheckedEmoji = getCheckboxEmoji(false);
 
     private MarkdownUtil() {
         // Util class
@@ -69,41 +65,56 @@ public class MarkdownUtil {
      * Therefore we currently fall back on {@link RxMarkdown} as the results will look better in this special case.
      * We might change this in the future by utilizing {@link Markwon} and creating a {@link Spanned} from an {@link HtmlCompat} interemediate.
      */
-    public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull CharSequence content) {
+    public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
         final MarkdownProcessor markdownProcessor = new MarkdownProcessor(context);
         markdownProcessor.factory(TextFactory.create());
-        final CharSequence parsed = parseCompat(markdownProcessor, content);
-        return replaceCheckboxesWithEmojis(parsed);
+        return parseCompat(markdownProcessor, replaceCheckboxesWithEmojis(content));
     }
 
-    private static CharSequence replaceCheckboxesWithEmojis(CharSequence parsed) {
-        if (checkboxCheckedEmoji != null) {
-            parsed = TextUtils.replace(parsed, new String[]{"- [x]"}, new String[]{checkboxCheckedEmoji});
-        }
-        if (checkboxUncheckedEmoji != null) {
-            parsed = TextUtils.replace(parsed, new String[]{"- [ ]"}, new String[]{checkboxUncheckedEmoji});
-        }
-        return parsed;
-    }
-
-    private static String getCheckboxCheckedEmoji() {
-        final String[] emojis = new String[]{"✅", "☑️", "✔️"};
-        final Paint paint = new Paint();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (String emoji : emojis) {
-                if (paint.hasGlyph(emoji)) {
-                    return emoji;
+    private static CharSequence replaceCheckboxesWithEmojis(String content) {
+        final String[] lines = TextUtils.split(content, "\n");
+        boolean isInFencedCodeBlock = false;
+        int fencedCodeBlockSigns = 0;
+        for (int i = 0; i < lines.length; i++) {
+            final Matcher matcher = PATTERN_CODE_FENCE.matcher(lines[i]);
+            if (matcher.find()) {
+                final String fence = matcher.group(1);
+                if (fence != null) {
+                    int currentFencedCodeBlockSigns = fence.length();
+                    if (isInFencedCodeBlock) {
+                        if (currentFencedCodeBlockSigns == fencedCodeBlockSigns) {
+                            isInFencedCodeBlock = false;
+                            fencedCodeBlockSigns = 0;
+                        }
+                    } else {
+                        isInFencedCodeBlock = true;
+                        fencedCodeBlockSigns = currentFencedCodeBlockSigns;
+                    }
+                }
+            }
+            if (!isInFencedCodeBlock) {
+                if (lineStartsWithCheckbox(lines[i]) && lines[i].trim().length() > EListType.DASH.checkboxChecked.length()) {
+                    for(EListType listType: EListType.values()) {
+                        if (checkboxCheckedEmoji != null) {
+                            lines[i] = lines[i].replace(listType.checkboxChecked, checkboxCheckedEmoji);
+                        }
+                        if (checkboxUncheckedEmoji != null) {
+                            lines[i] = lines[i].replace(listType.checkboxUnchecked, checkboxUncheckedEmoji);
+                        }
+                    }
                 }
             }
         }
-        return null;
+        return TextUtils.join("\n", lines);
     }
 
-    private static String getCheckboxUncheckedEmoji() {
-        final String[] emojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
+    @Nullable
+    private static String getCheckboxEmoji(boolean checked) {
+        final String[] checkedEmojis = new String[]{"✅", "☑️", "✔️"};
+        final String[] uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
         final Paint paint = new Paint();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (String emoji : emojis) {
+            for (String emoji : checked ? checkedEmojis: uncheckedEmojis) {
                 if (paint.hasGlyph(emoji)) {
                     return emoji;
                 }
