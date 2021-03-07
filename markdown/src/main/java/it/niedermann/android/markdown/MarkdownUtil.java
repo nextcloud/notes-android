@@ -1,6 +1,8 @@
 package it.niedermann.android.markdown;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.os.Build;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -13,12 +15,16 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.text.HtmlCompat;
+import androidx.core.text.TextUtilsCompat;
 
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,6 +53,11 @@ public class MarkdownUtil {
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
 
+    @Nullable
+    private static final String checkboxCheckedEmoji = getCheckboxCheckedEmoji();
+    @Nullable
+    private static final String checkboxUncheckedEmoji = getCheckboxUncheckedEmoji();
+
     private MarkdownUtil() {
         // Util class
     }
@@ -61,7 +72,52 @@ public class MarkdownUtil {
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull CharSequence content) {
         final MarkdownProcessor markdownProcessor = new MarkdownProcessor(context);
         markdownProcessor.factory(TextFactory.create());
-        return parseCompat(markdownProcessor, content);
+        final CharSequence parsed = parseCompat(markdownProcessor, content);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return replaceCheckboxesWithEmojis(parsed);
+        } else {
+            return parsed;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private static CharSequence replaceCheckboxesWithEmojis(CharSequence parsed) {
+        if (checkboxCheckedEmoji != null) {
+            // TODO replace
+            TextUtils.replace(parsed,  new String[] {"- [x]"}, new String[] {
+                    checkboxCheckedEmoji
+            });
+        }
+        if (checkboxUncheckedEmoji != null) {
+            // TODO replace
+        }
+        return parsed;
+    }
+
+    private static String getCheckboxCheckedEmoji() {
+        final List<String> emojis = Arrays.asList("✅", "☑️", "✔️");
+        final Paint paint = new Paint();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for(String emoji : emojis) {
+                if (paint.hasGlyph(emoji)) {
+                    return emoji;
+                }
+            }
+        }
+        return null;
+    }
+
+    private static String getCheckboxUncheckedEmoji() {
+        final List<String> emojis = Arrays.asList("❌", "\uD83D\uDD32️", "☐️");
+        final Paint paint = new Paint();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for(String emoji : emojis) {
+                if (paint.hasGlyph(emoji)) {
+                    return emoji;
+                }
+            }
+        }
+        return null;
     }
 
     /**
