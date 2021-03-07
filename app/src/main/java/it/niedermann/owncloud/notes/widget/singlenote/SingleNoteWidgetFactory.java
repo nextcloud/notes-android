@@ -8,14 +8,14 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import androidx.annotation.Nullable;
+
 import java.util.NoSuchElementException;
 
 import it.niedermann.android.markdown.MarkdownUtil;
-import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
@@ -23,9 +23,9 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private final Context context;
     private final int appWidgetId;
 
-    private NotesDatabase db;
+    private final NotesDatabase db;
+    @Nullable
     private DBNote note;
-    private boolean darkModeActive = false;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
@@ -34,12 +34,6 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
         this.db = NotesDatabase.getInstance(context);
-        try {
-            SingleNoteWidgetData data = db.getSingleNoteWidgetData(appWidgetId);
-            darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
-        } catch (NoSuchElementException e) {
-            Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
-        }
     }
 
     @Override
@@ -90,8 +84,6 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
             return null;
         }
 
-        RemoteViews note_content;
-
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 
@@ -99,7 +91,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
 
-        note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
+        final RemoteViews note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
         note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
         note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, note.getContent()));
 
