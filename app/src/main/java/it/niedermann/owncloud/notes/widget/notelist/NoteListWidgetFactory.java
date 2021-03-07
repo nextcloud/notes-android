@@ -10,16 +10,20 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.PARAM_CATEGORY;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListsWidgetData.MODE_DISPLAY_ALL;
@@ -111,7 +115,9 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv, getAddButtonText(context, data.getMode(), category));
             note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_add_blue_24dp);
-            note_content.setInt(R.id.widget_entry_fav_icon, "setColorFilter", localAccount.getColor());
+            note_content.setInt(R.id.widget_entry_fav_icon, "setColorFilter", NotesColorUtil.contrastRatioIsSufficient(ContextCompat.getColor(context, R.color.widget_background), localAccount.getColor())
+                    ? localAccount.getColor()
+                    : ContextCompat.getColor(context, R.color.widget_foreground));
         } else {
             position--;
             if (position > dbNotes.size() - 1 || dbNotes.get(position) == null) {
