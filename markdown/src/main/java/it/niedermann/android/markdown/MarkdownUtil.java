@@ -73,31 +73,24 @@ public class MarkdownUtil {
         final MarkdownProcessor markdownProcessor = new MarkdownProcessor(context);
         markdownProcessor.factory(TextFactory.create());
         final CharSequence parsed = parseCompat(markdownProcessor, content);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return replaceCheckboxesWithEmojis(parsed);
-        } else {
-            return parsed;
-        }
+        return replaceCheckboxesWithEmojis(parsed);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     private static CharSequence replaceCheckboxesWithEmojis(CharSequence parsed) {
         if (checkboxCheckedEmoji != null) {
-            // TODO replace
-            parsed = TextUtils.replace(parsed,  new String[] {"- [x]"}, new String[] {checkboxCheckedEmoji});
+            parsed = TextUtils.replace(parsed, new String[]{"- [x]"}, new String[]{checkboxCheckedEmoji});
         }
         if (checkboxUncheckedEmoji != null) {
-            // TODO replace
-            parsed = TextUtils.replace(parsed,  new String[] {"- [ ]"}, new String[] {checkboxUncheckedEmoji});
+            parsed = TextUtils.replace(parsed, new String[]{"- [ ]"}, new String[]{checkboxUncheckedEmoji});
         }
         return parsed;
     }
 
     private static String getCheckboxCheckedEmoji() {
-        final List<String> emojis = Arrays.asList("✅", "☑️", "✔️");
+        final String[] emojis = new String[]{"✅", "☑️", "✔️"};
         final Paint paint = new Paint();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for(String emoji : emojis) {
+            for (String emoji : emojis) {
                 if (paint.hasGlyph(emoji)) {
                     return emoji;
                 }
@@ -107,10 +100,10 @@ public class MarkdownUtil {
     }
 
     private static String getCheckboxUncheckedEmoji() {
-        final List<String> emojis = Arrays.asList("❌", "\uD83D\uDD32️", "☐️");
+        final String[] emojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
         final Paint paint = new Paint();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for(String emoji : emojis) {
+            for (String emoji : emojis) {
                 if (paint.hasGlyph(emoji)) {
                     return emoji;
                 }
