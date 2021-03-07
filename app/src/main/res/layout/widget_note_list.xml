@@ -6,55 +6,6 @@
     android:background="@drawable/widget_background"
     android:orientation="vertical">
 
-    <!-- Widget header -->
-    <RelativeLayout
-        android:id="@+id/widget_note_header"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_note_list_header_height"
-        android:background="@color/defaultBrand"
-        android:padding="@dimen/widget_note_list_hdr_padding">
-
-        <ImageView
-            android:id="@+id/widget_note_header_icon"
-            android:layout_width="@dimen/widget_note_list_icon_width"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:contentDescription="@string/widget_app_launcher_contentDescription"
-            android:paddingStart="@dimen/widget_note_list_outer_padding"
-            android:paddingEnd="@dimen/widget_note_list_inner_padding"
-            android:scaleX="2"
-            android:scaleY="2"
-            android:src="@drawable/ic_launcher_foreground" />
-
-        <TextView
-            android:id="@+id/widget_note_list_title_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toStartOf="@id/widget_note_list_create_icon"
-            android:layout_toEndOf="@id/widget_note_header_icon"
-            android:ellipsize="middle"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/widget_note_list_hdr_padding"
-            android:paddingEnd="@dimen/widget_note_list_hdr_padding"
-            android:singleLine="true"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            tools:text="@tools:sample/lorem/random" />
-
-        <ImageView
-            android:id="@+id/widget_note_list_create_icon"
-            android:layout_width="@dimen/widget_note_list_icon_width"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:contentDescription="@string/widget_create_note"
-            android:paddingStart="@dimen/widget_note_list_inner_padding"
-            android:paddingEnd="@dimen/widget_note_list_outer_padding"
-            android:src="@drawable/ic_add_white_24dp" />
-
-    </RelativeLayout>
-    <!-- End header -->
-
     <ListView
         android:id="@+id/note_list_widget_lv"
         android:layout_width="match_parent"

@@ -8,7 +8,7 @@ If you find a bug, feel free to [open an issue](https://github.com/stefan-nieder
 
 **Device**: e. g. Motorola Moto G 2015
 
-**System language**: English (US), German, ...
+**System language**: English (US), German, …
 
 **App version:** e. g. v0.8.1
 
@@ -18,14 +18,14 @@ If you find a bug, feel free to [open an issue](https://github.com/stefan-nieder
   1. open the app
   2. click on a note
   3. use the top left back-arrow
-  4. ...
+  4. …
 
 ### Copy & Paste
     **Android version:** e. g. 6.0.1 Marshmallow
     
     **Device**: e. g. Motorola Moto G 2015
     
-    **System language**: English (US), German, ...
+    **System language**: English (US), German, …
     
     **App version:** e. g. v0.8.1
     
@@ -35,7 +35,7 @@ If you find a bug, feel free to [open an issue](https://github.com/stefan-nieder
       1. open the app
       2. click on a note
       3. use the top left back-arrow
-      4. ...
+      4. …
 
 ## Adding new features
 
