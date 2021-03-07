@@ -10,8 +10,9 @@
         android:id="@+id/note_list_widget_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="@color/widget_divider"
+        android:dividerHeight="@dimen/widget_divider"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/fg_default"
         tools:listitem="@layout/widget_entry" />
 
     <TextView
