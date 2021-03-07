@@ -95,7 +95,7 @@ public class MarkdownUtil {
         final String[] uncheckedEmojis;
         // Seriously what the fuck, Samsung?
         // https://emojipedia.org/ballot-box-with-x/
-        if(Build.MANUFACTURER.toLowerCase().contains("samsung")) {
+        if(Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase().contains("samsung")) {
             checkedEmojis = new String[]{"✅", "☑️", "✔️"};
             uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
         } else {
