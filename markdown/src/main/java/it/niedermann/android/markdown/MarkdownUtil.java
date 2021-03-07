@@ -21,6 +21,10 @@ import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -72,7 +76,39 @@ public class MarkdownUtil {
     }
 
     private static CharSequence replaceCheckboxesWithEmojis(String content) {
-        final String[] lines = TextUtils.split(content, "\n");
+        return runForEachCheckbox(content, (line) -> {
+            for (EListType listType : EListType.values()) {
+                if (checkboxCheckedEmoji != null) {
+                    line = line.replace(listType.checkboxChecked, checkboxCheckedEmoji);
+                }
+                if (checkboxUncheckedEmoji != null) {
+                    line = line.replace(listType.checkboxUnchecked, checkboxUncheckedEmoji);
+                }
+            }
+            return line;
+        });
+    }
+
+    @Nullable
+    private static String getCheckboxEmoji(boolean checked) {
+        final String[] checkedEmojis = new String[]{"✅", "☑️", "✔️"};
+        final String[] uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
+        final Paint paint = new Paint();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for (String emoji : checked ? checkedEmojis : uncheckedEmojis) {
+                if (paint.hasGlyph(emoji)) {
+                    return emoji;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Performs the given {@param map} function for each line which contains a checkbox
+     */
+    private static CharSequence runForEachCheckbox(String markdownString, Function<String, String> map) {
+        final String[] lines = markdownString.split("\n");
         boolean isInFencedCodeBlock = false;
         int fencedCodeBlockSigns = 0;
         for (int i = 0; i < lines.length; i++) {
@@ -94,33 +130,11 @@ public class MarkdownUtil {
             }
             if (!isInFencedCodeBlock) {
                 if (lineStartsWithCheckbox(lines[i]) && lines[i].trim().length() > EListType.DASH.checkboxChecked.length()) {
-                    for(EListType listType: EListType.values()) {
-                        if (checkboxCheckedEmoji != null) {
-                            lines[i] = lines[i].replace(listType.checkboxChecked, checkboxCheckedEmoji);
-                        }
-                        if (checkboxUncheckedEmoji != null) {
-                            lines[i] = lines[i].replace(listType.checkboxUnchecked, checkboxUncheckedEmoji);
-                        }
-                    }
+                    lines[i] = map.apply(lines[i]);
                 }
             }
         }
         return TextUtils.join("\n", lines);
-    }
-
-    @Nullable
-    private static String getCheckboxEmoji(boolean checked) {
-        final String[] checkedEmojis = new String[]{"✅", "☑️", "✔️"};
-        final String[] uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
-        final Paint paint = new Paint();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            for (String emoji : checked ? checkedEmojis: uncheckedEmojis) {
-                if (paint.hasGlyph(emoji)) {
-                    return emoji;
-                }
-            }
-        }
-        return null;
     }
 
     /**
