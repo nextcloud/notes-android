@@ -32,7 +32,6 @@
         android:singleLine="true"
         android:textColor="@color/widget_foreground"
         android:textSize="14sp"
-        android:textStyle="bold"
         tools:text="@string/widget_note_list_add" />
 
 </LinearLayout>

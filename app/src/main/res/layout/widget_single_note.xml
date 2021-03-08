@@ -9,7 +9,7 @@
         android:id="@+id/single_note_widget_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/widget_single_note_padding"
+        android:padding="@dimen/spacer_1x"
         tools:listitem="@layout/widget_single_note_content" />
 
     <TextView
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:padding="@dimen/widget_single_note_padding"
+        android:padding="@dimen/spacer_1x"
         android:text="@string/widget_single_note_placeholder_tv"
         android:textAlignment="center"
         android:textColor="@color/widget_foreground" />

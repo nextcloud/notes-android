@@ -34,7 +34,6 @@
     <dimen name="widget_divider">1dp</dimen>
 
     <dimen name="widget_margin">@dimen/spacer_1x</dimen>
-    <dimen name="widget_single_note_padding">10dp</dimen>
 
     <dimen name="widget_note_list_hdr_padding">2dp</dimen>
     <dimen name="widget_note_list_header_height">36dp</dimen>
