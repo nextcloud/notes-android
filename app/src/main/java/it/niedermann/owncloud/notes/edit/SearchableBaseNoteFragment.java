@@ -127,7 +127,7 @@ public abstract class SearchableBaseNoteFragment extends BaseNoteFragment {
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             private DelayQueryRunnable delayQueryTask;
-            private Handler handler = new Handler();
+            private final Handler handler = new Handler();
 
             @Override
             public boolean onQueryTextSubmit(@NonNull String query) {
