@@ -95,12 +95,12 @@
     <string name="simple_exception">例外</string>
     <string name="pin_to_homescreen">釘選至主畫面</string>
     <string name="note_has_been_deleted">此則筆記已被刪除</string>
-    <string name="add_account">新增帳戶</string>
+    <string name="add_account">新增賬戶</string>
     <string name="category_music">音樂</string>
     <string name="category_movies">電影</string>
     <string name="category_movie">電影</string>
     <string name="category_work">工作</string>
-    <string name="account_already_imported">已成功匯入帳戶</string>
+    <string name="account_already_imported">已成功匯入賬戶</string>
     <string name="no_notes_yet">尚沒有筆記</string>
     <string name="no_notes_yet_description">請按 + 按鈕建立新筆記</string>
     <string name="simple_more">更多</string>
@@ -138,7 +138,7 @@
     <string name="simple_appearance">外觀</string>
     <string name="simple_synchronization">同步</string>
     <string name="simple_behavior">行為</string>
-    <string name="manage_accounts">帳戶管理</string>
+    <string name="manage_accounts">賬戶管理</string>
     <string name="action_formatting_help">正在格式化</string>
 
     <string-array name="noteMode_entries">
@@ -211,6 +211,9 @@
     <string name="formatting_help_structured_documents_body_6">- 愛因斯坦</string>
 
     <string name="formatting_help_code_title">代碼</string>
+    <string name="formatting_help_code_body_2">Markdown還支持稱為代碼防護（code fencing）的功能，該功能允許多行不縮進：</string>
+    <string name="formatting_help_code_body_3">如果您想使用語法突出顯示，請指定語言：</string>
+
     <string name="formatting_help_tables_title">表</string>
     <!-- Column header of a sample table -->
     <string name="formatting_help_tables_column">欄  %1d</string>
@@ -226,7 +229,7 @@
     <string name="error_action_open_battery_settings">電池設定</string>
     <string name="error_action_open_deck_info">開啟 App 資訊</string>
     <string name="error_action_open_network">網路設定</string>
-    <string name="no_account_configured_yet">未有已設定的帳戶</string>
+    <string name="no_account_configured_yet">未有已設定的賬戶</string>
     <string name="no_other_accounts">你尚未設定其它帳號。</string>
     <string name="context_based_formatting">基於 context 的格式彈出框</string>
 </resources>
