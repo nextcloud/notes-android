@@ -1,0 +1,2 @@
+- Note List Widget: Adjust button style to match other headlines (#1080)
+- Note List Widget: Button text is vertically mis aligned and not at the same offset as the + icon (#1080)

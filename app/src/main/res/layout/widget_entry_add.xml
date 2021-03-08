@@ -26,10 +26,13 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:ellipsize="middle"
-        android:singleLine="true"
+        android:gravity="center_vertical"
         android:paddingStart="@dimen/widget_note_list_inner_padding"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
+        android:singleLine="true"
         android:textColor="@color/widget_foreground"
+        android:textSize="14sp"
+        android:textStyle="bold"
         tools:text="@string/widget_note_list_add" />
 
 </LinearLayout>

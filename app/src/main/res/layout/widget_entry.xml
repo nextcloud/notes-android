@@ -26,10 +26,12 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:ellipsize="end"
+        android:gravity="center_vertical"
         android:lines="1"
         android:paddingStart="@dimen/widget_note_list_inner_padding"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
         android:textColor="@color/widget_foreground"
+        android:textSize="14sp"
         tools:text="@tools:sample/lorem/random" />
 
 </LinearLayout>
