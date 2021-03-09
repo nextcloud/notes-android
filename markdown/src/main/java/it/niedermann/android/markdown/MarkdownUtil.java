@@ -75,7 +75,8 @@ public class MarkdownUtil {
         return parseCompat(markdownProcessor, replaceCheckboxesWithEmojis(content));
     }
 
-    private static CharSequence replaceCheckboxesWithEmojis(String content) {
+    @NonNull
+    private static CharSequence replaceCheckboxesWithEmojis(@NonNull String content) {
         return runForEachCheckbox(content, (line) -> {
             for (EListType listType : EListType.values()) {
                 if (checkboxCheckedEmoji != null) {
@@ -95,7 +96,7 @@ public class MarkdownUtil {
         final String[] uncheckedEmojis;
         // Seriously what the fuck, Samsung?
         // https://emojipedia.org/ballot-box-with-x/
-        if(Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase().contains("samsung")) {
+        if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase().contains("samsung")) {
             checkedEmojis = new String[]{"✅", "☑️", "✔️"};
             uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
         } else {
@@ -116,6 +117,7 @@ public class MarkdownUtil {
     /**
      * Performs the given {@param map} function for each line which contains a checkbox
      */
+    @NonNull
     private static CharSequence runForEachCheckbox(@NonNull String markdownString, @NonNull Function<String, String> map) {
         final String[] lines = markdownString.split("\n");
         boolean isInFencedCodeBlock = false;
@@ -432,7 +434,7 @@ public class MarkdownUtil {
     }
 
     /**
-     * Strips all Markdown from the given String
+     * Strips all Markdown from {@param s} and replaces checkboxes with emojis.
      *
      * @param s Markdown string
      * @return Plain text string
@@ -441,13 +443,13 @@ public class MarkdownUtil {
     public static String removeMarkdown(@Nullable String s) {
         if (s == null)
             return "";
-        String result = s;
-        result = PATTERN_LISTS.matcher(result).replaceAll("");
-        result = PATTERN_HEADINGS.matcher(result).replaceAll("$1");
-        result = PATTERN_HEADING_LINE.matcher(result).replaceAll("");
-        result = PATTERN_EMPHASIS.matcher(result).replaceAll("$2");
-        result = PATTERN_SPACE_1.matcher(result).replaceAll("");
-        result = PATTERN_SPACE_2.matcher(result).replaceAll("");
-        return result;
+        s = replaceCheckboxesWithEmojis(s).toString();
+        s = PATTERN_LISTS.matcher(s).replaceAll("");
+        s = PATTERN_HEADINGS.matcher(s).replaceAll("$1");
+        s = PATTERN_HEADING_LINE.matcher(s).replaceAll("");
+        s = PATTERN_EMPHASIS.matcher(s).replaceAll("$2");
+        s = PATTERN_SPACE_1.matcher(s).replaceAll("");
+        s = PATTERN_SPACE_2.matcher(s).replaceAll("");
+        return s;
     }
 }
