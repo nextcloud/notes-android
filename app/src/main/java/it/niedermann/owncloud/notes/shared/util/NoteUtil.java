@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import it.niedermann.owncloud.notes.R;
 
 import static it.niedermann.android.markdown.MarkdownUtil.removeMarkdown;
+import static it.niedermann.android.markdown.MarkdownUtil.replaceCheckboxesWithEmojis;
 
 /**
  * Provides basic functionality for Note operations.
@@ -63,12 +64,12 @@ public class NoteUtil {
      */
     @NonNull
     public static String generateNoteExcerpt(@NonNull String content, @Nullable String title) {
-        content = removeMarkdown(content.trim());
+        content = removeMarkdown(replaceCheckboxesWithEmojis(content.trim()));
         if(TextUtils.isEmpty(content)) {
             return "";
         }
         if (!TextUtils.isEmpty(title)) {
-            final String trimmedTitle = removeMarkdown(title.trim());
+            final String trimmedTitle = removeMarkdown(replaceCheckboxesWithEmojis(title.trim()));
             if (content.startsWith(trimmedTitle)) {
                 content = content.substring(trimmedTitle.length());
             }

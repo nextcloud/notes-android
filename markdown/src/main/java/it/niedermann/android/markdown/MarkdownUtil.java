@@ -76,7 +76,7 @@ public class MarkdownUtil {
     }
 
     @NonNull
-    private static CharSequence replaceCheckboxesWithEmojis(@NonNull String content) {
+    public static String replaceCheckboxesWithEmojis(@NonNull String content) {
         return runForEachCheckbox(content, (line) -> {
             for (EListType listType : EListType.values()) {
                 if (checkboxCheckedEmoji != null) {
@@ -118,7 +118,7 @@ public class MarkdownUtil {
      * Performs the given {@param map} function for each line which contains a checkbox
      */
     @NonNull
-    private static CharSequence runForEachCheckbox(@NonNull String markdownString, @NonNull Function<String, String> map) {
+    private static String runForEachCheckbox(@NonNull String markdownString, @NonNull Function<String, String> map) {
         final String[] lines = markdownString.split("\n");
         boolean isInFencedCodeBlock = false;
         int fencedCodeBlockSigns = 0;
@@ -434,7 +434,7 @@ public class MarkdownUtil {
     }
 
     /**
-     * Strips all Markdown from {@param s} and replaces checkboxes with emojis.
+     * Strips all Markdown from {@param s}
      *
      * @param s Markdown string
      * @return Plain text string
@@ -443,7 +443,13 @@ public class MarkdownUtil {
     public static String removeMarkdown(@Nullable String s) {
         if (s == null)
             return "";
-        s = replaceCheckboxesWithEmojis(s).toString();
+        // TODO maybe we can utilize the markwon renderer?
+
+        for (EListType listType : EListType.values()) {
+            s = s.replace(listType.checkboxChecked, "");
+            s = s.replace(listType.checkboxUnchecked, "");
+            s = s.replace(listType.listSymbolWithTrailingSpace, "");
+        }
         s = PATTERN_LISTS.matcher(s).replaceAll("");
         s = PATTERN_HEADINGS.matcher(s).replaceAll("$1");
         s = PATTERN_HEADING_LINE.matcher(s).replaceAll("");
