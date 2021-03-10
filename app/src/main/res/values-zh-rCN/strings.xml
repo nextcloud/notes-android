@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">授权</string>
 
     <string name="widget_note_list_title">笔记列表</string>
+    <string name="widget_note_list_add">添加新笔记</string>
+    <string name="widget_note_list_add_favorite">添加新笔记到收藏</string>
+    <string name="widget_note_list_add_to_category">添加新笔记到 %1$s</string>
     <string name="widget_note_list_placeholder">没有笔记</string>
     <string name="widget_single_note_title">单个笔记</string>
     <string name="widget_single_note_placeholder_tv">未找到笔记</string>
