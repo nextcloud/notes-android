@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Licenza</string>
 
     <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_note_list_add">Engadir unha nova nota</string>
+    <string name="widget_note_list_add_favorite">Engadir unha nova nota aos favoritos</string>
+    <string name="widget_note_list_add_to_category">Engadir unha nova nota a %1$s</string>
     <string name="widget_note_list_placeholder">Non hai notas</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="widget_single_note_placeholder_tv">Non se atopou a nota</string>

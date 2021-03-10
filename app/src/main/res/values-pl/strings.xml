@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Licencja</string>
 
     <string name="widget_note_list_title">Lista notatek</string>
+    <string name="widget_note_list_add">Dodaj nową notatkę</string>
+    <string name="widget_note_list_add_favorite">Dodaj nową notatkę do ulubionych</string>
+    <string name="widget_note_list_add_to_category">Dodaj nową notatkę do %1$s</string>
     <string name="widget_note_list_placeholder">Brak notatek</string>
     <string name="widget_single_note_title">Pojedyncza notatka</string>
     <string name="widget_single_note_placeholder_tv">Nie znaleziono notatki</string>

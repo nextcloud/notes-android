@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">授權條款</string>
 
     <string name="widget_note_list_title">筆記清單</string>
+    <string name="widget_note_list_add">添加新筆記</string>
+    <string name="widget_note_list_add_favorite">將新筆記添加到收藏夾</string>
+    <string name="widget_note_list_add_to_category">將新筆記添加到 %1$s</string>
     <string name="widget_note_list_placeholder">沒有筆記</string>
     <string name="widget_single_note_title">單則筆記</string>
     <string name="widget_single_note_placeholder_tv">找不到筆記</string>
@@ -127,6 +130,8 @@
     <string name="error_dialog_contact_us">如果問題仍然存在，請不要猶豫與我們聯繫。 您可以在側欄的“關於”部分中找到我們聯絡的信息。</string>
     <string name="error_dialog_we_need_info">我們需要以下的技術資訊來幫助您：</string>
     <string name="error_dialog_server_app_enabled">請確保您已在伺服器上安裝並啟用 Notes 應用程式。</string>
+    <string name="error_dialog_redirect">您的伺服器確實以HTTP 302狀態代碼響應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。 這可能是由 .htaccess 檔案中的自定義替代引起的，也可能是由 Nextcloud 應用程式（如 OID 客戶端）引起的。</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">請禁用 Nextcloud 和 Notes 應用程式的所有電池優化。</string>
     <string name="added_content">已加入「%1$s」</string>
     <string name="shared_text_empty">分享的文字是空的</string>
     <string name="append_to_note">附加到筆記</string>
@@ -186,7 +191,12 @@
     <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">基於 context 的格式</string>
+    <string name="formatting_help_cbf_body_1">Notes 應用程式的主要設計目標是提供無干擾的工具，儘管您可以使用Markdown設置文本格式。 對於下面提到的各種示例，您可以使用快捷方式，以便無需輸入以下代碼即可格式化便箋。</string>
+    <string name="formatting_help_cbf_body_2">只需選擇一個文本範圍或在任意位置點擊光標，您將彈出一個選項單，該選項單包含默認條目 %1$s，%2$s，%3$s 條目如 %4$s 或 %5$s。</string>
+
     <string name="formatting_help_text_title">文字編輯器</string>
+    <string name="formatting_help_text_body">使用 Markdown 可以很容易地使某些單詞變為%1$s粗體%1$s，而其他單詞則變為%2$s斜體%2$s。您可以%3$s刪除%3$s一些單詞，甚至[鏈接到 Nextcloud ]（https://nextcloud.com）。</string>
+
     <string name="formatting_help_lists_title">清單</string>
     <string name="formatting_help_lists_body_1">有時您想顯示編號列表（numbered list）：</string>
     <string name="formatting_help_lists_body_2">一</string>
@@ -204,6 +214,7 @@
     <string name="formatting_help_checkboxes_body_3">項目 2</string>
 
     <string name="formatting_help_structured_documents_title">結構化文件</string>
+    <string name="formatting_help_structured_documents_body_1">有時，使用不同級別的標題來組織文檔很有用。以 %1$s 開頭的行以創建標題。連續多個 %2$s 表示較小的標題尺寸。</string>
     <string name="formatting_help_structured_documents_body_2">這是第三層標題</string>
     <string name="formatting_help_structured_documents_body_3">您可以使用從 %1$s 到 %2$s 等共六個不同等級的標題大小。</string>
     <string name="formatting_help_structured_documents_body_4">如果您想引用他人的說話，請在該行之前使用%1$s字符：</string>
@@ -211,6 +222,7 @@
     <string name="formatting_help_structured_documents_body_6">- 愛因斯坦</string>
 
     <string name="formatting_help_code_title">代碼</string>
+    <string name="formatting_help_code_body_1">使用 Markdown 設置代碼樣式的方法有多種。 如果您有內聯代碼塊，請將其包裝在反引號中：</string>
     <string name="formatting_help_code_body_2">Markdown還支持稱為代碼防護（code fencing）的功能，該功能允許多行不縮進：</string>
     <string name="formatting_help_code_body_3">如果您想使用語法突出顯示，請指定語言：</string>
 
