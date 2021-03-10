@@ -1,0 +1,1 @@
+- ✅ Use checkbox-emoji-replacement also in title and excerpt
