@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Lizentzia</string>
 
     <string name="widget_note_list_title">Oharren zerrenda</string>
+    <string name="widget_note_list_add">Gehitu ohar berria </string>
+    <string name="widget_note_list_add_favorite">Gehitu ohar berria gogokoetara</string>
+    <string name="widget_note_list_add_to_category">Gehitu ohar berria %1$s-(e)ra</string>
     <string name="widget_note_list_placeholder">Oharrik ez</string>
     <string name="widget_single_note_title">Ohar bakarra</string>
     <string name="widget_single_note_placeholder_tv">Oharra ez da aurkitu</string>

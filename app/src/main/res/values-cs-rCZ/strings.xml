@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Licence</string>
 
     <string name="widget_note_list_title">Seznam poznámek</string>
+    <string name="widget_note_list_add">Přidat novou poznámku</string>
+    <string name="widget_note_list_add_favorite">Přidat novou poznámku do oblíbených</string>
+    <string name="widget_note_list_add_to_category">Přidat novou poznámku do %1$s</string>
     <string name="widget_note_list_placeholder">Žádné poznámky</string>
     <string name="widget_single_note_title">Jediná poznámka</string>
     <string name="widget_single_note_placeholder_tv">Poznámka nenalezena</string>

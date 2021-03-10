@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Dovoljenje</string>
 
     <string name="widget_note_list_title">Seznam zabeležk</string>
+    <string name="widget_note_list_add">Dodaj novo zabeležko</string>
+    <string name="widget_note_list_add_favorite">Dodaj novo zabeležko med priljubljene</string>
+    <string name="widget_note_list_add_to_category">Dodaj novo zabeležko v %1$s</string>
     <string name="widget_note_list_placeholder">Ni zabeležk</string>
     <string name="widget_single_note_title">Samostojna zabeležka</string>
     <string name="widget_single_note_placeholder_tv">Zabeležke ni mogoče najti</string>
@@ -114,6 +117,7 @@
     <string name="error_dialog_title">Ojoj, kaj pa zdaj? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Poskusite vsiliti končanje programa in ga ponovno zagnati. Morda je težava v neustrezni povezavi z okoljem Nextcloud</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Če se težava še naprej pojavlja, poskusite počistiti podatke programa Nextcloud in Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Shrambo je mogoče počistiti med podrobnostmi programa Shramba → Počisti shrambo. ⚠️ Opozorilo: s tem izbrišete tudi zabeležke, ki še niso usklajene!</string>
     <string name="error_dialog_tip_files_outdated">Program Nextcloud je očitno starejše različice. Posodobite jo prek Trgovine Play ali s posodabljalnikom F-Droid.</string>
     <string name="error_dialog_tip_files_force_stop">Kaže, da je nekaj narobe s programom Nextcloud. Poskusite vsiljeno zaustaviti programa Nextcloud in Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Vsiljeno zaustavljanje ni imelo ustreznega učinka. Poskusite lahko še počistiti podatke shrambe obeh programov.</string>
@@ -249,6 +253,7 @@
     <string name="error_action_open_battery_settings">Nastavitve baterije</string>
     <string name="error_action_open_deck_info">Odpri podrobnosti programa</string>
     <string name="error_action_open_network">Nastavitve omrežja</string>
+    <string name="no_account_configured_yet">Ni nastavljenega nobenega računa</string>
     <string name="no_other_accounts">Ni nastavljenega nobenega drugega računa</string>
     <string name="context_based_formatting">Pojavno okno vsebinskega oblikovanja</string>
 </resources>

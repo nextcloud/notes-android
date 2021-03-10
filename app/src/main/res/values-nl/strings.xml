@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Licentie</string>
 
     <string name="widget_note_list_title">Notitielijst</string>
+    <string name="widget_note_list_add">Toevoegen nieuwe notitie</string>
+    <string name="widget_note_list_add_favorite">Toevoegen nieuwe notitie aan favorieten</string>
+    <string name="widget_note_list_add_to_category">Toevoegen nieuwe notitie aan %1$s</string>
     <string name="widget_note_list_placeholder">Geen notities</string>
     <string name="widget_single_note_title">Enkele notitie</string>
     <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>

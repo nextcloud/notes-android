@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Lizenz</string>
 
     <string name="widget_note_list_title">Liste der Notizen</string>
+    <string name="widget_note_list_add">Neue Notiz hinzufügen</string>
+    <string name="widget_note_list_add_favorite">Neue Notiz zu Favoriten hinzufügen</string>
+    <string name="widget_note_list_add_to_category">Neue Notiz zu %1$s hinzufügen</string>
     <string name="widget_note_list_placeholder">Keine Notizen</string>
     <string name="widget_single_note_title">Eine Notiz</string>
     <string name="widget_single_note_placeholder_tv">Notiz nicht gefunden</string>

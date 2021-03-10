@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Licença</string>
 
     <string name="widget_note_list_title">Lista de notas</string>
+    <string name="widget_note_list_add">Adicionar nova nota</string>
+    <string name="widget_note_list_add_favorite">Adicionar nova nota aos favoritos</string>
+    <string name="widget_note_list_add_to_category">Adicionar nova nota  %1$s</string>
     <string name="widget_note_list_placeholder">Sem anotações</string>
     <string name="widget_single_note_title">Anotação simples</string>
     <string name="widget_single_note_placeholder_tv">Anotação não encontrada</string>

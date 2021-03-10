@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Lisans</string>
 
     <string name="widget_note_list_title">Not listesi</string>
+    <string name="widget_note_list_add">Yeni not ekle</string>
+    <string name="widget_note_list_add_favorite">Sık kullanılanlara yeni not ekle</string>
+    <string name="widget_note_list_add_to_category">%1$s içine yeni not ekle</string>
     <string name="widget_note_list_placeholder">Herhangi bir not yok</string>
     <string name="widget_single_note_title">Tek not</string>
     <string name="widget_single_note_placeholder_tv">Not bulunamadı</string>
