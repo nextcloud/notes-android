@@ -42,6 +42,7 @@
     <dimen name="widget_note_list_outer_padding">4dp</dimen>
     <dimen name="widget_note_list_inner_padding">4dp</dimen>
 
+    <dimen name="widget_note_list_entry_add_button">34dp</dimen>
     <dimen name="widget_note_list_fav_icon_width">26dp</dimen>
     <dimen name="widget_note_list_fav_icon_height">20dp</dimen>
 </resources>
