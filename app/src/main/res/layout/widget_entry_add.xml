@@ -5,33 +5,34 @@
     android:id="@+id/widget_note_list_entry"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/spacer_1x">
-
-    <ImageView
-        android:id="@+id/widget_entry_fav_icon"
-        android:layout_width="@dimen/widget_note_list_fav_icon_width"
-        android:layout_height="@dimen/widget_note_list_fav_icon_height"
-        android:layout_gravity="center_vertical"
-        android:contentDescription="@string/widget_entry_fav_contentDescription"
-        android:foregroundGravity="center_vertical"
-        android:paddingStart="@dimen/widget_note_list_inner_padding"
-        android:paddingEnd="@dimen/widget_note_list_outer_padding"
-        app:srcCompat="@drawable/ic_add_blue_24dp" />
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/widget_entry_content_tv"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:ellipsize="middle"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/widget_note_list_inner_padding"
+        android:paddingStart="38dp"
+        android:paddingTop="@dimen/spacer_1x"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
+        android:paddingBottom="@dimen/spacer_1x"
         android:singleLine="true"
         android:textColor="@color/widget_foreground"
         android:textSize="14sp"
+        android:textStyle="bold"
         tools:text="@string/widget_note_list_add" />
 
+
+    <ImageView
+        android:id="@+id/widget_entry_fav_icon"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:contentDescription="@string/widget_entry_fav_contentDescription"
+        android:foregroundGravity="center_vertical"
+        android:paddingStart="@dimen/widget_note_list_inner_padding"
+        android:paddingEnd="12dp"
+        app:srcCompat="@drawable/ic_add_blue_24dp" />
 </LinearLayout>

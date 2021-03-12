@@ -1,6 +1,8 @@
 package it.niedermann.owncloud.notes.widget.notelist;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
@@ -19,6 +22,7 @@ import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
+import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.shared.model.Category;
 import it.niedermann.owncloud.notes.shared.model.DBNote;
@@ -96,7 +100,20 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
         if (position == 0) {
             final LocalAccount localAccount = db.getAccount(data.getAccountId());
-            final Intent fillInIntent = new Intent();
+            final Intent createIntent = new Intent();
+
+            // Launch application when user taps the header icon or app title
+            final Intent openIntent = new Intent(Intent.ACTION_MAIN);
+            openIntent.setComponent(new ComponentName(context.getPackageName(),
+                    MainActivity.class.getName()));
+
+            // Open the main app if the user taps the widget header
+            PendingIntent openAppI = PendingIntent.getActivity(context, 2,
+                    openIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+
             final Bundle extras = new Bundle();
 
             String category = null;
@@ -108,11 +125,11 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             extras.putSerializable(PARAM_CATEGORY, new Category(category, data.getMode() == MODE_DISPLAY_STARRED));
             extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, data.getAccountId());
 
-            fillInIntent.putExtras(extras);
-            fillInIntent.setData(Uri.parse(fillInIntent.toUri(Intent.URI_INTENT_SCHEME)));
+            createIntent.putExtras(extras);
+            createIntent.setData(Uri.parse(createIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_add);
-            note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
+            note_content.setOnClickFillInIntent(R.id.widget_entry_fav_icon, createIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv, getAddButtonText(context, data.getMode(), category));
             note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_add_blue_24dp);
             note_content.setInt(R.id.widget_entry_fav_icon, "setColorFilter", NotesColorUtil.contrastRatioIsSufficient(ContextCompat.getColor(context, R.color.widget_background), localAccount.getColor())
@@ -150,16 +167,14 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private static String getAddButtonText(@NonNull Context context, int displayMode, String category) {
         switch (displayMode) {
             case MODE_DISPLAY_STARRED:
-                return context.getString(R.string.widget_note_list_add_favorite);
+                return context.getString(R.string.label_favorites);
             case MODE_DISPLAY_CATEGORY:
-                if ("".equals(category)) {
-                    return context.getString(R.string.widget_note_list_add);
-                } else {
-                    return context.getString(R.string.widget_note_list_add_to_category, category);
-                }
+                return "".equals(category)
+                        ? context.getString(R.string.action_uncategorized)
+                        : category;
             case MODE_DISPLAY_ALL:
             default:
-                return context.getString(R.string.widget_note_list_add);
+                return context.getString(R.string.app_name);
         }
     }
 
