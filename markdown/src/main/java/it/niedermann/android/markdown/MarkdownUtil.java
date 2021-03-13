@@ -6,7 +6,11 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.BulletSpan;
+import android.text.style.QuoteSpan;
 import android.util.Log;
 import android.widget.RemoteViews.RemoteView;
 import android.widget.TextView;
@@ -14,6 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
 import org.commonmark.parser.Parser;
@@ -26,13 +31,14 @@ import java.util.regex.Pattern;
 import io.noties.markwon.Markwon;
 import it.niedermann.android.markdown.model.EListType;
 import it.niedermann.android.markdown.model.SearchSpan;
+import it.niedermann.android.util.DimensionUtil;
 
 public class MarkdownUtil {
 
     private static final String TAG = MarkdownUtil.class.getSimpleName();
 
     private final static Parser parser = Parser.builder().build();
-    private final static HtmlRenderer renderer = HtmlRenderer.builder().build();
+    private final static HtmlRenderer renderer = HtmlRenderer.builder().softbreak("<br>").build();
 
     private static final Pattern PATTERN_LISTS = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
     private static final Pattern PATTERN_HEADINGS = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
@@ -62,7 +68,31 @@ public class MarkdownUtil {
      * Therefore we currently use {@link HtmlCompat} to filter supported spans from the output of {@link HtmlRenderer} as an intermediate step.
      */
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
-        return HtmlCompat.fromHtml(renderer.render(parser.parse(replaceCheckboxesWithEmojis(content))), 0);
+        final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(content)));
+        return enhanceRenderedResult(context, HtmlCompat.fromHtml(html, 0));
+    }
+
+    private static Spanned enhanceRenderedResult(@NonNull Context context, @NonNull Spanned input) {
+        final SpannableStringBuilder ssb = new SpannableStringBuilder(input);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
+            @ColorInt final int colorBlockQuote = ContextCompat.getColor(context, R.color.block_quote);
+            for (QuoteSpan originalQuoteSpan : originalQuoteSpans) {
+                final int start = ssb.getSpanStart(originalQuoteSpan);
+                final int end = ssb.getSpanEnd(originalQuoteSpan);
+                ssb.removeSpan(originalQuoteSpan);
+                ssb.setSpan(new QuoteSpan(colorBlockQuote, 5, 30), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            final BulletSpan[] originalBulletSpans = ssb.getSpans(0, ssb.length(), BulletSpan.class);
+            @ColorInt final int colorBulletPoint = ContextCompat.getColor(context, R.color.bullet_point);
+            for (BulletSpan originalQuoteSpan : originalBulletSpans) {
+                final int start = ssb.getSpanStart(originalQuoteSpan);
+                final int end = ssb.getSpanEnd(originalQuoteSpan);
+                ssb.removeSpan(originalQuoteSpan);
+                ssb.setSpan(new BulletSpan(16, colorBulletPoint, 8), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        return ssb;
     }
 
     @NonNull
