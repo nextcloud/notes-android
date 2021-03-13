@@ -1,0 +1,4 @@
+- ✅ Single note widget displays checkboxes more nicely (#559)
+- Harmonize widget design across News, Deck & Notes (nextcloud/news-android/issues/930)
+- Do not waste space with the header in the List widget but instead use a button which can be scrolled
+- Dark mode in widgets now uses the global Android system setting for dark / light mode instead of implementing own stuff

@@ -114,7 +114,6 @@
     <string name="error_dialog_title">Oh, no! I ara què? </string>
     <string name="error_dialog_tip_token_mismatch_retry">Proveu de forçar el tancament de l\'aplicació i reinicieu-la. Pot ser que hi hagi hagut una connexió incorrecta a l\'aplicació Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persisteix, proveu d\'esborrar l\'emmagatzematge de totes dues aplicacions: Nextcloud i Notes del Nextcloud per tal de resoldre el problema.</string>
-    <string name="error_dialog_tip_clear_storage">Per a esborrar l\'emmagatzematge, obriu la informació de l\'aplicació i seleccioneu Emmagatzematge → Esborra l\'emmagatzematge.</string>
     <string name="error_dialog_tip_files_outdated">Sembla que la vostra aplicació Nextcloud està obsoleta. Visiteu la Play Store o l\'F-Droid per obtenir la darrera versió.</string>
     <string name="error_dialog_tip_files_force_stop">Sembla que hi ha algun problema amb la vostra aplicació Nextcloud. Intenteu forçar l\'aturada tant de l\'aplicació Nextcloud com de l\'aplicació Notes del Nextcloud.</string>
     <string name="error_dialog_tip_files_delete_storage">Si forçar-ne l\'aturada no ajuda, podeu provar d\'esborrar l\'emmagatzematge de totes dues aplicacions.</string>

@@ -114,7 +114,6 @@
     <string name="error_dialog_title">وای نه - حالا چی کار کنیم؟</string>
     <string name="error_dialog_tip_token_mismatch_retry">"لطفا از طریق توقف اجباری برنامه را بسته و دوباره اجرا کنید. ممکن است یک اتصال نادرست با ابر سانا ایجاد شده باشد.  "</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">اگر این مشکل استمرار داشت، سعی کنید با پاک کردن فضای ذخیره‌سازی هردو برنامک : ابر سانا و یادداشت سانا، این مورد را برطرف کنید.</string>
-    <string name="error_dialog_tip_clear_storage">شما می‌توانید فضای ذخیره‌سازی برنامک را با بازکردن اطلاعات برنامه و انتخاب «فضای ذخیره‌سازی و حافظه پنهان» -> «پاک‌کردن محل ذخیره‌سازی»، پاک‌سازی کنید.</string>
     <string name="error_dialog_tip_files_outdated">ظاهرا برنامک یادداشت منسوخ شده است. لطفا آخرین نسخه را از سانا مارکت دانلود کنید. </string>
     <string name="error_dialog_tip_files_force_stop">به نظر می‌رسد که مشکلی در برنامک نکست‌کلود ایجاد شده است. لطفا سعی کنید با توقف اجباری هر دو برنامک ابر سانا و یادداشت سانا را ببندید.  </string>
     <string name="error_dialog_tip_files_delete_storage">"اگر توقف اجباری برنامه‌ها کمکی نکرد، می‌توانید پاک‌کردن فضای ذخیره‌سازی هردو برنامه را پاک کنید. "</string>

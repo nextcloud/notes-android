@@ -14,6 +14,10 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.function.Consumer;
+
 import io.noties.markwon.Markwon;
 import io.noties.markwon.editor.MarkwonEditor;
 import io.noties.markwon.editor.handler.EmphasisEditHandler;
@@ -39,6 +43,8 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
 
     private static final String TAG = MarkwonMarkdownEditor.class.getSimpleName();
 
+    @Nullable
+    private Consumer<CharSequence> listener;
     private final MutableLiveData<CharSequence> unrenderedText$ = new MutableLiveData<>();
     private final CombinedTextWatcher combinedWatcher;
 
@@ -117,10 +123,18 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
      */
     public void setMarkdownStringModel(CharSequence text) {
         unrenderedText$.setValue(text == null ? "" : text.toString());
+        if (listener != null) {
+            listener.accept(text);
+        }
     }
 
     @Override
     public LiveData<CharSequence> getMarkdownString() {
         return unrenderedText$;
+    }
+
+    @Override
+    public void setMarkdownStringChangedListener(@Nullable Consumer<CharSequence> listener) {
+        this.listener = listener;
     }
 }

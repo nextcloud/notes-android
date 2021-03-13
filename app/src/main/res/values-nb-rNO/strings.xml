@@ -114,7 +114,6 @@
     <string name="error_dialog_title">Å nei - Hva nå? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prøv å tvinge avslutning av appen og start den på nytt. Det kan ha vært en feiltilkobling til Nextcloud-appen.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet vedvarer, prøv å tømme lageret for begge disse appene for å løse problemet: Nextcloud og Nextcloud Notes.</string>
-    <string name="error_dialog_tip_clear_storage">Du kan tømme lageret ved å åpne App info og velge Lagring og buffer → Tøm lagring.</string>
     <string name="error_dialog_tip_files_outdated">Det virker som Nextcloud appen er utdatert. Venligst besøk Play Sore eller F-Droid for å finne siste versjon.</string>
     <string name="error_dialog_tip_files_force_stop">Det virker som noe er galt med Nextcloud appen. Vennligst prøv å tvinge avslutning av Nextcloud appen og Nextcloud Notes appen.</string>
     <string name="error_dialog_tip_files_delete_storage">Hvis det ikke hjelper med tving avslutt, så kan du prøve å tømme lageret for begge appene.</string>

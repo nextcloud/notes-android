@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Licence</string>
 
     <string name="widget_note_list_title">Seznam poznámek</string>
+    <string name="widget_note_list_add">Přidat novou poznámku</string>
+    <string name="widget_note_list_add_favorite">Přidat novou poznámku do oblíbených</string>
+    <string name="widget_note_list_add_to_category">Přidat novou poznámku do %1$s</string>
     <string name="widget_note_list_placeholder">Žádné poznámky</string>
     <string name="widget_single_note_title">Jediná poznámka</string>
     <string name="widget_single_note_placeholder_tv">Poznámka nenalezena</string>
@@ -114,7 +117,7 @@
     <string name="error_dialog_title">Ó ne– co teď? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prosím pokuste se vynutit ukončení aplikace a spusťte ji znovu. Možná se něco nepodařilo při spojení s aplikací Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Pokud problém přetrvává, zkuste problém vyřešit vyčištěním úložišť obou aplikací: Nextcloud a Nextcloud poznámky.</string>
-    <string name="error_dialog_tip_clear_storage">Úložiště můžete vyčistit otevřením informací o aplikací a vybráním Úložiště → Vyčistit úložiště.</string>
+    <string name="error_dialog_tip_clear_storage">Úložiště můžete vyčistit otevřením nformací o aplikaci a vybráním Úložiště a mezipaměť → Vyčistit úložiště. ⚠️ Varování: toto nenávratně odstraní poznámky, které ještě nebyly synchronizovány se serverem. </string>
     <string name="error_dialog_tip_files_outdated">Zdá se, že aplikace Nextcloud, nainstalovaná na vašem zařízení, je staré verze. Přejděte prosím do Play Store nebo F-Droid a nainstalujte si nejnovější verzi.</string>
     <string name="error_dialog_tip_files_force_stop">Zdá se, že s vaší aplikací Nextcloud není něco v pořádku. Zkuste vynutit zastavení obojího – aplikace Nextcloud a Nextcloud Poznámky.</string>
     <string name="error_dialog_tip_files_delete_storage">Pokud vynucení jejich zastavení nepomůže, můžete zkusit vyčistit úložiště obou aplikací.</string>

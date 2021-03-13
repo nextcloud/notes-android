@@ -8,24 +8,23 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import androidx.annotation.Nullable;
+
 import it.niedermann.android.markdown.MarkdownUtil;
-import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
-import it.niedermann.owncloud.notes.preferences.DarkModeSetting;
-
 
 public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private final Context context;
     private final int appWidgetId;
 
-    private NotesDatabase db;
+    private final NotesDatabase db;
+    @Nullable
     private Note note;
-    private boolean darkModeActive = false;
 
     private static final String TAG = SingleNoteWidget.class.getSimpleName();
 
@@ -33,12 +32,6 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
         this.context = context;
         this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         this.db = NotesDatabase.getInstance(context);
-//        final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
-//        if (data != null) {
-//            darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
-//        } else {
-//            Log.w(TAG, "Widget with ID " + appWidgetId + " seems to be not configured yet.");
-//        }
     }
 
     @Override
@@ -49,8 +42,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     @Override
     public void onDataSetChanged() {
         final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
-        if (data != null) {
-            darkModeActive = NotesApplication.isDarkThemeActive(context, DarkModeSetting.fromModeID(data.getThemeMode()));
+        if(data != null) {
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
             note = db.getNoteDao().getNoteById(noteId);
@@ -90,24 +82,16 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
             return null;
         }
 
-        RemoteViews note_content;
-
         final Intent fillInIntent = new Intent();
         final Bundle extras = new Bundle();
 
         extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
         extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
         fillInIntent.putExtras(extras);
-        if (darkModeActive) {
-            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content_dark);
-            note_content.setOnClickFillInIntent(R.id.single_note_content_tv_dark, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv_dark, MarkdownUtil.renderForRemoteView(context, note.getContent()));
 
-        } else {
-            note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
-            note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
-            note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, note.getContent()));
-        }
+        final RemoteViews note_content = new RemoteViews(context.getPackageName(), R.layout.widget_single_note_content);
+        note_content.setOnClickFillInIntent(R.id.single_note_content_tv, fillInIntent);
+        note_content.setTextViewText(R.id.single_note_content_tv, MarkdownUtil.renderForRemoteView(context, note.getContent()));
 
         return note_content;
     }

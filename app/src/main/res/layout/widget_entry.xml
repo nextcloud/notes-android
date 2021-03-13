@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingStart="@dimen/spacer_1hx"
     android:paddingTop="@dimen/spacer_1x"
+    android:paddingStart="@null"
     android:paddingEnd="@dimen/spacer_1hx"
     android:paddingBottom="@dimen/spacer_1x">
 
@@ -25,14 +25,16 @@
     <TextView
         android:id="@+id/widget_entry_content_tv"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:ellipsize="end"
+        android:gravity="center_vertical"
         android:lines="1"
         android:paddingStart="@dimen/widget_note_list_inner_padding"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
-        android:textColor="@color/widget_fg_default"
+        android:textColor="@color/widget_foreground"
+        android:textSize="14sp"
         tools:text="@tools:sample/lorem/random" />
 
 </LinearLayout>

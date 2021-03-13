@@ -114,7 +114,6 @@
     <string name="error_dialog_title">Oh no - Immoe ite ddoe at? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Proa a serrare a fortza s\'aplicatzione e torrala a aviare. Fortzis ddoe at àpidu unu problema de connessione a s\'aplicatzione de Nextcloud. </string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si sighit su problema, proa a cantzellare s\'archiviatzione de ambas is aplicatziones Nextcloud e Nextcloud Notes pro isorvere su problema.</string>
-    <string name="error_dialog_tip_clear_storage">Podes limpiare s\'archiviatzione aberende is informatziones de s\'aplicatzione e seberende Archiviatzione → Lìmpia archiviatzione.</string>
     <string name="error_dialog_tip_files_outdated">S\'aplicatzione tua de Nextcloud paret foras d\'usu. Pro praghere, bìsita su Play Store o F-Droid pro otènnere s\'ùrtima versione.</string>
     <string name="error_dialog_tip_files_force_stop">Paret chi b\'at àpidu problemas cun s\'aplicatzione de Nextcloud. Pro praghere proa a ddas firmare ambas, s\'aplicatzione Nextcloud e s\'aplicatzione Nexcloud Notes. </string>
     <string name="error_dialog_tip_files_delete_storage">Si a ddas firmare a fortza no agiudat, podes proare a limpiare s\'archiviatzione de ambas is aplicatziones.</string>

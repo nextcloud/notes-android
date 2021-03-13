@@ -1,0 +1,1 @@
+- 📤 Allow to open app from list widget (#1085)

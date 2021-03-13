@@ -1,6 +1,8 @@
 package it.niedermann.android.markdown;
 
 import android.content.Context;
+import android.graphics.Paint;
+import android.os.Build;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -19,6 +21,10 @@ import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,6 +53,11 @@ public class MarkdownUtil {
     private static final Pattern PATTERN_ORDERED_LIST_ITEM_EMPTY = Pattern.compile("^(\\d+).\\s$");
     private static final Pattern PATTERN_MARKDOWN_LINK = Pattern.compile("\\[(.+)?]\\(([^ ]+?)?( \"(.+)\")?\\)");
 
+    @Nullable
+    private static final String checkboxCheckedEmoji = getCheckboxEmoji(true);
+    @Nullable
+    private static final String checkboxUncheckedEmoji = getCheckboxEmoji(false);
+
     private MarkdownUtil() {
         // Util class
     }
@@ -58,10 +69,83 @@ public class MarkdownUtil {
      * Therefore we currently fall back on {@link RxMarkdown} as the results will look better in this special case.
      * We might change this in the future by utilizing {@link Markwon} and creating a {@link Spanned} from an {@link HtmlCompat} interemediate.
      */
-    public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull CharSequence content) {
+    public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
         final MarkdownProcessor markdownProcessor = new MarkdownProcessor(context);
         markdownProcessor.factory(TextFactory.create());
-        return parseCompat(markdownProcessor, content);
+        return parseCompat(markdownProcessor, replaceCheckboxesWithEmojis(content));
+    }
+
+    @NonNull
+    public static String replaceCheckboxesWithEmojis(@NonNull String content) {
+        return runForEachCheckbox(content, (line) -> {
+            for (EListType listType : EListType.values()) {
+                if (checkboxCheckedEmoji != null) {
+                    line = line.replace(listType.checkboxChecked, checkboxCheckedEmoji);
+                }
+                if (checkboxUncheckedEmoji != null) {
+                    line = line.replace(listType.checkboxUnchecked, checkboxUncheckedEmoji);
+                }
+            }
+            return line;
+        });
+    }
+
+    @Nullable
+    private static String getCheckboxEmoji(boolean checked) {
+        final String[] checkedEmojis;
+        final String[] uncheckedEmojis;
+        // Seriously what the fuck, Samsung?
+        // https://emojipedia.org/ballot-box-with-x/
+        if (Build.MANUFACTURER != null && Build.MANUFACTURER.toLowerCase().contains("samsung")) {
+            checkedEmojis = new String[]{"✅", "☑️", "✔️"};
+            uncheckedEmojis = new String[]{"❌", "\uD83D\uDD32️", "☐️"};
+        } else {
+            checkedEmojis = new String[]{"☒", "✅", "☑️", "✔️"};
+            uncheckedEmojis = new String[]{"☐", "❌", "\uD83D\uDD32️", "☐️"};
+        }
+        final Paint paint = new Paint();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for (String emoji : checked ? checkedEmojis : uncheckedEmojis) {
+                if (paint.hasGlyph(emoji)) {
+                    return emoji;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Performs the given {@param map} function for each line which contains a checkbox
+     */
+    @NonNull
+    private static String runForEachCheckbox(@NonNull String markdownString, @NonNull Function<String, String> map) {
+        final String[] lines = markdownString.split("\n");
+        boolean isInFencedCodeBlock = false;
+        int fencedCodeBlockSigns = 0;
+        for (int i = 0; i < lines.length; i++) {
+            final Matcher matcher = PATTERN_CODE_FENCE.matcher(lines[i]);
+            if (matcher.find()) {
+                final String fence = matcher.group(1);
+                if (fence != null) {
+                    int currentFencedCodeBlockSigns = fence.length();
+                    if (isInFencedCodeBlock) {
+                        if (currentFencedCodeBlockSigns == fencedCodeBlockSigns) {
+                            isInFencedCodeBlock = false;
+                            fencedCodeBlockSigns = 0;
+                        }
+                    } else {
+                        isInFencedCodeBlock = true;
+                        fencedCodeBlockSigns = currentFencedCodeBlockSigns;
+                    }
+                }
+            }
+            if (!isInFencedCodeBlock) {
+                if (lineStartsWithCheckbox(lines[i]) && lines[i].trim().length() > EListType.DASH.checkboxChecked.length()) {
+                    lines[i] = map.apply(lines[i]);
+                }
+            }
+        }
+        return TextUtils.join("\n", lines);
     }
 
     /**
@@ -350,7 +434,7 @@ public class MarkdownUtil {
     }
 
     /**
-     * Strips all Markdown from the given String
+     * Strips all Markdown from {@param s}
      *
      * @param s Markdown string
      * @return Plain text string
@@ -359,13 +443,19 @@ public class MarkdownUtil {
     public static String removeMarkdown(@Nullable String s) {
         if (s == null)
             return "";
-        String result = s;
-        result = PATTERN_LISTS.matcher(result).replaceAll("");
-        result = PATTERN_HEADINGS.matcher(result).replaceAll("$1");
-        result = PATTERN_HEADING_LINE.matcher(result).replaceAll("");
-        result = PATTERN_EMPHASIS.matcher(result).replaceAll("$2");
-        result = PATTERN_SPACE_1.matcher(result).replaceAll("");
-        result = PATTERN_SPACE_2.matcher(result).replaceAll("");
-        return result;
+        // TODO maybe we can utilize the markwon renderer?
+
+        for (EListType listType : EListType.values()) {
+            s = s.replace(listType.checkboxChecked, "");
+            s = s.replace(listType.checkboxUnchecked, "");
+            s = s.replace(listType.listSymbolWithTrailingSpace, "");
+        }
+        s = PATTERN_LISTS.matcher(s).replaceAll("");
+        s = PATTERN_HEADINGS.matcher(s).replaceAll("$1");
+        s = PATTERN_HEADING_LINE.matcher(s).replaceAll("");
+        s = PATTERN_EMPHASIS.matcher(s).replaceAll("$2");
+        s = PATTERN_SPACE_1.matcher(s).replaceAll("");
+        s = PATTERN_SPACE_2.matcher(s).replaceAll("");
+        return s;
     }
 }

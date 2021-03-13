@@ -73,6 +73,9 @@
     <string name="about_license_tab_title">Licentie</string>
 
     <string name="widget_note_list_title">Notitielijst</string>
+    <string name="widget_note_list_add">Toevoegen nieuwe notitie</string>
+    <string name="widget_note_list_add_favorite">Toevoegen nieuwe notitie aan favorieten</string>
+    <string name="widget_note_list_add_to_category">Toevoegen nieuwe notitie aan %1$s</string>
     <string name="widget_note_list_placeholder">Geen notities</string>
     <string name="widget_single_note_title">Enkele notitie</string>
     <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
@@ -114,7 +117,7 @@
     <string name="error_dialog_title">Oh nee - wat nu? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Probeer de app te sluiten en opnieuw te starten. Er was misschien een onjuiste verbinding met de Nextcloud-app.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Als het probleem blijft aanhouden, probeer dan de gegevensopslag bij Nextcloud en de Nextcloud Notes apps te wissen.</string>
-    <string name="error_dialog_tip_clear_storage">Je kan de opslag leegmaken door in Android de app info te openen en kies dan Opslag →  Gegevens verwijderen.</string>
+    <string name="error_dialog_tip_clear_storage">Je kunt de opslag wissen door de app-info te openen en Opslag → Opslag wissen te selecteren. ⚠️ Waarschuwing: hiermee worden de nog niet gesynchroniseerde notities verwijderd!</string>
     <string name="error_dialog_tip_files_outdated">Je Nextcloud app lijkt te zijn verouderd. Download alstublieft de nieuwste versie in de Google Play Store of in F-Droid.</string>
     <string name="error_dialog_tip_files_force_stop">Er lijkt iets mis te zijn met je Nextcloud app. Probeer alstublieft de apps geforceerd af te sluiten, zowel de Nextcloud app als de Nextcloud Notes app.</string>
     <string name="error_dialog_tip_files_delete_storage">Als geforceerd afsluiten niet helpt, probeer dan van beide apps de gegevensopslag te wissen.</string>
