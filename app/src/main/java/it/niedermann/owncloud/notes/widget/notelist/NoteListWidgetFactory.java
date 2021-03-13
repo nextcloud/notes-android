@@ -23,9 +23,14 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
+import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
+import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.PARAM_CATEGORY;
+import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
+import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
+import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_STARRED;
 
 public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFactory {
     private static final String TAG = NoteListWidgetFactory.class.getSimpleName();
@@ -35,6 +40,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     private final NotesDatabase db;
     @NonNull
     private final List<Note> dbNotes = new ArrayList<>();
+    private NotesListWidgetData data;
 
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
@@ -51,16 +57,16 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     public void onDataSetChanged() {
         dbNotes.clear();
         try {
-            final NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
+            data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
-                case NotesListWidgetData.MODE_DISPLAY_ALL:
+                case MODE_DISPLAY_ALL:
                     dbNotes.addAll(db.getNoteDao().searchRecentByModified(data.getAccountId(), "%"));
                     break;
-                case NotesListWidgetData.MODE_DISPLAY_STARRED:
+                case MODE_DISPLAY_STARRED:
                     dbNotes.addAll(db.getNoteDao().searchFavoritesByModified(data.getAccountId(), "%"));
                     break;
-                case NotesListWidgetData.MODE_DISPLAY_CATEGORY:
+                case MODE_DISPLAY_CATEGORY:
                 default:
                     if (data.getCategory() != null) {
                         dbNotes.addAll(db.getNoteDao().searchCategoryByModified(data.getAccountId(), "%", data.getCategory()));
@@ -94,7 +100,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             final Intent createIntent = new Intent(context, EditNoteActivity.class);
             final Bundle extras = new Bundle();
 
-            extras.putSerializable(PARAM_CATEGORY, new Category(category, data.getMode() == MODE_DISPLAY_STARRED));
+            extras.putSerializable(PARAM_CATEGORY, data.getMode() == MODE_DISPLAY_STARRED ? new NavigationCategory(ENavigationCategoryType.FAVORITES) : new NavigationCategory(localAccount.getId(), data.getCategory()));
             extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, data.getAccountId());
 
             createIntent.putExtras(extras);
@@ -103,7 +109,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_add);
             note_content.setOnClickFillInIntent(R.id.widget_entry_content_tv, openIntent);
             note_content.setOnClickFillInIntent(R.id.widget_entry_fav_icon, createIntent);
-            note_content.setTextViewText(R.id.widget_entry_content_tv, getCategoryTitle(context, data.getMode(), category));
+            note_content.setTextViewText(R.id.widget_entry_content_tv, getCategoryTitle(context, data.getMode(), data.getCategory()));
             note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_add_blue_24dp);
             note_content.setInt(R.id.widget_entry_fav_icon, "setColorFilter", NotesColorUtil.contrastRatioIsSufficient(ContextCompat.getColor(context, R.color.widget_background), localAccount.getColor())
                     ? localAccount.getColor()
@@ -127,7 +133,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry);
             note_content.setOnClickFillInIntent(R.id.widget_note_list_entry, fillInIntent);
             note_content.setTextViewText(R.id.widget_entry_content_tv, note.getTitle());
-            note_content.setImageViewResource(R.id.widget_entry_fav_icon, note.isFavorite()
+            note_content.setImageViewResource(R.id.widget_entry_fav_icon, note.getFavorite()
                     ? R.drawable.ic_star_yellow_24dp
                     : R.drawable.ic_star_grey_ccc_24dp);
         }
@@ -171,7 +177,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                 Log.e(TAG, "Could not find position \"" + position + "\" in dbNotes list.");
                 return -2;
             }
-            DBNote note = dbNotes.get(position);
+            Note note = dbNotes.get(position);
             return note.getId();
         }
     }
