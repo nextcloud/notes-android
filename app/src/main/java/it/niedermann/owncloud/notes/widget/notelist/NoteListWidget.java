@@ -19,10 +19,6 @@ import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 public class NoteListWidget extends AppWidgetProvider {
     private static final String TAG = NoteListWidget.class.getSimpleName();
 
-    public static final int PENDING_INTENT_NEW_NOTE_RQ = 0;
-    public static final int PENDING_INTENT_EDIT_NOTE_RQ = 1;
-    public static final int PENDING_INTENT_OPEN_APP_RQ = 2;
-
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
         final NotesDatabase db = NotesDatabase.getInstance(context);
 
@@ -32,19 +28,17 @@ public class NoteListWidget extends AppWidgetProvider {
             try {
                 final NoteListsWidgetData data = db.getNoteListWidgetData(appWidgetId);
 
-                Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
+                final Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
                 serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
                 serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
-                PendingIntent templatePI = PendingIntent.getActivity(context, PENDING_INTENT_EDIT_NOTE_RQ,
-                        new Intent(context, EditNoteActivity.class),
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+                final PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(), PendingIntent.FLAG_UPDATE_CURRENT | Intent.FILL_IN_COMPONENT);
 
                 Log.v(TAG, "-- data - " + data);
 
                 views = new RemoteViews(context.getPackageName(), R.layout.widget_note_list);
-                views.setPendingIntentTemplate(R.id.note_list_widget_lv, templatePI);
                 views.setRemoteAdapter(R.id.note_list_widget_lv, serviceIntent);
+                views.setPendingIntentTemplate(R.id.note_list_widget_lv, pendingIntent);
                 views.setEmptyView(R.id.note_list_widget_lv, R.id.widget_note_list_placeholder_tv);
 
                 awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.note_list_widget_lv);

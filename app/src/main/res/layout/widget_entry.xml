@@ -6,7 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="@dimen/spacer_1x">
+    android:paddingTop="@dimen/spacer_1x"
+    android:paddingStart="@null"
+    android:paddingEnd="@dimen/spacer_1hx"
+    android:paddingBottom="@dimen/spacer_1x">
 
     <ImageView
         android:id="@+id/widget_entry_fav_icon"
@@ -22,7 +25,7 @@
     <TextView
         android:id="@+id/widget_entry_content_tv"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:ellipsize="end"

@@ -14,15 +14,15 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:ellipsize="middle"
-        android:paddingStart="38dp"
-        android:paddingTop="@dimen/spacer_1x"
+        android:paddingStart="30dp"
+        android:paddingTop="@null"
         android:paddingEnd="@dimen/widget_note_list_outer_padding"
         android:paddingBottom="@dimen/spacer_1x"
         android:singleLine="true"
         android:textColor="@color/widget_foreground"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        tools:text="@string/widget_note_list_add" />
+        tools:text="@string/app_name" />
 
 
     <ImageView
@@ -32,7 +32,8 @@
         android:layout_gravity="center_vertical"
         android:contentDescription="@string/widget_entry_fav_contentDescription"
         android:foregroundGravity="center_vertical"
-        android:paddingStart="@dimen/widget_note_list_inner_padding"
-        android:paddingEnd="12dp"
+        android:paddingStart="@dimen/spacer_1x"
+        android:paddingEnd="@dimen/spacer_1x"
+        android:paddingBottom="@dimen/spacer_1hx"
         app:srcCompat="@drawable/ic_add_blue_24dp" />
 </LinearLayout>

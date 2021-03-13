@@ -82,9 +82,6 @@
     <string name="about_license_tab_title">License</string>
 
     <string name="widget_note_list_title">Note list</string>
-    <string name="widget_note_list_add">Add new note</string>
-    <string name="widget_note_list_add_favorite">Add new note to favorites</string>
-    <string name="widget_note_list_add_to_category">Add new note to %1$s</string>
     <string name="widget_note_list_placeholder">No notes</string>
     <string name="widget_single_note_title">Single note</string>
     <string name="widget_single_note_placeholder_tv">Note not found</string>

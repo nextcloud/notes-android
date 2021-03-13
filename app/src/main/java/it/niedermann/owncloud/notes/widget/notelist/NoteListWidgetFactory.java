@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.widget.notelist;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,16 +10,13 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
@@ -100,20 +96,8 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
         if (position == 0) {
             final LocalAccount localAccount = db.getAccount(data.getAccountId());
-            final Intent createIntent = new Intent();
-
-            // Launch application when user taps the header icon or app title
-            final Intent openIntent = new Intent(Intent.ACTION_MAIN);
-            openIntent.setComponent(new ComponentName(context.getPackageName(),
-                    MainActivity.class.getName()));
-
-            // Open the main app if the user taps the widget header
-            PendingIntent openAppI = PendingIntent.getActivity(context, 2,
-                    openIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
-
-
-
+            final Intent openIntent = new Intent(Intent.ACTION_MAIN).setComponent(new ComponentName(context.getPackageName(), MainActivity.class.getName()));
+            final Intent createIntent = new Intent(context, EditNoteActivity.class);
             final Bundle extras = new Bundle();
 
             String category = null;
@@ -129,8 +113,9 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
             createIntent.setData(Uri.parse(createIntent.toUri(Intent.URI_INTENT_SCHEME)));
 
             note_content = new RemoteViews(context.getPackageName(), R.layout.widget_entry_add);
+            note_content.setOnClickFillInIntent(R.id.widget_entry_content_tv, openIntent);
             note_content.setOnClickFillInIntent(R.id.widget_entry_fav_icon, createIntent);
-            note_content.setTextViewText(R.id.widget_entry_content_tv, getAddButtonText(context, data.getMode(), category));
+            note_content.setTextViewText(R.id.widget_entry_content_tv, getCategoryTitle(context, data.getMode(), category));
             note_content.setImageViewResource(R.id.widget_entry_fav_icon, R.drawable.ic_add_blue_24dp);
             note_content.setInt(R.id.widget_entry_fav_icon, "setColorFilter", NotesColorUtil.contrastRatioIsSufficient(ContextCompat.getColor(context, R.color.widget_background), localAccount.getColor())
                     ? localAccount.getColor()
@@ -142,8 +127,8 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
                 return null;
             }
 
-            DBNote note = dbNotes.get(position);
-            final Intent fillInIntent = new Intent();
+            final DBNote note = dbNotes.get(position);
+            final Intent fillInIntent = new Intent(context, EditNoteActivity.class);
             final Bundle extras = new Bundle();
             extras.putLong(EditNoteActivity.PARAM_NOTE_ID, note.getId());
             extras.putLong(EditNoteActivity.PARAM_ACCOUNT_ID, note.getAccountId());
@@ -164,7 +149,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     }
 
     @NonNull
-    private static String getAddButtonText(@NonNull Context context, int displayMode, String category) {
+    private static String getCategoryTitle(@NonNull Context context, int displayMode, String category) {
         switch (displayMode) {
             case MODE_DISPLAY_STARRED:
                 return context.getString(R.string.label_favorites);
