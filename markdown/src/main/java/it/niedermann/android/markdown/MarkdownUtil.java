@@ -65,13 +65,7 @@ public class MarkdownUtil {
      * Therefore we currently use {@link HtmlCompat} to filter supported spans from the output of {@link HtmlRenderer} as an intermediate step.
      */
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
-        String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(content)));
-        // Emojis are only available on Marshmallow
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            html = html.replace("[ ]", "☐");
-            html = html.replace("[x]", "☑️️");
-        }
-        return HtmlCompat.fromHtml(html, 0);
+        return HtmlCompat.fromHtml(renderer.render(parser.parse(replaceCheckboxesWithEmojis(content))), 0);
     }
 
     @NonNull
@@ -145,23 +139,6 @@ public class MarkdownUtil {
             }
         }
         return TextUtils.join("\n", lines);
-    }
-
-    /**
-     * This is a compatibility-method that provides workarounds for several bugs in RxMarkdown
-     * <p>
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/772
-     *
-     * @param markdownProcessor RxMarkdown MarkdownProcessor instance
-     * @param text              CharSequence that should be parsed
-     * @return the processed text but with several workarounds for Bugs in RxMarkdown
-     */
-    @NonNull
-    private static CharSequence parseCompat(@NonNull final MarkdownProcessor markdownProcessor, CharSequence text) {
-        if (TextUtils.isEmpty(text)) {
-            return "";
-        }
-        return HtmlCompat.fromHtml(html, 0);
     }
 
     public static int getStartOfLine(@NonNull CharSequence s, int cursorPosition) {
