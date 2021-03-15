@@ -43,7 +43,7 @@ public class ManageAccountsActivity extends LockedActivity {
     private ActivityManageAccountsBinding binding;
     private ManageAccountAdapter adapter;
     private NotesDatabase db = null;
-    private List<LocalAccount> localAccounts = new ArrayList<>();
+    private final List<LocalAccount> localAccounts = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,16 +138,14 @@ public class ManageAccountsActivity extends LockedActivity {
                 .setMessage("File extension for new notes in your Nextcloud")
                 .setView(wrapper)
                 .setNeutralButton(android.R.string.cancel, null)
-                .setPositiveButton("Save", (v, d) -> {
-                    new Thread(() -> {
-                        try {
-                            final ServerSettings newSettings = client.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new ServerSettings(null, spinner.getSelectedItem().toString()));
-                            Toast.makeText(this, "New file suffix: " + newSettings.getNotesPath(), Toast.LENGTH_LONG).show();
-                        } catch (Exception e) {
-                            ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
-                        }
-                    }).start();
-                })
+                .setPositiveButton("Save", (v, d) -> new Thread(() -> {
+                    try {
+                        final ServerSettings newSettings = client.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new ServerSettings(null, spinner.getSelectedItem().toString()));
+                        Toast.makeText(this, "New file suffix: " + newSettings.getNotesPath(), Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                    }
+                }).start())
                 .show();
         new Thread(() -> {
             try {
