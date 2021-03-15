@@ -295,4 +295,7 @@
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
     <string name="context_based_formatting">Context based formatting popover</string>
+    <string name="settings_notes_path">Set folder</string>
+    <string name="settings_file_suffix">File extension</string>
+    <string name="remove_account">Remove account</string>
 </resources>

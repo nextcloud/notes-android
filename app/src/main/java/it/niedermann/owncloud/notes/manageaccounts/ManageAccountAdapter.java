@@ -1,6 +1,7 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 
 public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountViewHolder> {
@@ -22,12 +24,21 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
     private final List<LocalAccount> localAccounts = new ArrayList<>();
     @NonNull
     private final Consumer<LocalAccount> onAccountClick;
-    @Nullable
+    @NonNull
     private final Consumer<LocalAccount> onAccountDelete;
+    @NonNull
+    Consumer<LocalAccount> onChangeNotesPath;
+    @NonNull
+    Consumer<LocalAccount> onChangeFileSuffix;
 
-    public ManageAccountAdapter(@NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete) {
+    public ManageAccountAdapter(@NonNull Consumer<LocalAccount> onAccountClick,
+                                @NonNull Consumer<LocalAccount> onAccountDelete,
+                                @NonNull Consumer<LocalAccount> onChangeNotesPath,
+                                @NonNull Consumer<LocalAccount> onChangeFileSuffix) {
         this.onAccountClick = onAccountClick;
         this.onAccountDelete = onAccountDelete;
+        this.onChangeNotesPath = onChangeNotesPath;
+        this.onChangeFileSuffix = onChangeFileSuffix;
         setHasStableIds(true);
     }
 
@@ -49,17 +60,15 @@ public class ManageAccountAdapter extends RecyclerView.Adapter<ManageAccountView
             setCurrentLocalAccount(localAccountClicked);
             onAccountClick.accept(localAccountClicked);
         }, (localAccountToDelete -> {
-            if (onAccountDelete != null) {
-                for (int i = 0; i < localAccounts.size(); i++) {
-                    if (localAccounts.get(i).getId() == localAccountToDelete.getId()) {
-                        localAccounts.remove(i);
-                        notifyItemRemoved(i);
-                        break;
-                    }
+            for (int i = 0; i < localAccounts.size(); i++) {
+                if (localAccounts.get(i).getId() == localAccountToDelete.getId()) {
+                    localAccounts.remove(i);
+                    notifyItemRemoved(i);
+                    break;
                 }
-                onAccountDelete.accept(localAccountToDelete);
             }
-        }), currentLocalAccount != null && currentLocalAccount.getId() == localAccount.getId());
+            onAccountDelete.accept(localAccountToDelete);
+        }), onChangeNotesPath, onChangeFileSuffix, currentLocalAccount != null && currentLocalAccount.getId() == localAccount.getId());
     }
 
     @Override

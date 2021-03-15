@@ -2,10 +2,14 @@ package it.niedermann.owncloud.notes.manageaccounts;
 
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,14 +27,21 @@ import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLay
 
 public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
 
-    private ItemAccountChooseBinding binding;
+    private final ItemAccountChooseBinding binding;
 
     public ManageAccountViewHolder(@NonNull View itemView) {
         super(itemView);
         binding = ItemAccountChooseBinding.bind(itemView);
     }
 
-    public void bind(@NonNull LocalAccount localAccount, @NonNull Consumer<LocalAccount> onAccountClick, @Nullable Consumer<LocalAccount> onAccountDelete, boolean isCurrentAccount) {
+    public void bind(
+            @NonNull LocalAccount localAccount,
+            @NonNull Consumer<LocalAccount> onAccountClick,
+            @NonNull Consumer<LocalAccount> onAccountDelete,
+            @NonNull Consumer<LocalAccount> onChangeNotesPath,
+            @NonNull Consumer<LocalAccount> onChangeFileSuffix,
+            boolean isCurrentAccount
+    ) {
         binding.accountName.setText(localAccount.getUserName());
         binding.accountHost.setText(Uri.parse(localAccount.getUrl()).getHost());
         Glide.with(itemView.getContext())
@@ -39,12 +50,25 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.accountItemAvatar);
         itemView.setOnClickListener((v) -> onAccountClick.accept(localAccount));
-        if (onAccountDelete == null) {
-            binding.delete.setVisibility(GONE);
-        } else {
-            binding.delete.setVisibility(VISIBLE);
-            binding.delete.setOnClickListener((v) -> onAccountDelete.accept(localAccount));
-        }
+        binding.accountContextMenu.setVisibility(VISIBLE);
+        binding.accountContextMenu.setOnClickListener((v) -> {
+            final PopupMenu popup = new PopupMenu(itemView.getContext(), v);
+            popup.inflate(R.menu.menu_account);
+            popup.setOnMenuItemClickListener(item -> {
+                if (item.getItemId() == R.id.notes_path) {
+                    onChangeNotesPath.accept(localAccount);
+                    return true;
+                } else if (item.getItemId() == R.id.file_suffix) {
+                    onChangeFileSuffix.accept(localAccount);
+                    return true;
+                } else if (item.getItemId() == R.id.delete) {
+                    onAccountDelete.accept(localAccount);
+                    return true;
+                }
+                return false;
+            });
+            popup.show();
+        });
         if (isCurrentAccount) {
             binding.currentAccountIndicator.setVisibility(VISIBLE);
             applyBrandToLayerDrawable((LayerDrawable) binding.currentAccountIndicator.getDrawable(), R.id.area, localAccount.getColor());

@@ -64,7 +64,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/delete"
+        android:id="@+id/account_context_menu"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -72,7 +72,7 @@
         android:focusable="false"
         android:scaleType="center"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_delete_grey600_24dp"
+        app:srcCompat="@drawable/ic_settings_grey600_24dp"
         tools:visibility="visible" />
 
     <View

@@ -34,6 +34,6 @@ public class AccountSwitcherViewHolder extends RecyclerView.ViewHolder {
                 .apply(RequestOptions.circleCropTransform())
                 .into(binding.accountItemAvatar);
         itemView.setOnClickListener((v) -> onAccountClick.accept(localAccount));
-        binding.delete.setVisibility(View.GONE);
+        binding.accountContextMenu.setVisibility(View.GONE);
     }
 }
