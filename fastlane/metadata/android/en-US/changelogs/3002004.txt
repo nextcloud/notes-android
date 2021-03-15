@@ -1,0 +1,1 @@
+- 🐞 Grid view: no padding top on first line in some cases (#890)
