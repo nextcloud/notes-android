@@ -15,6 +15,7 @@ import java.util.Map;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NotesResponse;
+import it.niedermann.owncloud.notes.shared.model.ServerSettings;
 
 @WorkerThread
 public class NotesClientV1 extends NotesClient {
@@ -32,7 +33,7 @@ public class NotesClientV1 extends NotesClient {
     }
 
     private NoteResponse putNote(SingleSignOnAccount ssoAccount, CloudNote note, String path, String method) throws Exception {
-        JSONObject paramObject = new JSONObject();
+        final JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_TITLE, note.getTitle());
         paramObject.accumulate(JSON_CONTENT, note.getContent());
         paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
@@ -56,5 +57,18 @@ public class NotesClientV1 extends NotesClient {
     @Override
     protected String getApiPath() {
         return API_PATH;
+    }
+
+    @Override
+    public ServerSettings getServerSettings(SingleSignOnAccount ssoAccount) throws Exception {
+        return ServerSettings.from(new JSONObject(this.requestServer(ssoAccount, "settings", METHOD_GET, null, null, null).getContent()));
+    }
+
+    @Override
+    public ServerSettings putServerSettings(SingleSignOnAccount ssoAccount, @NonNull ServerSettings settings) throws Exception {
+        final JSONObject paramObject = new JSONObject();
+        paramObject.accumulate(JSON_SETTINGS_NOTES_PATH, settings.getNotesPath());
+        paramObject.accumulate(JSON_SETTINGS_FILE_SUFFIX, settings.getFileSuffix());
+        return ServerSettings.from(new JSONObject(this.requestServer(ssoAccount, "settings", METHOD_PUT, null, paramObject, null).getContent()));
     }
 }

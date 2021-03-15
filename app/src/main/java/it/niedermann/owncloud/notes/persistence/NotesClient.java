@@ -29,6 +29,7 @@ import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NotesResponse;
+import it.niedermann.owncloud.notes.shared.model.ServerSettings;
 
 @SuppressWarnings("WeakerAccess")
 @WorkerThread
@@ -61,6 +62,8 @@ public abstract class NotesClient {
     public static final String JSON_CATEGORY = "category";
     public static final String JSON_ETAG = "etag";
     public static final String JSON_MODIFIED = "modified";
+    public static final String JSON_SETTINGS_NOTES_PATH = "notesPath";
+    public static final String JSON_SETTINGS_FILE_SUFFIX = "fileSuffix";
 
     public static final ApiVersion[] SUPPORTED_API_VERSIONS = new ApiVersion[]{
             new ApiVersion(1, 0),
@@ -95,6 +98,14 @@ public abstract class NotesClient {
     abstract NoteResponse editNote(SingleSignOnAccount ssoAccount, CloudNote note) throws Exception;
 
     abstract void deleteNote(SingleSignOnAccount ssoAccount, long noteId) throws Exception;
+
+    public ServerSettings getServerSettings(SingleSignOnAccount ssoAccount) throws Exception {
+        throw new UnsupportedOperationException("Not available in this API version");
+    }
+
+    public ServerSettings putServerSettings(SingleSignOnAccount ssoAccount, @NonNull ServerSettings settings) throws Exception {
+        throw new UnsupportedOperationException("Not available in this API version");
+    }
 
     /**
      * This entity class is used to return relevant data of the HTTP reponse.

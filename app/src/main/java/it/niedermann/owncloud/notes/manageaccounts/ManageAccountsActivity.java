@@ -13,8 +13,10 @@ import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
@@ -27,8 +29,11 @@ import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
+import it.niedermann.owncloud.notes.persistence.NotesClient;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.shared.model.ServerSettings;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
@@ -90,34 +95,71 @@ public class ManageAccountsActivity extends LockedActivity {
     }
 
     private void onChangeNotesPath(@NonNull LocalAccount localAccount) {
+        final NotesClient client = NotesClient.newInstance(localAccount.getPreferredApiVersion(), getApplicationContext());
         final EditText editText = new EditText(this);
+        editText.setEnabled(false);
         final View wrapper = createDialogViewWrapper(editText);
-        new BrandedAlertDialogBuilder(this)
+        final AlertDialog dialog = new BrandedAlertDialogBuilder(this)
                 .setTitle(R.string.settings_notes_path)
                 .setMessage("Folder to store your notes in your  Nextcloud")
                 .setView(wrapper)
                 .setNeutralButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.action_edit_save, (v, d) -> {
-                    Toast.makeText(this, "Submitted " + editText.getText(), Toast.LENGTH_LONG).show();
-                })
+                .setPositiveButton(R.string.action_edit_save, (v, d) -> new Thread(() -> {
+                    try {
+                        final ServerSettings newSettings = client.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new ServerSettings(editText.getText().toString(), null));
+                        Toast.makeText(this, "New notes path: " + newSettings.getNotesPath(), Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                    }
+                }).start())
                 .show();
+        new Thread(() -> {
+            try {
+                final ServerSettings oldSettings = client.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()));
+                editText.setText(oldSettings.getNotesPath());
+                editText.setEnabled(true);
+            } catch (Exception e) {
+                dialog.dismiss();
+                ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+            }
+        }).start();
     }
 
     private void onChangeFileSuffix(@NonNull LocalAccount localAccount) {
+        final NotesClient client = NotesClient.newInstance(localAccount.getPreferredApiVersion(), getApplicationContext());
         final Spinner spinner = new Spinner(this);
+        spinner.setEnabled(false);
         final View wrapper = createDialogViewWrapper(spinner);
         final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.settings_file_suffixes, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        new BrandedAlertDialogBuilder(this)
+        final AlertDialog dialog = new BrandedAlertDialogBuilder(this)
                 .setTitle(R.string.settings_file_suffix)
                 .setMessage("File extension for new notes in your Nextcloud")
                 .setView(wrapper)
                 .setNeutralButton(android.R.string.cancel, null)
                 .setPositiveButton("Save", (v, d) -> {
-                    Toast.makeText(this, "Submitted " + spinner.getSelectedItem(), Toast.LENGTH_LONG).show();
+                    new Thread(() -> {
+                        try {
+                            final ServerSettings newSettings = client.putServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()), new ServerSettings(null, spinner.getSelectedItem().toString()));
+                            Toast.makeText(this, "New file suffix: " + newSettings.getNotesPath(), Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                        }
+                    }).start();
                 })
                 .show();
+        new Thread(() -> {
+            try {
+                final ServerSettings oldSettings = client.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()));
+                // TODO
+//                spinner.setSelection(adapteroldSettings.getNotesPath());
+                spinner.setEnabled(true);
+            } catch (Exception e) {
+                dialog.dismiss();
+                ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+            }
+        }).start();
     }
 
     @NonNull
