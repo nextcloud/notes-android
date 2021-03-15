@@ -1,11 +1,18 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.Px;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -22,6 +29,9 @@ import it.niedermann.owncloud.notes.branding.BrandedAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
 
 public class ManageAccountsActivity extends LockedActivity {
 
@@ -81,10 +91,11 @@ public class ManageAccountsActivity extends LockedActivity {
 
     private void onChangeNotesPath(@NonNull LocalAccount localAccount) {
         final EditText editText = new EditText(this);
+        final View wrapper = createDialogViewWrapper(editText);
         new BrandedAlertDialogBuilder(this)
                 .setTitle(R.string.settings_notes_path)
-                .setMessage("Folder to store your notes in your Nextcloud")
-                .setView(editText)
+                .setMessage("Folder to store your notes in your  Nextcloud")
+                .setView(wrapper)
                 .setNeutralButton(android.R.string.cancel, null)
                 .setPositiveButton(R.string.action_edit_save, (v, d) -> {
                     Toast.makeText(this, "Submitted " + editText.getText(), Toast.LENGTH_LONG).show();
@@ -93,16 +104,42 @@ public class ManageAccountsActivity extends LockedActivity {
     }
 
     private void onChangeFileSuffix(@NonNull LocalAccount localAccount) {
-        final EditText editText = new EditText(this);
+        final Spinner spinner = new Spinner(this);
+        final View wrapper = createDialogViewWrapper(spinner);
+        final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.settings_file_suffixes, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         new BrandedAlertDialogBuilder(this)
                 .setTitle(R.string.settings_file_suffix)
                 .setMessage("File extension for new notes in your Nextcloud")
-                .setView(editText)
+                .setView(wrapper)
                 .setNeutralButton(android.R.string.cancel, null)
                 .setPositiveButton("Save", (v, d) -> {
-                    Toast.makeText(this, "Submitted " + editText.getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Submitted " + spinner.getSelectedItem(), Toast.LENGTH_LONG).show();
                 })
                 .show();
+    }
+
+    @NonNull
+    private View createDialogViewWrapper(@NonNull View view) {
+        final FrameLayout wrapper = new FrameLayout(this);
+        final int paddingVertical = getResources().getDimensionPixelSize(R.dimen.spacer_1x);
+        final int paddingHorizontal = SDK_INT >= LOLLIPOP_MR1
+                ? getDimensionFromAttribute(android.R.attr.dialogPreferredPadding)
+                : getResources().getDimensionPixelSize(R.dimen.spacer_2x);
+        wrapper.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
+        wrapper.addView(view);
+        return wrapper;
+    }
+
+    @Px
+    private int getDimensionFromAttribute(@SuppressWarnings("SameParameterValue") @AttrRes int attr) {
+        final TypedValue typedValue = new TypedValue();
+        if (getTheme().resolveAttribute(attr, typedValue, true))
+            return TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
+        else {
+            return 0;
+        }
     }
 
     @Override

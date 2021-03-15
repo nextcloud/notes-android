@@ -16,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
@@ -54,6 +57,13 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
         binding.accountContextMenu.setOnClickListener((v) -> {
             final PopupMenu popup = new PopupMenu(itemView.getContext(), v);
             popup.inflate(R.menu.menu_account);
+            if (!localAccount.getPreferredApiVersion().supportsSettings()) {
+                final Menu menu = popup.getMenu();
+                Stream.of(
+                        R.id.notes_path,
+                        R.id.file_suffix
+                ).forEach((i) -> menu.removeItem(menu.findItem(i).getItemId()));
+            }
             popup.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.notes_path) {
                     onChangeNotesPath.accept(localAccount);

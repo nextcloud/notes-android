@@ -9,10 +9,11 @@ import java.util.regex.Pattern;
 @SuppressWarnings("WeakerAccess")
 public class ApiVersion implements Comparable<ApiVersion> {
     private static final Pattern NUMBER_EXTRACTION_PATTERN = Pattern.compile("[0-9]+");
+    private static final ApiVersion VERSION_1_2 = new ApiVersion("1.2", 1, 2);
 
     private String originalVersion = "?";
-    private int major;
-    private int minor;
+    private final int major;
+    private final int minor;
 
     public ApiVersion(String originalVersion, int major, int minor) {
         this(major, minor);
@@ -72,6 +73,11 @@ public class ApiVersion implements Comparable<ApiVersion> {
             return 1;
         }
         return 0;
+    }
+
+    public boolean supportsSettings() {
+        // TODO
+        return true;//getMajor() >= VERSION_1_2.getMajor() && getMinor() >= VERSION_1_2.getMinor();
     }
 
     @NonNull

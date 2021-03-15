@@ -298,4 +298,11 @@
     <string name="settings_notes_path">Set folder</string>
     <string name="settings_file_suffix">File extension</string>
     <string name="remove_account">Remove account</string>
+
+
+    <string-array name="settings_file_suffixes">
+        <item>.txt</item>
+        <item>.md</item>
+    </string-array>
+
 </resources>
