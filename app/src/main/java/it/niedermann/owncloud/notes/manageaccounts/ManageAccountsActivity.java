@@ -150,8 +150,12 @@ public class ManageAccountsActivity extends LockedActivity {
         new Thread(() -> {
             try {
                 final ServerSettings oldSettings = client.getServerSettings(AccountImporter.getSingleSignOnAccount(this, localAccount.getAccountName()));
-                // TODO
-//                spinner.setSelection(adapteroldSettings.getNotesPath());
+                for (int i = 0; i < adapter.getCount(); i++) {
+                    if (adapter.getItem(i).equals(oldSettings.getFileSuffix())) {
+                        spinner.setSelection(i);
+                        break;
+                    }
+                }
                 spinner.setEnabled(true);
             } catch (Exception e) {
                 dialog.dismiss();
