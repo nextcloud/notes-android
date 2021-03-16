@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Same as grid_item_background_selector in res/drawable, but can be applied as BackgroundColorResource -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/bg_highlighted" android:state_selected="true" />
+    <item android:color="@android:color/transparent" />
+</selector>
