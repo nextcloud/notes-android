@@ -3,8 +3,6 @@ package it.niedermann.owncloud.notes.main.items;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.BackgroundColorSpan;
@@ -66,8 +64,8 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
         noteCategory.setVisibility(showCategory && !category.isEmpty() ? View.VISIBLE : View.GONE);
         noteCategory.setText(category);
 
-        @ColorInt int categoryForeground;
-        @ColorInt int categoryBackground;
+        @ColorInt final int categoryForeground;
+        @ColorInt final int categoryBackground;
 
         if (isDarkThemeActive) {
             if (ColorUtil.INSTANCE.isColorDark(mainColor)) {
@@ -93,8 +91,13 @@ public abstract class NoteViewHolder extends RecyclerView.ViewHolder {
 
         noteCategory.setTextColor(categoryForeground);
         if (noteCategory instanceof Chip) {
-            ((Chip) noteCategory).setChipStrokeColor(ColorStateList.valueOf(categoryBackground));
-            ((Chip) noteCategory).setChipBackgroundColor(ColorStateList.valueOf(isDarkThemeActive ? categoryBackground : Color.TRANSPARENT));
+            final Chip chip = (Chip) noteCategory;
+            chip.setChipStrokeColor(ColorStateList.valueOf(categoryBackground));
+            if(isDarkThemeActive) {
+                chip.setChipBackgroundColor(ColorStateList.valueOf(categoryBackground));
+            } else {
+                chip.setChipBackgroundColorResource(R.color.grid_item_background_selector);
+            }
         } else {
             DrawableCompat.setTint(noteCategory.getBackground(), categoryBackground);
         }

@@ -1,0 +1,1 @@
+- 🏷 Category label in grid view doesn't take highlight background colour upon selection (#945)

@@ -38,7 +38,8 @@ public class GridItemDecoration extends SectionItemDecoration {
                 final int spanIndex = lp.getSpanIndex();
 
                 // First row gets some spacing at the top
-                if (position < spanCount && position < adapter.getFirstPositionOfViewType(ItemAdapter.TYPE_SECTION)) {
+                final int firstSectionPosition = adapter.getFirstPositionOfViewType(ItemAdapter.TYPE_SECTION);
+                if (position < spanCount && (firstSectionPosition < 0 || position < firstSectionPosition)) {
                     outRect.top = gutter;
                 }
 
