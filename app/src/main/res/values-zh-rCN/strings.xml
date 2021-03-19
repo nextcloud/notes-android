@@ -138,7 +138,7 @@
     <string name="change_note_title">更改笔记标题</string>
     <string name="menu_edit_title">编辑标题</string>
     <string name="settings_branding">创建标签</string>
-    <string name="settings_gridview">网格试图</string>
+    <string name="settings_gridview">网格视图</string>
     <string name="simple_security">安全</string>
     <string name="simple_appearance">外观</string>
     <string name="simple_synchronization">同步</string>
