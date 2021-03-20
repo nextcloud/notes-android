@@ -169,7 +169,7 @@
     <string name="change_note_title">Change note title</string>
     <string name="menu_edit_title">Edit title</string>
     <string name="settings_branding">Branding</string>
-    <string name="settings_gridview">Grid view 🆕</string>
+    <string name="settings_gridview">Grid view</string>
     <string name="simple_security">Security</string>
     <string name="simple_appearance">Appearance</string>
     <string name="simple_synchronization">Synchronization</string>
