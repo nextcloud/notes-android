@@ -1,5 +1,9 @@
 # Frequently asked questions
 
+- [Why aren't there any buttons to apply formatting?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#why-arent-there-any-buttons-to-apply-formatting)
+- [I have experienced an error](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#i-have-experienced-an-error)
+- [How can i activate the dark mode for widgets?](https://github.com/stefan-niedermann/nextcloud-notes/blob/master/FAQ.md#how-can-i-activate-the-dark-mode-for-widgets)
+
 ## Why aren't there any buttons to apply formatting
 
 We use context based formatting to avoid distractions while writing. This is not "Word on Android".
