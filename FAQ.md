@@ -63,3 +63,23 @@ This is necessary for two reasons:
 
 1. We have a rapid development cycle - bugs which have been reported weeks ago might no longer relevant
 2. We are loosing the context of a report or a question over the time. We have many things to care about and digging into an issue deep and then relying on an response which is not coming is a waste of our limited free time
+
+## How can i activate the dark mode for widgets?
+
+Since `v3.2.0` the widgets are using the **global Android setting**. You can change it in the Android settings, depending on your manufacturer probably under the "Display" menu item:
+
+![Enable global Android dark mode](https://user-images.githubusercontent.com/4741199/111076875-8c8bff00-84ee-11eb-8052-b086c8e143b3.png)
+
+The main reason is a better and tighter integration in the default android theming mechanism. For example Android will switch the complete system UI to a dark mode when the battery is low.
+The widgets have previously not respected those Android intentions, also they ignored the user setting mentioned above for a overall-same theme on the device.
+
+The dark mode of the app does *not* affect the appearance of the widgets because the context is different.
+While the app is something one starts intentionally and runs in its own context, the widgets run always in the context of the launcher.
+To provide a homogeneous interface in your launcher and take full benefits of OLED screens and battery saving mechanisms, Google implemented the global Android setting in Android 10 to affect everything in this context at once - the app drawer, the status bar and the widgets. 
+
+According to the Play Store statistics when we release `v3.2.0`, more than `73%` of our (Play Store) users used Android 10 or higher and therefore the global setting is already present for them.
+Further `24%` used Android 7 - Android 9 and can utilize [tweaks](https://www.androidauthority.com/night-mode-on-android-886864/) (or other workarounds if they prefer to stay on old and partially even by Google [abandoned Android versions without security fixes](https://endoflife.date/android) instead of using a modern Custom ROM or other alternatives).
+
+The efforts and benefits of a) maintaining a custom hacky dark mode vs. b) supporting natively the global dark mode inclusive auto-theming on low battery etc. is in absolutely no proportion anymore.
+
+The same applies to the widgets of the Nextcloud Deck App and the Nextcloud News App.
