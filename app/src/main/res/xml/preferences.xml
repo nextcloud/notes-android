@@ -93,7 +93,7 @@
             android:icon="@drawable/ic_lock_grey600_24dp"
             android:key="@string/pref_key_lock"
             android:layout="@layout/item_pref"
-            android:summary="@string/simple_beta"
+            android:summary="@string/settings_lock_summary"
             android:title="@string/settings_lock" />
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
