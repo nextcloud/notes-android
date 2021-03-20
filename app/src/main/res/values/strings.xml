@@ -144,6 +144,7 @@
     <string name="add_category">Add %1$s</string>
     <string name="simple_checkbox">Checkbox</string>
     <string name="unlock_notes">Unlock notes</string>
+    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Oh no - What now? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Please try to force close the app and restart it again. There might have been an incorrect connection to the Nextcloud app.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">If the issue persists, try to clear the storage of both apps: Nextcloud and Nextcloud Notes to solve this issue.</string>
