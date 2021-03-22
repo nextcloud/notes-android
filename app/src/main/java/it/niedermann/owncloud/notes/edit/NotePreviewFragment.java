@@ -42,6 +42,9 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     protected FragmentNotePreviewBinding binding;
 
+    @Nullable
+    private Runnable setScrollY;
+
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -52,6 +55,17 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     @Override
     public ScrollView getScrollView() {
         return binding.scrollView;
+    }
+
+    @Override
+    protected synchronized void scrollToY(int y) {
+        this.setScrollY = () -> {
+            if (binding != null) {
+                Log.v("SCROLL set (preview) to", y + "");
+                binding.scrollView.post(() -> binding.scrollView.setScrollY(y));
+            }
+            setScrollY = null;
+        };
     }
 
     @Override
@@ -83,7 +97,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         super.onActivityCreated(savedInstanceState);
 
         registerInternalNoteLinkHandler();
-        binding.singleNoteContent.setMarkdownString(note.getContent());
+        binding.singleNoteContent.setMarkdownString(note.getContent(), setScrollY);
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
         changedText = note.getContent();
 

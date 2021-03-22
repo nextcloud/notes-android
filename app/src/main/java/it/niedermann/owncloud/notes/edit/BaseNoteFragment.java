@@ -135,26 +135,22 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Nullable
     protected abstract ScrollView getScrollView();
 
+    protected abstract void scrollToY(int scrollY);
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        this.originalScrollY = note.getScrollY();
+        scrollToY(originalScrollY);
         final ScrollView scrollView = getScrollView();
         if (scrollView != null) {
-            scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-                if (scrollView.getScrollY() > 0) {
-                    note.setScrollY(scrollView.getScrollY());
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final ScrollView scrollView = getScrollView();
-        if (scrollView != null) {
-            this.originalScrollY = note.getScrollY();
-            scrollView.post(() -> scrollView.scrollTo(0, originalScrollY));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                scrollView.setOnScrollChangeListener((View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) -> {
+                    if (scrollY > 0) {
+                        note.setScrollY(scrollY);
+                    }
+                });
+            }
         }
     }
 
