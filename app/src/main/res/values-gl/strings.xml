@@ -42,7 +42,8 @@
     <string name="settings_font_title">Letra monoespazada</string>
     <string name="settings_font_size">Tamaño da letra</string>
     <string name="settings_wifi_only">Sincronizar só con wifi</string>
-    <string name="settings_lock">Protección por contrasinal</string>
+    <string name="settings_lock">Bloqueo de aplis (beta)</string>
+    <string name="settings_lock_summary">Credenciais do dispositivo</string>
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
 
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
@@ -73,9 +74,6 @@
     <string name="about_license_tab_title">Licenza</string>
 
     <string name="widget_note_list_title">Lista de notas</string>
-    <string name="widget_note_list_add">Engadir unha nova nota</string>
-    <string name="widget_note_list_add_favorite">Engadir unha nova nota aos favoritos</string>
-    <string name="widget_note_list_add_to_category">Engadir unha nova nota a %1$s</string>
     <string name="widget_note_list_placeholder">Non hai notas</string>
     <string name="widget_single_note_title">Nota única</string>
     <string name="widget_single_note_placeholder_tv">Non se atopou a nota</string>
@@ -138,7 +136,7 @@
     <string name="change_note_title">Cambiar o título da nota</string>
     <string name="menu_edit_title">Editar o título</string>
     <string name="settings_branding">Xestión da marca</string>
-    <string name="settings_gridview">Ver como grella 🆕</string>
+    <string name="settings_gridview">Ver como grella</string>
     <string name="simple_security">Seguridade</string>
     <string name="simple_appearance">Aparencia</string>
     <string name="simple_synchronization">Sincronización</string>

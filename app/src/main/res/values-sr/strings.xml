@@ -42,7 +42,6 @@
     <string name="settings_font_title">Фонт фиксне ширине</string>
     <string name="settings_font_size">Величина фонта</string>
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
-    <string name="settings_lock">Заштита лозинком</string>
     <string name="settings_background_sync">Позадинска синхронизација</string>
 
     <string name="error_sync">Синхронизација није успела%1$s</string>
@@ -134,7 +133,6 @@
     <string name="change_note_title">Промени назив белешке</string>
     <string name="menu_edit_title">Измени наслов</string>
     <string name="settings_branding">Брендирање</string>
-    <string name="settings_gridview">Приказ мреже 🆕</string>
     <string name="simple_security">Безбедност</string>
     <string name="simple_appearance">Изглед</string>
     <string name="simple_synchronization">Синхронизација</string>

@@ -42,7 +42,6 @@
     <string name="settings_font_title">Monospace 글꼴</string>
     <string name="settings_font_size">글꼴 크기</string>
     <string name="settings_wifi_only">Wi-Fi만 사용해 동기화</string>
-    <string name="settings_lock">암호 보호</string>
     <string name="settings_background_sync">백그라운드 동기화</string>
 
     <string name="error_sync">동기화 실패: %1$s</string>
@@ -134,7 +133,6 @@
     <string name="change_note_title">메모 제목 변경</string>
     <string name="menu_edit_title">제목 수정</string>
     <string name="settings_branding">브랜딩</string>
-    <string name="settings_gridview">바둑판식 보기 🆕</string>
     <string name="simple_security">보안</string>
     <string name="simple_appearance">외형</string>
     <string name="simple_synchronization">동기화</string>

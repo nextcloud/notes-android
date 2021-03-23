@@ -42,7 +42,6 @@
     <string name="settings_font_title">Pisava enotne širine</string>
     <string name="settings_font_size">Velikost pisave</string>
     <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
-    <string name="settings_lock">Zaščita z geslom</string>
     <string name="settings_background_sync"> Usklajevanje v ozadju</string>
 
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
@@ -73,9 +72,6 @@
     <string name="about_license_tab_title">Dovoljenje</string>
 
     <string name="widget_note_list_title">Seznam zabeležk</string>
-    <string name="widget_note_list_add">Dodaj novo zabeležko</string>
-    <string name="widget_note_list_add_favorite">Dodaj novo zabeležko med priljubljene</string>
-    <string name="widget_note_list_add_to_category">Dodaj novo zabeležko v %1$s</string>
     <string name="widget_note_list_placeholder">Ni zabeležk</string>
     <string name="widget_single_note_title">Samostojna zabeležka</string>
     <string name="widget_single_note_placeholder_tv">Zabeležke ni mogoče najti</string>
@@ -138,7 +134,6 @@
     <string name="change_note_title">Spremeni naslov zabeležke</string>
     <string name="menu_edit_title">Uredi naslov</string>
     <string name="settings_branding">Prilagajanje oblikovanja</string>
-    <string name="settings_gridview">Mrežni pogled</string>
     <string name="simple_security">Varnost</string>
     <string name="simple_appearance">Videz</string>
     <string name="simple_synchronization">Usklajevanje</string>

@@ -42,7 +42,8 @@
     <string name="settings_font_title">Zabalera bakarreko letra mota</string>
     <string name="settings_font_size">Letra tamaina</string>
     <string name="settings_wifi_only">Sinkronizatu wifi bidez bakarrik</string>
-    <string name="settings_lock">Pasahitz bidezko babesa</string>
+    <string name="settings_lock">Aplikazioen blokeoa (Beta)</string>
+    <string name="settings_lock_summary">Gailuaren kredentzialak</string>
     <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
 
     <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
@@ -73,9 +74,6 @@
     <string name="about_license_tab_title">Lizentzia</string>
 
     <string name="widget_note_list_title">Oharren zerrenda</string>
-    <string name="widget_note_list_add">Gehitu ohar berria </string>
-    <string name="widget_note_list_add_favorite">Gehitu ohar berria gogokoetara</string>
-    <string name="widget_note_list_add_to_category">Gehitu ohar berria %1$s-(e)ra</string>
     <string name="widget_note_list_placeholder">Oharrik ez</string>
     <string name="widget_single_note_title">Ohar bakarra</string>
     <string name="widget_single_note_placeholder_tv">Oharra ez da aurkitu</string>
@@ -138,7 +136,7 @@
     <string name="change_note_title">Aldatu notaren titulua</string>
     <string name="menu_edit_title">Editatu izenburua</string>
     <string name="settings_branding">Marka</string>
-    <string name="settings_gridview">Sareta ikuspegia 🆕</string>
+    <string name="settings_gridview">Sareta ikuspegia</string>
     <string name="simple_security">Segurtasuna</string>
     <string name="simple_appearance">Itxura</string>
     <string name="simple_synchronization">Sinkronizazioa</string>

@@ -42,7 +42,6 @@
     <string name="settings_font_title">Моноширинный шрифт</string>
     <string name="settings_font_size">Размер шрифта</string>
     <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>
-    <string name="settings_lock">Защита паролем</string>
     <string name="settings_background_sync">Синхр. в фоновом режиме</string>
 
     <string name="error_sync">Сбой синхронизации: %1$s</string>
@@ -134,7 +133,6 @@
     <string name="change_note_title">Изменить заголовок заметки</string>
     <string name="menu_edit_title">Редактировать заголовок</string>
     <string name="settings_branding">Брендирование</string>
-    <string name="settings_gridview">Вид сеткой 🆕</string>
     <string name="simple_security">Безопасность</string>
     <string name="simple_appearance">Внешний вид</string>
     <string name="simple_synchronization">Синхронизация</string>
