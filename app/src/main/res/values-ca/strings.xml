@@ -42,7 +42,6 @@
     <string name="settings_font_title">Tipus de lletra de mida fixa</string>
     <string name="settings_font_size">Mida de la lletra</string>
     <string name="settings_wifi_only">Sincronitza només per la connexió sense fil</string>
-    <string name="settings_lock">Protecció amb contrasenya</string>
     <string name="settings_background_sync">Sincronització en segon pla</string>
 
     <string name="error_sync">S\'ha produït un error en la sincronització: %1$s</string>
@@ -134,7 +133,6 @@
     <string name="change_note_title">Canvia el títol de la nota</string>
     <string name="menu_edit_title">Edita el títol</string>
     <string name="settings_branding">Marca</string>
-    <string name="settings_gridview">Visualització de graella </string>
     <string name="simple_security">Seguretat</string>
     <string name="simple_appearance">Aparença</string>
     <string name="simple_synchronization">Sincronització</string>

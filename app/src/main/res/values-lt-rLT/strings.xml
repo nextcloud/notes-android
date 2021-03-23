@@ -42,7 +42,6 @@
     <string name="settings_font_title">Lygiaplotis šriftas</string>
     <string name="settings_font_size">Šrifto dydis</string>
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
-    <string name="settings_lock">Apsauga slaptažodžiu</string>
     <string name="settings_background_sync">Foninis sinchronizavimas</string>
 
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
@@ -133,7 +132,6 @@
     <string name="change_note_title">Pakeisti užrašo pavadinimą</string>
     <string name="menu_edit_title">Redaguoti pavadinimą</string>
     <string name="settings_branding">Prekės ženklas</string>
-    <string name="settings_gridview">Tinklelinis atvaizdavimas</string>
     <string name="simple_security">Saugumas</string>
     <string name="simple_appearance">Išvaizda</string>
     <string name="simple_synchronization">Sinchronizacija</string>

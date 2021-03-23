@@ -42,7 +42,6 @@
     <string name="settings_font_title">Tasalevyinen fontti</string>
     <string name="settings_font_size">Fontin koko</string>
     <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
-    <string name="settings_lock">Salasanasuojaus</string>
     <string name="settings_background_sync">Taustasynkronointi</string>
 
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
@@ -133,7 +132,6 @@
     <string name="change_note_title">Muuta muistinpanon otsikkoa</string>
     <string name="menu_edit_title">Muokkaa otsikkoa</string>
     <string name="settings_branding">Brändäys</string>
-    <string name="settings_gridview">Ruudukkonäkymä 🆕</string>
     <string name="simple_security">Tietoturva</string>
     <string name="simple_appearance">Ulkoasu</string>
     <string name="simple_synchronization">Synkronointi</string>

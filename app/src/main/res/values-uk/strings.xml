@@ -42,7 +42,6 @@
     <string name="settings_font_title">Моноширинний шрифт</string>
     <string name="settings_font_size">Розмір шрифту</string>
     <string name="settings_wifi_only">Синхронізувати тільки по WI-Fi</string>
-    <string name="settings_lock">Захист паролем</string>
     <string name="settings_background_sync">Фонова синхронізація</string>
 
     <string name="error_sync">Синхронізація не вдалася: %1$s</string>
@@ -134,7 +133,6 @@
     <string name="change_note_title">Змінити заголовок нотатки</string>
     <string name="menu_edit_title">Редагувати нотатку</string>
     <string name="settings_branding">Оформлення</string>
-    <string name="settings_gridview">Упорядкування у формі сітки</string>
     <string name="simple_security">Безпека</string>
     <string name="simple_appearance">Вигляд</string>
     <string name="simple_synchronization">Синхронізація</string>

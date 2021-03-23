@@ -42,7 +42,8 @@
     <string name="settings_font_title">Nichtproportionale Schriftart</string>
     <string name="settings_font_size">Schriftgröße</string>
     <string name="settings_wifi_only">Nur über WLAN synchronisieren</string>
-    <string name="settings_lock">Passwortschutz</string>
+    <string name="settings_lock">App-Sperre (Beta)</string>
+    <string name="settings_lock_summary">Geräte-Anmeldedaten</string>
     <string name="settings_background_sync">Hintergrundsynchronisierung</string>
 
     <string name="error_sync">Synchronisierung fehlgeschlagen: %1$s</string>
@@ -73,9 +74,6 @@
     <string name="about_license_tab_title">Lizenz</string>
 
     <string name="widget_note_list_title">Liste der Notizen</string>
-    <string name="widget_note_list_add">Neue Notiz hinzufügen</string>
-    <string name="widget_note_list_add_favorite">Neue Notiz zu Favoriten hinzufügen</string>
-    <string name="widget_note_list_add_to_category">Neue Notiz zu %1$s hinzufügen</string>
     <string name="widget_note_list_placeholder">Keine Notizen</string>
     <string name="widget_single_note_title">Eine Notiz</string>
     <string name="widget_single_note_placeholder_tv">Notiz nicht gefunden</string>
@@ -138,7 +136,7 @@
     <string name="change_note_title">Notiz-Titel ändern</string>
     <string name="menu_edit_title">Titel ändern</string>
     <string name="settings_branding">Branding</string>
-    <string name="settings_gridview">Kachelansicht 🆕</string>
+    <string name="settings_gridview">Kachelansicht</string>
     <string name="simple_security">Sicherheit</string>
     <string name="simple_appearance">Aussehen</string>
     <string name="simple_synchronization">Synchronisierung</string>

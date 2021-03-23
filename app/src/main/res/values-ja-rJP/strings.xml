@@ -42,7 +42,6 @@
     <string name="settings_font_title">モノスペースフォント</string>
     <string name="settings_font_size">フォントサイズ</string>
     <string name="settings_wifi_only">Wi-Fi接続時のみ同期する</string>
-    <string name="settings_lock">パスワード保護</string>
     <string name="settings_background_sync">バックグラウンド同期</string>
 
     <string name="error_sync">同期に失敗しました: %1$s</string>
@@ -60,7 +59,7 @@
     <string name="about_source_title">ソースコード</string>
     <string name="about_source">このプロジェクトは GitHub: &lt;a href=\"%1$s\">%1$s&lt;/a> にホストされています</string>
     <string name="about_issues_title">問題</string>
-    <string name="about_issues">GitHub の問題追跡ツールで、バグ、拡張の提案、機能のリクエストを報告できます: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">GitHub の問題追跡ツールで、不具合、拡張の提案、機能のリクエストを報告できます: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">翻訳</string>
     <string name="about_translate">Transifex の Nextcloud チームに参加して、このアプリの翻訳を手伝ってください: &lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">アプリ ライセンス</string>
@@ -134,7 +133,6 @@
     <string name="change_note_title">ノートタイトルを変更</string>
     <string name="menu_edit_title">タイトルを編集</string>
     <string name="settings_branding">ブランディング</string>
-    <string name="settings_gridview">グリッド表示 🆕</string>
     <string name="simple_security">セキュリティ</string>
     <string name="simple_appearance">表示</string>
     <string name="simple_synchronization">同期</string>

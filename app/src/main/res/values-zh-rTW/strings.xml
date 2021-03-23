@@ -42,7 +42,6 @@
     <string name="settings_font_title">等寬</string>
     <string name="settings_font_size">字體大小</string>
     <string name="settings_wifi_only">只在有 Wi-Fi 時同步</string>
-    <string name="settings_lock">密碼保護</string>
     <string name="settings_background_sync">背景同步</string>
 
     <string name="error_sync">同步失敗：%1$s</string>
@@ -112,13 +111,26 @@
     <string name="unlock_notes">解鎖筆記</string>
     <string name="simple_beta">Beta 測試版</string>
     <string name="error_dialog_title">喔不 - 現在怎麼辦？🙁</string>
+    <string name="error_dialog_tip_token_mismatch_retry">請嘗試強制關閉應用程式並再次重新啟動。可能是有和Nextcloud應用程式不正確的連線。</string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">如果問題持續著，請試著清除Nextcloud以及Nextcloud Notes這兩個應用程式的儲存空間以解決這個問題。</string>
+    <string name="error_dialog_tip_clear_storage">您可以藉由打開應用程式資訊 → 清除儲存空間以清除儲存空間。⚠️警告：這將會刪除尚未同步的筆記！</string>
+    <string name="error_dialog_tip_files_outdated">您的Nextcloud應用程式似乎過舊了。請造訪Play Store或F-Droid以取得最新版本。</string>
+    <string name="error_dialog_tip_files_force_stop">您的Nextcloud應用程式似乎出了些問題。請試著強制停止Nextcloud以及Nextcloud Notes這兩個應用程式。</string>
+    <string name="error_dialog_tip_files_delete_storage">如果強制停止沒有幫助，請試著清除這兩個應用程式的儲存空間。</string>
+    <string name="error_dialog_timeout_instance">您的伺服器未在時間內回應。請確保您的Nextcloud正常運作。</string>
+    <string name="error_dialog_timeout_toggle">請檢查您的網路連接。有時候啟用/停用行動數據或Wi-Fi會有幫助。</string>
+    <string name="error_dialog_check_server">來自您的伺服器的回應並不正確。請確認您是否可藉由Web界面存取您的筆記。</string>
+    <string name="error_dialog_check_server_logs">您的Nextcloud設定有問題。請查看您的伺服器日誌檔。</string>
+    <string name="error_dialog_check_maintenance">請確認您的Nextcloud是否未處於維護模式。</string>
+    <string name="error_dialog_insufficient_storage">您的Nextcloud已無可用空間。請刪除部份檔案以將您的本地修改同步至雲端。</string>
+    <string name="error_dialog_contact_us">如果問題持續請不要猶豫並聯絡我們。您可以在關於的選項中找到我們的聯絡資訊。</string>
     <string name="error_dialog_we_need_info">我們需要以下的技術資訊來幫助您：</string>
+    <string name="error_dialog_server_app_enabled">請確保您已經在您的伺服器安裝並啟用了\"Notes\"應用程式。</string>
     <string name="added_content">已加入「%1$s」</string>
     <string name="shared_text_empty">分享的文字是空的</string>
     <string name="append_to_note">附加到筆記</string>
     <string name="change_note_title">改變筆記標題</string>
     <string name="menu_edit_title">編輯標題</string>
-    <string name="settings_gridview">格線檢視 </string>
     <string name="simple_security">安全性</string>
     <string name="simple_appearance">外觀</string>
     <string name="simple_synchronization">同步</string>
@@ -171,20 +183,33 @@
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_text_title">文字編輯器</string>
     <string name="formatting_help_lists_title">清單</string>
+    <string name="formatting_help_lists_body_1">有時您會想用數字列表：</string>
     <string name="formatting_help_lists_body_2">一</string>
     <string name="formatting_help_lists_body_3">二</string>
     <string name="formatting_help_lists_body_4">三</string>
+    <string name="formatting_help_lists_body_5">有時您會想用項目符號：</string>
+    <string name="formatting_help_lists_body_6">以連接號作為一行的開始</string>
     <string name="formatting_help_lists_body_8">類似這個</string>
     <string name="formatting_help_lists_body_9">還有這個</string>
 
+    <string name="formatting_help_checkboxes_title">核取方塊</string>
+    <string name="formatting_help_checkboxes_body_1">若要建立一個核取方塊，請在列表後使用中括號</string>
     <string name="formatting_help_checkboxes_body_2">項目 1</string>
     <string name="formatting_help_checkboxes_body_3">項目 2</string>
 
+    <string name="formatting_help_structured_documents_body_4">如果您想引用某些人的名言，請在每行開頭使用%1$s符號：</string>
+    <string name="formatting_help_structured_documents_body_5">想像力比知識更重要。知識是有限的，但想像力卻包含了整個世界。</string>
+    <string name="formatting_help_structured_documents_body_6">- 阿爾伯特·愛因斯坦</string>
+
+    <string name="formatting_help_code_title">代碼</string>
+    <string name="formatting_help_tables_title">表格</string>
+    <string name="formatting_help_images_title">圖片</string>
     <string name="simple_other">其他</string>
     <string name="sort_last_modified">依修改日期排序</string>
     <string name="sort_alphabetically">依字母排序</string>
     <string name="error_action_open_battery_settings">電池設定</string>
     <string name="error_action_open_deck_info">開啟 App 資訊</string>
     <string name="error_action_open_network">網路設定</string>
+    <string name="no_account_configured_yet">還沒有已設定的帳號</string>
     <string name="no_other_accounts">你尚未設定其它帳號。</string>
     </resources>

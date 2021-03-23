@@ -42,7 +42,6 @@
     <string name="settings_font_title">Carattere a spaziatura fissa</string>
     <string name="settings_font_size">Dimensione carattere</string>
     <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
-    <string name="settings_lock">Protezione con password</string>
     <string name="settings_background_sync">Sincronizzazione in background</string>
 
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
@@ -135,7 +134,6 @@
     <string name="change_note_title">Cambia titolo della nota</string>
     <string name="menu_edit_title">Modifica titolo</string>
     <string name="settings_branding">Marchio</string>
-    <string name="settings_gridview">Vista Griglia 🆕</string>
     <string name="simple_security">Sicurezza</string>
     <string name="simple_appearance">Aspetto</string>
     <string name="simple_synchronization">Sincronizzazione</string>

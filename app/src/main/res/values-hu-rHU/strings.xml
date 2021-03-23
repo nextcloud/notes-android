@@ -42,7 +42,6 @@
     <string name="settings_font_title">Fix szélességű betűkészlet</string>
     <string name="settings_font_size">Betűméret</string>
     <string name="settings_wifi_only">Szinkronizálás csak Wi-Fin</string>
-    <string name="settings_lock">Jelszavas védelem</string>
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
 
     <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
@@ -134,7 +133,6 @@
     <string name="change_note_title">Jegyzet címének módosítása</string>
     <string name="menu_edit_title">Cím szerkesztése</string>
     <string name="settings_branding">Márkázas</string>
-    <string name="settings_gridview">Rács nézet 🆕</string>
     <string name="simple_security">Biztonság</string>
     <string name="simple_appearance">Megjelenés</string>
     <string name="simple_synchronization">Szinkronizálás</string>

@@ -42,7 +42,8 @@
     <string name="settings_font_title">等宽字体</string>
     <string name="settings_font_size">字体大小</string>
     <string name="settings_wifi_only">仅在Wi-Fi下同步</string>
-    <string name="settings_lock">密码保护</string>
+    <string name="settings_lock">应用锁 （测试版）</string>
+    <string name="settings_lock_summary">设备凭据</string>
     <string name="settings_background_sync">后台同步</string>
 
     <string name="error_sync">同步失败：%1$s</string>
@@ -73,9 +74,6 @@
     <string name="about_license_tab_title">授权</string>
 
     <string name="widget_note_list_title">笔记列表</string>
-    <string name="widget_note_list_add">添加新笔记</string>
-    <string name="widget_note_list_add_favorite">添加新笔记到收藏</string>
-    <string name="widget_note_list_add_to_category">添加新笔记到 %1$s</string>
     <string name="widget_note_list_placeholder">没有笔记</string>
     <string name="widget_single_note_title">单个笔记</string>
     <string name="widget_single_note_placeholder_tv">未找到笔记</string>
@@ -138,7 +136,7 @@
     <string name="change_note_title">更改笔记标题</string>
     <string name="menu_edit_title">编辑标题</string>
     <string name="settings_branding">创建标签</string>
-    <string name="settings_gridview">网格试图</string>
+    <string name="settings_gridview">网格视图</string>
     <string name="simple_security">安全</string>
     <string name="simple_appearance">外观</string>
     <string name="simple_synchronization">同步</string>

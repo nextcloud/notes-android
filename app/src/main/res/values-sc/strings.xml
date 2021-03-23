@@ -42,7 +42,6 @@
     <string name="settings_font_title">Caràtere a ispatziadura fissa</string>
     <string name="settings_font_size">Dimensione caràtere</string>
     <string name="settings_wifi_only">Sincroniza isceti cun su Wi-Fi</string>
-    <string name="settings_lock">Bardiadura cun crae</string>
     <string name="settings_background_sync">Sincronizatzione isfundu</string>
 
     <string name="error_sync">Sincronizatzione faddida: %1$s</string>
@@ -114,6 +113,7 @@
     <string name="error_dialog_title">Oh no - Immoe ite ddoe at? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Proa a serrare a fortza s\'aplicatzione e torrala a aviare. Fortzis ddoe at àpidu unu problema de connessione a s\'aplicatzione de Nextcloud. </string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si sighit su problema, proa a cantzellare s\'archiviatzione de ambas is aplicatziones Nextcloud e Nextcloud Notes pro isorvere su problema.</string>
+    <string name="error_dialog_tip_clear_storage">Podes limpiare s\'archiviatzione aberende is informatziones de s\'aplicatzione e seberende Archiviatzione → Lìmpia archiviatzione. ⚠️ Atentzione: Custu at a cantzellare is notas no ancora sincronizadas!</string>
     <string name="error_dialog_tip_files_outdated">S\'aplicatzione tua de Nextcloud paret foras d\'usu. Pro praghere, bìsita su Play Store o F-Droid pro otènnere s\'ùrtima versione.</string>
     <string name="error_dialog_tip_files_force_stop">Paret chi b\'at àpidu problemas cun s\'aplicatzione de Nextcloud. Pro praghere proa a ddas firmare ambas, s\'aplicatzione Nextcloud e s\'aplicatzione Nexcloud Notes. </string>
     <string name="error_dialog_tip_files_delete_storage">Si a ddas firmare a fortza no agiudat, podes proare a limpiare s\'archiviatzione de ambas is aplicatziones.</string>
@@ -134,7 +134,6 @@
     <string name="change_note_title">Càmbia su tìtulu de sa nota</string>
     <string name="menu_edit_title">Modìfica tìtulu</string>
     <string name="settings_branding">Marca</string>
-    <string name="settings_gridview">Vista grìllia</string>
     <string name="simple_security">Seguresa</string>
     <string name="simple_appearance">Aparèntzia</string>
     <string name="simple_synchronization">Sincronizatzione</string>
