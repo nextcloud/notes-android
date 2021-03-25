@@ -32,7 +32,7 @@ dependencies {
     implementation 'com.github.stefan-niedermann:android-commons:0.2.0'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation "androidx.lifecycle:lifecycle-livedata:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.3.1"
 
     implementation "io.noties.markwon:core:$markwonVersion"
     implementation "io.noties.markwon:editor:$markwonVersion"
