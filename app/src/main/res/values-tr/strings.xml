@@ -42,6 +42,8 @@
     <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
     <string name="settings_font_size">Yazı boyutu</string>
     <string name="settings_wifi_only">Yalnız Wi-Fi ile eşitlensin</string>
+    <string name="settings_lock">Uygulama kilidi (Beta)</string>
+    <string name="settings_lock_summary">Aygıt kimlik doğrulama bilgileri</string>
     <string name="settings_background_sync">Arka planda eşitleme</string>
 
     <string name="error_sync">Eşitlenemedi: %1$s</string>
@@ -134,6 +136,7 @@
     <string name="change_note_title">Not başlığını değiştir</string>
     <string name="menu_edit_title">Başlığı düzenle</string>
     <string name="settings_branding">Markalama</string>
+    <string name="settings_gridview">Tablo görünümü</string>
     <string name="simple_security">Güvenlik</string>
     <string name="simple_appearance">Görünüm</string>
     <string name="simple_synchronization">Eşitleme</string>
