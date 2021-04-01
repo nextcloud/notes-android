@@ -171,7 +171,7 @@
     <string name="settings_branding">Branding</string>
     <string name="settings_gridview">Grid view</string>
     <string name="simple_security">Security</string>
-    <string name="simple_appearance">Appearance</string>
+    <string name="appearance_and_behavior">Appearance and behavior</string>
     <string name="simple_synchronization">Synchronization</string>
     <string name="simple_behavior">Behavior</string>
     <string name="manage_accounts">Manage accounts</string>
