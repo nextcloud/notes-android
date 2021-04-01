@@ -29,7 +29,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference fontPref;
     private BrandedSwitchPreference lockPref;
     private BrandedSwitchPreference wifiOnlyPref;
-    private BrandedSwitchPreference brandingPref;
     private BrandedSwitchPreference gridViewPref;
     private BrandedSwitchPreference preventScreenCapturePref;
 
@@ -118,7 +117,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         fontPref.applyBrand(mainColor, textColor);
         lockPref.applyBrand(mainColor, textColor);
         wifiOnlyPref.applyBrand(mainColor, textColor);
-        brandingPref.applyBrand(mainColor, textColor);
         gridViewPref.applyBrand(mainColor, textColor);
         preventScreenCapturePref.applyBrand(mainColor, textColor);
     }
