@@ -45,6 +45,7 @@
     <string name="settings_lock">App lock (Beta)</string>
     <string name="settings_lock_summary">Device credentials</string>
     <string name="settings_background_sync">Background synchronization</string>
+    <string name="settings_prevent_screen_capture">Prevent screen capture</string>
 
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_synchronization">Synchronization failed</string>
@@ -103,6 +104,7 @@
     <string name="pref_key_font_size" translatable="false">fontSize</string>
     <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>
     <string name="pref_key_lock" translatable="false">lock</string>
+    <string name="pref_key_prevent_screen_capture" translatable="false">preventScreenCapture</string>
     <string name="pref_category_security" translatable="false">security</string>
     <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
     <string name="pref_key_background_sync" translatable="false">backgroundSync</string>

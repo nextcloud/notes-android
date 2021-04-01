@@ -3,14 +3,15 @@ package it.niedermann.owncloud.notes;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.WindowManager;
 
 import androidx.annotation.Nullable;
+import androidx.preference.PreferenceManager;
 
-import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.branding.BrandedActivity;
+import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 
 public abstract class LockedActivity extends BrandedActivity {
 
@@ -24,6 +25,10 @@ public abstract class LockedActivity extends BrandedActivity {
         super.onCreate(savedInstanceState);
 
         Thread.currentThread().setUncaughtExceptionHandler(new ExceptionHandler(this));
+
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean(getString(R.string.pref_key_prevent_screen_capture), false)) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
 
         if (isTaskRoot()) {
             askToUnlock();
