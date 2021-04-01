@@ -12,13 +12,13 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.Branded;
 import it.niedermann.owncloud.notes.branding.BrandedSwitchPreference;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.persistence.SyncWorker;
 import it.niedermann.owncloud.notes.shared.util.DeviceCredentialUtil;
-import it.niedermann.owncloud.notes.NotesApplication;
 
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 
@@ -31,6 +31,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
     private BrandedSwitchPreference wifiOnlyPref;
     private BrandedSwitchPreference brandingPref;
     private BrandedSwitchPreference gridViewPref;
+    private BrandedSwitchPreference preventScreenCapturePref;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,16 +71,15 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
             Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_branding) + "\"");
         }
 
+        preventScreenCapturePref = findPreference(getString(R.string.pref_key_prevent_screen_capture));
+        if (preventScreenCapturePref == null) {
+            Log.e(TAG, "Could not find \"" + getString(R.string.pref_key_prevent_screen_capture) + "\"-preference.");
+        }
+
         lockPref = findPreference(getString(R.string.pref_key_lock));
         if (lockPref != null) {
             if (!DeviceCredentialUtil.areCredentialsAvailable(requireContext())) {
                 lockPref.setVisible(false);
-                Preference securityCategory = findPreference(getString(R.string.pref_category_security));
-                if (securityCategory != null) {
-                    securityCategory.setVisible(false);
-                } else {
-                    Log.e(TAG, "Could not find preference " + getString(R.string.pref_category_security));
-                }
             } else {
                 lockPref.setOnPreferenceChangeListener((preference, newValue) -> {
                     NotesApplication.setLockedPreference((Boolean) newValue);
@@ -134,5 +134,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
         wifiOnlyPref.applyBrand(mainColor, textColor);
         brandingPref.applyBrand(mainColor, textColor);
         gridViewPref.applyBrand(mainColor, textColor);
+        preventScreenCapturePref.applyBrand(mainColor, textColor);
     }
 }

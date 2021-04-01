@@ -95,6 +95,13 @@
             android:layout="@layout/item_pref"
             android:summary="@string/settings_lock_summary"
             android:title="@string/settings_lock" />
+
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/ic_baseline_screen_lock_portrait_24"
+            android:key="@string/pref_key_prevent_screen_capture"
+            android:layout="@layout/item_pref"
+            android:title="@string/settings_prevent_screen_capture" />
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
 </PreferenceScreen>
