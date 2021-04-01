@@ -68,7 +68,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
                 return true;
             });
         } else {
-            Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_branding) + "\"");
+            Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_gridview) + "\"");
         }
 
         preventScreenCapturePref = findPreference(getString(R.string.pref_key_prevent_screen_capture));
