@@ -61,13 +61,8 @@ public class BrandedSwitchPreference extends SwitchPreference implements Branded
 
     @Override
     public void applyBrand(@ColorInt int mainColor, @ColorInt int textColor) {
-        if (BrandingUtil.isBrandingEnabled(getContext())) {
-            this.mainColor = mainColor;
-            this.textColor = textColor;
-        } else {
-            this.mainColor = getContext().getResources().getColor(R.color.defaultBrand);
-            this.textColor = Color.WHITE;
-        }
+        this.mainColor = mainColor;
+        this.textColor = textColor;
         // onBindViewHolder is called after applyBrand, therefore we have to store the given values and apply them later.
         applyBrand();
     }

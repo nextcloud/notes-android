@@ -16,6 +16,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_15_16;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_16_17;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_17_18;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_18_19;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_19_20;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_4_5;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_5_6;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_6_7;
@@ -26,7 +27,7 @@ import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
 
 abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
 
-    private static final int database_version = 19;
+    private static final int database_version = 20;
     @NonNull
     protected final Context context;
 
@@ -194,6 +195,8 @@ abstract class AbstractNotesDatabase extends SQLiteOpenHelper {
                 new Migration_17_18(db);
             case 18:
                 new Migration_18_19(context);
+            case 19:
+                new Migration_19_20(context);
         }
     }
 

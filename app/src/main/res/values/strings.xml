@@ -99,7 +99,6 @@
     <string name="pref_key_note_mode" translatable="false">noteMode</string>
     <string name="pref_key_theme" translatable="false">darkTheme</string>
     <string name="pref_key_font" translatable="false">font</string>
-    <string name="pref_key_branding" translatable="false">branding</string>
     <string name="pref_key_gridview" translatable="false">gridview</string>
     <string name="pref_key_font_size" translatable="false">fontSize</string>
     <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>

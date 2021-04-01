@@ -44,20 +44,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat implements Bra
 
         fontPref = findPreference(getString(R.string.pref_key_font));
 
-        brandingPref = findPreference(getString(R.string.pref_key_branding));
-        if (brandingPref != null) {
-            brandingPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
-                updateNoteListWidgets(requireContext());
-                final Boolean branding = (Boolean) newValue;
-                Log.v(TAG, "branding: " + branding);
-                requireActivity().setResult(Activity.RESULT_OK);
-                ActivityCompat.recreate(requireActivity());
-                return true;
-            });
-        } else {
-            Log.e(TAG, "Could not find preference with key: \"" + getString(R.string.pref_key_branding) + "\"");
-        }
-
         gridViewPref = findPreference(getString(R.string.pref_key_gridview));
         if (gridViewPref != null) {
             gridViewPref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {

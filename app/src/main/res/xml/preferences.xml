@@ -39,13 +39,6 @@
             android:title="@string/settings_theme_title" />
 
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
-            android:defaultValue="true"
-            android:icon="@drawable/ic_color_lens_grey600_24dp"
-            android:key="@string/pref_key_branding"
-            android:layout="@layout/item_pref"
-            android:title="@string/settings_branding" />
-
-        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
             android:icon="@drawable/ic_baseline_dashboard_24"
             android:key="@string/pref_key_gridview"
             android:layout="@layout/item_pref"
