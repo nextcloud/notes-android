@@ -43,7 +43,6 @@
     <string name="settings_font_size">Величина фонта</string>
     <string name="settings_wifi_only">Синхронизуј само преко бежичне везе</string>
     <string name="settings_background_sync">Позадинска синхронизација</string>
-
     <string name="error_sync">Синхронизација није успела%1$s</string>
     <string name="error_synchronization">Синхронизација није успела</string>
     <string name="error_no_network">Нема мрежне везе</string>
@@ -109,7 +108,6 @@
     <string name="add_category">Додај %1$s</string>
     <string name="simple_checkbox">Штиклирање</string>
     <string name="unlock_notes">Откључај белешке</string>
-    <string name="simple_beta">Бета</string>
     <string name="error_dialog_title">О, не - шта сад? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Покушајте да форсирано затворите апликацију и стартујете је поново. Можда је била неисправна конекција ка Некстклауд апликацији.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ако проблем настави да се дешава, пробајте да очистите податке од обе апликације: и Некстклауд и Некстклауд Белешки да бисте решили проблем.</string>
@@ -134,7 +132,6 @@
     <string name="menu_edit_title">Измени наслов</string>
     <string name="settings_branding">Брендирање</string>
     <string name="simple_security">Безбедност</string>
-    <string name="simple_appearance">Изглед</string>
     <string name="simple_synchronization">Синхронизација</string>
     <string name="simple_behavior">Понашање</string>
     <string name="manage_accounts">Управљање налозима</string>

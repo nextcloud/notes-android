@@ -43,7 +43,6 @@
     <string name="settings_font_size">Skriftstørrelse</string>
     <string name="settings_wifi_only">Synkroniser kun med WiFi</string>
     <string name="settings_background_sync">Synkronisering i bakgrunnen</string>
-
     <string name="error_sync">Synkronisering mislyktes: %1$s</string>
     <string name="error_synchronization">Synkronisering mislyktes</string>
     <string name="error_no_network">Ingen nettverkstilkobling</string>
@@ -109,7 +108,6 @@
     <string name="add_category">Legg til%1$s</string>
     <string name="simple_checkbox">Avkryssningsboks</string>
     <string name="unlock_notes">Lås opp notater</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Å nei - Hva nå? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prøv å tvinge avslutning av appen og start den på nytt. Det kan ha vært en feiltilkobling til Nextcloud-appen.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Hvis problemet vedvarer, prøv å tømme lageret for begge disse appene for å løse problemet: Nextcloud og Nextcloud Notes.</string>
@@ -134,7 +132,6 @@
     <string name="menu_edit_title">Rediger tittel</string>
     <string name="settings_branding">Branding</string>
     <string name="simple_security">Sikkerhet</string>
-    <string name="simple_appearance">Utseende</string>
     <string name="simple_synchronization">Synkronisering</string>
     <string name="simple_behavior">Atferd</string>
     <string name="manage_accounts">Håndter kontoer</string>

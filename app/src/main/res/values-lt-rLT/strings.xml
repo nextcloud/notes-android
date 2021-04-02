@@ -43,7 +43,6 @@
     <string name="settings_font_size">Šrifto dydis</string>
     <string name="settings_wifi_only">Sinchronizuoti tik naudojant belaidį (Wi-Fi)</string>
     <string name="settings_background_sync">Foninis sinchronizavimas</string>
-
     <string name="error_sync">Sinchronizacija nepavyko: %1$s</string>
     <string name="error_synchronization">Sinchronizacija nepavyko</string>
     <string name="error_no_network">Nėra tinklo ryšio</string>
@@ -108,7 +107,6 @@
     <string name="add_category">Pridėti %1$s</string>
     <string name="simple_checkbox">Žymimasis langelis</string>
     <string name="unlock_notes">Atrakinti užrašus</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">O, ne - Kas dabar? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Pabandykite priverstinai uždaryti programą ir vėl paleiskite ją iš naujo. Galbūt buvo nepavyko užmegžti ryšį su „Nextcloud“ programa.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jei problema išlieka, pabandykite išvalyti abiejų programų saugyklą: „Nextcloud“ ir „Nextcloud Notes“.</string>
@@ -133,7 +131,6 @@
     <string name="menu_edit_title">Redaguoti pavadinimą</string>
     <string name="settings_branding">Prekės ženklas</string>
     <string name="simple_security">Saugumas</string>
-    <string name="simple_appearance">Išvaizda</string>
     <string name="simple_synchronization">Sinchronizacija</string>
     <string name="simple_behavior">Funkcionavimas</string>
     <string name="manage_accounts">Tvarkyti paskyras</string>

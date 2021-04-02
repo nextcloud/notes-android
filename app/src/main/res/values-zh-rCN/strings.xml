@@ -45,7 +45,6 @@
     <string name="settings_lock">应用锁 （测试版）</string>
     <string name="settings_lock_summary">设备凭据</string>
     <string name="settings_background_sync">后台同步</string>
-
     <string name="error_sync">同步失败：%1$s</string>
     <string name="error_synchronization">同步失败</string>
     <string name="error_no_network">没有网络连接</string>
@@ -111,7 +110,6 @@
     <string name="add_category">添加 %1$s</string>
     <string name="simple_checkbox">复选框</string>
     <string name="unlock_notes">解锁笔记</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">哦，不。所以会怎么样？🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">请尝试强行关闭应用并重新打开。可能是与 Nextcloud 应用的连接不正确。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">如果问题持续存在，尝试通过清除 Nextcloud 和 Nextcloud 笔记两个应用的缓存来解决问题。</string>
@@ -138,7 +136,6 @@
     <string name="settings_branding">创建标签</string>
     <string name="settings_gridview">网格视图</string>
     <string name="simple_security">安全</string>
-    <string name="simple_appearance">外观</string>
     <string name="simple_synchronization">同步</string>
     <string name="simple_behavior">行为</string>
     <string name="manage_accounts">管理账号</string>

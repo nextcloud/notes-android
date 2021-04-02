@@ -43,7 +43,6 @@
     <string name="settings_font_size">Dimensione caràtere</string>
     <string name="settings_wifi_only">Sincroniza isceti cun su Wi-Fi</string>
     <string name="settings_background_sync">Sincronizatzione isfundu</string>
-
     <string name="error_sync">Sincronizatzione faddida: %1$s</string>
     <string name="error_synchronization">Sincronizatzione faddida</string>
     <string name="error_no_network">Peruna connessione de rete</string>
@@ -109,7 +108,6 @@
     <string name="add_category">Agiunghe %1$s</string>
     <string name="simple_checkbox">Casella de seletzione</string>
     <string name="unlock_notes">Isbloca notas</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Oh no - Immoe ite ddoe at? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Proa a serrare a fortza s\'aplicatzione e torrala a aviare. Fortzis ddoe at àpidu unu problema de connessione a s\'aplicatzione de Nextcloud. </string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si sighit su problema, proa a cantzellare s\'archiviatzione de ambas is aplicatziones Nextcloud e Nextcloud Notes pro isorvere su problema.</string>
@@ -135,7 +133,6 @@
     <string name="menu_edit_title">Modìfica tìtulu</string>
     <string name="settings_branding">Marca</string>
     <string name="simple_security">Seguresa</string>
-    <string name="simple_appearance">Aparèntzia</string>
     <string name="simple_synchronization">Sincronizatzione</string>
     <string name="simple_behavior">Cumportamentu</string>
     <string name="manage_accounts">Gesti contos</string>

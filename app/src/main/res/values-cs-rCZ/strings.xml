@@ -45,7 +45,6 @@
     <string name="settings_lock">Zámek aplikace (zatím vyvíjeno)</string>
     <string name="settings_lock_summary">Přihlašovací údaje zařízení</string>
     <string name="settings_background_sync">Synchronizace na pozadí</string>
-
     <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
     <string name="error_synchronization">Synchronizace se nezdařila</string>
     <string name="error_no_network">Žádné síťové spojení</string>
@@ -111,7 +110,6 @@
     <string name="add_category">Přidat %1$s</string>
     <string name="simple_checkbox">Zatržítko</string>
     <string name="unlock_notes">Odemknout poznámky</string>
-    <string name="simple_beta">Vývojové</string>
     <string name="error_dialog_title">Ó ne – co teď? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prosím pokuste se vynutit ukončení aplikace a spusťte ji znovu. Možná se něco nepodařilo při spojení s aplikací Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Pokud problém přetrvává, zkuste problém vyřešit vyčištěním úložišť obou aplikací: Nextcloud a Nextcloud poznámky.</string>
@@ -138,7 +136,6 @@
     <string name="settings_branding">Opatření vlastním logem</string>
     <string name="settings_gridview">Zobrazení v mřížce</string>
     <string name="simple_security">Zabezpečení</string>
-    <string name="simple_appearance">Vzhled</string>
     <string name="simple_synchronization">Synchronizace</string>
     <string name="simple_behavior">Chování</string>
     <string name="manage_accounts">Spravovat účty</string>

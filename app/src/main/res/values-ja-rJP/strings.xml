@@ -43,7 +43,6 @@
     <string name="settings_font_size">フォントサイズ</string>
     <string name="settings_wifi_only">Wi-Fi接続時のみ同期する</string>
     <string name="settings_background_sync">バックグラウンド同期</string>
-
     <string name="error_sync">同期に失敗しました: %1$s</string>
     <string name="error_synchronization">同期に失敗</string>
     <string name="error_no_network">ネットワークに接続されていません</string>
@@ -109,7 +108,6 @@
     <string name="add_category">%1$s を追加</string>
     <string name="simple_checkbox">チェックボックス</string>
     <string name="unlock_notes">ノートをアンロック</string>
-    <string name="simple_beta">ベータ</string>
     <string name="error_dialog_title">おやまあ、どうしたことでしょう？🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">アプリの強制終了と再起動を試みてください。Nextcloudアプリへの接続が正しくない接続があったかも知れません。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">この問題が続くようでしたら、下記両方のアプリでストレージをクリアして問題が解決できるか試してください：Nextcloud と Nextcloud Notes</string>
@@ -134,7 +132,6 @@
     <string name="menu_edit_title">タイトルを編集</string>
     <string name="settings_branding">ブランディング</string>
     <string name="simple_security">セキュリティ</string>
-    <string name="simple_appearance">表示</string>
     <string name="simple_synchronization">同期</string>
     <string name="simple_behavior">表示形式</string>
     <string name="manage_accounts">アカウント管理</string>

@@ -43,7 +43,6 @@
     <string name="settings_font_size">Fontin koko</string>
     <string name="settings_wifi_only">Synkronoi vain wifi-yhteydellä</string>
     <string name="settings_background_sync">Taustasynkronointi</string>
-
     <string name="error_sync">Synkronointi epäonnistui: %1$s</string>
     <string name="error_synchronization">Synkronointi epäonnistui</string>
     <string name="error_no_network">Ei verkkoyhteyttä</string>
@@ -108,7 +107,6 @@
     <string name="add_category">Lisää %1$s</string>
     <string name="simple_checkbox">Valintaruutu</string>
     <string name="unlock_notes">Avaa muistiinpanojen lukitus</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Voi ei - Mitä nyt? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Yritä pakottaa sovelluksen sulkeminen ja käynnistä se uudelleen. Nextcloud-sovellukseen on saattanut olla virheellinen yhteys.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jos ongelma jatkuu, yritä tyhjentää sekä Nextcloud- että Nextcloud Notes-sovellusten tallennustilat ratkaistaksesi ongelman.</string>
@@ -133,7 +131,6 @@
     <string name="menu_edit_title">Muokkaa otsikkoa</string>
     <string name="settings_branding">Brändäys</string>
     <string name="simple_security">Tietoturva</string>
-    <string name="simple_appearance">Ulkoasu</string>
     <string name="simple_synchronization">Synkronointi</string>
     <string name="simple_behavior">Toiminta</string>
     <string name="manage_accounts">Tilien hallinta</string>

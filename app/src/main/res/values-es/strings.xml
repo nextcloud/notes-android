@@ -43,7 +43,6 @@
     <string name="settings_font_size">Tamaño de fuente</string>
     <string name="settings_wifi_only">Sincronizar solo sobre Wi-Fi</string>
     <string name="settings_background_sync">Sincronización en segundo plano</string>
-
     <string name="error_sync">Fallo en la sincronización: %1$s</string>
     <string name="error_synchronization">Fallo en la sincronización</string>
     <string name="error_no_network">Sin conexión de red</string>
@@ -109,7 +108,6 @@
     <string name="add_category">Añadir %1$s</string>
     <string name="simple_checkbox">Casilla de verificación</string>
     <string name="unlock_notes">Desbloquear notas</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Oh no - ¿Ahora qué? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Por favor, intenta forzar el cierre de la aplicación y vuelve a abrirla. Es posible que haya habido un problema de conexión con la aplicación Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si el problema persiste, intente borrar el almacenamiento de ambas aplicaciones: Nextcloud y Nextcloud Notas para solucionar este problema.</string>
@@ -135,7 +133,6 @@
     <string name="menu_edit_title">Editar título</string>
     <string name="settings_branding">Marca</string>
     <string name="simple_security">Seguridad</string>
-    <string name="simple_appearance">Apariencia</string>
     <string name="simple_synchronization">Sincronización</string>
     <string name="simple_behavior">Comportamiento</string>
     <string name="manage_accounts">Gestionar cuentas</string>

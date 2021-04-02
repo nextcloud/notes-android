@@ -45,7 +45,6 @@
     <string name="settings_lock">Blokada aplikacji (Beta)</string>
     <string name="settings_lock_summary">Poświadczenia urządzenia</string>
     <string name="settings_background_sync">Synchronizacja w tle</string>
-
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_synchronization">Synchronizacja nie powiodła się</string>
     <string name="error_no_network">Brak połączenia sieciowego</string>
@@ -111,7 +110,6 @@
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Pole checkbox</string>
     <string name="unlock_notes">Odblokuj notatki</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">O nie - co teraz? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Spróbuj wymusić zamknięcie aplikacji i uruchomić ją ponownie. Być może połączenie z aplikacją Nextcloud było nieprawidłowe.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jeśli problem będzie się powtarzać, spróbuj wyczyścić pamięć obu aplikacji: Nextcloud i Nextcloud Notes, aby rozwiązać ten problem.</string>
@@ -138,7 +136,6 @@
     <string name="settings_branding">Motyw serwera</string>
     <string name="settings_gridview">Widok siatki</string>
     <string name="simple_security">Bezpieczeństwo</string>
-    <string name="simple_appearance">Wygląd</string>
     <string name="simple_synchronization">Synchronizacja</string>
     <string name="simple_behavior">Zachowanie</string>
     <string name="manage_accounts">Zarządzaj kontami</string>
