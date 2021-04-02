@@ -1,1 +1,9 @@
+v3.2.5
+
+- 🐞 Remember scroll position in preview mode (#1046)
+
+v3.2.4
+
+- 🐞 Grid view: no padding top on first line in some cases (#890)
 - 🏷 Category label in grid view doesn't take highlight background colour upon selection (#945)
+- 📝 Improve line spacing by setting it to 115% (#1089)

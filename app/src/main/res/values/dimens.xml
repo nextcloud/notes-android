@@ -28,6 +28,8 @@
     <dimen name="note_font_size_medium">18sp</dimen>
     <dimen name="note_font_size_large">22sp</dimen>
 
+    <item format="float" name="note_line_spacing" type="dimen">1.15</item>
+
     <!-- Widgets -->
     <dimen name="widget_outer_radius">@dimen/spacer_1x</dimen>
     <dimen name="widget_inner_radius">@dimen/spacer_1hx</dimen>

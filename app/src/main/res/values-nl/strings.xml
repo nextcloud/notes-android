@@ -42,9 +42,9 @@
     <string name="settings_font_title">Monospace lettertype</string>
     <string name="settings_font_size">Fontgrootte</string>
     <string name="settings_wifi_only">Alleen met Wi-Fi synchroniseren</string>
-    <string name="settings_lock">Wachtwoordbeveiliging</string>
+    <string name="settings_lock">App slot (Beta)</string>
+    <string name="settings_lock_summary">Apparaatinloggegevens</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
-
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
@@ -73,9 +73,6 @@
     <string name="about_license_tab_title">Licentie</string>
 
     <string name="widget_note_list_title">Notitielijst</string>
-    <string name="widget_note_list_add">Toevoegen nieuwe notitie</string>
-    <string name="widget_note_list_add_favorite">Toevoegen nieuwe notitie aan favorieten</string>
-    <string name="widget_note_list_add_to_category">Toevoegen nieuwe notitie aan %1$s</string>
     <string name="widget_note_list_placeholder">Geen notities</string>
     <string name="widget_single_note_title">Enkele notitie</string>
     <string name="widget_single_note_placeholder_tv">Notitie niet gevonden</string>
@@ -113,7 +110,6 @@
     <string name="add_category">Toevoegen %1$s</string>
     <string name="simple_checkbox">Selectievakje</string>
     <string name="unlock_notes">Ontgrendel notities</string>
-    <string name="simple_beta">Bèta</string>
     <string name="error_dialog_title">Oh nee - wat nu? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Probeer de app te sluiten en opnieuw te starten. Er was misschien een onjuiste verbinding met de Nextcloud-app.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Als het probleem blijft aanhouden, probeer dan de gegevensopslag bij Nextcloud en de Nextcloud Notes apps te wissen.</string>
@@ -138,9 +134,8 @@
     <string name="change_note_title">Notitie titel wijzigen</string>
     <string name="menu_edit_title">Titel bewerken</string>
     <string name="settings_branding">Brandmerken</string>
-    <string name="settings_gridview">Rastweergave 🆕</string>
+    <string name="settings_gridview">Rasterweergave</string>
     <string name="simple_security">Beveiliging</string>
-    <string name="simple_appearance">Uiterlijk</string>
     <string name="simple_synchronization">Synchronisatie</string>
     <string name="simple_behavior">Gedrag</string>
     <string name="manage_accounts">Accounts beheren </string>

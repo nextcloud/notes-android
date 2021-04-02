@@ -1,4 +1,4 @@
- package it.niedermann.owncloud.notes.persistence;
+package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
 import android.content.Intent;
@@ -61,6 +61,7 @@ import it.niedermann.owncloud.notes.persistence.migration.Migration_16_17;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_17_18;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_18_19;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_19_20;
+import it.niedermann.owncloud.notes.persistence.migration.Migration_20_21;
 import it.niedermann.owncloud.notes.persistence.migration.Migration_9_10;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
@@ -87,7 +88,7 @@ import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.up
                 CategoryOptions.class,
                 SingleNoteWidgetData.class,
                 NotesListWidgetData.class
-        }, version = 20
+        }, version = 21
 )
 @TypeConverters({Converters.class})
 public abstract class NotesDatabase extends RoomDatabase {
@@ -116,7 +117,8 @@ public abstract class NotesDatabase extends RoomDatabase {
                         new Migration_16_17(),
                         new Migration_17_18(),
                         new Migration_18_19(context),
-                        new Migration_19_20()
+                        new Migration_19_20(context),
+                        new Migration_20_21()
                 )
                 .fallbackToDestructiveMigrationOnDowngrade()
                 .fallbackToDestructiveMigration()
@@ -271,8 +273,8 @@ public abstract class NotesDatabase extends RoomDatabase {
             if (newTitle != null) {
                 title = newTitle;
             } else {
-                if ((oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0)  &&
-                    (defaultNonEmptyTitle.equals(oldNote.getTitle()))) {
+                if ((oldNote.getRemoteId() == null || localAccount.getPreferredApiVersion() == null || localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 0, 0)) < 0) &&
+                        (defaultNonEmptyTitle.equals(oldNote.getTitle()))) {
                     title = NoteUtil.generateNonEmptyNoteTitle(newContent, context);
                 } else {
                     title = oldNote.getTitle();

@@ -44,6 +44,9 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     private boolean noteLoaded = false;
 
+    @Nullable
+    private Runnable setScrollY;
+
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -85,6 +88,8 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         super.onActivityCreated(savedInstanceState);
 
         binding.swiperefreshlayout.setOnRefreshListener(this);
+        registerInternalNoteLinkHandler();
+        binding.singleNoteContent.setMarkdownString(note.getContent(), setScrollY);
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());

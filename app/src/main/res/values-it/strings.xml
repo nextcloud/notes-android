@@ -42,9 +42,9 @@
     <string name="settings_font_title">Carattere a spaziatura fissa</string>
     <string name="settings_font_size">Dimensione carattere</string>
     <string name="settings_wifi_only">Sincronizza solo con Wi-Fi</string>
-    <string name="settings_lock">Protezione con password</string>
+    <string name="settings_lock">Blocco applicazione (Beta)</string>
+    <string name="settings_lock_summary">Credenziali dispositivo</string>
     <string name="settings_background_sync">Sincronizzazione in background</string>
-
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
     <string name="error_synchronization">Sincronizzazione non riuscita</string>
     <string name="error_no_network">Nessuna connessione di rete</string>
@@ -110,7 +110,6 @@
     <string name="add_category">Aggiungi %1$s</string>
     <string name="simple_checkbox">Casella di selezione</string>
     <string name="unlock_notes">Sblocca note</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Oh no - Cosa succede adesso? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Prova a forzare la chiusura dell\'applicazione e riavviarla nuovamente. Potrebbe essersi verificato un problema di connessione all\'applicazione Nextcloud. </string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Se il problema persiste, prova a cancellare l\'archiviazione di entrambe le applicazioni Nextcloud e Nextcloud Notes per risolver il problema.</string>
@@ -135,9 +134,8 @@
     <string name="change_note_title">Cambia titolo della nota</string>
     <string name="menu_edit_title">Modifica titolo</string>
     <string name="settings_branding">Marchio</string>
-    <string name="settings_gridview">Vista Griglia 🆕</string>
+    <string name="settings_gridview">Vista griglia</string>
     <string name="simple_security">Sicurezza</string>
-    <string name="simple_appearance">Aspetto</string>
     <string name="simple_synchronization">Sincronizzazione</string>
     <string name="simple_behavior">Comportamento</string>
     <string name="manage_accounts">Gestisci account</string>

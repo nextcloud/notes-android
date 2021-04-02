@@ -38,9 +38,7 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
         getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         colorAccent = typedValue.data;
 
-        if (BrandingUtil.isBrandingEnabled(this)) {
-            readBrandColors(this).observe(this, (pair) -> applyBrand(pair.first, pair.second));
-        }
+        readBrandColors(this).observe(this, (pair) -> applyBrand(pair.first, pair.second));
     }
 
     @Override

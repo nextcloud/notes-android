@@ -87,7 +87,7 @@ public class ServerResponse {
         }
         if (!json.isNull(NotesClient.JSON_MODIFIED)) {
             modified = Calendar.getInstance();
-            modified.setTimeInMillis(json.getLong(NotesClient.JSON_MODIFIED) * 1000);
+            modified.setTimeInMillis(json.getLong(NotesClient.JSON_MODIFIED) * 1_000);
         }
         if (!json.isNull(NotesClient.JSON_FAVORITE)) {
             favorite = json.getBoolean(NotesClient.JSON_FAVORITE);

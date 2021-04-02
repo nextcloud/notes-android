@@ -42,9 +42,9 @@
     <string name="settings_font_title">Fix szélességű betűkészlet</string>
     <string name="settings_font_size">Betűméret</string>
     <string name="settings_wifi_only">Szinkronizálás csak Wi-Fin</string>
-    <string name="settings_lock">Jelszavas védelem</string>
+    <string name="settings_lock">Alkalmazás zár (Béta)</string>
+    <string name="settings_lock_summary">Eszközhitelesítő-adatok</string>
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
-
     <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
     <string name="error_synchronization">Szinkronizálás sikertelen</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
@@ -110,10 +110,10 @@
     <string name="add_category">%1$s hozzáadása</string>
     <string name="simple_checkbox">Jelölőmező</string>
     <string name="unlock_notes">Jegyzetek feloldása</string>
-    <string name="simple_beta">Béta</string>
     <string name="error_dialog_title">Jaj ne – Most mi legyen? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Próbálja kényszeríteni az alkalmazás bezárását, és indítsa újra. Lehet, hogy hibás volt a kapcsolat a többi Nextcloud alkalmazással.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ha a probléma továbbra is fennáll, próbálja kiüríteni mindkét alkalmazás tárolóját: a Nextcloudét és a Nextcloud Jegyzetekét.</string>
+    <string name="error_dialog_tip_clear_storage">Törölheti a tárhelyet az alkalmazás adatainak megnyitásával, és válassza a Tárolás → Tárolás törlése lehetőséget. ⚠️ Figyelem: Ezzel törli a még nem szinkronizált jegyzeteket!</string>
     <string name="error_dialog_tip_files_outdated">A Nextcloud alkalmazása elavultnak tűnik. Keresse fel a Play Áruházat vagy az F-Droidot, hogy beszerezze a legfrissebb verziót.</string>
     <string name="error_dialog_tip_files_force_stop">Valami hibásnak tűnik a Nextcloud alkalmazásában. Próbálja mindkettőt leállítani, a Nextcloud és a Nextcloud Jegyzetek alkalmazást is.</string>
     <string name="error_dialog_tip_files_delete_storage">Ha a kényszerített leállítás nem segít, akkor megpróbálhatja mindkét alkalmazás tárolóját kiüríteni.</string>
@@ -127,16 +127,15 @@
     <string name="error_dialog_we_need_info">A következő műszaki információkra van szükségünk, hogy segíthessünk:</string>
     <string name="error_dialog_server_app_enabled">Bizonyosodjon meg róla, hogy telepítette és bekapcsolta a „Jegyzetek” alkalmazást a szerverén.</string>
     <string name="error_dialog_redirect">A kiszolgálója 302-es HTTP állapotkóddal válaszolt, amely arra utal, hogy nincs telepítve a Jegyzetek alkalmazás a kiszolgálón, vagy valami hibásan van beállítva. Ezt egyéni felülírások is okozhatják, mint egy .htaccess-fájl vagy az OID klienshez hasonló Nextcloud alkalmazások.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">Kapcsoljon ki minden energiatakarékossági beállítást a Nextcloud valamint a Jegyzetek alkalmazáshoz. </string>
+    <string name="error_dialog_tip_disable_battery_optimizations">Kapcsoljon ki minden energiatakarékossági beállítást a Nextcloud valamint a Jegyzetek alkalmazáshoz.</string>
     <string name="added_content">„%1$s” hozzáadva</string>
     <string name="shared_text_empty">A megosztott szöveg üres volt</string>
     <string name="append_to_note">Hozzáfűzés a jegyzethez</string>
     <string name="change_note_title">Jegyzet címének módosítása</string>
     <string name="menu_edit_title">Cím szerkesztése</string>
     <string name="settings_branding">Márkázas</string>
-    <string name="settings_gridview">Rács nézet 🆕</string>
+    <string name="settings_gridview">Rács nézet</string>
     <string name="simple_security">Biztonság</string>
-    <string name="simple_appearance">Megjelenés</string>
     <string name="simple_synchronization">Szinkronizálás</string>
     <string name="simple_behavior">Viselkedés</string>
     <string name="manage_accounts">Fiókok kezelése</string>
@@ -171,13 +170,29 @@
         <item quantity="one">%d kiválasztva</item>
         <item quantity="other">%d kiválasztva</item>
     </plurals>
+    <plurals name="bulk_notes_deleted">
+        <item quantity="one">Egy jegyzetet törölve</item>
+        <item quantity="other">%1$d jegyzet törölve</item>
+    </plurals>
+    <plurals name="bulk_notes_restored">
+        <item quantity="one">Egy jegyzet visszaállítva</item>
+        <item quantity="other">%1$d jegyzet visszaállítva</item>
+    </plurals>
+    <plurals name="share_multiple">
+        <item quantity="one">%1$d jegyzet tartalmának megosztása</item>
+        <item quantity="other">%1$d jegyzet tartalmának megosztása</item>
+    </plurals>
+
     <string name="formatting_help_divider" translateable="false">---</string>
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Környezetfüggő formázás</string>
     <string name="formatting_help_cbf_body_1">A Jegyzetek alkalmazás egyik célkitűzése, hogy egyszerű legyen, és ne vonja el a figyelmet. Viszont Markdownnal formázhatja a szövegeket. A lent említett példák némelyikénél rövidítéseket is használhat, így anélkül formázhatja meg a jegyzeteket, hogy beírná a lenti kódokat.</string>
+    <string name="formatting_help_cbf_body_2">Csak válasszon ki egy szövegtartományt, vagy érintse meg a kurzort bármely helyen, és megjelenik egy előugró menü, amely az alapértelmezett bejegyzések mellett %1$s, %2$s, %3$s tartalmaz olyan bejegyzéseket, mint %4$s vagy %5$s.</string>
+
     <string name="formatting_help_text_title">Szöveg</string>
     <string name="formatting_help_text_body">Nagyon egyszerűen írhat Markdownnal %1$sfélkövéren,%1$s valamint %2$sdőlten.%2$s Át is %3$shúzhat%3$s szavakat, valamint [linkelhet a Nextcloudra](https://nextcloud.com).</string>
 
@@ -186,16 +201,46 @@
     <string name="formatting_help_lists_body_2">Egy</string>
     <string name="formatting_help_lists_body_3">Két</string>
     <string name="formatting_help_lists_body_4">Három</string>
+    <string name="formatting_help_lists_body_5">Néha felsorolást szeretne:</string>
     <string name="formatting_help_lists_body_6">Kezdjen egy sort kötőjellel</string>
     <string name="formatting_help_lists_body_7">És ha alpontokat szeretne, rakjon két szóközt a kötőjel vagy csillag elé:</string>
     <string name="formatting_help_lists_body_8">Így</string>
     <string name="formatting_help_lists_body_9">És így</string>
 
+    <string name="formatting_help_checkboxes_title">Jelölőnégyzetek</string>
+    <string name="formatting_help_checkboxes_body_1">Jelölőnégyzet létrehozásához használjon egy listát, amelyet zárójelek követnek</string>
+    <string name="formatting_help_checkboxes_body_2">1. elem</string>
+    <string name="formatting_help_checkboxes_body_3">2. elem</string>
+
+    <string name="formatting_help_structured_documents_title">Strukturált dokumentumok</string>
+    <string name="formatting_help_structured_documents_body_1">Néha hasznos, ha különböző szintű címsorok vannak a dokumentumok strukturálásához. Indítsa el a sorokat %1$s-szal a címsorok létrehozásához. A(z) %2$s többszörös sorozata kisebb fejlécméretet jelöl.</string>
+    <string name="formatting_help_structured_documents_body_2">Ez egy harmadik szintű cím</string>
+    <string name="formatting_help_structured_documents_body_3">%1$s használható egészen %2$s hatig különböző fejlécméretekhez.</string>
+    <string name="formatting_help_structured_documents_body_4">Ha valakit idézni szerete, használja a %1$s karaktert a sor előtt:</string>
+    <string name="formatting_help_structured_documents_body_5">A képzelet sokkal fontosabb, mint a tudás. A tudás véges. A képzelet felöleli az egész világot.</string>
+    <string name="formatting_help_structured_documents_body_6">- Albert Einstein</string>
+
     <string name="formatting_help_code_title">Kód</string>
+    <string name="formatting_help_code_body_1">A Markdown segítségével sokféleképpen lehet stílus kódolni. Ha beágyazott kódblokkok vannak, csomagolja be őket fordított idézőjelekbe:</string>
+    <string name="formatting_help_code_body_2">A Markdown támogatja az úgynevezett kód keretezést is, amely több sort tesz lehetővé behúzás nélkül:</string>
+    <string name="formatting_help_code_body_3">Ha pedig a szintaxis kiemelését szeretné használni, adja meg a nyelvet:</string>
+
+    <string name="formatting_help_tables_title">Táblázatok</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">%1d. oszlop</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">%1d. érték</string>
+
+    <string name="formatting_help_images_title">Képek</string>
+    <string name="formatting_help_images_alt">Díszes kép</string>
+
     <string name="simple_other">Egyéb</string>
     <string name="sort_last_modified">Rendezés módosítás dátuma szerint</string>
     <string name="sort_alphabetically">Rendezés név szerint</string>
     <string name="error_action_open_battery_settings">Akkumulátorbeállítások</string>
     <string name="error_action_open_deck_info">Alkalmazásinformációk megnyitása</string>
     <string name="error_action_open_network">Hálózati beállítások</string>
+<string name="no_account_configured_yet">Nincs még fiók beállítva</string>
+    <string name="no_other_accounts">Még egyetlen más fiókot se állított be.</string>
+    <string name="context_based_formatting">Környezetfüggő formázási felbukkanó menü</string>
 </resources>

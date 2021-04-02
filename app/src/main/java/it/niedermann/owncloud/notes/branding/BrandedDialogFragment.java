@@ -14,11 +14,9 @@ public abstract class BrandedDialogFragment extends DialogFragment implements Br
 
         @Nullable Context context = getContext();
         if (context != null) {
-            if (BrandingUtil.isBrandingEnabled(context)) {
-                @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
-                @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
-                applyBrand(mainColor, textColor);
-            }
+            @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(context);
+            @ColorInt final int textColor = BrandingUtil.readBrandTextColor(context);
+            applyBrand(mainColor, textColor);
         }
     }
 }

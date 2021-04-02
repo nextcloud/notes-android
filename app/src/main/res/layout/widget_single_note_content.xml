@@ -4,5 +4,6 @@
     android:id="@+id/single_note_content_tv"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:lineSpacingMultiplier="@dimen/note_line_spacing"
     android:textColor="@color/widget_foreground"
     tools:text="@tools:sample/lorem/random" />

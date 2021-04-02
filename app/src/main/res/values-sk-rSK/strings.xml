@@ -42,9 +42,7 @@
     <string name="settings_font_title">Písmo s pevnou šírkou</string>
     <string name="settings_font_size">Veľkosť písma</string>
     <string name="settings_wifi_only">Synchronizovať len na Wi-Fi</string>
-    <string name="settings_lock">Ochrana heslom</string>
     <string name="settings_background_sync">Synchronizácia na pozadí</string>
-
     <string name="error_sync">Synchronizácia zlyhala: %1$s</string>
     <string name="error_synchronization">Synchronizácia zlyhala</string>
     <string name="error_no_network">Bez sieťového pripojenia</string>
@@ -110,7 +108,6 @@
     <string name="add_category">Pridať %1$s</string>
     <string name="simple_checkbox">Zaškrtávacie políčko</string>
     <string name="unlock_notes">Odomknúť poznámky</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Ale nie - Čo teraz? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Skúste vyinútiť zatvorenie aplikácie a znova ju reštartovať. Možno došlo k chybnému pripojeniu k aplikácii Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ak problém pretrváva, skúste vyčistiť úložisko oboch aplikácií: Nextcloud a Nextcloud Poznámky.</string>
@@ -134,9 +131,7 @@
     <string name="change_note_title">Zmeniť názov poznámky</string>
     <string name="menu_edit_title">Upraviť názov</string>
     <string name="settings_branding">Použitie vlastného loga</string>
-    <string name="settings_gridview">Mriežkové zobrazenie 🆕</string>
     <string name="simple_security">Zabezpečenie</string>
-    <string name="simple_appearance">Vzhľad</string>
     <string name="simple_synchronization">Synchronizácia</string>
     <string name="simple_behavior">Chod</string>
     <string name="manage_accounts">Spravovať účty</string>

@@ -26,7 +26,7 @@
 
     <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
         app:layout="@layout/item_preference_category"
-        app:title="@string/simple_appearance">
+        app:title="@string/appearance_and_behavior">
 
         <ListPreference
             android:defaultValue="@string/pref_value_theme_system_default"
@@ -39,39 +39,17 @@
             android:title="@string/settings_theme_title" />
 
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
-            android:defaultValue="true"
-            android:icon="@drawable/ic_color_lens_grey600_24dp"
-            android:key="@string/pref_key_branding"
-            android:layout="@layout/item_pref"
-            android:title="@string/settings_branding" />
-
-        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
             android:icon="@drawable/ic_baseline_dashboard_24"
             android:key="@string/pref_key_gridview"
             android:layout="@layout/item_pref"
-            android:summary="@string/simple_beta"
             android:title="@string/settings_gridview" />
 
-    </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
-
-    <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
-        app:layout="@layout/item_preference_category"
-        app:title="@string/simple_behavior">
         <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
             android:defaultValue="@string/pref_value_font_normal"
             android:icon="@drawable/ic_text_format_grey600_24dp"
             android:key="@string/pref_key_font"
             android:layout="@layout/item_pref"
             android:title="@string/settings_font_title" />
-        <ListPreference
-            android:defaultValue="@string/pref_value_mode_edit"
-            android:entries="@array/noteMode_entries"
-            android:entryValues="@array/noteMode_values"
-            android:icon="@drawable/ic_remove_red_eye_grey_24dp"
-            android:key="@string/pref_key_note_mode"
-            android:layout="@layout/item_pref"
-            android:summary="%s"
-            android:title="@string/settings_note_mode" />
 
         <ListPreference
             android:defaultValue="@string/pref_value_font_size_medium"
@@ -82,6 +60,16 @@
             android:layout="@layout/item_pref"
             android:summary="%s"
             android:title="@string/settings_font_size" />
+
+        <ListPreference
+            android:defaultValue="@string/pref_value_mode_edit"
+            android:entries="@array/noteMode_entries"
+            android:entryValues="@array/noteMode_values"
+            android:icon="@drawable/ic_remove_red_eye_grey_24dp"
+            android:key="@string/pref_key_note_mode"
+            android:layout="@layout/item_pref"
+            android:summary="%s"
+            android:title="@string/settings_note_mode" />
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
     <it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory
@@ -93,8 +81,15 @@
             android:icon="@drawable/ic_lock_grey600_24dp"
             android:key="@string/pref_key_lock"
             android:layout="@layout/item_pref"
-            android:summary="@string/simple_beta"
+            android:summary="@string/settings_lock_summary"
             android:title="@string/settings_lock" />
+
+        <it.niedermann.owncloud.notes.branding.BrandedSwitchPreference
+            android:defaultValue="false"
+            android:icon="@drawable/ic_baseline_screen_lock_portrait_24"
+            android:key="@string/pref_key_prevent_screen_capture"
+            android:layout="@layout/item_pref"
+            android:title="@string/settings_prevent_screen_capture" />
     </it.niedermann.owncloud.notes.branding.BrandedPreferenceCategory>
 
 </PreferenceScreen>

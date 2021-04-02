@@ -191,7 +191,7 @@ public abstract class NotesClient {
             long lastModified = 0;
             final AidlNetworkRequest.PlainHeader lastModifiedHeader = response.getPlainHeader(HEADER_KEY_LAST_MODIFIED);
             if (lastModifiedHeader != null)
-                lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1000;
+                lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1_000;
             Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
 
             String supportedApiVersions = null;

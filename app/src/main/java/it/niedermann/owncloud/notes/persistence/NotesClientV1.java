@@ -35,7 +35,7 @@ public class NotesClientV1 extends NotesClient {
         JSONObject paramObject = new JSONObject();
         paramObject.accumulate(JSON_TITLE, note.getTitle());
         paramObject.accumulate(JSON_CONTENT, note.getContent());
-        paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1000);
+        paramObject.accumulate(JSON_MODIFIED, note.getModified().getTimeInMillis() / 1_000);
         paramObject.accumulate(JSON_FAVORITE, note.getFavorite());
         paramObject.accumulate(JSON_CATEGORY, note.getCategory());
         return new NoteResponse(requestServer(ssoAccount, path, method, null, paramObject, null));

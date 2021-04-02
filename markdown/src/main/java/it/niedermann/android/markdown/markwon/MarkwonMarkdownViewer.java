@@ -127,6 +127,11 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
 
     @Override
     public void setMarkdownString(CharSequence text) {
+        setMarkdownString(text, null);
+    }
+
+    @Override
+    public void setMarkdownString(CharSequence text, Runnable afterRender) {
         final CharSequence previousText = this.unrenderedText$.getValue();
         this.unrenderedText$.setValue(text);
         if (listener != null) {
@@ -136,7 +141,12 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
             setText(text);
         } else {
             if (!text.equals(previousText)) {
-                this.renderService.execute(() -> post(() -> this.markwon.setMarkdown(this, text.toString())));
+                this.renderService.execute(() -> post(() -> {
+                    this.markwon.setMarkdown(this, text.toString());
+                    if (afterRender != null) {
+                        afterRender.run();
+                    }
+                }));
             }
         }
     }
@@ -162,7 +172,7 @@ public class MarkwonMarkdownViewer extends AppCompatTextView implements Markdown
     }
 
     @Override
-    public void setMarkdownString(CharSequence text, @NonNull Map<String, String> mentions) {
+    public void setMarkdownStringAndHighlightMentions(CharSequence text, @NonNull Map<String, String> mentions) {
         this.markwon = createMarkwonBuilder(getContext(), mentions).build();
         setMarkdownString(text);
     }

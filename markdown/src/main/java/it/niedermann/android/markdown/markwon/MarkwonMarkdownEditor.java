@@ -14,8 +14,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import java.util.Collection;
-import java.util.LinkedList;
 import java.util.function.Consumer;
 
 import io.noties.markwon.Markwon;
@@ -115,6 +113,11 @@ public class MarkwonMarkdownEditor extends AppCompatEditText implements Markdown
     public void setMarkdownString(CharSequence text) {
         setText(text);
         setMarkdownStringModel(text);
+    }
+
+    @Override
+    public void setMarkdownString(CharSequence text, Runnable afterRender) {
+        throw new UnsupportedOperationException("This is not available in " + MarkwonMarkdownEditor.class.getSimpleName() + " because the text is getting rendered all the time.");
     }
 
     /**

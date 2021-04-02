@@ -441,7 +441,7 @@ public class NoteServerSyncHelper {
             try {
                 final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
                 final Calendar modified = localAccount.getModified();
-                final long modifiedForServer = modified == null ? 0 : modified.getTimeInMillis() / 1000;
+                final long modifiedForServer = modified == null ? 0 : modified.getTimeInMillis() / 1_000;
                 final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, modifiedForServer, localAccount.getETag());
                 List<Note> remoteNotes = response.getNotes();
                 Set<Long> remoteIDs = new HashSet<>();

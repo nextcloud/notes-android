@@ -42,9 +42,9 @@
     <string name="settings_font_title">Sabit aralıklı yazı tipi</string>
     <string name="settings_font_size">Yazı boyutu</string>
     <string name="settings_wifi_only">Yalnız Wi-Fi ile eşitlensin</string>
-    <string name="settings_lock">Parola koruması</string>
+    <string name="settings_lock">Uygulama kilidi (Beta)</string>
+    <string name="settings_lock_summary">Aygıt kimlik doğrulama bilgileri</string>
     <string name="settings_background_sync">Arka planda eşitleme</string>
-
     <string name="error_sync">Eşitlenemedi: %1$s</string>
     <string name="error_synchronization">Eşitlenemedi</string>
     <string name="error_no_network">Ağ bağlantısı yok</string>
@@ -73,9 +73,6 @@
     <string name="about_license_tab_title">Lisans</string>
 
     <string name="widget_note_list_title">Not listesi</string>
-    <string name="widget_note_list_add">Yeni not ekle</string>
-    <string name="widget_note_list_add_favorite">Sık kullanılanlara yeni not ekle</string>
-    <string name="widget_note_list_add_to_category">%1$s içine yeni not ekle</string>
     <string name="widget_note_list_placeholder">Herhangi bir not yok</string>
     <string name="widget_single_note_title">Tek not</string>
     <string name="widget_single_note_placeholder_tv">Not bulunamadı</string>
@@ -113,7 +110,6 @@
     <string name="add_category">%1$s ekle</string>
     <string name="simple_checkbox">İşaret kutusu</string>
     <string name="unlock_notes">Kilidi açma notları</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Hayıır. Şimdi ne olacak? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Lütfen uygulamayı kapanmaya zorlayıp yeniden başlatın. Yanlış bir Nextcloud uygulaması bağlantısı olmalı.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Sorun sürerse, çözmek için hem Nextcloud uygulamasının hem de Nextcloud Notlar uygulamasının depolamalarını temizlemeyi deneyin.</string>
@@ -138,9 +134,8 @@
     <string name="change_note_title">Not başlığını değiştir</string>
     <string name="menu_edit_title">Başlığı düzenle</string>
     <string name="settings_branding">Markalama</string>
-    <string name="settings_gridview">Tablo görünümü 🆕</string>
+    <string name="settings_gridview">Tablo görünümü</string>
     <string name="simple_security">Güvenlik</string>
-    <string name="simple_appearance">Görünüm</string>
     <string name="simple_synchronization">Eşitleme</string>
     <string name="simple_behavior">Davranış</string>
     <string name="manage_accounts">Hesap yönetimi</string>
