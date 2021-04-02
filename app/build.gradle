@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 21
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode 3002005
         versionName "3.2.5"
         multiDexEnabled true
