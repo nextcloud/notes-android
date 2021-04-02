@@ -43,7 +43,6 @@
     <string name="settings_font_size">Taille des caractères</string>
     <string name="settings_wifi_only">Synchroniser uniquement en Wifi</string>
     <string name="settings_background_sync">Synchronisation en tâche de fond</string>
-
     <string name="error_sync">Échec de synchronisation : %1$s</string>
     <string name="error_synchronization">Échec de synchronisation</string>
     <string name="error_no_network">Aucune connexion réseau</string>
@@ -109,7 +108,6 @@
     <string name="add_category">Ajouter %1$s</string>
     <string name="simple_checkbox">Case à cocher</string>
     <string name="unlock_notes">Déverrouiller les notes</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Oh non ! - Et maintenant ? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Essayez de forcer la fermeture de l\'application puis redémarrer la. Il y avait peut-être une mauvaise connexion à Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Si le problème persiste, essayez d\'effacer les données des deux applications : Nextcloud et Nextcloud Notes pour résoudre ce problème.</string>
@@ -135,7 +133,6 @@
     <string name="menu_edit_title">Modifier le titre</string>
     <string name="settings_branding">marque</string>
     <string name="simple_security">Sécurité</string>
-    <string name="simple_appearance">Apparence</string>
     <string name="simple_synchronization">Synchronisation</string>
     <string name="simple_behavior">Comportement</string>
     <string name="manage_accounts">Gérer les comptes</string>

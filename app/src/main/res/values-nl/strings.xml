@@ -45,7 +45,6 @@
     <string name="settings_lock">App slot (Beta)</string>
     <string name="settings_lock_summary">Apparaatinloggegevens</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
-
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
@@ -111,7 +110,6 @@
     <string name="add_category">Toevoegen %1$s</string>
     <string name="simple_checkbox">Selectievakje</string>
     <string name="unlock_notes">Ontgrendel notities</string>
-    <string name="simple_beta">Bèta</string>
     <string name="error_dialog_title">Oh nee - wat nu? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Probeer de app te sluiten en opnieuw te starten. Er was misschien een onjuiste verbinding met de Nextcloud-app.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Als het probleem blijft aanhouden, probeer dan de gegevensopslag bij Nextcloud en de Nextcloud Notes apps te wissen.</string>
@@ -138,7 +136,6 @@
     <string name="settings_branding">Brandmerken</string>
     <string name="settings_gridview">Rasterweergave</string>
     <string name="simple_security">Beveiliging</string>
-    <string name="simple_appearance">Uiterlijk</string>
     <string name="simple_synchronization">Synchronisatie</string>
     <string name="simple_behavior">Gedrag</string>
     <string name="manage_accounts">Accounts beheren </string>

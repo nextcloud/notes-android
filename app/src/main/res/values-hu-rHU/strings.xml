@@ -45,7 +45,6 @@
     <string name="settings_lock">Alkalmazás zár (Béta)</string>
     <string name="settings_lock_summary">Eszközhitelesítő-adatok</string>
     <string name="settings_background_sync">Háttér-szinkronizálás</string>
-
     <string name="error_sync">Szinkronizálás sikertelen: %1$s</string>
     <string name="error_synchronization">Szinkronizálás sikertelen</string>
     <string name="error_no_network">Nincs hálózati kapcsolat</string>
@@ -111,7 +110,6 @@
     <string name="add_category">%1$s hozzáadása</string>
     <string name="simple_checkbox">Jelölőmező</string>
     <string name="unlock_notes">Jegyzetek feloldása</string>
-    <string name="simple_beta">Béta</string>
     <string name="error_dialog_title">Jaj ne – Most mi legyen? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Próbálja kényszeríteni az alkalmazás bezárását, és indítsa újra. Lehet, hogy hibás volt a kapcsolat a többi Nextcloud alkalmazással.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ha a probléma továbbra is fennáll, próbálja kiüríteni mindkét alkalmazás tárolóját: a Nextcloudét és a Nextcloud Jegyzetekét.</string>
@@ -138,7 +136,6 @@
     <string name="settings_branding">Márkázas</string>
     <string name="settings_gridview">Rács nézet</string>
     <string name="simple_security">Biztonság</string>
-    <string name="simple_appearance">Megjelenés</string>
     <string name="simple_synchronization">Szinkronizálás</string>
     <string name="simple_behavior">Viselkedés</string>
     <string name="manage_accounts">Fiókok kezelése</string>

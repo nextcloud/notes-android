@@ -43,7 +43,6 @@
     <string name="settings_font_size">Μέγεθος γραμματοσειράς</string>
     <string name="settings_wifi_only">Συγχρονισμός μόνο σε Wi-Fi</string>
     <string name="settings_background_sync">Συγχρονισμός στο παρασκήνιο</string>
-
     <string name="error_sync">Αποτυχία συγχρονισμού: %1$s</string>
     <string name="error_synchronization">Αποτυχία συγχρονισμού</string>
     <string name="error_no_network">Δεν υπάρχει σύνδεση στο δίκτυο</string>
@@ -109,7 +108,6 @@
     <string name="add_category">Προσθήκη %1$s</string>
     <string name="simple_checkbox">Πλαίσιο ελέγχου</string>
     <string name="unlock_notes">Ξεκλείδωμα σημειώσεων</string>
-    <string name="simple_beta">Δοκιμαστικό</string>
     <string name="error_dialog_title">Ωχ όχι - Τώρα τί; 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Δοκιμάστε τερματισμό της εφαρμογή και επανεκκίνηση. Ίσως υπάρχει λάθος σύνδεση.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Εάν το πρόβλημα παραμένει, προσπαθήστε να εκκαθαρίσετε τον χώρο αποθήκευσης και των δύο εφαρμογών: του Nextcloud και του Nextcloud Notes.</string>
@@ -134,7 +132,6 @@
     <string name="menu_edit_title">Επεξεργασία τίτλου</string>
     <string name="settings_branding">Επωνυμία</string>
     <string name="simple_security">Ασφάλεια</string>
-    <string name="simple_appearance">Εμφάνιση</string>
     <string name="simple_synchronization">Συγχρονισμός</string>
     <string name="simple_behavior">Συμπεριφορά</string>
     <string name="manage_accounts">Διαχείριση λογαριασμών</string>

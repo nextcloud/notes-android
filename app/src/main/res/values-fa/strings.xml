@@ -43,7 +43,6 @@
     <string name="settings_font_size">اندازهٔ قلم</string>
     <string name="settings_wifi_only">همگام‌سازی فقط در Wi-Fi</string>
     <string name="settings_background_sync">همگام‌سازی پس زمینه</string>
-
     <string name="error_sync">همگام‌سازی انجام نشد:%1$s</string>
     <string name="error_synchronization">همگام‌سازی انجام نشد</string>
     <string name="error_no_network">هیچ ارتباطی با شبکه برقرار نیست</string>
@@ -109,7 +108,6 @@
     <string name="add_category">افزودن%1$s</string>
     <string name="simple_checkbox">جعبه علامت</string>
     <string name="unlock_notes">یادداشت‌های باز</string>
-    <string name="simple_beta">بتا</string>
     <string name="error_dialog_title">وای نه - حالا چی کار کنیم؟</string>
     <string name="error_dialog_tip_token_mismatch_retry">لطفا از طریق توقف اجباری برنامه را بسته و دوباره اجرا کنید. ممکن است یک اتصال نادرست با نکست‌کلود ایجاد شده باشد.  </string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">اگر این مشکل استمرار داشت، سعی کنید با پاک کردن فضای ذخیره‌سازی هردو برنامک : Nextcloud و  Nextcloud Notes این مورد را برطرف کنید.</string>
@@ -134,7 +132,6 @@
     <string name="menu_edit_title">ویرایش عنوان</string>
     <string name="settings_branding">شخصی‌سازی</string>
     <string name="simple_security">امنیت</string>
-    <string name="simple_appearance">ظاهر</string>
     <string name="simple_synchronization">همگام‌سازی</string>
     <string name="simple_behavior">رفتار</string>
     <string name="manage_accounts">مدیریت حساب‌ها</string>

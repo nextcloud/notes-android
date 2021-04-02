@@ -43,7 +43,6 @@
     <string name="settings_font_size">Размер шрифта</string>
     <string name="settings_wifi_only">Синхр. только по Wi-Fi</string>
     <string name="settings_background_sync">Синхр. в фоновом режиме</string>
-
     <string name="error_sync">Сбой синхронизации: %1$s</string>
     <string name="error_synchronization">Сбой синхронизации</string>
     <string name="error_no_network">Нет подключения к сети</string>
@@ -109,7 +108,6 @@
     <string name="add_category">Добавить %1$s </string>
     <string name="simple_checkbox">Флажок</string>
     <string name="unlock_notes">Разблокировать заметки</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">О нет, что теперь? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Попробуйте принудительно закрыть приложение и запустить его снова. Это может быть связано с некорректным подключением к приложению Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Если проблема повторилась, попробуйте для ее решения очистить хранилище обоих приложений: Nextcloud и Nextcloud Notes</string>
@@ -134,7 +132,6 @@
     <string name="menu_edit_title">Редактировать заголовок</string>
     <string name="settings_branding">Брендирование</string>
     <string name="simple_security">Безопасность</string>
-    <string name="simple_appearance">Внешний вид</string>
     <string name="simple_synchronization">Синхронизация</string>
     <string name="simple_behavior">Режим</string>
     <string name="manage_accounts">Управление аккаунтами</string>

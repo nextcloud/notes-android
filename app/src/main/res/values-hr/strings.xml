@@ -42,8 +42,9 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Veličina fonta</string>
     <string name="settings_wifi_only">Sinkroniziraj samo putem bežične (Wi-Fi) mreže</string>
+    <string name="settings_lock">Zaključavanje aplikacije (beta)</string>
+    <string name="settings_lock_summary">Vjerodajnice uređaja</string>
     <string name="settings_background_sync">Pozadinska sinkronizacija</string>
-
     <string name="error_sync">Sinkronizacija nije uspjela: %1$s</string>
     <string name="error_synchronization">Sinkronizacija nije uspjela</string>
     <string name="error_no_network">Nema veze s mrežom</string>
@@ -109,10 +110,10 @@
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Potvrdni okvir</string>
     <string name="unlock_notes">Otključaj bilješke</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Ups, što sada? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Pokušajte prisilno zatvoriti aplikaciju i ponovo je pokrenuti. Možda se radi o nepravilnoj vezi s aplikacijom Nextcloud.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Ako problem i dalje nije otklonjen, pokušajte izbrisati pohranjene podatke iz obje aplikacije: Nextcloud i Nextcloud Notes.</string>
+    <string name="error_dialog_tip_clear_storage">Pohranjene podatke možete izbrisati tako da otvorite informacije o aplikaciji i odaberete Pohrana → Brisanje pohrane podataka. ⚠️ Upozorenje: ova radnja će izbrisati bilješke koje još uvijek nisu sinkronizirane!</string>
     <string name="error_dialog_tip_files_outdated">Čini se da je vaša aplikacija Nextcloud zastarjela. Posjetite trgovinu Play Store ili F-Droid kako biste dohvatili najnoviju inačicu.</string>
     <string name="error_dialog_tip_files_force_stop">Čini se da nešto nije u redu s vašom aplikacijom Nextcloud. Pokušajte prisilno zatvoriti aplikaciju Nextcloud i aplikaciju Nextcloud Notes.</string>
     <string name="error_dialog_tip_files_delete_storage">Ako prisilno zatvaranje nije otklonilo problem, pokušajte izbrisati pohranjene podatke iz obje aplikacije.</string>
@@ -133,8 +134,8 @@
     <string name="change_note_title">Promijeni naslov bilješke</string>
     <string name="menu_edit_title">Uredi naslov</string>
     <string name="settings_branding">Brendiranje</string>
+    <string name="settings_gridview">Prikaz rešetke</string>
     <string name="simple_security">Sigurnost</string>
-    <string name="simple_appearance">Izgled</string>
     <string name="simple_synchronization">Sinkronizacija</string>
     <string name="simple_behavior">Ponašanje</string>
     <string name="manage_accounts">Upravljaj računima</string>
@@ -190,6 +191,7 @@
     <string name="formatting_help_codefence_inline" translateable="false">`%1$s`</string>
     <string name="formatting_help_codefence_inline_escaped" translateable="false">\\`%1$s\\`</string>
     <string name="formatting_help_codefence" translateable="false">```</string>
+    <string name="formatting_help_codefence_outer" translateable="false">````</string>
     <string name="formatting_help_codefence_javascript" translateable="false">```javascript</string>
     <string name="formatting_help_cbf_title">Oblikovanje ovisno o kontekstu</string>
     <string name="formatting_help_cbf_body_1">Glavni cilj pri razvoju aplikacije Notes je stvoriti alat koji se može upotrebljavati bez ometanja. Svoje tekstove možete oblikovati posebnim oznakama Markdown. Za razne primjere navedene u nastavku možete se koristiti prečacima kako biste oblikovali svoje bilješke bez upisivanja šifri.</string>
@@ -227,11 +229,22 @@
     <string name="formatting_help_code_body_2">Markdown također podržava nešto što se naziva ograđivanje koda i omogućuje korištenje većeg broja redaka bez uvlačenja teksta:</string>
     <string name="formatting_help_code_body_3">Ako želite naglasiti sintaksu, dodajte jezik:</string>
 
+    <string name="formatting_help_tables_title">Tablice</string>
+    <!-- Column header of a sample table -->
+    <string name="formatting_help_tables_column">Stupac %1d</string>
+    <!-- Table cell value of a sample table -->
+    <string name="formatting_help_tables_value">Vrijednost %1d</string>
+
+    <string name="formatting_help_images_title">Slike</string>
+    <string name="formatting_help_images_alt">Vrhunska slika</string>
+
     <string name="simple_other">Ostalo</string>
     <string name="sort_last_modified">Razvrstaj prema datumu izmjene</string>
     <string name="sort_alphabetically">Razvrstaj po abecedi</string>
     <string name="error_action_open_battery_settings">Postavke baterije</string>
     <string name="error_action_open_deck_info">Otvori informacije o aplikaciji</string>
     <string name="error_action_open_network">Postavke mreže</string>
+    <string name="no_account_configured_yet">Još uvijek nema konfiguriranih računa</string>
     <string name="no_other_accounts">Nemate konfiguriranih računa.</string>
-    </resources>
+    <string name="context_based_formatting">Skočni okvir za oblikovanje ovisno o kontekstu</string>
+</resources>

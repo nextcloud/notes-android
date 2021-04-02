@@ -43,7 +43,6 @@
     <string name="settings_font_size">Velikost pisave</string>
     <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
     <string name="settings_background_sync"> Usklajevanje v ozadju</string>
-
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
     <string name="error_synchronization">Usklajevanje je spodletelo</string>
     <string name="error_no_network">Ni omrežne povezave</string>
@@ -109,7 +108,6 @@
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Izbirno polje</string>
     <string name="unlock_notes">Odkleni zabeležke</string>
-    <string name="simple_beta">Preizkusno</string>
     <string name="error_dialog_title">Ojoj, kaj pa zdaj? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Poskusite vsiliti končanje programa in ga ponovno zagnati. Morda je težava v neustrezni povezavi z okoljem Nextcloud</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Če se težava še naprej pojavlja, poskusite počistiti podatke programa Nextcloud in Nextcloud Notes.</string>
@@ -135,7 +133,6 @@
     <string name="menu_edit_title">Uredi naslov</string>
     <string name="settings_branding">Prilagajanje oblikovanja</string>
     <string name="simple_security">Varnost</string>
-    <string name="simple_appearance">Videz</string>
     <string name="simple_synchronization">Usklajevanje</string>
     <string name="simple_behavior">Obnašanje</string>
     <string name="manage_accounts">Upravljanje z računi</string>
