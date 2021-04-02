@@ -64,12 +64,6 @@ public class ImportAccountActivity extends AppCompatActivity {
                 AccountImporter.requestAndroidAccountPermissionsAndPickAccount(this);
             }
         });
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            Drawable wrapDrawable = DrawableCompat.wrap(binding.progressCircular.getIndeterminateDrawable());
-            DrawableCompat.setTint(wrapDrawable, ContextCompat.getColor(this, R.color.defaultBrand));
-            binding.progressCircular.setIndeterminateDrawable(DrawableCompat.unwrap(wrapDrawable));
-        }
     }
 
     @Override
