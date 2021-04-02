@@ -60,6 +60,17 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     }
 
     @Override
+    protected synchronized void scrollToY(int y) {
+        this.setScrollY = () -> {
+            if (binding != null) {
+                Log.v("SCROLL set (preview) to", y + "");
+                binding.scrollView.post(() -> binding.scrollView.setScrollY(y));
+            }
+            setScrollY = null;
+        };
+    }
+
+    @Override
     protected FloatingActionButton getSearchNextButton() {
         return binding.searchNext;
     }
@@ -89,7 +100,6 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
         binding.swiperefreshlayout.setOnRefreshListener(this);
         registerInternalNoteLinkHandler();
-        binding.singleNoteContent.setMarkdownString(note.getContent(), setScrollY);
         binding.singleNoteContent.setMovementMethod(LinkMovementMethod.getInstance());
 
         final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireActivity().getApplicationContext());
@@ -104,7 +114,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
         noteLoaded = true;
         registerInternalNoteLinkHandler();
         changedText = note.getContent();
-        binding.singleNoteContent.setMarkdownString(note.getContent());
+        binding.singleNoteContent.setMarkdownString(note.getContent(), setScrollY);
         binding.singleNoteContent.getMarkdownString().observe(requireActivity(), (newContent) -> {
             changedText = newContent.toString();
             saveNote(null);

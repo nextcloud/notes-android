@@ -79,6 +79,13 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     }
 
     @Override
+    protected void scrollToY(int y) {
+        if (binding != null) {
+            binding.scrollView.post(() -> binding.scrollView.setScrollY(y));
+        }
+    }
+
+    @Override
     protected Layout getLayout() {
         binding.editContent.onPreDraw();
         return binding.editContent.getLayout();
