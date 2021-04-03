@@ -45,6 +45,8 @@
     <string name="settings_lock">Zámek aplikace (zatím vyvíjeno)</string>
     <string name="settings_lock_summary">Přihlašovací údaje zařízení</string>
     <string name="settings_background_sync">Synchronizace na pozadí</string>
+    <string name="settings_prevent_screen_capture">Bránit pořizování snímků obrazovky</string>
+
     <string name="error_sync">Synchronizace se nezdařila: %1$s</string>
     <string name="error_synchronization">Synchronizace se nezdařila</string>
     <string name="error_no_network">Žádné síťové spojení</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">Opatření vlastním logem</string>
     <string name="settings_gridview">Zobrazení v mřížce</string>
     <string name="simple_security">Zabezpečení</string>
+    <string name="appearance_and_behavior">Vzhled a chování</string>
     <string name="simple_synchronization">Synchronizace</string>
     <string name="simple_behavior">Chování</string>
     <string name="manage_accounts">Spravovat účty</string>
