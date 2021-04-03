@@ -132,7 +132,7 @@ public abstract class NotesDatabase extends RoomDatabase {
                         Log.v(TAG, NotesDatabase.class.getSimpleName() + " created.");
                     }
                 })
-//                .allowMainThreadQueries() // FIXME remove
+                .allowMainThreadQueries() // FIXME Needed in BaseNoteFragment#saveNote()
                 .build();
     }
 

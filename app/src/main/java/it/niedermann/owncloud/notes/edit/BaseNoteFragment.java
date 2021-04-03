@@ -318,7 +318,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
             } else {
-                new Thread(() -> note = db.updateNoteAndSync(localAccount, note, newContent, null, callback)).start();
+                // FIXME requires database queries on main thread!
+                note = db.updateNoteAndSync(localAccount, note, newContent, null, callback);
                 listener.onNoteUpdated(note);
                 requireActivity().invalidateOptionsMenu();
             }
