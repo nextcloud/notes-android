@@ -111,6 +111,7 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
 
     @Override
     protected void onNoteLoaded(Note note) {
+        super.onNoteLoaded(note);
         noteLoaded = true;
         registerInternalNoteLinkHandler();
         changedText = note.getContent();

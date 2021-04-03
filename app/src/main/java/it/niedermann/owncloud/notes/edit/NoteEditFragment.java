@@ -142,28 +142,27 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
 
     @Override
     protected void onNoteLoaded(Note note) {
-        if (note != null) {
-            if (note.getContent().isEmpty()) {
-                binding.editContent.requestFocus();
+        super.onNoteLoaded(note);
+        if (note.getContent().isEmpty()) {
+            binding.editContent.requestFocus();
 
-                requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
-                final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (imm != null) {
-                    imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
-                } else {
-                    Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
-                }
+            final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
+            } else {
+                Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
             }
+        }
 
-            binding.editContent.setMarkdownString(note.getContent());
-            binding.editContent.setEnabled(true);
+        binding.editContent.setMarkdownString(note.getContent());
+        binding.editContent.setEnabled(true);
 
-            final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
-            binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
-            if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
-                binding.editContent.setTypeface(Typeface.MONOSPACE);
-            }
+        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(requireContext().getApplicationContext());
+        binding.editContent.setTextSize(TypedValue.COMPLEX_UNIT_PX, getFontSizeFromPreferences(requireContext(), sp));
+        if (sp.getBoolean(getString(R.string.pref_key_font), false)) {
+            binding.editContent.setTypeface(Typeface.MONOSPACE);
         }
     }
 
