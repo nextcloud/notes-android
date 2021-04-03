@@ -45,6 +45,8 @@
     <string name="settings_lock">App-Sperre (Beta)</string>
     <string name="settings_lock_summary">Geräte-Anmeldedaten</string>
     <string name="settings_background_sync">Hintergrundsynchronisierung</string>
+    <string name="settings_prevent_screen_capture">Bildschirmaufnahme verhindern</string>
+
     <string name="error_sync">Synchronisierung fehlgeschlagen: %1$s</string>
     <string name="error_synchronization">Synchronisierung fehlgeschlagen</string>
     <string name="error_no_network">Keine Netzwerkverbindung</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">Branding</string>
     <string name="settings_gridview">Kachelansicht</string>
     <string name="simple_security">Sicherheit</string>
+    <string name="appearance_and_behavior">Aussehen und Verhalten</string>
     <string name="simple_synchronization">Synchronisierung</string>
     <string name="simple_behavior">Verhalten</string>
     <string name="manage_accounts">Konten verwalten</string>
