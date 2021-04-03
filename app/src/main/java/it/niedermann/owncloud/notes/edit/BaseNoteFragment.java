@@ -318,11 +318,9 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
             } else {
-                new Thread(() -> {
-                    note = db.updateNoteAndSync(localAccount, note, newContent, null, callback);
-                    requireActivity().runOnUiThread(() -> listener.onNoteUpdated(note));
-                    requireActivity().invalidateOptionsMenu();
-                }).start();
+                new Thread(() -> note = db.updateNoteAndSync(localAccount, note, newContent, null, callback)).start();
+                listener.onNoteUpdated(note);
+                requireActivity().invalidateOptionsMenu();
             }
         } else {
             Log.e(TAG, "note is null");
