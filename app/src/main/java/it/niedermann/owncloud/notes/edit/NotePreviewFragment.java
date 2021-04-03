@@ -154,18 +154,22 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
     public void onRefresh() {
         if (noteLoaded && db.getNoteServerSyncHelper().isSyncPossible() && SSOUtil.isConfigured(getContext())) {
             binding.swiperefreshlayout.setRefreshing(true);
-            try {
-                final Account account = db.getAccountDao().getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
-                db.getNoteServerSyncHelper().addCallbackPull(account, () -> {
-                    note = db.getNoteDao().getNoteById(note.getId());
-                    changedText = note.getContent();
-                    binding.singleNoteContent.setMarkdownString(note.getContent());
-                    binding.swiperefreshlayout.setRefreshing(false);
-                });
-                db.getNoteServerSyncHelper().scheduleSync(account, false);
-            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-                e.printStackTrace();
-            }
+            new Thread(() -> {
+                try {
+                    final Account account = db.getAccountDao().getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext()).name);
+                    db.getNoteServerSyncHelper().addCallbackPull(account, () -> new Thread(() -> {
+                        note = db.getNoteDao().getNoteById(note.getId());
+                        changedText = note.getContent();
+                        requireActivity().runOnUiThread(() -> {
+                            binding.singleNoteContent.setMarkdownString(note.getContent());
+                            binding.swiperefreshlayout.setRefreshing(false);
+                        });
+                    }).start());
+                    db.getNoteServerSyncHelper().scheduleSync(account, false);
+                } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
         } else {
             binding.swiperefreshlayout.setRefreshing(false);
             Toast.makeText(requireContext(), getString(R.string.error_sync, getString(R.string.error_no_network)), Toast.LENGTH_LONG).show();
