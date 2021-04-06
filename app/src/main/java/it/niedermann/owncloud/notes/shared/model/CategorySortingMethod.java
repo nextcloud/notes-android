@@ -1,7 +1,5 @@
 package it.niedermann.owncloud.notes.shared.model;
 
-import java.util.NoSuchElementException;
-
 public enum CategorySortingMethod {
     SORT_MODIFIED_DESC(0, "MODIFIED DESC"),
     SORT_LEXICOGRAPHICAL_ASC(1, "TITLE COLLATE NOCASE ASC");
@@ -40,8 +38,8 @@ public enum CategorySortingMethod {
      * @return the corresponding enum item with the index (ordinal)
      */
     public static CategorySortingMethod findById(int id) {
-        for(CategorySortingMethod csm : values()) {
-            if(csm.getId() == id) {
+        for (CategorySortingMethod csm : values()) {
+            if (csm.getId() == id) {
                 return csm;
             }
         }
