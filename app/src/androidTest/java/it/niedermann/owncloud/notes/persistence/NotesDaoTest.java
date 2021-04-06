@@ -22,7 +22,6 @@ import java.util.List;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.persistence.entity.NoteIdPair;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
 import static it.niedermann.owncloud.notes.persistence.NotesDatabaseTestUtil.getOrAwaitValue;
@@ -126,7 +125,7 @@ public class NotesDaoTest {
         db.getNoteDao().addNote(new Note(666, 1234L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_EDITED, account.getId(), "", 0));
         db.getNoteDao().addNote(new Note(987, 6969L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_DELETED, account.getId(), "", 0));
 
-        final List<NoteIdPair> pair = db.getNoteDao().getRemoteIdAndId(account.getId());
+        final List<Note> pair = db.getNoteDao().getRemoteIdAndId(account.getId());
         assertEquals(2, pair.size());
         assertTrue(pair.stream().anyMatch(note -> 815 == note.getId() && Long.valueOf(4711).equals(note.getRemoteId())));
         assertTrue(pair.stream().anyMatch(note -> 666 == note.getId() && Long.valueOf(1234).equals(note.getRemoteId())));

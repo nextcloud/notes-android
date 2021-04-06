@@ -14,7 +14,6 @@ import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
-import it.niedermann.owncloud.notes.persistence.entity.NoteIdPair;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
 @SuppressWarnings("JavadocReference")
@@ -136,8 +135,8 @@ public interface NoteDao {
     @Query("SELECT DISTINCT remoteId FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
     List<Long> getRemoteIds(long accountId);
 
-    @Query("SELECT id, remoteId FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
-    List<NoteIdPair> getRemoteIdAndId(long accountId);
+    @Query("SELECT id, remoteId, 0 as accountId, '' as title, 0 as favorite, '' as excerpt, 0 as modified, '' as eTag, 0 as status, '' as category, '' as content, 0 as scrollY  FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
+    List<Note> getRemoteIdAndId(long accountId);
 
     /**
      * Get a single {@link Note} by {@link Note#remoteId} (aka. Nextcloud file id)
