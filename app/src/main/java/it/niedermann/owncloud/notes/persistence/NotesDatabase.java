@@ -207,7 +207,7 @@ public abstract class NotesDatabase extends RoomDatabase {
         return getNoteDao().getNoteById(getNoteDao().addNote(entity));
     }
 
-    @AnyThread
+    @MainThread
     public LiveData<Note> moveNoteToAnotherAccount(Account account, Note note) {
         return switchMap(getNoteDao().getContent$(note.getId()), (content) -> {
             final Note fullNote = new Note(null, note.getModified(), note.getTitle(), content, note.getCategory(), note.getFavorite(), null);
