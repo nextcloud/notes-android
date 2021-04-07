@@ -24,7 +24,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.LiveData;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
@@ -127,16 +126,10 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
                                 requireActivity().invalidateOptionsMenu();
                             }
                         } else {
-                            requireActivity().runOnUiThread(() -> {
-                                final LiveData<Note> createLiveData$ = db.addNoteAndSync(localAccount, cloudNote);
-                                createLiveData$.observe(requireActivity(), (createdNote) -> {
-                                    note = createdNote;
-                                    originalNote = null;
-                                    requireActivity().runOnUiThread(() -> onNoteLoaded(note));
-                                    requireActivity().invalidateOptionsMenu();
-                                    createLiveData$.removeObservers(requireActivity());
-                                });
-                            });
+                            note = db.addNote(localAccount.getId(), cloudNote);
+                            originalNote = null;
+                            requireActivity().runOnUiThread(() -> onNoteLoaded(note));
+                            requireActivity().invalidateOptionsMenu();
                         }
                     }
                 } else {

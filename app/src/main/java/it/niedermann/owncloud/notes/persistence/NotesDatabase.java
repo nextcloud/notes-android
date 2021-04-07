@@ -184,7 +184,7 @@ public abstract class NotesDatabase extends RoomDatabase {
      */
     @NonNull
     @WorkerThread
-    Note addNote(long accountId, Note note) {
+    public Note addNote(long accountId, Note note) {
         Note entity = new Note();
         if (note.getId() > 0) {
             entity.setId(note.getId());
