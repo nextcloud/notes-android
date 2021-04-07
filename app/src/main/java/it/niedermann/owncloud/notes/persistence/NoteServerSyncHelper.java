@@ -99,7 +99,7 @@ public class NoteServerSyncHelper {
     private final Map<Long, Boolean> syncActive = new HashMap<>();
     private final Map<Long, Boolean> syncScheduled = new HashMap<>();
 
-    // list of callbacks for both parts of synchronziation
+    // list of callbacks for both parts of synchronization
     private final Map<Long, List<ISyncCallback>> callbacksPush = new HashMap<>();
     private final Map<Long, List<ISyncCallback>> callbacksPull = new HashMap<>();
 
