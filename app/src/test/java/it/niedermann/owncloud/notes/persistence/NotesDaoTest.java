@@ -1,12 +1,12 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.database.sqlite.SQLiteConstraintException;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 
@@ -15,6 +15,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Calendar;
 import java.util.List;
@@ -24,7 +26,6 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
-import static it.niedermann.owncloud.notes.persistence.NotesDatabaseTestUtil.getOrAwaitValue;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
@@ -34,8 +35,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-@SuppressWarnings("ConstantConditions")
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(sdk = {Build.VERSION_CODES.P})
 public class NotesDaoTest {
 
     @Rule
@@ -47,8 +48,11 @@ public class NotesDaoTest {
 
     @Before
     public void setupDB() throws NextcloudHttpRequestFailedException {
-        db = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), NotesDatabase.class).build();
-        db.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("", null));
+        db = Room
+                .inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), NotesDatabase.class)
+                .allowMainThreadQueries()
+                .build();
+        db.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {}}", null));
         account = db.getAccountDao().getAccountByName("彼得@äöüß.example.com");
     }
 
@@ -62,12 +66,12 @@ public class NotesDaoTest {
         db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_DELETED, account.getId(), "", 0));
         db.getNoteDao().deleteByNoteId(1, LOCAL_DELETED);
         assertNull(db.getNoteDao().getNoteById(1));
-        assertNull(getOrAwaitValue(db.getNoteDao().getNoteById$(1)));
+        assertNull(NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getNoteById$(1)));
 
         db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_DELETED, account.getId(), "", 0));
         db.getNoteDao().deleteByNoteId(1, VOID);
         assertEquals(1, db.getNoteDao().getNoteById(1).getId());
-        assertEquals(1, getOrAwaitValue(db.getNoteDao().getNoteById$(1)).getId());
+        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getNoteById$(1)).getId());
     }
 
     @Test
@@ -151,8 +155,8 @@ public class NotesDaoTest {
         assertEquals(Integer.valueOf(1), db.getNoteDao().countFavorites(account.getId()));
         assertEquals(Integer.valueOf(1), db.getNoteDao().countFavorites(secondAccount.getId()));
 
-        assertEquals(Integer.valueOf(1), getOrAwaitValue(db.getNoteDao().countFavorites$(account.getId())));
-        assertEquals(Integer.valueOf(1), getOrAwaitValue(db.getNoteDao().countFavorites$(secondAccount.getId())));
+        assertEquals(Integer.valueOf(1), NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().countFavorites$(account.getId())));
+        assertEquals(Integer.valueOf(1), NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().countFavorites$(secondAccount.getId())));
     }
 
     @Test
@@ -162,8 +166,8 @@ public class NotesDaoTest {
         assertEquals(Integer.valueOf(7), db.getNoteDao().count(account.getId()));
         assertEquals(Integer.valueOf(5), db.getNoteDao().count(secondAccount.getId()));
 
-        assertEquals(Integer.valueOf(7), getOrAwaitValue(db.getNoteDao().count$(account.getId())));
-        assertEquals(Integer.valueOf(5), getOrAwaitValue(db.getNoteDao().count$(secondAccount.getId())));
+        assertEquals(Integer.valueOf(7), NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().count$(account.getId())));
+        assertEquals(Integer.valueOf(5), NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().count$(secondAccount.getId())));
     }
 
     @Test
@@ -338,16 +342,16 @@ public class NotesDaoTest {
         final Note note = new Note(1, 1L, Calendar.getInstance(), "My-Title", "My-Content", "", false, "1", LOCAL_DELETED, account.getId(), "", 0);
         db.getNoteDao().addNote(note);
         assertEquals("My-Content", db.getNoteDao().getContent(note.getId()));
-        assertEquals("My-Content", getOrAwaitValue(db.getNoteDao().getContent$(note.getId())));
+        assertEquals("My-Content", NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getContent$(note.getId())));
         assertNull(db.getNoteDao().getContent(note.getId() + 1));
-        assertNull(getOrAwaitValue(db.getNoteDao().getContent$(note.getId() + 1)));
+        assertNull(NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getContent$(note.getId() + 1)));
     }
 
     @Test
     public void getCategoriesLiveData() throws InterruptedException, NextcloudHttpRequestFailedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
-        final List<CategoryWithNotesCount> accountCategories = getOrAwaitValue(db.getNoteDao().getCategories$(account.getId()));
+        final List<CategoryWithNotesCount> accountCategories = NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getCategories$(account.getId()));
         assertEquals(4, accountCategories.size());
         for (CategoryWithNotesCount category : accountCategories) {
             assertEquals(account.getId(), category.getAccountId());
@@ -358,7 +362,7 @@ public class NotesDaoTest {
         assertTrue(accountCategories.stream().anyMatch(cat -> "ToDo".equals(cat.getCategory()) && Integer.valueOf(1).equals(cat.getTotalNotes())));
         assertTrue(accountCategories.stream().anyMatch(cat -> "日记".equals(cat.getCategory()) && Integer.valueOf(1).equals(cat.getTotalNotes())));
 
-        final List<CategoryWithNotesCount> secondAccountCategories = getOrAwaitValue(db.getNoteDao().getCategories$(secondAccount.getId()));
+        final List<CategoryWithNotesCount> secondAccountCategories = NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().getCategories$(secondAccount.getId()));
         assertEquals(2, secondAccountCategories.size());
         for (CategoryWithNotesCount category : secondAccountCategories) {
             assertEquals(secondAccount.getId(), category.getAccountId());
@@ -373,18 +377,18 @@ public class NotesDaoTest {
     public void searchCategories() throws InterruptedException, NextcloudHttpRequestFailedException {
         final Account secondAccount = setupSecondAccountAndTestNotes();
 
-        assertEquals(2, getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "M%")).size());
-        assertEquals(1, getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "Mo%")).size());
-        assertEquals(1, getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "MO%")).size());
-        assertEquals(1, getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "movie%")).size());
-        assertEquals(1, getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "T%")).size());
-        assertEquals(1, getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "日记")).size());
-        assertEquals(2, getOrAwaitValue(db.getNoteDao().searchCategories$(secondAccount.getId(), "M%")).size());
-        assertEquals(0, getOrAwaitValue(db.getNoteDao().searchCategories$(secondAccount.getId(), "T%")).size());
+        assertEquals(2, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "M%")).size());
+        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "Mo%")).size());
+        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "MO%")).size());
+        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "movie%")).size());
+        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "T%")).size());
+        assertEquals(1, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(account.getId(), "日记")).size());
+        assertEquals(2, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(secondAccount.getId(), "M%")).size());
+        assertEquals(0, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(secondAccount.getId(), "T%")).size());
     }
 
     private Account setupSecondAccount() throws NextcloudHttpRequestFailedException {
-        db.addAccount("https://example.org", "test", "test@example.org", new Capabilities("", null));
+        db.addAccount("https://example.org", "test", "test@example.org", new Capabilities("{ocs: {}}", null));
         return db.getAccountDao().getAccountByName("test@example.org");
     }
 

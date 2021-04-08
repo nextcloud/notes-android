@@ -1,18 +1,20 @@
 package it.niedermann.owncloud.notes.shared.model;
 
 import android.graphics.Color;
-
-import androidx.test.ext.junit.runners.AndroidJUnit4;
+import android.os.Build;
 
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(sdk = {Build.VERSION_CODES.P})
 public class CapabilitiesTest {
 
     @Test
@@ -90,7 +92,7 @@ public class CapabilitiesTest {
 
     @Test
     public void etagShouldAlwaysBeStored() throws NextcloudHttpRequestFailedException {
-        final Capabilities capabilities = new Capabilities("", "ed38bf28-e429-4231-84be-35d166acfb6d ");
+        final Capabilities capabilities = new Capabilities("{ocs: {}}", "ed38bf28-e429-4231-84be-35d166acfb6d ");
         assertEquals("ed38bf28-e429-4231-84be-35d166acfb6d ", capabilities.getETag());
     }
 
