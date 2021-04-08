@@ -45,6 +45,8 @@
     <string name="settings_lock">应用锁 （测试版）</string>
     <string name="settings_lock_summary">设备凭据</string>
     <string name="settings_background_sync">后台同步</string>
+    <string name="settings_prevent_screen_capture">防止截屏</string>
+
     <string name="error_sync">同步失败：%1$s</string>
     <string name="error_synchronization">同步失败</string>
     <string name="error_no_network">没有网络连接</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">创建标签</string>
     <string name="settings_gridview">网格视图</string>
     <string name="simple_security">安全</string>
+    <string name="appearance_and_behavior">外观和行为</string>
     <string name="simple_synchronization">同步</string>
     <string name="simple_behavior">行为</string>
     <string name="manage_accounts">管理账号</string>

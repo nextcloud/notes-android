@@ -45,6 +45,8 @@
     <string name="settings_lock">Uygulama kilidi (Beta)</string>
     <string name="settings_lock_summary">Aygıt kimlik doğrulama bilgileri</string>
     <string name="settings_background_sync">Arka planda eşitleme</string>
+    <string name="settings_prevent_screen_capture">Ekran görüntüsü alınamasın</string>
+
     <string name="error_sync">Eşitlenemedi: %1$s</string>
     <string name="error_synchronization">Eşitlenemedi</string>
     <string name="error_no_network">Ağ bağlantısı yok</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">Markalama</string>
     <string name="settings_gridview">Tablo görünümü</string>
     <string name="simple_security">Güvenlik</string>
+    <string name="appearance_and_behavior">Görünüm ve davranış</string>
     <string name="simple_synchronization">Eşitleme</string>
     <string name="simple_behavior">Davranış</string>
     <string name="manage_accounts">Hesap yönetimi</string>
