@@ -45,6 +45,8 @@
     <string name="settings_lock">應用程式上鎖 (Beta)</string>
     <string name="settings_lock_summary">裝置身份驗證</string>
     <string name="settings_background_sync">背景同步</string>
+    <string name="settings_prevent_screen_capture">防止屏幕截圖</string>
+
     <string name="error_sync">同步失敗：%1$s</string>
     <string name="error_synchronization">同步失敗</string>
     <string name="error_no_network">沒有網路連線</string>
@@ -67,7 +69,7 @@
     <string name="about_app_license">此程式依照 GNU GENERAL PUBLIC LICENSE v3+ 方式授權使用</string>
     <string name="about_app_license_button">檢視授權條款</string>
     <string name="about_icons_disclaimer_title">圖示</string>
-    <string name="about_icons_disclaimer">&lt;p>原創圖示由 %1$s 製作&lt;/p>&lt;p>其他 App 使用的圖示均為 Google Inc。製作的 &lt;a href=\"https：//materialdesignicons。com/\">Material Design 圖示&lt;/a>，並依 Apache 2。0 條款授權。&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>原創圖示由 %1$s 製作&lt;/p>&lt;p>其他 App 使用的圖示均為 Google Inc。製作的 &lt;a href=\"https：//materialdesignicons。com/\">Material Design 圖示&lt;/a>，並依 Apache 2.0 條款授權。&lt;/p></string>
     <string name="about_credits_tab_title">致謝</string>
     <string name="about_contribution_tab_title">貢獻</string>
     <string name="about_license_tab_title">授權條款</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">品牌化</string>
     <string name="settings_gridview">網格檢視</string>
     <string name="simple_security">安全性</string>
+    <string name="appearance_and_behavior">外觀與行為</string>
     <string name="simple_synchronization">同步</string>
     <string name="simple_behavior">行為</string>
     <string name="manage_accounts">賬戶管理</string>

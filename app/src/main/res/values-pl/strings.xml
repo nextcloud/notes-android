@@ -45,6 +45,8 @@
     <string name="settings_lock">Blokada aplikacji (Beta)</string>
     <string name="settings_lock_summary">Poświadczenia urządzenia</string>
     <string name="settings_background_sync">Synchronizacja w tle</string>
+    <string name="settings_prevent_screen_capture">Uniemożliwiaj przechwytywanie ekranu</string>
+
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_synchronization">Synchronizacja nie powiodła się</string>
     <string name="error_no_network">Brak połączenia sieciowego</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">Motyw serwera</string>
     <string name="settings_gridview">Widok siatki</string>
     <string name="simple_security">Bezpieczeństwo</string>
+    <string name="appearance_and_behavior">Wygląd i zachowanie</string>
     <string name="simple_synchronization">Synchronizacja</string>
     <string name="simple_behavior">Zachowanie</string>
     <string name="manage_accounts">Zarządzaj kontami</string>

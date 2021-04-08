@@ -14,8 +14,8 @@ android {
         applicationId "it.niedermann.owncloud.notes"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 3002005
-        versionName "3.2.5"
+        versionCode 3003000
+        versionName "3.3.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -35,7 +35,7 @@ android {
         }
 
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -89,7 +89,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:1.2.0"
     implementation "androidx.fragment:fragment:1.3.2"
     implementation "androidx.preference:preference:1.1.1"
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:1.2.0"
     implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.work:work-runtime:2.5.0'

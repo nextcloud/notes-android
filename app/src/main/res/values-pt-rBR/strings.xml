@@ -45,6 +45,8 @@
     <string name="settings_lock">Bloqueio de aplicativo (Beta)</string>
     <string name="settings_lock_summary">Credenciais de dispositivo</string>
     <string name="settings_background_sync">Sincronização em segundo plano</string>
+    <string name="settings_prevent_screen_capture">Proibir captura de tela</string>
+
     <string name="error_sync">A sincronização falhou: %1$s</string>
     <string name="error_synchronization">A sincronização falhou</string>
     <string name="error_no_network">Sem conexão de rede</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">Marcação</string>
     <string name="settings_gridview">Visualização em grade</string>
     <string name="simple_security">Segurança</string>
+    <string name="appearance_and_behavior">Aparência e comportamento</string>
     <string name="simple_synchronization">Sincronização</string>
     <string name="simple_behavior">Comportamento</string>
     <string name="manage_accounts">Gerenciar contas</string>
