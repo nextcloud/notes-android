@@ -16,6 +16,10 @@ import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
+/**
+ * Each method starting with <code>search</code> will return only a partial {@link Note} without any
+ * {@link Note#eTag}, {@link Note#status}, {@link Note#content} or {@link Note#scrollY} for performance reasons.
+ */
 @SuppressWarnings("JavadocReference")
 @Dao
 public interface NoteDao {

@@ -71,6 +71,7 @@ public class NotesDatabaseTest {
         assertEquals(3, idMapOfFirstAccount.size());
         assertEquals(Long.valueOf(1L), idMapOfFirstAccount.get(1001L));
         assertEquals(Long.valueOf(3L), idMapOfFirstAccount.get(1003L));
+        assertEquals(Long.valueOf(5L), idMapOfFirstAccount.get(1005L));
 
         final Map<Long, Long> idMapOfSecondAccount = db.getIdMap(secondAccount.getId());
         assertEquals(1, idMapOfSecondAccount.size());
