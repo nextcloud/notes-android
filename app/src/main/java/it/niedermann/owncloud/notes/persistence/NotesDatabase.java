@@ -217,7 +217,7 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     /**
      * @return a {@link Map} of remote IDs as keys and local IDs as values of all {@link Note}s of
-     * the given {@param accountId} which are note {@link DBStatus#LOCAL_DELETED}
+     * the given {@param accountId} which are not {@link DBStatus#LOCAL_DELETED}
      */
     @NonNull
     @WorkerThread
