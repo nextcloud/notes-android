@@ -73,7 +73,7 @@ public class NotesListViewItemTouchHelper extends ItemTouchHelper {
                     case ItemTouchHelper.LEFT:
                         viewHolder.setIsRecyclable(false);
                         final Note dbNoteWithoutContent = (Note) adapter.getItem(viewHolder.getLayoutPosition());
-                        final LiveData<Note> dbNoteLiveData = mainViewModel.getFullNote(dbNoteWithoutContent.getId());
+                        final LiveData<Note> dbNoteLiveData = mainViewModel.getFullNote$(dbNoteWithoutContent.getId());
                         dbNoteLiveData.observe(lifecycleOwner, (dbNote) -> {
                             dbNoteLiveData.removeObservers(lifecycleOwner);
                             tracker.deselect(dbNote.getId());

@@ -37,7 +37,7 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     public void onNoteClick(int position, View v) {
         if (!TextUtils.isEmpty(receivedText)) {
-            final LiveData<Note> fullNote$ = mainViewModel.getFullNote(((Note) adapter.getItem(position)).getId());
+            final LiveData<Note> fullNote$ = mainViewModel.getFullNote$(((Note) adapter.getItem(position)).getId());
             fullNote$.observe(this, (fullNote) -> {
                 fullNote$.removeObservers(this);
                 final String oldContent = fullNote.getContent();

@@ -528,8 +528,13 @@ public class MainViewModel extends AndroidViewModel {
         return db.addAccount(url, username, accountName, capabilities);
     }
 
-    public LiveData<Note> getFullNote(long id) {
+    public LiveData<Note> getFullNote$(long id) {
         return map(getFullNotesWithCategory(Collections.singleton(id)), input -> input.get(0));
+    }
+
+    @WorkerThread
+    public Note getFullNote(long id) {
+        return db.getNoteDao().getNoteById(id);
     }
 
     public LiveData<List<Note>> getFullNotesWithCategory(@NonNull Collection<Long> ids) {
@@ -579,27 +584,19 @@ public class MainViewModel extends AndroidViewModel {
         return db.getAccountDao().countAccounts$();
     }
 
-    public LiveData<String> collectNoteContents(List<Long> noteIds) {
-        return switchMap(getCurrentAccount(), currentAccount -> {
-            if (currentAccount != null) {
-                Log.v(TAG, "[collectNoteContents] - currentAccount: " + currentAccount.getAccountName());
-                final MutableLiveData<String> collectedContent$ = new MutableLiveData<>();
-                new Thread(() -> {
-                    final StringBuilder noteContents = new StringBuilder();
-                    for (Long noteId : noteIds) {
-                        final Note fullNote = db.getNoteDao().getNoteById(noteId);
-                        final String tempFullNote = fullNote.getContent();
-                        if (!TextUtils.isEmpty(tempFullNote)) {
-                            if (noteContents.length() > 0) {
-                                noteContents.append("\n\n");
-                            }
-                            noteContents.append(tempFullNote);
-                        }
-                    }
-                }).start();
-                return collectedContent$;
+    @WorkerThread
+    public String collectNoteContents(@NonNull List<Long> noteIds) {
+        final StringBuilder noteContents = new StringBuilder();
+        for (Long noteId : noteIds) {
+            final Note fullNote = db.getNoteDao().getNoteById(noteId);
+            final String tempFullNote = fullNote.getContent();
+            if (!TextUtils.isEmpty(tempFullNote)) {
+                if (noteContents.length() > 0) {
+                    noteContents.append("\n\n");
+                }
+                noteContents.append(tempFullNote);
             }
-            return new MutableLiveData<>(null);
-        });
+        }
+        return noteContents.toString();
     }
 }

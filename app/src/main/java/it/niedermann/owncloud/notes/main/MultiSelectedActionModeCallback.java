@@ -94,7 +94,7 @@ public class MultiSelectedActionModeCallback implements Callback {
         int itemId = item.getItemId();
         if (itemId == R.id.menu_delete) {
             final List<Long> selection = new ArrayList<>(tracker.getSelection().size());
-            for(Long sel : tracker.getSelection()) {
+            for (Long sel : tracker.getSelection()) {
                 selection.add(sel);
             }
             final LiveData<List<Note>> fullNotes$ = mainViewModel.getFullNotesWithCategory(selection);
@@ -134,21 +134,21 @@ public class MultiSelectedActionModeCallback implements Callback {
             return true;
         } else if (itemId == R.id.menu_share) {
             final List<Long> selection = new ArrayList<>(tracker.getSelection().size());
-            for(Long sel : tracker.getSelection()) {
+            for (Long sel : tracker.getSelection()) {
                 selection.add(sel);
             }
-            // FIXME use title if only one
-            final String subject = context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size());
-//            final String subject = (selection.size() == 1)
-//                    ? ((Note) adapter.getItem(adapter.getSelected().get(0))).getTitle()
-//                    : context.getResources().getQuantityString(R.plurals.share_multiple, adapter.getSelected().size(), adapter.getSelected().size());
+            tracker.clearSelection();
 
-            final LiveData<String> contentCollector = mainViewModel.collectNoteContents(selection);
-            contentCollector.observe(lifecycleOwner, (next) -> {
-                contentCollector.removeObservers(lifecycleOwner);
-                ShareUtil.openShareDialog(context, subject, next);
-                tracker.clearSelection();
-            });
+            new Thread(() -> {
+                if (selection.size() == 1) {
+                    final Note note = mainViewModel.getFullNote(selection.get(0));
+                    ShareUtil.openShareDialog(context, note.getTitle(), note.getContent());
+                } else {
+                    ShareUtil.openShareDialog(context,
+                            context.getResources().getQuantityString(R.plurals.share_multiple, selection.size(), selection.size()),
+                            mainViewModel.collectNoteContents(selection));
+                }
+            }).start();
             return true;
         } else if (itemId == R.id.menu_category) {// TODO detect whether all selected notes do have the same category - in this case preselect it
             final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();
@@ -165,7 +165,7 @@ public class MultiSelectedActionModeCallback implements Callback {
 
     @Override
     public void onDestroyActionMode(ActionMode mode) {
-        if(mode != null) {
+        if (mode != null) {
             mode.finish();
         }
         tracker.clearSelection();
