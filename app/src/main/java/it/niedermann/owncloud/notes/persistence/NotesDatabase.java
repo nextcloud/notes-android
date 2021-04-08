@@ -96,7 +96,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     private static final String NOTES_DB_NAME = "OWNCLOUD_NOTES";
     private static NotesDatabase instance;
     private static Context context;
-    private static NoteServerSyncHelper serverSyncHelper;
+    private static NotesServerSyncHelper serverSyncHelper;
     private static String defaultNonEmptyTitle;
 
     private static NotesDatabase create(final Context context) {
@@ -149,12 +149,12 @@ public abstract class NotesDatabase extends RoomDatabase {
         if (instance == null) {
             instance = create(context.getApplicationContext());
             NotesDatabase.context = context.getApplicationContext();
-            NotesDatabase.serverSyncHelper = NoteServerSyncHelper.getInstance(instance);
+            NotesDatabase.serverSyncHelper = NotesServerSyncHelper.getInstance(instance);
         }
         return instance;
     }
 
-    public NoteServerSyncHelper getNoteServerSyncHelper() {
+    public NotesServerSyncHelper getNoteServerSyncHelper() {
         return NotesDatabase.serverSyncHelper;
     }
 

@@ -32,7 +32,7 @@ import it.niedermann.owncloud.notes.branding.BrandingUtil;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
-import it.niedermann.owncloud.notes.persistence.NoteServerSyncHelper;
+import it.niedermann.owncloud.notes.persistence.NotesServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
@@ -375,7 +375,7 @@ public class MainViewModel extends AndroidViewModel {
                 return new MutableLiveData<>(false);
             } else {
                 Log.v(TAG, "[synchronize] - currentAccount: " + currentAccount.getAccountName());
-                NoteServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
+                NotesServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
                 if (!syncHelper.isSyncPossible()) {
                     syncHelper.updateNetworkStatus();
                 }
