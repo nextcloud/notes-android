@@ -25,9 +25,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     @NonNull
     private MenuItem[] menuItems;
     @NonNull
-    private Consumer<MenuItem> onClick;
+    private final Consumer<MenuItem> onClick;
     @NonNull
-    private Context context;
+    private final Context context;
 
     public MenuAdapter(@NonNull Context context, @NonNull Account account, @NonNull Consumer<MenuItem> onClick) {
         this.context = context;
@@ -67,7 +67,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     }
 
     @NonNull
-    private Intent generateTrashbinIntent(@NonNull Account account) {
+    private static Intent generateTrashbinIntent(@NonNull Account account) {
         return new Intent(Intent.ACTION_VIEW, Uri.parse(account.getUrl() + "/index.php/apps/files/?dir=/&view=trashbin"));
     }
 }
