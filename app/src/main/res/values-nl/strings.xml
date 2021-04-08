@@ -45,6 +45,8 @@
     <string name="settings_lock">App slot (Beta)</string>
     <string name="settings_lock_summary">Apparaatinloggegevens</string>
     <string name="settings_background_sync">Achtergrondsynchronisatie</string>
+    <string name="settings_prevent_screen_capture">Voorkomen schermafdruk</string>
+
     <string name="error_sync">Synchronisatie mislukt: %1$s</string>
     <string name="error_synchronization">Synchronisatie mislukt</string>
     <string name="error_no_network">Geen netwerkverbinding</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">Brandmerken</string>
     <string name="settings_gridview">Rasterweergave</string>
     <string name="simple_security">Beveiliging</string>
+    <string name="appearance_and_behavior">Uiterlijk en gedrag</string>
     <string name="simple_synchronization">Synchronisatie</string>
     <string name="simple_behavior">Gedrag</string>
     <string name="manage_accounts">Accounts beheren </string>
