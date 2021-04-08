@@ -14,7 +14,7 @@ import static android.view.View.GONE;
 
 public class MenuViewHolder extends RecyclerView.ViewHolder {
 
-    private ItemNavigationBinding binding;
+    private final ItemNavigationBinding binding;
 
     public MenuViewHolder(@NonNull ItemNavigationBinding binding) {
         super(binding.getRoot());

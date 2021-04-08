@@ -23,7 +23,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     public static final int SERVER_SETTINGS = 2;
 
     @NonNull
-    private MenuItem[] menuItems;
+    private final MenuItem[] menuItems;
     @NonNull
     private final Consumer<MenuItem> onClick;
     @NonNull
