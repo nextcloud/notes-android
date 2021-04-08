@@ -10,6 +10,7 @@ import androidx.test.core.app.ApplicationProvider;
 
 import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,8 +18,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 import it.niedermann.owncloud.notes.persistence.entity.Account;
@@ -57,7 +58,7 @@ public class NotesDatabaseTest {
         db.addAccount("https://example.org", "test", "test@example.org", new Capabilities("{ocs: {}}", null));
         secondAccount = db.getAccountDao().getAccountByName("test@example.org");
 
-        List.of(
+        Arrays.stream(new Note[]{
                 new Note(1, 1001L, Calendar.getInstance(), "美好的一天", "C", "Movies", false, null, VOID, account.getId(), "", 0),
                 new Note(2, null, Calendar.getInstance(), "T", "C", "Movies", false, null, LOCAL_EDITED, account.getId(), "", 0),
                 new Note(3, 1003L, Calendar.getInstance(), "美好的一天", "C", "Movies", false, null, LOCAL_EDITED, account.getId(), "", 0),
@@ -67,7 +68,12 @@ public class NotesDatabaseTest {
                 new Note(7, null, Calendar.getInstance(), "T", "C", "Music", true, null, LOCAL_EDITED, secondAccount.getId(), "", 0),
                 new Note(8, 1008L, Calendar.getInstance(), "美好的一天", "C", "ToDo", true, null, LOCAL_EDITED, secondAccount.getId(), "", 0),
                 new Note(9, 1009L, Calendar.getInstance(), "美好的一天", "C", "ToDo", true, null, LOCAL_DELETED, secondAccount.getId(), "", 0)
-        ).forEach(note -> db.getNoteDao().addNote(note));
+        }).forEach(note -> db.getNoteDao().addNote(note));
+    }
+
+    @After
+    public void closeDb() {
+        db.close();
     }
 
     @Test
