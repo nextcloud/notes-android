@@ -1,13 +1,23 @@
 package it.niedermann.owncloud.notes.shared.util;
 
+import android.os.Build;
+
 import junit.framework.TestCase;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 /**
  * Tests the NoteUtil
  * Created by stefan on 06.10.15.
  */
+@RunWith(RobolectricTestRunner.class)
+@Config(sdk = {Build.VERSION_CODES.P})
 public class NoteUtilTest extends TestCase {
 
+    @Test
     public void testIsEmptyLine() {
         assertTrue(NoteUtil.isEmptyLine(" "));
         assertTrue(NoteUtil.isEmptyLine("\n"));
@@ -17,6 +27,7 @@ public class NoteUtilTest extends TestCase {
         assertFalse(NoteUtil.isEmptyLine("a \n "));
     }
 
+    @Test
     public void testGetLineWithoutMarkdown() {
         assertEquals("Test", NoteUtil.getLineWithoutMarkdown("Test", 0));
         assertEquals("Test", NoteUtil.getLineWithoutMarkdown("\nTest", 0));
@@ -24,6 +35,7 @@ public class NoteUtilTest extends TestCase {
         assertEquals("Bar", NoteUtil.getLineWithoutMarkdown("Foo\nBar", 1));
     }
 
+    @Test
     public void testGenerateNoteTitle() {
         assertEquals("Test", NoteUtil.generateNoteTitle("Test"));
         assertEquals("Test", NoteUtil.generateNoteTitle("Test\n"));
@@ -32,6 +44,7 @@ public class NoteUtilTest extends TestCase {
         assertEquals("Test", NoteUtil.generateNoteTitle("\n\nTest"));
     }
 
+    @Test
     public void testGenerateNoteExcerpt() {
         // title is different from content → return max. 200 characters starting with the first line which is not empty
         assertEquals("Test", NoteUtil.generateNoteExcerpt("Test", "Title"));
