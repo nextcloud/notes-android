@@ -1,12 +1,14 @@
 package it.niedermann.owncloud.notes.persistence.util;
 
 import android.graphics.Color;
+import android.os.Build;
 
 import androidx.core.util.Pair;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +18,8 @@ import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(sdk = {Build.VERSION_CODES.P})
 public class NotesColorUtilTest {
     @Test
     public void testContrastRatioIsSufficient() {
