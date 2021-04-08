@@ -32,7 +32,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,6 +78,7 @@ import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT
 import static it.niedermann.owncloud.notes.shared.util.NoteUtil.generateNoteExcerpt;
 import static it.niedermann.owncloud.notes.widget.notelist.NoteListWidget.updateNoteListWidgets;
 import static it.niedermann.owncloud.notes.widget.singlenote.SingleNoteWidget.updateSingleNoteWidgets;
+import static java.util.stream.Collectors.toMap;
 
 @Database(
         entities = {
@@ -215,15 +215,19 @@ public abstract class NotesDatabase extends RoomDatabase {
         });
     }
 
+    /**
+     * @return a {@link Map} of remote IDs as keys and local IDs as values of all {@link Note}s of
+     * the given {@param accountId} which are note {@link DBStatus#LOCAL_DELETED}
+     */
     @NonNull
     @WorkerThread
     public Map<Long, Long> getIdMap(long accountId) {
         validateAccountId(accountId);
-        Map<Long, Long> result = new HashMap<>();
-        for (Note pair : getNoteDao().getRemoteIdAndId(accountId)) {
-            result.put(pair.getRemoteId(), pair.getId());
-        }
-        return result;
+        return getNoteDao()
+                .getRemoteIdAndId(accountId)
+                .stream()
+                .filter(note -> note.getRemoteId() != null)
+                .collect(toMap(Note::getRemoteId, Note::getId));
     }
 
     @AnyThread

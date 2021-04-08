@@ -20,22 +20,8 @@ public interface AccountDao {
     @Delete
     int deleteAccount(Account localAccount);
 
-    String getAccountById = "SELECT * FROM Account WHERE ID = :accountId";
-    String getAccountByName = "SELECT * FROM Account WHERE ACCOUNTNAME = :accountName";
     String getAccounts = "SELECT * FROM Account";
-    String countAccounts = "SELECT COUNT(*) FROM Account";
-
-    @Query(getAccountById)
-    LiveData<Account> getAccountById$(long accountId);
-
-    @Query(getAccountById)
-    Account getAccountById(long accountId);
-
-    @Query(getAccountByName)
-    LiveData<Account> getAccountByName$(String accountName);
-
-    @Query(getAccountByName)
-    Account getAccountByName(String accountName);
+    String getAccountById = "SELECT * FROM Account WHERE ID = :accountId";
 
     @Query(getAccounts)
     LiveData<List<Account>> getAccounts$();
@@ -43,11 +29,17 @@ public interface AccountDao {
     @Query(getAccounts)
     List<Account> getAccounts();
 
-    @Query(countAccounts)
-    LiveData<Integer> countAccounts$();
+    @Query(getAccountById)
+    LiveData<Account> getAccountById$(long accountId);
 
-    @Query(countAccounts)
-    Integer countAccounts();
+    @Query(getAccountById)
+    Account getAccountById(long accountId);
+
+    @Query("SELECT * FROM Account WHERE ACCOUNTNAME = :accountName")
+    Account getAccountByName(String accountName);
+
+    @Query("SELECT COUNT(*) FROM Account")
+    LiveData<Integer> countAccounts$();
 
     @Query("UPDATE Account SET COLOR = :color, TEXTCOLOR = :textColor WHERE id = :id")
     void updateBrand(long id, @ColorInt Integer color, @ColorInt Integer textColor);

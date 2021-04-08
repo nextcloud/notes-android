@@ -58,7 +58,7 @@ public class NotesDaoTest {
     }
 
     @Test
-    public void deleteNotebyId() throws InterruptedException {
+    public void deleteNoteById() throws InterruptedException {
         db.getNoteDao().addNote(new Note(1, 1L, Calendar.getInstance(), "T", "C", "", false, "1", LOCAL_DELETED, account.getId(), "", 0));
         db.getNoteDao().deleteByNoteId(1, LOCAL_DELETED);
         assertNull(db.getNoteDao().getNoteById(1));
