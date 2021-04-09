@@ -12,6 +12,7 @@ import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,10 +27,14 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 
+import static it.niedermann.owncloud.notes.persistence.NotesDatabaseTestUtil.getOrAwaitValue;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.VOID;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = {Build.VERSION_CODES.P})
@@ -89,4 +94,50 @@ public class NotesDatabaseTest {
         assertEquals(Long.valueOf(8L), idMapOfSecondAccount.get(1008L));
     }
 
+    @Test
+    public void testAddAccount() throws NextcloudHttpRequestFailedException, InterruptedException {
+        final Account createdAccount = getOrAwaitValue(db.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {}}", null)));
+        assertEquals("https://äöüß.example.com", createdAccount.getUrl());
+        assertEquals("彼得", createdAccount.getUserName());
+        assertEquals("彼得@äöüß.example.com", createdAccount.getAccountName());
+    }
+
+    @Test
+    public void testAddNote() {
+        final Note createdNote = db.addNote(account.getId(), new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123"));
+        assertEquals(LOCAL_EDITED, createdNote.getStatus());
+        assertEquals("MyContent", createdNote.getExcerpt());
+    }
+
+    @Test
+    public void updateApiVersion() {
+        assertThrows(IllegalArgumentException.class, () -> db.updateApiVersion(account.getId(), ""));
+        assertThrows(IllegalArgumentException.class, () -> db.updateApiVersion(account.getId(), "asdf"));
+        assertThrows(IllegalArgumentException.class, () -> db.updateApiVersion(account.getId(), "{}"));
+
+        db.updateApiVersion(account.getId(), null);
+        assertNull(db.getAccountDao().getAccountById(account.getId()).getApiVersion());
+        db.updateApiVersion(account.getId(), "[]");
+        assertNull(db.getAccountDao().getAccountById(account.getId()).getApiVersion());
+
+        db.updateApiVersion(account.getId(), "[1.0]");
+        assertEquals("[1.0]", db.getAccountDao().getAccountById(account.getId()).getApiVersion());
+        db.updateApiVersion(account.getId(), "[0.2, 1.0]");
+        assertEquals("[0.2, 1.0]", db.getAccountDao().getAccountById(account.getId()).getApiVersion());
+
+        // TODO is this really indented?
+        db.updateApiVersion(account.getId(), "[0.2, abc]");
+        assertEquals("[0.2, abc]", db.getAccountDao().getAccountById(account.getId()).getApiVersion());
+    }
+
+    @Test
+    @Ignore("Need to find a way to stub deleteAndSync method")
+    public void moveNoteToAnotherAccount() throws InterruptedException {
+        final Note noteToMove = db.getNoteDao().getNoteById(1);
+        assertEquals(3, db.getNoteDao().getLocalModifiedNotes(secondAccount.getId()).size());
+        final Note movedNote = getOrAwaitValue(db.moveNoteToAnotherAccount(secondAccount, noteToMove));
+        assertEquals(4, db.getNoteDao().getLocalModifiedNotes(secondAccount.getId()).size());
+        assertEquals(LOCAL_EDITED, movedNote.getStatus());
+        // TODO assert deleteAndSync has been called
+    }
 }

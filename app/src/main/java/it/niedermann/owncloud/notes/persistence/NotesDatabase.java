@@ -166,7 +166,7 @@ public abstract class NotesDatabase extends RoomDatabase {
     @NonNull
     @MainThread
     public LiveData<Note> addNoteAndSync(Account account, Note note) {
-        Note entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
+        final Note entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
         final MutableLiveData<Note> ret = new MutableLiveData<>();
         new Thread(() -> ret.postValue(addNote(account.getId(), entity))).start();
         return map(ret, newNote -> {
@@ -178,36 +178,22 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     /**
      * Inserts a note directly into the Database.
+     * Excerpt will be generated and {@link DBStatus#LOCAL_EDITED} will be applied.
      * No Synchronisation will be triggered! Use addNoteAndSync()!
      *
-     * @param note Note to be added. Locally created Notes must be of Type {@link Note} (with {@link DBStatus#LOCAL_EDITED})!
+     * @param note {@link Note} to be added.
      */
     @NonNull
     @WorkerThread
-    public Note addNote(long accountId, Note note) {
-        Note entity = new Note();
-        if (note.getId() > 0) {
-            entity.setId(note.getId());
-            entity.setStatus(note.getStatus());
-            entity.setAccountId(note.getAccountId());
-            entity.setExcerpt(note.getExcerpt());
-        } else {
-            entity.setStatus(DBStatus.LOCAL_EDITED);
-            entity.setAccountId(accountId);
-            entity.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
-        }
-        entity.setRemoteId(note.getRemoteId());
-        entity.setTitle(note.getTitle());
-        entity.setModified(note.getModified());
-        entity.setContent(note.getContent());
-        entity.setFavorite(note.getFavorite());
-        entity.setCategory(note.getCategory());
-        entity.setETag(note.getETag());
-        return getNoteDao().getNoteById(getNoteDao().addNote(entity));
+    public Note addNote(long accountId, @NonNull Note note) {
+        note.setStatus(DBStatus.LOCAL_EDITED);
+        note.setAccountId(accountId);
+        note.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
+        return getNoteDao().getNoteById(getNoteDao().addNote(note));
     }
 
     @MainThread
-    public LiveData<Note> moveNoteToAnotherAccount(Account account, Note note) {
+    public LiveData<Note> moveNoteToAnotherAccount(Account account, @NonNull Note note) {
         return switchMap(getNoteDao().getContent$(note.getId()), (content) -> {
             final Note fullNote = new Note(null, note.getModified(), note.getTitle(), content, note.getCategory(), note.getFavorite(), null);
             deleteNoteAndSync(account, note.getId());
