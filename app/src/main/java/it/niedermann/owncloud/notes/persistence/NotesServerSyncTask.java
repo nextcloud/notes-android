@@ -166,7 +166,8 @@ abstract class NotesServerSyncTask extends Thread {
             final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
             final Calendar modified = localAccount.getModified();
             final long modifiedForServer = modified == null ? 0 : modified.getTimeInMillis() / 1_000;
-            final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, modifiedForServer, localAccount.getETag());
+            // FIXME re-reading the localAccount is only a workaround for a not-up-to-date eTag in localAccount.
+            final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, modifiedForServer, db.getAccountDao().getAccountById(localAccount.getId()).getETag());
             List<Note> remoteNotes = response.getNotes();
             Set<Long> remoteIDs = new HashSet<>();
             // pull remote changes: update or create each remote note
