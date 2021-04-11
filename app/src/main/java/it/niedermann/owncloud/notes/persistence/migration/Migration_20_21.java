@@ -40,17 +40,17 @@ public final class Migration_20_21 extends Migration {
     }
 
     private static void dropOldIndices(@NonNull SupportSQLiteDatabase db) {
-        db.execSQL("DROP INDEX ACCOUNTS_URL_idx");
-        db.execSQL("DROP INDEX ACCOUNTS_USERNAME_idx");
-        db.execSQL("DROP INDEX ACCOUNTS_ACCOUNT_NAME_idx");
-        db.execSQL("DROP INDEX ACCOUNTS_ETAG_idx");
-        db.execSQL("DROP INDEX ACCOUNTS_MODIFIED_idx");
-        db.execSQL("DROP INDEX NOTES_REMOTEID_idx");
-        db.execSQL("DROP INDEX NOTES_ACCOUNT_ID_idx");
-        db.execSQL("DROP INDEX NOTES_STATUS_idx");
-        db.execSQL("DROP INDEX NOTES_FAVORITE_idx");
-        db.execSQL("DROP INDEX NOTES_CATEGORY_idx");
-        db.execSQL("DROP INDEX NOTES_MODIFIED_idx");
+        db.execSQL("DROP INDEX IF EXISTS ACCOUNTS_URL_idx");
+        db.execSQL("DROP INDEX IF EXISTS ACCOUNTS_USERNAME_idx");
+        db.execSQL("DROP INDEX IF EXISTS ACCOUNTS_ACCOUNT_NAME_idx");
+        db.execSQL("DROP INDEX IF EXISTS ACCOUNTS_ETAG_idx");
+        db.execSQL("DROP INDEX IF EXISTS ACCOUNTS_MODIFIED_idx");
+        db.execSQL("DROP INDEX IF EXISTS NOTES_REMOTEID_idx");
+        db.execSQL("DROP INDEX IF EXISTS NOTES_ACCOUNT_ID_idx");
+        db.execSQL("DROP INDEX IF EXISTS NOTES_STATUS_idx");
+        db.execSQL("DROP INDEX IF EXISTS NOTES_FAVORITE_idx");
+        db.execSQL("DROP INDEX IF EXISTS NOTES_CATEGORY_idx");
+        db.execSQL("DROP INDEX IF EXISTS NOTES_MODIFIED_idx");
     }
 
     private static void createNewTables(@NonNull SupportSQLiteDatabase db) {
