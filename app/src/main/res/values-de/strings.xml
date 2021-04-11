@@ -246,4 +246,5 @@
     <string name="no_account_configured_yet">Bislang kein Konto eingerichtet</string>
     <string name="no_other_accounts">Sie haben bislang keine weiteren Konten eingerichtet.</string>
     <string name="context_based_formatting">Popup für die kontextbasierte Formatierung</string>
+    <string name="delete_checked_items">Markierte Elemente entfernen</string>
 </resources>

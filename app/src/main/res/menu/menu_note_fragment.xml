@@ -35,6 +35,11 @@
         android:title="@string/menu_share"
         app:showAsAction="never" />
     <item
+        android:id="@+id/menu_remove_checked"
+        android:orderInCategory="120"
+        android:title="@string/delete_checked_items"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menu_move"
         android:icon="@drawable/ic_send_grey600_24dp"
         android:orderInCategory="120"

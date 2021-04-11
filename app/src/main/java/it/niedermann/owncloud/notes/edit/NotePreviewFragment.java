@@ -10,6 +10,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
@@ -165,6 +166,36 @@ public class NotePreviewFragment extends SearchableBaseNoteFragment implements O
             binding.swiperefreshlayout.setRefreshing(false);
             Toast.makeText(requireContext(), getString(R.string.error_sync, getString(R.string.error_no_network)), Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.menu_remove_checked) {
+            /*
+            Example markdown string: "- [x] Item1\n    - [ ] Item2\n- [x] Item3"
+
+            Regex explanation:
+            (?:term1|term2)                 --> (?:...):    do not generate groups and search for term1 OR term2
+
+            ^\s*[-*] \[[xX]\] [^\n]*\n?\r?  --> "^":        Pattern starts from the beginning of the string
+                                                "\s*":      any number of blanks
+                                                "[-*]":     followed by an "-" or an "*"
+                                                "\[[xX]\]": "[x]" or "[X]"
+                                                "[^\n]*":   any character except a new line
+                                                "\n?\r?":   optional newline and carriage return at the end
+                                                ==> removes a checked item in the first line e.g. "- [x] Item1", "* [X] Item2"
+
+            \n\r?\s*[-*] \[[xX]\] [^\n]*    --> "\n\r?":    Pattern starts after a new line with optional carriage return
+                                                "\s*":          any number of blanks
+                                                "[-*]":         followed by an "-" or an "*"
+                                                "\[[xX]\]":     "[x]" or "[X]"
+                                                "[^\n]*":       any characters except a new line
+                                                ==> removes the checked items after the first line "- [x] Item1", "* [X] Item2"
+            */
+            binding.singleNoteContent.setMarkdownString(note.getContent().replaceAll("(?:^\\s*[-*] \\[[xX]\\] [^\n]*\n?\r?|\n\r?\\s*[-*] \\[[xX]\\] [^\n]*)", ""));
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
