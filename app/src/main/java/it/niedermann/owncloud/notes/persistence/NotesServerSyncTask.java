@@ -9,7 +9,6 @@ import com.nextcloud.android.sso.exceptions.TokenMismatchException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -164,12 +163,10 @@ abstract class NotesServerSyncTask extends Thread {
         Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
         try {
             final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
-            final Calendar modified = localAccount.getModified();
-            final long modifiedForServer = modified == null ? 0 : modified.getTimeInMillis() / 1_000;
             // FIXME re-reading the localAccount is only a workaround for a not-up-to-date eTag in localAccount.
-            final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, modifiedForServer, db.getAccountDao().getAccountById(localAccount.getId()).getETag());
-            List<Note> remoteNotes = response.getNotes();
-            Set<Long> remoteIDs = new HashSet<>();
+            final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), db.getAccountDao().getAccountById(localAccount.getId()).getETag());
+            final List<Note> remoteNotes = response.getNotes();
+            final Set<Long> remoteIDs = new HashSet<>();
             // pull remote changes: update or create each remote note
             for (Note remoteNote : remoteNotes) {
                 Log.v(TAG, "   Process Remote Note: " + remoteNote);
@@ -201,9 +198,7 @@ abstract class NotesServerSyncTask extends Thread {
 
             // update ETag and Last-Modified in order to reduce size of next response
             localAccount.setETag(response.getETag());
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(response.getLastModified());
-            localAccount.setModified(calendar);
+            localAccount.setModified(response.getLastModified());
             db.getAccountDao().updateETag(localAccount.getId(), localAccount.getETag());
             db.getAccountDao().updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
             try {

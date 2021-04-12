@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -90,13 +91,14 @@ public abstract class NotesClient {
 
     /**
      * Gets the list of notes from the server.
-     * @param ssoAccount Account to be used
+     *
+     * @param ssoAccount   Account to be used
      * @param lastModified Last modified time of a former response (Unix timestamp in seconds!). All notes older than this time will be skipped.
-     * @param lastETag ETag of a former response. If nothing changed, the response will be 304 NOT MODIFIED.
+     * @param lastETag     ETag of a former response. If nothing changed, the response will be 304 NOT MODIFIED.
      * @return list of notes
      * @throws Exception
      */
-    abstract NotesResponse getNotes(SingleSignOnAccount ssoAccount, long lastModified, String lastETag) throws Exception;
+    abstract NotesResponse getNotes(SingleSignOnAccount ssoAccount, Calendar lastModified, String lastETag) throws Exception;
 
     abstract NoteResponse createNote(SingleSignOnAccount ssoAccount, Note note) throws Exception;
 
@@ -111,9 +113,9 @@ public abstract class NotesClient {
         private final String content;
         private final String etag;
         private final String supportedApiVersions;
-        private final long lastModified;
+        private final Calendar lastModified;
 
-        ResponseData(@NonNull String content, String etag, long lastModified, @Nullable String supportedApiVersions) {
+        ResponseData(@NonNull String content, String etag, @NonNull Calendar lastModified, @Nullable String supportedApiVersions) {
             this.content = content;
             this.etag = etag;
             this.lastModified = lastModified;
@@ -128,7 +130,7 @@ public abstract class NotesClient {
             return etag;
         }
 
-        public long getLastModified() {
+        public Calendar getLastModified() {
             return lastModified;
         }
 
@@ -188,10 +190,11 @@ public abstract class NotesClient {
                 etag = Objects.requireNonNull(eTagHeader.getValue()).replace("\"", "");
             }
 
-            long lastModified = 0;
+            final Calendar lastModified = Calendar.getInstance();
+            lastModified.setTimeInMillis(0);
             final AidlNetworkRequest.PlainHeader lastModifiedHeader = response.getPlainHeader(HEADER_KEY_LAST_MODIFIED);
             if (lastModifiedHeader != null)
-                lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1_000;
+                lastModified.setTimeInMillis(Date.parse(lastModifiedHeader.getValue()));
             Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
 
             String supportedApiVersions = null;

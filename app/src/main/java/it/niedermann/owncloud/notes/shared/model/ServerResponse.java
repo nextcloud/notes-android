@@ -59,7 +59,7 @@ public class ServerResponse {
         return response.getETag();
     }
 
-    public long getLastModified() {
+    public Calendar getLastModified() {
         return response.getLastModified();
     }
 

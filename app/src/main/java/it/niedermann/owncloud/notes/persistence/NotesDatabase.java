@@ -178,15 +178,16 @@ public abstract class NotesDatabase extends RoomDatabase {
 
     /**
      * Inserts a note directly into the Database.
-     * Excerpt will be generated and {@link DBStatus#LOCAL_EDITED} will be applied.
-     * No Synchronisation will be triggered! Use addNoteAndSync()!
+     * Excerpt will be generated, {@link DBStatus#LOCAL_EDITED} will be applied in case the note has
+     * already has a local ID, otherwise {@link DBStatus#VOID} will be applied.
+     * No Synchronisation will be triggered! Use {@link #addNoteAndSync(Account, Note)}!
      *
      * @param note {@link Note} to be added.
      */
     @NonNull
     @WorkerThread
     public Note addNote(long accountId, @NonNull Note note) {
-        note.setStatus(DBStatus.LOCAL_EDITED);
+        note.setStatus(note.getId() > 0 ? DBStatus.LOCAL_EDITED : DBStatus.VOID);
         note.setAccountId(accountId);
         note.setExcerpt(generateNoteExcerpt(note.getContent(), note.getTitle()));
         return getNoteDao().getNoteById(getNoteDao().addNote(note));

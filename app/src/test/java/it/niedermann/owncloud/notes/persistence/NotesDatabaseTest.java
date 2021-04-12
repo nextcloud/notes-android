@@ -104,9 +104,15 @@ public class NotesDatabaseTest {
 
     @Test
     public void testAddNote() {
-        final Note createdNote = db.addNote(account.getId(), new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123"));
-        assertEquals(LOCAL_EDITED, createdNote.getStatus());
-        assertEquals("MyContent", createdNote.getExcerpt());
+        final Note localNote = new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123");
+        localNote.setId(99);
+        final Note createdNoteFromLocal = db.addNote(account.getId(), localNote);
+        assertEquals(LOCAL_EDITED, createdNoteFromLocal.getStatus());
+        assertEquals("MyContent", createdNoteFromLocal.getExcerpt());
+
+        final Note createdNoteFromRemote = db.addNote(account.getId(), new Note(null, Calendar.getInstance(), "Fancy Title", "MyContent", "Samples", false, "123"));
+        assertEquals(VOID, createdNoteFromRemote.getStatus());
+        assertEquals("MyContent", createdNoteFromRemote.getExcerpt());
     }
 
     @Test

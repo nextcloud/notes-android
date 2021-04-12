@@ -9,6 +9,7 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,9 +26,9 @@ public class NotesClientV1 extends NotesClient {
         super(appContext);
     }
 
-    NotesResponse getNotes(SingleSignOnAccount ssoAccount, long lastModified, String lastETag) throws Exception {
-        Map<String, String> parameter = new HashMap<>();
-        parameter.put(GET_PARAM_KEY_PRUNE_BEFORE, Long.toString(lastModified));
+    NotesResponse getNotes(SingleSignOnAccount ssoAccount, Calendar lastModified, String lastETag) throws Exception {
+        final Map<String, String> parameter = new HashMap<>();
+        parameter.put(GET_PARAM_KEY_PRUNE_BEFORE, Long.toString(lastModified == null ? 0 : lastModified.getTimeInMillis() / 1_000));
         return new NotesResponse(requestServer(ssoAccount, "notes", METHOD_GET, parameter, null, lastETag));
     }
 
