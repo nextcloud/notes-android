@@ -25,6 +25,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.DBStatus;
 
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_DELETED;
 import static it.niedermann.owncloud.notes.shared.model.DBStatus.LOCAL_EDITED;
@@ -387,6 +388,27 @@ public class NotesDaoTest {
         assertEquals(0, NotesDatabaseTestUtil.getOrAwaitValue(db.getNoteDao().searchCategories$(secondAccount.getId(), "T%")).size());
     }
 
+    @Test
+    public void searchRecentByModified() throws NextcloudHttpRequestFailedException {
+        final Account secondAccount = setupSecondAccountAndTestNotes();
+        final List<Note> result = db.getNoteDao().searchRecentByModified(secondAccount.getId(), "T");
+        assertEquals(5, result.size());
+        for (Note note : result) {
+            assertNotEquals(DBStatus.LOCAL_DELETED, note.getStatus());
+            assertEquals(secondAccount.getId(), note.getAccountId());
+            assertTrue(note.getTitle().toLowerCase().contains("t") || note.getTitle().toLowerCase().contains("t"));
+            assertTrue("should be sorted by favorite", isSortedByFavorite(result));
+        }
+    }
+
+    private static boolean isSortedByFavorite(List<Note> notes) {
+        for (int i = 0; i < notes.size() - 1; ++i) {
+            if (Boolean.compare(notes.get(i).getFavorite(), notes.get(i + 1).getFavorite()) < 0)
+                return false;
+        }
+        return true;
+    }
+
     private Account setupSecondAccount() throws NextcloudHttpRequestFailedException {
         db.addAccount("https://example.org", "test", "test@example.org", new Capabilities("{ocs: {}}", null));
         return db.getAccountDao().getAccountByName("test@example.org");
@@ -410,10 +432,10 @@ public class NotesDaoTest {
 
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "Movies", false, null, VOID, secondAccount.getId(), "", 0),
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "Movies", false, null, LOCAL_EDITED, secondAccount.getId(), "", 0),
-                new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "Movies", false, null, LOCAL_EDITED, secondAccount.getId(), "", 0),
+                new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "t", "C", "Movies", false, null, LOCAL_EDITED, secondAccount.getId(), "", 0),
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "Movies", false, null, LOCAL_EDITED, secondAccount.getId(), "", 0),
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "Music", true, null, VOID, secondAccount.getId(), "", 0),
-                new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "Music", true, null, LOCAL_DELETED, secondAccount.getId(), "", 0),
+                new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "t", "C", "Music", true, null, LOCAL_DELETED, secondAccount.getId(), "", 0),
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "ToDo", true, null, LOCAL_DELETED, secondAccount.getId(), "", 0),
                 new Note(uniqueId++, uniqueId++, Calendar.getInstance(), "T", "C", "ToDo", true, null, LOCAL_DELETED, secondAccount.getId(), "", 0),
                 new Note(uniqueId++, uniqueId, Calendar.getInstance(), "T", "C", "ToDo", true, null, LOCAL_DELETED, secondAccount.getId(), "", 0)
