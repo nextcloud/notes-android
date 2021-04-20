@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.main;
 
+import android.accounts.NetworkErrorException;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandingUtil;
+import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
@@ -40,6 +42,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.Item;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 
@@ -366,32 +369,83 @@ public class MainViewModel extends AndroidViewModel {
         return items;
     }
 
-    /**
-     * @return <code>true</code>, if a synchronization could successfully be triggered, <code>false</code> if not.
-     */
-    public LiveData<Boolean> synchronize() {
-        return switchMap(getCurrentAccount(), currentAccount -> {
-            if (currentAccount == null) {
-                return new MutableLiveData<>(false);
-            } else {
-                Log.v(TAG, "[synchronize] - currentAccount: " + currentAccount.getAccountName());
-                NotesServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
-                if (!syncHelper.isSyncPossible()) {
-                    syncHelper.updateNetworkStatus();
-                }
-                if (syncHelper.isSyncPossible()) {
-                    syncHelper.scheduleSync(currentAccount, false);
-                    return new MutableLiveData<>(true);
-                } else { // Sync is not possible
-                    if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
-                        Log.d(TAG, "Network is connected, but sync is not possible");
-                    } else {
-                        Log.d(TAG, "Sync is not possible, because network is not connected");
-                    }
-                }
-                return new MutableLiveData<>(false);
+    public void synchronizeCapabilitiesAndNotes(@NonNull Account localAccount, @NonNull IResponseCallback callback) {
+        Log.i(TAG, "[synchronizeCapabilitiesAndNotes] Synchronize capabilities for " + localAccount.getAccountName());
+        synchronizeCapabilities(localAccount, new IResponseCallback() {
+            @Override
+            public void onSuccess() {
+                Log.i(TAG, "[synchronizeCapabilitiesAndNotes] Synchronize notes for " + localAccount.getAccountName());
+                synchronizeNotes(localAccount, callback);
+            }
+
+            @Override
+            public void onError(@NonNull Throwable t) {
+                callback.onError(t);
             }
         });
+    }
+
+    /**
+     * Updates the network status if necessary and pulls the latest {@link Capabilities} of the given {@param localAccount}
+     */
+    public void synchronizeCapabilities(@NonNull Account localAccount, @NonNull IResponseCallback callback) {
+        new Thread(() -> {
+            final NotesServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
+            if (!syncHelper.isSyncPossible()) {
+                syncHelper.updateNetworkStatus();
+            }
+            if (syncHelper.isSyncPossible()) {
+                try {
+                    final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplication(), AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName()), localAccount.getCapabilitiesETag());
+                    db.getAccountDao().updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
+                    db.getAccountDao().updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
+                    localAccount.setColor(capabilities.getColor());
+                    localAccount.setTextColor(capabilities.getTextColor());
+                    BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
+                    db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                    callback.onSuccess();
+                } catch (NextcloudFilesAppAccountNotFoundException e) {
+                    db.getAccountDao().deleteAccount(localAccount);
+                    callback.onError(e);
+                } catch (Exception e) {
+                    if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
+                        Log.i(TAG, "[synchronizeCapabilities] Capabilities not modified.");
+                        callback.onSuccess();
+                    } else {
+                        callback.onError(e);
+                    }
+                }
+            } else {
+                if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
+                    callback.onError(new IntendedOfflineException("Network is connected, but sync is not possible."));
+                } else {
+                    callback.onError(new NetworkErrorException("Sync is not possible, because network is not connected."));
+                }
+            }
+        }, "SYNC_CAPABILITIES").start();
+    }
+
+    /**
+     * Updates the network status if necessary and pulls the latest notes of the given {@param localAccount}
+     */
+    public void synchronizeNotes(@NonNull Account currentAccount, @NonNull IResponseCallback callback) {
+        new Thread(() -> {
+            Log.v(TAG, "[synchronize] - currentAccount: " + currentAccount.getAccountName());
+            final NotesServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
+            if (!syncHelper.isSyncPossible()) {
+                syncHelper.updateNetworkStatus();
+            }
+            if (syncHelper.isSyncPossible()) {
+                syncHelper.scheduleSync(currentAccount, false);
+                callback.onSuccess();
+            } else { // Sync is not possible
+                if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
+                    callback.onError(new IntendedOfflineException("Network is connected, but sync is not possible."));
+                } else {
+                    callback.onError(new NetworkErrorException("Sync is not possible, because network is not connected."));
+                }
+            }
+        }, "SYNC_NOTES").start();
     }
 
     public LiveData<Boolean> getSyncStatus() {
@@ -404,55 +458,6 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<Boolean> hasMultipleAccountsConfigured() {
         return map(db.getAccountDao().countAccounts$(), (counter) -> counter != null && counter > 1);
-    }
-
-    public LiveData<Boolean> performFullSynchronizationForCurrentAccount() {
-        final MutableLiveData<Boolean> insufficientInformation = new MutableLiveData<>();
-        return switchMap(getCurrentAccount(), localAccount -> {
-            Log.v(TAG, "[performFullSynchronizationForCurrentAccount] - currentAccount: " + localAccount);
-            if (localAccount == null) {
-                return insufficientInformation;
-            } else {
-                Log.i(TAG, "[performFullSynchronizationForCurrentAccount] Refreshing capabilities for " + localAccount.getAccountName());
-                final MutableLiveData<Boolean> syncCapabilitiesLiveData = new MutableLiveData<>();
-                new Thread(() -> {
-                    final Capabilities capabilities;
-                    try {
-                        capabilities = CapabilitiesClient.getCapabilities(getApplication(), AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName()), localAccount.getCapabilitiesETag());
-                        db.getAccountDao().updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
-                        db.getAccountDao().updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
-                        localAccount.setColor(capabilities.getColor());
-                        localAccount.setTextColor(capabilities.getTextColor());
-                        BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
-                        db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
-                        Log.i(TAG, capabilities.toString());
-                        syncCapabilitiesLiveData.postValue(true);
-                    } catch (NextcloudFilesAppAccountNotFoundException e) {
-                        e.printStackTrace();
-                        db.getAccountDao().deleteAccount(localAccount);
-                        syncCapabilitiesLiveData.postValue(false);
-                    } catch (Exception e) {
-                        if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
-                            Log.i(TAG, "[performFullSynchronizationForCurrentAccount] Capabilities not modified.");
-                        } else {
-                            e.printStackTrace();
-                        }
-                        // Capabilities couldn't be update correctly, we can still try to sync the notes list.
-                        syncCapabilitiesLiveData.postValue(true);
-                    }
-
-                }).start();
-                return switchMap(syncCapabilitiesLiveData, capabilitiesSyncedSuccessfully -> {
-                    if (Boolean.TRUE.equals(capabilitiesSyncedSuccessfully)) {
-                        Log.v(TAG, "[performFullSynchronizationForCurrentAccount] Capabilities refreshed successfully - synchronize notes for " + localAccount.getAccountName());
-                        return synchronize();
-                    } else {
-                        Log.w(TAG, "[performFullSynchronizationForCurrentAccount] Capabilities could not be refreshed correctly - end synchronization process here.");
-                        return new MutableLiveData<>(true);
-                    }
-                });
-            }
-        });
     }
 
     @WorkerThread

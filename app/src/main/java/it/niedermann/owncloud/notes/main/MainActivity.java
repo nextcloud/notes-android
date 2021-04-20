@@ -58,6 +58,7 @@ import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment;
 import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
+import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.importaccount.ImportAccountActivity;
 import it.niedermann.owncloud.notes.main.items.ItemAdapter;
 import it.niedermann.owncloud.notes.main.items.grid.GridItemDecoration;
@@ -74,6 +75,7 @@ import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.NoteClickListener;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
@@ -265,11 +267,21 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     .apply(RequestOptions.circleCropTransform())
                     .into(activityBinding.launchAccountSwitcher);
 
-            final LiveData<Boolean> syncLiveData = mainViewModel.synchronize();
-            syncLiveData.observe(this, (syncSuccess) -> {
-                syncLiveData.removeObservers(this);
-                if (!syncSuccess) {
-                    BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+            mainViewModel.synchronizeNotes(nextAccount, new IResponseCallback() {
+                @Override
+                public void onSuccess() {
+                    Log.d(TAG, "Successfully synchronized notes for " + nextAccount.getAccountName());
+                }
+
+                @Override
+                public void onError(@NonNull Throwable t) {
+                    runOnUiThread(() -> {
+                        if (t.getClass() == IntendedOfflineException.class || t instanceof IntendedOfflineException) {
+                            Log.i(TAG, "Capabilities and notes not updated because " + nextAccount.getAccountName() + " is offline by intention.");
+                        } else {
+                            BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                        }
+                    });
                 }
             });
             fabCreate.show();
@@ -294,12 +306,20 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
 
     @Override
     protected void onResume() {
-        final LiveData<Boolean> syncLiveData = mainViewModel.synchronize();
-        syncLiveData.observe(this, (syncSuccess) -> {
-            syncLiveData.removeObservers(this);
-            if (!syncSuccess) {
-                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
-            }
+        final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();
+        accountLiveData.observe(this, (currentAccount) -> {
+            accountLiveData.removeObservers(this);
+            mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback() {
+                @Override
+                public void onSuccess() {
+                    Log.d(TAG, "Successfully synchronized notes for " + currentAccount.getAccountName());
+                }
+
+                @Override
+                public void onError(@NonNull Throwable t) {
+                    t.printStackTrace();
+                }
+            });
         });
         super.onResume();
     }
@@ -404,13 +424,28 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             new Thread(() -> {
                 Log.i(TAG, "Clearing Glide disk cache");
                 Glide.get(getApplicationContext()).clearDiskCache();
-            }).start();
-            final LiveData<Boolean> syncLiveData = mainViewModel.performFullSynchronizationForCurrentAccount();
-            final Observer<Boolean> syncObserver = syncSuccess -> {
-                if (!syncSuccess) {
-                    BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
-                }
+            }, "CLEAR_GLIDE_CACHE").start();
+            final LiveData<Account> syncLiveData = mainViewModel.getCurrentAccount();
+            final Observer<Account> syncObserver = currentAccount -> {
                 syncLiveData.removeObservers(this);
+                mainViewModel.synchronizeCapabilitiesAndNotes(currentAccount, new IResponseCallback() {
+                    @Override
+                    public void onSuccess() {
+                        Log.d(TAG, "Successfully synchronized capabilities and notes for " + currentAccount.getAccountName());
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable t) {
+                        runOnUiThread(() -> {
+                            swipeRefreshLayout.setRefreshing(false);
+                            if (t.getClass() == IntendedOfflineException.class || t instanceof IntendedOfflineException) {
+                                Log.i(TAG, "Capabilities and notes not updated because " + currentAccount.getAccountName() + " is offline by intention.");
+                            } else {
+                                BrandedSnackbar.make(coordinatorLayout, getString(R.string.error_sync, getString(R.string.error_no_network)), Snackbar.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                });
             };
             syncLiveData.observe(this, syncObserver);
         });
