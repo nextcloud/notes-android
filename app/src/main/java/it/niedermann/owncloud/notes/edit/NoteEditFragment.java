@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
 import android.text.Layout;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
@@ -15,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ScrollView;
 
@@ -143,17 +143,17 @@ public class NoteEditFragment extends SearchableBaseNoteFragment {
     @Override
     protected void onNoteLoaded(Note note) {
         super.onNoteLoaded(note);
-        if (note.getContent().isEmpty()) {
-            binding.editContent.requestFocus();
+        if (TextUtils.isEmpty(note.getContent())) {
+            binding.editContent.post(() -> {
+                binding.editContent.requestFocus();
 
-            requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-            final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm != null) {
-                imm.showSoftInput(getView(), InputMethodManager.SHOW_IMPLICIT);
-            } else {
-                Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
-            }
+                final InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.showSoftInput(binding.editContent, InputMethodManager.SHOW_IMPLICIT);
+                } else {
+                    Log.e(TAG, InputMethodManager.class.getSimpleName() + " is null.");
+                }
+            });
         }
 
         binding.editContent.setMarkdownString(note.getContent());
