@@ -71,6 +71,6 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
             } catch (SQLException e) {
                 Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
-        });
+        }).start();
     }
 }
