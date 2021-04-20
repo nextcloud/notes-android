@@ -17,12 +17,6 @@ import it.niedermann.owncloud.notes.widget.AbstractWidgetData;
                         parentColumns = "id",
                         childColumns = "accountId",
                         onDelete = ForeignKey.CASCADE
-                ),
-                @ForeignKey(
-                        entity = CategoryOptions.class,
-                        parentColumns = {"accountId", "category"},
-                        childColumns = {"accountId", "category"},
-                        onDelete = ForeignKey.CASCADE
                 )
         },
         indices = {

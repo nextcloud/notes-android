@@ -23,7 +23,9 @@ import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.persistence.entity.CategoryOptions;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
+import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
