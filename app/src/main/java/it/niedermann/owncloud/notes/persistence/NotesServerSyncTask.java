@@ -163,8 +163,13 @@ abstract class NotesServerSyncTask extends Thread {
         Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
         try {
             final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
+
             // FIXME re-reading the localAccount is only a workaround for a not-up-to-date eTag in localAccount.
-            final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), db.getAccountDao().getAccountById(localAccount.getId()).getETag());
+            final Account accountFromDatabase = db.getAccountDao().getAccountById(localAccount.getId());
+            localAccount.setModified(accountFromDatabase.getModified());
+            localAccount.setETag(accountFromDatabase.getETag());
+
+            final ServerResponse.NotesResponse response = notesClient.getNotes(ssoAccount, localAccount.getModified(), localAccount.getETag());
             final List<Note> remoteNotes = response.getNotes();
             final Set<Long> remoteIDs = new HashSet<>();
             // pull remote changes: update or create each remote note
