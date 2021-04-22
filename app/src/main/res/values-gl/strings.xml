@@ -45,6 +45,8 @@
     <string name="settings_lock">Bloqueo de aplis (beta)</string>
     <string name="settings_lock_summary">Credenciais do dispositivo</string>
     <string name="settings_background_sync">Sincronización do traballo en segundo plano</string>
+    <string name="settings_prevent_screen_capture">Evitar a captura da pantalla</string>
+
     <string name="error_sync">Produciuse un fallo na sincronización: %1$s</string>
     <string name="error_synchronization">Produciuse un fallo na sincronización</string>
     <string name="error_no_network">Sen conexión de rede</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">Xestión da marca</string>
     <string name="settings_gridview">Ver como grella</string>
     <string name="simple_security">Seguridade</string>
+    <string name="appearance_and_behavior">Aparencia e comportamento</string>
     <string name="simple_synchronization">Sincronización</string>
     <string name="simple_behavior">Comportamento</string>
     <string name="manage_accounts">Xestionar contas</string>

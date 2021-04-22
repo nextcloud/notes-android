@@ -45,7 +45,7 @@
     <string name="settings_lock">Blocco applicazione (Beta)</string>
     <string name="settings_lock_summary">Credenziali dispositivo</string>
     <string name="settings_background_sync">Sincronizzazione in background</string>
-    <string name="settings_prevent_screen_capture">Impedisci cattura schermo</string>
+    <string name="settings_prevent_screen_capture">Impedisci cattura dello schermo</string>
 
     <string name="error_sync">Sincronizzazione non riuscita: %1$s</string>
     <string name="error_synchronization">Sincronizzazione non riuscita</string>

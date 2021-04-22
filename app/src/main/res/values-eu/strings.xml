@@ -45,6 +45,8 @@
     <string name="settings_lock">Aplikazioen blokeoa (Beta)</string>
     <string name="settings_lock_summary">Gailuaren kredentzialak</string>
     <string name="settings_background_sync">Atzeko planoko sinkronizazioa</string>
+    <string name="settings_prevent_screen_capture">Saihestu pantaila argazkia</string>
+
     <string name="error_sync">Sinkronizazioak huts egin du: %1$s</string>
     <string name="error_synchronization">Sinkronizazioak huts egin du</string>
     <string name="error_no_network">Ez dago sare konexiorik</string>
@@ -136,6 +138,7 @@
     <string name="settings_branding">Marka</string>
     <string name="settings_gridview">Sareta ikuspegia</string>
     <string name="simple_security">Segurtasuna</string>
+    <string name="appearance_and_behavior">Itxura eta portaera</string>
     <string name="simple_synchronization">Sinkronizazioa</string>
     <string name="simple_behavior">Portaera</string>
     <string name="manage_accounts">Kudeatu kontuak</string>
