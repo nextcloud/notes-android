@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
@@ -18,8 +19,7 @@ import java.util.List;
 
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemCategoryBinding;
-import it.niedermann.owncloud.notes.main.NavigationAdapter.CategoryNavigationItem;
-import it.niedermann.owncloud.notes.main.NavigationAdapter.NavigationItem;
+import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 
 public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -103,7 +103,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    void setCategoryList(List<CategoryNavigationItem> categories, String currentSearchString) {
+    void setCategoryList(List<NavigationItem.CategoryNavigationItem> categories, @Nullable String currentSearchString) {
         this.categories.clear();
         this.categories.addAll(categories);
         final NavigationItem clearItem = new NavigationItem(clearItemId, context.getString(R.string.no_category), 0, R.drawable.ic_clear_grey_24dp);

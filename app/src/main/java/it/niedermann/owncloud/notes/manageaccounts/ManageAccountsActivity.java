@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -32,18 +32,19 @@ import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.persistence.NotesClient;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.ServerSettings;
 
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP_MR1;
+import static androidx.lifecycle.Transformations.distinctUntilChanged;
 
 public class ManageAccountsActivity extends LockedActivity {
 
     private ActivityManageAccountsBinding binding;
     private ManageAccountAdapter adapter;
     private NotesDatabase db = null;
-    private final List<LocalAccount> localAccounts = new ArrayList<>();
+    private final List<Account> localAccounts = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,45 +57,54 @@ public class ManageAccountsActivity extends LockedActivity {
 
         db = NotesDatabase.getInstance(this);
 
-        localAccounts.clear();
-        localAccounts.addAll(db.getAccounts());
+        distinctUntilChanged(db.getAccountDao().getAccounts$()).observe(this, (localAccounts) -> {
 
-        adapter = new ManageAccountAdapter(
-                (localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()),
-                this::onAccountDelete,
-                this::onChangeNotesPath,
-                this::onChangeFileSuffix
-        );
-        adapter.setLocalAccounts(localAccounts);
-        try {
-            final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
-            if (ssoAccount != null) {
-                adapter.setCurrentLocalAccount(db.getLocalAccountByAccountName(ssoAccount.name));
+            this.localAccounts.clear();
+            this.localAccounts.addAll(localAccounts);
+
+            adapter = new ManageAccountAdapter(
+                    (localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()),
+                    this::onAccountDelete,
+                    this::onChangeNotesPath,
+                    this::onChangeFileSuffix
+            );
+            adapter.setLocalAccounts(localAccounts);
+            try {
+                final SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(this);
+                if (ssoAccount != null) {
+                    new Thread(() -> {
+                        final Account account = db.getAccountDao().getAccountByName(ssoAccount.name);
+                        runOnUiThread(() -> adapter.setCurrentLocalAccount(account));
+                    }).start();
+                }
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                e.printStackTrace();
             }
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
-        binding.accounts.setAdapter(adapter);
+            binding.accounts.setAdapter(adapter);
+        });
     }
 
-    private void onAccountDelete(@NonNull LocalAccount localAccount) {
-        db.deleteAccount(localAccount);
-        for (LocalAccount temp : localAccounts) {
-            if (temp.getId() == localAccount.getId()) {
-                localAccounts.remove(temp);
-                break;
+    private void onAccountDelete(@NonNull Account localAccount) {
+        final LiveData<Void> deleteLiveData = db.deleteAccount(localAccount);
+        deleteLiveData.observe(this, (v) -> {
+            for (Account temp : localAccounts) {
+                if (temp.getId() == localAccount.getId()) {
+                    localAccounts.remove(temp);
+                    break;
+                }
             }
-        }
-        if (localAccounts.size() > 0) {
-            SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
-            adapter.setCurrentLocalAccount(localAccounts.get(0));
-        } else {
-            setResult(AppCompatActivity.RESULT_FIRST_USER);
-            finish();
-        }
+            if (localAccounts.size() > 0) {
+                SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccounts.get(0).getAccountName());
+                adapter.setCurrentLocalAccount(localAccounts.get(0));
+            } else {
+                SingleAccountHelper.setCurrentAccount(getApplicationContext(), null);
+                finish();
+            }
+            deleteLiveData.removeObservers(this);
+        });
     }
 
-    private void onChangeNotesPath(@NonNull LocalAccount localAccount) {
+    private void onChangeNotesPath(@NonNull Account localAccount) {
         final NotesClient client = NotesClient.newInstance(localAccount.getPreferredApiVersion(), getApplicationContext());
         final EditText editText = new EditText(this);
         editText.setEnabled(false);
@@ -125,7 +135,7 @@ public class ManageAccountsActivity extends LockedActivity {
         }).start();
     }
 
-    private void onChangeFileSuffix(@NonNull LocalAccount localAccount) {
+    private void onChangeFileSuffix(@NonNull Account localAccount) {
         final NotesClient client = NotesClient.newInstance(localAccount.getPreferredApiVersion(), getApplicationContext());
         final Spinner spinner = new Spinner(this);
         spinner.setEnabled(false);

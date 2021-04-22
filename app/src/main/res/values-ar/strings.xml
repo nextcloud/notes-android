@@ -43,9 +43,7 @@
     <string name="settings_font_title">خط أحادي المسافة</string>
     <string name="settings_font_size">حجم الخط</string>
     <string name="settings_wifi_only">المزامنة فقط على الوايفاي</string>
-    <string name="settings_lock">الحماية بكلمة السر</string>
     <string name="settings_background_sync">مزامنة في خلفية النظام</string>
-
     <string name="error_sync">المزامنة فشلت \'%1$s\'</string>
     <string name="error_synchronization">المزامنة فشلت</string>
     <string name="error_no_network">لا يتوفر اتصال</string>
@@ -114,7 +112,6 @@
     <string name="add_category">اضف %1$s</string>
     <string name="simple_checkbox">مربع</string>
     <string name="unlock_notes">فتح قفل الملاحظات</string>
-    <string name="simple_beta">تجريبي</string>
     <string name="error_dialog_title">آه لا، ماذا الان؟🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">الرجاء محاولة اجبار اغلاق التطبيق واعادة تشغيله، ربما هنالك خطأ في الاتصال مع تطبيق نيكست كلاود nextcloud</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">اذا تكررت المشكلة، حاول تنظيف مساحة التخزين في التطبيقين كلاهما: 
@@ -139,9 +136,7 @@
     <string name="change_note_title">تغيير عنوان الملاحظة</string>
     <string name="menu_edit_title">تحرير العنوان</string>
     <string name="settings_branding">وسم</string>
-    <string name="settings_gridview">عرض شبكي 🆕</string>
     <string name="simple_security">الأمان</string>
-    <string name="simple_appearance">المظهر</string>
     <string name="simple_synchronization">المزامنة</string>
     <string name="simple_behavior">السلوك</string>
     <string name="manage_accounts">إدارة الحسابات</string>

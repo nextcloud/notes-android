@@ -6,6 +6,7 @@
     <string name="label_all_notes">All notes</string>
     <string name="label_favorites">Favorites</string>
     <string name="action_create">New note</string>
+    <string name="welcome_text">Welcome to %1$s</string>
     <string name="action_settings">Settings</string>
     <string name="action_trashbin">Deleted notes</string>
     <string name="action_search">Search</string>
@@ -42,8 +43,10 @@
     <string name="settings_font_title">Monospace font</string>
     <string name="settings_font_size">Font size</string>
     <string name="settings_wifi_only">Sync only on Wi-Fi</string>
-    <string name="settings_lock">Password protection</string>
+    <string name="settings_lock">App lock (Beta)</string>
+    <string name="settings_lock_summary">Device credentials</string>
     <string name="settings_background_sync">Background synchronization</string>
+    <string name="settings_prevent_screen_capture">Prevent screen capture</string>
 
     <string name="error_sync">Synchronization failed: %1$s</string>
     <string name="error_synchronization">Synchronization failed</string>
@@ -97,11 +100,11 @@
     <string name="pref_key_note_mode" translatable="false">noteMode</string>
     <string name="pref_key_theme" translatable="false">darkTheme</string>
     <string name="pref_key_font" translatable="false">font</string>
-    <string name="pref_key_branding" translatable="false">branding</string>
     <string name="pref_key_gridview" translatable="false">gridview</string>
     <string name="pref_key_font_size" translatable="false">fontSize</string>
     <string name="pref_key_wifi_only" translatable="false">wifiOnly</string>
     <string name="pref_key_lock" translatable="false">lock</string>
+    <string name="pref_key_prevent_screen_capture" translatable="false">preventScreenCapture</string>
     <string name="pref_category_security" translatable="false">security</string>
     <string name="pref_key_last_note_mode" translatable="false">lastNoteMode</string>
     <string name="pref_key_background_sync" translatable="false">backgroundSync</string>
@@ -143,7 +146,6 @@
     <string name="add_category">Add %1$s</string>
     <string name="simple_checkbox">Checkbox</string>
     <string name="unlock_notes">Unlock notes</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Oh no - What now? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Please try to force close the app and restart it again. There might have been an incorrect connection to the Nextcloud app.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">If the issue persists, try to clear the storage of both apps: Nextcloud and Nextcloud Notes to solve this issue.</string>
@@ -168,9 +170,9 @@
     <string name="change_note_title">Change note title</string>
     <string name="menu_edit_title">Edit title</string>
     <string name="settings_branding">Branding</string>
-    <string name="settings_gridview">Grid view 🆕</string>
+    <string name="settings_gridview">Grid view</string>
     <string name="simple_security">Security</string>
-    <string name="simple_appearance">Appearance</string>
+    <string name="appearance_and_behavior">Appearance and behavior</string>
     <string name="simple_synchronization">Synchronization</string>
     <string name="simple_behavior">Behavior</string>
     <string name="manage_accounts">Manage accounts</string>
@@ -294,6 +296,7 @@
     <string name="error_action_open_network">Network settings</string>
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
+    <string name="choose_account">Choose account</string>
     <string name="context_based_formatting">Context based formatting popover</string>
     <string name="settings_notes_path">Set folder</string>
     <string name="settings_file_suffix">File extension</string>

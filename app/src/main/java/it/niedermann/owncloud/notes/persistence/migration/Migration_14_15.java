@@ -5,16 +5,27 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.room.OnConflictStrategy;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
 import java.util.Hashtable;
 
 import it.niedermann.owncloud.notes.shared.util.DatabaseIndexUtil;
 
-public class Migration_14_15 {
+public class Migration_14_15 extends Migration {
+
+    public Migration_14_15() {
+        super(14, 15);
+    }
+
     /**
      * Normalize database (move category from string field to own table)
      * https://github.com/stefan-niedermann/nextcloud-notes/issues/814
      */
-    public Migration_14_15(SQLiteDatabase db) {
+    @Override
+    public void migrate(@NonNull SupportSQLiteDatabase db) {
         // Rename a tmp_NOTES table.
         String tmpTableNotes = String.format("tmp_%s", "NOTES");
         db.execSQL("ALTER TABLE NOTES RENAME TO " + tmpTableNotes);
@@ -44,7 +55,7 @@ public class Migration_14_15 {
         // This is used to prevent too many searches in database
         Hashtable<String, Integer> categoryTitleIdMap = new Hashtable<>();
         int id = 1;
-        Cursor tmpNotesCursor = db.rawQuery("SELECT * FROM " + tmpTableNotes, null);
+        Cursor tmpNotesCursor = db.query("SELECT * FROM " + tmpTableNotes, null);
         while (tmpNotesCursor.moveToNext()) {
             String categoryTitle = tmpNotesCursor.getString(8);
             int accountId = tmpNotesCursor.getInt(2);
@@ -59,7 +70,7 @@ public class Migration_14_15 {
                 values.put("CATEGORY_ID", categoryId);
                 values.put("CATEGORY_ACCOUNT_ID", accountId);
                 values.put("CATEGORY_TITLE", categoryTitle);
-                db.insert("CATEGORIES", null, values);
+                db.insert("CATEGORIES", OnConflictStrategy.REPLACE, values);
                 categoryTitleIdMap.put(categoryTitle, categoryId);
             }
             // Move the data in tmp_NOTES to NOTES
@@ -75,7 +86,7 @@ public class Migration_14_15 {
             values.put("CATEGORY", categoryId);
             values.put("ETAG", tmpNotesCursor.getString(9));
             values.put("EXCERPT", tmpNotesCursor.getString(10));
-            db.insert("NOTES", null, values);
+            db.insert("NOTES", OnConflictStrategy.REPLACE, values);
         }
         tmpNotesCursor.close();
         db.execSQL("DROP TABLE IF EXISTS " + tmpTableNotes);

@@ -1,5 +1,6 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
+import android.graphics.Color;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import java.util.stream.Stream;
 import it.niedermann.nextcloud.sso.glide.SingleSignOnUrl;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.databinding.ItemAccountChooseBinding;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -38,11 +39,11 @@ public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(
-            @NonNull LocalAccount localAccount,
-            @NonNull Consumer<LocalAccount> onAccountClick,
-            @NonNull Consumer<LocalAccount> onAccountDelete,
-            @NonNull Consumer<LocalAccount> onChangeNotesPath,
-            @NonNull Consumer<LocalAccount> onChangeFileSuffix,
+            @NonNull Account localAccount,
+            @NonNull Consumer<Account> onAccountClick,
+            @NonNull Consumer<Account> onAccountDelete,
+            @NonNull Consumer<Account> onChangeNotesPath,
+            @NonNull Consumer<Account> onChangeFileSuffix,
             boolean isCurrentAccount
     ) {
         binding.accountName.setText(localAccount.getUserName());

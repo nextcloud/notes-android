@@ -33,8 +33,16 @@ public class ExceptionDialogFragment extends AppCompatDialogFragment {
         final Bundle args = getArguments();
         if (args != null) {
             final Object throwablesArgument = args.getSerializable(KEY_THROWABLES);
-            if (throwablesArgument != null) {
-                throwables.addAll((ArrayList<Throwable>) throwablesArgument);
+            if (throwablesArgument instanceof Iterable<?>) {
+                for (Object arg : (Iterable<?>) throwablesArgument) {
+                    if (arg instanceof Throwable) {
+                        throwables.add((Throwable) arg);
+                    } else {
+                        throw new IllegalArgumentException("Expected all " + KEY_THROWABLES + " to be instance of " + Throwable.class.getSimpleName());
+                    }
+                }
+            } else {
+                throw new IllegalArgumentException(KEY_THROWABLES + " needs to be an " + Iterable.class.getSimpleName() + "<" + Throwable.class.getSimpleName() + ">");
             }
         }
     }

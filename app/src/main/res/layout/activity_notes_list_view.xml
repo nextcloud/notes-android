@@ -140,6 +140,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_create"
         style="@style/fab"
+        android:contentDescription="@string/action_create"
         android:title="@string/action_create"
         app:backgroundTint="@color/defaultBrand"
         app:srcCompat="@drawable/ic_add_white_24dp" />

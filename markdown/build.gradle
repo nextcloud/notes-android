@@ -7,12 +7,11 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 30
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-        multiDexEnabled true
     }
 
     compileOptions {
@@ -32,7 +31,7 @@ dependencies {
     implementation 'com.github.stefan-niedermann:android-commons:0.2.0'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation "androidx.lifecycle:lifecycle-livedata:2.3.0"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.3.1"
 
     implementation "io.noties.markwon:core:$markwonVersion"
     implementation "io.noties.markwon:editor:$markwonVersion"
@@ -57,7 +56,6 @@ dependencies {
     implementation "com.yydcdut:markdown-processor:$rxMarkdownVersion"
     implementation "com.yydcdut:rxmarkdown-wrapper:$rxMarkdownVersion"
 
-    implementation 'androidx.multidex:multidex:2.0.1'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     testImplementation 'junit:junit:4.13.2'

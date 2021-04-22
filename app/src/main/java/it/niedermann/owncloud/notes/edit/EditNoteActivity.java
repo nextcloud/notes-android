@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.edit;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -27,13 +29,16 @@ import it.niedermann.owncloud.notes.LockedActivity;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerListener;
 import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
-import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.shared.model.Category;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
+import it.niedermann.owncloud.notes.databinding.ActivityEditBinding;
+import it.niedermann.owncloud.notes.edit.category.CategoryViewModel;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.shared.model.DBStatus;
+import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
+
+import static it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType.FAVORITES;
 
 public class EditNoteActivity extends LockedActivity implements BaseNoteFragment.NoteFragmentListener, AccountPickerListener {
 
@@ -48,6 +53,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     public static final String PARAM_CONTENT = "content";
     public static final String PARAM_FAVORITE = "favorite";
 
+    private CategoryViewModel categoryViewModel;
     private ActivityEditBinding binding;
 
     private BaseNoteFragment fragment;
@@ -55,7 +61,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         try {
             if (SingleAccountHelper.getCurrentSingleSignOnAccount(this) == null) {
                 throw new NoCurrentAccountSelectedException();
@@ -66,6 +72,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
             return;
         }
 
+        categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
         binding = ActivityEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
@@ -171,12 +178,15 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     private void launchNewNote() {
         Intent intent = getIntent();
 
-        String category = null;
+        String categoryTitle = "";
         boolean favorite = false;
         if (intent.hasExtra(PARAM_CATEGORY)) {
-            Category categoryPreselection = (Category) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
-            category = categoryPreselection.category;
-            favorite = categoryPreselection.favorite != null ? categoryPreselection.favorite : false;
+            final NavigationCategory categoryPreselection = (NavigationCategory) Objects.requireNonNull(intent.getSerializableExtra(PARAM_CATEGORY));
+            final String category = categoryPreselection.getCategory();
+            if(category != null) {
+                categoryTitle = category;
+            }
+            favorite = categoryPreselection.getType() == FAVORITES;
         }
 
         String content = "";
@@ -194,7 +204,7 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
         if (content == null) {
             content = "";
         }
-        CloudNote newNote = new CloudNote(0, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, favorite, category, null);
+        Note newNote = new Note(null, Calendar.getInstance(), NoteUtil.generateNonEmptyNoteTitle(content, this), content, categoryTitle, favorite, null);
         fragment = NoteEditFragment.newInstanceWithNewNote(newNote);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, fragment).commit();
     }
@@ -231,19 +241,18 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                close();
-                return true;
-            case R.id.menu_preview:
-                launchExistingNote(getAccountId(), getNoteId(), false);
-                return true;
-            case R.id.menu_edit:
-                launchExistingNote(getAccountId(), getNoteId(), true);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            close();
+            return true;
+        } else if (itemId == R.id.menu_preview) {
+            launchExistingNote(getAccountId(), getNoteId(), false);
+            return true;
+        } else if (itemId == R.id.menu_edit) {
+            launchExistingNote(getAccountId(), getNoteId(), true);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -266,24 +275,19 @@ public class EditNoteActivity extends LockedActivity implements BaseNoteFragment
     }
 
     @Override
-    public void onNoteUpdated(DBNote note) {
+    public void onNoteUpdated(Note note) {
         if (note != null) {
             binding.toolbar.setTitle(note.getTitle());
-            if (note.getCategory().isEmpty()) {
+            if (TextUtils.isEmpty(note.getCategory())) {
                 binding.toolbar.setSubtitle(null);
             } else {
                 binding.toolbar.setSubtitle(NoteUtil.extendCategory(note.getCategory()));
             }
-        } else {
-            // Maybe account is not authenticated -> note == null
-            Log.e(TAG, "note is null, start " + MainActivity.class.getSimpleName());
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
         }
     }
 
     @Override
-    public void onAccountPicked(@NonNull LocalAccount account) {
+    public void onAccountPicked(@NonNull Account account) {
         fragment.moveNote(account);
     }
 

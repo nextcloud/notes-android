@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">یادداشت‌ها</string>
-    <string name="app_name_long">یادداشت های نکست کلود</string>
+    <string name="app_name_long">یادداشت‌های نکست کلود</string>
     <string name="label_all_notes">همه یادداشت‌ها</string>
     <string name="label_favorites">مورد علاقه‌ها</string>
     <string name="action_create">یادداشت جدید</string>
@@ -42,12 +42,10 @@
     <string name="settings_font_title">قلم Monospace</string>
     <string name="settings_font_size">اندازهٔ قلم</string>
     <string name="settings_wifi_only">همگام‌سازی فقط در Wi-Fi</string>
-    <string name="settings_lock">محافظت از رمز عبور</string>
     <string name="settings_background_sync">همگام‌سازی پس زمینه</string>
-
     <string name="error_sync">همگام‌سازی انجام نشد:%1$s</string>
     <string name="error_synchronization">همگام‌سازی انجام نشد</string>
-    <string name="error_no_network">هیچ ارتباطی به شبکه موجود نیست</string>
+    <string name="error_no_network">هیچ ارتباطی با شبکه برقرار نیست</string>
     <string name="error_unknown">یک خطای ناشناخته رخ داده است.</string>
 
     <string name="about_version_title">نسخه</string>
@@ -110,41 +108,38 @@
     <string name="add_category">افزودن%1$s</string>
     <string name="simple_checkbox">جعبه علامت</string>
     <string name="unlock_notes">یادداشت‌های باز</string>
-    <string name="simple_beta">بتا</string>
     <string name="error_dialog_title">وای نه - حالا چی کار کنیم؟</string>
-    <string name="error_dialog_tip_token_mismatch_retry">"لطفا از طریق توقف اجباری برنامه را بسته و دوباره اجرا کنید. ممکن است یک اتصال نادرست با ابر سانا ایجاد شده باشد.  "</string>
-    <string name="error_dialog_tip_token_mismatch_clear_storage">اگر این مشکل استمرار داشت، سعی کنید با پاک کردن فضای ذخیره‌سازی هردو برنامک : ابر سانا و یادداشت سانا، این مورد را برطرف کنید.</string>
-    <string name="error_dialog_tip_files_outdated">ظاهرا برنامک یادداشت منسوخ شده است. لطفا آخرین نسخه را از سانا مارکت دانلود کنید. </string>
-    <string name="error_dialog_tip_files_force_stop">به نظر می‌رسد که مشکلی در برنامک نکست‌کلود ایجاد شده است. لطفا سعی کنید با توقف اجباری هر دو برنامک ابر سانا و یادداشت سانا را ببندید.  </string>
+    <string name="error_dialog_tip_token_mismatch_retry">لطفا از طریق توقف اجباری برنامه را بسته و دوباره اجرا کنید. ممکن است یک اتصال نادرست با نکست‌کلود ایجاد شده باشد.  </string>
+    <string name="error_dialog_tip_token_mismatch_clear_storage">اگر این مشکل استمرار داشت، سعی کنید با پاک کردن فضای ذخیره‌سازی هردو برنامک : Nextcloud و  Nextcloud Notes این مورد را برطرف کنید.</string>
+    <string name="error_dialog_tip_files_outdated">ظاهرا برنامک یادداشت منسوخ شده است. لطفا آخرین نسخه را از Play Store  یا F-Droid دانلود کنید.</string>
+    <string name="error_dialog_tip_files_force_stop">به نظر می‌رسد که مشکلی در برنامک نکست‌کلود ایجاد شده است. لطفا سعی کنید با توقف اجباری هر دو برنامک Nextcloud app  و Nextcloud Notes   را ببندید.  </string>
     <string name="error_dialog_tip_files_delete_storage">"اگر توقف اجباری برنامه‌ها کمکی نکرد، می‌توانید پاک‌کردن فضای ذخیره‌سازی هردو برنامه را پاک کنید. "</string>
     <string name="error_dialog_timeout_instance">پاسخ از سمت سرور شما با نام داده شده دریافت نشد. لطفا بررسی کنید که نمونه شما به درستی کار می‌کند.</string>
-    <string name="error_dialog_timeout_toggle">"اتصال اینترنت خود را بررسی کنید. خاموش کردن اینترنت همراه و وای‌فای و روشن کردن مجدد آنها در برخی ار مواقع می‌تواند کارساز باشد. "</string>
+    <string name="error_dialog_timeout_toggle">اتصال اینترنت خود را بررسی کنید. خاموش کردن اینترنت همراه و وای‌فای و روشن کردن مجدد آنها در برخی از مواقع می‌تواند کارساز باشد. </string>
     <string name="error_dialog_check_server">پاسخ درستی از سرور شما دریافت نشد. لطفا دسترسی به یادداشت‌های خود را از طریق وب بررسی کنید.</string>
-    <string name="error_dialog_check_server_logs">" مشکلی در نصب ابر سانا وجود دارد. لطفا لاگ‌های سرور را بررسی کنید."</string>
-    <string name="error_dialog_check_maintenance">لطفا بررسی کنید که نسخه ابر سانای شما در حال حاضر در حالت تعمیر و نگهداری نباشد.</string>
+    <string name="error_dialog_check_server_logs"> مشکلی در نصب ابر Nextcloud وجود دارد. لطفا لاگ‌های سرور را بررسی کنید.</string>
+    <string name="error_dialog_check_maintenance">لطفا بررسی کنید که نسخه Nextcloud شما در حال حاضر در حالت تعمیر و نگهداری نباشد.</string>
     <string name="error_dialog_insufficient_storage">فضای برنامک نکست‌کلود شما پر شده است.لطفا یعضی از فایل‌های خود در را فضای ابری برای همگام‌سازی تغییرات محلی پاک کنید.  </string>
     <string name="error_dialog_contact_us">لطفا بدون هیچ تردیدی در صورت استمرار مشکل با ما تماس بگیرید.</string>
     <string name="error_dialog_we_need_info">ما برای کمک به شما احتیاج به دنبال کردن اطلاعات فنی داریم:</string>
     <string name="error_dialog_server_app_enabled">لطفا از نصب و فعال بودن برنامک یادداشت بر روی سرور، اطمینان حاصل کنید.</string>
     <string name="error_dialog_redirect">پاسخ سرور شما کد حالت HTTP 302 است. که دلالت بر عدم نصب برنامک یادداشت بر روی سرور و یا پیکربندی نامناسب دارد. این مشکل می‌تواند به دلیل تغییرات نامناسب ایجاد شده در فایل .htaccess و یا به دلیل برنامه‌های مرتبط با Nextcloud مثل OID Client رخ دهد.</string>
-    <string name="error_dialog_tip_disable_battery_optimizations">لطفا تمامی فرایند‌های بهینه‌سازی مصرف باتری برای ابر سانا و برنامک یادداشت را غیر فعال کنید.</string>
+    <string name="error_dialog_tip_disable_battery_optimizations">لطفا تمامی فرایند‌های بهینه‌سازی مصرف باتری برای Nextcloud و Notes app   را غیر فعال کنید.</string>
     <string name="added_content">اضافه ‌شده %1$s</string>
     <string name="shared_text_empty">متن به اشتراک گذاشته‌شده خالی است</string>
     <string name="append_to_note">به یادداشت اضافه کنید</string>
     <string name="change_note_title">عوض‌کردن عنوان یادداشت</string>
     <string name="menu_edit_title">ویرایش عنوان</string>
     <string name="settings_branding">شخصی‌سازی</string>
-    <string name="settings_gridview">حالت شبکه‌ای جدید</string>
     <string name="simple_security">امنیت</string>
-    <string name="simple_appearance">ظاهر</string>
     <string name="simple_synchronization">همگام‌سازی</string>
     <string name="simple_behavior">رفتار</string>
     <string name="manage_accounts">مدیریت حساب‌ها</string>
     <string name="action_formatting_help">قالب‌بندی</string>
 
     <string-array name="noteMode_entries">
-        <item>در حالت ویرایش باز کنید</item>
-        <item>در حالت پیش نمایش باز کنید</item>
+        <item> یادداشت را در حالت «ویرایش» باز کنید</item>
+        <item>یادداشت را در حالت پیش نمایش باز کنید</item>
         <item>آخرین انتخاب من را به خاطر بسپار</item>
     </string-array>
 

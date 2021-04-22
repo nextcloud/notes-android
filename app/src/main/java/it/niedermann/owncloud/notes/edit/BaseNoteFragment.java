@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ScrollView;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,9 @@ import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import it.niedermann.android.util.ColorUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.accountpicker.AccountPickerDialogFragment;
@@ -38,12 +42,11 @@ import it.niedermann.owncloud.notes.edit.category.CategoryDialogFragment.Categor
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment;
 import it.niedermann.owncloud.notes.edit.title.EditTitleDialogFragment.EditTitleListener;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.Account;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
-import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.shared.util.NoteUtil;
 import it.niedermann.owncloud.notes.shared.util.NotesColorUtil;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
@@ -52,6 +55,7 @@ import static androidx.core.content.pm.ShortcutManagerCompat.isRequestPinShortcu
 import static it.niedermann.owncloud.notes.NotesApplication.isDarkThemeActive;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 import static it.niedermann.owncloud.notes.edit.EditNoteActivity.ACTION_SHORTCUT;
+import static java.lang.Boolean.TRUE;
 
 public abstract class BaseNoteFragment extends BrandedFragment implements CategoryDialogListener, EditTitleListener {
 
@@ -65,13 +69,12 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     private static final String SAVEDKEY_NOTE = "note";
     private static final String SAVEDKEY_ORIGINAL_NOTE = "original_note";
 
-    private LocalAccount localAccount;
-    private SingleSignOnAccount ssoAccount;
+    private Account localAccount;
 
-    protected DBNote note;
+    protected Note note;
     // TODO do we really need this? The reference to note is currently the same
     @Nullable
-    private DBNote originalNote;
+    private Note originalNote;
     private int originalScrollY;
     protected NotesDatabase db;
     private NoteFragmentListener listener;
@@ -93,70 +96,59 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try {
-            this.ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireActivity().getApplicationContext());
-            this.localAccount = db.getLocalAccountByAccountName(ssoAccount.name);
+        new Thread(() -> {
+            try {
+                SingleSignOnAccount ssoAccount = SingleAccountHelper.getCurrentSingleSignOnAccount(requireContext().getApplicationContext());
+                this.localAccount = db.getAccountDao().getAccountByName(ssoAccount.name);
 
-            if (savedInstanceState == null) {
-                long id = requireArguments().getLong(PARAM_NOTE_ID);
-                if (id > 0) {
-                    long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
-                    if (accountId > 0) {
-                        /* Switch account if account id has been provided */
-                        this.localAccount = db.getAccount(accountId);
-                        SingleAccountHelper.setCurrentAccount(requireActivity().getApplicationContext(), localAccount.getAccountName());
-                    }
-                    isNew = false;
-                    note = originalNote = db.getNote(localAccount.getId(), id);
-                } else {
-                    CloudNote cloudNote = (CloudNote) requireArguments().getSerializable(PARAM_NEWNOTE);
-                    String content = requireArguments().getString(PARAM_CONTENT);
-                    if (cloudNote == null) {
-                        if (content == null) {
-                            throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
-                        } else {
-                            note = new DBNote(-1, -1, null, NoteUtil.generateNoteTitle(content), content, false, getString(R.string.category_readonly), null, DBStatus.VOID, -1, "", 0);
+                if (savedInstanceState == null) {
+                    long id = requireArguments().getLong(PARAM_NOTE_ID);
+                    if (id > 0) {
+                        long accountId = requireArguments().getLong(PARAM_ACCOUNT_ID);
+                        if (accountId > 0) {
+                            /* Switch account if account id has been provided */
+                            this.localAccount = db.getAccountDao().getAccountById(accountId);
+                            SingleAccountHelper.setCurrentAccount(requireContext().getApplicationContext(), localAccount.getAccountName());
                         }
+                        isNew = false;
+                        note = originalNote = db.getNoteDao().getNoteById(id);
+                        requireActivity().runOnUiThread(() -> onNoteLoaded(note));
+                        requireActivity().invalidateOptionsMenu();
                     } else {
-                        note = db.getNote(localAccount.getId(), db.addNoteAndSync(ssoAccount, localAccount.getId(), cloudNote));
-                        originalNote = null;
+                        Note cloudNote = (Note) requireArguments().getSerializable(PARAM_NEWNOTE);
+                        String content = requireArguments().getString(PARAM_CONTENT);
+                        if (cloudNote == null) {
+                            if (content == null) {
+                                throw new IllegalArgumentException(PARAM_NOTE_ID + " is not given, argument " + PARAM_NEWNOTE + " is missing and " + PARAM_CONTENT + " is missing.");
+                            } else {
+                                note = new Note(-1, null, Calendar.getInstance(), NoteUtil.generateNoteTitle(content), content, getString(R.string.category_readonly), false, null, DBStatus.VOID, -1, "", 0);
+                                requireActivity().runOnUiThread(() -> onNoteLoaded(note));
+                                requireActivity().invalidateOptionsMenu();
+                            }
+                        } else {
+                            note = db.addNote(localAccount.getId(), cloudNote);
+                            originalNote = null;
+                            requireActivity().runOnUiThread(() -> onNoteLoaded(note));
+                            requireActivity().invalidateOptionsMenu();
+                        }
                     }
+                } else {
+                    note = (Note) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
+                    originalNote = (Note) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
+                    requireActivity().runOnUiThread(() -> onNoteLoaded(note));
+                    requireActivity().invalidateOptionsMenu();
                 }
-            } else {
-                note = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_NOTE);
-                originalNote = (DBNote) savedInstanceState.getSerializable(SAVEDKEY_ORIGINAL_NOTE);
+            } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
+                e.printStackTrace();
             }
-            setHasOptionsMenu(true);
-        } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
-            e.printStackTrace();
-        }
+        }).start();
+        setHasOptionsMenu(true);
     }
 
     @Nullable
     protected abstract ScrollView getScrollView();
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        final ScrollView scrollView = getScrollView();
-        if (scrollView != null) {
-            scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-                if (scrollView.getScrollY() > 0) {
-                    note.setScrollY(scrollView.getScrollY());
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        final ScrollView scrollView = getScrollView();
-        if (scrollView != null) {
-            this.originalScrollY = note.getScrollY();
-            scrollView.post(() -> scrollView.scrollTo(0, originalScrollY));
-        }
-    }
+    protected abstract void scrollToY(int scrollY);
 
     @Override
     public void onResume() {
@@ -198,16 +190,17 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem itemFavorite = menu.findItem(R.id.menu_favorite);
-        prepareFavoriteOption(itemFavorite);
+        if (note != null) {
+            prepareFavoriteOption(menu.findItem(R.id.menu_favorite));
 
-        menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
-        menu.findItem(R.id.menu_delete).setVisible(!isNew);
+            menu.findItem(R.id.menu_title).setVisible(localAccount.getPreferredApiVersion() != null && localAccount.getPreferredApiVersion().compareTo(new ApiVersion("1.0", 1, 0)) >= 0);
+            menu.findItem(R.id.menu_delete).setVisible(!isNew);
+        }
     }
 
     private void prepareFavoriteOption(MenuItem item) {
-        item.setIcon(note.isFavorite() ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
-        item.setChecked(note.isFavorite());
+        item.setIcon(TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_white_24dp : R.drawable.ic_star_border_white_24dp);
+        item.setChecked(note.getFavorite());
         tintMenuIcon(item, colorAccent);
     }
 
@@ -218,19 +211,21 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         if (itemId == R.id.menu_cancel) {
-            if (originalNote == null) {
-                db.deleteNoteAndSync(ssoAccount, note.getId());
-            } else {
-                db.updateNoteAndSync(ssoAccount, localAccount, originalNote, null, null);
-            }
+            new Thread(() -> {
+                if (originalNote == null) {
+                    db.deleteNoteAndSync(localAccount, note.getId());
+                } else {
+                    db.updateNoteAndSync(localAccount, originalNote, null, null, null);
+                }
+            }).start();
             listener.close();
             return true;
         } else if (itemId == R.id.menu_delete) {
-            db.deleteNoteAndSync(ssoAccount, note.getId());
+            db.deleteNoteAndSync(localAccount, note.getId());
             listener.close();
             return true;
         } else if (itemId == R.id.menu_favorite) {
-            db.toggleFavorite(ssoAccount, note, null);
+            db.toggleFavoriteAndSync(localAccount, note.getId());
             listener.onNoteUpdated(note);
             prepareFavoriteOption(item);
             return true;
@@ -241,40 +236,32 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
             showEditTitleDialog();
             return true;
         } else if (itemId == R.id.menu_move) {
-            AccountPickerDialogFragment.newInstance(note.getAccountId()).show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
+            new Thread(() -> {
+                AccountPickerDialogFragment
+                        .newInstance(new ArrayList<>(), note.getAccountId())
+                        .show(requireActivity().getSupportFragmentManager(), BaseNoteFragment.class.getSimpleName());
+            }).start();
             return true;
         } else if (itemId == R.id.menu_share) {
             ShareUtil.openShareDialog(requireContext(), note.getTitle(), note.getContent());
             return false;
         } else if (itemId == MENU_ID_PIN) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
-
+                final ShortcutManager shortcutManager = requireActivity().getSystemService(ShortcutManager.class);
                 if (shortcutManager != null) {
                     if (shortcutManager.isRequestPinShortcutSupported()) {
-                        Intent intent = new Intent(getActivity(), EditNoteActivity.class);
-                        intent.putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId());
-                        intent.setAction(ACTION_SHORTCUT);
-
-                        ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
+                        final ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(getActivity(), note.getId() + "")
                                 .setShortLabel(note.getTitle())
-                                .setIcon(Icon.createWithResource(requireActivity().getApplicationContext(), note.isFavorite() ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
-                                .setIntent(intent)
+                                .setIcon(Icon.createWithResource(requireActivity().getApplicationContext(), TRUE.equals(note.getFavorite()) ? R.drawable.ic_star_yellow_24dp : R.drawable.ic_star_grey_ccc_24dp))
+                                .setIntent(new Intent(getActivity(), EditNoteActivity.class).putExtra(EditNoteActivity.PARAM_NOTE_ID, note.getId()).setAction(ACTION_SHORTCUT))
                                 .build();
 
-                        Intent pinnedShortcutCallbackIntent =
-                                shortcutManager.createShortcutResultIntent(pinShortcutInfo);
-
-                        PendingIntent successCallback = PendingIntent.getBroadcast(getActivity(), /* request code */ 0,
-                                pinnedShortcutCallbackIntent, /* flags */ 0);
-
-                        shortcutManager.requestPinShortcut(pinShortcutInfo,
-                                successCallback.getIntentSender());
+                        shortcutManager.requestPinShortcut(pinShortcutInfo, PendingIntent.getBroadcast(getActivity(), 0, shortcutManager.createShortcutResultIntent(pinShortcutInfo), 0).getIntentSender());
                     } else {
                         Log.i(TAG, "RequestPinShortcut is not supported");
                     }
                 } else {
-                    Log.e(TAG, "ShortcutManager is null");
+                    Log.e(TAG, ShortcutManager.class.getSimpleName() + " is null");
                 }
             }
 
@@ -283,9 +270,25 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
         return super.onOptionsItemSelected(item);
     }
 
+    @CallSuper
+    protected void onNoteLoaded(Note note) {
+        this.originalScrollY = note.getScrollY();
+        scrollToY(originalScrollY);
+        final ScrollView scrollView = getScrollView();
+        if (scrollView != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                scrollView.setOnScrollChangeListener((View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) -> {
+                    if (scrollY > 0) {
+                        note.setScrollY(scrollY);
+                    }
+                });
+            }
+        }
+    }
+
     public void onCloseNote() {
         if (!titleModified && originalNote == null && getContent().isEmpty()) {
-            db.deleteNoteAndSync(ssoAccount, note.getId());
+            db.deleteNoteAndSync(localAccount, note.getId());
         }
     }
 
@@ -297,16 +300,17 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     protected void saveNote(@Nullable ISyncCallback callback) {
         Log.d(TAG, "saveData()");
         if (note != null) {
-            String newContent = getContent();
+            final String newContent = getContent();
             if (note.getContent().equals(newContent)) {
                 if (note.getScrollY() != originalScrollY) {
                     Log.v(TAG, "... only saving new scroll state, since content did not change");
-                    db.updateScrollY(note.getId(), note.getScrollY());
+                    db.getNoteDao().updateScrollY(note.getId(), note.getScrollY());
                 } else {
                     Log.v(TAG, "... not saving, since nothing has changed");
                 }
             } else {
-                note = db.updateNoteAndSync(ssoAccount, localAccount, note, newContent, callback);
+                // FIXME requires database queries on main thread!
+                note = db.updateNoteAndSync(localAccount, note, newContent, null, callback);
                 listener.onNoteUpdated(note);
                 requireActivity().invalidateOptionsMenu();
             }
@@ -350,7 +354,8 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
 
     @Override
     public void onCategoryChosen(String category) {
-        db.setCategory(ssoAccount, note, category, null);
+        db.setCategory(localAccount, note.getId(), category);
+        note.setCategory(category);
         listener.onNoteUpdated(note);
     }
 
@@ -358,12 +363,14 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public void onTitleEdited(String newTitle) {
         titleModified = true;
         note.setTitle(newTitle);
-        note = db.updateNoteAndSync(ssoAccount, localAccount, note, note.getContent(), newTitle, null);
-        listener.onNoteUpdated(note);
+        new Thread(() -> {
+            note = db.updateNoteAndSync(localAccount, note, note.getContent(), newTitle, null);
+            requireActivity().runOnUiThread(() -> listener.onNoteUpdated(note));
+        }).start();
     }
 
-    public void moveNote(LocalAccount account) {
-        db.moveNoteToAnotherAccount(ssoAccount, note.getAccountId(), note, account.getId());
+    public void moveNote(Account account) {
+        db.moveNoteToAnotherAccount(account, note);
         listener.close();
     }
 
@@ -403,6 +410,6 @@ public abstract class BaseNoteFragment extends BrandedFragment implements Catego
     public interface NoteFragmentListener {
         void close();
 
-        void onNoteUpdated(DBNote note);
+        void onNoteUpdated(Note note);
     }
 }

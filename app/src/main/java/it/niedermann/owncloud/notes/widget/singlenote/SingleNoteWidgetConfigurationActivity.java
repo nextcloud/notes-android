@@ -12,11 +12,12 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import it.niedermann.owncloud.notes.NotesApplication;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.exception.ExceptionHandler;
 import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
-import it.niedermann.owncloud.notes.NotesApplication;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
+import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 
 public class SingleNoteWidgetConfigurationActivity extends MainActivity {
 
@@ -41,7 +42,7 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
 
     @Override
     public void onNoteClick(int position, View v) {
-        final DBNote note = (DBNote) adapter.getItem(position);
+        final Note note = (Note) adapter.getItem(position);
         final Bundle extras = getIntent().getExtras();
 
         if (extras == null) {
@@ -51,24 +52,25 @@ public class SingleNoteWidgetConfigurationActivity extends MainActivity {
 
         int appWidgetId = extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
 
-        try {
-            db.createOrUpdateSingleNoteWidgetData(
-                    new SingleNoteWidgetData(
-                            appWidgetId,
-                            note.getAccountId(),
-                            note.getId(),
-                            NotesApplication.getAppTheme(this).getModeId()
-                    )
-            );
-            final Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
-                    getApplicationContext(), SingleNoteWidget.class)
-                    .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-            setResult(RESULT_OK, updateIntent);
-            getApplicationContext().sendBroadcast(updateIntent);
-        } catch (SQLException e) {
-            Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        finish();
+        new Thread(() -> {
+            try {
+                mainViewModel.createOrUpdateSingleNoteWidgetData(
+                        new SingleNoteWidgetData(
+                                appWidgetId,
+                                note.getAccountId(),
+                                note.getId(),
+                                NotesApplication.getAppTheme(this).getModeId()
+                        )
+                );
+                final Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null,
+                        getApplicationContext(), SingleNoteWidget.class)
+                        .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+                setResult(RESULT_OK, updateIntent);
+                getApplicationContext().sendBroadcast(updateIntent);
+                finish();
+            } catch (SQLException e) {
+                Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        }).start();
     }
 }

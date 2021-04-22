@@ -42,8 +42,10 @@
     <string name="settings_font_title">等寬字體</string>
     <string name="settings_font_size">字體大小</string>
     <string name="settings_wifi_only">只在有 Wi-Fi 時同步</string>
-    <string name="settings_lock">密碼保護</string>
+    <string name="settings_lock">應用程式上鎖 (Beta)</string>
+    <string name="settings_lock_summary">裝置身份驗證</string>
     <string name="settings_background_sync">背景同步</string>
+    <string name="settings_prevent_screen_capture">防止屏幕截圖</string>
 
     <string name="error_sync">同步失敗：%1$s</string>
     <string name="error_synchronization">同步失敗</string>
@@ -60,22 +62,19 @@
     <string name="about_source_title">原始碼</string>
     <string name="about_source">此專案寄存在 GitHub 上：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_issues_title">問題</string>
-    <string name="about_issues">您可以在 GitHub 問題回報系統回報錯誤、改善建議及功能需求：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
+    <string name="about_issues">您可以在 GitHub 問題舉報系統舉報錯誤、改善建議及功能需求：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_translate_title">翻譯</string>
     <string name="about_translate">歡迎加入 Transifex 的 Nextcloud 團隊並協助翻譯此 App：&lt;a href=\"%1$s\">%1$s&lt;/a></string>
     <string name="about_app_license_title">程式授權條款</string>
     <string name="about_app_license">此程式依照 GNU GENERAL PUBLIC LICENSE v3+ 方式授權使用</string>
     <string name="about_app_license_button">檢視授權條款</string>
     <string name="about_icons_disclaimer_title">圖示</string>
-    <string name="about_icons_disclaimer">&lt;p>原創圖示由 %1$s 製作&lt;/p>&lt;p>其他 App 使用的圖示均為 Google Inc. 製作的 &lt;a href=\"https://materialdesignicons.com/\">Material Design 圖示&lt;/a>，並依 Apache 2.0 條款授權。&lt;/p></string>
+    <string name="about_icons_disclaimer">&lt;p>原創圖示由 %1$s 製作&lt;/p>&lt;p>其他 App 使用的圖示均為 Google Inc。製作的 &lt;a href=\"https：//materialdesignicons。com/\">Material Design 圖示&lt;/a>，並依 Apache 2.0 條款授權。&lt;/p></string>
     <string name="about_credits_tab_title">致謝</string>
     <string name="about_contribution_tab_title">貢獻</string>
     <string name="about_license_tab_title">授權條款</string>
 
     <string name="widget_note_list_title">筆記清單</string>
-    <string name="widget_note_list_add">添加新筆記</string>
-    <string name="widget_note_list_add_favorite">將新筆記添加到收藏夾</string>
-    <string name="widget_note_list_add_to_category">將新筆記添加到 %1$s</string>
     <string name="widget_note_list_placeholder">沒有筆記</string>
     <string name="widget_single_note_title">單則筆記</string>
     <string name="widget_single_note_placeholder_tv">找不到筆記</string>
@@ -113,7 +112,6 @@
     <string name="add_category">新增%1$s</string>
     <string name="simple_checkbox">勾選框</string>
     <string name="unlock_notes">解鎖筆記</string>
-    <string name="simple_beta">Beta 測試版</string>
     <string name="error_dialog_title">喔不 - 現在怎麼辦？🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">請嘗試強行關閉應用程式並重新打開。可能是與Nextcloud應用程式的連接不正確有關。</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">如果問題持續，請嘗試清除兩個應用程序的存儲：Nextcloud 和 Nextcloud Notes 的以解決此問題。</string>
@@ -130,17 +128,17 @@
     <string name="error_dialog_contact_us">如果問題仍然存在，請不要猶豫與我們聯繫。 您可以在側欄的“關於”部分中找到我們聯絡的信息。</string>
     <string name="error_dialog_we_need_info">我們需要以下的技術資訊來幫助您：</string>
     <string name="error_dialog_server_app_enabled">請確保您已在伺服器上安裝並啟用 Notes 應用程式。</string>
-    <string name="error_dialog_redirect">您的伺服器確實以HTTP 302狀態代碼響應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。 這可能是由 .htaccess 檔案中的自定義替代引起的，也可能是由 Nextcloud 應用程式（如 OID 客戶端）引起的。</string>
+    <string name="error_dialog_redirect">您的伺服器確實以HTTP 302狀態代碼響應，這表示您尚未在伺服器上安裝 Notes 應用程式或配置錯誤。 這可能是由 。htaccess 檔案中的自定義替代引起的，也可能是由 Nextcloud 應用程式（如 OID 客戶端）引起的。</string>
     <string name="error_dialog_tip_disable_battery_optimizations">請禁用 Nextcloud 和 Notes 應用程式的所有電池優化。</string>
     <string name="added_content">已加入「%1$s」</string>
     <string name="shared_text_empty">分享的文字是空的</string>
     <string name="append_to_note">附加到筆記</string>
     <string name="change_note_title">改變筆記標題</string>
     <string name="menu_edit_title">編輯標題</string>
-    <string name="settings_branding">創建標籤</string>
-    <string name="settings_gridview">網格檢視 🆕</string>
+    <string name="settings_branding">品牌化</string>
+    <string name="settings_gridview">網格檢視</string>
     <string name="simple_security">安全性</string>
-    <string name="simple_appearance">外觀</string>
+    <string name="appearance_and_behavior">外觀與行為</string>
     <string name="simple_synchronization">同步</string>
     <string name="simple_behavior">行為</string>
     <string name="manage_accounts">賬戶管理</string>
@@ -195,7 +193,7 @@
     <string name="formatting_help_cbf_body_2">只需選擇一個文本範圍或在任意位置點擊光標，您將彈出一個選項單，該選項單包含默認條目 %1$s，%2$s，%3$s 條目如 %4$s 或 %5$s。</string>
 
     <string name="formatting_help_text_title">文字編輯器</string>
-    <string name="formatting_help_text_body">使用 Markdown 可以很容易地使某些單詞變為%1$s粗體%1$s，而其他單詞則變為%2$s斜體%2$s。您可以%3$s刪除%3$s一些單詞，甚至[鏈接到 Nextcloud ]（https://nextcloud.com）。</string>
+    <string name="formatting_help_text_body">使用 Markdown 可以很容易地使某些單詞變為%1$s粗體%1$s，而其他單詞則變為%2$s斜體%2$s。您可以%3$s刪除%3$s一些單詞，甚至[鏈接到 Nextcloud ]（https：//nextcloud。com）。</string>
 
     <string name="formatting_help_lists_title">清單</string>
     <string name="formatting_help_lists_body_1">有時您想顯示編號列表（numbered list）：</string>
@@ -218,7 +216,7 @@
     <string name="formatting_help_structured_documents_body_2">這是第三層標題</string>
     <string name="formatting_help_structured_documents_body_3">您可以使用從 %1$s 到 %2$s 等共六個不同等級的標題大小。</string>
     <string name="formatting_help_structured_documents_body_4">如果您想引用他人的說話，請在該行之前使用%1$s字符：</string>
-    <string name="formatting_help_structured_documents_body_5">Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.</string>
+    <string name="formatting_help_structured_documents_body_5">Imagination is more important than knowledge。Knowledge is limited。Imagination encircles the world。</string>
     <string name="formatting_help_structured_documents_body_6">- 愛因斯坦</string>
 
     <string name="formatting_help_code_title">代碼</string>

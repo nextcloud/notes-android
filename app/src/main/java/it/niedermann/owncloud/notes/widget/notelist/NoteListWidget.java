@@ -13,8 +13,8 @@ import android.widget.RemoteViews;
 import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 
 public class NoteListWidget extends AppWidgetProvider {
     private static final String TAG = NoteListWidget.class.getSimpleName();
@@ -26,7 +26,7 @@ public class NoteListWidget extends AppWidgetProvider {
 
         for (int appWidgetId : appWidgetIds) {
             try {
-                final NoteListsWidgetData data = db.getNoteListWidgetData(appWidgetId);
+                final NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
 
                 final Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
                 serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -83,7 +83,7 @@ public class NoteListWidget extends AppWidgetProvider {
         final NotesDatabase db = NotesDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            db.removeNoteListWidget(appWidgetId);
+            new Thread(() -> db.getWidgetNotesListDao().removeNoteListWidget(appWidgetId)).start();
         }
     }
 

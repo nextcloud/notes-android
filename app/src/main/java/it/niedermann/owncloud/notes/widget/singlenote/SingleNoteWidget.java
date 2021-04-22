@@ -10,12 +10,11 @@ import android.net.Uri;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import java.util.NoSuchElementException;
-
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.edit.BaseNoteFragment;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 
 public class SingleNoteWidget extends AppWidgetProvider {
 
@@ -26,9 +25,8 @@ public class SingleNoteWidget extends AppWidgetProvider {
         final NotesDatabase db = NotesDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            try {
-                final SingleNoteWidgetData data = db.getSingleNoteWidgetData(appWidgetId);
-
+            final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
+            if(data != null) {
                 templateIntent.putExtra(BaseNoteFragment.PARAM_ACCOUNT_ID, data.getAccountId());
 
                 final PendingIntent templatePendingIntent = PendingIntent.getActivity(context, appWidgetId, templateIntent,
@@ -45,7 +43,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
 
                 awm.notifyAppWidgetViewDataChanged(appWidgetId, R.id.single_note_widget_lv);
                 awm.updateAppWidget(appWidgetId, views);
-            } catch (NoSuchElementException e) {
+            } else {
                 Log.i(TAG, "onUpdate has been triggered before the user finished configuring the widget");
             }
         }
@@ -71,7 +69,7 @@ public class SingleNoteWidget extends AppWidgetProvider {
         final NotesDatabase db = NotesDatabase.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            db.removeSingleNoteWidget(appWidgetId);
+            new Thread(() -> db.getWidgetSingleNoteDao().removeSingleNoteWidget(appWidgetId)).start();
         }
         super.onDeleted(context, appWidgetIds);
     }

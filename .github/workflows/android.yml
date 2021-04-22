@@ -21,18 +21,6 @@ jobs:
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
 
-  instrumented:
-    name: Android instrumented tests
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Android instrumented tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          script: ./gradlew connectAndroidTest --stacktrace
-
   codeql:
     name: CodeQL security scan
     runs-on: ubuntu-latest

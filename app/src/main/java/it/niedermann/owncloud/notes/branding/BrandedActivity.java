@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import it.niedermann.owncloud.notes.R;
 
+import static it.niedermann.owncloud.notes.branding.BrandingUtil.readBrandColors;
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.tintMenuIcon;
 
 public abstract class BrandedActivity extends AppCompatActivity implements Branded {
@@ -37,11 +38,7 @@ public abstract class BrandedActivity extends AppCompatActivity implements Brand
         getTheme().resolveAttribute(R.attr.colorAccent, typedValue, true);
         colorAccent = typedValue.data;
 
-        if (BrandingUtil.isBrandingEnabled(this)) {
-            @ColorInt final int mainColor = BrandingUtil.readBrandMainColor(this);
-            @ColorInt final int textColor = BrandingUtil.readBrandTextColor(this);
-            applyBrand(mainColor, textColor);
-        }
+        readBrandColors(this).observe(this, (pair) -> applyBrand(pair.first, pair.second));
     }
 
     @Override

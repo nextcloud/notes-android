@@ -8,9 +8,10 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.lifecycle.LiveData;
 
 import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.shared.model.DBNote;
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.util.ShareUtil;
 
 public class AppendToNoteActivity extends MainActivity {
@@ -36,23 +37,25 @@ public class AppendToNoteActivity extends MainActivity {
     @Override
     public void onNoteClick(int position, View v) {
         if (!TextUtils.isEmpty(receivedText)) {
-            final DBNote note = db.getNote(localAccount.getId(), ((DBNote) adapter.getItem(position)).getId());
-            final String oldContent = note.getContent();
-            String newContent;
-            if (oldContent != null && oldContent.length() > 0) {
-                newContent = oldContent + "\n\n" + receivedText;
-            } else {
-                newContent = receivedText;
-            }
-            db.updateNoteAndSync(ssoAccount, localAccount, note, newContent, () -> Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show());
+            final LiveData<Note> fullNote$ = mainViewModel.getFullNote$(((Note) adapter.getItem(position)).getId());
+            fullNote$.observe(this, (fullNote) -> {
+                fullNote$.removeObservers(this);
+                final String oldContent = fullNote.getContent();
+                String newContent;
+                if (oldContent != null && oldContent.length() > 0) {
+                    newContent = oldContent + "\n\n" + receivedText;
+                } else {
+                    newContent = receivedText;
+                }
+                LiveData<Void> updateLiveData = mainViewModel.updateNoteAndSync(fullNote, newContent, null);
+                updateLiveData.observe(this, (next) -> {
+                    Toast.makeText(this, getString(R.string.added_content, receivedText), Toast.LENGTH_SHORT).show();
+                    updateLiveData.removeObservers(this);
+                });
+            });
         } else {
             Toast.makeText(this, R.string.shared_text_empty, Toast.LENGTH_SHORT).show();
         }
         finish();
-    }
-
-    @Override
-    public boolean onNoteLongClick(int position, View v) {
-        return false;
     }
 }

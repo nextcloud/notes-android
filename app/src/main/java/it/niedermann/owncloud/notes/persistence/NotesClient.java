@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -25,8 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
-import it.niedermann.owncloud.notes.shared.model.CloudNote;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NoteResponse;
 import it.niedermann.owncloud.notes.shared.model.ServerResponse.NotesResponse;
 import it.niedermann.owncloud.notes.shared.model.ServerSettings;
@@ -87,15 +88,24 @@ public abstract class NotesClient {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public NotesClient(@NonNull Context appContext) {
+    protected NotesClient(@NonNull Context appContext) {
         this.appContext = appContext;
     }
 
-    abstract NotesResponse getNotes(SingleSignOnAccount ssoAccount, long lastModified, String lastETag) throws Exception;
+    /**
+     * Gets the list of notes from the server.
+     *
+     * @param ssoAccount   Account to be used
+     * @param lastModified Last modified time of a former response (Unix timestamp in seconds!). All notes older than this time will be skipped.
+     * @param lastETag     ETag of a former response. If nothing changed, the response will be 304 NOT MODIFIED.
+     * @return list of notes
+     * @throws Exception
+     */
+    abstract NotesResponse getNotes(SingleSignOnAccount ssoAccount, Calendar lastModified, String lastETag) throws Exception;
 
-    abstract NoteResponse createNote(SingleSignOnAccount ssoAccount, CloudNote note) throws Exception;
+    abstract NoteResponse createNote(SingleSignOnAccount ssoAccount, Note note) throws Exception;
 
-    abstract NoteResponse editNote(SingleSignOnAccount ssoAccount, CloudNote note) throws Exception;
+    abstract NoteResponse editNote(SingleSignOnAccount ssoAccount, Note note) throws Exception;
 
     abstract void deleteNote(SingleSignOnAccount ssoAccount, long noteId) throws Exception;
 
@@ -114,9 +124,9 @@ public abstract class NotesClient {
         private final String content;
         private final String etag;
         private final String supportedApiVersions;
-        private final long lastModified;
+        private final Calendar lastModified;
 
-        ResponseData(@NonNull String content, String etag, long lastModified, @Nullable String supportedApiVersions) {
+        ResponseData(@NonNull String content, String etag, @NonNull Calendar lastModified, @Nullable String supportedApiVersions) {
             this.content = content;
             this.etag = etag;
             this.lastModified = lastModified;
@@ -131,7 +141,7 @@ public abstract class NotesClient {
             return etag;
         }
 
-        public long getLastModified() {
+        public Calendar getLastModified() {
             return lastModified;
         }
 
@@ -175,8 +185,8 @@ public abstract class NotesClient {
 
         try {
             Log.v(TAG, ssoAccount.name + " → " + nextcloudRequest.getMethod() + " " + nextcloudRequest.getUrl() + " ");
+            Log.d(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
             final Response response = SSOClient.requestFilesApp(appContext, ssoAccount, nextcloudRequest);
-            Log.v(TAG, "NextcloudRequest: " + nextcloudRequest.toString());
 
             final BufferedReader rd = new BufferedReader(new InputStreamReader(response.getBody()));
             String line;
@@ -191,10 +201,11 @@ public abstract class NotesClient {
                 etag = Objects.requireNonNull(eTagHeader.getValue()).replace("\"", "");
             }
 
-            long lastModified = 0;
+            final Calendar lastModified = Calendar.getInstance();
+            lastModified.setTimeInMillis(0);
             final AidlNetworkRequest.PlainHeader lastModifiedHeader = response.getPlainHeader(HEADER_KEY_LAST_MODIFIED);
             if (lastModifiedHeader != null)
-                lastModified = new Date(lastModifiedHeader.getValue()).getTime() / 1000;
+                lastModified.setTimeInMillis(Date.parse(lastModifiedHeader.getValue()));
             Log.d(TAG, "ETag: " + etag + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
 
             String supportedApiVersions = null;

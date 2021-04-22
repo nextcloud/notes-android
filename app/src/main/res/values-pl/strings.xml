@@ -42,8 +42,10 @@
     <string name="settings_font_title">Czcionka monospace</string>
     <string name="settings_font_size">Rozmiar czcionki</string>
     <string name="settings_wifi_only">Synchronizuj tylko przez Wi-Fi</string>
-    <string name="settings_lock">Ochrona hasłem</string>
+    <string name="settings_lock">Blokada aplikacji (Beta)</string>
+    <string name="settings_lock_summary">Poświadczenia urządzenia</string>
     <string name="settings_background_sync">Synchronizacja w tle</string>
+    <string name="settings_prevent_screen_capture">Uniemożliwiaj przechwytywanie ekranu</string>
 
     <string name="error_sync">Synchronizacja nie powiodła się: %1$s</string>
     <string name="error_synchronization">Synchronizacja nie powiodła się</string>
@@ -73,14 +75,11 @@
     <string name="about_license_tab_title">Licencja</string>
 
     <string name="widget_note_list_title">Lista notatek</string>
-    <string name="widget_note_list_add">Dodaj nową notatkę</string>
-    <string name="widget_note_list_add_favorite">Dodaj nową notatkę do ulubionych</string>
-    <string name="widget_note_list_add_to_category">Dodaj nową notatkę do %1$s</string>
     <string name="widget_note_list_placeholder">Brak notatek</string>
     <string name="widget_single_note_title">Pojedyncza notatka</string>
     <string name="widget_single_note_placeholder_tv">Nie znaleziono notatki</string>
     <string name="widget_create_note">Utwórz notatkę</string>
-    <string name="widget_not_logged_in">Zaloguj się do Notes przed użyciem tego widgetu</string>
+    <string name="widget_not_logged_in">Zaloguj się do Notatek przed użyciem tego widżetu</string>
     <string name="widget_entry_fav_contentDescription">Ikona gwiazdki służy do oznaczenia pozycji jako ulubiona</string>
     <string name="widget_app_launcher_contentDescription">Uruchamia aplikację</string>
 
@@ -113,7 +112,6 @@
     <string name="add_category">Dodaj %1$s</string>
     <string name="simple_checkbox">Pole checkbox</string>
     <string name="unlock_notes">Odblokuj notatki</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">O nie - co teraz? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Spróbuj wymusić zamknięcie aplikacji i uruchomić ją ponownie. Być może połączenie z aplikacją Nextcloud było nieprawidłowe.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Jeśli problem będzie się powtarzać, spróbuj wyczyścić pamięć obu aplikacji: Nextcloud i Nextcloud Notes, aby rozwiązać ten problem.</string>
@@ -138,9 +136,9 @@
     <string name="change_note_title">Zmień tytuł notatki</string>
     <string name="menu_edit_title">Edytuj tytuł</string>
     <string name="settings_branding">Motyw serwera</string>
-    <string name="settings_gridview">Widok siatki 🆕</string>
+    <string name="settings_gridview">Widok siatki</string>
     <string name="simple_security">Bezpieczeństwo</string>
-    <string name="simple_appearance">Wygląd</string>
+    <string name="appearance_and_behavior">Wygląd i zachowanie</string>
     <string name="simple_synchronization">Synchronizacja</string>
     <string name="simple_behavior">Zachowanie</string>
     <string name="manage_accounts">Zarządzaj kontami</string>

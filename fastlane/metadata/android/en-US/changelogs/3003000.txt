@@ -1,0 +1,3 @@
+- 🔒 Prevent screen capture (#1098)
+- 🖼 Convert widget previews to WebP to reduce app size (#1120) by @connyduck
+- 🖼 Enable code minification (#1119)

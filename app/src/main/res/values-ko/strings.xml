@@ -42,9 +42,7 @@
     <string name="settings_font_title">Monospace 글꼴</string>
     <string name="settings_font_size">글꼴 크기</string>
     <string name="settings_wifi_only">Wi-Fi만 사용해 동기화</string>
-    <string name="settings_lock">암호 보호</string>
     <string name="settings_background_sync">백그라운드 동기화</string>
-
     <string name="error_sync">동기화 실패: %1$s</string>
     <string name="error_synchronization">동기화에 실패했습니다.</string>
     <string name="error_no_network">네트워크에 연결할 수 없음</string>
@@ -110,7 +108,6 @@
     <string name="add_category">%1$s(으)로 추가</string>
     <string name="simple_checkbox">체크 상자</string>
     <string name="unlock_notes">노트 잠금해제</string>
-    <string name="simple_beta">베타</string>
     <string name="error_dialog_title">세상에 - 무슨일이야?</string>
     <string name="error_dialog_tip_token_mismatch_retry">앱을 종료하고 다시 시작해주십시오.  아마 Nextcloud에 잘못된 연결이 있었을 것입니다.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">문제가 지속되면 Nextcloud와 Nextcloud Notes 두 앱의 스토리지를 모두 지워 이 문제를 해결해보십시오.</string>
@@ -134,9 +131,7 @@
     <string name="change_note_title">메모 제목 변경</string>
     <string name="menu_edit_title">제목 수정</string>
     <string name="settings_branding">브랜딩</string>
-    <string name="settings_gridview">바둑판식 보기 🆕</string>
     <string name="simple_security">보안</string>
-    <string name="simple_appearance">외형</string>
     <string name="simple_synchronization">동기화</string>
     <string name="simple_behavior">행동</string>
     <string name="manage_accounts">계정 관리</string>

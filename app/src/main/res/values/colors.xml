@@ -18,6 +18,7 @@
     <color name="fg_default_selection">#333333</color>
     <color name="fg_default_low">#666666</color>
     <color name="fg_default_high">#cccccc</color>
+    <color name="fg_secondary">#999999</color>
     <color name="fg_contrast">#ffffff</color>
 
     <color name="icon_color_default">#757575</color>

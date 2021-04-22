@@ -42,8 +42,10 @@
     <string name="settings_font_title">Nichtproportionale Schriftart</string>
     <string name="settings_font_size">Schriftgröße</string>
     <string name="settings_wifi_only">Nur über WLAN synchronisieren</string>
-    <string name="settings_lock">Passwortschutz</string>
+    <string name="settings_lock">App-Sperre (Beta)</string>
+    <string name="settings_lock_summary">Geräte-Anmeldedaten</string>
     <string name="settings_background_sync">Hintergrundsynchronisierung</string>
+    <string name="settings_prevent_screen_capture">Bildschirmaufnahme verhindern</string>
 
     <string name="error_sync">Synchronisierung fehlgeschlagen: %1$s</string>
     <string name="error_synchronization">Synchronisierung fehlgeschlagen</string>
@@ -73,9 +75,6 @@
     <string name="about_license_tab_title">Lizenz</string>
 
     <string name="widget_note_list_title">Liste der Notizen</string>
-    <string name="widget_note_list_add">Neue Notiz hinzufügen</string>
-    <string name="widget_note_list_add_favorite">Neue Notiz zu Favoriten hinzufügen</string>
-    <string name="widget_note_list_add_to_category">Neue Notiz zu %1$s hinzufügen</string>
     <string name="widget_note_list_placeholder">Keine Notizen</string>
     <string name="widget_single_note_title">Eine Notiz</string>
     <string name="widget_single_note_placeholder_tv">Notiz nicht gefunden</string>
@@ -113,7 +112,6 @@
     <string name="add_category">%1$s hinzufügen</string>
     <string name="simple_checkbox">Kontrollkästchen</string>
     <string name="unlock_notes">Notiz entsperren</string>
-    <string name="simple_beta">Beta</string>
     <string name="error_dialog_title">Oh nein - Was jetzt? 🙁</string>
     <string name="error_dialog_tip_token_mismatch_retry">Bitte versuchen Sie, das Schließen der App zu erzwingen und sie erneut zu starten. Möglicherweise bestand eine gestörte Verbindung zur Nextcloud-App.</string>
     <string name="error_dialog_tip_token_mismatch_clear_storage">Wenn das Problem weiterhin besteht, versuchen Sie, den Speicher von Nextcloud und Nextcloud Notes zu leeren, um das Problem zu beheben.</string>
@@ -138,9 +136,9 @@
     <string name="change_note_title">Notiz-Titel ändern</string>
     <string name="menu_edit_title">Titel ändern</string>
     <string name="settings_branding">Branding</string>
-    <string name="settings_gridview">Kachelansicht 🆕</string>
+    <string name="settings_gridview">Kachelansicht</string>
     <string name="simple_security">Sicherheit</string>
-    <string name="simple_appearance">Aussehen</string>
+    <string name="appearance_and_behavior">Aussehen und Verhalten</string>
     <string name="simple_synchronization">Synchronisierung</string>
     <string name="simple_behavior">Verhalten</string>
     <string name="manage_accounts">Konten verwalten</string>
