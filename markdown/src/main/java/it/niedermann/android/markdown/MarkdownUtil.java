@@ -6,8 +6,11 @@ import android.os.Build;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.BulletSpan;
+import android.text.style.QuoteSpan;
 import android.util.Log;
 import android.widget.RemoteViews.RemoteView;
 import android.widget.TextView;
@@ -15,15 +18,12 @@ import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 
-import com.yydcdut.markdown.MarkdownProcessor;
-import com.yydcdut.markdown.syntax.text.TextFactory;
-import com.yydcdut.rxmarkdown.RxMarkdown;
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,10 +36,8 @@ public class MarkdownUtil {
 
     private static final String TAG = MarkdownUtil.class.getSimpleName();
 
-    private static final String MD_IMAGE_WITH_EMPTY_DESCRIPTION = "![](";
-    private static final String MD_IMAGE_WITH_SPACE_DESCRIPTION = "![ ](";
-    private static final String[] MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_EMPTY_DESCRIPTION};
-    private static final String[] MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY = new String[]{MD_IMAGE_WITH_SPACE_DESCRIPTION};
+    private final static Parser parser = Parser.builder().build();
+    private final static HtmlRenderer renderer = HtmlRenderer.builder().softbreak("<br>").build();
 
     private static final Pattern PATTERN_LISTS = Pattern.compile("^\\s*[*+-]\\s+", Pattern.MULTILINE);
     private static final Pattern PATTERN_HEADINGS = Pattern.compile("^#+\\s+(.*?)\\s*#*$", Pattern.MULTILINE);
@@ -66,13 +64,34 @@ public class MarkdownUtil {
      * {@link RemoteView}s have a limited subset of supported classes to maintain compatibility with many different launchers.
      * <p>
      * Since {@link Markwon} makes heavy use of custom spans, this won't look nice e. g. at app widgets, because they simply won't be rendered.
-     * Therefore we currently fall back on {@link RxMarkdown} as the results will look better in this special case.
-     * We might change this in the future by utilizing {@link Markwon} and creating a {@link Spanned} from an {@link HtmlCompat} interemediate.
+     * Therefore we currently use {@link HtmlCompat} to filter supported spans from the output of {@link HtmlRenderer} as an intermediate step.
      */
     public static CharSequence renderForRemoteView(@NonNull Context context, @NonNull String content) {
-        final MarkdownProcessor markdownProcessor = new MarkdownProcessor(context);
-        markdownProcessor.factory(TextFactory.create());
-        return parseCompat(markdownProcessor, replaceCheckboxesWithEmojis(content));
+        final String html = renderer.render(parser.parse(replaceCheckboxesWithEmojis(content)));
+        return enhanceRenderedResult(context, HtmlCompat.fromHtml(html, 0));
+    }
+
+    private static Spanned enhanceRenderedResult(@NonNull Context context, @NonNull Spanned input) {
+        final SpannableStringBuilder ssb = new SpannableStringBuilder(input);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            final QuoteSpan[] originalQuoteSpans = ssb.getSpans(0, ssb.length(), QuoteSpan.class);
+            @ColorInt final int colorBlockQuote = ContextCompat.getColor(context, R.color.block_quote);
+            for (QuoteSpan originalQuoteSpan : originalQuoteSpans) {
+                final int start = ssb.getSpanStart(originalQuoteSpan);
+                final int end = ssb.getSpanEnd(originalQuoteSpan);
+                ssb.removeSpan(originalQuoteSpan);
+                ssb.setSpan(new QuoteSpan(colorBlockQuote, 5, 30), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            final BulletSpan[] originalBulletSpans = ssb.getSpans(0, ssb.length(), BulletSpan.class);
+            @ColorInt final int colorBulletPoint = ContextCompat.getColor(context, R.color.bullet_point);
+            for (BulletSpan originalQuoteSpan : originalBulletSpans) {
+                final int start = ssb.getSpanStart(originalQuoteSpan);
+                final int end = ssb.getSpanEnd(originalQuoteSpan);
+                ssb.removeSpan(originalQuoteSpan);
+                ssb.setSpan(new BulletSpan(16, colorBulletPoint, 8), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        return ssb;
     }
 
     @NonNull
@@ -146,28 +165,6 @@ public class MarkdownUtil {
             }
         }
         return TextUtils.join("\n", lines);
-    }
-
-    /**
-     * This is a compatibility-method that provides workarounds for several bugs in RxMarkdown
-     * <p>
-     * https://github.com/stefan-niedermann/nextcloud-notes/issues/772
-     *
-     * @param markdownProcessor RxMarkdown MarkdownProcessor instance
-     * @param text              CharSequence that should be parsed
-     * @return the processed text but with several workarounds for Bugs in RxMarkdown
-     */
-    @NonNull
-    private static CharSequence parseCompat(@NonNull final MarkdownProcessor markdownProcessor, CharSequence text) {
-        if (TextUtils.isEmpty(text)) {
-            return "";
-        }
-
-        while (TextUtils.indexOf(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION) >= 0) {
-            text = TextUtils.replace(text, MD_IMAGE_WITH_EMPTY_DESCRIPTION_ARRAY, MD_IMAGE_WITH_SPACE_DESCRIPTION_ARRAY);
-        }
-
-        return markdownProcessor.parse(text);
     }
 
     public static int getStartOfLine(@NonNull CharSequence s, int cursorPosition) {

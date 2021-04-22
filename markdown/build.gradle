@@ -53,9 +53,6 @@ dependencies {
     annotationProcessor "io.noties:prism4j-bundler:2.0.0"
     implementation 'org.jetbrains:annotations:20.1.0'
 
-    implementation "com.yydcdut:markdown-processor:$rxMarkdownVersion"
-    implementation "com.yydcdut:rxmarkdown-wrapper:$rxMarkdownVersion"
-
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     testImplementation 'junit:junit:4.13.2'
