@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import it.niedermann.android.markdown.MarkdownUtil;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.SingleNoteWidgetData;
 
@@ -22,7 +22,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     private final Context context;
     private final int appWidgetId;
 
-    private final NotesDatabase db;
+    private final NotesRepository repo;
     @Nullable
     private Note note;
 
@@ -31,7 +31,7 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
     SingleNoteWidgetFactory(Context context, Intent intent) {
         this.context = context;
         this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
-        this.db = NotesDatabase.getInstance(context);
+        this.repo = NotesRepository.getInstance(context);
     }
 
     @Override
@@ -41,11 +41,11 @@ public class SingleNoteWidgetFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDataSetChanged() {
-        final SingleNoteWidgetData data = db.getWidgetSingleNoteDao().getSingleNoteWidgetData(appWidgetId);
-        if(data != null) {
+        final SingleNoteWidgetData data = repo.getSingleNoteWidgetData(appWidgetId);
+        if (data != null) {
             final long noteId = data.getNoteId();
             Log.v(TAG, "Fetch note with id " + noteId);
-            note = db.getNoteDao().getNoteById(noteId);
+            note = repo.getNoteById(noteId);
 
             if (note == null) {
                 Log.e(TAG, "Error: note not found");

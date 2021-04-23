@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 
 import static androidx.lifecycle.Transformations.map;
 import static androidx.lifecycle.Transformations.switchMap;
@@ -19,14 +19,14 @@ import static it.niedermann.owncloud.notes.shared.util.DisplayUtils.convertToCat
 
 public class CategoryViewModel extends AndroidViewModel {
 
-    private final NotesDatabase db;
+    private final NotesRepository repo;
 
     @NonNull
     private final MutableLiveData<String> searchTerm = new MutableLiveData<>("");
 
     public CategoryViewModel(@NonNull Application application) {
         super(application);
-        db = NotesDatabase.getInstance(application);
+        repo = NotesRepository.getInstance(application);
     }
 
     public void postSearchTerm(@NonNull String searchTerm) {
@@ -36,7 +36,7 @@ public class CategoryViewModel extends AndroidViewModel {
     @NonNull
     public LiveData<List<NavigationItem.CategoryNavigationItem>> getCategories(long accountId) {
         return switchMap(this.searchTerm, searchTerm ->
-                map(db.getNoteDao().searchCategories$(accountId, TextUtils.isEmpty(searchTerm) ? "%" : "%" + searchTerm + "%"),
+                map(repo.searchCategories$(accountId, TextUtils.isEmpty(searchTerm) ? "%" : "%" + searchTerm + "%"),
                         categories -> convertToCategoryNavigationItem(getApplication(), categories)));
     }
 }

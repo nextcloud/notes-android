@@ -63,7 +63,7 @@ public class ManageAccountsActivity extends LockedActivity {
             @Override
             public void onSuccess(Long unsynchronizedChangesCount) {
                 runOnUiThread(() -> {
-                    if (unsynchronizedChangesCount != null && unsynchronizedChangesCount > 0) {
+                    if (unsynchronizedChangesCount > 0) {
                         new BrandedDeleteAlertDialogBuilder(ManageAccountsActivity.this)
                                 .setTitle(getString(R.string.remove_account, accountToDelete.getUserName()))
                                 .setMessage(getResources().getQuantityString(R.plurals.remove_account_message, (int) unsynchronizedChangesCount.longValue(), accountToDelete.getAccountName(), unsynchronizedChangesCount))

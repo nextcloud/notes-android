@@ -15,6 +15,7 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
@@ -25,28 +26,28 @@ public class ManageAccountsViewModel extends AndroidViewModel {
     private static final String TAG = ManageAccountsViewModel.class.getSimpleName();
 
     @NonNull
-    private final NotesDatabase db;
+    private final NotesRepository repo;
 
     public ManageAccountsViewModel(@NonNull Application application) {
         super(application);
-        this.db = NotesDatabase.getInstance(application);
+        this.repo = NotesRepository.getInstance(application);
     }
 
     public void getCurrentAccount(@NonNull Context context, @NonNull IResponseCallback<Account> callback) {
         try {
-            callback.onSuccess(db.getAccountDao().getAccountByName((SingleAccountHelper.getCurrentSingleSignOnAccount(context).name)));
+            callback.onSuccess(repo.getAccountByName((SingleAccountHelper.getCurrentSingleSignOnAccount(context).name)));
         } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
             callback.onError(e);
         }
     }
 
     public LiveData<List<Account>> getAccounts$() {
-        return distinctUntilChanged(db.getAccountDao().getAccounts$());
+        return distinctUntilChanged(repo.getAccounts$());
     }
 
     public void deleteAccount(@NonNull Account account, @NonNull Context context) {
         new Thread(() -> {
-            final List<Account> accounts = db.getAccountDao().getAccounts();
+            final List<Account> accounts = repo.getAccounts();
             for (int i = 0; i < accounts.size(); i++) {
                 if (accounts.get(i).getId() == account.getId()) {
                     if (i > 0) {
@@ -56,7 +57,7 @@ public class ManageAccountsViewModel extends AndroidViewModel {
                     } else {
                         selectAccount(null, context);
                     }
-                    db.deleteAccount(accounts.get(i));
+                    repo.deleteAccount(accounts.get(i));
                     break;
                 }
             }
@@ -68,6 +69,6 @@ public class ManageAccountsViewModel extends AndroidViewModel {
     }
 
     public void countUnsynchronizedNotes(long accountId, @NonNull IResponseCallback<Long> callback) {
-        new Thread(() -> callback.onSuccess(db.getNoteDao().countUnsynchronizedNotes(accountId))).start();
+        new Thread(() -> callback.onSuccess(repo.countUnsynchronizedNotes(accountId))).start();
     }
 }
