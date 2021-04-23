@@ -3,6 +3,7 @@ package it.niedermann.owncloud.notes.manageaccounts;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
@@ -40,9 +41,8 @@ public class ManageAccountsActivity extends LockedActivity {
         List<LocalAccount> localAccounts = db.getAccounts();
 
         adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
-            final BrandedDeleteAlertDialogBuilder builder = new BrandedDeleteAlertDialogBuilder(this);
-            builder.setMessage(R.string.message_delete_confirm);
-
+            final AlertDialog.Builder builder = new BrandedDeleteAlertDialogBuilder(this);
+            builder.setMessage(getString(R.string.message_delete_confirm, localAccount.getAccountName()));
             builder.setNeutralButton(android.R.string.cancel, null);
             builder.setPositiveButton(R.string.remove_perform, (dialog, which) -> {
                 dialog.dismiss();
