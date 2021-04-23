@@ -39,7 +39,7 @@ abstract class NotesServerSyncTask extends Thread {
     @NonNull
     private final NotesClient notesClient;
     @NonNull
-    private final NotesDatabase db;
+    private final NotesRepository repo;
     @NonNull
     protected final Account localAccount;
     @NonNull
@@ -50,10 +50,10 @@ abstract class NotesServerSyncTask extends Thread {
     @NonNull
     protected final ArrayList<Throwable> exceptions = new ArrayList<>();
 
-    NotesServerSyncTask(@NonNull NotesClient notesClient, @NonNull NotesDatabase db, @NonNull Account localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
+    NotesServerSyncTask(@NonNull NotesClient notesClient, @NonNull NotesRepository repo, @NonNull Account localAccount, @NonNull SingleSignOnAccount ssoAccount, boolean onlyLocalChanges) {
         super(TAG);
         this.notesClient = notesClient;
-        this.db = db;
+        this.repo = repo;
         this.localAccount = localAccount;
         this.ssoAccount = ssoAccount;
         this.onlyLocalChanges = onlyLocalChanges;
@@ -89,7 +89,7 @@ abstract class NotesServerSyncTask extends Thread {
         Log.d(TAG, "pushLocalChanges()");
 
         boolean success = true;
-        final List<Note> notes = db.getNoteDao().getLocalModifiedNotes(localAccount.getId());
+        final List<Note> notes = repo.getLocalModifiedNotes(localAccount.getId());
         for (Note note : notes) {
             Log.d(TAG, "   Process Local Note: " + note);
             try {
@@ -112,10 +112,10 @@ abstract class NotesServerSyncTask extends Thread {
                         } else {
                             Log.v(TAG, "   ...Note does not have a remoteId yet → create");
                             remoteNote = notesClient.createNote(ssoAccount, note).getNote();
-                            db.getNoteDao().updateRemoteId(note.getId(), remoteNote.getRemoteId());
+                            repo.updateRemoteId(note.getId(), remoteNote.getRemoteId());
                         }
                         // Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                        db.getNoteDao().updateIfNotModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()), note.getContent(), note.getCategory(), note.getFavorite());
+                        repo.updateIfNotModifiedLocallyDuringSync(note.getId(), remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()), note.getContent(), note.getCategory(), note.getFavorite());
                         break;
                     case LOCAL_DELETED:
                         if (note.getRemoteId() == null) {
@@ -133,7 +133,7 @@ abstract class NotesServerSyncTask extends Thread {
                             }
                         }
                         // Please note, that db.deleteNote() realizes an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
-                        db.getNoteDao().deleteByNoteId(note.getId(), LOCAL_DELETED);
+                        repo.deleteByNoteId(note.getId(), LOCAL_DELETED);
                         break;
                     default:
                         throw new IllegalStateException("Unknown State of Note " + note + ": " + note.getStatus());
@@ -162,10 +162,10 @@ abstract class NotesServerSyncTask extends Thread {
     private boolean pullRemoteChanges() {
         Log.d(TAG, "pullRemoteChanges() for account " + localAccount.getAccountName());
         try {
-            final Map<Long, Long> idMap = db.getIdMap(localAccount.getId());
+            final Map<Long, Long> idMap = repo.getIdMap(localAccount.getId());
 
             // FIXME re-reading the localAccount is only a workaround for a not-up-to-date eTag in localAccount.
-            final Account accountFromDatabase = db.getAccountDao().getAccountById(localAccount.getId());
+            final Account accountFromDatabase = repo.getAccountById(localAccount.getId());
             if (accountFromDatabase == null) {
                 callbacks.remove(localAccount.getId());
                 return true;
@@ -186,14 +186,14 @@ abstract class NotesServerSyncTask extends Thread {
                     Log.v(TAG, "   ... found → Update");
                     Long localId = idMap.get(remoteNote.getRemoteId());
                     if (localId != null) {
-                        db.getNoteDao().updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
+                        repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
                                 localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
                     } else {
                         Log.e(TAG, "Tried to update note from server, but local id of note is null. " + remoteNote);
                     }
                 } else {
                     Log.v(TAG, "   ... create");
-                    db.addNote(localAccount.getId(), remoteNote);
+                    repo.addNote(localAccount.getId(), remoteNote);
                 }
             }
             Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
@@ -201,17 +201,17 @@ abstract class NotesServerSyncTask extends Thread {
             for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
                 if (!remoteIDs.contains(entry.getKey())) {
                     Log.v(TAG, "   ... remove " + entry.getValue());
-                    db.getNoteDao().deleteByNoteId(entry.getValue(), DBStatus.VOID);
+                    repo.deleteByNoteId(entry.getValue(), DBStatus.VOID);
                 }
             }
 
             // update ETag and Last-Modified in order to reduce size of next response
             localAccount.setETag(response.getETag());
             localAccount.setModified(response.getLastModified());
-            db.getAccountDao().updateETag(localAccount.getId(), localAccount.getETag());
-            db.getAccountDao().updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
+            repo.updateETag(localAccount.getId(), localAccount.getETag());
+            repo.updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
             try {
-                if (db.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
+                if (repo.updateApiVersion(localAccount.getId(), response.getSupportedApiVersions())) {
                     localAccount.setApiVersion(response.getSupportedApiVersions());
                 }
             } catch (Exception e) {

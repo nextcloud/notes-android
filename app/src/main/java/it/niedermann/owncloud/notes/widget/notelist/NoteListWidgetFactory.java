@@ -19,7 +19,7 @@ import java.util.List;
 import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.edit.EditNoteActivity;
 import it.niedermann.owncloud.notes.main.MainActivity;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
@@ -37,7 +37,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
 
     private final Context context;
     private final int appWidgetId;
-    private final NotesDatabase db;
+    private final NotesRepository repo;
     @NonNull
     private final List<Note> dbNotes = new ArrayList<>();
     private NotesListWidgetData data;
@@ -45,7 +45,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     NoteListWidgetFactory(Context context, Intent intent) {
         this.context = context;
         this.appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
-        db = NotesDatabase.getInstance(context);
+        repo = NotesRepository.getInstance(context);
     }
 
     @Override
@@ -57,21 +57,21 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
     public void onDataSetChanged() {
         dbNotes.clear();
         try {
-            data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
+            data = repo.getNoteListWidgetData(appWidgetId);
             Log.v(TAG, "--- data - " + data);
             switch (data.getMode()) {
                 case MODE_DISPLAY_ALL:
-                    dbNotes.addAll(db.getNoteDao().searchRecentByModified(data.getAccountId(), "%"));
+                    dbNotes.addAll(repo.searchRecentByModified(data.getAccountId(), "%"));
                     break;
                 case MODE_DISPLAY_STARRED:
-                    dbNotes.addAll(db.getNoteDao().searchFavoritesByModified(data.getAccountId(), "%"));
+                    dbNotes.addAll(repo.searchFavoritesByModified(data.getAccountId(), "%"));
                     break;
                 case MODE_DISPLAY_CATEGORY:
                 default:
                     if (data.getCategory() != null) {
-                        dbNotes.addAll(db.getNoteDao().searchCategoryByModified(data.getAccountId(), "%", data.getCategory()));
+                        dbNotes.addAll(repo.searchCategoryByModified(data.getAccountId(), "%", data.getCategory()));
                     } else {
-                        dbNotes.addAll(db.getNoteDao().searchUncategorizedByModified(data.getAccountId(), "%"));
+                        dbNotes.addAll(repo.searchUncategorizedByModified(data.getAccountId(), "%"));
                     }
                     break;
             }
@@ -95,7 +95,7 @@ public class NoteListWidgetFactory implements RemoteViewsService.RemoteViewsFact
         final RemoteViews note_content;
 
         if (position == 0) {
-            final Account localAccount = db.getAccountDao().getAccountById(data.getAccountId());
+            final Account localAccount = repo.getAccountById(data.getAccountId());
             final Intent openIntent = new Intent(Intent.ACTION_MAIN).setComponent(new ComponentName(context.getPackageName(), MainActivity.class.getName()));
             final Intent createIntent = new Intent(context, EditNoteActivity.class);
             final Bundle extras = new Bundle();

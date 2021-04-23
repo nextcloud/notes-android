@@ -10,7 +10,6 @@ import androidx.room.Update;
 import java.util.List;
 import java.util.Set;
 
-import it.niedermann.owncloud.notes.persistence.NotesServerSyncHelper;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;

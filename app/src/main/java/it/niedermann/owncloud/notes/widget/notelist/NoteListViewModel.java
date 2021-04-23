@@ -14,7 +14,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.main.MainActivity;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 
 import static androidx.lifecycle.Transformations.distinctUntilChanged;
 import static androidx.lifecycle.Transformations.map;
@@ -28,20 +28,20 @@ public class NoteListViewModel extends AndroidViewModel {
     private static final String TAG = NoteListViewModel.class.getSimpleName();
 
     @NonNull
-    private final NotesDatabase db;
+    private final NotesRepository repo;
 
     public NoteListViewModel(@NonNull Application application) {
         super(application);
-        this.db = NotesDatabase.getInstance(application);
+        this.repo = NotesRepository.getInstance(application);
     }
 
     public LiveData<List<NavigationItem>> getAdapterCategories(Long accountId) {
         return distinctUntilChanged(
-                switchMap(distinctUntilChanged(db.getNoteDao().count$(accountId)), (count) -> {
+                switchMap(distinctUntilChanged(repo.count$(accountId)), (count) -> {
                     Log.v(TAG, "[getAdapterCategories] countLiveData: " + count);
-                    return switchMap(distinctUntilChanged(db.getNoteDao().countFavorites$(accountId)), (favoritesCount) -> {
+                    return switchMap(distinctUntilChanged(repo.countFavorites$(accountId)), (favoritesCount) -> {
                         Log.v(TAG, "[getAdapterCategories] getFavoritesCountLiveData: " + favoritesCount);
-                        return map(distinctUntilChanged(db.getNoteDao().getCategories$(accountId)), fromDatabase -> {
+                        return map(distinctUntilChanged(repo.getCategories$(accountId)), fromDatabase -> {
                             final List<NavigationItem.CategoryNavigationItem> categories = convertToCategoryNavigationItem(getApplication(), fromDatabase);
 
                             final List<NavigationItem> items = new ArrayList<>(fromDatabase.size() + 3);

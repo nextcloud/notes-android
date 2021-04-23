@@ -21,7 +21,7 @@ import it.niedermann.owncloud.notes.R;
 import it.niedermann.owncloud.notes.branding.BrandedDialogFragment;
 import it.niedermann.owncloud.notes.databinding.DialogAccountSwitcherBinding;
 import it.niedermann.owncloud.notes.manageaccounts.ManageAccountsActivity;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 
 import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLayerDrawable;
@@ -33,7 +33,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
 
     private static final String KEY_CURRENT_ACCOUNT_ID = "current_account_id";
 
-    private NotesDatabase db;
+    private NotesRepository repo;
     private DialogAccountSwitcherBinding binding;
     private AccountSwitcherListener accountSwitcherListener;
     private long currentAccountId;
@@ -55,7 +55,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
             this.currentAccountId = args.getLong(KEY_CURRENT_ACCOUNT_ID);
         }
 
-        db = NotesDatabase.getInstance(requireActivity());
+        repo = NotesRepository.getInstance(requireContext());
     }
 
     @NonNull
@@ -63,7 +63,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         binding = DialogAccountSwitcherBinding.inflate(requireActivity().getLayoutInflater());
 
-        final LiveData<Account> account$ = db.getAccountDao().getAccountById$(currentAccountId);
+        final LiveData<Account> account$ = repo.getAccountById$(currentAccountId);
         account$.observe(requireActivity(), (currentLocalAccount) -> {
             account$.removeObservers(requireActivity());
 
@@ -81,7 +81,7 @@ public class AccountSwitcherDialog extends BrandedDialogFragment {
                 dismiss();
             }));
             binding.accountsList.setAdapter(adapter);
-            final LiveData<List<Account>> localAccounts$ = db.getAccountDao().getAccounts$();
+            final LiveData<List<Account>> localAccounts$ = repo.getAccounts$();
             localAccounts$.observe(requireActivity(), (localAccounts) -> {
                 localAccounts$.removeObservers(requireActivity());
                 for (Account localAccount : localAccounts) {

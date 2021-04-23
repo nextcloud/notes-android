@@ -34,8 +34,7 @@ import it.niedermann.owncloud.notes.exception.IntendedOfflineException;
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
 import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.NotesServerSyncHelper;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.persistence.entity.CategoryWithNotesCount;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
@@ -73,7 +72,7 @@ public class MainViewModel extends AndroidViewModel {
     private static final String KEY_EXPANDED_CATEGORY = "expandedCategory";
 
     @NonNull
-    private final NotesDatabase db;
+    private final NotesRepository repo;
 
     @NonNull
     private final MutableLiveData<Account> currentAccount = new MutableLiveData<>();
@@ -86,7 +85,7 @@ public class MainViewModel extends AndroidViewModel {
 
     public MainViewModel(@NonNull Application application, @NonNull SavedStateHandle savedStateHandle) {
         super(application);
-        this.db = NotesDatabase.getInstance(application);
+        this.repo = NotesRepository.getInstance(application);
         this.state = savedStateHandle;
     }
 
@@ -175,7 +174,7 @@ public class MainViewModel extends AndroidViewModel {
     @NonNull
     @MainThread
     public LiveData<Pair<NavigationCategory, CategorySortingMethod>> getCategorySortingMethodOfSelectedCategory() {
-        return switchMap(getSelectedCategory(), selectedCategory -> map(db.getCategoryOrder(selectedCategory), sortingMethod -> new Pair<>(selectedCategory, sortingMethod)));
+        return switchMap(getSelectedCategory(), selectedCategory -> map(repo.getCategoryOrder(selectedCategory), sortingMethod -> new Pair<>(selectedCategory, sortingMethod)));
     }
 
     public LiveData<Void> modifyCategoryOrder(@NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
@@ -184,7 +183,7 @@ public class MainViewModel extends AndroidViewModel {
                 return new MutableLiveData<>(null);
             } else {
                 Log.v(TAG, "[modifyCategoryOrder] - currentAccount: " + currentAccount.getAccountName());
-                db.modifyCategoryOrder(currentAccount.getId(), selectedCategory, sortingMethod);
+                repo.modifyCategoryOrder(currentAccount.getId(), selectedCategory, sortingMethod);
                 return new MutableLiveData<>(null);
             }
         });
@@ -225,22 +224,22 @@ public class MainViewModel extends AndroidViewModel {
                                     case RECENT: {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + RECENT);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchRecentByModified$(accountId, searchQueryOrWildcard)
-                                                : db.getNoteDao().searchRecentLexicographically$(accountId, searchQueryOrWildcard);
+                                                ? repo.searchRecentByModified$(accountId, searchQueryOrWildcard)
+                                                : repo.searchRecentLexicographically$(accountId, searchQueryOrWildcard);
                                         break;
                                     }
                                     case FAVORITES: {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + FAVORITES);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchFavoritesByModified$(accountId, searchQueryOrWildcard)
-                                                : db.getNoteDao().searchFavoritesLexicographically$(accountId, searchQueryOrWildcard);
+                                                ? repo.searchFavoritesByModified$(accountId, searchQueryOrWildcard)
+                                                : repo.searchFavoritesLexicographically$(accountId, searchQueryOrWildcard);
                                         break;
                                     }
                                     case UNCATEGORIZED: {
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + UNCATEGORIZED);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchUncategorizedByModified$(accountId, searchQueryOrWildcard)
-                                                : db.getNoteDao().searchUncategorizedLexicographically$(accountId, searchQueryOrWildcard);
+                                                ? repo.searchUncategorizedByModified$(accountId, searchQueryOrWildcard)
+                                                : repo.searchUncategorizedLexicographically$(accountId, searchQueryOrWildcard);
                                         break;
                                     }
                                     case DEFAULT_CATEGORY:
@@ -251,8 +250,8 @@ public class MainViewModel extends AndroidViewModel {
                                         }
                                         Log.v(TAG, "[getNotesListLiveData] - category: " + category);
                                         fromDatabase = sortingMethod.second == SORT_MODIFIED_DESC
-                                                ? db.getNoteDao().searchCategoryByModified$(accountId, searchQueryOrWildcard, category)
-                                                : db.getNoteDao().searchCategoryLexicographically$(accountId, searchQueryOrWildcard, category);
+                                                ? repo.searchCategoryByModified$(accountId, searchQueryOrWildcard, category)
+                                                : repo.searchCategoryLexicographically$(accountId, searchQueryOrWildcard, category);
                                         break;
                                     }
                                 }
@@ -294,11 +293,11 @@ public class MainViewModel extends AndroidViewModel {
                 Log.v(TAG, "[getNavigationCategories] - currentAccount: " + currentAccount.getAccountName());
                 return switchMap(getExpandedCategory(), expandedCategory -> {
                     Log.v(TAG, "[getNavigationCategories] - expandedCategory: " + expandedCategory);
-                    return switchMap(db.getNoteDao().count$(currentAccount.getId()), (count) -> {
+                    return switchMap(repo.count$(currentAccount.getId()), (count) -> {
                         Log.v(TAG, "[getNavigationCategories] - count: " + count);
-                        return switchMap(db.getNoteDao().countFavorites$(currentAccount.getId()), (favoritesCount) -> {
+                        return switchMap(repo.countFavorites$(currentAccount.getId()), (favoritesCount) -> {
                             Log.v(TAG, "[getNavigationCategories] - favoritesCount: " + favoritesCount);
-                            return distinctUntilChanged(map(db.getNoteDao().getCategories$(currentAccount.getId()), fromDatabase ->
+                            return distinctUntilChanged(map(repo.getCategories$(currentAccount.getId()), fromDatabase ->
                                     fromCategoriesWithNotesCount(getApplication(), expandedCategory, fromDatabase, count, favoritesCount)
                             ));
                         });
@@ -390,22 +389,21 @@ public class MainViewModel extends AndroidViewModel {
      */
     public void synchronizeCapabilities(@NonNull Account localAccount, @NonNull IResponseCallback<Void> callback) {
         new Thread(() -> {
-            final NotesServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
-            if (!syncHelper.isSyncPossible()) {
-                syncHelper.updateNetworkStatus();
+            if (!repo.isSyncPossible()) {
+                repo.updateNetworkStatus();
             }
-            if (syncHelper.isSyncPossible()) {
+            if (repo.isSyncPossible()) {
                 try {
                     final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplication(), AccountImporter.getSingleSignOnAccount(getApplication(), localAccount.getAccountName()), localAccount.getCapabilitiesETag());
-                    db.getAccountDao().updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
-                    db.getAccountDao().updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
+                    repo.updateCapabilitiesETag(localAccount.getId(), capabilities.getETag());
+                    repo.updateBrand(localAccount.getId(), capabilities.getColor(), capabilities.getTextColor());
                     localAccount.setColor(capabilities.getColor());
                     localAccount.setTextColor(capabilities.getTextColor());
                     BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
-                    db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
+                    repo.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
                     callback.onSuccess(null);
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
-                    db.getAccountDao().deleteAccount(localAccount);
+                    repo.deleteAccount(localAccount);
                     callback.onError(e);
                 } catch (Exception e) {
                     if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
@@ -416,7 +414,7 @@ public class MainViewModel extends AndroidViewModel {
                     }
                 }
             } else {
-                if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
+                if (repo.isNetworkConnected() && repo.isSyncOnlyOnWifi()) {
                     callback.onError(new IntendedOfflineException("Network is connected, but sync is not possible."));
                 } else {
                     callback.onError(new NetworkErrorException("Sync is not possible, because network is not connected."));
@@ -431,15 +429,14 @@ public class MainViewModel extends AndroidViewModel {
     public void synchronizeNotes(@NonNull Account currentAccount, @NonNull IResponseCallback<Void> callback) {
         new Thread(() -> {
             Log.v(TAG, "[synchronize] - currentAccount: " + currentAccount.getAccountName());
-            final NotesServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
-            if (!syncHelper.isSyncPossible()) {
-                syncHelper.updateNetworkStatus();
+            if (!repo.isSyncPossible()) {
+                repo.updateNetworkStatus();
             }
-            if (syncHelper.isSyncPossible()) {
-                syncHelper.scheduleSync(currentAccount, false);
+            if (repo.isSyncPossible()) {
+                repo.scheduleSync(currentAccount, false);
                 callback.onSuccess(null);
             } else { // Sync is not possible
-                if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
+                if (repo.isNetworkConnected() && repo.isSyncOnlyOnWifi()) {
                     callback.onError(new IntendedOfflineException("Network is connected, but sync is not possible."));
                 } else {
                     callback.onError(new NetworkErrorException("Sync is not possible, because network is not connected."));
@@ -449,25 +446,25 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Boolean> getSyncStatus() {
-        return db.getNoteServerSyncHelper().getSyncStatus();
+        return repo.getSyncStatus();
     }
 
     public LiveData<ArrayList<Throwable>> getSyncErrors() {
-        return db.getNoteServerSyncHelper().getSyncErrors();
+        return repo.getSyncErrors();
     }
 
     public LiveData<Boolean> hasMultipleAccountsConfigured() {
-        return map(db.getAccountDao().countAccounts$(), (counter) -> counter != null && counter > 1);
+        return map(repo.countAccounts$(), (counter) -> counter != null && counter > 1);
     }
 
     @WorkerThread
     public Account getLocalAccountByAccountName(String accountName) {
-        return db.getAccountDao().getAccountByName(accountName);
+        return repo.getAccountByName(accountName);
     }
 
     @WorkerThread
     public List<Account> getAccounts() {
-        return db.getAccountDao().getAccounts();
+        return repo.getAccounts();
     }
 
     public LiveData<Void> setCategory(Iterable<Long> noteIds, @NonNull String category) {
@@ -477,7 +474,7 @@ public class MainViewModel extends AndroidViewModel {
             } else {
                 Log.v(TAG, "[setCategory] - currentAccount: " + currentAccount.getAccountName());
                 for (Long noteId : noteIds) {
-                    db.setCategory(currentAccount, noteId, category);
+                    repo.setCategory(currentAccount, noteId, category);
                 }
                 return new MutableLiveData<>(null);
             }
@@ -485,9 +482,9 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Note> moveNoteToAnotherAccount(Account account, Long noteId) {
-        return switchMap(db.getNoteDao().getNoteById$(noteId), (note) -> {
+        return switchMap(repo.getNoteById$(noteId), (note) -> {
             Log.v(TAG, "[moveNoteToAnotherAccount] - note: " + note);
-            return db.moveNoteToAnotherAccount(account, note);
+            return repo.moveNoteToAnotherAccount(account, note);
         });
     }
 
@@ -497,7 +494,7 @@ public class MainViewModel extends AndroidViewModel {
                 return new MutableLiveData<>(null);
             } else {
                 Log.v(TAG, "[toggleFavoriteAndSync] - currentAccount: " + currentAccount.getAccountName());
-                db.toggleFavoriteAndSync(currentAccount, noteId);
+                repo.toggleFavoriteAndSync(currentAccount, noteId);
                 return new MutableLiveData<>(null);
             }
         });
@@ -509,7 +506,7 @@ public class MainViewModel extends AndroidViewModel {
                 return new MutableLiveData<>(null);
             } else {
                 Log.v(TAG, "[deleteNoteAndSync] - currentAccount: " + currentAccount.getAccountName());
-                db.deleteNoteAndSync(currentAccount, id);
+                repo.deleteNoteAndSync(currentAccount, id);
                 return new MutableLiveData<>(null);
             }
         });
@@ -522,7 +519,7 @@ public class MainViewModel extends AndroidViewModel {
             } else {
                 Log.v(TAG, "[deleteNotesAndSync] - currentAccount: " + currentAccount.getAccountName());
                 for (Long id : ids) {
-                    db.deleteNoteAndSync(currentAccount, id);
+                    repo.deleteNoteAndSync(currentAccount, id);
                 }
                 return new MutableLiveData<>(null);
             }
@@ -530,7 +527,7 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        return db.addAccount(url, username, accountName, capabilities);
+        return repo.addAccount(url, username, accountName, capabilities);
     }
 
     public LiveData<Note> getFullNote$(long id) {
@@ -539,7 +536,7 @@ public class MainViewModel extends AndroidViewModel {
 
     @WorkerThread
     public Note getFullNote(long id) {
-        return db.getNoteDao().getNoteById(id);
+        return repo.getNoteById(id);
     }
 
     public LiveData<List<Note>> getFullNotesWithCategory(@NonNull Collection<Long> ids) {
@@ -552,7 +549,7 @@ public class MainViewModel extends AndroidViewModel {
                 new Thread(() -> notes.postValue(
                         ids
                                 .stream()
-                                .map(id -> db.getNoteDao().getNoteById(id))
+                                .map(repo::getNoteById)
                                 .collect(Collectors.toList())
                 )).start();
                 return notes;
@@ -566,7 +563,7 @@ public class MainViewModel extends AndroidViewModel {
                 return new MutableLiveData<>();
             } else {
                 Log.v(TAG, "[addNoteAndSync] - currentAccount: " + currentAccount.getAccountName());
-                return db.addNoteAndSync(currentAccount, note);
+                return repo.addNoteAndSync(currentAccount, note);
             }
         });
     }
@@ -575,25 +572,25 @@ public class MainViewModel extends AndroidViewModel {
         return switchMap(getCurrentAccount(), currentAccount -> {
             if (currentAccount != null) {
                 Log.v(TAG, "[updateNoteAndSync] - currentAccount: " + currentAccount.getAccountName());
-                db.updateNoteAndSync(currentAccount, oldNote, newContent, newTitle, null);
+                repo.updateNoteAndSync(currentAccount, oldNote, newContent, newTitle, null);
             }
             return new MutableLiveData<>(null);
         });
     }
 
     public void createOrUpdateSingleNoteWidgetData(SingleNoteWidgetData data) {
-        db.getWidgetSingleNoteDao().createOrUpdateSingleNoteWidgetData(data);
+        repo.createOrUpdateSingleNoteWidgetData(data);
     }
 
     public LiveData<Integer> getAccountsCount() {
-        return db.getAccountDao().countAccounts$();
+        return repo.countAccounts$();
     }
 
     @WorkerThread
     public String collectNoteContents(@NonNull List<Long> noteIds) {
         final StringBuilder noteContents = new StringBuilder();
         for (Long noteId : noteIds) {
-            final Note fullNote = db.getNoteDao().getNoteById(noteId);
+            final Note fullNote = repo.getNoteById(noteId);
             final String tempFullNote = fullNote.getContent();
             if (!TextUtils.isEmpty(tempFullNote)) {
                 if (noteContents.length() > 0) {

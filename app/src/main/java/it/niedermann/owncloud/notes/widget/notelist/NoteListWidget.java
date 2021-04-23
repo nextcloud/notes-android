@@ -13,20 +13,20 @@ import android.widget.RemoteViews;
 import java.util.NoSuchElementException;
 
 import it.niedermann.owncloud.notes.R;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
 
 public class NoteListWidget extends AppWidgetProvider {
     private static final String TAG = NoteListWidget.class.getSimpleName();
 
     static void updateAppWidget(Context context, AppWidgetManager awm, int[] appWidgetIds) {
-        final NotesDatabase db = NotesDatabase.getInstance(context);
+        final NotesRepository repo = NotesRepository.getInstance(context);
 
         RemoteViews views;
 
         for (int appWidgetId : appWidgetIds) {
             try {
-                final NotesListWidgetData data = db.getWidgetNotesListDao().getNoteListWidgetData(appWidgetId);
+                final NotesListWidgetData data = repo.getNoteListWidgetData(appWidgetId);
 
                 final Intent serviceIntent = new Intent(context, NoteListWidgetService.class);
                 serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -80,10 +80,10 @@ public class NoteListWidget extends AppWidgetProvider {
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
-        final NotesDatabase db = NotesDatabase.getInstance(context);
+        final NotesRepository repo = NotesRepository.getInstance(context);
 
         for (int appWidgetId : appWidgetIds) {
-            new Thread(() -> db.getWidgetNotesListDao().removeNoteListWidget(appWidgetId)).start();
+            new Thread(() -> repo.removeNoteListWidget(appWidgetId)).start();
         }
     }
 

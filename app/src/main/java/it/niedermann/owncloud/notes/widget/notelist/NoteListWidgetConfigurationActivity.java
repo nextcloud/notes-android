@@ -21,11 +21,9 @@ import it.niedermann.owncloud.notes.databinding.ActivityNoteListConfigurationBin
 import it.niedermann.owncloud.notes.main.navigation.NavigationAdapter;
 import it.niedermann.owncloud.notes.main.navigation.NavigationClickListener;
 import it.niedermann.owncloud.notes.main.navigation.NavigationItem;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
-import it.niedermann.owncloud.notes.persistence.entity.CategoryOptions;
 import it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData;
-import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_ALL;
 import static it.niedermann.owncloud.notes.persistence.entity.NotesListWidgetData.MODE_DISPLAY_CATEGORY;
@@ -43,14 +41,14 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
     private ActivityNoteListConfigurationBinding binding;
     private NoteListViewModel viewModel;
     private NavigationAdapter adapterCategories;
-    private NotesDatabase db = null;
+    private NotesRepository repo = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setResult(RESULT_CANCELED);
 
-        db = NotesDatabase.getInstance(this);
+        repo = NotesRepository.getInstance(this);
         final Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
@@ -107,7 +105,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
                 data.setThemeMode(NotesApplication.getAppTheme(getApplicationContext()).getModeId());
 
                 new Thread(() -> {
-                    db.getWidgetNotesListDao().createOrUpdateNoteListWidgetData(data);
+                    repo.createOrUpdateNoteListWidgetData(data);
 
                     final Intent updateIntent = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, getApplicationContext(), NoteListWidget.class)
                             .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
@@ -126,7 +124,7 @@ public class NoteListWidgetConfigurationActivity extends LockedActivity {
 
         new Thread(() -> {
             try {
-                this.localAccount = db.getAccountDao().getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
+                this.localAccount = repo.getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(this).name);
             } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                 e.printStackTrace();
                 Toast.makeText(this, R.string.widget_not_logged_in, Toast.LENGTH_LONG).show();
