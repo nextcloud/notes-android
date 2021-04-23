@@ -42,7 +42,11 @@
     <string name="settings_font_title">Pisava enotne širine</string>
     <string name="settings_font_size">Velikost pisave</string>
     <string name="settings_wifi_only">Usklajuj le na Wi-Fi</string>
+    <string name="settings_lock">Zaklep aplikacije (beta)</string>
+    <string name="settings_lock_summary">Poverila naprave</string>
     <string name="settings_background_sync"> Usklajevanje v ozadju</string>
+    <string name="settings_prevent_screen_capture">Prepreči zajem zaslona</string>
+
     <string name="error_sync">Usklajevanje je spodletelo: %1$s</string>
     <string name="error_synchronization">Usklajevanje je spodletelo</string>
     <string name="error_no_network">Ni omrežne povezave</string>
@@ -132,7 +136,9 @@
     <string name="change_note_title">Spremeni naslov zabeležke</string>
     <string name="menu_edit_title">Uredi naslov</string>
     <string name="settings_branding">Prilagajanje oblikovanja</string>
+    <string name="settings_gridview">Mrežni pogled</string>
     <string name="simple_security">Varnost</string>
+    <string name="appearance_and_behavior">Izgled in obnašanje</string>
     <string name="simple_synchronization">Usklajevanje</string>
     <string name="simple_behavior">Obnašanje</string>
     <string name="manage_accounts">Upravljanje z računi</string>

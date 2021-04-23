@@ -16,7 +16,7 @@
     <string name="simple_about">In contu de</string>
     <string name="simple_link">Ligòngiu</string>
     <string name="action_note_deleted">Cantzelladu %1$s</string>
-    <string name="action_note_restored">Recuperadu %1$s</string>
+    <string name="action_note_restored">Ripristinadu %1$s</string>
     <string name="action_undo">Annulla</string>
     <string name="action_uncategorized">Sena categoria</string>
     <string name="menu_delete">Cantzella</string>
