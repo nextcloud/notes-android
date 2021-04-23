@@ -295,4 +295,7 @@
     <string name="no_account_configured_yet">No account configured yet</string>
     <string name="no_other_accounts">You don\'t have configured any other accounts yet.</string>
     <string name="context_based_formatting">Context based formatting popover</string>
+    <string name="message_delete_confirm">Confirm delete</string>
+    <string name="remove_perform">Remove</string>
+    <string name="remove_cancel">Cancel</string>
 </resources>

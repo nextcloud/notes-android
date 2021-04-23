@@ -1,6 +1,5 @@
 package it.niedermann.owncloud.notes.manageaccounts;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,9 +13,12 @@ import com.nextcloud.android.sso.model.SingleSignOnAccount;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.LockedActivity;
+import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedDeleteAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
 import it.niedermann.owncloud.notes.shared.model.LocalAccount;
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+
 
 public class ManageAccountsActivity extends LockedActivity {
 
@@ -26,7 +28,7 @@ public class ManageAccountsActivity extends LockedActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
         binding = ActivityManageAccountsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -38,10 +40,11 @@ public class ManageAccountsActivity extends LockedActivity {
         List<LocalAccount> localAccounts = db.getAccounts();
 
         adapter = new ManageAccountAdapter((localAccount) -> SingleAccountHelper.setCurrentAccount(getApplicationContext(), localAccount.getAccountName()), (localAccount) -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("delete confirmation");
+            final BrandedDeleteAlertDialogBuilder builder = new BrandedDeleteAlertDialogBuilder(this);
+            builder.setMessage(R.string.message_delete_confirm);
 
-            builder.setPositiveButton("confirm", (dialog, which) -> {
+            builder.setNeutralButton(android.R.string.cancel, null);
+            builder.setPositiveButton(R.string.remove_perform, (dialog, which) -> {
                 dialog.dismiss();
                 db.deleteAccount(localAccount);
 
@@ -61,7 +64,7 @@ public class ManageAccountsActivity extends LockedActivity {
 
             });
 
-            builder.setNegativeButton("cancel", (dialog, which) -> dialog.dismiss());
+//            builder.setNegativeButton(R.string.remove_cancel, (dialog, which) -> dialog.dismiss());
 
             builder.create().show();
 
