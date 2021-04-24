@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.text.HtmlCompat;
 
+import com.youbenzi.mdtool.tool.MDTool;
 import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMarkdown;
@@ -440,22 +441,16 @@ public class MarkdownUtil {
      * @return Plain text string
      */
     @NonNull
+// CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1104
     public static String removeMarkdown(@Nullable String s) {
         if (s == null)
             return "";
         // TODO maybe we can utilize the markwon renderer?
-
-        for (EListType listType : EListType.values()) {
-            s = s.replace(listType.checkboxChecked, "");
-            s = s.replace(listType.checkboxUnchecked, "");
-            s = s.replace(listType.listSymbolWithTrailingSpace, "");
+        String html = MDTool.markdown2Html(s);
+        String htmlRemark = "(<[^<]*?>)|(<[\\s]*?/[^<]*?>)|(<[^<]*?/[\\s]*?>)";
+        if (html == null || html.length() == 0){
+            return "";
         }
-        s = PATTERN_LISTS.matcher(s).replaceAll("");
-        s = PATTERN_HEADINGS.matcher(s).replaceAll("$1");
-        s = PATTERN_HEADING_LINE.matcher(s).replaceAll("");
-        s = PATTERN_EMPHASIS.matcher(s).replaceAll("$2");
-        s = PATTERN_SPACE_1.matcher(s).replaceAll("");
-        s = PATTERN_SPACE_2.matcher(s).replaceAll("");
-        return s;
+        return html.replaceAll(htmlRemark,"");
     }
 }
