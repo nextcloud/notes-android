@@ -166,6 +166,10 @@ abstract class NotesServerSyncTask extends Thread {
 
             // FIXME re-reading the localAccount is only a workaround for a not-up-to-date eTag in localAccount.
             final Account accountFromDatabase = db.getAccountDao().getAccountById(localAccount.getId());
+            if (accountFromDatabase == null) {
+                callbacks.remove(localAccount.getId());
+                return true;
+            }
             localAccount.setModified(accountFromDatabase.getModified());
             localAccount.setETag(accountFromDatabase.getETag());
 

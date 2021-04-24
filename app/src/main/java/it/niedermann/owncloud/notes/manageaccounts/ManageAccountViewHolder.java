@@ -24,7 +24,7 @@ import static it.niedermann.owncloud.notes.branding.BrandingUtil.applyBrandToLay
 
 public class ManageAccountViewHolder extends RecyclerView.ViewHolder {
 
-    private ItemAccountChooseBinding binding;
+    private final ItemAccountChooseBinding binding;
 
     public ManageAccountViewHolder(@NonNull View itemView) {
         super(itemView);

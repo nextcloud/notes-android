@@ -267,9 +267,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                     .apply(RequestOptions.circleCropTransform())
                     .into(activityBinding.launchAccountSwitcher);
 
-            mainViewModel.synchronizeNotes(nextAccount, new IResponseCallback() {
+            mainViewModel.synchronizeNotes(nextAccount, new IResponseCallback<Void>() {
                 @Override
-                public void onSuccess() {
+                public void onSuccess(Void v) {
                     Log.d(TAG, "Successfully synchronized notes for " + nextAccount.getAccountName());
                 }
 
@@ -309,9 +309,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
         final LiveData<Account> accountLiveData = mainViewModel.getCurrentAccount();
         accountLiveData.observe(this, (currentAccount) -> {
             accountLiveData.removeObservers(this);
-            mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback() {
+            mainViewModel.synchronizeNotes(currentAccount, new IResponseCallback<Void>() {
                 @Override
-                public void onSuccess() {
+                public void onSuccess(Void v) {
                     Log.d(TAG, "Successfully synchronized notes for " + currentAccount.getAccountName());
                 }
 
@@ -428,9 +428,9 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
             final LiveData<Account> syncLiveData = mainViewModel.getCurrentAccount();
             final Observer<Account> syncObserver = currentAccount -> {
                 syncLiveData.removeObservers(this);
-                mainViewModel.synchronizeCapabilitiesAndNotes(currentAccount, new IResponseCallback() {
+                mainViewModel.synchronizeCapabilitiesAndNotes(currentAccount, new IResponseCallback<Void>() {
                     @Override
-                    public void onSuccess() {
+                    public void onSuccess(Void v) {
                         Log.d(TAG, "Successfully synchronized capabilities and notes for " + currentAccount.getAccountName());
                     }
 
@@ -633,6 +633,7 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
                                 LiveData<Account> createLiveData = mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
                                 runOnUiThread(() -> createLiveData.observe(this, (account) -> {
+                                    createLiveData.removeObservers(this);
                                     new Thread(() -> {
                                         Log.i(TAG, capabilities.toString());
                                         final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);

@@ -409,9 +409,8 @@ public abstract class NotesDatabase extends RoomDatabase {
      * @throws IllegalArgumentException if no account has been deleted by the given accountId
      */
     @AnyThread
-    public LiveData<Void> deleteAccount(@NonNull Account localAccount) throws IllegalArgumentException {
+    public void deleteAccount(@NonNull Account localAccount) throws IllegalArgumentException {
         validateAccountId(localAccount.getId());
-        MutableLiveData<Void> ret = new MutableLiveData<>();
         new Thread(() -> {
             int deletedAccounts = getAccountDao().deleteAccount(localAccount);
             if (deletedAccounts < 1) {
@@ -431,9 +430,7 @@ public abstract class NotesDatabase extends RoomDatabase {
             // TODO this should already be handled by foreign key cascade, no?
             final int deletedNotes = getNoteDao().deleteByAccountId(localAccount.getId());
             Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + localAccount.getId());
-            ret.postValue(null);
         }).start();
-        return ret;
     }
 
     private static void validateAccountId(long accountId) {

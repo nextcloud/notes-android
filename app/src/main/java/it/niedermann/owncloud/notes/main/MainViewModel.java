@@ -369,11 +369,11 @@ public class MainViewModel extends AndroidViewModel {
         return items;
     }
 
-    public void synchronizeCapabilitiesAndNotes(@NonNull Account localAccount, @NonNull IResponseCallback callback) {
+    public void synchronizeCapabilitiesAndNotes(@NonNull Account localAccount, @NonNull IResponseCallback<Void> callback) {
         Log.i(TAG, "[synchronizeCapabilitiesAndNotes] Synchronize capabilities for " + localAccount.getAccountName());
-        synchronizeCapabilities(localAccount, new IResponseCallback() {
+        synchronizeCapabilities(localAccount, new IResponseCallback<Void>() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(Void v) {
                 Log.i(TAG, "[synchronizeCapabilitiesAndNotes] Synchronize notes for " + localAccount.getAccountName());
                 synchronizeNotes(localAccount, callback);
             }
@@ -388,7 +388,7 @@ public class MainViewModel extends AndroidViewModel {
     /**
      * Updates the network status if necessary and pulls the latest {@link Capabilities} of the given {@param localAccount}
      */
-    public void synchronizeCapabilities(@NonNull Account localAccount, @NonNull IResponseCallback callback) {
+    public void synchronizeCapabilities(@NonNull Account localAccount, @NonNull IResponseCallback<Void> callback) {
         new Thread(() -> {
             final NotesServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
             if (!syncHelper.isSyncPossible()) {
@@ -403,14 +403,14 @@ public class MainViewModel extends AndroidViewModel {
                     localAccount.setTextColor(capabilities.getTextColor());
                     BrandingUtil.saveBrandColors(getApplication(), localAccount.getColor(), localAccount.getTextColor());
                     db.updateApiVersion(localAccount.getId(), capabilities.getApiVersion());
-                    callback.onSuccess();
+                    callback.onSuccess(null);
                 } catch (NextcloudFilesAppAccountNotFoundException e) {
                     db.getAccountDao().deleteAccount(localAccount);
                     callback.onError(e);
                 } catch (Exception e) {
                     if (e instanceof NextcloudHttpRequestFailedException && ((NextcloudHttpRequestFailedException) e).getStatusCode() == HttpURLConnection.HTTP_NOT_MODIFIED) {
                         Log.i(TAG, "[synchronizeCapabilities] Capabilities not modified.");
-                        callback.onSuccess();
+                        callback.onSuccess(null);
                     } else {
                         callback.onError(e);
                     }
@@ -428,7 +428,7 @@ public class MainViewModel extends AndroidViewModel {
     /**
      * Updates the network status if necessary and pulls the latest notes of the given {@param localAccount}
      */
-    public void synchronizeNotes(@NonNull Account currentAccount, @NonNull IResponseCallback callback) {
+    public void synchronizeNotes(@NonNull Account currentAccount, @NonNull IResponseCallback<Void> callback) {
         new Thread(() -> {
             Log.v(TAG, "[synchronize] - currentAccount: " + currentAccount.getAccountName());
             final NotesServerSyncHelper syncHelper = db.getNoteServerSyncHelper();
@@ -437,7 +437,7 @@ public class MainViewModel extends AndroidViewModel {
             }
             if (syncHelper.isSyncPossible()) {
                 syncHelper.scheduleSync(currentAccount, false);
-                callback.onSuccess();
+                callback.onSuccess(null);
             } else { // Sync is not possible
                 if (syncHelper.isNetworkConnected() && syncHelper.isSyncOnlyOnWifi()) {
                     callback.onError(new IntendedOfflineException("Network is connected, but sync is not possible."));
