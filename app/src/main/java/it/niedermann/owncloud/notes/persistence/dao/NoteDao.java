@@ -172,7 +172,7 @@ public interface NoteDao {
     void updateRemoteId(long id, Long remoteId);
 
     /**
-     * used by: {@link NotesServerSyncHelper.SyncTask#pushLocalChanges()} update only, if not modified locally during the synchronization
+     * used by: {@link it.niedermann.owncloud.notes.persistence.NotesServerSyncTask#pushLocalChanges()} update only, if not modified locally during the synchronization
      * (i.e. all (!) user changeable columns (content, favorite, category) must still have the same value), uses reference value gathered at start of synchronization
      */
     @Query("UPDATE NOTE SET title = :targetTitle, modified = :targetModified, favorite = :targetFavorite, etag = :targetETag, content = :targetContent, status = '', excerpt = :targetExcerpt " +
@@ -180,7 +180,7 @@ public interface NoteDao {
     int updateIfNotModifiedLocallyDuringSync(long noteId, Long targetModified, String targetTitle, boolean targetFavorite, String targetETag, String targetContent, String targetExcerpt, String contentBeforeSyncStart, String categoryBeforeSyncStart, boolean favoriteBeforeSyncStart);
 
     /**
-     * used by: {@link NotesServerSyncHelper.SyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
+     * used by: {@link it.niedermann.owncloud.notes.persistence.NotesServerSyncTask#pullRemoteChanges()} update only, if not modified locally (i.e. STATUS="") and if modified remotely (i.e. any (!) column has changed)
      */
     @Query("UPDATE NOTE SET title = :title, modified = :modified, favorite = :favorite, etag = :eTag, content = :content, status = '', excerpt = :excerpt " +
             "WHERE id = :id AND status = '' AND (title != :title OR modified != :modified OR favorite != :favorite OR category != :category OR (eTag IS NULL OR eTag != :eTag) OR content != :content)")
