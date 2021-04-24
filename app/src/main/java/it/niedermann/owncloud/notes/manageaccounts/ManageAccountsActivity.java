@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.nextcloud.android.sso.helper.SingleAccountHelper;
-
 import it.niedermann.owncloud.notes.LockedActivity;
+import it.niedermann.owncloud.notes.R;
+import it.niedermann.owncloud.notes.branding.BrandedDeleteAlertDialogBuilder;
 import it.niedermann.owncloud.notes.databinding.ActivityManageAccountsBinding;
-import it.niedermann.owncloud.notes.persistence.NotesDatabase;
+import it.niedermann.owncloud.notes.exception.ExceptionDialogFragment;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
@@ -19,7 +19,6 @@ public class ManageAccountsActivity extends LockedActivity {
     private ActivityManageAccountsBinding binding;
     private ManageAccountsViewModel viewModel;
     private ManageAccountAdapter adapter;
-    private NotesDatabase db = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,17 +26,11 @@ public class ManageAccountsActivity extends LockedActivity {
 
         binding = ActivityManageAccountsBinding.inflate(getLayoutInflater());
         viewModel = new ViewModelProvider(this).get(ManageAccountsViewModel.class);
-        setContentView(binding.getRoot());
 
+        setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        db = NotesDatabase.getInstance(this);
-
-        adapter = new ManageAccountAdapter(
-                (accountToSelect) -> viewModel.selectAccount(accountToSelect, this),
-                (accountToDelete) -> viewModel.deleteAccount(accountToDelete, this)
-        );
-
+        adapter = new ManageAccountAdapter(this::selectAccount, this::deleteAccount);
         binding.accounts.setAdapter(adapter);
 
         viewModel.getAccounts$().observe(this, (accounts) -> {
@@ -58,6 +51,35 @@ public class ManageAccountsActivity extends LockedActivity {
                     t.printStackTrace();
                 }
             });
+        });
+    }
+
+    private void selectAccount(@NonNull Account accountToSelect) {
+        viewModel.selectAccount(accountToSelect, this);
+    }
+
+    private void deleteAccount(@NonNull Account accountToDelete) {
+        viewModel.countUnsynchronizedNotes(accountToDelete.getId(), new IResponseCallback<Long>() {
+            @Override
+            public void onSuccess(Long unsynchronizedChangesCount) {
+                runOnUiThread(() -> {
+                    if (unsynchronizedChangesCount != null && unsynchronizedChangesCount > 0) {
+                        new BrandedDeleteAlertDialogBuilder(ManageAccountsActivity.this)
+                                .setTitle(getString(R.string.remove_account, accountToDelete.getUserName()))
+                                .setMessage(getResources().getQuantityString(R.plurals.remove_account_message, (int) unsynchronizedChangesCount.longValue(), accountToDelete.getAccountName(), unsynchronizedChangesCount))
+                                .setNeutralButton(android.R.string.cancel, null)
+                                .setPositiveButton(R.string.simple_remove, (d, l) -> viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this))
+                                .show();
+                    } else {
+                        viewModel.deleteAccount(accountToDelete, ManageAccountsActivity.this);
+                    }
+                });
+            }
+
+            @Override
+            public void onError(@NonNull Throwable t) {
+                ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+            }
         });
     }
 

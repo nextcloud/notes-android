@@ -1,0 +1,1 @@
+- ⚠️️ Display confirm dialog when deleting an account with unsynchronized changes (#989)

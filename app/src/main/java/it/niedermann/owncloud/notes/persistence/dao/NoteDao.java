@@ -194,4 +194,7 @@ public interface NoteDao {
 
     @Query("SELECT accountId, category, COUNT(*) as 'totalNotes' FROM NOTE WHERE STATUS != 'LOCAL_DELETED' AND accountId = :accountId AND category != '' AND category LIKE :searchTerm GROUP BY category")
     LiveData<List<CategoryWithNotesCount>> searchCategories$(Long accountId, String searchTerm);
+
+    @Query("SELECT COUNT(*) FROM NOTE WHERE STATUS != '' AND accountId = :accountId")
+    Long countUnsynchronizedNotes(long accountId);
 }

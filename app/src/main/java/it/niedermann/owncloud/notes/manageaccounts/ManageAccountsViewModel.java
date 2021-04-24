@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.nextcloud.android.sso.AccountImporter;
 import com.nextcloud.android.sso.exceptions.NextcloudFilesAppAccountNotFoundException;
 import com.nextcloud.android.sso.exceptions.NoCurrentAccountSelectedException;
 import com.nextcloud.android.sso.helper.SingleAccountHelper;
@@ -16,7 +15,6 @@ import com.nextcloud.android.sso.helper.SingleAccountHelper;
 import java.util.List;
 
 import it.niedermann.owncloud.notes.persistence.NotesDatabase;
-import it.niedermann.owncloud.notes.persistence.SSOClient;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
@@ -67,5 +65,9 @@ public class ManageAccountsViewModel extends AndroidViewModel {
 
     public void selectAccount(@Nullable Account account, @NonNull Context context) {
         SingleAccountHelper.setCurrentAccount(context, (account == null) ? null : account.getAccountName());
+    }
+
+    public void countUnsynchronizedNotes(long accountId, @NonNull IResponseCallback<Long> callback) {
+        new Thread(() -> callback.onSuccess(db.getNoteDao().countUnsynchronizedNotes(accountId))).start();
     }
 }
