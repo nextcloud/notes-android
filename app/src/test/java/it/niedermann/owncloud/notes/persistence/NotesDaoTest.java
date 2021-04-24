@@ -53,7 +53,7 @@ public class NotesDaoTest {
                 .inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), NotesDatabase.class)
                 .allowMainThreadQueries()
                 .build();
-        db.addAccount("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {}}", null));
+        db.getAccountDao().insert(new Account("https://äöüß.example.com", "彼得", "彼得@äöüß.example.com", new Capabilities("{ocs: {}}", null)));
         account = db.getAccountDao().getAccountByName("彼得@äöüß.example.com");
     }
 
@@ -410,7 +410,7 @@ public class NotesDaoTest {
     }
 
     private Account setupSecondAccount() throws NextcloudHttpRequestFailedException {
-        db.addAccount("https://example.org", "test", "test@example.org", new Capabilities("{ocs: {}}", null));
+        db.getAccountDao().insert(new Account("https://example.org", "test", "test@example.org", new Capabilities("{ocs: {}}", null)));
         return db.getAccountDao().getAccountByName("test@example.org");
     }
 
