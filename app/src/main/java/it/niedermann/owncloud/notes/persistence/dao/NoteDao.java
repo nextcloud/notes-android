@@ -138,7 +138,11 @@ public interface NoteDao {
     @Query("SELECT DISTINCT remoteId FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
     List<Long> getRemoteIds(long accountId);
 
-    @Query("SELECT id, remoteId, 0 as accountId, '' as title, 0 as favorite, '' as excerpt, 0 as modified, '' as eTag, 0 as status, '' as category, '' as content, 0 as scrollY  FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED'")
+    /**
+     * Gets a list of {@link Note} objects with filled {@link Note#id} and {@link Note#remoteId},
+     * where {@link Note#remoteId} is not <code>null</code>
+     */
+    @Query("SELECT id, remoteId, 0 as accountId, '' as title, 0 as favorite, '' as excerpt, 0 as modified, '' as eTag, 0 as status, '' as category, '' as content, 0 as scrollY  FROM NOTE WHERE accountId = :accountId AND status != 'LOCAL_DELETED' AND remoteId IS NOT NULL")
     List<Note> getRemoteIdAndId(long accountId);
 
     /**

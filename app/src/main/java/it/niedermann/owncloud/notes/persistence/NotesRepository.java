@@ -408,7 +408,6 @@ public class NotesRepository {
         return db.getNoteDao()
                 .getRemoteIdAndId(accountId)
                 .stream()
-                .filter(note -> note.getRemoteId() != null)
                 .collect(toMap(Note::getRemoteId, Note::getId));
     }
 
