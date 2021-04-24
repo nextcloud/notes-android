@@ -158,12 +158,26 @@ public class NotesRepository {
 
     // Accounts
 
+    @AnyThread
+    public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
+        return db.getAccountDao().getAccountById$(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
+    }
+
+    @WorkerThread
     public List<Account> getAccounts() {
         return db.getAccountDao().getAccounts();
     }
 
-    public int deleteAccount(Account localAccount) {
-        return db.getAccountDao().deleteAccount(localAccount);
+    @WorkerThread
+    public void deleteAccount(@NonNull Account account) {
+        try {
+            SSOClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, account.getAccountName()));
+        } catch (NextcloudFilesAppAccountNotFoundException e) {
+            e.printStackTrace();
+            SSOClient.invalidateAPICache();
+        }
+
+        db.getAccountDao().deleteAccount(account);
     }
 
     public Account getAccountByName(String accountName) {
@@ -391,7 +405,6 @@ public class NotesRepository {
     @NonNull
     @WorkerThread
     public Map<Long, Long> getIdMap(long accountId) {
-        validateAccountId(accountId);
         return db.getNoteDao()
                 .getRemoteIdAndId(accountId)
                 .stream()
@@ -513,7 +526,7 @@ public class NotesRepository {
     }
 
     @AnyThread
-    void updateDynamicShortcuts(long accountId) {
+    private void updateDynamicShortcuts(long accountId) {
         new Thread(() -> {
             if (SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
                 ShortcutManager shortcutManager = context.getApplicationContext().getSystemService(ShortcutManager.class);
@@ -546,18 +559,12 @@ public class NotesRepository {
         }).start();
     }
 
-    @AnyThread
-    public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        return db.getAccountDao().getAccountById$(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
-    }
-
     /**
      * @param apiVersion has to be a JSON array as a string <code>["0.2", "1.0", ...]</code>
      * @return whether or not the given {@link ApiVersion} has been written to the database
      * @throws IllegalArgumentException if the apiVersion does not match the expected format
      */
     public boolean updateApiVersion(long accountId, @Nullable String apiVersion) throws IllegalArgumentException {
-        validateAccountId(accountId);
         if (apiVersion != null) {
             try {
                 JSONArray apiVersions = new JSONArray(apiVersion);
@@ -587,44 +594,6 @@ public class NotesRepository {
     }
 
     /**
-     * @param localAccount the {@link Account} that should be deleted
-     * @throws IllegalArgumentException if no account has been deleted by the given accountId
-     */
-    @AnyThread
-    public LiveData<Void> deleteAccount$(@NonNull Account localAccount) throws IllegalArgumentException {
-        validateAccountId(localAccount.getId());
-        MutableLiveData<Void> ret = new MutableLiveData<>();
-        new Thread(() -> {
-            int deletedAccounts = db.getAccountDao().deleteAccount(localAccount);
-            if (deletedAccounts < 1) {
-                Log.e(TAG, "AccountId '" + localAccount.getId() + "' did not delete any account");
-                throw new IllegalArgumentException("The given accountId does not delete any row");
-            } else if (deletedAccounts > 1) {
-                Log.e(TAG, "AccountId '" + localAccount.getId() + "' deleted unexpectedly '" + deletedAccounts + "' accounts");
-            }
-
-            try {
-                SSOClient.invalidateAPICache(AccountImporter.getSingleSignOnAccount(context, localAccount.getAccountName()));
-            } catch (NextcloudFilesAppAccountNotFoundException e) {
-                e.printStackTrace();
-                SSOClient.invalidateAPICache();
-            }
-
-            // TODO this should already be handled by foreign key cascade, no?
-            final int deletedNotes = db.getNoteDao().deleteByAccountId(localAccount.getId());
-            Log.v(TAG, "Deleted " + deletedNotes + " notes from account " + localAccount.getId());
-            ret.postValue(null);
-        }).start();
-        return ret;
-    }
-
-    private static void validateAccountId(long accountId) {
-        if (accountId < 1) {
-            throw new IllegalArgumentException("accountId must be greater than 0");
-        }
-    }
-
-    /**
      * Modifies the sorting method for one category, the category can be normal category or
      * one of "All notes", "Favorite", and "Uncategorized".
      * If category is one of these three, sorting method will be modified in android.content.SharedPreference.
@@ -637,8 +606,6 @@ public class NotesRepository {
      */
     @AnyThread
     public void modifyCategoryOrder(long accountId, @NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
-        validateAccountId(accountId);
-
         new Thread(() -> {
             final Context ctx = context.getApplicationContext();
             final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
@@ -725,11 +692,6 @@ public class NotesRepository {
 
         return map(new SharedPreferenceIntLiveData(sp, prefKey, CategorySortingMethod.SORT_MODIFIED_DESC.getId()), CategorySortingMethod::findById);
     }
-
-    public Context getContext() {
-        return context;
-    }
-
 
     @Override
     protected void finalize() throws Throwable {
@@ -900,13 +862,11 @@ public class NotesRepository {
     public void updateNetworkStatus() {
         try {
             final ConnectivityManager connMgr = (ConnectivityManager) context.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
             if (connMgr == null) {
                 throw new NetworkErrorException("ConnectivityManager is null");
             }
 
             final NetworkInfo activeInfo = connMgr.getActiveNetworkInfo();
-
             if (activeInfo == null) {
                 throw new NetworkErrorException("NetworkInfo is null");
             }
@@ -915,7 +875,6 @@ public class NotesRepository {
                 networkConnected = true;
 
                 final NetworkInfo networkInfo = connMgr.getNetworkInfo((ConnectivityManager.TYPE_WIFI));
-
                 if (networkInfo == null) {
                     throw new NetworkErrorException("connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI) is null");
                 }
