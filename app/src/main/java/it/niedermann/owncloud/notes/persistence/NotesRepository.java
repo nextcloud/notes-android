@@ -134,21 +134,21 @@ public class NotesRepository {
 
     public static synchronized NotesRepository getInstance(@NonNull Context context) {
         if (instance == null) {
-            instance = new NotesRepository(context);
+            instance = new NotesRepository(context, NotesDatabase.getInstance(context.getApplicationContext()));
         }
         return instance;
     }
 
-    private NotesRepository(final Context context) {
+    private NotesRepository(@NonNull final Context context, @NonNull final NotesDatabase db) {
         this.context = context.getApplicationContext();
-        this.db = NotesDatabase.getInstance(this.context);
+        this.db = db;
         this.defaultNonEmptyTitle = NoteUtil.generateNonEmptyNoteTitle("", this.context);
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
 
         // Registers BroadcastReceiver to track network connection changes.
         context.getApplicationContext().registerReceiver(networkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context.getApplicationContext());
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this.context.getApplicationContext());
         prefs.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener);
         syncOnlyOnWifi = prefs.getBoolean(syncOnlyOnWifiKey, false);
 
