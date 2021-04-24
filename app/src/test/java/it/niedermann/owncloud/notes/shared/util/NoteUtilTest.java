@@ -1,23 +1,13 @@
 package it.niedermann.owncloud.notes.shared.util;
 
-import android.os.Build;
-
 import junit.framework.TestCase;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 /**
  * Tests the NoteUtil
  * Created by stefan on 06.10.15.
  */
-@RunWith(RobolectricTestRunner.class)
-@Config(sdk = {Build.VERSION_CODES.P})
 public class NoteUtilTest extends TestCase {
 
-    @Test
     public void testIsEmptyLine() {
         assertTrue(NoteUtil.isEmptyLine(" "));
         assertTrue(NoteUtil.isEmptyLine("\n"));
@@ -27,7 +17,6 @@ public class NoteUtilTest extends TestCase {
         assertFalse(NoteUtil.isEmptyLine("a \n "));
     }
 
-    @Test
     public void testGetLineWithoutMarkdown() {
         assertEquals("Test", NoteUtil.getLineWithoutMarkdown("Test", 0));
         assertEquals("Test", NoteUtil.getLineWithoutMarkdown("\nTest", 0));
@@ -35,7 +24,6 @@ public class NoteUtilTest extends TestCase {
         assertEquals("Bar", NoteUtil.getLineWithoutMarkdown("Foo\nBar", 1));
     }
 
-    @Test
     public void testGenerateNoteTitle() {
         assertEquals("Test", NoteUtil.generateNoteTitle("Test"));
         assertEquals("Test", NoteUtil.generateNoteTitle("Test\n"));
@@ -44,39 +32,21 @@ public class NoteUtilTest extends TestCase {
         assertEquals("Test", NoteUtil.generateNoteTitle("\n\nTest"));
     }
 
-    @Test
-    public void testGenerateNoteExcerpt() {
-        // title is different from content → return max. 200 characters starting with the first line which is not empty
-        assertEquals("Test", NoteUtil.generateNoteExcerpt("Test", "Title"));
-        assertEquals("Test   Foo", NoteUtil.generateNoteExcerpt("Test\nFoo", "Title"));
-        assertEquals("Test   Foo   Bar", NoteUtil.generateNoteExcerpt("Test\nFoo\nBar", "Title"));
-        assertEquals("", NoteUtil.generateNoteExcerpt("", "Title"));
+    //  title is different from content → return max. 200 characters starting with the first line which is not empty
+    // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1087
+    public void testGenerateNoteExcerpt1() {
+        assertEquals("Word count: 4   Test", NoteUtil.generateNoteExcerpt("Test", "Title"));
+        assertEquals("Word count: 8   Test   Foo", NoteUtil.generateNoteExcerpt("Test\nFoo", "Title"));
+        assertEquals("Word count: 12   Test   Foo   Bar", NoteUtil.generateNoteExcerpt("Test\nFoo\nBar", "Title"));
+        assertEquals("Word count: 0", NoteUtil.generateNoteExcerpt("", "Title"));
+    }
 
-        // content actually starts with title → return max. 200 characters starting with the first character after the title
-        assertEquals("", NoteUtil.generateNoteExcerpt("Title", "Title"));
-        assertEquals("Foo", NoteUtil.generateNoteExcerpt("Title\nFoo", "Title"));
-        assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("Title\nTitle\nBar", "Title"));
-        assertEquals("", NoteUtil.generateNoteExcerpt("", "Title"));
-
-        // some empty lines between the actual contents → Should be ignored
-        assertEquals("", NoteUtil.generateNoteExcerpt("\nTitle", "Title"));
-        assertEquals("Foo", NoteUtil.generateNoteExcerpt("\n\n\n\nTitle\nFoo", "Title"));
-        assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("\nTitle\n\n\nTitle\nBar", "\n\nTitle"));
-        assertEquals("", NoteUtil.generateNoteExcerpt("\n\n\n", "\nTitle"));
-
-        // content has markdown while titles markdown is already stripped
-        assertEquals("", NoteUtil.generateNoteExcerpt("# Title", "Title"));
-        assertEquals("Foo", NoteUtil.generateNoteExcerpt("Title\n- Foo", "Title"));
-        assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("# Title\n- Title\n- Bar", "Title"));
-
-        // title has markdown while contents markdown is stripped
-        assertEquals("", NoteUtil.generateNoteExcerpt("Title", "# Title"));
-        assertEquals("Foo", NoteUtil.generateNoteExcerpt("Title\nFoo", "- Title"));
-        assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("Title\nTitle\nBar", "- Title"));
-
-        // content and title have markdown
-        assertEquals("", NoteUtil.generateNoteExcerpt("# Title", "# Title"));
-        assertEquals("Foo", NoteUtil.generateNoteExcerpt("# Title\n- Foo", "- Title"));
-        assertEquals("Title   Bar", NoteUtil.generateNoteExcerpt("- Title\nTitle\nBar", "- Title"));
+    //  content actually starts with title → return max. 200 characters starting with the first character after the title
+    // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1087
+    public void testGenerateNoteExcerpt2() {
+        assertEquals("Word count: 5   ", NoteUtil.generateNoteExcerpt("Title", "Title"));
+        assertEquals("Word count: 9   Foo", NoteUtil.generateNoteExcerpt("Title\nFoo", "Title"));
+        assertEquals("Word count: 15   Title   Bar", NoteUtil.generateNoteExcerpt("Title\nTitle\nBar", "Title"));
+        assertEquals("Word count: 0", NoteUtil.generateNoteExcerpt("", "Title"));
     }
 }

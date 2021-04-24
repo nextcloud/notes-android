@@ -56,17 +56,21 @@ public class NoteUtil {
     }
 
     /**
-     * Generates an excerpt of a content that does <em>not</em> match the given title
+     * Generates word counts and an excerpt of a content that does <em>not</em> match the given title
      *
      * @param content {@link String}
      * @param title   {@link String} In case the content starts with the title, the excerpt should be generated starting from this point
-     * @return excerpt String
+     * @return word counts,excerpt String
      */
     @NonNull
     public static String generateNoteExcerpt(@NonNull String content, @Nullable String title) {
+        // CS304 issue link: https://github.com/stefan-niedermann/nextcloud-notes/issues/1087
+        String wordLen = Integer.toString(content.length());
         content = removeMarkdown(replaceCheckboxesWithEmojis(content.trim()));
+
+        System.out.println(content);
         if (TextUtils.isEmpty(content)) {
-            return "";
+            return "Word count: 0";
         }
         if (!TextUtils.isEmpty(title)) {
             final String trimmedTitle = removeMarkdown(replaceCheckboxesWithEmojis(title.trim()));
@@ -74,7 +78,8 @@ public class NoteUtil {
                 content = content.substring(trimmedTitle.length());
             }
         }
-        return truncateString(content.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
+        String excerpt = truncateString(content.trim(), 200).replace("\n", EXCERPT_LINE_SEPARATOR);
+        return "Word count: " + wordLen + "   " + excerpt;
     }
 
     @NonNull
