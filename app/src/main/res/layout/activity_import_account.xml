@@ -50,6 +50,19 @@
             android:text="@string/choose_account"
             app:backgroundTint="@color/defaultBrand" />
 
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/add_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textColor="@color/fg_secondary"
+            android:textSize="18sp"
+            tools:text="@string/you_have_to_be_connected_to_the_internet_in_order_to_add_an_account" />
+
         <ProgressBar
             android:id="@+id/progress_circular"
             android:layout_width="wrap_content"
