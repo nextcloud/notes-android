@@ -81,7 +81,7 @@ public class NotesRepository {
 
     private static NotesRepository instance;
 
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final ExecutorService executor;
     private final Context context;
     private final NotesDatabase db;
     private final String defaultNonEmptyTitle;
@@ -112,13 +112,13 @@ public class NotesRepository {
         public void onReceive(Context context, Intent intent) {
             updateNetworkStatus();
             if (isSyncPossible() && SSOUtil.isConfigured(context)) {
-                new Thread(() -> {
+                executor.submit(() -> {
                     try {
                         scheduleSync(getAccountByName(SingleAccountHelper.getCurrentSingleSignOnAccount(context).name), false);
                     } catch (NextcloudFilesAppAccountNotFoundException | NoCurrentAccountSelectedException e) {
                         Log.v(TAG, "Can not select current SingleSignOn account after network changed, do not sync.");
                     }
-                }).start();
+                });
             }
         }
     };
@@ -134,14 +134,15 @@ public class NotesRepository {
 
     public static synchronized NotesRepository getInstance(@NonNull Context context) {
         if (instance == null) {
-            instance = new NotesRepository(context, NotesDatabase.getInstance(context.getApplicationContext()));
+            instance = new NotesRepository(context, NotesDatabase.getInstance(context.getApplicationContext()), Executors.newCachedThreadPool());
         }
         return instance;
     }
 
-    private NotesRepository(@NonNull final Context context, @NonNull final NotesDatabase db) {
+    private NotesRepository(@NonNull final Context context, @NonNull final NotesDatabase db, @NonNull final ExecutorService executor) {
         this.context = context.getApplicationContext();
         this.db = db;
+        this.executor = executor;
         this.defaultNonEmptyTitle = NoteUtil.generateNonEmptyNoteTitle("", this.context);
         this.syncOnlyOnWifiKey = context.getApplicationContext().getResources().getString(R.string.pref_key_wifi_only);
 
@@ -364,7 +365,7 @@ public class NotesRepository {
     public LiveData<Note> addNoteAndSync(Account account, Note note) {
         final Note entity = new Note(0, null, note.getModified(), note.getTitle(), note.getContent(), note.getCategory(), note.getFavorite(), note.getETag(), DBStatus.LOCAL_EDITED, account.getId(), generateNoteExcerpt(note.getContent(), note.getTitle()), 0);
         final MutableLiveData<Note> ret = new MutableLiveData<>();
-        new Thread(() -> ret.postValue(addNote(account.getId(), entity))).start();
+        executor.submit(() -> ret.postValue(addNote(account.getId(), entity)));
         return map(ret, newNote -> {
             notifyWidgets();
             scheduleSync(account, true);
@@ -413,10 +414,10 @@ public class NotesRepository {
 
     @AnyThread
     public void toggleFavoriteAndSync(Account account, long noteId) {
-        new Thread(() -> {
+        executor.submit(() -> {
             db.getNoteDao().toggleFavorite(noteId);
             scheduleSync(account, true);
-        }).start();
+        });
     }
 
     /**
@@ -430,11 +431,11 @@ public class NotesRepository {
      */
     @AnyThread
     public void setCategory(@NonNull Account account, long noteId, @NonNull String category) {
-        new Thread(() -> {
+        executor.submit(() -> {
             db.getNoteDao().updateStatus(noteId, DBStatus.LOCAL_EDITED);
             db.getNoteDao().updateCategory(noteId, category);
             scheduleSync(account, true);
-        }).start();
+        });
     }
 
     /**
@@ -491,7 +492,7 @@ public class NotesRepository {
      */
     @AnyThread
     public void deleteNoteAndSync(Account account, long id) {
-        new Thread(() -> {
+        executor.submit(() -> {
             db.getNoteDao().updateStatus(id, DBStatus.LOCAL_DELETED);
             notifyWidgets();
             scheduleSync(account, true);
@@ -510,23 +511,23 @@ public class NotesRepository {
                     Log.e(TAG, ShortcutManager.class.getSimpleName() + "is null.");
                 }
             }
-        }).start();
+        });
     }
 
     /**
      * Notify about changed notes.
      */
     @AnyThread
-    protected void notifyWidgets() {
-        new Thread(() -> {
+    private void notifyWidgets() {
+        executor.submit(() -> {
             updateSingleNoteWidgets(context);
             updateNoteListWidgets(context);
-        }).start();
+        });
     }
 
     @AnyThread
     private void updateDynamicShortcuts(long accountId) {
-        new Thread(() -> {
+        executor.submit(() -> {
             if (SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
                 ShortcutManager shortcutManager = context.getApplicationContext().getSystemService(ShortcutManager.class);
                 if (shortcutManager != null) {
@@ -555,7 +556,7 @@ public class NotesRepository {
                     }
                 }
             }
-        }).start();
+        });
     }
 
     /**
@@ -605,7 +606,7 @@ public class NotesRepository {
      */
     @AnyThread
     public void modifyCategoryOrder(long accountId, @NonNull NavigationCategory selectedCategory, @NonNull CategorySortingMethod sortingMethod) {
-        new Thread(() -> {
+        executor.submit(() -> {
             final Context ctx = context.getApplicationContext();
             final SharedPreferences.Editor sp = PreferenceManager.getDefaultSharedPreferences(ctx).edit();
             int orderIndex = sortingMethod.getId();
@@ -642,7 +643,7 @@ public class NotesRepository {
                 }
             }
             sp.apply();
-        }).start();
+        });
     }
 
     /**
@@ -728,7 +729,7 @@ public class NotesRepository {
      *
      * @param callback Implementation of ISyncCallback, contains one method that shall be executed.
      */
-    public void addCallbackPush(Account account, ISyncCallback callback) {
+    private void addCallbackPush(Account account, ISyncCallback callback) {
         if (account == null) {
             Log.i(TAG, "ssoAccount is null. Is this a local account?");
             callback.onScheduled();
