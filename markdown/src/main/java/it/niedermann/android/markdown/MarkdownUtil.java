@@ -21,9 +21,7 @@ import com.yydcdut.markdown.MarkdownProcessor;
 import com.yydcdut.markdown.syntax.text.TextFactory;
 import com.yydcdut.rxmarkdown.RxMarkdown;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
+import java.util.Arrays;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -446,9 +444,11 @@ public class MarkdownUtil {
         // TODO maybe we can utilize the markwon renderer?
 
         for (EListType listType : EListType.values()) {
-            s = s.replace(listType.checkboxChecked, "");
-            s = s.replace(listType.checkboxUnchecked, "");
-            s = s.replace(listType.listSymbolWithTrailingSpace, "");
+            for (String item : Arrays.asList(listType.checkboxChecked, listType.checkboxUnchecked, listType.listSymbolWithTrailingSpace)) {
+                if (s.startsWith(item)) {
+                    s = s.substring(item.length());
+                }
+            }
         }
         s = PATTERN_LISTS.matcher(s).replaceAll("");
         s = PATTERN_HEADINGS.matcher(s).replaceAll("$1");
