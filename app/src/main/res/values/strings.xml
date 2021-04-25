@@ -300,8 +300,8 @@
     <string name="choose_account">Choose account</string>
     <string name="context_based_formatting">Context based formatting popover</string>
     <plurals name="remove_account_message">
-        <item quantity="one">Removing the account %1$s will also delete one unsynchronized change irrecoverable.</item>
-        <item quantity="other">Removing the account %1$s will also delete %2$d unsynchronized changes irrecoverable.</item>
+        <item quantity="one">Removing the account %1$s will also delete irrecoverable one unsynchronized change.</item>
+        <item quantity="other">Removing the account %1$s will also delete irrecoverable %2$d unsynchronized changes.</item>
     </plurals>
     <string name="remove_account">Remove %1$s</string>
 
