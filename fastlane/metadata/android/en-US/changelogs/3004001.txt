@@ -1,2 +1,3 @@
 - ⚠️️ Display confirm dialog when deleting an account with unsynchronized changes (#989) - by @AlpAcA0072
 - ➖ Allow dashes in note titles (#1104)
+- 🌐 Support links in tables (#1115)
