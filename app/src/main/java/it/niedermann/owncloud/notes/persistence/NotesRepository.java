@@ -312,6 +312,9 @@ public class NotesRepository {
         db.getNoteDao().deleteByNoteId(id, forceDBStatus);
     }
 
+    /**
+     * Please note, that db.updateNote() realized an optimistic conflict resolution, which is required for parallel changes of this Note from the UI.
+     */
     public int updateIfNotModifiedLocallyDuringSync(long noteId, Long targetModified, String targetTitle, boolean targetFavorite, String targetETag, String targetContent, String targetExcerpt, String contentBeforeSyncStart, String categoryBeforeSyncStart, boolean favoriteBeforeSyncStart) {
         return db.getNoteDao().updateIfNotModifiedLocallyDuringSync(noteId, targetModified, targetTitle, targetFavorite, targetETag, targetContent, targetExcerpt, contentBeforeSyncStart, categoryBeforeSyncStart, favoriteBeforeSyncStart);
     }
@@ -779,10 +782,8 @@ public class NotesRepository {
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(account.getId())) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
                 try {
-                    SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
                     Log.d(TAG, "... starting now");
-                    final NotesClient notesClient = NotesClient.newInstance(account.getPreferredApiVersion(), context);
-                    final NotesServerSyncTask syncTask = new NotesServerSyncTask(notesClient, this, account, ssoAccount, onlyLocalChanges) {
+                    final NotesServerSyncTask syncTask = new NotesServerSyncTask(context, this, account, onlyLocalChanges) {
                         @Override
                         void onPreExecute() {
                             syncStatus.postValue(true);
