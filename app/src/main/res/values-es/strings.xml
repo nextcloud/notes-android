@@ -240,4 +240,4 @@
     <string name="no_account_configured_yet">Todavía no hay una cuenta configurada</string>
     <string name="no_other_accounts">Aún no ha configurado ninguna otra cuenta.</string>
     <string name="context_based_formatting">Ventana emergente para formato basado en el contexto</string>
-</resources>
+    </resources>

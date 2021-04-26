@@ -6,12 +6,14 @@
     <string name="label_all_notes">Tum notlar</string>
     <string name="label_favorites">Sık Kullanılanlar</string>
     <string name="action_create">Not ekle</string>
+    <string name="welcome_text">%1$s uygulamasına hoş geldiniz</string>
     <string name="action_settings">Ayarlar</string>
     <string name="action_trashbin">Silinmiş notlar</string>
     <string name="action_search">Arama</string>
     <string name="action_sorting_method">Sıralama yöntemi</string>
     <string name="simple_cancel">İptal</string>
     <string name="simple_edit">Düzenle</string>
+    <string name="simple_remove">Sil</string>
     <string name="action_edit_save">Kaydet</string>
     <string name="simple_about">Hakkında</string>
     <string name="simple_link">Bağlantı</string>
@@ -245,5 +247,8 @@
     <string name="error_action_open_network">Ağ ayarları</string>
     <string name="no_account_configured_yet">Henüz bir hesap yapılandırılmamış</string>
     <string name="no_other_accounts">Henüz başka bir hesap yapılandırmamışsınız.</string>
+    <string name="choose_account">Hesap seçin</string>
     <string name="context_based_formatting">Bağlam tabanlı biçimlendirme açılan penceresi</string>
-</resources>
+    <string name="remove_account">%1$s sil</string>
+
+    </resources>

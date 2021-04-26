@@ -239,4 +239,4 @@
     <string name="no_account_configured_yet">Encara no s\'ha configurat cap compte</string>
     <string name="no_other_accounts">Encara no heu configurat cap altre compte.</string>
     <string name="context_based_formatting">Element emergent de format basat en el context</string>
-</resources>
+    </resources>
