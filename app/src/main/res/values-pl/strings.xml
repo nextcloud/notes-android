@@ -6,12 +6,14 @@
     <string name="label_all_notes">Wszystkie notatki</string>
     <string name="label_favorites">Ulubione</string>
     <string name="action_create">Nowa notatka</string>
+    <string name="welcome_text">Witamy w %1$s</string>
     <string name="action_settings">Ustawienia</string>
     <string name="action_trashbin">Usunięte notatki</string>
     <string name="action_search">Szukaj</string>
     <string name="action_sorting_method">Metoda sortowania</string>
     <string name="simple_cancel">Anuluj</string>
     <string name="simple_edit">Edytuj</string>
+    <string name="simple_remove">Usuń</string>
     <string name="action_edit_save">Zapisz</string>
     <string name="simple_about">O aplikacji</string>
     <string name="simple_link">Odnośnik</string>
@@ -253,5 +255,8 @@
     <string name="error_action_open_network">Ustawienia sieci</string>
     <string name="no_account_configured_yet">Nie skonfigurowano jeszcze konta</string>
     <string name="no_other_accounts">Nie masz jeszcze skonfigurowanych żadnych innych kont.</string>
+    <string name="choose_account">Wybierz konto</string>
     <string name="context_based_formatting">Okno podręczne formatowania opartego na kontekście</string>
-</resources>
+    <string name="remove_account">Usuń %1$s</string>
+
+    </resources>

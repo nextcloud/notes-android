@@ -6,12 +6,14 @@
     <string name="label_all_notes">所有筆記</string>
     <string name="label_favorites">我的最愛</string>
     <string name="action_create">新筆記</string>
+    <string name="welcome_text">歡迎來到 %1$s</string>
     <string name="action_settings">設定</string>
     <string name="action_trashbin">已刪除筆記</string>
     <string name="action_search">搜尋</string>
     <string name="action_sorting_method">排序方法</string>
     <string name="simple_cancel">取消</string>
     <string name="simple_edit">修改</string>
+    <string name="simple_remove">移除</string>
     <string name="action_edit_save">儲存</string>
     <string name="simple_about">關於</string>
     <string name="simple_link">連結</string>
@@ -241,5 +243,8 @@
     <string name="error_action_open_network">網路設定</string>
     <string name="no_account_configured_yet">未有已設定的賬戶</string>
     <string name="no_other_accounts">你尚未設定其它帳號。</string>
+    <string name="choose_account">選擇賬戶</string>
     <string name="context_based_formatting">基於 context 的格式彈出框</string>
-</resources>
+    <string name="remove_account">移除 %1$s</string>
+
+    </resources>

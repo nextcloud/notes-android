@@ -6,12 +6,14 @@
     <string name="label_all_notes">Alle Notizen</string>
     <string name="label_favorites">Favoriten</string>
     <string name="action_create">Neue Notiz</string>
+    <string name="welcome_text">Willkommen bei %1$s</string>
     <string name="action_settings">Einstellungen</string>
     <string name="action_trashbin">Gelöschte Notizen</string>
     <string name="action_search">Suche</string>
     <string name="action_sorting_method">Sortierverfahren</string>
     <string name="simple_cancel">Abbrechen</string>
     <string name="simple_edit">Bearbeiten</string>
+    <string name="simple_remove">Entfernen</string>
     <string name="action_edit_save">Speichern</string>
     <string name="simple_about">Über</string>
     <string name="simple_link">Link</string>
@@ -245,5 +247,8 @@
     <string name="error_action_open_network">Netzwerkeinstellungen</string>
     <string name="no_account_configured_yet">Bislang kein Konto eingerichtet</string>
     <string name="no_other_accounts">Sie haben bislang keine weiteren Konten eingerichtet.</string>
+    <string name="choose_account">Konto auswählen</string>
     <string name="context_based_formatting">Popup für die kontextbasierte Formatierung</string>
-</resources>
+    <string name="remove_account">%1$s entfernen</string>
+
+    </resources>

@@ -233,4 +233,4 @@
     <string name="error_action_open_network">네트워크 환경설정</string>
     <string name="no_other_accounts">아직 다른 계정을 구성하지 않았습니다.</string>
     <string name="context_based_formatting">컨텍스트 기반의 양식 팝오버</string>
-</resources>
+    </resources>
