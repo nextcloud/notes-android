@@ -2,3 +2,4 @@
 - ➖ Allow dashes in note titles (#1104)
 - 🌐 Support links in tables (#1115)
 - 🔌 Handle offline state when adding accounts (#1014)
+- 🐞 Fix parallel synchronization issues which can lead to duplicate primary keys

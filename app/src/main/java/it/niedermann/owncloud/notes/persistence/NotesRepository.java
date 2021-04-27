@@ -163,7 +163,7 @@ public class NotesRepository {
     @AnyThread
     public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
         final Account createdAccount = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
-        if(createdAccount == null) {
+        if (createdAccount == null) {
             callback.onError(new Exception("Could not read created account."));
         } else {
             callback.onSuccess(createdAccount);
@@ -775,7 +775,7 @@ public class NotesRepository {
      *
      * @param onlyLocalChanges Whether to only push local changes to the server or to also load the whole list of notes from the server.
      */
-    public void scheduleSync(Account account, boolean onlyLocalChanges) {
+    public synchronized void scheduleSync(Account account, boolean onlyLocalChanges) {
         if (account == null) {
             Log.i(TAG, SingleSignOnAccount.class.getSimpleName() + " is null. Is this a local account?");
         } else {
@@ -784,6 +784,7 @@ public class NotesRepository {
             }
             Log.d(TAG, "Sync requested (" + (onlyLocalChanges ? "onlyLocalChanges" : "full") + "; " + (Boolean.TRUE.equals(syncActive.get(account.getId())) ? "sync active" : "sync NOT active") + ") ...");
             if (isSyncPossible() && (!Boolean.TRUE.equals(syncActive.get(account.getId())) || onlyLocalChanges)) {
+                syncActive.put(account.getId(), true);
                 try {
                     SingleSignOnAccount ssoAccount = AccountImporter.getSingleSignOnAccount(context, account.getAccountName());
                     Log.d(TAG, "... starting now");
@@ -798,7 +799,6 @@ public class NotesRepository {
                             if (!onlyLocalChanges && Boolean.TRUE.equals(syncScheduled.get(localAccount.getId()))) {
                                 syncScheduled.put(localAccount.getId(), false);
                             }
-                            syncActive.put(localAccount.getId(), true);
                         }
 
                         @Override
