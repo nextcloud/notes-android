@@ -57,6 +57,7 @@ import it.niedermann.owncloud.notes.shared.model.Capabilities;
 import it.niedermann.owncloud.notes.shared.model.CategorySortingMethod;
 import it.niedermann.owncloud.notes.shared.model.DBStatus;
 import it.niedermann.owncloud.notes.shared.model.ENavigationCategoryType;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 import it.niedermann.owncloud.notes.shared.model.ISyncCallback;
 import it.niedermann.owncloud.notes.shared.model.NavigationCategory;
 import it.niedermann.owncloud.notes.shared.model.SyncResultStatus;
@@ -160,8 +161,13 @@ public class NotesRepository {
     // Accounts
 
     @AnyThread
-    public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        return db.getAccountDao().getAccountById$(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
+        final Account createdAccount = db.getAccountDao().getAccountById(db.getAccountDao().insert(new Account(url, username, accountName, capabilities)));
+        if(createdAccount == null) {
+            callback.onError(new Exception("Could not read created account."));
+        } else {
+            callback.onSuccess(createdAccount);
+        }
     }
 
     @WorkerThread

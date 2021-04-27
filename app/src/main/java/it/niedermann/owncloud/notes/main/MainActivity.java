@@ -633,15 +633,21 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                             try {
                                 Log.i(TAG, "Refreshing capabilities for " + ssoAccount.name);
                                 final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                                LiveData<Account> createLiveData = mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
-                                runOnUiThread(() -> createLiveData.observe(this, (account) -> {
-                                    createLiveData.removeObservers(this);
-                                    new Thread(() -> {
-                                        Log.i(TAG, capabilities.toString());
-                                        final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
-                                        runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
-                                    }).start();
-                                }));
+                                mainViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+                                    @Override
+                                    public void onSuccess(Account result) {
+                                        new Thread(() -> {
+                                            Log.i(TAG, capabilities.toString());
+                                            final Account a = mainViewModel.getLocalAccountByAccountName(ssoAccount.name);
+                                            runOnUiThread(() -> mainViewModel.postCurrentAccount(a));
+                                        }).start();
+                                    }
+
+                                    @Override
+                                    public void onError(@NonNull Throwable t) {
+                                        runOnUiThread(() -> ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName()));
+                                    }
+                                });
                             } catch (Exception e) {
                                 SSOClient.invalidateAPICache(ssoAccount);
                                 // Happens when importing an already existing account the second time

@@ -7,7 +7,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.nextcloud.android.sso.AccountImporter;
@@ -27,6 +26,7 @@ import it.niedermann.owncloud.notes.persistence.CapabilitiesClient;
 import it.niedermann.owncloud.notes.persistence.SSOClient;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
 public class ImportAccountActivity extends AppCompatActivity {
 
@@ -85,18 +85,25 @@ public class ImportAccountActivity extends AppCompatActivity {
                     try {
                         Log.i(TAG, "Loading capabilities for " + ssoAccount.name);
                         final Capabilities capabilities = CapabilitiesClient.getCapabilities(getApplicationContext(), ssoAccount, null);
-                        LiveData<Account> createLiveData = importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities);
-                        runOnUiThread(() -> createLiveData.observe(this, (account) -> {
-                            if (account != null) {
-                                Log.i(TAG, capabilities.toString());
-                                BrandingUtil.saveBrandColors(this, capabilities.getColor(), capabilities.getTextColor());
-                                setResult(RESULT_OK);
-                                finish();
-                            } else {
-                                binding.addButton.setEnabled(true);
-                                ExceptionDialogFragment.newInstance(new IllegalStateException("Created account is null.")).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                        importAccountViewModel.addAccount(ssoAccount.url, ssoAccount.userId, ssoAccount.name, capabilities, new IResponseCallback<Account>() {
+                            @Override
+                            public void onSuccess(Account account) {
+                                runOnUiThread(() -> {
+                                    Log.i(TAG, capabilities.toString());
+                                    BrandingUtil.saveBrandColors(ImportAccountActivity.this, capabilities.getColor(), capabilities.getTextColor());
+                                    setResult(RESULT_OK);
+                                    finish();
+                                });
                             }
-                        }));
+
+                            @Override
+                            public void onError(@NonNull Throwable t) {
+                                runOnUiThread(() -> {
+                                    binding.addButton.setEnabled(true);
+                                    ExceptionDialogFragment.newInstance(t).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                });
+                            }
+                        });
                     } catch (Throwable e) {
                         e.printStackTrace();
                         SSOClient.invalidateAPICache(ssoAccount);

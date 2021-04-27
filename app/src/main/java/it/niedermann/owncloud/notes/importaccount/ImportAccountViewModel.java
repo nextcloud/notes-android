@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import it.niedermann.owncloud.notes.persistence.NotesRepository;
 import it.niedermann.owncloud.notes.persistence.entity.Account;
 import it.niedermann.owncloud.notes.shared.model.Capabilities;
+import it.niedermann.owncloud.notes.shared.model.IResponseCallback;
 
 public class ImportAccountViewModel extends AndroidViewModel {
 
@@ -22,7 +23,7 @@ public class ImportAccountViewModel extends AndroidViewModel {
         this.repo = NotesRepository.getInstance(application);
     }
 
-    public LiveData<Account> addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities) {
-        return repo.addAccount(url, username, accountName, capabilities);
+    public void addAccount(@NonNull String url, @NonNull String username, @NonNull String accountName, @NonNull Capabilities capabilities, @NonNull IResponseCallback<Account> callback) {
+        repo.addAccount(url, username, accountName, capabilities, callback);
     }
 }
