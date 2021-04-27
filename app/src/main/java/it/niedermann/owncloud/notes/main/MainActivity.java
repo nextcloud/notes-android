@@ -650,10 +650,12 @@ public class MainActivity extends LockedActivity implements NoteClickListener, A
                                         coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, R.string.account_already_imported, Snackbar.LENGTH_LONG).show());
                                     });
                                 } else {
+                                    //CS304 issue: https://github.com/stefan-niedermann/nextcloud-notes/issues/1014
                                     e.printStackTrace();
                                     runOnUiThread(() -> {
                                         binding.activityNotesListView.progressCircular.setVisibility(GONE);
-                                        ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+//                                        ExceptionDialogFragment.newInstance(e).show(getSupportFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+                                        coordinatorLayout.post(() -> BrandedSnackbar.make(coordinatorLayout, "please connect to the network", Snackbar.LENGTH_LONG).show());
                                     });
                                 }
                             }
