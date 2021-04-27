@@ -257,6 +257,13 @@
     <string name="no_other_accounts">Nie masz jeszcze skonfigurowanych żadnych innych kont.</string>
     <string name="choose_account">Wybierz konto</string>
     <string name="context_based_formatting">Okno podręczne formatowania opartego na kontekście</string>
+    <plurals name="remove_account_message">
+        <item quantity="one">Usunięcie konta %1$s, usunie również nieodwracalnie jedną niezsynchronizowaną zmianę.</item>
+        <item quantity="few">Usunięcie konta %1$s, usunie również nieodwracalnie %2$d niezsynchronizowane zmiany.</item>
+        <item quantity="many">Usunięcie konta %1$s, usunie również nieodwracalnie %2$d niezsynchronizowanych zmian.</item>
+        <item quantity="other">Usunięcie konta %1$s, usunie również nieodwracalnie %2$d niezsynchronizowanych zmian.</item>
+    </plurals>
     <string name="remove_account">Usuń %1$s</string>
 
-    </resources>
+    <string name="you_have_to_be_connected_to_the_internet_in_order_to_add_an_account">Aby dodać konto, musisz mieć połączenie z Internetem.</string>
+</resources>
