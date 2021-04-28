@@ -104,6 +104,9 @@ dependencies {
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
 
+    // ReactiveX
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     // Testing

@@ -11,6 +11,7 @@ import com.nextcloud.android.sso.api.ParsedResponse;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import it.niedermann.owncloud.notes.shared.model.ApiVersion;
 import retrofit2.Call;
@@ -55,7 +56,7 @@ public class NotesAPI {
         }
     }
 
-    public Call<ParsedResponse<List<Note>>> getNotes(long lastModified, String lastETag) {
+    public Observable<ParsedResponse<List<Note>>> getNotes(long lastModified, String lastETag) {
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
             return notesAPI_1_0.getNotes(lastModified, lastETag);
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {

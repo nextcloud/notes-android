@@ -202,72 +202,67 @@ abstract class NotesServerSyncTask extends Thread {
             localAccount.setModified(accountFromDatabase.getModified());
             localAccount.setETag(accountFromDatabase.getETag());
 
-            final Response<ParsedResponse<List<Note>>> fetchResponse = notesAPI.getNotes(localAccount.getModified().getTimeInMillis() / 1_000, localAccount.getETag()).execute();
-            if (fetchResponse.isSuccessful()) {
-                final List<Note> remoteNotes = fetchResponse.body().getResponse();
-                final Set<Long> remoteIDs = new HashSet<>();
-                // pull remote changes: update or create each remote note
-                for (Note remoteNote : remoteNotes) {
-                    Log.v(TAG, "   Process Remote Note: " + remoteNote);
-                    remoteIDs.add(remoteNote.getRemoteId());
-                    if (remoteNote.getModified() == null) {
-                        Log.v(TAG, "   ... unchanged");
-                    } else if (idMap.containsKey(remoteNote.getRemoteId())) {
-                        Log.v(TAG, "   ... found → Update");
-                        Long localId = idMap.get(remoteNote.getRemoteId());
-                        if (localId != null) {
-                            repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
-                                    localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
-                        } else {
-                            Log.e(TAG, "Tried to update note from server, but local id of note is null. " + remoteNote);
-                        }
+            final ParsedResponse<List<Note>> fetchResponse = notesAPI.getNotes(localAccount.getModified().getTimeInMillis() / 1_000, localAccount.getETag()).blockingSingle();
+            final List<Note> remoteNotes = fetchResponse.getResponse();
+            final Set<Long> remoteIDs = new HashSet<>();
+            // pull remote changes: update or create each remote note
+            for (Note remoteNote : remoteNotes) {
+                Log.v(TAG, "   Process Remote Note: " + remoteNote);
+                remoteIDs.add(remoteNote.getRemoteId());
+                if (remoteNote.getModified() == null) {
+                    Log.v(TAG, "   ... unchanged");
+                } else if (idMap.containsKey(remoteNote.getRemoteId())) {
+                    Log.v(TAG, "   ... found → Update");
+                    Long localId = idMap.get(remoteNote.getRemoteId());
+                    if (localId != null) {
+                        repo.updateIfNotModifiedLocallyAndAnyRemoteColumnHasChanged(
+                                localId, remoteNote.getModified().getTimeInMillis(), remoteNote.getTitle(), remoteNote.getFavorite(), remoteNote.getCategory(), remoteNote.getETag(), remoteNote.getContent(), generateNoteExcerpt(remoteNote.getContent(), remoteNote.getTitle()));
                     } else {
-                        Log.v(TAG, "   ... create");
-                        repo.addNote(localAccount.getId(), remoteNote);
+                        Log.e(TAG, "Tried to update note from server, but local id of note is null. " + remoteNote);
                     }
+                } else {
+                    Log.v(TAG, "   ... create");
+                    repo.addNote(localAccount.getId(), remoteNote);
                 }
-                Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
-                // remove remotely deleted notes (only those without local changes)
-                for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
-                    if (!remoteIDs.contains(entry.getKey())) {
-                        Log.v(TAG, "   ... remove " + entry.getValue());
-                        repo.deleteByNoteId(entry.getValue(), DBStatus.VOID);
-                    }
-                }
-
-                // update ETag and Last-Modified in order to reduce size of next response
-                localAccount.setETag(fetchResponse.body().getHeaders().get(HEADER_KEY_ETAG));
-
-                final Calendar lastModified = Calendar.getInstance();
-                lastModified.setTimeInMillis(0);
-                final String lastModifiedHeader = fetchResponse.body().getHeaders().get(HEADER_KEY_LAST_MODIFIED);
-                if (lastModifiedHeader != null)
-                    lastModified.setTimeInMillis(Date.parse(lastModifiedHeader));
-                Log.d(TAG, "ETag: " + fetchResponse.body().getHeaders().get(HEADER_KEY_ETAG) + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
-
-                localAccount.setModified(lastModified);
-
-                repo.updateETag(localAccount.getId(), localAccount.getETag());
-                repo.updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
-
-
-                String supportedApiVersions = null;
-                final String supportedApiVersionsHeader = fetchResponse.body().getHeaders().get(HEADER_KEY_X_NOTES_API_VERSIONS);
-                if (supportedApiVersionsHeader != null) {
-                    supportedApiVersions = "[" + Objects.requireNonNull(supportedApiVersionsHeader) + "]";
-                }
-                try {
-                    if (repo.updateApiVersion(localAccount.getId(), supportedApiVersions)) {
-                        localAccount.setApiVersion(supportedApiVersions);
-                    }
-                } catch (Exception e) {
-                    exceptions.add(e);
-                }
-                return true;
-            } else {
-                exceptions.add(new Exception(fetchResponse.errorBody().string()));
-                return false;
             }
+            Log.d(TAG, "   Remove remotely deleted Notes (only those without local changes)");
+            // remove remotely deleted notes (only those without local changes)
+            for (Map.Entry<Long, Long> entry : idMap.entrySet()) {
+                if (!remoteIDs.contains(entry.getKey())) {
+                    Log.v(TAG, "   ... remove " + entry.getValue());
+                    repo.deleteByNoteId(entry.getValue(), DBStatus.VOID);
+                }
+            }
+
+            // update ETag and Last-Modified in order to reduce size of next response
+            localAccount.setETag(fetchResponse.getHeaders().get(HEADER_KEY_ETAG));
+
+            final Calendar lastModified = Calendar.getInstance();
+            lastModified.setTimeInMillis(0);
+            final String lastModifiedHeader = fetchResponse.getHeaders().get(HEADER_KEY_LAST_MODIFIED);
+            if (lastModifiedHeader != null)
+                lastModified.setTimeInMillis(Date.parse(lastModifiedHeader));
+            Log.d(TAG, "ETag: " + fetchResponse.getHeaders().get(HEADER_KEY_ETAG) + "; Last-Modified: " + lastModified + " (" + lastModified + ")");
+
+            localAccount.setModified(lastModified);
+
+            repo.updateETag(localAccount.getId(), localAccount.getETag());
+            repo.updateModified(localAccount.getId(), localAccount.getModified().getTimeInMillis());
+
+
+            String supportedApiVersions = null;
+            final String supportedApiVersionsHeader = fetchResponse.getHeaders().get(HEADER_KEY_X_NOTES_API_VERSIONS);
+            if (supportedApiVersionsHeader != null) {
+                supportedApiVersions = "[" + Objects.requireNonNull(supportedApiVersionsHeader) + "]";
+            }
+            try {
+                if (repo.updateApiVersion(localAccount.getId(), supportedApiVersions)) {
+                    localAccount.setApiVersion(supportedApiVersions);
+                }
+            } catch (Exception e) {
+                exceptions.add(e);
+            }
+            return true;
 //        } catch (NextcloudHttpRequestFailedException e) {
 //            Log.d(TAG, "Server returned HTTP Status Code " + e.getStatusCode() + " - " + e.getMessage());
 //            if (e.getStatusCode() == HTTP_NOT_MODIFIED) {

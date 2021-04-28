@@ -34,10 +34,10 @@ public class CapabilitiesClient {
     public static Capabilities getCapabilities(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @Nullable String lastETag) throws NextcloudHttpRequestFailedException, IOException {
         final NextcloudAPI nextcloudAPI = SSOClient.getNextcloudAPI(context.getApplicationContext(), ssoAccount);
         final OcsAPI ocsAPI = new NextcloudRetrofitApiBuilder(nextcloudAPI, API_ENDPOINT_OCS).create(OcsAPI.class);
-        final Response<ParsedResponse<Capabilities>> response = ocsAPI.getCapabilities(lastETag).execute();
+        final ParsedResponse<Capabilities> response = ocsAPI.getCapabilities(lastETag).blockingSingle();
         try {
-            final Capabilities capabilities = response.body().getResponse();
-            final Map<String, String> headers = response.body().getHeaders();
+            final Capabilities capabilities = response.getResponse();
+            final Map<String, String> headers = response.getHeaders();
             if (headers != null) {
                 capabilities.setETag(headers.get(HEADER_KEY_ETAG));
             } else {

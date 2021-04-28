@@ -7,6 +7,7 @@ import com.nextcloud.android.sso.api.ParsedResponse;
 import java.util.Calendar;
 import java.util.List;
 
+import io.reactivex.Observable;
 import it.niedermann.owncloud.notes.persistence.entity.Note;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -23,7 +24,7 @@ import retrofit2.http.Query;
 public interface NotesAPI_0_2 {
 
     @GET("notes")
-    Call<ParsedResponse<List<Note>>> getNotes(@Query(value = "pruneBefore") long lastModified, @Query("If-None-Match") String lastETag);
+    Observable<ParsedResponse<List<Note>>> getNotes(@Query(value = "pruneBefore") long lastModified, @Query("If-None-Match") String lastETag);
 
     default Call<Note> createNote(@Body Note note) {
         return createNote(new Note_0_2(note));
