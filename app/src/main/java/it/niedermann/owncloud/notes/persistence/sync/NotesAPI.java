@@ -86,7 +86,7 @@ public class NotesAPI {
         }
     }
 
-    public Call<Note> deleteNote(long noteId) {
+    public Call<Void> deleteNote(long noteId) {
         if (ApiVersion.API_VERSION_1_0.equals(usedApiVersion)) {
             return notesAPI_1_0.deleteNote(noteId);
         } else if (ApiVersion.API_VERSION_0_2.equals(usedApiVersion)) {

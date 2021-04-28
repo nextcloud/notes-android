@@ -38,7 +38,7 @@ public interface NotesAPI_0_2 {
     Call<Note> editNote(@Body Note note, @Path("remoteId") long remoteId);
 
     @DELETE("notes/{remoteId}")
-    Call<Note> deleteNote(@Path("remoteId") long noteId);
+    Call<Void> deleteNote(@Path("remoteId") long noteId);
 
     class Note_0_2 {
         @Expose

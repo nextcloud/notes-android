@@ -153,7 +153,7 @@ abstract class NotesServerSyncTask extends Thread {
                             Log.v(TAG, "   ...delete (only local, since it has never been synchronized)");
                         } else {
                             Log.v(TAG, "   ...delete (from server and local)");
-                            final Response<Note> deleteResponse = notesAPI.deleteNote(note.getRemoteId()).execute();
+                            final Response<Void> deleteResponse = notesAPI.deleteNote(note.getRemoteId()).execute();
                             if (!deleteResponse.isSuccessful()) {
                                 if (deleteResponse.code() == HTTP_NOT_FOUND) {
                                     Log.v(TAG, "   ...delete (note has already been deleted remotely)");
