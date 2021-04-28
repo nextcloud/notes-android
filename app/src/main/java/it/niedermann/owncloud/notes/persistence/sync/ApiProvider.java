@@ -16,16 +16,23 @@ import retrofit2.NextcloudRetrofitApiBuilder;
  */
 public class ApiProvider {
 
+    private static final String API_ENDPOINT_OCS = "/ocs/v2.php/cloud/";
     private static final String API_ENDPOINT_NOTES = "/index.php/apps/notes/api/v1/";
 
+    private final OcsAPI ocsAPI;
     private final NotesAPI notesAPI;
 
     public ApiProvider(@NonNull Context appContext, @NonNull SingleSignOnAccount ssoAccount) {
         final NextcloudAPI nextcloudAPI = SSOClient.getNextcloudAPI(appContext, ssoAccount);
+        ocsAPI = new NextcloudRetrofitApiBuilder(nextcloudAPI, API_ENDPOINT_OCS).create(OcsAPI.class);
         notesAPI = new NextcloudRetrofitApiBuilder(nextcloudAPI, API_ENDPOINT_NOTES).create(NotesAPI.class);
     }
 
     public NotesAPI getNotesAPI() {
         return notesAPI;
+    }
+
+    public OcsAPI getOcsAPI() {
+        return ocsAPI;
     }
 }

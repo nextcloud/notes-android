@@ -1,23 +1,39 @@
 package it.niedermann.owncloud.notes.persistence;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
+import com.bumptech.glide.load.HttpException;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializer;
 import com.nextcloud.android.sso.aidl.NextcloudRequest;
 import com.nextcloud.android.sso.api.NextcloudAPI;
 import com.nextcloud.android.sso.api.Response;
+import com.nextcloud.android.sso.exceptions.NextcloudHttpRequestFailedException;
 import com.nextcloud.android.sso.model.SingleSignOnAccount;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import it.niedermann.android.util.ColorUtil;
+import it.niedermann.owncloud.notes.persistence.sync.CapabilitiesDeserializer;
+import it.niedermann.owncloud.notes.shared.model.Capabilities;
+
+import static java.net.HttpURLConnection.HTTP_UNAVAILABLE;
 
 @SuppressWarnings("WeakerAccess")
 @WorkerThread
@@ -26,10 +42,6 @@ public class SSOClient {
     private static final String TAG = SSOClient.class.getSimpleName();
 
     private static final Map<String, NextcloudAPI> mNextcloudAPIs = new HashMap<>();
-
-    public static Response requestFilesApp(@NonNull Context context, @NonNull SingleSignOnAccount ssoAccount, @NonNull NextcloudRequest nextcloudRequest) throws Exception {
-        return getNextcloudAPI(context.getApplicationContext(), ssoAccount).performNetworkRequestV2(nextcloudRequest);
-    }
 
     public static NextcloudAPI getNextcloudAPI(Context appContext, SingleSignOnAccount ssoAccount) {
         if (mNextcloudAPIs.containsKey(ssoAccount.name)) {
@@ -45,6 +57,7 @@ public class SSOClient {
                                 calendar.setTimeInMillis(src.getAsLong() * 1_000);
                                 return calendar;
                             })
+                            .registerTypeAdapter(Capabilities.class, new CapabilitiesDeserializer())
                             .create(),
                     new NextcloudAPI.ApiConnectedListener() {
                         @Override

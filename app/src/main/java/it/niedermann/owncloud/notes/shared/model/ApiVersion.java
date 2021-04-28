@@ -10,6 +10,11 @@ import java.util.regex.Pattern;
 public class ApiVersion implements Comparable<ApiVersion> {
     private static final Pattern NUMBER_EXTRACTION_PATTERN = Pattern.compile("[0-9]+");
 
+    public static final ApiVersion[] SUPPORTED_API_VERSIONS = new ApiVersion[]{
+            new ApiVersion(1, 0),
+            new ApiVersion(0, 2)
+    };
+
     private String originalVersion = "?";
     private int major;
     private int minor;

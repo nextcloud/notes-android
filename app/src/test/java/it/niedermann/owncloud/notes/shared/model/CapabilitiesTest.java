@@ -48,8 +48,8 @@ public class CapabilitiesTest {
         final Capabilities capabilities = new Capabilities(response, null);
         assertNull(capabilities.getETag());
         assertNull(capabilities.getApiVersion());
-        assertEquals(Integer.valueOf(Color.parseColor("#1E4164")), capabilities.getColor());
-        assertEquals(Integer.valueOf(Color.parseColor("#ffffff")), capabilities.getTextColor());
+        assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
+        assertEquals(Color.parseColor("#ffffff"), capabilities.getTextColor());
     }
 
     @Test
@@ -86,8 +86,8 @@ public class CapabilitiesTest {
         final Capabilities capabilities = new Capabilities(response, null);
         assertNull(capabilities.getETag());
         assertEquals("1.0", capabilities.getApiVersion());
-        assertEquals(Integer.valueOf(Color.parseColor("#1E4164")), capabilities.getColor());
-        assertEquals(Integer.valueOf(Color.parseColor("#ffffff")), capabilities.getTextColor());
+        assertEquals(Color.parseColor("#1E4164"), capabilities.getColor());
+        assertEquals(Color.parseColor("#ffffff"), capabilities.getTextColor());
     }
 
     @Test
